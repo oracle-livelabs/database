@@ -208,7 +208,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 19.0.0.0.0 - Production on Tue Apr 29 11:47:03 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -261,7 +261,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Tue Apr 29 11:59:01 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -515,7 +515,7 @@ Data Pump allows you to export a view including all the rows. On import, that vi
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 19.0.0.0.0 - Production on Tue Apr 29 13:01:30 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -571,7 +571,7 @@ Data Pump allows you to export a view including all the rows. On import, that vi
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Tue Apr 29 13:05:38 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -727,7 +727,7 @@ Some times you just want to export or import just the metadata, or just the data
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 19.0.0.0.0 - Production on Wed Apr 30 09:20:15 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -819,7 +819,7 @@ Some times you just want to export or import just the metadata, or just the data
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Wed Apr 30 09:28:00 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -1016,7 +1016,7 @@ Some times you just want to export or import just the metadata, or just the data
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Wed Apr 30 09:37:05 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     

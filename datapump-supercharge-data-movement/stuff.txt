@@ -42,3 +42,66 @@ Task: Generate metadata
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-export.par > /dev/null
+schemas=f1
+directory=dpdir
+dumpfile=f1.dmp
+logfile=f1-export.log
+reuse_dumpfiles=yes
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-no.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=dp-04-comp-no-export.log
+metrics=yes
+logtime=all
+dumpfile=dp-04-comp-no-%L.dmp
+reuse_dumpfiles=yes
+filesize=1M
+parallel=4
+job_name=NO_COMPRESSION
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-med.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=dp-04-comp-med-export.log
+metrics=yes
+logtime=all
+dumpfile=dp-04-comp-med-%L.dmp
+reuse_dumpfiles=yes
+filesize=1M
+parallel=4
+job_name=MEDIUM_COMPRESSION
+compression=all
+compression_algorithm=medium
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-high.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=dp-04-comp-high-export.log
+metrics=yes
+logtime=all
+dumpfile=dp-04-comp-high-%L.dmp
+reuse_dumpfiles=yes
+filesize=1M
+parallel=4
+job_name=HIGH_COMPRESSION
+compression=all
+compression_algorithm=high
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-stats-export.par > /dev/null
+schemas=F1
+directory=dpdir
+dumpfile=faster-import-stats-%L.dmp
+reuse_dumpfiles=yes
+logfile=faster-import-stats-export.log
+metrics=yes
+logtime=all
+parallel=4
+exclude=statistics
+EOF

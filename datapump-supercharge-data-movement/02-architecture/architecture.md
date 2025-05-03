@@ -165,11 +165,8 @@ Normally, you start a Data Pump job using the command-line clients.
 
     ```
     <copy>
-    cd $ORACLE_HOME/bin
-    ll *dp
+    ll $ORACLE_HOME/bin/*dp
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * There are two clients. `expdp` for exports, and `impdp` for imports.
@@ -178,10 +175,8 @@ Normally, you start a Data Pump job using the command-line clients.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    cd $ORACLE_HOME/bin
-    ll *dp
-    -rwxr-x--x. 1 oracle oinstall 234728 Dec  5 18:30 expdp
-    -rwxr-x--x. 1 oracle oinstall 242640 Dec  5 18:30 impdp
+    -rwxr-x--x. 1 oracle oinstall 235128 May  2 19:09 /u01/app/oracle/product/19/bin/expdp
+    -rwxr-x--x. 1 oracle oinstall 242992 May  2 19:09 /u01/app/oracle/product/19/bin/impdp
     ```
     </details> 
 
@@ -198,7 +193,7 @@ Normally, you start a Data Pump job using the command-line clients.
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 19.0.0.0.0 - Production on Fri Apr 25 07:17:10 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     

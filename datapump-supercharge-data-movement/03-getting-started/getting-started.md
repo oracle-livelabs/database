@@ -103,7 +103,7 @@ A few things must be in place before you can start a Data Pump job.
     -- Be sure to hit RETURN
     ```
 
-    * The `grant ... identified by` construct creates the user and grant privileges in one command.
+    * The `GRANT ... IDENTIFIED BY` construct creates the user and grant privileges in one command.
     * The user doing the Data Pump job must have quota on a tablespace to store the control table.
     
     <details>
@@ -298,7 +298,7 @@ With a parameter file you can now start a Data Pump export and import a schema i
     $ expdp system/oracle parfile=/home/oracle/scripts/dp-03-export.par
     
     Export: Release 19.0.0.0.0 - Production on Fri Apr 25 12:13:35 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -347,16 +347,6 @@ With a parameter file you can now start a Data Pump export and import a schema i
 
     -- Be sure to hit RETURN
     ```
-
-3. Ensure that the database is running.
-
-    ```
-    <copy>
-    startup
-    </copy>
-    ```
-
-    * Ignore *ORA-01081: cannot start already-running ORACLE - shut it down first* if you receive it.
 
 4. Create a user.
 
@@ -473,7 +463,7 @@ With a parameter file you can now start a Data Pump export and import a schema i
     $ impdp dpuser/oracle parfile=/home/oracle/scripts/dp-03-import.par
     
     Import: Release 19.0.0.0.0 - Production on Fri Apr 25 12:38:36 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -543,7 +533,7 @@ You just done an export/import via a dump file. Let's try to an import using *ne
     -- Be sure to hit RETURN
     ```
 
-    * You must create the database link in the schema that doesn't the import.
+    * You must create the database link in the schema that does the import. In this task, it is *dpuser*. 
     * The user, *dpuser*, must have appropriate privileges to export in the source database. 
 
     <details>
@@ -604,6 +594,7 @@ You just done an export/import via a dump file. Let's try to an import using *ne
 
     * The environment is set to the target database, *UPGR*, and you use the import client, *impdp*. 
     * Notice how Data Pump remaps the schema *F1* to *F2*. 
+    * When doing network imports, you don't have to export on the source database. The import implicitly performs the export.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -611,7 +602,7 @@ You just done an export/import via a dump file. Let's try to an import using *ne
     $ impdp dpuser/oracle parfile=/home/oracle/scripts/dp-03-import-network.par
     
     Import: Release 19.0.0.0.0 - Production on Fri Apr 25 13:11:09 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     

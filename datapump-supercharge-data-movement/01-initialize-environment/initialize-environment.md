@@ -39,6 +39,7 @@ In this lab, you will:
         - LISTENER
     - Database Server Instances
         - FTEX
+        - UPGR
         - CDB23
 
 2. Use the *yellow* terminal 🟨. Ensure the listener is started.
@@ -57,7 +58,7 @@ In this lab, you will:
     ```
     </details>
 
-3. Ensure that the databases (*FTEX* and *CDB23*) are started.
+3. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
 
     ```
     <copy>

@@ -44,9 +44,9 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     ``` text
     $ . ftex
     $ $ORACLE_HOME/OPatch/opatch lspatches
-    35648110;OJVM RELEASE UPDATE: 19.21.0.0.231017 (35648110)
-    35787077;DATAPUMP BUNDLE PATCH 19.21.0.0.0
-    35643107;Database Release Update : 19.21.0.0.231017 (35643107)
+    37777295;DATAPUMP BUNDLE PATCH 19.27.0.0.0
+    37499406;OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+    37642901;Database Release Update : 19.27.0.0.250415 (37642901)
     29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
     
     OPatch succeeded.
@@ -85,7 +85,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     </copy>
     ```
 
-    * The `DUMPFILE` parameter now contains `%L`. Data Pump now creates multiple dump files (when needed) and generates unique file names. In earlier versions of Data Pump, you would use *%U* instead.
+    * The `DUMPFILE` parameter now contains `%L`. Data Pump now creates multiple dump files (when needed) and generates unique file names. In earlier versions of Data Pump, you would use `%U` instead.
     * Allowing Data Pump to create multiple files is essential to maximize the throughput of parallel exports.
     * `FILESIZE` tells Data Pump to split the files when reaching a certain size. The *1M* setting splits at 1 MB allowing you to neatly put your dump files on floppy disks... Just kidding, this low setting is for demonstration purposes only. Normally, you would have a much larger setting. When moving data to the cloud a `FILESIZE=5G` is normally a good setting.
 
@@ -116,7 +116,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     * If one worker process is using parallel query processes (PQ), you will see less worker processes being active.
     * The parallel degree on export and on import are completely independent. You can export with `PARALLEL=4` and import with `PARALLEL=16` - even if you just have four dump files.
     * You can even import in parallel when you have just one dump file.
-    * To avoid bottlenecks during parallel export, be sure to allow multiple dump files using the *%L* wildcard discussed above.
+    * To avoid bottlenecks during parallel export, be sure to allow multiple dump files using the `%L` wildcard discussed above.
     * As a rule-of-thumb, set `PARALLEL` to twice the number of physical cores, or number of ECPUs / 4 in OCI (alternatively number of OCPUs).
     * Using `PARALLEL` requires Enterprise Edition.
 
@@ -151,6 +151,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
 
     * Data Pump jobs - both export and import - are querying the data dictionary massively. 
     * To avoid issues with poor performing SQLs ensure that the dictionary statistics are current.
+    * Statistics on user-owned objects are normally not essential for Data Pump jobs. 
     * Oracle recommends gathering dictionary statistics before an export, before an import and immediately after an import.
     * You can also use `DBMS_STATS.GATHER_DICTIONARY_STATS`, but the Data Pump product management team recommends gathering schema statistics instead.
 
@@ -158,30 +159,29 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     <summary>*click to see the output*</summary>
     ``` text
      SQL*Plus: Release 19.0.0.0.0 - Production on Sat Apr 26 07:36:46 2025
-     Version 19.21.0.0.0
+     Version 19.27.0.0.0
      
      Copyright (c) 1982, 2022, Oracle.  All rights reserved.
      
      
      Connected to:
      Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-     Version 19.21.0.0.0
+     Version 19.27.0.0.0
      
      SQL>   2    3    4    5
      
      PL/SQL procedure successfully completed.
      
      Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-     Version 19.21.0.0.0
+     Version 19.27.0.0.0
     ```
     </details>  
 
-6. Remove any existing dump files and start an export.
+6. Start an export.
 
     ```
     <copy>
     . ftex
-    rm /home/oracle/dpdir/*dmp
     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-bp-3.par
     </copy>
 
@@ -191,7 +191,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     * Notice the enhanced diagnostics information in the log file. 
     * Each line is prefixed with a timestamp.
     * Multiple workers were employed. Each line tells you which worker did the job, notice the *W-1*, *W-2*, *W-3* and *W-4* labels.
-    * For table data export, you can also see the *direct\_path* method were selected for all tables. 
+    * During export of rows, you can also see the *direct\_path* method were selected for all tables. 
     * In the end of the output, you can also see that Data Pump created a total of 24 log files.
 
     <details>
@@ -202,7 +202,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     $ expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-bp-3.par
     
     Export: Release 19.0.0.0.0 - Production on Sat Apr 26 07:43:05 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -291,7 +291,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     ```
 
     * No file is bigger than 1 MB.
-    * There are 24 dump files.
+    * There are around 24 dump files. Your number might vary a little.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -340,6 +340,7 @@ Besides the general best practices, there are a number of useful settings. Compr
 
     * `COMPRESSION=ALL` instructs Data Pump to compress metadata and data.
     * `COMPRESSION_ALGORITHM` tells which algorithm to use. *medium* is also the default, because it often gives a good balance between compression ratio and CPU usage.
+    * `JOB_NAME` assigns a custom name to the Data Pump job, so you can easily distinguish between the log files. You will learn more about `JOB_NAME` later on.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -347,15 +348,16 @@ Besides the general best practices, there are a number of useful settings. Compr
     $ cat /home/oracle/scripts/dp-04-comp-med.par
     schemas=f1
     directory=dpdir
-    logfile=f1-export.log
+    logfile=dp-04-comp-med-export.log
     metrics=yes
     logtime=all
-    dumpfile=f1_%L.dmp
+    dumpfile=dp-04-comp-med-%L.dmp
+    reuse_dumpfiles=yes
     filesize=1M
     parallel=4
     job_name=MEDIUM_COMPRESSION
     compression=all
-    compression_agorithm=medium
+    compression_algorithm=medium
     ```
     </details> 
 
@@ -364,7 +366,6 @@ Besides the general best practices, there are a number of useful settings. Compr
     ```
     <copy>
     . ftex
-    rm /home/oracle/dpdir/*
     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-no.par
     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-med.par
     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-high.par
@@ -377,210 +378,212 @@ Besides the general best practices, there are a number of useful settings. Compr
     <summary>*click to see the output*</summary>
     ``` text
     $ . ftex
-    $ rm /home/oracle/dpdir/*
     $ expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-no.par
     
-    Export: Release 19.0.0.0.0 - Production on Sat Apr 26 08:15:28 2025
-    Version 19.21.0.0.0
+    Export: Release 19.0.0.0.0 - Production on Sat May 3 06:12:52 2025
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
     Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    26-APR-25 08:15:31.395: Starting "DPUSER"."NO_COMPRESSION":  dpuser/******** parfile=/home/oracle/scripts/dp-04-comp-no.par
-    26-APR-25 08:15:31.743: W-1 Startup took 0 seconds
-    26-APR-25 08:15:33.058: W-2 Startup took 0 seconds
-    26-APR-25 08:15:33.064: W-3 Startup took 1 seconds
-    26-APR-25 08:15:33.219: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
-    26-APR-25 08:15:33.246: W-4 Startup took 0 seconds
-    26-APR-25 08:15:33.260: W-1      Completed 19 INDEX_STATISTICS objects in 0 seconds
-    26-APR-25 08:15:33.354: W-1 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
-    26-APR-25 08:15:33.360: W-1      Completed 14 TABLE_STATISTICS objects in 0 seconds
-    26-APR-25 08:15:33.446: W-1 Processing object type SCHEMA_EXPORT/USER
-    26-APR-25 08:15:33.450: W-1      Completed 1 USER objects in 0 seconds
-    26-APR-25 08:15:33.471: W-1 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
-    26-APR-25 08:15:33.474: W-1      Completed 2 SYSTEM_GRANT objects in 0 seconds
-    26-APR-25 08:15:33.508: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
-    26-APR-25 08:15:33.511: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
-    26-APR-25 08:15:33.542: W-3 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
-    26-APR-25 08:15:33.565: W-3      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
-    26-APR-25 08:15:33.808: W-1 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
-    26-APR-25 08:15:33.813: W-1      Completed 1 PROCACT_SCHEMA objects in 0 seconds
-    26-APR-25 08:15:34.676: W-2 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
-    26-APR-25 08:15:36.925: W-2 Processing object type SCHEMA_EXPORT/TABLE/TABLE
-    26-APR-25 08:15:37.050: W-2      Completed 14 TABLE objects in 2 seconds
-    26-APR-25 08:15:37.518: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
-    26-APR-25 08:15:37.526: W-1      Completed 22 CONSTRAINT objects in 1 seconds
-    26-APR-25 08:15:38.276: W-4 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
-    26-APR-25 08:15:38.321: W-1 . . exported "F1"."F1_RESULTS"                           1.429 MB   26439 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.364: W-1 . . exported "F1"."F1_DRIVERSTANDINGS"                   916.2 KB   34511 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.390: W-1 . . exported "F1"."F1_QUALIFYING"                        419.0 KB   10174 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.411: W-4      Completed 1 MARKER objects in 5 seconds
-    26-APR-25 08:15:38.431: W-1 . . exported "F1"."F1_PITSTOPS"                          416.8 KB   10793 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.460: W-1 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              344.1 KB   13231 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.483: W-1 . . exported "F1"."F1_CONSTRUCTORRESULTS"                225.2 KB   12465 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.509: W-1 . . exported "F1"."F1_RACES"                             131.4 KB    1125 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.544: W-1 . . exported "F1"."F1_DRIVERS"                           87.86 KB     859 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.586: W-1 . . exported "F1"."F1_SPRINTRESULTS"                     29.88 KB     280 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.616: W-1 . . exported "F1"."F1_CONSTRUCTORS"                      22.97 KB     212 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.645: W-1 . . exported "F1"."F1_CIRCUITS"                          17.42 KB      77 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.655: W-2 . . exported "F1"."F1_LAPTIMES"                          16.98 MB  571047 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.670: W-1 . . exported "F1"."F1_SEASONS"                           10.03 KB      75 rows in 0 seconds using direct_path
-    26-APR-25 08:15:38.711: W-1 . . exported "F1"."F1_STATUS"                            7.843 KB     139 rows in 0 seconds using direct_path
-    26-APR-25 08:15:39.436: W-2      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 0 seconds
-    26-APR-25 08:15:40.054: W-2 Master table "DPUSER"."NO_COMPRESSION" successfully loaded/unloaded
-    26-APR-25 08:15:40.057: ******************************************************************************
-    26-APR-25 08:15:40.058: Dump file set for DPUSER.NO_COMPRESSION is:
-    26-APR-25 08:15:40.059:   /home/oracle/dpdir/f1_nocomp_01.dmp
-    26-APR-25 08:15:40.059:   /home/oracle/dpdir/f1_nocomp_02.dmp
-    26-APR-25 08:15:40.060:   /home/oracle/dpdir/f1_nocomp_03.dmp
-    26-APR-25 08:15:40.060:   /home/oracle/dpdir/f1_nocomp_04.dmp
-    26-APR-25 08:15:40.060:   /home/oracle/dpdir/f1_nocomp_05.dmp
-    26-APR-25 08:15:40.061:   /home/oracle/dpdir/f1_nocomp_06.dmp
-    26-APR-25 08:15:40.061:   /home/oracle/dpdir/f1_nocomp_07.dmp
-    26-APR-25 08:15:40.061:   /home/oracle/dpdir/f1_nocomp_08.dmp
-    26-APR-25 08:15:40.062:   /home/oracle/dpdir/f1_nocomp_09.dmp
-    26-APR-25 08:15:40.062:   /home/oracle/dpdir/f1_nocomp_10.dmp
-    26-APR-25 08:15:40.062:   /home/oracle/dpdir/f1_nocomp_11.dmp
-    26-APR-25 08:15:40.063:   /home/oracle/dpdir/f1_nocomp_12.dmp
-    26-APR-25 08:15:40.063:   /home/oracle/dpdir/f1_nocomp_13.dmp
-    26-APR-25 08:15:40.063:   /home/oracle/dpdir/f1_nocomp_14.dmp
-    26-APR-25 08:15:40.064:   /home/oracle/dpdir/f1_nocomp_15.dmp
-    26-APR-25 08:15:40.064:   /home/oracle/dpdir/f1_nocomp_16.dmp
-    26-APR-25 08:15:40.064:   /home/oracle/dpdir/f1_nocomp_17.dmp
-    26-APR-25 08:15:40.065:   /home/oracle/dpdir/f1_nocomp_18.dmp
-    26-APR-25 08:15:40.065:   /home/oracle/dpdir/f1_nocomp_19.dmp
-    26-APR-25 08:15:40.065:   /home/oracle/dpdir/f1_nocomp_20.dmp
-    26-APR-25 08:15:40.066:   /home/oracle/dpdir/f1_nocomp_21.dmp
-    26-APR-25 08:15:40.066:   /home/oracle/dpdir/f1_nocomp_22.dmp
-    26-APR-25 08:15:40.066:   /home/oracle/dpdir/f1_nocomp_23.dmp
-    26-APR-25 08:15:40.067:   /home/oracle/dpdir/f1_nocomp_24.dmp
-    26-APR-25 08:15:40.077: Job "DPUSER"."NO_COMPRESSION" successfully completed at Sat Apr 26 08:15:40 2025 elapsed 0 00:00:10
+    03-MAY-25 06:12:54.554: Starting "DPUSER"."NO_COMPRESSION":  dpuser/******** parfile=/home/oracle/scripts/dp-04-comp-no.par
+    03-MAY-25 06:12:54.940: W-1 Startup took 0 seconds
+    03-MAY-25 06:12:56.218: W-3 Startup took 1 seconds
+    03-MAY-25 06:12:56.232: W-4 Startup took 1 seconds
+    03-MAY-25 06:12:56.255: W-2 Startup took 1 seconds
+    03-MAY-25 06:12:56.655: W-4 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+    03-MAY-25 06:12:56.710: W-3 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+    03-MAY-25 06:12:56.726: W-2 Processing object type SCHEMA_EXPORT/USER
+    03-MAY-25 06:12:56.733: W-4      Completed 19 INDEX_STATISTICS objects in 0 seconds
+    03-MAY-25 06:12:56.737: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    03-MAY-25 06:12:56.739: W-3      Completed 14 TABLE_STATISTICS objects in 0 seconds
+    03-MAY-25 06:12:56.742: W-2      Completed 1 USER objects in 0 seconds
+    03-MAY-25 06:12:56.761: W-3 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    03-MAY-25 06:12:56.763: W-3      Completed 2 SYSTEM_GRANT objects in 0 seconds
+    03-MAY-25 06:12:56.769: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    03-MAY-25 06:12:56.784: W-3 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+    03-MAY-25 06:12:56.786: W-3      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
+    03-MAY-25 06:12:56.790: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    03-MAY-25 06:12:56.986: W-3 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    03-MAY-25 06:12:56.989: W-3      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    03-MAY-25 06:12:58.968: W-3 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    03-MAY-25 06:12:59.199: W-3      Completed 14 TABLE objects in 2 seconds
+    03-MAY-25 06:12:59.617: W-4 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
+    03-MAY-25 06:12:59.812: W-4      Completed 1 MARKER objects in 3 seconds
+    03-MAY-25 06:13:00.291: W-4 . . exported "F1"."F1_RESULTS"                           1.429 MB   26439 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.329: W-4 . . exported "F1"."F1_DRIVERSTANDINGS"                   916.2 KB   34511 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.350: W-4 . . exported "F1"."F1_QUALIFYING"                        419.0 KB   10174 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.381: W-4 . . exported "F1"."F1_PITSTOPS"                          416.8 KB   10793 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.402: W-4 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              344.1 KB   13231 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.420: W-4 . . exported "F1"."F1_CONSTRUCTORRESULTS"                225.2 KB   12465 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.440: W-4 . . exported "F1"."F1_RACES"                             131.4 KB    1125 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.463: W-4 . . exported "F1"."F1_DRIVERS"                           87.86 KB     859 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.481: W-4 . . exported "F1"."F1_SPRINTRESULTS"                     29.88 KB     280 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.517: W-4 . . exported "F1"."F1_CONSTRUCTORS"                      22.97 KB     212 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.534: W-3 . . exported "F1"."F1_LAPTIMES"                          16.98 MB  571047 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.538: W-4 . . exported "F1"."F1_CIRCUITS"                          17.42 KB      77 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.553: W-4 . . exported "F1"."F1_SEASONS"                           10.03 KB      75 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.569: W-4 . . exported "F1"."F1_STATUS"                            7.843 KB     139 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:00.639: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    03-MAY-25 06:13:00.649: W-1      Completed 22 CONSTRAINT objects in 1 seconds
+    03-MAY-25 06:13:01.311: W-2      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 0 seconds
+    03-MAY-25 06:13:01.915: W-2 Master table "DPUSER"."NO_COMPRESSION" successfully loaded/unloaded
+    03-MAY-25 06:13:01.917: ******************************************************************************
+    03-MAY-25 06:13:01.917: Dump file set for DPUSER.NO_COMPRESSION is:
+    03-MAY-25 06:13:01.919:   /home/oracle/dpdir/dp-04-comp-no-01.dmp
+    03-MAY-25 06:13:01.919:   /home/oracle/dpdir/dp-04-comp-no-02.dmp
+    03-MAY-25 06:13:01.919:   /home/oracle/dpdir/dp-04-comp-no-03.dmp
+    03-MAY-25 06:13:01.919:   /home/oracle/dpdir/dp-04-comp-no-04.dmp
+    03-MAY-25 06:13:01.920:   /home/oracle/dpdir/dp-04-comp-no-05.dmp
+    03-MAY-25 06:13:01.920:   /home/oracle/dpdir/dp-04-comp-no-06.dmp
+    03-MAY-25 06:13:01.920:   /home/oracle/dpdir/dp-04-comp-no-07.dmp
+    03-MAY-25 06:13:01.920:   /home/oracle/dpdir/dp-04-comp-no-08.dmp
+    03-MAY-25 06:13:01.920:   /home/oracle/dpdir/dp-04-comp-no-09.dmp
+    03-MAY-25 06:13:01.920:   /home/oracle/dpdir/dp-04-comp-no-10.dmp
+    03-MAY-25 06:13:01.921:   /home/oracle/dpdir/dp-04-comp-no-11.dmp
+    03-MAY-25 06:13:01.921:   /home/oracle/dpdir/dp-04-comp-no-12.dmp
+    03-MAY-25 06:13:01.921:   /home/oracle/dpdir/dp-04-comp-no-13.dmp
+    03-MAY-25 06:13:01.921:   /home/oracle/dpdir/dp-04-comp-no-14.dmp
+    03-MAY-25 06:13:01.921:   /home/oracle/dpdir/dp-04-comp-no-15.dmp
+    03-MAY-25 06:13:01.922:   /home/oracle/dpdir/dp-04-comp-no-16.dmp
+    03-MAY-25 06:13:01.922:   /home/oracle/dpdir/dp-04-comp-no-17.dmp
+    03-MAY-25 06:13:01.922:   /home/oracle/dpdir/dp-04-comp-no-18.dmp
+    03-MAY-25 06:13:01.922:   /home/oracle/dpdir/dp-04-comp-no-19.dmp
+    03-MAY-25 06:13:01.922:   /home/oracle/dpdir/dp-04-comp-no-20.dmp
+    03-MAY-25 06:13:01.922:   /home/oracle/dpdir/dp-04-comp-no-21.dmp
+    03-MAY-25 06:13:01.923:   /home/oracle/dpdir/dp-04-comp-no-22.dmp
+    03-MAY-25 06:13:01.923:   /home/oracle/dpdir/dp-04-comp-no-23.dmp
+    03-MAY-25 06:13:01.923:   /home/oracle/dpdir/dp-04-comp-no-24.dmp
+    03-MAY-25 06:13:01.923:   /home/oracle/dpdir/dp-04-comp-no-25.dmp
+    03-MAY-25 06:13:01.939: Job "DPUSER"."NO_COMPRESSION" successfully completed at Sat May 3 06:13:01 2025 elapsed 0 00:00:08
     
-    [FTEX:oracle@holserv1:~]$ expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-med.par
+    [FTEX:oracle@holserv1:~/dpdir]$     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-med.par
     
-    Export: Release 19.0.0.0.0 - Production on Sat Apr 26 08:15:41 2025
-    Version 19.21.0.0.0
-    
-    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
-    
-    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    26-APR-25 08:15:44.832: Starting "DPUSER"."MEDIUM_COMPRESSION":  dpuser/******** parfile=/home/oracle/scripts/dp-04-comp-med.par
-    26-APR-25 08:15:45.210: W-1 Startup took 1 seconds
-    26-APR-25 08:15:46.378: W-2 Startup took 0 seconds
-    26-APR-25 08:15:46.433: W-3 Startup took 0 seconds
-    26-APR-25 08:15:46.660: W-4 Startup took 0 seconds
-    26-APR-25 08:15:46.843: W-1 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
-    26-APR-25 08:15:46.874: W-1      Completed 14 TABLE_STATISTICS objects in 0 seconds
-    26-APR-25 08:15:46.946: W-2 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
-    26-APR-25 08:15:46.965: W-1 Processing object type SCHEMA_EXPORT/USER
-    26-APR-25 08:15:46.967: W-1      Completed 1 USER objects in 0 seconds
-    26-APR-25 08:15:46.974: W-2      Completed 2 SYSTEM_GRANT objects in 0 seconds
-    26-APR-25 08:15:46.993: W-2 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
-    26-APR-25 08:15:46.996: W-2      Completed 1 DEFAULT_ROLE objects in 0 seconds
-    26-APR-25 08:15:47.020: W-2 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
-    26-APR-25 08:15:47.023: W-2      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
-    26-APR-25 08:15:47.236: W-4 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
-    26-APR-25 08:15:47.252: W-4      Completed 19 INDEX_STATISTICS objects in 0 seconds
-    26-APR-25 08:15:47.314: W-2 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
-    26-APR-25 08:15:47.318: W-2      Completed 1 PROCACT_SCHEMA objects in 0 seconds
-    26-APR-25 08:15:48.267: W-3 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
-    26-APR-25 08:15:50.544: W-3 Processing object type SCHEMA_EXPORT/TABLE/TABLE
-    26-APR-25 08:15:50.657: W-3      Completed 14 TABLE objects in 2 seconds
-    26-APR-25 08:15:51.147: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
-    26-APR-25 08:15:51.156: W-1      Completed 22 CONSTRAINT objects in 1 seconds
-    26-APR-25 08:15:51.753: W-4 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
-    26-APR-25 08:15:52.015: W-2 . . exported "F1"."F1_RESULTS"                           563.0 KB   26439 rows in 1 seconds using direct_path
-    26-APR-25 08:15:52.042: W-4      Completed 1 MARKER objects in 5 seconds
-    26-APR-25 08:15:52.060: W-2 . . exported "F1"."F1_DRIVERSTANDINGS"                   282.2 KB   34511 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.098: W-2 . . exported "F1"."F1_QUALIFYING"                        166.5 KB   10174 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.136: W-2 . . exported "F1"."F1_PITSTOPS"                          172.5 KB   10793 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.164: W-2 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              107.7 KB   13231 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.194: W-2 . . exported "F1"."F1_CONSTRUCTORRESULTS"                78.28 KB   12465 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.219: W-2 . . exported "F1"."F1_RACES"                             28.57 KB    1125 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.247: W-2 . . exported "F1"."F1_DRIVERS"                           33.57 KB     859 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.270: W-2 . . exported "F1"."F1_SPRINTRESULTS"                     12.46 KB     280 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.300: W-2 . . exported "F1"."F1_CONSTRUCTORS"                      9.554 KB     212 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.318: W-2 . . exported "F1"."F1_CIRCUITS"                          8.625 KB      77 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.339: W-2 . . exported "F1"."F1_SEASONS"                           5.046 KB      75 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.369: W-2 . . exported "F1"."F1_STATUS"                            5.835 KB     139 rows in 0 seconds using direct_path
-    26-APR-25 08:15:52.409: W-3 . . exported "F1"."F1_LAPTIMES"                          6.211 MB  571047 rows in 1 seconds using direct_path
-    26-APR-25 08:15:53.126: W-3      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 1 seconds
-    26-APR-25 08:15:53.782: W-3 Master table "DPUSER"."MEDIUM_COMPRESSION" successfully loaded/unloaded
-    26-APR-25 08:15:53.785: ******************************************************************************
-    26-APR-25 08:15:53.785: Dump file set for DPUSER.MEDIUM_COMPRESSION is:
-    26-APR-25 08:15:53.786:   /home/oracle/dpdir/f1_compmed_01.dmp
-    26-APR-25 08:15:53.787:   /home/oracle/dpdir/f1_compmed_02.dmp
-    26-APR-25 08:15:53.787:   /home/oracle/dpdir/f1_compmed_03.dmp
-    26-APR-25 08:15:53.787:   /home/oracle/dpdir/f1_compmed_04.dmp
-    26-APR-25 08:15:53.788:   /home/oracle/dpdir/f1_compmed_05.dmp
-    26-APR-25 08:15:53.788:   /home/oracle/dpdir/f1_compmed_06.dmp
-    26-APR-25 08:15:53.788:   /home/oracle/dpdir/f1_compmed_07.dmp
-    26-APR-25 08:15:53.789:   /home/oracle/dpdir/f1_compmed_08.dmp
-    26-APR-25 08:15:53.789:   /home/oracle/dpdir/f1_compmed_09.dmp
-    26-APR-25 08:15:53.789:   /home/oracle/dpdir/f1_compmed_10.dmp
-    26-APR-25 08:15:53.800: Job "DPUSER"."MEDIUM_COMPRESSION" successfully completed at Sat Apr 26 08:15:53 2025 elapsed 0 00:00:10
-    
-    [FTEX:oracle@holserv1:~]$ expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-high.par
-    
-    Export: Release 19.0.0.0.0 - Production on Sat Apr 26 08:15:55 2025
-    Version 19.21.0.0.0
+    Export: Release 19.0.0.0.0 - Production on Sat May 3 06:13:03 2025
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
     Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    26-APR-25 08:15:58.601: Starting "DPUSER"."HIGH_COMPRESSION":  dpuser/******** parfile=/home/oracle/scripts/dp-04-comp-high.par
-    26-APR-25 08:15:59.075: W-1 Startup took 1 seconds
-    26-APR-25 08:16:00.239: W-2 Startup took 0 seconds
-    26-APR-25 08:16:00.288: W-3 Startup took 0 seconds
-    26-APR-25 08:16:00.463: W-4 Startup took 0 seconds
-    26-APR-25 08:16:00.518: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
-    26-APR-25 08:16:00.595: W-1      Completed 19 INDEX_STATISTICS objects in 0 seconds
-    26-APR-25 08:16:00.693: W-1 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
-    26-APR-25 08:16:00.697: W-1      Completed 14 TABLE_STATISTICS objects in 0 seconds
-    26-APR-25 08:16:00.751: W-2 Processing object type SCHEMA_EXPORT/USER
-    26-APR-25 08:16:00.754: W-1 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
-    26-APR-25 08:16:00.773: W-1      Completed 2 SYSTEM_GRANT objects in 0 seconds
-    26-APR-25 08:16:00.779: W-2      Completed 1 USER objects in 0 seconds
-    26-APR-25 08:16:00.799: W-2 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
-    26-APR-25 08:16:00.803: W-2      Completed 1 DEFAULT_ROLE objects in 0 seconds
-    26-APR-25 08:16:00.820: W-2 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
-    26-APR-25 08:16:00.825: W-2      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
-    26-APR-25 08:16:00.998: W-2 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
-    26-APR-25 08:16:01.002: W-2      Completed 1 PROCACT_SCHEMA objects in 0 seconds
-    26-APR-25 08:16:01.974: W-3 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
-    26-APR-25 08:16:04.298: W-3 Processing object type SCHEMA_EXPORT/TABLE/TABLE
-    26-APR-25 08:16:04.398: W-3      Completed 14 TABLE objects in 2 seconds
-    26-APR-25 08:16:04.677: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
-    26-APR-25 08:16:04.686: W-1      Completed 22 CONSTRAINT objects in 1 seconds
-    26-APR-25 08:16:05.497: W-4 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
-    26-APR-25 08:16:05.696: W-4      Completed 1 MARKER objects in 4 seconds
-    26-APR-25 08:16:05.918: W-3 . . exported "F1"."F1_RESULTS"                           448.3 KB   26439 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.154: W-3 . . exported "F1"."F1_DRIVERSTANDINGS"                   227.2 KB   34511 rows in 1 seconds using direct_path
-    26-APR-25 08:16:06.289: W-3 . . exported "F1"."F1_QUALIFYING"                        139.2 KB   10174 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.403: W-3 . . exported "F1"."F1_PITSTOPS"                          138.6 KB   10793 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.509: W-3 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              88.28 KB   13231 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.589: W-3 . . exported "F1"."F1_CONSTRUCTORRESULTS"                65.36 KB   12465 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.621: W-3 . . exported "F1"."F1_RACES"                             23.69 KB    1125 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.648: W-3 . . exported "F1"."F1_DRIVERS"                           30.39 KB     859 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.674: W-3 . . exported "F1"."F1_SPRINTRESULTS"                     11.27 KB     280 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.698: W-3 . . exported "F1"."F1_CONSTRUCTORS"                      9.226 KB     212 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.721: W-3 . . exported "F1"."F1_CIRCUITS"                          8.445 KB      77 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.745: W-3 . . exported "F1"."F1_SEASONS"                               5 KB      75 rows in 0 seconds using direct_path
-    26-APR-25 08:16:06.767: W-3 . . exported "F1"."F1_STATUS"                            5.765 KB     139 rows in 0 seconds using direct_path
-    26-APR-25 08:16:08.891: W-2 . . exported "F1"."F1_LAPTIMES"                          4.892 MB  571047 rows in 3 seconds using direct_path
-    26-APR-25 08:16:09.619: W-3      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 3 seconds
-    26-APR-25 08:16:10.317: W-3 Master table "DPUSER"."HIGH_COMPRESSION" successfully loaded/unloaded
-    26-APR-25 08:16:10.320: ******************************************************************************
-    26-APR-25 08:16:10.320: Dump file set for DPUSER.HIGH_COMPRESSION is:
-    26-APR-25 08:16:10.321:   /home/oracle/dpdir/f1_comphigh_01.dmp
-    26-APR-25 08:16:10.322:   /home/oracle/dpdir/f1_comphigh_02.dmp
-    26-APR-25 08:16:10.322:   /home/oracle/dpdir/f1_comphigh_03.dmp
-    26-APR-25 08:16:10.322:   /home/oracle/dpdir/f1_comphigh_04.dmp
-    26-APR-25 08:16:10.323:   /home/oracle/dpdir/f1_comphigh_05.dmp
-    26-APR-25 08:16:10.323:   /home/oracle/dpdir/f1_comphigh_06.dmp
-    26-APR-25 08:16:10.323:   /home/oracle/dpdir/f1_comphigh_07.dmp
-    26-APR-25 08:16:10.323:   /home/oracle/dpdir/f1_comphigh_08.dmp
-    26-APR-25 08:16:10.332: Job "DPUSER"."HIGH_COMPRESSION" successfully completed at Sat Apr 26 08:16:10 2025 elapsed 0 00:00:13
+    03-MAY-25 06:13:05.874: Starting "DPUSER"."MEDIUM_COMPRESSION":  dpuser/******** parfile=/home/oracle/scripts/dp-04-comp-med.par
+    03-MAY-25 06:13:06.260: W-1 Startup took 1 seconds
+    03-MAY-25 06:13:07.451: W-2 Startup took 0 seconds
+    03-MAY-25 06:13:07.464: W-4 Startup took 0 seconds
+    03-MAY-25 06:13:07.470: W-3 Startup took 0 seconds
+    03-MAY-25 06:13:07.898: W-4 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+    03-MAY-25 06:13:07.951: W-2 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+    03-MAY-25 06:13:07.964: W-4      Completed 19 INDEX_STATISTICS objects in 0 seconds
+    03-MAY-25 06:13:07.968: W-2      Completed 14 TABLE_STATISTICS objects in 0 seconds
+    03-MAY-25 06:13:07.979: W-4 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    03-MAY-25 06:13:07.981: W-4      Completed 2 SYSTEM_GRANT objects in 0 seconds
+    03-MAY-25 06:13:07.990: W-3 Processing object type SCHEMA_EXPORT/USER
+    03-MAY-25 06:13:08.002: W-3      Completed 1 USER objects in 1 seconds
+    03-MAY-25 06:13:08.011: W-4 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    03-MAY-25 06:13:08.015: W-4      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    03-MAY-25 06:13:08.028: W-4 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+    03-MAY-25 06:13:08.031: W-4      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
+    03-MAY-25 06:13:08.237: W-4 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    03-MAY-25 06:13:08.240: W-4      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    03-MAY-25 06:13:08.247: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    03-MAY-25 06:13:10.382: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    03-MAY-25 06:13:10.490: W-1      Completed 14 TABLE objects in 2 seconds
+    03-MAY-25 06:13:10.817: W-2 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
+    03-MAY-25 06:13:10.985: W-2      Completed 1 MARKER objects in 3 seconds
+    03-MAY-25 06:13:11.473: W-2 . . exported "F1"."F1_RESULTS"                           564.8 KB   26439 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.500: W-2 . . exported "F1"."F1_DRIVERSTANDINGS"                   284.7 KB   34511 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.540: W-2 . . exported "F1"."F1_QUALIFYING"                        167.0 KB   10174 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.571: W-2 . . exported "F1"."F1_PITSTOPS"                          172.7 KB   10793 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.594: W-2 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              108.2 KB   13231 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.613: W-2 . . exported "F1"."F1_CONSTRUCTORRESULTS"                78.46 KB   12465 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.635: W-2 . . exported "F1"."F1_RACES"                             28.92 KB    1125 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.649: W-2 . . exported "F1"."F1_DRIVERS"                           33.72 KB     859 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.668: W-2 . . exported "F1"."F1_SPRINTRESULTS"                     12.46 KB     280 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.686: W-2 . . exported "F1"."F1_CONSTRUCTORS"                      9.554 KB     212 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.704: W-2 . . exported "F1"."F1_CIRCUITS"                          8.625 KB      77 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.721: W-2 . . exported "F1"."F1_SEASONS"                           5.054 KB      75 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.742: W-2 . . exported "F1"."F1_STATUS"                            5.835 KB     139 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.746: W-4 . . exported "F1"."F1_LAPTIMES"                          6.212 MB  571047 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:11.866: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    03-MAY-25 06:13:11.882: W-1      Completed 22 CONSTRAINT objects in 1 seconds
+    03-MAY-25 06:13:12.555: W-4      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 0 seconds
+    03-MAY-25 06:13:13.116: W-4 Master table "DPUSER"."MEDIUM_COMPRESSION" successfully loaded/unloaded
+    03-MAY-25 06:13:13.118: ******************************************************************************
+    03-MAY-25 06:13:13.119: Dump file set for DPUSER.MEDIUM_COMPRESSION is:
+    03-MAY-25 06:13:13.120:   /home/oracle/dpdir/dp-04-comp-med-01.dmp
+    03-MAY-25 06:13:13.120:   /home/oracle/dpdir/dp-04-comp-med-02.dmp
+    03-MAY-25 06:13:13.121:   /home/oracle/dpdir/dp-04-comp-med-03.dmp
+    03-MAY-25 06:13:13.121:   /home/oracle/dpdir/dp-04-comp-med-04.dmp
+    03-MAY-25 06:13:13.121:   /home/oracle/dpdir/dp-04-comp-med-05.dmp
+    03-MAY-25 06:13:13.121:   /home/oracle/dpdir/dp-04-comp-med-06.dmp
+    03-MAY-25 06:13:13.121:   /home/oracle/dpdir/dp-04-comp-med-07.dmp
+    03-MAY-25 06:13:13.122:   /home/oracle/dpdir/dp-04-comp-med-08.dmp
+    03-MAY-25 06:13:13.122:   /home/oracle/dpdir/dp-04-comp-med-09.dmp
+    03-MAY-25 06:13:13.122:   /home/oracle/dpdir/dp-04-comp-med-10.dmp
+    03-MAY-25 06:13:13.122:   /home/oracle/dpdir/dp-04-comp-med-11.dmp
+    03-MAY-25 06:13:13.135: Job "DPUSER"."MEDIUM_COMPRESSION" successfully completed at Sat May 3 06:13:13 2025 elapsed 0 00:00:08
+    
+    [FTEX:oracle@holserv1:~/dpdir]$     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-comp-high.par
+    
+    Export: Release 19.0.0.0.0 - Production on Sat May 3 06:13:23 2025
+    Version 19.27.0.0.0
+    
+    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+    
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    03-MAY-25 06:13:25.438: Starting "DPUSER"."HIGH_COMPRESSION":  dpuser/******** parfile=/home/oracle/scripts/dp-04-comp-high.par
+    03-MAY-25 06:13:25.852: W-1 Startup took 0 seconds
+    03-MAY-25 06:13:27.106: W-2 Startup took 1 seconds
+    03-MAY-25 06:13:27.120: W-3 Startup took 1 seconds
+    03-MAY-25 06:13:27.152: W-4 Startup took 1 seconds
+    03-MAY-25 06:13:27.500: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    03-MAY-25 06:13:27.546: W-3 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+    03-MAY-25 06:13:27.548: W-2 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+    03-MAY-25 06:13:27.605: W-1 Processing object type SCHEMA_EXPORT/USER
+    03-MAY-25 06:13:27.612: W-2      Completed 14 TABLE_STATISTICS objects in 0 seconds
+    03-MAY-25 06:13:27.615: W-3      Completed 19 INDEX_STATISTICS objects in 0 seconds
+    03-MAY-25 06:13:27.620: W-1      Completed 1 USER objects in 0 seconds
+    03-MAY-25 06:13:27.621: W-4 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    03-MAY-25 06:13:27.634: W-4      Completed 2 SYSTEM_GRANT objects in 0 seconds
+    03-MAY-25 06:13:27.638: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    03-MAY-25 06:13:27.641: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    03-MAY-25 06:13:27.651: W-4 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+    03-MAY-25 06:13:27.655: W-4      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
+    03-MAY-25 06:13:27.841: W-3 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    03-MAY-25 06:13:27.844: W-3      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    03-MAY-25 06:13:30.086: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    03-MAY-25 06:13:30.624: W-2 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
+    03-MAY-25 06:13:30.827: W-2      Completed 1 MARKER objects in 3 seconds
+    03-MAY-25 06:13:31.244: W-1      Completed 14 TABLE objects in 3 seconds
+    03-MAY-25 06:13:32.035: W-3 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    03-MAY-25 06:13:32.075: W-3      Completed 22 CONSTRAINT objects in 2 seconds
+    03-MAY-25 06:13:32.248: W-4 . . exported "F1"."F1_RESULTS"                           449.3 KB   26439 rows in 1 seconds using direct_path
+    03-MAY-25 06:13:32.502: W-4 . . exported "F1"."F1_DRIVERSTANDINGS"                   228.6 KB   34511 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.609: W-4 . . exported "F1"."F1_QUALIFYING"                        139.6 KB   10174 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.706: W-4 . . exported "F1"."F1_PITSTOPS"                            139 KB   10793 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.798: W-4 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              88.67 KB   13231 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.872: W-4 . . exported "F1"."F1_CONSTRUCTORRESULTS"                65.96 KB   12465 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.896: W-4 . . exported "F1"."F1_RACES"                             23.91 KB    1125 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.917: W-4 . . exported "F1"."F1_DRIVERS"                           30.44 KB     859 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.939: W-4 . . exported "F1"."F1_SPRINTRESULTS"                     11.27 KB     280 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.957: W-4 . . exported "F1"."F1_CONSTRUCTORS"                      9.226 KB     212 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.975: W-4 . . exported "F1"."F1_CIRCUITS"                          8.445 KB      77 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:32.993: W-4 . . exported "F1"."F1_SEASONS"                               5 KB      75 rows in 0 seconds using direct_path
+    03-MAY-25 06:13:33.009: W-4 . . exported "F1"."F1_STATUS"                            5.765 KB     139 rows in 1 seconds using direct_path
+    03-MAY-25 06:13:34.883: W-2 . . exported "F1"."F1_LAPTIMES"                          4.893 MB  571047 rows in 3 seconds using direct_path
+    03-MAY-25 06:13:35.555: W-4      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 3 seconds
+    03-MAY-25 06:13:36.192: W-4 Master table "DPUSER"."HIGH_COMPRESSION" successfully loaded/unloaded
+    03-MAY-25 06:13:36.194: ******************************************************************************
+    03-MAY-25 06:13:36.194: Dump file set for DPUSER.HIGH_COMPRESSION is:
+    03-MAY-25 06:13:36.195:   /home/oracle/dpdir/dp-04-comp-high-01.dmp
+    03-MAY-25 06:13:36.196:   /home/oracle/dpdir/dp-04-comp-high-02.dmp
+    03-MAY-25 06:13:36.196:   /home/oracle/dpdir/dp-04-comp-high-03.dmp
+    03-MAY-25 06:13:36.196:   /home/oracle/dpdir/dp-04-comp-high-04.dmp
+    03-MAY-25 06:13:36.196:   /home/oracle/dpdir/dp-04-comp-high-05.dmp
+    03-MAY-25 06:13:36.196:   /home/oracle/dpdir/dp-04-comp-high-06.dmp
+    03-MAY-25 06:13:36.197:   /home/oracle/dpdir/dp-04-comp-high-07.dmp
+    03-MAY-25 06:13:36.197:   /home/oracle/dpdir/dp-04-comp-high-08.dmp
+    03-MAY-25 06:13:36.197:   /home/oracle/dpdir/dp-04-comp-high-09.dmp
+    03-MAY-25 06:13:36.210: Job "DPUSER"."HIGH_COMPRESSION" successfully completed at Sat May 3 06:13:36 2025 elapsed 0 00:00:12
     ```
     </details> 
 
@@ -589,7 +592,7 @@ Besides the general best practices, there are a number of useful settings. Compr
     ```
     <copy>
     cd /home/oracle/dpdir
-    grep "Job" f1*log
+    grep "Job" dp-04-comp-*log
     </copy>
 
     -- Be sure to hit RETURN
@@ -602,11 +605,9 @@ Besides the general best practices, there are a number of useful settings. Compr
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd /home/oracle/dpdir
-    $ grep "Job" f1*log
-    f1-export-high.log:26-APR-25 08:16:10.331: Job "DPUSER"."HIGH_COMPRESSION" successfully completed at Sat Apr 26 08:16:10 2025 elapsed 0 00:00:13
-    f1-export.log:26-APR-25 08:15:40.077: Job "DPUSER"."NO_COMPRESSION" successfully completed at Sat Apr 26 08:15:40 2025 elapsed 0 00:00:10
-    f1-export-medium.log:26-APR-25 08:15:53.800: Job "DPUSER"."MEDIUM_COMPRESSION" successfully completed at Sat Apr 26 08:15:53 2025 elapsed 0 00:00:10
+    dp-04-comp-high-export.log:03-MAY-25 06:13:36.210: Job "DPUSER"."HIGH_COMPRESSION" successfully completed at Sat May 3 06:13:36 2025 elapsed 0 00:00:12
+    dp-04-comp-med-export.log:03-MAY-25 06:13:13.135: Job "DPUSER"."MEDIUM_COMPRESSION" successfully completed at Sat May 3 06:13:13 2025 elapsed 0 00:00:08
+    dp-04-comp-no-export.log:03-MAY-25 06:13:01.939: Job "DPUSER"."NO_COMPRESSION" successfully completed at Sat May 3 06:13:01 2025 elapsed 0 00:00:08
     ```
     </details> 
 
@@ -614,10 +615,10 @@ Besides the general best practices, there are a number of useful settings. Compr
 
     ```
     <copy>
-    cd /home/oracle/dpdir
-    echo "No compression: "$(du -ch f1_nocomp* | tail -1 | cut -f 1)
-    echo "Medium compression: "$(du -ch f1_compmed* | tail -1 | cut -f 1)
-    echo "High compression: "$(du -ch f1_comphigh* | tail -1 | cut -f 1)
+    echo "No compression: "$(du -ch f1_nocomp_*.dmp | tail -1 | cut -f 1)
+    echo "Medium compression: "$(du -ch f1_compmed_*.dmp | tail -1 | cut -f 1)
+    echo "High compression: "$(du -ch f1_comphigh_*.dmp | tail -1 | cut -f 1)
+    cd
     </copy>
 
     -- Be sure to hit RETURN
@@ -631,12 +632,11 @@ Besides the general best practices, there are a number of useful settings. Compr
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd /home/oracle/dpdir
-    $ echo "No compression: "$(du -ch f1_nocomp* | tail -1 | cut -f 1)
+    $ echo "No compression: "$(du -ch f1_nocomp_*.dmp | tail -1 | cut -f 1)
     No compression: 22M
-    $ echo "Medium compression: "$(du -ch f1_compmed* | tail -1 | cut -f 1)
+    $ echo "Medium compression: "$(du -ch f1_compmed_*.dmp | tail -1 | cut -f 1)
     Medium compression: 7.9M
-    $ echo "High compression: "$(du -ch f1_comphigh* | tail -1 | cut -f 1)
+    $ echo "High compression: "$(du -ch f1_comphigh_*.dmp | tail -1 | cut -f 1)
     High compression: 6.3M
     ```
     </details> 
@@ -705,7 +705,6 @@ Data Pump attempts to minimize the impact on the database during export. This me
     ```
     <copy>
     . ftex
-    rm /home/oracle/dpdir/*
     expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent.par
     </copy>
 
@@ -716,11 +715,10 @@ Data Pump attempts to minimize the impact on the database during export. This me
     <summary>*click to see the output*</summary>
     ``` text
     $ . ftex
-    $ rm /home/oracle/dpdir/*
     $ expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent.par
     
     Export: Release 19.0.0.0.0 - Production on Mon Apr 28 05:25:51 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     

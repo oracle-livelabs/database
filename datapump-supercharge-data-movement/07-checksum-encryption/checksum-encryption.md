@@ -123,7 +123,7 @@ While you move a dump file from the source to the target host, it might get corr
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Apr 29 09:36:53 2025
-    Version 23.5.0.24.07
+    Version 23.8.0.25.04
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -232,7 +232,7 @@ While you move a dump file from the source to the target host, it might get corr
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Apr 29 09:42:19 2025
-    Version 23.5.0.24.07
+    Version 23.8.0.25.04
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -287,7 +287,7 @@ While you move a dump file from the source to the target host, it might get corr
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Apr 29 09:44:19 2025
-    Version 23.5.0.24.07
+    Version 23.8.0.25.04
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -348,7 +348,7 @@ Data Pump stores the data in the dump files in a proprietary format. However, so
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Apr 29 09:36:53 2025
-    Version 23.5.0.24.07
+    Version 23.8.0.25.04
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     

@@ -63,7 +63,10 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     -- Be sure to hit RETURN
     ```
 
+    * It takes 2-3 minutes to perform the import.
     * The table *BLOBLOAD.TAB1* contains a BasicFile LOB column.
+    * The replacement for BasicFile LOB is SecureFile LOB. SecureFile LOB got introduced in Oracle Database 11g Release 1 in 2007. 
+    * Since Oracle Database 12.1, Oracle has listed BasicFile LOB as deprecated. Yet, it is not uncommon to still find them around even today.
     * Notice how long it took to import the table. In the example in the instructions it took 121 seconds.
     * Also, Data Pump used direct path to load the table.
 
@@ -71,7 +74,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Mon Apr 28 08:40:43 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -123,20 +126,20 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     <summary>*click to see the output*</summary>
     ``` text
     SQL*Plus: Release 19.0.0.0.0 - Production on Mon Apr 28 08:46:50 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2022, Oracle.  All rights reserved.
     
     
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     SQL>
     User dropped.
     
     SQL> Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     ```
     </details> 
 
@@ -182,7 +185,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Mon Apr 28 08:49:43 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -239,11 +242,11 @@ When exporting tables or indexes Data Pump also exports the corresponding statis
     schemas=F1
     directory=dpdir
     dumpfile=faster-import-stats-%L.dmp
+    reuse_dumpfiles=yes
     logfile=faster-import-stats-export.log
     metrics=yes
     logtime=all
     parallel=4
-    reuse_dumpfiles=yes
     exclude=statistics
     ```
     </details> 
@@ -261,7 +264,7 @@ When exporting tables or indexes Data Pump also exports the corresponding statis
     <summary>*click to see the output*</summary>
     ``` text
     Export: Release 19.0.0.0.0 - Production on Mon Apr 28 13:29:21 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -361,7 +364,7 @@ When exporting tables or indexes Data Pump also exports the corresponding statis
     <summary>*click to see the output*</summary>
     ``` text
     Import: Release 19.0.0.0.0 - Production on Mon Apr 28 13:37:00 2025
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
     
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
@@ -477,7 +480,8 @@ When exporting tables or indexes Data Pump also exports the corresponding statis
     -- Be sure to hit RETURN
     ```
 
-    * Using `DEGREE` set to `AUTO_DEGREE` allows the database to use more CPU.
+    * Using `DEGREE=AUTO_DEGREE` allows the database to gather statistics using parallel query. 
+    * This uses more CPU but may speed it up significantly.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -537,7 +541,7 @@ When exporting tables or indexes Data Pump also exports the corresponding statis
 
 Another option is to transfer the statistics from the source database using the `DBMS_STATS` package. Transferring statistics is much faster than exporting and importing statistics using Data Pump. 
 
-1. Still in the *yellow* terminal 🟨 and connected to the *FTEX* database. In our lab, the source and target databases are the same. Otherwise, you should have switched to the source database now. The source tables in the *F1* schema does have statistics. 
+1. Still in the *yellow* terminal 🟨 and connected to the *FTEX* database. In this lab, the source and target databases are the same. Otherwise, you should have switched to the source database now. The source tables in the *F1* schema does have statistics. 
 
     ```
     <copy>
@@ -1142,6 +1146,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
 11. After a while Data Pump is done processing rows. It will move on to process constraints. This happens in `SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`. 
 
     * If your job is not there yet, then wait a little while. 
+    * Alternative, move to the *blue* 🟦 terminal and use the `STATUS` command. There are around 23 million rows to load.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1166,7 +1171,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
 
     * When Data Pump processes constraints the work is done by only one worker. 
-    * All other workers are idle.
+    * All other workers are idle. Their state is *WORK WAITING*. 
     * When Data Pump adds a constraint, the database will perform a full scan to ensure the column has no bad data. This full scan can't use parallel query.
     * So, one worker is processing constraints and each constraint uses no parallel query.
     * This is the reason why it might take very long to add constraints.
@@ -1302,6 +1307,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
 
     * You allow Data Pump to transform constraints using the parameter `TRANSFORM=CONSTRAINT_NOVALIDATE:Y`.
+    * This feature requires 19.27 or higher including the Data Pump Bundle Patch.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1497,12 +1503,22 @@ Constraints are used to enforce data quality and is often used extensively. A co
 
 25. Switch back to the *yellow* terminal 🟨. Wait for the Data Pump job to complete. 
 
+    * It takes 5-6 minutes for the Data Pump job to complete.
+    * Optionally, switch to the *blue* 🟦 terminal. Try to attach to the job and monitor it using the `STATUS` command.
+
+    <details>
+    <summary>*click to see the command*</summary>
+    ``` text
+    impdp dpuser/oracle attach=CONSTR_NOVALIDATE
+    ```
+    </details>     
+
 26. When the jobs complete. Check the time it took to add constraints.
 
     * Look for the object type `SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`.
     * It took 0 seconds to add all 92 constraints. 
     * Because Data Pump adds the constraints as *not validated*, the database just write the constraint defintion to the data dictionary. It does not check the table.
-    * In the previous import where Data Pump added *validated* constraints, the same operation took 162 seconds.
+    * In the previous import, when Data Pump added *validated* constraints, the same operation took 162 seconds.
 
     <details>
     <summary>*click to see the output*</summary>
