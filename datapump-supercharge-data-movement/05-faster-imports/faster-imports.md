@@ -732,7 +732,15 @@ Another option is to transfer the statistics from the source database using the 
     ```
     </details>  
 
-10. Exit SQL*Plus.
+10. Clean up.
+
+    ```
+    <copy>
+    exec dbms_stats.drop_stat_table('F1', 'STATTAB');
+    </copy>
+    ```
+
+11. Exit SQL*Plus.
 
     ```
     <copy>

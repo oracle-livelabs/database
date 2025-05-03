@@ -27,12 +27,12 @@ During export and import, Data Pump may faces errors or situations that can't be
 
     ```
     <copy>
-    tail -4f /home/oracle/scripts/dp-08-errors-import.log
+    tail -4 /home/oracle/scripts/dp-08-errors-import.log
     </copy>
     ```
 
     * The last line says *completed with 1 error*.
-    * Scroll up and you can find the details about the error.
+    * You need to examine the entire log file if you want to find the details.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -149,7 +149,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
     ```
     <copy>
-    create database link srclinks connect to system identified by oracle using 'localhost/ftex';
+    create database link srclink connect to system identified by oracle using 'localhost/ftex';
     </copy>
     ```
 
@@ -321,6 +321,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
 2. Create a new comparison.
 
+    ```
     <copy>
     begin
         dbms_comparison.create_comparison (

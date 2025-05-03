@@ -95,6 +95,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     ```
 
     * There are much fewer object paths for a table export (20) - compared to a schema export (105).
+    * A table export doesn't have to create the user, grant privileges and many other things that a schema export must.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -201,8 +202,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     * Data Pump now only exports the index definitions and the index statistics.
     * Index statistics is an dependent object path of indexes.
     * All other object paths that you normally see in a schema export are excluded.
-    * Depending on whether you performed lab 5, Data Pump only exports one or two indexes.
-    * Data Pump exports 23 index statistics. These come from primary key indexes (which are part of the TABLE object path) and LOB indexes.
+    * Data Pump exports 20 index statistics. These come from primary key indexes (which are part of the TABLE object path) and LOB indexes.
     
     <details>
     <summary>*click to see the output*</summary>
@@ -216,9 +216,9 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     29-APR-25 11:47:06.191: Starting "DPUSER"."SYS_EXPORT_SCHEMA_02":  dpuser/******** parfile=/home/oracle/scripts/dp-06-include-index-export.par
     29-APR-25 11:47:06.486: W-1 Startup took 0 seconds
     29-APR-25 11:47:07.148: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
-    29-APR-25 11:47:07.180: W-1      Completed 23 INDEX_STATISTICS objects in 1 seconds
+    29-APR-25 11:47:07.180: W-1      Completed 20 INDEX_STATISTICS objects in 1 seconds
     29-APR-25 11:47:08.955: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/INDEX
-    29-APR-25 11:47:08.960: W-1      Completed 2 INDEX objects in 1 seconds
+    29-APR-25 11:47:08.960: W-1      Completed 1 INDEX objects in 1 seconds
     29-APR-25 11:47:09.630: W-1 Master table "DPUSER"."SYS_EXPORT_SCHEMA_02" successfully loaded/unloaded
     29-APR-25 11:47:09.633: ******************************************************************************
     29-APR-25 11:47:09.633: Dump file set for DPUSER.SYS_EXPORT_SCHEMA_02 is:
@@ -270,9 +270,9 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     29-APR-25 11:59:03.066: W-1 Master table "DPUSER"."SYS_SQL_FILE_FULL_01" successfully loaded/unloaded
     29-APR-25 11:59:03.194: Starting "DPUSER"."SYS_SQL_FILE_FULL_01":  dpuser/******** parfile=/home/oracle/scripts/dp-06-include-index-sqlfile.par
     29-APR-25 11:59:03.217: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/INDEX
-    29-APR-25 11:59:03.281: W-1      Completed 2 INDEX objects in 0 seconds
+    29-APR-25 11:59:03.281: W-1      Completed 1 INDEX objects in 0 seconds
     29-APR-25 11:59:03.283: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
-    29-APR-25 11:59:03.289: W-1      Completed 23 INDEX_STATISTICS objects in 0 seconds
+    29-APR-25 11:59:03.289: W-1      Completed 20 INDEX_STATISTICS objects in 0 seconds
     29-APR-25 11:59:03.307: Job "DPUSER"."SYS_SQL_FILE_FULL_01" successfully completed at Tue Apr 29 11:59:03 2025 elapsed 0 00:00:01
     ```
     </details> 
@@ -286,7 +286,6 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     ```
 
     * You can find the `CREATE INDEX "F1"."F1_DRIVERS_IDX1"` statement in the file.
-    * You might also see `CREATE INDEX "F1"."STATTAB"` from lab 5.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -300,14 +299,6 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     ALTER SESSION SET EVENTS '22830 TRACE NAME CONTEXT FOREVER, LEVEL 192 ';
     -- new object type path: SCHEMA_EXPORT/TABLE/INDEX/INDEX
     -- CONNECT F1
-    CREATE INDEX "F1"."STATTAB" ON "F1"."STATTAB" ("STATID", "TYPE", "C5", "C1", "C2", "C3", "C4", "VERSION")
-      PCTFREE 10 INITRANS 2 MAXTRANS 255
-      STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-      PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-      BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-      TABLESPACE "USERS" PARALLEL 1 ;
-    
-      ALTER INDEX "F1"."STATTAB" NOPARALLEL;
     CREATE INDEX "F1"."F1_DRIVERS_IDX1" ON "F1"."F1_DRIVERS" ("CODE")
       PCTFREE 10 INITRANS 2 MAXTRANS 255
       STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -322,7 +313,17 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     ```
     </details> 
 
-10. In Oracle Database 19c, the `EXCLUDE` and `INCLUDE` parameters are mutually exclusive. From Oracle Database 21c you can combine those parameters. Using the previous example, if you wanted to include just indexes, and exclude index statistics you could use the following parameter file.
+10. Clean up.
+
+    ```
+    <copy>
+    sqlplus / as sysdba<<EOF
+       drop index f1.f1_drivers_idx1;
+    EOF
+    </copy>
+    ```
+
+11. In Oracle Database 19c, the `EXCLUDE` and `INCLUDE` parameters are mutually exclusive. From Oracle Database 21c you can combine those parameters. Using the previous example, if you wanted to include just indexes, and exclude index statistics you could use the following parameter file.
 
     ```
     schemas=F1
@@ -340,7 +341,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     * Combining `INCLUDE` and `EXCLUDE` allows you to easily customize the Data Pump job.
     * Previously, you had to use `INCLUDE` on the export command, and then `EXCLUDE` on the import command.
 
-11. Not only can you exclude/include an entire object path. You can also selectively exclude/include specific objects within an object path. For example, you can exclude certain, but not all users using `EXCLUDE=USER:"IN('APPUSER', 'REPORTUSER')"`. You learn more about that syntax in lab 10, *Upgrading, Downgrading and Converting*. 
+12. Not only can you exclude/include an entire object path. You can also selectively exclude/include specific objects within an object path. For example, you can exclude certain, but not all users using `EXCLUDE=USER:"IN('APPUSER', 'REPORTUSER')"`. You learn more about that syntax in lab 10, *Upgrading, Downgrading and Converting*. 
 
 ## Task 2: Views as tables and remap table
 
@@ -697,6 +698,7 @@ Data Pump allows you to export a view including all the rows. On import, that vi
     ```
     <copy>
     drop view f1.f1_winners;
+    drop table f1.f1_champs;
     </copy>
     ```
     

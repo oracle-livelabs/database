@@ -435,9 +435,11 @@ Data Pump stores the data in the dump files in a proprietary format. However, so
     </copy>
     ```
 
-    * You create an encrypted dump file using `ENCRYPTION_MODE=PASSOWRD`. This requires a license for the Advanced Security Option.
+    * You create an encrypted dump file using `ENCRYPTION_MODE=PASSWORD`. This requires a license for the Advanced Security Option.
     * For ease-of-use, the encryption password is stored in clear text in the parameter file. This is not good practice and you should avoid that.
+    * If you remove `ENCRYPTION_PASSWORD` from the parameter file, Data Pump prompts for the password.
     * You can change the encryption algorithm using `ENCRYPTION_ALGORITHM`. 
+    * The default is *AES256* in Oracle Database 23ai, and *AES128* in Oracle Database 19c and 21c.
 
     <details>
     <summary>*click to see the output*</summary>
