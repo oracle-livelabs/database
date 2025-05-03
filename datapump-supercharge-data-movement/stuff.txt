@@ -3,7 +3,7 @@ STUFF TO REMEMBER
 - YouTube videos for each chapter
 - Data Pump log analyzer is out
 - Nothing on the new index method
-
+- Test lab 9
 **************************************************************
 
 

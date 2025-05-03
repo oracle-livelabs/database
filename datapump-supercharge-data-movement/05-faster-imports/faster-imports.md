@@ -221,6 +221,18 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     ```
     </details>
 
+7. Clean up.
+
+    ```
+    <copy>
+    sqlplus / as sysdba<<EOF
+       drop user blobload cascade;
+    EOF
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```    
+
 ## Task 2: Statistics - Gather
 
 When exporting tables or indexes Data Pump also exports the corresponding statistics. Knowing how essential statistics are for good query performance, this is a good and convenient approach. However, there are other methods to getting up-to-date statistics after import. Oracle recommends that you exclude statistics from your export and use the other methods. In this task, you will re-gather statistics after import.

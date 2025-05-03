@@ -50,7 +50,7 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     -- Be sure to hit RETURN
     ```
 
-    * In this task, you use a SQL*Plus bind variable (´h1´). You will see it reference using `:h1`, but you can build it entirely in PL/SQL as well. 
+    * In this task, you use a SQL*Plus bind variable (`h1`). You will see it reference using `:h1`, but you can build it entirely in PL/SQL as well. 
 
 3. Add a filter to select only the *F1* schema.
 
@@ -120,6 +120,7 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
 7. Enable diagnostics.
 
     ```
+    <copy>
     begin 
         dbms_datapump.set_parameter(
             handle => :h1,
@@ -169,8 +170,9 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     -- Be sure to hit RETURN
     ```
 
-    * The procedure prints the final state: STOPPED or COMPLETED.
+    * The procedure prints the final state: *STOPPED* or *COMPLETED*.
     * You could also build your own loop and query some of the Data Pump views.
+    * If you get `ORA-31623: a job is not attached to this session via the specified handle` the job is already completed.
 
 10. Exit SQL*Plus.
 
@@ -190,7 +192,7 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     -- Be sure to hit RETURN
     ```
 
-    * The dump files and log file is there, so that's a good sign.
+    * The dump files and log file are there, so that's a good sign.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -221,11 +223,11 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     ```
     </details> 
     
-13. If you need inspiration on how to use `DBMS_DATAPUMP`. You can enable SQL trace on a database and start the job via `expdp` or `impdp`. Find the matching trace file (not dm or dw trace files, but the session trace file). You will be able to see the `DBMS_DATAPUMP` calls made by `expdp` or `impdp`.
+13. If you need inspiration on how to use `DBMS_DATAPUMP`. You can enable SQL trace on a database and start the job via `expdp` or `impdp`. Find the matching trace file (not dm or dw trace files, but the session trace file). You will be able to see the `DBMS_DATAPUMP` calls made by `expdp` or `impdp`. This is what you did in lab 9, *Monitoring, Troubleshooting and Tracing*.
 
 ## Task 2: DBMS\_METADATA
 
-
+Coming soon...
 
 **Congratulations!** This is the end of the lab.
 

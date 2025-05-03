@@ -166,6 +166,7 @@ In lab 5, your learned about the interactive console and the `STATUS` command. Y
 
     * One process is busy during *direct path sync*. Perhaps this database doesn't use direct I/O (`FILESYSTEMIO_OPTIONS=SETALL`). 
     * The other processes are waiting for *log buffer space*. Perhaps you could tune the system by putting redo logs on faster disks, implement more redo log groups or larger redo log members, or even import with `NOLOGGING` clause. You could implement the latter with `TRANSFORM=DISABLE_ARCHIVE_LOGGING:Y`.
+    * Occasionally, you will find *enq: TT - contention*. This is caused by bigfile tablespace extension. You could solve that by increasing the size of the data files in advance.
     * There are additional columns in the view that can supply additional information about the wait event, like which objects it involves.
 
     <details>
@@ -776,7 +777,7 @@ The control table contains information about the data and metadata in the dump f
 
 Here's a good way to generate trace information to solve a specific functional or performance problem.
 
-1. Still in the *yellow* terminal 🟨. Connect to the database. 
+1. Still in the *yellow* terminal 🟨. Connect to the *FTEX* database. 
 
     ```
     <copy>
@@ -1137,6 +1138,38 @@ Here's a good way to generate trace information to solve a specific functional o
     total bytes=32425407, compressed=3769031 -> 88% savings    
     ```
     </details> 
+
+12. You enabled SQL trace before the export. Take a look at the control process trace file.
+
+    ```
+    <copy>
+    grep -i "dbms_datapump.set_parameter" /u01/app/oracle/diag/rdbms/ftex/FTEX/trace/FTEX_*dm*trc
+    </copy>
+    ```
+
+    * Notice how the `SET_PARAMETER` procedure is called with *TRACE* set to 33489664. Convert the value to hex, and you get *1FF0300* - the trace value you added on the command line (`TRACE=1FF0300`).
+    * In lab 11, you will learn how to define jobs using `DBMS_DATAPUMP` directly. You will recognize these calls.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    KUPM:08:05:20.080: DBMS_DATAPUMP.SET_PARAMETER (hand, 'TRACE', 33489664);
+    KUPM:08:05:20.183: DBMS_DATAPUMP.SET_PARAMETER (hand, 'COMMAND_LINE_CLIENT', 1);
+    KUPM:08:05:20.186: DBMS_DATAPUMP.SET_PARAMETER (hand, 'CLIENT_COMMAND', 'dpuser/******** parfile=/home/oracle/scripts/dp-09-trace-export.par trace=1FF0300 ');
+    KUPM:08:05:20.211: DBMS_DATAPUMP.SET_PARAMETER (hand, 'METRICS', 1);
+    KUPM:08:05:20.317: DBMS_DATAPUMP.SET_PARAMETER (hand, 'LOGTIME', 'all');
+    ```
+    </details> 
+
+13. Disable SQL trace.
+
+    ```
+    <copy>
+    sqlplus / as sysdba<<EOF
+       alter system set events 'sql_trace {process: pname = dw | process: pname = dm} level=1';
+    EOF
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 
