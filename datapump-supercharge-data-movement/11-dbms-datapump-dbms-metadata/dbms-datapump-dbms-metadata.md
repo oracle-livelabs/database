@@ -4,7 +4,7 @@
 
 ...
 
-Estimated Time: 20 Minutes
+Estimated Time: 15 Minutes
 
 ### Objectives
 
@@ -19,7 +19,7 @@ This lab assumes:
 
 - You have completed Lab 3: Getting Started
 
-## Task 1: DBMS\_DATAPUMP
+## Task 1: Data Pump API
 
 A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you use the clients, `expdp` or `impdp`, they will generate and start the job via the package. 
 
@@ -225,7 +225,7 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     
 13. If you need inspiration on how to use `DBMS_DATAPUMP`. You can enable SQL trace on a database and start the job via `expdp` or `impdp`. Find the matching trace file (not dm or dw trace files, but the session trace file). You will be able to see the `DBMS_DATAPUMP` calls made by `expdp` or `impdp`. This is what you did in lab 9, *Monitoring, Troubleshooting and Tracing*.
 
-## Task 2: DBMS\_METADATA
+## Task 2: Metadata API
 
 Coming soon...
 

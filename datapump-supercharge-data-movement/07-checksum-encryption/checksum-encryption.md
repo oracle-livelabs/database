@@ -4,7 +4,7 @@
 
 What happens to your data when you move it out of the database? If you need to ship data to a far-away data center, how can you ensure that nothing happens *in-flight*? It could be a simple network corruption or a malicious user altering data. In this lab, you will explore options to detect and avoid this.
 
-Estimated Time: 15 Minutes
+Estimated Time: 10 Minutes
 
 ### Objectives
 

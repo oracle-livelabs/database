@@ -4,7 +4,7 @@
 
 In this lab, you will see some best practices that will help you get the more out of Data Pump. In addition, you will use some of the settings in Data Pump.
 
-Estimated Time: 10 Minutes
+Estimated Time: 15 Minutes
 
 ### Objectives
 

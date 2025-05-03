@@ -4,7 +4,7 @@
 
 When you move complex data around or when you're doing full export/imports, it's common to find errors in the Data Pump log file. In this lab, you will learn about errors and being able to determine whether an import was successful. 
 
-Estimated Time: 20 Minutes
+Estimated Time: 10 Minutes
 
 ### Objectives
 
