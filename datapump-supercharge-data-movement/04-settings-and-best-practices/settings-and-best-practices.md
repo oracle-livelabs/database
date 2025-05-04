@@ -598,9 +598,11 @@ Besides the general best practices, there are a number of useful settings. Compr
     -- Be sure to hit RETURN
     ```
 
-    * Check the elapsed time at the end of each line.
-    * The job with no compression ran for 10 seconds, so did the one with medium compression.
+    * Check the elapsed time at the end of each line. 
+    * How much slower was the job with medium and high compression compared to no compression?
+    * In the example in the instructions, the job with no compression ran for 10 seconds, so did the one with medium compression.
     * Using high compression caused the job to run for 3 seconds more - but that's also a 30 % increase.
+    * Medium gives a good compression ratio without affecting the runtime significantly.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -615,9 +617,9 @@ Besides the general best practices, there are a number of useful settings. Compr
 
     ```
     <copy>
-    echo "No compression: "$(du -ch f1_nocomp_*.dmp | tail -1 | cut -f 1)
-    echo "Medium compression: "$(du -ch f1_compmed_*.dmp | tail -1 | cut -f 1)
-    echo "High compression: "$(du -ch f1_comphigh_*.dmp | tail -1 | cut -f 1)
+    echo "No compression: "$(du -ch dp-04-comp-no-*.dmp | tail -1 | cut -f 1)
+    echo "Medium compression: "$(du -ch dp-04-comp-med-*.dmp | tail -1 | cut -f 1)
+    echo "High compression: "$(du -ch dp-04-comp-high*.dmp | tail -1 | cut -f 1)
     cd
     </copy>
 
@@ -632,11 +634,8 @@ Besides the general best practices, there are a number of useful settings. Compr
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ echo "No compression: "$(du -ch f1_nocomp_*.dmp | tail -1 | cut -f 1)
     No compression: 22M
-    $ echo "Medium compression: "$(du -ch f1_compmed_*.dmp | tail -1 | cut -f 1)
     Medium compression: 7.9M
-    $ echo "High compression: "$(du -ch f1_comphigh_*.dmp | tail -1 | cut -f 1)
     High compression: 6.3M
     ```
     </details> 

@@ -223,6 +223,7 @@ In lab 5, your learned about the interactive console and the `STATUS` command. Y
     CTRL+C
     ```
 
+    * Hit `CTRL+C` only once.
     * In lab 5, *Faster Imports*, you learned how to use the interactive console.
 
 9. Now, kill the job.

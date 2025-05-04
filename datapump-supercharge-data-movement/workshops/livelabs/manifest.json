@@ -64,8 +64,8 @@
       "filename": "../../10-upgrade-downgrade-convert/upgrade-downgrade-convert.md"
     },
     {
-      "title": "Lab 11: Using DBMS_DATAPUMP and DBMS_METADATA",
-      "description": "Using DBMS_DATAPUMP and DBMS_METADATA",
+      "title": "Lab 11: Using DBMS_DATAPUMP",
+      "description": "Using DBMS_DATAPUMP",
       "filename": "../../11-dbms-datapump-dbms-metadata/dbms-datapump-dbms-metadata.md"
     },
     {

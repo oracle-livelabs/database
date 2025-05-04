@@ -67,7 +67,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     * The table *BLOBLOAD.TAB1* contains a BasicFile LOB column.
     * The replacement for BasicFile LOB is SecureFile LOB. SecureFile LOB got introduced in Oracle Database 11g Release 1 in 2007. 
     * Since Oracle Database 12.1, Oracle has listed BasicFile LOB as deprecated. Yet, it is not uncommon to still find them around even today.
-    * Notice how long it took to import the table. In the example in the instructions it took 121 seconds.
+    * Notice how long it took to import the table. In the example in the instructions, it took 121 seconds.
     * Also, Data Pump used direct path to load the table.
 
     <details>
@@ -1452,6 +1452,8 @@ Constraints are used to enforce data quality and is often used extensively. A co
     -- Be sure to hit RETURN
     ```
 
+    * Job mode is listed as full even though you had a schema export. In the parameter file for the import, you didn't specify anything and that starts a full export. Since is in fact just a schema import because that's what you have in the dump file.
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -1470,6 +1472,9 @@ Constraints are used to enforce data quality and is often used extensively. A co
     select inst_id, saddr, session_type from dba_datapump_sessions;
     </copy>
     ```
+
+    * You started the job with parallel degree 4. 
+    * Data Pump starts the control process that is listed as *MASTER*. In addition, there are four worker processes. Finally, a process for `DBMS_DATAPUMP` which you will learn about in a later lab.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1511,7 +1516,9 @@ Constraints are used to enforce data quality and is often used extensively. A co
 
     1 row selected.
     ```
-    </details> 
+    </details>
+
+24. Compare the level of information you could retrieve from the `STATUS` command in the interactiven console with that of the Data Pump views. The `STATUS` command offers much greater detail but requires a Data Pump session connected to the interactive console. Other sources of information is the `DBMS_DATAPUMP` package which has a `GET_STATUS` function. Finally, you can query the control table directly. However, the control table format is not documented and not meant for public use.
 
 24. Exit SQL*Plus.
 

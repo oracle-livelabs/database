@@ -1,17 +1,16 @@
-# Using DBMS\_DATAPUMP and DBMS\_METADATA
+# Using DBMS\_DATAPUMP
 
 ## Introduction
 
-...
+Normally, you use the Data Pump clients to start a job. Those clients use the Data Pump API underneath the hood. In this lab, you will try to create a Data Pump job using the API. You can also start Data Pump jobs through tools like Enterprise Manager, Zero Downtime Migration, and SQLcl. Those tools use the Data Pump API as well.
 
-Estimated Time: 15 Minutes
+Estimated Time: 10 Minutes
 
 ### Objectives
 
 In this lab, you will:
 
 * Start a Data Pump job using the API
-* Generate DDL
 
 ### Prerequisites
 
@@ -225,9 +224,6 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     
 13. If you need inspiration on how to use `DBMS_DATAPUMP`. You can enable SQL trace on a database and start the job via `expdp` or `impdp`. Find the matching trace file (not dm or dw trace files, but the session trace file). You will be able to see the `DBMS_DATAPUMP` calls made by `expdp` or `impdp`. This is what you did in lab 9, *Monitoring, Troubleshooting and Tracing*.
 
-## Task 2: Metadata API
-
-Coming soon...
 
 **Congratulations!** This is the end of the lab.
 

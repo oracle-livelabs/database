@@ -369,7 +369,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
     col constructorref format a14
     col name format a30
     col nationality format a20
-    col url format a60
+    col url format a50
 
     declare
         l_scan_info     dbms_comparison.comparison_type;

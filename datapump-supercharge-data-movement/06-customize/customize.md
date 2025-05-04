@@ -880,7 +880,24 @@ Some times you just want to export or import just the metadata, or just the data
      NATIONALITY                                        VARCHAR2(255)
      URL                                                VARCHAR2(255)    
     ```
-    </details>     
+    </details>
+
+6. Verify it's empty.
+
+    ```
+    <copy>
+    select count(*) from contentdemo.f1_drivers;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    COUNT(*)
+    --------
+    0
+    ```
+    </details>
 
 6. Imagine that you are importing into a Unicode database. Names on people often contain national characters which mostly likely takes up more bytes in a Unicode character set. To avoid any truncation issues you decide to expand the *FORENAME* column to 512 bytes. Another option is to change the length semantics from `BYTE` to `CHAR`. You decide to do that on the *SURNAME* column.
 
