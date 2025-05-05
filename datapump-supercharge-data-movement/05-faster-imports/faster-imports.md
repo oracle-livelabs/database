@@ -65,7 +65,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
 
     * It takes 2-3 minutes to perform the import.
     * The table *BLOBLOAD.TAB1* contains a BasicFile LOB column.
-    * The replacement for BasicFile LOB is SecureFile LOB. SecureFile LOB got introduced in Oracle Database 11g Release 1 in 2007. 
+    * The replacement for BasicFile LOB is SecureFile LOB. SecureFile LOB was introduced in Oracle Database 11g Release 1 in 2007. 
     * Since Oracle Database 12.1, Oracle has listed BasicFile LOB as deprecated. Yet, it is not uncommon to still find them around even today.
     * Notice how long it took to import the table. In the example in the instructions, it took 121 seconds.
     * Also, Data Pump used direct path to load the table.
@@ -176,7 +176,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     ```
 
     * Data Pump now chooses a different access method, external table. Previously, Data Pump selected direct path. 
-    * Loading data into a SecureFile LOB allows Data Pump to choose other load methods and using parallel query (PQ) processes.
+    * Loading data into a SecureFile LOB allows Data Pump to choose other load methods and use parallel query (PQ) processes.
     * Compare the time it took to import the table with the previous import. Importing into a SecureFile LOB is faster. In the example in the instructions, it went from 121 seconds to 80 seconds. 
     * Oracle recommends that you always convert BasicFile LOBs to SecureFile LOBs on import. It's faster and SecureFile LOBs offer superior functionality. 
     * It's safe to always add `TRANSFORM=LOB_STORAGE:SECUREFILE` to your parameter files. If a LOB is already a SecureFile, Data Pump ignores the transformation.
