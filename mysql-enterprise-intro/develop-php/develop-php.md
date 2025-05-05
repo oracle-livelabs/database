@@ -1,8 +1,8 @@
-# Build and Test Web Application - LAMP: Linux, Apache, MySQL, PHP
+# Install, configure, and test Apache/PHP Web Application
 
 ## Introduction
 
-**Important:** You can install either the PHP (LAMP) stack or the Python (LMPF) stack on this server — not both.  
+**Important:** You can install either the Apache/PHP server or the Flask/Python server on the compute instance - but not both.  
 
 MySQL Enterprise Edition integrates seamlessly with the LAMP (Linux, Apache, MySQL, PHP) stack, enhancing open-source capabilities with enterprise features. MySQL EE works with the LAMP stack by:
 
@@ -38,14 +38,14 @@ In this lab, you will be guided through the following tasks:
     <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
      ```
 
-2. Verify that the Python (LMPF) stack has not already been installed on this server.
+2. Verify that Python/Flask server has not already been installed on this compute instance. **If yes then exit this lab**.
 
      ```bash
     <copy>python -c "import flask" 2>/dev/null
         if [ $? -eq 0 ]; then
-            echo "Python Flask is installed. You cannot install the PHP (LAMP) stack. Please exit this Lab."
+            echo "Python/Flask server is installed. You cannot install the Apache/PHP server. Please exit this Lab."
         else
-            echo "Python Flask is not installed. You may proceed to install the PHP (LAMP) stack."
+            echo "Python/Flask server is not installed. You may proceed to install the Apache/PHP server."
         fi</copy>
      ```
 

@@ -32,13 +32,13 @@
 
         {
 
-          "title": "Lab 4: Build and Test Web Application - LAMP: Linux, Apache, MySQL, PHP",
+          "title": "Lab 4: Install, configure, and test Apache/PHP Web Application",
           "filename": "../../develop-php/develop-php.md"
         },
 
         {
 
-          "title": "Lab 5: Build and Test Web Application - LMPF: Linux, MySQL, Python, Flask",
+          "title": "Lab 5: Install, configure, and test Flask/Python Web Application",
           "filename": "../../develop-python/develop-python.md"
         },
 
