@@ -1,16 +1,16 @@
-# Build and Test Web Application - LMPF: Linux, MySQL, Python, Flask
+# Install, configure, and test Flask/Python Web Application
 
 ## Introduction
 
-**Important:** You can install the Python (LMPF) stack or either the PHP (LAMP) stack on this server — not both. 
+**Important:** You can install either the Apache/PHP server or the Flask/Python server on the compute instance - but not both. 
 
-MySQL Enterprise Edition integrates seamlessly with the LMPF (Linux, MySQL, Python, Flask) stack, enhancing open-source capabilities with enterprise features. MySQL EE works with the LMPF stack by:
+MySQL Enterprise Edition integrates seamlessly with Linux, MySQL, Python, Flask enhancing open-source capabilities with enterprise features. MySQL EE works with them by:
 
 - Running JavaScript functions in database
 - Using PyMySQL Package
 - Maintaining Flask/Linux compatibility
 
-After installing the LMPF Stack , you will Deploy and test the "Sakila Film Library with Time Converter" web application. This application displays the Sakila.Film data while providing a time conversion tool. Users can enter seconds and convert them to either HH:MM:SS format or written time descriptions using MySQL Enterprise Edition's JavaScript function. This LMPF-based application demonstrates practical use of database features within MySQL Enterprise Edition.
+After installing the Flask/Python server , you will Deploy and test the "Sakila Film Library with Time Converter" web application. This application displays the Sakila.Film data while providing a time conversion tool. Users can enter seconds and convert them to either HH:MM:SS format or written time descriptions using MySQL Enterprise Edition's JavaScript function. This Flask/Python - based application demonstrates practical use of database features within MySQL Enterprise Edition.
 
 **Note:** The application code in this lab is intended for educational purposes only. It is designed to help developers learn and practice application development skills with MySQL Enterprise Edition. The code is not designed to be used in a production environment
 
@@ -21,7 +21,7 @@ _Estimated Lab Time:_ 15 minutes
 In this lab, you will be guided through the following tasks:
 
 - Install  Python and Flask
-- Deploy the Sample LMPF WEB Application
+- Deploy the Sample Flask/Python WEB Application
 
 ### Prerequisites
 
@@ -37,14 +37,14 @@ In this lab, you will be guided through the following tasks:
     <copy>cd /home/opc</copy>
     ```
 
-2. Verify that the PHP (LAMP) stack has not already been installed on this server.
+2. Verify that Apache/PHP server has not already been installed on this compute instance. **If yes then exit this lab**.
 
     ```bash
     <copy>php -v 2>/dev/null
     if [ $? -eq 0 ]; then
-        echo "PHP is installed. You cannot install the Python (LMPF) stack. Please exit this Lab"
+        echo "Apache/PHP server is installed. You cannot install the Python/Flask server. Please exit this Lab"
     else
-        echo "PHP is not installed. You may proceed to install the Python (LMPF) stack."
+        echo "Apache/PHP server is not installed. You may proceed to install the Python/Flask server."
     fi </copy>   
     ```
 
