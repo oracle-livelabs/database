@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Data Pump is a very versatile tool that allows you to customize the exports and imports. In this lab, you will explore som of the options.
+Data Pump is a very versatile tool that allows you to customize the exports and imports. In this lab, you will explore some of the options.
 
 Estimated Time: 10 Minutes
 
@@ -94,7 +94,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     -- Be sure to hit RETURN
     ```
 
-    * There are much fewer object paths for a table export (20) - compared to a schema export (105).
+    * There are many fewer object paths for a table export (20) - compared to a schema export (105).
     * A table export doesn't have to create the user, grant privileges and many other things that a schema export must.
 
     <details>
@@ -200,7 +200,7 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     ```
 
     * Data Pump now only exports the index definitions and the index statistics.
-    * Index statistics is an dependent object path of indexes.
+    * Index statistics is a dependent object path of indexes.
     * All other object paths that you normally see in a schema export are excluded.
     * Data Pump exports 20 index statistics. These come from primary key indexes (which are part of the TABLE object path) and LOB indexes.
     
@@ -712,7 +712,7 @@ Data Pump allows you to export a view including all the rows. On import, that vi
 
 ## Task 3: Content
 
-Some times you just want to export or import just the metadata, or just the data. Importing metadata first, allows you to customize the schema before importing the data.
+Sometimes you just want to export or import just the metadata, or just the data. Importing metadata first, allows you to customize the schema before importing the data.
 
 1. Still in the *yellow* terminal 🟨. Export the *F1* schema.
 
@@ -780,7 +780,7 @@ Some times you just want to export or import just the metadata, or just the data
     ```
     </details>     
 
-2. Start by importing just the metadata of the *F1* schema and rename it to *CONTENTDEMO*. Examine the parameter file.
+2. Start by importing just the metadata of the *F1* schema and renaming it to *CONTENTDEMO*. Examine the parameter file.
 
     ```
     <copy>
@@ -899,7 +899,7 @@ Some times you just want to export or import just the metadata, or just the data
     ```
     </details>
 
-6. Imagine that you are importing into a Unicode database. Names on people often contain national characters which mostly likely takes up more bytes in a Unicode character set. To avoid any truncation issues you decide to expand the *FORENAME* column to 512 bytes. Another option is to change the length semantics from `BYTE` to `CHAR`. You decide to do that on the *SURNAME* column.
+6. Imagine that you are importing into a Unicode database. Names of people often contain national characters which most likely take up more bytes in a Unicode character set. To avoid any truncation issues you decide to expand the *FORENAME* column to 512 bytes. Another option is to change the length semantics from `BYTE` to `CHAR`. You decide to do that on the *SURNAME* column.
 
     ```
     <copy>

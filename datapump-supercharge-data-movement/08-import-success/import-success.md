@@ -2,7 +2,7 @@
 
 ## Introduction
 
-When you move complex data around or when you're doing full export/imports, it's common to find errors in the Data Pump log file. In this lab, you will learn about errors and being able to determine whether an import was successful. 
+When you move complex data around or when you're doing full exports/imports, it's common to find errors in the Data Pump log file. In this lab, you will learn about errors and how to determine whether an import was successful. 
 
 Estimated Time: 10 Minutes
 
@@ -21,9 +21,9 @@ This lab assumes:
 
 ## Task 1: Errors
 
-During export and import, Data Pump may faces errors or situations that can't be resolved.
+During export and import, Data Pump may face errors or situations that can't be resolved.
 
-1. Use the *yellow* terminal 🟨. If Data Pump encounters an error or face a situation it can't resolve, it will print an error to the console and into the logfile. At the end of the output, Data Pump summarizes and list the number of errors faced during the job. Examine the last lines of a Data Pump import log file.
+1. Use the *yellow* terminal 🟨. If Data Pump encounters an error or faces a situation it can't resolve, it will print an error to the console and into the logfile. At the end of the output, Data Pump summarizes and lists the number of errors faced during the job. Examine the last lines of a Data Pump import log file.
 
     ```
     <copy>
@@ -175,7 +175,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
     ```
 
     * *No rows selected* means the count of different object types matches.
-    * It does not mean that that there are no differences between the source and target. 
+    * It does not mean that there are no differences between the source and target. 
     * This is just a simple count.
 
     <details>
@@ -189,7 +189,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
     ```
     </details>
 
-4. Drop a table in the target to simulate that one table were lost in the migration.
+4. Drop a table in the target to simulate that one table was lost in the migration.
 
     ```
     <copy>
@@ -220,7 +220,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
     -- Be sure to hit RETURN
     ```
 
-    * The count of tables and indexes are different in target compared to source.
+    * The count of tables and indexes are different in the target compared to the source.
     
     <details>
     <summary>*click to see the output*</summary>
@@ -248,7 +248,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
     -- Be sure to hit RETURN
     ```
 
-    * The query select all tables from the source and removes all the table from the target.
+    * The query selects all the tables from the source and removes all the table from the target.
     * It shows that *F1\_DRIVERS* are missing. It is the table you just dropped.
     
     <details>
@@ -275,7 +275,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
     * You can use parallel query to speed up the process, however, selects over a database link can't use parallel query.
     * For big tables it might be faster to run the query on each database, spool to a file and compare the two files.
-    * Counting rows works most efficiently if the table has an index on a column with a NOT NULL constraints, like a primary key index.
+    * Counting rows works most efficiently if the table has an index on a column with a NOT NULL constraint, like a primary key index.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -286,7 +286,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
     ```
     </details>
 
-8. The examples used in this task is not a complete guide. It should give you an idea on how you can use the data dictionary information and queries to compare your source and target environment. Comparing objects become more complicated when you have system-generated names for indexes and partitions and when you use Advanced Queueing. The latter because it creates a varying amount of objects recursively depending on how you use the queues.
+8. The examples used in this task are not a complete guide. It should give you an idea of how you can use the data dictionary information and queries to compare your source and target environments. Comparing objects becomes more complicated when you have system-generated names for indexes and partitions and when you use Advanced Queueing. The latter because it creates a varying number of objects recursively depending on how you use the queues.
 
 
 ## Task 3: DBMS_COMPARISON
@@ -415,7 +415,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
     * For simplicity, the bits and pieces have been glued together in a piece of PL/SQL.
     * The code conducts a comparison and reports the differences.
-    * It also lists a query to find the offending rows in the remote/source and local/target database.
+    * It also lists a query to find the offending rows in the remote/source and local/target databases.
     * In this case, the comparison correctly finds the one row you changed previously. 
 
     <details>
@@ -431,7 +431,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
     ```
     </details> 
 
-4. Execute the two queries. Don't copy paste/from the instructions. Use the queries in your output.
+4. Execute the two queries. Don't copy and paste from the instructions. Use the queries in your output.
 
     ```
     select * from f1.f1_constructors where rowid='AAAG3lAAAAAAAPuAAW';

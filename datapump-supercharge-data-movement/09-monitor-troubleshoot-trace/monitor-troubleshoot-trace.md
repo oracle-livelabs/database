@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Occasionally things doesn't go as planned. When that happens, you can rely on instrumentation in Data Pump that will provide you better understanding of what's going on. In this lab, you will learn ways of monitoring Data Pump and dig deeper into the details with tracing.
+Occasionally, things don't go as planned. When that happens, you can rely on instrumentation in Data Pump that will provide you better understanding of what's going on. In this lab, you will learn ways of monitoring Data Pump and dig deeper into the details with tracing.
 
 Estimated Time: 20 Minutes
 
@@ -20,7 +20,7 @@ This lab assumes:
 
 ## Task 1: Monitoring
 
-In lab 5, your learned about the interactive console and the `STATUS` command. You also used a few views in the database. In Oracle Database 23ai, there are new views with even better details on your Data Pump jobs. 
+In lab 5, you learned about the interactive console and the `STATUS` command. You also used a few views in the database. In Oracle Database 23ai, there are new views with even better details on your Data Pump jobs. 
 
 1. Use the *yellow* terminal 🟨. Copy an existing dump file to the *DPDIR* directory.
 
@@ -67,7 +67,7 @@ In lab 5, your learned about the interactive console and the `STATUS` command. Y
 
     * Don't wait for the import to complete.
     * Leave it running in the *yellow* terminal 🟨.
-    * Move on with the next step.
+    * Move on to the next step.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -136,7 +136,7 @@ In lab 5, your learned about the interactive console and the `STATUS` command. Y
     ```
 
     * There are five Data Pump processes.
-    * The control process (formerly known as *master process*) is seen as *DM00*.
+    * The control process (formerly known as the *master process*) is seen as *DM00*.
     * The four workers are seen as *DW0n*.
 
     <details>
@@ -165,7 +165,7 @@ In lab 5, your learned about the interactive console and the `STATUS` command. Y
     ```
 
     * One process is busy during *direct path sync*. Perhaps this database doesn't use direct I/O (`FILESYSTEMIO_OPTIONS=SETALL`). 
-    * The other processes are waiting for *log buffer space*. Perhaps you could tune the system by putting redo logs on faster disks, implement more redo log groups or larger redo log members, or even import with `NOLOGGING` clause. You could implement the latter with `TRANSFORM=DISABLE_ARCHIVE_LOGGING:Y`.
+    * The other processes are waiting for *log buffer space*. Perhaps you could tune the system by putting redo logs on faster disks, implementing more redo log groups or larger redo log members, or even importing with the `NOLOGGING` clause. You could implement the latter with `TRANSFORM=DISABLE_ARCHIVE_LOGGING:Y`.
     * Occasionally, you will find *enq: TT - contention*. This is caused by bigfile tablespace extension. You could solve that by increasing the size of the data files in advance.
     * There are additional columns in the view that can supply additional information about the wait event, like which objects it involves.
 
@@ -237,7 +237,7 @@ In lab 5, your learned about the interactive console and the `STATUS` command. Y
     * Confirm by inputting `YES`.
     * It takes a little while for Data Pump to stop the job. 
 
-10. Drop the schema that were imported.
+10. Drop the schema that was imported.
 
 
     ```
@@ -618,7 +618,7 @@ The control table contains information about the data and metadata in the dump f
 
     * Notice the state is now *EXECUTING*.
     * The workers should be busy loading rows. 
-    * Run the `STATUS` command a few times and see how *Completed rows* increases.
+    * Run the `STATUS` command a few times and see how the *Completed rows* increases.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -831,7 +831,7 @@ Here's a good way to generate trace information to solve a specific functional o
     </copy>
     ```
 
-    * If you already knew the SQL ID of the problematic statement, you could enabled SQL trace for a specific SQL ID only using `ALTER SYSTEM SET EVENTS 'sql_trace[SQL: <sql-id>]'`. 
+    * If you already knew the SQL ID of the problematic statement, you could enable SQL trace for a specific SQL ID only using `ALTER SYSTEM SET EVENTS 'sql_trace[SQL: <sql-id>]'`. 
 
     <details>
     <summary>*click to see the output*</summary>

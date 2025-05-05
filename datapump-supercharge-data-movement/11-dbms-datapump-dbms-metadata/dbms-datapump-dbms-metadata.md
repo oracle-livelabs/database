@@ -22,7 +22,7 @@ This lab assumes:
 
 A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you use the clients, `expdp` or `impdp`, they will generate and start the job via the package. 
 
-1. Use the *yellow* terminal 🟨. Connect to *FTEX* database.
+1. Use the *yellow* terminal 🟨. Connect to the *FTEX* database.
 
     ```
     <copy>
@@ -49,7 +49,7 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     -- Be sure to hit RETURN
     ```
 
-    * In this task, you use a SQL*Plus bind variable (`h1`). You will see it reference using `:h1`, but you can build it entirely in PL/SQL as well. 
+    * In this task, you use a SQL*Plus bind variable (`h1`). You will see it referenced using `:h1`, but you can build it entirely in PL/SQL as well. 
 
 3. Add a filter to select only the *F1* schema.
 

@@ -34,7 +34,7 @@ While you move a dump file from the source to the target host, it might get corr
     -- Be sure to hit RETURN
     ```
 
-2. For this task, you use the *RED* PDB. Connect and prepare for Data Pump by creating a user and directory.
+2. For this task, you use the *RED* PDB. Connect and prepare for Data Pump by creating a user and a directory.
 
     ```
     <copy>
@@ -117,7 +117,7 @@ While you move a dump file from the source to the target host, it might get corr
     -- Be sure to hit RETURN
     ```
 
-    * In the end of the log file, Data Pump informs you that it calculated the checksum and stored it in the dump file.
+    * At the end of the log file, Data Pump informs you that it calculated the checksum and stored it in the dump file.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -248,7 +248,7 @@ While you move a dump file from the source to the target host, it might get corr
     ```
     </details> 
 
-9. Now, it is recommended to re-transmit the dump file from the source to avoid the corruption. But you can also force Data Pump to import the dump file anyway. Examine a pre-created dump file.
+9. Now, it is recommended to re-transmit the dump file from the source to avoid corruption. But you can also force Data Pump to import the dump file anyway. Examine a pre-created dump file.
 
     ```
     <copy>
@@ -475,10 +475,10 @@ Data Pump stores the data in the dump files in a proprietary format. However, so
     </copy>
     ```
 
-    * The command returns nothing because the text (*ayrton*) no longer appears in clear text.
+    * The command returns nothing because the text (*Ayrton*) no longer appears in clear text.
     * The data in the dump file is now encrypted.
 
-6. Encryption not only protects your data, but also ensures that no one changes the data while it is stored in the dump file. You get the best protection by encrypting your dump files. 
+6. Encryption not only protects your data, but also ensures that no one can change the data while it is stored in the dump file. You get the best protection by encrypting your dump files. 
 
 You may now *proceed to the next lab*.
 

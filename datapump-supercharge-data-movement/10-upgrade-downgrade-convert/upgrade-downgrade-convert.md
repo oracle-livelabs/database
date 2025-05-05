@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Data Pump can move data between different releases of Oracle Database and even between certain architectures; from non-CDB to PDB, from one character set to another, from big Endian platforms like AIX to little Endian platforms like Linux. Data Pump handles such transitions without user intervention although a character set migration would require proper analysis. In this lab, you will try some of these scenarios.
+Data Pump can move data between different releases of Oracle Database and even between certain architectures; from non-CDB to PDB, from one character set to another, from big-endian platforms like AIX to little-endian platforms like Linux. Data Pump handles such transitions without user intervention although a character set migration would require proper analysis. In this lab, you will try some of these scenarios.
 
 Estimated Time: 20 Minutes
 
@@ -34,7 +34,7 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
     -- Be sure to hit RETURN
     ```
 
-2. In this task, you perform a full database export. In lab 6, *Customizing Data Pump Jobs*, you looked at the objects paths included in various export modes. A full export has the most object paths included. Look at the object paths that are part of a full export.
+2. In this task, you perform a full database export. In lab 6, *Customizing Data Pump Jobs*, you looked at the object paths included in various export modes. A full export has the most object paths included. Look at the object paths that are part of a full export.
 
     ```
     <copy>
@@ -391,8 +391,8 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
     </copy>
     ```
 
-    * Because you are doing a full import, there is a chance that some of the objects exist already.
-    * You've created the *DPDIR* directory and *DPUSER* already, but they exist in the source database also. To avoid conflicts you can exclude those using `EXCLUDE=DIRECTORY:"IN('DPDIR')"` and `EXCLUDE=USER:"IN('DPUSER')"`.
+    * Because you are doing a full import, there is a chance that some of the objects already exist.
+    * You've created the *DPDIR* directory and *DPUSER* already, but they also exist in the source database. To avoid conflicts you can exclude those using `EXCLUDE=DIRECTORY:"IN('DPDIR')"` and `EXCLUDE=USER:"IN('DPUSER')"`.
     * The tablespaces *TEMP* and *UNDOTBS1* exist as well, so you can safely exclude those using `EXCLUDE=TABLESPACE:"IN('TEMP','UNDOTBS1')"`.
     * Notice the extended syntax for `EXCLUDE`. You can exclude not only an entire object path, but also just selected objects within that path using an in-list. This works for `INCLUDE` as well.
 
@@ -422,7 +422,7 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
     -- Be sure to hit RETURN
     ```
 
-    * Data Pump spends a while in `DATABASE_EXPORT/TABLESPACE` when it is creating tablespaces. The initial size of the data files is set to the current size in the source database. The database has to write and format all those block. You could avoid that by manually creating the tablespaces with the desired initial size before the import. Then, exclude the tablespace from the import using `EXCLUDE=TABLESPACE:"IN('TBS1','TBS2', 'TBS3')"`. Imagine, the size of your tablespaces is 1 TB. The database would have to write 1 TB data files during the import. That's potentially a lot of time you can save.
+    * Data Pump spends a while in `DATABASE_EXPORT/TABLESPACE` when it is creating tablespaces. The initial size of the data files is set to the current size in the source database. The database has to write and format all those blocks. You could avoid that by manually creating the tablespaces with the desired initial size before the import. Then, exclude the tablespace from the import using `EXCLUDE=TABLESPACE:"IN('TBS1','TBS2', 'TBS3')"`. Imagine, the size of your tablespaces is 1 TB. The database would have to write 1 TB data files during the import. That's potentially a lot of time you can save.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -870,7 +870,7 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
     ```
     </details> 
 
-12. The import completes with errors. It is common to find import errors when moving to a different version, because the data dictionary is different and Data Pump doesn't know of these difference. In this example, some roles are missing which causes grants to fail. This is expected since these roles are removed in Oracle Database 23ai. When doing full imports, you must use the knowledge you gained in lab 8, *Determining Import Success*.
+12. The import completes with errors. It is common to find import errors when moving to a different version, because the data dictionary is different and Data Pump doesn't know of these differences. In this example, some roles are missing which causes grants to fail. This is expected since these roles are removed in Oracle Database 23ai. When doing full imports, you must use the knowledge you gained in lab 8, *Determining Import Success*.
 
 13. In this task, the database was very small and you could perform the export/import quickly. Much faster than a regular upgrade and PDB conversion. But as the size of the data increases, you will need more and more time for the export/import. At one point, it will be faster to upgrade and convert the entire database.
 
@@ -958,7 +958,7 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
 
 ## Task 2: Downgrade and back to non-CDB
 
-Data Pump can also move data to a lower release. In contrast to moving to a higher release, going to a lower release does require a little more consideration. What will happen if you are using features that doesn't exist in the lower version? You'll soon find out.
+Data Pump can also move data to a lower release. In contrast to moving to a higher release, going to a lower release does require a little more consideration. What will happen if you are using features that don't't exist in the lower version? You'll soon find out.
 
 1. Still in the *yellow* terminal 🟨. Connect to the *RUBY* database as *F1*.
 
