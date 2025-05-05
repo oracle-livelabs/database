@@ -187,7 +187,7 @@ A few things must be in place before you can start a Data Pump job.
     ```
     </details> 
 
-8. Automatic Shared Memory Management (ASMM) automatically will allocate memory to the streams pool when needed. However, it will resize the pool in small granules and it might affect performance of the Data Pump job. Increase the streams pool immediately.
+8. Automatic Shared Memory Management (ASMM) automatically will automatically allocate memory to the streams pool when needed. However, it will resize the pool in small granules and it might affect the performance of the Data Pump job. Increase the streams pool immediately.
 
     ```
     <copy>
@@ -227,7 +227,7 @@ A few things must be in place before you can start a Data Pump job.
 
 ## Task 2: Parameter file
 
-It often takes a number of parameters to start a Data Pump job. If you have many parameters or need to escape characters, it becomes very impractical to supply the parameters on the command line. Instead you can use a parameter file.
+It often takes a number of parameters to start a Data Pump job. If you have many parameters or need to escape characters, it becomes very impractical to supply the parameters on the command line. Instead, you can use a parameter file.
 
 1. Still connected to the *yellow* terminal 🟨. Find the command line parameter that toggles the use of a parameter file.
 

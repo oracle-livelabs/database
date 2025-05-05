@@ -22,7 +22,7 @@ This is an optional lab. You can skip it if you are already familiar with Data P
 
 ## Task 1: Check Data Pump objects
 
-Data Pump is a server-side utility. Although, you can start a job from a client, the job runs entirely on the database server. Data Pump unloads to and loads from a dump file on the server. This is in constrast to the classic export (`exp`) and import tool (`imp`) which ran on your client and exported to/imported from a local dump file. 
+Data Pump is a server-side utility. Although you can start a job from a client, the job runs entirely on the database server. Data Pump unloads to and loads from a dump file on the server. This is in contrast to the classic export (`exp`) and import tool (`imp`) which ran on your client and exported to/imported from a local dump file. 
 
 1. Use the *yellow* terminal 🟨. Set the environment to *FTEX* and connect.
 
@@ -90,7 +90,7 @@ Data Pump is a server-side utility. Although, you can start a job from a client,
     ```
 
     * Data Pump uses `DBMS_METADATA` to extract the definition of objects during an export.
-    * Data Pump stores the metadata information is an XML format in the dump file.
+    * Data Pump stores the metadata information in an XML format in the dump file.
     * While importing metadata, Data Pump reads the XML from the dump file and translates that into DDL calls.
     * In a later lab, you'll try to extract metadata from the database.
 
@@ -137,7 +137,7 @@ Data Pump is a server-side utility. Although, you can start a job from a client,
     ```
 
     * The query returns no rows because no Data Pump job is running.
-    * *DM00* is the control process which coordinates the Data Pump jobs. 
+    * *DM00* is the control process that coordinates the Data Pump jobs. 
     * The control process can start one or more worker processes. Those are named *DW00*, *DW01*, and so forth.
 
     <details>

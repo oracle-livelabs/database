@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will see some best practices that will help you get the more out of Data Pump. In addition, you will use some of the settings in Data Pump.
+In this lab, you will see some best practices that will help you get more out of Data Pump. In addition, you will use some of the settings in Data Pump.
 
 Estimated Time: 15 Minutes
 
@@ -113,8 +113,8 @@ Applying these practices will help you get more out of Data Pump and avoid some 
 
     * Setting a `PARALLEL` degree allows Data Pump to spawn worker processes to speed up the process.
     * With a setting of `PARALLEL=4` Data Pump uses one control process and up to four worker processes. 
-    * If one worker process is using parallel query processes (PQ), you will see less worker processes being active.
-    * The parallel degree on export and on import are completely independent. You can export with `PARALLEL=4` and import with `PARALLEL=16` - even if you just have four dump files.
+    * If one worker process is using parallel query processes (PQ), you will see fewer worker processes being active.
+    * The parallel degree on export and on import is completely independent. You can export with `PARALLEL=4` and import with `PARALLEL=16` - even if you just have four dump files.
     * You can even import in parallel when you have just one dump file.
     * To avoid bottlenecks during parallel export, be sure to allow multiple dump files using the `%L` wildcard discussed above.
     * As a rule-of-thumb, set `PARALLEL` to twice the number of physical cores, or number of ECPUs / 4 in OCI (alternatively number of OCPUs).
@@ -147,10 +147,12 @@ Applying these practices will help you get more out of Data Pump and avoid some 
        /       
     EOF
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * Data Pump jobs - both export and import - are querying the data dictionary massively. 
-    * To avoid issues with poor performing SQLs ensure that the dictionary statistics are current.
+    * To avoid issues with poorly performing SQLs ensure that the dictionary statistics are current.
     * Statistics on user-owned objects are normally not essential for Data Pump jobs. 
     * Oracle recommends gathering dictionary statistics before an export, before an import and immediately after an import.
     * You can also use `DBMS_STATS.GATHER_DICTIONARY_STATS`, but the Data Pump product management team recommends gathering schema statistics instead.
@@ -191,7 +193,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     * Notice the enhanced diagnostics information in the log file. 
     * Each line is prefixed with a timestamp.
     * Multiple workers were employed. Each line tells you which worker did the job, notice the *W-1*, *W-2*, *W-3* and *W-4* labels.
-    * During export of rows, you can also see the *direct\_path* method were selected for all tables. 
+    * During export of rows, you can also see that the *direct\_path* method was selected for all tables. 
     * In the end of the output, you can also see that Data Pump created a total of 24 log files.
 
     <details>

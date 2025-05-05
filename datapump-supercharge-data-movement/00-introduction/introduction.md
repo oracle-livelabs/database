@@ -13,10 +13,10 @@ Estimated Workshop Time: 2 hours
 In this workshop, you will:
 
 * Learn about Data Pump architecture and best practices
-* Customize data export and imports
+* Customize data exports and imports
 * Use some of the options in Data Pump
 * Tweak Data Pump to boost performance
-* Monitor, troubleshooting and trace Data Pump processes
+* Monitor, troubleshoot and trace Data Pump processes
 
 ## About the workshop contents
 
@@ -33,7 +33,7 @@ In a full database export, the entire database is unloaded. This includes all ta
 
 ### Schema
 
-A schema export is the default export mode. It exports one or more schemas including all data and metadata owned by those schemas, but excludes system related data that you only get in a full export. 
+A schema export is the default export mode. It exports one or more schemas including all data and metadata owned by those schemas, but excludes system-related data that you only get in a full export. 
 
 ### Tablespace 
 
@@ -41,7 +41,7 @@ In tablespace mode, only the tables contained in a specified set of tablespaces 
 
 ### Table
 
-In table mode, only a specified set of tables, partitions, and their dependent objects are unloaded. Any object required to create the table, such as the owning schema, or types for columns, must already exist.
+In table mode, only a specified set of tables, partitions, and their dependent objects are unloaded. Any object required to create the table, such as the owning schema or types for columns, must already exist.
 
 ### Transportable
 
