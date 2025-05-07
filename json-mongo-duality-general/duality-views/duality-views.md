@@ -474,10 +474,10 @@ You might have noticed that any JSON document in a Duality View carried addition
     ```
     > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
 
-8. Make a GET request from your laptop terminal command line. 
-    I've done this on a macOS - if you're running on Windows, see step 9 below instead. This URL assumes that you have done the workshop as database user ADMIN. This database user is Web (REST) enabled by default, with the default path of */ords/admin/* which we are using here. 
+8. Make a GET request from your laptop terminal command line.
+    I've done this on a macOS - if you're running on Windows, see step 9 below instead. This URL assumes that you have done the workshop as database user ADMIN. This database user is Web (REST) enabled by default, with the default path of */ords/admin/* which we are using here.
 
-    If you do not have json_pp on your machine, then don't worry. Just use the curl command. The output will just not look as pretty as it does with json_pp.
+    If you do not have json\_pp on your machine, then don't worry. Just use the curl command. The output will just not look as pretty as it does with json\_pp.
 
 	```
 	<copy>
