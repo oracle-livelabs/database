@@ -340,7 +340,7 @@ Expected output:
 2.	Connect to the catalog's local service (GSM services can also be accessed from other Podman containers, such as appclient):
     ```nohighlighting
     <copy>
-    sqlplus gsmcatuser/Oracle_23ai@gsm1.example.com:1522/GDS$CATALOG.gds01;
+    sqlplus gsmcatuser/Oracle_23ai@gsm1.example.com:1522/GDS\$CATALOG.gds01;
     </copy>
     ```
 3.	Exit the gsm1 container:

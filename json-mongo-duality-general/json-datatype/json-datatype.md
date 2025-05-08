@@ -20,6 +20,10 @@ In this lab, you will:
 
 ## Task 1: Create a relational table with a JSON column
 
+1. Navigate to your Database by selecting **Oracle Database**, then **Autonomous Database**. Ensure you're in the correct compartment for the resource. Click the database display name to open the details page.
+
+	![Select your Compartment](images/select-compartment.png)
+
 1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
 	![DB Actions](images/dbaction1.png)
