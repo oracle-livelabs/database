@@ -1545,6 +1545,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     * Look for the object type `SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`.
     * It took 0 seconds to add all 92 constraints. 
     * Because Data Pump adds the constraints as *not validated*, the database just write the constraint defintion to the data dictionary. It does not check the table.
+    * The constraints, however, are *enabled*. Even though the loaded lines were *not validated*, any new row will be enforced against the existing constraints rules.
     * In the previous import, when Data Pump added *validated* constraints, the same operation took 162 seconds.
 
     <details>
@@ -1652,7 +1653,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-30. When validating an already enabled constraint, you can take advantage of parallel query and do the validation much faster. Validate some more constraints.
+31. When validating an already enabled constraint, you can take advantage of parallel query and do the validation much faster. Validate some more constraints.
 
     ```
     <copy>
@@ -1721,7 +1722,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-12. Clean up.
+32. Clean up.
 
     ```
     <copy>
@@ -1738,7 +1739,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-31. Exit SQL*Plus.
+33. Exit SQL*Plus.
 
     ```
     <copy>
@@ -1746,7 +1747,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     </copy>
     ```
 
-32. Transforming validated constraints to not validated constraints is potentially a huge time saver. It is still adversible to validate the constraints, but you can do that after the Data Pump import while you are doing other tasks. You can even postpone the validation to a later maintenance window. You might even do it online, as it requires no table lock. 
+34. Transforming validated constraints to not validated constraints is potentially a huge time saver. It is still adversible to validate the constraints, but you can do that after the Data Pump import while you are doing other tasks. You can even postpone the validation to a later maintenance window. You might even do it online, as it requires no table lock. 
 
 You may now *proceed to the next lab*.
 

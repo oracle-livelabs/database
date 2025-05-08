@@ -194,7 +194,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     * Each line is prefixed with a timestamp.
     * Multiple workers were employed. Each line tells you which worker did the job, notice the *W-1*, *W-2*, *W-3* and *W-4* labels.
     * During export of rows, you can also see that the *direct\_path* method was selected for all tables. 
-    * In the end of the output, you can also see that Data Pump created a total of 24 log files.
+    * In the end of the output, you can also see that Data Pump created a total of 24 dump files.
 
     <details>
     <summary>*click to see the output*</summary>
