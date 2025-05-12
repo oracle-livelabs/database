@@ -1,0 +1,46 @@
+{
+	"workshoptitle": "Create Global, Scalable Microservices on OCI with Jakarta Data, and NoSQL",
+	"help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+		{
+			"title": "Introduction",
+			"description": "This is the introduction for the lab",
+			"type": "livelabs",
+			"filename": "../../introduction/introduction.md"
+		},
+		{
+			"title": "Get Started",
+			"description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable).",
+			"filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+		},
+		{
+			"title": "Lab 1: Prepare Your Environment",
+			"description": "Perform the inital setup operations",
+			"type": "livelabs",
+			"filename": "../../setup-environment/setup-environment-green.md"
+		},
+		{
+			"title": "Lab 2: Create Tables, Load Tables",
+			"description": "Create and populate your tables",
+			"type": "livelabs",
+			"filename": "../../create-populate-tables/create-populate-tables.md"
+		},
+		{
+			"title": "Lab 3: Run the Movie Stream Catalog Microservice",
+			"description": "This is the content developers",
+			"type": "livelabs",
+			"filename": "../../run-nosql-app/run-nosql-app.md"
+		},
+		{
+			"title": "Lab 4: Deploy the Movie Stream Catalog Microservice with Container Instances",
+			"description": "This is the content devops",
+			"type": "livelabs",
+			"filename": "../../run-nosql-app-container/run-nosql-app-container.md"
+		}
+		{
+			"title": "Need Help?",
+			"description": "Solutions to Common Problems and Directions for Receiving Live Help",
+			"filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+		}
+	]
+}

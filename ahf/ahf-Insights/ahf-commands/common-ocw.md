@@ -24,7 +24,7 @@ The Insights report will bring all this information in to a dynamic html report 
     tfactl changes -last 1h -node local
     </copy>
     ```
-    Command Output:
+    Example Command Output:
     <pre>
     Generating System Changes From 08/08/2024 17:47:05.947 To 08/08/2024 18:47:05.950
 
@@ -42,7 +42,7 @@ The Insights report will bring all this information in to a dynamic html report 
     tfactl param -parameter pga
     </copy>
     ```
-    Command Output:
+    Example Command Output:
     <pre>
     .----------------------------------------------------------------------------------------------.
     | Database Parameters                                                                          |

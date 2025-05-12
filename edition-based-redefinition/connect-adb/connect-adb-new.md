@@ -70,27 +70,28 @@ The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (A
 1. Using the same cloud shell console, download the required lab files
 
     ```text
-    <copy>wget http://bit.ly/ebrlabs</copy>
+    <copy>wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/ebronline.zip</copy>
     ```
-    Verify the download of the file `ebrlabs` using the list command ls -ltr as provided in the screenshot.
 
-   ![Download ebrlabs](images/download-ebrlabs.png " ")
+    Verify the download of the file `ebronline.zip` using the list command ls -ltr as provided in the screenshot.
 
-2. Unzip the ebrlabs file
+   ![Download ebronline](images/download-ebronline.png " ")
+
+2. Unzip the ebronline file
 
     ```text
-    <copy>unzip ebrlabs</copy>
+    <copy>unzip ebronline.zip</copy>
     ```
 
-    ![Unzip ebrlabs](images/unzip-ebrlabs.png " ")
+    ![Unzip ebronline](images/unzip-ebronline.png " ")
 
     It should have two folders **initial_setup** and **changes**, with a bunch of SQL and XML files. Verify using the list command ls -ltr as provided in the screenshot.
 
-    ![Ebrlabs folders](images/ebrlabs-folders.png " ")
+    ![Ebronline folders](images/ebronline-folders.png " ")
 
 You have successfully downloaded the ADB wallet and lab files. [Proceed to the next lab](#next) to setup the HR schema.
 
 ## Acknowledgements
 
-- Author - Ludovico Caldara and Suraj Ramesh
-- Last Updated By/Date -Suraj Ramesh, August 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date -Suraj Ramesh, November 2024

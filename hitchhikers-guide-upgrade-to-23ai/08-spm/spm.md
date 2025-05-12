@@ -8,7 +8,7 @@ Credits: You will use scripts written by Carlos Sierra.
 
 Estimated Time: 15 minutes
 
-[Hitchhiker's Guide LAB8](videohub:1_0m3rb2yz)
+[Hitchhiker's Guide Lab 8](youtube:lwvdaM4v4tQ?start=3855)
 
 ### Objectives
 
@@ -34,6 +34,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     sqlplus / as sysdba
     alter session set container=UPGR;
     </copy>
+
     -- Be sure to hit RETURN
     ```
 
@@ -245,6 +246,8 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       col fixed format a5
       SELECT sql_handle, plan_name, enabled, accepted, fixed FROM dba_sql_plan_baselines;
       </copy>
+
+      -- Be sure to hit RETURN
       ```
 
       <details>
@@ -315,6 +318,8 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
     SELECT ROWID FROM CUSTOMER WHERE C_W_ID = :B3 AND C_D_ID = :B2 AND C_LAST =:B1 ORDER BY C_FIRST;
     select * from table(dbms_xplan.display);
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * The optimizer chooses the index plan for the SQL. 
@@ -370,6 +375,7 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
     sqlplus / as sysdba
     alter session set container=UPGR;
     </copy>
+
     -- Be sure to hit RETURN
     ```    
 
@@ -380,6 +386,8 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
     alter system reset optimizer_index_cost_adj scope=both;
     show parameter optimizer_index_cost_adj
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 8. Exit SQL*Plus.
@@ -411,4 +419,4 @@ In this context, a plan includes all plan-related information (for example, SQL 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen - Scripts provided by: Carlos Sierra
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

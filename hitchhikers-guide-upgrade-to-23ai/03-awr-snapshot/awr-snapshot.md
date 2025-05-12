@@ -6,7 +6,7 @@ In this lab, you will execute an application workload using HammerDB on the *UPG
 
 Estimated Time: 15 Minutes
 
-[Hitchhiker's Guide LAB3](videohub:1_533ui7ij)
+[Hitchhiker's Guide Lab 3](youtube:lwvdaM4v4tQ?start=1290)
 
 ### Objectives
 
@@ -33,6 +33,8 @@ This lab assumes:
     . upgr
     sqlplus / as sysdba
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 2. Use the script to generate an AWR snapshot. Take note of the snapshot ID (e.g.: 113). You need it later on.
@@ -554,4 +556,4 @@ Snapshots are sets of historical data for specific periods that are used for per
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

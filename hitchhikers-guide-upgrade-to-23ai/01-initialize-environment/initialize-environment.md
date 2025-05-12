@@ -6,7 +6,7 @@ In this lab, you will check all components required to successfully run this wor
 
 Estimated Time: 5 Minutes
 
-[Hitchhiker's Guide LAB1](videohub:1_gu082fvs)
+[Hitchhiker's Guide Lab 1](youtube:lwvdaM4v4tQ?start=268)
 
 ### Objectives
 

@@ -137,6 +137,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
+* [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
 * [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
@@ -145,6 +146,4 @@ You may now **proceed to the next lab**
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
    - Wojciech Pluta, Director, Technical Product Marketing
-* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
-   - Wojciech Pluta, Director, Technical Product Marketing
-* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
+* **Last Updated By/Date** -  Bogdan Farca, Sep 2024

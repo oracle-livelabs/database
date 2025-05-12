@@ -1,10 +1,12 @@
-# Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell (mongosh) in Oracle Database 23ai
+# Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell (mongosh)
 
 ## Introduction
 
-In previous versions of Oracle Database, JSON indexes had to be created from SQL and the type of the data (e.g. string, number, date, etc) had to be specified when the index was created. Multi-value any-type indexes do not require users to specify a data type upfront, and they can be created directly from MongoDB clients. And these indexes will be picked up by both MongoDB and SQL queries over the same data. In previous versions of Oracle Database, MongoDB aggregation pipelines were not supported, which sometimes created friction for users attempting to migrate MongoDB applications to Oracle Database. In 23ai, these aggregation pipelines are now supported; they are transparently converted into SQL and executed directly. In this lab, we will create a native JSON collection called SALES and we will create indexes and aggregation pipelines directly from mongosh.
+In Oracle Database 23ai, indexes can be created natively from within any MongoDB tool or using any MongoDB API. Oracle creates such indexes as Multi-value any-type indexes that do not require users to specify a data type upfront. These indexes will be picked up by both MongoDB and SQL queries over the same data. 
 
-MongoDB added recently a new operator $sql to their aggregation pipeline framework not too long ago, so we at Oracle figured, hey, we have SQL, too. But unlike them, we've been doing SQL for quite some time, so why not support that operator and offer our customers the world of Oracle's powerful SQL within the realms of the MongoDB API? The examples below will also show how $sql can be used in Oracle Database 23ai.
+Oracle Database 23ai furthermore supports aggregation pipelines; they are transparently converted into SQL and executed directly. In this lab, we will create a native JSON collection called SALES and we will create indexes and aggregation pipelines directly from MongoDB Shell.
+
+MongoDB added recently a new operator $sql to their aggregation pipeline framework not too long ago, so we at Oracle figured, hey, we have SQL, too. But unlike MongoDB, Oracle is doing SQL for quite some time, so Oracle supports that operator and offers its customers the world of Oracle's powerful SQL within the realms of the MongoDB API. The examples below will also show how $sql can be used in Oracle Database 23ai.
 
 
 Estimated Time: 10 minutes
@@ -22,33 +24,21 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23.5 with direct OS access as oracle user MongoDB shell (mongosh) installed
-- All previous labs successfully completed
+- Oracle Database 23ai
+- MongoDB shell installed
 
+## Task !: Create a native JSON collection called **SALES**
 
-## Task 1: Clean up the environment:
-
-1. Follow these steps to clean up your environment:
-
-    ```
-    <copy>
-    db.SALES.drop();
-    </copy>
-    ```
-
-## Task 2: Create a native JSON collection called **SALES**
-
-1. Follow this code to run:
+1. From within mongosh, execute the following statement:
 
     ```
     <copy>db.createCollection('SALES');
     </copy>
     ```
-*Note: you do not need to explicitly create a collection in Mongo, you can just insert data, and a collection will be created.*
 
-## Task 3: Populate the SALES collections with data
+## Task 2: Populate the SALES collections with data
 
-1. Follow this code to run:
+1. Execute the following code in mongosh:
 
     ```
     <copy>db.SALES.insertMany([
@@ -68,7 +58,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 4: Create indexes on SALES
+## Task 3: Create indexes on SALES
 
 1. The following example creates an ascending index on the field size:
 
@@ -128,7 +118,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 5: Create aggregation pipelines
+## Task 4: Create aggregation pipelines
 
 1. Calculate the total price of all items
 
@@ -181,4 +171,4 @@ In this lab, you will:
 
 * **Author** - Julian Dontcheff, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, July 2024
+* **Last Updated By/Date** - Hermann Baer, February 2025

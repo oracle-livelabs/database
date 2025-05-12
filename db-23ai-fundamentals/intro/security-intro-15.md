@@ -1,27 +1,26 @@
 # Introduction
 
-Welcome to the Oracle Database Security workshop for Oracle Database 23ai! In this workshop, we will explore some of the new security features introduced in Oracle Database 23ai, focusing on Security Firewall, Schema Level Privileges, and the Developer Role. By the end of this lab, you will have a deeper understanding of how these features can help improve the security of your database environment. This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
+In this workshop, we introduce you to a newly released feature of Oracle Database 23ai--_Schema-Level Privileges_. Previously, developers had to either give users full-access to the database or manually grant user privileges to each database object in a schema. With Oracle Database 23ai, developers can now grant privileges at the schema-level--making it easier to secure your database.
 
-## About Oracle Database 23ai
+## About this Workshop
 
-Building on the strengths of its predecessor, Oracle Database 23ai represents the latest long-term support release, delivering new cutting-edge technology. Just like Oracle Database 19c, version 23ai provides best-in-class support for all data types, including the new Vector data type along with relational, JSON, XML, spatial, graph, and more, coupled with industry-leading performance, scalability, availability, and security for various workloads.
+There are additional workshops dedicated to the Oracle Database Security features and functionalities.
 
-Users of Oracle Database 19c and 21c can directly upgrade to Oracle Database 23ai.
+Based on an OCI architecture, deployed in a few minutes with a simple internet connection, it allows you to test DB Security use cases in a complete environment already pre-configured by the Oracle Database Security Product Manager Team.
 
-Check out this workshop for free access to two databases and a hands on guide to get some experience with upgrading:
-[Hitchhiker's Guide for Upgrading to Oracle Database 19c & Oracle Database 23ai](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943)
+Now, you no longer need important resources on your PC (storage, CPU or memory), nor complex tools to master, making you completely autonomous to discover at your rhythm all new DB Security features.
 
-### **New Security Features**
+### Components
+The complete architecture of the **DB Security Hands-On Labs** is as following:
 
-This section explores some of the new Security features in Oracle Database 23ai.
-* **SQL Firewall:** 
-    - SQL Firewall offers real-time protection against common database attacks by monitoring and blocking unauthorized SQL and SQL injection attacks from inside the database. 
+  ![DBSec LiveLabs Archi](./images/dbseclab-archi.png "DBSec LiveLabs Archi")
 
-- **Schema Level Privileges:**
-    - Prior to Oracle Database 23ai, managing schema privileges required more administration efforts. With schema-level privileges, administrators can easily reduce the overhead involved in granting and managing privileges, and improve security at the same time.
-
-- **Developer Role:**
-    - The Developer Role provides a comprehensive set of system privileges, object privileges, predefined roles, PL/SQL package privileges, and tracing privileges required by application developers.
+It may be composed of as many as five VMs:
+  - **DBSec-Lab** (mandatory for all workshops: Baseline and Advanced workshops)
+  - **Audit Vault Server** (for Advanced workshop only)
+  - **DB Firewall Server** (for Advanced workshop only)
+  - **Key Vault Server** (for Advanced workshop only)
+  - **DB23ai** (for SQL Firewall workshop only)
 
     
 You may now proceed to the next section.
@@ -36,6 +35,6 @@ You may now proceed to the next section.
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
-* **Contributors** - Dom Giles, Distinguished Database Product Manager
-* **Last Updated By/Date** - Killian Lynch, April 2024
+* **Contributors** - Dom Giles, Brianna Ambler, Francis Regalado Database Product Management
+* **Last Updated By/Date** - Francis Regalado, Oct 2024
 

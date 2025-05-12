@@ -17,7 +17,7 @@ Estimated Time - 5 minutes
 ### Prerequisites
 
 - You should have provisioned the **Learn how to use Oracle Sharding for mission-critical, internet-scale apps** workshop using a terraform stack
-- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use Oracle Sharding for mission-critical, internet-scale apps](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
+- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use Oracle Sharding for mission-critical, internet-scale apps](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
 
