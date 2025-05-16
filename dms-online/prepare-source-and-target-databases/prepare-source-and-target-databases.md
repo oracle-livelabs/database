@@ -232,4 +232,4 @@ You may now [proceed to the next lab](#next).
 * **Author** - Zachary Talke, Solutions Engineer, NA Tech Solution Engineering
 * **Author** - Ameet Kumar Nihalani, Senior Principal Support Engineer, Oracle Cloud Database Migration
 * **Contributors** - LiveLabs Team, ZDM Development Team
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022
+* **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025

@@ -77,4 +77,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Hanna Rakhsha, Kiana McDaniel, Solution Engineers, Killian Lynch, Austin Specialist Hub
-* **Last Updated By/Date** - Hanna Rakhsha, Kiana McDaniel, Killian, Lynch Solution Engineers, July 2021
+* **Last Updated By/Date** - - Jorge Martinez, Product Management, May 2025
