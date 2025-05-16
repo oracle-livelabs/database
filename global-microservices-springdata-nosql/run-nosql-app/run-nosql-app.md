@@ -162,7 +162,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
 
      ```shell
       <copy>
-      csruntimectl java set graalvmjdk-17
+      csruntimectl java set graalvmeejdk-17
       </copy>
       ```
 
