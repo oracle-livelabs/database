@@ -267,10 +267,9 @@ Exit out of the Cloud Shell.  You may now **proceed to the next lab.**
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
-* [Java API Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html)
+* [Java API Reference Guide](https://oracle.github.io/nosql-java-sdk/)
 * [Node API Reference Guide](https://oracle.github.io/nosql-node-sdk/)
 * [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/index.html)
-* [NoSQL SQL Reference Manual](https://docs.oracle.com/en/database/other-databases/nosql-database/21.2/sqlreferencefornosql/sql-reference-guide.pdf)
 * [About Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 
