@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 7: Getting Started
+- You have completed Lab 7: Checksum and Encryption
 
 ## Task 1: Errors
 
