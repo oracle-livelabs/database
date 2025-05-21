@@ -311,8 +311,8 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward and use the `lsj` command.
 
     ```
-    <copy>
-    
+    <copy>    
+
     lsj -a 10
     </copy>
     ```
@@ -549,6 +549,8 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
     . ftex
     sqlplus / as sysdba
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 2. Start the database.
@@ -604,4 +606,4 @@ You can even use refreshable clone PDB for databases that are already a PDB. Ver
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

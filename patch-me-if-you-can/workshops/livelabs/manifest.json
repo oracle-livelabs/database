@@ -4,48 +4,59 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-      "title": "Get Started with noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      "title": "Introduction",
+      "description": "The Introduction to Oracle Database Patching",
+      "filename": "../../00-introduction/00-introduction.md"
     },
     {
-      "title": "Introduction and Overview",
-      "description": "The Introduction to Patching",
-      "filename": "../../00-introduction-overview/00-introduction-and-overview.md"
+      "title": "Get Started",
+      "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
     },
     {
-      "title": "Lab 1: Installation and Patching",
-      "description": "Install Oracle database into a separate OH and patch it unattended.",
-      "filename": "../../01-installation-patching/01-installation-and-patching.md"
+      "title": "Lab 1: Initialize environment",
+      "description": "Initialize environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Checks in the 19.18 Environment",
-      "description": "Common checks when patching",
-      "filename": "../../02-db-19-18-checks/02-db-19-18-checks.md"
+      "title": "Lab 2: Simple patching",
+      "description": "Simple patching",
+      "filename": "../../02-simple-patching/simple-patching.md"
     },
     {
-      "title": "Lab 3: AutoUpgrade for patching",
-      "description": "Use AutoUpgrade for patching",
-      "filename": "../../03-autoupgrade-4-patching/03-autoupgrade-4-patching.md"
+      "title": "Lab 3: Familiarize with patching",
+      "description": "Familiarize with patching",
+      "filename": "../../03-familiarize-with-patching/familiarize-with-patching.md"
     },
     {
-      "title": "Lab 4: In-Place Patching",
-      "description": "Patching an existing OH",
-      "filename": "../../04-in-place-patching/04-in-place-patching.md"
+      "title": "Lab 4: Simple patching to existing Oracle home",
+      "description": "Simple patching to existing Oracle home",
+      "filename": "../../04-simple-patching-existing-home/simple-patching-existing-home.md"
     },
     {
-      "title": "Lab 5: Inventory Cleanup and Final Checks",
-      "filename": "../../05-final-checks/05-final-checks.md"
+      "title": "Lab 5: Install Oracle home",
+      "description": "Install Oracle home",
+      "filename": "../../05-install-oracle-home/install-oracle-home.md"
+    },
+    {
+      "title": "Lab 6: Manual patching of a container database",
+      "description": "Patching a container database",
+      "filename": "../../06-patching-container-database/patching-container-database.md"
+    },
+    {
+      "title": "Lab 7: Advanced patching",
+      "description": "Advanced patching exercises",
+      "filename": "../../07-advanced-patching/advanced-patching.md"
+    },
+    {
+      "title": "Lab 8: Patching internals",
+      "description": "Patching internals",
+      "filename": "../../08-patching-internals/patching-internals.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-    },
-    {
-      "title": "Other LiveLabs you might like",
-      "description": "Other LiveLabs you might like",
-      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

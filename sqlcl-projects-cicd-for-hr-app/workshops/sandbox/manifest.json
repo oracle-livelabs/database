@@ -1,0 +1,43 @@
+{
+  "workshoptitle": "Database CI/CD Project Automation for a React JS Application",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": ["../../variables/variables.json",
+    "../../variables/variables-in-another-file.json"],
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Using Oracle Cloud",
+      "filename": "../../get-started/get-started.md"
+    },
+    {
+      "title": "Lab 1: Migrate Your Application to SQLcl Projects",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../lab1-application-migration/lab1-application-migration.md"
+    },
+    {
+      "title": "Lab 2: Application Development & Deployment",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../lab2-application-dev-deploy/lab2-application-dev-deploy.md"
+    },
+    {
+      "title": "Lab 3: Database CI/CD with SQLcl Projects",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../lab3-database-cicd/lab3-database-cicd.md"
+    },
+    {
+      "title": "Lab 4: Challenge Yourself",
+      "description": "In this lab the learner will explore the app and do a change",
+      "filename": "../../lab4-challenge-yourself/lab4-challenge-yourself.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

@@ -15,7 +15,7 @@
     {
       "title": "Lab 1: Set Up the Environment",
       "description": "Verify the setup of the Compute instance.",
-      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
     },
     {
       "title": "Lab 2: Set Up the ORDS Instances",

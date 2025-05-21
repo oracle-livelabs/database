@@ -80,7 +80,7 @@ In this lab, you will:
 2. Before we connect to the MongoDB Shell, let's populate our database using the MongoDB Command Line Database Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
 
     ```
-    $ <copy>curl -s https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json | mongoimport --collection movies --drop --tlsInsecure --uri $URI
+    $ <copy>curl -s https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json | mongoimport --collection movies --drop --uri $URI
     </copy>
     ```
     ![Populate the database](images/populate-mongo-db.png " ")
@@ -88,7 +88,7 @@ In this lab, you will:
 3. Now with the URI set, we can connect to MongoDB Shell. Run the command below to connect.
 
     ```
-    $ <copy>mongosh  --tlsAllowInvalidCertificates $URI</copy>
+    $ <copy>mongosh $URI</copy>
     ```
     ![Connect to the Mongo Shell](images/mongo-shell.png " ")
 

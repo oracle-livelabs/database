@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "DBA Essentials - Install Oracle Database 23ai software and create a database",
+  "workshoptitle": "DBA Essentials - Install Oracle Database 23ai on OCI compute",
   "help": "livelabs-help-db_us@oracle.com",
   "include": {
         "adm-users": "./../../intro-install/files/adm-users.txt", 
@@ -17,11 +17,11 @@
     {
       "title": "Introduction",
       "description": "The workshop on Oracle Database 23ai Installation.",
-      "publisheddate": "10/14/2024",
+      "publisheddate": "03/11/2025",
       "filename": "./../../intro-install/intro-install.md"
     },
     {
-      "title": "Lab 1: Verify compute instance setup",
+      "title": "Lab 1: Access the NoVNC Remote Desktop",
       "description": "Verify Setup of compute instance",
       "publisheddate": "05/06/2024",
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
@@ -29,7 +29,7 @@
     {
       "title": "Lab 2: Install Oracle Database",
       "description": "How to install the Oracle Database software and create a database with Desktop class (minimal configuration) and Server class (advanced configuration).",
-      "publisheddate": "10/14/2024",
+      "publisheddate": "03/11/2025",
       "filename": "./../../install-desktop-server/install-desktop-server.md"
     },
     {

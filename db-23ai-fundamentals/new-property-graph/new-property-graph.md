@@ -91,37 +91,63 @@ This lab is just a short overview of the functionality introduced with Property 
     ```
     <copy>
 
-    drop table if exists people cascade CONSTRAINTS;
-    drop table if exists relationship cascade CONSTRAINTS;
+    DROP TABLE if exists customer_relationships CASCADE CONSTRAINTS;
+    DROP TABLE if exists customers CASCADE CONSTRAINTS;
 
-    CREATE TABLE people (
-        p_id NUMBER PRIMARY KEY,
-        name VARCHAR2(50)
-    );
+    CREATE TABLE CUSTOMERS 
+        ( 
+        CUSTOMER_ID  NUMBER , 
+        FIRST_NAME   VARCHAR2 (100) , 
+        LAST_NAME    VARCHAR2 (100) , 
+        EMAIL        VARCHAR2 (255)  NOT NULL , 
+        SIGNUP_DATE  DATE DEFAULT SYSDATE , 
+        HAS_SUB      BOOLEAN , 
+        DOB          DATE , 
+        ADDRESS      VARCHAR2 (200) , 
+        ZIP          VARCHAR2 (10) , 
+        PHONE_NUMBER VARCHAR2 (20) , 
+        CREDIT_CARD  VARCHAR2 (20) 
+        ) ;
 
-    INSERT INTO people (p_id, name) VALUES 
-        (1, 'Alice'), 
-        (2, 'Bob'), 
-        (3, 'Carol'), 
-        (4, 'Dave'), 
-        (5, 'Eve');
 
-    CREATE TABLE relationship (
-        r_id NUMBER PRIMARY KEY,
+    INSERT INTO customers (customer_id, first_name, last_name, email, signup_date, has_sub, dob, address, zip, phone_number, credit_card)
+    VALUES
+        (1, 'John', 'Doe', 'john.doe@example.com', SYSDATE, TRUE, NULL, NULL, NULL, NULL, NULL),
+        (2, 'Jane', 'Smith', 'jane.smith@example.com', SYSDATE, TRUE, NULL, NULL, NULL, NULL, NULL),
+        (3, 'Alice', 'Johnson', 'alice.johnson@example.com', SYSDATE, TRUE, NULL, NULL, NULL, NULL, NULL),
+        (4, 'Bob', 'Brown', 'bob.brown@example.com', SYSDATE, TRUE, NULL, NULL, NULL, NULL, NULL),
+        (5, 'Charlie', 'Davis', 'charlie.davis@example.com', SYSDATE, TRUE, NULL, NULL, NULL, NULL, NULL),
+        (6, 'David', 'Wilson', 'david.wilson@example.com', SYSDATE, TRUE, TO_DATE('1985-08-15', 'YYYY-MM-DD'), '123 Elm Street', '90210', '555-1234', '4111111111111111'),
+        (7, 'Jim', 'Brown', 'jim.brown@example.com', SYSDATE, TRUE, TO_DATE('1988-01-01', 'YYYY-MM-DD'), '456 Maple Street', '12345', NULL, NULL),
+        (8, 'Suzy', 'Brown', 'suzy.brown@example.com', SYSDATE, TRUE, TO_DATE('1990-01-01', 'YYYY-MM-DD'), '123 Maple Street', '12345', '555-1234', '4111111111111111');
+
+
+
+
+    CREATE TABLE if not exists customer_relationships(
+        id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) not null constraint rel_pk primary key,
         source_id NUMBER,
         target_id NUMBER,
-        relationship VARCHAR2(50),
-        CONSTRAINT connections_people_1_fk FOREIGN KEY (source_id) REFERENCES people (p_id),
-        CONSTRAINT connections_people_2_fk FOREIGN KEY (target_id) REFERENCES people (p_id)
-    );
+        relationship VARCHAR2(100));
 
-    INSERT INTO relationship (r_id, source_id, target_id, relationship) 
-    VALUES 
-        (1, 1, 2, 'friend'),
-        (2, 2, 3, 'colleague'),
-        (3, 3, 4, 'neighbor'),
-        (4, 4, 1, 'sibling'),
-        (5, 1, 3, 'mentor');
+
+
+    INSERT INTO customer_relationships (SOURCE_ID, TARGET_ID, RELATIONSHIP)
+    VALUES
+        (8, 7, 'Married'),
+        (7, 8, 'Married'),
+        (7, 4, 'Brother'),
+        (4, 7, 'Brother'),
+        (1, 2, 'Friend'),
+        (3, 5, 'Colleague'),
+        (6, 4, 'Neighbor'),
+        (7, 6, 'Friend'),
+        (6, 7, 'Friend'),
+        (7, 3, 'Friend'),
+        (3, 7, 'Friend'),
+        (7, 1, 'Friend'),
+        (1, 7, 'Friend');
+
 
     </copy>
     ```
@@ -136,38 +162,36 @@ This lab is just a short overview of the functionality introduced with Property 
     
     The property graphs are stored as metadata inside the database meaning they don't store the actual data. Rather, the data is still stored in the underlying objects and we use the SQL/PQG syntax to interact with the property graphs.
 
-    "Why not do this in SQL?" Short answer is, you can. However, it may not be simple. Modeling graphs inside the database using SQL can be difficult and cumbersome and could require complex SQL code to accurately represent and query all aspects of a graph.
+    "Why not do this in SQL?" The short answer is, you can. However, it may not be simple. Modeling graphs inside the database using SQL can be difficult and cumbersome and could require complex SQL code to accurately represent and query all aspects of a graph.
 
     This is where property graphs come in. Property graphs make the process of working with interconnected data, like identifying influencers in a social network, predicting trends and customer behavior, discovering relationships based on pattern matching and more by providing a more natural and efficient way to model and query them. Let's take a look at how to create property graphs and query them using the SQL/PGQ extension.
 
-2. We'll first create a property graph that models the relationship between people (our tables created earlier).
+2. We'll first create a property graph that models the relationship between customers.
 
     ```
     <copy>
         
-    drop property graph if exists relationships_pg;
+    DROP PROPERTY GRAPH IF EXISTS moviestreams_pg;
 
-    CREATE PROPERTY GRAPH relationships_pg
-        VERTEX TABLES (
-            people
-            KEY (p_id)
-            LABEL person
-            PROPERTIES ALL COLUMNS
-        )
-        EDGE TABLES (
-            relationship
-            KEY (r_id)
-            SOURCE KEY (source_id) REFERENCES people (p_id)
-            DESTINATION KEY (target_id) REFERENCES people (p_id)
-            LABEL relationship
-            PROPERTIES ALL COLUMNS
-        );
-
+    create property graph moviestreams_pg
+    vertex tables (
+        customers
+        key(customer_id)
+        label customer
+        properties (customer_id, first_name, last_name)
+    )
+    edge tables (
+        customer_relationships as related
+        key (id)
+        source key(source_id) references customers(customer_id)
+        destination key(target_id) references customers(customer_id)
+        properties (id, relationship)
+    )
     </copy>
     ```
 
     A couple things to point out here:
-    * Vertex represent our people table
+    * Vertex represent our customers table
     * Edges represent how they are connected (relationship table)
     * Our edges table has a source key and destination key, representing the connection between the two people
 
@@ -285,77 +309,55 @@ This lab is just a short overview of the functionality introduced with Property 
 
 12. In this short lab we've looked at SQL property graphs and SQL/PGQ in Oracle Database 23ai. We've learned how to create property graphs from existing tables, query these graphs to discover relationships, and prepare data for visualization. 
 
-
-## Task 3: Querying Property Graphs with SQL/PGQ
-
-1. Now we can use SQL/PQG to query and work with our property graphs. We'll use the GRAPH_TABLE operator here to display people who are connected to each other.
-
+13. We can clean our environment.
     ```
     <copy>
-        
-    SELECT person_1, relationship, person_2
-    FROM   graph_table (relationships_pg
-            MATCH
-            (p1 IS person) -[r IS relationship]-> (p2 IS person)
-            COLUMNS (p1.name AS person_1, r.relationship, p2.name AS person_2)
-        );
-
+    drop table if exists customer_relationships CASCADE CONSTRAINTS;
+    drop table if exists customers CASCADE CONSTRAINTS;
+    drop property graph moviestreams_pg;
     </copy>
     ```
 
-    ![use sql/pgq to query the graph](images/im4.png =50%x*)
+## Task 4: Clean up
 
-2. We can filter our results like we can in SQL.
+1. Sign back in with the **admin** user. 
+
+    If you've forgotten your password, it can be found by clicking the **View login info** button in the top left of these instruction. Alternatively, you can watch the gif below to find the password.  
+
+    ![reset the password](images/pswrd1.gif " ")
+
+2. Now using the password we found above, sign in as the admin user. 
+
+    ![sign into the admin user](images/im25.png " ")
+
+3. Using the hamburger menu in the upper left hand corner of the screen, find and open the SQL Editor
+
+    ![sign into the admin user](images/im22.png " ")
+
+
+4. Terminate any active sessions created by the DB23AI user and drop the user.
 
     ```
     <copy>
-        
-    SELECT person_1, relationship, person_2
-    FROM   graph_table (relationships_pg
-            MATCH
-            (p1 IS person WHERE p1.name = 'Alice') -[r IS relationship]-> (p2 IS person)
-            COLUMNS (p1.name AS person_1, r.relationship, p2.name AS person_2)
-        );
+
+    BEGIN
+    FOR session IN (SELECT SID, SERIAL# FROM V$SESSION WHERE USERNAME = 'DB23AI') LOOP
+        EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || session.SID || ',' || session.SERIAL# || ''' IMMEDIATE';
+    END LOOP;
+    END;
 
     </copy>
     ```
+    ![terminate sessions](images/im21.png " ")
 
-    ![use sql/pgq to select a person from the graph](images/im5.png " ")
+5. Now drop the user
 
-3. We can also check the metadata about our graph
     ```
     <copy>
-        
-    SELECT person_1, relationship, person_2, id_person_1, id_relationship, id_person_2
-    FROM   graph_table (relationships_pg
-            MATCH
-            (p1 IS person) -[r IS relationship]-> (p2 IS person)
-            COLUMNS (p1.name AS person_1,
-                    p2.name AS person_2,
-                    r.relationship AS relationship,
-                    vertex_id(p1) AS id_person_1,
-                    edge_id(r) AS id_relationship,
-                    vertex_id(p2) AS id_person_2)
-        );
-
+    DROP USER DB23AI CASCADE;
     </copy>
     ```
-    ![check graph metadata using sql/pgq](images/im6.png " ")
 
-
-4. In this short lab we've looked at SQL property graphs and SQL/PGQ in Oracle Database 23ai. We've learned how to create property graphs from existing tables, query these graphs to discover relationships, and prepare data for visualization. 
-
-    This is just a small sample of what you can do with Property Graphs and SQL/PQG in Oracle Database 23ai. For more in depth labs and other graph functionality, brows through the following link
-    * [Graphs in 23ai](https://livelabs.oracle.com/pls/apex/f?p=133:100:105582422382278::::SEARCH:graph)
-
-5. We can clean our environment.
-    ```
-    <copy>
-    drop table people cascade CONSTRAINTS;
-    drop table relationship cascade CONSTRAINTS;
-    drop property graph relationships_pg;
-    </copy>
-    ```
 
 You may now **proceed to the next lab** 
 
@@ -367,4 +369,4 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dom Giles, Distinguished Database Product Manager
-* **Last Updated By/Date** - Killian Lynch, April 2024
+* **Last Updated By/Date** - Killian Lynch, December 2024

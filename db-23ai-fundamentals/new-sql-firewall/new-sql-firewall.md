@@ -144,7 +144,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![start capture](images/im22.png " ")
     ![start capture](images/im23.png " ")
 
-10. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
+10. Select the SQL tile so we can run some typical SQL operations to capture normal activities (e.g., select and insert statements).
 
     ```
     <copy>

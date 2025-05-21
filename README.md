@@ -15,7 +15,7 @@ Visit [LiveLabs](https://livelabs.oracle.com) now to get started.  Workshops are
 Pull requests are currently not being accepted. See [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
-Copyright (c) 2014, 2022 Oracle and/or its affiliates
+Copyright (c) 2014, 2025 Oracle and/or its affiliates
 The Universal Permissive License (UPL), Version 1.0
 See [LICENSE](LICENSE.txt) for details.
 
