@@ -28,7 +28,7 @@ In this task, we will review the code using the OCI Code Editor.
 
 1. Open the OCI Code Editor in the top-right menu.
 
-   ![Cloud Editor](./images/cloud-code-editor.png)
+   ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
 
 2. Open `microprofile-config.properties` in the directory `books-management/src/main/resources/META-INF/`. This file configures the database connection and deployment settings, providing flexibility for different environments.
 
