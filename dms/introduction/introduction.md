@@ -1,6 +1,6 @@
 # Introduction
 
-The labs in this workshop will walk you through all the steps to get started using Oracle Cloud Infrastructure (OCI) Database Migration (DMS). You will provision a Virtual Cloud Network (VCN), an Oracle Database 19c instance, and an Oracle Autonomous Database (ADB) instance in order to perform a database migration using DMS.
+The labs in this workshop will walk you through all the steps to get started using Oracle Cloud Infrastructure (OCI) Database Migration (DMS). You will provision a Virtual Cloud Network (VCN), an Oracle Database 19c instance, and an Oracle Autonomous Database (ADB) instance in order to perform an **offline**  database migration using DMS.
 
 With DMS we make it quick and easy for you to migrate databases from on-premises, Oracle or third-party cloud into Oracle databases on OCI.
 
@@ -19,11 +19,11 @@ In the current release of DMS we support Oracle databases located on-premises, i
 
 |                  |  |     
 |--------------------------|-------------------------|
-| Source Databases | Oracle DB 11g, 12c, 18c, 19c, 21c: <br>on-premises, third-party cloud, OCI  |   
+| Source Databases | Oracle DB 11g, 12c, 18c, 19c, 21c,23ai: <br>on-premises, third-party cloud, OCI  |   
 | Target Databases | ADB serverless and dedicated <br> Co-managed Oracle Base Database (VM, BM)<br> Exadata on Oracle Public Cloud. |
 | Supported Source Environments | Oracle Cloud Infrastructure co-managed databases or on-premises environments<br>Amazon Web Services RDS Oracle Database<br> Linux-x86-64, IBM AIX<br>Oracle Solaris|        
 | Migration Modes  | Direct Access to Source <br>(VPN or Fast Connect) Indirect Access to Source <br>(Agent on Source Env) |                        |  
-| Initial Load <br> (Offline Migration) | Logical Migration using <br>Data Pump to Object Store <br>Data Pump using SQLnet |  |
+| Initial Load <br> (Offline Migration) | Logical Migration using <br>Data Pump to Object Store <br>Data Pump using SQLnet <br>Data Pump via file storage |  |
 | Replication <br> (Online Migration) | GoldenGate Integrated Service<br>GoldenGate Marketplace |
 
 The DMS service runs as a managed cloud service separate from the user's tenancy and resources. The service operates as a multitenant service in a DMS Service Tenancy and communicates with the user's resources using Private Endpoints (PEs). PEs are managed by DMS and are transparent to the user.
@@ -39,13 +39,13 @@ The DMS service runs as a managed cloud service separate from the user's tenancy
 Estimated Lab Time: 180 minutes -- this estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.
 
 
-### Objectives
+### Objectives 
 
 In this lab, you will:
 * Create SSH Keys
 * Create a VCN
 * Create a Vault
-* Create Databases
+* Create and prepare databases
 * Create an Object Storage Bucket
 * Create Database Connections
 * Create, Validate, and Run a Migration
@@ -66,4 +66,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Killian Lynch, Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, May 2025
