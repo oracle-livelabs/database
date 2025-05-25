@@ -35,7 +35,7 @@ In this lab, you will be guided through the following task:
 
 1. From the OCI Menu, navigate to **Identity & Security** and click **Vault**
 
-    ![Identity & Security Vault](./images/OCI-menu-vault.png "OCI-menu-vault ")
+    ![Identity & Security Vault](./images/oci-menu-vault.png "oci-menu-vault ")
 
 2. Create a Vault
 
@@ -170,7 +170,7 @@ In this lab, you will be guided through the following task:
 
 1. From the OCI Menu, navigate to **Developer Services** and click **SQL Worksheet**
 
-    ![Developer Services SQL Worksheet](./images/OCI-developer-services-sql-worksheets.png "OCI-developer-services-sql-worksheets ")
+    ![Developer Services SQL Worksheet](./images/oci-developer-services-sql-worksheets.png "oc-developer-services-sql-worksheets ")
 
 2. Select the **movies** compartment and the created **HW-MovieHub-Connection**
 
