@@ -158,7 +158,7 @@ For this task you need the following info from previous steps:
     Source database
       - Export directory object name: **dumpdir**
       - Export directory object path: **/u01/app/oracle/dumpdir**
-      - Source Database file system SSL wallet path: **/u01/app/oracle/dumpdir/wallet**
+      - Source Database file system SSL wallet path: **/u01/app/oracle/wallet**
 
     Object Storage bucket
       - DMSStorage

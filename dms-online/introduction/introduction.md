@@ -47,7 +47,7 @@ In this lab, you will:
 * Create SSH Keys
 * Create a VCN
 * Create a Vault
-* Create Databases
+* Create and prepare databases
 * Create an Object Storage Bucket
 * Create Database Connections
 * Create, Validate, and Run a Migration
