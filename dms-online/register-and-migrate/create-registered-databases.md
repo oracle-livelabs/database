@@ -165,6 +165,7 @@ For this task you need the following info from previous steps:
 
     Online replication:
       - Check Use Online Replication 
+      - *Check* Source database is a pluggable database with version less than 21c
 
     Source container database
       - Container database connection: **SourceCDB** 
