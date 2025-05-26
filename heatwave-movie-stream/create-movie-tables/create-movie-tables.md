@@ -19,7 +19,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab 6
+- Completed Lab 5
 
 ## Task 1: Connect with MySQL Shell:
 
@@ -140,7 +140,7 @@ In this lab, you will be guided through the following tasks:
 
     d. Notice the difference in the number of created records for the tables
 
-    The number of records for every user table will vary between each other. This is because we are only getting the items from the user that the models WERE NOT trained with.
+    **The number of records for every user table will vary between each other**. This is because we are only getting the items from the user that the models WERE NOT trained with.
 
     This is exactly the same that the function ML\_PREDICT\_ROW does. In this case we are generating the results in tables to be easily consumed by the ORACLE APEX APP.
 
@@ -321,12 +321,11 @@ You may now **proceed to the next lab**
 
 ## Learn More
 
-- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/index.html)
-- [MySQL HeatWave ML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
-
+- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/home.htm)
+- [MySQL HeatWave AutoML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, November 2024
+- **Author** - Cristian Aguilar, MySQL Solution Engineering
+- **Contributors** - Perside Foster, MySQL Principal Solution Engineering
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025
