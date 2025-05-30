@@ -30,21 +30,21 @@ This lab assumes you have:
 
     ```
     <copy>
-    sudo docker ps -a
+    sudo podman ps -a
     </copy>
     ```
 
-     ![<List Docker Containers>](images/uds19c-init-env-docker-containers-status.png " ")
+     ![<List podman Containers>](images/uds19c-init-env-podman-containers-status.png " ")
 
 2. Connect catalog image (pcatalog)
 
     ```
     <copy>
-    sudo docker exec -it pcatalog /bin/bash
+    sudo podman exec -it pcatalog /bin/bash
     </copy>
     ```
 
-     ![<Connect Catalog Docker Image pcatalog>](images/uds19c-connect-catalog-docker-image.png " ")
+     ![<Connect Catalog podman Image pcatalog>](images/uds19c-connect-catalog-podman-image.png " ")
 
 ## Task 2: Connect as SYSDBA user to create a sharded database schema user
 
@@ -59,7 +59,7 @@ This lab assumes you have:
 
     -- If sharded user (transactions) already exists drop that before re-create user
     -- drop user transactions cascade;
-    CREATE USER transactions IDENTIFIED BY ****************;
+    CREATE USER transactions IDENTIFIED BY WElcomeUDS19c##;
     ```
 
 2. Grant roles to the user.
@@ -84,7 +84,7 @@ This lab assumes you have:
 4. Connect as the schema user to create sharded table(s), a duplicated table and populated them with data.
 
     ```
-    connect transactions/****************@PCAT1PDB;
+    sqlplus transactions/WElcomeUDS19c##@PCAT1PDB;
     ```
 
 5. If sharded tables (payments and accounts) already exists, drop those before you re-create the tables.
@@ -110,7 +110,7 @@ This lab assumes you have:
     PARTITION p_shard1 VALUES
     ('USA','CAN','BRA','MEX') TABLESPACE tbs_shardspace1
     ,PARTITION p_shard2 VALUES
-    ('IND','DEU','FRA','CHN','AUS','ZAF') TABLESPACE tbs_shardspace2
+    ('IND','DEU','FRA','CHN','AUS','ZAF','JPN') TABLESPACE tbs_shardspace2
     );
     ```
 
@@ -140,7 +140,7 @@ This lab assumes you have:
     PARTITION p_shard1 VALUES
     ('USA','CAN','BRA','MEX') TABLESPACE tbs_shardspace1
     ,PARTITION p_shard2 VALUES
-    ('IND','DEU','FRA','CHN','AUS','ZAF') TABLESPACE tbs_shardspace2
+    ('IND','DEU','FRA','CHN','AUS','ZAF','JPN') TABLESPACE tbs_shardspace2
     );
     ```
 
@@ -173,6 +173,9 @@ This lab assumes you have:
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('ZAF',10,10,10000,sysdate);
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('USA',11,11,10000,sysdate);
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('IND',12,12,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',13,13,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',14,14,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',15,15,10000,sysdate);
     commit;
     ```
 
@@ -197,4 +200,4 @@ You may now **proceed to the next lab**.
 
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, October 2023
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, November 2024

@@ -1,23 +1,25 @@
-# Run an LRA Sample Application
+# Run Travel Agent App which Uses Saga
 
 ## Introduction
 
-Run a sample application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
-The sample application code is available in the MicroTx distribution. The MicroTx library files are already integrated with the sample application code.
+Run a Travel Agent application that uses the Saga transaction protocol to book a trip and understand how you can use Oracle Transaction Manager for Microservices (MicroTx) to coordinate the transactions. The Saga transaction protocol is based on Eclipse MicroProfile Long Running Actions (LRA).
 
 Estimated Time: *10 minutes*
 
 Watch the video below for a quick walk-through of the lab.
-[Run an LRA Sample Application](videohub:1_0g2khxyc)
+[Run the Travel Agent App Using Saga](videohub:1_0g2khxyc)
 
-### About LRA Sample Application
+### About the Travel Agent Application
 
-The sample application demonstrates how you can develop microservices that participate in LRA transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. To test the failure scenario, the flight service sample app rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
+The following figure shows a Travel Agent application, which contains several microservices, to demonstrate how you can develop microservices that participate in Saga transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. The Flight Booking and Hotel Booking applications store the booking or reservation information in memory.
 
-The following figure shows a sample LRA application, which contains several microservices, to demonstrate how you can develop microservices that participate in LRA transactions.
-![Microservices in sample LRA application](./images/lra-sample-app.png)
+![Microservices in sample Saga application](./images/lra-sample-app.png)
 
-For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
+Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The Flight Booking application in this example allows only two confirmed bookings by default. To test the failure scenario, the Flight Booking applications rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
+
+Code for the Travel Agent application is available in the MicroTx distribution package. The MicroTx library files are already integrated with the application code.
+
+For more details, see [About the Sample Saga Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
@@ -25,10 +27,9 @@ In this lab, you will:
 
 * Configure Minikube
 * Start a tunnel between Minikube and MicroTx
-* Deploy Kiali and Jaeger in your minikube cluster (Optional)
-* Run the LRA sample application
-* View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the sample application (Optional)
+* Run the Travel Agent application
+* Visualize the flow of requests (optional)
+* View source code of the Travel Agent application (optional)
 
 ### Prerequisites
 
@@ -49,7 +50,7 @@ This lab assumes you have:
 
 ## Task 1: Configure Minikube
 
-Follow the instructions in this section to configure Minikube, and then run a sample application.
+Follow the instructions in this section to configure Minikube. When you start Minikube, the Travel Agent application is deployed.
 
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
@@ -133,70 +134,23 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
     </copy>
     ```
 
-## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
-This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
-Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
-You will be able to visualize the service mesh and the distributed traces after you have run the sample application in the following task.
-The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
+## Task 3: Run the Travel Agent Application
 
-1. Deploy Kiali.
-
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
-    </copy>
-    ```
-2. Deploy Prometheus.
-
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/prometheus.yaml
-    </copy>
-    ```
-3. Deploy Jaeger.
-
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/jaeger.yaml
-    </copy>
-    ```
-4. Start Kiali Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
-
-    ```text
-    <copy>
-    istioctl dashboard kiali
-    </copy>
-    ```
-   An output will show a URL on which you can access the kiali dashboard in a browser tab:
-    http://localhost:20001/kiali
-
-5. Start Jaeger Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
-
-    ```text
-    <copy>
-    istioctl dashboard jaeger
-    </copy>
-    ```
-   An output will show a URL on which you can access the jaeger dashboard in a browser tab:
-   http://localhost:16686
-
-## Task 4: Run the LRA sample application
-
-Run the sample LRA application to book a hotel room and flight ticket.
+Run the Travel Agent application to book a hotel room and flight ticket.
 
 1. Run the Trip Client application.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client
+    cd /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-client
     java -jar target/trip-client.jar
     </copy>
     ```
 
     The Trip Booking Service console is displayed.
 
-2. Type **y** to confirm that you want to run the LRA sample application, and then press Enter.
-The sample application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
+2. Type **y** to confirm that you want to run the Travel Agent application, and then press Enter.
+The Travel Agent application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
 
 3. Type **y** to confirm the provisional booking, and then press Enter.
 
@@ -233,38 +187,70 @@ The sample application provisionally books a hotel room and a flight ticket and 
     </copy>
     ```
 
-## Task 5: View Service Mesh graph and Distributed Traces (Optional)
-You can perform this task only if you have performed Task 3. 
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
-1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
+## Task 4: Visualize the Flow of Requests (Optional)
 
-2. Select Graph for the otmm namespace.
+To visualize the flow of requests between MicroTx and the distributed microservices to book a trip, use Kiali and Jaeger dashboards.
+
+When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus are deployed and configured. The YAML files that contain the configuration information for Kiali, Jaeger, and Prometheus are available in the `$HOME/visualizations` folder.
+
+1. Run the following command to ensure that Kiali, Prometheus, and Jaeger are in the `Running` status.
+
+    ```text
+    <copy>
+    kubectl get pods -n istio-system
+    </copy>
+    ```
+    
+    **Example output**
+    ![Kiali, Prometheus, and Jaeger in Running status](./images/visualization-tools-status.png)
+
+2. Start the Kiali Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard kiali
+    </copy>
+    ```
+
+   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
+
+3. Select Graph for the `otmm` namespace.
 ![Kiali Dashboard](images/kiali-dashboard-lra.png)
 
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
-4. Select istio-ingressgateway.istio-system from the Service list. You can see the list of traces with each trace representing a request. 
+4. Start the Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard jaeger
+    </copy>
+    ```
+
+   A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
+
+5. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
+6. Click **Find Traces**. You can see the list of traces with each trace representing a request.
 ![Jaeger Traces List](images/jaeger-traces-list.png)
-5. Select one of the traces to view.
+7. Select one of the traces to view.
 ![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
 
-## Task 6: View source code of the sample application (Optional)
-The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo
-- Trip Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-manager
-- Hotel Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/hotel
-- Flight Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/flight
-- Trip Client Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client 
+## Task 5: View Source Code of the Travel Agent Application (Optional)
+
+The source code of the Travel Agent application is present in folder: /home/oracle/OTMM/otmm-package/samples/lra/lrademo
+- Trip Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-manager
+- Hotel Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/hotel
+- Flight Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/flight
+- Trip Client Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-client
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
-
-You may now **proceed to the next lab** to run a sample XA application. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Environment Clean Up**.
+You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Clean Up**.
 
 ## Learn More
 
-* [Develop Applications with LRA](https://doc.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-lra-applications.html#GUID-63827BB6-7993-40B5-A753-AC42DE97F6F4)
+* [Develop Applications with Saga](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-63827BB6-7993-40B5-A753-AC42DE97F6F4)
 
 ## Acknowledgements
 
-* **Author** - Sylaja Kannan, Principal User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, January 2023
+* **Author** - Sylaja Kannan, Consulting User Assistance Developer
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
+* **Last Updated By/Date** - Sylaja, August 2024

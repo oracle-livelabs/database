@@ -32,11 +32,11 @@ This lab assumes you have:
 
     ```
     <copy>
-    sudo docker ps -a
+    sudo podman ps -a
     </copy>
     ```
 
-     ![<List Docker Containers>](images/uds19c-init-env-docker-containers-status.png " ")
+     ![<List podman Containers>](images/uds19c-init-env-podman-containers-status.png " ")
 
 
 2. The user-defined sharded database schema and tables are created, and data is inserted for this lab. Connect to the Shard1, Shard2, and Catalog Databases and compare query results from sharded table Accounts on each database.
@@ -56,15 +56,15 @@ This lab assumes you have:
 
     ```
     <copy>
-    sudo docker exec -it shard1 /bin/bash
+    sudo podman exec -it shard1 /bin/bash
     </copy>
     ```
-     ![<Connect Shard1 Docker Image shard1>](images/uds19c-connect-shard1-docker-image.png " ")
+     ![<Connect shard1 podman image>](images/uds19c-connect-shard1-podman-image.png " ")
 
 
     ```
     <copy>
-    connect transactions/****************@PORCL1PDB;
+    sqlplus transactions/WElcomeUDS19c##@PORCL1PDB;
     select count(account_id) from accounts;
     select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
@@ -73,20 +73,20 @@ This lab assumes you have:
     ![<Shard1 sharded table queries>](images/uds19c-connect-shard1-sharded-table-queries.png " ")
 
 
-4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 7 accounts and 6 Countries are in Shard2.
+4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 10 accounts and 7 Countries are in Shard2.
 
 
     ```
     <copy>
-    sudo docker exec -it shard2 /bin/bash
+    sudo podman exec -it shard2 /bin/bash
     </copy>
     ```
-     ![<Connect Shard2 Docker Image shard1>](images/uds19c-connect-shard2-docker-image.png " ")
+     ![<Connect shard2 podman image>](images/uds19c-connect-shard2-podman-image.png " ")
 
 
     ```
     <copy>
-    connect transactions/****************@PORCL2PDB;
+    sqlplus transactions/WElcomeUDS19c##@PORCL2PDB;
     select count(account_id) from accounts;
     select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
@@ -96,19 +96,19 @@ This lab assumes you have:
 
 
 
-5. Connect to the Catalog and run cross shard queries on sharded table accounts. A total of 12 accounts and 10 countries are in the Catalog, which matches the sums for accounts (7+5=12) and countries (4+6=10) from both shards. This exercise confirms that Oracle Sharding with user-defined sharding allows you to implement Data Sovereignty use cases.
+5. Connect to the Catalog and run cross shard queries on sharded table accounts. A total of 15 accounts and 11 countries are in the Catalog, which matches the sums for accounts (5+10=15) and countries (4+7=11) from both shards. This exercise confirms that Oracle Sharding with user-defined sharding allows you to implement Data Sovereignty use cases.
 
     ```
     <copy>
-    sudo docker exec -it pcatalog /bin/bash
+    sudo podman exec -it pcatalog /bin/bash
     </copy>
     ```
-     ![<Connect Catalog Docker Image pcatalog>](images/uds19c-connect-catalog-docker-image.png " ")
+     ![<Connect Catalog podman Image pcatalog>](images/uds19c-connect-catalog-podman-image.png " ")
 
 
     ```
     <copy>
-    connect transactions/****************@PCAT1PDB;
+    sqlplus transactions/WElcomeUDS19c##@PCAT1PDB;
     select count(account_id) from accounts;
     select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
@@ -150,7 +150,8 @@ This lab assumes you have:
 1. Connect the Catalog using gsm service for proxy routing and run a cross shard query
     ```
     <copy>
-    sqlplus transactions/****************@oshard-gsm1.example.com:1522/GDS\$CATALOG.oradbcloud
+    sqlplus transactions/WElcomeUDS19c##@oshard-gsm1.example.com:1522/GDS\$CATALOG.oradbcloud;
+    select count(*) from accounts;
     </copy>
     ```
 
@@ -164,7 +165,8 @@ This lab assumes you have:
     ```
     <copy>
     -- Connect oltp_rw_svc service used with direct-routing by applications: randomly connect to a shard
-    sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)))'
+    sqlplus transactions/WElcomeUDS19c##@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)))';
+    select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
     ```
 
@@ -178,7 +180,8 @@ This lab assumes you have:
     ```
     <copy>
     connect oltp_rw_svc service used with direct-routing by applications: connects to shard1 using sharding_key=USA
-    sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=USA)))'
+    sqlplus transactions/WElcomeUDS19c##@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=USA)))';
+    select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
     ```
 ![<Connect GSM Global Service to shard1 database>](images/uds19c-connect-gsm-service-shard-1.png " ")
@@ -191,7 +194,8 @@ This lab assumes you have:
     ```
     <copy>
     connect oltp_rw_svc service used with direct-routing by applications: connects to shard2 using sharding_key=IND
-    sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=IND)))'
+    sqlplus transactions/WElcomeUDS19c##@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=IND)))';
+    select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
     ```
 ![<Connect GSM Global Service to shard2 database>](images/uds19c-connect-gsm-service-shard-2.png " ")
@@ -201,4 +205,4 @@ This lab assumes you have:
 
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, October 2023
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, November 2024

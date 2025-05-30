@@ -16,7 +16,7 @@ Estimated Time - 5 minutes
 
 ### Prerequisites
 
-- You should have provisioned the **Achieving Data Sovereignty with Oracle Sharding** workshop using a Docker container
+- You should have provisioned the **Achieving Data Sovereignty with Oracle Sharding** workshop using a podman container
 - To provision this workshop, there are detailed instructions in Lab 1 of [Achieving Data Sovereignty with Oracle Sharding](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
 
 ## Task 1: Terminate a provisioned Oracle Autonomous Database instance.
@@ -53,4 +53,4 @@ You may now **proceed to the next lab**.
 
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, October 2023
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, November 2024

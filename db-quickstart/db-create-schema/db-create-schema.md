@@ -270,6 +270,7 @@ In this section, you execute the `DROP TABLE` statement to remove a table and it
     ```
 
     ![Drop the CUSTOMERS table](./images/drop-table-error-referential-integrity.png " ")
+
     An error message is displayed because of the referential integrity constraint on the `CUSTOMER_ID` column.
 
 2. Include the `CASCADE CONSTRAINTS` clause to remove the table and its referential integrity constraints.
@@ -307,4 +308,4 @@ Click [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt
 - **Author** - Rick Green, Principal Developer, Database User Assistance
 - **Contributor** - Supriya Ananth
 - **Adapted for Cloud by** - Rick Green
-- **Last Updated By/Date** - Shilpa Sharma, March 2023
+- **Last Updated By/Date** - Katherine Wardhana, May 2024

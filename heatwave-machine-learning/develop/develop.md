@@ -138,14 +138,16 @@ In this lab, you will be guided through the following tasks:
     ```
 
     ```bash
-    <copy> sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/EQTHbWQcztdMROAhjbJBgPdyK8gqU-khhM871SJCxsmsMHqJlGvGrJ6z5uSQlxot/n/mysqlpm/b/mysql_iris_ml_app/o/iris_app.zip </copy>
+    <copy> sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/9WLLKC8BD0tfBdIJ98_x7dXLN9Kvow9ZPtBD35KVwzdqoIQshX1WBBMBB7AqIGMT/n/mysqlpm/b/mysql_iris_ml_app/o/iris_app.zip </copy>
     ```
 
     ```bash
     <copy>sudo unzip iris_app.zip</copy>
     ```
 
-3. Configure the application to connect to MySQL HeatWave. <br>
+   **Note** This application uses the "ml_dev" database username that you should have used to create  the Machine Learning Model.
+
+3. Configure the application to connect to MySQL HeatWave.
    Replace the database IP in config.php file with your heatwave database IP and save the file.
 
     ```bash
@@ -166,7 +168,7 @@ In this lab, you will be guided through the following tasks:
 
     ![Iris App Execution](./images/iris-web-php.png "iris-app-php run")
 
-6. Insert test values in the text boxes (you can use the examples in the page) and press '**Submit**' button to see the prediction:
+6. Insert test values in the text boxes (you can use the examples in the page) and press '**Submit**' button. Page down to see the prediction, explanation, and score:
 
      ![Test Iris App](./images/iris-web-php-result.png "iris-app-php test ")
 
@@ -175,4 +177,4 @@ In this lab, you will be guided through the following tasks:
 - **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak, MySQL Solution Engineering
 
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, Jul 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,January 2025

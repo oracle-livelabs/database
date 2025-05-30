@@ -25,8 +25,7 @@ This lab assumes you have:
     * Lab 1: Prepare setup
     * Lab 2: Set Up the Environment
     * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
-    * Lab 4: Provision Autonomous Databases for Use as Resource Manager
-    * Lab 5: Deploy the Bank and Stock-Trading Application
+    * Lab 4: Deploy the Bank and Stock-Trading Application
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
     ```
@@ -122,22 +121,22 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
 ## Task 4: View Service Mesh graph and Distributed Traces (Optional)
 
 Perform this task only if you have deployed Kiali and Jaeger in your cluster.
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Lab 5.
+To visualize what happens behind the scenes and how a request to purchase or sell stocks is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in the previous lab.
 
-1. Open a new browser tab and navigate to the Kiali dashboard URL - <http://localhost:20001/kiali>
+1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
 2. Select Graph for the otmm namespace.
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - <http://localhost:16686>
+3. Open a new browser tab and navigate to the Jaeger dashboard URL. For example, `http://localhost:16686`.
 4. In the **Service** drop-down list, select **istio-ingressgateway**. A list of traces is displayed where each trace represents a request.
 5. Select a trace to view it.
 
 ## Task 5: View Source Code of the Bank and Stock-Trading application (Optional)
 
-Source code for the following microservices is present in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder.
+Source code for the following microservices is present in the `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp` folder.
 
-* Source code for the Stock Broker Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker`.
-* Source code for the Branch Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking`.
-* Source code for the Core Banking Service is available at`/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking`.
-* Source code for the User Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/UserBanking`.
+* Source code for the Stock Broker Service is available at `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/StockBroker`.
+* Source code for the Branch Banking Service is available at `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/BranchBanking`.
+* Source code for the Core Banking Service is available at`/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/CoreBanking`.
+* Source code for the User Banking Service is available at `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/UserBanking`.
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
@@ -146,7 +145,7 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 

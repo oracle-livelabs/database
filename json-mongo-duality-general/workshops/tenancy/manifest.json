@@ -1,0 +1,49 @@
+{
+    "workshoptitle": "SQL Meets JSON in Oracle Database: Unify Data with Duality Views, JSON Collections & MongoDB API",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to All-things-JSON in the Oracle Database.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 1: Create your Autonomous Database 23ai Free Instance",
+            "description": "Create an Autonomous Database 23ai for this workshop",
+            "type": "livelabs",
+            "filename": "../../../23aifree/login-to-abd3/login-to-adb3.md"
+        },
+        {
+            "title": "Lab 2: Schema flexibility for relational tables - the JSON datatype",
+            "description": "Use the JSON datatype with relational tables",
+            "filename": "../../json-datatype/json-datatype.md"
+          },
+        {
+            "title": "Lab 3: JSON Collections - the native storage for JSON documents",
+            "description": "Create JSON Collections to store documents in the database",
+            "filename": "../../json-collections/json-collections.md"
+          },
+          {
+              "title": "Lab 4: JSON Duality Views - JSON meets relational",
+              "description": "Building Duality Views",
+              "type": "livelabs",
+              "filename": "../../duality-views/duality-views.md"
+          },
+          {
+            "title": "Lab 5: MongoDB Plug-and-Play - Full MongoDB compatibility to work with JSON Collections and Duality Views",
+            "description": "MongoDB compatibility with the MongoDB API",
+            "type": "livelabs",
+            "filename": "../../mongodb-api/mongodb-api.md"
+        },
+          {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

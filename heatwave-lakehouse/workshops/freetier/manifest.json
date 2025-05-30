@@ -15,7 +15,7 @@
         },
 
         {
-          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB System while loading DB Data",
+          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB System",
           "filename": "../../create-heatwave-vcn-db/create-heatwave-vcn-db.md"
         },
 
@@ -30,8 +30,8 @@
         },
 
         {
-          "title": "Lab 4: Add HeatWave Cluster to the DB sytem",
-          "filename": "../../add-heatwave-cluster/add-heatwave-cluster.md"
+          "title": "Lab 4: Setup HeatWave with mysql_customer_orders Data",
+          "filename": "../../setup-db-data/setup-db-data.md"
         },
         
         {

@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "workshoptitle": "Maintain data consistency across microservices using Oracle MicroTx",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -13,15 +13,15 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 1: Run an LRA sample application",
+      "title": "Lab 1: Run Travel agent app which uses Saga",
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 2: Provision Autonomous Databases for use as resource manager",
-      "filename": "../../adb-provision/adb-provision.md"
+      "title": "Lab 2: Run Travel agent app which uses Saga and Lock-Free Reservation",
+      "filename": "../../run-lra-app-lockfree/run-lra-app-lockfree.md"
     },
     {
-      "title": "Lab 3: Run an XA sample application",
+      "title": "Lab 3: Run Transfer app which uses XA",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

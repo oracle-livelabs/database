@@ -1,188 +1,134 @@
-# Create Registered Databases
+# Create Database Connections
 
 ## Introduction
 
-This lab walks you through the steps to register a database for use with DMS. Registered database resources enable networking and connectivity for the source and target databases
+This lab walks you through the steps to create a database connection to use with DMS. Database connection resources enable networking and connectivity for the source and target databases.
 
 Estimated Lab Time: 20 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Create Registered Database for Source CDB
-* Create Registered Database for Source PDB
-* Create Registered Database for Target ADB
-* Create a Migration
+* Create a database connection for Source PDB
+* Create a database connection for Target ADB
+* Create an online Migration
 
 ### Prerequisites
 
 * An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
 * This lab requires completion of the preceding labs in the Contents menu on the left.
-* Source DB Private IP
-* Source DB CDB Service Name
+* Source database system and database name
 * Source DB PDB Service Name
 * Database Administrator Password
 
-*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
+*Note: If you have a **Free Trial** account when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
-## Task 1: Create Registered Database for Source CDB
 
-For this task you need the following info from previous steps:
-* Source DB Private IP
-* Source DB CDB Service Name
-* Database Administrator Password
+## Task 1: Create database connection for source PDB
 
-1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Registered Databases**
+1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![registered database navigation](images/registered-db.png =90%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
-2. Press **Register Database**
+2. Press **Create connection**
 
-  ![click Register Database](images/1-2.png =90%x*)
-
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
-    - Name: **SourceCDB**
-    - Vault: **DMS_Vault**
-    - Encryption Key: **DMS_Key**
-    - Database Type: **DB System Database (Bare Metal, VM, Exadata)**
-    - Database System: **SourceDB**
-    - Database: **sourcedb**
-    - Connect String: Change existing string by replacing the qualified hostname with the **private IP** of the database node, for example:
-        - **10.0.0.3**:1521/sourcedb_iad158.sub12062328210.vcndmsla.oraclevcn.com
-    - Subnet: Pick the Subnet that the DB is located in
-
-4. Press **Next**
-
-  ![enter database details](images/1-4.png =50%x*)
-
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Database Administrator Username: **system**
-    - Database Administrator Password: <*Admin password*>
-    - SSH Database Server Hostname: <*DB Node Private IP Address*>
-    - SSH Private Key: Select private key file
-    - SSH Username: **opc**
-    - SSH Sudo Location: **/usr/bin/sudo**
-
-6. Press **Register**
-
-  ![enter connection details](images/1-6.png =50%x*)
-
-## Task 2: Create Registered Database for Source PDB
-
-For this task you need the following info from previous steps:
-* Source DB Private IP
-* Source DB PDB Service Name
-* Database Administrator Password
-
-1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Registered Databases**
-
-  ![registered database navigation](images/registered-db.png =90%x*)
-
-2. Press **Register Database**
-
-  ![click Register Database](images/1-2.png =90%x*)
+  ![Screenshot of click create db](images/db-connection-pdb.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
+    - Type: **Oracle Database**
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
-    - Database Type: **DB System Database (Bare Metal, VM, Exadata)**
-    - Database System: **SourceDB**
-    - Database: **sourcedb**
-    - Connect String: Change existing string by replacing the qualified hostname with the **private IP** of the database node. Then replace service name with **PDB service name**, for example:
-        - **10.0.0.3**:1521/**pdb**.sub12062328210.vcndmsla.oraclevcn.com
-    - Subnet: Pick the Subnet that the DB is located in
 
-4. Press **Next**
+  Select Database details: Select an OCI database
+   - Database System: **SourceDB**
+   - Pluggable database: **pdb**
+   - Initial load database username: **system**
+   - Initial load database password: \****
 
-  ![database details for PDB](images/2-4.png =50%x*)
+Don’t check create private endpoint option.
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Database Administrator Username: **system**
-    - Database Administrator Password: <*Admin password*>
-    - SSH Database Server Hostname: <*DB Node Private IP Address*>
-    - SSH Private Key: Select **private** key file
-    - SSH Username: **opc**
-    - SSH Sudo Location: **/usr/bin/sudo**
 
-6. Press **Register**
+4. Press **Create**
 
-  ![connection details press register](images/1-6.png =50%x*)
+  ![Screenshot of register db](images/create-db-next-second.png =50%x*)
+  ![Screenshot of register db](images/create-db-next-second1.png =50%x*)
+  ![Screenshot of register db](images/create-db-next-second2.png =50%x*)
 
-## Task 3: Create Registered Database for Target ADB
+  
+
+## Task 2: Create database connection for target ADB
 
 For this task you need the following info from previous steps:
 * Database Administrator Password
 
-1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), **Migration & Disaster Recovery > Database Migration > Registered Databases**
+1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![registered database navigation](images/registered-db.png =90%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
-2. Press **Register Database**
+2. Press **Create connection**
 
-  ![click Register Database](images/1-2.png =90%x*)
+   ![Screenshot of click register db](images/click-create-db-atp.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetATP**
+    - Type: **Oracle Autonomous Database**
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
-    - Database Type: **Autonomous Database**
-    - Database: **TargetATP**
 
-4. Press **Next**
+   Select the Autonomous database name in your compartment i.e: dmsatp2
+    - Initial load database username: **admin**
+    - Initial load database password: \****
 
-  ![ATP database details](images/3-4.png =50%x*)
+      
+   Network connectivity: Create private endpoint to access this database and select the correct subnet.
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Database Administrator Username: **admin**
-    - Database Administrator Password: <*Admin password*>
+4. Press **create**
 
-6. Press **Register**
-
-  ![connection details ATP](images/3-6.png =50%x*)
+  ![Screenshot of target connection creation ](images/target-press-next.png )
+  ![Screenshot of target connection creation ](images/target-press-next-b.png )
 
 
-## Task 4: Create Migration
+## Task 3: Create Migration
 
   1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![create migration navigation](images/migration-create.png =90%x*)
+    ![create migration navigation](images/migration-create.png =50%x*)
 
   2. Press **Create Migration**
 
-    ![press create migration](images/2.png =90%x*)
+    ![Screenshot of press create migration](images/press-create-migration.png =50%x*)
 
-  3. On the page **Add Details**, fill in the following entries, otherwise leave defaults:
+  3. On the page **Create migration**, fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
-      - Vault: **DMS_Vault**
-      - Encryption Key: **DMS_Key**
+      - Compartment: **your compartment**
+      
+    Source database
+      - Database connection: **SourcePDB**
 
-      ![create migration details](images/add-details.png =40%x*)
+    Target database
+      - Database connection: **TargetATP** 
 
-  4. Press **Next**
+    Transfer medium for initial load
+      - Data Pump via Object Storage
 
-  5. On the page **Select Databases**, fill in the following entries, otherwise leave defaults:
-      - Source Database: **SourcePDB**
-      - *Check* Database is pluggable database (PDB)
-      - Registered Container Database: **SourceCDB**
-      - Target Database: **TargetATP**
+    Source database
+      - Export directory object name: **dumpdir**
+      - Export directory object path: **/u01/app/oracle/dumpdir**
+      - Source Database file system SSL wallet path: **/u01/app/oracle/wallet**
 
-      ![select databases](images/select-databases.png =40%x*)
+    Object Storage bucket
+      - DMSStorage
 
-  6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
-      - In **Initial Load**, select **Datapump via Object Storage**
-      - Object Storage Bucket: **DMSStorage**
-      - Export Directory Object:
-          - Name: **dumpdir**
-          - Path: **/u01/app/oracle/dumpdir**
-      - *DO NOT Check* Use Online Replication
+    Online replication:
+      - Don't enable it  
 
-          ![complete migration creation](images/Test-migration.png =40%x*)
+         
+  4. Press **Create** 
+  ![Screenshot of migration creation creation ](images/add-details.png )
+  ![Screenshot of migration creation creation ](images/select-databases.png )
 
-
-  7. Press **Create**
-
-
+  
 You may now [proceed to the next lab](#next).
 
 ## Learn More
@@ -191,7 +137,7 @@ You may now [proceed to the next lab](#next).
 * [Managing Migrations](https://docs.oracle.com/en-us/iaas/database-migration/doc/managing-migrations.html)
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Kiana McDaniel, Hanna Rakhsha, Killian Lynch Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025
