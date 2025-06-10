@@ -17,22 +17,19 @@ In this lab, you will be guided through the following tasks:
 - Create SSH Key on OCI Cloud
 - Create Bastion Compute Instance
 - Install MySQL Shell on the Compute Instance
-- Connect to MySQL Database System
 - Install Python and Pandas Module
 
 ### Prerequisites
 
 - An Oracle Trial or Paid Cloud Account
-- Some Experience with MySQL Shell
-- Must Complete Lab 2 - be **Active**
+- Some Experience with Linux VM
+- Must Complete Lab 1
 
 ## Task 1: Create SSH Key on OCI Cloud Shell
 
 The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate a SSH Key to use  for the Bastion  session.
 
 1. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
-
-    cloudshell-main
 
     ![cloud shell main](./images/cloud-shell.png  "cloud shell main " )
 
@@ -74,31 +71,29 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
 You will need a compute Instance to connect to your brand new MySQL database.
 
-1. Before creating the Compute instance open a notepad 
+1. Before creating the Compute instance open a notepad
 
 2. Do the followings steps to copy the public SSH key to the  notepad
 
     Open the Cloud shell
-    ![open cloud shell large](./images/cloud-shell-open-large.png "open cloud shell large ")
-
-    Enter the following command  
+    Enter the following command
 
     ```bash
     <copy>cat ~/.ssh/id_rsa.pub</copy>
     ```
 
-    ![ssh key display](./images/ssh-key-display.png "ssh key display ") 
+    ![ssh key display](./images/ssh-key-display.png "ssh key display ")
 
 3. Copy the id_rsa.pub content the notepad
 
     Your notepad should look like this
-    ![show ssh key](./images/notepad-rsa-key.png "show ssh key")  
+    ![show ssh key](./images/notepad-rsa-key.png "show ssh key")
 
 4. Minimize cloud shell
 
-    ![minimize cloud shell](./images/ssh-key-display-minimize.png "minimize cloud shell")  
+    ![minimize cloud shell](./images/ssh-key-display-minimize.png "minimize cloud shell")
 
-5. To launch a Linux Compute instance, go to 
+5. To launch a Linux Compute instance, go to
     Navigation Menu
     Compute
     Instances
@@ -119,45 +114,48 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 9. On Placement, keep the selected Availability Domain
 
-10. On Security, keep the default
+    ![compute create basic](./images/compute-create-basic.png "compute create basic")  
+
+10. On Image  keep the selected Image, Oracle Linux 8
+
+11. Click Change Shape
+
+12. If not already selected. Select Instance Shape: VM.Standard.E4.Flex with 1 OCPU and 16 GB of RAM
+
+      ![compute create select shape](./images/compute-create-select-shape.png "compute create select shape") 
+
+    Click **Next**
+
+13. On Security, keep the default
 
     - Shielded instance: Disabled
-    - Confidential computing:Disabled
 
-      ![compute create security](./images/compute-create-security.png "compute create security ") 
+      ![compute create security](./images/compute-create-security.png "compute create security ")
 
-11. On Image  keep the selected Image, Oracle Linux 8 and click Edit
+    Click **Next**
 
-      ![compute create image](./images/compute-create-image.png "compute create image ")  
-
-12. Click Change Shape
-
-      ![compute create change shape](./images/compute-create-change-shape.png "compute create change shape")  
-
-13. Select Instance Shape: VM.Standard.E4.Flex
-
-      ![compute create select shape](./images/compute-create-select-shape.png "compute create select shape")  
-
-14. On Networking, click Edit
-
-      ![compute create networking](./images/compute-create-networking.png "compute create networking ")  
-
-15. Make sure **HEATWAVE-VCN**  and  and  **public subnet-HEATWAVE-VCN** are selected. Keep Public IPV4 address **Assign..** default
+14. On Networking. Make sure **HEATWAVE-VCN**  and  and  **public subnet-HEATWAVE-VCN** are selected. Keep Public IPV4 address **Automatically Assign...** default
 
       ![compute create networking](./images/compute-create-networking-select.png "compute create networking ")
 
-16. On Add SSH keys, paste the public key from the notepad.
+15. On Add SSH keys, paste the public key from the notepad.
 
     ![compute create add ssh key](./images/compute-create-add-ssh-key.png "compute create add ssh key ")
 
-17. Keep Boot Volume default and Click **Create** button to finish creating your Compute Instance.
+    Click **Next**
 
-    ![compute create boot volue](./images/compute-create-boot-volume.png "compute create boot volume")
+16. Keep Boot Volume default. Click **Next**
+
+17. Click **Create** button to finish creating your Compute Instance.
+
+    ![compute create summary](./images/compute-create-summary.png "compute create summary")
 
 18. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
     ![compute provisioning](./images/compute-provisioning.png "compute provisioning ")
 
 19. The state 'Running' indicates that the Virtual Machine is ready to use.
+
+    Click on the 'Networking' tab to see the compute network details
 
     ![compute active](./images/compute-active.png "compute active")
 
@@ -165,10 +163,10 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 1. Copy the public IP address of the active Compute Instance to your notepad
 
-    - Go to Navigation Menu
-        - Compute
-        - Instances
-        - Copy **Public IP**
+    Go to Navigation Menu
+    - Compute
+    - Instances
+    - Copy **Public IP**
     ![navigation compute with instance](./images/navigation-compute-with-instance.png "navigation compute with instance ")
 
 2. Go to Cloud shell to SSH into the new Compute Instance
@@ -194,10 +192,8 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     a. Install MySQL Shell with the following command (enter y for each question)
 
-    **[opc@…]$**
-
     ```bash
-    <copy>wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell-9.1.0-1.el8.x86_64.rpm</copy>
+    <copy>wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell-9.3.0-1.el8.x86_64.rpm</copy>
     ```
 
     ```bash
@@ -226,11 +222,15 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     c. Exit Python with **Ctrl + Z**
 
-
 You may now **proceed to the next lab**
+
+## Learn More
+
+- [Oracle Cloud Infrastructure Compute Documentation](https://docs.oracle.com/en-us/iaas/Content/Compute/home.htm)
+- [MySQL Shell Documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-features.html)
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Cristian Aguilar, MySQL Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Author** - Cristian Aguilar, MySQL Solution Engineering
+- **Contributors** - Perside Foster, MySQL Principal Solution Engineering
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025
