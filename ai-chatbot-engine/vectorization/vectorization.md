@@ -149,12 +149,14 @@ Finally, let's start to code.
 It is now time to insert the prepared chunks into the vector database.
 
 ### Step 1: Create a database connection
+<if type="freetier">1. Drag and drop the wallet file you downloaded previosly into the Jupyter file pane. Unzip it in folder named "wallet".</if>
 1. The connection details should be pinned down in a cell.
    ```python
    <copy>
-   un = "vector"
-   pw = "vector"
-   <if type="freetier">cs = "localhost/FREEPDB1"</if><if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if><if type="ocw24">cs = "host.containers.internal/FREEPDB1"</if>
+   un = "<your database username>"
+   pw = "<your database password>"
+   <if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if>
+   <if type="ocw24">cs = "host.containers.internal/FREEPDB1"</if>
    </copy>
    ```
    > Note: Use the exact username and password you set up for the database in the previous lab.
@@ -163,13 +165,19 @@ It is now time to insert the prepared chunks into the vector database.
    ```python
    <copy>
    import oracledb
+   <if type="freetier">
+   dsn = '<NAME OF THE DATABASE>_high' 
 
-   connection = oracledb.connect(user=un, password=pw, dsn=cs)
+   connection = oracledb.connect(
+      config_dir='../Graphs/wallet',
+      user=un,
+      password=pw,
+      dsn=dsn,
+      wallet_location='./wallet',
+      wallet_password=<your wallet password>)
+   </if><if type="livelabs">connection = oracledb.connect(user=un, password=pw, dsn=cs)</if><if type="ocw24">connection = oracledb.connect(user=un, password=pw, dsn=cs)</if>
    </copy>
    ```
-   ![connection](images/image15.png)
-
-   > Note: Don't forget to run each cell by pressing Shift + Enter while inside it.
 
 ### Step 2: Create the `faqs` table
 We need a table inside our database to store our vectors and metadata.
@@ -294,6 +302,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
+* [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
 * [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
@@ -302,4 +311,4 @@ You may now **proceed to the next lab**
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, Sep 2024
+* **Last Updated By/Date** -  Bogdan Farca, January 2025

@@ -206,7 +206,9 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     </copy>
     ```
 
-    * One of the first lines tells whether this patch is RAC Rolling and standby-first installable.
+    * It takes a little while to open Firefox.
+    * In section *1 Patch Information* you can find specific information about this patch.
+    * It states that this patch is *RAC Rolling* and *Standby-First Installable*.
     * The file also contains installation instructions.
 
 6. Close Firefox.
@@ -547,7 +549,7 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
     ```
     </details>  
 
-5. It takes around 10 minutes to install the Oracle home. Leave the process running. You can start on the next lab, and return to this lab after a while.
+5. It takes around 10 minutes to install the Oracle home. Leave the process running. You can start on the next lab, *Lab 6: Manual patching of a container database*, and return to this lab after a while.
 
 ## Task 6: Check manual installation
 
@@ -585,7 +587,9 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
 
 Gold images are a convenient way of installing Oracle homes on many different servers. You prepare and patch an Oracle home only once, and then distribute the patched Oracle home to all other servers.
 
-1. Still in the *blue* 🟦 terminal. Set the environment to the new Oracle home.
+1. This is an optional lab that takes around 10 minutes. If you are short on time, you can skip executing the commands, but do read on. 
+
+2. Still in the *blue* 🟦 terminal. Set the environment to the new Oracle home.
 
     ```
     <copy>
@@ -599,7 +603,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * This is the Oracle home you created using AutoUpgrade.
     * The Oracle home is patched with Release Update 25.
 
-2. Create the gold image.
+3. Create the gold image.
 
     ```
     <copy>
@@ -627,7 +631,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     ```
     </details> 
 
-3. Find the gold image.
+4. Find the gold image.
 
     ```
     <copy>
@@ -643,7 +647,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     ```
     </details> 
 
-4. In this lab, you won't use the gold image. But you can review the commands needed to install it.
+5. In this lab, you won't use the gold image. But you can review the commands needed to install it.
 
     ```
     # Set environment to new Oracle home    
@@ -687,5 +691,5 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, December 2024
+* **Contributors** - Rodrigo Jorge, Mike Dietrich
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

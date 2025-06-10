@@ -1,4 +1,4 @@
-# Create a Low Code Application with Oracle APEX and REST SERVICES for MySQL
+# Create a Low Code Application with Oracle APEX for MySQL
 
 ![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
 
@@ -8,7 +8,7 @@ The Oracle Database Development Tools team launched the Database Tools service i
 
 Using APEX, developers can quickly develop and deploy compelling apps that solve real problems and provide immediate value. You don't need to be an expert in a vast array of technologies to deliver sophisticated solutions. Focus on solving the problem and let APEX take care of the rest. [https://apex.oracle.com/en/platform/why-oracle-apex/](https://apex.oracle.com/en/platform/why-oracle-apex/)
 
-**Tasks Support Guides**
+**Aditional Support Guides**
 - [https://medium.com/oracledevs/get-insight-on-mysql-data-using-apex](https://medium.com/oracledevs/get-insight-on-mysql-data-using-apex-22-1-7fe613c76ca5)
 - [https://peterobrien.blog/2022/06/15/](https://peterobrien.blog/2022/06/15/)
 - [https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/](https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/)
@@ -22,20 +22,20 @@ In this lab, you will be guided through the following task:
 - Setup Identity and Security tools and services
 - Configure a Private Connection
 - Create and configure an APEX Instance
-- Configure APEX Rest Service
+- Configure APEX Credentials
 
 ### Prerequisites
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with OCI Console
 - Some Experience with Oracle Autonomous and Oracle APEX
-- Completed Lab 8
+- Completed Lab 6
 
 ## Task 1 Setup Identity & Security tools in OCI to Create a Secret
 
 1. From the OCI Menu, navigate to **Identity & Security** and click **Vault**
 
-    ![Identity & Security Vault](./images/OCI-menu-vault.png "OCI-menu-vault ")
+    ![Identity & Security Vault](./images/oci-menu-vault.png "oci-menu-vault ")
 
 2. Create a Vault
 
@@ -57,29 +57,29 @@ In this lab, you will be guided through the following task:
 
     a. Click on the newly created Vault
 
-    b. Click **Create Key**
+    b. Go to the 'Master Encryption Keys' tab
+
+    c. Click **Create Key**
 
     ![Create Master Encryption Key](./images/vault-menu-create-key.png "vault-menu-create-key ")
 
-    c. Select the movies compartment
+    d. Select the movies compartment
 
-    d. Give the key a name
+    e. Give the key a name
 
     ```bash
     <copy> HW-DB </copy>
     ```
 
-    e. Leave the rest configurations in default values
+    f. Leave the rest configurations in default values
 
     ![Create Key Details](./images/create-key-details.png "create-key-details ")
 
-    f. Click **Create Key**
+    g. Click **Create Key**
 
 4. Create a Secret
 
-    a. Click on **Secrets** to navigate to the secrets panel
-
-    ![Navigate to Secrets Panel](./images/navigate-secret-panel.png =60%x* "navigate-secret-panel ")
+    a. Click on **Secrets** tab to navigate to the secrets panel
 
     b. Click **Create Secret**
 
@@ -87,27 +87,32 @@ In this lab, you will be guided through the following task:
 
     c. Select the movies compartment
 
-    d. Give the secret a name
+    d. Give the secret a name and description
 
     ```bash
-    <copy> HW-DB </copy>
+    <copy>HW-DB</copy>
     ```
 
-    e. Select the created Encryption Key
+    ```bash
+    <copy>moviepass</copy>
+    ```
+    e. Select the previously created Encryption Key
 
-    f. In **Secret Contents**, write the password for the admin user created for your MySQL HeatWave DB System
+    f. Select 'Manual secret generation'
+
+    g. In **Secret Contents**, write the password for the admin user created for your MySQL HeatWave DB System
 
     ![Create Secrets details](./images/create-secret-details.png "create-secret-details ")
 
-    g. Leave the rest configurations in default values
+    h. Leave the rest configurations in default values
 
-    h. Click **Create Secret**
+    i. Click **Create Secret**
 
 ## Task 2 Configure a Private Connection
 
-1. From the OCI Menu, navigate to **Developer Services** and click **Connections**
+1. From the OCI Menu, navigate to **Developer Services** and click **Private Endpoints**
 
-    ![Developer Services Connections](./images/oci-developer-services-menu-connections.png "oci-developer-services-menu-connections ")
+    ![Developer Services Private Endpoint](./images/oci-developer-services-private-endpoint.png "oci-developer-services-private-endpoint ")
 
 2. Create a Private Endpoint
 
@@ -153,17 +158,21 @@ In this lab, you will be guided through the following task:
 
     g. Select the created secret that contains the matching mysql password
 
+    h. Select 'Access database via a private network'
+
+    i. Click 'Select private endpoint' and select your previously created Private endpoint
+
     ![Create Connection Details](./images/create-connection-details.png "create-connection-details ")
 
-    h. Click **Next** and **Create**
+    j. Click **Create**
 
 ## Task 3 Run SQL Worksheet
 
 1. From the OCI Menu, navigate to **Developer Services** and click **SQL Worksheet**
 
-    ![Developer Services SQL Worksheet](./images/OCI-developer-services-sql-worksheets.png "OCI-developer-services-sql-worksheets ")
+    ![Developer Services SQL Worksheet](./images/oci-developer-services-sql-worksheets.png "oc-developer-services-sql-worksheets ")
 
-2. Select the movies compartment and the created **HW-MovieHub-Connection**
+2. Select the **movies** compartment and the created **HW-MovieHub-Connection**
 
 3. You can run SQL queries, in the SQL Worksheet.
 
@@ -173,21 +182,26 @@ In this lab, you will be guided through the following task:
     <copy> SHOW SCHEMAS;</copy>
     ```
 
+    ![SQL Worksheets page](./images/sql-worksheet-page.png "SQL-Worksheets-page ")
+
 4. Get the MySQL Connection Endpoint URL
 
     The OCI Services connect to the MySQL DB System though the created Connection. This Connection Endpoint Consists of a URL Pattern:
 
-    **Note** The pattern is `https://sql.dbtools.< region >.oci.oraclecloud.com/20201005/ords/< connection ocid >/_/sql`
+    **Note.** The pattern is: 
 
-    **Example** <https://sql.dbtools.us-ashburn-1.oci.oraclecloud.com/20201005/ords/ocid1.databasetoolsconnection.oc1.iad.amaaaaaao27h4wiamnbgbmuznwvg4nenu4j7nzbecnvpmzgs2fkgiugwueyq/_/sql>
+        `https://sql.dbtools.< region >.oci.oraclecloud.com/20201005/ords/< connection-ocid >/_/sql`
 
+    **Example:** 
+
+        `https://sql.dbtools.us-ashburn-1.oci.oraclecloud.com/20201005/ords/ocid1.databasetoolsconnection.oc1.iad.amaaaaaao27h4wiamnbgbmuznwvg4nenu4j7nzbecnvpmzgs2fkgiugwueyq/_/sql`
     This URL can be also obtained by retrieving it from the network logs from the developer console in a Web Browser.
 
     a. Open the Developer Console from your web browser. This can be done by right clicking on the page and clicking **inspect/inspect element**
 
     ![inspect developer console](./images/inspect-developer-console.png =70%x* "inspect-developer-console ")
 
-    b. In the developer **console** tab, look up for **dbtools-sqldev__LogEvent**. There you can click on the object to see its details
+    b. In the developer **console** tab, look up for an event **dbtools-sqldev__LogEvent**. Then, click on the **object** to see its details
 
     ![inspect connection object url](./images/inspect-url-connection-endpoint.png "inspect-url-connection-endpoint ")
 
@@ -195,9 +209,11 @@ In this lab, you will be guided through the following task:
 
     ![inspect copy object url](./images/inspect-copy-url.png "inspect-copy-url ")
 
-    d. Notice the pattern of the URL
+    d. Notice the pattern of the URL. **_if your enpoint ends with something like  "/\_/graphiql/status?q=%7B%7D"_**
 
-    e. Save the Endpoint URL for later
+    **_Replace it with  "/\_/sql"_**
+
+    e. Save the Endpoint URL for later. You will need it for **Task 6** and **Task 7**
 
 ## Task 4 Create API Keys
 
@@ -205,52 +221,51 @@ In this lab, you will be guided through the following task:
 
     ![oci identity security domains](./images/oci-identity-security-domains.png "oci-identity-security-domains ")
 
-2. Click on **Default** domain and navigate to **Users**
+2. Click on **My profile** and navigate to **Tokens and Keys** tab
 
-    ![domains default user](./images/domains-default-user.png "domains-default-user ")
-
-3. Click on your current user
+3. Click **Add API Key**
 
     ![Create API Key](./images/user-panel-create-apikey.png "user-panel-create-apikey ")
 
-4. Click **Add API Key**
-
-5. Save the generated API Key Pair
+4. Save the generated API Key Pair
 
     ![Add API Key](./images/add-api-key.png "add-api-key ")
 
-6. Save the content of the Configuration file preview by **copying** it. Then click **Close**
+5. Save the content of the Configuration file preview by **copying** it. Then click **Close**
 
     ![Configuration file preview](./images/api-config-fingerprint.png "api-config-fingerprint ")
 
-    **Notice the Values for your Username, Tenancy, Region, Fingerprint**
+    **Note the values for your Username, Tenancy, and Fingerprint.** (If your resources are deployed in a region different from your tenancy's Home Region, the region value in the generated API configuration file will not match)
 
 ## Task 5 Create and Configure an APEX Instance
 
 1. Create and Launch APEX
 
-    a.
+    a. Go to the OCI home page and look for the 'Quickstarts' menu. (the location may differ from your console)
+
+    b. Click on 'Deploy a low-code app on Autonomous Database using Apex'
     ![start apex deploy](./images/start-apex-deploy.png "start apex deploy ")
     ![continue apex deploy](./images/continue-apex-deploy.png "continue apex deploy ")
-    b. Choose movies compartment and set APEX password
+    c. Choose movies compartment and set the APEX password
     ![set apex password](./images/set-password-apex-deploy.png "set apex password")
     ![completed apex deploy](./images/completed-apex-deploy.png "completed apex deploy")
 
 2. Create Workspace
 
-    a.
+    a. Enter your APEX password
     ![login apexd](./images/login-apexd.png "login apexd ")
 
+    b. Click 'Create Workspace'
     ![create apex workspace](./images/create-apex-workspace.png "create apex workspace" )
-    b. Name the APEX workspace
+    c. Name the APEX workspace
 
     ```bash
     <copy> heatwave-movies </copy>
     ```
 
-    c. Set an Admin user and password for the workspace
+    d. Set an Admin user and password for the workspace
     ![name apex workspace](./images/name-apex-workspace.png "name apex workspace")
-    d. Log out from APEX
+    e. Log out from APEX
     ![apex logout](./images/apex-logout.png "apex logout")
 
 
@@ -259,21 +274,24 @@ In this lab, you will be guided through the following task:
 1. Create Web Credentials
 
     a. Log In to the APEX Workspace
+    ```bash
+    <copy> heatwave-movies </copy>
+    ```
     ![Log in APEX workspace](./images/log-in-apex-workspace.png "log-in-apex-workspace ")
     b. Navigate to the Workspace Utilities from the App Builder Menu
     ![Workspace Utilities](./images/apex-menu-workspace-utilities.png "apex-menu-workspace-utilities ")
     c. Click on **Web Credentials**
     ![workspace utilities web credential](./images/workspace-utilities-web-credentials.png "workspace-utilities-web-credentials ")
 
-    d. You can obtain the OCID values and fingerprint from the **Configuration File Preview** generated with the API Key or retrieve them from the OCI Console. Open the Private Key file in a text editor to copy the content.
+    d. You can obtain the OCID values and fingerprint from the **Configuration File Preview** generated with the API Key in **Task 4.4** or retrieve them from the OCI Console. Open the Private Key file in a text editor to copy the content.
 
     | Attributes | Value |
     | --------| -------:|
-    | Name | mysqlheatwave |
-    | Static ID | mysqlheatwave |
+    | Name | Moviehub |
+    | Static ID | Moviehub |
     | Authentication Type | OCI Native Authentication |
     | OCI User ID | **< YourUserOCID >** |
-    | OCI Private Key | **< ContentOfYourSavedPrivateKey >** |
+    | OCI Private Key | **< ContentOfYourSaved-APIPrivateKey >** |
     | OCI Tenancy ID | **< YourTenancyOCID >** |
     | OCI Public Key Fingerprint | **< YourPublicKeyFingerprint >** |
     | Valid for URLs | **< EndpointURL >** |
@@ -282,45 +300,12 @@ In this lab, you will be guided through the following task:
     e. Create new Web Credentials. Click **Create**
     ![apex web credentials ](./images/apex-web-credentials.png "apex web credentials")
 
-## Task 7 Create APEX Rest Service
-
-1. Navigate to the Workspace Utilities from the App Builder Menu
-    ![Workspace Utilities](./images/apex-menu-workspace-utilities.png "apex-menu-workspace-utilities ")
-
-2. Click on **REST Enabled SQL Services**
-    ![workspace utilities rest services](./images/workspace-utilities-rest-services.png "workspace-utilities-rest-services ")
-
-3. Click **Create**
-
-    ![Create rest services](./images/rest-service-create.png "rest-service-create ")
-
-4. Give the REST service a name
-
-    ```bash
-    <copy> MovieHub-moviesdb </copy>
-    ```
-
-5. For Endpoint URL, Introduce the Endpoint URL **without** the "**`/_/sql`**" at the end. Notice the help message.
-
-6. Click **Next**
-
-7. Select the previously created credentials. Click **Create**
-
-    ![rest services credentials](./images/rest-service-credentials.png "rest-service-credentials ")
-
-8. If previous steps were performed correctly, you should see a successful connection. Select the default database **movies**
-
-    ![rest services successful connection](./images/rest-service-success.png "rest-service-success ")
-
-
 You may now **proceed to the next lab**
 
 ## Learn More
 
 - How to use the Oracle Database Tools Service to provide MySQL data to APEX - [APEX and the MySQL Database Service](https://asktom.oracle.com/pls/apex/asktom.search?oh=18245)
-
 - [Oracle Autonomous Database Serverless Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/index.html#Oracle%C2%AE-Cloud)
-
 - [Using Web Services with Oracle APEX Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/apex-web-services.html#GUID-DA24C605-384D-4448-B73C-D00C02F5060E)
 
 
@@ -328,4 +313,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025

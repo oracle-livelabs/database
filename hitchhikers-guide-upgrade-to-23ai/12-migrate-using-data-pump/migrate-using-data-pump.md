@@ -53,6 +53,8 @@ You need to prepare a few things before you can start a Data Pump export.
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>

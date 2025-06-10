@@ -176,7 +176,7 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
 3. It takes just a few minutes to patch the database. Leave AutoUpgrade running.
 
     * You can press ENTER and can use the `status -job 101 -a 10` command.
-    * You can xplore the options in AutoUpgrade using the `help` command.
+    * You can explore the options in AutoUpgrade using the `help` command.
     * You can see the list of pre- and post-patching fixups using `fxlist -job 101`.
     * You can disable the post-patching dictionary stats run using `fxlist -job 101 -c UPGR alter POST_DICTIONARY run no`.
 
@@ -225,5 +225,5 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, December 2024
+* **Contributors** - Rodrigo Jorge, Mike Dietrich
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

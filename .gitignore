@@ -5,3 +5,4 @@
 *.patch
 env.sh
 .vscode
+.idea
