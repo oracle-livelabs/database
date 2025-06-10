@@ -92,7 +92,6 @@ These prerequisites are already configured in this LiveLabs environment but may 
     - To review the response file, run:
     ```nohighlighting
     <copy>
-    cd $ORACLE_HOME
     cat /opt/oracle/install/23ai_gsm_install.rsp
     </copy>
     ```
@@ -132,9 +131,10 @@ These prerequisites are already configured in this LiveLabs environment but may 
     ```nohighlighting
     <copy>
     sudo su -
-    # now you are in [root@gsm1 ~]#
     </copy>
     ```
+    Now you are in directory displaying as [root@gsm1 ~]#
+
     - Execute the following script: 
     ```nohighlighting
     <copy>
@@ -209,6 +209,7 @@ For high availability, you can install GDS on "gsm2" container. To do so:
 2.  Follow the same installation steps as gsm1:
 
     - Repeat Task 2, Task 3, and Task 4 inside the gsm2 container.
+      Edit commands to use **gsm2** container only for gsm2 installation.
 
     
 **Note:** Why Install GDS on Multiple GSM Containers?

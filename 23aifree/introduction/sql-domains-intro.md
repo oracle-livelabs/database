@@ -1,6 +1,6 @@
 # Introduction
 
-## About the SQL Empowerment in Oracle 23ai: Leveraging Domains and New Features Workshop
+## About the SQL Empowerment in Oracle Database 23ai: Leveraging Domains and New Features Workshop
 
 This workshop focuses on SQL Domains and Features in Oracle Database 23ai.
 
@@ -32,7 +32,7 @@ In this lab, you will:
 ### Prerequisites
 
 In order to do this workshop you need
-* An Oracle 23ai Free Developer Release Database or one running in a LiveLabs environment
+* An Oracle Database 23ai Free Developer Release Database or one running in a LiveLabs environment
 
 ## Learn More
 

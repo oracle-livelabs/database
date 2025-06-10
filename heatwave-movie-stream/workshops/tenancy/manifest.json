@@ -20,57 +20,52 @@
           },
 
           {
-            "title": "Lab 2:  Setup a HeatWave Cluster for OLAP/AutoML",
-            "filename": "../../setup-hw-cluster/setup-hw-cluster.md"
-          },
-
-          {
-            "title": "Lab 3:  Create Bastion Server for MySQL Data",
+            "title": "Lab 2:  Create Bastion Server for MySQL Data",
             "filename": "../../create-bastion-with-python/create-bastion-with-python.md"
           },
 
           {
-            "title": "Lab 4:  Download & Transform the MovieLens dataset files",
+            "title": "Lab 3:  Download & Transform the MovieLens dataset files",
             "filename": "../../transform-data/transform-data.md"
           },
 
           {
-            "title": "Lab 5:  Add MovieLens data to MySQL HeatWave",
+            "title": "Lab 4:  Add MovieLens data to MySQL HeatWave",
             "filename": "../../add-data-mysql/add-data-mysql.md"
           },
 
           {
-            "title": "Lab 6: Create and test HeatWave AutoML Recommender System",
+            "title": "Lab 5: Create and test HeatWave AutoML Recommender System",
             "filename": "../../create-automl/create-automl.md"
           },
 
           {
-            "title": "Lab 7:  Create the base Movies Database Tables for the Movie App",
+            "title": "Lab 6:  Create the base Movies Database Tables for the Movie App",
             "filename": "../../create-movie-tables/create-movie-tables.md"
           },
 
           {
-            "title": "Lab 8:  Query Information from the movies and predictions tables",
+            "title": "Lab 7:  (Optional) Query Information from the movies and predictions tables",
             "filename": "../../query-from-movies-predictions/query-from-movies-predictions.md"
           },
 
           {
-            "title": "Lab 9:  Create a Low Code Application with Oracle APEX and REST SERVICES for MySQL",
+            "title": "Lab 8:  Create a Low Code Application with Oracle APEX for MySQL",
             "filename": "../../apex-heatwave/apex-heatwave.md"
           },
 
           {
-            "title": "Lab 10:  Setup the APEX Application and Workspace",
+            "title": "Lab 9:  Setup the APEX Application and Workspace",
             "filename": "../../app-configure-apex/app-configure-apex.md"
           },
 
           {
-            "title": "Lab 11:  Explore the Movie Recommendation App with data inside MySQL HeatWave",
+            "title": "Lab 10:  Explore the Movie Recommendation App with data inside MySQL HeatWave",
             "filename": "../../develop-moviehub-apex-app/develop-moviehub-apex-app.md"
           },
 
           {
-            "title": "Lab 12:  (Bonus) Add your images to the MovieHub App for display",
+            "title": "Lab 11:  (Bonus) Add your images to the MovieHub App for display",
             "filename": "../../improve-app-hw/improve-app-hw.md"
           },
 

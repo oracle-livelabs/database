@@ -18,7 +18,7 @@ In this lab, you will:
 
 This lab assumes you have:
 * Completed all previous workshops
-* Have a Linux VM running Oracle 23ai Free Database
+* Have a Linux VM running Oracle Database 23ai Free Database
 * Have access to a GUI on the Linux VM to run Database Actions (SQL Developer Web)
 
 [Lab Walkthrough](videohub:1_17wvzaf1)

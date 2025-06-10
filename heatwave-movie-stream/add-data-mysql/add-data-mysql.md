@@ -10,7 +10,7 @@ Click the following link for an overview of the MovieLens100k dataset files:
 
 - [README file for the MovieLens dataset](https://files.grouplens.org/datasets/movielens/ml-100k-README.txt).
 
-_Estimated Time:_ 15 minutes
+_Estimated Time:_ 10 minutes
 
 ### Objectives
 
@@ -23,9 +23,9 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with Linux and Python
-- Completed Lab 4
+- Completed Lab 3
 
-## Task 1: Add movies data to HeatWave
+## Task 1: Create tables for movies data in HeatWave
 
 1. Go to Cloud shell to SSH into the new Compute Instance
 
@@ -117,7 +117,7 @@ In this lab, you will be guided through the following tasks:
             `user_id` varchar(5) DEFAULT NULL,
             `item_id` varchar(7) DEFAULT NULL,
             `rating` int DEFAULT NULL
-            );  
+            );
 
         </copy>
         ```
@@ -126,7 +126,10 @@ In this lab, you will be guided through the following tasks:
     b. Hit **ENTER** to execute the last command
 
     ![create primary tables ](./images/primary-tables-create.png "primary-tables-create ")
-7. Source the SQL files into your tables with MySQL Shell
+
+## Task 2: Add movies data into HeatWave tables
+
+1. Import the CSV files into your tables with MySQL Shell Import Table Utility
 
     a. Make sure you are in the movie database
 
@@ -134,31 +137,41 @@ In this lab, you will be guided through the following tasks:
     <copy>USE movies;</copy>
     ```
 
-    b. Source the files into their tables
-
-    Make sure to replace the path of the file with your actual path if it is not the same.
-    Enter the following command at the prompt
+    b. Change MySQL Shell mode to JavaScript
 
     ```bash
-    <copy>
-    SOURCE /home/opc/ml-100k/item.sql
-
-    SOURCE /home/opc/ml-100k/user.sql
-
-    SOURCE /home/opc/ml-100k/data.sql
-    </copy>
+    <copy>\js</copy>
     ```
-    c. Hit **ENTER** to execute the last command
+    ![change shell js mode ](./images/change-shell-js-mode.png "change-shell-js-mode ")
 
-    **This operation might take a couple of minutes**
+    c. Import the files into their respective tables. Make sure to replace the path of the file with your actual path if it is not the same.
 
-    You will see the the following result
+    **Enter** the following commands at the JS prompt:
 
-    ![source sql files output](./images/source-sql-data-output.png "source-sql-files-output ")
+    ```bash
+    <copy>util.importTable("file:///home/opc/ml-100k/item.csv", {"characterSet": "latin1", "schema": "movies", "table": "item", "dialect": "default", fieldsTerminatedBy: ",", fieldsOptionallyEnclosed: true, fieldsEnclosedBy: '"', "skipRows": "1"})</copy>
+    ```
+    ```bash
+    <copy>util.importTable("file:///home/opc/ml-100k/user.csv", {"characterSet": "latin1", "schema": "movies", "table": "user", "dialect": "default", fieldsTerminatedBy: ",", fieldsOptionallyEnclosed: true, fieldsEnclosedBy: '"', "skipRows": "1"})</copy>
+    ```
+    ```bash
+    <copy>util.importTable("file:///home/opc/ml-100k/data.csv", {"characterSet": "latin1", "schema": "movies", "table": "data0", "dialect": "default", fieldsTerminatedBy: ",", fieldsOptionallyEnclosed: true, fieldsEnclosedBy: '"', "skipRows": "1"})</copy>
+    ```
 
-8. Check the number of rows for every created table
+    d. You should see a similar result:
 
-    a. Enter the following command to ensure the data was inserted correctly
+    ![import tables output](./images/import-tables-output.png "import-tables-output ")
+
+
+     e. Change back MySQL Shell mode to SQL
+
+    ```bash
+    <copy>\sql</copy>
+    ```
+
+2. Check the number of rows for every created table
+
+    a. Enter the following command to validate that the data was inserted correctly
 
     ```bash
     <copy>
@@ -176,7 +189,7 @@ In this lab, you will be guided through the following tasks:
 
     ![row counts primary tables](./images/row-counts-primary-tables.png "row-counts-primary-tables ")
 
-9. Create two more data tables to be used by HeatWave AutoML
+3. Create two more data tables to be used by HeatWave AutoML
 
     a.
 
@@ -223,7 +236,7 @@ In this lab, you will be guided through the following tasks:
 
     b. Hit **ENTER** to execute the last command
 
-10. Compare the number of rows in the data tables.
+4. Compare the number of rows in the data tables.
 
     a. Enter the following command to compare the number of rows
 
@@ -239,7 +252,7 @@ In this lab, you will be guided through the following tasks:
 
     b. Hit **ENTER** to execute the last command
 
-    c. You should see the following resulting counts
+    c. You should see the following result counts
 
     ![row counts data tables](./images/row-counts-data-tables.png "row-counts-data-tables ")
 
@@ -247,14 +260,15 @@ You may now **proceed to the next lab**
 
 ## Learn More
 
-- [Oracle Cloud Infrastructure MySQL Database Service Documentation ](https://docs.cloud.oracle.com/en-us/iaas/MySQL-database)
-- [MySQL HeatWave ML Documentation] (https://dev.mysql.com/doc/heatwave/en/heatwave-machine-learning.html)
+- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/home.htm)
+- [MySQL HeatWave AutoML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
+- [MySQL Shell Documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-features.html)
 
 ## Acknowledgements
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025
 
 - **Dataset** - F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets:
 History and Context. ACM Transactions on Interactive Intelligent
