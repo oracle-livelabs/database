@@ -1,0 +1,45 @@
+{
+    "workshoptitle": "Work with JSON Relational Duality Views using SQL",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "This is an introduction to Oracle Database 23ai.",
+            "type": "livelabs",
+            "filename": "../../introduction/sql-introduction.md"
+        },
+        {
+            "title": "Get Started with NoVNC",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        },
+        {
+            "title": "Lab 1: Setup User",
+            "description": "Creating the schema including JSON Duality Views",
+            "type": "livelabs",
+            "filename": "../../change-pw/change-pw.md"
+        },{
+            "title": "Lab 2: Create the schema",
+            "description": "Creating the schema including JSON Duality Views",
+            "type": "livelabs",
+            "filename": "../../sql-schema/sql-schema.md"
+        },
+        {
+            "title": "Lab 3: JSON and the Duality Views",
+            "description": "Working with JSON and the Duality Views",
+            "type": "livelabs",
+            "filename": "../../sql-json/sql-json.md"
+        },
+        {
+            "title": "Lab 4: The Extreme Flexibility of JSON Duality Views",
+            "description": "Working with SQL and the Duality Views",
+            "type": "livelabs",
+            "filename": "../../sql-extended/sql-extended.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

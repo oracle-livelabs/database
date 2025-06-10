@@ -85,7 +85,7 @@ To be able to access your compute instance, you need to configure egress and ing
 
 ## Task 2: Create a `workshop-installed` compute instance
 
-1. Download [db19cnf-workshop-installed.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/jyHA4nclWcTaekNIdpKPq3u2gsLb00v_1mmRKDIuOEsp--D6GJWS_tMrqGmb85R2/n/c4u04/b/livelabsfiles/o/labfiles/db19cnf-workshop-installed.zip) to a directory on your local computer.
+1. Download [db19cnf-workshop-installed.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/db19cnf-workshop-installed.zip) to a directory on your local computer.
 
 2. On the home page in Oracle Cloud Infrastructure, click **Create a stack**.
 

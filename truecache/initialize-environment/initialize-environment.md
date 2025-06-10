@@ -15,21 +15,21 @@ Watch the video for a quick walk through of the Initialize Environment lab.
 
 ### Prerequisites
 This lab assumes you have:
-- An Oracle Cloud account
+- A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup 
-    - Lab: Environment Setup
+    - Lab: Prepare Setup(*Free-tier* and *Paid Tenants* only)
+    - Lab: Environment Setup((*Free-tier* and *Paid Tenants* only))
 
-## Task 1: Validate That Required Processes are Up and Running.
-1. Now with access to your remote desktop session, proceed as indicated below to validate your environment before you start executing the subsequent labs. The following Processes should be up and running:
+## Task 1: Validate That Required Processes Are Up and Running.
+1. With access to your remote desktop session, validate your environment before you start the subsequent labs. The following processes should be up and running:
 
-    - Oracle Primary database Container
-    - Oracle True Cache  Container
-    - Client App Container
+    - Oracle primary database container
+    - Oracle True Cache  container
+    - Client app container
 
-2.  Open a terminal session and proceed as indicated below to validate the services.
+2.  Open a terminal session and follow these steps to validate the services.
 
-    - Log on to Podman and check for podman containers: 
+    - Log in to Podman and check for podman containers.
 
         ```
         <copy>
@@ -38,7 +38,7 @@ This lab assumes you have:
         ```
         ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
 
-    - If a container is stopped and not in running state then try to restart it by using below docker command.
+    - If a container is stopped and not in running state then try to restart it.
 
         ```
         <copy>
@@ -48,7 +48,7 @@ This lab assumes you have:
         sudo podman start <container ID/NAME>
         </copy>
         ```
-    - For multiple containers, run the following to restart all at once:
+    - For multiple containers, run the following to restart all at once.
 
         ```
         <copy>

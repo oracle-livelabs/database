@@ -27,22 +27,17 @@
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
-      "title": "Lab 4: Provision Autonomous Databases for use as Resource Manager",
-      "type": "tenancy",
-      "filename": "../../adb-provision/adb-provision.md"
-    },
-    {
-      "title": "Lab 5: Deploy the Bank and Stock-Trading Application",
+      "title": "Lab 4: Deploy the Bank and Stock-Trading Application",
       "filename": "../../deploy-stock-trading-app/deploy-stock-trading-app.md"
     },
     {
-      "title": "Lab 6: Trade Stocks with the Bank and Stock-Trading Application",
+      "title": "Lab 5: Trade Stocks with the Bank and Stock-Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
       "description": "Cleanly dispose all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 7: Clean Up"
+      "title": "Lab 6: Clean Up"
     },
     {
       "title": "Need help?",

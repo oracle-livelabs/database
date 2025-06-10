@@ -77,7 +77,7 @@ Click on the next lab to **Get Started**.
 ## Learn More
 
 - [Blog on Introducing Oracle Database 21c](https://blogs.oracle.com/database/introducing-oracle-database-21c)
-- Workshop on how to [Install Oracle Database 21c on OCI Compute](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=871)
+- Workshop on how to [Install Oracle Database 21c on OCI Compute](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=871)
 
 ## Acknowledgements
 

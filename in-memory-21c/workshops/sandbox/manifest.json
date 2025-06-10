@@ -18,7 +18,7 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 3: Setting up the In-Memory Column Store",
+      "title": "Lab 3: Set up the In-Memory Column Store",
       "description": "Populating and administering the In-Memory column store",
       "filename": "../../setup/setup.md"
     },

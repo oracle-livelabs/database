@@ -1,0 +1,77 @@
+{
+  "workshoptitle": "Data Pump - Supercharge Data Movement",
+  "support": "https://community.oracle.com/mosc/categories/oracle_database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Get Started",
+      "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+    },
+    {
+      "title": "Introduction",
+      "description": "Introduction to Oracle Data Pump and overview of architecture",
+      "filename": "../../00-introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Architecture",
+      "description": "Architecture",
+      "filename": "../../02-architecture/architecture.md"
+    },
+    {
+      "title": "Lab 3: Getting Started",
+      "description": "Getting Started",
+      "filename": "../../03-getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 4: Best Practices and Other Settings",
+      "description": "Best Practices and Other Settings",
+      "filename": "../../04-settings-and-best-practices/settings-and-best-practices.md"
+    },
+    {
+      "title": "Lab 5: Faster Imports",
+      "description": "Faster Imports",
+      "filename": "../../05-faster-imports/faster-imports.md"
+    },
+    {
+      "title": "Lab 6: Customizing Data Pump Jobs",
+      "description": "Customizing Data Pump Jobs",
+      "filename": "../../06-customize/customize.md"
+    },
+    {
+      "title": "Lab 7: Checksum and Encryption",
+      "description": "Checksum and Encryption",
+      "filename": "../../07-checksum-encryption/checksum-encryption.md"
+    },
+    {
+      "title": "Lab 8: Determining Import Success",
+      "description": "Determining Import Success",
+      "filename": "../../08-import-success/import-success.md"
+    },
+    {
+      "title": "Lab 9: Monitoring, Troubleshooting and Tracing",
+      "description": "Monitoring, Troubleshooting and Tracing",
+      "filename": "../../09-monitor-troubleshoot-trace/monitor-troubleshoot-trace.md"
+    },
+    {
+      "title": "Lab 10: Upgrading, Downgrading and Converting",
+      "description": "Upgrading, Downgrading and Converting",
+      "filename": "../../10-upgrade-downgrade-convert/upgrade-downgrade-convert.md"
+    },
+    {
+      "title": "Lab 11: Using DBMS_DATAPUMP",
+      "description": "Using DBMS_DATAPUMP",
+      "filename": "../../11-dbms-datapump-dbms-metadata/dbms-datapump-dbms-metadata.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

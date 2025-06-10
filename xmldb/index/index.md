@@ -1,289 +1,238 @@
-# Index XML data
+# Index your XML documents
 
 ## Introduction
 Indexing XML data will give you quick access to the data and significantly improve the query performance. The use of indexes is particularly recommended for online transaction processing (OLTP) environments involving few updates.
 
-Generally, when your XML data contains an island of structured, predictable data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
+Generally, when your XML data contains structured, predictable fragments of data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
 
-Estimated Time: 45 minutes
+Estimated Time: 20 minutes
 
 ### Objectives
 In this lab, you will learn:
--	Using XMLIndex,
--	Using XML Search Index.
+-	How to use Structured XMLIndex,
+-	How to use XML Search Index.
 
 ### Prerequisites
-- Be logged into your Oracle Cloud Account.
-
-## Task 1: Open Database Actions
-1. Log in to the Oracle Cloud.
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources,  you need to be in a region where Always Free Resources are available. You can see your current default Region in the top, right-hand corner of the page.
-3. Click the navigation menu in the upper left to show top-level navigation choices.
-4. Click on Oracle Database and choose Autonomous Transaction Processing.
-5. If using FreeTier, your compartment should be the root compartment for your tenancy.
-Note: Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
-6. You should see your database XMLDB listed in the center. Click on the database name "XMLDB".
-7. On the database page, choose Database Actions.
-8. You are now in Database Actions.
-Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
-9. You should be in the Database Actions panel. Click on the SQL card
+- Be logged into your Oracle Cloud Account and have access to the SQL Worksheet in Database Actions.
 
 
-## Task 2: Index XML Data
-
-1. Create XMLIndex
+## Task 1: Create and use structured XMLIndexes
   
-    Often times users know the structure or pattern of the queries. For example, consider the following few examples: 
+Often times users know the structure or pattern of the queries and consequently the fragments of their XML documents that are used for selective access. For example, consider the following few examples: 
 
-    ```
-    <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
-            PASSING P.DOC
-        );
-    </copy>
-    ```
+```
+<copy>
+SELECT
+    XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
+        PASSING P.DOC
+    RETURNING CONTENT).GETCLOBVAL() as ItemNumber
+FROM
+    PURCHASEORDER P
+WHERE
+    XMLEXISTS ('/PurchaseOrder[Reference="CJONES-2022PST"]'
+        PASSING P.DOC
+    );
+</copy>
+```
 
-
-    ```
-    <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/Part/text()'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
-            PASSING P.DOC
-        );
-    </copy>
-    ```
-
-
-    All the queries use a similar pattern, and we can leverage that. Users can create an index focusing on those cases only. By doing that they will significantly reduce the index size and at the same time, we will get a significant performance improvement.
-
-    ```
-    <copy>
-    DROP INDEX PURCHASEORDER_IDX;
-
-    BEGIN
-        DBMS_XMLINDEX.DROPPARAMETER('PO_SXI_PARAMETERS');
-    END;
-    /
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Run Statement".
-
-    ![Drop index and parameters](./images/img-1.png)
-
-    
-
-    ```
-    <copy>
-    BEGIN
-        DBMS_XMLINDEX.REGISTERPARAMETER('PO_SXI_PARAMETERS', 'GROUP   PO_LINEITEM
-            XMLTABLE PO_INDEX_MASTER ''/PurchaseOrder''
+```
+<copy>
+CREATE OR REPLACE VIEW V_ORDERITEM AS 
+    SELECT M.REFERENCE, L.*
+    FROM PURCHASEORDER P,
+        XMLTABLE ('/PurchaseOrder' PASSING P.DOC
             COLUMNS
-            REFERENCE        varchar2(30)   PATH ''Reference/text()'',
-                LINEITEM            xmlType     PATH ''LineItems/LineItem''
-        VIRTUAL XMLTABLE PO_INDEX_LINEITEM ''/LineItem''
-        PASSING lineitem
+                REFERENCE VARCHAR2(30) PATH 'Reference/text()',
+                LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
+        XMLTABLE ('/LineItem' PASSING M.LINEITEMS
             COLUMNS
-                ITEMNO         number(38)    PATH ''@ItemNumber'',
-                UPC            varchar2(14)   PATH ''Part/text()'',     
-                DESCRIPTION    varchar2(256)  PATH ''Part/@Description''
-                        ');
-    END;
-    /
-    </copy>
-    ```
+                ITEMNO NUMBER(38) PATH '@ItemNumber',
+            PARTNO VARCHAR2(14) PATH 'Part/@Id',
+                DESCRIPTION VARCHAR2(100) PATH 'Description',
+                QUANTITY NUMBER(5) PATH 'Quantity') L;
+</copy>
+```
 
-    Copy the above statement into the worksheet area and press "Run Statement".
+The queries use a similar XPath to access /PurchaserOrder/Reference or /PurchaseOrder/LineItems/LineItem elements. We can create a structured XML index on these structured parts of the data. An XML index will also help the query performance significantly.
 
-    ![Register parameters](./images/img-2.png)
+Let us create a structured XML index for our sample table:
+```
+<copy>
+DROP INDEX PURCHASEORDER_IDX;
 
+CREATE INDEX PURCHASEORDER_IDX
+    ON purchaseorder(doc) INDEXTYPE IS XDB.XMLIndex
+    PARAMETERS ('
+        XMLTABLE PO_INDEX_MASTER
+                ''/PurchaseOrder''
+        COLUMNS
+            reference VARCHAR2(30) PATH ''Reference/text()'',
+            lineitem  XMLTYPE PATH ''LineItems/LineItem'' VIRTUAL
+        XMLTable PO_INDEX_LINEITEM
+                ''/LineItem'' PASSING lineitem
+        COLUMNS
+            ITEMNO number(38)   PATH ''@ItemNumber'',
+            PARTNO varchar2(14)  PATH ''Part/@Id'',
+            DESCRIPTION varchar2(30) PATH ''Description'',
+            QUANTITY NUMBER(5) PATH ''Quantity''
+    ');
+</copy>
+```
+![Create index](./images/img-3.png)
+
+After you created the index, you will see an index PURCHASEORDER_IDX in your data dictionary, but you will also see two additional (structured) tables being created; those are so-called "path tables" that provide the structure for your XML index. You can describe them, however.
+
+The two internal XML index path tables PO\_INDEX\_MASTER and PO\_INDEX\_LINEITEM are named after the XMLTABLE parameters of your index creation statement. 
+- PO\_INDEX\_MASTER has columns reference and lineitem. Column lineitem is of type XMLTYPE which is virtual. It represents a collection and is passed to the second XMLTable construct to form the second-level relational index table, PO\_INDEX\_LINEITEM.
+- PO\_INDEX\_LiNEITEM has columns itemno, partno, description, and quantity. 
+
+Your queries are optimized through Structured XML Index directly from the underneath relational index tables. We will see this later in this lab.
+
+You can even create secondary indexes on the columns of these internal XML index tables, which will further improve the query performance. Let's do this now:
+```
+<copy>
+CREATE UNIQUE INDEX REFERENCE_IDX ON
+    PO_INDEX_MASTER (
+        REFERENCE
+    );
+
+-- creating a secondary index on the UPC column
+CREATE INDEX UPC_IDX ON
+    PO_INDEX_LINEITEM (
+        PARTNO
+    );
+</copy>
+```
+
+Copy the above statement into the worksheet area and press "Run Statement".
+
+![Secondary indexes](./images/img-4.png)
+
+Now let's see our indexes at work, using some sample queries.
+
+```
+<copy>
+SELECT
+    XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
+        PASSING P.DOC
+    RETURNING CONTENT).GETCLOBVAL()
+FROM
+    PURCHASEORDER P
+WHERE
+    XMLEXISTS ( '/PurchaseOrder[Reference="CJONES-2022PST"]'
+        PASSING P.DOC
+    );
+</copy>
+```
+
+Copy the above statement into the worksheet area and press "Explain Plan".
+
+![Explain plan 1](./images/img-5.png)
+
+You will see that the access path is driven by our secondary index on /PurchaseOrder/Reference (index REFERENCE\_IDX on our path table PO\_INDEX\_MASTER) since we have a very selective predicate "REFERENCE"='CJONES-2022PST'.
+
+Now let's create a view and see what happens when I am just selecting from my view:
+```
+<copy>
+CREATE OR REPLACE VIEW V_ORDERITEM AS  
+    SELECT M.REFERENCE, L.*
+    FROM PURCHASEORDER P,
+        XMLTABLE ('/PurchaseOrder' PASSING P.DOC
+            COLUMNS
+                REFERENCE VARCHAR2(30) PATH 'Reference/text()',
+                LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
+        XMLTABLE ('/LineItem' PASSING M.LINEITEMS
+            COLUMNS
+                ITEMNO NUMBER(38) PATH '@ItemNumber',
+                PARTNO VARCHAR2(14) PATH 'Part/@Id',
+                DESCRIPTION VARCHAR2(30) PATH 'Description',
+                QUANTITY NUMBER(5) PATH 'Quantity') L;
+
+SELECT * FROM V_ORDERITEM;
+</copy>
+```
+
+Copy the above statement into the worksheet area and press "Explain Plan". You see how the structures built for our structured XML index work together to optimize the master-detail access of our XML documents.
+
+![Explain plan 2](./images/img-6.png)
+
+## Task 2: Create and use XML Search Indexes
     
+In case of ad-hoc or free-form XML queries, that don’t follow a well-defined structure as appropriate for the Structured XMLIndex discussed in the previous section, we recommend creating an XML Search Index instead. The search index can be used to get a performance boost on both full-text as well as range search queries.
 
-    Please grant the required privileges if needed.
+1. The first step is to create a section group and set the search preferences:
+        ```
+        <copy>
+        BEGIN
+            CTX_DDL.DROP_PREFERENCE('STORAGE_PREFS');
+        END;
+        /
 
-    ```
-    <copy>
-    CREATE INDEX PURCHASEORDER_IDX ON
-        PURCHASEORDER (
-            DOC
-        )
-    INDEXTYPE IS XDB.XMLINDEX PARAMETERS ( 'PARAM PO_SXI_PARAMETERS' );
-    </copy>
-    ```
+        BEGIN
+            CTX_DDL.DROP_SECTION_GROUP('XQFT');
+        END;
+        /
 
-    Copy the above statement into the worksheet area and press "Run Statement".
+        BEGIN
+            CTX_DDL.CREATE_SECTION_GROUP('XQFT', 'PATH_SECTION_GROUP');
+            CTX_DDL.SET_SEC_GRP_ATTR('XQFT', 'XML_ENABLE', 'T');
+            CTX_DDL.CREATE_PREFERENCE('STORAGE_PREFS', 'BASIC_STORAGE');
+        END;
+        /
+        </copy>
+        ```
 
-    ![Create index](./images/img-3.png)
-
-    
-
-    ```
-    <copy>
-    -- we can even create a secondary index on primary index columns.
-    -- creating a secondary index on the REFERENCE column
-    CREATE UNIQUE INDEX REFERENCE_IDX ON
-        PO_INDEX_MASTER (
-            REFERENCE
-        );
-
-    -- creating a secondary index on the UPC column
-    CREATE INDEX UPC_IDX ON
-        PO_INDEX_LINEITEM (
-            UPC
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Run Statement".
-
-    ![Secondary indexes](./images/img-4.png)
-
-    
-
-
-    ```
-    <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
-            PASSING P.DOC
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Explain Plan".
-
-    ![Explain plan 1](./images/img-5.png)
-
-    
-
-
-    ```
-    <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/Part/text()'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
-            PASSING P.DOC
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Explain Plan".
-
-    ![Explain plan 2](./images/img-6.png)
-
-    
-
-2. Create XML Search Index
-    
-    In the case of ad-hoc XML queries or queries requiring text search or range search, we recommend creating an XML Search index to get a performance boost.
-
-    ```
-    <copy>
-    BEGIN
-        CTX_DDL.DROP_PREFERENCE('STORAGE_PREFS');
-    END;
-    /
-
-    BEGIN
-        CTX_DDL.DROP_SECTION_GROUP('XQFT');
-    END;
-    /
-
-    BEGIN
-        CTX_DDL.CREATE_SECTION_GROUP('XQFT', 'PATH_SECTION_GROUP');
-        CTX_DDL.SET_SEC_GRP_ATTR('XQFT', 'XML_ENABLE', 'T');
-        CTX_DDL.CREATE_PREFERENCE('STORAGE_PREFS', 'BASIC_STORAGE');
-    END;
-    /
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement". You can ignore the errors from the first two drop operations if you run this lab for the first time. The lab is built in a way that you can re-run individual sections.
 
     ![Set preferences](./images/img-7.png)
 
-    
-
-    ```
-    <copy>
-    CREATE INDEX PURCHASEORDER_XQFT_IDX ON
-        PURCHASEORDER (
-            DOC
-        )
-    INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ( 'storage STORAGE_PREFS 
-                section group XQFT' );
-    </copy>
-    ```
+2. The second step is to actually create the search index on the base table using the preferences created in the previous step: 
+        ```
+        <copy>
+        CREATE INDEX PURCHASEORDER_XQFT_IDX ON
+            PURCHASEORDER (
+                DOC
+            )
+        INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ( 'storage STORAGE_PREFS 
+                    section group XQFT' );
+        </copy>
+        ```
 
     Copy the above statement into the worksheet area and press "Run Statement".
 
     ![Create XML search index](./images/img-8.png)
 
-    
+Now that the search index has been set up, try running a variety of different queries and verify if the index is picked for each one of them by clicking on explain plan.
 
-3. Run queries and check explain plan
-    
-    3.1. Finding addresses given a zipCode. After creating the search index, a query like this will significantly improve the query performance.
+Let’s look at a few text-search queries:
 
+1. Find all “Overnight” orders
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '(#ora:use_xmltext_idx #)
-    {$P/PurchaseOrder/LineItems/LineItem[@ItemNumber > $num]}'
-            PASSING PO.DOC AS "P",
-            '0' AS "num"
-        );
+        XMLEXISTS ('/PurchaseOrder/SpecialInstructions[. contains text "Overnight"]'
+            PASSING doc);
     </copy>
     ```
-
 
     Copy the above statement into the worksheet area and press "Explain Plan".
 
     ![Explain plan SIQ1](./images/img-9.png)
-        
 
-
-    3.2. Search for a contains match on a phrase. The contains match is case sensitive. 
-
+2. Orders where the description contains “Harry” and “Potter”
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER 
     WHERE
-        XMLEXISTS ( ' (#ora:use_xmltext_idx #)
-    {$P/PurchaseOrder/ShippingInstructions/Address/street[contains(.,$PHRASE)]}'
-            PASSING PO.DOC AS "P",
-            'Building' AS "PHRASE"
+        XMLEXISTS ( '/PurchaseOrder/LineItems/LineItem/Description[. contains text "Harry" ftand "Potter"]'
+            PASSING doc
         );
     </copy>
     ```
@@ -292,20 +241,17 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ![Explain plan SIQ2](./images/img-10.png)
 
-    
-
-    3.3. An XQuery Full-Text "contains text" search on a phrase. The index is used since "contains text" comparisons are case insensitive. 
+3. Orders where the description contains the words “C++” or “Java”
 
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '(#ora:use_xmltext_idx #) {$P/PurchaseOrder/ShippingInstructions/Address/street[. contains text {$PHRASE}]}'
-            PASSING PO.DOC AS "P",
-            'building' AS "PHRASE"
+        XMLEXISTS ( '/PurchaseOrder/LineItems/LineItem/Description[. contains text "Java" ftor "C++"]'
+            PASSING doc
         );
     </copy>
     ```
@@ -315,18 +261,17 @@ Database Actions allows you to connect to your Autonomous Database through vario
     ![Explain plan SIQ3](./images/img-11.png)
     
 
-    3.4. An XQuery Full-Text "contains text" search on a phrase with stemming.
-
+4. Orders with price > 50
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address/street[. contains text {$PHRASE} using stemming]'
-            PASSING PO.DOC AS "P",
-            'build' AS "PHRASE"
+        XMLEXISTS ( '(# ora:use_xmltext_idx #) 
+            {/PurchaseOrder/LineItems/LineItem/Part[@UnitPrice > 50]}' 
+            PASSING doc
         );
     </copy>
     ```
@@ -336,19 +281,18 @@ Database Actions allows you to connect to your Autonomous Database through vario
     ![Explain plan SIQ4](./images/img-12.png)
     
 
-    3.5. An XQuery Full-Text "contains text" search on a fragment using the ftand operator. 
+5. Orders where the Requestor name is lexicographically > “Jake”
 
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address[. contains text {$PHRASE1} ftand {$PHRASE2} using stemming]'
-            PASSING PO.DOC AS "P",
-            'nil' AS "PHRASE1",
-            'build' AS "PHRASE2"
+        XMLEXISTS ( '(# ora:use_xmltext_idx #) 
+            {/PurchaseOrder[Requestor > "Jake"]}'
+            PASSING doc
         );
     </copy>
     ```
@@ -356,62 +300,12 @@ Database Actions allows you to connect to your Autonomous Database through vario
     Copy the above statement into the worksheet area and press "Explain Plan".
 
     ![Explain plan SIQ5 with stemming](./images/img-13.png)
-    
-
-    ```
-    <copy>
-    SELECT
-        COUNT(*)
-    FROM
-        PURCHASEORDER PO
-    WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address[. contains text {$PHRASE1} ftand {$PHRASE2} using stemming window 2 words]'
-            PASSING PO.DOC AS "P",
-            'nil' AS "PHRASE1",
-            'build' AS "PHRASE2"
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Explain Plan".
-
-    ![Explain plan SIQ5 with stemming window 2](./images/img-14.png)
-    
-
-    ```
-    <copy>
-    SELECT
-        COUNT(*)
-    FROM
-        PURCHASEORDER PO
-    WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address[. contains text {$PHRASE1} ftand {$PHRASE2} using stemming window 5 words]'
-            PASSING PO.DOC AS "P",
-            'nil' AS "PHRASE1",
-            'build' AS "PHRASE2"
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Explain Plan".
-
-    ![Explain plan SIQ5 stemming window 5](./images/img-15.png)
  
+You have now experienced both structured XML indexes and search XML indexes in action to optimize various predicates and search condition. Feel free to experience more with other variants of queries if you like. 
+
 You may now **proceed to the next lab**.
-
-## Learn More
-- [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
-- [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)
-- [JSON without Limits] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=836)
-- [Using the Database API for MongoDB] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
-- [Database API for MongoDB - The Basics] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3221)
-- [Full-Text Search in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286)
-- [Autonomous Database Dedicated](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=677)
-- [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scaling and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
-
 
 ## Acknowledgements
 * **Author** - Harichandan Roy, Principal Member of Technical Staff, Oracle Document DB
 * **Contributors** -  XDB Team
-* **Last Updated By/Date** - Harichandan Roy, February 2023
+- **Last Updated By/Date** - Ernesto Alvarez, April 2024

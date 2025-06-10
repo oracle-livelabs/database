@@ -62,7 +62,7 @@ In this lab, you will be guided through the following steps:
 ### Prerequisites
 
 - An Oracle Free Tier, Paid or LiveLabs Cloud Account
-- Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
+- Some Experience with MySQL Shell - [MySQL shell] (https://dev.mysql.com/doc/refman/9.2/en/)
 
 
 ## Acknowledgements
@@ -72,4 +72,4 @@ In this lab, you will be guided through the following steps:
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
 Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, Jul 2023
+- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, February 2025

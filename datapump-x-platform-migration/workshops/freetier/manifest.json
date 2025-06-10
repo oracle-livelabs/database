@@ -12,7 +12,19 @@
       "title": "Get Started",
       "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
-  },
+    },
+    {
+      "title": "Prepare Setup",
+      "description": "How to download your ORM stack and update security rules for an existing VCN",
+      "publisheddate": "09/28/2020",
+      "filename": "../../00-prepare-setup/00-prepare-setup.md"
+    },
+    {
+      "title": "Environment Setup",
+      "description": "How to provision the workshop environment and connect to it",
+      "publisheddate": "06/30/2020",
+      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+    },
     {
       "title": "Lab 1: Prepare the Target",
       "description": "Adding a PDB to the Target CDB",

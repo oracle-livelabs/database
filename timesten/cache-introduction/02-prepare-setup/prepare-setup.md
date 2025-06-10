@@ -21,7 +21,7 @@ This lab assumes you have:
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
- [ll-timesten-cache-intro.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/zXF3WR--V6CG3ZmB1vgQcEcYYidDhuejeplM9oBUwiYGs-7BnN4YI2_TLVY82_-b/n/natdsecurity/b/stack/o/ll-timesten-cache-intro.zip)
+ [ll-timesten-cache-intro.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/ll-timesten-cache-intro.zip)
 
 2.  Save in your downloads folder.
 
@@ -55,11 +55,11 @@ You can now **proceed to the next lab**.
 
 This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN/subnet, the following ports should be added to the **Ingress** rules.
 
-| Port           |Description                            |
-| :------------- | :------------------------------------ |
-| 22             | SSH                                   |
-| 80             | Remote Desktop using noVNC            |
-| 6080           | Remote Desktop using noVNC            |
+| Port | Description                |
+| :--- | :------------------------- |
+| 22   | SSH                        |
+| 80   | Remote Desktop using noVNC |
+| 6080 | Remote Desktop using noVNC |
 
 **Note:** If you plan to only use SSH connectivity, or only Remote Desktop connectivity, then you only need to open the appropriate port(s).
 
@@ -68,9 +68,9 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 2.  Choose your network.
 
-3.  Under Resources, select *Security Lists*.
+3.  Select *Security* tab from the sub-menu bar.
 
-4.  Click on *Default Security Lists* under the Create Security List button.
+4.  Under *Security Lists*, click on the Create Security List button.
 
 5.  Click the *Add Ingress Rule* button.
 
@@ -84,4 +84,4 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Jenny Bloom, March 2023
+* **Last Updated By/Date** - Jenny Bloom, June 2025

@@ -30,45 +30,45 @@ In this lab, you will:
 
 The following task is *optional* if a suitable VCN is already present.
 
-1. In the OCI Console Menu, go to **Networking** > **Virtual Cloud Networks**.
+1. In the OCI Console Menu, go to **Networking** > **Virtual cloud networks**.
 
-  ![screenshot of VCN menu navigation](images/vcn-location.png)
+  ![screenshot of VCN menu navigation](images/vcn-location.png =50%x*)
 
-2. Pick a compartment on the left-hand side **Compartment** list. You need to have the necessary permissions for the compartment.
+2. Pick a compartment in the **Applied filters**/**Compartment**  list. You need to have the necessary permissions for the compartment.
 
-  ![screenshot where to select compartment](images/create-vcn-in-compartment.png)
+  ![screenshot where to select compartment](images/create-vcn-in-compartment.png =50%x*)
 
-3. Press **Start VCN Wizard** and pick **VCN with Internet Connectivity**.
+3. Press **Actions**/**Start VCN Wizard** and pick **VCN with Internet Connectivity**.
 
-  ![screenshot of start VCN wizzard ](images/vcn-with-internet-wizard.png =50%x50%)
+  ![screenshot of start VCN wizzard ](images/vcn-with-internet-wizard.png =50%x*)
 
 4. Enter a **VCN Name**, such as VCN\_DMS. Leave CIDR block defaults, unless you need non-overlapping addresses for peering later. Press **Next**.
 
-  ![screenshot of where to enter VCN name](images/vcn-configuration.png)
+  ![screenshot of where to enter VCN name](images/vcn-configuration.png =50%x*)
 
 5. Review Summary and press **Create**.
 
-  ![screenshot of summary](images/vcn-review-and-create.png)
+  ![screenshot of summary](images/vcn-review-and-create.png =50%x*)
 
 ## Task 2: Update Security List for Virtual Cloud Network Subnet
 
 This task assumes default permissions in your public subnet. If you disabled or restricted your default permissions such as port 22 SSH access or restricted egress, please add default permissions as needed.
 
-1. In the OCI Console Menu, go to **Networking** > **Virtual Cloud Networks** and pick your VCN.
+1. In the OCI Console Menu, go to **Networking** > **Virtual cloud networks** and pick your VCN.
 
-  ![screenshot of navigation to Virtual Cloud Networks](images/created-vcn.png)
+  ![screenshot of navigation to Virtual Cloud Networks](images/created-vcn.png =50%x*)
 
 2. In the **Subnets** list, pick **Public Subnet-VCN NAME**.
 
-  ![Screenshot of subnets selection ](images/vcn-public-subnet.png)
+  ![Screenshot of subnets selection ](images/vcn-public-subnet.png =50%x*)
 
-3. In the **Security Lists** list, pick **Default Security List for VCN NAME**.
+3. Click in the **Security** tab and in the **Security Lists** list, pick **Default Security List for VCN NAME**.
 
-  ![screenshot of Default Security List for VCN NAME](images/public-subnet-default-sl.png)
+  ![screenshot of Default Security List for VCN NAME](images/public-subnet-default-sl.png =50%x*)
 
-4. In the **Ingress Rules** list press **Add Ingress Rules**.
+4. Click to the **Security rules** tab and in the **Ingress Rules** section press **Add Ingress Rules**.
 
-  ![Screenshot of Ingress rules navigation and add ingress rules](images/add-ingress.png)
+  ![Screenshot of Ingress rules navigation and add ingress rules](images/add-ingress.png =50%x*)
 
 5. Enter the following values, otherwise leave defaults:
     - Source CIDR: **0.0.0.0/0**
@@ -76,7 +76,7 @@ This task assumes default permissions in your public subnet. If you disabled or 
     - Description: **OGG HTTPS**
     - Close dialog by pressing **Add Ingress Rules**.
 
-  ![Screenshot of values for ingress rules](images/ogg-ingress.png =50%x50%)
+  ![Screenshot of values for ingress rules](images/ogg-ingress.png =50%x*)
 
 6. In the **Ingress Rules** list press **Add Ingress Rules**.
 
@@ -86,50 +86,47 @@ This task assumes default permissions in your public subnet. If you disabled or 
     - Description: **Oracle DB access for PEs**
     - Close dialog by pressing **Add Ingress Rules**.
 
-  ![Screenshot of values for ingress rules](images/oracle-db-access-ingress.png =50%x50%)
+  ![Screenshot of values for ingress rules](images/oracle-db-access-ingress.png =50%x*)
 
-![Screenshot of ingress rules](images/ingress-rules.png)
 
 You may now [proceed to the next lab](#next).
 
 
 ## Task 3: Create Vault
 
-These steps walk you through the steps of creating a vault and encrypted key. For more information visit the *Learn More* tab at the bottom of the page.
+These are the steps to create a vault and encrypted key. For more information visit the *Learn More* tab at the bottom of the page.
 
 The following task is *optional* if a Vault is already present.
 
 1. In the OCI Console Menu, go to **Identity & Security** > **Vault**.
 
-  ![Screenshot of Vault navigation](images/vault-oci-menu.png)
+  ![Screenshot of Vault navigation](images/vault-oci-menu.png =50%x*)
 
-2. Pick a compartment on the left-hand side **Compartment** list.
+2. Pick a compartment in the **Applied filters**/**Compartment**  list.
 
 3. Press **Create Vault**.
 
-  ![Screenshot of create vault](images/create-vault.png)
+  ![Screenshot of create vault](images/create-vault.png =50%x*)
 
 4. In the **Create Vault** dialog, enter a Name such as **DMS\_Vault**.
 
 5. Close the dialog by pressing **Create Vault**.
 
-  ![screenshot of vault creation](images/vault-name.png =50%x50%)
+  ![screenshot of vault creation](images/vault-name.png =50%x*)
 
 6. Wait until the state of the new vault is **Active**. This takes about 5 minutes.
 
-  ![Screenshot where Vault is active](images/active-vault.png)
+  ![Screenshot where Vault is active](images/active-vault.png =50%x*)
 
 7. Click on the new vault and press **Create Key** in the **Master Encryption Keys** list.
 
-  ![Screenshot of create new key ](images/create-key.png)
+  ![Screenshot of create new key ](images/create-key.png =50%x*)
 
 8. In the **Create Key** dialog, enter a Name such as **DMS\_Key**.
 
 9. Close the dialog by pressing **Create Key**.
 
-  ![Screenshot of create key confirmation](images/name-key.png =50%x50%)
-
-![screenshot of enabled key](images/created-key.png)
+  ![Screenshot of create key confirmation](images/name-key.png =50%x*)
 
 
 
@@ -165,4 +162,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Hanna Rakhsha, Kiana McDaniel, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Hanna Rakhsha, Kiana McDaniel, Killian, Lynch Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025

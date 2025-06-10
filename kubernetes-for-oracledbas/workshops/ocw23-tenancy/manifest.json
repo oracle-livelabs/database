@@ -98,11 +98,10 @@
             "last_reviewed": "08-July-2023"
         },
         {
-            "title": "CloudWorld - Need Help?",
-            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "../../cloud-world/need-help.md",
-            "last_reviewed": "N/A"
-        },
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
         {
             "title": "Other LiveLabs you might like",
             "description": "Other LiveLabs you might like",

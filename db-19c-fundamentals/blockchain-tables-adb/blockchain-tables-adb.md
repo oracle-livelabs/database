@@ -26,18 +26,18 @@ In this lab, you will:
 
 ## Task 1: Connect to ADB with SQL Developer Web
 
-Please proceed to STEP 4 if you are already connected to Autonomous Database with SQL Developer Web as a NF19C user.
-1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.**
+1. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.** If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. 
  
-  ![locate adb](./images/locate-adb.png " ")
+  ![locate adb](./images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
    ![db actions](./images/database-actions.png " ")
    
-3. Log into Database Actions as the NF19C user.
+3. Log into Database Actions as the NF19C user. Use the picture below to navigate to the SQL editor
 	![JSON Database Actions](./images/db-actions-logout.png)
-	![JSON Database Actions](./images/db-actions-login-lab.png)
+	![JSON Database Actions](./images/login-db.png)
+	![JSON Database Actions](./images/new-sql.png)
 
 4. The `CREATE BLOCKCHAIN TABLE` statement requires additional attributes. The `NO DROP`, `NO DELETE`, `HASHING USING`, and `VERSION` clauses are mandatory.
 
@@ -250,7 +250,7 @@ In the lab, we focused on a subset of the capabilities of blockchain, primarily 
 
 If you're keen on exploring the fascinating world of blockchain technology and learning more about signing records and verifying ledgers, we highly recommend checking out the LiveLab below. This interactive and immersive learning experience will provide you with hands-on experience in creating and managing blockchain tables, signing specific records, and verifying the entire blockchain's integrity through a certificate directory.
 
-- [Blockchain in the Oracle Database](https://apexapps.oracle.com/pls/apex/f?p=133:180:114026617672312::::wid:746)
+- [Blockchain in the Oracle Database](https://livelabs.oracle.com/pls/apex/f?p=133:180:114026617672312::::wid:746)
 
 You may now proceed to the next lab.
 
@@ -258,4 +258,4 @@ You may now proceed to the next lab.
 
 * **Author** - Rayes Huang, Mark Rakhmilevich, Anoosha Pilli
 * **Contributors** - Anoosha Pilli, Didi Han, Database Product Management, Oracle Database
-* **Last Updated By/Date** - Killian Lynch Feb 2023
+* **Last Updated By/Date** - Killian Lynch June 2024
