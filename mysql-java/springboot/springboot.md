@@ -72,12 +72,12 @@ vi src/main/java/com/mysql/web/basic/BasicController.java
 ````
 Replace
 ```
-  private String DB_URL = "jdbc:mysql://10.1.1.237/db1?user=root&password=Welcome1!";
+  private String DB_URL = "jdbc:mysql://10.1.1.237/db1?user=root&password=Welcome___1";
 ```
 By
 ```
-   1. private String DB_URL = "jdbc:mysql://&lt;mysql ip address&gt;/db1?user=root&password=Welcome1!";
-or 2. private String DB_URL = "jdbc:mysql://mysql/db1?user=root&password=Welcome1!";
+   1. private String DB_URL = "jdbc:mysql://&lt;mysql ip address&gt;/db1?user=root&password=Welcome___1";
+or 2. private String DB_URL = "jdbc:mysql://mysql/db1?user=root&password=Welcome___1";
 ```
 
 Then we need also to change the kubernetes yaml file 
@@ -134,7 +134,7 @@ cat bin/config.sh
 </copy>
 ```
 ```
-<copy>kubectl create secret generic db-secret --from-literal=username=root --from-literal=password=Welcome1!
+<copy>kubectl create secret generic db-secret --from-literal=username=root --from-literal=password=Welcome___1
 kubectl apply -f webquerydb-cfg.yaml
 </copy>
 ```
@@ -216,7 +216,7 @@ Caused by: java.lang.IllegalArgumentException: invalid target release: 11
 
 Connect to it through a kubernetes mysql-client
 ```
-<copy>kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql -h10.1.1.237 -uroot -pWelcome1!
+<copy>kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql -h10.1.1.237 -uroot -pWelcome___1
 # Press enter to see the prompt
 exit
 </copy>
@@ -230,7 +230,7 @@ Do not forget to change your IP address
 kubectl run --restart=Never --image=alpine/socat mysql-jump-server -- -d -d tcp-listen:3306,fork,reuseaddr tcp-connect:10.1.1.237:3306
 kubectl wait --for=condition=Ready pod/mysql-jump-server
 kubectl port-forward pod/mysql-jump-server 3306:3306 &
-mysql -h127.0.0.1 -uroot -pWelcome1!
+mysql -h127.0.0.1 -uroot -pWelcome___1
 exit
 </copy> 
 ```
