@@ -718,7 +718,7 @@ Another option is to transfer the statistics from the source database using the 
     -- Be sure to hit RETURN
     ```
 
-    * The column `LAST_ANALYZED` is NULL indicating that there are no statistics.
+    * The date in `LAST_ANALYZED` indicates that there are statistics.
 
     <details>
     <summary>*click to see the output*</summary>
