@@ -126,9 +126,9 @@ This lab assumes you have:
     ![Choose oke-vnc VCN](images/vcn.png)
 
 2. Click on **operator-subnet-regional** subnet
-    ![operator subnet](images/vcn-subet.png)
+    ![operator subnet](images/vcn-subnet.png)
 
-3. Click on **operator-subnet-regional** security list
+3. Click on **operator-seclist** security list
     ![security list](images/vcn-subnet-securitylist.png)
 
 4. Click on **Add Ingress Rule** to add a new ingress rule
@@ -157,7 +157,7 @@ This lab assumes you have:
 2. Click on **MySQLInstance**
     ![DB System](images/oci-mysql-dbsystem.png)
 
-3. Note down the **Private IP Address** for MySQL HeatWave
+3. Select the "Connection" tab and note down the **Private IP Address** for MySQL HeatWave
     ![DB System](images/oci-mysql-dbsystem-ip.png)
 
 4. Point your browser to http://&lt;public IP of **oke-operator** &gt;:8088
@@ -190,11 +190,11 @@ This lab assumes you have:
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, May 2024
+Last Updated By/Date - Ryan Kuan, July 2025

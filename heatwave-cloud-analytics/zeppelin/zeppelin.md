@@ -150,9 +150,9 @@ limit 10;
 
 * **Author**
 	* Ivan Ma, MySQL Solution Engineer, MySQL APAC
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
+	* Ryan Kuan, HeatWave Data Architect, MySQL APAC
 * **Contributors**
 	* Perside Foster, MySQL Solution Engineering
 	* Rayes Huang, OCI Solution Specialist, OCI APAC
 
-* **Last Updated By/Date** - Ryan Kuan, March 2022
+* **Last Updated By/Date** - Ryan Kuan, July 2025
