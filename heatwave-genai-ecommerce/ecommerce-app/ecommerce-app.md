@@ -45,7 +45,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     For example: 
 
     ```bash
-    <copy>ssh -i  C:/Users/MyUser/.ssh/ssh-key-2024.key opc@129.198.x.192</copy>
+    <copy>ssh -i  C:/Users/MyUser/.ssh/ssh-key-2024.key opc@129.198.47.192</copy>
     ```
 
     ![SSH command](./images/compute-ssh.png "SSH command")
@@ -72,7 +72,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     For example:
 
     ```bash
-    <copy>mysqlsh admin@10.0.x.100</copy>
+    <copy>mysqlsh admin@10.0.1.100</copy>
     ``` 
 
     ![Connect to HeatWave](./images/connect-heatwave-instance.png "Connect to HeatwWave")
@@ -190,7 +190,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     ```
     For example:
 
-    http://129.153.xx.143
+    http://129.153.218.143
     
     ![Test Apache](./images/test-apache.png "Test Apache")
 
@@ -260,7 +260,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     ```
     For example:
 
-    http://129.153.xx.143/info.php
+    http://129.153.218.143/info.php
     
     ![Info.php page output](./images/output-info-php.png "Info.php page output")
 
@@ -323,7 +323,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     ```
     For example:
 
-    http://129.153.xx.143/config.php
+    http://129.153.218.143/config.php
     
     ![config.php page output](./images/output-config-php.png "config.php page output")
 
@@ -374,7 +374,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     ```
     For example:
 
-    http://129.153.xx.143/dbtest.php
+    http://129.153.218.143/dbtest.php
     
     ![dbtest.php page output](./images/output-dbtest-php.png "dbtest.php page output")
 
@@ -430,7 +430,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
 
 8.  Replace the following:
 
-    - **your\_mysql\_host**: Specify the IP address of the HeatWave instance, **heatwave-genai-dbs**. For example, 10.0.x.123.
+    - **your\_mysql\_host**: Specify the IP address of the HeatWave instance, **heatwave-genai-dbs**. For example, 10.0.0.123.
     - **your\_username**: Specify the username you had used for the HeatWave instance. If you arefollowing the lab instructions, specify **admin**.
     - **your\_password**: Specify the pasword you used when creating the HeatWave instance.
     
@@ -452,7 +452,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
 
     For example:
     
-    http://129.153.xx.143/genai_ecommerce_app/ecommerce.php
+    http://129.153.218.143/genai_ecommerce_app/ecommerce.php
 
 2. You'll see a ecommerce page  with a text input field where you can enter reviews. The application will send your review to HeatWave GenAI and analyze the sentiment.
 
