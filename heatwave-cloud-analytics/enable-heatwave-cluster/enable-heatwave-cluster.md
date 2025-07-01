@@ -25,10 +25,10 @@ This lab assumes you have:
 
     ![MDS Menu](images/mds-menu.png)
 
-2. Select the **MDSInstance**
+2. Select the **MySQLInstance**
     ![MDS Details](images/mds-details.png)
 
-3. On the DB System details page of **MDSInstance** , click on the button Add HeatWave Cluster.
+3. On the DB System details page of **MySQLInstance** , click on the button Add HeatWave Cluster.
     ![Add HeatWave](images/heatwave-add.png)
 
 4. You need select the HeatWave shape by clicking "Select Shape" button. 
@@ -49,7 +49,7 @@ This lab assumes you have:
 
 ## Task 2: Accelerate long running queries on HeatWave
 
-1. Before we can explore all the cool features of MySQL HeatWave, we need to load the data from MDS into the HeatWave Cluster so that the data is distributed to the memory of the 2 HeatWave cluster nodes we just added
+1. Before we can explore all the cool features of HeatWave MySQL, we need to load the data from MySQL instance into the HeatWave Cluster so that the data is distributed to the memory of the 2 HeatWave cluster nodes we just added
 
     ```text
     <copy>
@@ -57,7 +57,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    We will use this AutoPilot feature, **heatwave_load** function to offload the data from MDS to the HeatWave cluster
+    We will use this AutoPilot feature, **heatwave_load** function to offload the data from MySQL instance to the HeatWave cluster
 
     ```text
     <copy>
@@ -67,7 +67,7 @@ This lab assumes you have:
 
     ![HeatWave Load](images/heatwave-load.png)
 
-2. We can verify the data offloading from MySQL to HeatWave cluster
+2. We can verify the data offloading from MySQL to the HeatWave clusters
 
     ```text
     <copy>
