@@ -44,14 +44,14 @@ In this lab, you will:
 
     ```
     <copy>
-    wget https://raw.githubusercontent.com/kuanrcl/learning-library/master/data-management-library/mysql/heatwave-cloud-analytics/zeppelin/files/zeppelin-server.yaml
+    wget https://raw.githubusercontent.com/oracle-livelabs/database/main/heatwave-cloud-analytics/zeppelin/files/zeppelin-server.yaml
     </copy>
     ```
 
 3. Download the [Zeppelin ingress YAML](files/zeppelin-ing.yaml) 
     ```
     <copy>
-    wget https://raw.githubusercontent.com/kuanrcl/learning-library/master/data-management-library/mysql/heatwave-cloud-analytics/zeppelin/files/zeppelin-ing.yaml
+    wget https://raw.githubusercontent.com/oracle-livelabs/database/main/heatwave-cloud-analytics/zeppelin/files/zeppelin-ing.yaml
     </copy>
     ```
 

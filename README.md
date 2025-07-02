@@ -1,13 +1,13 @@
 # Welcome
 
-[![](https://oracle-livelabs.github.io/common/images/livelabs-banner-formarketplace.png)](https://developer.oracle.com/livelabs)
+[![](https://oracle-livelabs.github.io/common/images/livelabs-banner-formarketplace.png)](https://livelabs.oracle.com)
 ---
 LiveLabs is the place to explore Oracle's products and services using workshops designed to enhance your experience building and deploying applications on the Cloud and On-Premises.   Our library of workshops cover everything from how to provision the world's first autonomous database to setting up a webserver on OCI, machine learning and much more.  Use your existing Oracle Cloud account, a Free Tier account, or a LiveLabs Sandbox Reservation to build, test, and deploy applications on Oracle's Cloud.
 
 ### How do I get started?
-Visit [LiveLabs](https://developer.oracle.com/livelabs) now to get started.  Workshops are added weekly, please visit frequently for new content.
+Visit [LiveLabs](https://livelabs.oracle.com) now to get started.  Workshops are added weekly, please visit frequently for new content.
 
-[![](https://oracle-livelabs.github.io/common/images/livelabs-new-skin.png)](https://developer.oracle.com/livelabs)
+[![](https://oracle-livelabs.github.io/common/images/livelabs-new-skin.png)](https://livelabs.oracle.com)
 
 
 
@@ -15,7 +15,7 @@ Visit [LiveLabs](https://developer.oracle.com/livelabs) now to get started.  Wor
 Pull requests are currently not being accepted. See [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
-Copyright (c) 2014, 2022 Oracle and/or its affiliates
+Copyright (c) 2014, 2025 Oracle and/or its affiliates
 The Universal Permissive License (UPL), Version 1.0
 See [LICENSE](LICENSE.txt) for details.
 

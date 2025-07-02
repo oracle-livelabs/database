@@ -21,15 +21,20 @@ In this lab, you will:
 
 
 ## Task 1: Alter Table Move
-1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up, skip to step 3.**
+1. **If you already have SQL Developer Web up and are logged in as the NF19C user on the SQL tile, skip to step 4.** If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. 
  
-  ![locate adb](./images/locate-adb.png " ")
+  ![locate adb](./images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
    ![db actions](./images/database-actions.png " ")
+   
+3. Log into Database Actions as the NF19C user. Use the picture below to navigate to the SQL editor
+	![JSON Database Actions](./images/db-actions-logout.png)
+	![JSON Database Actions](./images/login-db.png)
+	![JSON Database Actions](./images/new-sql.png)
 
-3. Let's start by creating a table and moving it offline to get a feel for how a table move works.
+4. Let's start by creating a table and moving it offline to get a feel for how a table move works.
 
     ```
     <copy>
@@ -42,7 +47,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Let's add some data to our table. We will use the **Run Script button** for the remainder of this lab. It's located in the Database Actions console as shown in the GIF below. (F5) works as well
+5. Let's add some data to our table. We will use the **Run Script button** for the remainder of this lab. It's located in the Database Actions console as shown in the GIF below. (F5) works as well
 
     ```
     <copy>
@@ -54,7 +59,7 @@ In this lab, you will:
     ```
     ![run with the script button](./images/run-script.png)
 
-5. Here we will go ahead and add a constraint and create an index on the locations by state. Let's use the **Run script button** as shown above. (F5) works as well.
+6. Here we will go ahead and add a constraint and create an index on the locations by state. Let's use the **Run script button** as shown above. (F5) works as well.
 
     ```
     <copy>
@@ -65,7 +70,7 @@ In this lab, you will:
     ![run with the script button](./images/state-index.png)
 
 
-6. Now that we have some test data, we'll move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location. Let's use the **Run Script button** again 
+7. Now that we have some test data, we'll move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location. Let's use the **Run Script button** again 
 
     ```
     <copy>
@@ -76,7 +81,7 @@ In this lab, you will:
 
     ![run with the script button](./images/unstable-index.png)
 
-7. We will go ahead now and rebuild our indexes. Use the Run Script button and run the commands below to rebuild both.
+8. We will go ahead now and rebuild our indexes. Use the Run Script button and run the commands below to rebuild both.
 
     ```
     <copy>
@@ -87,7 +92,7 @@ In this lab, you will:
 
     ![run with the script button](./images/rebuild.png)
 
-8. Next, we can run the same query as we did earlier to check the status of our indexes. Notice they are both valid. 
+9. Next, we can run the same query as we did earlier to check the status of our indexes. Notice they are both valid. 
     ```
     <copy>
     SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';

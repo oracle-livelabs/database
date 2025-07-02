@@ -14,8 +14,8 @@ Watch the video below for a walk through of the In-Memory External Tables lab:
 
 ### Objectives
 
-- Learn how to enable In-Memory on the Oracle Database
-- Perform various queries on the In-Memory Column Store
+- Learn how to populate external tables with Database In-Memory.
+- See how Database In-Memory can optimize the access of external data, and support both external tables, partitioned external tables and hybrid partitioned tables.
 
 ### Prerequisites
 
@@ -29,15 +29,11 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: In-Memory External Tables
 
 Oracle Database introduced support for populating external tables in the IM column store in Oracle Database Release 18c. Enhancements were made in Oracle Database 21c to support partitioned external tables and hybrid partitioned tables. If you missed what a hybrid partitioned table is, they were introduced in Oracle Database 19c, it is a table that has both internal and external partitions. With external table support Database In-Memory can populate data without first having to load it into Oracle Database. For many customers this is a great benefit because they only need to run analytics on some external data and they don't need that data to reside permanently in Oracle Database. It also allows them to combine analytic queries with other internal database data using all of the tools available with Oracle Database.
 
 In this lab you will see how external tables, partitioned external tables and hybrid partitioned tables work with Database In-Memory.
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the ext-tab folder and log back in to the PDB:
 
@@ -1455,4 +1451,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024

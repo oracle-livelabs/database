@@ -1,0 +1,33 @@
+{
+    "workshoptitle": "How to import JavaScript ES Modules in 23ai FREE and use them in SQL queries!",
+    "help": "livelabs-help-db_us@oracle.com",
+
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to JavaScript ES Modules in 23ai FREE and use them in SQL queries!",
+            "filename": "../../introduction/intro-chance-js.md"
+        },
+        {
+            "title": "Get Started with NoVNC",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        },
+        {
+            "title": "Lab 1: Setup User and ORDS",
+            "description": "Setup User",
+            "filename": "./../../change-pw/change-pw.md"
+        },
+        {
+            "title": "Lab 2: Get Started with Chance",
+            "description": "Setting up",
+            "filename": "../../chance-js/chance-js.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    
+    ]
+}

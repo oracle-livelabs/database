@@ -11,6 +11,8 @@ create examples of both tables.
 
 _Estimated Time:_ 7 minutes
 
+[Walkthrough Lab 03: Create Tables, Load Tables](videohub:1_kon3yjis)
+
 ### Objectives
 
 * Create 2 tables with provisioned reads/sec, writes/sec, and GB storage
@@ -29,7 +31,7 @@ _Estimated Time:_ 7 minutes
 go to **Databases** and then press **Tables** under Oracle NoSQL Database.
 This brings you to the 'Tables' screen where you can create a table from the console.
 
-    ![nosql-tables](./images/nosql-tables.png)
+    ![nosql-tables](https://oracle-livelabs.github.io/common/images/console/nosql-tables.png)
 
 <if type="freetier">
 2. On the 'Tables' screen there is a **Compartment** field on the left.
@@ -386,4 +388,4 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Management, May 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Management, July 2023

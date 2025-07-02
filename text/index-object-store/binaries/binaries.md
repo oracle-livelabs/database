@@ -31,8 +31,8 @@ In this lab, you will:
 
 We have two simple binary files, a PDF file of pangrams, and a zip file containing four text files. Download these to a location on your local machine.
 
-* [pangrams.pdf](https://objectstorage.us-ashburn-1.oraclecloud.com/p/1ggC2PFheJunfA30X-MYL-3Rm8vS_9zyoqOahli8yXV_fD3cM5dP2QlKiizCGvsX/n/c4u04/b/livelabsfiles/o/data-management-library-files/pangrams.pdf "pangrams.pdf download")
-* [files.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/files.zip "files.zip download")
+* [pangrams.pdf](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/pangrams.pdf "pangrams.pdf download")
+* [files.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/files.zip "files.zip download")
 
 I suggest you take a look at those files before we continue. You will find that the PDF file contains the usual list of pangrams, and the zip file consists of three files, with the following text in them:
 
@@ -44,20 +44,6 @@ I suggest you take a look at those files before we continue. You will find that 
 
 1. Log in to the Oracle Cloud.
 
-<if type="freetier">
-
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
-
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
-
-</if>
-<if type="livelabs">
-
-2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
-
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
-
-</if>
 
 3. Click the navigation menu in the upper left to show top-level navigation choices.
 
@@ -186,4 +172,4 @@ If we don't specify **binary_files: true** then the indexing process will simply
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
-- **Last Updated By/Date** - Roger Ford, November 2022
+- **Last Updated By/Date** - Hermann Baer, May 2024

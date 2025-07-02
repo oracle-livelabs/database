@@ -1,36 +1,32 @@
-# Run an XA sample application
+# Run Transfer App which Uses XA
 
 ## Introduction
 
-Run the XA sample application to transfer an amount from one department to another and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
+Run the Transfer application, which uses the XA transaction protocol, to transfer an amount from one department to another. Run this application to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
 
-The sample application code is available in the MicroTx distribution. The MicroTx library files are already integrated with the sample application code.
-
-Estimated Lab Time: *20 minutes*
+Estimated Lab Time: *10 minutes*
 
 Watch the video below for a quick walk-through of the lab.
-[Run an LRA Sample Application](videohub:1_ta8uv36s)
+[Run the Transfer Application](videohub:1_ta8uv36s)
 
-### About XA Sample Application
+### About the Transfer Application
 
-The following figure shows a sample XA application, which contains several microservices.
-![Microservices in the XA sample applications](./images/xa-sample-app-simple.png)
+The following figure shows the various microservices that are available in the Transfer application.
+![Microservices in the Transfer Application](./images/xa-sample-app-simple.png)
 
-The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+The Transfer application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
-For more details, see [About the Sample XA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in the *Transaction Manager for Microservices Developer Guide*.
+For more details, see [About the Transfer Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
 In this lab, you will:
 
-* Build container images for each microservice from the XA sample application code. After building the container images, the images are available in your Minikube container registry.
-* Update the `values.yaml` file, which contains the deployment configuration details for the XA sample application.
-* Install the Sample XA Application. While installing the sample application, Helm uses the configuration details you provide in the `values.yaml` file.
-* Deploy Kiali and Jaeger in your minikube cluster (Optional and if not already deployed)
-* Run an XA transaction to withdraw an amount from Department A and deposit it in Department B.
-* View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the sample application (Optional)
+* Start Minikube. When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
+* Run the Transfer application to start an XA transaction to withdraw an amount from Department A and deposit it in Department B.
+* Visualize the flow of requests (optional).
+* View source code of the Transfer application (optional).
+* Access the Oracle Database instances (optional).
 
 ### Prerequisites
 
@@ -41,7 +37,6 @@ This lab assumes you have:
   * Get Started
   * Lab 1: Prepare setup
   * Lab 2: Environment setup
-  * Lab 4: Provision an Oracle Autonomous Database for use as resource manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
@@ -50,137 +45,40 @@ This lab assumes you have:
   </copy>
   ```
 
-## Task 1: Build Container Images for Sample XA Applications
+## Task 1: Start Minikube
 
-The code for the XA sample application is available in the installation bundle in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java` folder. Build container images for each microservice in the XA sample application.
+Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-package/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
 
-To build container images for each microservice in the sample:
+When you start Minikube, an instance of the Oracle Database 23ai Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses `DEPT1PDB` PDB as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses `DEPT2PDB` PDB as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
 
-1. Run the following commands to build the container image for the Teller application.
+| Account_ID  | Amount    |
+| ----------- | --------- |
+| account5    | 5000      |
+| account4    | 4000      |
+| account3    | 3000      |
+| account2    | 2000      |
+| account1    | 1000      |
+{: title="Amount in the various accounts"}
+
+When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
+
+Follow the instructions in this section to start Minikube, and then verify that all the resources are ready.
+
+1. Click **Activities** in the remote desktop window to open a new terminal.
+
+2. Run the following command to start Minikube.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
+    minikube start
     </copy>
     ```
 
-    ```text
-    <copy>
-    minikube image build -t xa-java-teller:1.0 .</copy>
-    ```
+   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
 
-   When the image is successfully built, the following message is displayed.
+   ![minikube start error](./images/minikube-start-error.png)
 
-   **Successfully tagged xa-java-teller:1.0**
-
-2. Run the following commands to build the Docker image for the Department 1 application.
-
-    ```text
-    <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
-    </copy>
-    ```
-
-    ```text
-    <copy>
-    minikube image build -t department-helidon:1.0 .
-    </copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged department-helidon:1.0**
-
-3. Run the following commands to build the Docker image for the Department 2 application.
-
-    ```text
-    <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
-    </copy>
-    ```
-
-    ```text
-    <copy>
-    minikube image build -t department-spring:1.0 .
-    </copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged department-spring:1.0**
-
-The container images that you have created are available in your Minikube container registry.
-
-## Task 2: Update the values.yaml File
-
-The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the XA sample application.
-
-In the `values.yaml` file, specify the image to pull, the credentials to use when pulling the images, and details to access the resource managers. While installing the sample application, Helm uses the values you provide to pull the sample application images from the Minikube container registry.
-
-To provide the configuration and environment details in the `values.yaml` file:
-
-1. Open the values.yaml file, which is in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts/transfer` folder, in any code editor. This file contains sample values. Replace these sample values with values that are specific to your environment.
-
-2. Provide the details of the ATP database instances, that you have created, in the `values.yaml` file, so that the Department A and Department B sample microservices can access the resource manager.
-
-    * `connectString`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the DB Connection Tab under Connection Strings as shown in screenshot below.
-
-      **Syntax**
-
-        ```text
-        <copy>
-        jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
-        </copy>
-        ```
-
-    * `databaseUser`: Enter the user name to access the database, such as ADMIN. Use ADMIN if you created the tables and inserted sample data in the previous Lab.
-    * `databasePassword`: Enter the password to access the database for the specific user. Use ADMIN user password if you created the tables and inserted sample data in the previous Lab.
-    * `resourceManagerId`: A unique identifier (uuid) to identify a resource manager. Enter a random value for this lab as shown below.
-
-   The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
-
-    ```text
-   <copy>
-    dept1:
-      ...
-      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
-      databaseUser: db_user
-      databasePassword: db_user_password
-      resourceManagerId: 77e75891-27f4-49cf-a488-7e6fece865b7
-    dept2:
-      ...
-      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb4_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
-      databaseUser: db_user
-      databasePassword: db_user_password
-      resourceManagerId: 17ff43bb-6a4d-4833-a189-56ef023158d3
-   </copy>
-    ```
-
-   ![DB connection string](./images/db-connection-string.png)
-
-3. Save your changes.
-
-## Task 3: Install the Sample XA Application
-
-Install the XA sample application in the `otmm` namespace, where you have installed MicroTx. While installing the sample application, Helm uses the configuration details you provide in the values.yaml file.
-
-1. Run the following commands to install the XA sample application.
-
-    ```text
-    <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts
-    </copy>
-    ```
-
-    ```text
-    <copy>
-    helm install sample-xa-app --namespace otmm transfer/ --values transfer/values.yaml
-    </copy>
-    ```
-
-   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application.
-
-2. Verify that the application has been deployed successfully.
+3. Verify that the application has been deployed successfully.
 
     ```text
     <copy>
@@ -188,31 +86,41 @@ Install the XA sample application in the `otmm` namespace, where you have instal
     </copy>
     ```
 
-   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed.
+   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed` as shown in the following image.
 
    **Example output**
 
-   ![Helm install success](./images/helm-install-deployed.png)
+   ![Helm install success](./images/list-pods.png)
 
-3. If you need to make any changes in the `values.yaml` file, then uninstall `sample-xa-app`. Update the `values.yaml` file, and then reinstall the `sample-xa-app`. Perform step 1 as described in this task again to reinstall `sample-xa-app`.  and install it again by perform step 1. Otherwise, skip this step and go to the next step.
-
-    ```text
-    <copy>
-    helm uninstall sample-xa-app --namespace otmm
-    </copy>
-    ```
-
-4. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+4. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
     <copy>
-    kubectl get all -n otmm
+    kubectl get pods -n otmm
     </copy>
     ```
 
-## Task 4: Start a Tunnel
+   **Example output**
 
-Before you start a transaction, you must start a Minikube tunnel.
+   ![Status of pods in the otmm namespace](./images/pod-status.png)
+
+5. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n oracledb
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Database instance details](./images/database-service.png)
+
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1`.
+
+## Task 2: Start a Minikube Tunnel
+
+Before you start a transaction, you must start a Minikube tunnel. You can skip this task if you had started a tunnel earlier while running a lab.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -250,59 +158,35 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 5: Deploy Kiali and Jaeger in the cluster (Optional)
-**You can skip this task if you have already deployed Kiali and Jaeger in your cluster while performing Lab 3. However, ensure you have started Kiali and Jaeger dashboards as shown in steps 4 and 5.** 
-This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
-Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
-You will be able to visualize the service mesh and the distributed traces after you have run the sample application in the following task.
-The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
+## Task 3: Run the Teller Application
 
-1. Deploy Kiali.
+The Teller application is the transaction initiator service, it initiates the XA transaction. When the Teller application runs, it withdraws money from one account and deposits it to another account by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or all actions are rolled back in case of a failure of any one or more actions.
 
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
-    </copy>
-    ```
-2. Deploy Prometheus.
+1. Run the Teller application. Type the URL in the following format, 'http://$CLUSTER_IPADDR/teller', in a new web browser. For example, `http://192.0.2.117/teller`. The Teller application opens as shown in the following figure.
 
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/prometheus.yaml
-    </copy>
-    ```
-3. Deploy Jaeger.
+    ![Teller application](./images/teller-initial.png)
 
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/jaeger.yaml
-    </copy>
-    ```
-4. Start Kiali Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+2. In the **From Account** group, select the account from which you want to transfer an amount.
 
-    ```text
-    <copy>
-    istioctl dashboard kiali
-    </copy>
-    ```
-   An output will show a URL on which you can access the kiali dashboard in a browser tab:
-   http://localhost:20001/kiali
+3. Click **Check Balance**. The current balance in the selected account is displayed.
 
-5. Start Jaeger Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+4. In the **To Account** group, select the account to which you want to transfer the amount.
 
-    ```text
-    <copy>
-    istioctl dashboard jaeger
-    </copy>
-    ```
-   An output will show a URL on which you can access the jaeger dashboard in a browser tab:
-   http://localhost:16686
+5. Click **Check Balance**. The current balance in the selected account is displayed as shown in the following figure.
+    ![Current balance in two accounts](./images/teller-app-balance.png)
 
-## Task 6: Run an XA Transaction
+6. In the **Amount** group, enter the amount that you want to transfer, and then click **Transfer**.
 
-Run an XA transaction When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+    Transfer completed successfully message is displayed as shown in the following image to indicate that the specified amount has been transfered.
+    ![Transfer completed successfully](./images/teller-app-transfer-msg.png)
 
-1. Before you start the transaction, run the following commands to check the balance in Department 1 and Department 2 accounts.
+7. Check the balance of both the accounts once more to verify that the correct updated amount is reflected and to confirm that the transaction was completed successfully.
+
+## Task 4: Use cURL Commands to Run the Transfer Application (Optional)
+
+You can skip this task if you have already completed Task 3. This task provides details to run the Transfer application using cURL commands. When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+
+1. Before you start the transaction, run the following commands to check the balance in the Department 1 and Department 2 accounts.
 
     **Example command to check balance in Department 1**
 
@@ -380,31 +264,99 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
     </copy>
     ```
-## Task 7: View Service Mesh graph and Distributed Traces (Optional)
-You can perform this task only if you have performed Task 5 or have Kiali and Jaeger deployed in your cluster.
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
-1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
-2. Select Graph for the otmm namespace.
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
-4. Select istio-ingressgateway.istio-system from the Service list. You can see the list of traces with each trace representing a request.
-5. Select one of the traces to view.
 
-## Task 8: View source code of the sample application (Optional)
-The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3/samples/xa/java
-- Teller Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
-- Department 1 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
-- Department 2 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
+## Task 5: Visualize the Flow of Requests (Optional)
+
+To visualize the flow of requests between MicroTx and the distributed microservices to book a trip, use Kiali and Jaeger dashboards.
+
+When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus are deployed and configured. The YAML files that contain the configuration information for Kiali, Jaeger, and Prometheus are available in the `$HOME/visualizations` folder.
+
+1. Run the following command to ensure that Kiali, Prometheus, and Jaeger are in the `Running` status.
+
+    ```text
+    <copy>
+    kubectl get pods -n istio-system
+    </copy>
+    ```
+
+    **Example output**
+    ![Kiali, Prometheus, and Jaeger in Running status](./images/visualization-tools-status.png)
+
+2. Start the Kiali Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard kiali
+    </copy>
+    ```
+
+   A URL is displayed.
+
+3. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
+
+4. Select Graph for the `otmm` namespace.
+
+5. Start the Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard jaeger
+    </copy>
+    ```
+
+   A URL is displayed.
+   
+6. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
+7. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
+8. Click **Find Traces**. You can see the list of traces with each trace representing a request.
+9. Select one of the traces to view.
+
+## Task 6: View Source Code of the Transfer Application (Optional)
+
+The source code of the application is present in folder: /home/oracle/OTMM/otmm-package/samples/xa/java
+- Teller Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/teller
+- Department 1 Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/department-helidon
+- Department 2 Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/department-spring
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
+## Task 7: Access the Oracle Database Instances (Optional)
+
+Use tools, such as Oracle Database SQL*Plus, to access the Oracle Database 23ai instances to view the tables and data.
+
+1. Navigate to the folder that contains the scripts.
+
+    ```text
+    <copy>
+    cd $HOME/db_access
+    </copy>
+    ```
+
+2. Run the following command to access `DEPT1PDB` PDB.
+
+    ```text
+    <copy>
+    ./loginDept1PDB.sh 
+    </copy>
+    ```
+
+3. Run the following command to access `DEPT2PDB` PDB.
+
+    ```text
+    <copy>
+    ./loginDept2PDB.sh
+    </copy>
+    ```
+
+If you would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Clean Up**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/24.2.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
-* **Author** - Sylaja Kannan, Principal User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, January 2023
+* **Author** - Sylaja Kannan, Consulting User Assistance Developer
+* **Contributors** - Brijesh Kumar Deo, Bharath MC, Atul Dhiman, and Anand Verma
+* **Last Updated By/Date** - Sylaja Kannan, February 2025

@@ -10,7 +10,7 @@ This lab walks you through the steps to quickly provision an Oracle Autonomous D
 
 Estimated Lab Time: 10 minutes
 
-*Note: While this lab uses ADW, the steps are identical for creating and connecting to an ATP database.*
+**Note:** While this lab uses ADW, the steps are identical for creating and connecting to an ATP database.
 
 ### Objectives
 
@@ -35,11 +35,11 @@ Estimated Lab Time: 10 minutes
 
 4. Make sure your workload type is __Data Warehouse__ or __All__ to see your Autonomous Data Warehouse instances. You can use the __List Scope__ drop-down menu to select a compartment. Select your __root compartment__, or __another compartment of your choice__ where you will create your new ADW instance. If you want to create a new compartment, click [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three). To learn more about compartments, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy).
 
- __Note__ - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+    __Note:__ Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
 5. This console shows the existing databases. If there is a long list of databases, you can filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by __Workload Type__. Here, the __Data Warehouse__ workload type is selected.
 
-    ![You can filter the list of databases](./images/compartment.png " ")
+    ![You can filter the list of databases](./images/Compartment.png " ")
 
 ## Task 2: Create the Autonomous Database Instance
 
@@ -75,14 +75,14 @@ Estimated Lab Time: 10 minutes
 
     - __Always Free__ - Select always free Autonomous Database configuration options.
     - __Choose database version__ - Select a database version from the available versions.
-    - __OCPU count__ - Number of CPUs for your service. For this lab, specify __1 CPU__.
+    - __ECPU count__ - Number of CPUs for your service. For this lab, specify __2 CPU__.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, specify __1 TB__ of storage.
-    - __OCPU Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
+    - __ECPU Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
     - __New Database Preview__ - If a checkbox is available to preview a new database version, do __not__ select it.
 
     **Note**: If you opt for the always free Autonomous Database option, you can only choose the database version, all other configuration options are greyed out.
 
-    ![Configure the database](./images/configure-db.png " ")
+    ![Configure the database](./images/configure-db-ecpu.png " ")
 
 7. Create administrator credentials:
 
@@ -97,21 +97,21 @@ Estimated Lab Time: 10 minutes
     ![Create administrator credentials](./images/create-administrator-credentials.png " ")
 
 8. Choose network access:
-    - For this lab, accept the default, "Secure access from everywhere."
-    - If you want to allow traffic only from the IP addresses and VCNs you specify - where access to the database from all public IPs or VCNs is blocked, select "Secure access from allowed IPs and VCNs only" in the Choose network access area.
-    - If you want to restrict access to a private endpoint within an OCI VCN, select "Private endpoint access only" in the Choose network access area.
-    - If the "Require mutual TLS (mTLS) authentication" option is selected, mTLS will be required to authenticate connections to your Autonomous Database. TLS connections allow you to connect to your Autonomous Database without a wallet, if you use a JDBC thin driver with JDK8 or above. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
+    - For this lab, accept the default, **Secure access from everywhere**.
+    - If you want to allow traffic only from the IP addresses and VCNs you specify - where access to the database from all public IPs or VCNs is blocked, select **Secure access from allowed IPs and VCNs only** in the Choose network access area.
+    - If you want to restrict access to a private endpoint within an OCI VCN, select **Private endpoint access only** in the Choose network access area.
+    - If the **Require mutual TLS (mTLS) authentication** option is selected, mTLS will be required to authenticate connections to your Autonomous Database. TLS connections allow you to connect to your Autonomous Database without a wallet, if you use a JDBC thin driver with JDK8 or above. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
 
     ![Choose the network access type.](./images/choose-network-access.png " ")
 
-9. Choose a license type. For this lab, choose __License Included__. The two license types are:
+9. Choose a license type. For this lab, keep the license type as __License Included__. The two license types are:
 
     - __Bring Your Own License (BYOL)__ - Select this type when your organization has existing database licenses.
     - __License Included__ - Select this type when you want to subscribe to new database software licenses and the database cloud service.
 
     ![Choose a license type.](images/choose-license-type.png)
 
-10. For this lab, do not provide a contact email address. The "Contact Email" field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.
+10. For this lab, do not provide a contact email address. The **Contact Email** field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.
 
     ![Do not provide a contact email address.](images/contact-email-field.png)
 
@@ -132,4 +132,4 @@ Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-clo
 ## Acknowledgements
 
 - **Author** - Richard Green, Principal Developer, Database User Assistance
-- **Last Updated By/Date** - Shilpa Sharma, March 2023
+- **Last Updated By/Date** - Katherine Wardhana, User Assistance Developer, February 2024

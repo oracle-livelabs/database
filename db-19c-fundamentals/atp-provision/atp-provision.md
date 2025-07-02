@@ -2,6 +2,10 @@
 
 ## Introduction
 
+> **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
+
+> [Oracle Database 23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
+
 This lab provides a step-by-step guide to help you get started using the Oracle Autonomous Database (Autonomous Data Warehouse [ADW] and Autonomous Transaction Processing [ATP]) on Oracle Cloud. In this lab, you will learn how to provision a new ATP instance.
 
 **Note:** While this lab uses ATP, the steps are the same for creating an ADW database.
@@ -62,12 +66,12 @@ In this lab, you will:
 
 3. Specify basic information for the autonomous database:
 
-    | **Field**  | **Value** | Note |
-    |---|---|---|
-    | Compartment | (Defaut) | |
-    | Display Name | `OCIDemo` | Enter a memorable name for the database for display purposes |
+    | **Field**     | **Value** | Note                                                                                   |
+    | ------------- | --------- | -------------------------------------------------------------------------------------- |
+    | Compartment   | (Defaut)  |                                                                                        |
+    | Display Name  | `OCIDemo` | Enter a memorable name for the database for display purposes                           |
     | Database Name | `OCIDEMO` | Use letters and numbers only, starting with a letter. Maximum length is 14 characters. |
-    |
+    |               |
 
 
 4. Choose a workload type. Select the workload type for your database from the choices:
@@ -87,9 +91,9 @@ In this lab, you will:
 
 6. Configure the database:
 
-    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, we recommend you check **Always Free** option.
+    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with at least 2 CPUs and 20 GB of storage. For this lab, we recommend you check **Always Free** option.
     - **Choose database version** - Select database version 19c from the available versions.
-    - **OCPU count** - Number of CPUs for your service. For this lab, specify **1 CPU**. If you choose an Always Free database, it comes with 1 CPU.
+    - **ECPU count** - Number of CPUs for your service. For this lab, specify **2 CPUs**. If you choose an Always Free database, it comes with at least 2 CPUs.
     - **Storage (TB)** - Select your storage capacity in terabytes. For this lab, specify **1 TB** of storage. Or, if you choose an Always Free database, it comes with 20 GB of storage.
     - **Auto Scaling** - For always free accounts (this lab), auto scaling will be disabled.
     - **New Database Preview** - If a checkbox is available to preview a new database version, do NOT select it.
@@ -120,45 +124,34 @@ In this lab, you will:
 
 
 
-9. Choose a license type. For this lab, choose **License Included**. The two license types are:
+9. Choose a license type. For this lab, accept **License Included**. The two license types are:
 
 
     - **Bring Your Own License (BYOL)** - Select this type when your organization has existing database licenses.
-    - **License Included** - Select this type when you want to subscribe to new database software licenses and the database cloud service.
-
-
-
-    ![Select Network Access](./images/create-adb-license-type.png " ")
+    - **License Included** - Select this type when you want to subscribe to new database software licenses and the database cloud service. (This is free!)
 
 
 10. Click **Create Autonomous Database**.
 
     ![Create Autonomous Database](./images/create-adb.png " ")
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, OCPU count, and storage size.
-
-
-    ![Show Autonomous Database](images/adb-available-freetier.png)
-
-
-You may  *proceed to the next lab*.
+11.  Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, ECPU count, and storage size.
 
 ## Task 3: Create the Lab User
 1. After your Autonomous Database has finished provisioning, click on the **Database Actions** button located at the top of the screen. 
 
 	![Database Action](./images/database-actions.png)
 
-2. If you're not automatically logged in, sign in as ADMIN. Your password will be the password you specified when you created the database.
+2. If you're not automatically logged in, double check your browser didnt block the popup. If it did, close out the new tab and select **Database Actions** and click SQL again.
 
-	![Database Actions Login](./images/db-actions-login.png)
 
 3. (Optional database password reset) If you need to reset your database password, it's very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
 
 	![Reset DB Password](./images/db-password-reset.png)
 
-4. Once logged in as the Admin user, we can create our workshop user one of two ways. Either by writing sql statements or by using  Database Users tile in Database Actions. We'll do that later. Scroll down on the Database Actions page to the **Database Users** tile under the Administration Section and select it.
+4. Once logged in as the Admin user, we can create our workshop user one of two ways. Either by writing sql statements or by using  Database Users tile in Database Actions. We'll do that latter. SPress the hamburger menu icon in the top left and select **Database Users** 
 
-    ![Select the Database Users tile](./images/database-users.gif)
+    ![Select the Database Users tile](./images/database-users.png)
 
 5. Here we'll create our lab user. **Select Create User**
 
@@ -216,47 +209,37 @@ To make this workshop as realistic as possible, let us introduce the business sc
 
 Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets and phones where they are presented with a targeted list of movies based on their past viewing habits. The company is now looking for better, smarter ways to track performance, identifying customers to target with campaigns that promote new services, new movies and new viewing platforms. Many of the scenarios in this workshop will be based on challenges companies are seeing in their own businesses, and we hope the following labs and accompanying workshops will give you some insight into how Oracle can help you solve these common everyday business and technical challenges.
 
-1. Now that we're signed in as user **NF19C** we can load our data. Select the Data Load card.
+1. Now that we're signed in as user **NF19C** we can load our data. From the launchpad select Select the Data Load card and press open.
 
 	![Selecting the Data Load Card on the right side of the screen ](./images/load-data.png)
 
-2. To make things easier, the data needed for today's lab is stored in Oracle's Object Storage. Scroll down and select **Cloud Locations**.
+2. To make things easier, the data needed for today's lab is stored in Oracle's Object Storage. Select **Load Data**.
 
-	![select cloud storage ](./images/cloud-locations.gif)
+	![select cloud storage ](./images/cloud-locations.png)
 
-3. Select **Add Cloud Store Location** in the top right and fill in the following:
-    * Name: MovieStreamLanding
-    * **Public Bucket**
-    * Bucket URI
+3. Select **Cloud Storage** in the top tab bar and paste the link in the empty square and press 'enter' **on your keyboard**
 
-    	```
+    ```
 	<copy>
 		https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o
 	</copy>
 	```
 
-    ![Adding the cloud Bucket URI ](./images/cloud-bucket.png)
+    ![Adding the cloud Bucket URI ](./images/cloud-bucket1.png)
 
-4. Using the navigation bar on the left, select **Data Load** and **Load Cloud Store**
 
-	![load cloud data ](./images/load-cloud-data.png)
-
-5. Drag and drop the **customer_contact, custsales, genre,** and **movie** folders into the data loading area. **Select yes** when prompted if you would like to load an object in the folder to the table or SODA Collection. Once all the folders have been moved to the loading area and **press start and run**.
+4. Drag and drop the **customer_contact, custsales, genre,** and **movie** folders into the data loading area. **Select yes** when prompted if you would like to load an object in the folder to the table or SODA Collection. Once all the folders have been moved to the loading area and **press start and run**.
 
 
 	![Drag and drop the folders into the data loading tool ](./images/drag-and-drop-data.gif)
 
-6. Wait for the jobs to finish running. Depending on the size of the database the jobs may take longer may take up to ~7 min to complete.  
+5. Wait for the jobs to finish running. Depending on the size of the database the jobs may take longer may take up to ~7 min to complete.  
 
-7. Once the Jobs have finished - click the launchpad in the top left corner to go back to the database actions home screen.
+6. Once the Jobs have finished - click the hamburger menu in the top left corner and Select the SQL tile. 
 
 	![Click the word Oracle in the top left](./images/launchpad.png)
 
-8. Select the SQL tile. 
-
-	![Select the SQL tile ](./images/sql.png)
-
-9. run the following SQL to verity the data was loaded into the NF19C user. 
+7. run the following SQL to verity the data was loaded into the NF19C user. 
 
     ```
 	    <copy>
@@ -293,4 +276,4 @@ Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-
 
 - **Author** - Killian Lynch, Oracle Database Product Management
 - **Contributors** - 
-- **Last Updated By/Date** - Killian Lynch (February 2023)
+- **Last Updated By/Date** - Killian Lynch (June 2024)

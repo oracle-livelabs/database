@@ -6,6 +6,10 @@ This lab walks you through a Video on Demand streaming application demo created 
 
 ![component-arch](images/component-arch.png)
 
+_Estimated Time:_ 12 minutes
+
+[Walkthrough Lab 01: Video on Demand streaming - Activity Tracking Demo](videohub:1_91x8kepr)
+
 ### Activity Tracking service
 
 Consider a Video on Demand streaming application. It streams various shows that customers across the globe watch. Shows can have a number of seasons and a season can have multiple episodes. You need a modern, persistent meta-data store to keep track of customer activity.
@@ -14,7 +18,6 @@ In general, customers are interested in tracking things like: the episodes they 
 
 The streaming application backend collects data so reports such as, which is the most popular show and what is the average watch time of a show, can be generated.
 
-_Estimated Time:_ 12 minutes
 
 ### Serverless Logic Tier
 
@@ -34,10 +37,9 @@ with the rapidly changing requirements of the clients that access them, such as,
 
 For those applications, we looked for a solution that minimized the data transferred over the network and allowed users to query data easily using an API directly.
 
-GraphQL is an open-source data query and manipulation language for APIs, and a runtime for fulfilling those queries
-with existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
-
-GraphQL is often confused with being a database technology. GraphQL isn't tied to any specific database or storage engine and is instead backed by your existing data. You can code with GraphQL engines available in many languages.
+GraphQL is an open-source data query and manipulation language for APIs you can code in many different languages.
+GraphQL provides a complete and easy to understand description of the data in your API, while providing runtime capabilities to fulfill queries with existing data. 
+Although GraphQL is often confused with being a database technology, GraphQL isn't tied to any specific database or storage engine, but instead is backed by your existing data.
 
 In this demo, we will learn how easy it is develop the Activity Tracking service using Node.Js, ApolloServer and Oracle NoSQL Database.
 
@@ -78,12 +80,12 @@ This particular application came to the NoSQL team from an internal Oracle team 
 
 When we thought about this for a little bit, we realized that this was a perfect use case for NoSQL. Many Video on Demand services are now offering real time activity tracking. When you use their application, you get close to a real time feed of your viewing behaviors.
 
-What are a few goals of this application:
+1. Read the following bullet points to understand a few goals of this application:
 
-  - Predictable low latency
-  - Scalable to your user base
-  - Highly available
-  - Auto expiry of the data
+    * Predictable low latency
+    * Scalable to your user base
+    * Highly available
+    * Auto expiry of the data
 
 
 ## Task 2: Explore data using GraphQL queries
@@ -120,38 +122,36 @@ With developer tools, you can know exactly what data you can request from your A
 
 ## Task 3: Ask for what you need, get exactly that
 
-By default, it may put you in a spot where it wants you to execute an Example Query.  Under "Documentation" you will see something similar to this image below.
+1. By default, it may put you in a spot where it wants you to execute an Example Query.  Under "Documentation" you will see something similar to this image below.
 
-![Sandbox start](images/sandbox-start.png)
+  ![Sandbox start](images/sandbox-start.png)
 
-If that is the case, click on the arrow next to "Query" and it will place you into "Root."  Now that you have moved over to "Root", watch the animated gif below.  This walks you through the steps of triggering a query.  You will build a query from scratch by hitting "Query", then adding the "Streams" array, followed by adding several fields to display.   Finally you will hit the "Query" button to execute the query.   You will see the results of your query to the right.  Feel free to select different fields and re-execute your query and watch how the results change.  
+2. If that is the case, click on the arrow next to "Query" and it will place you into "Root."  Now that you have moved over to "Root", watch the animated gif below.  This walks you through the steps of triggering a query.  You will build a query from scratch by hitting "Query", then adding the "Streams" array, followed by adding several fields to display.   Finally you will hit the "Query" button to execute the query.   You will see the results of your query to the right.  Feel free to select different fields and re-execute your query and watch how the results change.  
 
-Hopefully you see, it is easy to build a GraphQL query in your API and get exactly what you need, nothing more and nothing less. GraphQL queries always return predictable results. Apps using GraphQL are fast and stable because they control the data they get, not the server.  
+  Hopefully you see, it is easy to build a GraphQL query in your API and get exactly what you need, nothing more and nothing less. GraphQL queries always return predictable results. Apps using GraphQL are fast and stable because they control the data they get, not the server.  
 
 
-![Simple query](images/capture-graphql-simple-query.gif)
+  ![Simple query](images/capture-graphql-simple-query.gif)
 
 ## Task 4: Get many resources in a single request
 
-GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request.  This makes GraphQL Apps much more efficient than REST based Apps, especially in slow network environments.  In the animated gif below we are going to build a query that includes the people watching shows from the US.   After executing that request we are to add another resource to the original request and grab the watch time of various shows.   We will then execute the request again, thus demonstrating getting different resources from a single request.   Follow along and build this request in your environment.
+1. GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request.  This makes GraphQL Apps much more efficient than REST based Apps, especially in slow network environments.  In the animated gif below we are going to build a query that includes the people watching shows from the US.   After executing that request we are to add another resource to the original request and grab the watch time of various shows.   We will then execute the request again, thus demonstrating getting different resources from a single request.   Follow along and build this request in your environment.
 
-![Multiple queries in one](images/capture-graphql-multi-query.gif)
+  ![Multiple queries in one](images/capture-graphql-multi-query.gif)
 
 ## Task 5: Describe what’s possible with a type system
 
-GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.  We can take a look at the schema, and see the different fields and their associated types.  To move to the schema view, click the button marked in the graphic below.
+1. GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.  We can take a look at the schema, and see the different fields and their associated types.  To move to the schema view, click the button marked in the graphic below.
 
-![Sandbox start](images/schema.png)
+  ![Sandbox start](images/schema.png)
 
+2. After you do that, click on the SDL tab.
 
-After you do that, click on the SDL tab.
+  ![Sandbox start](images/schema-SDL.png)
 
-![Sandbox start](images/schema-SDL.png)
+3. Next you should see something similar to the below image.   Go ahead and scroll through the list and review the different parts of the schema.
 
-
-Next you should see something similar to the below image.   Go ahead and scroll through the list and review the different parts of the schema.
-
-![graphql-schema](images/capture-graphql-schema.png)
+  ![graphql-schema](images/capture-graphql-schema.png)
 
 
 ## Task 6: Test using an unique URL
@@ -160,41 +160,41 @@ In the previous tasks, we looked at the flexibility and the power of GraphQL to 
 
 Now, explore the queries that we will use in the next Lab.
 
-Open the [demo-streaming.json](files/demo-streaming.json) file in another tab on
+1. Open the [demo-streaming.json](files/demo-streaming.json) file in another tab on
 your browser
 
-![demo-streaming-json](images/capture-demo-streaming-json.png)
+  ![demo-streaming-json](images/capture-demo-streaming-json.png)
 
-If you prefer, you can use an API tool like Postman
+  If you prefer, you can use an API tool like Postman
 
-![graphql-url](images/capture-graphql-url.png)
+  ![graphql-url](images/capture-graphql-url.png)
 
 
 ## Task 7: Key takeaways
 
-1. While this was a simple demo, it used many components that are available in Oracle Cloud Infrastructure today.
+  1. Read the following information.
 
-  * The Activity Tracking application is running live in all Oracle Cloud Infrastructure Regions
-  * The Activity Tracking application uses Oracle Cloud Infrastructure traffic Management for
-  Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure region
-  * The Activity Tracking uses Oracle Cloud Infrastructure API gateway
-  * Data is stored in Oracle NoSQL Cloud Service as JSON documents
-  * GraphQL is a query language for your APIs, which provides a complete and understandable description of the data in your API.  It is easy to integrate with the Oracle NoSQL Database Cloud Service.
+    While this was a simple demo, it used many components that are available in Oracle Cloud Infrastructure today.
+    * The Activity Tracking application is running live in all Oracle Cloud Infrastructure Regions
+    * The Activity Tracking application uses Oracle Cloud Infrastructure traffic Management for
+Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure region
+    * The Activity Tracking uses Oracle Cloud Infrastructure API gateway
+    * Data is stored in Oracle NoSQL Cloud Service as JSON documents
+    * GraphQL is a query language for your APIs, which provides a complete and understandable description of the data in your API.  It is easy to integrate with the Oracle NoSQL Database Cloud Service.
 
-  The benefits to customers are shown in this slide.
+    The benefits to customers are shown in this slide.
 
       ![benefits](images/benefits.png)
 
-You may now **proceed to the next lab.**
+    You may now **proceed to the next lab.**
 
 ## Learn More
-
+* [About GraphQL](https://graphql.org/)
+* [What is the GraphQL Foundation?](https://graphql.org/foundation/)
 * [About Architecting Microservices-based applications](https://docs.oracle.com/en/solutions/learn-architect-microservice/index.html)
 * [Speed Matters! Why Choosing the Right Database is Critical for Best Customer Experience?](https://blogs.oracle.com/nosql/post/speed-matters-why-choosing-the-right-database-is-critical-for-best-customer-experience)
 * [About Security, Identity, and Compliance](https://www.oracle.com/security/)
 * [Application Development](https://www.oracle.com/application-development/)
-
-### Services
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
@@ -202,13 +202,10 @@ You may now **proceed to the next lab.**
 * [About Container Engine for Kubernetes (OKE)](https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/)
 * [About Container Instance](https://www.oracle.com/cloud/cloud-native/container-instances/)
 
-* [AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
-* [Media Streams](https://www.oracle.com/cloud/media-streams/)
-
-
-### References
+* [About AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
+* [About Media Streams](https://www.oracle.com/cloud/media-streams/)
 
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, July 2023

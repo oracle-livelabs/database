@@ -4,7 +4,7 @@
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
+      "description": "About the workshop and description of the Bank and Stock-Trading application.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -13,7 +13,7 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
-      "title": "Lab 1: Prepare",
+      "title": "Lab 1: Prepare Setup",
       "description": "How to download your ORM stack and update security rules for an existing VCN",
       "filename": "../../prepare-setup/prepare-setup.md"
     },
@@ -23,13 +23,12 @@
       "filename": "../../setup-compute/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 3: Integrate MicroTx Client Libraries with XA Sample Application",
+      "title": "Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice",
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
-      "title": "Lab 4: Provision Autonomous Databases for use as Resource Manager",
-      "type": "tenancy",
-      "filename": "../../adb-provision/adb-provision.md"
+      "title": "Lab 4: Deploy the Bank and Stock-Trading Application",
+      "filename": "../../deploy-stock-trading-app/deploy-stock-trading-app.md"
     },
     {
       "title": "Lab 5: Trade Stocks with the Bank and Stock-Trading Application",
@@ -38,7 +37,7 @@
     {
       "description": "Cleanly dispose all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 6: Clean Up the Environment"
+      "title": "Lab 6: Clean Up"
     },
     {
       "title": "Need help?",

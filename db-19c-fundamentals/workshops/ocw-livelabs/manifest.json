@@ -10,7 +10,7 @@
         }, {
             "title": "Getting Started",
             "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/pre-register-free-tier-account.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
        {
         "title": "Lab: 19C Setup",
@@ -33,8 +33,10 @@
         "filename": "../../cleanup/terminate-adb-bucket.md"
     },
     {
-        "title": "Oracle CloudWorld 2022 - Get Help",
-        "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
+
     ]
 }
