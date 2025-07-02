@@ -124,7 +124,7 @@ In this lab, you will:
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, HeatWave Data Architect , MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
