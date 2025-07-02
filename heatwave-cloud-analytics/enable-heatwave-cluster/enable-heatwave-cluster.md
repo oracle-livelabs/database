@@ -33,9 +33,11 @@ This lab assumes you have:
 
 4. You need select the HeatWave shape by clicking "Select Shape" button. 
     ![Select Shape](images/heatwave-select-shape.png)
+
    Next, you would select the HeatWave.512GB shape and click on the "Select a shape" button
     ![Confirm Shape](images/heatwave-shape-confirm.png)
-   Once you selected the HeatWave shape, specify the number of nodes to 2, and confirm the settings and click on "Add HeatWave cluster"
+
+   Once you have selected the HeatWave shape, specify the number of nodes to **2**, confirm the settings and click on "Add HeatWave cluster"
     ![Review HeatWave](images/heatwave-review.png)
 
 5. You will be brought back to the main page where you can check for the creation status. You should see the nodes in **Creating** status after a few minutes.

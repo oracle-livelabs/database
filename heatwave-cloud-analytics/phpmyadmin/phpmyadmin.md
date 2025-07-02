@@ -115,9 +115,9 @@ In this lab, you will:
 
 7. Access the deployed phpMyAdmin application using your browser, **http:://&lt;PUBLIC&#95;IP of Operator VM&gt;:8080/**. Enter MySQL admin user, **admin**, and default password **Oracle#123**
 
-  ![PhpMyAdmin](images/phpmyadmin.png)
+    ![PhpMyAdmin](images/phpmyadmin.png)
 
-  Congratulations! You have completed all the labs.
+    Congratulations! You have completed all the labs.
 
 ## Acknowledgements
 
