@@ -31,12 +31,12 @@ In this lab, you will provision the following OCI resources using Resource Manag
 
 2. Sign in to **Oracle Cloud** if you haven't yet. On the page of 'Create Stack', check to accept terms, give a name to your stack (e.g. "Analytics on OKE"), select the compartment (e.g. HOL-compartment) to provision OCI resources, and click **Next**
 
-    ![Stack Information](images/resouce-manager-stack-info.png)
+    ![Stack Information](images/resource-manager-stack-info.png)
 
 
 3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123). Specify the [supported kubernetes version](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengaboutk8sversions.htm#supportedk8sversions), for example, 1.33.1 and click **Next**.
 
-    ![Stack Variables](images/resouce-manager-stack-variables.png)
+    ![Stack Variables](images/resource-manager-stack-variables.png)
     > **Note**: Oracle recommends that you use the most recent Kubernetes version that Container Engine for Kubernetes supports
 
 

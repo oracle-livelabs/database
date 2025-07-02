@@ -174,15 +174,18 @@ This lab assumes you have:
 
 1. Select **Data Sources** from the **Settings** on the left menu
 
-    ![Add Datasource](images/select-datasource.png =300x100)
+    ![Add Datasource](images/select-datasource.png)
 
 2. Click "**Add data source**" button
+
     ![Add Datasource](images/add-datasource.png)
 
 3. Enter **mysql** in the filter textbox to search for MySQL data source. Click on **Select** button on **MySQL** datasource
+
     ![Choose MySQL](images/select-mysql-datasource.png)
 
 4. Fill in the **MySQL Connection** details with MySQL's IP address, port, username and password details
+
     ![Fill MySQL](images/mysql-datasource-details.png)
 
 ## Task 5: Execute dashboard script

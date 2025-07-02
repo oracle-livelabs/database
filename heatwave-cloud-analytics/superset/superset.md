@@ -155,35 +155,44 @@ This lab assumes you have:
 1. Login to OCI Console, select the **Hamburger Menu** ![OCI Menu](images/hamburger.png), type in **mysql** in the seach bar, select **DB System**
 
 2. Click on **MySQLInstance**
+
     ![DB System](images/oci-mysql-dbsystem.png)
 
 3. Select the "Connection" tab and note down the **Private IP Address** for MySQL HeatWave
-    ![DB System](images/oci-mysql-dbsystem-ip.png)
+
+    ![Connection](images/oci-mysql-dbsystem-ip.png)
 
 4. Point your browser to http://&lt;public IP of **oke-operator** &gt;:8088
 
 5. Click on **+**, expand on **Data**, and select **Connect database**
-    ![Connect Database Menu](images/superset-add-database-menu.png)
 
-6. Select **MySQL**
+    ![Connect Database Menu](images/superset-add-database-menu.png)   
+
+6. Select **MySQL** 
+
     ![Connect MySQL database](images/superset-connect-mysql.png)
 
 7. Specify details of your MySQL HeatWave (You can get the private ip address of MySQL HeatWave in Lab 2, Task 2). Click on **Connect** to test the connection
+
     ![MySQL Details](images/superset-mysql-details.png)
 
 8. Click **Finish** on successful connection to MySQL
+
     ![Connect Success](images/superset-mysql-connect-success.png)
 
 ## Task 6: Execute SQL
 
 1. Expand **SQL Lab** in Superset dashboard, and select **SQL Editor**
+
     ![SQL Editor menu](images/superset-sqllab-menu.png)
+
     ![SQL Editor menu](images/superset-sql-editor.png)
 
 2. Select **MySQL** as Database, **airportdb** as schema. You can start executing SQL in the **SQL Editor**
+
     ![SQL Editor test](images/superset-sql-editor-test.png)
 
-  You may now **proceed to the next lab.**
+    You may now **proceed to the next lab.**
 
 ## Acknowledgements
 
