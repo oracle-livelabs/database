@@ -31,7 +31,7 @@ During export and import, Data Pump may face errors or situations that can't be 
     </copy>
     ```
 
-    * The last line for *schemas_import_nfs.log* says *successfully completed*.
+    * The last line for *schemas\_import\_nfs.log* says *successfully completed*.
     * There were no errors.
 
 ## Task 2: Revisiting the CPAT checks.

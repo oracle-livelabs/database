@@ -25,7 +25,7 @@ This lab assumes:
 
 CPAT tool is available in *My Oracle Support*, on Doc ID 2758371.1.
 
-![CPAT](./images/mos.png)
+![CPAT](images/mos-cpat.png)
 
 The tool was already pre-downloaded on this lab and is available at */home/oracle/scripts/*.
 
@@ -34,7 +34,9 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     ``` shell
     <copy>
     mkdir -p /home/oracle/cpat
+
     unzip /home/oracle/scripts/p32613591_112048_Generic.zip -d /home/oracle/cpat
+
     ls -l /home/oracle/cpat
     </copy>
 
@@ -158,8 +160,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
     ``` shell
     <copy>
-    cd ~/cpat_output/1_generic/
-    cat premigration_advisor_summary_report.txt
+    cat ~/cpat_output/1_generic/premigration_advisor_summary_report.txt
     </copy>
 
     # Be sure to hit RETURN
@@ -169,7 +170,9 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
     ``` shell
     <copy>
-    head -n 100 RED/RED_premigration_advisor_report.txt
+    ls -1 ~/cpat_output/1_generic/RED/
+
+    head -n 100 ~/cpat_output/1_generic/RED/RED_premigration_advisor_report.txt
     </copy>
 
     # Be sure to hit RETURN
@@ -342,7 +345,9 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     ``` shell
     <copy>
     . cdb23
+
     ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix blue
+
     ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix red
     </copy>
 
@@ -433,7 +438,9 @@ So, let's create a CPAT report where we only list issues for this specific migra
     ``` shell
     <copy>
     . cdb23
+
     ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod DATAPUMP --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix blue
+
     ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod DATAPUMP_DBLINK --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix red
     </copy>
 

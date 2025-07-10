@@ -41,7 +41,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
     - The *RED* local PDB to *RUBY* running on ADB using Data Pump with Database Links.
     - The *BLUE* local PDB to *SAPPHIRE* running on ADB using Data Pump with files over NFS.
 
-    ![Migration Strategy](./images/migration.png)
+    ![Migration Strategy](images/migration.png)
 
     We will explore using both a dump file in a shared NFS, as using the database link to move the data.
 
@@ -91,6 +91,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
     ```
     <copy>
     alter session set container=BLUE;
+
     select username
       from dba_users
      where oracle_maintained='N'
@@ -103,7 +104,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
     ```
 
     * `ADMIN` is the default PDB_DBA user on a PDB.
-    * `BI`, `HR`, `IX`, `OE`, `PM` and `SH` are sample schemas that we will move later to ADB.
+    * `BI`, `HR`, `IX`, `PM` and `SH` are sample schemas that we will move later to ADB.
     
     <details>
     <summary>*click to see the output*</summary>
@@ -114,7 +115,6 @@ For moving a database to ADB, we need to perform basically 4 steps:
     BI
     HR
     IX
-    OE
     PM
     SH
     ```
@@ -125,6 +125,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
     ```
     <copy>
     alter session set container=RED;
+
     select username
       from dba_users
      where oracle_maintained='N'
@@ -168,8 +169,11 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     ```
     <copy>
     . adb
+
     echo $TNS_ADMIN
+
     ls -l $TNS_ADMIN
+
     cat $TNS_ADMIN/tnsnames.ora
     </copy>
 
@@ -331,6 +335,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     ```
     <copy>
     connect admin/Welcome_1234@ruby_tp
+
     select username
       from dba_users
      where oracle_maintained='N'

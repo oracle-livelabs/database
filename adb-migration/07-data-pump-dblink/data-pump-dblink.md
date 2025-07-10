@@ -2,8 +2,6 @@
 
 ## Introduction
 
-Now, after performing all the analysis, it's time to start our migration.
-
 In this lab, we will migrate the *RED* PDB to the *RUBY* ADB using Data Pump with database link.
 
 Differently from the "file method", with a database link, you don't need to create intermediate dump files. This makes this method very fast for smaller databases as we read and load at the same time.
@@ -36,7 +34,7 @@ To create a database link from Autonomous Database to another non-ADB database, 
 
 How it works? With Mutual TLS (mTLS), both the server and the client present certificates. They mutually authenticate each other. In this case, not only the *RUBY* database wallet would be required, but also the *RED* database wallet.
 
-All the databases used on this lab are listening also on port 1522 using mTLS. We can chech that using lsnrctl:
+All the databases used on this lab are listening also on port 1522 using mTLS. We can check that using *lsnrctl*:
 
 1. Use the *blue* 🟦 terminal. Check that *RED* database also authenticates using mTLS.
 
@@ -155,7 +153,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     ```
     </details>
 
-    For this lab, we generated a wallet in advance with the certificate to connect on this server. The wallet is located under */home/oracle/client_tls_wallet*.
+    For this lab, we generated a wallet in advance with the certificate to connect on this server. The wallet is located under */home/oracle/client\_tls\_wallet*.
 
     Connecting using the wallet:
 
@@ -270,6 +268,9 @@ First, we need to upload the *RED* wallet to ADB directory.
     -- Be sure to hit RETURN
     ```
 
+    * *adb-07-upload\_file.sql* will upload a file to an *Oracle Directory* using SQLcl and JavaScript.
+    * The script converts the local file into a BLOB and writes using *UTL\_FILE.PUT\_RAW*.
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -356,6 +357,7 @@ First, we need to upload the *RED* wallet to ADB directory.
         directory_name => 'RED_DBLINK_WALLET_DIR');
     end;
     /
+
     select * from dual@SOURCE_DBLINK;
     </copy>
 
@@ -394,6 +396,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     ``` shell
     <copy>
     create directory nfs_dir as 'nfs';
+
     begin
       dbms_cloud_admin.attach_file_system (
           file_system_name      => 'nfs',
@@ -403,6 +406,7 @@ First, we need to upload the *RED* wallet to ADB directory.
       );
     end;
     /
+
     select * from dbms_cloud.list_files('nfs_dir');
     </copy>
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now, it's time to start our migration of our *BLUE* PDB. This one is more complex than the *RED*.
+Now, after performing all the analysis, it's time to start our migration.
 
 In this lab, we will migrate the *BLUE* PDB to the *SAPPHIRE* ADB using Data Pump using NFS share.
 
@@ -65,6 +65,8 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     # Be sure to hit RETURN
     ```
+
+    * You should list one single file named *WORKING* on the NFS directory.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -138,7 +140,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     ```
     * *logtime* and *metrics* for a better verbose output.
     * *dumpfile=schemas\_export\_%L.dmp* and *parallel=2* to use parallelism.
-    * *flashback\_time* for having a consistent output.
+    * *flashback\_time* for having a consistent data output.
 
     <details>
     <summary>*click to see the output*</summary>

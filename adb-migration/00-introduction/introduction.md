@@ -14,18 +14,18 @@ In this workshop, you will:
 
 * Learn about the ADB architecture
 * Check your environment for readiness before you move
-* Use Cloud Migration Analyser to get the recommended move approach
-* Check if the latency between your system and ADB is acceptable.
+* Use Cloud Migration Analyzer to get the recommended move approach
+* Check if the latency between your system and ADB is acceptable
 * Export data with Data Pump and import into ADB
 * Move data using Data Pump with DB Link method
-* Monitor, troubleshoot and analyse ADB performance
+* Monitor, troubleshoot and analyze ADB performance
 
 ## About the workshop contents
 
-This workshop comes with pre-installed Oracle homes and pre-created databases. The 2 Automous Database instances are running on podman the Autonomous Database Free Container Image.
+This workshop comes with pre-installed Oracle homes and pre-created databases. The 2 Autonomous Databases instances are running on *podman* the Autonomous Database Free Container Image.
 You can switch between environments using the shortcuts shown in the last column of the diagram below.
 
-![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
+![Overview of the Oracle Homes and databases in the lab](images/introduction-overview.png " ")
 
 ## Learn More
 

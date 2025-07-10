@@ -70,8 +70,11 @@ This lab assumes:
     ```
     <copy>
     grep -w exported /nfs_mount/schemas_export.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_export_rows.log
+
     grep -w imported /nfs_mount/schemas_import_nfs.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_import_nfs_rows.log
+
     head /nfs_mount/schemas_export_rows.log
+
     diff -s /nfs_mount/schemas_export_rows.log /nfs_mount/schemas_import_nfs_rows.log
     </copy>
     ```
@@ -319,7 +322,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 ## Task 5: Comparing objects metadata
 
-Let's now try the same code on the *SAPPHIRE* database. However, we need to create a database link to the source environment first.
+Let's now try the same code on the *SAPPHIRE* database. However, we need to create a database link to the source environment first, so we can compare more easily.
 
 1. Still in the *yellow* 🟨 terminal, connect to the *SAPPHIRE* ADB. This is our target database.
 
@@ -590,13 +593,13 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     dst    SH       SALES_TRANSACTIONS_EXT    YES                        YES           NO                 NO
     ```
 
-    * HR.COUNTRIES was IOT in source but was converted to HEAP on target.
+    * *HR.COUNTRIES* was IOT in source but was converted to HEAP on target.
 
         Index-organized tables are not supported, but attempting to create one does not generate an error.
         Instead, a heap-organized table with a primary key index is created.
         Therefore, if you use index-organized tables, you should test the applications that use index-organized tables to confirm that they work using heap-organized tables with a primary key indexes.
 
-    * SH.SALES\_TRANSACTIONS\_EXT was HEAP in source but was converted to HEAP on target.
+    * *SH.SALES\_TRANSACTIONS\_EXT* was an EXTERNAL in source but was converted to HEAP on target.
 
         This is a problem we have to fix.
 
@@ -610,18 +613,7 @@ When we perform a Data Pump schema export/import, directories are not moved as t
 
 1. Create same directories as source database:
 
-    First connect on the *SAPPHIRE* ADB:
-
-    ``` shell
-    <copy>
-    . adb
-    sql admin/Welcome_1234@sapphire_tp
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-    Now let's check the directories that needs to be created:
+    Let's check the directories that needs to be created:
 
     ``` shell
     <copy>
@@ -940,8 +932,6 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     -- Be sure to hit RETURN
     ```
 
-    * To get CN (Common Name), you can run: *openssl x509 -in ~/adb_tls_wallet/adb_container.cert -noout -subject*
-
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -1003,20 +993,22 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     ```
     </details>
 
-    * Now the external table is fixed and returning the same ammount of rows as on the source environment.
+    Now the external table is fixed and returning the same ammount of rows as on the source environment.
 
 ## Task 8: What about the MEDIA\_DIR directory?
 
-After creating the missing directories, *DATA\_FILE\_DIR* and *LOG\_FILE\_DIR* were used by the *SH* external table. What about the MEDIA\_DIR directory?
+After creating the missing directories, *DATA\_FILE\_DIR* and *LOG\_FILE\_DIR* were used by the *SH* external table. What about the *MEDIA\_DIR* directory?
 
 Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fix that.
 
-* BFILEs are large data objects stored in the server's operating system files outside the database tablespaces. 
+* Note: BFILEs are large data objects stored in the server's operating system files outside the database tablespaces. 
 
 1. Still in the *yellow* 🟨 terminal, check the PM.PRINT\_MEDIA table structure.
 
     ```
     <copy>
+    conn admin/Welcome_1234@sapphire_tp
+
     desc PM.PRINT_MEDIA
     </copy>
 
@@ -1026,6 +1018,9 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> conn admin/Welcome_1234@sapphire_tp
+    Connected.
+
     SQL> desc PM.PRINT_MEDIA
 
     Name                Null?       Type
@@ -1185,6 +1180,8 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     -- Be sure to hit RETURN
     ```
+
+The *BLUE* database schemas are now 100% successfully cloned to the *SAPPHIRE* ADB.
 
 You may now *proceed to the next lab*.
 

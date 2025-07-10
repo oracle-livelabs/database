@@ -11,8 +11,8 @@ Estimated Time: 15 Minutes
 In this lab, you will:
 
 * Open Cloud Migration Advisor
-* Upload CPAT findings to it and process.
-* Check the generated report.
+* Upload CPAT findings to it and process
+* Check the generated report
 
 ### Prerequisites
 
@@ -32,7 +32,7 @@ The tool was already pre-downloaded and installed on this lab and is available a
 
 1. Double-click on the *ADB_Actions* shortcut on the desktop.
 
-![Click shortcut to start a brownser](images/cma-icon.png)
+![Click shortcut to start a browser](images/cma-icon.png)
 
 2. Click on the second tab.
 
@@ -42,8 +42,8 @@ The tool was already pre-downloaded and installed on this lab and is available a
 
     Type the CMA user and password
 
-    * Username: CMA
-    * Password: Welcome_1234
+    * Username: *CMA*
+    * Password: *Welcome\_1234*
 
 ![CMA Home Page](images/cma-home.png)
 
@@ -52,7 +52,7 @@ The tool was already pre-downloaded and installed on this lab and is available a
 Cloud Migration Advisor is a tool with many options and flows.
 In this lab, we will use it on a simple mode, just to get the recommended method for the 2 PDBs that we want to move to ADB.
 
-1. Open on the hamburguer icon on the top left and click on *Guided Mode*.
+1. Open on the *hamburger icon* on the top left and click on *Guided Mode*.
 
 ![CMA Guided](images/cma-guided-1.png)
 
@@ -70,7 +70,7 @@ In this lab, we will use it on a simple mode, just to get the recommended method
 
 ![CMA Guided](images/cma-guided-4.png)
 
-6. First, click on the Home shortcut in the left menu and load: *cpat\_output/2\_adbs/blue_premigration\_advisor\_report.json*.
+6. First, click on the *Home* shortcut in the left menu and load: *cpat\_output/2\_adbs/blue_premigration\_advisor\_report.json*.
 
 ![CMA Guided](images/cma-guided-5.png)
 
@@ -78,15 +78,15 @@ In this lab, we will use it on a simple mode, just to get the recommended method
 
 ![CMA Guided](images/cma-guided-6.png)
 
-1. Repeat the steps above to load now *cpat\_output/2\_adbs/red\_premigration\_advisor\_report.json*.
+8. Repeat the steps above to load now *cpat\_output/2\_adbs/red\_premigration\_advisor\_report.json*.
 
 ![CMA Guided](images/cma-guided-7.png)
 
-10. Click *Open* and next *Upload*. It will show "2" databases loaded!
+9. Click *Open* and next *Upload*. It will show "2" databases loaded!
 
 ![CMA Guided](images/cma-guided-8.png)
 
-11. Click *Next* and on "Step 3", finally click *Finish*.
+10. Click *Next* and on "Step 3", finally click *Finish*.
 
 ![CMA Guided](images/cma-guided-9.png)
 
@@ -96,18 +96,18 @@ When the Solution Report page is opened, we can see that:
 
 ![CMA Report](images/cma-report.png)
 
-1. CMA is recommending using for both databases the "Datapump Conventional Export/Import" method. Please note we used the ADB CPAT file where other methods were collected, like "GoldenGate" and "Data Pump with DB Link", so CMA scans and shows which one would be the most simple.
+1. CMA is recommending using for both databases the "Data Pump Conventional Export/Import" method. Please note we used the ADB CPAT file where other methods were collected, like "GoldenGate" and "Data Pump with DB Link", so CMA scans and shows which one would be the most simple.
 
 2. CMA is showing that RED database is less complex to move (scored 9.40) than the BLUE database (scored 9.20). This is because RED has less CPAT findings than BLUE:
   + 0 x 1 in Actions Required.
   + 1 x 4 in Review Required.
   + 4 x 6 in Review Suggested.
 
-3. Click on the "Solution# 1" link at the breadcumb bar. On the new page that opens, click on "Checks Report".
+3. Click on the *Solution# 1* link at the breadcrumb bar. On the new page that opens, click on *Checks Report* button on the top right.
 
-![CMA Checks](images/cma-cheks.png)
+![CMA Checks](images/cma-checks.png)
 
-4. In this page, you can view all CPAT checks for both databases and their CPAT status. Click on the row "has_directories", now scroll down to the end of the page. Notice that on the "Databases" report table at the bottom, you can check the list of affected objects for that specific check.
+4. In this page, you can view all CPAT checks for both databases, and their CPAT status. Click on the row "has_directories", now scroll down to the end of the page. Notice that on the "Databases" report table at the bottom, you can check the list of affected objects for that specific check.
 
 ![CMA has_directories](images/cma-has_directories.png)
 

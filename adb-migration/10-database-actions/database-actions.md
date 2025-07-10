@@ -34,24 +34,35 @@ This lab assumes:
 * Please note you are connecting on *Database Actions* for the *SAPPHIRE* database.
 * The *Database Actions* URL for *RUBY* is: [https://localhost/ords/ruby/sql-developer](https://localhost/ords/ruby/sql-developer)
 
-3. In the main screen or clicking on the hamburguer icon on the top left, note that *Database Actions* is divided in 6 *Feature Areas*:
+3. In the main screen or clicking on the *hamburger icon* on the top left, note that *Database Actions* is divided in 6 *Feature Areas*:
 
 ![Main Page](images/main-page.png)
 
 As of 23.8, they are:
 
 * Development
-  + SQL, Data Modeler, REST, JSON, Charts, Scheduling, Oracle Machine Learning, Graph Studio, and Oracle APEX
+  
+  SQL, Data Modeler, REST, JSON, Charts, Scheduling, Oracle Machine Learning, Graph Studio, and Oracle APEX
+
 * Data Studio
-  + Data Load, Catalog, Data Insights, Data Transforms, and Data Analysis
+
+  Data Load, Catalog, Data Insights, Data Transforms, and Data Analysis
+
 * Administration
-  + Database Users, APEX Workspaces, Data Pump, Download Client Credentials, and Set Resource Management Rules
+
+  Database Users, APEX Workspaces, Data Pump, Download Client Credentials, and Set Resource Management Rules
+
 * Monitoring
-  + Performance Hub and Database Dashboard
+
+  Performance Hub and Database Dashboard
+
 * Downloads
-  + Download Oracle Instant Client and Download SODA Drivers
+
+  Download Oracle Instant Client and Download SODA Drivers
+
 * Related Services
-  + Restful Data Services (ORDS) and SODA and Access Oracle Machine Learning Restful Services
+
+  Restful Data Services (ORDS) and SODA and Access Oracle Machine Learning Restful Services
 
 In the next tasks, we will learn how to use some of the ADB features via Web UI.
 
@@ -59,7 +70,7 @@ In the next tasks, we will learn how to use some of the ADB features via Web UI.
 
 In this task, we will play with the *SQL Navigator*, which looks very familiar to the *SQL Developer* tool.
 
-1. Click on the hamburguer icon on the top left, and next click on *SQL* under the *Development* group.
+1. Click on the *hamburger icon* on the top left, and next click on *SQL* under the *Development* group.
 
 ![SQL page](images/sql-1.png)
 
@@ -81,13 +92,15 @@ In this task, we will play with the *SQL Navigator*, which looks very familiar t
 
 ![BLOB image](images/sql-5.png)
 
+* Please note the image can be a different one depending on the order that rows are returned.
+
 6. Click on the "Cancel" and "Close" to leave the column editor.
 
 ## Task 3: *Database Actions* | *Database Users*
 
 In this task, we will create another administrator user for this *SAPPHIRE* ADB.
 
-1. Click on the hamburguer icon on the top left, and next click on *Database Users* under the *Administration* group.
+1. Click on the *hamburger icon* on the top left, and next click on *Database Users* under the *Administration* group.
 
 ![Users menu](images/user-1.png)
 
@@ -99,7 +112,7 @@ Provide the following information:
 * User Name: *DEV\_USER*
 * Password: *Welcome\_1234*
 * Scrool down, enable the *REST, GraphQL, MongoDB API, and Web access* switch.
-* Move to *Granted Roles* tab. Add: *DB\_DEVELOPER\_ROLE*
+* Move to *Granted Roles* tab. Select (mark the first checkbox) for *DB\_DEVELOPER\_ROLE*
 
 3. After filling the information above, click on the *Show code* switch.
 
@@ -107,21 +120,21 @@ Provide the following information:
 
 4. Click "Create User". After user is created, click "Sign Out" on the top left menu.
 
-5. Let's connect as the newly created *DEV\_USER*.
+5. Let's connect as the newly created *DEV\_USER* (password *Welcome\_1234*).
 
 ![DEV_USER Connect](images/user-4.png)
 
-6. Now, click on the hamburguer icon on the top left menu. Note that some sections like *Performance Hub* and *APEX Workspace* are **not** available.
+6. Now, click on the *hamburger icon* on the top left menu. Note that some sections like *Performance Hub* and *APEX Workspace* are **not** available.
 
 ![Main Page](images/user-5.png)
 
-7. Click "Sign Out" on the right top menu and connect back as *ADMIN*.
+7. Click "Sign Out" on the right top menu and connect back as *ADMIN* (password *Welcome\_1234*).
 
 ## Task 3: *Database Actions* | *Performance Hub*
 
 In this task, we will use the *Performance Hub* to check performance issues on the running queries.
 
-1. Click on the hamburguer icon on the top left, and next click on *Performance Hub* under the *Monitoring* group.
+1. Click on the *hamburger icon* on the top left, and next click on *Performance Hub* under the *Monitoring* group.
 
 ![Performance Hub](images/perf-1.png)
 

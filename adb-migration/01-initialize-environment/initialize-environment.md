@@ -10,8 +10,8 @@ Estimated Time: 5 Minutes
 
 In this lab, you will:
 
-* Familiarize yourself with the workshop environment
-* Initialize the workshop environment
+* Familiarize yourself with the workshop environment.
+* Initialize the workshop environment.
 
 ## Task 1: Familiarize yourself with the workshop environment
 
@@ -21,7 +21,7 @@ In this lab, you will:
 
 3. Double-click on the *Terminal* shortcut on the desktop. 
 
-![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
+![Click shortcut to start a terminal](images/initialize-environment-desktop-click-terminal.jpeg " ")
 
 4. The terminal has two tabs, *yellow* 🟨 and *blue* 🟦.
 
@@ -29,7 +29,7 @@ In this lab, you will:
 
 6. Optionally, in the terminal, you can zoom in to make the text larger. 
 
-![Zoom in to make the text larger in the terminal](./images/initialize-environment-terminal-zoom-in.png)    
+![Zoom in to make the text larger in the terminal](images/initialize-environment-terminal-zoom-in.png)    
 
 ## Task 2: Initialize the workshop environment
 

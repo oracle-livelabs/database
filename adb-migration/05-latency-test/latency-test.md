@@ -32,7 +32,7 @@ This is an optional lab. You can skip it if you are already familiar with ADBPin
 
 ADBPing tool is available in *My Oracle Support*, on Doc ID 2863450.1.
 
-![ADBPing](./images/mos-adbping.png)
+![ADBPing](images/mos-adbping.png)
 
 The tool was already pre-downloaded on this lab and is available at */home/oracle/scripts/*.
 
@@ -92,9 +92,9 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
 
 ## Task 2: Generate ADBPing report for ADB
 
-ADBPing can evaluate multiple connection methods, like java or sqlplus.
+ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
 
-1. Execute *adbping* for *SAPPHIRE* ADB, via sqlplus method.
+1. Execute *adbping* for *SAPPHIRE* ADB, via SQL*Plus method.
 
     ``` shell
     <copy>
@@ -110,7 +110,7 @@ ADBPing can evaluate multiple connection methods, like java or sqlplus.
 
     What we are doing here?
        * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
-       * Connecting to ADB using "sqlplus".
+       * Connecting to ADB using "SQL*Plus".
        * Opening 10 threads (*-t 10*) in parallel.
 
     ``` shell
@@ -136,7 +136,7 @@ ADBPing can evaluate multiple connection methods, like java or sqlplus.
 
 2. Execute *adbping* for *SAPPHIRE* ADB, via java method.
 
-    Now we will repeat the same command, but using java instead of sqlplus.
+    Now we will repeat the same command, but using java instead of SQL*Plus.
 
     Java connects once and create a connection pool, that saves all the time it takes for the authentication handshake process.
 
@@ -168,7 +168,7 @@ ADBPing can evaluate multiple connection methods, like java or sqlplus.
 
     Interpreting the results:
 
-       * In 10 seconds, 123896 times the session was opened and *select 1 from dual* was executed. This is almost 200x more than using sqlplus method.
+       * In 10 seconds, 123896 times the session was opened and *select 1 from dual* was executed. This is almost 200x more than using SQL*Plus method.
        * The time to execute each SQL was avg 0.826 ms, less than 1 ms, which is still very fast.
        * The time to connect and execute was about 0.858 ms.
          + The connection time accounted less than 1% of the total time now.
@@ -180,7 +180,7 @@ Even though ADBPing was a tool created to check latency for ADB, it can also be 
 
 In this lab, we will run it against the *BLUE* PDB and compare the results with the previously gathered for *SAPPHIRE*.
 
-1. Execute *adbping* for *BLUE* PDB, via sqlplus method.
+1. Execute *adbping* for *BLUE* PDB, via SQL*Plus method.
 
     ``` shell
     <copy>
@@ -217,7 +217,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
          + This was about the same time it took in ADB.
        * The time to connect and execute was about 49 ms.
          + The connection time accounted almost 100% of the total time.
-         + It took 2.5x more time to stablish sqlplus connection on *SAPPHIRE* ADB than on the local *BLUE* PDB.
+         + It took 2.5x more time to stablish SQL*Plus connection on *SAPPHIRE* ADB than on the local *BLUE* PDB.
 
 2. Execute *adbping* for *BLUE* PDB, via java method.
 
@@ -251,7 +251,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
     Interpreting the results:
 
        * In 10 seconds, 555099 times the session was opened and *select 1 from dual* was executed.
-         + This is about 1500x faster than using sqlplus method.
+         + This is about 1500x faster than using SQL*Plus method.
          + This is 3x more than using java method on ADB.
        * The time to execute each SQL was avg 0.145 ms.
        * The time to connect and execute was about 0.162 ms.
