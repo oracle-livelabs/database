@@ -101,7 +101,7 @@ In this lab, you will:
     # Be sure to hit RETURN
     ```
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Acknowledgments
 

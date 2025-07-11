@@ -543,7 +543,7 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     Close Firefox.
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Additional information
 

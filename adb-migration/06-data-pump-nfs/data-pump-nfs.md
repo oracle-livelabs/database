@@ -1,4 +1,4 @@
-# Migration using Data Pump with NFS
+# Migrate with Data Pump over NFS
 
 ## Introduction
 
@@ -697,7 +697,7 @@ In this task, we will change the default profile so passwords for imported users
 
     </details>
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Additional information
 

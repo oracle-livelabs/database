@@ -112,7 +112,7 @@ When the Solution Report page is opened, we can see that:
 
     ![CMA has_directories](./images/cma-has_directories.png)
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Additional information
 

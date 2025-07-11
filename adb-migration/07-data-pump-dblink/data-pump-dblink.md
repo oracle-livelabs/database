@@ -1,4 +1,4 @@
-# Migration using Data Pump with DB Link
+# Migrate with Data Pump over DB Link
 
 ## Introduction
 
@@ -555,7 +555,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     </details>
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Additional information
 

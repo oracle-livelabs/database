@@ -18,8 +18,8 @@ In this lab, you will:
 
 This lab assumes:
 
-* You have completed Lab 6: Migration using Data Pump with NFS
-* You have completed Lab 7: Migration using Data Pump with DB Link
+* You have completed Lab 6: Migrate with Data Pump over NFS
+* You have completed Lab 7: Migrate with Data Pump over DB Link
 
 ## Task 1: Open *Database Actions*
 

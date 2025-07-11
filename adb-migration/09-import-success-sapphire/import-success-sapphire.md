@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-* You have completed Lab 6: Migration using Data Pump with NFS
+* You have completed Lab 6: Migrate with Data Pump over NFS
 
 ## Task 1: Verify Data Pump errors
 
@@ -1241,7 +1241,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
 The *BLUE* database schemas are now 100% successfully cloned to the *SAPPHIRE* ADB.
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Additional information
 

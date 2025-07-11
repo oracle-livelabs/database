@@ -267,7 +267,7 @@ However, both runs so fast that the difference is only spotted at the sub-milise
 
 As this difference will not represent any problem to our application, we can move forward with this migration. In case the latency passes any threshold defined by the application team, it would be needed to move the application closer to ADB, before moving forward with the process.
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Additional information
 

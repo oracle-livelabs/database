@@ -383,7 +383,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     -- Be sure to hit RETURN
     ```
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Acknowledgments
 

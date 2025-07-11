@@ -39,13 +39,13 @@
       "filename": "../../05-latency-test/latency-test.md"
     },
     {
-      "title": "Lab 6: Migration using Data Pump with NFS",
-      "description": "Migration using Data Pump with NFS",
+      "title": "Lab 6: Migrate with Data Pump over NFS",
+      "description": "Migrate with Data Pump over NFS",
       "filename": "../../06-data-pump-nfs/data-pump-nfs.md"
     },
     {
-      "title": "Lab 7: Migration using Data Pump with DB Link",
-      "description": "Migration using Data Pump with DB Link",
+      "title": "Lab 7: Migrate with Data Pump over DB Link",
+      "description": "Migrate with Data Pump over DB Link",
       "filename": "../../07-data-pump-dblink/data-pump-dblink.md"
     },
     {
