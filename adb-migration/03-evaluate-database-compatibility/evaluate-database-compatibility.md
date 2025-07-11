@@ -231,12 +231,13 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     ``` shell
     <copy>
     . adb
-    ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire
+    ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire <<< 'Welcome_1234'
     </copy>
 
     # Be sure to hit RETURN
     ```
-    * When ADMIN password is requested, type *Welcome_1234*
+
+    * The ADMIN password *Welcome_1234* is provided as "Here Strings".
 
     <details>
     <summary>*click to see the output*</summary>
@@ -256,13 +257,13 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     ``` shell
     <copy>
     . adb
-    ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby
+    ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby <<< 'Welcome_1234'
     </copy>
 
     # Be sure to hit RETURN
     ```
 
-    * When ADMIN password is requested, type *Welcome_1234*
+    * The ADMIN password *Welcome_1234* is provided as "Here Strings".
 
     <details>
     <summary>*click to see the output*</summary>
@@ -305,7 +306,6 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     # Be sure to hit RETURN
     ```
-    * When ADMIN password is requested, type *Welcome_1234*
 
     <details>
     <summary>*click to see the output*</summary>

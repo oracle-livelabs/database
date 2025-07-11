@@ -283,7 +283,7 @@ We need to upload the *RED* wallet to ADB directory.
     -- Be sure to hit RETURN
     ```
 
-    * To get CN (Common Name), you can run: *openssl x509 -in ~/adb_tls_wallet/adb_container.cert -noout -subject*
+    * To get CN (Common Name), you can run: *openssl x509 -in ~/adb\_tls\_wallet/adb\_container.cert -noout -subject*
 
     <details>
     <summary>*click to see the output*</summary>
