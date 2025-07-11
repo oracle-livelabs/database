@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 7: Migration using Data Pump with DB Link
+* You have completed Lab 7: Migration using Data Pump with DB Link
 
 ## Task 1: Verify Data Pump errors
 
@@ -25,7 +25,7 @@ During export and import, Data Pump may face errors or situations that can't be 
 
 1. Use the *blue* 🟦 terminal. If Data Pump encounters an error or faces a situation it can't resolve, it will print an error to the console and into the logfile. At the end of the output, Data Pump summarizes and lists the number of errors faced during the job. Examine the last lines of a Data Pump import log file.
 
-    ```
+    ``` shell
     <copy>
     tail -1 /nfs_mount/schemas_import_dblink.log
     </copy>
@@ -34,23 +34,23 @@ During export and import, Data Pump may face errors or situations that can't be 
     * The last line for *schemas\_import\_nfs.log* says *successfully completed*.
     * There were no errors.
 
-## Task 2: Revisiting the CPAT checks.
+## Task 2: Revisiting the CPAT checks
 
 When we executed CPAT for the *RED* database, the only "Review Required" action that we had for the target database was "Directories".
 
-![Directories](images/red-directories.png)
+![Directories](./images/red-directories.png)
 
 However, as all the directories mentioned on this check are oracle internal and were not in use by the *F1* schema or any other administrator task, we are good to go.
 
 This is a good opportunity to read the CPAT file for any other finding, including the "Review Suggested" ones.
 
-## Task 3: Comparing source and target data and metadata 
+## Task 3: Comparing source and target data and metadata
 
 After moving data you can perform simple checks to validate the outcome. You will try such on the *F1* schema in the *RUBY* ADB that you imported in lab 7.
 
 1. Still in the *blue* 🟦 terminal, connect to the *RUBY* ADB. This is our target database.
 
-    ```
+    ``` shell
     <copy>
     . adb
     sql admin/Welcome_1234@ruby_tp
@@ -63,7 +63,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
 2. Count the number of objects grouped by types in the target database and compare it to the source database.
 
-    ```
+    ``` sql
     <copy>
     select object_type, count(*) from dba_objects where owner='F1' group by object_type
     minus
@@ -79,6 +79,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select object_type, count(*) from dba_objects where owner='F1' group by object_type
          minus
@@ -86,11 +87,12 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
     no rows selected
     ```
+
     </details>
 
 3. If you want to compare the amount of rows, you can do that too
 
-    ```
+    ``` sql
     <copy>
     select
        (select count(*) from f1.f1_laptimes@source_dblink) as source,
@@ -107,11 +109,13 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SOURCE     TARGET
     ---------- ----------
     571047     571047
     ```
+
     </details>
 
 4. The examples used in this task are not a complete guide. It should give you an idea of how you can use the data dictionary information and queries to compare your source and target environments. Comparing objects becomes more complicated when you have system-generated names for indexes and partitions and when you use Advanced Queueing. The latter because it creates a varying number of objects recursively depending on how you use the queues.
@@ -122,7 +126,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
 1. Still in the *blue* 🟦 terminal, and connected to the *RUBY* ADB from the previous task. Create a new comparison.
 
-    ```
+    ``` sql
     <copy>
     ! cat /home/oracle/scripts/adb-08-dbms_compare.sql
     @/home/oracle/scripts/adb-08-dbms_compare.sql
@@ -136,6 +140,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> ! cat /home/oracle/scripts/adb-08-dbms_compare.sql
     SET SERVEROUT ON
@@ -205,6 +210,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 2. Now close SQLcl:

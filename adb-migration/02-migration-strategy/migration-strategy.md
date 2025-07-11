@@ -16,7 +16,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 This is an optional lab. You can skip it if you are already familiar with ADB migration steps.
 
@@ -38,10 +38,10 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     Next, we will move:
 
-    - The *RED* local PDB to *RUBY* running on ADB using Data Pump with Database Links.
-    - The *BLUE* local PDB to *SAPPHIRE* running on ADB using Data Pump with files over NFS.
+    * The *RED* local PDB to *RUBY* running on ADB using Data Pump with Database Links.
+    * The *BLUE* local PDB to *SAPPHIRE* running on ADB using Data Pump with files over NFS.
 
-    ![Migration Strategy](images/migration.png)
+    ![Migration Strategy](./images/migration.png)
 
     We will explore using both a dump file in a shared NFS, as using the database link to move the data.
 
@@ -53,7 +53,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
 1. Use the *yellow* terminal 🟨. Let's connect to the cdb23.
 
-    ```
+    ``` shell
     <copy>
     . cdb23
     sql / as sysdba
@@ -64,7 +64,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     List the PDBS:
 
-    ```
+    ``` sql
     <copy>
     show pdbs
     </copy>
@@ -74,9 +74,10 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> show pdbs
-    
+
         CON_ID CON_NAME                       OPEN MODE  RESTRICTED
     ---------- ------------------------------ ---------- ----------
              2 PDB$SEED                       READ ONLY  NO
@@ -84,11 +85,12 @@ For moving a database to ADB, we need to perform basically 4 steps:
              4 BLUE                           READ WRITE NO
              5 GREEN                          MOUNTED
     ```
+
     </details>
 
 2. Switch to the *BLUE* PDB and check all the non-internal users already created on the database.
 
-    ```
+    ``` sql
     <copy>
     alter session set container=BLUE;
 
@@ -105,9 +107,10 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     * `ADMIN` is the default PDB_DBA user on a PDB.
     * `BI`, `HR`, `IX`, `PM` and `SH` are sample schemas that we will move later to ADB.
-    
+
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     USERNAME
     --------------------------------------------------------------------------------
@@ -118,11 +121,12 @@ For moving a database to ADB, we need to perform basically 4 steps:
     PM
     SH
     ```
+
     </details>
 
 3. Connect now on the *RED* PDB and perform the same query.
 
-    ```
+    ``` sql
     <copy>
     alter session set container=RED;
 
@@ -139,15 +143,17 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     * `ADMIN` is the default PDB_DBA user on a PDB.
     * `F1` is a sample schemas that we will migrate later to ADB.
-  
+
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     USERNAME
     --------------------------------------------------------------------------------
     ADMIN
     F1
     ```
+
     </details>
 
 4. Now close SQLcl:
@@ -166,7 +172,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
 1. Now, switch to the *blue* 🟦 terminal. Set the environment to *ADB* and check the contents TNS\_ADMIN folder.
 
-    ```
+    ``` shell
     <copy>
     . adb
 
@@ -185,6 +191,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ echo $TNS_ADMIN
     /home/oracle/adb_tls_wallet
@@ -284,11 +291,12 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
                           (address=(protocol=tcps)(port=1523)(host=holserv1.livelabs.oraclevcn.com))
                           (connect_data=(service_name=ruby_tpurgent.adb.oraclecloud.com))(security=(ssl_server_dn_match=no)))
     ```
+
     </details>
 
 2. Connect to the *SAPPHIRE* ADB.
 
-    ```
+    ``` shell
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -299,7 +307,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
 3. Check all the non-internal users already created on the database.
 
-    ```
+    ``` sql
     <copy>
     select username
       from dba_users
@@ -319,6 +327,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     USERNAME
     --------------------------------------------------------------------------------
@@ -328,11 +337,12 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     ORDS_PLSQL_GATEWAY2
     ORDS_PUBLIC_USER2
     ```
+
     </details>
 
 4. Connect now on the *RUBY* ADB and perform the same query.
 
-    ```
+    ``` sql
     <copy>
     connect admin/Welcome_1234@ruby_tp
 
@@ -351,6 +361,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     USERNAME
     --------------------------------------------------------------------------------
@@ -359,6 +370,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     ORDS_PLSQL_GATEWAY2
     ORDS_PUBLIC_USER2
     ```
+
     </details>
 
 5. Now close SQLcl:

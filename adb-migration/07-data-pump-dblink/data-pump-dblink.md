@@ -26,7 +26,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 ## Task 1: Test mTLS to *RED* PDB
 
@@ -51,6 +51,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ . cdb23
     [CDB23:oracle@holserv1:~]$ lsnrctl status
@@ -95,6 +96,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
       Instance "CDB23", status READY, has 1 handler(s) for this service...
     The command completed successfully
     ```
+
     </details>
 
     ``` shell
@@ -110,6 +112,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~]$ cat /u01/app/oracle/product/23/network/admin/listener.ora
     LISTENER =
@@ -124,6 +127,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     [CDB23:oracle@holserv1:~]$ cat /u01/app/oracle/product/23/network/admin/sqlnet.ora
     WALLET_LOCATION = (SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=/u01/app/oracle/tls_wallet)))
     ```
+
     </details>
 
 2. Authenticate using mTLS.
@@ -140,6 +144,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQLcl: Release 25.1 Production on Wed Jul 02 14:48:30 2025
 
@@ -151,6 +156,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     Error Message = ORA-29002: SSL transport detected invalid or obsolete server certificate.
     Help: https://docs.oracle.com/error-help/db/ora-29002/
     ```
+
     </details>
 
     For this lab, we generated a wallet in advance with the certificate to connect on this server. The wallet is located under */home/oracle/client\_tls\_wallet*.
@@ -169,6 +175,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQLcl: Release 25.1 Production on Wed Jul 02 14:50:36 2025
 
@@ -180,6 +187,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     SQL>
     ```
+
     </details>
 
 3. Now close SQLcl:
@@ -220,6 +228,7 @@ In this task, we will change the default profile so passwords for imported users
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> alter profile default limit PASSWORD_LIFE_TIME unlimited;
 
@@ -231,6 +240,7 @@ In this task, we will change the default profile so passwords for imported users
 
     SQL>
     ```
+
     </details>
 
 ## Task 3: Create a database link on ADB
@@ -251,11 +261,13 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory red_dblink_wallet_dir as 'red_dblink_wallet_dir';
 
     Directory RED_DBLINK_WALLET_DIR created.
     ```
+
     </details>
 
 2. Next, let's upload the local wallet files to this directory.
@@ -273,6 +285,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @~/scripts/adb-07-upload_file.sql /home/oracle/client_tls_wallet/cwallet.sso RED_DBLINK_WALLET_DIR cwallet.sso
     Starting upload_file.js script...
@@ -286,6 +299,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     File successfully written to Oracle directory.
     File uploaded successfully.
     ```
+
     </details>
 
 3. Check if file was uploaded.
@@ -300,6 +314,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select * from dbms_cloud.list_files('red_dblink_wallet_dir');
 
@@ -307,6 +322,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     ______________ ________ ___________ ______________________________________ ______________________________________
     cwallet.sso        3035             02-JUL-25 03.28.11.618341000 PM GMT    02-JUL-25 03.28.11.713437000 PM GMT
     ```
+
     </details>
 
 4. Create the DB link credentials.
@@ -329,6 +345,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> begin
       2    dbms_cloud.create_credential(
@@ -340,6 +357,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 5. Create the DB link and test it.
@@ -349,7 +367,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     begin
       dbms_cloud_admin.create_database_link(
         db_link_name => 'SOURCE_DBLINK',
-        hostname => 'holserv1.livelabs.oraclevcn.com',
+        hostname => 'hol-server',
         port => '1522',
         service_name => 'red',
         ssl_server_cert_dn => 'CN=holserv1',
@@ -366,11 +384,12 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> begin
       2    dbms_cloud_admin.create_database_link(
       3      db_link_name => 'SOURCE_DBLINK',
-      4      hostname => 'holserv1.livelabs.oraclevcn.com',
+      4      hostname => 'hol-server',
       5      port => '1522',
       6      service_name => 'red',
       7      ssl_server_cert_dn => 'CN=holserv1',
@@ -387,6 +406,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     ________
     X
     ```
+
     </details>
 
 ## Task 4: Import schema in ADB
@@ -417,6 +437,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory nfs_dir as 'nfs';
 
@@ -446,9 +467,10 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     SQL>
     ```
+
     </details>
 
-3. Now close SQLcl:
+2. Now close SQLcl:
 
     ``` shell
     <copy>
@@ -458,7 +480,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     -- Be sure to hit RETURN
     ```
 
-4. Still in the *blue* 🟦 terminal, import the F1 schema on *RUBY* ADB.
+3. Still in the *blue* 🟦 terminal, import the F1 schema on *RUBY* ADB.
 
     ``` shell
     <copy>
@@ -481,6 +503,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed Jul 2 17:23:49 2025
     Version 23.8.0.25.04
@@ -529,6 +552,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     02-JUL-25 17:25:27.353: W-2      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 3 seconds
     02-JUL-25 17:25:27.400: Job "ADMIN"."SYS_IMPORT_SCHEMA_01" successfully completed at Wed Jul 2 17:25:27 2025 elapsed 0 00:01:36
     ```
+
     </details>
 
 You may now *proceed to the next lab*.

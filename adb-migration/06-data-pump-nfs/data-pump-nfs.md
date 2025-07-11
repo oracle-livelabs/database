@@ -7,8 +7,9 @@ Now, after performing all the analysis, it's time to start our migration.
 In this lab, we will migrate the *BLUE* PDB to the *SAPPHIRE* ADB using Data Pump using NFS share.
 
 Data Pump using dump files, instead of DB links, has some advantages, like:
-+ More control over parallelism
-+ No source-target connection interoperability requirement
+
+* More control over parallelism
+* No source-target connection interoperability requirement
 
 Estimated Time: 10 Minutes
 
@@ -24,7 +25,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 ## Task 1: Setup NFS server
 
@@ -46,10 +47,12 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ sudo podman restart nfs-server
     nfs-server
     ```
+
     </details>
 
 2. Mount the NFS share available at server *nfs-server:/exports* on the localhost.
@@ -70,6 +73,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ sudo mkdir -p /nfs_mount
     [ADB:oracle@holserv1:~]$ sudo mount -t nfs nfs-server:/exports /nfs_mount
@@ -77,6 +81,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     total 0
     -rw-r--r--. 1 root root 0 Jul  1 19:13 WORKING
     ```
+
     </details>
 
 ## Task 2: Export the *BLUE* PDB
@@ -104,11 +109,13 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory nfs_dir as '/nfs_mount';
 
     Directory created.
     ```
+
     </details>
 
 3. Now close SQLcl:
@@ -138,12 +145,14 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     # Be sure to hit RETURN
     ```
+
     * *logtime* and *metrics* for a better verbose output.
     * *dumpfile=schemas\_export\_%L.dmp* and *parallel=2* to use parallelism.
     * *flashback\_time* for having a consistent data output.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Export: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed Jul 2 13:37:05 2025
     Version 23.8.0.25.04
@@ -317,6 +326,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     02-JUL-25 13:38:11.030:   /nfs_mount/schemas_export_02.dmp
     02-JUL-25 13:38:11.040: Job "SYSTEM"."SYS_EXPORT_SCHEMA_01" successfully completed at Wed Jul 2 13:38:11 2025 elapsed 0 00:01:03
     ```
+
     </details>
 
 5. Verify that the dump file was generated on the NFS folder.
@@ -331,6 +341,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~]$ ls -l /nfs_mount
     total 48532
@@ -339,11 +350,12 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     -rw-r--r--. 1 oracle oinstall    19094 Jul  2 13:38 schemas_export.log
     -rw-r--r--. 1 root   root            0 Jul  1 19:13 WORKING
     ```
+
     </details>
 
 ## Task 3: Modify profile in ADB
 
-In this task, we will change the default profile so passwords for imported users will not expire and match the profile setting from the source database. 
+In this task, we will change the default profile so passwords for imported users will not expire and match the profile setting from the source database.
 
 1. Still in the *yellow* 🟨 terminal, connect on the *SAPPHIRE* ADB to modify the default profile.
 
@@ -369,6 +381,7 @@ In this task, we will change the default profile so passwords for imported users
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> alter profile default limit PASSWORD_LIFE_TIME unlimited;
 
@@ -380,6 +393,7 @@ In this task, we will change the default profile so passwords for imported users
 
     SQL>
     ```
+
     </details>
 
 ## Task 4: Share NFS with ADB
@@ -410,6 +424,7 @@ In this task, we will change the default profile so passwords for imported users
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory nfs_dir as 'nfs';
 
@@ -438,6 +453,7 @@ In this task, we will change the default profile so passwords for imported users
 
     SQL>
     ```
+
     </details>
 
 2. Now close SQLcl:
@@ -475,6 +491,7 @@ In this task, we will change the default profile so passwords for imported users
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed Jul 2 13:42:21 2025
     Version 23.8.0.25.04
@@ -677,6 +694,7 @@ In this task, we will change the default profile so passwords for imported users
     02-JUL-25 13:43:11.226: W-1      Completed 89 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 24 seconds
     02-JUL-25 13:43:11.295: Job "ADMIN"."SYS_IMPORT_SCHEMA_01" completed with 1 error(s) at Wed Jul 2 13:43:11 2025 elapsed 0 00:00:46
     ```
+
     </details>
 
 You may now *proceed to the next lab*.

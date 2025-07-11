@@ -19,13 +19,13 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 ## Task 1: Download CPAT
 
 CPAT tool is available in *My Oracle Support*, on Doc ID 2758371.1.
 
-![CPAT](images/mos-cpat.png)
+![CPAT](./images/mos-cpat.png)
 
 The tool was already pre-downloaded on this lab and is available at */home/oracle/scripts/*.
 
@@ -45,6 +45,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~]$ mkdir -p /home/oracle/cpat
     [CDB23:oracle@holserv1:~]$ unzip /home/oracle/scripts/p32613591_112048_Generic.zip -d /home/oracle/cpat
@@ -82,6 +83,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     -rw-r--r--. 1 oracle oinstall  1782 Feb 10 14:09 README.txt
     -rw-r--r--. 1 oracle oinstall 11533 Feb 10 14:09 THIRD_PARTY_LICENSES.txt
     ```
+
     </details>
 
 ## Task 2: Generate and open a generic CPAT report
@@ -101,8 +103,8 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
     * To get all the possible parameter options for CPAT, run *~/cpat/premigration.sh -help*.
     * *--connectstring jdbc:oracle:oci:@ --sysdba* is used for OS Authentication.
-      + It will connect on cdb23 as it is the currently exported *ORACLE\_HOME* and *ORACLE\_SID*.
-      + It will run CPAT for all opened PDBs: *BLUE* and *RED*.
+      * It will connect on cdb23 as it is the currently exported *ORACLE\_HOME* and *ORACLE\_SID*.
+      * It will run CPAT for all opened PDBs: *BLUE* and *RED*.
     * *--targetcloud ALL* is used to run checks against all possible targets, like ATP, ADW and Exadata.
     * *--migrationmethod ALL* is used to run checks for all possible migration methods.
     * *--reportformat JSON HTML TEXT* is used to generate report in HTML, JSON and TEXT.
@@ -110,6 +112,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --targetcloud ALL --migrationmethod ALL --reportformat JSON HTML TEXT --outdir ~/cpat_output/1_generic/
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
@@ -127,6 +130,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/1_generic/premigration_advisor_summary_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/1_generic/premigration_advisor_summary_report.txt
     ```
+
     </details>
 
 2. Check the generated report files.
@@ -140,9 +144,9 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
     ```
 
     * Note that the output folder contains 3 different file types: JSON, TEXT and HTML.
-      + The JSON file will be later consumed by CMA, on the next lab.
-      + The TEXT file can be read on a terminal.
-      + The HTML file can be opened in a brownser.
+      * The JSON file will be later consumed by CMA, on the next lab.
+      * The TEXT file can be read on a terminal.
+      * The HTML file can be opened in a brownser.
     * Only the *BLUE* and *RED* PDBs were checked. As *GREEN* PDB was closed, it was skipped.
 
     ``` text
@@ -190,7 +194,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
     # Be sure to hit RETURN
     ```
 
-    ![CPAT Summary](images/cpat_summary_gen.png)
+    ![CPAT Summary](./images/cpat_summary_gen.png)
 
     * This is a summary page with information about execution on all the PDBs.
     * Note that only the *BLUE* and *RED* PDBs were checked. As *GREEN* PDB was closed, it was skipped.
@@ -199,13 +203,13 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
     Open the HTML Report *BLUE/BLUE\_premigratrion\_advisor\_report.html*.
 
-    ![Blue Summary](images/blue_summary_gen.png)
+    ![Blue Summary](./images/blue_summary_gen.png)
 
     * Note that for each different category (source database, target database, migration method and additional tasks), we have total checks and their results.
 
     Go to "Premigration Advisor Check Details List". Navigate though the report.
 
-    ![Blue Checks](images/blue_checks_gen.png)
+    ![Blue Checks](./images/blue_checks_gen.png)
 
     * Note that some of the checks that have "Action Required" are related to Golden Gate, which is not the migration method we will use on this lab.
     * Also, there are some false positive results related to "Timezone Version" under "Additional Tasks". This is because CPAT has no information about the target ADB.
@@ -219,6 +223,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 Now that we could see that CPAT could generate a report when you still don't know the migration method that will be used and the target type, let's create a more specific report, where I know where we are going, but haven't decided yet which method to use.
 
 In this lab, we will be moving:
+
 * *BLUE* PDB to *SAPPHIRE* ADB.
 * *RED* PDB to *RUBY* ADB.
 
@@ -241,6 +246,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire
     Enter password for ADMIN user:
@@ -250,6 +256,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     Cloud Premigration Advisor Tool Version 25.2.0
     Cloud Premigration Advisor Tool generated properties file location: /home/oracle/cpat_output/props/sapphire_premigration_advisor_analysis.properties
     ```
+
     </details>
 
     Next, run for the *RUBY* ADB:
@@ -267,6 +274,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby
     Enter password for ADMIN user:
@@ -276,6 +284,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     Cloud Premigration Advisor Tool Version 25.2.0
     Cloud Premigration Advisor Tool generated properties file location: /home/oracle/cpat_output/props/ruby_premigration_advisor_analysis.properties
     ```
+
     </details>
 
     Verify the generated property files:
@@ -289,6 +298,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     ```
 
     <summary>*Output:*</summary>
+
     ``` text
     $ ls -l ~/cpat_output/props/
     -rw-r--r--. 1 oracle oinstall   8326 Jun 27 13:26 ruby_premigration_advisor_analysis.properties
@@ -309,6 +319,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     #Created by CPAT version 25.2.0
     #Fri Jun 27 13:26:17 GMT 2025
@@ -338,6 +349,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     TargetInstanceProp.MAX_STRING_SIZE=EXTENDED
     TargetInstanceProp.PROFILES=DEFAULT,ORA_ADMIN_PROFILE,ORA_APP_PROFILE,ORA_CIS_PROFILE,ORA_EXTAPP_PROFILE,ORA_MANDATORY_PROFILE,ORA_MANDATORY_PROFILE_GOV,ORA_PROTECTED_PROFILE,ORA_STIG_PROFILE
     ```
+
     </details>
 
 2. Now, execute CPAT for *BLUE* and *RED* PDBs, generating a specific report.
@@ -356,6 +368,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix blue
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
@@ -382,6 +395,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/red_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/red_premigration_advisor_report.txt
     ```
+
     </details>
 
 ## Task 4: Check that total issues were reduced
@@ -399,11 +413,12 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     # Be sure to hit RETURN
     ```
+
 2. Check the issues on *BLUE* PDB.
 
     On the first tab, which is the *BLUE* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are significantly less issues to be analysed.
 
-    ![Blue Summary](images/blue_summary_adb.png)
+    ![Blue Summary](./images/blue_summary_adb.png)
 
     * Actions Required reduced from 6 to 4
     * Reviews Required reduced from 10 to 7
@@ -413,7 +428,7 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are almost nothing to be analysed.
 
-    ![Red Summary](images/red_summary_adb.png)
+    ![Red Summary](./images/red_summary_adb.png)
 
     * Actions Required reduced from 3 to 2
     * Reviews Required reduced from 6 to 3
@@ -428,6 +443,7 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 Now that we could see that CPAT could generate a report when you still don't know the migration method that will be used, let's create a more specific report, where I want to specify which method we are using.
 
 In this lab, we will be moving:
+
 * *BLUE* PDB using Data Pump.
 * *RED* PDB using Data Pump with DB Links.
 
@@ -451,6 +467,7 @@ So, let's create a CPAT report where we only list issues for this specific migra
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod DATAPUMP --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix blue
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
@@ -477,6 +494,7 @@ So, let's create a CPAT report where we only list issues for this specific migra
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/red_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/red_premigration_advisor_report.txt
     ```
+
     </details>
 
 ## Task 6: Check issues that will affect this migration
@@ -499,27 +517,27 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
    On the first tab, which is the *BLUE* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are significantly less issues to be analysed.
 
-   ![Blue Summary](images/blue_summary_adb.png)
+   ![Blue Summary](./images/blue_summary_adb.png)
 
    * Action Requireds reduced now to just 1, on Source Database
    * The checks that will need a closer attention are:
-     + "User Defined Objects in SYS" (Action Required)
-     + "Database Links" (Review Required)
-     + "External Tables for Serverless" (Review Required)
-     + "Directories" (Review Required)
-     + "Non-Exported Object Grants" (Review Required)
-   + We will later on another lab see how to fix each of them while moving to ADB.
+     * "User Defined Objects in SYS" (Action Required)
+     * "Database Links" (Review Required)
+     * "External Tables for Serverless" (Review Required)
+     * "Directories" (Review Required)
+     * "Non-Exported Object Grants" (Review Required)
+   * We will later on another lab see how to fix each of them while moving to ADB.
 
 3. Check the issues on *RED* PDB.
 
    On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are almost nothing to be analysed.
 
-   ![Red Summary](images/red_summary_adb.png)
+   ![Red Summary](./images/red_summary_adb.png)
 
    * Action Requireds reduced to 0
    * The only check that will need a closer attention is:
-     + "Directories" (Review Required)
-   + However, it only lists internal directories that don't exists in ADB, but are not being used by the application. So this can be safelly ignored
+     * "Directories" (Review Required)
+   * However, it only lists internal directories that don't exists in ADB, but are not being used by the application. So this can be safelly ignored
 
    Now that we know what needs to be adapted before moving to ADB, we can move to the next lab.
 

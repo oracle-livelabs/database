@@ -17,13 +17,13 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 6: Migration using Data Pump with NFS
+* You have completed Lab 6: Migration using Data Pump with NFS
 
 ## Task 1: Verify Data Pump errors
 
 1. Use the *yellow* terminal 🟨. Examine the last lines of a Data Pump import log file.
 
-    ```
+    ``` shell
     <copy>
     tail -1 /nfs_mount/schemas_import_nfs.log
     </copy>
@@ -34,15 +34,17 @@ This lab assumes:
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ tail -1 /nfs_mount/schemas_import_nfs.log
     02-JUL-25 13:43:11.295: Job "ADMIN"."SYS_IMPORT_SCHEMA_01" completed with 1 error(s) at Wed Jul 2 13:43:11 2025 elapsed 0 00:00:46
     ```
+
     </details>
 
 2. In the Data Pump NFS import, we experience an error. What is it about it?
 
-    ```
+    ``` shell
     <copy>
     grep -B 1 -A 2 'ORA-' /nfs_mount/schemas_import_nfs.log
     </copy>
@@ -53,21 +55,23 @@ This lab assumes:
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     02-JUL-25 13:42:30.736: W-1 Processing object type SCHEMA_EXPORT/DB_LINK
     02-JUL-25 13:42:30.809: ORA-31685: Object type DB_LINK:"SH"."F1" failed due to insufficient privileges. Failing sql is:
     CREATE DATABASE LINK "F1"  CONNECT TO "F1" IDENTIFIED BY VALUES ':1'  USING '//localhost:1521/red'
     02-JUL-25 13:42:30.819: W-1      Completed 1 DB_LINK objects in 0 seconds
     ```
+
     </details>
 
-3.  These are just examples of the errors you might encounter. In each situation, you must investigate the situation and determine whether or not it influences the integrity of the data you're moving.
+3. These are just examples of the errors you might encounter. In each situation, you must investigate the situation and determine whether or not it influences the integrity of the data you're moving.
 
 ## Task 2: Comparing total rows on Data Pump export/import logs
 
 1. You can also compare total rows returned in both import/export logs. This is a good way for tracking overall missing objects and errors.
 
-    ```
+    ``` shell
     <copy>
     grep -w exported /nfs_mount/schemas_export.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_export_rows.log
 
@@ -81,6 +85,7 @@ This lab assumes:
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~]$ grep -w exported /nfs_mount/schemas_export.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_export_rows.log
     [ADB:oracle@holserv1:~]$ grep -w imported /nfs_mount/schemas_import_nfs.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_import_nfs_rows.log
@@ -98,27 +103,28 @@ This lab assumes:
     [ADB:oracle@holserv1:~]$ diff -s /nfs_mount/schemas_export_rows.log /nfs_mount/schemas_import_nfs_rows.log
     Files /nfs_mount/schemas_export_rows.log and /nfs_mount/schemas_import_nfs_rows.log are identical
     ```
+
     </details>
 
-## Task 3: Revisiting the CPAT checks.
+## Task 3: Revisiting the CPAT checks
 
 When we executed CPAT for the *BLUE* database, there were some items on the "Review Required" action that we had for the target database:
 
 1. Database Links
 
-![Database Links](images/blue-dblinks.png)
+    ![Database Links](./images/blue-dblinks.png)
 
 2. External Tables
 
-![External Tables](images/blue-external-tables.png)
+    ![External Tables](./images/blue-external-tables.png)
 
 3. Directories
 
-![Directories](images/blue-directories.png)
+    ![Directories](./images/blue-directories.png)
 
-So it's not a surprise that some issues will need to be fixed after the migration. On the next tasks, we will check and fix them.
+    So it's not a surprise that some issues will need to be fixed after the migration. On the next tasks, we will check and fix them.
 
-This is also again a good opportunity to read the CPAT file for any other finding, including the "Review Suggested" ones.
+    This is also again a good opportunity to read the CPAT file for any other finding, including the "Review Suggested" ones.
 
 ## Task 4: Fix the database link error
 
@@ -156,6 +162,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory ruby_dblink_wallet_dir as 'ruby_dblink_wallet_dir';
 
@@ -173,6 +180,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     Grant succeeded.
     ```
+
     </details>
 
 3. Next, let's upload the local wallet files to this directory.
@@ -187,6 +195,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @~/scripts/adb-07-upload_file.sql /home/oracle/adb_tls_wallet/cwallet.sso RUBY_DBLINK_WALLET_DIR cwallet.sso
     Starting upload_file.js script...
@@ -200,6 +209,7 @@ We need to upload the *RED* wallet to ADB directory.
     File successfully written to Oracle directory.
     File uploaded successfully.
     ```
+
     </details>
 
 4. Check if file was uploaded.
@@ -214,6 +224,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select * from dbms_cloud.list_files('ruby_dblink_wallet_dir');
 
@@ -221,6 +232,7 @@ We need to upload the *RED* wallet to ADB directory.
     ______________ ________ ___________ ______________________________________ ______________________________________
     cwallet.sso        3899             02-JUL-25 03.28.11.618341000 PM GMT    02-JUL-25 03.28.11.713437000 PM GMT
     ```
+
     </details>
 
 5. Now connect as SH user. Create the DB link credentials.
@@ -245,6 +257,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> conn sh/oracle@sapphire_tp
 
@@ -259,6 +272,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 6. Create the DB link and test it.
@@ -287,6 +301,7 @@ We need to upload the *RED* wallet to ADB directory.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> begin
       2    dbms_cloud_admin.create_database_link(
@@ -308,6 +323,7 @@ We need to upload the *RED* wallet to ADB directory.
     ___________
           26439
     ```
+
     </details>
 
 7. Now close SQLcl:
@@ -326,7 +342,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 1. Still in the *yellow* 🟨 terminal, connect to the *SAPPHIRE* ADB. This is our target database.
 
-    ```
+    ``` shell
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -347,11 +363,13 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory blue_dblink_wallet_dir as 'blue_dblink_wallet_dir';
 
     Directory BLUE_DBLINK_WALLET_DIR created.
     ```
+
     </details>
 
 3. Next, let's upload the local wallet files to this directory.
@@ -366,6 +384,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @~/scripts/adb-07-upload_file.sql /home/oracle/client_tls_wallet/cwallet.sso BLUE_DBLINK_WALLET_DIR cwallet.sso
     Starting upload_file.js script...
@@ -379,6 +398,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     File successfully written to Oracle directory.
     File uploaded successfully.
     ```
+
     </details>
 
 4. Check if file was uploaded.
@@ -393,6 +413,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select * from dbms_cloud.list_files('blue_dblink_wallet_dir');
 
@@ -400,6 +421,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     ______________ ________ ___________ ______________________________________ ______________________________________
     cwallet.sso        3035             02-JUL-25 03.28.11.618341000 PM GMT    02-JUL-25 03.28.11.713437000 PM GMT
     ```
+
     </details>
 
 5. Create the DB link credentials.
@@ -422,6 +444,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> begin
       2    dbms_cloud.create_credential(
@@ -433,6 +456,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 6. Create the DB link and test it.
@@ -442,7 +466,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     begin
       dbms_cloud_admin.create_database_link(
         db_link_name => 'SOURCE_DBLINK',
-        hostname => 'holserv1.livelabs.oraclevcn.com',
+        hostname => 'hol-server',
         port => '1522',
         service_name => 'blue',
         ssl_server_cert_dn => 'CN=holserv1',
@@ -459,11 +483,12 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> begin
       2    dbms_cloud_admin.create_database_link(
       3      db_link_name => 'SOURCE_DBLINK',
-      4      hostname => 'holserv1.livelabs.oraclevcn.com',
+      4      hostname => 'hol-server',
       5      port => '1522',
       6      service_name => 'blue',
       7      ssl_server_cert_dn => 'CN=holserv1',
@@ -480,11 +505,12 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     ________
     X
     ```
+
     </details>
 
 7. Count the number of objects grouped by types in the target database and compare it to the source database.
 
-    ```
+    ``` sql
     <copy>
     select object_type, count(*) from dba_objects where owner in ('HR','PM','IX','SH','BI') group by object_type
     minus
@@ -495,6 +521,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     ```
 
     <summary>*Output:*</summary>
+
     ``` text
     OBJECT_TYPE       COUNT(*)
     ______________ ___________
@@ -507,12 +534,12 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 8. Also, check the total number of constraints, as they are not on dba_objects, grouped by tables, in the target database and compare it to the source database.
 
-    ```
+    ``` sql
     <copy>
-    select owner, table_name, count(table_name) 
+    select owner, table_name, count(table_name)
     from dba_constraints where owner in ('HR','PM','IX','SH','BI') group by owner, table_name
     minus
-    select owner, table_name, count(table_name) 
+    select owner, table_name, count(table_name)
     from dba_constraints@source_dblink where owner in ('HR','PM','IX','SH','BI') group by owner, table_name;
     </copy>
 
@@ -520,6 +547,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     ```
 
     <summary>*Output:*</summary>
+
     ``` text
     no rows selected
     ```
@@ -540,6 +568,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> ! cat /home/oracle/scripts/adb-09-dba_tables-compare.sql
     with src_tab as (select /*+ materialize */ owner,table_name,logging,iot_type,monitoring,segment_created,external from dba_tables@source_dblink where owner in ('F1','HR','PM','IX','SH','BI')),
@@ -576,6 +605,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     8 rows selected.
     ```
+
     </details>
 
 10. From the output, we can check that:
@@ -627,6 +657,7 @@ When we perform a Data Pump schema export/import, directories are not moved as t
     ```
 
     <summary>Output</summary>
+
     ``` text
     GRANTEE    DIRECTORY_NAME    DIRECTORY_PATH                                PRIVILEGE
     __________ _________________ _____________________________________________ ____________
@@ -662,6 +693,7 @@ When we perform a Data Pump schema export/import, directories are not moved as t
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory data_file_dir as 'sample-apps/sales_history';
 
@@ -693,6 +725,7 @@ When we perform a Data Pump schema export/import, directories are not moved as t
 
     SQL>
     ```
+
     </details>
 
 ## Task 7: Fix the External Table issue
@@ -715,6 +748,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select count(*) from sh.sales_transactions_ext;
 
@@ -729,6 +763,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
          916039
 
     ```
+
     </details>
 
 2. Now, switch to the *blue* 🟦 terminal. Set the environment to *ADB* and get the DDL for this table.
@@ -753,6 +788,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [ADB:oracle@holserv1:~/scripts]$ impdp userid=admin/Welcome_1234@sapphire_tp \
     > directory=nfs_dir \
@@ -783,15 +819,15 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     ALTER SESSION SET EVENTS '22830 TRACE NAME CONTEXT FOREVER, LEVEL 192 ';
     -- new object type path: SCHEMA_EXPORT/TABLE/TABLE
     CREATE TABLE "SH"."SALES_TRANSACTIONS_EXT"
-       (	"PROD_ID" NUMBER,
-    	"CUST_ID" NUMBER,
-    	"TIME_ID" DATE,
-    	"CHANNEL_ID" NUMBER,
-    	"PROMO_ID" NUMBER,
-    	"QUANTITY_SOLD" NUMBER,
-    	"AMOUNT_SOLD" NUMBER(10,2),
-    	"UNIT_COST" NUMBER(10,2),
-    	"UNIT_PRICE" NUMBER(10,2)
+       ( "PROD_ID" NUMBER,
+         "CUST_ID" NUMBER,
+         "TIME_ID" DATE,
+         "CHANNEL_ID" NUMBER,
+         "PROMO_ID" NUMBER,
+         "QUANTITY_SOLD" NUMBER,
+         "AMOUNT_SOLD" NUMBER(10,2),
+         "UNIT_COST" NUMBER(10,2),
+         "UNIT_PRICE" NUMBER(10,2)
        )  DEFAULT COLLATION "USING_NLS_COMP"
        ORGANIZATION EXTERNAL
         ( TYPE ORACLE_LOADER
@@ -821,21 +857,22 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     -- new object type path: SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
     -- new object type path: SCHEMA_EXPORT/STATISTICS/MARKER
     ```
+
     </details>
 
 3. The generate DDL is:
 
     ```text
     CREATE TABLE "SH"."SALES_TRANSACTIONS_EXT"
-       (	"PROD_ID" NUMBER,
-    	"CUST_ID" NUMBER,
-    	"TIME_ID" DATE,
-    	"CHANNEL_ID" NUMBER,
-    	"PROMO_ID" NUMBER,
-    	"QUANTITY_SOLD" NUMBER,
-    	"AMOUNT_SOLD" NUMBER(10,2),
-    	"UNIT_COST" NUMBER(10,2),
-    	"UNIT_PRICE" NUMBER(10,2)
+       ( "PROD_ID" NUMBER,
+         "CUST_ID" NUMBER,
+         "TIME_ID" DATE,
+         "CHANNEL_ID" NUMBER,
+         "PROMO_ID" NUMBER,
+         "QUANTITY_SOLD" NUMBER,
+         "AMOUNT_SOLD" NUMBER(10,2),
+         "UNIT_COST" NUMBER(10,2),
+         "UNIT_PRICE" NUMBER(10,2)
        )  DEFAULT COLLATION "USING_NLS_COMP"
        ORGANIZATION EXTERNAL
         ( TYPE ORACLE_LOADER
@@ -878,6 +915,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @~/scripts/adb-07-upload_file.sql /u01/app/oracle/sample-apps/sales_history/sale1v3.dat DATA_FILE_DIR sale1v3.dat
     Starting upload_file.js script...
@@ -891,6 +929,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     File successfully written to Oracle directory.
     File uploaded successfully.
     ```
+
     </details>
 
 5. Check if file was uploaded.
@@ -905,6 +944,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select * from dbms_cloud.list_files('data_file_dir');
 
@@ -912,6 +952,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     ______________ ___________ ___________ ______________________________________ ______________________________________
     sale1v3.dat       42445678             03-JUL-25 08.40.05.617442000 PM GMT    03-JUL-25 08.40.06.807438000 PM GMT
     ```
+
     </details>
 
 6. Now connect as SH user. Create the external table and test it.
@@ -934,6 +975,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> conn sh/oracle@sapphire_tp
 
@@ -991,21 +1033,22 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     ___________
          916039
     ```
+
     </details>
 
     Now the external table is fixed and returning the same ammount of rows as on the source environment.
 
-## Task 8: What about the MEDIA\_DIR directory?
+## Task 8: What about the MEDIA_DIR directory?
 
 After creating the missing directories, *DATA\_FILE\_DIR* and *LOG\_FILE\_DIR* were used by the *SH* external table. What about the *MEDIA\_DIR* directory?
 
 Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fix that.
 
-* Note: BFILEs are large data objects stored in the server's operating system files outside the database tablespaces. 
+* Note: BFILEs are large data objects stored in the server's operating system files outside the database tablespaces.
 
 1. Still in the *yellow* 🟨 terminal, check the PM.PRINT\_MEDIA table structure.
 
-    ```
+    ``` sql
     <copy>
     conn admin/Welcome_1234@sapphire_tp
 
@@ -1017,6 +1060,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> conn admin/Welcome_1234@sapphire_tp
     Connected.
@@ -1038,11 +1082,12 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     SQL>
     ```
+
     </details>
 
 2. Check what are the files and directories refenced by this table
 
-    ```
+    ``` sql
     <copy>
     WITH
       FUNCTION GET_DIR_NAME (BF BFILE) RETURN VARCHAR2 IS
@@ -1064,6 +1109,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
     ```
 
     <summary>*Output:*</summary>
+
     ``` text
     GET_DIR_NAME(AD_GRAPHIC)
     ___________________________
@@ -1078,7 +1124,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
 3. Move the missing files do ADB.
 
-    We need to connect back with ADMIN, as PM user has no *WRITE* privileges under this directory. 
+    We need to connect back with ADMIN, as PM user has no *WRITE* privileges under this directory.
 
     ``` shell
     <copy>
@@ -1096,6 +1142,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @~/scripts/adb-07-upload_file.sql /u01/app/oracle/sample-apps/product_media/monitor.jpg MEDIA_DIR monitor.jpg
     Starting upload_file.js script...
@@ -1143,6 +1190,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
     File uploaded successfully.
     SQL>
     ```
+
     </details>
 
 4. Check if table now validates the BFILEs.
@@ -1155,10 +1203,11 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
     -- Be sure to hit RETURN
     ```
 
-    * The "1" output means that the files could be located. 
+    * The "1" output means that the files could be located.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select dbms_lob.fileexists(ad_graphic) from pm.print_media;
 
@@ -1169,6 +1218,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
                                      1
                                      1
         ```
+
     </details>
 
 5. Now close SQLcl:

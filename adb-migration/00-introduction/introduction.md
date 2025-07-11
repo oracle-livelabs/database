@@ -4,7 +4,7 @@
 
 An autonomous database (ADB) is a cloud database that uses machine learning to automate database tuning, security, backups, updates, and other routine management tasks traditionally performed by DBAs. Unlike a conventional database, an autonomous database performs all these tasks and more without human intervention.
 
-In this lab, you will learn all the steps to move your current workload to ADB, in a number of ways, and to test its power and flexibility. 
+In this lab, you will learn all the steps to move your current workload to ADB, in a number of ways, and to test its power and flexibility.
 
 Estimated Workshop Time: 2 hours
 
@@ -25,7 +25,7 @@ In this workshop, you will:
 This workshop comes with pre-installed Oracle homes and pre-created databases. The 2 Autonomous Databases instances are running on *podman* the Autonomous Database Free Container Image.
 You can switch between environments using the shortcuts shown in the last column of the diagram below.
 
-![Overview of the Oracle Homes and databases in the lab](images/introduction-overview.png " ")
+![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
 ## Learn More
 
@@ -33,6 +33,7 @@ You can switch between environments using the shortcuts shown in the last column
 * [YouTube channel](https://www.youtube.com/@upgradenow/)
 
 ## Acknowledgments
+
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Rodrigo Jorge, May 2025

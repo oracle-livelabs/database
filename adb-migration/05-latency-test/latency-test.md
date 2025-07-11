@@ -24,7 +24,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 This is an optional lab. You can skip it if you are already familiar with ADBPing.
 
@@ -32,7 +32,7 @@ This is an optional lab. You can skip it if you are already familiar with ADBPin
 
 ADBPing tool is available in *My Oracle Support*, on Doc ID 2863450.1.
 
-![ADBPing](images/mos-adbping.png)
+![ADBPing](./images/mos-adbping.png)
 
 The tool was already pre-downloaded on this lab and is available at */home/oracle/scripts/*.
 
@@ -52,6 +52,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     [CDB23:oracle@holserv1:~/cpat_output]$ mkdir -p /home/oracle/adbping
     [CDB23:oracle@holserv1:~/cpat_output]$ unzip /home/oracle/scripts/adbping_Linux.X64_230127.zip -d /home/oracle/adbping
@@ -88,6 +89,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     drwxr-xr-x. 4 oracle oinstall      47 Jan 27  2023  samples
     -rwxrwxrwx. 1 oracle oinstall 1398331 Jan 27  2023  ucp.jar
     ```
+
     </details>
 
 ## Task 2: Generate ADBPing report for ADB
@@ -109,9 +111,10 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
     ```
 
     What we are doing here?
-       * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
-       * Connecting to ADB using "SQL*Plus".
-       * Opening 10 threads (*-t 10*) in parallel.
+
+    * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
+    * Connecting to ADB using "SQL*Plus".
+    * Opening 10 threads (*-t 10*) in parallel.
 
     ``` shell
     [ADB:oracle@holserv1:~/adbping]$ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c sqlplus -s sapphire_tp -d 10 -t 10
@@ -129,10 +132,10 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
 
     Interpreting the results:
 
-       * In 10 seconds, 670 times the session was opened and *select 1 from dual* was executed.
-       * The time to execute each SQL was avg 0.478 ms. This is less than 1 ms, which is very fast.
-       * The time to connect and execute was about 127 ms.
-         + The connection time accounted almost 100% of the total time.
+    * In 10 seconds, 670 times the session was opened and *select 1 from dual* was executed.
+    * The time to execute each SQL was avg 0.478 ms. This is less than 1 ms, which is very fast.
+    * The time to connect and execute was about 127 ms.
+      * The connection time accounted almost 100% of the total time.
 
 2. Execute *adbping* for *SAPPHIRE* ADB, via java method.
 
@@ -168,11 +171,11 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
 
     Interpreting the results:
 
-       * In 10 seconds, 123896 times the session was opened and *select 1 from dual* was executed. This is almost 200x more than using SQL*Plus method.
-       * The time to execute each SQL was avg 0.826 ms, less than 1 ms, which is still very fast.
-       * The time to connect and execute was about 0.858 ms.
-         + The connection time accounted less than 1% of the total time now.
-         + Reason for all this gain is because java will connect once and use a pool to run the statements.
+    * In 10 seconds, 123896 times the session was opened and *select 1 from dual* was executed. This is almost 200x more than using SQL*Plus method.
+    * The time to execute each SQL was avg 0.826 ms, less than 1 ms, which is still very fast.
+    * The time to connect and execute was about 0.858 ms.
+      * The connection time accounted less than 1% of the total time now.
+      * Reason for all this gain is because java will connect once and use a pool to run the statements.
 
 ## Task 3: Compare result with current PDBs
 
@@ -191,10 +194,11 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
     ```
 
     What we are doing here?
-       * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
-       * Connecting to ADB using "sqlplus".
-       * Opening 2 threads (*-t 2*) in parallel.
-         + We only 2 parallel process or we may cause starvation on the local connection resources.
+
+    * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
+    * Connecting to ADB using "sqlplus".
+    * Opening 2 threads (*-t 2*) in parallel.
+      * We only 2 parallel process or we may cause starvation on the local connection resources.
 
     ``` shell
     [ADB:oracle@holserv1:~/adbping]$ ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
@@ -212,12 +216,12 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
 
     Interpreting the results:
 
-       * In 10 seconds, 380 times the session was opened and *select 1 from dual* was executed.
-       * The time to execute each SQL was avg 0.368 ms.
-         + This was about the same time it took in ADB.
-       * The time to connect and execute was about 49 ms.
-         + The connection time accounted almost 100% of the total time.
-         + It took 2.5x more time to stablish SQL*Plus connection on *SAPPHIRE* ADB than on the local *BLUE* PDB.
+    * In 10 seconds, 380 times the session was opened and *select 1 from dual* was executed.
+    * The time to execute each SQL was avg 0.368 ms.
+      * This was about the same time it took in ADB.
+    * The time to connect and execute was about 49 ms.
+      * The connection time accounted almost 100% of the total time.
+      * It took 2.5x more time to stablish SQL*Plus connection on *SAPPHIRE* ADB than on the local *BLUE* PDB.
 
 2. Execute *adbping* for *BLUE* PDB, via java method.
 
@@ -250,12 +254,12 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
 
     Interpreting the results:
 
-       * In 10 seconds, 555099 times the session was opened and *select 1 from dual* was executed.
-         + This is about 1500x faster than using SQL*Plus method.
-         + This is 3x more than using java method on ADB.
-       * The time to execute each SQL was avg 0.145 ms.
-       * The time to connect and execute was about 0.162 ms.
-         + The connection time accounted less than 1% of the total time.
+    * In 10 seconds, 555099 times the session was opened and *select 1 from dual* was executed.
+      * This is about 1500x faster than using SQL*Plus method.
+      * This is 3x more than using java method on ADB.
+    * The time to execute each SQL was avg 0.145 ms.
+    * The time to connect and execute was about 0.162 ms.
+      * The connection time accounted less than 1% of the total time.
 
 After mesuring and comparing the total latency for ADB vs the local PDB, we can see PDB is faster, specially as the authentication process does not use TLS or mTLS.
 
