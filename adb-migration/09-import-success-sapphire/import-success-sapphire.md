@@ -193,6 +193,8 @@ We need to upload the *RED* wallet to ADB directory.
     -- Be sure to hit RETURN
     ```
 
+    * *adb-07-upload\_file.sql* will upload a file to an *Oracle Directory* using SQLcl and JavaScript.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -381,6 +383,8 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
     -- Be sure to hit RETURN
     ```
+
+    * *adb-07-upload\_file.sql* will upload a file to an *Oracle Directory* using SQLcl and JavaScript.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -913,6 +917,8 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     -- Be sure to hit RETURN
     ```
 
+    * *adb-07-upload\_file.sql* will upload a file to an *Oracle Directory* using SQLcl and JavaScript.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -1139,6 +1145,8 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     -- Be sure to hit RETURN
     ```
+
+    * *adb-07-upload\_file.sql* will upload a file to an *Oracle Directory* using SQLcl and JavaScript.
 
     <details>
     <summary>*click to see the output*</summary>

@@ -515,33 +515,33 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
 2. Check the issues on *BLUE* PDB.
 
-   On the first tab, which is the *BLUE* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are significantly less issues to be analysed.
+    On the first tab, which is the *BLUE* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*,  you can see there are significantly less issues to be analysed.
 
-   ![Blue Summary](./images/blue_summary_adb.png)
+    ![Blue Summary](./images/blue_summary_adb.png)
 
-   * Action Requireds reduced now to just 1, on Source Database
-   * The checks that will need a closer attention are:
-     * "User Defined Objects in SYS" (Action Required)
-     * "Database Links" (Review Required)
-     * "External Tables for Serverless" (Review Required)
-     * "Directories" (Review Required)
-     * "Non-Exported Object Grants" (Review Required)
-   * We will later on another lab see how to fix each of them while moving to ADB.
+    * Action Requireds reduced now to just 1, on Source Database
+    * The checks that will need a closer attention are:
+      * "User Defined Objects in SYS" (Action Required)
+      * "Database Links" (Review Required)
+      * "External Tables for Serverless" (Review Required)
+      * "Directories" (Review Required)
+      * "Non-Exported Object Grants" (Review Required)
+    * We will later on another lab see how to fix each of them while moving to ADB.
 
 3. Check the issues on *RED* PDB.
 
-   On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are almost nothing to be analysed.
+    On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*,  you can see there are almost nothing to be analysed.
 
-   ![Red Summary](./images/red_summary_adb.png)
+    ![Red Summary](./images/red_summary_adb.png)
 
-   * Action Requireds reduced to 0
-   * The only check that will need a closer attention is:
-     * "Directories" (Review Required)
-   * However, it only lists internal directories that don't exists in ADB, but are not being used by the application. So this can be safelly ignored
+    * Action Requireds reduced to 0
+    * The only check that will need a closer attention is:
+      * "Directories" (Review Required)
+    * However, it only lists internal directories that don't exists in ADB, but are not being used by the application. So this  can be safelly ignored
 
-   Now that we know what needs to be adapted before moving to ADB, we can move to the next lab.
+    Now that we know what needs to be adapted before moving to ADB, we can move to the next lab.
 
-   Close Firefox.
+    Close Firefox.
 
 You may now *proceed to the next lab*.
 
