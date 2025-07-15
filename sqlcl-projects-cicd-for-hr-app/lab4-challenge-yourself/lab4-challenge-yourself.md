@@ -208,6 +208,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
             project stage -verbose
         </copy>
         ```
+
         <!--![Git add and commit](./images/git-add-commit.png " ")
         ![Project stage](./images/project-stage.png " ")-->
 
