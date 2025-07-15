@@ -148,7 +148,13 @@ In this lab, you will be guided through the following tasks:
     **Destination Port Range**:
 
     ```bash
-    <copy>80,443</copy>
+    <copy>80,443,5000</copy>
+    ```
+
+    **Description**
+
+    ```bash
+    <copy>Web app ports</copy>
     ```
 
     ![Ingress rules](./images/18-enter-ingess-rules-default-security-list.png "Ingress rules") 
@@ -224,9 +230,9 @@ You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Solution Engineering
+- **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributor** 
     - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
-    - Selena Sanchez, MySQL Staff Solutions Engineer, 
+    - Selena Sanchez, MySQL Staff Solutions Engineer,
     - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,April  2025
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, April  2025

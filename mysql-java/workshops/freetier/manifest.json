@@ -16,7 +16,7 @@
         {
             "title": "Lab 1: Setup Kubernetes",
             "description": "Labs that follow the introduction are numbered, starting with Lab 1",
-            "filename": "https://oracle-livelabs.github.io/weblogic/weblogic-kubernetes/setup-oke-ocishell/setup-oke-ocishell.md"
+            "filename": "../../setup-oke-ocicli/setup-oke.md"
         },
         {
             "title": "Lab 2: Setup MySQL",

@@ -328,7 +328,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     Looks like **Antonia Mclachlan** is the owner of this account.  
 
-17. What about account 934?
+18. What about account 934?
 
     Let's run the same query but for account **934**.
 
@@ -339,11 +339,11 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     </copy>
     ```
     
-    ​![owner of account 387](images/owner-of-account387.png)
+    ​![owner of account 934](images/owner-of-account934.png)
 
     The owner of account 934 is **Russell Rivera**.   
 
-18. Let’s look at the **circular transfers that originate and terminate at Russell Rivera's account**, and visualize the results.
+19. Let’s look at the **circular transfers that originate and terminate at Russell Rivera's account**, and visualize the results.
 
     We start with the **of hops equals 4** as specified as []->{4}.
 
@@ -364,7 +364,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     We see **three circular payment chains 4 hops** in length, that start and end in this account.
 
-19. Now we want to look at the circular payment chains when we change the chain length to be **5 hops**.
+20. Now we want to look at the circular payment chains when we change the chain length to be **5 hops**.
 
     ```
     <copy>
@@ -383,7 +383,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     **The number of circular payment chains that start and end in Russell Rivera's account makes it an account we should investigate further.**
 
-20. Let us continue our investigation using another algorithm, the PageRank graph analytics algorithm.
+21. Let us continue our investigation using another algorithm, the PageRank graph analytics algorithm.
 
     A %python-pgx paragraph let's you execute Python code snippets. **We will use the Python API to run the PageRank algorithm.**
     The code snippet below creates a PgxGraph object containing a handle to the BANK_GRAPH loaded into the in-memory graph server.
@@ -400,7 +400,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running pagerank](images/run-pagerank.png)
 
-21. Now let's list the PageRank values in descending order to find the accounts with high PageRank values. **A high PageRank value indicates that that account is important**, which in the context of BANK_GRAPH, a high number of transfers have flown through that account, or the account is connected to accounts with a high number of transfers flowing through them.
+22. Now let's list the PageRank values in descending order to find the accounts with high PageRank values. **A high PageRank value indicates that that account is important**, which in the context of BANK_GRAPH, a high number of transfers have flown through that account, or the account is connected to accounts with a high number of transfers flowing through them.
 
     ```
     <copy>
@@ -418,7 +418,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     We see that **Russell Rivera's is in the top 5**. So this metric also indicates that a large number of transactions flow through Russell Rivera's account.
     But he is not at the very top, and interestingly **Antonia Mclachlan is at the top of the list**.
 
-22. Now let's use the **computed PageRank value** in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
+23. Now let's use the **computed PageRank value** in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
 
     Execute the paragraph with the following query, which finds the **3-hop payment chains starting at Antonia Mclachlan's account**.
 
@@ -438,7 +438,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     From this visualization we can quickly see **which accounts that are connected to Antonia Maclachlan also have a high pagerank value**.
 
-23. So far, we used the knowledge that a highly connected account might be fraudulent, or when money moves in a cycle then there is potential fraud. What if we did **not know this about this specific domain**, that cycles might indicate fraud? What if we only new that accounts 934 and 387 are fraudulent, but did not have the additional information on what patterns might constitute fraud?
+24. So far, we used the knowledge that a highly connected account might be fraudulent, or when money moves in a cycle then there is potential fraud. What if we did **not know this about this specific domain**, that cycles might indicate fraud? What if we only new that accounts 934 and 387 are fraudulent, but did not have the additional information on what patterns might constitute fraud?
 
     We can use a **Graph Machine Learning** algorithm like **DeepWalk** to find accounts that have a similar structure to an account. We don't know what structure we are looking for, we are looking for any structure that is similar. That is the power of machine learning - **you can find similarities even if you don't know exactly what are you are looking for.**
 
@@ -455,7 +455,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running deepwalk](images/deepwalk.png)
 
-24. Now we will **train the DeepWalk model**. Run the following paragraph.
+25. Now we will **train the DeepWalk model**. Run the following paragraph.
 
     ```
     <copy>
@@ -469,7 +469,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![training deepwalk model](images/train-deepwalk.png) 
 
-25. Let's get the **most similar nodes to account 934** with respect to transfer patterns.
+26. Let's get the **most similar nodes to account 934** with respect to transfer patterns.
 
     ```
     <copy>
@@ -482,7 +482,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running deepwalk for account 934](images/deepwalk934.png)
 
-26. Now we will take look at **similar nodes to account 387** with respect to transfer patterns.
+27. Now we will take look at **similar nodes to account 387** with respect to transfer patterns.
 
     ```
     <copy>
@@ -497,7 +497,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     We see that 135 shows up as the account closest to 934 and 387, in terms of the patterns of the connections that account is involved in.
 
-27. **When we query for transactions 2 hops away from 934, 387, or 135, we see that their patterns are similar**. Let's add a highlight to see these accounts by giving them a 'star' icon. You can also right-click on them to check their account ids.
+28. **When we query for transactions 2 hops away from 934, 387, or 135, we see that their patterns are similar**. Let's add a highlight to see these accounts by giving them a 'star' icon. You can also right-click on them to check their account ids.
 
     ```
     <copy>
@@ -523,4 +523,4 @@ You have now completed this lab.
 
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
 - **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Ramu Murakami Gutierrez, December 18th 2024
+- **Last Updated By/Date** - Renée Wikestad June 2025

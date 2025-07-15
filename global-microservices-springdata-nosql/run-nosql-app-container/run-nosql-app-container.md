@@ -37,7 +37,7 @@ In this task we will review the code using OCI Code Editor.
 
 1. Open the OCI Code Editor in the top right menu.
 
-    ![Cloud Editor](./images/cloud-code-editor.png)
+    ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
 
 
 2. Go to the Code Editor, and open the file `AppConfig.java` in the following directory

@@ -28,11 +28,20 @@
           "title": "Lab 3: Setup Sakila Sample Database and JavaScript Stored Function",
           "filename": "../../setup-sakila/setup-sakila.md"
         },
+
+
         {
 
-          "title": "Lab 4: Build and Test Apache/ PHP/ MySQL Web Application ",
-          "filename": "../../develop/develop.md"
+          "title": "Lab 4: Install, configure, and test Apache/PHP Web Application",
+          "filename": "../../develop-php/develop-php.md"
         },
+
+        {
+
+          "title": "Lab 5: Install, configure, and test Flask/Python Web Application",
+          "filename": "../../develop-python/develop-python.md"
+        },
+
 
         {
             "title": "Need Help?",

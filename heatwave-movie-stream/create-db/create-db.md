@@ -4,9 +4,13 @@
 
 ## Introduction
 
-In this lab, you will create and configure a MySQL HeatWave DB System.
+In this lab, you will create and configure a MySQL HeatWave DB System with HeatWave Cluster node.
 
-_Estimated Time:_ 15 minutes
+A HeatWave cluster comprise of a MySQL DB System node and one or more HeatWave nodes. The MySQL DB System node includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
+
+![heatwave architect](./images/mysql-heatwave-architecture.png =50%x* "heatwave architect ")
+
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -14,12 +18,11 @@ In this lab, you will be guided through the following tasks:
 
 - Create Compartment
 - Create Virtual Cloud Network
-- Create MySQL HeatWave (DB System) Instance
+- Create MySQL HeatWave (DB System) Instance with a HeatWave Cluster attached
 
 ### Prerequisites
 
 - An Oracle Trial or Paid Cloud Account
-- Some Experience with MySQL Shell
 
 ## Task 1: Create Compartment
 
@@ -53,12 +56,12 @@ In this lab, you will be guided through the following tasks:
 
     ![OCI Console Home Page](./images/homepage.png " home page")
 
-2. Click  **Networking**, then **Virtual Cloud Networks**  
+2. Click  **Networking**, then **Virtual Cloud Networks**
     ![menu vcn](./images/home-menu-networking-vcn.png "home menu networking vcn ")
 
     Select the **movies** compartment
 
-3. Select the Click **Start VCN Wizard**
+3. Click the 'Actions' menu and Click **Start VCN Wizard**
     ![vcn start wizard](./images/vcn-wizard-menu.png "vcn wizard menu")
 
 4. Select 'Create VCN with Internet Connectivity'
@@ -81,7 +84,7 @@ In this lab, you will be guided through the following tasks:
     Your screen should look similar to the following
     ![select compartment](./images/vcn-wizard-compartment.png "select compartment")
 
-6. Click 'Next' at the bottom of the screen
+6. Click **'Next'** at the bottom of the screen
 
 7. Review Oracle Virtual Cloud Network (VCN), Subnets, and Gateways
 
@@ -93,13 +96,13 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 3: Configure security list to allow MySQL incoming connections
 
-1. On HEATWAVE-VCN page under 'Subnets in **movies** Compartment', click  '**Private Subnet-HEATWAVE-VCN**'
+1. On HEATWAVE-VCN page in **movies** Compartment', on 'Subnets' tab , click  '**Private Subnet-HEATWAVE-VCN**'
      ![vcn subnet](./images/vcn-details-subnet.png "vcn details subnet")
 
-2. On Private Subnet-HEATWAVE-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-HEATWAVE-VCN**'
+2. On Private Subnet-HEATWAVE-VCN page on 'Security' tab,  click  '**Security List for Private Subnet-HEATWAVE-VCN**'
     ![vcn private security list](./images/vcn-private-security-list.png "vcn private security list")
 
-3. On Security List for Private Subnet-HEATWAVE-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
+3. On Security list for Private Subnet-HEATWAVE-VCN page on 'Security rules' tab and 'Ingress Rules' section, click '**Add Ingress Rules**'
     ![vcn private subnet](./images/vcn-private-security-list-ingress.png "vcn private security list ingress")
 
 4. On Add Ingress Rules page under Ingress Rule 1
@@ -119,7 +122,7 @@ In this lab, you will be guided through the following tasks:
     c. Description
 
     ```bash
-    <copy>MySQL Port Access</copy>
+    <copy>MySQL Ports Access</copy>
     ```
 
     d. Click 'Add Ingress Rule'
@@ -130,13 +133,13 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 4: Configure security list to allow HTTP incoming connections
 
-1. Navigation Menu > Networking > Virtual Cloud Networks
+1. **Navigation Menu > Networking > Virtual Cloud Networks**
 
-2. Open HEATWAVE-VCN
+2. Open HEATWAVE-VCN and Click on 'Security' tab
 
-3. Click  public subnet-HEATWAVE-VCN
+3. Click 'Default Security List for HEATWAVE-VCN'
 
-4. Click Default Security List for HEATWAVE-VCN
+4. Click on the 'Security rules' tab
 
 5. Click Add Ingress Rules page under Ingress Rule
 
@@ -155,7 +158,7 @@ In this lab, you will be guided through the following tasks:
     Description
 
     ```bash
-    <copy>Allow HTTP connections</copy>
+    <copy>Allow HTTP and HTTPs connections</copy>
     ```
 
 6. Click 'Add Ingress Rule'
@@ -169,9 +172,8 @@ In this lab, you will be guided through the following tasks:
 ## Task 5: Create MySQL Database for HeatWave (DB System) instance
 
 1. Click on Navigation Menu
-         Databases
-         MySQL
-    ![home menu mysq](./images/home-menu-database-mysql.png "home menu mysql")
+         Databases, HeatWave MySQL
+    ![home menu heatwave mysq](./images/home-menu-database-mysql.png "home menu heatwave mysql")
 
 2. Click 'Create DB System'
     ![mysql create button](./images/mysql-menu.png " mysql create button")
@@ -207,9 +209,6 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL HeatWave Database Instance</copy>
     ```
 
-    d. Select **Standalone** and enable **Configure MySQL HeatWave**
-    ![heatwave db info setup](./images/mysql-create-info-setup.png "heatwave db info setup ")
-
 6. Create Administrator Credentials
 
     **Enter Username** (write username to notepad for later use)
@@ -220,7 +219,11 @@ In this lab, you will be guided through the following tasks:
 
     ![heatwave db admin](./images/mysql-create-admin.png "heatwave db admin ")
 
-7. On Configure networking, keep the default values
+7. Select **Standalone**
+
+    ![heatwave db info setup](./images/mysql-create-info-setup.png "heatwave db info setup ")
+
+8. On Configure networking, keep the default values
 
     a. Virtual Cloud Network: **HEATWAVE-VCN**
 
@@ -232,19 +235,39 @@ In this lab, you will be guided through the following tasks:
 
     ![heatwave db network ad](./images/mysql-create-network-ad.png "heatwave db network ad ")
 
-8. On Configure hardware
-    - a. Click the **Change shape** button to select the **MySQL.HeatWave.VM.Standard** shape.
-    - b. For Data Storage Size (GB) Set value to:  **1024**
+9. On Configure hardware
+
+    a. Click on 'Edit' at the top right corner to expand the Configure hardware section
+
+    b. Select the checkbox 'Enable HeatWave cluster'
+
+    c. At 'Select Shape' section. Click on **Change shape** button to select the **MySQL.4** shape.
+
+    ![heatwave db  shape](./images/mysql-create-db-shape.png "heatwave db shape ")
+
+    d. At 'HeatWave cluster configuration' section. Click on **Configure HeatWave cluster**
+
+    - 1. Click on **Change shape** button to select the **HeatWave.512GB** node shape. Click on **Select a shape**
+    - 2. Keep **1** Node and the checkbox 'HeatWave Lakehouse' selected.
+    - 3. Click on **Save changes**
 
     ![heatwave db  hardware](./images/mysql-create-db-hardware.png "heatwave db hardware ")
 
-9. On Configure Backups, disable 'Enable Automatic Backup'
+    e. For Data Storage Size (GB) Set value to: **1024**
+
+     ![heatwave db hardware summary](./images/mysql-create-db-hardware-summary.png "heatwave db hardware summary")
+
+10. On Configure Backups, disable 'Enable Automatic Backup'
 
     ![heatwave db  backup](./images/mysql-create-backup.png " heatwave db  backup")
 
-10. Click on Show Advanced Options
+11. Click on Show Advanced Options
 
-11. Go to the Connections tab
+12. Go to the Configuration tab
+
+    a. Click on 'Select a database version' and choose the **latest MySQL '9.X.X Innovation'** version.
+
+13. Go to the Connections tab
 
     a. In the Hostname field enter (same as DB System Name):
 
@@ -252,33 +275,40 @@ In this lab, you will be guided through the following tasks:
         <copy>HW-MovieHub</copy>
     ```
 
-    b. Choose '**Service defined**' for Security certificate
+    b. Leave 'Read endpoint' unselected
+
+    c. Choose '**Service defined**' for Security certificate
 
     ![heatwave db advanced](./images/mysql-create-advanced.png "heatwave db advanced ")
 
-12. Review **Create MySQL DB System**  Screen
+14. Review **Create MySQL DB System**  Screen
 
     ![heatwave db create](./images/mysql-create.png "heatwave db create ")
 
     Click the '**Create**' button
 
-13. The New MySQL DB System will be ready to use after a few minutes
+15. The New MySQL DB System will be ready to use after a few minutes
 
     The state will be shown as 'Creating' during the creation
     ![show creeation state](./images/mysql-create-in-progress.png "show creeation state")
 
-14. The state 'Active' indicates that the DB System is ready for use
+16. The state 'Active' indicates that the DB System is ready for use
 
     ![show active state](./images/mysql-detail-active.png "show active state")
 
-15. On HEATWAVE-HW Page, select the **Connections** tab and save the MySQL Endpoint (Private IP Address) to notepad for use later.
+17. On HEATWAVE-HW Page, select the **Connections** tab and save the MySQL Endpoint (Private IP Address) to notepad for use later.
 
     ![heatwave endpoint](./images/mysql-detail-endpoint.png "heatwave endpoint")
 
 You may now **proceed to the next lab**
 
+## Learn More
+
+- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/home.htm)
+- [MySQL Database Documentation](https://www.MySQL.com)
+
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Author** - Cristian Aguilar, MySQL Solution Engineering
+- **Contributors** - Perside Foster, MySQL Principal Solution Engineering, Mandy Pang, MySQL Principal Product Manager
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025

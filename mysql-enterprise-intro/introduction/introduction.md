@@ -9,8 +9,8 @@ In this workshop, you'll work through a series of guided tasks and exercises tha
 - Installing and configuring the server
 - Creating and managing databases
 - Using JavaScript to create stored procedures and functions
-- Implementing a LAMP (Linux, Apache, PHP, and MySQL) stack for web development
-- Deploying a sample web application, the "Sakila Film Time Converter", which demonstrates the use of MySQL JavaScript functions
+- Implementing a LAMP (Linux, Apache, MySQL, and PHP) stack—or a LAMP stack with Python/Flask instead of Apache/PHP—for web development
+- Deploying a sample  PHP or Python  Web Application, the "Sakila Film Time Converter", which demonstrates the use of MySQL JavaScript functions
 
 By the end of this workshop, you'll have a solid foundation in MySQL Enterprise Edition and be able to start building your own databases and applications. Our goal is to provide you with a comprehensive and practical introduction to MySQL Enterprise Edition.
 
@@ -46,8 +46,9 @@ In this lab, you will be guided through the following steps:
 1. Install MySQL Enterprise Edition (Developer Download from Oracle Technology Network (OTN))  
 2. Install Sample Database Sakila
 3. Create and configure JavaScript stored program  / Function
-4. Install Configure and test Linux, Apache, PHP,and  MySQL(LAMP) Development Stack
-5. Deploy Sample application using Sakilaa data and MySQL JavaScript Function
+4. Install, configure, and test **Apache/PHP** Web Server
+5. Install, configure, and test **Flask/Python** Web Server
+6. Deploy Sample application using Sakila data and MySQL JavaScript Function
 
 You may now **proceed to the next lab**
 
@@ -57,9 +58,9 @@ You may now **proceed to the next lab**
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Solution Engineering
+- **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributor** 
     - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
-    - Selena Sanchez, MySQL Staff Solutions Engineer, 
+    - Selena Sanchez, MySQL Staff Solutions Engineer,
     - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,April  2025
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, April  2025
