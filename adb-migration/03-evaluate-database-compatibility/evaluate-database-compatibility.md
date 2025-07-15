@@ -53,35 +53,36 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
       inflating: /home/oracle/cpat/README.txt
       inflating: /home/oracle/cpat/LICENSE.txt
       inflating: /home/oracle/cpat/THIRD_PARTY_LICENSES.txt
-      creating: /home/oracle/cpat/bin/
+       creating: /home/oracle/cpat/bin/
       inflating: /home/oracle/cpat/bin/cma.cmd
       inflating: /home/oracle/cpat/bin/cma.sh
       inflating: /home/oracle/cpat/bin/premigration.ps1
       inflating: /home/oracle/cpat/premigration.cmd
       inflating: /home/oracle/cpat/premigration.sh
-      creating: /home/oracle/cpat/lib/
+       creating: /home/oracle/cpat/lib/
       inflating: /home/oracle/cpat/lib/premigration.jar
       inflating: /home/oracle/cpat/lib/ojdbc8-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/ucp-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/oraclepki-19.3.0.0.jar
+      inflating: /home/oracle/cpat/lib/oraclepki-23.5.0.24.07.jar
       inflating: /home/oracle/cpat/lib/osdt_core-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/osdt_cert-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/orai18n-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/ons-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/simplefan-19.3.0.0.jar
       inflating: /home/oracle/cpat/lib/commons-cli-1.9.0.jar
-      creating: /home/oracle/cpat/misc/
+       creating: /home/oracle/cpat/misc/
       inflating: /home/oracle/cpat/misc/CPATReportSchema.json
     [CDB23:oracle@holserv1:~]$ ls -l /home/oracle/cpat
-    total 44
-    drwxr-xr-x. 2 oracle oinstall    59 Feb 10 14:09 bin
-    drwxr-xr-x. 2 oracle oinstall  4096 Feb 10 14:09 lib
-    -rw-r--r--. 1 oracle oinstall  6069 Feb 10 14:09 LICENSE.txt
-    drwxr-xr-x. 2 oracle oinstall    35 Feb 10 14:09 misc
-    -rw-r--r--. 1 oracle oinstall   139 Feb 10 14:09 premigration.cmd
-    -rwxr-xr-x. 1 oracle oinstall 10519 Feb 10 14:09 premigration.sh
-    -rw-r--r--. 1 oracle oinstall  1782 Feb 10 14:09 README.txt
-    -rw-r--r--. 1 oracle oinstall 11533 Feb 10 14:09 THIRD_PARTY_LICENSES.txt
+    total 48
+    drwxr-xr-x. 2 oracle oinstall    59 Jun 17 00:45 bin
+    drwxr-xr-x. 2 oracle oinstall  4096 Jun 17 00:45 lib
+    -rw-r--r--. 1 oracle oinstall  6069 Jun 17 00:45 LICENSE.txt
+    drwxr-xr-x. 2 oracle oinstall    35 Jun 17 00:45 misc
+    -rw-r--r--. 1 oracle oinstall   139 Jun 17 00:45 premigration.cmd
+    -rwxr-xr-x. 1 oracle oinstall 10519 Jun 17 00:45 premigration.sh
+    -rw-r--r--. 1 oracle oinstall  7619 Jun 17 00:45 README.txt
+    -rw-r--r--. 1 oracle oinstall 11533 Jun 17 00:45 THIRD_PARTY_LICENSES.txt
     ```
 
     </details>
@@ -118,7 +119,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     CPAT-1013: Informational: No analysis properties file found on the command line. Source analysis will not be as complete as possible.
     See the help text for information on using an analysis properties file.
 
@@ -248,12 +249,12 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire
+    [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire <<< 'Welcome_1234'
     Enter password for ADMIN user:
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     Cloud Premigration Advisor Tool generated properties file location: /home/oracle/cpat_output/props/sapphire_premigration_advisor_analysis.properties
     ```
 
@@ -276,12 +277,12 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby
+    [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby <<< 'Welcome_1234'
     Enter password for ADMIN user:
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     Cloud Premigration Advisor Tool generated properties file location: /home/oracle/cpat_output/props/ruby_premigration_advisor_analysis.properties
     ```
 
@@ -321,7 +322,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     <summary>*click to see the output*</summary>
 
     ``` text
-    #Created by CPAT version 25.2.0
+    #Created by CPAT version 25.6.0
     #Fri Jun 27 13:26:17 GMT 2025
     TargetInstanceProp.NLS_CHARACTERSET=AL32UTF8
     TargetInstanceProp.TABLESPACE_BLOCK_SIZE.TEMP=8192
@@ -343,7 +344,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     TargetInstanceProp.DB_BLOCK_SIZE=8192
     TargetInstanceProp.ALLOW_ROWID_COLUMN_TYPE=FALSE
     TargetInstanceProp.DB_TIME_ZONE=+00\:00
-    TargetInstanceProp.CPAT_VERSION=25.2.0
+    TargetInstanceProp.CPAT_VERSION=25.6.0
     TargetInstanceProp.TABLESPACE_BLOCK_SIZE.SYSTEM=8192
     TargetInstanceProp.NLS_NCHAR_CHARACTERSET=AL16UTF16
     TargetInstanceProp.MAX_STRING_SIZE=EXTENDED
@@ -374,7 +375,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     CPAT-4007: Warning: the build date for this version of the Cloud Premigration Advisor Tool is over 137 days.  Please run "premigration.sh --updatecheck" to see if a more recent version of this tool is available.
     Please download the latest available version of the CPAT application.
 
@@ -386,11 +387,11 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     CPAT-4007: Warning: the build date for this version of the Cloud Premigration Advisor Tool is over 137 days.  Please run "premigration.sh --updatecheck" to see if a more recent version of this tool is available.
     Please download the latest available version of the CPAT application.
 
-    Cloud Premigration Advisor Tool completed with overall result: Review Required
+    Cloud Premigration Advisor Tool completed with overall result: Action Required
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/red_premigration_advisor_report.json
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/red_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/red_premigration_advisor_report.txt
@@ -418,9 +419,9 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     On the first tab, which is the *BLUE* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are significantly less issues to be analysed.
 
-    ![Blue Summary](./images/blue_summary_adb.png)
+    ![Blue Summary](./images/blue_summary_prop.png)
 
-    * Actions Required reduced from 6 to 4
+    * Actions Required reduced from 8 to 6
     * Reviews Required reduced from 10 to 7
     * Reviews Suggested reduced from 9 to 6
 
@@ -428,11 +429,11 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are almost nothing to be analysed.
 
-    ![Red Summary](./images/red_summary_adb.png)
+    ![Red Summary](./images/red_summary_prop.png)
 
-    * Actions Required reduced from 3 to 2
+    * Actions Required reduced from 5 to 4
     * Reviews Required reduced from 6 to 3
-    * Reviews Suggested reduced from 7 to 4
+    * Reviews Suggested reduced from 6 to 4
 
     Note that are still many checks that are related to Golden Gate, which is not the migration method we will use on this lab. In the next task, we will try to reduce the number of results now by gathering information only related to the target method we will.
 
@@ -473,7 +474,7 @@ So, let's create a CPAT report where we only list issues for this specific migra
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     CPAT-4007: Warning: the build date for this version of the Cloud Premigration Advisor Tool is over 137 days.  Please run "premigration.sh --updatecheck" to see if a more recent version of this tool is available.
     Please download the latest available version of the CPAT application.
 
@@ -485,11 +486,11 @@ So, let's create a CPAT report where we only list issues for this specific migra
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
-    Cloud Premigration Advisor Tool Version 25.2.0
+    Cloud Premigration Advisor Tool Version 25.6.0
     CPAT-4007: Warning: the build date for this version of the Cloud Premigration Advisor Tool is over 137 days.  Please run "premigration.sh --updatecheck" to see if a more recent version of this tool is available.
     Please download the latest available version of the CPAT application.
 
-    Cloud Premigration Advisor Tool completed with overall result: Review Required
+    Cloud Premigration Advisor Tool completed with overall result: Action Required
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/red_premigration_advisor_report.json
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/red_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/red_premigration_advisor_report.txt
@@ -519,25 +520,29 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     ![Blue Summary](./images/blue_summary_adb.png)
 
-    * Action Requireds reduced now to just 1, on Source Database
-    * The checks that will need a closer attention are:
-      * "User Defined Objects in SYS" (Action Required)
-      * "Database Links" (Review Required)
-      * "External Tables for Serverless" (Review Required)
-      * "Directories" (Review Required)
-      * "Non-Exported Object Grants" (Review Required)
-    * We will later on another lab see how to fix each of them while moving to ADB.
+    * The "Action Required" actions are:
+        * "User Defined Objects in SYS"
+        * "Users who Own Objects but Have Insufficient Privileges to Create Them"
+        * "Role Privileges"
+    * The "Review Required" actions are:
+        * "Database Links"
+        * "External Tables for Serverless"
+        * "Directories"
+        * "Non-Exported Object Grants"
+    * We will later on another lab see how to fix each of them while moving to ADB
 
 3. Check the issues on *RED* PDB.
 
-    On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*,  you can see there are almost nothing to be analysed.
+    On the second tab, which is the *RED* PDB, explore the CPAT findings. If you click on *Premigration Advisor Report Summary*, you can see there are almost nothing to be analysed.
 
     ![Red Summary](./images/red_summary_adb.png)
 
-    * Action Requireds reduced to 0
-    * The only check that will need a closer attention is:
-      * "Directories" (Review Required)
-    * However, it only lists internal directories that don't exists in ADB, but are not being used by the application. So this  can be safelly ignored
+    * The "Action Required" actions are:
+        * "Users who Own Objects but Have Insufficient Privileges to Create Them"
+        * "Role Privileges"
+    * The "Review Required" action is:
+        * "Directories" (Review Required)
+    * However, it only lists internal directories that don't exists in ADB, but are not being used by the application, so this can be safelly ignored
 
     Now that we know what needs to be adapted before moving to ADB, we can move to the next lab.
 

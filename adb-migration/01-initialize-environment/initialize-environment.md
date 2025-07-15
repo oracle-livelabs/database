@@ -41,7 +41,7 @@ In this lab, you will:
         * CDB23
         * POD1
 
-2. Use the *yellow* terminal 🟨. Ensure the listener is started.
+2. Use the *yellow* terminal 🟨. Ensure the listeners are started.
 
     ``` shell
     <copy>

@@ -487,7 +487,8 @@ In this task, we will change the default profile so passwords for imported users
     # Be sure to hit RETURN
     ```
 
-    * Note that the only error reported was with the DB Link that points to F1 schema on *RED* PDB. We will handle that later.
+    * Note that the only error reported was with the DB Link that points to F1 schema on *RED* PDB.
+    * We will learn how to fix this error later on *Lab 9: Check Sapphire Migration*.
 
     <details>
     <summary>*click to see the output*</summary>
