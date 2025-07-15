@@ -28,9 +28,9 @@ You need a compute instance to connect to perform the database and application t
   
     ![Click compute](./images/click-compute.png "Click compute")
 
-2. In the **Livelab Compartment Name** into the search box and then select it, and click the **Create instance** button.
+2. Ensure the compartment is selected, and click click  **Create instance**.
 
-     ![Set Compartment and Click Create Compartment ](./images/compartment.png " Set Compartment Click Create Compartment")
+     ![Create instance](./images/create-instance.png "Create instance")
 
 3. On **Create compute instance** page, enter the name of the compute instance.
 
@@ -38,31 +38,21 @@ You need a compute instance to connect to perform the database and application t
     <copy>mysql-compute</copy>
     ```
 
-4. Keep the selected **Livelab Compartment Name** .
+4. Ensure **mysql** compartment is selected.
 
-    ![Compute instance name](./images/compute-name-livelab.png "Compute instance name")
+    ![Compute instance name](./images/compute-name.png "Compute instance name")
 
 5. In the **Placement** field, keep the selected **Availability Domain**.
 
-6. In the **Image and Shape** field, keep the selected image, **Oracle Linux 8**, and click the **Change shape** button.
+6. In the **Image and Shape** field, keep the selected image, **Oracle Linux 8**, and the default shape.
 
-    ![Compute image and shape](./images/compute-shape.png "Compute image and shape")
-
-    - For new shape do the following:
-        - Instance Type: Select Virtual Machine 
-        - Shape series: Select AMD
-        !["AMD shape](./images/amd-shape.png "AMD shape")  
-        - Shape name:  VM.Standard.E4.Flex   1 OCPU 16 Memory(GB).
-        ![Flex4 shape](./images/compute-shape-flex4.png "Flex4 shape")  
-    - Completes Shape selection:
-    ![Completed shape](./images/completed-shape.png "Completed shape") 
-
+    ![Compute image and shape](./images/compute-image-shape.png "Compute image and shape")
 
 7. In **Primary VNIC information** field, ensure the following settings are selected:
 
-    - **Primary Network**: **existing vcn**
+    - **Primary Network**: **mysql-vcn**
 
-    - **Subnet**: **existing public-subnet-vcn**
+    - **Subnet**: **public-subnet-mysql-vcn**
 
 8. In **Primary VNIC IP addresses** field, ensure the following settings are selected:
 
@@ -90,7 +80,7 @@ You need a compute instance to connect to perform the database and application t
 
 13. When the compute instance is ready to use, the state is shown as **Running**. _Note_ the **Public IP address** and the **Username**.
 
-    ![Compute instance is created](./images/livelab-compute.png "Compute instance is created")
+    ![Compute instance is created](./images/compute.png "Compute instance is created")
 
 You may now **proceed to the next lab**.
 
