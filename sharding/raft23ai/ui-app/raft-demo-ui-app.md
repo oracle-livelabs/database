@@ -91,7 +91,7 @@ This lab assumes you have:
 
 Similar CRUD operations and database shutdown/startup can be performed using SQL*Plus command from within podman containers. Database status can be verfied from gsm containers using GDSCTL.
 
-## Task 3: startup the previously shutdown shard
+## Task 3: Startup the previously shutdown shard
 
 1. As you verified that application kept running while one of the shard was down, now bring that shard back.
    For example, click "Start Shard2" since it was shutdown in a previous Task 1.3 as above
