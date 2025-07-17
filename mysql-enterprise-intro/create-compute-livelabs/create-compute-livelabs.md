@@ -24,7 +24,7 @@ You need a compute instance to connect to perform the database and application t
   
     ![Click compute](./images/1-click-compute.png "Click compute")
 
-2. Ensure **mysql** compartment is selected, and click **Create instance**.
+2. Ensure your Livelabs compartment is selected, and click **Create instance**.
 
      ![Create instance](./images/2-create-instance.png "Create instance")
 
@@ -34,7 +34,7 @@ You need a compute instance to connect to perform the database and application t
     <copy>mysql-compute</copy>
     ```
 
-4. Ensure **mysql** compartment is selected.
+4. Ensure your Livelabs compartment is selected.
 
 5. In the **Placement** field, keep the selected **Availability domain**.
 
@@ -64,15 +64,15 @@ You need a compute instance to connect to perform the database and application t
 
 10. Under **Networking** panel, in **Primary network** field, select **Select existing virtual cloud network**, and ensure the following settings are selected:
 
-    - **Virtual cloud network compartment**: **mysql**
+    - **Virtual cloud network compartment**: Livelabs Compartment
 
-    - **Virtual cloud network**: **mysql-vcn**
+    - **Virtual cloud network**: Livalabs VCN
 
 11. Under **Subnet**, ensure the following are selected:
 
-    - **Subnet compartment**: **mysql**
+    - **Subnet compartment**: Livelabs Compartment
 
-    - **Subnet**: **public-subnet-mysql-vcn**
+    - **Subnet**: Livelabs Public Subnet VCN
 
 12. In **Primary VNIC IP addresses** field, ensure the following settings are selected:
 
