@@ -1,19 +1,17 @@
-# Raft Replication Demo UI Application: To verify Raft Replication Topology in Oracle 23ai
+# RAFT Replication Demo UI Application
 
 ## Introduction
 
-Raft Replication Demo UI Application to verify Raft Replication Topology in Oracle 23ai with sample Customers Data.
-This Demo app is to give a feel of a simple CRUD application based on Oracle 23ai RAFT replication features. Similar database operations can be performed from various GDSCTL or SQL*Plus command.  
+On right side of browser window, by default a single page application with titled "RAFT 23ai LiveLabs Demo: All Customers List" is shown.
+Raft Replication Demo UI Application is to verify Raft Replication Topology in Oracle 23ai with sample Customers Data.
+This demo application is to give a feel of a simple CRUD application based on Oracle 23ai RAFT replication features.
 
-Data can be populated by two different ways in Customers and its child tables:         
-        a) Run the workload (Same as in the previous Lab: Explore Raft Replication Topology's Task 4: Run the workload).         
-        b) Add Customers from Demo UI.
-
-"More details" link on the Home page opens a new page which shows the shard database name and Replication Unit (RU#) of the customer with matching customerId (which is the sharding key). There are optional links to "Update" (or just want to view) or "Delete" a record.
-
-Here is the Home page of the Raft Replication Demo UI Application after running initial workload to view some sample customers data:
+The Home page of the Raft Replication Demo UI Application to view sample customers data populated via running the initial workload:
 
 ![<all_customer_after_inital_workload>](./images/all_customer_after_inital_workload.png " ")
+
+
+All Customers List query is retrieved from the Catalog Database using the proxy-routing query via GDS$CATALOG service. The Home Page shows 25 Customer's data with pagination along with "Add customer", "More Details", "Update" customer, "Delete" customer links and "Count" of all the customers. In the bottom section of the application, multiple page numbers are shown starting with page number "1". You can click any of the page number to view the max 25 customers listed on a specific page number.
 
 _Estimated Time_: 30 minutes
 
@@ -21,8 +19,9 @@ _Estimated Time_: 30 minutes
 
 In this lab, you will:
 
-- Explore Raft Replication Demo UI Application for CRUD (Create, Update, Delete) operations and getting More Details.
-- Testing the UI App use-cases.
+- Explore Raft Replication Demo UI Application for getting More Details for a customer record including its Replication Unit and leader shard.
+- Switchover of a Replication Unit(RU#) to another shard as soon as its leader shard is shutdown.
+- CRUD (Create, Update, Delete) operations with the UI Application to get a feel of zero data loss and never down scenarios while using RAFT replication.
 
 ### Prerequisites
 
@@ -33,126 +32,79 @@ This lab assumes you have:
   - Lab: Prepare Setup (_Free-tier_ and _Paid Tenants_ only)
   - Lab: Environment Setup
   - Lab: Initialize Environment
-  - Lab: Topology
-
-## Task 1: Verify RAFT Demo UI application is running
-
-1. How to check if RAFT Demo UI is running?
-
-    ```
-    <copy>
-    ps -ef | grep raft-ui
-    </copy>
-    ```
-
-   ![<check-raft-ui-process>](./images/raft-ui-app_is_running.png " ")
-
-2. For some reasons if you want to restart the RAFT Demo UI, it can be stopped then started:
-    ```
-    <copy>
-    sudo podman exec -it appclient /bin/bash
-    ps -ef | grep raft-ui
-    kill -9 <pid of process resulting from above command>
-    ps -ef | grep raft-ui
-    cd $DEMO_MASTER
-    ./start-raft-ui-app.sh
-    ps -ef | grep raft-ui
-    </copy>
-    ```
-
-    ![<restart_raft_ui_app>](./images/restart_raft_ui_app.png " ")
-
-## Task 2: Demo UI application page flow
-
-1. On right side of browser window by default page "RAFT 23ai LiveLabs Demo: All Customers List" is shown by http://localhost:/8080.
-   It retrieves All Customers List from the Catalog Database using GDS$CATALOG service. Home Page shows 25 Customer's data with pagination, count of All customers, More Details, add new customer, update customer and Delete customer links. To view the customers listed on a specific page number, you can click the page number displayed below the All-Customers List.
-
-2. More Details Page: When you click on "More Details" link shown on the Home Page, it will show shard database name and Replication Unit (RU#) to which this particular customerId belongs to as of now. This page also shows Refresh link which can be useful to view "More details" after any event which moves the record for this customerId to some other RU on a different shard database.
-
-## Task 3: Perform switchover and verify results from "More Details" page and Terminal window
- 
-1. On "More Details" page, for a customer record, its Shard database name is shown as orcl1cdb_orcl1pdb (which is shard1) for RU#1. It’s because Leader is shard1 for this RU#1:
-
-    ![<before_switchover_of_ru1_from_shard1_to_shard2leader_shard1>](./images/before_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard1.png " ")
-
-   This can also be verified from the terminal:
-
-    ```
-    <copy>
-    sudo podman exec -it gsm1 /bin/bash
-    gdsctl ru -sort
-    </copy>
-    ```
-
-    ![<before_switchover_ru_sort_shows_shard1_is_leader_for_ru1>](./images/before_switchover_ru_sort_shows_shard1_is_leader_for_ru1.png " ")
 
 
-2. Switchover RU#1 from shard1 to shard2 from the terminal:
+## Task 1: Navigate to "More Details" page and shutdown a shard to perform switchover of its RUs to another shard(s)
 
-    ```
-    <copy>
-    gdsctl switchover ru -ru 1 -shard orcl2cdb_orcl2pdb
-    </copy>
-    ```
+1. From "All Customers List" page, right click on the "More Details" link, it will open a page titled with "RAFT 23ai LiveLabs Demo: More Details".
 
-    After switchover of RU#1 from shard1 to shard2, once you refresh the "More Details" page for same customer record, its Shard Database Name changes to orcl2cdb_orcl2pdb (which is shard2) because the new Leader of RU#1 is shard2:
+    ![<all_customers_more_details_link>](./images/all_customers_more_details_link.png " ")
 
-    ![<after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2>](./images/after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2.png " ")
+    If you just click on the "More Details" link, it'll open in the same tab. Clicking "Back to Customers List" brings back to the main page.
 
-    Switchover verification from the Terminal:
+2. "More Details" tab shows the "Shard Database Name" and Replication Unit (RU#) of the customer record with matching customerId (which is the sharding key). here, "Shard Database Name" can be either "orcl1cdborcl1pdb" (Shard1) or "orcl2cdborcl2pdb" (Shard2) or "orcl3cdb_orcl3pdb" (Shard3).
 
-    ![<switchover_ru1_from_shard1_to_shard2_terminal2>](./images/switchover_ru1_from_shard1_to_shard2_terminal.png " ")
-    
+    This page shows "Refresh" link which can be useful to view "More details" after any event which moves the record for this customerId to some other RU on a different shard database.
 
-3. Switchover RU#1 back to orcl1cdb_orcl1pdb (which is shard1) as it was originally:
+    ![<more_details_prior_shutdown_shard2>](./images/more_details_prior_shutdown_shard2.png " ")
 
-    ```
-    <copy>
-    gdsctl switchover ru -ru 1 -shard orcl1cdb_orcl1pdb
-    </copy>
-    ```
+3. You can Shutdown a Shard based on the "Shard Database Name" value. Click only one of the matching shard's links for example, either "Shutdown Shard1" or "Shutdown Shard2" or "Shutdown Shard3". Please **do not shutdown more than one Shard from the UI Application** otherwise those shards may need to bring back up from the terminal window for which steps will be provided later in the next Lab "Explore Raft Replication Topology".
 
-    It shows Shard Database Name orcl1cdb_orcl1pdb which is the new leader of RU#1:
+    When Shard2 is the leader for Replucation Unit (RU#1), click "Shutdown Shard2" link as below:
 
-    ![<after_switchover_of_ru1_from_shard2_to_shard1_leader_is_shard1_as_originial>](./images/after_switchover_of_ru1_from_shard2_to_shard1_leader_is_shard1_as_originial.png " ")
+    ![<more_details_prior_shutdown_shard2>](./images/shutdown_shard2.png " ")
 
-    Switchover verification from the Terminal:
+4. Wait until the shutdown a shard completes. You will notice that the hovering icon of the "more Details" tab stops and the shard leadership automatically changes. "Shard Database Name" will show new leader shard. For Example, "orcl3cdb_orcl3pdb" (Shard3) is the new leader for Replucation Unit (RU#1) in the screenshot as below.
 
-    ![<switchover_ru1_from_shard2_to_shard1_terminal>](./images/switchover_ru1_from_shard2_to_shard1_terminal.png " ")
+    ![<more_details_after_shutdown_shard2>](./images/more_details_after_shutdown_shard2.png " ")
 
-Similarly, there are other multiple RU movement commands, rebalance data manually, perform failover test, scale up /scale-down by stop/start shard(s) etc. as detailed in Lab "Explore Raft Replication Topology" tasks can be performed and verified from "More Details" page.
-In the bottom of the "More Details" page a link to Home Page is shown to return back to view "RAFT 23ai LiveLabs Demo: All Customers List".
+    You can observe that the leadership has automatically moved to another shard, indicating re-routing of the request and switchover of RU to another shard is completed. To confirm that no impact to the application even one of the shard is down, you can continue to next task.
 
-## Task 3: Access the Demo UI application to view pre-loaded Customers List and perform CRUD operations
+## Task 2: Access the Demo UI application to view pre-loaded Customers List and perform CRUD operations
 
-1. Add Customer: A customer can be added either using link "Add Customer" on top section of the home page "RAFT 23ai LiveLabs Demo: All Customers List" or API call in a browser http://localhost:/8080/addcustomer/
+1. Add Customer: A customer can be added either using link "Add Customer" on top section of the home page "RAFT 23ai LiveLabs Demo: All Customers List" or API call in a browser http://localhost:8080/addcustomer
 
-   ![Add Customer>](./images/add_customer.png " ")
+    ![<add_customer_aaa>](./images/add_customer_aaa.png " ")
 
-   After adding customer, it brings back to the All-Customers List page. Total Customers count gets increased after adding a customer by 1. The customer details can be viewed with Api call format http://localhost:/8080/updateCustomer/<customerId> for given value of customerId.
+2. After adding customer, it brings back to the All-Customers List page. Total Customers count increased by 1.
 
+    ![<view_added_customer>](./images/view_added_customer.png " ")
 
-2. Update Customer: A customer can be edited either by using link "Update" link from the Home Page or directly using Api call format http://localhost:/8080/updateCustomer/<customerId>
+    Data can be also be populated by Run the workload (as in the next Lab: Explore Raft Replication Topology's Task 4: Run the workload).
 
-   ![Edit Customer>](./images/edit_customer.png " ")
+3. Update Customer: A customer can be edited either by using link "Update" link from the Home Page or directly using API call format http://localhost:8080/updateCustomer/[customerId]
 
-   After updating customer, it brings back to the All-Customers List page. You can verify the updated customer details shown in UI or manually using Api call format http://localhost:/8080/updateCustomer/<customerId>
+    ![<edit_customer_aaa>](./images/edit_customer_aaa.png " ")
 
+4. After updating customer, it brings back to the All-Customers List page
 
-3. Delete Customer: A customer can delete either using link "Delete" or manually using Api call from the browser in the format http://localhost:8080/deleteCustomer/<customerId>.
+    ![<after_edit_customer_class>](./images/after_edit_customer_class.png " ")
+
+5. Delete Customer: A customer can delete either using link "Delete" or manually using API call from the browser in the format http://localhost:8080/deleteCustomer/[customerId].
    After deleting customer, it brings back to the All-Customers List page. Total count on the All-Customers List page is reduce by 1.
 
+    ![<after_delete_customer>](./images/after_delete_customer.png " ")
 
-4. To Refresh the data on the "Home Page", you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page from the browser's default refresh icon.
+6. To Refresh the data on the "Home Page", you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page from the browser's default refresh icon.
 
+7. "Home" Page link at the bottom the page brings to the first page and useful when you are at any higher page# and want to return to the first page of RAFT UI application.
 
-5. "Home" Page link at the bottom the page brings to the first page and useful when you are at any higher page# and want to return to the first page of RAFT UI application.
+Similar CRUD operations and database shutdown/startup can be performed using SQL*Plus command from within podman containers. Database status can be verfied from gsm containers using GDSCTL.
 
+## Task 3: Startup the previously shutdown shard
 
-In addition to above information, the results from previous Labs "Explore Raft Replication Topology and "Explore Raft Replication Advanced Use-Cases" tasks e.g., for Raft Replication failovers, Scale UP or Scale Down, Move or Copy Replication Unit Replicas etc. all can be verified from Raft Demo UI.
+1. As you verified that application kept running while one of the shard was down, now bring that shard back.
+   For example, click "Start Shard2" since it was shutdown in a previous Task 1.3 as above
 
+    ![<restart_shard2>](./images/restart_shard2.png " ")
+
+    Now all three shards are up and application is running.
+
+    The results from next Labs "Explore Raft Replication Topology and "Explore Raft Replication Advanced Use-Cases" tasks e.g., for Raft Replication switchover ru rebalance, Scale UP or Scale Down, Move or Copy Replication Unit Replicas etc. all can be verified from Raft Demo UI. Therefore, keep the Application UI page running. If you have closed UI, you can open a new browser session and use http://localhost:8080 to view UI page.
+
+You may now proceed to the next lab.
 
 ## Acknowledgements
-* **Authors** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Deeksha Sehgal, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, August 2024
+* **Authors** - Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Deeksha Sehgal, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025
