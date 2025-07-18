@@ -61,7 +61,7 @@ Estimated Time: 5 minutes
 
     ![The LL assigned resources are displayed in the **Reservation Information** panel.](./images/ll-resources.png " ")
 
-4. On the **Autonomous Databases** page, click your **DB-DCAT** ADB instance.
+4. On the **Autonomous Databases** page, click your ADB instance.
     ![On the Autonomous Databases page, the Autonomous Database that is assigned to your LiveLabs workshop reservation is displayed.](./images/ll-adb-page.png " ")
 
 5. On the **Autonomous Database details** page, click the **Database actions** drop-down list, and then click **SQL**.
