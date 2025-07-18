@@ -47,26 +47,35 @@ Estimated Time: 5 minutes
 
 ## Task 2: Navigate to the Autonomous Database
 
-1. You should be already logged in to the Console using the instructions in the **Task 1** in this lab.
+1. You should be already logged in to the Console using the instructions in the **Task 1** above in this lab.
 
-2. Open the **Navigation** menu and click **Oracle Database**. Under **Oracle Database**, click **Autonomous Database**. The **Autonomous Databases** page should be displayed; however, your assigned resources for this workshop are all in your assigned LiveLabs compartment (that is displayed in the  **Reservation Information** panel) and not in the **root** tenancy. The following expected warning message is displayed.
+2. Open the **Navigation** menu (top left hand corner)and click **Oracle Database**. Under **Oracle Database**, click **Autonomous Database**. 
+
+    ![Screenshot of the Oracle Cloud Console showing the Autonomous Database section highlighted in the navigation menu. The wider environment includes the Console interface with various database options visible. The emotional tone is neutral and instructional. Visible text includes Oracle Database and Autonomous Database in the navigation menu, guiding users to locate their Autonomous Database instance.](./images/adb.png)
+
+
+3. You may see an error message if you're in the wrong compartment. Your resources are in your assigned LiveLabs compartment, not the root compartment.
 
     ![Warning that you might get if you are in the root compartment and not in your own LiveLabs assigned compartment.](./images/wrong-compartment.png " ")
 
-3. To select your assigned LiveLabs compartment, click the **Compartment** drop-down list in the **List Scope** section on the left. Enter your LiveLabs assigned compartment name in the **Compartment** text field to search for it which should look something like **LL#####-COMPARTMENT** where the **#####** is a unique five-digit number. Alternatively, you can drill-down on the **Livelabs** node and select your assigned compartment. When your assigned compartment is displayed in the list of compartments, select it. In addition, make sure that your LiveLabs assigned region from the **Run Workshop *workshop-name*** page is selected in Console's banner.
+4. Switch to your assigned compartment:
+   - in the center (see the picture below), click the **Compartment** button
+   - Search for your compartment name (looks like **LL#####-COMPARTMENT** with 5 numbers)
+   - Select your assigned compartment when it appears
+   - Verify you're in the correct region shown in your **Reservation Information**
 
-    ![The Data Catalogs page in your assigned LiveLabs compartment is displayed. The training-dcat-instance Data Catalog instance provided for you is displayed on this page.](./images/ll-select-compartment.png " ")
+    ![The Data Catalogs page in your assigned LiveLabs compartment is displayed. The training-dcat-instance Data Catalog instance provided for you is displayed on this page.](./images/compartment.png " ")
 
     >**Note:** Refer to the **Reservation Information** panel that you can access from the **Run Workshop *workshop-name*** tab for information about your assigned resources.
 
     ![The LL assigned resources are displayed in the **Reservation Information** panel.](./images/ll-resources.png " ")
 
-4. On the **Autonomous Databases** page, click your **DB-DCAT** ADB instance.
+5. Now, On the **Autonomous Databases** page, click your ADB instance.
     ![On the Autonomous Databases page, the Autonomous Database that is assigned to your LiveLabs workshop reservation is displayed.](./images/ll-adb-page.png " ")
 
-5. On the **Autonomous Database details** page, click the **Database actions** drop-down list, and then click **SQL**.
+6. On the **Autonomous Database details** page, click the **Database actions** drop-down list, and then click **SQL**.
 
-    ![The Database Actions button is highlighted.](./images/sql.png " ")
+    ![The Database Actions button is highlighted.](../common-images/im1.png " ")
 
 You may now proceed to the next lab.
 

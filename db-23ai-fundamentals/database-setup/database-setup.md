@@ -24,21 +24,14 @@ The objective of this workshop is to set up the 23ai always free ADB. The follow
 
     ![locate adb](images/im3.png " ")
 
-4. Double check we're creating a 23ai always free database and give your database a password. 
+4. Give your database a password and let's keep the defaults for the rest and create our database. **Click** Create Autonomous Database at the bottom of the screen.
     > The password must be 12 to 30 characters and contain at least one uppercase letter, one lowercase letter, and one number. The password cannot contain the double quote (") character or the username "admin".
 
     ![locate adb](images/im4.png " ")
 
-5. Lets keep the defaults for the rest and create our database. **Click** Create Autonomous Database at the bottom of the screen.
+5. The database in now being created for us. It should take around 5 min or less.  Explore any of the labs at your own pace. There's no specific order to follow, so feel free to pick an choose whichever ones catch your interest. Whether you want to try them all or focus on specific features, the choice is yours.
 
     ![locate adb](images/im5.png " ")
-
-6. The database in now being created for us. It should take around 5 min or less. Once its available it will show green and say Available.
-
-    ![locate adb](images/im6.png " ")
-
-7. You've now set up an Always Free Oracle Autonomous Database 23ai (23ai always free ADB) on Oracle Cloud Infrastructure. Explore any of the labs at your own pace. There's no specific order to follow, so feel free to pick an choose whichever ones catch your interest. Whether you want to try them all or focus on specific features, the choice is yours.
-
 
 ## Learn More
 
