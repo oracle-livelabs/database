@@ -28,7 +28,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL SQL and  PHP
-- Completed Lab 3
+- Completed Lab 4
 
 ## Task 1: Install App Server (APACHE)
 
