@@ -9,7 +9,6 @@
       "filename": "../../intro/intro.md"
     },
     {
-
       "title": "Lab 1: Environment Setup",
       "description": "Verify Setup of compute instance",
       "publisheddate": "06/30/2020",
@@ -21,26 +20,26 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 3: Explore Raft Replication Topology",
+      "title": "Lab 3: Demo UI Application for Raft Replication",
+      "description": "Demo UI Application for Raft Replication",
+      "filename": "../../ui-app/raft-demo-ui-app.md"
+    },
+    {
+      "title": "Lab 4: Explore Raft Replication Topology",
       "description": "Exploring Sharding Topology",
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 4: Explore Raft Replication Advanced Use-Cases",
+      "title": "Lab 5: Explore Raft Replication Advanced Use-Cases",
       "description": "Exploring Raft Replication Advanced Use-Cases",
       "filename": "../../advanced-use-cases/advanced-use-cases.md"
-    },
-    {
-      "title": "Appendix: Demo UI Application for Raft Replication",
-      "description": "Demo UI Application for Raft Replication",
-      "filename": "../../ui-app/raft-demo-ui-app.md"
     },
     {
       "title": "Troubleshooting: Guide for Raft Replication Test Cases",
       "description": "Troubleshooting Guide for Raft Replication Test Cases",
       "filename": "../../troubleshooting/troubleshooting.md"
     },
-     {
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"

@@ -170,19 +170,11 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
     </copy>
     ```
 
-  Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
+  Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    ```
-    <copy>
-    [DEFAULT]
-    user=USER-OCID
-    fingerprint=FINGERPRINT-VALUE
-    tenancy=TENANCY-OCID
-    key_file=<Location of the private key oci_api_key_private.pem>
-    pass_phrase=PASSPHRASE
-    </copy>
-    ```
-  Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. Replace the PASSPHRASE with the passphrase that you entered. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
   ![View config file](images/config-file.png)
   When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
 
@@ -206,19 +198,11 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
 
    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.py file, replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    ```
-    <copy>
-    [DEFAULT]
-    user=USER-OCID
-    fingerprint=FINGERPRINT-VALUE
-    tenancy=TENANCY-OCID
-    key_file=<Location of the private key oci_api_key_private.pem>
-    pass_phrase=PASSPHRASE
-    </copy>
-    ```   
-  Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. Replace the PASSPHRASE with the passphrase that you entered. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
   ![View config file](images/config-file.png)
 
 4. Execute the sample application:
@@ -253,19 +237,11 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
 
    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.go file, replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    ```
-    <copy>
-    [DEFAULT]
-    user=USER-OCID
-    fingerprint=FINGERPRINT-VALUE
-    tenancy=TENANCY-OCID
-    key_file=<Location of the private key oci_api_key_private.pem>
-    pass_phrase=PASSPHRASE
-    </copy>
-    ```
-  Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. Replace the PASSPHRASE with the passphrase that you entered. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
   ![View config file](images/config-file.png)
 
 4.  Execute the sample application:
@@ -325,19 +301,11 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Depending on your application, edit either the JavaScript code in HelloWorld.js or the TypeScript code in HelloWorld.ts, replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it. 
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file. 
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    ```
-    <copy>  
-    [DEFAULT]
-    user=USER-OCID
-    fingerprint=FINGERPRINT-VALUE
-    tenancy=TENANCY-OCID
-    key_file=<Location of the private key oci_api_key_private.pem>
-    pass_phrase=PASSPHRASE
-    </copy>
-    ```
-   Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. Replace the PASSPHRASE with the passphrase that you entered. You should have noted these values in a text file as you've been working through this workshop. Use the values recorded from Lab 1.
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
    ![View config file](images/config-file.png)
 
 4. Execute the Sample Application
@@ -370,19 +338,11 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.cs file, replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    ```
-    <copy>
-    [DEFAULT]
-    user=USER-OCID
-    fingerprint=FINGERPRINT-VALUE
-    tenancy=TENANCY-OCID
-    key_file=<Location of the private key oci_api_key_private.pem>
-    pass_phrase=PASSPHRASE
-    </copy>
-    ```
-  Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. Replace the PASSPHRASE with the passphrase that you entered. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
   ![View config file](images/config-file.png)
 
 4. Go to your project directory. You will see the example source code ```Program.cs```. Remove this file.

@@ -72,9 +72,17 @@ This lab assumes you have:
 
     ```text
     <copy>
+    cat > my-config.py <<- EOM
+    SECRET_KEY = $(openssl rand -base64 42)
+    EOM
+    </copy>
+    ```
+
+    ```text
+    <copy>
     helm show values superset/superset  > superset-custom-values.yaml
     kubectl create ns superset
-    helm upgrade --install --values superset-custom-values.yaml superset superset/superset -n superset
+    helm upgrade --install --values superset-custom-values.yaml --set-file configOverrides.my-override=my-config.py superset superset/superset -n superset
     </copy>
     ```
 
@@ -118,9 +126,9 @@ This lab assumes you have:
     ![Choose oke-vnc VCN](images/vcn.png)
 
 2. Click on **operator-subnet-regional** subnet
-    ![operator subnet](images/vcn-subet.png)
+    ![operator subnet](images/vcn-subnet.png)
 
-3. Click on **operator-subnet-regional** security list
+3. Click on **operator-seclist** security list
     ![security list](images/vcn-subnet-securitylist.png)
 
 4. Click on **Add Ingress Rule** to add a new ingress rule
@@ -147,46 +155,55 @@ This lab assumes you have:
 1. Login to OCI Console, select the **Hamburger Menu** ![OCI Menu](images/hamburger.png), type in **mysql** in the seach bar, select **DB System**
 
 2. Click on **MySQLInstance**
+
     ![DB System](images/oci-mysql-dbsystem.png)
 
-3. Note down the **Private IP Address** for MySQL HeatWave
-    ![DB System](images/oci-mysql-dbsystem-ip.png)
+3. Select the "Connection" tab and note down the **Private IP Address** for MySQL HeatWave
+
+    ![Connection](images/oci-mysql-dbsystem-ip.png)
 
 4. Point your browser to http://&lt;public IP of **oke-operator** &gt;:8088
 
 5. Click on **+**, expand on **Data**, and select **Connect database**
-    ![Connect Database Menu](images/superset-add-database-menu.png)
 
-6. Select **MySQL**
+    ![Connect Database Menu](images/superset-add-database-menu.png)   
+
+6. Select **MySQL** 
+
     ![Connect MySQL database](images/superset-connect-mysql.png)
 
 7. Specify details of your MySQL HeatWave (You can get the private ip address of MySQL HeatWave in Lab 2, Task 2). Click on **Connect** to test the connection
+
     ![MySQL Details](images/superset-mysql-details.png)
 
 8. Click **Finish** on successful connection to MySQL
+
     ![Connect Success](images/superset-mysql-connect-success.png)
 
 ## Task 6: Execute SQL
 
 1. Expand **SQL Lab** in Superset dashboard, and select **SQL Editor**
+
     ![SQL Editor menu](images/superset-sqllab-menu.png)
+
     ![SQL Editor menu](images/superset-sql-editor.png)
 
 2. Select **MySQL** as Database, **airportdb** as schema. You can start executing SQL in the **SQL Editor**
+
     ![SQL Editor test](images/superset-sql-editor-test.png)
 
-  You may now **proceed to the next lab.**
+    You may now **proceed to the next lab.**
 
 ## Acknowledgements
 
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, May 2024
+Last Updated By/Date - Ryan Kuan, July 2025

@@ -27,7 +27,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL SQL and  Python
-- Completed Lab 3
+- Completed Lab 4
 
 ## Task 1: Install Python
 
@@ -220,7 +220,8 @@ In this lab, you will be guided through the following tasks:
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Solution Engineering
-- **Contributor** - Nick Mader, MySQL Global Channel Enablement & Strategy Director,
-Selena Sanchez, MySQL Staff Solutions Engineer 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, April  2025
+- **Author** - Perside Foster, MySQL Principal Solution Engineering
+- **Contributors** 
+- Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
+- Selena Sanchez, MySQL Staff Solutions Engineer,
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, July   2025

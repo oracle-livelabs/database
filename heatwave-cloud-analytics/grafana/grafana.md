@@ -51,93 +51,93 @@ This lab assumes you have:
 3. Deploy Grafana application with Load Balancer service
 
     ```bash
-<copy>
+    <copy>
 
-cat << EOF | kubectl apply -n grafana -f -
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: grafana-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: grafana
-  name: grafana
-spec:
-  selector:
-    matchLabels:
-      app: grafana
-  template:
+    cat << EOF | kubectl apply -n grafana -f -
+    ---
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: grafana-pvc
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
     metadata:
       labels:
         app: grafana
+      name: grafana
     spec:
-      securityContext:
-        fsGroup: 472
-        supplementalGroups:
-          - 0
-      containers:
-        - name: grafana
-          image: grafana/grafana
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 3000
-              name: http-grafana
-              protocol: TCP
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /robots.txt
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 2
-          livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            tcpSocket:
-              port: 3000
-            timeoutSeconds: 1
-          resources:
-            requests:
-              cpu: 250m
-              memory: 750Mi
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: grafana-pv
-      volumes:
-        - name: grafana-pv
-          persistentVolumeClaim:
-            claimName: grafana-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana
-spec:
-  ports:
-    - port: 3000
-      protocol: TCP
-      targetPort: http-grafana
-  selector:
-    app: grafana
-  sessionAffinity: None
-  type: LoadBalancer
-EOF
-</copy>
+      selector:
+        matchLabels:
+          app: grafana
+      template:
+        metadata:
+          labels:
+            app: grafana
+        spec:
+          securityContext:
+            fsGroup: 472
+            supplementalGroups:
+              - 0
+          containers:
+            - name: grafana
+              image: grafana/grafana
+              imagePullPolicy: IfNotPresent
+              ports:
+                - containerPort: 3000
+                  name: http-grafana
+                  protocol: TCP
+              readinessProbe:
+                failureThreshold: 3
+                httpGet:
+                  path: /robots.txt
+                  port: 3000
+                  scheme: HTTP
+                initialDelaySeconds: 10
+                periodSeconds: 30
+                successThreshold: 1
+                timeoutSeconds: 2
+              livenessProbe:
+                failureThreshold: 3
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                successThreshold: 1
+                tcpSocket:
+                  port: 3000
+                timeoutSeconds: 1
+              resources:
+                requests:
+                  cpu: 250m
+                  memory: 750Mi
+              volumeMounts:
+                - mountPath: /var/lib/grafana
+                  name: grafana-pv
+          volumes:
+            - name: grafana-pv
+              persistentVolumeClaim:
+                claimName: grafana-pvc
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: grafana
+    spec:
+      ports:
+        - port: 3000
+          protocol: TCP
+          targetPort: http-grafana
+      selector:
+        app: grafana
+      sessionAffinity: None
+      type: LoadBalancer
+    EOF
+    </copy>
     ```
 
 4. Check the status of pods and wait until all the pods are up and running
@@ -174,15 +174,18 @@ EOF
 
 1. Select **Data Sources** from the **Settings** on the left menu
 
-    ![Add Datasource](images/select-datasource.png =300x100)
+    ![Add Datasource](images/select-datasource.png)
 
 2. Click "**Add data source**" button
+
     ![Add Datasource](images/add-datasource.png)
 
 3. Enter **mysql** in the filter textbox to search for MySQL data source. Click on **Select** button on **MySQL** datasource
+
     ![Choose MySQL](images/select-mysql-datasource.png)
 
 4. Fill in the **MySQL Connection** details with MySQL's IP address, port, username and password details
+
     ![Fill MySQL](images/mysql-datasource-details.png)
 
 ## Task 5: Execute dashboard script
@@ -334,11 +337,11 @@ EOF
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, March 2023
+Last Updated By/Date - Ryan Kuan, July 2025
