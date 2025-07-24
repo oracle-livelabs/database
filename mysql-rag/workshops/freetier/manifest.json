@@ -15,35 +15,39 @@
         },
 
         {
-          "title": "Lab 1: Create a Compute instance ",
+          "title": "Lab 1: Create the Virtual Cloud Network",
+          "filename": "../../create-vcn/create-vcn.md"
+        },
+
+        {
+          "title": "Lab 2: Create a Compute instance ",
           "filename": "../../create-compute/create-compute.md"
         },
 
         {
 
-          "title": "Lab 2: Build and Test Apache / PHP Installation",
+          "title": "Lab 3: Build and Test Apache / PHP Installation",
           "filename": "../../build-lamp/build-lamp.md"
         },
 
         {
 
-          "title": "Lab 3: Build Chatbot Application ",
+          "title": "Lab 4: Build Chatbot Application ",
           "filename": "../../build-chatbot/build-chatbot.md"
         },
         {
-          "title": "Lab 4: Install Enterprise Edition",
+          "title": "Lab 5: Install Enterprise Edition",
           "filename": "../../install-ee/install-ee.md"
         },
 
         {
-          "title": "Lab 5: Setup Sakila Sample Database and configure Vector datatype",
+          "title": "Lab 6: Setup Sakila Sample Database and configure Vector datatype",
           "filename": "../../setup-sakila/setup-sakila.md"
         },
         
-
         {
 
-          "title": "Lab 6: Build MySQL Vector AI Application",
+          "title": "Lab 7: Build MySQL Vector AI Application",
           "filename": "../../build-ai-app/build-ai-app.md"
         },
 
