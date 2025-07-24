@@ -181,7 +181,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 
     ```
     <copy>
-    cat /home/oracle/scripts/UPGR.cfg
+    cat /home/oracle/scripts/upg-05-UPGR.cfg
     </copy>
     ```
 
@@ -202,7 +202,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     upg1.sid=UPGR
     upg1.target_cdb=CDB23
     upg1.restoration=no
-    upg1.add_after_upgrade_pfile=/home/oracle/scripts/upgr_after_addinit.ora
+    upg1.add_after_upgrade_pfile=/home/oracle/scripts/upg-05-upgr_after_addinit.ora
     upg1.timezone_upg=NO
     ```
     </details>
@@ -217,7 +217,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/UPGR.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-05-UPGR.cfg -mode analyze
     </copy>
     ```
 
@@ -302,7 +302,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/UPGR.cfg -mode deploy
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-05-UPGR.cfg -mode deploy
     </copy>
     ```
     <details>

@@ -155,7 +155,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
     ```
     <copy>
-    cat /home/oracle/scripts/ftex-refresh.cfg
+    cat /home/oracle/scripts/upg-11-ftex-refresh.cfg
     </copy>
     ```
 
@@ -188,7 +188,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode analyze
     </copy>
     ```
 
@@ -234,7 +234,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode fixups
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode fixups
     </copy>
     ```
 
@@ -290,7 +290,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode deploy
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode deploy
     </copy>
     ```
 

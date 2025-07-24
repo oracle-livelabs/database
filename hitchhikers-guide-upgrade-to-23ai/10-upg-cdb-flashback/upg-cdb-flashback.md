@@ -94,7 +94,7 @@ You start by checking the *CDB19* database.
 
     ```
     <copy>
-    cat /home/oracle/scripts/cdb19.cfg
+    cat /home/oracle/scripts/upg-10-cdb19.cfg
     </copy>
     ```
 
@@ -120,7 +120,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/cdb19.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-10-cdb19.cfg -mode analyze
     </copy>
     ```
 
@@ -191,7 +191,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/cdb19.cfg -mode deploy
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-10-cdb19.cfg -mode deploy
     </copy>
     ```
 
@@ -326,7 +326,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/cdb19.cfg -restore -jobs 101
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-10-cdb19.cfg -restore -jobs 101
     </copy>
     ```
 

@@ -41,14 +41,14 @@ This lab assumes:
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-snapshot-snap-before.sql
+    @/home/oracle/scripts/upg-03-awr-snapshot-snap-before.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-snapshot-snap-before.sql
+    SQL> @/home/oracle/scripts/upg-03-awr-snapshot-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 113 created. -
     -------------------------------------------
@@ -90,14 +90,14 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     ```
     <copy>
-    @/home/oracle/scripts/capture_cc.sql
+    @/home/oracle/scripts/upg-03-capture_cc.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/capture_cc.sql
+    SQL> @/home/oracle/scripts/upg-03-capture_cc.sql
     Dropping SQL Tuning Set, if exists
 
     PL/SQL procedure successfully completed.
@@ -124,12 +124,12 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 5. Exit HammerDB.
 
-6. Back in the *yellow* terminal 🟨, the script `capture_cc.sql` should be done by now. Examine the output. It lists how many statements it captured from the cursor cache and into the SQL Tuning Set.
+6. Back in the *yellow* terminal 🟨, the script `upg-03-capture_cc.sql` should be done by now. Examine the output. It lists how many statements it captured from the cursor cache and into the SQL Tuning Set.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/capture_cc.sql
+    SQL> @/home/oracle/scripts/upg-03-capture_cc.sql
     Dropping SQL Tuning Set, if exists
 
     PL/SQL procedure successfully completed.
@@ -154,14 +154,14 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-snapshot-snap-after.sql
+    @/home/oracle/scripts/upg-03-awr-snapshot-snap-after.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-snapshot-snap-after.sql
+    SQL> @/home/oracle/scripts/upg-03-awr-snapshot-snap-after.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 117 created. -
     -------------------------------------------

@@ -112,14 +112,14 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_cpu.sql
+    @/home/oracle/scripts/upg-07-spa_cpu.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/spa_cpu.sql
+    SQL> @/home/oracle/scripts/upg-07-spa_cpu.sql
     SQL Tuning Set does exist - will run SPA now ...
     SQL Performance Analyzer Task does not exist - will be created ...
 
@@ -137,14 +137,14 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_report_cpu.sql
+    @/home/oracle/scripts/upg-07-spa_report_cpu.sql
     </copy>
     ```
 6. Then repeat this for *ELAPSED\_TIME*. First, analyze performance.
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_elapsed.sql
+    @/home/oracle/scripts/upg-07-spa_elapsed.sql
     </copy>
     ```
 
@@ -152,7 +152,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_report_elapsed.sql
+    @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
     </copy>
     ```
 
@@ -232,7 +232,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_elapsed.sql
+    @/home/oracle/scripts/upg-07-spa_elapsed.sql
     </copy>
     ```
 
@@ -240,7 +240,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_report_elapsed.sql
+    @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
     </copy>
     ```
 

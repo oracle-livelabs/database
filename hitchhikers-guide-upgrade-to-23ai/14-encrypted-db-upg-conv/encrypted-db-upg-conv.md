@@ -322,7 +322,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
     ```
     <copy>
-    cat /home/oracle/scripts/encrypted-db-upg-conv.cfg
+    cat /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg
     </copy>
     ```
 
@@ -348,7 +348,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/encrypted-db-upg-conv.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -mode analyze
     </copy>
     ```
 
@@ -487,7 +487,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/encrypted-db-upg-conv.cfg -load_password
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -load_password
     </copy>
     ```
 
@@ -586,7 +586,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/encrypted-db-upg-conv.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -mode analyze
     </copy>
     ```
 
@@ -660,7 +660,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/encrypted-db-upg-conv.cfg -mode deploy
+    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -mode deploy
     </copy>
     ```
 

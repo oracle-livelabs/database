@@ -202,7 +202,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
     ```
     <copy>
     alter pluggable database YELLOW close;
-    alter pluggable database YELLOW unplug into '/home/oracle/scripts/yellow.xml';
+    alter pluggable database YELLOW unplug into '/home/oracle/scripts/upg-15-yellow.xml';
     </copy>
 
     -- Be sure to hit RETURN
@@ -215,7 +215,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
     Pluggable database altered.
 
-    SQL> alter pluggable database YELLOW unplug into '/home/oracle/scripts/yellow.xml';
+    SQL> alter pluggable database YELLOW unplug into '/home/oracle/scripts/upg-15-yellow.xml';
 
     Pluggable database altered.
     ```
@@ -275,7 +275,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
 
     ```
     <copy>
-    create pluggable database YELLOW using '/home/oracle/scripts/yellow.xml';
+    create pluggable database YELLOW using '/home/oracle/scripts/upg-15-yellow.xml';
     alter pluggable database YELLOW open upgrade;
     </copy>
 
@@ -285,7 +285,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> create pluggable database YELLOW using '/home/oracle/scripts/yellow.xml';
+    SQL> create pluggable database YELLOW using '/home/oracle/scripts/upg-15-yellow.xml';
 
     Pluggable database created.
 

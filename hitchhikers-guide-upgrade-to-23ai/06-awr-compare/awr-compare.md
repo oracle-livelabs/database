@@ -43,14 +43,14 @@ Use HammerDB to create a workload.
 
 	```
     <copy>
-    @/home/oracle/scripts/awr-compare-snap-before.sql
+    @/home/oracle/scripts/upg-06-awr-compare-snap-before.sql
     </copy>
 	```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-compare-snap-before.sql
+    SQL> @/home/oracle/scripts/upg-06-awr-compare-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 130 created. -
     -------------------------------------------
@@ -93,14 +93,14 @@ Use HammerDB to create a workload.
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-compare-snap-after.sql
+    @/home/oracle/scripts/upg-06-awr-compare-snap-after.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-compare-snap-after.sql
+    SQL> @/home/oracle/scripts/upg-06-awr-compare-snap-after.sql
     ------------------------------------------
     - AWR Snapshot with Snap-ID: 131 created. -
     ------------------------------------------

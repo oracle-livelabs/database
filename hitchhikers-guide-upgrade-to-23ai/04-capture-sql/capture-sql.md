@@ -40,14 +40,14 @@ Capture workload information from the workload you generated in lab 3 - Generate
 
     ```
     <copy>
-    @/home/oracle/scripts/capture_awr.sql
+    @/home/oracle/scripts/upg-04-capture_awr.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/capture_awr.sql
+    SQL> @/home/oracle/scripts/upg-04-capture_awr.sql
     Snapshot Range between 111 and 120.
     There are 31 SQL Statements in STS_CaptureAWR.
 

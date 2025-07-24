@@ -77,7 +77,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
     ```
     <copy>
-    @/home/oracle/scripts/spb_create.sql
+    @/home/oracle/scripts/upg-08-spb_create.sql
     </copy>
     ```
 
@@ -91,7 +91,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/spb_create.sql
+    SQL> @/home/oracle/scripts/upg-08-spb_create.sql
     
     PL/SQL procedure successfully completed.
     
@@ -120,7 +120,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     UPGR
     
-    SQL> @spm/spb_create.sql 0cwuxyv314wcg
+    SQL> @spm/upg-08-spb_create.sql 0cwuxyv314wcg
     
     spb_create_cdb23_oraclevcn_com_upgr_0cwuxyv314wcg_20240813_084739.txt
     

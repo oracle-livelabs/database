@@ -42,7 +42,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
     ```
     <copy>
-    @/home/oracle/scripts/sta_cc.sql
+    @/home/oracle/scripts/upg-09-sta_cc.sql
     </copy>
     ```
 
@@ -243,8 +243,8 @@ In this lab, you will implement some of the recommendations. Namely, those about
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_elapsed.sql
-    @/home/oracle/scripts/spa_report_elapsed.sql
+    @/home/oracle/scripts/upg-07-spa_elapsed.sql
+    @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
     </copy>
 
     -- Be sure to hit RETURN
