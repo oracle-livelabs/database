@@ -12,141 +12,94 @@ In this lab, we will review and startup all components required to successfully 
 ### Prerequisites
 This lab assumes you have:
 - An Oracle Cloud account
-- You have completed:
+- Successfully completed the previous labs
     - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
     - Lab: Environment Setup
 
 >**Note:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise, the last line will remain in the buffer until you hit* **ENTER!**
 
-## Task 1: Validate That Required Processes are Up and Running.
+## Task 1: Create an API Key to Access OpenAI
 
-1. Now with access to your remote desktop session, proceed as indicated below to validate your environment before you start executing the subsequent labs. The following Processes should be up and running:
+1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create).
 
-    - Database Listeners
-        - LISTENER (1521)
-        - LISTCDB2 (1522)
-    - Database Server Instances
-        - CDB1
-        - CDB2
+2. Copy the name and value of the created key and save it safely. You will need to provide this information later. You won't be able to view the key again in your OpenAI account for security reasons. You will need to provide this information later.
 
-    You may test database connectivity by clicking on the *+* sign next to the Database(s) as shown below in the *SQL Developer Oracle Connections* panel.
+## Task 2: Create a Webhook in Slack
 
-    ![](./images/19c_hol_landing.png " ")
+Create webhook to send notifications about the loan approval request to a Slack channel.
 
-2. Click the *Terminal* icon on the desktop to launch a session, then run the following to validate that expected processes are up.
+1. [Create an incoming webhook](https://api.slack.com/messaging/webhooks) in Slack.
 
-    ```
-    <copy>
-    ps -ef|grep LIST|grep -v grep
-    ps -ef|grep ora_|grep pmon|grep -v grep
-    systemctl status oracle-database
-    systemctl status oracle-db-listener
-    </copy>
-    ```
+2. Copy the incoming webhook URL and save it. You'll need to provide this information later.
 
-    ![](./images/check-pmon-up.png " ")
-    ![](./images/check-db-service-up.png " ")
-    ![](./images/check-dblistner-service-up.png " ")
+## Task 3: Start the Services
 
-    If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
+1. Click **Activities** in the remote desktop window to open a new terminal.
 
-3. If you see questionable output(s), failure, or down component(s), restart the service accordingly
+2. From your remote desktop session as user *oracle*, run the following commands to start all the services.
 
     ```
     <copy>
-    sudo systemctl restart oracle-database
-    sudo systemctl restart oracle-db-listener
+    cd $HOME/WorkflowScripts/
+    ./startMicrotxWorkflowServices.sh
     </copy>
     ```
 
-## Task 2: Initialize Database for Multitenant Use Cases
+    When you run this script, it opens 4 new terminal windows (or tabs). Each tab is for one of the following services or process: document processing agent service, loan processing agent, loan compliance service, and workflow server.
 
-1. From your remote desktop session as user *oracle*, run the block below to refresh labs artifacts
+    It takes around 90 seconds or more to build and start all the services. After all the services are built, a new terminal is opened for workflow UI and the Workflow UI is displayed as shown in the following image.
 
-    ```
-    <copy>
-    cd ~
-    wget -O labs-novnc.zip https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/labs-novnc.zip
-    unzip -qo labs-novnc.zip
-    rm -f labs-novnc.zip
-    cd labs/multitenant
-    chmod +x *.sh
-    </copy>
-    ```
+	![MicroTx Workflow UI](images/ui-initial-screen.png)
 
-    ![](./images/init-multitenant.png " ")
+3.  The Workflow UI is displayed by default. In case the Workflow UI is not displayed, open `http://localhost:5000/` in any browser tab to access the Workflow UI.
+
+## Task 4: Add the OpenAI API Key to MicroTx Workflow Engine
+
+1. In the Workflow UI, click **Definitions**, and then click **Agentic AI** tab.
+   The following LLM definitions are displayed.
+
+	![AI Definitions page in MicroTx Workflow UI](images/agentic-ai-tab.png)
+
+2. Click **gpt-4o-mini**. 
+   The **Edit LLM Definition** dialog box appears. A dummy value is displayed for **API Key**.
+
+	![Edit LLM Definitions page in MicroTx Workflow UI](images/replace-api-key.png)
+
+3. Replace the **API Key** value with the value of the OpenAI API key that you have copied in step 1.
+
+4. Click Submit.
+
+5. Click **gpt-4o**.
+   The **Edit LLM Definition** dialog box appears. A dummy value is displayed for **API Key**.
+
+	![Edit LLM Definitions page in MicroTx Workflow UI](images/replace-api-key-chatgpt4o.png)
+
+6. Replace the **API Key** value with the value of the OpenAI API key that you have copied in step 1.
+
+7. Click Submit.
+
+## Task 5: View the Overall Workflow and add the Slack Webhook
+
+1. In the Workflow UI, click **Definitions**.
+
+2. In the **Workflows** tab,  click the **acme_bank_loan_processing_workflow** workflow.
+   ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
+
+3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed.
+   ![View the selected workflow in Workflow UI](images/view-workflow.png)
+
+4. Find occurrences of `slack.com` in the workflow code and replace the entire URI with the incoming webhook URL that you had copied in step 2. Repeat this step for all 4 occurrences of `slack.com` in the workflow code.
+
+5. Click **Save** to save the changes.
+   The changes that you have made are highlighted.
+
+6. View the changes, and then click **Save** to save the changes.
+
+
 
 You may now [proceed to the next lab](#next).
 
-## Appendix 1: Managing Startup Services
-
-1. Database service (All databases and Standard Listener).
-
-    - Start
-
-    ```
-    <copy>
-    sudo systemctl start oracle-database
-    </copy>
-    ```
-    - Stop
-
-    ```
-    <copy>
-    sudo systemctl stop oracle-database
-    </copy>
-    ```
-
-    - Status
-
-    ```
-    <copy>
-    systemctl status oracle-database
-    </copy>
-    ```
-
-    - Restart
-
-    ```
-    <copy>
-    sudo systemctl restart oracle-database
-    </copy>
-    ```
-
-2. Database service (Non-Standard Listeners).
-
-    - Start
-
-    ```
-    <copy>
-    sudo systemctl start oracle-db-listener
-    </copy>
-    ```
-    - Stop
-
-    ```
-    <copy>
-    sudo systemctl stop oracle-db-listener
-    </copy>
-    ```
-
-    - Status
-
-    ```
-    <copy>
-    systemctl status oracle-db-listener
-    </copy>
-    ```
-
-    - Restart
-
-    ```
-    <copy>
-    sudo systemctl restart oracle-db-listener
-    </copy>
-    ```
-
 ## Acknowledgements
-* **Author** - Andy Rivenes, Sr. Principal Product Manager, Oracle Database In-Memory
-* **Contributors** - Kay Malcolm, Didi Han, Rene Fontcha
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2021
+* **Author** - Sylaja Kannan, Consulting User Assistance Developer
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
+* **Last Updated By/Date** - Sylaja Kannan, September 2025

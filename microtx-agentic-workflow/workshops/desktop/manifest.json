@@ -18,20 +18,11 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Provision an Instance",
+      "title": "Lab 2: Run a Workflow",
       "description": "Provisioning the Lab Environment",
-      "filename": "../../provision/provision.md"
+      "filename": "../../run/run.md"
     },
-    {
-      "title": "Lab 3: Load Data into an Instance",
-      "description": "Loading the data",
-      "filename": "../../data-load/data-load.md"
-    },
-    {
-      "title": "Lab 4: Query Data",
-      "description": "Querying the data",
-      "filename": "../../query/query.md"
-    },
+
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

@@ -33,19 +33,9 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Provision an Instance",
+      "title": "Lab 4: Run a Workflow",
       "description": "Provisioning the Lab Environment",
-      "filename": "../../provision/provision.md"
-    },
-    {
-      "title": "Lab 5: Load Data into an Instance",
-      "description": "Loading the data",
-      "filename": "../../data-load/data-load.md"
-    },
-    {
-      "title": "Lab 6: Query Data",
-      "description": "Queyring the data",
-      "filename": "../../query/query.md"
+      "filename": "../../run/run.md"
     },
     {
       "title": "Environment Cleanup",
