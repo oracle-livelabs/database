@@ -63,7 +63,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Deploy Zeppelin
+5. Deploy Zeppelin
 
     ```
     <copy>
@@ -76,7 +76,7 @@ In this lab, you will:
     </copy>
     ```
 
-5. Find out the public IP of OKE Ingress Controller
+6. Find out the public IP of OKE Ingress Controller
 
     ```
     <copy>
@@ -85,7 +85,7 @@ In this lab, you will:
     ```
 	![Ingress IP](images/ingress.png)
 
-6. Access the deployed Zeppelin application. Point your browser to **https://&lt;INGRESS&#95;PUBLIC&#95;IP&#95;ADDRESS&gt;/zeppelin/**
+7. Access the deployed Zeppelin application. Point your browser to **https://&lt;INGRESS&#95;PUBLIC&#95;IP&#95;ADDRESS&gt;/zeppelin/**
 
     >Note: Please ensure you have the closing **/** in the url, that is, **zeppelin/**
 
@@ -118,31 +118,30 @@ Task 3: Connect to MySQL HeatWave
 5. You can now start working with MySQL HeatWave!
 
 	![Interactive Query](images/notebook-query.png)
-
+   
     ```
-<copy>
-%mysql
-use airportdb;
-select * from airline limit 10;
-</copy>
-```
-
+    <copy>
+    %mysql
+    use airportdb;
+    select * from airline limit 10;
+    </copy>
     ```
-<copy>
-%mysql
-use airportdb;
-select airline.airlinename, count(*) as nb_people from booking, flight, airline, passengerdetails
-where booking.flight_id=flight.flight_id and
-airline.airline_id=flight.airline_id and
-booking.passenger_id=passengerdetails.passenger_id and
-country in ("SWITZERLAND", "FRANCE", "ITALY")
-group by
-airline.airlinename
-order by
-airline.airlinename, nb_people
-limit 10;
-</copy>
-```
+    ```
+    <copy>
+    %mysql
+    use airportdb;
+    select airline.airlinename, count(*) as nb_people from booking, flight, airline, passengerdetails
+    where booking.flight_id=flight.flight_id and
+    airline.airline_id=flight.airline_id and
+    booking.passenger_id=passengerdetails.passenger_id and
+    country in ("SWITZERLAND", "FRANCE", "ITALY")
+    group by
+    airline.airlinename
+    order by
+    airline.airlinename, nb_people
+    limit 10;
+    </copy>
+    ```
 
     You may now **proceed to the next lab.**
 
@@ -150,9 +149,9 @@ limit 10;
 
 * **Author**
 	* Ivan Ma, MySQL Solution Engineer, MySQL APAC
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
+	* Ryan Kuan, HeatWave Data Architect, MySQL APAC
 * **Contributors**
 	* Perside Foster, MySQL Solution Engineering
 	* Rayes Huang, OCI Solution Specialist, OCI APAC
 
-* **Last Updated By/Date** - Ryan Kuan, March 2022
+* **Last Updated By/Date** - Ryan Kuan, July 2025

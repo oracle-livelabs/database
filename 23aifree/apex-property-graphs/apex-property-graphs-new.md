@@ -121,4 +121,4 @@ This lab assumes:
 ## Acknowledgements
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
 - **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova
+- **Last Updated By/Date** - Renée Wikestad, June 2025

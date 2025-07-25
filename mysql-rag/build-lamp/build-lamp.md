@@ -17,7 +17,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL SQL and  PHP
-- Completed Lab 1
+- Completed Lab 2
 
 ## Task 1: Install App Server (APACHE)
 
@@ -128,4 +128,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Craig Shallahamer, Applied AI Scientist, Viscosity North America
 - **Contributor** - Perside Foster, MySQL Solution Engineering 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , April 2025
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , July 2025
