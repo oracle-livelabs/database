@@ -55,7 +55,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
 
     ```
     <copy>
-    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_25
+    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_28
     export OLD_ORACLE_HOME=/u01/app/oracle/product/19
     mv $NEW_ORACLE_HOME/dbs/spfileFTEX.ora $OLD_ORACLE_HOME/dbs
     mv $NEW_ORACLE_HOME/dbs/orapwFTEX $OLD_ORACLE_HOME/dbs
@@ -128,7 +128,7 @@ In the Oracle home you find other software components, that is patched together 
     ```
     <copy>
     export OLD_ORACLE_HOME=/u01/app/oracle/product/19
-    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_25
+    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_28
     $OLD_ORACLE_HOME/jdk/bin/java -version
     $NEW_ORACLE_HOME/jdk/bin/java -version
     </copy>
@@ -143,7 +143,7 @@ In the Oracle home you find other software components, that is patched together 
     <summary>*click to see the output*</summary>
     ``` text
     $ export OLD_ORACLE_HOME=/u01/app/oracle/product/19
-    $ export NEW_ORACLE_HOME=/u01/app/oracle/product/19_25
+    $ export NEW_ORACLE_HOME=/u01/app/oracle/product/19_28
     $ $OLD_ORACLE_HOME/jdk/bin/java -version
     java version "1.8.0_381"
     Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
@@ -336,14 +336,14 @@ In the Oracle home you find other software components, that is patched together 
     OPATCH_SCRIPT_DIR         /u01/app/oracle/product/19/QOpatch
     JAVA$JOX$CUJS$DIRECTORY$  /u01/app/oracle/product/19/javavm/admin/
     OPATCH_LOG_DIR            /u01/app/oracle/product/19/rdbms/log
-    ORACLE_HOME               /u01/app/oracle/product/19_25
-    ORACLE_OCM_CONFIG_DIR     /u01/app/oracle/product/19_25/ccr/state
-    ORACLE_OCM_CONFIG_DIR2    /u01/app/oracle/product/19_25/ccr/state
-    DBMS_OPTIM_LOGDIR         /u01/app/oracle/product/19_25/cfgtoollogs
-    DBMS_OPTIM_ADMINDIR       /u01/app/oracle/product/19_25/rdbms/admin
-    DATA_PUMP_DIR             /u01/app/oracle/product/19_25/rdbms/log/
-    XMLDIR                    /u01/app/oracle/product/19_25/rdbms/xml
-    XSDDIR                    /u01/app/oracle/product/19_25/rdbms/xml/schema
+    ORACLE_HOME               /u01/app/oracle/product/19_28
+    ORACLE_OCM_CONFIG_DIR     /u01/app/oracle/product/19_28/ccr/state
+    ORACLE_OCM_CONFIG_DIR2    /u01/app/oracle/product/19_28/ccr/state
+    DBMS_OPTIM_LOGDIR         /u01/app/oracle/product/19_28/cfgtoollogs
+    DBMS_OPTIM_ADMINDIR       /u01/app/oracle/product/19_28/rdbms/admin
+    DATA_PUMP_DIR             /u01/app/oracle/product/19_28/rdbms/log/
+    XMLDIR                    /u01/app/oracle/product/19_28/rdbms/xml
+    XSDDIR                    /u01/app/oracle/product/19_28/rdbms/xml/schema
     
     13 rows selected.
     ```
@@ -365,32 +365,32 @@ In the Oracle home you find other software components, that is patched together 
     Container: ftex
     
     Current  ORACLE_HOME: /u01/app/oracle/product/19
-    Original ORACLE_HOME: /u01/app/oracle/product/19_25
+    Original ORACLE_HOME: /u01/app/oracle/product/19_28
     
     
     DATA_PUMP_DIR
-    ...OLD: /u01/app/oracle/product/19_25/rdbms/log/
+    ...OLD: /u01/app/oracle/product/19_28/rdbms/log/
     ...NEW: /u01/app/oracle/product/19/rdbms/log/
     DBMS_OPTIM_ADMINDIR
-    ...OLD: /u01/app/oracle/product/19_25/rdbms/admin
+    ...OLD: /u01/app/oracle/product/19_28/rdbms/admin
     ...NEW: /u01/app/oracle/product/19/rdbms/admin
     DBMS_OPTIM_LOGDIR
-    ...OLD: /u01/app/oracle/product/19_25/cfgtoollogs
+    ...OLD: /u01/app/oracle/product/19_28/cfgtoollogs
     ...NEW: /u01/app/oracle/product/19/cfgtoollogs
     ORACLE_HOME
-    ...OLD: /u01/app/oracle/product/19_25
+    ...OLD: /u01/app/oracle/product/19_28
     ...NEW: /u01/app/oracle/product/19
     ORACLE_OCM_CONFIG_DIR
-    ...OLD: /u01/app/oracle/product/19_25/ccr/state
+    ...OLD: /u01/app/oracle/product/19_28/ccr/state
     ...NEW: /u01/app/oracle/product/19/ccr/state
     ORACLE_OCM_CONFIG_DIR2
-    ...OLD: /u01/app/oracle/product/19_25/ccr/state
+    ...OLD: /u01/app/oracle/product/19_28/ccr/state
     ...NEW: /u01/app/oracle/product/19/ccr/state
     XMLDIR
-    ...OLD: /u01/app/oracle/product/19_25/rdbms/xml
+    ...OLD: /u01/app/oracle/product/19_28/rdbms/xml
     ...NEW: /u01/app/oracle/product/19/rdbms/xml
     XSDDIR
-    ...OLD: /u01/app/oracle/product/19_25/rdbms/xml/schema
+    ...OLD: /u01/app/oracle/product/19_28/rdbms/xml/schema
     ...NEW: /u01/app/oracle/product/19/rdbms/xml/schema
     
     PL/SQL procedure successfully completed.
@@ -772,4 +772,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025

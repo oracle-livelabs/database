@@ -98,7 +98,7 @@ You will patch *CDB19* to 19.25 and use an existing Oracle home.
 
     ```
     <copy>
-    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_25
+    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_28
     export OLD_ORACLE_HOME=/u01/app/oracle/product/19
     mv $OLD_ORACLE_HOME/dbs/spfileCDB19.ora $NEW_ORACLE_HOME/dbs
     mv $OLD_ORACLE_HOME/dbs/orapwCDB19 $NEW_ORACLE_HOME/dbs
@@ -548,4 +548,4 @@ You may now *proceed to the next lab*. Return to *lab 5* if you didn't finish it
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025

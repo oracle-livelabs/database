@@ -44,7 +44,7 @@ You will use AutoUpgrade just like in lab 2.
     $ cat scripts/simple-patching-existing-home.cfg
     global.autoupg_log_dir=/home/oracle/autoupgrade-patching/simple-patching-existing-home/log
     patch1.source_home=/u01/app/oracle/product/19
-    patch1.target_home=/u01/app/oracle/product/19_25
+    patch1.target_home=/u01/app/oracle/product/19_28
     patch1.sid=UPGR
     patch1.restoration=no
     ```
@@ -65,7 +65,7 @@ You will use AutoUpgrade just like in lab 2.
     <summary>*click to see the output*</summary>
     ``` text
     $ java -jar autoupgrade.jar -config scripts/simple-patching-existing-home.cfg -mode analyze
-    AutoUpgrade 24.8.241119 launched with default internal options
+    AutoUpgrade 25.3.250509 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -136,7 +136,7 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
     <summary>*click to see the output*</summary>
     ``` text
     $ java -jar autoupgrade.jar -config scripts/simple-patching-existing-home.cfg -mode deploy
-    AutoUpgrade 24.8.241119 launched with default internal options
+    AutoUpgrade 25.3.250509 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -226,4 +226,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025

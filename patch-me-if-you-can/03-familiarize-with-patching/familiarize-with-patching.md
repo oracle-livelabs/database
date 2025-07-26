@@ -685,7 +685,7 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
     ``` text
     $ cd
     $ java -jar autoupgrade.jar -version
-    build.version 24.8.241119
+    build.version 25.3.250509
     build.date 2024/11/19 12:49:28 -0500
     build.hash b404cf007
     build.hash_date 2024/11/18 14:39:19 -0500
@@ -703,4 +703,4 @@ You may now *proceed to the next lab*. Return to *lab 2* if you didn't finish it
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025

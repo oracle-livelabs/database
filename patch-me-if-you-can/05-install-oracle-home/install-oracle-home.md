@@ -49,7 +49,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     $ cat scripts/install-oracle-home.cfg
     global.global_log_dir=/home/oracle/autoupgrade-patching/install-oracle-home/log
     patch1.source_home=/u01/app/oracle/product/19
-    patch1.target_home=/u01/app/oracle/product/19_25_au
+    patch1.target_home=/u01/app/oracle/product/19_28_au
     patch1.folder=/home/oracle/patch-repo
     patch1.patch=RECOMMENDED,29213893
     patch1.download=no
@@ -68,7 +68,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     <summary>*click to see the output*</summary>
     ``` text
     $ java -jar autoupgrade.jar -config scripts/install-oracle-home.cfg -patch -mode create_home
-    AutoUpgrade Patching 24.8.241119 launched with default internal options
+    AutoUpgrade Patching 25.3.250509 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -314,7 +314,7 @@ Install an Oracle manually. This allows you to compare the two methods.
     ```
     <copy>
     cd
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
+    export ORACLE_HOME=/u01/app/oracle/product/19_28_man
     mkdir -p $ORACLE_HOME
     </copy>
 
@@ -338,18 +338,18 @@ Install an Oracle manually. This allows you to compare the two methods.
     ``` text
     $ unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
     Archive:  /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip
-       creating: /u01/app/oracle/product/19_25_man/drdaas/
-       creating: /u01/app/oracle/product/19_25_man/drdaas/admin/
-      inflating: /u01/app/oracle/product/19_25_man/drdaas/admin/drdasqtt_translator_setup.sql
-      inflating: /u01/app/oracle/product/19_25_man/drdaas/admin/drdapkg_db2.sql
+       creating: /u01/app/oracle/product/19_28_man/drdaas/
+       creating: /u01/app/oracle/product/19_28_man/drdaas/admin/
+      inflating: /u01/app/oracle/product/19_28_man/drdaas/admin/drdasqtt_translator_setup.sql
+      inflating: /u01/app/oracle/product/19_28_man/drdaas/admin/drdapkg_db2.sql
     ...
     (output truncated)  
     ...
-      /u01/app/oracle/product/19_25_man/javavm/lib/security/cacerts -> ../../../javavm/jdk/jdk8/lib/security/cacerts
-      /u01/app/oracle/product/19_25_man/javavm/lib/sunjce_provider.jar -> ../../javavm/jdk/jdk8/lib/sunjce_provider.jar
-      /u01/app/oracle/product/19_25_man/javavm/lib/security/README.txt -> ../../../javavm/jdk/jdk8/lib/security/README.txt
-      /u01/app/oracle/product/19_25_man/javavm/lib/security/java.security -> ../../../javavm/jdk/jdk8/lib/security/java.security
-      /u01/app/oracle/product/19_25_man/jdk/jre/lib/amd64/server/libjsig.so -> ../libjsig.so
+      /u01/app/oracle/product/19_28_man/javavm/lib/security/cacerts -> ../../../javavm/jdk/jdk8/lib/security/cacerts
+      /u01/app/oracle/product/19_28_man/javavm/lib/sunjce_provider.jar -> ../../javavm/jdk/jdk8/lib/sunjce_provider.jar
+      /u01/app/oracle/product/19_28_man/javavm/lib/security/README.txt -> ../../../javavm/jdk/jdk8/lib/security/README.txt
+      /u01/app/oracle/product/19_28_man/javavm/lib/security/java.security -> ../../../javavm/jdk/jdk8/lib/security/java.security
+      /u01/app/oracle/product/19_28_man/jdk/jre/lib/amd64/server/libjsig.so -> ../libjsig.so
     ```
     </details>  
 
@@ -372,18 +372,18 @@ Install an Oracle manually. This allows you to compare the two methods.
     $ mv OPatch OPatch.old
     $ unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
     Archive:  /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip
-       creating: /u01/app/oracle/product/19_25_man/OPatch/
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/opatchauto
-       creating: /u01/app/oracle/product/19_25_man/OPatch/ocm/
-       creating: /u01/app/oracle/product/19_25_man/OPatch/ocm/doc/
+       creating: /u01/app/oracle/product/19_28_man/OPatch/
+      inflating: /u01/app/oracle/product/19_28_man/OPatch/opatchauto
+       creating: /u01/app/oracle/product/19_28_man/OPatch/ocm/
+       creating: /u01/app/oracle/product/19_28_man/OPatch/ocm/doc/
     ...
     (output truncated)  
     ...
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/features/com.oracle.orapki.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/features/com.oracle.glcm.patch.opatch-common-api-classpath.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/com.sun.org.apache.xml.internal.resolver.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/com.sun.xml.bind.jaxb-jxc.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/javax.activation.javax.activation.jar
+      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/features/com.oracle.orapki.jar
+      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/features/com.oracle.glcm.patch.opatch-common-api-classpath.jar
+      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/com.sun.org.apache.xml.internal.resolver.jar
+      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/com.sun.xml.bind.jaxb-jxc.jar
+      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/javax.activation.javax.activation.jar
     ```
     </details>  
 
@@ -439,8 +439,8 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     <HOME NAME="OraDB19Home1" LOC="/u01/app/oracle/product/19" TYPE="O" IDX="1"/>
     <HOME NAME="OraDB21Home1" LOC="/u01/app/oracle/product/21" TYPE="O" IDX="2"/>
     <HOME NAME="OraDB23Home1" LOC="/u01/app/oracle/product/23" TYPE="O" IDX="3"/>
-    <HOME NAME="OraDB19Home2" LOC="/u01/app/oracle/product/19_25" TYPE="O" IDX="4"/>
-    <HOME NAME="OraDB19Home3" LOC="/u01/app/oracle/product/19_25_au" TYPE="O" IDX="5"/>
+    <HOME NAME="OraDB19Home2" LOC="/u01/app/oracle/product/19_28" TYPE="O" IDX="4"/>
+    <HOME NAME="OraDB19Home3" LOC="/u01/app/oracle/product/19_28_au" TYPE="O" IDX="5"/>
     </HOME_LIST>
     <COMPOSITEHOME_LIST>
     </COMPOSITEHOME_LIST>
@@ -452,7 +452,7 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
 
     ```
     <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_au
+    export ORACLE_HOME=/u01/app/oracle/product/19_28_au
     $ORACLE_HOME/OPatch/opatch lspatches
     </copy>
 
@@ -465,7 +465,7 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ /u01/app/oracle/product/19_25_au/OPatch/opatch lspatches
+    $ /u01/app/oracle/product/19_28_au/OPatch/opatch lspatches
     29213893;DBMS_STATS FAILING WITH ERROR ORA-01422 WHEN GATHERING STATS FOR USER$ TABLE
     36878697;OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
     37056207;DATAPUMP BUNDLE PATCH 19.25.0.0.0
@@ -484,7 +484,7 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
 
     ```
     <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
+    export ORACLE_HOME=/u01/app/oracle/product/19_28_man
     export PATH=$ORACLE_HOME/bin:$PATH
     export ORAINVENTORY=/u01/app/oraInventory
     export ORACLE_BASE=/u01/app/oracle
@@ -533,15 +533,15 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
     Launching Oracle Database Setup Wizard...
     
     The response file for this session can be found at:
-     /u01/app/oracle/product/19_25_man/install/response/db_2024-11-05_09-48-23AM.rsp
+     /u01/app/oracle/product/19_28_man/install/response/db_2024-11-05_09-48-23AM.rsp
     
     You can find the log of this install session at:
      /u01/app/oraInventory/logs/InstallActions2024-11-05_09-48-23AM/installActions2024-11-05_09-48-23AM.log
     
     As a root user, execute the following script(s):
-    	1. /u01/app/oracle/product/19_25_man/root.sh
+    	1. /u01/app/oracle/product/19_28_man/root.sh
     
-    Execute /u01/app/oracle/product/19_25_man/root.sh on the following nodes:
+    Execute /u01/app/oracle/product/19_28_man/root.sh on the following nodes:
     [holserv1]
     
     
@@ -561,7 +561,7 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
 
     ```
     <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
+    export ORACLE_HOME=/u01/app/oracle/product/19_28_man
     $ORACLE_HOME/OPatch/opatch lspatches
     </copy>
     ```
@@ -593,7 +593,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 
     ```
     <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_au
+    export ORACLE_HOME=/u01/app/oracle/product/19_28_au
     export PATH=$ORACLE_HOME/bin:$PATH
     </copy>
 
@@ -651,7 +651,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 
     ```
     # Set environment to new Oracle home    
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_gold
+    export ORACLE_HOME=/u01/app/oracle/product/19_28_gold
 
     # Extract gold image
     unzip /home/oracle/patch-repo/goldImage_dbHome_19_25_0.zip -d $ORACLE_HOME
@@ -692,4 +692,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025

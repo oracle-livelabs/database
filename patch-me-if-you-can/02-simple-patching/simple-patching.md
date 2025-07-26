@@ -31,7 +31,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     ```
     <copy>
     cd
-    cat scripts/simple-patching.cfg
+    cat scripts/pt-02-simple-patching.cfg
     </copy>
 
     -- Be sure to hit RETURN
@@ -46,10 +46,10 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cat scripts/simple-patching.cfg
+    $ cat scripts/pt-02-simple-patching.cfg
     global.global_log_dir=/home/oracle/autoupgrade-patching/simple-patching/log
     patch1.source_home=/u01/app/oracle/product/19
-    patch1.target_home=/u01/app/oracle/product/19_25
+    patch1.target_home=/u01/app/oracle/product/19_28
     patch1.sid=FTEX
     patch1.folder=/home/oracle/patch-repo
     patch1.patch=RECOMMENDED
@@ -61,15 +61,15 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config scripts/simple-patching.cfg -patch -mode analyze
+    java -jar autoupgrade.jar -config scripts/pt-02-simple-patching.cfg -patch -mode analyze
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar autoupgrade.jar -config scripts/simple-patching.cfg -patch -mode analyze
-    AutoUpgrade Patching 24.8.241119 launched with default internal options
+    $ java -jar autoupgrade.jar -config scripts/pt-02-simple-patching.cfg -patch -mode analyze
+    AutoUpgrade Patching 25.3.250509 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -164,7 +164,7 @@ Patching a single instance Oracle Database require downtime.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config scripts/simple-patching.cfg -patch -mode deploy
+    java -jar autoupgrade.jar -config scripts/pt-02-simple-patching.cfg -patch -mode deploy
     </copy>
     ```
 
@@ -174,8 +174,8 @@ Patching a single instance Oracle Database require downtime.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar autoupgrade.jar -config scripts/simple-patching.cfg -patch -mode deploy
-    AutoUpgrade Patching 24.8.241119 launched with default internal options
+    $ java -jar autoupgrade.jar -config scripts/pt-02-simple-patching.cfg -patch -mode deploy
+    AutoUpgrade Patching 25.3.250509 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -351,15 +351,15 @@ Patching a single instance Oracle Database require downtime.
     2024-11-04 10:10:13.851 INFO No user defined actions were specified
     2024-11-04 10:10:19.092 INFO Analyzing FTEX, 61 checks will run using 8 threads
     2024-11-04 10:12:27.560 INFO Analyzing FTEX, 61 checks will run using 8 threads
-    2024-11-04 10:14:30.061 INFO The file /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip is being extracted to /u01/app/oracle/product/19_25
-    2024-11-04 10:15:19.918 INFO Successfully extracted the gold image to /u01/app/oracle/product/19_25
+    2024-11-04 10:14:30.061 INFO The file /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip is being extracted to /u01/app/oracle/product/19_28
+    2024-11-04 10:15:19.918 INFO Successfully extracted the gold image to /u01/app/oracle/product/19_28
     2024-11-04 10:15:20.269 INFO Waiting to acquire lock
     2024-11-04 10:15:20.281 INFO Installing ORACLE_HOME
-    2024-11-04 10:15:20.283 INFO The new ORACLE_HOME will be created in /u01/app/oracle/product/19_25 and will have the following edition: Enterprise Edition
-    2024-11-04 10:15:20.284 INFO Running runInstaller in the target ORACLE_HOME /u01/app/oracle/product/19_25
-    2024-11-04 10:16:20.344 INFO Successfully installed the target ORACLE_HOME /u01/app/oracle/product/19_25
-    2024-11-04 10:16:20.407 INFO AutoUpgrade Patching has not run /u01/app/oracle/product/19_25/root.sh for the newly installed ORACLE_HOME. This needs to be performed manually after     AutoUpgrade Patching completes.
-    2024-11-04 10:16:20.483 INFO The file /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip is being extracted to /u01/app/oracle/product/19_25
+    2024-11-04 10:15:20.283 INFO The new ORACLE_HOME will be created in /u01/app/oracle/product/19_28 and will have the following edition: Enterprise Edition
+    2024-11-04 10:15:20.284 INFO Running runInstaller in the target ORACLE_HOME /u01/app/oracle/product/19_28
+    2024-11-04 10:16:20.344 INFO Successfully installed the target ORACLE_HOME /u01/app/oracle/product/19_28
+    2024-11-04 10:16:20.407 INFO AutoUpgrade Patching has not run /u01/app/oracle/product/19_28/root.sh for the newly installed ORACLE_HOME. This needs to be performed manually after     AutoUpgrade Patching completes.
+    2024-11-04 10:16:20.483 INFO The file /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip is being extracted to /u01/app/oracle/product/19_28
     2024-11-04 10:16:22.971 INFO The existing autoupgrade.jar is not going to be updated within the new ORACLE_HOME
     2024-11-04 10:16:23.048 INFO Waiting to acquire lock
     2024-11-04 10:16:23.059 INFO Executing OPatch
@@ -429,4 +429,4 @@ AutoUpgrade can also connect to My Oracle Support and find and download the nece
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025
