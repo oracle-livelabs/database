@@ -1,18 +1,17 @@
 # Install Oracle Home
 
-In this lab, you will install an Oracle home in two different ways. The easy, automated approach using AutoUpgrade and, for comparison, a manual installation.
+In this lab, you will install an Oracle home using AutoUpgrade. This method is simple and easy.
 
 
 ## Introduction
 
-Estimated Time: 30 Minutes
+Estimated Time: 20 Minutes
 
 ### Objectives
 
 In this lab, you will:
 
 * Install Oracle home using AutoUpgrade
-* Install Oracle home manually
 
 ### Prerequisites
 
@@ -100,6 +99,11 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     The command lsj is running every 10 seconds. PRESS ENTER TO EXIT
     ```
     </details>    
+
+Explain how create_home mode works when you have source_home. That all settings are copied. You can give the OH a new name if you like, or change some of the options.
+
+Explain create_home mode on an empty server. Show some of the options that you can set. 
+
 
 4. It takes around 10 minutes to install a new Oracle home and patch it. Leave AutoUpgrade running and move on to the next task.
 
@@ -305,90 +309,6 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     ```
     </details>   
 
-## Task 3: Install manually
-
-Install an Oracle manually. This allows you to compare the two methods.
-
-1. Still in the *blue* 🟦 terminal. Create a directory for the new Oracle home.
-
-    ```
-    <copy>
-    cd
-    export ORACLE_HOME=/u01/app/oracle/product/19_28_man
-    mkdir -p $ORACLE_HOME
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-2. Unzip the Oracle Database 19.3 base release into the new Oracle home.
-
-    ```
-    <copy>
-    unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
-    </copy>
-    ```
-
-    * Oracle recommends that you always start with the base release when you install a new Oracle home.
-    * Oracle does not recommend using the same, cloned Oracle home over and over again. Over time, the Oracle home might become bloated.
-    * You can download the base release from www.oracle.com.
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
-    Archive:  /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip
-       creating: /u01/app/oracle/product/19_28_man/drdaas/
-       creating: /u01/app/oracle/product/19_28_man/drdaas/admin/
-      inflating: /u01/app/oracle/product/19_28_man/drdaas/admin/drdasqtt_translator_setup.sql
-      inflating: /u01/app/oracle/product/19_28_man/drdaas/admin/drdapkg_db2.sql
-    ...
-    (output truncated)  
-    ...
-      /u01/app/oracle/product/19_28_man/javavm/lib/security/cacerts -> ../../../javavm/jdk/jdk8/lib/security/cacerts
-      /u01/app/oracle/product/19_28_man/javavm/lib/sunjce_provider.jar -> ../../javavm/jdk/jdk8/lib/sunjce_provider.jar
-      /u01/app/oracle/product/19_28_man/javavm/lib/security/README.txt -> ../../../javavm/jdk/jdk8/lib/security/README.txt
-      /u01/app/oracle/product/19_28_man/javavm/lib/security/java.security -> ../../../javavm/jdk/jdk8/lib/security/java.security
-      /u01/app/oracle/product/19_28_man/jdk/jre/lib/amd64/server/libjsig.so -> ../libjsig.so
-    ```
-    </details>  
-
-3. Update OPatch.
-
-    ```
-    <copy>
-    cd $ORACLE_HOME
-    mv OPatch OPatch.old
-    unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ cd $ORACLE_HOME
-    $ mv OPatch OPatch.old
-    $ unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
-    Archive:  /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip
-       creating: /u01/app/oracle/product/19_28_man/OPatch/
-      inflating: /u01/app/oracle/product/19_28_man/OPatch/opatchauto
-       creating: /u01/app/oracle/product/19_28_man/OPatch/ocm/
-       creating: /u01/app/oracle/product/19_28_man/OPatch/ocm/doc/
-    ...
-    (output truncated)  
-    ...
-      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/features/com.oracle.orapki.jar
-      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/features/com.oracle.glcm.patch.opatch-common-api-classpath.jar
-      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/com.sun.org.apache.xml.internal.resolver.jar
-      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/com.sun.xml.bind.jaxb-jxc.jar
-      inflating: /u01/app/oracle/product/19_28_man/OPatch/modules/javax.activation.javax.activation.jar
-    ```
-    </details>  
-
-4. Next step is to start the installer. However, only one installer can be active at the same time. Let's check AutoUpgrade and the first Oracle home.
-
 ## Task 4: Check AutoUpgrade
 
 Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
@@ -476,113 +396,6 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     ```
     </details> 
 
-## Task 5: Install manually, continued
-
-Now that AutoUpgrade has created the first Oracle home, you can start the installer to install the second Oracle home. 
-
-1. Switch to the *blue* 🟦 terminal. Start the installer to attach the Oracle home and apply the patches at the same time.
-
-    ```
-    <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/19_28_man
-    export PATH=$ORACLE_HOME/bin:$PATH
-    export ORAINVENTORY=/u01/app/oraInventory
-    export ORACLE_BASE=/u01/app/oracle
-    export CV_ASSUME_DISTID=OEL7.6
-    cd $ORACLE_HOME
-    ./runInstaller \
-       -silent -ignorePrereqFailure -waitforcompletion \
-       -applyRU /home/oracle/patch-repo/36912597/36912597  \
-       -applyOneOffs /home/oracle/patch-repo/37056207/37056207,/home/oracle/patch-repo/36878697/36878697,/home/oracle/patch-repo/29213893/29213893 \
-       oracle.install.option=INSTALL_DB_SWONLY \
-       UNIX_GROUP_NAME=oinstall \
-       INVENTORY_LOCATION=$ORAINVENTORY \
-       ORACLE_HOME=$ORACLE_HOME \
-       ORACLE_BASE=$ORACLE_BASE \
-       oracle.install.db.InstallEdition=EE \
-       oracle.install.db.OSDBA_GROUP=dba \
-       oracle.install.db.OSOPER_GROUP=dba \
-       oracle.install.db.OSBACKUPDBA_GROUP=dba \
-       oracle.install.db.OSDGDBA_GROUP=dba \
-       oracle.install.db.OSKMDBA_GROUP=dba \
-       oracle.install.db.OSRACDBA_GROUP=dba \
-       SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
-       DECLINE_SECURITY_UPDATES=true
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-    * Set the environment before starting the installer.
-    * Oracle Database 19c didn't support Oracle Linux 8 to begin with. When installing the base release on this platform, the installer fails because the operating system is not supported. You can avoid that with the environment variable `CV_ASSUME_DISTID`.
-    * Notice the `-applyRU` and `-ApplyOneOffs` parameters which instructs the installer to apply the patches to the Oracle home as part of the process.
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    Preparing the home to patch...
-    Applying the patch /home/oracle/patch-repo/36912597/36912597...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/patch-repo/37056207/37056207...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/patch-repo/36878697/36878697...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/patch-repo/29213893/29213893...
-    Successfully applied the patch.
-    The log can be found at: /u01/app/oraInventory/logs/InstallActions2024-11-05_09-48-23AM/installerPatchActions_2024-11-05_09-48-23AM.log
-    Launching Oracle Database Setup Wizard...
-    
-    The response file for this session can be found at:
-     /u01/app/oracle/product/19_28_man/install/response/db_2024-11-05_09-48-23AM.rsp
-    
-    You can find the log of this install session at:
-     /u01/app/oraInventory/logs/InstallActions2024-11-05_09-48-23AM/installActions2024-11-05_09-48-23AM.log
-    
-    As a root user, execute the following script(s):
-    	1. /u01/app/oracle/product/19_28_man/root.sh
-    
-    Execute /u01/app/oracle/product/19_28_man/root.sh on the following nodes:
-    [holserv1]
-    
-    
-    Successfully Setup Software.
-    ```
-    </details>  
-
-5. It takes around 10 minutes to install the Oracle home. Leave the process running. You can start on the next lab, *Lab 6: Manual patching of a container database*, and return to this lab after a while.
-
-## Task 6: Check manual installation
-
-1. Still in the *blue* 🟦 terminal. 
-
-2. The manual installation should be done by now. The installer should have exited with the message `Successfully Setup Software.`
-
-3. Check the patches in the new Oracle home.
-
-    ```
-    <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/19_28_man
-    $ORACLE_HOME/OPatch/opatch lspatches
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ $ORACLE_HOME/OPatch/opatch lspatches
-    29213893;DBMS_STATS FAILING WITH ERROR ORA-01422 WHEN GATHERING STATS FOR USER$ TABLE
-    36878697;OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    37056207;DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    36912597;Database Release Update : 19.25.0.0.241015 (36912597)
-    29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
-    
-    OPatch succeeded.
-    ```
-    </details> 
-
-4. In this lab, you can't run `root.sh` because of missing privileges. 
-
-
 ## Task 7: Use Gold Image
 
 Gold images are a convenient way of installing Oracle homes on many different servers. You prepare and patch an Oracle home only once, and then distribute the patched Oracle home to all other servers.
@@ -609,7 +422,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     <copy>
     $ORACLE_HOME/runInstaller -createGoldImage \
        -destinationLocation /home/oracle/patch-repo \
-       -name goldImage_dbHome_19_25_0.zip \
+       -name goldImage_dbHome_19_28_0.zip \
        -silent
     </copy>
     ```
@@ -627,7 +440,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     Launching Oracle Database Setup Wizard...
     
     Successfully Setup Software.
-    Gold Image location: /home/oracle/patch-repo/goldImage_dbHome_19_25_0.zip
+    Gold Image location: /home/oracle/patch-repo/goldImage_dbHome_19_28_0.zip
     ```
     </details> 
 
@@ -643,7 +456,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     <summary>*click to see the output*</summary>
     ``` text
     $ ls -l /home/oracle/patch-repo/goldImage*
-    -rw-r--r--. 1 oracle oinstall 4625522638 Nov  5 11:43 /home/oracle/patch-repo/goldImage_dbHome_19_25_0.zip
+    -rw-r--r--. 1 oracle oinstall 4625522638 Nov  5 11:43 /home/oracle/patch-repo/goldImage_dbHome_19_28_0.zip
     ```
     </details> 
 
@@ -654,7 +467,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     export ORACLE_HOME=/u01/app/oracle/product/19_28_gold
 
     # Extract gold image
-    unzip /home/oracle/patch-repo/goldImage_dbHome_19_25_0.zip -d $ORACLE_HOME
+    unzip /home/oracle/patch-repo/goldImage_dbHome_19_28_0.zip -d $ORACLE_HOME
 
     # Install the Oracle home
     export PATH=$ORACLE_HOME/bin:$PATH
@@ -685,6 +498,9 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * OPatch is also already updated.
     * By using a gold image in your environment, you know that the same set of patches are in all of your databases.
     * You patch only once, then create a gold image, and use that to distribute to all systems.
+
+
+What are you thoughts about installing a new Oracle home using AutoUpgrade? How do you think it compares to installing Oracle homes manually?
 
 You may now *proceed to the next lab*.
 

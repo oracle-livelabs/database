@@ -38,7 +38,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     ```
 
     * `source_home` and `sid` describe the current database.
-    * `target_home` is the location of the new Oracle home. It doesn't exist yet. AutoUpgrade creates it for you.
+    * `target_home` is the location of the new Oracle home. It doesn't exist yet. AutoUpgrade creates it for you. AutoUpgrade uses the settings from the source Oracle home to create the new one.
     * `folder` is the location where AutoUpgrade can find and store patch files. Ideally, this location is a network share accessible to all your database hosts. 
     * `patch` informs AutoUpgrade which patches you want to apply. `RECOMMENDED` means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches.
     * `download` tells whether AutoUpgrade should attempt to download the patches from My Oracle Support using your My Oracle Support credentials. This is not possible inside this lab environment, so all patches have been pre-downloaded.
@@ -117,7 +117,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     ```
 
     * You can see that you're patching the *FTEX* database. 
-    * You can also see that you're patching from 19.21 to 19.25.
+    * You can also see that you're patching from 19.27 to 19.28.
     * In the end, you can see that all checks passed and there's no manual intervention needed.
     * This database was found to be ready for patching. 
 
@@ -128,25 +128,25 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     ==========================================
        AutoUpgrade Patching Summary Report
     ==========================================
-    [Date]           Mon Nov 04 07:45:55 GMT 2024
+    [Date]           Sat Jul 26 05:49:47 GMT 2025
     [Number of Jobs] 1
     ==========================================
     [Job ID] 100
     ==========================================
     [DB Name]                ftex
-    [Version Before AutoUpgrade Patching] 19.21.0.0.0
-    [Version After AutoUpgrade Patching]  19.25.0.0.241015
+    [Version Before AutoUpgrade Patching] 19.27.0.0.0
+    [Version After AutoUpgrade Patching]  19.28.0.0.250715
     ------------------------------------------
     [Stage Name]    PENDING
     [Status]        SUCCESS
-    [Start Time]    2024-11-04 07:43:51
+    [Start Time]    2025-07-26 05:47:39
     [Duration]      0:00:00
     [Log Directory] /home/oracle/autoupgrade-patching/simple-patching/log/FTEX/100/pending
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
-    [Start Time]    2024-11-04 07:43:51
-    [Duration]      0:02:03
+    [Start Time]    2025-07-26 05:47:39
+    [Duration]      0:02:08
     [Log Directory] /home/oracle/autoupgrade-patching/simple-patching/log/FTEX/100/prechecks
     [Detail]        /home/oracle/autoupgrade-patching/simple-patching/log/FTEX/100/prechecks/ftex_preupgrade.log
                     Check passed and no manual intervention needed
@@ -328,42 +328,28 @@ Patching a single instance Oracle Database require downtime.
     <summary>*click to see the output*</summary>
     ``` text
     $ cat autoupgrade_patching_*_user.log
-    2024-11-04 10:10:12.278 INFO
+    2025-07-26 05:54:09.876 INFO
     build.MOS_LINK:https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     build.MOS_NOTE:2485457.1
-    build.date:2024/10/21 11:16:05 -0400
-    build.hash:babf5a631
-    build.hash_date:2024/10/18 18:36:27 -0400
-    build.label:(HEAD, tag: v24.7, origin/stable_devel, stable_devel)
+    build.date:2025/05/09 02:53:15 +0000
+    build.hash:3110a3d32
+    build.hash_date:2025/05/05 19:43:04 +0000
+    build.label:(HEAD, tag: v25.3, origin/stable_devel, stable_devel)
     build.max_target_version:19
     build.supported_target_versions:19
     build.type:production
-    build.version:24.7.241021
+    build.version:25.3.250509
     
-    2024-11-04 10:10:12.279 INFO The following patches will be used for this job:
+    2025-07-26 05:54:09.877 INFO The following patches will be used for this job:
     /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip - Base Image - 19
-    /home/oracle/patch-repo/p36912597_190000_Linux-x86-64.zip - Database Release Update : 19.25.0.0.241015 (36912597)
-    /home/oracle/patch-repo/p37056207_1925000DBRU_Generic.zip - DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    /home/oracle/patch-repo/p36878697_190000_Linux-x86-64.zip - OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip - OPatch - 12.2.0.1.44
-    2024-11-04 10:10:12.755 INFO Guarantee Restore Point (GRP) successfully removed [FTEX][AU_PATCHING_9212_FTEX1921000]
-    2024-11-04 10:10:13.787 INFO Guarantee Restore Point (GRP) successfully created [FTEX][AU_PATCHING_9212_FTEX1921000]
-    2024-11-04 10:10:13.851 INFO No user defined actions were specified
-    2024-11-04 10:10:19.092 INFO Analyzing FTEX, 61 checks will run using 8 threads
-    2024-11-04 10:12:27.560 INFO Analyzing FTEX, 61 checks will run using 8 threads
-    2024-11-04 10:14:30.061 INFO The file /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip is being extracted to /u01/app/oracle/product/19_28
-    2024-11-04 10:15:19.918 INFO Successfully extracted the gold image to /u01/app/oracle/product/19_28
-    2024-11-04 10:15:20.269 INFO Waiting to acquire lock
-    2024-11-04 10:15:20.281 INFO Installing ORACLE_HOME
-    2024-11-04 10:15:20.283 INFO The new ORACLE_HOME will be created in /u01/app/oracle/product/19_28 and will have the following edition: Enterprise Edition
-    2024-11-04 10:15:20.284 INFO Running runInstaller in the target ORACLE_HOME /u01/app/oracle/product/19_28
-    2024-11-04 10:16:20.344 INFO Successfully installed the target ORACLE_HOME /u01/app/oracle/product/19_28
-    2024-11-04 10:16:20.407 INFO AutoUpgrade Patching has not run /u01/app/oracle/product/19_28/root.sh for the newly installed ORACLE_HOME. This needs to be performed manually after     AutoUpgrade Patching completes.
-    2024-11-04 10:16:20.483 INFO The file /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip is being extracted to /u01/app/oracle/product/19_28
-    2024-11-04 10:16:22.971 INFO The existing autoupgrade.jar is not going to be updated within the new ORACLE_HOME
-    2024-11-04 10:16:23.048 INFO Waiting to acquire lock
-    2024-11-04 10:16:23.059 INFO Executing OPatch
-    2024-11-04 10:16:23.070 INFO Installing Database Release Update : 19.25.0.0.241015 (36912597) - /home/oracle/patch-repo/p36912597_190000_Linux-x86-64.zip
+    /home/oracle/patch-repo/p37960098_190000_Linux-x86-64_dbru1928.zip - Database Release Update : 19.28.0.0.250715 (37960098)
+    /home/oracle/patch-repo/p38170982_1928000DBRU_Generic_dpbp1928.zip - DATAPUMP BUNDLE PATCH 19.28.0.0.0
+    /home/oracle/patch-repo/p37847857_190000_Linux-x86-64_ojvm1928.zip - OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
+    /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip - OPatch - 12.2.0.1.47
+    2025-07-26 05:54:10.386 INFO Guarantee Restore Point (GRP) successfully removed [FTEX][AU_PATCHING_9212_FTEX1927000]
+    2025-07-26 05:54:11.468 INFO Guarantee Restore Point (GRP) successfully created [FTEX][AU_PATCHING_9212_FTEX1927000]
+    2025-07-26 05:54:11.530 INFO No user defined actions were specified
+    2025-07-26 05:54:16.467 INFO Analyzing FTEX, 60 checks will run using 8 threads
     ```
     </details> 
 
@@ -404,7 +390,7 @@ Patching a single instance Oracle Database require downtime.
 
     ```
     <copy>
-    sed -i 's/^ORACLE_HOME=.*/ORACLE_HOME=\/u01\/app\/oracle\/product\/19_25/' /usr/local/bin/ftex
+    sed -i 's/^ORACLE_HOME=.*/ORACLE_HOME=\/u01\/app\/oracle\/product\/19_28/' /usr/local/bin/ftex
     </copy>
     ``` 
 
