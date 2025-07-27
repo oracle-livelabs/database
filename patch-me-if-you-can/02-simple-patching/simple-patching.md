@@ -322,7 +322,7 @@ Patching a single instance Oracle Database require downtime.
 
     * The output is different in your lab environment.
     * Examine the content to understand that AutoUpgrade is doing behind the scenes.
-    * AutoUpgrade prints the patches that it will install. In this case, it is the 19.25 Relese Update plus matching OJVM and Data Pump bundle patches. In addition, it also updated OPatch.
+    * AutoUpgrade prints the patches that it will install. In this case, it is the 19.28 Relese Update plus matching OJVM and Data Pump bundle patches. In addition, it also updated OPatch.
 
     <details>
     <summary>*click to see the output*</summary>

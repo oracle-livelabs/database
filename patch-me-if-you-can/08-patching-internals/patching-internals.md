@@ -11,7 +11,7 @@ Estimated Time: 15 Minutes
 In this lab, you will:
 
 * Check Datapatch infrastructure and logs
-* Gather diagnostics information
+* Delete old patch files and metadata
 
 ### Prerequisites
 
@@ -106,9 +106,9 @@ Datapatch stores patching information inside the database. Understanding these t
     -- Be sure to hit RETURN
     ```
 
-    * This database was first patched from the base release, 19.3, to 19.21, including the OJVM and Data Pump bundle patches.
-    * In lab 2, you patched the database to 19.25.
-    * In lab 8, you rolled back to 19.21.
+    * This database was first patched from the base release, 19.3, to 19.27, including the OJVM and Data Pump bundle patches.
+    * Then, in a previous lab you patched the database to 19.28.
+    * Finally, you manually rolled back to 19.27. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -125,25 +125,25 @@ Datapatch stores patching information inside the database. Understanding these t
     
       PATCH_ID ACTION   STATUS     ACTION_TIME                    DESCRIPTION
     ---------- -------- ---------- ------------------------------ ------------------------------------------------------------
-      35643107 APPLY    SUCCESS    10-JUL-24 04.20.22.518873 PM   Database Release Update : 19.21.0.0.231017 (35643107)
-      35648110 APPLY    SUCCESS    10-JUL-24 04.20.22.526734 PM   OJVM RELEASE UPDATE: 19.21.0.0.231017 (35648110)
-      35787077 APPLY    SUCCESS    10-JUL-24 04.20.23.439857 PM   DATAPUMP BUNDLE PATCH 19.21.0.0.0
-      35648110 ROLLBACK SUCCESS    02-DEC-24 10.38.13.950615 AM   OJVM RELEASE UPDATE: 19.21.0.0.231017 (35648110)
-      36878697 APPLY    SUCCESS    02-DEC-24 10.38.13.971532 AM   OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-      35787077 ROLLBACK SUCCESS    02-DEC-24 10.38.14.099176 AM   DATAPUMP BUNDLE PATCH 19.21.0.0.0
-      36912597 APPLY    SUCCESS    02-DEC-24 10.39.09.610198 AM   Database Release Update : 19.25.0.0.241015 (36912597)
-      37056207 APPLY    SUCCESS    02-DEC-24 10.39.49.664582 AM   DATAPUMP BUNDLE PATCH 19.25.0.0.0
-      36878697 ROLLBACK SUCCESS    03-DEC-24 10.57.37.852844 AM   OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-      37056207 ROLLBACK SUCCESS    03-DEC-24 10.57.37.859396 AM   DATAPUMP BUNDLE PATCH 19.25.0.0.0
-      36912597 ROLLBACK SUCCESS    03-DEC-24 10.57.39.130585 AM   Database Release Update : 19.25.0.0.241015 (36912597)
-      35648110 APPLY    SUCCESS    03-DEC-24 10.57.39.133106 AM   OJVM RELEASE UPDATE: 19.21.0.0.231017 (35648110)
-      35787077 APPLY    SUCCESS    03-DEC-24 10.57.40.005614 AM   DATAPUMP BUNDLE PATCH 19.21.0.0.0
+      37499406 APPLY    SUCCESS    24-JUL-25 11.07.34.275677 AM   OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+      37642901 APPLY    SUCCESS    24-JUL-25 11.09.35.626423 AM   Database Release Update : 19.27.0.0.250415 (37642901)
+      37777295 APPLY    SUCCESS    24-JUL-25 11.09.50.525332 AM   DATAPUMP BUNDLE PATCH 19.27.0.0.0
+      37499406 ROLLBACK SUCCESS    26-JUL-25 06.13.57.910977 AM   OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+      37847857 APPLY    SUCCESS    26-JUL-25 06.13.57.960755 AM   OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
+      37777295 ROLLBACK SUCCESS    26-JUL-25 06.13.58.356647 AM   DATAPUMP BUNDLE PATCH 19.27.0.0.0
+      37960098 APPLY    SUCCESS    26-JUL-25 06.14.24.135101 AM   Database Release Update : 19.28.0.0.250715 (37960098)
+      38170982 APPLY    SUCCESS    26-JUL-25 06.15.04.060463 AM   DATAPUMP BUNDLE PATCH 19.28.0.0.0
+      37847857 ROLLBACK SUCCESS    27-JUL-25 04.45.25.075949 PM   OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
+      37499406 APPLY    SUCCESS    27-JUL-25 04.45.25.129895 PM   OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+      38170982 ROLLBACK SUCCESS    27-JUL-25 04.45.28.030885 PM   DATAPUMP BUNDLE PATCH 19.28.0.0.0
+      37960098 ROLLBACK SUCCESS    27-JUL-25 04.45.52.646298 PM   Database Release Update : 19.28.0.0.250715 (37960098)
+      37777295 APPLY    SUCCESS    27-JUL-25 04.46.23.100470 PM   DATAPUMP BUNDLE PATCH 19.27.0.0.0
     
     13 rows selected.
     ```
     </details>   
 
-4. Find the log file used to apply the 19.25 Release Update.
+4. Find the log file used to apply the 19.28 Release Update.
 
     ```
     <copy>
@@ -152,7 +152,7 @@ Datapatch stores patching information inside the database. Understanding these t
     col logfile format a125
     select logfile 
     from   dba_registry_sqlpatch 
-    where  description like 'Database Release Update : 19.25%' 
+    where  description like 'Database Release Update : 19.28%' 
            and action='APPLY';
     </copy>
 
@@ -166,12 +166,12 @@ Datapatch stores patching information inside the database. Understanding these t
     SQL> col logfile format a125
     SQL> select logfile
          from   dba_registry_sqlpatch
-         where  description like 'Database Release Update : 19.25%'
+         where  description like 'Database Release Update : 19.28%'
                 and action='APPLY';
     
     LOGFILE
     ----------------------------------------------------------------------------------------------------
-    /u01/app/oracle/cfgtoollogs/sqlpatch/36912597/25871884/36912597_apply_FTEX_2024Dec02_10_38_14.log
+    /u01/app/oracle/cfgtoollogs/sqlpatch/37960098/27635722/37960098_apply_FTEX_2025Jul26_06_13_58.log    
     ```
     </details>      
 
@@ -207,32 +207,55 @@ Datapatch also stores log files in the file system.
     ``` text
     $ cd $ORACLE_BASE/cfgtoollogs/sqlpatch
     $ ll
-    total 16
-    drwxr-xr-x. 3 oracle oinstall   22 Dec  2 10:38 35648110
-    -rw-r--r--. 1 oracle oinstall    0 Dec  2 10:38 35648110_25365038.lock
-    drwxr-xr-x. 3 oracle oinstall   22 Dec  2 10:38 35787077
-    -rw-r--r--. 1 oracle oinstall    0 Dec  2 10:38 35787077_25410019.lock
-    drwxr-xr-x. 3 oracle oinstall   22 Dec  2 10:38 36878697
-    -rw-r--r--. 1 oracle oinstall    0 Dec  2 10:38 36878697_25797620.lock
-    drwxr-xr-x. 3 oracle oinstall   22 Dec  2 10:37 36912597
-    -rw-r--r--. 1 oracle oinstall    0 Dec  2 10:37 36912597_25871884.lock
-    drwxr-xr-x. 3 oracle oinstall   22 Dec  2 10:38 37056207
-    -rw-r--r--. 1 oracle oinstall    0 Dec  2 10:38 37056207_25840925.lock
-    drwxr-xr-x. 2 oracle oinstall  134 Dec  3 10:12 sqlpatch_105270_2024_12_03_10_11_56
-    drwxr-xr-x. 2 oracle oinstall 4096 Dec  3 10:13 sqlpatch_105347_2024_12_03_10_12_02
-    drwxr-xr-x. 2 oracle oinstall 4096 Dec  3 10:57 sqlpatch_108337_2024_12_03_10_55_30
-    drwxr-xr-x. 2 oracle oinstall  133 Dec  2 10:38 sqlpatch_26012_2024_12_02_10_37_42
-    drwxr-xr-x. 2 oracle oinstall 4096 Dec  2 10:39 sqlpatch_26108_2024_12_02_10_38_08
-    -rw-r--r--. 1 oracle oinstall  558 Dec  3 10:55 sqlpatch_history.txt
+    total 48
+    drwxr-x---. 3 oracle oinstall   22 Jul 24 10:21 36878697
+    -rw-r-----. 1 oracle oinstall    0 Jul 24 10:21 36878697_25797620.lock
+    drwxr-x---. 3 oracle oinstall   22 Jul 24 10:21 36912597
+    -rw-r-----. 1 oracle oinstall    0 Jul 24 10:21 36912597_25871884.lock
+    drwxr-x---. 3 oracle oinstall   22 Jul 24 10:21 37056207
+    -rw-r-----. 1 oracle oinstall    0 Jul 24 10:21 37056207_25840925.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 24 10:37 37102264
+    -rw-r--r--. 1 oracle oinstall    0 Jul 24 10:37 37102264_25987410.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 24 10:37 37260974
+    -rw-r--r--. 1 oracle oinstall    0 Jul 24 10:37 37260974_26040769.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 24 10:37 37470729
+    -rw-r--r--. 1 oracle oinstall    0 Jul 24 10:37 37470729_26036111.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 24 10:50 37499406
+    -rw-r--r--. 1 oracle oinstall    0 Jul 24 10:50 37499406_26115603.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 24 10:50 37642901
+    -rw-r--r--. 1 oracle oinstall    0 Jul 24 10:50 37642901_27123174.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 24 10:50 37777295
+    -rw-r--r--. 1 oracle oinstall    0 Jul 24 10:50 37777295_27238855.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 26 06:13 37847857
+    -rw-r--r--. 1 oracle oinstall    0 Jul 26 06:13 37847857_27534561.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 26 06:13 37960098
+    -rw-r--r--. 1 oracle oinstall    0 Jul 26 06:13 37960098_27635722.lock
+    drwxr-xr-x. 3 oracle oinstall   22 Jul 26 06:13 38170982
+    -rw-r--r--. 1 oracle oinstall    0 Jul 26 06:13 38170982_27628376.lock
+    drwxr-xr-x. 2 oracle oinstall  151 Jul 26 06:30 sanity_checks_20250726_062945_168019
+    drwxr-xr-x. 2 oracle oinstall  134 Jul 26 06:13 sqlpatch_165318_2025_07_26_06_13_17
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 26 06:15 sqlpatch_165611_2025_07_26_06_13_50
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 26 06:16 sqlpatch_166073_2025_07_26_06_15_44
+    drwxr-xr-x. 2 oracle oinstall  134 Jul 26 06:44 sqlpatch_172743_2025_07_26_06_44_20
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 26 06:45 sqlpatch_172825_2025_07_26_06_44_29
+    drwxr-x---. 2 oracle oinstall 4096 Jul 24 10:24 sqlpatch_175565_2025_07_24_10_21_21
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 24 10:38 sqlpatch_181458_2025_07_24_10_36_38
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 24 10:52 sqlpatch_186303_2025_07_24_10_49_53
+    drwxr-x---. 2 oracle oinstall 4096 Jul 24 11:10 sqlpatch_188512_2025_07_24_11_06_55
+    drwxr-x---. 2 oracle oinstall 4096 Jul 24 11:41 sqlpatch_193646_2025_07_24_11_37_19
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 27 16:36 sqlpatch_302392_2025_07_27_16_34_06
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 27 16:42 sqlpatch_303293_2025_07_27_16_42_12
+    drwxr-xr-x. 2 oracle oinstall 4096 Jul 27 16:46 sqlpatch_304182_2025_07_27_16_44_43
+    -rw-r-----. 1 oracle oinstall 1456 Jul 27 16:44 sqlpatch_history.txt
     ```
     </details>       
 
-2. Examine the log file used to apply the 19.25 Release Update to the FTEX database. This is the log file you found in the previous task. 
+2. Examine the log file used to apply the 19.28 Release Update to the FTEX database. This is the log file you found in the previous task. 
 
     ```
     <copy>
     cd $ORACLE_BASE/cfgtoollogs/sqlpatch
-    head -n20 36912597/25871884/36912597_apply_FTEX_*.log
+    head -n20 37960098/27635722/37960098_apply_FTEX_*.log
     </copy>
 
     -- Be sure to hit RETURN
@@ -249,9 +272,9 @@ Datapatch also stores log files in the file system.
     $ head -n20 36912597/25871884/36912597_apply_FTEX_*.log
     SQL>
     SQL> SET PAGESIZE 0
-    SQL> SELECT 'Starting apply for patch 36912597/25871884 on ' ||
+    SQL> SELECT 'Starting apply for patch 37960098/27635722 on ' ||
       2         SYSTIMESTAMP FROM dual;
-    Starting apply for patch 36912597/25871884 on 02-DEC-24 10.38.14.109433 AM +00:0
+    Starting apply for patch 37960098/27635722 on 26-JUL-25 06.13.58.374133 AM +00:0
     0
     
     
@@ -261,8 +284,8 @@ Datapatch also stores log files in the file system.
     SQL> SET PAGESIZE 10
     SQL>
     SQL> BEGIN
-      2      dbms_sqlpatch.patch_initialize(p_patch_id      => 36912597,
-      3                                     p_patch_uid     => 25871884,
+      2      dbms_sqlpatch.patch_initialize(p_patch_id      => 37960098,
+      3                                     p_patch_uid     => 27635722,
       4                                     p_logfile       => '&full_logfile');
       5  END;
       6  /
@@ -362,46 +385,69 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     -- Be sure to hit RETURN
     ```
 
-    * The output shows that the patching chain in this Oracle home is from 19.3 (base release) to 19.21.
-    * This means that it is a brand-new Oracle home where only 19.21 has been applied.
-    * The *active* RU is 19.21 - this is where the Oracle home currently is.
-    * The *inactive* RU is 19.3 - this is where the Oracle home came from.
-    * In this lab, you create new Oracle homes from the base release which matches Oracle's recommendations.
-    * If you use in-place patching or clone existing Oracle homes, you will see more inactive patches.
-
+    * The output shows that the patching chain in this Oracle home is from 19.3 (base release) to 19.25 to 19.26 and then 19.27.
+    * This means that several in-place patch applies have been made to this Oracle home. Oracle doesn't recommend in-place patching. It's used here for illustrative purposes. 
+    * The *active* RU is 19.27 - this is where the Oracle home currently is.
+    * The *inactive* RUs are 19.3, 19.25 and 19.26 - this is where the Oracle home came from.
+    
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     $ . ftex
     $ cd $ORACLE_HOME/OPatch
     $ ./opatch util ListOrderedInactivePatches
-    Oracle Interim Patch Installer version 12.2.0.1.42
-    Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+    Oracle Interim Patch Installer version 12.2.0.1.47
+    Copyright (c) 2025, Oracle Corporation.  All rights reserved.
     
     
     Oracle Home       : /u01/app/oracle/product/19
     Central Inventory : /u01/app/oraInventory
        from           : /u01/app/oracle/product/19/oraInst.loc
-    OPatch version    : 12.2.0.1.42
+    OPatch version    : 12.2.0.1.47
     OUI version       : 12.2.0.7.0
-    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2024-12-04_12-24-27PM_1.log
+    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2025-07-27_17-04-29PM_1.log
     
     Invoking utility "listorderedinactivepatches"
     List Inactive patches option provided
     
     The oracle home has the following inactive patch(es) and their respective overlay patches:
     
-    The number of RU chains is  1
+    The number of RU chains is  2
     
-    ***** There are 1 inactive RU patches in chain 1
+    ***** There are 3 inactive RU patches in chain 1
     -Inactive RU/BP 29517242:Database Release Update : 19.3.0.0.190416 (29517242), installed on: Thu Apr 18 07:21:17 GMT 2019, with no overlays
-    -Active RU/BP 35643107:Database Release Update : 19.21.0.0.231017 (35643107), installed on: Wed Jul 10 14:53:39 GMT 2024, with no overlays
+    -Inactive RU/BP 36912597:Database Release Update : 19.25.0.0.241015 (36912597), installed on: Thu Jul 24 09:49:33 GMT 2025, with no overlays
+    -Inactive RU/BP 37260974:Database Release Update : 19.26.0.0.250121 (37260974), installed on: Thu Jul 24 10:30:23 GMT 2025, with no overlays
+    -Active RU/BP 37642901:Database Release Update : 19.27.0.0.250415 (37642901), installed on: Thu Jul 24 10:42:18 GMT 2025, with no overlays
+    
+    ***** There are 2 inactive RU patches in chain 2
+    -Inactive RU/BP 36878697:OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697), installed on: Thu Jul 24 09:53:30 GMT 2025, with no overlays
+    -Inactive RU/BP 37102264:OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264), installed on: Thu Jul 24 10:35:00 GMT 2025, with no overlays
+    -Active RU/BP 37499406:OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406), installed on: Thu Jul 24 10:47:46 GMT 2025, with no overlays
     
     OPatch succeeded.
     ```
     </details>       
 
-2. You can remove information about the *inactive* patches. This reduces the patching metadata which makes OPatch run faster. It also deletes patches from the `.patch_storage` directory inside the Oracle home and reduces the space used. Delete the inactive patches.
+2. You can remove information about the *inactive* patches. This reduces the patching metadata which makes OPatch run faster. It also deletes patches from the `.patch_storage` directory inside the Oracle home and reduces the space used. Check the size of the `.patch_storage` folder.
+
+    ```
+    <copy>
+    du -sh $ORACLE_HOME/.patch_storage
+    </copy>
+    ```
+
+    * Currently, OPatch uses 8.2 GB to store old patch files. All the way back to 19.3. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ du -sh $ORACLE_HOME/.patch_storage
+    8.2G    /u01/app/oracle/product/19/.patch_storage
+    ```
+    </details>   
+
+3. Delete the inactive patches. When prompted to proceed enter *Y*. 
 
     ```
     <copy>
@@ -409,10 +455,9 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     </copy>
     ```
 
-    * The command does not delete anything, because OPatch wants to keep at least one inactive RU. This ensure you can always roll back to the previous patch.
-    * Since this lab uses out-of-place patching from the base release, there will never be more than 1 inactive patch.
-    * If you use in-place patching or patch out-of-place using a cloned Oracle home, you will see the list grows over time. This will require more disk space and prolong OPatch commands.
-    * If you find OPatch is running slow, try to clear our inactive patching metadata.
+    * OPatch keeps one inactive patch - and deletes the rest of the inactive patches. 
+    * The number of inactive patches to keep is configurable.
+    * If you find OPatch is running slow in your own environment, try to clear our inactive patching metadata.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -420,27 +465,67 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     $ . ftex
     $ cd $ORACLE_HOME/OPatch
     $ ./opatch util deleteinactivepatches
-    Oracle Interim Patch Installer version 12.2.0.1.42
-    Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+    Oracle Interim Patch Installer version 12.2.0.1.47
+    Copyright (c) 2025, Oracle Corporation.  All rights reserved.
     
     
     Oracle Home       : /u01/app/oracle/product/19
     Central Inventory : /u01/app/oraInventory
        from           : /u01/app/oracle/product/19/oraInst.loc
-    OPatch version    : 12.2.0.1.42
+    OPatch version    : 12.2.0.1.47
     OUI version       : 12.2.0.7.0
-    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2024-12-04_12-23-58PM_1.log
+    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2025-07-27_17-10-05PM_1.log
     
     Invoking utility "deleteinactivepatches"
     Inactive Patches Cleanup option provided
     Delete Inactive Patches .......
-    Warning: No inactive RU is eligible for delete. See log file for more details
+    
+    ***** There are 3 inactive RU patches in chain 1
+    
+    ***** 2 inactive patches will be deleted
+    -To be deleted inactive RU/BP 29517242:Database Release Update : 19.3.0.0.190416 (29517242), installed on: Thu Apr 18 07:21:17 GMT 2019, with no     overlays
+    -To be deleted inactive RU/BP 36912597:Database Release Update : 19.25.0.0.241015 (36912597), installed on: Thu Jul 24 09:49:33 GMT 2025, with no     overlays
+    -To be retained inactive RU/BP 37260974:Database Release Update : 19.26.0.0.250121 (37260974), installed on: Thu Jul 24 10:30:23 GMT 2025, with no     overlays
+    -Active RU/BP 37642901:Database Release Update : 19.27.0.0.250415 (37642901), installed on: Thu Jul 24 10:42:18 GMT 2025, with no overlays
+    
+    ***** There are 2 inactive RU patches in chain 2
+    
+    ***** 1 inactive patches will be deleted
+    -To be deleted inactive RU/BP 36878697:OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697), installed on: Thu Jul 24 09:53:30 GMT 2025, with no     overlays
+    -To be retained inactive RU/BP 37102264:OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264), installed on: Thu Jul 24 10:35:00 GMT 2025, with no     overlays
+    -Active RU/BP 37499406:OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406), installed on: Thu Jul 24 10:47:46 GMT 2025, with no overlays
+    
+    Do you want to proceed? [y|n]
+    y
+    User Responded with: Y
+    Deleted RU/BP patch: 29517242
+    Deleted RU/BP patch: 36912597
+    Deleted RU/BP patch: 36878697
     
     OPatch succeeded.
     ```
     </details>     
 
-3. OPatch stores the patching information in the Oracle home. Examine the directory.
+4. How much space did you reclaim inside the Oracle home? Check the size of the `.patch_storage` folder.
+
+    ```
+    <copy>
+    du -sh $ORACLE_HOME/.patch_storage
+    </copy>
+    ```
+
+    * Now, OPatch uses 5.5 GB to store old patch files. 
+    * You reclaimed almost 3 GBs. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ du -sh $ORACLE_HOME/.patch_storage
+    5.5G    /u01/app/oracle/product/19/.patch_storage
+    ```
+    </details>      
+
+5. OPatch stores the patching information in the Oracle home. Examine the directory.
 
     ```
     <copy>
@@ -459,17 +544,19 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     ``` text
     $ cd $ORACLE_HOME/.patch_storage
     $ ll
-    total 268
-    drwxr-xr-x. 3 oracle oinstall     74 Apr 18  2019 29517242_Apr_17_2019_23_27_10
-    drwxr-xr-x. 3 oracle oinstall     74 Apr 18  2019 29585399_Apr_9_2019_19_12_47
-    drwxr-xr-x. 4 oracle oinstall     87 Jul 10 14:58 35643107_Oct_3_2023_13_34_29
-    drwxr-xr-x. 4 oracle oinstall     87 Jul 10 15:00 35648110_Aug_25_2023_10_22_03
-    drwxr-xr-x. 4 oracle oinstall     87 Jul 10 14:59 35787077_Oct_6_2023_06_58_49
-    -rw-r--r--. 1 oracle oinstall 100145 Jul 10 14:59 interim_inventory.txt
-    -rw-r--r--. 1 oracle oinstall     93 Jul 10 14:59 LatestOPatchSession.properties
-    drwxr-xr-x. 9 oracle oinstall   4096 Jul 10 14:59 NApply
-    -rw-r--r--. 1 oracle oinstall  57729 Jul 10 14:57 newdirs.txt
-    -rw-r--r--. 1 oracle oinstall  99508 Jul 10 14:59 record_inventory.txt
+    total 392
+    drwxr-xr-x.  3 oracle oinstall     74 Apr 18  2019 29585399_Apr_9_2019_19_12_47
+    drwxr-xr-x.  4 oracle oinstall     87 Jul 24 10:35 37102264_Dec_18_2024_05_06_41
+    drwxr-xr-x.  4 oracle oinstall     87 Jul 24 10:33 37260974_Jan_20_2025_04_30_30
+    drwxr-xr-x.  4 oracle oinstall     87 Jul 24 10:48 37499406_Apr_8_2025_08_50_50
+    drwxr-xr-x.  4 oracle oinstall     87 Jul 24 10:46 37642901_Apr_15_2025_08_17_25
+    drwxr-xr-x.  4 oracle oinstall     87 Jul 24 10:49 37777295_Apr_18_2025_16_56_05
+    drwxr-xr-x.  3 oracle oinstall     33 Jul 27 17:46 backup_delete_inactive
+    -rw-r--r--.  1 oracle oinstall 127747 Jul 24 10:49 interim_inventory.txt
+    -rw-r-----.  1 oracle oinstall     93 Jul 24 10:49 LatestOPatchSession.properties
+    drwxr-xr-x. 15 oracle oinstall   4096 Jul 24 10:49 NApply
+    -rw-r--r--.  1 oracle oinstall 131708 Jul 24 10:45 newdirs.txt
+    -rw-r--r--.  1 oracle oinstall 125662 Jul 24 10:49 record_inventory.txt
     ```
     </details>   
 
