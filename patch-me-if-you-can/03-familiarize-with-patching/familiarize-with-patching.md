@@ -53,7 +53,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
     ``` text
     $ cd OPatch
     $ ./opatch version
-    OPatch Version: 12.2.0.1.47
+    OPatch Version: 12.2.0.1.46
     
     OPatch succeeded.
     ```
@@ -71,7 +71,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
     <summary>*click to see the output*</summary>
     ``` text
     $ cat version.txt
-    OPATCH_VERSION:12.2.0.1.47
+    OPATCH_VERSION:12.2.0.1.46
     ```
     </details>  
 
@@ -116,7 +116,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
     </copy>
     ```
 
-    * The previous version of OPatch was *12.2.0.1.47*.
+    * The previous version of OPatch was *12.2.0.1.46*.
 
     <details>
     <summary>*click to see the output*</summary>
