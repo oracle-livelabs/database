@@ -12,6 +12,7 @@ Estimated Time: 20 Minutes
 In this lab, you will:
 
 * Install Oracle home using AutoUpgrade
+* Understand patch files
 
 ### Prerequisites
 
@@ -30,7 +31,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     ```
     <copy>
     cd
-    cat scripts/install-oracle-home.cfg
+    cat scripts/pt-05-install-oracle-home.cfg
     </copy>
 
     -- Be sure to hit RETURN
@@ -39,18 +40,18 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     * `source_home` is an existing Oracle home that you will use as a template to install the new Oracle home. AutoUpgrade installs the new Oracle home using the same settings as this Oracle home. 
     * `target_home` is where you want to install the new Oracle home.
     * `folder` is the location where AutoUpgrade can find and store patch files. Ideally, this location is a network share accessible to all your database hosts. 
-    * `patch` informs AutoUpgrade which patches you want to apply. *RECOMMENDED* means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches. In addition, you are also installing a one-off patch, *29213893*.
+    * `patch` informs AutoUpgrade which patches you want to apply. *RECOMMENDED* means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches. *OCW* updates the OCW component in the Oracle home. In addition, you are also installing a one-off patch, *29213893*.
     * `download` tells whether AutoUpgrade should attempt to download the patches from My Oracle Support using your My Oracle Support credentials. This is not possible inside this lab environment, so all patches have been pre-downloaded.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cat scripts/install-oracle-home.cfg
+    $ cat scripts/pt-05-install-oracle-home.cfg
     global.global_log_dir=/home/oracle/autoupgrade-patching/install-oracle-home/log
     patch1.source_home=/u01/app/oracle/product/19
     patch1.target_home=/u01/app/oracle/product/19_28_au
     patch1.folder=/home/oracle/patch-repo
-    patch1.patch=RECOMMENDED,29213893
+    patch1.patch=RECOMMENDED,OCW,29213893
     patch1.download=no
     ```
     </details>    
@@ -59,14 +60,14 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config scripts/install-oracle-home.cfg -patch -mode create_home
+    java -jar autoupgrade.jar -config scripts/pt-05-install-oracle-home.cfg -patch -mode create_home
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar autoupgrade.jar -config scripts/install-oracle-home.cfg -patch -mode create_home
+    $ java -jar autoupgrade.jar -config scripts/pt-05-install-oracle-home.cfg -patch -mode create_home
     AutoUpgrade Patching 25.3.250509 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
@@ -100,39 +101,39 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     ```
     </details>    
 
-Explain how create_home mode works when you have source_home. That all settings are copied. You can give the OH a new name if you like, or change some of the options.
+4. When you have an existing Oracle home specified using `source_home` parameter, AutoUpgrade checks the settings of the source Oracle home and creates the target Oracle home with the same settings. 
+    * You can override the Oracle home settings using config file parameters. For instance, you could enable the OLAP option by using `patch1.home_settings.binopt.olap=yes`.
+    * Some prefer to give the Oracle home a custom name which you can do with `patch1.home_settings.home_name=your_custom_home_name`. 
 
-Explain create_home mode on an empty server. Show some of the options that you can set. 
+5. If you have a brand-new server with no existing Oracle home, you can still using `-mode create_home`. AutoUpgrade creates the Oracle home with the default settings rather than copying from a source Oracle home. In this case, you can specify most of the runInstaller settings using `patch1.home_settings`. 
 
+6. In this task, you installed a Release Update and additional patches. AutoUpgrade also allows you to install the recent-most Monthly Recommended Patches (MRP) of the specified Release Update. You can do that by adding *MRP* to the patch specification, `patch1.patch=RECOMMENDED,OCW,29213893,MRP`. AutoUpgrade automatically finds the appropriate patch and applies it. This is a simple way of getting the most-important one-off fixes for a given Release Update.**
 
-4. It takes around 10 minutes to install a new Oracle home and patch it. Leave AutoUpgrade running and move on to the next task.
+7. It takes around 10 minutes to install a new Oracle home and patch it. Leave AutoUpgrade running and move on to the next task.
 
 ## Task 2: Check patch files
 
 While AutoUpgrade installs a new Oracle home, you can inspect some of the patch files. 
 
-1. Switch to the *blue* 🟦 terminal. Extract the patch files that you are installing.
+1. Switch to the *blue* 🟦 terminal. Extract one of the patch files.
 
     ```
     <copy>
     cd /home/oracle/patch-repo
-    unzip p36912597_190000_Linux-x86-64.zip -d ./36912597
-    unzip p37056207_1925000DBRU_Generic.zip -d ./37056207
-    unzip p36878697_190000_Linux-x86-64 -d ./36878697
-    unzip p29213893_1925000DBRU_Generic.zip -d ./29213893
+    unzip p37960098_190000_Linux-x86-64_dbru1928.zip -d ./37960098
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
     * Patch files comes from My Oracle Support as zip files.
-    * The patch zip files are the 19.25 Release Update, Data Pump bundle patch, OJVM bundle patch, and a one-off patch.
+    * The patch zip file you are extracting is the 19.28 Release Update.
     
 2. Switch to the directory where you extracted the Release Update. Here you find the patch metadata stored in PatchSearch.xml
 
     ```
     <copy>
-    cd 36912597
+    cd 37960098
     ll
     </copy>
 
@@ -142,11 +143,11 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd 36912597
+    $ cd 37960098
     $ ll
-    total 1992
-    drwxr-xr-x. 5 oracle oinstall      81 Nov  5 13:09 36912597
-    -rw-rw-r--. 1 oracle oinstall 2038582 Oct 15 14:35 PatchSearch.xml
+    total 2328
+    drwxr-xr-x. 5 oracle oinstall      81 Jul 15 11:45 37960098
+    -rw-rw-r--. 1 oracle oinstall 2382992 Jul 15 20:46 PatchSearch.xml
     ```
     </details>       
 
@@ -158,22 +159,22 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     </copy>
     ```
 
-    * One of the XML elements contains the patch text, *DATABASE RELEASE UPDATE 19.25.0.0.0*.
+    * One of the XML elements contains the patch text, *DATABASE RELEASE UPDATE 19.28.0.0.0*.
     * The file contains a lot of metadata about the patch. 
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     <!-- This file contain patch Metadata -->
-    <results md5_sum="5bf0a12bccfd23b199291f7a140df9f3">
-      <generated_date in_epoch_ms="1729002935000">2024-10-15 14:35:35</generated_date>
+    <results md5_sum="39feeb0aebbbdf20a315af704d6ea304">
+      <generated_date in_epoch_ms="1752612418000">2025-07-15 20:46:58</generated_date>
       <patch has_prereqs="n" has_postreqs="n" is_system_patch="n">
         <bug>
-          <number>36912597</number>
-          <abstract><![CDATA[DATABASE RELEASE UPDATE 19.25.0.0.0]]></abstract>
+          <number>37960098</number>
+          <abstract><![CDATA[DATABASE RELEASE UPDATE 19.28.0.0.0]]></abstract>
         </bug>
-        <name>36912597</name>
-        <type>Patch</type>    
+        <name>37960098</name>
+        <type>Patch</type>
     ```
     </details>     
 
@@ -181,7 +182,7 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
 
     ```
     <copy>
-    cd 36912597
+    cd 37960098
     ll
     </copy>
 
@@ -191,14 +192,14 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd 36912597
+    $ cd 37960098
     $ ll
-    total 96
-    drwxr-x---.  3 oracle oinstall    21 Oct 11 06:50 custom
-    drwxr-x---.  3 oracle oinstall    20 Oct 11 06:50 etc
-    drwxr-x---. 46 oracle oinstall  4096 Oct 11 06:47 files
-    -rw-r--r--.  1 oracle oinstall 88918 Oct 14 10:01 README.html
-    -rw-r--r--.  1 oracle oinstall    21 Oct 11 06:50 README.txt
+    total 104
+    drwxr-x---.  3 oracle oinstall    21 Jul 15 11:49 custom
+    drwxr-x---.  3 oracle oinstall    20 Jul 15 11:49 etc
+    drwxr-x---. 48 oracle oinstall  4096 Jul 15 11:45 files
+    -rw-r--r--.  1 oracle oinstall 97600 Jul 15 14:48 README.html
+    -rw-r--r--.  1 oracle oinstall    21 Jul 15 11:49 README.txt
     ```
     </details>     
 
@@ -240,10 +241,10 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     ....
     (output truncated)
     ....
-    ./files/rdbms/admin/bug_32218552_apply.sql
-    ./files/rdbms/admin/bug29394140_apply.sql
-    ./files/md/admin/bug35161422_apply.sql
+    ./files/md/admin/bug_28134316_apply.sql
+    ./files/md/admin/bug35999257_apply.sql
     ./files/md/admin/bug32425205_apply.sql
+    ./files/md/admin/bug36357097_apply.sql
     ./files/md/admin/bug29357424_apply.sql
     ```
     </details>   
@@ -309,7 +310,7 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     ```
     </details>   
 
-## Task 4: Check AutoUpgrade
+## Task 3: Check AutoUpgrade
 
 Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
 
@@ -386,17 +387,18 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     <summary>*click to see the output*</summary>
     ``` text
     $ /u01/app/oracle/product/19_28_au/OPatch/opatch lspatches
-    29213893;DBMS_STATS FAILING WITH ERROR ORA-01422 WHEN GATHERING STATS FOR USER$ TABLE
-    36878697;OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    37056207;DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    36912597;Database Release Update : 19.25.0.0.241015 (36912597)
-    29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
     
+    29213893;DBMS_STATS FAILING WITH ERROR ORA-01422 WHEN GATHERING STATS FOR USER$ TABLE
+    37847857;OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
+    37962946;OCW RELEASE UPDATE 19.28.0.0.0 (37962946)
+    38170982;DATAPUMP BUNDLE PATCH 19.28.0.0.0
+    37960098;Database Release Update : 19.28.0.0.250715 (37960098)
+        
     OPatch succeeded.
     ```
     </details> 
 
-## Task 7: Use Gold Image
+## Task 4: Use Gold Image
 
 Gold images are a convenient way of installing Oracle homes on many different servers. You prepare and patch an Oracle home only once, and then distribute the patched Oracle home to all other servers.
 
@@ -414,7 +416,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     ```
 
     * This is the Oracle home you created using AutoUpgrade.
-    * The Oracle home is patched with Release Update 25.
+    * The Oracle home is patched with Release Update 28.
 
 3. Create the gold image.
 
