@@ -369,7 +369,7 @@ Datapatch also stores log files in the file system.
     ```
     </details>      
 
-## Task 3: Patch storage
+## Task 3: Patch storage clean-up
 
 OPatch keeps track of all the patches that you apply over time to an Oracle home. It stores a lot of patching metadata as well as the actual patches.
 
@@ -455,7 +455,8 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     </copy>
     ```
 
-    * OPatch keeps one inactive patch - and deletes the rest of the inactive patches. 
+    * OPatch keeps one inactive patch - and deletes the rest of the inactive patches.
+    * By keeping one inactive patch - the latest - it ensures that you can always roll back to the previous patch. Going back even further would require that you restore the files or simply install a new Oracle home with the required patches.
     * The number of inactive patches to keep is configurable.
     * If you find OPatch is running slow in your own environment, try to clear our inactive patching metadata.
 
@@ -559,6 +560,182 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     -rw-r--r--.  1 oracle oinstall 125662 Jul 24 10:49 record_inventory.txt
     ```
     </details>   
+
+## Task 4: Datapatch clean-up
+
+Everytime you patch your datababase, Datapatch stores the rollback scripts inside the database. This ensures, that Datapatch always have the option of rolling back patches - even when you use out-of-place patching and the rollback scripts are no longer in the Oracle home. Datapatch stores the rollback scripts in the SYSAUX tablespace and over time it might take up a significant amount of space.
+
+1. Stay in the *yellow* terminal 🟨. Set the environment and connect to the *UPGR* database.
+
+    ```
+    <copy>
+    . upgr
+    sqlplus / as sysdba
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+2. Generate a list of rollback scripts and the size of them.
+
+    ```
+    <copy>
+    set line 130
+    col description format a50
+    select * from (
+       select description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024, 2) as size_mb 
+       from DBA_REGISTRY_SQLPATCH 
+       where action='APPLY' and description not like 'Database Release Update%'
+       union 
+       select 'Release Update ' || RU_version as description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024) as size_mb 
+       from DBA_REGISTRY_SQLPATCH_RU_INFO)
+    order by description;
+    </copy>
+    ```
+
+    * Datapatch stored the rollback script for each of the patch actions in this database; for Release Updates and one-off patches.
+    * The total size is around 560 MB. Underlying segments are in the SYSAUX tablespace.
+    * In a container database, Datapatch stores the data in the root container and all PDBs. 
+   
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    DESCRIPTION                                           SIZE_MB
+    -------------------------------------------------- ----------
+    DATAPUMP BUNDLE PATCH 19.25.0.0.0                        1.03
+    DATAPUMP BUNDLE PATCH 19.26.0.0.0                        1.03
+    DATAPUMP BUNDLE PATCH 19.27.0.0.0                        1.03
+    OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)          .01
+    OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)          .02
+    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          .02
+    Release Update 19.25.0.0.0                                175
+    Release Update 19.26.0.0.0                                184
+    Release Update 19.27.0.0.0                                194
+    Release Update 19.3.0.0.0                                   4
+    
+    10 rows selected.
+    ```
+    </details>  
+
+3. Exit SQL*Plus
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+4. Purge the old rollback scripts.
+
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/datapatch -purge_old_metadata
+    </copy>
+    ```
+
+    * Datapatch removes the rollback scripts from the database for all patches except those that are currently applied.
+    * This doesn't prevent you from rolling back the currently applied patches.
+    * The old rollback scripts are no longer needed and can be safely cleaned up.
+    * This doesn't remove the patching history, just the rollback scripts.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL Patching tool version 19.27.0.0.0 Production on Mon Jul 28 05:36:29 2025
+    Copyright (c) 2012, 2025, Oracle.  All rights reserved.
+    
+    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_15601_2025_07_28_05_36_29/sqlpatch_invocation.log
+    
+    Connecting to database...OK
+    Gathering database info...done
+    Bootstrapping registry and package to current versions...done
+    Determining current state...done
+    
+    Current state of interim SQL patches:
+    Interim patch 36878697 (OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 24-JUL-25 10.37.27.200664 AM
+    Interim patch 37056207 (DATAPUMP BUNDLE PATCH 19.25.0.0.0):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 24-JUL-25 10.37.27.308823 AM
+    Interim patch 37102264 (OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 24-JUL-25 10.50.50.136642 AM
+    Interim patch 37470729 (DATAPUMP BUNDLE PATCH 19.26.0.0.0):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 24-JUL-25 10.50.50.495814 AM
+    Interim patch 37499406 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)):
+      Binary registry: Installed
+      SQL registry: Applied successfully on 24-JUL-25 10.50.50.193972 AM
+    Interim patch 37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0):
+      Binary registry: Installed
+      SQL registry: Applied successfully on 24-JUL-25 10.52.04.139464 AM
+    
+    Current state of release update SQL patches:
+      Binary registry:
+        19.27.0.0.0 Release_Update 250406131139: Installed
+      SQL registry:
+        Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 10.51.34.382883 AM
+    
+      Purging old patch metadata process started...
+    
+    CAUTION: This could be I/O intensive sometimes due to cleanup of BLOB columns. If you find this process taking unusually long time or if you are seeing any impact to the database performance, then abort this datapatch process and reschedule this clean up activity in a quiet maintenance window.
+    
+      Purge old patch metadata process completed.
+    
+    SQL Patching tool complete on Mon Jul 28 05:36:57 2025
+    ```
+    </details>  
+
+6. Reconnect to the database.
+
+    ```
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+7. Generate a list of rollback scripts and the size of them.
+
+    ```
+    <copy>
+    set line 130
+    col description format a50
+    select * from (
+       select description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024, 2) as size_mb 
+       from DBA_REGISTRY_SQLPATCH 
+       where action='APPLY' and description not like 'Database Release Update%'
+       union 
+       select 'Release Update ' || RU_version as description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024) as size_mb 
+       from DBA_REGISTRY_SQLPATCH_RU_INFO)
+    order by description;
+    </copy>
+    ```
+
+    * The total size is now below 200 MB.
+    * The cleanup happens via a `TRUNCATE TABLE` command which effectively reclaims space so other segments may use it. However, it doesn't shrink the tablespace, so the physical size of the data files remain the same.
+   
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    DESCRIPTION                                           SIZE_MB
+    -------------------------------------------------- ----------
+    DATAPUMP BUNDLE PATCH 19.25.0.0.0                        
+    DATAPUMP BUNDLE PATCH 19.26.0.0.0                        
+    DATAPUMP BUNDLE PATCH 19.27.0.0.0                        1.03
+    OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)          
+    OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)          
+    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          .02
+    Release Update 19.25.0.0.0                                
+    Release Update 19.26.0.0.0                                
+    Release Update 19.27.0.0.0                                194
+    Release Update 19.3.0.0.0                                 
+    
+    10 rows selected.
+    ```
+    </details>
+
+8. Oracle expects to add the Datapatch cleanup functionality in Release Update 19.29. Until then, you can add the functionality using a one-off patch (37738908).
 
 This is the end of *Patch Me If You Can*.
 
