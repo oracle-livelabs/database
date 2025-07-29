@@ -29,7 +29,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 1. Data Pump needs access to a directory where it can put dump and log file. Create a directory in the file system.
 
-    ```
+    ``` shell
     <copy>
     mkdir -p /home/oracle/logs/migrate-using-data-pump
     </copy>
@@ -37,7 +37,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 2. Set the environment to the source database and connect.
 
-    ```
+    ``` sql
     <copy>
     . ftex
     sqlplus / as sysdba
@@ -48,7 +48,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
 
-    ```
+    ``` sql
     <copy>
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
@@ -59,6 +59,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> exec dbms_stats.gather_schema_stats('SYS');
 
@@ -68,11 +69,12 @@ You need to prepare a few things before you can start a Data Pump export.
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 4. Create a database directory object. It must point to the directory in the operating system that you just created.
 
-    ```
+    ``` sql
     <copy>
     create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
@@ -80,16 +82,18 @@ You need to prepare a few things before you can start a Data Pump export.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
 
     Directory created.
     ```
+
     </details>
 
 5. Create a dedicated user that you can use for the Data Pump export job.
 
-    ```
+    ``` sql
     <copy>
     create user expuser identified by expuser default tablespace users;
     grant exp_full_database to expuser;
@@ -102,6 +106,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create user expuser identified by expuser default tablespace users;
 
@@ -119,11 +124,12 @@ You need to prepare a few things before you can start a Data Pump export.
 
     User altered.
     ```
+
     </details>
 
 6. Exit SQL*Plus.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -131,7 +137,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 7. Examine the precreated Data Pump parameter file.
 
-    ```
+    ``` shell
     <copy>
     cat /home/oracle/scripts/upg-12-migrate-using-data-pump-exp.par
     </copy>
@@ -146,6 +152,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     directory=dmpdir
     logfile=full_exp.log
@@ -157,11 +164,12 @@ You need to prepare a few things before you can start a Data Pump export.
     exclude=statistics
     full=y
     ```
+
     </details>
 
 8. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created.
 
-    ```
+    ``` shell
     <copy>
     expdp expuser/expuser parfile=/home/oracle/scripts/upg-12-migrate-using-data-pump-exp.par
     </copy>
@@ -169,6 +177,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Export: Release 19.0.0.0.0 - Production on Tue May 28 03:23:45 2024
     Version 19.21.0.0.0
@@ -308,6 +317,7 @@ You need to prepare a few things before you can start a Data Pump export.
     28-MAY-24 03:24:27.862:   /home/oracle/logs/migrate-using-data-pump/full_exp_02.dmp
     28-MAY-24 03:24:27.878: Job "EXPUSER"."SYS_EXPORT_FULL_01" successfully completed at Tue May 28 03:24:27 2024 elapsed 0 00:00:41
     ```
+
     </details>
 
 ## Task 2: Create new PDB
@@ -315,18 +325,19 @@ You need to prepare a few things before you can start a Data Pump export.
 You create a new, empty PDB in Oracle Database 23ai and import directly into it. This avoids the in-place upgrade and PDB conversion.
 
 1. Set the environment to the target database, *CDB23*, and connect.
-    ```
+
+    ``` sql
     <copy>
     . cdb23
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-3. Create a new PDB called *PURPLE* and open it.
+2. Create a new PDB called *PURPLE* and open it.
 
-    ```
+    ``` sql
     <copy>
     create pluggable database purple admin user admin identified by admin;
     alter pluggable database purple open;
@@ -338,6 +349,7 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create pluggable database PURPLE admin user admin identified by admin;
 
@@ -351,11 +363,12 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
     Pluggable database altered.
     ```
+
     </details>
 
-4. Create a *USERS* tablespace in the new PDB.
+3. Create a *USERS* tablespace in the new PDB.
 
-    ```
+    ``` sql
     <copy>
     alter session set container=purple;
     create tablespace users datafile size 100m autoextend on next 100m maxsize 32767m;
@@ -366,6 +379,7 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> alter session set container=purple;
 
@@ -375,6 +389,7 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
     Tablespace created.
     ```
+
     </details>
 
 ## Task 3: Data Pump import
@@ -383,7 +398,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 1. Create a database directory object that points to the same operating system directory that you created in the previous task.
 
-    ```
+    ``` sql
     <copy>
     create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
@@ -391,16 +406,18 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
 
     Directory created.
     ```
+
     </details>
 
 2. Create a dedicated user for the Data Pump import.
 
-    ```
+    ``` sql
     <copy>
     create user impuser identified by impuser default tablespace users;
     grant imp_full_database to impuser;
@@ -413,6 +430,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create user impuser identified by impuser default tablespace users;
 
@@ -430,19 +448,20 @@ You need a few more changes to the new PDB before you can start the import.
 
     User altered.
     ```
+
     </details>
 
-6. Exit SQL*Plus.
+3. Exit SQLcl.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
     ```
 
-3. Examine the precreated Data Pump import parameter file.
+4. Examine the precreated Data Pump import parameter file.
 
-    ```
+    ``` shell
     <copy>
     cat /home/oracle/scripts/upg-12-migrate-using-data-pump-imp.par
     </copy>
@@ -455,6 +474,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     directory=dmpdir
     logfile=full_imp.log
@@ -465,11 +485,12 @@ You need a few more changes to the new PDB before you can start the import.
     exclude=tablespace
     transform=lob_storage:securefile
     ```
+
     </details>
 
-4. Start the Data Pump import.
+5. Start the Data Pump import.
 
-    ```
+    ``` shell
     <copy>
     impdp impuser/impuser@localhost/purple parfile=/home/oracle/scripts/upg-12-migrate-using-data-pump-imp.par
     </copy>
@@ -477,9 +498,10 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue May 28 03:26:43 2024
-    Version 23.5.0.24.07
+    Version 23.9.0.25.07
 
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
 
@@ -907,29 +929,30 @@ You need a few more changes to the new PDB before you can start the import.
     28-MAY-24 03:27:00.184: W-4      Completed 15 DATABASE_EXPORT/SCHEMA/TABLE/TABLE_DATA objects in 0 seconds
     28-MAY-24 03:27:00.209: Job "IMPUSER"."SYS_IMPORT_FULL_01" completed with 33 error(s) at Tue May 28 03:27:00 2024 elapsed 0 00:00:14
     ```
+
     </details>
 
-5. Examine the Data Pump log file for any critical issues. A full import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
+6. Examine the Data Pump log file for any critical issues. A full import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
 
     * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in Oracle Database 23ai causing the grants to fail.
     * The same applies to the `ORACLE_OCM` user.
     * An error related to traditional auditing that is desupported in Oracle Database 23ai.
     * This log file doesn't contain any critical issues.
 
-6. Set the environment to the target database, *CDB23*, and connect.
+7. Set the environment to the target database, *CDB23*, and connect.
 
-    ```
+    ``` sql
     <copy>
     . cdb23
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-7. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. 
+8. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
 
-    ```
+    ``` sql
     <copy>
     alter session set container=purple;
     exec dbms_stats.gather_schema_stats('SYS');
@@ -941,6 +964,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> alter session set container=purple;
 
@@ -954,11 +978,12 @@ You need a few more changes to the new PDB before you can start the import.
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
-8. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics.
+9. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics.
 
-    ```
+    ``` sql
     <copy>
     exec dbms_stats.gather_database_stats;
     </copy>
@@ -968,16 +993,18 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> exec dbms_stats.gather_database_stats;
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
-9. Verify your database has been imported. Check the number of objects in the *F1* schema.
+10. Verify your database has been imported. Check the number of objects in the *F1* schema.
 
-    ```
+    ``` sql
     <copy>
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
     </copy>
@@ -987,6 +1014,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
 
@@ -995,11 +1023,12 @@ You need a few more changes to the new PDB before you can start the import.
     TABLE                           14
     INDEX                           19
     ```
+
     </details>
 
-10. Perform a more extensive check. Verify the actual data. Find the best race of the Danish driver, *Kevin Magnussen*.
+11. Perform a more extensive check. Verify the actual data. Find the best race of the Danish driver, *Kevin Magnussen*.
 
-    ```
+    ``` sql
     <copy>
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra,
@@ -1017,6 +1046,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select ra.name || ' ' || ra.year as race
       2  from f1.f1_races ra,
@@ -1032,11 +1062,12 @@ You need a few more changes to the new PDB before you can start the import.
     --------------------------------------------------------------------------------
     Australian Grand Prix 2014
     ```
+
     </details>
 
-11. Exit SQL*Plus.
+12. Exit SQLcl.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -1044,7 +1075,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 **Congratulations!** You have now moved your data into a PDB on Oracle Database 23ai
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Learn More
 
@@ -1057,6 +1088,7 @@ You can avoid an in-place upgrade and PDB conversion by using Data Pump. The sou
 * Slides, [Data Pump Best Practices and Real World Scenarios](https://dohdatabase.com/wp-content/uploads/2023/04/vc15_datapump_masterdeck_final.pdf)
 
 ## Acknowledgements
+
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025

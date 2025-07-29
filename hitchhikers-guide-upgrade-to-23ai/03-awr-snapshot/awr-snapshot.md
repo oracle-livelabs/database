@@ -12,23 +12,23 @@ Estimated Time: 15 Minutes
 
 In this lab, you will:
 
-- Generate an AWR snapshot
-- Prepare workload
-- Start workload
-- Generate another AWR snapshot
-- Export AWR (optional)
+* Generate an AWR snapshot
+* Prepare workload
+* Start workload
+* Generate another AWR snapshot
+* Export AWR (optional)
 
 ### Prerequisites
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 ## Task 1: Generate an AWR snapshot
 
 1. Use the *yellow* terminal 🟨. Set the environment to the *UPGR* database and connect.
 
-    ```
+    ``` sql
     <copy>
     . upgr
     sqlplus / as sysdba
@@ -39,7 +39,7 @@ This lab assumes:
 
 2. Use the script to generate an AWR snapshot. Take note of the snapshot ID (e.g.: 113). You need it later on.
 
-    ```
+    ``` python
     <copy>
     @/home/oracle/scripts/upg-03-awr-snapshot-snap-before.sql
     </copy>
@@ -47,19 +47,21 @@ This lab assumes:
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @/home/oracle/scripts/upg-03-awr-snapshot-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 113 created. -
     -------------------------------------------
     ```
+
     </details>
 
     Your snapshot ID might differ from the one in the sample output.
 
 3. Don’t exit the terminal. Keep SQL*Plus open.
 
-4. Start HammerDB using the desktop shortcut. 
+4. Start HammerDB using the desktop shortcut.
 
     ![Start HammerDB using desktop icon](./images/awr-snapshot-hammerdb-icon.png " ")
 
@@ -80,6 +82,7 @@ This lab assumes:
 4. This populates the *Script Editor* tab with the driver script. Ignore any error messages.
 
 5. Expand *Virtual Users* and double-click on *Create*. This creates three virtual users (users 2-4) for the workload. HammerDB creates an additional user for monitoring.
+
     ![view the 3 Virtual Users being started](./images/awr-snapshot-create-virtual-users.png " ")
 
 ## Task 3: Start workload
@@ -88,7 +91,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 1. Back in the *yellow* terminal 🟨, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
 
-    ```
+    ``` python
     <copy>
     @/home/oracle/scripts/upg-03-capture_cc.sql
     </copy>
@@ -96,6 +99,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @/home/oracle/scripts/upg-03-capture_cc.sql
     Dropping SQL Tuning Set, if exists
@@ -110,6 +114,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
     You get control back in 180 seconds.
     Do not press CTRL+C
     ```
+
     </details>
 
 2. Click *Run* in the list. Start the load by clicking on the Run icon.
@@ -117,9 +122,11 @@ Use HammerDB to start a workload. At the same time, capture workload information
     ![Start the TPC-C Load by clicking on the Run icon](./images/awr-snapshot-start-load.png " ")
 
 3. Click on the Graph / Transaction Counter icon in the top menu icon bar.
+
     ![Click on the Graph Transaction Counter icon](./images/awr-snapshot-transact-counter.png " ")
 
 4. It will take a few seconds; then you will see the performance charts and the transactions-per-minute (tpm). The load run usually takes 2-3 minutes to complete.
+
     ![see the performance charts and the transactions-per-minute](./images/awr-snapshot-transact-viewer.png " ")
 
 5. Exit HammerDB.
@@ -128,6 +135,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @/home/oracle/scripts/upg-03-capture_cc.sql
     Dropping SQL Tuning Set, if exists
@@ -146,13 +154,14 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 ## Task 4: Generate another AWR snapshot
 
 1. Still in the *yellow* terminal 🟨, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on.
 
-    ```
+    ``` python
     <copy>
     @/home/oracle/scripts/upg-03-awr-snapshot-snap-after.sql
     </copy>
@@ -160,19 +169,21 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @/home/oracle/scripts/upg-03-awr-snapshot-snap-after.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 117 created. -
     -------------------------------------------
     ```
+
     </details>
 
     Your snapshot ID might differ from the one in the sample output.
 
 2. Exit from SQL*Plus.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -186,7 +197,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
 1. Set the environment to the *UPGR* database and connect.
 
-    ```
+    ``` sql
     <copy>
     . upgr
     sqlplus / as sysdba
@@ -197,11 +208,12 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
 2. In `rdbms/admin` in your Oracle Home, you find a script to export AWR. Use the script to start the export. It runs for around two minutes.
 
-    ```
+    ``` python
     <copy>
     @?/rdbms/admin/awrextr.sql
     </copy>
     ```
+
     When prompted for:
     * *dbid*, hit RETURN.
     * *num_days*, type *2*, hit RETURN.
@@ -209,9 +221,11 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     * *end_snap*, type the last *Snap Id*, hit RETURN.
     * *directory\_name*, type *DATA\_PUMP\_DIR*, hit RETURN.
     * *file_name*, hit RETURN.
+    * *include_sqlmon*, hit RETURN.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> @?/rdbms/admin/awrextr.sql
     #############
@@ -322,11 +336,12 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     End of AWR Extract
     ```
+
     </details>
 
 3. Exit from SQL*Plus.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -334,7 +349,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
 4. Data Pump has now exported the AWR data to a dump file.
 
-    ```
+    ``` shell
     <copy>
     ls -l /u01/app/oracle/product/19/rdbms/log/awr*
     </copy>
@@ -342,17 +357,19 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ ls -l /u01/app/oracle/product/19/rdbms/log/awr*
     total 8940
     -rw-r-----. 1 oracle dba 9138176 Jul  6 12:28 awrdat_111_120.dmp
     -rw-r--r--. 1 oracle dba   14009 Jul  6 12:28 awrdat_111_120.log
     ```
+
     </details>
 
 5. Examine the Data Pump log file.
 
-    ```
+    ``` shell
     <copy>
     cat /u01/app/oracle/product/19/rdbms/log/awrdat*.log
     </copy>
@@ -360,6 +377,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ cat /u01/app/oracle/product/19/rdbms/log/awrdat*.log
     Starting "SYS"."SYS_EXPORT_TABLE_01":
@@ -539,9 +557,10 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     /u01/app/oracle/product/19/rdbms/log/awrdat_111_120.dmp
     Job "SYS"."SYS_EXPORT_TABLE_01" successfully completed at Thu Jul 6 12:28:31 2023 elapsed 0 00:00:22
     ```
+
     </details>
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Learn More
 
@@ -551,9 +570,10 @@ Snapshots are sets of historical data for specific periods that are used for per
 
 * [HammerDB](https://www.hammerdb.com/)
 * Documentation, [Managing AWR Snapshots](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgdba/gathering-database-statistics.html#GUID-144711F9-85AE-4281-B548-3E01280F9A56)
-* Webinar, [Performance Stability Perscription #1: Collect SQL Tuning Sets](https://www.youtube.com/watch?v=qCt1_Fc3JRs&t=3969s)
+* Webinar, [Performance Stability Prescription #1: Collect SQL Tuning Sets](https://www.youtube.com/watch?v=qCt1_Fc3JRs&t=3969s)
 
 ## Acknowledgements
+
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025
