@@ -47,8 +47,8 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ mkdir -p /home/oracle/cpat
-    [CDB23:oracle@holserv1:~]$ unzip /home/oracle/scripts/p32613591_112048_Generic.zip -d /home/oracle/cpat
+    $ mkdir -p /home/oracle/cpat
+    $ unzip /home/oracle/scripts/p32613591_112048_Generic.zip -d /home/oracle/cpat
     Archive:  /home/oracle/scripts/p32613591_112048_Generic.zip
       inflating: /home/oracle/cpat/README.txt
       inflating: /home/oracle/cpat/LICENSE.txt
@@ -73,7 +73,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
       inflating: /home/oracle/cpat/lib/commons-cli-1.9.0.jar
        creating: /home/oracle/cpat/misc/
       inflating: /home/oracle/cpat/misc/CPATReportSchema.json
-    [CDB23:oracle@holserv1:~]$ ls -l /home/oracle/cpat
+    $ ls -l /home/oracle/cpat
     total 48
     drwxr-xr-x. 2 oracle oinstall    59 Jun 17 00:45 bin
     drwxr-xr-x. 2 oracle oinstall  4096 Jun 17 00:45 lib
@@ -115,7 +115,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --targetcloud ALL --migrationmethod ALL --reportformat JSON HTML TEXT --outdir ~/cpat_output/1_generic/
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --targetcloud ALL --migrationmethod ALL --reportformat JSON HTML TEXT --outdir ~/cpat_output/1_generic/
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
@@ -151,7 +151,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
     * Only the *BLUE* and *RED* PDBs were checked. As *GREEN* PDB was closed, it was skipped.
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ ls -l ~/cpat_output/1_generic/
+    $ ls -l ~/cpat_output/1_generic/
     total 40
     drwxr-xr-x. 2 oracle oinstall   177 Jun 27 12:44 BLUE
     -rw-r--r--. 1 oracle oinstall 10684 Jun 27 12:44 premigration_advisor_summary.log
@@ -249,7 +249,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire <<< 'Welcome_1234'
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire <<< 'Welcome_1234'
     Enter password for ADMIN user:
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
@@ -277,7 +277,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby <<< 'Welcome_1234'
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby <<< 'Welcome_1234'
     Enter password for ADMIN user:
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
@@ -371,7 +371,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix blue
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix blue
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
@@ -383,7 +383,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/blue_premigration_advisor_report.json
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/blue_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/2_adbs/blue_premigration_advisor_report.txt
-    [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix red
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod ALL --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/2_adbs/ --outfileprefix red
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
@@ -470,7 +470,7 @@ So, let's create a CPAT report where we only list issues for this specific migra
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod DATAPUMP --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix blue
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod DATAPUMP --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix blue
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
@@ -482,7 +482,7 @@ So, let's create a CPAT report where we only list issues for this specific migra
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/blue_premigration_advisor_report.json
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/blue_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/blue_premigration_advisor_report.txt
-    [CDB23:oracle@holserv1:~]$ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod DATAPUMP_DBLINK --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix red
+    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod DATAPUMP_DBLINK --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix red
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 

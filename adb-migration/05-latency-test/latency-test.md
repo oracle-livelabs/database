@@ -54,8 +54,8 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~/cpat_output]$ mkdir -p /home/oracle/adbping
-    [CDB23:oracle@holserv1:~/cpat_output]$ unzip /home/oracle/scripts/adbping_Linux.X64_230127.zip -d /home/oracle/adbping
+    $ mkdir -p /home/oracle/adbping
+    $ unzip /home/oracle/scripts/adbping_Linux.X64_230127.zip -d /home/oracle/adbping
     Archive:  /home/oracle/scripts/adbping_Linux.X64_230127.zip
     inflating: /home/oracle/adbping/adbping
     inflating: /home/oracle/adbping/ConnectAndSQLExecTest.class
@@ -76,7 +76,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     extracting: /home/oracle/adbping/samples/sqlplus_client/simpleinsert.sql
     inflating: /home/oracle/adbping/samples/sqlplus_client/large_resultset.sql
     inflating: /home/oracle/adbping/ucp.jar
-    [CDB23:oracle@holserv1:~/cpat_output]$ ls -l /home/oracle/adbping
+    $ ls -l /home/oracle/adbping
     total 13176
     -rwxr-xr-x. 1 oracle oinstall 7080448 Jan 27  2023  adbping
     -rw-r--r--. 1 oracle oinstall    4458 Jan 27  2023 'ConnectAndSQLExecTest$Worker.class'
@@ -117,7 +117,7 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
     * Opening 10 threads (*-t 10*) in parallel.
 
     ``` shell
-    [ADB:oracle@holserv1:~/adbping]$ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c sqlplus -s sapphire_tp -d 10 -t 10
+    $ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c sqlplus -s sapphire_tp -d 10 -t 10
     +++Test Summary+++
        Test Client: sqlplus
        Number of concurrent threads: 10
@@ -155,7 +155,7 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
        * Same thing as before, but connecting to ADB using java method.
 
     ``` shell
-    [ADB:oracle@holserv1:~/adbping]$ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c java -s sapphire_tp -d 10 -t 10
+    $ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c java -s sapphire_tp -d 10 -t 10
     +++Test Summary+++
        Test Client: java
        Number of concurrent threads: 10
@@ -201,7 +201,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
       * We only 2 parallel process or we may cause starvation on the local connection resources.
 
     ``` shell
-    [ADB:oracle@holserv1:~/adbping]$ ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
+    $ ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
     +++Test Summary+++
        Test Client: sqlplus
        Number of concurrent threads: 2
@@ -238,7 +238,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
     What we are doing here? Same thing as before, but connecting to ADB using java method.
 
     ``` shell
-    [ADB:oracle@holserv1:~/adbping]$ ./adbping -u system -p oracle -w $TNS_ADMIN -c java -s //localhost:1521/blue -d 10 -t 10
+    $ ./adbping -u system -p oracle -w $TNS_ADMIN -c java -s //localhost:1521/blue -d 10 -t 10
     +++Test Summary+++
        Test Client: java
        Number of concurrent threads: 10

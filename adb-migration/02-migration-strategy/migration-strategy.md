@@ -193,9 +193,9 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ echo $TNS_ADMIN
+    $ echo $TNS_ADMIN
     /home/oracle/adb_tls_wallet
-    [ADB:oracle@holserv1:~]$ ls -l $TNS_ADMIN
+    $ ls -l $TNS_ADMIN
     total 48
     -rw-------. 1 oracle oinstall  996 Jun 18 13:49 adb_container.cert
     -rw-------. 1 oracle oinstall 3899 Jun 18 13:49 cwallet.sso
@@ -210,7 +210,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     -rw-r--r--. 1 oracle oinstall 5823 Jun 18 14:16 tnsnames.ora
     -rw-r--r--. 1 oracle oinstall 2651 Jun 18 13:57 tnsnames_ruby.ora
     -rw-------. 1 oracle oinstall 2128 Jun 18 13:51 truststore.jks
-    [ADB:oracle@holserv1:~]$ cat $TNS_ADMIN/tnsnames.ora
+    $ cat $TNS_ADMIN/tnsnames.ora
     sapphire_medium = (description=(retry_count=0)(retry_delay=3)
                      (address=(protocol=tcps)(port=1523)(host=holserv1.livelabs.oraclevcn.com))
                      (connect_data=(service_name=sapphire_medium.adb.oraclecloud.com))(security=(SSL_SERVER_DN_MATCH=TRUE)    (SSL_SERVER_CERT_DN="CN=93ced68f921a")))

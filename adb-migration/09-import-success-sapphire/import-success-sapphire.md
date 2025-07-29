@@ -36,7 +36,7 @@ This lab assumes:
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ tail -1 /nfs_mount/schemas_import_nfs.log
+    $ tail -1 /nfs_mount/schemas_import_nfs.log
     02-JUL-25 13:43:11.295: Job "ADMIN"."SYS_IMPORT_SCHEMA_01" completed with 1 error(s) at Wed Jul 2 13:43:11 2025 elapsed 0 00:00:46
     ```
 
@@ -87,9 +87,9 @@ This lab assumes:
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ grep -w exported /nfs_mount/schemas_export.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_export_rows.log
-    [ADB:oracle@holserv1:~]$ grep -w imported /nfs_mount/schemas_import_nfs.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_import_nfs_rows.log
-    [ADB:oracle@holserv1:~]$ head /nfs_mount/schemas_export_rows.log
+    $ grep -w exported /nfs_mount/schemas_export.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_export_rows.log
+    $ grep -w imported /nfs_mount/schemas_import_nfs.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_import_nfs_rows.log
+    $ head /nfs_mount/schemas_export_rows.log
     "HR"."COUNTRIES" 25
     "HR"."DEPARTMENTS" 27
     "HR"."EMPLOYEES" 107
@@ -100,7 +100,7 @@ This lab assumes:
     "IX"."AQ$_ORDERS_QUEUETABLE_G" 0
     "IX"."AQ$_ORDERS_QUEUETABLE_H" 0
     "IX"."AQ$_ORDERS_QUEUETABLE_I" 0
-    [ADB:oracle@holserv1:~]$ diff -s /nfs_mount/schemas_export_rows.log /nfs_mount/schemas_import_nfs_rows.log
+    $ diff -s /nfs_mount/schemas_export_rows.log /nfs_mount/schemas_import_nfs_rows.log
     Files /nfs_mount/schemas_export_rows.log and /nfs_mount/schemas_import_nfs_rows.log are identical
     ```
 
@@ -794,7 +794,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~/scripts]$ impdp userid=admin/Welcome_1234@sapphire_tp \
+    $ impdp userid=admin/Welcome_1234@sapphire_tp \
     > directory=nfs_dir \
     > dumpfile=schemas_export_%L.dmp \
     > sqlfile=sh.sales_transactions_ext.sql \
@@ -812,7 +812,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
     Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
     Job "ADMIN"."SYS_SQL_FILE_TABLE_01" successfully completed at Thu Jul 3 20:06:54 2025 elapsed 0 00:00:04
 
-    [ADB:oracle@holserv1:~/scripts]$ cat /nfs_mount/sh.sales_transactions_ext.sql
+    $ cat /nfs_mount/sh.sales_transactions_ext.sql
     -- CONNECT ADMIN
     ALTER SESSION SET EVENTS '10150 TRACE NAME CONTEXT FOREVER, LEVEL 1';
     ALTER SESSION SET EVENTS '10904 TRACE NAME CONTEXT FOREVER, LEVEL 1';

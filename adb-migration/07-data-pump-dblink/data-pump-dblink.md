@@ -53,8 +53,8 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ . cdb23
-    [CDB23:oracle@holserv1:~]$ lsnrctl status
+    $ . cdb23
+    $ lsnrctl status
 
     LSNRCTL for Linux: Version 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on 02-JUL-2025 14:04:10
 
@@ -114,7 +114,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ cat /u01/app/oracle/product/23/network/admin/listener.ora
+    $ cat /u01/app/oracle/product/23/network/admin/listener.ora
     LISTENER =
     (DESCRIPTION_LIST =
         (DESCRIPTION =
@@ -124,7 +124,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     )
 
     WALLET_LOCATION = (SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=/u01/app/oracle/tls_wallet)))
-    [CDB23:oracle@holserv1:~]$ cat /u01/app/oracle/product/23/network/admin/sqlnet.ora
+    $ cat /u01/app/oracle/product/23/network/admin/sqlnet.ora
     WALLET_LOCATION = (SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=/u01/app/oracle/tls_wallet)))
     ```
 

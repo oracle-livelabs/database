@@ -49,7 +49,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ sudo podman restart nfs-server
+    $ sudo podman restart nfs-server
     nfs-server
     ```
 
@@ -75,9 +75,9 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     <summary>*click to see the output*</summary>
 
     ``` text
-    [ADB:oracle@holserv1:~]$ sudo mkdir -p /nfs_mount
-    [ADB:oracle@holserv1:~]$ sudo mount -t nfs nfs-server:/exports /nfs_mount
-    [ADB:oracle@holserv1:~]$ ls -l /nfs_mount
+    $ sudo mkdir -p /nfs_mount
+    $ sudo mount -t nfs nfs-server:/exports /nfs_mount
+    $ ls -l /nfs_mount
     total 0
     -rw-r--r--. 1 root root 0 Jul  1 19:13 WORKING
     ```
@@ -343,7 +343,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     <summary>*click to see the output*</summary>
 
     ``` text
-    [CDB23:oracle@holserv1:~]$ ls -l /nfs_mount
+    $ ls -l /nfs_mount
     total 48532
     -rw-r-----. 1 oracle oinstall 49623040 Jul  2 13:38 schemas_export_01.dmp
     -rw-r-----. 1 oracle oinstall    53248 Jul  2 13:38 schemas_export_02.dmp
