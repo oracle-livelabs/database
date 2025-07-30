@@ -43,7 +43,7 @@ In this lab, you will:
 
 2. Use the *yellow* terminal 🟨. Ensure the listeners are started.
 
-    ``` shell
+    ``` bash
     <copy>
     ps -ef | grep LISTENER | grep -v grep
     </copy>
@@ -66,7 +66,7 @@ In this lab, you will:
 
 3. Ensure that the databases (*POD1* and *CDB23*) are started.
 
-    ``` shell
+    ``` bash
     <copy>
     ps -ef | grep ora_ | grep pmon | grep -v grep
     </copy>
@@ -91,7 +91,7 @@ In this lab, you will:
 
 4. If *POD1* or *CDB23* are not running, start them.
 
-    ``` shell
+    ``` bash
     <copy>
     sudo podman start adb-free
     . cdb23

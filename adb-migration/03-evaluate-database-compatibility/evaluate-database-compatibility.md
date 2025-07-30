@@ -31,7 +31,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
 
 1. Use the *yellow* terminal 🟨. Unzip CPAT file.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /home/oracle/cpat
 
@@ -93,7 +93,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
 1. Execute CPAT for both *BLUE* and *RED* PDBs, generating a generic report.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
     ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --targetcloud ALL --migrationmethod ALL --reportformat JSON HTML TEXT --outdir ~/cpat_output/1_generic/
@@ -136,7 +136,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
 2. Check the generated report files.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -l ~/cpat_output/1_generic/
     </copy>
@@ -163,7 +163,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
 3. Open and explore the TEXT files.
 
-    ``` shell
+    ``` bash
     <copy>
     cat ~/cpat_output/1_generic/premigration_advisor_summary_report.txt
     </copy>
@@ -173,7 +173,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
     Now take a look on the contents of the text report for the *RED* PDB.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -1 ~/cpat_output/1_generic/RED/
 
@@ -185,7 +185,7 @@ CPAT can evaluate multiple different migration methods, like golden gate and dat
 
 4. Open and explore the HTML files.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -1 ~/cpat_output/1_generic/
 
@@ -234,7 +234,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     Use the *yellow* terminal 🟨. Run it first for the *SAPPHIRE* ADB:
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix sapphire <<< 'Welcome_1234'
@@ -262,7 +262,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     Next, run for the *RUBY* ADB:
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     ~/cpat/premigration.sh --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN --username ADMIN --gettargetprops --outdir ~/cpat_output/props/ --outfileprefix ruby <<< 'Welcome_1234'
@@ -290,7 +290,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     Verify the generated property files:
 
-    ``` shell
+    ``` bash
     <copy>
     ls -l ~/cpat_output/props/
     </copy>
@@ -310,7 +310,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
     Check the contents:
 
-    ``` shell
+    ``` bash
     <copy>
     cat ~/cpat_output/props/ruby_premigration_advisor_analysis.properties
     </copy>
@@ -355,7 +355,7 @@ So, let's create a CPAT report where we only list issues for those specifics ADB
 
 2. Now, execute CPAT for *BLUE* and *RED* PDBs, generating a specific report.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
 
@@ -405,7 +405,7 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
 1. Open and explore the HTML files.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -1 ~/cpat_output/2_adbs/
 
@@ -452,7 +452,7 @@ So, let's create a CPAT report where we only list issues for this specific migra
 
 1. Execute CPAT for *BLUE* and *RED* PDBs, generating a specific report.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
 
@@ -504,7 +504,7 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
 1. Open and explore the HTML files.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -1 ~/cpat_output/3_adbs_datapump/
 

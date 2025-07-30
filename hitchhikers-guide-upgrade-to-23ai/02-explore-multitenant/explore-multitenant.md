@@ -30,7 +30,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 1. Use the *yellow* terminal 🟨. Set the environment to *CDB23* and connect.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
     sql / as sysdba
@@ -232,7 +232,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 10. The CDB automatically creates services for each PDB. Get a list of services.
 
-    ``` shell
+    ``` bash
     <copy>
     lsnrctl status
     </copy>
@@ -282,7 +282,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 11. Connect to a PDB via a service.
 
-    ``` shell
+    ``` bash
     <copy>
     sql system/oracle@localhost/red
     </copy>
@@ -667,7 +667,7 @@ You want to run a script in a CDB including all PDBs.
 
 2. The Oracle home contains a program that can execute scripts in a CDB. Explore the options of *catcon.pl*.
 
-    ``` shell
+    ``` bash
     <copy>
     $ORACLE_HOME/perl/bin/perl $ORACLE_HOME/rdbms/admin/catcon.pl --help
     </copy>
@@ -722,7 +722,7 @@ You want to run a script in a CDB including all PDBs.
 
 3. Recompile invalid objects in all containers using *utlrp.sql*.
 
-    ``` shell
+    ``` bash
     <copy>
     $ORACLE_HOME/perl/bin/perl $ORACLE_HOME/rdbms/admin/catcon.pl \
        -d $ORACLE_HOME/rdbms/admin \
@@ -756,7 +756,7 @@ You want to run a script in a CDB including all PDBs.
 
 4. *catcon.pl* stores the output from each container in a separate log file. List the files.
 
-    ``` shell
+    ``` bash
     <copy>
     ll /tmp/utlrp_result*.log
     </copy>
@@ -774,7 +774,7 @@ You want to run a script in a CDB including all PDBs.
 
 5. Optionally, you can examine one of the files.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /tmp/utlrp_result0.log
     </copy>

@@ -48,7 +48,7 @@ In this lab, you will:
 
 2. Ensure the listener is started. Use the *yellow* terminal 🟨.
 
-    ``` shell
+    ``` bash
     <copy>
     ps -ef | grep LISTENER | grep -v grep
     </copy>
@@ -66,7 +66,7 @@ In this lab, you will:
 
 3. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
 
-    ``` shell
+    ``` bash
     <copy>
     ps -ef | grep ora_ | grep pmon | grep -v grep
     </copy>

@@ -308,7 +308,7 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
 
 3. Connect as the HammerDB benchmark user
 
-    ``` shell
+    ``` bash
     <copy>
     sql tpcc/tpcc@localhost/upgr
     </copy>

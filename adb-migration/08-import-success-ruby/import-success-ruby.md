@@ -25,7 +25,7 @@ During export and import, Data Pump may face errors or situations that can't be 
 
 1. Use the *blue* 🟦 terminal. If Data Pump encounters an error or faces a situation it can't resolve, it will print an error to the console and into the logfile. At the end of the output, Data Pump summarizes and lists the number of errors faced during the job. Examine the last lines of a Data Pump import log file.
 
-    ``` shell
+    ``` bash
     <copy>
     tail -1 /nfs_mount/schemas_import_dblink.log
     </copy>
@@ -50,7 +50,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
 1. Still in the *blue* 🟦 terminal, connect to the *RUBY* ADB. This is our target database.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql admin/Welcome_1234@ruby_tp
@@ -215,7 +215,7 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
 2. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>

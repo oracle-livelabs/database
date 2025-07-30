@@ -147,7 +147,7 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 
 3. Open the AWR diff report in Firefox.
 
-    ``` shell
+    ``` bash
     <copy>
     firefox awrdiff*.html &
     </copy>

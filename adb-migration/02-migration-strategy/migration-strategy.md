@@ -53,7 +53,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
 1. Use the *yellow* terminal 🟨. Let's connect to the cdb23.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
     sql / as sysdba
@@ -158,7 +158,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
 4. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>
@@ -172,7 +172,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
 1. Now, switch to the *blue* 🟦 terminal. Set the environment to *ADB* and check the contents TNS\_ADMIN folder.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
 
@@ -296,7 +296,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
 2. Connect to the *SAPPHIRE* ADB.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -375,7 +375,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
 5. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>

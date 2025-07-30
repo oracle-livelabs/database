@@ -172,7 +172,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
 1. Use the `dbdowngrade` script to start the downgrade process. It will complete in only a few minutes.
 
-    ``` shell
+    ``` bash
     <copy>
     cd $ORACLE_HOME/bin
     ./dbdowngrade -c 'YELLOW'

@@ -38,7 +38,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
 1. Use the *blue* 🟦 terminal. Check that *RED* database also authenticates using mTLS.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
     lsnrctl status
@@ -99,7 +99,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     </details>
 
-    ``` shell
+    ``` bash
     <copy>
     cat $ORACLE_HOME/network/admin/listener.ora
     cat $ORACLE_HOME/network/admin/sqlnet.ora
@@ -134,7 +134,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     If we try to authenticate on TCPS without providing a wallet, we get an TNS error:
 
-    ``` shell
+    ``` bash
     <copy>
     sql admin/admin@tcps://localhost:1522/red
     </copy>
@@ -163,7 +163,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     Connecting using the wallet:
 
-    ``` shell
+    ``` bash
     <copy>
     sql admin/admin@"tcps://localhost:1522/red?wallet_location=/home/oracle/client_tls_wallet&ssl_server_dn_match=false"
     </copy>
@@ -192,7 +192,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
 3. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>
@@ -206,7 +206,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Still in the *blue* 🟦 terminal, connect on the *RUBY* ADB to modify the default profile.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql admin/Welcome_1234@ruby_tp
@@ -217,7 +217,7 @@ In this task, we will change the default profile so passwords for imported users
 
 2. Alter the profile.
 
-    ``` shell
+    ``` bash
     <copy>
     alter profile default limit PASSWORD_LIFE_TIME unlimited;
     alter profile default limit PASSWORD_GRACE_TIME unlimited;
@@ -251,7 +251,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 1. Create a directory to keep the wallet files.
 
-    ``` shell
+    ``` bash
     <copy>
     create directory red_dblink_wallet_dir as 'red_dblink_wallet_dir';
     </copy>
@@ -272,7 +272,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 2. Next, let's upload the local wallet files to this directory.
 
-    ``` shell
+    ``` bash
     <copy>
     @~/scripts/adb-07-upload_file.sql /home/oracle/client_tls_wallet/cwallet.sso RED_DBLINK_WALLET_DIR cwallet.sso
     </copy>
@@ -304,7 +304,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 3. Check if file was uploaded.
 
-    ``` shell
+    ``` bash
     <copy>
     select * from dbms_cloud.list_files('red_dblink_wallet_dir');
     </copy>
@@ -327,7 +327,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 4. Create the DB link credentials.
 
-    ``` shell
+    ``` bash
     <copy>
     begin
       dbms_cloud.create_credential(
@@ -362,7 +362,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 5. Create the DB link and test it.
 
-    ``` shell
+    ``` bash
     <copy>
     begin
       dbms_cloud_admin.create_database_link(
@@ -413,7 +413,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 1. Create a directory pointing to *nfs-server:/exports* to store log files.
 
-    ``` shell
+    ``` bash
     <copy>
     create directory nfs_dir as 'nfs';
 
@@ -472,7 +472,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 2. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>
@@ -482,7 +482,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 3. Still in the *blue* 🟦 terminal, import the F1 schema on *RUBY* ADB.
 
-    ``` shell
+    ``` bash
     <copy>
     impdp userid=admin/Welcome_1234@ruby_tpurgent \
     schemas=F1 \

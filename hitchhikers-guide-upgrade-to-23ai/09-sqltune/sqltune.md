@@ -271,7 +271,7 @@ In this lab, you will implement some of the recommendations. Namely, those about
 
 3. Examine the SQL Performance Analyzer report based on *ELAPSED\_TIME*.
 
-    ``` shell
+    ``` bash
     <copy>
     firefox $(ls -t compare_spa_runs*html | head -1) &
     </copy>

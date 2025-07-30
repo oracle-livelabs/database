@@ -28,7 +28,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 
 1. Use the *yellow* terminal 🟨. Set the environment to the *UPGR* database and check the AutoUpgrade version.
 
-    ``` shell
+    ``` bash
     <copy>
     . upgr
     cd
@@ -61,7 +61,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 
 2. To show the many capabilities of AutoUpgrade, create a sample config file. Examine the file to get an idea of the many options in AutoUpgrade. In this lab, you will not use the sample config file.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -create_sample_file config
     more sample_config.cfg
@@ -183,7 +183,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 
 3. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-05-UPGR.cfg
     </copy>
@@ -221,7 +221,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
 1. Start AutoUpgrade in *analyze* mode. The check usually completes very fast. Wait for it to complete.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-05-UPGR.cfg -mode analyze
     </copy>
@@ -254,7 +254,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
 2. AutoUpgrade prints the path to the summary report. Check it.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
@@ -292,7 +292,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
 3. Check the summary report in HTML format. Also, click on *Checks Report* for even more details. Firefox might print warnings to the console. You can safely ignore those.
 
-    ``` shell
+    ``` bash
     <copy>
     firefox /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.html &
     </copy>
@@ -311,7 +311,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 1. Start AutoUpgrade in *deploy* mode to perform the upgrade and conversion. Notice you are re-using the same config file and command, but this time `-mode` is set to `deploy`.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-05-UPGR.cfg -mode deploy
     </copy>
@@ -335,7 +335,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 2. You are now in the AutoUpgrade console. The upgrade job is running in the background. Examine the list of available commands.
 
-    ``` shell
+    ``` bash
     <copy>
     help
     </copy>
@@ -397,7 +397,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 3. Get an overview of the current jobs.
 
-    ``` shell
+    ``` bash
     <copy>
     lsj
     </copy>
@@ -421,7 +421,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 4. Get details about your upgrade job. Use the `status` command. Your job number should be *101*. If that's not the case, replace it with your value.
 
-    ``` shell
+    ``` bash
     <copy>
     status -job 101
     </copy>
@@ -479,7 +479,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 6. Go to the *Logs Base* location.
 
-    ``` shell
+    ``` bash
     <copy>
     cd /home/oracle/logs/autoupgrade-UPGR/UPGR
     ls -l
@@ -505,7 +505,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 7. Explore the directory of your current upgrade job. If your job number is different, you must change it (from `101`).
 
-    ``` shell
+    ``` bash
     <copy>
     cd /home/oracle/logs/autoupgrade-UPGR/UPGR/101
     ls -l
@@ -540,7 +540,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 9. You are still connected to the AutoUpgrade console. Monitor the upgrade using the `status` command. The `-a` parameter instructs AutoUpgrade upgrade to refresh the information at a given interval.
 
-    ``` shell
+    ``` bash
     <copy>
     status -job 101 -a 30
     </copy>

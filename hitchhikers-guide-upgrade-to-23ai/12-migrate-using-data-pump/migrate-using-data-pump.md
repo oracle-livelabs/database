@@ -29,7 +29,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 1. Data Pump needs access to a directory where it can put dump and log file. Create a directory in the file system.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /home/oracle/logs/migrate-using-data-pump
     </copy>
@@ -137,7 +137,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 7. Examine the precreated Data Pump parameter file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-12-migrate-using-data-pump-exp.par
     </copy>
@@ -169,7 +169,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 8. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created.
 
-    ``` shell
+    ``` bash
     <copy>
     expdp expuser/expuser parfile=/home/oracle/scripts/upg-12-migrate-using-data-pump-exp.par
     </copy>
@@ -461,7 +461,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 4. Examine the precreated Data Pump import parameter file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-12-migrate-using-data-pump-imp.par
     </copy>
@@ -490,7 +490,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 5. Start the Data Pump import.
 
-    ``` shell
+    ``` bash
     <copy>
     impdp impuser/impuser@localhost/purple parfile=/home/oracle/scripts/upg-12-migrate-using-data-pump-imp.par
     </copy>

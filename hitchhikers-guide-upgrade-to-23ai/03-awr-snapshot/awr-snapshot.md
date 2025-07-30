@@ -349,7 +349,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
 4. Data Pump has now exported the AWR data to a dump file.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -l /u01/app/oracle/product/19/rdbms/log/awr*
     </copy>
@@ -369,7 +369,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
 5. Examine the Data Pump log file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /u01/app/oracle/product/19/rdbms/log/awrdat*.log
     </copy>

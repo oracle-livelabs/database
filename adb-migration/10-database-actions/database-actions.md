@@ -143,7 +143,7 @@ In this task, we will use the *Performance Hub* to check performance issues on t
 
 2. Keep *Chrome* opened. Move to the *yellow* terminal 🟨 tab. Let's first connect on ADB:
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql sh/oracle@sapphire_tp
@@ -154,7 +154,7 @@ In this task, we will use the *Performance Hub* to check performance issues on t
 
 3. Run a SQL query that is forcing a terrible performance.
 
-    ``` shell
+    ``` bash
     <copy>
     ! cat ~/scripts/adb-10-sh_query.sql
     @~/scripts/adb-10-sh_query.sql

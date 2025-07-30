@@ -173,7 +173,7 @@ This lab assumes:
 
 9. Open the two SPA reports. Put them side-by-side.
 
-    ``` shell
+    ``` bash
     <copy>
     firefox compare_spa_* &
     </copy>
@@ -264,7 +264,7 @@ This lab assumes:
 
 19. Open it with Firefox.
 
-    ``` shell
+    ``` bash
     <copy>
     firefox $(ls -t compare_spa_runs*html | head -1) &
     </copy>

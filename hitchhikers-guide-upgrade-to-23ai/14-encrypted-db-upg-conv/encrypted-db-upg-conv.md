@@ -26,7 +26,7 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
 
 1. Create a directory to hold the database keystore.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /u01/app/oracle/admin/FTEX/wallet/tde
     </copy>
@@ -198,7 +198,7 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
 
 1. Create a directory to hold the database keystore.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /u01/app/oracle/admin/CDB23/wallet/tde
     </copy>
@@ -328,7 +328,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 1. To enable AutoUpgrade to work with encrypted databases, it must have access to a directory where it can store a special keystore just for AutoUpgrade.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /u01/app/oracle/keystore/autoupgrade
     </copy>
@@ -336,7 +336,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 2. In this lab, you will use a pre-created AutoUpgrade config file. Examine the config file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg
     </copy>
@@ -364,7 +364,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 3. Start AutoUpgrade in analyze mode. Wait for it to complete.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -mode analyze
     </copy>
@@ -397,7 +397,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 4. Check the *summary report*.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
@@ -507,7 +507,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 6. Load the database keystore passwords into the AutoUpgrade keystore. Start the password loader.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -load_password
     </copy>
@@ -535,7 +535,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 7. Add the database keystore password for *FTEX*.
 
-    ``` shell
+    ``` bash
     <copy>
     add FTEX
     </copy>
@@ -556,7 +556,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 8. Add the database keystore password for *CDB23*.
 
-    ``` shell
+    ``` bash
     <copy>
     add CDB23
     </copy>
@@ -577,7 +577,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 9. Save the AutoUpgrade keystore and convert it to an auto-login keystore.
 
-    ``` shell
+    ``` bash
     <copy>
     save
     </copy>
@@ -597,7 +597,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 10. Exit the AutoUpgrade password loader.
 
-    ``` shell
+    ``` bash
     <copy>
     exit
     </copy>
@@ -616,7 +616,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 11. Re-analyze the database for upgrade readiness. Now that you added the database keystore passwords to AutoUpgrade, you can re-analyze to see if that meets the requirements. It takes a short while. Wait for it to complete.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -mode analyze
     </copy>
@@ -651,7 +651,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
 12. Check the result in the summary report.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
@@ -694,7 +694,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
 
 1. Start AutoUpgrade in deploy. This starts the upgrade and conversion in one fully automated process.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-14-encrypted-db-upg-conv.cfg -mode deploy
     </copy>
@@ -720,7 +720,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
 
 2. Monitor the progress.
 
-    ``` shell
+    ``` bash
     <copy>
     lsj -a 30
     </copy>

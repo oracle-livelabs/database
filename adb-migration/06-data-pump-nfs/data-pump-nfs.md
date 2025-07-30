@@ -35,7 +35,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 1. Use the *yellow* terminal 🟨. Ensure NFS Server is running.
 
-    ``` shell
+    ``` bash
     <copy>
     cd
 
@@ -57,7 +57,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 2. Mount the NFS share available at server *nfs-server:/exports* on the localhost.
 
-    ``` shell
+    ``` bash
     <copy>
     sudo mkdir -p /nfs_mount
 
@@ -88,7 +88,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 1. Still in the *yellow* 🟨 terminal, connect on the *BLUE* PDB to create a directory.
 
-    ``` shell
+    ``` bash
     <copy>
     . cdb23
     sql sys/oracle@//localhost:1521/blue as sysdba
@@ -99,7 +99,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 2. Create a directory pointing to */nfs_mount*.
 
-    ``` shell
+    ``` bash
     <copy>
     create directory nfs_dir as '/nfs_mount';
     </copy>
@@ -120,7 +120,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 3. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>
@@ -130,7 +130,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 4. Export all the schemas of *BLUE* PDB.
 
-    ``` shell
+    ``` bash
     <copy>
     expdp userid=system/oracle@//localhost:1521/blue \
     schemas=HR,PM,IX,SH,BI \
@@ -331,7 +331,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 5. Verify that the dump file was generated on the NFS folder.
 
-    ``` shell
+    ``` bash
     <copy>
     ls -l /nfs_mount
     </copy>
@@ -359,7 +359,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Still in the *yellow* 🟨 terminal, connect on the *SAPPHIRE* ADB to modify the default profile.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -370,7 +370,7 @@ In this task, we will change the default profile so passwords for imported users
 
 2. Alter the profile.
 
-    ``` shell
+    ``` bash
     <copy>
     alter profile default limit PASSWORD_LIFE_TIME unlimited;
     alter profile default limit PASSWORD_GRACE_TIME unlimited;
@@ -400,7 +400,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Create a directory pointing to *nfs-server:/exports*.
 
-    ``` shell
+    ``` bash
     <copy>
     create directory nfs_dir as 'nfs';
 
@@ -458,7 +458,7 @@ In this task, we will change the default profile so passwords for imported users
 
 2. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>
@@ -470,7 +470,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Still in the *yellow* 🟨 terminal, import all the 5 schemas on *SAPPHIRE* ADB.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
 

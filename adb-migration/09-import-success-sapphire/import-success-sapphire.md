@@ -23,7 +23,7 @@ This lab assumes:
 
 1. Use the *yellow* terminal 🟨. Examine the last lines of a Data Pump import log file.
 
-    ``` shell
+    ``` bash
     <copy>
     tail -1 /nfs_mount/schemas_import_nfs.log
     </copy>
@@ -44,7 +44,7 @@ This lab assumes:
 
 2. In the Data Pump NFS import, we experience an error. What is it about it?
 
-    ``` shell
+    ``` bash
     <copy>
     grep -B 1 -A 2 'ORA-' /nfs_mount/schemas_import_nfs.log
     </copy>
@@ -71,7 +71,7 @@ This lab assumes:
 
 1. You can also compare total rows returned in both import/export logs. This is a good way for tracking overall missing objects and errors.
 
-    ``` shell
+    ``` bash
     <copy>
     grep -w exported /nfs_mount/schemas_export.log | grep -w rows | awk '{print $7,$10}' | sort > /nfs_mount/schemas_export_rows.log
 
@@ -138,7 +138,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 1. Use the *yellow* terminal 🟨. Let's first connect on ADB:
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -149,7 +149,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 2. Create a directory to keep the wallet files.
 
-    ``` shell
+    ``` bash
     <copy>
     create directory ruby_dblink_wallet_dir as 'ruby_dblink_wallet_dir';
     grant execute on dbms_cloud to SH;
@@ -185,7 +185,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 3. Next, let's upload the local wallet files to this directory.
 
-    ``` shell
+    ``` bash
     <copy>
     @~/scripts/adb-07-upload_file.sql /home/oracle/adb_tls_wallet/cwallet.sso RUBY_DBLINK_WALLET_DIR cwallet.sso
     </copy>
@@ -216,7 +216,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 4. Check if file was uploaded.
 
-    ``` shell
+    ``` bash
     <copy>
     select * from dbms_cloud.list_files('ruby_dblink_wallet_dir');
     </copy>
@@ -239,7 +239,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 5. Now connect as SH user. Create the DB link credentials.
 
-    ``` shell
+    ``` bash
     <copy>
     conn sh/oracle@sapphire_tp
 
@@ -279,7 +279,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 6. Create the DB link and test it.
 
-    ``` shell
+    ``` bash
     <copy>
     begin
       dbms_cloud_admin.create_database_link(
@@ -330,7 +330,7 @@ We need to upload the *RED* wallet to ADB directory.
 
 7. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>
@@ -344,7 +344,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 1. Still in the *yellow* 🟨 terminal, connect to the *SAPPHIRE* ADB. This is our target database.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -355,7 +355,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 2. Create a directory to keep the wallet files.
 
-    ``` shell
+    ``` bash
     <copy>
     create directory blue_dblink_wallet_dir as 'blue_dblink_wallet_dir';
     </copy>
@@ -376,7 +376,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 3. Next, let's upload the local wallet files to this directory.
 
-    ``` shell
+    ``` bash
     <copy>
     @~/scripts/adb-07-upload_file.sql /home/oracle/client_tls_wallet/cwallet.sso BLUE_DBLINK_WALLET_DIR cwallet.sso
     </copy>
@@ -407,7 +407,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 4. Check if file was uploaded.
 
-    ``` shell
+    ``` bash
     <copy>
     select * from dbms_cloud.list_files('blue_dblink_wallet_dir');
     </copy>
@@ -430,7 +430,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 5. Create the DB link credentials.
 
-    ``` shell
+    ``` bash
     <copy>
     begin
       dbms_cloud.create_credential(
@@ -465,7 +465,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 6. Create the DB link and test it.
 
-    ``` shell
+    ``` bash
     <copy>
     begin
       dbms_cloud_admin.create_database_link(
@@ -561,7 +561,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
 
 9. Even though total number of tables match, let's compare now the dba_tables:
 
-    ``` shell
+    ``` bash
     <copy>
     ! cat /home/oracle/scripts/adb-09-dba_tables-compare.sql
     @/home/oracle/scripts/adb-09-dba_tables-compare.sql
@@ -649,7 +649,7 @@ When we perform a Data Pump schema export/import, directories are not moved as t
 
     Let's check the directories that needs to be created:
 
-    ``` shell
+    ``` bash
     <copy>
     select grantee,directory_name,directory_path,privilege
     from dba_tab_privs@source_dblink t1, dba_directories@source_dblink t2
@@ -673,7 +673,7 @@ When we perform a Data Pump schema export/import, directories are not moved as t
 
     Create directories and grant permissions to users:
 
-    ``` shell
+    ``` bash
     <copy>
     create directory data_file_dir as 'sample-apps/sales_history';
 
@@ -738,7 +738,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
 1. Let's first check if the objects are really different on ADB:
 
-    ``` shell
+    ``` bash
     <copy>
     select count(*) from sh.sales_transactions_ext;
 
@@ -772,7 +772,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
 2. Now, switch to the *blue* 🟦 terminal. Set the environment to *ADB* and get the DDL for this table.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
 
@@ -909,7 +909,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
 4. Now, switch back to the *yellow* terminal 🟨. Next, let's upload the local external table file, *sale1v3.dat*, to the same directory.
 
-    ``` shell
+    ``` bash
     <copy>
     @~/scripts/adb-07-upload_file.sql /u01/app/oracle/sample-apps/sales_history/sale1v3.dat DATA_FILE_DIR sale1v3.dat
     </copy>
@@ -940,7 +940,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
 5. Check if file was uploaded.
 
-    ``` shell
+    ``` bash
     <copy>
     select * from dbms_cloud.list_files('data_file_dir');
     </copy>
@@ -963,7 +963,7 @@ In ADB Serverless, the syntax to create an external table is different. We must 
 
 6. Now connect as SH user. Create the external table and test it.
 
-    ``` shell
+    ``` bash
     <copy>
     conn sh/oracle@sapphire_tp
 
@@ -1132,7 +1132,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     We need to connect back with ADMIN, as PM user has no *WRITE* privileges under this directory.
 
-    ``` shell
+    ``` bash
     <copy>
     @~/scripts/adb-07-upload_file.sql /u01/app/oracle/sample-apps/product_media/monitor.jpg MEDIA_DIR monitor.jpg
 
@@ -1203,7 +1203,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
 4. Check if table now validates the BFILEs.
 
-    ``` shell
+    ``` bash
     <copy>
     select dbms_lob.fileexists(ad_graphic) from pm.print_media;
     </copy>
@@ -1231,7 +1231,7 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
 5. Now close SQLcl:
 
-    ``` shell
+    ``` bash
     <copy>
     exit;
     </copy>

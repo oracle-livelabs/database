@@ -38,7 +38,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
 
 1. Use the *yellow* terminal 🟨. Unzip CPAT file.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /home/oracle/adbping
 
@@ -98,7 +98,7 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
 
 1. Execute *adbping* for *SAPPHIRE* ADB, via SQL*Plus method.
 
-    ``` shell
+    ``` bash
     <copy>
     . adb
 
@@ -116,7 +116,7 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
     * Connecting to ADB using "SQL*Plus".
     * Opening 10 threads (*-t 10*) in parallel.
 
-    ``` shell
+    ``` bash
     $ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c sqlplus -s sapphire_tp -d 10 -t 10
     +++Test Summary+++
        Test Client: sqlplus
@@ -143,7 +143,7 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
 
     Java connects once and create a connection pool, that saves all the time it takes for the authentication handshake process.
 
-    ``` shell
+    ``` bash
     <copy>
     ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c java -s sapphire_tp -d 10 -t 10
     </copy>
@@ -154,7 +154,7 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
     What we are doing here?
        * Same thing as before, but connecting to ADB using java method.
 
-    ``` shell
+    ``` bash
     $ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c java -s sapphire_tp -d 10 -t 10
     +++Test Summary+++
        Test Client: java
@@ -185,7 +185,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
 
 1. Execute *adbping* for *BLUE* PDB, via SQL*Plus method.
 
-    ``` shell
+    ``` bash
     <copy>
     ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
     </copy>
@@ -200,7 +200,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
     * Opening 2 threads (*-t 2*) in parallel.
       * We only 2 parallel process or we may cause starvation on the local connection resources.
 
-    ``` shell
+    ``` bash
     $ ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
     +++Test Summary+++
        Test Client: sqlplus
@@ -227,7 +227,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
 
     Again, let's now go with *java method*, but now on the local PDB.
 
-    ``` shell
+    ``` bash
     <copy>
     ./adbping -u system -p oracle -w $TNS_ADMIN -c java -s //localhost:1521/blue -d 10 -t 10
     </copy>
@@ -237,7 +237,7 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
 
     What we are doing here? Same thing as before, but connecting to ADB using java method.
 
-    ``` shell
+    ``` bash
     $ ./adbping -u system -p oracle -w $TNS_ADMIN -c java -s //localhost:1521/blue -d 10 -t 10
     +++Test Summary+++
        Test Client: java

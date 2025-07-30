@@ -159,7 +159,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
 1. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-11-ftex-refresh.cfg
     </copy>
@@ -196,7 +196,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
     * The analysis must run on the source system. Since source and target is the same in this lab, you don't need to worry about it.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode analyze
     </copy>
@@ -204,7 +204,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
 3. When AutoUpgrade completes, it prints the path to the summary report. Check the summary report.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
@@ -245,7 +245,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     * Normally, you would do this close to the final refresh (as dictated by `start_time` config file parameter or when you plan to run the *proceed* command). But in this lab we do it now.
     * The fixups must run on the source system. Since source and target is the same in this lab, you don't need to worry about it.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode fixups
     </copy>
@@ -253,7 +253,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
 5. Monitor the fixups.
 
-    ``` shell
+    ``` bash
     <copy>
     lsj -a 10
     </copy>
@@ -304,7 +304,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     * The deploy must run on the target system. Since source and target is the same in this lab, you don't need to worry about it.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode deploy
     </copy>
@@ -327,7 +327,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
 2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward and use the `lsj` command.
 
-    ``` shell
+    ``` bash
     <copy>
 
     lsj -a 10
@@ -404,7 +404,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
 7. Switch to the second terminal. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
 
-    ``` shell
+    ``` bash
     <copy>
     cd /u01/app/oracle/diag/rdbms/cdb23/CDB23/trace
     grep -i -B2 "create pluggable database \"TEAL\"" alert_CDB23.log
@@ -436,7 +436,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
 8. Further, let's see the period refresh.
 
-    ``` shell
+    ``` bash
     <copy>
     grep -i -B2 "refresh" alert_CDB23.log
     </copy>
@@ -501,7 +501,7 @@ When the upgrade starts, is when AutoUpgrade executes a final refresh to bring o
 
 1. Press ENTER just to stop *lsj* from spooling the job status. Next, run the `proceed` command to force the start of upgrade process **now**.
 
-    ``` shell
+    ``` bash
     <copy>
     proceed -job 102
     </copy>

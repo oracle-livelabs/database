@@ -145,7 +145,7 @@ You start by checking the *CDBRES* database.
 
 7. To upgrade this database from 19c to 23ai, we used the *upg-10-cdbres.cfg* config file. Examine config file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-10-cdbres.cfg
     </copy>
@@ -169,7 +169,7 @@ You start by checking the *CDBRES* database.
 
 8. By the config file contents, you can tell the logs are placed on */home/oracle/logs/upg-cdb-flashback*. Check AutoUpgrade the log contents.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
@@ -271,7 +271,7 @@ Suppose your tests find a critical error and you would like to go back to Oracle
 
 1. Check the *oratab* registration.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /etc/oratab | grep CDBRES
     </copy>
@@ -291,7 +291,7 @@ Suppose your tests find a critical error and you would like to go back to Oracle
 
 2. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade.
 
-    ``` shell
+    ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-10-cdbres.cfg -restore -jobs 100
     </copy>
@@ -380,7 +380,7 @@ Suppose your tests find a critical error and you would like to go back to Oracle
 
 7. AutoUpgrade also reverted the *oratab* registration.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /etc/oratab | grep CDBRES
     </copy>
@@ -400,7 +400,7 @@ Suppose your tests find a critical error and you would like to go back to Oracle
 
 8. AutoUpgrade also moved database configuration files back into the original Oracle home.
 
-    ``` shell
+    ``` bash
     <copy>
     ll $ORACLE_HOME/dbs/*CDBRES*
     </copy>

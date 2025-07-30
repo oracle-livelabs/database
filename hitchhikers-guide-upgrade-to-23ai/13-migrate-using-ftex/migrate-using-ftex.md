@@ -29,7 +29,7 @@ You need to prepare a few things before you can start FTEX.
 
 1. Data Pump needs access to a directory where it can put dump and log file. Create a directory in the file system.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /home/oracle/logs/migrate-using-ftex
     </copy>
@@ -191,7 +191,7 @@ You need to prepare a few things before you can start FTEX.
 
 9. Examine the precreated Data Pump parameter file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-13-migrate-using-ftex-exp.par
     </copy>
@@ -222,7 +222,7 @@ You need to prepare a few things before you can start FTEX.
 
 10. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created.
 
-    ``` shell
+    ``` bash
     <copy>
     expdp ftexuser/ftexuser parfile=/home/oracle/scripts/upg-13-migrate-using-ftex-exp.par
     </copy>
@@ -488,7 +488,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 4. Make a directory for *MAROON* data files. Copy the data files from the source database to this directory.
 
-    ``` shell
+    ``` bash
     <copy>
     mkdir -p /u02/oradata/CDB23/MAROON
 
@@ -500,7 +500,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 5. Examine the precreated Data Pump import parameter file.
 
-    ``` shell
+    ``` bash
     <copy>
     cat /home/oracle/scripts/upg-13-migrate-using-ftex-imp.par
     </copy>
@@ -531,7 +531,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 6. Start the Data Pump import.
 
-    ``` shell
+    ``` bash
     <copy>
     impdp ftexuser/ftexuser@localhost/maroon parfile=/home/oracle/scripts/upg-13-migrate-using-ftex-imp.par
     </copy>
