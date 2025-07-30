@@ -2,10 +2,9 @@
 
 ## Introduction
 
-In this lab, you will familiarize with some of the tools used to patch Oracle Database. 
+In this lab, you will familiarize with some of the tools used to patch Oracle Database.
 
 Estimated Time: 10 Minutes
-
 
 ### Objectives
 
@@ -18,50 +17,52 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 1: Initialize Environment
+* You have completed Lab 1: Initialize Environment
 
 This is an optional lab. You can skip it if you are already familiar with patching Oracle Database.
 
 ## Task 1: Use OPatch from shell
 
-You use *OPatch* to perform the first part of patching an Oracle Database; patching the Oracle home. OPatch replaces some files in the Oracle home and might also add new files. If the Oracle home is in use, for instance by a database instance or listener, you must stop those processes. 
+You use *OPatch* to perform the first part of patching an Oracle Database; patching the Oracle home. OPatch replaces some files in the Oracle home and might also add new files. If the Oracle home is in use, for instance by a database instance or listener, you must stop those processes.
 
 1. Use the *blue* 🟦 terminal. Set the environment to *UPGR* and change to the Oracle home.
 
-    ```
+    ``` bash
     <copy>
     . upgr
     cd $ORACLE_HOME
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
 2. You find OPatch in a subdirectory. Check the version of OPatch.
-    
-    ```
+
+    ``` bash
     <copy>
     cd OPatch
     ./opatch version
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ cd OPatch
     $ ./opatch version
     OPatch Version: 12.2.0.1.46
-    
+
     OPatch succeeded.
     ```
-    </details>        
+
+    </details>
 
 3. There are other means of finding the OPatch version.
 
-    ```
+    ``` bash
     <copy>
     cat version.txt
     </copy>
@@ -69,30 +70,33 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ cat version.txt
     OPATCH_VERSION:12.2.0.1.46
     ```
-    </details>  
+
+    </details>
 
 4. Update OPatch by unzipping the OPatch patch file. Keep the old Oracle home as back.
-    
-    ```
+
+    ``` bash
     <copy>
     cd $ORACLE_HOME
     mv OPatch OPatch_backup
     unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
-    * You should always use the latest version of OPatch. 
-    * AutoUpgrade automatically updates OPatch when you use `patch=RECOMMENDED` or includes the `OPATCH` keyword in the the `patch=` specification. 
+    * You should always use the latest version of OPatch.
+    * AutoUpgrade automatically updates OPatch when you use `patch=RECOMMENDED` or includes the `OPATCH` keyword in the the `patch=` specification.
     * You can manually download the latest of OPatch from My Oracle Support. Search for patch *6880880*.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ cd $ORACLE_HOME
     $ mv OPatch OPatch_backup
@@ -106,11 +110,12 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
       inflating: OPatch/modules/com.sun.xml.bind.jaxb-jxc.jar
       inflating: OPatch/modules/javax.activation.javax.activation.jar
     ```
-    </details>    
+
+    </details>
 
 5. Check the new version of OPatch
-    
-    ```
+
+    ``` bash
     <copy>
     $ORACLE_HOME/OPatch/opatch version
     </copy>
@@ -120,17 +125,19 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ $ORACLE_HOME/OPatch/opatch version
     OPatch Version: 12.2.0.1.47
-    
+
     OPatch succeeded.
     ```
-    </details>     
+
+    </details>
 
 6. Check the patches currently installed.
 
-    ```
+    ``` bash
     <copy>
     $ORACLE_HOME/OPatch/opatch lspatches
     </copy>
@@ -142,43 +149,37 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ $ORACLE_HOME/OPatch/opatch lspatches
     37777295;DATAPUMP BUNDLE PATCH 19.27.0.0.0
     37499406;OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
     37642901;Database Release Update : 19.27.0.0.250415 (37642901)
     29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
-    
+
     OPatch succeeded.
     ```
-    </details>   
+
+    </details>
 
 7. Get detailed information about the patches in the Oracle home.
 
-    ```
+    ``` bash
     <copy>
     cd $ORACLE_HOME
     OPatch/opatch lsinventory > opatch_lsinventory.txt
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     * You spool the contents to a file.
     * If you create a service request in My Oracle Support, it is often a good idea to attach the file.
     * The file is mandatory in many cases, e.g., when requesting a merge patch or backport.
 
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ cd $ORACLE_HOME
-    $ OPatch/opatch lsinventory > opatch_lsinventory.txt
-    ```
-    </details>  
-
 8. Examine the contents of the file.
 
-    ```
+    ``` bash
     <copy>
     more opatch_lsinventory.txt
     </copy>
@@ -188,34 +189,35 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ more opatch_lsinventory.txt
     Oracle Interim Patch Installer version 12.2.0.1.47
     Copyright (c) 2025, Oracle Corporation.  All rights reserved.
-    
-    
+
+
     Oracle Home       : /u01/app/oracle/product/19
     Central Inventory : /u01/app/oraInventory
        from           : /u01/app/oracle/product/19/oraInst.loc
     OPatch version    : 12.2.0.1.47
     OUI version       : 12.2.0.7.0
     Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2025-07-26_06-03-27AM_1.log
-    
+
     Lsinventory Output file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/lsinv/lsinventory2025-07-26_06-03-27AM.txt
     --------------------------------------------------------------------------------
     Local Machine Information::
     Hostname: doverbyh-newhol-04.sub02121342350.daniel.oraclevcn.com
     ARU platform id: 226
     ARU platform description:: Linux x86-64
-    
+
     Installed Top-level Products (1):
-    
+
     Oracle Database 19c                                                  19.0.0.0.0
     There are 1 products installed in this Oracle Home.
-    
-    
+
+
     Interim patches (4) :
-    
+
     Patch  37777295     : applied on Thu Jul 24 10:49:34 GMT 2025
     Unique Patch ID:  27238855
     Patch description:  "DATAPUMP BUNDLE PATCH 19.27.0.0.0"
@@ -224,19 +226,20 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
          11845132, 20656226, 21664172, 23625458, 24338134, 24794088, 25143018
 
     ....
-    (output truncated)         
+    (output truncated)
     ....
 
          29380527, 29381000, 29382296, 29391301, 29393649, 29402110, 29411931
          29413360, 29457319, 29465047, 3
-    
-    
-    
+
+
+
     --------------------------------------------------------------------------------
-    
+
     OPatch succeeded.
     ```
-    </details>      
+
+    </details>
 
 ## Task 2: Use OPatch inside the database
 
@@ -244,7 +247,7 @@ You can use the *queryable inventory* inside the database to get information fro
 
 1. Remain in the *blue* 🟦 terminal. Connect to the *UPGR* database.
 
-     ```
+     ``` sql
     <copy>
     . upgr
     sqlplus / as sysdba
@@ -255,10 +258,10 @@ You can use the *queryable inventory* inside the database to get information fro
 
 2. Get information about Oracle home.
 
-     ```
+     ``` sql
     <copy>
     set long 1000000
-    set pagesize 0
+    set pagesize 30
     select xmltransform(dbms_qopatch.get_opatch_install_info, dbms_qopatch.get_opatch_xslt) as install_info from dual;
     </copy>
 
@@ -267,21 +270,22 @@ You can use the *queryable inventory* inside the database to get information fro
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
-    SQL> set long 1000000
-    SQL> set pagesize 0
     SQL> select xmltransform(dbms_qopatch.get_opatch_install_info, dbms_qopatch.get_opatch_xslt) as install_info from dual;
+
     INSTALL_INFO
     ------------------------------------------
-    
+
     Oracle Home   : /u01/app/oracle/product/19
     Inventory     : /u01/app/oraInventory
     ```
-    </details>       
+
+    </details>
 
 3. See if a patch is installed.
 
-    ```
+    ``` sql
     <copy>
     set pagesize 30
     select xmltransform(dbms_qopatch.is_patch_installed('37642901'), dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
@@ -294,58 +298,61 @@ You can use the *queryable inventory* inside the database to get information fro
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select xmltransform(dbms_qopatch.is_patch_installed('37642901'), dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
-    
+
     Patch installed?
     --------------------------------------------------------------------------------
-        
+
     Patch Information:
              37642901:   applied on 2025-07-24T10:42:18Z
     ```
-    </details>    
+
+    </details>
 
 4. Get the output of `opatch lsinventory` and find the patches installed.
 
-    ```
+    ``` sql
     <copy>
-    col description format a60
+    col description format a65
     set line 100
-    with inv as (select dbms_qopatch.get_opatch_lsinventory output from dual) 
-    select patches.patch_id, patches.patch_unique_id, patches.description 
-    from inv, 
+    with inv as (select dbms_qopatch.get_opatch_lsinventory output from dual)
+    select patches.patch_id, patches.patch_unique_id, patches.description
+    from inv,
          xmltable('InventoryInstance/patches/*' passing inv.output columns patch_id number path 'patchID', patch_unique_id number path 'uniquePatchID', description varchar2(80) path 'patchDescription') patches;
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-    * The output is a very detailed XML document. 
+    * The output is a very detailed XML document.
     * You can extract the information of interest.
     * Here you are extracting the patches installed.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
-    SQL> col description format a60
-    SQL> set line 100
-    SQL> with inv as (select dbms_qopatch.get_opatch_lsinventory output from dual) 
-    select patches.patch_id, patches.patch_unique_id, patches.description 
-    from inv, 
+    SQL> with inv as (select dbms_qopatch.get_opatch_lsinventory output from dual)
+    select patches.patch_id, patches.patch_unique_id, patches.description
+    from inv,
          xmltable('InventoryInstance/patches/*' passing inv.output columns patch_id number path 'patchID', patch_unique_id number path 'uniquePatchID', description varchar2(80) path 'patchDescription') patches;
 
       PATCH_ID PATCH_UNIQUE_ID DESCRIPTION
-    ---------- --------------- ------------------------------------------------------------
+    ---------- --------------- -----------------------------------------------------------------
+      37738908        27644118 SEPARATE PURGE_OLD_METADATA FROM PATCHING ACTIVITY IN DATAPATCH
       37777295        27238855 DATAPUMP BUNDLE PATCH 19.27.0.0.0
       37499406        26115603 OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
       37642901        27123174 Database Release Update : 19.27.0.0.250415 (37642901)
-      29585399        22840393 OCW RELEASE UPDATE 19.3.0.0.0 (29585399)     
+      29585399        22840393 OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
     ```
-    </details>    
+
+    </details>
 
 5. Exit SQL*Plus.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -353,31 +360,33 @@ You can use the *queryable inventory* inside the database to get information fro
 
 ## Task 3: Use Datapatch
 
-Datapatch applies or rolls back SQL changes to the database. 
+Datapatch applies or rolls back SQL changes to the database.
 
-1. Remain in the *blue* 🟦 terminal. You find Datapatch in the *OPatch* directory. 
-    
-    ```
+1. Remain in the *blue* 🟦 terminal. You find Datapatch in the *OPatch* directory.
+
+    ``` bash
     <copy>
     cd $ORACLE_HOME/OPatch
     ls -l datapatch
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ cd $ORACLE_HOME/OPatch
     $ ls -l datapatch
     -rwxr-x---. 1 oracle oinstall 589 Oct  4 18:43 datapatch
     ```
-    </details>    
+
+    </details>
 
 2. Check the version of Datapatch.
 
-    ```
+    ``` bash
     <copy>
     ./datapatch -version
     </copy>
@@ -387,42 +396,45 @@ Datapatch applies or rolls back SQL changes to the database.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ ./datapatch -version
     SQL Patching tool version 19.27.0.0.0 Production on Sat Jul 26 06:15:19 2025
     Copyright (c) 2012, 2025, Oracle.  All rights reserved.
-    
+
     Build label: RDBMS_19.27.0.0.0DBRU_LINUX.X64_250405
     SQL Patching tool complete on Sat Jul 26 06:15:19 2025
     ```
-    </details>  
+
+    </details>
 
 3. Run the prerequisites check.
 
-    ```
+    ``` bash
     <copy>
     ./datapatch -prereq
     </copy>
     ```
 
     * Datapatch works on one database only.
-    * This check is non-instrusive. It examines your database and checks if Datapatch needs to install patches.
+    * This check is non-intrusive. It examines your database and checks if Datapatch needs to install patches.
     * Datapatch reports that no patches need to be applied.
     * If you need to work on two databases at the same time, you would need to start another terminal, set the environment accordingly, and execute Datapatch.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ ./datapatch -prereq
     SQL Patching tool version 19.27.0.0.0 Production on Sat Jul 26 06:15:44 2025
     Copyright (c) 2012, 2025, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_166073_2025_07_26_06_15_44/sqlpatch_invocation.log
-    
+
     Connecting to database...OK
     Gathering database info...done
     Determining current state...done
-    
+
     Current state of interim SQL patches:
     Interim patch 36878697 (OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)):
       Binary registry: Not installed
@@ -442,46 +454,48 @@ Datapatch applies or rolls back SQL changes to the database.
     Interim patch 37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0):
       Binary registry: Installed
       SQL registry: Applied successfully on 24-JUL-25 10.52.04.139464 AM
-    
+
     Current state of release update SQL patches:
       Binary registry:
         19.27.0.0.0 Release_Update 250406131139: Installed
       SQL registry:
         Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 10.51.34.382883 AM
-    
+
     Adding patches to installation queue and performing prereq checks...done
     Installation queue:
       No interim patches need to be rolled back
       No release update patches need to be installed
       No interim patches need to be applied
-    
+
     SQL Patching tool complete on Sat Jul 26 06:16:11 2025
     ```
-    </details>  
+
+    </details>
 
 4. Run Datapatch Sanity Checks.
 
-    ```
+    ``` bash
     <copy>
     ./datapatch -sanity_checks
     </copy>
     ```
 
-    * The sanity checks are lightweight and non-instrusive. You can run it on a live database.
+    * The sanity checks are lightweight and non-intrusive. You can run it on a live database.
     * It examines your database for issues that are known to cause problems during patching.
-    
+
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL Patching sanity checks version 19.27.0.0.0 on Sat 26 Jul 2025 06:29:45 AM GMT
     Copyright (c) 2021, 2025, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sanity_checks_20250726_062945_168019/sanity_checks_20250726_062945_168019.log
-    
+
     Running checks
     JSON report generated in /u01/app/oracle/cfgtoollogs/sqlpatch/sanity_checks_20250726_062945_168019/sqlpatch_sanity_checks_summary.json file
     Checks completed. Printing report:
-    
+
     Check: Database component status - OK
     Check: PDB Violations - OK
     Check: Invalid System Objects - OK
@@ -532,17 +546,18 @@ Datapatch applies or rolls back SQL changes to the database.
     Check: Imperva processes - OK
     Check: Guardium processes - OK
     Check: Locale - OK
-    
+
     Refer to MOS Note 2975965.1 and debug log
     /u01/app/oracle/cfgtoollogs/sqlpatch/sanity_checks_20250726_062945_168019/sanity_checks_debug_20250726_062945_168019.log
-    
+
     SQL Patching sanity checks completed on Sat 26 Jul 2025 06:30:23 AM GMT
     ```
-    </details>   
+
+    </details>
 
 5. Connect to the *UPGR* database.
 
-     ```
+     ``` bash
     <copy>
     sqlplus / as sysdba
     </copy>
@@ -550,7 +565,7 @@ Datapatch applies or rolls back SQL changes to the database.
 
 6. Examine the Datapatch actions.
 
-    ```
+    ``` sql
     <copy>
     col action format a8
     col description format a80
@@ -574,6 +589,7 @@ Datapatch applies or rolls back SQL changes to the database.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> col action format a8
     SQL> col description format a80
@@ -587,23 +603,24 @@ Datapatch applies or rolls back SQL changes to the database.
          from dba_registry_sqlpatch
          order by action_time;
 
-    EVENT_DATE PATCH_ID   PATCH_TYPE ACTION   DESCRIPTION
-    ---------- ---------- ---------- -------- -----------------------------------------------------
-    2025-07-24   36878697 INTERIM	 APPLY    OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    2025-07-24   36912597 RU         APPLY    Database Release Update : 19.25.0.0.241015 (36912597)
-    2025-07-24   37056207 INTERIM	 APPLY    DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    2025-07-24   36878697 INTERIM	 ROLLBACK OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    2025-07-24   37102264 INTERIM	 APPLY    OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
-    2025-07-24   37056207 INTERIM	 ROLLBACK DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    2025-07-24   37260974 RU         APPLY    Database Release Update : 19.26.0.0.250121 (37260974)
-    2025-07-24   37470729 INTERIM	 APPLY    DATAPUMP BUNDLE PATCH 19.26.0.0.0
-    2025-07-24   37102264 INTERIM	 ROLLBACK OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
-    2025-07-24   37499406 INTERIM	 APPLY    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
-    2025-07-24   37470729 INTERIM	 ROLLBACK DATAPUMP BUNDLE PATCH 19.26.0.0.0
-    2025-07-24   37642901 RU         APPLY    Database Release Update : 19.27.0.0.250415 (37642901)
-    2025-07-24   37777295 INTERIM	 APPLY    DATAPUMP BUNDLE PATCH 19.27.0.0.0
+    EVENT_DATE   PATCH_ID PATCH_TYPE ACTION   DESCRIPTION
+    ---------- ---------- ---------- -------- --------------------------------------------------------------------------------
+    2025-07-28   36878697 INTERIM    APPLY    OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
+    2025-07-28   36912597 RU         APPLY    Database Release Update : 19.25.0.0.241015 (36912597)
+    2025-07-28   37056207 INTERIM    APPLY    DATAPUMP BUNDLE PATCH 19.25.0.0.0
+    2025-07-29   36878697 INTERIM    ROLLBACK OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
+    2025-07-29   37102264 INTERIM    APPLY    OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
+    2025-07-29   37056207 INTERIM    ROLLBACK DATAPUMP BUNDLE PATCH 19.25.0.0.0
+    2025-07-29   37260974 RU         APPLY    Database Release Update : 19.26.0.0.250121 (37260974)
+    2025-07-29   37470729 INTERIM    APPLY    DATAPUMP BUNDLE PATCH 19.26.0.0.0
+    2025-07-29   37102264 INTERIM    ROLLBACK OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
+    2025-07-29   37499406 INTERIM    APPLY    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+    2025-07-29   37470729 INTERIM    ROLLBACK DATAPUMP BUNDLE PATCH 19.26.0.0.0
+    2025-07-29   37642901 RU         APPLY    Database Release Update : 19.27.0.0.250415 (37642901)
+    2025-07-29   37777295 INTERIM    APPLY    DATAPUMP BUNDLE PATCH 19.27.0.0.0
     ```
-    </details>       
+
+    </details>
 
 ## Task 4: Useful queries
 
@@ -611,7 +628,7 @@ Here are a few useful queries that informs about the database.
 
 1. Still connected to the *UPGR* database. Get the Oracle home of the database.
 
-    ```
+    ``` sql
     <copy>
     col oracle_home format a60
     select sys_context('USERENV','ORACLE_HOME') as oracle_home from dual;
@@ -622,6 +639,7 @@ Here are a few useful queries that informs about the database.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> col oracle_home format a60
     SQL> select sys_context('USERENV','ORACLE_HOME') as oracle_home from dual;
@@ -630,11 +648,12 @@ Here are a few useful queries that informs about the database.
     ------------------------------------------------------------
     /u01/app/oracle/product/19
     ```
-    </details>     
+
+    </details>
 
 2. Get the full version of the database.
 
-    ```
+    ``` sql
     <copy>
     select version_full from v$instance;
     </copy>
@@ -642,6 +661,7 @@ Here are a few useful queries that informs about the database.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select version_full from v$instance;
 
@@ -649,15 +669,16 @@ Here are a few useful queries that informs about the database.
     -----------------
     19.27.0.0.0
     ```
-    </details>     
+
+    </details>
 
 3. List the components installed in the database.
 
-    ```
+    ``` sql
     <copy>
     col comp_id format a10
     col version_full format a15
-    col status format a15    
+    col status format a15
     select comp_id,
            version_full,
            status
@@ -670,6 +691,7 @@ Here are a few useful queries that informs about the database.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> col comp_id format a10
     SQL> col version_full format a15
@@ -688,15 +710,16 @@ Here are a few useful queries that informs about the database.
     RAC        19.27.0.0.0     OPTION OFF
     XDB        19.27.0.0.0     VALID
     ```
-    </details>    
+
+    </details>
 
 4. Exit SQL*Plus.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
 ## Task 5: Check AutoUpgrade
 
@@ -704,13 +727,13 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
 
 1. Check the version of AutoUpgrade.
 
-    ```
+    ``` bash
     <copy>
     cd
     java -jar autoupgrade.jar -version
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     * *MOS_LINK* contains the URL to the My Oracle Support document where you can download the latest version of AutoUpgrade.
@@ -719,6 +742,7 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     $ cd
     $ java -jar autoupgrade.jar -version
@@ -732,9 +756,10 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
     build.MOS_NOTE 2485457.1
     build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```
-    </details>   
 
-You may now *proceed to the next lab*. Return to *lab 2* if you didn't finish it.
+    </details>
+
+You may now [*proceed to the next lab*](#next). Return to *lab 2* if you didn't finish it.
 
 ## Acknowledgements
 
