@@ -42,32 +42,29 @@ In this lab, you will:
 
 3. Click the navigation menu in the upper left to show top-level navigation choices.
 
-4. Click on **Oracle Database** and choose **Autonomous JSON Database**.
+4. Click on **Oracle Database** and choose **Autonomous Database**.
 
-    ![Click Autonomous JSON Database](./images/adb-json.png " ")
+    ![Click Autonomous JSON Database](./images/oracle-cloud-adb.png " ")
 
-5. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous JSON Database in Lab 2. Make sure your workload type is __JSON Database__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
+5. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous JSON Database in Lab 2.  <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 
     ![Check the workload type on the left.](images/livelabs-compartment.png " ")
 
-</if>
-<if type="freetier">
-    ![Check the workload type on the left.](./images/compartments.png " ")
-</if>
-    ![Check the workload type on the left](./images/workload-type.png " ")
 
-<if type="freetier">
-   > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
-</if>
+    <if type="freetier">
+        > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+    </if>
 
 6. You should see your database **JSONDB** listed in the center. Click on the database name "JSONDB".
 
     ![Choose database name](./images/database-name.png " ")
 
 
-7.  On the database page, choose __Database Actions__.
+7.  On the database page, choose SQL under __Database Actions__.
 
     ![Choose dbactions button](./images/dbactions-button.png " ")
+
+    Depending on your machine's preference, the following dialogs might be in white or dark system theme.
 
 8.  You are now in Database Actions.
 
@@ -82,9 +79,9 @@ In this lab, you will:
 
 ## Task 2: JSON in Database Actions
 
-1. You should be in the Database Actions panel. Click on the **JSON** card
+1. You should be in the Database Actions panel. Click on the **JSON** under the development tools tab
 
-    ![dbactions menu - choose json](./images/dbactions-menu-json.png " ")
+    ![dbactions menu - choose json](./images/homepage-json.png " ")
 
     When you first enter JSON, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button.
 
@@ -183,7 +180,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
     Now we want to open SQL. Click on the SQL panel in Database Actions
 
-    ![dbactions menu sql](./images/dbactions-menu-sql.png " ")
+    ![dbactions menu sql](./images/homepage-sql.png " ")
 
 2.  Examine the EMP table
 
@@ -320,7 +317,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
     ![dbactions button 2](./images/dbactions-button-2.png " ")
 
-    ![dbactions menu charts](./images/dbactions-menu-charts.png " ")
+    ![dbactions menu charts](./images/homepage-charts.png " ")
 
     As usual, the first time you enter Charts you will see a tutorial. You can step through it or skip it for now.
 
@@ -359,4 +356,4 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
 - **Author** - Roger Ford, Principal Product Manager
 - **Contributors** - Kamryn Vinson, Andres Quintana
-- **Last Updated By/Date** - Roger Ford, March 2022
+- **Last Updated By/Date** - Hermann Baer, July 2025
