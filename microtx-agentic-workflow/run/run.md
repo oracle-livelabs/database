@@ -59,7 +59,6 @@ This lab assumes you have:
     A notification is sent on Slack to approve the loan as shown in the following figure.
     ![Approve loan notification on Slack](images/slack-notification.png)
 
-
 ## Task 2: Approve the Loan Request
 
 1. In the other browser tab where the Workflow UI is running, click **Workflow Notifications**.
@@ -87,6 +86,8 @@ This lab assumes you have:
 
 9. Click **human_approval_task**, and then click the **Output** tab to view the output as shown in the following image.
     ![alt text](images/workflow-output.png)
+
+    A notification is also sent on Slack when the loan is approved.
 
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer

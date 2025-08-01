@@ -20,9 +20,9 @@ This lab assumes you have:
 
 ## Task 1: Create an API Key to Access OpenAI
 
-1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create).
+1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create). Use the default settings to create the API key.
 
-2. Copy the name and value of the created key and save it safely. You will need to provide this information later. You won't be able to view the key again in your OpenAI account for security reasons. You will need to provide this information later.
+2. Copy the name and value of the created key and save it safely. You will need to provide this information later.
 
 ## Task 2: Create a Webhook in Slack
 
@@ -36,7 +36,7 @@ Create webhook to send notifications about the loan approval request to a Slack 
 
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
-2. From your remote desktop session as user *oracle*, run the following commands to start all the services.
+2. From your remote desktop session as an *oracle* user, run the following commands to start all the services.
 
     ```
     <copy>
@@ -94,8 +94,6 @@ Create webhook to send notifications about the loan approval request to a Slack 
    The changes that you have made are highlighted.
 
 6. View the changes, and then click **Save** to save the changes.
-
-
 
 You may now [proceed to the next lab](#next).
 
