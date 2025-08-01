@@ -145,7 +145,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     * Currently, the Oracle home on Release Update 19.27.0.
     * The OJVM and Data Pump bundle patches are installed as well.
-    * You can ignore the OCW Release Update.
+    * You can see that the OCW component in the Oracle home has not been updated. It's still on the base release, *19.3.0.0.0*. Oracle requires that the OCW component is updated only when you use Oracle RAC or Oracle Restart, which is not the case in this lab. Nevertheless, it is a good idea to always update the component. You'll see how you can do that in another lab using the `OCW` keyword in the `patch` parameter.
 
     <details>
     <summary>*click to see the output*</summary>

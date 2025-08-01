@@ -39,7 +39,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     * `source_home` and `sid` describe the current database.
     * `target_home` is the location of the new Oracle home. It doesn't exist yet. AutoUpgrade creates it for you. AutoUpgrade uses the settings from the source Oracle home to create the new one.
     * `folder` is the location where AutoUpgrade can find and store patch files. Ideally, this location is a network share accessible to all your database hosts.
-    * `patch` informs AutoUpgrade which patches you want to apply. `RECOMMENDED` means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches.
+    * `patch` informs AutoUpgrade which patches you want to apply. `RECOMMENDED` means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches. In addition, you're adding a one-off patch.
     * `download` tells whether AutoUpgrade should attempt to download the patches from My Oracle Support using your My Oracle Support credentials. This is not possible inside this lab environment, so all patches have been pre-downloaded.
 
     <details>
@@ -52,7 +52,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     patch1.target_home=/u01/app/oracle/product/19_28
     patch1.sid=FTEX
     patch1.folder=/home/oracle/patch-repo
-    patch1.patch=RECOMMENDED
+    patch1.patch=RECOMMENDED,37738908
     patch1.download=no
     ```
 
@@ -362,6 +362,7 @@ Patching a single instance Oracle Database require downtime.
     /home/oracle/patch-repo/p38170982_1928000DBRU_Generic_dpbp1928.zip - DATAPUMP BUNDLE PATCH 19.28.0.0.0
     /home/oracle/patch-repo/p37847857_190000_Linux-x86-64_ojvm1928.zip - OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
     /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip - OPatch - 12.2.0.1.47
+    /home/oracle/patch-repo/p37738908_1928000DBRU_Generic.zip - SEPARATE PURGE_OLD_METADATA FROM PATCHING ACTIVITY IN DATAPATCH
     2025-07-26 05:54:10.386 INFO Guarantee Restore Point (GRP) successfully removed [FTEX][AU_PATCHING_9212_FTEX1927000]
     2025-07-26 05:54:11.468 INFO Guarantee Restore Point (GRP) successfully created [FTEX][AU_PATCHING_9212_FTEX1927000]
     2025-07-26 05:54:11.530 INFO No user defined actions were specified

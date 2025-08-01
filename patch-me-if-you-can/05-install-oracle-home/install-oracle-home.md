@@ -39,7 +39,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     * `source_home` is an existing Oracle home that you will use as a template to install the new Oracle home. AutoUpgrade installs the new Oracle home using the same settings as this Oracle home.
     * `target_home` is where you want to install the new Oracle home.
     * `folder` is the location where AutoUpgrade can find and store patch files. Ideally, this location is a network share accessible to all your database hosts.
-    * `patch` informs AutoUpgrade which patches you want to apply. *RECOMMENDED* means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches. *OCW* updates the OCW component in the Oracle home. In addition, you are also installing a one-off patch, *29213893*.
+    * `patch` informs AutoUpgrade which patches you want to apply. You can specify a specific Release Update using the *RU* keyword with the Release Update specified after the colon. The keywords *OPATCH*, *OJVM* and *DPBP* installs the lastest version of OPatch and the OJVM and Data Pump bundle patches. *OCW* updates the OCW component in the Oracle home. In addition, you are also installing a one-off patch, *29213893*.
     * `download` tells whether AutoUpgrade should attempt to download the patches from My Oracle Support using your My Oracle Support credentials. This is not possible inside this lab environment, so all patches have been pre-downloaded.
 
     <details>
@@ -51,7 +51,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     patch1.source_home=/u01/app/oracle/product/19
     patch1.target_home=/u01/app/oracle/product/19_28_au
     patch1.folder=/home/oracle/patch-repo
-    patch1.patch=RECOMMENDED,OCW,29213893
+    patch1.patch=RU:19.28,OPATCH,OJVM,DPBP,OCW,29213893
     patch1.download=no
     ```
 
@@ -402,8 +402,8 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     # Be sure to hit RETURN
     ```
 
-    * Because the config file contained `patch=RECOMMENDED` AutoUpgrade installed the recent-most Release Update and matching OPatch and bundle patches.
-    * The config file also specified a one-off patches, which AutoUpgrade installed as well.
+    * AutoUpgrade installed the Release Update you specified including the other patches. 
+    * Notice how the OCW component has been updated as well. It is now on *19.28.0.0.0*. 
 
     <details>
     <summary>*click to see the output*</summary>

@@ -90,7 +90,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     </copy>
     ```
 
-    * Note that if it was a RAC, it would be possible to patch it online using the *RAC Rolling* method.
+    * You must shut down a single instance database to patch it. In contrast, if it was an Oracle RAC Database, you could patch it using the *RAC Rolling* method without downtime.
 
 6. Exit SQL*Plus.
 
@@ -170,10 +170,10 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     ORACLE instance started.
 
     Total System Global Area 4294966064 bytes
-    Fixed Size		    9186096 bytes
-    Variable Size		  838860800 bytes
-    Database Buffers	 3439329280 bytes
-    Redo Buffers		    7589888 bytes
+    Fixed Size                  9186096 bytes
+    Variable Size             838860800 bytes
+    Database Buffers         3439329280 bytes
+    Redo Buffers                7589888 bytes
     Database mounted.
     Database opened.
     SQL> show pdbs
@@ -561,7 +561,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     </details>
 
-You may now [*proceed to the next lab*](#next). Return to *lab 5* if you didn't finish it.
+You may now [*proceed to the next lab*](#next).
 
 ## Acknowledgements
 
