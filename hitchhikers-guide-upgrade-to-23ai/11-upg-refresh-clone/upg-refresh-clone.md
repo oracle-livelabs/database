@@ -490,7 +490,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     -- Be sure to hit RETURN
     ```
 
-    * AutoUpgrade will start shirtly.
+    * AutoUpgrade will start shortly.
     * You can also specify a new start time using *proceed -job <#> -newStartTime [dd/mm/yyyy hh:mm:ss, +<#>h<#>m]*.
 
     <details>
