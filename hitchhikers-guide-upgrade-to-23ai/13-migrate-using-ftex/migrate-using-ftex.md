@@ -235,7 +235,7 @@ You need to prepare a few things before you can start FTEX.
 
     ``` text
     Export: Release 19.0.0.0.0 - Production on Wed May 29 13:31:09 2024
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 

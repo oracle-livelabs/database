@@ -420,7 +420,7 @@ Analyze the *FTEX* database for upgrade readiness.
     [Job ID] 100
     ==========================================
     [DB Name]                FTEX
-    [Version Before Upgrade] 19.21.0.0.0
+    [Version Before Upgrade] 19.27.0.0.0
     [Version After Upgrade]  23.9.0.25.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
@@ -673,7 +673,7 @@ Analyze the *FTEX* database for upgrade readiness.
     [Job ID] 101
     ==========================================
     [DB Name]                FTEX
-    [Version Before Upgrade] 19.21.0.0.0
+    [Version Before Upgrade] 19.27.0.0.0
     [Version After Upgrade]  23.9.0.25.07
     ------------------------------------------
     [Stage Name]    PRECHECKS

@@ -180,7 +180,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     ``` text
     Export: Release 19.0.0.0.0 - Production on Tue May 28 03:23:45 2024
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 

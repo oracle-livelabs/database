@@ -302,7 +302,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ![The Checks Report shows many details about the database](./images/autoupgrade-checks-report.png " ")
 
     * Examine the Checks Report.
-    * Notice how a specific check has severity *RECOMMENDED*, but AutoUpgrade has a fixup available.
+    * Notice how a specific check has severity *ERROR*, but AutoUpgrade has a fixup available.
     * Then close Firefox.
 
 ## Task 3: Upgrade your database
