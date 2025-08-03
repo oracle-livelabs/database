@@ -374,7 +374,7 @@ Analyze the *FTEX* database for upgrade readiness.
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -626,7 +626,7 @@ Analyze the *FTEX* database for upgrade readiness.
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded
@@ -704,7 +704,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded

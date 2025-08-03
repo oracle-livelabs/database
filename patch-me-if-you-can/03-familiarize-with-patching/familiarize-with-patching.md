@@ -746,13 +746,13 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
     ``` text
     $ cd
     $ java -jar autoupgrade.jar -version
-    build.version 25.3.250509
-    build.date 2025/05/09 02:53:51 +0000
-    build.hash 3110a3d32
-    build.hash_date 2025/05/05 19:43:04 +0000
+    build.version 25.4.250730
+    build.date 2025/07/30 16:33:06 +0000
+    build.hash d12ffb74e
+    build.hash_date 2025/07/24 14:59:09 +0000
     build.supported_target_versions 12.2,18,19,21,23
     build.type production
-    build.label (HEAD, tag: v25.3, origin/stable_devel, stable_devel)
+    build.label (HEAD, tag: v25.4, origin/stable_devel, stable_devel)
     build.MOS_NOTE 2485457.1
     build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```

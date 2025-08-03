@@ -71,7 +71,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     ``` text
     $ java -jar autoupgrade.jar -config scripts/pt-02-simple-patching.cfg -patch -mode analyze
-    AutoUpgrade Patching 25.3.250509 launched with default internal options
+    AutoUpgrade Patching 25.4.250730 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -183,7 +183,7 @@ Patching a single instance Oracle Database require downtime.
 
     ``` text
     $ java -jar autoupgrade.jar -config scripts/pt-02-simple-patching.cfg -patch -mode deploy
-    AutoUpgrade Patching 25.3.250509 launched with default internal options
+    AutoUpgrade Patching 25.4.250730 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -347,14 +347,14 @@ Patching a single instance Oracle Database require downtime.
     2025-07-26 05:54:09.876 INFO
     build.MOS_LINK:https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     build.MOS_NOTE:2485457.1
-    build.date:2025/05/09 02:53:15 +0000
-    build.hash:3110a3d32
-    build.hash_date:2025/05/05 19:43:04 +0000
-    build.label:(HEAD, tag: v25.3, origin/stable_devel, stable_devel)
+    build.date 2025/07/30 16:33:06 +0000
+    build.hash:d12ffb74e
+    build.hash_date 2025/07/24 14:59:09 +0000
+    build.label:(HEAD, tag: v25.4, origin/stable_devel, stable_devel)
     build.max_target_version:19
     build.supported_target_versions:19
     build.type:production
-    build.version:25.3.250509
+    build.version:25.4.250730
 
     2025-07-26 05:54:09.877 INFO The following patches will be used for this job:
     /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip - Base Image - 19

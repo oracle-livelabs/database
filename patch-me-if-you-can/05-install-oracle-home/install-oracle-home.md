@@ -72,7 +72,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
 
     ``` text
     $ java -jar autoupgrade.jar -config scripts/pt-05-install-oracle-home.cfg -patch -mode create_home
-    AutoUpgrade Patching 25.3.250509 launched with default internal options
+    AutoUpgrade Patching 25.4.250730 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
