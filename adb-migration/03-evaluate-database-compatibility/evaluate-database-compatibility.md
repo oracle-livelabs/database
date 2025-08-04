@@ -680,21 +680,47 @@ By specifying the migration method, you can create a CPAT report with the most a
     <copy>
     . cdb23
 
-    ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod DATAPUMP --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix blue
+    ~/cpat/premigration.sh \
+       --connectstring jdbc:oracle:oci:@ --sysdba \
+       --pdbname BLUE \
+       --targetcloud ATPS \
+       --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties \
+       --migrationmethod DATAPUMP \
+       --reportformat JSON HTML TEXT \
+       --outdir ~/cpat_output/3_adbs_datapump/ \
+       --outfileprefix blue
 
-    ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod DATAPUMP_DBLINK --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix red
+    ~/cpat/premigration.sh \
+       --connectstring jdbc:oracle:oci:@ --sysdba \
+       --pdbname RED \
+       --targetcloud ATPS \
+       --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties \
+       --migrationmethod DATAPUMP_DBLINK \
+       --reportformat JSON HTML TEXT \
+       --outdir ~/cpat_output/3_adbs_datapump/ \
+       --outfileprefix red
     </copy>
 
     # Be sure to hit RETURN
     ```
 
-    * Note we changed from *--migrationmethod ALL* to *--migrationmethod DATAPUMP* (for BLUE) and *--migrationmethod DATAPUMP_DBLINK* (for RED).
+    * The commands are similar to the previous commands except for *migrationmethod*.
+    * We changed from *--migrationmethod ALL* to *--migrationmethod DATAPUMP* (for BLUE) and *--migrationmethod DATAPUMP_DBLINK* (for RED).
+    * This enables CPAT to produce more accurate findings.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
-    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname BLUE --targetcloud ATPS --migrationmethod DATAPUMP --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix blue
+    $ ~/cpat/premigration.sh \
+    >   --connectstring jdbc:oracle:oci:@ --sysdba \
+    >   --pdbname BLUE \
+    >   --targetcloud ATPS \
+    >   --analysisprops ~/cpat_output/props/sapphire_premigration_advisor_analysis.properties \
+    >   --migrationmethod DATAPUMP \
+    >   --reportformat JSON HTML TEXT \
+    >   --outdir ~/cpat_output/3_adbs_datapump/ \
+    >   --outfileprefix blue
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
@@ -706,7 +732,15 @@ By specifying the migration method, you can create a CPAT report with the most a
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/blue_premigration_advisor_report.json
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/blue_premigration_advisor_report.html
     Cloud Premigration Advisor Tool generated report location: /home/oracle/cpat_output/3_adbs_datapump/blue_premigration_advisor_report.txt
-    $ ~/cpat/premigration.sh --connectstring jdbc:oracle:oci:@ --sysdba --pdbname RED --targetcloud ATPS --migrationmethod DATAPUMP_DBLINK --reportformat JSON HTML TEXT --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties --outdir ~/cpat_output/3_adbs_datapump/ --outfileprefix red
+    $ ~/cpat/premigration.sh \
+    >   --connectstring jdbc:oracle:oci:@ --sysdba \
+    >   --pdbname RED \
+    >   --targetcloud ATPS \
+    >   --analysisprops ~/cpat_output/props/ruby_premigration_advisor_analysis.properties \
+    >   --migrationmethod DATAPUMP_DBLINK \
+    >   --reportformat JSON HTML TEXT \
+    >   --outdir ~/cpat_output/3_adbs_datapump/ \
+    >   --outfileprefix red
     CPAT-1018: Informational: The amount of memory available to CPAT is 3926 MB. Oracle recommends running CPAT using a 64-bit JVM on a system with at least 8 GB of memory.
     Increase the memory by setting _JAVA_OPTIONS=-Xmx4g or higher if additional memory is available.
 
@@ -770,7 +804,7 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
 
     Now that we know what needs to be adapted before moving to ADB, we can move to the next lab.
 
-    Close Firefox.
+4. Close Firefox.
 
 You may now [*proceed to the next lab*](#next).
 
