@@ -107,4 +107,4 @@ You may now [*proceed to the next lab*](#next).
 
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Rodrigo Jorge, May 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025

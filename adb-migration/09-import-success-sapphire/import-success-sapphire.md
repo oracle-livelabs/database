@@ -328,14 +328,12 @@ We need to upload the *RED* wallet to ADB directory.
 
     </details>
 
-7. Now close SQLcl:
+7. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 ## Task 5: Comparing objects metadata
@@ -1229,14 +1227,12 @@ Actually, this directory is used by BFILEs of the PM.PRINT\_MEDIA. We need to fi
 
     </details>
 
-5. Now close SQLcl:
+5. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 The *BLUE* database schemas are now 100% successfully cloned to the *SAPPHIRE* ADB.
@@ -1252,4 +1248,4 @@ You may now [*proceed to the next lab*](#next).
 
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Rodrigo Jorge, May 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025

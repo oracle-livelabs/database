@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will have a look at the necessary steps to move a database running on your local environment to ADB.
+In this lab, you will have a look at the necessary steps to move an Oracle Database running on your local environment to Oracle Autonomous Database (ADB).
 
 Estimated Time: 5 Minutes
 
@@ -20,34 +20,34 @@ This lab assumes:
 
 This is an optional lab. You can skip it if you are already familiar with ADB migration steps.
 
-## Task 1: Undertand the Migration Strategy
+## Task 1: Understand the Migration Strategy
 
-For moving a database to ADB, we need to perform basically 4 steps:
+For moving a database to ADB, we need to perform basically four steps:
 
 1. Checking source database for readiness.
 
-    To evaluate the compatibility of the source database before you migrate to an Oracle Cloud database, use the Cloud Premigration Advisor Tool (CPAT).
+    To evaluate the compatibility of the source database before you migrate to an Oracle database, use the Cloud Premigration Advisor Tool (CPAT).
 
     The purpose of the Cloud Premigration Advisor Tool (CPAT) is to help plan successful migrations to Oracle Databases in the Oracle Cloud or on-premises. It analyzes the compatibility of the source database with your database target and chosen migration method, and suggests a course of action for potential incompatibilities. CPAT provides you with information to consider for different migration tools.
 
-2. Evaluating the best Migration Method
+2. Evaluating the best migration method
 
-    There are multiple ways of migrating a database. You could ether use Data Pump, Database Links, Golden Gate, OCI DMS or ZDM, to name a few. In this lab, we will check how Oracle Cloud Migration Advisor brings you the expert technical knowledge of Oracle Database upgrade and migration to give you the best possible migration advice.
+    There are multiple ways of migrating a database. You could ether use Data Pump, database links, Oracle GoldenGate, Database Migration Service or Zero Downtime Migration, to name a few. In this lab, we will check how Oracle Cloud Migration Advisor (CMA) brings you the expert technical knowledge of Oracle Database upgrade and migration to give you the best possible migration advice.
 
-3. Performing the Migration
+3. Performing the migration
 
     Next, we will move:
 
-    * The *RED* local PDB to *RUBY* running on ADB using Data Pump with Database Links.
-    * The *BLUE* local PDB to *SAPPHIRE* running on ADB using Data Pump with files over NFS.
+    * The *RED* local PDB to *RUBY* running on ADB using Data Pump with database links.
+    * The *BLUE* local PDB to *SAPPHIRE* running on ADB using Data Pump with dump files over NFS.
 
     ![Migration Strategy](./images/migration.png)
 
-    We will explore using both a dump file in a shared NFS, as using the database link to move the data.
+    We will explore both options allowing you to evaluate which method would suit your own migration.
 
-4. Post steps
+4. Post-migration steps
 
-    After migration has finished, you will check how to perform some maintainance tasks using the ADB "Database Actions" page.
+    After finishing a migration, you will check how to perform some maintainance tasks using the ADB "Database Actions" page.
 
 ## Task 2: Test connection on the source PDBs: Blue and Red
 
@@ -62,14 +62,12 @@ For moving a database to ADB, we need to perform basically 4 steps:
     -- Be sure to hit RETURN
     ```
 
-    List the PDBS:
+2. List the PDBS.
 
     ``` sql
     <copy>
     show pdbs
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -88,7 +86,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     </details>
 
-2. Switch to the *BLUE* PDB and check all the non-internal users already created on the database.
+3. Switch to the *BLUE* PDB and check all the non-internal users already created on the database.
 
     ``` sql
     <copy>
@@ -124,7 +122,7 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     </details>
 
-3. Connect now on the *RED* PDB and perform the same query.
+4. Connect now on the *RED* PDB and perform the same query.
 
     ``` sql
     <copy>
@@ -156,14 +154,12 @@ For moving a database to ADB, we need to perform basically 4 steps:
 
     </details>
 
-4. Now close SQLcl:
+5. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 ## Task 3: Test connection on the target ADBs: Sapphire and Ruby
@@ -186,8 +182,10 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     # Be sure to hit RETURN
     ```
 
-    * Note that TNS\_ADMIN was set to /home/oracle/adb\_tls\_wallet.
-    * On ADB, a similar Wallet can be download from the web UI.
+    * Note that TNS\_ADMIN was set to `/home/oracle/adb_tls_wallet`.
+    * This folder contains the configuration files and keystores required to connect to ADB.
+    * Check the connection strings and notice how they differ from a regular connection string. ADB requires secure connections, which is why additional configuration is required.
+    * In OCI, you can download a wallet containing these files from the console (web UI) or using an API.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -305,7 +303,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
     -- Be sure to hit RETURN
     ```
 
-3. Check all the non-internal users already created on the database.
+3. Check all the non-internal users already created in the database.
 
     ``` sql
     <copy>
@@ -322,7 +320,7 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
     * `ADMIN` is the default DBA user on ADB.
     * `CMA` is the schema where CMA tool was deployed.
-    * `MPACK_OEE` is a pre-created schema available in ADB Free Container with the State Explorer tool.
+    * `MPACK_OEE` is a pre-created schema available in ADB Free Container with the Estate Explorer tool. This tool can help you get an enterprise-wide overview of your Oracle Databases and determine the best candidates for ADB migration. This tool is out-of-scope of this lab.
     * `ORDS_PLSQL_GATEWAY2` and `ORDS_PUBLIC_USER2` are schemas created to handle ORDS access.
 
     <details>
@@ -373,14 +371,12 @@ To connect on the ADB instance, you must use a ADB Wallet, which is already unco
 
     </details>
 
-5. Now close SQLcl:
+5. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 You may now [*proceed to the next lab*](#next).
@@ -389,4 +385,4 @@ You may now [*proceed to the next lab*](#next).
 
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Rodrigo Jorge, May 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025

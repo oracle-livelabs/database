@@ -118,14 +118,12 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     </details>
 
-3. Now close SQLcl:
+3. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 4. Export all the schemas of *BLUE* PDB.
@@ -456,14 +454,12 @@ In this task, we will change the default profile so passwords for imported users
 
     </details>
 
-2. Now close SQLcl:
+2. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 ## Task 5: Import schemas in ADB
@@ -709,4 +705,4 @@ You may now [*proceed to the next lab*](#next).
 
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Rodrigo Jorge, May 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025
