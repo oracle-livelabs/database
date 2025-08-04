@@ -190,14 +190,12 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     </details>
 
-3. Now close SQLcl:
+3. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 ## Task 2: Modify profile in ADB
@@ -470,14 +468,12 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     </details>
 
-2. Now close SQLcl:
+2. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 3. Still in the *blue* 🟦 terminal, import the F1 schema on *RUBY* ADB.
@@ -566,4 +562,4 @@ You may now [*proceed to the next lab*](#next).
 
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Rodrigo Jorge, May 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025

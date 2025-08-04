@@ -597,6 +597,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     ``` sql
     <copy>
     set line 130
+    set pagesize 30
     col description format a50
     select * from (
        select description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024, 2) as size_mb
@@ -610,7 +611,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     ```
 
     * Datapatch stored the rollback script for each of the patch actions in this database; for Release Updates and one-off patches.
-    * The total size is around 560 MB. Underlying segments are in the SYSAUX tablespace.
+    * The total size is around 750 MB. Underlying segments are in the SYSAUX tablespace.
     * In a container database, Datapatch stores the data in the root container and all PDBs.
 
     <details>
@@ -622,12 +623,15 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     DATAPUMP BUNDLE PATCH 19.25.0.0.0                        1.03
     DATAPUMP BUNDLE PATCH 19.26.0.0.0                        1.03
     DATAPUMP BUNDLE PATCH 19.27.0.0.0                        1.03
+    DATAPUMP BUNDLE PATCH 19.28.0.0.0                        1.04    
     OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)          .01
     OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)          .02
     OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          .02
+    OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)          .02
     Release Update 19.25.0.0.0                                175
     Release Update 19.26.0.0.0                                184
     Release Update 19.27.0.0.0                                194
+    Release Update 19.28.0.0.0                                203
     Release Update 19.3.0.0.0                                   4
 
     10 rows selected.
@@ -660,49 +664,55 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL Patching tool version 19.27.0.0.0 Production on Mon Jul 28 05:36:29 2025
+    SQL Patching tool version 19.28.0.0.0 Production on Fri Aug  1 06:55:12 2025
     Copyright (c) 2012, 2025, Oracle.  All rights reserved.
-
-    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_15601_2025_07_28_05_36_29/sqlpatch_invocation.log
-
+    
+    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_120240_2025_08_01_06_55_12/sqlpatch_invocation.log
+    
     Connecting to database...OK
     Gathering database info...done
     Bootstrapping registry and package to current versions...done
     Determining current state...done
-
+    
     Current state of interim SQL patches:
     Interim patch 36878697 (OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)):
       Binary registry: Not installed
-      SQL registry: Rolled back successfully on 24-JUL-25 10.37.27.200664 AM
+      SQL registry: Rolled back successfully on 31-JUL-25 08.23.09.135446 AM
     Interim patch 37056207 (DATAPUMP BUNDLE PATCH 19.25.0.0.0):
       Binary registry: Not installed
-      SQL registry: Rolled back successfully on 24-JUL-25 10.37.27.308823 AM
+      SQL registry: Rolled back successfully on 31-JUL-25 08.23.09.246077 AM
     Interim patch 37102264 (OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)):
       Binary registry: Not installed
-      SQL registry: Rolled back successfully on 24-JUL-25 10.50.50.136642 AM
+      SQL registry: Rolled back successfully on 31-JUL-25 08.38.11.022067 AM
     Interim patch 37470729 (DATAPUMP BUNDLE PATCH 19.26.0.0.0):
       Binary registry: Not installed
-      SQL registry: Rolled back successfully on 24-JUL-25 10.50.50.495814 AM
+      SQL registry: Rolled back successfully on 31-JUL-25 08.38.11.360518 AM
     Interim patch 37499406 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)):
-      Binary registry: Installed
-      SQL registry: Applied successfully on 24-JUL-25 10.50.50.193972 AM
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 01-AUG-25 06.08.25.411000 AM
     Interim patch 37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 01-AUG-25 06.08.25.837984 AM
+    Interim patch 37847857 (OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)):
       Binary registry: Installed
-      SQL registry: Applied successfully on 24-JUL-25 10.52.04.139464 AM
-
+      SQL registry: Applied successfully on 01-AUG-25 06.08.25.457376 AM
+    Interim patch 38170982 (DATAPUMP BUNDLE PATCH 19.28.0.0.0):
+      Binary registry: Installed
+      SQL registry: Applied successfully on 01-AUG-25 06.09.26.991082 AM
+    
     Current state of release update SQL patches:
       Binary registry:
-        19.27.0.0.0 Release_Update 250406131139: Installed
+        19.28.0.0.0 Release_Update 250705030417: Installed
       SQL registry:
-        Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 10.51.34.382883 AM
-
+        Applied 19.28.0.0.0 Release_Update 250705030417 successfully on 01-AUG-25 06.08.48.499528 AM
+    
       Purging old patch metadata process started...
-
-    CAUTION: This could be I/O intensive sometimes due to cleanup of BLOB columns. If you find this process taking unusually long time or if you are seeing any impact to the database performance, then abort this datapatch process and reschedule this clean up activity in a quiet maintenance window.
-
+    
+    CAUTION: This could be I/O intensive sometimes due to cleanup of BLOB columns. If you find this process taking unusually long time or if you are     seeing any impact to the database performance, then abort this datapatch process and reschedule this clean up activity in a quiet maintenance     window.
+    
       Purge old patch metadata process completed.
-
-    SQL Patching tool complete on Mon Jul 28 05:36:57 2025
+    
+    SQL Patching tool complete on Fri Aug  1 06:55:33 2025
     ```
 
     </details>
@@ -720,6 +730,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     ``` sql
     <copy>
     set line 130
+    set pagesize 30
     col description format a50
     select * from (
        select description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024, 2) as size_mb
@@ -732,7 +743,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     </copy>
     ```
 
-    * The total size is now below 200 MB.
+    * The total size is around 200 MB.
     * The cleanup happens via a `TRUNCATE TABLE` command which effectively reclaims space so other segments may use it. However, it doesn't shrink the tablespace, so the physical size of the data files remain the same.
 
     <details>
@@ -743,13 +754,16 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     -------------------------------------------------- ----------
     DATAPUMP BUNDLE PATCH 19.25.0.0.0
     DATAPUMP BUNDLE PATCH 19.26.0.0.0
-    DATAPUMP BUNDLE PATCH 19.27.0.0.0                        1.03
+    DATAPUMP BUNDLE PATCH 19.27.0.0.0                        
+    DATAPUMP BUNDLE PATCH 19.28.0.0.0                        1.04
     OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
     OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
-    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          .02
+    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          
+    OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)          .02
     Release Update 19.25.0.0.0
     Release Update 19.26.0.0.0
-    Release Update 19.27.0.0.0                                194
+    Release Update 19.27.0.0.0                                   
+    Release Update 19.28.0.0.0                                203
     Release Update 19.3.0.0.0
 
     10 rows selected.

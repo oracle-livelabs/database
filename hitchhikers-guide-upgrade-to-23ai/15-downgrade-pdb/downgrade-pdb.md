@@ -464,7 +464,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
 
     VERSION_FULL
     ---------------
-    19.21.0.0.0
+    19.27.0.0.0
 
     1 row selected.
     ```

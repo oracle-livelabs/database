@@ -34,7 +34,7 @@ You start by checking the *CDBRES* database.
     -- Be sure to hit RETURN
     ```
 
-2. Start up *CDBRES*.
+2. Start the database.
 
     ``` sql
     <copy>
@@ -175,7 +175,8 @@ You start by checking the *CDBRES* database.
     </copy>
     ```
 
-    * Notice that on the *GRP* stage, the created Restore point was "AUTOUPGRADE\_9212\_CDBRES1927000". The same one we queried above.
+    * Notice the *GRP* stage. AutoUpgrade wrote the name of the restore point to the log file.
+    * It is the same restore point that you found in the query above.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -310,6 +311,12 @@ Suppose your tests find a critical error and you would like to go back to Oracle
     +--------------------------------+
     | Starting AutoUpgrade execution |
     +--------------------------------+
+    +----+-------+---------+---------+--------+------------+-------+-------+
+    |Job#|DB_NAME|    STAGE|OPERATION|  STATUS|  START_TIME|UPDATED|MESSAGE|
+    +----+-------+---------+---------+--------+------------+-------+-------+
+    | 100| CDBRES|COMPLETED|  STOPPED|FINISHED|Jul-31 09:15|       |       |
+    +----+-------+---------+---------+--------+------------+-------+-------+
+    Total jobs 1
     ```
 
     </details>
@@ -339,14 +346,14 @@ Suppose your tests find a critical error and you would like to go back to Oracle
 
 4. Set the environment to the original Oracle home and connect.
 
-    ``` sql
+    ``` bash
     <copy>
     . cdbres
     export ORACLE_HOME=/u01/app/oracle/product/19
     sqlplus / as sysdba
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
 5. Verify that the database is running on Oracle Database 19c.

@@ -145,7 +145,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     * Currently, the Oracle home on Release Update 19.27.0.
     * The OJVM and Data Pump bundle patches are installed as well.
-    * You can ignore the OCW Release Update.
+    * You can see that the OCW component in the Oracle home has not been updated. It's still on the base release, *19.3.0.0.0*. Oracle requires that the OCW component is updated only when you use Oracle RAC or Oracle Restart, which is not the case in this lab. Nevertheless, it is a good idea to always update the component. You'll see how you can do that in another lab using the `OCW` keyword in the `patch` parameter.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -746,13 +746,13 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
     ``` text
     $ cd
     $ java -jar autoupgrade.jar -version
-    build.version 25.3.250509
-    build.date 2025/05/09 02:53:51 +0000
-    build.hash 3110a3d32
-    build.hash_date 2025/05/05 19:43:04 +0000
+    build.version 25.4.250730
+    build.date 2025/07/30 16:33:06 +0000
+    build.hash d12ffb74e
+    build.hash_date 2025/07/24 14:59:09 +0000
     build.supported_target_versions 12.2,18,19,21,23
     build.type production
-    build.label (HEAD, tag: v25.3, origin/stable_devel, stable_devel)
+    build.label (HEAD, tag: v25.4, origin/stable_devel, stable_devel)
     build.MOS_NOTE 2485457.1
     build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```

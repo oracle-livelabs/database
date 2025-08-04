@@ -213,14 +213,12 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
     </details>
 
-2. Now close SQLcl:
+2. Close SQLcl.
 
     ``` bash
     <copy>
     exit;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 You may now [*proceed to the next lab*](#next).
@@ -234,4 +232,4 @@ You may now [*proceed to the next lab*](#next).
 
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Rodrigo Jorge, May 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025

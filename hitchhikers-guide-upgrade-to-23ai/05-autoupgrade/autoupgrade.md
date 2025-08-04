@@ -42,13 +42,13 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     <summary>*click to see the output*</summary>
 
     ``` text
-    build.version 25.3.250509
-    build.date 2025/05/09 02:53:51 +0000
-    build.hash 3110a3d32
-    build.hash_date 2025/05/05 19:43:04 +0000
+    build.version 25.4.250730
+    build.date 2025/07/30 16:33:06 +0000
+    build.hash d12ffb74e
+    build.hash_date 2025/07/24 14:59:09 +0000
     build.supported_target_versions 12.2,18,19,21,23
     build.type production
-    build.label (HEAD, tag: v25.3, origin/stable_devel, stable_devel)
+    build.label (HEAD, tag: v25.4, origin/stable_devel, stable_devel)
     build.MOS_NOTE 2485457.1
     build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```
@@ -79,8 +79,8 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #
     # Sample config file for AutoUpgrade
     #
-    # build version 25.3.250509
-    # build date    2024/04/19 15:45:58 -0400
+    # build version 25.4.250730
+    # build date    2025/07/30 16:33:06 +0000
     #
     #
     # Global configurations
@@ -231,7 +231,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -302,7 +302,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ![The Checks Report shows many details about the database](./images/autoupgrade-checks-report.png " ")
 
     * Examine the Checks Report.
-    * Notice how a specific check has severity *RECOMMENDED*, but AutoUpgrade has a fixup available.
+    * Notice how a specific check has severity *ERROR*, but AutoUpgrade has a fixup available.
     * Then close Firefox.
 
 ## Task 3: Upgrade your database
@@ -321,7 +321,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |

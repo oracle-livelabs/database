@@ -62,7 +62,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     _________ ___________ _____________ _____________
     2         PDB$SEED    READ ONLY     NO
     3         RED         READ WRITE    NO
-    4         BLUE        READ WRITE    NO
+    4         BLUE        MOUNTED
     5         GREEN       MOUNTED
     ```
 
@@ -370,18 +370,19 @@ You check initialization parameters and set some in the CDB. Also, find a list o
     <summary>*click to see the output*</summary>
 
     ``` text
-    CON_ID    NAME               VALUE
-    _________ __________________ ___________
-    2         sga_target         0
-    2         undo_tablespace
-    3         sga_target         0
-    3         undo_tablespace    UNDOTBS1
-    4         sga_target         0
-    4         undo_tablespace    UNDOTBS1
-    5         sga_target         0
-    5         undo_tablespace    UNDOTBS1
-
-    8 rows selected.
+       CON_ID NAME                           VALUE
+    _________ ______________________________ ___________
+            2 sga_target                     0
+            2 undo_tablespace
+            3 sga_target                     0
+            3 undo_tablespace                UNDOTBS1
+            4 sga_target                     0
+            4 spatial_vector_acceleration    TRUE
+            4 undo_tablespace                UNDOTBS1
+            5 sga_target                     0
+            5 undo_tablespace                UNDOTBS1
+    
+    9 rows selected.
     ```
 
     </details>

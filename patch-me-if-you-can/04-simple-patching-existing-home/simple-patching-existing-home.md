@@ -69,7 +69,7 @@ You will use AutoUpgrade just like in lab 2.
 
     ``` text
     $ java -jar autoupgrade.jar -config scripts/pt-04-simple-patching-existing-home.cfg -mode deploy
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |

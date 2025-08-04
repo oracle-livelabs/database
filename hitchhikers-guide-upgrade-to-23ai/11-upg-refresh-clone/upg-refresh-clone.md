@@ -225,7 +225,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     [Job ID] 100
     ==========================================
     [DB Name]                FTEX
-    [Version Before Upgrade] 19.21.0.0.0
+    [Version Before Upgrade] 19.27.0.0.0
     [Version After Upgrade]  23.9.0.25.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
@@ -474,30 +474,11 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     </details>
 
-9. Close the second terminal and return to the first terminal. Do not close the terminal in which AutoUpgrade is running.
-
-    ``` sql
-    <copy>
-    exit
-    </copy>
-    ```
-
-10. Note: When we are performing a PDB hot cloning from non-CDB/root, the source database **can't be restarted**. If that happens, you will notice the error below on the *alert.log* and the PDB needs to be recreated:
-
-    ``` text
-    2024-08-28T05:27:00.451985+00:00
-    PDB2(4):Error! unsupported source PDB operation: 3
-    2024-08-28T05:27:00.710236+00:00
-    PDB2(4):Media Recovery failed with error 65339
-    ```
-
-    * When you restart the source database, the source database places a special marker in the redo stream. This even happens for a clean shutdown (SHUTDOWN NORMAL). The target CDB does not understand how to recover beyond this marker.
-
 ## Task 4: Upgrade and convert to PDB
 
-The *REFRESHPDB* phase would stay technically for the next 100 hours. Reason we defined that long time is to have a full control when to start the process. Imagine, for example, we are waiting for a GO or approval from another team to shut the application down so we can start our migration?
+The *REFRESHPDB* phase would stay technically for the next 100 hours. Reason we defined that long time is to have a full control when to start the process. Imagine, for example, we are waiting for a *go* or approval from another team to shut the application down so we can start our migration.
 
-When the upgrade starts, is when AutoUpgrade executes a final refresh to bring over the latest changes. So no more changes will be captured from the source database. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
+When the upgrade starts, AutoUpgrade executes a final refresh to bring over the latest changes. So no more changes will be captured from the source database. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
 
 1. Press ENTER just to stop *lsj* from spooling the job status. Next, run the `proceed` command to force the start of upgrade process **now**.
 
@@ -509,30 +490,80 @@ When the upgrade starts, is when AutoUpgrade executes a final refresh to bring o
     -- Be sure to hit RETURN
     ```
 
-    * AutoUpgrade will start the upgrade in 1 minute.
-    * This is a security delay in case you accidentally typed the *proceed* command.
-    * You can adjust it again using *proceed -job <#> -newStartTime [dd/mm/yyyy hh:mm:ss, +<#>h<#>m]*.
+    * AutoUpgrade will start shortly.
+    * You can also specify a new start time using *proceed -job <#> -newStartTime [dd/mm/yyyy hh:mm:ss, +<#>h<#>m]*.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
     upg> proceed -job 102
-    New start time for job 100 is scheduled 0 minute(s) from now, at 25/07/2025 13:29:41
+    New start time for job 203 is scheduled 0 minute(s) from now, at 25/07/2025 13:29:41
     ```
 
     </details>
 
-2. In the first terminal, check the output of the `lsj` command running in the AutoUpgrade console.
+2. Monitor the progress.
 
-    * AutoUpgrade moves through the next phases. The two main ones are *DBUPGRADE* which performs the upgrade to Oracle Database 23ai. The other one is *NONCDBTOPDB* which transforms the database into a proper PDB.
+    ``` sql
+    <copy>
+    status -job 102 -a 10
+    </copy>
+    ```
 
-3. Optionally, while waiting for the job to complete, use some of the other commands in the console.
+    * AutoUpgrade was holding in *REFRESHPDB*; applying redo at the specified interval.
+    * When you issued the `proceed` command, AutoUpgrade made a final refresh before moving on to the next phase.
+    * Any changes made in the source database at this point in time, would not come over to the target PDB.
+    * In the *DBUPGRADE* stage, AutoUpgrade is upgrading the PDB to the new release; Oracle Database 23ai. The CDB is already on the new release, so only the PDB is upgraded which is much faster than a complete database upgrade.
+    * Since the source database is a non-CDB, the PDB must also be converted to a proper PDB. AutoUpgrade does that in *NONCDBTOPDB* where it runs the `noncdb_to_pdb.sql` script. 
 
-    * `status -job 102 -a 10`: Gives you even more details about the current job.
-    * `help`: Show other commands available in the AutoUpgrade console.
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Details
+    
+    	Job No           102
+    	Oracle SID       FTEX
+    	Start Time       25/08/01 09:48:23
+    	Elapsed (min):   3
+    	End time:        N/A
+    
+    Logfiles
+    
+    	Logs Base:    /home/oracle/logs/ftex-refresh/FTEX
+    	Job logs:     /home/oracle/logs/ftex-refresh/FTEX/102
+    	Stage logs:   /home/oracle/logs/ftex-refresh/FTEX/102/dbupgrade
+    	TimeZone:     /home/oracle/logs/ftex-refresh/FTEX/temp
+    	Remote Dirs:
+    
+    Stages
+    	SETUP            <1 min
+    	PREUPGRADE       <1 min
+    	DRAIN            <1 min
+    	CLONEPDB         <1 min
+    	REFRESHPDB       3 min
+    	DISPATCH         <1 min
+    	DISPATCH         <1 min
+    	DBUPGRADE        ~2 min (RUNNING)
+    	NONCDBTOPDB
+    	POSTCHECKS
+    	POSTFIXUPS
+    	POSTUPGRADE
+    	SYSUPDATES
+    
+    Stage-Progress Per Container
+    
+    	+--------+---------+
+    	|Database|DBUPGRADE|
+    	+--------+---------+
+    	|    TEAL|    6  % |
+    	+--------+---------+
+    
+    The command status is running every 10 seconds. PRESS ENTER TO EXIT
+    ```
+    </details>
 
-4. Wait for AutoUpgrade to complete the migration. When the job completes, AutoUpgrade prints *Job 102 completed*.
+3. Wait for AutoUpgrade to complete the migration. When the job completes, AutoUpgrade prints *Job 102 completed*. It usually takes 10-15 minutes.
 
     <details>
     <summary>*click to see the output*</summary>

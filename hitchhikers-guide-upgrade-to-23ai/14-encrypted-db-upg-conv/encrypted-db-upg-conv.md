@@ -374,7 +374,7 @@ Analyze the *FTEX* database for upgrade readiness.
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -420,7 +420,7 @@ Analyze the *FTEX* database for upgrade readiness.
     [Job ID] 100
     ==========================================
     [DB Name]                FTEX
-    [Version Before Upgrade] 19.21.0.0.0
+    [Version Before Upgrade] 19.27.0.0.0
     [Version After Upgrade]  23.9.0.25.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
@@ -626,7 +626,7 @@ Analyze the *FTEX* database for upgrade readiness.
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded
@@ -673,7 +673,7 @@ Analyze the *FTEX* database for upgrade readiness.
     [Job ID] 101
     ==========================================
     [DB Name]                FTEX
-    [Version Before Upgrade] 19.21.0.0.0
+    [Version Before Upgrade] 19.27.0.0.0
     [Version After Upgrade]  23.9.0.25.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
@@ -704,7 +704,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <summary>*click to see the output*</summary>
 
     ``` text
-    AutoUpgrade 25.3.250509 launched with default internal options
+    AutoUpgrade 25.4.250730 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded

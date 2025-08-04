@@ -22,7 +22,7 @@ This lab assumes:
 
 ## Task 1: Check statements
 
-1. Use the *yellow* terminal. Set the environment to *CDB23* and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to *CDB23* and connect.
 
       ``` sql
       <copy>
