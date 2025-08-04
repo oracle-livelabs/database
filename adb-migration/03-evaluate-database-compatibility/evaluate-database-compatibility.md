@@ -193,18 +193,18 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
     ====================================================================================================================================
     
     Report Details
-    ~~~~~~~~~~~~~~
+    --------------
       CPAT Application Version: 25.6.0
       Report Generated On:      2025-08-04T06:55:15Z
       OPEN PDBs:                BLUE, RED
       CLOSED PDBs:              GREEN
     
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ------------------------------------------------------------------------------------------------------------------------------------
     List of PDB Analysis Summaries
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ------------------------------------------------------------------------------------------------------------------------------------
     
     PDB Analysis Summary
-    ~~~~~~~~~~~~~~~~~~~~
+    --------------------
       PDB Name:              BLUE
       Overall Report Result: Action Required
       Analysis Duration:     00:00:10.000
@@ -214,10 +214,10 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
         JSON:                BLUE/BLUE_premigration_advisor_report.json
         HTML:                BLUE/BLUE_premigration_advisor_report.html
         TEXT:                BLUE/BLUE_premigration_advisor_report.txt
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ------------------------------------------------------------------------------------------------------------------------------------
     
     PDB Analysis Summary
-    ~~~~~~~~~~~~~~~~~~~~
+    --------------------
       PDB Name:              RED
       Overall Report Result: Action Required
       Analysis Duration:     00:00:10.000
@@ -227,7 +227,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
         JSON:                RED/RED_premigration_advisor_report.json
         HTML:                RED/RED_premigration_advisor_report.html
         TEXT:                RED/RED_premigration_advisor_report.txt
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ------------------------------------------------------------------------------------------------------------------------------------
     ====================================================================================================================================    
     ```
     </details>    
@@ -255,7 +255,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
     ====================================================================================================================================
     
     Report Details
-    ~~~~~~~~~~~~~~
+    --------------
       Analysis Mode:            FULL
       CPAT Application Version: 25.6.0
       CPAT Checks Version:      25.6.0
@@ -265,7 +265,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
       Report Result:            Action Required
     
     Database Details
-    ~~~~~~~~~~~~~~~~
+    --------------
       Source Database Applications:                                             No Known Applications Detected
       Source Cloud Vendor:                                                      Oracle Cloud Infrastructure (Database)
       Source Database Container Name:                                           RED
@@ -284,7 +284,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
       Source Database Username:                                                 SYS
     
     Report Analysis Notes
-    ~~~~~~~~~~~~~~~~~~~~~
+    ---------------------
       Note # Note Info
       ------ ---------------------------------------------------------------------------------------------------------------------------
       1      CAUSE: Informational: No analysis properties file found on the command line. Source analysis will not be as complete
@@ -310,7 +310,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
              DECODE(q.max_bytes, -1, 'NO')),'YES' ) = 'YES' ORDER BY USERNAME, TABLESPACE_NAME;
     
     Source Database Version Information
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    -----------------------------------
       PRODUCT                                  VERSION    VERSION_FULL STATUS
       ---------------------------------------- ---------- ------------ ---------------------------------------
       Oracle Database 23ai Enterprise Edition  23.0.0.0.0 23.8.0.25.04 for Oracle Cloud and Engineered Systems
@@ -318,7 +318,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
       Source Database Version:            23.8.0.25.04
     
     Source Database Patch Information
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ---------------------------------
       COMMENTS                                                          SOURCE_VERSION TARGET_VERSION ACTION     ACTION_TIME
       ----------------------------------------------------------------- -------------- -------------- ---------- --------------------
       RDBMS_23.8.0.25.04DBRU_LINUX.X64_250416                           23                            BOOTSTRAP
