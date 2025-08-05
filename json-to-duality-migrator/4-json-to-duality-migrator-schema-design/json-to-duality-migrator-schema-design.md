@@ -4,11 +4,13 @@
 
 This lab walks you through the steps to guide relational schema design using the JSON to Duality Migrator.
 
-Estimated Lab Time: 10 minutes
+Estimated Lab Time: 15 minutes
 
 ### About the JSON to Duality Migrator
 
 The JSON to Duality Migrator addresses the challenge of preserving JSON document semantics in relational schemas. By inferring implicit relationships from document collections, it generates updatable duality views that mirror original JSON structures. This method ensures backward compatibility for applications reliant on document APIs while leveraging relational optimization, such as indexing and ACID compliance. The tool supports iterative refinement, allowing developers to adjust inferred schemas post-migration.
+
+The migrator provides several customization parameters, a two-phase API, as well as a hint infrastructure to guide relational schema design. In this lab, we will cover some of these customizations.
 
 ### Objectives
 
@@ -17,21 +19,28 @@ In this lab, you will:
 * Learn how to customize the relational schema using the JSON to Duality Migrator
 * Learn how to validate imported data using the JSON to Duality Migrator
 
-## Task 1: Create JSON collections and load some data
+### Prerequisites
 
-Just like the previous lab, we will start with JSON collection tables 'speaker, 'attendee', and 'session' that represents collections required for a database conference application.
+* Oracle Autonomous Database 23ai provisioned or one running in a LiveLabs environment
 
-1. Create the speaker, attendee, and session collections.
+## Task 1: Create JSON Collections and Load Data
+
+Just like the previous lab, we will start with JSON collection tables `speaker`, `attendee`, and `session` that represents collections required for a database conference application.
+
+1. Create the `speaker`, `attendee`, and `session` collections.
 
     ```sql
     <copy>
+    DROP TABLE IF EXISTS speaker;
+    DROP TABLE IF EXISTS attendee;
+    DROP TABLE IF EXISTS session;
     CREATE JSON COLLECTION TABLE IF NOT EXISTS speaker;
     CREATE JSON COLLECTION TABLE IF NOT EXISTS attendee;
     CREATE JSON COLLECTION TABLE IF NOT EXISTS session;
     </copy>
     ```
 
-2. Insert data into the speaker, attendee, and session collections. The attendee data is a bit different from the previous lab - only one attendee has specified their pre-ordered coffee item.
+2. Insert data into the `speaker`, `attendee`, and `session` collections. The attendee data is a bit different from the previous lab - only one attendee has specified their pre-ordered coffee item.
 
    ```sql
    <copy>
@@ -49,7 +58,7 @@ Just like the previous lab, we will start with JSON collection tables 'speaker, 
         "yearsAtOracle"  : 30,
         "department"     : "Autonomous Databases",
         "sessionsTaught" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "classType" : "In-person"},
-                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"}, ]}'),
+                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"} ]}'),
      ('{"_id"            : 103,
         "name"           : "Colin J.",
         "phoneNumber"    : "222-555-023",
@@ -113,11 +122,11 @@ Just like the previous lab, we will start with JSON collection tables 'speaker, 
    </copy>
    ```
 
-## Task 2: Customized schema inference using the JSON to Duality Migrator
+## Task 2: Customized Schema Inference using the JSON to Duality Migrator
 
-In this task, we will infer a normalized relational schema using data from our JSON collections. The JSON to Duality Migrator will analyze the data in the input collections, and recommend a set of relational tables (including constraints, indexes, and sequences) and a set of duality views to match the input JSON collections.
+In this task, we will infer a customized normalized relational schema using data from our JSON collections. The JSON to Duality Migrator will analyze the data in the input collections, and recommend a set of relational tables (including constraints, indexes, and sequences) and a set of duality views to match the input JSON collections.
 
-1. Run the INFER\_AND\_GENERATE\_SCHEMA procedure to infer a relational schema. We specify 'minFieldFrequency' as 30 so that the 'coffeeItem' field will be pruned from the schema and won't map to a relational column.
+1. Run the `INFER_AND_GENERATE_SCHEMA` procedure to infer a relational schema. We specify `minFieldFrequency` as 30 so that the `coffeeItem` field will be pruned from the schema and won't map to a relational column.
 
    ```sql
    <copy>
@@ -135,17 +144,14 @@ In this task, we will infer a normalized relational schema using data from our J
 
      -- Print DDL script
      DBMS_OUTPUT.PUT_LINE(schema_sql);
-
-     -- Create relational schema
-     EXECUTE IMMEDIATE schema_sql;
    END;
    /
    </copy>
    ```
 
-   Let's inspect the output DDL script. Since 'coffeeItem' appears in fewer than 30% of documents, there is no column in the relational schema for the field, nor does it appear in the duality view definition. So what happens when you import the input data into this duality view? Can you guess from what we learnt in lab 2? Since the migrator creates flex JSON columns by default, the 'coffeeItem' field will be inserted into the flex column! This is a great way of handling rare fields - set 'minFrequencyThreshold' as desired and the migrator handles the rest.
+   Let's inspect the output DDL script. Since `coffeeItem` appears in fewer than 30% of documents, there is no column in the relational schema for the field, nor does it appear in the duality view definition. So what happens when you import the input data into this duality view? Can you guess from what we learnt in lab 2? Since the migrator creates flex JSON columns by default, the `coffeeItem` field will be inserted into the flex column! This is a great way of handling rare fields - set `minFrequencyThreshold` as desired and the migrator handles the rest.
 
-2. Run the INFER\_AND\_GENERATE\_SCHEMA procedure again with a datatype hint for the 'phoneNumber' field. In the output above, we created a VARCHAR2 column for phone number. Let's say that we want a fixed character length datatype (CHAR) for the phone number instead, since we know that all phone numbers will have the same length. We can use the hints configuration parameter to specify the datatype for the 'phoneNumber' field.
+2. Run the `INFER_AND_GENERATE_SCHEMA` procedure again with a datatype hint for the `phoneNumber` field. In the output above, we created a `VARCHAR2` column for phone number. Let's say that we want a fixed character length datatype (`CHAR`) for the phone number instead, since we know that all phone numbers will have the same length. We can use the hints configuration parameter to specify the datatype for the `phoneNumber` field.
 
    ```sql
    <copy>
@@ -176,7 +182,7 @@ In this task, we will infer a normalized relational schema using data from our J
    </copy>
    ```
 
-3. Describe the speaker\_root table. We can see that the datatype for 'phone_number' is CHAR(11), which is exactly what we specified in the hint parameter.
+3. Describe the `speaker_root` table. We can see that the datatype for `phone_number` is `CHAR(11)`, which is exactly what we specified in the hint parameter.
 
    ```sql
    <copy>
@@ -186,7 +192,7 @@ In this task, we will infer a normalized relational schema using data from our J
 
    The migrator also allows you to specify hints to specify identifying keys for sub-objects and whether to share data for sub-objects with other collections. The hint infrastructure is an effective tool to design and customize an effective normalized relational schema based on application and business requirements.
 
-4. Validate the schema using the VALIDATE\_SCHEMA\_REPORT table function. This should show no rows selected for each duality view, which means that there are no validation failures.
+4. Validate the schema using the `VALIDATE_SCHEMA_REPORT` table function. This should show no rows selected for each duality view, which means that there are no validation failures.
 
    ```sql
    <copy>
@@ -196,7 +202,7 @@ In this task, we will infer a normalized relational schema using data from our J
    </copy>
    ```
 
-## Task 3 - Data import and validation using the JSON to Duality Migrator
+## Task 3: Data Import and Validation using the JSON to Duality Migrator
 
 In this task, we will import data from input JSON collections into the duality views. We will also look at techniques to find document that cannot be imported successfully and validate that data has been imported successfully.
 
@@ -239,7 +245,7 @@ In this task, we will import data from input JSON collections into the duality v
    </copy>
    ```
 
-4. Let's validate that all data has been successfully imported using the VALIDATE\_IMPORT\_REPORT table function. This should show no rows selected for each duality view, which means that all data has been successfully imported.
+4. Let's validate that all data has been successfully imported using the `VALIDATE_IMPORT_REPORT` table function. This should show no rows selected for each duality view, which means that all data has been successfully imported.
 
 ## Learn More
 

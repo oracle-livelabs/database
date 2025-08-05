@@ -10,6 +10,18 @@ Estimated Lab Time: 15 minutes
 
 The JSON to Duality Migrator addresses the challenge of preserving JSON document semantics in relational schemas. By inferring implicit relationships from document collections, it generates updatable duality views that mirror original JSON structures. This method ensures backward compatibility for applications reliant on document APIs while leveraging relational optimization, such as indexing and ACID compliance. The tool supports iterative refinement, allowing developers to adjust inferred schemas post-migration.
 
+The migrator exposes a set of easy-to-use PL/SQL functions and procedures (part of the `DBMS_JSON_DUALITY` package) to assist with schema inference, schema generation, schema validation, data import, and data validation.
+
+| API                       | Description                                                                                                    |
+|---------------------------|----------------------------------------------------------------------------------------------------------------|
+| `infer_schema`              | Infers the relational schema that represents all the input collections                                          |
+| `generate_schema`           | Produces the code to create the required database objects for each duality view                                 |
+| `infer_and_generate_schema` | Performs both `infer_schema` and `generate_schema`                                                                  |
+| `validate_schema_report`    | Validates the inferred schema against the input collections                                                     |
+| `import_all`                | Imports the existing document collections into the duality views (in fact into the underlying relational tables) |
+| `validate_import_report`    | Validates the imported data against the input collections                                                       |
+{: title="JSON to Duality Migrator API"}
+
 ### Objectives
 
 In this lab, you will:
@@ -17,21 +29,28 @@ In this lab, you will:
 * Learn how to infer a relational schema using the JSON to Duality Migrator
 * Learn how to import data into a duality view using the JSON to Duality Migrator
 
-## Task 1: Create JSON collections and load some data
+### Prerequisites
 
-In this task, we will create JSON collection tables 'speaker, 'attendee', and 'session' that represents collections required for a database conference application.
+* Oracle Autonomous Database 23ai provisioned or one running in a LiveLabs environment
 
-1. Create the speaker, attendee, and session collections.
+## Task 1: Create JSON Collections and Load Data
+
+In this task, we will create JSON collection tables `speaker`, `attendee`, and `session` that represents collections required for a database conference application.
+
+1. Create the `speaker`, `attendee`, and `session` collections.
 
    ```sql
    <copy>
+   DROP TABLE IF EXISTS speaker;
+   DROP TABLE IF EXISTS attendee;
+   DROP TABLE IF EXISTS session;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS speaker;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS attendee;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS session;
    </copy>
    ```
 
-2. Insert data into the speaker, attendee, and session collections.
+2. Insert data into the `speaker`, `attendee`, and `session` collections.
 
    ```sql
    <copy>
@@ -49,7 +68,7 @@ In this task, we will create JSON collection tables 'speaker, 'attendee', and 's
         "yearsAtOracle"  : 30,
         "department"     : "Autonomous Databases",
         "sessionsTaught" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "classType" : "In-person"},
-                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"}, ]}'),
+                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"} ]}'),
      ('{"_id"            : 103,
         "name"           : "Colin J.",
         "phoneNumber"    : "222-555-023",
@@ -116,11 +135,11 @@ In this task, we will create JSON collection tables 'speaker, 'attendee', and 's
    </copy>
    ```
 
-## Task 2: Schema inference using the JSON to Duality Migrator
+## Task 2: Schema Inference using the JSON to Duality Migrator
 
 In this task, we will infer a normalized relational schema using data from our JSON collections. The JSON to Duality Migrator will analyze the data in the input collections, and recommend a set of relational tables (including constraints, indexes, and sequences) and a set of duality views to match the input JSON collections.
 
-1. Run the INFER\_AND\_GENERATE\_SCHEMA procedure to infer a relational schema using a few lines of PL/SQL code. This procedure will analyze the data in our input collections, infer an optimized normalized relational schema, and generate a DDL script to create the relational schema along with duality views for each collection. Here we store the generated DDL script in a CLOB variable and then call the 'EXECUTE IMMEDIATE' PL/SQL construct to execute the script.
+1. Run the `INFER_AND_GENERATE_SCHEMA` procedure to infer a relational schema using a few lines of PL/SQL code. This procedure will analyze the data in our input collections, infer an optimized normalized relational schema, and generate a DDL script to create the relational schema along with duality views for each collection. Here we store the generated DDL script in a `CLOB` variable and then call the `EXECUTE IMMEDIATE` PL/SQL construct to execute the script.
 
    ```sql
    <copy>
@@ -144,7 +163,9 @@ In this task, we will infer a normalized relational schema using data from our J
    </copy>
    ```
 
-2. Check the objects created by the migrator. Note that the relational schema is completely normalized - one table is created per logical entity, one for speaker (speaker\_root), one for attendee (attendee\_root), and one for sessions (sessions\_root). The many-to-many relationship between attendees and sessions is automatically identified and a mapping table is created to map attendees to sessions.
+   You can also use external tables pointing to data stored in object stores as the input to `INFER_AND_GENERATE_SCHEMA`. This is useful in cases where you are migrating from an external database to Oracle.
+
+2. Check the objects created by the migrator. Note that the relational schema is completely normalized - one table is created per logical entity, one for speaker (`speaker_root`), one for attendee (`attendee_root`), and one for sessions (`sessions_root`). The many-to-many relationship between attendees and sessions is automatically identified and a mapping table is created to map attendees to sessions.
 
    ```sql
    <copy>
@@ -155,9 +176,9 @@ In this task, we will infer a normalized relational schema using data from our J
    </copy>
    ```
 
-   You can also use the two-phase API (INFER\_SCHEMA and GENERATE\_SCHEMA) to split the schema inference and DDL script generation into separate calls. This is useful when you want to inspect and hand-modify the resulting schema before generating the final DDL script.
+   You can also use the two-phase API (`INFER_SCHEMA` and `GENERATE_SCHEMA`) to split the schema inference and DDL script generation into separate calls. This is useful when you want to inspect and hand-modify the resulting schema before generating the final DDL script.
 
-3. Validate the schema using the VALIDATE\_SCHEMA\_REPORT table function. This should show no rows selected for each duality view, which means that there are no validation failures.
+3. Validate the schema using the `VALIDATE_SCHEMA_REPORT` table function. This should show no rows selected for each duality view, which means that there are no validation failures.
 
    ```sql
    <copy>
@@ -169,7 +190,7 @@ In this task, we will infer a normalized relational schema using data from our J
 
 The result shows no rows selected indicating that the resulting schema fits the input collections.
 
-## Task 3 - Data import using the JSON to Duality Migrator
+## Task 3: Data Import using the JSON to Duality Migrator
 
 In this task, we will import data from input JSON collections into the duality views. We will also look at techniques to find document that cannot be imported successfully and validate that data has been imported successfully.
 
@@ -186,7 +207,7 @@ In this task, we will import data from input JSON collections into the duality v
    </copy>
    ```
 
-2. Let’s import the data into the duality views using the IMPORT\_ALL procedure.
+2. Let’s import the data into the duality views using the `IMPORT_ALL` procedure.
 
    ```sql
    <copy>
@@ -211,6 +232,8 @@ In this task, we will import data from input JSON collections into the duality v
    SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM SPEAKER_ERR_LOG;
    </copy>
    ```
+
+You may now **proceed to the next lab**.
 
 ## Learn More
 

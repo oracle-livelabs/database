@@ -2,7 +2,7 @@
 
 ## About the Think Relational, Stay JSON: Oracle’s Duality View Revolution Workshop
 
-This workshop focuses on migrating from JSON Collections to Duality Views using the JSON-to-Duality Migrator in Oracle Database 23ai. You will learn how to migrate apps from a document to relational model automatically without any application changes.
+This workshop focuses on migrating from JSON Collections to Duality Views using the JSON to Duality Migrator in Oracle Database 23ai. You will learn how to migrate apps from a document to relational model automatically without any application changes.
 
 ### **JSON Relational Duality**
 
@@ -18,7 +18,7 @@ Key benefits of JSON Relational Duality:
 * Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically.
 * Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new value-based concurrency control protocol provided with Duality Views supports high concurrency updates. The new protocol also works efficiently for interactive applications since the data is not locked during human thinking time.
 
-### **JSON-to-Duality Migrator**
+### **JSON to Duality Migrator**
 
 The JSON to Duality Migrator is a new tool in Oracle Database 23ai that addresses the challenge of preserving JSON document semantics in relational schemas. By inferring implicit relationships from document collections, it generates updatable duality views that mirror original JSON structures. This method ensures backward compatibility for applications reliant on document APIs while leveraging relational optimization, such as indexing and ACID compliance. The tool supports iterative refinement, allowing developers to adjust inferred schemas post-migration.
 
@@ -28,14 +28,14 @@ The migrator allows you to:
 2. **Migrate** data from document database to Oracle duality views, while automatically transforming to the target schema.
 3. **Lift-and-Shift** applications transparently with minimal to no code changes.
 
-What does the JSON-to-Duality Migrator provide?
+What does the JSON to Duality Migrator provide?
 
 1. Generates DDL scripts to create the relational schema (including tables, indexes, constraints, and sequences)
 2. Generates duality views that mirror the shape of the JSON documents in the input collections
 3. Automatically normalizes and deduplicates data
 4. Optionally allows users to fine-tune and optimize the generated schema
 
-How does the JSON-to-Duality Migrator work?
+How does the JSON to Duality Migrator work?
 
 1. Determines normalized schema after analyzing data and structure of input JSON collections
 2. Uses sophisticated unsupervised machine learning (ML) algorithms to create a normalized relational schema
@@ -46,16 +46,16 @@ Watch this quick video to know why JSON Relational Duality is awesome.
 
 [](youtube:Eb_ytQBw2i8)
 
+Estimated Time: 50 minutes
+
 ### Objectives
 
 In this lab, you will:
 
 * Work with JSON Collections
 * Work with Duality Views
-* Migrate from JSON Collections to Duality Views using the JSON-to-Duality Migrator
-* Use the JSON-to-Duality Migrator's hint infrastructure to guide relational schema design
-
-Estimated Time: 60 minutes
+* Migrate from JSON Collections to Duality Views using the JSON to Duality Migrator
+* Use the JSON to Duality Migrator's hint infrastructure to guide relational schema design
 
 ### Prerequisites
 
@@ -63,7 +63,7 @@ Estimated Time: 60 minutes
 
 ## Learn More
 
-* [Blog: JSON-to-Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
+* [Blog: JSON to Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [Blog: Key benefits of JSON Relational Duality](https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 * [Migrating from JSON to Duality](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/migrating-from-json-to-duality.html)
