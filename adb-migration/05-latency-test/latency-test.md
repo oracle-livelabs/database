@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In Oracle Autonomous Database on shared infrastructure, it is a common requirement for end customers and internal operations to quickly determine the latency while connecting to a particular service.
+In Oracle Autonomous Database Serverless, it is a common requirement for end customers and internal operations to quickly determine the latency while connecting to a particular service.
 
 A typical use case for such a test would be when a customer query or a workload is running with an unusually high latency and the user needs to ensure if the database service used by the workload, is healthy and is not having inherent latency issues impacting the workload / queries.
 
@@ -34,12 +34,14 @@ ADBPing tool is available in *My Oracle Support*, on Doc ID 2863450.1.
 
 ![ADBPing](./images/mos-adbping.png)
 
-The tool was already pre-downloaded on this lab and is available at */home/oracle/scripts/*.
+You find the tool in */home/oracle/scripts/*.
 
-1. Use the *yellow* terminal 🟨. Unzip CPAT file.
+1. Use the *yellow* terminal 🟨. Set the environment and unzip the file.
 
     ``` bash
     <copy>
+    . adb
+
     mkdir -p /home/oracle/adbping
 
     unzip /home/oracle/scripts/adbping_Linux.X64_230127.zip -d /home/oracle/adbping
@@ -54,6 +56,7 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
     <summary>*click to see the output*</summary>
 
     ``` text
+    $ . adb
     $ mkdir -p /home/oracle/adbping
     $ unzip /home/oracle/scripts/adbping_Linux.X64_230127.zip -d /home/oracle/adbping
     Archive:  /home/oracle/scripts/adbping_Linux.X64_230127.zip
@@ -94,9 +97,9 @@ The tool was already pre-downloaded on this lab and is available at */home/oracl
 
 ## Task 2: Generate ADBPing report for ADB
 
-ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
+ADBPing can evaluate multiple connection methods, like Java or SQL*Plus. It connects and execute a simple query (`select 1 from dual`) a number of times. Based on timings on the executions, it generates a report.
 
-1. Execute *adbping* for *SAPPHIRE* ADB, via SQL*Plus method.
+1. Execute *adbping* for *SAPPHIRE* ADB and check the SQL*Plus method.
 
     ``` bash
     <copy>
@@ -110,13 +113,12 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
     # Be sure to hit RETURN
     ```
 
-    What we are doing here?
+    * The tool runs the test 10 times (*-d 10*). 
+    * It opens 10 threads in parallel (*-t 10*).
 
-    * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
-    * Connecting to ADB using "SQL*Plus".
-    * Opening 10 threads (*-t 10*) in parallel.
-
-    ``` bash
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c sqlplus -s sapphire_tp -d 10 -t 10
     +++Test Summary+++
        Test Client: sqlplus
@@ -129,19 +131,14 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
        SQL Execution Time(ms) : Min:0 Max:10 Avg:0.478 Median:0 Perc90:0 Perc95:0 Perc99:10
        Connect + SQL Execution Time(ms) : Min:104.76 Max:304.012 Avg:127.897 Median:125.965 Perc90:135.369 Perc95:137.86 Perc99:261.863
     ```
-
-    Interpreting the results:
+    </details>    
 
     * In 10 seconds, 670 times the session was opened and *select 1 from dual* was executed.
     * The time to execute each SQL was avg 0.478 ms. This is less than 1 ms, which is very fast.
     * The time to connect and execute was about 127 ms.
-      * The connection time accounted almost 100% of the total time.
+    * The connection time accounted almost 100% of the total time.
 
-2. Execute *adbping* for *SAPPHIRE* ADB, via java method.
-
-    Now we will repeat the same command, but using java instead of SQL*Plus.
-
-    Java connects once and create a connection pool, that saves all the time it takes for the authentication handshake process.
+2. Execute the same check, now using the Java method.
 
     ``` bash
     <copy>
@@ -151,10 +148,11 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
     # Be sure to hit RETURN
     ```
 
-    What we are doing here?
-       * Same thing as before, but connecting to ADB using java method.
+    * *-c java* tells the tool to use a Java connection instead.
 
-    ``` bash
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ ./adbping -u admin -p Welcome_1234 -w $TNS_ADMIN -c java -s sapphire_tp -d 10 -t 10
     +++Test Summary+++
        Test Client: java
@@ -168,14 +166,14 @@ ADBPing can evaluate multiple connection methods, like java or SQL*Plus.
        SQL Execution Time(ms) : Min:0.108 Max:1052.673 Avg:0.826 Median:0.213 Perc90:0.302 Perc95:0.336 Perc99:0.458
        Connect + SQL Execution Time(ms) : Min:0.114 Max:1052.705 Avg:0.858 Median:0.235 Perc90:0.355 Perc95:0.392 Perc99:0.582
     ```
+    </details>    
 
-    Interpreting the results:
-
+    * Java connects once and create a connection pool, that saves all the time it takes for the authentication handshake process.
     * In 10 seconds, 123896 times the session was opened and *select 1 from dual* was executed. This is almost 200x more than using SQL*Plus method.
     * The time to execute each SQL was avg 0.826 ms, less than 1 ms, which is still very fast.
     * The time to connect and execute was about 0.858 ms.
-      * The connection time accounted less than 1% of the total time now.
-      * Reason for all this gain is because java will connect once and use a pool to run the statements.
+    * The connection time accounted less than 1% of the total time now.
+    * Reason for all this gain is because Java will connect once and use a pool to run the statements.
 
 ## Task 3: Compare result with current PDBs
 
@@ -189,18 +187,16 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
     <copy>
     ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
     </copy>
-
-    # Be sure to hit RETURN
     ```
-
-    What we are doing here?
 
     * Checking how many times in 10 seconds (*-d 10*) we can execute a simple SQL (*select 1 from dual*).
     * Connecting to ADB using "sqlplus".
     * Opening 2 threads (*-t 2*) in parallel.
-      * We only 2 parallel process or we may cause starvation on the local connection resources.
+    * We only 2 parallel process or we may cause starvation on the local connection resources.
 
-    ``` bash
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ ./adbping -u system -p oracle -w $TNS_ADMIN -c sqlplus -s //localhost:1521/blue -d 10 -t 2
     +++Test Summary+++
        Test Client: sqlplus
@@ -211,33 +207,30 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
        Test start date: 2025-07-01 17:20:48.866061+00:00
        Test end date: 2025-07-01 17:20:58.895275+00:00
        SQL Execution Time(ms) : Min:0 Max:10 Avg:0.368 Median:0 Perc90:0 Perc95:0 Perc99:10
-       Connect + SQL Execution Time(ms) : Min:46.792 Max:62.586 Avg:49.405 Median:48.921 Perc90:50.691 Perc95:52.303 Perc99:60.038
+       Connect + SQL Execution Time(ms) : Min:46.792 Max:62.586 Avg:49.405 Median:48.921 Perc90:50.691 Perc95:52.303 Perc99:60.038    
     ```
-
-    Interpreting the results:
+    </details>
 
     * In 10 seconds, 380 times the session was opened and *select 1 from dual* was executed.
     * The time to execute each SQL was avg 0.368 ms.
-      * This was about the same time it took in ADB.
+    * This was about the same time it took in ADB.
     * The time to connect and execute was about 49 ms.
-      * The connection time accounted almost 100% of the total time.
-      * It took 2.5x more time to stablish SQL*Plus connection on *SAPPHIRE* ADB than on the local *BLUE* PDB.
+    * The connection time accounted almost 100% of the total time.
+    * It took 2.5x more time to stablish SQL*Plus connection on *SAPPHIRE* ADB than on the local *BLUE* PDB.
 
-2. Execute *adbping* for *BLUE* PDB, via java method.
-
-    Again, let's now go with *java method*, but now on the local PDB.
+2. Execute *adbping* for *BLUE* PDB, via Java method. This time on the local PDB.
 
     ``` bash
     <copy>
     ./adbping -u system -p oracle -w $TNS_ADMIN -c java -s //localhost:1521/blue -d 10 -t 10
     </copy>
-
-    # Be sure to hit RETURN
     ```
 
-    What we are doing here? Same thing as before, but connecting to ADB using java method.
+    * This command is similar to the previous one. However, this time we connect using Java method.
 
-    ``` bash
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ ./adbping -u system -p oracle -w $TNS_ADMIN -c java -s //localhost:1521/blue -d 10 -t 10
     +++Test Summary+++
        Test Client: java
@@ -251,21 +244,18 @@ In this lab, we will run it against the *BLUE* PDB and compare the results with 
        SQL Execution Time(ms) : Min:0.074 Max:8.441 Avg:0.145 Median:0.131 Perc90:0.194 Perc95:0.22 Perc99:0.289
        Connect + SQL Execution Time(ms) : Min:0.079 Max:12.98 Avg:0.162 Median:0.144 Perc90:0.223 Perc95:0.25 Perc99:0.334
     ```
-
-    Interpreting the results:
+    </details>    
 
     * In 10 seconds, 555099 times the session was opened and *select 1 from dual* was executed.
-      * This is about 1500x faster than using SQL*Plus method.
-      * This is 3x more than using java method on ADB.
+    * This is about 1500x faster than using SQL*Plus method.
+    * This is 3x more than using java method on ADB.
     * The time to execute each SQL was avg 0.145 ms.
     * The time to connect and execute was about 0.162 ms.
-      * The connection time accounted less than 1% of the total time.
+    * The connection time accounted less than 1% of the total time.
 
-After mesuring and comparing the total latency for ADB vs the local PDB, we can see PDB is faster, specially as the authentication process does not use TLS or mTLS.
+3. After mesuring and comparing the total latency for ADB vs the local PDB, we can see PDB is faster, specially as the authentication process does not use TLS or mTLS. However, both runs so fast that the difference is only spotted at the sub-milisecond layer.
 
-However, both runs so fast that the difference is only spotted at the sub-milisecond layer.
-
-As this difference will not represent any problem to our application, we can move forward with this migration. In case the latency passes any threshold defined by the application team, it would be needed to move the application closer to ADB, before moving forward with the process.
+4. As this difference will not represent any problem to our application, we can move forward with this migration. In case the latency passes any threshold defined by the application team, it would be needed to move the application closer to ADB, before moving forward with the process.
 
 You may now [*proceed to the next lab*](#next).
 
