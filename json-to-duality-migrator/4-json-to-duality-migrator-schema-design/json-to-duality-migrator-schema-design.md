@@ -27,20 +27,35 @@ In this lab, you will:
 
 Just like the previous lab, we will start with JSON collection tables `speaker`, `attendee`, and `session` that represents collections required for a database conference application.
 
-1. Create the `speaker`, `attendee`, and `session` collections.
+1. Let's drop all the objects that we created in the previous lab first.
 
-    ```sql
-    <copy>
-    DROP TABLE IF EXISTS speaker;
-    DROP TABLE IF EXISTS attendee;
-    DROP TABLE IF EXISTS session;
-    CREATE JSON COLLECTION TABLE IF NOT EXISTS speaker;
-    CREATE JSON COLLECTION TABLE IF NOT EXISTS attendee;
-    CREATE JSON COLLECTION TABLE IF NOT EXISTS session;
-    </copy>
-    ```
+   ```sql
+   <copy>
+   BEGIN
+     FOR t IN (SELECT table_name FROM user_tables) LOOP
+       BEGIN
+         EXECUTE IMMEDIATE 'DROP TABLE "' || t.table_name || '" CASCADE CONSTRAINTS';
+       END;
+     END LOOP;
+   END;
+   /
+   </copy>
+   ```
 
-2. Insert data into the `speaker`, `attendee`, and `session` collections. The attendee data is a bit different from the previous lab - only one attendee has specified their pre-ordered coffee item.
+2. Create the `speaker`, `attendee`, and `session` collections.
+
+   ```sql
+   <copy>
+   DROP TABLE IF EXISTS speaker;
+   DROP TABLE IF EXISTS attendee;
+   DROP TABLE IF EXISTS session;
+   CREATE JSON COLLECTION TABLE IF NOT EXISTS speaker;
+   CREATE JSON COLLECTION TABLE IF NOT EXISTS attendee;
+   CREATE JSON COLLECTION TABLE IF NOT EXISTS session;
+   </copy>
+   ```
+
+3. Insert data into the `speaker`, `attendee`, and `session` collections. The attendee data is a bit different from the previous lab - only one attendee has specified their pre-ordered coffee item.
 
    ```sql
    <copy>
@@ -206,7 +221,7 @@ In this task, we will infer a customized normalized relational schema using data
 
 In this task, we will import data from input JSON collections into the duality views. We will also look at techniques to find document that cannot be imported successfully and validate that data has been imported successfully.
 
-1. Let’s create error logs to log errors for documents that do not get imported successfully.
+1. Let's create error logs to log errors for documents that do not get imported successfully.
 
    ```sql
    <copy>
@@ -219,7 +234,7 @@ In this task, we will import data from input JSON collections into the duality v
    </copy>
    ```
 
-2. Let’s import the data into the duality views using the IMPORT\_ALL procedure.
+2. Let's import the data into the duality views using the IMPORT\_ALL procedure.
 
    ```sql
    <copy>

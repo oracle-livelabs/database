@@ -194,7 +194,7 @@ The result shows no rows selected indicating that the resulting schema fits the 
 
 In this task, we will import data from input JSON collections into the duality views. We will also look at techniques to find document that cannot be imported successfully and validate that data has been imported successfully.
 
-1. Let’s create error logs to log errors for documents that do not get imported successfully.
+1. Let's create error logs to log errors for documents that do not get imported successfully.
 
    ```sql
    <copy>
@@ -207,7 +207,7 @@ In this task, we will import data from input JSON collections into the duality v
    </copy>
    ```
 
-2. Let’s import the data into the duality views using the `IMPORT_ALL` procedure.
+2. Let's import the data into the duality views using the `IMPORT_ALL` procedure.
 
    ```sql
    <copy>
