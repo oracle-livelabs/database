@@ -36,13 +36,13 @@ During export and import, Data Pump may face errors or situations that can't be 
 
 ## Task 2: Revisiting the CPAT checks
 
-When we executed CPAT for the *RED* database, the only "Review Required" action that we had for the target database was "Directories".
+1. When we executed CPAT for the *RED* database, the only "Review Required" action that we had for the target database was "Directories".
 
 ![Directories](./images/red-directories.png)
 
-However, as all the directories mentioned on this check are oracle internal and were not in use by the *F1* schema or any other administrator task, we are good to go.
+2. However, as all the directories mentioned on this check are Oracle internal and were not in use by the *F1* schema, we are good to go.
 
-This is a good opportunity to read the CPAT file for any other finding, including the "Review Suggested" ones.
+3. This is a good opportunity to read the CPAT file for any other finding, including the "Review Suggested" ones.
 
 ## Task 3: Comparing source and target data and metadata
 
@@ -134,9 +134,11 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
 
     -- Be sure to hit RETURN
     ```
-
-    * The `SCAN_MODE` is set to full because it is a small table.
+    
+    * The code creates a comparison and uses `SCAN_MODE` set to full because it is a small database.
     * If you have bigger tables, you can select just a sample.
+    * In the end, it reports the findings for each table.
+    * *MATCH* means that the two tables are identical. The migration didn't corrupt any data.
 
     <details>
     <summary>*click to see the output*</summary>

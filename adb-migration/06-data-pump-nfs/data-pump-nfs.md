@@ -99,12 +99,10 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 2. Create a directory pointing to */nfs_mount*.
 
-    ``` bash
+    ``` sql
     <copy>
     create directory nfs_dir as '/nfs_mount';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -131,19 +129,20 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     ``` bash
     <copy>
     expdp userid=system/oracle@//localhost:1521/blue \
-    schemas=HR,PM,IX,SH,BI \
-    logtime=all \
-    metrics=true \
-    directory=nfs_dir \
-    dumpfile=schemas_export_%L.dmp \
-    logfile=schemas_export.log \
-    parallel=2 \
-    flashback_time=systimestamp
+       schemas=HR,PM,IX,SH,BI \
+       logtime=all \
+       metrics=true \
+       directory=nfs_dir \
+       dumpfile=schemas_export_%L.dmp \
+       logfile=schemas_export.log \
+       parallel=2 \
+       flashback_time=systimestamp
     </copy>
 
     # Be sure to hit RETURN
     ```
 
+    * You are performing a schema-based export of the schemas holding the data. For migrations to ADB, Oracle recommends using a schema-based approach. A full database export is not recommended.
     * *logtime* and *metrics* for a better verbose output.
     * *dumpfile=schemas\_export\_%L.dmp* and *parallel=2* to use parallelism.
     * *flashback\_time* for having a consistent data output.
@@ -368,7 +367,7 @@ In this task, we will change the default profile so passwords for imported users
 
 2. Alter the profile.
 
-    ``` bash
+    ``` sql
     <copy>
     alter profile default limit PASSWORD_LIFE_TIME unlimited;
     alter profile default limit PASSWORD_GRACE_TIME unlimited;
@@ -398,7 +397,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Create a directory pointing to *nfs-server:/exports*.
 
-    ``` bash
+    ``` sql
     <copy>
     create directory nfs_dir as 'nfs';
 
@@ -456,7 +455,7 @@ In this task, we will change the default profile so passwords for imported users
 
 2. Close SQLcl.
 
-    ``` bash
+    ``` sql
     <copy>
     exit;
     </copy>
@@ -471,13 +470,13 @@ In this task, we will change the default profile so passwords for imported users
     . adb
 
     impdp userid=admin/Welcome_1234@sapphire_tpurgent \
-    schemas=HR,PM,IX,SH,BI \
-    logtime=all \
-    metrics=true \
-    directory=nfs_dir \
-    dumpfile=schemas_export_%L.dmp \
-    logfile=schemas_import_nfs.log \
-    parallel=2
+       schemas=HR,PM,IX,SH,BI \
+       logtime=all \
+       metrics=true \
+       directory=nfs_dir \
+       dumpfile=schemas_export_%L.dmp \
+       logfile=schemas_import_nfs.log \
+       parallel=2
     </copy>
 
     # Be sure to hit RETURN

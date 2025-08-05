@@ -4,9 +4,7 @@
 
 In this lab, we will migrate the *RED* PDB to the *RUBY* ADB using Data Pump with database link.
 
-Differently from the "file method", with a database link, you don't need to create intermediate dump files. This makes this method very fast for smaller databases as we read and load at the same time.
-
-However, there are 2 issues with database link over dump files:
+Differently from the "file method", with a database link, you don't need to create intermediate dump files. This makes this method very fast for smaller databases as we read and load at the same time. However, there are 2 issues with database link over dump files:
 
 * If you have LOB, a network round trip is required for reach row with a LOB. If you have millions of LOB rows and a high latency connection to ADB, this may have a significant negative impact.
 * A network link import does not import metadata in parallel. On complex schemas this may have a significant negative impact.
@@ -32,9 +30,9 @@ This lab assumes:
 
 To create a database link from Autonomous Database to another non-ADB database, it is required to use mTLS connection.
 
-How it works? With Mutual TLS (mTLS), both the server and the client present certificates. They mutually authenticate each other. In this case, not only the *RUBY* database wallet would be required, but also the *RED* database wallet.
+With Mutual TLS (mTLS) both the server and the client present certificates during establishment of the connection. They mutually authenticate each other. In this case, not only the *RUBY* database wallet would be required, but also the *RED* database wallet.
 
-All the databases used on this lab are listening also on port 1522 using mTLS. We can check that using *lsnrctl*:
+All the databases used on this lab are listening also on port 1522 using mTLS. We can check that using *lsnrctl*.
 
 1. Use the *blue* 🟦 terminal. Check that *RED* database also authenticates using mTLS.
 
@@ -47,7 +45,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     # Be sure to hit RETURN
     ```
 
-    * Note the listener is also running on port *1522* using *TCPS*
+    * In the *Listener Endpoints Summary* you can see that the listener is also running on port *1522* using *TCPS*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -99,79 +97,64 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     </details>
 
+2. Verify the listener configuration.
+
     ``` bash
     <copy>
     cat $ORACLE_HOME/network/admin/listener.ora
-    cat $ORACLE_HOME/network/admin/sqlnet.ora
     </copy>
-
-    # Be sure to hit RETURN
     ```
 
+    * The listener has two endpoints. A regular, TCP endpoint on 1521. Plus, another TCPS on 1522.
+    * The endpoint on 1522 is used for secure TCPS connections.
+    * mTLS connections (TCPS) also require a wallet (*wallet\_location*).
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    LISTENER =
+      (DESCRIPTION_LIST =
+        (DESCRIPTION =
+          (ADDRESS = (PROTOCOL = TCP)(HOST = holserv1.livelabs.oraclevcn.com)(PORT = 1521))
+          (ADDRESS = (PROTOCOL = TCPS)(HOST = holserv1.livelabs.oraclevcn.com)(PORT = 1522))
+        )
+    )
+    
+    WALLET_LOCATION = (SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=/u01/app/oracle/tls_wallet)))    
+    ```
+    </details>    
+
+3. The database link between the two databases must also use TCPS, so a proper configuration in *sqlnet.ora* is required.
+
+    ``` bash
+    <copy>
+    cat $ORACLE_HOME/network/admin/sqlnet.ora
+    </copy>
+    ```
+
+    * The *wallet\_location* parameter allows use of the wallet to establish a secure connection.
     * All databases running on this *ORACLE\_HOME* will read the *WALLET\_LOCATION* of *sqlnet.ora* when a new connection is established and check if the provided certificate is available on this wallet.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
-    $ cat /u01/app/oracle/product/23/network/admin/listener.ora
-    LISTENER =
-    (DESCRIPTION_LIST =
-        (DESCRIPTION =
-        (ADDRESS = (PROTOCOL = TCP)(HOST = holserv1.livelabs.oraclevcn.com)(PORT = 1521))
-        (ADDRESS = (PROTOCOL = TCPS)(HOST = holserv1.livelabs.oraclevcn.com)(PORT = 1522))
-        )
-    )
-
-    WALLET_LOCATION = (SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=/u01/app/oracle/tls_wallet)))
-    $ cat /u01/app/oracle/product/23/network/admin/sqlnet.ora
     WALLET_LOCATION = (SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=/u01/app/oracle/tls_wallet)))
     ```
 
     </details>
 
-2. Authenticate using mTLS.
-
-    If we try to authenticate on TCPS without providing a wallet, we get an TNS error:
-
-    ``` bash
-    <copy>
-    sql admin/admin@tcps://localhost:1522/red
-    </copy>
-
-    # Be sure to hit RETURN
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-
-    ``` text
-    SQLcl: Release 25.1 Production on Wed Jul 02 14:48:30 2025
-
-    Copyright (c) 1982, 2025, Oracle.  All rights reserved.
-
-    Connection failed
-    USER          = admin
-    URL           = jdbc:oracle:oci8:@tcps://localhost:1522/red
-    Error Message = ORA-29002: SSL transport detected invalid or obsolete server certificate.
-    Help: https://docs.oracle.com/error-help/db/ora-29002/
-    ```
-
-    </details>
-
-    For this lab, we generated a wallet in advance with the certificate to connect on this server. The wallet is located under */home/oracle/client\_tls\_wallet*.
-
-    Connecting using the wallet:
+4. Authenticate using mTLS.
 
     ``` bash
     <copy>
     sql admin/admin@"tcps://localhost:1522/red?wallet_location=/home/oracle/client_tls_wallet&ssl_server_dn_match=false"
     </copy>
-
-    # Be sure to hit RETURN
     ```
 
+    * For this lab, we generated a wallet in advance with the certificate to connect on this server. The wallet is located under */home/oracle/client\_tls\_wallet*.
     * We need to provide *ssl_server_dn_match* as SQLcl would send *localhost* instead of *holserv1*, resulting in *ORA-17965*.
+    * If we try to authenticate on TCPS without providing a wallet, we get an TNS error (ORA-29002: SSL transport detected invalid or obsolete server certificate).
 
     <details>
     <summary>*click to see the output*</summary>
@@ -202,7 +185,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
 In this task, we will change the default profile so passwords for imported users will not expire and match the profile setting from the source database.
 
-1. Still in the *blue* 🟦 terminal, connect on the *RUBY* ADB to modify the default profile.
+1. Still in the *blue* 🟦 terminal, connect on the *RUBY* ADB.
 
     ``` bash
     <copy>
@@ -253,8 +236,6 @@ First, we need to upload the *RED* wallet to ADB directory.
     <copy>
     create directory red_dblink_wallet_dir as 'red_dblink_wallet_dir';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -270,12 +251,10 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 2. Next, let's upload the local wallet files to this directory.
 
-    ``` bash
+    ``` sql
     <copy>
     @~/scripts/adb-07-upload_file.sql /home/oracle/client_tls_wallet/cwallet.sso RED_DBLINK_WALLET_DIR cwallet.sso
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * *adb-07-upload\_file.sql* will upload a file to an *Oracle Directory* using SQLcl and JavaScript.
@@ -302,12 +281,10 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 3. Check if file was uploaded.
 
-    ``` bash
+    ``` sql
     <copy>
     select * from dbms_cloud.list_files('red_dblink_wallet_dir');
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -325,7 +302,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 4. Create the DB link credentials.
 
-    ``` bash
+    ``` sql
     <copy>
     begin
       dbms_cloud.create_credential(
@@ -360,7 +337,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 5. Create the DB link and test it.
 
-    ``` bash
+    ``` sql
     <copy>
     begin
       dbms_cloud_admin.create_database_link(
@@ -411,7 +388,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
 1. Create a directory pointing to *nfs-server:/exports* to store log files.
 
-    ``` bash
+    ``` sql
     <copy>
     create directory nfs_dir as 'nfs';
 
@@ -481,16 +458,14 @@ First, we need to upload the *RED* wallet to ADB directory.
     ``` bash
     <copy>
     impdp userid=admin/Welcome_1234@ruby_tpurgent \
-    schemas=F1 \
-    logtime=all \
-    metrics=true \
-    directory=nfs_dir \
-    network_link=source_dblink \
-    logfile=schemas_import_dblink.log \
-    parallel=2
+       schemas=F1 \
+       logtime=all \
+       metrics=true \
+       directory=nfs_dir \
+       network_link=source_dblink \
+       logfile=schemas_import_dblink.log \
+       parallel=2
     </copy>
-
-    # Be sure to hit RETURN
     ```
 
     * Note that we only use *directory* for saving the output *logfile*.
