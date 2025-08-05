@@ -83,6 +83,12 @@ This lab assumes:
     </copy>
     ```
 
+    * The commands extract the number of rows exported and imported from the Data Pump log files and store them in separate files.
+    * It then prints one of the files - then one with the number of exported rows.
+    * Then it uses *diff* to find differences in the files. If the number of rows exported and imported for a given table didn't match, there would be a difference in the files.
+    * This is not the case here, so the same amount of rows were exported and imported.
+    * This does, however, not say if the content of the rows are actually the same.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -128,13 +134,9 @@ When we executed CPAT for the *BLUE* database, there were some items on the "Rev
 
 ## Task 4: Fix the database link error
 
-In ADB Serverless, the syntax to create a database link is different. We must use DBMS\_CLOUD\_ADMIN. Let's fix it.
+In ADB Serverless, the syntax to create a database link is different. We must use *DBMS\_CLOUD\_ADMIN* instead for the *CREATE DATABASE LINK* command.
 
-First, this DB Link was connecting from (*BLUE* -> *RED*).
-
-As both databases were migrated, now this needs to be changed to connect from (*SAPPHIRE* -> *RUBY*).
-
-We need to upload the *RED* wallet to ADB directory.
+First, this DB Link was connecting from (*BLUE* -> *RED*). As both databases were migrated, now this needs to be changed to connect from (*SAPPHIRE* -> *RUBY*). Also, we need to upload the *RED* wallet to ADB directory.
 
 1. Use the *yellow* terminal 🟨. Let's first connect on ADB:
 

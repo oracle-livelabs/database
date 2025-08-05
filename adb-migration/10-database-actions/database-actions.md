@@ -104,7 +104,7 @@ In this task, we will create another administrator user for this *SAPPHIRE* ADB.
 
     ![Users menu](./images/user-1.png)
 
-2. Click on "+ Create User" on the left. I new screen will open.
+2. Click on "+ Create User" on the right. A new screen will open.
 
     ![Create User](./images/user-2.png)
 
@@ -119,7 +119,9 @@ In this task, we will create another administrator user for this *SAPPHIRE* ADB.
 
     ![Show code](./images/user-3.png)
 
-4. Click "Create User". After user is created, click "Sign Out" on the top left menu.
+4. Click "Create User". 
+
+5. Click on the "down arrow" in the upper right corner. Select "Sign Out".
 
 5. Let's connect as the newly created *DEV\_USER* (password *Welcome\_1234*).
 
