@@ -84,7 +84,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
         "coffeeItem"   : "Espresso",
-        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
+        "LECTUREs" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
                        {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
                        {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
@@ -95,7 +95,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
-        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
+        "LECTUREs" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
                        {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
@@ -104,7 +104,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
-        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
+        "LECTUREs" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
                        {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
@@ -112,7 +112,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "LECTUREs" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
 
    INSERT INTO lecture VALUES
      ('{"_id"               : 10,
@@ -159,7 +159,7 @@ In this task, we will infer a normalized relational schema using data from our J
      -- Infer relational schema
      schema_sql :=
       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames" : [ "lecture", "ATTENDEE", "SPEAKER" ]}')
+        JSON('{"tableNames" : [ "LECTURE", "ATTENDEE", "SPEAKER" ]}')
       );
 
      -- Print DDL script
@@ -174,7 +174,7 @@ In this task, we will infer a normalized relational schema using data from our J
 
    You can also use external tables pointing to data stored in object stores as the input to `INFER_AND_GENERATE_SCHEMA`. This is useful in cases where you are migrating from an external database to Oracle.
 
-2. Check the objects created by the migrator. Note that the relational schema is completely normalized - one table is created per logical entity, one for speaker (`speaker_root`), one for attendee (`attendee_root`), and one for lectures (`lectures_root`). The many-to-many relationship between attendees and lectures is automatically identified and a mapping table is created to map attendees to lectures.
+2. Check the objects created by the migrator. Note that the relational schema is completely normalized - one table is created per logical entity, one for speaker (`speaker_root`), one for attendee (`attendee_root`), and one for lecture (`lecture_root`). The many-to-many relationship between attendees and lectures is automatically identified and a mapping table is created to map attendees to lectures.
 
    ```sql
    <copy>
@@ -191,7 +191,7 @@ In this task, we will infer a normalized relational schema using data from our J
 
    ```sql
    <copy>
-   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'lecture', view_name => 'lecture_DUALITY');
+   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'LECTURE', view_name => 'LECTURE_DUALITY');
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'ATTENDEE', view_name => 'ATTENDEE_DUALITY');
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'SPEAKER', view_name => 'SPEAKER_DUALITY');
    </copy>
@@ -208,7 +208,7 @@ In this task, we will import data from input JSON collections into the duality v
    ```sql
    <copy>
    BEGIN
-     DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'lecture', err_log_table_name => 'lecture_ERR_LOG', skip_unsupported => TRUE);
+     DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'LECTURE', err_log_table_name => 'LECTURE_ERR_LOG', skip_unsupported => TRUE);
      DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'ATTENDEE', err_log_table_name => 'ATTENDEE_ERR_LOG', skip_unsupported => TRUE);
      DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'SPEAKER', err_log_table_name => 'SPEAKER_ERR_LOG', skip_unsupported => TRUE);
    END;
@@ -222,9 +222,9 @@ In this task, we will import data from input JSON collections into the duality v
    <copy>
    BEGIN
      DBMS_JSON_DUALITY.IMPORT_ALL(
-                         JSON('{"tableNames" : [ "lecture", "ATTENDEE", "SPEAKER" ],
-                                "viewNames"  : [ "lecture_DUALITY", "ATTENDEE_DUALITY", "SPEAKER_DUALITY" ],
-                                "errorLog"   : [ "lecture_ERR_LOG", "ATTENDEE_ERR_LOG", "SPEAKER_ERR_LOG" ]}'
+                         JSON('{"tableNames" : [ "LECTURE", "ATTENDEE", "SPEAKER" ],
+                                "viewNames"  : [ "LECTURE_DUALITY", "ATTENDEE_DUALITY", "SPEAKER_DUALITY" ],
+                                "errorLog"   : [ "LECTURE_ERR_LOG", "ATTENDEE_ERR_LOG", "SPEAKER_ERR_LOG" ]}'
                          )
      );
    END;

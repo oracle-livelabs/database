@@ -161,7 +161,7 @@ In this task, we will infer a customized normalized relational schema using data
      -- Infer relational schema
      schema_sql :=
       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "lecture" ],
+        JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
                "minFieldFrequency" : 30}'
         )
       );
@@ -186,7 +186,7 @@ In this task, we will infer a customized normalized relational schema using data
      -- Infer relational schema
      schema_sql :=
       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "lecture" ],
+        JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
                "minFieldFrequency" : 25,
                "hints"             : [ {"table" : "SPEAKER",
                                         "type"  : "datatype",
@@ -220,7 +220,7 @@ In this task, we will infer a customized normalized relational schema using data
 
    ```sql
    <copy>
-   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'lecture', view_name => 'lecture_DUALITY');
+   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'LECTURE', view_name => 'LECTURE_DUALITY');
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'ATTENDEE', view_name => 'ATTENDEE_DUALITY');
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'SPEAKER', view_name => 'SPEAKER_DUALITY');
    </copy>
@@ -235,7 +235,7 @@ In this task, we will import data from input JSON collections into the duality v
    ```sql
    <copy>
    BEGIN
-     DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'lecture', err_log_table_name => 'lecture_ERR_LOG', skip_unsupported => TRUE);
+     DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'LECTURE', err_log_table_name => 'LECTURE_ERR_LOG', skip_unsupported => TRUE);
      DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'ATTENDEE', err_log_table_name => 'ATTENDEE_ERR_LOG', skip_unsupported => TRUE);
      DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'SPEAKER', err_log_table_name => 'SPEAKER_ERR_LOG', skip_unsupported => TRUE);
    END;
@@ -249,9 +249,9 @@ In this task, we will import data from input JSON collections into the duality v
    <copy>
    BEGIN
      DBMS_JSON_DUALITY.IMPORT_ALL(
-                         JSON('{"tableNames" : [ "lecture", "ATTENDEE", "SPEAKER" ],
-                                "viewNames"  : [ "lecture_DUALITY", "ATTENDEE_DUALITY", "SPEAKER_DUALITY" ],
-                                "errorLog"   : [ "lecture_ERR_LOG", "ATTENDEE_ERR_LOG", "SPEAKER_ERR_LOG" ]}'
+                         JSON('{"tableNames" : [ "LECTURE", "ATTENDEE", "SPEAKER" ],
+                                "viewNames"  : [ "LECTURE_DUALITY", "ATTENDEE_DUALITY", "SPEAKER_DUALITY" ],
+                                "errorLog"   : [ "LECTURE_ERR_LOG", "ATTENDEE_ERR_LOG", "SPEAKER_ERR_LOG" ]}'
                          )
      );
    END;
