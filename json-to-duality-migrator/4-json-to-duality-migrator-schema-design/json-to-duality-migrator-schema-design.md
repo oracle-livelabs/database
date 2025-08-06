@@ -292,7 +292,8 @@ In this task, we will import data from input JSON collections into the duality v
 
 ## Learn More
 
-* [Blog: JSON-to-Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
+* [JSON to Duality Migrator Schema Customization Options](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/json-config-filelds-specifying-migrator-parameters.html#GUID-36F4ABA7-CA01-4D70-9CF1-50A00C21E149)
+* [Blog: JSON to Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
 * [Migrating from JSON to Duality](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/migrating-from-json-to-duality.html)
 * [JSON-Relational Duality Views](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html)
 

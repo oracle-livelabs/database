@@ -1,6 +1,6 @@
 # Introduction
 
-## About the Think Relational, Stay JSON: Oracle’s Duality View Revolution Workshop
+## About the Think Relational, Stay JSON: Oracle's Duality View Revolution Workshop
 
 This workshop focuses on migrating from JSON Collections to Duality Views using the JSON to Duality Migrator in Oracle Database 23ai. You will learn how to migrate apps from a document to relational model automatically without any application changes.
 
@@ -61,11 +61,13 @@ In this lab, you will:
 
 * Oracle Autonomous Database 23ai provisioned or one running in a LiveLabs environment
 
+You may now **proceed to the next lab**.
+
 ## Learn More
 
+* [Blog: Key benefits of JSON Relational Duality](https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 * [Blog: JSON to Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [Blog: Key benefits of JSON Relational Duality](https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 * [Migrating from JSON to Duality](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/migrating-from-json-to-duality.html)
 
 ## Acknowledgements

@@ -110,6 +110,8 @@ In this task, we will create a JSON collection table called `attendee` that repr
    </copy>
    ```
 
+   ![Task 2 Step 1 Output](../1-json-collections/images/task2-step1b.png " ")
+
 2. Add a field to an existing document. We will add a `country` field to Julian's attendee document to specify his country of origin.
 
    ```sql

@@ -279,7 +279,7 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Blog: JSON-to-Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
+* [Blog: JSON to Duality Migrator](https://blogs.oracle.com/database/post/jsontoduality-migrator)
 * [Migrating from JSON to Duality](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/migrating-from-json-to-duality.html)
 * [JSON-Relational Duality Views](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html)
 
