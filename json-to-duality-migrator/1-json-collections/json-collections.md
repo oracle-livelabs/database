@@ -44,7 +44,9 @@ In this task, we will create a JSON collection table called `attendee` that repr
    <copy>
    INSERT INTO attendee VALUES
      ('{"_id"          : 1,
-        "name"         : "Beda",
+        "firstName"    : "Beda",
+        "lastName"     : "Hammerschmidt",
+        "nickName"     : "Dr. JSON",
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
         "coffeeItem"   : "Espresso",
@@ -55,7 +57,8 @@ In this task, we will create a JSON collection table called `attendee` that repr
                        {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 2,
-        "name"         : "Hermann",
+        "firstName"    : "Hermann",
+        "lastName"     : "Baer",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
@@ -64,7 +67,9 @@ In this task, we will create a JSON collection table called `attendee` that repr
                        {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
-        "name"          : "Shashank",
+        "firstName"     : "Shashank",
+        "lastName"      : "Gugnani",
+        "nickName"      : "SG",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
@@ -72,7 +77,9 @@ In this task, we will create a JSON collection table called `attendee` that repr
                        {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
-        "name"         : "Julian",
+        "firstName"    : "Julian",
+        "lastName"     : "Dontcheff",
+        "nickName"     : "Jul",
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
@@ -125,7 +132,7 @@ In this task, we will create a JSON collection table called `attendee` that repr
    <copy>
    SELECT a.data.lastName || ', ' || a.data.firstName as name,
           a.data.nickName as nick_name,
-          a.country as country
+          a.data.country as country
    FROM attendee a
    WHERE a.data."_id" = 4;
    </copy>
@@ -152,7 +159,7 @@ In this task, we will update session name for session id 40, from "JSON Duality 
    UPDATE attendee
    SET data = JSON_TRANSFORM(
       data,
-      SET '$.sessions[?(@.id == 40)].sessionName' = 'JSON Relational Duality Views'
+      SET '$.sessions?(@.id == 40).sessionName' = 'JSON Relational Duality Views'
    )
    WHERE JSON_EXISTS(data, '$.sessions[*]?(@.id == 40)');
 
