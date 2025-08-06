@@ -33,16 +33,16 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
    <copy>
    BEGIN
      FOR t IN (
-       SELECT table_name
+       SELECT object_name
        FROM user_objects
        WHERE object_type = 'TABLE'
          AND created >= SYSDATE - INTERVAL '2' HOUR
      ) LOOP
        BEGIN
-         EXECUTE IMMEDIATE 'DROP TABLE "' || t.table_name || '" CASCADE CONSTRAINTS';
+         EXECUTE IMMEDIATE 'DROP TABLE "' || t.object_name || '" CASCADE CONSTRAINTS';
        EXCEPTION
          WHEN OTHERS THEN
-           DBMS_OUTPUT.PUT_LINE('Failed to drop table ' || t.table_name || ': ' || SQLERRM);
+           DBMS_OUTPUT.PUT_LINE('Failed to drop table ' || t.object_name || ': ' || SQLERRM);
        END;
      END LOOP;
    END;
