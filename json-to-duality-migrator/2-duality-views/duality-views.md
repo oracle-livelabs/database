@@ -93,44 +93,47 @@ In this task, we will create a duality view called `attendee` that represents a 
 
 3. Insert data into the attendee duality view.
 
-  ```sql
-  <copy>
-  INSERT INTO attendee VALUES
-    ('{"_id"          : 1,
-       "name"         : "Beda",
-       "age"          : 20,
-       "phoneNumber"  : "222-111-021",
-       "coffeeItem"   : "Espresso",
-       "sessions" : [ {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 90},
-                      {"id" : 20, "sessionName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
-                      {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
-                      {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                      {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}'),
-    ('{"_id"          : 2,
-       "name"         : "Hermann",
-       "age"          : 22,
-       "phoneNumber"  : "222-112-023",
-       "coffeeItem"   : "Cappuccino",
-       "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
-                      {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                      {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}'),
-    ('{"_id"           : 3,
-       "name"          : "Shashank",
-       "age"           : 23,
-       "phoneNumber"   : "222-112-024",
-       "coffeeItem"    : "Americano",
-       "sessions" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                      {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}'),
-    ('{"_id"          : 4,
-       "name"         : "Julian",
-       "age"          : 24,
-       "phoneNumber"  : "222-113-025",
-       "coffeeItem"   : "Decaf",
-       "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+   ```sql
+   <copy>
+   INSERT INTO attendee VALUES
+     ('{"_id"          : 1,
+        "name"         : "Beda",
+        "age"          : 20,
+        "phoneNumber"  : "222-111-021",
+        "coffeeItem"   : "Espresso",
+        "sessions" : [ {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 90},
+                       {"id" : 20, "sessionName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
+                       {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
+                       {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
+                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+   INSERT INTO attendee VALUES
+     ('{"_id"          : 2,
+        "name"         : "Hermann",
+        "age"          : 22,
+        "phoneNumber"  : "222-112-023",
+        "coffeeItem"   : "Cappuccino",
+        "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
+                       {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
+                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+   INSERT INTO attendee VALUES
+     ('{"_id"           : 3,
+        "name"          : "Shashank",
+        "age"           : 23,
+        "phoneNumber"   : "222-112-024",
+        "coffeeItem"    : "Americano",
+        "sessions" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
+                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+   INSERT INTO attendee VALUES
+     ('{"_id"          : 4,
+        "name"         : "Julian",
+        "age"          : 24,
+        "phoneNumber"  : "222-113-025",
+        "coffeeItem"   : "Decaf",
+        "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
 
-  COMMIT;
-  </copy>
-  ```
+   COMMIT;
+   </copy>
+   ```
 
   As you see, it looks like a normal SQL INSERT statement. The only difference is that we specified a proper JSON document as input for our DATA column. Copy the SQL statement and execute it in the SQL worksheet.
 

@@ -66,14 +66,16 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
         "yearsAtOracle"  : 25,
         "department"     : "Product Management",
         "sessionsTaught" : [ {"id" : 10, "sessionName" : "JSON and SQL",  "classType" : "Online"},
-                             {"id" : 20, "sessionName" : "PL/SQL or Javascript", "classType" : "In-person"} ]}'),
+                             {"id" : 20, "sessionName" : "PL/SQL or Javascript", "classType" : "In-person"} ]}');
+   INSERT INTO speaker VALUES
      ('{"_id"            : 102,
         "name"           : "Betty Z.",
         "phoneNumber"    : "222-555-022",
         "yearsAtOracle"  : 30,
         "department"     : "Autonomous Databases",
         "sessionsTaught" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "classType" : "In-person"},
-                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"} ]}'),
+                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"} ]}');
+   INSERT INTO speaker VALUES
      ('{"_id"            : 103,
         "name"           : "Colin J.",
         "phoneNumber"    : "222-555-023",
@@ -90,20 +92,23 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
                        {"id" : 20, "sessionName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
                        {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
                        {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}'),
+                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+   INSERT INTO attendee VALUES
      ('{"_id"          : 2,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
                        {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}'),
+                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+   INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "name"          : "Shashank",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "sessions" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}'),
+                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+   INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "name"         : "Julian",
         "age"          : 24,
@@ -115,19 +120,23 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
      ('{"_id"               : 10,
         "sessionName"       : "JSON and SQL",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}'),
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
+   INSERT INTO session VALUES
      ('{"_id"               : 20,
         "sessionName"       : "PL/SQL or Javascript",
         "creditHours"       : 4,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}'),
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
+   INSERT INTO session VALUES
      ('{"_id"               : 30,
         "sessionName"       : "MongoDB API Internals",
         "creditHours"       : 5,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}'),
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
+   INSERT INTO session VALUES
      ('{"_id"               : 40,
         "sessionName"       : "Oracle ADB on iPhone",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}'),
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
+   INSERT INTO session VALUES
      ('{"_id"               : 50,
         "sessionName"       : "JSON Duality Views",
         "creditHours"       : 3,

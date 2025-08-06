@@ -43,7 +43,7 @@ In this task, we will create a JSON collection table called `attendee` that repr
    ```sql
    <copy>
    INSERT INTO attendee VALUES
-     ('{"_id"         : 1,
+     ('{"_id"          : 1,
         "name"         : "Beda",
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
@@ -52,23 +52,26 @@ In this task, we will create a JSON collection table called `attendee` that repr
                        {"id" : 20, "sessionName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
                        {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
                        {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}'),
-     ('{"_id"         : 2,
+                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+   INSERT INTO attendee VALUES
+     ('{"_id"          : 2,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
         "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
                        {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}'),
-     ('{"_id"          : 3,
+                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+   INSERT INTO attendee VALUES
+     ('{"_id"           : 3,
         "name"          : "Shashank",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
         "sessions" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}'),
-     ('{"_id"         : 4,
+                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+   INSERT INTO attendee VALUES
+     ('{"_id"          : 4,
         "name"         : "Julian",
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
