@@ -60,14 +60,17 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> select PLAN_HASH_VALUE phv, child_number child, operation, options, object_name from v$sql_plan where sql_id='0cwuxyv314wcg' order by 1, child_number, position desc;
+    SQL> select PLAN_HASH_VALUE phv, child_number child, operation, options, object_name
+      2  from v$sql_plan
+      3  where sql_id='0cwuxyv314wcg'
+      4* order by 1, child_number, position desc;
 
-    PHV        CHILD OPERATION        OPTIONS                OBJECT_NAME
-    ---------- ----- ---------------- ---------------------- -----------
-    612465046      0 SELECT STATEMENT
-    612465046      0 TABLE ACCESS     BY INDEX ROWID BATCHED CUSTOMER
-    612465046      0 INDEX            RANGE SCAN             CUSTOMER_I1
-    612465046      0 SORT             ORDER BY
+             PHV    CHILD OPERATION           OPTIONS                   OBJECT_NAME
+    ____________ ________ ___________________ _________________________ ______________
+       612465046        0 SELECT STATEMENT
+       612465046        0 TABLE ACCESS        BY INDEX ROWID BATCHED    CUSTOMER
+       612465046        0 INDEX               RANGE SCAN                CUSTOMER_I1
+       612465046        0 SORT                ORDER BY
 
     4 rows selected.
     ```
@@ -134,10 +137,10 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     SIGNATURE : 7823966832826756817
 
     EXISTING BASELINES
-    ~~~~~~~~~~~~~~~~~~
+    ------------------
 
     PLANS PERFORMANCE
-    ~~~~~~~~~~~~~~~~~
+    -----------------
 
            Plan ET Avg      ET Avg      CPU Avg     CPU Avg           BG Avg       BG Avg     Rows Avg     Rows Avg       Executions       Executions                                   ET 100th    ET 99th     ET 97th     ET 95th     CPU 100th   CPU 99th    CPU 97th    CPU 95th
      Hash Value AWR (ms)    MEM (ms)    AWR (ms)    MEM (ms)             AWR          MEM          AWR          MEM              AWR              MEM   MIN Cost   MAX Cost  NL  HJ  MJ Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)
@@ -194,7 +197,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     PLANS:0
 
     RESULTING BASELINES
-    ~~~~~~~~~~~~~~~~~~~
+    -------------------
 
     CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
     ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -209,11 +212,11 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     2024-08-13T08:47:46 SQL_PLAN_6t52hc6fj7bqj9b7dfa5f YES YES NO  YES NO  2608724575  2608724575  612465046     2608724575
 
     SQL PLAN BASELINES
-    ~~~~~~~~~~~~~~~~~~
+    ------------------
     Error: neither SQL handle nor plan name specified
 
     RESULTING BASELINES
-    ~~~~~~~~~~~~~~~~~~~
+    -------------------
 
     CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
     ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -253,16 +256,11 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> col sql_handle format a20
-    SQL> col plan_name format a30
-    SQL> col enabled format a7
-    SQL> col accepted format a8
-    SQL> col fixed format a5
     SQL> SELECT sql_handle, plan_name, enabled, accepted, fixed FROM dba_sql_plan_baselines;
 
-    SQL_HANDLE           PLAN_NAME                      ENABLED ACCEPTED FIXED
-    -------------------- ------------------------------ ------- -------- -----
-    SQL_6c9450619d13aed1 SQL_PLAN_6t52hc6fj7bqj9b7dfa5f YES     YES      NO
+    SQL_HANDLE              PLAN_NAME                         ENABLED    ACCEPTED    FIXED
+    _______________________ _________________________________ __________ ___________ ________
+    SQL_6c9450619d13aed1    SQL_PLAN_6t52hc6fj7bqj9b7dfa5f    YES        YES         NO
     ```
 
     </details>

@@ -40,7 +40,7 @@ You need to prepare a few things before you can start a Data Pump export.
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -127,7 +127,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     </details>
 
-6. Exit SQL*Plus.
+6. Exit SQLcl.
 
     ``` sql
     <copy>

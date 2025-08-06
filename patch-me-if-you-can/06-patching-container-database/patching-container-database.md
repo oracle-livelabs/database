@@ -28,7 +28,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     ``` sql
     <copy>
     . cdb19
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -92,7 +92,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     * You must shut down a single instance database to patch it. In contrast, if it was an Oracle RAC Database, you could patch it using the *RAC Rolling* method without downtime.
 
-6. Exit SQL*Plus.
+6. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -145,7 +145,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     ``` bash
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -187,7 +187,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     </details>
 
-12. Exit SQL*Plus.
+12. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -320,7 +320,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     ``` bash
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -339,8 +339,12 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     ``` text
     SQL> alter pluggable database indigo open;
+    ORA-24344: success with compilation error
+    24344. 00000 -  "success with compilation error"
+    *Cause:    A sql/plsql compilation error occurred.
+    *Action:   Return OCI_SUCCESS_WITH_INFO along with the error code
 
-    Warning: PDB altered with errors.
+    Pluggable database INDIGO altered.
     ```
 
     </details>
@@ -349,10 +353,6 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     ``` sql
     <copy>
-    set line 200
-    col cause format a14
-    col type format a8
-    col message format a140
     select cause, type, message
     from   pdb_plug_in_violations
     where  name='INDIGO' and status!='RESOLVED';
@@ -470,7 +470,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     </details>
 
-9. Exit SQL*Plus.
+9. Exit SQLcl.
 
     ``` sql
     <copy>

@@ -25,7 +25,7 @@ This is an optional lab. You can skip it if you are already familiar with patchi
 
 You use *OPatch* to perform the first part of patching an Oracle Database; patching the Oracle home. OPatch replaces some files in the Oracle home and might also add new files. If the Oracle home is in use, for instance by a database instance or listener, you must stop those processes.
 
-1. Use the *blue* 🟦 terminal. Set the environment to *UPGR* and change to the Oracle home.
+1. Use the *blue* terminal 🟦. Set the environment to *UPGR* and change to the Oracle home.
 
     ``` bash
     <copy>
@@ -245,12 +245,12 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
 You can use the *queryable inventory* inside the database to get information from OPatch.
 
-1. Remain in the *blue* 🟦 terminal. Connect to the *UPGR* database.
+1. Remain in the *blue* terminal 🟦. Connect to the *UPGR* database.
 
      ``` sql
     <copy>
     . upgr
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -260,8 +260,6 @@ You can use the *queryable inventory* inside the database to get information fro
 
      ``` sql
     <copy>
-    set long 1000000
-    set pagesize 30
     select xmltransform(dbms_qopatch.get_opatch_install_info, dbms_qopatch.get_opatch_xslt) as install_info from dual;
     </copy>
 
@@ -275,10 +273,10 @@ You can use the *queryable inventory* inside the database to get information fro
     SQL> select xmltransform(dbms_qopatch.get_opatch_install_info, dbms_qopatch.get_opatch_xslt) as install_info from dual;
 
     INSTALL_INFO
-    ------------------------------------------
+    _______________________________________________
 
-    Oracle Home   : /u01/app/oracle/product/19
-    Inventory     : /u01/app/oraInventory
+    Oracle Home       : /u01/app/oracle/product/19
+    Inventory         : /u01/app/oraInventory
     ```
 
     </details>
@@ -287,7 +285,6 @@ You can use the *queryable inventory* inside the database to get information fro
 
     ``` sql
     <copy>
-    set pagesize 30
     select xmltransform(dbms_qopatch.is_patch_installed('37642901'), dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
     </copy>
 
@@ -303,7 +300,7 @@ You can use the *queryable inventory* inside the database to get information fro
     SQL> select xmltransform(dbms_qopatch.is_patch_installed('37642901'), dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
 
     Patch installed?
-    --------------------------------------------------------------------------------
+    _____________________________________________________
 
     Patch Information:
              37642901:   applied on 2025-07-24T10:42:18Z
@@ -315,8 +312,6 @@ You can use the *queryable inventory* inside the database to get information fro
 
     ``` sql
     <copy>
-    col description format a65
-    set line 100
     with inv as (select dbms_qopatch.get_opatch_lsinventory output from dual)
     select patches.patch_id, patches.patch_unique_id, patches.description
     from inv,
@@ -335,22 +330,22 @@ You can use the *queryable inventory* inside the database to get information fro
 
     ``` text
     SQL> with inv as (select dbms_qopatch.get_opatch_lsinventory output from dual)
-    select patches.patch_id, patches.patch_unique_id, patches.description
-    from inv,
-         xmltable('InventoryInstance/patches/*' passing inv.output columns patch_id number path 'patchID', patch_unique_id number path 'uniquePatchID', description varchar2(80) path 'patchDescription') patches;
+      2  select patches.patch_id, patches.patch_unique_id, patches.description
+      3  from inv,
+      4*      xmltable('InventoryInstance/patches/*' passing inv.output columns patch_id number path    'patchID', patch_unique_id number path 'uniquePatchID', description varchar2(80) path   'patchDescription') patches;
 
-      PATCH_ID PATCH_UNIQUE_ID DESCRIPTION
-    ---------- --------------- -----------------------------------------------------------------
-      37738908        27644118 SEPARATE PURGE_OLD_METADATA FROM PATCHING ACTIVITY IN DATAPATCH
-      37777295        27238855 DATAPUMP BUNDLE PATCH 19.27.0.0.0
-      37499406        26115603 OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
-      37642901        27123174 Database Release Update : 19.27.0.0.250415 (37642901)
-      29585399        22840393 OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
+       PATCH_ID    PATCH_UNIQUE_ID                                                        DESCRIPTION
+    ___________ __________________ __________________________________________________________________
+       37738908           27644118 SEPARATE PURGE_OLD_METADATA FROM PATCHING ACTIVITY IN DATAPATCH
+       37777295           27238855 DATAPUMP BUNDLE PATCH 19.27.0.0.0
+       37499406           26115603 OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+       37642901           27123174 Database Release Update : 19.27.0.0.250415 (37642901)
+       29585399           22840393 OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
     ```
 
     </details>
 
-5. Exit SQL*Plus.
+5. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -362,7 +357,7 @@ You can use the *queryable inventory* inside the database to get information fro
 
 Datapatch applies or rolls back SQL changes to the database.
 
-1. Remain in the *blue* 🟦 terminal. You find Datapatch in the *OPatch* directory.
+1. Remain in the *blue* terminal 🟦. You find Datapatch in the *OPatch* directory.
 
     ``` bash
     <copy>
@@ -559,7 +554,7 @@ Datapatch applies or rolls back SQL changes to the database.
 
      ``` bash
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -567,10 +562,6 @@ Datapatch applies or rolls back SQL changes to the database.
 
     ``` sql
     <copy>
-    col action format a8
-    col description format a80
-    set linesize 300
-    set pagesize 30
     select to_char(action_time, 'YYYY-MM-DD') as event_date,
            patch_id,
            patch_type,
@@ -591,33 +582,29 @@ Datapatch applies or rolls back SQL changes to the database.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> col action format a8
-    SQL> col description format a80
-    SQL> set linesize 300
-    SQL> set pagesize 30
     SQL> select to_char(action_time, 'YYYY-MM-DD') as event_date,
-                patch_id,
-                patch_type,
-                action,
-                description
-         from dba_registry_sqlpatch
-         order by action_time;
+      2         patch_id,
+      3         patch_type,
+      4         action,
+      5         description
+      6  from dba_registry_sqlpatch
+      7* order by action_time;
 
-    EVENT_DATE   PATCH_ID PATCH_TYPE ACTION   DESCRIPTION
-    ---------- ---------- ---------- -------- --------------------------------------------------------------------------------
-    2025-07-28   36878697 INTERIM    APPLY    OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    2025-07-28   36912597 RU         APPLY    Database Release Update : 19.25.0.0.241015 (36912597)
-    2025-07-28   37056207 INTERIM    APPLY    DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    2025-07-29   36878697 INTERIM    ROLLBACK OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    2025-07-29   37102264 INTERIM    APPLY    OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
-    2025-07-29   37056207 INTERIM    ROLLBACK DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    2025-07-29   37260974 RU         APPLY    Database Release Update : 19.26.0.0.250121 (37260974)
-    2025-07-29   37470729 INTERIM    APPLY    DATAPUMP BUNDLE PATCH 19.26.0.0.0
-    2025-07-29   37102264 INTERIM    ROLLBACK OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
-    2025-07-29   37499406 INTERIM    APPLY    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
-    2025-07-29   37470729 INTERIM    ROLLBACK DATAPUMP BUNDLE PATCH 19.26.0.0.0
-    2025-07-29   37642901 RU         APPLY    Database Release Update : 19.27.0.0.250415 (37642901)
-    2025-07-29   37777295 INTERIM    APPLY    DATAPUMP BUNDLE PATCH 19.27.0.0.0
+       EVENT_DATE    PATCH_ID    PATCH_TYPE      ACTION                                              DESCRIPTION
+    _____________ ___________ _____________ ___________ ________________________________________________________
+    2025-07-28       36878697 INTERIM       APPLY       OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
+    2025-07-28       36912597 RU            APPLY       Database Release Update : 19.25.0.0.241015 (36912597)
+    2025-07-28       37056207 INTERIM       APPLY       DATAPUMP BUNDLE PATCH 19.25.0.0.0
+    2025-08-05       36878697 INTERIM       ROLLBACK    OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
+    2025-08-05       37102264 INTERIM       APPLY       OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
+    2025-08-05       37056207 INTERIM       ROLLBACK    DATAPUMP BUNDLE PATCH 19.25.0.0.0
+    2025-08-05       37260974 RU            APPLY       Database Release Update : 19.26.0.0.250121 (37260974)
+    2025-08-05       37470729 INTERIM       APPLY       DATAPUMP BUNDLE PATCH 19.26.0.0.0
+    2025-08-05       37102264 INTERIM       ROLLBACK    OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
+    2025-08-05       37499406 INTERIM       APPLY       OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+    2025-08-05       37470729 INTERIM       ROLLBACK    DATAPUMP BUNDLE PATCH 19.26.0.0.0
+    2025-08-05       37642901 RU            APPLY       Database Release Update : 19.27.0.0.250415 (37642901)
+    2025-08-05       37777295 INTERIM       APPLY       DATAPUMP BUNDLE PATCH 19.27.0.0.0
     ```
 
     </details>
@@ -630,7 +617,6 @@ Here are a few useful queries that informs about the database.
 
     ``` sql
     <copy>
-    col oracle_home format a60
     select sys_context('USERENV','ORACLE_HOME') as oracle_home from dual;
     </copy>
 
@@ -641,11 +627,10 @@ Here are a few useful queries that informs about the database.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> col oracle_home format a60
     SQL> select sys_context('USERENV','ORACLE_HOME') as oracle_home from dual;
 
-    ORACLE_HOME
-    ------------------------------------------------------------
+                      ORACLE_HOME
+    _____________________________
     /u01/app/oracle/product/19
     ```
 
@@ -665,8 +650,8 @@ Here are a few useful queries that informs about the database.
     ``` text
     SQL> select version_full from v$instance;
 
-    VERSION_FULL
-    -----------------
+       VERSION_FULL
+    _______________
     19.27.0.0.0
     ```
 
@@ -676,9 +661,6 @@ Here are a few useful queries that informs about the database.
 
     ``` sql
     <copy>
-    col comp_id format a10
-    col version_full format a15
-    col status format a15
     select comp_id,
            version_full,
            status
@@ -693,17 +675,14 @@ Here are a few useful queries that informs about the database.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> col comp_id format a10
-    SQL> col version_full format a15
-    SQL> col status format a15
     SQL> select comp_id,
-                version_full,
-                status
-         from dba_registry
-         order by comp_id;
+      2         version_full,
+      3         status
+      4  from dba_registry
+      5* order by comp_id;
 
-    COMP_ID    VERSION_FULL    STATUS
-    ---------- --------------- ---------------
+       COMP_ID    VERSION_FULL        STATUS
+    __________ _______________ _____________
     CATALOG    19.27.0.0.0     VALID
     CATPROC    19.27.0.0.0     VALID
     OWM        19.27.0.0.0     VALID
@@ -713,7 +692,7 @@ Here are a few useful queries that informs about the database.
 
     </details>
 
-4. Exit SQL*Plus.
+4. Exit SQLcl.
 
     ``` sql
     <copy>

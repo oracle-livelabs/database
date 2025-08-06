@@ -30,7 +30,7 @@ Capture workload information from the workload you generated in lab 3 - Generate
     ``` sql
     <copy>
     . upgr
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -72,8 +72,6 @@ You now have two SQL Tuning Sets:
 
     ``` sql
     <copy>
-    col name for a30
-    col owner for a10
     select name, owner, statement_count 
     from dba_sqlset 
     where name like 'STS_Capture%';
@@ -86,17 +84,17 @@ You now have two SQL Tuning Sets:
     <summary>*click to see the output*</summary>
 
     ``` text
-    NAME                           OWNER      STATEMENT_COUNT
-    ------------------------------ ---------- ---------------
-    STS_CaptureCursorCache         SYS                     41
-    STS_CaptureAWR                 SYS                     31
+    NAME                         OWNER    STATEMENT_COUNT
+    _________________________ ________ __________________
+    STS_CaptureAWR            SYS                      36
+    STS_CaptureCursorCache    SYS                      43
     ```
 
     </details>
 
     It is very likely that you will get different statement counts. One of the reasons could be that often, the capture from the cursor cache will catch more statements compared to those written down from ASH (Active Session History) into AWR. And it does not play any role for the lab whether the number of statements matches.
 
-2. Exit from SQL*Plus.
+2. Exit from SQLcl.
 
     ``` sql
     <copy>

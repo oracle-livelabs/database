@@ -28,7 +28,7 @@ Datapatch stores patching information inside the database. Understanding these t
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -94,12 +94,6 @@ Datapatch stores patching information inside the database. Understanding these t
 
     ``` sql
     <copy>
-    set pagesize 1000
-    set line 200
-    col action format a8
-    col status format a10
-    col action_time format a30
-    col description format a60
     select   patch_id, action, status, action_time, description
     from     dba_registry_sqlpatch
     order by action_time;
@@ -117,24 +111,24 @@ Datapatch stores patching information inside the database. Understanding these t
 
     ``` text
     SQL> select   patch_id, action, status, action_time, description
-         from     dba_registSQL> ry_sqlpatch
-         order by action_time;
+      2  from     dba_registry_sqlpatch
+      3* order by action_time;
 
-      PATCH_ID ACTION   STATUS     ACTION_TIME                    DESCRIPTION
-    ---------- -------- ---------- ------------------------------ ------------------------------------------------------------
-      37499406 APPLY    SUCCESS    24-JUL-25 11.07.34.275677 AM   OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
-      37642901 APPLY    SUCCESS    24-JUL-25 11.09.35.626423 AM   Database Release Update : 19.27.0.0.250415 (37642901)
-      37777295 APPLY    SUCCESS    24-JUL-25 11.09.50.525332 AM   DATAPUMP BUNDLE PATCH 19.27.0.0.0
-      37499406 ROLLBACK SUCCESS    26-JUL-25 06.13.57.910977 AM   OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
-      37847857 APPLY    SUCCESS    26-JUL-25 06.13.57.960755 AM   OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
-      37777295 ROLLBACK SUCCESS    26-JUL-25 06.13.58.356647 AM   DATAPUMP BUNDLE PATCH 19.27.0.0.0
-      37960098 APPLY    SUCCESS    26-JUL-25 06.14.24.135101 AM   Database Release Update : 19.28.0.0.250715 (37960098)
-      38170982 APPLY    SUCCESS    26-JUL-25 06.15.04.060463 AM   DATAPUMP BUNDLE PATCH 19.28.0.0.0
-      37847857 ROLLBACK SUCCESS    27-JUL-25 04.45.25.075949 PM   OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
-      37499406 APPLY    SUCCESS    27-JUL-25 04.45.25.129895 PM   OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
-      38170982 ROLLBACK SUCCESS    27-JUL-25 04.45.28.030885 PM   DATAPUMP BUNDLE PATCH 19.28.0.0.0
-      37960098 ROLLBACK SUCCESS    27-JUL-25 04.45.52.646298 PM   Database Release Update : 19.28.0.0.250715 (37960098)
-      37777295 APPLY    SUCCESS    27-JUL-25 04.46.23.100470 PM   DATAPUMP BUNDLE PATCH 19.27.0.0.0
+       PATCH_ID      ACTION     STATUS                        ACTION_TIME                                              DESCRIPTION
+    ___________ ___________ __________ __________________________________ ________________________________________________________
+       37499406 APPLY       SUCCESS    28-JUL-25 06.47.19.709775000 AM    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+       37642901 APPLY       SUCCESS    28-JUL-25 06.49.05.749475000 AM    Database Release Update : 19.27.0.0.250415 (37642901)
+       37777295 APPLY       SUCCESS    28-JUL-25 06.49.21.076437000 AM    DATAPUMP BUNDLE PATCH 19.27.0.0.0
+       37499406 ROLLBACK    SUCCESS    06-AUG-25 02.51.46.116801000 PM    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+       37847857 APPLY       SUCCESS    06-AUG-25 02.51.46.197901000 PM    OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
+       37777295 ROLLBACK    SUCCESS    06-AUG-25 02.51.46.726059000 PM    DATAPUMP BUNDLE PATCH 19.27.0.0.0
+       37960098 APPLY       SUCCESS    06-AUG-25 02.52.15.642992000 PM    Database Release Update : 19.28.0.0.250715 (37960098)
+       38170982 APPLY       SUCCESS    06-AUG-25 02.53.07.995809000 PM    DATAPUMP BUNDLE PATCH 19.28.0.0.0
+       37847857 ROLLBACK    SUCCESS    06-AUG-25 04.27.00.257227000 PM    OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)
+       37499406 APPLY       SUCCESS    06-AUG-25 04.27.00.306292000 PM    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
+       38170982 ROLLBACK    SUCCESS    06-AUG-25 04.27.03.284323000 PM    DATAPUMP BUNDLE PATCH 19.28.0.0.0
+       37960098 ROLLBACK    SUCCESS    06-AUG-25 04.27.25.907309000 PM    Database Release Update : 19.28.0.0.250715 (37960098)
+       37777295 APPLY       SUCCESS    06-AUG-25 04.27.57.047666000 PM    DATAPUMP BUNDLE PATCH 19.27.0.0.0
 
     13 rows selected.
     ```
@@ -145,9 +139,6 @@ Datapatch stores patching information inside the database. Understanding these t
 
     ``` sql
     <copy>
-    set pagesize 1000
-    set line 125
-    col logfile format a125
     select logfile
     from   dba_registry_sqlpatch
     where  description like 'Database Release Update : 19.28%'
@@ -173,7 +164,7 @@ Datapatch stores patching information inside the database. Understanding these t
 
     </details>
 
-5. Exit SQL*Plus.
+5. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -586,7 +577,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     ``` sql
     <copy>
     . upgr
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -596,9 +587,6 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
 
     ``` sql
     <copy>
-    set line 130
-    set pagesize 30
-    col description format a50
     select * from (
        select description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024, 2) as size_mb
        from DBA_REGISTRY_SQLPATCH
@@ -623,7 +611,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     DATAPUMP BUNDLE PATCH 19.25.0.0.0                        1.03
     DATAPUMP BUNDLE PATCH 19.26.0.0.0                        1.03
     DATAPUMP BUNDLE PATCH 19.27.0.0.0                        1.03
-    DATAPUMP BUNDLE PATCH 19.28.0.0.0                        1.04    
+    DATAPUMP BUNDLE PATCH 19.28.0.0.0                        1.04
     OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)          .01
     OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)          .02
     OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          .02
@@ -639,7 +627,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
 
     </details>
 
-3. Exit SQL*Plus
+3. Exit SQLcl
 
     ``` sql
     <copy>
@@ -666,14 +654,14 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     ``` text
     SQL Patching tool version 19.28.0.0.0 Production on Fri Aug  1 06:55:12 2025
     Copyright (c) 2012, 2025, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_120240_2025_08_01_06_55_12/sqlpatch_invocation.log
-    
+
     Connecting to database...OK
     Gathering database info...done
     Bootstrapping registry and package to current versions...done
     Determining current state...done
-    
+
     Current state of interim SQL patches:
     Interim patch 36878697 (OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)):
       Binary registry: Not installed
@@ -699,19 +687,19 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     Interim patch 38170982 (DATAPUMP BUNDLE PATCH 19.28.0.0.0):
       Binary registry: Installed
       SQL registry: Applied successfully on 01-AUG-25 06.09.26.991082 AM
-    
+
     Current state of release update SQL patches:
       Binary registry:
         19.28.0.0.0 Release_Update 250705030417: Installed
       SQL registry:
         Applied 19.28.0.0.0 Release_Update 250705030417 successfully on 01-AUG-25 06.08.48.499528 AM
-    
+
       Purging old patch metadata process started...
-    
+
     CAUTION: This could be I/O intensive sometimes due to cleanup of BLOB columns. If you find this process taking unusually long time or if you are     seeing any impact to the database performance, then abort this datapatch process and reschedule this clean up activity in a quiet maintenance     window.
-    
+
       Purge old patch metadata process completed.
-    
+
     SQL Patching tool complete on Fri Aug  1 06:55:33 2025
     ```
 
@@ -721,7 +709,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
 
     ``` bash
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -729,9 +717,6 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
 
     ``` sql
     <copy>
-    set line 130
-    set pagesize 30
-    col description format a50
     select * from (
        select description, round(dbms_lob.getlength(PATCH_DIRECTORY)/1024/1024, 2) as size_mb
        from DBA_REGISTRY_SQLPATCH
@@ -754,15 +739,15 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     -------------------------------------------------- ----------
     DATAPUMP BUNDLE PATCH 19.25.0.0.0
     DATAPUMP BUNDLE PATCH 19.26.0.0.0
-    DATAPUMP BUNDLE PATCH 19.27.0.0.0                        
+    DATAPUMP BUNDLE PATCH 19.27.0.0.0
     DATAPUMP BUNDLE PATCH 19.28.0.0.0                        1.04
     OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
     OJVM RELEASE UPDATE: 19.26.0.0.250121 (37102264)
-    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)          
+    OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
     OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)          .02
     Release Update 19.25.0.0.0
     Release Update 19.26.0.0.0
-    Release Update 19.27.0.0.0                                   
+    Release Update 19.27.0.0.0
     Release Update 19.28.0.0.0                                203
     Release Update 19.3.0.0.0
 

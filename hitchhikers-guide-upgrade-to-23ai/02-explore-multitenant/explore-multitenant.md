@@ -30,7 +30,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 1. Use the *yellow* terminal 🟨. Set the environment to *CDB23* and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb23
     sql / as sysdba
@@ -60,10 +60,10 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ``` text
     CON_ID    CON_NAME    OPEN MODE     RESTRICTED
     _________ ___________ _____________ _____________
-    2         PDB$SEED    READ ONLY     NO
-    3         RED         READ WRITE    NO
-    4         BLUE        MOUNTED
-    5         GREEN       MOUNTED
+            2 PDB$SEED    READ ONLY     NO
+            3 RED         READ WRITE    NO
+            4 BLUE        MOUNTED
+            5 GREEN       MOUNTED
     ```
 
     </details>
@@ -103,10 +103,10 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ``` text
     CON_ID    CON_NAME    OPEN MODE     RESTRICTED
     _________ ___________ _____________ _____________
-    2         PDB$SEED    READ ONLY     NO
-    3         RED         READ WRITE    NO
-    4         BLUE        READ WRITE    NO
-    5         GREEN       MOUNTED
+            2 PDB$SEED    READ ONLY     NO
+            3 RED         READ WRITE    NO
+            4 BLUE        READ WRITE    NO
+            5 GREEN       MOUNTED
     ```
 
     </details>
@@ -129,11 +129,11 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ``` text
     CON_ID    NAME        OPEN_MODE     RESTRICTED
     _________ ___________ _____________ _____________
-    1         CDB$ROOT    READ WRITE    NO
-    2         PDB$SEED    READ ONLY     NO
-    3         RED         READ WRITE    NO
-    4         BLUE        READ WRITE    NO
-    5         GREEN       MOUNTED
+            1 CDB$ROOT    READ WRITE    NO
+            2 PDB$SEED    READ ONLY     NO
+            3 RED         READ WRITE    NO
+            4 BLUE        READ WRITE    NO
+            5 GREEN       MOUNTED
     ```
 
     </details>
@@ -370,7 +370,7 @@ You check initialization parameters and set some in the CDB. Also, find a list o
     <summary>*click to see the output*</summary>
 
     ``` text
-       CON_ID NAME                           VALUE
+    CON_ID    NAME                           VALUE
     _________ ______________________________ ___________
             2 sga_target                     0
             2 undo_tablespace
@@ -433,8 +433,8 @@ You check initialization parameters and set some in the CDB. Also, find a list o
     ``` text
     CON_ID    NAME               VALUE
     _________ __________________ ____________
-    3         sga_target         524288000
-    3         undo_tablespace    UNDOTBS1
+            3 sga_target         524288000
+            3 undo_tablespace    UNDOTBS1
     ```
 
     </details>
@@ -495,25 +495,25 @@ You check DBA and CDB views.
     ``` text
     CON_ID    NAME        TABLESPACE_NAME
     _________ ___________ __________________
-    1         CDB$ROOT    SYSAUX
-    1         CDB$ROOT    SYSTEM
-    1         CDB$ROOT    TEMP
-    1         CDB$ROOT    UNDOTBS1
-    1         CDB$ROOT    USERS
-    3         RED         SYSAUX
-    3         RED         SYSTEM
-    3         RED         TEMP
-    3         RED         UNDOTBS1
-    3         RED         USERS
-    4         BLUE        EXAMPLE
-    4         BLUE        SYSAUX
-    4         BLUE        SYSTEM
-    4         BLUE        TEMP
-    4         BLUE        UNDOTBS1
-    5         GREEN       SYSAUX
-    5         GREEN       SYSTEM
-    5         GREEN       TEMP
-    5         GREEN       UNDOTBS1
+            1 CDB$ROOT    SYSAUX
+            1 CDB$ROOT    SYSTEM
+            1 CDB$ROOT    TEMP
+            1 CDB$ROOT    UNDOTBS1
+            1 CDB$ROOT    USERS
+            3 RED         SYSAUX
+            3 RED         SYSTEM
+            3 RED         TEMP
+            3 RED         UNDOTBS1
+            3 RED         USERS
+            4 BLUE        EXAMPLE
+            4 BLUE        SYSAUX
+            4 BLUE        SYSTEM
+            4 BLUE        TEMP
+            4 BLUE        UNDOTBS1
+            5 GREEN       SYSAUX
+            5 GREEN       SYSTEM
+            5 GREEN       TEMP
+            5 GREEN       UNDOTBS1
 
     19 rows selected.
     ```
@@ -543,29 +543,29 @@ You check DBA and CDB views.
     ``` text
     CON_ID    NAME        TABLESPACE_NAME
     _________ ___________ __________________
-    1         CDB$ROOT    SYSAUX
-    1         CDB$ROOT    SYSTEM
-    1         CDB$ROOT    TEMP
-    1         CDB$ROOT    UNDOTBS1
-    1         CDB$ROOT    USERS
-    2         PDB$SEED    SYSAUX
-    2         PDB$SEED    SYSTEM
-    2         PDB$SEED    TEMP
-    2         PDB$SEED    UNDOTBS1
-    3         RED         SYSAUX
-    3         RED         SYSTEM
-    3         RED         TEMP
-    3         RED         UNDOTBS1
-    3         RED         USERS
-    4         BLUE        EXAMPLE
-    4         BLUE        SYSAUX
-    4         BLUE        SYSTEM
-    4         BLUE        TEMP
-    4         BLUE        UNDOTBS1
-    5         GREEN       SYSAUX
-    5         GREEN       SYSTEM
-    5         GREEN       TEMP
-    5         GREEN       UNDOTBS1
+            1 CDB$ROOT    SYSAUX
+            1 CDB$ROOT    SYSTEM
+            1 CDB$ROOT    TEMP
+            1 CDB$ROOT    UNDOTBS1
+            1 CDB$ROOT    USERS
+            2 PDB$SEED    SYSAUX
+            2 PDB$SEED    SYSTEM
+            2 PDB$SEED    TEMP
+            2 PDB$SEED    UNDOTBS1
+            3 RED         SYSAUX
+            3 RED         SYSTEM
+            3 RED         TEMP
+            3 RED         UNDOTBS1
+            3 RED         USERS
+            4 BLUE        EXAMPLE
+            4 BLUE        SYSAUX
+            4 BLUE        SYSTEM
+            4 BLUE        TEMP
+            4 BLUE        UNDOTBS1
+            5 GREEN       SYSAUX
+            5 GREEN       SYSTEM
+            5 GREEN       TEMP
+            5 GREEN       UNDOTBS1
 
     23 rows selected.
     ```
@@ -589,29 +589,29 @@ You check DBA and CDB views.
     ``` text
     CON_ID    TABLESPACE_NAME
     _________ __________________
-    1         SYSAUX
-    1         SYSTEM
-    1         TEMP
-    1         UNDOTBS1
-    1         USERS
-    2         SYSAUX
-    2         SYSTEM
-    2         TEMP
-    2         UNDOTBS1
-    3         SYSAUX
-    3         SYSTEM
-    3         TEMP
-    3         UNDOTBS1
-    3         USERS
-    4         EXAMPLE
-    4         SYSAUX
-    4         SYSTEM
-    4         TEMP
-    4         UNDOTBS1
-    5         SYSAUX
-    5         SYSTEM
-    5         TEMP
-    5         UNDOTBS1
+            1 SYSAUX
+            1 SYSTEM
+            1 TEMP
+            1 UNDOTBS1
+            1 USERS
+            2 SYSAUX
+            2 SYSTEM
+            2 TEMP
+            2 UNDOTBS1
+            3 SYSAUX
+            3 SYSTEM
+            3 TEMP
+            3 UNDOTBS1
+            3 USERS
+            4 EXAMPLE
+            4 SYSAUX
+            4 SYSTEM
+            4 TEMP
+            4 UNDOTBS1
+            5 SYSAUX
+            5 SYSTEM
+            5 TEMP
+            5 UNDOTBS1
 
     23 rows selected.
     ```
@@ -642,10 +642,10 @@ You check DBA and CDB views.
     ``` text
     CON_ID    NAME        TABLESPACE_NAME
     _________ ___________ __________________
-    5         GREEN       SYSAUX
-    5         GREEN       SYSTEM
-    5         GREEN       TEMP
-    5         GREEN       UNDOTBS1
+            5 GREEN       SYSAUX
+            5 GREEN       SYSTEM
+            5 GREEN       TEMP
+            5 GREEN       UNDOTBS1
 
     4 rows selected.
     ```

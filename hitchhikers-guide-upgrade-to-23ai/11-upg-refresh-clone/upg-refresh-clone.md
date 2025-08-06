@@ -30,7 +30,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -80,7 +80,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
 
     </details>
 
-3. Exit SQL*Plus.
+3. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -336,12 +336,12 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you will enter some data to the *FTEX* database. This allows you to verify that changes made after the initial copy of data files still exist in the PDB after the migration.
 
-3. Do not exit AutoUpgrade. Use a second terminal and set the environment to the *FTEX* database.
+3. Do not exit AutoUpgrade. Switch to the *blue* terminal 🟦 and set the environment to the *FTEX* database.
 
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -376,7 +376,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     </details>
 
-5. Exit SQL*Plus.
+5. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -384,7 +384,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     </copy>
     ```
 
-6. Back in the first terminal check the progress of the *REFRESHPDB* phase. The *MESSAGE* field tells you how far it is.
+6. Switch back to the *yellow* terminal 🟨 and check the progress of the *REFRESHPDB* phase. The *MESSAGE* field tells you how far it is.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -402,7 +402,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     </details>
 
-7. Switch to the second terminal. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
+7. Switch to the *blue* terminal 🟦. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
 
     ``` bash
     <copy>
@@ -410,7 +410,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     grep -i -B2 "create pluggable database \"TEAL\"" alert_CDB23.log
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     * Notice how AutoUpgrade used the `CREATE PLUGGABLE DATABASE` statement.
@@ -480,7 +480,7 @@ The *REFRESHPDB* phase would stay technically for the next 100 hours. Reason we 
 
 When the upgrade starts, AutoUpgrade executes a final refresh to bring over the latest changes. So no more changes will be captured from the source database. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
 
-1. Press ENTER just to stop *lsj* from spooling the job status. Next, run the `proceed` command to force the start of upgrade process **now**.
+1. Use the *yellow* terminal 🟨. Press ENTER just to stop *lsj* from spooling the job status. Next, run the `proceed` command to force the start of upgrade process **now**.
 
     ``` bash
     <copy>
@@ -646,7 +646,7 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -677,7 +677,7 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
 
     </details>
 
-3. Exit SQL*Plus.
+3. Exit SQLcl.
 
     ``` sql
     <copy>

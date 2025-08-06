@@ -37,7 +37,7 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -184,7 +184,7 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
 
     </details>
 
-8. Exit SQL*Plus.
+8. Exit SQLcl.
 
     ``` sql
     <copy>

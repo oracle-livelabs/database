@@ -28,14 +28,14 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 1. Use the *yellow* terminal 🟨. Set the environment to *CDB23* and connect.
 
-      ``` sql
-      <copy>
-      . cdb23
-      sql / as sysdba
-      </copy>
+    ``` sql
+    <copy>
+    . cdb23
+    sql / as sysdba
+    </copy>
 
-      -- Be sure to hit RETURN
-      ```
+    -- Be sure to hit RETURN
+    ```
 
 2. Switch to *UPGR*, then create a SQL Tuning Advisor task.
 
@@ -252,7 +252,7 @@ In this lab, you will implement some of the recommendations. Namely, those about
 
 1. Evaluate the effect on your workload. Use SPA to test based on *ELAPSED\_TIME* and generate reports.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_elapsed.sql
     @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
