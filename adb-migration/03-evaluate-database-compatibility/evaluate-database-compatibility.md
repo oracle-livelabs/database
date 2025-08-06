@@ -96,6 +96,7 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
     ``` bash
     <copy>
     . cdb23
+
     ~/cpat/premigration.sh \
        --connectstring jdbc:oracle:oci:@ --sysdba \
        --targetcloud ALL \
@@ -121,7 +122,6 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
 
     ``` text
     $ ~/cpat/premigration.sh \
-    ~/cpat/premigration.sh \
     >   --connectstring jdbc:oracle:oci:@ --sysdba \
     >   --targetcloud ALL \
     >   --migrationmethod ALL \
@@ -313,22 +313,22 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
     -----------------------------------
       PRODUCT                                  VERSION    VERSION_FULL STATUS
       ---------------------------------------- ---------- ------------ ---------------------------------------
-      Oracle Database 23ai Enterprise Edition  23.0.0.0.0 23.8.0.25.04 for Oracle Cloud and Engineered Systems
+      Oracle Database 23ai Enterprise Edition  23.0.0.0.0 23.9.0.25.07 for Oracle Cloud and Engineered Systems
       Source Database Compatible Version: 23.0.0
-      Source Database Version:            23.8.0.25.04
+      Source Database Version:            23.9.0.25.07
     
     Source Database Patch Information
     ---------------------------------
       COMMENTS                                                          SOURCE_VERSION TARGET_VERSION ACTION     ACTION_TIME
       ----------------------------------------------------------------- -------------- -------------- ---------- --------------------
-      RDBMS_23.8.0.25.04DBRU_LINUX.X64_250416                           23                            BOOTSTRAP
+      RDBMS_23.9.0.25.07DBRU_LINUX.X64_250416                           23                            BOOTSTRAP
       ca1d019aff30b2db3fdfd55985a5968e|AC94252451E296090CF0DA55B54EDD60 23                            BOOTSTRAP
       395f6924a8636b0c79d567b200887def|EC8FDCD4372C30FB3659559AD3155574 23                            BOOTSTRAP
       cc33d7b58f7f4efa82f56bcd4e4cc655|CFE1C0F9D24EFBEAA05917AD4A3957B9 23                            BOOTSTRAP
       e0b85a0176a706b50918f5ba985f7bde|40E31CE3CE567D947FFFBE286C3BA439 23                            BOOTSTRAP
-      Installed RU 23.8.0.25.04                                         23.8.0.25.04                  RU_INSTALL 03-MAY-2025 09:22:24
-      DATAPUMP BUNDLE PATCH 23.8.0.25.04                                23.8.0.25.04   23.8.0.25.04   APPLY      03-MAY-2025 09:21:36
-      Database Release Update : 23.8.0.25.04 (37701421) Gold Image      23.8.0.25.04   23.8.0.25.04   APPLY      03-MAY-2025 09:22:24
+      Installed RU 23.9.0.25.07                                         23.9.0.25.07                  RU_INSTALL 03-MAY-2025 09:22:24
+      DATAPUMP BUNDLE PATCH 23.9.0.25.07                                23.9.0.25.07   23.9.0.25.07   APPLY      03-MAY-2025 09:21:36
+      Database Release Update : 23.9.0.25.07 (37701421) Gold Image      23.9.0.25.07   23.9.0.25.07   APPLY      03-MAY-2025 09:22:24
     
     ------------------------------------------------------------------------------------------------------------------------------------
     Premigration Advisor Report Check Summary
@@ -402,6 +402,7 @@ Knowing the target type enables you to create a much more specific report.
     ``` bash
     <copy>
     . adb
+
     ~/cpat/premigration.sh \
        --connectstring jdbc:oracle:thin:@sapphire_tp?TNS_ADMIN=$TNS_ADMIN \
        --username ADMIN \
@@ -444,6 +445,7 @@ Knowing the target type enables you to create a much more specific report.
     ``` bash
     <copy>
     . adb
+
     ~/cpat/premigration.sh \
        --connectstring jdbc:oracle:thin:@ruby_tp?TNS_ADMIN=$TNS_ADMIN \
        --username ADMIN \

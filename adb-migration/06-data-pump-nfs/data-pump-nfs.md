@@ -88,7 +88,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
 1. Still in the *yellow* 🟨 terminal, connect on the *BLUE* PDB to create a directory.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb23
     sql sys/oracle@//localhost:1521/blue as sysdba
@@ -152,7 +152,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     ``` text
     Export: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed Jul 2 13:37:05 2025
-    Version 23.8.0.25.04
+    Version 23.9.0.25.07
 
     Copyright (c) 1982, 2025, Oracle and/or its affiliates.  All rights reserved.
 
@@ -356,7 +356,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Still in the *yellow* 🟨 terminal, connect on the *SAPPHIRE* ADB to modify the default profile.
 
-    ``` bash
+    ``` sql
     <copy>
     . adb
     sql admin/Welcome_1234@sapphire_tp
@@ -490,7 +490,7 @@ In this task, we will change the default profile so passwords for imported users
 
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed Jul 2 13:42:21 2025
-    Version 23.8.0.25.04
+    Version 23.9.0.25.07
 
     Copyright (c) 1982, 2025, Oracle and/or its affiliates.  All rights reserved.
 

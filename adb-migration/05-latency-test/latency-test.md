@@ -97,7 +97,7 @@ You find the tool in */home/oracle/scripts/*.
 
 ## Task 2: Generate ADBPing report for ADB
 
-ADBPing can evaluate multiple connection methods, like Java or SQL*Plus. It connects and execute a simple query (`select 1 from dual`) a number of times. Based on timings on the executions, it generates a report.
+ADBPing can evaluate multiple connection methods, like Java or SQL*Plus. It connects and execute a simple query (`select 1 from dual`) as many times it can for a period. Based on timings on the executions, it generates a report.
 
 1. Execute *adbping* for *SAPPHIRE* ADB and check the SQL*Plus method.
 
@@ -113,7 +113,7 @@ ADBPing can evaluate multiple connection methods, like Java or SQL*Plus. It conn
     # Be sure to hit RETURN
     ```
 
-    * The tool runs the test 10 times (*-d 10*). 
+    * The tool runs the test for 10 seconds (*-d 10*). 
     * It opens 10 threads in parallel (*-t 10*).
 
     <details>
