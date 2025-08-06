@@ -32,9 +32,17 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
    ```sql
    <copy>
    BEGIN
-     FOR t IN (SELECT table_name FROM user_tables) LOOP
+     FOR t IN (
+       SELECT table_name
+       FROM user_objects
+       WHERE object_type = 'TABLE'
+         AND created >= SYSDATE - INTERVAL '2' HOUR
+     ) LOOP
        BEGIN
          EXECUTE IMMEDIATE 'DROP TABLE "' || t.table_name || '" CASCADE CONSTRAINTS';
+       EXCEPTION
+         WHEN OTHERS THEN
+           DBMS_OUTPUT.PUT_LINE('Failed to drop table ' || t.table_name || ': ' || SQLERRM);
        END;
      END LOOP;
    END;
@@ -266,7 +274,7 @@ In this task, we will import data from input JSON collections into the duality v
 
    ```sql
    <copy>
-   SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM lecture_ERR_LOG;
+   SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM LECTURE_ERR_LOG;
    SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM ATTENDEE_ERR_LOG;
    SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM SPEAKER_ERR_LOG;
    </copy>
