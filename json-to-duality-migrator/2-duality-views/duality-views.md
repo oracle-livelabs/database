@@ -117,9 +117,9 @@ In this task, we will create a duality view called `attendee` that represents a 
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
-        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3},
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
+                       {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "firstName"     : "Shashank",
@@ -128,8 +128,8 @@ In this task, we will create a duality view called `attendee` that represents a 
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
-        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "firstName"    : "Julian",

@@ -101,16 +101,16 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
-        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3},
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
+                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "name"          : "Shashank",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
-        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "name"         : "Julian",
