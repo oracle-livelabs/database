@@ -46,6 +46,9 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
 
    ```sql
    <copy>
+   DROP VIEW IF EXISTS speaker;
+   DROP VIEW IF EXISTS attendee;
+   DROP VIEW IF EXISTS lecture;
    DROP TABLE IF EXISTS speaker;
    DROP TABLE IF EXISTS attendee;
    DROP TABLE IF EXISTS lecture;
@@ -98,7 +101,7 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
-        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
+        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
                        {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
@@ -114,7 +117,7 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
 
    INSERT INTO lecture VALUES
      ('{"_id"               : 10,
@@ -206,7 +209,7 @@ In this task, we will infer a customized normalized relational schema using data
    </copy>
    ```
 
-3. Describe the `speaker_root` table. We can see that the datatype for `phone_number` is `CHAR(11)`, which is exactly what we specified in the hint parameter.
+3. Describe the `speaker_root` table. We can see that the datatype for `PHONE_NUMBER` is `CHAR(11)`, which is exactly what we specified in the hint parameter.
 
    ```sql
    <copy>
@@ -270,6 +273,14 @@ In this task, we will import data from input JSON collections into the duality v
    ```
 
 4. Let's validate that all data has been successfully imported using the `VALIDATE_IMPORT_REPORT` table function. This should show no rows selected for each duality view, which means that all data has been successfully imported.
+
+   ```sql
+   <copy>
+   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_IMPORT_REPORT(table_name => 'LECTURE', view_name => 'LECTURE_DUALITY');
+   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_IMPORT_REPORT(table_name => 'ATTENDEE', view_name => 'ATTENDEE_DUALITY');
+   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_IMPORT_REPORT(table_name => 'SPEAKER', view_name => 'SPEAKER_DUALITY');
+   </copy>
+   ```
 
 ## Learn More
 

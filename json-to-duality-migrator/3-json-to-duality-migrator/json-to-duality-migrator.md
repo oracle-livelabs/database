@@ -41,6 +41,9 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
 
    ```sql
    <copy>
+   DROP VIEW IF EXISTS speaker;
+   DROP VIEW IF EXISTS attendee;
+   DROP VIEW IF EXISTS lecture;
    DROP TABLE IF EXISTS speaker;
    DROP TABLE IF EXISTS attendee;
    DROP TABLE IF EXISTS lecture;
@@ -84,7 +87,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
         "coffeeItem"   : "Espresso",
-        "LECTUREs" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
                        {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
                        {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
@@ -95,7 +98,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
-        "LECTUREs" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
+        "Lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
                        {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
                        {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
@@ -104,7 +107,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
-        "LECTUREs" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
+        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
                        {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
@@ -112,7 +115,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "LECTUREs" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
 
    INSERT INTO lecture VALUES
      ('{"_id"               : 10,
@@ -148,7 +151,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
 
 In this task, we will infer a normalized relational schema using data from our JSON collections. The JSON to Duality Migrator will analyze the data in the input collections, and recommend a set of relational tables (including constraints, indexes, and sequences) and a set of duality views to match the input JSON collections.
 
-1. Run the `INFER_AND_GENERATE_SCHEMA` procedure to infer a relational schema using a few lines of PL/SQL code. This procedure will analyze the data in our input collections, infer an optimized normalized relational schema, and generate a DDL script to create the relational schema along with duality views for each collection. Here we store the generated DDL script in a `CLOB` variable and then call the `EXECUTE IMMEDIATE` PL/SQL construct to execute the script.
+1. Run the `INFER_AND_GENERATE_SCHEMA` procedure to infer a relational schema using a few lines of PL/SQL code. This procedure will analyze the data in our input collections, infer an optimized normalized relational schema, and generate a DDL script to create the relational schema along with duality views for each collection. Here, we store the generated DDL script in a `CLOB` variable and then call the `EXECUTE IMMEDIATE` PL/SQL construct to execute the script.
 
    ```sql
    <copy>
