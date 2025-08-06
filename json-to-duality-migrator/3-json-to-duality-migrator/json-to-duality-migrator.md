@@ -35,22 +35,22 @@ In this lab, you will:
 
 ## Task 1: Create JSON Collections and Load Data
 
-In this task, we will create JSON collection tables `speaker`, `attendee`, and `session` that represents collections required for a database conference application.
+In this task, we will create JSON collection tables `speaker`, `attendee`, and `lecture` that represents collections required for a database conference application.
 
-1. Create the `speaker`, `attendee`, and `session` collections.
+1. Create the `speaker`, `attendee`, and `lecture` collections.
 
    ```sql
    <copy>
    DROP TABLE IF EXISTS speaker;
    DROP TABLE IF EXISTS attendee;
-   DROP TABLE IF EXISTS session;
+   DROP TABLE IF EXISTS lecture;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS speaker;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS attendee;
-   CREATE JSON COLLECTION TABLE IF NOT EXISTS session;
+   CREATE JSON COLLECTION TABLE IF NOT EXISTS lecture;
    </copy>
    ```
 
-2. Insert data into the `speaker`, `attendee`, and `session` collections.
+2. Insert data into the `speaker`, `attendee`, and `lecture` collections.
 
    ```sql
    <copy>
@@ -60,23 +60,23 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "phoneNumber"    : "222-555-011",
         "yearsAtOracle"  : 25,
         "department"     : "Product Management",
-        "sessionsTaught" : [ {"id" : 10, "sessionName" : "JSON and SQL",  "classType" : "Online"},
-                             {"id" : 20, "sessionName" : "PL/SQL or Javascript", "classType" : "In-person"} ]}');
+        "lecturesTaught" : [ {"id" : 10, "lectureName" : "JSON and SQL",  "classType" : "Online"},
+                             {"id" : 20, "lectureName" : "PL/SQL or Javascript", "classType" : "In-person"} ]}');
    INSERT INTO speaker VALUES
      ('{"_id"            : 102,
         "name"           : "Betty Z.",
         "phoneNumber"    : "222-555-022",
         "yearsAtOracle"  : 30,
         "department"     : "Autonomous Databases",
-        "sessionsTaught" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "classType" : "In-person"},
-                             {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "classType" : "Online"} ]}');
+        "lecturesTaught" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "classType" : "In-person"},
+                             {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "classType" : "Online"} ]}');
    INSERT INTO speaker VALUES
      ('{"_id"            : 103,
         "name"           : "Colin J.",
         "phoneNumber"    : "222-555-023",
         "yearsAtOracle"  : 27,
         "department"     : "In-Memory and Data",
-        "sessionsTaught" : [ {"id" : 50, "sessionName" : "JSON Duality Views", "classType" : "Online"} ]}');
+        "lecturesTaught" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "classType" : "Online"} ]}');
 
    INSERT INTO attendee VALUES
      ('{"_id"          : 1,
@@ -84,59 +84,59 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
         "coffeeItem"   : "Espresso",
-        "sessions" : [ {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 90},
-                       {"id" : 20, "sessionName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
-                       {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
-                       {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
+                       {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
+                       {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
+                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 2,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
-        "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
-                       {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "name"          : "Shashank",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
-        "sessions" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "name"         : "Julian",
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
 
-   INSERT INTO session VALUES
+   INSERT INTO lecture VALUES
      ('{"_id"               : 10,
-        "sessionName"       : "JSON and SQL",
+        "lectureName"       : "JSON and SQL",
         "creditHours"       : 3,
         "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
-   INSERT INTO session VALUES
+   INSERT INTO lecture VALUES
      ('{"_id"               : 20,
-        "sessionName"       : "PL/SQL or Javascript",
+        "lectureName"       : "PL/SQL or Javascript",
         "creditHours"       : 4,
         "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
-   INSERT INTO session VALUES
+   INSERT INTO lecture VALUES
      ('{"_id"               : 30,
-        "sessionName"       : "MongoDB API Internals",
+        "lectureName"       : "MongoDB API Internals",
         "creditHours"       : 5,
         "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
-   INSERT INTO session VALUES
+   INSERT INTO lecture VALUES
      ('{"_id"               : 40,
-        "sessionName"       : "Oracle ADB on iPhone",
+        "lectureName"       : "Oracle ADB on iPhone",
         "creditHours"       : 3,
         "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
-   INSERT INTO session VALUES
+   INSERT INTO lecture VALUES
      ('{"_id"               : 50,
-        "sessionName"       : "JSON Duality Views",
+        "lectureName"       : "JSON Duality Views",
         "creditHours"       : 3,
         "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 4, "name": "Julian"} ]}');
 
@@ -159,7 +159,7 @@ In this task, we will infer a normalized relational schema using data from our J
      -- Infer relational schema
      schema_sql :=
       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames" : [ "SESSION", "ATTENDEE", "SPEAKER" ]}')
+        JSON('{"tableNames" : [ "lecture", "ATTENDEE", "SPEAKER" ]}')
       );
 
      -- Print DDL script
@@ -174,7 +174,7 @@ In this task, we will infer a normalized relational schema using data from our J
 
    You can also use external tables pointing to data stored in object stores as the input to `INFER_AND_GENERATE_SCHEMA`. This is useful in cases where you are migrating from an external database to Oracle.
 
-2. Check the objects created by the migrator. Note that the relational schema is completely normalized - one table is created per logical entity, one for speaker (`speaker_root`), one for attendee (`attendee_root`), and one for sessions (`sessions_root`). The many-to-many relationship between attendees and sessions is automatically identified and a mapping table is created to map attendees to sessions.
+2. Check the objects created by the migrator. Note that the relational schema is completely normalized - one table is created per logical entity, one for speaker (`speaker_root`), one for attendee (`attendee_root`), and one for lectures (`lectures_root`). The many-to-many relationship between attendees and lectures is automatically identified and a mapping table is created to map attendees to lectures.
 
    ```sql
    <copy>
@@ -191,7 +191,7 @@ In this task, we will infer a normalized relational schema using data from our J
 
    ```sql
    <copy>
-   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'SESSION', view_name => 'SESSION_DUALITY');
+   SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'lecture', view_name => 'lecture_DUALITY');
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'ATTENDEE', view_name => 'ATTENDEE_DUALITY');
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'SPEAKER', view_name => 'SPEAKER_DUALITY');
    </copy>
@@ -208,7 +208,7 @@ In this task, we will import data from input JSON collections into the duality v
    ```sql
    <copy>
    BEGIN
-     DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'SESSION', err_log_table_name => 'SESSION_ERR_LOG', skip_unsupported => TRUE);
+     DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'lecture', err_log_table_name => 'lecture_ERR_LOG', skip_unsupported => TRUE);
      DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'ATTENDEE', err_log_table_name => 'ATTENDEE_ERR_LOG', skip_unsupported => TRUE);
      DBMS_ERRLOG.CREATE_ERROR_LOG(dml_table_name => 'SPEAKER', err_log_table_name => 'SPEAKER_ERR_LOG', skip_unsupported => TRUE);
    END;
@@ -222,9 +222,9 @@ In this task, we will import data from input JSON collections into the duality v
    <copy>
    BEGIN
      DBMS_JSON_DUALITY.IMPORT_ALL(
-                         JSON('{"tableNames" : [ "SESSION", "ATTENDEE", "SPEAKER" ],
-                                "viewNames"  : [ "SESSION_DUALITY", "ATTENDEE_DUALITY", "SPEAKER_DUALITY" ],
-                                "errorLog"   : [ "SESSION_ERR_LOG", "ATTENDEE_ERR_LOG", "SPEAKER_ERR_LOG" ]}'
+                         JSON('{"tableNames" : [ "lecture", "ATTENDEE", "SPEAKER" ],
+                                "viewNames"  : [ "lecture_DUALITY", "ATTENDEE_DUALITY", "SPEAKER_DUALITY" ],
+                                "errorLog"   : [ "lecture_ERR_LOG", "ATTENDEE_ERR_LOG", "SPEAKER_ERR_LOG" ]}'
                          )
      );
    END;
@@ -236,7 +236,7 @@ In this task, we will import data from input JSON collections into the duality v
 
    ```sql
    <copy>
-   SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM SESSION_ERR_LOG;
+   SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM lecture_ERR_LOG;
    SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM ATTENDEE_ERR_LOG;
    SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM SPEAKER_ERR_LOG;
    </copy>

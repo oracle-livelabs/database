@@ -50,11 +50,11 @@ In this task, we will create a JSON collection table called `attendee` that repr
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
         "coffeeItem"   : "Espresso",
-        "sessions" : [ {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 90},
-                       {"id" : 20, "sessionName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
-                       {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
-                       {"id" : 40, "sessionName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                       {"id" : 50, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
+                       {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
+                       {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
+                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 2,
         "firstName"    : "Hermann",
@@ -62,9 +62,9 @@ In this task, we will create a JSON collection table called `attendee` that repr
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
-        "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
-                       {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "firstName"     : "Shashank",
@@ -73,8 +73,8 @@ In this task, we will create a JSON collection table called `attendee` that repr
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
-        "sessions" : [ {"id" : 30, "sessionName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                       {"id" : 10, "sessionName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "firstName"    : "Julian",
@@ -83,7 +83,7 @@ In this task, we will create a JSON collection table called `attendee` that repr
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "sessions" : [ {"id" : 40, "sessionName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "lectures" : [ {"id" : 40, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
 
    COMMIT;
    </copy>
@@ -140,34 +140,34 @@ In this task, we will create a JSON collection table called `attendee` that repr
 
 ## Task 3: Update Shared Information
 
-In this task, we will update session name for session id 40, from "JSON Duality Views" to "JSON Relational Duality Views". Since session information is duplicated across multiple attendee documents, we must update the session name in all documents containing that session.
+In this task, we will update lecture name for lecture id 40, from "JSON Duality Views" to "JSON Relational Duality Views". Since lecture information is duplicated across multiple attendee documents, we must update the lecture name in all documents containing that lecture.
 
-1. Find all document that contain session id 40. We will use a `JSON_EXISTS` predicate to find all such documents.
+1. Find all document that contain lecture id 40. We will use a `JSON_EXISTS` predicate to find all such documents.
 
    ```sql
    <copy>
    SELECT data
    FROM attendee
-   WHERE JSON_EXISTS(data, '$.sessions[*]?(@.id == 40)');
+   WHERE JSON_EXISTS(data, '$.lectures[*]?(@.id == 40)');
    </copy>
    ```
 
-2. Update the session name in all documents containing session id 40. We will use a `JSON_EXISTS` predicate to find all such documents, then use `JSON_TRANSFORM` to update the session name only for the matching session id.
+2. Update the lecture name in all documents containing lecture id 40. We will use a `JSON_EXISTS` predicate to find all such documents, then use `JSON_TRANSFORM` to update the lecture name only for the matching lecture id.
 
    ```sql
    <copy>
    UPDATE attendee
    SET data = JSON_TRANSFORM(
       data,
-      SET '$.sessions?(@.id == 40).sessionName' = 'JSON Relational Duality Views'
+      SET '$.lectures[*]?(@.id == 40).lectureName' = 'JSON Relational Duality Views'
    )
-   WHERE JSON_EXISTS(data, '$.sessions[*]?(@.id == 40)');
+   WHERE JSON_EXISTS(data, '$.lectures[*]?(@.id == 40)');
 
    COMMIT;
    </copy>
    ```
 
-   This statement updates three documents, each of which references session id 40.
+   This statement updates three documents, each of which references lecture id 40.
 
 3. Select all documents from the view to see the updated documents.
 
@@ -178,7 +178,7 @@ In this task, we will update session name for session id 40, from "JSON Duality 
    </copy>
    ```
 
-   We can see that the session name for session id 40 has now been updated consistently everywhere. It is easy to see the problem with JSON collections containing duplicate data - Any update to duplicate data must be managed carefully and kept consistent manually. In the next lab, we will see how duality views effectively solves this problem.
+   We can see that the lecture name for lecture id 40 has now been updated consistently everywhere. It is easy to see the problem with JSON collections containing duplicate data - Any update to duplicate data must be managed carefully and kept consistent manually. In the next lab, we will see how duality views effectively solves this problem.
 
 You may now **proceed to the next lab**.
 

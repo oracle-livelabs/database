@@ -226,7 +226,7 @@ In this task, we will update session name for session id 40, from "JSON Duality 
    UPDATE attendee a
    SET data = JSON_TRANSFORM(
       data,
-      SET '$.sessions?(@.id == 40).sessionName' = 'JSON Relational Duality Views'
+      SET '$.sessions[*]?(@.id == 40).sessionName' = 'JSON Relational Duality Views'
    )
    WHERE a.data."_id" = 1;
 
