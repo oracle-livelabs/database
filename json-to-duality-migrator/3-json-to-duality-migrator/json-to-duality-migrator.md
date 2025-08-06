@@ -87,35 +87,35 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
         "coffeeItem"   : "Espresso",
-        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
-                       {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
-                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
-                       {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3},
+                       {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
+                       {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3},
+                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 2,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
         "coffeeItem"   : "Cappuccino",
-        "Lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
-                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "Lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "name"          : "Shashank",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
         "coffeeItem"    : "Americano",
-        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "name"         : "Julian",
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3} ]}');
 
    INSERT INTO lecture VALUES
      ('{"_id"               : 10,

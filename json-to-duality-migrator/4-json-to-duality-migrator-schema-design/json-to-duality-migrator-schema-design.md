@@ -91,33 +91,33 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
         "name"         : "Beda",
         "age"          : 20,
         "phoneNumber"  : "222-111-021",
-        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 90},
-                       {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4, "testScore": 70},
-                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 75},
-                       {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3, "testScore": 45},
-                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 70} ]}');
+        "lectures" : [ {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3},
+                       {"id" : 20, "lectureName" : "PL/SQL or Javascript", "credits" : 4},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
+                       {"id" : 40, "lectureName" : "Oracle ADB on iPhone", "credits" : 3},
+                       {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 2,
         "name"         : "Hermann",
         "age"          : 22,
         "phoneNumber"  : "222-112-023",
-        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 60},
-                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 70},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3},
+                       {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"           : 3,
         "name"          : "Shashank",
         "age"           : 23,
         "phoneNumber"   : "222-112-024",
-        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5, "testScore": 60},
-                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3, "testScore": 50} ]}');
+        "lectures" : [ {"id" : 30, "lectureName" : "MongoDB API Internals", "credits" : 5},
+                       {"id" : 10, "lectureName" : "JSON and SQL", "credits" : 3} ]}');
    INSERT INTO attendee VALUES
      ('{"_id"          : 4,
         "name"         : "Julian",
         "age"          : 24,
         "phoneNumber"  : "222-113-025",
         "coffeeItem"   : "Decaf",
-        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3, "testScore": 35} ]}');
+        "lectures" : [ {"id" : 50, "lectureName" : "JSON Duality Views", "credits" : 3} ]}');
 
    INSERT INTO lecture VALUES
      ('{"_id"               : 10,
@@ -190,7 +190,7 @@ In this task, we will infer a customized normalized relational schema using data
      schema_sql :=
       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
         JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
-               "minFieldFrequency" : 25,
+               "minFieldFrequency" : 30,
                "hints"             : [ {"table" : "SPEAKER",
                                         "type"  : "datatype",
                                         "path"  : "$.phoneNumber",
