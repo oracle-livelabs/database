@@ -259,6 +259,8 @@ In this task, we will update lecture name for lecture id 40, from "JSON Duality 
 
    We can see that the lecture name for lecture id 40 has now been updated consistently everywhere. Updating the data in one place updates it consistently everywhere.
 
+In this lab, we saw how duality views solve the data duplication problem with JSON collections while providing schema flexibility. However, users still need to define the relational schema and duality views upfront. What if the relational schema and duality views could be automatically inferred and created? In the next lab, we will work with the JSON-to-Duality Migrator, which solves exactly this problem!
+
 You may now **proceed to the next lab**.
 
 ## Learn More

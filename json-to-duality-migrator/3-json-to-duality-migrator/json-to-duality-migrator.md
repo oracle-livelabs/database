@@ -19,7 +19,7 @@ The migrator exposes a set of easy-to-use PL/SQL functions and procedures (part 
 | `infer_and_generate_schema` | Performs both `infer_schema` and `generate_schema`                                                               |
 | `validate_schema_report`    | Validates the inferred schema against the input collections                                                      |
 | `import_all`                | Imports the existing document collections into the duality views (in fact into the underlying relational tables) |
-| `validate_import_report`    | Validates the imported data against the input collections                                                        |
+| `validate_import_report`    | Validates the imported data against the input collections |
 {: title="JSON to Duality Migrator API"}
 
 ### Objectives
@@ -287,6 +287,8 @@ In this task, we will import data from input JSON collections into the duality v
    ```
 
    ![Task 3 Step 3 Output](../3-json-to-duality-migrator/images/task3-step3.png " ")
+
+   In case you find that some documents could not be imported successfully, you can look at the error message to understand the reason for the failure, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
 
 You may now **proceed to the next lab**.
 
