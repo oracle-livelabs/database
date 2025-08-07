@@ -131,7 +131,9 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
      ('{"_id"               : 10,
         "lectureName"       : "JSON and SQL",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
+                                {"_id" : 2, "name": "Hermann"},
+                                {"_id" : 3, "name": "Shashank"} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 20,
         "lectureName"       : "PL/SQL or Javascript",
@@ -141,7 +143,9 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
      ('{"_id"               : 30,
         "lectureName"       : "MongoDB API Internals",
         "creditHours"       : 5,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
+                                {"_id" : 2, "name": "Hermann"},
+                                {"_id" : 3, "name": "Shashank"} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 40,
         "lectureName"       : "Oracle ADB on iPhone",
@@ -151,7 +155,9 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
      ('{"_id"               : 50,
         "lectureName"       : "JSON Duality Views",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 4, "name": "Julian"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
+                                {"_id" : 2, "name": "Hermann"},
+                                {"_id" : 4, "name": "Julian"} ]}');
 
    COMMIT;
    </copy>

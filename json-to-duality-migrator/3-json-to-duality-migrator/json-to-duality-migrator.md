@@ -151,7 +151,9 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
      ('{"_id"               : 10,
         "lectureName"       : "JSON and SQL",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
+                                {"_id" : 2, "name": "Hermann"},
+                                {"_id" : 3, "name": "Shashank"} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 20,
         "lectureName"       : "PL/SQL or Javascript",
@@ -161,7 +163,9 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
      ('{"_id"               : 30,
         "lectureName"       : "MongoDB API Internals",
         "creditHours"       : 5,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
+                                {"_id" : 2, "name": "Hermann"},
+                                {"_id" : 3, "name": "Shashank"} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 40,
         "lectureName"       : "Oracle ADB on iPhone",
@@ -171,7 +175,9 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
      ('{"_id"               : 50,
         "lectureName"       : "JSON Duality Views",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"}, {"_id" : 2, "name": "Hermann"}, {"_id" : 4, "name": "Julian"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
+                                {"_id" : 2, "name": "Hermann"},
+                                {"_id" : 4, "name": "Julian"} ]}');
 
    COMMIT;
    </copy>
