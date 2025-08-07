@@ -131,33 +131,33 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
      ('{"_id"               : 10,
         "lectureName"       : "JSON and SQL",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
-                                {"_id" : 2, "name": "Hermann"},
-                                {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20},
+                                {"_id" : 2, "name": "Hermann", "age" : 22},
+                                {"_id" : 3, "name": "Shashank", "age" : 23} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 20,
         "lectureName"       : "PL/SQL or Javascript",
         "creditHours"       : 4,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 30,
         "lectureName"       : "MongoDB API Internals",
         "creditHours"       : 5,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
-                                {"_id" : 2, "name": "Hermann"},
-                                {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20},
+                                {"_id" : 2, "name": "Hermann", "age" : 22},
+                                {"_id" : 3, "name": "Shashank", "age" : 23} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 40,
         "lectureName"       : "Oracle ADB on iPhone",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 50,
         "lectureName"       : "JSON Duality Views",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
-                                {"_id" : 2, "name": "Hermann"},
-                                {"_id" : 4, "name": "Julian"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20},
+                                {"_id" : 2, "name": "Hermann", "age" : 22},
+                                {"_id" : 4, "name": "Julian", "age" : 24} ]}');
 
    COMMIT;
    </copy>
@@ -177,10 +177,10 @@ In this task, we will infer a customized normalized relational schema using data
    BEGIN
      -- Infer relational schema
      schema_sql :=
-      DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
-               "minFieldFrequency" : 30}'
-        )
+       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
+         JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
+                "minFieldFrequency" : 30}'
+         )
       );
 
      -- Print DDL script
@@ -202,16 +202,16 @@ In this task, we will infer a customized normalized relational schema using data
    BEGIN
      -- Infer relational schema
      schema_sql :=
-      DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
-               "minFieldFrequency" : 30,
-               "hints"             : [ {"table" : "SPEAKER",
-                                        "type"  : "datatype",
-                                        "path"  : "$.phoneNumber",
-                                        "value" : "CHAR(11)"} ]
-              }'
-        )
-      );
+       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
+         JSON('{"tableNames"        : [ "ATTENDEE", "SPEAKER", "LECTURE" ],
+                "minFieldFrequency" : 30,
+                "hints"             : [ {"table" : "SPEAKER",
+                                         "type"  : "datatype",
+                                         "path"  : "$.phoneNumber",
+                                         "value" : "CHAR(11)"} ]
+               }'
+         )
+       );
 
      -- Print DDL script
      DBMS_OUTPUT.PUT_LINE(schema_sql);
@@ -231,6 +231,8 @@ In this task, we will infer a customized normalized relational schema using data
    </copy>
    ```
 
+   ![Task 2 Step 3 Output](../4-json-to-duality-migrator-schema-design/images/task2-step3.png " ")
+
    The migrator also allows you to specify hints to specify identifying keys for sub-objects and whether to share data for sub-objects with other collections. The hint infrastructure is an effective tool to design and customize an effective normalized relational schema based on application and business requirements.
 
 4. Validate the schema using the `VALIDATE_SCHEMA_REPORT` table function. This should show no rows selected for each duality view, which means that there are no validation failures.
@@ -242,6 +244,8 @@ In this task, we will infer a customized normalized relational schema using data
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_SCHEMA_REPORT(table_name => 'SPEAKER', view_name => 'SPEAKER_DUALITY');
    </copy>
    ```
+
+   ![Task 2 Step 4 Output](../4-json-to-duality-migrator-schema-design/images/task2-step4.png " ")
 
 ## Task 3: Data Import and Validation using the JSON to Duality Migrator
 
@@ -286,6 +290,8 @@ In this task, we will import data from input JSON collections into the duality v
    </copy>
    ```
 
+   ![Task 3 Step 3 Output](../4-json-to-duality-migrator-schema-design/images/task3-step3.png " ")
+
 4. Let's validate that all data has been successfully imported using the `VALIDATE_IMPORT_REPORT` table function. This should show no rows selected for each duality view, which means that all data has been successfully imported.
 
    ```sql
@@ -295,6 +301,8 @@ In this task, we will import data from input JSON collections into the duality v
    SELECT * FROM DBMS_JSON_DUALITY.VALIDATE_IMPORT_REPORT(table_name => 'SPEAKER', view_name => 'SPEAKER_DUALITY');
    </copy>
    ```
+
+   ![Task 3 Step 4 Output](../4-json-to-duality-migrator-schema-design/images/task3-step4.png " ")
 
 ## Learn More
 

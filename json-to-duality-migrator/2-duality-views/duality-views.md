@@ -154,6 +154,8 @@ In this task, we will create a duality view called `attendee` that represents a 
    <copy>SELECT a.data FROM attendee a WHERE a.data."_id" = 1;</copy>
    ```
 
+   ![Task 2 Step 1a Output](../2-duality-views/images/task2-step1a.png " ")
+
    We can also select specific fields within the JSON document by using the dot notation to peek inside the document.
 
    ```sql
@@ -164,6 +166,8 @@ In this task, we will create a duality view called `attendee` that represents a 
    WHERE a.data."_id" = 1;
    </copy>
    ```
+
+   ![Task 2 Step 1b Output](../2-duality-views/images/task2-step1b.png " ")
 
 2. Add a field to an existing document. We will add a `country` field to Julian's attendee document to specify his country of origin. This field gets stored in the `extras` flex JSON column since it is not mapped to any column in the attendees table.
 
@@ -183,6 +187,8 @@ In this task, we will create a duality view called `attendee` that represents a 
    <copy>SELECT a.data FROM attendee a WHERE a.data."_id" = 4;</copy>
    ```
 
+   ![Task 2 Step 3a Output](../2-duality-views/images/task2-step3a.png " ")
+
    ```sql
    <copy>
    SELECT a.data.lastName || ', ' || a.data.firstName as name,
@@ -193,6 +199,8 @@ In this task, we will create a duality view called `attendee` that represents a 
    </copy>
    ```
 
+   ![Task 2 Step 3b Output](../2-duality-views/images/task2-step3b.png " ")
+
 4. Query the `attendees` table. The `extras` column holds both the key and value for the `country` field.
 
    ```sql
@@ -202,6 +210,8 @@ In this task, we will create a duality view called `attendee` that represents a 
    WHERE id = 4;
    </copy>
    ```
+
+   ![Task 2 Step 4 Output](../2-duality-views/images/task2-step4.png " ")
 
 ## Task 3: Update Shared Information
 
@@ -216,6 +226,8 @@ In this task, we will update lecture name for lecture id 40, from "JSON Duality 
    WHERE JSON_EXISTS(data, '$.lectures[*]?(@.id == 40)');
    </copy>
    ```
+
+   ![Task 3 Step 1 Output](../2-duality-views/images/task3-step1.png " ")
 
 2. Update the lecture name in only attendee id 1's document using `JSON_TRANSFORM` to update the lecture name only for the matching lecture id.
 
@@ -242,6 +254,8 @@ In this task, we will update lecture name for lecture id 40, from "JSON Duality 
    FROM attendee;
    </copy>
    ```
+
+   ![Task 3 Step 3 Output](../2-duality-views/images/task3-step3.png " ")
 
    We can see that the lecture name for lecture id 40 has now been updated consistently everywhere. Updating the data in one place updates it consistently everywhere.
 

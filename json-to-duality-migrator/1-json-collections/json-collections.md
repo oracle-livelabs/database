@@ -99,6 +99,8 @@ In this task, we will create a JSON collection table called `attendee` that repr
    <copy>SELECT a.data FROM attendee a WHERE a.data."_id" = 1;</copy>
    ```
 
+   ![Task 2 Step 1a Output](../1-json-collections/images/task2-step1a.png " ")
+
    We can also select specific fields within the JSON document by using the dot notation to peek inside the document.
 
    ```sql
@@ -110,7 +112,7 @@ In this task, we will create a JSON collection table called `attendee` that repr
    </copy>
    ```
 
-   ![Task 2 Step 1 Output](../1-json-collections/images/task2-step1b.png " ")
+   ![Task 2 Step 1b Output](../1-json-collections/images/task2-step1b.png " ")
 
 2. Add a field to an existing document. We will add a `country` field to Julian's attendee document to specify his country of origin.
 
@@ -130,6 +132,8 @@ In this task, we will create a JSON collection table called `attendee` that repr
    <copy>SELECT a.data FROM attendee a WHERE a.data."_id" = 4;</copy>
    ```
 
+   ![Task 2 Step 3a Output](../1-json-collections/images/task2-step3a.png " ")
+
    ```sql
    <copy>
    SELECT a.data.lastName || ', ' || a.data.firstName as name,
@@ -139,6 +143,8 @@ In this task, we will create a JSON collection table called `attendee` that repr
    WHERE a.data."_id" = 4;
    </copy>
    ```
+
+   ![Task 2 Step 3b Output](../1-json-collections/images/task2-step3b.png " ")
 
 ## Task 3: Update Shared Information
 
@@ -153,6 +159,8 @@ In this task, we will update lecture name for lecture id 40, from "JSON Duality 
    WHERE JSON_EXISTS(data, '$.lectures[*]?(@.id == 40)');
    </copy>
    ```
+
+   ![Task 3 Step 1 Output](../1-json-collections/images/task3-step1.png " ")
 
 2. Update the lecture name in all documents containing lecture id 40. We will use a `JSON_EXISTS` predicate to find all such documents, then use `JSON_TRANSFORM` to update the lecture name only for the matching lecture id.
 
@@ -179,6 +187,8 @@ In this task, we will update lecture name for lecture id 40, from "JSON Duality 
    FROM attendee;
    </copy>
    ```
+
+   ![Task 3 Step 3 Output](../1-json-collections/images/task3-step3.png " ")
 
    We can see that the lecture name for lecture id 40 has now been updated consistently everywhere. It is easy to see the problem with JSON collections containing duplicate data - Any update to duplicate data must be managed carefully and kept consistent manually. In the next lab, we will see how duality views effectively solves this problem.
 

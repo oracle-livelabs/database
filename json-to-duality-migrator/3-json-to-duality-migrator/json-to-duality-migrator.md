@@ -12,14 +12,14 @@ The JSON to Duality Migrator addresses the challenge of preserving JSON document
 
 The migrator exposes a set of easy-to-use PL/SQL functions and procedures (part of the `DBMS_JSON_DUALITY` package) to assist with schema inference, schema generation, schema validation, data import, and data validation.
 
-| API                       | Description                                                                                                    |
-|---------------------------|----------------------------------------------------------------------------------------------------------------|
-| `infer_schema`              | Infers the relational schema that represents all the input collections                                          |
-| `generate_schema`           | Produces the code to create the required database objects for each duality view                                 |
-| `infer_and_generate_schema` | Performs both `infer_schema` and `generate_schema`                                                                  |
-| `validate_schema_report`    | Validates the inferred schema against the input collections                                                     |
+| API                         | Description                                                                                                      |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------|
+| `infer_schema`              | Infers the relational schema that represents all the input collections                                           |
+| `generate_schema`           | Produces the code to create the required database objects for each duality view                                  |
+| `infer_and_generate_schema` | Performs both `infer_schema` and `generate_schema`                                                               |
+| `validate_schema_report`    | Validates the inferred schema against the input collections                                                      |
 | `import_all`                | Imports the existing document collections into the duality views (in fact into the underlying relational tables) |
-| `validate_import_report`    | Validates the imported data against the input collections                                                       |
+| `validate_import_report`    | Validates the imported data against the input collections                                                        |
 {: title="JSON to Duality Migrator API"}
 
 ### Objectives
@@ -151,33 +151,33 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
      ('{"_id"               : 10,
         "lectureName"       : "JSON and SQL",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
-                                {"_id" : 2, "name": "Hermann"},
-                                {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20},
+                                {"_id" : 2, "name": "Hermann", "age" : 22},
+                                {"_id" : 3, "name": "Shashank", "age" : 23} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 20,
         "lectureName"       : "PL/SQL or Javascript",
         "creditHours"       : 4,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 30,
         "lectureName"       : "MongoDB API Internals",
         "creditHours"       : 5,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
-                                {"_id" : 2, "name": "Hermann"},
-                                {"_id" : 3, "name": "Shashank"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20},
+                                {"_id" : 2, "name": "Hermann", "age" : 22},
+                                {"_id" : 3, "name": "Shashank", "age" : 23} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 40,
         "lectureName"       : "Oracle ADB on iPhone",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20} ]}');
    INSERT INTO lecture VALUES
      ('{"_id"               : 50,
         "lectureName"       : "JSON Duality Views",
         "creditHours"       : 3,
-        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda"},
-                                {"_id" : 2, "name": "Hermann"},
-                                {"_id" : 4, "name": "Julian"} ]}');
+        "attendeesEnrolled" : [ {"_id" : 1, "name": "Beda", "age" : 20},
+                                {"_id" : 2, "name": "Hermann", "age" : 22},
+                                {"_id" : 4, "name": "Julian", "age" : 24} ]}');
 
    COMMIT;
    </copy>
@@ -197,9 +197,9 @@ In this task, we will infer a normalized relational schema using data from our J
    BEGIN
      -- Infer relational schema
      schema_sql :=
-      DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
-        JSON('{"tableNames" : [ "LECTURE", "ATTENDEE", "SPEAKER" ]}')
-      );
+       DBMS_JSON_DUALITY.INFER_AND_GENERATE_SCHEMA(
+         JSON('{"tableNames" : [ "LECTURE", "ATTENDEE", "SPEAKER" ]}')
+       );
 
      -- Print DDL script
      DBMS_OUTPUT.PUT_LINE(schema_sql);
@@ -225,6 +225,8 @@ In this task, we will infer a normalized relational schema using data from our J
    </copy>
    ```
 
+   ![Task 2 Step 2 Output](../3-json-to-duality-migrator/images/task2-step2.png " ")
+
    You can also use the two-phase API (`INFER_SCHEMA` and `GENERATE_SCHEMA`) to split the schema inference and DDL script generation into separate calls. This is useful when you want to inspect and hand-modify the resulting schema before generating the final DDL script.
 
 3. Validate the schema using the `VALIDATE_SCHEMA_REPORT` table function. This should show no rows selected for each duality view, which means that there are no validation failures.
@@ -237,11 +239,13 @@ In this task, we will infer a normalized relational schema using data from our J
    </copy>
    ```
 
+   ![Task 2 Step 3 Output](../3-json-to-duality-migrator/images/task2-step3.png " ")
+
 The result shows no rows selected indicating that the resulting schema fits the input collections.
 
 ## Task 3: Data Import using the JSON to Duality Migrator
 
-In this task, we will import data from input JSON collections into the duality views. We will also look at techniques to find document that cannot be imported successfully and validate that data has been imported successfully.
+In this task, we will import data from input JSON collections into the duality views. We will also look at techniques to find document that cannot be imported successfully.
 
 1. Let's create error logs to log errors for documents that do not get imported successfully.
 
@@ -281,6 +285,8 @@ In this task, we will import data from input JSON collections into the duality v
    SELECT ora_err_number$, ora_err_mesg$, ora_err_tag$ FROM SPEAKER_ERR_LOG;
    </copy>
    ```
+
+   ![Task 3 Step 3 Output](../3-json-to-duality-migrator/images/task3-step3.png " ")
 
 You may now **proceed to the next lab**.
 
