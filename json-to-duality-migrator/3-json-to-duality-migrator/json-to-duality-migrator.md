@@ -213,8 +213,9 @@ In this task, we will infer a normalized relational schema using data from our J
    <copy>
    SELECT object_name, object_type
    FROM user_objects
-   WHERE created > sysdate-1/24
-   ORDER BY object_type DESC;
+   WHERE created >= SYSDATE - INTERVAL '2' HOUR
+   ORDER BY object_type DESC
+   FETCH FIRST 15 ROWS ONLY;
    </copy>
    ```
 

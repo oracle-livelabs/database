@@ -184,7 +184,7 @@ In this task, we will infer a customized normalized relational schema using data
    </copy>
    ```
 
-   Let's inspect the output DDL script. Since `coffeeItem` appears in fewer than 30% of documents, there is no column in the relational schema for the field, nor does it appear in the duality view definition. So what happens when you import the input data into this duality view? Can you guess from what we learnt in lab 2? Since the migrator creates flex JSON columns by default, the `coffeeItem` field will be inserted into the flex column! This is a great way of handling rare fields - set `minFrequencyThreshold` as desired and the migrator handles the rest.
+   Let's inspect the output DDL script. Since `coffeeItem` appears in fewer than 30% of documents, there is no column in the relational schema for the field, nor does it appear in the duality view definition. So what happens when you import the input data into this duality view? Can you guess from what we learnt in lab 2? Since the migrator creates flex JSON columns by default, the `coffeeItem` field will be inserted into the flex column! This is a great way of handling rare fields - set `minFieldFrequency` as desired and the migrator handles the rest.
 
 2. Run the `INFER_AND_GENERATE_SCHEMA` procedure again with a datatype hint for the `phoneNumber` field. In the output above, we created a `VARCHAR2` column for phone number. Let's say that we want a fixed character length datatype (`CHAR`) for the phone number instead, since we know that all phone numbers will have the same length. We can use the hints configuration parameter to specify the datatype for the `phoneNumber` field.
 
@@ -217,7 +217,7 @@ In this task, we will infer a customized normalized relational schema using data
    </copy>
    ```
 
-3. Describe the `speaker_root` table. We can see that the datatype for `PHONE_NUMBER` is `CHAR(11)`, which is exactly what we specified in the hint parameter.
+3. Describe the `speaker_root` table. We can see that the datatype for the `PHONE_NUMBER` column is `CHAR(11)`, which is exactly what we specified in the hint parameter.
 
    ```sql
    <copy>
