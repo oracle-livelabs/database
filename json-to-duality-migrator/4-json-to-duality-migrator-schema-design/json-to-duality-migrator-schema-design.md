@@ -292,7 +292,7 @@ In this task, we will import data from input JSON collections into the duality v
 
    ![Task 3 Step 3 Output](../4-json-to-duality-migrator-schema-design/images/task3-step3.png " ")
 
-   In case you find that some documents could not be imported successfully, you can look at the error message to understand the reason for the failure, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
+   > **_NOTE:_** In case you find that some documents could not be imported successfully, you can look at the error message to understand the reason for the failure, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
 
 4. Let's validate that all data has been successfully imported using the `VALIDATE_IMPORT_REPORT` table function. This function validates that all documents that have been imported into duality views have correct data by comparing the duality view document contents with the input collection document content. This should show no rows selected for each duality view, which means that all data has been successfully imported.
 
@@ -306,7 +306,7 @@ In this task, we will import data from input JSON collections into the duality v
 
    ![Task 3 Step 4 Output](../4-json-to-duality-migrator-schema-design/images/task3-step4.png " ")
 
-   In case you find that some documents have different content that the input document, you can look at the error message to understand the reason for the difference, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
+   > **_NOTE:_** In case you find that some documents have different content that the input document, you can look at the error message to understand the reason for the difference, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
 
 ## Learn More
 
