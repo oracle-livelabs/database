@@ -49,7 +49,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
          AND created >= SYSDATE - INTERVAL '2' HOUR
      ) LOOP
        BEGIN
-         EXECUTE IMMEDIATE 'DROP TABLE "' || t.object_name || '" CASCADE CONSTRAINTS';
+         EXECUTE IMMEDIATE 'DROP TABLE "' || t.object_name || '" CASCADE CONSTRAINTS PURGE';
        EXCEPTION
          WHEN OTHERS THEN
            DBMS_OUTPUT.PUT_LINE('Failed to drop table ' || t.object_name || ': ' || SQLERRM);
@@ -67,9 +67,9 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
    DROP VIEW IF EXISTS speaker;
    DROP VIEW IF EXISTS attendee;
    DROP VIEW IF EXISTS lecture;
-   DROP TABLE IF EXISTS speaker;
-   DROP TABLE IF EXISTS attendee;
-   DROP TABLE IF EXISTS lecture;
+   DROP TABLE IF EXISTS speaker PURGE;
+   DROP TABLE IF EXISTS attendee PURGE;
+   DROP TABLE IF EXISTS lecture PURGE;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS speaker;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS attendee;
    CREATE JSON COLLECTION TABLE IF NOT EXISTS lecture;
