@@ -38,7 +38,7 @@ Capture workload information from the workload you generated in lab 3 - Generate
 
 2. Run the capture script.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-04-capture_awr.sql
     </copy>

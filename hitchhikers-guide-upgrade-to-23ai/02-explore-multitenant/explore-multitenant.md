@@ -22,7 +22,7 @@ This lab assumes:
 
 * You have completed Lab 1: Initialize Environment
 
-This is an optional lab. You can skip it if you are already familiar with multitenant architecture.
+This is an optional lab. **You can skip it if you are already familiar with multitenant architecture.**
 
 ## Task 1: Connect to a CDB and a PDB
 

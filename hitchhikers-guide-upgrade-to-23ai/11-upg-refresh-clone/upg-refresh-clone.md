@@ -325,18 +325,19 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     </details>
 
-2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward and use the `lsj` command.
+2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward.
+
+3. Use the `lsj` command.
 
     ``` bash
-    <copy>
-
+    <copy> 
     lsj -a 10
     </copy>
     ```
 
     AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you will enter some data to the *FTEX* database. This allows you to verify that changes made after the initial copy of data files still exist in the PDB after the migration.
 
-3. Do not exit AutoUpgrade. Switch to the *blue* terminal 🟦 and set the environment to the *FTEX* database.
+3. Do not exit AutoUpgrade. Switch to a *new* terminal. You might have to open a new tab. Set the environment to the *FTEX* database.
 
     ``` sql
     <copy>
@@ -384,7 +385,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     </copy>
     ```
 
-6. Switch back to the *yellow* terminal 🟨 and check the progress of the *REFRESHPDB* phase. The *MESSAGE* field tells you how far it is.
+6. Switch back to the *original* terminal and check the progress of the *REFRESHPDB* phase. The *MESSAGE* field tells you how far it is.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -402,7 +403,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     </details>
 
-7. Switch to the *blue* terminal 🟦. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
+7. Switch to the *new* terminal. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
 
     ``` bash
     <copy>
@@ -480,7 +481,7 @@ The *REFRESHPDB* phase would stay technically for the next 100 hours. Reason we 
 
 When the upgrade starts, AutoUpgrade executes a final refresh to bring over the latest changes. So no more changes will be captured from the source database. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
 
-1. Use the *yellow* terminal 🟨. Press ENTER just to stop *lsj* from spooling the job status. Next, run the `proceed` command to force the start of upgrade process **now**.
+1. Use the *original* terminal. Press ENTER just to stop *lsj* from spooling the job status. Next, run the `proceed` command to force the start of upgrade process **now**.
 
     ``` bash
     <copy>
@@ -563,7 +564,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     ```
     </details>
 
-3. Wait for AutoUpgrade to complete the migration. When the job completes, AutoUpgrade prints *Job 102 completed*. It usually takes 10-15 minutes.
+3. **Wait for AutoUpgrade to complete the migration**. When the job completes, AutoUpgrade prints *Job 102 completed*. It usually takes 10-15 minutes.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -624,7 +625,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
       COUNT(*)
     ----------
-         22757
+         22924
     ```
 
     </details>

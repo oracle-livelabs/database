@@ -57,7 +57,10 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 
     You use AutoUpgrade from the user's home directory. In fact, you can use AutoUpgrade from any location. It does not matter.
 
-    Check the version. If a newer version is available, you can download it from My Oracle Support ([AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)). Don't do this now.
+    Check the version. If a newer version is available, you can download it from:
+    * My Oracle Support ([AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1))
+    * Oracle.com ([Database Upgrades and Migrations](https://www.oracle.com/database/upgrades/))
+    Don't do this now.
 
 2. To show the many capabilities of AutoUpgrade, create a sample config file. Examine the file to get an idea of the many options in AutoUpgrade. In this lab, you will not use the sample config file.
 
@@ -71,115 +74,224 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     ```
 
     * Hit *SPACE* to scroll through the output.
+    * Some parameters are mandatory.
+    * Others are optional and prefixed with a comment sign `#`.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
+    ################################################################
     #
-    # Sample config file for AutoUpgrade
+    # :::  Sample config file for upgrade :::
     #
-    # build version 25.4.250730
-    # build date    2025/07/30 16:33:06 +0000
+    # Build version 25.4.250730
+    # Build date    2025/07/30 16:33:06 +0000
     #
+    # # Directory includes the following:
+    #   (1) upgrade's global directory
+    #   (2) Any logs tied to a job
     #
-    # Global configurations
+    ################################################################
+    
+    ################################################################
     #
-    # This directory will include the following:
-    #   (1) AutoUpgrade''s global directory
-    #   (2) Any logs, not directly tied to a job
-    #   (3) Config files
-    #   (4) progress.json and status.json
-    global.autoupg_log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade
+    # ::: MANDATORY PARAMETERS :::
+    #
+    # global.global_log_dir
+    # 	The base logging directory of upgrade
+    #	Each instance of upgrade must write to a unique directory
+    # <prefix>.sid
+    # 	The SID of the non-CDB or CDB to upgrade
+    # <prefix>.source_home
+    # 	Path to the Oracle home of the database
+    # <prefix>.target_home
+    # 	Path to the Oracle home to which you want to upgrade
+    #
+    ################################################################
+    global.global_log_dir=<$ORACLE_BASE/cfgtoollogs/upgrade or /tmp/upgrade>
+    upg1.sid=<$ORACLE_SID or {SID}}>
+    upg1.source_home=<$ORACLE_HOME or /u01/app/oracle/product/12.2/dbhome_1>
+    upg1.target_home=<$ORACLE_TARGET_HOME or /u01/app/oracle/product/23/dbhome_1>
+    
+    ################################################################
+    #
+    # global.keystore
+    # 	Location where upgrade can store its keystore
+    #	Needed for most operations on encrypted databases
+    #
+    ################################################################
+    #global.keystore=/u01/app/oracle/admin/ORCL/keystore
+    
+    ################################################################
+    #
+    # <prefix>.drop_grp_after_upgrade
+    # 	Drop the restore point after successful upgrade
+    #	Accepted values: YES, NO
+    #
+    ################################################################
+    #upg1.drop_grp_after_upgrade=
+    
+    ################################################################
+    #
+    # <prefix>.restoration
+    # 	Create a guaranteed restore point before upgrade
+    #	Accepted values: YES, NO
+    #
+    ################################################################
+    #upg1.restoration=
+    
+    ################################################################
+    #
+    # <prefix>.add_after_upgrade_pfile
+    # 	Path to file containing parameters to add after upgrade
+    #	Example: /u01/app/oracle/admin/ORCL/init_add.ora
+    #
+    ################################################################
+    #upg1.add_after_upgrade_pfile=
+    
+    ################################################################
+    #
+    # <prefix>.drop_after_upgrade_pfile
+    # 	Path to file containing parameters to remove after upgrade
+    #	Example: /u01/app/oracle/admin/ORCL/init_drop.ora
+    #
+    ################################################################
+    #upg1.drop_after_upgrade_pfile=
+    
+    ################################################################
+    #
+    # <prefix>.before_action
+    # 	Path to script to execute before starting upgrade flow
+    #
+    ################################################################
+    #upg1.before_action=/u01/app/oracle/admin/ORCL/before_upgrade.sh
+    
+    ################################################################
+    #
+    # <prefix>.after_action
+    # 	Path to script to execute after the upgrade flow
+    #
+    ################################################################
+    #upg1.after_action=/u01/app/oracle/admin/ORCL/after_upgrade.sh
+    
+    ################################################################
+    #
+    # <prefix>.drop_win_src_service
+    # 	Windows only: Drop the Windows service after registering the new service
+    #	Accepted values: YES, NO
+    #
+    ################################################################
+    #upg1.drop_win_src_service=
+    
+    ################################################################
+    #
+    # <prefix>.wincredential
+    # 	Location of a Microsoft Windows credential object file that you have previously generated with the upgrade command-line parameter        load_win_credential.
+    #
+    ################################################################
+    #upg1.wincredential=C:Usersoraclecred
+    
+    ################################################################
+    #
+    # <prefix>.log_dir
+    # 	Location of database-specific log files created during the upgrade
+    #	If not specified, global.global_log_dir is used
+    #
+    ################################################################
+    #upg1.log_dir=/u01/app/oracle/admin/ORCL/upgrade_logs
+    
+    ################################################################
+    #
+    # <prefix>.raise_compatible
+    # 	Raise compatible parameter to the default value of the new release
+    #	Requires <prefix>.drop_grp_after_upgrade=yes
+    #	Accepted values: YES, NO
+    #
+    ################################################################
+    #upg1.raise_compatible=
+    
+    ################################################################
+    #
+    # <prefix>.run_dictionary_health
+    # 	Perform a dictionary check as part of the pre-upgrade analysis
+    #	Accepted values: YES, NO
+    #
+    ################################################################
+    #upg1.run_dictionary_health=
+    
+    ################################################################
+    #
+    # <prefix>.timezone_upg
+    # 	Upgrade the time zone file after upgrade
+    #	Accepted values: YES, NO
+    #
+    ################################################################
+    #upg1.timezone_upg=
+    ```
+    </details>
 
-    #
-    # Database number 1 - Full DB/CDB upgrade
-    #
-    upg1.log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade/employee             # Path of the log directory for the upgrade job
-    upg1.sid=emp                                              # ORACLE_SID of the source DB/CDB
-    upg1.source_home=/u01/app/oracle/product/12.2.0/dbhome_1  # Path of the source ORACLE_HOME
-    upg1.target_home=/u01/app/oracle/product/23.1.0/dbhome_1  # Path of the target ORACLE_HOME
-    upg1.start_time=NOW                                       # Optional. [NOW | +XhYm (X hours, Y minutes after launch) | dd/mm/yyyy hh:mm:ss]
-    upg1.upgrade_node=holserv1.livelabs.oraclevcn.com                                # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
-    #upg1.run_utlrp=[yes|no]                                  # Optional. Whether or not to run utlrp after upgrade
-    #upg1.timezone_upg=[yes|no]                               # Optional. Whether or not to run the timezone upgrade
-    #upg1.target_version=[12.2|18|19|21|23]                      # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
+3. If you set the environment, AutoUpgrade can create a more precise config file.
 
-    #
-    # Database number 2 - Unplug/Plug upgrade
-    #
-    #upg2.log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade/cdb12
-    #upg2.sid=cdb12
-    #upg2.source_home=/u01/app/oracle/product/12.2.0/dbhome_1
-    #upg2.target_cdb=cdb19
-    #upg2.target_home=/u01/app/oracle/product/23/dbhome_1
-    #upg2.pdbs=mypdb1,mypdb2                    # Comma delimited list of pdb names that will be upgraded and moved to the target CDB
-    #upg2.target_pdb_name.mypdb1=altpdb1        # Optional. Name of the PDB to be created on the target CDB
-    #upg2.target_pdb_copy_option.mypdb1=file_name_convert=('mypdb1', 'altpdb1')  # Optional. file_name_convert option used when creating the PDB on the target CDB
-    #upg2.target_pdb_name.mypdb2=altpdb2
-    #upg2.start_time=29/05/2024 17:25:38        # Optional. [NOW | +XhYm (X hours, Y minutes after launch) | dd/mm/yyyy hh:mm:ss]
-    #upg2.upgrade_node=localhost                # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
-    #upg2.run_utlrp=[yes|no]                   # Optional. Whether or not to run utlrp after upgrade
-    #upg2.timezone_upg=[yes|no]                # Optional. Whether or not to run the timezone upgrade
-    #upg2.target_version=[12.2|18|19|21|23]       # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
+    ``` bash
+    <copy>
+    . upgr
+    java -jar autoupgrade.jar -auto_config
+    head -n40 /home/oracle/auto_config.cfg
+    </copy>
 
-    #
-    # Database number 3 - Noncdb to PDB upgrade
-    #
-    #upg3.log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade/employee
-    #upg3.sid=emp
-    #upg3.source_home=/u01/app/oracle/product/11.2.0/dbhome_1
-    #upg3.target_cdb=cdb23
-    #upg3.target_home=/u01/app/oracle/product/19.8.0/dbhome_1
-    #upg3.target_pdb_name=pdb12
-    #upg3.target_pdb_copy_option=file_name_convert=('emp', 'emppdb')
-    #upg3.start_time=+10m                  # Optional. 10 Minutes from now
-    #upg3.upgrade_node=localhost           # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
-    #upg3.run_utlrp=[yes|no]              # Optional. Whether or not to run utlrp after upgrade
-    #upg3.timezone_upg=[yes|no]           # Optional. Whether or not to run the timezone upgrade
-    #upg3.target_version=[12.2|18|19|21|23]  # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-
-    #
-    # You can have as many databases as desired
-    #
-    # ----- Unplug/Plug Upgrade -----
-    # To perform an Unplug/Plug operation that upgrades and moves one or more PDBs
-    # from a source CDB into a target CDB, use the target_cdb and pdbs parameters.
-    # The target_pdb_name and target_pdb_copy_option parameters can be used
-    # to determine how each PDB is created on the target CDB.
-    #
-    # ----- NonCDB to PDB conversion -----
-    # To upgrade and convert an existing NonCDB database into a PDB of a target CDB,
-    # use the target_cdb parameter to specify the destination CDB.
-    # The target_pdb_name and target_pdb_copy_option parameters can be used
-    # to determine how each PDB is created on the target CDB.
-    #
-    # When neither of these options are used, a full upgrade of the source DB/CDB is performed.
-    #
-
-    #upgN.log_dir=<Path of the log directory for the upgrade job>
-    #upgN.sid=<ORACLE_SID of the source DB/CDB>
-    #upgN.source_home=<Path of the source ORACLE_HOME>
-    #upgN.target_home=<Path of the target ORACLE_HOME>
-    #upgN.target_version=<Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2>
-    #upgN.start_time=<Optional. [NOW | +XhYm (X hours, Y minutes after launch) | dd/mm/yyyy hh:mm:ss]>
-    #upgN.upgrade_node=<Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''>
-    #upgN.run_utlrp=[yes|no]    # Optional. Whether or not to run utlrp after upgrade
-    #upgN.timezone_upg=[yes|no] # Optional. Whether or not to run the timezone upgrade
-
-    ### Unplug/Plug parameters ###
-    #upgN.target_cdb=<ORACLE_SID of the target CDB>
-    #upgN.pdbs=<Comma delimited list of pdb names that will be upgraded and moved to the target CDB>
-    #upgN.<pdb_name>.target_pdb_name=<Optional. Name of the PDB to be created on the target CDB>
-    #upgN.<pdb_name>.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>
-
-    ### NonCDB to PDB parameters ###
-    #upgN.target_cdb=<ORACLE_SID of the target CDB>
-    #upgN.target_pdb_name=<Optional. Name of the PDB to be created on the target CDB>
-    #upgN.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>
+    # Be sure to hit RETURN
     ```
 
-    </details>
+    * Notice how AutoUpgrade used the environment settings to fill the parameters *sid* and *source\_home*.
+    * AutoUpgrade doesn't know the target Oracle home, but has made some suggestions. You can set `TARGET_ORACLE_HOME` and AutoUpgrade uses that.
+    * This is a very convenient way of creating a config file for a specific database.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    ################################################################
+    #
+    # :::  Sample config file for upgrade :::
+    #
+    # Build version 25.4.250730
+    # Build date    2025/07/30 16:33:06 +0000
+    #
+    # # Directory includes the following:
+    #   (1) upgrade's global directory
+    #   (2) Any logs tied to a job
+    #
+    ################################################################
+    
+    ################################################################
+    #
+    # ::: MANDATORY PARAMETERS :::
+    #
+    # global.global_log_dir
+    # 	The base logging directory of upgrade
+    #	Each instance of upgrade must write to a unique directory
+    # <prefix>.sid
+    # 	The SID of the non-CDB or CDB to upgrade
+    # <prefix>.source_home
+    # 	Path to the Oracle home of the database
+    # <prefix>.target_home
+    # 	Path to the Oracle home to which you want to upgrade
+    # <prefix>.log_dir
+    # 	Location of database-specific log files created during the upgrade
+    #	If not specified, global.global_log_dir is used
+    #
+    ################################################################
+    global.global_log_dir=/home/oracle/autoConfig
+    upg1.sid=UPGR
+    upg1.source_home=/u01/app/oracle/product/19
+    #upg1.target_home=/u01/app/oracle/product/21
+    #upg1.target_home=/u01/app/oracle/product/23
+    upg1.log_dir=/home/oracle/autoConfig
+    
+    ################################################################
+    #
+    ```
+    </details>    
 
 3. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
@@ -302,7 +414,8 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ![The Checks Report shows many details about the database](./images/autoupgrade-checks-report.png " ")
 
     * Examine the Checks Report.
-    * Notice how a specific check has severity *ERROR*, but AutoUpgrade has a fixup available.
+    * Notice how a specific check has severity *ERROR*, but **AutoUpgrade has a fixup available**.
+    * For most checks, AutoUpgrade has a fixup. Often, you'll see that there's no manual action needed.
     * Then close Firefox.
 
 ## Task 3: Upgrade your database

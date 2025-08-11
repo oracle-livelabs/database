@@ -513,9 +513,6 @@ Analyze the *FTEX* database for upgrade readiness.
     </copy>
     ```
 
-    * Since it is the first time you start the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password.
-    * Use the following AutoUpgrade keystore password: *autoupgrade_4U*
-
     <details>
     <summary>*click to see the output*</summary>
 
@@ -524,6 +521,21 @@ Analyze the *FTEX* database for upgrade readiness.
 
     Starting AutoUpgrade Password Loader - Type help for available options
     Creating new AutoUpgrade keystore - Password required
+    Enter password:
+    ```
+
+7. Since it is the first time you start the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password. Use the following AutoUpgrade keystore password: 
+
+    ``` bash
+    <copy>
+    autoupgrade_4U
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
     Enter password:
     Enter password again:
     AutoUpgrade keystore was successfully created
@@ -541,7 +553,13 @@ Analyze the *FTEX* database for upgrade readiness.
     </copy>
     ```
 
-    * Enter the *FTEX* database keystore password twice: *oracle_4U*
+    Enter the *FTEX* database keystore password twice: 
+    
+    ``` bash
+    <copy>
+    oracle_4U
+    </copy>
+    ```    
 
     <details>
     <summary>*click to see the output*</summary>
@@ -562,8 +580,14 @@ Analyze the *FTEX* database for upgrade readiness.
     </copy>
     ```
 
-    * Enter the *CDB23* database keystore password twice: *oracle_4U*
-
+    Enter the *CDB23* database keystore password twice:
+    
+    ``` bash
+    <copy>
+    oracle_4U
+    </copy>
+    ```
+    
     <details>
     <summary>*click to see the output*</summary>
 
@@ -784,6 +808,9 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     show pdbs
     </copy>
     ```
+
+    * You renamed *FTEX* to *CYAN*.
+    * You might see other PDBs from other labs. Focus on *CYAN*. 
 
     <details>
     <summary>*click to see the output*</summary>

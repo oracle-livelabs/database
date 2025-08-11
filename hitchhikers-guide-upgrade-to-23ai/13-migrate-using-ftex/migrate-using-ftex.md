@@ -46,7 +46,7 @@ You need to prepare a few things before you can start FTEX.
     -- Be sure to hit RETURN
     ```
 
-3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
+3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job. In the interest of time, you can skip it.
 
     ``` sql
     <copy>
@@ -197,12 +197,12 @@ You need to prepare a few things before you can start FTEX.
     </copy>
     ```
 
+    * `full=y` and `transportable=always` tells Data Pump to perform a full transportable export/import.
     * `dumpfile` uses the `%L` wildcard that enables Data Pump to create many dump files.
     * `filesize` splits the files into 5 GB chunks which is handy if you need to transfer the dump files to a remote system.
     * `metrics` and `logtime` print additional diagnostic information in the log file.
     * `exclude` specifies to skip database statistics. You will re-gather statistics on target.
-    * `full=y` and `transportable=always` tells Data Pump to perform a full transportable export/import.
-
+    
     <details>
     <summary>*click to see the output*</summary>
 
@@ -987,7 +987,7 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-9. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+9. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. In the interest of time, you can skip it.
 
     ``` sql
     <copy>

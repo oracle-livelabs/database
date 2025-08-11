@@ -79,7 +79,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
 3. Create a SQL plan baseline. You will use a script created by Carlos Sierra.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-08-spb_create.sql
     </copy>

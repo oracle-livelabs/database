@@ -237,10 +237,6 @@ In this lab, you will implement some of the recommendations. Namely, those about
     SQL> create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
 
     Index created.
-
-    SQL> create index TPCC.IDX$$_02ED0002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
-
-    Index created.
     ```
 
     </details>

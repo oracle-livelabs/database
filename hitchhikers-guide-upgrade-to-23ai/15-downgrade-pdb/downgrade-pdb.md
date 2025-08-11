@@ -360,7 +360,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
 
 5. Recompile all invalid objects. The *utlrp.sql* script recompiles all existing PL/SQL modules that were previously in an *INVALID* state, such as packages, procedures, types, and so on.
 
-    ``` python
+    ``` sql
     <copy>
     @$ORACLE_HOME/rdbms/admin/utlrp.sql
     </copy>

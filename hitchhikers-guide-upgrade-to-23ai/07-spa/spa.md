@@ -113,7 +113,7 @@ This lab assumes:
 
 4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now *test executes* the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 23ai optimizer. First, you compare *CPU\_TIME*.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_cpu.sql
     </copy>
@@ -141,7 +141,7 @@ This lab assumes:
 
 5. Generate the HTML Report containing the results below.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_report_cpu.sql
     </copy>
@@ -149,7 +149,7 @@ This lab assumes:
 
 6. Then repeat this for *ELAPSED\_TIME*. First, analyze performance.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_elapsed.sql
     </copy>
@@ -157,7 +157,7 @@ This lab assumes:
 
 7. Next, generate a report.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
     </copy>
@@ -240,7 +240,7 @@ This lab assumes:
 
 16. Re-analyze the workload based on *ELAPSED\_TIME*. This allows you to see the impact of the change on the database.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_elapsed.sql
     </copy>
@@ -248,7 +248,7 @@ This lab assumes:
 
 17. Generate a new report.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
     </copy>

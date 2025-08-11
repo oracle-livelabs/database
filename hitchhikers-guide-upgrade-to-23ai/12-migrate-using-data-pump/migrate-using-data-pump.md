@@ -46,7 +46,7 @@ You need to prepare a few things before you can start a Data Pump export.
     -- Be sure to hit RETURN
     ```
 
-3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
+3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job. In the interest of time, you can skip it.
 
     ``` sql
     <copy>
@@ -76,7 +76,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     ``` sql
     <copy>
-    create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
+    create directory expdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
     ```
 
@@ -84,7 +84,7 @@ You need to prepare a few things before you can start a Data Pump export.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
+    SQL> create directory expdir as '/home/oracle/logs/migrate-using-data-pump';
 
     Directory created.
     ```
@@ -97,7 +97,7 @@ You need to prepare a few things before you can start a Data Pump export.
     <copy>
     create user expuser identified by expuser default tablespace users;
     grant exp_full_database to expuser;
-    grant read, write on directory dmpdir to expuser;
+    grant read, write on directory expdir to expuser;
     alter user expuser quota unlimited on users;
     </copy>
 
@@ -116,7 +116,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     Grant succeeded.
 
-    SQL> grant read, write on directory dmpdir to expuser;
+    SQL> grant read, write on directory expdir to expuser;
 
     Grant succeeded.
 
@@ -154,7 +154,7 @@ You need to prepare a few things before you can start a Data Pump export.
     <summary>*click to see the output*</summary>
 
     ``` text
-    directory=dmpdir
+    directory=expdir
     logfile=full_exp.log
     dumpfile=full_exp_%L.dmp
     filesize=5g
@@ -400,7 +400,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     ``` sql
     <copy>
-    create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
+    create directory impdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
     ```
 
@@ -408,7 +408,7 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
+    SQL> create directory impdir as '/home/oracle/logs/migrate-using-data-pump';
 
     Directory created.
     ```
@@ -421,7 +421,7 @@ You need a few more changes to the new PDB before you can start the import.
     <copy>
     create user impuser identified by impuser default tablespace users;
     grant imp_full_database to impuser;
-    grant read, write on directory dmpdir to impuser;
+    grant read, write on directory impdir to impuser;
     alter user impuser quota unlimited on users;
     </copy>
 
@@ -440,7 +440,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     Grant succeeded.
 
-    SQL> grant read, write on directory dmpdir to impuser;
+    SQL> grant read, write on directory impdir to impuser;
 
     Grant succeeded.
 
@@ -476,7 +476,7 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
 
     ``` text
-    directory=dmpdir
+    directory=impdir
     logfile=full_imp.log
     dumpfile=full_exp_%L.dmp
     parallel=4
@@ -770,8 +770,6 @@ You need a few more changes to the new PDB before you can start the import.
     28-MAY-24 03:26:50.833: W-1      Completed 1 TRUSTED_DB_LINK objects in 0 seconds
     28-MAY-24 03:26:50.833: W-1      Completed by worker 1 1 TRUSTED_DB_LINK objects in 0 seconds
     28-MAY-24 03:26:50.835: W-1 Processing object type DATABASE_EXPORT/DIRECTORY/DIRECTORY
-    28-MAY-24 03:26:50.862: ORA-31684: Object type DIRECTORY:"DMPDIR" already exists
-
     28-MAY-24 03:26:50.868: W-1      Completed 2 DIRECTORY objects in 0 seconds
     28-MAY-24 03:26:50.868: W-1      Completed by worker 1 2 DIRECTORY objects in 0 seconds
     28-MAY-24 03:26:50.870: W-1 Processing object type DATABASE_EXPORT/DIRECTORY/GRANT/OWNER_GRANT/OBJECT_GRANT
@@ -950,7 +948,7 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-8. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+8. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. In the interest of time, you can skip it.
 
     ``` sql
     <copy>

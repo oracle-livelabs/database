@@ -94,11 +94,13 @@ Use HammerDB to create a workload.
 
     ![see the performance charts and the transactions-per-minute](./images/awr-compare-transact-viewer.png " ")
 
-12. Exit HammerDB.
+12. Wait for the run to complete. 
+
+13. Exit HammerDB.
 
 13. Switch back to the *yellow* terminal 🟨. SQLcl is still running. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
 
-    ``` python
+    ``` sql
     <copy>
     @/home/oracle/scripts/upg-06-awr-compare-snap-after.sql
     </copy>
@@ -122,11 +124,13 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 
 1. Call the AWR Diff script awrddrpt.sql:
 
-    ``` python
+    ``` sql
     <copy>
     @?/rdbms/admin/awrddrpt.sql
     </copy>
     ```
+
+    * The snapshots are not ordered completely numerical. Scroll through the output to find all snapshots.
 
     When prompted for:
 
