@@ -152,6 +152,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
     ``` text
     $ $ORACLE_HOME/OPatch/opatch lspatches
+    37738908;SEPARATE PURGE_OLD_METADATA FROM PATCHING ACTIVITY IN DATAPATCH
     37777295;DATAPUMP BUNDLE PATCH 19.27.0.0.0
     37499406;OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)
     37642901;Database Release Update : 19.27.0.0.250415 (37642901)
@@ -186,6 +187,7 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
     ```
 
     * Use *Space* to browse through the pages.
+    * Use *CTRL+C* to break when you'se seen enough.
 
     <details>
     <summary>*click to see the output*</summary>

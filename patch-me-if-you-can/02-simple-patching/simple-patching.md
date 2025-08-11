@@ -177,6 +177,7 @@ Patching a single instance Oracle Database require downtime.
 
     * You're reusing the same command line as the analysis, however, this time you are activating deploy mode.
     * Deploy mode is the complete automation which performs all parts of a patch process.
+    * Since AutoUpgrade is in *patching* mode, the prompt is `patch>`. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -373,7 +374,7 @@ Patching a single instance Oracle Database require downtime.
 
 7. Spend some time examining the other log files and subdirectories.
 
-8. Switch back to the *yellow* terminal 🟨. It takes around 20 minutes to patch the database. If AutoUpgrade is still running, you either wait or you can perform lab 3, *Familiarize with patching*.
+8. Switch back to the *yellow* terminal 🟨. **It takes around 20 minutes to patch the database**. If AutoUpgrade is still running, you either wait or you can perform lab 3, *Familiarize with patching*.
 
 ## Task 3: Patch database, continued
 

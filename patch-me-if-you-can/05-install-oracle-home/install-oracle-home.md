@@ -117,7 +117,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
 
 6. In this task, you installed a Release Update and additional patches. AutoUpgrade also allows you to install the recent-most Monthly Recommended Patches (MRP) of the specified Release Update. You can do that by adding *MRP* to the patch specification, `patch1.patch=RECOMMENDED,OCW,29213893,MRP`. AutoUpgrade automatically finds the appropriate patch and applies it. This is a simple way of getting the most-important one-off fixes for a given Release Update.
 
-7. It takes around 10 minutes to install a new Oracle home and patch it. Leave AutoUpgrade running and move on to the next task.
+7. **It takes around 10 minutes to install a new Oracle home and patch it**. Leave AutoUpgrade running and move on to the next task.
 
 ## Task 2: Check patch files
 
@@ -422,13 +422,13 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
 
     </details>
 
-## Task 4: Use Gold Image
+## Task 4: Optional: Use Gold Image
 
 Gold images are a convenient way of installing Oracle homes on many different servers. You prepare and patch an Oracle home only once, and then distribute the patched Oracle home to all other servers.
 
-1. This is an optional lab that takes around 10 minutes. If you are short on time, you can skip executing the commands, but do read on.
+1. **This is an optional lab that takes around 10 minutes**. If you are short on time, you can skip executing the commands, but do read on.
 
-2. Still in the *blue* terminal 🟦. Set the environment to the new Oracle home.
+2. Still in the *yellow* terminal 🟨. Set the environment to the new Oracle home.
 
     ``` bash
     <copy>
@@ -453,10 +453,10 @@ Gold images are a convenient way of installing Oracle homes on many different se
     </copy>
     ```
 
+    * It takes a few minutes to create the gold image.
     * The installer puts the Oracle home into a zip file.
     * `destinationLocation` determines where the gold image is placed.
     * `name` tells the installer the name of the zip file.
-    * It takes a few minutes to create the gold image.
     * While the installer creates a gold image, reflect on the differences between creating the new Oracle home using AutoUpgrade and manually?
     * You can move on with the next lab while the installer completes.
 

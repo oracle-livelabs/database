@@ -682,7 +682,7 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     ```
 
     * Each bug is now in a separate row.
-    * You can see there are 209 bug fixes currently.
+    * You can see there are 219 bug fixes currently.
 
     <details>
     <summary>*click to see the output*</summary>

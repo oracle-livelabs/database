@@ -46,7 +46,7 @@ Datapatch stores patching information inside the database. Understanding these t
     ```
 
     * Datapatch uses `REGISTRY$SQLPATCH_RU_INFO` to hold information about Release Updates, whereas it uses `REGISTRY$SQLPATCH` for all patches.
-    * Notice how more columns are in the latter table.
+    * Notice the additional columns in `REGISTRY$SQLPATCH`.
     * The `PATCH_DIRECTORY` column contains the rollback script for a specific patch. Datapatch always adds the rollback script to the database when applying a patch. This ensures that Datapatch can always perform a rollback, if needed, even if the original Oracle home is missing.
 
     <details>
