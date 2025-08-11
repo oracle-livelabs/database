@@ -40,7 +40,7 @@ You need to prepare a few things before you can start FTEX.
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -181,7 +181,7 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-8. Exit SQL*Plus.
+8. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -495,7 +495,7 @@ You need a few more changes to the new PDB before you can start the import.
     i=1; for f in /u02/oradata/FTEX/datafile/o1_mf_users_*.dbf; do cp -av "$f" "/u02/oradata/CDB23/MAROON/users$(printf '%02d' $i).dbf"; ((i++)); done
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
 5. Examine the precreated Data Pump import parameter file.
@@ -1067,7 +1067,6 @@ You need a few more changes to the new PDB before you can start the import.
 
     ``` sql
     <copy>
-    set pagesize 100
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra,
          f1.f1_results re,
@@ -1089,7 +1088,6 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> set pagesize 100
     SQL> select ra.name || ' ' || ra.year as race
       2  from f1.f1_races ra,
       3       f1.f1_results re,
@@ -1167,7 +1165,7 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -1192,7 +1190,7 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
 
     </details>
 
-3. Exit SQL*Plus.
+3. Exit SQLcl.
 
     ``` sql
     <copy>

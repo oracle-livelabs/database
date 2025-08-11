@@ -29,22 +29,25 @@ Use HammerDB to create a workload.
 
 1. Use the *yellow* terminal 🟨. Set the environment to the *CDB23* database. Now, since you upgraded the *UPGR* database and plugged into *CDB23*, the environment needs to be set to the CDB.
 
-      ``` sql
-      <copy>
-      . cdb23
-      sqlplus / as sysdba
-      alter session set container=UPGR;
-      </copy>
+    ``` sql
+    <copy>
+    . cdb23
+    sql / as sysdba
+    </copy>
 
-      -- Be sure to hit RETURN
-      ```
+    -- Be sure to hit RETURN
+    ```
 
 2. Create an AWR snapshot. Take note of the snapshot ID (e.g., 130). You need it later on.
 
-    ``` python
+    ``` sql
     <copy>
+    alter session set container=UPGR;
+
     @/home/oracle/scripts/upg-06-awr-compare-snap-before.sql
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -59,7 +62,7 @@ Use HammerDB to create a workload.
 
     </details>
 
-3. Don’t exit the terminal. Keep SQL*Plus open.
+3. Don’t exit the terminal. Keep SQLcl open.
 
 4. Start HammerDB using the desktop shortcut.
 
@@ -93,7 +96,7 @@ Use HammerDB to create a workload.
 
 12. Exit HammerDB.
 
-13. Switch back to the *yellow* terminal 🟨. SQL*Plus is still running. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
+13. Switch back to the *yellow* terminal 🟨. SQLcl is still running. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
 
     ``` python
     <copy>
@@ -137,7 +140,7 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
     * *end_snap* (second pair), type the last *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/logs/awr-compare-snap-after.log`.
     * *report_name*, hit RETURN.
 
-2. Wait until the HTML output has been generated, then exit SQL*Plus.
+2. Wait until the HTML output has been generated, then exit SQLcl.
 
     ``` sql
     <copy>

@@ -29,7 +29,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
     ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -43,7 +43,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
     </copy>
     ```
 
-3. Exit SQL*Plus.
+3. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -120,7 +120,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
 
     ``` bash
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -147,7 +147,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
 
 In the Oracle home you find other software components, that is patched together with the database.
 
-1. Switch to the *blue* 🟦 terminal. Compare the version of the JDK components in two Oracle homes.
+1. Switch to the *blue* terminal 🟦. Compare the version of the JDK components in two Oracle homes.
 
     ``` bash
     <copy>
@@ -352,7 +352,7 @@ In the Oracle home you find other software components, that is patched together 
 
     ``` bash
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -360,10 +360,6 @@ In the Oracle home you find other software components, that is patched together 
 
     ``` sql
     <copy>
-    set line 200
-    set pagesize 100
-    col directory_name format a25
-    col directory_path format a50
     select directory_name, directory_path from dba_directories where owner='SYS' order by 2;
     </copy>
 
@@ -447,10 +443,6 @@ In the Oracle home you find other software components, that is patched together 
 
     ``` sql
     <copy>
-    set line 200
-    set pagesize 100
-    col directory_name format a25
-    col directory_path format a50
     select directory_name , directory_path from dba_directories where owner='SYS' order by 2;
     </copy>
 
@@ -679,8 +671,6 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
 
     ``` sql
     <copy>
-    set pagesize 1000
-    col value format a40
     select * from (
        select     trim(regexp_substr (str,'[^,]+',1,level)) value
        from       (select value as str from v$system_parameter where name='_fix_control')
@@ -698,8 +688,6 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> set pagesize 1000
-    SQL> col value format a40
     SQL> select * from (
             select     trim(regexp_substr (str,'[^,]+',1,level)) value
             from       (select value as str from v$system_parameter where name='_fix_control')
@@ -814,12 +802,12 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     ``` text
     SQL> create pfile from spfile;
 
-    File created.
+    Pfile FROM created.
     ```
 
     </details>
 
-11. Exit SQL*Plus.
+11. Exit SQLcl.
 
     ``` sql
     <copy>

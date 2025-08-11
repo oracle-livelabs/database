@@ -31,7 +31,7 @@ This lab assumes:
     ``` sql
     <copy>
     . upgr
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -59,7 +59,7 @@ This lab assumes:
 
     Your snapshot ID might differ from the one in the sample output.
 
-3. Don’t exit the terminal. Keep SQL*Plus open.
+3. Don’t exit the terminal. Keep SQLcl open.
 
 4. Start HammerDB using the desktop shortcut.
 
@@ -181,7 +181,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     Your snapshot ID might differ from the one in the sample output.
 
-2. Exit from SQL*Plus.
+2. Exit from SQLcl.
 
     ``` sql
     <copy>
@@ -200,7 +200,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     ``` sql
     <copy>
     . upgr
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -339,7 +339,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     </details>
 
-3. Exit from SQL*Plus.
+3. Exit from SQLcl.
 
     ``` sql
     <copy>

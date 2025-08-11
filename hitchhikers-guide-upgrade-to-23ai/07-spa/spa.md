@@ -24,14 +24,14 @@ This lab assumes:
 
 1. Use the *yellow* terminal 🟨. Set the environment to *CDB23* and connect.
 
-      ``` sql
-      <copy>
-      . cdb23
-      sql / as sysdba
-      </copy>
+    ``` sql
+    <copy>
+    . cdb23
+    sql / as sysdba
+    </copy>
 
-      -- Be sure to hit RETURN
-      ```
+    -- Be sure to hit RETURN
+    ```
 
 2. Switch to *UPGR*, then check the SQL Tuning Sets and the number of statements in them:
 
@@ -213,14 +213,14 @@ This lab assumes:
 
 14. Reconnect to the database.
 
-      ``` sql
-      <copy>
-      . cdb23
-      sql / as sysdba
-      </copy>
+    ``` sql
+    <copy>
+    . cdb23
+    sql / as sysdba
+    </copy>
 
-      -- Be sure to hit RETURN
-      ```
+    -- Be sure to hit RETURN
+    ```
 
 15. Switch to the *UPGR* database, then implement a change and re-test workload. Imagine you have found the root cause of the bad performance. In this case, you know it is *optimizer\_index\_cost\_adj*. Now, you change the parameter back to the default value (100) and repeat the test.
 

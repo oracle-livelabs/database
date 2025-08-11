@@ -30,7 +30,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     ``` sql
     <copy>
     . cdb23com
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -158,7 +158,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
 
     </details>
 
-7. Exit SQL*Plus.
+7. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -178,7 +178,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
     ./dbdowngrade -c 'YELLOW'
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     * Use `-c` to downgrade just that one PDB, not the entire CDB.
@@ -205,7 +205,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
     ``` sql
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -235,7 +235,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
     </details>
 
-4. Exit SQL*Plus.
+4. Exit SQLcl.
 
     ``` sql
     <copy>
@@ -252,7 +252,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     ``` sql
     <copy>
     . cdb19
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -538,7 +538,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
 
     </details>
 
-11. Exit SQL*Plus.
+11. Exit SQLcl.
 
     ``` sql
     <copy>

@@ -28,7 +28,7 @@ You start by checking the *CDBRES* database.
     ``` sql
     <copy>
     . cdbres
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -101,8 +101,8 @@ You start by checking the *CDBRES* database.
     CON_ID     CON_NAME           OPEN MODE  RESTRICTED
     ---------- ------------------ ---------- ----------
              2 PDB$SEED           READ ONLY  NO
-             4 GREY               READ WRITE NO
-     ```
+             3 GREY               READ WRITE NO
+    ```
 
     </details>
 
@@ -110,10 +110,6 @@ You start by checking the *CDBRES* database.
 
     ``` sql
     <copy>
-    set lines 100
-    col time for a32
-    col name for a32
-
     select scn, storage_size, time, preserved, name from v$restore_point;
     </copy>
 
@@ -131,11 +127,11 @@ You start by checking the *CDBRES* database.
           SCN    STORAGE_SIZE TIME                               PRESERVED    NAME
     _________ _______________ __________________________________ ____________ _________________________________
        715819      1677721600 24-JUL-25 03.15.50.000000000 PM    YES          AUTOUPGRADE_9212_CDBRES1927000
-     ```
+    ```
 
     </details>
 
-6. Exit SQL*Plus.
+6. Exit SQLcl.
 
     ``` sql
     <copy>

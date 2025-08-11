@@ -50,7 +50,7 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
 1. Still in the *blue* 🟦 terminal, connect to the *RUBY* ADB. This is our target database.
 
-    ``` bash
+    ``` sql
     <copy>
     . adb
     sql admin/Welcome_1234@ruby_tp

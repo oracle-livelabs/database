@@ -153,7 +153,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
     ```
 
     * For this lab, we generated a wallet in advance with the certificate to connect on this server. The wallet is located under */home/oracle/client\_tls\_wallet*.
-    * We need to provide *ssl_server_dn_match* as SQLcl would send *localhost* instead of *holserv1*, resulting in *ORA-17965*.
+    * We need to provide *ssl\_server\_dn\_match* as SQLcl would send *localhost* instead of *holserv1*, resulting in *ORA-17965*.
     * If we try to authenticate on TCPS without providing a wallet, we get an TNS error (ORA-29002: SSL transport detected invalid or obsolete server certificate).
 
     <details>
@@ -166,7 +166,7 @@ All the databases used on this lab are listening also on port 1522 using mTLS. W
 
     Connected to:
     Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
-    Version 23.8.0.25.04
+    Version 23.9.0.25.07
 
     SQL>
     ```
@@ -187,7 +187,7 @@ In this task, we will change the default profile so passwords for imported users
 
 1. Still in the *blue* 🟦 terminal, connect on the *RUBY* ADB.
 
-    ``` bash
+    ``` sql
     <copy>
     . adb
     sql admin/Welcome_1234@ruby_tp
@@ -198,7 +198,7 @@ In this task, we will change the default profile so passwords for imported users
 
 2. Alter the profile.
 
-    ``` bash
+    ``` sql
     <copy>
     alter profile default limit PASSWORD_LIFE_TIME unlimited;
     alter profile default limit PASSWORD_GRACE_TIME unlimited;
@@ -477,7 +477,7 @@ First, we need to upload the *RED* wallet to ADB directory.
 
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed Jul 2 17:23:49 2025
-    Version 23.8.0.25.04
+    Version 23.9.0.25.07
 
     Copyright (c) 1982, 2025, Oracle and/or its affiliates.  All rights reserved.
 

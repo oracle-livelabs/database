@@ -286,7 +286,7 @@ Patching a single instance Oracle Database require downtime.
 
 4. In the output of the `status` command, you can see where AutoUpgrade stores log files. Examine the log files.
 
-5. Leave AutoUpgrade running. Switch to the *blue* 🟦 terminal. Examine the job logging directory.
+5. Leave AutoUpgrade running. Switch to the *blue* terminal 🟦. Examine the job logging directory.
 
     ``` bash
     <copy>

@@ -123,7 +123,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
 
 While AutoUpgrade installs a new Oracle home, you can inspect some of the patch files.
 
-1. Switch to the *blue* 🟦 terminal. Extract one of the patch files.
+1. Switch to the *blue* terminal 🟦. Extract one of the patch files.
 
     ``` bash
     <copy>
@@ -428,7 +428,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 
 1. This is an optional lab that takes around 10 minutes. If you are short on time, you can skip executing the commands, but do read on.
 
-2. Still in the *blue* 🟦 terminal. Set the environment to the new Oracle home.
+2. Still in the *blue* terminal 🟦. Set the environment to the new Oracle home.
 
     ``` bash
     <copy>

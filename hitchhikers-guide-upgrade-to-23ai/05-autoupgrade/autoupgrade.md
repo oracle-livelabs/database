@@ -35,7 +35,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     java -jar autoupgrade.jar -version
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     <details>
@@ -67,7 +67,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     more sample_config.cfg
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     * Hit *SPACE* to scroll through the output.
@@ -485,7 +485,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ls -l
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     * Explore the subdirectories.
@@ -511,7 +511,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ls -l
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
     <details>
