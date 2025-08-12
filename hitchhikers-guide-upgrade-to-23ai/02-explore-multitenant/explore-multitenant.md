@@ -475,16 +475,15 @@ You check DBA and CDB views.
 
     ``` sql
     <copy>
-    select t.con_id, c.name, t.tablespace_name
-    from cdb_tablespaces t, v$containers c
-    where t.con_id=c.con_id
+    select con_id, con$name as name, tablespace_name
+    from cdb_tablespaces
+    where con_id
     order by 1, 3;
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-    * You have to join on `v$containers` to translate the container ID to its name.
     * Notice you are using a CDB view.
     * CDB views are similar to DBA views, but they show the result from the entire CDB.
     * For each DBA view there is a similar CDB view.
@@ -526,9 +525,9 @@ You check DBA and CDB views.
     <copy>
     alter system set "_exclude_seed_cdb_view"=false;
 
-    select t.con_id, c.name, t.tablespace_name
-    from cdb_tablespaces t, v$containers c
-    where t.con_id=c.con_id
+    select con_id, con$name as name, tablespace_name
+    from cdb_tablespaces
+    where con_id
     order by 1, 3;
     </copy>
 
@@ -624,9 +623,9 @@ You check DBA and CDB views.
     <copy>
     alter session set container=GREEN;
 
-    select t.con_id, c.name, t.tablespace_name
-    from cdb_tablespaces t, v$containers c
-    where t.con_id=c.con_id
+    select con_id, con$name as name, tablespace_name
+    from cdb_tablespaces
+    where con_id
     order by 1, 3;
     </copy>
 
@@ -828,8 +827,6 @@ You want to run a script in a CDB including all PDBs.
     ```
 
     </details>
-
-**Congratulations! You now know some of the basics of the multitenant architecture.**
 
 You may now [*proceed to the next lab*](#next).
 

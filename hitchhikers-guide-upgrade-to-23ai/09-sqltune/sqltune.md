@@ -223,11 +223,13 @@ In this lab, you will implement some of the recommendations. Namely, those about
 1. Implement the index recommendation. Be sure to remove duplicate recommendations. Your recommendations may vary from the sample output. Copy/paste the recommendations from your own report.
 
     ``` sql
-    <copy>
-    create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
-    </copy>
+    create index TPCC.IDX$$_00780001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    create index TPCC.IDX$$_00780002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
+    create index TPCC.IDX$$_00780003 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
     ```
 
+    * Do not copy from the instructions, copy from the terminal output.
+    * Implement all the `CREATE INDEX` recommendations.
     * Do not implement any of the other recommendations.
 
     <details>

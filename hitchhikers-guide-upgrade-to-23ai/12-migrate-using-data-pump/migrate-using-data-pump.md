@@ -46,31 +46,12 @@ You need to prepare a few things before you can start a Data Pump export.
     -- Be sure to hit RETURN
     ```
 
-3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job. In the interest of time, you can skip it.
+3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job. In the interest of time, you skip it in this lab.
 
     ``` sql
-    <copy>
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
-    </copy>
-
-    -- Be sure to hit RETURN
     ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-
-    ``` text
-    SQL> exec dbms_stats.gather_schema_stats('SYS');
-
-    PL/SQL procedure successfully completed.
-
-    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
-
-    PL/SQL procedure successfully completed.
-    ```
-
-    </details>
 
 4. Create a database directory object. It must point to the directory in the operating system that you just created.
 
@@ -948,64 +929,31 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-8. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. In the interest of time, you can skip it.
+8. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. In the interest of time, you skip it in this lab.
 
     ``` sql
-    <copy>
     alter session set container=purple;
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
-    </copy>
-
-    -- Be sure to hit RETURN
     ```
 
-    <details>
-    <summary>*click to see the output*</summary>
-
-    ``` text
-    SQL> alter session set container=purple;
-
-    Session altered.
-
-    SQL> exec dbms_stats.gather_schema_stats('SYS');
-
-    PL/SQL procedure successfully completed.
-
-    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
-
-    PL/SQL procedure successfully completed.
-    ```
-
-    </details>
-
-9. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics.
+9. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics. In the interest of time, you skip it in this lab.
 
     ``` sql
-    <copy>
     exec dbms_stats.gather_database_stats;
-    </copy>
     ```
 
     * You could also transfer the old statistics from the source database using `DBMS_STATS`.
-
-    <details>
-    <summary>*click to see the output*</summary>
-
-    ``` text
-    SQL> exec dbms_stats.gather_database_stats;
-
-    PL/SQL procedure successfully completed.
-    ```
-
-    </details>
 
 10. Verify your database has been imported. Check the number of objects in the *F1* schema.
 
     ``` sql
     <copy>
+    alter session set container=purple;
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * There should be 14 tables and 19 indexes.
@@ -1014,6 +962,10 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
 
     ``` text
+    SQL> alter session set container=purple;
+
+    Session altered.
+    
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
 
     OBJECT_TYPE               COUNT(*)

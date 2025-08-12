@@ -94,7 +94,7 @@ Use HammerDB to create a workload.
 
     ![see the performance charts and the transactions-per-minute](./images/awr-compare-transact-viewer.png " ")
 
-12. Wait for the run to complete. 
+12. HammerDB is done running the workload when the transaction-per-minute metric drops to zero. Wait for the run to complete. 
 
 13. Exit HammerDB.
 

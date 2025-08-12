@@ -157,7 +157,7 @@ Use HammerDB to start a workload.
     You get control back in 180 seconds.
     Do not press CTRL+C
 
-    There are now 38 SQL Statements in this STS.
+    There are now 43 SQL Statements in this STS.
 
     PL/SQL procedure successfully completed.
     ```

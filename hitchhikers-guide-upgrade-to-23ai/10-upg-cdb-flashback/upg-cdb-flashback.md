@@ -21,7 +21,7 @@ This lab uses the *CDBRES* databases.
 
 ## Task 1: Check your environment
 
-You start by checking the *CDBRES* database.
+You start by checking the *CDBRES* database. This database was originally on Oracle Database 19c and later upgraded to Oracle Database 23ai. You should imagine that you already upgraded the database, and now you find a critical problem and decide to roll back to the previous release.
 
 1. Set the environment to the new Oracle home and connect to the upgraded *CDBRES* database.
 
@@ -106,7 +106,7 @@ You start by checking the *CDBRES* database.
 
     </details>
 
-5. Get a list of Restore Points.
+5. Get a list of restore points.
 
     ``` sql
     <copy>
@@ -116,7 +116,7 @@ You start by checking the *CDBRES* database.
     -- Be sure to hit RETURN
     ```
 
-    * There is one Restore Point named "AUTOUPGRADE\_9212\_CDBRES1927000".
+    * There is one restore point named "AUTOUPGRADE\_9212\_CDBRES1927000".
 
     <details>
     <summary>*click to see the output*</summary>

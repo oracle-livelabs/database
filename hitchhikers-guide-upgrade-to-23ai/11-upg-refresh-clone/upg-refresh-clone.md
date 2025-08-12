@@ -625,7 +625,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
       COUNT(*)
     ----------
-         22924
+         22844
     ```
 
     </details>

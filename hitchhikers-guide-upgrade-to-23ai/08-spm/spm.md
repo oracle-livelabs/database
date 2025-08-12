@@ -328,8 +328,9 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
     ```
 
     * The optimizer chooses the index plan for the SQL.
-    * The hack that should ensure the optimizer uses a full table scan is in plan.
+    * The hack that should ensure the optimizer uses a full table scan is in place.
     * However, the SQL plan baseline restricts the optimizer to use a plan from the baseline. The only plan in the baseline is the index plan.
+    * Without the SQL plan baseline the optimizer would select the full table scan, which is a bad plan. But your efforts ensured a better plan - even with the hack.
 
     <details>
     <summary>*click to see the output*</summary>
