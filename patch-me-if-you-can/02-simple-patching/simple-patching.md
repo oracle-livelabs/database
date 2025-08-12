@@ -123,6 +123,8 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     * You can see that you're patching the *FTEX* database.
     * You can also see that you're patching from 19.27 to 19.28.
+    * In this lab, you can only use already downloaded patches. When this lab was created, 19.28 was the latest Release Update. 
+    * In your own environment, when AutoUpgrade downloads patches, it will always take the latest available Release Upgrade from MOS when you specify *patch=recommended*. 
     * In the end, you can see that all checks passed and there's no manual intervention needed.
     * This database was found to be ready for patching.
 
@@ -338,7 +340,7 @@ Patching a single instance Oracle Database require downtime.
 
     * The output is different in your lab environment.
     * Examine the content to understand that AutoUpgrade is doing behind the scenes.
-    * AutoUpgrade prints the patches that it will install. In this case, it is the 19.28 Relese Update plus matching OJVM and Data Pump bundle patches. In addition, it also updated OPatch.
+    * AutoUpgrade prints the patches that it will install. In this case, it is the 19.28 Relese Update plus matching OJVM and Data Pump bundle patches. In addition, it also updated OPatch and installed a one-off patch.
 
     <details>
     <summary>*click to see the output*</summary>

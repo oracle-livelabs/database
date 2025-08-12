@@ -33,7 +33,7 @@ In this lab, you will:
 
 6. On the desktop you also find *VS Code*. It has the *Oracle SQL Developer Extension* installed (the new SQL Developer). You won't use it in this lab, but installed for convenience.
 
-6. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
+7. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
 
     ![Zoom in in Firefox to make text bigger](images/initialize-environment-firefox-zoom.png)
 
