@@ -1,6 +1,11 @@
 {
   "workshoptitle": "Explore Operational Property Graphs in Oracle Database 23ai",
     "help": "livelabs-help-sg_us@oracle.com",
+    "include": {
+    "adb-goto-service-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/goto-service-body.md",
+    "adb-provision-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/provision-body.md",
+    "adb-provision-body-developer.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/provision-body-developer.md"
+},
     "tutorials": [
       {
           "title": "Introduction",
