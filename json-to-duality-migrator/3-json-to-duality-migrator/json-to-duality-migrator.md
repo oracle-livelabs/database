@@ -290,6 +290,8 @@ In this task, we will import data from input JSON collections into the duality v
 
    > **_NOTE:_** In case you find that some documents could not be imported successfully, you can look at the error message to understand the reason for the failure, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
 
+In this lab, we used the default configuration options when invoking the `INFER_AND_GENERATE_SCHEMA` procedure and did not customize the relational schema in any way. However, in many use cases, you may want to customize the relational schema based on business requirements and the application model. In the next lab, we will see how to use a few configuration options to customize and design the relational schema with the JSON to Duality Migrator.
+
 You may now **proceed to the next lab**.
 
 ## Learn More
