@@ -1,6 +1,11 @@
 {
-  "workshoptitle": "Exploring Operational Property Graphs in 23ai Free",
+  "workshoptitle": "Explore Operational Property Graphs in Oracle Database 23ai",
     "help": "livelabs-help-sg_us@oracle.com",
+    "include": {
+    "adb-goto-service-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/goto-service-body.md",
+    "adb-provision-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/provision-body.md",
+    "adb-provision-body-developer.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/provision-body-developer.md"
+},
     "tutorials": [
       {
           "title": "Introduction",
@@ -14,44 +19,32 @@
         "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
       },
       {
-        "title": "Lab 1: Prepare Setup",
-        "description": "How to download your ORM stack and update security rules for an existing VCN",
-        "filename": "../../prepare-setup/prepare-setup.md",
-        "type": "property-graphs"
+        "title": "Lab 1: Provision an ADB Instance",
+        "description": "Provisioning an Autonomous Database Instance",
+        "type": "freetier",
+        "filename": "https://oracle-livelabs.github.io/common/building-blocks/blocks/adb/provision/provision-console.md"
       },
       {
-        "title": "Lab 2: Environment Setup",
-        "description": "How to provision the workshop environment and connect to it",
-        "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
+        "title": "Lab 2: Create a Graph User",
+        "description": "Create a simple graph and learn how to navigate the user interface.",
+        "filename": "https://oracle-livelabs.github.io/spatial-graph/adb-graph/getting-started-with-graph-studio/create-user/create-user.md"
+      },
+       {
+        "title": "Lab 3: Setup Property Graph",
+        "description": "Create the Operational Property Graph",
+        "filename": "../../create-graph/create-graph.md"
       },
       {
-          "title": "Lab 3: Use noVNC remote desktop",
-          "description": "Using noVNC Remote Desktop",
-          "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
-      },
-      {
-          "title": "Lab 4: Setup User",
-          "description": "Creating the schema including JSON Duality Views",
-          "type": "livelabs",
-          "filename": "../../change-pw/change-pw.md"
-      },
-      {
-          "title": "Lab 5: Configure setup materials and tools",
-          "description": "Creating the schema including JSON Duality Views",
-          "type": "livelabs",
-          "filename": "../../property-graphs-setup/property-graphs-setup.md"
-      },
-      {
-          "title": "Lab 6: Operational Property Graphs Example with SQL/PGQ in 23ai",
+          "title": "Lab 4: Operational Property Graphs Example with SQL/PGQ in 23ai",
           "description": "Using Property Graphs in 23ai",
           "type": "livelabs",
-          "filename": "../../property-graphs/property-graphs.md"
+          "filename": "../../property-graphs/property-graphs-new.md"
       },
       {
           "title": "Bonus Lab: Integration with APEX",
           "description": "Using Property Graphs in 23ai",
           "type": "livelabs",
-          "filename": "../../apex-property-graphs/apex-property-graphs.md"
+          "filename": "../../apex-property-graphs/apex-property-graphs-new.md"
       },
       {
         "title": "Need Help?",
