@@ -91,7 +91,11 @@ In this lab, you will be guided through the following tasks:
 
     ![MDS](./images/mysql-avail-domain.png "mysql availability domain ")
 
-10. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard.E3**
+10. On Configure hardware, ensure **Enable HeatWave Cluster** is unchecked
+    ![MDS](./images/mysql-disable-heatwave.png "disable heatwave")
+
+    Change the default shape **MySQL.2** to **MySQL.16**
+    ![MDS](./images/mysql-configure-mysql-shape.png "mysql shape")
 
     Data Storage Size (GB) Set value to:  **1024**
 
@@ -99,7 +103,7 @@ In this lab, you will be guided through the following tasks:
     <copy>1024</copy>
     ```
 
-    ![MDS](./images/mysql-configure-hardware.png "mysql hardware ")
+    ![MDS](./images/mysql-configure-storage.png "mysql hardware ")
 
 11. On Configure Backups, disable 'Enable Automatic Backup'
 
@@ -130,7 +134,7 @@ In this lab, you will be guided through the following tasks:
 
     On MDS-HW Page, check the MySQL Endpoint (Private IP Address)
 
-    ![MDS](./images/mysql-heatwave-active.png"mysql heatwave active ")
+    ![MDS](./images/mysql-heatwave-active.png "mysql heatwave active ")
 
 You may now **proceed to the next lab**
 
