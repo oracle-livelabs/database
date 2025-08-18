@@ -29,7 +29,7 @@ You need to prepare a few things before you can start FTEX.
 
 1. Data Pump needs access to a directory where it can put dump and log file. Create a directory in the file system.
 
-    ```
+    ``` bash
     <copy>
     mkdir -p /home/oracle/logs/migrate-using-ftex
     </copy>
@@ -37,18 +37,18 @@ You need to prepare a few things before you can start FTEX.
 
 2. Set the environment to the source database and connect.
 
-    ```
+    ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
+3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job. In the interest of time, you can skip it.
 
-    ```
+    ``` sql
     <copy>
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
@@ -59,6 +59,7 @@ You need to prepare a few things before you can start FTEX.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> exec dbms_stats.gather_schema_stats('SYS');
 
@@ -68,11 +69,12 @@ You need to prepare a few things before you can start FTEX.
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 4. Create a database directory object. It must point to the directory in the operating system that you just created.
 
-    ```
+    ``` sql
     <copy>
     create or replace directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
     </copy>
@@ -80,16 +82,18 @@ You need to prepare a few things before you can start FTEX.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create or replace directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
 
     Directory created.
     ```
+
     </details>
 
 5. Create a dedicated user that you can use for the Data Pump export job.
 
-    ```
+    ``` sql
     <copy>
     create user ftexuser identified by ftexuser default tablespace system;
     grant exp_full_database to ftexuser;
@@ -104,6 +108,7 @@ You need to prepare a few things before you can start FTEX.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create user ftexuser identified by ftexuser default tablespace system;
 
@@ -121,11 +126,12 @@ You need to prepare a few things before you can start FTEX.
 
     User altered.
     ```
+
     </details>
 
 6. Generate a list of tablespaces to set read-only.
 
-    ```
+    ``` sql
     <copy>
     select
        tablespace_name
@@ -139,6 +145,7 @@ You need to prepare a few things before you can start FTEX.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select
            tablespace_name
@@ -152,11 +159,12 @@ You need to prepare a few things before you can start FTEX.
     ------------------------------
     USERS
     ```
+
     </details>
 
 7. Set the tablespace read-only.
 
-    ```
+    ``` sql
     <copy>
     ALTER TABLESPACE USERS READ ONLY;
     </copy>
@@ -164,37 +172,40 @@ You need to prepare a few things before you can start FTEX.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> ALTER TABLESPACE USERS READ ONLY;
 
     Tablespace altered.
     ```
+
     </details>
 
-6. Exit SQL*Plus.
+8. Exit SQLcl.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
     ```
 
-7. Examine the precreated Data Pump parameter file.
+9. Examine the precreated Data Pump parameter file.
 
-    ```
+    ``` bash
     <copy>
-    cat /home/oracle/scripts/migrate-using-ftex-exp.par
+    cat /home/oracle/scripts/upg-13-migrate-using-ftex-exp.par
     </copy>
     ```
 
+    * `full=y` and `transportable=always` tells Data Pump to perform a full transportable export/import.
     * `dumpfile` uses the `%L` wildcard that enables Data Pump to create many dump files.
     * `filesize` splits the files into 5 GB chunks which is handy if you need to transfer the dump files to a remote system.
     * `metrics` and `logtime` print additional diagnostic information in the log file.
     * `exclude` specifies to skip database statistics. You will re-gather statistics on target.
-    * `full=y` and `transportable=always` tells Data Pump to perform a full transportable export/import.
-
+    
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     directory=ftexdir
     logfile=ftex_exp.log
@@ -206,13 +217,14 @@ You need to prepare a few things before you can start FTEX.
     full=y
     transportable=always
     ```
+
     </details>
 
-8. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created.
+10. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created.
 
-    ```
+    ``` bash
     <copy>
-    expdp ftexuser/ftexuser parfile=/home/oracle/scripts/migrate-using-ftex-exp.par
+    expdp ftexuser/ftexuser parfile=/home/oracle/scripts/upg-13-migrate-using-ftex-exp.par
     </copy>
     ```
 
@@ -220,14 +232,15 @@ You need to prepare a few things before you can start FTEX.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Export: Release 19.0.0.0.0 - Production on Wed May 29 13:31:09 2024
-    Version 19.21.0.0.0
+    Version 19.27.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
     Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    29-MAY-24 13:31:12.853: Starting "FTEXUSER"."SYS_EXPORT_FULL_01":  ftexuser/******** parfile=/home/oracle/scripts/migrate-using-ftex-exp.par
+    29-MAY-24 13:31:12.853: Starting "FTEXUSER"."SYS_EXPORT_FULL_01":  ftexuser/******** parfile=/home/oracle/scripts/upg-13-migrate-using-ftex-exp.par
     29-MAY-24 13:31:13.540: W-1 Startup took 1 seconds
     29-MAY-24 13:31:15.094: W-2 Startup took 1 seconds
     29-MAY-24 13:31:16.400: W-1 Processing object type DATABASE_EXPORT/EARLY_OPTIONS/VIEWS_AS_TABLES/TABLE_DATA
@@ -354,6 +367,7 @@ You need to prepare a few things before you can start FTEX.
     29-MAY-24 13:32:29.366:   /u02/oradata/FTEX/users01.dbf
     29-MAY-24 13:32:29.389: Job "FTEXUSER"."SYS_EXPORT_FULL_01" successfully completed at Wed May 29 13:32:29 2024 elapsed 0 00:01:18
     ```
+
     </details>
 
 ## Task 2: Create new PDB
@@ -361,18 +375,19 @@ You need to prepare a few things before you can start FTEX.
 You create a new, empty PDB in Oracle Database 23ai and import directly into it. This avoids the in-place upgrade and PDB conversion.
 
 1. Set the environment to the target database, *CDB23*, and connect.
-    ```
+
+    ``` sql
     <copy>
     . cdb23
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-3. Create a new PDB called *MAROON* and open it.
+2. Create a new PDB called *MAROON* and open it.
 
-    ```
+    ``` sql
     <copy>
     create pluggable database maroon admin user admin identified by admin;
     alter pluggable database maroon open;
@@ -384,6 +399,7 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create pluggable database MAROON admin user admin identified by admin;
 
@@ -397,8 +413,8 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
     Pluggable database altered.
     ```
-    </details>
 
+    </details>
 
 ## Task 3: Data Pump import
 
@@ -406,7 +422,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 1. Create a database directory object that points to the same operating system directory that you created in the previous task. In this lab, the export and import share the same directory. This enables Data Pump to find the dump files. If you import on a remote system, you must copy the dump files.
 
-    ```
+    ``` sql
     <copy>
     alter session set container=maroon;
     create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
@@ -417,16 +433,18 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
 
     Directory created.
     ```
+
     </details>
 
 2. Create a dedicated user for the Data Pump import.
 
-    ```
+    ``` sql
     <copy>
     create user ftexuser identified by ftexuser default tablespace system;
     grant imp_full_database to ftexuser;
@@ -439,6 +457,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> create user ftexuser identified by ftexuser default tablespace system;
 
@@ -456,11 +475,12 @@ You need a few more changes to the new PDB before you can start the import.
 
     User altered.
     ```
+
     </details>
 
-3. Exit SQL*Plus.
+3. Exit SQLcl.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -468,20 +488,21 @@ You need a few more changes to the new PDB before you can start the import.
 
 4. Make a directory for *MAROON* data files. Copy the data files from the source database to this directory.
 
-    ```
+    ``` bash
     <copy>
-    mkdir -p /u01/app/oracle/oradata/CDB23/MAROON
-    cp /u02/oradata/FTEX/datafile/o1_mf_users_*.dbf /u01/app/oracle/oradata/CDB23/MAROON/users01.dbf
+    mkdir -p /u02/oradata/CDB23/MAROON
+
+    i=1; for f in /u02/oradata/FTEX/datafile/o1_mf_users_*.dbf; do cp -av "$f" "/u02/oradata/CDB23/MAROON/users$(printf '%02d' $i).dbf"; ((i++)); done
     </copy>
 
-    -- Be sure to hit RETURN
+    # Be sure to hit RETURN
     ```
 
 5. Examine the precreated Data Pump import parameter file.
 
-    ```
+    ``` bash
     <copy>
-    cat /home/oracle/scripts/migrate-using-ftex-imp.par
+    cat /home/oracle/scripts/upg-13-migrate-using-ftex-imp.par
     </copy>
     ```
 
@@ -493,6 +514,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     directory=ftexdir
     logfile=ftex_imp.log
@@ -502,23 +524,25 @@ You need a few more changes to the new PDB before you can start the import.
     logtime=all
     exclude=tablespace:"in ('TEMP', 'UNDOTBS100')"
     exclude=user:"in ('FTEXUSER')"
-    transport_datafiles=/u01/app/oracle/oradata/CDB23/MAROON/users01.dbf
+    transport_datafiles=/u02/oradata/CDB23/MAROON/users*.dbf
     ```
+
     </details>
 
 6. Start the Data Pump import.
 
-    ```
+    ``` bash
     <copy>
-    impdp ftexuser/ftexuser@localhost/maroon parfile=/home/oracle/scripts/migrate-using-ftex-imp.par
+    impdp ftexuser/ftexuser@localhost/maroon parfile=/home/oracle/scripts/upg-13-migrate-using-ftex-imp.par
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed May 29 14:01:10 2024
-    Version 23.5.0.24.07
+    Version 23.9.0.25.07
 
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
 
@@ -526,7 +550,7 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:13.959: W-1 Startup on instance 1 took 0 seconds
     29-MAY-24 14:01:15.408: W-1 Master table "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
     29-MAY-24 14:01:15.943: W-1 Source time zone is +02:00 and target time zone is +00:00.
-    29-MAY-24 14:01:15.946: Starting "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01":  ftexuser/********@localhost/maroon parfile=/home/oracle/scripts/migrate-using-ftex-imp.par
+    29-MAY-24 14:01:15.946: Starting "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01":  ftexuser/********@localhost/maroon parfile=/home/oracle/scripts/upg-13-migrate-using-ftex-imp.par
     29-MAY-24 14:01:16.037: W-1 Processing object type DATABASE_EXPORT/PRE_SYSTEM_IMPCALLOUT/MARKER/SCHEDULER
     29-MAY-24 14:01:16.066: W-1      Completed 1 SCHEDULER objects in 0 seconds
     29-MAY-24 14:01:16.069: W-1 Processing object type DATABASE_EXPORT/PRE_SYSTEM_IMPCALLOUT/MARKER/WMSYS
@@ -942,6 +966,7 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:27.587: W-3      Completed 1 DATABASE_EXPORT/SCHEMA/TABLE/TABLE_DATA objects in 0 seconds
     29-MAY-24 14:01:27.605: Job "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01" completed with 33 error(s) at Wed May 29 14:01:27 2024 elapsed 0 00:00:15
     ```
+
     </details>
 
 7. Examine the Data Pump log file for any critical issues. A FTEX import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
@@ -953,18 +978,18 @@ You need a few more changes to the new PDB before you can start the import.
 
 8. Set the environment to the target database, *CDB23*, and connect.
 
-    ```
+    ``` sql
     <copy>
     . cdb23
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
-9. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+9. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. In the interest of time, you can skip it.
 
-    ```
+    ``` sql
     <copy>
     alter session set container=maroon;
     exec dbms_stats.gather_schema_stats('SYS');
@@ -976,6 +1001,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> alter session set container=maroon;
 
@@ -989,11 +1015,12 @@ You need a few more changes to the new PDB before you can start the import.
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 10. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics.
 
-    ```
+    ``` sql
     <copy>
     exec dbms_stats.gather_database_stats;
     </copy>
@@ -1003,16 +1030,18 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> exec dbms_stats.gather_database_stats;
 
     PL/SQL procedure successfully completed.
     ```
+
     </details>
 
 11. Verify your database has been imported. Check the number of objects in the *F1* schema.
 
-    ```
+    ``` sql
     <copy>
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
     </copy>
@@ -1022,6 +1051,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
 
@@ -1030,13 +1060,13 @@ You need a few more changes to the new PDB before you can start the import.
     TABLE                           14
     INDEX                           19
     ```
+
     </details>
 
 12. Perform a more extensive check. Verify the actual data. Find all the races won by the legend, *Ayrton Senna*.
 
-    ```
+    ``` sql
     <copy>
-    set pagesize 100
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra,
          f1.f1_results re,
@@ -1046,7 +1076,7 @@ You need a few more changes to the new PDB before you can start the import.
       and re.position=1
       and d.driverid=re.driverid
       and ra.raceid=re.raceid
-    order by ra.year, ra.name;      
+    order by ra.year, ra.name;
     </copy>
 
     -- Be sure to hit RETURN
@@ -1056,8 +1086,8 @@ You need a few more changes to the new PDB before you can start the import.
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
-    SQL> set pagesize 100
     SQL> select ra.name || ' ' || ra.year as race
       2  from f1.f1_races ra,
       3       f1.f1_results re,
@@ -1112,14 +1142,15 @@ You need a few more changes to the new PDB before you can start the import.
     European Grand Prix 1993
     Japanese Grand Prix 1993
     Monaco Grand Prix 1993
-    
+
     41 rows selected.
     ```
+
     </details>
 
-13. Exit SQL*Plus.
+13. Exit SQLcl.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -1129,12 +1160,12 @@ You need a few more changes to the new PDB before you can start the import.
 
 You might need the *FTEX* database in another lab. In a real migration, you don't need to do this.
 
-1. Set the tablespace to *READ WRITE* again. 
+1. Set the tablespace to *READ WRITE* again.
 
-    ```
+    ``` sql
     <copy>
     . ftex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -1142,7 +1173,7 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
 
 2. Set the tablespace *READ WRITE*.
 
-    ```
+    ``` sql
     <copy>
     ALTER TABLESPACE USERS READ WRITE;
     </copy>
@@ -1150,16 +1181,18 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
 
     <details>
     <summary>*click to see the output*</summary>
+
     ``` text
     SQL> ALTER TABLESPACE USERS READ WRITE;
 
     Tablespace altered.
     ```
+
     </details>
 
-11. Exit SQL*Plus.
+3. Exit SQLcl.
 
-    ```
+    ``` sql
     <copy>
     exit
     </copy>
@@ -1167,7 +1200,7 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
 
 **Congratulations!** You have now moved your data into a PDB on Oracle Database 23ai
 
-You may now *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Learn More
 
@@ -1180,6 +1213,7 @@ You can avoid an in-place upgrade and PDB conversion by using FTEX. The source d
 * Slides, [Cross Platform Migration – Transportable Tablespaces to the Extreme](https://dohdatabase.com/wp-content/uploads/2024/03/cross-platform-migration-transportable-tablespace-to-the-extreme.pdf)
 
 ## Acknowledgements
+
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Rodrigo Jorge, August 2025
