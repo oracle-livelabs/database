@@ -155,7 +155,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
 
 ## Task 2: Prepare for upgrade
 
-You check the source database for upgrade readiness and execute pre-upgrade fixups.
+You check the source database for upgrade readiness.
 
 1. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
@@ -243,58 +243,8 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 4. Proceed with the pre-upgrade fixups.
 
     * Normally, you would do this close to the final refresh (as dictated by `start_time` config file parameter or when you plan to run the *proceed* command). But in this lab we do it now.
-    * The fixups must run on the source system. Since source and target is the same in this lab, you don't need to worry about it.
-
-    ``` bash
-    <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/upg-11-ftex-refresh.cfg -mode fixups
-    </copy>
-    ```
-
-5. Monitor the fixups.
-
-    ``` bash
-    <copy>
-    lsj -a 10
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-
-    ``` text
-    upg> lsj -a 10
-    +----+-------+---------+---------+-------+----------+-------+----------------------------+
-    |Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME|UPDATED|                     MESSAGE|
-    +----+-------+---------+---------+-------+----------+-------+----------------------------+
-    | 101|   FTEX|PRECHECKS|EXECUTING|RUNNING|  07:53:37| 3s ago|Loading database information|
-    +----+-------+---------+---------+-------+----------+-------+----------------------------+
-    Total jobs 1
-
-    The command lsj is running every 10 seconds. PRESS ENTER TO EXIT
-    ```
-
-    </details>
-
-6. Wait for the fixups to complete. AutoUpgrade prints *Job 101 completed* when done.
-
-    <details>
-    <summary>*click to see the output*</summary>
-
-    ``` text
-    Job 101 completed
-    ------------------- Final Summary --------------------
-    Number of databases            [ 1 ]
-
-    Jobs finished                  [1]
-    Jobs failed                    [0]
-
-    Please check the summary report at:
-    /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
-    ```
-
-    </details>
+    * The fixups must run on the source system. 
+    * In the interest of time, you skip the fixups in this exercise.
 
 ## Task 3: Build refreshable clone
 
@@ -320,7 +270,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     +--------------------------------+
     1 Non-CDB(s) will be processed
     Type 'help' to list console commands
-    upg> Copying remote database 'FTEX' as 'TEAL' for job 102
+    upg> Copying remote database 'FTEX' as 'TEAL' for job 101
     ```
 
     </details>
@@ -394,7 +344,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     +----+-------+----------+---------+-------+----------+-------+-----------------------+
     |Job#|DB_NAME|     STAGE|OPERATION| STATUS|START_TIME|UPDATED|                MESSAGE|
     +----+-------+----------+---------+-------+----------+-------+-----------------------+
-    | 102|   FTEX|REFRESHPDB|EXECUTING|RUNNING|  07:57:29| 2s ago|Starts in 5,997 minutes|
+    | 101|   FTEX|REFRESHPDB|EXECUTING|RUNNING|  07:57:29| 2s ago|Starts in 5,997 minutes|
     +----+-------+----------+---------+-------+----------+-------+-----------------------+
     Total jobs 1
 
@@ -485,7 +435,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
     ``` bash
     <copy>
-    proceed -job 102
+    proceed -job 101
     </copy>
 
     -- Be sure to hit RETURN
@@ -498,8 +448,8 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     <summary>*click to see the output*</summary>
 
     ``` text
-    upg> proceed -job 102
-    New start time for job 203 is scheduled 0 minute(s) from now, at 25/07/2025 13:29:41
+    upg> proceed -job 101
+    New start time for job 101 is scheduled 0 minute(s) from now, at 25/07/2025 13:29:41
     ```
 
     </details>
@@ -508,7 +458,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
     ``` sql
     <copy>
-    status -job 102 -a 10
+    status -job 101 -a 10
     </copy>
     ```
 
@@ -523,7 +473,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     ``` text
     Details
     
-    	Job No           102
+    	Job No           101
     	Oracle SID       FTEX
     	Start Time       25/08/01 09:48:23
     	Elapsed (min):   3
@@ -532,8 +482,8 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     Logfiles
     
     	Logs Base:    /home/oracle/logs/ftex-refresh/FTEX
-    	Job logs:     /home/oracle/logs/ftex-refresh/FTEX/102
-    	Stage logs:   /home/oracle/logs/ftex-refresh/FTEX/102/dbupgrade
+    	Job logs:     /home/oracle/logs/ftex-refresh/FTEX/101
+    	Stage logs:   /home/oracle/logs/ftex-refresh/FTEX/101/dbupgrade
     	TimeZone:     /home/oracle/logs/ftex-refresh/FTEX/temp
     	Remote Dirs:
     
@@ -564,13 +514,13 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     ```
     </details>
 
-3. **Wait for AutoUpgrade to complete the migration**. When the job completes, AutoUpgrade prints *Job 102 completed*. It usually takes 10-15 minutes.
+3. **Wait for AutoUpgrade to complete the migration**. When the job completes, AutoUpgrade prints *Job 101 completed*. It usually takes 10-15 minutes.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
-    Job 102 completed
+    Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
 
