@@ -8,6 +8,10 @@ This lab is only intended to give you a small taste of what duality views have t
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_ws0k6cn3)
+
+
 **JSON Duality**
 
 JSON Relational Duality is a landmark capability in Oracle Database 23ai, providing game-changing flexibility and simplicity for Oracle Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
@@ -37,54 +41,40 @@ This lab assumes you have:
 * Completed the get started Lab
 
 
-## Task 1: Getting Started
+## Task 1: JSON Relational Duality View
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png =50%x*)
+1. We'll use both the customers table and the ratings table from the last lab. Let's add some additional information.
 
-2.  Let's create some tables to use in the lab. Copy and run the following SQL script:
     ```
     <copy>
-    DROP TABLE if exists orders CASCADE CONSTRAINTS;
-    DROP TABLE if exists customers CASCADE CONSTRAINTS;
+    ALTER TABLE customers
+    ADD dob DATE
+        ANNOTATIONS (description 'Date of birth of the customer');
 
-    -- Create a table to store order data
-    CREATE TABLE if not exists orders (
-        id NUMBER,
-        product_id NUMBER,
-        order_date TIMESTAMP,
-        customer_id NUMBER,
-        total_value NUMBER(6,2),
-        order_shipped BOOLEAN,
-        warranty INTERVAL YEAR TO MONTH
-    );
+    ALTER TABLE customers
+    ADD address VARCHAR2(200)
+        ANNOTATIONS (description 'Address of the customer');
 
-    -- Create a table to store customer data
-    CREATE TABLE if not exists customers (
-        id NUMBER,
-        first_name VARCHAR2(100),
-        last_name VARCHAR2(100),
-        dob DATE,
-        email VARCHAR2(100),
-        address VARCHAR2(200),
-        zip VARCHAR2(10),
-        phone_number VARCHAR2(20),
-        credit_card VARCHAR2(20),
-        joined_date TIMESTAMP DEFAULT SYSTIMESTAMP,
-        gold_customer BOOLEAN DEFAULT FALSE,
-        CONSTRAINT new_customers_pk PRIMARY KEY (id)
-    );
+    ALTER TABLE customers
+    ADD zip VARCHAR2(10)
+        ANNOTATIONS (description 'ZIP code of the customer');
 
-    -- Add foreign key constraint to new_orders table
-    ALTER TABLE orders ADD (CONSTRAINT orders_pk PRIMARY KEY (id));
-    ALTER TABLE orders ADD (CONSTRAINT orders_fk FOREIGN KEY (customer_id) REFERENCES customers (id));
+    ALTER TABLE customers
+    ADD phone_number VARCHAR2(20)
+        ANNOTATIONS (description 'Phone number of the customer');
+
+    ALTER TABLE customers
+    ADD credit_card VARCHAR2(20)
+        ANNOTATIONS (description 'Credit card number of the customer');
+
+        ALTER TABLE ratings
+    ADD content_policy VARCHAR2(20)
+        ANNOTATIONS (description 'the version of the content policy at the time of the rating');
+
     </copy>
     ```
-
-
-## Task 2: JSON Relational Duality View
-
-1. In addition to the list of JSON Relational Duality Views benefits from above, Duality Views also have a security benefit. 
+  
+2. In addition to the list of JSON Relational Duality Views benefits from above, Duality Views also have a security benefit. 
 
     First, the documents you create (the Duality Views), **are not directly tied to the storage of the data**. 
 
@@ -99,23 +89,22 @@ This lab assumes you have:
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW customers_dv AS
     customers @insert @update @delete
     {
-        _id      : id,
-        FirstName       : first_name,
-        LastName        : last_name,
-        DateOfBirth     : dob,
-        Email           : email,
-        Address         : address,
+        _id      : customer_id,
+        FirstName       : first_name
+        LastName        : last_name
+        Email           : email
+        SignUpDate      : signup_date
+        HasSubscription : has_sub
+        DateOfBirth     : dob
+        Address         : address
         Zip             : zip
-        phoneNumber     : phone_number
-        creditCard      : credit_card
-        joinedDate      : joined_date 
-        goldStatus      : gold_customer
-    }
-;
+        PhoneNumber     : phone_number
+        CreditCard      : credit_card
+    };
 	</copy>
     ```
 
-2. The second security benefit comes from the fact we can **HIDE** data. We can create these views however we like. 
+3. The second security benefit comes from the fact we can **HIDE** data. We can create these views however we like. 
 
     For example, say we want to exclude sensitive personally identifiable information like customers credit card or phone numbers. 
     
@@ -123,181 +112,180 @@ This lab assumes you have:
 
     ```
     <copy>
-    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW customer_orders_dv AS
+    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW customer_rating_dv AS
         customers
         {
-            _id      : id,
+            _id      : customer_id,
             FirstName       : first_name,
             LastName        : last_name,
             Address         : address,
             Zip             : zip,
-            orders : orders @insert @update @delete
+            ratings : ratings @insert @update @delete
             [ 
                 {
-                    OrderID       : id,
-                    ProductID     : product_id,
-                    OrderDate     : order_date,
-                    TotalValue    : total_value,
-                    OrderShipped  : order_shipped
+                    RatingID      : rating_id,
+                    MovieId       : movie_id,
+                    Rating        : rating,
+                    RatingDate    : rating_date,
+                    ContentPolicy : content_policy
                 }
             ]
         };
 	</copy>
     ```
 
-    If you notice, this view doesn’t specify @insert, @update, or @delete on our customers table. You created this view so that you can only update orders through the `customer_orders_dv` Duality View, and no sensitive customer information (such as customers’ credit card numbers or phone numbers) will be shown. The only way to manage that information is through the `customers_dv` view.
+    If you notice, this view doesn’t specify @insert, @update, or @delete on our customers table. You created this view so that you can only update ratings through the `customer_rating_dv` Duality View, and no sensitive customer information (such as customers’ credit card numbers or phone numbers) will be shown. The only way to manage that information is through the `customers_dv` view.
 
-	![Creating the Duality View](images/im2.png =50%x*)
 
-3. Now that the Duality Views have bee created, we have two options, we can insert directly into the tables,
+4. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
 
 
 	```
 	<copy>
-    INSERT INTO customers (id, first_name, last_name, dob, email, address, zip, phone_number, credit_card)
-    VALUES (1, 'Alice', 'Brown', DATE '1990-01-01', 'alice.brown@example.com', '123 Maple Street', '12345', '555-1234', '4111 1111 1111 1111');
+    INSERT INTO customers (customer_id, first_name, last_name, email, signup_date, has_sub, dob, address, zip, phone_number, credit_card)
+    VALUES
+    (6, 'David', 'Wilson', 'david.wilson@example.com', SYSDATE, TRUE, TO_DATE('1985-08-15', 'YYYY-MM-DD'), '123 Elm Street', '90210', '555-1234', '4111111111111111');
 
-    INSERT INTO orders (id, customer_id, product_id, order_date, total_value)
-    VALUES (100, 1, 101, SYSTIMESTAMP, 300.00);
+    INSERT INTO ratings (rating_id, customer_id, movie_id, rating, rating_date, content_policy)
+    VALUES
+    (6, 6, 1, 5, SYSDATE, 'V.1');
+
 	</copy>
     ```
-    ![inserting into our new_customers table](images/im3.png " ")
 
-    Or, we can insert through a Duality View. 
+5. Let's now insert data into the duality view of our customer data.
 
 	```
 	<copy>
-    INSERT INTO customers_DV values ('{"_id": 2, "FirstName": "Jim", "LastName":"Brown", "Email": "jim.brown@example.com", "Address": "456 Maple Street", "Zip": 12345}');
+    INSERT INTO customers_dv values ('{"_id": 7, "FirstName": "Jim", "LastName":"Brown", "Email": "jim.brown@example.com", "Address": "456 Maple Street", "Zip": 12345}');
 
     commit;
 	</copy>
     ```
 
-4. Let’s take a look at what we have. To enter an order, we simply link the customer information to the order. There is no data duplication.
-
-    This Duality View will show us two customers.
+5. This Duality View will show us the customers.
 
 	```
 	<copy>
-    select * from customers_dv;
+    select json_serialize(data PRETTY) from customers_dv;
 	</copy>
     ```
-    And this Duality View will show us the same two customers - one with an order and one without.
+    This Duality View will show us the same customers - some with ratings, some without
 
 	```
 	<copy>
-    select * from customer_orders_dv;
+    select json_serialize(data PRETTY) from customer_rating_dv;
 	</copy>
     ```
  
-    And we can see the same in relational.
+    We can see the same in relational.
 
 	```
 	<copy>
     select * from customers;
-    select * from orders;
+    select * from ratings;
 	</copy>
     ```
 
-5. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
+7. Now, when we created the `customer_rating_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our ratings. Let's update a rating through our Duality View.
 
 
 	```
 	<copy>
-    UPDATE customer_orders_dv c
+    UPDATE customer_rating_dv c
     SET c.data = json_transform(
         data,
-        APPEND '$.orders' = JSON {'OrderID':101, 'ProductID' : 202, 'OrderDate' : SYSTIMESTAMP, 'TotalValue' : 150.00}
+        APPEND '$.ratings' = JSON {'RatingID':123, 'MovieId' : 2, 'Rating' : 4, 'RatingDate' : SYSTIMESTAMP, 'ContentPolicy' : 'V.1'}
     )
-    WHERE c.data."_id" =1;
+    WHERE c.data."_id" =7;
     commit;
 
-    select * from customer_orders_dv o where o.data."_id" = 1;
+    select json_serialize(data PRETTY) from customer_rating_dv r where r.data."_id" = 7;
     </copy>
     ```
 
 
-    ![Updating the our customers view](images/im4.png " ")
 
- 6. We talked about the security benefit of the Duality Views earlier. If you'll remember, we didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
+ 8. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_rating_dv` Duality View (or allow for sensitive customer information in the document). 
  
-    Lets take a look at how an update will fail if we try and update customer information through the `customer_orders_dv` document. 
+    Let's take a look at how an update will fail if we try and update customer information through the `customer_rating_dv` document. 
 
     Try and change the name of Jim's last name from Brown to Browne.
 
 	```
 	<copy>
-    UPDATE customer_orders_dv c
+    UPDATE customer_rating_dv c
     SET c.data = json_transform(
         data,
         SET '$.LastName' = 'Browne'
     )
-    WHERE c.data."_id" =1;
+    WHERE c.data."_id" =7;
 
     </copy>
     ```
-    ![selecting from our customers table](images/im5.png " ")
+
+9. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
 
 
-7. Another benefit of the Duality Views is that, because the data is stored as tables, if we need to update any of our embedded documents, we only need to update the corresponding table, and all of the documents will reflect those changes. Doing that in pure JSON would be a challenge.
-
-    Let's see an example.
-
-    First, we can insert some orders into our Jim Brown customer. Here, we can use `mergepath`.
+    We can insert some ratings into our Jim Brown customer using `mergepath`.
 
 
 	```
 	<copy>
-    update customer_orders_dv o set data = json_mergepatch(data,'{"orders" : 
+    update customer_rating_dv r set data = json_mergepatch(data,'{"ratings" : 
     [
         {
-        "OrderID": 102,
-        "ProductID": 202,
-        "OrderDate": "2024-06-27T11:55:20.174683",
-        "TotalValue": 150.00,
-        "OrderShipped": null
+        "RatingID": 124,
+        "MovieId": 10,
+        "Rating": 4,
+        "RatingDate": "2024-06-27T11:55:20.174683",
+        "ContentPolicy" : "V.2"
         },
         {
-        "OrderID": 103,
-        "ProductID": 20002,
-        "OrderDate": "2024-06-27T11:55:50.424141",
-        "TotalValue": 500.00,
-        "OrderShipped": null
+        "RatingID": 125,
+        "MovieId": 6,
+        "Rating": 3,
+        "RatingDate": "2024-06-27T11:57:20.174683",
+        "ContentPolicy" : "V.2"
         }
     ]}')
-    where o.data."_id" = 2;
+    where r.data."_id" = 7;
+    </copy>
+    ```
+    
+    Let's see the customers ratings now. 
 
-    commit;
+    ```
+    <copy>
+    select * from ratings where customer_id = 7;
     </copy>
     ```
 
-    Let's imagine we need to change one of the Product IDs. 
-
-    Since both our customers have ordered Product 202, we will use this as our example.
-
+10. Let's imagine we've been tasked with updating the content policy for our ratings. Let's say all ratings with policy of V.1, need to be updated to the current rating policy of V.2.
 	```
 	<copy>
-    SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
+    select json_serialize(data PRETTY) from customer_rating_dv
     </copy>
     ```
 
-8. We can easily update the orders table and this will update all documents with nested orders of number 202.
+
+11. If we were to do this in JSON, we would need to check every document for a rating that had the policy version 1. With JSON Duality Views, we can easily update the ratings table and this will update all documents with nested ratings that have a policy of V.1.
 
 	```
 	<copy>
-    UPDATE orders
-    SET product_id = 999
-    WHERE product_id = 202;
+    UPDATE ratings
+    SET content_policy = 'V.2'
+    WHERE content_policy = 'V.1';
     </copy>
     ```
 
-9. This one change updates every document where a nested order has `product_id = 202`.
+9. This one change updates every document where a nested rating has `content_policy = V.1`.
 
-    We can take a look at all the customer orders through the Duality View.
+    We can take a look at all the customer ratings through the Duality View.
 
 	```
 	<copy>
-    SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
+    SELECT json_serialize(data PRETTY) FROM customer_rating_dv;
     </copy>
     ```
 
@@ -305,11 +293,12 @@ This lab assumes you have:
 
     If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
-## Task 3: (Optional) JSON Relational Duality Views with REST
+
+## Task 2: (Optional) JSON Relational Duality Views with REST
 
 1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
 
-    For a small example, I will show this using a macOS native terminal and execute a basic GET request.
+    As small example, I will show this using a macOS native terminal and execute a basic GET request.
 
 2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
 
@@ -333,13 +322,13 @@ This lab assumes you have:
 
     ![find the URL](images/r2.png " ")
 
-    for example,  mine looks like this 
+    For example,  mine looks like this: 
 
     ```
     ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
     ```
 
-6. Now, create a variable in your terminal (It shouldn't have / in the end.)
+6. Now, create a variable in your terminal (It shouldn't have / at the end.)
 
 	```
 	<copy>
@@ -354,36 +343,26 @@ This lab assumes you have:
     echo $ADB_LL_URL
     </copy>
     ```
-> NOTE: This base url will be unique for each user, verify that you are using the correct URL.
+    > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
 
 8. Make a GET request from your laptop terminal command line.
 
 	```
 	<copy>
-    curl -X GET $ADB_LL_URL/ords/admin/customers_dv/ | json_pp
+    curl -X GET $ADB_LL_URL/ords/db23ai/customers_dv/ | json_pp
 
     </copy>
     ```
-    ![pull one doc](images/r1.png " ")
+    ![pull one doc](images/r3.png " ")
 
 
-9. This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow the link below:
+9. This lab is only intended to give you a small taste of what Duality Views have to offer. In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease and allows you to define how the data is accessed and used.
 
     [23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
 
-    In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
 
-10. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one - step one if you need a reminder where it is.
 
-    ```
-    <copy>
-    DROP TABLE orders CASCADE CONSTRAINTS;
-    DROP TABLE customers CASCADE CONSTRAINTS;
-    DROP VIEW customer_orders_dv;
-    DROP VIEW customers_dv;
 
-    </copy>
-    ```
 
 You may now **proceed to the next lab** 
 
@@ -391,6 +370,8 @@ You may now **proceed to the next lab**
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html#)
+* [23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
+
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager

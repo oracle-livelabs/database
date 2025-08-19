@@ -4,7 +4,9 @@
 
 The next part of the migration is the incremental backups. They built on top of the initial level 0 backup, but backs up only the changes since the last backup. Each incremental backup reduces the time and size of the final incremental backup. Like the previous lab, there is still no downtime yet.
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 6](youtube:fgyDy-QcV_o?start=1232)
 
 ![Start the incremental level 1 backup/restore](./images/incremental-backup-restore-overview.png " ")
 

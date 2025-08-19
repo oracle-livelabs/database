@@ -319,7 +319,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 2. Return to the 'Tables' screen and repeat the process for the **demo** and **demoKeyVal** tables.
 
 <if type="paid">
-3. If you created an API Key, delete that. It will show up as a fingerprint. Click your **Profile**, then **User Settings** and **API Key** on the left. Click the 3 dots on the right of the fingerprint you created. Click **Delete**.
+3. If you created an API Key, delete that. It will show up as a fingerprint. Click your **Profile**, then **User Settings** and **Tokens and keys** . Click the 3 dots on the right of the fingerprint you created. Click **Delete**.
 
   ![Delete API keys](./images/delete-api.png)
 

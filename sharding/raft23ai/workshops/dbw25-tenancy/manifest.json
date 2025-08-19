@@ -1,0 +1,58 @@
+{
+  "workshoptitle": "Use Raft Replication with Distributed Database for Resilient Never Down Apps",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "../../intro/intro.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Login to Oracle Cloud",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+    {
+      "title": "Lab 1: Prepare Setup",
+      "description": "How to download your ORM stack and update security rules for an existing VCN",
+      "publisheddate": "09/28/2020",
+      "filename": "../../prepare-setup/prepare-setup.md"
+    },
+    {
+      "title": "Lab 2: Environment Setup",
+      "description": "How to provision the workshop environment and connect to it",
+      "publisheddate": "06/30/2020",
+      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+    },
+    {
+      "title": "Lab 3: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 4: Demo UI Application for Raft Replication",
+      "description": "Demo UI Application for Raft Replication",
+      "filename": "../../ui-app/raft-demo-ui-app.md"
+    },
+    {
+      "title": "Lab 5: Explore Raft Replication Topology",
+      "description": "Exploring Sharding Topology",
+      "filename": "../../topology/topology.md"
+    },
+    {
+      "title": "Lab 6: Clean up Stack and Instances",
+      "description": "Clean up ORM Stack and instances",
+      "filename": "../../cleanup/cleanup.md"
+    },
+    {
+      "title": "Troubleshooting: Guide for Raft Replication Test Cases",
+      "description": "Troubleshooting Guide for Raft Replication Test Cases",
+      "filename": "../../troubleshooting/troubleshooting.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

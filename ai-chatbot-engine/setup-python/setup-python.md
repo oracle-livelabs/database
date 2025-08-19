@@ -17,7 +17,38 @@ Estimated Time: 15 minutes
 * Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and consoles
 * Basic Linux knowledge
 
-## Task 1: Install Python
+## Task 1: Create a compute instance to run the lab
+
+> Note: If you don't know how to create a virtual machine and connect to it via SSH, please [see this lab first](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=648&clear=RR,180&session=108750023091545). The following section will only give you a brief overview.
+
+Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the "US Midwest (Chicago)" or "Frankfurt" region, which is necessary to access the OCI Generative AI services endpoint.
+
+   ![console](images/image1.png)
+
+1. Navigate to the "Compute" section and click on "Instances".
+
+2. Click on "Create Instance".
+
+3. Fill in the necessary details, such as name, compartment, and availability domain.
+
+4. Choose the "Oracle Linux 8" image.
+
+5. Choose a `VM.Standard.E4.Flex` shape.
+
+6. In the Networking section, most of the defaults are perfect for our purposes. However, you will need to scroll down and select the Assign a public IPv4 address option.
+
+6. Configure the security list to allow SSH (port 22) and Jupyter Lab (port 8888). [See here](https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/securitylists.htm) how to do it.
+
+7. Create your instance by clicking on the `Create` button.
+
+8. Connect to your remote instance using SSH.
+   ```
+   <copy>
+   ssh -i <private_ssh_key> opc@<public_ip_address>
+   </copy>
+   ```
+
+## Task 2: Install Python
 
 > Note: First, log in to your remote instance via SSH, as described in the previous lab.
 
@@ -85,7 +116,7 @@ Now check if it succeeded :
 ```
 <copy>python --version</copy>
 ```
-## Task 2: Install the required frameworks
+## Task 3: Install the required frameworks
 
 ```bash
 <copy>
@@ -95,7 +126,7 @@ pip install oci
 </copy>
 ```
 
-## Task 3: Install and configure Jupyter Lab
+## Task 4: Install and configure Jupyter Lab
 
 ### Step 1: Install the Jupyter server
 ```
@@ -141,4 +172,4 @@ You may now **proceed to the next lab**
    - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, May 2024
+* **Last Updated By/Date** -  Bogdan Farca, Sep 2024

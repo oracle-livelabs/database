@@ -6,6 +6,8 @@ This lab walks you through the steps necessary to create a proper operating envi
 
 _Estimated Time:_ 9 minutes
 
+[Lab 1 Walkthrough](videohub:1_f6tvezjm)
+
 ### Objectives
 
 In this lab you will:
@@ -26,7 +28,7 @@ This lab assumes you have:
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of
 what region you are at.
 
-    ![Oracle Cloud Console](images/home-page.png)
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
 
 2. On left side drop down (under Oracle Cloud banner), go to **Identity & Security**
 and then **Compartments.**

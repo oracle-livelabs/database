@@ -17,7 +17,11 @@
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 2: Run Transfer app which uses XA",
+      "title": "Lab 2: Run Travel agent app which uses Saga and Lock-Free Reservation",
+      "filename": "../../run-lra-app-lockfree/run-lra-app-lockfree.md"
+    },
+    {
+      "title": "Lab 3: Run Transfer app which uses XA",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

@@ -34,14 +34,14 @@ Estimated Workshop Time:  2 hours
 Oracle Application Continuity provides:
 * Continuous availability for applications
 
-![](./images/RACandRACFamily.png " ")
+![RAC and Associated Technologies](./images/racandassociated.png " ")
 
 ## Application Continuity and MAA
 Oracle MAA is a collection of architecture, configuration, and life cycle best practices and blueprints. It provides Oracle’s customers with valuable insights and expert recommendations which have been validated and tested working with enterprise customers. This is also an outcome of ongoing communication, with the community of database architects, software engineers, and database strategists, that helps Oracle develop a deep and complete understanding of various kinds of events that can affect availability or data integrity. Over the years, this led to the development and natural evolution of an array of availability reference architectures.
 
 Application Continuity extends the MAA architecture to the application tier.
 
-![](./images/maa_overview.png " ")
+![MAA Overview](./images/maa_overview.png " ")
 
 ## More Information on Oracle Application Continuity
 
@@ -49,5 +49,5 @@ Application Continuity extends the MAA architecture to the application tier.
 
 ## Acknowledgements
 
-- **Authors/Contributors** - Troy Anthony, Ian Cookson
-- **Last Updated By/Date** - Troy Anthony, March 2021
+- **Authors/Contributors** - Troy Anthony, Anil Nair
+- **Last Updated By/Date** - Anil Nair, November 2024

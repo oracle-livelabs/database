@@ -10,6 +10,8 @@ For simplicity, this lab teaches you to migrate a database from Linux to Linux, 
 
 Estimated Workshop Time: 1 hour
 
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces -  Introduction](youtube:fgyDy-QcV_o?start=10)
+
 ### Objectives
 
 In this workshop, you will:

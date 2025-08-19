@@ -19,11 +19,13 @@ In Oracle Database 23ai, several key enhancements have been introduced to the SQ
   
 - **Boolean Data Type:** The introduction of a new boolean data type enhances data modeling capabilities, allowing for more efficient representation and manipulation of boolean values.
 
+- **IF EXISTS:** The IF EXISTS statements are powerful tools for executing SQL commands based on the existence or non-existence of certain conditions or objects inside the database.
+
 - **Table Value Constructors:** Table value constructors provide a convenient way to specify multiple rows in insert, select, or merge statements, simplifying data manipulation tasks.
 
 - **Direct Joins in Updates:** Streamlined syntax for performing direct joins in update operations simplifies query construction and improves code readability.
   
-- **IF EXISTS:** The IF EXISTS statements are powerful tools for executing SQL commands based on the existence or non-existence of certain conditions or objects inside the database.
+- **DML RETURNING Clause Enhancements:** The `RETURNING INTO` clause for `INSERT`, `UPDATE`, `DELETE`, and `MERGE` statements has been enhanced to report old and new values affected by the respective statement. This allows developers to use a uniform approach for each of these DML types to obtain values before and after statement execution, enhancing efficiency and reducing the database workload.
 
 You may now **proceed to the next lab** 
 
@@ -38,4 +40,4 @@ For further exploration of Oracle Database features and enhancements, visit:
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dom Giles, Distinguished Database Product Manager
-* **Last Updated By/Date** - Killian Lynch, January 2024
+* **Last Updated By/Date** - Killian Lynch, December 2024

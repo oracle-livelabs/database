@@ -18,7 +18,7 @@ Estimated Time - 5 minutes
 
 - You should have provisioned the **Use Raft Replication with Distributed Database for Resilient Never-Down Apps** workshop using a terraform stack
 
-- To provision this workshop, there are detailed instructions in Lab 1 of [Use Raft Replication with Distributed Database for Resilient Never-Down Apps](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3772&clear=RR,180&session=107115107642748) workshop.
+- To provision this workshop, there are detailed instructions in Lab 1 of [Use Raft Replication with Distributed Database for Resilient Never-Down Apps](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3772&clear=RR,180&session=107115107642748) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Instance
 
@@ -29,7 +29,7 @@ Estimated Time - 5 minutes
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
-4.  Click the name of the stack that you created in Lab 1.The Stack details page opens.
+4. Click the name of the stack that you created in Lab 1.The Stack details page opens.
 
 5. Click **Destroy**.
 
@@ -41,7 +41,7 @@ Estimated Time - 5 minutes
 
 9. After a few minutes, once the instance is terminated, the Lifecycle state will change from Terminating to Terminated.
 
-  You have successfully cleaned up your  instance.
+You have successfully cleaned up your  instance.
 
 ## Learn More
 
@@ -49,7 +49,6 @@ Estimated Time - 5 minutes
 [Raft Replication Documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 ## Acknowledgements
-
-* **Author** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
-* **Contributor** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024
+* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025

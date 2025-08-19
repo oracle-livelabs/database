@@ -7,6 +7,8 @@ the tables we created, load data, and execute queries using a Spring Data REST b
 
 _Estimated Time:_ 16 minutes
 
+[Lab 3 Walkthrough](videohub:1_m5ilj0z4)
+
 ### Objectives
 
 * Understand the different Java Classes in this Spring Data SDK project.
@@ -26,7 +28,7 @@ In this task we will review the code using OCI Code Editor.
 
 1. Open the OCI Code Editor in the top right menu.
 
-    ![Cloud Editor](./images/cloud-code-editor.png)
+    ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
 
 2. Click on the Explorer button of OCI Code Editor.
 
@@ -160,7 +162,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
 
      ```shell
       <copy>
-      csruntimectl java set graalvmjdk-17
+      csruntimectl java set graalvmeejdk-17
       </copy>
       ```
 
