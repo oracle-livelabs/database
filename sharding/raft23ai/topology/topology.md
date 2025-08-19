@@ -182,170 +182,7 @@ For more details check [Raft Replication Configuration and Management] (https://
     ``` 
     ![<leader_status_after_change>](./images/t3-5-status-after-leader-change.png " ")
 
-
-## Task 4: Raft Replication Demo with UI Application 
-
-1. Please verify, if the Demo UI application is already opened on the browser window.
-
-    ![<demo_ui_app_browser>](./images/demo-ui-app-browser-1.png " ")  
-
-2. In the list, please open the "More Details" tab for User No. 1.
-
-![<demo_ui_app_more_details_2>](./images/demo-ui-app-click-more-det-2.png " ")  
-
-Similarly, Open two additional tabs by clicking on "Update" for User No. 1
-
-![<demo_ui_app_update_tab_1>](./images/demo-ui-app-update-tab-3.png " ")  
-
-
-3. Check User No. 1's Shard in Demo UI:
-Verify where the leadership is for User No. 1's shard in the Demo UI.
-
-![<demo_ui_app_more_details>](./images/demo-ui-app-more-det-3.png " ")  
-
-4. Go to the terminal window logged in as **oracle** and stop that shard.
-
-    ```
-    <copy>
-    sudo podman stop shard3
-    </copy>
-    ```
-
-    You can use below command to switch to **GSM**.
-    
-    ```
-    <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
-    </copy>
-    ```
-
-   Run the below command in terminal window that is switched to **GSM**, to see the status of the shard.
-
-    ```
-    <copy>
-    gdsctl config shard
-    </copy>
-    ```
-
-    ![<demo_ui_app_stop_shard>](./images/demo-ui-app-stop-shard-4.png " ")  
-
-5. Return to the Demo UI App browser window on "More Details" tab and click on "Refresh" button to observe that the leadership has automatically moved to another shard, indicating re-routing of the request.
-
-    ![<demo_ui_app_refresh_more_details>](./images/demo-ui-app-refresh-more-det-5.png " ")  
-
-6. Go to the first update tab in Demo UI Application and change the class.
-
-    ![<demo_ui_app_update_class>](./images/demo-ui-app-update-class-6.png " ")  
-
-    Click on the next update tab and refresh it to see that change in class.
-
-    ![<demo_ui_app_class_updated>](./images/demo-ui-app-class-updated-6.png " ")  
-
-
-7. Run the Workload and check the count of customers in Demo UI App.
-
-   Check the count in browser window before running the workload.
-
-   ![<demo_ui_check_count_before_workload>](./images/demo-ui-app-checkcount-before-workload-7.png " ")  
-
-
-   Note that while the shard is stopped, you can still run the workload.
-
-   If you are using a new terminal, you can use below command as **oracle** to switch to **appclient** container and the switch to the "oracle" user and then change the path to $DEMO_MASTER location.
-
-   ```
-   <copy>
-   sudo podman exec -it appclient /bin/bash
-   </copy>
-   ```
-
-   ```
-   <copy>
-   su - oracle
-   </copy>
-   ```
-
-   ```
-   <copy>
-   cd $DEMO_MASTER
-   pwd
-   ls -rlt
-   </copy>
-   ```
-
-   Run the workload using the below command in a terminal window that is switched to **appclient** container.
-
-   ```
-   <copy>
-   sh run.sh demo
-   </copy>
-   ```
-
-   ![<demo_ui_app_run_workload_a>](./images/demo-ui-app-run-workload-7a.png " ")  
-
-
-   ![<demo_ui_app_run_workload>](./images/demo-ui-app-run-workload-7b.png " ")  
-
-
-   Refresh the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
-
-
-   ![<demo_ui_app_inc_after_workload>](./images/demo-ui-app-count-inc-after-workload-7c.png " ")  
-
-
-8. Stop the Workload.
-
-    You can stop the workload that ran in the previous task using Ctrl+C.
-
-9. Run the below command in terminal that is switched to **GSM** to  auto rebalance the leaders.
-
-    ```
-    <copy>
-    gdsctl switchover ru -rebalance
-    </copy>
-    ```
-    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
-
-10. Now, we are going to perform delete operation through Demo UI Application.
-
-   Take a look at the count before clicking on delete button.
-
-   ![<demo_ui_app_count_before_del>](./images/demo-ui-app-count-before-delete-9.png " ")  
-
-   Click on Delete button in the browser window and delete few users. You will notice that the count is decreasing.
-
-   ![<demo_ui_app_after_del_count>](./images/demo-ui-app-after-del-count-9a.png " ")  
-
-
-11. Run the below command in terminal window logged in as **oracle**. Start the shard and see that the shard1 is joining back.
-
-    ```
-    <copy>
-    sudo podman start shard3
-    </copy>
-    ```
-
-    Run the below command in terminal that is switched to **GSM** to check the status of the shard.
-
-    ```
-    <copy>
-    gdsctl config shard
-    </copy>
-    ```
-
-    ![<demo_ui_app_start_shard>](./images/demo-ui-app-start-shard-11.png " ")  
-
-12. Run the below command in terminal that is switched to **GSM** to  auto rebalance the leaders.
-
-    ```
-    <copy>
-    gdsctl switchover ru -rebalance
-    </copy>
-    ```
-    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
-
-
-## Task 5: Run the workload
+## Task 4: Run the workload
 
 Please use the below steps to run the workload using the "app_schema" account with the available configuration files on the "appclient" container:
 
@@ -374,7 +211,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
     <copy>
     cd $DEMO_MASTER
     pwd
-    ls -rlt
+    ls -lrt
     </copy>
     ```
 
@@ -405,7 +242,7 @@ Notice that the log index is increasing as read and write operations are going o
 6. You can keep running the workload for some time while you perform the next task.
 
 
-## Task 6: Perform Failover Test
+## Task 5: Perform Failover Test
 
 What happens when one of the available shard databases goes down or is taken down for maintenance? 
 Failover test by stopping shard1 to create shard1 down situation. 
@@ -512,6 +349,6 @@ You can stop the workload that ran in the previous task using Ctrl+C.
 You may now proceed to the next lab.
 
 ## Acknowledgements
-* **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, August 2024
+* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025

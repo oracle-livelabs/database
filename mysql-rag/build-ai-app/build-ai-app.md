@@ -34,7 +34,7 @@ In this lab, you will be guided through the following tasks:
 - Access to Claude 3.7 Sonnet AI assistant  
 - Access to OpenAI API, plus API key for 'gpt-4o-mini' and and 'text-embedding-3-small'  AI models
 - Some Experience with MySQL SQL and  PHP
-- Completed Lab 5
+- Completed Lab 6
 
 ## Task 1: Understand the application
 
@@ -436,4 +436,4 @@ This hands-on experience demonstrates the power of combining MySQL's vector capa
 
 - **Author** - Craig Shallahamer, Applied AI Scientist, Viscosity North America
 - **Contributor** - Perside Foster, MySQL Solution Engineering
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , April 2025
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , July 2025
