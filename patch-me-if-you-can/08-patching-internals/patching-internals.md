@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-* You have completed Lab 2: Simple Patching With AutoUpgrade
+* You have completed Lab 7: Advanced Patching
 
 ## Task 1: Examine Datapatch tables
 
