@@ -12,7 +12,7 @@
     {
       "title": "Get Started",
       "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+      "filename": "https://github.com/oracle-livelabs/common/blob/main/labs/cloud-login/cloud-login-23ai.md"
     },
     {
       "title": "Lab 1: Prepare Setup",
@@ -33,7 +33,7 @@
     },
     {
       "title": "Lab 4: Load Data into database",
-      "filename": "../../data-load/data-load.md"
+      "filename": "../../data-load/data-load_dbw25.md"
     },
     {
       "title": "Lab 5: Use True Cache through jdbc",
