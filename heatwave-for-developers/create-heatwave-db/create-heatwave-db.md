@@ -62,7 +62,7 @@ In this lab, you will be guided through the following tasks:
 
     ![MDS](./images/mysql-heatwave-basic.png "HeatWave Basic")
 
-6. Select **HeatWave** to specify a HeatWave DB System
+6. Select **Standalone** for the DB System
     ![MDS](./images/mysql-heatwave-system-selection.png "mysql heatwave system selection")
 
 7. Create Administrator Credentials
@@ -132,7 +132,7 @@ In this lab, you will be guided through the following tasks:
 
 16. The state 'Active' indicates that the DB System is ready for use
 
-    On MDS-HW Page, check the MySQL Endpoint (Private IP Address)
+    On DB System details Page, navigate to the "Connections" tab, check the Primary Endpoint (Private IP Address)
 
     ![MDS](./images/mysql-heatwave-active.png "mysql heatwave active ")
 

@@ -109,11 +109,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 8. On Placement, keep the selected Availability Domain
 
-9. On Image and Shape, keep the selected Image, Oracle Linux 8
+9. On Image and Shape, change the Image type to Oracle Linux 8
 
       ![CONNECT](./images/compute-oracle-linux.png "compute oracle linux")  
 
-10. Select Instance Shape: VM.Standard.E2.2
+10. On Instance Shape, keep the default shape of VM.Standard.E4.Flex
 
       ![CONNECT](./images/compute-shape-select.png "compute shape select")
  
@@ -143,13 +143,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
     - Go to Navigation Menu
             Compute
             Instances
-    ![CONNECT](./images/compute-list.png "compute list")
 
-    - Click the `heatwave-cient` Instance link
-
-    ![CONNECT](./images/compute-running.png "compute public ip")
 
     - Copy `heatwave-cient` plus  the `Public IP Address` to the notepad
+    ![CONNECT](./images/compute-running-ip.png "compute public ip")
+
 
 2. Copy the private IP address of the active MySQl Database heatwave-client Service Instance to your notepad
 
