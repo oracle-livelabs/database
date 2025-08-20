@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In this lab, you will create acreate a Compartment, a Virtual Cloud Network,  and create the MySQL HeatWave DB System.  
+In this lab, you will create a Compartment, a Virtual Cloud Network, and create the MySQL HeatWave DB System with a HeatWave cluster.  
 
 _Estimated Time:_ 20 minutes
 
