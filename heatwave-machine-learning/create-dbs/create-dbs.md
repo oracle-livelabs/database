@@ -216,23 +216,21 @@ In this lab, you will be guided through the following tasks:
 
     ![heatwave db admin](./images/mysql-create-admin.png "heatwave db admin ")
 
-6. Select **“Standalone”** and enable **“Configure MySQL HeatWave”**.
+6. Select **“Standalone”**.
     ![HeatWave Type selection](./images/mysql-heatwave-system-selection.png "mysql heatwave system selection")
-7. On Configure networking, keep the default values:
+7. On Configure networking, select these values:
 
     a. Virtual Cloud Network: **HEATWAVE-VCN**
 
-    b. Subnet: **Private Subnet-HEATWAVE-VCN (Regional)**
+    b. Subnet: **private Subnet-HEATWAVE-VCN (Regional)**
 
-    c. On Configure placement under 'Availability Domain'
-
-    Select AD-1  ...  Do not check 'Choose a Fault Domain' for this DB System.
+    c. On Configure placement, select **AD-1** under Availability Domain. Do not check **Choose a Fault Domain** for this DB System.
 
     ![heatwave db network ad](./images/mysql-create-network-ad.png "heatwave db network ad ")
 
-8. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard**.
+8. On Configure Hardware, keep default values.
 
-    Data Storage Size (GB) Set value to:  **1024**
+    For Storage Size, set **Initial data storage size (GB)** value to:  **1024**
 
     ```bash
     <copy>1024</copy>
@@ -240,13 +238,13 @@ In this lab, you will be guided through the following tasks:
 
     ![heatwave db  hardware](./images/mysql-create-db-hardware.png "heatwave db hardware ")
 
-9. On Configure Backups, disable **Enable Automatic Backup**.
+9. On Configure backup plan, disable **Enable Automatic Backup**.
 
     ![heatwave db  backup](./images/mysql-create-backup.png " heatwave db  backup")
 
-10. Click **Show Advanced Options**.
+10. Click **Show advanced options**.
 
-11. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
+11. Expand Connections, then in the **Hostname** field enter (same as DB System Name):
 
     ```bash
         <copy>HEATWAVE-DB</copy> 
@@ -254,21 +252,18 @@ In this lab, you will be guided through the following tasks:
 
     ![heatwave db advanced](./images/mysql-create-advanced.png "heatwave db advanced ")
 
-12. Review **Create MySQL DB System**  screen.
+12. Review **Create MySQL DB System**  screen, then click **Create**.
 
     ![heatwave db create](./images/mysql-create.png "heatwave db create ")
-  
-
-    Click **Create**.
 
 13. The New MySQL DB System will be ready to use after a few minutes.
 
-    The state will be shown as 'Creating' during the creation.
+    The state is shown as 'Creating' during the creation.
     ![show creation state](./images/mysql-create-in-progress.png"show creeation state")
 
 14. The state 'Active' indicates that the DB System is ready for use.
 
-    On HEATWAVE-DB Page, check the MySQL Endpoint (Private IP Address).
+    On HEATWAVE-DB Page, click **Connections**, and then check the Primary endpoint (**Private IP Address**).
 
     ![heatwave endpoint](./images/mysql-detail-active.png"heatwave endpoint")
 
