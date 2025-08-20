@@ -6,6 +6,8 @@
 
 In this lab, you will create a Compartment, a Virtual Cloud Network, and create the MySQL HeatWave DB System with a HeatWave cluster.  A HeatWave cluster comprises of one or more HeatWave nodes. The MySQL DB System includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
 
+![heatwave architect](./images/mysql-heatwave-architecture.png "heatwave architect ")
+
 _Estimated Time:_ 20 minutes
 
 ### Objectives
