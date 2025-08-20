@@ -356,7 +356,7 @@ Analyze the *FTEX* database for upgrade readiness.
     upg1.target_home=/u01/app/oracle/product/23
     upg1.sid=FTEX
     upg1.target_cdb=CDB23
-    upg1.target_pdb_name.FTEX=CYAN
+    upg1.target_pdb_name=CYAN
     upg1.timezone_upg=NO
     ```
 
