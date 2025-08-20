@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In this lab, you will create a Compartment, a Virtual Cloud Network, and create the MySQL HeatWave DB System with a HeatWave cluster.  
+In this lab, you will create a Compartment, a Virtual Cloud Network, and create the MySQL HeatWave DB System with a HeatWave cluster.  A HeatWave cluster comprises of one or more HeatWave nodes. The MySQL DB System includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
 
 _Estimated Time:_ 20 minutes
 
@@ -14,7 +14,7 @@ In this lab, you will be guided through the following tasks:
 
 - Create Compartment
 - Create Virtual Cloud Network
-- Create MySQL HeatWave (DB System) Instance
+- Create MySQL HeatWave DB System Instance with a HeatWave cluster
 
 ### Prerequisites
 
