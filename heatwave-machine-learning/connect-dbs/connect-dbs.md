@@ -73,14 +73,14 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
 You will need a compute Instance to connect to your brand new MySQL database.
 
-1. Before creating the Compute instance open a notepad
+1. Before creating the Compute instance open a notepad.
 
-2. Do the followings steps to copy the public SSH key to the  notepad
+2. Do the followings steps to copy the public SSH key to the  notepad:
 
-    Open the Cloud shell
+    Open the Cloud shell.
     ![open cloud shell large](./images/cloud-shell-open-large.png "open cloud shell large ")
 
-    Enter the following command  
+    Enter the following command:  
 
     ```bash
     <copy>cat ~/.ssh/id_rsa.pub</copy>
@@ -88,25 +88,24 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![ssh key display](./images/ssh-key-display.png "ssh key display ")
 
-3. Copy the id_rsa.pub content the notepad
+3. Copy the id_rsa.pub content to notepad.
 
     Your notepad should look like this
     ![show ssh key](./images/notepad-rsa-key.png "show ssh key")  
 
-4. Minimize cloud shell
+4. Minimize Cloud shell.
 
     ![minimize cloud shell](./images/ssh-key-display-minimize.png "minimize cloud shell")  
 
-5. To launch a Linux Compute instance, go to
-    Navigation Menu
-    Compute
-    Instances
+5. To launch a Linux Compute instance, go to Navigation Menu > Compute > Instances.
+
     ![navigation compute](./images/navigation-compute.png "navigation compute")
 
-6. On Instances in **automl** Compartment, click  **Create Instance**
+6. On Instances in **automl** Compartment, click  **Create Instance**.
+
     ![compute menu create instance](./images/compute-menu-create-instance.png "ccompute menu create instance ")
 
-7. On Create Compute Instance
+7. On Create Compute Instance:
 
     Enter Name
 
@@ -114,44 +113,48 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>HEATWAVE-Client</copy>
     ```
 
-8. Make sure **automl** compartment is selected
+8. Make sure **automl** compartment is selected.
 
-9. On Placement, keep the selected Availability Domain
+9. On Placement, keep the selected Availability Domain.
 
-10. On Security, keep the default
-
-    - Shielded instance: Disabled
-    - Confidential computing:Disabled
-
-      ![compute create security](./images/compute-create-security.png "compute create security ")
-
-11. On Image  keep the selected Image, Oracle Linux 8 and click Edit
+10. On Image keep the selected Image, Oracle Linux 9.
 
       ![compute create image](./images/compute-create-image.png "compute create image ")  
 
-12. Click Change Shape
+11. Click **Change Shape**.
 
       ![compute create change shape](./images/compute-create-change-shape.png "compute create change shape")  
 
-13. Select Instance Shape: VM.Standard.E2.2
+12. Select **Specialty and previous generation**, and then select **VM.Standard.E2.2** under Image.
 
       ![compute create select shape](./images/compute-create-select-shape.png "compute create select shape")  
 
-14. On Networking, click Edit
+    Click **Select shape**, then click **Next**.
 
-      ![compute create networking](./images/compute-create-networking.png "compute create networking ")  
+13. On Security, keep the default
 
-15. Make sure **HEATWAVE-VCN**  and  and  **public subnet-HEATWAVE-VCN** are selected. Keep Public IPV4 address **Assign..** default
+    - Shielded instance: Disabled
+
+      ![compute create security](./images/compute-create-security.png "compute create security ")
+
+    Click **Next**
+
+14. On Networking, make sure **HEATWAVE-VCN** and **public subnet-HEATWAVE-VCN** are selected. 
+    Keep Public IPV4 address **Assign..** default. 
 
       ![compute create networking](./images/compute-create-networking-select.png "compute create networking ")
 
-16. On Add SSH keys, paste the public key from the notepad.
+15. On Add SSH keys, paste the public key from the notepad.
   
     ![compute create add ssh key](./images/compute-create-add-ssh-key.png "compute create add ssh key ")
 
-17. Keep Boot Volume default and Click **Create** button to finish creating your Compute Instance.
+    Click **Next**
+
+16. Keep Boot Volume default. Click **Next** 
 
     ![compute create boot volue](./images/compute-create-boot-volume.png "compute create boot volume")
+
+17. Click **Create** button to finish creating your Compute Instance.
 
 18. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
     ![compute provisioning](./images/compute-provisioning.png "compute provisioning ")
@@ -162,29 +165,30 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 ## Task 3: Connect to Compute Instance using SSH
 
-1. Copy the public IP address of the active Compute Instance to your notepad
+1. Copy the public IP address of the active Compute Instance to your notepad:
 
-    - Go to Navigation Menu
-        - Compute
-        - Instances
-        - Copy **Public IP**
+    - Go to Navigation Menu > Compute > Instances. 
+    - Copy the public IP.
+
     ![navigation compute with instance](./images/navigation-compute-with-instance.png "navigation compute with instance ")
 
-2. Copy the private IP address of the active MySQL HeatWave Instance to your notepad
+2. Copy the private IP address of the active MySQL HeatWave Instance to your notepad:
 
-    - Go to Navigation Menu
-        - Databases
-        - MySQL
-        - Click the `HEATWAVE-DB` Database System link
+    - Go to Navigation Menu > Databases > MySQL HeatWave, then click **DB Systems** in the left pane.
+
+    - Click the `HEATWAVE-DB` Database System link.
+
     ![navigation mysql with instance](./images/navigation-mysql-with-instance.png " navigation mysqlwith instance")
 
-3. Copy the HEATWAVE-DB  `Private IP Address` to the notepad
+3. Go to the Connections tab, and copy the HEATWAVE-DB  private IP Address to notepad.
+
     ![mysql detail ip](./images/mysql-detail-ip.png "mysql detail ip")
 
 4. Your notepad should look like the following:
+
     ![notepad rsa key compute db](./images/notepad-rsa-key-compute-db.png "notepad rsa key compute db ")
 
-5. Go to Cloud shell to SSH into the new Compute Instance
+5. Go to Cloud shell to SSH into the new Compute instance.
 
     Enter the username **opc** and the Public **IP Address**.
 
@@ -205,7 +209,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 1. You will need a MySQL client tool to connect to your new MySQL DB System from your client machine.
 
-    Install MySQL Shell with the following command (enter y for each question)
+    Install MySQL Shell with the following command (enter y for each question):
 
     **[opc@…]$**
 
@@ -223,7 +227,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![mysql endpoint private ip](./images/mysql-endpoint-private-ip.png "mysql endpoint private ip")
 
-3. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the HEATWAVE-DB private IP address at the end of the command. Also enter the admin user and the db password created on Lab 1
+3. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the HEATWAVE-DB private IP address at the end of the command. Also enter the admin user and the db password created in Lab 1.
 
     (Example  **mysqlsh -uadmin -p -h10.0.1..**)
 
@@ -235,7 +239,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![mysql shell first connect](./images/mysql-shell-first-connect.png "mysql shell first connect ")
 
-4. List schemas in your heatwave instance before Shell Load
+4. List schemas in your heatwave instance before Shell Load:
 
     ```bash
         <copy>\sql</copy>
@@ -247,7 +251,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![CONNECT](./images/list-schemas-before.png "list schemas before")
 
-You may now **proceed to the next lab**
+You may now **proceed to the next lab**.
 
 ## Learn More
 
