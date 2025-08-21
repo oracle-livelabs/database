@@ -243,7 +243,36 @@ In this section, you will:
 
 ### Interact with native JSON Collections in the Oracle Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *Tool Configuration* tab.
+
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. 
+
+    **Your Autonomous Database should be configured with an enabled MongoDB API, ready for you to go. If you don't see the MongoDB API enabled in your environment, then let's enable it quickly.** 
+    
+    You need to do two things:
+
+    1. Enable Access Control Lists (ACLs)
+
+        Due to security precautions, the MongoDB API is not enabled to the public out of the box, but requires some conscious control access. To enable ACLs, go to the details page of your autonomous database and select to edit the access control lists.
+
+        ![Set ACL](./images/set-acl.png " ")
+
+        Choose an ACL that enables the machine where you have installed the MongoDB tools to access the database. For demonstration purposes, the most pragmatic way to do this is to set the CIDR block to 0.0.0.0/0 which allows full access from the Internet. **This is for demonstration purposes only and never meant for production environment or systems with sensitive data.**
+
+        ![Set CIDR block](./images/set-cidr-block.png " ")
+
+        Save your changes and go back to the detail page of your Autonomous Database.        
+
+    2. Ensure that the MongoDB API is enabled.
+
+        You can find the URI in the Autonomous Database console in the *Tool Configuration* tab if the MongoDB API is enabled. If the API is disabled, then enable the MongoDB API.
+
+        ![Edit state of MongoDB API](./images/edit-mongo-api.png " ")
+
+        Enable the MongoDB API and save the state.
+
+        ![Enable MongoDB API](./images/enable-mongo-api.png " ")
+        
+    If the MongoDB API is successfully enabled, it will show you the URI to copy.
 
     ![Copy Mongo URI](./images/copy-mongo-uri.png " ")
 
@@ -254,6 +283,7 @@ In this section, you will:
     mongodb://[user:password@][ADB Instance name].adb.[region].oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true
     </copy>
     ```
+
 
     Let's create an environment variable called *URI* which contains the MongoDB URI including the user and password information.
 
