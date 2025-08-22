@@ -8,7 +8,7 @@ To load the Iris data components, perform the following steps to create and load
 
 After this step the data is stored in the MySQL HeatWave database in the following schema and tables:
 
-**ml_data schema:** The schema containing training and test dataset tables
+**ml_data schema:** The schema containing training and test dataset tables.
 
 **iris_train table:** The training dataset (labeled). Includes feature columns (sepal length, sepal width, petal length, petal width) and a populated class target column with ground truth values.
 
