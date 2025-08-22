@@ -55,12 +55,12 @@ Create webhook to send notifications about the loan approval request to a Slack 
 
 ## Task 4: Add the OpenAI API Key to MicroTx Workflow Engine
 
-1. In the Workflow UI, click **Definitions**, and then click **Agentic AI** tab.
+1. In the Workflow UI, open the navigation menu, and then click **Agentic AI**.
    The following LLM definitions are displayed.
 
 	![AI Definitions page in MicroTx Workflow UI](images/agentic-ai-tab.png)
 
-2. Click **gpt-4o-mini**. 
+2. Click **gpt-4o-mini**.
    The **Edit LLM Definition** dialog box appears. A dummy value is displayed for **API Key**.
 
 	![Edit LLM Definitions page in MicroTx Workflow UI](images/replace-api-key.png)
