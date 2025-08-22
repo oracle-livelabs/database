@@ -33,7 +33,12 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Run a Workflow",
+      "title": "Lab 4: Create Connectors",
+      "description": "Connectors",
+      "filename": "../../connector/connector.md"
+    },
+    {
+      "title": "Lab 5: Run a Workflow",
       "description": "Provisioning the Lab Environment",
       "filename": "../../run/run.md"
     },
