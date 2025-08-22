@@ -24,14 +24,12 @@ In this lab, you will be guided through the following task:
 
 ## Task 1: Stop HEATWAVE-DB Database Instance
 
-1. Open the navigation menu  
-    - Databases
-    - MySQL
-    - DB Systems
-2. Choose the **automl** Compartment. A list of DB Systems is displayed.
+1. Open the navigation menu, select Databases > MySQL HeatWave > DB Systems.
+
+2. Choose the **automl** compartment. A list of DB Systems is displayed.
     ![navigation mysql with instance](./images/navigation-mysql-with-instance.png "navigation mysql with instance")
 
-3. In the displayed Instance Click **Stop**.
+3. In the displayed Instance click **Lifecycle**, and select **Stop**.
     ![mysql select stop](./images/mysql-instance-active.png " mysql select stop")
 
 4. In the displayed **Stop DB system** dialog box, click the  **Stop** button.
@@ -40,14 +38,12 @@ In this lab, you will be guided through the following task:
 
 ## Task 2: Stop HEATWAVE-Client Compute Instance
 
-1. Open the navigation menu  
-    - Compute
-    - Instances
+1. Open the navigation menu, select Compute > Instances.
 
 2. Choose the **automl** Compartment. A list of Compute intances is displayed. In the list of Compute Instances, click the **HEATWAVE-Client** instance.
     ![navigation compute instance](./images/navigation-compute-instance.png "navigation compute instance")
 
-3. In the displayed Instance Click **Stop**.
+3. In the displayed Instance, click **Actions** and then select **Stop**.
     ![mysql select stop](./images/compute-instance-stop.png " mysql select stop")
 
 4. In the displayed **Stop Instance** dialog box, click the  **Stop instance** button.
