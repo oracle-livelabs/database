@@ -55,34 +55,25 @@ Create webhook to send notifications about the loan approval request to a Slack 
 
 ## Task 4: Add the OpenAI API Key to MicroTx Workflow Engine
 
-1. In the Workflow UI, open the navigation menu, and then click **Agentic AI**.
-   The following LLM definitions are displayed.
+1. In the Workflow UI, open the navigation menu, and then click **Connectors**.
+   The following LLM definition is displayed.
 
-	![AI Definitions page in MicroTx Workflow UI](images/agentic-ai-tab.png)
+	![LLM Definitions page in MicroTx Workflow UI](images/connectors-tab.png)
 
-2. Click **gpt-4o-mini**.
+2. Click ![Edit](images/edit.png) (Edit).
    The **Edit LLM Definition** dialog box appears. A dummy value is displayed for **API Key**.
 
 	![Edit LLM Definitions page in MicroTx Workflow UI](images/replace-api-key.png)
 
 3. Replace the **API Key** value with the value of the OpenAI API key that you have copied in step 1.
 
-4. Click Submit.
-
-5. Click **gpt-4o**.
-   The **Edit LLM Definition** dialog box appears. A dummy value is displayed for **API Key**.
-
-	![Edit LLM Definitions page in MicroTx Workflow UI](images/replace-api-key-chatgpt4o.png)
-
-6. Replace the **API Key** value with the value of the OpenAI API key that you have copied in step 1.
-
-7. Click Submit.
+4. Click **Save**.
 
 ## Task 5: View the Overall Workflow and add the Slack Webhook
 
 1. In the Workflow UI, click **Definitions**.
 
-2. In the **Workflows** tab,  click the **acme_bank_loan_processing_workflow** workflow.
+2. In the **Workflows** tab,  click the `acme_bank_loan_processing_workflow` workflow.
    ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
 
 3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed.

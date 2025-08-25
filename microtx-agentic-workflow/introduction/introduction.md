@@ -30,11 +30,11 @@ Estimated Workshop Time: 1 hour 30 minutes
 
 In this workshop, you will learn how to:
 
-    * Learn how to model and orchestrate agentic workflows for real-world, production-grade use cases.
-    * Use a planner task powered by LLMs to drive real-time, adaptive decision-making within your workflows.
-    * Build modular AI agent workers in Java, such as KYC Agent, Credit Scoring Agent, Risk Evaluation Agent.
-    * Combine AI and orchestration with MicroTx Workflow to boost flexibility, automation, and control in complex business operations.
-    * Configure and execute distributed transactions using MicroTx, ensuring atomicity, resiliency, and data integrity across microservices.
+* Learn how to model and orchestrate agentic workflows for real-world, production-grade use cases.
+* Use a planner task powered by LLMs to drive real-time, adaptive decision-making within your workflows.
+* Build modular AI agent workers in Java, such as KYC Agent, Credit Scoring Agent, Risk Evaluation Agent.
+* Combine AI and orchestration with MicroTx Workflow to boost flexibility, automation, and control in complex business operations.
+* Configure and execute distributed transactions using MicroTx, ensuring atomicity, resiliency, and data integrity across microservices.
 
 By the end of this LiveLab, you'll not only understand the architectural benefits and capabilities of MicroTx Workflow, but you'll have hands-on experience to define, configure, and execute AI-enhanced workflows in real-world scenarios with dynamic control flow, decision-making, and integration.
 

@@ -13,7 +13,7 @@ MicroTx provides a No-code solution to develop agents and agentic workflows.
 ### Objectives
 
 In this lab, you will:
-* Assemble reusable tasks, other agents in a workflow 
+* Assemble reusable tasks, other agents in a workflow
 * Provide instructions in natural language
 * Use built-in access to tools, including MCP servers
 * Leverage planner to transform the high-level goal into actionable tasks with real time adjustments based on the executed task outcome
@@ -25,11 +25,11 @@ This lab assumes you have:
 * All previous labs successfully completed
 
 ## Task 1: Initiate the Workflow
-   
+
 1. In the Workflow UI, click **Workbench**.
     The **Workflow Workbench** dialog box appears.
 
-2. In the **Workflow Name** drop-down list, select the **acme_bank_loan_processing_workflow** workflow.
+2. In the **Workflow Name** drop-down list, select the `acme_bank_loan_processing_workflow` workflow.
 
 3. In the **Input (JSON)** text box, paste the following lines of code which provides details about the loan amount, loan tenure, and SSN number of the customer. For document verification, upload a driver's license, this file is already available in object storage.
 
@@ -61,7 +61,9 @@ This lab assumes you have:
 
 ## Task 2: Approve the Loan Request
 
-1. In the other browser tab where the Workflow UI is running, click **Workflow Notifications**.
+1. Open the Workflow UI in a new browser tab.
+
+2. Open the navigation menu and click **Workflow Notification**.
    ![View the status of the workflow execution](images/workflow-notification.png)
 
 2. Click **Act**.
