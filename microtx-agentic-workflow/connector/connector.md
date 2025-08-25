@@ -1,22 +1,23 @@
-# Title of the Lab
+# View Connectors
 
 ## Introduction
 
-This lab walks you through the steps to create all the connectors, which enable seamless integration of external services—such as databases, Large Language Models (LLMs), Managed Compute Platform (MCP) servers, external tools, message queues, notification systems, and more—into the MicroTx Workflow runtime environment.
+This lab walks you through the steps to view different types of connectors, which enable seamless integration of external services—such as databases, Large Language Models (LLMs), Managed Compute Platform (MCP) servers, external tools, message queues, notification systems, and more—into the MicroTx Workflow runtime environment.
 
-Estimated Lab Time: 15 minutes
+Connectors are one of the main building blocks of the agentic workflow. This lab will help you understand the different components of an agentic workflow. This knowledge will help you build your own workflows later.
+
+Estimated Lab Time: 5 minutes
 
 ### About Connectors
-Define connector configurations centrally to efficiently reference and reuse these connections across multiple workflow tasks. This approach streamlines integration, reduces configuration overhead, and ensures consistency in how external services are accessed within workflows. It also offers greater agility in adapting to new or changing external services—with no need to duplicate sensitive credentials or configuration across tasks.
+You can define connector configurations centrally to efficiently reference and reuse these connections across multiple workflow tasks. This approach streamlines integration, reduces configuration overhead, and ensures consistency in how external services are accessed within workflows. It also offers greater agility in adapting to new or changing external services—with no need to duplicate sensitive credentials or configuration across tasks.
 
 ### Objectives
 
-*List objectives for this lab using the format below*
-
 In this lab, you will:
-* Objective 1
-* Objective 2
-* Objective 3
+* View LLM connector to OpenAI
+* View the database connection details in database profile
+* View a connector to a custom HTTP tool
+* View connectors to MCP servers
 
 ### Prerequisites
 
@@ -24,125 +25,73 @@ This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
 
-## Task 1: Create an LLM Connector
+## Task 1: View an LLM Connector for OpenAI
 
-Let's create an LLM connector to define an LLM profile that includes API details and the list of supported models for OpenAI provider. This profile acts as a reference point—meaning you can easily embed advanced AI capabilities in workflow tasks by simply specifying the defined LLM connector.
-
-1. Open the navigation menu and click **Connectors**.
-
-2. Click the **LLM** tab.
-
-3. Click **New LLM Definition**. The New LLM Definition dialog box appears.
-
-4. Enter the following information.
-
-    - **Name**: Enter `openaai-dev` as a unique and descriptive name to identify this LLM definition in workflows.
-    - **Model Provider**: Select **OPENAI** as the model provider.
-    - **Models**: Enter `gpt-4o, gpt-4o-mini` as a comma-separated list of the names of the models which you intend to use.
-    - **Description**: Enter a description for the LLM definition.
-    - **API Key**: Paste your OpenAI API key, which authenticates your requests.
-    - **Base URL**: Enter `https://api.openai.com/` as the URL to access the API endpoint of the LLM.
-
-	![New LLM Definition dialog box with values](images/openai-llm-connector.png)
-
-5. Click **Submit**.
-
-Your new definition appears in the list of available LLM definitions.
-
-## Task 2: Create a Database Profile
-
-Create a database profile to define and manage connections to your application database. Define connection parameters, such as the type of database engine, supported capabilities, connection URL, user credentials, and secure wallet options.
+Let's view an LLM connector that includes API details and the list of supported models for OpenAI provider. This profile acts as a reference point—meaning you can easily embed advanced AI capabilities in workflow tasks by simply specifying the defined LLM connector.
 
 1. Open the navigation menu and click **Connectors**.
 
-2. Click the **Database Profiles** tab.
+2. Click the **LLM** tab. The LLM Definitions list page opens. All the LLMs that you have defined are displayed in a table.
 
-3. Click **New Database Profiles**. The New Database Profiles dialog box appears.
+3. Identify the definition that you want to view, and then click ![View](images/view.png) (View).
 
-4. Enter the following information.
+	![LLM Definition details](images/view-openai-connector.png.png)
 
-    - **Name**: Enter `oracle-database-livelabuser` as a unique and descriptive name to identify this database profile in workflows.
-    - **Engine**: Enter **ORACLE** as the database that you want to use.
-    - **Capabilities**: Enter `RELATIONAL, VECTOR` as the supported features for the database profile. This indicates that the database can be used for traditional relational database operations and vector-based operations.
-    - **Username**: Enter `livelabsUser` as the username to authenticate and connect to the database.
-    - **Password**: Enter the password for the specified database user name.
-    - **URL**: Provide the full connection URL to the database. For example, jdbc:oracle:thin:@host:port/service.
-    - **Description**: Enter a description for the database profile.
-    - **Wallet Password**: If you are using an Oracle Wallet for secure credential storage, enter the wallet password here. This is used for decrypting wallet files and securing connections.
-    - **Wallet File**: Upload the Oracle Wallet file if your connection requires it. The wallet file contains encrypted credentials and security details for secure authentication.
+4. Click **Close**.
 
-5. Click **Submit**.
+## Task 2: View a Database Profile
 
-Your new definition appears in the list of available database profiles.
+You can use database profile to define and manage connections to your application database. It defines connection parameters, such as the type of database engine, supported capabilities, connection URL, user credentials, and secure wallet options.
 
-## Task 3: Create a Tools Configuration
+1. Open the navigation menu and click **Connectors**.
+
+2. Click the **Database Profiles** tab. The Database Profiles list page opens. All the database profiles that you have defined are displayed in a table.
+
+3. Identify the profile that you want to view, and then click ![View](images/view.png) (View).
+
+	![View Database Profile details](images/view-db-profile.png)
+
+4. Click **Close**.
+
+## Task 3: View a Tools Configuration
 
 Create a tools configuration for use in the agentic tasks.
 
 1. Open the navigation menu and click **Connectors**.
 
-2. Click the **Tools Configs** tab.
+2. Click the **Tools Configs** tab. The Tools Configs list page opens. All the tool configurations that you have defined are displayed in a table.
 
-3. Click **New Tools Config**. The New Tools Config dialog box appears.
+3. Identify the configuration that you want to view, and then click ![View](images/view.png) (View).
 
-4. Enter the following information.
+	![View Tools Configuration details](images/tools-config-details.png)
 
-    - **Name**: Enter `custom_http` as a unique and descriptive name to identify this tool configuration in workflows.
-    - **Description**: Enter a description for the tool configuration, such as `custom http tool`.
-    - **Category**: Select **API** as the category.
-    - **Type**: Select **HTTP** as the type of tool.
-
-	![New Tools Config dialog box with values](images/new-tools-config-connector.png)
-
-5. Click **Submit**.
-
-Your new definition appears in the list of available tool configurations.
-
-## Task 4: Create an MCP Server Connector for Oracle Database
+4. Click **Close**.
 
 
+## Task 4: View details of an MCP Server Connector for Oracle Database
 
 1. Open the navigation menu and click **Connectors**.
 
-2. Click the **MCP** tab.
+2. Click the **MCP** tab. The MCP Definitions list page opens. All the MCPs that you have defined are displayed in a table.
 
-3. Click **New MCP Definition**. The New MCP Definition dialog box appears.
+3. Identify the connector that you want to view, and then click ![View](images/view.png) (View)
 
-4. Enter the following information.
+	![View MCP Definition dialog box with values](images/view-mcp-db.png)
 
-    - **Name**: Enter `oracledb_mcp` as a unique and descriptive name to identify this MCP server definition in workflows.
-    - **Description**: Enter a description for the tool configuration, such as `custom http tool`.
-    - **Transport**: Select **STDIO** from the drop-down list to specify the network transport protocol used by the MCP server for communication.
-    - **Command**: Enter **/app/sqlcl/bin/sql**.
-
-	![New MCP Definition dialog box with values](images/oracledb-mcp-server-connector.png)
-
-5. Click **Submit**.
-
-Your new connector appears in the list of available MCP definitions.
+4. Click **Close**.
 
 ## Task 5: Create an MCP Server Connector for Document Verification
 
-
-
 1. Open the navigation menu and click **Connectors**.
 
-2. Click the **MCP** tab.
+2. Click the **MCP** tab. The MCP Definitions list page opens. All the MCPs that you have defined are displayed in a table.
 
-3. Click **New MCP Definition**. The New MCP Definition dialog box appears.
+3. Identify the connector that you want to view, and then click ![View](images/view.png) (View)
 
-4. Enter the following information.
+	![View MCP Definition dialog box with values](images/mcp-server-2.png)
 
-    - **Name**: Enter `doc_mcp` as a unique and descriptive name to identify this MCP server definition in workflows.
-    - **Description**: Enter a description for the tool configuration, such as `Document verification custom MCP server`.
-    - **Transport**: Select **SSE** from the drop-down list to specify the network transport protocol used by the MCP server for communication.
-    - **URL**: Enter the URL of the MCP server **http://doc-process-mcp-server:8000/**.
+4. Click **Close**.
 
-	![New MCP Definition dialog box with values](images/doc-verify-mcp-server-connector.png)
-
-5. Click **Submit**.
-
-Your new connector appears in the list of available MCP definitions.
 
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
