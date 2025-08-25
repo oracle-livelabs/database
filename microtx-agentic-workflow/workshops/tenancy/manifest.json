@@ -33,12 +33,22 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Create Connectors",
+      "title": "Lab 4: View Connectors",
       "description": "Connectors",
       "filename": "../../connector/connector.md"
     },
     {
-      "title": "Lab 5: Run a Workflow",
+      "title": "Lab 5: View AI Agents",
+      "description": "AI Agents",
+      "filename": "../../agentic-ai/agentic-ai.md"
+    },
+    {
+      "title": "Lab 6: View Tasks and Workflow",
+      "description": "Tasks and Workflow",
+      "filename": "../../tasks/tasks.md"
+    },
+    {
+      "title": "Lab 7: Run a Workflow",
       "description": "Provisioning the Lab Environment",
       "filename": "../../run/run.md"
     },

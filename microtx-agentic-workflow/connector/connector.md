@@ -35,7 +35,7 @@ Let's view an LLM connector that includes API details and the list of supported 
 
 3. Identify the definition that you want to view, and then click ![View](images/view.png) (View).
 
-	![LLM Definition details](images/view-openai-connector.png.png)
+	![LLM Definition details](images/view-openai-connector.png)
 
 4. Click **Close**.
 
@@ -53,9 +53,9 @@ You can use database profile to define and manage connections to your applicatio
 
 4. Click **Close**.
 
-## Task 3: View a Tools Configuration
+## Task 3: View Details of a Tools Configuration
 
-Create a tools configuration for use in the agentic tasks.
+View configuration details of an HTTP tool, which is used in the agentic tasks.
 
 1. Open the navigation menu and click **Connectors**.
 
@@ -80,7 +80,7 @@ Create a tools configuration for use in the agentic tasks.
 
 4. Click **Close**.
 
-## Task 5: Create an MCP Server Connector for Document Verification
+## Task 5: View details of an MCP Server Connector for Document Verification
 
 1. Open the navigation menu and click **Connectors**.
 

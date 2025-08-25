@@ -71,9 +71,9 @@ Create webhook to send notifications about the loan approval request to a Slack 
 
 ## Task 5: View the Overall Workflow and add the Slack Webhook
 
-1. In the Workflow UI, click **Definitions**.
+1. Open the navigation menu and then click **Definitions**.
 
-2. In the **Workflows** tab,  click the `acme_bank_loan_processing_workflow` workflow.
+2. In the **Workflows** tab, click the `acme_bank_loan_processing_workflow` workflow.
    ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
 
 3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed.
