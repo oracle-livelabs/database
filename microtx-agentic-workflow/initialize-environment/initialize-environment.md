@@ -94,7 +94,7 @@ Follow the instructions in this section to configure Minikube and start a tunnel
     ```
    After a few seconds, the following message is displayed.
 
-    ``text
+    ```text
     Minikube started successfully.
     ```
 
