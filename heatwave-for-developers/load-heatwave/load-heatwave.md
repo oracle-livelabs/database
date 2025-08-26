@@ -36,15 +36,21 @@ In this lab, you will be guided through the following task:
 
     ![CONNECT](./images/mysql-heatwave-active.png "db active ")
 
-3. In the list of DB Systems, click the **heatwave-db** system. click **More Action ->  Add HeatWave Cluster**.
+3. Click on the **Add HeatWave Cluster**.
     ![Connect](./images/mysql-heatwave-more.png "mysql heatwave more")
 
-4. Estiamte cluster nodes
+4. Click on the **Select Shape** to select the HeatWave 512GB node shape
+    ![Connect](./images/mysql-heatwave-select-shape.png "mysql heatwave shape")
+
+4. If there is data loaded in the MySQL DB System, you can click on the **Estimate** button to let the system recommend how many HeatWave nodes are needed for your data
     ![Connect](./images/heatwave-cluster-estimate-node.png "heatwave cluster add estimate node")
 
-5. Generate Estimate and review loaded data then  hit cancel
+5. Since we haven't loaded any data to the MySQL DB System, the system won't be able to estimate the number of nodes for us
+    ![Connect](./images/heatwave-cluster-no-estimate.png "heatwave cluster generate estimate")
 
+   Here is a sample output of the estimation if there is data loaded in the DB System:
     ![Connect](./images/heatwave-cluster-generate-estimate.png "heatwave cluster generate  estimate ")
+   
 
 6. **Set Node Count to 2 for this Lab Click** “Add HeatWave Cluster” to create the HeatWave cluster
 
