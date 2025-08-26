@@ -8,7 +8,7 @@ Estimated Time: 10 minutes
 
 ### About MicroTx Workflow Engine
 
-MicroTx provides a No-code solution to develop agents and agentic workflows.
+MicroTx Workflow is a no-code solution that helps you design and configure workflows visually, develop agents and agentic workflows, while drastically reducing the need for custom code.
 
 ### Objectives
 
@@ -87,7 +87,7 @@ The workflow does not progress until a human approves or rejects the loan reques
     The human approval task is now marked in green and status of the workflow changes to **Completed**.
     ![Workflow execute complete](images/workflow-run-complete.png)
 
-## Task 3: Verify the status of the Workflow
+## Task 3: Verify the Status of the Workflow
 
 1. Copy the Workflow ID from the Workbench as shown in the following image.
     ![Workflow ID](images/workflow-id.png)

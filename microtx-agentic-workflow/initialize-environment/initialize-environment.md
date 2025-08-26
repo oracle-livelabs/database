@@ -8,10 +8,6 @@ In this lab, we will complete the prerequisites, configure, and start all the co
 
 ### Objectives
 - Initialize the workshop environment.
-* Configure Minikube
-* Start a tunnel between Minikube and MicroTx
-* Run 
-
 
 ### Prerequisites
 This lab assumes you have:

@@ -8,7 +8,7 @@ This lab walks you through the steps to create a workflow for a loan processing 
 
 In this lab, you will understand the various building blocks of the workflow, such as tasks, prompts, and agent profile. You will also build a few of these blocks. In this lab, you will add multiple tasks in a step-by-step manner. Each task accomplishes a specific goal. This workflow accepts user input in natural language.
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 20 minutes
 
 ### Objectives
 
@@ -22,9 +22,6 @@ In this lab, you will:
 This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
-
-
-*This is the "fold" - below items are collapsed by default*
 
 ## Task 1: Create a New Workflow
 
