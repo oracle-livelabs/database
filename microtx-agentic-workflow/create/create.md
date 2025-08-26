@@ -10,17 +10,10 @@ In this lab, you will understand the various building blocks of the workflow, su
 
 Estimated Lab Time: 30 minutes
 
-### About <Product/Technology> (Optional)
-Enter background information here about the technology/feature or product used in this lab - no need to repeat what you covered in the introduction. Keep this section fairly concise. If you find yourself needing more than two sections/paragraphs, please utilize the "Learn More" section.
-
 ### Objectives
 
-*List objectives for this lab using the format below*
-
 In this lab, you will:
-* Objective 1
-* Objective 2
-* Objective 3
+* Understand the various building blocks of a workflow and create a few building blocks.
 
 ### Prerequisites (Optional)
 
@@ -58,7 +51,7 @@ This lab assumes you have:
     ```
 5. Click **Save**.
 
-## Task 2: Extract loan application details
+## Task 2: Extract Loan Application Details
 
 The workflow accepts user input in natural language. Use a GenAI task type to extract the loan application details from the input provided by a user. Since a GenAI task requires LLM, let's start by creating a connector for accessing the LLM.
 
@@ -82,64 +75,213 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 5. Click **Submit**.
     Your new definition appears in the list of available LLM definitions.
 
-6. 
+6. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
 
-(optional) Task 1 opening paragraph.
-
-1. Step 1
-
-	![Image alt text](images/sample1.png)
-
-2. Step 2
-
-  ![Image alt text](images/sample1.png)
-
-4. Example with inline navigation icon ![Image alt text](images/sample2.png) click **Navigation**.
-
-5. Example with bold **text**.
-
-   If you add another paragraph, add 3 spaces before the line.
-
-## Task 2: Concise Task Description
-
-1. Step 1 - tables sample
-
-  Use tables sparingly:
-
-  | Column 1 | Column 2 | Column 3 |
-  | --- | --- | --- |
-  | 1 | Some text or a link | More text  |
-  | 2 |Some text or a link | More text |
-  | 3 | Some text or a link | More text |
-
-2. You can also include bulleted lists - make sure to indent 4 spaces:
-
-    - List item 1
-    - List item 2
-
-3. Code examples
-
-    ```
-    Adding code examples
-  	Indentation is important for the code example to appear inside the step
-    Multiple lines of code
-  	<copy>Enclose the text you want to copy in <copy></copy>.</copy>
+7. Delete the JSON code that appears by default and paste the following code.
+  	```
+    <copy>
+    {
+    "name": "Extract Loan Application details",
+    "taskReferenceName": "extract_loan_details",
+    "inputParameters": {
+        "llmProfile": {
+            "name": "openai-dev",
+            "model": "gpt-4o-mini"
+        },
+        "promptTemplate": "loan_application_nl_2_json",
+        "promptVariables": {
+            "loan_application_text": "${workflow.input.loan_application_text}"
+        }
+    },
+    "type": "GENAI_TASK"
+    }
+    </copy>
     ```
 
-4. Code examples that include variables
+8. Click **Save**.
 
-	```
-  <copy>ssh -i <ssh-key-file></copy>
-  ```
+9. Let's look at the input parameters required by this GenAI task. It requires the LLM profile definition that we created earlier and a prompt template. Next, let's create the prompt template.
 
-## Learn More
+10. In the navigation menu, click **Agentic AI**, and then click the **Prompt** tab. The Prompt Definitions list page opens. All the prompts that you have defined are displayed in a table.
 
-*(optional - include links to docs, white papers, blogs, etc)*
+11. Click **New Prompt Definition**.
 
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+12. Enter the following information.
+
+	  ![New Prompt Definition](images/new-prompt-template.png)
+
+    * Name: Enter `loan_application_nl_2_json` as a unique and descriptive name to identify this prompt definition in workflows.
+  
+    * Description: Optional. Enter the following description for the prompt definition.
+      	```text
+        <copy>
+        Extract the input parameters from natural language input.
+        </copy>
+        ```
+
+    * Prompt Template: Create a prompt template to guide the planner's decision-making strategy. Here's an example prompt template which extracts the loan application details, such as loan amount and tenure from the input text.
+
+      	```text
+        <copy>
+        Extract the loan application details like loan amount, tenure, ssn, id etc. from the input text. 
+        Input: ${loan_application_text}
+        Constraints:
+          - Only output the structured plan in JSON format. No extra commentary.
+          - Return only the raw JSON object as plain text — no ```json, no backticks, no explanation.
+          - Don't extract any other garbage info. If nothing related to loan application found in input text, just mark the status as failed with message. Or else mark status as success.
+        Example output format:
+        json
+        {
+          "status": "SUCCCESS/FAILED"
+          "ssn": "xxx-xx",
+          "loanAmount": 1000,
+          "tenure": 2,
+          "name":"xyz",
+          "email":"xyz@o.com"
+        }
+        </copy>
+        ```
+
+13. Click **Submit**.
+
+## Task 3: Loan Application Completeness Check
+
+Check the details provides for the loan application and terminate the workflow if any required information is absent from the user input.
+To achieve this, let's add a SWITCH statement task and define the decision cases. If the check fails, send a notification and then terminate the workflow processing.
+
+1. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+
+2. Delete the JSON code that appears by default and paste the following code.
+
+  	```
+    <copy>
+    {
+    "name": "Check loan application completeness",
+    "taskReferenceName": "check_loan_application_completeness",
+    "inputParameters": {
+        "switchCaseValue": "${extract_loan_details.output.status}"
+    },
+    "type": "SWITCH",
+    "decisionCases": {
+        "FAILED": [
+            {
+                "name": "Notify incomplete loan application",
+                "taskReferenceName": "notify_incomplete_loan_application",
+                "inputParameters": {
+                    "http_request": {
+                        "method": "POST",
+                        "uri": "http://notification-service:8085/email-service/sendMail",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": {
+                            "from": "microtx.user@localhost",
+                            "to": "microtx.user@microtx.com",
+                            "cc": "",
+                            "subject": "Loan application rejected!",
+                            "body": "Loan application rejected due to incomplete details. ${workflow.input.loan_application_text}",
+                            "isEmailBodyText": true
+                        }
+                    }
+                },
+                "type": "HTTP",
+                "decisionCases": {},
+                "defaultCase": [],
+                "forkTasks": [],
+                "startDelay": 0,
+                "joinOn": [],
+                "optional": false,
+                "defaultExclusiveJoinTask": [],
+                "asyncComplete": false,
+                "loopOver": [],
+                "onStateChange": {},
+                "permissive": false
+            },
+            {
+                "name": "terminate",
+                "taskReferenceName": "terminate_ref",
+                "inputParameters": {
+                    "terminationStatus": "TERMINATED",
+                    "terminationReason": "Incomplete loan application details",
+                    "workflowOutput": "${extract_loan_details.output}"
+                },
+                "type": "TERMINATE",
+                "decisionCases": {},
+                "defaultCase": [],
+                "forkTasks": [],
+                "startDelay": 0,
+                "joinOn": [],
+                "optional": false,
+                "defaultExclusiveJoinTask": [],
+                "asyncComplete": false,
+                "loopOver": [],
+                "onStateChange": {},
+                "permissive": false
+            }
+        ]
+    },
+    "defaultCase": [],
+    "forkTasks": [],
+    "startDelay": 0,
+    "joinOn": [],
+    "optional": false,
+    "defaultExclusiveJoinTask": [],
+    "asyncComplete": false,
+    "loopOver": [],
+    "evaluatorType": "value-param",
+    "expression": "switchCaseValue",
+    "onStateChange": {},
+    "permissive": false
+    }
+    </copy>
+    ```
+
+3. Click **Save**.
+
+## Task 4: Create the Loan Application Record
+
+Once the application is deemed complete, create an application record in the database using a SQL Task.
+
+1. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+
+2. Delete the JSON code that appears by default and paste the following code.
+
+  	```
+    <copy>
+    {
+    "name": "auditLoanOracleSql",
+    "taskReferenceName": "audit_loan_oracle_sql_task_ref",
+    "inputParameters": {
+        "databaseProfile": "oracle-database-livelabuser",
+        "sqlStatement": "INSERT INTO LOAN_APPLICATIONS (APPLICATION_ID, USER_SSN, LOAN_AMOUNT, TENURE_MONTHS, APPLICATION_STATUS) VALUES (?, ?, ?, ?, ?);",
+        "parameters": [
+            "${workflow.workflowId}",
+            "${extract_loan_details.output.ssn}",
+            "${extract_loan_details.output.loanAmount}",
+            "${extract_loan_details.output.tenure}",
+            "PENDING"
+        ],
+        "type": "UPDATE"
+    },
+    "type": "SQL",
+    "decisionCases": {},
+    "defaultCase": [],
+    "forkTasks": [],
+    "startDelay": 0,
+    "joinOn": [],
+    "optional": false,
+    "defaultExclusiveJoinTask": [],
+    "asyncComplete": false,
+    "loopOver": [],
+    "onStateChange": {},
+    "permissive": false
+    }
+    </copy>
+    ```
+
+3. Click **Save**.
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+* **Author** - Sylaja Kannan, Consulting User Assistance Developer
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
+* **Last Updated By/Date** - Sylaja Kannan, September 2025
