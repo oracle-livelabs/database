@@ -385,9 +385,9 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 
 17. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
 
-18. Delete the JSON code that appears by default and paste the following code to add code for an Agentic Planner task with the required tasks and tools.
+18. Delete the JSON code that appears by default and paste the following code to create an agent profile to build a document verification agent using Agentic task and MCP tools. With Agentic tasks, you can build the LLM-based agentic task in MicroTx Workflow. You can also use internal tools and tools from external MCP servers in the agent definition.
 
-   ```json
+    ```json
     <copy>
     {
     "name": "Agentic Planner",
@@ -491,9 +491,13 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
     </copy>
     ```
 
-20. Click **Save**.
+19. Click **Save**.
 
+Here are the details of a few other tasks that are used in the Agentic planner.
 
+* The Loan Compliance microservice validates CIBIL and AML checks. This microservice is pre-configured and available locally in the LiveLabs environment.
+* The Loan Processing agent is developed using Langraph in Python. It validates the user's debt-to-credit ratio and makes the final loan offer. This agent is pre-created and available locally in the LiveLabs environment.
+* Human task validates AML failure. If the loan compliance agent fails the workflow due to an AML check failure, invoke human intervention to validate the rejection. If the user is wrongly flagged, it allow the workflow to proceed or reject and fail the workflow. The workflow will remain paused until manual verification and sign-off are completed.
 
 
 ## Task 6: Check the Execution Status of the Orchestrator (Planner)
