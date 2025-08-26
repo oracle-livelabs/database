@@ -49,23 +49,18 @@
     },
     {
       "title": "Lab 7: Run a Workflow",
-      "description": "Provisioning the Lab Environment",
+      "description": "Run the workflow",
       "filename": "../../run/run.md"
     },
     {
-      "title": "Environment Cleanup",
+      "title": "Environment Clean Up",
       "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
+      "filename": "../../cleanup-stack/cleanup-stack.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
-    },
-    {
-      "title": "Other LiveLabs you might like",
-      "description": "Other LiveLabs you might like",
-      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

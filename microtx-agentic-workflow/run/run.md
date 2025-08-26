@@ -51,15 +51,15 @@ This lab assumes you have:
 
     ![View the workflow execution ID](images/execution-history.png)
 
-5. Click the ID. The status of the workflow execution is displayed in a new browser tab as shown in the following image. Green indicates that the steps have already been executed.
+5. Click the workflow execution ID. The status of the workflow execution is displayed in a new browser tab as shown in the following image. Green indicates that the steps have already been executed successfully.
     ![View the status of the workflow execution](images/workflow-execution-status.png)
 
 6. Click **Refresh** to view the updated status of the workflow after a few seconds. It might take 90 seconds or more to execute the workflow completely.
-    When the Send Slack notification step turns green as shown in the following image, the workflow stops executing.
+    When the Send Email notification step turns green as shown in the following image, the workflow stops executing.
     ![View the status of the workflow execution](images/human-task-approval.png)
 
-    A notification is sent on Slack to approve the loan as shown in the following figure.
-    ![Approve loan notification on Slack](images/slack-notification.png)
+A notification is sent to the Thunderbird email client that you had configured earlier. As shown in the following figure the notification is a request to approve the loan. Note that the email notification is sent for the highlighted workflow ID. This requires a human being to review the documents and approve the loan request.
+![Email notification to approve the loan request](images/email-notification.png)
 
 ## Task 2: Approve the Loan Request
 
