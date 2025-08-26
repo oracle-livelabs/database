@@ -13,9 +13,11 @@ Estimated Lab Time: 20 minutes
 ### Objectives
 
 In this lab, you will:
+
 * Understand the various building blocks of a workflow and create a few building blocks.
 
 This lab assumes you have:
+
 * An Oracle Cloud account
 * All previous labs successfully completed
 
@@ -27,11 +29,11 @@ This lab assumes you have:
 
 3. Click **New Workflow Definition**.
    A JSON file is displayed, which is the default workflow in the left pane. In the right pane, the components of the workflow are depicted visually.
-	 ![Default Workflow Definition](images/default-workflow.png)
+  ![Default Workflow Definition](images/default-workflow.png)
 
 4. Delete the JSON code that appears by default and paste the following code.
 
-  	```
+   ```json
     <copy>
     {
      "name": "acme_bank_loan_processing_workflow",
@@ -54,23 +56,23 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 3. Click **New LLM Definition**. The **New LLM Definition** dialog box appears.
 
 4. Enter the following information.
-
     * Name: Enter openaai-dev as a unique and descriptive name to identify this LLM definition in workflows.
     * Model Provider: Select OPENAI as the model provider.
     * Models: Enter gpt-4o, gpt-4o-mini as a comma-separated list of the names of the models which you intend to use.
     * Description: Enter a description for the LLM definition.
     * API Key: Paste your OpenAI API key, which authenticates your requests.
-    * Base URL: Enter https://api.openai.com/ as the URL to access the API endpoint of the LLM.
+    * Base URL: Enter <https://api.openai.com/> as the URL to access the API endpoint of the LLM.
 
-	 ![New LLM Definition](images/openai-llm-connector.png)
+     ![New LLM Definition](images/openai-llm-connector.png)
 
-5. Click **Submit**.
+5.  Click **Submit**.
     Your new definition appears in the list of available LLM definitions.
 
-6. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+6.  In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
 
-7. Delete the JSON code that appears by default and paste the following code.
-  	```
+7.  Delete the JSON code that appears by default and paste the following code.
+
+    ```json
     <copy>
     {
     "name": "Extract Loan Application details",
@@ -100,12 +102,13 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 
 12. Enter the following information.
 
-	  ![New Prompt Definition](images/new-prompt-template.png)
+   ![New Prompt Definition](images/new-prompt-template.png)
 
     * Name: Enter `loan_application_nl_2_json` as a unique and descriptive name to identify this prompt definition in workflows.
   
     * Description: Optional. Enter the following description for the prompt definition.
-      	```text
+
+       ```text
         <copy>
         Extract the input parameters from natural language input.
         </copy>
@@ -113,7 +116,7 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 
     * Prompt Template: Create a prompt template to guide the planner's decision-making strategy. Here's an example prompt template which extracts the loan application details, such as loan amount and tenure from the input text.
 
-      	```text
+       ```text
         <copy>
         Extract the loan application details like loan amount, tenure, ssn, id etc. from the input text. 
         Input: ${loan_application_text}
@@ -145,7 +148,7 @@ To achieve this, let's add a SWITCH statement task and define the decision cases
 
 2. Delete the JSON code that appears by default and paste the following code.
 
-  	```
+   ```json
     <copy>
     {
     "name": "Check loan application completeness",
@@ -238,7 +241,7 @@ Once the application is deemed complete, create an application record in the dat
 
 2. Delete the JSON code that appears by default and paste the following code.
 
-  	```
+   ```json
     <copy>
     {
     "name": "auditLoanOracleSql",
@@ -273,6 +276,226 @@ Once the application is deemed complete, create an application record in the dat
 
 3. Click **Save**.
 
+## Task 5: Process Loan Using a Planner Task in a Multi Agent or Microservices Orchestration
+
+Next, a Planner Task receives this structured information and coordinates the entire flow by assigning specialized agents and tools to handle different parts of the verification process.
+
+* It manages the steps, such as document verification using OCR or checking the applicant's identity. The planner checks compliance, for example credit score and anti-money laundering rules. If review is required by a human, the planner notifies the right people. It also calls the loan processing task to perform other loan application formalities.
+* A human task is added to enable admin cross-verification at runtime in case of any anti-money laundering (AML) check failures.
+
+At its core, the Agentic Planner uses an LLM to dynamically decide the next steps in a workflow. You can think of it as the brain behind the orchestration—it takes in a natural language goal, understands the tools and tasks available, and then figures out the optimal sequence of actions.
+
+Here's how the agentic planner works in simple steps:
+
+  1. First, we give the planner all the information it needs. That includes the goal, a prompt, any tools it can use, and a list of tasks.
+  2. Next, the planner figures out what to do next. It decides the sequence and order of the tasks and makes sure everything fits together.
+  3. Then, the planner sends its instructions to the orchestrator, which starts executing the planned tasks.
+  4. This process keeps looping—planning, executing, and checking—until the final goal is reached.
+
+Agentic Planner requires LLM access, a prompt, and tools as input parameters. Next, let's create required connectors and prompt template.
+
+1. Let's reuse the `openaai-dev` LLM definition that you have created in Task 2.
+
+2. In the navigation menu, click **Agentic AI**, and then click the **Prompt** tab. The Prompt Definitions list page opens. All the prompts that you have defined are displayed in a table.
+
+3. Click **New Prompt Definition**.
+
+4. Enter the following information.
+
+    * Name: Enter `loan_process_planner` as a unique and descriptive name to identify this prompt definition in workflows.
+  
+    * Description: Optional. Enter the following description for the prompt definition.
+
+       ```text
+        <copy>
+        Loan process tasks planner.
+        </copy>
+        ```
+
+    * Prompt Template: Create a prompt template to guide the planner's decision-making strategy. Here's an example prompt template which extracts the loan application details, such as loan amount and tenure from the input text.
+
+       ```text
+        <copy>
+        Your goal is to execute the loan approval. Do call the required tasks/tools to finish the loan approval process as per the below conditions:
+        1. First step is to verify the documents. Do propose to only call the document verification task and parse the response for success. If the verification fails, do exit with status failed.
+        2. Second step, propose to call compliance agent and loan processing agent tasks in parallel. Handle the failures in below order:
+            2.a. If the compliance agent is failed due to the low credit score. And if the credit score is between 400 to 700, do propose to call the verify income proof tool with input as ${document}. parse the response for success. If the verification fails, do exit with status failed.
+            2.b. If the compliance agent is failed with the AML (anti Money Laundering) check, then propose to call notify aml check failure to admin and human aml verification tasks in parallel.
+        </copy>
+        ```
+
+5. Click **Submit**.
+
+6. Open the navigation menu and click **Connectors**, and then click the **MCP** tab.
+
+7. Click **New MCP Definition**. The New MCP Definition dialog box appears.
+
+8. Enter the following information to create an MCP Server connector for document verification.
+    * Name: Enter `doc_mcp` as a unique and descriptive name to identify this MCP server definition in workflows.
+    * Description: Enter a description for the tool configuration, such as Document verification custom MCP server.
+    * Transport: Select SSE from the drop-down list to specify the network transport protocol used by the MCP server for communication.
+    * URL: Enter the URL of the MCP server as `http://localhost:8000`.
+    * SSE Endpoint: Enter `/mcp` as the full endpoint path for server-sent events (SSE). This is required for communicating with the MCP server.
+
+   ![Create an MCP Server connector for document verification](images/doc-verify-mcp-server-connector.png)
+
+9. Click **Submit**. Your new connector appears in the list of available MCP definitions.
+
+10. Click **New MCP Definition**. The New MCP Definition dialog box appears.
+
+11. Enter the following information to create an MCP server connector for Oracle Database.
+    * Name: Enter `oracledb_mcp` as a unique and descriptive name to identify this MCP server definition in workflows.
+    * Description: Enter a description for the tool configuration, such as Oracle Database MCP server.
+    * Transport: Select SSE from the drop-down list to specify the network transport protocol used by the MCP server for communication.
+    * URL: Enter the URL of the MCP server as `http://localhost:8000`.
+    * SSE Endpoint: Enter `/mcp` as the full endpoint path for server-sent events (SSE). This is required for communicating with the MCP server.
+
+     ![Create an MCP server connector for Oracle Database.](images/mcp2.png)
+
+12. Click **Submit**. Your new connector appears in the list of available MCP definitions.
+
+13. Open the navigation menu and click **Agentic AI**, and then click the **Agent Profile** tab.
+
+14. Click **New Agent Profile Definition**. The New Agent Profile Definition dialog box appears.
+
+15. Enter the following information to create an MCP server connector for Oracle Database.
+    * Name: Enter `loan_document_verification_agent` as a unique and descriptive name to identify this agent profile definition in workflows.
+    * Description: Enter a description for the tool configuration, such as Loan Documents Verification Agent.
+    * Role: Enter `Loan application documents verification agent` as the intended role or function of the agent.
+    * Instruction: Enter the specific prompt or set of instructions that guide the agent's operation. Describe what the agent should do when invoked, how to use tools, and how to respond to prompts.
+
+      ```text
+      <copy>
+
+      You are a loan application document verification agent, you are given with the document name and list of tools to execute the verification.
+        - Extract the document key details from the document ${document} using tool.
+        - If the extracted info confidence is less than 0.7, fail the verification.
+        - Verify the identity proof by passing above extracted identification number and type. Use tool to execute the verification.
+        - response should only contain in json format. No commentary
+        - respond with success or failure with key details.
+      </copy>
+      ```
+
+    * Tools: Enter `ociVisionApi`. The agent accesses and invokes the specified tools during workflow execution.
+    * MCP Servers: Select **doc_mcp** as the MCP servers that the agent will use for executing tasks or accessing resources.
+    * LLM Profile: Select **gpt-4o** as the LLM profile that will power the agent's reasoning and language tasks.
+    * Use Memory: Select this option for the agent to retain details about the interactions with LLM.
+
+16. Click **Submit**. Your new agent profile appears in the list of available agent profile definitions.
+
+17. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+
+18. Delete the JSON code that appears by default and paste the following code to add code for an Agentic Planner task with the required tasks and tools.
+
+   ```json
+    <copy>
+    {
+    "name": "Agentic Planner",
+    "taskReferenceName": "agentic_planner",
+    "inputParameters": {
+        "llmProfile": {
+            "name": "openai-dev",
+            "model": "gpt-4o"
+        },
+        "promptTemplate": "loan_process_planner",
+        "promptVariables": {
+            "workflowId": "${workflow.workflowId}"
+        },
+        "mcpServers": [
+            "doc_mcp",
+            "oracledb_mcp"
+        ],
+        "tasks": [
+            {
+                "name": "Loan Document Verification Task",
+                "taskReferenceName": "document_verification",
+                "inputParameters": {
+                    "agentProfile": "loan_document_verification_agent",
+                    "promptVariables": {
+                        "document": "${workflow.input.document}"
+                    }
+                },
+                "type": "AGENTIC_TASK"
+            },
+            {
+                "name": "Compliance Agent",
+                "taskReferenceName": "compliance_agent",
+                "type": "HTTP",
+                "inputParameters": {
+                    "http_request": {
+                        "method": "POST",
+                        "uri": "http://loan-compliance-service:8001/api/compliance/check",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": {
+                            "socialSecurityNumber": "${extract_loan_details.output.ssn}"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "loan_processing_agent_task",
+                "taskReferenceName": "loan_processing_agent_task",
+                "inputParameters": {
+                    "applicantId": "12345"
+                },
+                "type": "SIMPLE"
+            },
+            {
+                "name": "Notify AML verification failure for reverification",
+                "taskReferenceName": "notify_aml_check_failure_to_admin",
+                "type": "HTTP",
+                "inputParameters": {
+                    "http_request": {
+                        "method": "POST",
+                        "uri": "http://notification-service:8085/email-service/sendMail",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": {
+                            "from": "microtx.user@localhost",
+                            "to": "microtx.user@microtx.com",
+                            "cc": "",
+                            "subject": "Loan application rejected!",
+                            "body": "Loan application rejected. User is flagged in Anti-money laundering (AML) database. Do reverify and accept/reject application. \nUser laon request : ${workflow.input.loan_application_text}",
+                            "isEmailBodyText": true
+                        }
+                    }
+                },
+                "readResponse": false
+            },
+            {
+                "name": "human_aml_verification_task",
+                "taskReferenceName": "human_aml_verification",
+                "type": "HUMAN",
+                "inputParameters": {
+                    "applicant": "${extract_loan_details.output}"
+                }
+            }
+        ]
+    },
+    "type": "AGENTIC_PLANNER",
+    "decisionCases": {},
+    "defaultCase": [],
+    "forkTasks": [],
+    "startDelay": 0,
+    "joinOn": [],
+    "optional": false,
+    "defaultExclusiveJoinTask": [],
+    "asyncComplete": false,
+    "loopOver": [],
+    "onStateChange": {},
+    "permissive": false
+    }
+    </copy>
+    ```
+
+20. Click **Save**.
+
+
+
+
 ## Task 6: Check the Execution Status of the Orchestrator (Planner)
 
 Terminate the workflow if the Agentic planner fails the multi-agent orchestration. Add a SWITCH statement task to achieve this.
@@ -281,7 +504,7 @@ Terminate the workflow if the Agentic planner fails the multi-agent orchestratio
 
 2. Delete the JSON code that appears by default and paste the following code.
 
-  	```
+   ```
     <copy>
     {
       "name": "Check planner execution status",
@@ -376,7 +599,7 @@ Before sharing the final decision with the user, a human operator conducts a fin
 
 2. Delete the JSON code that appears by default and paste the following code.
 
-  	```
+   ```
     <copy>
     {
       "name": "Send Email notification",
@@ -443,7 +666,7 @@ Update the final status of the loan application using a SQL Task.
 
 2. Delete the JSON code that appears by default and paste the following code.
 
-  	```
+   ```
     <copy>
     {
       "name": "auditFInalLoanOracleSql",
