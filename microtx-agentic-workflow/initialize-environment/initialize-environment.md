@@ -185,16 +185,6 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
 4. Click **Save**.
 
-## Task 7: View the Overall Workflow
-
-1. Open the navigation menu and then click **Definitions**.
-
-2. In the **Workflows** tab, click the `acme_bank_loan_processing_workflow` workflow.
-   ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
-
-3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed.
-   ![View the selected workflow in Workflow UI](images/view-workflow.png)
-
 You may now [proceed to the next lab](#next).
 
 ## Acknowledgements

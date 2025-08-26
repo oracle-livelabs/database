@@ -24,7 +24,17 @@ This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
 
-## Task 1: Initiate the Workflow
+## Task 1: View the Overall Workflow
+
+1. Open the navigation menu and then click **Definitions**.
+
+2. In the **Workflows** tab, click the `acme_bank_loan_processing_workflow` workflow.
+   ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
+
+3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed. The code appears in the left pane and you can see a visual representation of the code components, such as tasks in the right pane.
+   ![View the selected workflow in Workflow UI](images/view-workflow.png)
+
+## Task 2: Initiate the Workflow
 
 1. In the Workflow UI, click **Workbench**.
     The **Workflow Workbench** dialog box appears.
@@ -63,7 +73,7 @@ A notification is sent to the Thunderbird email client that you had configured e
 
 The workflow does not progress until a human approves or rejects the loan request.
 
-## Task 2: Approve the Loan Request
+## Task 3: Approve the Loan Request
 
 1. Open the MicroTx Workflow UI in a new browser tab.
 
@@ -87,7 +97,7 @@ The workflow does not progress until a human approves or rejects the loan reques
     The human approval task is now marked in green and status of the workflow changes to **Completed**.
     ![Workflow execute complete](images/workflow-run-complete.png)
 
-## Task 3: Verify the Status of the Workflow
+## Task 4: Verify the Status of the Workflow
 
 1. Copy the Workflow ID from the Workbench as shown in the following image.
     ![Workflow ID](images/workflow-id.png)

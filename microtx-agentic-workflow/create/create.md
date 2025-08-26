@@ -273,6 +273,222 @@ Once the application is deemed complete, create an application record in the dat
 
 3. Click **Save**.
 
+## Task 6: Check the Execution Status of the Orchestrator (Planner)
+
+Terminate the workflow if the Agentic planner fails the multi-agent orchestration. Add a SWITCH statement task to achieve this.
+
+1. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+
+2. Delete the JSON code that appears by default and paste the following code.
+
+  	```
+    <copy>
+    {
+      "name": "Check planner execution status",
+      "taskReferenceName": "check_planner_execution_status",
+      "inputParameters": {
+        "switchCaseValue": "${agentic_planner.output.status}"
+      },
+      "type": "SWITCH",
+      "decisionCases": {
+        "FAILED": [
+          {
+            "name": "Notify loan application rejection",
+            "taskReferenceName": "notify_loan_application_rejection",
+            "inputParameters": {
+              "http_request": {
+                "method": "POST",
+                "uri": "http://notification-service:8085/email-service/sendMail",
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "from": "microtx.user@localhost",
+                  "to": "microtx.user@microtx.com",
+                  "cc": "",
+                  "subject": "Loan application rejected!",
+                  "body": "Loan application rejected due to planner failure. ${agentic_planner.output}",
+                  "isEmailBodyText": true
+                }
+              }
+            },
+            "type": "HTTP",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "onStateChange": {},
+            "permissive": false
+          },
+          {
+            "name": "terminate loan application",
+            "taskReferenceName": "terminate_loan_application_ref",
+            "inputParameters": {
+              "terminationStatus": "TERMINATED",
+              "terminationReason": "loan application rejected",
+              "workflowOutput": "${agentic_planner.output}"
+            },
+            "type": "TERMINATE",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "onStateChange": {},
+            "permissive": false
+          }
+        ]
+      },
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "evaluatorType": "value-param",
+      "expression": "switchCaseValue",
+      "onStateChange": {},
+      "permissive": false
+    }
+    </copy>
+    ```
+
+    Where, 'http://notification-service:8085/email-service/sendMail' is the email webhook that you have added for sending email notifications in case of a failure.
+
+3. Click **Save**.
+
+## Task 7: Human Intervention to Validate Workflow Execution
+
+Before sharing the final decision with the user, a human operator conducts a final review and approves or rejects the loan through a dedicated task.
+
+1. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+
+2. Delete the JSON code that appears by default and paste the following code.
+
+  	```
+    <copy>
+    {
+      "name": "Send Email notification",
+      "taskReferenceName": "email_notify",
+      "inputParameters": {
+        "http_request": {
+          "method": "POST",
+          "uri": "http://notification-service:8085/email-service/sendMail",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "from": "microtx.user@localhost",
+            "to": "microtx.user@microtx.com",
+            "cc": "",
+            "subject": "Loan approval request!",
+            "body": "Please approve loan req ${workflow.workflowId}",
+            "isEmailBodyText": true
+          }
+        }
+      },
+      "type": "HTTP",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {},
+      "permissive": false
+    },
+    {
+      "name": "human_approval_task",
+      "taskReferenceName": "wait_for_approval",
+      "inputParameters": {
+        "applicant": "${extract_loan_details.output}"
+      },
+      "type": "HUMAN",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {},
+      "permissive": false
+    }
+    </copy>
+    ```
+
+3. Click **Save**.
+
+## Task 8: Update the Loan Application Status
+
+Update the final status of the loan application using a SQL Task.
+
+1. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+
+2. Delete the JSON code that appears by default and paste the following code.
+
+  	```
+    <copy>
+    {
+      "name": "auditFInalLoanOracleSql",
+      "taskReferenceName": "audit_final_loan_oracle_sql_task_ref",
+      "inputParameters": 
+      {
+        "databaseProfile": "oracle-database-livelabuser",
+        "sqlStatement": "UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'APPROVED' WHERE APPLICATION_ID = ?;",
+        "parameters": [
+          "${workflow.workflowId}"
+        ],
+        "type": "UPDATE"
+      },
+      "type": "SQL",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {},
+      "permissive": false
+    }
+    ],
+     "inputParameters": [],
+     "outputParameters": {},
+     "schemaVersion": 2,
+     "restartable": true,
+     "workflowStatusListenerEnabled": false,
+     "ownerEmail": "you@example.com",
+     "timeoutPolicy": "ALERT_ONLY",
+     "timeoutSeconds": 0,
+     "variables": {},
+     "inputTemplate": {},
+     "enforceSchema": true,
+     "metadata": {}
+    }
+    </copy>
+    ```
+
+3. Click **Save**.
+
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
