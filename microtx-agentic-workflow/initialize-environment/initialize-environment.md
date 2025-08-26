@@ -40,20 +40,21 @@ This lab assumes you have:
     cd $HOME/WorkflowScripts
     ./start_oracle_db.sh
     </copy>
-   ```
+    ```
 
    Wait for a few seconds. When the database instance is ready, you will see the following message.
-   ```text
-   Status of the Oracle FREE 23ai service:
-   LISTENER status: RUNNING
-   FREE Database status: RUNNING
-   ```
+
+    ```text
+    Status of the Oracle FREE 23ai service:
+    LISTENER status: RUNNING
+    FREE Database status: RUNNING
+    ```
 
    This Oracle Database 23ai Free instance is configured with two schemas. MicroTx Workflow uses one schema to store the transaction data. A SQL task uses the other schema, named `livelabsUser`. The MCP server connects to the `livelabsUser` schema.
 
 ## Task 2: Set the Password to Receive Email Notifications
 
-The Thunderbird email client on your remote desktop has been pre-configured with the user name `microtx.user` to receive emails notifications whenever a loan request requires approval.
+The Thunderbird email client on your remote desktop has been pre-configured with the user name `microtx.user`. MicroTx Workflow sends  emails notifications whenever a loan request requires approval.
 
 1. Run the following command to reset the password for the `microtx.user` user who receives email notifications to approve a loan request.
 
@@ -63,19 +64,21 @@ The Thunderbird email client on your remote desktop has been pre-configured with
     </copy>
    ```
 
-2. You are prompted to enter the password, and then confirm it. The following message is displayed.
+2. You are prompted to enter the password, and then confirm it. The following message is displayed when the password is reset.
 
-   ```text
-   passwd: all authentication token updated successfully.
-   ```
+    ```text
+    passwd: all authentication token updated successfully.
+    ```
 
-   Remember the password as you must provide this password to access the SMTP server and also provide this password to log into Thunderbird email client.
+    Remember the password as you must provide this password to access the SMTP server and also provide this password to log into the Thunderbird email client.
 
-3. Open the Thunderbird email client on your remote desktop.
+3. Open the Thunderbird email client on your remote desktop. You are prompted to enter a password for the `microtx.user`.
 
-4. You are prompted to enter a password. Enter the password that you had reset in the previous step.
+   ![Enter a new password for microtx.user](./images/email-password.png)
 
-You can now view your email notifications in Thunderbird email client.
+4. Enter the password that you had reset in the previous step, and then click OK.
+
+You can now view your emails in Thunderbird email client.
 
 ## Task 3: Configure Minikube
 
@@ -91,19 +94,20 @@ Follow the instructions in this section to configure Minikube and start a tunnel
     ```
    After a few seconds, the following message is displayed.
 
-   ```text
-   Minikube started successfully.
-   ```
+    ``text
+    Minikube started successfully.
+    ```
 
-   It also starts a Minikube tunnel in a new tab.
-   **Example output**
+    It also starts a Minikube tunnel in a new tab.
 
-   ![Minikube tunnel in a new tab](./images/minikube-tunnel.png)
+    **Example output**
 
-   > [! WARNING]
-   > Do not close this tab. Keep this tab open for the entire duration of the workshop.
+    ![Minikube tunnel in a new tab](./images/minikube-tunnel.png)
 
-   This command also returns the external IP address of the ngnix ingress controller.
+    > [! WARNING]
+    > Do not close this tab. Keep this tab open for the entire duration of the workshop.
+
+    This command also returns the external IP address of the ngnix ingress controller.
 
 2. Run the following command to verify that the external IP address of the load balance which was returned in the previous step is correct.
 
@@ -115,11 +119,11 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
     **Example output**
 
-   ```text
-    NAME                                              TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
-   nginx-ingress-ingress-nginx-controller             LoadBalancer   192..........   192..........  80:31572/TCP,443:32415/TCP   23h
-   nginx-ingress-ingress-nginx-controller-admission   ClusterIP      192.0.........  <none>         443/TCP
-   ```
+    ```text
+    NAME                                               TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
+    nginx-ingress-ingress-nginx-controller             LoadBalancer   192..........   192..........  80:31572/TCP,443:32415/TCP   23h
+    nginx-ingress-ingress-nginx-controller-admission   ClusterIP      192.0.........  <none>         443/TCP
+    ```
 
     From the output note down the value of `EXTERNAL-IP` for the load balance. You will use this value later to access MicroTx Workflow.
 
@@ -152,19 +156,16 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
 	![MicroTx Workflow UI](images/deployed-workflow-services.png)
 
-After all the services are built, a new terminal is opened for workflow UI and the Workflow UI is displayed as shown in the following image.
-	![MicroTx Workflow UI](images/deployed-workflow-services.png)
-
 2. Open `http://$CLUSTER_IPADDR/workflow/` in any browser tab to access the MicroTx Workflow UI.
 
 3. Run the following commands to initialize the SQLcl MCP server and configure the  The workflow uses this MCP server 
 
-   ```
-   <copy>
-   cd $HOME/WorkflowScripts
-   ./initilize_oracledb_mcp_server.sh
-   </copy>
-   ```
+    ```
+    <copy>
+    cd $HOME/WorkflowScripts
+    ./initilize_oracledb_mcp_server.sh
+    </copy>
+    ```
 
 ## Task 5: Create an API Key to Access OpenAI
 

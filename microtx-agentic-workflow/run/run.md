@@ -31,13 +31,15 @@ This lab assumes you have:
 
 2. In the **Workflow Name** drop-down list, select the `acme_bank_loan_processing_workflow` workflow.
 
-3. In the **Input (JSON)** text box, paste the following lines of code which provides details about the loan amount, loan tenure, and SSN number of the customer. For document verification, upload a driver's license, this file is already available in object storage.
+3. In the **Workflow Version** drop-down list, select **Latest Version**.
+
+4. In the **Input (JSON)** text box, paste the following lines of code which provides details about the loan amount, loan tenure, and SSN number of the customer. For document verification, upload a driver's license, this file is already available in object storage.
 
     ```
     <copy>
     {
-     "loan_application_text": "I am looking for the $3000 loan for 3 years tenure. Provide me best interest rate and terms. My ssn number is 123-45-6789",
-     "document": "Californian_sample_driver's_license,_c._2019-1.jpeg"
+      "loan_application_text": "I am looking for the $3000 loan for 3 years tenure. Provide me best interest rate and terms. My ssn number is 123-45-6789",
+      "document": "/app/samples_for_ocr/driving-license.png"
     }
     </copy>
     ```
