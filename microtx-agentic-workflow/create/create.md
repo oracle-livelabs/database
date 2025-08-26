@@ -15,10 +15,6 @@ Estimated Lab Time: 20 minutes
 In this lab, you will:
 * Understand the various building blocks of a workflow and create a few building blocks.
 
-### Prerequisites (Optional)
-
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is necessary to complete the lab. Do NOT list each previous lab as a prerequisite.*
-
 This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
@@ -29,11 +25,9 @@ This lab assumes you have:
 
 2. Click the **Workflow** tab.
 
-	 ![New Workflow Definition](images/sample1.png)
-
 3. Click **New Workflow Definition**.
    A JSON file is displayed, which is the default workflow in the left pane. In the right pane, the components of the workflow are depicted visually.
-	 ![Default Workflow Definition](images/sample1.png)
+	 ![Default Workflow Definition](images/default-workflow.png)
 
 4. Delete the JSON code that appears by default and paste the following code.
 
@@ -46,6 +40,7 @@ This lab assumes you have:
     }
     </copy>
     ```
+
 5. Click **Save**.
 
 ## Task 2: Extract Loan Application Details
@@ -124,7 +119,7 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
         Input: ${loan_application_text}
         Constraints:
           - Only output the structured plan in JSON format. No extra commentary.
-          - Return only the raw JSON object as plain text — no ```json, no backticks, no explanation.
+          - Return only the raw JSON object as plain text — no json, no backticks, no explanation.
           - Don't extract any other garbage info. If nothing related to loan application found in input text, just mark the status as failed with message. Or else mark status as success.
         Example output format:
         json
