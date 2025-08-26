@@ -61,9 +61,11 @@ This lab assumes you have:
 A notification is sent to the Thunderbird email client that you had configured earlier. As shown in the following figure the notification is a request to approve the loan. Note that the email notification is sent for the highlighted workflow ID. This requires a human being to review the documents and approve the loan request.
 ![Email notification to approve the loan request](images/email-notification.png)
 
+The workflow does not progress until a human approves or rejects the loan request.
+
 ## Task 2: Approve the Loan Request
 
-1. Open the Workflow UI in a new browser tab.
+1. Open the MicroTx Workflow UI in a new browser tab.
 
 2. Open the navigation menu and click **Workflow Notification**.
    ![View the status of the workflow execution](images/workflow-notification.png)
@@ -81,17 +83,32 @@ A notification is sent to the Thunderbird email client that you had configured e
 
 6. Click **OK**.
 
-7. Refresh the **Workflow Notifications** page.
-    No workflow notification is displayed.
-
-8. Refresh the browser tab where the status of the workflow execution is displayed.
+7. Refresh the browser tab where the status of the workflow execution is displayed in Workbench.
     The human approval task is now marked in green and status of the workflow changes to **Completed**.
-    ![Workflow execute complete](images/workflow-execution-status.png)
+    ![Workflow execute complete](images/workflow-run-complete.png)
 
-9. Click **human_approval_task**, and then click the **Output** tab to view the output as shown in the following image.
-    ![alt text](images/workflow-output.png)
+## Task 3: Verify the status of the Workflow
 
-    A notification is also sent on Slack when the loan is approved.
+1. Copy the Workflow ID from the Workbench as shown in the following image.
+    ![Workflow ID](images/workflow-id.png)
+
+1. Open Oracle SQL Developer.
+
+2. Under **Oracle Connections**, right-click **livelabsUser**, and then click **Connect** to connect to the `livelabUser` schema.
+    ![Connect to the livelabUser schema](images/sql-connect.png)
+
+3. Enter the following query to retrieve the status of an application. Replace `<workflow-id>` with the value that you have copied in step 1.
+
+    ```
+    <copy>
+        SELECT * FROM loan_applications
+        WHERE application_id = '<workflow-id>';
+    </copy>
+    ```
+
+4. Click Run to run the query.
+    As shown in the following image, the **Query Result** displays the status of the application as **APPROVED**. Which indicates that the application has been processed successfully.
+    ![View the status of the workflow](images/sql-workflow-status.png)
 
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
