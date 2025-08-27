@@ -4,6 +4,11 @@
 
 This workshop focuses on migrating from JSON Collections to Duality Views using the JSON to Duality Migrator in Oracle Database 23ai. You will learn how to migrate apps from a document to relational model automatically without any application changes.
 
+Watch this quick video to know why JSON Relational Duality is awesome.
+
+[](youtube:Eb_ytQBw2i8)
+
+
 ### **JSON Relational Duality**
 
 JSON Relational Duality is a landmark capability in Oracle Database 23ai providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
@@ -12,11 +17,11 @@ JSON Relational Duality helps to converge the benefits of both document and rela
 
 Key benefits of JSON Relational Duality:
 
-* Experience extreme flexibility in building apps using Duality Views. Developers can access the same data relationally or as hierarchical documents based on their use case and are not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
-* Experience simplicity by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updatable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning.
-* Enable flexibility and simplicity in building multiple apps on same data. Developers can define multiple Duality Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
-* Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically.
-* Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new value-based concurrency control protocol provided with Duality Views supports high concurrency updates. The new protocol also works efficiently for interactive applications since the data is not locked during human thinking time.
+* **Experience extreme flexibility** in building apps using Duality Views. Developers can access the same data relationally or as hierarchical documents based on their use case and are not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
+* **Experience simplicity** by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updatable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning.
+* **Enable flexibility and simplicity** in building multiple apps on same data. Developers can define multiple Duality Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
+* **Eliminate the inherent problem of data duplication and data inconsistency** in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically.
+* **Support high concurrency access and updates**. Traditional locks don’t work well for modern apps. A new value-based concurrency control protocol provided with Duality Views supports high concurrency updates. The new protocol also works efficiently for interactive applications since the data is not locked during human thinking time.
 
 ### **JSON to Duality Migrator**
 
@@ -42,11 +47,6 @@ How does the JSON to Duality Migrator work?
 3. Eliminates duplication by identifying shared data across collections
 4. Uses functional dependency analysis to automatically identify primary keys for each entity and foreign keys between the identified entities
 
-Watch this quick video to know why JSON Relational Duality is awesome.
-
-[](youtube:Eb_ytQBw2i8)
-
-Estimated Time: 50 minutes
 
 ### Objectives
 
@@ -56,6 +56,8 @@ In this lab, you will:
 * Work with Duality Views
 * Migrate from JSON Collections to Duality Views using the JSON to Duality Migrator
 * Use the JSON to Duality Migrator's hint infrastructure to guide relational schema design
+
+Estimated Time: 50 minutes
 
 ### Prerequisites
 
