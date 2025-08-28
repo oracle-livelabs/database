@@ -23,7 +23,8 @@ This lab assumes you have:
 
 ## Task 1: Get Compartment OCID
 
-Once you LiveLabs test environment was set up, you should have clicked on a button saying to 'Attend the Workshop.'This will take you to a screen that looks similar to this.
+Once you LiveLabs test environment was set up, you should have clicked on a button saying to 'Launch Workshop.'This will take you to a screen that looks similar to this.
+Click on View Login Info if the information is not shown automatically.
 
   ![Attend the Workshop](images/green-button.png)
 
@@ -43,7 +44,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 3. In this step we need to execute a few commands in the Cloud Shell. To start the Cloud Shell, we have to select our compartment first. Click on the 'hamburger' menu on the top left. Click on **Databases** and then click on **Tables**.
 
-    ![Choose Compartment](images/nosql-tables.png)
+    ![Choose Compartment](https://oracle-livelabs.github.io/common/images/console/nosql-tables.png)
 
 4. In the **Compartment** drop down on the left, pick you compartment. In Task 1, you should have taken note of your compartment. To find it, expand the root node (**c4u04**), then expand the **Livelabs** node. Your compartment should be listed under there. In this example we are using **LL11090-COMPARTMENT**.
 
@@ -83,15 +84,11 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 
 
-9. On the left, click **API Keys**, then click **Add API Key.**
+9. click **Token and keys**, then click **Add API Key.**
 
     ![Add API Key](images/api-keys.png)
 
-10. Click on **Paste Public Key**
-
-    ![Paste Public Key](images/paste-key.png)
-
-   Paste your public key into the **Public Key** text box. Click **Add** at the bottom.
+10. Click on **Paste Public Key** and Paste your public key into the **Public Key** text box. Click **Add** at the bottom.
 
    ![Add](images/hit-add.png)
 

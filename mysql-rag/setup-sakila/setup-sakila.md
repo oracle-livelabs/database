@@ -19,7 +19,7 @@ In this lab, you will be guided through the following tasks:
 
 This lab assumes you have:
 
-- Completed Labs 4
+- Completed Labs 5
 
 ## Task 1: Install Sakila Database
 
@@ -141,4 +141,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Craig Shallahamer, Applied AI Scientist, Viscosity North America
 - **Contributor** - Perside Foster, MySQL Solution Engineering 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , April 2025
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , July 2025

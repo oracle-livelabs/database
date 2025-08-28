@@ -25,7 +25,7 @@ In this lab, you will be guided through the following tasks:
 
 This lab assumes you have:
 
-- Completed Labs 2
+- Completed Labs 3
 
 ## Task 1: Install Sakila Database
 
@@ -278,8 +278,7 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributor** 
-    - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
-    - Selena Sanchez, MySQL Staff Solutions Engineer,
-    - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
-- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, April  2025
+- **Contributors** 
+- Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
+- Selena Sanchez, MySQL Staff Solutions Engineer,
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, July   2025
