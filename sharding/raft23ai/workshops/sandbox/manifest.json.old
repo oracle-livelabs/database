@@ -9,27 +9,28 @@
       "filename": "../../intro/intro.md"
     },
     {
-      "title": "Get Started",
-      "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "publisheddate": "06/30/2020",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
-      "title": "Lab 1: Initialize Environment",
+      "title": "Lab 2: Initialize Environment",
       "description": "Initialize Environment",
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Demo UI Application for Raft Replication",
+      "title": "Lab 3: Demo UI Application for Raft Replication",
       "description": "Demo UI Application for Raft Replication",
       "filename": "../../ui-app/raft-demo-ui-app.md"
     },
     {
-      "title": "Lab 3: Explore Raft Replication Topology",
+      "title": "Lab 4: Explore Raft Replication Topology",
       "description": "Exploring Sharding Topology",
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 4: Explore Raft Replication Advanced Use-Cases",
+      "title": "Lab 5: Explore Raft Replication Advanced Use-Cases",
       "description": "Exploring Raft Replication Advanced Use-Cases",
       "filename": "../../advanced-use-cases/advanced-use-cases.md"
     },
