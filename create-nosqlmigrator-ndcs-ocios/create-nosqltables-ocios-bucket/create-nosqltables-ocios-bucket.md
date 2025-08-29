@@ -20,7 +20,7 @@ In this lab you will:
 ### Prerequisites
 
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-* Download the **[NDCSupload_rows.json](to be linked)** file to your system.
+* Download the **[NDCSupload_rows.json](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles%2FNDCSupload_rows.json)** file to your system.
 
 ## Step 1: Create an Oracle NoSQL Database Cloud Service table and upload data
 

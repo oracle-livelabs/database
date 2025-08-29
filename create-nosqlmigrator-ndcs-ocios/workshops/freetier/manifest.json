@@ -13,19 +13,19 @@
           "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
-          "title": "Create Oracle NoSQL table and OCI Object Storage Bucket",
+          "title": "Lab 1: Create Oracle NoSQL table and OCI Object Storage Bucket",
           "filename":"../../create-nosqltables-ocios-bucket/create-nosqltables-ocios-bucket.md"
         },
 		    {
-          "title": "Lab 1: Download Migrator Utility and Upload to Cloud Shell",
+          "title": "Lab 2: Download Migrator Utility and Upload to Cloud Shell",
           "filename": "../../download-migrator-utility/download-migrator-utility.md"
         },
 		    {
-          "title": "Lab 2: Create a Configuration File",
+          "title": "Lab 3: Create a Configuration File",
           "filename": "../../create-migrator-config-file/create-migrator-config-file.md"
         },
 		    {
-          "title": "Lab 3: Run the Oracle NoSQL Database Migrator Utility",
+          "title": "Lab 4: Run the Oracle NoSQL Database Migrator Utility",
           "filename": "../../run-migrator-utility/run-migrator-utility.md"
         },
         {

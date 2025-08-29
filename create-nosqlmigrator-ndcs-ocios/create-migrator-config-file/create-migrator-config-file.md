@@ -117,7 +117,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
 ## Step 3: Create a Configuration File
 
 1. Launch the Cloud Shell from the **Developer tools** menu on your Oracle Cloud console. The web browser opens your home directory.
-2. Navigate to the directory where you extracted the NoSQL Database Migrator utility. See **Lab 1 - Download Migrator Utility and Upload to Cloud Shell**.
+2. Navigate to the directory where you extracted the NoSQL Database Migrator utility. See **Lab - Download Migrator Utility and Upload to Cloud Shell**.
 
     ```
     <copy>cd V1048015-01/nosql-migrator-1.7.0</copy>

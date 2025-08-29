@@ -17,7 +17,7 @@ In this lab you will:
 ### Prerequisites
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-*  Migrator configuration file created in **Lab 2 - Create a Configuration File**.
+*  Migrator configuration file created in **Lab - Create a Configuration File**.
 
 ## Step 1: Run the Oracle NoSQL Database Migrator utility
 
@@ -27,7 +27,7 @@ In this lab you will:
     <copy>cd V1048015-01/nosql-migrator-1.7.0</copy>
     ```
 
-2. Run the runMigrator command by passing the configuration file created in **Lab 2 - Create a Configuration File**.
+2. Run the runMigrator command by passing the configuration file created in **Lab - Create a Configuration File**.
 
     ```
     <copy>
