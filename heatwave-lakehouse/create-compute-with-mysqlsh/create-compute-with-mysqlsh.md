@@ -12,7 +12,6 @@ _Estimated Lab Time:_ 20 minutes
 
 In this lab, you will be guided through the following tasks:
 
-- Create SSH Key on OCI Cloud
 - Create Compute Instance
 - Setup Compute Instance with MySQL Shell
 - Connect to MySQL Heatwave System
@@ -24,83 +23,7 @@ In this lab, you will be guided through the following tasks:
 - Some Experience with MySQL Shell
 - Must Complete Lab 2
 
-## Task 1: Create SSH Key on OCI Cloud Shell
-
-The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate a SSH Key to use  for the Bastion  session.
-
-1. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
-
-    ![Open Cloudshell](./images/cloudshellopen.png "cloudshellopen ")
-
-    ![Cloudshell Message](./images/cloudshell-welcome.png "cloudshell welcome ")
-
-    *Note: You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.
-
-2. Once the cloud shell has started, create the SSH Key using the following command:
-
-    ```bash
-    <copy>ssh-keygen -t rsa</copy>
-    ```
-
-    Press enter for each question.
-
-    Here is what it should look like.  
-
-    ![Generate SSH Key](./images/ssh-keygen.png "ssh keygen ")
-
-3. The SSH keys are stored as follows:
-    - public SSH key stored in ~/.ssh/id_rsa.pub.
-    - private SSH keys stored in ~/.ssh/id_rsa
-
-4. Examine the two files that you just created.
-
-    ```bash
-    <copy>cd .ssh</copy>
-    ```
-
-    ```bash
-    <copy>ls</copy>
-    ```
-
-    ![SSH files list](./images/ssh-list.png "ssh list ")
-
-    **Note** in the output there are two files, a *private key:`id_rsa` and a public key: `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
-
-5. To asign the right permissions to your SSH keys, run the following command:
-
-    ```bash
-    <copy>chmod 600 id_rsa.pub</copy>
-    ```
-
-    ```bash
-    <copy>chmod 600 id_rsa</copy>
-    ```
-
-## Task 2: Copy public SSH key value to Notepad
-
-You will need a compute Instance to connect to your brand new MySQL database.
-
-1. Before creating the Compute instance open a notepad
-
-2. Do the followings steps to copy the public SSH key to the  notepad
-
-    Open the Cloud shell
-    ![Copy SSh Key](./images/cloudshell-copy-ssh.png "cloudshell copy ssh")
-
-    Enter the following command  
-
-    ```bash
-    <copy>cat ~/.ssh/id_rsa.pub</copy>
-    ```
-
-    ![Display SSH Key](./images/cloudshell-cat.png "cloudshell cat") 
-
-3. Copy the id_rsa.pub content the notepad
-
-    Your notepad should look like this
-    ![Completed SSH key](./images/notepad-rsa-key.png "notepad rsa key ")
-
-## Task 3: Create Compute instance
+## Task 1: Create Compute instance
 
 1. To launch a Linux Compute instance, go to 
     Navigation Menu
@@ -123,13 +46,15 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 5. On Placement, keep the selected Availability Domain
 
-6. Keep Security "Disabled"
+    ![Use Linux OS](./images/compute-placement-security.png "compute security placement")
 
-    ![Use Linux OS](./images/compute-placement-security.png "compute security placement")  
+6. Keep the defaults for Image and Shape
 
-7. Keep the defaults for Image and Shape
+    ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")
 
-    ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
+    Click **Next**.
+
+7. Keep Security features disabled. Click **Next**.
 
 8. On Networking, make sure '**heatwave-vcn**' is selected
 
@@ -137,11 +62,18 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![Select VCN](./images/compute-vcn.png "compute vcn.")
 
-9. On Add SSH keys, paste the public key from the notepad.
-  
+9. On Add SSH keys, 
+    a. Click **Download private key**
+
+    B. Click **Download public key**
+
     ![Add SSH key](./images/compute-id-rsa-paste.png "compute id rsa paste")
 
-10. Click '**Create**' to finish creating your Compute Instance.
+    Click **Next**.
+
+10. On Boot volume, leave everything in default and click **Next**.
+
+    Click '**Create**' to finish creating your Compute Instance.
 
 11. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
     ![Provision Compute](./images/compute-provisioning.png "compute provisioning")
@@ -150,7 +82,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![Completed Compute](./images/compute-running.png "compute running")
 
-## Task 4: Connect to Compute and Install MySQl Shell
+## Task 2: Connect to Compute and Install MySQl Shell
 
 1. Copy the public IP address of the active Compute Instance to your notepad
 
@@ -179,7 +111,40 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     - Select the **Connections** tab, copy the database nane `heatwave-db`  and the `Private IP Address` to the notepad
         ![HeatWave create complete connection](./images/mysql-heatwave-connection-tab.png"mysql heatwave connection ")
-3. Indicate the location of the private key you created earlier with **heatwave-client**.
+
+3. Open Cloud Shell
+
+    The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate a SSH Key to use  for the Bastion  session.
+
+    a. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
+
+    ![cloud shell main](./images/cloud-shell.png  "cloud shell main " )
+
+    ![cloud shell button](./images/cloud-shell-setup.png  "cloud shell button " )
+
+    ![open cloud shell](./images/cloud-shell-open.png "open cloud shell" )
+
+    _Note: You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session._
+
+4. Create a file with the private SSH Key file.
+
+    a. Paste the RSA SSH Key from **Task 1.9**
+
+    ```bash
+    <copy>nano ~/.ssh/id_rsa</copy>
+    ```
+    ![open nano rsa key](./images/vim-paste-rsa.png "open nano rsa key" )
+
+    b. Save the file with **CTRL + o**, Hit **Enter**, Then close nano with **CTRL + x**
+
+    ![paste prive rsa key](./images/vim-save-rsa.png "paste prive rsa key" )
+
+    c. Modify the id_rsa file permissions.
+
+    ```bash
+    <copy>chmod 600 ~/.ssh/id_rsa</copy>
+    ```
+5. Indicate the location of the private key you created earlier.
 
     Enter the username **opc** and the Public **IP Address**.
 
@@ -191,19 +156,26 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![SSH Connected](./images/connect-signin.png "connect signin")
 
-    **Install MySQL Shell on the Compute Instance**
 
-4. You will need a MySQL client tool to connect to your new MySQL DB System from your client machine.
+6. **Install MySQL Shell on the Compute Instance**
 
-    Install MySQL Shell with the following command (enter y for each question)
+    You will need a MySQL client tool to connect to your new MySQL HeatWave System from the Bastion. **You might want to have MySQL Shell in the same version as your DB System**
 
-    **[opc@…]$**
+    You can download the specific desired version and architecture at [MySQL Community Dowloads](https://dev.mysql.com/downloads/shell/)
 
-     ```bash
-    <copy>sudo yum install mysql-shell -y</copy>
+    To Install the current latest MySQL Shell version (9.4) for x86 architecture, you can follow the instructions:
+
+    a. Install MySQL Shell with the following command (enter y for each question)
+
+    ```bash
+    <copy>wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell-9.4.0-1.el9.x86_64.rpm</copy>
     ```
 
-    ![MySQL Shell Install](./images/connect-shell.png "connect shell")
+    ```bash
+    <copy>sudo yum install mysql-shell-9* -y</copy>
+    ```
+
+    ![mysql shell install](./images/mysql-install-shell.png "mysql shell install ")
 
 You may now **proceed to the next lab**
 
@@ -212,4 +184,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, August 2025
