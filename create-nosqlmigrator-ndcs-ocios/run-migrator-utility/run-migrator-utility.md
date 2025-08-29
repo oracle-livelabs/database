@@ -19,7 +19,7 @@ In this lab you will:
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
 *  Migrator configuration file created in **Lab - Create a Configuration File**.
 
-## Step 1: Run the Oracle NoSQL Database Migrator utility
+## Task 1: Run the Oracle NoSQL Database Migrator utility
 
 1. From the Cloud Shell, navigate to the directory where you extracted the NoSQL Database Migrator utility.
 
@@ -54,7 +54,7 @@ In this lab you will:
     </copy>
     ```
 
-## Step 2: View migrated data in OCI Object Storage Bucket
+## Task 2: View migrated data in OCI Object Storage Bucket
 
 1. Log in to the Oracle Cloud console.
 2. From the Navigation menu, select **Storage > Object Storage & Archive Storage > Buckets**.

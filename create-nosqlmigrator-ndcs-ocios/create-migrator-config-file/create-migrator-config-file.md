@@ -21,7 +21,7 @@ In this lab you will:
 * OCI Object Storage bucket in the subscribed region as the sink to store the migrated data.
 * Privileges to write objects in the Object Storage Bucket. For more details on setting the policies, see **[Let users write objects to Object Storage buckets](https://docs.oracle.com/en-us/iaas/Content/Identity/policiescommon/commonpolicies.htm#write-objects-to-buckets)**.
 
-## Step 1: Identify the Source Parameters
+## Task 1: Identify the Source Parameters
 
 To configure the Migrator utility to copy data from an Oracle NoSQL Database Cloud Service table, you need the following source parameters:  **table, compartment, endpoint**.
 
@@ -71,7 +71,7 @@ To configure the Migrator utility to copy data from an Oracle NoSQL Database Clo
 
   The **endpoint** and **compartment** parameter values differ based on your tenancy.
 
-## Step 2: Identify the Sink Parameters
+## Task 2: Identify the Sink Parameters
 
 To configure the Migrator utility to copy data into the Object Storage bucket, you need the following sink parameters: **endpoint, prefix, bucket, namespace**.
 
@@ -114,7 +114,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
 
   The **endpoint** and **namespace** parameter values differ based on your tenancy.
 
-## Step 3: Create a Configuration File
+## Task 3: Create a Configuration File
 
 1. Launch the Cloud Shell from the **Developer tools** menu on your Oracle Cloud console. The web browser opens your home directory.
 2. Navigate to the directory where you extracted the NoSQL Database Migrator utility. See **Lab - Download Migrator Utility and Upload to Cloud Shell**.
@@ -123,7 +123,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
     <copy>cd V1048015-01/nosql-migrator-1.7.0</copy>
     ```
 
-3. Create the configuration file template in a notepad as follows. Update the source and sink parameters with the values that you noted in Step 1 and Step 2 of this lab. 
+3. Create the configuration file template in a notepad as follows. Update the source and sink parameters with the values that you noted in Task 1 and Task 2 of this lab. 
 
   *Note: The endpoints, compartment, and namespace values will differ based on your tenancy.*  
 

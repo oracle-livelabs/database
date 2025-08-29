@@ -22,7 +22,7 @@ In this lab you will:
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
 * Download the **[NDCSupload_rows.json](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles%2FNDCSupload_rows.json)** file to your system.
 
-## Step 1: Create an Oracle NoSQL Database Cloud Service table and upload data
+## Task 1: Create an Oracle NoSQL Database Cloud Service table and upload data
 
 1. Open the Oracle Cloud Console. See **Get Started** lab for detailed steps to access the Oracle Cloud Console.
 2. From the navigation menu, select **Databases** and then select **Tables** under **Oracle NoSQL Database**.
@@ -66,7 +66,7 @@ In this lab you will:
     Select **Execute** to view the table rows. 
 
 
-## Step 2: Create an OCI Object Storage bucket
+## Task 2: Create an OCI Object Storage bucket
 
 1. Open the Oracle Cloud Console. See **Get Started** lab for detailed steps to access the Oracle Cloud Console.
 2. From the navigation menu, select **Storage** and then select **Object Storage & Archive Storage**.

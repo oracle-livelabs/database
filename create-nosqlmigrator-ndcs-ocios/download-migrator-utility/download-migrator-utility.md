@@ -17,7 +17,7 @@ In this lab you will:
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
 
-## Step 1: Download the Oracle NoSQL Migrator Utility
+## Task 1: Download the Oracle NoSQL Migrator Utility
 
 1. Open the **[Oracle NoSQL Downloads page](https://www.oracle.com/database/technologies/nosql-database-server-downloads.html)** and scroll down to Oracle NoSQL Database Migrator and Analytics Integrator section.
 
@@ -29,7 +29,7 @@ In this lab you will:
 
 4. Download the Oracle NoSQL Migrator package to your local machine. Here you will use **V1048015-01.zip**.
 
-## Step 2: Upload Oracle NoSQL Migrator Utility to the Cloud Shell
+## Task 2: Upload Oracle NoSQL Migrator Utility to the Cloud Shell
 
 1. Launch the Cloud Shell from the **Developer tools** menu on your Oracle Cloud console. The web browser opens your home directory. See **Get Started** lab for detailed steps to access the Oracle Cloud Console.
 
