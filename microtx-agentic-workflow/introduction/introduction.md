@@ -13,9 +13,9 @@ The following diagram illustrates how an agentic workflow processes a loan appli
 1. Submission and data extraction: The process begins when a user submits a loan application. AI algorithms automatically extract all relevant details from the application, even if the information is provided in natural language.
 2. Completeness check: The system checks whether all required information is present. If any details are missing, the applicant is immediately notified, and the process is paused pending their response.
 3. Loan Application record creation: Once the application is deemed complete, a new load application record is created in the database.
-Orchestration by agentic planner: The agentic planner takes over, orchestrating key workflow steps—such as verifying submitted documents using OCR technology and validating the applicant’s identity.
-4. Compliance and review: The workflow then performs compliance checks, including evaluating the applicant’s credit score and ensuring adherence to anti-money laundering (AML) regulations. If any step requires human intervention, the planner promptly alerts the appropriate personnel for manual review.
-5. Iterative processing: The planner continuously assesses and executes the necessary tasks, looping through verification and compliance checks until a final decision is reached. The final decision could be one of the following:
+4. Orchestration by agentic planner: The agentic planner takes over, orchestrating key workflow steps—such as verifying submitted documents using OCR technology and validating the applicant’s identity.
+5. Compliance and review: The workflow then performs compliance checks, including evaluating the applicant’s credit score and ensuring adherence to anti-money laundering (AML) regulations. If any step requires human intervention, the planner promptly alerts the appropriate personnel for manual review.
+6. Iterative processing (Plan-reflect-replan): The planner continuously assesses and executes the necessary tasks, looping through verification and compliance checks until a final decision is reached. The final decision could be one of the following:
     * Approval: If the application passes all checks, a final manual signoff is requested. Once confirmed, the system updates the application status to approved.
     * Rejection: If any check fails, the applicant is promptly notified of the decision, and the process concludes.
 

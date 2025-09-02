@@ -38,7 +38,7 @@ This lab assumes you have:
     </copy>
     ```
 
-   Wait for a few seconds. When the database instance is ready, you will see the following message.
+   Wait until the database starts. This can take from a few seconds to a couple of minutes. When the database instance is ready, you will see the following message.
 
     ```text
     Status of the Oracle FREE 23ai service:
@@ -46,7 +46,7 @@ This lab assumes you have:
     FREE Database status: RUNNING
     ```
 
-   This Oracle Database 23ai Free instance is configured with two schemas. MicroTx Workflow uses one schema to store the transaction data. A SQL task uses the other schema, named `livelabsUser`. The MCP server connects to the `livelabsUser` schema.
+   This Oracle Database 23ai Free instance is configured with two schemas. MicroTx Workflow uses one schema to store the transaction data. A SQL task uses the other schema, named `livelabsUser`. The Oracle MCP server connects to the `livelabsUser` schema.
 
 ## Task 2: Set the Password to Receive Email Notifications
 
@@ -117,19 +117,19 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
     ```text
     NAME                                               TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
-    nginx-ingress-ingress-nginx-controller             LoadBalancer   192..........   192..........  80:31572/TCP,443:32415/TCP   23h
-    nginx-ingress-ingress-nginx-controller-admission   ClusterIP      192.0.........  <none>         443/TCP
+    nginx-ingress-ingress-nginx-controller             LoadBalancer   10.107.........   10.107......  80:31572/TCP,443:32415/TCP   23h
+    nginx-ingress-ingress-nginx-controller-admission   ClusterIP      10.111.........  <none>         443/TCP
     ```
 
     From the output note down the value of `EXTERNAL-IP` for the load balance. You will use this value later to access MicroTx Workflow.
 
-    Let's consider that the value of the external IP in the above example is 192.0.2.117.
+    Let's consider that the value of the external IP in the above example is 10.107.21.222.
 
 3. Store the external IP address in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
 
     ```text
     <copy>
-    export CLUSTER_IPADDR=192.0.2.117
+    export CLUSTER_IPADDR=10.107.21.222
     </copy>
     ```
 
@@ -137,24 +137,22 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
 ## Task 4: Start MicroTx Workflow Services
 
-1. From your remote desktop session as an `oracle` user, run the following commands to start all the services that are required to run the Loan Processing application in MicroTx Workflow.
+1. From your remote desktop session as an `oracle` user, run the following commands to deploy and start all the services that are required to run the Loan application processing workflow in MicroTx Workflow.
 
     ```
     <copy>
     cd $HOME/WorkflowScripts/
-    ./startMicrotxWorkflowServices.sh
+    ./deploy_services_on_minikube.sh
     </copy>
     ```
 
     When you run this script, it starts the following services or processes: document processing agent service, loan processing agent, loan compliance service, Optical Character Recognition (OCR) service, MicroTx Workflow server, and MicroTx Workflow UI.
 
-    It takes a few seconds to build and start all the services.
+    It takes a few seconds to deploy and start all the services. Wait until all services are started.
 
 	![MicroTx Workflow UI](images/deployed-workflow-services.png)
 
-2. Open `http://$CLUSTER_IPADDR/workflow/` in any browser tab to access the MicroTx Workflow UI.
-
-3. Run the following commands to initialize the SQLcl MCP server and configure the  The workflow uses this MCP server 
+2. Run the following commands to initialize the SQLcl MCP server and configure the  The workflow uses this MCP server.
 
     ```
     <copy>
@@ -163,11 +161,13 @@ Follow the instructions in this section to configure Minikube and start a tunnel
     </copy>
     ```
 
+3. Open `http://$CLUSTER_IPADDR/workflow/` in any browser tab to access the MicroTx Workflow UI.
+
 ## Task 5: Create an API Key to Access OpenAI
 
-1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create). Use the default settings to create the API key.
+1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create). Use the default settings to create the API key. If you already have an API key, you can use that instead of creating a new key.
 
-2. Copy the name and value of the created key and save it safely. You will need to provide this information later.
+2. Copy the name and value of the created/existing key and save it safely. You will need to provide this information later.
 
 ## Task 6: Add the OpenAI API Key to MicroTx Workflow
 
