@@ -165,25 +165,9 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
 ## Task 5: Create an API Key to Access OpenAI
 
-1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create). Use the default settings to create the API key. If you already have an API key, you can use that instead of creating a new key.
+1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create). Use the default settings to create the API key. If you already have an API key or an API key has been provided, you can use that instead of creating a new key.
 
 2. Copy the name and value of the created/existing key and save it safely. You will need to provide this information later.
-
-## Task 6: Add the OpenAI API Key to MicroTx Workflow
-
-1. In the Workflow UI, open the navigation menu, and then click **Connectors**.
-   The following LLM definition is displayed.
-
-	![LLM Definitions page in MicroTx Workflow UI](images/connectors-tab.png)
-
-2. Click ![Edit](images/edit.png) (Edit).
-   The **Edit LLM Definition** dialog box appears. A dummy value is displayed for **API Key**.
-
-	![Edit LLM Definitions page in MicroTx Workflow UI](images/replace-api-key.png)
-
-3. Replace the **API Key** value with the value of the OpenAI API key that you have copied in step 1.
-
-4. Click **Save**.
 
 You may now [proceed to the next lab](#next).
 
