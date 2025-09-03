@@ -106,7 +106,7 @@ The combination creates a powerful data governance framework that benefits any o
 
 2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
 
-    ![click SQL](images/simple-db-actions.png =50%x*)
+    ![click SQL](../common-images/simple-db-actions.png =50%x*)
 
 1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including compliance annotations.
 
