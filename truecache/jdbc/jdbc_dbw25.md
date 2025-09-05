@@ -42,11 +42,11 @@ This lab assumes you have:
     </copy>
     ```
 
-2. Run the application by running TransactionApp.sh , This first runs the application against the primary database for 2 minutes. Then it identifies the tables and index in the schema and does a wamrup to populate the True Cache. Then it runs the application against True Cache for 2 minutes with 50 threads.
+2. Run the application by running TransactionsApp.sh , This first runs the application against the primary database for 2 minutes. Then it identifies the tables and index in the schema and does a wamrup to populate the True Cache. Then it runs the application against True Cache for 2 minutes with 50 threads.
     
     ```
     <copy>
-     sh TransactionApp.sh
+     sh TransactionsApp.sh
     </copy>
     ```
 ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp_dbw25.png " ")
@@ -57,10 +57,10 @@ This lab assumes you have:
 
 ## Learn More
 
-[True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
+[True Cache documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/using-oracle-true-cache-your-applications.html)
 
 
 ## Acknowledgements
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Thirumalai Thathachary
-* **Last Updated By/Date** - Vivek Vishwanathan ,Software Developer, Oracle Database Product Management, August 2023
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
