@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-* You have completed Lab 2: Simple Patching With AutoUpgrade
+* You have completed Lab 7: Advanced Patching
 
 ## Task 1: Examine Datapatch tables
 
@@ -570,7 +570,7 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
 
 ## Task 4: Datapatch clean-up
 
-Everytime you patch your datababase, Datapatch stores the rollback scripts inside the database. This ensures, that Datapatch always have the option of rolling back patches - even when you use out-of-place patching and the rollback scripts are no longer in the Oracle home. Datapatch stores the rollback scripts in the SYSAUX tablespace and over time it might take up a significant amount of space.
+Everytime you patch your datababase, Datapatch stores the rollback scripts inside the database. This ensures, that Datapatch always have the option of rolling back patches - even when you use out-of-place patching and the rollback scripts are no longer in the Oracle home. Datapatch stores the rollback scripts in the SYSTEM tablespace and over time it might take up a significant amount of space.
 
 1. Stay in the *yellow* terminal 🟨. Set the environment and connect to the *UPGR* database.
 
@@ -599,7 +599,7 @@ Everytime you patch your datababase, Datapatch stores the rollback scripts insid
     ```
 
     * Datapatch stored the rollback script for each of the patch actions in this database; for Release Updates and one-off patches.
-    * The total size is around 750 MB. Underlying segments are in the SYSAUX tablespace.
+    * The total size is around 750 MB. Underlying segments are in the SYSTEM tablespace.
     * In a container database, Datapatch stores the data in the root container and all PDBs.
 
     <details>
