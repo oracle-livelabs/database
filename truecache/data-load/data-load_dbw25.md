@@ -169,7 +169,7 @@ sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
 7. Execute DBMS_CACHEUTIL.TRUE_CACHE_KEEP for the table.
      ```
     <copy>
-    EXECUTE DBMS_CACHEUTIL.TRUE_CACHE_KEEP('TRANSACTIONS','ACCOUNTS')
+    EXECUTE DBMS_CACHEUTIL.TRUE_CACHE_KEEP('TRANSACTIONS','ACCOUNTS');
     </copy>
     ```
 ![dataload truecache keep](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachekeep.png " ")
@@ -199,5 +199,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Thirumalai Thathachary
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
 * **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management, August 2025
