@@ -246,7 +246,7 @@ In this lab, you will be guided through the following tasks:
     ```
 
     ```bash
-    <copy>mysql -u root -p < world.sql </copy>
+    <copy>mysql -u root -p < world.sql</copy>
     ```
 
     ![Download/Unzip the Sample Database](./images/download-sample1.png "download-sample-db")
