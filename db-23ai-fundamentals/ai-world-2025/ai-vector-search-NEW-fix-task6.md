@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to the **Oracle AI Vector Search** lab! In this hands-on session, you'll explore Oracle Database  23ai's powerful AI Vector Search capabilities using the LumenCare healthcare scenario.
+Welcome to the **Oracle AI Vector Search** lab! In this hands-on session, you'll explore Oracle Database 26ai's powerful AI Vector Search capabilities using the LumenCare healthcare scenario.
 
 Building on the patient data from our previous labs, you'll learn how to create vector embeddings from healthcare documents stored in Oracle Cloud Infrastructure (OCI) Object Storage and perform semantic searches to find relevant medical information.
 
@@ -11,7 +11,7 @@ Estimated Lab Time: 25 minutes
 ### What You'll Learn
 
 - Loading ONNX Embedding Models into the database
-- Creating vector tables with Oracle  23ai's AI Vector Search
+- Creating vector tables with Oracle 26ai's AI Vector Search
 - Generating embeddings for semantic similarity searches
 - Performing vector searches on documents
 - Connecting vector search results to existing patient data
@@ -19,7 +19,7 @@ Estimated Lab Time: 25 minutes
 
 ### Prerequisites
 
-- Access to Oracle Database  23ai
+- Access to Oracle Database 26ai
 - Completion of previous LumenCare labs (recommended)
 - Basic SQL knowledge
 
@@ -82,7 +82,7 @@ Estimated Lab Time: 25 minutes
 
 ## Task 2: Set Up Vector Search Infrastructure
 
-1. Before we can perform vector searches, we need to configure the necessary database components. Oracle  23ai provides built-in AI vector capabilities that integrate seamlessly with existing data.
+1. Before we can perform vector searches, we need to configure the necessary database components. Oracle 26ai provides built-in AI vector capabilities that integrate seamlessly with existing data.
 
     ```sql
     <copy>
@@ -185,7 +185,7 @@ Estimated Lab Time: 25 minutes
 
 ## Task 4: Generate Vector Embeddings
 
-1. Oracle  23ai can generate embeddings using built-in AI capabilities. We'll create vector representations of our healthcare documents that capture their semantic meaning.
+1. Oracle 26ai can generate embeddings using built-in AI capabilities. We'll create vector representations of our healthcare documents that capture their semantic meaning.
 
     ```
     <copy>
@@ -296,18 +296,154 @@ Estimated Lab Time: 25 minutes
 
     This gives a complete view of the gait assessment — imaging, specialist report, and the patient’s own words.
 
+## Task 6: Combining Vector Search with Relational Data
 
-## Task 6: Creating Vector Indexes
+1. So far, we’ve searched our healthcare documents by meaning alone. That’s powerful, but in real-world healthcare you almost always want to connect unstructured data (notes, lab reports, messages) with structured data (patient demographics, visit info, billing records).
 
-1. Now we'll learn about Oracle Database  23ai's vector indexing capabilities. Vector indexes are essential for scaling vector search operations as your document corpus grows, providing significant performance improvements for approximate nearest neighbor (ANN) searches.
+    Oracle Database 26ai shines here because it’s a converged database. We can join vector results with relational tables in the same SQL query.
 
-  Oracle  23ai provides two main types of vector indexes optimized for different use cases:
+    Think about a provider who asks:
+
+    “Show me which of my patients recently had knee surgery notes and physical therapy updates.”
+
+    A pure vector search will surface the right documents. But by joining with the patients table, we can also return the patient name and other structured attributes right alongside.
+
+    Let's update our demo a bit. Run the following SQL to enhance the workshop
+
+    ```
+    <copy>
+    ALTER TABLE healthcare_documents ADD (patient_id NUMBER);
+
+    ALTER TABLE healthcare_documents
+    ADD CONSTRAINT fk_healthcare_docs_patient
+    FOREIGN KEY (patient_id) REFERENCES patients(id);
+
+    -- Courtney Henry (meniscus repair, PT, follow-ups, auth)
+    UPDATE healthcare_documents d
+    SET patient_id = (SELECT id FROM patients WHERE name = 'Courtney Henry')
+    WHERE patient_id IS NULL
+    AND (
+            DBMS_LOB.INSTR(d.content, 'Patient: Courtney Henry') > 0
+        OR DBMS_LOB.INSTR(d.content, 'Name: Courtney Henry')    > 0
+    );
+
+    -- Leslie Alexander (BP messages, lipid panel, DASH nutrition consult)
+    UPDATE healthcare_documents d
+    SET patient_id = (SELECT id FROM patients WHERE name = 'Leslie Alexander')
+    WHERE patient_id IS NULL
+    AND (
+            DBMS_LOB.INSTR(d.content, 'Patient: Leslie Alexander') > 0
+        OR DBMS_LOB.INSTR(d.content, 'Name: Leslie Alexander')    > 0
+    );
+
+    -- Ronald Richards (gait consult, foot X-ray, running thread)
+    UPDATE healthcare_documents d
+    SET patient_id = (SELECT id FROM patients WHERE name = 'Ronald Richards')
+    WHERE patient_id IS NULL
+    AND (
+            DBMS_LOB.INSTR(d.content, 'Patient: Ronald Richards') > 0
+        OR DBMS_LOB.INSTR(d.content, 'Name: Ronald Richards')    > 0
+    );
+
+    COMMIT;
+    </copy>
+    ```
+
+2. Let’s embed a simple phrase — “meniscus repair discharge instructions and physical therapy progression” — and then return the top matching docs with the patient’s name included.
+
+    ```
+    <copy>
+    WITH q AS (
+    SELECT VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING
+            'meniscus repair discharge instructions and physical therapy progression' AS DATA) AS v
+     
+    )
+    SELECT p.name  AS patient_name,
+        d.title AS document_title,
+        SUBSTR(d.content, 1, 180) || '...' AS snippet,
+        VECTOR_DISTANCE(d.content_vector, q.v, COSINE) AS distance
+    FROM healthcare_documents d
+    JOIN patients p ON p.id = d.patient_id
+    CROSS JOIN q
+    ORDER BY distance
+    FETCH FIRST 4 ROWS ONLY;
+    </copy>
+    ``` 
+    What to expect in your results:
+    * Courtney Henry – Clinical Notes
+    * Courtney Henry – Physical therapy session notes
+    * Courtney Henry – Arthroscopic meniscus repair discharge summary
+    * Sometimes also her MRI authorization request
+
+    Notice how the results not only show the right documents, but also clearly identify the patient they belong to.
+
+3. Now let’s search for “blood pressure readings and hypertension management”:
+
+    ```
+    <copy>
+    WITH q AS (
+    SELECT VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING
+            'blood pressure readings and hypertension management' AS DATA) AS v
+     
+    )
+    SELECT p.name  AS patient_name,
+        d.title AS document_title,
+        SUBSTR(d.content, 1, 180) || '...' AS snippet,
+        VECTOR_DISTANCE(d.content_vector, q.v, COSINE) AS distance
+    FROM healthcare_documents d
+    JOIN patients p ON p.id = d.patient_id
+    CROSS JOIN q
+    ORDER BY distance
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+    Likely results:
+    * Leslie Alexander – Secure message thread about BP + Lisinopril
+    * Leslie Alexander – Lipid panel with borderline LDL
+    * Leslie Alexander – Nutrition consult with DASH diet
+
+
+## Task 7: Creating Vector Indexes
+
+1. Now we'll learn about Oracle Database 26ai's vector indexing capabilities. Vector indexes are essential for scaling vector search operations as your document corpus grows, providing significant performance improvements for approximate nearest neighbor (ANN) searches.
+
+  Oracle 26ai provides two main types of vector indexes optimized for different use cases:
     - **In-Memory Neighbor Graph Vector Index**: Uses Hierarchical Navigable Small World (HNSW) graphs for fast searches
     - **Neighbor Partition Vector Index**: Uses Inverted File Flat (IVF) approach for balanced performance
 
   In Autonomous Database, the vector memory size is automatically managed, making vector index creation and management much simpler than in traditional Oracle databases.
 
-2. Vector indexes provide several benefits: Speed, Scalability, Accuracy,  Control. Lets create a vector index - In-Memory Neighbor Graph Vector Index 
+2. First, let's understand why vector indexes are important by running a query without an index and observing the execution plan.
+
+    ```sql
+    <copy>
+    -- Check current execution plan for vector search without index
+    EXPLAIN PLAN FOR
+    WITH q AS (
+        SELECT VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING
+               'blood pressure readings and hypertension management' AS DATA) AS v
+         
+    )
+    SELECT doc_id, title,
+           VECTOR_DISTANCE(content_vector, q.v, COSINE) AS distance
+    FROM healthcare_documents d
+    CROSS JOIN q
+    ORDER BY distance
+    FETCH FIRST 5 ROWS ONLY;
+
+    SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY());
+    </copy>
+    ```
+
+    **What you'll observe:** Without a vector index, Oracle performs a full table scan, computing distance for every vector - inefficient as data grows.
+
+3. Vector indexes provide several benefits:
+    - **Speed**: Convert linear O(n) searches to approximately O(log n) 
+    - **Scalability**: Essential when dealing with thousands or millions of vectors
+    - **Accuracy Control**: Configurable precision vs performance trade-offs
+    - **Memory Efficiency**: Optimized storage and retrieval patterns
+
+4. **Create your first vector index** - In-Memory Neighbor Graph Vector Index 
 
     ```sql
     <copy>
@@ -370,12 +506,12 @@ Estimated Lab Time: 25 minutes
 
 ## Conclusion
 
-Congratulations! You've successfully implemented Oracle AI Vector Search for healthcare documents using Oracle Database  23ai. 
+Congratulations! You've successfully implemented Oracle AI Vector Search for healthcare documents using Oracle Database 26ai. 
 
 
 ## Learn More
 
-* [Oracle Database  23ai AI Vector Search Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/index.html)
+* [Oracle Database 26ai AI Vector Search Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/index.html)
 * [Vector Data Type Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/vector.html)
 * [AI Vector Search Functions](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/vector-functions.html)
 

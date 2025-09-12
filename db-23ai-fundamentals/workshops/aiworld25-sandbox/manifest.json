@@ -10,7 +10,7 @@
       },
       {
         "title": "Get Started with LiveLabs",
-        "filename": "../../intro/green-button-setup.md"
+        "filename": "../../ai-world-2025/green-button-setup-ai-25.md"
     },
       {
         "title": "Lab 1: Domains and Annotations",
@@ -37,23 +37,17 @@
           "filename": "../../ai-world-2025/json-duality.md"
       },
       {
-          "title": "Lab 5: Property Graphs",
-          "description": "Building Property Graphs",
-          "type": "livelabs",
-          "filename": "../../ai-world-2025/new-property-graph.md"
-      },
-      {
-        "title": "Lab 6: (Bonus) SQL Updates",
+        "title": "Lab 5: (Bonus) SQL Updates",
         "description": "Learn how to efficiently update records in your database using advanced SQL techniques.",
         "type": "livelabs",
         "filename": "../../ai-world-2025/sql-features.md"
     },
-  {
-    "title": "Lab 7: (Bonus) SQL Analysis Report",
-    "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
-    "type": "livelabs",
-    "filename": "../../new-sql-analysis-report/new-sql-analysis-report.md"
-},
+      {
+          "title": "Lab 6: Property Graphs",
+          "description": "Building Property Graphs",
+          "type": "livelabs",
+          "filename": "../../ai-world-2025/new-property-graph.md"
+      },
 
         {
           "title": "Need Help?",

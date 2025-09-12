@@ -28,11 +28,9 @@ LumenCare's development teams face a common modern challenge: some applications 
 
 **Oracle Database 23ai's JSON Relational Duality Views solve this completely.** The same data can be accessed and modified as either relational rows or JSON documents, with all changes automatically synchronized and ACID-compliant.
 
-## Task 1: Understanding Your Existing Data and Adding Schema Flexibility
+## Task 1: Understanding Existing Data
 
-Before creating duality views, let's examine the healthcare data we've built throughout our previous labs and add the flexibility needed for evolving healthcare requirements.
-
-1. **Review the existing patient and appointment data structure.**
+1. Before creating duality views, let's examine the healthcare data we've built throughout our previous labs and add the flexibility needed for evolving healthcare requirements.
 
     ```sql
     <copy>
@@ -59,9 +57,7 @@ Before creating duality views, let's examine the healthcare data we've built thr
     </copy>
     ```
 
-2. **Add schema flexibility to the patients table for evolving healthcare requirements.**
-
-    Healthcare data requirements often change - new regulations, additional patient information, or evolving clinical practices. Let's add a flex field to handle future requirements.
+2. Now, lets add schema flexibility to the patients table. Healthcare data requirements often change - new regulations, additional patient information, or evolving clinical practices. Let's add a flex field to handle future requirements.
 
     ```sql
     <copy>
@@ -72,13 +68,11 @@ Before creating duality views, let's examine the healthcare data we've built thr
     </copy>
     ```
 
-    **What You'll See:** The structured patient demographics alongside rich appointment data stored as JSON, plus a new flexible field ready for future healthcare data requirements.
+## Task 2: Creating Duality Views 
 
-## Task 2: Creating Patient-Focused Duality Views with Precise Access Control
+1. JSON Relational Duality Views allow you to define exactly how your data should be presented as JSON documents while maintaining full relational integrity.
 
-JSON Relational Duality Views allow you to define exactly how your data should be presented as JSON documents while maintaining full relational integrity. **Crucially, you can control exactly which operations (insert, update, delete) are allowed on each table through each view.**
-
-1. **Create a patient-centric duality view with full patient access but controlled appointment access.**
+    Create a patient-centric duality view with full patient access but controlled appointment access.
 
     ```sql
     <copy>
@@ -115,7 +109,7 @@ JSON Relational Duality Views allow you to define exactly how your data should b
     - **`appointments @insert @update @delete`**: This view has full control over appointments - can create, modify, and remove appointments
     - **Security Benefit**: Clinical staff can manage both patient demographics and appointments, but patient deletion requires a different, more restricted process
 
-2. **Create a mobile appointment view with read-only patient access.**
+2. Now, create a mobile appointment view with read-only patient access.
 
     ```sql
     <copy>
@@ -148,9 +142,7 @@ JSON Relational Duality Views allow you to define exactly how your data should b
 
 ## Task 3: Querying Data Through Duality Views
 
-Now let's explore how the same data can be accessed in completely different formats through our duality views.
-
-1. **Query patient data in JSON document format.**
+1. Now let's explore how the same data can be accessed in completely different formats through our duality views. Query patient data in JSON document format.
 
     ```sql
     <copy>
@@ -161,7 +153,7 @@ Now let's explore how the same data can be accessed in completely different form
     </copy>
     ```
 
-2. **Query appointment data optimized for mobile applications.**
+2. Next, query appointment data optimized for mobile applications through our mobile duality view
 
     ```sql
     <copy>
@@ -174,7 +166,7 @@ Now let's explore how the same data can be accessed in completely different form
     </copy>
     ```
 
-3. **Compare relational vs. document access to the same underlying data.**
+3. Here, we can see relational vs. document access to the same underlying data.
 
     ```sql
     <copy>
@@ -191,29 +183,23 @@ Now let's explore how the same data can be accessed in completely different form
 
     ```sql
     <copy>
-    -- Document view: Extract same metrics from JSON structure
-    WITH appointment_durations AS (
-        SELECT JSON_VALUE(data, '$.patientName') as name,
-               JSON_VALUE(data, '$.appointments.size()') as appointment_count,
-               t.duration
-        FROM patient_complete_dv p,
-             JSON_TABLE(JSON_QUERY(data, '$.appointments'), '$[*]' 
-                 COLUMNS (duration NUMBER PATH '$.clinicalData.duration')) t
-    )
-    SELECT name,
-           appointment_count,
-           AVG(duration) as avg_duration
-    FROM appointment_durations
-    GROUP BY name, appointment_count
+    -- Document view: Derive appointment count by COUNT(*) after JSON_TABLE expansion
+    SELECT JSON_VALUE(p.data, '$.patientName') as name,
+        COUNT(t.duration) as appointment_count,
+        AVG(t.duration) as avg_duration
+    FROM patient_complete_dv p
+    LEFT JOIN JSON_TABLE(
+        JSON_QUERY(p.data, '$.appointments'), '$[*]'
+        COLUMNS (duration NUMBER PATH '$.clinicalData.duration')
+    ) t ON 1=1
+    GROUP BY JSON_VALUE(p.data, '$.patientName')
     ORDER BY appointment_count DESC;
     </copy>
     ```
 
-4. **Experience schema flexibility.**
+4. One of the big value propositions of JSON documents is schema flexibility. You don't have to know all attributes and structures of your documents ahead of time - and those will most likely change over time anyway. Duality views give you this flexibility with their flex fields.
 
-    One of the big value propositions of JSON documents is schema flexibility. You don't have to know all attributes and structures of your documents ahead of time - and those will most likely change over time anyway. Duality views give you this flexibility with their flex fields.
-
-    The patient_complete_dv duality view was defined with this schema flexibility through the `patient_extras @flex` field, so we can add any attribute to our patient documents. Any attribute that is not explicitly mapped to a relational column will be stored in the flex column.
+    The patient\_complete\_dv duality view was defined with this schema flexibility through the `patient extras @flex` field, so we can add any attribute to our patient documents. Any attribute that is not explicitly mapped to a relational column will be stored in the flex column.
 
     ```sql
     <copy>
@@ -255,9 +241,7 @@ Now let's explore how the same data can be accessed in completely different form
     </copy>
     ```
 
-5. **Advanced Duality View capability - generated columns.**
-
-    So far our duality views have mapped to the columns in our base relational model, exposing the information in the relational schema as JSON documents. However, there is more that you can do with duality views. Often, derived information from existing data is necessary to complete or augment the information of your 'business objects' - our JSON documents. This is very easily doable with duality views.
+5. There is more that you can do with duality views. Often, derived information from existing data is necessary to complete or augment the information of your 'business objects' - our JSON documents. This is very easily doable with duality views.
 
     In our healthcare example, you not only want to show the patient information with all their appointments, but you also want to know the total number of appointments that a patient actually has. We can use **generated fields** to add additional data that is derived from other information in our duality view. (Generated fields are ignored when updating data.)
 
@@ -308,9 +292,7 @@ Now let's explore how the same data can be accessed in completely different form
 
 ## Task 4: Updating Data Through Duality Views
 
-The real power of duality views becomes apparent when updating data - changes made through any view automatically appear in all other views and the underlying tables.
-
-1. **First, let's reset our duality view to the standard structure for the update examples.**
+1. First, let's reset our duality view to the standard structure for the update examples.
 
     ```sql
     <copy>
@@ -342,7 +324,7 @@ The real power of duality views becomes apparent when updating data - changes ma
     </copy>
     ```
 
-2. **Add a new appointment through the patient-centric duality view.**
+2. Now we can add a new appointment through the patient-centric duality view.
 
     ```sql
     <copy>
@@ -369,7 +351,7 @@ The real power of duality views becomes apparent when updating data - changes ma
     </copy>
     ```
 
-2. **Verify the appointment appears in all views and the base table.**
+3. Now lets verify the appointment appears in all views and the base table.
 
     ```sql
     <copy>
@@ -390,7 +372,7 @@ The real power of duality views becomes apparent when updating data - changes ma
     </copy>
     ```
 
-3. **Update appointment status through the mobile view.**
+3. We can also update appointment status through the mobile view.
 
     ```sql
     <copy>
@@ -406,7 +388,7 @@ The real power of duality views becomes apparent when updating data - changes ma
     </copy>
     ```
 
-4. **Verify the change propagated to all views.**
+4. Again, we can verify the change propagated to all views.
 
     ```sql
     <copy>
@@ -432,11 +414,9 @@ The real power of duality views becomes apparent when updating data - changes ma
 
 ## Task 5: Understanding Duality View Permissions and Security
 
-One of the powerful features of duality views is the ability to control exactly which data can be modified and by whom. Remember that our `appointment_mobile_dv` view was designed for mobile applications and doesn't allow patient demographic updates.
+1. Another aspect of duality views is the ability to control exactly what data can be modified and by whom. Remember that our `appointment_mobile_dv` view was designed for mobile applications and doesn't allow patient demographic updates.
 
-1. **Try to update patient information through the mobile appointment view.**
-
-    Let's attempt to change a patient's name through the mobile duality view that's designed only for appointment management.
+    Let's try to update patient information through the mobile appointment view.
 
     ```sql
     <copy>
@@ -452,7 +432,7 @@ One of the powerful features of duality views is the ability to control exactly 
 
     **Expected Result:** This will fail with an error because the `appointment_mobile_dv` view doesn't include `@update` permissions on the patients table. The mobile view is designed only to manage appointment data, not patient demographics.
 
-2. **Now update the same patient information through the correct view.**
+2. Now update the same patient information through the correct view.
 
     ```sql
     <copy>
@@ -468,14 +448,14 @@ One of the powerful features of duality views is the ability to control exactly 
     </copy>
     ```
 
-3. **Verify the security model worked as designed.**
+3. We can also verify the security model worked as designed.
 
     ```sql
     <copy>
     -- Check the updated name appears in patient view
     SELECT JSON_VALUE(data, '$.patientName') as updated_name
     FROM patient_complete_dv
-    WHERE JSON_VALUE(data, '$._id') = '1';
+    WHERE JSON_VALUE(data, '$._id') = '3';
     </copy>
     ```
 
