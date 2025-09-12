@@ -28,21 +28,19 @@ In this lab, you will be guided through the following tasks:
 
     ![OCI Profile Icon Expanded - User Settings](./images/nav-config1-new.png "nav-config2")
 
-    **Note:** you should be on the below "User Details" page, once finished with the previous step
+    You should be on the below "Details" page, once finished with the previous step
 
     ![OCI User Details Page](./images/config-page1-new.png "config-page")
 
-2. Scroll down on that same page until you see the ‘Resources’ section on the left. Click “API Keys” and “Add API Key”
+2. Open the "Tokens and keys" tab, and click “Add API key”
 
     ![OCI User Details Page - Resources Section](./images/nav-page-1-new.png "config-page2")
 
-    ![User Details Page - API Key Section](./images/add-api1-new.png "config-page3")
-
-3. When you click on 'Add API Key' a popup will appear saying "Add API Key". On that popup, select ‘Generate API Key Pair’ and download both the “Private Key” and “Public Key”. Afterwards, click “Add”
+3. When you click on "Add API key", the "Add API key" pane appears. On that pane, select "Generate API key pair" and download both the “Private Key” and “Public Key”. Then, click “Add”
 
     ![Add API Key Popup](./images/add-api02-new.png "add-apikey")
 
-4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file, save it in a notepad, and click 'Close' afterwards to exit out of the Configuration File Preview
+4. After you add the API key, the “Configuration file preview” pane appears. Copy the contents of the file, save it in a notepad, and then click 'Close' to exit out of the Configuration file preview
 
     ![Configuration File Preview Popup](./images/add-config2-new.png "copy-config")
 
