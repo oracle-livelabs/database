@@ -1,10 +1,5 @@
 {
   "workshoptitle": "Design and Deploy Agentic Workflows with Large Language Models and Distributed Transactions",
-  "include": {
-    "starter-file.sql": "../../data-load/files/starter-file.sql",
-    "sample.json": "../../data-load/files/sample.json",
-    "step2.md": "../../data-load/files/step2.md"
-  },
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -20,8 +15,7 @@
     {
       "title": "Lab 1: Prepare Setup",
       "description": "How to download your ORM stack and update security rules for an existing VCN",
-      "filename": "../../prepare-setup/prepare-setup.md",
-      "type": "advanced"
+      "filename": "../../prepare-setup/prepare-setup.md"
     },
     {
       "title": "Lab 2: Environment Setup",
@@ -29,24 +23,24 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 2: Initialize Environment",
+      "title": "Lab 3: Initialize Environment",
       "description": "Initialize Environment",
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 3: Load Data into an Instance",
-      "description": "Loading the data",
-      "filename": "../../data-load/data-load.md"
+      "title": "Lab 4: Create a Workflow",
+      "description": "Create",
+      "filename": "../../create/create.md"
     },
     {
-      "title": "Lab 4: Query Data",
-      "description": "Queyring the data",
-      "filename": "../../query/query.md"
+      "title": "Lab 5: Run a Workflow",
+      "description": "Run a workflow",
+      "filename": "../../run/run.md"
     },
     {
-      "title": "Environment Cleanup",
+      "title": "Environment Clean Up",
       "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
+      "filename": "../../cleanup-stack/cleanup-stack.md"
     },
     {
       "title": "Need Help?",
