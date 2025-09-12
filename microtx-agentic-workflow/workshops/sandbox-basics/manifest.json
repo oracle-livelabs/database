@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "The Title of the Workshop is defined in the manifest",
+  "workshoptitle": "Design and Deploy Agentic Workflows with Large Language Models and Distributed Transactions",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -18,9 +18,14 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 3: Provision an Instance",
-      "description": "Provisioning the Lab Environment",
-      "filename": "../../provision/provision.md"
+      "title": "Lab 3: Create a Workflow",
+      "description": "Create",
+      "filename": "../../create/create.md"
+    },
+    {
+      "title": "Lab 4: Run a Workflow",
+      "description": "Run a workflow",
+      "filename": "../../run/run.md"
     },
     {
       "title": "Need Help?",
