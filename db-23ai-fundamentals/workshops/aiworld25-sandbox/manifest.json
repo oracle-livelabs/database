@@ -43,7 +43,7 @@
         "filename": "../../ai-world-2025/sql-features.md"
     },
       {
-          "title": "Lab 6: Property Graphs",
+          "title": "Lab 6: (Bonus) Property Graphs",
           "description": "Building Property Graphs",
           "type": "livelabs",
           "filename": "../../ai-world-2025/new-property-graph.md"
