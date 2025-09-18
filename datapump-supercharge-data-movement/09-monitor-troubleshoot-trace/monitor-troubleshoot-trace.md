@@ -6,6 +6,8 @@ Occasionally, things don't go as planned. When that happens, you can rely on ins
 
 Estimated Time: 20 Minutes
 
+[Lab 9 walk-through](videohub:1_xgjqkfby)
+
 ### Objectives
 
 In this lab, you will:
