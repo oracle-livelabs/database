@@ -49,9 +49,7 @@ In this lab, you will:
 
 4. Configure the database:
 
-    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, you can leave Always Free checked.
-    - **Choose database version** - Select 23ai from the database version.
-    - **ECPU Count** - You can specify the number of ECPUs. You can keep the default of 2.
+    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database.
 
     ![Config database2](images/create-adb3-2.png)
 
