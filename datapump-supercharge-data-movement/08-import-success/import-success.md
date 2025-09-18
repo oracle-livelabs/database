@@ -6,6 +6,8 @@ When you move complex data around or when you're doing full exports/imports, it'
 
 Estimated Time: 10 Minutes
 
+[Lab 8 walk-through](videohub:1_ye19x6o0)
+
 ### Objectives
 
 In this lab, you will:

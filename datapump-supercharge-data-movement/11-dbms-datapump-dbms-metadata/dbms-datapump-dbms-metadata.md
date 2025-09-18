@@ -6,6 +6,8 @@ Normally, you use the Data Pump clients to start a job. Those clients use the Da
 
 Estimated Time: 10 Minutes
 
+[Lab 11 walk-through](videohub:1_3kpl85gm)
+
 ### Objectives
 
 In this lab, you will:
