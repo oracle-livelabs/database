@@ -54,13 +54,15 @@ This lab assumes you have:
 
     When Shard2 is the leader for Replucation Unit (RU#1), click "Shutdown Shard2" link as below:
 
-    ![<more_details_prior_shutdown_shard2>](./images/shutdown_shard2.png " ")
+    ![<shutdown_shard2>](./images/shutdown_shard2.png " ")
 
-4. Wait until the shutdown a shard completes (it can take around a minute or a few seconds sometime). You will notice that the hovering icon of the "more Details" tab stops and the shard leadership automatically changes. "Shard Database Name" will show new leader shard. For Example, "orcl3cdb_orcl3pdb" (Shard3) is the new leader for Replucation Unit (RU#1) in the screenshot as below.
+4. Wait until the shutdown a shard completes (it can take around a minute or a few seconds sometime). You will notice that the hovering icon of the "more Details" tab stops and the shard leadership automatically changes. "Shard Database Name" will show new leader shard. For Example, When "orcl1cdb_orcl1pdb" (Shard1) is the new leader for Replucation Unit (RU#1) in the screenshot as below.
 
     ![<more_details_after_shutdown_shard2>](./images/more_details_after_shutdown_shard2.png " ")
 
-    You can observe that the leadership has automatically moved to another shard, indicating re-routing of the request and switchover of RU to another shard is completed. To confirm that no impact to the application even one of the shard is down, you can continue to next task.
+    You can observe that the leadership has automatically moved to another shard, indicating re-routing of the request and switchover of RU to another shard is completed.
+
+    To confirm that there is no impact to the application even when one of the shard is down, you can continue to next task.
 
 ## Task 2: Access the Demo UI application to view pre-loaded Customers List and perform CRUD operations
 
@@ -74,7 +76,7 @@ This lab assumes you have:
 
     Data can also be populated by Run the workload (as in the next Lab: Explore Raft Replication Topology's Task 4: Run the workload).
 
-3. Update Customer: A customer can be edited either by using link "Update" link from the Home Page or directly using an API call format "http://localhost:8080/updateCustomer/[customerId]"
+3. Update Customer: To Update a customer, click on the link "Update" from the Home Page. "Update" link is next to the "More Details" link. Alternatively, update can be performed using an API call with following the format "http://localhost:8080/updateCustomer/[customerId]".
 
     ![<edit_customer_aaa>](./images/edit_customer_aaa.png " ")
 
@@ -82,16 +84,16 @@ This lab assumes you have:
 
     ![<after_edit_customer_class>](./images/after_edit_customer_class.png " ")
 
-5. Delete Customer: A customer can delete either using link "Delete" or manually using API call from the browser in the format "http://localhost:8080/deleteCustomer/[customerId]".
-   After deleting customer, it brings back to the All-Customers List page. Total count on the All-Customers List page is reduce by 1.
+5. Delete Customer: To Delete a customer, click on the link "Delete" from the Home Page. "Delete" link is next to the "More Details" link. Alternatively, delete can be performed using an API call with following the format  "http://localhost:8080/deleteCustomer/[customerId]".
+
+6. After deleting customer, it brings back to the All-Customers List page. Total count on the All-Customers List page is reduce by 1.
 
     ![<after_delete_customer>](./images/after_delete_customer.png " ")
+7. Data gets refresh automatically on the page but to Refresh the data on the "Home Page" at anytime manually, you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page from the browser's default refresh icon.
 
-6. Data gets refresh automatically on the page but to Refresh the data on the "Home Page" at anytime manually, you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page from the browser's default refresh icon.
+8. "Home" Page link at the bottom the page brings to the first page and useful when you are at any higher page# and want to return to the first page of RAFT UI application.
 
-7. "Home" Page link at the bottom the page brings to the first page and useful when you are at any higher page# and want to return to the first page of RAFT UI application.
-
-    Similar CRUD operations and database shutdown/startup can be performed using SQL*Plus command from within a podman container of a specific database. Database status can be verfied from within its datbase container or any of the gsm containers using GDSCTL.
+    Similar CRUD operations and database shutdown/startup can be performed using SQL*Plus command from within a podman container of a specific database.
 
 ## Task 3: Startup the previously shutdown shard
 
@@ -102,11 +104,11 @@ This lab assumes you have:
 
     Now all three shards are up and application is running.
 
-    You can keep the Application UI page running to verify the results from next Labs "Explore Raft Replication Topology" or any activities affecting application data. If you have closed UI browser session, you can open it anytime in a browser session by http://localhost:8080 or from a terminal window following the Initialize Environment Lab's Task 1 step 2.
+    You can keep the Application UI page running to verify the results from next Labs "Explore Raft Replication Topology" or any other activities affecting application data. If you have closed UI browser session, you can open it anytime in a browser session by http://localhost:8080 or from a terminal window entering ".livelabs/init_ll_windows.sh" as shown earlier in the Initialize Environment Lab's Task 1 step 2.
 
 You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Deeksha Sehgal, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, August 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
