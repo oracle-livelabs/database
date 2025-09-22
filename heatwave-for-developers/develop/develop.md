@@ -214,7 +214,7 @@ if ($stmt = $link->prepare($query)) {
 2. Get Eureka Application files  from Storage Object Stogage
 
     ```bash
-    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/_s6Gj-VS4vo95Ch180Ip3ABw7fnu3ufHvUG0MdIOKJ40DzuERyYeQos3agOt0y0e/n/mysqlpm/b/plf_mysql_customer_orders/o/eureka_sales/eurekaweb.zip</copy>
+    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/mrb4Qw1WdDoNxUqRBMr3qMF3HDLkDQB-LnzeJl5dBrTIk2mJQrNO41xPZ_7caXNj/n/mysqlpm/b/mysql_customer_orders/o/eureka_sales/eurekaweb.zip</copy>
     ```
 
 3. Unnzip eurekaweb.zip file 

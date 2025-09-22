@@ -35,7 +35,7 @@ COPY . /app
 COPY lib /app/lib
 WORKDIR /app
 RUN javac QueryDB.java
-CMD ["java", "-classpath",  "lib/*:.", "QueryDB", "jdbc:mysql://127.0.0.1/db1", "root", "Welcome1!"] 
+CMD ["java", "-classpath",  "lib/*:.", "QueryDB", "jdbc:mysql://127.0.0.1/db1", "root", "Welcome___1"] 
 ```
 Note: in the previous labs, we have forwarded the MySQL 3306 to localhost(127.0.0.1):3306. 
 
@@ -71,7 +71,8 @@ To build and run the docker container, do this:
 <copy>bin/build.sh
 docker run --net=host querydb</copy>
 ```
-Comment: The "-net=host" is needed because MySQL is accessed on 127.0.0.1.
+- Choose: docker.io/library/openjdk:xxxx
+- The "-net=host" is needed because MySQL is accessed on 127.0.0.1.
 
 You will see:
 

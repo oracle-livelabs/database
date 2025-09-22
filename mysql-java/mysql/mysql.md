@@ -30,24 +30,27 @@ Open the Oracle Cloud Shell and clone this repository:
 
 ## Option 1 - Part 1: Install MySQL Database Service
 
-To install the MySQL Database service, follow these steps:
+To install the Heatwave MySQL Database service, follow these steps:
 
-1. In the Oracle Cloud Menu, go to Database / MySQL. Click "Create MySQL Database System"
+1. In the Oracle Cloud Menu, go to Database / Heatwave MySQL. Click "Create DB System"
 
 	![MySQL Before Create](images/mysql-before-create.png)
 
 2. Please use these paramaters:
+    - Type: Development or Test
     - Name: mysql
     - Username: root
-    - Password (2x): Welcome1! 
+    - Password (2x): Welcome___1 
     - In Configure Networking, choose the VCN that was created by the OKE wizard : oke-vcn-quick-cluster1-xxxxx (##2##)
     - Subnet: oke-nodesubnet-quick-cluster1-xxxx-regional (##3##)
 
 	![MySQL Create](images/mysql-create.png)
 
+    - Choose to enable or disable Heatwave.
+
 3. Click Create.
 
-4. When the database is installed. Please note the Private IP Address (##4##). The MySQL port will be 3306.
+4. When the database is installed. Go to the tab connection, please note the Private IP Address (##4##). The MySQL port will be 3306.
 
 	![MySQL IP](images/mysql-ip.png)
 
@@ -59,6 +62,7 @@ Let's install a Bastion. A longer explanation is available here: [https://blogs.
 
       - Menu / Identity & Security
       - Click Bastion
+      - Name: bastion
       - Choose the VCN where MySQL is installed (##2##)
       - Choose the Subnet where MySQL is installed (##3##)
       - Use 0.0.0.0/0 for the CIDR allow block (See the blog above for more secure solution)
@@ -88,7 +92,7 @@ Let's install a Bastion. A longer explanation is available here: [https://blogs.
       - Click Create session
       - Enter
        - Session Type: SSH Port forwarding session
-       - IP Address: 10.0.10.2 (your value from ##4##)
+       - IP Address: 10.0.10.31 (your value from ##4##)
        - Port: 3306
        - Paste SSH Key (##5##)
 
@@ -98,7 +102,7 @@ Let's install a Bastion. A longer explanation is available here: [https://blogs.
       - Copy SSH commands. It will look like this:
 
 	```
-	ssh -i <privateKey> -N -L <localPort>:10.0.10.2:3306 -p 22 ocid1.bastionsession.oc1.eu-frankfurt-1.abcdefgxxcujoii55b7kq@host.bastion.eu-frankfurt-1.oci.oraclecloud.com
+	ssh -i <privateKey> -N -L <localPort>:10.0.10.31:3306 -p 22 ocid1.bastionsession.oc1.eu-frankfurt-1.abcdefgxxcujoii55b7kq@host.bastion.eu-frankfurt-1.oci.oraclecloud.com
 	```
 
 4. Try to connect through the bastion 
@@ -108,19 +112,20 @@ Let's install a Bastion. A longer explanation is available here: [https://blogs.
           - Remove the  -i <privateKey>, since it is the default key
           - Replace &lt;localPort&gt; with 3306
           - Add the flag -4
+          - Add the flag -oHostKeyAlgorithms=+ssh-ed25519
           - Add & at the end of the command to run in background
 
 	Example
      
 	```
-	<copy>ssh -4 -N -L 3306:10.0.10.2:3306 -p 22 ocid1.bastionsession.oc1.eu-frankfurt-1.abcdefgxxcujoii55b7kq@host.bastion.eu-frankfurt-1.oci.oraclecloud.com &
+	<copy>ssh -4 -oHostKeyAlgorithms=+ssh-ed25519 -N -L 3306:10.0.10.2:3306 -p 22 ocid1.bastionsession.oc1.eu-frankfurt-1.abcdefgxxcujoii55b7kq@host.bastion.eu-frankfurt-1.oci.oraclecloud.com &
 	</copy>
 	````
 
 	Connect to the database
 
 	```
-	<copy>mysqlsh root@127.0.0.1:3306 --password=Welcome1! --sql
+	<copy>mysqlsh root@127.0.0.1:3306 --password=Welcome___1 --sql
 	\exit
 	</copy>
 	```
@@ -132,7 +137,7 @@ Note the command to connect to the database (##1##)
 For reference, the explanation on how to install MySQL in Kubernetes is here:
 - [https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/](https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/)
 
-The git repository contains an example to create a MySQL server with username/password = root/Welcome1!
+The git repository contains an example to create a MySQL server with username/password = root/Welcome___1
 
 ```
 <copy>cd oke_mysql_java_101
@@ -145,8 +150,8 @@ to run the following MySQL commands:
 
 ```
 <copy>kubectl exec -it deployment/mysql -- bash
-bash# mysql -uroot -pWelcome1!
-mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'Welcome1!';
+bash# mysql -uroot -pWelcome___1
+mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'Welcome___1';
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 mysql> exit
 bash# exit
@@ -158,7 +163,7 @@ Then forward the MySQL port to your Oracle Cloud Shell and check if it works:
 
 ```
 <copy>kubectl port-forward deployment/mysql 3306 &
-mysqlsh root@127.0.0.1:3306 --password=Welcome1! --sql
+mysqlsh root@127.0.0.1:3306 --password=Welcome___1 --sql
 \exit
 </copy>
 ```
