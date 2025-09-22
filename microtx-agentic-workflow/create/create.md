@@ -32,10 +32,10 @@ This lab assumes you have:
    The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
   ![View a workflow](images/view-workflow.png)
 
-3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
+3. Click the **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the entire JSON.
    ![View a workflow](images/view-workflow-json.png)
 
-4. Click a component to view more details. The following figure shows the details of an Agentic Planner task in the right pane under **Task** tab.
+4. Click a component to view more details. The following figure shows the details of an Agentic Planner task in the right pane under the **Task** tab.
    ![View a workflow](images/workflow-builder-view-task.png)
 
 5. If you want to proceed by viewing the workflow and not creating a new one, then skip Task 2 and proceed to Task 3.
@@ -43,7 +43,6 @@ This lab assumes you have:
 ## Task 2: Create a New Workflow
 
 1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
-   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
 2. Click **New Workflow**. The Workflow Builder is displayed. In the right pane, the **Workflow** tab displays all the details of the workflow. Enter details of the workflow, such as its name and values for the other parameters.
    ![Workflow Builder Landing Page](images/workflow-builder-landing-page.png)
@@ -55,6 +54,7 @@ This lab assumes you have:
    ![Workflow Builder Add New Building Block](images/workflow-builder-add-new-task.png)
 
 5. Click a task that you want to add to the workflow. The following image shows an agentic task that is added to the workflow.
+   ![Enter task details](images/add-task-workflow-builder.png)
 
 6. Click the task to enter details about the task, such as its name and parameters.
    ![Enter task details](images/add-task-details.png)
