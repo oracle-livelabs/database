@@ -26,17 +26,19 @@ This lab assumes you have:
 
 ## Task 1: View the Overall Workflow
 
-1. Open the navigation menu and then click **Definitions**.
+1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
+   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
-2. In the **Workflows** tab, click the `acme_bank_loan_processing_workflow` workflow.
-   ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll to view and all the components of the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
+  ![View a workflow](images/view-workflow.png)
 
-3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed. The code appears in the left pane and you can see a visual representation of the code components, such as tasks in the right pane.
-   ![View the selected workflow in Workflow UI](images/view-workflow.png)
+3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
+   ![View a workflow](images/view-workflow-json.png)
 
 ## Task 2: Initiate the Workflow
 
-1. In the Workflow UI, click **Workbench**.
+1. Open the navigation menu and click **Workbench**.
     The **Workflow Workbench** dialog box appears.
 
 2. In the **Workflow Name** drop-down list, select the `acme_bank_loan_processing_workflow` workflow.

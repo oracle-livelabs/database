@@ -25,21 +25,20 @@ This lab assumes you have:
 
 ## Task 1: View Existing Workflow
 
-1. Open the navigation menu and click **Definitions**.
+1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
+   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
-2. Click the **Workflows** tab.
-
-3. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
-   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
   ![View a workflow](images/view-workflow.png)
 
-4. Click **Json** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
+3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
    ![View a workflow](images/view-workflow-json.png)
 
-5. Click a component to view more details. The following figure shows the details of an Agentic Planner task in the right pane under **Task** tab.
+4. Click a component to view more details. The following figure shows the details of an Agentic Planner task in the right pane under **Task** tab.
    ![View a workflow](images/workflow-builder-view-task.png)
 
-6. If you want to proceed by viewing the workflow and not creating a new one, then skip Task 2 and proceed to Task 3.
+5. If you want to proceed by viewing the workflow and not creating a new one, then skip Task 2 and proceed to Task 3.
 
 ## Task 2: Create a New Workflow
 
@@ -173,7 +172,14 @@ To achieve this, let's add a SWITCH statement task and define the decision cases
 
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. View the workflow JSON code that appears for the "Check loan application completeness" and the terminate tasks or paste the following code to add these tasks if you are creating a new workflow.
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+  ![View a workflow](images/view-workflow.png)
+
+3. Scroll up in the left pane to view the **Check loan application completeness** task, and then click the task to view the details of the task in the **Task** tab.
+   ![View task details](images/check-loan-task-details.png)
+
+4. Click the **JSON** tab to view the JSON code for the **Check loan application completeness** task or paste the following code to add this task if you are creating a new workflow and save your changes.
 
    ```json
     <copy>
@@ -258,15 +264,20 @@ To achieve this, let's add a SWITCH statement task and define the decision cases
     </copy>
     ```
 
-3. Click **Save**.
-
 ## Task 5: Create the Loan Application Record
 
 Once the application is deemed complete, create an application record in the database using a SQL Task.
 
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. View the workflow JSON code that appears for the "auditLoanOracleSql" task or paste the following code to add this task if you are creating a new workflow.
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+  ![View a workflow](images/view-workflow.png)
+
+3. Scroll up in the left pane to view the **auditLoanOracleSql** task, and then click the task to view the details of the task in the **Task** tab.
+   ![View task details](images/sql-task-view.png)
+
+4. Click the **JSON** tab to view the JSON code for the **auditLoanOracleSql** task or paste the following code to add this task if you are creating a new workflow and save your changes.
 
    ```json
     <copy>
@@ -300,8 +311,6 @@ Once the application is deemed complete, create an application record in the dat
     }
     </copy>
     ```
-
-3. Click **Save**.
 
 ## Task 6: Process Loan Using a Planner Task in a Multi Agent or Microservices Orchestration
 
@@ -415,7 +424,13 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 
 17. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-18. View the workflow JSON code that appears for the "Agentic Planner" tasks or paste the following code to add these tasks when creating a new workflow to create an agent profile to build a document verification agent using Agentic task and MCP tools. With Agentic tasks, you can build the LLM-based agentic task in MicroTx Workflow. You can also use internal tools and tools from external MCP servers in the agent definition.
+18. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+
+19. In the left pane, click **Agentic Planner** task to view the details of the task in the **Task** tab.
+   ![View task details](images/view-agentic-task-wb.png)
+
+20. Click the **JSON** tab to view the JSON code for the **Agentic Planner** task or paste the following code to add this task if you are creating a new workflow and save your changes. The following code creates an agent profile to build a document verification agent using Agentic task and MCP tools. With Agentic tasks, you can build the LLM-based agentic task in MicroTx Workflow. You can also use internal tools and tools from external MCP servers in the agent definition.
 
     ```json
     <copy>
@@ -521,8 +536,6 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
     </copy>
     ```
 
-19. Click **Save**.
-
 Here are the details of a few other tasks that are used in the Agentic planner.
 
 * The Loan Compliance microservice performs credit score and AML checks. This microservice is pre-configured and available locally in the LiveLabs environment.
@@ -536,7 +549,13 @@ Terminate the workflow if the Agentic planner fails the multi-agent orchestratio
 
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. View the workflow JSON code that appears for the "Check planner execution status" and terminate tasks or paste the following code to add these tasks if you are creating a new workflow.
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+
+3. Scroll up in the left pane to view the **Check planner execution status** task, and then click the task to view the details of the task in the **Task** tab.
+   ![View task details](images/view-planner-task-wb.png)
+
+4. Click the **JSON** tab to view the JSON code for the **Check planner execution status** and **Terminate** task or paste the following code to add this task if you are creating a new workflow and save your changes.
 
    ```
     <copy>
@@ -623,15 +642,19 @@ Terminate the workflow if the Agentic planner fails the multi-agent orchestratio
 
     Where, 'http://notification-service:8085/email-service/sendMail' is the email webhook that you have added for sending email notifications in case of a failure.
 
-3. Click **Save**.
-
 ## Task 8: Human Intervention to Validate Workflow Execution
 
 Before sharing the final decision with the user, a human operator conducts a final review and approves or rejects the loan through a dedicated task.
 
-1. In the navigation menu, click **Definitions**, and then click the **Tasks** tab.
+1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. View the workflow JSON code that appears for the "Send Email notification" and "human\_approval\_task" tasks or paste the following code to add these tasks if you are creating a new workflow.
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+
+3. Scroll down in the left pane to view the **Send Email notification** task, and then click the task to view the details of the task in the **Task** tab.
+   ![View task details](images/view-email-notification-task-wb.png)
+
+4. Click the **JSON** tab to view the JSON code for the **Send Email notification** and **human\_approval\_task** tasks or paste the following code to add this task if you are creating a new workflow and save your changes.
 
    ```
     <copy>
@@ -690,15 +713,19 @@ Before sharing the final decision with the user, a human operator conducts a fin
     </copy>
     ```
 
-3. Click **Save**.
-
 ## Task 9: Update the Loan Application Status
 
 Update the final status of the loan application using a SQL Task.
 
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. View the workflow JSON code that appears for the "auditFInalLoanOracleSql" task or paste the following code to add this task if you are creating a new workflow.
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+
+3. Scroll up in the left pane to view the **auditFInalLoanOracleSql** task, and then click the task to view the details of the task in the **Task** tab.
+   ![View task details](images/view-final-task-wb.png)
+
+4. Click the **JSON** tab to view the JSON code for the **auditFInalLoanOracleSql** task or paste the following code to add this task if you are creating a new workflow and save your changes.
 
    ```
     <copy>
@@ -743,8 +770,6 @@ Update the final status of the loan application using a SQL Task.
     }
     </copy>
     ```
-
-3. Click **Save**.
 
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
