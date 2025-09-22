@@ -8,7 +8,7 @@ This lab walks you through the steps to create a workflow for a loan processing 
 
 In this lab, you will understand the various building blocks of the workflow, such as tasks, prompts, and agent profile. You will also build a few of these blocks. In this lab, you will add multiple tasks in a step-by-step manner. Each task accomplishes a specific goal. This workflow accepts user input in natural language.
 
-**Note**: You can also complete the tasks in this lab by viewing the building blocks and workflow tasks defined in the existing loan application processing workflow. All the building blocks such as connectors for LLM, database and MCP server, prompt templates, gen-ai task, agentic task, planner task and other tasks are already created to support the execution of the existing loan application processing workflow. You can analyze the json definitions to understand how these building blocks are added into a workflow.
+**Note**: You can also complete the tasks in this lab by viewing the building blocks and workflow tasks defined in the existing loan application processing workflow. All the building blocks such as connectors for LLM, database and MCP server, prompt templates, gen-ai task, agentic task, planner task and other tasks are already created to support the execution of the existing loan application processing workflow. You can analyze the task definitions in the Workflow Builder to understand how these building blocks are added into a workflow.
 
 Estimated Lab Time: 30 minutes
 
@@ -23,40 +23,50 @@ This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
 
-## Task 1: View Existing Workflow 
+## Task 1: View Existing Workflow
 
 1. Open the navigation menu and click **Definitions**.
 
 2. Click the **Workflows** tab.
 
-3. Click on the **"acme\_bank\_loan\_processing\_workflow"**.
-   A JSON file is displayed, which is the existing workflow in the left pane. In the right pane, the components of the workflow are depicted visually.
-  ![Existing Workflow Definition](images/existing-workflow.png)
-4. If you want to proceed by viewing the workflow and not creating a new one, then skip Task 2 and proceed to Task 3.
+3. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+  ![View a workflow](images/view-workflow.png)
 
-## Task 2: Create a New Workflow 
+4. Click **Json** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
+   ![View a workflow](images/view-workflow-json.png)
 
-1. Open the navigation menu and click **Definitions**.
+5. Click a component to view more details. The following figure shows the details of an Agentic Planner task in the right pane under **Task** tab.
+   ![View a workflow](images/workflow-builder-view-task.png)
 
-2. Click the **Workflow** tab.
+6. If you want to proceed by viewing the workflow and not creating a new one, then skip Task 2 and proceed to Task 3.
 
-3. Click **New Workflow Definition**.
-   A JSON file is displayed, which is the default workflow in the left pane. In the right pane, the components of the workflow are depicted visually.
-  ![Default Workflow Definition](images/default-workflow.png)
+## Task 2: Create a New Workflow
 
-4. Delete the JSON code that appears by default and paste the following code.
+1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
+   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
-   ```json
-    <copy>
-    {
-     "name": "acme_bank_loan_processing_workflow",
-     "description": "Acme bank Loan processing workflow with multi agent orchestration",
-     "tasks": []
-    }
-    </copy>
-    ```
+2. Click **New Workflow**. The Workflow Builder is displayed. In the right pane, the **Workflow** tab displays all the details of the workflow. Enter details of the workflow, such as its name and values for the other parameters.
+   ![Workflow Builder Landing Page](images/workflow-builder-landing-page.png)
 
-5. Click **Save**.
+3. Place the cursor on the arrow mark. A plus sign appears.
+   ![Workflow Builder Add New Building Block](images/workflow-builder-add-new.png)
+
+4. Click the plus icon. Many tasks are displayed.
+   ![Workflow Builder Add New Building Block](images/workflow-builder-add-new-task.png)
+
+5. Click a task that you want to add to the workflow. The following image shows an agentic task that is added to the workflow.
+
+6. Click the task to enter details about the task, such as its name and parameters.
+   ![Enter task details](images/add-task-details.png)
+
+7. Click **Save**.
+   MicroTx Workflow displays the changes in JSON code. Review all the changes.
+   ![Enter task details](images/save-workflow-changes.png)
+
+8. Click **Confirm Save** to save the changes.
+
+The new workflow is displayed in the Workflows list page.
 
 ## Task 3: Extract Loan Application Details
 
@@ -83,7 +93,15 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 
 6.  In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-7.  View the workflow JSON code that appears for the "Extract Loan Application details" task or paste the following code to add this task if you are creating a new workflow.
+7. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the components of the workflow in the left pane. Scroll up and down to view all the components of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
+  ![View a workflow](images/view-workflow.png)
+
+8. Scroll up in the left pane to view the **Extract Loan Application details** task, and then click the task to view the details of the task in the **Task** tab.
+   ![View task details](images/extract-loan-application-details.png)
+
+9. Click the **Json** tab to view the JSON code for the **Extract Loan Application details** task or paste the following code to add this task if you are creating a new workflow and save your changes.
+   ![View task JSON code](images/view-task-json.png)
 
     ```json
     <copy>
@@ -105,11 +123,7 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
     </copy>
     ```
 
-8. Click **Save**.
-
-9. Let's look at the input parameters required by this GenAI task. It requires the LLM profile definition that we created earlier and a prompt template. Next, let's create the prompt template.
-
-10. In the navigation menu, click **Agentic AI**, and then click the **Prompt** tab. The Prompt Definitions list page opens. All the prompts that you have defined are displayed in a table.
+10. Let's look at the input parameters required by this GenAI task. It requires the LLM profile definition that we created earlier and a prompt template. Next, let's create the prompt template. In the navigation menu, click **Agentic AI**, and then click the **Prompt** tab. The Prompt Definitions list page opens. All the prompts that you have defined are displayed in a table.
 
 11. View the existing "loan\_application\_nl\_2\_json" prompt definition. To create a new prompt template, click **New Prompt Definition**.
 
