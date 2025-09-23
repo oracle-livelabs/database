@@ -80,7 +80,7 @@ You can now view your emails in Thunderbird email client.
 
 Follow the instructions in this section to configure Minikube and start a tunnel between Minikube and MicroTx Workflow.
 
-1. Run the following commands to start Minikube and start a tunnel.
+1. In a new terminal tab, run the following commands to start Minikube and start a tunnel.
 
     ```text
     <copy>
@@ -121,7 +121,7 @@ Follow the instructions in this section to configure Minikube and start a tunnel
     nginx-ingress-ingress-nginx-controller-admission   ClusterIP      10.111.........  <none>         443/TCP
     ```
 
-    From the output note down the value of `EXTERNAL-IP` for the load balance. You will use this value later to access MicroTx Workflow.
+    From the output note down the value of `EXTERNAL-IP` for the load balancer. You will use this value later to access MicroTx Workflow.
 
     Let's consider that the value of the external IP in the above example is 10.107.21.222.
 
@@ -137,7 +137,9 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
 ## Task 4: Start MicroTx Workflow Services
 
-1. From your remote desktop session as an `oracle` user, run the following commands to deploy and start all the services that are required to run the Loan application processing workflow in MicroTx Workflow.
+1. From your remote desktop session, open a new terminal tab.
+
+2. As an `oracle` user, run the following commands to deploy and start all the services that are required to run the Loan application processing workflow in MicroTx Workflow.
 
     ```
     <copy>
@@ -152,7 +154,7 @@ Follow the instructions in this section to configure Minikube and start a tunnel
 
 	![MicroTx Workflow UI](images/deployed-workflow-services.png)
 
-2. Run the following commands to initialize the SQLcl MCP server and configure the  The workflow uses this MCP server.
+3. Run the following commands to initialize and configure the SQLcl MCP server. The workflow uses this MCP server.
 
     ```
     <copy>
@@ -161,7 +163,7 @@ Follow the instructions in this section to configure Minikube and start a tunnel
     </copy>
     ```
 
-3. Open `http://$CLUSTER_IPADDR/workflow/` in any browser tab to access the MicroTx Workflow UI.
+4. Open `http://10.107.21.222/consoleui/` in any browser tab to access the MicroTx Workflow UI. Replace, `10.107.21.222` with the external IP address of the load balancer that you have copied in the previous step.
 
 ## Task 5: Create an API Key to Access OpenAI
 
