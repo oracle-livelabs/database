@@ -48,14 +48,14 @@ In this lab, you will be guided through the following steps:
 - An Oracle Free Tier, Paid or LiveLabs Cloud Account
 - Some Experience with MySQL Shell - [MySQL Site](https://dev.MySQL.com/doc/MySQL-shell/8.0/en/).
 
-You may now **proceed to the next lab**
+## Task 1: You may now **proceed to the next lab**
 
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Aijaz Fatima, Product Manager, Sept 2025
 
 <!--- 
 [def]: videohub:VideoID
