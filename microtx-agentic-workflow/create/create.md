@@ -4,7 +4,7 @@
 
 This lab walks you through the steps to create a workflow for a loan processing application.
 
-**Note**: A complete workflow is already available in MicroTx Workflow on your remote desktop. You can use this workflow as a reference. To directly run the workflow, jump to the next lab and skip this lab.
+**Note**: Skip this lab and jump to the next lab to directly run an existing workflow. A complete workflow is already available in MicroTx Workflow on your remote desktop. You can use this workflow as a reference.
 
 In this lab, you will understand the various building blocks of the workflow, such as tasks, prompts, and agent profile. You will also build a few of these blocks. In this lab, you will add multiple tasks in a step-by-step manner. Each task accomplishes a specific goal. This workflow accepts user input in natural language.
 

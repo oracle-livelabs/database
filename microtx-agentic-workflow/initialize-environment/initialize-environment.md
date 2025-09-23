@@ -68,13 +68,16 @@ The Thunderbird email client on your remote desktop has been pre-configured with
 
     Remember the password as you must provide this password to access the SMTP server and also provide this password to log into the Thunderbird email client.
 
-3. Open the Thunderbird email client on your remote desktop. You are prompted to enter a password for the `microtx.user`.
+3. Click **Activities** in the remote desktop window, and then click **Show Applications**.
+   ![View all applications](./images/thunderbird.png)
+
+4. Click Thunderbird to open the Thunderbird email client on your remote desktop. You are prompted to enter a password for the `microtx.user`.
 
    ![Enter a new password for microtx.user](./images/email-password.png)
 
-4. Enter the password that you had reset in the previous step, and then click OK.
+5. Enter the password that you had reset in the previous step, and then click OK.
 
-You can now view your emails in Thunderbird email client.
+You can now view your emails in the Thunderbird email client.
 
 ## Task 3: Configure Minikube
 
@@ -88,6 +91,7 @@ Follow the instructions in this section to configure Minikube and start a tunnel
     ./start_minikube.sh
     </copy>
     ```
+
    After a few seconds, the following message is displayed.
 
     ```text
