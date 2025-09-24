@@ -10,6 +10,9 @@ Watch the video for a quick walk through of the Initialize Environment lab.
 
 [Initialize Environment lab](youtube:e3EXx3BMhec)
 
+Watch the video for a quick walk through of the Lab1.
+[Lab1](videohub:1_2ee2tbuw) 
+
 ### Objectives
 - Initialize the workshop environment.
 
@@ -27,7 +30,9 @@ This lab assumes you have:
     - Oracle True Cache  container
     - Client app container
 
-2.  Open a terminal session and follow these steps to validate the services.
+2.  Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal and follow these steps to validate the services.
+
+![activities_terminal_icon](images/activities_terminal_icon.png " ")
 
     - Log in to Podman and check for podman containers.
 
