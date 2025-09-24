@@ -6,8 +6,6 @@ Oracle Database 23ai is a *Long Term Support Release*. This lab combines several
 
 Estimated Workshop Time: 120 minutes
 
-[Hitchhiker's Guide Introduction](youtube:lwvdaM4v4tQ)
-
 ### Objectives
 
 In this workshop, you will:

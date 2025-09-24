@@ -8,7 +8,7 @@ Those reports give you a first indication of issues you may see (or performance 
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide Lab 6](youtube:lwvdaM4v4tQ?start=2782)
+[Lab 6 walk-through](videohub:1_57py2r19)
 
 ### Objectives
 

@@ -10,6 +10,8 @@ You will perform a full export from the *FTEX* database and import into a new PD
 
 Estimated Time: 15 minutes
 
+[Lab 12 walk-through](videohub:1_vy467cbr)
+
 ### Objectives
 
 In this lab, you will:
