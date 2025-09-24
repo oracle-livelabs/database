@@ -214,4 +214,4 @@ In this lab, you will be guided through the following tasks:
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, August 2025

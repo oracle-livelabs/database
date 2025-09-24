@@ -54,7 +54,7 @@ In this lab, you will be guided through the following tasks:
     Select Virtual Cloud Networks
     ![VCN Menu](./images/menuvcn.png "show vcn menu")
 
-2. Click **Start VCN Wizard**
+2. Click **Actions**, **Start VCN Wizard**
     ![VCN Wizard](./images/networking-main.png "show networking main dialog")
 
 3. Select 'Create VCN with Internet Connectivity'
@@ -128,6 +128,8 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 4: Configure security list to allow HTTP incoming connections
 
+Repeat the process for the public subnet security list
+
 1. Navigation Menu > Networking > Virtual Cloud Networks
 
 2. Open heatwave-vcn
@@ -153,7 +155,7 @@ In this lab, you will be guided through the following tasks:
     Description
 
     ```bash
-    <copy>Allow HTTP connections</copy>
+    <copy>Allow HTTP & HTTPS connections</copy>
     ```
 
 6. Click 'Add Ingress Rule'
@@ -228,6 +230,8 @@ In this lab, you will be guided through the following tasks:
 
     Subnet: **Private Subnet-heatwave-vcn (Regional)**
 
+    Network security groups (NSGs): Leave default config
+
     ![HeatWave VCN](./images/mysql-vcn.png "mysql vcn ")
 
 9. On Configure placement under 'Availability Domain'
@@ -257,7 +261,7 @@ In this lab, you will be guided through the following tasks:
 
     ![HeatWave hardware selection](./images/mysql-configure-hardware.png "mysql hardware ")
 
-11. On Configure Backups, disable 'Enable Automatic Backup'
+11. On Configure Backup plan, disable 'Enable Automatic Backup'
 
     ![HeatWave Backup config](./images/mysql-backup.png "mysql backup ")
 
@@ -274,47 +278,19 @@ In this lab, you will be guided through the following tasks:
 
     ![Select mysql version](./images/mysql-configuration-version.png "Select latest MySQL version")
 
-15. Select the Data Import tab.
-
-16. Use the Image below to identify your OCI Region.
-
-    ![HeatWave Find Region](./images/regionSelector.png "region Selector")
-
-17. Click on your localized geographic area
-
-    ## North America (NA)
-
-    **Tenancy Regions** Please select the same region that you are creating **heatwave-db** in  
-
-    <details>
-    <summary>US East (Ashburn) Region - Copy and paste to PAR Source URL</summary>
-    <br>
-    ```
-    <copy>
-   https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/
-    </copy>
-    ```
-    
-
-18. If your OCI Region is not listed in step 16, don't worry, You will be able to load the DB Data in Lab 4 Task 1. Please skip to step 19.
-
-19. The Data Import Link entry should look like this:
-
-    ![HeatWave PAR Import](./images/mysql-data-import.png "mysql data import ")
-
-20. Click the '**Create**' button
+15. Click the '**Create**' button
 
    ![mysql creare button ](./images/mysql-create-button.png "mysql creare button")
 
-21. The New MySQL DB System will be ready to use after a few minutes
+16. The New MySQL DB System will be ready to use after a few minutes
 
     The state will be shown as 'Creating' during the creation
     ![HeatWave create state](./images/mysql-heatwave-creating.png "mysql heatwave creating ")
 
-22. The state 'Active' indicates that the DB System is ready for use
+17. The state 'Active' indicates that the DB System is ready for use
     ![HeatWave create complete](./images/mysql-heatwave-active.png"mysql heatwave active ")
 
-23. On **heatwave-db** Page,select the **Connections** tab, check and save the Endpoint (Private IP Address). Later, you will need this value to connect to the Heatwave DB using the MySQL Shell client tool.
+18. On **heatwave-db** Page,select the **Connections** tab, check and save the Endpoint (Private IP Address). Later, you will need this value to connect to the Heatwave DB using the MySQL Shell client tool.
     ![HeatWave create complete connection](./images/mysql-heatwave-connection-tab.png"mysql heatwave connection ")
 You may now **proceed to the next lab**
 
@@ -323,4 +299,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, August 2025

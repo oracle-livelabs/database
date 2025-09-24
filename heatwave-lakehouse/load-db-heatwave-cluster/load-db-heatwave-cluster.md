@@ -99,18 +99,28 @@ In this lab, you will be guided through the following task:
 
     ```bash
     <copy>EXPLAIN  
-    select `o`.`ORDER_ID` AS `order_id`,`o`.`ORDER_DATETIME` AS `ORDER_DATETIME`,
-	    `o`.`ORDER_STATUS` AS `order_status`, `c`.`CUSTOMER_ID` AS `customer_id`,
-	    `c`.`EMAIL_ADDRESS` AS `email_address`,`c`.`FULL_NAME`  AS `full_name`,
-	    sum((`oi`.`QUANTITY` * `oi`.`UNIT_PRICE`)) AS `order_total`,
-	    `p`.`PRODUCT_NAME` AS `product_name`,`oi`.`LINE_ITEM_ID` AS `LINE_ITEM_ID`,
-	    `oi`.`QUANTITY`  AS `QUANTITY`,`oi`.`UNIT_PRICE` AS `UNIT_PRICE` 
-    from (((`orders` `o` join `order_items` `oi` on((`o`.`ORDER_ID` = `oi`.`ORDER_ID`))) 
-	    join `customers` `c` on((`o`.`CUSTOMER_ID` = `c`.`CUSTOMER_ID`))) 
-	    join `products` `p` on((`oi`.`PRODUCT_ID` = `p`.`PRODUCT_ID`))) 
-    group by `o`.`ORDER_ID`,`o`.`ORDER_DATETIME`,`o`.`ORDER_STATUS`,`c`.`CUSTOMER_ID`
-	    ,`c`.`EMAIL_ADDRESS` ,`c`.`FULL_NAME`,`p`.`PRODUCT_NAME`
-        ,`oi`.`LINE_ITEM_ID`,`oi`.`QUANTITY`,`oi`.`UNIT_PRICE` limit 10;
+    SELECT
+    SUBSTRING_INDEX(c.EMAIL_ADDRESS, '@', -1) AS email_domain,
+    SUM(oi.QUANTITY * oi.UNIT_PRICE) AS total_revenue,
+    AVG(
+        LENGTH(p.PRODUCT_NAME) / (
+            LENGTH(p.PRODUCT_NAME) - LENGTH(REPLACE(p.PRODUCT_NAME, ' ', '')) + 1
+        )
+    ) AS avg_word_length_in_product_name
+    FROM
+        customers c
+    JOIN
+        orders o ON c.CUSTOMER_ID = o.CUSTOMER_ID
+    JOIN
+        order_items oi ON o.ORDER_ID = oi.ORDER_ID
+    JOIN
+        products p ON oi.PRODUCT_ID = p.PRODUCT_ID
+    WHERE
+        o.ORDER_STATUS = 'COMPLETE'
+    GROUP BY
+        email_domain
+    ORDER BY
+        total_revenue DESC;
     </copy>
     ```
 
@@ -119,22 +129,32 @@ In this lab, you will be guided through the following task:
 5. After verifying that the query can be offloaded, run the query and note the execution time. Enter the following command at the prompt:
 
      ```bash
-    <copy> select `o`.`ORDER_ID` AS `order_id`,`o`.`ORDER_DATETIME` AS `ORDER_DATETIME`,
-	    `o`.`ORDER_STATUS` AS `order_status`, `c`.`CUSTOMER_ID` AS `customer_id`,
-	    `c`.`EMAIL_ADDRESS` AS `email_address`,`c`.`FULL_NAME`  AS `full_name`,
-	    sum((`oi`.`QUANTITY` * `oi`.`UNIT_PRICE`)) AS `order_total`,
-	    `p`.`PRODUCT_NAME` AS `product_name`,`oi`.`LINE_ITEM_ID` AS `LINE_ITEM_ID`,
-	    `oi`.`QUANTITY`  AS `QUANTITY`,`oi`.`UNIT_PRICE` AS `UNIT_PRICE` 
-    from (((`orders` `o` join `order_items` `oi` on((`o`.`ORDER_ID` = `oi`.`ORDER_ID`))) 
-	    join `customers` `c` on((`o`.`CUSTOMER_ID` = `c`.`CUSTOMER_ID`))) 
-	    join `products` `p` on((`oi`.`PRODUCT_ID` = `p`.`PRODUCT_ID`))) 
-    group by `o`.`ORDER_ID`,`o`.`ORDER_DATETIME`,`o`.`ORDER_STATUS`,`c`.`CUSTOMER_ID`
-	    ,`c`.`EMAIL_ADDRESS` ,`c`.`FULL_NAME`,`p`.`PRODUCT_NAME`
-        ,`oi`.`LINE_ITEM_ID`,`oi`.`QUANTITY`,`oi`.`UNIT_PRICE` limit 10;
+    <copy> SELECT
+    SUBSTRING_INDEX(c.EMAIL_ADDRESS, '@', -1) AS email_domain,
+    SUM(oi.QUANTITY * oi.UNIT_PRICE) AS total_revenue,
+    AVG(
+        LENGTH(p.PRODUCT_NAME) / (
+            LENGTH(p.PRODUCT_NAME) - LENGTH(REPLACE(p.PRODUCT_NAME, ' ', '')) + 1
+        )
+    ) AS avg_word_length_in_product_name
+    FROM
+        customers c
+    JOIN
+        orders o ON c.CUSTOMER_ID = o.CUSTOMER_ID
+    JOIN
+        order_items oi ON o.ORDER_ID = oi.ORDER_ID
+    JOIN
+        products p ON oi.PRODUCT_ID = p.PRODUCT_ID
+    WHERE
+        o.ORDER_STATUS = 'COMPLETE'
+    GROUP BY
+        email_domain
+    ORDER BY
+        total_revenue DESC;
     </copy>
     ```
 
-    - With HeatWave Cluster **ON: .3509 seconds**
+    - With HeatWave Cluster **ON: 1.3930 seconds**
 
     ![mysql-customer-order data](./images/mysql-customer-order.png "mysql customer order ")
 
@@ -149,22 +169,32 @@ In this lab, you will be guided through the following task:
 7. Enter the following command at the prompt:
 
      ```bash
-    <copy> select `o`.`ORDER_ID` AS `order_id`,`o`.`ORDER_DATETIME` AS `ORDER_DATETIME`,
-	    `o`.`ORDER_STATUS` AS `order_status`, `c`.`CUSTOMER_ID` AS `customer_id`,
-	    `c`.`EMAIL_ADDRESS` AS `email_address`,`c`.`FULL_NAME`  AS `full_name`,
-	    sum((`oi`.`QUANTITY` * `oi`.`UNIT_PRICE`)) AS `order_total`,
-	    `p`.`PRODUCT_NAME` AS `product_name`,`oi`.`LINE_ITEM_ID` AS `LINE_ITEM_ID`,
-	    `oi`.`QUANTITY`  AS `QUANTITY`,`oi`.`UNIT_PRICE` AS `UNIT_PRICE` 
-    from (((`orders` `o` join `order_items` `oi` on((`o`.`ORDER_ID` = `oi`.`ORDER_ID`))) 
-	    join `customers` `c` on((`o`.`CUSTOMER_ID` = `c`.`CUSTOMER_ID`))) 
-	    join `products` `p` on((`oi`.`PRODUCT_ID` = `p`.`PRODUCT_ID`))) 
-    group by `o`.`ORDER_ID`,`o`.`ORDER_DATETIME`,`o`.`ORDER_STATUS`,`c`.`CUSTOMER_ID`
-	    ,`c`.`EMAIL_ADDRESS` ,`c`.`FULL_NAME`,`p`.`PRODUCT_NAME`
-        ,`oi`.`LINE_ITEM_ID`,`oi`.`QUANTITY`,`oi`.`UNIT_PRICE` limit 10;
+    <copy> SELECT
+    SUBSTRING_INDEX(c.EMAIL_ADDRESS, '@', -1) AS email_domain,
+    SUM(oi.QUANTITY * oi.UNIT_PRICE) AS total_revenue,
+    AVG(
+        LENGTH(p.PRODUCT_NAME) / (
+            LENGTH(p.PRODUCT_NAME) - LENGTH(REPLACE(p.PRODUCT_NAME, ' ', '')) + 1
+        )
+    ) AS avg_word_length_in_product_name
+    FROM
+        customers c
+    JOIN
+        orders o ON c.CUSTOMER_ID = o.CUSTOMER_ID
+    JOIN
+        order_items oi ON o.ORDER_ID = oi.ORDER_ID
+    JOIN
+        products p ON oi.PRODUCT_ID = p.PRODUCT_ID
+    WHERE
+        o.ORDER_STATUS = 'COMPLETE'
+    GROUP BY
+        email_domain
+    ORDER BY
+        total_revenue DESC;
     </copy>
     ```
 
-    - With HeatWave Cluster **OFF: 16.4660 seconds**
+    - With HeatWave Cluster **OFF: 5.1417 seconds**
 
     ![RUN](./images/mysql-customer-order-nocluster.png "mysql customer order")
 
@@ -187,4 +217,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, August 2025
