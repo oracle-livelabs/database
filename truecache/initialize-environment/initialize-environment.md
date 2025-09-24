@@ -34,7 +34,7 @@ This lab assumes you have:
 
 ![activities_terminal_icon](images/activities_terminal_icon.png " ")
 
-    - Log in to Podman and check for podman containers.
+3. Log in to Podman and check for podman containers.
 
         ```
         <copy>
@@ -43,7 +43,7 @@ This lab assumes you have:
         ```
         ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
 
-    - If a container is stopped and not in running state then try to restart it.
+4. If a container is stopped and not in running state then try to restart it.
 
         ```
         <copy>
@@ -53,7 +53,7 @@ This lab assumes you have:
         sudo podman start <container ID/NAME>
         </copy>
         ```
-    - For multiple containers, run the following to restart all at once.
+5. For multiple containers, run the following to restart all at once.
 
         ```
         <copy>
