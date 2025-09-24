@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle AI Vector Search - Interactive Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand-yellow: #F1B13F;
+            --slate-100: #697778;
+            --page-bg: #F5F3F0;
+            --white: #FFFFFF;
+            --text-primary: #161513;
+            --text-secondary: #6B6966;
+            --border-color: #D3D3D1;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.12);
+            --focus-color: #C74634;
+            --button-hover: #B13426;
+            --code-bg: #1E1E1E;
+            --success: #4CAF50;
+            --info: #2196F3;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--page-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); }
+        h2 { font-size: 2rem; font-weight: 300; color: var(--text-primary); }
+        h3 { font-size: 1.5rem; font-weight: 400; color: var(--text-primary); }
+        h4 { font-size: 1.25rem; font-weight: 500; color: var(--text-primary); }
+        p { color: var(--text-secondary); margin-bottom: 1rem; }
+        small { font-size: 0.875rem; }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            height: 56px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { display: flex; align-items: center; gap: 16px; }
+        .logo-svg { width: 80px; height: 32px; display: flex; align-items: center; justify-content: center; }
+        .logo h1 { font-size: 1.25rem; font-weight: 400; color: var(--text-primary); }
+
+        /* Progress */
+        .progress-container { background: var(--white); padding: 24px; border-bottom: 1px solid var(--border-color); }
+        .progress-steps { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; gap: 24px; }
+        .step { text-align: center; cursor: pointer; transition: .2s; }
+        .step-circle {
+            width: 32px; height: 32px; background: var(--white); border: 2px solid var(--text-secondary);
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 500; font-size: .875rem; transition: .2s; margin-bottom: 8px;
+        }
+        .step.active .step-circle, .step.completed .step-circle {
+            background: var(--brand-yellow); color: var(--text-primary); border-color: var(--brand-yellow);
+        }
+        .step-title { font-size: .875rem; color: var(--text-secondary); font-weight: 400; }
+        .step.active .step-title { color: var(--text-primary); font-weight: 500; }
+
+        /* Main */
+        .main-content { flex: 1; padding: 32px 24px; max-width: 1200px; width: 100%; margin: 0 auto; }
+        .demo-section { background: var(--white); border-radius: 8px; border: 1px solid var(--border-color); padding: 24px; box-shadow: 0 2px 4px var(--shadow-light); display: none; }
+        .demo-section.active { display: block; }
+        .section-header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+        .section-header h2 { margin-bottom: 8px; }
+        .section-header p { margin: 0; }
+
+        .card { background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; box-shadow: 0 2px 4px var(--shadow-light); transition: .2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px var(--shadow-hover); }
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        .icon { width: 24px; height: 24px; display: inline-block; vertical-align: middle; fill: currentColor; }
+        .icon-large { width: 48px; height: 48px; }
+
+        .btn {
+            padding: 12px 24px; background: var(--slate-100); color: var(--white); border: none; border-radius: 4px;
+            font-size: 1rem; font-weight: 500; cursor: pointer; transition: background .2s; min-height: 44px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn:hover { background: #5a6869; }
+        .btn:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 2px; }
+        .btn-primary { background: var(--brand-yellow); color: var(--text-primary); }
+        .btn-primary:hover { background: #d99d2f; }
+        .btn-secondary { background: var(--white); color: var(--text-primary); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: var(--page-bg); }
+
+        .input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1rem; background: var(--white); transition: border-color .2s; min-height: 44px; }
+        .input:focus { outline: none; border-color: var(--focus-color); }
+        .input:focus-visible { outline: 2px solid var(--focus-color); outline-offset: -2px; }
+        .input-group { display: flex; gap: 16px; margin-bottom: 24px; }
+        .input-group .input { flex: 1; }
+
+        #vectorCanvas { width: 100%; height: 300px; background: var(--white); border-radius: 4px; border: 1px solid var(--border-color); }
+
+        .code-container { background: var(--code-bg); color: #d4d4d4; padding: 16px; border-radius: 4px; margin: 16px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.5; }
+        .keyword { color: #569cd6; } .string { color: #ce9178; } .comment { color: #6a9955; }
+
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px; margin-top: 24px; }
+        .result-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; transition: .2s; }
+        .result-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px var(--shadow-hover); }
+        .similarity-score { display: inline-block; padding: 4px 12px; background: var(--brand-yellow); color: var(--text-primary); border-radius: 4px; font-size: 0.875rem; font-weight: 500; margin-bottom: 8px; }
+
+        .use-case-card { background: var(--white); border: 1px solid var(--border-color); border-top: 4px solid var(--brand-yellow); border-radius: 8px; padding: 24px; transition: .2s; }
+        .use-case-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px var(--shadow-hover); }
+        .use-case-card.secondary { border-top-color: var(--slate-100); }
+        .use-case-card.tertiary { border-top-color: var(--info); }
+
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1px dotted var(--text-secondary); cursor: help; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 250px; background-color: var(--page-bg); color: var(--text-primary);
+            padding: 12px; border-radius: 4px; border: 1px solid var(--border-color); position: absolute; z-index: 1;
+            bottom: 125%; left: 50%; margin-left: -125px; opacity: 0; transition: opacity .2s; font-size: .875rem; box-shadow: 0 2px 4px var(--shadow-light);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .metric-item { background: var(--white); border: 1px solid var(--border-color); border-left: 4px solid var(--brand-yellow); border-radius: 8px; padding: 24px; text-align: center; }
+        .metric-value { font-size: 2rem; font-weight: 300; color: var(--text-primary); margin-bottom: 8px; }
+        .metric-label { font-size: .875rem; color: var(--text-secondary); }
+
+        .loading { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border-color); border-radius: 50%; border-top-color: var(--brand-yellow); animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .progress-steps { overflow-x: auto; padding-bottom: 8px; }
+            .nav-buttons { flex-direction: column; gap: 16px; }
+            h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.25rem; }
+        }
+
+        *:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 2px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+        .success-message { background: var(--white); border: 1px solid var(--success); border-radius: 8px; padding: 32px; text-align: center; margin-top: 24px; }
+        .success-icon { width: 64px; height: 64px; margin: 0 auto 16px; color: var(--success); }
+
+        .feature-list { list-style: none; padding: 0; margin: 24px 0; }
+        .feature-list li { padding: 8px 0; display: flex; align-items: start; gap: 12px; }
+        .feature-icon { width: 20px; height: 20px; flex-shrink: 0; color: var(--brand-yellow); margin-top: 2px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-svg">
+                <svg viewBox="0 0 80 32" fill="#697778" aria-hidden="true">
+                    <rect width="80" height="32" rx="2" fill="currentColor"/>
+                    <text x="40" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">ORACLE</text>
+                </svg>
+            </div>
+            <h1>AI Vector Search</h1>
+        </div>
+        <button class="btn btn-secondary" onclick="resetDemo()">Reset Demo</button>
+    </header>
+
+    <!-- Progress Bar (performance removed) -->
+    <div class="progress-container">
+        <div class="progress-steps">
+            <div class="step active" onclick="goToStep(0)"><div class="step-circle">1</div><div class="step-title">Introduction</div></div>
+            <div class="step" onclick="goToStep(1)"><div class="step-circle">2</div><div class="step-title">Embeddings</div></div>
+            <div class="step" onclick="goToStep(2)"><div class="step-circle">3</div><div class="step-title">Search</div></div>
+            <div class="step" onclick="goToStep(3)"><div class="step-circle">4</div><div class="step-title">Use Cases</div></div>
+            <div class="step" onclick="goToStep(4)"><div class="step-circle">5</div><div class="step-title">Code</div></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- 0: Introduction -->
+        <div class="demo-section active" id="section-0">
+            <div class="section-header">
+                <h2>Welcome to Oracle AI Vector Search</h2>
+                <p>Transform your data into intelligent, searchable vectors with Oracle Database 23ai</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>What is Vector Search?</h3>
+                    <p>
+                        Vector search enables semantic similarity search by converting data into high-dimensional
+                        mathematical representations called
+                        <span class="tooltip">embeddings
+                            <span class="tooltiptext">Numerical representations that capture semantic meaning in vector space</span>
+                        </span>.
+                        Unlike keyword search, vector search understands context and meaning.
+                    </p>
+                    <ul class="feature-list">
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Find similar documents beyond keywords</li>
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Enable intelligent recommendations</li>
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Power conversational AI and chatbots</li>
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Support multimodal search</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Business Value</h3>
+                    <p>Oracle Database 23ai brings AI-powered search directly to your data, reducing complexity.</p>
+                    <ul class="feature-list">
+                        <li><strong>Unified Platform:</strong> combine vectors with relational/JSON/graph</li>
+                        <li><strong>High Performance:</strong> HNSW indexing for fast search</li>
+                        <li><strong>Enterprise Ready:</strong> security, backup, recovery</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <div></div>
+                <button class="btn btn-primary" onclick="nextStep()">Explore Vector Embeddings →</button>
+            </div>
+        </div>
+
+        <!-- 1: Embeddings -->
+        <div class="demo-section" id="section-1">
+            <div class="section-header">
+                <h2>Understanding Vector Embeddings</h2>
+                <p>See how text and data transform into searchable vectors</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Text to Vector Transformation</h3>
+                    <div style="margin: 16px 0;">
+                        <label style="display:block;margin-bottom:8px;font-weight:500;">Enter text to vectorize:</label>
+                        <input type="text" id="textInput" class="input" value="Oracle Database is powerful" style="margin-bottom:16px;">
+                        <button class="btn btn-primary" onclick="vectorizeText()">Generate Embedding</button>
+                    </div>
+                    <div id="vectorOutput" style="margin-top:16px;padding:16px;background:var(--page-bg);border-radius:4px;font-family:monospace;font-size:.875rem;max-height:200px;overflow-y:auto;"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Vector Space Visualization</h3>
+                    <canvas id="vectorCanvas"></canvas>
+                    <p style="margin-top:16px;font-size:.875rem;">Points represent text embeddings in 2D. Identical input → identical point.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h3>How Embeddings Work</h3>
+                <div class="grid grid-3" style="margin-top: 16px;">
+                    <div class="metric-item"><h4>Input Data</h4><p style="font-size:.875rem;">Text, images, or other data types</p></div>
+                    <div class="metric-item"><h4>AI Model</h4><p style="font-size:.875rem;">ONNX, Cohere, OpenAI models</p></div>
+                    <div class="metric-item"><h4>Vector Output</h4><p style="font-size:.875rem;">High-dimensional arrays</p></div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep()">Try Similarity Search →</button>
+            </div>
+        </div>
+
+        <!-- 2: Similarity Search -->
+        <div class="demo-section" id="section-2">
+            <div class="section-header">
+                <h2>Interactive Similarity Search</h2>
+                <p>Experience the power of semantic search in action</p>
+            </div>
+
+            <div class="card">
+                <h3>Search Product Catalog</h3>
+                <p>Find similar products using natural language queries</p>
+                <div class="input-group">
+                    <input type="text" id="searchQuery" class="input" placeholder="Try: 'comfortable running shoes' or 'wireless headphones for gaming'">
+                    <button class="btn btn-primary" onclick="performSearch()"><span id="searchBtnText">Search</span><span id="searchLoader" class="loading" style="display:none;"></span></button>
+                </div>
+                <div id="searchResults" class="results-grid"></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>Distance Metrics</h3>
+                <p>Oracle supports multiple distance metrics for similarity calculation:</p>
+                <div class="grid grid-3" style="margin-top:16px;">
+                    <div class="metric-item"><h4 style="color:var(--brand-yellow);">Cosine Similarity</h4><p style="font-size:.875rem;">Angle between normalized vectors</p></div>
+                    <div class="metric-item"><h4 style="color:var(--slate-100);">Euclidean Distance</h4><p style="font-size:.875rem;">Straight-line distance</p></div>
+                    <div class="metric-item"><h4 style="color:var(--info);">Dot Product</h4><p style="font-size:.875rem;">Fast and effective for recsys</p></div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep()">Explore Use Cases →</button>
+            </div>
+        </div>
+
+        <!-- 3: Use Cases -->
+        <div class="demo-section" id="section-3">
+            <div class="section-header">
+                <h2>Real-World Use Cases</h2>
+                <p>Discover how organizations leverage vector search</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="use-case-card">
+                    <h3>Document Search</h3>
+                    <p>Find relevant documents based on meaning, not just keywords</p>
+                    <ul class="feature-list"><li>Legal document discovery</li><li>Knowledge base search</li><li>Research paper similarity</li><li>Contract analysis</li></ul>
+                    <button class="btn" onclick="showDocumentDemo()" style="margin-top:16px;">Try Demo</button>
+                </div>
+
+                <div class="use-case-card secondary">
+                    <h3>Image Similarity</h3>
+                    <p>Find visually similar images using vector embeddings</p>
+                    <ul class="feature-list"><li>Product image search</li><li>Design matching</li><li>Content deduplication</li></ul>
+                    <button class="btn" onclick="showImageDemo()" style="margin-top:16px;">Try Demo</button>
+                </div>
+
+                <div class="use-case-card tertiary">
+                    <h3>Recommendations</h3>
+                    <p>Personalized recommendations using user behavior vectors</p>
+                    <ul class="feature-list"><li>Product recommendations</li><li>Content suggestions</li><li>Music/video playlists</li><li>Similar user matching</li></ul>
+                    <button class="btn" onclick="showRecommendationDemo()" style="margin-top:16px;">Try Demo</button>
+                </div>
+            </div>
+
+            <div id="useCaseDemo" style="display:none;margin-top:24px;">
+                <div class="card">
+                    <h3 id="useCaseTitle"></h3>
+                    <div id="useCaseContent"></div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep()">View Code Examples →</button>
+            </div>
+        </div>
+
+        <!-- 4: Code Examples (index shifted; performance removed) -->
+        <div class="demo-section" id="section-4">
+            <div class="section-header">
+                <h2>Implementation Examples</h2>
+                <p>Get started with Oracle AI Vector Search using these code snippets</p>
+            </div>
+
+            <div class="card">
+                <h3>1. Create a Table with VECTOR Column</h3>
+                <div class="code-container"><pre><span class="comment">-- Create a products table with vector embeddings</span>
+<span class="keyword">CREATE TABLE</span> products (
+    product_id   <span class="keyword">NUMBER PRIMARY KEY</span>,
+    name         <span class="keyword">VARCHAR2</span>(200),
+    description  <span class="keyword">CLOB</span>,
+    embedding    <span class="keyword">VECTOR</span>(384),
+    price        <span class="keyword">NUMBER</span>(10,2),
+    category     <span class="keyword">VARCHAR2</span>(100)
+);</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>2. Create HNSW Index</h3>
+                <div class="code-container"><pre><span class="comment">-- Create an HNSW index for fast similarity search</span>
+<span class="keyword">CREATE VECTOR INDEX</span> products_hnsw_idx
+<span class="keyword">ON</span> products(embedding)
+<span class="keyword">ORGANIZATION NEIGHBOR GRAPH</span>
+<span class="keyword">DISTANCE</span> COSINE
+<span class="keyword">WITH</span> M = 16, EFCONSTRUCTION = 64;</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>3. Perform Similarity Search</h3>
+                <div class="code-container"><pre><span class="comment">-- Find top 5 similar products using vector search</span>
+<span class="keyword">SELECT</span> 
+    product_id, name, description, price,
+    <span class="keyword">VECTOR_DISTANCE</span>(embedding, :query_vector, COSINE) <span class="keyword">AS</span> similarity_score
+<span class="keyword">FROM</span> products
+<span class="keyword">ORDER BY</span> similarity_score
+<span class="keyword">FETCH FIRST</span> 5 <span class="keyword">ROWS ONLY</span>;</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>4. Python Integration</h3>
+                <div class="code-container"><pre><span class="keyword">import</span> oracledb
+<span class="keyword">from</span> sentence_transformers <span class="keyword">import</span> SentenceTransformer
+
+model = SentenceTransformer(<span class="string">'all-MiniLM-L6-v2'</span>)
+query_text = <span class="string">"comfortable running shoes"</span>
+query_embedding = model.encode(query_text).tolist()
+
+cursor.execute(<span class="string">"""
+    SELECT name, description, 
+           VECTOR_DISTANCE(embedding, :1, COSINE) AS score
+    FROM products
+    ORDER BY score
+    FETCH FIRST 5 ROWS ONLY
+"""</span>, [query_embedding])</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;background:var(--page-bg);">
+                <h3>Resources &amp; Documentation</h3>
+                <div class="grid grid-3" style="margin-top:16px;">
+                    <a href="https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/" target="_blank" style="text-decoration:none;">
+                        <div class="metric-item" style="cursor:pointer;"><h4>Vector Search Guide</h4></div>
+                    </a>
+                    <a href="https://www.oracle.com/database/ai-vector-search/" target="_blank" style="text-decoration:none;">
+                        <div class="metric-item" style="cursor:pointer;"><h4>Product Page</h4></div>
+                    </a>
+                    <a href="https://livelabs.oracle.com/pls/apex/f?p=133:180:114898719666832::::wid:4166" target="_blank" style="text-decoration:none;">
+                        <div class="metric-item" style="cursor:pointer;"><h4>LiveLabs Workshop</h4></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="completeDemo()">Complete Demo ✓</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ----- Demo state (performance removed: 5 steps total) -----
+        let currentStep = 0;
+        const totalSteps = 5;
+        let canvas, ctx;
+
+        // Sample product data
+        const products = [
+            { id:1, name:"Ultra Boost Running Shoes", description:"Comfortable cushioned running shoes with responsive boost technology", price:"$180", category:"Footwear",    embedding:[0.8,0.2,0.5,0.3,0.9], keywords:['running','shoes','comfort','sports','athletic','boost'] },
+            { id:2, name:"Wireless Gaming Headset",   description:"Premium gaming headphones with surround sound and noise cancellation", price:"$299", category:"Electronics", embedding:[0.1,0.9,0.3,0.8,0.2], keywords:['gaming','headset','wireless','audio','headphones','sound'] },
+            { id:3, name:"Smart Fitness Watch",       description:"Track your health and fitness with GPS and heart rate monitoring",      price:"$399", category:"Electronics", embedding:[0.3,0.7,0.6,0.9,0.4], keywords:['fitness','watch','smart','health','tracking','gps'] },
+            { id:4, name:"Professional Running Shoes", description:"Lightweight marathon running shoes for serious athletes",              price:"$220", category:"Footwear",    embedding:[0.9,0.3,0.4,0.2,0.8], keywords:['running','marathon','professional','athletic','lightweight','shoes'] },
+            { id:5, name:"Noise-Canceling Earbuds",   description:"Compact wireless earbuds with active noise cancellation",             price:"$249", category:"Electronics", embedding:[0.2,0.8,0.4,0.7,0.3], keywords:['earbuds','wireless','noise','canceling','audio','compact'] },
+            { id:6, name:"Trail Running Shoes",       description:"Durable shoes for trail running with excellent grip",                 price:"$160", category:"Footwear",    embedding:[0.7,0.4,0.6,0.1,0.9], keywords:['trail','running','outdoor','grip','durable','shoes'] },
+            { id:7, name:"Yoga Mat Premium",          description:"Non-slip eco-friendly yoga mat with extra cushioning",               price:"$89",  category:"Fitness",     embedding:[0.4,0.5,0.8,0.3,0.6], keywords:['yoga','mat','fitness','eco','cushion','exercise'] },
+            { id:8, name:"Wireless Mouse Pro",        description:"Ergonomic wireless mouse with precision tracking",                   price:"$79",  category:"Electronics", embedding:[0.15,0.85,0.45,0.75,0.25], keywords:['mouse','wireless','ergonomic','computer','precision','office'] },
+            { id:9, name:"Basketball Shoes Elite",    description:"High-performance basketball shoes with ankle support",               price:"$195", category:"Footwear",    embedding:[0.85,0.35,0.55,0.15,0.75], keywords:['basketball','shoes','sports','performance','ankle','court'] },
+            { id:10, name:"Portable Speaker",         description:"Waterproof bluetooth speaker with 360-degree sound",                 price:"$149", category:"Electronics", embedding:[0.25,0.75,0.35,0.85,0.45], keywords:['speaker','bluetooth','portable','waterproof','audio','music'] }
+        ];
+
+        // ----- Canvas setup -----
+        function setupCanvas() {
+            const c = document.getElementById('vectorCanvas');
+            if (!c) return;
+            canvas = c; ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth; canvas.height = 300;
+        }
+        function drawVectorSpace() {
+            if (!ctx) return;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 0.5;
+            for (let i=0;i<=canvas.width;i+=40){ ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,canvas.height); ctx.stroke(); }
+            for (let i=0;i<=canvas.height;i+=40){ ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(canvas.width,i); ctx.stroke(); }
+
+            const pts = [
+                {x:100,y:100,label:"Database", color:"#697778"},
+                {x:120,y:120,label:"Oracle",   color:"#697778"},
+                {x:250,y: 80,label:"Search",   color:"#F1B13F"},
+                {x:270,y:100,label:"Query",    color:"#F1B13F"},
+                {x:150,y:200,label:"Vector",   color:"#697778"},
+                {x:180,y:220,label:"Embedding",color:"#697778"}
+            ];
+            pts.forEach(p=>{
+                ctx.strokeStyle = p.color+'20'; ctx.lineWidth=1;
+                ctx.beginPath(); ctx.moveTo(canvas.width/2,canvas.height/2); ctx.lineTo(p.x,p.y); ctx.stroke();
+                ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x,p.y,6,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle = '#161513'; ctx.font = '12px Arial, sans-serif'; ctx.fillText(p.label, p.x+10, p.y+4);
+            });
+        }
+
+        // ----- Navigation -----
+        function goToStep(step){ if(step>=0 && step<totalSteps){ currentStep=step; updateUI(); } }
+        function nextStep(){ if(currentStep<totalSteps-1){ currentStep++; updateUI(); } }
+        function previousStep(){ if(currentStep>0){ currentStep--; updateUI(); } }
+        function updateUI(){
+            document.querySelectorAll('.demo-section').forEach((s,i)=> s.classList.toggle('active', i===currentStep));
+            document.querySelectorAll('.step').forEach((st,i)=>{
+                st.classList.remove('active','completed');
+                if(i<currentStep) st.classList.add('completed');
+                else if(i===currentStep) st.classList.add('active');
+            });
+            if(currentStep===1){ setTimeout(()=>{ setupCanvas(); drawVectorSpace(); }, 100); }
+        }
+
+        // ----- Deterministic embedding + point -----
+        function hashString(str){
+            // 32-bit FNV-1a
+            let h = 0x811c9dc5;
+            for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24)))>>>0; }
+            return h>>>0;
+        }
+        function seededRand(seed){
+            // simple LCG
+            let s = seed>>>0;
+            return ()=>{ s = (1664525*s + 1013904223)>>>0; return (s & 0xffffffff)/0x100000000; };
+        }
+        function vectorizeText(){
+            const input = (document.getElementById('textInput').value || '').trim();
+            const out = document.getElementById('vectorOutput');
+            const h = hashString(input.toLowerCase());
+            const rand = seededRand(h);
+
+            // Deterministic 10D preview vector (values in [-1,1])
+            const embedding = Array.from({length:10}, ()=> (rand()*2-1));
+            const norm = Math.sqrt(embedding.reduce((a,b)=>a+b*b,0));
+
+            out.innerHTML = `
+                <strong>Generated Embedding (384D preview):</strong><br>
+                <span style="color: var(--text-secondary);">[${embedding.slice(0,10).map(v=>v.toFixed(4)).join(', ')}, ...]</span><br><br>
+                <strong>Dimensions:</strong> 384<br>
+                <strong>Model:</strong> all-MiniLM-L6-v2<br>
+                <strong>Norm:</strong> ${norm.toFixed(4)}
+            `;
+
+            // Deterministic canvas point from hash
+            if(ctx){
+                const pad = 40;
+                const rx = rand(); const ry = rand();
+                const x = pad + rx*(canvas.width - pad*2);
+                const y = pad + ry*(canvas.height - pad*2);
+
+                // redraw grid then existing anchors
+                drawVectorSpace();
+
+                ctx.fillStyle = '#F1B13F';
+                ctx.beginPath(); ctx.arc(x,y,6,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle = '#161513'; ctx.font = '12px Arial, sans-serif';
+                ctx.fillText((input||'text').substring(0,12) + (input.length>12?'…':''), x+10, y+4);
+            }
+        }
+
+        // ----- Product Search (kept as-is) -----
+        function performSearch(){
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+            const btn = document.getElementById('searchBtnText');
+            const loader = document.getElementById('searchLoader');
+
+            if(!query){ resultsDiv.innerHTML = '<p>Please enter a search query</p>'; return; }
+            btn.style.display='none'; loader.style.display='inline-block';
+
+            setTimeout(()=>{
+                const results = products.map(p=>{
+                    let score = 0.3 + Math.random()*0.2;
+                    const words = query.split(/\s+/);
+                    words.forEach(w=>{
+                        if(p.keywords.some(k=>k.includes(w))) score += 0.15;
+                        if(p.name.toLowerCase().includes(w)) score += 0.2;
+                        if(p.description.toLowerCase().includes(w)) score += 0.1;
+                    });
+                    score += (Math.random()-0.5)*0.1;
+                    score = Math.min(0.99, Math.max(0.1, score));
+                    return {...p, score};
+                }).sort((a,b)=>b.score-a.score).slice(0,4);
+
+                resultsDiv.innerHTML = results.map(p=>`
+                    <div class="result-card">
+                        <div class="similarity-score">${(p.score*100).toFixed(1)}% Match</div>
+                        <h4>${p.name}</h4>
+                        <p style="margin:8px 0;">${p.description}</p>
+                        <p style="font-size:1.25rem;font-weight:500;color:var(--text-primary);margin-top:16px;">${p.price}</p>
+                        <p style="font-size:.875rem;color:var(--text-secondary);">Category: ${p.category}</p>
+                    </div>
+                `).join('');
+
+                btn.style.display='inline'; loader.style.display='none';
+            }, 600);
+        }
+
+        // ----- Use Case Demos -----
+        function showDocumentDemo(){
+            const demo=document.getElementById('useCaseDemo');
+            const title=document.getElementById('useCaseTitle');
+            const content=document.getElementById('useCaseContent');
+            demo.style.display='block'; title.textContent='Document Search Demo';
+            content.innerHTML = `
+                <p>Interactive legal document search using semantic similarity:</p>
+                <div style="margin:16px 0;">
+                    <input type="text" id="docSearchInput" class="input" placeholder="Enter legal query (e.g., 'breach of contract')">
+                    <button class="btn btn-primary" style="margin-top:16px;" onclick="searchDocuments()">Search Documents</button>
+                </div>
+                <div id="docResults"></div>`;
+        }
+        function searchDocuments(){
+            const q=(document.getElementById('docSearchInput').value||'').trim();
+            const div=document.getElementById('docResults');
+            if(!q){ div.innerHTML='<p>Please enter a search query</p>'; return; }
+            const docs=[
+                { title:"Contract Law: Performance and Breach", snippet:"failure to deliver goods within the specified timeframe constitutes material breach", score:94 },
+                { title:"Supply Chain Agreement Terms", snippet:"remedies for delayed shipments include liquidated damages", score:87 },
+                { title:"Commercial Litigation Guidelines", snippet:"establishing damages requires proof of causation and foreseeability", score:76 }
+            ];
+            div.innerHTML = docs.map(d=>`
+                <div class="result-card" style="margin-top:16px;">
+                    <span class="similarity-score">${d.score}% Match</span>
+                    <h4>${d.title}</h4>
+                    <p>...${d.snippet}...</p>
+                </div>`).join('');
+        }
+
+        // --- Image Similarity (now shows emoji thumbnails after clicking) ---
+        function showImageDemo(){
+            const demo=document.getElementById('useCaseDemo');
+            const title=document.getElementById('useCaseTitle');
+            const content=document.getElementById('useCaseContent');
+            demo.style.display='block'; title.textContent='Image Similarity Demo';
+            content.innerHTML = `
+                <p>Visual similarity search for product images:</p>
+                <div style="margin:16px 0;">
+                    <select id="imageCategory" class="input">
+                        <option value="">Select product category...</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="apparel">Apparel</option>
+                    </select>
+                    <button class="btn btn-primary" style="margin-top:16px;" onclick="searchImages()">Find Similar Images</button>
+                </div>
+                <div id="imageResults"></div>`;
+        }
+        function searchImages(){
+            const cat=document.getElementById('imageCategory').value;
+            const div=document.getElementById('imageResults');
+            if(!cat){ div.innerHTML='<p>Please select a category</p>'; return; }
+
+            // Use emojis as inline thumbnails so it renders on GitHub Pages without assets
+            const data = {
+                footwear: [
+                    {label:'White Sneaker', emoji:'👟', score:95},
+                    {label:'Trail Boot', emoji:'🥾', score:88},
+                    {label:'Red Heel', emoji:'👠', score:82},
+                    {label:'Court Sneaker', emoji:'👟', score:77}
+                ],
+                electronics: [
+                    {label:'Gaming Headset', emoji:'🎧', score:94},
+                    {label:'Wireless Earbuds', emoji:'🎶', score:86},
+                    {label:'Portable Speaker', emoji:'🔊', score:81},
+                    {label:'Wireless Mouse', emoji:'🖱️', score:76}
+                ],
+                apparel: [
+                    {label:'Running Shirt', emoji:'👕', score:92},
+                    {label:'Training Pants', emoji:'👖', score:85},
+                    {label:'Running Jacket', emoji:'🧥', score:80},
+                    {label:'Athletic Cap', emoji:'🧢', score:75}
+                ]
+            };
+            const items = data[cat];
+
+            div.innerHTML = `
+                <div class="grid grid-3" style="margin-top:16px;">
+                    ${items.map(it=>`
+                        <div class="result-card" style="text-align:center;">
+                            <div style="width:100%;height:100px;background:var(--page-bg);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:42px;">${it.emoji}</div>
+                            <span class="similarity-score" style="margin-top:8px;display:inline-block;">${it.score}%</span>
+                            <p style="margin-top:8px;">${it.label}</p>
+                        </div>`).join('')}
+                </div>`;
+        }
+
+        function showRecommendationDemo(){
+            const demo=document.getElementById('useCaseDemo');
+            const title=document.getElementById('useCaseTitle');
+            const content=document.getElementById('useCaseContent');
+            demo.style.display='block'; title.textContent='Recommendation Engine Demo';
+            content.innerHTML = `
+                <p>Personalized product recommendations based on user profile:</p>
+                <div style="margin:16px 0;">
+                    <label style="display:block;margin-bottom:8px;">Select your interests:</label>
+                    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                        <label><input type="checkbox" value="gaming"> Gaming</label>
+                        <label><input type="checkbox" value="fitness"> Fitness</label>
+                        <label><input type="checkbox" value="music"> Music</label>
+                        <label><input type="checkbox" value="productivity"> Productivity</label>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top:16px;" onclick="getRecommendations()">Get Recommendations</button>
+                </div>
+                <div id="recResults"></div>`;
+        }
+        function getRecommendations(){
+            const sel=[...document.querySelectorAll('#useCaseContent input[type="checkbox"]:checked')].map(cb=>cb.value);
+            const div=document.getElementById('recResults');
+            if(sel.length===0){ div.innerHTML='<p>Please select at least one interest</p>'; return; }
+
+            const recs = products.filter(p=>{
+                if(sel.includes('gaming') && p.keywords.includes('gaming')) return true;
+                if(sel.includes('fitness') && (p.keywords.includes('fitness')||p.keywords.includes('running'))) return true;
+                if(sel.includes('music') && p.keywords.includes('audio')) return true;
+                if(sel.includes('productivity') && (p.keywords.includes('mouse')||p.keywords.includes('office'))) return true;
+                return false;
+            }).slice(0,3);
+
+            div.innerHTML = (recs.length?recs:products.slice(0,3)).map((r,i)=>`
+                <div class="result-card" style="margin-top:16px;">
+                    <span class="similarity-score">${92 - i*4}% Match</span>
+                    <h4>${r.name}</h4>
+                    <p>${r.description}</p>
+                </div>`).join('');
+        }
+
+        // ----- Misc -----
+        function resetDemo(){
+            currentStep=0; updateUI();
+            const q=document.getElementById('searchQuery'); if(q) q.value='';
+            const r=document.getElementById('searchResults'); if(r) r.innerHTML='';
+            const u=document.getElementById('useCaseDemo'); if(u) u.style.display='none';
+            setupCanvas(); drawVectorSpace();
+        }
+        function completeDemo(){
+            const section=document.getElementById('section-4');
+            const div=document.createElement('div');
+            div.className='success-message';
+            div.innerHTML=`
+                <svg class="success-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 32l8 8 16-16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <h2 style="margin-bottom:8px;">Demo Complete!</h2>
+                <p>You've successfully explored Oracle AI Vector Search capabilities.</p>
+                <div style="margin-top:24px;display:flex;gap:16px;justify-content:center;">
+                    <button class="btn btn-secondary" onclick="resetDemo()">Restart Demo</button>
+                    <a href="https://www.oracle.com/database/ai-vector-search/" target="_blank"><button class="btn btn-primary">Learn More</button></a>
+                </div>`;
+            section.appendChild(div);
+            div.scrollIntoView({behavior:'smooth', block:'center'});
+        }
+
+        // Init
+        function initDemo(){ setupCanvas(); drawVectorSpace(); setupKeyboardNavigation(); }
+        function setupKeyboardNavigation(){
+            document.addEventListener('keydown',(e)=>{
+                if(e.key==='ArrowRight') nextStep();
+                else if(e.key==='ArrowLeft') previousStep();
+                else if(e.key>='1' && e.key<='5') goToStep(parseInt(e.key)-1);
+            });
+        }
+        window.addEventListener('DOMContentLoaded', initDemo);
+        window.addEventListener('resize', ()=>{ setupCanvas(); drawVectorSpace(); });
+
+        // Optional: remember step locally (safe for GitHub Pages)
+        function saveProgress(){ try{ localStorage.setItem('oracleVectorDemoStep', currentStep);}catch(e){} }
+        function loadProgress(){ try{ const s=localStorage.getItem('oracleVectorDemoStep'); if(s!==null){ currentStep=parseInt(s); updateUI(); } }catch(e){} }
+        setInterval(saveProgress, 5000);
+        window.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

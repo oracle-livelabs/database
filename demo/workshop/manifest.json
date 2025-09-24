@@ -1,0 +1,11 @@
+{
+  "workshoptitle": "Try a Quick Vector Search Demo",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Learn more about Oracle's Vector Search feature in Oracle Database 23ai",
+      "filename": "../vector-demo-introduction.md"
+    }
+  ]
+}
