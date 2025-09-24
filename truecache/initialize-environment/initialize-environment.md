@@ -41,7 +41,7 @@ This lab assumes you have:
         sudo podman ps -a
         </copy>
         ```
-        ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
+    ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
 
 4. If a container is stopped and not in running state then try to restart it.
 
@@ -49,6 +49,8 @@ This lab assumes you have:
         <copy>
         sudo podman stop <container ID/NAME>
         </copy>
+        ```
+        ```
         <copy>
         sudo podman start <container ID/NAME>
         </copy>
@@ -59,6 +61,8 @@ This lab assumes you have:
         <copy>
         sudo podman container stop $(sudo podman container list -qa)
         </copy>
+        ```
+        ```
         <copy>
         sudo podman container start $(sudo podman container list -qa)
         </copy>
