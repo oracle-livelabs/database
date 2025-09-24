@@ -10,6 +10,8 @@ You will use the easiest method for transportable tablespaces, Full Transportabl
 
 Estimated Time: 15 minutes
 
+[Lab 13 walk-through](videohub:1_swnymxf8)
+
 ### Objectives
 
 In this lab, you will:

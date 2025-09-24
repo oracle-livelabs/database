@@ -6,6 +6,8 @@ This lab focuses on databases encrypted using Transparent Data Encryption (TDE).
 
 Estimated Time: 25 minutes
 
+[Lab 14 walk-through](videohub:1_gnqp040b)
+
 ### Objectives
 
 In this lab, you will:
