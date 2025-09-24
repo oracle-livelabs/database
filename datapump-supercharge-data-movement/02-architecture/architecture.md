@@ -6,6 +6,8 @@ In this lab, you will have a look at the components making up Data Pump
 
 Estimated Time: 5 Minutes
 
+[Lab 2 walk-through](videohub:1_ptbxqeer)
+
 ### Objectives
 
 In this lab, you will:

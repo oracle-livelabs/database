@@ -25,7 +25,7 @@ In this lab, you will:
 
 1. Login to the Oracle Cloud. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in the home region of the tenancy.
 
-2. Open the **Navigation** menu in the upper left and click **Oracle Database**. Under **Oracle Database**, click **Autonomous Transaction Processing**. The **Autonomous Transaction Processing** page should be displayed.
+2. Open the **Navigation** menu in the upper left and click **Oracle Database**. Under **Oracle Database**, click **Autonomous Database**.
 
     ![Oracle Database](images/create-adb1.png)
 
@@ -44,14 +44,12 @@ In this lab, you will:
     - **Database Name** - You can leave the prepopulated name. If you want to change it, use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not
     initially supported.)
     - **Workload** - For this lab, choose *Transaction Processing*.
-    - **Deployment Type** - Choose *Serverless* as the deployment type.
 
     ![Config database1](images/create-adb3-1.png)
 
 4. Configure the database:
 
-    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, you can leave Always Free checked.
-    - **Choose database version** - Select 23ai from the database version.
+    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database.
 
     ![Config database2](images/create-adb3-2.png)
 
@@ -68,7 +66,7 @@ In this lab, you will:
 
     ![Config network](images/create-adb-network.png)
 
-7. Click **Create Autonomous Database**
+7. Click **Create**
 
     ![Create](images/create-adb-7.png)
 
@@ -80,6 +78,8 @@ In this lab, you will:
 
     ![Tool Config](images/create-adb6.png)
 
+    ![Enable Mongo](images/create-adb8.png)
+
     > **_NOTE:_**  More information about this can be found in the **Learn More** section.
 
 ## Learn More
@@ -90,4 +90,4 @@ In this lab, you will:
 
 * **Author** - Carmen Berdant, Technical Program Manager, Product Management
 * **Contributors** -  Kevin Lazarz, Senior Manager, Product Management
-* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, August 2024
+* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, September 2025
