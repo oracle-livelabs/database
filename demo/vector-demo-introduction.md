@@ -13,7 +13,8 @@ You may add an optional video, using this format: [](youtube:YouTube video id)
 ### Try the Interactive Demo
 
 Launch the HTML demo here:
-- [Open the Interactive Demo](./vector-demo.html)
+- <a href="./vector-demo.html" target="_blank">Open the Interactive Demo</a>
+
 
 What you’ll see:
 - Introduction: High-level overview of vector search
