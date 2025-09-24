@@ -23,7 +23,9 @@ This lab assumes you have:
 
  ![default_windows_raft_livelabs](images/default_windows_raft_livelabs.png " ")
 
-2. Reload the browser windows at anytime (when not shown for some reason)
+    You can skip the below stpes if both browser windows are shown.
+
+2. If both browser windows are shown for some reason, reload the browser windows at anytime with steps as below:
 
     a. Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
     
