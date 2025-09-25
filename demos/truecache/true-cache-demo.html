@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle True Cache - Interactive Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand-yellow: #F1B13F;
+            --slate-100: #697778;
+            --page-bg: #F5F3F0;
+            --white: #FFFFFF;
+            --text-primary: #161513;
+            --text-secondary: #6B6966;
+            --border-color: #D3D3D1;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.12);
+            --focus-color: #C74634;
+            --button-hover: #B13426;
+            --code-bg: #1E1E1E;
+            --success: #4CAF50;
+            --info: #2196F3;
+            --cache-hit: #4CAF50;
+            --cache-miss: #FF5252;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--page-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); }
+        h2 { font-size: 2rem; font-weight: 300; color: var(--text-primary); }
+        h3 { font-size: 1.5rem; font-weight: 400; color: var(--text-primary); }
+        h4 { font-size: 1.25rem; font-weight: 500; color: var(--text-primary); }
+        p { color: var(--text-secondary); margin-bottom: 1rem; }
+        small { font-size: 0.875rem; }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            height: 56px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+        .logo h1 { font-size: 1.25rem; font-weight: 400; color: var(--text-primary); }
+
+        /* Progress */
+        .progress-container { background: var(--white); padding: 24px; border-bottom: 1px solid var(--border-color); }
+        .progress-steps { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; gap: 24px; }
+        .step { text-align: center; cursor: pointer; transition: .2s; flex: 1; }
+        .step-circle {
+            width: 32px; height: 32px; background: var(--white); border: 2px solid var(--text-secondary);
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 500; font-size: .875rem; transition: .2s; margin-bottom: 8px;
+        }
+        .step.active .step-circle, .step.completed .step-circle {
+            background: var(--brand-yellow); color: var(--text-primary); border-color: var(--brand-yellow);
+        }
+        .step-title { font-size: .875rem; color: var(--text-secondary); font-weight: 400; }
+        .step.active .step-title { color: var(--text-primary); font-weight: 500; }
+
+        /* Main */
+        .main-content { flex: 1; padding: 32px 24px; max-width: 1200px; width: 100%; margin: 0 auto; }
+        .demo-section { background: var(--white); border-radius: 8px; border: 1px solid var(--border-color); padding: 24px; box-shadow: 0 2px 4px var(--shadow-light); display: none; }
+        .demo-section.active { display: block; }
+        .section-header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+        .section-header h2 { margin-bottom: 8px; }
+        .section-header p { margin: 0; }
+
+        .card { background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; box-shadow: 0 2px 4px var(--shadow-light); transition: .2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px var(--shadow-hover); }
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        .icon { width: 24px; height: 24px; display: inline-block; vertical-align: middle; fill: currentColor; }
+        .icon-large { width: 48px; height: 48px; }
+
+        .btn {
+            padding: 12px 24px; background: var(--slate-100); color: var(--white); border: none; border-radius: 4px;
+            font-size: 1rem; font-weight: 500; cursor: pointer; transition: background .2s; min-height: 44px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn:hover { background: #5a6869; }
+        .btn:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 2px; }
+        .btn-primary { background: var(--brand-yellow); color: var(--text-primary); }
+        .btn-primary:hover { background: #d99d2f; }
+        .btn-secondary { background: var(--white); color: var(--text-primary); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: var(--page-bg); }
+
+        .input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1rem; background: var(--white); transition: border-color .2s; min-height: 44px; }
+        .input:focus { outline: none; border-color: var(--focus-color); }
+        .input:focus-visible { outline: 2px solid var(--focus-color); outline-offset: -2px; }
+        .input-group { display: flex; gap: 16px; margin-bottom: 24px; }
+        .input-group .input { flex: 1; }
+
+        #cacheCanvas { width: 100%; height: 400px; background: var(--white); border-radius: 4px; border: 1px solid var(--border-color); }
+
+        .code-container { background: var(--code-bg); color: #d4d4d4; padding: 16px; border-radius: 4px; margin: 16px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.5; }
+        .keyword { color: #569cd6; } .string { color: #ce9178; } .comment { color: #6a9955; }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .comparison-table th {
+            background: var(--page-bg);
+            font-weight: 500;
+        }
+        .comparison-table .highlight {
+            color: var(--brand-yellow);
+            font-weight: 500;
+        }
+
+        .use-case-card { background: var(--white); border: 1px solid var(--border-color); border-top: 4px solid var(--brand-yellow); border-radius: 8px; padding: 24px; transition: .2s; }
+        .use-case-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px var(--shadow-hover); }
+        .use-case-card.secondary { border-top-color: var(--slate-100); }
+        .use-case-card.tertiary { border-top-color: var(--info); }
+
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1px dotted var(--text-secondary); cursor: help; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 250px; background-color: var(--page-bg); color: var(--text-primary);
+            padding: 12px; border-radius: 4px; border: 1px solid var(--border-color); position: absolute; z-index: 1;
+            bottom: 125%; left: 50%; margin-left: -125px; opacity: 0; transition: opacity .2s; font-size: .875rem; box-shadow: 0 2px 4px var(--shadow-light);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .metric-item { background: var(--white); border: 1px solid var(--border-color); border-left: 4px solid var(--brand-yellow); border-radius: 8px; padding: 24px; text-align: center; }
+        .metric-value { font-size: 2rem; font-weight: 300; color: var(--text-primary); margin-bottom: 8px; }
+        .metric-label { font-size: .875rem; color: var(--text-secondary); }
+
+        .architecture-diagram {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            margin: 24px 0;
+        }
+        .arch-component {
+            text-align: center;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--white);
+            min-width: 120px;
+            transition: .2s;
+        }
+        .arch-component:hover {
+            border-color: var(--brand-yellow);
+            transform: scale(1.05);
+        }
+        .arch-arrow {
+            width: 40px;
+            height: 2px;
+            background: var(--text-secondary);
+            position: relative;
+        }
+        .arch-arrow::after {
+            content: '▶';
+            position: absolute;
+            right: -10px;
+            top: -8px;
+            color: var(--text-secondary);
+        }
+
+        .cache-simulator {
+            background: var(--page-bg);
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 24px;
+        }
+        .cache-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+        .cache-hit { background: var(--cache-hit); color: white; }
+        .cache-miss { background: var(--cache-miss); color: white; }
+
+        .loading { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border-color); border-radius: 50%; border-top-color: var(--brand-yellow); animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .feature-list { list-style: none; padding: 0; margin: 24px 0; }
+        .feature-list li { padding: 8px 0; display: flex; align-items: start; gap: 12px; }
+        .feature-icon { width: 20px; height: 20px; flex-shrink: 0; color: var(--brand-yellow); margin-top: 2px; }
+
+        .success-message { background: var(--white); border: 1px solid var(--success); border-radius: 8px; padding: 32px; text-align: center; margin-top: 24px; }
+        .success-icon { width: 64px; height: 64px; margin: 0 auto 16px; color: var(--success); }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .progress-steps { overflow-x: auto; padding-bottom: 8px; }
+            .nav-buttons { flex-direction: column; gap: 16px; }
+            .architecture-diagram { flex-direction: column; }
+            .arch-arrow { transform: rotate(90deg); margin: 16px 0; }
+            h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.25rem; }
+        }
+
+        *:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 2px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="var(--brand-yellow)">
+                    <rect x="8" y="8" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="16" cy="16" r="4" fill="currentColor"/>
+                </svg>
+            </div>
+            <h1>True Cache</h1>
+        </div>
+        <button class="btn btn-secondary" onclick="resetDemo()">Reset Demo</button>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-steps">
+            <div class="step active" onclick="goToStep(0)"><div class="step-circle">1</div><div class="step-title">Introduction</div></div>
+            <div class="step" onclick="goToStep(1)"><div class="step-circle">2</div><div class="step-title">Architecture</div></div>
+            <div class="step" onclick="goToStep(2)"><div class="step-circle">3</div><div class="step-title">Cache Demo</div></div>
+            <div class="step" onclick="goToStep(3)"><div class="step-circle">4</div><div class="step-title">Use Cases</div></div>
+            <div class="step" onclick="goToStep(4)"><div class="step-circle">5</div><div class="step-title">Implementation</div></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- 0: Introduction -->
+        <div class="demo-section active" id="section-0">
+            <div class="section-header">
+                <h2>Welcome to Oracle True Cache</h2>
+                <p>In-memory, consistent, and automatically refreshed SQL and object cache for Oracle Database 23ai</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>What is True Cache?</h3>
+                    <p>
+                        True Cache is an in-memory 
+                        <span class="tooltip">SQL and object cache
+                            <span class="tooltiptext">Handles all read SQLs like Oracle Database and caches objects with automatic consistency</span>
+                        </span>
+                        deployed in front of an Oracle database. It's conceptually like a diskless Active Data Guard standby.
+                    </p>
+                    <ul class="feature-list">
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Always current and consistent data</li>
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Automatic schema propagation</li>
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>No application changes required</li>
+                        <li><svg class="feature-icon" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Enterprise security built-in</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Why True Cache?</h3>
+                    <p>Unlike conventional caches (Redis, Memcached), True Cache eliminates developer burden:</p>
+                    <table style="width: 100%; margin-top: 16px;">
+                        <tr>
+                            <td style="padding: 8px 0;">Cache Loading</td>
+                            <td style="text-align: right; color: var(--brand-yellow); font-weight: 500;">Automated</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;">Data Consistency</td>
+                            <td style="text-align: right; color: var(--brand-yellow); font-weight: 500;">Automated</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;">Complex Data Types</td>
+                            <td style="text-align: right; color: var(--brand-yellow); font-weight: 500;">Automated</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;">High Availability</td>
+                            <td style="text-align: right; color: var(--brand-yellow); font-weight: 500;">In-Built</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px; background: var(--page-bg);">
+                <h3>Business Benefits</h3>
+                <div class="grid grid-3" style="margin-top: 16px;">
+                    <div class="metric-item">
+                        <div class="metric-value">💰</div>
+                        <div class="metric-label">Cost Savings</div>
+                        <p style="font-size: .875rem; margin-top: 8px;">No additional caching products or skills needed</p>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">⚡</div>
+                        <div class="metric-label">Performance</div>
+                        <p style="font-size: .875rem; margin-top: 8px;">In-memory speed without complexity</p>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">🔒</div>
+                        <div class="metric-label">Security</div>
+                        <p style="font-size: .875rem; margin-top: 8px;">Enterprise Oracle Database security</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <div></div>
+                <button class="btn btn-primary" onclick="nextStep()">Explore Architecture →</button>
+            </div>
+        </div>
+
+        <!-- 1: Architecture -->
+        <div class="demo-section" id="section-1">
+            <div class="section-header">
+                <h2>True Cache Architecture</h2>
+                <p>Understanding how True Cache works with your Oracle Database</p>
+            </div>
+
+            <div class="card">
+                <h3>Basic Configuration</h3>
+                <div class="architecture-diagram">
+                    <div class="arch-component" id="app-box">
+                        <div style="font-size: 32px;">📱</div>
+                        <div>Application</div>
+                        <small style="color: var(--text-secondary);">Reads & Writes</small>
+                    </div>
+                    <div class="arch-arrow"></div>
+                    <div class="arch-component" id="cache-box">
+                        <div style="font-size: 32px;">⚡</div>
+                        <div>True Cache</div>
+                        <small style="color: var(--text-secondary);">In-Memory</small>
+                    </div>
+                    <div class="arch-arrow"></div>
+                    <div class="arch-component" id="db-box">
+                        <div style="font-size: 32px;">🗄️</div>
+                        <div>Oracle DB</div>
+                        <small style="color: var(--text-secondary);">Source of Truth</small>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 16px;">
+                    <strong>Reads</strong> go to True Cache • <strong>Writes</strong> go to Database • <strong>Current Reads</strong> go to Database
+                </p>
+            </div>
+
+            <div class="grid grid-2" style="margin-top: 24px;">
+                <div class="card">
+                    <h3>Scaling with Partitioned Configuration</h3>
+                    <p>Multiple True Cache instances can be deployed for:</p>
+                    <ul class="feature-list">
+                        <li>• Load balancing across instances</li>
+                        <li>• High availability</li>
+                        <li>• Caching larger data volumes</li>
+                        <li>• Department/service isolation</li>
+                    </ul>
+                    <button class="btn" onclick="showPartitionedConfig()">View Configuration</button>
+                </div>
+
+                <div class="card">
+                    <h3>Global Data Proximity</h3>
+                    <p>Deploy True Cache near applications for:</p>
+                    <ul class="feature-list">
+                        <li>• Data residency compliance</li>
+                        <li>• Reduced network latency</li>
+                        <li>• Edge computing scenarios</li>
+                        <li>• Cross-cloud deployments</li>
+                    </ul>
+                    <button class="btn" onclick="showGlobalConfig()">View Global Setup</button>
+                </div>
+            </div>
+
+            <div id="configDisplay" class="card" style="margin-top: 24px; display: none;">
+                <h3 id="configTitle"></h3>
+                <div id="configContent"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep()">Try Cache Demo →</button>
+            </div>
+        </div>
+
+        <!-- 2: Cache Demo -->
+        <div class="demo-section" id="section-2">
+            <div class="section-header">
+                <h2>How True Cache Works</h2>
+                <p>Watch how True Cache automatically handles different types of database operations</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Query Flow Visualization</h3>
+                    <div id="queryFlow" style="padding: 24px; background: var(--page-bg); border-radius: 8px; min-height: 300px;">
+                        <div id="flowAnimation" style="text-align: center;">
+                            <div style="display: flex; justify-content: space-around; align-items: center; margin: 32px 0;">
+                                <div id="appNode" style="padding: 16px; background: var(--white); border-radius: 8px; border: 2px solid var(--border-color);">
+                                    <div style="font-size: 32px;">📱</div>
+                                    <div>Application</div>
+                                </div>
+                                <div id="arrow1" style="width: 60px; height: 2px; background: var(--border-color); position: relative;">
+                                    <div id="queryDot" style="position: absolute; width: 8px; height: 8px; background: var(--brand-yellow); border-radius: 50%; top: -3px; left: 0;"></div>
+                                </div>
+                                <div id="cacheNode" style="padding: 16px; background: var(--white); border-radius: 8px; border: 2px solid var(--border-color);">
+                                    <div style="font-size: 32px;">⚡</div>
+                                    <div>True Cache</div>
+                                </div>
+                                <div id="arrow2" style="width: 60px; height: 2px; background: var(--border-color); position: relative;"></div>
+                                <div id="dbNode" style="padding: 16px; background: var(--white); border-radius: 8px; border: 2px solid var(--border-color);">
+                                    <div style="font-size: 32px;">🗄️</div>
+                                    <div>Database</div>
+                                </div>
+                            </div>
+                            <div id="queryInfo" style="padding: 16px; background: var(--white); border-radius: 8px; margin-top: 24px; min-height: 80px;">
+                                <div id="queryText" style="font-family: monospace; font-size: 0.875rem; color: var(--text-secondary);">Starting demo...</div>
+                                <div id="queryStatus" style="margin-top: 12px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px; text-align: center;">
+                        <button class="btn btn-primary" onclick="startCacheDemo()">Start Demo</button>
+                        <button class="btn btn-secondary" onclick="pauseCacheDemo()">Pause</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Cache Performance Metrics</h3>
+                    <canvas id="cacheCanvas"></canvas>
+                    <div id="cacheStats" style="margin-top:16px;">
+                        <div style="display: flex; justify-content: space-around; text-align: center;">
+                            <div>
+                                <div class="metric-value" id="hitRate">0%</div>
+                                <div class="metric-label">Cache Hit Rate</div>
+                            </div>
+                            <div>
+                                <div class="metric-value" id="totalQueries">0</div>
+                                <div class="metric-label">Total Queries</div>
+                            </div>
+                            <div>
+                                <div class="metric-value" id="avgLatency">0ms</div>
+                                <div class="metric-label">Avg Latency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card cache-simulator">
+                <h3>Query Types and Behavior</h3>
+                <div class="grid grid-3" style="margin-top: 16px;">
+                    <div style="padding: 16px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--cache-hit);">
+                        <h4>Read Queries</h4>
+                        <p style="font-size: 0.875rem;">SELECT statements served from cache memory</p>
+                        <div class="metric-value" style="color: var(--cache-hit); font-size: 1.5rem;">~2ms</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--info);">
+                        <h4>Write Operations</h4>
+                        <p style="font-size: 0.875rem;">INSERT/UPDATE/DELETE go to database</p>
+                        <div class="metric-value" style="color: var(--info); font-size: 1.5rem;">~50ms</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--slate-100);">
+                        <h4>Current Reads</h4>
+                        <p style="font-size: 0.875rem;">SELECT FOR UPDATE bypasses cache</p>
+                        <div class="metric-value" style="color: var(--slate-100); font-size: 1.5rem;">~45ms</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep()">Explore Use Cases →</button>
+            </div>
+        </div>
+
+        <!-- 3: Use Cases -->
+        <div class="demo-section" id="section-3">
+            <div class="section-header">
+                <h2>Real-World Use Cases</h2>
+                <p>How organizations leverage True Cache for their applications</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="use-case-card">
+                    <h3>Mid-Tier Cache</h3>
+                    <div style="font-size: 48px; text-align: center; margin: 16px 0;">🏢</div>
+                    <p>Deploy between application and database tiers for improved response times</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li>• Reduce database load</li>
+                        <li>• Scale read operations</li>
+                        <li>• Improve app performance</li>
+                    </ul>
+                    <button class="btn" onclick="showUseCase('midtier')" style="margin-top:16px; width: 100%;">View Details</button>
+                </div>
+
+                <div class="use-case-card secondary">
+                    <h3>Edge Cache</h3>
+                    <div style="font-size: 48px; text-align: center; margin: 16px 0;">🌐</div>
+                    <p>Deploy at edge locations for low-latency access to frequently used data</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li>• IoT data processing</li>
+                        <li>• Content delivery</li>
+                        <li>• Regional operations</li>
+                    </ul>
+                    <button class="btn" onclick="showUseCase('edge')" style="margin-top:16px; width: 100%;">View Details</button>
+                </div>
+
+                <div class="use-case-card tertiary">
+                    <h3>Cross-Cloud Cache</h3>
+                    <div style="font-size: 48px; text-align: center; margin: 16px 0;">☁️</div>
+                    <p>Enable multi-cloud strategies with cached data across cloud providers</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li>• Cloud migration</li>
+                        <li>• Hybrid deployments</li>
+                        <li>• Disaster recovery</li>
+                    </ul>
+                    <button class="btn" onclick="showUseCase('cloud')" style="margin-top:16px; width: 100%;">View Details</button>
+                </div>
+            </div>
+
+            <div id="useCaseDetail" style="display:none; margin-top:24px;">
+                <div class="card">
+                    <h3 id="useCaseTitle"></h3>
+                    <div id="useCaseContent"></div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px; background: var(--page-bg);">
+                <h3>Customer Success Stories</h3>
+                <div class="grid grid-3" style="margin-top: 16px;">
+                    <div style="padding: 16px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--brand-yellow);">
+                        <h4>Stock Exchange</h4>
+                        <p>Offloaded read queries for stock tickers with 10TB cached data for 200TB database. Replaced 200-node Redis cluster with just 6 True Cache instances.</p>
+                    </div>
+                    <div style="padding: 16px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--info);">
+                        <h4>Financial Institution</h4>
+                        <p>Accelerated fraud detection AI model inferencing. Models trained once daily, with read-only queries served from True Cache.</p>
+                    </div>
+                    <div style="padding: 16px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--success);">
+                        <h4>Mobile Phone Manufacturer</h4>
+                        <p>Offloaded read-only queries when primary database reached vertical scaling limits, achieving seamless performance improvement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep()">View Implementation →</button>
+            </div>
+        </div>
+
+        <!-- 4: Implementation -->
+        <div class="demo-section" id="section-4">
+            <div class="section-header">
+                <h2>Implementation Guide</h2>
+                <p>Get started with Oracle True Cache in your environment</p>
+            </div>
+
+            <div class="card">
+                <h3>1. Configure True Cache Instance</h3>
+                <div class="code-container"><pre><span class="comment">-- Configure True Cache parameters</span>
+<span class="keyword">ALTER SYSTEM SET</span> true_cache_memory_size = 10G;
+<span class="keyword">ALTER SYSTEM SET</span> true_cache_instance_mode = <span class="string">'ENABLED'</span>;
+<span class="keyword">ALTER SYSTEM SET</span> true_cache_refresh_interval = 100;
+
+<span class="comment">-- Start True Cache instance</span>
+<span class="keyword">STARTUP</span> MOUNT;
+<span class="keyword">ALTER DATABASE</span> OPEN READ ONLY;</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>2. Application Connection Configuration</h3>
+                <div class="code-container"><pre><span class="comment">-- Connection string for read/write splitting</span>
+jdbc:oracle:thin:@(DESCRIPTION=
+  (CONNECT_TIMEOUT=90)(RETRY_COUNT=20)(RETRY_DELAY=3)
+  (ADDRESS_LIST=
+    <span class="comment">-- True Cache for reads</span>
+    (ADDRESS=(PROTOCOL=TCP)(HOST=truecache-host)(PORT=1521))
+    <span class="comment">-- Primary database for writes</span>
+    (ADDRESS=(PROTOCOL=TCP)(HOST=primary-host)(PORT=1521))
+  )
+  (CONNECT_DATA=
+    (SERVICE_NAME=myservice)
+  )
+)</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>3. Monitor Cache Performance</h3>
+                <div class="code-container"><pre><span class="comment">-- Check cache hit ratio</span>
+<span class="keyword">SELECT</span> 
+    cache_hits,
+    cache_misses,
+    ROUND(cache_hits / (cache_hits + cache_misses) * 100, 2) <span class="keyword">AS</span> hit_ratio
+<span class="keyword">FROM</span> v$true_cache_stats;
+
+<span class="comment">-- Monitor cache memory usage</span>
+<span class="keyword">SELECT</span> 
+    current_size,
+    max_size,
+    ROUND(current_size / max_size * 100, 2) <span class="keyword">AS</span> usage_pct
+<span class="keyword">FROM</span> v$true_cache_memory;</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+                <h3>4. Java Application Example</h3>
+                <div class="code-container"><pre><span class="keyword">import</span> java.sql.*;
+<span class="keyword">import</span> oracle.jdbc.OracleConnection;
+
+<span class="keyword">public class</span> TrueCacheExample {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Connection will automatically route reads to True Cache</span>
+        String url = <span class="string">"jdbc:oracle:thin:@truecache-scan:1521/myservice"</span>;
+        
+        <span class="keyword">try</span> (Connection conn = DriverManager.getConnection(url, user, pass)) {
+            <span class="comment">// Read query - goes to True Cache</span>
+            PreparedStatement read = conn.prepareStatement(
+                <span class="string">"SELECT * FROM products WHERE category = ?"</span>
+            );
+            
+            <span class="comment">// Write query - goes to primary database</span>
+            PreparedStatement write = conn.prepareStatement(
+                <span class="string">"UPDATE products SET price = ? WHERE id = ?"</span>
+            );
+        }
+    }
+}</pre></div>
+            </div>
+
+            <div class="card" style="margin-top:24px; background:var(--page-bg);">
+                <h3>Resources & Documentation</h3>
+                <div class="grid grid-3" style="margin-top:16px;">
+                    <a href="https://www.oracle.com/database/truecache/" target="_blank" style="text-decoration:none;">
+                        <div class="metric-item" style="cursor:pointer;">
+                            <h4>Product Page</h4>
+                            <p style="font-size:.875rem;">Learn more about True Cache</p>
+                        </div>
+                    </a>
+                    <a href="https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/overview-oracle-true-cache.html" target="_blank" style="text-decoration:none;">
+                        <div class="metric-item" style="cursor:pointer;">
+                            <h4>Documentation</h4>
+                            <p style="font-size:.875rem;">Technical documentation</p>
+                        </div>
+                    </a>
+                    <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3933" target="_blank" style="text-decoration:none;">
+                        <div class="metric-item" style="cursor:pointer;">
+                            <h4>LiveLabs</h4>
+                            <p style="font-size:.875rem;">Hands-on workshop</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+                <button class="btn btn-primary" onclick="completeDemo()">Complete Demo ✓</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Demo state
+        let currentStep = 0;
+        const totalSteps = 5;
+        let canvas, ctx;
+        let cacheStats = {
+            hits: 0,
+            misses: 0,
+            total: 0,
+            latencies: []
+        };
+
+        // Navigation
+        function goToStep(step) {
+            if (step >= 0 && step < totalSteps) {
+                currentStep = step;
+                updateUI();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                updateUI();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            document.querySelectorAll('.demo-section').forEach((s, i) => 
+                s.classList.toggle('active', i === currentStep));
+            
+            document.querySelectorAll('.step').forEach((st, i) => {
+                st.classList.remove('active', 'completed');
+                if (i < currentStep) st.classList.add('completed');
+                else if (i === currentStep) st.classList.add('active');
+            });
+
+            if (currentStep === 2) {
+                setTimeout(() => {
+                    setupCanvas();
+                    drawCacheChart();
+                    startCacheDemo(); // Auto-start the demo
+                }, 100);
+            } else {
+                pauseCacheDemo(); // Pause demo when leaving the cache demo section
+            }
+        }
+
+        // Architecture demos
+        function showPartitionedConfig() {
+            const display = document.getElementById('configDisplay');
+            const title = document.getElementById('configTitle');
+            const content = document.getElementById('configContent');
+            
+            display.style.display = 'block';
+            title.textContent = 'Partitioned Configuration';
+            content.innerHTML = `
+                <div style="text-align: center; padding: 24px; background: var(--page-bg); border-radius: 8px;">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap;">
+                        <div style="padding: 16px; background: var(--white); border-radius: 8px;">
+                            <div style="font-size: 32px;">📱</div>
+                            <div>Application</div>
+                        </div>
+                        <div style="font-size: 24px;">→</div>
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div style="padding: 16px; background: var(--white); border-radius: 8px; border: 2px solid var(--brand-yellow);">
+                                <div>⚡ True Cache 1 (Sales)</div>
+                            </div>
+                            <div style="padding: 16px; background: var(--white); border-radius: 8px; border: 2px solid var(--info);">
+                                <div>⚡ True Cache 2 (HR)</div>
+                            </div>
+                            <div style="padding: 16px; background: var(--white); border-radius: 8px; border: 2px solid var(--success);">
+                                <div>⚡ True Cache 3 (Finance)</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 24px;">→</div>
+                        <div style="padding: 16px; background: var(--white); border-radius: 8px;">
+                            <div style="font-size: 32px;">🗄️</div>
+                            <div>Oracle DB</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 24px;">Multiple True Cache instances provide scalability, isolation, and high availability</p>
+                </div>
+            `;
+        }
+
+        function showGlobalConfig() {
+            const display = document.getElementById('configDisplay');
+            const title = document.getElementById('configTitle');
+            const content = document.getElementById('configContent');
+            
+            display.style.display = 'block';
+            title.textContent = 'Global Proximity Configuration';
+            content.innerHTML = `
+                <div style="padding: 24px; background: var(--page-bg); border-radius: 8px;">
+                    <div style="text-align: center;">
+                        <div style="display: inline-block; position: relative; width: 100%; max-width: 600px;">
+                            <svg width="100%" height="300" viewBox="0 0 600 300">
+                                <!-- World map simplified -->
+                                <rect x="0" y="0" width="600" height="300" fill="#e3f2fd" rx="8"/>
+                                <!-- US -->
+                                <circle cx="150" cy="150" r="8" fill="var(--brand-yellow)"/>
+                                <text x="150" y="180" text-anchor="middle" font-size="12">US App</text>
+                                <circle cx="150" cy="100" r="6" fill="var(--info)"/>
+                                <text x="150" y="85" text-anchor="middle" font-size="10">True Cache</text>
+                                <!-- EU -->
+                                <circle cx="350" cy="120" r="8" fill="var(--brand-yellow)"/>
+                                <text x="350" y="150" text-anchor="middle" font-size="12">EU App</text>
+                                <circle cx="350" cy="70" r="6" fill="var(--info)"/>
+                                <text x="350" y="55" text-anchor="middle" font-size="10">True Cache</text>
+                                <!-- APAC -->
+                                <circle cx="500" cy="180" r="8" fill="var(--brand-yellow)"/>
+                                <text x="500" y="210" text-anchor="middle" font-size="12">APAC App</text>
+                                <circle cx="500" cy="130" r="6" fill="var(--info)"/>
+                                <text x="500" y="115" text-anchor="middle" font-size="10">True Cache</text>
+                                <!-- Central DB -->
+                                <rect x="250" y="230" width="100" height="40" fill="var(--slate-100)" rx="4"/>
+                                <text x="300" y="255" text-anchor="middle" font-size="12" fill="white">Primary DB</text>
+                                <!-- Lines -->
+                                <line x1="150" y1="100" x2="300" y2="230" stroke="var(--text-secondary)" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="350" y1="70" x2="300" y2="230" stroke="var(--text-secondary)" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="500" y1="130" x2="300" y2="230" stroke="var(--text-secondary)" stroke-width="1" stroke-dasharray="5,5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 16px;">
+                        Deploy True Cache close to applications globally for reduced latency and data residency compliance
+                    </p>
+                </div>
+            `;
+        }
+
+        // Cache Demo
+        let demoInterval = null;
+        let demoStep = 0;
+        const demoScenarios = [
+            { type: 'read', query: 'SELECT * FROM products WHERE category = \'Electronics\'', isHit: true, latency: 2 },
+            { type: 'read', query: 'SELECT name, price FROM inventory WHERE stock > 100', isHit: false, latency: 48 },
+            { type: 'write', query: 'UPDATE products SET price = 299.99 WHERE id = 42', isHit: false, latency: 52 },
+            { type: 'read', query: 'SELECT * FROM products WHERE category = \'Electronics\'', isHit: true, latency: 3 },
+            { type: 'current', query: 'SELECT * FROM orders WHERE status = \'pending\' FOR UPDATE', isHit: false, latency: 45 }
+        ];
+
+        function startCacheDemo() {
+            if (demoInterval) clearInterval(demoInterval);
+            demoStep = 0;
+            cacheStats = { hits: 0, misses: 0, total: 0, latencies: [] };
+            
+            runDemoStep();
+            demoInterval = setInterval(runDemoStep, 3000);
+        }
+
+        function pauseCacheDemo() {
+            if (demoInterval) {
+                clearInterval(demoInterval);
+                demoInterval = null;
+            }
+        }
+
+        function runDemoStep() {
+            const scenario = demoScenarios[demoStep % demoScenarios.length];
+            animateQuery(scenario);
+            demoStep++;
+        }
+
+        function animateQuery(scenario) {
+            const appNode = document.getElementById('appNode');
+            const cacheNode = document.getElementById('cacheNode');
+            const dbNode = document.getElementById('dbNode');
+            const queryDot = document.getElementById('queryDot');
+            const queryText = document.getElementById('queryText');
+            const queryStatus = document.getElementById('queryStatus');
+            
+            // Reset styles
+            appNode.style.borderColor = '#F1B13F';
+            cacheNode.style.borderColor = '#D3D3D1';
+            dbNode.style.borderColor = '#D3D3D1';
+            
+            // Update query text
+            queryText.textContent = scenario.query;
+            
+            // Animate based on query type
+            if (scenario.type === 'read') {
+                // Animate dot to cache
+                queryDot.style.transition = 'left 0.5s ease';
+                queryDot.style.left = '52px';
+                
+                setTimeout(() => {
+                    cacheNode.style.borderColor = scenario.isHit ? '#4CAF50' : '#FF5252';
+                    
+                    if (scenario.isHit) {
+                        queryStatus.innerHTML = `<span class="cache-status cache-hit">Cache Hit! ✓</span> Response time: ${scenario.latency}ms`;
+                        cacheStats.hits++;
+                    } else {
+                        // Animate to database
+                        queryDot.style.left = '120px';
+                        dbNode.style.borderColor = '#2196F3';
+                        queryStatus.innerHTML = `<span class="cache-status cache-miss">Cache Miss</span> Fetching from database: ${scenario.latency}ms`;
+                        cacheStats.misses++;
+                    }
+                    updateCacheMetrics();
+                }, 600);
+            } else if (scenario.type === 'write') {
+                // Animate directly to database
+                queryDot.style.transition = 'left 1s ease';
+                queryDot.style.left = '120px';
+                dbNode.style.borderColor = '#2196F3';
+                queryStatus.innerHTML = `<span class="cache-status" style="background: #2196F3; color: white;">Write Operation</span> Direct to database: ${scenario.latency}ms`;
+            } else if (scenario.type === 'current') {
+                // Current read - goes to database
+                queryDot.style.transition = 'left 1s ease';
+                queryDot.style.left = '120px';
+                dbNode.style.borderColor = '#697778';
+                queryStatus.innerHTML = `<span class="cache-status" style="background: #697778; color: white;">Current Read</span> Fetching latest: ${scenario.latency}ms`;
+            }
+            
+            // Reset dot position after animation
+            setTimeout(() => {
+                queryDot.style.transition = 'none';
+                queryDot.style.left = '0';
+            }, 2500);
+            
+            cacheStats.total++;
+            cacheStats.latencies.push(scenario.latency);
+        }
+
+        function updateCacheMetrics() {
+            const hitRate = cacheStats.hits + cacheStats.misses > 0 ? 
+                ((cacheStats.hits / (cacheStats.hits + cacheStats.misses)) * 100).toFixed(1) : 0;
+            const avgLatency = cacheStats.latencies.length > 0 ?
+                (cacheStats.latencies.reduce((a, b) => a + b, 0) / cacheStats.latencies.length).toFixed(1) : 0;
+            
+            document.getElementById('hitRate').textContent = hitRate + '%';
+            document.getElementById('totalQueries').textContent = cacheStats.total;
+            document.getElementById('avgLatency').textContent = avgLatency + 'ms';
+            
+            drawCacheChart();
+        }
+
+        function setupCanvas() {
+            const c = document.getElementById('cacheCanvas');
+            if (!c) return;
+            canvas = c;
+            ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 400;
+        }
+
+        function drawCacheChart() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 100;
+            
+            // Draw pie chart
+            const total = cacheStats.hits + cacheStats.misses || 1;
+            const hitAngle = (cacheStats.hits / total) * Math.PI * 2;
+            
+            // Cache hits
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, -Math.PI/2, -Math.PI/2 + hitAngle);
+            ctx.lineTo(centerX, centerY);
+            ctx.fillStyle = '#4CAF50';
+            ctx.fill();
+            
+            // Cache misses
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, -Math.PI/2 + hitAngle, Math.PI * 1.5);
+            ctx.lineTo(centerX, centerY);
+            ctx.fillStyle = '#FF5252';
+            ctx.fill();
+            
+            // Labels
+            ctx.fillStyle = '#161513';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            
+            if (cacheStats.hits > 0) {
+                ctx.fillText('Cache Hits', centerX - 60, centerY - radius - 20);
+                ctx.fillStyle = '#4CAF50';
+                ctx.fillRect(centerX - 100, centerY - radius - 35, 15, 15);
+            }
+            
+            if (cacheStats.misses > 0) {
+                ctx.fillStyle = '#161513';
+                ctx.fillText('Cache Misses', centerX + 60, centerY - radius - 20);
+                ctx.fillStyle = '#FF5252';
+                ctx.fillRect(centerX + 10, centerY - radius - 35, 15, 15);
+            }
+        }
+
+        function executeQuery() {
+            const queryType = document.getElementById('queryType').value;
+            const queryInput = document.getElementById('queryInput').value || 'SELECT * FROM products';
+            const resultDiv = document.getElementById('queryResult');
+            
+            let isHit = false;
+            let latency = 0;
+            let message = '';
+            
+            if (queryType === 'read') {
+                isHit = Math.random() > 0.2; // 80% cache hit rate
+                latency = isHit ? 2 + Math.random() * 3 : 40 + Math.random() * 20;
+                message = isHit ? 
+                    `<div class="cache-status cache-hit">Cache Hit! ✓</div>
+                     <p>Query served from True Cache memory in ${latency.toFixed(1)}ms</p>` :
+                    `<div class="cache-status cache-miss">Cache Miss</div>
+                     <p>Query forwarded to database, cached for next time (${latency.toFixed(1)}ms)</p>`;
+                
+                if (isHit) cacheStats.hits++;
+                else cacheStats.misses++;
+            } else if (queryType === 'write') {
+                latency = 50 + Math.random() * 30;
+                message = `<div class="cache-status" style="background: var(--info); color: white;">Write Operation</div>
+                          <p>Query sent directly to primary database (${latency.toFixed(1)}ms)</p>
+                          <p style="font-size: 0.875rem; color: var(--text-secondary);">Cache automatically updated via redo logs</p>`;
+            } else {
+                latency = 45 + Math.random() * 25;
+                message = `<div class="cache-status" style="background: var(--slate-100); color: white;">Current Read</div>
+                          <p>Query sent to primary database for latest data (${latency.toFixed(1)}ms)</p>`;
+            }
+            
+            cacheStats.total++;
+            cacheStats.latencies.push(latency);
+            
+            resultDiv.innerHTML = message;
+            updateCacheStats();
+            drawCacheChart();
+        }
+
+        function updateCacheStats() {
+            const hitRate = cacheStats.total > 0 ? 
+                ((cacheStats.hits / (cacheStats.hits + cacheStats.misses)) * 100).toFixed(1) : 0;
+            const avgLatency = cacheStats.latencies.length > 0 ?
+                (cacheStats.latencies.reduce((a, b) => a + b, 0) / cacheStats.latencies.length).toFixed(1) : 0;
+            
+            document.getElementById('hitRate').textContent = hitRate + '%';
+            document.getElementById('totalQueries').textContent = cacheStats.total;
+            document.getElementById('avgLatency').textContent = avgLatency + 'ms';
+        }
+
+        // Use Cases
+        function showUseCase(type) {
+            const detail = document.getElementById('useCaseDetail');
+            const title = document.getElementById('useCaseTitle');
+            const content = document.getElementById('useCaseContent');
+            
+            detail.style.display = 'block';
+            
+            const cases = {
+                midtier: {
+                    title: 'Mid-Tier Cache Architecture',
+                    content: `
+                        <p>Deploy True Cache as a middle tier between your application servers and database:</p>
+                        <ul style="margin: 16px 0;">
+                            <li><strong>Scenario:</strong> High-traffic web applications with read-heavy workloads</li>
+                            <li><strong>Benefits:</strong> 
+                                <ul style="margin-left: 20px;">
+                                    <li>Reduce database CPU utilization by 40-60%</li>
+                                    <li>Improve response times by 10-25x for cached queries</li>
+                                    <li>Scale read operations independently</li>
+                                </ul>
+                            </li>
+                            <li><strong>Implementation:</strong> Deploy True Cache on commodity hardware in the application tier</li>
+                        </ul>
+                        <div style="padding: 16px; background: var(--page-bg); border-radius: 8px; margin-top: 16px;">
+                            <strong>Example:</strong> E-commerce platform serving product catalogs to millions of users
+                        </div>
+                    `
+                },
+                edge: {
+                    title: 'Edge Cache Deployment',
+                    content: `
+                        <p>Position True Cache at edge locations for ultra-low latency:</p>
+                        <ul style="margin: 16px 0;">
+                            <li><strong>Scenario:</strong> IoT deployments, CDN integration, regional offices</li>
+                            <li><strong>Benefits:</strong>
+                                <ul style="margin-left: 20px;">
+                                    <li>Sub-millisecond response times for local users</li>
+                                    <li>Reduce WAN bandwidth usage by 70-90%</li>
+                                    <li>Continue operations during network disruptions</li>
+                                </ul>
+                            </li>
+                            <li><strong>Implementation:</strong> Deploy lightweight True Cache instances at edge data centers</li>
+                        </ul>
+                        <div style="padding: 16px; background: var(--page-bg); border-radius: 8px; margin-top: 16px;">
+                            <strong>Example:</strong> Manufacturing company with factories worldwide accessing central ERP data
+                        </div>
+                    `
+                },
+                cloud: {
+                    title: 'Cross-Cloud Cache Strategy',
+                    content: `
+                        <p>Enable multi-cloud architectures with True Cache:</p>
+                        <ul style="margin: 16px 0;">
+                            <li><strong>Scenario:</strong> Hybrid cloud, multi-cloud deployments, cloud migration</li>
+                            <li><strong>Benefits:</strong>
+                                <ul style="margin-left: 20px;">
+                                    <li>Avoid vendor lock-in with data portability</li>
+                                    <li>Reduce cross-cloud data transfer costs by 60%</li>
+                                    <li>Enable gradual cloud migration without downtime</li>
+                                </ul>
+                            </li>
+                            <li><strong>Implementation:</strong> True Cache instances in each cloud environment</li>
+                        </ul>
+                        <div style="padding: 16px; background: var(--page-bg); border-radius: 8px; margin-top: 16px;">
+                            <strong>Example:</strong> Financial services firm running analytics on AWS while primary database remains on-premises
+                        </div>
+                    `
+                }
+            };
+            
+            title.textContent = cases[type].title;
+            content.innerHTML = cases[type].content;
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Complete Demo
+        function completeDemo() {
+            const section = document.getElementById('section-4');
+            const div = document.createElement('div');
+            div.className = 'success-message';
+            div.innerHTML = `
+                <svg class="success-icon" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20 32l8 8 16-16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h2 style="margin-bottom:8px;">Demo Complete!</h2>
+                <p>You've successfully explored Oracle True Cache capabilities.</p>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 8px;">
+                    A True Cache with less effort - Why settle for less?
+                </p>
+                <div style="margin-top:24px;display:flex;gap:16px;justify-content:center;">
+                    <button class="btn btn-secondary" onclick="resetDemo()">Restart Demo</button>
+                    <a href="https://www.oracle.com/database/truecache/" target="_blank">
+                        <button class="btn btn-primary">Learn More</button>
+                    </a>
+                </div>
+            `;
+            section.appendChild(div);
+            div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetDemo() {
+            pauseCacheDemo(); // Stop any running demo animation
+            currentStep = 0;
+            updateUI();
+            cacheStats = { hits: 0, misses: 0, total: 0, latencies: [] };
+            updateCacheMetrics();
+            const successMsg = document.querySelector('.success-message');
+            if (successMsg) successMsg.remove();
+            
+            // Clear any open details
+            const configDisplay = document.getElementById('configDisplay');
+            const useCaseDetail = document.getElementById('useCaseDetail');
+            if (configDisplay) configDisplay.style.display = 'none';
+            if (useCaseDetail) useCaseDetail.style.display = 'none';
+            
+            // Reset demo step
+            demoStep = 0;
+        }
+
+        // Keyboard navigation
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextStep();
+                else if (e.key === 'ArrowLeft') previousStep();
+                else if (e.key >= '1' && e.key <= '5') goToStep(parseInt(e.key) - 1);
+            });
+        }
+
+        // Initialize
+        function initDemo() {
+            setupKeyboardNavigation();
+            updateCacheStats();
+        }
+
+        window.addEventListener('DOMContentLoaded', initDemo);
+        window.addEventListener('resize', () => {
+            if (currentStep === 2) {
+                setupCanvas();
+                drawCacheChart();
+            }
+        });
+
+        // Optional: Save progress
+        function saveProgress() { 
+            try { 
+                localStorage.setItem('oracleTrueCacheStep', currentStep); 
+            } catch(e) {} 
+        }
+        
+        function loadProgress() { 
+            try { 
+                const step = localStorage.getItem('oracleTrueCacheStep'); 
+                if (step !== null) { 
+                    currentStep = parseInt(step); 
+                    updateUI(); 
+                } 
+            } catch(e) {} 
+        }
+        
+        setInterval(saveProgress, 5000);
+        window.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "workshoptitle": "Try a Quick True Cache Demo",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Learn more about Oracle's True Cache feature in Oracle Database 23ai",
+      "filename": "../true-cache-demo-introduction.md"
+    }
+  ]
+}
