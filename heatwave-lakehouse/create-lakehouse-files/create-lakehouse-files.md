@@ -81,7 +81,6 @@ A set of files have been created for you to use in this workshop. You will creat
 
 6. Create the  Pre-Authenticated Request URL for the bucket
      - a. Click on the 3 dots to the right of the **lakehouse-files** bucket  Click on ‘Create Pre-Authenticated Request’
-        ![lakehouse-files 3 dots](./images/create-lakehous-bucket-par-dots.png "bucket par dots")
         ![Create PAR](./images/create-lakehous-bucket-par-load.png "bucket par load")
      - b. The ‘Bucket’ option will be pre-selected
      - c. For 'Access Type' select 'Permit object write
@@ -108,38 +107,38 @@ A set of files have been created for you to use in this workshop. You will creat
 2. Add the delivery-orders-1.csv file to the storage bucket by modifying the following statement with the example below. You must replace the **(PAR URL)** value with the saved generated **PAR URL** from the previous Task.
 
     ```bash
-    <copy>curl -X PUT --data-binary '@delivery-orders-1.csv' (PAR URL)order/delivery-orders-1.csv</copy>
+    <copy>curl -X PUT -T delivery-orders-1.csv (PAR URL)order/delivery-orders-1.csv</copy>
      ```
 
      **Example**  
-     curl -X PUT --data-binary '@delivery-orders-1.csv' https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/order/delivery-orders-1.csv
+     curl -X PUT -T delivery-orders-1.csv https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/order/delivery-orders-1.csv
 
 3. Add the @delivery-orders-2.csv file to the storage bucket by modifying the following statement with the example below. You must replace the **(PAR URL)** value with the saved generated **PAR URL** from the previous Task.
 
     ```bash
-    <copy>curl -X PUT --data-binary '@delivery-orders-2.csv' (PAR URL)order/delivery-orders-2.csv</copy>
+    <copy>curl -X PUT -T delivery-orders-2.csv (PAR URL)order/delivery-orders-2.csv</copy>
      ```
 
      **Example**  
-     curl -X PUT --data-binary '@delivery-orders-2.csv' https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/order/delivery-orders-2.csv
+     curl -X PUT -T delivery-orders-2.csv https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/order/delivery-orders-2.csv
 
 4. Add the @delivery-orders-31.csv file to the storage bucket by modifying the following statement with the example below. You must replace the **(PAR URL)** value with the saved generated **PAR URL** from the previous Task.
 
     ```bash
-    <copy>curl -X PUT --data-binary '@delivery-orders-3.csv' (PAR URL)order/delivery-orders-3.csv</copy>
+    <copy>curl -X PUT -T delivery-orders-3.csv (PAR URL)order/delivery-orders-3.csv</copy>
      ```
 
      **Example**  
-     curl -X PUT --data-binary '@delivery-orders-3.csv' https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/order/delivery-orders-3.csv
+     curl -X PUT -T delivery-orders-3.csv https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/order/delivery-orders-3.csv
 
 5. Add the @delivery-vendor.pq file to the storage bucket by modifying the following statement with the example below. You must replace the **(PAR URL)** value with the saved generated **PAR URL** from the previous Task.
 
     ```bash
-    <copy>curl -X PUT --data-binary '@delivery-vendor.pq' (PAR URL)delivery-vendor.pq</copy>
+    <copy>curl -X PUT -T delivery-vendor.pq (PAR URL)delivery-vendor.pq</copy>
      ```
 
      **Example**  
-     curl -X PUT --data-binary '@delivery-vendor.pq' https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/delivery-vendor.pq
+     curl -X PUT -T delivery-vendor.pq https://objectstorage.us-ashburn-1.oraclecloud.com/p/RfXc55AGpLSu26UgqbmGxbWZwh4hPhLkVWYMg4f5pNerQx_1NghgSKJHLzE4IWxH/n/******/b/lakehouse-files/o/delivery-vendor.pq
 
 6. Your **lakehouse-files** bucket should look like this:
     ![cloud storage bucket](./images/lakehouse-bucket.png "lakehouse bucket")
@@ -151,4 +150,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, August 2025

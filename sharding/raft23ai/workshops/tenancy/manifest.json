@@ -40,12 +40,7 @@
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 6: Explore Raft Replication Advanced Use-Cases",
-      "description": "Exploring Raft Replication Advanced Use-Cases",
-      "filename": "../../advanced-use-cases/advanced-use-cases.md"
-    },
-    {
-      "title": "Lab 7: Clean up Stack and Instances",
+      "title": "Lab 6: Clean up Stack and Instances",
       "description": "Clean up ORM Stack and instances",
       "filename": "../../cleanup/cleanup.md"
     },

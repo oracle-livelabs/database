@@ -6,6 +6,8 @@ In this lab, you will start by checking an entire CDB that was already upgraded,
 
 Estimated Time: 60 minutes
 
+[Lab 10 walk-through](videohub:1_yd0yeopa)
+
 ### Objectives
 
 In this lab, you will:

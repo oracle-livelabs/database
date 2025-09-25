@@ -8,6 +8,8 @@ You will upgrade the *FTEX* database and plug it into the *CDB23* database.
 
 Estimated Time: 35 minutes
 
+[Lab 11 walk-through](videohub:1_ib32g6i4)
+
 ### Objectives
 
 In this lab, you will:

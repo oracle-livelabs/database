@@ -16,6 +16,7 @@ In this workshop, we attempt to use minimal resources to show the demonstration,
 
 *Estimated Time*:  30 minutes
 
+[Explore Raft Replication Topology](videohub:1_wgjpojgc)
 
 ### Objectives
 In this lab, you will:
@@ -34,7 +35,7 @@ This lab assumes you have:
 
 ## Task 1: Check for containers in your VM
 
-1. To open a new terminal (skip this step if already opened a terminal as mentioned in previous lab initialize environment's Task 1), Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
+1. To open a new terminal (if not opened it already), Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
 
     From podman container Details, verify all containers are running:
     
@@ -46,19 +47,21 @@ This lab assumes you have:
     
     ![<podman_containers>](./images/t1-podman-containers-1.png " ")
 
-   Click on the "+" sign (on the top-left corner of the same terminal window) to open another tab and switched to **GSM** level:
+   From top left corner of the Terminal, Click on the "File" and choose first option "New Tab" to open a new tab on the same terminal window: 
 
-    ![<click_plus_sign_top_left_terminal_window>](./images/click-plus-sign-top-left-terminal-window.png " ")
+    ![<click_file_new_tab_from_top_left_terminal_window>](./images/click_file_new_tab_from_top_left_terminal_window.png " ")
+   
+    Go inside **gsm1** podman container:
 
     ```
     <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
+    sudo podman exec -it gsm1 /bin/bash
     </copy>
     ```
 
-   ![<terminal_gsm>](./images/terminal_tab_2_gsm1.png " ")
+   ![<terminal_gsm1_tab>](./images/terminal_gsm1_tab.png " ")
 
-   Similarly, Click on the "+" sign (on the top-left corner of the same terminal window) to open one more tab and switched to **appclient** container.
+   Similarly, open one more tab (from top left corner of the Terminal, Click on the "File" and choose first option "New Tab") and switched to **appclient** container.
 
     ```
     <copy>
@@ -66,7 +69,7 @@ This lab assumes you have:
     </copy>
     ```
    
-   ![<terminal_appclient>](./images/terminal_tab_3_appclient.png " ")
+   ![<terminal_appclient_tab>](./images/terminal_appclient_tab.png " ")
 
     Alternatively, you can open multiple terminals for different tasks from each terminals.
 
@@ -81,7 +84,7 @@ Changes to data made by a DML are recorded in the Raft log. A commit record is a
 For more details check [Raft Replication Configuration and Management] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 
-1. Use the terminal tab (2nd tab) that is switched to **gsm1**. Verify sharding topology using the  **gdsctl config shard** command.
+1. Use the terminal tab (2nd tab) that is switched to **gsm1** container. Verify sharding topology using the  **gdsctl config shard** command.
 
     ```
     <copy>
@@ -154,7 +157,7 @@ The -shard option makes the replication unit member on the specified shard datab
     gdsctl status ru -leaders
     </copy>
     ```
-    ![<leader_status_before_change>](./images/t3-3-status-after-relabalnce.png " ")
+    ![<leader_status_after_change>](./images/t3-3-status-after-rebalance.png " ")
 
 4. Change the leader of the RU 1 to Shard2:
 
@@ -173,6 +176,17 @@ The -shard option makes the replication unit member on the specified shard datab
     </copy>
     ``` 
     ![<leader_status_after_change>](./images/t3-5-status-after-leader-change.png " ")
+
+6. Check the RU#s in sorted order after the change:
+
+    ```
+    <copy>
+    gdsctl ru -sort
+    </copy>
+    ``` 
+    ![<ru_leader_sort_after_change>](./images/t3-6-ru-sort-after-leader-change.png " ")
+
+
 
 ## Task 4: Run the workload
 
@@ -199,7 +213,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
 
     ![<appclient_container_loc>](./images/t4-3-appclient-container.png " ")
 
-3. Run the workload using the below command
+3. Run the workload using the below command and to exit press Ctrl + C
 
     ```
     <copy>
@@ -207,10 +221,10 @@ Please use the below steps to run the workload using the "app_schema" account wi
     </copy>
     ```
     
-    ![<run_workload>](./images/t4-4-run-workload.png " ")
+    ![<t4-4-run-workload_and_ctrl_c>](./images/t4-4-run-workload_and_ctrl_c.png " ")
 
-4. During this time, you can continue to check the RU details from terminal's 2nd tab which is switched to  **gsm** .
-Notice that the log index is increasing as read and write operations are going on.
+4. Now check the RU details from terminal's 2nd tab which is switched to  **gsm1**.
+Notice that for each RU#s, the values is "Log Index" columns are increased due to read and write operations are performed while running the workload.
 
     ```
     <copy>
@@ -218,9 +232,14 @@ Notice that the log index is increasing as read and write operations are going o
     </copy>
     ```
 
-    ![<workload_RU_log_index>](./images/t4-5-workload-log-index.png " ")
+    ![<workload_ru_log_index>](./images/t4-5-workload-log-index.png " ")
 
-5. You can keep running the workload for a few seconds and enter CTRL-C to stop the workload. You can check RAFT UI Demo main page to confirm the count is increased. You can also restart this workload as in step 3 and keep running during the next task "Perform Failover Test".
+5. From the browser check the increased value of the count on the demo application ( if not running you can rerun using http://localhost:8080).
+
+![<t4-6-ui-after-workload-increase-count>](./images/t4-6-ui-after-workload-increase-count.png " ")
+
+
+6. You can enter CTRL-C to stop the workload if not already and check the RAFT UI Demo main page to confirm the count is increased. You can also restart this workload as in step 3 and keep running during the next task "Perform Failover Test".
 
 
 ## Task 5: Perform Failover Test
@@ -274,7 +293,7 @@ Failover test by stopping shard1 to create shard1 down situation.
 
     ![<chunk_status_after_shard1_down>](./images/t5-3-status-chunks-after-shard1-down.png " ")  
 
-You will see that shard1 down situation has no impact on the running workload.
+    You can verify that shard1 down situation has no impact on either the demo ui application or running the workload.
 
 4. On a terminal window logged in as **oracle**.
 Start the shard1 using the podman start command, to reflect that shard1 is joining back.
@@ -288,15 +307,7 @@ Start the shard1 using the podman start command, to reflect that shard1 is joini
     ![<start_shard1>](./images/t5-4-startup-shard1.png " ")
 
 
-5. You can use the below command as **oracle** to switch to **GSM**.
-
-    ```
-    <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
-    </copy>
-    ```
-
-    On a terminal window switched to **GSM**, check the status of shard, RU's and see that shard1 has joined back.
+5. On a terminal window switched to the tab for **gsm1** container, check the status of shard, RU's and see that shard1 has joined back.
 
     ```
     <copy>
@@ -312,7 +323,7 @@ Start the shard1 using the podman start command, to reflect that shard1 is joini
 
     ![<chunk_status_after_startup_shard1>](./images/t5-5-status-chunks-after-startup-shard1.png " ")  
     
-Navigate to the third tab ( using appclient container) where the workload is running and enter CTRL-C to stop the workload.
+    Navigate to the third tab ( using appclient container) where the workload is running and enter CTRL-C to stop the workload.
 
 6. Run the below command in terminal that is switched to **GSM** to auto rebalance the leaders.
 
@@ -323,10 +334,18 @@ Navigate to the third tab ( using appclient container) where the workload is run
     ```
     ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
 
+7. Verify the RU# and its leaders after rebalancing the RUs on the shards.
+
+    ```
+    <copy>
+    gdsctl ru -sort
+    </copy>
+    ```
+    ![<ru_sort_after_rebalance>](./images/t5-6-ru-sort-after-rebalance.png " ")
 
 You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, August 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
