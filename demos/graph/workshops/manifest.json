@@ -1,0 +1,11 @@
+{
+  "workshoptitle": "Try a Quick Property Graph Demo",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Learn more about Oracle Operational Property Graphs in Oracle Database 23ai and this interactive HTML demo.",
+      "filename": "../graph-demo-introduction.md"
+    }
+  ]
+}
