@@ -870,8 +870,6 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <copy>
     select wrl_type, status, wallet_type, keystore_mode from v$encryption_wallet;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>

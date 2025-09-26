@@ -439,8 +439,6 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     <copy>
     proceed -job 101
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * AutoUpgrade will start shortly.
