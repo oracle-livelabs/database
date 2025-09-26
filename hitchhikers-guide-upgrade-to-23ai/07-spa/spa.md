@@ -115,14 +115,19 @@ This lab assumes:
 
     ``` sql
     <copy>
+    ! sed -i 's/STS_CaptureAWR/STS_CaptureCursorCache/g' /home/oracle/scripts/upg-07-spa_cpu.sql
+
     @/home/oracle/scripts/upg-07-spa_cpu.sql
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     The script will:
 
-    * Convert the information from `STS_CaptureAWR` into the right format.
-    * Simulate the execution of all statements in `STS_CaptureAWR`.
+    * Change upg-07-spa_cpu.sql to use `STS_CaptureCursorCache` instead of `STS_CaptureAWR`.
+    * Convert the information from `STS_CaptureCursorCache` into the right format.
+    * Simulate the execution of all statements in `STS_CaptureCursorCache`.
     * Compare before/after.
     * Report on the results based on *CPU\_TIME*.
 
@@ -151,8 +156,12 @@ This lab assumes:
 
     ``` sql
     <copy>
+    ! sed -i 's/STS_CaptureAWR/STS_CaptureCursorCache/g' /home/oracle/scripts/upg-07-spa_elapsed.sql
+
     @/home/oracle/scripts/upg-07-spa_elapsed.sql
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 7. Next, generate a report.
