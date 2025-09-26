@@ -22,22 +22,18 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Task 1: Enhanced DML RETURNING Clause
 
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](../common-images/im1.png =50%x*)
 
-    Using the ADMIN user isn't typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we'll use it to simplify the setup and ensure we can show the full range of features effectively.
-
-2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+1. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
 
     ![click SQL](../new-domains/images/simple-db-actions.png =50%x*)
 
 3. **Understanding the Enhanced RETURNING Clause:**
    
-   The enhanced RETURNING clause in Oracle Database 23ai is a significant improvement that allows you to capture both OLD and NEW values during UPDATE operations. This is incredibly valuable for:
-   - **Audit trails** - Track what values changed during updates
-   - **Change monitoring** - Capture price changes, status updates, etc.
-   - **Business logic** - Calculate differences without additional queries
-   - **Performance** - Eliminate extra SELECT statements to check changes
+   The enhanced RETURNING clause in Oracle Database 23ai is a simple improvement that allows you to capture both OLD and NEW values during UPDATE operations. This is valuable for:
+    - **Audit trails** - Track what values changed during updates
+    - **Change monitoring** - Capture price changes, status updates, etc.
+    - **Business logic** - Calculate differences without additional queries
+    - **Performance** - Eliminate extra SELECT statements to check changes
 
    Previously, you could only capture the final values after an UPDATE. Now you can see before and after values in a single operation.
 
@@ -107,6 +103,12 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 1. Oracle Database 23ai introduces the UUID() function that generates RFC 9562-compliant version 4 variant 1 UUIDs. These are truly random and unpredictable, unlike the traditional SYS_GUID() function.
 
+   **Why is SYS_GUID() predictable?**
+   SYS_GUID() generates values using a combination of host identifier, process identifier, and a sequential component. This often results in values that increment sequentially - for example, consecutive calls might generate values where only one character changes while the rest remains identical. This predictable pattern makes SYS_GUID() unsuitable for security-sensitive applications.
+
+   **Why is UUID() truly random?**
+   UUID() generates RFC 9562-compliant version 4 UUIDs with 122 bits of cryptographic randomness (only 6 bits are reserved for version and variant identifiers). This provides 2^122 possible unique values with no predictable patterns.
+
 2. Let's compare UUID() with SYS_GUID() to understand the differences:
 
     ```
@@ -124,14 +126,14 @@ By the end of this lab, you will understand and be able to use these five key SQ
     </copy>
     ```
 
-3. Create a user sessions table that leverages UUID for primary keys:
+3. Create a user sessions table that leverages UUID for primary keys (note that UUID() returns RAW(16) data type, which is required for UUID storage):
 
     ```
     <copy>
     DROP TABLE IF EXISTS user_sessions CASCADE CONSTRAINTS;
 
     CREATE TABLE user_sessions (
-        session_id RAW(16) DEFAULT UUID() PRIMARY KEY,
+        session_id RAW(16) PRIMARY KEY,
         user_id NUMBER NOT NULL,
         session_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         ip_address VARCHAR2(45),
@@ -145,22 +147,15 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
     ```
     <copy>
-    -- Insert data with automatic UUID generation
-    INSERT INTO user_sessions (user_id, ip_address, user_agent, status) 
-    VALUES (1001, '192.168.1.100', 'Mozilla/5.0 Chrome/120.0', 'ACTIVE');
+    -- Insert data with explicit UUID generation
+    INSERT INTO user_sessions (session_id, user_id, ip_address, user_agent, status) 
+    VALUES (UUID(), 1001, '192.168.1.100', 'Mozilla/5.0 Chrome/120.0', 'ACTIVE');
 
-    INSERT INTO user_sessions (user_id, ip_address, user_agent, status) 
-    VALUES (1002, '10.0.0.50', 'Mozilla/5.0 Firefox/121.0', 'ACTIVE');
+    INSERT INTO user_sessions (session_id, user_id, ip_address, user_agent, status) 
+    VALUES (UUID(), 1002, '10.0.0.50', 'Mozilla/5.0 Firefox/121.0', 'ACTIVE');
 
     -- Query with formatted UUID
-    SELECT 
-        REGEXP_REPLACE(RAWTOHEX(session_id), 
-                      '([0-9A-F]{8})([0-9A-F]{4})([0-9A-F]{4})([0-9A-F]{4})([0-9A-F]{12})', 
-                      '\1-\2-\3-\4-\5') as SESSION_ID,
-        user_id,
-        session_start,
-        ip_address,
-        status
+    SELECT *
     FROM user_sessions;
     </copy>
     ```
