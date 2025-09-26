@@ -12,31 +12,25 @@ CREATE TABLE trivia_questions (
 
 -- Insert Oracle history trivia
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('In what year was the company that became Oracle founded?', '1977', 'Easy');
+('In what year was the company that became Oracle founded?', '1977', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('What was Oracle''s original company name at founding in 1977?', 'Software Development Laboratories (SDL)', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Before it was called Oracle Corporation, what was the company''s name in 1979–1982?', 'Relational Software, Inc. (RSI)', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('Oracle Database version "2" was the first commercial release. In what year did it ship?', '1979', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Name the three Oracle co-founders.', 'Larry Ellison; Bob Miner; Ed Oates', 'Easy');
+('Which Oracle Database major release introduced PL/SQL?', 'Oracle 6', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Which Oracle Database major release introduced PL/SQL?', 'Oracle6', 'Medium');
+('Which release introduced Real Application Clusters (RAC)?', 'Oracle 9i', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Which release introduced Real Application Clusters (RAC)?', 'Oracle9i', 'Medium');
+('Oracle 10g emphasized what computing model in its branding?', 'Grid computing', 'Easy');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Oracle10g emphasized what computing model in its branding?', 'Grid computing', 'Easy');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Oracle12c introduced a new architecture for consolidation. What is it called?', 'Multitenant (CDB/PDB)', 'Easy');
+('Oracle 12c introduced a new architecture for consolidation. What is it called?', 'Multitenant (CDB/PDB)', 'Easy');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('Which company did Oracle acquire in 2010 that made it steward of Java and MySQL?', 'Sun Microsystems', 'Easy');
@@ -54,22 +48,10 @@ INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('What is the internal name for the relational engine that inspired Oracle''s original product name?', 'Oracle (from a CIA project codename)', 'Hard');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Oracle7 (early 1990s) became famous for which features (name one)?', 'Stored procedures, triggers, cost-based optimizer (any one)', 'Medium');
+('Who was Oracle''s first customer?', 'The CIA', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Which release family introduced Automatic Storage Management (ASM)?', 'Oracle10g', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Which release family introduced Active Data Guard?', 'Oracle11g', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('The first SQL*Net/Net8 predecessors enabled what key capability for Oracle databases?', 'Client/server network connectivity to the DB over protocols', 'Hard');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Oracle''s first relational database was heavily influenced by research from which IBM scientist?', 'Edgar F. Codd', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Which Oracle release name introduced the concept of "c" for cloud?', 'Oracle12c', 'Easy');
+('Which Oracle release name introduced the concept of "c" for cloud?', 'Oracle 12c', 'Easy');
 
 -- Save the data
 COMMIT;

@@ -2,44 +2,43 @@
 
 ## Introduction
 
-Welcome to the **Oracle AI Vector Search** lab! In this hands-on session, you'll explore Oracle Database  23ai's powerful AI Vector Search capabilities using the LumenCare healthcare scenario.
+Welcome to the **Oracle AI Vector Search** lab! In this hands-on session, you'll learn how to search documents by **meaning** rather than just matching exact words.
 
-Building on the patient data from our previous labs, you'll learn how to create vector embeddings from healthcare documents stored in Oracle Cloud Infrastructure (OCI) Object Storage and perform semantic searches to find relevant medical information.
+Traditional database searches look for exact text matches. But what if you want to find documents about "knee pain" and also discover records mentioning "joint discomfort" or "patella issues"? Vector search solves this by understanding that these terms have similar meanings.
+
+Building on the patient data from our previous labs, you'll learn how to set up vector search to find relevant medical information across healthcare documents, even when they use different terminology.
 
 Estimated Lab Time: 25 minutes
 
 ### What You'll Learn
 
-- Loading ONNX Embedding Models into the database
-- Creating vector tables with Oracle  23ai's AI Vector Search
-- Generating embeddings for semantic similarity searches
-- Performing vector searches on documents
-- Connecting vector search results to existing patient data
-- How to load text documents from OCI Object Storage using Pre-Authenticated Request (PAR) URLs
+- How vector search finds documents by meaning, not just keywords
+- Setting up the AI model that powers semantic search
+- Loading healthcare documents into searchable format
+- Performing "find similar documents" searches
+- Connecting search results to existing patient data
 
 ### Prerequisites
 
 - Access to Oracle Database  23ai
-- Completion of previous LumenCare labs (recommended)
+- Completion of previous LumenCare labs
 - Basic SQL knowledge
 
 
-## Task 1: Load the Embedding Model for Vector Search
-1. In order to create embeddings and perform vector searches, you'll need an embedding model. Oracle Database allows you to optionally load embedding models into the database to perform secure embedding. In this task, you'll load the **ALL\_MiniLM_L12\_v2** model that has been staged in Oracle Cloud Infrastructure Object Storage. This model will be used to create our vectors.
+## Task 1: Load the AI Model for Vector Search
 
-2. Vector search enables semantic similarity matching by converting unstructured objects into high-dimensional numerical vectors called embeddings. Similar content produces similar vectors, allowing the database to find related information based on meaning rather than exact text matches.
+1. **How vector search works:** To find documents by meaning, Oracle needs to convert text into numbers called "vectors." Think of vectors as coordinates that represent the meaning of text. Documents with similar meanings get similar vectors, making them easy to find.
 
-    The ALL\_MiniLM\_L12\_v2 model is a lightweight transformer model optimized for generating high-quality sentence embeddings that work perfectly with Oracle's native vector search capabilities.
+    For example:
+    - "knee surgery recovery" might become vectors like [0.2, 0.8, 0.1, ...]
+    - "joint operation healing" would get very similar vectors
+    - "diabetes management" would get completely different vectors
 
-3. **Create and execute the embedding model loader script**. The following PL/SQL block will:
+2. **Why we need a model:** To convert text to these meaningful vectors, we need an AI model. Oracle lets you load these models directly into the database for secure, fast processing.
 
-    - Download the pre-trained ONNX model from Oracle's Object Storage
-    - Load it into your database as `ALL_MINILM_L12_V2`
-    - Make it available for generating embeddings in subsequent tasks
+    In this task, we'll load a pre-trained model called **ALL\_MiniLM\_L12\_v2** that's optimized for understanding general text.
 
-    **Expected Result:** You should see output confirming the model was successfully loaded with the name `ALL_MINILM_L12_V2`. This model will be used throughout the remaining tasks to generate vector embeddings for our healthcare documents.
-
-    **Note:** This one-time setup process enables Oracle Database to generate embeddings locally without requiring external API calls.
+3. **Load the model into your database:** The code below downloads the AI model and installs it in your database. This is a one-time setup that lets Oracle convert text to vectors without needing external services.
 
     ```sql
     <copy>
@@ -80,14 +79,15 @@ Estimated Lab Time: 25 minutes
     </copy>
     ```
 
-## Task 2: Set Up Vector Search Infrastructure
+## Task 2: Create a Table to Store Documents and Their Vectors
 
-1. Before we can perform vector searches, we need to configure the necessary database components. Oracle  23ai provides built-in AI vector capabilities that integrate seamlessly with existing data.
+1. Now we need a place to store both the original healthcare documents and their vectors.
+
+2. Let's create our storage table:
 
     ```sql
     <copy>
-
-        -- First, let's create our vector search schema objects
+        -- Create table to store healthcare documents
         CREATE TABLE IF NOT EXISTS healthcare_documents (
             doc_id NUMBER GENERATED BY DEFAULT AS IDENTITY,
             title VARCHAR2(200),
@@ -97,19 +97,32 @@ Estimated Lab Time: 25 minutes
             CONSTRAINT pk_healthcare_docs PRIMARY KEY (doc_id)
         );
 
-        -- Add vector column for embeddings
+        -- Add the new vector column to store vectors
         ALTER TABLE healthcare_documents ADD (
             content_vector VECTOR(384, FLOAT32)
         );
-
     </copy>
     ```
-    **Note** I am only using an alter statement here to draw attention to the vector datatype. You can also simply add this while creating the table.
+
+    **What this creates:**
+    - **Regular columns**: `title`, `content`, `document_type` store the readable text
+    - **Vector column**: `content_vector` stores 384 dimension vectors for each document
+    - **VECTOR(384, FLOAT32)**: This special data type tells Oracle we're storing 384 decimal numbers that represent document meaning
 
 
 
-## Task 3: Load Healthcare Documents from Object Storage
-1. Now, load Healthcare Documents from Object Storage using DBMS_CLOUD with PAR URLs
+## Task 3: Load Sample Healthcare Documents
+
+1. Now we need some healthcare documents to search through. We've prepared realistic sample documents that represent different types of medical records you might find in a healthcare system:
+
+    - Patient messages and communications
+    - Discharge summaries and clinical notes  
+    - Lab results and radiology reports
+    - Insurance authorizations and referrals
+
+    These documents are stored in Oracle Cloud storage, and we'll download them directly into our database table.
+
+2. **Load the documents:** The code below downloads 11 sample healthcare documents and stores them in our table. Don't worry about understanding all the technical details - the important part is that it's loading realistic medical documents for us to search.
 
     ```sql
     <copy>
@@ -166,10 +179,10 @@ Estimated Lab Time: 25 minutes
             /
     </copy>
     ```
-2. Now, verify the loaded documents
+3. **Check what documents were loaded:** Let's see what healthcare documents are now in our table:
+
     ```sql
     <copy>
-
         SELECT doc_id,
                 title,
                 document_type,
@@ -177,17 +190,27 @@ Estimated Lab Time: 25 minutes
                 SUBSTR(content, 1, 150) || '...' as content_preview
         FROM healthcare_documents
         ORDER BY doc_id;
-
     </copy>
     ```
 
+    You should see 11 documents with titles like:
+    - "Patient Portal Message: Courtney Henry - Knee Recovery Update"
+    - "DISCHARGE SUMMARY - Arthroscopic Meniscus Repair"
+    - "LAB RESULTS - Comprehensive Metabolic Panel"
+    
+    Notice that `content_vector` is NULL for now - we'll create the vector in the next task.
 
 
-## Task 4: Generate Vector Embeddings
 
-1. Oracle  23ai can generate embeddings using built-in AI capabilities. We'll create vector representations of our healthcare documents that capture their semantic meaning.
+## Task 4: Convert Documents to Vectors
 
-    ```
+1. **Why we need to convert text to numbers:** To search by meaning, Oracle needs to convert text into numbers called vectors. The AI model reads each document and creates a unique set of vectors that represents what the document is about.
+
+    Documents about similar topics get similar vectors, making them easy to find when we search.
+
+2. **Convert all documents to vectors:** This simple command tells Oracle to read each document and create the vectors:
+
+    ```sql
     <copy>
         UPDATE healthcare_documents
         SET content_vector = VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING content AS DATA)
@@ -195,30 +218,39 @@ Estimated Lab Time: 25 minutes
         COMMIT;
     </copy>
     ```
-    What’s going on here?
-    Think of a vector as a point in space. In two dimensions, that might be an (x, y) coordinate on a graph. But embeddings are 384 dimensions — far too big to draw — so we use math to measure closeness.
-    * When we say “similarity,” we really mean distance.
-    * If two documents are “close” in vector space, they’re semantically similar.
-    * Oracle gives us the function VECTOR_DISTANCE to calculate that closeness.
 
-    Smaller distance = more similar.
-2. Look at one of the vectors 
+    **What this does:**
+    - Takes each document's text content
+    - Uses our AI model to convert it to vectors 
+    - Stores those vectors in the `content_vector` column
+    - Now Oracle can measure how "close" documents are by comparing their vectors
 
-    ```
+3. **See what the vectors look like:** Let's look at one document's vectors :
+
+    ```sql
     <copy>
         SELECT doc_id,
             title,
             content_vector
-    FROM healthcare_documents
-    FETCH FIRST 1 ROW ONLY;
+        FROM healthcare_documents
+        FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
 
-## Task 5: Perform Basic Vector Similarity Searches
+    You'll see 384 decimal numbers like [0.1234, -0.5678, 0.9012, ...]. These numbers are the vectors that represent the document's meaning.
 
-1. Now let's perform semantic searches to find similar healthcare documents. Vector search finds content with similar meaning, even if the exact words differ.
+    ![vecs](./images/v1.png)
 
-    Let’s try something practical. We’ll embed a short English phrase, turn it into a query vector, then order our documents by cosine distance to that query. Suppose a clinician wants to quickly find all records related to blood pressure management.
+## Task 5: Search Documents by Meaning
+
+1. **How vector search works:** Now that our documents are represented as vectors, we can search by meaning instead of exact words. Here's how:
+    
+    - Type what you're looking for (like "diabetes management")
+    - Oracle converts your search phrase to vectors too
+    - Oracle finds documents with the most similar vectors
+    - Documents with closer vectors = more similar meaning
+
+2. **Try your first semantic search:** Let's search for documents about diabetes management. Notice how this will find relevant documents even if they don't contain the exact words "diabetes management":
     ```
     <copy>
     -- Search for documents similar to a diabetes query
@@ -238,14 +270,16 @@ Estimated Lab Time: 25 minutes
     FETCH FIRST 3 ROWS ONLY;
     </copy>
     ```
-    What you’ll see near the top:
-    * Leslie’s secure messages discussing Lisinopril and DASH diet
-    * The nutrition consultation notes about reducing sodium
-    * Her lipid panel with cholesterol results
+3. **What you'll see in the results:**
+    - Leslie's messages about blood pressure medication (Lisinopril)
+    - Nutrition consultation notes about DASH diet
+    - Lab results showing cholesterol levels
+   
+   Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
 
-    One short phrase pulls together patient communications, labs, and diet counseling — no keywords needed.
+    ![vecs](./images/v2.png)
 
-3. Now let’s look for Courtney’s recovery notes.
+4. Now let's look for Courtney's recovery notes.
     ```
     <copy>
     WITH q AS (
@@ -263,13 +297,17 @@ Estimated Lab Time: 25 minutes
     FETCH FIRST 4 ROWS ONLY;
     </copy>
     ```
-    Expected results:
-    * Courtney’s clinical notes 
+    **Expected results:**
+    * Courtney's clinical notes 
     * Physical therapy session notes showing progress
     * Operative report and discharge summary after arthroscopic repair
-    * Even the MRI authorization request appears, because it’s part of the same clinical episode
+    * Even the MRI authorization request appears, because it's part of the same clinical episode
 
-4. Let's try one more. 
+    Again, vector search connected related documents across different document types - all about the same patient's knee recovery journey.
+
+    ![vecs](./images/v3.png)
+
+5. Let's try one more. 
 
     ```
     <copy>
@@ -289,25 +327,26 @@ Estimated Lab Time: 25 minutes
     </copy>
     ```
 
-    Likely matches:
+    **What vector search finds:**
     * Radiology foot X-ray showing flatfoot/overpronation
     * Sports medicine consult with cadence and form recommendations
     * Patient messages about training goals and soreness
 
-    This gives a complete view of the gait assessment — imaging, specialist report, and the patient’s own words.
+    This demonstrates how vector search can pull together a complete clinical picture from multiple sources - imaging, specialist reports, and patient communications - all related to foot biomechanics.
+
+    ![vecs](./images/v4.png)
 
 
-## Task 6: Creating Vector Indexes
 
-1. Now we'll learn about Oracle Database  23ai's vector indexing capabilities. Vector indexes are essential for scaling vector search operations as your document corpus grows, providing significant performance improvements for approximate nearest neighbor (ANN) searches.
+## Task 6: Speed Up Vector Search with Indexes
 
-  Oracle  23ai provides two main types of vector indexes optimized for different use cases:
-    - **In-Memory Neighbor Graph Vector Index**: Uses Hierarchical Navigable Small World (HNSW) graphs for fast searches
-    - **Neighbor Partition Vector Index**: Uses Inverted File Flat (IVF) approach for balanced performance
+1. **Why indexes matter:** With 11 documents, searches are instant. But with thousands or millions of documents, Oracle would have to compare your search against every single document. Vector indexes solve this problem.
 
-  In Autonomous Database, the vector memory size is automatically managed, making vector index creation and management much simpler than in traditional Oracle databases.
+2. **Oracle's two vector index types:**
+    - **In-Memory Neighbor Graph Index** - Uses HNSW (Hierarchical Navigable Small World) algorithm to create a network of connections between similar documents
+    - **Neighbor Partition Index** - Uses IVF (Inverted File indexing) to divide documents into clusters and search only relevant clusters
 
-2. Vector indexes provide several benefits: Speed, Scalability, Accuracy,  Control. Lets create a vector index - In-Memory Neighbor Graph Vector Index 
+3. **Create an In-Memory Neighbor Graph Index:** This type is optimized for speed and accuracy:
 
     ```sql
     <copy>
@@ -321,12 +360,12 @@ Estimated Lab Time: 25 minutes
     </copy>
     ```
 
-    **What this does:**
-    - `INMEMORY NEIGHBOR GRAPH`: Uses HNSW algorithm for fast searches
-    - `DISTANCE COSINE`: Matches our search queries (always align with your search metric)
-    - `TARGET ACCURACY 95`: Aims for 95% accuracy vs exact brute-force search
+    **What this creates:**
+    - `INMEMORY NEIGHBOR GRAPH`: Builds the HNSW network in memory for fastest searches
+    - `DISTANCE COSINE`: Uses the same distance measurement as our search queries
+    - `TARGET ACCURACY 95`: Finds 95% of the same results as checking every document, but much faster
 
-2. We can check the status of the vector index in the user indexes table just as expected
+4. **Verify the index was created:**
     ```sql
     <copy>
     -- Check index status
@@ -337,7 +376,7 @@ Estimated Lab Time: 25 minutes
     </copy>
     ```
 
-3. **Alternative: Create a Neighbor Partition Vector Index** (for comparison):
+5. **Alternative: Create a Neighbor Partition Index** (try this option instead):
 
     ```sql
     <copy>
@@ -354,18 +393,15 @@ Estimated Lab Time: 25 minutes
     </copy>
     ```
 
-    **Key differences:**
-    - **NEIGHBOR PARTITIONS**: Uses IVF (Inverted File Flat) approach
-    - Better for larger datasets with memory constraints
-    - Slightly different performance characteristics
+    **When to use each index type:**
+    - **INMEMORY NEIGHBOR GRAPH**: Best for fastest searches with smaller datasets
+    - **NEIGHBOR PARTITIONS**: Better for very large datasets or when memory is limited
+    - Both use `TARGET ACCURACY 95` to balance speed vs precision
 
-
-3. **Important index management best practices:**
-
-    - **Keep distance metrics consistent**: Always use the same distance metric (COSINE, EUCLIDEAN, etc.) in both index creation and queries
-    - **Monitor accuracy vs performance**: Higher TARGET_ACCURACY values provide better results but use more resources  
-    - **Regular statistics**: Keep table statistics current for optimal query plans
-    - **Autonomous advantages**: In Autonomous Database, vector memory is auto-managed, eliminating manual tuning
+6. **Index best practices:**
+    - Always use the same distance metric (COSINE) in both index creation and search queries
+    - Higher TARGET_ACCURACY values give better results but use more resources
+    - In Autonomous Database, vector memory is automatically managed for you
 
 
 ## Conclusion

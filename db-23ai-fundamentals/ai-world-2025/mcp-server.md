@@ -18,7 +18,7 @@ By the end of this lab you will be able to:
 
 
 ### Prerequisites:
-This lab assumes you have:
+**This lab assumes you have:**
 - Oracle Java 17 or 21 installed.
 - Access to an Oracle Database (FreeSQL, LiveSQL, or an Autonomous Database with wallet).
 - Oracle account credentials.
@@ -58,7 +58,8 @@ This lab assumes you have:
       1. connection name: **AIWorld-HOL**
       2. username: **aiworld25**
       3. password: **OracleAIworld2025**
-      4. **Cloud Wallet**
+      4. Select the connection type dropdown. Select: **Cloud Wallet**
+      5. Click choose file and select the wallet
 
    ![create connection](./images/w2.png " ")
 
@@ -71,13 +72,24 @@ Cline is an MCP client extension for VS Code that lets you connect AI assistants
 1. In VS Code Extensions, search for “Cline” and install it.  
    ![install cline](./images/lab-2/13-searching-for-cline-vs-code-extension.png " ")
 
-2. Open Cline in the Activity Bar. 
+2. Open Cline in the Activity Bar.
 
-3. First, click the gear icon to open cline settings. In this example, I'll show signing up with cline and using a free model. You can use and configure whatever API provider you prefer, including Oracle Code Assist. With Oracle code assist, you can authenticate with a valid Oracle SSO instead of an API key.
+   ![alt text](./images/c8.png =30%x* )
+
+3. You can use any API key you want. For this demo, I'll show cline for simplicity. Click **Get started for free**
+
+   You will be prompted to sign up. follow the instructions if you wish to create a cline account. You do not need a cline account if you have your own API. 
+
+   ![alt text](./images/c10.png =30%x* )
+
+
+4. First, **click the gear icon** to open cline settings. Then **click the API Configuration** (see the picture below).
+
+    In this example, I'll show signing up with cline and using a free model. You can use and configure whatever API provider you prefer, including Oracle Code Assist. With Oracle code assist, you can authenticate with a valid Oracle SSO instead of an API key.
 
    ![choose provider](./images/w3.png =30%x* " ")
 
-4. Once you've picked an API Provider (remember the mcp server works with any provider you pick), choose an AI model. Here I'll use a free model that cline offers. 
+5. Once you've picked an API Provider (remember the mcp server works with any provider you pick), choose an AI model. Here I'll use a free model that cline offers. 
 
    ![choose provider](./images/w4.png =30%x* " ")
 
@@ -97,14 +109,14 @@ Cline is an MCP client extension for VS Code that lets you connect AI assistants
 2. Click **Configure MCP Servers**. This opens a JSON file.  
    ![choose provider](./images/w6.png =60%x* " ")
 
-3. Replace the empty JSON with the following (update the path to your SQLcl install):  
+3. You much **update the the JSON BELOW**. You need your path to the SQLcl folder we just unzipped. See the photo below for an example of what my path looks like. Yours will be different.  
 
       ```json
       <copy>
       {
          "mcpServers": {
             "sqlcl": {
-               "command": "[UPDATE THIS WITH YOUR PATH]/bin/sql",
+               "command": "[UPDATE THIS WITH YOUR PATH TO SQLCL]/bin/sql",
                "args": ["-mcp"]
             }
          }
@@ -167,7 +179,7 @@ Cline is an MCP client extension for VS Code that lets you connect AI assistants
    ![installed servers](./images/c3.png =30%x* " ")
 
 
-5. Now let’s use the `run-sqlcl` tool to execute a SQL script in your database. Copy the following script into a **new file in VS Code** named `trivia.sql`:   
+5. Now let’s use the `run-sqlcl` tool to execute a SQL script in your database. Copy the following script into a **new file in VS Code** named `trivia-data.sql`:   
 
    <details>
       <summary style="color: #0055ffff";><kbd style="font-size: 10px;">(click) </kbd><strong>SQL Script</strong></summary>
@@ -264,7 +276,9 @@ Cline is an MCP client extension for VS Code that lets you connect AI assistants
 
    ![cline-2](./images/c5.png " ")
 
-2. In Cline, run the script with the `run-sqlcl` tool, specifying your connection.  
+2. Make sure you have **saved the file** in the step above.
+
+3.  Navigate back to Cline, run the script below:
 
       ```text
       <copy>
@@ -272,7 +286,9 @@ Cline is an MCP client extension for VS Code that lets you connect AI assistants
       </copy>
       ```
 
-7. Cline will use the run-sqlcl tool to execute SQLcl commands on your behalf. Different LLMs will do different things; it's up to **YOU** to review what the coding agent wants to do and either approve, modify, or deny each request. Here I'll allow it to use SQLcl and run the script, adding the data to my database.
+7. Cline will use the run-sqlcl tool to execute SQLcl commands on your behalf. Different LLMs will do different things; it's up to **YOU** to review what the coding agent wants to do and either approve, modify, or deny each request. 
+
+   Here I'll allow it to use SQLcl and run the script, adding the data to my database.
 
    ![cline-2](./images/c6.png " ")
 
@@ -301,7 +317,7 @@ Cline is an MCP client extension for VS Code that lets you connect AI assistants
 
 ## Clean Up
 
-If you’d like to reset your environment, drop the table as follows:  
+If you’d like to reset your environment, drop the table as follows, or ask the coding agent to do it for you! (don't forget to ask it to disconnect when you're done).
 
 ```sql
 <copy>
