@@ -93,8 +93,6 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <copy>
     select con_id, name, open_mode, restricted from v$pdbs;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -117,8 +115,6 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <copy>
     select con_id, name, open_mode, restricted from v$containers;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * By selecting from `v$containers` instead of `v$pdbs` you can see information about the root container (*CDB$ROOT*) as well.

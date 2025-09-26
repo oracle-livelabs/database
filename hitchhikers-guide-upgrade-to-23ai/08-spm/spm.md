@@ -248,8 +248,6 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     <copy>
     SELECT sql_handle, plan_name, enabled, accepted, fixed FROM dba_sql_plan_baselines;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
