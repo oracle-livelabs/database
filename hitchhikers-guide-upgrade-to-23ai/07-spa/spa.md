@@ -6,7 +6,7 @@ In this lab, you will use the SQL Performance Analyzer (SPA) that is a part of t
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide Lab 7](youtube:lwvdaM4v4tQ?start=3165)
+[Lab 7 walk-through](videohub:1_9v29sxht)
 
 ### Objectives
 
@@ -115,14 +115,19 @@ This lab assumes:
 
     ``` sql
     <copy>
+    ! sed -i 's/STS_CaptureAWR/STS_CaptureCursorCache/g' /home/oracle/scripts/upg-07-spa_cpu.sql
+
     @/home/oracle/scripts/upg-07-spa_cpu.sql
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     The script will:
 
-    * Convert the information from `STS_CaptureAWR` into the right format.
-    * Simulate the execution of all statements in `STS_CaptureAWR`.
+    * Change upg-07-spa_cpu.sql to use `STS_CaptureCursorCache` instead of `STS_CaptureAWR`.
+    * Convert the information from `STS_CaptureCursorCache` into the right format.
+    * Simulate the execution of all statements in `STS_CaptureCursorCache`.
     * Compare before/after.
     * Report on the results based on *CPU\_TIME*.
 
@@ -151,8 +156,12 @@ This lab assumes:
 
     ``` sql
     <copy>
+    ! sed -i 's/STS_CaptureAWR/STS_CaptureCursorCache/g' /home/oracle/scripts/upg-07-spa_elapsed.sql
+
     @/home/oracle/scripts/upg-07-spa_elapsed.sql
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 7. Next, generate a report.
