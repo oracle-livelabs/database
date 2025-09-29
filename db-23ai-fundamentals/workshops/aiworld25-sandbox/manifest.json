@@ -43,10 +43,10 @@
         "filename": "../../ai-world-2025/sql-features.md"
     },
       {
-          "title": "Lab 6: (Bonus) Property Graphs",
-          "description": "Building Property Graphs",
+          "title": "Lab 6: (Bonus) SQLcl MCP Server and the Oracle Database ",
+          "description": "Working with the sqlcl mcp server",
           "type": "livelabs",
-          "filename": "../../ai-world-2025/new-property-graph.md"
+          "filename": "../../ai-world-2025/mcp-server.md"
       },
 
         {

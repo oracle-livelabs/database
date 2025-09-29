@@ -1,8 +1,0 @@
-{
-  "appointmentType": "orthopedic",
-  "duration": 45,
-  "specialty": "sports medicine",
-  "followUpWeeks": 6,
-  "painLevel": 3,
-  "mobilityImprovement": true
-}
