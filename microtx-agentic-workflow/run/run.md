@@ -26,17 +26,19 @@ This lab assumes you have:
 
 ## Task 1: View the Overall Workflow
 
-1. Open the navigation menu and then click **Definitions**.
+1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
+   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
-2. In the **Workflows** tab, click the `acme_bank_loan_processing_workflow` workflow.
-   ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
+2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+   The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks in the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
+  ![View a workflow](images/view-workflow.png)
 
-3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed. The code appears in the left pane and you can see a visual representation of the code components, such as tasks in the right pane.
-   ![View the selected workflow in Workflow UI](images/view-workflow.png)
+3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
+   ![View a workflow](images/view-workflow-json.png)
 
-## Task 2: Initiate the Workflow
+## Task 2: Execute the Workflow
 
-1. In the Workflow UI, click **Workbench**.
+1. Open the navigation menu and click **Workbench**.
     The **Workflow Workbench** dialog box appears.
 
 2. In the **Workflow Name** drop-down list, select the `acme_bank_loan_processing_workflow` workflow.
@@ -54,17 +56,17 @@ This lab assumes you have:
     </copy>
     ```
 
-4. Click **Execute Workflow** to run the selected workflow.
+5. Click **Execute Workflow** to run the selected workflow.
    ![Select a workflow that you want to view in the Workflow UI](images/workbench-workflow.png)
 
     Under **Execution History**, a new workflow execution ID is displayed along with the status of the workflow.
 
     ![View the workflow execution ID](images/execution-history.png)
 
-5. Click the workflow execution ID. The status of the workflow execution is displayed in a new browser tab as shown in the following image. Green indicates that the steps have already been executed successfully.
+6. Click the workflow execution ID. The status of the workflow execution is displayed as shown in the following image. Green indicates that the steps have already been executed successfully.
     ![View the status of the workflow execution](images/workflow-execution-status.png)
 
-6. Click **Refresh** to view the updated status of the workflow after a few seconds. It might take 90 seconds or more to execute the workflow completely.
+7. Click **Refresh** to view the updated status of the workflow after a few seconds. It might take 90 seconds or more to execute the workflow completely.
     When the Send Email notification step turns green as shown in the following image, the workflow stops executing.
     ![View the status of the workflow execution](images/human-task-approval.png)
 
@@ -97,7 +99,7 @@ The workflow does not progress until a human approves or rejects the loan reques
     The human approval task is now marked in green and status of the workflow changes to **Completed**.
     ![Workflow execute complete](images/workflow-run-complete.png)
 
-## Task 4: Verify the Status of the Workflow
+## Task 4: Verify the Status of the Loan Application
 
 1. Copy the Workflow ID from the Workbench as shown in the following image.
     ![Workflow ID](images/workflow-id.png)

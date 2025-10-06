@@ -1,15 +1,15 @@
-# Domains and Annotations with Oracle AI Database 26ai
+# Domains and Annotations with Oracle AI Database 23ai
 
 ## Introduction
 
-Welcome to the **Domains and Annotations** lab! In this hands-on session, you'll learn how Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations work together to solve data governance challenges in the LumenCare demo.
+Welcome to the **Domains and Annotations** lab! In this hands-on session, you'll learn how Oracle AI Database 23ai's Data Usecase Domains and Schema Annotations work together to solve data governance challenges in the LumenCare demo.
 
 As organizations like LumenCare manage increasingly complex data requirements—from regulatory compliance to business workflow automation, traditional database comments and constraints fall short. This lab demonstrates how modern database features can enforce data integrity while maintaining comprehensive metadata documentation for any business domain.
 
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to demonstrate Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for compliance reporting.
+The objective of this lab is to demonstrate Oracle AI Database 23ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for any number of reasons.
 
 **The LumenCare Challenge**
 LumenCare's platform faces several common data governance challenges that many organizations encounter:
@@ -20,7 +20,7 @@ LumenCare's platform faces several common data governance challenges that many o
 4. **Audit Requirements**: All sensitive data needs structured metadata for compliance reporting and business intelligence
 
 ### Prerequisites:
-- Access to Oracle AI Database 26ai.
+- Access to Oracle AI Database 23ai.
 - Basic understanding of SQL concepts.
 
 ## What are Data Usecase Domains?
@@ -33,7 +33,7 @@ Data Use Case Domains also provide consistent metadata for development, analytic
 
 ### Understanding the Four Types of Data Usecase Domains
 
-Before we dive into our healthcare examples, let's understand the four powerful types of Data Usecase Domains available in Oracle AI Database 26ai:
+Before we dive into our healthcare examples, let's understand the four types of Data Usecase Domains available in Oracle AI Database 23ai:
 
 #### 1. Single Column Domain
 * **Purpose**: Applies constraints and validation rules to a single column across multiple tables.
@@ -59,7 +59,7 @@ Before we dive into our healthcare examples, let's understand the four powerful 
 Schema Annotations, as an extension of traditional comments, offer a more structured and versatile approach to database documentation. They allow us to associate name-value pairs with database objects, allowing us to describe, classify, and categorize them according to our specific requirements.
 
 ### Why Use Them Together?
-The combination creates a powerful data governance framework that benefits any organization:
+The combination creates a data governance framework that benefits any organization:
 - **Domains** enforce consistent data validation rules across all applications
 - **Annotations** provide structured metadata for compliance, documentation, and automation
 - Together they create self-documenting database schemas that reduce maintenance overhead and improve data quality
@@ -88,11 +88,11 @@ The combination creates a powerful data governance framework that benefits any o
 
     ![The Database Actions button is highlighted.](../common-images/simple-db-actions.png =50%x* " ")
 
-1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including compliance annotations.
+1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including annotations.
 
   Let's create single column domains that apply constraints and validation to individual columns that can be reused across multiple tables.
 
-    **Note**: We're using `IF NOT EXISTS` syntax, an Oracle AI Database 26ai feature that can prevents errors when running scripts multiple times. The feature lets you to create objects only if they don't already exist, making your database scripts more robust and reusable - particularly valuable in development environments where scripts may be executed repeatedly.
+    **Note**: We're using `IF NOT EXISTS` syntax, an Oracle AI Database 23ai feature that can prevents errors when running scripts multiple times. The feature lets you to create objects only if they don't already exist, making your database scripts more robust and reusable - particularly valuable in development environments where scripts may be executed repeatedly.
 
     ```sql
     <copy>
@@ -176,7 +176,7 @@ The combination creates a powerful data governance framework that benefits any o
       primary_reason    VARCHAR2(200),
       created_at        TIMESTAMP DEFAULT SYSTIMESTAMP,
       last_updated      TIMESTAMP DEFAULT SYSTIMESTAMP,
-      -- Virtual columns (26ai enhanced support for up to 4096 columns)
+      -- Virtual columns (23ai enhanced support for up to 4096 columns)
       full_name_upper   VARCHAR2(100) GENERATED ALWAYS AS (
         UPPER(name)
       ) VIRTUAL
@@ -215,11 +215,6 @@ The combination creates a powerful data governance framework that benefits any o
     </copy>
     ```
 
-    **Annotation Pattern Summary**: Notice how each table demonstrates the **contextual annotation approach**:
-    - **Patients**: Focus on clinical care and administrative operations with HIPAA jurisdiction
-    - **Appointments**: Emphasizes workflow management and billing with state-specific requirements
-    
-    The domain annotations (HIPAA flags, PII classification) are inherited automatically, while table annotations provide the specific business context.
 
 ## Task 3: Testing Domain Constraints
 
@@ -260,7 +255,7 @@ The combination creates a powerful data governance framework that benefits any o
 
 ## Task 4: Multi-Column Domain Example
 
-1. Now let's explore the power of multi-column domains with a complex healthcare example that demonstrates how to validate related data points as a logical unit.
+1. Now let's explore the power of multi-column domains with an example that shows how to validate related data points as a logical unit. 
 
     ```sql
     <copy>
@@ -287,8 +282,6 @@ The combination creates a powerful data governance framework that benefits any o
     ```
 
     This multi-column domain demonstrates how to enforce relationships between related data points - all vital signs must fall within medically reasonable ranges, and they're validated as a complete set rather than individual values.
-
-    **Note**: The domain focuses on validation rules and data classification, while retention policies would be managed at the table level following our governance best practices.
 
 2. Now create a table using the multi-column domain
 
@@ -382,7 +375,7 @@ The combination creates a powerful data governance framework that benefits any o
 
 ## Conclusion
 
-In this lab, you've seen how Oracle AI Database 26ai's Domains and Annotations work together to solve real data governance challenges:
+In this lab, you've seen how Oracle AI Database 23ai's Domains and Annotations work together to solve real data governance challenges:
 
 1. **Domains** provide reusable, consistent data validation across your entire schema
 2. **Annotations** enable structured metadata management

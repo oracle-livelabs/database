@@ -22,22 +22,18 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Task 1: Enhanced DML RETURNING Clause
 
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](../common-images/im1.png =50%x*)
 
-    Using the ADMIN user isn't typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we'll use it to simplify the setup and ensure we can show the full range of features effectively.
-
-2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+1. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
 
     ![click SQL](../new-domains/images/simple-db-actions.png =50%x*)
 
 3. **Understanding the Enhanced RETURNING Clause:**
    
-   The enhanced RETURNING clause in Oracle Database 23ai is a significant improvement that allows you to capture both OLD and NEW values during UPDATE operations. This is incredibly valuable for:
-   - **Audit trails** - Track what values changed during updates
-   - **Change monitoring** - Capture price changes, status updates, etc.
-   - **Business logic** - Calculate differences without additional queries
-   - **Performance** - Eliminate extra SELECT statements to check changes
+   The enhanced RETURNING clause in Oracle Database 23ai is a simple improvement that allows you to capture both OLD and NEW values during UPDATE operations. This is valuable for:
+    - **Audit trails** - Track what values changed during updates
+    - **Change monitoring** - Capture price changes, status updates, etc.
+    - **Business logic** - Calculate differences without additional queries
+    - **Performance** - Eliminate extra SELECT statements to check changes
 
    Previously, you could only capture the final values after an UPDATE. Now you can see before and after values in a single operation.
 
@@ -107,31 +103,20 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 1. Oracle Database 23ai introduces the UUID() function that generates RFC 9562-compliant version 4 variant 1 UUIDs. These are truly random and unpredictable, unlike the traditional SYS_GUID() function.
 
-2. Let's compare UUID() with SYS_GUID() to understand the differences:
+   **Why could SYS\_GUID() be predictable?**
+   SYS\_GUID() generates values using a combination of host identifier, process identifier, and a sequential component. This often results in values that increment sequentially - for example, consecutive calls might generate values where only one character changes while the rest remains identical. This predictable pattern makes SYS_GUID() unsuitable for security-sensitive applications.
 
-    ```
-    <copy>
-    -- Compare UUID and SYS_GUID (leveraging 23ai's FROM DUAL simplification)
-    SELECT 
-        'Traditional SYS_GUID' as METHOD,
-        SYS_GUID() as RAW_VALUE,
-        RAWTOHEX(SYS_GUID()) as HEX_STRING
-    UNION ALL
-    SELECT 
-        'RFC 9562 UUID',
-        UUID() as RAW_VALUE,
-        RAWTOHEX(UUID()) as HEX_STRING;
-    </copy>
-    ```
+   **Why is UUID() truly random?**
+   UUID() generates RFC 9562-compliant version 4 UUIDs with 122 bits of cryptographic randomness (only 6 bits are reserved for version and variant identifiers). This provides 2^122 possible unique values with no predictable patterns.
 
-3. Create a user sessions table that leverages UUID for primary keys:
+3. Create a user sessions table that leverages UUID for primary keys (note that UUID() returns RAW(16) data type, which is required for UUID storage):
 
     ```
     <copy>
     DROP TABLE IF EXISTS user_sessions CASCADE CONSTRAINTS;
 
     CREATE TABLE user_sessions (
-        session_id RAW(16) DEFAULT UUID() PRIMARY KEY,
+        session_id RAW(16) PRIMARY KEY,
         user_id NUMBER NOT NULL,
         session_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         ip_address VARCHAR2(45),
@@ -145,22 +130,14 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
     ```
     <copy>
-    -- Insert data with automatic UUID generation
-    INSERT INTO user_sessions (user_id, ip_address, user_agent, status) 
-    VALUES (1001, '192.168.1.100', 'Mozilla/5.0 Chrome/120.0', 'ACTIVE');
+    -- Insert data with explicit UUID generation
+    INSERT INTO user_sessions (session_id, user_id, ip_address, user_agent, status) 
+    VALUES (UUID(), 1001, '192.168.1.100', 'Mozilla/5.0 Chrome/120.0', 'ACTIVE');
 
-    INSERT INTO user_sessions (user_id, ip_address, user_agent, status) 
-    VALUES (1002, '10.0.0.50', 'Mozilla/5.0 Firefox/121.0', 'ACTIVE');
+    INSERT INTO user_sessions (session_id, user_id, ip_address, user_agent, status) 
+    VALUES (UUID(), 1002, '10.0.0.50', 'Mozilla/5.0 Firefox/121.0', 'ACTIVE');
 
-    -- Query with formatted UUID
-    SELECT 
-        REGEXP_REPLACE(RAWTOHEX(session_id), 
-                      '([0-9A-F]{8})([0-9A-F]{4})([0-9A-F]{4})([0-9A-F]{4})([0-9A-F]{12})', 
-                      '\1-\2-\3-\4-\5') as SESSION_ID,
-        user_id,
-        session_start,
-        ip_address,
-        status
+    SELECT *
     FROM user_sessions;
     </copy>
     ```
@@ -178,18 +155,22 @@ By the end of this lab, you will understand and be able to use these five key SQ
         product_category VARCHAR2(50),
         product_name VARCHAR2(100),
         region VARCHAR2(50),
-        sale_date DATE,
+        country VARCHAR2(50),
+        sales_rep VARCHAR2(100),
+        customer_segment VARCHAR2(50),
+        sale_month VARCHAR2(20),
         quantity NUMBER,
         unit_price NUMBER(10,2)
     );
 
     -- Insert sample data
-    INSERT INTO sales_data VALUES (1, 'Electronics', 'Laptop', 'North', DATE '2024-01-15', 5, 999.99);
-    INSERT INTO sales_data VALUES (2, 'Electronics', 'Smartphone', 'North', DATE '2024-01-16', 10, 699.99);
-    INSERT INTO sales_data VALUES (3, 'Electronics', 'Laptop', 'South', DATE '2024-01-17', 3, 999.99);
-    INSERT INTO sales_data VALUES (4, 'Books', 'Fiction Novel', 'North', DATE '2024-01-18', 25, 19.99);
-    INSERT INTO sales_data VALUES (5, 'Books', 'Technical Manual', 'South', DATE '2024-01-19', 8, 49.99);
-    INSERT INTO sales_data VALUES (6, 'Electronics', 'Tablet', 'East', DATE '2024-01-20', 7, 399.99);
+    INSERT INTO sales_data VALUES 
+        (1, 'Electronics', 'Laptop', 'North', 'USA', 'John Smith', 'Enterprise', 'January', 5, 999.99),
+        (2, 'Electronics', 'Smartphone', 'North', 'USA', 'John Smith', 'Consumer', 'January', 10, 699.99),
+        (3, 'Electronics', 'Laptop', 'South', 'USA', 'Jane Doe', 'Enterprise', 'January', 3, 999.99),
+        (4, 'Books', 'Fiction Novel', 'North', 'Canada', 'Bob Wilson', 'Consumer', 'January', 25, 19.99),
+        (5, 'Books', 'Technical Manual', 'South', 'USA', 'Jane Doe', 'Education', 'February', 8, 49.99),
+        (6, 'Electronics', 'Tablet', 'East', 'USA', 'Alice Brown', 'Consumer', 'February', 7, 399.99);
 
     COMMIT;
     </copy>
@@ -199,27 +180,35 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
     ```
     <copy>
-    -- Traditional approach - verbose and error-prone
+    -- Traditional approach - lists everything
     SELECT PRODUCT_CATEGORY,
            PRODUCT_NAME,
            REGION,
+           COUNTRY,
+           SALES_REP,
+           CUSTOMER_SEGMENT,
+           SALE_MONTH,
            SUM(quantity * unit_price) as REVENUE,
            AVG(unit_price) as AVG_PRICE,
            COUNT(*) as TRANSACTIONS
     FROM sales_data
-    GROUP BY PRODUCT_CATEGORY, PRODUCT_NAME, REGION
+    GROUP BY PRODUCT_CATEGORY, PRODUCT_NAME, REGION, COUNTRY, SALES_REP, CUSTOMER_SEGMENT, SALE_MONTH
     ORDER BY PRODUCT_CATEGORY, PRODUCT_NAME, REGION;
     </copy>
     ```
 
-3. Now use GROUP BY ALL - much cleaner and less error-prone:
+3. Now use GROUP BY ALL 
 
     ```
     <copy>
-    -- GROUP BY ALL approach - clean and concise
+    -- GROUP BY ALL approach - clean and concisecolumns
     SELECT PRODUCT_CATEGORY,
            PRODUCT_NAME,
            REGION,
+           COUNTRY,
+           SALES_REP,
+           CUSTOMER_SEGMENT,
+           SALE_MONTH,
            SUM(quantity * unit_price) as REVENUE,
            AVG(unit_price) as AVG_PRICE,
            COUNT(*) as TRANSACTIONS
@@ -231,7 +220,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Task 4: Direct Joins for UPDATE and DELETE
 
-1. Oracle Database 23ai introduces direct joins for UPDATE and DELETE statements, making multi-table operations much simpler. Let's create a movie streaming scenario:
+1. Oracle Database 23ai introduces direct joins for UPDATE and DELETE statements, making multi-table operations much simpler. Before 23ai, you had to use subqueries or complex WHERE clauses. Now you can use familiar JOIN syntax directly in UPDATE/DELETE statements. Let's create a movie streaming scenario:
 
     ```
     <copy>
@@ -268,46 +257,82 @@ By the end of this lab, you will understand and be able to use these five key SQ
     </copy>
     ```
 
-2. Use direct joins to boost thriller movie ratings:
+2. Before Oracle 23ai, updating rows based on conditions from other tables required subqueries:
 
     ```
     <copy>
-    -- Before: Check current thriller ratings
-    SELECT m.movie_id, m.title, m.rating
-    FROM movies m
-    JOIN genres g ON m.genre_id = g.genre_id
-    WHERE g.genre_name = 'Thriller';
+    UPDATE movies 
+    SET rating = rating + 0.5
+    WHERE genre_id IN (
+        SELECT genre_id 
+        FROM genres 
+        WHERE genre_name = 'Thriller'
+    );
+    
+    -- What if we wanted to use data from the genres table in the SET clause?
+    -- Traditional approach gets very complex with correlated subqueries:
+    UPDATE movies m1
+    SET rating = rating + 0.5,
+        title = title || ' (' || (
+            SELECT g.genre_name 
+            FROM genres g 
+            WHERE g.genre_id = m1.genre_id
+        ) || ' Classic)'
+    WHERE EXISTS (
+        SELECT 1 
+        FROM genres g 
+        WHERE g.genre_id = m1.genre_id 
+        AND g.genre_name = 'Thriller'
+    );
+    </copy>
+    ```
 
-    -- Direct join UPDATE - much simpler than subqueries
+3. **The Solution:** Oracle 23ai direct joins make this much simpler:
+
+    ```
+    <copy>
+    -- Reset the titles first
+    UPDATE movies SET title = REPLACE(title, ' (Thriller Classic)', '') WHERE title LIKE '%(Thriller Classic)%';
+    
+    -- Oracle Database 23ai: Direct join UPDATE - clean and intuitive
     UPDATE movies m
-    SET m.rating = m.rating + 0.5
+    SET m.rating = m.rating + 0.5,
+        m.title = m.title || ' (' || g.genre_name || ' Classic)'
     FROM genres g
     WHERE m.genre_id = g.genre_id
     AND g.genre_name = 'Thriller';
 
-    -- After: Check updated ratings
-    SELECT m.movie_id, m.title, m.rating
+    -- Check the results - notice how we can easily access both table's data
+    SELECT m.title, m.rating, g.genre_name
     FROM movies m
     JOIN genres g ON m.genre_id = g.genre_id
     WHERE g.genre_name = 'Thriller';
     </copy>
     ```
 
-3. Use direct joins to delete all horror movies:
+4. Compare traditional vs direct join DELETE operations:
 
     ```
     <copy>
-    -- Direct join DELETE - clean and readable
+    -- Traditional approach: DELETE with subquery (more complex)
+    DELETE FROM movies 
+    WHERE genre_id IN (
+        SELECT genre_id 
+        FROM genres 
+        WHERE genre_name = 'Horror'
+    );
+
+    -- Oracle Database 23ai: Direct join DELETE - clean and readable
     DELETE FROM movies m
     FROM genres g
     WHERE m.genre_id = g.genre_id
-    AND g.genre_name = 'Horror';
+    AND g.genre_name = 'Comedy';
 
-    -- Verify horror movies are gone
-    SELECT COUNT(*) as HORROR_MOVIES_REMAINING
+    -- Verify comedy movies are gone
+    SELECT COUNT(*) as COMEDY_MOVIES_REMAINING
     FROM movies m
     JOIN genres g ON m.genre_id = g.genre_id
-    WHERE g.genre_name = 'Horror';
+    WHERE g.genre_name = 'Comedy';
     </copy>
     ```
 
@@ -358,12 +383,12 @@ By the end of this lab, you will understand and be able to use these five key SQ
         department = 'Engineering',
         hire_date = DATE '2024-02-01';
 
-    -- Multiple rows with INSERT INTO SET
+    -- Multiple rows with INSERT INTO SET (correct syntax)
     INSERT INTO employees SET
-        (emp_id, emp_name, job_title, salary, department, hire_date) = 
-        (1003, 'Bob Wilson', 'Data Analyst', 65000, 'Analytics', DATE '2024-02-15'),
-        (emp_id, emp_name, job_title, salary, department, hire_date) = 
-        (1004, 'Alice Brown', 'Project Manager', 90000, 'IT', DATE '2024-03-01');
+        (emp_id = 1003, emp_name = 'Bob Wilson', job_title = 'Data Analyst', 
+         salary = 65000, department = 'Analytics', hire_date = DATE '2024-02-15'),
+        (emp_id = 1004, emp_name = 'Alice Brown', job_title = 'Project Manager', 
+         salary = 90000, department = 'IT', hire_date = DATE '2024-03-01');
     </copy>
     ```
 
@@ -379,7 +404,11 @@ By the end of this lab, you will understand and be able to use these five key SQ
     -- Clear the table for BY NAME demonstration
     DELETE FROM employees_copy;
 
-    -- INSERT INTO BY NAME - columns matched by name, order doesn't matter
+    -- INSERT INTO BY NAME - simplest approach with SELECT *
+    INSERT INTO employees_copy BY NAME
+    SELECT * FROM employees;
+
+    -- Alternative: BY NAME with different column order (names match automatically)
     INSERT INTO employees_copy BY NAME
     SELECT salary,           -- Different order
            emp_name,         -- but names match
@@ -387,10 +416,11 @@ By the end of this lab, you will understand and be able to use these five key SQ
            job_title,
            department,
            emp_id
-    FROM employees;
+    FROM employees
+    WHERE emp_id > 1002;  -- Add only remaining employees
 
     -- Verify the data was inserted correctly
-    SELECT * FROM employees_copy ORDER BY emp_id;
+    SELECT emp_id, emp_name, job_title, created_date FROM employees_copy ORDER BY emp_id;
     </copy>
     ```
 

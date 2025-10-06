@@ -6,7 +6,7 @@ In this lab, you will capture and preserve SQL statements and information from t
 
 Estimated Time: 5 minutes
 
-[Hitchhiker's Guide Lab 4](youtube:lwvdaM4v4tQ?start=1860)
+[Lab 4 walk-through](videohub:1_e0hdwjnw)
 
 ### Objectives
 

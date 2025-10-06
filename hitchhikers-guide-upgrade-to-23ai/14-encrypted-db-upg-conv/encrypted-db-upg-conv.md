@@ -6,6 +6,8 @@ This lab focuses on databases encrypted using Transparent Data Encryption (TDE).
 
 Estimated Time: 25 minutes
 
+[Lab 14 walk-through](videohub:1_gnqp040b)
+
 ### Objectives
 
 In this lab, you will:
@@ -868,8 +870,6 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <copy>
     select wrl_type, status, wallet_type, keystore_mode from v$encryption_wallet;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>

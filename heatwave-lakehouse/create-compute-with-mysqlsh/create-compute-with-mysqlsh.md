@@ -32,9 +32,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     ![Open Cloudshell](./images/cloudshellopen.png "cloudshellopen ")
 
-    ![Cloudshell Message](./images/cloudshell-welcome.png "cloudshell welcome ")
-
-    *Note: You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.
+    *Note*: You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.
 
 2. Once the cloud shell has started, create the SSH Key using the following command:
 
@@ -80,14 +78,14 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
 You will need a compute Instance to connect to your brand new MySQL database.
 
-1. Before creating the Compute instance open a notepad
+1. Before creating the Compute instance open a notepad.
 
-2. Do the followings steps to copy the public SSH key to the  notepad
+2. Do the followings steps to copy the public SSH key to the  notepad.
 
-    Open the Cloud shell
+    Open the Cloud shell.
     ![Copy SSh Key](./images/cloudshell-copy-ssh.png "cloudshell copy ssh")
 
-    Enter the following command  
+    Enter the following command.
 
     ```bash
     <copy>cat ~/.ssh/id_rsa.pub</copy>
@@ -95,53 +93,52 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![Display SSH Key](./images/cloudshell-cat.png "cloudshell cat") 
 
-3. Copy the id_rsa.pub content the notepad
+3. Copy the id_rsa.pub content the notepad.
 
-    Your notepad should look like this
+    Your notepad should look like this:
     ![Completed SSH key](./images/notepad-rsa-key.png "notepad rsa key ")
 
-## Task 3: Create Compute instance
+## Task 3: Create a Compute instance
 
-1. To launch a Linux Compute instance, go to 
-    Navigation Menu
-    Compute
-    Instances
+1. Go to **Navigation Menu**, **Compute**, and then click **Instances**.
     ![Compute Template](./images/compute-launch.png "compute launch ")
 
-2. On Instances in **lakehouse** Compartment, click  **Create Instance**
+2. In **Lakehouse** Compartment, click  **Create instance**.
     ![Create Compute button](./images/compute-create.png "compute create")
 
-3. On Create Compute Instance
+3. On **Create compute instance** page, enter the following:
 
-    Enter Name
+    Name:
 
     ```bash
     <copy>heatwave-client</copy>
     ```
 
-4. Make sure **lakehouse** compartment is selected
+4. Make sure **Lakehouse** compartment is selected.
 
-5. On Placement, keep the selected Availability Domain
+5. Under **Placement**, keep the selected Availability domain.
 
-6. Keep Security "Disabled"
+    ![Use Linux OS](./images/compute-placement-security.png "Select default settings")  
 
-    ![Use Linux OS](./images/compute-placement-security.png "compute security placement")  
-
-7. Keep the defaults for Image and Shape
+6. Keep the defaults for **Image and shape**, and click **Next**.
 
     ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
 
-8. On Networking, make sure '**heatwave-vcn**' is selected
+7. Keep the defaults for **Security**, and click **Next**.  
 
-    'Assign a public IP address' should be set to Yes
+8. Under **Networking**, select **Select existing virtual cloud network**, and ensure the Compartment is **Lakehouse**, and Virtual cloud network is **heatwave-vcn**.
+
+9. Under **Subnet**, select **Select exsiting subnet**, and ensure the Compartment is **Lakehouse**, and Subnet is **public subnet-heatwave-vcn**.
+
+10. Under **Primary VNIC IP address**, ensure **Automatically assign a private IP4 address** and **Automatically assign public IP4 address**c is selected.
 
     ![Select VCN](./images/compute-vcn.png "compute vcn.")
 
-9. On Add SSH keys, paste the public key from the notepad.
+9. On Add SSH keys, paste the public key from the notepad, and click **Next**.
   
     ![Add SSH key](./images/compute-id-rsa-paste.png "compute id rsa paste")
 
-10. Click '**Create**' to finish creating your Compute Instance.
+10. Click **Next**, and then click **Create**.
 
 11. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
     ![Provision Compute](./images/compute-provisioning.png "compute provisioning")
@@ -152,34 +149,23 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 ## Task 4: Connect to Compute and Install MySQl Shell
 
-1. Copy the public IP address of the active Compute Instance to your notepad
+1.  Go to **Navigation Menu**, **Compute**, and then click **Instances**, and click **heatwave-client**.
 
-    - Go to Navigation Menu
-            Compute
-            Instances
-        ![Navigate to Compute ](./images/compute-list.png "compute list")
+    ![Compute Instance List](./images/compute-running.png "compute public ip")
 
-    - Click the `heatwave-cient` Instance link
+2. Copy the compute name **heatwave-cient**, and the **Public IP Address** to the notepad.
 
-        ![Compute Instance List](./images/compute-running.png "compute public ip")
+    ![Compute Instance](./images/public-ip.png "compute public ip")
 
-    - Copy the compute name `heatwave-cient`  and  the `Public IP Address` to the notepad
+3. Go to **Navigation Menu**, **Databases**, and click **DB systems**. 
 
-2. Copy the private IP address of the active MySQl Database heatwave-client Service Instance to your notepad
+4. Click **heatwave-db**.
 
-    - Go to Navigation Menu
-            Databases
-            MySQL
+5. In the **heatwave-db** page, go to the **Connections** tab, and copy the **Private IP address** of the DB system.
 
-        ![Database list](./images/db-list.png "db list")
+    ![HeatWave create complete](./images/mysql-heatwave-active.png" mysql heatwave active ")
 
-    - Click the `heatwave-db` Database System link
-
-        ![HeatWave create complete](./images/mysql-heatwave-active.png"mysql heatwave active ")
-
-    - Select the **Connections** tab, copy the database nane `heatwave-db`  and the `Private IP Address` to the notepad
-        ![HeatWave create complete connection](./images/mysql-heatwave-connection-tab.png"mysql heatwave connection ")
-3. Indicate the location of the private key you created earlier with **heatwave-client**.
+6. Indicate the location of the private key you created earlier with **heatwave-client**.
 
     Enter the username **opc** and the Public **IP Address**.
 
@@ -212,4 +198,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Aijaz Fatima, Product Manager, September 2025

@@ -8,6 +8,8 @@ The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. I
 
 Estimated Time: 20 minutes
 
+[Lab 15 walk-through](videohub:1_gxluetcu)
+
 ### Objectives
 
 In this lab, you will:

@@ -16,6 +16,7 @@ In this workshop, we attempt to use minimal resources to show the demonstration,
 
 *Estimated Time*:  30 minutes
 
+[Explore Raft Replication Topology](videohub:1_wgjpojgc)
 
 ### Objectives
 In this lab, you will:
@@ -34,7 +35,7 @@ This lab assumes you have:
 
 ## Task 1: Check for containers in your VM
 
-1. To open a new terminal (skip this step if already opened a terminal as mentioned in previous lab initialize environment's Task 1), Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
+1. To open a new terminal (if not opened it already), Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
 
     From podman container Details, verify all containers are running:
     
@@ -50,7 +51,7 @@ This lab assumes you have:
 
     ![<click_file_new_tab_from_top_left_terminal_window>](./images/click_file_new_tab_from_top_left_terminal_window.png " ")
    
-    Go inside **gsm1** podman container which we'll use to verify RAFT topology:
+    Go inside **gsm1** podman container:
 
     ```
     <copy>
@@ -292,7 +293,7 @@ Failover test by stopping shard1 to create shard1 down situation.
 
     ![<chunk_status_after_shard1_down>](./images/t5-3-status-chunks-after-shard1-down.png " ")  
 
-You will see that shard1 down situation has no impact on the running workload.
+    You can verify that shard1 down situation has no impact on either the demo ui application or running the workload.
 
 4. On a terminal window logged in as **oracle**.
 Start the shard1 using the podman start command, to reflect that shard1 is joining back.
@@ -322,7 +323,7 @@ Start the shard1 using the podman start command, to reflect that shard1 is joini
 
     ![<chunk_status_after_startup_shard1>](./images/t5-5-status-chunks-after-startup-shard1.png " ")  
     
-Navigate to the third tab ( using appclient container) where the workload is running and enter CTRL-C to stop the workload.
+    Navigate to the third tab ( using appclient container) where the workload is running and enter CTRL-C to stop the workload.
 
 6. Run the below command in terminal that is switched to **GSM** to auto rebalance the leaders.
 

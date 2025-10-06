@@ -6,6 +6,8 @@ In this lab, you will start by checking an entire CDB that was already upgraded,
 
 Estimated Time: 60 minutes
 
+[Lab 10 walk-through](videohub:1_yd0yeopa)
+
 ### Objectives
 
 In this lab, you will:
@@ -112,8 +114,6 @@ You start by checking the *CDBRES* database. This database was originally on Ora
     <copy>
     select scn, storage_size, time, preserved, name from v$restore_point;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * There is one restore point named "AUTOUPGRADE\_9212\_CDBRES1927000".

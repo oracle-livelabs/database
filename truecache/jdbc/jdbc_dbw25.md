@@ -6,6 +6,9 @@ In this lab, you will test the connection to True Cache through JDBC and run the
 
 Estimated Time: 10 minutes
 
+Watch the video for a quick walk through of the Lab3.
+[Lab3](videohub:1_j4nqgxmz) 
+
 ### About True Cache using JDBC
 The application maintains one logical connection by using the database application service name of the primary database, and the JDBC Thin driver (Oracle Database 23ai and later) maintains two physical connections. The read/write split between True Cache and the primary database is controlled by the application through special calls to flag the logical connection as read-only or read-write. This mode is only for JDBC-based applications.
 
