@@ -85,55 +85,45 @@ This lab assumes you have:
 
 
 ## Task 2: Prepare Sakila for RAG processing
-1. Now create the RAG embeddings table
+
+
+1. Create a copy of the film_list view, which contains film context.
 
     ```bash
-    <copy>CREATE TABLE film_rag (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    film_id SMALLINT UNSIGNED,
-    content TEXT,
-    embedding VECTOR(384) COMMENT 'GENAI_OPTIONS=EMBED_MODEL_ID=all_minilm_l12_v2',
-    FOREIGN KEY (film_id) REFERENCES film(film_id));
+    <copy>create table film_list_rag as select * from film_list;</copy>
+    ```
+2. Rename fid column to film_id.
+
+    ```bash
+    <copy>alter table film_list_rag rename column fid to film_id;</copy>
+    ```
+3. Add column release_year and update.
+
+    ```bash
+    <copy>alter table film_list_rag add column release_year integer;
+    UPDATE film_list_rag
+    JOIN film ON film_list_rag.film_id = film.film_id
+    SET film_list_rag.release_year = film.release_year;
     </copy>
     ```
 
-    ![CREATE TABLE film_rag results](./images/film-rag-results.png "CREATE TABLE film_rag results")
-
-
-
-2. Populate with enriched film data
+4. Add the embedding columns for performing similarity searches.
 
     ```bash
-    <copy>INSERT INTO film_rag (film_id, content)
-    SELECT 
-        f.film_id,
-        CONCAT(title, '. ', description, '. Category: ', 
-            (SELECT name FROM category c JOIN film_category fc ON c.category_id = fc.category_id WHERE fc.film_id = f.film_id))
-    FROM film f;</copy>
+    <copy>alter table film_list_rag add column embedding_text text;</copy>
     ```
-3. Generate embeddings
 
     ```bash
-    <copy>UPDATE film_rag 
-    SET embedding = sys.ML_EMBED_ROW(content, JSON_OBJECT('model_id', 'all_minilm_l12_v2'))
-    WHERE embedding IS NULL;</copy>
+    <copy>alter table film_list_rag add column vector_embedding VECTOR(384) COMMENT 'GENAI_OPTIONS=EMBED_MODEL_ID=all_minilm_l12_v2';</copy>
     ```
-4. Wait 5 minutes.
-5. Check the embedding results.
+    ![Show film-list-rag table](./images/film-list-rag.png "Show film-list-rag table")
 
-    ```bash
-    <copy>SELECT 
-    COUNT(*) as total_rows,
-    COUNT(embedding) as rows_with_embeddings,
-    COUNT(*) - COUNT(embedding) as rows_remaining
-    FROM film_rag;</copy>
-    ```
-    ![Embedding results](./images/embedding-results.png "Embedding results")
-6. Exit MySQL.
+5. Exit MySQL.
 
     ```bash
     <copy>EXIT;</copy>
     ```
+
 You may now **proceed to the next lab**
 
 ## Learn More
