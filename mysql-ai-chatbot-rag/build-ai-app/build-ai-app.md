@@ -28,48 +28,36 @@ _Estimated Lab Time:_ 30 minutes
 
 ## Task 1: Understand the Application
 
-### Directory Structure
+A RAG chatbot using MySQL AI for in-database semantic search and LLM inference.
 
+**Key Features:**
+- All AI operations in MySQL (no external APIs)
+- 7-section super prompt with strict knowledge boundaries
+- Similarity filtering (0.30 threshold) for quality results
+- Session-based history (4 turns max)
+
+![RAG architecture diagram](./images/rag-architecture-diagram.png "RAG request-response flow")
+
+**Flow:** Query → Semantic search → Build super prompt (AI identity + rules + contexts) → MySQL LLM generates response
+
+
+**File Structure**
 ```
 chatbot-mysql-ai-rag/
-├── api_key.php              # MySQL database connection
-├── chat_handler.php         # Main chat processing with RAG logic
+├── api_key.php              # Database connection
+├── config.php               # RAG parameters & model IDs
+├── chat_handler.php         # Main RAG logic & API endpoint
+├── generate_embeddings.php  # One-time vector generation
 ├── index.html               # Frontend UI
 └── styles.css               # Styling
 ```
 
-### Technical Components
 
-**Core Components:**
-- Frontend (index.html + styles.css) - Terminal-style chat interface with markdown rendering
-- Backend (chat_handler.php) - Request routing and conversation management
-- Database (api_key.php) - MySQL connection to Sakila database with AI capabilities
-- RAG Pipeline - Semantic search → Context building → LLM response generation
-
-**Key Features:**
-- Semantic movie search using vector embeddings
-- Pure RAG mode for movie queries, regular chat for general questions
-- Session-based conversation history (up to 12 messages)
-- Markdown formatting with syntax highlighting
-- Responsive terminal-inspired UI
-
-### The RAG Pipeline Flow
-
-1. User submits a query via the web interface
-2. `chat_handler.php` receives and routes the query based on content
-3. For movie queries, `getPureRAGResponse()` extracts search terms
-4. `semanticMovieRetrieval()` generates a vector embedding using `sys.ML_EMBED_ROW()`
-5. Similarity search performed using `DISTANCE()` function against film_rag table
-6. Top 8 matches formatted into context with relevance scores
-7. `buildPureRAGPrompt()` constructs prompt with movie context and conversation history
-8. Prompt sent to `sys.ML_GENERATE()` using llama3.2-3b-instruct model
-9. AI-generated response returned and displayed to user
 
 ## Task 2: Deploy and Configure the Application
 
 > **Note:** This application is the exact same application that you built in **Lab 5: Build Chatbot Application**. 
 We just extended it to support RAG. So don't feel like you created the chatbot app for no purpose.
-
 
 1. Navigate to the development folder
 
@@ -94,7 +82,7 @@ We just extended it to support RAG. So don't feel like you created the chatbot a
     ```bash
     <copy>tree chatbot-mysql-ai-rag</copy>
     ```
-    ![chatbot-mysql-ai-rag folder content](./images/chatbot-mysql-ai-rag-tree.png "chatbot-mysql-ai-rag folder content")
+    ![chatbot-mysql-ai-rag folder content](./images/file-structure.png "chatbot-mysql-ai-rag folder content")
 
 5. Configure database credentials in `api_key.php`
 
@@ -120,7 +108,13 @@ We just extended it to support RAG. So don't feel like you created the chatbot a
     <copy>sudo chmod 755 .</copy>
     ```
 
+7. Generate the vector embeddings
 
+    ```bash
+    <copy>php /var/www/html/chatbot-mysql-ai-rag/generate_embeddings.php</copy>
+    ```
+
+    ![Vector embeddings results start](./images/generate-embedding.png "Vector embeddings results start")
 
 ## Task 3: Check for Errors
 
