@@ -42,7 +42,7 @@ A RAG chatbot using MySQL AI for in-database semantic search and LLM inference.
 
 
 **File Structure**
-```
+
 chatbot-mysql-ai-rag/
 ├── api_key.php              # Database connection
 ├── config.php               # RAG parameters & model IDs
@@ -50,7 +50,7 @@ chatbot-mysql-ai-rag/
 ├── generate_embeddings.php  # One-time vector generation
 ├── index.html               # Frontend UI
 └── styles.css               # Styling
-```
+
 
 
 
