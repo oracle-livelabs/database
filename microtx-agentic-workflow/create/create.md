@@ -382,14 +382,14 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 
 10. View the existing "oracledb\_mcp" MCP definition. To create a new MCP definition, click **New MCP Definition (+)**.
 
-11. Click on the edit button to view the oracledb\_mcp definition. Or enter the following information when creating a new MCP server connector for Oracle Database.
+11. Click on the edit button to view the oracledb\_mcp definition. Or enter the following information when creating a new MCP server connector for Oracle AI Database.
     * Name: Enter `oracledb_mcp` as a unique and descriptive name to identify this MCP server definition in workflows.
-    * Description: Enter a description for the tool configuration, such as Oracle Database MCP server.
+    * Description: Enter a description for the tool configuration, such as Oracle AI Database MCP server.
     * Transport: Select STDIO from the drop-down list to specify the network transport protocol used by the MCP server for communication.
     * Command: Enter '/app/sqlcl/bin/sql'.
     * Args: Enter `-mcp` as the command argument.
 
-     ![Create an MCP server connector for Oracle Database.](images/oracle-mcp2.png)
+     ![Create an MCP server connector for Oracle AI Database.](images/oracle-mcp2.png)
 
 12. Click **Submit**. Your new connector appears in the list of available MCP definitions.
 

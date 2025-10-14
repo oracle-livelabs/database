@@ -25,11 +25,11 @@ This lab assumes you have:
 
 >**Note:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise, the last line will remain in the buffer until you hit* **ENTER!**
 
-## Task 1: Start the Oracle Database Instance
+## Task 1: Start the Oracle AI Database Instance
 
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
-2. From your remote desktop session as an *oracle* user, run the following commands to start an instance of Oracle Database 23ai Free.
+2. From your remote desktop session as an *oracle* user, run the following commands to start an instance of Oracle AI Database 26ai Free.
 
     ```
     <copy>
@@ -41,12 +41,12 @@ This lab assumes you have:
    Wait until the database starts. *This can take from 90 seconds to a couple of minutes.* When the database instance is ready, you will see the following message.
 
     ```text
-    Status of the Oracle FREE 23ai service:
+    Status of the Oracle FREE 26ai service:
     LISTENER status: RUNNING
     FREE Database status: RUNNING
     ```
 
-   This Oracle Database 23ai Free instance is configured with two schemas. MicroTx Workflow uses one schema to store the workflow definitions and the execution state data. A SQL task uses the other schema, named `livelabsUser` which stores the loan application data. The Oracle MCP server connects to the `livelabsUser` schema.
+   This Oracle AI Database 26ai Free instance is configured with two schemas. MicroTx Workflow uses one schema to store the workflow definitions and the execution state data. A SQL task uses the other schema, named `livelabsUser` which stores the loan application data. The Oracle MCP server connects to the `livelabsUser` schema.
 
 ## Task 2: Set the Password to Receive Email Notifications
 
