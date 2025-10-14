@@ -2,19 +2,19 @@
 
 ## Introduction
 
-Welcome to the **JSON and SQL Data Type** lab! This hands-on session explores Oracle AI Database 23ai's native JSON data type and its capabilities for storing, querying, and managing complex business data across any industry alongside relationally stored data.
+Welcome to the **JSON and SQL Data Type** lab! This hands-on session explores Oracle AI Database 26ai's native JSON data type and its capabilities for storing, querying, and managing complex business data across any industry alongside relationally stored data.
 
 Building on the domains and annotations concepts from the previous lab, this lab covers how to combine structured data validation with flexible document storage.
 
 Estimated Lab Time: 15 minutes
 
-The 23ai release significantly expanded JSON capabilities beyond basic constructors to include advanced schema validation, collection management, and bi-directional JSON-relational duality views.
+The 26ai release significantly expanded JSON capabilities beyond basic constructors to include advanced schema validation, collection management, and bi-directional JSON-relational duality views.
 
 ### Objective:
-The objective of this lab is to showcase Oracle AI Database 23ai's native JSON data type capabilities for enterprise applications. By the end of this lab, you will understand how to create tables with JSON columns, query JSON data efficiently, and leverage advanced JSON features for flexible business data management.
+The objective of this lab is to showcase Oracle AI Database 26ai's native JSON data type capabilities for enterprise applications. By the end of this lab, you will understand how to create tables with JSON columns, query JSON data efficiently, and leverage advanced JSON features for flexible business data management.
 
 ### Prerequisites:
-- Access to Oracle AI Database 23ai.
+- Access to Oracle AI Database 26ai.
 - Basic understanding of SQL concepts.
 - Completion of Domains & Annotations lab.
 
@@ -47,7 +47,7 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
     <copy>
     -- APPOINTMENTS FOR COURTNEY HENRY (Patient ID 1 - Knee Rehab)
 
-    -- Courtney Henry appointments using Oracle 23ai TABLE VALUE clause
+    -- Courtney Henry appointments using Oracle 26ai TABLE VALUE clause
     INSERT INTO appointments (patient_id, start_time, reason, status, provider_name, appointment_data)
     VALUES 
         (1, TIMESTAMP '2025-08-12 09:30:00', 'Knee rehab progress evaluation', 'Completed', 'Dr. Jennifer Park',
@@ -89,7 +89,7 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
     <copy>
     -- APPOINTMENTS FOR RONALD RICHARDS (Patient ID 2 - Running Assessment)
     -- APPOINTMENTS FOR LESLIE ALEXANDER (Patient ID 3 - Blood Pressure)
-    -- Appointments using Oracle 23ai TABLE VALUE clause
+    -- Appointments using Oracle 26ai TABLE VALUE clause
     INSERT INTO appointments (patient_id, start_time, reason, status, provider_name, appointment_data)
     VALUES 
         (2, TIMESTAMP '2025-08-09 08:00:00', 'Running gait analysis and biomechanics', 'Completed', 'Dr. Sarah Kim',
@@ -169,10 +169,10 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
     - **Integration**: Simple integration with relational columns and constraints
     - **Schema Evolution**: New business requirements can add fields without altering table structure or application downtime
 
-## Task 2: JSON Querying in 23ai
+## Task 2: JSON Querying in 26ai
 
 
-1. Oracle AI Database 23ai lets you easily access data inside JSON columns using dot notation. Dot notation allows you to refer directly to properties inside a JSON object, just like you would with a regular column. You simply use a period (`.`) to separate the column name from the field name.
+1. Oracle AI Database 26ai lets you easily access data inside JSON columns using dot notation. Dot notation allows you to refer directly to properties inside a JSON object, just like you would with a regular column. You simply use a period (`.`) to separate the column name from the field name.
 
     For example, we have a column called **`appointment_data`** that stores JSON, we can get the value of the **`appointmentType`** field like this:
 
@@ -284,7 +284,7 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
 
 2. Let's use JSON_MERGEPATCH to update existing JSON documents with new information.
 
-    **`JSON_MERGEPATCH`** is a powerful new function in Oracle 23ai that lets you update JSON documents by merging in new fields or changing existing ones. Think of it like "patching" a JSON document with updates.
+    **`JSON_MERGEPATCH`** is a powerful new function in Oracle 26ai that lets you update JSON documents by merging in new fields or changing existing ones. Think of it like "patching" a JSON document with updates.
 
     For example, let's say we want to add follow-up information to completed appointments:
 
@@ -319,7 +319,7 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
 
 3. Let's create patient summary reports by building new JSON documents from our data.
 
-    Sometimes you need to create JSON reports that combine information from both your regular table columns (like patient name and date of birth) and your JSON columns (like appointment types and durations). Oracle 23ai's **`JSON_OBJECT`** and **`JSON_ARRAYAGG`** functions make this happen.
+    Sometimes you need to create JSON reports that combine information from both your regular table columns (like patient name and date of birth) and your JSON columns (like appointment types and durations). Oracle 26ai's **`JSON_OBJECT`** and **`JSON_ARRAYAGG`** functions make this happen.
 
     The query below creates a complete patient summary that includes:
     - Patient demographics from the relational columns
@@ -355,7 +355,7 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
 
 1. Sometimes you want to ensure that JSON data follows certain rules. For example, with appointment data, you might want to guarantee that every appointment has a type and that durations are always positive numbers.
 
-    Oracle 23ai's **JSON Schema validation** lets you set these rules directly on your table. If someone tries to insert JSON that doesn't follow the rules, the database will reject it and show an error.
+    Oracle 26ai's **JSON Schema validation** lets you set these rules directly on your table. If someone tries to insert JSON that doesn't follow the rules, the database will reject it and show an error.
 
 2. Let's create a new appointments table with validation rules:
 
@@ -432,23 +432,23 @@ The objective of this lab is to showcase Oracle AI Database 23ai's native JSON d
 
 
 **Learn More:**
-- [Oracle 23ai JSON Schema Validation Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/json-schema.html)
+- [Oracle 26ai JSON Schema Validation Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/json-schema.html)
 
 
 ## Conclusion
 
-In this lab, you've experienced Oracle AI Database 23ai's revolutionary JSON capabilities combined with structured domain validation:
+In this lab, you've experienced Oracle AI Database 26ai's revolutionary JSON capabilities combined with structured domain validation:
 
 1. **Native JSON Type**: OSON binary storage delivers superior performance and space efficiency
 2. **Advanced Querying**: SQL/JSON functions provide powerful document manipulation capabilities
 3. **Schema Evolution**: Documents adapt to changing requirements without database schema changes
 
 
-This combination positions Oracle AI Database 23ai as the ideal platform for modern applications that need both the reliability of structured data and the flexibility of document storage.
+This combination positions Oracle AI Database 26ai as the ideal platform for modern applications that need both the reliability of structured data and the flexibility of document storage.
 
 ## Learn More
 
-* [Oracle AI Database 23ai JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/index.html)
+* [Oracle AI Database 26ai JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/index.html)
 * [JSON Data Type in Oracle AI Database](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/json-data-type.html)
 * [Multi-Value Indexes for JSON](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/indexes-for-json-data.html)
 * [JSON Schema Validation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/json-schema.html)

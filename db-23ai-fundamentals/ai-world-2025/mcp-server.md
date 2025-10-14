@@ -1,9 +1,9 @@
 
-# Oracle SQLcl MCP Server with the Oracle Database
+# Oracle SQLcl MCP Server with the Oracle AI Database
 
 ## Introduction
 
-In this lab you'll learn how to set up and use the SQLcl MCP Server with an AI agent in VS Code. The SQLcl MCP Server enables you to connect your Oracle Database to AI assistants—whether that's Copilot, Cline, Claude Desktop, or any other tool that supports the Model Context Protocol (MCP).
+In this lab you'll learn how to set up and use the SQLcl MCP Server with an AI agent in VS Code. The SQLcl MCP Server enables you to connect your Oracle AI Database to AI assistants—whether that's Copilot, Cline, Claude Desktop, or any other tool that supports the Model Context Protocol (MCP).
 
 The MCP Server acts as a bridge between your database and AI tools, allowing you to use natural language to interact with your data, run SQL queries, and execute database commands. Instead of writing SQL from scratch, you can describe what you want to do and let the AI assistant handle the technical details.
 
@@ -15,14 +15,14 @@ For this demonstration, we'll use VS Code with Copilot, but the steps work with 
 By the end of this lab you will be able to:
 - Download and configure SQLcl (with MCP support)
 - Install and set up the SQL Developer and Cline extensions for VS Code
-- Connect to your Oracle Database using a wallet
+- Connect to your Oracle AI Database using a wallet
 - Configure your MCP settings in VS Code
 - Use the SQLcl MCP server with an AI agent to list connections, run SQL, and create a trivia game table
 
 ### Prerequisites
 **This lab assumes you have:**
 - Oracle Java 17 or 21 installed
-- Access to an Oracle Database (FreeSQL, LiveSQL, or an Autonomous Database with wallet)
+- Access to an Oracle AI Database (FreeSQL, LiveSQL, or an Autonomous Database with wallet)
 - Oracle account credentials
 - VS Code installed on your machine
 
@@ -53,7 +53,7 @@ Check that a `.zip` file was downloaded to your computer (usually in your Downlo
 ## Task 2: Install SQL Developer Extension for VS Code
 
 **What this extension does:**
-The Oracle SQL Developer Extension allows you to work with and manage Oracle databases in VS Code.
+The Oracle SQL Developer Extension allows you to work with and manage Oracle AI Databases in VS Code.
 
 **Why you need it:**
 This extension will store your database connection details
@@ -122,7 +122,7 @@ Cline is an open-source AI Coding agent.
 ## Task 4: Install SQLcl
 
 **What SQLcl is:**
-SQLcl is Oracle's modern command-line interface for working with Oracle databases. It includes the MCP Server functionality that allows AI assistants and coding agents to interact with your database securely.
+SQLcl is Oracle's modern command-line interface for working with Oracle AI Databases. It includes the MCP Server functionality that allows AI assistants and coding agents to interact with your database securely.
 
 **Why you need version 25.2 or later:**
 The MCP Server feature was introduced in SQLcl version 25.2, so earlier versions won't work for this lab.
@@ -130,7 +130,7 @@ The MCP Server feature was introduced in SQLcl version 25.2, so earlier versions
 **Installation options:**
 
 **Option 1: Download directly (recommended)**
-1. Download SQLcl (25.2 or later) from [this link](https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip). The SQLcl tool is offered under [Oracle Free Use License](https://www.oracle.com/downloads/licenses/oracle-free-license.html).
+1. Download SQLcl (25.2 or later) from [this link](https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-25.2.0.184.2054.zip). The SQLcl tool is offered under [Oracle Free Use License](https://www.oracle.com/downloads/licenses/oracle-free-license.html).
 
 2. Unzip the downloaded folder to a location you'll remember. For this demo, we'll use the Downloads folder, but you can choose any location.
 
@@ -208,14 +208,14 @@ Without this configuration, Cline can't access your database. The MCP Server act
    ![installed servers](./images/w10.png =30%x* " ")
 
 **What you've accomplished:**
-Cline can now securely communicate with your Oracle Database through the MCP Server. You're ready to start using natural language to interact with your data!
+Cline can now securely communicate with your Oracle AI Database through the MCP Server. You're ready to start using natural language to interact with your data!
 
 
 
 ## Task 6: Using the MCP Server
 
 **What you'll accomplish:**
-In this task, you'll use natural language to interact with your Oracle Database through Cline and the MCP Server. You'll list your connections, load sample data, and build a simple application.
+In this task, you'll use natural language to interact with your Oracle AI Database through Cline and the MCP Server. You'll list your connections, load sample data, and build a simple application.
 
 **Understanding Cline modes:**
    - **Plan mode:** Cline creates a plan and asks for approval before executing
@@ -260,81 +260,54 @@ In this task, you'll use natural language to interact with your Oracle Database 
     
       ```sql
       <copy>
-         -- Drop the table if it already exists
-         DROP TABLE if exists trivia_questions CASCADE CONSTRAINTS;
+      -- Drop the table if it already exists (optional for a clean reset)
+      DROP TABLE if exists trivia_questions CASCADE CONSTRAINTS;
 
-         -- Create the trivia table
-         CREATE TABLE trivia_questions (
-            id            NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-            question_text VARCHAR2(500) NOT NULL,
-            answer_text   VARCHAR2(200) NOT NULL,
-            category      VARCHAR2(50)  DEFAULT 'Oracle History',
-            difficulty    VARCHAR2(20)  DEFAULT 'Medium'
-         );
+      -- Create the trivia table
+      CREATE TABLE trivia_questions (
+         id            NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+         question_text VARCHAR2(500) NOT NULL,
+         answer_text   VARCHAR2(200) NOT NULL,
+         category      VARCHAR2(50)  DEFAULT 'Oracle History',
+         difficulty    VARCHAR2(20)  DEFAULT 'Medium'
+      );
 
-         -- Insert Oracle history trivia
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('In what year was the company that became Oracle founded?', '1977', 'Easy');
+      -- Insert Oracle history trivia
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('In what year was the company that became Oracle founded?', '1977', 'Medium');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('What was Oracle''s original company name at founding in 1977?', 'Software Development Laboratories (SDL)', 'Medium');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Which Oracle Database major release introduced PL/SQL?', 'Oracle 6', 'Medium');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Before it was called Oracle Corporation, what was the company''s name in 1979–1982?', 'Relational Software, Inc. (RSI)', 'Medium');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Which release introduced Real Application Clusters (RAC)?', 'Oracle 9i', 'Medium');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle Database version "2" was the first commercial release. In what year did it ship?', '1979', 'Medium');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Oracle 10g emphasized what computing model in its branding?', 'Grid computing', 'Easy');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Name the three Oracle co-founders.', 'Larry Ellison; Bob Miner; Ed Oates', 'Easy');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Oracle 12c introduced a new architecture for consolidation. What is it called?', 'Multitenant (CDB/PDB)', 'Easy');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Which Oracle Database major release introduced PL/SQL?', 'Oracle6', 'Medium');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Which company did Oracle acquire in 2010 that made it steward of Java and MySQL?', 'Sun Microsystems', 'Easy');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Which release introduced Real Application Clusters (RAC)?', 'Oracle9i', 'Medium');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Exadata, Oracle’s engineered system for databases, debuted in what decade?', '2000s (2008)', 'Medium');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle10g emphasized what computing model in its branding?', 'Grid computing', 'Easy');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Oracle Autonomous Database was first announced in which year?', '2017', 'Medium');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle12c introduced a new architecture for consolidation. What is it called?', 'Multitenant (CDB/PDB)', 'Easy');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('What is the internal name for the relational engine that inspired Oracle''s original product name?', 'Oracle (from a CIA project codename)', 'Hard');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Which company did Oracle acquire in 2010 that made it steward of Java and MySQL?', 'Sun Microsystems', 'Easy');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Who was Oracle''s first customer?', 'The CIA', 'Medium');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Exadata, Oracle’s engineered system for databases, debuted in what decade?', '2000s (2008)', 'Medium');
+      INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
+      ('Which Oracle release name introduced the concept of "c" for cloud?', 'Oracle 12c', 'Easy');
 
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle Autonomous Database was first announced in which year?', '2017', 'Medium');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle Application Express (APEX) first launched under a different name. What was it?', 'HTML DB', 'Medium');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('What is the internal name for the relational engine that inspired Oracle''s original product name?', 'Oracle (from a CIA project codename)', 'Hard');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle7 (early 1990s) became famous for which features (name one)?', 'Stored procedures, triggers, cost-based optimizer (any one)', 'Medium');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Which release family introduced Automatic Storage Management (ASM)?', 'Oracle10g', 'Medium');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Which release family introduced Active Data Guard?', 'Oracle11g', 'Medium');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('The first SQL*Net/Net8 predecessors enabled what key capability for Oracle databases?', 'Client/server network connectivity to the DB over protocols', 'Hard');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Oracle''s first relational database was heavily influenced by research from which IBM scientist?', 'Edgar F. Codd', 'Medium');
-
-         INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-         ('Which Oracle release name introduced the concept of "c" for cloud?', 'Oracle12c', 'Easy');
-
-         -- Save the data
-         COMMIT;
+      -- Save the data
+      COMMIT;
 
       </copy>
       ```
@@ -391,7 +364,7 @@ In this task, you'll use natural language to interact with your Oracle Database 
 
    **Interested in learning more?**
 
-   Check out the full MCP Session **Agentic AI for the Oracle Database via Our MCP Server (Offering 2) [HOL3088]**  Thursday, Oct 16
+   Check out the full MCP Session **Agentic AI for the Oracle AI Database via Our MCP Server (Offering 2) [HOL3088]**  Thursday, Oct 16
    9:00 AM - 10:30 AM PDT
 
 ## Clean Up
@@ -416,6 +389,6 @@ In this task, you'll use natural language to interact with your Oracle Database 
 ---
 
 ## Acknowledgements
-* **Author** – Killian Lynch, Oracle Database Product Management  
+* **Author** – Killian Lynch, Oracle AI Database Product Management  
 * **Contributors** – Chris Hoina, Jeff Smith - Database Tools 
 * **Last Updated By/Date** – Killian, September 2025  

@@ -20,7 +20,7 @@ Estimated Lab Time: 25 minutes
 
 ### Prerequisites
 
-- Access to Oracle Database  23ai
+- Access to Oracle AI Database  26ai
 - Completion of previous LumenCare labs
 - Basic SQL knowledge
 
@@ -406,12 +406,12 @@ Estimated Lab Time: 25 minutes
 
 ## Conclusion
 
-Congratulations! You've successfully implemented Oracle AI Vector Search for healthcare documents using Oracle Database  23ai. 
+Congratulations! You've successfully implemented Oracle AI Vector Search for healthcare documents using Oracle AI Database  26ai. 
 
 
 ## Learn More
 
-* [Oracle Database  23ai AI Vector Search Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/index.html)
+* [Oracle AI Database  26ai AI Vector Search Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/index.html)
 * [Vector Data Type Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/vector.html)
 * [AI Vector Search Functions](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/vector-functions.html)
 

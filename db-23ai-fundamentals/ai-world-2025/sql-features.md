@@ -1,8 +1,8 @@
-# Oracle Database 23ai SQL Features Lab
+# Oracle AI Database 26ai SQL Features Lab
 
 ## Introduction
 
-Welcome to the comprehensive Oracle Database 23ai SQL Features lab! In this lab, you'll explore five powerful new SQL enhancements that make writing queries more efficient, readable, and less error-prone. These features represent significant improvements in Oracle Database 23ai that simplify common database operations and modernize SQL development.
+Welcome to the comprehensive Oracle AI Database 26ai SQL Features lab! In this lab, you'll explore five powerful new SQL enhancements that make writing queries more efficient, readable, and less error-prone. These features represent significant improvements in Oracle AI Database 26ai that simplify common database operations and modernize SQL development.
 
 You'll learn about:
 - Enhanced DML RETURNING clause for capturing old and new values
@@ -14,10 +14,10 @@ You'll learn about:
 Estimated Lab Time: 30 minutes
 
 ### Objective:
-By the end of this lab, you will understand and be able to use these five key SQL enhancements in Oracle Database 23ai to write more efficient, maintainable, and secure database applications.
+By the end of this lab, you will understand and be able to use these five key SQL enhancements in Oracle AI Database 26ai to write more efficient, maintainable, and secure database applications.
 
 ### Prerequisites:
-- Access to Oracle Database 23ai
+- Access to Oracle AI Database 26ai
 - Basic understanding of SQL concepts
 
 ## Task 1: Enhanced DML RETURNING Clause
@@ -29,7 +29,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 3. **Understanding the Enhanced RETURNING Clause:**
    
-   The enhanced RETURNING clause in Oracle Database 23ai is a simple improvement that allows you to capture both OLD and NEW values during UPDATE operations. This is valuable for:
+   The enhanced RETURNING clause in Oracle AI Database 26ai is a simple improvement that allows you to capture both OLD and NEW values during UPDATE operations. This is valuable for:
     - **Audit trails** - Track what values changed during updates
     - **Change monitoring** - Capture price changes, status updates, etc.
     - **Business logic** - Calculate differences without additional queries
@@ -101,7 +101,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Task 2: UUID Generation for Modern Applications
 
-1. Oracle Database 23ai introduces the UUID() function that generates RFC 9562-compliant version 4 variant 1 UUIDs. These are truly random and unpredictable, unlike the traditional SYS_GUID() function.
+1. Oracle AI Database 26ai introduces the UUID() function that generates RFC 9562-compliant version 4 variant 1 UUIDs. These are truly random and unpredictable, unlike the traditional SYS_GUID() function.
 
    **Why could SYS\_GUID() be predictable?**
    SYS\_GUID() generates values using a combination of host identifier, process identifier, and a sequential component. This often results in values that increment sequentially - for example, consecutive calls might generate values where only one character changes while the rest remains identical. This predictable pattern makes SYS_GUID() unsuitable for security-sensitive applications.
@@ -220,7 +220,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Task 4: Direct Joins for UPDATE and DELETE
 
-1. Oracle Database 23ai introduces direct joins for UPDATE and DELETE statements, making multi-table operations much simpler. Before 23ai, you had to use subqueries or complex WHERE clauses. Now you can use familiar JOIN syntax directly in UPDATE/DELETE statements. Let's create a movie streaming scenario:
+1. Oracle AI Database 26ai introduces direct joins for UPDATE and DELETE statements, making multi-table operations much simpler. Before 26ai, you had to use subqueries or complex WHERE clauses. Now you can use familiar JOIN syntax directly in UPDATE/DELETE statements. Let's create a movie streaming scenario:
 
     ```
     <copy>
@@ -257,7 +257,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
     </copy>
     ```
 
-2. Before Oracle 23ai, updating rows based on conditions from other tables required subqueries:
+2. Before Oracle 26ai, updating rows based on conditions from other tables required subqueries:
 
     ```
     <copy>
@@ -287,14 +287,14 @@ By the end of this lab, you will understand and be able to use these five key SQ
     </copy>
     ```
 
-3. **The Solution:** Oracle 23ai direct joins make this much simpler:
+3. **The Solution:** Oracle 26ai direct joins make this much simpler:
 
     ```
     <copy>
     -- Reset the titles first
     UPDATE movies SET title = REPLACE(title, ' (Thriller Classic)', '') WHERE title LIKE '%(Thriller Classic)%';
     
-    -- Oracle Database 23ai: Direct join UPDATE - clean and intuitive
+    -- Oracle AI Database 26ai: Direct join UPDATE - clean and intuitive
     UPDATE movies m
     SET m.rating = m.rating + 0.5,
         m.title = m.title || ' (' || g.genre_name || ' Classic)'
@@ -322,7 +322,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
         WHERE genre_name = 'Horror'
     );
 
-    -- Oracle Database 23ai: Direct join DELETE - clean and readable
+    -- Oracle AI Database 26ai: Direct join DELETE - clean and readable
     DELETE FROM movies m
     FROM genres g
     WHERE m.genre_id = g.genre_id
@@ -338,7 +338,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Task 5: Non-Positional INSERT Enhancements
 
-1. Oracle Database 23ai introduces two new INSERT syntaxes that make INSERT statements more readable and flexible. Let's create an employee table to demonstrate:
+1. Oracle AI Database 26ai introduces two new INSERT syntaxes that make INSERT statements more readable and flexible. Let's create an employee table to demonstrate:
 
     ```
     <copy>
@@ -469,7 +469,7 @@ By the end of this lab, you will understand and be able to use these five key SQ
 
 ## Summary
 
-In this comprehensive lab, you've explored five major SQL enhancements in Oracle Database 23ai:
+In this comprehensive lab, you've explored five major SQL enhancements in Oracle AI Database 26ai:
 
 1. **Enhanced RETURNING Clause**: Capture both old and new values during DML operations for better auditing and change tracking
 2. **UUID() Function**: Generate RFC 9562-compliant, truly random unique identifiers for modern security requirements
@@ -477,7 +477,7 @@ In this comprehensive lab, you've explored five major SQL enhancements in Oracle
 4. **Direct Joins**: Perform UPDATE and DELETE operations across multiple tables with clean, readable syntax
 5. **Non-Positional INSERT**: Use SET and BY NAME clauses for more readable and flexible INSERT statements
 
-These features collectively make Oracle Database 23ai more developer-friendly, reducing code complexity while improving security, maintainability, and readability of SQL applications.
+These features collectively make Oracle AI Database 26ai more developer-friendly, reducing code complexity while improving security, maintainability, and readability of SQL applications.
 
 ## Key Benefits:
 - **Reduced Code Complexity**: Less verbose syntax with GROUP BY ALL and direct joins
