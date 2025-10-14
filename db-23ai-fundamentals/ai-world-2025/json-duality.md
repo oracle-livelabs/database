@@ -1,15 +1,15 @@
-# JSON Relational Duality Views: Unified Healthcare Data Access with Oracle Database 23ai
+# JSON Relational Duality Views: Unified Healthcare Data Access with Oracle AI Database 26ai
 
 ## Introduction
 
-Welcome to the **JSON Relational Duality Views** lab! This session demonstrates how Oracle Database 23ai's duality views solve a fundamental challenge in modern application development: accessing the same data through both relational and document interfaces.
+Welcome to the **JSON Relational Duality Views** lab! This session demonstrates how Oracle AI Database 26ai's duality views solve a fundamental challenge in modern application development: accessing the same data through both relational and document interfaces.
 
 **The Challenge:** Modern applications often need both data access patterns:
 - **Relational access** - SQL queries, reporting, analytics, and compliance systems work best with structured tables
 - **Document access** - Mobile apps, REST APIs, and real-time dashboards prefer flexible JSON documents  
 - **Traditional approach** - Choose one data model or maintain complex dual storage systems
 
-**Oracle 23ai's Solution:** JSON Relational Duality Views present the same underlying data as both relational tables and JSON documents. Updates through either interface automatically synchronize, maintaining ACID compliance across both data models.
+**Oracle 26ai's Solution:** JSON Relational Duality Views present the same underlying data as both relational tables and JSON documents. Updates through either interface automatically synchronize, maintaining ACID compliance across both data models.
 
 In this lab, we'll use our LumenCare healthcare scenario to explore duality views, but this technology applies to any industry where applications need flexible data access patterns.
 
@@ -25,7 +25,7 @@ Estimated Lab Time: 20 minutes
 
 ### Prerequisites
 
-- Access to Oracle Database 23ai
+- Access to Oracle AI Database 26ai
 - Completion of previous LumenCare labs (Domains & Annotations, JSON Data Type, AI Vector Search)
 - Basic understanding of JSON and SQL
 
@@ -477,7 +477,7 @@ Estimated Lab Time: 20 minutes
 
 ## Conclusion
 
-In this lab, you've explored Oracle Database 23ai's JSON Relational Duality Views:
+In this lab, you've explored Oracle AI Database 26ai's JSON Relational Duality Views:
 
 - **Task 1**: Added schema flexibility to existing healthcare data
 - **Task 2**: Created duality views with precise access control permissions 
