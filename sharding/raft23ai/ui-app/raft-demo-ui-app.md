@@ -17,6 +17,8 @@ All Customers List query is retrieved from the Catalog Database using the proxy-
 
 _Estimated Time_: 30 minutes
 
+[Demo App for Raft Replication](videohub:1_147isows)
+
 ### Objectives
 
 In this lab, you will:
@@ -104,7 +106,7 @@ This lab assumes you have:
 
     Now all three shards are up and application is running.
 
-    You can keep the Application UI page running to verify the results from next Labs "Explore Raft Replication Topology" or any other activities affecting application data. If you have closed UI browser session, you can open it anytime in a browser session by http://localhost:8080 or from a terminal window entering ".livelabs/init_ll_windows.sh" as shown earlier in the Initialize Environment Lab's Task 1 step 2.
+    You can keep the Application UI page running to verify the results from next Labs "Explore Raft Replication Topology" or any other activities affecting application data. If you have closed UI browser session, you can open it anytime in a browser session by http://localhost:8080 or from a terminal window entering ".livelabs/init\_ll\_windows.sh" as shown earlier in the Initialize Environment Lab's Task 1 step 2.
 
 You may now proceed to the next lab.
 
