@@ -1,10 +1,17 @@
-# JSON Relational Duality Views: Unified Healthcare Data Access with Oracle Database 23ai
+# JSON Relational Duality Views: Unified Healthcare Data Access with Oracle AI Database 26ai
 
 ## Introduction
 
-Welcome to the **JSON Relational Duality Views** lab! This final session in our LumenCare workshop series demonstrates how Oracle Database 23ai's JSON Relational Duality Views provide unified access to both relational and document data models, creating the ultimate flexibility for healthcare applications.
+Welcome to the **JSON Relational Duality Views** lab! This session demonstrates how Oracle AI Database 26ai's duality views solve a fundamental challenge in modern application development: accessing the same data through both relational and document interfaces.
 
-Building on the patient data, domains, and JSON documents from our previous labs, you'll learn how to create duality views that present the same healthcare data as both structured relational records and flexible JSON documents. This revolutionary capability eliminates the traditional trade-offs between relational integrity and document flexibility.
+**The Challenge:** Modern applications often need both data access patterns:
+- **Relational access** - SQL queries, reporting, analytics, and compliance systems work best with structured tables
+- **Document access** - Mobile apps, REST APIs, and real-time dashboards prefer flexible JSON documents  
+- **Traditional approach** - Choose one data model or maintain complex dual storage systems
+
+**Oracle 26ai's Solution:** JSON Relational Duality Views present the same underlying data as both relational tables and JSON documents. Updates through either interface automatically synchronize, maintaining ACID compliance across both data models.
+
+In this lab, we'll use our LumenCare healthcare scenario to explore duality views, but this technology applies to any industry where applications need flexible data access patterns.
 
 Estimated Lab Time: 20 minutes
 
@@ -18,19 +25,16 @@ Estimated Lab Time: 20 minutes
 
 ### Prerequisites
 
-- Access to Oracle Database 23ai
+- Access to Oracle AI Database 26ai
 - Completion of previous LumenCare labs (Domains & Annotations, JSON Data Type, AI Vector Search)
 - Basic understanding of JSON and SQL
 
-## The LumenCare Integration Challenge
 
-LumenCare's development teams face a common modern challenge: some applications work best with structured relational data (reporting, analytics, compliance systems), while others need flexible document models (mobile apps, APIs, real-time dashboards). Traditionally, this meant choosing one approach or maintaining dual storage systems.
+## Task 1: Prepare Data for Duality Views
 
-**Oracle Database 23ai's JSON Relational Duality Views solve this completely.** The same data can be accessed and modified as either relational rows or JSON documents, with all changes automatically synchronized and ACID-compliant.
+1. **What we're building:** Duality views present the same underlying relational tables as JSON documents. We'll create views that let applications access patient and appointment data either as SQL tables or as JSON documents, with all changes automatically synchronized.
 
-## Task 1: Understanding Existing Data
-
-1. Before creating duality views, let's examine the healthcare data we've built throughout our previous labs and add the flexibility needed for evolving healthcare requirements.
+2. **Review the foundation data:** Let's examine the relational tables we've built in previous labs that will become the foundation for our duality views:
 
     ```sql
     <copy>
@@ -57,7 +61,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-2. Now, lets add schema flexibility to the patients table. Healthcare data requirements often change - new regulations, additional patient information, or evolving clinical practices. Let's add a flex field to handle future requirements.
+3. **Add schema flexibility for duality views:** One advantage of JSON documents is schema flexibility - you can add new fields without changing table structure. To enable this in our duality views, we'll add a JSON column that can store additional patient information:
 
     ```sql
     <copy>
@@ -68,11 +72,11 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-## Task 2: Creating Duality Views 
+## Task 2: Create Duality Views
 
-1. JSON Relational Duality Views allow you to define exactly how your data should be presented as JSON documents while maintaining full relational integrity.
+1. **What we're building:** Duality views define how relational data appears as JSON documents and what operations are allowed. We'll create two different views over the same tables to demonstrate different access patterns and permissions.
 
-    Create a patient-centric duality view with full patient access but controlled appointment access.
+2. **Create a patient-centric duality view** with comprehensive data access:
 
     ```sql
     <copy>
@@ -104,12 +108,13 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    **Understanding the Access Control Permissions:**
-    - **`patients @insert @update`**: This view can create new patients and modify existing patient information, but **cannot delete patients** (no `@delete` specified)
-    - **`appointments @insert @update @delete`**: This view has full control over appointments - can create, modify, and remove appointments
-    - **Security Benefit**: Clinical staff can manage both patient demographics and appointments, but patient deletion requires a different, more restricted process
+    **What this creates:**
+    - **`patients @insert @update`**: Can create and modify patients, but cannot delete them (no `@delete`)
+    - **`appointments @insert @update @delete`**: Full appointment management capabilities  
+    - **`@flex`**: The `patient_extras` field can store additional JSON data without changing table structure
+    - **Nested structure**: Appointments appear as an array within each patient document
 
-2. Now, create a mobile appointment view with read-only patient access.
+3. **Create an appointment-focused duality view** with different permissions:
 
     ```sql
     <copy>
@@ -135,14 +140,15 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    **Understanding This Mobile View's Permissions:**
-    - **`appointments @insert @update @delete`**: Mobile apps can fully manage appointments (create, modify, cancel)
-    - **`patients` (no permissions)**: Mobile apps can **read** patient information but **cannot modify** patient demographics
-    - **Healthcare Benefit**: Prevents mobile scheduling apps from accidentally corrupting patient master data while still providing necessary information for appointment booking
+    **What this creates:**
+    - **`appointments @insert @update @delete`**: Full appointment management capabilities
+    - **`patients` (no permissions)**: Read-only access to patient information - can read but cannot modify patient demographics
+    - **Different structure**: Appointment-centric with nested patient info (reverse of the first view)
+    - **Benefit**: Mobile apps can manage appointments but cannot accidentally modify patient master data
 
-## Task 3: Querying Data Through Duality Views
+## Task 3: Query Data Through Duality Views
 
-1. Now let's explore how the same data can be accessed in completely different formats through our duality views. Query patient data in JSON document format.
+1. **Basic JSON document querying:** Duality views automatically expose your relational data as JSON documents. Let's query patient data in JSON format:
 
     ```sql
     <copy>
@@ -153,7 +159,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-2. Next, query appointment data optimized for mobile applications through our mobile duality view
+2. **Query the appointment-focused view:** The same data appears in different structure through our mobile duality view:
 
     ```sql
     <copy>
@@ -166,7 +172,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-3. Here, we can see relational vs. document access to the same underlying data.
+3. **Compare relational vs document approaches:** The same analysis can be done through traditional SQL or JSON document queries:
 
     ```sql
     <copy>
@@ -197,9 +203,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-4. One of the big value propositions of JSON documents is schema flexibility. You don't have to know all attributes and structures of your documents ahead of time - and those will most likely change over time anyway. Duality views give you this flexibility with their flex fields.
-
-    The patient\_complete\_dv duality view was defined with this schema flexibility through the `patient extras @flex` field, so we can add any attribute to our patient documents. Any attribute that is not explicitly mapped to a relational column will be stored in the flex column.
+4. **Schema flexibility with flex fields:** Duality views support adding new JSON fields without changing the table structure. Our `patient_extras @flex` field enables this - any new JSON properties get stored in this flexible column:
 
     ```sql
     <copy>
@@ -230,7 +234,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    As you can see, we added new attributes that weren't part of our original table structure without any problems. Checking the relational underlying table will show you where this information ended up: in the flex field `patient_extras`.
+    **Verify the flexibility:** The new fields were added without changing the table structure. Check where they're stored in the relational table:
 
     ```sql
     <copy>
@@ -241,11 +245,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-5. There is more that you can do with duality views. Often, derived information from existing data is necessary to complete or augment the information of your 'business objects' - our JSON documents. This is very easily doable with duality views.
-
-    In our healthcare example, you not only want to show the patient information with all their appointments, but you also want to know the total number of appointments that a patient actually has. We can use **generated fields** to add additional data that is derived from other information in our duality view. (Generated fields are ignored when updating data.)
-
-    Let's enhance our patient duality view to include a generated field:
+5. **Generated fields for calculated data:** Duality views can include calculated fields that are automatically derived from other data. Let's add a field that shows the total number of appointments for each patient:
 
     ```sql
     <copy>
@@ -277,7 +277,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    We didn't touch any data on disk, but only changed the metadata of our duality view.
+    **Test the generated field:** The view now automatically calculates appointment counts:
 
     ```sql
     <copy>
@@ -288,11 +288,15 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    You can see that the `totalAppointments` field is automatically calculated from the size of the appointments array. This derived information is available in every patient document without storing redundant data.
+    The `totalAppointments` field is automatically calculated from the appointments array size. 
 
-## Task 4: Updating Data Through Duality Views
+    ![dvs](./images/dv1.png)
 
-1. First, let's reset our duality view to the standard structure for the update examples.
+## Task 4: Update Data Through Duality Views
+
+1. **Why update through JSON documents:** Duality views enable applications to insert and update data using JSON operations instead of SQL. Changes made through any duality view automatically synchronize to the underlying tables and all other views.
+
+2. **Reset the view structure** for cleaner update examples:
 
     ```sql
     <copy>
@@ -324,7 +328,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-2. Now we can add a new appointment through the patient-centric duality view.
+3. **Add data through JSON document operations:** Insert a new appointment by updating the JSON document:
 
     ```sql
     <copy>
@@ -351,7 +355,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-3. Now lets verify the appointment appears in all views and the base table.
+4. **Verify automatic synchronization:** The new appointment should now appear in the relational table and all duality views:
 
     ```sql
     <copy>
@@ -372,7 +376,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-3. We can also update appointment status through the mobile view.
+5. **Update through a different view:** Modify the appointment status through the mobile duality view:
 
     ```sql
     <copy>
@@ -388,7 +392,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-4. Again, we can verify the change propagated to all views.
+6. **Confirm cross-view synchronization:** The status change should appear in both the patient view and base table:
 
     ```sql
     <copy>
@@ -412,11 +416,11 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-## Task 5: Understanding Duality View Permissions and Security
+## Task 5: Duality View Security and Permissions
 
-1. Another aspect of duality views is the ability to control exactly what data can be modified and by whom. Remember that our `appointment_mobile_dv` view was designed for mobile applications and doesn't allow patient demographic updates.
+1. **Why granular permissions matter:** Duality views let you control exactly what each application can modify. For example, a mobile scheduling app should manage appointments but not accidentally change patient master data. Each duality view enforces its own permission rules.
 
-    Let's try to update patient information through the mobile appointment view.
+2. **Test permission restrictions:** Our mobile view was created with read-only access to patient data. Let's see what happens when we try to modify patient information through it:
 
     ```sql
     <copy>
@@ -430,9 +434,9 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    **Expected Result:** This will fail with an error because the `appointment_mobile_dv` view doesn't include `@update` permissions on the patients table. The mobile view is designed only to manage appointment data, not patient demographics.
+    **Expected Result:** This fails because the mobile view doesn't have `@update` permissions on the patients table - only on appointments.
 
-2. Now update the same patient information through the correct view.
+3. **Use the correct view for patient updates:** The patient-focused view has the required permissions:
 
     ```sql
     <copy>
@@ -448,7 +452,7 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-3. We can also verify the security model worked as designed.
+4. **Verify the security model:** Check that the update succeeded and is visible across views:
 
     ```sql
     <copy>
@@ -468,12 +472,12 @@ LumenCare's development teams face a common modern challenge: some applications 
     </copy>
     ```
 
-    **Key Security Insight:** Duality views provide granular access control. The mobile view can *read* patient information but cannot *modify* it. Only the patient-focused duality view has permission to update patient demographics. This ensures that mobile applications can't accidentally corrupt patient master data while still providing access to necessary information for appointment management.
+    **Security model confirmed:** The mobile view can read the updated patient name but cannot modify it. This demonstrates how duality views provide fine-grained access control - each view enforces exactly the permissions it was designed with.
 
 
 ## Conclusion
 
-In this lab, you've explored Oracle Database 23ai's JSON Relational Duality Views:
+In this lab, you've explored Oracle AI Database 26ai's JSON Relational Duality Views:
 
 - **Task 1**: Added schema flexibility to existing healthcare data
 - **Task 2**: Created duality views with precise access control permissions 

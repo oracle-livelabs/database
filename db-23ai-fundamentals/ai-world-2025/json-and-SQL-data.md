@@ -8,18 +8,7 @@ Building on the domains and annotations concepts from the previous lab, this lab
 
 Estimated Lab Time: 15 minutes
 
-**Key JSON Enhancements in Oracle AI Database 26ai**
-* **Native JSON Data Type**
-* **JSON Schema Validation**
-* **Enhanced JSON Constructor**
-
-**Advanced SQL/JSON Functions**
-- **JSON_ARRAY with Subqueries**: Generate arrays from query results
-- **JSON_TRANSFORM**: Modify documents with conditional logic and calculations
-- **JSON_SERIALIZE with ORDERED**: Consistent field ordering for predictable output
-
-**Multi-Value Indexes**
-Specialized indexes that efficiently query JSON arrays and nested structures, dramatically improving performance for complex document queries.
+The 26ai release significantly expanded JSON capabilities beyond basic constructors to include advanced schema validation, collection management, and bi-directional JSON-relational duality views.
 
 ### Objective:
 The objective of this lab is to showcase Oracle AI Database 26ai's native JSON data type capabilities for enterprise applications. By the end of this lab, you will understand how to create tables with JSON columns, query JSON data efficiently, and leverage advanced JSON features for flexible business data management.
@@ -183,9 +172,9 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
 ## Task 2: JSON Querying in 26ai
 
 
-1. Oracle AI Database 26ai lets you easily access data inside JSON columns using dot notation. Dot notation allows you to refer directly to properties inside a JSON object, just like you would with a regular column. You simply use a period (`.`) to separate the column name from the property name.
+1. Oracle AI Database 26ai lets you easily access data inside JSON columns using dot notation. Dot notation allows you to refer directly to properties inside a JSON object, just like you would with a regular column. You simply use a period (`.`) to separate the column name from the field name.
 
-    For example, we have a column called `appointment_data` that stores JSON, we can get the value of the `appointmentType` property like this:
+    For example, we have a column called **`appointment_data`** that stores JSON, we can get the value of the **`appointmentType`** field like this:
 
     ```sql
     SELECT a.appointment_data.appointmentType
@@ -213,12 +202,12 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
     </copy>
     ```
 
-    In this query, `a.appointment_data.appointmentType` and `a.appointment_data.duration` use dot notation to directly access the `appointmentType` and `duration` properties inside the JSON document stored in the `appointment_data` column.
+    In this query, **`a.appointment_data.appointmentType`** and **`a.appointment_data.duration`** use dot notation to directly access the **`appointmentType`** and **`duration`** properties inside the JSON document stored in the **`appointment_data`** column.
 
     You do not need to use any special JSON functions for simple property access.
 
 
-2. Let's see how Oracle dot notation can be used to access a specific property inside the JSON document, such as `painLevel`. This is a scalar (single value) property, not an array. For example, to list all appointments that recorded a pain level:
+2. Let's see how Oracle dot notation can be used to access a specific property inside the JSON document, such as **`painLevel`**. This is a scalar (single value) property, not an array. For example, to list all appointments that recorded a pain level:
 
     ```sql
     <copy>
@@ -258,8 +247,8 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
 1. In this task, you'll see how to use the `JSON_TRANSFORM` function to modify existing JSON documents by adding new, calculated fields. This is useful for generating enhanced JSON output for reporting or APIs, without changing the original data in the table.
 
     For example, the query below:
-    - Adds a new field called `calculatedEndTime` to each appointment’s JSON document. This field is calculated by adding the `duration` (in minutes) to the `start_time` of the appointment, resulting in the end time of the appointment.
-    - Adds another field called `patientName` to the JSON, setting it to the patient’s name from the relational table.
+    - Adds a new field called **`calculatedEndTime`** to each appointment’s JSON document. This field is calculated by adding the **`duration`** (in minutes) to the **`start_time`** of the appointment, resulting in the end time of the appointment.
+    - Adds another field called **`patientName`** to the JSON, setting it to the patient’s name from the relational table.
 
     The result is a new JSON document for each row, with these extra fields included, returned as part of the query result.
 
@@ -267,49 +256,76 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
 
     ```sql
     <copy>
-    -- Transform JSON data to add calculated fields
+    -- Transform JSON data to add calculated fields with formatted output
     SELECT 
         p.name,
         a.reason,
-        JSON_TRANSFORM(
-            a.appointment_data,
-            SET '$.calculatedEndTime' = 
-                TO_CHAR(a.start_time + 
-                    INTERVAL '1' MINUTE * 
-                    JSON_VALUE(a.appointment_data, '$.duration' RETURNING NUMBER), 
-                    'YYYY-MM-DD"T"HH24:MI:SS'),
-            SET '$.patientName' = p.name
+        JSON_SERIALIZE(
+            JSON_TRANSFORM(
+                a.appointment_data,
+                SET '$.calculatedEndTime' = 
+                    TO_CHAR(a.start_time + 
+                        INTERVAL '1' MINUTE * 
+                        JSON_VALUE(a.appointment_data, '$.duration' RETURNING NUMBER), 
+                        'YYYY-MM-DD"T"HH24:MI:SS'),
+                SET '$.patientName' = p.name
+            ) PRETTY
         ) as enhanced_appointment_data
     FROM appointments a
     JOIN patients p ON a.patient_id = p.id
-    WHERE a.id <= 3;
+    WHERE a.id = 3;
     </copy>
     ```
 
 
+    ![Simple JSON example](images/j1.png)
 
-2. We'll create more sophisticated queries that search for specific conditions within JSON documents.
 
-    In this step, you'll see how to search for specific conditions within your JSON documents using `JSON_EXISTS` and `JSON_VALUE`. These functions let you filter and extract information from any property—whether it was part of the original JSON or added/calculated in a previous step.
+
+2. Let's use JSON_MERGEPATCH to update existing JSON documents with new information.
+
+    **`JSON_MERGEPATCH`** is a powerful new function in Oracle 26ai that lets you update JSON documents by merging in new fields or changing existing ones. Think of it like "patching" a JSON document with updates.
+
+    For example, let's say we want to add follow-up information to completed appointments:
 
     ```sql
-        <copy>
-        -- Find appointments with specific conditions using JSON_EXISTS
-        SELECT 
-            p.name,
-            a.reason,
-            a.appointment_data.appointmentType as type,
-            JSON_VALUE(a.appointment_data, '$.bpReading') as blood_pressure
-        FROM appointments a
-        JOIN patients p ON a.patient_id = p.id
-        WHERE JSON_EXISTS(a.appointment_data, '$.bpReading')
-        OR JSON_EXISTS(a.appointment_data, '$.painLevel');
-        </copy>
+    <copy>
+    -- Use JSON_MERGEPATCH to add follow-up notes to completed appointments
+    SELECT 
+        p.name,
+        a.reason,
+        a.status,
+        JSON_SERIALIZE(
+            JSON_MERGEPATCH(
+                a.appointment_data,
+                JSON('{
+                    "followUpAdded": true,
+                    "nextAppointmentRecommended": "2 weeks"
+                }')
+            ) PRETTY
+        ) as updated_appointment_data
+    FROM appointments a
+    JOIN patients p ON a.patient_id = p.id
+    WHERE a.status = 'Completed'
+    AND a.patient_id = 1;
+    </copy>
     ```
 
-3. Let's generate JSON summaries from our relational data, combining both structured and document approaches.
+    **What JSON_MERGEPATCH does:**
+    - **Adds new fields**: **`followUpAdded`** and **`nextAppointmentRecommended`** are added to the JSON
+    - **Preserves other data**: All other fields in the original JSON remain unchanged
 
-    Here, you'll learn how to generate JSON summaries that combine both relational and JSON data. You can include any fields, including those added with `JSON_TRANSFORM`, to create rich, flexible JSON outputs for reporting or integration.
+    This shows how you can create enhanced versions of your JSON data for reporting or analysis while keeping the original data unchanged.
+
+3. Let's create patient summary reports by building new JSON documents from our data.
+
+    Sometimes you need to create JSON reports that combine information from both your regular table columns (like patient name and date of birth) and your JSON columns (like appointment types and durations). Oracle 26ai's **`JSON_OBJECT`** and **`JSON_ARRAYAGG`** functions make this happen.
+
+    The query below creates a complete patient summary that includes:
+    - Patient demographics from the relational columns
+    - A count of their total appointments
+    - A list of all their appointment types
+    - Their total appointment time
 
     ```sql
     <copy>
@@ -337,10 +353,11 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
 
 ## Task 4: JSON Schema Validation
 
-1. Oracle AI Database 26ai introduces **native JSON Schema validation** using the `VALIDATE` clause. This allows you to enforce complex rules on your JSON columns using industry-standard JSON Schema documents.
+1. Sometimes you want to ensure that JSON data follows certain rules. For example, with appointment data, you might want to guarantee that every appointment has a type and that durations are always positive numbers.
 
+    Oracle 26ai's **JSON Schema validation** lets you set these rules directly on your table. If someone tries to insert JSON that doesn't follow the rules, the database will reject it and show an error.
 
-2. Here's a simple example that requires appointmentType (string) and, if present, duration (number, must be > 0):
+2. Let's create a new appointments table with validation rules:
 
     ```sql
     <copy>
@@ -352,64 +369,65 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
             status VARCHAR2(30),
             provider_name VARCHAR2(100),
             appointment_data JSON VALIDATE '{
-    "type": "object",
-    "properties": {
-      "appointmentType": {"type": "string"},
-      "duration": {"type": "number", "exclusiveMinimum": 0}
-    },
-    "required": ["appointmentType"]
-  }'
+                "type": "object",
+                "properties": {
+                    "appointmentType": {"type": "string"},
+                    "duration": {"type": "number", "exclusiveMinimum": 0}
+                },
+                "required": ["appointmentType"]
+            }'
         );
     </copy>
     ```
 
-3. You can also validate JSON at insert or query time using the `IS JSON VALIDATE` condition. For example, to only insert rows where the JSON matches a schema:
+    **What the validation rules do:**
+    - **Required field**: Every JSON document must have an **`appointmentType` **field
+    - **String type**: The **`appointmentType`** must be text (like "orthopedic" or "cardiology")
+    - **Positive numbers**: If a **`duration`** field exists, it must be a number greater than 0
 
-
-    ```sql
-    <copy>
-        -- Only insert if the JSON is valid for the schema
-        INSERT INTO appointments_with_schema (patient_id, start_time, reason, status, provider_name, appointment_data)
-        SELECT 4, TIMESTAMP '2025-09-01 13:00:00', 'Test', 'Scheduled', 'Dr. Park', j
-        FROM (
-            SELECT JSON('{"appointmentType": "orthopedic", "duration": 30}') AS j
-        ) t
-        WHERE j IS JSON VALIDATE '{
-            "type": "object",
-            "properties": {
-                "appointmentType": {"type": "string"},
-                "duration": {"type": "number", "exclusiveMinimum": 0}
-            },
-            "required": ["appointmentType"]
-        }';
-    </copy>
-    ```
-    This approach is useful if you want to validate JSON on-the-fly, even if the table does not have a schema constraint.
-
-    **Explanation:**
-    - The `VALIDATE ON INSERT WITH SCHEMA` clause enforces the JSON Schema on every insert.
-    - The schema requires `appointmentType` (string) and, if present, `duration` must be a number > 0.
-
-4. Try inserting valid and invalid JSON documents:
+3. Let's test the validation by trying to insert both valid and invalid data:
 
     ```sql
     <copy>
-        -- Valid
+        -- This will work: has required appointmentType and valid duration
         INSERT INTO appointments_with_schema (patient_id, start_time, reason, status, provider_name, appointment_data)
         VALUES (1, TIMESTAMP '2025-09-01 10:00:00', 'Test', 'Scheduled', 'Dr. Park',
           JSON('{"appointmentType": "orthopedic", "duration": 30}'));
 
-        -- Invalid: missing appointmentType
+        -- This will FAIL: missing required appointmentType field
         INSERT INTO appointments_with_schema (patient_id, start_time, reason, status, provider_name, appointment_data)
         VALUES (2, TIMESTAMP '2025-09-01 11:00:00', 'Test', 'Scheduled', 'Dr. Park',
           JSON('{"duration": 30}'));
 
-        -- Invalid: duration negative
+        -- This will FAIL: duration is negative (must be > 0)
         INSERT INTO appointments_with_schema (patient_id, start_time, reason, status, provider_name, appointment_data)
         VALUES (3, TIMESTAMP '2025-09-01 12:00:00', 'Test', 'Scheduled', 'Dr. Park',
           JSON('{"appointmentType": "orthopedic", "duration": -10}'));
     </copy>
     ```
+
+    When you run the invalid inserts, Oracle will show clear error messages explaining exactly what rule was violated. This helps prevent bad data from entering your database and makes debugging much easier.
+
+4. You can also validate JSON on-the-fly during INSERT statements, even without table-level validation:
+
+    ```sql
+    <copy>
+    -- Only insert if the JSON passes validation
+    INSERT INTO appointments (patient_id, start_time, reason, status, provider_name, appointment_data)
+    SELECT 4, TIMESTAMP '2025-09-01 13:00:00', 'Test', 'Scheduled', 'Dr. Park', 
+           JSON('{"appointmentType": "cardiology", "duration": 45}')
+    WHERE JSON('{"appointmentType": "cardiology", "duration": 45}') IS JSON VALIDATE '{
+        "type": "object",
+        "properties": {
+            "appointmentType": {"type": "string"},
+            "duration": {"type": "number", "exclusiveMinimum": 0}
+        },
+        "required": ["appointmentType"]
+    }';
+    </copy>
+    ```
+
+    This approach lets you validate specific JSON data without enforcing rules on the entire table.
 
 
 

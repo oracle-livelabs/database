@@ -45,11 +45,11 @@ Estimated Time: 5 minutes
     >**Note:** Bookmark the workshop page for quicker access.
 
 
-## Task 2: Navigate to the Autonomous Database
+## Task 2: Navigate to the Autonomous AI Database
 
 1. You should be already logged in to the Console using the instructions in the **Task 1** above in this lab.
 
-2. Open the **Navigation** menu (top left hand corner)and click **Oracle Database**. Under **Oracle Database**, click **Autonomous Database**. 
+2. Open the **Navigation** menu (top left hand corner)and click **Oracle Database**. Under **Oracle Database**, click **Autonomous AI Database**. 
 
     ![Screenshot of the Oracle Cloud Console showing the Autonomous Database section highlighted in the navigation menu. The wider environment includes the Console interface with various database options visible. The emotional tone is neutral and instructional. Visible text includes Oracle Database and Autonomous Database in the navigation menu, guiding users to locate their Autonomous Database instance.](./images/adb.png =50%x*)
 
@@ -69,10 +69,10 @@ Estimated Time: 5 minutes
     >**Note:** Refer to the **Reservation Information** panel that you can access from the **Run Workshop *workshop-name*** tab for information about your assigned resources.
     ![The LL assigned resources are displayed in the **Reservation Information** panel.](./images/ll-resources.png =50%x* " ")
 
-5. Now, On the **Autonomous Databases** page, click your ADB instance.
+5. Now, On the **Autonomous AI Databases** page, click your ADB instance.
     ![On the Autonomous Databases page, the Autonomous Database that is assigned to your LiveLabs workshop reservation is displayed.](./images/ll-adb-page.png =50%x* " ")
 
-6. On the **Autonomous Database details** page, click the **Database actions** drop-down list, and then click **Database Users**.
+6. On the **Autonomous AI Database details** page, click the **Database actions** drop-down list, and then click **Database Users**.
 
     ![The Database Actions button is highlighted.](./images/im1.png =50%x* " ")
 
@@ -99,13 +99,13 @@ You may now proceed to the next lab.
 ## Learn More
 
 * [Oracle Cloud Infrastructure Documentation](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm)
-* [Using Oracle Autonomous Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
+* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
 
 ## Acknowledgements
 
 * **Author:** Killian Lynch, Oracle Database Product Manager
 * **Contributors:**
-    * Mike Matthews, Autonomous Database Product Management
-    * Marty Gubar, Autonomous Database Product Management
+    * Mike Matthews, Autonomous AI Database Product Management
+    * Marty Gubar, Autonomous AI Database Product Management
     * Lauran K. Serhal, Consulting User Assistance Developer
 * **Last Updated By/Date:** Killian Lynch, September 2025
