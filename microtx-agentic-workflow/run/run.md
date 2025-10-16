@@ -39,7 +39,7 @@ This lab assumes you have:
 ## Task 2: Execute the Workflow
 
 1. Open the navigation menu and click **Workbench**.
-    The **Workflow Workbench** dialog box appears.
+    The **Workflow Workbench** page is displayed.
 
 2. In the **Workflow Name** drop-down list, select the `acme_bank_loan_processing_workflow` workflow.
 

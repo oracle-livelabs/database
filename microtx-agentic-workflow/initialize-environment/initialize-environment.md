@@ -129,16 +129,6 @@ Click **Activities** in the remote desktop window, and then go back to the termi
 
     Let's consider that the value of the external IP in the above example is 10.107.21.222.
 
-3. Store the external IP address in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
-
-    ```text
-    <copy>
-    export CLUSTER_IPADDR=10.107.21.222
-    </copy>
-    ```
-
-    Note that, if you don't do this, then you must explicitly specify the IP address when required in the commands.
-
 ## Task 4: Start MicroTx Workflow Services
 
 1. From your remote desktop session, open a new terminal tab.
@@ -167,9 +157,12 @@ Click **Activities** in the remote desktop window, and then go back to the termi
     </copy>
     ```
 
-4. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser. Open `http://10.107.21.222/consoleui/` in any browser tab to access the MicroTx Workflow GUI. Replace, `10.107.21.222` with the external IP address of the load balancer that you have copied in the previous step in case the external IP address is different.
-If you see these options on the screen, then click on Workflow.
-        ![MicroTx Workflow UI Options](images/initial-screen-options.png)
+4. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser. 
+
+5. Open `http://10.107.21.222/consoleui/` in any browser tab to access the MicroTx Workflow GUI. Replace, `10.107.21.222` with the external IP address of the load balancer that you have copied in the previous step in case the external IP address is different.
+
+6. If the following options are displayed, then click **Workflow**.
+    ![MicroTx Workflow UI Options](images/initial-screen-options.png)
 
 ## Task 5: Create an API Key to Access OpenAI
 
