@@ -100,7 +100,7 @@ To create a user API key, you will use `openssl` on your local system. If you ar
 
   ![Save configuration file parameters](images/config-file-preview.png)
 
-You may proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Learn More
 

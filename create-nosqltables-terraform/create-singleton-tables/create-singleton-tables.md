@@ -310,7 +310,7 @@ Only 'yes' will be accepted to approve.
 ```
 On confirmation, the singleton tables are created.
 
-You may proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Learn More
 

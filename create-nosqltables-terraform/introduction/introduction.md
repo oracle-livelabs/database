@@ -40,7 +40,7 @@ The Oracle NoSQL Database Cloud Service is a server-less, fully managed data sto
 3. Connect to the Oracle NoSQL Database Cloud Service
 4. Invoke terraform and run the scripts
 
-You may proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Learn More
 
