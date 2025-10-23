@@ -1,15 +1,15 @@
-# Domains and Annotations with Oracle AI Database 23ai
+# Domains and Annotations with Oracle AI Database 26ai
 
 ## Introduction
 
-Welcome to the **Domains and Annotations** lab! In this hands-on session, you'll learn how Oracle AI Database 23ai's Data Usecase Domains and Schema Annotations work together to solve data governance challenges in the LumenCare demo.
+Welcome to the **Domains and Annotations** lab! In this hands-on session, you'll learn how Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations work together to solve data governance challenges in the LumenCare demo.
 
 As organizations like LumenCare manage increasingly complex data requirements—from regulatory compliance to business workflow automation, traditional database comments and constraints fall short. This lab demonstrates how modern database features can enforce data integrity while maintaining comprehensive metadata documentation for any business domain.
 
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to demonstrate Oracle AI Database 23ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for any number of reasons.
+The objective of this lab is to demonstrate Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for any number of reasons.
 
 **The LumenCare Challenge**
 LumenCare's platform faces several common data governance challenges that many organizations encounter:
@@ -20,7 +20,7 @@ LumenCare's platform faces several common data governance challenges that many o
 4. **Audit Requirements**: All sensitive data needs structured metadata for compliance reporting and business intelligence
 
 ### Prerequisites:
-- Access to Oracle AI Database 23ai.
+- Access to Oracle AI Database 26ai.
 - Basic understanding of SQL concepts.
 
 ## What are Data Usecase Domains?
@@ -33,7 +33,7 @@ Data Use Case Domains also provide consistent metadata for development, analytic
 
 ### Understanding the Four Types of Data Usecase Domains
 
-Before we dive into our healthcare examples, let's understand the four types of Data Usecase Domains available in Oracle AI Database 23ai:
+Before we dive into our healthcare examples, let's understand the four types of Data Usecase Domains available in Oracle AI Database 26ai:
 
 #### 1. Single Column Domain
 * **Purpose**: Applies constraints and validation rules to a single column across multiple tables.
@@ -92,7 +92,7 @@ The combination creates a data governance framework that benefits any organizati
 
   Let's create single column domains that apply constraints and validation to individual columns that can be reused across multiple tables.
 
-    **Note**: We're using `IF NOT EXISTS` syntax, an Oracle AI Database 23ai feature that can prevents errors when running scripts multiple times. The feature lets you to create objects only if they don't already exist, making your database scripts more robust and reusable - particularly valuable in development environments where scripts may be executed repeatedly.
+    **Note**: We're using `IF NOT EXISTS` syntax, an Oracle AI Database 26ai feature that can prevents errors when running scripts multiple times. The feature lets you to create objects only if they don't already exist, making your database scripts more robust and reusable - particularly valuable in development environments where scripts may be executed repeatedly.
 
     ```sql
     <copy>
@@ -176,7 +176,7 @@ The combination creates a data governance framework that benefits any organizati
       primary_reason    VARCHAR2(200),
       created_at        TIMESTAMP DEFAULT SYSTIMESTAMP,
       last_updated      TIMESTAMP DEFAULT SYSTIMESTAMP,
-      -- Virtual columns (23ai enhanced support for up to 4096 columns)
+      -- Virtual columns (26ai enhanced support for up to 4096 columns)
       full_name_upper   VARCHAR2(100) GENERATED ALWAYS AS (
         UPPER(name)
       ) VIRTUAL
@@ -375,7 +375,7 @@ The combination creates a data governance framework that benefits any organizati
 
 ## Conclusion
 
-In this lab, you've seen how Oracle AI Database 23ai's Domains and Annotations work together to solve real data governance challenges:
+In this lab, you've seen how Oracle AI Database 26ai's Domains and Annotations work together to solve real data governance challenges:
 
 1. **Domains** provide reusable, consistent data validation across your entire schema
 2. **Annotations** enable structured metadata management

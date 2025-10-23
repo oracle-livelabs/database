@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Oracle Database provides native JSON support, enabling the storage, indexing, and querying of JSON documents directly within standard relational tables. This native JSON datatype allows developers to manage schema-flexible data efficiently, making it easy to accommodate evolving data models without predefined relational schemas. Users benefit from Oracle’s powerful SQL/JSON query capabilities, blending structured and semi-structured data seamlessly.
+Oracle AI Database provides native JSON support, enabling the storage, indexing, and querying of JSON documents directly within standard relational tables. This native JSON datatype allows developers to manage schema-flexible data efficiently, making it easy to accommodate evolving data models without predefined relational schemas. Users benefit from Oracle’s powerful SQL/JSON query capabilities, blending structured and semi-structured data seamlessly.
 
 Estimated Time: 15 minutes
 
@@ -16,11 +16,11 @@ In this lab, you will:
 
 ### Prerequisites
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
 
 ## Task 1: Create a relational table with a JSON column
 
-1. Navigate to your Database by selecting **Oracle Database**, then **Autonomous Database**. Ensure you're in the correct compartment for the resource. Click the database display name to open the details page.
+1. Navigate to your database by selecting **Oracle AI Database**, then **Autonomous AI Database**. Ensure you're in the correct compartment for the resource. Click the database display name to open the details page.
 
 	![Select your Compartment](images/select-compartment.png)
 
@@ -54,7 +54,7 @@ In this lab, you will:
 	</copy>
 	```
 
-	You can see that you create this table just like any other table. JSON is just another native datatype of the Oracle database. You could become more specific and create the JSON datatype with one of the following JSON column modifiers:
+	You can see that you create this table just like any other table. JSON is just another native datatype of the Oracle AI Database. You could become more specific and create the JSON datatype with one of the following JSON column modifiers:
 	- JSON
 	- JSON (object)
 	- JSON (scalar)
@@ -164,7 +164,7 @@ As you might know, the JSON standard supports only a simple set of data types op
 
 **So how do we handle datatypes in general in JSON columns?**
 
-Native binary JSON data (OSON format) extends the JSON language by adding scalar types, such as date, that correspond to SQL types and are not part of the JSON standard. Oracle Database also supports the use of textual JSON objects that represent JSON scalar values, including such nonstandard values.
+Native binary JSON data (OSON format) extends the JSON language by adding scalar types, such as date, that correspond to SQL types and are not part of the JSON standard. Oracle AI Database also supports the use of textual JSON objects that represent JSON scalar values, including such nonstandard values.
 
 When you create native binary JSON data from textual JSON data that contains such extended objects, they can optionally be replaced with corresponding (native binary) JSON scalar values.
 

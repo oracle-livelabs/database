@@ -15,12 +15,6 @@ INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('In what year was the company that became Oracle founded?', '1977', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('What was Oracle''s original company name at founding in 1977?', 'Software Development Laboratories (SDL)', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Oracle Database version "2" was the first commercial release. In what year did it ship?', '1979', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('Which Oracle Database major release introduced PL/SQL?', 'Oracle 6', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
@@ -40,9 +34,6 @@ INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('Oracle Autonomous Database was first announced in which year?', '2017', 'Medium');
-
-INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
-('Oracle Application Express (APEX) first launched under a different name. What was it?', 'HTML DB', 'Medium');
 
 INSERT INTO trivia_questions (question_text, answer_text, difficulty) VALUES
 ('What is the internal name for the relational engine that inspired Oracle''s original product name?', 'Oracle (from a CIA project codename)', 'Hard');

@@ -8,7 +8,7 @@ Estimated Lab Time: 15 minutes
 
 **JSON Duality**
 
-JSON Relational Duality is a landmark capability in Oracle Database 23ai, providing game-changing flexibility and simplicity for Oracle Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
+JSON Relational Duality is a landmark capability in Oracle AI Database, providing game-changing flexibility and simplicity for Oracle AI Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
 
 JSON Relational Duality helps to converge the benefits of both document and relational worlds. Developers now get the flexibility and data access benefits of the JSON document model, plus the storage efficiency and power of the relational model. The new feature enabling this functionality is JSON Relational Duality View (we'll refer to it as a Duality View below).
 
@@ -31,12 +31,12 @@ This lab aims to provide hands-on experience with JSON-relational Duality Views,
 
 This lab assumes you have:
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
 
 
 ## Task 1: Install a relational schema with sample data
 
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png)
 
     Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 

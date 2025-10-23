@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Oracle is a relational database, meaning it typically stores data in rows and columns of tables and JSON can be stored as a column value. For this lab we focus on JSON Collections, a native storage format in the Oracle Database for storing documents in a MongoDB-compatible format. A JSON collection stores JSON documents natively in Oracle's binary OSON format that is optimized for random reads and writes. JSON Collections are MongoDB compatible
+Oracle is a relational database, meaning it typically stores data in rows and columns of tables and JSON can be stored as a column value. For this lab we focus on JSON Collections, a native storage format in the Oracle AI Database for storing documents in a MongoDB-compatible format. A JSON collection stores JSON documents natively in Oracle's binary OSON format that is optimized for random reads and writes. JSON Collections are MongoDB compatible
 
 To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection to store information about movies.
 
@@ -19,7 +19,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
 - **Ensure that you have dropped the relational table movies prior to this lab, otherwise you won't be able to create your json collection movies.**
 
 ## Task 1: Create Collection
@@ -212,7 +212,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/development-sql.png)
 
-2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle Database 23ai.**
+2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle AI Database.**
 
 	To quickly recap what the documents look like, let's look at the first JSON document quickly. (Don't worry, we will have a closer look into the SQL world with JSON later):
 	```
@@ -304,7 +304,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create allowed item](./images/create-right-type.png)
 	![doc successfully created](./images/json-doc-created.png)
 
-7. Now that was quite cumbersome to figure out the mistakes manually. But there's a better way: you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle Database 23ai.**
+7. Now that was quite cumbersome to figure out the mistakes manually. But there's a better way: you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle AI Database.**
 
     ```
     <copy>
@@ -327,7 +327,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
 
-8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23ai.**
+8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle AI Database.**
 In the SQL tool, run:
 
     ```
@@ -346,7 +346,7 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-* [Oracle Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
+* [Oracle AI Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
 
 ## Acknowledgements
 
