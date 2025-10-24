@@ -21,9 +21,7 @@ It is easy to deploy a Global Active table on OCI using Terraform. In [Lab 2 : C
 ## Task 1:  Create NoSQL Terraform configuration file
 Resources are the most important element in the Terraform language. Terraform creates a NoSQL table and a table replica as a resource. The NoSQL Terraform configuration file will define the resources to be created. In this lab the resources created are a NoSQL table and a table replica.
 
-When you create a Global Active table:
-* The table should contain at least one JSON column.
-* The table DDL definition must include **with schema frozen** clause.
+When you create a Global Active table the table DDL definition must include **with schema frozen** or **with schema frozen force** clause.
 
 When you add a regional table replica, you can either specify the name of the table or the OCID of the table. If you specify the name of the table, then you need to specify the OCID of your compartment and the **depends\_on** clause while defining the regional replica. If you are specifying the OCID of the table as shown below, then **depends_on** clause, and compartment OCID are optional.
 
@@ -147,7 +145,7 @@ Only 'yes' will be accepted to approve.
 ```
 On confirmation, a regional replica of the *nosql_demo* table is created, converting the singleton table to a GAT.
 
-You may proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -156,4 +154,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
+* **Last Updated By/Date** - Purnima Subramanian, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, October 2025
