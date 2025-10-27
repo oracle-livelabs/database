@@ -16,11 +16,11 @@ In this lab, you will:
 * Alternatively, you can install MongoDB Compass (GUI)
 * Set up your PATH to point to the MongoDB Shell and MongoDB Command Line Database Tools executable
 * Load more data through the Database API for MongoDB
-* Use MongoDB Shell to interact with Oracle Database
+* Use MongoDB Shell to interact with Oracle AI Database
 
 ### Prerequisites
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the MongoDB API used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the MongoDB API used in this lab.
 - You have successfully completed Lab 2, JSON Collections, and Lab 3, Duality Views. We will rely on the JSON Collections and Duality Views that were created in these labs in this module.
 
 ## Task 1: Install MongoDB Shell and MongoDB Command Line Database Tools
@@ -195,9 +195,9 @@ Mongo Shell is now set up on your PC or Mac.
 
 This step is optional, so it is not described in more detail here, although the installation itself is intuitive and self-describing.
 
-## Task 2: Use Mongo API to interact with Oracle Database
+## Task 2: Use Mongo API to interact with Oracle AI Database
 
-With our JSON Collection and Duality Views created in the Oracle Database, we can use Mongo APIs to interact with these collections as if we were interacting with a Mongo Database. In this section, we will use native Mongo tools and connect to the Oracle database with a Mongo connection string -- which was configured as a part of the Oracle REST Data Service (ORDS) configuration. From there, we can interact with Mongo tools or SQL Developer Web interchangeably to access our data.
+With our JSON Collection and Duality Views created in the Oracle AI Database, we can use Mongo APIs to interact with these collections as if we were interacting with a Mongo Database. In this section, we will use native Mongo tools and connect to the Oracle AI Database with a Mongo connection string -- which was configured as a part of the Oracle REST Data Service (ORDS) configuration. From there, we can interact with Mongo tools or SQL Developer Web interchangeably to access our data.
 
 ### Objectives
 
@@ -241,11 +241,30 @@ In this section, you will:
 
     Let us look at those with MongoDB tools now.
 
-### Interact with native JSON Collections in the Oracle Database using Mongo API
+### Interact with native JSON Collections in the Oracle AI Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *Tool Configuration* tab.
 
-    ![Copy Mongo URI](./images/copy-mongo-uri.png " ")
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. 
+
+    **Your Autonomous AI Database should be configured with an enabled MongoDB API, ready for you to go. If you don't see the MongoDB API enabled in your environment, then let's enable it quickly.** 
+    
+    You need to do two things:
+
+    1. Enable Access Control Lists (ACLs)
+
+        Due to security precautions, the MongoDB API is not enabled to the public out of the box, but requires some conscious control access. To enable ACLs, go to the details page of your Autonomous AI Database and select to edit the access control lists.
+
+        ![Set ACL](./images/set-acl.png " ")
+
+        Choose an ACL that enables the machine where you have installed the MongoDB tools to access the database. For demonstration purposes, the most pragmatic way to do this is to set the CIDR block to 0.0.0.0/0 which allows full access from the Internet. **This is for demonstration purposes only and never meant for production environment or systems with sensitive data.**
+
+        ![Set CIDR block](./images/set-cidr-block.png " ")
+
+        Save your changes and go back to the detail page of your Autonomous AI Database.        
+
+    2. If the MongoDB API is successfully enabled, it will show you the URI to copy.
+
+    ![Copy Mongo URI](./images/newmonogoapi.png " ")
 
     The MongoDB API URI looks like this:
 
@@ -254,6 +273,7 @@ In this section, you will:
     mongodb://[user:password@][ADB Instance name].adb.[region].oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true
     </copy>
     ```
+
 
     Let's create an environment variable called *URI* which contains the MongoDB URI including the user and password information.
 
@@ -305,7 +325,7 @@ In this section, you will:
     | Replace with      |  %2C  |  %2F  |  %3A  |  %3B  |  %3D  |  %3F  |  %40  |  %5B  |  %5D  |
     {: title="Special characters and their replacements 2"}
 
-     Please check [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn more about Using MongoDB API in the Oracle Database.
+     Please check [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn more about Using MongoDB API in the Oracle AI Database.
 
 
 2. Let's use the first MongoDB utility - mongoimport - to populate our database with data exported from a MongoDB in ndjson format. You will use a document from Object Storage to seed the data in your **movie** collection.
@@ -459,7 +479,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ![Update SuperAction Mars in Mongo](./images/mongo-update-superaction-mars.png " ")
 
 
-4. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
+4. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle AI Database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
 
     ```
     <copy>{ "title": "SuperAction Mars" }
@@ -496,13 +516,13 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ```
 	![Schedules](./images/schedules.png)
 
-That was a quick run-through of using JSON Collections with the MongoDB compatible API in Oracle Database. There is obviously more to this - as always - but we hope that it helped you to get started and interested in Oracle's comprehensive JSON capabilities.
+That was a quick run-through of using JSON Collections with the MongoDB compatible API in Oracle AI Database. There is obviously more to this - as always - but we hope that it helped you to get started and interested in Oracle's comprehensive JSON capabilities.
 
 ## Learn More
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html#)
-* [Oracle Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
+* [Oracle AI Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
 
 ## Acknowledgements
 

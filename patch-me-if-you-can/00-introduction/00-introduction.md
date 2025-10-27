@@ -2,8 +2,7 @@
 
 ## About this Workshop
 
-
-In this lab, you will familiarize with patching of Oracle Database. you will use AutoUpgrade to patch in the easiest way and explore the more advanced options. All exercises will guide you through out-of-place patching and show the best practices. 
+In this lab, you will familiarize with patching of Oracle Database. you will use AutoUpgrade to patch in the easiest way and explore the more advanced options. All exercises will guide you through out-of-place patching and show the best practices.
 
 Estimated Workshop Time: 120 minutes
 
@@ -22,7 +21,7 @@ You can switch between environments with the shortcuts shown in the last column 
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
-The lab contains a number of labs that you should perform in the specified order. 
+The lab contains a number of labs that you should perform in the specified order.
 
 * You start by exploring patching concepts
 * Then you use simple methods to patch databases
@@ -33,17 +32,17 @@ The lab contains a number of labs that you should perform in the specified order
 
 ### AutoUpgrade
 
-- AutoUpgrade was originally developed to facilitate easier upgrades of Oracle Database. By demand of our customers, it was enhanced to also patch Oracle Database using the same easy methodology that our customers liked. The aim of AutoUpgrade is to fully automate maintenance activites and perform them according to our best practices - include all pre- and post-tasks. It can patch many databases in parallel and allows all sorts of customizations needed in today's complex environments. AutoUpgrade works on all supported platforms, for non-CDB and CDBs, for all or only selected pluggable databases.
+* AutoUpgrade was originally developed to facilitate easier upgrades of Oracle Database. By demand of our customers, it was enhanced to also patch Oracle Database using the same easy methodology that our customers liked. The aim of AutoUpgrade is to fully automate maintenance activities and perform them according to our best practices - include all pre- and post-tasks. It can patch many databases in parallel and allows all sorts of customizations needed in today's complex environments. AutoUpgrade works on all supported platforms, for non-CDB and CDBs, for all or only selected pluggable databases.
 
 ### OPatch
 
-- OPatch is a common utility used by many products in Oracle, including Oracle Database. OPatch patches the Oracle home, so the binaries that you use to run an Oracle Database instance. OPatch only patches the files inside the Oracle home.
+* OPatch is a common utility used by many products in Oracle, including Oracle Database. OPatch patches the Oracle home, so the binaries that you use to run an Oracle Database instance. OPatch only patches the files inside the Oracle home.
 
 ### Datapatch
 
-- Datapatch patches the database itself. Most often, patches requires changes inside the database. This could be changes to existing objects (tables, views, packages) or completely new objects. Datapatch uses *apply scripts* to make those changes. OPatch updates the apply scripts and places them in the Oracle home.
+* Datapatch patches the database itself. Most often, patches requires changes inside the database. This could be changes to existing objects (tables, views, packages) or completely new objects. Datapatch uses *apply scripts* to make those changes. OPatch updates the apply scripts and places them in the Oracle home.
 
-You may *proceed to the next lab*.
+You may now [*proceed to the next lab*](#next).
 
 ## Learn More
 
@@ -54,4 +53,4 @@ You may *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2025

@@ -6,6 +6,8 @@ In this lab, you will review and start-up all components required to run this wo
 
 Estimated Time: 5 Minutes
 
+[Lab 1 walk-through](videohub:1_jnf29ur0)
+
 ### Objectives
 
 In this lab, you will:

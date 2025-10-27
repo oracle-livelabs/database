@@ -90,10 +90,6 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
     ![Create Policy page](./images/policy-create.png "Create Policy page")
 
-    > **Note:** The following screen shot shows the completed policy creation:
-
-    ![Completed policy creation page](./images/policy-complete.png "Completed policy creation page")
-
 ## Task 3: Create a VCN
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Networking**, and select **Virtual Cloud Networks**.
@@ -105,6 +101,9 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 3. Select **VCN with Internet Connectivity** and click **Start VCN Wizard**.
 
     ![Start VCN Wizard](./images/vcn-start.png "Start VCN Wizard")
+    ![Start VCN Wizard Select](./images/vcn-start-select.png "Start VCN Wizard Select")
+
+    
 
 4. On the Create a VCN with Internet Connectivity page, in the **Basic Information** section, in the **VCN Name** field, enter `HeatWave_VCN` and from the **Compartment** drop-down list, select **HeatWave_Sandbox**.
     > **Note:** Your screen should look similar to the following screen shot:
@@ -125,29 +124,22 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
     ![View Virtual Cloud Network](./images/vcn-view.png "View Virtual Cloud Network")
 
-8. In the **Name** column, click **HeatWave_VCN**.
 
-   ![HeatWave_VCN](./images/vcn-heatwave.png " heatwave vcn view")
-
-9. On the Virtual Cloud Network Details page, under **Resources**, select **Security Lists (2)**.
+8. On the Virtual Cloud Network Details page, select the **Security** tab, click on **Security List for Private Subnet-HeatWave_VCN**
 
      ![Security Lists](./images/vcn-security-list.png "VCN Security Lists")
 
 ## Task 4: Configure security list to allow MySQL incoming connection HeatWave_VCNs
 
-1. In the **Security Lists in _Compartment\_Name_ Compartment** section, click **Security List for Private Subnet-HeatWave_VCN**.
-
-    ![Private Subnet-HeatWave_VCN](./images/vcn-private-subnet.png "Private Subnet-HeatWave_VCN")
-
-2. In the **Security List for Private Subnet-HeatWave_VCN** section, in the **Ingress Rules** section, click **Add Ingress Rules**.
+1. In the **Security List for Private Subnet-HeatWave_VCN** section, in the **Ingress Rules** section, click **Add Ingress Rules**.
 
     ![Ingress Rules](./images/vcn-private-subnet-ingress-rules.png "Ingress Rules")
 
-3. In the **Add Ingress Rule** dialog box, add an ingress rule with **Source CIDR** `0.0.0.0/0` and destination port number `3306, 33060` and click **Add Ingress Rule**.
+2. In the **Add Ingress Rule** dialog box, add an ingress rule with **Source CIDR** `0.0.0.0/0` and destination port number `3306, 33060` and click **Add Ingress Rule**.
 
     ![MySQL Port](./images/vcn-private-subnet-ingress-rules-input.png "MySQL Port")
 
-4. On the Security List for Private Subnet-HeatWave_VCN page, the new ingress rules will be shown in the **Ingress Rules** list.
+3. On the Security List for Private Subnet-HeatWave_VCN page, the new ingress rules will be shown in the **Ingress Rules** list.
 
     ![Private Subnet-HeatWave_VCN page](./images/vcn-private-subnet-ingress-rules-page.png "Private Subnet-HeatWave_VCN page")
 
@@ -358,7 +350,10 @@ The installation procedure involves downloading the airportdb database to cloud 
 
    ![Configure placement and hardware](./images/compute-create-info.png "Configure placement and hardware")
 
-    > **Note:** For the **Virtual cloud network**, make sure **HeatWave_VCN** is selected and **Assign a public IPv4 address** is set to **Yes**.  
+    > **Note:** For the **Security** section, click Next
+    ![Configure security](./images/compute-create-security.png "Configure security")
+    
+    > **Note:** **Virtual cloud network**, make sure **HeatWave_VCN** is selected and **Assign a public IPv4 address** is **selected**
 
    ![Assign a public IPv4 address](./images/compute-create-vnic.png "Assign a public IPv4 address")
 
@@ -373,9 +368,13 @@ The installation procedure involves downloading the airportdb database to cloud 
 
     ![SSH key pair](./images/compute-create.png "SSH key pair")
 
+    > **Note:** For the **Storage** section, click Next
+    ![Configure storage](./images/compute-create-storage.png "Configure storage")
+
 9. Click the Create **button**
 
-    > **Note:** The new virtual machine will be ready to use after a few minutes. The state will be shown as **Provisioning** during the creation.
+    ![Click create](./images/compute-create-click.png "Click create")
+    **Note:** The new virtual machine will be ready to use after a few minutes. The state will be shown as **Provisioning** during the creation.
 
     ![Compute Provisioning](./images/compute-provisioning.png "Compute Provisioning")
 
@@ -399,6 +398,8 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
 
       > **Note:** The **HeatWave\_Client** shows the public IP Address as mentioned at the end of **Task 9: Create the Client Virtual Machine**. For example, **ssh -i ~/.ssh/id_rsa opc@132.145.678.990**
 
+      ![SSH Connect cred](./images/connect-cred.png "SSH Connect cred")
+
     ```bash
     <copy>ssh -i ~/.ssh/id_rsa opc@&<your_compute_instance_ip>;</copy>
     ```
@@ -408,7 +409,7 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
 5. Install MySQL Shell with the following command:
 
     ```bash
-    <copy>[opc@...]$ sudo yum install –y mysql-shell</copy>
+    <copy>sudo yum install mysql-shell -y</copy>
     ```
 
      ![Install MySQL Shell](./images/connect-install-mysql-shell.png "Install MySQL Shell")
@@ -418,7 +419,7 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
     For example,  **mysqlsh -uadmin -p -h10.170.990**.
 
     ```bash
-    <copy>[opc@...]$ mysqlsh -u<HeatWave_admin_username> -p -h<HeatWave_endpoint></copy>
+    <copy>mysqlsh -u<HeatWave_admin_username> -p -h<HeatWave_endpoint></copy>
     ```
 
      ![Connect MySQL Shell client with IP](./images/connect-mysql-shell.png "Connect MySQL Shell client with IP")
@@ -487,18 +488,18 @@ Do the following to view the metrics for your DB system:
 
 2. List Database Systems.
 
-
-   ![List Database Systems](./images/mysql-list.png "List Database Systems")
-
 3. Select the **HeatWave\_Sandbox** Compartment and click **HeatWave\_DB** to open the MySQL DB System Details page.
-
+    
+    ![List Database Systems](./images/mysql-list.png "List Database Systems")
     ![DB System Details page](./images/mysql-details.png "DB System Details page")
 
-4. Select one of the following actions:
+4. Click the **Lyfecycle** option and select one of the following actions:
 
     - Start: Starts a stopped database system. After the database system is started, the **Stop** action is enabled and the **Start** option is disabled.
     - Stop: Stops a running database system. After the database system is powered off, the **Start** action is enabled.
     - Restart: Shuts down a database system, and restarts it.
+
+    ![DB System lifecycle](./images/mysql-lifecycle.png "DB System lifecycle")
 
      > **Note:**  Stopping a database system stops billing for all OCPUs associated with it.
        - Billing continues for storage.
@@ -523,17 +524,13 @@ Deleting a database system is permanent. Any manual backups associated with the 
 
 2. List Database Systems.
 
-    ![List Database Systems](./images/mysql-list.png "List Database Systems")
-
-
 3. Choose the **HeatWave_Sandbox** Compartment.
 
 4. Click **HeatWave_DB** to open the MySQL DB System Details page.
-
-
+    ![List Database Systems](./images/mysql-list.png "List Database Systems")
     ![DB System Details page](./images/mysql-details.png "DB System Details page")
 
-5. From the **More Actions** drop-down list, select **Delete**.
+5. From the **Lifecycle** drop-down list, select **Delete**.
 
       ![HeatWave Details More Actions page](./images/mysql-details-more-actions.png "HeatWave Details More Actions page")
 
@@ -554,4 +551,4 @@ When the delete process is done, **HeatWave_DB** will be set to the **Delete** s
 
 - **Author** -  Perside Foster, MySQL Solution Engineering
 - **Contributors** -  Sriram Vrinda, MySQL Product Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2024
+- **Last Updated By/Date** - Selena Sánchez, MySQL Solution Engineering, August 2025
