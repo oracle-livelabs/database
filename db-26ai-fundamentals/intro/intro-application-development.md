@@ -2,7 +2,6 @@
 
 Welcome to the Application Development focus area of the LiveLab. This section covers some of the latest features in Oracle AI Database 26ai for application development. While this is not an exhaustive list of new features, we've chosen to spotlight six particularly exciting ones: AI Vector Search, JSON Duality Views, Property Graphs, Use Case Domains, Schema Annotations, and JSON Schema. From these labs, you'll gain an understanding of each of the new features and how they can improve your development projects. This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
-[Oracle AI Database 26ai app dev video](youtube:ksVgnhbxj9w)
 
 ## About Oracle AI Database 26ai
 
@@ -27,9 +26,8 @@ This section lets you explore and experiment with some of the new Application De
 
 ## Learn More
 
-* [Announcing Oracle AI Database 26ai : General Availability](https://blogs.oracle.com/database/post/oracle-26ai-now-generally-available) 
+* [Announcing Oracle AI Database 26ai : General Availability](https://blogs.oracle.com/database/post/oracle-announces-oracle-ai-database-26ai) 
 * [Oracle AI Database Features and Licensing](https://apex.oracle.com/database-features/)
-* [Oracle AI Database 26ai : Where to find information](https://blogs.oracle.com/database/post/oracle-database-23ai-where-to-find-more-information)
 * [Free sandbox to practice upgrading to 26ai!](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943)
 
 

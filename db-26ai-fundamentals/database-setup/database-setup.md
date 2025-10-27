@@ -1,6 +1,6 @@
 # Introduction
 
-In this lab we will setup an Oracle AI Database. For this LiveLab, we will create an Always Free Oracle Autonomous Database 26ai (26ai always free ADB). All of the labs in this LiveLab and all of the features we are going to work with today are available and work on any 26ai database, regardless of the deployment style.
+In this lab we will setup an Oracle AI Database. For this LiveLab, we will create an Always Free Oracle Autonomous AI Database 26ai (26ai always free ADB). All of the labs in this LiveLab and all of the features we are going to work with today are available and work on any 26ai database, regardless of the deployment style.
 
 Estimated Lab Time: 10 minutes
 
@@ -12,11 +12,11 @@ The objective of this workshop is to set up the 26ai always free ADB. The follow
 - Basic understanding of SQL is helpful.
 
 ## Task 1: Database creation
-1. Using the hamburger menu in the top left hand of the screen, **click** Oracle AI Database and then click Autonomous Database.
+1. Using the hamburger menu in the top left hand of the screen, **click** Oracle AI Database and then click Autonomous AI Database.
 
     ![locate adb](images/im1.png " ")
 
-2. Now **select** Create Autonomous Database.
+2. Now **select** Create Autonomous AI Database.
 
     ![locate adb](images/im2.png " ")
 
@@ -24,7 +24,7 @@ The objective of this workshop is to set up the 26ai always free ADB. The follow
 
     ![locate adb](images/im3.png " ")
 
-4. Give your database a password and let's keep the defaults for the rest and create our database. **Click** Create Autonomous Database at the bottom of the screen.
+4. Give your database a password and let's keep the defaults for the rest and create our database. **Click** Create Autonomous AI Database at the bottom of the screen.
     > The password must be 12 to 30 characters and contain at least one uppercase letter, one lowercase letter, and one number. The password cannot contain the double quote (") character or the username "admin".
 
     ![locate adb](images/im4.png " ")

@@ -17,7 +17,7 @@ In this lab, you will explore the new vector data type and SQL Functions introdu
 - Basic understanding of SQL and PL/SQL.
 
 ## Task 1: Creating a vector table
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
     ![click SQL](../common-images/im1.png =50%x*)
 
     Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 

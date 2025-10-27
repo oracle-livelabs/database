@@ -24,7 +24,7 @@ This lab is just a short overview of the functionality introduced with Property 
 
 ## Task 1: Lab Setup
 
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
 
     ![click SQL](../common-images/im1.png =50%x*)
 

@@ -163,6 +163,12 @@
             "filename": "../../update-return-clause-enhancements/update-return-clause-enhancements.md"
         },  
         {
+            "title": "Lab: NEW GROUP BY ALL Clause",
+            "description": "Enhanced Data Manipulation with NEW GROUP BY ALL Clause",
+            "type": "livelabs",
+            "filename": "../../group-by-all/group-by-all.md"
+        },
+        {
           "title": "Need Help?",
           "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
           "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"

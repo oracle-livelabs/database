@@ -45,13 +45,13 @@ Estimated Time: 5 minutes
     >**Note:** Bookmark the workshop page for quicker access.
 
 
-## Task 2: Navigate to the Autonomous Database
+## Task 2: Navigate to the Autonomous AI Database
 
 1. You should be already logged in to the Console using the instructions in the **Task 1** above in this lab.
 
-2. Open the **Navigation** menu (top left hand corner)and click **Oracle AI Database**. Under **Oracle AI Database**, click **Autonomous Database**. 
+2. Open the **Navigation** menu (top left hand corner)and click **Oracle AI Database**. Under **Oracle AI Database**, click **Autonomous AI Database**. 
 
-    ![Screenshot of the Oracle Cloud Console showing the Autonomous Database section highlighted in the navigation menu. The wider environment includes the Console interface with various database options visible. The emotional tone is neutral and instructional. Visible text includes Oracle AI Database and Autonomous Database in the navigation menu, guiding users to locate their Autonomous Database instance.](./images/adb.png)
+    ![Screenshot of the Oracle Cloud Console showing the Autonomous AI Database section highlighted in the navigation menu. The wider environment includes the Console interface with various database options visible. The emotional tone is neutral and instructional. Visible text includes Oracle AI Database and Autonomous AI Database in the navigation menu, guiding users to locate their Autonomous AI Database instance.](./images/adb.png)
 
 
 3. You may see an error message if you're in the wrong compartment. Your resources are in your assigned LiveLabs compartment, not the root compartment.
@@ -70,10 +70,10 @@ Estimated Time: 5 minutes
 
     ![The LL assigned resources are displayed in the **Reservation Information** panel.](./images/ll-resources.png " ")
 
-5. Now, On the **Autonomous Databases** page, click your ADB instance.
-    ![On the Autonomous Databases page, the Autonomous Database that is assigned to your LiveLabs workshop reservation is displayed.](./images/ll-adb-page.png " ")
+5. Now, On the **Autonomous AI Databases** page, click your ADB instance.
+    ![On the Autonomous AI Databases page, the Autonomous AI Database that is assigned to your LiveLabs workshop reservation is displayed.](./images/ll-adb-page.png " ")
 
-6. On the **Autonomous Database details** page, click the **Database actions** drop-down list, and then click **SQL**.
+6. On the **Autonomous AI Database details** page, click the **Database actions** drop-down list, and then click **SQL**.
 
     ![The Database Actions button is highlighted.](../common-images/im1.png " ")
 
@@ -82,13 +82,13 @@ You may now proceed to the next lab.
 ## Learn More
 
 * [Oracle Cloud Infrastructure Documentation](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm)
-* [Using Oracle Autonomous Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
+* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
 
 ## Acknowledgements
 
 * **Author:** Killian Lynch, Oracle AI Database Product Manager
 * **Contributors:**
-    * Mike Matthews, Autonomous Database Product Management
-    * Marty Gubar, Autonomous Database Product Management
+    * Mike Matthews, Autonomous AI Database Product Management
+    * Marty Gubar, Autonomous AI Database Product Management
     * Lauran K. Serhal, Consulting User Assistance Developer
 * **Last Updated By/Date** - Killian Lynch, October 2025

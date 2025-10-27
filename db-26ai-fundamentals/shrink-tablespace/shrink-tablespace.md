@@ -15,7 +15,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
 
 ## Task 1: Understanding the need for tablespace shrinkage
 
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
 
     ![click SQL](../common-images/im1.png =50%x*)
 
@@ -25,28 +25,11 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
 
     ![click SQL](images/simple-db-actions.png =50%x*)
 
-1. Before we jump into the process of using the `shrink_tablespace` procedure, let's understand why reclaiming unused space in tablespaces is important.
+3. Before we jump into the process of using the `shrink_tablespace` procedure, let's understand why reclaiming unused space in tablespaces is important.
 
     Unused or free space within tablespaces can grow over time, reducing database efficiency and performance. Shrinking tablespaces helps optimize database resource utilization by reclaiming unused space. The `shrink_tablespace` procedure provides a convenient solution for resizing data files and organizing objects.
 
-2. Now, let's explore how to use the `shrink_tablespace` procedure to reclaim unused space in a tablespace.
-
-    To begin, let's first check our current tablespace size.
-
-    > Your tablespace size may be different depending on what prior labs you've done, that's okay.
-
-    ```
-    <copy>    
-    SELECT tablespace_name,
-        ROUND(SUM(bytes) / 1024 / 1024 / 1024, 2) AS "Size_GB"
-    FROM dba_data_files
-    where TABLESPACE_NAME = 'DATA'
-    GROUP BY tablespace_name;
-    </copy>
-    ```
-    ![calculate your tablespace size](../common-images/im1.png =50%x*)
-
-2. We can create a new table and populate it with data. You can use the following SQL statement as an example:
+4. We can create a new table and populate it with data. You can use the following SQL statement as an example:
 
     ```
     <copy>
@@ -63,7 +46,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     ```
     ![create a table](images/im3.png =50%x*)
 
-3. We'll now add 2 million rows to the table (feel free to skip this and read the rest if you don't want to add the data to your table).
+5. We'll now add 2 million rows to the table (feel free to skip this and read the rest if you don't want to add the data to your table).
 
     > **This creates about 2 gigs worth of data - use cautiously if you're on the free tier**
 

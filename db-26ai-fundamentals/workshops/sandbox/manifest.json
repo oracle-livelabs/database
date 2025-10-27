@@ -138,7 +138,7 @@
             "filename": "../../if-exists-for-ddl/if-exists-for-ddl.md"
         },
         {
-            "title": "Lab: New Table Value Clause",
+            "title": "Lab: Table Value Clause",
             "description": "Explore the advantages of the new table value clause in SQL for enhanced data manipulation capabilities.",
             "type": "livelabs",
             "filename": "../../table-value-clause/table-value-clause.md"
@@ -154,7 +154,13 @@
             "description": "Enhanced Data Manipulation with DML RETURNING Clause",
             "type": "livelabs",
             "filename": "../../update-return-clause-enhancements/update-return-clause-enhancements.md"
-        },  
+        }, 
+        {
+            "title": "Lab: NEW GROUP BY ALL Clause",
+            "description": "Enhanced Data Manipulation with NEW GROUP BY ALL Clause",
+            "type": "livelabs",
+            "filename": "../../group-by-all/group-by-all.md"
+        },
         {
           "title": "Need Help?",
           "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",

@@ -27,6 +27,8 @@ In Oracle AI Database 26ai, several key enhancements have been introduced to the
   
 - **DML RETURNING Clause Enhancements:** The `RETURNING INTO` clause for `INSERT`, `UPDATE`, `DELETE`, and `MERGE` statements has been enhanced to report old and new values affected by the respective statement. This allows developers to use a uniform approach for each of these DML types to obtain values before and after statement execution, enhancing efficiency and reducing the database workload.
 
+- **GROUP BY ALL:** The GROUP BY ALL clause automatically groups by all non-aggregated columns in the SELECT list, meaning you don't have to explicitly list each column in the GROUP BY clause. Check out the lab for more.
+
 You may now **proceed to the next lab** 
 
 ## Learn More
