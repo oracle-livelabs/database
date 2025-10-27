@@ -77,7 +77,7 @@ You use the `GRANT` statement to assign privileges to users and roles. To assign
 
 **Syntax:** 
 
-```
+```sql
 GRANT <grant_privilege> TO <user>;
 ```
 
