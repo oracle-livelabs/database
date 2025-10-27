@@ -352,7 +352,7 @@ DROP TABLE <table>;
 
 In this section, you execute the `REVOKE` statement to revoke user and role system privileges. To revoke a system privilege or a role, you must be assigned the privilege with the `ADMIN OPTION`.
 
-**Syntax** 
+**Syntax:** 
 
 ```
 REVOKE <privilege> FROM <user>;
