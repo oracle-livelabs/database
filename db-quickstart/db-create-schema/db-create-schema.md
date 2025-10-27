@@ -324,12 +324,6 @@ You use the `DELETE` statement to delete rows of data from a database table. Exe
 
 In this section, you execute the `DROP TABLE` statement to remove a table and its data from the database.
 
-**Syntax:**
-
-```
-DROP TABLE <table>;
-```
-
 1. Remove the `CUSTOMERS` table.
 
     ```
@@ -351,12 +345,6 @@ DROP TABLE <table>;
 ## Task 7: Revoke Privileges
 
 In this section, you execute the `REVOKE` statement to revoke user and role system privileges. To revoke a system privilege or a role, you must be assigned the privilege with the `ADMIN OPTION`.
-
-**Syntax:** 
-
-```
-REVOKE <privilege> FROM <user>;
-```
 
 1. In the lab, you should be signed in to the SQL Worksheet as the **`online_shoppe`** user. Log out of the `online_shoppe` user. On the **Oracle Database Actions | SQL** banner, click the drop-down list next to the `online_shoppe` user, and then select **Sign Out** from the drop-down menu. 
 
