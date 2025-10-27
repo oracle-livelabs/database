@@ -355,7 +355,7 @@ In this section, you execute the `REVOKE` statement to revoke user and role syst
 **Syntax** 
 
 ```
-REVOKE <revoke_privilege> FROM <user>;
+REVOKE <privilege> FROM <user>;
 ```
 
 1. In the lab, you should be signed in to the SQL Worksheet as the **`online_shoppe`** user. Log out of the `online_shoppe` user. On the **Oracle Database Actions | SQL** banner, click the drop-down list next to the `online_shoppe` user, and then select **Sign Out** from the drop-down menu. 
