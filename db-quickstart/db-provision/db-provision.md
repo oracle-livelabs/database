@@ -23,7 +23,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- This lab requires completion of the Get Started section in the Contents menu on the left.
+- This lab requires completion of the **Get Started** section in the **Contents** menu on the left.
 
 ## Task 1: (Optional) Create a Compartment
 [](include:iam-compartment-create-body.md)
@@ -33,17 +33,20 @@ In this lab, you will:
 
 ## Task 3: Create the Autonomous AI Database Instance
 
+<if type="livelabs">
+1. On the **Autonomous AI Databases** page, select your assigned compartment from the **compartment** field. Click **Create Autonomous AI Database** to start the instance creation process.
+
+    ![Click Create Autonomous AI Database.](images/ll-click-create-new-adb.png =65%x*)
+</if>
+
+<if type="tenancy">
+
 1. On the **Autonomous AI Databases** page, select your desired **region** and **compartment**. Click **Create Autonomous AI Database** to start the instance creation process.
 
-    <if type="sandbox">
     ![Click Create Autonomous AI Database.](images/click-create-new-adb.png =65%x*)
-    </if>
+</if>
 
-    <if type="tenancy">
-    ![Click Create Autonomous AI Database.](images/click-create-new-adb.png =65%x*)
-    </if>
-
-    The **Create Autonomous AI Database Serverless** page is displayed.
+The **Create Autonomous AI Database Serverless** page is displayed.
 
 2. Specify the following:
 
@@ -55,12 +58,12 @@ In this lab, you will:
         ![Enter the required details.](./images/adb-create-screen-names.png =65%x*)
 </if>
 
-<if type="sandbox">
-    - **Display Name**: Enter a memorable name for the database for display purposes. For this lab, use **[](var:db_display_name)**.
-    - **Database Name**: Use letters and numbers only, starting with a letter. Maximum length is 14 characters. _Hyphens and Underscores are not supported_. For this lab, use **[](var:db_name_livelabs)**. For example, if your assigned compartment is `LL166140-COMPARTMENT`, append **`LL166140`** to the database name. In this example, the database name will be **`ADWFINANCELL166140`**.
+<if type="livelabs">
+    - **Display Name**: Enter a memorable name for the database for display purposes. For this lab, use **`ADW-Finance-Mart`**.
+    - **Database Name**: Use letters and numbers only, starting with a letter. Maximum length is 14 characters. _Hyphens and Underscores are not supported_. For this lab, use **`ADWFINANCE`**.
     - **Compartment**: Use the default compartment created for your reservation.
 
-    ![Enter the required details.](./images/adb-create-screen-names.png =65%x*)
+        ![Enter the required details.](./images/ll-adb-create-screen-names.png =65%x*)
 
     > **Note:** Ensure that you use the suggested database names as instructed in this step, and not those shown in the screenshots.
 </if>
