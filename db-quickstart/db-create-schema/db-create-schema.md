@@ -62,16 +62,16 @@ In general, there are two types of privileges:
 
 Here are a few of the basic system and object privileges:
 
-### **System privileges:**
-- Create a table, a view, or an index that is owned by any user in the database
-- Alter a table, a view, or an index in the database
-- Drop a table, a view, or an index in the database
+* **System privileges:**
+    - Create a table, a view, or an index that is owned by any user in the database
+    - Alter a table, a view, or an index in the database
+    - Drop a table, a view, or an index in the database
 
-### **Object privileges:**
-- Insert values into a table
-- Create a foreign key dependency for a table
-- Select from a table
-- Update a table
+* **Object privileges:**
+    - Insert values into a table
+    - Create a foreign key dependency for a table
+    - Select from a table
+    - Update a table
 
 You use the `GRANT` statement to assign privileges to users and roles. To assign privileges, you must have been assigned either the `ADMIN OPTION` or the `GRANT ANY PRIVILEGE` system privilege.
 
