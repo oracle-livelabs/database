@@ -62,12 +62,12 @@ In general, there are two types of privileges:
 
 Here are a few of the basic system and object privileges:
 
-**System privileges:**
+### **System privileges:**
 - Create a table, a view, or an index that is owned by any user in the database
 - Alter a table, a view, or an index in the database
 - Drop a table, a view, or an index in the database
 
-**Object privileges:**
+### **Object privileges:**
 - Insert values into a table
 - Create a foreign key dependency for a table
 - Select from a table
@@ -81,7 +81,9 @@ You use the `GRANT` statement to assign privileges to users and roles. To assign
 GRANT <privileges> TO <user>;
 ```
 
-1. When you create a user with the `CREATE USER` statement, the user's privilege domain is empty by default. The administrator assigns privileges to the user based on the tasks that the user may perform in the future. In this lab, the `ONLINE_SHOPPE` user establishes a session, creates a table, and writes DML statements against tables. Execute the following statements to assign the required privileges to the `ONLINE_SHOPPE` user.
+When you create a user with the `CREATE USER` statement, the user's privilege domain is empty by default. The administrator assigns privileges to the user based on the tasks that the user may perform in the future. 
+
+1. In this lab, the `ONLINE_SHOPPE` user establishes a session, creates a table, and writes DML statements against tables. Execute the following statements to assign the required privileges to the `ONLINE_SHOPPE` user.
 
     ```
     <copy>
