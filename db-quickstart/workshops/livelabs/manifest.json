@@ -15,48 +15,45 @@
         "adb-goto-data-load-utility.md":"/common/building-blocks/tasks/adb/goto-data-load-utility.md",
         "iam-compartment-create-body.md":"/common/building-blocks/tasks/iam/compartment-create-body.md"
       },
-      "variables": ["./variables.json"],
-
     "tutorials": [
         {
             "title": "Introduction",
-            "type":"tenancy",
             "description": "Introduction",
             "filename": "../../db-quickstart-workshop/intro.md"
         },
         {
             "title": "Get Started",
-            "description": "Get a Free Trial",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+            "description": "Login to Oracle Cloud",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
-            "title": "Lab 1: Provision an Oracle Autonomous AI Database",
-            "type":"tenancy",
-            "description": "Provision Autonomous Database",
+            "title": "Lab 1: Provision an Autonomous AI Database",
+            "type":"livelabs",
+            "description": "Provision Autonomous AI Database",
             "filename": "./../../db-provision/db-provision.md"
         },
-       {
-            "title": "Lab 2: Get Familiar with the SH Sample Schema using the SQL Worksheet",
-            "type":"tenancy",
+        {
+            "title": "Lab 2: Familiarize with the SH Sample Schema using SQL Worksheet",
+            "type":"livelabs",
             "description": "Familiarize with the SH Sample Schema",
             "filename": "./../../db-familiarize-sh/db-familiarize-sh.md"
         },
         {
             "title": "Lab 3: Query the SH Sample Schema",
-            "type":"tenancy",
+            "type":"livelabs",
             "description": "Query the SH Sample Schema",
             "filename": "./../../db-query/db-query.md"
         },
         {
             "title": "Lab 4: Create a Schema",
-            "type":"tenancy",
+            "type":"livelabs",
             "description": "Create a Schema",
             "filename": "./../../db-create-schema/db-create-schema.md"
         },
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
         }
     ]
 }
