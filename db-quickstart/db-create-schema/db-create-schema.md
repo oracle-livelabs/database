@@ -321,9 +321,11 @@ You use the `DELETE` statement to delete rows of data from a database table. Exe
     ![Delete an order from a table](./images/delete-data-online-shoppe.png " ")
 
 ## Task 6: Remove Tables
+
 In this section, you execute the `DROP TABLE` statement to remove a table and its data from the database.
 
-**Syntax**: 
+**Syntax:**
+
 ```
 DROP TABLE <table>;
 ```
@@ -396,5 +398,5 @@ REVOKE <revoke_privilege> FROM <user>;
 ## Acknowledgements
 
 - **Author:** Lauran K. Serhal, Consulting User Assistance Developer
-- **Last Updated By/Date:** Lauran K. Serhal, October 2025
+- **Last Updated By/Date:** Lauran K. Serhal, November 2025
 

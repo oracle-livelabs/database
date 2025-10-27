@@ -57,12 +57,12 @@ In this lab, you will:
 
 <if type="sandbox">
     - **Display Name**: Enter a memorable name for the database for display purposes. For this lab, use **[](var:db_display_name)**.
-    - **Database Name**: Use letters and numbers only, starting with a letter. Maximum length is 14 characters. _Hyphens and Underscores are not supported_. For this lab, use **[](var:db_name_livelabs)**. For example, if your assigned compartment is `LL166140-COMPARTMENT`, append **`LL166140`** to the database name. In this example, the database name will be **ADWFINANCELL166140**.
+    - **Database Name**: Use letters and numbers only, starting with a letter. Maximum length is 14 characters. _Hyphens and Underscores are not supported_. For this lab, use **[](var:db_name_livelabs)**. For example, if your assigned compartment is `LL166140-COMPARTMENT`, append **`LL166140`** to the database name. In this example, the database name will be **`ADWFINANCELL166140`**.
     - **Compartment**: Use the default compartment created for your reservation.
 
     ![Enter the required details.](./images/adb-create-screen-names.png =65%x*)
 
-> **Note:** Ensure that you use the suggested database names as instructed in this step, and not those shown in the screenshots.
+    > **Note:** Ensure that you use the suggested database names as instructed in this step, and not those shown in the screenshots.
 </if>
 
 3. In the **Workload type** section, choose a workload type. Select the workload type for your database from the following choices:
