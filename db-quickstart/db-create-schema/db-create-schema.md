@@ -75,10 +75,10 @@ Here are a few of the basic system and object privileges:
 
 You use the `GRANT` statement to assign privileges to users and roles. To assign privileges, you must have been assigned either the `ADMIN OPTION` or the `GRANT ANY PRIVILEGE` system privilege.
 
-**Syntax:** 
+**Syntax:**
 
 ```sql
-GRANT <grant_privilege> TO <user>;
+GRANT <privileges> TO <user>;
 ```
 
 1. When you create a user with the `CREATE USER` statement, the user's privilege domain is empty by default. The administrator assigns privileges to the user based on the tasks that the user may perform in the future. In this lab, the `ONLINE_SHOPPE` user establishes a session, creates a table, and writes DML statements against tables. Execute the following statements to assign the required privileges to the `ONLINE_SHOPPE` user.
