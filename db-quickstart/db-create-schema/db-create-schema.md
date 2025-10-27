@@ -44,7 +44,9 @@ CREATE USER <USER> IDENTIFIED BY <password>;
 
 
     ```
+    <copy>
     CREATE USER online_shoppe IDENTIFIED BY Lab_practice1;
+    </copy>
     ```
 
     ![Create user](./images/create-user.png " ")

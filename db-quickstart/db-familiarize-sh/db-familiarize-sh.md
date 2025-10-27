@@ -67,11 +67,21 @@ Here is the entity-relationship diagram of the SH schema:
 
 The `DESCRIBE` command provides a description of a specified table or view. The description for tables and views contains the following information:
 -   Column names
--   Whether null values are allowed (NULL or NOT NULL) for each column
--   Data type of columns, such as DATE, NUMBER, VARCHAR2
--   Precision of columns, such as VARCHAR2(50)
+-   Whether null values are allowed (`NULL` or `NOT NULL`) for each column
+-   Data type of columns, such as `DATE`, `NUMBER`, `VARCHAR2`
+-   Precision of columns, such as `VARCHAR2(50)`
 
-Syntax: DESC[RIBE] schema\_name.table\_name
+    **Syntax:** 
+
+    ```
+    <copy>
+    DESC[RIBE] schema_name.table_name
+    </copy>
+    ```
+
+    > **Note:** The first time you attempt to paste code in your SQL Worksheet, a dialog box is displayed. Click **Allow**.
+
+    ![Click Allow.](images/click-allow.png =40%x*)
 
 1. View the description of the `COUNTRIES` table. Copy and paste the following code into your SQL Worksheet, and then click the **Run Script (F5)** icon in the Worksheet toolbar.
 
