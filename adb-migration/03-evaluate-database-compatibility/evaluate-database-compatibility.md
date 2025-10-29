@@ -364,11 +364,15 @@ CPAT can evaluate multiple different migration methods, like GoldenGate and Data
     <copy>
     ls -1 ~/cpat_output/1_generic/
 
+    find ~/cpat_output/1_generic/ -name "*.html" | xargs sed -i -E 's|https://[^ ]+\.com/|https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/oradbclouducm/b/oracle-jet/o/|g'
+
     firefox ~/cpat_output/1_generic/premigration_advisor_summary_report.html &
     </copy>
 
     # Be sure to hit RETURN
     ```
+
+    * The *sed* command is used as a workaround since the Oracle JET JavaScript files required for handling CPAT HTML output are not accessible from this lab.
 
     ![CPAT Summary](./images/cpat_summary_gen.png)
 
@@ -659,6 +663,8 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
     <copy>
     ls -1 ~/cpat_output/2_adbs/
 
+    find ~/cpat_output/2_adbs/ -name "*.html" | xargs sed -i -E 's|https://[^ ]+\.com/|https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/oradbclouducm/b/oracle-jet/o/|g'
+
     firefox ~/cpat_output/2_adbs/{blue_premigration_advisor_report.html,red_premigration_advisor_report.html} &
     </copy>
 
@@ -805,6 +811,8 @@ Now that we executed CPAT for both PDBs on our specific migration scenarios, let
     ``` bash
     <copy>
     ls -1 ~/cpat_output/3_adbs_datapump/
+
+    find ~/cpat_output/3_adbs_datapump/ -name "*.html" | xargs sed -i -E 's|https://[^ ]+\.com/|https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/oradbclouducm/b/oracle-jet/o/|g'
 
     firefox ~/cpat_output/3_adbs_datapump/{blue_premigration_advisor_report.html,red_premigration_advisor_report.html} &
     </copy>
