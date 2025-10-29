@@ -12,6 +12,8 @@ Raft replication is integrated with transaction execution and is completely tran
 
 ![Raft introduction](images/raft-intro.png " ")
 
+[Introduction and verify Lab environment](videohub:1_c5e1jhps)
+
 ### Objectives
 In this workshop, you will gain first-hand experience in utilizing the Raft Replication within Oracle Globally Distributed Database, enabling participants to manage Raft-enabled replication for robust distributed database solutions.
 
@@ -32,6 +34,6 @@ You may now proceed to the next lab.
 - [Raft Replication Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 ## Acknowledgements
-* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
+* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025

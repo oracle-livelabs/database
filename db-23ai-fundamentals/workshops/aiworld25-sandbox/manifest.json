@@ -1,0 +1,58 @@
+{
+    "workshoptitle": "Oracle AI Database 26ai New Features",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        {
+          "title": "Introduction",
+          "description": "Introduction to Oracle AI Database 26ai",
+          "type": "livelabs",
+          "filename": "../../intro/ai-world-2025-intro.md"
+      },
+      {
+        "title": "Get Started with LiveLabs",
+        "filename": "../../ai-world-2025/green-button-setup-ai-25.md"
+    },
+      {
+        "title": "Lab 1: Domains and Annotations",
+        "description": "Learn how Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations solve healthcare data governance challenges.",
+        "type": "livelabs",
+        "filename": "../../ai-world-2025/domains-annotations.md"
+    },
+      {
+        "title": "Lab 2: JSON and SQL",
+        "description": "Try out JSON and SQL capabilities in 23ai",
+        "type": "livelabs",
+        "filename": "../../ai-world-2025/json-and-SQL-data.md"
+    },
+      {
+          "title": "Lab 3: AI Vector Search",
+          "description": "Explore AI Vector Search capabilities and create healthcare tables with vector search functionality",
+          "type": "livelabs",
+          "filename": "../../ai-world-2025/ai-vector-search.md"
+      },
+      {
+          "title": "Lab 4: JSON Duality Views",
+          "description": "Building Duality Views",
+          "type": "livelabs",
+          "filename": "../../ai-world-2025/json-duality.md"
+      },
+      {
+        "title": "Lab 5: (Bonus) SQL Updates",
+        "description": "Learn how to efficiently update records in your database using advanced SQL techniques.",
+        "type": "livelabs",
+        "filename": "../../ai-world-2025/sql-features.md"
+    },
+      {
+          "title": "Lab 6: (Bonus) SQLcl MCP Server and the Oracle Database ",
+          "description": "Working with the sqlcl mcp server",
+          "type": "livelabs",
+          "filename": "../../ai-world-2025/mcp-server.md"
+      },
+
+        {
+          "title": "Need Help?",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

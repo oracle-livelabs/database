@@ -62,7 +62,7 @@ This lab assumes you have:
     ps -ef | grep raftLiveLabsApp
     </copy>
     ```
-   ![<restart_raft_ui_app>](./images/restart_raft_ui_app.png " ")
+   ![<verify_raft_ui_app>](./images/verify_raft_ui_app.png " ")
 
 2. For some reasons if you want to restart the RAFT Demo UI, it can be stopped then started:
     ```
@@ -197,6 +197,6 @@ This lab assumes you have:
 
 
 ## Acknowledgements
-* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
+* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
