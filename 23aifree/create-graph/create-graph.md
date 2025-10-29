@@ -1,22 +1,24 @@
-# Setup 
+# Setup
 
 ## Introduction
 
-You will be creating an Operational Property Graph inside of Graph Studio, one of the applications that's available in 23ai Autonomous Database. 
+You will be creating an Operational Property Graph inside of Graph Studio, one of the applications that's available in Autonomous AI Database.
 
 Estimated Time: 10 minutes
 
 ### Objective
 
 In this lab, you will:
+
 * Open up Graph Studio
-* Create an Operational Property Graph 
+* Create an Operational Property Graph
 
 ### Prerequisites
 
 This lab assumes you have:
-* Access to an Oracle Always Free Autonomous Database 23ai
-- The bank\_accounts and bank\_transfers tables exist. 
+
+* Access to an Oracle Autonomous AI Database
+* The bank\_accounts and bank\_transfers tables exist.
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. The lab instructions on the left might not match the workshop you are currently in, but the steps in the terminal on the right remain the same.
@@ -29,7 +31,7 @@ These files we will not be using throughout the lab, but are available if you wo
 
 1. Click [this link] (https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/23aifree-property-graph.zip) to download the zip file with our property graph setup materials.
 
-2. Unzip the files. You should see these files available. 
+2. Unzip the files. You should see these files available.
 
     ![Content of the zip file](images/1-unzip.png)
 
@@ -61,7 +63,7 @@ These files we will not be using throughout the lab, but are available if you wo
 
     ![Locating the Graph Studio URL](images/2-graph-studio-url.png)
 
-3. Sign into Graph Studio. 
+3. Sign into Graph Studio.
 
     Username: hol23ai
 
@@ -74,8 +76,8 @@ These files we will not be using throughout the lab, but are available if you wo
    
     ![Shows where the create button modeler is](images/graph-create-button.png " ")  
 
-4. Enter `bank_graph` as the graph name, then click **next**. The description is optional.   
-    That graph name is used throughout the next lab. **Do not enter a different name** because then the queries and code snippets in the next lab will fail.  
+4. Enter `bank_graph` as the graph name, then click **next**. The description is optional.
+    That graph name is used throughout the next lab. **Do not enter a different name** because then the queries and code snippets in the next lab will fail.
     
     ![Shows the create graph window where you assign the graph a name](./images/create-graph-dialog.png " ")
 
@@ -109,9 +111,10 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-* [Introducing Oracle Database 23ai Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
+* [Introducing Oracle AI Database 26ai: Next-Gen AI-Native Database for All Your Data](https://blogs.oracle.com/database/post/oracle-announces-oracle-ai-database-26ai)
 
 ## Acknowledgements
+
 * **Author** - Kaylien Phan, William Masdon
-* **Contributors** - David Start
-* **Last Updated By/Date** - Renée Wikestad, June 2025
+* **Contributors** - David Start, Renée Wikestad
+* **Last Updated By/Date** - Denise Myrick, October 2025
