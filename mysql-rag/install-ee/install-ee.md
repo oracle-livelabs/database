@@ -19,7 +19,7 @@ In this lab, you will be guided through the following tasks:
 
 This lab assumes you have:
 
-- Completed Labs 3 
+- Completed Labs 4 
 - or a working Oracle Linux machine
 
 ## Task 1: Get MySQL Enterprise Edition Download from Oracle Technology Network (OTN)
@@ -166,4 +166,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Craig Shallahamer, Applied AI Scientist, Viscosity North America
 - **Contributor** - Perside Foster, MySQL Solution Engineering 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , April 2025
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , July 2025

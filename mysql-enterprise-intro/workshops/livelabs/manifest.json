@@ -14,30 +14,37 @@
             "filename": "../../introduction/introduction.md"
         },
 
+ 
         {
-          "title": "Lab 1: Create a Compute instance ",
-          "filename": "../../create-compute-livelab/create-compute-livelab.md"
+          "title": "Lab 1: View your Virtual Cloud Network",
+          "filename": "../../view-vcn/view-vcn.md"
         },
 
         {
-          "title": "Lab 2: Install Enterprise Edition",
+          "title": "Lab 2: Create a Compute instance",
+          "filename": "../../create-compute-livelabs/create-compute-livelabs.md"
+        },
+
+        {
+          "title": "Lab 3: Install Enterprise Edition",
           "filename": "../../install-ee/install-ee.md"
         },
 
         {
-          "title": "Lab 3: Setup Sakila Sample Database and JavaScript Stored Function",
+          "title": "Lab 4: Setup Sakila Sample Database and JavaScript Stored Function",
           "filename": "../../setup-sakila/setup-sakila.md"
         },
 
+
         {
 
-          "title": "Lab 4: Install, configure, and test Apache/PHP Web Application",
+          "title": "Lab 5: Install, configure, and test Apache/PHP Web Application",
           "filename": "../../develop-php/develop-php.md"
         },
 
         {
 
-          "title": "Lab 5: Install, configure, and test Flask/Python Web Application",
+          "title": "Lab 6: Install, configure, and test Flask/Python Web Application",
           "filename": "../../develop-python/develop-python.md"
         },
 

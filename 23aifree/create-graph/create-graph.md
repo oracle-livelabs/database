@@ -6,7 +6,7 @@ You will be creating an Operational Property Graph inside of Graph Studio, one o
 
 Estimated Time: 10 minutes
 
-### Objectives
+### Objective
 
 In this lab, you will:
 * Open up Graph Studio
@@ -114,4 +114,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Author** - Kaylien Phan, William Masdon
 * **Contributors** - David Start
-* **Last Updated By/Date** - Ramu Murakami Gutierrez, December 2024
+* **Last Updated By/Date** - Renée Wikestad, June 2025
