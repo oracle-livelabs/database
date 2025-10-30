@@ -39,13 +39,13 @@
 
         {
 
-          "title": "Lab 5: Exploring JSON Duality Views with MySQL ",
+          "title": "Lab 5: Explore JSON Duality Views with MySQL ",
           "filename": "../ddl/ddl.md"
         },
 
         {
 
-          "title": "Lab 6: Modifying Data with JSON Relational Duality Views ",
+          "title": "Lab 6: Modify Data with JSON Relational Duality Views ",
           "filename": "../dml/dml.md"
         },
 

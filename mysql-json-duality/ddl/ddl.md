@@ -1,4 +1,4 @@
-# Exploring JSON Duality Views with MySQL
+# Explore JSON Duality Views with MySQL
 
 ## Introduction
 

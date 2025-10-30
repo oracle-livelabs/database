@@ -1,4 +1,4 @@
-# Modifying Data with JSON Relational Duality Views
+# Modify Data with JSON Relational Duality Views
 
 ## Introduction
 
