@@ -1,18 +1,21 @@
-# Operational Property Graphs Example with SQL/PGQ in 23ai
+# Operational Property Graphs Example with SQL/PGQ in Oracle AI Database
 
 ## Introduction
 
 In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ, a new extension in SQL:2023.
 ​
-
 Estimated Time: 30 minutes.
 ​
 ### Objectives
+
 Learn how to:
+
 - Use APEX and SQL/PGQ to define and query a property graph.
 ​
 ### Prerequisites
-This lab assumes:  
+
+This lab assumes:
+
 - The database user exists and has the right roles and privileges.
 
 <!-- <if type="livelabs">
@@ -137,7 +140,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 ​
 6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 
 
-    Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 23ai.
+    Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle AI Database.
    
     ```
     <copy>
@@ -313,7 +316,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running deepwalk](images/deepwalk.png)
 
-24. Now we will **train the DeepWalk model**. Run the following paragraph.
+16. Now we will **train the DeepWalk model**. Run the following paragraph.
 
     ```
     <copy>
@@ -327,7 +330,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![training deepwalk model](images/train-deepwalk.png) 
 
-16. Let's get the **most similar nodes to account 934** with respect to transfer patterns.
+17. Let's get the **most similar nodes to account 934** with respect to transfer patterns.
 
     ```
     <copy>
@@ -340,7 +343,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running deepwalk for account 934](images/deepwalk934.png)
 
-17. Now we will take look at **similar nodes to account 387** with respect to transfer patterns.
+18. Now we will take look at **similar nodes to account 387** with respect to transfer patterns.
 
     ```
     <copy>
@@ -355,7 +358,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     We see that 135 shows up as the account closest to 934 and 387, in terms of the patterns of the connections that account is involved in.
 
-18. **When we query for transactions 2 hops away from 934, 387, or 135, we see that their patterns are similar**. Let's add a highlight to see these accounts by giving them a 'star' icon. You can also right-click on them to check their account ids.
+19. **When we query for transactions 2 hops away from 934, 387, or 135, we see that their patterns are similar**. Let's add a highlight to see these accounts by giving them a 'star' icon. You can also right-click on them to check their account ids.
 
     ```
     <copy>
@@ -370,15 +373,15 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![visualize 2 hops](images/2-hops.png) 
 
-
 You have now completed this lab.
 
 ## Learn More
-* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
-* [SQL Property Graph syntax in Oracle Database 23ai Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+- [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+- [Graph Developer's Guide for Property Graph - SQL DDL Statements for Property Graphs](https://docs.oracle.com/en/database/oracle/property-graph/25.4/spgdg/sql-ddl-statements-property-graphs.html)
 
 ## Acknowledgements
 
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
 - **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Ramu Murakami Gutierrez, December 18th 2024
+- **Last Updated By/Date** - Denise Myrick, October 2025
