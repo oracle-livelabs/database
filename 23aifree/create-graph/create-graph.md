@@ -57,11 +57,11 @@ These files we will not be using throughout the lab, but are available if you wo
 
 1. Click View Login Info on your LiveLabs reservation.
 
-    ![Clicking for login info in LiveLabs](images/1-view-login-info.png)
+    ![Clicking for login info in LiveLabs](images/view-login-info.png)
 
 2. On the right hand side underneath Terraform Values, click the Graph Studio URL.
 
-    ![Locating the Graph Studio URL](images/2-graph-studio-url.png)
+    ![Locating the Graph Studio URL](images/graph-studio-url.png)
 
 3. Sign into Graph Studio.
 
@@ -71,37 +71,37 @@ These files we will not be using throughout the lab, but are available if you wo
 
     ![Signing into Graph Studio](images/3-graph-studio-login.png)
 
-3. Click the **Graph** icon to navigate to create your graph.  
+4. Click the **Graph** icon to navigate to create your graph.  
     Then click **Create Graph**.  
    
-    ![Shows where the create button modeler is](images/graph-create-button.png " ")  
+    ![Shows where the create button modeler is](images/graph-create-button-v1.png " ")  
 
-4. Enter `bank_graph` as the graph name, then click **next**. The description is optional.
+5. Enter `bank_graph` as the graph name, then click **Vext**. The description is optional.
     That graph name is used throughout the next lab. **Do not enter a different name** because then the queries and code snippets in the next lab will fail.
     
     ![Shows the create graph window where you assign the graph a name](./images/create-graph-dialog.png " ")
 
-5. Expand **GRAPHUSER** and select the `BANK_ACCOUNTS` and `BANK_TRANSFERS` tables. 
+6. Expand **HOL23AI** and select the `BANK_ACCOUNTS` and `BANK_TRANSFERS` tables.
 
-    ![Shows how to select the BANK_ACCOUNTS and BANK_TXNS](./images/select-tables.png " ")
+    ![Shows how to select the BANK_ACCOUNTS and BANK_TXNS](./images/select-tables-v1.png " ")
 
-6. Move them to the right, that is, click the first icon on the shuttle control.   
+7. Move them to the right, that is, click the first icon on the shuttle control.   
 
-    ![Shows the selected tables](./images/selected-tables.png " ")
+    ![Shows the selected tables](./images/selected-tables-v1.png " ")
 
-7. Click **Next**.  
+8. Click **Next**.  
 
-    The suggested graph has the `BANK_ACCOUNTS` as a vertex table since there are foreign key constraints specified on `BANK_TRANSFERS` that reference it.   
+    The suggested graph has the `BANK_ACCOUNTS` as a vertex table since there are foreign key constraints specified on `BANK_TRANSFERS` that reference it.
 
     And `BANK_TRANSFERS` is a suggested edge table. Click **Next**.
 
-    ![Shows the vertex and edge table](./images/create-graph-suggested-model.png " ")    
+    ![Shows the vertex and edge table](./images/create-graph-suggested-model-v1.png " ")
 
-7. In the Summary step, click on **Create Graph**. This will open a Create Graph tab, click on **Create Graph. 
+9. In the Summary step, click on **Create Graph**. This will open a Create Graph tab, click on **Create Graph**.
 
     ![Shows the job tab with the job status as successful](./images/jobs-create-graph.png " ")  
 
-    This will open a Create Graph tab, click on **Create Graph**. 
+    This will open a Create Graph tab, click on **Create Graph**.
 
     ![Shows in-memory enabled and the create graph button](./images/create-graph-in-memory.png " ")
 

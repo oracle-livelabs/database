@@ -43,7 +43,7 @@ Watch the video below for a quick walk-through of the lab.
 [Change password](videohub:1_ovgflc5c)
 </if>
 
-## Task 1 : Define a graph view on these tables
+## Task 1: Define a graph view on these tables
 
 1. In your SQL Developer window, click on the tab named hol23c_freepdb1 or hol23c, not the CreateKeys.sql tab that you are currently in.
 
@@ -114,7 +114,7 @@ Watch the video below for a quick walk-through of the lab.
 ​
     ![Properties for labels](images/property-labels.png)
 ​
-## Task 2 : Query the bank_graph
+## Task 2: Query the bank_graph
 ​
 In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH clause, and COLUMNS clause. The GRAPH\_TABLE operator enables you to query the property graph by specifying a graph pattern to look for and return the results as a set of columns. The MATCH clause lets you specify the graph patterns, and the COLUMN clause lists the query output columns. Everything else is existing SQL syntax.
 ​

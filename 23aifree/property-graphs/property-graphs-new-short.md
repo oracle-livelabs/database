@@ -27,7 +27,7 @@ Watch the video below for a quick walk-through of the lab.
 
  You can import a notebook that has the graph queries and analytics. Each paragraph in the notebook has an explanation.  You can review the explanation, and then run the query or analytics algorithm.
 
-  [Click here to download the notebook](link to notebook) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the MOVIE_RECOMMENDATIONS graph.
+  [Click here to download the notebook](link to notebook) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the BANK_GRAPH graph.
 
  1. Click the **Notebook** icon. Import a notebook by clicking on the notebook icon on the left, and then clicking on the **Import** icon on the far right.
 
@@ -46,6 +46,7 @@ In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH cla
 A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 
 >**Note**: We created the graph using the Graph Studio modeler. However, in the following paragraph, we provide the **CREATE PROPERTY GRAPH SQL statement**, which you can use to create a graph anywhere SQL queries are supported.
+
 ​    ```
     %sql
     CREATE PROPERTY GRAPH BANK_GRAPH 
