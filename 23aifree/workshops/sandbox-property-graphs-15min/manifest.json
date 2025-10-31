@@ -1,10 +1,10 @@
 {
-    "workshoptitle": "Exploring Operational Property Graphs in 23ai Free",
+    "workshoptitle": "Exploring Operational Property Graphs in Oracle AI Database",
       "help": "livelabs-help-sg_us@oracle.com",
       "tutorials": [
         {
             "title": "Introduction",
-            "description": "This is an introduction to Oracle Database 23ai.",
+            "description": "This is an introduction to Oracle AI Database.",
             "type": "livelabs",
             "filename": "../../introduction/intro-property-graphs-15.md"
         },
@@ -15,7 +15,7 @@
         },
         {
           "title": "Lab 1: Creating and working with Property Graphs",
-          "description": "Using Property Graphs in 23ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "livelabs",
           "filename": "../../create-graph-15/property-graphs-15.md"
         },

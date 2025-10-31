@@ -47,6 +47,7 @@ In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH cla
 A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 
 >**Note**: We created the graph using the Graph Studio modeler. However, in the following paragraph, we provide the **CREATE PROPERTY GRAPH SQL statement**, which you can use to create a graph anywhere SQL queries are supported.
+
 ​    ```
     %sql
     CREATE PROPERTY GRAPH BANK_GRAPH 
@@ -65,7 +66,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
 1. Let's use SQL to find the **top 10 accounts by number of transfers** the account has received. Run the paragraph with the following query.
-    
+
     ```
     <copy>
     SELECT acct_id, COUNT(1) AS Num_Transfers 
@@ -79,7 +80,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ![Most incoming transfers accounts](images/8-num-transfers.png)
 ​
     We see that accounts **387** and **934** have a high number of incoming transactions.
-    
+
 2.  What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
     
     ```
