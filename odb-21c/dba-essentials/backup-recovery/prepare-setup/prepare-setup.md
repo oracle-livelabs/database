@@ -15,7 +15,7 @@ This lab will show you how to download the Oracle Resource Manager (ORM) stack z
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
-    - [db21c-dbae-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/jp-H9yF7Ryb-wk6tPibxVxiBpEO-XXQja8pbbJMQ1dD3OMrl-IIPPIRPPOu2PKwr/n/c4u02/b/hosted_workshops/o/stacks/db21c-dbae-mkplc-freetier.zip)
+    - [db21c-dbae-mkplc-freetier.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/db21c-dbae-mkplc-freetier.zip)
 
 2.  Save in your downloads folder.
 
