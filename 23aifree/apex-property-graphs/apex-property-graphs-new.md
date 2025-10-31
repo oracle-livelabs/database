@@ -28,7 +28,7 @@ This lab assumes:
 
 1. Go back to LiveLabs and click on View Login Details, and then APEX URL to open your APEX workspace in a new tab.
 
-    ![Retrieving APEX URL from login details](images/1-apex-url.png)
+    ![Retrieving APEX URL from login details](images/apex-url.png)
 
 2. Fill out your password with your ATP Admin Password that's underneath your Terraform variables in your Login Details.
 
