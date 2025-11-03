@@ -1,4 +1,4 @@
-# Operational Property Graphs Example with SQL/PGQ in 23ai
+# Operational Property Graphs Example with SQL/PGQ in 26ai
 
 ## Introduction
 
@@ -8,11 +8,15 @@ In this lab you will query the newly created graph (that is, `bank_graph`) using
 Estimated Time: 30 minutes.
 ​
 ### Objectives
+
 Learn how to:
+
 - Use APEX and SQL/PGQ to define and query a property graph.
 ​
 ### Prerequisites
-This lab assumes:  
+
+This lab assumes:
+
 - The database user exists and has the right roles and privileges.
 
 <!-- <if type="livelabs">
@@ -43,6 +47,7 @@ In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH cla
 A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 
 >**Note**: We created the graph using the Graph Studio modeler. However, in the following paragraph, we provide the **CREATE PROPERTY GRAPH SQL statement**, which you can use to create a graph anywhere SQL queries are supported.
+
 ​    ```
     %sql
     CREATE PROPERTY GRAPH BANK_GRAPH 
@@ -61,7 +66,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
 1. Let's use SQL to find the **top 10 accounts by number of transfers** the account has received. Run the paragraph with the following query.
-    
+
     ```
     <copy>
     SELECT acct_id, COUNT(1) AS Num_Transfers 
@@ -75,7 +80,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ![Most incoming transfers accounts](images/8-num-transfers.png)
 ​
     We see that accounts **387** and **934** have a high number of incoming transactions.
-    
+
 2.  What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
     
     ```
@@ -105,7 +110,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     ![Accounts that received a transfer](images/10-transfers-to-387.png)
 
-4. We looked at accounts with the most incoming transfers and those which were simply conduits. Now let's query the graph to determine if there are any circular payment chains, i.e. a sequence of transfers that start and end at the same account. First let's check if there are **any 3-hop (triangles) transfers that start and end at the same account**. 
+4. We looked at accounts with the most incoming transfers and those which were simply conduits. Now let's query the graph to determine if there are any circular payment chains, i.e. a sequence of transfers that start and end at the same account. First let's check if there are **any 3-hop (triangles) transfers that start and end at the same account**.
 
     This query lists such accounts, ordered by the number of triangles that start and end with that account.
     
@@ -135,9 +140,9 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 ​
     ![4hop transfers](images/12-num-4hop-chains.png)
 ​
-6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 
+6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 5.
 
-    Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 23ai.
+    Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 26ai.
    
     ```
     <copy>
@@ -415,7 +420,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running pagerank results](images/run-pagerank-results.png)
 
-    We see that **Russell Rivera's is in the top 5**. So this metric also indicates that a large number of transactions flow through Russell Rivera's account.
+    We see that **Russell Rivera is in the top 5**. So this metric also indicates that a large number of transactions flow through Russell Rivera's account.
     But he is not at the very top, and interestingly **Antonia Mclachlan is at the top of the list**.
 
 23. Now let's use the **computed PageRank value** in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
@@ -436,7 +441,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![visualize 3 hop payment chain](images/3-hop-payment.png) 
 
-    From this visualization we can quickly see **which accounts that are connected to Antonia Maclachlan also have a high pagerank value**.
+    From this visualization we can quickly see **which accounts that are connected to Antonia Maclachlan also have a high PageRank value**.
 
 24. So far, we used the knowledge that a highly connected account might be fraudulent, or when money moves in a cycle then there is potential fraud. What if we did **not know this about this specific domain**, that cycles might indicate fraud? What if we only new that accounts 934 and 387 are fraudulent, but did not have the additional information on what patterns might constitute fraud?
 
@@ -512,15 +517,15 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![visualize 2 hops](images/2-hops.png) 
 
-
 You have now completed this lab.
 
 ## Learn More
-* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
-* [SQL Property Graph syntax in Oracle Database 23ai Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+- [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+- [Graph Developer's Guide for Property Graph - SQL DDL Statements for Property Graphs](https://docs.oracle.com/en/database/oracle/property-graph/25.4/spgdg/sql-ddl-statements-property-graphs.html)
 
 ## Acknowledgements
 
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
-- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Renée Wikestad June 2025
+- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker, Renée Wikestad
+- **Last Updated By/Date** - Denise Myrick, October 2025
