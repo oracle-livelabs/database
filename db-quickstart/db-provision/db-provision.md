@@ -11,7 +11,7 @@ Estimated Time: 5 minutes
 In this lab, you will:
 
 -   Create an Oracle Cloud Infrastructure compartment
--   Provision a new Autonomous AI Database
+-   Provision a new Autonomous AI Database instance
 
 ### Prerequisites
 
@@ -153,7 +153,7 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author:** Lauran K. Serhal, Consulting User Assistance Developer
-- **Last Updated By/Date:** Lauran K. Serhal, October 2025
+- **Last Updated By/Date:** Lauran K. Serhal, November 2025
 - **Built with Common Tasks**
 
 Data about movies in this workshop were sourced from Wikipedia.
