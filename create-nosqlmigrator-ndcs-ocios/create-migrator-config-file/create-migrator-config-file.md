@@ -64,7 +64,7 @@ To configure the Migrator utility to copy data from an Oracle NoSQL Database Clo
     ```
     <copy>
     endpoint: "us-ashburn-1"
-    compartment: "ocid1.compartment.oc1..aaaaaaaahcrgrgptoaq4cgpoymd32ti2ql4sdpu5puroausdf4og55z4tnya"
+    compartment: "ocid1.compartment.oc1..aa..tnya"
     table: "NDCSupload"
     </copy>
     ```
@@ -108,7 +108,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
     endpoint: "us-ashburn-1"
     bucket: "Migrate_oci"
     prefix: "Delegation"
-    namespace: "oradbclouducm" 
+    namespace: "or....m" 
     </copy>
     ```
 
@@ -134,7 +134,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
         "type" : "nosqldb_cloud",
         "endpoint" : "us-ashburn-1",
         "table" : "NDCSupload",
-        "compartment" : "ocid1.compartment.oc1.. aaaaaaaahcrgrgptoaq4cgpoymd32ti2ql4sdpu5puroausdf4og55z4tnya",
+        "compartment" : "ocid1.compartment.oc1.. aa..tnya",
         "useDelegationToken" : true,
         "readUnitsPercent" : 90,
         "includeTTL" : true,
@@ -144,7 +144,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
         "type" : "object_storage_oci",
         "format" : "json",
         "endpoint" : "us-ashburn-1",
-        "namespace" : "oradbclouducm",
+        "namespace" : "or....m",
         "bucket" : "Migrate_oci",
         "prefix" : "Delegation",
         "chunkSize" : 32,
