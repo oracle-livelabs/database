@@ -16,14 +16,6 @@ Click [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt
 ### **What is an Oracle Autonomous AI Database?**
 An autonomous database is a cloud database that uses machine learning to automate database tuning, security, backups, updates, and other routine management tasks traditionally performed by DBAs. Unlike a conventional database, an autonomous database performs all these tasks and more without human intervention. You don’t need to spend time thinking about how you should store your data, when or how to back it up or how to tune your queries. We take care of everything for you.
 
-Watch our 11-minute video that explains key features in Oracle's Autonomous AI  Database:
-
-[](youtube:c-DUIePFKco)
-
-Watch a more in-depth 43-minute video that looks "under the hood" at the technology driving Oracle's Autonomous AI Database:
-
-[](youtube:2ZPTNtoXVQ8)
-
 Oracle’s Autonomous AI Database is the perfect quick-start service for fast data loading and sophisticated data reporting and analysis. Oracle manages everything for you so you can focus on your data.
 
 Estimated Workshop Time: 70 minutes

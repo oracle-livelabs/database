@@ -1,13 +1,5 @@
 # Provision an Autonomous AI Database
 
-## Introduction
-
-#### Video Preview
-
-<!--[](youtube:BvSkiWWhuN4)-->
-
-[Provision an Autonomous AI Database](videohub:1_o5aynk24)
-
 In just a few minutes, Autonomous AI Database lets you deploy a complete data warehousing platform that can scale to your requirements. And, you can use its Database Tools to easily populate that warehouse from the data lake.
 
 This lab walks you through the steps to get started using the Oracle Autonomous AI Database on Oracle Cloud Interface. In this lab, you provision a new Oracle Autonomous AI Lakehouse instance.
@@ -19,7 +11,7 @@ Estimated Time: 5 minutes
 In this lab, you will:
 
 -   Create an Oracle Cloud Infrastructure compartment
--   Provision a new Autonomous AI Database
+-   Provision a new Autonomous AI Database instance
 
 ### Prerequisites
 
@@ -161,7 +153,7 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author:** Lauran K. Serhal, Consulting User Assistance Developer
-- **Last Updated By/Date:** Lauran K. Serhal, October 2025
+- **Last Updated By/Date:** Lauran K. Serhal, November 2025
 - **Built with Common Tasks**
 
 Data about movies in this workshop were sourced from Wikipedia.

@@ -43,11 +43,11 @@ In this lab, you will:
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-5. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
+5. In the field **Collection Name**, provide the name **movies**. Leave MongoDB Compatible radio button checked.  Then click **Create**.
 
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
-	![New Collection: movies](./images/collection-name.png)
+	![New Collection: movies](./images/collection-name-mongodb-checked.png)
 
 6. A notification pops up that displays **movies** collections has been created.
 
@@ -352,4 +352,4 @@ You may now proceed to the next lab.
 
 * **Author** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025
