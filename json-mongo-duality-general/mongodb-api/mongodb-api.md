@@ -528,4 +528,4 @@ That was a quick run-through of using JSON Collections with the MongoDB compatib
 
 * **Authors** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-- **Last Updated By/Date** - Hermann Baer, April 2025
+- **Last Updated By/Date** - Eileen Beck, November 2025

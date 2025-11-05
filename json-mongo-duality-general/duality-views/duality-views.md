@@ -506,4 +506,4 @@ You might have noticed that any JSON document in a Duality View carried addition
 ## Acknowledgements
 * **Author** - Hermann Baer
 * **Contributors** - Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025

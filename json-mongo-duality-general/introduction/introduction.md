@@ -89,4 +89,4 @@ You may now proceed to the next lab.
 
 * **Author** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025
