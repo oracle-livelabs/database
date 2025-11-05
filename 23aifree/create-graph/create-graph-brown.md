@@ -18,7 +18,6 @@ In this lab, you will:
 This lab assumes you have:
 
 * Access to an Oracle Autonomous AI Database
-* The bank\_accounts and bank\_transfers tables exist.
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. The lab instructions on the left might not match the workshop you are currently in, but the steps in the terminal on the right remain the same.
@@ -26,8 +25,6 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 </if> -->
 
 ## Task 1: Setup materials
-
-These files we will not be using throughout the lab, but are available if you would like to see what commands we chose to create the schema with (CreateKeys.sql) or the data that populates the tables that we've created (BANK\_ACCOUNTS.csv and BANK\_TRANSFERS.csv).
 
 1. Click [this link](https://objectstorage.us-ashburn-1.oraclecloud.com/p/gBR_pM9Rzu7d91U6pPkaa-sUZeGRr81D3W9S-7n_3HLz08-hrQZhovqYBvA1mBMN/n/oradbclouducm/b/OperationalPropertyGraphs/o/26ai-property-graph.zip) to download the zip file with our property graph setup materials.
 
@@ -53,43 +50,73 @@ These files we will not be using throughout the lab, but are available if you wo
     | AMOUNT |  | NUMBER |
     {: title="BANK_TRANSFERS"}
 
-## Task 2: Create the Property Graph
+## Task 2: Load data from files
 
-1. Click View Login Info on your LiveLabs reservation.
+You begin by loading data for bank accounts and bank transfers from CSV files.
 
-    ![Clicking for login info in LiveLabs](images/view-login-info.png)
+1. Sign out of Admin and sign into your graph user account.
+    ![Prepare graph data](images/create-data-00.png)
 
-2. On the right hand side underneath Terraform Values, click the Graph Studio URL.
+2. Load the files to database tables. In Database actions, click on the hamburger icon at the top left and then click **Data Load**.
+    ![Prepare graph data](images/create-data-01.png)
 
-    ![Locating the Graph Studio URL](images/graph-studio-url.png)
+3. Select **LOAD DATA**.
 
-3. Sign into Graph Studio.
+ ![Prepare graph data](images/create-data-02.png)
 
-    Username: hol23ai
+4. Select the 2 .csv files you downloaded, then drag and drop them onto the Data Load page.
 
-    Password: Listed underneath Terraform Values -> User Password (hol23ai).
+ ![Prepare graph data](images/create-data-03.png)
 
-    ![Signing into Graph Studio](images/3-graph-studio-login.png)
+5. Click **Start** and the click **Run**
 
-4. Click the **Graph** icon to navigate to create your graph.  
+ ![Prepare graph data](images/create-data-04.png)
+
+6. Click the main hamburger icon at the top left, and then select SQL.
+
+ ![Prepare graph data](images/launch-sql.png)
+
+7. Confirm that the 2 tables are now created.
+
+ ![Prepare graph data](images/created-tables.png)
+
+8. Copy and paste the contents of the file CreateKeys.sql into the worksheet.
+
+ ![Prepare graph data](images/create-keys.png)
+
+9. Click **Run Script**.
+
+ ![Prepare graph data](images/run-script.png)
+
+## Task 3: Create the Property Graph
+
+1. Launch Graph Studio. In Database actions, click on the hamburger icon at the top left and then click **Graph Studio**.
+
+    ![Clicking for login info in LiveLabs](images/launch-graph-studio.png)
+
+2. Sign into Graph Studio.
+
+    ![Signing into Graph Studio](images/graph-studio-login.png)
+
+3. Click the **Graph** icon to navigate to create your graph.  
     Then click **Create Graph**.  
    
     ![Shows where the create button modeler is](images/graph-create-button-v1.png " ")  
 
-5. Enter `bank_graph` as the graph name, then click **Next**. The description is optional.
+4. Enter `bank_graph` as the graph name, then click **Next**. The description is optional.
     That graph name is used throughout the next lab. **Do not enter a different name** because then the queries and code snippets in the next lab will fail.
     
     ![Shows the create graph window where you assign the graph a name](./images/create-graph-dialog.png " ")
 
-6. Expand **HOL23AI** and select the `BANK_ACCOUNTS` and `BANK_TRANSFERS` tables.
+5. Expand **GRAPHUSER** (or whatever name you gave your graph user) and select the `BANK_ACCOUNTS` and `BANK_TRANSFERS` tables.
 
     ![Shows how to select the BANK_ACCOUNTS and BANK_TXNS](./images/select-tables-v1.png " ")
 
-7. Move them to the right, that is, click the first icon on the shuttle control.   
+6. Move them to the right, that is, click the first icon on the shuttle control.   
 
     ![Shows the selected tables](./images/selected-tables-v1.png " ")
 
-8. Click **Next**.  
+7. Click **Next**.  
 
     The suggested graph has the `BANK_ACCOUNTS` as a vertex table since there are foreign key constraints specified on `BANK_TRANSFERS` that reference it.
 
@@ -97,7 +124,7 @@ These files we will not be using throughout the lab, but are available if you wo
 
     ![Shows the vertex and edge table](./images/create-graph-suggested-model-v1.png " ")
 
-9. In the Summary step, click on **Create Graph**. This will open a Create Graph tab, click on **Create Graph**.
+8. In the Summary step, click on **Create Graph**. This will open a Create Graph tab, click on **Create Graph**.
 
     ![Shows the job tab with the job status as successful](./images/jobs-create-graph.png " ")  
 
@@ -117,4 +144,4 @@ You may now proceed to the next lab.
 
 * **Author** - Kaylien Phan, William Masdon
 * **Contributors** - David Start, Renée Wikestad
-* **Last Updated By/Date** - Denise Myrick, October 2025
+* **Last Updated By/Date** - Denise Myrick, November 2025

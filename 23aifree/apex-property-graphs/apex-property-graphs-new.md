@@ -98,20 +98,20 @@ This lab assumes:
 
     **NOTE:** graph is case-sensitive.
 
-    ![Log back in](images/15-login-app.png)
+    ![Log back in](images/login-app-v1.png)
 
 10. Click Property Graph queries with SQL box.
-    ![Property graph queries selection](images/16-homepage.png)
+    ![Property graph queries selection](images/homepage-v1.png)
     
 11. Scroll through output to see the queries that you had ran in the prior lab visualized.
-    ![Final scroll through the output](images/17-query-page.png)
+    ![Final scroll through the output](images/query-page-v1.png)
 
 12. Click the hamburger menu in the upper left corner of the application and click "Using the Graph Visualization Plugin".
 
-    ![Hamburger menu options](images/17-menu.png)
+    ![Hamburger menu options](images/menu-v1.png)
 
 13. Scroll through the output to see the Graph Viz plugin utilized.
-    ![Graph viz](images/18-graph-viz-page.png)
+    ![Graph viz](images/graph-viz-page-v1.png)
 
 14. You have now completed this lab.
 
