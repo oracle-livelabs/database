@@ -78,7 +78,7 @@ This lab assumes:
 
     ![Import from app builder](images/10-import-workspace.png)
 
-5. Click to add a file to open for import. In the beginning of this lab, you had downloaded and unzipped a zip file. Within there, you should navigate to the graph folder -> f106.sql. Leave the defaults and click Next.
+5. Click to add a file to open for import. In the beginning of this workshop, you downloaded and unzipped a zip file. Within there, you should navigate to the graph folder -> f106.sql. Leave the defaults and click Next.
 
     ![Import f106 sql file](images/file-import.png)
 

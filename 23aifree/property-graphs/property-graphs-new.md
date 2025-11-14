@@ -29,7 +29,7 @@ Watch the video below for a quick walk-through of the lab.
 
  You can import a notebook that has the graph queries and analytics. Each paragraph in the notebook has an explanation.  You can review the explanation, and then run the query or analytics algorithm.
 
-  [Click here to download the notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/iHXFYzQcmh_dASlRYzZIEEVT-6hjwGbJPt5iHPC9hx6KA2BlSxsQ7P2d3hzFhsKE/n/oradbclouducm/b/OperationalPropertyGraphs/o/BANK_GRAPH_26ai_alg.dsnb) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the BANK_GRAPH graph.
+  [Click here to download the notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/HumxEAuTIN5IyHEDRS2WZVuL9NEydm3cT84HVRBjK2vIBqPlc967wo0qM7vZ1aWM/n/oradbclouducm/b/OperationalPropertyGraphs/o/BANK_GRAPH_26ai_alg.dsnb) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the BANK_GRAPH graph.
 
  1. Click the **Notebook** icon. Import a notebook by clicking on the notebook icon on the left, and then clicking on the **Import** icon on the far right.
 

@@ -29,7 +29,7 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 
 These files we will not be using throughout the lab, but are available if you would like to see what commands we chose to create the schema with (CreateKeys.sql) or the data that populates the tables that we've created (BANK\_ACCOUNTS.csv and BANK\_TRANSFERS.csv).
 
-1. Click [this link](https://objectstorage.us-ashburn-1.oraclecloud.com/p/gBR_pM9Rzu7d91U6pPkaa-sUZeGRr81D3W9S-7n_3HLz08-hrQZhovqYBvA1mBMN/n/oradbclouducm/b/OperationalPropertyGraphs/o/26ai-property-graph.zip) to download the zip file with our property graph setup materials.
+1. Click [this link](https://objectstorage.us-ashburn-1.oraclecloud.com/p/J3-_Q3MMvb_J03-lN4o-eDtcJP0nGQC1OQaQkh3OUXab69VaXJuI1KSa8ZsB2vE1/n/oradbclouducm/b/OperationalPropertyGraphs/o/26ai-property-graph.zip) to download the zip file with our property graph setup materials.
 
 2. Unzip the files. You should see these files available.
 
