@@ -57,36 +57,29 @@ You begin by loading data for bank accounts and bank transfers from CSV files.
 1. Sign out of Admin and sign into your graph user account.
     ![Prepare graph data](images/create-data-00.png)
 
-2. Load the files to database tables. In Database actions, click on the hamburger icon at the top left and then click **Data Load**.
-    ![Prepare graph data](images/create-data-01.png)
-
-3. Select **LOAD DATA**.
-
- ![Prepare graph data](images/create-data-02.png)
-
-4. Select the 2 .csv files you downloaded, then drag and drop them onto the Data Load page.
-
- ![Prepare graph data](images/create-data-03.png)
-
-5. Click **Start** and the click **Run**
-
- ![Prepare graph data](images/create-data-04.png)
-
-6. Click the main hamburger icon at the top left, and then select SQL.
+2. In Database Actions, click the main hamburger icon at the top left, and then select SQL.
 
  ![Prepare graph data](images/launch-sql.png)
 
-7. Confirm that the 2 tables are now created.
+3. Click Data Load in the top right corner
 
- ![Prepare graph data](images/created-tables.png)
+ ![Load graph data](images/data-load-sql.png)
 
-8. Copy and paste the contents of the file CreateKeys.sql into the worksheet.
+4. Drag and drop the 2 .csv files (bank_accounts.csv and bank_transfers.csv) into the data load page.
 
- ![Prepare graph data](images/create-keys.png)
+ ![Load graph data](images/data-load-empty.png)
 
-9. Click **Run Script**.
+5. Click Upload
 
- ![Prepare graph data](images/run-script.png)
+ ![Load graph data](images/data-load-upload.png)
+
+6. Then click Close
+
+ ![Load graph data](images/data-load-close.png)
+
+7. Copy and paste the contents of the file CreateKeys.sql into the worksheet. Click **Run Script**.
+
+ ![Prepare graph data](images/create-keys-1.png)
 
 ## Task 3: Create the Property Graph
 
@@ -108,13 +101,13 @@ You begin by loading data for bank accounts and bank transfers from CSV files.
     
     ![Shows the create graph window where you assign the graph a name](./images/create-graph-dialog.png " ")
 
-5. Expand **GRAPHUSER** (or whatever name you gave your graph user) and select the `BANK_ACCOUNTS` and `BANK_TRANSFERS` tables.
+5. Expand **GRAPHUSER** and select the `BANK_ACCOUNTS` and `BANK_TRANSFERS` tables.
 
-    ![Shows how to select the BANK_ACCOUNTS and BANK_TXNS](./images/select-tables-v1.png " ")
+    ![Shows how to select the BANK_ACCOUNTS and BANK_TXNS](./images/select-tables-v2.png " ")
 
 6. Move them to the right, that is, click the first icon on the shuttle control.   
 
-    ![Shows the selected tables](./images/selected-tables-v1.png " ")
+    ![Shows the selected tables](./images/selected-tables-v2.png " ")
 
 7. Click **Next**.  
 
@@ -126,7 +119,7 @@ You begin by loading data for bank accounts and bank transfers from CSV files.
 
 8. In the Summary step, click on **Create Graph**. This will open a Create Graph tab, click on **Create Graph**.
 
-    ![Shows the job tab with the job status as successful](./images/jobs-create-graph.png " ")  
+    ![Shows the job tab with the job status as successful](./images/jobs-create-graph-v1.png " ")  
 
     This will open a Create Graph tab, click on **Create Graph**.
 

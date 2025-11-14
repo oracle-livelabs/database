@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ, a new extension in SQL:2023.
+In this lab you will query the newly created graph (`bank_graph`) using SQL/PGQ, an extension in SQL:2023.
 ​
 
 Estimated Time: 30 minutes.
@@ -18,6 +18,7 @@ Learn how to:
 This lab assumes:
 
 - The database user exists and has the right roles and privileges.
+- A property graph, named `bank_graph` has been created.
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
@@ -32,7 +33,7 @@ Watch the video below for a quick walk-through of the lab.
 
  1. Click the **Notebook** icon. Import a notebook by clicking on the notebook icon on the left, and then clicking on the **Import** icon on the far right.
 
-    ![Click the notebook icon and import the notebook.](images/task3step1.png " ")
+    ![Click the notebook icon and import the notebook.](images/import-notebook-button.png " ")
     
      Select or drag and drop the notebook and click **Import**.
 
@@ -142,7 +143,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 ​
 6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 5.
 
-    Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 26ai.
+    Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the SQL syntax for graphs in Oracle AI Database.
    
     ```
     <copy>

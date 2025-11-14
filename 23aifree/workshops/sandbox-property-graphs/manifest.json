@@ -21,7 +21,7 @@
       },
       {
           "title": "Lab 2: Configure setup materials and tools",
-          "description": "Creating the schema including JSON Duality Views",
+          "description": "Creating the schema",
           "type": "livelabs",
           "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
@@ -29,7 +29,7 @@
           "title": "Lab 3: Operational Property Graphs Example with SQL/PGQ in 26ai",
           "description": "Using Property Graphs in 26ai",
           "type": "livelabs",
-          "filename": "../../property-graphs/property-graphs.md"
+          "filename": "../../property-graphs/property-graphs-new.md"
       },
       {
           "title": "Bonus Lab: Integration with APEX",
