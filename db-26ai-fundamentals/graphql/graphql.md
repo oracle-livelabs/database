@@ -161,7 +161,7 @@ Before we begin, here are the key concepts you'll use:
       );
     </copy>
     ```
-    ![create tables](images/im1.png =40%x*)
+    ![create tables](images/create-table.png =40%x*)
 
 
 2. Check the tables were created:
@@ -179,7 +179,7 @@ Before we begin, here are the key concepts you'll use:
     - All 5 tables listed: CATEGORIES, CUSTOMERS, ORDERS, ORDER_ITEMS, PRODUCTS
     - These tables are connected by foreign keys, which GraphQL will use to navigate between them
       
-      ![create tables](images/im2.png =40%x*)
+      ![show the tables](images/show-table.png =40%x*)
 
 
 3. Now load sample e-commerce data into the tables. Again use the 'Run Script' button if you are using SQL Developer Web 
@@ -226,7 +226,7 @@ Before we begin, here are the key concepts you'll use:
     </copy>
     ```
 
-    ![create tables](images/im3.png =40%x*)
+    ![insert into table](images/insert.png =40%x*)
 
 
 4. We can check the data was loaded correctly.
@@ -258,7 +258,7 @@ Before we begin, here are the key concepts you'll use:
     - Notice the JOIN in the query above - GraphQL will let you get this same data without writing JOINs
 
 
-    ![create tables](images/im4.png =40%x*)
+    ![select from the table](images/select-table.png =40%x*)
 
 
 ## Task 2: Execute Basic GraphQL Queries
@@ -406,7 +406,7 @@ Basic GraphQL queries are useful, but real apps need to filter and sort data. Di
     - Only products in that price range: Dell XPS 13 ($1299), Gaming Laptop ROG ($1899), Samsung Galaxy S24 ($849)
     - Notice how we also got the category name by requesting `categories` inside products - GraphQL follows relationships in both directions
 
-    ![create tables](images/im5.png =40%x*)
+    ![create graphql query](images/graphql.png =40%x*)
 
 
 
