@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ, a new extension in SQL:2023.
+In this lab you will query the newly created graph (`bank_graph`) using SQL/PGQ, an extension in SQL:2023.
 ​
 
 Estimated Time: 30 minutes.
@@ -18,6 +18,7 @@ Learn how to:
 This lab assumes:
 
 - The database user exists and has the right roles and privileges.
+- A property graph, named `bank_graph` has been created.
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
@@ -28,15 +29,15 @@ Watch the video below for a quick walk-through of the lab.
 
  You can import a notebook that has the graph queries and analytics. Each paragraph in the notebook has an explanation.  You can review the explanation, and then run the query or analytics algorithm.
 
-  [Click here to download the notebook](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/IgAbg73m8_uWkH1JfjrdqqzgPLUM52ZauWRwA7tEb7C2NRDyXZBQAP8eUenQD4N8/n/c4u04/b/livelabsfiles/o/labfiles/BANK_GRAPH_23ai_alg.dsnb) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the MOVIE_RECOMMENDATIONS graph.
+  [Click here to download the notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/HumxEAuTIN5IyHEDRS2WZVuL9NEydm3cT84HVRBjK2vIBqPlc967wo0qM7vZ1aWM/n/oradbclouducm/b/OperationalPropertyGraphs/o/BANK_GRAPH_26ai_alg.dsnb) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the BANK_GRAPH graph.
 
  1. Click the **Notebook** icon. Import a notebook by clicking on the notebook icon on the left, and then clicking on the **Import** icon on the far right.
 
-    ![Click the notebook icon and import the notebook.](images/task3step1.png " ")
+    ![Click the notebook icon and import the notebook.](images/import-notebook-button.png " ")
     
      Select or drag and drop the notebook and click **Import**.
 
-    ![Select the notebook to import and click on Import.](images/task3step2.png " ")
+    ![Select the notebook to import and click on Import.](images/task3step2-v1.png " ")
 
     A dialog pops up named **Compute Environment**. It will disappear when the compute environment finishes attaching, usually in less than one minute. Or you can click **Close** to close the dialog and start working on your environment. Note that you will not be able to run any paragraph until the environment finishes attaching.
 ​
@@ -50,18 +51,18 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
 ​    ```
     %sql
-    CREATE PROPERTY GRAPH BANK_GRAPH 
+    CREATE PROPERTY GRAPH BANK_GRAPH
     VERTEX TABLES (
         BANK_ACCOUNTS
         KEY (ID)
-        PROPERTIES (ID, Name, Balance) 
+        PROPERTIES (ID, Name, Balance)
     )
     EDGE TABLES (
-        BANK_TRANSFERS 
-        KEY (TXN_ID) 
+        BANK_TRANSFERS
+        KEY (TXN_ID)
         SOURCE KEY (src_acct_id) REFERENCES BANK_ACCOUNTS(ID)
         DESTINATION KEY (dst_acct_id) REFERENCES BANK_ACCOUNTS(ID)
-        PROPERTIES (src_acct_id, dst_acct_id, amount) 
+        PROPERTIES (src_acct_id, dst_acct_id, amount)
         )
     ```
 
@@ -69,9 +70,9 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     ```
     <copy>
-    SELECT acct_id, COUNT(1) AS Num_Transfers 
-    FROM graph_table ( BANK_GRAPH 
-        MATCH (src) - [IS BANK_TRANSFERS] -> (dst) 
+    SELECT acct_id, COUNT(1) AS Num_Transfers
+    FROM graph_table ( BANK_GRAPH
+        MATCH (src) - [IS BANK_TRANSFERS] -> (dst)
         COLUMNS ( dst.id AS acct_id )
     ) GROUP BY acct_id ORDER BY Num_Transfers DESC FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -82,7 +83,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     We see that accounts **387** and **934** have a high number of incoming transactions.
 
 2.  What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
-    
+
     ```
     <copy>
     SELECT acct_id, COUNT(1) AS Num_In_Middle 
@@ -126,7 +127,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     ![3hop triangle transfers](images/11-num-triangles.png)
 ​
-5. We can use the same query but **modify the number of hops** to check if there are **any 4-hop transfers that start and end at the same account**. 
+5. We can use the same query but **modify the number of hops** to check if there are **any 4-hop transfers that start and end at the same account**.
 
     ```
     <copy>
@@ -142,7 +143,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 ​
 6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 5.
 
-    Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 26ai.
+    Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the SQL syntax for graphs in Oracle AI Database.
    
     ```
     <copy>
