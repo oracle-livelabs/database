@@ -55,6 +55,12 @@
           "filename": "../../domains/domains.md"
       },
       {
+          "title": "Lab: NEW GraphQL Table Function",
+          "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
+          "type": "livelabs",
+          "filename": "../../graphql/graphql.md"
+      },
+      {
           "title": "Lab: Annotations",
           "description": "Creating Annotations",
           "type": "livelabs",
@@ -167,12 +173,6 @@
             "description": "Enhanced Data Manipulation with NEW GROUP BY ALL Clause",
             "type": "livelabs",
             "filename": "../../group-by-all/group-by-all.md"
-        },
-        {
-            "title": "Lab: NEW GraphQL Table Function",
-            "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
-            "type": "livelabs",
-            "filename": "../../graphql/graphql.md"
         },
         {
           "title": "Need Help?",

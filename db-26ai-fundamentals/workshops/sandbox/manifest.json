@@ -48,6 +48,12 @@
           "filename": "../../domains/domains.md"
       },
       {
+          "title": "Lab: NEW GraphQL Table Function",
+          "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
+          "type": "livelabs",
+          "filename": "../../graphql/graphql.md"
+      },
+      {
           "title": "Lab: Annotations",
           "description": "Creating Annotations",
           "type": "livelabs",
@@ -161,13 +167,6 @@
             "type": "livelabs",
             "filename": "../../group-by-all/group-by-all.md"
         },
-        {
-            "title": "Lab: NEW GraphQL Table Function",
-            "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
-            "type": "livelabs",
-            "filename": "../../graphql/graphql.md"
-        },
-
         {
           "title": "Need Help?",
           "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
