@@ -1,10 +1,10 @@
 {
-    "workshoptitle": "SQL Meets JSON in Oracle Database: Unify Data with Duality Views, JSON Collections & MongoDB API",
+    "workshoptitle": "SQL Meets JSON in Oracle AI Database: Unify Data with Duality Views, JSON Collections & MongoDB API",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
             "title": "Introduction",
-            "description": "Introduction to All-things-JSON in the Oracle Database.",
+            "description": "Introduction to All-things-JSON in the Oracle AI Database.",
             "filename": "../../introduction/introduction.md"
         },
         {

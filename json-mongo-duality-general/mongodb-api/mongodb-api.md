@@ -4,7 +4,7 @@
 
 JSON collections - JSON Collection Tables and JSON Collection Views like Duality Views - store JSON documents alongside some metadata , making them fully MongoDB compatible out-of-the box. Through the MongoDB API, part of Oracle REST Data Services (ORDS), you can use any MongoDB tool, utility, or SDK to work with these collections.
 
-This lab walks you through the steps to install MongoDB Shell and Command Line Database Tools to interaction with our JSON collection through the MongoDB API. 
+This lab walks you through the steps to install MongoDB Shell and Command Line Database Tools to interaction with our JSON collection through the MongoDB API.
 
 Estimated Time: 15 minutes
 
