@@ -8,7 +8,7 @@ Welcome to the Oracle AI Database 26ai New Features Workshop! This workshop cove
 
 ## About Oracle AI Database 26ai
 
-Oracle AI Database 26ai is the current long term support release version of the database. This means that it is the suggested version for all enterprise workloads by Oracle Corporation. Oracle AI Database 26ai is the newest release, combining all the features developed over the past 40 years, similar to the previous long-term support release, version 19c, and the innovation release, version 21c. If you're interested in the new features from 21c, bookmark [this lab](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943) for later. 
+Oracle AI Database 26ai is the current long term support release version of the database. This means that it is the suggested version for all enterprise workloads by Oracle Corporation. Oracle AI Database 26ai is the newest release, combining all the features developed over the past 40 years, similar to the previous long-term support release, version 19c, and the innovation release, version 21c.
 
 The Oracle AI Database is what is called a 'converged' database. This means the database supports multiple different data types like Relational, JSON, XML, Graph, Vector, and more. Converged also means it has the ability to run all sorts of workloads, from Transactional to IoT to Analytical to Machine Learning and more. It also can also handle a number of different development paradigm, including Microservices, Events, REST, SaaS, and CI/CD, (to name a few). All of this functionality can be used right 'out of the box'. All while still benefiting from Oracles leading performance, security, scalability and availability.
 
