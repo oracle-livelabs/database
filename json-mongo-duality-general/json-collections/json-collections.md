@@ -15,7 +15,7 @@ In this lab, you will:
 * Create Collection using Database Actions|JSON
 * Insert First Document using Database Actions|JSON
 * Find JSON documents in a collection using Database Actions|JSON
-* Learn about JSON and Constraints 
+* Learn about JSON and Constraints
 
 ### Prerequisites
 
@@ -28,32 +28,26 @@ In this lab, you will:
 
 	![DB Actions](images/dbaction1.png)
 
-
-2. Below you can find the Database Actions homepage.
-
-	![Homepage Database Actions](./images/homepage-dbactions.png)
-
-
-3. On the homepage, click the JSON tile under Development.
+2. On the homepage, click the JSON tile under the Development tab.
 
 	![Homepage Development JSON](./images/homepage-json.png)
 
-4. To create a collection, click **Create Collection**.
+3. To create a collection, click **Create Collection**.
 	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-5. In the field **Collection Name**, provide the name **movies**. Leave MongoDB Compatible radio button checked.  Then click **Create**.
+4. In the field **Collection Name**, provide the name **movies**. Leave MongoDB Compatible radio button checked.  Then click **Create**.
 
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
 	![New Collection: movies](./images/collection-name-mongodb-checked.png)
 
-6. A notification pops up that displays **movies** collections has been created.
+5. A notification pops up that displays **movies** collections has been created.
 
 	![New collection notification](./images/popup.png)
 
-9. Click the refresh button to verify the **movies** collection has been created.
+6. Click the refresh button to verify the **movies** collection has been created.
 
 	![Refresh button](./images/refresh-collection.png)
 
@@ -210,7 +204,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/development-sql.png)
+	![SQL navigation](./images/homepage-sql.png)
 
 2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle AI Database.**
 
@@ -225,19 +219,20 @@ More generally, constraints can be used to check the data being entered for vari
     Now copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
     ```
-    <copy>alter table "movies" add constraint movies_json_schema
+    <copy>
+	alter table "movies" add constraint movies_json_schema
     check (data is json validate '{   "type": "object",
         "properties": {
             "_id": { "type": "number" },
             "title": { "type": "string"},
             "type": {"type" : "string"},
             "price": {"type" : "number"},
-    "starring": {
-    "type": "array",
-    "minItems": 0,
-    "items": {
-    "type": "string"
-    }
+            "starring": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+            "type": "string"
+        }
     }
         },
         "required": ["_id", "title", "type", "price"]
