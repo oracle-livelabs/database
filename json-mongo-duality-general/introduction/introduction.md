@@ -2,11 +2,9 @@
 
 ## About this Workshop
 
-In this workshop, you will experience Oracle's JSON capabilities using both relational and document-store APIs. You will be learn all variants of how to leverage JSON in the Oracle AI Database, starting from the native JSON datatype over JSON Collections and JSON Duality Views - the latest groundbreaking JSON-related functionality, to the Oracle AI Database API for MongoDB that provides full MongoDB compatibility in a plug-and-play fashion
+In this workshop, you will experience Oracle's JSON capabilities using both relational and document-store APIs. You will be learn all variants of how to leverage JSON in the Oracle AI Database, starting from the native JSON datatype over JSON Collections and JSON Duality Views - the latest groundbreaking JSON-related functionality, to the Oracle AI Database API for MongoDB that provides full MongoDB compatibility in a plug-and-play fashion.
 
-This lab is organized into different topics, each topic consists of multiple steps. After completing this workshop a user has a very good understanding of what JSON features are available in Oracle AI Database and when to use them. You will work against the same data using both with SQL and using the MongoDB API and will experience yourself why Oracle AI Database is better suited for JSON Development than Mongo database.
-
-### Objective
+This lab is organized into different topics, each topic consists of multiple steps. This workshop highlights available JSON features in the Oracle AI Database and when to use them. You will work against the same data using both SQL and the MongoDB API and will experience why Oracle AI Database is better suited for JSON Development than Mongo database.
 
 This workshop is not a 'cookbook' or 'design guideline' on how to work with JSON data - the purpose is to illustrate various JSON features that the Oracle AI Database offers. That said, you likely find that many examples are applicable to your business needs!
 
@@ -69,11 +67,11 @@ In this workshop, you will:
 *   Work with JSON Collections, a native MongoDB-compatible document storage
 *   Experience the groundbreaking new functionality of JSON Relational Duality Views, marrying the benefits of relational and JSON
 *	Use the MongoDB API to query or manipulate JSON Collections and Duality Views in the Oracle AI Database
-*	Use SQL interchangeably to MongoDB API to query, generate and process JSON data
+*	Use SQL interchangeably with MongoDB API to query, generate and process JSON data
 
 ### Prerequisites
 
-- Autonomous AI Database, free or paid
+- Autonomous AI Database, within your free or paid tenancy, or Autonomous AI Database created within LiveLab Sandbox
 
 **Please Note:**: While this workshop is using Autonomous AI Database, all commands and features related to JSON enhancement are also available on any other Oracle AI Database (Version 23.4 or higher) release. This includes the Oracle AI Database Free release as well as 26ai running on Oracle AI Database Base Service or Oracle Engineered Systems.
 
@@ -91,4 +89,4 @@ You may now proceed to the next lab.
 
 * **Author** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025

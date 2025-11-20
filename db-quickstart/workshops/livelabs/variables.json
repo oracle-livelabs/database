@@ -1,0 +1,10 @@
+{
+    "db_name": "ADWFINANCE",
+    "db_display_name":"ADW-Finance-Mart",
+    "db_ocpu": "2 ECPUs",
+    "db_storage": "1 TB",
+    "db_name_livelabs": "MOVIE+your user id",
+    "db_name_livelabs_example": "MOVIE2252",
+    "db_workload_type":"Autonomous AI Lakehouse",
+    "oac_instance_name": "WORKSHOPOAC"
+ }
