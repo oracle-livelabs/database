@@ -55,6 +55,12 @@
           "filename": "../../domains/domains.md"
       },
       {
+          "title": "Lab: NEW GraphQL Table Function",
+          "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
+          "type": "livelabs",
+          "filename": "../../graphql/graphql.md"
+      },
+      {
           "title": "Lab: Annotations",
           "description": "Creating Annotations",
           "type": "livelabs",
