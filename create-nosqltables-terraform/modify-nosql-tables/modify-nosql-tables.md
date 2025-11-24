@@ -250,4 +250,4 @@ Terraform shows the plan to be applied and prompts for confirmation. Once confir
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
+* **Last Updated By/Date** - Purnima Subramanian, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, October 2025
