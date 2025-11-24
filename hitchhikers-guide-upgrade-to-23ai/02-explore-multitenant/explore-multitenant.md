@@ -6,7 +6,7 @@ In this lab, you will familiarize yourself with the multitenant architecture.
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide Lab 2](youtube:lwvdaM4v4tQ?start=444)
+[Lab 2 walk-through](videohub:1_84inrh3g)
 
 ### Objectives
 
@@ -93,8 +93,6 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <copy>
     select con_id, name, open_mode, restricted from v$pdbs;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -117,8 +115,6 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <copy>
     select con_id, name, open_mode, restricted from v$containers;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * By selecting from `v$containers` instead of `v$pdbs` you can see information about the root container (*CDB$ROOT*) as well.
@@ -290,7 +286,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 12. Verify you are connected to *RED*.
 
-    * Notice how the `select` statement has no `from` clause. This is a new feature in Oracle Database 23ai.
+    * Notice how the `select` statement has no `from` clause. This is a new feature in Oracle AI Database.
 
     ``` sql
     <copy>

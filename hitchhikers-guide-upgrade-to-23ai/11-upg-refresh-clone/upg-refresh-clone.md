@@ -2,11 +2,13 @@
 
 ## Introduction
 
-In this lab, you will upgrade a non-CDB to Oracle Database 23ai and convert it io a pluggable database (PDB). You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
+In this lab, you will upgrade a non-CDB and convert it io a pluggable database (PDB). You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
 
 You will upgrade the *FTEX* database and plug it into the *CDB23* database.
 
 Estimated Time: 35 minutes
+
+[Lab 11 walk-through](videohub:1_ib32g6i4)
 
 ### Objectives
 
@@ -437,8 +439,6 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     <copy>
     proceed -job 101
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * AutoUpgrade will start shortly.
@@ -465,7 +465,7 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     * AutoUpgrade was holding in *REFRESHPDB*; applying redo at the specified interval.
     * When you issued the `proceed` command, AutoUpgrade made a final refresh before moving on to the next phase.
     * Any changes made in the source database at this point in time, would not come over to the target PDB.
-    * In the *DBUPGRADE* stage, AutoUpgrade is upgrading the PDB to the new release; Oracle Database 23ai. The CDB is already on the new release, so only the PDB is upgraded which is much faster than a complete database upgrade.
+    * In the *DBUPGRADE* stage, AutoUpgrade is upgrading the PDB to the new release. The CDB is already on the new release, so only the PDB is upgraded which is much faster than a complete database upgrade.
     * Since the source database is a non-CDB, the PDB must also be converted to a proper PDB. AutoUpgrade does that in *NONCDBTOPDB* where it runs the `noncdb_to_pdb.sql` script. 
 
     <details>

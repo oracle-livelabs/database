@@ -2,9 +2,11 @@
 
 ## Introduction
 
-In this lab, you will start by checking an entire CDB that was already upgraded, to save time, from Oracle Database 19c to 23ai. Then, you will practice a rollback and the restoration option in AutoUpgrade. This uses Flashback Database to get the database back to the starting point.
+In this lab, you will start by checking an entire CDB that was already upgraded to a new version of Oracle AI Database. Then, you will practice a rollback and the restoration option in AutoUpgrade. This uses Flashback Database to get the database back to the starting point.
 
 Estimated Time: 60 minutes
+
+[Lab 10 walk-through](videohub:1_yd0yeopa)
 
 ### Objectives
 
@@ -21,7 +23,7 @@ This lab uses the *CDBRES* databases.
 
 ## Task 1: Check your environment
 
-You start by checking the *CDBRES* database. This database was originally on Oracle Database 19c and later upgraded to Oracle Database 23ai. You should imagine that you already upgraded the database, and now you find a critical problem and decide to roll back to the previous release.
+You start by checking the *CDBRES* database. This database was originally on Oracle Database 19c and later upgraded to a newer version of Oracle AI Database. You should imagine that you already upgraded the database, and now you find a critical problem and decide to roll back to the previous release.
 
 1. Set the environment to the new Oracle home and connect to the upgraded *CDBRES* database.
 
@@ -112,8 +114,6 @@ You start by checking the *CDBRES* database. This database was originally on Ora
     <copy>
     select scn, storage_size, time, preserved, name from v$restore_point;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * There is one restore point named "AUTOUPGRADE\_9212\_CDBRES1927000".
@@ -139,7 +139,7 @@ You start by checking the *CDBRES* database. This database was originally on Ora
     </copy>
     ```
 
-7. To upgrade this database from 19c to 23ai, we used the *upg-10-cdbres.cfg* config file. Examine config file.
+7. To upgrade this database from 19c to the new release, we used the *upg-10-cdbres.cfg* config file. Examine config file.
 
     ``` bash
     <copy>
@@ -274,7 +274,7 @@ Suppose your tests find a critical error and you would like to go back to Oracle
     </copy>
     ```
 
-    * Notice how the Oracle home is set to the new, 23ai Oracle home. This was done by AutoUpgrade.
+    * Notice how the Oracle home is set to the new Oracle home. This was done by AutoUpgrade.
     * If Grid Infrastructure would manage the database, AutoUpgrade would modify the clusterware registration as well.
 
     <details>

@@ -2,9 +2,11 @@
 
 ## Introduction
 
-This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to Oracle Database 23ai and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB. For this purpose, AutoUpgrade has its own keystore which you will use.
+This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to a new release of Oracle AI Database and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB. For this purpose, AutoUpgrade has its own keystore which you will use.
 
 Estimated Time: 25 minutes
+
+[Lab 14 walk-through](videohub:1_gnqp040b)
 
 ### Objectives
 
@@ -868,8 +870,6 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <copy>
     select wrl_type, status, wallet_type, keystore_mode from v$encryption_wallet;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -893,7 +893,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     </copy>
     ```
 
-**Congratulations!** You have now upgraded your encrypted database to Oracle Database 23ai.
+**Congratulations!** You have now upgraded your encrypted database to a new release of Oracle AI Database.
 
 You may now [*proceed to the next lab*](#next).
 

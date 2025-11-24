@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Explore Operational Property Graphs in Oracle Database 23ai",
+  "workshoptitle": "Explore Operational Property Graphs in Oracle AI Database",
     "help": "livelabs-help-sg_us@oracle.com",
     "include": {
     "adb-goto-service-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/goto-service-body.md",
@@ -9,7 +9,7 @@
     "tutorials": [
       {
           "title": "Introduction",
-          "description": "This is an introduction to Oracle Database 23ai.",
+          "description": "This is an introduction to Oracle AI Database.",
           "type": "livelabs",
           "filename": "../../introduction/intro-property-graphs.md"
       },
@@ -20,7 +20,7 @@
       },
       {
         "title": "Lab 1: Provision an ADB Instance",
-        "description": "Provisioning an Autonomous Database Instance",
+        "description": "Provisioning an Autonomous AI Database Instance",
         "type": "freetier",
         "filename": "https://oracle-livelabs.github.io/common/building-blocks/blocks/adb/provision/provision-console.md"
       },
@@ -32,17 +32,17 @@
        {
         "title": "Lab 3: Setup Property Graph",
         "description": "Create the Operational Property Graph",
-        "filename": "../../create-graph/create-graph.md"
+        "filename": "../../create-graph/create-graph-brown.md"
       },
       {
-          "title": "Lab 4: Operational Property Graphs Example with SQL/PGQ in 23ai",
-          "description": "Using Property Graphs in 23ai",
+          "title": "Lab 4: Operational Property Graphs Example with SQL/PGQ in 26ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "livelabs",
           "filename": "../../property-graphs/property-graphs-new.md"
       },
       {
           "title": "Bonus Lab: Integration with APEX",
-          "description": "Using Property Graphs in 23ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "livelabs",
           "filename": "../../apex-property-graphs/apex-property-graphs-new.md"
       },

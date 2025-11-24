@@ -2,11 +2,11 @@
 
 ## Introduction
 
-In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23ai. You will use AutoUpgrade.
+In this lab, you will upgrade the *UPGR* database to the latest version of Oracle AI Database. You will use AutoUpgrade.
 
 Estimated Time: 45 minutes
 
-[Hitchhiker's Guide Lab 5](youtube:lwvdaM4v4tQ?start=1966)
+[Lab 5 walk-through](videohub:1_khpxnrg7)
 
 ### Objectives
 
@@ -711,7 +711,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 12. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
 
-**Congratulations! You upgraded the UPGR database successfully from Oracle Database 19c to 23ai and converted your database to a PDB.**
+**Congratulations! You upgraded the UPGR database successfully to the latest version of Oracle AI Database and converted your database to a PDB.**
 
 You may now [*proceed to the next lab*](#next).
 
@@ -720,7 +720,7 @@ You may now [*proceed to the next lab*](#next).
 AutoUpgrade completely automates upgrades and incorporates our best practices. AutoUpgrade run all prechecks against multiple databases, fix potential issues, set a restore point in case something goes wrong, before it finally upgrade and convert your databases. And of course, do the postupgrade checks, recompilation and time zone adjustment. The only thing you need to provide is a config file in text format.
 
 * My Oracle Support, [AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)
-* Documentation, [Using AutoUpgrade for Oracle Database Upgrades](https://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/using-autoupgrade-oracle-database-upgrades.html#GUID-71883C8C-7A34-4E93-8955-040CB04F2109)
+* Documentation, [Using AutoUpgrade for Oracle AI Database Upgrades](https://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/using-autoupgrade-oracle-database-upgrades.html#GUID-71883C8C-7A34-4E93-8955-040CB04F2109)
 * Webinar, [Move to Oracle Database 23ai – Everything you need to know about Oracle Multitenant – Part 1](https://youtu.be/k0wCWbp-htU)
 * Blog post, [Upgrade to Oracle Database 23ai](https://dohdatabase.com/upgrade23)
 

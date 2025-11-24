@@ -1,10 +1,10 @@
 {
-    "workshoptitle": "Oracle Database 23ai New Features",
+    "workshoptitle": "Oracle AI Database 26ai New Features",
       "help": "livelabs-help-db_us@oracle.com",
       "tutorials": [
         {
           "title": "Introduction",
-          "description": "This is an introduction to installing and exploring the Oracle Database 23ai Free",
+          "description": "Introduction to Oracle AI Database 26ai",
           "type": "livelabs",
           "filename": "../../intro/ai-world-2025-intro.md"
       },
@@ -14,7 +14,7 @@
     },
       {
         "title": "Lab 1: Domains and Annotations",
-        "description": "Learn how Oracle Database 23ai's Data Usecase Domains and Schema Annotations solve healthcare data governance challenges.",
+        "description": "Learn how Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations solve healthcare data governance challenges.",
         "type": "livelabs",
         "filename": "../../ai-world-2025/domains-annotations.md"
     },
@@ -43,10 +43,10 @@
         "filename": "../../ai-world-2025/sql-features.md"
     },
       {
-          "title": "Lab 6: (Bonus) Property Graphs",
-          "description": "Building Property Graphs",
+          "title": "Lab 6: (Bonus) SQLcl MCP Server and the Oracle Database ",
+          "description": "Working with the sqlcl mcp server",
           "type": "livelabs",
-          "filename": "../../ai-world-2025/new-property-graph.md"
+          "filename": "../../ai-world-2025/mcp-server.md"
       },
 
         {

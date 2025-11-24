@@ -6,7 +6,7 @@ In this lab, you will use SQL Tuning Advisor (STA) to find suggestions for impro
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide Lab 9](youtube:lwvdaM4v4tQ?start=4242)
+[Lab 9 walk-through](videohub:1_r65m3nv0)
 
 ### Objectives
 
@@ -299,7 +299,7 @@ You may now [*proceed to the next lab*](#next).
 
 ## Learn More
 
-SQL Tuning Advisor is SQL diagnostic software in the Oracle Database Tuning Pack.
+SQL Tuning Advisor is SQL diagnostic software in the Oracle AI Database Tuning Pack.
 
 You can submit one or more SQL statements as input to the advisor and receive advice or recommendations for how to tune the statements, along with a rationale and expected benefit.
 

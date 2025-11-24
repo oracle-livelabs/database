@@ -6,7 +6,7 @@ In this lab, you will execute an application workload using HammerDB on the *UPG
 
 Estimated Time: 15 Minutes
 
-[Hitchhiker's Guide Lab 3](youtube:lwvdaM4v4tQ?start=1290)
+[Lab 3 walk-through](videohub:1_f4gn811j)
 
 ### Objectives
 
@@ -202,7 +202,7 @@ You may now [*proceed to the next lab*](#next).
 
 The Automatic Workload Repository (AWR) collects, processes, and maintains performance statistics for problem detection and self-tuning purposes. This data is both in memory and stored in the database. You can display the gathered data as both reports and views.
 
-Snapshots are sets of historical data for specific periods that are used for performance comparisons by ADDM. By default, Oracle Database automatically generates snapshots of the performance data once every hour and retains the statistics in the workload repository for 8 days. You can also manually create snapshots. In this lab, we will manually create snapshots.
+Snapshots are sets of historical data for specific periods that are used for performance comparisons by ADDM. By default, Oracle AI Database automatically generates snapshots of the performance data once every hour and retains the statistics in the workload repository for 8 days. You can also manually create snapshots. In this lab, we will manually create snapshots.
 
 * [HammerDB](https://www.hammerdb.com/)
 * Documentation, [Managing AWR Snapshots](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgdba/gathering-database-statistics.html#GUID-144711F9-85AE-4281-B548-3E01280F9A56)

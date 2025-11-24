@@ -2,13 +2,15 @@
 
 ## Introduction
 
-Instead of upgrading and migrating an entire database, you will try a different approach in this lab. A migration of your data using transportable tablespaces into a brand new, empty database on Oracle Database 23ai. Using this approach, you can skip the usual upgrade and PDB conversion. Transportable tablespaces enables you to move your data directly into a higher release database. Further, you can export from a non-CDB and directly into a pluggable database.
+Instead of upgrading and migrating an entire database, you will try a different approach in this lab. A migration of your data using transportable tablespaces into a brand new, empty database on the new release of Oracle AI Database. Using this approach, you can skip the usual upgrade and PDB conversion. Transportable tablespaces enables you to move your data directly into a higher release database. Further, you can export from a non-CDB and directly into a pluggable database.
 
 Transportable tablespaces works fine even on bigger databases compared to a regular export/import. However, with transportable tablespaces you don't have the same customization options.
 
 You will use the easiest method for transportable tablespaces, Full Transportable Export/Import (FTEX), to move data from the *FTEX* database and into a new PDB in the *CDB23* database.
 
 Estimated Time: 15 minutes
+
+[Lab 13 walk-through](videohub:1_swnymxf8)
 
 ### Objectives
 
@@ -372,7 +374,7 @@ You need to prepare a few things before you can start FTEX.
 
 ## Task 2: Create new PDB
 
-You create a new, empty PDB in Oracle Database 23ai and import directly into it. This avoids the in-place upgrade and PDB conversion.
+You create a new, empty PDB in the new release of Oracle AI Database and import directly into it. This avoids the in-place upgrade and PDB conversion.
 
 1. Set the environment to the target database, *CDB23*, and connect.
 
@@ -971,9 +973,9 @@ You need a few more changes to the new PDB before you can start the import.
 
 7. Examine the Data Pump log file for any critical issues. A FTEX import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
 
-    * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in Oracle Database 23ai causing the grants to fail.
+    * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in later releases of Oracle AI Database cause the grants to fail.
     * The same applies to the `ORACLE_OCM` user.
-    * An error related to traditional auditing that is desupported in Oracle Database 23ai.
+    * An error related to traditional auditing that is desupported in newer releases of Oracle AI Database.
     * This log file doesn't contain any critical issues.
 
 8. Set the environment to the target database, *CDB23*, and connect.
@@ -1198,7 +1200,7 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
     </copy>
     ```
 
-**Congratulations!** You have now moved your data into a PDB on Oracle Database 23ai
+**Congratulations!** You have now moved your data into a PDB on Oracle AI Database.
 
 You may now [*proceed to the next lab*](#next).
 

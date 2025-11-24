@@ -2,13 +2,15 @@
 
 ## Introduction
 
-Instead of upgrading and migrating an entire database, you will try a different approach in this lab. A logical migration of your data into a brand new, empty database on Oracle Database 23ai. Using this approach, you can skip the usual upgrade and PDB conversion. Data Pump enables you to import data directly into a higher release database (and lower for that matter). Further, you can export from a non-CDB and directly into a pluggable database.
+Instead of upgrading and migrating an entire database, you will try a different approach in this lab. A logical migration of your data into a brand new, empty database on the new release of Oracle AI Database. Using this approach, you can skip the usual upgrade and PDB conversion. Data Pump enables you to import data directly into a higher release database (and lower for that matter). Further, you can export from a non-CDB and directly into a pluggable database.
 
 A migration with Data Pump is mostly suitable for smaller databases or when you have other changes to the database, like converting LOBs to SecureFile, character set migrations, or other schema changes.
 
 You will perform a full export from the *FTEX* database and import into a new PDB in the *CDB23* database.
 
 Estimated Time: 15 minutes
+
+[Lab 12 walk-through](videohub:1_vy467cbr)
 
 ### Objectives
 
@@ -303,7 +305,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 ## Task 2: Create new PDB
 
-You create a new, empty PDB in Oracle Database 23ai and import directly into it. This avoids the in-place upgrade and PDB conversion.
+You create a new, empty PDB in the new release and import directly into it. This avoids the in-place upgrade and PDB conversion.
 
 1. Set the environment to the target database, *CDB23*, and connect.
 
@@ -913,9 +915,9 @@ You need a few more changes to the new PDB before you can start the import.
 
 6. Examine the Data Pump log file for any critical issues. A full import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
 
-    * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in Oracle Database 23ai causing the grants to fail.
+    * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in newer releases of Oracle AI Database cause the grants to fail.
     * The same applies to the `ORACLE_OCM` user.
-    * An error related to traditional auditing that is desupported in Oracle Database 23ai.
+    * An error related to traditional auditing that is desupported in newer releases.
     * This log file doesn't contain any critical issues.
 
 7. Set the environment to the target database, *CDB23*, and connect.
@@ -1023,7 +1025,7 @@ You need a few more changes to the new PDB before you can start the import.
     </copy>
     ```
 
-**Congratulations!** You have now moved your data into a PDB on Oracle Database 23ai
+**Congratulations!** You have now moved your data into a PDB on the new release of Oracle AI Database.
 
 You may now [*proceed to the next lab*](#next).
 

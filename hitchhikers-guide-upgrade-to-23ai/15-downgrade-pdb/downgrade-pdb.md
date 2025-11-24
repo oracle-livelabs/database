@@ -4,16 +4,18 @@
 
 In this lab, you will try a database downgrade. After an upgrade, if a serious problem arises in the new release, you can bring the database back to the previous release. This is called a database downgrade.
 
-The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in *CDB23COM*. You will downgrade *YELLOW* and plug it into the *CDB19* running on Oracle Database 19c.
+The PDB, *YELLOW*, has already been upgraded from to the new release of Oracle AI Database. It's currently placed in *CDB23COM*. You will downgrade *YELLOW* and plug it into the *CDB19* running on Oracle Database 19c.
 
 Estimated Time: 20 minutes
+
+[Lab 15 walk-through](videohub:1_gxluetcu)
 
 ### Objectives
 
 In this lab, you will:
 
 * Downgrade a PDB
-* Unplug from Oracle Database 23ai back to 19c
+* Unplug from Oracle AI Database back to 19c
 
 ### Prerequisites
 
@@ -23,7 +25,7 @@ This lab uses the *CDB19* databases. Don't do this lab at the same time as lab 1
 
 ## Task 1: Prepare for downgrade
 
-You start the downgrade process while the PDB is still on Oracle Database 23ai.
+You start the downgrade process while the PDB is still on the new release of Oracle AI Database.
 
 1. Connect to *CDB23COM*. This CDB currently holds the upgraded PDB.
 
@@ -166,7 +168,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     </copy>
     ```
 
-## Task 2: Downgrade the PDB from Oracle Database 23ai
+## Task 2: Downgrade the PDB from the new release of Oracle AI Database
 
 Now that the PDB is open in downgrade mode, you can start the process.
 
@@ -546,7 +548,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     </copy>
     ```
 
-**Congratulations!** You have now downgraded a PDB from Oracle Database 23ai to 19c.
+**Congratulations!** You have now downgraded a PDB from a newer release of Oracle AI Database to 19c.
 
 You may now [*proceed to the next lab*](#next).
 
