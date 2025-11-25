@@ -57,7 +57,7 @@ In this lab, you will:
 
 	![new document button](./images/new-json-doc.png)
 
-3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
+2. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
 	```
 	<copy>
@@ -78,11 +78,11 @@ In this lab, you will:
 
 	![add new document](./images/json-object.png)
 
-4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
+3. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
 	![new document confirmation popup](./images/popup-json-doc.png)
 
-5. Let's repeat this with the following documents:
+4. Let's repeat this with the following documents:
 
 	Click the *New JSON Document* button, copy the following JSON objects one by one, paste it into the worksheet and click **Create**.
 

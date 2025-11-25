@@ -24,7 +24,7 @@ In this lab, you will:
 
 	![Select your Compartment](images/select-compartment.png)
 
-1. Click in the *Database Actions* dropdown list and select **View all database actions**
+2. Click in the *Database Actions* dropdown list and select **View all database actions**
 
 	![DB Actions](images/dbaction1.png)
 
