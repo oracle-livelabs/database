@@ -21,7 +21,7 @@ In the current release of DMS we support Oracle databases located on-premises, i
 
 |                  |  |     
 |--------------------------|-------------------------|
-| Source Databases | Oracle DB 11g, 12c, 18c, 19c ,21c, 23ai: <br>on-premises, third-party cloud, OCI.  |   
+| Source Databases | Oracle DB 11g, 12c, 18c, 19c, 21c, and subsequent releases: <br>on-premises, third-party cloud, OCI.  |   
 | Target Databases | ADB serverless and dedicated <br> Co-managed Oracle Base Database (VM, BM)<br> Exadata on Oracle Public Cloud. |  
 | Supported Source Environments| Oracle Cloud Infrastructure co-managed databases or on-premises environments<br>Amazon Web Services RDS Oracle Database <br>Linux-x86-64, IBM AIX <br>Oracle Solaris |
 | Migration Modes  | Direct Access to Source <br>(VPN or Fast Connect) Indirect Access to Source <br>(Agent on Source Env) |                        |  
