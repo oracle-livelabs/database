@@ -25,6 +25,12 @@
           "type": "livelabs",
           "filename": "../../intro/intro-application-development.md"
       },
+     {
+          "title": "Lab: (NEW in 23.26) GraphQL Table Function",
+          "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
+          "type": "livelabs",
+          "filename": "../../graphql/graphql.md"
+      },
       {
         "title": "Lab: AI Vector Search",
         "description": "Try out AI Vector search in 26ai",
@@ -53,12 +59,6 @@
           "description": "Using SQL Domains",
           "type": "livelabs",
           "filename": "../../domains/domains.md"
-      },
-      {
-          "title": "Lab: NEW GraphQL Table Function",
-          "description": "Enhanced Data Manipulation with NEW GraphQL Table Function",
-          "type": "livelabs",
-          "filename": "../../graphql/graphql.md"
       },
       {
           "title": "Lab: Annotations",
@@ -138,6 +138,12 @@
             "type": "livelabs",
             "filename": "../../intro/sql-enhancements.md"
         },
+        {
+            "title": "Lab: UUID",
+            "description": "Embrace the UUID data type in SQL for a more straightforward and efficient representation of unique identifiers.",
+            "type": "livelabs",
+            "filename": "../../uuid/uuid.md"
+        },   
           {
               "title": "Lab: Boolean",
               "description": "Embrace the Boolean data type in SQL for a more straightforward and efficient representation of truth values.",
