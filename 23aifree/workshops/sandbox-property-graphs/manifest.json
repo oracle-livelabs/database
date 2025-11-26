@@ -1,18 +1,18 @@
 {
-  "workshoptitle": "Exploring Operational Property Graphs in 23ai Free",
+  "workshoptitle": "Exploring Operational Property Graphs in Oracle AI Database",
     "help": "livelabs-help-sg_us@oracle.com",
     "tutorials": [
       {
           "title": "Introduction",
-          "description": "This is an introduction to Oracle Database 23ai.",
+          "description": "This is an introduction to Oracle Database 26ai.",
           "type": "livelabs",
           "filename": "../../introduction/intro-property-graphs.md"
       },
-      {
-          "title": "Get Started with NoVNC",
-          "description": "Verify Setup of compute instance",
-          "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
-      },
+        {
+            "title": "Get Started",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs.md"
+        },
       {
           "title": "Lab 1: Setup User",
           "description": "Creating the schema including JSON Duality Views",
@@ -21,19 +21,19 @@
       },
       {
           "title": "Lab 2: Configure setup materials and tools",
-          "description": "Creating the schema including JSON Duality Views",
+          "description": "Creating the schema",
           "type": "livelabs",
           "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
       {
-          "title": "Lab 3: Operational Property Graphs Example with SQL/PGQ in 23ai",
-          "description": "Using Property Graphs in 23ai",
+          "title": "Lab 3: Operational Property Graphs Example with SQL/PGQ in 26ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "livelabs",
-          "filename": "../../property-graphs/property-graphs.md"
+          "filename": "../../property-graphs/property-graphs-new.md"
       },
       {
           "title": "Bonus Lab: Integration with APEX",
-          "description": "Using Property Graphs in 23ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "livelabs",
           "filename": "../../apex-property-graphs/apex-property-graphs.md"
       },
