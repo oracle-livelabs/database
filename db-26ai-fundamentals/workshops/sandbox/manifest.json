@@ -132,6 +132,12 @@
           "filename": "../../intro/sql-enhancements.md"
       },
         {
+            "title": "Lab: (NEW in 23.26) QUALIFY Clause",
+            "description": "Filter window function results directly with the NEW QUALIFY Clause",
+            "type": "livelabs",
+            "filename": "../../qualifying-clause/qualifying-clause.md"
+        },
+        {
             "title": "Lab: UUID",
             "description": "Embrace the UUID data type in SQL for a more straightforward and efficient representation of unique identifiers.",
             "type": "livelabs",
