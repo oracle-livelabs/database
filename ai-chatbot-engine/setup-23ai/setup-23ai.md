@@ -1,8 +1,8 @@
-# Setup the vector database (Oracle Database 23ai)
+# Setup the vector database (Oracle AI Database)
 
 ## Introduction
 
-This lab guide you through setting up Oracle Autonomous Database 23ai.
+This lab guide you through setting up Oracle Autonomous AI Database.
 
 Estimated Time: 15 minutes
 
@@ -18,7 +18,7 @@ Estimated Time: 15 minutes
 
 > Note: Any kind of Linux-based system is okay, but you will need to modify the following instructions to suit your specific setup.
 
-## Task 1: Install and configure the database (Oracle Database 23ai)
+## Task 1: Install and configure the database (Oracle AI Database)
 
 1. Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the "US Midwest (Chicago)" or "Frankfurt" region, which is necessary to access the OCI Generative AI services endpoint.
 
@@ -79,7 +79,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
-* [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
+* [Get Started with Oracle AI Database](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA

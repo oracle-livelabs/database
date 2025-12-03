@@ -286,7 +286,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 12. Verify you are connected to *RED*.
 
-    * Notice how the `select` statement has no `from` clause. This is a new feature in Oracle Database 23ai.
+    * Notice how the `select` statement has no `from` clause. This is a new feature in Oracle AI Database.
 
     ``` sql
     <copy>
