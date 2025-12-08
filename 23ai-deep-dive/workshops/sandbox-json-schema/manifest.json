@@ -1,0 +1,120 @@
+{
+    "workshoptitle": "Oracle Database 23ai Deep Dive",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+
+        {
+            "title": "Get Started with LiveLabs",
+            "filename": "../../get-started/combined-get-started.md"
+        },
+        {
+            "title": "Lab: IF Exists for DDL",
+            "description": "Simplify data definition language operations with the introduction of conditional logic using 'IF Exists.'",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-if-exists-for-ddl/new-if-exists-for-ddl.md"
+        },
+        {
+            "title": "Lab: Direct Joins for Updates and Deletes",
+            "description": "Optimize update and delete operations by employing direct joins for increased efficiency.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
+        },
+        {
+            "title": "Lab: Enhanced DML RETURNING Clause",
+            "description": "Enhanced Data Manipulation with DML RETURNING Clause",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/update-return-clause-enhancements/update-return-clause-enhancements.md"
+        },
+        {
+            "title": "Lab: New Table Value Clause",
+            "description": "Explore the advantages of the new table value clause in SQL for enhanced data manipulation capabilities.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-table-value-clause/new-table-value-clause.md"
+        },
+        {
+            "title": "Lab: Boolean",
+            "description": "Embrace the Boolean data type in SQL for a more straightforward and efficient representation of truth values.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-boolean/new-boolean.md"
+        },
+        {
+            "title": "Lab: Schema Level Privileges",
+            "description": "Gain insights into schema-level privileges management, enhancing control and security at a granular level.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-schema-level-privileges/new-schema-level-privileges.md"
+        },
+        {
+            "title": "Lab: Developer Role",
+            "description": "Establish and configure a dedicated developer role, streamlining development activities within the database.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-developer-role/new-developer-role.md"
+        },
+        {
+            "title": "Lab: Error Message Improvements",
+            "description": "Enhance user experience and troubleshooting by implementing improved error messages in your SQL environment.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-error-message-improvements/new-error-message-improvements.md"
+        },
+        {
+            "title": "Lab: Annotations",
+            "description": "Creating Annotations",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/annotations/annotations.md"
+        },
+        {
+            "title": "Lab: SQL Domains",
+            "description": "Using SQL Domains",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-domains/new-domains.md"
+        },
+        {
+            "title": "Lab: SQL Analysis Report",
+            "description": "Learn to generate comprehensive SQL analysis reports for performance optimization.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-sql-analysis-report/new-sql-analysis-report.md"
+        },
+        {
+            "title": "Lab: Shrink Tablespace",
+            "description": "Optimize your database storage by mastering the technique of shrinking tablespaces efficiently.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
+        },
+
+        {
+            "title": "Workshop: AI Vector Search - Run a RAG Application",
+            "description": "Run a RAG application",
+            "type": "livelabs",
+            "filename": "../../../ai-vector-rag/demo/demo.md"
+        },
+        {
+            "title": "Lab: Build Your Own RAG App",
+            "description": "Exploring RAG",
+            "type": "livelabs",
+            "filename": "../../../ai-vector-rag/rag/rag.md"
+        },
+        {
+            "title": "Workshop: JSON Schema",
+            "description": "Creating JSON Schemas",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-json-schema/new-json-schema.md"
+        },
+        {
+            "title": "Lab: JSON Duality Views",
+            "description": "Building Duality Views",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-duality-views/new-duality-views.md"
+        },
+        {
+            "title": "Workshop: Property Graphs",
+            "description": "Building Property Graphs",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-property-graph/property-graph-se-deep-dive.md"
+        },
+
+        {
+            "title": "Need Help?",
+            "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+            "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

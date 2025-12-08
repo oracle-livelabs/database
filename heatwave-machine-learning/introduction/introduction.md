@@ -2,7 +2,7 @@
 
 ![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
 
-This workshop is based on [MySQL HeatWave User Guide: Iris Data Set Machine Learning Quickstart](https://dev.mysql.com/doc/heatwave/en/hwml-iris-example.html)
+This workshop is based on [MySQL HeatWave User Guide: Iris Data Set Machine Learning Quickstart] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-iris-quickstart.html)
 
 HeatWave is a massively parallel, high-performance, in-memory query accelerator that accelerates MySQL performance by orders of magnitude for analytics workloads, mixed workloads, and machine learning. A HeatWave Cluster consists of a MySQL DB System and HeatWave nodes that store data in memory and process analytics and machine learning queries.
 
@@ -62,7 +62,7 @@ In this lab, you will be guided through the following steps:
 ### Prerequisites
 
 - An Oracle Free Tier, Paid or LiveLabs Cloud Account
-- Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
+- Some Experience with MySQL Shell - [MySQL shell] (https://dev.mysql.com/doc/refman/9.2/en/)
 
 
 ## Acknowledgements
@@ -72,4 +72,4 @@ In this lab, you will be guided through the following steps:
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
 Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, Jul 2023
+- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, February 2025

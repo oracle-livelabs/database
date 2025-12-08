@@ -18,7 +18,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 ## Task 1: Enabling SQL Firewall
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png =50%x*)
+    ![click SQL](../common-images/im1.png =50%x*)
 
 2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
 
@@ -144,7 +144,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![start capture](images/im22.png " ")
     ![start capture](images/im23.png " ")
 
-10. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
+10. Select the SQL tile so we can run some typical SQL operations to capture normal activities (e.g., select and insert statements).
 
     ```
     <copy>

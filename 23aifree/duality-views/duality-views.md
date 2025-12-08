@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab demonstrates the extreme flexibility of JSON Duality Views in the Oracle 23ai database. You will learn how to work with SQL data and JSON documents simultaneously, leveraging the true duality of the views. With JSON Duality Views, you have the flexibility and data access benefits of the JSON document model combined with the storage efficiency and power of the relational model.
+This lab demonstrates the extreme flexibility of JSON Duality Views in the Oracle Database 23ai database. You will learn how to work with SQL data and JSON documents simultaneously, leveraging the true duality of the views. With JSON Duality Views, you have the flexibility and data access benefits of the JSON document model combined with the storage efficiency and power of the relational model.
 
 Estimated Time: 20 minutes
 

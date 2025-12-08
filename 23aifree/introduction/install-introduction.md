@@ -33,9 +33,9 @@ Estimated Time: 75 minutes
 ### Objectives
 
 In this lab, you will:
-* Install and create an Oracle 23ai Free Database
+* Install and create an Oracle Database 23ai Free Database
 * Configure tools to use with the database
-* Try out some of the new features of the Oracle 23ai Free Database
+* Try out some of the new features of the Oracle Database 23ai Free Database
 
 ### Prerequisites
 

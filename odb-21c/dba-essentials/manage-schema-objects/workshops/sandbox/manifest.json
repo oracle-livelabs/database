@@ -9,7 +9,7 @@
       "type": "em-dba"
     },
     {
-      "title": "Lab 1: Environment Setup",
+      "title": "Lab 1: Verify compute instance setup",
       "description": "Verify Setup of compute instance",
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },

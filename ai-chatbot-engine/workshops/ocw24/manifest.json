@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "AI Chatbot engine with Oracle Database 23ai and OCI Generative AI Services",
+    "workshoptitle": "AI Chatbot engine with Oracle AI Database and OCI Generative AI Services",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
@@ -33,7 +33,7 @@
         },
         {
             "title": "Your OCI GenAI key",
-            "filename": "https://oracle-livelabs.github.io/common/labs/ocw24/tut3008.md"
+            "filename": "../../search+llm/cw-key.md"
         },
         {
             "title": "Need Help?",

@@ -38,7 +38,7 @@ This lab assumes you have:
 
 1. Log in to **OCI** and select **Developer Services**, and **Kubernetes Clusters (OKE)** to access to your OKE cluster created
 
-    ![OKE](images/oke-cluster.png)
+    ![OKE](images/navigate-to-oke.png)
 
 2. Click on the **oke-cluster**
 
@@ -157,30 +157,30 @@ This lab assumes you have:
 
 4. Deploy Ingress Resource 'helloworld-ing' to 'helloworld' namespace
 
-  ```text
-<copy>
-cat <<EOF | kubectl apply -n helloworld -f -
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: helloworld-ing
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths:
-        - path: /helloworld
-          pathType: Prefix
-          backend:
-            service:
-              name: docker-hello-world-svc
-              port:
-                number: 8088
-EOF
-</copy>
-```
+    ```text
+    <copy>
+    cat <<EOF | kubectl apply -n helloworld -f -
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: helloworld-ing
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+    spec:
+      ingressClassName: nginx
+      rules:
+      - http:
+          paths:
+            - path: /helloworld
+              pathType: Prefix
+              backend:
+                service:
+                  name: docker-hello-world-svc
+                  port:
+                    number: 8088
+    EOF
+    </copy>
+    ```
 
     ![Deploy ingress](images/deploy-ingress-output.png)
 
@@ -188,23 +188,23 @@ EOF
 
 1. Check the Public IP and resource
 
-  Take note of the external public IP for the service
+    Take note of the external public IP for the service
 
-  >**Note** The Public IP of the the Ingress Resource **helloworld-ing** will take sometime to be assigned, monitor the creation until the Public IP address is assigned
+    >**Note** The Public IP of the the Ingress Resource **helloworld-ing** will take sometime to be assigned, monitor the creation until the Public IP address is assigned
 
-  ```text
-  <copy>
-  kubectl get svc -n ingress-nginx
-  </copy>
-  ```
+    ```text
+    <copy>
+    kubectl get svc -n ingress-nginx
+    </copy>
+    ```
 
-  ```text
-  <copy>
-  kubectl get ing -n helloworld
-  </copy>
-  ```
+    ```text
+    <copy>
+    kubectl get ing -n helloworld
+    </copy>
+    ```
 
-  ![Check Ingress status](images/check-ingress-status.png)
+    ![Check Ingress status](images/check-ingress-status.png)
 
 2. Open a browser and access your 'hello world' application using the external IP address. (e.g. http://xxx.xxx.xxx.xxx:/helloworld)
 
@@ -214,24 +214,24 @@ EOF
 
 1. Remove the 'helloworld' namespace (hello world application, ingress)
 
-  ```text
-  <copy>
-  kubectl delete ns helloworld
-  </copy>
-  ```
+    ```text
+    <copy>
+    kubectl delete ns helloworld
+    </copy>
+    ```
 
-  You may now **proceed to the next lab.**
+    You may now **proceed to the next lab.**
 
 ## Acknowledgements
 
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, March 2023
+Last Updated By/Date - Ryan Kuan, July 2025

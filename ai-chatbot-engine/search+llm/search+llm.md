@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab guides you through the steps to integrate the vector database (Oracle Database 23ai in our case) and retrieve a list of text chunks that are close to the "question" in vector space. Then, we will use the most relevant text chunks to create an LLM prompt and ask the Oracle Generative AI Service to create a nicely worded response for us.
+This lab guides you through the steps to integrate the vector database (Oracle AI Database in our case) and retrieve a list of text chunks that are close to the "question" in vector space. Then, we will use the most relevant text chunks to create an LLM prompt and ask the Oracle Generative AI Service to create a nicely worded response for us.
 
 This is a classical Retrieval-Augmented Generation (RAG) approach. The Retrieval-Augmented Generation architecture combines retrieval-based and generation-based methods to enhance natural language processing tasks. It consists of a retriever, which searches a knowledge base for relevant documents, and a generator, which uses these documents to produce informed responses. This dual approach improves accuracy and detail compared to models relying solely on pre-trained knowledge.
 
@@ -45,7 +45,7 @@ fetch approx first {topK} rows only"""
 ```
 In the given SQL query, `topK` represents the number of top results to retrieve. The query selects the payload column along with the cosine distance between the vector column in the specified table (`table_name`) and a provided vector parameter `:vector`, aliasing the distance calculation as `score`. 
 
-By ordering the results by the calculated `score` and using `fetch approx first {topK} rows onl`y, the query efficiently retrieves only the top `topK` results based on their cosine similarity to the provided vector. 
+By ordering the results by the calculated `score` and using `fetch approx first {topK} rows only`, the query efficiently retrieves only the top `topK` results based on their cosine similarity to the provided vector.
 
 ### Step 2: Transforming the question into a vector
 First, we define the question in a new cell.
@@ -88,8 +88,10 @@ The SQL query is executed with the provided vector parameter, fetching relevant 
 
 If we print the results, we obtain something like the following. As requested, we have the "score" of each hit, which is essentially the distance in vector space between the question and the text chunk, as well as the metadata JSON embedded in each chunk.
 ```python
+<copy>
 import pprint
 pprint.pp(results)
+</copy>
 ```
 
 ```
@@ -166,7 +168,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     ```python
     <copy>
     # transform docs into a string array using the "paylod" key
-    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in docs])
+    docs_as_one_string = "\n=========\n".join([doc[1]["text"] for doc in results])
     docs_truncated = truncate_string(docs_as_one_string, 1000)
     </copy>
     ```
@@ -200,16 +202,14 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 ## Task 3: Call the Generative AI Service LLM
 
 <if type="ocw24">
-0. **If you're running this lab at CloudWorld 2024**
+0. **If you're running this lab at CloudWorld**
 
 In this case, the credentials needed to access the OCI GenAI Service are provided for you. Click on the link below and download the zip file.
 
-[Get Your OCI GenAI key](https://objectstorage.us-ashburn-1.oraclecloud.com/p/75QkYvgn8zNo7vSaI8M4k5GGvs62bRQzeHPQFCxoQQZD1nwD5sl8oDyWjkBvAScE/n/c4u04/b/OCW2024/o/api/tut3008.zip)
+[Get Your OCI GenAI key](https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/sCxNUExb6_eLVYNxc1Waef-KLO6nSmchNG56nK_xBAkktsX-DiUMa6Xp-RbdW3aR/n/fr1wb0c6sbky/b/bucket-20250115-1555/o/oci-files.zip)
 
-Unzip the downloaded file and copy the text file and non-public pem file to your JupyterLab window.
-Rename the text file to `config` (no extension).
-
-Double-click to open it in Jupyter. It will look like this:
+Unzip the downloaded file and copy the `config` file and non-public pem file to your JupyterLab window.
+Open the `config` file in Jupyter. It will look like this:
 ```
 [DEFAULT]
 user=ocid1.user.oc1..zzzzzzzzzzzzz
@@ -217,13 +217,10 @@ fingerprint=80:2a:84:00:29:2d:ec:04:8b:ee:xxxx
 tenancy=ocid1.tenancy.oc1..yyyyyyyyyyyy
 region=us-chicago-1
 key_file=<path to your private keyfile> # TODO
-
-Compartment ocid = ocid1.compartment.oc1..xxxxxxxx
 ```
-Make note of your compartment ocid and delete that line (the last one in the file). You will need it in point 2 below.
-
 Enter the path and name of your private key at the end of the `key_file` line.
 
+The compartment id (needed later in this tutorial) is stored in the `compartment-id.txt` file.
 
 > Note: The details in paragraph 1 below are provided for your information only. It is safe to skip to point 2.
 </if>
@@ -283,7 +280,7 @@ Enter the path and name of your private key at the end of the `key_file` line.
     ```
 
 ### Step 2: Make the call
-This code leverages *Oracle Cloud Infrastructure (OCI)* to generate text using a language model, specifically the “*cohere.command-r-plus*” model. The process starts by creating an inference request where various parameters are defined. These parameters include the input prompt, the maximum number of tokens to generate, and settings for controlling the randomness and creativity of the output, such as `temperature` and `top_p` values. The `is_stream` attribute is set to `False`, indicating that the SDK currently does not support streaming responses.
+This code leverages *Oracle Cloud Infrastructure (OCI)* to generate text using a language model, specifically the latest available Cohere model. The process starts by creating an inference request where various parameters are defined. These parameters include the input prompt, the maximum number of tokens to generate, and settings for controlling the randomness and creativity of the output, such as `temperature` and `top_p` values. The `is_stream` attribute is set to `False`, indicating that the SDK currently does not support streaming responses.
 
 Next, the code sets up the details required for the text generation request. This involves specifying the serving mode and model ID, which identifies the language model to use, and the compartment ID where the request will be processed. The inference request, with all its configured parameters, is then attached to these details. This setup ensures that the OCI service knows exactly what model to use and how to handle the request.
 
@@ -301,7 +298,7 @@ chat_request.frequency_penalty = 0
 chat_request.top_p = 0.75
 chat_request.top_k = 0
 
-chat_detail.serving_mode = oci.generative_ai_inference.models.OnDemandServingMode(model_id="cohere.command-r-plus")
+chat_detail.serving_mode = oci.generative_ai_inference.models.OnDemandServingMode(model_id="cohere.command-r-plus-08-2024") # <- Please check the OCI docs for the latest available model at the time you're running the lab.
 chat_detail.chat_request = chat_request
 chat_detail.compartment_id = compartment_id
 chat_response = generative_ai_inference_client.chat(chat_detail)
@@ -320,11 +317,15 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
-* [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
+* [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
+* [Get Started with Oracle AI Database](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, Sep 2024
+* **Reviewers**
+  - Rahul Gupta, Senior Cloud Engineer, Analytics
+  - Kashif Manzoor, Master Principal Account Cloud Engineer, EMEA AI CoE
+* **Last Updated By/Date** -  Bogdan Farca, Jan 2025

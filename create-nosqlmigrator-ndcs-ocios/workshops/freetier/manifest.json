@@ -1,0 +1,37 @@
+{
+    "workshoptitle": "Migrate Data from NoSQL Cloud Service to OCI Object Storage",
+    "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+        {
+          "title": "Introduction",
+          "description": "This is the inroduction to the lab",
+          "filename":"../../introduction/introduction.md"
+        },
+        {
+          "title": "Get Started",
+          "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable).",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+          "title": "Lab 1: Create Oracle NoSQL table and OCI Object Storage Bucket",
+          "filename":"../../create-nosqltables-ocios-bucket/create-nosqltables-ocios-bucket.md"
+        },
+		    {
+          "title": "Lab 2: Download Migrator Utility and Upload to Cloud Shell",
+          "filename": "../../download-migrator-utility/download-migrator-utility.md"
+        },
+		    {
+          "title": "Lab 3: Create a Configuration File",
+          "filename": "../../create-migrator-config-file/create-migrator-config-file.md"
+        },
+		    {
+          "title": "Lab 4: Run the Oracle NoSQL Database Migrator Utility",
+          "filename": "../../run-migrator-utility/run-migrator-utility.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
