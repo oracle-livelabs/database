@@ -2,19 +2,19 @@
 
 ## About the JSON Duality Views Workshop
 
-This workshop focuses on working with JSON Duality Views in Oracle Database 23ai.
+This workshop focuses on working with JSON Duality Views in Oracle AI Database.
 
 ### **JSON Duality**
 
-JSON Relational Duality is a landmark capability in Oracle Database 23ai providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
+JSON Relational Duality is a landmark capability in Oracle AI Database providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
 
 JSON Relational Duality helps to converge the benefits of both document and relational worlds. Developers now get the flexibility and data access benefits of the JSON document model, plus the storage efficiency and power of the relational model. The new feature enabling this convergence is JSON Relational Duality View (Will be referred below as Duality View).
 
 Key benefits of JSON Relational Duality:
 - Experience extreme flexibility in building apps using Duality Views. Developers can access the same data relationally or as hierarchical documents based on their use case and are not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
-- Experience simplicity by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updatable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning. 
+- Experience simplicity by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updatable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning.
 - Enable flexibility and simplicity in building multiple apps on same data. Developers can use the power of Duality View to define multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
-- Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically. 
+- Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically.
 - Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new lock-free concurrency control provided with Duality View supports high concurrency updates. The new-lock free concurrency control also works efficiently for interactive applications since the data is not locked during human thinking time.
 
 Estimated Time: 75 minutes
@@ -25,13 +25,13 @@ In this lab, you will:
 * Create JSON Duality Views
 * Perform insert and update operations against JSON Duality Views
 * Perform both JSON and SQL operations against JSON Duality Views
-* Explore some of the Utilities fpr working with JSON Duality Views  
+* Explore some of the Utilities fpr working with JSON Duality Views
 * Work with both SQL and REST to modify data using Duality Views
 
 ### Prerequisites
 
 In order to do this workshop you need
-* Oracle Autonomous Database 23ai provisioned or one running in a LiveLabs environment
+* Oracle Autonomous AI Database provisioned or one running in a LiveLabs environment
 
 ## Learn More
 
@@ -42,5 +42,4 @@ In order to do this workshop you need
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager
 * **Contributors** - Sean Stacey, Oracle Database Product Management, Outbound Product Manager
-
-* **Last Updated By/Date** - Sean Stacey, Oracle Database Product Management, Outbound Product Manager, August 2024
+* **Last Updated By/Date** - Eileen Beck, December 2025
