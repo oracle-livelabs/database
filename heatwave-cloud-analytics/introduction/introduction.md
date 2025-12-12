@@ -44,7 +44,7 @@ The following diagram illustrates all the components deployed on OCI when you co
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 

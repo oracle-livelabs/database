@@ -67,7 +67,7 @@ The last issue in the previous task occurred because the departments table is mi
 
     ```sql
     <copy>
-        cd /home/oracle/assets/workshops/sqlcl-projects-react-app/scripts/
+        cd /home/assets/assets/workshops/sqlcl-projects-react-app/scripts/
     </copy>
     ```
 
@@ -76,7 +76,12 @@ The last issue in the previous task occurred because the departments table is mi
         @departments_table.sql
     </copy>
     ```
-
+    After all the inserts have run successfully, commit your changes to the database using COMMIT statement.
+    ```sql
+    <copy>
+        COMMIT
+    </copy>
+    ```
     ![Departments ddl and data executed](./images/departments-table-executed.png " ")
 
 </details>
@@ -85,7 +90,7 @@ The last issue in the previous task occurred because the departments table is mi
 
 1. Open to Database Actions
 2. Connect as DEV_USER
-3. Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
+3. Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button.
 
     ![Run departments ddl in database actions](./images/run-departments-table-database-actions.png " ")
 
@@ -108,18 +113,47 @@ Don’t worry, we’ll easily configure it in the next task using ***ORDS***, wh
 
 </details>
 
-## Task 3: Enable ORDS Endpoint For Departments Table
+## Task 3: Enable REST Endpoints For Departments Table
+
+<!--You already enabled the employees table in the get stated lab and know how to do that, now we need enable the departments table as well. This time you will use an other more easy way to enable it quickly different from the first way, just using a specific PL/SQL block.-->
+You have already enabled the EMPLOYEES table in the "Get Started" lab and are familiar with the process. Now, we need to enable the DEPARTMENTS table as well. This time, you will use a quicker and simpler method, different from the previous one, by using a specific PL/SQL block.
 
 If you are still connected to DEV_USER in Database Actions, skip to step 3.
 
 1. Open Oracle Database Actions
 2. Connect as DEV_USER
+3. Copy the following PL/SQL block and paste it into the SQL worksheet:
+
+    ```sql
+    <copy>
+        BEGIN
+        ORDS.ENABLE_OBJECT(
+            P_ENABLED => TRUE,
+            P_SCHEMA => 'DEV_USER',
+            P_OBJECT =>  'DEPARTMENTS',
+            P_OBJECT_TYPE => 'TABLE',
+            P_OBJECT_ALIAS => 'departments',
+            P_AUTO_REST_AUTH => FALSE
+        );
+        COMMIT;
+    END;
+    /
+    </copy>
+    ```
+
+4. Click the **Run Script** button to execute the block
+    <!--![Copy and past the PL/SQL block to the sql worksheet](./images/rest-enable-.png " ")-->
+5. Refresh the tables list, and you'll notice the REST-enabled icon appear next to the DEPARTMENTS table, confirming that it is now ready for REST interactions
+    <!--![The REST enabled icon appears](./images/rest-enable-icon-for-departments.png " ")-->
+
+Your DEPARTMENTS table is now ready for REST interactions.
+<!--
 3. Select **Tables**, right-click on **`DEPARTMENTS`**, choose **REST**, and then click **Enable**
     ![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")
 4. Click **Enable** at the bottom right
     ![REST Enable Object](./images/rest-enable-object.png " ")
 5. The **DEPARTMENTS** table is **REST enabled** now
-    ![Departments REST Enabled](./images/departments-rest-enabled.png " ")
+    ![Departments REST Enabled](./images/departments-rest-enabled.png " ")-->
 
 ## Task 4: Check the Departments Page After Database Update
 
@@ -132,11 +166,11 @@ Now, our application is ready for the next release (version 2), and will be depl
 
 >**Note:** We will just simulate and imagine this process of deployments due to time constant of the workshop and also to avoid diverging from the workshop main goal (Explore Project command in SQLcl)
 
-When moving to production, we will no longer be working with the development database (DEV\_USER). Instead, the application will use the **production database**, which, in this workshop, is represented by the **PROD\_USER** schema.
+When moving to production, we will no longer be working with the development database (DEV\_USER). Instead, the application will use the **production database**, which, in this workshop, is represented by the **prod\_user** schema.
 
 Let's assume our production database is PROD_USER for all the next operations.
 
-All right, so now we will go to the .env file and replace **DEV\_USER** with **PROD\_USER**
+All right, so now we will go to the .env file and replace **dev\_user** with **prod\_user**
 
 1. In the terminal, make sure you are in the application directory.
 
@@ -149,19 +183,54 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 3. Press Esc + I to enter insert mode.
 
-4. Replace **DEV\_USER** with **PROD\_USER**. Use the Up, Down, Left, and Right arrow keys to navigate to your target.
+4. Replace **dev\_user** with **prod\_user**. Use the Up, Down, Left, and Right arrow keys to navigate to your target.
 
-    ![Replace DEV_USER with PROD_USER in .env](./images/replace-dev-to-prod-user.png " ")
+    ![Replace dev_user with prod_user in .env](./images/replace-dev-to-prod.png " ")
 
 5. Press **Esc**, then type **:wq** and press **Enter** to save and exit.
 
 6. Go to the application and refresh
+    - After making modifications to the .env file, go to the terminal where the application is running, stop the process by pressing Ctrl+C, and then restart it by running:
+    ```
+       <copy>
+         npm run dev
+     </copy>
+    ```
+    Once the application is restarted, go to the browser and refresh the page.
+
+    >**Note:** Every time you make changes to the **.env** file, you must restart the application to apply the new environment variables.
+
+    - If you don't see the changes on the department page, ensure that the DEPARTMENTS table is REST-enabled. You can verify this by executing the following SQL query:
+
+        - Connect as prod_user with : 
+            ```
+            <copy>
+            sql prod_user/$DBPASSWORD@"$DBCONNECTION" 
+            </copy>
+            ```
+        - Run this query to REST-enable departments table:
+            ```sql
+                <copy>
+                    BEGIN
+                    ORDS.ENABLE_OBJECT(
+                        P_ENABLED => TRUE,
+                        P_SCHEMA => 'PROD_USER',
+                        P_OBJECT =>  'DEPARTMENTS',
+                        P_OBJECT_TYPE => 'TABLE',
+                        P_OBJECT_ALIAS => 'departments',
+                        P_AUTO_REST_AUTH => FALSE
+                    );
+                    COMMIT;
+                END;
+                /
+                </copy>
+            ```
 
 7. Click on the Departments section
 
     ![Departments page unlocked](./images/departments-page-unlocked.png " ")
 
-There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to PROD\_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
+There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to prod\_user (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the prod_user schema and checking its tables.
 
 ![No departments table in prod](./images/show-prod-tables.png " ")
 

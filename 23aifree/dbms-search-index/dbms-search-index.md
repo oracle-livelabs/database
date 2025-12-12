@@ -16,7 +16,7 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes you have:
-* Oracle Database 23ai Free Developer Release
+* Oracle AI Database 26ai Free Developer Release
 * All previous labs successfully completed
 * SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
@@ -67,7 +67,7 @@ You should then be at a screen that looks like this.
 
     ![Created search index](images/created-search-index.png " ")
 
-## Task 2: Check the index table
+## Task 3: Check the index table
 
 1. On the Navigator pane on the left, refresh the list of tables by clicking the circular button. You will see a number of new tables. The table called DEMO_IDX (same as our index name) is the one we are interested in. Click on the triangle next to it to open it and view its columns.
 
@@ -77,7 +77,7 @@ You should then be at a screen that looks like this.
 
     ![viewing the index table](images/view-index-table.png " ")
 
-## Task 3: Add some tables to the index as sources
+## Task 4: Add some tables to the index as sources
 
 Let's say we want to be able to search for info in the EMPLOYEES and JOBS tables. You can view those tables in the Navigator pane if you wish to. To add them to the index, we use another procedure from the DBMS\_SEARCH package: **ADD\_SOURCE**. This takes the name of the previously-created index, and the name of a source object (table or view) to be added.
 
@@ -94,7 +94,7 @@ Let's say we want to be able to search for info in the EMPLOYEES and JOBS tables
 
     ![adding tables to the index](images/add-tables.png " ")
 
-## Task 4: Check what data was indexed
+## Task 5: Check what data was indexed
 
 Data added from source tables is not stored in our DEMO\_IDX table. Only metadata is stored there. The metadata is stored in a binary JSON column. We can look at it, but we'll need to use the json_serialize function to get the data in human-readable format.
 
@@ -150,7 +150,7 @@ Data added from source tables is not stored in our DEMO\_IDX table. Only metadat
 
     ![get one document](images/get-one-document.png " ")
 
-## Task 5: Add tables from another schema
+## Task 6: Add tables from another schema
 
 Adding tables from another schema is straightforward. We just need to enter SCHEMA.TABLENAME in place just the table name. Of course, you need SELECT access to a table before you can add it to the index. During the setup phase we granted HR access to two tables in the Sales History (SH) schema, so we can add those to the same index that contains our EMPLOYEES and JOBS tables.
 
@@ -167,7 +167,7 @@ Adding tables from another schema is straightforward. We just need to enter SCHE
 
     Feel free to try variations on the previous queries to explore the METADATA column and the GET_DOCUMENT function, or jump straight on to the next task.
 
-## Task 6: Add a view to our index
+## Task 7: Add a view to our index
 
 Views are a little more complicated to deal with - we can't just add any view. In order to be used with a search index, a view must have both a primary key and a foreign key constraint to any tables used other than the source of the primary key. This ensures that the DBMS_SEARCH index is able to identify any updates to the view's source tables, and update the index appropriately.
 
@@ -217,4 +217,4 @@ In the next lab we'll look at queries against our index.
 
 ## Acknowledgements
 * **Author** - Roger Ford
-* **Last Updated By/Date** - Roger Ford, Database Product Management, June 2023
+* **Last Updated By/Date** - Abby Mulry, December 2025

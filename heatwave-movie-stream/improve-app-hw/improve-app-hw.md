@@ -25,7 +25,7 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Download sample display images from a Bucket in OCI Object Store:
 
-1. Click on this link to Download the images [MovieHub Sample Images](https://objectstorage.us-ashburn-1.oraclecloud.com/p/IQ5Zvpi-KPjZMgVUMfAQfkzwezllFxOzLgEZ9tuLdkQilotp3WzvUh58eMGRXGTc/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/moviehub_imgs.zip) from the Demo to your local machine
+1. Click on this link to Download the images [MovieHub Sample Images](https://objectstorage.us-ashburn-1.oraclecloud.com/p/7f9WLDZWdUgR9cRXVhapk8y7zFgQRGPTGPZyPn9Ef3z6SV9twdN9lAk4tVOm14Dr/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/moviehub_imgs.zip) from the Demo to your local machine
 
 ## Task 2: Upload Images to the OCI Object Store:
 
@@ -39,15 +39,24 @@ In this lab, you will be guided through the following tasks:
 
 ![Create Bucket ](./images/create-bucket.png "create-bucket ")
 
-4. Scroll down in the MovieHub-images bucket page
+4. Enter a name for the bucket
 
-5. Click **Upload** to upload objects to the bucket. Upload the images you want to showcase in the app.
+    ```bash
+    <copy>MovieHub-Images
+    </copy>
+    ```
+
+5. Scroll down in the MovieHub-images bucket page
+
+6. Click **Upload** to upload objects to the bucket. Upload the images you want to showcase in the app.
 
 ![Upload Images Bucket ](./images/upload-images-bucket.png "upload-images-bucket ")
 
 ## Task 3: Create Pre-Authenticated Requests for each image
 
 1. Click on the three dots in the far right of an object.
+
+    ![Create Pre-Authenticated Request ](./images/create-pre-authenticated-requests.png "create-pre-authenticated-requests ")
 
 2. Click **Create Pre-Authenticated Request**
 
@@ -99,7 +108,7 @@ In this lab, you will be guided through the following tasks:
     ```bash
     <copy>SELECT * FROM profiles;</copy>
     ```
-    ![List Profiles](./images/list-profiles.png =60%x* "list-profiles ")
+    ![List Profiles](./images/list-profiles.png =50%x* "list-profiles ")
 
     b. Enter the following command at the prompt.
 
@@ -183,12 +192,11 @@ In this lab, you will be guided through the following tasks:
 
 - [Oracle Autonomous Database Serverless Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/index.html#Oracle%C2%AE-Cloud)
 - [Oracle APEX Rendering Objects Documentation](https://docs.oracle.com/en/database/oracle/apex/23.1/aexjs/apex.html)
-- [Oracle JavaScript Extension Toolkit (JET) API Reference Documentation](https://www.oracle.com/webfolder/technetwork/jet/jsdocs/index.html)
-- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/index.html)
-- [MySQL HeatWave ML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
+- [Oracle JavaScript Extension Toolkit (JET) API Reference Documentation](https://docs.oracle.com/en/middleware/developer-tools/jet/14.1/develop/getting-started-oracle-javascript-extension-toolkit-jet.html)
+- [Oracle Cloud Infrastructure Object Storage Documentation](https://docs.oracle.com/en-us/iaas/Content/Object/home.htm)
 
 ## Acknowledgements
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025

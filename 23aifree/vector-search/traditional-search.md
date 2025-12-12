@@ -1,7 +1,7 @@
 # Perform a Traditional Data Search
 
 ## Introduction
-In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
+In this lab, you will experience how AI Vector Search solves the traditional search dilemma.
 
 **_Estimated Time: 20 minutes_**
 

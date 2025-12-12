@@ -6,9 +6,8 @@ In this lab, we'll be downloading materials and setting up the necessary tools r
 
 Estimated Time: 5 minutes
 
-
 <if type="livelabs">
-Watch the video below for a quick walk-through of the lab. 
+Watch the video below for a quick walk-through of the lab.
 [Change password](videohub:1_lvc3vcko)
 </if>
 
@@ -18,17 +17,16 @@ In this lab, you will:
 
 - Download the graph setup files and materials onto your noVNC instance
 - Open SQL Developer
-- Start running ORDS to enable APEX 
+- Start running ORDS to enable APEX
 
 ### Prerequisites
 
 This lab assumes you have:
+
 - An instance with 23ai Free Developer Release database installed
 - Access to the instance's remote desktop
 
-
 ## Task 1: Download the graph setup materials
-
 
 1. Click Activities in the upper left corner, then click Terminal. Select File -> New Tab since ORDS is running in your current Terminal tab.
 
@@ -38,11 +36,10 @@ This lab assumes you have:
 
     **NOTE:** You must ensure to run this command, otherwise you will be downloading/unzipping files to the wrong location.
 
-
     ```
     $ <copy>cd ~/examples</copy>
     ```
-    
+
 3. Pull down the materials for setup.
 
     ```
@@ -51,7 +48,7 @@ This lab assumes you have:
 
     ![Wget to pull materials](images/material-pulldown-setup.png)
 
-3. Unzip the file. Inside this zip file are the files to setup your schema and APEX application.
+4. Unzip the file. Inside this zip file are the files to setup your schema and APEX application.
 
     ```
     $ <copy>unzip -o 23aifree-property-graph.zip</copy>
@@ -60,14 +57,13 @@ This lab assumes you have:
     <!-- ![Unzip file](images/unzip-file.png) -->
 
     ![Unzip the file](images/unzip2.png)
-
-4. Remove the remaining zip file after you've unzipped it.
+5. Remove the remaining zip file after you've unzipped it.
 
     ```
     $ <copy>rm -rf 23aifree-property-graph.zip</copy>
     ```
-    
-    ![Remaining zip file removed](images/remove-zip.png) 
+
+    ![Remaining zip file removed](images/remove-zip.png)
 
 ## Task 2: Open SQL Developer
 
@@ -85,7 +81,6 @@ This lab assumes you have:
     >**Note:** If you do **not** see the hol23c_freepdb1 connection available on the menu, please complete Task 3: Add the user connection and then go to step 4.
 
     ![Open the connection](images/hol23c-connection.png)
-
 
 3. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
 
@@ -107,7 +102,7 @@ This lab assumes you have:
 
     ![Run script with play button](images/play-button.png)
 
-8. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward. 
+8. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward.
 
     ![Data output and disregard error](images/error-disregard.png)
 
@@ -132,11 +127,12 @@ This lab assumes you have:
     ![Connect](images/connect.png)
 
 ## Learn More
-* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
-* [SQL Property Graph syntax in Oracle Database 23ai Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+- [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+- [SQL Property Graph syntax in Oracle Database 23ai](https://docs.oracle.com/en/database/oracle/property-graph/25.3/spgdg/sql-ddl-statements-property-graphs.html)
 
 ## Acknowledgements
 
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
 - **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova
+- **Last Updated By/Date** - Denise Myrick, August 2025

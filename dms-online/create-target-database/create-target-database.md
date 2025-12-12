@@ -25,17 +25,13 @@ In this lab, you will:
 
 The following tasks are *optional* if a target autonomous database is already present.
 
-1. You first need to create a Network Security Group for use in a Private IP ADB instance. In the OCI Console Menu, go to **Networking > Virtual Cloud Networks** and pick your VCN.
+1. You first need to create a Network Security Group for use in a Private IP ADB instance. In the OCI Console Menu, go to **Networking > Virtual Cloud Networks**   and pick your VCN.
 
-2. In the left-hand Resources list, pick **Network Security Groups**.
+2. Navigate to the **Security** tab , ick **Network Security Groups**, click on **Create Network Security Group**
 
-3. Press **Create Network Security Group**.
+  ![create network security group](images/create-network-security-group.png =50%x*)
 
-  ![create network security group](images/create-network-security-group.png)
-
-4. Enter Name such as **DMS\_NSG** and press **Next**.
-
-  ![enter NSG name](images/naming-nsg.png)
+4. Enter Name such as **DMS\_NSG** 
 
 5. In the **Rule** box please enter the following entries, otherwise leave defaults:
     - Source Type: **CIDR**
@@ -43,36 +39,34 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 6. Press **Create**.
 
-  ![enter security rules and press create](images/add-security-rules-nsg.png)
+  ![enter NSG name](images/naming-nsg.png =50%x*)
 
 ## Task 2: Create Target Autonomous Database
 
-1. Now you can create the ADB instance. In the OCI Console Menu, go to **Oracle Database > Autonomous Transaction Processing**.
+1. Now you can create the ADB instance. In the OCI Console Menu, go to **Oracle Database > Autonomous Database**.
 
-  ![Oracle autnomous database navigation menu](images/odb-to-atp.png)
+  ![Oracle autnomous database navigation menu](images/odb-to-atp.png =50%x*)
 
-2. Pick a compartment on the left-hand side **Compartment** list.
+2. Pick a compartment in the applied filters **Compartment** list.
 
 3. Press **Create Autonomous Database**.
 
 4. Enter the following values, otherwise leave defaults. You can adjust shapes and storage to your use case.
     - Display Name: **TargetATP**
     - Database Name: **TargetATP**
-    - Create administrator credentials – Password: *password of your choice*
+    - Workload type: **Transaction Processing**
+    - Administrator credentials – Password: *password of your choice*
     - Access Type: **Private endpoint access only**
     - Virtual cloud network: **Select your VCN**
     - Subnet: **Select your public subnet**
-    - Choose a license type: **Bring your own license (BYOL)**
+    - Advanced options: Network security groups select **DMS_NSG**
 
-  ![ATP name](images/atp-name.png)
+  ![ATP name](images/atp-name.png =50%x*)
 
-  ![define a password for your ATP](images/atp-password.png)
-  ![choose network access](images/network-access.png)
+  ![define a password for your ATP](images/atp-password.png =50%x*)
+  ![choose network access](images/network-access.png =50%x*)
 
-  ![choose your license](images/license.png)
-
-5. Close the dialog by pressing **Create Autonomous Database**.
-
+ 
 You may now [proceed to the next lab](#next).
 
 ## Learn More
@@ -83,4 +77,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Hanna Rakhsha, Kiana McDaniel, Solution Engineers, Killian Lynch, Austin Specialist Hub
-* **Last Updated By/Date** - Hanna Rakhsha, Kiana McDaniel, Killian, Lynch Solution Engineers, July 2021
+* **Last Updated By/Date** - - Jorge Martinez, Product Management, May 2025

@@ -28,13 +28,12 @@ In this lab, you will:
 ## Task 1: Create a Database Connection for Source CDB
 
 For this task you need the following info from previous steps:
-* Source DB Private IP
-* Source DB CDB Service Name
+* Source DB  Name
 * Database Administrator Password
 
 1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![registered database navigation](images/db-connection.png =50%x*)
+  ![database connection navigation](images/db-connection.png =50%x*)
 
 2. Press **Create Connection**
 
@@ -42,34 +41,27 @@ For this task you need the following info from previous steps:
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
+    - Type: **Oracle Database**
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
-    - Database Type: **DB System Database (Bare Metal, VM, Exadata)**
-    - Database System: **SourceDB**
-    - Database: **sourcedb**
-    - Connect String: Change existing string by replacing the qualified hostname with the **private IP** of the database node, for example:
-        - **10.0.0.3**:1521/sourcedb_iad158.sub12062328210.vcndmsla.oraclevcn.com
-    - Subnet: Pick the Subnet that the DB is in
 
-4. Press **Next**
+  Select Database details: Select an OCI database
+   - Database System: **SourceDB**
+   - Initial load database username: **system**
+   - Initial load database password: \****
 
-  ![Screenshot of register DB details and click next](images/create-db-next.png =50%x*)
+Check **Use different credentials for replication** and provide c##ggadmin and password.
+Don’t check create private endpoint option.
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Initial load database username: **system**
-    - Initial load database password: <*Admin password*>
-    - Check **Use different credentials for replication**
-    - Replication database username: **c##ggadmin**
-    - Replication database password: <*Admin password*>
-    
-6. Press **Create**
+4. Press **Create**
 
-  ![Screenshot of  confirm register DB](images/create-db-confirm.png =40%x*)
+  ![Screenshot of database creation details and click next](images/create-db-next.png =50%x*)
+   ![Screenshot of database creation details and click next](images/create-db-next1.png =50%x*)
 
-## Task 2: Create Database Connection for Source PDB
+
+## Task 2: Create database connection for source PDB
 
 For this task you need the following info from previous steps:
-* Source DB Private IP
 * Source DB PDB Service Name
 * Database Administrator Password
 
@@ -79,36 +71,33 @@ For this task you need the following info from previous steps:
 
 2. Press **Create connection**
 
-  ![Screenshot of click register db](images/click-create-db.png =50%x*)
+  ![Screenshot of click register db](images/db-connection-pdb.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
+    - Type: **Oracle Database**
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
-    - Database Type: **DB System Database (Bare Metal, VM, Exadata)**
-    - Database System: **SourceDB**
-    - Database: **sourcedb**
-    - Connect String: Change existing string by replacing the qualified hostname with the **private IP** of the database node. Then replace service name with **PDB service name**, for example:
-        - **10.0.0.3**:1521/**pdb**.sub12062328210.vcndmsla.oraclevcn.com
-    - Subnet: Pick the Subnet that the DB is located in
 
-4. Press **Next**
+  Select Database details: Select an OCI database
+   - Database System: **SourceDB**
+   - Pluggable database: **pdb**
+   - Initial load database username: **system**
+   - Initial load database password: \****
+
+Check **Use different credentials for replication** and provide ggadmin and password.
+Don’t check create private endpoint option.
+
+
+4. Press **Create**
 
   ![Screenshot of register db](images/create-db-next-second.png =50%x*)
+  ![Screenshot of register db](images/create-db-next-second1.png =50%x*)
+  ![Screenshot of register db](images/create-db-next-second2.png =50%x*)
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Initial load database username: **system**
-    - Initial load database password: <*Admin password*>
-    - Check **Use different credentials for replication**
-    - Replication database username: **ggadmin**
-    - Replication database password: <*Admin password*>
-    
+  
 
-6. Press **Create**
-
-   ![Screenshot of  confirm register DB](images/create-db-confirm-pdb.png =40%x*)
-
-## Task 3: Create Database Connection for Target ADB
+## Task 3: Create database connection for target ADB
 
 For this task you need the following info from previous steps:
 * Database Administrator Password
@@ -119,29 +108,28 @@ For this task you need the following info from previous steps:
 
 2. Press **Create connection**
 
-   ![Screenshot of click register db](images/click-create-db.png =50%x*)
+   ![Screenshot of click register db](images/click-create-db-atp.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetATP**
+    - Type: **Oracle Autonomous Database**
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
-    - Database Type: **Autonomous Database**
-    - Database: **TargetATP**
 
-4. Press **Next**
-
-  ![Screenshot of press next after entering details](images/target-press-next.png =50%x*)
-
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
+   Select the Autonomous database name in your compartment i.e: dmsatp2
     - Initial load database username: **admin**
-    - Initial load database password: <*Admin password*>
-    - Check the **Use different credentials for replication**
+    - Initial load database password: \****
+
+   Check **Use different credentials for replication**”** and provide ggadmin and password.
     - Replication database username: **ggadmin**
-    - Replication database password: <*Admin password*>
+    - Replication database password: \****
+   
+   Network connectivity: Create private endpoint to access this database and select the correct subnet.
 
-6. Press **Create**
+4. Press **create**
 
-  ![Screenshot of confirm db registration](images/confirm-target-connection.png )
+  ![Screenshot of target connection creation ](images/target-press-next.png )
+  ![Screenshot of target connection creation ](images/target-press-next-b.png )
 
 
 ## Task 4: Create Migration
@@ -154,39 +142,40 @@ For this task you need the following info from previous steps:
 
     ![Screenshot of press create migration](images/press-create-migration.png =50%x*)
 
-  3. On the page **Add Details**, fill in the following entries, otherwise leave defaults:
+  3. On the page **Create migration**, fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
-      - Vault: **DMS_Vault**
-      - Encryption Key: **DMS_Key**
-
-    ![Screenshot to add vault details](images/add-details.png =50%x*)
-
-  4. Press **Next**
-
-  5. On the page **Select Databases**, fill in the following entries, otherwise leave defaults:
-      - Source Database: **SourcePDB**
-      - *Check* Database is pluggable database (PDB)
-      - Container Database connection: **SourceCDB**
-      - Target Database: **TargetATP**
-
-    ![Screenshot of source db selection](images/select-databases.png =50%x*)
-
-  6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
-      - In **Initial Load**, select **Datapump via Object Storage**
-      - Object Storage Bucket: **DMSStorage**
-      - Export Directory Object:
-          - Name: **dumpdir**
-          - Path: **/u01/app/oracle/dumpdir**
-      - Source Database file system SSL wallet path, we manually downloaded the required certificates in a previous lab:
-          - **/u01/app/oracle/dumpdir/wallet**
+      - Compartment: **your compartment**
       
-      - Check **Use Online Replication**    
+    Source database
+      - Database connection: **SourcePDB**
 
-      - Press Create to initiate the Migration creation    
+    Target database
+      - Database connection: **TargetATP** 
+
+    Transfer medium for initial load
+      - Data Pump via Object Storage
+
+    Source database
+      - Export directory object name: **dumpdir**
+      - Export directory object path: **/u01/app/oracle/dumpdir**
+      - Source Database file system SSL wallet path: **/u01/app/oracle/wallet**
+
+    Object Storage bucket
+      - DMSStorage
+
+    Online replication:
+      - Check Use Online Replication 
+      - *Check* Source database is a pluggable database with version less than 21c
+
+    Source container database
+      - Container database connection: **SourceCDB** 
+
      
-    ![Screenshot for migration options](images/test-migration-1.png =50%x*)
+  4. Press **Create** 
+  ![Screenshot of migration creation creation ](images/add-details.png )
+  ![Screenshot of migration creation creation ](images/select-databases.png )
 
-
+  
 You may now [proceed to the next lab](#next).
 
 ## Learn More
@@ -198,4 +187,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022
+* **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025

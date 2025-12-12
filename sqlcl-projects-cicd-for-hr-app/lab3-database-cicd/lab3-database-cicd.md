@@ -26,27 +26,19 @@ Estimated Lab Time: 15 minutes
 
 ## Task 1: Export Database Changes (project export)
 
-First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/oracle/assets/workshops/**sqlcl-projects-react-app**.
+First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/assets/assets/workshops/**sqlcl-projects-react-app**.
 
 ```sql
 <copy>
-    sql sys/Welcome23ai@10.89.0.1:1521/FREEPDB1 as sysdba
+    sql dev_user/$DBPASSWORD@"$DBCONNECTION"
 </copy>
 ```
 
 ```sql
 <copy>
-    connect DEV_USER
+    cd /home/assets/assets/workshops/sqlcl-projects-react-app
 </copy>
 ```
-
-```sql
-<copy>
-    cd /home/oracle/assets/workshops/sqlcl-projects-react-app/
-</copy>
-```
-
-![Connect to DEV_USER](./images/connec-to-dev-and-be-in-the-app-dir.png " ")
 
 >**Note:** You must be in the project folder (in your case **sqlcl-projects-react-app** is your project/application folder) to execute project commands; otherwise, an error will occur.
 
@@ -142,7 +134,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     <!--![Departments.sql content](./images/departments-sql-file-content.png " ")-->
     <!--![Departments.sql content](./images/departments-sql-content.png " ")-->
 
-## Task 4: Stage Changes (project stage)
+## Task 2: Stage Changes (project stage)
 
 1. **Stage Changes:**
 
@@ -219,11 +211,18 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
         ![Custom file location](./images/custom-file-location.png " ")
 
-    * Open the dept_data.sql file and paste the insert statements
+    * Open the dept-data.sql file and paste the insert statements
 
         Double-click the file and paste the copied inserts inside and save it (Command + S or Ctrl + S).
 
         ![Insert data in the custom script](./images/insert-into-custom.png " ")
+
+           ***Important:*** Add the COMMIT statement at the end of the dept-data.sql file.
+          ```sql
+          <copy>
+              COMMIT
+          </copy>
+          ```
 
         <!--TODO: add commit-->
 
@@ -231,7 +230,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 
@@ -260,7 +259,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     ![Merge branch with main ](./images/merge-to-main.png " ")
     <!--![Merge branch with main ](./images/merge-branch-to-main.png " ")-->
 
-## Task 5: Release Changes (project release)
+## Task 3: Release Changes (project release)
 
 1. Once your changes are merged into the main branch, execute the following command to create a second release:
 
@@ -276,7 +275,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 
@@ -286,7 +285,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     </copy>
     ```
 
-## Task 6: Generate Deployable Artifact (project gen-artifact)
+## Task 4: Generate Deployable Artifact (project gen-artifact)
 
 Before generating the artifact, you need to return the install.sql file to its initial state containing **lb update**.
 
@@ -302,6 +301,26 @@ Before generating the artifact, you need to return the install.sql file to its i
 3. Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
 4. Add and commit.
+
+    ```sql
+    <copy>
+        !git add --all
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git status
+    </copy>
+    ```
+
+    ![Git add the installer file](./images/update-install-file-to-update.png " ")
+
+    ```sql
+    <copy>
+        !git commit -m "updated installer to do an update"
+    </copy>
+    ```
 
 5. Run `project gen-artifact`
 
@@ -319,7 +338,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     ![Navigate to the artifact folder](./images/artifact-folder.png " ")
 
-## Task 7: Deploying to Production (project deploy)
+## Task 5: Deploying to Production (project deploy)
 
 1. **Connect to the Production Database:**
 
@@ -341,7 +360,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
         ```sql
         <copy>
-            project deploy -file artifact/HrManager-2.O.0.zip  -verbose
+            project deploy -file artifact/HrManager-2.0.0.zip  -verbose
         </copy>
         ```
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->

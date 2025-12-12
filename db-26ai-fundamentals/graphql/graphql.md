@@ -1,0 +1,738 @@
+# Lab: GraphQL in Oracle AI Database 26ai
+
+## Introduction
+
+When building web apps, you usually need to get related info from multiple database tables at once. For example, if you're build a product catalog page, you might need to show each category and its products. There are a number of different ways to do this - you could write multiple separate SQL queries, use JOIN statements, store the data as JSON, or use other approaches. Each has different tradeoffs in terms of complexity and formatting.
+
+Oracle AI Database 26ai has a built-in `graphql()` function that can make this easier. You write a single, readable query that describes the data structure you want, and the database automatically retrieves the data from related tables and returns it as properly formatted JSON.
+
+In this lab, you'll work with products, categories, customers, and orders tables in the database. You'll learn how to use the `graphql()` function to retrieve data from multiple related tables in a single query, how to filter and sort results, and how to create reusable query templates.
+
+Estimated Lab Time: 35 minutes
+
+### Objective
+
+- Write GraphQL queries using Oracle's `graphql()` function
+- Get data from related tables in a single query
+- Filter and sort results using directives
+- Create reusable queries with variables
+- Use advanced directives for data structuring
+- Use query-by-example filtering
+
+### Prerequisites
+
+- Access to Oracle AI Database 26ai (23.26.0 or later)
+- Basic understanding of SQL and JSON
+- Familiarity with database tables and relationships
+
+## Understanding GraphQL in Oracle AI Database
+
+Before we start writing queries, let's understand what GraphQL is and how it works in Oracle AI Database.
+
+### What is GraphQL?
+
+GraphQL is a way to ask your database for exactly the data you need using simple, readable syntax. Instead of writing SQL JOINs, you describe the shape of the data you want, and GraphQL figures out how to get it.
+
+**A Simple Example:**
+
+Let's say you have two tables: `categories` and `products`. Each product belongs to a category (connected by a foreign key).
+
+**The Traditional SQL Way:**
+```sql
+-- First, get categories
+SELECT category_id, cgt_n FROM categories;
+
+-- Then, get products
+SELECT product_name, price FROM products WHERE category_id = 1;
+SELECT product_name, price FROM products WHERE category_id = 2;
+-- ... and so on
+```
+
+**The GraphQL Way:**
+```sql
+-- One query that describes the data structure you want
+SELECT * FROM graphql('
+  categories {
+    categoryName: cgt_n
+    products {
+      productName: product_name
+      price: price
+    }
+  }
+');
+```
+
+This single query returns JSON that looks like:
+```json
+{
+  "categoryName": "Laptops",
+  "products": [
+    {"productName": "MacBook Pro", "price": 2499},
+    {"productName": "Dell XPS", "price": 1299}
+  ]
+}
+```
+
+### How It Works in Oracle AI Database
+
+1. **Foreign Keys Connect the Tables**: The `graphql()` function looks at your foreign key relationships to understand how tables connect. When you request `products` inside `categories`, it knows to use the foreign key relationship to get related products.
+
+2. **Automatic JSON Output**: The function automatically formats results as nested JSON objects, which is exactly what web and mobile apps need.
+
+3. **Simple Syntax**: Instead of writing JOIN statements, you just list the fields you want. You can rename database columns to more readable names (like `categoryName` instead of `cgt_n`).
+
+### Key Concepts
+
+Before we begin, here are the key concepts you'll use:
+
+- **Fields**: The data you want to retrieve (column names from your tables)
+- **Nesting**: Requesting related data inside other data (like products inside categories)
+- **Directives**: Instructions that start with `@` that tell GraphQL how to filter or sort data
+- **Variables**: Placeholders (starting with `$`) that let you create reusable query templates
+
+
+## Task 1: Create the Database Schema
+1.  Imagine you're building the backend for an online electronics store. Your frontend team needs product catalogs, order details, and customer info in JSON format. GraphQL makes this straightforward. 
+
+  In this task, you'll create the tables and data for the demo. Pay attention to the foreign key constraints here. The `graphql()` function uses these to understand how to get related data automatically. First, create the database tables. 
+  
+  Click the copy button and run this inside SQL Developer Web. Be sure to click the 'Run Script' button (shown in the screenshot).
+
+    ```
+    <copy>
+      -- Create e-commerce schema tables
+      DROP TABLE IF EXISTS order_items;
+      DROP TABLE IF EXISTS orders;
+      DROP TABLE IF EXISTS products;
+      DROP TABLE IF EXISTS categories;
+      DROP TABLE IF EXISTS customers;
+
+      -- Categories table for product organization
+      CREATE TABLE categories (
+          category_id    NUMBER GENERATED BY DEFAULT AS IDENTITY,
+          category_name  VARCHAR2(100) NOT NULL,
+          description    VARCHAR2(500),
+          CONSTRAINT pk_categories PRIMARY KEY (category_id)
+      );
+
+      -- Products table with category relationship
+      CREATE TABLE products (
+          product_id     NUMBER GENERATED BY DEFAULT AS IDENTITY,
+          product_name   VARCHAR2(200) NOT NULL,
+          category_id    NUMBER NOT NULL,
+          price          NUMBER(10,2) NOT NULL,
+          stock_quantity NUMBER DEFAULT 0,
+          description    VARCHAR2(1000),
+          CONSTRAINT pk_products PRIMARY KEY (product_id),
+          CONSTRAINT fk_products_category FOREIGN KEY (category_id) REFERENCES categories(category_id)
+      );
+
+      -- Customers table
+      CREATE TABLE customers (
+          customer_id   NUMBER GENERATED BY DEFAULT AS IDENTITY,
+          first_name    VARCHAR2(50) NOT NULL,
+          last_name     VARCHAR2(50) NOT NULL,
+          email         VARCHAR2(100) UNIQUE NOT NULL,
+          city          VARCHAR2(100),
+          CONSTRAINT pk_customers PRIMARY KEY (customer_id)
+      );
+
+      -- Orders table with customer relationship
+      CREATE TABLE orders (
+          order_id      NUMBER GENERATED BY DEFAULT AS IDENTITY,
+          customer_id   NUMBER NOT NULL,
+          order_date    DATE DEFAULT SYSDATE,
+          order_total   NUMBER(10,2),
+          status        VARCHAR2(20) DEFAULT 'PENDING',
+          CONSTRAINT pk_orders PRIMARY KEY (order_id),
+          CONSTRAINT fk_orders_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+      );
+
+      -- Order items for order details
+      CREATE TABLE order_items (
+          item_id      NUMBER GENERATED BY DEFAULT AS IDENTITY,
+          order_id     NUMBER NOT NULL,
+          product_id   NUMBER NOT NULL,
+          quantity     NUMBER NOT NULL,
+          unit_price   NUMBER(10,2) NOT NULL,
+          CONSTRAINT pk_order_items PRIMARY KEY (item_id),
+          CONSTRAINT fk_items_order FOREIGN KEY (order_id) REFERENCES orders(order_id),
+          CONSTRAINT fk_items_product FOREIGN KEY (product_id) REFERENCES products(product_id)
+      );
+    </copy>
+    ```
+    ![create tables](images/create-table.png =40%x*)
+
+
+2. Check the tables were created:
+
+    ```
+    <copy>
+    -- Check that all tables were created successfully
+    SELECT table_name FROM user_tables
+    WHERE table_name IN ('CATEGORIES', 'PRODUCTS', 'CUSTOMERS', 'ORDERS', 'ORDER_ITEMS')
+    ORDER BY table_name;
+    </copy>
+    ```
+
+    **What you should see:**
+    - All 5 tables listed: CATEGORIES, CUSTOMERS, ORDERS, ORDER_ITEMS, PRODUCTS
+    - These tables are connected by foreign keys, which GraphQL will use to navigate between them
+      
+      ![show the tables](images/show-table.png =40%x*)
+
+
+3. Now load sample e-commerce data into the tables. Again use the 'Run Script' button if you are using SQL Developer Web 
+
+    ```sql
+    <copy>
+    -- Insert product categories
+    INSERT INTO categories (category_name, description) VALUES
+    ('Laptops', 'Portable computers for work and gaming'),
+    ('Smartphones', 'Mobile phones with advanced features'),
+    ('Accessories', 'Computer and phone accessories');
+
+    -- Insert products for each category
+    INSERT INTO products (product_name, category_id, price, stock_quantity, description) VALUES
+    ('MacBook Pro 16-inch', 1, 2499.00, 15, 'High-performance laptop for professionals'),
+    ('Dell XPS 13', 1, 1299.00, 23, 'Ultrabook for business and personal use'),
+    ('Gaming Laptop ROG', 1, 1899.00, 8, 'High-end gaming laptop with RTX graphics'),
+    ('iPhone 15 Pro', 2, 999.00, 45, 'Latest iPhone with titanium design'),
+    ('Samsung Galaxy S24', 2, 849.00, 32, 'Android flagship with AI features'),
+    ('Wireless Mouse', 3, 89.00, 150, 'Ergonomic wireless mouse for productivity'),
+    ('USB-C Hub', 3, 129.00, 75, 'Multi-port hub for modern laptops');
+
+    -- Insert sample customers
+    INSERT INTO customers (first_name, last_name, email, city) VALUES
+    ('Sarah', 'Johnson', 'sarah.johnson@email.com', 'San Francisco'),
+    ('Michael', 'Chen', 'michael.chen@email.com', 'Seattle'),
+    ('Lisa', 'Williams', 'lisa.williams@email.com', 'Austin');
+
+    -- Insert sample orders
+    INSERT INTO orders (customer_id, order_date, order_total, status) VALUES
+    (1, DATE '2024-01-15', 2588.00, 'DELIVERED'),
+    (2, DATE '2024-01-20', 1428.00, 'SHIPPED'),
+    (3, DATE '2024-01-25', 999.00, 'PENDING');
+
+    -- Insert order items to show what customers bought
+    INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
+    (1, 1, 1, 2499.00),  -- Sarah bought MacBook Pro
+    (1, 6, 1, 89.00),    -- and wireless mouse
+    (2, 2, 1, 1299.00),  -- Michael bought Dell XPS
+    (2, 7, 1, 129.00),   -- and USB-C hub
+    (3, 4, 1, 999.00);   -- Lisa bought iPhone 15 Pro
+
+    COMMIT;
+    </copy>
+    ```
+
+    ![insert into table](images/insert.png =40%x*)
+
+
+4. We can check the data was loaded correctly.
+
+    ```sql
+    <copy>
+    -- Check how many rows are in each table
+    SELECT 'Categories' AS table_name, COUNT(*) AS row_count FROM categories
+    UNION ALL
+    SELECT 'Products', COUNT(*) FROM products
+    UNION ALL
+    SELECT 'Customers', COUNT(*) FROM customers
+    UNION ALL
+    SELECT 'Orders', COUNT(*) FROM orders
+    UNION ALL
+    SELECT 'Order Items', COUNT(*) FROM order_items;
+
+    -- Look at some sample data
+    SELECT c.category_name, p.product_name, p.price
+    FROM categories c
+    JOIN products p ON c.category_id = p.category_id
+    FETCH FIRST 3 ROWS ONLY;
+    </copy>
+    ```
+
+   **What you should see:**
+    - Row counts: 3 categories, 7 products, 3 customers, 3 orders, 5 order items
+    - Sample products like "MacBook Pro 16-inch" in the "Laptops" category priced at $2499.00
+    - Notice the JOIN in the query above - GraphQL will let you get this same data without writing JOINs
+
+
+    ![select from the table](images/select-table.png =40%x*)
+
+
+## Task 2: Execute Basic GraphQL Queries
+
+Now you'll write your first GraphQL queries. The key benefit is you can get data from multiple related tables in a single query, and it comes back as nested JSON.
+
+1. Query categories with all their products.
+
+   In the query below, notice how you put **`products`** directly inside **`categories`**. The database uses the foreign key relationship between these tables to automatically get all products for each category. No JOIN statement needed.
+
+   Also notice the syntax like **`categoryName: category_name`**. This lets you rename columns - the part before the colon is what appears in your JSON output, and the part after the colon is the actual database column name.
+
+    ```sql
+    <copy>
+    -- Get all categories with their products
+    SELECT * FROM graphql('
+    categories {
+      categoryId: category_id
+      categoryName: category_name
+      description: description
+      products {
+        productId: product_id
+        productName: product_name
+        price: price
+        stockQuantity: stock_quantity
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - JSON output with each category containing an array of its products
+    - For example, the "Laptops" category will show MacBook Pro, Dell XPS, and Gaming Laptop ROG
+    - All the data came from one query, even though it's spread across two tables
+
+2. Query a specific category using a filter.
+
+    This uses arguments for simple filtering. In Task 3, you'll learn the @where directive for more complex filtering.
+
+    You can pass arguments to narrow down results. The query below gets only category 1 (Laptops) and its products.
+
+    ```sql
+    <copy>
+    -- Get just the Laptops category and its products
+    SELECT * FROM graphql('
+    categories(category_id: 1) {
+      categoryName: category_name
+      description: description
+      products {
+        productName: product_name
+        price: price
+        description: description
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Only one category: "Laptops"
+    - Three products: MacBook Pro, Dell XPS, and Gaming Laptop ROG
+
+3. Query customers with complete order details.
+
+   GraphQL can handle multiple levels of nesting. This statement gets customers, their orders, the items in each order, and the product details for each item. 
+
+    ```sql
+    <copy>
+    -- Get customers with complete order and product details
+    SELECT * FROM graphql('
+    customers {
+      customerId: customer_id
+      customerName: first_name
+      lastName: last_name
+      email: email
+      city: city
+      orders {
+        orderId: order_id
+        orderDate: order_date
+        orderTotal: order_total
+        status: status
+        order_items {
+          quantity: quantity
+          unitPrice: unit_price
+          product: products {
+            productName: product_name
+            category: categories {
+              categoryName: category_name
+            }
+          }
+        }
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Each customer with their orders nested inside
+    - Each order showing the items purchased
+    - Each item showing the product name and category
+    - For example, Sarah's order shows she bought a MacBook Pro (from Laptops category) and a Wireless Mouse (from Accessories category)
+    - This goes through 4 tables (customers → orders → order_items → products) in one query
+
+4. Try a simple query to see the JSON output clearly.
+
+    ```sql
+    <copy>
+    -- Simple query showing just products
+    SELECT * FROM graphql('
+    products {
+      productName: product_name
+      price: price
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Clean JSON output for each product, like: `{"productName":"MacBook Pro 16-inch","price":2499}`
+    - This is exactly the format web apps expect - no extra transformation needed
+
+  Now that you understand basic queries, let's learn how to filter and sort the results.
+
+## Task 3: Filter and Sort Data with Directives
+
+Basic GraphQL queries are useful, but real apps need to filter and sort data. Directives are instructions you add to your GraphQL queries (they start with `@`) that control filtering, sorting, and data calculations.
+
+1. Filter products by price range using `@where`.
+
+   The `@where` directive lets you filter results. You provide a SQL condition inside it. The query below finds products priced between $800 and $1500.
+
+    ```sql
+    <copy>
+    -- Find products priced between $800 and $1500
+    SELECT * FROM graphql('
+    products @where(sql: "price BETWEEN 800 AND 1500") {
+      productName: product_name
+      price: price
+      category: categories {
+        categoryName: category_name
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Only products in that price range: Dell XPS 13 ($1299), Gaming Laptop ROG ($1899), Samsung Galaxy S24 ($849)
+    - Notice how we also got the category name by requesting `categories` inside products - GraphQL follows relationships in both directions
+
+    ![create graphql query](images/graphql.png =40%x*)
+
+
+
+
+2. Sort products by price using `@orderby`.
+
+   The `@orderby` directive sorts results. The SQL below shows all categories, with products sorted by price (highest first).
+
+    ```sql
+    <copy>
+    -- Show each category with products sorted by price (highest to lowest)
+    SELECT * FROM graphql('
+    categories {
+      categoryName: category_name
+      products @orderby(sql: "price desc") {
+        productName: product_name
+        price: price
+        stockQuantity: stock_quantity
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Each category with its products sorted by price
+    - In the Laptops category: MacBook Pro ($2499) appears first, then Gaming Laptop ROG ($1899), then Dell XPS 13 ($1299)
+
+3. Calculate new values using `@generated`.
+
+   The `@generated` directive creates calculated fields that don't exist in your database. The SQL below calculates the inventory value by multiplying price by quantity.
+
+    ```sql
+    <copy>
+    -- Show products with inventory value calculated
+    SELECT * FROM graphql('
+    products @where(sql: "stock_quantity > 20") {
+      productName: product_name
+      price: price
+      stockQuantity: stock_quantity
+      inventoryValue @generated(sql: "price * stock_quantity")
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Only products with more than 20 units in stock
+    - A new `inventoryValue` field showing the total value (price × quantity)
+    - For example, Dell XPS 13 has 23 units at $1299 each = inventory value of $29,877
+
+4. Combine multiple directives in one query.
+
+   You can use multiple directives together. This query filters customers by city, sorts orders by date, and goes three levels deep into related tables.
+
+    ```sql
+    <copy>
+    -- Get customers in specific cities with their complete order details
+    SELECT * FROM graphql('
+    customers @where(sql: "city IN (''San Francisco'', ''Seattle'')") {
+      customerName: first_name
+      lastName: last_name
+      city: city
+      orders @orderby(sql: "order_date desc") {
+        orderId: order_id
+        orderDate: order_date
+        orderTotal: order_total
+        status: status
+        order_items {
+          quantity: quantity
+          unitPrice: unit_price
+          product: products {
+            productName: product_name
+          }
+        }
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Only Sarah Johnson (San Francisco) and Michael Chen (Seattle)
+    - Their orders sorted by date (most recent first)
+    - Order items showing what products they bought
+    - This goes through 4 tables (customers → orders → order_items → products) in one query!
+
+## Task 4: Create Reusable Queries with Variables
+
+So far, our queries have all had fixed values (like category ID 1, or price between 800 and 1500). But real apps need queries where the values change based on user input - like showing products in whatever category the user clicks on.
+
+You can use GraphQL variables to solve this problem. You write the query once with placeholders (starting with `$`), then pass in different values each time you run it using the `PASSING` keyword.
+
+Think of it like a function: you define the parameters once, then call it with different values.
+
+1. Use a variable to query different categories.
+
+   The query below uses `$categoryId` as a placeholder. You provide the actual value with `PASSING 2 AS "categoryId"`. Try changing the 2 to 1 or 3 to see different categories.
+
+    ```sql
+    <copy>
+    -- Get a specific category using a variable
+    SELECT * FROM graphql('
+    categories(category_id: $categoryId) {
+      categoryName: category_name
+      description: description
+      products @orderby(sql: "price asc") {
+        productName: product_name
+        price: price
+        stockQuantity: stock_quantity
+      }
+    }'
+    PASSING 2 AS "categoryId");
+    </copy>
+    ```
+
+    **What you should see:**
+    - Category 2: "Smartphones"
+    - Products sorted by price: Samsung Galaxy S24 ($849), iPhone 15 Pro ($999)
+    - Try changing `PASSING 2` to `PASSING 1` to see the Laptops category instead
+
+2. Get customer order details with a variable.
+
+   This query gets one customer's complete order history. Change the customer ID to see different customers.
+
+    ```sql
+    <copy>
+    -- Get a specific customer's orders and order items
+    SELECT * FROM graphql('
+    customers(customer_id: $custId) {
+      customerName: first_name
+      lastName: last_name
+      email: email
+      orders @where(sql: "order_date >= DATE ''2024-01-20''") {
+        orderId: order_id
+        orderDate: order_date
+        orderTotal: order_total
+        status: status
+        order_items {
+          quantity: quantity
+          unitPrice: unit_price
+          lineTotal @generated(sql: "quantity * unit_price")
+          product: products {
+            productName: product_name
+            category: categories {
+              categoryName: category_name
+            }
+          }
+        }
+      }
+    }'
+    PASSING 2 AS "custId");
+    </copy>
+    ```
+
+   **What you should see:**
+    - Customer 2: Michael Chen
+    - His order from January 20, 2024
+    - Order items showing he bought a Dell XPS 13 and USB-C Hub
+    - Calculated line totals for each item
+    - Product categories included
+
+3. Use multiple variables in one query.
+
+   You can pass multiple variables. This query uses two: minimum price and minimum stock quantity.
+
+    ```sql
+    <copy>
+    -- Filter products using two variables
+    SELECT * FROM graphql('
+    products @where(sql: "price >= $minPrice AND stock_quantity >= $minStock") {
+      productName: product_name
+      price: price
+      stockQuantity: stock_quantity
+      category: categories {
+        categoryName: category_name
+      }
+    }'
+    PASSING 1000 AS "minPrice", 20 AS "minStock");
+    </copy>
+    ```
+
+   **What you should see:**
+    - Products priced at least $1000 with at least 20 units in stock
+    - Should show: MacBook Pro ($2499, 15 units) and iPhone 15 Pro ($999, 45 units)
+    - Try different values like `PASSING 2000 AS "minPrice", 10 AS "minStock"` to see different results
+
+4. Use a text variable to filter by category name.
+
+   Variables work with text too, not just numbers. This query finds a category by name and shows in-stock products.
+
+    ```sql
+    <copy>
+    -- Search for products by category name
+    SELECT * FROM graphql('
+    categories @where(sql: "category_name = $catName") {
+      categoryName: category_name
+      description: description
+      products @where(sql: "stock_quantity > 0") @orderby(sql: "price asc") {
+        productId: product_id
+        productName: product_name
+        price: price
+        stockQuantity: stock_quantity
+        available @generated(sql: "CASE WHEN stock_quantity > 0 THEN ''In Stock'' ELSE ''Out of Stock'' END")
+      }
+    }'
+    PASSING 'Smartphones' AS "catName");
+    </copy>
+    ```
+
+   **What you should see:**
+    - The Smartphones category
+    - Only in-stock products (both have stock)
+    - Sorted by price (Samsung Galaxy S24 first, then iPhone 15 Pro)
+    - Availability status calculated as "In Stock"
+
+## Task 5: Additional Directives and Features
+
+Oracle's GraphQL includes a number of other directives and features. This task shows some of them.
+
+1. Group related fields with `@nest`.
+
+   The `@nest` directive lets you group related fields under a single object. This is useful for organizing your JSON output into logical sections.
+
+    ```sql
+    <copy>
+    -- Group pricing and inventory info together
+    SELECT * FROM graphql('
+    products {
+      productName: product_name
+      pricingInfo @nest {
+        price: price
+        stockQuantity: stock_quantity
+        inventoryValue @generated(sql: "price * stock_quantity")
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Each product with a nested `pricingInfo` object
+    - Price, stock, and calculated inventory value grouped together
+    - This makes the JSON structure cleaner and more organized
+
+2. Flatten nested data with `@unnest`.
+
+   The `@unnest` directive does the opposite of nesting - it brings fields from a related table directly into the parent object instead of creating a nested structure.
+
+    ```sql
+    <copy>
+    -- Flatten category info directly into products
+    SELECT * FROM graphql('
+    products {
+      productName: product_name
+      price: price
+      categories @unnest {
+        categoryName: category_name
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Products with `categoryName` as a direct field
+    - Instead of a nested `categories` object, the category name appears at the top level
+    - This is useful when you only need one or two fields from a related table
+
+3.    When you have multiple foreign keys between tables, the `@link` directive explicitly tells GraphQL which one to use. While GraphQL can auto-detect foreign keys, `@link` gives you explicit control
+
+    ```sql
+    <copy>
+    -- Use @link to explicitly specify the foreign key
+    SELECT * FROM graphql('
+    categories {
+      categoryName: category_name
+      products @link(from: ["CATEGORY_ID"], to: ["CATEGORY_ID"]) {
+        productName: product_name
+        price: price
+      }
+    }');    </copy>
+    ```
+
+   **What you should see:**
+    - Categories with their products
+    - The `@link` directive explicitly specifies which columns to join (from categories.category\_id to products.category\_id)
+
+
+4. Use Query-By-Example (QBE) operators for filtering.
+
+   Oracle GraphQL supports QBE operators like `_eq`, `_lt`, `_gt`, `_like` for filtering. These provide an alternative to the `@where` directive. QBE operators use the `check` parameter to specify filter conditions.
+
+    ```sql
+    <copy>
+    -- Filter using QBE operators
+    SELECT * FROM graphql('
+    products(check: {price: {_gt: 1000}}) {
+      productName: product_name
+      price: price
+      category: categories {
+        categoryName: category_name
+      }
+    }');
+    </copy>
+    ```
+
+   **What you should see:**
+    - Products priced greater than $1000
+    - QBE operators like `_gt` (greater than), `_lt` (less than), `_eq` (equals) provide a structured way to filter
+    - The `check` parameter wraps the filter conditions, similar to SQL's WHERE clause
+
+
+You've learned how to use GraphQL in Oracle AI Database 26ai. Here's what we did:
+
+  - Write GraphQL queries using the `graphql()` function
+  - Get nested data from related tables without writing JOIN statements
+  - Filter and sort data using directives (`@where`, `@orderby`, `@generated`)
+  - Create reusable queries with variables that accept different values
+  - Structure JSON output with `@nest` and `@unnest` directives
+  - Specify foreign key relationships explicitly with `@link`
+  - Apply query-by-example (QBE) operators for structured filtering
+
+## Learn More
+
+- [Oracle AI Database 26ai GraphQL Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/gphql/)
+- [GraphQL Table Function Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/gphql/graphql-table-function.html)
+- [GraphQL Queries and Directives](https://docs.oracle.com/en/database/oracle/oracle-database/26/gphql/graphql-queries.html)
+- [Oracle REST Data Services (ORDS) GraphQL](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/23.3/orddg/graphql-oracle-rest-data-services.html)
+
+## Acknowledgements
+
+- **Author** – Killian Lynch - Oracle AI Database Product Manager
+- **Last Updated By/Date** – Killian Lynch - Oracle AI Database Product Manager - November 2025

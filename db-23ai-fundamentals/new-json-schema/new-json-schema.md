@@ -16,7 +16,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
 ## Task 1: Understanding JSON Schema Validation
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png =50%x*)
+    ![click SQL](../common-images/im1.png =50%x*)
 
     Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
 
@@ -75,28 +75,61 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
 
     ![get an error for the json](images/im4.png " ")
 
-5. We can also enhance JSON Schema with additional constraints. For example, we can say no additional properties can be added to the object.
+5. We can also enhance JSON Schema with additional constraints. For example, we can say no additional properties can be added to the object. Instead of dropping and recreating the table (which would lose data), let's use ALTER TABLE to modify our existing constraint - a more practical approach for production environments.
 
     ```
     <copy>
+    -- First, let's recreate our basic table with some data
+    -- Notice we're giving the JSON constraint a specific name: vehicles_json_check
     DROP TABLE IF EXISTS vehicles cascade constraints;
 
     CREATE TABLE vehicles (
         vehicle_id   NUMBER,
-        vehicle_info JSON VALIDATE '{
+        vehicle_info JSON CONSTRAINT vehicles_json_check VALIDATE '{
         "type"       : "object",
         "properties" : {"make"    : {"type" : "string"},
                         "model"   : {"type" : "string"},
                         "year"    : {"type" : "integer",
                                     "minimum" : 1886,
                                     "maximum" : 2024}},
-        "required"   : ["make", "model", "year"],
-        "additionalProperties" : false
+        "required"   : ["make", "model", "year"]
         }',
         CONSTRAINT vehicles_pk PRIMARY KEY (vehicle_id)
     );
+
+    -- Insert some valid data
+    INSERT INTO vehicles (vehicle_id, vehicle_info) 
+    VALUES 
+        (1, JSON('{\"make\":\"Toyota\",\"model\":\"Camry\",\"year\":2020}')),
+        (2, JSON('{\"make\":\"Ford\",\"model\":\"Mustang\",\"year\":1967}'));
     </copy>
     ```
+
+    Now let's enhance our JSON schema constraint using ALTER TABLE to add the "additionalProperties": false restriction. 
+
+    Since we named our constraint `vehicles_json_check`, we can directly modify it using ALTER TABLE:
+
+    ```
+    <copy>
+    -- Drop the existing named JSON schema constraint
+    ALTER TABLE vehicles DROP CONSTRAINT vehicles_json_check;
+
+    -- Add the enhanced constraint with additionalProperties: false
+    ALTER TABLE vehicles ADD CONSTRAINT vehicles_json_enhanced_check 
+    CHECK (vehicle_info IS JSON VALIDATE '{
+    "type"       : "object",
+    "properties" : {"make"    : {"type" : "string"},
+                    "model"   : {"type" : "string"},
+                    "year"    : {"type" : "integer",
+                                "minimum" : 1886,
+                                "maximum" : 2024}},
+    "required"   : ["make", "model", "year"],
+    "additionalProperties" : false
+    }');
+    </copy>
+    ```
+
+    **Note:** If you don't specify a constraint name (using just `JSON VALIDATE` without `CONSTRAINT name`), Oracle generates system names like `SYS_C008316`. In that case, you'd need to query `USER_CONSTRAINTS` to find the generated name before dropping it.
 
     ![create a vehicle table](images/im5.png =50%x*)
 

@@ -26,7 +26,7 @@ This lab assumes you have:
 
     ![Compute Menu](images/compute-menu.png)
 
-2. In the Compute>Instance page, select the right compartment under “Compartment” > “HOL-compartment” on the right side. The list of instances will be shown. Then, find out the **Public IP** of the compute instance **oke-operator**, we will need this to connect to the compute instance to load the data into **MySQL Database Service**
+2. In the Compute>Instance page, select the correct compartment, **HOL-compartment** on the top of the page. The list of instances will be shown. Then, find out the **Public IP** of the compute instance **oke-operator**, we will need this to connect to the compute instance to load the data into **MySQL Database Service**
 
     ![Compute ip](images/compute-ip.png)
 
@@ -85,13 +85,13 @@ This lab assumes you have:
 
     ![Unzip airportdb](images/unzip-airportdb.png)
 
-3. Next we need to connect to the provisioned MDS instance. Click on the ![OCI Menu](images/hamburger.png) at the top left corner of the OCI console, and select **Databases**, anc click on **DB Systems**
+3. Next we need to connect to the provisioned MySQL instance. Click on the ![OCI Menu](images/hamburger.png) at the top left corner of the OCI console, and select **Databases**, anc click on **DB Systems**
     ![MySQL Menu](images/mds-menu.png)
 
-4. Select the provisioned MySQL instance, **MDSInstance**
+4. Select the provisioned MySQL instance, **MySQLInstance**
     ![MySQL Details](images/mds-details.png)
 
-5. If you did not note down the private ip of **MDSInstance**
+5. If you did not note down the private ip of **MySQLInstance**, goto the main menu of the OCI console, select Databases->HeatWave MySQL->DB Systems and click into the MySQLInstance database, and look for the private ip address in the **Connections** tab
     ![MySQL Private IP](images/mds-ip.png)
 
 6. Connect to MySQL instance. Update password (default: Oracle#123) and host (same as MySQL host private IP address).
@@ -190,11 +190,11 @@ This lab assumes you have:
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, March 2023
+Last Updated By/Date - Ryan Kuan, July 2025

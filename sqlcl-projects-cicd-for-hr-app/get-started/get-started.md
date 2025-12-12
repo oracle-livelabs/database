@@ -46,13 +46,13 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
      * **Password:** A single password used for JupyterLab and all ORDS users.
      * **SQL Developer Web (Database Actions):** Click the provided URL to access Database Actions.
 
-    ![Reservation info](images/reservation-info.png " ")
+    ![Reservation info](images/reservation-info.png =50%x*)
 
 ## Task 2: Sign in Oracle Database Actions
 
 1. Click the SQL Developer Web URL in the Reservation information to access it.
 
-   ![Reservation info](images/reservation-info.png " ")
+   ![Reservation info](images/reservation-info-for-sdw.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
@@ -64,20 +64,8 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
     Once the Sign-in screen appears, enter the following credentials, and click the <button type="button" style="pointer-events: none;">Sign-in</button> button:
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: `DEV_USER`
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: `[Can be found in your Reservation details - see image in Step 1 for reference]`
-
-    >**Note:** If you're having trouble connecting to DEV\_USER which is normal in the first time, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
-
-    ***Alternatively***, simply modify the URL to include DEV\_USER in the path as the following:
-
-    ```text
-    <copy>
-    http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
-    </copy>
-    ```
-
-    Then, enter the DEV_USER credentials (username & password).
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Username:** `DEV_USER`
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Password:** `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
@@ -85,7 +73,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
       > **NOTE:** If this is your first time visiting the SQL Worksheet, a guided tour will appear. You may continue with the tour, or click the <button type="button" style="pointer-events: none;">X</button> (as seen in the image) to exit the tour.
 
-4. You'll notice an `Employees` table has already been created for you. This table has also been pre-populated with DEV_USER data.
+4. You'll notice an `Employees` table has already been created for you. This table has also been pre-populated with data.
 
    To view a sample of the table's data<span class="fa fa-file-play" aria-hidden="true"></span> copy and paste the following SQL statement into the SQL Worksheet and click then `Run Statement` icon.
 
@@ -97,9 +85,9 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    You will see results similar to the following image:
 
-   ![Reviewing the results](images/run-select-from-employees.png " ")
+   ![Reviewing the results](images/run-select-from-employees-unenabled.png " ")
 
-5. You may notice the varied data types in this table. To take a closer look at how this `DEV_USER` table is structured, right-click on the `DEV_USER` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.
+5. You may notice the varied data types in this table. To take a closer look at how this `EMPLOYEES` table is structured, right-click on the `EMPLOYEES` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.
 
    Note the data types:
 
@@ -107,11 +95,63 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
       > **Note:** ORDS APIs will be able to handle all of these various data types and send them to your application.
 
-6. Once you are satisfied, return to the Reservation information for this workshop.
+## Task 3: Enable REST Endpoints Using ORDS
+
+To interact with the EMPLOYEES table from your application, you need to enable a REST endpoint. This will allow you to fetch and post data directly to the database using standard HTTP requests.
+
+Oracle REST Data Services (ORDS) provides a simple and efficient way to expose database objects as RESTful services. Instead of building custom APIs from scratch, ORDS allows you to instantly enable REST access to your tables with minimal effort and eliminate the need for complex backend development while ensuring secure and scalable database access.
+
+In this task, you will use ORDS to enable a REST endpoint for the Departments table, making it accessible through standard HTTP requests, simplifying data integration and allowing your application to interact with the database smoothly.
+
+1. Open Oracle Database Actions
+2. Connect as DEV_USER
+3. Select **Tables**, right-click on **`EMPLOYEES`**, choose **REST**, and then click **Enable**
+    ![Enable ORDS Endpoint For EMPLOYEES Table](./images/enable-ords-for-employees.png " ")
+4. Click **Enable** at the bottom right
+    ![REST Enable Object](./images/rest-enable-object.png " ")
+5. The **EMPLOYEES** table is **REST enabled** now
+    ![EMPLOYEES REST Enabled](./images/employees-rest-enabled.png " ")
+
+    >**Note:** The icon next to the table name indicates that the table is REST-enabled.
+
+6. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
+
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
+
+7. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
+
+   ![Click AUTOREST](images/autorest.png " ")
+
+There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
+
+Once you are satisfied, return to the Reservation information for this workshop.
 
    ![View Login info](images/workshop-login-info.png " ")
+<!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
 
-## Task 3: Open Jupyter lab
+2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.-->
+
+<!--1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table.
+
+      >**Note:** The icon next to the table name indicates that the table is REST-enabled.
+
+   ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
+
+2. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
+
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
+
+3. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
+
+   ![Click AUTOREST](images/autorest.png " ")
+
+There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.-->
+
+<!--5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
+
+   ![Adding the ORDS URIs to the clipboard](images/copy-rest.png " ")-->
+
+## Task 4: Open Jupyter Lab
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
@@ -120,7 +160,6 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
    Use the same password from the previous task.
 
    ![Jupyter password](images/jupyter-pwd.png " ")
-  
 2. Once logged in, you may see several directories. Navigate (i.e., double or single-click on the directory) to the `workshops` directory, then to the `sqlcl-projects-react-app` directory. This last directory is the folder containing the application you will use and work with throughout this workshop. Take a moment to locate it, explore its contents, and get familiar with its structure.
 
    ![Navigating to SQLcl Projects react app directory.](images/go-to-app-folder.png " ")
@@ -141,32 +180,6 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
     > **TIP:** Refer to Task 1, Step 1 for keyboard shortcuts for copy and paste actions.
 
    ![Copying contents of the DEV_USERstream module.](images/the-DEV_USERstream-resource-module.png " ")-->
-
-## Task 4: Check Enabled ORDS Endpoints
-
-<!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
-
-2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.-->
-
-1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table. 
-
-      >**Note:** The icon next to the table name indicates that the table is REST-enabled.
-
-   ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
-
-2. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
-
-   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
-
-3. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
-
-   ![Click AUTOREST](images/autorest.png " ")
-
-There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
-
-<!--5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
-
-   ![Adding the ORDS URIs to the clipboard](images/copy-rest.png " ")-->
 
 ## Task 5: Prepare Your Application Environment Variables
 
@@ -216,23 +229,40 @@ Next, you will modify the .env file, which is located in your application's root
 
 3. Press Esc + I to enter insert mode.
 
-4. Navigate to the placeholders. Replace [Your Lab's IP] with your actual lab IP in the following variables:
+4. Navigate to the placeholders. Replace [THE PLACEHOLDER] with your instance links in the following variables:
 
       ```text
       <copy>
       VITE_API_URL=http://[Your Lab's IP]:5500/api/connection
-      VITE_BASE_URL=http://[Your Lab's IP]:8181/ords/
-      VITE_DB_USERNAME=DEV_USER
+      VITE_BASE_URL=http://[ORDS LINK]:8181/ords/
+      VITE_DB_USERNAME=dev_user
       </copy>
-      ```
+       ```
 
-     * **`VITE_API_URL`**: The base URL for your API connection.
+     * **`VITE_API_URL`:** The base URL for your API connection, replace placeholder with your jupyter IP address.
 
-     * **`VITE_BASE_URL`**: The base URL for your ORDS REST service.
+     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service. You can obtain this URL using either of these methods:
+          - Method 1: Use your terminal and run the following command: 
+            ```text
+            <copy>
+               echo $ORDSURL
+            </copy>
+            ```
+         ![Get the ords link](images/echo-ords-link.png " ")
 
-     * **`VITE_DB_USERNAME`**: The database username.
+          - Method 2: Retrieve the URL from SQL Developer Web:
+            1. Access SQL Developer Web using the link provided in the login info page
+            2. Log in with username "dev_user" and the Database Password (found in the login info page)
+            3. Copy the URL from your browser's address bar
+            4. Remove the final "dev\_user/\_sdw/" portion from the URL
+            ![Get the ords link from ORDS ](images/ords-link-url.png " ")
 
-     ![Open the environment variable file](images/env-file-opened2.png " ")
+
+     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
+
+    ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
+
+     ![Open the environment variable file](images/env-file-opened3.png " ")
      <!--![Open the environment variable file](images/env-file-opened.png " ")-->
 
 5. Press Esc, then type :wq to save and exit.

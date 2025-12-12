@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "AI Chatbot engine with Oracle Database 23ai and OCI Generative AI Services",
+    "workshoptitle": "AI Chatbot engine with Oracle AI Database and OCI Generative AI Services",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
@@ -14,8 +14,8 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
         {
-            "title": "Lab 1: Setup the vector database (Oracle Database 23ai)",
-            "description": "Setting up the vector database (Oracle Database 23ai)",
+            "title": "Lab 1: Setup the vector database (Oracle AI Database)",
+            "description": "Setting up the vector database (Oracle AI Database)",
             "type": "freetier",
             "filename": "../../setup-23ai/setup-23ai.md"
         },

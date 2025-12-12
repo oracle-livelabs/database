@@ -68,9 +68,9 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 2.  Choose your network.
 
-3.  Under Resources, select *Security Lists*.
+3.  Select *Security* tab from the sub-menu bar.
 
-4.  Click on *Default Security Lists* under the Create Security List button.
+4.  Under *Security Lists*, click on the Create Security List button.
 
 5.  Click the *Add Ingress Rule* button.
 
@@ -84,4 +84,4 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Jenny Bloom, November 2023
+* **Last Updated By/Date** - Jenny Bloom, June 2025

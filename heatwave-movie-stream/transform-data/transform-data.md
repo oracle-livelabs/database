@@ -24,7 +24,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with Linux and Python
-- Completed Lab 3
+- Completed Lab 2
 
 ## Task 1: Download the movie dataset
 
@@ -100,7 +100,7 @@ In this lab, you will be guided through the following tasks:
     Enter the following command at the prompt
 
     ```bash
-    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/7yuwIwQMyXC5lTzpv-mKaXbnqAnIDTdubHnHsCaWd0LyUgs7KGVxphWDMaFZpviL/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/scripts.zip</copy>
+    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/SyQ2QLCqljrI8sRvpfFhrPCZ_WVK9TX0XpWQZSJ61JKArVxtf4BHpalgYAkuEwIY/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/scripts.zip</copy>
     ```
 
     Unzip the application code. Be sure to include the -j option to avoid creating a new folder.
@@ -177,7 +177,9 @@ In this lab, you will be guided through the following tasks:
 
     ![result item sql file](./images/result-item-sql-file.png "result-item-sql-file")
 
-    b. Exit nano without saving any changes with **Ctrl + X**
+    b. This file can be sourced to load the data into the tables. However, MySQL Shell import utility will be used with the CSV files.
+
+    c. Exit nano without saving any changes with **Ctrl + X**
 
 You may now **proceed to the next lab**
 
@@ -185,7 +187,7 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025
 
 - **Dataset** - F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets:
 History and Context. ACM Transactions on Interactive Intelligent

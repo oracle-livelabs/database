@@ -13,56 +13,39 @@
 			"publisheddate": "03/22/2024",
 			"filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
 	    },
+
 		{
-			"title": "Lab 1: Prepare setup",
-			"description": "How to download your ORM stack and update security rules for an existing VCN.",
-			"publisheddate": "10/31/2021",
-			"filename": "./../../prepare-setup/prepare-setup.md",
-			"type": "default"
-		},
-		{
-			"title": "Lab 2: Setup compute instance",
-			"description": "How to provision the workshop environment and connect to it",
-			"publisheddate": "06/30/2020",
-			"filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
-		},
-		{
-			"title": "Lab 3: Initialize environment",
-			"description": "How to initialize and setup the workshop components.",
-			"filename": "./../../initialize-environment/initialize-environment.md"
-		},
-		{
-			"title": "Lab 4: Configure recovery settings",
+			"title": "Lab 1: Configure recovery settings",
 			"description": "How to configure the Oracle Database for several recovery settings.",
 			"filename": "../../configure-recovery-settings/configure-recovery-settings.md"
 		},
 		{
-			"title": "Lab 5: Configure backup settings",
+			"title": "Lab 2: Configure backup settings",
 			"description": "How to configure the database for several backup-related settings and policies.",
 			"filename": "../../configure-backup-settings/configure-backup-settings.md"
 		},
 		{
-			"title": "Lab 6: Perform backups",
+			"title": "Lab 3: Perform backups",
 			"description": "How to use RMAN to perfrom backups.",
 			"filename": "../../perform-backups/perform-backups.md"
 		},
 		{
-			"title": "Lab 7: Manage backups",
+			"title": "Lab 4: Manage backups",
 			"description": "How to manage backups after you create them.",
 			"filename": "../../manage-backups/manage-backups.md"
 		},
 		{
-			"title": "Lab 8: Restore Database",
+			"title": "Lab 5: Restore Database",
 			"description": "How to use RMAN commands to restore database.",
 			"filename": "../../restore-database/restore-database.md"
 		},
 		{
-			"title": "Lab 9: Rewind a table using Oracle Flashback Table",
+			"title": "Lab 6: Rewind a table using Oracle Flashback Table",
 			"description": "How to rewind one or more tables to their contents at a previous time without affecting other database objects.",
 			"filename": "../../rewind-table-using-flashback-table/rewind-table-using-flashback-table.md"
 		},
 		{
-			"title": "Lab 10: Recover a dropped table using Oracle Flashback Drop",
+			"title": "Lab 7: Recover a dropped table using Oracle Flashback Drop",
 			"description": "How to reverse the effects of dropping (deleting) a table, returning the dropped table to the database along with dependent objects such as indexes and triggers.",
 			"filename": "../../recover-dropped-table-using-flashback-drop/recover-dropped-table-using-flashback-drop.md"
 		},

@@ -34,7 +34,7 @@ In this lab, you will be guided through the following task:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab 5
+- Completed Lab 4
 
 ## Task 1: Connect with MySQL Shell:
 
@@ -64,7 +64,7 @@ In this lab, you will be guided through the following task:
     <copy>USE movies;</copy>
     ```
 
-    b. View the content of one of your Machine Learning tables (data0)
+    b. Inspect the content of one of your Machine Learning tables (data0)
 
     ```bash
     <copy>DESC data0;</copy>
@@ -89,7 +89,7 @@ In this lab, you will be guided through the following task:
 
 1. Train the model using ML_TRAIN. Since this is a recommendation dataset, the recommendation task is specified to create a recommendation model:
 
-    a. Train the first recommendation model
+    a. Train the first recommendation model. (This operation might take a couple of minutes)
 
     ```bash
     <copy>CALL sys.ML_TRAIN('movies.data0','rating',JSON_OBJECT('task','recommendation','items','item_id','users','user_id'), @movies_model_1);</copy>
@@ -122,6 +122,8 @@ In this lab, you will be guided through the following task:
     ```bash
     <copy>CALL sys.ML_MODEL_LOAD(@movies_model_1, NULL);</copy>
     ```
+
+    ![load model one](./images/load-model-one.png "load-model-one ")
 
 3. Test the model to predict the TOP 3 items recommended for a given user.
 
@@ -236,11 +238,12 @@ You may now **proceed to the next lab**
 
 ## Learn More
 
-- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/index.html)
-- [MySQL HeatWave ML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
+- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/home.htm)
+- [MySQL HeatWave AutoML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
+- [MySQL Shell Documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-features.html)
 
 ## Acknowledgements
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
-- **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Contributors** - Perside Foster, MySQL Principal Solution Engineering, Mandy Pang, MySQL Principal Product Manager
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025

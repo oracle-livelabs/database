@@ -18,7 +18,7 @@ The objective of this lab is to familiarize you with the improvements being made
 1. Error messages play a crucial role in diagnosing and resolving database issues. Clear and descriptive error messages can greatly reduce the time and effort (and headache) required to troubleshoot problems. This has the chance to lead to faster resolution and better database reliability.
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png =50%x*)
+    ![click SQL](../common-images/im1.png =50%x*)
 
     Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
 

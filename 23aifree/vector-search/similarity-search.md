@@ -1,7 +1,7 @@
 # Learn the Vector Search Process on Oracle Database 23ai
 
 ## Introduction
-In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
+In this lab, you will learn how to prepare your workspace to perform AI Vector Search.
 
 **_Estimated Time: 45 minutes_**
 

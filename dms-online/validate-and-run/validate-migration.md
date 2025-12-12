@@ -23,7 +23,7 @@ In this lab, you will:
 1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
     ![create migration navigation](images/migration-create.png =50%x*)
-
+    
 2. Select **TestMigration**
 
   ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
@@ -34,31 +34,33 @@ In this lab, you will:
 
   ![Screenshot of press validate](images/press-validate.png =50%x*)
 
-5. Click on **Jobs** in left-hand **Resources** list
+5. Click on the **Jobs** tab to display the existing jobs:
 
-  ![Screenshot of click jobs](images/click-jobs.png)
+  ![Screenshot of click jobs](images/click-jobs.png =50%x*)
 
 6. Click on most recent Evaluation Job
 
-7. Click on **Phases** in the left-hand **Resources** list
-
-  ![Screnshot of click on phases](images/click-phases.png =17%x*)
-
+7. Click on **Phases** tab to list the job phases
+  
 8. Phases will be shown, and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
-    
-9. If a phase has failed, it will show with the status **Failed**. In this case, press **Download Log** to learn more about the reason for failure. Press **Abort** on a failed job to allow further jobs or deleting of the migration.
 
-  ![Screenshot of phases with updated status](images/job-details.png =90%x*)
+![Screenshot of click phases](images/click-phases.png =50%x*)
+    
+9. If a phase has failed, it will show with the status **Failed**. Press **Actions**/**Download Log** to learn more about the reason for failure. 
+
+  ![Screenshot of phases with updated status](images/job-details.png =50%x*)
 
 10. In this case **Validate premigration advisor** phase has failed.CPAT is a tool that will assess your source database instance, checking for potentially problematic content and other factors that could impede a successful migration. If you click on the link it will take you to a summary view. 
-![Screenshot of CPAT summary](images/media-types.png =90%x*)
+
+  ![Screenshot of CPAT summary](images/media-types.png =50%x*)
 
 11. You can click on every check and access to the check details. You will be presented with a description of the issue, the impact and a recommended action. You can mark the check to be excluded from the migration.
 
-  ![Screenshot of check exclusion](images/exclude-check.png )
+  ![Screenshot of check exclusion](images/exclude-check.png =50%x*)
 
 12. Since we took care of the problematic finding the validation Job can be run again. This process should be repeated until “Validate premigration advisor” phase completes with no error.
-![Screenshot of successful validation](images/job-details-succeeded.png =90%x*)
+
+  ![Screenshot of successful validation](images/job-details-succeeded.png =50%x*)
 
 13. Once all phases show complete, move to the next step.
 
@@ -72,15 +74,15 @@ In this lab, you will:
 
     ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
-  3. Press **Start** to begin the Migration. The Start Migration dialog is shown. Select the default phase: **Monitor replication lag**.This will cause the replication to run continuously until the Migration is resumed. 
+  3. Press **Start** to begin the Migration. The Start Migration dialog is shown. The default phase is: **Monitor replication lag**. When this phase completes the replication will keep running continuously until the Migration is resumed. 
 
     ![Screenshot of start migration](images/monitor-replication-lag.png =50%x*)
 
-  4. Click on **Jobs** in the left-hand **Resources** list
+  4. Click on the **Jobs** tab to see the list of jobs
 
   5. Click on the most recent Migration Job
 
-  6. Click on **Phases** in the left-hand **Resources** list
+  6. Click on the **Phases** tab to see the list of phases
 
   7. Job phases are updated as the migration progresses
 
@@ -88,7 +90,7 @@ In this lab, you will:
 
   ![Screenshot of completed phases](images/monitor-lag-waiting.png =50%x*)
 
-  9. Now data replication is in progress. **If you want test the replication please continue, otherwise you can jump to step 15**.
+  9. Now data replication is in progress. **If you want test the replication please continue, otherwise you can jump to step 11**.
 
   Go back to your source database and execute the following script:
 
@@ -127,15 +129,15 @@ In this lab, you will:
 
   10. Connect to your target ADB and look for the new records in the EMPL table
 
- 11. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover** phase and press **Resume**. The Switchover phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
-![Screenshot of resume job switchover](./images/resume-job-switchover.png " ")
+ 11. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Actions**/**Resume** on the job to complete replication. In the Resume Job dialog, leave the presected **Switchover** phase and press **Resume**. The Switchover phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
+![Screenshot of resume job switchover](./images/resume-job-switchover.png =50%x*)
 
-12. After Job resumes and waits after Switchover phase, press Resume. Select the last phase Cleanup and press Resume:
+12. After Job resumes and waits after Switchover phase, press **Actions**/**Resume**. The last and pre selected phase Cleanup will show, press Resume:
 ![Screenshot of resume job cleanup](./images/resume-job-cleanup.png =50%x*)
 
-13. The migration runs the final cleanup phases and shows as Succeeded when finished:
+13. The migration job runs the final cleanup phase and shows as Succeeded when finished:
 ![Screenshot of resume job cleanup completed](./images/cleanup-completed.png =50%x*)
-![Screenshot of succeeded Migration](./images/succeeded.png " ")
+![Screenshot of succeeded Migration](./images/succeeded.png =50%x*)
 
 ## Learn More
 
@@ -144,4 +146,4 @@ In this lab, you will:
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian, Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Killian Lynch, Kiana McDaniel, Hanna Rakhsha, Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025

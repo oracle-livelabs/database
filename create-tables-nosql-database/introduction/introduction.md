@@ -43,10 +43,8 @@ You may proceed to the next lab.
 ## Learn More
 
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
-* [Oracle NoSQL Database Cloud Service page](https://cloud.oracle.com/en_US/nosql)
-* [Java API Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html)
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, February 2023
+* **Last Updated By/Date** - Aayushi Arora, Database User Assistance, March 2025

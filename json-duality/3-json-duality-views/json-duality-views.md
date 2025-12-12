@@ -4,7 +4,7 @@
 
 In a previous lab we saw how it is possible to transpose the contents of a JSON document as a relational view using the SQL package JSON_DATAGUIDE. While DATAGUIDE views are a powerful tool for displaying and querying JSON documents with SQL, it is not possible update the contents...*
 
-This lab demonstrates the extreme flexibility of JSON Duality Views in Oracle Database 23ai. You will learn how to work with SQL data and JSON documents simultaneously, leveraging the true duality of the views. With JSON Duality Views, you have the flexibility and data access benefits of the JSON document model combined with the storage efficiency and power of the relational model.
+This lab demonstrates the extreme flexibility of JSON Duality Views in Oracle AI Database. You will learn how to work with SQL data and JSON documents simultaneously, leveraging the true duality of the views. With JSON Duality Views, you have the flexibility and data access benefits of the JSON document model combined with the storage efficiency and power of the relational model.
 
 Estimated Time: 20 minutes
 
@@ -14,16 +14,16 @@ Estimated Time: 20 minutes
 
 In this lab, you will:
 
-* Learn about the different types of JSON Duality Views available in Database 23ai
-* Create Duality Views using two different approaches 
-* See how to query JSON documents using SQL. 
+* Learn about the different types of JSON Duality Views available in Oracle AI Database
+* Create Duality Views using two different approaches
+* See how to query JSON documents using SQL.
 * Perform insert and update operations on Duality Views and underlying SQL base tables
 
 
 ### Prerequisites
 
 This lab assumes you have:
-* An Oracle Autonomous Database 23ai provisioned.
+* An Oracle Autonomous Database 26ai provisioned.
 * The CLASSMATE schema tables created and populated.
 
 
@@ -42,15 +42,15 @@ This lab assumes you have:
                         FROM   classmate.student s WITH NOINSERT UPDATE NODELETE
                         WHERE  sc.student_id = s.student_id
                         ),
-                    'schedule' : 
+                    'schedule' :
                         (SELECT JSON {'courseId' : c.course_id,
                                     'courseName' : c.course_name,
                                     'courseRoom' : c.room,
                                     'courseTime' : c.time,
-                                    'teacher'    : 
+                                    'teacher'    :
                                                     (SELECT JSON { 'teacherName' : t.teacher_name,
                                                                     'teacherId'   : t.teacher_id }
-                                                    FROM   classmate.teacher t WITH NOINSERT UPDATE NODELETE 
+                                                    FROM   classmate.teacher t WITH NOINSERT UPDATE NODELETE
                                                     WHERE  c.teacher_id = t.teacher_id)
                                     }
                         FROM   classmate.course c WITH NOINSERT UPDATE NODELETE
@@ -69,7 +69,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    DESC student_schedule 
+    DESC student_schedule
     </copy>
     ```
 
@@ -123,7 +123,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule ;
     </copy>
     ```
@@ -137,7 +137,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.student.studentName') IN ('Janet') ;
     </copy>
@@ -153,7 +153,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.schedule.teacherName') IN ('Adam') ;
     </copy>
@@ -170,7 +170,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.schedule.teacher.teacherName') IN ('Adam') ;
     </copy>
@@ -200,7 +200,7 @@ This lab assumes you have:
                       FROM   classmate.student s WITH NOINSERT UPDATE NODELETE
                       WHERE  sc.student_id = s.student_id
                      ),
-                 'schedule' : 
+                 'schedule' :
                      (SELECT JSON {'courseId'   : c.course_id,
                                    'courseName' : c.course_name,
                                    'courseRoom' : c.room,
@@ -208,7 +208,7 @@ This lab assumes you have:
                                     UNNEST
                                         (SELECT JSON { 'teacherName' : t.teacher_name,
                                                        'teacherId'   : t.teacher_id }
-                                         FROM   classmate.teacher t WITH NOINSERT NOUPDATE NODELETE 
+                                         FROM   classmate.teacher t WITH NOINSERT NOUPDATE NODELETE
                                          WHERE  c.teacher_id = t.teacher_id)
                      }
                       FROM   classmate.course c WITH NOINSERT UPDATE NODELETE
@@ -237,14 +237,14 @@ This lab assumes you have:
 
    ![Showing describe duality view](images/lab030202.png " ")
 
-    **NOTE:**  You should notice that the "teacherId" and "teacherName" are now at the same level as the "courseId" and "courseName".   
+    **NOTE:**  You should notice that the "teacherId" and "teacherName" are now at the same level as the "courseId" and "courseName".
 
 
 3. Now that we have recreated the `STUDENT_SCHEDULE`, let's re-run our previous queries to see how the UNNEST parameter affects the output:
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.student.studentName') IN ('Jerri') ;
     </copy>
@@ -260,7 +260,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.schedule.teacherName') IN ('Adam') ;
     </copy>
@@ -288,7 +288,7 @@ For our first scenario let's see how the `STUDENT_SCHEDULE` is affected when we 
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.schedule.courseId') IN ('C124') ;
     </copy>
@@ -316,7 +316,7 @@ For our first scenario let's see how the `STUDENT_SCHEDULE` is affected when we 
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.schedule.courseId') IN ('C124') ;
     </copy>
@@ -342,11 +342,11 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.student.studentId') IN ('1735');
-    
-    SELECT json_serialize(data pretty) 
+
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.student.studentName') IN ('Jane');
     </copy>
@@ -364,7 +364,7 @@ In this task, we will see what happens when we add a new Student into the JSON d
     ```
     <copy>
     SELECT * FROM student WHERE student_name = 'Jane' ;
-    
+
     SELECT * FROM student_courses WHERE student_id = 1735 ;
     </copy>
     ```
@@ -397,18 +397,18 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
    ![Showing insert into duality view](images/lab030402.png " ")
 
-                                     
+
 3. We should now see the newly enrolled Student in our JSON Duality View as well as all of the related underlying tables.
 
   a. We will start by checking the `student_schedule` JSON Duality View-
 
     ```
     <copy>
-    SELECT json_serialize(data pretty) 
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.student.studentId') IN ('1735');
-    
-    SELECT json_serialize(data pretty) 
+
+    SELECT json_serialize(data pretty)
     FROM   student_schedule
     WHERE  json_value(data, '$.student.studentName') IN ('Jane');
     </copy>
@@ -418,14 +418,14 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
    ![Showing insert into duality view](images/lab030403a.png " ")
 
-    **NOTE:** You will need to scroll up in the results pane to see the output for both statements. Each statement now returns a single row.  
+    **NOTE:** You will need to scroll up in the results pane to see the output for both statements. Each statement now returns a single row.
 
   b. Also take a look at the underlying tables:
 
     ```
     <copy>
     SELECT * FROM student WHERE student_name = 'Jane' ;
-    
+
     SELECT * FROM student_courses WHERE student_id = 1735 ;
     </copy>
     ```
@@ -437,18 +437,18 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
     Feel free to try some other updates.
 
-    Congratulations! You have finished this lab. You may now **proceed to the next lab** 
+    Congratulations! You have finished this lab. You may now **proceed to the next lab**
 
 
 ## Learn More
 
-* [Oracle Database 23ai Feature Highlights](https://www.oracle.com/database/23ai/?source=v1-DBFree-ChatCTA-j2032-20240709)
-* [Oracle Database 23ai Online Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/index.html)
+* [Oracle Database 26ai Feature Highlights](https://www.oracle.com/database/23ai/?source=v1-DBFree-ChatCTA-j2032-20240709)
+* [Oracle Database 26ai Online Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/index.html)
 * [Oracle Developer Guide: Oracle JSON Relational Duality View Overview](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html)
-* [Oracle Documentation: Information on the Oracle JSON-To-Duality Migrator](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/json-duality.html)
+* [Oracle Documentation: Information on the Oracle JSON-To-Duality Migrator](https://docs.oracle.com/en/database/oracle/oracle-database/26/sutil/migrating-from-json-to-duality.html)
 
 ## Acknowledgements
 * **Author** - Sean Stacey, Oracle Database Product Management
 * **Contributors** - Killian Lynch, Oracle Database Product Management, Product Manager, Ranjan Priyadarshi, Oracle Database Product Management
-* **Last Updated By/Date** - Sean Stacey, Oracle Database Product Management, July 2024
+* **Last Updated By/Date** - Eileen Beck, December 2025
 

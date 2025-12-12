@@ -19,30 +19,25 @@
           "title": "Lab 1: Create MySQL Database System and HeatWave Cluster",
           "filename": "../../create-dbs/create-dbs.md"
         },
-         
-        {
-          "title": "Lab 2: Add HeatWave cluster",
-          "filename": "../../add-heatwave-cluster/add-heatwave-cluster.md"
-        },
 
         {
-          "title": "Lab 3: Connect to MySQL DB System",
+          "title": "Lab 2: Connect to MySQL DB System",
           "filename": "../../connect-dbs/connect-dbs.md"
         },
 
 
         {
-            "title": "Lab 4: Build HeatWave AutoML with SQL",
+            "title": "Lab 3: Build HeatWave AutoML with SQL",
             "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
         },
 
         {
-          "title": "Lab 5: (BONUS) Build HeatWave AutoML Web App with PHP",
+          "title": "Lab 4: (BONUS) Build HeatWave AutoML Web App with PHP",
           "filename": "../../develop/develop.md"
         },
         
         {
-          "title": "Lab6: Stop OCI Services",
+          "title": "Lab 5: Stop OCI Services",
           "filename": "../../stop-services/stop-services.md"
         },
 

@@ -2,42 +2,46 @@
 
 ## Introduction
 
-In this lab, you will query the Sales History (SH) sample schema that comes with the database.
+In this lab, you will query the `Sales History (SH)` sample schema that comes with the database.
 
 Estimated lab time: 10 minutes
 
 ### Objectives
 
--   Execute the SELECT statement to query tables in the SH schema
-
--   Use the WHERE clause to restrict the rows that are returned from the SELECT query
-
--   Use the ORDER BY clause to sort the rows that are retrieved from the SELECT statement
-
+-   Execute the `SELECT` statement to query tables in the `SH schema`
+-   Use the `WHERE` clause to restrict the rows that are returned from the `SELECT` query
+-   Use the `ORDER BY` clause to sort the rows that are retrieved from the `SELECT` statement
 
 ### Prerequisites
 
--   This lab requires completion of the preceding labs in the Contents menu on the left.
+This lab requires completion of the preceding labs in the **Contents** menu on the left.
 
 ## Task 1: Query Tables
 
 In this section, you execute the `SELECT` statement to retrieve data from tables and views. You can select rows and columns that you want to return in the output. In its simplest form, a `SELECT` statement must contain the following:
 -   A `SELECT` clause, which specifies columns containing the values to be matched
 -   A `FROM` clause, which specifies the table containing the columns listed in the SELECT clause
-    -   Syntax:  `SELECT {*|[DISTINCT] column|expression [alias],...} FROM <table>`
 
-**Note:** Remember that you need to prefix the table names with the schema name SH in your queries.
-
-1. You can display all columns of data in a table by entering an asterisk * after the SELECT keyword. Execute the following statement to view all rows and columns in the  `PROMOTIONS` table:
+    **Syntax:**  
 
     ```
-    <copy>SELECT *
-    FROM sh.promotions;</copy>
+    SELECT {*|[DISTINCT] column|expression [alias],...} FROM <table>
     ```
 
-    ![Execute statement to view PROMOTIONS table](./images/select-star-from-sh-promotions.png " ")
+    >**Note:** You need to prefix the table names with the schema name **`SH`** in your queries.
 
-2. You can display specific columns of data in a table by specifying the column names in the SELECT statement. Execute the following statement to view the `PROMO_NAME` and `PROMO_END_DATE` columns in the `PROMOTIONS` table:
+1. You can display all columns of data in a table by entering an asterisk * after the `SELECT` statement. Execute the following statement to view all rows and columns in the  `PROMOTIONS` table. Copy and paste the following query into your SQL Worksheet, and then click the **Run Statement** icon in the Worksheet toolbar.
+
+    ```
+    <copy>
+    SELECT *
+    FROM sh.promotions;
+    </copy>
+    ```
+
+    ![Execute statement to view PROMOTIONS table](./images/select-star-from-sh.png " ")
+
+2. You can display specific columns of data in a table by specifying the column names in the SELECT statement. View the `PROMO_NAME` and `PROMO_END_DATE` columns in the `PROMOTIONS` table. Copy and paste the following query into your SQL Worksheet, and then click the **Run Statement** icon in the Worksheet toolbar.
 
     ```
     <copy>SELECT promo_name, promo_end_date
@@ -47,16 +51,17 @@ In this section, you execute the `SELECT` statement to retrieve data from tables
     ![Execute statement to view two columns in PROMOTIONS table](./images/select-promo-name-promo-end-date-from-promotions.png " ")
 
 ## Task 2: Restrict Data
+
 In this section, you use the `WHERE` clause to restrict the rows that are returned from the `SELECT` query. A `WHERE` clause contains a condition that must be met. It directly follows the `FROM` clause. If the condition is true, the row that meets the condition is returned.
 
-1. Modify the `SELECT` statement. Execute the following query to restrict the number of rows to where the `PROMO_SUBCATEGORY` has a value of `radio commercial`:
+1. Execute the following query to restrict the number of rows to where the `PROMO_SUBCATEGORY` column has a value of `radio commercial`.
 
     ```
-    <copy>SELECT *
-
+    <copy>
+    SELECT *
     FROM sh.promotions
-
-    WHERE promo_subcategory='radio commercial';</copy>
+    WHERE promo_subcategory='radio commercial';
+    </copy>
     ```
 
     ![Execute a query to restrict the number of rows](./images/where-promo-subcategory-equals-radio-commercial.png " ")
@@ -65,16 +70,15 @@ In this section, you use the `WHERE` clause to restrict the rows that are return
 
 In this section, you use the `ORDER BY` clause to sort the rows that are retrieved from the `SELECT` statement. You specify the column based on the rows that must be sorted. You also specify the `ASC` keyword to display rows in ascending order (default), and you specify the `DESC` keyword to display rows in descending order.
 
-1. Execute the following `SELECT` statement to retrieve the `CUST_LAST_NAME`, `CUST_CREDIT_LIMIT`, and `CUST_YEAR_OF_BIRTH` columns of customers who live in the `Noord Holland` CUST\_STATE\_PROVINCE. Sort the rows in ascending order based on the `CUST_YEAR_OF_BIRTH` column.
+1. Execute the following `SELECT` statement to retrieve the `CUST_LAST_NAME`, `CUST_CREDIT_LIMIT`, and `CUST_YEAR_OF_BIRTH` columns of customers who live in the `Noord Holland` `CUST_STATE_PROVINCE`. Sort the rows in ascending order (default) based on the `CUST_YEAR_OF_BIRTH` column.
 
     ```
-    <copy>SELECT cust_last_name, cust_credit_limit, cust_year_of_birth
-
+    <copy>
+    SELECT cust_last_name, cust_credit_limit, cust_year_of_birth
     FROM   sh.customers
-
     WHERE  cust_state_province='Noord-Holland'
-
-    ORDER BY cust_year_of_birth;</copy>
+    ORDER BY cust_year_of_birth;
+    </copy>
     ```
 
     ![Use the ORDER BY clause](./images/order-by-cust-year-of-birth.png " ")  
@@ -82,18 +86,17 @@ In this section, you use the `ORDER BY` clause to sort the rows that are retriev
 2. Modify the `SELECT` statement to display rows in descending order. Use the `DESC` keyword.
 
     ```
-    <copy>SELECT cust_last_name, cust_credit_limit, cust_year_of_birth
-
+    <copy>
+    SELECT cust_last_name, cust_credit_limit, cust_year_of_birth
     FROM   sh.customers
-
     WHERE  cust_state_province='Noord-Holland'
-
-    ORDER BY cust_year_of_birth DESC;</copy>
+    ORDER BY cust_year_of_birth DESC;
+    </copy>
     ```
 
   ![Display rows in descending order](./images/order-by-cust-year-of-birth-desc.png " ")  
 
-## Task 4:  Rank Data
+## Task 4: Rank Data
 
 In this section, you use the `RANK ()` function to rank the rows that are retrieved from the `SELECT` statement. You can use the RANK function as an **aggregate**  function (takes multiple rows and returns a single number) or as an **analytical** function (takes criteria and shows a number for each record).
 
@@ -118,11 +121,10 @@ You may now **proceed to the next lab.**
 
 ## Want to Learn More?
 
-Click [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/sql.html#GUID-90EA5D9B-76F2-4916-9F7E-CF0D8AA1A09D) for documentation on Data Manipulation Language (DML) statements.
+* [Introduction to Oracle AI Database](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/oracle-database/26/cncpt&id=CNCPT-GUID-A42A6EF0-20F8-4F4B-AFF7-09C100AE581E)
+
 
 ## Acknowledgements
 
-- **Author** - Rick Green, Principal Developer, Database User Assistance
-- **Contributor** - Supriya Ananth
-- **Adapted for Cloud by** - Rick Green
-- **Last Updated By/Date** - Katherine Wardhana, May 2024
+- **Author:** Lauran K. Serhal, Consulting User Assistance Developer
+- **Last Updated By/Date:** Lauran K. Serhal, October 2025

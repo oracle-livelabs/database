@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Work with JSON Relational Duality Views in Oracle Database 23ai",
+    "workshoptitle": "Work with JSON Relational Duality Views in Oracle AI Database",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
@@ -9,7 +9,7 @@
         },
         {
             "title": "Introduction",
-            "description": "This is an introduction to Oracle Database 23ai.",
+            "description": "This is an introduction to Oracle AI Database.",
             "type": "livelabs",
             "filename": "../../0-intro/introduction.md"
         },

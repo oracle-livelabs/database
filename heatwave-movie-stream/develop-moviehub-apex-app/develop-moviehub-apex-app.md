@@ -8,7 +8,7 @@ The MovieHub App is a demo application created to showcase the potential of MySQ
 
 In this lab, you will be guided to create high performance apps powered by the MySQL HeatWave Database Service; developing a movie stream like web application using Oracle APEX, a leading low-code development tool that allows you to create complex web apps in minutes. You will also learn how you can leverage the automation of machine learning processes, thanks to MySQL AutoML that allows you to build, train, deploy, and explain machine learning models within MySQL HeatWave.
 
-_Estimated Time:_ 15 minutes
+_Estimated Time:_ 10 minutes
 
 ### Objectives
 
@@ -26,7 +26,7 @@ In this lab, you will be guided through the following task:
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
 - Some Experience with Oracle Autonomous and Oracle APEX
-- Completed Lab 10
+- Completed Lab 9
 
 ## Task 1: Run the MovieHub App
 
@@ -37,6 +37,8 @@ In this lab, you will be guided through the following task:
     You should see the imported application
 
 2. Run and log into the imported app
+
+    **The app will not run correctly if the Web credentials and Endopint have not been correctly set at Lab 8, Task 6 and Lab 9, Task 3**
 
     a. Click on **Run**
 
@@ -142,7 +144,7 @@ In this lab, you will be guided through the following task:
 
     d. **Top 10 Trending Movies** Bar chart
 
-## Task 4: Explore the Holiday Movie pages
+## Task 4: Explore the Holiday and Top Trending Movies page
 
 1. Click in the **Holiday Movie** Navigation Menu button to access the **Holiday Movie** page
 
@@ -154,18 +156,20 @@ In this lab, you will be guided through the following task:
 
     ![Item 200 recommendation page](./images/recommendations-item-200-page.png "recommendations-item-200-page ")
 
+2. You can inspect the **Top Trending Movie** page too.
+
 You may now **proceed to the next lab**
 
 ## Learn More
 
 - [Oracle Autonomous Database Serverless Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/index.html#Oracle%C2%AE-Cloud)
 - [Oracle APEX Rendering Objects Documentation](https://docs.oracle.com/en/database/oracle/apex/23.1/aexjs/apex.html)
-- [Oracle JavaScript Extension Toolkit (JET) API Reference Documentation](https://www.oracle.com/webfolder/technetwork/jet/jsdocs/index.html)
-- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/index.html)
-- [MySQL HeatWave ML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
+- [Oracle JavaScript Extension Toolkit (JET) API Reference Documentation](https://docs.oracle.com/en/middleware/developer-tools/jet/14.1/develop/getting-started-oracle-javascript-extension-toolkit-jet.html)
+- [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/home.htm)
+- [MySQL HeatWave AutoML Documentation] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-machine-learning.html)
 
 ## Acknowledgements
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, May 2025

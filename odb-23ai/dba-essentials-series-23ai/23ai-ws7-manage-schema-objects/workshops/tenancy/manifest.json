@@ -14,35 +14,17 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
-      "title": "Lab 1: Prepare Setup",
-      "description": "How to download your ORM stack and update security rules for an existing VCN.",
-      "publisheddate": "12/21/2021",
-      "filename": "./../../prepare-setup/prepare-setup.md"
-    },
-    {
-      "title": "Lab 2: Setup Compute Instance",
-      "description": "How to provision the workshop environment and connect to it",
-      "publisheddate": "08/31/2021",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
-    },
-    {
-      "title": "Lab 3: Initialize Environment",
-      "description": "How to initialize and start all the workshop components.",
-      "publisheddate": "10/13/2021",
-      "filename": "./../../initialize-environment/initialize-environment.md"
-    },
-    {
-      "title": "Lab 4: Manage Tables",
+      "title": "Lab 1: Manage Tables",
       "description": "How to manage tables in Oracle Database 23ai using Database Actions.",
       "filename": "./../../manage-tables/manage-tables.md"
     },
     {
-      "title": "Lab 5: Create Indexes and Views",
+      "title": "Lab 2: Create Indexes and Views",
       "description": "How to create indexes and views in Oracle Database 23ai using Database Actions.",
       "filename": "./../../create-indexes-and-views/create-indexes-and-views.md"
     },
     {
-      "title": "Lab 6: Manage Program code stored in Oracle Database",
+      "title": "Lab 3: Manage Program code stored in Oracle Database",
       "description": "How to manage program code stored in Oracle Database 23ai using Database Actions.",
       "filename": "./../../manage-program-code/manage-program-code.md"
     },

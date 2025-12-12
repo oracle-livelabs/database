@@ -29,7 +29,7 @@ _Estimated Time:_ 11 minutes
 go to **Databases** and then select **Tables** under Oracle NoSQL Database.
 This brings you to the 'Tables' screen where you can create a table from the console.
 
-    ![nosql-tables](./images/nosql-tables.png)
+    ![nosql-tables](https://oracle-livelabs.github.io/common/images/console/nosql-tables.png)
 
 <if type="freetier">
 2. On the 'Tables' screen there is a **Compartment** field on the left.

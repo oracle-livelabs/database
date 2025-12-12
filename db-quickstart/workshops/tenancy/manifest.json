@@ -1,10 +1,26 @@
 {
-    "workshoptitle": "Get Started with Oracle Database",
+    "workshoptitle": "Get Started with Oracle AI Database",
     "help": "livelabs-help-db_us@oracle.com",
+    "include": {
+        "adb-connect-with-sql-worksheet-body.md":"/common/building-blocks/tasks/adb/connect-with-sql-worksheet-body.md",
+        "adb-create-load-json-collection.md":"/common/building-blocks/tasks/adb/create-load-json-collection.md",
+        "adb-load-public-db-actions.md":"/common/building-blocks/tasks/adb/load-public-db-actions.md",
+        "adb-goto-service-body.md":"/common/building-blocks/tasks/adb/goto-service-body.md",
+        "adb-goto-sql-worksheet.md":"/common/building-blocks/tasks/adb/goto-sql-worksheet.md",
+        "adb-provision-body.md":"/common/building-blocks/tasks/adb/provision-body.md",
+        "adb-query-json-arrays.md":"/common/building-blocks/tasks/adb/query-json-arrays.md",
+        "adb-query-json-simple.md":"/common/building-blocks/tasks/adb/query-json-simple.md",
+        "adb-query-object-store-contents-with-sql.md":"/common/building-blocks/tasks/adb/query-object-store-contents-with-sql.md",
+        "adb-use-partitioned-external-table-body.md":"/common/building-blocks/tasks/adb/use-partitioned-external-table-body.md",
+        "adb-goto-data-load-utility.md":"/common/building-blocks/tasks/adb/goto-data-load-utility.md",
+        "iam-compartment-create-body.md":"/common/building-blocks/tasks/iam/compartment-create-body.md"
+      },
+      "variables": ["./variables.json"],
 
     "tutorials": [
         {
             "title": "Introduction",
+            "type":"tenancy",
             "description": "Introduction",
             "filename": "../../db-quickstart-workshop/intro.md"
         },
@@ -14,22 +30,26 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
         {
-            "title": "Lab 1: Provision an Autonomous Database",
+            "title": "Lab 1: Provision an Oracle Autonomous AI Database",
+            "type":"tenancy",
             "description": "Provision Autonomous Database",
             "filename": "./../../db-provision/db-provision.md"
         },
        {
-            "title": "Lab 2: Familiarize with the SH Sample Schema using SQL Worksheet",
+            "title": "Lab 2: Get Familiar with the SH Sample Schema using the SQL Worksheet",
+            "type":"tenancy",
             "description": "Familiarize with the SH Sample Schema",
             "filename": "./../../db-familiarize-sh/db-familiarize-sh.md"
         },
         {
             "title": "Lab 3: Query the SH Sample Schema",
+            "type":"tenancy",
             "description": "Query the SH Sample Schema",
             "filename": "./../../db-query/db-query.md"
         },
         {
             "title": "Lab 4: Create a Schema",
+            "type":"tenancy",
             "description": "Create a Schema",
             "filename": "./../../db-create-schema/db-create-schema.md"
         },

@@ -46,7 +46,7 @@ Watch the video below for a quick walk through of the lab.
 
 2. On the Oracle Cloud Infrastructure menu drop down on the left, go to **Databases** and then press **Tables** under Oracle NoSQL Database. This brings you to the 'Tables' screen where you can create a table from the console.
 
-    ![NoSQL Tables](./images/nosql-tables.png)
+    ![NoSQL Tables](https://oracle-livelabs.github.io/common/images/console/nosql-tables.png)
 
 <if type="paid">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure **demonosql** compartment is selected.

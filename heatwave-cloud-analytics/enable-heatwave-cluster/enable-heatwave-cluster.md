@@ -25,13 +25,19 @@ This lab assumes you have:
 
     ![MDS Menu](images/mds-menu.png)
 
-2. Select the **MDSInstance**
+2. Select the **MySQLInstance**
     ![MDS Details](images/mds-details.png)
 
-3. From the menu on the bottom on the left, select HeatWave, and click on the button Add HeatWave Cluster located on the right.
+3. On the DB System details page of **MySQLInstance** , click on the button Add HeatWave Cluster.
     ![Add HeatWave](images/heatwave-add.png)
 
-4. Check that Shape looks as per the picture below and that Node Count is set to 2, and then click the button Add HeatWave Cluster.
+4. You need select the HeatWave shape by clicking "Select Shape" button. 
+    ![Select Shape](images/heatwave-select-shape.png)
+
+   Next, you would select the HeatWave.512GB shape and click on the "Select a shape" button
+    ![Confirm Shape](images/heatwave-shape-confirm.png)
+
+   Once you have selected the HeatWave shape, specify the number of nodes to **2**, confirm the settings and click on "Add HeatWave cluster"
     ![Review HeatWave](images/heatwave-review.png)
 
 5. You will be brought back to the main page where you can check for the creation status. You should see the nodes in **Creating** status after a few minutes.
@@ -45,7 +51,7 @@ This lab assumes you have:
 
 ## Task 2: Accelerate long running queries on HeatWave
 
-1. Before we can explore all the cool features of MySQL HeatWave, we need to load the data from MDS into the HeatWave Cluster so that the data is distributed to the memory of the 2 HeatWave cluster nodes we just added
+1. Before we can explore all the cool features of HeatWave MySQL, we need to load the data from MySQL instance into the HeatWave Cluster so that the data is distributed to the memory of the 2 HeatWave cluster nodes we just added
 
     ```text
     <copy>
@@ -53,7 +59,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    We will use this AutoPilot feature, **heatwave_load** function to offload the data from MDS to the HeatWave cluster
+    We will use this AutoPilot feature, **heatwave_load** function to offload the data from MySQL instance to the HeatWave cluster
 
     ```text
     <copy>
@@ -63,7 +69,7 @@ This lab assumes you have:
 
     ![HeatWave Load](images/heatwave-load.png)
 
-2. We can verify the data offloading from MySQL to HeatWave cluster
+2. We can verify the data offloading from MySQL to the HeatWave clusters
 
     ```text
     <copy>
@@ -125,11 +131,11 @@ This lab assumes you have:
 Author
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, March 2023
+Last Updated By/Date - Ryan Kuan, July 2025

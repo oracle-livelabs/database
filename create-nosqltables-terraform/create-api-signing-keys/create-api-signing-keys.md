@@ -22,32 +22,7 @@ Any software client you use to connect to Oracle Cloud Infrastructure must be co
 * [Git Bash Shell](https://gitforwindows.org/) (Windows)
 * Download an Oracle NoSQL Database SDK
 
-## Task 1: Record your tenancy and user OCID
-
-1. Create a note file on your local system to record the following information:
-
-    - Tenancy OCID
-    - User OCID
-    - API Key Fingerprint
-    - API Key Passphrase
-
-2. Click the **Navigation Menu** in the upper left, navigate to **Governance & Administration**, and select **Tenancy Details**.
-
-	![Tenancy Details](https://oracle-livelabs.github.io/common/images/console/admin-details.png " ")
-
-3. The Tenancy Details page shows information about your cloud account. Copy the Tenancy OCID by clicking on the **Copy** link next to it. Save the value in your note file.
-
-  ![Copy Tenancy OCID](images/copy-tenancy-ocid.png)
-
-4. In the top-right corner of the Console, open the Profile menu (User menu icon) and then click **User Settings** to view the details.
-
-  ![User Settings](images/user-settings.png)
-
-5. Click Copy beside the (User) OCID save it to your note file.
-
-  ![Copy OCID](images/copy-user-ocid.png)
-
-## Task 2: Generate an API Sign-In Key
+## Task 1: Generate an API Sign-In Key
 
 To create a user API key, you will use `openssl` on your local system. If you are using Windows, we recommend the Git Bash Shell.
 
@@ -101,23 +76,31 @@ To create a user API key, you will use `openssl` on your local system. If you ar
     <copy>ls -l ~/.oci</copy>
     ```
 
-7. Having created the API key pair, upload the public key value to Oracle Cloud Infrastructure. In the top-right corner of the Console, open the Profile menu again and then click **User Settings** to view the details.
+7. Having created the API key pair, upload the public key value to Oracle Cloud Infrastructure. In the top-right corner of the Console, open the Profile menu and then click **User Settings** to view the details.
 
   ![View User Settings](images/user-settings.png)
 
-8. On the API Keys page, click **Add Public Key**.
+8. On the **Tokens and keys** menu, click **Add API key**.
 
   ![Add Public key](images/add-public-key.png)
 
-9. Click **select one** and navigate to your `~/.oci` directory, and select the `oci_api_key_public.pem` file. Click **Add**.
+9. Select **Choose public key file** and click **Drop a file or select one**. Navigate to your `~/.oci` directory, and select the `oci_api_key_public.pem` file. Click **Add**.
 
   ![Add API Key](images/upload-public-key.png)
 
-10. Save the fingerprint value to your note file, as you will use the fingerprint later.
+10. The fingerprint value is listed in the **Token and keys** page.
 
   ![Save fingerprint value](images/copy-fingerprint.png)
 
-You may proceed to the next lab.
+11. Select **View configuration file** from the action menu at the end of the fingerprint row. 
+
+  ![View configuration file](images/view-configuration.png)
+
+12. On the **Configuration file preview** page, select copy to record the configuration parameters required for API key sign-in authentication. Save the value in a note file. 
+
+  ![Save configuration file parameters](images/config-file-preview.png)
+
+You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -125,4 +108,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
+* **Last Updated By/Date** - Purnima Subramanian, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, October 2025
