@@ -21,13 +21,13 @@ In this lab you will:
 
 ## Task 1: Run the Oracle NoSQL Database Migrator utility
 
-1. From the Cloud Shell, navigate to the directory where you extracted the NoSQL Database Migrator utility.
+1. From the Cloud Shell, navigate to the directory where you extracted the NoSQL Database Migrator utility. This directory now includes the configuration file created in **Lab - Create a Configuration File**.
 
     ```
     <copy>cd V1048015-01/nosql-migrator-1.7.0</copy>
     ```
 
-2. Run the runMigrator command by passing the configuration file created in **Lab - Create a Configuration File**.
+2. Run the runMigrator command by passing the configuration file.
 
     ```
     <copy>
@@ -56,14 +56,13 @@ In this lab you will:
 
 ## Task 2: View migrated data in OCI Object Storage Bucket
 
-1. Log in to the Oracle Cloud console.
-2. From the Navigation menu, select **Storage > Object Storage & Archive Storage > Buckets**.
-3. Select your compartment and then select the **Migrate_oci** bucket.
-4. On the **Objects** tab, you can view the exported data in the **Delegation/Data** directory.
+1. On the Oracle Cloud console's navigation menu, select **Storage > Object Storage & Archive Storage > Buckets**.
+2. Select your compartment and then select the **Migrate_oci** bucket.
+3. On the **Objects** tab, you can view the exported data in the **Delegation/Data** directory.
 
   ![Object Storage data](images/objectstorage-data.png)
 
-5. You can view the exported table schema in the **Delegation/Schema** directory.
+4. You can view the exported table schema in the **Delegation/Schema** directory.
 
   ![Object Storage schema](images/objectstorage-schema.png)
  
@@ -71,4 +70,4 @@ Congratulations! You have completed the workshop.
 
 ## Acknowledgements
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, August 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, December 2025
