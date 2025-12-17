@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before jumping into the description of JavaScript features and all their details let's begin with a practical example. Enhancing data quality is a focus area for many businesses. Poor data quality prevents analysts from making properly informed decisions, and it all starts at the source system. In this lab you will read about validating email addresses, a common scenario in many applications.
+Before jumping into the description of JavaScript features and all their details, let's begin with a practical example. Enhancing data quality is a focus area for many businesses. Poor data quality prevents analysts from making well-informed decisions, and it all starts at the source system. In this lab, you'll learn about validating email addresses, a common scenario in many applications.
 
 Validating email addresses isn't a new problem, and there are plenty of solutions available. This lab explores the open source `validator.js` module's `isEmail()` function and demonstrates how to use it in your application.
 
@@ -30,7 +30,7 @@ This lab assumes you have:
 
 ## Task 1: Create a new user
 
-The default user you are connecting to when starting Database Actions - ADMIN - is a super-user. Just like with any other system, you shouldn't use super-users for regular tasks.
+The default user you are connecting to when starting Database Actions—the ADMIN user—is a superuser. Just like with any other system, you shouldn't use superusers for regular tasks.
 
 1. Log into Database Actions
 
@@ -62,17 +62,17 @@ The default user you are connecting to when starting Database Actions - ADMIN - 
 
 4. Finish the user creation
 
-    Click on the "create user" button to create the database account and enable it.
+    Click on the "Create User" button to create the database account and enable it.
 
 This concludes the user creation.
 
 ## Task 2: Create the Validator Module
 
-Sign out of the admin account using the menu in the top right corner, and log back in as EMILY. Using the hamburger menu, select _JavaScript_ in the left most column. Make sure you are using the _Editor_ tab.
+Sign out of the ADMIN account using the menu in the top right corner, and log back in as EMILY. Using the hamburger menu, select _JavaScript_ in the leftmost column. Make sure you are using the _Editor_ tab.
 
 1. Load the Validator Module into the database
 
-    Click on the globe icon (the one in the red circle) to open the "load from URL" dialog. JavaScript module can be loaded into the database in many ways, the browser's "load from URL" being the most convenient.
+    Click on the globe icon (the one in the red circle) to open the "Load from URL" dialog. JavaScript modules can be loaded into the database in many ways, the browser's "Load from URL" being the most convenient.
 
     ![Load from URL dialog](./images/create-validator-module-01.png)
 
@@ -96,7 +96,7 @@ This concludes the loading of the JavaScript module in the database.
 
 ## Task 3: Make the JavaScript code available to SQL and PL/SQL
 
-You can make any function defined in a JavaScript module available to SQL and PL/SQL. This is done with the help of a call specification. A call specification essentially maps a name in the SQL namespace to a JavaScript function within a module. You are going to create one in this task.
+You can make any function defined in a JavaScript module available to SQL and PL/SQL. This is done using a call specification. A call specification essentially maps a name in the SQL namespace to a JavaScript function within a module. You are going to create one in this task.
 
 1. Create a call specification
 
@@ -116,7 +116,7 @@ You can make any function defined in a JavaScript module available to SQL and PL
     </copy>
     ```
 
-    This statement allows you to call the function `is_email` in SQL and PL/SQL. Instead of a PL/SQL body you find a reference to the `validator_module` you created earlier. As the name suggests, validator.js allows you to perform lots of [validations against strings](https://www.jsdelivr.com/package/npm/validator). One of the functions available to you is called `isEmail()`. This is now available for use.
+    This statement allows you to call the function `is_email` in SQL and PL/SQL. Instead of a PL/SQL body, you find a reference to the `validator_module` you created earlier. As the name suggests, validator.js allows you to perform lots of [validations against strings](https://www.jsdelivr.com/package/npm/validator). One of the functions available to you is called `isEmail()`. This is now available for use.
 
 3. Validate some email addresses
 
@@ -130,7 +130,7 @@ You can make any function defined in a JavaScript module available to SQL and PL
     </copy>
     ```
 
-    Run these statements as script or individual statements and see validator.isEmail() in action. If you ran these commands as script you should see the following output:
+    Run these statements as a script or individual statements and see validator.isEmail() in action. If you ran these commands as a script, you should see the following output:
 
     ```
     TEST1 
