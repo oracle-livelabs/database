@@ -55,8 +55,8 @@ The default user you are connecting to when starting Database Actions - ADMIN - 
 
     Assign the following roles:
 
-    - SODA_APP
-    - DB_DEVELOPER_ROLE
+    - `SODA_APP`
+    - `DB_DEVELOPER_ROLE`
 
     Please tick the _Granted_ and _Default_ checkboxes for each of these.
 
