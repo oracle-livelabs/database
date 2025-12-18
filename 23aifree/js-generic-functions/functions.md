@@ -517,9 +517,9 @@ You many now proceed to the next lab.
 
 ## Learn More
 
-- [Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/lnpls/index.html)
-- [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes call specifications and inline JavaScript functions in detail
-- [Database Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/index.html) contains the definition of all dictionary views referred to in this lab
+- [Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/lnpls/index.html)
+- JavaScript Developer's Guide describes [modules and environments](https://docs.oracle.com/en/database/oracle/oracle-database/26/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) in more detail. There is an [entire chapter](https://docs.oracle.com/en/database/oracle/oracle-database/26/mlejs/calling-mle-js-functions.html) dedicated to call specifications and inline JavaScript functions
+- [Database Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/refrn/index.html) contains the definition of all dictionary views referred to in this lab
 
 ## Acknowledgements
 
