@@ -60,9 +60,9 @@ This lab assumes:
 
     </details>
 
-3. The idea of the *Performance Stability Prescription* is to identify bad performance after upgrade. However, the workload in this lab runs faster in Oracle Database 23ai. To get the best benefit out of the lab, you simulate bad performance. This lab changes optimizer behavior (*optimizer\_index\_cost\_adj*) which has a negative impact on the workload.
+3. The idea of the *Performance Stability Prescription* is to identify bad performance after upgrade. However, the workload in this lab runs faster in the new version of Oracle AI Database. To get the best benefit out of the lab, you simulate bad performance. This lab changes optimizer behavior (*optimizer\_index\_cost\_adj*) which has a negative impact on the workload.
 
-    You should imagine that this workload performs bad without any changes after upgrade to Oracle Database 23ai.
+    You should imagine that this workload performs bad without any changes after the upgrade.
 
     Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimizer to disregard index scans and perform full table scan. This causes bad performance.
 
@@ -111,7 +111,7 @@ This lab assumes:
 
     </details>
 
-4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now *test executes* the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 23ai optimizer. First, you compare *CPU\_TIME*.
+4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now *test executes* the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new optimizer. First, you compare *CPU\_TIME*.
 
     ``` sql
     <copy>
