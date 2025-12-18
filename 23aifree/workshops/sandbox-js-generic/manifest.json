@@ -1,6 +1,10 @@
 {
-  "workshoptitle": "Simple Data Driven applications using JavaScript in Oracle Database 23ai",
+  "workshoptitle": "Simple Data Driven applications using JavaScript in Oracle Database 26ai",
     "help": "livelabs-help-db_us@oracle.com",
+    "include": {
+      "adb-provision-body.md":"/common/building-blocks/tasks/adb/provision-body.md",
+      "adb-goto-service-body.md":"/common/building-blocks/tasks/adb/goto-service-body.md"
+    },
     "tutorials": [
       {
           "title": "Introduction",
@@ -8,13 +12,18 @@
           "filename": "../../introduction/intro-js-generic.md"
       },
       {
-          "title": "Get Started with NoVNC",
-          "description": "Verify Setup of compute instance",
-          "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+          "title": "Get Started",
+          "description": "Sign in to Oracle Cloud",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+      },
+      {
+          "title": "Provision an Oracle Autonomous Database (Serverless)",
+          "description": "Create the necessary database for this lab",
+          "filename": "https://oracle-livelabs.github.io/common/building-blocks/blocks/adb/provision/provision-console.md"
       },
       {
           "title": "Lab 1: Get started with JavaScript development using a community module",
-          "description": "Set up your environment and implement the validator.js module in your application",
+          "description": "Implement the validator.js module in your application",
           "filename": "../../js-generic-get-started-example/get-started-example.md"
       },
       {
@@ -36,16 +45,6 @@
         "title": "Lab 5: Work effectively with JSON",
         "description": "Learn how to work with JSON using a document model",
         "filename": "../../js-generic-json/json.md"
-      },
-      {
-        "title": "Lab 6: Get insights into your code using Post-Execution Debugging",
-        "description": "Learn how to use Post-Execution debugging for JavaScript modules",
-        "filename": "../../js-generic-post-execution-debugging/post-execution-debugging.md"
-      },
-      {
-        "title": "Lab 7: Instructions for setup, tear-down and backup",
-        "description": "Learn how to configure the lab, tear it down, and back up your progress",
-        "filename": "../../js-generic-appendix/appendix.md"
       },
       {
         "title": "Need Help?",
