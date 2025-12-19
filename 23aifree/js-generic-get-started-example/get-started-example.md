@@ -32,14 +32,18 @@ This lab assumes you have:
 
 The default user you are connecting to when starting Database Actions—the ADMIN user—is a superuser. Just like with any other system, you shouldn't use superusers for regular tasks.
 
-1. Log into Database Actions
+1. Access your Autonomous Database
+
+    After you logged into Oracle Cloud Console you can access your Autonomous AI Database. Access the hamburger menu in the top-left corner, then click on Oracle AI Database > Autonomous AI Database. Change your compartment by clicking on nnnn (root) and entering the compartment from your login details.
+
+2. Log into Database Actions
 
     Select Database Actions -> Users in the landing page of your Autonomous Database.
     ![Select Database Actions -> Database Users](./images/create-user-01.png)
 
     Control is transferred to Database Actions in a new browser tab.
 
-2. Create the Emily account
+3. Create the Emily account
 
     Complete the user creation wizard as shown in the screenshot.
 
@@ -47,7 +51,7 @@ The default user you are connecting to when starting Database Actions—the ADMI
 
     Don't forget to enable the "REST enabled" switch.
 
-3. Assign Roles
+4. Assign Roles
 
     Proceed to the second tab in the user creation wizard.
 
@@ -60,7 +64,7 @@ The default user you are connecting to when starting Database Actions—the ADMI
 
     Please tick the _Granted_ and _Default_ checkboxes for each of these.
 
-4. Finish the user creation
+5. Finish the user creation
 
     Click on the "Create User" button to create the database account and enable it.
 
