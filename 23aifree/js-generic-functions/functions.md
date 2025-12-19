@@ -372,9 +372,9 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
     <copy>
     create or replace function hello("who" varchar2) return varchar2
     as mle language javascript 
-    {{
+    <<
         return `hello, ${who}`;
-    }};
+    >>;
     /
     </copy>
     ```
@@ -409,7 +409,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
         "inputString" varchar2
     ) return JSON
     as mle language javascript
-    {{
+    <<
         if ( inputString === undefined ) {
             throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
         }
@@ -432,7 +432,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
             myObject[tuple[0]] = tuple[1];
         });
         return myObject;
-    }};
+    >>;
     /
     </copy>
     ```

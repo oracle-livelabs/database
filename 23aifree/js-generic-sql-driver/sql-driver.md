@@ -409,7 +409,7 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
         "p_log_message" log_t.log_message%type
     ) return log_t.log_id%type 
     as mle language javascript
-    {{
+    <<
         const result = session.execute(
             `insert into log_t (
                 log_message
@@ -433,7 +433,7 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
         // by definition the outBinds array can contain only a single
         // element in this scenario. 
         return result.outBinds.id[0];
-    }};
+    >>;
     /
     </copy>
     ```

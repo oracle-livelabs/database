@@ -158,6 +158,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     There are times when you have to modify a document in a collection. The SODA API offers a simple and convenient way to do so. The following function can be used to update an employee's salary.
 
     ```js
+    <copy>
     const col = soda.createCollection('myCollection');
 
     const docCursor = col.find().filter({ "ename": "JONES" }).getCursor();
@@ -173,6 +174,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
         console.log(`Mr. "JONES" has been given a raise, his new salary is ${emp.sal}`);
 
     }
+    </copy>
     ```
 
     Executing this snippet will update JONES's salary by 10 percent.
@@ -182,6 +184,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     Just like records in relational tables, sometimes you have to delete documents from a collection. This example demonstrates how to do so. It deletes the previously modified document.
 
     ```js
+    <copy>
     const col = soda.createCollection('myCollection');
 
     const result = col.find().filter({ "ename": "JONES" }).remove();
@@ -190,6 +193,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     }
 
     console.log('the document has been successfully removed');
+    </copy>
     ```
 
 6. Clean up by dropping the collection
@@ -197,6 +201,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     Dropping a collection is like dropping a table in the relational world—it can be potentially dangerous! Only drop a collection if you are absolutely sure you don't need it anymore. Here is an example of how to drop a collection:
 
     ```js
+    <copy>
     // verify if the collection to be dropped exists in the first place
     const col = soda.openCollection('myCollection');
     if (col === null) {
@@ -207,6 +212,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     // this might be a dangerous operation since the collection and
     // all its documents are removed permanently
     col.drop();
+    </copy>
     ```
 
     The underlying table Oracle created for you has also been dropped, together with the collection itself.
