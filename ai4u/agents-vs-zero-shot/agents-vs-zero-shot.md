@@ -82,12 +82,12 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
         order_date  DATE DEFAULT SYSDATE
     );
 
-    -- Add comments so Select AI understands this is THE orders table
-    COMMENT ON TABLE sample_orders IS 'This is the orders table. Use this table for all order lookups. Contains order ID, customer name, order status, amount, and order date.';
-    COMMENT ON COLUMN sample_orders.order_id IS 'The unique order identifier. Examples: 12345, 12346, 12347. Use this to look up orders.';
-    COMMENT ON COLUMN sample_orders.customer IS 'The customer or company name who placed the order';
-    COMMENT ON COLUMN sample_orders.status IS 'Current order status. Valid values: PENDING, SHIPPED, DELIVERED';
-    COMMENT ON COLUMN sample_orders.amount IS 'Total order amount in US dollars';
+    -- Add comments so Select AI understands the table
+    COMMENT ON TABLE sample_orders IS 'Orders table containing order ID, customer name, status, amount, and date.';
+    COMMENT ON COLUMN sample_orders.order_id IS 'Unique order identifier. Examples: 12345, 12346, 12347.';
+    COMMENT ON COLUMN sample_orders.customer IS 'Customer or company name who placed the order';
+    COMMENT ON COLUMN sample_orders.status IS 'Order status: PENDING, SHIPPED, or DELIVERED';
+    COMMENT ON COLUMN sample_orders.amount IS 'Order total in US dollars';
     COMMENT ON COLUMN sample_orders.order_date IS 'Date when the order was placed';
 
     -- Insert sample data
@@ -113,23 +113,25 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     </copy>
     ```
 
-3. Use SELECT AI to query the order status.
+3. Use SELECT AI NARRATE to query the order status.
 
-    **Observe:** SELECT AI CAN read your data. It generates SQL and returns the actual status.
+    **Observe:** SELECT AI CAN read your data and answer questions about it.
 
     ```sql
     <copy>
-    SELECT AI What is the status of order 12345;
+    SELECT AI NARRATE What is the status of order 12345;
     </copy>
     ```
 
+SELECT AI returned the actual status: SHIPPED. Compare this to zero-shot which could only give generic advice.
+
 4. Now try to update using SELECT AI.
 
-    **Observe:** SELECT AI cannot update data. It can only generate SELECT statements, not UPDATE statements.
+    **Observe:** SELECT AI cannot update data. It can only read.
 
     ```sql
     <copy>
-    SELECT AI Update order 12345 to delivered;
+    SELECT AI NARRATE Update order 12345 to delivered;
     </copy>
     ```
 

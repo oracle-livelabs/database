@@ -41,7 +41,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Create the orders table\nCREATE TABLE sample_orders (\n    order_id    VARCHAR2(20) PRIMARY KEY,\n    customer    VARCHAR2(100),\n    status      VARCHAR2(20),\n    amount      NUMBER(10,2),\n    order_date  DATE DEFAULT SYSDATE\n);\n\n-- Add comments so Select AI understands this is THE orders table\nCOMMENT ON TABLE sample_orders IS 'This is the orders table. Use this table for all order lookups. Contains order ID, customer name, order status, amount, and order date.';\nCOMMENT ON COLUMN sample_orders.order_id IS 'The unique order identifier. Examples: 12345, 12346, 12347. Use this to look up orders.';\nCOMMENT ON COLUMN sample_orders.customer IS 'The customer or company name who placed the order';\nCOMMENT ON COLUMN sample_orders.status IS 'Current order status. Valid values: PENDING, SHIPPED, DELIVERED';\nCOMMENT ON COLUMN sample_orders.amount IS 'Total order amount in US dollars';\nCOMMENT ON COLUMN sample_orders.order_date IS 'Date when the order was placed';\n\n-- Insert sample data\nINSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);\nINSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);\nINSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);\nCOMMIT;",
+      "text": "%script\n-- Create the orders table\nCREATE TABLE sample_orders (\n    order_id    VARCHAR2(20) PRIMARY KEY,\n    customer    VARCHAR2(100),\n    status      VARCHAR2(20),\n    amount      NUMBER(10,2),\n    order_date  DATE DEFAULT SYSDATE\n);\n\n-- Add comments so Select AI understands the table\nCOMMENT ON TABLE sample_orders IS 'Orders table containing order ID, customer name, status, amount, and date.';\nCOMMENT ON COLUMN sample_orders.order_id IS 'Unique order identifier. Examples: 12345, 12346, 12347.';\nCOMMENT ON COLUMN sample_orders.customer IS 'Customer or company name who placed the order';\nCOMMENT ON COLUMN sample_orders.status IS 'Order status: PENDING, SHIPPED, or DELIVERED';\nCOMMENT ON COLUMN sample_orders.amount IS 'Order total in US dollars';\nCOMMENT ON COLUMN sample_orders.order_date IS 'Date when the order was placed';\n\n-- Insert sample data\nINSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);\nINSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);\nINSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);\nCOMMIT;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -53,19 +53,19 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Use SELECT AI to query the order status.\n\n**Observe:** SELECT AI CAN read your data. It generates SQL and returns the actual status.",
+      "text": "%md\n3. Use SELECT AI NARRATE to query the order status.\n\n**Observe:** SELECT AI CAN read your data and answer questions about it.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI What is the status of order 12345;",
+      "text": "%script\nSELECT AI NARRATE What is the status of order 12345;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n4. Now try to update using SELECT AI.\n\n**Observe:** SELECT AI cannot update data. It can only generate SELECT statements, not UPDATE statements.",
+      "text": "%md\nSELECT AI returned the actual status: SHIPPED. Compare this to zero-shot which could only give generic advice.\n\n4. Now try to update using SELECT AI.\n\n**Observe:** SELECT AI cannot update data. It can only read.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI Update order 12345 to delivered;",
+      "text": "%script\nSELECT AI NARRATE Update order 12345 to delivered;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
