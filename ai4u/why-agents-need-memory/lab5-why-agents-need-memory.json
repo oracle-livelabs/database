@@ -1,0 +1,135 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Why Agents Need Memory\n\n## Introduction\n\nIn this lab, you'll experience the forgetting problem firsthand—and understand why memory is essential for agents that do real work.\n\nMost AI agents have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned last week, or what rules they're supposed to follow. This works for demos. It fails completely in production.\n\nYou'll tell an agent something important, clear the session, and watch it forget everything.\n\nEstimated Time: 10 minutes\n\n### Objectives\n\n* Experience the forgetting problem directly\n* Understand the difference between chat memory and agentic memory\n* See why stateless agents can't run real workflows\n* Recognize the need for persistent memory\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-4 or have a working agent setup\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL\n\n## Task 1: Create an Agent Without Memory\n\nWe'll create an agent that has no way to store or retrieve information between sessions.\n\n1. Create a simple customer service agent.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\n-- Create a basic SQL tool so the agent can function\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'BASIC_SQL_TOOL',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Basic SQL query tool'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'FORGETFUL_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a helpful customer service agent. Remember any preferences or information customers share with you so you can serve them better.\"}',\n        description => 'Agent without memory capabilities'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'FORGETFUL_TASK',\n        attributes  => '{\"instruction\": \"Help the customer with their request. {query}\",\n                        \"tools\": [\"BASIC_SQL_TOOL\"]}',\n        description => 'Task without memory tools'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'FORGETFUL_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating memory limitations'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Set the team for your session.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 2: Teach the Agent Something\n\nLet's give the agent important information about a customer.\n\n1. Tell the agent about customer preferences.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT I am Sarah Chen from Acme Corp. I prefer email contact and my timezone is Pacific. Please remember this for future interactions;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nThe agent acknowledges and seems to understand.\n\n2. Immediately ask about what you just said.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What is my preferred contact method;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nThe agent can recall this—it's still in the conversation context.\n\n3. Ask another question in the same session.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What timezone am I in;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nStill works—the context is maintained within the session.\n\n## Task 3: Experience the Forgetting\n\nNow let's simulate what happens when the session ends and a new one begins.\n\n1. Clear the team (simulating session end).",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Start a new session.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Ask about the preferences you shared.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What is my preferred contact method;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.\n\n4. Try asking about your name and company.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Who am I and what company do I work for;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Gone.** Everything you told it has been forgotten.\n\n## Task 4: See the Business Impact\n\nThis isn't just an inconvenience—it breaks real workflows.\n\n1. Simulate Day 1: Customer reports an issue.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT I am having problems with my order ORD-5678. The shipment is delayed and I need it urgently for a client presentation on Friday;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. The agent acknowledges the issue. Now simulate Day 2:",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Customer calls back for an update.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Any update on my order issue;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**The agent has no idea what issue you're talking about.** The customer has to explain everything again.\n\n## Task 5: Understand What's Missing\n\nLet's be clear about what the agent lacks:\n\n1. Query what tools the agent has.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT tool_name, description \nFROM USER_AI_AGENT_TOOLS;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nThe forgetful agent has no memory tools—no way to store or retrieve information.\n\n2. Check if anything was recorded in history.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as when\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '10' MINUTE\nORDER BY start_date DESC;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Summary\n\nIn this lab, you experienced the forgetting problem:\n\n* Told an agent important information\n* Watched it forget everything when the session ended\n* Understood why this breaks real workflows\n* Recognized the gap between chat memory and agentic memory\n\n**Key takeaway:** Intelligence doesn't matter if an agent can't remember what just happened. Without memory, agents perform. With memory, agents progress.\n\n## Cleanup (Optional)",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    }
+  ],
+  "name": "Lab 5 - Why Agents Need Memory",
+  "id": "lab5-why-agents-need-memory",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": { "isZeppelinNotebookCronEnable": false },
+  "info": {}
+}

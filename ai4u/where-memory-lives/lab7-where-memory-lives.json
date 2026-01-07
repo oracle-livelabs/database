@@ -1,0 +1,151 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Where Agent Memory Should Live\n\n## Introduction\n\nIn this lab, you'll build a **memory core**—the converged database foundation that gives AI agents **agentic memory**.\n\nThe technology that unlocks agentic memory isn't another model layer—it's a converged database capable of serving as the memory core for agentic systems. Not a vector store. Not a caching layer. A real database that can handle everything agents need.\n\nYou'll create a memory table using JSON for flexible storage, build tools the agent can use to remember and recall facts, and have actual conversations with an AI that uses your database as its memory core.\n\nThis isn't a simulation—you'll actually converse with an AI agent that uses your database as its memory core.\n\nEstimated Time: 15 minutes\n\n### Objectives\n\n* Build a memory core using Oracle's native JSON type\n* Create PL/SQL functions as agent tools for memory\n* Register tools with the agent framework\n* Have conversations with an agent that has true agentic memory\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-6 or have a working agent setup\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL and PL/SQL\n\n## Task 1: Create the Memory Core Table\n\nThe memory table is the foundation—where the agent stores everything it learns.\n\n1. Create the memory core table.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE TABLE agent_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    agent_id       VARCHAR2(100) DEFAULT 'DEFAULT_AGENT',\n    memory_type    VARCHAR2(20) DEFAULT 'FACT',\n    content        JSON NOT NULL,\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Create indexes for efficient JSON queries.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE INDEX idx_memory_about ON agent_memory m (m.content.about.string());\nCREATE INDEX idx_memory_type ON agent_memory(memory_type);",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 2: Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability.\n\n1. Create the function to store facts.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION remember_fact(\n    p_fact     VARCHAR2,\n    p_category VARCHAR2 DEFAULT 'general',\n    p_about    VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO agent_memory (memory_type, content)\n    VALUES (\n        'FACT',\n        JSON_OBJECT(\n            'fact'       VALUE p_fact,\n            'category'   VALUE p_category,\n            'about'      VALUE p_about,\n            'source'     VALUE 'conversation',\n            'remembered' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        )\n    );\n    COMMIT;\n    \n    RETURN 'Remembered: ' || p_fact || \n           CASE WHEN p_about IS NOT NULL THEN ' (about ' || p_about || ')' ELSE '' END;\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 3: Create the Recall Function\n\nThe recall function is the agent's \"search memory\" capability.\n\n1. Create the function to retrieve facts.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION recall_facts(\n    p_about    VARCHAR2 DEFAULT NULL,\n    p_category VARCHAR2 DEFAULT NULL\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count  NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            m.content.fact.string() as fact,\n            m.content.category.string() as category,\n            m.content.about.string() as about,\n            created_at\n        FROM agent_memory m\n        WHERE memory_type = 'FACT'\n        AND (p_about IS NULL OR UPPER(m.content.about.string()) = UPPER(p_about))\n        AND (p_category IS NULL OR UPPER(m.content.category.string()) = UPPER(p_category))\n        ORDER BY created_at DESC\n        FETCH FIRST 10 ROWS ONLY\n    ) LOOP\n        v_result := v_result || '- ' || rec.fact;\n        IF rec.about IS NOT NULL THEN\n            v_result := v_result || ' (about: ' || rec.about || ')';\n        END IF;\n        v_result := v_result || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No facts found matching the criteria.';\n    END IF;\n    \n    RETURN 'Found ' || v_count || ' facts:' || CHR(10) || v_result;\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 4: Register the Agent Tools\n\nTools bridge your PL/SQL functions and the AI agent.\n\n1. Register the \"remember\" tool.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_TOOL',\n        attributes  => '{\"instruction\": \"Store a fact for future reference. Use when the user shares something worth remembering. IMPORTANT: Use UPPERCASE parameter names: P_FACT (the fact), P_CATEGORY (type), P_ABOUT (entity name).\",\n                        \"function\": \"remember_fact\"}',\n        description => 'Stores facts in long-term memory'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Register the \"recall\" tool.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve facts from memory. Use when you need to know about a person, customer, or entity. IMPORTANT: Use UPPERCASE parameter names: P_ABOUT (entity name), P_CATEGORY (optional filter).\",\n                        \"function\": \"recall_facts\"}',\n        description => 'Retrieves facts from long-term memory'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Verify the tools were created.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT tool_name, status, description FROM USER_AI_AGENT_TOOLS;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 5: Create the Agent, Task, and Team\n\n1. Create the agent with memory awareness.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a helpful assistant with the ability to remember facts. When users tell you things worth remembering, use REMEMBER_TOOL. When users ask about something, use RECALL_TOOL to check what you know. Always check your memory before saying you do not know something.\"}',\n        description => 'An agent with persistent memory'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Create the task.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'MEMORY_TASK',\n        attributes  => '{\"instruction\": \"Process this user request. If the user shares information, call REMEMBER_TOOL once. If the user asks a question, call RECALL_TOOL once. Use at most ONE tool call, then respond. User request: {query}\",\n                        \"tools\": [\"REMEMBER_TOOL\", \"RECALL_TOOL\"]}',\n        description => 'Task for memory-enabled conversations'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Create the team.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"MEMORY_AGENT\", \"task\": \"MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with memory-enabled agent'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 6: Talk to Your Agent\n\nNow let's see memory in action.\n\n1. Set the team.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('MEMORY_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Tell the agent something to remember.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Customer Acme Corp prefers to be contacted by email, not phone;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Tell it more.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Acme Corp's main contact is Sarah Johnson and their timezone is Pacific;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n4. Ask about what it knows.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What do you know about Acme Corp;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nThe agent recalls the stored facts.\n\n## Task 7: Verify Persistence Across Sessions\n\n1. Clear and reset the session.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('MEMORY_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Ask about previous information.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Who is the contact for Acme Corp;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**The agent remembers!** Because facts are stored in the database, not session memory.\n\n3. View the memory core contents.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    memory_type,\n    JSON_SERIALIZE(content PRETTY) as content_json,\n    created_at\nFROM agent_memory\nORDER BY created_at DESC;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Summary\n\nIn this lab, you built a **memory core** using Oracle's converged database:\n\n* Created a memory table with native JSON\n* Built remember and recall functions\n* Registered them as agent tools\n* Had conversations with an agent that remembers\n* Verified persistence across sessions\n\n**Key takeaway:** The memory core isn't another model layer—it's a converged database. Everything lives in one place: one transaction, one security model, one query language.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n* [JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/adjsn/)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    }
+  ],
+  "name": "Lab 7 - Where Memory Lives",
+  "id": "lab7-where-memory-lives",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": { "isZeppelinNotebookCronEnable": false },
+  "info": {}
+}

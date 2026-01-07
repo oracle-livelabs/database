@@ -1,0 +1,159 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# How Agents Actually Get Work Done\n\n## Introduction\n\nIn this lab, you'll trace an agent through its complete execution loop—from understanding a request to taking action and reporting results.\n\nEvery agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.\n\nEstimated Time: 10 minutes\n\n### Objectives\n\n* Trace the complete agent execution loop\n* Understand the relationship between LLM reasoning and tool actions\n* Use history views to see every step\n* Recognize the pattern that all agents follow\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-3 or have a working agent setup\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL\n\n## Task 1: Set Up an Observable Agent\n\nWe'll create an agent with tools that log what's happening so you can see each step clearly.\n\n1. Create tables and sequence for tracking.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE TABLE workflow_log (\n    log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n    step_name   VARCHAR2(100),\n    step_detail VARCHAR2(500),\n    logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n);\n\nCREATE TABLE expense_requests (\n    request_id  VARCHAR2(20) PRIMARY KEY,\n    employee    VARCHAR2(100),\n    amount      NUMBER(10,2),\n    category    VARCHAR2(50),\n    status      VARCHAR2(30) DEFAULT 'NEW',\n    created_at  TIMESTAMP DEFAULT SYSTIMESTAMP\n);\n\nCREATE SEQUENCE expense_requests_seq START WITH 1001;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Create the first tool function - create expense request.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION create_expense_request(\n    p_employee VARCHAR2,\n    p_amount   NUMBER,\n    p_category VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_request_id VARCHAR2(20);\nBEGIN\n    v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_requests_seq.NEXTVAL;\n    \n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_employee || ', $' || p_amount);\n    \n    -- Create the request\n    INSERT INTO expense_requests (request_id, employee, amount, category, status)\n    VALUES (v_request_id, p_employee, p_amount, p_category, 'SUBMITTED');\n    \n    COMMIT;\n    RETURN 'Created expense request ' || v_request_id || ' for $' || p_amount || ' (' || p_category || ')';\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Create the second tool function - check expense rules.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION check_expense_rules(\n    p_amount   NUMBER,\n    p_category VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_result VARCHAR2(200);\nBEGIN\n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('CHECK_RULES', 'Checking rules for $' || p_amount || ', category: ' || p_category);\n    \n    -- Apply rules\n    IF p_amount < 100 THEN\n        v_result := 'AUTO_APPROVE: Amount under $100';\n    ELSIF p_amount < 500 THEN\n        v_result := 'MANAGER_APPROVAL: Amount $100-500 requires manager';\n    ELSE\n        v_result := 'DIRECTOR_APPROVAL: Amount $500+ requires director';\n    END IF;\n    \n    COMMIT;\n    RETURN v_result;\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n4. Create the third tool function - route for approval.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION route_for_approval(\n    p_request_id VARCHAR2,\n    p_approval_level VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('ROUTE_APPROVAL', 'Routing ' || p_request_id || ' for ' || p_approval_level);\n    \n    -- Update status\n    UPDATE expense_requests \n    SET status = 'PENDING_' || p_approval_level\n    WHERE request_id = p_request_id;\n    \n    COMMIT;\n    RETURN 'Routed ' || p_request_id || ' for ' || p_approval_level || ' approval';\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n5. Register the tools.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CREATE_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Create a new expense request. Parameters: P_EMPLOYEE (name), P_AMOUNT (dollars), P_CATEGORY (travel/meals/supplies).\",\n                        \"function\": \"create_expense_request\"}',\n        description => 'Creates expense request'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CHECK_RULES_TOOL',\n        attributes  => '{\"instruction\": \"Check what approval level is needed. Parameters: P_AMOUNT (dollars), P_CATEGORY.\",\n                        \"function\": \"check_expense_rules\"}',\n        description => 'Checks expense approval rules'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ROUTE_APPROVAL_TOOL',\n        attributes  => '{\"instruction\": \"Route expense for approval. Parameters: P_REQUEST_ID, P_APPROVAL_LEVEL.\",\n                        \"function\": \"route_for_approval\"}',\n        description => 'Routes for approval'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n6. Create the agent and team.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_EXEC_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense processing agent. When someone submits an expense: 1) Create the request, 2) Check the rules, 3) Route for appropriate approval.\"}',\n        description => 'Agent demonstrating execution loop'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_EXEC_TASK',\n        attributes  => '{\"instruction\": \"Process the expense request step by step: create it, check rules, then route. {query}\",\n                        \"tools\": [\"CREATE_EXPENSE_TOOL\", \"CHECK_RULES_TOOL\", \"ROUTE_APPROVAL_TOOL\"]}',\n        description => 'Task for expense execution demo'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_EXEC_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_EXEC_AGENT\", \"task\": \"EXPENSE_EXEC_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for execution demo'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 2: Execute a Complete Workflow\n\nNow let's run a request and trace every step.\n\n1. Clear the log and set the team.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('EXPENSE_EXEC_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Submit an expense request.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $250 expense for team lunch for John Smith;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Immediately check the workflow log.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    step_name,\n    step_detail,\n    TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time\nFROM workflow_log\nORDER BY log_id;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe the execution sequence:**\n- CREATE_REQUEST: The expense was created\n- CHECK_RULES: Rules were evaluated\n- ROUTE_APPROVAL: It was routed for manager approval\n\n## Task 3: Trace the Agent's Tool Calls\n\nThe history views show what the agent did.\n\n1. Query the tool history.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as started,\n    TO_CHAR(end_date, 'HH24:MI:SS.FF3') as ended,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Check the expense request that was created.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    request_id,\n    employee,\n    amount,\n    category,\n    status,\n    TO_CHAR(created_at, 'HH24:MI:SS') as created\nFROM expense_requests\nORDER BY created_at DESC;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nYou can see the actual record the agent created.\n\n## Task 4: Trace Different Execution Paths\n\nDifferent amounts trigger different rules and therefore different execution paths.\n\n1. Submit a small expense (auto-approve path).",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $50 expense for office supplies for Jane Doe;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Check the workflow log.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT step_name, step_detail FROM workflow_log ORDER BY log_id;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** Even though the rules said AUTO_APPROVE, the agent still created and routed it (following its instructions).\n\n3. Submit a large expense (director approval path).",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $750 expense for client dinner for Bob Wilson;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n4. Check the workflow log again.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT step_name, step_detail FROM workflow_log ORDER BY log_id;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** Different amount → different rule result → different routing.\n\n## Task 5: Understand the Execution Pattern\n\nEvery agent execution follows this pattern:\n\n1. **Receive request** → The user submits a query\n2. **LLM understands** → Interprets the intent\n3. **LLM plans** → Determines which tools and in what order\n4. **Tool executes** → First tool runs, returns result\n5. **LLM analyzes** → Interprets the result\n6. **Next tool** → Repeat steps 4-5 for each tool\n7. **LLM responds** → Generates final response\n\nQuery to see the complete execution timeline:",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    'TOOL: ' || tool_name as step,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as time,\n    SUBSTR(output, 1, 50) as output\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE\nORDER BY start_date;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nCompare with your workflow log:",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    'LOG: ' || step_name as step,\n    TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time,\n    step_detail as output\nFROM workflow_log\nWHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE\nORDER BY logged_at;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Summary\n\nIn this lab, you traced the complete agent execution loop:\n\n* Created an observable agent with logging tools\n* Watched a multi-step workflow execute\n* Traced tool calls through history views\n* Saw how different inputs lead to different execution paths\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable.\n\n## Cleanup (Optional)",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_EXEC_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_EXEC_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_EXEC_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RULES_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_APPROVAL_TOOL', TRUE);\nDROP TABLE expense_requests;\nDROP TABLE workflow_log;\nDROP SEQUENCE expense_requests_seq;\nDROP FUNCTION create_expense_request;\nDROP FUNCTION check_expense_rules;\nDROP FUNCTION route_for_approval;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    }
+  ],
+  "name": "Lab 4 - How Agents Execute",
+  "id": "lab4-how-agents-execute",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": { "isZeppelinNotebookCronEnable": false },
+  "info": {}
+}

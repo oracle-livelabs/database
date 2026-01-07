@@ -1,0 +1,143 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# What Is an AI Agent, Really?\n\n## Introduction\n\nMost people think AI is just a chatbot—you ask a question, it gives an answer. But agents do more. They don't just respond, they *act*. They look up real data, make decisions based on your systems, and complete tasks.\n\nIn this lab, you'll see that difference firsthand. You'll create an agent that can query actual order data from your database—not explain how to check orders, but actually check them and give you real answers.\n\n**Estimated Time:** 10 minutes\n\n### Objectives\n* Create sample data for the agent to query\n* Build an agent with a SQL tool\n* See the agent look up real information\n* Understand why execution beats explanation",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%md\n## Task 1: Create Sample Order Data\n\nFirst, let's create a simple orders table. This gives the agent something real to work with.\n\n**Step 1:** Create the orders table.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE TABLE orders (\n    order_id      VARCHAR2(20) PRIMARY KEY,\n    customer_name VARCHAR2(100),\n    order_date    DATE,\n    status        VARCHAR2(30),\n    amount        NUMBER(10,2)\n);",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 2:** Add some sample orders.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nINSERT INTO orders VALUES ('ORD-12345', 'Alex Chen', DATE '2025-01-02', 'Shipped', 299.99);\nINSERT INTO orders VALUES ('ORD-12346', 'Maria Santos', DATE '2025-01-03', 'Processing', 149.50);\nINSERT INTO orders VALUES ('ORD-12347', 'James Wilson', DATE '2024-12-28', 'Delivered', 89.00);\nINSERT INTO orders VALUES ('ORD-12348', 'Sarah Johnson', DATE '2025-01-04', 'Pending', 450.00);\nCOMMIT;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 3:** Verify the data exists.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT order_id, customer_name, status, amount FROM orders;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 2: Create the Agent Components\n\nNow let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.\n\n**Step 1:** Create the SQL tool. This gives the agent the ability to query your database.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ORDER_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query order information from the database'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 2:** Create the agent with a clear role.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ORDER_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a helpful order assistant. Look up order information and provide accurate answers based on actual data.\"}',\n        description => 'Agent that looks up order information'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 3:** Create the task that tells the agent what to do and which tools to use.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ORDER_TASK',\n        attributes  => '{\"instruction\": \"Help the user with their order inquiry. Use the ORDER_LOOKUP tool to find real order data. User request: {query}\",\n                        \"tools\": [\"ORDER_LOOKUP\"]}',\n        description => 'Task for handling order inquiries'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 4:** Create the team that connects everything together.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ORDER_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"ORDER_AGENT\", \"task\": \"ORDER_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for order inquiries'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 5:** Verify everything is created.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT tool_name, status FROM USER_AI_AGENT_TOOLS WHERE tool_name = 'ORDER_LOOKUP';\nSELECT agent_name, status FROM USER_AI_AGENTS WHERE agent_name = 'ORDER_AGENT';\nSELECT task_name, status FROM USER_AI_AGENT_TASKS WHERE task_name = 'ORDER_TASK';\nSELECT agent_team_name, status FROM USER_AI_AGENT_TEAMS WHERE agent_team_name = 'ORDER_TEAM';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 3: See the Agent in Action\n\nNow let's see the difference between an agent and a chatbot.\n\n**Step 1:** Set the team for your session.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ORDER_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 2:** Ask about a specific order.\n\n**This is the key moment.** The agent doesn't explain *how* to check order status. It actually queries the orders table and tells you the answer.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What is the status of order ORD-12345;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 3:** Ask about another order.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT How much was order ORD-12347;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 4:** Ask a question that requires reasoning over data.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Which orders are still being processed;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 4: See What Happened Behind the Scenes\n\nThe agent used a tool to get real answers. Let's see the evidence.\n\n**Step 1:** Check the tool execution history.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called_at,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Step 2:** Check the team execution history.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    team_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as started,\n    state\nFROM USER_AI_AGENT_TEAM_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 5: The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n> \"To check the status of an order, you would typically:\n> 1. Log into your account\n> 2. Navigate to Order History\n> 3. Find the order by ID\n> 4. View the current status\"\n\n**The agent said:**\n> \"Order ORD-12345 was placed on January 2, 2025 for $299.99. Current status: Shipped.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent—it doesn't just know things, it *does* things.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%md\n## Summary\n\nIn this lab, you experienced the fundamental nature of AI agents:\n\n* Created an agent with access to a SQL tool\n* Watched it query real data to answer questions\n* Saw the execution history proving it took action\n* Understood the difference between explanation and execution\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ORDER_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ORDER_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ORDER_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ORDER_LOOKUP', TRUE);\nDROP TABLE orders PURGE;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    }
+  ],
+  "name": "Lab 1 - What Is an AI Agent",
+  "id": "lab1-what-is-agent",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": { "isZeppelinNotebookCronEnable": false },
+  "info": {}
+}

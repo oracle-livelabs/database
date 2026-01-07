@@ -1,0 +1,119 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# How Agents Plan the Work\n\n## Introduction\n\nIn this lab, you'll observe how an AI agent plans its work before taking action.\n\nPlanning is what separates agents from chatbots. Before executing anything, an agent breaks a task into steps, identifies which tools to use, and determines the order of operations. This makes agent behavior predictable and debuggable.\n\nYou'll give an agent a multi-step task and watch how it decomposes the work.\n\nEstimated Time: 10 minutes\n\n### Objectives\n\n* Understand how agents break tasks into steps\n* Observe the planning process through history views\n* See the relationship between instructions and execution\n* Learn why planning makes agents predictable\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-2 or have a working agent setup\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL\n\n## Task 1: Create a Multi-Tool Agent\n\nTo see planning in action, we need an agent with multiple tools. The agent will decide which tools to use and in what order.\n\n1. Create sample data tables.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\n-- Customer table\nCREATE TABLE demo_customers (\n    customer_id   VARCHAR2(20) PRIMARY KEY,\n    name          VARCHAR2(100),\n    tier          VARCHAR2(20),\n    contact_email VARCHAR2(100)\n);\n\nINSERT INTO demo_customers VALUES ('CUST-001', 'Acme Corp', 'PREMIUM', 'contact@acme.com');\nINSERT INTO demo_customers VALUES ('CUST-002', 'TechStart', 'STANDARD', 'info@techstart.com');\n\n-- Order table\nCREATE TABLE demo_orders (\n    order_id    VARCHAR2(20) PRIMARY KEY,\n    customer_id VARCHAR2(20),\n    status      VARCHAR2(20),\n    amount      NUMBER(10,2),\n    order_date  DATE\n);\n\nINSERT INTO demo_orders VALUES ('ORD-100', 'CUST-001', 'SHIPPED', 500.00, SYSDATE - 2);\nINSERT INTO demo_orders VALUES ('ORD-101', 'CUST-001', 'PENDING', 250.00, SYSDATE);\nINSERT INTO demo_orders VALUES ('ORD-102', 'CUST-002', 'DELIVERED', 100.00, SYSDATE - 5);\n\nCOMMIT;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Create tool functions.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\n-- Tool 1: Look up customer\nCREATE OR REPLACE FUNCTION get_customer(p_customer_id VARCHAR2) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT 'Customer: ' || name || ', Tier: ' || tier || ', Email: ' || contact_email\n    INTO v_result FROM demo_customers WHERE customer_id = p_customer_id;\n    RETURN v_result;\nEXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Customer not found: ' || p_customer_id;\nEND;\n/\n\n-- Tool 2: Get customer orders\nCREATE OR REPLACE FUNCTION get_customer_orders(p_customer_id VARCHAR2) RETURN VARCHAR2 AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (SELECT order_id, status, amount, order_date \n                FROM demo_orders WHERE customer_id = p_customer_id ORDER BY order_date DESC) LOOP\n        v_result := v_result || rec.order_id || ': ' || rec.status || ', $' || rec.amount || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    IF v_count = 0 THEN RETURN 'No orders found for customer.'; END IF;\n    RETURN 'Found ' || v_count || ' orders:' || CHR(10) || v_result;\nEND;\n/\n\n-- Tool 3: Check if customer is eligible for priority support\nCREATE OR REPLACE FUNCTION check_priority_eligibility(p_customer_id VARCHAR2) RETURN VARCHAR2 AS\n    v_tier VARCHAR2(20);\nBEGIN\n    SELECT tier INTO v_tier FROM demo_customers WHERE customer_id = p_customer_id;\n    IF v_tier = 'PREMIUM' THEN\n        RETURN 'ELIGIBLE: Customer is Premium tier - priority support available.';\n    ELSE\n        RETURN 'NOT ELIGIBLE: Customer is ' || v_tier || ' tier - standard support only.';\n    END IF;\nEXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Customer not found.';\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Register the tools.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_CUSTOMER_TOOL',\n        attributes  => '{\"instruction\": \"Get customer details. Use P_CUSTOMER_ID parameter.\",\n                        \"function\": \"get_customer\"}',\n        description => 'Retrieves customer information'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_ORDERS_TOOL',\n        attributes  => '{\"instruction\": \"Get all orders for a customer. Use P_CUSTOMER_ID parameter.\",\n                        \"function\": \"get_customer_orders\"}',\n        description => 'Retrieves customer order history'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CHECK_PRIORITY_TOOL',\n        attributes  => '{\"instruction\": \"Check if customer is eligible for priority support. Use P_CUSTOMER_ID parameter.\",\n                        \"function\": \"check_priority_eligibility\"}',\n        description => 'Checks priority support eligibility'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n4. Create the agent and team.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'PLANNING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a customer service agent. You have tools to look up customers, check their orders, and verify priority support eligibility. Use the appropriate tools to answer customer inquiries completely.\"}',\n        description => 'Agent that plans multi-step responses'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'PLANNING_TASK',\n        attributes  => '{\"instruction\": \"Answer the customer inquiry completely. Use the available tools to gather all relevant information. User request: {query}\",\n                        \"tools\": [\"GET_CUSTOMER_TOOL\", \"GET_ORDERS_TOOL\", \"CHECK_PRIORITY_TOOL\"]}',\n        description => 'Task with multiple tools for planning demonstration'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"PLANNING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating agent planning'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 2: Observe Single-Tool Planning\n\nLet's start with a simple request that needs only one tool.\n\n1. Set the team and ask a simple question.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');\nSELECT AI AGENT Who is customer CUST-001;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Check the tool history to see the plan execution.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** The agent planned to use just GET_CUSTOMER_TOOL because that's all the question required.\n\n## Task 3: Observe Multi-Tool Planning\n\nNow let's ask a question that requires multiple tools.\n\n1. Ask a complex question.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT I need a complete picture of customer CUST-001. \nWho are they, what orders do they have, and are they eligible for priority support;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Check the tool history.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** The agent planned to use multiple tools:\n- GET_CUSTOMER_TOOL to get basic info\n- GET_ORDERS_TOOL to get order history\n- CHECK_PRIORITY_TOOL to verify eligibility\n\n3. Notice the sequence—the agent determined the logical order.\n\n## Task 4: See How Instructions Shape Planning\n\nThe task instruction guides how the agent plans. Let's modify it.\n\n1. Create a more specific task.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'STRUCTURED_TASK',\n        attributes  => '{\"instruction\": \"For customer inquiries, follow this plan: 1. First, look up the customer using GET_CUSTOMER_TOOL 2. Then, get their orders using GET_ORDERS_TOOL 3. Finally, check priority eligibility using CHECK_PRIORITY_TOOL. Report all findings. User request: {query}\",\n                        \"tools\": [\"GET_CUSTOMER_TOOL\", \"GET_ORDERS_TOOL\", \"CHECK_PRIORITY_TOOL\"]}',\n        description => 'Task with explicit planning instructions'\n    );\nEND;\n/\n\n-- Update the team to use the new task\nBEGIN\n    DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"STRUCTURED_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with structured planning'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Test with the structured instructions.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');\nSELECT AI AGENT Tell me about customer CUST-001;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Check the tool history again.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** The agent followed the explicit plan: customer first, then orders, then eligibility—in that order.\n\n## Task 5: Understand Why Planning Matters\n\nPlanning provides:\n\n1. **Predictability** — You can anticipate what the agent will do\n2. **Debuggability** — When something goes wrong, you can see where\n3. **Efficiency** — The agent gathers what it needs without redundant calls\n4. **Control** — You shape the plan through instructions\n\nQuery the complete execution sequence:",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as started,\n    TO_CHAR(end_date, 'HH24:MI:SS') as ended\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Summary\n\nIn this lab, you observed how agents plan their work:\n\n* Created an agent with multiple tools\n* Watched the agent choose tools based on the question\n* Saw how multi-step questions trigger multi-tool plans\n* Learned how instructions shape the planning process\n\n**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views.\n\n## Cleanup (Optional)",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('PLANNING_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_CUSTOMER_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ORDERS_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_PRIORITY_TOOL', TRUE);\nDROP TABLE demo_orders;\nDROP TABLE demo_customers;\nDROP FUNCTION get_customer;\nDROP FUNCTION get_customer_orders;\nDROP FUNCTION check_priority_eligibility;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    }
+  ],
+  "name": "Lab 3 - How Agents Plan",
+  "id": "lab3-how-agents-plan",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": { "isZeppelinNotebookCronEnable": false },
+  "info": {}
+}
