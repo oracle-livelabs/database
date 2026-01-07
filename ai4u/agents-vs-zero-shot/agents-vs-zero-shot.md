@@ -45,7 +45,7 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
 3. Now try asking for something that requires YOUR data.
 
-    **Observe:** The AI can't answer this because it has no access to your data. It gives a generic response about how to check order status, but it doesn't actually know YOUR order 12345.
+    **Observe:** The AI cannot answer this because it has no access to your data. It gives generic advice about how to check order status, but it does not actually know YOUR order 12345.
 
     This is the limitation of zero-shot: great for general knowledge, useless for your specific business data.
 
@@ -69,10 +69,11 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
 Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.
 
-1. Create a sample orders table.
+1. Create a sample orders table with comments to help Select AI understand the schema.
 
     ```sql
     <copy>
+    -- Create the orders table
     CREATE TABLE sample_orders (
         order_id    VARCHAR2(20) PRIMARY KEY,
         customer    VARCHAR2(100),
@@ -81,6 +82,15 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
         order_date  DATE DEFAULT SYSDATE
     );
 
+    -- Add comments so Select AI understands this is THE orders table
+    COMMENT ON TABLE sample_orders IS 'This is the orders table. Use this table for all order lookups. Contains order ID, customer name, order status, amount, and order date.';
+    COMMENT ON COLUMN sample_orders.order_id IS 'The unique order identifier. Examples: 12345, 12346, 12347. Use this to look up orders.';
+    COMMENT ON COLUMN sample_orders.customer IS 'The customer or company name who placed the order';
+    COMMENT ON COLUMN sample_orders.status IS 'Current order status. Valid values: PENDING, SHIPPED, DELIVERED';
+    COMMENT ON COLUMN sample_orders.amount IS 'Total order amount in US dollars';
+    COMMENT ON COLUMN sample_orders.order_date IS 'Date when the order was placed';
+
+    -- Insert sample data
     INSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);
     INSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);
     INSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);
@@ -115,7 +125,7 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
 
 4. Now try to update using SELECT AI.
 
-    **Observe:** SELECT AI cannot update data. It only generates SELECT statements, not UPDATE statements. Even if it tried, it would fail.
+    **Observe:** SELECT AI cannot update data. It can only generate SELECT statements, not UPDATE statements.
 
     ```sql
     <copy>
@@ -299,7 +309,7 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
     </copy>
     ```
 
-**The status changed from SHIPPED to DELIVERED.** The agent didn't just talk about updating - it actually did it.
+**The status changed from SHIPPED to DELIVERED.** The agent did not just talk about updating - it actually did it.
 
 4. Try a conditional update that should NOT happen.
 
@@ -333,8 +343,8 @@ You can see the sequence: lookup, then update (or just lookup if no update was n
 
 ## Task 6: When to Use Each Approach
 
-| Approach | Can Read Data | Can Write Data | Can Coordinate |
-|----------|--------------|----------------|----------------|
+| Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |
+|----------|---------------------|-----------------|----------------------|
 | SELECT AI CHAT | No | No | No |
 | SELECT AI | Yes | No | No |
 | SELECT AI AGENT | Yes | Yes | Yes |
@@ -345,27 +355,27 @@ You can see the sequence: lookup, then update (or just lookup if no update was n
 - You want advice or explanation
 
 **Use SELECT AI when:**
-- You need to query your data
+- You need to query your data with natural language
 - Read-only access is sufficient
 - Single-step retrieval
 
 **Use agents (SELECT AI AGENT) when:**
-- The task requires multiple steps
+- The task requires access to your data
 - You need to READ and WRITE data
 - Decisions depend on data (conditional logic)
-- Actions need coordination across tools
+- Actions need coordination across multiple tools
 
 ## Summary
 
 In this lab, you directly compared three approaches:
 
-* **SELECT AI CHAT** - Cannot access your data at all
-* **SELECT AI** - Can read your data but cannot change it
-* **SELECT AI AGENT** - Can read, decide, and act
+* **SELECT AI CHAT** - Cannot access your data; can only give generic advice
+* **SELECT AI** - Can read your data but cannot modify it
+* **SELECT AI AGENT** - Can read your data, make decisions, and take action
 
 You watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.
 
-**Key takeaway:** The difference isn't just intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.
+**Key takeaway:** The difference is not just intelligence—it is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.
 
 ## Learn More
 

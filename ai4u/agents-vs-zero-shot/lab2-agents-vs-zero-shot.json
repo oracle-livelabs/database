@@ -21,7 +21,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Now try asking for something that requires YOUR data.\n\n**Observe:** The AI can't answer this because it has no access to your data. It gives a generic response about how to check order status, but it doesn't actually know YOUR order 12345.\n\nThis is the limitation of zero-shot: great for general knowledge, useless for your specific business data.",
+      "text": "%md\n3. Now try asking for something that requires YOUR data.\n\n**Observe:** The AI cannot answer this because it has no access to your data. It gives generic advice about how to check order status, but it does not actually know YOUR order 12345.\n\nThis is the limitation of zero-shot: great for general knowledge, useless for your specific business data.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -37,11 +37,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 2: See What SELECT AI Can Do\n\nBefore we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.\n\n1. Create a sample orders table.",
+      "text": "%md\n## Task 2: See What SELECT AI Can Do\n\nBefore we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.\n\n1. Create a sample orders table with comments to help Select AI understand the schema.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE TABLE sample_orders (\n    order_id    VARCHAR2(20) PRIMARY KEY,\n    customer    VARCHAR2(100),\n    status      VARCHAR2(20),\n    amount      NUMBER(10,2),\n    order_date  DATE DEFAULT SYSDATE\n);\n\nINSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);\nINSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);\nINSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);\nCOMMIT;",
+      "text": "%script\n-- Create the orders table\nCREATE TABLE sample_orders (\n    order_id    VARCHAR2(20) PRIMARY KEY,\n    customer    VARCHAR2(100),\n    status      VARCHAR2(20),\n    amount      NUMBER(10,2),\n    order_date  DATE DEFAULT SYSDATE\n);\n\n-- Add comments so Select AI understands this is THE orders table\nCOMMENT ON TABLE sample_orders IS 'This is the orders table. Use this table for all order lookups. Contains order ID, customer name, order status, amount, and order date.';\nCOMMENT ON COLUMN sample_orders.order_id IS 'The unique order identifier. Examples: 12345, 12346, 12347. Use this to look up orders.';\nCOMMENT ON COLUMN sample_orders.customer IS 'The customer or company name who placed the order';\nCOMMENT ON COLUMN sample_orders.status IS 'Current order status. Valid values: PENDING, SHIPPED, DELIVERED';\nCOMMENT ON COLUMN sample_orders.amount IS 'Total order amount in US dollars';\nCOMMENT ON COLUMN sample_orders.order_date IS 'Date when the order was placed';\n\n-- Insert sample data\nINSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);\nINSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);\nINSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);\nCOMMIT;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -61,7 +61,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n4. Now try to update using SELECT AI.\n\n**Observe:** SELECT AI cannot update data. It only generates SELECT statements, not UPDATE statements. Even if it tried, it would fail.",
+      "text": "%md\n4. Now try to update using SELECT AI.\n\n**Observe:** SELECT AI cannot update data. It can only generate SELECT statements, not UPDATE statements.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -133,7 +133,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**The status changed from SHIPPED to DELIVERED.** The agent didn't just talk about updating - it actually did it.\n\n4. Try a conditional update that should NOT happen.",
+      "text": "%md\n**The status changed from SHIPPED to DELIVERED.** The agent did not just talk about updating - it actually did it.\n\n4. Try a conditional update that should NOT happen.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -153,7 +153,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nYou can see the sequence: lookup, then update (or just lookup if no update was needed).\n\n## Task 6: When to Use Each Approach\n\n| Approach | Can Read Data | Can Write Data | Can Coordinate |\n|----------|--------------|----------------|----------------|\n| SELECT AI CHAT | No | No | No |\n| SELECT AI | Yes | No | No |\n| SELECT AI AGENT | Yes | Yes | Yes |\n\n**Use zero-shot (SELECT AI CHAT) when:**\n- You need a quick answer from general knowledge\n- No data access is required\n- You want advice or explanation\n\n**Use SELECT AI when:**\n- You need to query your data\n- Read-only access is sufficient\n- Single-step retrieval\n\n**Use agents (SELECT AI AGENT) when:**\n- The task requires multiple steps\n- You need to READ and WRITE data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across tools\n\n## Summary\n\nIn this lab, you directly compared three approaches:\n\n* **SELECT AI CHAT** - Cannot access your data at all\n* **SELECT AI** - Can read your data but cannot change it\n* **SELECT AI AGENT** - Can read, decide, and act\n\nYou watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.\n\n**Key takeaway:** The difference isn't just intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "text": "%md\nYou can see the sequence: lookup, then update (or just lookup if no update was needed).\n\n## Task 6: When to Use Each Approach\n\n| Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |\n|----------|---------------------|-----------------|----------------------|\n| SELECT AI CHAT | No | No | No |\n| SELECT AI | Yes | No | No |\n| SELECT AI AGENT | Yes | Yes | Yes |\n\n**Use zero-shot (SELECT AI CHAT) when:**\n- You need a quick answer from general knowledge\n- No data access is required\n- You want advice or explanation\n\n**Use SELECT AI when:**\n- You need to query your data with natural language\n- Read-only access is sufficient\n- Single-step retrieval\n\n**Use agents (SELECT AI AGENT) when:**\n- The task requires access to your data\n- You need to READ and WRITE data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across multiple tools\n\n## Summary\n\nIn this lab, you directly compared three approaches:\n\n* **SELECT AI CHAT** - Cannot access your data; can only give generic advice\n* **SELECT AI** - Can read your data but cannot modify it\n* **SELECT AI AGENT** - Can read your data, make decisions, and take action\n\nYou watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.\n\n**Key takeaway:** The difference is not just intelligence—it is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
