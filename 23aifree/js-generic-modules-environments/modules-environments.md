@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After the previous lab introduced JavaScript in Oracle Database 23ai Free you will now learn more about Multilingual Engine (MLE) modules and environments. Modules are similar in concept to PL/SQL packages as they allow you to logically group code in a single namespace. Just as with PL/SQL you can create public and private functions. MLE modules contain JavaScript code expressed in terms of ECMAScript modules.
+After the previous lab introduced JavaScript in Oracle AI Database 26ai Free, you will now learn more about Multilingual Engine (MLE) modules and environments. Modules are similar in concept to PL/SQL packages as they allow you to logically group code in a single namespace. Just as with PL/SQL you can create public and private functions. MLE modules contain JavaScript code expressed in terms of ECMAScript modules.
 
 Estimated Lab Time: 10 minutes
 
@@ -10,239 +10,106 @@ Estimated Lab Time: 10 minutes
 
 In this lab, you will:
 
-- Create a database session
+- Connect to Database Actions
 - Create JavaScript modules
-- Perform naming resolution using MLE environments
+- Perform naming resolution using JavaScript environments
 - View dictionary information about modules and environments
 
 ### Prerequisites
 
 This lab assumes you have:
 
-- An Oracle Database 23ai Free environment available to use
-- Created the `emily` account as per Lab 1
+- Access to an Oracle AI Database 26ai Autonomous Database
+- Created the `EMILY` account as per Lab 1
 
-## Task 1: Create a database session
+## Task 1: Connect to Database Actions
 
-Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
+Before starting any of the following tasks, you need to log into Database Actions as EMILY. Make sure to switch to SQL worksheets.
 
-```bash
-<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
-```
+If you forgot the URL to log in to the Emily account, use the Database Actions dropdown and select Database Users as shown in this screenshot:
 
-## Task 2: Create JavaScript modules
+![Screenshot showing how to view/modify and delete Database Users](../js-generic-get-started-example/images/create-user-01.png)
 
-A JavaScript module is a unit of MLE's language code stored in the database as a schema object. Storing code within the database is one of the main benefits of using JavaScript in Oracle Database 23ai: rather than having to manage a fleet of application servers each with their own copy of the application, the database takes care of this for you.
+In the ensuing dialog, identify the Emily account and take a note of the URL.
 
-In addition, Data Guard replication ensures that the exact same code is present in both production and all physical standby databases. This way configuration drift, a common problem bound to occur when invoking the disaster recovery location, can be mitigated.
+![Screenshot showing all user accounts in the database](./images/identify-sdw-url-01.png)
+
+Copy/paste it into your favorite browser and access Database Actions use the option pointed to by the arrow to open Database Actions in a new window.
+
+## Task 2: Create JavaScript modules in Database Actions
+
+A JavaScript module in Oracle AI Database 26ai isn't too dissimilar from a JavaScript module you use in node, deno, or bun. The main difference is that you don't use a file system: the database's dictionary contains all your code.
+
+In the context of the database a module is a unit of MLE's language code represented as a schema object. Storing code within the database is one of the main benefits of using JavaScript in Oracle AI Database 26ai: rather than having to manage a fleet of application servers each with their own copy of the application, the database takes care of this for you.
+
+In addition, Data Guard replication ensures that the exact same code is present in both production and all physical standby databases. This way configuration drift, a common problem bound to occur when activating the disaster recovery site, can be mitigated.
 
 > **Note**: A JavaScript module in MLE is equivalent to an ECMAScript 6 module. The terms MLE module and JavaScript module are used interchangeably in this lab.
 
-1. Create a JavaScript module inline
+The easiest way to create a JavaScript module is to provide the JavaScript code inline with the `create mle module` DDL statement. Enter the following code in your worksheet:
 
-    The easiest way to create a JavaScript module is to provide the JavaScript code inline with the `create mle module` statement.
+```sql
+<copy>create or replace mle module helper_module_inline
+language javascript as 
 
-    ```sql
-    <copy>create or replace mle module helper_module_inline
-    language javascript as 
-
-    /**
-     * convert a delimited string into key-value pairs and return JSON
-     * @param {string} inputString - the input string to be converted
-     * @returns {JSON}
-     */
-    function string2obj(inputString) {
-        if ( inputString === undefined ) {
-            throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
-        }
-        let myObject = {};
-        if ( inputString.length === 0 ) {
-            return myObject;
-        }
-        const kvPairs = inputString.split(";");
-        kvPairs.forEach( pair => {
-            const tuple = pair.split("=");
-            if ( tuple.length === 1 ) {
-                tuple[1] = false;
-            } else if ( tuple.length != 2 ) {
-                throw "parse error: you need to use exactly one '=' between " + 
-                        "key and value and not use '=' in either key or value";
-            }
-            myObject[tuple[0]] = tuple[1];
-        });
+/**
+* convert a delimited string into key-value pairs and return JSON
+* @param {string} inputString - the input string to be converted
+* @returns {JSON}
+*/
+function string2obj(inputString) {
+    if ( inputString === undefined ) {
+        throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
+    }
+    let myObject = {};
+    if ( inputString.length === 0 ) {
         return myObject;
     }
-
-    /**
-     * convert a JavaScript object to a string
-     * @param {object} inputObject - the object to transform to a string
-     * @returns {string}
-     */
-    function obj2String(inputObject) {
-        if ( typeof inputObject != 'object' ) {
-            throw "inputObject isn't an object";
+    const kvPairs = inputString.split(";");
+    kvPairs.forEach( pair => {
+        const tuple = pair.split("=");
+        if ( tuple.length === 1 ) {
+            tuple[1] = false;
+        } else if ( tuple.length != 2 ) {
+            throw "parse error: you need to use exactly one '=' between " + 
+                    "key and value and not use '=' in either key or value";
         }
-        return JSON.stringify(inputObject);
+        myObject[tuple[0]] = tuple[1];
+    });
+    return myObject;
+}
+
+/**
+* convert a JavaScript object to a string
+* @param {object} inputObject - the object to transform to a string
+* @returns {string}
+*/
+function obj2String(inputObject) {
+    if ( typeof inputObject != 'object' ) {
+        throw "inputObject isn't an object";
     }
+    return JSON.stringify(inputObject);
+}
 
-    export { string2obj, obj2String }
-    /</copy>
-    ```
+export { string2obj, obj2String }
+/</copy>
+```
 
-2. Create a JavaScript module from a file in the file system
+Submit the code to the database using the Execute button, circled in red in the following screenshot:
 
-    Another popular way of creating a JavaScript module is by loading it from the file system. The `BFILE` clause in the `create mle module` statement can be used to this effect. You created a directory object named `javascript_src_dir` in the previous lab, it will be used again in this lab. Exit `sqlplus` first, then copy the JavaScript code into a file.
+![Creating an MLE module in Database Actions | SQL](./images/create-mle-module-01.png)
 
-    ```bash
-    $ <copy>cat <<'EOF' > /home/oracle/hol23c/helper_module_bfile.js
-    /**
-     * convert a delimited string into key-value pairs and return JSON
-     * @param {string} inputString - the input string to be converted
-     * @returns {JSON}
-     */
-    function string2obj(inputString) {
-        if ( inputString === undefined ) {
-            throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
-        }
-        let myObject = {};
-        if ( inputString.length === 0 ) {
-            return myObject;
-        }
-        const kvPairs = inputString.split(";");
-        kvPairs.forEach( pair => {
-            const tuple = pair.split("=");
-            if ( tuple.length === 1 ) {
-                tuple[1] = false;
-            } else if ( tuple.length != 2 ) {
-                throw "parse error: you need to use exactly one '=' " + 
-                    " between key and value and not use '=' in either key or value";
-            }
-            myObject[tuple[0]] = tuple[1];
-        });
-        return myObject;
-    }
+Execute the statement. The JavaScript module has now been created in the database.
 
-    /**
-     * convert a JavaScript object to a string
-     * @param {object} inputObject - the object to transform to a string
-     * @returns {string}
-     */
-    function obj2String(inputObject) {
-        if ( typeof inputObject != 'object' ) {
-            throw "inputObject isn't an object";
-        }
-        return JSON.stringify(inputObject);
-    }
-
-    export { string2obj, obj2String }
-    EOF</copy>
-    ```
-
-    With the file in place you can create the module in the next step. Create a database session first ...
-
-    ```bash
-    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
-    ```
-
-    ... before you create the module
-
-    ```sql
-    <copy>
-    create or replace mle module helper_module_bfile
-    language javascript
-    using bfile (javascript_src_dir, 'helper_module_bfile.js');
-    /
-    </copy>
-    ```
-
-## Task 3: Create a JavaScript module with Database Actions
-
-Database Actions is a web-based interface that uses Oracle REST Data Services (ORDS) to provide development, data studio, administration and monitoring features for Oracle Database. You REST-enabled your schema in the first lab by calling `ords.enable_schema`. With Database Actions you can create JavaScript modules using a browser interface.
-
-1. Start ORDS
-
-    ORDS is pre-installed in your environment, but not started when you log in for the first time. To start the software open a new tab in your terminal by selecting "File", "New Tab" or by typing SHIFT + CTRL + T. Use this new tab to start ords as follows:
-
-    ```shell
-    <copy>
-    ords serve
-    </copy>
-    ```
-
-    ORDS will now start, it shouldn't take longer than 1 minute to become available. Please keep this tab open for the duration of your lab.
-
-2. Log in to Database Actions
-
-    Begin by starting a web browser. You should see a button named "Activities" in the top left corner of the screen. Clicking on it opens a panel allowing you to choose from either Chrome or Firefox. Pick the one you like best.
-
-    Next, point your browser to `http://localhost:8080/ords/emily/_sdw` and log in to database actions using the password you assigned to the `emily` user.
-
-    ![Database Actions login screen](images/sdw-login.jpg)
-
-    Once connected, navigate to the MLE JS tile
-
-    ![Database Actions main screen](images/sdw-main-page.jpg)
-
-    With the editor (not Snippet) pane open, paste the following JavaScript code into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
-
-    ```javascript
-    /**
-     * convert a delimited string into key-value pairs and return JSON
-     * @param {string} inputString - the input string to be converted
-     * @returns {JSON}
-     */
-    function string2obj(inputString) {
-        if ( inputString === undefined ) {
-            throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
-        }
-        let myObject = {};
-        if ( inputString.length === 0 ) {
-            return myObject;
-        }
-        const kvPairs = inputString.split(";");
-        kvPairs.forEach( pair => {
-            const tuple = pair.split("=");
-            if ( tuple.length === 1 ) {
-                tuple[1] = false;
-            } else if ( tuple.length != 2 ) {
-                throw "parse error: you need to use exactly one '=' " + 
-                    " between key and value and not use '=' in either key or value";
-            }
-            myObject[tuple[0]] = tuple[1];
-        });
-        return myObject;
-    }
-
-    /**
-     * convert a JavaScript object to a string
-     * @param {object} inputObject - the object to transform to a string
-     * @returns {string}
-     */
-    function obj2String(inputObject) {
-        if ( typeof inputObject != 'object' ) {
-            throw "inputObject isn't an object";
-        }
-        return JSON.stringify(inputObject);
-    }
-
-    export { string2obj, obj2String }
-    ```
-
-    This is what it should look like:
-
-    ![Database Actions module editor](images/sdw-mle-module-editor.jpg)
-
-    A short message should indicate that the module was indeed saved in the database.
-
-## Task 4: Perform name resolution using MLE environments
+## Task 3: Perform name resolution using MLE environments
 
 1. Reference existing modules
 
-    The more modular your code, the more reusable it is. JavaScript modules in Oracle Database 23ai can reference other modules easily, allowing developers to follow a divide and conquer approach designing applications. The code shown later in this lab makes use of the module `helper_module_inline` created earlier to convert a string representing an order before inserting it into a table.
+    The more modular your code, the more reusable it is. JavaScript modules in Oracle AI Database 26ai can reference other modules easily, allowing developers to follow a divide and conquer approach designing applications. The code shown later in this lab makes use of the module `helper_module_inline` created earlier to convert a string representing an order before inserting it into a table.
 
     > **Note**: Lab 4 will explain the use of the JavaScript SQL Driver in more detail.
 
-    The following example makes use of the `SH` sample schema. If you don't have the sample schemas installed in your PDB you can create a simplified version of the `ORDERS` table as follows:
+    The following example makes use of the `SH` sample schema. If you don't have the sample schemas installed in your PDB you can create a simplified version of the `ORDERS` table as follows. Copy and paste the following snippet into your worksheet. Then execute the statement.
 
     ```sql
     <copy>
@@ -260,7 +127,7 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     </copy>
     ```
 
-    The `business_logic` module will insert an order into that table after converting a comma-separated string to a JSON document which is eventually parsed by `json_table()`. Inserting data into a table requires the use of the MLE JavaScript SQL driver which will be covered in a later lab.
+    The `business_logic` module shown below will insert an order into that table after converting a comma-separated string to a JSON document which is eventually parsed by `json_table()`. Inserting data into a table requires the use of the MLE JavaScript SQL driver which will be covered in a later lab.
 
     ```sql
     <copy>
@@ -318,13 +185,17 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     </copy>
     ```
 
+    Submit this statement against the database.
+
 2. Understand name resolution in JavaScript powered by Multilingual Engine (MLE)
 
-    The `business_logic` module introduces a new concept: an (ECMAScript) `import` statement. `string2JSON()`, defined in the helpers module is imported into the module's namespace.
+    The `business_logic` module introduces a new concept: an (ECMAScript) `import` statement. `string2obj()`, defined in the helpers module is imported into the module's namespace.
+
+    On its own, MLE does not know how to resolve the import name to a module. A separate entity performs this mapping: a so-called MLE environment. You need to create one for the business module shown above not to throw runtime errors.
 
 3. Create and edit an environment
 
-    The following snippet creates an environment mapping the import name `helpers` as seen in the `business_logic` module to `helper_module_inline`
+    The following snippet creates an MLE environment, mapping the import name `helpers` as seen in the `business_logic` module to `helper_module_inline`
 
     ```sql
     <copy>
@@ -335,37 +206,54 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     </copy>
     ```
 
-    Database Actions supports working with environments as well. From the drop down on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
+    This will come in handy later.
 
-    ![Database Actions MLE Environment editor](images/sdw-mle-env-editor.jpg)
+## Task 4: View and edit JavaScript modules and environments using the JavaScript editor
 
-    You can see that list of imported modules on the right-hand side of the wizard displays an import name `helpers`, mapping to `helper_module_inline`. Add the `business_logic` module to the list of imported modules by selecting it in the list of available modules, followed by a click on the `>` symbol. Finally click on the apply button to persist the change. 
+Apart from the SQL worksheet you used earlier, a dedicated JavaScript editor exists in Database Actions as well.
+
+1. View JavaScript modules using the JavaScript editor
+
+    The JavaScript editor featured in Database Actions supports working with modules and environments as well. Switch over to the "JavaScript" editor by using the hamburger menu in the top-left corner again, then choose "JavaScript".
+
+    You should see all JavaScript modules in the tree structure to the left, as shown in the following screenshot. Right-clicking on a module name allows you to load it into the editor.
+
+    ![JavaScript code editor in Database Actions](./images/create-mle-module-02.png)
+
+2. View environment information using the JavaScript editor
+
+    From the dropdown on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
+
+    ![Database Actions MLE Environment editor](images/edit-mle-env-01.png)
+
+    You can see that list of imported modules on the right-hand side of the wizard displays an import name `helpers`, mapping to `helper_module_inline`. Add the `business_logic` module to the list of imported modules by selecting it in the list of available modules, followed by a click on the `>` symbol. Finally click on the apply button to persist the change.
 
     The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
 
     Database Actions provides a handy way of viewing code dependencies based on a given combination of module/environment. `BUSINESS_LOGIC` is the only module importing functionality provided by another module, and serves as an example.
 
-    Switch back to "Modules" in the left-hand tree view. Next, right-click on the `BUSINES_LOGIC` module in the tree view and select "Edit" from the context menu. This will load the module's code into the Editor pane. Now you need to associate `BUSINESS_LOGIC_ENV` with the module using the down-down menu as shown in this screenshot. Should the drop-down be empty click on the reload icon next to it and try again.
+    Switch back to "Modules" in the left-hand tree view. Next, right-click on the `BUSINESS_LOGIC` module in the tree view and select "Edit" from the context menu. This will load the module's code into the Editor pane. Now you need to associate `BUSINESS_MODULE_ENV` with the module using the dropdown menu as shown in this screenshot. Should the drop-down be empty click on the reload icon next to it and try again.
 
-    ![Database Actions MLE Environment editor](images/sdw-mle-associate-env-with-module.jpg)
+    Once the environment is associated with the module you can view the module's dependency diagram. Click on the module's name in the drop-down menu in the editor's top left corner (right above the `import { string2obj }` statement) and select "Code Dependencies Diagram".
 
-    Once the environment is associated with the module you can view the module's dependency diagram. Click on the module's name in the drop-down menu in the editor's top left corner (right above the `import { string2obj }` statement) and select "Code Dependencies Diagram". The following diagram is shown, highlighting `BUSINESS_LOGIC`'s dependency on `HELPER_MODULE_INLINE`.
+    ![Module code loaded with the environment associated](./images/code-dependencies-01.png)
 
-    ![Database Actions MLE Environment editor](images/sdw-mle-module-dependencies.jpg)
+    The following diagram is shown, highlighting `BUSINESS_LOGIC`'s dependency on `HELPER_MODULE_INLINE`.
 
-    > **Note:** it is possible to reference a module in multiple environments, there is no strict 1:1 mapping between environment and module.
+    ![Database Actions MLE Environment editor](images/code-dependencies-02.png)
+
+    > **Note:** It's possible to reference a module in multiple environments, there is no strict 1:1 mapping between environment and module.
 
 ## Task 5: View dictionary information about modules and environments
 
-A number of dictionary views allow you to see which modules are present in your schema, which environments were created, and which import names have been mapped to modules. Existing views like `ALL_SOURCE` have been extended to show the module's source code.
+A number of dictionary views allow you to see which modules are present in your schema, which environments were created, and which import names have been mapped to modules. Existing views like `ALL_SOURCE` have been extended to show the module's source code. These can come in handy if you don't have access to graphical user interfaces such as Database Actions.
 
 1. View the source code of `helper_module_inline`
 
+    Switch to the SQL worksheets and run the following query, preferably as a script.
+
     ```sql
     <copy>
-    col line for 9999
-    col text for a90
-    set lines 120 pages 100
     select 
         line, 
         text 
@@ -378,49 +266,58 @@ A number of dictionary views allow you to see which modules are present in your 
     You should see the following output:
 
     ```
-    LINE TEXT
-    ----- ------------------------------------------------------------------------------------
-        1 function string2obj(inputString) {
-        2     if ( inputString === undefined ) {
-        3         throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
-        4     }
-        5     let myObject = {};
-        6     if ( inputString.length === 0 ) {
-        7         return myObject;
-        8     }
-        9     const kvPairs = inputString.split(";");
-       10     kvPairs.forEach( pair => {
-       11         const tuple = pair.split("=");
-       12         if ( tuple.length === 1 ) {
-       13             tuple[1] = false;
-       14         } else if ( tuple.length != 2 ) {
-       15             throw "parse error: you need to use exactly one '=' between " +
-       16                   "key and value and not use '=' in either key or value";
-       17         }
-       18         myObject[tuple[0]] = tuple[1];
-       19     });
-       20     return myObject;
-       21 }
-       22 /**
-       23  * convert a JavaScript object to a string
-       24  * @param {object} inputObject - the object to transform to a string
-       25  * @returns {string}
-       26  */
-       27 function obj2String(inputObject) {
-       28     if ( typeof inputObject != 'object' ) {
-       29         throw "inputObject isn't an object";
-       30     }
-       31     return JSON.stringify(inputObject);
-       32 }
-       33 export { string2obj, obj2String }
+    LINE TEXT                                                                              
+    ---- --------------------------------------------------------------------------------- 
+    1 /**                                                                               
+    2     * convert a delimited string into key-value pairs and return JSON             
+    3     * @param {string} inputString - the input string to be converted              
+    4     * @returns {JSON}                                                             
+    5     */                                                                            
+    6 function string2obj(inputString) {                                                
+    7     if ( inputString === undefined ) {                                            
+    8         throw `must provide a string in the form of key1=value1;...;keyN=valueN`; 
+    9     }                                                                             
+    10     let myObject = {};                                                            
+    11     if ( inputString.length === 0 ) {                                             
+    12         return myObject;                                                          
+    13     }                                                                             
+    14     const kvPairs = inputString.split(";");                                       
+    15     kvPairs.forEach( pair => {                                                    
+    16         const tuple = pair.split("=");                                            
+    17         if ( tuple.length === 1 ) {                                               
+    18             tuple[1] = false;                                                     
+    19         } else if ( tuple.length != 2 ) {                                         
+    20             throw "parse error: you need to use exactly one '=' between " +       
+    21                     "key and value and not use '=' in either key or value";       
+    22         }                                                                         
+    23         myObject[tuple[0]] = tuple[1];                                            
+    24     });                                                                           
+    25     return myObject;                                                              
+    26 }                                                                                 
+    27                                                                               
+    28 /**                                                                               
+    29     * convert a JavaScript object to a string                                     
+    30     * @param {object} inputObject - the object to transform to a string           
+    31     * @returns {string}                                                           
+    32     */                                                                            
+    33 function obj2String(inputObject) {                                                
+    34     if ( typeof inputObject != 'object' ) {                                       
+    35         throw "inputObject isn't an object";                                      
+    36     }                                                                             
+    37     return JSON.stringify(inputObject);                                           
+    38 }                                                                                 
+    39                                                                              
+    40 export { string2obj, obj2String }                                                 
+
+
+    Elapsed: 00:00:00.005
+    40 rows selected.
     ```
 
 2. View information about modules in your schema
 
     ```sql
     <copy>
-    col module_name for a40
-    col language_name for a20
     select
         module_name,
         language_name
@@ -436,20 +333,17 @@ A number of dictionary views allow you to see which modules are present in your 
     You should see the following output:
 
     ```
-    MODULE_NAME                              LANGUAGE_NAME
-    ---------------------------------------- --------------------
-    BUSINESS_LOGIC                           JAVASCRIPT
-    HELPER_MODULE_BFILE                      JAVASCRIPT
-    HELPER_MODULE_INLINE                     JAVASCRIPT
-    HELPER_MODULE_ORDS                       JAVASCRIPT
-    VALIDATOR                                JAVASCRIPT
+    MODULE_NAME          LANGUAGE_NAME 
+    -------------------- ------------- 
+    BUSINESS_LOGIC       JAVASCRIPT    
+    HELPER_MODULE_INLINE JAVASCRIPT    
+    VALIDATOR_MODULE     JAVASCRIPT 
     ```
 
 3. List all environments in your schema
 
     ```sql
     <copy>
-    col env_name for a20
     select
         env_name
     from
@@ -471,8 +365,6 @@ A number of dictionary views allow you to see which modules are present in your 
 
     ```sql
     <copy>
-    col import_name for a30
-    col module_name for a30
     select
         env_name,
         import_name,
@@ -487,18 +379,19 @@ A number of dictionary views allow you to see which modules are present in your 
     You should see the following output:
 
     ```
-    ENV_NAME             IMPORT_NAME                    MODULE_NAME
-    -------------------- ------------------------------ ------------------------------
-    BUSINESS_MODULE_ENV  helpers                        HELPER_MODULE_INLINE
+    ENV_NAME            IMPORT_NAME    MODULE_NAME          
+    ------------------- -------------- -------------------- 
+    BUSINESS_MODULE_ENV helpers        HELPER_MODULE_INLINE 
+    BUSINESS_MODULE_ENV BUSINESS_LOGIC BUSINESS_LOGIC  
     ```
 
-You many now proceed to the next lab.
+You may now proceed to the next lab.
 
 ## Learn More
 
 - SQL Language Reference [CREATE MLE MODULE](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/create-mle-module.html#GUID-EF8D8EBC-2313-4C6C-A76E-1A739C304DCC)
 - SQL Language Reference [CREATE MLE ENV](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/create-mle-env.html#GUID-419C81FD-338D-495F-85CD-135D4D316718)
-- Chapter 2 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes modules and environments in detail
+- Chapter 3 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes modules and environments in detail
 - [Database Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/index.html) contains the definition of all dictionary views
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) section covering ECMAScript modules
 
@@ -506,4 +399,4 @@ You many now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 28-NOV-2023
+- **Last Updated By/Date** - Martin Bach 17-DEC-2025

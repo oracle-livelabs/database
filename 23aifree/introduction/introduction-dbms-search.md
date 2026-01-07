@@ -2,11 +2,11 @@
 
 ## About the DBMS_SEARCH Workshop
 
-This workshop focuses on working with DBMS_SEARCH indexes in Oracle Database 23ai.
+This workshop focuses on working with DBMS_SEARCH indexes in Oracle AI Database 26ai.
 
 ### **DBMS_SEARCH**
 
-DBMS\_SEARCH is a new package in Oracle Database 23ai which allows you to create a single index covering multiple schema objects.
+DBMS\_SEARCH is a new package in Oracle AI Database 26ai which allows you to create a single index covering multiple schema objects.
 
 Also known as an "ubiquitous search index", you can add sets of tables and views as data sources to such an index, and all the columns in the sources are indexed in a single index. Full-text search is available on text columns (such as VARCHAR2 and CLOB) and range search is available on numeric or date columns.
 
@@ -25,7 +25,7 @@ In this lab, you will:
 ### Prerequisites
 
 In order to do this workshop you need
-* An Oracle Database 23ai Free Developer Release Database or one running in a LiveLabs environment
+* An Oracle AI Database 26ai Free Developer Release Database or one running in a LiveLabs environment
 * Some understanding of basic SQL concepts
 * Knowledge of SQL/JSON will be an advantage, but is not required
 
@@ -36,4 +36,4 @@ In order to do this workshop you need
 ## Acknowledgements
 * **Author** - Roger Ford
 * **Contributors** - Alexandra Czarlinska
-* **Last Updated By/Date** - Roger Ford, Database Product Management, June 2023
+* **Last Updated By/Date** - Abby Mulry, December 2025

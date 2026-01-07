@@ -27,7 +27,7 @@ In this lab you will:
 1. Open the Oracle Cloud Console. See **Get Started** lab for detailed steps to access the Oracle Cloud Console.
 2. From the navigation menu, select **Databases** and then select **Tables** under **Oracle NoSQL Database**.
 
-    ![Databases menu](images/console-Nosqlmenu.png)
+    ![Databases menu](images/console-nosqlmenu-new.png)
 
 3. Select your compartment from the drop-down menu and then select **Create table**. 
 
