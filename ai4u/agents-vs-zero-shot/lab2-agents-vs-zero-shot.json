@@ -37,7 +37,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 2: Create an Agent with Tools\n\nNow let's create an agent that can actually access AND modify your data. We'll give it two tools: one to look up orders and one to update them.\n\n1. Create a sample orders table.",
+      "text": "%md\n## Task 2: See What SELECT AI Can Do\n\nBefore we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.\n\n1. Create a sample orders table.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -45,7 +45,39 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Create a function to look up orders (read).",
+      "text": "%md\n2. Add the table to your AI profile so SELECT AI knows about it.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"SAMPLE_ORDERS\"}]'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n3. Use SELECT AI to query the order status.\n\n**Observe:** SELECT AI CAN read your data. It generates SQL and returns the actual status.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI What is the status of order 12345;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n4. Now try to update using SELECT AI.\n\n**Observe:** SELECT AI cannot update data. It only generates SELECT statements, not UPDATE statements. Even if it tried, it would fail.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI Update order 12345 to delivered;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n5. Verify the order was NOT updated.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT order_id, status FROM sample_orders WHERE order_id = '12345';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\nStill SHIPPED. SELECT AI can read but cannot write.\n\n## Task 3: Create an Agent with Tools\n\nNow let's create an agent that can both READ and WRITE. We'll give it two tools: one to look up orders and one to update them.\n\n1. Create a function to look up orders (read).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -53,7 +85,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Create a function to update order status (write).",
+      "text": "%md\n2. Create a function to update order status (write).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -61,7 +93,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n4. Register both as tools.",
+      "text": "%md\n3. Register both as tools.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -69,7 +101,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n5. Create an agent with both tools.",
+      "text": "%md\n4. Create an agent with both tools.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -77,27 +109,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 3: See the Agent Read Data\n\nFirst, let's verify the agent can look up orders.\n\n1. Set the team and ask about an order.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ORDER_TEAM');\nSELECT AI AGENT What is the status of order 12345;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n**Compare to Task 1:** Zero-shot could only give generic advice. The agent returns the ACTUAL status: SHIPPED.\n\n## Task 4: See the Agent Coordinate and Act\n\nNow the real difference. Ask the agent to check AND update.\n\n1. Ask the agent to update an order.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nSELECT AI AGENT Check order 12345 and if it has shipped, mark it as delivered;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n**Observe:** The agent:\n1. Called ORDER_LOOKUP_TOOL to check current status (SHIPPED)\n2. Made a decision based on the result\n3. Called ORDER_UPDATE_TOOL to change it to DELIVERED\n4. Reported what it did\n\nThis is what zero-shot cannot do: **coordinate multiple steps and take action**.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%md\n2. Verify the change actually happened.",
+      "text": "%md\n## Task 4: See the Agent Coordinate and Act\n\nNow let's see the real power of agents: coordinating multiple tools and making changes.\n\n1. First, check the current status of order 12345.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -105,7 +117,23 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe status is now DELIVERED. The agent didn't just talk about updating - it actually did it.\n\n3. Try a conditional update that should NOT happen.",
+      "text": "%md\nThe order is currently SHIPPED.\n\n2. Set the team and ask the agent to check and update the order.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ORDER_TEAM');\nSELECT AI AGENT Check order 12345 and if it has shipped, mark it as delivered;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** The agent:\n1. Called ORDER_LOOKUP_TOOL to check current status (SHIPPED)\n2. Made a decision based on the result\n3. Called ORDER_UPDATE_TOOL to change it to DELIVERED\n4. Reported what it did\n\nThis is what SELECT AI cannot do: **coordinate multiple steps and take action**.\n\n3. Verify the change actually happened.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT order_id, customer, status FROM sample_orders WHERE order_id = '12345';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**The status changed from SHIPPED to DELIVERED.** The agent didn't just talk about updating - it actually did it.\n\n4. Try a conditional update that should NOT happen.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -117,7 +145,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Task 5: See What the Agent Did\n\nThe key difference is that agents take actions. Let's see the tool calls.\n\n1. Query the tool history.",
+      "text": "%md\n## Task 5: See What the Agent Did\n\nEvery tool call is logged. Let's see the execution history.\n\n1. Query the tool history.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -125,7 +153,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nYou can see the sequence: lookup, then update (or just lookup if no update was needed).\n\n## Task 6: When to Use Each Approach\n\n**Use zero-shot (SELECT AI CHAT) when:**\n- You need a quick answer from general knowledge\n- No data access is required\n- You want advice or explanation\n\n**Use SELECT AI (runsql/narrate) when:**\n- You need to query your data\n- Read-only access is sufficient\n- Single-step retrieval\n\n**Use agents (SELECT AI AGENT) when:**\n- The task requires multiple steps\n- You need to READ and WRITE data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across tools\n\n## Summary\n\nIn this lab, you directly compared zero-shot prompting with agent execution:\n\n* Saw that zero-shot explains work but cannot access your data\n* Built an agent with lookup AND update tools\n* Watched the agent coordinate: check status → decide → act\n* Verified the agent actually changed the data\n\n**Key takeaway:** The difference isn't just intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "text": "%md\nYou can see the sequence: lookup, then update (or just lookup if no update was needed).\n\n## Task 6: When to Use Each Approach\n\n| Approach | Can Read Data | Can Write Data | Can Coordinate |\n|----------|--------------|----------------|----------------|\n| SELECT AI CHAT | No | No | No |\n| SELECT AI | Yes | No | No |\n| SELECT AI AGENT | Yes | Yes | Yes |\n\n**Use zero-shot (SELECT AI CHAT) when:**\n- You need a quick answer from general knowledge\n- No data access is required\n- You want advice or explanation\n\n**Use SELECT AI when:**\n- You need to query your data\n- Read-only access is sufficient\n- Single-step retrieval\n\n**Use agents (SELECT AI AGENT) when:**\n- The task requires multiple steps\n- You need to READ and WRITE data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across tools\n\n## Summary\n\nIn this lab, you directly compared three approaches:\n\n* **SELECT AI CHAT** - Cannot access your data at all\n* **SELECT AI** - Can read your data but cannot change it\n* **SELECT AI AGENT** - Can read, decide, and act\n\nYou watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.\n\n**Key takeaway:** The difference isn't just intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

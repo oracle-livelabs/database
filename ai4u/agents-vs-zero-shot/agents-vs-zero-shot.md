@@ -65,9 +65,9 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
-## Task 2: Create an Agent with Tools
+## Task 2: See What SELECT AI Can Do
 
-Now let's create an agent that can actually access AND modify your data. We'll give it two tools: one to look up orders and one to update them.
+Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.
 
 1. Create a sample orders table.
 
@@ -88,7 +88,56 @@ Now let's create an agent that can actually access AND modify your data. We'll g
     </copy>
     ```
 
-2. Create a function to look up orders (read).
+2. Add the table to your AI profile so SELECT AI knows about it.
+
+    ```sql
+    <copy>
+    BEGIN
+        DBMS_CLOUD_AI.SET_ATTRIBUTE(
+            profile_name    => 'genai',
+            attribute_name  => 'object_list',
+            attribute_value => '[{"owner": "' || USER || '", "name": "SAMPLE_ORDERS"}]'
+        );
+    END;
+    /
+    </copy>
+    ```
+
+3. Use SELECT AI to query the order status.
+
+    **Observe:** SELECT AI CAN read your data. It generates SQL and returns the actual status.
+
+    ```sql
+    <copy>
+    SELECT AI What is the status of order 12345;
+    </copy>
+    ```
+
+4. Now try to update using SELECT AI.
+
+    **Observe:** SELECT AI cannot update data. It only generates SELECT statements, not UPDATE statements. Even if it tried, it would fail.
+
+    ```sql
+    <copy>
+    SELECT AI Update order 12345 to delivered;
+    </copy>
+    ```
+
+5. Verify the order was NOT updated.
+
+    ```sql
+    <copy>
+    SELECT order_id, status FROM sample_orders WHERE order_id = '12345';
+    </copy>
+    ```
+
+Still SHIPPED. SELECT AI can read but cannot write.
+
+## Task 3: Create an Agent with Tools
+
+Now let's create an agent that can both READ and WRITE. We'll give it two tools: one to look up orders and one to update them.
+
+1. Create a function to look up orders (read).
 
     ```sql
     <copy>
@@ -114,7 +163,7 @@ Now let's create an agent that can actually access AND modify your data. We'll g
     </copy>
     ```
 
-3. Create a function to update order status (write).
+2. Create a function to update order status (write).
 
     ```sql
     <copy>
@@ -149,7 +198,7 @@ Now let's create an agent that can actually access AND modify your data. We'll g
     </copy>
     ```
 
-4. Register both as tools.
+3. Register both as tools.
 
     ```sql
     <copy>
@@ -175,7 +224,7 @@ Now let's create an agent that can actually access AND modify your data. We'll g
     </copy>
     ```
 
-5. Create an agent with both tools.
+4. Create an agent with both tools.
 
     ```sql
     <copy>
@@ -211,29 +260,25 @@ Now let's create an agent that can actually access AND modify your data. We'll g
     </copy>
     ```
 
-## Task 3: See the Agent Read Data
+## Task 4: See the Agent Coordinate and Act
 
-First, let's verify the agent can look up orders.
+Now let's see the real power of agents: coordinating multiple tools and making changes.
 
-1. Set the team and ask about an order.
+1. First, check the current status of order 12345.
+
+    ```sql
+    <copy>
+    SELECT order_id, customer, status FROM sample_orders WHERE order_id = '12345';
+    </copy>
+    ```
+
+The order is currently SHIPPED.
+
+2. Set the team and ask the agent to check and update the order.
 
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ORDER_TEAM');
-    SELECT AI AGENT What is the status of order 12345;
-    </copy>
-    ```
-
-**Compare to Task 1:** Zero-shot could only give generic advice. The agent returns the ACTUAL status: SHIPPED.
-
-## Task 4: See the Agent Coordinate and Act
-
-Now the real difference. Ask the agent to check AND update.
-
-1. Ask the agent to update an order.
-
-    ```sql
-    <copy>
     SELECT AI AGENT Check order 12345 and if it has shipped, mark it as delivered;
     </copy>
     ```
@@ -244,9 +289,9 @@ Now the real difference. Ask the agent to check AND update.
 3. Called ORDER_UPDATE_TOOL to change it to DELIVERED
 4. Reported what it did
 
-This is what zero-shot cannot do: **coordinate multiple steps and take action**.
+This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
-2. Verify the change actually happened.
+3. Verify the change actually happened.
 
     ```sql
     <copy>
@@ -254,9 +299,9 @@ This is what zero-shot cannot do: **coordinate multiple steps and take action**.
     </copy>
     ```
 
-The status is now DELIVERED. The agent didn't just talk about updating - it actually did it.
+**The status changed from SHIPPED to DELIVERED.** The agent didn't just talk about updating - it actually did it.
 
-3. Try a conditional update that should NOT happen.
+4. Try a conditional update that should NOT happen.
 
     ```sql
     <copy>
@@ -268,7 +313,7 @@ The status is now DELIVERED. The agent didn't just talk about updating - it actu
 
 ## Task 5: See What the Agent Did
 
-The key difference is that agents take actions. Let's see the tool calls.
+Every tool call is logged. Let's see the execution history.
 
 1. Query the tool history.
 
@@ -288,12 +333,18 @@ You can see the sequence: lookup, then update (or just lookup if no update was n
 
 ## Task 6: When to Use Each Approach
 
+| Approach | Can Read Data | Can Write Data | Can Coordinate |
+|----------|--------------|----------------|----------------|
+| SELECT AI CHAT | No | No | No |
+| SELECT AI | Yes | No | No |
+| SELECT AI AGENT | Yes | Yes | Yes |
+
 **Use zero-shot (SELECT AI CHAT) when:**
 - You need a quick answer from general knowledge
 - No data access is required
 - You want advice or explanation
 
-**Use SELECT AI (runsql/narrate) when:**
+**Use SELECT AI when:**
 - You need to query your data
 - Read-only access is sufficient
 - Single-step retrieval
@@ -306,12 +357,13 @@ You can see the sequence: lookup, then update (or just lookup if no update was n
 
 ## Summary
 
-In this lab, you directly compared zero-shot prompting with agent execution:
+In this lab, you directly compared three approaches:
 
-* Saw that zero-shot explains work but cannot access your data
-* Built an agent with lookup AND update tools
-* Watched the agent coordinate: check status → decide → act
-* Verified the agent actually changed the data
+* **SELECT AI CHAT** - Cannot access your data at all
+* **SELECT AI** - Can read your data but cannot change it
+* **SELECT AI AGENT** - Can read, decide, and act
+
+You watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.
 
 **Key takeaway:** The difference isn't just intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.
 
