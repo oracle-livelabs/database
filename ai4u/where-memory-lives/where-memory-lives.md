@@ -252,7 +252,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT Acme Corp's main contact is Sarah Johnson and their timezone is Pacific;
+    SELECT AI AGENT The main contact for Acme Corp is Sarah Johnson and their timezone is Pacific;
     </copy>
     ```
 

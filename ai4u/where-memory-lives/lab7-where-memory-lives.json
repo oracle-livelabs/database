@@ -101,7 +101,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Acme Corp's main contact is Sarah Johnson and their timezone is Pacific;",
+      "text": "%script\nSELECT AI AGENT The main contact for Acme Corp is Sarah Johnson and their timezone is Pacific;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
