@@ -19,9 +19,7 @@ Estimated Time: 10 minutes
 
 This lab assumes you have:
 
-* An Oracle Cloud account with access to Autonomous Database
-* An AI profile named `genai` already configured
-* Basic knowledge of SQL
+* An AI profile named `genai` already configured with your AI provider credentials
 
 ## Task 1: Create Sample Order Data
 
@@ -31,33 +29,48 @@ First, let's create a simple orders table. This gives the agent something real t
 
     ```sql
     <copy>
-    CREATE TABLE orders (
-        order_id      VARCHAR2(20) PRIMARY KEY,
-        customer_name VARCHAR2(100),
-        order_date    DATE,
-        status        VARCHAR2(30),
-        amount        NUMBER(10,2)
+    CREATE TABLE customer_orders (
+        order_id           VARCHAR2(20) PRIMARY KEY,
+        customer_name      VARCHAR2(100),
+        order_date         DATE,
+        order_status       VARCHAR2(30),
+        order_total_amount NUMBER(10,2)
     );
     </copy>
     ```
 
-2. Add some sample orders.
+2. Add comments so Select AI understands what this table contains.
+
+    >**Note:** Select AI reads table and column comments to understand your schema. Good comments make the AI smarter about your data.
 
     ```sql
     <copy>
-    INSERT INTO orders VALUES ('ORD-12345', 'Alex Chen', DATE '2025-01-02', 'Shipped', 299.99);
-    INSERT INTO orders VALUES ('ORD-12346', 'Maria Santos', DATE '2025-01-03', 'Processing', 149.50);
-    INSERT INTO orders VALUES ('ORD-12347', 'James Wilson', DATE '2024-12-28', 'Delivered', 89.00);
-    INSERT INTO orders VALUES ('ORD-12348', 'Sarah Johnson', DATE '2025-01-04', 'Pending', 450.00);
+    COMMENT ON TABLE customer_orders IS 'Customer orders including status tracking and amounts';
+    COMMENT ON COLUMN customer_orders.order_id IS 'Unique order identifier like ORD-12345';
+    COMMENT ON COLUMN customer_orders.customer_name IS 'Full name of the customer who placed the order';
+    COMMENT ON COLUMN customer_orders.order_date IS 'Date the order was placed';
+    COMMENT ON COLUMN customer_orders.order_status IS 'Current status: Pending, Processing, Shipped, or Delivered';
+    COMMENT ON COLUMN customer_orders.order_total_amount IS 'Total order amount in dollars';
+    </copy>
+    ```
+
+3. Add some sample orders.
+
+    ```sql
+    <copy>
+    INSERT INTO customer_orders VALUES ('ORD-12345', 'Alex Chen', DATE '2025-01-02', 'Shipped', 299.99);
+    INSERT INTO customer_orders VALUES ('ORD-12346', 'Maria Santos', DATE '2025-01-03', 'Processing', 149.50);
+    INSERT INTO customer_orders VALUES ('ORD-12347', 'James Wilson', DATE '2024-12-28', 'Delivered', 89.00);
+    INSERT INTO customer_orders VALUES ('ORD-12348', 'Sarah Johnson', DATE '2025-01-04', 'Pending', 450.00);
     COMMIT;
     </copy>
     ```
 
-3. Verify the data exists.
+4. Verify the data exists.
 
     ```sql
     <copy>
-    SELECT order_id, customer_name, status, amount FROM orders;
+    SELECT order_id, customer_name, order_status, order_total_amount FROM customer_orders;
     </copy>
     ```
 
@@ -74,7 +87,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
             tool_name   => 'ORDER_LOOKUP',
             attributes  => '{"tool_type": "SQL",
                             "tool_params": {"profile_name": "genai"}}',
-            description => 'Query order information from the database'
+            description => 'Query the CUSTOMER_ORDERS table to look up order status, amounts, dates, and customer information'
         );
     END;
     /
@@ -154,13 +167,13 @@ Now let's see the difference between an agent and a chatbot.
 
 2. Ask about a specific order.
 
+    **This is the key moment.** The agent doesn't explain *how* to check order status. It actually queries the customer_orders table and tells you the answer.
+
     ```sql
     <copy>
     SELECT AI AGENT What is the status of order ORD-12345;
     </copy>
     ```
-
-    **This is the key moment.** The agent doesn't explain *how* to check order status. It actually queries the orders table and tells you: Order ORD-12345 is Shipped.
 
 3. Ask about another order.
 
@@ -170,8 +183,6 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
-    Again, the agent looks up the real data and returns the actual amount.
-
 4. Ask a question that requires reasoning over data.
 
     ```sql
@@ -179,8 +190,6 @@ Now let's see the difference between an agent and a chatbot.
     SELECT AI AGENT Which orders are still being processed;
     </copy>
     ```
-
-    The agent queries the table, finds orders with status 'Processing' or 'Pending', and lists them.
 
 ## Task 4: See What Happened Behind the Scenes
 
@@ -200,8 +209,6 @@ The agent used a tool to get real answers. Let's see the evidence.
     </copy>
     ```
 
-    You'll see ORDER_LOOKUP was called each time you asked about orders.
-
 2. Check the team execution history.
 
     ```sql
@@ -217,8 +224,6 @@ The agent used a tool to get real answers. Let's see the evidence.
     ```
 
 ## Task 5: The Chatbot vs Agent Difference
-
-Let's make the difference concrete.
 
 **A chatbot would say:**
 
@@ -240,16 +245,24 @@ That's what makes an agent an agent—it doesn't just know things, it *does* thi
 
 In this lab, you experienced the fundamental nature of AI agents:
 
-* Created an agent with access to a SQL tool
+* Created a table with descriptive comments for Select AI
+* Built an agent with access to a SQL tool
 * Watched it query real data to answer questions
 * Saw the execution history proving it took action
 * Understood the difference between explanation and execution
 
 **Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.
 
-In the next lab, you'll see why this agent pattern beats simple prompts for real work.
+## Learn More
 
-## Cleanup
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
+
+## Cleanup (Optional)
 
 ```sql
 <copy>
@@ -257,16 +270,6 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ORDER_TEAM', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ORDER_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ORDER_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ORDER_LOOKUP', TRUE);
-DROP TABLE orders PURGE;
+DROP TABLE customer_orders PURGE;
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-* [Select AI Agent Concepts](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/select-ai-agents-concepts.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
