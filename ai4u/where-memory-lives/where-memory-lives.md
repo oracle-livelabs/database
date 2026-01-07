@@ -25,14 +25,10 @@ This lab assumes you have:
 
 * Completed Labs 1-6 or have a working agent setup
 * An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL and PL/SQL
 
 ## Task 1: Create the Memory Core Table
 
 The memory table is the foundation—where the agent stores everything it learns.
-
-By using Oracle's native JSON type, we get flexibility to store any fact structure without predefined schemas. The agent can remember a customer's email preference today and their timezone tomorrow without any ALTER TABLE statements.
 
 1. Create the memory core table.
 
@@ -56,8 +52,6 @@ By using Oracle's native JSON type, we get flexibility to store any fact structu
     CREATE INDEX idx_memory_type ON agent_memory(memory_type);
     </copy>
     ```
-
-    >**Note:** The `content` column is native `JSON` type—not VARCHAR2 storing JSON text. Oracle validates, indexes, and optimizes it automatically.
 
 ## Task 2: Create the Remember Function
 
@@ -117,7 +111,7 @@ The recall function is the agent's "search memory" capability.
                 created_at
             FROM agent_memory m
             WHERE memory_type = 'FACT'
-            AND (p_about IS NULL OR UPPER(m.content.about.string()) = UPPER(p_about))
+            AND (p_about IS NULL OR UPPER(m.content.about.string()) LIKE '%' || UPPER(p_about) || '%')
             AND (p_category IS NULL OR UPPER(m.content.category.string()) = UPPER(p_category))
             ORDER BY created_at DESC
             FETCH FIRST 10 ROWS ONLY
@@ -151,9 +145,9 @@ Tools bridge your PL/SQL functions and the AI agent.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'REMEMBER_TOOL',
-            attributes  => '{"instruction": "Store a fact for future reference. Use when the user shares something worth remembering. IMPORTANT: Use UPPERCASE parameter names: P_FACT (the fact), P_CATEGORY (type), P_ABOUT (entity name).",
+            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Acme Corp). Use this when the user shares important information.",
                             "function": "remember_fact"}',
-            description => 'Stores facts in long-term memory'
+            description => 'Stores facts in long-term memory for future recall'
         );
     END;
     /
@@ -167,9 +161,9 @@ Tools bridge your PL/SQL functions and the AI agent.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'RECALL_TOOL',
-            attributes  => '{"instruction": "Retrieve facts from memory. Use when you need to know about a person, customer, or entity. IMPORTANT: Use UPPERCASE parameter names: P_ABOUT (entity name), P_CATEGORY (optional filter).",
+            attributes  => '{"instruction": "Retrieve facts from memory. Parameters: P_ABOUT (optional: entity name to search for), P_CATEGORY (optional: filter by category). Use this when asked about something you might have stored.",
                             "function": "recall_facts"}',
-            description => 'Retrieves facts from long-term memory'
+            description => 'Retrieves stored facts from long-term memory'
         );
     END;
     /
@@ -194,7 +188,7 @@ Tools bridge your PL/SQL functions and the AI agent.
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'MEMORY_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a helpful assistant with the ability to remember facts. When users tell you things worth remembering, use REMEMBER_TOOL. When users ask about something, use RECALL_TOOL to check what you know. Always check your memory before saying you do not know something."}',
+                            "role": "You are a helpful assistant with persistent memory. When users share information, use REMEMBER_TOOL to store it. When users ask questions, use RECALL_TOOL to check your memory. Always use your tools - never guess."}',
             description => 'An agent with persistent memory'
         );
     END;
@@ -209,7 +203,7 @@ Tools bridge your PL/SQL functions and the AI agent.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'MEMORY_TASK',
-            attributes  => '{"instruction": "Process this user request. If the user shares information, call REMEMBER_TOOL once. If the user asks a question, call RECALL_TOOL once. Use at most ONE tool call, then respond. User request: {query}",
+            attributes  => '{"instruction": "Process this user request. If the user shares information worth remembering, call REMEMBER_TOOL to store it. If the user asks a question, call RECALL_TOOL to search memory first. Do not ask clarifying questions. User request: {query}",
                             "tools": ["REMEMBER_TOOL", "RECALL_TOOL"]}',
             description => 'Task for memory-enabled conversations'
         );
@@ -270,7 +264,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-    The agent recalls the stored facts.
+The agent recalls the stored facts.
 
 ## Task 7: Verify Persistence Across Sessions
 
@@ -291,7 +285,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-    **The agent remembers!** Because facts are stored in the database, not session memory.
+**The agent remembers!** Because facts are stored in the database, not session memory.
 
 3. View the memory core contents.
 
@@ -305,21 +299,6 @@ Now let's see memory in action.
     ORDER BY created_at DESC;
     </copy>
     ```
-
-## Task 8: Understand the Converged Database Advantage
-
-You just built a memory core with:
-
-| Capability | What It Provides |
-|------------|------------------|
-| **Native JSON** | Flexible fact structure, no migrations |
-| **SQL Access** | Query memory with standard SQL |
-| **Indexing** | Fast lookups on JSON fields |
-| **Transactions** | ACID guarantees on memory writes |
-| **Security** | Database roles and privileges |
-| **Persistence** | Survives restarts, reconnects |
-
-Traditional architectures would scatter this across multiple systems. You did it in one database.
 
 ## Summary
 
@@ -342,3 +321,18 @@ In this lab, you built a **memory core** using Oracle's converged database:
 
 * **Author** - David Start
 * **Last Updated By/Date** - David Start, January 2026
+
+## Cleanup (Optional)
+
+```sql
+<copy>
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('MEMORY_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('MEMORY_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('MEMORY_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REMEMBER_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECALL_TOOL', TRUE);
+DROP TABLE agent_memory PURGE;
+DROP FUNCTION remember_fact;
+DROP FUNCTION recall_facts;
+</copy>
+```

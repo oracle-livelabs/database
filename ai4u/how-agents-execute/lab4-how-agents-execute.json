@@ -1,11 +1,11 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# How Agents Actually Get Work Done\n\n## Introduction\n\nIn this lab, you'll trace an agent through its complete execution loop—from understanding a request to taking action and reporting results.\n\nEvery agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.\n\nEstimated Time: 10 minutes\n\n### Objectives\n\n* Trace the complete agent execution loop\n* Understand the relationship between LLM reasoning and tool actions\n* Use history views to see every step\n* Recognize the pattern that all agents follow\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-3 or have a working agent setup\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL\n\n## Task 1: Set Up an Observable Agent\n\nWe'll create an agent with tools that log what's happening so you can see each step clearly.\n\n1. Create tables and sequence for tracking.",
+      "text": "%md\n# How Agents Actually Get Work Done\n\n## Introduction\n\nIn this lab, you'll trace an agent through its complete execution loop—from understanding a request to taking action and reporting results.\n\nEvery agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.\n\nEstimated Time: 10 minutes\n\n### Objectives\n\n* Trace the complete agent execution loop\n* Understand the relationship between LLM reasoning and tool actions\n* Use history views to see every step\n* Recognize the pattern that all agents follow\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-3 or have a working agent setup\n* An AI profile named `genai` already configured\n\n## Task 1: Set Up an Observable Agent\n\nWe'll create an agent with tools that log what's happening so you can see each step clearly.\n\n1. Create tables and sequence for tracking.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE TABLE workflow_log (\n    log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n    step_name   VARCHAR2(100),\n    step_detail VARCHAR2(500),\n    logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n);\n\nCREATE TABLE expense_requests (\n    request_id  VARCHAR2(20) PRIMARY KEY,\n    employee    VARCHAR2(100),\n    amount      NUMBER(10,2),\n    category    VARCHAR2(50),\n    status      VARCHAR2(30) DEFAULT 'NEW',\n    created_at  TIMESTAMP DEFAULT SYSTIMESTAMP\n);\n\nCREATE SEQUENCE expense_requests_seq START WITH 1001;",
+      "text": "%script\nCREATE SEQUENCE expense_requests_seq START WITH 1001;\n\nCREATE TABLE workflow_log (\n    log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n    step_name   VARCHAR2(100),\n    step_detail VARCHAR2(500),\n    logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n);\n\nCREATE TABLE expense_requests (\n    request_id  VARCHAR2(20) PRIMARY KEY,\n    employee    VARCHAR2(100),\n    amount      NUMBER(10,2),\n    category    VARCHAR2(50),\n    status      VARCHAR2(30) DEFAULT 'NEW',\n    created_at  TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -37,7 +37,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CREATE_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Create a new expense request. Parameters: P_EMPLOYEE (name), P_AMOUNT (dollars), P_CATEGORY (travel/meals/supplies).\",\n                        \"function\": \"create_expense_request\"}',\n        description => 'Creates expense request'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CHECK_RULES_TOOL',\n        attributes  => '{\"instruction\": \"Check what approval level is needed. Parameters: P_AMOUNT (dollars), P_CATEGORY.\",\n                        \"function\": \"check_expense_rules\"}',\n        description => 'Checks expense approval rules'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ROUTE_APPROVAL_TOOL',\n        attributes  => '{\"instruction\": \"Route expense for approval. Parameters: P_REQUEST_ID, P_APPROVAL_LEVEL.\",\n                        \"function\": \"route_for_approval\"}',\n        description => 'Routes for approval'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CREATE_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Create a new expense request. Parameters: P_EMPLOYEE (employee name), P_AMOUNT (dollar amount as number), P_CATEGORY (travel, meals, or supplies). Returns the request ID.\",\n                        \"function\": \"create_expense_request\"}',\n        description => 'Creates an expense request and returns the request ID'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CHECK_RULES_TOOL',\n        attributes  => '{\"instruction\": \"Check what approval level is needed for an expense. Parameters: P_AMOUNT (dollar amount as number), P_CATEGORY. Returns AUTO_APPROVE, MANAGER_APPROVAL, or DIRECTOR_APPROVAL.\",\n                        \"function\": \"check_expense_rules\"}',\n        description => 'Returns the required approval level based on amount and category'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ROUTE_APPROVAL_TOOL',\n        attributes  => '{\"instruction\": \"Route an expense for approval. Parameters: P_REQUEST_ID (the EXP-YYMMDD-NNNN format ID from CREATE_EXPENSE_TOOL), P_APPROVAL_LEVEL (MANAGER or DIRECTOR from CHECK_RULES_TOOL).\",\n                        \"function\": \"route_for_approval\"}',\n        description => 'Routes the expense request to the appropriate approver'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -45,7 +45,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_EXEC_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense processing agent. When someone submits an expense: 1) Create the request, 2) Check the rules, 3) Route for appropriate approval.\"}',\n        description => 'Agent demonstrating execution loop'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_EXEC_TASK',\n        attributes  => '{\"instruction\": \"Process the expense request step by step: create it, check rules, then route. {query}\",\n                        \"tools\": [\"CREATE_EXPENSE_TOOL\", \"CHECK_RULES_TOOL\", \"ROUTE_APPROVAL_TOOL\"]}',\n        description => 'Task for expense execution demo'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_EXEC_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_EXEC_AGENT\", \"task\": \"EXPENSE_EXEC_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for execution demo'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_EXEC_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense processing agent. Process expenses by: 1) Creating the request, 2) Checking the rules, 3) Routing for approval. Always complete all three steps.\"}',\n        description => 'Agent demonstrating execution loop'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_EXEC_TASK',\n        attributes  => '{\"instruction\": \"Process the expense request by following these steps in order: 1. Call CREATE_EXPENSE_TOOL to create the request 2. Call CHECK_RULES_TOOL to determine approval level 3. Call ROUTE_APPROVAL_TOOL to route it. Do not ask clarifying questions. User request: {query}\",\n                        \"tools\": [\"CREATE_EXPENSE_TOOL\", \"CHECK_RULES_TOOL\", \"ROUTE_APPROVAL_TOOL\"]}',\n        description => 'Task for expense execution demo'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_EXEC_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_EXEC_AGENT\", \"task\": \"EXPENSE_EXEC_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for execution demo'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -61,7 +61,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $250 expense for team lunch for John Smith;",
+      "text": "%script\nSELECT AI AGENT Submit a $250 expense for meals for John Smith;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -93,7 +93,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $50 expense for office supplies for Jane Doe;",
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $50 expense for supplies for Jane Doe;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -105,11 +105,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** Even though the rules said AUTO_APPROVE, the agent still created and routed it (following its instructions).\n\n3. Submit a large expense (director approval path).",
+      "text": "%md\n**Observe:** The rules said AUTO_APPROVE because it's under $100.\n\n3. Submit a large expense (director approval path).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $750 expense for client dinner for Bob Wilson;",
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $750 expense for travel for Bob Wilson;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -137,16 +137,16 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you traced the complete agent execution loop:\n\n* Created an observable agent with logging tools\n* Watched a multi-step workflow execute\n* Traced tool calls through history views\n* Saw how different inputs lead to different execution paths\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable.\n\n## Cleanup (Optional)",
+      "text": "%md\n## Summary\n\nIn this lab, you traced the complete agent execution loop:\n\n* Created an observable agent with logging tools\n* Watched a multi-step workflow execute\n* Traced tool calls through history views\n* Saw how different inputs lead to different execution paths\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_EXEC_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_EXEC_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_EXEC_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RULES_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_APPROVAL_TOOL', TRUE);\nDROP TABLE expense_requests;\nDROP TABLE workflow_log;\nDROP SEQUENCE expense_requests_seq;\nDROP FUNCTION create_expense_request;\nDROP FUNCTION check_expense_rules;\nDROP FUNCTION route_for_approval;",
+      "text": "%md\n## Cleanup (Optional)",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_EXEC_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_EXEC_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_EXEC_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RULES_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_APPROVAL_TOOL', TRUE);\nDROP TABLE expense_requests PURGE;\nDROP TABLE workflow_log PURGE;\nDROP SEQUENCE expense_requests_seq;\nDROP FUNCTION create_expense_request;\nDROP FUNCTION check_expense_rules;\nDROP FUNCTION route_for_approval;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     }
   ],
   "name": "Lab 4 - How Agents Execute",

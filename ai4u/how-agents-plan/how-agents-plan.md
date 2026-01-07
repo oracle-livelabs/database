@@ -23,8 +23,6 @@ This lab assumes you have:
 
 * Completed Labs 1-2 or have a working agent setup
 * An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL
 
 ## Task 1: Create a Multi-Tool Agent
 
@@ -41,10 +39,10 @@ To see planning in action, we need an agent with multiple tools. The agent will 
         tier          VARCHAR2(20),
         contact_email VARCHAR2(100)
     );
-    
+
     INSERT INTO demo_customers VALUES ('CUST-001', 'Acme Corp', 'PREMIUM', 'contact@acme.com');
     INSERT INTO demo_customers VALUES ('CUST-002', 'TechStart', 'STANDARD', 'info@techstart.com');
-    
+
     -- Order table
     CREATE TABLE demo_orders (
         order_id    VARCHAR2(20) PRIMARY KEY,
@@ -53,11 +51,11 @@ To see planning in action, we need an agent with multiple tools. The agent will 
         amount      NUMBER(10,2),
         order_date  DATE
     );
-    
+
     INSERT INTO demo_orders VALUES ('ORD-100', 'CUST-001', 'SHIPPED', 500.00, SYSDATE - 2);
     INSERT INTO demo_orders VALUES ('ORD-101', 'CUST-001', 'PENDING', 250.00, SYSDATE);
     INSERT INTO demo_orders VALUES ('ORD-102', 'CUST-002', 'DELIVERED', 100.00, SYSDATE - 5);
-    
+
     COMMIT;
     </copy>
     ```
@@ -76,7 +74,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Customer not found: ' || p_customer_id;
     END;
     /
-    
+
     -- Tool 2: Get customer orders
     CREATE OR REPLACE FUNCTION get_customer_orders(p_customer_id VARCHAR2) RETURN VARCHAR2 AS
         v_result CLOB := '';
@@ -91,7 +89,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
         RETURN 'Found ' || v_count || ' orders:' || CHR(10) || v_result;
     END;
     /
-    
+
     -- Tool 3: Check if customer is eligible for priority support
     CREATE OR REPLACE FUNCTION check_priority_eligibility(p_customer_id VARCHAR2) RETURN VARCHAR2 AS
         v_tier VARCHAR2(20);
@@ -115,29 +113,29 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'GET_CUSTOMER_TOOL',
-            attributes  => '{"instruction": "Get customer details. Use P_CUSTOMER_ID parameter.",
+            attributes  => '{"instruction": "Get customer details by ID. Parameter: P_CUSTOMER_ID (e.g. CUST-001). Returns name, tier, and email.",
                             "function": "get_customer"}',
-            description => 'Retrieves customer information'
+            description => 'Retrieves customer name, tier, and contact email'
         );
     END;
     /
-    
+
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'GET_ORDERS_TOOL',
-            attributes  => '{"instruction": "Get all orders for a customer. Use P_CUSTOMER_ID parameter.",
+            attributes  => '{"instruction": "Get all orders for a customer. Parameter: P_CUSTOMER_ID (e.g. CUST-001). Returns order IDs, statuses, and amounts.",
                             "function": "get_customer_orders"}',
-            description => 'Retrieves customer order history'
+            description => 'Retrieves customer order history with status and amounts'
         );
     END;
     /
-    
+
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CHECK_PRIORITY_TOOL',
-            attributes  => '{"instruction": "Check if customer is eligible for priority support. Use P_CUSTOMER_ID parameter.",
+            attributes  => '{"instruction": "Check if customer qualifies for priority support. Parameter: P_CUSTOMER_ID (e.g. CUST-001). Returns ELIGIBLE or NOT ELIGIBLE.",
                             "function": "check_priority_eligibility"}',
-            description => 'Checks priority support eligibility'
+            description => 'Checks if customer tier qualifies for priority support'
         );
     END;
     /
@@ -152,7 +150,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'PLANNING_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a customer service agent. You have tools to look up customers, check their orders, and verify priority support eligibility. Use the appropriate tools to answer customer inquiries completely."}',
+                            "role": "You are a customer service agent. Use your tools to look up customer information, orders, and support eligibility. Always use the tools - never guess or make up information."}',
             description => 'Agent that plans multi-step responses'
         );
     END;
@@ -161,7 +159,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'PLANNING_TASK',
-            attributes  => '{"instruction": "Answer the customer inquiry completely. Use the available tools to gather all relevant information. User request: {query}",
+            attributes  => '{"instruction": "Answer customer inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
                             "tools": ["GET_CUSTOMER_TOOL", "GET_ORDERS_TOOL", "CHECK_PRIORITY_TOOL"]}',
             description => 'Task with multiple tools for planning demonstration'
         );
@@ -207,7 +205,7 @@ Let's start with a simple request that needs only one tool.
     </copy>
     ```
 
-    **Observe:** The agent planned to use just GET_CUSTOMER_TOOL because that's all the question required.
+**Observe:** The agent planned to use just GET_CUSTOMER_TOOL because that's all the question required.
 
 ## Task 3: Observe Multi-Tool Planning
 
@@ -217,8 +215,7 @@ Now let's ask a question that requires multiple tools.
 
     ```sql
     <copy>
-    SELECT AI AGENT I need a complete picture of customer CUST-001. 
-    Who are they, what orders do they have, and are they eligible for priority support;
+    SELECT AI AGENT Give me a complete picture of customer CUST-001 including their orders and support eligibility;
     </copy>
     ```
 
@@ -236,10 +233,10 @@ Now let's ask a question that requires multiple tools.
     </copy>
     ```
 
-    **Observe:** The agent planned to use multiple tools:
-    - GET_CUSTOMER_TOOL to get basic info
-    - GET_ORDERS_TOOL to get order history
-    - CHECK_PRIORITY_TOOL to verify eligibility
+**Observe:** The agent planned to use multiple tools:
+- GET_CUSTOMER_TOOL to get basic info
+- GET_ORDERS_TOOL to get order history
+- CHECK_PRIORITY_TOOL to verify eligibility
 
 3. Notice the sequence—the agent determined the logical order.
 
@@ -254,7 +251,7 @@ The task instruction guides how the agent plans. Let's modify it.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'STRUCTURED_TASK',
-            attributes  => '{"instruction": "For customer inquiries, follow this plan: 1. First, look up the customer using GET_CUSTOMER_TOOL 2. Then, get their orders using GET_ORDERS_TOOL 3. Finally, check priority eligibility using CHECK_PRIORITY_TOOL. Report all findings. User request: {query}",
+            attributes  => '{"instruction": "For customer inquiries, ALWAYS follow this exact sequence: 1. First, look up the customer using GET_CUSTOMER_TOOL 2. Then, get their orders using GET_ORDERS_TOOL 3. Finally, check priority eligibility using CHECK_PRIORITY_TOOL. Report all findings. User request: {query}",
                             "tools": ["GET_CUSTOMER_TOOL", "GET_ORDERS_TOOL", "CHECK_PRIORITY_TOOL"]}',
             description => 'Task with explicit planning instructions'
         );
@@ -297,7 +294,7 @@ The task instruction guides how the agent plans. Let's modify it.
     </copy>
     ```
 
-    **Observe:** The agent followed the explicit plan: customer first, then orders, then eligibility—in that order.
+**Observe:** The agent followed the explicit plan: customer first, then orders, then eligibility—in that order.
 
 ## Task 5: Understand Why Planning Matters
 
@@ -333,6 +330,15 @@ In this lab, you observed how agents plan their work:
 
 **Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views.
 
+## Learn More
+
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
+
 ## Cleanup (Optional)
 
 ```sql
@@ -344,19 +350,10 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_CUSTOMER_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ORDERS_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_PRIORITY_TOOL', TRUE);
-DROP TABLE demo_orders;
-DROP TABLE demo_customers;
+DROP TABLE demo_orders PURGE;
+DROP TABLE demo_customers PURGE;
 DROP FUNCTION get_customer;
 DROP FUNCTION get_customer_orders;
 DROP FUNCTION check_priority_eligibility;
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, December 2025

@@ -6,8 +6,6 @@ In this lab, you'll directly compare zero-shot prompting with agent-based execut
 
 Zero-shot prompting means: one question, one answer, done. It's useful for general knowledge, but it doesn't execute workflows or access your data. Agents break tasks into steps, use tools, and actually complete the work.
 
-You'll ask the same question using both approaches and see the difference firsthand.
-
 Estimated Time: 10 minutes
 
 ### Objectives
@@ -21,10 +19,7 @@ Estimated Time: 10 minutes
 
 This lab assumes you have:
 
-* Completed Lab 1 or have a working agent setup
-* An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL
+* An AI profile named `genai` already configured with your AI provider credentials
 
 ## Task 1: Experience Zero-Shot Prompting
 
@@ -40,15 +35,17 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
 2. Ask a procedural question using zero-shot.
 
+    **Observe:** You get a helpful explanation of the steps. But you still have to do each step yourself.
+
     ```sql
     <copy>
     SELECT AI CHAT How do I process an expense report;
     </copy>
     ```
 
-    **Observe:** You get a helpful explanation of the steps. But you still have to do each step yourself.
-
 3. Ask a more complex question.
+
+    **Observe:** Again, you get instructions. The AI explains the work but doesn't do the work.
 
     ```sql
     <copy>
@@ -56,9 +53,9 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
-    **Observe:** Again, you get instructions. The AI explains the work but doesn't do the work.
-
 4. Ask about best practices.
+
+    **Observe:** Great for general knowledge—no data needed.
 
     ```sql
     <copy>
@@ -66,19 +63,17 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
-    **Observe:** Great for general knowledge—no data needed.
-
 5. Now try asking for something that requires YOUR data.
+
+    **Observe:** The AI can't answer this because it has no access to your data. It gives a generic response about how to check order status, but it doesn't actually know YOUR order 12345.
+
+    This is the limitation of zero-shot: great for general knowledge, useless for your specific business data.
 
     ```sql
     <copy>
     SELECT AI CHAT What is the status of order 12345;
     </copy>
     ```
-
-    **Observe:** The AI can't answer this because it has no access to your data. It gives a generic response about how to check order status, but it doesn't actually know YOUR order 12345.
-
-This is the limitation of zero-shot: great for general knowledge, useless for your specific business data.
 
 ## Task 2: Create an Agent with Tools
 
@@ -95,7 +90,7 @@ Now let's create an agent that can actually access your data. We'll give it a to
         amount      NUMBER(10,2),
         order_date  DATE DEFAULT SYSDATE
     );
-    
+
     INSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);
     INSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);
     INSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);
@@ -136,9 +131,9 @@ Now let's create an agent that can actually access your data. We'll give it a to
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'ORDER_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up order status and details. Use when someone asks about an order. IMPORTANT: Use UPPERCASE parameter name: P_ORDER_ID (the order number).",
+            attributes  => '{"instruction": "Look up order status and details by order ID. Parameter: P_ORDER_ID (the order number, e.g. 12345). Always use this tool when asked about orders.",
                             "function": "lookup_order"}',
-            description => 'Retrieves order information by order ID'
+            description => 'Retrieves order status, customer, amount, and date by order ID'
         );
     END;
     /
@@ -153,22 +148,30 @@ Now let's create an agent that can actually access your data. We'll give it a to
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'ORDER_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a customer service agent who can look up order information. When asked about orders, use the ORDER_LOOKUP_TOOL to get the actual status."}',
+                            "role": "You are a customer service agent. When asked about orders, ALWAYS use the ORDER_LOOKUP_TOOL to get the actual data. Never make up order information - always look it up."}',
             description => 'Agent that can look up orders'
         );
     END;
     /
+    </copy>
+    ```
 
+    ```sql
+    <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'ORDER_TASK',
-            attributes  => '{"instruction": "Help with order inquiries. Use ORDER_LOOKUP_TOOL to get order details. User request: {query}",
+            attributes  => '{"instruction": "Help with order inquiries. ALWAYS use ORDER_LOOKUP_TOOL to look up order information - never guess or ask clarifying questions about order details. Just look up the order and report what you find. User request: {query}",
                             "tools": ["ORDER_LOOKUP_TOOL"]}',
             description => 'Task for order lookups'
         );
     END;
     /
+    </copy>
+    ```
 
+    ```sql
+    <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
             team_name   => 'ORDER_TEAM',
@@ -187,16 +190,14 @@ Now let's ask about order 12345 again—but this time with an agent.
 
 1. Set the team and ask the agent.
 
+    **Result:** The agent calls the lookup tool and returns the actual status. Compare this to Task 1 where zero-shot couldn't tell you anything about order 12345!
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ORDER_TEAM');
     SELECT AI AGENT What is the status of order 12345;
     </copy>
     ```
-
-    **Result:** The agent calls the lookup tool and returns the actual status: "SHIPPED, Customer: Acme Corp, Amount: $299.00"
-
-    Compare this to Task 1 where zero-shot couldn't tell you anything about order 12345!
 
 2. Try another order.
 
@@ -206,8 +207,6 @@ Now let's ask about order 12345 again—but this time with an agent.
     </copy>
     ```
 
-    The agent looks it up and reports: "PENDING"
-
 3. Ask about a non-existent order.
 
     ```sql
@@ -215,8 +214,6 @@ Now let's ask about order 12345 again—but this time with an agent.
     SELECT AI AGENT Check on order 99999;
     </copy>
     ```
-
-    The agent looks it up and reports it wasn't found.
 
 ## Task 4: See What the Agent Did
 
@@ -236,20 +233,7 @@ The key difference is that agents take actions. Let's see the tool calls.
     </copy>
     ```
 
-    You'll see each ORDER_LOOKUP_TOOL call the agent made.
-
-2. Compare the interaction patterns.
-
-    | Zero-Shot (SELECT AI CHAT) | Agent (SELECT AI AGENT) |
-    |----------------------------|-------------------------|
-    | Single prompt, single response | Multi-step with tool calls |
-    | No data access | Queries your database |
-    | Explains what to do | Does the work |
-    | General knowledge only | Your specific business data |
-
 ## Task 5: When to Use Each Approach
-
-Based on what you've seen:
 
 **Use zero-shot (SELECT AI CHAT) when:**
 - You need a quick answer from general knowledge
@@ -274,6 +258,15 @@ In this lab, you directly compared zero-shot prompting with agent execution:
 
 **Key takeaway:** The difference isn't intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.
 
+## Learn More
+
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
+
 ## Cleanup (Optional)
 
 ```sql
@@ -286,13 +279,3 @@ DROP TABLE sample_orders;
 DROP FUNCTION lookup_order;
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-package.html)
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026

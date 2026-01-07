@@ -101,7 +101,7 @@ Let's give the agent important information about a customer.
     </copy>
     ```
 
-    The agent acknowledges and seems to understand.
+The agent acknowledges and seems to understand.
 
 2. Immediately ask about what you just said.
 
@@ -111,7 +111,7 @@ Let's give the agent important information about a customer.
     </copy>
     ```
 
-    The agent can recall this—it's still in the conversation context.
+The agent can recall this—it's still in the conversation context.
 
 3. Ask another question in the same session.
 
@@ -121,7 +121,7 @@ Let's give the agent important information about a customer.
     </copy>
     ```
 
-    Still works—the context is maintained within the session.
+Still works—the context is maintained within the session.
 
 ## Task 3: Experience the Forgetting
 
@@ -151,7 +151,7 @@ Now let's simulate what happens when the session ends and a new one begins.
     </copy>
     ```
 
-    **The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
+**The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
 
 4. Try asking about your name and company.
 
@@ -161,7 +161,7 @@ Now let's simulate what happens when the session ends and a new one begins.
     </copy>
     ```
 
-    **Gone.** Everything you told it has been forgotten.
+**Gone.** Everything you told it has been forgotten.
 
 ## Task 4: See the Business Impact
 
@@ -192,12 +192,7 @@ This isn't just an inconvenience—it breaks real workflows.
     </copy>
     ```
 
-    **The agent has no idea what issue you're talking about.** The customer has to explain everything again.
-
-4. This is the workplace nobody would tolerate:
-   - Every project starts from scratch
-   - Every customer interaction begins with "I don't have any record of your previous contact"
-   - Every process improvement is forgotten by the next shift
+**The agent has no idea what issue you're talking about.** The customer has to explain everything again.
 
 ## Task 5: Understand What's Missing
 
@@ -212,7 +207,7 @@ Let's be clear about what the agent lacks:
     </copy>
     ```
 
-    The forgetful agent has no memory tools—no way to store or retrieve information.
+The forgetful agent has no memory tools—no way to store or retrieve information.
 
 2. Check if anything was recorded in history.
 
@@ -227,37 +222,6 @@ Let's be clear about what the agent lacks:
     </copy>
     ```
 
-    No tool calls for remembering—because there are no memory tools.
-
-3. What the agent needs but doesn't have:
-
-    | Capability | Status |
-    |------------|--------|
-    | Remember customer preferences | ❌ Missing |
-    | Recall past interactions | ❌ Missing |
-    | Store decisions and outcomes | ❌ Missing |
-    | Learn from experience | ❌ Missing |
-    | Apply institutional knowledge | ❌ Missing |
-
-## Task 6: Preview What Memory Enables
-
-In the next labs, you'll give agents real memory. Here's a preview of what that looks like:
-
-1. **With memory, the agent could:**
-   - Store: "Sarah Chen from Acme prefers email, Pacific timezone"
-   - Recall: "Customer has open issue with ORD-5678, deadline Friday"
-   - Learn: "Last time this happened, expedited shipping resolved it"
-   - Apply: "Premium customers get priority—escalate immediately"
-
-2. The difference between performing and progressing:
-
-    | Without Memory | With Memory |
-    |----------------|-------------|
-    | Performs each task in isolation | Builds on past interactions |
-    | Repeats the same mistakes | Learns from experience |
-    | Every customer is new | Recognizes returning customers |
-    | No institutional knowledge | Applies business rules consistently |
-
 ## Summary
 
 In this lab, you experienced the forgetting problem:
@@ -269,7 +233,14 @@ In this lab, you experienced the forgetting problem:
 
 **Key takeaway:** Intelligence doesn't matter if an agent can't remember what just happened. Without memory, agents perform. With memory, agents progress.
 
-In the next labs, you'll build the memory core that makes agents truly useful.
+## Learn More
+
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
 
@@ -281,12 +252,3 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, December 2025

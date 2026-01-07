@@ -21,8 +21,6 @@ This lab assumes you have:
 
 * Completed Labs 1-3 or have a working agent setup
 * An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL
 
 ## Task 1: Set Up an Observable Agent
 
@@ -32,13 +30,15 @@ We'll create an agent with tools that log what's happening so you can see each s
 
     ```sql
     <copy>
+    CREATE SEQUENCE expense_requests_seq START WITH 1001;
+
     CREATE TABLE workflow_log (
         log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         step_name   VARCHAR2(100),
         step_detail VARCHAR2(500),
         logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP
     );
-    
+
     CREATE TABLE expense_requests (
         request_id  VARCHAR2(20) PRIMARY KEY,
         employee    VARCHAR2(100),
@@ -47,8 +47,6 @@ We'll create an agent with tools that log what's happening so you can see each s
         status      VARCHAR2(30) DEFAULT 'NEW',
         created_at  TIMESTAMP DEFAULT SYSTIMESTAMP
     );
-    
-    CREATE SEQUENCE expense_requests_seq START WITH 1001;
     </copy>
     ```
 
@@ -145,23 +143,23 @@ We'll create an agent with tools that log what's happening so you can see each s
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CREATE_EXPENSE_TOOL',
-            attributes  => '{"instruction": "Create a new expense request. Parameters: P_EMPLOYEE (name), P_AMOUNT (dollars), P_CATEGORY (travel/meals/supplies).",
+            attributes  => '{"instruction": "Create a new expense request. Parameters: P_EMPLOYEE (employee name), P_AMOUNT (dollar amount as number), P_CATEGORY (travel, meals, or supplies). Returns the request ID.",
                             "function": "create_expense_request"}',
-            description => 'Creates expense request'
+            description => 'Creates an expense request and returns the request ID'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CHECK_RULES_TOOL',
-            attributes  => '{"instruction": "Check what approval level is needed. Parameters: P_AMOUNT (dollars), P_CATEGORY.",
+            attributes  => '{"instruction": "Check what approval level is needed for an expense. Parameters: P_AMOUNT (dollar amount as number), P_CATEGORY. Returns AUTO_APPROVE, MANAGER_APPROVAL, or DIRECTOR_APPROVAL.",
                             "function": "check_expense_rules"}',
-            description => 'Checks expense approval rules'
+            description => 'Returns the required approval level based on amount and category'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'ROUTE_APPROVAL_TOOL',
-            attributes  => '{"instruction": "Route expense for approval. Parameters: P_REQUEST_ID, P_APPROVAL_LEVEL.",
+            attributes  => '{"instruction": "Route an expense for approval. Parameters: P_REQUEST_ID (the EXP-YYMMDD-NNNN format ID from CREATE_EXPENSE_TOOL), P_APPROVAL_LEVEL (MANAGER or DIRECTOR from CHECK_RULES_TOOL).",
                             "function": "route_for_approval"}',
-            description => 'Routes for approval'
+            description => 'Routes the expense request to the appropriate approver'
         );
     END;
     /
@@ -176,13 +174,13 @@ We'll create an agent with tools that log what's happening so you can see each s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'EXPENSE_EXEC_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are an expense processing agent. When someone submits an expense: 1) Create the request, 2) Check the rules, 3) Route for appropriate approval."}',
+                            "role": "You are an expense processing agent. Process expenses by: 1) Creating the request, 2) Checking the rules, 3) Routing for approval. Always complete all three steps."}',
             description => 'Agent demonstrating execution loop'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'EXPENSE_EXEC_TASK',
-            attributes  => '{"instruction": "Process the expense request step by step: create it, check rules, then route. {query}",
+            attributes  => '{"instruction": "Process the expense request by following these steps in order: 1. Call CREATE_EXPENSE_TOOL to create the request 2. Call CHECK_RULES_TOOL to determine approval level 3. Call ROUTE_APPROVAL_TOOL to route it. Do not ask clarifying questions. User request: {query}",
                             "tools": ["CREATE_EXPENSE_TOOL", "CHECK_RULES_TOOL", "ROUTE_APPROVAL_TOOL"]}',
             description => 'Task for expense execution demo'
         );
@@ -215,7 +213,7 @@ Now let's run a request and trace every step.
 
     ```sql
     <copy>
-    SELECT AI AGENT Submit a $250 expense for team lunch for John Smith;
+    SELECT AI AGENT Submit a $250 expense for meals for John Smith;
     </copy>
     ```
 
@@ -232,10 +230,10 @@ Now let's run a request and trace every step.
     </copy>
     ```
 
-    **Observe the execution sequence:**
-    - CREATE_REQUEST: The expense was created
-    - CHECK_RULES: Rules were evaluated
-    - ROUTE_APPROVAL: It was routed for manager approval
+**Observe the execution sequence:**
+- CREATE_REQUEST: The expense was created
+- CHECK_RULES: Rules were evaluated
+- ROUTE_APPROVAL: It was routed for manager approval
 
 ## Task 3: Trace the Agent's Tool Calls
 
@@ -272,7 +270,7 @@ The history views show what the agent did.
     </copy>
     ```
 
-    You can see the actual record the agent created.
+You can see the actual record the agent created.
 
 ## Task 4: Trace Different Execution Paths
 
@@ -283,7 +281,7 @@ Different amounts trigger different rules and therefore different execution path
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Submit a $50 expense for office supplies for Jane Doe;
+    SELECT AI AGENT Submit a $50 expense for supplies for Jane Doe;
     </copy>
     ```
 
@@ -295,14 +293,14 @@ Different amounts trigger different rules and therefore different execution path
     </copy>
     ```
 
-    **Observe:** Even though the rules said AUTO_APPROVE, the agent still created and routed it (following its instructions).
+**Observe:** The rules said AUTO_APPROVE because it's under $100.
 
 3. Submit a large expense (director approval path).
 
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Submit a $750 expense for client dinner for Bob Wilson;
+    SELECT AI AGENT Submit a $750 expense for travel for Bob Wilson;
     </copy>
     ```
 
@@ -314,7 +312,7 @@ Different amounts trigger different rules and therefore different execution path
     </copy>
     ```
 
-    **Observe:** Different amount → different rule result → different routing.
+**Observe:** Different amount → different rule result → different routing.
 
 ## Task 5: Understand the Execution Pattern
 
@@ -367,6 +365,15 @@ In this lab, you traced the complete agent execution loop:
 
 **Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable.
 
+## Learn More
+
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
+
 ## Cleanup (Optional)
 
 ```sql
@@ -377,20 +384,11 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_EXEC_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_EXPENSE_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RULES_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_APPROVAL_TOOL', TRUE);
-DROP TABLE expense_requests;
-DROP TABLE workflow_log;
+DROP TABLE expense_requests PURGE;
+DROP TABLE workflow_log PURGE;
 DROP SEQUENCE expense_requests_seq;
 DROP FUNCTION create_expense_request;
 DROP FUNCTION check_expense_rules;
 DROP FUNCTION route_for_approval;
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026

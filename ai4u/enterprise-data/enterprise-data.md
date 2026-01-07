@@ -90,7 +90,7 @@ Let's see what happens when an agent doesn't have access to your business data.
     </copy>
     ```
 
-    The agent gives a generic response—it doesn't know YOUR return policy.
+The agent gives a generic response—it doesn't know YOUR return policy.
 
 3. Ask about a specific customer.
 
@@ -100,17 +100,7 @@ Let's see what happens when an agent doesn't have access to your business data.
     </copy>
     ```
 
-    The agent can't answer—it has no customer data.
-
-4. Ask about internal procedures.
-
-    ```sql
-    <copy>
-    SELECT AI AGENT What is the escalation process for billing disputes;
-    </copy>
-    ```
-
-    Generic advice, not your actual process.
+The agent can't answer—it has no customer data.
 
 ## Task 2: Create Enterprise Data
 
@@ -127,28 +117,28 @@ Now let's create the business data that the agent needs.
         policy_text  CLOB,
         applies_to   VARCHAR2(50)
     );
-    
+
     INSERT INTO company_policies VALUES (
         'POL-001', 'Return Policy - Premium',
         'Premium members may return items within 90 days for full refund, no questions asked. ' ||
         'Standard restocking fees are waived. Free return shipping included.',
         'PREMIUM'
     );
-    
+
     INSERT INTO company_policies VALUES (
         'POL-002', 'Return Policy - Standard',
         'Standard members may return items within 30 days. A 15% restocking fee applies. ' ||
         'Customer pays return shipping.',
         'STANDARD'
     );
-    
+
     INSERT INTO company_policies VALUES (
         'POL-003', 'Escalation Process',
         'Billing disputes: 1) Agent attempts resolution, 2) If over $100, escalate to Team Lead, ' ||
         '3) If unresolved after 24 hours, escalate to Manager, 4) Customer may request VP review.',
         'ALL'
     );
-    
+
     -- Customer data
     CREATE TABLE enterprise_customers (
         customer_id   VARCHAR2(20) PRIMARY KEY,
@@ -158,11 +148,11 @@ Now let's create the business data that the agent needs.
         total_spend   NUMBER(12,2),
         upgrade_eligible VARCHAR2(1)
     );
-    
+
     INSERT INTO enterprise_customers VALUES ('CUST-1001', 'Acme Corp', 'STANDARD', DATE '2022-01-15', 45000, 'Y');
     INSERT INTO enterprise_customers VALUES ('CUST-1002', 'TechStart', 'PREMIUM', DATE '2020-06-01', 125000, 'N');
     INSERT INTO enterprise_customers VALUES ('CUST-1003', 'NewCo', 'STANDARD', DATE '2024-01-10', 5000, 'N');
-    
+
     COMMIT;
     </copy>
     ```
@@ -193,7 +183,7 @@ Now let's create the business data that the agent needs.
         RETURN v_result;
     END;
     /
-    
+
     -- Tool to look up customer
     CREATE OR REPLACE FUNCTION get_customer_info(
         p_customer_id VARCHAR2
@@ -294,7 +284,7 @@ Now let's see the difference.
     </copy>
     ```
 
-    **Now you get YOUR actual policy:** 90 days, no questions, waived fees, free shipping.
+**Now you get YOUR actual policy:** 90 days, no questions, waived fees, free shipping.
 
 2. Ask about the specific customer.
 
@@ -304,7 +294,7 @@ Now let's see the difference.
     </copy>
     ```
 
-    **The agent looks up the customer and reports:** Yes, Acme Corp is eligible for upgrade.
+**The agent looks up the customer and reports:** Yes, Acme Corp is eligible for upgrade.
 
 3. Ask about escalation.
 
@@ -314,7 +304,7 @@ Now let's see the difference.
     </copy>
     ```
 
-    **Your actual process:** Agent first, Team Lead if over $100, Manager after 24 hours, VP if requested.
+**Your actual process:** Agent first, Team Lead if over $100, Manager after 24 hours, VP if requested.
 
 ## Task 5: See the Tool Calls
 
@@ -334,28 +324,6 @@ Let's verify the agent is using enterprise data.
     </copy>
     ```
 
-    You'll see POLICY_LOOKUP_TOOL and CUSTOMER_LOOKUP_TOOL calls.
-
-2. Compare the two approaches:
-
-    | Without Enterprise Data | With Enterprise Data |
-    |------------------------|---------------------|
-    | Generic answers | Specific to your business |
-    | Can't access customer info | Knows your customers |
-    | Guesses at policies | Applies your actual policies |
-    | No context | Full business context |
-
-## Task 6: Understand What Enterprise Data Provides
-
-Enterprise data gives agents:
-
-1. **Context** — Understanding the specific situation
-2. **Consistency** — Applying the same rules every time
-3. **Judgment** — Making decisions aligned with past practice
-4. **Guardrails** — Operating within your policies
-
-Without it, an agent is just a smart demo. With it, an agent can operate the way your business actually works.
-
 ## Summary
 
 In this lab, you experienced the difference enterprise data makes:
@@ -366,6 +334,15 @@ In this lab, you experienced the difference enterprise data makes:
 * Understood why enterprise data is essential
 
 **Key takeaway:** Agents don't fail because they're not smart—they fail because they don't know your business. Enterprise data is what transforms generic AI into your AI.
+
+## Learn More
+
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
 
@@ -386,12 +363,3 @@ DROP FUNCTION get_policy;
 DROP FUNCTION get_customer_info;
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, December 2025

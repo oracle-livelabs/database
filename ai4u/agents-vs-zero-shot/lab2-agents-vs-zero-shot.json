@@ -5,7 +5,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Task 1: Experience Zero-Shot Prompting\n\nZero-shot queries go directly to the LLM for general knowledge answers. Use `SELECT AI CHAT` to ask questions without involving your database.\n\n**Step 1:** Set the profile.",
+      "text": "%md\n## Task 1: Experience Zero-Shot Prompting\n\nZero-shot queries go directly to the LLM for general knowledge answers. Use `SELECT AI CHAT` to ask questions without involving your database.\n\n1. Set the profile.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -13,7 +13,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 2:** Ask a procedural question using zero-shot.\n\n**Observe:** You get a helpful explanation of the steps. But you still have to do each step yourself.",
+      "text": "%md\n2. Ask a procedural question using zero-shot.\n\n**Observe:** You get a helpful explanation of the steps. But you still have to do each step yourself.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -21,7 +21,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 3:** Ask a more complex question.\n\n**Observe:** Again, you get instructions. The AI explains the work but doesn't do the work.",
+      "text": "%md\n3. Ask a more complex question.\n\n**Observe:** Again, you get instructions. The AI explains the work but doesn't do the work.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -29,7 +29,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 4:** Ask about best practices.\n\n**Observe:** Great for general knowledge—no data needed.",
+      "text": "%md\n4. Ask about best practices.\n\n**Observe:** Great for general knowledge—no data needed.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -37,7 +37,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 5:** Now try asking for something that requires YOUR data.\n\n**Observe:** The AI can't answer this because it has no access to your data. It gives a generic response about how to check order status, but it doesn't actually know YOUR order 12345.\n\nThis is the limitation of zero-shot: great for general knowledge, useless for your specific business data.",
+      "text": "%md\n5. Now try asking for something that requires YOUR data.\n\n**Observe:** The AI can't answer this because it has no access to your data. It gives a generic response about how to check order status, but it doesn't actually know YOUR order 12345.\n\nThis is the limitation of zero-shot: great for general knowledge, useless for your specific business data.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -45,7 +45,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 2: Create an Agent with Tools\n\nNow let's create an agent that can actually access your data. We'll give it a tool to look up order information.\n\n**Step 1:** Create a sample orders table.",
+      "text": "%md\n## Task 2: Create an Agent with Tools\n\nNow let's create an agent that can actually access your data. We'll give it a tool to look up order information.\n\n1. Create a sample orders table.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -53,7 +53,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 2:** Create a function to look up orders.",
+      "text": "%md\n2. Create a function to look up orders.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -61,23 +61,23 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 3:** Register it as a tool.",
+      "text": "%md\n3. Register it as a tool.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ORDER_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up order status and details. Use when someone asks about an order. IMPORTANT: Use UPPERCASE parameter name: P_ORDER_ID (the order number).\",\n                        \"function\": \"lookup_order\"}',\n        description => 'Retrieves order information by order ID'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ORDER_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up order status and details by order ID. Parameter: P_ORDER_ID (the order number, e.g. 12345). Always use this tool when asked about orders.\",\n                        \"function\": \"lookup_order\"}',\n        description => 'Retrieves order status, customer, amount, and date by order ID'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 4:** Create an agent with this tool.",
+      "text": "%md\n4. Create an agent with this tool.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ORDER_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a customer service agent who can look up order information. When asked about orders, use the ORDER_LOOKUP_TOOL to get the actual status.\"}',\n        description => 'Agent that can look up orders'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ORDER_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a customer service agent. When asked about orders, ALWAYS use the ORDER_LOOKUP_TOOL to get the actual data. Never make up order information - always look it up.\"}',\n        description => 'Agent that can look up orders'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ORDER_TASK',\n        attributes  => '{\"instruction\": \"Help with order inquiries. Use ORDER_LOOKUP_TOOL to get order details. User request: {query}\",\n                        \"tools\": [\"ORDER_LOOKUP_TOOL\"]}',\n        description => 'Task for order lookups'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ORDER_TASK',\n        attributes  => '{\"instruction\": \"Help with order inquiries. ALWAYS use ORDER_LOOKUP_TOOL to look up order information - never guess or ask clarifying questions about order details. Just look up the order and report what you find. User request: {query}\",\n                        \"tools\": [\"ORDER_LOOKUP_TOOL\"]}',\n        description => 'Task for order lookups'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -85,7 +85,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 3: Compare the Same Question\n\nNow let's ask about order 12345 again—but this time with an agent.\n\n**Step 1:** Set the team and ask the agent.\n\n**Result:** The agent calls the lookup tool and returns the actual status. Compare this to Task 1 where zero-shot couldn't tell you anything about order 12345!",
+      "text": "%md\n## Task 3: Compare the Same Question\n\nNow let's ask about order 12345 again—but this time with an agent.\n\n1. Set the team and ask the agent.\n\n**Result:** The agent calls the lookup tool and returns the actual status. Compare this to Task 1 where zero-shot couldn't tell you anything about order 12345!",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -93,7 +93,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 2:** Try another order.",
+      "text": "%md\n2. Try another order.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -101,7 +101,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Step 3:** Ask about a non-existent order.",
+      "text": "%md\n3. Ask about a non-existent order.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -109,7 +109,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 4: See What the Agent Did\n\nThe key difference is that agents take actions. Let's see the tool calls.\n\n**Step 1:** Query the tool history.",
+      "text": "%md\n## Task 4: See What the Agent Did\n\nThe key difference is that agents take actions. Let's see the tool calls.\n\n1. Query the tool history.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -121,7 +121,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you directly compared zero-shot prompting with agent execution:\n\n* Saw that zero-shot explains work but doesn't execute it\n* Built an agent with a tool to access data\n* Compared the same question using both approaches\n* Understood when each approach is appropriate\n\n**Key takeaway:** The difference isn't intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.",
+      "text": "%md\n## Summary\n\nIn this lab, you directly compared zero-shot prompting with agent execution:\n\n* Saw that zero-shot explains work but doesn't execute it\n* Built an agent with a tool to access data\n* Compared the same question using both approaches\n* Understood when each approach is appropriate\n\n**Key takeaway:** The difference isn't intelligence—it's action. Zero-shot AI tells you what to do. Agents do it.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -129,7 +129,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ORDER_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ORDER_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ORDER_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ORDER_LOOKUP_TOOL', TRUE);\nDROP TABLE sample_orders;\nDROP FUNCTION lookup_order;",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ORDER_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ORDER_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ORDER_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ORDER_LOOKUP_TOOL', TRUE);\nDROP TABLE sample_orders PURGE;\nDROP FUNCTION lookup_order;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     }
   ],
