@@ -37,7 +37,23 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 2: Create the Agent Components\n\nNow let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.\n\n1. Create the SQL tool. This gives the agent the ability to query your database.",
+      "text": "%md\n## Task 2: Add the Table to Your AI Profile\n\nFor Select AI to query your table, the profile needs to know about it. We'll add the table to your existing `genai` profile's object list.\n\n1. Add the CUSTOMER_ORDERS table to the genai profile.\n\n>**Note:** The `object_list` tells Select AI which tables it can query. Without this, the AI won't know your table exists.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"CUSTOMER_ORDERS\"}]'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n2. Verify the profile has the table.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT profile_name, status FROM USER_CLOUD_AI_PROFILES WHERE profile_name = 'genai';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 3: Create the Agent Components\n\nNow let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.\n\n1. Create the SQL tool. This gives the agent the ability to query your database.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -77,7 +93,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 3: See the Agent in Action\n\nNow let's see the difference between an agent and a chatbot.\n\n1. Set the team for your session.",
+      "text": "%md\n## Task 4: See the Agent in Action\n\nNow let's see the difference between an agent and a chatbot.\n\n1. Set the team for your session.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -109,7 +125,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 4: See What Happened Behind the Scenes\n\nThe agent used a tool to get real answers. Let's see the evidence.\n\n1. Check the tool execution history.",
+      "text": "%md\n## Task 5: See What Happened Behind the Scenes\n\nThe agent used a tool to get real answers. Let's see the evidence.\n\n1. Check the tool execution history.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -125,11 +141,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 5: The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n> \"To check the status of an order, you would typically:\n> 1. Log into your account\n> 2. Navigate to Order History\n> 3. Find the order by ID\n> 4. View the current status\"\n\n**The agent said:**\n> \"Order ORD-12345 was placed on January 2, 2025 for $299.99. Current status: Shipped.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent—it doesn't just know things, it *does* things.",
+      "text": "%md\n## Task 6: The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n> \"To check the status of an order, you would typically:\n> 1. Log into your account\n> 2. Navigate to Order History\n> 3. Find the order by ID\n> 4. View the current status\"\n\n**The agent said:**\n> \"Order ORD-12345 was placed on January 2, 2025 for $299.99. Current status: Shipped.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent—it doesn't just know things, it *does* things.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you experienced the fundamental nature of AI agents:\n\n* Created a table with descriptive comments for Select AI\n* Built an agent with access to a SQL tool\n* Watched it query real data to answer questions\n* Saw the execution history proving it took action\n* Understood the difference between explanation and execution\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "text": "%md\n## Summary\n\nIn this lab, you experienced the fundamental nature of AI agents:\n\n* Created a table with descriptive comments for Select AI\n* Added the table to your AI profile's object_list\n* Built an agent with access to a SQL tool\n* Watched it query real data to answer questions\n* Saw the execution history proving it took action\n* Understood the difference between explanation and execution\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

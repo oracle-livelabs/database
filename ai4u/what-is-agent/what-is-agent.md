@@ -74,7 +74,36 @@ First, let's create a simple orders table. This gives the agent something real t
     </copy>
     ```
 
-## Task 2: Create the Agent Components
+## Task 2: Add the Table to Your AI Profile
+
+For Select AI to query your table, the profile needs to know about it. We'll add the table to your existing `genai` profile's object list.
+
+1. Add the CUSTOMER_ORDERS table to the genai profile.
+
+    >**Note:** The `object_list` tells Select AI which tables it can query. Without this, the AI won't know your table exists.
+
+    ```sql
+    <copy>
+    BEGIN
+        DBMS_CLOUD_AI.SET_ATTRIBUTE(
+            profile_name    => 'genai',
+            attribute_name  => 'object_list',
+            attribute_value => '[{"owner": "' || USER || '", "name": "CUSTOMER_ORDERS"}]'
+        );
+    END;
+    /
+    </copy>
+    ```
+
+2. Verify the profile has the table.
+
+    ```sql
+    <copy>
+    SELECT profile_name, status FROM USER_CLOUD_AI_PROFILES WHERE profile_name = 'genai';
+    </copy>
+    ```
+
+## Task 3: Create the Agent Components
 
 Now let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.
 
@@ -153,7 +182,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-## Task 3: See the Agent in Action
+## Task 4: See the Agent in Action
 
 Now let's see the difference between an agent and a chatbot.
 
@@ -191,7 +220,7 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
-## Task 4: See What Happened Behind the Scenes
+## Task 5: See What Happened Behind the Scenes
 
 The agent used a tool to get real answers. Let's see the evidence.
 
@@ -223,7 +252,7 @@ The agent used a tool to get real answers. Let's see the evidence.
     </copy>
     ```
 
-## Task 5: The Chatbot vs Agent Difference
+## Task 6: The Chatbot vs Agent Difference
 
 **A chatbot would say:**
 
@@ -246,6 +275,7 @@ That's what makes an agent an agent—it doesn't just know things, it *does* thi
 In this lab, you experienced the fundamental nature of AI agents:
 
 * Created a table with descriptive comments for Select AI
+* Added the table to your AI profile's object_list
 * Built an agent with access to a SQL tool
 * Watched it query real data to answer questions
 * Saw the execution history proving it took action
