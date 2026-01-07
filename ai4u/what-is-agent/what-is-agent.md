@@ -116,7 +116,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
             tool_name   => 'ORDER_LOOKUP',
             attributes  => '{"tool_type": "SQL",
                             "tool_params": {"profile_name": "genai"}}',
-            description => 'Query the CUSTOMER_ORDERS table to look up order status, amounts, dates, and customer information'
+            description => 'Query the CUSTOMER_ORDERS table. Columns: ORDER_ID, CUSTOMER_NAME, ORDER_DATE, ORDER_STATUS (Pending/Processing/Shipped/Delivered), ORDER_TOTAL_AMOUNT.'
         );
     END;
     /
@@ -131,7 +131,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'ORDER_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a helpful order assistant. Look up order information and provide accurate answers based on actual data."}',
+                            "role": "You are an order assistant. Always use the ORDER_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find."}',
             description => 'Agent that looks up order information'
         );
     END;
@@ -146,7 +146,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'ORDER_TASK',
-            attributes  => '{"instruction": "Help the user with their order inquiry. Use the ORDER_LOOKUP tool to find real order data. User request: {query}",
+            attributes  => '{"instruction": "Answer questions about orders by querying the CUSTOMER_ORDERS table using the ORDER_LOOKUP tool. The table has columns: ORDER_ID, CUSTOMER_NAME, ORDER_DATE, ORDER_STATUS (values: Pending, Processing, Shipped, Delivered), ORDER_TOTAL_AMOUNT. Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
                             "tools": ["ORDER_LOOKUP"]}',
             description => 'Task for handling order inquiries'
         );
