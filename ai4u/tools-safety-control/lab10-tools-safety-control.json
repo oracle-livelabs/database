@@ -13,7 +13,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION submit_expense(\n    p_employee_id VARCHAR2,\n    p_amount      NUMBER,\n    p_category    VARCHAR2,\n    p_description VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_request_id VARCHAR2(20);\n    v_limit NUMBER;\nBEGIN\n    -- Get employee's expense limit\n    SELECT expense_limit INTO v_limit \n    FROM employees WHERE employee_id = p_employee_id;\n    \n    -- Generate request ID\n    v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_seq.NEXTVAL;\n    \n    -- Insert the request\n    INSERT INTO expense_requests (request_id, employee_id, amount, category, description, status)\n    VALUES (\n        v_request_id, \n        p_employee_id, \n        p_amount, \n        LOWER(p_category), \n        p_description,\n        CASE WHEN p_amount > v_limit THEN 'NEEDS_APPROVAL' ELSE 'PENDING' END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"request_id\": \"' || v_request_id || '\", ' ||\n           '\"status\": \"' || CASE WHEN p_amount > v_limit THEN 'NEEDS_APPROVAL' ELSE 'PENDING' END || '\", ' ||\n           '\"message\": \"' || CASE \n               WHEN p_amount > v_limit THEN 'Amount exceeds limit ($' || v_limit || '). Requires approval.'\n               ELSE 'Expense submitted successfully.'\n           END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION submit_expense(\n    p_employee_id VARCHAR2,\n    p_amount      NUMBER,\n    p_category    VARCHAR2,\n    p_description VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_request_id VARCHAR2(20);\n    v_status VARCHAR2(30);\nBEGIN\n    -- Generate request ID\n    v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_seq.NEXTVAL;\n    \n    -- Determine status based on amount\n    -- Small expenses (<$50) are auto-approved\n    -- Medium expenses are pending\n    -- Large expenses ($1000+) or equipment need approval\n    IF p_amount < 50 THEN\n        v_status := 'APPROVED';  -- Auto-approved\n    ELSIF p_amount >= 1000 OR LOWER(p_category) = 'equipment' THEN\n        v_status := 'NEEDS_APPROVAL';\n    ELSE\n        v_status := 'PENDING';\n    END IF;\n    \n    -- Insert the request\n    INSERT INTO expense_requests (request_id, employee_id, amount, category, description, status, approved_by, approved_at)\n    VALUES (\n        v_request_id, \n        p_employee_id, \n        p_amount, \n        LOWER(p_category), \n        p_description,\n        v_status,\n        CASE WHEN v_status = 'APPROVED' THEN 'AUTO' ELSE NULL END,\n        CASE WHEN v_status = 'APPROVED' THEN SYSTIMESTAMP ELSE NULL END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"request_id\": \"' || v_request_id || '\", ' ||\n           '\"status\": \"' || v_status || '\", ' ||\n           '\"message\": \"' || CASE \n               WHEN v_status = 'APPROVED' THEN 'Expense auto-approved (under $50).'\n               WHEN v_status = 'NEEDS_APPROVAL' THEN 'Expense requires manager approval.'\n               ELSE 'Expense submitted successfully.'\n           END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -97,7 +97,15 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe agent should check rules, see AUTO_APPROVED, and submit.\n\n3. Test a medium expense (standard path).",
+      "text": "%md\n3. Verify it was auto-approved - check the expense record.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** Status is APPROVED and approved_by is AUTO - the $35 expense was auto-approved because it's under $50.\n\n4. Test a medium expense (standard path).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -105,7 +113,15 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n4. Test a high-value expense (approval required path).",
+      "text": "%md\n5. Verify the medium expense status.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** Status is PENDING - the $200 expense needs standard processing (not auto-approved, not blocked).\n\n6. Test a high-value expense (approval required path).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -113,7 +129,15 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**The agent should pause and ask for approval.**\n\n5. Test a blocked expense.",
+      "text": "%md\n**The agent should pause and ask for approval before submitting.**\n\n7. Verify the high-value expense status.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** Status is NEEDS_APPROVAL - the $1500 expense requires manager approval.\n\n8. Test a blocked expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -121,7 +145,15 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe agent should check rules, see BLOCKED, and refuse to submit.\n\n6. Test equipment (always needs approval).",
+      "text": "%md\nThe agent should check rules, see BLOCKED, and refuse to submit. Let's verify no expense was created:",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT COUNT(*) as total_expenses FROM expense_requests;\nSELECT request_id, amount, status FROM expense_requests ORDER BY submitted_at DESC;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** No $7500 expense exists - the agent correctly blocked it.\n\n9. Test equipment (always needs approval regardless of amount).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -129,7 +161,15 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n---\n\n## Part 4: Audit Trail\n\nEverything the agent does is logged. This is essential for compliance and debugging.\n\n### Task 6: Query the Audit Trail\n\n1. See all tool calls.",
+      "text": "%md\n10. Verify the equipment expense status.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nWHERE category = 'equipment'\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** Status is NEEDS_APPROVAL - equipment always requires approval, even though $150 is under the $1000 threshold.\n\n---\n\n## Part 4: Audit Trail\n\nEverything the agent does is logged. This is essential for compliance and debugging.\n\n### Task 6: Query the Audit Trail\n\n1. See all tool calls.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -145,11 +185,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. See all expense requests created.",
+      "text": "%md\n3. See all expense requests created with their status.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT \n    request_id,\n    (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,\n    amount,\n    category,\n    status,\n    TO_CHAR(submitted_at, 'HH24:MI:SS') as submitted\nFROM expense_requests e\nORDER BY submitted_at DESC;",
+      "text": "%script\nSELECT \n    request_id,\n    (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,\n    amount,\n    category,\n    status,\n    NVL(approved_by, '-') as approved_by,\n    TO_CHAR(submitted_at, 'HH24:MI:SS') as submitted\nFROM expense_requests e\nORDER BY submitted_at DESC;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
