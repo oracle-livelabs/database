@@ -1,7 +1,15 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# How an AI Database Builds Competence\n\n## Introduction\n\nIn this lab, you'll build the learning loop that turns agents from first-day interns into seasoned contributors.\n\nAgents don't improve automatically just by running more tasks. Without recording outcomes and retrieving relevant experience, agents repeat the same mistakes and rediscover the same edge cases. The learning loop changes this: **action → result → memory → improvement**.\n\nThe technical foundation for this loop is **semantic search**—the ability to find relevant past experiences by meaning, not just keywords.\n\nIn this lab, you'll load an ONNX embedding model, add vector columns for semantic embeddings, and build the retrieval system that makes outcome-based learning possible.\n\nEstimated Time: 15 minutes\n\n### Objectives\n\n* Load an ONNX embedding model into the database\n* Add VECTOR columns for semantic embeddings\n* Create semantic search that finds by meaning\n* Build the learning loop: action → result → memory → improvement\n* See how agents get better over time\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 7-8 or have memory tables\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL\n\n## Task 1: Load the ONNX Embedding Model\n\nEmbedding models convert text into numerical vectors that capture meaning.\n\n1. Download the model.",
+      "text": "%md\n# How an AI Database Builds Competence\n\n## Introduction\n\nIn this lab, you'll build the learning loop that turns agents from first-day interns into seasoned contributors.\n\nAgents don't improve automatically just by running more tasks. Without recording outcomes and retrieving relevant experience, agents repeat the same mistakes and rediscover the same edge cases. The learning loop changes this: **action → result → memory → improvement**.\n\nThe technical foundation for this loop is **semantic search**—the ability to find relevant past experiences by meaning, not just keywords.\n\nIn this lab, you'll load an ONNX embedding model, add vector columns for semantic embeddings, and build the retrieval system that makes outcome-based learning possible.\n\nEstimated Time: 15 minutes\n\n### Objectives\n\n* Load an ONNX embedding model into the database\n* Add VECTOR columns for semantic embeddings\n* Create semantic search that finds by meaning\n* Build the learning loop: action → result → memory → improvement\n* See how agents get better over time\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* An AI profile named `genai` already configured\n* Oracle Database 26ai with Select AI Agent\n* Basic knowledge of SQL\n\n## Task 1: Create the Memory Table\n\nFirst, we'll create a memory table to store agent experiences.\n\n1. Create the agent memory table with a vector column for semantic embeddings.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE TABLE agent_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    memory_type    VARCHAR2(20) NOT NULL,\n    session_id     VARCHAR2(100),\n    entity_id      VARCHAR2(100),\n    content        JSON NOT NULL,\n    embedding      VECTOR(384),\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,\n    expires_at     TIMESTAMP\n);\n\nCREATE INDEX idx_memory_type ON agent_memory(memory_type);",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Task 2: Load the ONNX Embedding Model\n\nEmbedding models convert text into numerical vectors that capture meaning.\n\n1. Download the model.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -25,15 +33,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 2: Add VECTOR Column to Memory\n\n1. Add the embedding column.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nALTER TABLE agent_memory ADD (\n    embedding VECTOR(384)\n);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n2. Create a vector index for fast similarity search.",
+      "text": "%md\n## Task 3: Create a Vector Index\n\n1. Create a vector index for fast similarity search.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -41,7 +41,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 3: Create the Learning Loop Functions\n\nThe learning loop: action → result → observe → interpret → store → retrieve → better decision.\n\n1. Create a function to store experiences with embeddings.",
+      "text": "%md\n## Task 4: Create the Learning Loop Functions\n\nThe learning loop: action → result → observe → interpret → store → retrieve → better decision.\n\n1. Create a function to store experiences with embeddings.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -57,7 +57,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 4: Seed the Learning Database\n\nLet's add some experiences the agent can learn from.",
+      "text": "%md\n## Task 5: Seed the Learning Database\n\nLet's add some experiences the agent can learn from.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -65,11 +65,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 5: See Semantic Search in Action\n\nNow test finding relevant experience by meaning, not keywords.\n\n1. Search for a shipping issue (different words, same meaning).",
+      "text": "%md\n## Task 6: See Semantic Search in Action\n\nNow test finding relevant experience by meaning, not keywords.\n\n1. Search for a shipping issue (different words, same meaning).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT find_relevant_experience('customer angry about late delivery') as experience FROM DUAL;",
+      "text": "%script\nSET LONG 5000\nSET LINESIZE 200\nSELECT find_relevant_experience('customer angry about late delivery') as experience FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -89,7 +89,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** Finds BOTH billing experiences—one that failed and one that succeeded. The agent can learn from both.\n\n## Task 6: See the Learning Loop in Action\n\nLet's trace a complete learning loop.\n\n1. **New situation arrives.**",
+      "text": "%md\n**Observe:** Finds BOTH billing experiences—one that failed and one that succeeded. The agent can learn from both.\n\n## Task 7: See the Learning Loop in Action\n\nLet's trace a complete learning loop.\n\n1. **New situation arrives.**",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -113,7 +113,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 7: View the Competence Building",
+      "text": "%md\n## Task 8: View the Competence Building",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -121,7 +121,15 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you built the learning loop:\n\n* Loaded an ONNX embedding model into the database\n* Added VECTOR column for semantic embeddings\n* Created semantic search that finds by meaning\n* Stored experiences that teach the agent\n* Saw how agents retrieve relevant experience to decide\n\n**Key takeaway:** This is how agents improve—not magically, but systematically. Action → result → memory → improvement. The AI database powers it all.\n\n## Learn More\n\n* [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "text": "%md\n## Summary\n\nIn this lab, you built the learning loop:\n\n* Loaded an ONNX embedding model into the database\n* Added VECTOR column for semantic embeddings\n* Created semantic search that finds by meaning\n* Stored experiences that teach the agent\n* Saw how agents retrieve relevant experience to decide\n\n**Key takeaway:** This is how agents improve—not magically, but systematically. Action → result → memory → improvement. The AI database powers it all.\n\n## Cleanup (Optional)",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nDROP TABLE agent_memory PURGE;\nDROP FUNCTION store_experience;\nDROP FUNCTION find_relevant_experience;\n\n-- Note: The ONNX model can be kept for other uses or dropped with:\n-- BEGIN DBMS_DATA_MINING.DROP_MODEL('ALL_MINILM_L12_V2'); END;\n-- /",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Learn More\n\n* [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     }
   ],
