@@ -4,7 +4,7 @@
 
 In this lab, you'll build all four types of memory that agents need to operate effectively.
 
-Just like people don't rely on one kind of memory, agents can't either. As covered in Post 8, agents need:
+Just like people don't rely on one kind of memory, agents can't either. Agents need:
 
 - **Short-term context** — What's happening right now
 - **Long-term facts** — Stable information about entities
@@ -49,7 +49,7 @@ We'll create structures for each memory type.
         expires_at     TIMESTAMP,              -- For short-term context expiration
         CONSTRAINT chk_memory_type CHECK (memory_type IN ('SHORTTERM', 'LONGTERM', 'DECISION', 'REFERENCE'))
     );
-    
+
     CREATE INDEX idx_memory_type ON agent_memory(memory_type);
     CREATE INDEX idx_memory_entity ON agent_memory(entity_id);
     CREATE INDEX idx_memory_session ON agent_memory(session_id);
@@ -74,7 +74,7 @@ We'll create structures for each memory type.
 
 ## Task 2: Short-Term Context (Current Task)
 
-Short-term context holds what's happening right now—the active information for completing the current task. This memory is transient and should disappear when the task finishes.
+Short-term context holds what's happening right now—the active information for completing the current task.
 
 1. Create functions for short-term context.
 
@@ -107,7 +107,7 @@ Short-term context holds what's happening right now—the active information for
         RETURN 'Context set for ' || p_entity_id;
     END;
     /
-    
+
     -- Get short-term context
     CREATE OR REPLACE FUNCTION get_context(
         p_session_id VARCHAR2,
@@ -142,17 +142,15 @@ Short-term context holds what's happening right now—the active information for
     -- Set context for current task
     SELECT set_context('SESSION-001', 'current_customer', 'Acme Corp, Premium tier, discussing order issue') FROM DUAL;
     SELECT set_context('SESSION-001', 'current_order', 'ORD-5678, shipped late, customer needs by Friday') FROM DUAL;
-    
+
     -- Retrieve context
     SELECT get_context('SESSION-001') FROM DUAL;
     </copy>
     ```
 
-    Short-term context is like your desk while working—papers everywhere for the current task, cleared when done.
-
 ## Task 3: Long-Term Facts (Persistent Entity Knowledge)
 
-Long-term facts are stable information the agent should rely on across tasks and sessions. These are things that are true about customers, accounts, or other entities—not policies, but facts.
+Long-term facts are stable information the agent should rely on across tasks and sessions.
 
 1. Create functions for long-term facts.
 
@@ -180,7 +178,7 @@ Long-term facts are stable information the agent should rely on across tasks and
         RETURN 'Fact stored about ' || p_entity_id || ': ' || p_fact;
     END;
     /
-    
+
     -- Retrieve facts about an entity
     CREATE OR REPLACE FUNCTION get_facts(
         p_entity_id VARCHAR2,
@@ -221,7 +219,7 @@ Long-term facts are stable information the agent should rely on across tasks and
     SELECT store_fact('CUST-001', 'Timezone is Pacific', 'preference') FROM DUAL;
     SELECT store_fact('CUST-001', 'Approved for 20% discount exception', 'exception') FROM DUAL;
     SELECT store_fact('CUST-001', 'Primary contact is Sarah Johnson', 'contact') FROM DUAL;
-    
+
     SELECT store_fact('CUST-002', 'Requires PO number on all invoices', 'requirement') FROM DUAL;
     SELECT store_fact('CUST-002', 'Annual contract renewal in March', 'schedule') FROM DUAL;
     </copy>
@@ -233,17 +231,15 @@ Long-term facts are stable information the agent should rely on across tasks and
     <copy>
     -- Get all facts about a customer
     SELECT get_facts('CUST-001') FROM DUAL;
-    
+
     -- Get only preferences
     SELECT get_facts('CUST-001', 'preference') FROM DUAL;
     </copy>
     ```
 
-    Unlike short-term context, these facts persist. Next month, the agent still knows CUST-001 prefers email.
-
 ## Task 4: Decisions and Outcomes (Audit Trail)
 
-Decisions and outcomes record what the agent decided and what happened. This answers two critical questions: "What did the agent do?" and "Why did it do that?"
+Decisions and outcomes record what the agent decided and what happened.
 
 1. Create functions for decisions and outcomes.
 
@@ -275,7 +271,7 @@ Decisions and outcomes record what the agent decided and what happened. This ans
         RETURN 'Decision recorded: ' || p_decision;
     END;
     /
-    
+
     -- Find similar past decisions
     CREATE OR REPLACE FUNCTION find_past_decisions(
         p_situation VARCHAR2,
@@ -329,7 +325,7 @@ Decisions and outcomes record what the agent decided and what happened. This ans
         'Customer satisfied, relationship preserved',
         'true'
     ) FROM DUAL;
-    
+
     SELECT record_decision(
         'CUST-002',
         'Standard customer requested refund after 45 days',
@@ -337,7 +333,7 @@ Decisions and outcomes record what the agent decided and what happened. This ans
         'Customer accepted store credit, positive resolution',
         'true'
     ) FROM DUAL;
-    
+
     SELECT record_decision(
         'CUST-003',
         'Customer upset about billing error',
@@ -354,17 +350,15 @@ Decisions and outcomes record what the agent decided and what happened. This ans
     <copy>
     -- Find decisions about shipping issues
     SELECT find_past_decisions('shipping') FROM DUAL;
-    
+
     -- Find decisions about billing
     SELECT find_past_decisions('billing') FROM DUAL;
     </copy>
     ```
 
-    This memory type is critical for explaining agent behavior. When someone asks "Why did the agent do that?", you can point to the decision record.
-
 ## Task 5: Reference Knowledge (Policies and Procedures)
 
-Reference knowledge is background information the agent consults but does not change. This includes policies, procedures, and guidelines. Humans maintain this; agents only read it.
+Reference knowledge is background information the agent consults but does not change.
 
 1. Create functions for reference knowledge.
 
@@ -390,7 +384,7 @@ Reference knowledge is background information the agent consults but does not ch
         RETURN 'Reference added: ' || p_name;
     END;
     /
-    
+
     -- Get reference knowledge (agent reads this)
     CREATE OR REPLACE FUNCTION get_reference(
         p_category VARCHAR2 DEFAULT NULL,
@@ -450,51 +444,13 @@ Reference knowledge is background information the agent consults but does not ch
     <copy>
     -- Get all policies
     SELECT get_reference('policy') FROM DUAL;
-    
+
     -- Get escalation procedure
     SELECT get_reference('procedure', 'escalation') FROM DUAL;
     </copy>
     ```
 
-    Reference knowledge changes slowly and is updated by humans. The agent reads it but never writes to it.
-
-## Task 6: See All Four Types Together
-
-Let's see how all four memory types work together.
-
-1. Query each memory type.
-
-    ```sql
-    <copy>
-    -- Short-term context (current session)
-    SELECT 'SHORT-TERM' as type, entity_id, JSON_VALUE(content, '$.context') as detail
-    FROM agent_memory WHERE memory_type = 'SHORTTERM' AND session_id = 'SESSION-001';
-    
-    -- Long-term facts (about entities)
-    SELECT 'LONG-TERM FACT' as type, entity_id, JSON_VALUE(content, '$.fact') as detail
-    FROM agent_memory WHERE memory_type = 'LONGTERM';
-    
-    -- Decisions and outcomes (audit trail)
-    SELECT 'DECISION' as type, entity_id, 
-           JSON_VALUE(content, '$.decision') || ' -> ' || JSON_VALUE(content, '$.outcome') as detail
-    FROM agent_memory WHERE memory_type = 'DECISION';
-    
-    -- Reference knowledge (policies)
-    SELECT 'REFERENCE' as type, category, name || ': ' || SUBSTR(JSON_VALUE(content, '$.text'), 1, 50) || '...' as detail
-    FROM reference_knowledge WHERE is_active = 1;
-    </copy>
-    ```
-
-2. Understand the coordination:
-
-    | Memory Type | Question It Answers | Persistence | Who Updates |
-    |-------------|---------------------|-------------|-------------|
-    | **Short-term context** | What's happening now? | Session only | Agent |
-    | **Long-term facts** | What do we know about this entity? | Permanent | Agent |
-    | **Decisions & outcomes** | What did we decide and why? | Permanent | Agent |
-    | **Reference knowledge** | What are the rules? | Permanent | Humans |
-
-## Task 7: A Complete Example
+## Task 6: A Complete Example
 
 Let's trace how an agent would use all four types together.
 
@@ -508,15 +464,12 @@ SELECT set_context('SESSION-002', 'issue', 'Order ORD-789 delayed 3 days') FROM 
 
 -- 2. Check long-term facts (what do we know about them?)
 SELECT get_facts('CUST-001') FROM DUAL;
--- Returns: Prefers email, Pacific timezone, approved for 20% discount, contact is Sarah
 
 -- 3. Check reference knowledge (what's the policy?)
 SELECT get_reference('policy', 'return') FROM DUAL;
--- Returns: Premium members get 90 days, no questions...
 
 -- 4. Find similar past decisions (what worked before?)
 SELECT find_past_decisions('shipping delay') FROM DUAL;
--- Returns: "Offered expedited shipping at no cost" -> "Customer satisfied"
 
 -- 5. Agent makes decision based on all of this, then records it
 SELECT record_decision(
@@ -532,8 +485,6 @@ SELECT store_fact('CUST-001', 'Sensitive to shipping delays - prioritize expedit
 </copy>
 ```
 
-Four memory types, one coherent response.
-
 ## Summary
 
 In this lab, you built the four types of agent memory:
@@ -544,6 +495,16 @@ In this lab, you built the four types of agent memory:
 * **Reference knowledge** — Policies and procedures (human-maintained)
 
 Together, these memories make agents consistent, contextual, and explainable.
+
+## Learn More
+
+* [Oracle JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/adjsn/)
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
 
@@ -561,13 +522,3 @@ DROP FUNCTION add_reference;
 DROP FUNCTION get_reference;
 </copy>
 ```
-
-## Learn More
-
-* [Oracle JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/adjsn/)
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026

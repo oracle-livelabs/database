@@ -4,7 +4,7 @@
 
 In this capstone lab, you'll build a complete agent system with tools that act, rules that constrain, and human oversight that keeps people in control.
 
-As covered in Post 10, agents don't act directly on systems—they act through tools you explicitly build and register. This separation is what makes agents both powerful and safe. Tools define what's *possible*. Rules define what's *allowed*. Human-in-the-loop defines when to *pause*.
+Agents don't act directly on systems—they act through tools you explicitly build and register. This separation is what makes agents both powerful and safe. Tools define what's *possible*. Rules define what's *allowed*. Human-in-the-loop defines when to *pause*.
 
 You'll create an expense processing agent with multiple tools, add safety rules that enforce business policies, enable human approval for high-stakes decisions, and query the audit trail to see everything that happened.
 
@@ -48,7 +48,7 @@ Tools are PL/SQL functions that agents can call. They're the only way an agent c
         manager_id    VARCHAR2(20),
         expense_limit NUMBER(10,2) DEFAULT 500
     );
-    
+
     -- Expense requests with constraints
     CREATE TABLE expense_requests (
         request_id    VARCHAR2(20) PRIMARY KEY,
@@ -64,20 +64,18 @@ Tools are PL/SQL functions that agents can call. They're the only way an agent c
         approved_by   VARCHAR2(100),
         approved_at   TIMESTAMP
     );
-    
+
     -- Sequence for request IDs
     CREATE SEQUENCE expense_seq START WITH 1001;
-    
+
     -- Insert sample employees
     INSERT INTO employees VALUES ('EMP-001', 'Alice Johnson', 'alice@company.com', 'Engineering', NULL, 1000);
     INSERT INTO employees VALUES ('EMP-002', 'Bob Smith', 'bob@company.com', 'Sales', 'EMP-001', 500);
     INSERT INTO employees VALUES ('EMP-003', 'Carol Davis', 'carol@company.com', 'Marketing', 'EMP-001', 500);
-    
+
     COMMIT;
     </copy>
     ```
-
-    >**Note:** The CHECK constraints are your safety backstop. Even if an agent somehow tries to insert invalid data, the database rejects it.
 
 ### Task 2: Create Tool Functions
 
@@ -232,7 +230,7 @@ Tools define what's possible. Rules define what's allowed. We'll create a flexib
         ),
         10
     );
-    
+
     -- Require approval for high amounts
     INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
         'High Amount Approval',
@@ -245,7 +243,7 @@ Tools define what's possible. Rules define what's allowed. We'll create a flexib
         ),
         20
     );
-    
+
     -- Require approval for equipment
     INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
         'Equipment Approval',
@@ -258,7 +256,7 @@ Tools define what's possible. Rules define what's allowed. We'll create a flexib
         ),
         30
     );
-    
+
     -- Auto-approve small expenses
     INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
         'Auto-approve Small',
@@ -271,7 +269,7 @@ Tools define what's possible. Rules define what's allowed. We'll create a flexib
         ),
         100
     );
-    
+
     COMMIT;
     </copy>
     ```
@@ -469,7 +467,7 @@ Some decisions need human judgment. Oracle's agent framework supports genuine pa
     </copy>
     ```
 
-    The agent should check rules, see AUTO_APPROVED, and submit.
+The agent should check rules, see AUTO_APPROVED, and submit.
 
 3. Test a medium expense (standard path).
 
@@ -487,14 +485,7 @@ Some decisions need human judgment. Oracle's agent framework supports genuine pa
     </copy>
     ```
 
-    **The agent should pause and ask for approval.** With `enable_human_tool`, it can request human input:
-
-    ```
-    Agent: "This expense of $1,500 requires manager approval per company policy. 
-            Do you authorize this expense?"
-    ```
-
-    Respond with: "Yes, approved" or "No, reject it"
+**The agent should pause and ask for approval.**
 
 5. Test a blocked expense.
 
@@ -504,7 +495,7 @@ Some decisions need human judgment. Oracle's agent framework supports genuine pa
     </copy>
     ```
 
-    The agent should check rules, see BLOCKED, and refuse to submit.
+The agent should check rules, see BLOCKED, and refuse to submit.
 
 6. Test equipment (always needs approval).
 
@@ -513,8 +504,6 @@ Some decisions need human judgment. Oracle's agent framework supports genuine pa
     SELECT AI AGENT Submit a $150 expense for a keyboard for employee EMP-002;
     </copy>
     ```
-
-    Even though $150 is under normal limits, equipment always requires approval.
 
 ---
 
@@ -614,6 +603,16 @@ In this capstone lab, you built a complete agent system with:
 
 **Key takeaway:** Agents are safe because their boundaries are explicit. Tools define capabilities. Rules define constraints. Humans retain control. Everything is auditable.
 
+## Learn More
+
+* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [Oracle Database Security Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/dbseg/)
+
+## Acknowledgements
+
+* **Author** - David Start
+* **Last Updated By/Date** - David Start, January 2026
+
 ## Cleanup (Optional)
 
 ```sql
@@ -635,13 +634,3 @@ DROP FUNCTION get_employee_info;
 DROP FUNCTION check_expense_rules;
 </copy>
 ```
-
-## Learn More
-
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-* [Oracle Database Security Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/dbseg/)
-
-## Acknowledgements
-
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026

@@ -4,9 +4,9 @@
 
 In this lab, you'll build the learning loop that turns agents from first-day interns into seasoned contributors.
 
-As covered in Post 9, agents don't improve automatically just by running more tasks. Without recording outcomes and retrieving relevant experience, agents repeat the same mistakes and rediscover the same edge cases. The learning loop changes this: **action → result → memory → improvement**.
+Agents don't improve automatically just by running more tasks. Without recording outcomes and retrieving relevant experience, agents repeat the same mistakes and rediscover the same edge cases. The learning loop changes this: **action → result → memory → improvement**.
 
-The technical foundation for this loop is **semantic search**—the ability to find relevant past experiences by meaning, not just keywords. When an agent faces "customer angry about late delivery," it should find past experiences about "shipping delays" even though the words are different. That's what embedding models and vector search provide.
+The technical foundation for this loop is **semantic search**—the ability to find relevant past experiences by meaning, not just keywords.
 
 In this lab, you'll load an ONNX embedding model, add vector columns for semantic embeddings, and build the retrieval system that makes outcome-based learning possible.
 
@@ -31,7 +31,7 @@ This lab assumes you have:
 
 ## Task 1: Load the ONNX Embedding Model
 
-Embedding models convert text into numerical vectors that capture meaning. Similar meanings produce similar vectors, even with different words.
+Embedding models convert text into numerical vectors that capture meaning.
 
 1. Download the model.
 
@@ -245,7 +245,7 @@ Now test finding relevant experience by meaning, not keywords.
     </copy>
     ```
 
-    **Observe:** Finds "shipping delay" experience even though we said "late delivery."
+**Observe:** Finds "shipping delay" experience even though we said "late delivery."
 
 2. Search for a pricing situation.
 
@@ -255,7 +255,7 @@ Now test finding relevant experience by meaning, not keywords.
     </copy>
     ```
 
-    **Observe:** Finds the price match experience.
+**Observe:** Finds the price match experience.
 
 3. Search for a billing problem.
 
@@ -265,7 +265,7 @@ Now test finding relevant experience by meaning, not keywords.
     </copy>
     ```
 
-    **Observe:** Finds BOTH billing experiences—one that failed and one that succeeded. The agent can learn from both.
+**Observe:** Finds BOTH billing experiences—one that failed and one that succeeded. The agent can learn from both.
 
 ## Task 6: See the Learning Loop in Action
 
@@ -319,11 +319,6 @@ ORDER BY created_at DESC;
 </copy>
 ```
 
-Each experience adds to the agent's knowledge. Over time:
-- More situations covered
-- Both successes and failures to learn from
-- Better decisions through pattern matching
-
 ## Summary
 
 In this lab, you built the learning loop:
@@ -338,10 +333,9 @@ In this lab, you built the learning loop:
 
 ## Learn More
 
-* [Blog Post: How an AI Database Builds Competence](../blogs/09-ai-database-competence.md)
 * [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)
 
 ## Acknowledgements
 
 * **Author** - David Start
-* **Last Updated By/Date** - David Start, December 2025
+* **Last Updated By/Date** - David Start, January 2026
