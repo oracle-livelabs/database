@@ -77,7 +77,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense processing agent. ALWAYS check rules with CHECK_RULES_TOOL before submitting any expense. If the rules say BLOCKED, explain why and do NOT submit. If the rules say NEEDS_APPROVAL, ask the human before proceeding. Never ask clarifying questions about expense details - just process them.\"}',\n        description => 'Expense processing agent with safety controls'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_TASK',\n        attributes  => '{\"instruction\": \"Process expense requests following this workflow: 1. First, call CHECK_RULES_TOOL to validate the expense 2. If BLOCKED: Explain why and do NOT submit 3. If NEEDS_APPROVAL: Ask human for authorization before submitting 4. If allowed: Call SUBMIT_EXPENSE_TOOL. User request: {query}\",\n                        \"tools\": [\"CHECK_RULES_TOOL\", \"SUBMIT_EXPENSE_TOOL\", \"GET_EXPENSE_TOOL\", \"GET_EMPLOYEE_TOOL\"],\n                        \"enable_human_tool\": \"true\"}',\n        description => 'Expense processing with human-in-the-loop'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_AGENT\", \"task\": \"EXPENSE_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Expense processing team'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense processing agent. ALWAYS check rules with CHECK_RULES_TOOL before submitting any expense. If the rules say BLOCKED, explain why and do NOT submit. If the rules say NEEDS_APPROVAL, do NOT submit - explain that approval is required and stop. Only submit if the rules say AUTO_APPROVED or STANDARD.\"}',\n        description => 'Expense processing agent with safety controls'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_TASK',\n        attributes  => '{\"instruction\": \"Process expense requests following this workflow: 1. First, call CHECK_RULES_TOOL to validate the expense 2. If BLOCKED: Explain why and do NOT call SUBMIT_EXPENSE_TOOL 3. If NEEDS_APPROVAL: Explain that manager approval is required and do NOT call SUBMIT_EXPENSE_TOOL 4. If AUTO_APPROVED or STANDARD: Call SUBMIT_EXPENSE_TOOL. User request: {query}\",\n                        \"tools\": [\"CHECK_RULES_TOOL\", \"SUBMIT_EXPENSE_TOOL\", \"GET_EXPENSE_TOOL\", \"GET_EMPLOYEE_TOOL\"],\n                        \"enable_human_tool\": \"true\"}',\n        description => 'Expense processing with human-in-the-loop'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_AGENT\", \"task\": \"EXPENSE_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Expense processing team'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -101,7 +101,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -129,15 +129,23 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**The agent should pause and ask for approval before submitting.**\n\n7. Verify the high-value expense status.",
+      "text": "%md\n**The agent should NOT submit the expense.** It asks for your approval first.\n\n7. Decline the approval request.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "text": "%script\nSELECT AI AGENT No, do not submit that expense;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** Status is NEEDS_APPROVAL - the $1500 expense requires manager approval.\n\n8. Test a blocked expense.",
+      "text": "%md\nThe agent acknowledges your decision and does not submit.\n\n8. Verify no $1500 expense was created.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** The most recent expense should still be the $200 one - no $1500 training expense was created because you declined.\n\n9. Test a blocked expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -145,7 +153,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe agent should check rules, see BLOCKED, and refuse to submit. Let's verify no expense was created:",
+      "text": "%md\nThe agent should check rules, see BLOCKED, and refuse to submit.\n\n10. Verify no $7500 expense was created.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -153,7 +161,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** No $7500 expense exists - the agent correctly blocked it.\n\n9. Test equipment (always needs approval regardless of amount).",
+      "text": "%md\n**Observe:** No $7500 expense exists - the agent correctly blocked it.\n\n11. Test equipment (always needs approval regardless of amount).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -161,15 +169,23 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n10. Verify the equipment expense status.",
+      "text": "%md\n**The agent asks for approval** because equipment always requires it regardless of amount.\n\n12. Decline the equipment expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nWHERE category = 'equipment'\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "text": "%script\nSELECT AI AGENT No, decline that equipment purchase;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** Status is NEEDS_APPROVAL - equipment always requires approval, even though $150 is under the $1000 threshold.\n\n---\n\n## Part 4: Audit Trail\n\nEverything the agent does is logged. This is essential for compliance and debugging.\n\n### Task 6: Query the Audit Trail\n\n1. See all tool calls.",
+      "text": "%md\n13. Verify no equipment expense was created.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n**Observe:** No equipment expense was created. You should only see the $35 supplies (APPROVED) and $200 meals (PENDING) expenses.\n\n---\n\n## Part 4: Audit Trail\n\nEverything the agent does is logged. This is essential for compliance and debugging.\n\n### Task 6: Query the Audit Trail\n\n1. See all tool calls.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
