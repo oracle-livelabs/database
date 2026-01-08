@@ -53,7 +53,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Get all facts about a customer\nSELECT get_facts('CUST-001') FROM DUAL;\n\n-- Get only preferences\nSELECT get_facts('CUST-001', 'preference') FROM DUAL;",
+      "text": "%script\n-- Set display width for CLOB output\nSET LONG 5000\nSET LINESIZE 200\n\n-- Get all facts about a customer\nSELECT get_facts('CUST-001') as facts FROM DUAL;\n\n-- Get only preferences\nSELECT get_facts('CUST-001', 'preference') as preferences FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -77,7 +77,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Find decisions about shipping issues\nSELECT find_past_decisions('shipping') FROM DUAL;\n\n-- Find decisions about billing\nSELECT find_past_decisions('billing') FROM DUAL;",
+      "text": "%script\n-- Set display width for CLOB output\nSET LONG 5000\nSET LINESIZE 200\n\n-- Find decisions about shipping issues\nSELECT find_past_decisions('shipping') as shipping_decisions FROM DUAL;\n\n-- Find decisions about billing\nSELECT find_past_decisions('billing') as billing_decisions FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -101,7 +101,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Get all policies\nSELECT get_reference('policy') FROM DUAL;\n\n-- Get escalation procedure\nSELECT get_reference('procedure', 'escalation') FROM DUAL;",
+      "text": "%script\n-- Set display width for CLOB output\nSET LONG 5000\nSET LINESIZE 200\n\n-- Get all policies\nSELECT get_reference('policy') as policies FROM DUAL;\n\n-- Get escalation procedure\nSELECT get_reference('procedure', 'escalation') as escalation FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -109,7 +109,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Scenario: Customer CUST-001 calls about a late shipment\n\n-- 1. Set short-term context (current task)\nSELECT set_context('SESSION-002', 'customer', 'CUST-001 calling about late shipment') FROM DUAL;\nSELECT set_context('SESSION-002', 'issue', 'Order ORD-789 delayed 3 days') FROM DUAL;\n\n-- 2. Check long-term facts (what do we know about them?)\nSELECT get_facts('CUST-001') FROM DUAL;\n\n-- 3. Check reference knowledge (what's the policy?)\nSELECT get_reference('policy', 'return') FROM DUAL;\n\n-- 4. Find similar past decisions (what worked before?)\nSELECT find_past_decisions('shipping delay') FROM DUAL;\n\n-- 5. Agent makes decision based on all of this, then records it\nSELECT record_decision(\n    'CUST-001',\n    'Premium customer CUST-001 reported 3-day shipping delay on ORD-789',\n    'Offered expedited replacement shipping and $25 credit for inconvenience',\n    'Customer satisfied, appreciated proactive resolution',\n    'true'\n) FROM DUAL;\n\n-- 6. Learn new fact if relevant\nSELECT store_fact('CUST-001', 'Sensitive to shipping delays - prioritize expedited options', 'preference') FROM DUAL;",
+      "text": "%script\n-- Set display width for CLOB output\nSET LONG 5000\nSET LINESIZE 200\n\n-- Scenario: Customer CUST-001 calls about a late shipment\n\n-- 1. Set short-term context (current task)\nSELECT set_context('SESSION-002', 'customer', 'CUST-001 calling about late shipment') as step1_context FROM DUAL;\nSELECT set_context('SESSION-002', 'issue', 'Order ORD-789 delayed 3 days') as step1_issue FROM DUAL;\n\n-- 2. Check long-term facts (what do we know about them?)\nSELECT get_facts('CUST-001') as step2_facts FROM DUAL;\n\n-- 3. Check reference knowledge (what is the policy?)\nSELECT get_reference('policy', 'return') as step3_policy FROM DUAL;\n\n-- 4. Find similar past decisions (what worked before?)\nSELECT find_past_decisions('shipping delay') as step4_past_decisions FROM DUAL;\n\n-- 5. Agent makes decision based on all of this, then records it\nSELECT record_decision(\n    'CUST-001',\n    'Premium customer CUST-001 reported 3-day shipping delay on ORD-789',\n    'Offered expedited replacement shipping and $25 credit for inconvenience',\n    'Customer satisfied, appreciated proactive resolution',\n    'true'\n) as step5_decision FROM DUAL;\n\n-- 6. Learn new fact if relevant\nSELECT store_fact('CUST-001', 'Sensitive to shipping delays - prioritize expedited options', 'preference') as step6_new_fact FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
