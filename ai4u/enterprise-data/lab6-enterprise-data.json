@@ -5,11 +5,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Task 1: Experience the Knowledge Gap\n\nLet's see what happens when you ask an LLM about your business without giving it access to your data. We'll use `SELECT AI CHAT` which uses the LLM's general knowledge.\n\n1. Ask about your return policy.",
+      "text": "%md\n## Task 1: Experience the Knowledge Gap\n\nLet's see what happens when you ask an LLM about your business without giving it access to your data. We'll use `SELECT AI CHAT` which uses the LLM's general knowledge.\n\n1. Set the AI profile and ask about your return policy.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI CHAT What is the return policy for premium members at TechCorp;",
+      "text": "%script\n-- Set the AI profile for SELECT AI CHAT\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT AI CHAT What is the return policy for premium members at TechCorp;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
