@@ -21,7 +21,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_VECTOR.LOAD_ONNX_MODEL(\n        directory  => 'DATA_PUMP_DIR',\n        file_name  => 'all_MiniLM_L12_v2.onnx',\n        model_name => 'ALL_MINILM_L12_V2'\n    );\nEND;\n/",
+      "text": "%script\n-- Drop model if it already exists\nEXEC DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);\n\nBEGIN\n    DBMS_VECTOR.LOAD_ONNX_MODEL(\n        directory  => 'DATA_PUMP_DIR',\n        file_name  => 'all_MiniLM_L12_v2.onnx',\n        model_name => 'ALL_MINILM_L12_V2'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -77,7 +77,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT find_relevant_experience('customer wants us to match Amazon price') as experience FROM DUAL;",
+      "text": "%script\nSET LONG 5000\nSET LINESIZE 200\nSELECT find_relevant_experience('customer wants us to match Amazon price') as experience FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -85,7 +85,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT find_relevant_experience('customer has billing complaint') as experience FROM DUAL;",
+      "text": "%script\nSET LONG 5000\nSET LINESIZE 200\nSELECT find_relevant_experience('customer has billing complaint') as experience FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -93,7 +93,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Agent receives: \"Customer TechCorp is upset about incorrect invoice\"\nSELECT find_relevant_experience('Customer upset about incorrect invoice') as past_experience FROM DUAL;",
+      "text": "%script\nSET LONG 5000\nSET LINESIZE 200\n-- Agent receives: \"Customer TechCorp is upset about incorrect invoice\"\nSELECT find_relevant_experience('Customer upset about incorrect invoice') as past_experience FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -109,7 +109,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT find_relevant_experience('invoice problem') as growing_experience FROM DUAL;",
+      "text": "%script\nSET LONG 5000\nSET LINESIZE 200\nSELECT find_relevant_experience('invoice problem') as growing_experience FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -125,7 +125,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nDROP TABLE agent_memory PURGE;\nDROP FUNCTION store_experience;\nDROP FUNCTION find_relevant_experience;\n\n-- Note: The ONNX model can be kept for other uses or dropped with:\n-- BEGIN DBMS_DATA_MINING.DROP_MODEL('ALL_MINILM_L12_V2'); END;\n-- /",
+      "text": "%script\nDROP TABLE agent_memory PURGE;\nDROP FUNCTION store_experience;\nDROP FUNCTION find_relevant_experience;\n\n-- Drop the ONNX model\nEXEC DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
