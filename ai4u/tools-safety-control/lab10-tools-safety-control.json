@@ -1,87 +1,95 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# Tools, Safety, and Human Control\n\n## Introduction\n\nIn this capstone lab, you'll build a complete agent system with tools that act, rules that constrain, and human oversight that keeps people in control.\n\nAgents don't act directly on systems—they act through tools you explicitly build and register. This separation is what makes agents both powerful and safe. Tools define what's *possible*. Rules define what's *allowed*. Human-in-the-loop defines when to *pause*.\n\nYou'll create an expense processing agent with multiple tools, add safety rules that enforce business policies, enable human approval for high-stakes decisions, and query the audit trail to see everything that happened.\n\nEstimated Time: 25 minutes\n\n### Objectives\n\n* Create PL/SQL functions as agent tools\n* Build a safety rules system with JSON configuration\n* Add database constraints as a backstop\n* Enable human-in-the-loop for approval workflows\n* Query the audit trail to see all actions\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-9 or have a working agent setup\n* An AI profile named `genai` already configured\n\n---\n\n## Part 1: Tools That Act\n\nTools are PL/SQL functions that agents can call. They're the only way an agent can affect your systems.\n\n### Task 1: Create the Data Model\n\n1. Create tables with built-in constraints (safety at the database level).",
+      "text": "%md\n# Tools, Safety, and Human Control\n\n## Introduction\n\nIn this capstone lab, you'll build a complete agent system with tools that act, rules that constrain, and human oversight that keeps people in control.\n\nYou'll create two agents:\n- **EXPENSE_AGENT** — Employees use this to submit expenses\n- **APPROVAL_AGENT** — Managers use this to review and approve expenses\n\nThis separation demonstrates real-world agent design: different roles, different capabilities, different tools.\n\nEstimated Time: 25 minutes\n\n### Objectives\n\n* Create PL/SQL functions as agent tools\n* Build a safety rules system with JSON configuration\n* Create separate agents for different roles\n* See how agents respect rules and route work appropriately\n* Query the audit trail to see all actions\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-9 or have a working agent setup\n* An AI profile named `genai` already configured\n\n---\n\n## Part 1: The Data Model\n\n### Task 1: Create Tables\n\n1. Create the expense system tables.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Sequence for request IDs\nCREATE SEQUENCE expense_seq START WITH 1001;\n\n-- Employees table\nCREATE TABLE employees (\n    employee_id   VARCHAR2(20) PRIMARY KEY,\n    name          VARCHAR2(100) NOT NULL,\n    email         VARCHAR2(100) NOT NULL,\n    department    VARCHAR2(50),\n    manager_id    VARCHAR2(20),\n    expense_limit NUMBER(10,2) DEFAULT 500\n);\n\n-- Expense requests with constraints\nCREATE TABLE expense_requests (\n    request_id    VARCHAR2(20) PRIMARY KEY,\n    employee_id   VARCHAR2(20) NOT NULL REFERENCES employees(employee_id),\n    amount        NUMBER(10,2) NOT NULL \n                  CONSTRAINT chk_positive_amount CHECK (amount > 0),\n    category      VARCHAR2(50) NOT NULL\n                  CONSTRAINT chk_category CHECK (category IN ('travel','meals','supplies','equipment','training')),\n    description   VARCHAR2(500),\n    status        VARCHAR2(30) DEFAULT 'PENDING'\n                  CONSTRAINT chk_status CHECK (status IN ('PENDING','APPROVED','REJECTED','NEEDS_APPROVAL','PAID')),\n    submitted_at  TIMESTAMP DEFAULT SYSTIMESTAMP,\n    approved_by   VARCHAR2(100),\n    approved_at   TIMESTAMP\n);\n\n-- Insert sample employees\nINSERT INTO employees VALUES ('EMP-001', 'Alice Johnson', 'alice@company.com', 'Engineering', NULL, 1000);\nINSERT INTO employees VALUES ('EMP-002', 'Bob Smith', 'bob@company.com', 'Sales', 'EMP-001', 500);\nINSERT INTO employees VALUES ('EMP-003', 'Carol Davis', 'carol@company.com', 'Marketing', 'EMP-001', 500);\n\nCOMMIT;",
+      "text": "%script\n-- Sequence for request IDs\nCREATE SEQUENCE expense_seq START WITH 1001;\n\n-- Employees table\nCREATE TABLE employees (\n    employee_id   VARCHAR2(20) PRIMARY KEY,\n    name          VARCHAR2(100) NOT NULL,\n    email         VARCHAR2(100) NOT NULL,\n    department    VARCHAR2(50),\n    manager_id    VARCHAR2(20)\n);\n\n-- Expense requests\nCREATE TABLE expense_requests (\n    request_id    VARCHAR2(20) PRIMARY KEY,\n    employee_id   VARCHAR2(20) NOT NULL REFERENCES employees(employee_id),\n    amount        NUMBER(10,2) NOT NULL \n                  CONSTRAINT chk_positive_amount CHECK (amount > 0),\n    category      VARCHAR2(50) NOT NULL\n                  CONSTRAINT chk_category CHECK (category IN ('travel','meals','supplies','equipment','training')),\n    description   VARCHAR2(500),\n    status        VARCHAR2(30) DEFAULT 'NEEDS_APPROVAL'\n                  CONSTRAINT chk_status CHECK (status IN ('APPROVED','REJECTED','NEEDS_APPROVAL')),\n    submitted_at  TIMESTAMP DEFAULT SYSTIMESTAMP,\n    approved_by   VARCHAR2(100),\n    approved_at   TIMESTAMP\n);\n\n-- Safety rules\nCREATE TABLE safety_rules (\n    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    rule_name    VARCHAR2(200) NOT NULL,\n    rule_type    VARCHAR2(20) NOT NULL \n                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_APPROVAL','AUTO_APPROVE')),\n    rule_config  JSON NOT NULL,\n    priority     NUMBER DEFAULT 100,\n    is_active    NUMBER(1) DEFAULT 1\n);\n\n-- Insert sample employees\nINSERT INTO employees VALUES ('EMP-001', 'Alice Johnson', 'alice@company.com', 'Engineering', NULL);\nINSERT INTO employees VALUES ('EMP-002', 'Bob Smith', 'bob@company.com', 'Sales', 'EMP-001');\nINSERT INTO employees VALUES ('EMP-003', 'Carol Davis', 'carol@company.com', 'Marketing', 'EMP-001');\n\nCOMMIT;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n### Task 2: Create Tool Functions\n\n1. Create the expense submission tool.",
+      "text": "%md\n### Task 2: Create Safety Rules\n\n1. Add the business rules.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION submit_expense(\n    p_employee_id VARCHAR2,\n    p_amount      NUMBER,\n    p_category    VARCHAR2,\n    p_description VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_request_id VARCHAR2(20);\n    v_status VARCHAR2(30);\nBEGIN\n    -- Generate request ID\n    v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_seq.NEXTVAL;\n    \n    -- Determine status based on amount\n    -- Small expenses (<$50) are auto-approved\n    -- Medium expenses are pending\n    -- Large expenses ($1000+) or equipment need approval\n    IF p_amount < 50 THEN\n        v_status := 'APPROVED';  -- Auto-approved\n    ELSIF p_amount >= 1000 OR LOWER(p_category) = 'equipment' THEN\n        v_status := 'NEEDS_APPROVAL';\n    ELSE\n        v_status := 'PENDING';\n    END IF;\n    \n    -- Insert the request\n    INSERT INTO expense_requests (request_id, employee_id, amount, category, description, status, approved_by, approved_at)\n    VALUES (\n        v_request_id, \n        p_employee_id, \n        p_amount, \n        LOWER(p_category), \n        p_description,\n        v_status,\n        CASE WHEN v_status = 'APPROVED' THEN 'AUTO' ELSE NULL END,\n        CASE WHEN v_status = 'APPROVED' THEN SYSTIMESTAMP ELSE NULL END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"request_id\": \"' || v_request_id || '\", ' ||\n           '\"status\": \"' || v_status || '\", ' ||\n           '\"message\": \"' || CASE \n               WHEN v_status = 'APPROVED' THEN 'Expense auto-approved (under $50).'\n               WHEN v_status = 'NEEDS_APPROVAL' THEN 'Expense requires manager approval.'\n               ELSE 'Expense submitted successfully.'\n           END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "text": "%script\n-- Block excessive amounts (>$5000)\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Block Excessive Expense',\n    'BLOCK',\n    '{\"field\": \"amount\", \"operator\": \"gt\", \"value\": 5000, \"message\": \"Expenses over $5,000 are not permitted. Contact Finance directly.\"}',\n    10\n);\n\n-- Require approval for high amounts (>=$1000)\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'High Amount Approval',\n    'REQUIRE_APPROVAL',\n    '{\"field\": \"amount\", \"operator\": \"gte\", \"value\": 1000, \"message\": \"Expenses $1,000 and above require manager approval.\"}',\n    20\n);\n\n-- Require approval for equipment (any amount)\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Equipment Approval',\n    'REQUIRE_APPROVAL',\n    '{\"field\": \"category\", \"operator\": \"eq\", \"value\": \"equipment\", \"message\": \"Equipment purchases require manager approval.\"}',\n    30\n);\n\n-- Auto-approve everything else under $1000\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Auto-approve Standard',\n    'AUTO_APPROVE',\n    '{\"field\": \"amount\", \"operator\": \"lt\", \"value\": 1000, \"message\": \"Expenses under $1,000 are auto-approved.\"}',\n    100\n);\n\nCOMMIT;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Create an expense lookup tool.",
+      "text": "%md\n---\n\n## Part 2: Tool Functions\n\n### Task 3: Create the Rules Checker\n\n1. Create the function that checks safety rules.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION get_expense_status(\n    p_request_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT '{\"request_id\": \"' || request_id || '\", ' ||\n           '\"employee\": \"' || (SELECT name FROM employees WHERE employee_id = e.employee_id) || '\", ' ||\n           '\"amount\": ' || amount || ', ' ||\n           '\"category\": \"' || category || '\", ' ||\n           '\"status\": \"' || status || '\", ' ||\n           '\"submitted\": \"' || TO_CHAR(submitted_at, 'YYYY-MM-DD HH24:MI') || '\", ' ||\n           '\"approved_by\": \"' || NVL(approved_by, 'N/A') || '\"}'\n    INTO v_result\n    FROM expense_requests e\n    WHERE request_id = p_request_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Expense not found: ' || p_request_id || '\"}';\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION check_expense_rules(\n    p_amount   NUMBER,\n    p_category VARCHAR2\n) RETURN VARCHAR2 AS\nBEGIN\n    FOR rec IN (\n        SELECT rule_name, rule_type, rule_config\n        FROM safety_rules\n        WHERE is_active = 1\n        ORDER BY priority\n    ) LOOP\n        DECLARE\n            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');\n            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');\n            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');\n            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');\n            v_match    BOOLEAN := FALSE;\n        BEGIN\n            IF v_field = 'amount' THEN\n                IF v_operator = 'gt' AND p_amount > TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'gte' AND p_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'lt' AND p_amount < TO_NUMBER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'category' THEN\n                IF v_operator = 'eq' AND LOWER(p_category) = LOWER(v_value) THEN v_match := TRUE;\n                END IF;\n            END IF;\n            \n            IF v_match THEN\n                RETURN '{\"action\": \"' || rec.rule_type || '\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n            END IF;\n        END;\n    END LOOP;\n    \n    RETURN '{\"action\": \"AUTO_APPROVE\", \"message\": \"Standard processing.\"}';\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Create an employee lookup tool.",
+      "text": "%md\n2. Test the rules.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION get_employee_info(\n    p_employee_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT '{\"employee_id\": \"' || employee_id || '\", ' ||\n           '\"name\": \"' || name || '\", ' ||\n           '\"department\": \"' || department || '\", ' ||\n           '\"expense_limit\": ' || expense_limit || '}'\n    INTO v_result\n    FROM employees\n    WHERE employee_id = p_employee_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Employee not found: ' || p_employee_id || '\"}';\nEND;\n/",
+      "text": "%script\nSELECT '$35 supplies:' as test, check_expense_rules(35, 'supplies') as result FROM DUAL\nUNION ALL\nSELECT '$200 meals:', check_expense_rules(200, 'meals') FROM DUAL\nUNION ALL\nSELECT '$1500 training:', check_expense_rules(1500, 'training') FROM DUAL\nUNION ALL\nSELECT '$150 equipment:', check_expense_rules(150, 'equipment') FROM DUAL\nUNION ALL\nSELECT '$7500 travel:', check_expense_rules(7500, 'travel') FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n---\n\n## Part 2: Safety Rules\n\nTools define what's possible. Rules define what's allowed. We'll create a flexible rules system using JSON.\n\n### Task 3: Create the Rules System\n\n1. Create a safety rules table.",
+      "text": "%md\n### Task 4: Create Expense Submission Tool\n\n1. Create the submit function that respects the rules.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE TABLE safety_rules (\n    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    rule_name    VARCHAR2(200) NOT NULL,\n    rule_type    VARCHAR2(20) NOT NULL \n                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_APPROVAL','WARN','AUTO_APPROVE')),\n    rule_config  JSON NOT NULL,\n    priority     NUMBER DEFAULT 100,\n    is_active    NUMBER(1) DEFAULT 1,\n    created_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
+      "text": "%script\nCREATE OR REPLACE FUNCTION submit_expense(\n    p_employee_id VARCHAR2,\n    p_amount      NUMBER,\n    p_category    VARCHAR2,\n    p_description VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_request_id VARCHAR2(20);\n    v_rules      VARCHAR2(500);\n    v_action     VARCHAR2(20);\n    v_status     VARCHAR2(30);\nBEGIN\n    -- Check rules first\n    v_rules := check_expense_rules(p_amount, p_category);\n    v_action := JSON_VALUE(v_rules, '$.action');\n    \n    -- Handle BLOCK - don't create the expense\n    IF v_action = 'BLOCK' THEN\n        RETURN '{\"error\": \"BLOCKED\", \"message\": \"' || JSON_VALUE(v_rules, '$.message') || '\"}';\n    END IF;\n    \n    -- Determine status\n    IF v_action = 'AUTO_APPROVE' THEN\n        v_status := 'APPROVED';\n    ELSE\n        v_status := 'NEEDS_APPROVAL';\n    END IF;\n    \n    -- Generate request ID and insert\n    v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_seq.NEXTVAL;\n    \n    INSERT INTO expense_requests (request_id, employee_id, amount, category, description, status, approved_by, approved_at)\n    VALUES (\n        v_request_id, \n        p_employee_id, \n        p_amount, \n        LOWER(p_category), \n        p_description,\n        v_status,\n        CASE WHEN v_status = 'APPROVED' THEN 'AUTO' ELSE NULL END,\n        CASE WHEN v_status = 'APPROVED' THEN SYSTIMESTAMP ELSE NULL END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"request_id\": \"' || v_request_id || '\", \"status\": \"' || v_status || '\", \"message\": \"' || \n           CASE WHEN v_status = 'APPROVED' THEN 'Auto-approved.' ELSE 'Submitted. Awaiting manager approval.' END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Add safety rules.",
+      "text": "%md\n### Task 5: Create Approval Tools\n\n1. Create a function to list expenses needing approval.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Block excessive amounts\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Block Excessive Expense',\n    'BLOCK',\n    '{\"field\": \"amount\", \"operator\": \"gt\", \"value\": 5000, \"message\": \"Expenses over $5,000 are not permitted through self-service. Contact Finance directly.\"}',\n    10\n);\n\n-- Require approval for high amounts\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'High Amount Approval',\n    'REQUIRE_APPROVAL',\n    '{\"field\": \"amount\", \"operator\": \"gte\", \"value\": 1000, \"message\": \"Expenses $1,000 and above require manager approval.\"}',\n    20\n);\n\n-- Require approval for equipment\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Equipment Approval',\n    'REQUIRE_APPROVAL',\n    '{\"field\": \"category\", \"operator\": \"eq\", \"value\": \"equipment\", \"message\": \"Equipment purchases require manager approval regardless of amount.\"}',\n    30\n);\n\n-- Auto-approve small expenses\nINSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Auto-approve Small',\n    'AUTO_APPROVE',\n    '{\"field\": \"amount\", \"operator\": \"lt\", \"value\": 50, \"message\": \"Small expenses under $50 are auto-approved.\"}',\n    100\n);\n\nCOMMIT;",
+      "text": "%script\nCREATE OR REPLACE FUNCTION get_pending_approvals RETURN VARCHAR2 AS\n    v_result VARCHAR2(4000) := '[';\n    v_first  BOOLEAN := TRUE;\nBEGIN\n    FOR rec IN (\n        SELECT e.request_id, emp.name as employee_name, e.amount, e.category, \n               e.description, TO_CHAR(e.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted\n        FROM expense_requests e\n        JOIN employees emp ON e.employee_id = emp.employee_id\n        WHERE e.status = 'NEEDS_APPROVAL'\n        ORDER BY e.submitted_at\n    ) LOOP\n        IF NOT v_first THEN\n            v_result := v_result || ',';\n        END IF;\n        v_first := FALSE;\n        \n        v_result := v_result || '{\"request_id\": \"' || rec.request_id || '\", ' ||\n                    '\"employee\": \"' || rec.employee_name || '\", ' ||\n                    '\"amount\": ' || rec.amount || ', ' ||\n                    '\"category\": \"' || rec.category || '\", ' ||\n                    '\"description\": \"' || NVL(rec.description, 'N/A') || '\", ' ||\n                    '\"submitted\": \"' || rec.submitted || '\"}';\n    END LOOP;\n    \n    v_result := v_result || ']';\n    \n    IF v_result = '[]' THEN\n        RETURN '{\"message\": \"No expenses pending approval.\"}';\n    END IF;\n    \n    RETURN v_result;\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Create the rules checking function.",
+      "text": "%md\n2. Create a function to approve an expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION check_expense_rules(\n    p_amount   NUMBER,\n    p_category VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result JSON;\nBEGIN\n    -- Check rules in priority order\n    FOR rec IN (\n        SELECT rule_name, rule_type, rule_config\n        FROM safety_rules\n        WHERE is_active = 1\n        ORDER BY priority\n    ) LOOP\n        DECLARE\n            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');\n            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');\n            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');\n            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');\n            v_match    BOOLEAN := FALSE;\n        BEGIN\n            -- Evaluate rule\n            IF v_field = 'amount' THEN\n                IF v_operator = 'gt' AND p_amount > TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'gte' AND p_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'lt' AND p_amount < TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'lte' AND p_amount <= TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'eq' AND p_amount = TO_NUMBER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'category' THEN\n                IF v_operator = 'eq' AND LOWER(p_category) = LOWER(v_value) THEN v_match := TRUE;\n                END IF;\n            END IF;\n            \n            -- Return first matching rule\n            IF v_match THEN\n                IF rec.rule_type = 'BLOCK' THEN\n                    RETURN '{\"allowed\": false, \"action\": \"BLOCKED\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n                ELSIF rec.rule_type = 'REQUIRE_APPROVAL' THEN\n                    RETURN '{\"allowed\": true, \"action\": \"NEEDS_APPROVAL\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n                ELSIF rec.rule_type = 'AUTO_APPROVE' THEN\n                    RETURN '{\"allowed\": true, \"action\": \"AUTO_APPROVED\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n                END IF;\n            END IF;\n        END;\n    END LOOP;\n    \n    -- No rule matched - allow with standard processing\n    RETURN '{\"allowed\": true, \"action\": \"STANDARD\", \"message\": \"No special rules apply. Standard processing.\"}';\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION approve_expense(\n    p_request_id VARCHAR2,\n    p_approver   VARCHAR2 DEFAULT 'MANAGER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    -- Check current status\n    SELECT status INTO v_current_status\n    FROM expense_requests\n    WHERE request_id = p_request_id;\n    \n    IF v_current_status != 'NEEDS_APPROVAL' THEN\n        RETURN '{\"error\": \"Cannot approve. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    -- Approve it\n    UPDATE expense_requests\n    SET status = 'APPROVED',\n        approved_by = p_approver,\n        approved_at = SYSTIMESTAMP\n    WHERE request_id = p_request_id;\n    \n    COMMIT;\n    RETURN '{\"request_id\": \"' || p_request_id || '\", \"status\": \"APPROVED\", \"approved_by\": \"' || p_approver || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Expense not found: ' || p_request_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n4. Test the rules.",
+      "text": "%md\n3. Create a function to reject an expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Test various scenarios\nSELECT check_expense_rules(25, 'meals') as small_expense FROM DUAL;\nSELECT check_expense_rules(500, 'travel') as medium_expense FROM DUAL;\nSELECT check_expense_rules(1500, 'training') as large_expense FROM DUAL;\nSELECT check_expense_rules(200, 'equipment') as equipment_expense FROM DUAL;\nSELECT check_expense_rules(10000, 'travel') as blocked_expense FROM DUAL;",
+      "text": "%script\nCREATE OR REPLACE FUNCTION reject_expense(\n    p_request_id VARCHAR2,\n    p_approver   VARCHAR2 DEFAULT 'MANAGER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT status INTO v_current_status\n    FROM expense_requests\n    WHERE request_id = p_request_id;\n    \n    IF v_current_status != 'NEEDS_APPROVAL' THEN\n        RETURN '{\"error\": \"Cannot reject. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE expense_requests\n    SET status = 'REJECTED',\n        approved_by = p_approver,\n        approved_at = SYSTIMESTAMP\n    WHERE request_id = p_request_id;\n    \n    COMMIT;\n    RETURN '{\"request_id\": \"' || p_request_id || '\", \"status\": \"REJECTED\", \"rejected_by\": \"' || p_approver || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Expense not found: ' || p_request_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n---\n\n## Part 3: Human-in-the-Loop\n\nSome decisions need human judgment. Oracle's agent framework supports genuine pauses for approval.\n\n### Task 4: Register Tools and Create the Agent\n\n1. Register all tools.",
+      "text": "%md\n---\n\n## Part 3: Create the Agents\n\n### Task 6: Register Tools\n\n1. Register all tools.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    -- Submit expense tool\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'SUBMIT_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Submit an expense request. Parameters: P_EMPLOYEE_ID (e.g. EMP-001), P_AMOUNT (number), P_CATEGORY (travel, meals, supplies, equipment, or training), P_DESCRIPTION (text). Returns request ID and status.\",\n                        \"function\": \"submit_expense\"}',\n        description => 'Creates an expense request and returns the request ID'\n    );\n    \n    -- Check rules tool\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CHECK_RULES_TOOL',\n        attributes  => '{\"instruction\": \"ALWAYS call this BEFORE submitting an expense to check if it is allowed. Parameters: P_AMOUNT (number), P_CATEGORY (travel, meals, supplies, equipment, or training). Returns whether expense is allowed, blocked, or needs approval.\",\n                        \"function\": \"check_expense_rules\"}',\n        description => 'Validates expense against safety rules - call this first'\n    );\n    \n    -- Get expense status tool\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Look up expense status by request ID. Parameter: P_REQUEST_ID (e.g. EXP-250107-1001). Returns expense details.\",\n                        \"function\": \"get_expense_status\"}',\n        description => 'Retrieves expense request details by ID'\n    );\n    \n    -- Get employee info tool\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_EMPLOYEE_TOOL',\n        attributes  => '{\"instruction\": \"Look up employee information. Parameter: P_EMPLOYEE_ID (e.g. EMP-001). Returns employee name, department, and expense limit.\",\n                        \"function\": \"get_employee_info\"}',\n        description => 'Retrieves employee details including expense limit'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    -- Submission tool (for EXPENSE_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'SUBMIT_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Submit an expense request. Parameters: P_EMPLOYEE_ID (e.g. EMP-001, EMP-002, EMP-003), P_AMOUNT (number), P_CATEGORY (travel, meals, supplies, equipment, or training), P_DESCRIPTION (text description of the expense).\",\n                        \"function\": \"submit_expense\"}',\n        description => 'Submits an expense request'\n    );\n    \n    -- Pending list tool (for APPROVAL_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_PENDING_TOOL',\n        attributes  => '{\"instruction\": \"Get list of expenses waiting for approval. No parameters needed.\",\n                        \"function\": \"get_pending_approvals\"}',\n        description => 'Lists expenses needing approval'\n    );\n    \n    -- Approve tool (for APPROVAL_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'APPROVE_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Approve an expense request. Parameter: P_REQUEST_ID (e.g. EXP-260108-1001).\",\n                        \"function\": \"approve_expense\"}',\n        description => 'Approves an expense'\n    );\n    \n    -- Reject tool (for APPROVAL_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REJECT_EXPENSE_TOOL',\n        attributes  => '{\"instruction\": \"Reject an expense request. Parameter: P_REQUEST_ID (e.g. EXP-260108-1001).\",\n                        \"function\": \"reject_expense\"}',\n        description => 'Rejects an expense'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Create the agent with human-in-the-loop enabled.",
+      "text": "%md\n### Task 7: Create the Expense Agent (Employee Role)\n\n1. Create the expense submission agent and team.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense processing agent. ALWAYS check rules with CHECK_RULES_TOOL before submitting any expense. If the rules say BLOCKED, explain why and do NOT submit. If the rules say NEEDS_APPROVAL, do NOT submit - explain that approval is required and stop. Only submit if the rules say AUTO_APPROVED or STANDARD.\"}',\n        description => 'Expense processing agent with safety controls'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_TASK',\n        attributes  => '{\"instruction\": \"Process expense requests following this workflow: 1. First, call CHECK_RULES_TOOL to validate the expense 2. If BLOCKED: Explain why and do NOT call SUBMIT_EXPENSE_TOOL 3. If NEEDS_APPROVAL: Explain that manager approval is required and do NOT call SUBMIT_EXPENSE_TOOL 4. If AUTO_APPROVED or STANDARD: Call SUBMIT_EXPENSE_TOOL. User request: {query}\",\n                        \"tools\": [\"CHECK_RULES_TOOL\", \"SUBMIT_EXPENSE_TOOL\", \"GET_EXPENSE_TOOL\", \"GET_EMPLOYEE_TOOL\"],\n                        \"enable_human_tool\": \"true\"}',\n        description => 'Expense processing with human-in-the-loop'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_AGENT\", \"task\": \"EXPENSE_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Expense processing team'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'EXPENSE_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense submission agent for employees. When asked to submit an expense, call SUBMIT_EXPENSE_TOOL with the provided details. Report the result clearly - whether it was auto-approved, needs manager approval, or was blocked.\"}',\n        description => 'Employee expense submission agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'EXPENSE_TASK',\n        attributes  => '{\"instruction\": \"Process expense submission requests. Call SUBMIT_EXPENSE_TOOL with the employee ID, amount, category, and description. Report the outcome. User request: {query}\",\n                        \"tools\": [\"SUBMIT_EXPENSE_TOOL\"]}',\n        description => 'Expense submission task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'EXPENSE_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"EXPENSE_AGENT\", \"task\": \"EXPENSE_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Employee expense submission team'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n### Task 5: Test the Complete Workflow\n\n1. Set the team.",
+      "text": "%md\n### Task 8: Create the Approval Agent (Manager Role)\n\n1. Create the manager approval agent and team.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'APPROVAL_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an expense approval agent for managers. You can list pending expenses, approve them, or reject them. When asked what needs approval, call GET_PENDING_TOOL. When asked to approve, call APPROVE_EXPENSE_TOOL. When asked to reject, call REJECT_EXPENSE_TOOL.\"}',\n        description => 'Manager expense approval agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'APPROVAL_TASK',\n        attributes  => '{\"instruction\": \"Process expense approval requests. To see pending expenses, call GET_PENDING_TOOL. To approve, call APPROVE_EXPENSE_TOOL with the request ID. To reject, call REJECT_EXPENSE_TOOL with the request ID. User request: {query}\",\n                        \"tools\": [\"GET_PENDING_TOOL\", \"APPROVE_EXPENSE_TOOL\", \"REJECT_EXPENSE_TOOL\"]}',\n        description => 'Expense approval task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'APPROVAL_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"APPROVAL_AGENT\", \"task\": \"APPROVAL_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Manager expense approval team'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n---\n\n## Part 4: Test the Workflow\n\n### Task 9: Submit Expenses as an Employee\n\n1. Set the expense submission team.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -89,135 +97,111 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Test a small expense (auto-approve path).",
+      "text": "%md\n2. Submit a small expense (auto-approve).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $35 expense for supplies for employee EMP-002;",
+      "text": "%script\nSELECT AI AGENT Submit a $35 expense for supplies for employee EMP-002, description office supplies;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Verify it was auto-approved - check the expense record.",
+      "text": "%md\n**Expected:** Auto-approved (under $1000, not equipment).\n\n3. Submit a medium expense (auto-approve).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC;",
+      "text": "%script\nSELECT AI AGENT Submit a $200 expense for meals for employee EMP-003, description team lunch;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** Status is APPROVED and approved_by is AUTO - the $35 expense was auto-approved because it's under $50.\n\n4. Test a medium expense (standard path).",
+      "text": "%md\n**Expected:** Auto-approved (under $1000, not equipment).\n\n4. Submit a high-value expense (needs approval).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $200 expense for meals for employee EMP-003;",
+      "text": "%script\nSELECT AI AGENT Submit a $1500 expense for training for employee EMP-002, description annual conference registration;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n5. Verify the medium expense status.",
+      "text": "%md\n**Expected:** Needs approval ($1000 or more).\n\n5. Submit an equipment expense (needs approval).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC\nFETCH FIRST 1 ROW ONLY;",
+      "text": "%script\nSELECT AI AGENT Submit a $150 expense for equipment for employee EMP-002, description new keyboard;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** Status is PENDING - the $200 expense needs standard processing (not auto-approved, not blocked).\n\n6. Test a high-value expense (approval required path).",
+      "text": "%md\n**Expected:** Needs approval (equipment category always requires approval).\n\n6. Try to submit a blocked expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $1500 expense for training for employee EMP-002;",
+      "text": "%script\nSELECT AI AGENT Submit a $7500 expense for travel for employee EMP-001, description international trip;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**The agent should NOT submit the expense.** It asks for your approval first.\n\n7. Decline the approval request.",
+      "text": "%md\n**Expected:** Blocked (over $5000).\n\n7. Verify the expense records.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT No, do not submit that expense;",
+      "text": "%script\nSELECT request_id, \n       (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,\n       amount, \n       category, \n       status, \n       NVL(approved_by, '-') as approved_by\nFROM expense_requests e\nORDER BY submitted_at;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe agent acknowledges your decision and does not submit.\n\n8. Verify no $1500 expense was created.",
+      "text": "%md\n**Expected Results:**\n\n| Amount | Category | Status | Approved By |\n|--------|----------|--------|-------------|\n| $35 | supplies | APPROVED | AUTO |\n| $200 | meals | APPROVED | AUTO |\n| $1500 | training | NEEDS_APPROVAL | - |\n| $150 | equipment | NEEDS_APPROVAL | - |\n\nNote: The $7500 expense was blocked and not created.\n\n---\n\n### Task 10: Approve Expenses as a Manager\n\n1. Switch to the approval team.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC;",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('APPROVAL_TEAM');",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** The most recent expense should still be the $200 one - no $1500 training expense was created because you declined.\n\n9. Test a blocked expense.",
+      "text": "%md\n2. Ask what expenses need approval.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $7500 expense for travel for employee EMP-001;",
+      "text": "%script\nSELECT AI AGENT What expenses need my approval;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe agent should check rules, see BLOCKED, and refuse to submit.\n\n10. Verify no $7500 expense was created.",
+      "text": "%md\n**Expected:** Lists the $1500 training and $150 equipment expenses.\n\n3. Approve the training expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT COUNT(*) as total_expenses FROM expense_requests;\nSELECT request_id, amount, status FROM expense_requests ORDER BY submitted_at DESC;",
+      "text": "%script\nSELECT AI AGENT Approve the training expense;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** No $7500 expense exists - the agent correctly blocked it.\n\n11. Test equipment (always needs approval regardless of amount).",
+      "text": "%md\n4. Reject the equipment expense.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $150 expense for equipment for employee EMP-002;",
+      "text": "%script\nSELECT AI AGENT Reject the equipment expense;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**The agent asks for approval** because equipment always requires it regardless of amount.\n\n12. Decline the equipment expense.",
+      "text": "%md\n5. Verify final status of all expenses.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT No, decline that equipment purchase;",
+      "text": "%script\nSELECT request_id, \n       (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,\n       amount, \n       category, \n       status, \n       NVL(approved_by, '-') as approved_by,\n       TO_CHAR(approved_at, 'HH24:MI:SS') as approved_at\nFROM expense_requests e\nORDER BY submitted_at;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n13. Verify no equipment expense was created.",
+      "text": "%md\n**Expected Final Results:**\n\n| Amount | Category | Status | Approved By |\n|--------|----------|--------|-------------|\n| $35 | supplies | APPROVED | AUTO |\n| $200 | meals | APPROVED | AUTO |\n| $1500 | training | APPROVED | MANAGER |\n| $150 | equipment | REJECTED | MANAGER |\n\n---\n\n## Part 5: Audit Trail\n\n### Task 11: Query the Audit Trail\n\n1. See all tool calls.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT request_id, amount, category, status, approved_by\nFROM expense_requests\nORDER BY submitted_at DESC;",
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called,\n    SUBSTR(input, 1, 60) as input_preview,\n    SUBSTR(output, 1, 60) as output_preview\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 15 ROWS ONLY;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Observe:** No equipment expense was created. You should only see the $35 supplies (APPROVED) and $200 meals (PENDING) expenses.\n\n---\n\n## Part 4: Audit Trail\n\nEverything the agent does is logged. This is essential for compliance and debugging.\n\n### Task 6: Query the Audit Trail\n\n1. See all tool calls.",
+      "text": "%md\n2. Audit summary by tool.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called,\n    SUBSTR(input, 1, 50) as input_preview,\n    SUBSTR(output, 1, 50) as output_preview\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 15 ROWS ONLY;",
+      "text": "%script\nSELECT \n    tool_name,\n    COUNT(*) as call_count\nFROM USER_AI_AGENT_TOOL_HISTORY\nGROUP BY tool_name\nORDER BY call_count DESC;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. See the full input/output for recent calls.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as when,\n    input as full_input,\n    output as full_output\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '10' MINUTE\nORDER BY start_date;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n3. See all expense requests created with their status.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nSELECT \n    request_id,\n    (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,\n    amount,\n    category,\n    status,\n    NVL(approved_by, '-') as approved_by,\n    TO_CHAR(submitted_at, 'HH24:MI:SS') as submitted\nFROM expense_requests e\nORDER BY submitted_at DESC;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n4. Audit summary: tools used by type.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nSELECT \n    tool_name,\n    COUNT(*) as call_count,\n    MIN(start_date) as first_call,\n    MAX(start_date) as last_call\nFROM USER_AI_AGENT_TOOL_HISTORY\nGROUP BY tool_name\nORDER BY call_count DESC;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n---\n\n## Summary\n\nIn this capstone lab, you built a complete agent system with:\n\n**Part 1: Tools**\n- PL/SQL functions that agents can call\n- Clean separation: LLM reasons, tools act\n- If there's no tool, the agent can't do it\n\n**Part 2: Safety Rules**\n- JSON-configured business rules\n- BLOCK / REQUIRE_APPROVAL / WARN / AUTO_APPROVE\n- Rules engine the agent calls before acting\n- Database constraints as the final backstop\n\n**Part 3: Human-in-the-Loop**\n- `enable_human_tool` for approval workflows\n- Agent genuinely pauses for human input\n- Collaboration spectrum: autonomous → supervised → collaborative\n\n**Part 4: Audit Trail**\n- Every tool call logged automatically\n- Full input/output captured\n- Explainable agent behavior\n\n**Key takeaway:** Agents are safe because their boundaries are explicit. Tools define capabilities. Rules define constraints. Humans retain control. Everything is auditable.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n* [Oracle Database Security Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/dbseg/)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "text": "%md\n---\n\n## Summary\n\nIn this capstone lab, you built a complete agent system with:\n\n**Two Agents with Different Roles:**\n- EXPENSE_AGENT — Employees submit expenses\n- APPROVAL_AGENT — Managers review and decide\n\n**Safety Rules:**\n- AUTO_APPROVE: Under $1000 (not equipment)\n- REQUIRE_APPROVAL: $1000+ or equipment\n- BLOCK: Over $5000\n\n**Clean Workflow:**\n1. Employee submits → Auto-approved or queued for approval\n2. Manager reviews queue → Approves or rejects\n3. Everything logged in audit trail\n\n**Key Takeaways:**\n- Tools define what's possible\n- Rules define what's allowed\n- Different agents for different roles\n- Humans retain control over important decisions\n- Everything is auditable\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -225,7 +209,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RULES_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_EMPLOYEE_TOOL', TRUE);\nDROP TABLE expense_requests PURGE;\nDROP TABLE employees PURGE;\nDROP TABLE safety_rules PURGE;\nDROP SEQUENCE expense_seq;\nDROP FUNCTION submit_expense;\nDROP FUNCTION get_expense_status;\nDROP FUNCTION get_employee_info;\nDROP FUNCTION check_expense_rules;",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('APPROVAL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('APPROVAL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('APPROVAL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_PENDING_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPROVE_EXPENSE_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REJECT_EXPENSE_TOOL', TRUE);\nDROP TABLE expense_requests PURGE;\nDROP TABLE employees PURGE;\nDROP TABLE safety_rules PURGE;\nDROP SEQUENCE expense_seq;\nDROP FUNCTION submit_expense;\nDROP FUNCTION check_expense_rules;\nDROP FUNCTION get_pending_approvals;\nDROP FUNCTION approve_expense;\nDROP FUNCTION reject_expense;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     }
   ],
