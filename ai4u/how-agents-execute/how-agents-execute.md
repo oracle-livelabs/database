@@ -157,7 +157,7 @@ We'll create an agent with tools that log what's happening so you can see each s
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'ROUTE_APPROVAL_TOOL',
-            attributes  => '{"instruction": "Route an expense for approval. Parameters: P_REQUEST_ID (the EXP-YYMMDD-NNNN format ID from CREATE_EXPENSE_TOOL), P_APPROVAL_LEVEL (MANAGER or DIRECTOR from CHECK_RULES_TOOL).",
+            attributes  => '{"instruction": "Route an expense for approval. Only call this if CHECK_RULES_TOOL returned MANAGER_APPROVAL or DIRECTOR_APPROVAL. Do NOT call this for AUTO_APPROVE. Parameters: P_REQUEST_ID (the EXP-YYMMDD-NNNN format ID), P_APPROVAL_LEVEL (MANAGER or DIRECTOR).",
                             "function": "route_for_approval"}',
             description => 'Routes the expense request to the appropriate approver'
         );
@@ -174,13 +174,13 @@ We'll create an agent with tools that log what's happening so you can see each s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'EXPENSE_EXEC_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are an expense processing agent. Process expenses by: 1) Creating the request, 2) Checking the rules, 3) Routing for approval. Always complete all three steps."}',
+                            "role": "You are an expense processing agent. Process expenses by: 1) Creating the request, 2) Checking the rules, 3) Only routing for approval if rules require it. If rules say AUTO_APPROVE, do not route."}',
             description => 'Agent demonstrating execution loop'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'EXPENSE_EXEC_TASK',
-            attributes  => '{"instruction": "Process the expense request by following these steps in order: 1. Call CREATE_EXPENSE_TOOL to create the request 2. Call CHECK_RULES_TOOL to determine approval level 3. Call ROUTE_APPROVAL_TOOL to route it. Do not ask clarifying questions. User request: {query}",
+            attributes  => '{"instruction": "Process the expense request: 1. Call CREATE_EXPENSE_TOOL to create the request 2. Call CHECK_RULES_TOOL to determine approval level 3. If result contains MANAGER_APPROVAL or DIRECTOR_APPROVAL, call ROUTE_APPROVAL_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_APPROVAL_TOOL - just confirm the expense is auto-approved. User request: {query}",
                             "tools": ["CREATE_EXPENSE_TOOL", "CHECK_RULES_TOOL", "ROUTE_APPROVAL_TOOL"]}',
             description => 'Task for expense execution demo'
         );
@@ -232,7 +232,7 @@ Now let's run a request and trace every step.
 
 **Observe the execution sequence:**
 - CREATE_REQUEST: The expense was created
-- CHECK_RULES: Rules were evaluated
+- CHECK_RULES: Rules were evaluated ($250 requires manager)
 - ROUTE_APPROVAL: It was routed for manager approval
 
 ## Task 3: Trace the Agent's Tool Calls
@@ -293,9 +293,21 @@ Different amounts trigger different rules and therefore different execution path
     </copy>
     ```
 
-**Observe:** The rules said AUTO_APPROVE because it's under $100.
+**Observe:** Only CREATE_REQUEST and CHECK_RULES appear - no ROUTE_APPROVAL because the rules said AUTO_APPROVE (under $100).
 
-3. Submit a large expense (director approval path).
+3. Check the expense record status.
+
+    ```sql
+    <copy>
+    SELECT request_id, employee, amount, status 
+    FROM expense_requests 
+    WHERE employee = 'Jane Doe';
+    </copy>
+    ```
+
+The status is SUBMITTED (not PENDING_MANAGER) - it was auto-approved, so no routing was needed.
+
+4. Submit a large expense (director approval path).
 
     ```sql
     <copy>
@@ -304,7 +316,7 @@ Different amounts trigger different rules and therefore different execution path
     </copy>
     ```
 
-4. Check the workflow log again.
+5. Check the workflow log again.
 
     ```sql
     <copy>
@@ -312,9 +324,42 @@ Different amounts trigger different rules and therefore different execution path
     </copy>
     ```
 
-**Observe:** Different amount → different rule result → different routing.
+**Observe:** All three steps appear - $750 requires DIRECTOR_APPROVAL so it was routed.
 
-## Task 5: Understand the Execution Pattern
+6. Check the expense record status.
+
+    ```sql
+    <copy>
+    SELECT request_id, employee, amount, status 
+    FROM expense_requests 
+    WHERE employee = 'Bob Wilson';
+    </copy>
+    ```
+
+The status is PENDING_DIRECTOR because the $750 expense was routed for director approval.
+
+## Task 5: Compare All Three Expenses
+
+Let's see all the expenses and their different statuses.
+
+```sql
+<copy>
+SELECT 
+    request_id,
+    employee,
+    amount,
+    status,
+    CASE 
+        WHEN amount < 100 THEN 'Auto-approved'
+        WHEN amount < 500 THEN 'Manager approval'
+        ELSE 'Director approval'
+    END as approval_path
+FROM expense_requests
+ORDER BY created_at;
+</copy>
+```
+
+## Task 6: Understand the Execution Pattern
 
 Every agent execution follows this pattern:
 
@@ -323,7 +368,7 @@ Every agent execution follows this pattern:
 3. **LLM plans** → Determines which tools and in what order
 4. **Tool executes** → First tool runs, returns result
 5. **LLM analyzes** → Interprets the result
-6. **Next tool** → Repeat steps 4-5 for each tool
+6. **Next tool** → Repeat steps 4-5 for each tool (conditionally)
 7. **LLM responds** → Generates final response
 
 Query to see the complete execution timeline:

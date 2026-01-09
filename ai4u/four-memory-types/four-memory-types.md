@@ -229,11 +229,15 @@ Long-term facts are stable information the agent should rely on across tasks and
 
     ```sql
     <copy>
+    -- Set display width for CLOB output
+    SET LONG 5000
+    SET LINESIZE 200
+
     -- Get all facts about a customer
-    SELECT get_facts('CUST-001') FROM DUAL;
+    SELECT get_facts('CUST-001') as facts FROM DUAL;
 
     -- Get only preferences
-    SELECT get_facts('CUST-001', 'preference') FROM DUAL;
+    SELECT get_facts('CUST-001', 'preference') as preferences FROM DUAL;
     </copy>
     ```
 
@@ -348,11 +352,15 @@ Decisions and outcomes record what the agent decided and what happened.
 
     ```sql
     <copy>
+    -- Set display width for CLOB output
+    SET LONG 5000
+    SET LINESIZE 200
+
     -- Find decisions about shipping issues
-    SELECT find_past_decisions('shipping') FROM DUAL;
+    SELECT find_past_decisions('shipping') as shipping_decisions FROM DUAL;
 
     -- Find decisions about billing
-    SELECT find_past_decisions('billing') FROM DUAL;
+    SELECT find_past_decisions('billing') as billing_decisions FROM DUAL;
     </copy>
     ```
 
@@ -442,11 +450,15 @@ Reference knowledge is background information the agent consults but does not ch
 
     ```sql
     <copy>
+    -- Set display width for CLOB output
+    SET LONG 5000
+    SET LINESIZE 200
+
     -- Get all policies
-    SELECT get_reference('policy') FROM DUAL;
+    SELECT get_reference('policy') as policies FROM DUAL;
 
     -- Get escalation procedure
-    SELECT get_reference('procedure', 'escalation') FROM DUAL;
+    SELECT get_reference('procedure', 'escalation') as escalation FROM DUAL;
     </copy>
     ```
 
@@ -456,20 +468,24 @@ Let's trace how an agent would use all four types together.
 
 ```sql
 <copy>
+-- Set display width for CLOB output
+SET LONG 5000
+SET LINESIZE 200
+
 -- Scenario: Customer CUST-001 calls about a late shipment
 
 -- 1. Set short-term context (current task)
-SELECT set_context('SESSION-002', 'customer', 'CUST-001 calling about late shipment') FROM DUAL;
-SELECT set_context('SESSION-002', 'issue', 'Order ORD-789 delayed 3 days') FROM DUAL;
+SELECT set_context('SESSION-002', 'customer', 'CUST-001 calling about late shipment') as step1_context FROM DUAL;
+SELECT set_context('SESSION-002', 'issue', 'Order ORD-789 delayed 3 days') as step1_issue FROM DUAL;
 
 -- 2. Check long-term facts (what do we know about them?)
-SELECT get_facts('CUST-001') FROM DUAL;
+SELECT get_facts('CUST-001') as step2_facts FROM DUAL;
 
--- 3. Check reference knowledge (what's the policy?)
-SELECT get_reference('policy', 'return') FROM DUAL;
+-- 3. Check reference knowledge (what is the policy?)
+SELECT get_reference('policy', 'return') as step3_policy FROM DUAL;
 
 -- 4. Find similar past decisions (what worked before?)
-SELECT find_past_decisions('shipping delay') FROM DUAL;
+SELECT find_past_decisions('shipping delay') as step4_past_decisions FROM DUAL;
 
 -- 5. Agent makes decision based on all of this, then records it
 SELECT record_decision(
@@ -478,10 +494,10 @@ SELECT record_decision(
     'Offered expedited replacement shipping and $25 credit for inconvenience',
     'Customer satisfied, appreciated proactive resolution',
     'true'
-) FROM DUAL;
+) as step5_decision FROM DUAL;
 
 -- 6. Learn new fact if relevant
-SELECT store_fact('CUST-001', 'Sensitive to shipping delays - prioritize expedited options', 'preference') FROM DUAL;
+SELECT store_fact('CUST-001', 'Sensitive to shipping delays - prioritize expedited options', 'preference') as step6_new_fact FROM DUAL;
 </copy>
 ```
 

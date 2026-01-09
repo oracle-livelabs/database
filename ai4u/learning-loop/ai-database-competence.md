@@ -24,12 +24,34 @@ Estimated Time: 15 minutes
 
 This lab assumes you have:
 
-* Completed Labs 7-8 or have memory tables
 * An AI profile named `genai` already configured
 * Oracle Database 26ai with Select AI Agent
 * Basic knowledge of SQL
 
-## Task 1: Load the ONNX Embedding Model
+## Task 1: Create the Memory Table
+
+First, we'll create a memory table to store agent experiences.
+
+1. Create the agent memory table with a vector column for semantic embeddings.
+
+    ```sql
+    <copy>
+    CREATE TABLE agent_memory (
+        memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
+        memory_type    VARCHAR2(20) NOT NULL,
+        session_id     VARCHAR2(100),
+        entity_id      VARCHAR2(100),
+        content        JSON NOT NULL,
+        embedding      VECTOR(384),
+        created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,
+        expires_at     TIMESTAMP
+    );
+
+    CREATE INDEX idx_memory_type ON agent_memory(memory_type);
+    </copy>
+    ```
+
+## Task 2: Load the ONNX Embedding Model
 
 Embedding models convert text into numerical vectors that capture meaning.
 
@@ -54,6 +76,9 @@ Embedding models convert text into numerical vectors that capture meaning.
 
     ```sql
     <copy>
+    -- Drop model if it already exists
+    EXEC DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);
+
     BEGIN
         DBMS_VECTOR.LOAD_ONNX_MODEL(
             directory  => 'DATA_PUMP_DIR',
@@ -75,19 +100,9 @@ Embedding models convert text into numerical vectors that capture meaning.
     </copy>
     ```
 
-## Task 2: Add VECTOR Column to Memory
+## Task 3: Create a Vector Index
 
-1. Add the embedding column.
-
-    ```sql
-    <copy>
-    ALTER TABLE agent_memory ADD (
-        embedding VECTOR(384)
-    );
-    </copy>
-    ```
-
-2. Create a vector index for fast similarity search.
+1. Create a vector index for fast similarity search.
 
     ```sql
     <copy>
@@ -98,7 +113,7 @@ Embedding models convert text into numerical vectors that capture meaning.
     </copy>
     ```
 
-## Task 3: Create the Learning Loop Functions
+## Task 4: Create the Learning Loop Functions
 
 The learning loop: action → result → observe → interpret → store → retrieve → better decision.
 
@@ -188,7 +203,7 @@ The learning loop: action → result → observe → interpret → store → ret
     </copy>
     ```
 
-## Task 4: Seed the Learning Database
+## Task 5: Seed the Learning Database
 
 Let's add some experiences the agent can learn from.
 
@@ -233,7 +248,7 @@ SELECT store_experience(
 </copy>
 ```
 
-## Task 5: See Semantic Search in Action
+## Task 6: See Semantic Search in Action
 
 Now test finding relevant experience by meaning, not keywords.
 
@@ -241,6 +256,8 @@ Now test finding relevant experience by meaning, not keywords.
 
     ```sql
     <copy>
+    SET LONG 5000
+    SET LINESIZE 200
     SELECT find_relevant_experience('customer angry about late delivery') as experience FROM DUAL;
     </copy>
     ```
@@ -251,6 +268,8 @@ Now test finding relevant experience by meaning, not keywords.
 
     ```sql
     <copy>
+    SET LONG 5000
+    SET LINESIZE 200
     SELECT find_relevant_experience('customer wants us to match Amazon price') as experience FROM DUAL;
     </copy>
     ```
@@ -261,13 +280,15 @@ Now test finding relevant experience by meaning, not keywords.
 
     ```sql
     <copy>
+    SET LONG 5000
+    SET LINESIZE 200
     SELECT find_relevant_experience('customer has billing complaint') as experience FROM DUAL;
     </copy>
     ```
 
 **Observe:** Finds BOTH billing experiences—one that failed and one that succeeded. The agent can learn from both.
 
-## Task 6: See the Learning Loop in Action
+## Task 7: See the Learning Loop in Action
 
 Let's trace a complete learning loop.
 
@@ -275,6 +296,8 @@ Let's trace a complete learning loop.
 
     ```sql
     <copy>
+    SET LONG 5000
+    SET LINESIZE 200
     -- Agent receives: "Customer TechCorp is upset about incorrect invoice"
     SELECT find_relevant_experience('Customer upset about incorrect invoice') as past_experience FROM DUAL;
     </copy>
@@ -301,11 +324,13 @@ Let's trace a complete learning loop.
 
     ```sql
     <copy>
+    SET LONG 5000
+    SET LINESIZE 200
     SELECT find_relevant_experience('invoice problem') as growing_experience FROM DUAL;
     </copy>
     ```
 
-## Task 7: View the Competence Building
+## Task 8: View the Competence Building
 
 ```sql
 <copy>
@@ -330,6 +355,19 @@ In this lab, you built the learning loop:
 * Saw how agents retrieve relevant experience to decide
 
 **Key takeaway:** This is how agents improve—not magically, but systematically. Action → result → memory → improvement. The AI database powers it all.
+
+## Cleanup (Optional)
+
+```sql
+<copy>
+DROP TABLE agent_memory PURGE;
+DROP FUNCTION store_experience;
+DROP FUNCTION find_relevant_experience;
+
+-- Drop the ONNX model
+EXEC DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);
+</copy>
+```
 
 ## Learn More
 

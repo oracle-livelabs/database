@@ -6,13 +6,13 @@ In this lab, you'll see why agents fail without enterprise data—and how connec
 
 Agents don't show up understanding your organization. They don't know your policies, your workflows, or how decisions were handled last time. That knowledge lives in your enterprise data.
 
-You'll first ask an agent business-specific questions it can't answer, then give it access to your data and see the difference.
+You'll first ask the LLM business-specific questions it can't answer, then give an agent access to your data and see the difference.
 
 Estimated Time: 10 minutes
 
 ### Objectives
 
-* Experience agent failure without business context
+* Experience LLM failure without business context
 * Create enterprise data tools for agents
 * See how data access transforms agent responses
 * Understand why enterprise data provides judgment and guardrails
@@ -23,88 +23,37 @@ This lab assumes you have:
 
 * Completed Labs 1-5 or have a working agent setup
 * An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL
 
 ## Task 1: Experience the Knowledge Gap
 
-Let's see what happens when an agent doesn't have access to your business data.
+Let's see what happens when you ask an LLM about your business without giving it access to your data. We'll use `SELECT AI CHAT` which uses the LLM's general knowledge.
 
-1. Create a simple agent without data access.
-
-    ```sql
-    <copy>
-    -- Create a basic SQL tool so the agent can function
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'BASIC_SQL_TOOL',
-            attributes  => '{"tool_type": "SQL",
-                            "tool_params": {"profile_name": "genai"}}',
-            description => 'Basic SQL query tool'
-        );
-    EXCEPTION WHEN OTHERS THEN NULL;
-    END;
-    /
-
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-            agent_name  => 'CLUELESS_AGENT',
-            attributes  => '{"profile_name": "genai",
-                            "role": "You are a customer service agent for TechCorp. Help customers with their inquiries."}',
-            description => 'Agent without enterprise data'
-        );
-    EXCEPTION WHEN OTHERS THEN NULL;
-    END;
-    /
-
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-            task_name   => 'CLUELESS_TASK',
-            attributes  => '{"instruction": "Help the customer: {query}",
-                            "tools": ["BASIC_SQL_TOOL"]}',
-            description => 'Task without data tools'
-        );
-    EXCEPTION WHEN OTHERS THEN NULL;
-    END;
-    /
-
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'CLUELESS_TEAM',
-            attributes  => '{"agents": [{"name": "CLUELESS_AGENT", "task": "CLUELESS_TASK"}],
-                            "process": "sequential"}',
-            description => 'Team without enterprise data'
-        );
-    EXCEPTION WHEN OTHERS THEN NULL;
-    END;
-    /
-    </copy>
-    ```
-
-2. Ask business-specific questions.
+1. Set the AI profile and ask about your return policy.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('CLUELESS_TEAM');
-    SELECT AI AGENT What is the return policy for premium members;
+    -- Set the AI profile for SELECT AI CHAT
+    EXEC DBMS_CLOUD_AI.SET_PROFILE('genai');
+
+    SELECT AI CHAT What is the return policy for premium members at TechCorp;
     </copy>
     ```
 
-The agent gives a generic response—it doesn't know YOUR return policy.
+The LLM gives a generic response—it doesn't know YOUR return policy because it has no access to your data.
 
-3. Ask about a specific customer.
+2. Ask about a specific customer.
 
     ```sql
     <copy>
-    SELECT AI AGENT Is customer CUST-1001 eligible for an upgrade;
+    SELECT AI CHAT Is customer CUST-1001 eligible for an upgrade;
     </copy>
     ```
 
-The agent can't answer—it has no customer data.
+The LLM can't answer—it has no customer data. It might make something up or tell you it doesn't have access.
 
 ## Task 2: Create Enterprise Data
 
-Now let's create the business data that the agent needs.
+Now let's create the business data that an agent needs.
 
 1. Create policy and customer tables.
 
@@ -214,16 +163,16 @@ Now let's create the business data that the agent needs.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'POLICY_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up company policies. Parameters: P_POLICY_TYPE (return/escalation/etc), P_MEMBER_TIER (PREMIUM/STANDARD, optional).",
+            attributes  => '{"instruction": "Look up company policies. Parameters: P_POLICY_TYPE (e.g. return, escalation), P_MEMBER_TIER (PREMIUM or STANDARD, optional). Always use this to answer policy questions.",
                             "function": "get_policy"}',
-            description => 'Retrieves company policies'
+            description => 'Retrieves company policies including return policies and escalation procedures'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CUSTOMER_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up customer information. Parameter: P_CUSTOMER_ID.",
+            attributes  => '{"instruction": "Look up customer information. Parameter: P_CUSTOMER_ID (e.g. CUST-1001). Returns tier, spend, and upgrade eligibility. Always use this when asked about specific customers.",
                             "function": "get_customer_info"}',
-            description => 'Retrieves customer details'
+            description => 'Retrieves customer details including tier, spend history, and upgrade eligibility'
         );
     END;
     /
@@ -242,13 +191,13 @@ Now let's create an agent with access to enterprise data.
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'INFORMED_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a customer service agent for TechCorp. You have access to company policies and customer information. Use these tools to provide accurate, specific answers."}',
+                            "role": "You are a customer service agent for TechCorp. You have access to company policies and customer information. Always use your tools to look up real data - never guess."}',
             description => 'Agent with enterprise data access'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'INFORMED_TASK',
-            attributes  => '{"instruction": "Help the customer by looking up relevant policies and customer information. {query}",
+            attributes  => '{"instruction": "Help the customer by looking up relevant policies and customer information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}",
                             "tools": ["POLICY_LOOKUP_TOOL", "CUSTOMER_LOOKUP_TOOL"]}',
             description => 'Task with data access'
         );
@@ -264,7 +213,7 @@ Now let's create an agent with access to enterprise data.
     </copy>
     ```
 
-2. Set the new team.
+2. Set the team.
 
     ```sql
     <copy>
@@ -274,7 +223,7 @@ Now let's create an agent with access to enterprise data.
 
 ## Task 4: Ask the Same Questions Again
 
-Now let's see the difference.
+Now let's see the difference. This time we use `SELECT AI AGENT` which has access to our enterprise data tools.
 
 1. Ask about return policy for premium members.
 
@@ -328,10 +277,9 @@ Let's verify the agent is using enterprise data.
 
 In this lab, you experienced the difference enterprise data makes:
 
-* Saw an agent fail without business context
-* Created enterprise data tables and tool access
-* Watched the same questions get vastly better answers
-* Understood why enterprise data is essential
+* `SELECT AI CHAT` - LLM general knowledge only, gave generic answers
+* `SELECT AI AGENT` - Agent with tools, gave YOUR specific answers
+* Enterprise data transforms generic AI into your AI
 
 **Key takeaway:** Agents don't fail because they're not smart—they fail because they don't know your business. Enterprise data is what transforms generic AI into your AI.
 
@@ -348,17 +296,13 @@ In this lab, you experienced the difference enterprise data makes:
 
 ```sql
 <copy>
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('CLUELESS_TEAM', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('INFORMED_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('CLUELESS_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('INFORMED_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('CLUELESS_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('INFORMED_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('POLICY_LOOKUP_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CUSTOMER_LOOKUP_TOOL', TRUE);
-DROP TABLE company_policies;
-DROP TABLE enterprise_customers;
+DROP TABLE company_policies PURGE;
+DROP TABLE enterprise_customers PURGE;
 DROP FUNCTION get_policy;
 DROP FUNCTION get_customer_info;
 </copy>

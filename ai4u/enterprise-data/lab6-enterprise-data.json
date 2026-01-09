@@ -1,107 +1,115 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# Why Enterprise Data Matters\n\n## Introduction\n\nIn this lab, you'll see why agents fail without enterprise data—and how connecting them to your business context transforms their usefulness.\n\nAgents don't show up understanding your organization. They don't know your policies, your workflows, or how decisions were handled last time. That knowledge lives in your enterprise data.\n\nYou'll first ask the LLM business-specific questions it can't answer, then give an agent access to your data and see the difference.\n\nEstimated Time: 10 minutes\n\n### Objectives\n\n* Experience LLM failure without business context\n* Create enterprise data tools for agents\n* See how data access transforms agent responses\n* Understand why enterprise data provides judgment and guardrails\n\n### Prerequisites\n\nThis lab assumes you have:\n\n* Completed Labs 1-5 or have a working agent setup\n* An AI profile named `genai` already configured",
+      "text": "%md\n## Connect Agents to Enterprise Data at Seers Equity\n\n### The Business Problem\n\nSeers Equity deployed AI chatbots to help loan officers answer client questions. The problem? The chatbots don't know Seers Equity's actual rates, policies, or client information.\n\n*\"I asked the AI what rates we offer preferred customers. It said 6.5%. Our actual preferred rate is 7.9%. I almost quoted wrong rates to a client!\"*\n\n*\"The AI doesn't know our policies. It gives generic answers about 'typical lending practices' when clients need our specific requirements.\"*\n\nWithout access to enterprise data, AI assistants are worse than useless—they're confidently wrong.\n\n### What You'll Learn\n\nIn this lab, you'll see the transformation that happens when agents get access to real business data:\n\n1. **Without data:** Ask about Seers Equity loan rates. Watch the AI give generic (or wrong) answers.\n2. **With data:** Connect the agent to actual loan policies and client information.\n3. **The difference:** The same question now returns real rates, real requirements, real client details.\n\nEnterprise data is what turns a generic AI into YOUR AI—one that knows your business.\n\n**What you'll build:** An agent connected to Seers Equity's loan policies and applicant data.\n\n**Estimated Time:** 10 minutes",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Task 1: Experience the Knowledge Gap\n\nLet's see what happens when you ask an LLM about your business without giving it access to your data. We'll use `SELECT AI CHAT` which uses the LLM's general knowledge.\n\n1. Set the AI profile and ask about your return policy.",
+      "text": "%md\n## Ask the LLM About Seers Equity's Loan Rates\n\nLet's start by asking the raw LLM (SELECT AI CHAT) about Seers Equity's loan products. This goes directly to the LLM with no access to your business data.\n\n**Watch what happens:** The LLM gives a generic response. It might describe typical loan rates or say it doesn't know. Either way, it can't tell you YOUR rates because it has no access to Seers Equity's data.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Set the AI profile for SELECT AI CHAT\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT AI CHAT What is the return policy for premium members at TechCorp;",
+      "text": "%script\n-- Set the AI profile for SELECT AI CHAT\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT AI CHAT What are the current interest rates for personal loans at Seers Equity for preferred customers;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe LLM gives a generic response—it doesn't know YOUR return policy because it has no access to your data.\n\n2. Ask about a specific customer.",
+      "text": "%md\n## Ask the LLM About a Specific Applicant\n\nNow ask about a specific loan applicant in your system.\n\n**Watch what happens:** The LLM has no applicant data. It might make something up (hallucinate), admit it doesn't know, or give generic advice. It cannot tell you anything about YOUR applicant APPL-1001.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI CHAT Is customer CUST-1001 eligible for an upgrade;",
+      "text": "%script\nSELECT AI CHAT Is applicant APPL-1001 eligible for a premium rate loan at Seers Equity;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\nThe LLM can't answer—it has no customer data. It might make something up or tell you it doesn't have access.\n\n## Task 2: Create Enterprise Data\n\nNow let's create the business data that an agent needs.\n\n1. Create policy and customer tables.",
+      "text": "%md\n## Create Seers Equity's Enterprise Data\n\nNow let's create the business data that makes an agent useful for Seers Equity. You'll create:\n\n1. **loan_policies** — Seers Equity's actual loan products, rates, and requirements\n2. **loan_applicants** — Real applicant records with credit scores, income, and eligibility\n\nThis is the knowledge the agent needs to answer business-specific questions accurately.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Company policies\nCREATE TABLE company_policies (\n    policy_id    VARCHAR2(20) PRIMARY KEY,\n    policy_name  VARCHAR2(100),\n    policy_text  CLOB,\n    applies_to   VARCHAR2(50)\n);\n\nINSERT INTO company_policies VALUES (\n    'POL-001', 'Return Policy - Premium',\n    'Premium members may return items within 90 days for full refund, no questions asked. ' ||\n    'Standard restocking fees are waived. Free return shipping included.',\n    'PREMIUM'\n);\n\nINSERT INTO company_policies VALUES (\n    'POL-002', 'Return Policy - Standard',\n    'Standard members may return items within 30 days. A 15% restocking fee applies. ' ||\n    'Customer pays return shipping.',\n    'STANDARD'\n);\n\nINSERT INTO company_policies VALUES (\n    'POL-003', 'Escalation Process',\n    'Billing disputes: 1) Agent attempts resolution, 2) If over $100, escalate to Team Lead, ' ||\n    '3) If unresolved after 24 hours, escalate to Manager, 4) Customer may request VP review.',\n    'ALL'\n);\n\n-- Customer data\nCREATE TABLE enterprise_customers (\n    customer_id   VARCHAR2(20) PRIMARY KEY,\n    name          VARCHAR2(100),\n    tier          VARCHAR2(20),\n    since         DATE,\n    total_spend   NUMBER(12,2),\n    upgrade_eligible VARCHAR2(1)\n);\n\nINSERT INTO enterprise_customers VALUES ('CUST-1001', 'Acme Corp', 'STANDARD', DATE '2022-01-15', 45000, 'Y');\nINSERT INTO enterprise_customers VALUES ('CUST-1002', 'TechStart', 'PREMIUM', DATE '2020-06-01', 125000, 'N');\nINSERT INTO enterprise_customers VALUES ('CUST-1003', 'NewCo', 'STANDARD', DATE '2024-01-10', 5000, 'N');\n\nCOMMIT;",
+      "text": "%script\n-- Seers Equity Loan Policies\nCREATE TABLE loan_policies (\n    policy_id      VARCHAR2(20) PRIMARY KEY,\n    policy_name    VARCHAR2(100),\n    policy_text    CLOB,\n    applies_to     VARCHAR2(50)\n);\n\nINSERT INTO loan_policies VALUES (\n    'POL-001', 'Personal Loan - Preferred Rate',\n    'Preferred customers (credit score 750+) qualify for personal loans at 7.9% APR. ' ||\n    'Maximum loan amount $100,000. No origination fee. Same-day approval for amounts under $50,000.',\n    'PREFERRED'\n);\n\nINSERT INTO loan_policies VALUES (\n    'POL-002', 'Personal Loan - Standard Rate',\n    'Standard customers (credit score 650-749) qualify for personal loans at 12.9% APR. ' ||\n    'Maximum loan amount $50,000. 2% origination fee applies. ' ||\n    'Approval within 2 business days.',\n    'STANDARD'\n);\n\nINSERT INTO loan_policies VALUES (\n    'POL-003', 'Mortgage Guidelines',\n    'All mortgage applications require: 1) Minimum credit score 680, 2) Debt-to-income ratio under 43%, ' ||\n    '3) Down payment minimum 10%, 4) Employment verification for past 2 years. ' ||\n    'Senior underwriter review required for all mortgages.',\n    'ALL'\n);\n\nINSERT INTO loan_policies VALUES (\n    'POL-004', 'Auto Loan - Preferred Rate',\n    'Preferred customers qualify for auto loans at 5.9% APR for new vehicles, 7.9% for used. ' ||\n    'Maximum term 72 months for new, 60 months for used. No down payment required for amounts under $35,000.',\n    'PREFERRED'\n);\n\nINSERT INTO loan_policies VALUES (\n    'POL-005', 'Credit Risk Escalation',\n    'Loan applications with risk flags: 1) Agent assesses initial eligibility, 2) If debt-to-income exceeds 35%, ' ||\n    'escalate to underwriter, 3) If credit score below 650, escalate to senior underwriter, ' ||\n    '4) Applicant may request manager review of any decision.',\n    'ALL'\n);\n\n-- Seers Equity Applicant Data\nCREATE TABLE loan_applicants (\n    applicant_id        VARCHAR2(20) PRIMARY KEY,\n    name                VARCHAR2(100),\n    customer_tier       VARCHAR2(20),\n    credit_score        NUMBER,\n    annual_income       NUMBER(12,2),\n    existing_debt       NUMBER(12,2),\n    member_since        DATE,\n    premium_eligible    VARCHAR2(1)\n);\n\nINSERT INTO loan_applicants VALUES ('APPL-1001', 'Acme Industries LLC', 'PREFERRED', 780, 450000, 125000, DATE '2019-03-15', 'Y');\nINSERT INTO loan_applicants VALUES ('APPL-1002', 'TechStart Solutions', 'STANDARD', 695, 125000, 45000, DATE '2022-06-01', 'N');\nINSERT INTO loan_applicants VALUES ('APPL-1003', 'NewVenture Corp', 'STANDARD', 620, 75000, 35000, DATE '2024-01-10', 'N');\n\nCOMMIT;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Create tool functions to access this data.",
+      "text": "%md\n## Create the Data Access Functions\n\nThese functions become the agent's \"eyes\" into Seers Equity's enterprise data. Each function queries your tables and returns formatted information the agent can use.\n\n- **get_loan_policy** — Retrieves loan policies by type and optionally by customer tier\n- **get_applicant_info** — Retrieves applicant details including credit score, income, and eligibility",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Tool to look up policies\nCREATE OR REPLACE FUNCTION get_policy(\n    p_policy_type VARCHAR2,\n    p_member_tier VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    v_result CLOB := '';\nBEGIN\n    FOR rec IN (\n        SELECT policy_name, policy_text \n        FROM company_policies \n        WHERE UPPER(policy_name) LIKE '%' || UPPER(p_policy_type) || '%'\n        AND (applies_to = p_member_tier OR applies_to = 'ALL' OR p_member_tier IS NULL)\n    ) LOOP\n        v_result := v_result || rec.policy_name || ': ' || rec.policy_text || CHR(10);\n    END LOOP;\n    \n    IF v_result IS NULL THEN\n        RETURN 'No policy found for: ' || p_policy_type;\n    END IF;\n    RETURN v_result;\nEND;\n/\n\n-- Tool to look up customer\nCREATE OR REPLACE FUNCTION get_customer_info(\n    p_customer_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT 'Customer: ' || name || ', Tier: ' || tier || \n           ', Member since: ' || TO_CHAR(since, 'YYYY-MM-DD') ||\n           ', Total spend: $' || TO_CHAR(total_spend, '999,999') ||\n           ', Upgrade eligible: ' || upgrade_eligible\n    INTO v_result\n    FROM enterprise_customers\n    WHERE customer_id = p_customer_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Customer not found: ' || p_customer_id;\nEND;\n/",
+      "text": "%script\n-- Tool to look up loan policies\nCREATE OR REPLACE FUNCTION get_loan_policy(\n    p_policy_type  VARCHAR2,\n    p_customer_tier VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    v_result CLOB := '';\nBEGIN\n    FOR rec IN (\n        SELECT policy_name, policy_text \n        FROM loan_policies \n        WHERE UPPER(policy_name) LIKE '%' || UPPER(p_policy_type) || '%'\n        AND (applies_to = p_customer_tier OR applies_to = 'ALL' OR p_customer_tier IS NULL)\n    ) LOOP\n        v_result := v_result || rec.policy_name || ': ' || rec.policy_text || CHR(10);\n    END LOOP;\n    \n    IF v_result IS NULL THEN\n        RETURN 'No policy found for: ' || p_policy_type;\n    END IF;\n    RETURN v_result;\nEND;\n/\n\n-- Tool to look up applicant information\nCREATE OR REPLACE FUNCTION get_applicant_info(\n    p_applicant_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\n    v_dti NUMBER;\nBEGIN\n    SELECT 'Applicant: ' || name || \n           ', Tier: ' || customer_tier || \n           ', Credit Score: ' || credit_score ||\n           ', Annual Income: $' || TO_CHAR(annual_income, '999,999') ||\n           ', Existing Debt: $' || TO_CHAR(existing_debt, '999,999') ||\n           ', Debt-to-Income: ' || ROUND((existing_debt / annual_income) * 100, 1) || '%' ||\n           ', Member Since: ' || TO_CHAR(member_since, 'YYYY-MM-DD') ||\n           ', Premium Rate Eligible: ' || premium_eligible\n    INTO v_result\n    FROM loan_applicants\n    WHERE applicant_id = p_applicant_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Applicant not found: ' || p_applicant_id;\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n3. Register the tools.",
+      "text": "%md\n## Register the Tools\n\nRegister both functions as agent tools. The instructions tell the agent when to use each tool—loan policy questions use LOAN_POLICY_TOOL, applicant questions use APPLICANT_LOOKUP_TOOL.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'POLICY_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up company policies. Parameters: P_POLICY_TYPE (e.g. return, escalation), P_MEMBER_TIER (PREMIUM or STANDARD, optional). Always use this to answer policy questions.\",\n                        \"function\": \"get_policy\"}',\n        description => 'Retrieves company policies including return policies and escalation procedures'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CUSTOMER_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up customer information. Parameter: P_CUSTOMER_ID (e.g. CUST-1001). Returns tier, spend, and upgrade eligibility. Always use this when asked about specific customers.\",\n                        \"function\": \"get_customer_info\"}',\n        description => 'Retrieves customer details including tier, spend history, and upgrade eligibility'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'LOAN_POLICY_TOOL',\n        attributes  => '{\"instruction\": \"Look up Seers Equity loan policies. Parameters: P_POLICY_TYPE (e.g. personal, mortgage, auto, escalation), P_CUSTOMER_TIER (PREFERRED or STANDARD, optional). Always use this to answer loan policy and rate questions.\",\n                        \"function\": \"get_loan_policy\"}',\n        description => 'Retrieves Seers Equity loan policies including rates, requirements, and approval guidelines'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'APPLICANT_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up loan applicant information. Parameter: P_APPLICANT_ID (e.g. APPL-1001). Returns credit score, income, debt-to-income ratio, and premium eligibility. Always use this when asked about specific applicants.\",\n                        \"function\": \"get_applicant_info\"}',\n        description => 'Retrieves applicant details including credit score, income, and loan eligibility'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 3: Create an Informed Agent\n\nNow let's create an agent with access to enterprise data.\n\n1. Create the informed agent.",
+      "text": "%md\n## Create the Seers Equity Loan Agent\n\nCreate an agent that has access to your enterprise data tools. The role tells the agent it works for Seers Equity and should always use its tools—never guess about rates or applicant information.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'INFORMED_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a customer service agent for TechCorp. You have access to company policies and customer information. Always use your tools to look up real data - never guess.\"}',\n        description => 'Agent with enterprise data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'INFORMED_TASK',\n        attributes  => '{\"instruction\": \"Help the customer by looking up relevant policies and customer information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}\",\n                        \"tools\": [\"POLICY_LOOKUP_TOOL\", \"CUSTOMER_LOOKUP_TOOL\"]}',\n        description => 'Task with data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'INFORMED_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"INFORMED_AGENT\", \"task\": \"INFORMED_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with enterprise data'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'SEERS_LOAN_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seers Equity. You have access to company loan policies and applicant information. Always use your tools to look up real data - never guess about rates, policies, or applicant details.\"}',\n        description => 'Agent with Seers Equity enterprise data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'SEERS_LOAN_TASK',\n        attributes  => '{\"instruction\": \"Help the loan officer by looking up relevant policies and applicant information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}\",\n                        \"tools\": [\"LOAN_POLICY_TOOL\", \"APPLICANT_LOOKUP_TOOL\"]}',\n        description => 'Task with Seers Equity data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'SEERS_LOAN_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"SEERS_LOAN_AGENT\", \"task\": \"SEERS_LOAN_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with Seers Equity enterprise data'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n2. Set the team.",
+      "text": "%md\n## Activate the Seers Equity Agent\n\nSet the team so the Seers Equity agent handles your requests.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('INFORMED_TEAM');",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_LOAN_TEAM');",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Task 4: Ask the Same Questions Again\n\nNow let's see the difference. This time we use `SELECT AI AGENT` which has access to our enterprise data tools.\n\n1. Ask about return policy for premium members.",
+      "text": "%md\n## Ask About Personal Loan Rates Again\n\nNow ask the SAME question you asked the raw LLM earlier. This time, the agent has access to Seers Equity's policy data.\n\n**Watch the difference:** Instead of generic advice, you get YOUR actual rates: 7.9% APR for preferred customers, $100,000 maximum, no origination fee, same-day approval for amounts under $50K. This is your real business policy, not a guess.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is the return policy for premium members;",
+      "text": "%script\nSELECT AI AGENT What are the current interest rates for personal loans for preferred customers;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Now you get YOUR actual policy:** 90 days, no questions, waived fees, free shipping.\n\n2. Ask about the specific customer.",
+      "text": "%md\n## Ask About the Specific Applicant Again\n\nNow ask about applicant APPL-1001 again.\n\n**Watch the difference:** The agent looks up the applicant and reports factual information: Acme Industries LLC, PREFERRED tier, 780 credit score, $450K income, 27.8% debt-to-income, premium eligible = YES. Real data, not hallucination.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT Is customer CUST-1001 eligible for an upgrade;",
+      "text": "%script\nSELECT AI AGENT Is applicant APPL-1001 eligible for a premium rate loan;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**The agent looks up the customer and reports:** Yes, Acme Corp is eligible for upgrade.\n\n3. Ask about escalation.",
+      "text": "%md\n## Ask About Mortgage Requirements\n\nTry another question—what are Seers Equity's mortgage requirements?\n\n**Watch the result:** Your actual mortgage guidelines: minimum credit score 680, DTI under 43%, 10% down payment minimum, 2 years employment verification, senior underwriter required. The agent knows your procedures.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is the escalation process for billing disputes;",
+      "text": "%script\nSELECT AI AGENT What are the mortgage requirements at Seers Equity;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n**Your actual process:** Agent first, Team Lead if over $100, Manager after 24 hours, VP if requested.\n\n## Task 5: See the Tool Calls\n\nLet's verify the agent is using enterprise data.\n\n1. Query tool history.",
+      "text": "%md\n## Ask About Risk Escalation\n\nAsk about the escalation process for risky applications.\n\n**Watch the result:** Your actual escalation process: initial assessment by agent, underwriter if DTI exceeds 35%, senior underwriter if credit below 650, manager review available. The agent knows your risk management procedures.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as when,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "text": "%script\nSELECT AI AGENT What is the escalation process for high-risk loan applications;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you experienced the difference enterprise data makes:\n\n* `SELECT AI CHAT` - LLM general knowledge only, gave generic answers\n* `SELECT AI AGENT` - Agent with tools, gave YOUR specific answers\n* Enterprise data transforms generic AI into your AI\n\n**Key takeaway:** Agents don't fail because they're not smart—they fail because they don't know your business. Enterprise data is what transforms generic AI into your AI.\n\n## Learn More\n\n* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - David Start, January 2026",
+      "text": "%md\n## Verify the Agent Used Your Data\n\nLook at the tool execution history to confirm the agent queried your enterprise data.\n\nYou should see LOAN_POLICY_TOOL and APPLICANT_LOOKUP_TOOL calls, with results from your actual tables. This proves the agent is using real data, not making things up.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Cleanup (Optional)",
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called_at,\n    SUBSTR(output, 1, 80) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## What You Learned\n\nIn this lab, you experienced the transformative power of enterprise data at Seers Equity:\n\n| Approach | Result |\n|----------|--------|\n| **SELECT AI CHAT** (LLM only) | Generic answers, no business knowledge |\n| **SELECT AI AGENT** (with tools) | YOUR loan rates, YOUR applicants, YOUR procedures |\n\n**Key takeaway:** Agents don't fail because they're not smart—they fail because they don't know your business. Enterprise data is what transforms generic AI into Seers Equity's AI.\n\nThe LLM provides the intelligence. Your database provides the knowledge. Together, they create an agent that actually understands your lending business.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('INFORMED_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('INFORMED_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('INFORMED_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('POLICY_LOOKUP_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CUSTOMER_LOOKUP_TOOL', TRUE);\nDROP TABLE company_policies PURGE;\nDROP TABLE enterprise_customers PURGE;\nDROP FUNCTION get_policy;\nDROP FUNCTION get_customer_info;",
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('SEERS_LOAN_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('SEERS_LOAN_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('SEERS_LOAN_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('LOAN_POLICY_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPLICANT_LOOKUP_TOOL', TRUE);\nDROP TABLE loan_policies PURGE;\nDROP TABLE loan_applicants PURGE;\nDROP FUNCTION get_loan_policy;\nDROP FUNCTION get_applicant_info;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     }
   ],
