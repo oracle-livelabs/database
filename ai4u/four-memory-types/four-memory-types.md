@@ -4,14 +4,31 @@
 
 In this lab, you'll build all four types of memory that agents need to operate effectively.
 
-Just like people don't rely on one kind of memory, agents can't either. Agents need:
+### The Business Problem
 
-- **Short-term context** — What's happening right now
-- **Long-term facts** — Stable information about entities
-- **Decisions and outcomes** — What was decided and why
-- **Reference knowledge** — Policies and procedures
+Seers Equity's loan officers are struggling with different kinds of information gaps:
+
+- **During calls:** *"What did the client just say about their timeline? I was looking up their file."*
+- **Across sessions:** *"Sarah Chen has a rate exception, but I don't remember the details."*
+- **For compliance:** *"Why did we approve that loan at those terms? What was the reasoning?"*
+- **For consistency:** *"What's our policy on credit score requirements? Different people tell me different things."*
+
+These aren't the same problem. They need different solutions. Just like people don't rely on one kind of memory, agents can't either.
+
+### What You'll Learn
+
+In this lab, you'll build the four types of memory that solve these distinct problems:
+
+| Memory Type | What It Stores | Seers Equity Example |
+|-------------|----------------|----------------------|
+| **Short-term** | Current conversation context | Client's question, active request |
+| **Long-term** | Stable facts about entities | Sarah Chen prefers email, has 15% rate exception |
+| **Episodic** | Decisions and their outcomes | Approved Acme's loan because of 6-year history |
+| **Reference** | Policies and procedures | Credit requirements, rate tiers, approval rules |
 
 You'll create each type and see how they work together to make agents consistent and explainable.
+
+**What you'll build:** A complete memory system with all four memory types working together.
 
 Estimated Time: 15 minutes
 
@@ -74,7 +91,7 @@ We'll create structures for each memory type.
 
 ## Task 2: Short-Term Context (Current Task)
 
-Short-term context holds what's happening right now—the active information for completing the current task.
+Short-term context holds what's happening right now, the active information for completing the current task.
 
 1. Create functions for short-term context.
 
@@ -505,10 +522,10 @@ SELECT store_fact('CUST-001', 'Sensitive to shipping delays - prioritize expedit
 
 In this lab, you built the four types of agent memory:
 
-* **Short-term context** — Current task inputs (expires with task)
-* **Long-term facts** — Stable entity knowledge (persists forever)
-* **Decisions and outcomes** — Audit trail (persists forever)
-* **Reference knowledge** — Policies and procedures (human-maintained)
+* **Short-term context**: Current task inputs (expires with task)
+* **Long-term facts**: Stable entity knowledge (persists forever)
+* **Decisions and outcomes**: Audit trail (persists forever)
+* **Reference knowledge**: Policies and procedures (human-maintained)
 
 Together, these memories make agents consistent, contextual, and explainable.
 

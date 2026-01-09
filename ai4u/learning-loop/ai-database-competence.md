@@ -4,11 +4,28 @@
 
 In this lab, you'll build the learning loop that turns agents from first-day interns into seasoned contributors.
 
-Agents don't improve automatically just by running more tasks. Without recording outcomes and retrieving relevant experience, agents repeat the same mistakes and rediscover the same edge cases. The learning loop changes this: **action → result → memory → improvement**.
+### The Business Problem
 
-The technical foundation for this loop is **semantic search**—the ability to find relevant past experiences by meaning, not just keywords.
+Seers Equity approved a similar loan three months ago. Same amount, same credit profile, same industry. The loan officer who handled it negotiated special terms based on the client's cash flow timing. But today's loan officer has no idea that case exists.
 
-In this lab, you'll load an ONNX embedding model, add vector columns for semantic embeddings, and build the retrieval system that makes outcome-based learning possible.
+> *"We keep solving the same problems from scratch. Someone figured out how to handle seasonal cash flow for agricultural clients last quarter, but that knowledge just... disappeared."*
+>
+> Jennifer, Senior Loan Officer
+
+The problem isn't intelligence. It's retrieval. When a new situation arises, the agent can't find similar past situations to learn from. And when a similar keyword search fails ("seasonal" vs "cyclical" vs "variable cash flow"), the connection is lost.
+
+### What You'll Learn
+
+In this lab, you'll build **semantic search**, the ability to find relevant past experiences by *meaning*, not just keywords:
+
+1. **Load an ONNX embedding model** directly into the database
+2. **Add vector columns** to store semantic meaning alongside facts
+3. **Build semantic search** that finds "seasonal cash flow" when you search for "cyclical revenue"
+4. **Create the learning loop**: action → result → memory → improvement
+
+This is what lets agents learn from experience. Not just store it, but retrieve it when it's relevant.
+
+**What you'll build:** A semantic memory system that finds similar past decisions and improves over time.
 
 Estimated Time: 15 minutes
 
@@ -286,7 +303,7 @@ Now test finding relevant experience by meaning, not keywords.
     </copy>
     ```
 
-**Observe:** Finds BOTH billing experiences—one that failed and one that succeeded. The agent can learn from both.
+**Observe:** Finds BOTH billing experiences: one that failed and one that succeeded. The agent can learn from both.
 
 ## Task 7: See the Learning Loop in Action
 
@@ -354,7 +371,7 @@ In this lab, you built the learning loop:
 * Stored experiences that teach the agent
 * Saw how agents retrieve relevant experience to decide
 
-**Key takeaway:** This is how agents improve—not magically, but systematically. Action → result → memory → improvement. The AI database powers it all.
+**Key takeaway:** This is how agents improve. Not magically, but systematically. Action, result, memory, improvement. The AI database powers it all.
 
 ## Cleanup (Optional)
 

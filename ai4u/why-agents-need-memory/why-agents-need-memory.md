@@ -2,11 +2,29 @@
 
 ## Introduction
 
-In this lab, you'll experience the forgetting problem firsthand—and understand why memory is essential for agents that do real work.
+In this lab, you'll experience the forgetting problem firsthand and understand why memory is essential for agents that do real work.
 
 Most AI agents have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned last week, or what rules they're supposed to follow. This works for demos. It fails completely in production.
 
 You'll tell an agent something important, clear the session, and watch it forget everything.
+
+### The Business Problem
+
+Last month at Seers Equity, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with the company for six years and has a **15% rate exception** on file.
+
+Sarah was not happy:
+
+> *"I've told three different people my preferences. Why doesn't anyone remember? I specifically asked to be contacted by email, not phone. I have a rate exception that took months to negotiate. And every time I call, it's like starting over."*
+>
+> Sarah Chen, Acme Industries
+
+This is exactly what's happening with Seers Equity's AI assistants. They have amnesia. Every conversation starts fresh. A client shares their preferences, and five minutes later (or after a session reset), the AI has no idea who they are.
+
+### What You'll Learn
+
+This lab lets you experience the forgetting problem directly. You'll tell an agent about a client, clear the session, and watch it forget everything. This demonstrates why memory is essential, not just nice to have.
+
+**What you'll build:** Nothing permanent. This lab is about experiencing the problem that the rest of the workshop solves.
 
 Estimated Time: 10 minutes
 
@@ -30,7 +48,7 @@ This lab assumes you have:
 
 We'll create an agent that has no way to store or retrieve information between sessions.
 
-1. Create a simple customer service agent.
+1. Create a simple loan officer assistant agent.
 
     ```sql
     <copy>
@@ -50,7 +68,7 @@ We'll create an agent that has no way to store or retrieve information between s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'FORGETFUL_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a helpful customer service agent. Remember any preferences or information customers share with you so you can serve them better."}',
+                            "role": "You are a loan officer assistant for Seers Equity. Remember any preferences or information clients share with you so you can serve them better. Build relationships by recalling past interactions."}',
             description => 'Agent without memory capabilities'
         );
     EXCEPTION WHEN OTHERS THEN NULL;
@@ -60,7 +78,7 @@ We'll create an agent that has no way to store or retrieve information between s
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'FORGETFUL_TASK',
-            attributes  => '{"instruction": "Help the customer with their request. {query}",
+            attributes  => '{"instruction": "Help the loan officer with their request. Remember client preferences and details for future interactions. {query}",
                             "tools": ["BASIC_SQL_TOOL"]}',
             description => 'Task without memory tools'
         );
@@ -89,25 +107,25 @@ We'll create an agent that has no way to store or retrieve information between s
     </copy>
     ```
 
-## Task 2: Teach the Agent Something
+## Task 2: Teach the Agent About Sarah Chen
 
-Let's give the agent important information about a customer.
+Let's give the agent important information about a client, just like a real loan officer would share.
 
-1. Tell the agent about customer preferences.
+1. Tell the agent about Sarah Chen's preferences.
 
     ```sql
     <copy>
-    SELECT AI AGENT I am Sarah Chen from Acme Corp. I prefer email contact and my timezone is Pacific. Please remember this for future interactions;
+    SELECT AI AGENT Sarah Chen from Acme Industries prefers email contact, never phone. Her timezone is Pacific. She has a 15 percent rate exception that was approved last year. Please remember this for future interactions;
     </copy>
     ```
 
-The agent acknowledges and seems to understand.
+The agent acknowledges and seems to understand. It might even thank you for the information.
 
 2. Immediately ask about what you just said.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is my preferred contact method;
+    SELECT AI AGENT What is Sarah Chen's preferred contact method;
     </copy>
     ```
 
@@ -117,7 +135,7 @@ The agent can recall this—it's still in the conversation context.
 
     ```sql
     <copy>
-    SELECT AI AGENT What timezone am I in;
+    SELECT AI AGENT What rate exception does Sarah Chen have;
     </copy>
     ```
 
@@ -125,7 +143,7 @@ Still works—the context is maintained within the session.
 
 ## Task 3: Experience the Forgetting
 
-Now let's simulate what happens when the session ends and a new one begins.
+Now let's simulate what happens when the session ends and a new one begins, like when Sarah calls back the next day.
 
 1. Clear the team (simulating session end).
 
@@ -147,35 +165,35 @@ Now let's simulate what happens when the session ends and a new one begins.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is my preferred contact method;
+    SELECT AI AGENT What is Sarah Chen's preferred contact method;
     </copy>
     ```
 
 **The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
 
-4. Try asking about your name and company.
+4. Try asking about her rate exception.
 
     ```sql
     <copy>
-    SELECT AI AGENT Who am I and what company do I work for;
+    SELECT AI AGENT What rate exception does Sarah Chen from Acme Industries have;
     </copy>
     ```
 
-**Gone.** Everything you told it has been forgotten.
+**Gone.** Everything you told it has been forgotten. This is exactly what happened when Sarah Chen called Seers Equity and got quoted standard rates.
 
 ## Task 4: See the Business Impact
 
-This isn't just an inconvenience—it breaks real workflows.
+This isn't just an inconvenience. It breaks real workflows and damages client relationships.
 
-1. Simulate Day 1: Customer reports an issue.
+1. Simulate Day 1: Client shares important information.
 
     ```sql
     <copy>
-    SELECT AI AGENT I am having problems with my order ORD-5678. The shipment is delayed and I need it urgently for a client presentation on Friday;
+    SELECT AI AGENT I am working with client TechStart Inc. They need all communications sent to their CFO, not the general email. They are sensitive about being contacted during market hours. They have a special pricing tier because they bring us 10 loans per year;
     </copy>
     ```
 
-2. The agent acknowledges the issue. Now simulate Day 2:
+2. The agent acknowledges the information. Now simulate Day 2:
 
     ```sql
     <copy>
@@ -184,15 +202,15 @@ This isn't just an inconvenience—it breaks real workflows.
     </copy>
     ```
 
-3. Customer calls back for an update.
+3. A different loan officer asks about TechStart.
 
     ```sql
     <copy>
-    SELECT AI AGENT Any update on my order issue;
+    SELECT AI AGENT What special requirements does TechStart Inc have;
     </copy>
     ```
 
-**The agent has no idea what issue you're talking about.** The customer has to explain everything again.
+**The agent has no idea.** The new loan officer might contact the wrong person, call during market hours, or quote the wrong rates. The client gets frustrated. The relationship suffers.
 
 ## Task 5: Understand What's Missing
 
@@ -207,7 +225,7 @@ Let's be clear about what the agent lacks:
     </copy>
     ```
 
-The forgetful agent has no memory tools—no way to store or retrieve information.
+The forgetful agent has no memory tools. It has no way to store or retrieve information persistently.
 
 2. Check if anything was recorded in history.
 
@@ -222,16 +240,34 @@ The forgetful agent has no memory tools—no way to store or retrieve informatio
     </copy>
     ```
 
+The tool calls are logged, but the client information itself? Lost.
+
+## Task 6: The Real Cost to Seers Equity
+
+Consider what this forgetting costs:
+
+| What's Forgotten | Business Impact |
+|------------------|-----------------|
+| Contact preferences | Clients get annoyed by wrong contact method |
+| Rate exceptions | Long-term clients quoted wrong rates |
+| Relationship history | Every interaction feels like starting over |
+| Special requirements | Compliance and service failures |
+| Past decisions | Same issues get re-decided differently |
+
+Sarah Chen's experience wasn't unique. It's happening every day with every client who interacts with Seers Equity's AI assistants.
+
 ## Summary
 
 In this lab, you experienced the forgetting problem:
 
-* Told an agent important information
+* Told an agent important client information
 * Watched it forget everything when the session ended
 * Understood why this breaks real workflows
 * Recognized the gap between chat memory and agentic memory
 
-**Key takeaway:** Intelligence doesn't matter if an agent can't remember what just happened. Without memory, agents perform. With memory, agents progress.
+**Key takeaway:** Intelligence doesn't matter if an agent can't remember what just happened. Without memory, agents perform. With memory, agents progress. Sarah Chen shouldn't have to explain her preferences three times, and with agentic memory, she won't have to.
+
+The next labs will show you how to solve this problem.
 
 ## Learn More
 

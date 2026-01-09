@@ -8,6 +8,27 @@ Planning is what separates agents from chatbots. Before executing anything, an a
 
 You'll give an agent a multi-step task and watch how it decomposes the work.
 
+### The Business Problem
+
+At Seers Equity, preparing for a client call is tedious. A loan officer needs to pull together information from multiple places:
+
+- **Contact info**: How does this client prefer to be reached?
+- **Loan history**: What applications do they have pending?
+- **Rate eligibility**: What tier are they in?
+- **Credit information**: What credit tier applies?
+
+> *"Before every client call, I spend 10-15 minutes just gathering the information I need. By the time I'm ready, I've forgotten why they called."*
+>
+> Jennifer, Loan Officer
+
+The loan officers need an agent that can plan and execute a multi-step information retrieval: analyze what's needed, identify the right tools, determine the order, and synthesize the results.
+
+### What You'll Learn
+
+This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seers Equity's "gathering" problem.
+
+**What you'll build:** A multi-tool agent that plans information retrieval for loan applicants.
+
 Estimated Time: 10 minutes
 
 ### Objectives
@@ -32,29 +53,31 @@ To see planning in action, we need an agent with multiple tools. The agent will 
 
     ```sql
     <copy>
-    -- Customer table
-    CREATE TABLE demo_customers (
-        customer_id   VARCHAR2(20) PRIMARY KEY,
-        name          VARCHAR2(100),
-        tier          VARCHAR2(20),
-        contact_email VARCHAR2(100)
+    -- Applicant table
+    CREATE TABLE demo_applicants (
+        applicant_id    VARCHAR2(20) PRIMARY KEY,
+        name            VARCHAR2(100),
+        credit_tier     VARCHAR2(20),
+        contact_email   VARCHAR2(100),
+        contact_pref    VARCHAR2(20)
     );
 
-    INSERT INTO demo_customers VALUES ('CUST-001', 'Acme Corp', 'PREMIUM', 'contact@acme.com');
-    INSERT INTO demo_customers VALUES ('CUST-002', 'TechStart', 'STANDARD', 'info@techstart.com');
+    INSERT INTO demo_applicants VALUES ('APP-001', 'Acme Corp', 'PREFERRED', 'sarah@acme.com', 'EMAIL');
+    INSERT INTO demo_applicants VALUES ('APP-002', 'TechStart', 'STANDARD', 'info@techstart.com', 'PHONE');
 
-    -- Order table
-    CREATE TABLE demo_orders (
-        order_id    VARCHAR2(20) PRIMARY KEY,
-        customer_id VARCHAR2(20),
-        status      VARCHAR2(20),
-        amount      NUMBER(10,2),
-        order_date  DATE
+    -- Loan application table
+    CREATE TABLE demo_loans (
+        loan_id       VARCHAR2(20) PRIMARY KEY,
+        applicant_id  VARCHAR2(20),
+        status        VARCHAR2(30),
+        amount        NUMBER(12,2),
+        loan_type     VARCHAR2(30),
+        rate          NUMBER(5,2)
     );
 
-    INSERT INTO demo_orders VALUES ('ORD-100', 'CUST-001', 'SHIPPED', 500.00, SYSDATE - 2);
-    INSERT INTO demo_orders VALUES ('ORD-101', 'CUST-001', 'PENDING', 250.00, SYSDATE);
-    INSERT INTO demo_orders VALUES ('ORD-102', 'CUST-002', 'DELIVERED', 100.00, SYSDATE - 5);
+    INSERT INTO demo_loans VALUES ('LOAN-100', 'APP-001', 'APPROVED', 150000, 'Business', 7.9);
+    INSERT INTO demo_loans VALUES ('LOAN-101', 'APP-001', 'PENDING', 75000, 'Personal', 8.5);
+    INSERT INTO demo_loans VALUES ('LOAN-102', 'APP-002', 'UNDER_REVIEW', 45000, 'Auto', 9.9);
 
     COMMIT;
     </copy>
@@ -64,43 +87,47 @@ To see planning in action, we need an agent with multiple tools. The agent will 
 
     ```sql
     <copy>
-    -- Tool 1: Look up customer
-    CREATE OR REPLACE FUNCTION get_customer(p_customer_id VARCHAR2) RETURN VARCHAR2 AS
+    -- Tool 1: Look up applicant
+    CREATE OR REPLACE FUNCTION get_applicant(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS
         v_result VARCHAR2(500);
     BEGIN
-        SELECT 'Customer: ' || name || ', Tier: ' || tier || ', Email: ' || contact_email
-        INTO v_result FROM demo_customers WHERE customer_id = p_customer_id;
+        SELECT 'Applicant: ' || name || ', Credit Tier: ' || credit_tier || 
+               ', Contact: ' || contact_email || ' (' || contact_pref || ')'
+        INTO v_result FROM demo_applicants WHERE applicant_id = p_applicant_id;
         RETURN v_result;
-    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Customer not found: ' || p_customer_id;
+    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found: ' || p_applicant_id;
     END;
     /
 
-    -- Tool 2: Get customer orders
-    CREATE OR REPLACE FUNCTION get_customer_orders(p_customer_id VARCHAR2) RETURN VARCHAR2 AS
+    -- Tool 2: Get applicant loans
+    CREATE OR REPLACE FUNCTION get_applicant_loans(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS
         v_result CLOB := '';
         v_count NUMBER := 0;
     BEGIN
-        FOR rec IN (SELECT order_id, status, amount, order_date 
-                    FROM demo_orders WHERE customer_id = p_customer_id ORDER BY order_date DESC) LOOP
-            v_result := v_result || rec.order_id || ': ' || rec.status || ', $' || rec.amount || CHR(10);
+        FOR rec IN (SELECT loan_id, status, amount, loan_type, rate 
+                    FROM demo_loans WHERE applicant_id = p_applicant_id ORDER BY amount DESC) LOOP
+            v_result := v_result || rec.loan_id || ': ' || rec.status || ', $' || rec.amount || 
+                       ' ' || rec.loan_type || ' at ' || rec.rate || '%' || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        IF v_count = 0 THEN RETURN 'No orders found for customer.'; END IF;
-        RETURN 'Found ' || v_count || ' orders:' || CHR(10) || v_result;
+        IF v_count = 0 THEN RETURN 'No loans found for applicant.'; END IF;
+        RETURN 'Found ' || v_count || ' loans:' || CHR(10) || v_result;
     END;
     /
 
-    -- Tool 3: Check if customer is eligible for priority support
-    CREATE OR REPLACE FUNCTION check_priority_eligibility(p_customer_id VARCHAR2) RETURN VARCHAR2 AS
+    -- Tool 3: Check rate eligibility
+    CREATE OR REPLACE FUNCTION check_rate_eligibility(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS
         v_tier VARCHAR2(20);
     BEGIN
-        SELECT tier INTO v_tier FROM demo_customers WHERE customer_id = p_customer_id;
-        IF v_tier = 'PREMIUM' THEN
-            RETURN 'ELIGIBLE: Customer is Premium tier - priority support available.';
+        SELECT credit_tier INTO v_tier FROM demo_applicants WHERE applicant_id = p_applicant_id;
+        IF v_tier = 'PREFERRED' THEN
+            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% APR. Up to $500K limit.';
+        ELSIF v_tier = 'STANDARD' THEN
+            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% APR. Up to $100K limit.';
         ELSE
-            RETURN 'NOT ELIGIBLE: Customer is ' || v_tier || ' tier - standard support only.';
+            RETURN 'SUBPRIME RATES: Rates starting at 14.9% APR. Up to $25K limit.';
         END IF;
-    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Customer not found.';
+    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found.';
     END;
     /
     </copy>
@@ -112,30 +139,30 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'GET_CUSTOMER_TOOL',
-            attributes  => '{"instruction": "Get customer details by ID. Parameter: P_CUSTOMER_ID (e.g. CUST-001). Returns name, tier, and email.",
-                            "function": "get_customer"}',
-            description => 'Retrieves customer name, tier, and contact email'
+            tool_name   => 'GET_APPLICANT_TOOL',
+            attributes  => '{"instruction": "Get applicant details by ID. Parameter: P_APPLICANT_ID (e.g. APP-001). Returns name, credit tier, and contact info.",
+                            "function": "get_applicant"}',
+            description => 'Retrieves applicant name, credit tier, and contact preferences'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'GET_ORDERS_TOOL',
-            attributes  => '{"instruction": "Get all orders for a customer. Parameter: P_CUSTOMER_ID (e.g. CUST-001). Returns order IDs, statuses, and amounts.",
-                            "function": "get_customer_orders"}',
-            description => 'Retrieves customer order history with status and amounts'
+            tool_name   => 'GET_LOANS_TOOL',
+            attributes  => '{"instruction": "Get all loans for an applicant. Parameter: P_APPLICANT_ID (e.g. APP-001). Returns loan IDs, statuses, amounts, and rates.",
+                            "function": "get_applicant_loans"}',
+            description => 'Retrieves applicant loan history with status and rates'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'CHECK_PRIORITY_TOOL',
-            attributes  => '{"instruction": "Check if customer qualifies for priority support. Parameter: P_CUSTOMER_ID (e.g. CUST-001). Returns ELIGIBLE or NOT ELIGIBLE.",
-                            "function": "check_priority_eligibility"}',
-            description => 'Checks if customer tier qualifies for priority support'
+            tool_name   => 'CHECK_RATES_TOOL',
+            attributes  => '{"instruction": "Check rate eligibility for an applicant. Parameter: P_APPLICANT_ID (e.g. APP-001). Returns eligible rate tier and limits.",
+                            "function": "check_rate_eligibility"}',
+            description => 'Checks what rate tier the applicant qualifies for'
         );
     END;
     /
@@ -150,7 +177,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'PLANNING_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a customer service agent. Use your tools to look up customer information, orders, and support eligibility. Always use the tools - never guess or make up information."}',
+                            "role": "You are a loan officer assistant for Seers Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information."}',
             description => 'Agent that plans multi-step responses'
         );
     END;
@@ -159,8 +186,8 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'PLANNING_TASK',
-            attributes  => '{"instruction": "Answer customer inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
-                            "tools": ["GET_CUSTOMER_TOOL", "GET_ORDERS_TOOL", "CHECK_PRIORITY_TOOL"]}',
+            attributes  => '{"instruction": "Answer loan officer inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
+                            "tools": ["GET_APPLICANT_TOOL", "GET_LOANS_TOOL", "CHECK_RATES_TOOL"]}',
             description => 'Task with multiple tools for planning demonstration'
         );
     END;
@@ -187,7 +214,7 @@ Let's start with a simple request that needs only one tool.
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
-    SELECT AI AGENT Who is customer CUST-001;
+    SELECT AI AGENT Who is applicant APP-001;
     </copy>
     ```
 
@@ -205,17 +232,17 @@ Let's start with a simple request that needs only one tool.
     </copy>
     ```
 
-**Observe:** The agent planned to use just GET_CUSTOMER_TOOL because that's all the question required.
+**Observe:** The agent planned to use just GET_APPLICANT_TOOL because that's all the question required.
 
 ## Task 3: Observe Multi-Tool Planning
 
-Now let's ask a question that requires multiple tools.
+Now let's ask a question that requires multiple tools, just like a loan officer preparing for a client call.
 
 1. Ask a complex question.
 
     ```sql
     <copy>
-    SELECT AI AGENT Give me a complete picture of customer CUST-001 including their orders and support eligibility;
+    SELECT AI AGENT Give me a complete picture of applicant APP-001 including their loans and rate eligibility;
     </copy>
     ```
 
@@ -234,9 +261,9 @@ Now let's ask a question that requires multiple tools.
     ```
 
 **Observe:** The agent planned to use multiple tools:
-- GET_CUSTOMER_TOOL to get basic info
-- GET_ORDERS_TOOL to get order history
-- CHECK_PRIORITY_TOOL to verify eligibility
+- GET_APPLICANT_TOOL to get basic info
+- GET_LOANS_TOOL to get loan history
+- CHECK_RATES_TOOL to verify rate eligibility
 
 3. Notice the sequence—the agent determined the logical order.
 
@@ -251,8 +278,8 @@ The task instruction guides how the agent plans. Let's modify it.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'STRUCTURED_TASK',
-            attributes  => '{"instruction": "For customer inquiries, ALWAYS follow this exact sequence: 1. First, look up the customer using GET_CUSTOMER_TOOL 2. Then, get their orders using GET_ORDERS_TOOL 3. Finally, check priority eligibility using CHECK_PRIORITY_TOOL. Report all findings. User request: {query}",
-                            "tools": ["GET_CUSTOMER_TOOL", "GET_ORDERS_TOOL", "CHECK_PRIORITY_TOOL"]}',
+            attributes  => '{"instruction": "For applicant inquiries, ALWAYS follow this exact sequence: 1. First, look up the applicant using GET_APPLICANT_TOOL 2. Then, get their loans using GET_LOANS_TOOL 3. Finally, check rate eligibility using CHECK_RATES_TOOL. Report all findings. User request: {query}",
+                            "tools": ["GET_APPLICANT_TOOL", "GET_LOANS_TOOL", "CHECK_RATES_TOOL"]}',
             description => 'Task with explicit planning instructions'
         );
     END;
@@ -277,7 +304,7 @@ The task instruction guides how the agent plans. Let's modify it.
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
-    SELECT AI AGENT Tell me about customer CUST-001;
+    SELECT AI AGENT Tell me about applicant APP-001;
     </copy>
     ```
 
@@ -294,16 +321,16 @@ The task instruction guides how the agent plans. Let's modify it.
     </copy>
     ```
 
-**Observe:** The agent followed the explicit plan: customer first, then orders, then eligibility—in that order.
+**Observe:** The agent followed the explicit plan: applicant first, then loans, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
 
 ## Task 5: Understand Why Planning Matters
 
 Planning provides:
 
-1. **Predictability** — You can anticipate what the agent will do
-2. **Debuggability** — When something goes wrong, you can see where
-3. **Efficiency** — The agent gathers what it needs without redundant calls
-4. **Control** — You shape the plan through instructions
+1. **Predictability**: You can anticipate what the agent will do
+2. **Debuggability**: When something goes wrong, you can see where
+3. **Efficiency**: The agent gathers what it needs without redundant calls
+4. **Control**: You shape the plan through instructions
 
 Query the complete execution sequence:
 
@@ -328,7 +355,7 @@ In this lab, you observed how agents plan their work:
 * Saw how multi-step questions trigger multi-tool plans
 * Learned how instructions shape the planning process
 
-**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views.
+**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Seers Equity, this means loan officers get complete client summaries in seconds, not minutes.
 
 ## Learn More
 
@@ -347,13 +374,13 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('PLANNING_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_CUSTOMER_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ORDERS_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_PRIORITY_TOOL', TRUE);
-DROP TABLE demo_orders PURGE;
-DROP TABLE demo_customers PURGE;
-DROP FUNCTION get_customer;
-DROP FUNCTION get_customer_orders;
-DROP FUNCTION check_priority_eligibility;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_APPLICANT_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_LOANS_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RATES_TOOL', TRUE);
+DROP TABLE demo_loans PURGE;
+DROP TABLE demo_applicants PURGE;
+DROP FUNCTION get_applicant;
+DROP FUNCTION get_applicant_loans;
+DROP FUNCTION check_rate_eligibility;
 </copy>
 ```

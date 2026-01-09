@@ -4,11 +4,33 @@
 
 In this capstone lab, you'll build a complete agent system with tools that act, rules that constrain, and human oversight that keeps people in control.
 
-You'll create two agents:
-- **EXPENSE_AGENT** — Employees use this to submit expenses
-- **APPROVAL_AGENT** — Managers use this to review and approve expenses
+### The Business Problem
 
-This separation demonstrates real-world agent design: different roles, different capabilities, different tools.
+Seers Equity is ready to deploy AI agents, but the compliance team has concerns:
+
+> *"We can't have an AI approving $50,000 expenses automatically. What if it makes a mistake? Where's the audit trail? How do we prove we followed policy?"*
+>
+> Rachel, Compliance Director
+
+Legitimate concerns. The previous labs gave agents memory and intelligence. This lab gives them **boundaries and accountability**:
+
+- **Tools define what's possible**: No tool = no action
+- **Rules define what's allowed**: JSON-configured business logic
+- **Separation of duties**: Different agents for different roles
+- **Audit trails**: Every action logged and traceable
+
+### What You'll Learn
+
+In this capstone lab, you'll build a complete expense system with two agents:
+
+| Agent | Role | Tools | Constraint |
+|-------|------|-------|------------|
+| **EXPENSE_AGENT** | Employees submit expenses | Submit only | Can't approve their own |
+| **APPROVAL_AGENT** | Managers review/approve | Approve, Reject | Must review before approving |
+
+This separation demonstrates real-world agent design: different roles, different capabilities, different tools. It's the foundation for compliant AI deployment.
+
+**What you'll build:** A two-agent expense system with safety rules, separation of duties, and complete audit trails.
 
 Estimated Time: 25 minutes
 
@@ -691,8 +713,8 @@ Note: The $7500 expense was blocked and not created.
 In this capstone lab, you built a complete agent system with:
 
 **Two Agents with Different Roles:**
-- EXPENSE_AGENT — Employees submit expenses
-- APPROVAL_AGENT — Managers review and decide
+- EXPENSE_AGENT: Employees submit expenses
+- APPROVAL_AGENT: Managers review and decide
 
 **Safety Rules:**
 - AUTO_APPROVE: Under $1000 (not equipment)

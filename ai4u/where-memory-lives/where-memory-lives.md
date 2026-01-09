@@ -2,13 +2,30 @@
 
 ## Introduction
 
-In this lab, you'll build a **memory core**—the converged database foundation that gives AI agents **agentic memory**.
+In this lab, you'll build a **memory core**, the converged database foundation that gives AI agents **agentic memory**.
 
-The technology that unlocks agentic memory isn't another model layer—it's a converged database capable of serving as the memory core for agentic systems. Not a vector store. Not a caching layer. A real database that can handle everything agents need.
+### The Business Problem
 
-You'll create a memory table using JSON for flexible storage, build tools the agent can use to remember and recall facts, and have actual conversations with an AI that uses your database as its memory core.
+In Lab 5, you experienced the forgetting problem firsthand. Sarah Chen from Acme Industries had to explain her preferences and rate exception to three different loan officers. The AI assistant forgot everything the moment each session ended.
 
-This isn't a simulation—you'll actually converse with an AI agent that uses your database as its memory core.
+This isn't just frustrating. It's costing Seers Equity business. Clients feel unvalued. Loan officers waste time re-gathering information. And compliance can't track what was communicated.
+
+> *"Every conversation starts from zero. I told your AI about my preferences last week. Today it has no idea who I am."*
+>
+> Sarah Chen, Acme Industries
+
+### What You'll Learn
+
+In this lab, you'll solve the forgetting problem by building a **memory core**, the database foundation that gives agents persistent memory:
+
+1. **Create memory tables** using Oracle's native JSON for flexible storage
+2. **Build remember/recall functions** that agents call as tools
+3. **Register the tools** so the agent can store and retrieve facts
+4. **Test across sessions** to prove memory persists
+
+The key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.
+
+**What you'll build:** A persistent memory system where agents store and recall client information across sessions.
 
 Estimated Time: 15 minutes
 
@@ -28,7 +45,7 @@ This lab assumes you have:
 
 ## Task 1: Create the Memory Core Table
 
-The memory table is the foundation—where the agent stores everything it learns.
+The memory table is the foundation, where the agent stores everything it learns.
 
 1. Create the memory core table.
 
@@ -310,7 +327,7 @@ In this lab, you built a **memory core** using Oracle's converged database:
 * Had conversations with an agent that remembers
 * Verified persistence across sessions
 
-**Key takeaway:** The memory core isn't another model layer—it's a converged database. Everything lives in one place: one transaction, one security model, one query language.
+**Key takeaway:** The memory core isn't another model layer. It's a converged database. Everything lives in one place: one transaction, one security model, one query language.
 
 ## Learn More
 

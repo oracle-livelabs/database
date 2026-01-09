@@ -2,9 +2,30 @@
 
 ## Introduction
 
-In this lab, you'll directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done.
+In this lab, you'll directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seers Equity**.
 
 Zero-shot prompting means: one question, one answer, done. It's useful for general knowledge, but it doesn't execute workflows or access your data. Agents break tasks into steps, use tools, and actually complete the work.
+
+### The Business Problem
+
+At Seers Equity, loan officers tried using the AI chatbot to check loan statuses. The results were frustrating:
+
+> *"I asked about a client's loan status, and it told me how to log in. I know how to log in! I wanted the actual status."*
+>
+> Marcus, Senior Loan Officer
+
+The chatbot was helpful for general questions like "What's a good credit score?" or "How do mortgages work?" But when loan officers needed actual data or wanted to take action, it fell short.
+
+Seers Equity needs AI that can:
+- **Access real data** — Query the actual loan database
+- **Take action** — Update statuses, not just explain how to update them
+- **Coordinate steps** — Check a condition, then act on it
+
+### What You'll Learn
+
+This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). You'll see exactly where each approach works and where it fails.
+
+**What you'll build:** A comparison demonstrating when to use chat vs agents, plus an agent that can both read AND update loan data.
 
 Estimated Time: 10 minutes
 
@@ -39,29 +60,29 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
     ```sql
     <copy>
-    SELECT AI CHAT How do I process an expense report;
+    SELECT AI CHAT How do I process a loan application;
     </copy>
     ```
 
 3. Now try asking for something that requires YOUR data.
 
-    **Observe:** The AI cannot answer this because it has no access to your data. It gives generic advice about how to check order status, but it does not actually know YOUR order 12345.
+    **Observe:** The AI cannot answer this because it has no access to your data. It gives generic advice about how to check loan status, but it does not actually know YOUR loan LOAN-12345.
 
     This is the limitation of zero-shot: great for general knowledge, useless for your specific business data.
 
     ```sql
     <copy>
-    SELECT AI CHAT What is the status of order 12345;
+    SELECT AI CHAT What is the status of loan LOAN-12345;
     </copy>
     ```
 
 4. Ask it to do something.
 
-    **Observe:** The AI explains HOW to update an order but cannot actually do it. Zero-shot can advise; it cannot act.
+    **Observe:** The AI explains HOW to update a loan but cannot actually do it. Zero-shot can advise; it cannot act.
 
     ```sql
     <copy>
-    SELECT AI CHAT Update order 12345 to delivered;
+    SELECT AI CHAT Update loan LOAN-12345 to approved;
     </copy>
     ```
 
@@ -69,31 +90,33 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
 Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.
 
-1. Create a sample orders table with comments to help Select AI understand the schema.
+1. Create a sample loan applications table with comments to help Select AI understand the schema.
 
     ```sql
     <copy>
-    -- Create the orders table
-    CREATE TABLE sample_orders (
-        order_id    VARCHAR2(20) PRIMARY KEY,
-        customer    VARCHAR2(100),
-        status      VARCHAR2(20),
-        amount      NUMBER(10,2),
-        order_date  DATE DEFAULT SYSDATE
+    -- Create the loan applications table
+    CREATE TABLE sample_loans (
+        application_id  VARCHAR2(20) PRIMARY KEY,
+        applicant       VARCHAR2(100),
+        status          VARCHAR2(30),
+        amount          NUMBER(12,2),
+        loan_type       VARCHAR2(30),
+        application_date DATE DEFAULT SYSDATE
     );
 
     -- Add comments so Select AI understands the table
-    COMMENT ON TABLE sample_orders IS 'Orders table containing order ID, customer name, status, amount, and date.';
-    COMMENT ON COLUMN sample_orders.order_id IS 'Unique order identifier. Examples: 12345, 12346, 12347.';
-    COMMENT ON COLUMN sample_orders.customer IS 'Customer or company name who placed the order';
-    COMMENT ON COLUMN sample_orders.status IS 'Order status: PENDING, SHIPPED, or DELIVERED';
-    COMMENT ON COLUMN sample_orders.amount IS 'Order total in US dollars';
-    COMMENT ON COLUMN sample_orders.order_date IS 'Date when the order was placed';
+    COMMENT ON TABLE sample_loans IS 'Seers Equity loan applications with status tracking.';
+    COMMENT ON COLUMN sample_loans.application_id IS 'Unique loan application identifier. Examples: LOAN-12345, LOAN-12346.';
+    COMMENT ON COLUMN sample_loans.applicant IS 'Name of the person or business applying for the loan';
+    COMMENT ON COLUMN sample_loans.status IS 'Application status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';
+    COMMENT ON COLUMN sample_loans.amount IS 'Requested loan amount in US dollars';
+    COMMENT ON COLUMN sample_loans.loan_type IS 'Type of loan: Personal, Auto, Mortgage, or Business';
+    COMMENT ON COLUMN sample_loans.application_date IS 'Date the application was submitted';
 
     -- Insert sample data
-    INSERT INTO sample_orders VALUES ('12345', 'Acme Corp', 'SHIPPED', 299.00, SYSDATE - 3);
-    INSERT INTO sample_orders VALUES ('12346', 'TechStart', 'PENDING', 150.00, SYSDATE - 1);
-    INSERT INTO sample_orders VALUES ('12347', 'GlobalCo', 'DELIVERED', 499.00, SYSDATE - 7);
+    INSERT INTO sample_loans VALUES ('LOAN-12345', 'Acme Corp', 'UNDER_REVIEW', 150000, 'Business', SYSDATE - 3);
+    INSERT INTO sample_loans VALUES ('LOAN-12346', 'TechStart', 'PENDING', 45000, 'Business', SYSDATE - 1);
+    INSERT INTO sample_loans VALUES ('LOAN-12347', 'GlobalCo', 'APPROVED', 275000, 'Mortgage', SYSDATE - 7);
     COMMIT;
     </copy>
     ```
@@ -106,24 +129,24 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
         DBMS_CLOUD_AI.SET_ATTRIBUTE(
             profile_name    => 'genai',
             attribute_name  => 'object_list',
-            attribute_value => '[{"owner": "' || USER || '", "name": "SAMPLE_ORDERS"}]'
+            attribute_value => '[{"owner": "' || USER || '", "name": "SAMPLE_LOANS"}]'
         );
     END;
     /
     </copy>
     ```
 
-3. Use SELECT AI NARRATE to query the order status.
+3. Use SELECT AI NARRATE to query the loan status.
 
     **Observe:** SELECT AI CAN read your data and answer questions about it.
 
     ```sql
     <copy>
-    SELECT AI NARRATE What is the status of order 12345;
+    SELECT AI NARRATE What is the status of loan LOAN-12345;
     </copy>
     ```
 
-SELECT AI returned the actual status: SHIPPED. Compare this to zero-shot which could only give generic advice.
+SELECT AI returned the actual status: UNDER_REVIEW. Compare this to zero-shot which could only give generic advice.
 
 4. Now try to update using SELECT AI.
 
@@ -131,80 +154,80 @@ SELECT AI returned the actual status: SHIPPED. Compare this to zero-shot which c
 
     ```sql
     <copy>
-    SELECT AI NARRATE Update order 12345 to delivered;
+    SELECT AI NARRATE Update loan LOAN-12345 to approved;
     </copy>
     ```
 
-5. Verify the order was NOT updated.
+5. Verify the loan was NOT updated.
 
     ```sql
     <copy>
-    SELECT order_id, status FROM sample_orders WHERE order_id = '12345';
+    SELECT application_id, status FROM sample_loans WHERE application_id = 'LOAN-12345';
     </copy>
     ```
 
-Still SHIPPED. SELECT AI can read but cannot write.
+Still UNDER_REVIEW. SELECT AI can read but cannot write.
 
 ## Task 3: Create an Agent with Tools
 
-Now let's create an agent that can both READ and WRITE. We'll give it two tools: one to look up orders and one to update them.
+Now let's create an agent that can both READ and WRITE. We'll give it two tools: one to look up loans and one to update them.
 
-1. Create a function to look up orders (read).
+1. Create a function to look up loans (read).
 
     ```sql
     <copy>
-    CREATE OR REPLACE FUNCTION lookup_order(
-        p_order_id VARCHAR2
+    CREATE OR REPLACE FUNCTION lookup_loan(
+        p_application_id VARCHAR2
     ) RETURN VARCHAR2 AS
         v_result VARCHAR2(500);
     BEGIN
-        SELECT 'Order ' || order_id || ': ' || status || 
-               ', Customer: ' || customer || 
+        SELECT 'Loan ' || application_id || ': ' || status || 
+               ', Applicant: ' || applicant || 
                ', Amount: $' || amount ||
-               ', Date: ' || TO_CHAR(order_date, 'YYYY-MM-DD')
+               ', Type: ' || loan_type
         INTO v_result
-        FROM sample_orders
-        WHERE order_id = p_order_id;
+        FROM sample_loans
+        WHERE application_id = p_application_id;
         
         RETURN v_result;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            RETURN 'Order ' || p_order_id || ' not found.';
+            RETURN 'Loan application ' || p_application_id || ' not found.';
     END;
     /
     </copy>
     ```
 
-2. Create a function to update order status (write).
+2. Create a function to update loan status (write).
 
     ```sql
     <copy>
-    CREATE OR REPLACE FUNCTION update_order_status(
-        p_order_id   VARCHAR2,
-        p_new_status VARCHAR2
+    CREATE OR REPLACE FUNCTION update_loan_status(
+        p_application_id VARCHAR2,
+        p_new_status     VARCHAR2
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
-        v_old_status VARCHAR2(20);
+        v_old_status VARCHAR2(30);
     BEGIN
         -- Get current status
         SELECT status INTO v_old_status
-        FROM sample_orders
-        WHERE order_id = p_order_id;
+        FROM sample_loans
+        WHERE application_id = p_application_id;
         
         -- Update the status
-        UPDATE sample_orders
+        UPDATE sample_loans
         SET status = UPPER(p_new_status)
-        WHERE order_id = p_order_id;
+        WHERE application_id = p_application_id;
         
         COMMIT;
         
-        RETURN 'Order ' || p_order_id || ' updated from ' || v_old_status || ' to ' || UPPER(p_new_status);
+        RETURN 'Loan ' || p_application_id || ' updated from ' || v_old_status || ' to ' || UPPER(p_new_status);
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            RETURN 'Order ' || p_order_id || ' not found. Cannot update.';
+            RETURN 'Loan application ' || p_application_id || ' not found. Cannot update.';
         WHEN OTHERS THEN
             ROLLBACK;
-            RETURN 'Error updating order: ' || SQLERRM;
+            RETURN 'Error updating loan: ' || SQLERRM;
     END;
     /
     </copy>
@@ -216,20 +239,20 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'ORDER_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up order status and details by order ID. Parameter: P_ORDER_ID (the order number, e.g. 12345). Use this to check current order status before making updates.",
-                            "function": "lookup_order"}',
-            description => 'Retrieves order status, customer, amount, and date by order ID'
+            tool_name   => 'LOAN_LOOKUP_TOOL',
+            attributes  => '{"instruction": "Look up loan application status and details by application ID. Parameter: P_APPLICATION_ID (the loan number, e.g. LOAN-12345). Use this to check current status before making updates.",
+                            "function": "lookup_loan"}',
+            description => 'Retrieves loan status, applicant, amount, and type by application ID'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'ORDER_UPDATE_TOOL',
-            attributes  => '{"instruction": "Update an order status. Parameters: P_ORDER_ID (the order number), P_NEW_STATUS (PENDING, SHIPPED, or DELIVERED). Only call this after confirming the current status with ORDER_LOOKUP_TOOL.",
-                            "function": "update_order_status"}',
-            description => 'Updates order status to a new value'
+            tool_name   => 'LOAN_UPDATE_TOOL',
+            attributes  => '{"instruction": "Update a loan application status. Parameters: P_APPLICATION_ID (the loan number), P_NEW_STATUS (PENDING, UNDER_REVIEW, APPROVED, or DENIED). Only call this after confirming the current status with LOAN_LOOKUP_TOOL.",
+                            "function": "update_loan_status"}',
+            description => 'Updates loan application status to a new value'
         );
     END;
     /
@@ -242,30 +265,30 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-            agent_name  => 'ORDER_AGENT',
+            agent_name  => 'LOAN_MGMT_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are an order management agent. You can look up orders and update their status. Always look up an order first before updating it. Never make up order information - always use your tools."}',
-            description => 'Agent that can look up and update orders'
+                            "role": "You are a loan management agent for Seers Equity. You can look up loan applications and update their status. Always look up a loan first before updating it. Never make up loan information - always use your tools."}',
+            description => 'Agent that can look up and update loan applications'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-            task_name   => 'ORDER_TASK',
-            attributes  => '{"instruction": "Help with order inquiries and updates. When asked to check an order, use ORDER_LOOKUP_TOOL. When asked to update an order, first use ORDER_LOOKUP_TOOL to verify current status, then use ORDER_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}",
-                            "tools": ["ORDER_LOOKUP_TOOL", "ORDER_UPDATE_TOOL"]}',
-            description => 'Task for order lookups and updates'
+            task_name   => 'LOAN_MGMT_TASK',
+            attributes  => '{"instruction": "Help with loan application inquiries and updates. When asked to check a loan, use LOAN_LOOKUP_TOOL. When asked to update a loan, first use LOAN_LOOKUP_TOOL to verify current status, then use LOAN_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}",
+                            "tools": ["LOAN_LOOKUP_TOOL", "LOAN_UPDATE_TOOL"]}',
+            description => 'Task for loan lookups and updates'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'ORDER_TEAM',
-            attributes  => '{"agents": [{"name": "ORDER_AGENT", "task": "ORDER_TASK"}],
+            team_name   => 'LOAN_MGMT_TEAM',
+            attributes  => '{"agents": [{"name": "LOAN_MGMT_AGENT", "task": "LOAN_MGMT_TASK"}],
                             "process": "sequential"}',
-            description => 'Team for order management'
+            description => 'Team for loan management'
         );
     END;
     /
@@ -276,29 +299,29 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
 
 Now let's see the real power of agents: coordinating multiple tools and making changes.
 
-1. First, check the current status of order 12345.
+1. First, check the current status of loan LOAN-12345.
 
     ```sql
     <copy>
-    SELECT order_id, customer, status FROM sample_orders WHERE order_id = '12345';
+    SELECT application_id, applicant, status FROM sample_loans WHERE application_id = 'LOAN-12345';
     </copy>
     ```
 
-The order is currently SHIPPED.
+The loan is currently UNDER_REVIEW.
 
-2. Set the team and ask the agent to check and update the order.
+2. Set the team and ask the agent to check and update the loan.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ORDER_TEAM');
-    SELECT AI AGENT Check order 12345 and if it has shipped, mark it as delivered;
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_MGMT_TEAM');
+    SELECT AI AGENT Check loan LOAN-12345 and if it is under review, approve it;
     </copy>
     ```
 
 **Observe:** The agent:
-1. Called ORDER_LOOKUP_TOOL to check current status (SHIPPED)
+1. Called LOAN_LOOKUP_TOOL to check current status (UNDER_REVIEW)
 2. Made a decision based on the result
-3. Called ORDER_UPDATE_TOOL to change it to DELIVERED
+3. Called LOAN_UPDATE_TOOL to change it to APPROVED
 4. Reported what it did
 
 This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
@@ -307,21 +330,21 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
     ```sql
     <copy>
-    SELECT order_id, customer, status FROM sample_orders WHERE order_id = '12345';
+    SELECT application_id, applicant, status FROM sample_loans WHERE application_id = 'LOAN-12345';
     </copy>
     ```
 
-**The status changed from SHIPPED to DELIVERED.** The agent did not just talk about updating - it actually did it.
+**The status changed from UNDER_REVIEW to APPROVED.** The agent did not just talk about updating - it actually did it.
 
 4. Try a conditional update that should NOT happen.
 
     ```sql
     <copy>
-    SELECT AI AGENT Check order 12346 and if it has shipped, mark it as delivered;
+    SELECT AI AGENT Check loan LOAN-12346 and if it is under review, approve it;
     </copy>
     ```
 
-**Observe:** The agent looked up order 12346, saw it was PENDING (not SHIPPED), and correctly decided NOT to update it. This is intelligent coordination.
+**Observe:** The agent looked up loan LOAN-12346, saw it was PENDING (not UNDER_REVIEW), and correctly decided NOT to update it. This is intelligent coordination.
 
 ## Task 5: See What the Agent Did
 
@@ -371,13 +394,13 @@ You can see the sequence: lookup, then update (or just lookup if no update was n
 
 In this lab, you directly compared three approaches:
 
-* **SELECT AI CHAT** - Cannot access your data; can only give generic advice
-* **SELECT AI** - Can read your data but cannot modify it
-* **SELECT AI AGENT** - Can read your data, make decisions, and take action
+* **SELECT AI CHAT** — Cannot access your data; can only give generic advice
+* **SELECT AI** — Can read your data but cannot modify it
+* **SELECT AI AGENT** — Can read your data, make decisions, and take action
 
 You watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.
 
-**Key takeaway:** The difference is not just intelligence—it is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.
+**Key takeaway:** The difference is not just intelligence. It's action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work. For Seers Equity, that means loan officers can focus on clients instead of data entry.
 
 ## Learn More
 
@@ -392,13 +415,13 @@ You watched the agent coordinate: check status → decide → act → report. An
 
 ```sql
 <copy>
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ORDER_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ORDER_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ORDER_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ORDER_LOOKUP_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ORDER_UPDATE_TOOL', TRUE);
-DROP TABLE sample_orders PURGE;
-DROP FUNCTION lookup_order;
-DROP FUNCTION update_order_status;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('LOAN_MGMT_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('LOAN_MGMT_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('LOAN_MGMT_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('LOAN_LOOKUP_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('LOAN_UPDATE_TOOL', TRUE);
+DROP TABLE sample_loans PURGE;
+DROP FUNCTION lookup_loan;
+DROP FUNCTION update_loan_status;
 </copy>
 ```

@@ -2,9 +2,30 @@
 
 ## Introduction
 
-In this lab, you'll trace an agent through its complete execution loop—from understanding a request to taking action and reporting results.
+In this lab, you'll trace an agent through its complete execution loop, from understanding a request to taking action and reporting results.
 
 Every agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.
+
+### The Business Problem
+
+At Seers Equity, small loans take as long to process as big ones. A $25,000 personal loan for a client with excellent credit goes through the same review process as a $500,000 mortgage.
+
+> *"We spend hours reviewing applications that should just auto-approve. A $25K personal loan with 800 credit? That shouldn't take the same time as a complex mortgage."*
+>
+> David, Operations Manager
+
+The company needs smart routing:
+- **Under $50K with good credit** → Auto-approve
+- **$50K-$250K** → Underwriter review
+- **$250K+ or mortgages** → Senior underwriter
+
+Plus, everything needs to be logged for compliance. When a regulator asks "why was this approved?", there needs to be an answer.
+
+### What You'll Learn
+
+This lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes loans based on amount and type. This is the foundation for solving Seers Equity's processing bottleneck.
+
+**What you'll build:** A loan processing workflow with conditional routing and complete audit trails.
 
 Estimated Time: 10 minutes
 
@@ -13,7 +34,7 @@ Estimated Time: 10 minutes
 * Trace the complete agent execution loop
 * Understand the relationship between LLM reasoning and tool actions
 * Use history views to see every step
-* Recognize the pattern that all agents follow
+* Build conditional routing based on loan risk
 
 ### Prerequisites
 
@@ -30,7 +51,7 @@ We'll create an agent with tools that log what's happening so you can see each s
 
     ```sql
     <copy>
-    CREATE SEQUENCE expense_requests_seq START WITH 1001;
+    CREATE SEQUENCE loan_requests_seq START WITH 1001;
 
     CREATE TABLE workflow_log (
         log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -39,155 +60,161 @@ We'll create an agent with tools that log what's happening so you can see each s
         logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP
     );
 
-    CREATE TABLE expense_requests (
-        request_id  VARCHAR2(20) PRIMARY KEY,
-        employee    VARCHAR2(100),
-        amount      NUMBER(10,2),
-        category    VARCHAR2(50),
-        status      VARCHAR2(30) DEFAULT 'NEW',
-        created_at  TIMESTAMP DEFAULT SYSTIMESTAMP
+    CREATE TABLE loan_requests (
+        request_id    VARCHAR2(20) PRIMARY KEY,
+        applicant     VARCHAR2(100),
+        amount        NUMBER(12,2),
+        loan_type     VARCHAR2(50),
+        credit_score  NUMBER(3),
+        risk_level    VARCHAR2(30),
+        status        VARCHAR2(30) DEFAULT 'NEW',
+        routed_to     VARCHAR2(50),
+        created_at    TIMESTAMP DEFAULT SYSTIMESTAMP
     );
     </copy>
     ```
 
-2. Create the first tool function - create expense request.
+2. Create the first tool function - create loan request.
 
     ```sql
     <copy>
-    CREATE OR REPLACE FUNCTION create_expense_request(
-        p_employee VARCHAR2,
-        p_amount   NUMBER,
-        p_category VARCHAR2
+    CREATE OR REPLACE FUNCTION create_loan_request(
+        p_applicant    VARCHAR2,
+        p_amount       NUMBER,
+        p_loan_type    VARCHAR2,
+        p_credit_score NUMBER
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
         v_request_id VARCHAR2(20);
     BEGIN
-        v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_requests_seq.NEXTVAL;
+        v_request_id := 'LN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || loan_requests_seq.NEXTVAL;
         
         -- Log the step
         INSERT INTO workflow_log (step_name, step_detail) 
-        VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_employee || ', $' || p_amount);
+        VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_applicant || 
+                ', $' || p_amount || ' ' || p_loan_type || ', Credit: ' || p_credit_score);
         
         -- Create the request
-        INSERT INTO expense_requests (request_id, employee, amount, category, status)
-        VALUES (v_request_id, p_employee, p_amount, p_category, 'SUBMITTED');
+        INSERT INTO loan_requests (request_id, applicant, amount, loan_type, credit_score, status)
+        VALUES (v_request_id, p_applicant, p_amount, LOWER(p_loan_type), p_credit_score, 'SUBMITTED');
         
         COMMIT;
-        RETURN 'Created expense request ' || v_request_id || ' for $' || p_amount || ' (' || p_category || ')';
+        RETURN 'Created loan request ' || v_request_id || ' for $' || p_amount || ' ' || p_loan_type;
     END;
     /
     </copy>
     ```
 
-3. Create the second tool function - check expense rules.
+3. Create the second tool function - assess risk and route.
 
     ```sql
     <copy>
-    CREATE OR REPLACE FUNCTION check_expense_rules(
-        p_amount   NUMBER,
-        p_category VARCHAR2
+    CREATE OR REPLACE FUNCTION assess_and_route(
+        p_request_id VARCHAR2
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
-        v_result VARCHAR2(200);
+        v_amount       NUMBER;
+        v_loan_type    VARCHAR2(50);
+        v_credit_score NUMBER;
+        v_risk_level   VARCHAR2(30);
+        v_route_to     VARCHAR2(50);
+        v_result       VARCHAR2(500);
     BEGIN
-        -- Log the step
-        INSERT INTO workflow_log (step_name, step_detail) 
-        VALUES ('CHECK_RULES', 'Checking rules for $' || p_amount || ', category: ' || p_category);
+        -- Get request details
+        SELECT amount, loan_type, credit_score
+        INTO v_amount, v_loan_type, v_credit_score
+        FROM loan_requests WHERE request_id = p_request_id;
         
-        -- Apply rules
-        IF p_amount < 100 THEN
-            v_result := 'AUTO_APPROVE: Amount under $100';
-        ELSIF p_amount < 500 THEN
-            v_result := 'MANAGER_APPROVAL: Amount $100-500 requires manager';
+        -- Log the assessment start
+        INSERT INTO workflow_log (step_name, step_detail) 
+        VALUES ('ASSESS_RISK', 'Assessing ' || p_request_id || ': $' || v_amount || 
+                ', Credit: ' || v_credit_score);
+        
+        -- Apply risk rules
+        IF v_credit_score < 550 THEN
+            v_risk_level := 'BLOCKED';
+            v_route_to := 'REJECTED';
+            v_result := 'BLOCKED: Credit score ' || v_credit_score || ' below minimum 550.';
+        ELSIF v_loan_type = 'personal' AND v_amount < 50000 AND v_credit_score >= 700 THEN
+            v_risk_level := 'LOW';
+            v_route_to := 'AUTO_APPROVED';
+            v_result := 'AUTO_APPROVED: Personal loan under $50K with credit ' || v_credit_score || '.';
+        ELSIF v_amount < 250000 AND v_loan_type != 'mortgage' THEN
+            v_risk_level := 'MEDIUM';
+            v_route_to := 'UNDERWRITER';
+            v_result := 'Routed to UNDERWRITER: $' || v_amount || ' ' || v_loan_type || ' requires review.';
         ELSE
-            v_result := 'DIRECTOR_APPROVAL: Amount $500+ requires director';
+            v_risk_level := 'HIGH';
+            v_route_to := 'SENIOR_UNDERWRITER';
+            v_result := 'Routed to SENIOR_UNDERWRITER: $' || v_amount || ' ' || v_loan_type || ' requires senior review.';
         END IF;
         
-        COMMIT;
-        RETURN v_result;
-    END;
-    /
-    </copy>
-    ```
-
-4. Create the third tool function - route for approval.
-
-    ```sql
-    <copy>
-    CREATE OR REPLACE FUNCTION route_for_approval(
-        p_request_id VARCHAR2,
-        p_approval_level VARCHAR2
-    ) RETURN VARCHAR2 AS
-        PRAGMA AUTONOMOUS_TRANSACTION;
-    BEGIN
-        -- Log the step
+        -- Log the routing decision
         INSERT INTO workflow_log (step_name, step_detail) 
-        VALUES ('ROUTE_APPROVAL', 'Routing ' || p_request_id || ' for ' || p_approval_level);
+        VALUES ('ROUTE_DECISION', p_request_id || ' -> ' || v_route_to || ' (Risk: ' || v_risk_level || ')');
         
-        -- Update status
-        UPDATE expense_requests 
-        SET status = 'PENDING_' || p_approval_level
+        -- Update the request
+        UPDATE loan_requests
+        SET risk_level = v_risk_level, 
+            routed_to = v_route_to,
+            status = CASE WHEN v_route_to IN ('AUTO_APPROVED', 'REJECTED') THEN v_route_to ELSE 'PENDING_REVIEW' END
         WHERE request_id = p_request_id;
         
         COMMIT;
-        RETURN 'Routed ' || p_request_id || ' for ' || p_approval_level || ' approval';
+        RETURN v_result;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RETURN 'Request not found: ' || p_request_id;
     END;
     /
     </copy>
     ```
 
-5. Register the tools.
+4. Register the tools.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'CREATE_EXPENSE_TOOL',
-            attributes  => '{"instruction": "Create a new expense request. Parameters: P_EMPLOYEE (employee name), P_AMOUNT (dollar amount as number), P_CATEGORY (travel, meals, or supplies). Returns the request ID.",
-                            "function": "create_expense_request"}',
-            description => 'Creates an expense request and returns the request ID'
+            tool_name   => 'CREATE_LOAN_TOOL',
+            attributes  => '{"instruction": "Create a new loan request. Parameters: P_APPLICANT (name), P_AMOUNT (dollar amount as number), P_LOAN_TYPE (personal, auto, mortgage, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.",
+                            "function": "create_loan_request"}',
+            description => 'Creates a loan request and returns the request ID'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'CHECK_RULES_TOOL',
-            attributes  => '{"instruction": "Check what approval level is needed for an expense. Parameters: P_AMOUNT (dollar amount as number), P_CATEGORY. Returns AUTO_APPROVE, MANAGER_APPROVAL, or DIRECTOR_APPROVAL.",
-                            "function": "check_expense_rules"}',
-            description => 'Returns the required approval level based on amount and category'
-        );
-        
-        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'ROUTE_APPROVAL_TOOL',
-            attributes  => '{"instruction": "Route an expense for approval. Only call this if CHECK_RULES_TOOL returned MANAGER_APPROVAL or DIRECTOR_APPROVAL. Do NOT call this for AUTO_APPROVE. Parameters: P_REQUEST_ID (the EXP-YYMMDD-NNNN format ID), P_APPROVAL_LEVEL (MANAGER or DIRECTOR).",
-                            "function": "route_for_approval"}',
-            description => 'Routes the expense request to the appropriate approver'
+            tool_name   => 'ASSESS_ROUTE_TOOL',
+            attributes  => '{"instruction": "Assess risk and route a loan request. Parameter: P_REQUEST_ID (the LN-YYMMDD-NNNN format ID from CREATE_LOAN_TOOL). Returns routing decision.",
+                            "function": "assess_and_route"}',
+            description => 'Assesses risk level and routes to appropriate reviewer'
         );
     END;
     /
     </copy>
     ```
 
-6. Create the agent and team.
+5. Create the agent and team.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-            agent_name  => 'EXPENSE_EXEC_AGENT',
+            agent_name  => 'LOAN_EXEC_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are an expense processing agent. Process expenses by: 1) Creating the request, 2) Checking the rules, 3) Only routing for approval if rules require it. If rules say AUTO_APPROVE, do not route."}',
+                            "role": "You are a loan processing agent for Seers Equity. Process loans by: 1) Creating the request with CREATE_LOAN_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
             description => 'Agent demonstrating execution loop'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-            task_name   => 'EXPENSE_EXEC_TASK',
-            attributes  => '{"instruction": "Process the expense request: 1. Call CREATE_EXPENSE_TOOL to create the request 2. Call CHECK_RULES_TOOL to determine approval level 3. If result contains MANAGER_APPROVAL or DIRECTOR_APPROVAL, call ROUTE_APPROVAL_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_APPROVAL_TOOL - just confirm the expense is auto-approved. User request: {query}",
-                            "tools": ["CREATE_EXPENSE_TOOL", "CHECK_RULES_TOOL", "ROUTE_APPROVAL_TOOL"]}',
-            description => 'Task for expense execution demo'
+            task_name   => 'LOAN_EXEC_TASK',
+            attributes  => '{"instruction": "Process the loan request: 1. Call CREATE_LOAN_TOOL to create the request 2. Call ASSESS_ROUTE_TOOL with the returned request ID to assess and route. Report the final routing decision. User request: {query}",
+                            "tools": ["CREATE_LOAN_TOOL", "ASSESS_ROUTE_TOOL"]}',
+            description => 'Task for loan execution demo'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'EXPENSE_EXEC_TEAM',
-            attributes  => '{"agents": [{"name": "EXPENSE_EXEC_AGENT", "task": "EXPENSE_EXEC_TASK"}],
+            team_name   => 'LOAN_EXEC_TEAM',
+            attributes  => '{"agents": [{"name": "LOAN_EXEC_AGENT", "task": "LOAN_EXEC_TASK"}],
                             "process": "sequential"}',
             description => 'Team for execution demo'
         );
@@ -205,15 +232,15 @@ Now let's run a request and trace every step.
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('EXPENSE_EXEC_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_EXEC_TEAM');
     </copy>
     ```
 
-2. Submit an expense request.
+2. Submit a loan request that should auto-approve.
 
     ```sql
     <copy>
-    SELECT AI AGENT Submit a $250 expense for meals for John Smith;
+    SELECT AI AGENT Process a $35000 personal loan for John Smith with credit score 780;
     </copy>
     ```
 
@@ -231,9 +258,9 @@ Now let's run a request and trace every step.
     ```
 
 **Observe the execution sequence:**
-- CREATE_REQUEST: The expense was created
-- CHECK_RULES: Rules were evaluated ($250 requires manager)
-- ROUTE_APPROVAL: It was routed for manager approval
+- CREATE_REQUEST: The loan was created
+- ASSESS_RISK: Risk was evaluated
+- ROUTE_DECISION: AUTO_APPROVED (personal under $50K with 780 credit)
 
 ## Task 3: Trace the Agent's Tool Calls
 
@@ -254,34 +281,36 @@ The history views show what the agent did.
     </copy>
     ```
 
-2. Check the expense request that was created.
+2. Check the loan request that was created.
 
     ```sql
     <copy>
     SELECT 
         request_id,
-        employee,
+        applicant,
         amount,
-        category,
-        status,
-        TO_CHAR(created_at, 'HH24:MI:SS') as created
-    FROM expense_requests
+        loan_type,
+        credit_score,
+        risk_level,
+        routed_to,
+        status
+    FROM loan_requests
     ORDER BY created_at DESC;
     </copy>
     ```
 
-You can see the actual record the agent created.
+You can see the actual record the agent created, with the risk assessment and routing.
 
 ## Task 4: Trace Different Execution Paths
 
-Different amounts trigger different rules and therefore different execution paths.
+Different loan parameters trigger different routing paths.
 
-1. Submit a small expense (auto-approve path).
+1. Submit a loan that needs underwriter review.
 
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Submit a $50 expense for supplies for Jane Doe;
+    SELECT AI AGENT Process a $150000 business loan for Acme Corp with credit score 720;
     </copy>
     ```
 
@@ -293,30 +322,18 @@ Different amounts trigger different rules and therefore different execution path
     </copy>
     ```
 
-**Observe:** Only CREATE_REQUEST and CHECK_RULES appear - no ROUTE_APPROVAL because the rules said AUTO_APPROVE (under $100).
+**Observe:** Routed to UNDERWRITER because $150K business loan needs review.
 
-3. Check the expense record status.
-
-    ```sql
-    <copy>
-    SELECT request_id, employee, amount, status 
-    FROM expense_requests 
-    WHERE employee = 'Jane Doe';
-    </copy>
-    ```
-
-The status is SUBMITTED (not PENDING_MANAGER) - it was auto-approved, so no routing was needed.
-
-4. Submit a large expense (director approval path).
+3. Submit a loan that needs senior review.
 
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Submit a $750 expense for travel for Bob Wilson;
+    SELECT AI AGENT Process a $450000 mortgage for Jane Doe with credit score 750;
     </copy>
     ```
 
-5. Check the workflow log again.
+4. Check the routing.
 
     ```sql
     <copy>
@@ -324,37 +341,43 @@ The status is SUBMITTED (not PENDING_MANAGER) - it was auto-approved, so no rout
     </copy>
     ```
 
-**Observe:** All three steps appear - $750 requires DIRECTOR_APPROVAL so it was routed.
+**Observe:** Routed to SENIOR_UNDERWRITER because it's a mortgage over $250K.
 
-6. Check the expense record status.
+5. Submit a loan that should be blocked.
 
     ```sql
     <copy>
-    SELECT request_id, employee, amount, status 
-    FROM expense_requests 
-    WHERE employee = 'Bob Wilson';
+    TRUNCATE TABLE workflow_log;
+    SELECT AI AGENT Process a $25000 personal loan for Bob Wilson with credit score 520;
     </copy>
     ```
 
-The status is PENDING_DIRECTOR because the $750 expense was routed for director approval.
+6. Check the routing.
 
-## Task 5: Compare All Three Expenses
+    ```sql
+    <copy>
+    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;
+    </copy>
+    ```
 
-Let's see all the expenses and their different statuses.
+**Observe:** BLOCKED because credit score 520 is below minimum 550.
+
+## Task 5: Compare All Loans and Their Routes
+
+Let's see all the loans and their different routing decisions.
 
 ```sql
 <copy>
 SELECT 
     request_id,
-    employee,
+    applicant,
     amount,
-    status,
-    CASE 
-        WHEN amount < 100 THEN 'Auto-approved'
-        WHEN amount < 500 THEN 'Manager approval'
-        ELSE 'Director approval'
-    END as approval_path
-FROM expense_requests
+    loan_type,
+    credit_score,
+    risk_level,
+    routed_to,
+    status
+FROM loan_requests
 ORDER BY created_at;
 </copy>
 ```
@@ -404,11 +427,11 @@ ORDER BY logged_at;
 In this lab, you traced the complete agent execution loop:
 
 * Created an observable agent with logging tools
-* Watched a multi-step workflow execute
+* Watched a multi-step workflow execute with risk assessment
 * Traced tool calls through history views
-* Saw how different inputs lead to different execution paths
+* Saw how different inputs lead to different routing paths
 
-**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable.
+**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Seers Equity, this means small loans auto-approve in seconds, complex loans get routed appropriately, and compliance has a complete audit trail.
 
 ## Learn More
 
@@ -423,17 +446,15 @@ In this lab, you traced the complete agent execution loop:
 
 ```sql
 <copy>
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_EXEC_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_EXEC_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_EXEC_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_EXPENSE_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RULES_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_APPROVAL_TOOL', TRUE);
-DROP TABLE expense_requests PURGE;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('LOAN_EXEC_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('LOAN_EXEC_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('LOAN_EXEC_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_LOAN_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ASSESS_ROUTE_TOOL', TRUE);
+DROP TABLE loan_requests PURGE;
 DROP TABLE workflow_log PURGE;
-DROP SEQUENCE expense_requests_seq;
-DROP FUNCTION create_expense_request;
-DROP FUNCTION check_expense_rules;
-DROP FUNCTION route_for_approval;
+DROP SEQUENCE loan_requests_seq;
+DROP FUNCTION create_loan_request;
+DROP FUNCTION assess_and_route;
 </copy>
 ```

@@ -2,11 +2,32 @@
 
 ## Introduction
 
-In this lab, you'll see why agents fail without enterprise data—and how connecting them to your business context transforms their usefulness.
+In this lab, you'll see why agents fail without enterprise data, and how connecting them to your business context transforms their usefulness.
 
 Agents don't show up understanding your organization. They don't know your policies, your workflows, or how decisions were handled last time. That knowledge lives in your enterprise data.
 
 You'll first ask the LLM business-specific questions it can't answer, then give an agent access to your data and see the difference.
+
+### The Business Problem
+
+At Seers Equity, a loan officer asked the AI assistant about rates for preferred customers:
+
+> *"I asked the AI what rates we offer preferred customers. It said 6.5%. Our actual preferred rate is 7.9%. I almost quoted wrong rates to a client!"*
+>
+> Marcus, Senior Loan Officer
+
+The chatbot doesn't know Seers Equity's actual rates, policies, or client information. It gives generic answers that sound confident but are confidently wrong.
+
+Seers Equity needs AI that knows:
+- **Actual rate tiers**: Preferred is 7.9%, Standard is 12.9%
+- **Lending policies**: Credit requirements, documentation needed
+- **Client details**: Who qualifies for what, what exceptions exist
+
+### What You'll Learn
+
+This lab shows you the difference between generic AI knowledge and enterprise-connected AI. You'll see the same questions answered wrong (without data) and right (with data access).
+
+**What you'll build:** An agent connected to Seers Equity's loan policies and applicant data.
 
 Estimated Time: 10 minutes
 
@@ -28,79 +49,99 @@ This lab assumes you have:
 
 Let's see what happens when you ask an LLM about your business without giving it access to your data. We'll use `SELECT AI CHAT` which uses the LLM's general knowledge.
 
-1. Set the AI profile and ask about your return policy.
+1. Set the AI profile and ask about Seers Equity's rates.
 
     ```sql
     <copy>
     -- Set the AI profile for SELECT AI CHAT
     EXEC DBMS_CLOUD_AI.SET_PROFILE('genai');
 
-    SELECT AI CHAT What is the return policy for premium members at TechCorp;
+    SELECT AI CHAT What interest rates does Seers Equity offer for preferred customers;
     </copy>
     ```
 
-The LLM gives a generic response—it doesn't know YOUR return policy because it has no access to your data.
+The LLM gives a generic response. It doesn't know YOUR rates because it has no access to your data. It might make up a number or say it doesn't have that information.
 
-2. Ask about a specific customer.
+2. Ask about a specific applicant.
 
     ```sql
     <copy>
-    SELECT AI CHAT Is customer CUST-1001 eligible for an upgrade;
+    SELECT AI CHAT Is applicant Sarah Chen eligible for preferred rates at Seers Equity;
     </copy>
     ```
 
-The LLM can't answer—it has no customer data. It might make something up or tell you it doesn't have access.
+The LLM can't answer. It has no applicant data. It might make something up or tell you it doesn't have access.
+
+3. Ask about lending policy.
+
+    ```sql
+    <copy>
+    SELECT AI CHAT What credit score does Seers Equity require for a mortgage;
+    </copy>
+    ```
+
+Generic answer. Not YOUR policy.
 
 ## Task 2: Create Enterprise Data
 
 Now let's create the business data that an agent needs.
 
-1. Create policy and customer tables.
+1. Create loan policy and applicant tables.
 
     ```sql
     <copy>
-    -- Company policies
-    CREATE TABLE company_policies (
+    -- Seers Equity loan policies
+    CREATE TABLE loan_policies (
         policy_id    VARCHAR2(20) PRIMARY KEY,
         policy_name  VARCHAR2(100),
         policy_text  CLOB,
-        applies_to   VARCHAR2(50)
+        rate_tier    VARCHAR2(50),
+        loan_types   VARCHAR2(200)
     );
 
-    INSERT INTO company_policies VALUES (
-        'POL-001', 'Return Policy - Premium',
-        'Premium members may return items within 90 days for full refund, no questions asked. ' ||
-        'Standard restocking fees are waived. Free return shipping included.',
-        'PREMIUM'
+    INSERT INTO loan_policies VALUES (
+        'POL-PREF', 'Preferred Rate Tier',
+        'Preferred rate is 7.9% APR for customers with credit score 750+. ' ||
+        'Maximum loan amount $500,000. Requires 20% down payment for mortgages. ' ||
+        'Rate exception up to 15% discount available for clients with 5+ year history.',
+        'PREFERRED',
+        'Personal, Auto, Mortgage, Business'
     );
 
-    INSERT INTO company_policies VALUES (
-        'POL-002', 'Return Policy - Standard',
-        'Standard members may return items within 30 days. A 15% restocking fee applies. ' ||
-        'Customer pays return shipping.',
-        'STANDARD'
+    INSERT INTO loan_policies VALUES (
+        'POL-STD', 'Standard Rate Tier',
+        'Standard rate is 12.9% APR for customers with credit score 650-749. ' ||
+        'Maximum loan amount $250,000. Requires 25% down payment for mortgages. ' ||
+        'No rate exceptions available for this tier.',
+        'STANDARD',
+        'Personal, Auto, Business'
     );
 
-    INSERT INTO company_policies VALUES (
-        'POL-003', 'Escalation Process',
-        'Billing disputes: 1) Agent attempts resolution, 2) If over $100, escalate to Team Lead, ' ||
-        '3) If unresolved after 24 hours, escalate to Manager, 4) Customer may request VP review.',
-        'ALL'
+    INSERT INTO loan_policies VALUES (
+        'POL-CREDIT', 'Credit Requirements',
+        'Minimum credit score 550 for any loan consideration. ' ||
+        'Credit score 750+ qualifies for Preferred tier. ' ||
+        'Credit score 650-749 qualifies for Standard tier. ' ||
+        'Credit score below 650 requires additional documentation and cosigner.',
+        'ALL',
+        'All loan types'
     );
 
-    -- Customer data
-    CREATE TABLE enterprise_customers (
-        customer_id   VARCHAR2(20) PRIMARY KEY,
-        name          VARCHAR2(100),
-        tier          VARCHAR2(20),
-        since         DATE,
-        total_spend   NUMBER(12,2),
-        upgrade_eligible VARCHAR2(1)
+    -- Seers Equity applicant data
+    CREATE TABLE se_applicants (
+        applicant_id      VARCHAR2(20) PRIMARY KEY,
+        name              VARCHAR2(100),
+        company           VARCHAR2(100),
+        credit_score      NUMBER(3),
+        rate_tier         VARCHAR2(20),
+        client_since      DATE,
+        rate_exception    NUMBER(5,2),
+        total_loans       NUMBER(3)
     );
 
-    INSERT INTO enterprise_customers VALUES ('CUST-1001', 'Acme Corp', 'STANDARD', DATE '2022-01-15', 45000, 'Y');
-    INSERT INTO enterprise_customers VALUES ('CUST-1002', 'TechStart', 'PREMIUM', DATE '2020-06-01', 125000, 'N');
-    INSERT INTO enterprise_customers VALUES ('CUST-1003', 'NewCo', 'STANDARD', DATE '2024-01-10', 5000, 'N');
+    INSERT INTO se_applicants VALUES ('APP-001', 'Sarah Chen', 'Acme Industries', 780, 'PREFERRED', DATE '2019-03-15', 15, 8);
+    INSERT INTO se_applicants VALUES ('APP-002', 'TechStart LLC', NULL, 710, 'STANDARD', DATE '2022-06-01', NULL, 2);
+    INSERT INTO se_applicants VALUES ('APP-003', 'GlobalCo', NULL, 620, 'STANDARD', DATE '2024-01-10', NULL, 1);
 
     COMMIT;
     </copy>
@@ -110,20 +151,22 @@ Now let's create the business data that an agent needs.
 
     ```sql
     <copy>
-    -- Tool to look up policies
-    CREATE OR REPLACE FUNCTION get_policy(
+    -- Tool to look up loan policies
+    CREATE OR REPLACE FUNCTION get_loan_policy(
         p_policy_type VARCHAR2,
-        p_member_tier VARCHAR2 DEFAULT NULL
+        p_rate_tier   VARCHAR2 DEFAULT NULL
     ) RETURN VARCHAR2 AS
         v_result CLOB := '';
     BEGIN
         FOR rec IN (
-            SELECT policy_name, policy_text 
-            FROM company_policies 
-            WHERE UPPER(policy_name) LIKE '%' || UPPER(p_policy_type) || '%'
-            AND (applies_to = p_member_tier OR applies_to = 'ALL' OR p_member_tier IS NULL)
+            SELECT policy_name, policy_text, rate_tier
+            FROM loan_policies 
+            WHERE (UPPER(policy_name) LIKE '%' || UPPER(p_policy_type) || '%'
+                   OR UPPER(policy_text) LIKE '%' || UPPER(p_policy_type) || '%')
+            AND (p_rate_tier IS NULL OR rate_tier = p_rate_tier OR rate_tier = 'ALL')
         ) LOOP
-            v_result := v_result || rec.policy_name || ': ' || rec.policy_text || CHR(10);
+            v_result := v_result || rec.policy_name || ' (' || rec.rate_tier || '): ' || 
+                       rec.policy_text || CHR(10) || CHR(10);
         END LOOP;
         
         IF v_result IS NULL THEN
@@ -133,24 +176,31 @@ Now let's create the business data that an agent needs.
     END;
     /
 
-    -- Tool to look up customer
-    CREATE OR REPLACE FUNCTION get_customer_info(
-        p_customer_id VARCHAR2
+    -- Tool to look up applicant
+    CREATE OR REPLACE FUNCTION get_applicant_info(
+        p_applicant_name VARCHAR2
     ) RETURN VARCHAR2 AS
-        v_result VARCHAR2(500);
+        v_result VARCHAR2(1000);
     BEGIN
-        SELECT 'Customer: ' || name || ', Tier: ' || tier || 
-               ', Member since: ' || TO_CHAR(since, 'YYYY-MM-DD') ||
-               ', Total spend: $' || TO_CHAR(total_spend, '999,999') ||
-               ', Upgrade eligible: ' || upgrade_eligible
+        SELECT 'Applicant: ' || name || 
+               CASE WHEN company IS NOT NULL THEN ' (' || company || ')' ELSE '' END ||
+               ', Credit Score: ' || credit_score || 
+               ', Rate Tier: ' || rate_tier ||
+               ', Client Since: ' || TO_CHAR(client_since, 'YYYY-MM-DD') ||
+               ', Total Loans: ' || total_loans ||
+               CASE WHEN rate_exception IS NOT NULL 
+                    THEN ', Rate Exception: ' || rate_exception || '% discount'
+                    ELSE ', No rate exception' END
         INTO v_result
-        FROM enterprise_customers
-        WHERE customer_id = p_customer_id;
+        FROM se_applicants
+        WHERE UPPER(name) LIKE '%' || UPPER(p_applicant_name) || '%';
         
         RETURN v_result;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            RETURN 'Customer not found: ' || p_customer_id;
+            RETURN 'Applicant not found: ' || p_applicant_name;
+        WHEN TOO_MANY_ROWS THEN
+            RETURN 'Multiple applicants found matching: ' || p_applicant_name || '. Please be more specific.';
     END;
     /
     </copy>
@@ -163,16 +213,16 @@ Now let's create the business data that an agent needs.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'POLICY_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up company policies. Parameters: P_POLICY_TYPE (e.g. return, escalation), P_MEMBER_TIER (PREMIUM or STANDARD, optional). Always use this to answer policy questions.",
-                            "function": "get_policy"}',
-            description => 'Retrieves company policies including return policies and escalation procedures'
+            attributes  => '{"instruction": "Look up Seers Equity loan policies. Parameters: P_POLICY_TYPE (e.g. rate, credit, preferred, standard), P_RATE_TIER (PREFERRED or STANDARD, optional). Always use this to answer policy questions - never guess at rates or requirements.",
+                            "function": "get_loan_policy"}',
+            description => 'Retrieves Seers Equity loan policies including rates and requirements'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'CUSTOMER_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up customer information. Parameter: P_CUSTOMER_ID (e.g. CUST-1001). Returns tier, spend, and upgrade eligibility. Always use this when asked about specific customers.",
-                            "function": "get_customer_info"}',
-            description => 'Retrieves customer details including tier, spend history, and upgrade eligibility'
+            tool_name   => 'APPLICANT_LOOKUP_TOOL',
+            attributes  => '{"instruction": "Look up applicant information. Parameter: P_APPLICANT_NAME (full or partial name). Returns credit score, rate tier, client history, and any rate exceptions. Always use this when asked about specific applicants.",
+                            "function": "get_applicant_info"}',
+            description => 'Retrieves applicant details including credit tier and rate exceptions'
         );
     END;
     /
@@ -181,7 +231,7 @@ Now let's create the business data that an agent needs.
 
 ## Task 3: Create an Informed Agent
 
-Now let's create an agent with access to enterprise data.
+Now let's create an agent with access to Seers Equity's enterprise data.
 
 1. Create the informed agent.
 
@@ -191,14 +241,14 @@ Now let's create an agent with access to enterprise data.
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'INFORMED_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a customer service agent for TechCorp. You have access to company policies and customer information. Always use your tools to look up real data - never guess."}',
+                            "role": "You are a loan officer assistant for Seers Equity. You have access to company loan policies and applicant information. Always use your tools to look up real data - never guess at rates, requirements, or applicant details."}',
             description => 'Agent with enterprise data access'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'INFORMED_TASK',
-            attributes  => '{"instruction": "Help the customer by looking up relevant policies and customer information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}",
-                            "tools": ["POLICY_LOOKUP_TOOL", "CUSTOMER_LOOKUP_TOOL"]}',
+            attributes  => '{"instruction": "Help the loan officer by looking up relevant policies and applicant information using your tools. Do not guess - if asked about rates, policies, or applicants, use the tools. User request: {query}",
+                            "tools": ["POLICY_LOOKUP_TOOL", "APPLICANT_LOOKUP_TOOL"]}',
             description => 'Task with data access'
         );
         
@@ -225,35 +275,45 @@ Now let's create an agent with access to enterprise data.
 
 Now let's see the difference. This time we use `SELECT AI AGENT` which has access to our enterprise data tools.
 
-1. Ask about return policy for premium members.
+1. Ask about rates for preferred customers.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is the return policy for premium members;
+    SELECT AI AGENT What interest rates does Seers Equity offer for preferred customers;
     </copy>
     ```
 
-**Now you get YOUR actual policy:** 90 days, no questions, waived fees, free shipping.
+**Now you get YOUR actual rate:** 7.9% APR for Preferred tier with credit score 750+.
 
-2. Ask about the specific customer.
+2. Ask about Sarah Chen specifically.
 
     ```sql
     <copy>
-    SELECT AI AGENT Is customer CUST-1001 eligible for an upgrade;
+    SELECT AI AGENT Is Sarah Chen eligible for preferred rates and does she have any special pricing;
     </copy>
     ```
 
-**The agent looks up the customer and reports:** Yes, Acme Corp is eligible for upgrade.
+**The agent looks up the applicant and reports:** Sarah Chen has credit score 780 (Preferred tier), has been a client since 2019, and has a 15% rate exception.
 
-3. Ask about escalation.
+3. Ask about credit requirements.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is the escalation process for billing disputes;
+    SELECT AI AGENT What credit score does Seers Equity require for a mortgage;
     </copy>
     ```
 
-**Your actual process:** Agent first, Team Lead if over $100, Manager after 24 hours, VP if requested.
+**Your actual policy:** Minimum 550 for any loan, 750+ for Preferred tier, 650-749 for Standard.
+
+4. Ask a combination question.
+
+    ```sql
+    <copy>
+    SELECT AI AGENT What rate would TechStart LLC qualify for on a new loan;
+    </copy>
+    ```
+
+**The agent checks both:** TechStart has credit score 710 (Standard tier), so they qualify for 12.9% APR.
 
 ## Task 5: See the Tool Calls
 
@@ -266,22 +326,24 @@ Let's verify the agent is using enterprise data.
     SELECT 
         tool_name,
         TO_CHAR(start_date, 'HH24:MI:SS') as when,
-        SUBSTR(output, 1, 60) as result
+        SUBSTR(output, 1, 80) as result
     FROM USER_AI_AGENT_TOOL_HISTORY
     ORDER BY start_date DESC
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
+You can see the agent called POLICY_LOOKUP_TOOL and APPLICANT_LOOKUP_TOOL to get real data.
+
 ## Summary
 
 In this lab, you experienced the difference enterprise data makes:
 
-* `SELECT AI CHAT` - LLM general knowledge only, gave generic answers
-* `SELECT AI AGENT` - Agent with tools, gave YOUR specific answers
+* `SELECT AI CHAT`: LLM general knowledge only, gave generic or wrong answers
+* `SELECT AI AGENT`: Agent with tools, gave YOUR specific accurate answers
 * Enterprise data transforms generic AI into your AI
 
-**Key takeaway:** Agents don't fail because they're not smart—they fail because they don't know your business. Enterprise data is what transforms generic AI into your AI.
+**Key takeaway:** Agents don't fail because they're not smart. They fail because they don't know your business. Marcus almost quoted wrong rates because the AI didn't have access to Seers Equity's actual rate tables. Enterprise data is what transforms generic AI into your AI.
 
 ## Learn More
 
@@ -300,10 +362,10 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('INFORMED_TEAM', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('INFORMED_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('INFORMED_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('POLICY_LOOKUP_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CUSTOMER_LOOKUP_TOOL', TRUE);
-DROP TABLE company_policies PURGE;
-DROP TABLE enterprise_customers PURGE;
-DROP FUNCTION get_policy;
-DROP FUNCTION get_customer_info;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPLICANT_LOOKUP_TOOL', TRUE);
+DROP TABLE loan_policies PURGE;
+DROP TABLE se_applicants PURGE;
+DROP FUNCTION get_loan_policy;
+DROP FUNCTION get_applicant_info;
 </copy>
 ```

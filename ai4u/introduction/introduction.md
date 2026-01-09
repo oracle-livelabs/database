@@ -6,19 +6,19 @@
 
 Most AI agents have amnesia. Every conversation starts fresh. They don't remember the customer they helped last week, the decision they made yesterday, or the policy they're supposed to follow. This works for demos. It fails completely in production.
 
-This workshop shows how to build AI agents with **agentic memory**—agents that remember, learn, and improve over time. Using Oracle Database 23ai and Select AI Agent, you'll create agents that store facts, recall context, and make consistent decisions across sessions.
+This workshop shows how to build AI agents with **agentic memory**: agents that remember, learn, and improve over time. Using Oracle Database 26ai and Select AI Agent, you'll create agents that store facts, recall context, and make consistent decisions across sessions.
 
 ## Meet Seers Equity
 
 Throughout this workshop, you'll build AI agents for **Seers Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
 
-Seers Equity has been growing fast—maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
+Seers Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
 
 ### The Problems Keeping Leadership Up at Night
 
 **"We keep forgetting our best clients."**
 
-Last month, a loan officer quoted standard rates to Sarah Chen from Acme Industries—a client who's been with Seers Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
+Last month, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with Seers Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
 
 **"Every loan officer handles the same situation differently."**
 
@@ -34,7 +34,7 @@ A $25,000 personal loan for a client with excellent credit shouldn't require the
 
 **"We can't enforce separation of duties."**
 
-Compliance requires that the person who submits a loan application can't be the same person who approves it. But their current systems don't enforce this—it's just policy that people are supposed to follow. One mistake away from a regulatory finding.
+Compliance requires that the person who submits a loan application can't be the same person who approves it. But their current systems don't enforce this. It's just policy that people are supposed to follow. One mistake away from a regulatory finding.
 
 ### How Agent Memory Solves These Problems
 
@@ -51,12 +51,12 @@ This workshop walks you through building AI agents that address each of Seers Eq
 
 By the end, you'll have a complete loan processing system where:
 
-- **Clients are remembered** — Rate exceptions, contact preferences, and relationship history persist forever
-- **Decisions are consistent** — Agents check what worked before in similar situations
-- **Everything is auditable** — Every tool call is logged with inputs and outputs
-- **Policies are followed** — Agents consult the actual corporate lending policies
-- **Routine work is automated** — Low-risk loans auto-approve; complex ones get human review
-- **Duties are separated** — Loan officers can submit but not approve; underwriters can approve but not submit
+- **Clients are remembered**: Rate exceptions, contact preferences, and relationship history persist forever
+- **Decisions are consistent**: Agents check what worked before in similar situations
+- **Everything is auditable**: Every tool call is logged with inputs and outputs
+- **Policies are followed**: Agents consult the actual corporate lending policies
+- **Routine work is automated**: Low-risk loans auto-approve; complex ones get human review
+- **Duties are separated**: Loan officers can submit but not approve; underwriters can approve but not submit
 
 ## Workshop Structure
 
@@ -64,37 +64,37 @@ By the end, you'll have a complete loan processing system where:
 
 Before solving Seers Equity's problems, you need to understand how agents work:
 
-* **Lab 1 – What is an AI Agent?** — Build your first agent that queries loan application data. See the difference between a chatbot that *explains* how to check loan status versus an agent that *actually checks it*.
+* **Lab 1 – What is an AI Agent?** Build your first agent that queries loan application data. See the difference between a chatbot that *explains* how to check loan status versus an agent that *actually checks it*.
 
-* **Lab 2 – Agents vs Zero-Shot** — Compare three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions.
+* **Lab 2 – Agents vs Zero-Shot** Compare three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions.
 
-* **Lab 3 – How Agents Plan** — Give an agent a complex request about a loan applicant. Watch it plan which tools to call and in what order. See how explicit instructions create predictable behavior.
+* **Lab 3 – How Agents Plan** Give an agent a complex request about a loan applicant. Watch it plan which tools to call and in what order. See how explicit instructions create predictable behavior.
 
-* **Lab 4 – How Agents Execute** — Build Seers Equity's loan risk assessment workflow. Create tools that evaluate loan applications and route them based on amount and type. See conditional logic in action: auto-approve, underwriter review, or senior underwriter.
+* **Lab 4 – How Agents Execute** Build Seers Equity's loan risk assessment workflow. Create tools that evaluate loan applications and route them based on amount and type. See conditional logic in action: auto-approve, underwriter review, or senior underwriter.
 
 ✅ **Build memory systems (Labs 5-9)**
 
 Now you'll solve the "forgetting" problem that frustrates Seers Equity's clients:
 
-* **Lab 5 – Experience the Forgetting Problem** — Tell an agent about Sarah Chen's email preference and 15% rate exception. Clear the session. Ask again. *The agent has no idea who Sarah Chen is.* This is exactly what's happening to Seers Equity's clients.
+* **Lab 5 – Experience the Forgetting Problem** Tell an agent about Sarah Chen's email preference and 15% rate exception. Clear the session. Ask again. *The agent has no idea who Sarah Chen is.* This is exactly what's happening to Seers Equity's clients.
 
-* **Lab 6 – Connect Agents to Enterprise Data** — Ask an agent about Seers Equity's loan rates. Without enterprise data, it gives generic answers. Connect it to the actual policy database and watch it quote real rates, requirements, and client-specific information.
+* **Lab 6 – Connect Agents to Enterprise Data** Ask an agent about Seers Equity's loan rates. Without enterprise data, it gives generic answers. Connect it to the actual policy database and watch it quote real rates, requirements, and client-specific information.
 
-* **Lab 7 – Build Your Memory Core** — Create memory tables using Oracle's native JSON. Build `remember_fact` and `recall_facts` functions. Register them as agent tools. Now when you tell the agent about Sarah Chen, clear the session, and ask again—*the agent remembers*.
+* **Lab 7 – Build Your Memory Core** Create memory tables using Oracle's native JSON. Build `remember_fact` and `recall_facts` functions. Register them as agent tools. Now when you tell the agent about Sarah Chen, clear the session, and ask again, *the agent remembers*.
 
-* **Lab 8 – Implement All Four Memory Types** — Build the complete memory architecture:
-  - **Short-term context** — What loan application are we working on right now?
-  - **Long-term facts** — Client preferences, rate exceptions, relationship history
-  - **Decisions and outcomes** — What did we decide before? What happened?
-  - **Reference knowledge** — Corporate lending policies (human-maintained)
+* **Lab 8 – Implement All Four Memory Types** Build the complete memory architecture:
+  - **Short-term context**: What loan application are we working on right now?
+  - **Long-term facts**: Client preferences, rate exceptions, relationship history
+  - **Decisions and outcomes**: What did we decide before? What happened?
+  - **Reference knowledge**: Corporate lending policies (human-maintained)
 
-* **Lab 9 – The Learning Loop** — Create a fully memory-enabled loan officer assistant. It checks memory before answering, stores new information automatically, consults past decisions for guidance, and looks up policies on demand. Test it across session boundaries—it remembers everything.
+* **Lab 9 – The Learning Loop** Create a fully memory-enabled loan officer assistant. It checks memory before answering, stores new information automatically, consults past decisions for guidance, and looks up policies on demand. Test it across session boundaries. It remembers everything.
 
 ✅ **Control and safety (Lab 10)**
 
 Finally, you'll build the guardrails that make agents safe for financial services:
 
-* **Lab 10 – Tools, Safety, and Human Control** — Build a two-agent system that enforces separation of duties:
+* **Lab 10 – Tools, Safety, and Human Control** Build a two-agent system that enforces separation of duties:
   
   **LOAN_AGENT** (for loan officers):
   - Can submit loan applications
