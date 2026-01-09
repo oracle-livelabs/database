@@ -182,15 +182,15 @@ By the end of this workshop, you'll be able to:
 
 This lab assumes you have:
 
-* An Oracle Cloud account with access to Oracle Database 23ai
+* An Oracle Cloud account with access to Oracle Database 26ai
 * Access to an AI provider (OCI Generative AI, OpenAI, etc.)
 * Basic knowledge of SQL and PL/SQL
 
 ## Learn More
 
-* [Oracle Database 23ai Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/)
+* [Oracle Database 26ai Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
 * [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
-* [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/)
+* [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)
 
 ## Acknowledgements
 
