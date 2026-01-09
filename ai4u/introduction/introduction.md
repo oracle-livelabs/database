@@ -8,7 +8,7 @@ Most AI agents have amnesia. Every conversation starts fresh. They don't remembe
 
 This workshop shows how to build AI agents with **agentic memory**: agents that remember, learn, and improve over time. Using Oracle Database 26ai and Select AI Agent, you'll create agents that store facts, recall context, and make consistent decisions across sessions.
 
-## Meet Seers Equity
+## Meet Seer Equity
 
 Throughout this workshop, you'll build AI agents for **Seers Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
 
