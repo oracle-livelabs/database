@@ -45,11 +45,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -147,9 +147,20 @@ For Select AI to query your table, the profile needs to know about it. We'll add
 
 ## Task 4: Create the Agent Components
 
-Now let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.
+Now let's build an agent that can query this data. An agent system has four components that work together:
 
-1. Create the SQL tool. This gives the agent the ability to query your database.
+| Component | Purpose |
+|-----------|--------|
+| **Tool** | Defines a specific capability the agent can use (like querying a database) |
+| **Agent** | The AI personality with a role and behavior guidelines |
+| **Task** | Instructions that tell the agent what to do and which tools to use |
+| **Team** | Brings agents and tasks together so you can run them |
+
+Think of it like hiring a new employee: the **tool** is the software they'll use, the **agent** is the person with their job title and responsibilities, the **task** is their job description, and the **team** is the department that coordinates their work.
+
+1. Create the SQL tool.
+
+    A **tool** gives the agent a specific capability. Without tools, an agent can only talk—it can't actually do anything. This SQL tool connects to your AI profile and allows the agent to query the loan applications table. The description helps the agent understand when and how to use this tool.
 
     ```sql
     <copy>
@@ -165,7 +176,9 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-2. Create the agent with a clear role.
+2. Create the agent.
+
+    An **agent** is the AI entity that will handle requests. The `role` attribute shapes the agent's personality and behavior—it's like giving an employee their job title and explaining how they should approach their work. Here we're telling the agent it's a loan application assistant and should always use its tools rather than asking follow-up questions.
 
     ```sql
     <copy>
@@ -181,7 +194,9 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-3. Create the task that tells the agent what to do and which tools to use.
+3. Create the task.
+
+    A **task** is a set of instructions that tells the agent exactly what to do when it receives a request. It also specifies which tools the agent can use for this task. The `{query}` placeholder is where the user's question gets inserted. Think of the task as the detailed job description that guides the agent's work.
 
     ```sql
     <copy>
@@ -197,7 +212,9 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-4. Create the team that connects everything together.
+4. Create the team.
+
+    A **team** is the container that brings everything together. It assigns agents to tasks and defines how they coordinate. The `process` attribute determines how work flows—"sequential" means agents work one after another (in this case we only have one agent). You interact with the team, and the team orchestrates which agent handles your request using which task.
 
     ```sql
     <copy>

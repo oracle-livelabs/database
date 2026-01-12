@@ -51,11 +51,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -69,9 +69,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create the Memory Tables
 
-We'll create structures for each memory type.
+We'll create structures for each memory type. Instead of four separate tables, we use one main table with a `memory_type` column to distinguish between types. This makes it easier to query across all memories when needed.
 
 1. Create the unified memory table with type classification.
+
+    The table stores all four memory types. The `memory_type` column tells us what kind of memory it is. Short-term memories have a `session_id` and `expires_at`. Long-term memories have an `entity_id` to track what they're about.
 
     ```sql
     <copy>
@@ -94,6 +96,8 @@ We'll create structures for each memory type.
 
 2. Create a separate reference table for policies (read-only by agents).
 
+    Reference knowledge is different—it's maintained by humans, not learned by the agent. We put it in a separate table to make this clear. Agents can read it, but they shouldn't change it.
+
     ```sql
     <copy>
     CREATE TABLE reference_knowledge (
@@ -110,9 +114,11 @@ We'll create structures for each memory type.
 
 ## Task 3: Short-Term Context (Current Task)
 
-Short-term context holds what's happening right now, the active information for completing the current task.
+Short-term context holds what's happening right now—the active information for completing the current task. Think of it like your working memory when you're on a phone call: who you're talking to, what they just said, what problem you're solving. It expires when the task is done.
 
 1. Create functions for short-term context.
+
+    The `set_context` function stores temporary information tied to a session. Notice the `expires_at` field—short-term context automatically expires after an hour. The `get_context` function retrieves all active context for a session.
 
     ```sql
     <copy>
@@ -186,9 +192,11 @@ Short-term context holds what's happening right now, the active information for 
 
 ## Task 4: Long-Term Facts (Persistent Entity Knowledge)
 
-Long-term facts are stable information the agent should rely on across tasks and sessions.
+Long-term facts are stable information the agent should rely on across tasks and sessions. Unlike short-term context, these never expire. They're things like "Sarah prefers email" or "This customer has a rate exception."
 
 1. Create functions for long-term facts.
+
+    The `store_fact` function saves a fact about an entity. The `get_facts` function retrieves all facts about that entity, optionally filtered by category.
 
     ```sql
     <copy>
@@ -279,9 +287,11 @@ Long-term facts are stable information the agent should rely on across tasks and
 
 ## Task 5: Decisions and Outcomes (Audit Trail)
 
-Decisions and outcomes record what the agent decided and what happened.
+Decisions and outcomes record what the agent decided and what happened. This is your audit trail—when someone asks "why did we do that?", you can look it up. It also helps the agent learn from past decisions.
 
 1. Create functions for decisions and outcomes.
+
+    The `record_decision` function stores what situation occurred, what decision was made, and whether it worked. The `find_past_decisions` function searches for similar situations to learn from.
 
     ```sql
     <copy>
@@ -402,9 +412,11 @@ Decisions and outcomes record what the agent decided and what happened.
 
 ## Task 6: Reference Knowledge (Policies and Procedures)
 
-Reference knowledge is background information the agent consults but does not change.
+Reference knowledge is background information the agent consults but does not change. These are your company policies, procedures, and guidelines—things that humans maintain and agents follow.
 
 1. Create functions for reference knowledge.
+
+    The `add_reference` function is for administrators to add policies. The `get_reference` function lets agents look up what the policy says. Notice agents can read but not write—this keeps your policies under human control.
 
     ```sql
     <copy>

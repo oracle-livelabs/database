@@ -49,11 +49,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -67,9 +67,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create the Memory Table
 
-First, we'll create a memory table to store agent experiences.
+First, we'll create a memory table to store agent experiences. The key difference from earlier labs is the VECTOR column—this stores the mathematical representation of what each memory means.
 
 1. Create the agent memory table with a vector column for semantic embeddings.
+
+    The `embedding` column with type `VECTOR(384)` stores 384 numbers that capture the meaning of each memory. Two memories with similar meanings will have similar vectors, even if they use different words.
 
     ```sql
     <copy>
@@ -90,9 +92,11 @@ First, we'll create a memory table to store agent experiences.
 
 ## Task 3: Load the ONNX Embedding Model
 
-Embedding models convert text into numerical vectors that capture meaning.
+Embedding models convert text into numerical vectors that capture meaning. Instead of calling an external API every time we need an embedding, we load the model directly into the database. This means embeddings happen locally, instantly, and without network latency.
 
 1. Download the model.
+
+    We're using a pre-trained model called "all_MiniLM_L12_v2" that's good at understanding the meaning of sentences. This downloads the model file to the database server.
 
     ```sql
     <copy>
@@ -110,6 +114,8 @@ Embedding models convert text into numerical vectors that capture meaning.
     ```
 
 2. Load it into the database.
+
+    This loads the ONNX model into the database so we can use it in SQL. Once loaded, we can call `VECTOR_EMBEDDING()` in any query to convert text to vectors.
 
     ```sql
     <copy>
@@ -139,7 +145,11 @@ Embedding models convert text into numerical vectors that capture meaning.
 
 ## Task 4: Create a Vector Index
 
+A vector index makes similarity searches fast. Without an index, the database would have to compare your query against every single memory. With an index, it can quickly find the most similar ones.
+
 1. Create a vector index for fast similarity search.
+
+    The index uses "cosine distance" which measures how similar two vectors are based on their direction, not their size. A 95% accuracy target means the index is optimized for speed while staying very accurate.
 
     ```sql
     <copy>
@@ -152,9 +162,11 @@ Embedding models convert text into numerical vectors that capture meaning.
 
 ## Task 5: Create the Learning Loop Functions
 
-The learning loop: action → result → observe → interpret → store → retrieve → better decision.
+The learning loop: action → result → observe → interpret → store → retrieve → better decision. These two functions power the loop—one to store new experiences and one to find relevant past experiences.
 
 1. Create a function to store experiences with embeddings.
+
+    When we store an experience, we combine the situation, action, and outcome into text, then convert that text to a vector. This vector captures the meaning of the whole experience so we can find it later even if we use different words.
 
     ```sql
     <copy>
@@ -190,6 +202,8 @@ The learning loop: action → result → observe → interpret → store → ret
     ```
 
 2. Create semantic search for similar experiences.
+
+    This function takes a new situation and finds the most relevant past experiences. It converts your query to a vector, then finds memories with the most similar vectors. The "relevance" score shows how close the match is—higher percentages mean more relevant experiences.
 
     ```sql
     <copy>
@@ -242,7 +256,7 @@ The learning loop: action → result → observe → interpret → store → ret
 
 ## Task 6: Seed the Learning Database
 
-Let's add some experiences the agent can learn from.
+Let's add some experiences the agent can learn from. We're deliberately adding both successes and failures—the agent needs to learn from both. Notice we're using different words for similar situations ("shipping delay" vs "late delivery") to test semantic search later.
 
 ```sql
 <copy>
@@ -287,7 +301,7 @@ SELECT store_experience(
 
 ## Task 7: See Semantic Search in Action
 
-Now test finding relevant experience by meaning, not keywords.
+Now test finding relevant experience by meaning, not keywords. This is where the magic happens—we'll search using different words than what we stored, and the system will still find the right matches.
 
 1. Search for a shipping issue (different words, same meaning).
 
@@ -327,7 +341,7 @@ Now test finding relevant experience by meaning, not keywords.
 
 ## Task 8: See the Learning Loop in Action
 
-Let's trace a complete learning loop.
+Let's trace a complete learning loop. This is how agents get better over time: they encounter a situation, look up what worked before, take informed action, and then record the outcome so future situations benefit from the experience.
 
 1. **New situation arrives.**
 

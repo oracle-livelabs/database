@@ -50,11 +50,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -68,9 +68,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create a Multi-Tool Agent
 
-To see planning in action, we need an agent with multiple tools. The agent will decide which tools to use and in what order.
+To see planning in action, we need an agent with multiple tools. When an agent has several tools available, it has to figure out which ones to use and in what order. This decision-making process is what we call "planning."
 
 1. Create sample data tables.
+
+    First, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.
 
     ```sql
     <copy>
@@ -105,6 +107,8 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     ```
 
 2. Create tool functions.
+
+    Now we create three different functions, each doing one specific job. This separation is important—instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.
 
     ```sql
     <copy>
@@ -156,6 +160,8 @@ To see planning in action, we need an agent with multiple tools. The agent will 
 
 3. Register the tools.
 
+    Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.
+
     ```sql
     <copy>
     BEGIN
@@ -191,6 +197,8 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     ```
 
 4. Create the agent and team.
+
+    Now we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.
 
     ```sql
     <copy>

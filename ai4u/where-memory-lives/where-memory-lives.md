@@ -48,11 +48,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -66,9 +66,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create the Memory Core Table
 
-The memory table is the foundation, where the agent stores everything it learns.
+The memory table is the foundation—where the agent stores everything it learns. We use JSON for the content because memories can have different shapes: some might be simple facts, others might be preferences with multiple attributes.
 
 1. Create the memory core table.
+
+    This table stores all agent memories. Each memory has a type (like FACT), JSON content (the actual information), and a timestamp. The JSON format gives us flexibility—we can store any kind of structured information.
 
     ```sql
     <copy>
@@ -93,9 +95,11 @@ The memory table is the foundation, where the agent stores everything it learns.
 
 ## Task 3: Create the Remember Function
 
-This function becomes the agent's "save to memory" capability.
+This function becomes the agent's "save to memory" capability. When someone tells the agent something important, the agent calls this function to store it permanently.
 
 1. Create the function to store facts.
+
+    The function takes a fact (the information), an optional category (like "preference" or "contact"), and an optional "about" field (who or what this fact relates to). It stores everything as JSON and returns a confirmation.
 
     ```sql
     <copy>
@@ -128,9 +132,11 @@ This function becomes the agent's "save to memory" capability.
 
 ## Task 4: Create the Recall Function
 
-The recall function is the agent's "search memory" capability.
+The recall function is the agent's "search memory" capability. When someone asks the agent a question, the agent can search its memory for relevant facts.
 
 1. Create the function to retrieve facts.
+
+    This function searches the memory table for facts that match what we're looking for. You can search by entity ("about") or by category. It returns the most recent matching facts.
 
     ```sql
     <copy>
@@ -174,9 +180,11 @@ The recall function is the agent's "search memory" capability.
 
 ## Task 5: Register the Agent Tools
 
-Tools bridge your PL/SQL functions and the AI agent.
+Tools bridge your PL/SQL functions and the AI agent. By registering these functions as tools, we give the agent the ability to remember and recall information. The instructions tell the agent when to use each tool.
 
 1. Register the "remember" tool.
+
+    The instruction tells the agent to use this tool when users share important information. This is how the agent knows to save things.
 
     ```sql
     <copy>
@@ -193,6 +201,8 @@ Tools bridge your PL/SQL functions and the AI agent.
     ```
 
 2. Register the "recall" tool.
+
+    The instruction tells the agent to search memory when asked about something. This is how the agent knows to look things up before answering.
 
     ```sql
     <copy>
@@ -218,7 +228,11 @@ Tools bridge your PL/SQL functions and the AI agent.
 
 ## Task 6: Create the Agent, Task, and Team
 
+Now we put it all together. The agent gets both memory tools, and its role tells it to actively use them. This is what makes it different from the forgetful agent in Lab 5—this one has the ability to actually store and retrieve information.
+
 1. Create the agent with memory awareness.
+
+    The role emphasizes using the tools—never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
 
     ```sql
     <copy>

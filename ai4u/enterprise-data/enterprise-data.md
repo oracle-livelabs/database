@@ -50,11 +50,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -105,9 +105,11 @@ Generic answer. Not YOUR policy.
 
 ## Task 3: Create Enterprise Data
 
-Now let's create the business data that an agent needs.
+Now let's create the business data that an agent needs. This is the key difference—instead of hoping the AI knows your rates and policies, we store them in tables the agent can query.
 
 1. Create loan policy and applicant tables.
+
+    These tables contain Seer Equity's actual business information: real rate tiers, real credit requirements, and real client data. This is what turns a generic AI into YOUR AI.
 
     ```sql
     <copy>
@@ -170,6 +172,8 @@ Now let's create the business data that an agent needs.
 
 2. Create tool functions to access this data.
 
+    Now we create functions that can look up this information. These functions become the agent's eyes into your enterprise data. When someone asks about rates, the agent can look up the real answer instead of guessing.
+
     ```sql
     <copy>
     -- Tool to look up loan policies
@@ -229,6 +233,8 @@ Now let's create the business data that an agent needs.
 
 3. Register the tools.
 
+    We turn these functions into tools the agent can use. The instructions tell the agent to ALWAYS use these tools for policy and applicant questions—never guess. This is how you prevent the agent from making up answers.
+
     ```sql
     <copy>
     BEGIN
@@ -252,9 +258,11 @@ Now let's create the business data that an agent needs.
 
 ## Task 4: Create an Informed Agent
 
-Now let's create an agent with access to Seer Equity's enterprise data.
+Now let's create an agent with access to Seer Equity's enterprise data. The key difference from a regular chatbot is that this agent has tools to look up real information.
 
 1. Create the informed agent.
+
+    Notice how the role and task both emphasize using tools and not guessing. This is important—you're training the agent to rely on your data rather than its general knowledge.
 
     ```sql
     <copy>

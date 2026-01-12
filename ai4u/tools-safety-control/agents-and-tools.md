@@ -58,11 +58,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -76,7 +76,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 2: Create Tables
 
+First, we need the data structures for our expense system. We'll create tables for employees, expense requests, and safety rules.
+
 1. Create the expense system tables.
+
+    The `employees` table tracks who can submit expenses. The `expense_requests` table stores the actual expense submissions with their status. The `safety_rules` table holds our business rules in JSON format—this is how we configure what's allowed without changing code.
 
     ```sql
     <copy>
@@ -130,7 +134,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 3: Create Safety Rules
 
+Safety rules define what's allowed, what needs approval, and what's blocked. We store them as JSON so you can change the rules without changing code—just update the table.
+
 1. Add the business rules.
+
+    Each rule has a type (BLOCK, REQUIRE_APPROVAL, or AUTO_APPROVE), a condition to check, and a message to display. Rules are checked in priority order—lower numbers are checked first.
 
     ```sql
     <copy>
@@ -176,7 +184,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 4: Create the Rules Checker
 
+The rules checker is the brain of our safety system. It looks at an expense and figures out which rule applies.
+
 1. Create the function that checks safety rules.
+
+    This function loops through all active rules in priority order. When it finds a rule that matches the expense (based on amount or category), it returns what action to take. This is how we enforce business logic without hardcoding it.
 
     ```sql
     <copy>
@@ -238,7 +250,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 5: Create Expense Submission Tool
 
+This is the main tool employees use to submit expenses. It checks the rules first, then either blocks the expense, auto-approves it, or queues it for manager approval.
+
 1. Create the submit function that respects the rules.
+
+    The function first calls our rules checker. If the expense is blocked, it returns an error without creating a record. Otherwise, it creates the expense with the appropriate status. Notice how the rules are enforced automatically—the agent doesn't have to understand the rules, it just calls the tool.
 
     ```sql
     <copy>
@@ -300,7 +316,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 6: Create Approval Tools
 
+Managers need different tools than employees. They need to see what's waiting for approval, and then approve or reject each expense. These are three separate tools because they do three different things.
+
 1. Create a function to list expenses needing approval.
+
+    This tool shows all expenses with status NEEDS_APPROVAL. Managers use this to see their queue.
 
     ```sql
     <copy>
@@ -343,6 +363,8 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 2. Create a function to approve an expense.
 
+    This tool changes an expense status to APPROVED. It also records who approved it and when—this is part of your audit trail.
+
     ```sql
     <copy>
     CREATE OR REPLACE FUNCTION approve_expense(
@@ -380,6 +402,8 @@ You should now be on the screen with the notebook imported. This workshop will h
     ```
 
 3. Create a function to reject an expense.
+
+    Similar to approve, but sets the status to REJECTED. Having separate approve and reject functions makes the agent's choices explicit—there's no ambiguity about what action was taken.
 
     ```sql
     <copy>
@@ -423,7 +447,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 7: Register Tools
 
+Now we turn our functions into tools the agents can use. This is where we control which agent can do what—the expense agent only gets the submit tool, while the approval agent gets the review and decision tools.
+
 1. Register all tools.
+
+    Each tool gets an instruction that tells the agent when and how to use it. Notice how we're creating four tools, but we'll assign them to different agents based on their role.
 
     ```sql
     <copy>
@@ -466,7 +494,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 8: Create the Expense Agent (Employee Role)
 
+This agent handles expense submissions for employees. It only has access to the submit tool—it can't approve or reject expenses. This separation of duties is intentional.
+
 1. Create the expense submission agent and team.
+
+    The agent's role tells it what to do: submit expenses and report results. The task gives it access to only SUBMIT_EXPENSE_TOOL. Even if someone asks this agent to approve an expense, it can't—it doesn't have that tool.
 
     ```sql
     <copy>
@@ -504,7 +536,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ### Task 9: Create the Approval Agent (Manager Role)
 
+This agent handles the manager side of the workflow. It has access to three tools: one to see pending expenses, one to approve, and one to reject. Notice it does NOT have access to the submit tool—managers use a different agent for their own expenses.
+
 1. Create the manager approval agent and team.
+
+    The agent gets three tools for its three capabilities. The task instructions tell it which tool to use for each type of request. This is separation of duties in action—employees and managers have different agents with different tools.
 
     ```sql
     <copy>

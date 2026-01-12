@@ -47,11 +47,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -65,7 +65,7 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create an Agent Without Memory
 
-We'll create an agent that has no way to store or retrieve information between sessions.
+We'll create an agent that has no way to store or retrieve information between sessions. Notice that we tell the agent in its role to "remember" things, but we don't give it any tools to actually do that. This is the gap—the agent wants to remember but has no way to make memories persist.
 
 1. Create a simple loan officer assistant agent.
 

@@ -48,11 +48,11 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-2. Click **Import**.
+2. Click **Import** to expand the Import drop down.
 
-3. Select **GitHub** as the source.
+3. Select **Git**.
 
-4. Paste the following GitHub URL:
+4. Paste the following GitHub URL leaving the credential field blank:
 
     ```text
     <copy>
@@ -194,7 +194,11 @@ Still UNDER_REVIEW. SELECT AI can read but cannot write.
 
 Now let's create an agent that can both READ and WRITE. We'll give it two tools: one to look up loans and one to update them.
 
+In this lab, we're using **function-based tools** instead of SQL tools. A function-based tool wraps a PL/SQL function you write, giving you complete control over what the tool does. This is how you give agents the ability to make changes to your data, not just read it.
+
 1. Create a function to look up loans (read).
+
+    This function takes a loan ID and returns the loan details. It's a simple read operation that the agent will use to check on loans before taking action.
 
     ```sql
     <copy>
@@ -221,6 +225,8 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     ```
 
 2. Create a function to update loan status (write).
+
+    This function actually changes data in the database. Notice it first checks the current status, then makes the update. The agent will use this to approve or deny loans.
 
     ```sql
     <copy>
@@ -255,7 +261,9 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     </copy>
     ```
 
-3. Register both as tools.
+3. Register both functions as tools.
+
+    Now we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating—this is how you build smart behavior into your agent.
 
     ```sql
     <copy>
@@ -281,7 +289,9 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     </copy>
     ```
 
-4. Create an agent with both tools.
+4. Create the agent, task, and team.
+
+    Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable. Notice how we give the agent access to TWO tools—it can decide which one to use based on what you ask.
 
     ```sql
     <copy>
