@@ -5,7 +5,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Create Sample Data\n\nYou'll create two related tables: loan applicants and their applications. This gives the agent multiple dimensions of information to work with at Seer Equity.",
+      "text": "%md\n## Create Sample Data\n\nFirst, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.\n\nThis gives the agent multiple dimensions of information to work with at Seer Equity.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -13,7 +13,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create Three Tool Functions\n\nYou'll give the agent three different tools, each accessing different information:\n\n1. **get_applicant**: Basic applicant info (name, credit tier, email)\n2. **get_applicant_loans**: Loan history for an applicant\n3. **check_premium_eligibility**: Whether applicant qualifies for premium rates\n\nThe agent will decide which tools to use based on what's being asked.",
+      "text": "%md\n## Create Three Tool Functions\n\nNow we create three different functions, each doing one specific job. This separation is important—instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.\n\n1. **get_applicant**: Basic applicant info (name, credit tier, email)\n2. **get_applicant_loans**: Loan history for an applicant\n3. **check_premium_eligibility**: Whether applicant qualifies for premium rates",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -21,7 +21,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Register the Tools\n\nEach tool has an instruction that tells the agent when to use it. The agent reads these instructions to plan which tools apply to a given question.",
+      "text": "%md\n## Register the Tools\n\nEach function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -29,7 +29,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the Agent and Team\n\nThe agent has access to all three tools. The task instruction tells it to use tools rather than making up information.",
+      "text": "%md\n## Create the Agent and Team\n\nNow we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

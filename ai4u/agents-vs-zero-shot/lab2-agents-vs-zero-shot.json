@@ -77,15 +77,19 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create an Agent That Can Act\n\nNow let's build an agent that can both READ and WRITE. We'll give it two tools:\n- **lookup_loan**: Reads loan application information\n- **update_loan_status**: Modifies loan application status\n\nThis is the key difference: agents have tools that can take action.",
+      "text": "%md\n## Create an Agent That Can Act\n\nNow let's build an agent that can both READ and WRITE. We'll give it two tools: one to look up loans and one to update them.\n\nIn this lab, we're using **function-based tools** instead of SQL tools. A function-based tool wraps a PL/SQL function you write, giving you complete control over what the tool does. This is how you give agents the ability to make changes to your data, not just read it.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Tool 1: Look up loan applications (read)\nCREATE OR REPLACE FUNCTION lookup_loan(\n    p_application_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT 'Application ' || application_id || ': ' || loan_status || \n           ', Applicant: ' || applicant || \n           ', Amount: $' || TO_CHAR(loan_amount, '999,999') ||\n           ', Type: ' || loan_type ||\n           ', Date: ' || TO_CHAR(application_date, 'YYYY-MM-DD')\n    INTO v_result\n    FROM sample_loans\n    WHERE application_id = p_application_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Loan application ' || p_application_id || ' not found.';\nEND;\n/",
+      "text": "%md\n## Create the Lookup Function\n\nThis function takes a loan ID and returns the loan details. It's a simple read operation that the agent will use to check on loans before taking action.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION lookup_loan(\n    p_application_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT 'Application ' || application_id || ': ' || loan_status || \n           ', Applicant: ' || applicant || \n           ', Amount: $' || TO_CHAR(loan_amount, '999,999') ||\n           ', Type: ' || loan_type ||\n           ', Date: ' || TO_CHAR(application_date, 'YYYY-MM-DD')\n    INTO v_result\n    FROM sample_loans\n    WHERE application_id = p_application_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Loan application ' || p_application_id || ' not found.';\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the Update Function\n\nThis function can actually modify data. Notice the `PRAGMA AUTONOMOUS_TRANSACTION` which allows it to commit changes.",
+      "text": "%md\n## Create the Update Function\n\nThis function actually changes data in the database. Notice it first checks the current status, then makes the update. The agent will use this to approve or deny loans.\n\nThe `PRAGMA AUTONOMOUS_TRANSACTION` allows it to commit changes independently.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -93,7 +97,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Register the Tools\n\nNow register both functions as agent tools. The instructions tell the agent when to use each tool.",
+      "text": "%md\n## Register the Tools\n\nNow we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating—this is how you build smart behavior into your agent.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -101,7 +105,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the Agent and Team\n\nBuild the agent with access to both tools. The role tells the agent to look up applications before updating them.",
+      "text": "%md\n## Create the Agent, Task, and Team\n\nNow we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.\n\nNotice how we give the agent access to TWO tools—it can decide which one to use based on what you ask.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

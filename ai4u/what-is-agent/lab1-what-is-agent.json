@@ -53,31 +53,35 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the SQL Tool\n\nNow you'll build the agent components. First, create a SQL tool—this gives the agent the ability to query Seers Equity's database.\n\nThe tool description tells the agent what data is available. Notice we list the columns and valid status values so the agent knows how to write good queries.",
+      "text": "%md\n## Create the Agent Components\n\nNow you'll build the agent components. An agent system has four parts that work together:\n\n| Component | Purpose |\n|-----------|--------|\n| **Tool** | Defines a specific capability the agent can use (like querying a database) |\n| **Agent** | The AI personality with a role and behavior guidelines |\n| **Task** | Instructions that tell the agent what to do and which tools to use |\n| **Team** | Brings agents and tasks together so you can run them |\n\nThink of it like hiring a new employee: the **tool** is the software they'll use, the **agent** is the person with their job title and responsibilities, the **task** is their job description, and the **team** is the department that coordinates their work.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'LOAN_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the LOAN_APPLICATIONS table for Seers Equity. Columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending/Under Review/Approved/Denied), LOAN_AMOUNT, LOAN_TYPE (Personal/Auto/Mortgage/Business).'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n## Create the Agent\n\nThe agent is the \"brain\" that decides how to respond to requests. The `role` tells it what kind of assistant it is—a loan application assistant for Seers Equity.\n\nNotice the instruction to \"never ask clarifying questions\"—this ensures the agent takes action rather than asking you for more details.",
+      "text": "%md\n## Create the SQL Tool\n\nA **tool** gives the agent a specific capability. Without tools, an agent can only talk—it can't actually do anything. This SQL tool connects to your AI profile and allows the agent to query the loan applications table. The description helps the agent understand when and how to use this tool.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'LOAN_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan application assistant for Seers Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find.\"}',\n        description => 'Agent that looks up loan application information'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'LOAN_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the LOAN_APPLICATIONS table for Seer Equity. Columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending/Under Review/Approved/Denied), LOAN_AMOUNT, LOAN_TYPE (Personal/Auto/Mortgage/Business).'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the Task\n\nThe task connects the agent to its tools and provides specific instructions for handling requests.\n\nThe `{query}` placeholder is where the user's question gets inserted. The tools array lists which tools the agent can use.",
+      "text": "%md\n## Create the Agent\n\nAn **agent** is the AI entity that will handle requests. The `role` attribute shapes the agent's personality and behavior—it's like giving an employee their job title and explaining how they should approach their work. Here we're telling the agent it's a loan application assistant and should always use its tools rather than asking follow-up questions.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'LOAN_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Seers Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (values: Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"LOAN_LOOKUP\"]}',\n        description => 'Task for handling loan application inquiries'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'LOAN_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan application assistant for Seer Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find.\"}',\n        description => 'Agent that looks up loan application information'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the Team\n\nThe team ties everything together. It assigns the task to the agent and defines how requests flow through the system.\n\nFor this simple agent, we use `sequential` processing—requests go to one agent, which completes them.",
+      "text": "%md\n## Create the Task\n\nA **task** is a set of instructions that tells the agent exactly what to do when it receives a request. It also specifies which tools the agent can use for this task. The `{query}` placeholder is where the user's question gets inserted. Think of the task as the detailed job description that guides the agent's work.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'LOAN_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Seer Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (values: Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"LOAN_LOOKUP\"]}',\n        description => 'Task for handling loan application inquiries'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Create the Team\n\nA **team** is the container that brings everything together. It assigns agents to tasks and defines how they coordinate. The `process` attribute determines how work flows—\"sequential\" means agents work one after another (in this case we only have one agent). You interact with the team, and the team orchestrates which agent handles your request using which task.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -141,11 +145,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n> \"To check the status of a loan application at Seers Equity, you would typically:\n> 1. Log into the loan management system\n> 2. Navigate to Application Search\n> 3. Enter the application ID\n> 4. View the current status\"\n\n**Your agent said:**\n> \"Loan application LOAN-12345 for Alex Chen was submitted on January 2, 2025 for a $45,000 Personal loan. Current status: Approved.\"\n\nSame question. One explains the process. The other runs it.\n\n**That's what makes an agent an agent. It doesn't just know things, it does things.**",
+      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n> \"To check the status of a loan application at Seer Equity, you would typically:\n> 1. Log into the loan management system\n> 2. Navigate to Application Search\n> 3. Enter the application ID\n> 4. View the current status\"\n\n**Your agent said:**\n> \"Loan application LOAN-12345 for Alex Chen was submitted on January 2, 2025 for a $45,000 Personal loan. Current status: Approved.\"\n\nSame question. One explains the process. The other runs it.\n\n**That's what makes an agent an agent. It doesn't just know things, it does things.**",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## What You Built\n\nCongratulations! You've created your first AI agent for Seers Equity. Here's what you accomplished:\n\n- Created a table with descriptive comments for Select AI\n- Added the table to your AI profile's object_list  \n- Built an agent with a SQL tool\n- Watched it query real loan application data to answer questions\n- Saw the execution history proving it took action\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.",
+      "text": "%md\n## What You Built\n\nCongratulations! You've created your first AI agent for Seer Equity. Here's what you accomplished:\n\n- Created a table with descriptive comments for Select AI\n- Added the table to your AI profile's object_list  \n- Built an agent with a SQL tool\n- Watched it query real loan application data to answer questions\n- Saw the execution history proving it took action\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
