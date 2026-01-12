@@ -1,0 +1,167 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Welcome to Your First AI Agent at Seers Equity\n\n### The Business Problem\n\n**Seers Equity** is a growing financial services company—and they're struggling. Loan officers spend hours answering basic questions: *\"What's the status of my application?\" \"How much did I apply for?\" \"Is my mortgage still under review?\"*\n\nThe company deployed AI chatbots, but they just explain *how* to look things up. They don't actually look anything up. A client asks about their loan status and gets a five-step tutorial on using the loan portal. Not helpful.\n\nSeers Equity needs AI that *acts*—that queries the actual loan database and returns real answers.\n\n### What You'll Learn\n\nIn this lab, you'll build your first AI agent and see the fundamental difference between chatbots and agents:\n\n- **Chatbots** explain how to do things\n- **Agents** actually do things\n\nYou'll create an agent that queries Seers Equity's loan application data directly. Ask it about a loan, and it returns the real status from the database—not instructions on how to find it yourself.\n\n**What you'll build:** A loan application lookup agent with a SQL tool that queries your database.\n\n**Estimated Time:** 10 minutes",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%md\n## Create the Loan Applications Table\n\nFirst, you need data for the agent to work with. You'll create a simple loan applications table with sample applications.\n\nThis table represents a real business system—the kind of data that a chatbot would never be able to access, but your agent will query directly.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCREATE TABLE loan_applications (\n    application_id     VARCHAR2(20) PRIMARY KEY,\n    applicant_name     VARCHAR2(100),\n    application_date   DATE,\n    loan_status        VARCHAR2(30),\n    loan_amount        NUMBER(12,2),\n    loan_type          VARCHAR2(30)\n);",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Add Comments for Select AI\n\nSelect AI reads table and column comments to understand your schema. Good comments make the AI smarter about your data.\n\nThink of comments as documentation that the AI can read. The more descriptive your comments, the better the AI understands how to query Seers Equity's loan data.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nCOMMENT ON TABLE loan_applications IS 'Seers Equity loan applications including status tracking and amounts';\nCOMMENT ON COLUMN loan_applications.application_id IS 'Unique application identifier like LOAN-12345';\nCOMMENT ON COLUMN loan_applications.applicant_name IS 'Full name of the person or business applying for the loan';\nCOMMENT ON COLUMN loan_applications.application_date IS 'Date the loan application was submitted';\nCOMMENT ON COLUMN loan_applications.loan_status IS 'Current status: Pending, Under Review, Approved, or Denied';\nCOMMENT ON COLUMN loan_applications.loan_amount IS 'Requested loan amount in dollars';\nCOMMENT ON COLUMN loan_applications.loan_type IS 'Type of loan: Personal, Auto, Mortgage, or Business';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Insert Sample Loan Applications\n\nNow add four loan applications with different statuses. These will be the applications your agent can look up:\n\n| Application ID | Applicant | Status | Amount | Type |\n|----------------|-----------|--------|--------|------|\n| LOAN-12345 | Alex Chen | Approved | $45,000 | Personal |\n| LOAN-12346 | Maria Santos | Under Review | $275,000 | Mortgage |\n| LOAN-12347 | James Wilson | Approved | $32,000 | Auto |\n| LOAN-12348 | Sarah Johnson | Pending | $85,000 | Business |",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nINSERT INTO loan_applications VALUES ('LOAN-12345', 'Alex Chen', DATE '2025-01-02', 'Approved', 45000, 'Personal');\nINSERT INTO loan_applications VALUES ('LOAN-12346', 'Maria Santos', DATE '2025-01-03', 'Under Review', 275000, 'Mortgage');\nINSERT INTO loan_applications VALUES ('LOAN-12347', 'James Wilson', DATE '2024-12-28', 'Approved', 32000, 'Auto');\nINSERT INTO loan_applications VALUES ('LOAN-12348', 'Sarah Johnson', DATE '2025-01-04', 'Pending', 85000, 'Business');\nCOMMIT;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Verify Your Data\n\nBefore building the agent, confirm the data exists. You should see all four loan applications with their statuses.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT application_id, applicant_name, loan_status, loan_amount, loan_type FROM loan_applications;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Add the Table to Your AI Profile\n\nFor Select AI to query your table, the profile needs to know about it. The `object_list` tells Select AI which tables it can access.\n\nWithout this step, the AI won't know your table exists—it would be invisible to the agent.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"LOAN_APPLICATIONS\"}]'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Verify the Profile\n\nConfirm your profile is ready. You should see `genai` with status `ENABLED`.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT profile_name, status FROM USER_CLOUD_AI_PROFILES WHERE profile_name = 'genai';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Create the SQL Tool\n\nNow you'll build the agent components. First, create a SQL tool—this gives the agent the ability to query Seers Equity's database.\n\nThe tool description tells the agent what data is available. Notice we list the columns and valid status values so the agent knows how to write good queries.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'LOAN_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the LOAN_APPLICATIONS table for Seers Equity. Columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending/Under Review/Approved/Denied), LOAN_AMOUNT, LOAN_TYPE (Personal/Auto/Mortgage/Business).'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Create the Agent\n\nThe agent is the \"brain\" that decides how to respond to requests. The `role` tells it what kind of assistant it is—a loan application assistant for Seers Equity.\n\nNotice the instruction to \"never ask clarifying questions\"—this ensures the agent takes action rather than asking you for more details.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'LOAN_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan application assistant for Seers Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find.\"}',\n        description => 'Agent that looks up loan application information'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Create the Task\n\nThe task connects the agent to its tools and provides specific instructions for handling requests.\n\nThe `{query}` placeholder is where the user's question gets inserted. The tools array lists which tools the agent can use.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'LOAN_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Seers Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (values: Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"LOAN_LOOKUP\"]}',\n        description => 'Task for handling loan application inquiries'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Create the Team\n\nThe team ties everything together. It assigns the task to the agent and defines how requests flow through the system.\n\nFor this simple agent, we use `sequential` processing—requests go to one agent, which completes them.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'LOAN_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"LOAN_AGENT\", \"task\": \"LOAN_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for loan application inquiries'\n    );\nEND;\n/",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Verify Everything Is Created\n\nConfirm all four components exist and are enabled. You should see:\n- Tool: LOAN_LOOKUP\n- Agent: LOAN_AGENT  \n- Task: LOAN_TASK\n- Team: LOAN_TEAM\n\nAll should have status ENABLED.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT tool_name, status FROM USER_AI_AGENT_TOOLS WHERE tool_name = 'LOAN_LOOKUP';\nSELECT agent_name, status FROM USER_AI_AGENTS WHERE agent_name = 'LOAN_AGENT';\nSELECT task_name, status FROM USER_AI_AGENT_TASKS WHERE task_name = 'LOAN_TASK';\nSELECT agent_team_name, status FROM USER_AI_AGENT_TEAMS WHERE agent_team_name = 'LOAN_TEAM';",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Activate the Team\n\nBefore you can use the agent, you need to set the team for your session. This tells Oracle which agent should handle your SELECT AI AGENT commands.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_TEAM');",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Ask About a Loan Application\n\n**This is the key moment.** The agent doesn't explain *how* to check loan application status. It actually queries your loan_applications table and tells you the answer.\n\nWatch the response—you should see specific information about application LOAN-12345: Alex Chen, Approved, $45,000 Personal loan.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What is the status of loan application LOAN-12345;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Ask About Loan Amount\n\nTry a different question. The agent should return that application LOAN-12347 was for $32,000.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT How much was loan application LOAN-12347 for;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## Ask a Question Requiring Reasoning\n\nThis question requires the agent to filter data—find loan applications that are still under review. \n\nYou should see Maria Santos' mortgage application (LOAN-12346) in the response, since that's the only one with status \"Under Review\".",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Which loan applications are still under review;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## See the Tool Execution History\n\nThe agent used a tool to get those answers. Let's see the evidence.\n\nYou should see LOAN_LOOKUP calls with the query results. This proves the agent actually queried your database—it didn't make up the answers.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called_at,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## See the Team Execution History\n\nYou can also see the team-level history, showing when each request was processed and its final state.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nSELECT \n    team_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as started,\n    state\nFROM USER_AI_AGENT_TEAM_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    },
+    {
+      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n> \"To check the status of a loan application at Seers Equity, you would typically:\n> 1. Log into the loan management system\n> 2. Navigate to Application Search\n> 3. Enter the application ID\n> 4. View the current status\"\n\n**Your agent said:**\n> \"Loan application LOAN-12345 for Alex Chen was submitted on January 2, 2025 for a $45,000 Personal loan. Current status: Approved.\"\n\nSame question. One explains the process. The other runs it.\n\n**That's what makes an agent an agent—it doesn't just know things, it does things.**",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%md\n## What You Built\n\nCongratulations! You've created your first AI agent for Seers Equity. Here's what you accomplished:\n\n- Created a table with descriptive comments for Select AI\n- Added the table to your AI profile's object_list  \n- Built an agent with a SQL tool\n- Watched it query real loan application data to answer questions\n- Saw the execution history proving it took action\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('LOAN_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('LOAN_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('LOAN_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('LOAN_LOOKUP', TRUE);\nDROP TABLE loan_applications PURGE;",
+      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+    }
+  ],
+  "name": "Lab 1 - What Is an AI Agent",
+  "id": "lab1-what-is-agent",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": { "isZeppelinNotebookCronEnable": false },
+  "info": {}
+}
