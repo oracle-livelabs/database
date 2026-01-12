@@ -4,11 +4,11 @@
 
 Most people think AI is just a chatbot. You ask a question, it gives an answer. But agents do more. They don't just respond, they *act*. They look up real data, make decisions based on your systems, and complete tasks.
 
-In this lab, you'll see that difference firsthand at **Seers Equity**, a growing financial services company. You'll create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
+In this lab, you'll see that difference firsthand at **Seer Equity**, a growing financial services company. You'll create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
 
 ### The Business Problem
 
-At Seers Equity, loan officers spend hours every day answering the same question: *"What's my loan status?"*
+At Seer Equity, loan officers spend hours every day answering the same question: *"What's my loan status?"*
 
 When a client calls, the loan officer has to log into the system, navigate to the right screen, find the application, and read out the status. It's tedious. It's slow. And it takes time away from actually helping clients.
 
@@ -16,11 +16,11 @@ The company tried deploying a chatbot. But when a client asked "What's the statu
 
 > *"I asked the AI about my loan and it told me how to look it up. I know how to look it up! I wanted you to just tell me the status."*
 >
-> Frustrated Seers Equity client
+> Frustrated Seer Equity client
 
 ### What You'll Learn
 
-This lab shows you the fundamental difference between a chatbot (explains how) and an agent (actually does it). You'll build an agent that queries real loan data and returns actual answers. This is the first step toward solving Seers Equity's client service challenges.
+This lab shows you the fundamental difference between a chatbot (explains how) and an agent (actually does it). You'll build an agent that queries real loan data and returns actual answers. This is the first step toward solving Seer Equity's client service challenges.
 
 **What you'll build:** A loan application lookup agent with a SQL tool that queries your database.
 
@@ -39,7 +39,29 @@ This lab assumes you have:
 
 * An AI profile named `genai` already configured with your AI provider credentials
 
-## Task 1: Create the Loan Applications Table
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/what-is-agent/lab1-what-is-agent.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Create the Loan Applications Table
 
 First, let's create a loan applications table. This gives the agent something real to work with, the kind of data that a chatbot would never be able to access.
 
@@ -64,7 +86,7 @@ First, let's create a loan applications table. This gives the agent something re
 
     ```sql
     <copy>
-    COMMENT ON TABLE loan_applications IS 'Seers Equity loan applications including status tracking and amounts';
+    COMMENT ON TABLE loan_applications IS 'Seer Equity loan applications including status tracking and amounts';
     COMMENT ON COLUMN loan_applications.application_id IS 'Unique application identifier like LOAN-12345';
     COMMENT ON COLUMN loan_applications.applicant_name IS 'Full name of the person or business applying for the loan';
     COMMENT ON COLUMN loan_applications.application_date IS 'Date the loan application was submitted';
@@ -94,7 +116,7 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
-## Task 2: Add the Table to Your AI Profile
+## Task 3: Add the Table to Your AI Profile
 
 For Select AI to query your table, the profile needs to know about it. We'll add the table to your existing `genai` profile's object list.
 
@@ -123,7 +145,7 @@ For Select AI to query your table, the profile needs to know about it. We'll add
     </copy>
     ```
 
-## Task 3: Create the Agent Components
+## Task 4: Create the Agent Components
 
 Now let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.
 
@@ -151,7 +173,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'LOAN_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan application assistant for Seers Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find."}',
+                            "role": "You are a loan application assistant for Seer Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find."}',
             description => 'Agent that looks up loan application information'
         );
     END;
@@ -166,7 +188,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'LOAN_TASK',
-            attributes  => '{"instruction": "Answer questions about Seers Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
+            attributes  => '{"instruction": "Answer questions about Seer Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
                             "tools": ["LOAN_LOOKUP"]}',
             description => 'Task for handling loan application inquiries'
         );
@@ -202,7 +224,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-## Task 4: See the Agent in Action
+## Task 5: See the Agent in Action
 
 Now let's see the difference between an agent and a chatbot.
 
@@ -240,7 +262,7 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
-## Task 5: See What Happened Behind the Scenes
+## Task 6: See What Happened Behind the Scenes
 
 The agent used a tool to get real answers. Let's see the evidence.
 
@@ -272,12 +294,12 @@ The agent used a tool to get real answers. Let's see the evidence.
     </copy>
     ```
 
-## Task 6: The Chatbot vs Agent Difference
+## Task 7: The Chatbot vs Agent Difference
 
 **A chatbot would say:**
 
 > "To check the status of a loan application, you would typically:
-> 1. Log into the Seers Equity portal
+> 1. Log into the Seer Equity portal
 > 2. Navigate to Application Status
 > 3. Enter your application ID
 > 4. View the current status"
@@ -288,7 +310,7 @@ The agent used a tool to get real answers. Let's see the evidence.
 
 Same question. One explains the process. The other runs it.
 
-That's what makes an agent an agent. It doesn't just know things. It *does* things. And that's exactly what Seers Equity's clients need.
+That's what makes an agent an agent. It doesn't just know things. It *does* things. And that's exactly what Seer Equity's clients need.
 
 ## Summary
 
@@ -301,7 +323,7 @@ In this lab, you experienced the fundamental nature of AI agents:
 * Saw the execution history proving it took action
 * Understood the difference between explanation and execution
 
-**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Seers Equity, and for your business.
+**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Seer Equity, and for your business.
 
 ## Learn More
 

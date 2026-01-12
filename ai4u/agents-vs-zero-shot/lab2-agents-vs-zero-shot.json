@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## Why Agents Beat Zero-Shot Prompts at Seers Equity\n\n### The Business Problem\n\nSeers Equity's loan officers have been using AI chatbots for months, and the reviews are... mixed.\n\n*\"I asked it about a client's loan status and it told me how to log into our system. I know how to log in! I wanted the actual status.\"*\n\n*\"It gave me great advice on updating loan records, but it can't actually update them. I still have to do everything manually.\"*\n\nThe chatbots are helpful for general questions, but they can't access Seers Equity's data or take action. They explain processes without executing them.\n\n### What You'll Learn\n\nIn this lab, you'll directly compare three approaches to understand why agents are transforming how work gets done:\n\n| Approach | Can Access Data | Can Modify Data | Can Coordinate |\n|----------|-----------------|-----------------|----------------|\n| **SELECT AI CHAT** (zero-shot) | ❌ No | ❌ No | ❌ No |\n| **SELECT AI** | ✅ Yes | ❌ No | ❌ No |\n| **SELECT AI AGENT** | ✅ Yes | ✅ Yes | ✅ Yes |\n\nYou'll ask the same question about loan applications to each approach and see the dramatic difference.\n\n**What you'll build:** A comparison showing exactly when to use each approach.\n\n**Estimated Time:** 10 minutes",
+      "text": "%md\n## Why Agents Beat Zero-Shot Prompts at Seer Equity\n\n### The Business Problem\n\nSeer Equity's loan officers have been using AI chatbots for months, and the reviews are... mixed.\n\n*\"I asked it about a client's loan status and it told me how to log into our system. I know how to log in! I wanted the actual status.\"*\n\n*\"It gave me great advice on updating loan records, but it can't actually update them. I still have to do everything manually.\"*\n\nThe chatbots are helpful for general questions, but they can't access Seer Equity's data or take action. They explain processes without executing them.\n\n### What You'll Learn\n\nIn this lab, you'll directly compare three approaches to understand why agents are transforming how work gets done:\n\n| Approach | Can Access Data | Can Modify Data | Can Coordinate |\n|----------|-----------------|-----------------|----------------|\n| **SELECT AI CHAT** (zero-shot) | No | No | No |\n| **SELECT AI** | Yes | No | No |\n| **SELECT AI AGENT** | Yes | Yes | Yes |\n\nYou'll ask the same question about loan applications to each approach and see the dramatic difference.\n\n**What you'll build:** A comparison showing exactly when to use each approach.\n\n**Estimated Time:** 10 minutes",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -13,11 +13,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Try Zero-Shot: Ask a Procedural Question\n\nZero-shot (SELECT AI CHAT) goes directly to the LLM for general knowledge. Watch what happens when you ask how to process a loan application.\n\n**What you'll see:** A helpful explanation of the steps—but you still have to do each step yourself. The AI advises; it doesn't act.",
+      "text": "%md\n## Try Zero-Shot: Ask a Procedural Question\n\nZero-shot (SELECT AI CHAT) goes directly to the LLM for general knowledge. Watch what happens when you ask how to process a loan application.\n\n**What you'll see:** A helpful explanation of the steps, but you still have to do each step yourself. The AI advises; it doesn't act.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI CHAT How do I process a loan application at Seers Equity;",
+      "text": "%script\nSELECT AI CHAT How do I process a loan application at Seer Equity;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -25,7 +25,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nSELECT AI CHAT What is the status of loan application LOAN-12345 at Seers Equity;",
+      "text": "%script\nSELECT AI CHAT What is the status of loan application LOAN-12345 at Seer Equity;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -37,11 +37,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create Sample Data for SELECT AI\n\nBefore we try SELECT AI (without CHAT or AGENT), we need actual data. Let's create a loan applications table.\n\nNotice the detailed comments—these help Select AI understand what each column contains.",
+      "text": "%md\n## Create Sample Data for SELECT AI\n\nBefore we try SELECT AI (without CHAT or AGENT), we need actual data. Let's create a loan applications table.\n\nNotice the detailed comments. These help Select AI understand what each column contains.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Create the loan applications table\nCREATE TABLE sample_loans (\n    application_id  VARCHAR2(20) PRIMARY KEY,\n    applicant       VARCHAR2(100),\n    loan_status     VARCHAR2(20),\n    loan_amount     NUMBER(12,2),\n    loan_type       VARCHAR2(30),\n    application_date DATE DEFAULT SYSDATE\n);\n\n-- Add comments so Select AI understands the table\nCOMMENT ON TABLE sample_loans IS 'Seers Equity loan applications with applicant, status, amount, and type.';\nCOMMENT ON COLUMN sample_loans.application_id IS 'Unique application identifier. Examples: LOAN-12345, LOAN-12346.';\nCOMMENT ON COLUMN sample_loans.applicant IS 'Name of person or business applying for the loan';\nCOMMENT ON COLUMN sample_loans.loan_status IS 'Application status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';\nCOMMENT ON COLUMN sample_loans.loan_amount IS 'Requested loan amount in US dollars';\nCOMMENT ON COLUMN sample_loans.loan_type IS 'Type of loan: Personal, Auto, Mortgage, or Business';\nCOMMENT ON COLUMN sample_loans.application_date IS 'Date when the application was submitted';\n\n-- Insert sample data\nINSERT INTO sample_loans VALUES ('LOAN-12345', 'Acme Corp', 'UNDER_REVIEW', 150000, 'Business', SYSDATE - 3);\nINSERT INTO sample_loans VALUES ('LOAN-12346', 'TechStart LLC', 'PENDING', 75000, 'Business', SYSDATE - 1);\nINSERT INTO sample_loans VALUES ('LOAN-12347', 'GlobalCo Inc', 'APPROVED', 250000, 'Business', SYSDATE - 7);\nCOMMIT;",
+      "text": "%script\n-- Create the loan applications table\nCREATE TABLE sample_loans (\n    application_id  VARCHAR2(20) PRIMARY KEY,\n    applicant       VARCHAR2(100),\n    loan_status     VARCHAR2(20),\n    loan_amount     NUMBER(12,2),\n    loan_type       VARCHAR2(30),\n    application_date DATE DEFAULT SYSDATE\n);\n\n-- Add comments so Select AI understands the table\nCOMMENT ON TABLE sample_loans IS 'Seer Equity loan applications with applicant, status, amount, and type.';\nCOMMENT ON COLUMN sample_loans.application_id IS 'Unique application identifier. Examples: LOAN-12345, LOAN-12346.';\nCOMMENT ON COLUMN sample_loans.applicant IS 'Name of person or business applying for the loan';\nCOMMENT ON COLUMN sample_loans.loan_status IS 'Application status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';\nCOMMENT ON COLUMN sample_loans.loan_amount IS 'Requested loan amount in US dollars';\nCOMMENT ON COLUMN sample_loans.loan_type IS 'Type of loan: Personal, Auto, Mortgage, or Business';\nCOMMENT ON COLUMN sample_loans.application_date IS 'Date when the application was submitted';\n\n-- Insert sample data\nINSERT INTO sample_loans VALUES ('LOAN-12345', 'Acme Corp', 'UNDER_REVIEW', 150000, 'Business', SYSDATE - 3);\nINSERT INTO sample_loans VALUES ('LOAN-12346', 'TechStart LLC', 'PENDING', 75000, 'Business', SYSDATE - 1);\nINSERT INTO sample_loans VALUES ('LOAN-12347', 'GlobalCo Inc', 'APPROVED', 250000, 'Business', SYSDATE - 7);\nCOMMIT;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -77,7 +77,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create an Agent That Can Act\n\nNow let's build an agent that can both READ and WRITE. We'll give it two tools:\n- **lookup_loan**: Reads loan application information\n- **update_loan_status**: Modifies loan application status\n\nThis is the key difference—agents have tools that can take action.",
+      "text": "%md\n## Create an Agent That Can Act\n\nNow let's build an agent that can both READ and WRITE. We'll give it two tools:\n- **lookup_loan**: Reads loan application information\n- **update_loan_status**: Modifies loan application status\n\nThis is the key difference: agents have tools that can take action.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -105,7 +105,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'LOAN_MGMT_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan application management agent for Seers Equity. You can look up loan applications and update their status. Always look up an application first before updating it. Never make up application information - always use your tools.\"}',\n        description => 'Agent that can look up and update loan applications'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'LOAN_MGMT_TASK',\n        attributes  => '{\"instruction\": \"Help with loan application inquiries and status updates. When asked to check an application, use LOAN_LOOKUP_TOOL. When asked to update an application, first use LOAN_LOOKUP_TOOL to verify current status, then use LOAN_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}\",\n                        \"tools\": [\"LOAN_LOOKUP_TOOL\", \"LOAN_UPDATE_TOOL\"]}',\n        description => 'Task for loan application lookups and updates'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'LOAN_MGMT_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"LOAN_MGMT_AGENT\", \"task\": \"LOAN_MGMT_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for loan application management'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'LOAN_MGMT_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan application management agent for Seer Equity. You can look up loan applications and update their status. Always look up an application first before updating it. Never make up application information - always use your tools.\"}',\n        description => 'Agent that can look up and update loan applications'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'LOAN_MGMT_TASK',\n        attributes  => '{\"instruction\": \"Help with loan application inquiries and status updates. When asked to check an application, use LOAN_LOOKUP_TOOL. When asked to update an application, first use LOAN_LOOKUP_TOOL to verify current status, then use LOAN_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}\",\n                        \"tools\": [\"LOAN_LOOKUP_TOOL\", \"LOAN_UPDATE_TOOL\"]}',\n        description => 'Task for loan application lookups and updates'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'LOAN_MGMT_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"LOAN_MGMT_AGENT\", \"task\": \"LOAN_MGMT_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for loan application management'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -125,7 +125,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Verify the Agent Made the Change\n\nLet's confirm the update actually happened.\n\n**What you'll see:** Status is now APPROVED. The agent didn't just talk about updating—it actually did it.",
+      "text": "%md\n## Verify the Agent Made the Change\n\nLet's confirm the update actually happened.\n\n**What you'll see:** Status is now APPROVED. The agent didn't just talk about updating. It actually did it.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -133,7 +133,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Test Conditional Logic\n\nNow try the same request on loan application LOAN-12346, which is PENDING (not under review).\n\n**What you'll see:** The agent looks up the application, sees it's PENDING, and correctly decides NOT to update it because the condition (\"if it's under review\") isn't met.\n\nThis is intelligent coordination—the agent makes decisions based on data.",
+      "text": "%md\n## Test Conditional Logic\n\nNow try the same request on loan application LOAN-12346, which is PENDING (not under review).\n\n**What you'll see:** The agent looks up the application, sees it's PENDING, and correctly decides NOT to update it because the condition (\"if it's under review\") isn't met.\n\nThis is intelligent coordination. The agent makes decisions based on data.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -141,7 +141,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Review the Tool Execution History\n\nEvery tool call is logged. You can see exactly what the agent did.\n\n**What you'll see:** The sequence of tool calls—lookups followed by updates (or just lookups when no update was needed).",
+      "text": "%md\n## Review the Tool Execution History\n\nEvery tool call is logged. You can see exactly what the agent did.\n\n**What you'll see:** The sequence of tool calls: lookups followed by updates (or just lookups when no update was needed).",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -149,11 +149,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## The Comparison Summary\n\n| Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |\n|----------|---------------------|-----------------|----------------------|\n| SELECT AI CHAT | ❌ No | ❌ No | ❌ No |\n| SELECT AI | ✅ Yes | ❌ No | ❌ No |\n| SELECT AI AGENT | ✅ Yes | ✅ Yes | ✅ Yes |\n\n**Use SELECT AI CHAT when:**\n- You need general knowledge answers\n- No data access required\n- You want advice or explanation\n\n**Use SELECT AI when:**\n- You need to query your data with natural language\n- Read-only access is sufficient\n\n**Use SELECT AI AGENT when:**\n- You need to read AND write data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across multiple steps",
+      "text": "%md\n## The Comparison Summary\n\n| Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |\n|----------|---------------------|-----------------|----------------------|\n| SELECT AI CHAT | No | No | No |\n| SELECT AI | Yes | No | No |\n| SELECT AI AGENT | Yes | Yes | Yes |\n\n**Use SELECT AI CHAT when:**\n- You need general knowledge answers\n- No data access required\n- You want advice or explanation\n\n**Use SELECT AI when:**\n- You need to query your data with natural language\n- Read-only access is sufficient\n\n**Use SELECT AI AGENT when:**\n- You need to read AND write data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across multiple steps",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## What You Learned\n\nYou directly compared three approaches:\n\n- **SELECT AI CHAT** — Cannot access your data; can only give generic advice\n- **SELECT AI** — Can read your data but cannot modify it  \n- **SELECT AI AGENT** — Can read your data, make decisions, and take action\n\nYou watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.\n\n**Key takeaway:** The difference is not just intelligence—it is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.",
+      "text": "%md\n## What You Learned\n\nYou directly compared three approaches:\n\n- **SELECT AI CHAT**: Cannot access your data; can only give generic advice\n- **SELECT AI**: Can read your data but cannot modify it  \n- **SELECT AI AGENT**: Can read your data, make decisions, and take action\n\nYou watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.\n\n**Key takeaway:** The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

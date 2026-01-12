@@ -1,11 +1,11 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## How Agents Plan Their Work at Seers Equity\n\n### The Business Problem\n\nWhen a loan officer at Seers Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.\n\n*\"Give me a complete picture of Acme Industries\"* seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.\n\n### What You'll Learn\n\nIn this lab, you'll see how agents *plan* before they act. When you ask for a \"complete picture\" of a client, the agent:\n\n1. Analyzes what information is needed\n2. Identifies which tools can provide that information\n3. Determines the optimal order to call them\n4. Executes the plan and synthesizes the results\n\nThis planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.\n\n**What you'll build:** A multi-tool agent that plans and coordinates client information retrieval.\n\n**Estimated Time:** 10 minutes",
+      "text": "%md\n## How Agents Plan Their Work at Seer Equity\n\n### The Business Problem\n\nWhen a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.\n\n*\"Give me a complete picture of Acme Industries\"* seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.\n\n### What You'll Learn\n\nIn this lab, you'll see how agents *plan* before they act. When you ask for a \"complete picture\" of a client, the agent:\n\n1. Analyzes what information is needed\n2. Identifies which tools can provide that information\n3. Determines the optimal order to call them\n4. Executes the plan and synthesizes the results\n\nThis planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.\n\n**What you'll build:** A multi-tool agent that plans and coordinates client information retrieval.\n\n**Estimated Time:** 10 minutes",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%md\n## Create Sample Data\n\nYou'll create two related tables—loan applicants and their applications. This gives the agent multiple dimensions of information to work with at Seers Equity.",
+      "text": "%md\n## Create Sample Data\n\nYou'll create two related tables: loan applicants and their applications. This gives the agent multiple dimensions of information to work with at Seer Equity.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -13,7 +13,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create Three Tool Functions\n\nYou'll give the agent three different tools, each accessing different information:\n\n1. **get_applicant** — Basic applicant info (name, credit tier, email)\n2. **get_applicant_loans** — Loan history for an applicant\n3. **check_premium_eligibility** — Whether applicant qualifies for premium rates\n\nThe agent will decide which tools to use based on what's being asked.",
+      "text": "%md\n## Create Three Tool Functions\n\nYou'll give the agent three different tools, each accessing different information:\n\n1. **get_applicant**: Basic applicant info (name, credit tier, email)\n2. **get_applicant_loans**: Loan history for an applicant\n3. **check_premium_eligibility**: Whether applicant qualifies for premium rates\n\nThe agent will decide which tools to use based on what's being asked.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -33,7 +33,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'PLANNING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seers Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information.\"}',\n        description => 'Agent that plans multi-step responses'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'PLANNING_TASK',\n        attributes  => '{\"instruction\": \"Answer loan applicant inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}\",\n                        \"tools\": [\"GET_APPLICANT_TOOL\", \"GET_LOANS_TOOL\", \"CHECK_PREMIUM_TOOL\"]}',\n        description => 'Task with multiple tools for planning demonstration'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"PLANNING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating agent planning'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'PLANNING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seer Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information.\"}',\n        description => 'Agent that plans multi-step responses'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'PLANNING_TASK',\n        attributes  => '{\"instruction\": \"Answer loan applicant inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}\",\n                        \"tools\": [\"GET_APPLICANT_TOOL\", \"GET_LOANS_TOOL\", \"CHECK_PREMIUM_TOOL\"]}',\n        description => 'Task with multiple tools for planning demonstration'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"PLANNING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating agent planning'\n    );\nEND;\n/",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -45,7 +45,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Check the Tool History\n\nLook at the tool execution history. You should see only GET_APPLICANT_TOOL was called—the agent planned correctly for a simple question.",
+      "text": "%md\n## Check the Tool History\n\nLook at the tool execution history. You should see only GET_APPLICANT_TOOL was called. The agent planned correctly for a simple question.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -53,7 +53,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Ask a Complex Question (Multiple Tools)\n\nNow ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.\n\n**What you'll see:** The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility—then synthesizes them into a complete response.",
+      "text": "%md\n## Ask a Complex Question (Multiple Tools)\n\nNow ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.\n\n**What you'll see:** The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -85,7 +85,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Verify the Explicit Plan Was Followed\n\nThe tool history should show the exact sequence: applicant → loans → eligibility.\n\n**What you'll see:** GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL—in that exact order, as specified in the task instructions.",
+      "text": "%md\n## Verify the Explicit Plan Was Followed\n\nThe tool history should show the exact sequence: applicant → loans → eligibility.\n\n**What you'll see:** GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -93,7 +93,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Why Planning Matters at Seers Equity\n\nPlanning provides:\n\n1. **Predictability** — You can anticipate what the agent will do\n2. **Debuggability** — When something goes wrong, you can see where\n3. **Efficiency** — The agent gathers what it needs without redundant calls\n4. **Control** — You shape the plan through task instructions\n\nFor a financial services company like Seers Equity, this predictability is essential for compliance and audit trails.",
+      "text": "%md\n## Why Planning Matters at Seer Equity\n\nPlanning provides:\n\n1. **Predictability**: You can anticipate what the agent will do\n2. **Debuggability**: When something goes wrong, you can see where\n3. **Efficiency**: The agent gathers what it needs without redundant calls\n4. **Control**: You shape the plan through task instructions\n\nFor a financial services company like Seer Equity, this predictability is essential for compliance and audit trails.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

@@ -6,7 +6,7 @@ In this lab, you'll build all four types of memory that agents need to operate e
 
 ### The Business Problem
 
-Seers Equity's loan officers are struggling with different kinds of information gaps:
+Seer Equity's loan officers are struggling with different kinds of information gaps:
 
 - **During calls:** *"What did the client just say about their timeline? I was looking up their file."*
 - **Across sessions:** *"Sarah Chen has a rate exception, but I don't remember the details."*
@@ -48,7 +48,29 @@ This lab assumes you have:
 * Oracle Database 26ai with Select AI Agent
 * Basic knowledge of SQL and JSON
 
-## Task 1: Create the Memory Tables
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/four-memory-types/lab8-four-memory-types.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Create the Memory Tables
 
 We'll create structures for each memory type.
 
@@ -89,7 +111,7 @@ We'll create structures for each memory type.
     </copy>
     ```
 
-## Task 2: Short-Term Context (Current Task)
+## Task 3: Short-Term Context (Current Task)
 
 Short-term context holds what's happening right now, the active information for completing the current task.
 
@@ -165,7 +187,7 @@ Short-term context holds what's happening right now, the active information for 
     </copy>
     ```
 
-## Task 3: Long-Term Facts (Persistent Entity Knowledge)
+## Task 4: Long-Term Facts (Persistent Entity Knowledge)
 
 Long-term facts are stable information the agent should rely on across tasks and sessions.
 
@@ -258,7 +280,7 @@ Long-term facts are stable information the agent should rely on across tasks and
     </copy>
     ```
 
-## Task 4: Decisions and Outcomes (Audit Trail)
+## Task 5: Decisions and Outcomes (Audit Trail)
 
 Decisions and outcomes record what the agent decided and what happened.
 
@@ -381,7 +403,7 @@ Decisions and outcomes record what the agent decided and what happened.
     </copy>
     ```
 
-## Task 5: Reference Knowledge (Policies and Procedures)
+## Task 6: Reference Knowledge (Policies and Procedures)
 
 Reference knowledge is background information the agent consults but does not change.
 
@@ -479,7 +501,7 @@ Reference knowledge is background information the agent consults but does not ch
     </copy>
     ```
 
-## Task 6: A Complete Example
+## Task 7: A Complete Example
 
 Let's trace how an agent would use all four types together.
 

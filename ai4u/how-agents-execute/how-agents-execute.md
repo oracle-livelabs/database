@@ -8,7 +8,7 @@ Every agent follows the same pattern: understand, plan, execute tools, analyze r
 
 ### The Business Problem
 
-At Seers Equity, small loans take as long to process as big ones. A $25,000 personal loan for a client with excellent credit goes through the same review process as a $500,000 mortgage.
+At Seer Equity, small loans take as long to process as big ones. A $25,000 personal loan for a client with excellent credit goes through the same review process as a $500,000 mortgage.
 
 > *"We spend hours reviewing applications that should just auto-approve. A $25K personal loan with 800 credit? That shouldn't take the same time as a complex mortgage."*
 >
@@ -43,7 +43,29 @@ This lab assumes you have:
 * Completed Labs 1-3 or have a working agent setup
 * An AI profile named `genai` already configured
 
-## Task 1: Set Up an Observable Agent
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/how-agents-execute/lab4-how-agents-execute.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Set Up an Observable Agent
 
 We'll create an agent with tools that log what's happening so you can see each step clearly.
 
@@ -201,7 +223,7 @@ We'll create an agent with tools that log what's happening so you can see each s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'LOAN_EXEC_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan processing agent for Seers Equity. Process loans by: 1) Creating the request with CREATE_LOAN_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
+                            "role": "You are a loan processing agent for Seer Equity. Process loans by: 1) Creating the request with CREATE_LOAN_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
             description => 'Agent demonstrating execution loop'
         );
         
@@ -223,7 +245,7 @@ We'll create an agent with tools that log what's happening so you can see each s
     </copy>
     ```
 
-## Task 2: Execute a Complete Workflow
+## Task 3: Execute a Complete Workflow
 
 Now let's run a request and trace every step.
 
@@ -262,7 +284,7 @@ Now let's run a request and trace every step.
 - ASSESS_RISK: Risk was evaluated
 - ROUTE_DECISION: AUTO_APPROVED (personal under $50K with 780 credit)
 
-## Task 3: Trace the Agent's Tool Calls
+## Task 4: Trace the Agent's Tool Calls
 
 The history views show what the agent did.
 
@@ -301,7 +323,7 @@ The history views show what the agent did.
 
 You can see the actual record the agent created, with the risk assessment and routing.
 
-## Task 4: Trace Different Execution Paths
+## Task 5: Trace Different Execution Paths
 
 Different loan parameters trigger different routing paths.
 
@@ -362,7 +384,7 @@ Different loan parameters trigger different routing paths.
 
 **Observe:** BLOCKED because credit score 520 is below minimum 550.
 
-## Task 5: Compare All Loans and Their Routes
+## Task 6: Compare All Loans and Their Routes
 
 Let's see all the loans and their different routing decisions.
 
@@ -382,7 +404,7 @@ ORDER BY created_at;
 </copy>
 ```
 
-## Task 6: Understand the Execution Pattern
+## Task 7: Understand the Execution Pattern
 
 Every agent execution follows this pattern:
 
@@ -431,7 +453,7 @@ In this lab, you traced the complete agent execution loop:
 * Traced tool calls through history views
 * Saw how different inputs lead to different routing paths
 
-**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Seers Equity, this means small loans auto-approve in seconds, complex loans get routed appropriately, and compliance has a complete audit trail.
+**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Seer Equity, this means small loans auto-approve in seconds, complex loans get routed appropriately, and compliance has a complete audit trail.
 
 ## Learn More
 

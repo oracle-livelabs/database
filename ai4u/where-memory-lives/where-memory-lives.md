@@ -8,7 +8,7 @@ In this lab, you'll build a **memory core**, the converged database foundation t
 
 In Lab 5, you experienced the forgetting problem firsthand. Sarah Chen from Acme Industries had to explain her preferences and rate exception to three different loan officers. The AI assistant forgot everything the moment each session ended.
 
-This isn't just frustrating. It's costing Seers Equity business. Clients feel unvalued. Loan officers waste time re-gathering information. And compliance can't track what was communicated.
+This isn't just frustrating. It's costing Seer Equity business. Clients feel unvalued. Loan officers waste time re-gathering information. And compliance can't track what was communicated.
 
 > *"Every conversation starts from zero. I told your AI about my preferences last week. Today it has no idea who I am."*
 >
@@ -43,7 +43,29 @@ This lab assumes you have:
 * Completed Labs 1-6 or have a working agent setup
 * An AI profile named `genai` already configured
 
-## Task 1: Create the Memory Core Table
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/where-memory-lives/lab7-where-memory-lives.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Create the Memory Core Table
 
 The memory table is the foundation, where the agent stores everything it learns.
 
@@ -70,7 +92,7 @@ The memory table is the foundation, where the agent stores everything it learns.
     </copy>
     ```
 
-## Task 2: Create the Remember Function
+## Task 3: Create the Remember Function
 
 This function becomes the agent's "save to memory" capability.
 
@@ -105,7 +127,7 @@ This function becomes the agent's "save to memory" capability.
     </copy>
     ```
 
-## Task 3: Create the Recall Function
+## Task 4: Create the Recall Function
 
 The recall function is the agent's "search memory" capability.
 
@@ -151,7 +173,7 @@ The recall function is the agent's "search memory" capability.
     </copy>
     ```
 
-## Task 4: Register the Agent Tools
+## Task 5: Register the Agent Tools
 
 Tools bridge your PL/SQL functions and the AI agent.
 
@@ -195,7 +217,7 @@ Tools bridge your PL/SQL functions and the AI agent.
     </copy>
     ```
 
-## Task 5: Create the Agent, Task, and Team
+## Task 6: Create the Agent, Task, and Team
 
 1. Create the agent with memory awareness.
 
@@ -245,7 +267,7 @@ Tools bridge your PL/SQL functions and the AI agent.
     </copy>
     ```
 
-## Task 6: Talk to Your Agent
+## Task 7: Talk to Your Agent
 
 Now let's see memory in action.
 
@@ -283,7 +305,7 @@ Now let's see memory in action.
 
 The agent recalls the stored facts.
 
-## Task 7: Verify Persistence Across Sessions
+## Task 8: Verify Persistence Across Sessions
 
 1. Clear and reset the session.
 

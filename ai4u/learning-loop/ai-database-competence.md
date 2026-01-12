@@ -45,7 +45,29 @@ This lab assumes you have:
 * Oracle Database 26ai with Select AI Agent
 * Basic knowledge of SQL
 
-## Task 1: Create the Memory Table
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/learning-loop/lab9-learning-loop.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Create the Memory Table
 
 First, we'll create a memory table to store agent experiences.
 
@@ -68,7 +90,7 @@ First, we'll create a memory table to store agent experiences.
     </copy>
     ```
 
-## Task 2: Load the ONNX Embedding Model
+## Task 3: Load the ONNX Embedding Model
 
 Embedding models convert text into numerical vectors that capture meaning.
 
@@ -117,7 +139,7 @@ Embedding models convert text into numerical vectors that capture meaning.
     </copy>
     ```
 
-## Task 3: Create a Vector Index
+## Task 4: Create a Vector Index
 
 1. Create a vector index for fast similarity search.
 
@@ -130,7 +152,7 @@ Embedding models convert text into numerical vectors that capture meaning.
     </copy>
     ```
 
-## Task 4: Create the Learning Loop Functions
+## Task 5: Create the Learning Loop Functions
 
 The learning loop: action → result → observe → interpret → store → retrieve → better decision.
 
@@ -220,7 +242,7 @@ The learning loop: action → result → observe → interpret → store → ret
     </copy>
     ```
 
-## Task 5: Seed the Learning Database
+## Task 6: Seed the Learning Database
 
 Let's add some experiences the agent can learn from.
 
@@ -265,7 +287,7 @@ SELECT store_experience(
 </copy>
 ```
 
-## Task 6: See Semantic Search in Action
+## Task 7: See Semantic Search in Action
 
 Now test finding relevant experience by meaning, not keywords.
 
@@ -305,7 +327,7 @@ Now test finding relevant experience by meaning, not keywords.
 
 **Observe:** Finds BOTH billing experiences: one that failed and one that succeeded. The agent can learn from both.
 
-## Task 7: See the Learning Loop in Action
+## Task 8: See the Learning Loop in Action
 
 Let's trace a complete learning loop.
 
@@ -347,7 +369,7 @@ Let's trace a complete learning loop.
     </copy>
     ```
 
-## Task 8: View the Competence Building
+## Task 9: View the Competence Building
 
 ```sql
 <copy>

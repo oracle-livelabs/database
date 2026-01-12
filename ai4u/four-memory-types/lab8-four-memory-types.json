@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## The Four Types of Agent Memory at Seers Equity\n\n### The Business Problem\n\nTwo similar business loan applications came in last quarter at Seers Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.\n\n*\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"*\n\nThe problem isn't just forgetting clients—it's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.\n\n### What You'll Learn\n\nAgents need four types of memory, just like people:\n\n| Memory Type | Purpose | Example at Seers Equity |\n|-------------|---------|-------------------------|\n| **Short-term context** | What's happening right now | \"Working on LOAN-5678 for Acme Industries\" |\n| **Long-term facts** | Stable client information | \"Acme has 15% rate exception\" |\n| **Decisions/outcomes** | What we decided before | \"Approved similar loan last quarter, client paid on time\" |\n| **Reference knowledge** | Corporate policies | \"Preferred rate is 7.9% for 750+ credit\" |\n\nIn this lab, you'll build all four types and see how they work together to make agents consistent and explainable.\n\n**What you'll build:** A complete four-type memory architecture for loan decisions.\n\n**Estimated Time:** 15 minutes",
+      "text": "%md\n## The Four Types of Agent Memory at Seer Equity\n\n### The Business Problem\n\nTwo similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.\n\n*\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"*\n\nThe problem isn't just forgetting clients. It's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.\n\n### What You'll Learn\n\nAgents need four types of memory, just like people:\n\n| Memory Type | Purpose | Example at Seer Equity |\n|-------------|---------|-------------------------|\n| **Short-term context** | What's happening right now | \"Working on LOAN-5678 for Acme Industries\" |\n| **Long-term facts** | Stable client information | \"Acme has 15% rate exception\" |\n| **Decisions/outcomes** | What we decided before | \"Approved similar loan last quarter, client paid on time\" |\n| **Reference knowledge** | Corporate policies | \"Preferred rate is 7.9% for 750+ credit\" |\n\nIn this lab, you'll build all four types and see how they work together to make agents consistent and explainable.\n\n**What you'll build:** A complete four-type memory architecture for loan decisions.\n\n**Estimated Time:** 15 minutes",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -13,7 +13,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create the Reference Knowledge Table\n\nReference knowledge is different—it's maintained by humans, not agents. Agents can read Seers Equity's loan policies but shouldn't modify them.\n\nNotice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.",
+      "text": "%md\n## Create the Reference Knowledge Table\n\nReference knowledge is different. It's maintained by humans, not agents. Agents can read Seer Equity's loan policies but shouldn't modify them.\n\nNotice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -21,7 +21,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create Short-Term Context Functions\n\nShort-term context holds what's happening right now—the active information for completing the current loan task.\n\n- **set_context** — Store context for a session/entity (replaces old context, expires in 1 hour)\n- **get_context** — Retrieve context for a session\n\nThis is like a loan officer's working memory—what they're actively thinking about while processing an application.",
+      "text": "%md\n## Create Short-Term Context Functions\n\nShort-term context holds what's happening right now: the active information for completing the current loan task.\n\n- **set_context** — Store context for a session/entity (replaces old context, expires in 1 hour)\n- **get_context** — Retrieve context for a session\n\nThis is like a loan officer's working memory: what they're actively thinking about while processing an application.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -37,7 +37,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Create Long-Term Facts Functions\n\nLong-term facts are stable information about clients that the agent should rely on across all tasks and sessions.\n\n- **store_fact** — Store a fact about a client with an optional category\n- **get_facts** — Retrieve facts about a client, optionally filtered by category\n\nUnlike short-term context, these don't expire. Once Seers Equity learns something about a client, the agent remembers forever.",
+      "text": "%md\n## Create Long-Term Facts Functions\n\nLong-term facts are stable information about clients that the agent should rely on across all tasks and sessions.\n\n- **store_fact** — Store a fact about a client with an optional category\n- **get_facts** — Retrieve facts about a client, optionally filtered by category\n\nUnlike short-term context, these don't expire. Once Seer Equity learns something about a client, the agent remembers forever.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
@@ -45,11 +45,11 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Store Long-Term Facts About Seers Equity Clients\n\nStore several facts about two clients. Notice the different categories: contact_preference, rate_exception, relationship, requirement.\n\nThese facts will persist across all sessions. Every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.",
+      "text": "%md\n## Store Long-Term Facts About Seer Equity Clients\n\nStore several facts about two clients. Notice the different categories: contact_preference, rate_exception, relationship, requirement.\n\nThese facts will persist across all sessions. Every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {
-      "text": "%script\n-- Facts about Seers Equity clients\nSELECT store_fact('CLIENT-001', 'Prefers email contact, CFO Sarah Chen handles loan communications', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Pacific timezone, best contact time is 9-11am PT', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Approved for 15% rate exception due to 5-year relationship', 'rate_exception') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Client since 2019, excellent payment history on 3 previous loans', 'relationship') FROM DUAL;\n\nSELECT store_fact('CLIENT-002', 'Requires board approval for loans over $500K', 'requirement') FROM DUAL;\nSELECT store_fact('CLIENT-002', 'Annual loan review scheduled for March', 'schedule') FROM DUAL;",
+      "text": "%script\n-- Facts about Seer Equity clients\nSELECT store_fact('CLIENT-001', 'Prefers email contact, CFO Sarah Chen handles loan communications', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Pacific timezone, best contact time is 9-11am PT', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Approved for 15% rate exception due to 5-year relationship', 'rate_exception') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Client since 2019, excellent payment history on 3 previous loans', 'relationship') FROM DUAL;\n\nSELECT store_fact('CLIENT-002', 'Requires board approval for loans over $500K', 'requirement') FROM DUAL;\nSELECT store_fact('CLIENT-002', 'Annual loan review scheduled for March', 'schedule') FROM DUAL;",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
@@ -69,7 +69,7 @@
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
     },
     {
-      "text": "%md\n## Record Past Loan Decisions\n\nRecord some historical loan decisions—both successful and unsuccessful. This creates a knowledge base the agent can learn from.\n\nNotice the third decision has `success = false`. The agent should learn what NOT to do from failures.",
+      "text": "%md\n## Record Past Loan Decisions\n\nRecord some historical loan decisions, both successful and unsuccessful. This creates a knowledge base the agent can learn from.\n\nNotice the third decision has `success = false`. The agent should learn what NOT to do from failures.",
       "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
     },
     {

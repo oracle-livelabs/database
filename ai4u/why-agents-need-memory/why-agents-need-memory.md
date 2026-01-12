@@ -10,7 +10,7 @@ You'll tell an agent something important, clear the session, and watch it forget
 
 ### The Business Problem
 
-Last month at Seers Equity, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with the company for six years and has a **15% rate exception** on file.
+Last month at Seer Equity, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with the company for six years and has a **15% rate exception** on file.
 
 Sarah was not happy:
 
@@ -18,7 +18,7 @@ Sarah was not happy:
 >
 > Sarah Chen, Acme Industries
 
-This is exactly what's happening with Seers Equity's AI assistants. They have amnesia. Every conversation starts fresh. A client shares their preferences, and five minutes later (or after a session reset), the AI has no idea who they are.
+This is exactly what's happening with Seer Equity's AI assistants. They have amnesia. Every conversation starts fresh. A client shares their preferences, and five minutes later (or after a session reset), the AI has no idea who they are.
 
 ### What You'll Learn
 
@@ -44,7 +44,29 @@ This lab assumes you have:
 * Oracle Database 26ai with Select AI Agent
 * Basic knowledge of SQL
 
-## Task 1: Create an Agent Without Memory
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/why-agents-need-memory/lab5-why-agents-need-memory.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Create an Agent Without Memory
 
 We'll create an agent that has no way to store or retrieve information between sessions.
 
@@ -68,7 +90,7 @@ We'll create an agent that has no way to store or retrieve information between s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'FORGETFUL_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan officer assistant for Seers Equity. Remember any preferences or information clients share with you so you can serve them better. Build relationships by recalling past interactions."}',
+                            "role": "You are a loan officer assistant for Seer Equity. Remember any preferences or information clients share with you so you can serve them better. Build relationships by recalling past interactions."}',
             description => 'Agent without memory capabilities'
         );
     EXCEPTION WHEN OTHERS THEN NULL;
@@ -107,7 +129,7 @@ We'll create an agent that has no way to store or retrieve information between s
     </copy>
     ```
 
-## Task 2: Teach the Agent About Sarah Chen
+## Task 3: Teach the Agent About Sarah Chen
 
 Let's give the agent important information about a client, just like a real loan officer would share.
 
@@ -141,7 +163,7 @@ The agent can recall this—it's still in the conversation context.
 
 Still works—the context is maintained within the session.
 
-## Task 3: Experience the Forgetting
+## Task 4: Experience the Forgetting
 
 Now let's simulate what happens when the session ends and a new one begins, like when Sarah calls back the next day.
 
@@ -179,9 +201,9 @@ Now let's simulate what happens when the session ends and a new one begins, like
     </copy>
     ```
 
-**Gone.** Everything you told it has been forgotten. This is exactly what happened when Sarah Chen called Seers Equity and got quoted standard rates.
+**Gone.** Everything you told it has been forgotten. This is exactly what happened when Sarah Chen called Seer Equity and got quoted standard rates.
 
-## Task 4: See the Business Impact
+## Task 5: See the Business Impact
 
 This isn't just an inconvenience. It breaks real workflows and damages client relationships.
 
@@ -212,7 +234,7 @@ This isn't just an inconvenience. It breaks real workflows and damages client re
 
 **The agent has no idea.** The new loan officer might contact the wrong person, call during market hours, or quote the wrong rates. The client gets frustrated. The relationship suffers.
 
-## Task 5: Understand What's Missing
+## Task 6: Understand What's Missing
 
 Let's be clear about what the agent lacks:
 
@@ -242,7 +264,7 @@ The forgetful agent has no memory tools. It has no way to store or retrieve info
 
 The tool calls are logged, but the client information itself? Lost.
 
-## Task 6: The Real Cost to Seers Equity
+## Task 7: The Real Cost to Seer Equity
 
 Consider what this forgetting costs:
 
@@ -254,7 +276,7 @@ Consider what this forgetting costs:
 | Special requirements | Compliance and service failures |
 | Past decisions | Same issues get re-decided differently |
 
-Sarah Chen's experience wasn't unique. It's happening every day with every client who interacts with Seers Equity's AI assistants.
+Sarah Chen's experience wasn't unique. It's happening every day with every client who interacts with Seer Equity's AI assistants.
 
 ## Summary
 

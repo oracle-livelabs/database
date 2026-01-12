@@ -8,17 +8,17 @@ Most AI agents have amnesia. Every conversation starts fresh. They don't remembe
 
 This workshop shows how to build AI agents with **agentic memory**: agents that remember, learn, and improve over time. Using Oracle Database 26ai and Select AI Agent, you'll create agents that store facts, recall context, and make consistent decisions across sessions.
 
-## Meet Seers Equity
+## Meet Seer Equity
 
-Throughout this workshop, you'll build AI agents for **Seers Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
+Throughout this workshop, you'll build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
 
-Seers Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
+Seer Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
 
 ### The Problems Keeping Leadership Up at Night
 
 **"We keep forgetting our best clients."**
 
-Last month, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with Seers Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
+Last month, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with Seer Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
 
 **"Every loan officer handles the same situation differently."**
 
@@ -38,7 +38,7 @@ Compliance requires that the person who submits a loan application can't be the 
 
 ### How Agent Memory Solves These Problems
 
-This workshop walks you through building AI agents that address each of Seers Equity's struggles:
+This workshop walks you through building AI agents that address each of Seer Equity's struggles:
 
 | Business Problem | Agent Solution | You'll Build It In |
 |------------------|----------------|---------------------|
@@ -62,7 +62,7 @@ By the end, you'll have a complete loan processing system where:
 
 ✅ **Start with the basics (Labs 1-4)**
 
-Before solving Seers Equity's problems, you need to understand how agents work:
+Before solving Seer Equity's problems, you need to understand how agents work:
 
 * **Lab 1 – What is an AI Agent?** Build your first agent that queries loan application data. See the difference between a chatbot that *explains* how to check loan status versus an agent that *actually checks it*.
 
@@ -70,15 +70,15 @@ Before solving Seers Equity's problems, you need to understand how agents work:
 
 * **Lab 3 – How Agents Plan** Give an agent a complex request about a loan applicant. Watch it plan which tools to call and in what order. See how explicit instructions create predictable behavior.
 
-* **Lab 4 – How Agents Execute** Build Seers Equity's loan risk assessment workflow. Create tools that evaluate loan applications and route them based on amount and type. See conditional logic in action: auto-approve, underwriter review, or senior underwriter.
+* **Lab 4 – How Agents Execute** Build Seer Equity's loan risk assessment workflow. Create tools that evaluate loan applications and route them based on amount and type. See conditional logic in action: auto-approve, underwriter review, or senior underwriter.
 
 ✅ **Build memory systems (Labs 5-9)**
 
-Now you'll solve the "forgetting" problem that frustrates Seers Equity's clients:
+Now you'll solve the "forgetting" problem that frustrates Seer Equity's clients:
 
-* **Lab 5 – Experience the Forgetting Problem** Tell an agent about Sarah Chen's email preference and 15% rate exception. Clear the session. Ask again. *The agent has no idea who Sarah Chen is.* This is exactly what's happening to Seers Equity's clients.
+* **Lab 5 – Experience the Forgetting Problem** Tell an agent about Sarah Chen's email preference and 15% rate exception. Clear the session. Ask again. *The agent has no idea who Sarah Chen is.* This is exactly what's happening to Seer Equity's clients.
 
-* **Lab 6 – Connect Agents to Enterprise Data** Ask an agent about Seers Equity's loan rates. Without enterprise data, it gives generic answers. Connect it to the actual policy database and watch it quote real rates, requirements, and client-specific information.
+* **Lab 6 – Connect Agents to Enterprise Data** Ask an agent about Seer Equity's loan rates. Without enterprise data, it gives generic answers. Connect it to the actual policy database and watch it quote real rates, requirements, and client-specific information.
 
 * **Lab 7 – Build Your Memory Core** Create memory tables using Oracle's native JSON. Build `remember_fact` and `recall_facts` functions. Register them as agent tools. Now when you tell the agent about Sarah Chen, clear the session, and ask again, *the agent remembers*.
 
@@ -117,13 +117,13 @@ Finally, you'll build the guardrails that make agents safe for financial service
   - Full input and output captured
   - Queryable for compliance review
 
-## The Seers Equity Loan Workflow
+## The Seer Equity Loan Workflow
 
 Here's the complete workflow you'll build across the labs:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     SEERS EQUITY LOAN PROCESSING                │
+│                     SEER EQUITY LOAN PROCESSING                │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  CLIENT APPLIES                                                 │

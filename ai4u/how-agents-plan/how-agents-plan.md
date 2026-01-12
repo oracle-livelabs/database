@@ -10,7 +10,7 @@ You'll give an agent a multi-step task and watch how it decomposes the work.
 
 ### The Business Problem
 
-At Seers Equity, preparing for a client call is tedious. A loan officer needs to pull together information from multiple places:
+At Seer Equity, preparing for a client call is tedious. A loan officer needs to pull together information from multiple places:
 
 - **Contact info**: How does this client prefer to be reached?
 - **Loan history**: What applications do they have pending?
@@ -45,7 +45,29 @@ This lab assumes you have:
 * Completed Labs 1-2 or have a working agent setup
 * An AI profile named `genai` already configured
 
-## Task 1: Create a Multi-Tool Agent
+## Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/how-agents-plan/lab3-how-agents-plan.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+## Task 2: Create a Multi-Tool Agent
 
 To see planning in action, we need an agent with multiple tools. The agent will decide which tools to use and in what order.
 
@@ -177,7 +199,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'PLANNING_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan officer assistant for Seers Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information."}',
+                            "role": "You are a loan officer assistant for Seer Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information."}',
             description => 'Agent that plans multi-step responses'
         );
     END;
@@ -205,7 +227,7 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     </copy>
     ```
 
-## Task 2: Observe Single-Tool Planning
+## Task 3: Observe Single-Tool Planning
 
 Let's start with a simple request that needs only one tool.
 
@@ -234,7 +256,7 @@ Let's start with a simple request that needs only one tool.
 
 **Observe:** The agent planned to use just GET_APPLICANT_TOOL because that's all the question required.
 
-## Task 3: Observe Multi-Tool Planning
+## Task 4: Observe Multi-Tool Planning
 
 Now let's ask a question that requires multiple tools, just like a loan officer preparing for a client call.
 
@@ -267,7 +289,7 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
 3. Notice the sequence—the agent determined the logical order.
 
-## Task 4: See How Instructions Shape Planning
+## Task 5: See How Instructions Shape Planning
 
 The task instruction guides how the agent plans. Let's modify it.
 
@@ -323,7 +345,7 @@ The task instruction guides how the agent plans. Let's modify it.
 
 **Observe:** The agent followed the explicit plan: applicant first, then loans, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
 
-## Task 5: Understand Why Planning Matters
+## Task 6: Understand Why Planning Matters
 
 Planning provides:
 
@@ -355,7 +377,7 @@ In this lab, you observed how agents plan their work:
 * Saw how multi-step questions trigger multi-tool plans
 * Learned how instructions shape the planning process
 
-**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Seers Equity, this means loan officers get complete client summaries in seconds, not minutes.
+**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Seer Equity, this means loan officers get complete client summaries in seconds, not minutes.
 
 ## Learn More
 

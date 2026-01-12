@@ -6,7 +6,7 @@ In this capstone lab, you'll build a complete agent system with tools that act, 
 
 ### The Business Problem
 
-Seers Equity is ready to deploy AI agents, but the compliance team has concerns:
+Seer Equity is ready to deploy AI agents, but the compliance team has concerns:
 
 > *"We can't have an AI approving $50,000 expenses automatically. What if it makes a mistake? Where's the audit trail? How do we prove we followed policy?"*
 >
@@ -53,7 +53,29 @@ This lab assumes you have:
 
 ## Part 1: The Data Model
 
-### Task 1: Create Tables
+### Task 1: Import the Lab Notebook
+
+Before you begin, import the notebook for this lab into Oracle Machine Learning.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import**.
+
+3. Select **GitHub** as the source.
+
+4. Paste the following GitHub URL:
+
+    ```text
+    <copy>
+    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/tools-safety-control/lab10-tools-safety-control.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+
+### Task 2: Create Tables
 
 1. Create the expense system tables.
 
@@ -107,7 +129,7 @@ This lab assumes you have:
     </copy>
     ```
 
-### Task 2: Create Safety Rules
+### Task 3: Create Safety Rules
 
 1. Add the business rules.
 
@@ -153,7 +175,7 @@ This lab assumes you have:
 
 ## Part 2: Tool Functions
 
-### Task 3: Create the Rules Checker
+### Task 4: Create the Rules Checker
 
 1. Create the function that checks safety rules.
 
@@ -215,7 +237,7 @@ This lab assumes you have:
     </copy>
     ```
 
-### Task 4: Create Expense Submission Tool
+### Task 5: Create Expense Submission Tool
 
 1. Create the submit function that respects the rules.
 
@@ -277,7 +299,7 @@ This lab assumes you have:
     </copy>
     ```
 
-### Task 5: Create Approval Tools
+### Task 6: Create Approval Tools
 
 1. Create a function to list expenses needing approval.
 
@@ -400,7 +422,7 @@ This lab assumes you have:
 
 ## Part 3: Create the Agents
 
-### Task 6: Register Tools
+### Task 7: Register Tools
 
 1. Register all tools.
 
@@ -443,7 +465,7 @@ This lab assumes you have:
     </copy>
     ```
 
-### Task 7: Create the Expense Agent (Employee Role)
+### Task 8: Create the Expense Agent (Employee Role)
 
 1. Create the expense submission agent and team.
 
@@ -481,7 +503,7 @@ This lab assumes you have:
     </copy>
     ```
 
-### Task 8: Create the Approval Agent (Manager Role)
+### Task 9: Create the Approval Agent (Manager Role)
 
 1. Create the manager approval agent and team.
 
@@ -523,7 +545,7 @@ This lab assumes you have:
 
 ## Part 4: Test the Workflow
 
-### Task 9: Submit Expenses as an Employee
+### Task 10: Submit Expenses as an Employee
 
 1. Set the expense submission team.
 
@@ -611,7 +633,7 @@ Note: The $7500 expense was blocked and not created.
 
 ---
 
-### Task 10: Approve Expenses as a Manager
+### Task 11: Approve Expenses as a Manager
 
 1. Switch to the approval team.
 
@@ -676,7 +698,7 @@ Note: The $7500 expense was blocked and not created.
 
 ## Part 5: Audit Trail
 
-### Task 11: Query the Audit Trail
+### Task 12: Query the Audit Trail
 
 1. See all tool calls.
 
