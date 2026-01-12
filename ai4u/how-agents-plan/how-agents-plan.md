@@ -25,7 +25,7 @@ The loan officers need an agent that can plan and execute a multi-step informati
 
 ### What You'll Learn
 
-This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seers Equity's "gathering" problem.
+This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seer Equity's "gathering" problem.
 
 **What you'll build:** A multi-tool agent that plans information retrieval for loan applicants.
 
@@ -40,14 +40,13 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-2 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
-Before you begin, import the notebook for this lab into Oracle Machine Learning.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
@@ -59,13 +58,13 @@ Before you begin, import the notebook for this lab into Oracle Machine Learning.
 
     ```text
     <copy>
-    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/how-agents-plan/lab3-how-agents-plan.json
+    https://github.com/davidastart/database/blob/main/ai4u/how-agents-plan/lab3-how-agents-plan.json
     </copy>
     ```
 
 5. Click **Import**.
 
-The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create a Multi-Tool Agent
 
@@ -381,7 +380,7 @@ In this lab, you observed how agents plan their work:
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 

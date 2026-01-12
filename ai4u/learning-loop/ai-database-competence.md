@@ -6,7 +6,7 @@ In this lab, you'll build the learning loop that turns agents from first-day int
 
 ### The Business Problem
 
-Seers Equity approved a similar loan three months ago. Same amount, same credit profile, same industry. The loan officer who handled it negotiated special terms based on the client's cash flow timing. But today's loan officer has no idea that case exists.
+Seer Equity approved a similar loan three months ago. Same amount, same credit profile, same industry. The loan officer who handled it negotiated special terms based on the client's cash flow timing. But today's loan officer has no idea that case exists.
 
 > *"We keep solving the same problems from scratch. Someone figured out how to handle seasonal cash flow for agricultural clients last quarter, but that knowledge just... disappeared."*
 >
@@ -39,15 +39,13 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
-Before you begin, import the notebook for this lab into Oracle Machine Learning.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
@@ -59,13 +57,13 @@ Before you begin, import the notebook for this lab into Oracle Machine Learning.
 
     ```text
     <copy>
-    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/learning-loop/lab9-learning-loop.json
+    https://github.com/davidastart/database/blob/main/ai4u/learning-loop/lab9-learning-loop.json
     </copy>
     ```
 
 5. Click **Import**.
 
-The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Table
 

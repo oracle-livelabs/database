@@ -19,7 +19,7 @@ These aren't the same problem. They need different solutions. Just like people d
 
 In this lab, you'll build the four types of memory that solve these distinct problems:
 
-| Memory Type | What It Stores | Seers Equity Example |
+| Memory Type | What It Stores | Seer Equity Example |
 |-------------|----------------|----------------------|
 | **Short-term** | Current conversation context | Client's question, active request |
 | **Long-term** | Stable facts about entities | Sarah Chen prefers email, has 15% rate exception |
@@ -41,16 +41,13 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-7 or have a working agent setup
-* An AI profile named `genai` already configured
-* Oracle Database 26ai with Select AI Agent
-* Basic knowledge of SQL and JSON
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
-Before you begin, import the notebook for this lab into Oracle Machine Learning.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
@@ -62,13 +59,13 @@ Before you begin, import the notebook for this lab into Oracle Machine Learning.
 
     ```text
     <copy>
-    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/four-memory-types/lab8-four-memory-types.json
+    https://github.com/davidastart/database/blob/main/ai4u/four-memory-types/lab8-four-memory-types.json
     </copy>
     ```
 
 5. Click **Import**.
 
-The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Tables
 
@@ -554,7 +551,7 @@ Together, these memories make agents consistent, contextual, and explainable.
 ## Learn More
 
 * [Oracle JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/adjsn/)
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 

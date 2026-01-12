@@ -23,7 +23,7 @@ Plus, everything needs to be logged for compliance. When a regulator asks "why w
 
 ### What You'll Learn
 
-This lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes loans based on amount and type. This is the foundation for solving Seers Equity's processing bottleneck.
+This lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes loans based on amount and type. This is the foundation for solving Seer Equity's processing bottleneck.
 
 **What you'll build:** A loan processing workflow with conditional routing and complete audit trails.
 
@@ -38,14 +38,13 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-3 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
-Before you begin, import the notebook for this lab into Oracle Machine Learning.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
@@ -57,13 +56,13 @@ Before you begin, import the notebook for this lab into Oracle Machine Learning.
 
     ```text
     <copy>
-    https://github.com/davidstart/ideation/blob/main/blogseries/select_ai_agentic_memory/how-agents-execute/lab4-how-agents-execute.json
+    https://github.com/davidastart/database/blob/main/ai4u/how-agents-execute/lab4-how-agents-execute.json
     </copy>
     ```
 
 5. Click **Import**.
 
-The notebook contains all the SQL commands for this lab. You can follow along with the detailed instructions below or run the notebook cells directly.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Set Up an Observable Agent
 
@@ -457,7 +456,7 @@ In this lab, you traced the complete agent execution loop:
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 

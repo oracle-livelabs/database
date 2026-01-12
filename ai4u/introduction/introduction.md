@@ -122,49 +122,49 @@ Finally, you'll build the guardrails that make agents safe for financial service
 Here's the complete workflow you'll build across the labs:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     SEER EQUITY LOAN PROCESSING                │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  CLIENT APPLIES                                                 │
-│       ↓                                                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ LOAN AGENT (Loan Officer)                                │   │
-│  │ • Recalls client history from memory                     │   │
-│  │ • Looks up applicable rates and policies                 │   │
-│  │ • Submits application with risk assessment               │   │
-│  │ • Stores new client information for next time            │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│       ↓                                                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ RISK ASSESSMENT                                          │   │
-│  │ • Credit < 550         → BLOCKED                         │   │
-│  │ • Personal < $50K      → AUTO_APPROVE                    │   │
-│  │ • $50K - $250K         → UNDERWRITER_REVIEW              │   │
-│  │ • > $250K or Mortgage  → SENIOR_UNDERWRITER              │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│       ↓                                                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ UNDERWRITING AGENT (if needed)                           │   │
-│  │ • Reviews pending applications                           │   │
-│  │ • Checks past decisions for similar situations           │   │
-│  │ • Approves or denies with logged rationale               │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│       ↓                                                         │
-│  DECISION RECORDED → AUDIT TRAIL COMPLETE                       │
-│                                                                 │
-├─────────────────────────────────────────────────────────────────┤
-│  RATE TIERS                                                     │
-│  • Preferred (750+ credit): 7.9% APR, up to $100K              │
-│  • Standard (650-749):      12.9% APR, up to $50K              │
-│  • Rate exceptions: Up to 15% discount for 5+ year clients     │
-├─────────────────────────────────────────────────────────────────┤
-│  MEMORY ENABLES                                                 │
-│  • Client preferences persist across sessions                   │
-│  • Rate exceptions are remembered and applied                   │
-│  • Past decisions guide new ones                                │
-│  • Every action is logged for compliance                        │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│                  SEER EQUITY LOAN PROCESSING                  │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│  CLIENT APPLIES                                               │
+│       ↓                                                       │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ LOAN AGENT (Loan Officer)                               │  │
+│  │ • Recalls client history from memory                    │  │
+│  │ • Looks up applicable rates and policies                │  │
+│  │ • Submits application with risk assessment              │  │
+│  │ • Stores new client information for next time           │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│       ↓                                                       │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ RISK ASSESSMENT                                         │  │
+│  │ • Credit < 550         → BLOCKED                        │  │
+│  │ • Personal < $50K      → AUTO_APPROVE                   │  │
+│  │ • $50K - $250K         → UNDERWRITER_REVIEW             │  │
+│  │ • > $250K or Mortgage  → SENIOR_UNDERWRITER             │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│       ↓                                                       │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ UNDERWRITING AGENT (if needed)                          │  │
+│  │ • Reviews pending applications                          │  │
+│  │ • Checks past decisions for similar situations          │  │
+│  │ • Approves or denies with logged rationale              │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│       ↓                                                       │
+│  DECISION RECORDED → AUDIT TRAIL COMPLETE                     │
+│                                                               │
+├───────────────────────────────────────────────────────────────┤
+│  RATE TIERS                                                   │
+│  • Preferred (750+ credit): 7.9% APR, up to $100K             │
+│  • Standard (650-749):      12.9% APR, up to $50K             │
+│  • Rate exceptions: Up to 15% discount for 5+ year clients    │
+├───────────────────────────────────────────────────────────────┤
+│  MEMORY ENABLES                                               │
+│  • Client preferences persist across sessions                 │
+│  • Rate exceptions are remembered and applied                 │
+│  • Past decisions guide new ones                              │
+│  • Every action is logged for compliance                      │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ### Objectives
@@ -180,16 +180,14 @@ By the end of this workshop, you'll be able to:
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* An Oracle Cloud account with access to Oracle Database 26ai
-* Access to an AI provider (OCI Generative AI, OpenAI, etc.)
-* Basic knowledge of SQL and PL/SQL
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
 ## Learn More
 
 * [Oracle Database 26ai Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 * [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)
 
 ## Acknowledgements
