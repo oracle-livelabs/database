@@ -1,0 +1,16 @@
+{
+    "workshoptitle": "AI4U",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "About this workshop",
+            "filename": "../../introduction/introduction2.md"
+        },
+        {
+            "title": "Lab 1: What Is an AI Agent, Really?",
+            "description": "See an agent in action, experience its limitations",
+            "filename": "../../what-is-agent/what-is-agent.md"
+        }
+    ]
+}
