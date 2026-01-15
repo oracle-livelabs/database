@@ -8,7 +8,7 @@ Every agent follows the same pattern: understand, plan, execute tools, analyze r
 
 ### The Business Problem
 
-At Seers Equity, small loans take as long to process as big ones. A $25,000 personal loan for a client with excellent credit goes through the same review process as a $500,000 mortgage.
+At Seer Equity, small loans take as long to process as big ones. A $25,000 personal loan for a client with excellent credit goes through the same review process as a $500,000 mortgage.
 
 > *"We spend hours reviewing applications that should just auto-approve. A $25K personal loan with 800 credit? That shouldn't take the same time as a complex mortgage."*
 >
@@ -23,7 +23,7 @@ Plus, everything needs to be logged for compliance. When a regulator asks "why w
 
 ### What You'll Learn
 
-This lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes loans based on amount and type. This is the foundation for solving Seers Equity's processing bottleneck.
+This lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes loans based on amount and type. This is the foundation for solving Seer Equity's processing bottleneck.
 
 **What you'll build:** A loan processing workflow with conditional routing and complete audit trails.
 
@@ -38,16 +38,39 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-3 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
-## Task 1: Set Up an Observable Agent
+## Task 1: Import the Lab Notebook
 
-We'll create an agent with tools that log what's happening so you can see each step clearly.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import** to expand the Import drop down.
+
+3. Select **Git**.
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
+    <copy>
+    https://github.com/davidastart/database/blob/main/ai4u/how-agents-execute/lab4-how-agents-execute.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+
+## Task 2: Set Up an Observable Agent
+
+We'll create an agent with tools that log what's happening so you can see each step clearly. The key here is that our tools will write to a log table as they work, giving us a window into exactly what the agent is doing.
 
 1. Create tables and sequence for tracking.
+
+    We need two tables: one to log every step the agent takes (`workflow_log`) and one to store the actual loan requests (`loan_requests`). This separation lets us see both what the agent did AND what data it created.
 
     ```sql
     <copy>
@@ -75,6 +98,8 @@ We'll create an agent with tools that log what's happening so you can see each s
     ```
 
 2. Create the first tool function - create loan request.
+
+    This function does two things: it creates a loan request record AND it logs what it's doing. Every time the agent calls this tool, we'll see an entry in our workflow log. This is how we make the agent's work visible.
 
     ```sql
     <copy>
@@ -106,6 +131,8 @@ We'll create an agent with tools that log what's happening so you can see each s
     ```
 
 3. Create the second tool function - assess risk and route.
+
+    This is where the business logic lives. The function looks at the loan amount, type, and credit score, then decides where to route it. It logs both the assessment and the routing decision. This is the kind of conditional logic that makes agents useful—different inputs lead to different outcomes.
 
     ```sql
     <copy>
@@ -172,6 +199,8 @@ We'll create an agent with tools that log what's happening so you can see each s
 
 4. Register the tools.
 
+    We register both functions as tools. Notice how the instructions tell the agent what each tool does and what parameters it needs. The agent will use CREATE_LOAN_TOOL first to create the request, then ASSESS_ROUTE_TOOL to evaluate and route it.
+
     ```sql
     <copy>
     BEGIN
@@ -195,13 +224,15 @@ We'll create an agent with tools that log what's happening so you can see each s
 
 5. Create the agent and team.
 
+    The agent's role tells it to always complete both steps: create then assess. The task reinforces this with specific instructions. This ensures the agent follows a consistent workflow every time—create the request, get an ID back, then use that ID to assess and route.
+
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'LOAN_EXEC_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan processing agent for Seers Equity. Process loans by: 1) Creating the request with CREATE_LOAN_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
+                            "role": "You are a loan processing agent for Seer Equity. Process loans by: 1) Creating the request with CREATE_LOAN_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
             description => 'Agent demonstrating execution loop'
         );
         
@@ -223,7 +254,7 @@ We'll create an agent with tools that log what's happening so you can see each s
     </copy>
     ```
 
-## Task 2: Execute a Complete Workflow
+## Task 3: Execute a Complete Workflow
 
 Now let's run a request and trace every step.
 
@@ -262,7 +293,7 @@ Now let's run a request and trace every step.
 - ASSESS_RISK: Risk was evaluated
 - ROUTE_DECISION: AUTO_APPROVED (personal under $50K with 780 credit)
 
-## Task 3: Trace the Agent's Tool Calls
+## Task 4: Trace the Agent's Tool Calls
 
 The history views show what the agent did.
 
@@ -301,7 +332,7 @@ The history views show what the agent did.
 
 You can see the actual record the agent created, with the risk assessment and routing.
 
-## Task 4: Trace Different Execution Paths
+## Task 5: Trace Different Execution Paths
 
 Different loan parameters trigger different routing paths.
 
@@ -362,7 +393,7 @@ Different loan parameters trigger different routing paths.
 
 **Observe:** BLOCKED because credit score 520 is below minimum 550.
 
-## Task 5: Compare All Loans and Their Routes
+## Task 6: Compare All Loans and Their Routes
 
 Let's see all the loans and their different routing decisions.
 
@@ -382,7 +413,7 @@ ORDER BY created_at;
 </copy>
 ```
 
-## Task 6: Understand the Execution Pattern
+## Task 7: Understand the Execution Pattern
 
 Every agent execution follows this pattern:
 
@@ -431,11 +462,11 @@ In this lab, you traced the complete agent execution loop:
 * Traced tool calls through history views
 * Saw how different inputs lead to different routing paths
 
-**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Seers Equity, this means small loans auto-approve in seconds, complex loans get routed appropriately, and compliance has a complete audit trail.
+**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Seer Equity, this means small loans auto-approve in seconds, complex loans get routed appropriately, and compliance has a complete audit trail.
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 

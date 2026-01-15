@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In this lab, you'll directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seers Equity**.
+In this lab, you'll directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seer Equity**.
 
 Zero-shot prompting means: one question, one answer, done. It's useful for general knowledge, but it doesn't execute workflows or access your data. Agents break tasks into steps, use tools, and actually complete the work.
 
 ### The Business Problem
 
-At Seers Equity, loan officers tried using the AI chatbot to check loan statuses. The results were frustrating:
+At Seer Equity, loan officers tried using the AI chatbot to check loan statuses. The results were frustrating:
 
 > *"I asked about a client's loan status, and it told me how to log in. I know how to log in! I wanted the actual status."*
 >
@@ -16,7 +16,7 @@ At Seers Equity, loan officers tried using the AI chatbot to check loan statuses
 
 The chatbot was helpful for general questions like "What's a good credit score?" or "How do mortgages work?" But when loan officers needed actual data or wanted to take action, it fell short.
 
-Seers Equity needs AI that can:
+Seer Equity needs AI that can:
 - **Access real data** — Query the actual loan database
 - **Take action** — Update statuses, not just explain how to update them
 - **Coordinate steps** — Check a condition, then act on it
@@ -38,11 +38,33 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* An AI profile named `genai` already configured with your AI provider credentials
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
-## Task 1: Experience Zero-Shot Prompting
+## Task 1: Import the Lab Notebook
+
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import** to expand the Import drop down.
+
+3. Select **Git**.
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
+    <copy>
+    https://github.com/davidastart/database/blob/main/ai4u/agents-vs-zero-shot/lab2-agents-vs-zero-shot.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+
+## Task 2: Experience Zero-Shot Prompting
 
 Zero-shot queries go directly to the LLM for general knowledge answers. Use `SELECT AI CHAT` to ask questions without involving your database.
 
@@ -86,7 +108,7 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
-## Task 2: See What SELECT AI Can Do
+## Task 3: See What SELECT AI Can Do
 
 Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.
 
@@ -105,7 +127,7 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     );
 
     -- Add comments so Select AI understands the table
-    COMMENT ON TABLE sample_loans IS 'Seers Equity loan applications with status tracking.';
+    COMMENT ON TABLE sample_loans IS 'Seer Equity loan applications with status tracking.';
     COMMENT ON COLUMN sample_loans.application_id IS 'Unique loan application identifier. Examples: LOAN-12345, LOAN-12346.';
     COMMENT ON COLUMN sample_loans.applicant IS 'Name of the person or business applying for the loan';
     COMMENT ON COLUMN sample_loans.status IS 'Application status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';
@@ -168,11 +190,15 @@ SELECT AI returned the actual status: UNDER_REVIEW. Compare this to zero-shot wh
 
 Still UNDER_REVIEW. SELECT AI can read but cannot write.
 
-## Task 3: Create an Agent with Tools
+## Task 4: Create an Agent with Tools
 
 Now let's create an agent that can both READ and WRITE. We'll give it two tools: one to look up loans and one to update them.
 
+In this lab, we're using **function-based tools** instead of SQL tools. A function-based tool wraps a PL/SQL function you write, giving you complete control over what the tool does. This is how you give agents the ability to make changes to your data, not just read it.
+
 1. Create a function to look up loans (read).
+
+    This function takes a loan ID and returns the loan details. It's a simple read operation that the agent will use to check on loans before taking action.
 
     ```sql
     <copy>
@@ -199,6 +225,8 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     ```
 
 2. Create a function to update loan status (write).
+
+    This function actually changes data in the database. Notice it first checks the current status, then makes the update. The agent will use this to approve or deny loans.
 
     ```sql
     <copy>
@@ -233,7 +261,9 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     </copy>
     ```
 
-3. Register both as tools.
+3. Register both functions as tools.
+
+    Now we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating—this is how you build smart behavior into your agent.
 
     ```sql
     <copy>
@@ -259,7 +289,9 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     </copy>
     ```
 
-4. Create an agent with both tools.
+4. Create the agent, task, and team.
+
+    Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable. Notice how we give the agent access to TWO tools—it can decide which one to use based on what you ask.
 
     ```sql
     <copy>
@@ -267,7 +299,7 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'LOAN_MGMT_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan management agent for Seers Equity. You can look up loan applications and update their status. Always look up a loan first before updating it. Never make up loan information - always use your tools."}',
+                            "role": "You are a loan management agent for Seer Equity. You can look up loan applications and update their status. Always look up a loan first before updating it. Never make up loan information - always use your tools."}',
             description => 'Agent that can look up and update loan applications'
         );
     END;
@@ -295,7 +327,7 @@ Now let's create an agent that can both READ and WRITE. We'll give it two tools:
     </copy>
     ```
 
-## Task 4: See the Agent Coordinate and Act
+## Task 5: See the Agent Coordinate and Act
 
 Now let's see the real power of agents: coordinating multiple tools and making changes.
 
@@ -346,7 +378,7 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
 **Observe:** The agent looked up loan LOAN-12346, saw it was PENDING (not UNDER_REVIEW), and correctly decided NOT to update it. This is intelligent coordination.
 
-## Task 5: See What the Agent Did
+## Task 6: See What the Agent Did
 
 Every tool call is logged. Let's see the execution history.
 
@@ -366,7 +398,7 @@ Every tool call is logged. Let's see the execution history.
 
 You can see the sequence: lookup, then update (or just lookup if no update was needed).
 
-## Task 6: When to Use Each Approach
+## Task 7: When to Use Each Approach
 
 | Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |
 |----------|---------------------|-----------------|----------------------|
@@ -400,11 +432,11 @@ In this lab, you directly compared three approaches:
 
 You watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.
 
-**Key takeaway:** The difference is not just intelligence. It's action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work. For Seers Equity, that means loan officers can focus on clients instead of data entry.
+**Key takeaway:** The difference is not just intelligence. It's action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work. For Seer Equity, that means loan officers can focus on clients instead of data entry.
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 

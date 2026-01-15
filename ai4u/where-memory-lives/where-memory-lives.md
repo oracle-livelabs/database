@@ -6,13 +6,13 @@ In this lab, you'll build a **memory core**, the converged database foundation t
 
 ### The Business Problem
 
-In Lab 5, you experienced the forgetting problem firsthand. Sarah Chen from Acme Industries had to explain her preferences and rate exception to three different loan officers. The AI assistant forgot everything the moment each session ended.
+In Lab 5, you experienced the forgetting problem firsthand. Sarah Chen had to explain her preferences and rate exception to three different loan officers. The AI assistant forgot everything the moment each session ended.
 
-This isn't just frustrating. It's costing Seers Equity business. Clients feel unvalued. Loan officers waste time re-gathering information. And compliance can't track what was communicated.
+This isn't just frustrating. It's costing Seer Equity business. Clients feel unvalued. Loan officers waste time re-gathering information. And compliance can't track what was communicated.
 
 > *"Every conversation starts from zero. I told your AI about my preferences last week. Today it has no idea who I am."*
 >
-> Sarah Chen, Acme Industries
+> Sarah Chen, Seer Equity Client
 
 ### What You'll Learn
 
@@ -38,16 +38,39 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-6 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
-## Task 1: Create the Memory Core Table
+## Task 1: Import the Lab Notebook
 
-The memory table is the foundation, where the agent stores everything it learns.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import** to expand the Import drop down.
+
+3. Select **Git**.
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
+    <copy>
+    https://github.com/davidastart/database/blob/main/ai4u/where-memory-lives/lab7-where-memory-lives.json
+    </copy>
+    ```
+
+5. Click **Import**.
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+
+## Task 2: Create the Memory Core Table
+
+The memory table is the foundation, where the agent stores everything it learns. We use JSON for the content because memories can have different shapes: some might be simple facts, others might be preferences with multiple attributes.
 
 1. Create the memory core table.
+
+    This table stores all agent memories. Each memory has a type (like FACT), JSON content (the actual information), and a timestamp. The JSON format gives us flexibility, we can store any kind of structured information.
 
     ```sql
     <copy>
@@ -70,11 +93,13 @@ The memory table is the foundation, where the agent stores everything it learns.
     </copy>
     ```
 
-## Task 2: Create the Remember Function
+## Task 3: Create the Remember Function
 
-This function becomes the agent's "save to memory" capability.
+This function becomes the agent's "save to memory" capability. When someone tells the agent something important, the agent calls this function to store it permanently.
 
 1. Create the function to store facts.
+
+    The function takes a fact (the information), an optional category (like "preference" or "contact"), and an optional "about" field (who or what this fact relates to). It stores everything as JSON and returns a confirmation.
 
     ```sql
     <copy>
@@ -105,11 +130,13 @@ This function becomes the agent's "save to memory" capability.
     </copy>
     ```
 
-## Task 3: Create the Recall Function
+## Task 4: Create the Recall Function
 
-The recall function is the agent's "search memory" capability.
+The recall function is the agent's "search memory" capability. When someone asks the agent a question, the agent can search its memory for relevant facts.
 
 1. Create the function to retrieve facts.
+
+    This function searches the memory table for facts that match what we're looking for. You can search by entity ("about") or by category. It returns the most recent matching facts.
 
     ```sql
     <copy>
@@ -151,18 +178,20 @@ The recall function is the agent's "search memory" capability.
     </copy>
     ```
 
-## Task 4: Register the Agent Tools
+## Task 5: Register the Agent Tools
 
-Tools bridge your PL/SQL functions and the AI agent.
+Tools bridge your PL/SQL functions and the AI agent. By registering these functions as tools, we give the agent the ability to remember and recall information. The instructions tell the agent when to use each tool.
 
 1. Register the "remember" tool.
+
+    The instruction tells the agent to use this tool when users share important information. This is how the agent knows to save things.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'REMEMBER_TOOL',
-            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Acme Corp). Use this when the user shares important information.",
+            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Sarah Chen). Use this when the user shares important information.",
                             "function": "remember_fact"}',
             description => 'Stores facts in long-term memory for future recall'
         );
@@ -172,6 +201,8 @@ Tools bridge your PL/SQL functions and the AI agent.
     ```
 
 2. Register the "recall" tool.
+
+    The instruction tells the agent to search memory when asked about something. This is how the agent knows to look things up before answering.
 
     ```sql
     <copy>
@@ -195,9 +226,13 @@ Tools bridge your PL/SQL functions and the AI agent.
     </copy>
     ```
 
-## Task 5: Create the Agent, Task, and Team
+## Task 6: Create the Agent, Task, and Team
+
+Now we put it all together. The agent gets both memory tools, and its role tells it to actively use them. This is what makes it different from the forgetful agent in Lab 5, this one has the ability to actually store and retrieve information.
 
 1. Create the agent with memory awareness.
+
+    The role emphasizes using the tools, never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
 
     ```sql
     <copy>
@@ -245,7 +280,7 @@ Tools bridge your PL/SQL functions and the AI agent.
     </copy>
     ```
 
-## Task 6: Talk to Your Agent
+## Task 7: Talk to Your Agent
 
 Now let's see memory in action.
 
@@ -261,7 +296,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT Customer Acme Corp prefers to be contacted by email, not phone;
+    SELECT AI AGENT Customer Sarah Chen prefers to be contacted by email, not phone;
     </copy>
     ```
 
@@ -269,7 +304,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT The main contact for Acme Corp is Sarah Johnson and their timezone is Pacific;
+    SELECT AI AGENT Sarah Chen has a 15 percent rate exception and her timezone is Pacific;
     </copy>
     ```
 
@@ -277,13 +312,13 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT What do you know about Acme Corp;
+    SELECT AI AGENT What do you know about Sarah Chen;
     </copy>
     ```
 
 The agent recalls the stored facts.
 
-## Task 7: Verify Persistence Across Sessions
+## Task 8: Verify Persistence Across Sessions
 
 1. Clear and reset the session.
 
@@ -298,7 +333,7 @@ The agent recalls the stored facts.
 
     ```sql
     <copy>
-    SELECT AI AGENT Who is the contact for Acme Corp;
+    SELECT AI AGENT What is Sarah Chen's preferred contact method;
     </copy>
     ```
 
@@ -331,7 +366,7 @@ In this lab, you built a **memory core** using Oracle's converged database:
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 * [JSON Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/adjsn/)
 
 ## Acknowledgements
