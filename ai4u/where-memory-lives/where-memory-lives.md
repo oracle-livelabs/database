@@ -6,13 +6,13 @@ In this lab, you'll build a **memory core**, the converged database foundation t
 
 ### The Business Problem
 
-In Lab 5, you experienced the forgetting problem firsthand. Sarah Chen from Acme Industries had to explain her preferences and rate exception to three different loan officers. The AI assistant forgot everything the moment each session ended.
+In Lab 5, you experienced the forgetting problem firsthand. Sarah Chen had to explain her preferences and rate exception to three different loan officers. The AI assistant forgot everything the moment each session ended.
 
 This isn't just frustrating. It's costing Seer Equity business. Clients feel unvalued. Loan officers waste time re-gathering information. And compliance can't track what was communicated.
 
 > *"Every conversation starts from zero. I told your AI about my preferences last week. Today it has no idea who I am."*
 >
-> Sarah Chen, Acme Industries
+> Sarah Chen, Seer Equity Client
 
 ### What You'll Learn
 
@@ -66,11 +66,11 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create the Memory Core Table
 
-The memory table is the foundation—where the agent stores everything it learns. We use JSON for the content because memories can have different shapes: some might be simple facts, others might be preferences with multiple attributes.
+The memory table is the foundation, where the agent stores everything it learns. We use JSON for the content because memories can have different shapes: some might be simple facts, others might be preferences with multiple attributes.
 
 1. Create the memory core table.
 
-    This table stores all agent memories. Each memory has a type (like FACT), JSON content (the actual information), and a timestamp. The JSON format gives us flexibility—we can store any kind of structured information.
+    This table stores all agent memories. Each memory has a type (like FACT), JSON content (the actual information), and a timestamp. The JSON format gives us flexibility, we can store any kind of structured information.
 
     ```sql
     <copy>
@@ -191,7 +191,7 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'REMEMBER_TOOL',
-            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Acme Corp). Use this when the user shares important information.",
+            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Sarah Chen). Use this when the user shares important information.",
                             "function": "remember_fact"}',
             description => 'Stores facts in long-term memory for future recall'
         );
@@ -228,11 +228,11 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
 ## Task 6: Create the Agent, Task, and Team
 
-Now we put it all together. The agent gets both memory tools, and its role tells it to actively use them. This is what makes it different from the forgetful agent in Lab 5—this one has the ability to actually store and retrieve information.
+Now we put it all together. The agent gets both memory tools, and its role tells it to actively use them. This is what makes it different from the forgetful agent in Lab 5, this one has the ability to actually store and retrieve information.
 
 1. Create the agent with memory awareness.
 
-    The role emphasizes using the tools—never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
+    The role emphasizes using the tools, never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
 
     ```sql
     <copy>
@@ -296,7 +296,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT Customer Acme Corp prefers to be contacted by email, not phone;
+    SELECT AI AGENT Customer Sarah Chen prefers to be contacted by email, not phone;
     </copy>
     ```
 
@@ -304,7 +304,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT The main contact for Acme Corp is Sarah Johnson and their timezone is Pacific;
+    SELECT AI AGENT Sarah Chen has a 15 percent rate exception and her timezone is Pacific;
     </copy>
     ```
 
@@ -312,7 +312,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT What do you know about Acme Corp;
+    SELECT AI AGENT What do you know about Sarah Chen;
     </copy>
     ```
 
@@ -333,7 +333,7 @@ The agent recalls the stored facts.
 
     ```sql
     <copy>
-    SELECT AI AGENT Who is the contact for Acme Corp;
+    SELECT AI AGENT What is Sarah Chen's preferred contact method;
     </copy>
     ```
 

@@ -137,14 +137,6 @@ For Select AI to query your table, the profile needs to know about it. We'll add
     </copy>
     ```
 
-2. Verify the profile has the table.
-
-    ```sql
-    <copy>
-    SELECT profile_name, status FROM USER_CLOUD_AI_PROFILES WHERE profile_name = 'genai';
-    </copy>
-    ```
-
 ## Task 4: Create the Agent Components
 
 Now let's build an agent that can query this data. An agent system has four components that work together:
@@ -160,7 +152,7 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
 
 1. Create the SQL tool.
 
-    A **tool** gives the agent a specific capability. Without tools, an agent can only talk—it can't actually do anything. This SQL tool connects to your AI profile and allows the agent to query the loan applications table. The description helps the agent understand when and how to use this tool.
+    A **tool** gives the agent a specific capability. Without tools, an agent can only talk, it can't actually do anything. This SQL tool connects to your AI profile and allows the agent to query the loan applications table. The description helps the agent understand when and how to use this tool.
 
     ```sql
     <copy>
@@ -178,7 +170,7 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
 
 2. Create the agent.
 
-    An **agent** is the AI entity that will handle requests. The `role` attribute shapes the agent's personality and behavior—it's like giving an employee their job title and explaining how they should approach their work. Here we're telling the agent it's a loan application assistant and should always use its tools rather than asking follow-up questions.
+    An **agent** is the AI entity that will handle requests. The `role` attribute shapes the agent's personality and behavior, it's like giving an employee their job title and explaining how they should approach their work. Here we're telling the agent it's a loan application assistant and should always use its tools rather than asking follow-up questions.
 
     ```sql
     <copy>
@@ -214,7 +206,7 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
 
 4. Create the team.
 
-    A **team** is the container that brings everything together. It assigns agents to tasks and defines how they coordinate. The `process` attribute determines how work flows—"sequential" means agents work one after another (in this case we only have one agent). You interact with the team, and the team orchestrates which agent handles your request using which task.
+    A **team** is the container that brings everything together. It assigns agents to tasks and defines how they coordinate. The `process` attribute determines how work flows, "sequential" means agents work one after another (in this case we only have one agent). You interact with the team, and the team orchestrates which agent handles your request using which task.
 
     ```sql
     <copy>

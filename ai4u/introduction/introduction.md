@@ -18,7 +18,7 @@ Seer Equity has been growing fast. Maybe too fast. Their loan officers are overw
 
 **"We keep forgetting our best clients."**
 
-Last month, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with Seer Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
+Last month, a loan officer quoted standard rates to Sarah Chen, a client who's been with Seer Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
 
 **"Every loan officer handles the same situation differently."**
 

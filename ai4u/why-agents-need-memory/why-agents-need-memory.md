@@ -10,13 +10,13 @@ You'll tell an agent something important, clear the session, and watch it forget
 
 ### The Business Problem
 
-Last month at Seer Equity, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with the company for six years and has a **15% rate exception** on file.
+Last month at Seer Equity, a loan officer quoted standard rates to Sarah Chen, a client who's been with the company for six years and has a **15% rate exception** on file.
 
 Sarah was not happy:
 
 > *"I've told three different people my preferences. Why doesn't anyone remember? I specifically asked to be contacted by email, not phone. I have a rate exception that took months to negotiate. And every time I call, it's like starting over."*
 >
-> Sarah Chen, Acme Industries
+> Sarah Chen, Seer Equity Client
 
 This is exactly what's happening with Seer Equity's AI assistants. They have amnesia. Every conversation starts fresh. A client shares their preferences, and five minutes later (or after a session reset), the AI has no idea who they are.
 
@@ -65,7 +65,7 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create an Agent Without Memory
 
-We'll create an agent that has no way to store or retrieve information between sessions. Notice that we tell the agent in its role to "remember" things, but we don't give it any tools to actually do that. This is the gap—the agent wants to remember but has no way to make memories persist.
+We'll create an agent that has no way to store or retrieve information between sessions. Notice that we tell the agent in its role to "remember" things, but we don't give it any tools to actually do that. This is the gap: the agent wants to remember but has no way to make memories persist.
 
 1. Create a simple loan officer assistant agent.
 
@@ -134,7 +134,7 @@ Let's give the agent important information about a client, just like a real loan
 
     ```sql
     <copy>
-    SELECT AI AGENT Sarah Chen from Acme Industries prefers email contact, never phone. Her timezone is Pacific. She has a 15 percent rate exception that was approved last year. Please remember this for future interactions;
+    SELECT AI AGENT Sarah Chen prefers email contact, never phone. Her timezone is Pacific. She has a 15 percent rate exception that was approved last year due to her long relationship with Seer Equity. Please remember this for future interactions;
     </copy>
     ```
 
@@ -148,7 +148,7 @@ The agent acknowledges and seems to understand. It might even thank you for the 
     </copy>
     ```
 
-The agent can recall this—it's still in the conversation context.
+The agent can recall this, it's still in the conversation context.
 
 3. Ask another question in the same session.
 
@@ -158,7 +158,7 @@ The agent can recall this—it's still in the conversation context.
     </copy>
     ```
 
-Still works—the context is maintained within the session.
+Still works, the context is maintained within the session.
 
 ## Task 4: Experience the Forgetting
 
@@ -194,7 +194,7 @@ Now let's simulate what happens when the session ends and a new one begins, like
 
     ```sql
     <copy>
-    SELECT AI AGENT What rate exception does Sarah Chen from Acme Industries have;
+    SELECT AI AGENT What rate exception does Sarah Chen have;
     </copy>
     ```
 
