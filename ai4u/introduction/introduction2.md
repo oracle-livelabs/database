@@ -61,13 +61,12 @@ Compliance requires that the person who submits a loan cannot be the same person
 
 We will solve all of these problems in future labs. This is Part 1 of an ongoing series following Seer Equity as they transform their AI from helpful explainers into trusted actors.
 
-**Follow us on LinkedIn to catch new labs as they drop.**
+**Follow us on LinkedIn to catch new labs as they drop. Also check back into this workshop as we add more content.**
 
 ## This Workshop
 
 This release includes:
 
-- **Introduction**: Meet Seer Equity and understand the business problems
 - **Lab 1**: Build your first AI agent with a SQL tool that queries loan data
 
 You will learn:
