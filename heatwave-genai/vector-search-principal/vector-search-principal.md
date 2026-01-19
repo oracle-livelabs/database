@@ -20,7 +20,7 @@ In this lab, you will be guided through the following task:
 
 ### Prerequisites
 
-- Must complete Lab 4.
+- Must complete Lab **Use HeatWave in-database LLM**...
 
 ## Task 1: Download HeatWave files
 
@@ -353,4 +353,4 @@ HeatWave retrieves content from the vector store and provide that as context to 
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager, Aijaz Fatima, Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, August 2024
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
