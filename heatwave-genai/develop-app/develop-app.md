@@ -6,6 +6,8 @@ HeatWave seamlessly integrates with existing Oracle services, such as Oracle Ana
 
 In this lab you will build a LAMP stack and deploy a prebuilt  HeatWave RAG Chat Application. The application  is designed to make interacting with HeatWave GenAI Retrieval-Augmented Generation (RAG) capabilities straightforward and user-friendly.
 
+**Note:** The application code in this lab is intended for educational purposes only. It is designed to help developers learn and practice application development skills with HeatWave. The code is not designed to be used in a production environment
+
 ### Objectives
 
 In this lab, you will be guided through the following tasks:
