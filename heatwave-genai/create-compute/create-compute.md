@@ -20,7 +20,7 @@ In this lab, you will be guided through the following tasks:
 
 ### Prerequisites
 
-- You have completed Lab 2.
+- You have completed Lab **Create a HeatWave instance** .
 
 ## Task 1: Create a Compute Instance
 
@@ -110,4 +110,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, April 2025
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
