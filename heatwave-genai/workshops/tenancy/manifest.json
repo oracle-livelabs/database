@@ -35,13 +35,20 @@
         },
 
         {
-          "title": "Lab 5: Perform Retrieval Augmented Generation",
-          "filename": "../../vector-search/vector-search.md"
+          "title": "Lab 5: Perform Retrieval Augmented Generation(PAR)",
+          "filename": "../../vector-search-par/vector-search-par.md"
         },
+
 
         {
           "title": "Lab 6: Build HeatWave RAG Chat Application",
           "filename": "../../develop-app/develop-app.md"
+        },
+
+
+        {
+          "title": "Lab BONUS: Perform Retrieval Augmented Generation(Resource Principal)",
+          "filename": "../../vector-search-principal/vector-search-principal.md"
         },
 
         {

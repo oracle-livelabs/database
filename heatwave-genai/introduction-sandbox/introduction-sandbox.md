@@ -25,16 +25,15 @@ The following diagram illustrates HeatWave components at a glance.
 
 In this lab, you will be guided through the following steps:
 
-1. Setup MySQL Shell for Visual Studio Code
-2. Create a HeatWave instance
-3. Connect to the HeatWave instance from Visual Studio Code
-4. Generate content
-5. Perform a vector search
-6. Build HeatWave RAG Chat Application
+1. Connect to the HeatWave instance from Visual Studio Code
+2. Generate content
+3. Perform a vector search
+4. Build HeatWave RAG Chat Application
 
 ## Prerequisites
 
-Please make sure you can sign in to your HeatWave OCI Cloud Account.
+Please make sure you can Log in to your LiveLabs Sandbox.
+
 
 ## Learn More
 
@@ -48,4 +47,4 @@ Please make sure you can sign in to your HeatWave OCI Cloud Account.
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
