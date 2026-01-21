@@ -96,7 +96,7 @@ By the end of this workshop, you will be able to:
 ## Learn More
 
 * [Oracle Database Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
