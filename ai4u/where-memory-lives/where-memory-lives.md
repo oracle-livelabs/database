@@ -72,6 +72,8 @@ The memory table is the foundation, where the agent stores everything it learns.
 
     This table stores all agent memories. Each memory has a type (like FACT), JSON content (the actual information), and a timestamp. The JSON format gives us flexibility, we can store any kind of structured information.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     CREATE TABLE agent_memory (
@@ -85,6 +87,8 @@ The memory table is the foundation, where the agent stores everything it learns.
     ```
 
 2. Create indexes for efficient JSON queries.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -100,6 +104,8 @@ This function becomes the agent's "save to memory" capability. When someone tell
 1. Create the function to store facts.
 
     The function takes a fact (the information), an optional category (like "preference" or "contact"), and an optional "about" field (who or what this fact relates to). It stores everything as JSON and returns a confirmation.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -137,6 +143,8 @@ The recall function is the agent's "search memory" capability. When someone asks
 1. Create the function to retrieve facts.
 
     This function searches the memory table for facts that match what we're looking for. You can search by entity ("about") or by category. It returns the most recent matching facts.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -186,6 +194,8 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
     The instruction tells the agent to use this tool when users share important information. This is how the agent knows to save things.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -204,6 +214,8 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
     The instruction tells the agent to search memory when asked about something. This is how the agent knows to look things up before answering.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -220,6 +232,8 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
 3. Verify the tools were created.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT tool_name, status, description FROM USER_AI_AGENT_TOOLS;
@@ -233,6 +247,8 @@ Now we put it all together. The agent gets both memory tools, and its role tells
 1. Create the agent with memory awareness.
 
     The role emphasizes using the tools, never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -250,6 +266,8 @@ Now we put it all together. The agent gets both memory tools, and its role tells
 
 2. Create the task.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -265,6 +283,8 @@ Now we put it all together. The agent gets both memory tools, and its role tells
     ```
 
 3. Create the team.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -286,6 +306,8 @@ Now let's see memory in action.
 
 1. Set the team.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('MEMORY_TEAM');
@@ -293,6 +315,8 @@ Now let's see memory in action.
     ```
 
 2. Tell the agent something to remember.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -302,6 +326,8 @@ Now let's see memory in action.
 
 3. Tell it more.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT Sarah Chen has a 15 percent rate exception and her timezone is Pacific;
@@ -309,6 +335,8 @@ Now let's see memory in action.
     ```
 
 4. Ask about what it knows.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -322,6 +350,8 @@ The agent recalls the stored facts.
 
 1. Clear and reset the session.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
@@ -330,6 +360,8 @@ The agent recalls the stored facts.
     ```
 
 2. Ask about previous information.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -340,6 +372,8 @@ The agent recalls the stored facts.
 **The agent remembers!** Because facts are stored in the database, not session memory.
 
 3. View the memory core contents.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -375,6 +409,8 @@ In this lab, you built a **memory core** using Oracle's converged database:
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>

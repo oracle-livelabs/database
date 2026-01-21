@@ -45,9 +45,15 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![Notebook Information](./images/notebook_launch.png " ")
+
 2. Click **Import** to expand the Import drop down.
 
+    ![Notebook Information](./images/notebook_import.png " ")
+
 3. Select **Git**.
+
+    ![Notebook Information](./images/notebook_git.png " ")
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -56,8 +62,11 @@ Before you begin, you are going to import a notebook that has all of the command
     https://github.com/davidastart/database/blob/main/ai4u/what-is-agent/lab1-what-is-agent.json
     </copy>
     ```
+    ![Notebook Information](./images/notebook_clone.png " ")
 
-5. Click **Import**.
+5. Click **Ok**.
+
+    ![Notebook Information](./images/notebook_clone.png " ")
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -66,6 +75,8 @@ You should now be on the screen with the notebook imported. This workshop will h
 First, let's create a loan applications table. This gives the agent something real to work with, the kind of data that a chatbot would never be able to access.
 
 1. Create the loan applications table.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -80,9 +91,13 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
+    ![Task Information](./images/task2_1.png " ")
+
 2. Add comments so Select AI understands what this table contains.
 
     >**Note:** Select AI reads table and column comments to understand your schema. Good comments make the AI smarter about your data.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -96,7 +111,11 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
+    ![Task Information](./images/task2_2.png " ")
+
 3. Add sample loan applications.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -108,13 +127,19 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
+    ![Task Information](./images/task2_3.png " ")
+
 4. Verify the data exists.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
     SELECT application_id, applicant_name, loan_status, loan_amount, loan_type FROM loan_applications;
     </copy>
     ```
+
+    ![Task Information](./images/task2_4.png " ")
 
 ## Task 3: Add the Table to Your AI Profile
 
@@ -123,6 +148,8 @@ For Select AI to query your table, the profile needs to know about it. We'll add
 1. Add the LOAN_APPLICATIONS table to the genai profile.
 
     >**Note:** The `object_list` tells Select AI which tables it can query. Without this, the AI won't know your table exists.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -136,6 +163,8 @@ For Select AI to query your table, the profile needs to know about it. We'll add
     /
     </copy>
     ```
+
+    ![Task Information](./images/task3_1.png " ")
 
 ## Task 4: Create the Agent Components
 
@@ -154,6 +183,8 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
 
     A **tool** gives the agent a specific capability. Without tools, an agent can only talk, it can't actually do anything. This SQL tool connects to your AI profile and allows the agent to query the loan applications table. The description helps the agent understand when and how to use this tool.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -168,9 +199,13 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
     </copy>
     ```
 
+    ![Task Information](./images/task4_1.png " ")
+
 2. Create the agent.
 
     An **agent** is the AI entity that will handle requests. The `role` attribute shapes the agent's personality and behavior, it's like giving an employee their job title and explaining how they should approach their work. Here we're telling the agent it's a loan application assistant and should always use its tools rather than asking follow-up questions.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -186,9 +221,13 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
     </copy>
     ```
 
+    ![Task Information](./images/task4_2.png " ")
+
 3. Create the task.
 
     A **task** is a set of instructions that tells the agent exactly what to do when it receives a request. It also specifies which tools the agent can use for this task. The `{query}` placeholder is where the user's question gets inserted. Think of the task as the detailed job description that guides the agent's work.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -204,9 +243,13 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
     </copy>
     ```
 
+    ![Task Information](./images/task4_3.png " ")
+
 4. Create the team.
 
     A **team** is the container that brings everything together. It assigns agents to tasks and defines how they coordinate. The `process` attribute determines how work flows, "sequential" means agents work one after another (in this case we only have one agent). You interact with the team, and the team orchestrates which agent handles your request using which task.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -222,7 +265,11 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
     </copy>
     ```
 
+    ![Task Information](./images/task4_4.png " ")
+
 5. Verify everything is created.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -233,11 +280,15 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
     </copy>
     ```
 
+    ![Task Information](./images/task4_5.png " ")
+
 ## Task 5: See the Agent in Action
 
 Now let's see the difference between an agent and a chatbot.
 
 1. Set the team for your session.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -245,9 +296,13 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_1.png " ")
+
 2. Ask about a specific loan application.
 
     **This is the key moment.** The agent doesn't explain *how* to check loan status. It actually queries the loan_applications table and tells you the answer.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -255,7 +310,11 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_2.png " ")
+
 3. Ask about another application.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -263,7 +322,11 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_3.png " ")
+
 4. Ask a question that requires reasoning over data.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -271,11 +334,15 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_4.png " ")
+
 ## Task 6: See What Happened Behind the Scenes
 
 The agent used a tool to get real answers. Let's see the evidence.
 
 1. Check the tool execution history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -289,7 +356,11 @@ The agent used a tool to get real answers. Let's see the evidence.
     </copy>
     ```
 
+    ![Task Information](./images/task6_1.png " ")
+
 2. Check the team execution history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -302,6 +373,8 @@ The agent used a tool to get real answers. Let's see the evidence.
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    ![Task Information](./images/task6_2.png " ")
 
 ## Task 7: The Chatbot vs Agent Difference
 
@@ -345,6 +418,8 @@ In this lab, you experienced the fundamental nature of AI agents:
 
 ## Cleanup (Optional)
 
+> This command is already in your notebook—just click the play button (▶) to run it.
+
 ```sql
 <copy>
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('LOAN_TEAM', TRUE);
@@ -354,3 +429,5 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('LOAN_LOOKUP', TRUE);
 DROP TABLE loan_applications PURGE;
 </copy>
 ```
+
+![Cleanup](./images/cleanup.png " ")

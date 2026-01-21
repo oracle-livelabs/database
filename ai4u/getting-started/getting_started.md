@@ -15,23 +15,29 @@ Estimated Time: 5 minutes
 
 1. Click the **View Login Info** button in the workshop. This opens the reservation information panel on the right side of your screen.
 
+    ![Reservation Information](./images/res_info1.png " ")
+
 2. In the reservation panel, you will see:
 
     - A link to the Oracle Machine Learning notebook (click the button to open it)
     - Your username
     - Your password
 
+    ![Reservation Information](./images/res_info2.png " ")
+
 3. Click the button to open the Oracle Machine Learning notebook link. This opens OML in a new browser tab.
+
+    ![Reservation Information](./images/res_info3.png " ")
 
 ## Task 2: Log Into Oracle Machine Learning
 
-1. On the Oracle Machine Learning sign-in page, enter the **username** from your reservation information.
+1. On the Oracle Machine Learning sign-in page, enter the **username** and **password** from your reservation information and click **Sign In**
 
-2. Enter the **password** from your reservation information.
-
-3. Click **Sign In**.
+    ![Reservation Information](./images/oml_login.png " ")
 
 4. You should now see the Oracle Machine Learning home page.
+
+    ![Reservation Information](./images/oml_landing.png " ")
 
 ## Summary
 
