@@ -74,6 +74,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 
     First, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Applicant table
@@ -109,6 +111,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 2. Create tool functions.
 
     Now we create three different functions, each doing one specific job. This separation is important—instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -162,6 +166,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 
     Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -199,6 +205,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 4. Create the agent and team.
 
     Now we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -240,6 +248,8 @@ Let's start with a simple request that needs only one tool.
 
 1. Set the team and ask a simple question.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
@@ -248,6 +258,8 @@ Let's start with a simple request that needs only one tool.
     ```
 
 2. Check the tool history to see the plan execution.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -269,6 +281,8 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
 1. Ask a complex question.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT Give me a complete picture of applicant APP-001 including their loans and rate eligibility;
@@ -276,6 +290,8 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     ```
 
 2. Check the tool history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -301,6 +317,8 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 The task instruction guides how the agent plans. Let's modify it.
 
 1. Create a more specific task.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -330,6 +348,8 @@ The task instruction guides how the agent plans. Let's modify it.
 
 2. Test with the structured instructions.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
@@ -338,6 +358,8 @@ The task instruction guides how the agent plans. Let's modify it.
     ```
 
 3. Check the tool history again.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -362,6 +384,8 @@ Planning provides:
 4. **Control**: You shape the plan through instructions
 
 Query the complete execution sequence:
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -396,6 +420,8 @@ In this lab, you observed how agents plan their work:
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>

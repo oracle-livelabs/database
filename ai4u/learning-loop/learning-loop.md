@@ -73,6 +73,8 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
 
     We're using a pre-trained model called "all_MiniLM_L12_v2" that's good at understanding the meaning of sentences. This downloads the model file to the database server.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -91,6 +93,8 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
 2. Load it into the database.
 
     This loads the ONNX model into the database so we can use it in SQL. Once loaded, we can call `VECTOR_EMBEDDING()` in any query to convert text to vectors.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -113,6 +117,8 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
 
 3. Verify the model is loaded.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT model_name, algorithm, mining_function 
@@ -128,6 +134,8 @@ Create tables that will hold Seer Equity's agent memory. The key difference from
 1. Create the memory table with a vector column.
 
     The `embedding` column with type `VECTOR(384)` stores 384 numbers that capture the meaning of each memory. Two memories with similar meanings will have similar vectors, even if they use different words.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -162,6 +170,8 @@ Create tables that will hold Seer Equity's agent memory. The key difference from
 
     The index uses "cosine distance" which measures how similar two vectors are based on their direction, not their size. A 95% accuracy target means the index is optimized for speed while staying very accurate.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     CREATE VECTOR INDEX idx_memory_vector ON seers_memory(embedding)
@@ -174,6 +184,8 @@ Create tables that will hold Seer Equity's agent memory. The key difference from
 ## Task 4: Populate Seer Equity Loan Policies
 
 Add Seer Equity's loan policies. These are the corporate rules the agent must follow when processing loan applications.
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -219,6 +231,8 @@ COMMIT;
 Create the core memory functions. The key difference from earlier labs: `find_similar_decisions` uses vector similarity search to find relevant past decisions by meaning, not just keywords.
 
 1. Create functions to store and recall client facts.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -279,6 +293,8 @@ Create the core memory functions. The key difference from earlier labs: `find_si
 2. Create functions to record and find loan decisions with semantic search.
 
     This is where the magic happens. When we store a decision, we embed the situation description. When we search, we find decisions with similar meaning—even if the words are different.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -360,6 +376,8 @@ Create the core memory functions. The key difference from earlier labs: `find_si
 
 3. Create a function to look up loan policies.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Look up loan policies
@@ -399,6 +417,8 @@ Create the core memory functions. The key difference from earlier labs: `find_si
 ## Task 6: Register the Memory Tools
 
 Register all five functions as agent tools. The instructions tell the agent when to use each tool.
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -458,6 +478,8 @@ END;
 
 Create an agent with access to all memory tools. The role instructions tell the agent to use its memory proactively.
 
+> This command is already in your notebook—just click the play button (▶) to run it.
+
 ```sql
 <copy>
 BEGIN
@@ -495,6 +517,8 @@ END;
 ## Task 8: Seed Historical Decisions for Learning
 
 Add historical loan decisions that the agent can learn from. Notice we're using varied wording—"seasonal cash flow," "cyclical revenue," "variable income"—to test semantic search.
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -563,6 +587,8 @@ Now test finding relevant decisions by meaning, not keywords. This is where the 
 
 1. Activate the team and set your session.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_MEMORY_TEAM');
@@ -570,6 +596,8 @@ Now test finding relevant decisions by meaning, not keywords. This is where the 
     ```
 
 2. Search for "irregular income patterns" (finds "seasonal cash flow" and "cyclical revenue").
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -580,6 +608,8 @@ Now test finding relevant decisions by meaning, not keywords. This is where the 
     **Observe:** Finds Harvest Farms ("seasonal cash flow") and Consulting Partners ("cyclical revenue") even though we said "irregular income patterns."
 
 3. Search for "discount request from new customer."
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -595,6 +625,8 @@ Now use the agent to demonstrate the complete learning loop.
 
 1. Teach the agent about a client.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT Acme Industries is one of our best clients. They prefer email contact through their CFO Sarah Chen. They have been with Seer Equity since 2019 and were approved for a 15% rate exception due to their excellent payment history on 4 previous loans. Please remember all of this;
@@ -602,6 +634,8 @@ Now use the agent to demonstrate the complete learning loop.
     ```
 
 2. Ask for guidance on a new situation.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -612,6 +646,8 @@ Now use the agent to demonstrate the complete learning loop.
     **Observe:** The semantic search finds Harvest Farms (seasonal) and Consulting Partners (cyclical) even though we said "unpredictable revenue" and "landscaping."
 
 3. Record a new decision.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -625,6 +661,8 @@ Clear the session and verify memory persists.
 
 1. Clear and reset the session.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
@@ -633,6 +671,8 @@ Clear the session and verify memory persists.
     ```
 
 2. Ask about Acme Industries in the "new" session.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -643,6 +683,8 @@ Clear the session and verify memory persists.
     **Observe:** The agent still knows! Because facts are stored in the database with embeddings, they persist across sessions.
 
 3. Search for seasonal payment decisions (now includes GreenScape).
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -655,6 +697,8 @@ Clear the session and verify memory persists.
 ## Task 12: Examine the Memory Core
 
 Look at what's stored in the memory tables.
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -684,6 +728,8 @@ In this lab, you built the learning loop with semantic search:
 **Key takeaway:** This is how agents improve. Not magically, but systematically. Decision → outcome → memory → better future decisions. The semantic search ensures relevant past experience is found even when described differently. The AI database powers it all.
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
