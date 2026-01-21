@@ -72,6 +72,8 @@ We'll create an agent with tools that log what's happening so you can see each s
 
     We need two tables: one to log every step the agent takes (`workflow_log`) and one to store the actual loan requests (`loan_requests`). This separation lets us see both what the agent did AND what data it created.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     CREATE SEQUENCE loan_requests_seq START WITH 1001;
@@ -100,6 +102,8 @@ We'll create an agent with tools that log what's happening so you can see each s
 2. Create the first tool function - create loan request.
 
     This function does two things: it creates a loan request record AND it logs what it's doing. Every time the agent calls this tool, we'll see an entry in our workflow log. This is how we make the agent's work visible.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -133,6 +137,8 @@ We'll create an agent with tools that log what's happening so you can see each s
 3. Create the second tool function - assess risk and route.
 
     This is where the business logic lives. The function looks at the loan amount, type, and credit score, then decides where to route it. It logs both the assessment and the routing decision. This is the kind of conditional logic that makes agents useful—different inputs lead to different outcomes.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -201,6 +207,8 @@ We'll create an agent with tools that log what's happening so you can see each s
 
     We register both functions as tools. Notice how the instructions tell the agent what each tool does and what parameters it needs. The agent will use CREATE_LOAN_TOOL first to create the request, then ASSESS_ROUTE_TOOL to evaluate and route it.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -225,6 +233,8 @@ We'll create an agent with tools that log what's happening so you can see each s
 5. Create the agent and team.
 
     The agent's role tells it to always complete both steps: create then assess. The task reinforces this with specific instructions. This ensures the agent follows a consistent workflow every time—create the request, get an ID back, then use that ID to assess and route.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -260,6 +270,8 @@ Now let's run a request and trace every step.
 
 1. Clear the log and set the team.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
@@ -269,6 +281,8 @@ Now let's run a request and trace every step.
 
 2. Submit a loan request that should auto-approve.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT Process a $35000 personal loan for John Smith with credit score 780;
@@ -276,6 +290,8 @@ Now let's run a request and trace every step.
     ```
 
 3. Immediately check the workflow log.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -299,6 +315,8 @@ The history views show what the agent did.
 
 1. Query the tool history.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT 
@@ -313,6 +331,8 @@ The history views show what the agent did.
     ```
 
 2. Check the loan request that was created.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -338,6 +358,8 @@ Different loan parameters trigger different routing paths.
 
 1. Submit a loan that needs underwriter review.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
@@ -346,6 +368,8 @@ Different loan parameters trigger different routing paths.
     ```
 
 2. Check the workflow log.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -357,6 +381,8 @@ Different loan parameters trigger different routing paths.
 
 3. Submit a loan that needs senior review.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
@@ -365,6 +391,8 @@ Different loan parameters trigger different routing paths.
     ```
 
 4. Check the routing.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -376,6 +404,8 @@ Different loan parameters trigger different routing paths.
 
 5. Submit a loan that should be blocked.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
@@ -384,6 +414,8 @@ Different loan parameters trigger different routing paths.
     ```
 
 6. Check the routing.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -396,6 +428,8 @@ Different loan parameters trigger different routing paths.
 ## Task 6: Compare All Loans and Their Routes
 
 Let's see all the loans and their different routing decisions.
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -427,6 +461,8 @@ Every agent execution follows this pattern:
 
 Query to see the complete execution timeline:
 
+> This command is already in your notebook—just click the play button (▶) to run it.
+
 ```sql
 <copy>
 SELECT 
@@ -440,6 +476,8 @@ ORDER BY start_date;
 ```
 
 Compare with your workflow log:
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -474,6 +512,8 @@ In this lab, you traced the complete agent execution loop:
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>

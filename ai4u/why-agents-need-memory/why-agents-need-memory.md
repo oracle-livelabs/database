@@ -69,6 +69,8 @@ We'll create an agent that has no way to store or retrieve information between s
 
 1. Create a simple loan officer assistant agent.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Create a basic SQL tool so the agent can function
@@ -120,6 +122,8 @@ We'll create an agent that has no way to store or retrieve information between s
 
 2. Set the team for your session.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
@@ -132,6 +136,8 @@ Let's give the agent important information about a client, just like a real loan
 
 1. Tell the agent about Sarah Chen's preferences.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT Sarah Chen prefers email contact, never phone. Her timezone is Pacific. She has a 15 percent rate exception that was approved last year due to her long relationship with Seer Equity. Please remember this for future interactions;
@@ -142,6 +148,8 @@ The agent acknowledges and seems to understand. It might even thank you for the 
 
 2. Immediately ask about what you just said.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT What is Sarah Chen's preferred contact method;
@@ -151,6 +159,8 @@ The agent acknowledges and seems to understand. It might even thank you for the 
 The agent can recall this, it's still in the conversation context.
 
 3. Ask another question in the same session.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -166,6 +176,8 @@ Now let's simulate what happens when the session ends and a new one begins, like
 
 1. Clear the team (simulating session end).
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
@@ -174,6 +186,8 @@ Now let's simulate what happens when the session ends and a new one begins, like
 
 2. Start a new session.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
@@ -181,6 +195,8 @@ Now let's simulate what happens when the session ends and a new one begins, like
     ```
 
 3. Ask about the preferences you shared.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -191,6 +207,8 @@ Now let's simulate what happens when the session ends and a new one begins, like
 **The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
 
 4. Try asking about her rate exception.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -206,6 +224,8 @@ This isn't just an inconvenience. It breaks real workflows and damages client re
 
 1. Simulate Day 1: Client shares important information.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT AI AGENT I am working with client TechStart Inc. They need all communications sent to their CFO, not the general email. They are sensitive about being contacted during market hours. They have a special pricing tier because they bring us 10 loans per year;
@@ -213,6 +233,8 @@ This isn't just an inconvenience. It breaks real workflows and damages client re
     ```
 
 2. The agent acknowledges the information. Now simulate Day 2:
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -222,6 +244,8 @@ This isn't just an inconvenience. It breaks real workflows and damages client re
     ```
 
 3. A different loan officer asks about TechStart.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -237,6 +261,8 @@ Let's be clear about what the agent lacks:
 
 1. Query what tools the agent has.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     SELECT tool_name, description 
@@ -247,6 +273,8 @@ Let's be clear about what the agent lacks:
 The forgetful agent has no memory tools. It has no way to store or retrieve information persistently.
 
 2. Check if anything was recorded in history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -298,6 +326,8 @@ The next labs will show you how to solve this problem.
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>

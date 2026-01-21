@@ -75,6 +75,8 @@ We'll create structures for each memory type. Instead of four separate tables, w
 
     The table stores all four memory types. The `memory_type` column tells us what kind of memory it is. Short-term memories have a `session_id` and `expires_at`. Long-term memories have an `entity_id` to track what they're about.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     CREATE TABLE agent_memory (
@@ -98,6 +100,8 @@ We'll create structures for each memory type. Instead of four separate tables, w
 
     Reference knowledge is different—it's maintained by humans, not learned by the agent. We put it in a separate table to make this clear. Agents can read it, but they shouldn't change it.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     CREATE TABLE reference_knowledge (
@@ -119,6 +123,8 @@ Short-term context holds what's happening right now—the active information for
 1. Create functions for short-term context.
 
     The `set_context` function stores temporary information tied to a session. Notice the `expires_at` field—short-term context automatically expires after an hour. The `get_context` function retrieves all active context for a session.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -179,6 +185,8 @@ Short-term context holds what's happening right now—the active information for
 
 2. Test short-term context.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Set context for current task
@@ -197,6 +205,8 @@ Long-term facts are stable information the agent should rely on across tasks and
 1. Create functions for long-term facts.
 
     The `store_fact` function saves a fact about an entity. The `get_facts` function retrieves all facts about that entity, optionally filtered by category.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -256,6 +266,8 @@ Long-term facts are stable information the agent should rely on across tasks and
 
 2. Store some long-term facts.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Facts about customers
@@ -270,6 +282,8 @@ Long-term facts are stable information the agent should rely on across tasks and
     ```
 
 3. Retrieve facts.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -292,6 +306,8 @@ Decisions and outcomes record what the agent decided and what happened. This is 
 1. Create functions for decisions and outcomes.
 
     The `record_decision` function stores what situation occurred, what decision was made, and whether it worked. The `find_past_decisions` function searches for similar situations to learn from.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -365,6 +381,8 @@ Decisions and outcomes record what the agent decided and what happened. This is 
 
 2. Record some decisions.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Record past decisions and their outcomes
@@ -396,6 +414,8 @@ Decisions and outcomes record what the agent decided and what happened. This is 
 
 3. Search for relevant past decisions.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Set display width for CLOB output
@@ -417,6 +437,8 @@ Reference knowledge is background information the agent consults but does not ch
 1. Create functions for reference knowledge.
 
     The `add_reference` function is for administrators to add policies. The `get_reference` function lets agents look up what the policy says. Notice agents can read but not write—this keeps your policies under human control.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -473,6 +495,8 @@ Reference knowledge is background information the agent consults but does not ch
 
 2. Add reference knowledge (policies).
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Add policies
@@ -496,6 +520,8 @@ Reference knowledge is background information the agent consults but does not ch
 
 3. Query reference knowledge.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     -- Set display width for CLOB output
@@ -513,6 +539,8 @@ Reference knowledge is background information the agent consults but does not ch
 ## Task 7: A Complete Example
 
 Let's trace how an agent would use all four types together.
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -571,6 +599,8 @@ Together, these memories make agents consistent, contextual, and explainable.
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
