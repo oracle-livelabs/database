@@ -65,31 +65,31 @@ A set of files have been created for you to use in this workshop. You will creat
 ## Task 2: Create Object Storage bucket
 
 1. From the Console navigation menu, click **Storage**.
-2. Under Object Storage, click Buckets
+
+2. Under Object Storage, click **Buckets**.
     ![bucket menu](./images/cloud-storage-menu.png "cloud storage menu")
 
     **NOTE:** Ensure the correct Compartment is selected : Select **lakehouse**
 
-3. Click Create Bucket. The Create Bucket pane is displayed.
+3. Click **Create Bucket**.
 
     ![bucket create pane](./images/cloud-storage-bucket.png "cloud storage bucket")
 
-4. Enter the Bucket Name **lakehouse-files**
-5. Under Default Storage Tier, click Standard. Leave all the other fields at their default values.
+4. Enter the **Bucket Name**: **lakehouse-bucket**.
+5. Under **Default Storage Tier**, click **Standard**, and then click **Create bucket**. Leave all the other fields at their default values.
 
     ![Add bucket name](./images/create-lakehous-bucket.png "create bucket")
 
-6. Create the  Pre-Authenticated Request URL for the bucket
-     - a. Click on the 3 dots to the right of the **lakehouse-files** bucket  Click on ‘Create Pre-Authenticated Request’
-        ![lakehouse-files 3 dots](./images/create-lakehous-bucket-par-dots.png "bucket par dots")
+6. Create the  Pre-Authenticated Request URL for the bucket:
+     - a. Click on **Actions** menu to the right of the **lakehouse-bucket** bucket.  Click on **Create Pre-Authenticated Request**.
         ![Create PAR](./images/create-lakehous-bucket-par-load.png "bucket par load")
-     - b. The ‘Bucket’ option will be pre-selected
-     - c. For 'Access Type' select 'Permit object write
-     - d. Click the Create "Pre-Authenticated Request' button
+     - b. The **Bucket** option is pre-selected.
+     - c. For **Access Type** select **Permit object writes**.
+     - d. Click **Create Pre-authenticated request**.
         ![PAR Button](./images/create-lakehous-bucket-par-load-button.png " bucket par load button")
-     - e. Click the ‘Copy’ icon to copy the PAR URL
+     - e. Click the **Copy** icon to copy the PAR URL.
         ![Copy PAR](./images/create-lakehous-bucket-par-copy-load.png "bucket par load copy")
-     - f. Save the generated PAR URL; you will need it in the next task
+     - f. Save the generated PAR URL; you will need it in the next task.
 
 ## Task 3: Add files into  the Bucket using the saved PAR URL
 
@@ -144,7 +144,7 @@ A set of files have been created for you to use in this workshop. You will creat
 6. Your **lakehouse-files** bucket should look like this:
     ![cloud storage bucket](./images/lakehouse-bucket.png "lakehouse bucket")
 
-You may now **proceed to the next lab**
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

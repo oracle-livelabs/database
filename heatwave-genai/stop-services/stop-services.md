@@ -17,13 +17,13 @@ In this lab, you will be guided through the following task:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab1-5
+- HeatWave instance and Compute instance exist
 
 ## Task 1: Stop the HeatWave instance
 
-1. Click the **Navigation Menu** in the upper left, navigate to **Databases**, and under HeatWave select **DB Systems**.
+1. Click the **Navigation menu** in the upper left, navigate to **Databases**, and under **HeatWave MySQL**, select **DB Systems**.
 
-2. In the **heatwave-geni** Compartment, select the **heatwave-genai-dbs**, under **Actions**, click **Stop**.
+2. In the **heatwave-geni** compartment, select the **heatwave-genai-dbs**, under **Actions**, click **Stop**.
 
     ![Stop DB system](./images/1-stop-dbs.png "Stop DB system")
 
@@ -51,6 +51,8 @@ In this lab, you will be guided through the following task:
 
 - [HeatWave User Guide](https://dev.mysql.com/doc/heatwave/en/)
 
+- [HeatWave GenAI Technical Brief](https://www.oracle.com/a/ocom/docs/heatwave-genai-technical-brief.pdf)
+
 - [HeatWave on OCI User Guide](https://docs.oracle.com/en-us/iaas/mysql-database/index.html)
 
 - [MySQL Documentation](https://dev.mysql.com/)
@@ -59,4 +61,4 @@ In this lab, you will be guided through the following task:
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, August 2024
+- **Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025

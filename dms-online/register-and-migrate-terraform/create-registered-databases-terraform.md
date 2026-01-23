@@ -36,28 +36,26 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
+  ![database connection navigation](images/db-connection.png =50%x*)
 
 2. Select your assigned compartment. Identify the value assigned to you in the **Reservation Information** then in OCI go to the **Compartment** field and look for the value under Root / Livelabs, an example is displayed below:
 
-  ![Screenshot to select compartment](images/compartment-selection.png =90%x*)
+  ![Screenshot to select compartment](images/compartment-selection.png =50%x*)
 
 3. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection.png =90%x*)
+  ![Screenshot of click create connection](images/click-create-db.png =50%x*)
 
 4. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
     - Type: **Oracle Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    
-5. Press **Next**
 
   ![Screenshot of database details and click next](images/database-details-cdb.png =50%x*)
 
-6. On the page Connection details, fill in the following entries, otherwise leave defaults:
-    - Database details, select **Enter database information**
+5. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database details, select **Enter database connection details**
     - Database connection string : **CDB Connection String** value from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
@@ -67,11 +65,11 @@ For this task you need the following info from previous steps:
 
     Please uncheck the checkbox **Create private endpoint to access this database**.
 
-7. Press **Create**
+6. Press **Create**
 
   ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
-8. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
+7. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
   ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
     - If the test is not successful, correct your connection details and try again.
@@ -87,11 +85,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
+  ![Screenshot of Database Connections navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection-pdb.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-pdb.png =50%x*)
 
 3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -104,7 +102,7 @@ For this task you need the following info from previous steps:
   ![Screenshot of database details and click next](images/database-details-pdb.png =50%x*)
 
 5. On the page Connection details, fill in the following entries, otherwise leave defaults:
-    - Database details, select **Enter database information**
+    - Database details, select **Enter database connection details**
     - Database connection string: **PDB Connection String** value from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
@@ -132,11 +130,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
+  ![Screenshot of Database Connections navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection-adb.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-adb.png =50%x*)
 
 3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **TargetADB**
@@ -176,28 +174,20 @@ For this task you need the following info from previous steps:
 
   1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-  ![Screenshot of Migrations navigation](images/migration-nav.png =90%x*)
+  ![Screenshot of Migrations navigation](images/migration-create.png =50%x*)
 
   2. Press **Create Migration**
 
-    ![Screenshot of press create migration](images/press-create-migration.png =90%x*)
+    ![Screenshot of press create migration](images/press-create-migration.png =50%x*)
 
-  3. On the page **General information**, fill in the following entries, otherwise leave defaults:
+  3. Fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
-
-      ![Screenshot to add vault details](images/add-details.png =40%x*)
-
-  4. Press **Next**
-
-  5. On the page **Select Databases**, fill in the following entries with the Database Connections created in tasks 1 to 3, otherwise leave defaults:
       - Source Database connection: **SourcePDB**
-      - *Check* Database is pluggable database (PDB)
-      - Container database connection: **SourceCDB**
       - Target Database connection: **TargetADB**
 
       ![Screenshot of source db selection](images/select-databases.png =50%x*)
 
-  6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
+  5. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
       - Transfer medium for initial load:  **Datapump via Object Storage**
       - Export Directory Object:
           - Name: **dumpdir**
@@ -205,7 +195,8 @@ For this task you need the following info from previous steps:
       - Source Database file system SSL wallet path: **/u01/app/oracle/myserverwallet**
       - Object Storage Bucket: **DMSStorage-#####**
       - Select **Use online replication**
-
+            - *Check* Database is pluggable database (PDB)
+      - Container database connection: **SourceCDB**
          
           ![Screenshot for migration options](images/test-migration.png =50%x*)
 
@@ -225,4 +216,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, June 2024
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, May 2025

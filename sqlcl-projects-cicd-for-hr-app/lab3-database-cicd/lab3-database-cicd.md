@@ -230,7 +230,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 
@@ -275,7 +275,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 
@@ -304,7 +304,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 

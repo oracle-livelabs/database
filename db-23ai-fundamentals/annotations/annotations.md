@@ -18,7 +18,7 @@ The objective of this lab is to provide hands-on experience with Schema Annotati
 ## Task 1: Adding Schema Annotations 
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png =50%x*)
+    ![click SQL](../common-images/im1.png =50%x*)
 
     Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
 

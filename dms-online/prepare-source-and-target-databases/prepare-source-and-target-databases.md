@@ -128,7 +128,7 @@ For your source database connectivity, you must perform the following steps:
 1.  Create a new directory: 
 ```
     <copy>    
-    mkdir /u01/app/oracle/dumpdir/wallet
+    mkdir /u01/app/oracle/wallet
 
     </copy>
 ```
@@ -156,7 +156,7 @@ For your source database connectivity, you must perform the following steps:
 
 5. Save this path location, you will need it during the migration creation, once there populate the SSL Wallet Path with it:
 
-    i.e: /u01/app/oracle/dumpdir/wallet
+    i.e: /u01/app/oracle/wallet
 
 6. The user performing the export or import requires the necessary network ACL to be granted to access the network from the source and target database host. For this guide, run the following commands as SYS if the export or import user is SYSTEM. Since your database is multitenant, the following actions need to be performed in CDB$ROOT. Replace clouduser and sslwalletdir accordingly:
 

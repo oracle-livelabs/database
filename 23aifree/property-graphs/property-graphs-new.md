@@ -1,19 +1,24 @@
-# Operational Property Graphs Example with SQL/PGQ in 23ai
+# Operational Property Graphs Example with SQL/PGQ in 26ai
 
 ## Introduction
 
-In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ, a new extension in SQL:2023.
+In this lab you will query the newly created graph (`bank_graph`) using SQL/PGQ, an extension in SQL:2023.
 ​
 
 Estimated Time: 30 minutes.
 ​
 ### Objectives
+
 Learn how to:
+
 - Use APEX and SQL/PGQ to define and query a property graph.
 ​
 ### Prerequisites
-This lab assumes:  
+
+This lab assumes:
+
 - The database user exists and has the right roles and privileges.
+- A property graph, named `bank_graph` has been created.
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
@@ -24,15 +29,15 @@ Watch the video below for a quick walk-through of the lab.
 
  You can import a notebook that has the graph queries and analytics. Each paragraph in the notebook has an explanation.  You can review the explanation, and then run the query or analytics algorithm.
 
-  [Click here to download the notebook](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/IgAbg73m8_uWkH1JfjrdqqzgPLUM52ZauWRwA7tEb7C2NRDyXZBQAP8eUenQD4N8/n/c4u04/b/livelabsfiles/o/labfiles/BANK_GRAPH_23ai_alg.dsnb) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the MOVIE_RECOMMENDATIONS graph.
+  [Click here to download the notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/HumxEAuTIN5IyHEDRS2WZVuL9NEydm3cT84HVRBjK2vIBqPlc967wo0qM7vZ1aWM/n/oradbclouducm/b/OperationalPropertyGraphs/o/BANK_GRAPH_26ai_alg.dsnb) and save it to a folder on your local computer.  This notebook includes graph queries and analytics for the BANK_GRAPH graph.
 
  1. Click the **Notebook** icon. Import a notebook by clicking on the notebook icon on the left, and then clicking on the **Import** icon on the far right.
 
-    ![Click the notebook icon and import the notebook.](images/task3step1.png " ")
+    ![Click the notebook icon and import the notebook.](images/import-notebook-button.png " ")
     
      Select or drag and drop the notebook and click **Import**.
 
-    ![Select the notebook to import and click on Import.](images/task3step2.png " ")
+    ![Select the notebook to import and click on Import.](images/task3step2-v1.png " ")
 
     A dialog pops up named **Compute Environment**. It will disappear when the compute environment finishes attaching, usually in less than one minute. Or you can click **Close** to close the dialog and start working on your environment. Note that you will not be able to run any paragraph until the environment finishes attaching.
 ​
@@ -43,30 +48,31 @@ In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH cla
 A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 
 >**Note**: We created the graph using the Graph Studio modeler. However, in the following paragraph, we provide the **CREATE PROPERTY GRAPH SQL statement**, which you can use to create a graph anywhere SQL queries are supported.
+
 ​    ```
     %sql
-    CREATE PROPERTY GRAPH BANK_GRAPH 
+    CREATE PROPERTY GRAPH BANK_GRAPH
     VERTEX TABLES (
         BANK_ACCOUNTS
         KEY (ID)
-        PROPERTIES (ID, Name, Balance) 
+        PROPERTIES (ID, Name, Balance)
     )
     EDGE TABLES (
-        BANK_TRANSFERS 
-        KEY (TXN_ID) 
+        BANK_TRANSFERS
+        KEY (TXN_ID)
         SOURCE KEY (src_acct_id) REFERENCES BANK_ACCOUNTS(ID)
         DESTINATION KEY (dst_acct_id) REFERENCES BANK_ACCOUNTS(ID)
-        PROPERTIES (src_acct_id, dst_acct_id, amount) 
+        PROPERTIES (src_acct_id, dst_acct_id, amount)
         )
     ```
 
 1. Let's use SQL to find the **top 10 accounts by number of transfers** the account has received. Run the paragraph with the following query.
-    
+
     ```
     <copy>
-    SELECT acct_id, COUNT(1) AS Num_Transfers 
-    FROM graph_table ( BANK_GRAPH 
-        MATCH (src) - [IS BANK_TRANSFERS] -> (dst) 
+    SELECT acct_id, COUNT(1) AS Num_Transfers
+    FROM graph_table ( BANK_GRAPH
+        MATCH (src) - [IS BANK_TRANSFERS] -> (dst)
         COLUMNS ( dst.id AS acct_id )
     ) GROUP BY acct_id ORDER BY Num_Transfers DESC FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -75,9 +81,9 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ![Most incoming transfers accounts](images/8-num-transfers.png)
 ​
     We see that accounts **387** and **934** have a high number of incoming transactions.
-    
+
 2.  What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
-    
+
     ```
     <copy>
     SELECT acct_id, COUNT(1) AS Num_In_Middle 
@@ -105,7 +111,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     ![Accounts that received a transfer](images/10-transfers-to-387.png)
 
-4. We looked at accounts with the most incoming transfers and those which were simply conduits. Now let's query the graph to determine if there are any circular payment chains, i.e. a sequence of transfers that start and end at the same account. First let's check if there are **any 3-hop (triangles) transfers that start and end at the same account**. 
+4. We looked at accounts with the most incoming transfers and those which were simply conduits. Now let's query the graph to determine if there are any circular payment chains, i.e. a sequence of transfers that start and end at the same account. First let's check if there are **any 3-hop (triangles) transfers that start and end at the same account**.
 
     This query lists such accounts, ordered by the number of triangles that start and end with that account.
     
@@ -121,7 +127,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     ![3hop triangle transfers](images/11-num-triangles.png)
 ​
-5. We can use the same query but **modify the number of hops** to check if there are **any 4-hop transfers that start and end at the same account**. 
+5. We can use the same query but **modify the number of hops** to check if there are **any 4-hop transfers that start and end at the same account**.
 
     ```
     <copy>
@@ -135,9 +141,9 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 ​
     ![4hop transfers](images/12-num-4hop-chains.png)
 ​
-6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 
+6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 5.
 
-    Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 23ai.
+    Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the SQL syntax for graphs in Oracle AI Database.
    
     ```
     <copy>
@@ -328,7 +334,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     Looks like **Antonia Mclachlan** is the owner of this account.  
 
-17. What about account 934?
+18. What about account 934?
 
     Let's run the same query but for account **934**.
 
@@ -339,11 +345,11 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     </copy>
     ```
     
-    ​![owner of account 387](images/owner-of-account387.png)
+    ​![owner of account 934](images/owner-of-account934.png)
 
     The owner of account 934 is **Russell Rivera**.   
 
-18. Let’s look at the **circular transfers that originate and terminate at Russell Rivera's account**, and visualize the results.
+19. Let’s look at the **circular transfers that originate and terminate at Russell Rivera's account**, and visualize the results.
 
     We start with the **of hops equals 4** as specified as []->{4}.
 
@@ -364,7 +370,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     We see **three circular payment chains 4 hops** in length, that start and end in this account.
 
-19. Now we want to look at the circular payment chains when we change the chain length to be **5 hops**.
+20. Now we want to look at the circular payment chains when we change the chain length to be **5 hops**.
 
     ```
     <copy>
@@ -383,7 +389,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     **The number of circular payment chains that start and end in Russell Rivera's account makes it an account we should investigate further.**
 
-20. Let us continue our investigation using another algorithm, the PageRank graph analytics algorithm.
+21. Let us continue our investigation using another algorithm, the PageRank graph analytics algorithm.
 
     A %python-pgx paragraph let's you execute Python code snippets. **We will use the Python API to run the PageRank algorithm.**
     The code snippet below creates a PgxGraph object containing a handle to the BANK_GRAPH loaded into the in-memory graph server.
@@ -400,7 +406,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running pagerank](images/run-pagerank.png)
 
-21. Now let's list the PageRank values in descending order to find the accounts with high PageRank values. **A high PageRank value indicates that that account is important**, which in the context of BANK_GRAPH, a high number of transfers have flown through that account, or the account is connected to accounts with a high number of transfers flowing through them.
+22. Now let's list the PageRank values in descending order to find the accounts with high PageRank values. **A high PageRank value indicates that that account is important**, which in the context of BANK_GRAPH, a high number of transfers have flown through that account, or the account is connected to accounts with a high number of transfers flowing through them.
 
     ```
     <copy>
@@ -415,10 +421,10 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running pagerank results](images/run-pagerank-results.png)
 
-    We see that **Russell Rivera's is in the top 5**. So this metric also indicates that a large number of transactions flow through Russell Rivera's account.
+    We see that **Russell Rivera is in the top 5**. So this metric also indicates that a large number of transactions flow through Russell Rivera's account.
     But he is not at the very top, and interestingly **Antonia Mclachlan is at the top of the list**.
 
-22. Now let's use the **computed PageRank value** in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
+23. Now let's use the **computed PageRank value** in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
 
     Execute the paragraph with the following query, which finds the **3-hop payment chains starting at Antonia Mclachlan's account**.
 
@@ -436,9 +442,9 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![visualize 3 hop payment chain](images/3-hop-payment.png) 
 
-    From this visualization we can quickly see **which accounts that are connected to Antonia Maclachlan also have a high pagerank value**.
+    From this visualization we can quickly see **which accounts that are connected to Antonia Maclachlan also have a high PageRank value**.
 
-23. So far, we used the knowledge that a highly connected account might be fraudulent, or when money moves in a cycle then there is potential fraud. What if we did **not know this about this specific domain**, that cycles might indicate fraud? What if we only new that accounts 934 and 387 are fraudulent, but did not have the additional information on what patterns might constitute fraud?
+24. So far, we used the knowledge that a highly connected account might be fraudulent, or when money moves in a cycle then there is potential fraud. What if we did **not know this about this specific domain**, that cycles might indicate fraud? What if we only new that accounts 934 and 387 are fraudulent, but did not have the additional information on what patterns might constitute fraud?
 
     We can use a **Graph Machine Learning** algorithm like **DeepWalk** to find accounts that have a similar structure to an account. We don't know what structure we are looking for, we are looking for any structure that is similar. That is the power of machine learning - **you can find similarities even if you don't know exactly what are you are looking for.**
 
@@ -455,7 +461,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running deepwalk](images/deepwalk.png)
 
-24. Now we will **train the DeepWalk model**. Run the following paragraph.
+25. Now we will **train the DeepWalk model**. Run the following paragraph.
 
     ```
     <copy>
@@ -469,7 +475,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![training deepwalk model](images/train-deepwalk.png) 
 
-25. Let's get the **most similar nodes to account 934** with respect to transfer patterns.
+26. Let's get the **most similar nodes to account 934** with respect to transfer patterns.
 
     ```
     <copy>
@@ -482,7 +488,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![running deepwalk for account 934](images/deepwalk934.png)
 
-26. Now we will take look at **similar nodes to account 387** with respect to transfer patterns.
+27. Now we will take look at **similar nodes to account 387** with respect to transfer patterns.
 
     ```
     <copy>
@@ -497,7 +503,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     We see that 135 shows up as the account closest to 934 and 387, in terms of the patterns of the connections that account is involved in.
 
-27. **When we query for transactions 2 hops away from 934, 387, or 135, we see that their patterns are similar**. Let's add a highlight to see these accounts by giving them a 'star' icon. You can also right-click on them to check their account ids.
+28. **When we query for transactions 2 hops away from 934, 387, or 135, we see that their patterns are similar**. Let's add a highlight to see these accounts by giving them a 'star' icon. You can also right-click on them to check their account ids.
 
     ```
     <copy>
@@ -512,15 +518,15 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     
     ​![visualize 2 hops](images/2-hops.png) 
 
-
 You have now completed this lab.
 
 ## Learn More
-* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
-* [SQL Property Graph syntax in Oracle Database 23ai Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+- [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+- [Graph Developer's Guide for Property Graph - SQL DDL Statements for Property Graphs](https://docs.oracle.com/en/database/oracle/property-graph/25.4/spgdg/sql-ddl-statements-property-graphs.html)
 
 ## Acknowledgements
 
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
-- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Ramu Murakami Gutierrez, December 18th 2024
+- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker, Renée Wikestad
+- **Last Updated By/Date** - Denise Myrick, October 2025

@@ -11,7 +11,7 @@ Estimated Lab Time: 75-90 minutes
 In this lab, you will:
 * Create a VM Database System as the Source Database
 * Gather Database information for Connectivity
-* Add data to the Pluggable Database
+
 
 ### Prerequisites
 

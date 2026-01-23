@@ -21,7 +21,7 @@ In this lab, you will:
 
 * Be logged into your Oracle Cloud Account
 
-## Task 1: Choose AJD from the Services Menu
+## Task 1: Choose Autonomous Database from the Services Menu
 
 1. Login to the Oracle Cloud.
 
@@ -40,23 +40,17 @@ In this lab, you will:
 
 </if>
 
-3. Click the navigation menu in the upper left to show top-level navigation choices.
+3. Click the navigation menu in the upper left to show top-level navigation choices. Then click on **Oracle Database** and choose **Autonomous Database**.
 
-    ![Oracle home page.](./images/navigation.png " ")
+    ![Click Autonomous JSON Database](./images/oracle-cloud-adb.png " ")
 
-4. Click on **Oracle Database** and choose **Autonomous JSON Database**.
+5. Use the __List Scope__ drop-down menu on the left to select a compartment.  
 
-    ![Click Autonomous JSON Database](./images/adb-json.png " ")
-
-5. Use the __List Scope__ drop-down menu on the left to select a compartment. Make sure your workload type is __JSON Database__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
+<if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 
     ![Check the workload type on the left.](images/livelabs-compartment.png " ")
 
 </if>
-<if type="freetier">
-    ![Check the workload type on the left.](./images/compartments.png " ")
-</if>
-    ![workload type](./images/workload-type.png " ")
 
 <if type="freetier">
    > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
@@ -96,31 +90,24 @@ In this lab, you will:
 
     ![Choose a workload type.](./images/workload-type2.png " ")
 
-5. Choose a deployment type: Select the deployment type for your database from the choices:
-
-    - __Serverless__ - For this lab, choose __Serverless__ as the deployment type.
-    - __Dedicated Infrastructure__ - Alternatively, you could have chosen Dedicated Infrastructure as the deployment type.
-
-    ![Choose a deployment type.](./images/deployment-type.png " ")
-
-6. Configure the database:
+5. Configure the database:
 
     <if type="freetier">
-    - __Always Free__ - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, we recommend you leave Always Free unchecked.
+    - __Always Free__ - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with shared CPU and 20 GB of storage. For this lab, we recommend you leave Always Free unchecked.
     </if>
     <if type="livelabs">
     - __Always Free__ - For this lab, we recommend you leave Always Free unchecked.
     </if>
-    - __Choose database version__ - Select 19c from the database version. Note: This lab should work on 21c AJD database as well.
-    - __OCPU count__ - Number of OCPUs for your service. For this lab, leave the default __1 OCPU__. If you choose an Always Free database, it comes with 1 OCPU.
+    - __Choose database version__ - The default database version for AJD is 23ai. Leave this version.
+    - __ECPU count__ - Number of ECPUs for your service. For this lab, leave the default __2 ECPUs__. If you choose an Always Free database, it comes with shared CPU.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, leave the default __1 TB__ of storage. If you choose an Always Free database, it comes with 20 GB of storage.
-    - __Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
+    - __Auto Scaling__ - For this lab, keep the default of auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand. You won't need it for the lab, though
 
     *Note: You cannot scale up/down an Always Free autonomous database.*
 
     ![Choose the remaining parameters.](./images/configuration.png " ")
 
-7. Create administrator credentials:
+6. Create administrator credentials:
 
     - __Password and Confirm Password__ - Specify the password for ADMIN user of the service instance and confirm the password.
 
@@ -136,7 +123,7 @@ In this lab, you will:
     
     ![Enter password and confirm password.](./images/administration.png " ")
 
-8. Set network access:
+7. Set network access:
 
     In order to use the Database API for MongoDB, you must set the database up with an access control rule. So choose __Secure access from allowed IPs and VCNs only__.
 
@@ -149,7 +136,7 @@ In this lab, you will:
     ![network cidr](./images/network-cidr.png " ")
 
 
-9. Choose a license type:
+8. Choose a license type:
 
     For Autonomous JSON Database, only __License Included__ is available. For other Autonomous Database workloads, you have these options:
     - __Bring Your Own License (BYOL)__ - Select this type when your organization has existing database licenses.
@@ -157,30 +144,26 @@ In this lab, you will:
 
     ![license type](./images/license-type.png " ")
 
-10. Click __Create Autonomous Database__.
+9. Click __Create Autonomous JSON Database__.
 
     ![Click Create Autonomous Database.](./images/create-adb-final.png " ")
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous JSON database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
+10.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous JSON database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
 
     ![Database instance homepage.](./images/provisioning.png " ")
 
 ## Task 3: Check the URL for the Database API for MongoDB
 
 
-1. On the Autonomous Database Details page, click on the Service Console button.
+1. On the Autonomous Database Details page, click on the *tools configuration* button.
 
-    ![service console](./images/service-console.png)
+    ![service console](./images/tools-configuration.png)
 
-2. On the Service Console, click on __Development__ on the left-hand side
-
-    ![service console dev](./images/service-console-dev.png)
-
-3. Scroll down to the bottom of the Development page, and you should see a card titled Oracle Database API for MongoDB (if you don't, it's possible you didn't set up secure access to your database). There are two URLs listed, copy the first one and save it in a text file somewhere for later use.
+2. Scroll down to the bottom of the page, and you should see the information about the Oracle Database API for MongoDB (if it is not enabled, it's possible you didn't set up secure access to your database). 
 
     ![mongo urls](./images/mongo-urls.png)
 
-Again, make sure you have saved these URLs for the next lab.
+Again, make sure you have saved the URL for the next lab.
 
 You may now **proceed to the next lab**.
 
@@ -192,4 +175,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
 - **Contributors** - Kamryn Vinson, Andres Quintana
-- **Last Updated By/Date** - Roger Ford, March 2022
+- **Last Updated By/Date** - Hermann Baer, July 2025

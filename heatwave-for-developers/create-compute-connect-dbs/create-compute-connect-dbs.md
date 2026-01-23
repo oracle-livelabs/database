@@ -109,11 +109,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 8. On Placement, keep the selected Availability Domain
 
-9. On Image and Shape, keep the selected Image, Oracle Linux 8
+9. On Image and Shape, change the Image type to Oracle Linux 8
 
       ![CONNECT](./images/compute-oracle-linux.png "compute oracle linux")  
 
-10. Select Instance Shape: VM.Standard.E2.2
+10. On Instance Shape, keep the default shape of VM.Standard.E4.Flex
 
       ![CONNECT](./images/compute-shape-select.png "compute shape select")
  
@@ -143,13 +143,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
     - Go to Navigation Menu
             Compute
             Instances
-    ![CONNECT](./images/compute-list.png "compute list")
 
-    - Click the `heatwave-cient` Instance link
-
-    ![CONNECT](./images/compute-running.png "compute public ip")
 
     - Copy `heatwave-cient` plus  the `Public IP Address` to the notepad
+    ![CONNECT](./images/compute-running-ip.png "compute public ip")
+
 
 2. Copy the private IP address of the active MySQl Database heatwave-client Service Instance to your notepad
 
@@ -224,10 +222,10 @@ You will need a compute Instance to connect to your brand new MySQL database.
     b. 
 
     ```bash
-    <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/XEr0VxeZ--ec5VOZ3RUF82T2zYZ86mMysnI6idtoe7Fak0vL2ZihIddkm7awoWFx/n/mysqlpm/b/plf_mysql_customer_orders/o/mco_dump_02102023/", {progressFile: "progress.json"})</copy>
+    <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/If-D5OfqC9QrIMJwVQ5aOYWUPWf3n26do9KBOkKb96hnw9Sy-1s4C64lvwD48Sb6/n/mysqlpm/b/mysql_customer_orders/o/mco_dump_02102023/", {progressFile: "progress.json"})</copy>
     ```
 
-    **Note** it takse about 5 minutes to create and load the mysql_customer_orders schema
+    **Note** It takes about 5 minutes to create and load the mysql\_customer\_orders schema
 
 8. List schemas in your heatwave instance after Shell Load
 

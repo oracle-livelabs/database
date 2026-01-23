@@ -86,11 +86,11 @@ In this lab, you will be guided through the following tasks:
 
      ![Show subnet details](./images/9-heatwave-genai-vcn-subnets.png "Show subnet details")
 
-2. On **private subnet-heatwave-genai-vcn** page, under **Security Lists**, click  **security List for private subnet-heatwave-vcn**.
+2. On **private subnet-heatwave-genai-vcn** page, under **Security**, click  **security list for private subnet-heatwave-vcn**.
 
     ![Select security lists](./images/10-select-security-list.png "Select security lists")
 
-3. On the **security list for private subnet-heatwave-genai-vcn** page, under **Ingress Rules**, click **Add Ingress Rules**.
+3. On the **security list for private subnet-heatwave-genai-vcn** page, under **Security Rules**, click **Add Ingress Rules**.
 
     ![Add ingress rules](./images/11-add-ingress-rules.png "Add ingress rules")
 
@@ -128,11 +128,11 @@ In this lab, you will be guided through the following tasks:
 
     ![Select public subnet](./images/15-public-subnet.png "Select public subnet")
 
-4. Click **Default Security List for heatwave-genai-vcn**.
+4. Under **Security**, click **Default Security List for heatwave-genai-vcn**.
 
     ![Default security list](./images/16-default-security-list.png "Default security list")
 
-5. On **Default Security List for heatwave-genai-vcn** page, under **Ingress Rules**, click **Add Ingress Rules**.
+5. On **Default Security List for heatwave-genai-vcn** page, under **Security rules**, click **Add Ingress Rules**.
 
     ![Add ingress rules in default security list](./images/17-add-ingress-rules-default-security-list.png "Add ingress rules in default security list")
 
@@ -158,7 +158,7 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 5: Create a HeatWave instance
 
-1. Click the **Navigation menu** in the upper left, navigate to **Databases**, and under **HeatWave**, select **DB Systems**.
+1. Click the **Navigation menu** in the upper left, navigate to **Databases**, and under **HeatWave MySQL**, select **DB Systems**.
     
     ![Select HeatWave DB System](./images/20-select-heatwave-db-system.png "Select HeatWave DB System")
 
@@ -166,7 +166,7 @@ In this lab, you will be guided through the following tasks:
 
     ![Create DB system](./images/21-create-dbs.png "Create DB system")
 
-3. In the **Create DB system** panel, select **Development or Testing**.
+3. In the **Create DB system** panel, select **Development or testing**.
 
 4. Under **Create in compartment**, ensure **heatwave-genai** is selected, and enter a name for the DB system.
 

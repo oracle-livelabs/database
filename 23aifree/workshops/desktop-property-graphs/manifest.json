@@ -1,10 +1,10 @@
 {
-  "workshoptitle": "Exploring Operational Property Graphs in 23ai Free",
+  "workshoptitle": "Exploring Operational Property Graphs in 26ai",
     "help": "livelabs-help-sg_us@oracle.com",
     "tutorials": [
       {
           "title": "Introduction",
-          "description": "This is an introduction to Oracle Database 23ai.",
+          "description": "This is an introduction to Oracle Database 26ai.",
           "type": "livelabs",
           "filename": "../../introduction/intro-property-graphs.md"
       },
@@ -26,14 +26,14 @@
           "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
       {
-          "title": "Lab 3: Operational Property Graphs Example with SQL/PGQ in 23ai",
-          "description": "Using Property Graphs in 23ai",
+          "title": "Lab 3: Operational Property Graphs Example with SQL/PGQ in 26ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "desktop",
           "filename": "../../property-graphs/property-graphs.md"
       },
       {
           "title": "Bonus Lab: Integration with APEX",
-          "description": "Using Property Graphs in 23ai",
+          "description": "Using Property Graphs in 26ai",
           "type": "desktop",
           "filename": "../../apex-property-graphs/apex-property-graphs.md"
       },

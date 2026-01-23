@@ -1,0 +1,37 @@
+{
+    "workshoptitle": "Migrate Data from NoSQL Cloud Service to OCI Object Storage",
+    "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+        {
+          "title": "Introduction",
+          "description": "This is the introduction to the lab",
+          "filename":"../../introduction/introduction.md"
+        },
+        {
+          "title": "Get Started",
+          "description": "Prerequisites for LiveLabs (Oracle-owned tenancies).",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+		    {
+          "title": "Lab 1: Upload data to Oracle NoSQL table",
+          "filename": "../../upload-nosql-data/upload-nosql-data.md"
+        },
+        {
+          "title": "Lab 2: Download Migrator Utility and Upload to Cloud Shell",
+          "filename": "../../download-migrator-utility/download-migrator-utility.md"
+        },        
+		    {
+          "title": "Lab 3: Create a Configuration File",
+          "filename": "../../create-migrator-config-file/create-migrator-config-file.md"
+        },
+		    {
+          "title": "Lab 4: Run the Oracle NoSQL Database Migrator Utility",
+          "filename": "../../run-migrator-utility/run-migrator-utility.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}

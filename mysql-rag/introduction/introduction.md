@@ -6,9 +6,9 @@
 
 In this workshop, we'll explore the powerful combination of large language models, vector search, and relational databases to create a truly intelligent film recommendation application. We'll be working with a MySQL on-premise database, showing how this traditional relational system can be transformed into an AI-powered recommendation engine that understands not just what films people like, but why they like them.
 
-### What You'll Learn
+### What You will Learn
 
-During this workshop, you'll build a complete application that can answer detailed questions about movies by combining the Sakila film database with AI-powered language generation. We'll start by building a standalone chatbot using Claude 3.7 Sonnet as our AI assistant, providing it with predefined prompts to generate the chatbot code based on our specifications. You'll get hands-on experience setting up RAG with MySQL's vector capabilities, and we'll leverage preexisting code to quickly deploy and test the finished application.
+During this workshop, you'll build a complete application that can answer detailed questions about movies by combining the Sakila film database, conversation history with AI-powered language generation. We'll start by building a standalone chatbot using Claude 3.7 Sonnet as our AI assistant, providing it with predefined prompts to generate the chatbot code based on our specifications. You'll get hands-on experience setting up RAG with MySQL's vector capabilities, and we'll leverage preexisting code to quickly deploy and test the finished application.
 
 ### Why This Matters
 
@@ -70,12 +70,13 @@ For production use, a commercial license must be purchased through MySQL's websi
 
 In this lab, you will be guided through the following steps:
 
-- Lab 1: Create a Compute instance
-- Lab 2: Build and Test Apache / PHP Installation
-- Lab 3: Build Chatbot Application
-- Lab 4: Install Enterprise Edition
-- Lab 5: Setup Sakila Sample Database and configure Vector datatype
-- Lab 6: Build and MySQL Vector AI Application
+- Lab 1: Create a Virtual Cloud Network
+- Lab 2: Create a Compute instance
+- Lab 3: Build and Test Apache / PHP Installation
+- Lab 4: Build Chatbot Application
+- Lab 5: Install Enterprise Edition
+- Lab 6: Setup Sakila Sample Database and configure Vector datatype
+- Lab 7: Build and MySQL Vector AI Application
 
 ## Prerequisites
 
@@ -93,4 +94,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Craig Shallahamer, Applied AI Scientist, Viscosity North America
 - **Contributor** - Perside Foster, MySQL Solution Engineering 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , April 2025
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , July 2025

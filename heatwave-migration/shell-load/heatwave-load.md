@@ -58,7 +58,7 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 2: Load the MySQL InnoDB data into an in-memory HeatWave Cluster for query acceleration
 
-1. Now in order to load your InnoDB Storage engine data into HeatWave in-memory engine; from your OCI Home Page, click the ‘Hamburger’ menu and go to “Databases” > “MySQL”. Once on the MySQL page, click on the name of your MySQL HeatWave System. This will take you to "DB System Details" page for your MySQL HeatWave. Upon landing on the "DB System Details" page, click on "More actions"
+1. Now in order to load your InnoDB Storage engine data into HeatWave in-memory engine; from your OCI Home Page, click the ‘Hamburger’ menu and go to “Databases” > "DB Systems" under “MySQL HeatWave”. Once on the MySQL page, click on the name of your MySQL HeatWave System. This will take you to "DB System Details" page for your MySQL HeatWave. Upon landing on the "DB System Details" page, click on "HeatWave cluster details"
 
     ![OCI Navigation Databases Page](./images/oci-mysql-new.png "oci-mysql-nav")
 
@@ -66,13 +66,9 @@ In this lab, you will be guided through the following tasks:
 
     ![DB System Details Page](./images/hw-more-actions-new.png "add-hw-cluster")
 
-2. On the “More actions” dropdown, select “Add HeatWave cluster”
+2. On the “MySQL-HW - HeatWave cluster” page, click “Estimate node” 
 
     ![DB System Details Page - Add HeatWave Cluster](./images/add-hw-cl03-new.png "add-hw-cluster2")
-
-3. Clicking on 'Add HeatWave cluster' will bring you to the below page. Here, click on “Estimate node”.
-
-    ![Add HeatWave Cluster Page](./images/estimate-hw-node1-new.png "estimate-hw-nodes")
 
     Note: based on your database size, the next steps will estimate the size of the HeatWave cluster you will need to load the data into memory and run queries. The number of nodes in MySQL HeatWave in OCI can scale up to 64. Each node can handle approximately 1 TB of data
 
@@ -96,33 +92,19 @@ In this lab, you will be guided through the following tasks:
 
     **Note:** instead of loading the whole database, we will only load the 2 tables (city and countrylanguage)
 
-8. After you are done selecting the tables/databases you want to load in-memory, on that same screen, scroll down until you see a "Summary" and "Load command" section
+8. After you are done selecting the tables/databases you want to load in-memory, on that same screen, scroll down until you see a "Summary" and "Predefined commands" section
 
     ![Estimate HeatWave Node Page - Summary](./images/estimate-hw-node06-new.png "estimate-hw-nodes6")
 
     **Note:** the "Summary" section shows how many HeatWave nodes will be required depending on the data we have selected (in our case as you can see, we only need 1 node and 6 MB of memory will be used)
 
-9. Under the "Load command" section, there will be a SQL command. Simple copy that line of code, afterwards, click "Apply estimated node". In the upcoming steps we will take the copied command and execute it inside our MySQL HeatWave system, which will automatically load the selected data into memory using parallelism
+9. Under the "Predefined commands" section, there will be a SQL command. Simple copy that line of code, afterwards, click "Apply estimated node". In the upcoming steps we will take the copied command and execute it inside our MySQL HeatWave system, which will automatically load the selected data into memory using parallelism
 
     ![Estimate HeatWave Node Page - Load Command](./images/estimate-hw-node07-new.png "estimate-hw-nodes7")
 
-    **Note:** after clicking “Apply estimated node”, the number of nodes required to load the data that you have selected, will change (depending on your data size). Lastly, click "Add HeatWave cluster" to finish the HeatWave cluster creation process
+    **Note:** after clicking “Apply estimated node”, the number of nodes required to load the data that you have selected, will change (depending on your data size). Lastly, click "Save changes" to finish the HeatWave cluster set up
 
     ![Add HeatWave Cluster Page](./images/add-hw-cl1-new.png "add-hw-cluster")
-
-10. After clicking “Add HeatWave cluster”, you can see the status of the Cluster to “Creating” on the “DB System Details” page
-
-    ![DB System Details Page](./images/cluster-creating1-new.png "cluster-creating")
-
-    **Note:** to track how far along is the Cluster creation process, simply scroll down on that same page and look for “Work Requests” under the 'Resources' section on the left
-
-    ![DB System Details Page - Resources - Work Requests](./images/cluster-creating02-new.png "cluster-creating2")
-
-11. Once the HeatWave Cluster is created and “ACTIVE”, this is what it should look like
-
-    ![DB System Details Page](./images/cluster-active1-new.png "cluster-active")
-
-    **Note:** notice the “Cluster state: ACTIVE” option
 
 12. Now it is time to login back into our MySQL HeatWave system, and load the data into memory. Login to your Compute instance with MySQL Shell installed to connect to MySQL HeatWave
 

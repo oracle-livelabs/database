@@ -208,6 +208,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
             project stage -verbose
         </copy>
         ```
+
         <!--![Git add and commit](./images/git-add-commit.png " ")
         ![Project stage](./images/project-stage.png " ")-->
 
@@ -217,7 +218,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
         ```sql
         <copy>
-            project stage add-custom -file att_data.sql -verbose
+            project stage add-custom -file-name att_data.sql -verbose
         </copy>
         ```
 
@@ -225,7 +226,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
         ```sql
         <copy>
-            project stage add-custom -file perf_data.sql -verbose
+            project stage add-custom -file-name perf_data.sql -verbose
         </copy>
         ```
 
@@ -275,7 +276,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 
@@ -305,7 +306,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
     ```sql
     <copy>
-        project deploy -file artifact/HrManager-3.O.0.zip  -verbose
+        project deploy -file artifact/HrManager-3.0.0.zip  -verbose
     </copy>
     ```
 

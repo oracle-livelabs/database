@@ -6,6 +6,8 @@ In this lab, you will see some best practices that will help you get more out of
 
 Estimated Time: 15 Minutes
 
+[Lab 4 walk-through](videohub:1_gas7aj4f)
+
 ### Objectives
 
 In this lab, you will:

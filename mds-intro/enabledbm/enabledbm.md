@@ -71,9 +71,12 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
 
 ## Task 3: Database Management for MySQL HeatWave fleet summary 
 
-1.	On the left pane, click **MySQL HeatWave** to navigate to the MySQL HeatWave fleet summary page. 
+1.	On the left pane, click **Diagnostics & Management**  
     
     ![Select MySQL HeatWave](./images/select-dbm-fleet.png "Select MySQL HeatWave")
+
+2.	Then, click **HeatWave & MySQL**  to navigate to the MySQL HeatWave fleet summary page. 
+    ![MySQL HeatWave Fleet](./images/dbm-mysql-fleet.png "MySQL HeatWave Fleet")
 
     The following tiles are available on the fleet summary page:
     * **Inventory:**  Displays the number of MySQL HeatWave systems in the compartment and enables quick assessment of version disparity between the monitored systems.
@@ -82,7 +85,7 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
     * **Alarms:**  Displays all open alarms in your monitored MySQL HeatWave systems.  You can view more granular details on the alarms by clicking the link.
     * **MySQL HeatWave system:**  A table listing top individual statistics for a monitored HeatWave system.  You can assess the overall resource utilization and health of your environment at a glance.  The table provides a search feature as well as sortable columns to find systems consuming the most resources.
 
-    ![MySQL HeatWave Fleet](./images/dbm-mysql-fleet.png "MySQL HeatWave Fleet")
+
 
     
 ## Task 4: Monitor a single MySQL HeatWave instance
@@ -165,7 +168,7 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
 
 - **Author** - Derik Harlow, MySQL Product Manager 
 - **Contributors** - Derik Harlow, MySQL Product Manager; Sriram Vrinda, MySQL Product Manager; Perside Foster, MySQL Solution Engineering; Selena Sánchez MySQL Solution Engineering
-- **Last Updated By/Date** - Selena Sánchez, MySQL Solution Engineering, March 2024 
+- **Last Updated By/Date** - Selena Sánchez, MySQL Solution Engineering, August 2025
 
 
 

@@ -1,0 +1,36 @@
+{
+    "workshoptitle": "Connect to Oracle NoSQL Database",
+    "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+        {
+          "title": "Introduction",
+          "description": "Overview of the various approaches to connect to Oracle NoSQL Database",
+          "filename":"../../introduction/introduction.md"
+        },      
+        {
+          "title": "Get Started",
+          "description": "These are the prerequisites for starting the database and connecting to it",
+          "filename":"../../get-started/get-started.md"
+        },             
+        {
+          "title": "Use IDE Plugin to connect to KVLite",
+          "description": "Steps to connect to KVLite using IDE Plugin",
+          "filename":"../../use-ide-plugin-to-connect-to-kvlite/use-ide-plugin-to-connect-to-kvlite.md"
+        },
+        {
+          "title": "Use SDK to connect to KVLite",
+          "description": "Steps to connect to KVLite using SDK",
+          "filename":"../../use-sdk-to-connect-to-kvlite/use-sdk-to-connect-to-kvlite.md"
+        },        
+        {
+          "title": "Use SQL CLI to connect to KVLite",
+          "description": "Steps to connect using SQL CLI",
+          "filename":"../../use-sql-cli-to-connect-to-kvlite/use-sql-cli-to-connect-to-kvlite.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }                                  
+    ]
+}

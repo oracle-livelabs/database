@@ -1,10 +1,12 @@
-# Checksum and Encryption
+# Determining Import Success
 
 ## Introduction
 
 When you move complex data around or when you're doing full exports/imports, it's common to find errors in the Data Pump log file. In this lab, you will learn about errors and how to determine whether an import was successful. 
 
 Estimated Time: 10 Minutes
+
+[Lab 8 walk-through](videohub:1_ye19x6o0)
 
 ### Objectives
 

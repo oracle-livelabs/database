@@ -34,11 +34,15 @@
             "filename": "../../create-target-database/create-target-database.md"
         },
         {
-            "title": "Lab 5: Register and Setup Migration",
+            "title": "Lab 5: Prepare the source database ",
+            "filename": "../../prepare-source/prepare-source.md"
+        },
+        {
+            "title": "Lab 6: Register and Setup Migration",
             "filename": "../../register-and-migrate/create-registered-databases.md"
         },
         {
-            "title": "Lab 6: Validate and Run Migration",
+            "title": "Lab 7: Validate and Run Migration",
             "filename": "../../validate-and-run/validate-migration.md"
         },
         {

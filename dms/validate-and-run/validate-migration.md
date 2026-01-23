@@ -17,46 +17,56 @@ In this lab, you will:
 * An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
 * This lab requires completion of the preceding labs in the Contents menu on the left.
 
-*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 ## Task 1: Validate Migration
 
 1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-  ![migrations navigation](images/migration-create.png =90%x*)
-
+    ![create migration navigation](images/migration-create.png =50%x*)
+    
 2. Select **TestMigration**
 
-  ![click on testMigration](images/select-testmigration.png)
+  ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
 3. If Migration is still being created, wait until Lifecycle State is Active
 
 4. Press **Validate** button
 
-  ![press validate](images/press-validate.png)
+  ![Screenshot of press validate](images/press-validate.png =50%x*)
 
-5. Click on **Jobs** in left-hand **Resources** list
+5. Click on the **Jobs** tab to display the existing jobs:
 
-  ![click on jobs menu](images/4.png)
+  ![Screenshot of click jobs](images/click-jobs.png =50%x*)
 
 6. Click on most recent Evaluation Job
 
-7. Click on **Phases** in left-hand **Resources** list
+7. Click on **Phases** tab to list the job phases
+  
+8. Phases will be shown, and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
 
-  ![click phases menu](images/click-phases.png =17%x*)
+![Screenshot of click phases](images/click-phases.png =50%x*)
+    
+9. If a phase has failed, it will show with the status **Failed**. Press **Actions**/**Download Log** to learn more about the reason for failure. 
 
-8. Phases will be shown and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
-    ![phases are displayed](images/Pump.png =90%x*)
+  ![Screenshot of phases with updated status](images/job-details.png =50%x*)
 
-9. If a phase has failed, it will show with status **Failed**. In this case press **Download Log** to learn more about the reason of failure. Press **Abort** on a failed job to allow further jobs or deleting of the migration.
+10. In this case **Validate premigration advisor** phase has failed.CPAT is a tool that will assess your source database instance, checking for potentially problematic content and other factors that could impede a successful migration. If you click on the link it will take you to a summary view. 
 
-  ![press download logs](images/9.png =90%x*)
+  ![Screenshot of CPAT summary](images/media-types.png =50%x*)
 
-10. Once all phases show complete, move to the next step.
+11. You can click on every check and access to the check details. You will be presented with a description of the issue, the impact and a recommended action. You can mark the check to be excluded from the migration.
+
+  ![Screenshot of check exclusion](images/exclude-check.png =50%x*)
+
+12. Since we took care of the problematic finding the validation Job can be run again. This process should be repeated until “Validate premigration advisor” phase completes with no error.
+
+  ![Screenshot of successful validation](images/job-details-succeeded.png =50%x*)
+
+13. Once all phases show complete, move to the next step.
 
 ## Task 2: Run Migration
 
-  1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
+ 1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
     ![create migration navigation](images/migration-create.png =50%x*)
 
@@ -64,31 +74,32 @@ In this lab, you will:
 
     ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
-  3. Press **Start** to begin the Migration. Please note, if a dialog box appears, press **Start** in the dialog box  to begin the migration.
+  3. Press **Start** to begin the Migration. The confirmation window is displayed, you can select if the migration needs to stop in a specific phase, by default it will complete all phases. Click **Start** again.
 
-    ![press start](images/pic.png =90%x*)
+    ![Screenshot of start migration](images/monitor-replication-lag.png =50%x*)
 
-  4. Click on **Jobs** in left-hand **Resources** list
+  4. Click on the **Jobs** tab to see the list of jobs
 
-  5. Click on most recent Migration Job
+  5. Click on the most recent Migration Job
 
-  6. Click on **Phases** in left-hand **Resources** list
+  6. Click on the **Phases** tab to see the list of phases
 
   7. Job phases are updated as the migration progresses
 
-  8. Wait till all the phases have completed and your screen should look the like picture below.
+  8. Wait till **Cleanup** phase completes.
 
-  ![phases completed](images/FD.png =90%x*)
+  ![Screenshot of completed phases](images/monitor-lag-waiting.png =50%x*)
 
-  9. The migration runs the final cleanup phases and shows as **Succeeded** when finished
-
-You may now [proceed to the next lab](#next).
+ 
+13. When the cleanup phase completes the job will change to Succeeded:
+    The migration should also show as succeeded now.
+![Screenshot of succeeded Migration](./images/succeeded.png =50%x*)
 
 ## Learn More
 
 * [Managing Migration Jobs](https://docs.oracle.com/en-us/iaas/database-migration/doc/managing-migration-jobs.html)
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian, Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Killian Lynch, Kiana McDaniel, Hanna Rakhsha, Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025

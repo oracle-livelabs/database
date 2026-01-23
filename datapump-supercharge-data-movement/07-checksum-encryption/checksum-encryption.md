@@ -6,6 +6,8 @@ What happens to your data when you move it out of the database? If you need to s
 
 Estimated Time: 10 Minutes
 
+[Lab 7 walk-through](videohub:1_puykxb20)
+
 ### Objectives
 
 In this lab, you will:

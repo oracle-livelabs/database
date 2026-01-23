@@ -36,7 +36,28 @@ Run in the terminal window logged in as **oracle** user to Create SHARD4 databas
 
     ```
     <copy>
-   sudo podman run -d --hostname oshard4-0 --dns-search=example.com --network=shard_pub1_nw --ip=10.0.20.106 -e DOMAIN=example.com -e ORACLE_SID=ORCL4CDB -e ORACLE_PDB=ORCL4PDB -e OP_TYPE=primaryshard -e COMMON_OS_PWD_FILE=pwdsecret -e PWD_KEY=keysecret -e SHARD_SETUP="true" -e ENABLE_ARCHIVELOG=true -e INIT_SGA_SIZE=5000 -e INIT_PGA_SIZE=2000 --secret pwdsecret --secret keysecret -v /oradata/dbfiles/ORCL4CDB:/opt/oracle/oradata -v /opt/containers/shard_host_file:/etc/hosts --privileged=false --name shard4 localhost/oracle/database-ext-sharding:23.4.0-ee
+        sudo podman run -d --hostname oshard4-0 \
+        --dns-search=example.com \
+        --network=shard_pub1_nw \
+        --ip=10.0.20.106 \
+        -e DOMAIN=example.com \
+        -e ORACLE_SID=FREE \
+        -e ORACLE_PDB=FREEPDB1 \
+        -e ORACLE_FREE_PDB=ORCL4PDB \
+        -e DB_UNIQUE_NAME=ORCL4CDB \
+        -e INIT_SGA_SIZE=5000 \
+        -e INIT_PGA_SIZE=2000 \
+        -e OP_TYPE=primaryshard \
+        -e COMMON_OS_PWD_FILE=pwdsecret \
+        -e PWD_KEY=keysecret \
+        -e SHARD_SETUP="true" \
+        -e ENABLE_ARCHIVELOG=true \
+        --secret pwdsecret \
+        --secret keysecret \
+        -v /oradata/dbfiles/ORCL4CDB:/opt/oracle/oradata \
+        -v /opt/containers/shard_host_file:/etc/hosts \
+        --privileged=false \
+        --name shard4 localhost/oracle/database-ext-sharding:23.8.0-free
     </copy>
     ```
 
@@ -649,6 +670,6 @@ When you are finished don't forget to rate this workshop!  We rely on this feedb
 If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 
 ## Acknowledgements
-* **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, Aug 2024
+* **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025

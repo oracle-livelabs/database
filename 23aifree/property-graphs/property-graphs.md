@@ -1,7 +1,6 @@
-# Operational Property Graphs Example with SQL/PGQ in 23ai
+# Operational Property Graphs Example with SQL/PGQ in Oracle AI Database
 
 ## Introduction
-
 
 In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ, a new extension in SQL:2023.
 ​
@@ -9,15 +8,19 @@ In this lab you will query the newly created graph (that is, `bank_graph`) using
 Estimated Time: 30 minutes.
 ​
 ### Objectives
+
 Learn how to:
+
 - Use APEX and SQL/PGQ to define and query a property graph.
 ​
 ### Prerequisites
+
 This lab assumes:  
+
 - The database user exists and has the right roles and privileges.
-- The bank\_accounts and bank\_transfers tables exist. 
+- The bank\_accounts and bank\_transfers tables exist.
 ​
-### Tables are:  
+### Tables are:
 
 | Name | Null? | Type |
 | ------- |:--------:| --------------:|
@@ -40,7 +43,8 @@ Watch the video below for a quick walk-through of the lab.
 [Change password](videohub:1_ovgflc5c)
 </if>
 
-## Task 1 : Define a graph view on these tables
+## Task 1: Define a graph view on these tables
+
 1. In your SQL Developer window, click on the tab named hol23c_freepdb1 or hol23c, not the CreateKeys.sql tab that you are currently in.
 
     ![Open hol tab](images/sql-hol23-tab.png)
@@ -90,7 +94,6 @@ Watch the video below for a quick walk-through of the lab.
     
     ![DDL for bank graph](images/ddl-bankgraph.png " ") 
 
-
 5. Here you can look at the elements of the BANK\_GRAPH graph (i.e. its vertices and edges).
     
     ```
@@ -110,17 +113,15 @@ Watch the video below for a quick walk-through of the lab.
     ```
 ​
     ![Properties for labels](images/property-labels.png)
-
 ​
-​
-## Task 2 : Query the bank_graph
+## Task 2: Query the bank_graph
 ​
 In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH clause, and COLUMNS clause. The GRAPH\_TABLE operator enables you to query the property graph by specifying a graph pattern to look for and return the results as a set of columns. The MATCH clause lets you specify the graph patterns, and the COLUMN clause lists the query output columns. Everything else is existing SQL syntax.
 ​
 
 A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 ​
-1. Let's start by finding the top 10 accounts which have the most incoming transfers. 
+1. Let's start by finding the top 10 accounts which have the most incoming transfers.
     
     ```
     <copy>
@@ -261,7 +262,6 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
    ​ ![insert more data into bank transfers](images/insert-1.png " ")
 
-
 10.   Re-run the top 10 query to see if there are any changes after inserting rows in BANK\_TRANSFERS.
    
     ```
@@ -360,11 +360,12 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 16. You have now completed this lab.
 
 ## Learn More
-* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
-* [SQL Property Graph syntax in Oracle Database 23ai Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+- [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+- [Graph Developer's Guide for Property Graph - SQL DDL Statements for Property Graphs](https://docs.oracle.com/en/database/oracle/property-graph/25.4/spgdg/sql-ddl-statements-property-graphs.html)
 
 ## Acknowledgements
 
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
 - **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova
+- **Last Updated By/Date** - Denise  Myrick, October 2025

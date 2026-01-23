@@ -19,44 +19,59 @@ In this lab, you will be guided through the following tasks:
 
 This lab assumes you have:
 
-- Completed Labs 1 
-- or a working Oracle Linux machine
+- Completed Labs 2 
+- a working Oracle Linux machine
 
-## Task 1: Get MySQL Enterprise Edition Download from Oracle Technology Network (OTN)
+## Task 1: Connect to Compute Instance
 
-1. Connect to **myserver** instance using Cloud Shell (**Example:** ssh -i  ~/.ssh/id_rsa opc@132.145...)
+If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
 
-     ```bash
-    <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
+1. If you are a Windows user, click the **Start** menu from your windows machine and search **Windows PowerShell**. Select **Windows PowerShell**, which will take you to the Windows PowerShell terminal.
+
+2. From a terminal window on your local system, connect to the compute instance.
+
+    ```bash
+    <copy>ssh -i  <PathtoSSHFile> opc@<ComputeIPAddress></copy>
     ```
+    Replace the following:
 
+    - PathtoSSHFile: The path where you stored the SSH file in Lab 2.
+    - ComputeIPAddress: The compute IP address that you Saved in Lab 2.
+
+    For example: 
+
+    ```bash
+    <copy>ssh -i  C:/Users/MyUser/.ssh/ssh-key-2025.key opc@129.198.47...</copy>
+    ```
     ![CONNECT](./images/ssh-login-2.png " ")
 
-2. Create a new directory named "tmp"
+## Task 2: Get MySQL Enterprise Edition Download from Oracle Technology Network (OTN)
+
+1. Create a new directory named "tmp"
 
     ```bash
     <copy>mkdir tmp</copy>
     ```
 
-3. Navigate into the "tmp" directory
+2. Navigate into the "tmp" directory
 
      ```bash
     <copy>cd tmp</copy>
     ```
 
-4. Get  OTN MySQL Enterprise Edition package
+3. Get  OTN MySQL Enterprise Edition package
 
     ```bash
     <copy>wget 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/OG6aTpLGugOeCftxqcU1D4d1k360Zko_MC9cYLeZSdchpDhTwIwwZ9gX4nVBboMT/n/idazzjlcjqzj/b/mysql-ee-downloads/o/Oracle%20Technical%20Resource(OTR)/mysql-enterprise-9.3.0_el8_x86_64_bundle.tar'</copy>
     ```
 
-5. Extract the contents of the `"mysql-enterprise-9.3.0_el8_x86_64_bundle.tar"` archive file
+4. Extract the contents of the `"mysql-enterprise-9.3.0_el8_x86_64_bundle.tar"` archive file
 
     ```bash
     <copy>tar xvf mysql-enterprise-9.3.0_el8_x86_64_bundle.tar</copy>
     ```
 
-## Task 2: Install MySQL Enterprise Edition
+## Task 3: Install MySQL Enterprise Edition
 
 1. Import the MySQL repository GPG key using the RPM package manager
 
@@ -94,7 +109,7 @@ This lab assumes you have:
     <copy>sudo yum install mysql-shell-commercial -y </copy>
     ```
 
-## Task 3: Configure and Start MySQL Enterprise Edition
+## Task 4: Configure and Start MySQL Enterprise Edition
 
 1. Start the MySQL server using the systemd system and service manager
 
@@ -118,7 +133,7 @@ This lab assumes you have:
     <copy>ps -ef | grep mysqld</copy>
     ```
 
-## Task 4: Change root password and create admin account
+## Task 5: Change root password and create admin account
 
 1. Search for the phrase "temporary password" in the "/var/log/mysqld.log" file, ignoring case sensitivity
 
@@ -169,8 +184,7 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributor** 
-    - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
-    - Selena Sanchez, MySQL Staff Solutions Engineer,
-    - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
-- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, April  2025
+- **Contributors** 
+- Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
+- Selena Sanchez, MySQL Staff Solutions Engineer,
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, July   2025

@@ -6,6 +6,8 @@ In this lab, you will create the prerequisites for starting a job. Plus, start a
 
 Estimated Time: 10 Minutes
 
+[Lab 3 walk-through](videohub:1_n0u6uz4c)
+
 ### Objectives
 
 In this lab, you will:

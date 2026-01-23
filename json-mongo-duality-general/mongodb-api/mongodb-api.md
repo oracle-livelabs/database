@@ -4,7 +4,7 @@
 
 JSON collections - JSON Collection Tables and JSON Collection Views like Duality Views - store JSON documents alongside some metadata , making them fully MongoDB compatible out-of-the box. Through the MongoDB API, part of Oracle REST Data Services (ORDS), you can use any MongoDB tool, utility, or SDK to work with these collections.
 
-We'll then install MongoDB Shell and Command Line Database Tools to enable Mongo APIs. These will interact with our JSON collection. 
+This lab walks you through the steps to install MongoDB Shell and Command Line Database Tools to interaction with our JSON collection through the MongoDB API.
 
 Estimated Time: 15 minutes
 
@@ -16,11 +16,11 @@ In this lab, you will:
 * Alternatively, you can install MongoDB Compass (GUI)
 * Set up your PATH to point to the MongoDB Shell and MongoDB Command Line Database Tools executable
 * Load more data through the Database API for MongoDB
-* Use MongoDB Shell to interact with Oracle Database
+* Use MongoDB Shell to interact with Oracle AI Database
 
 ### Prerequisites
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the MongoDB API used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the MongoDB API used in this lab.
 - You have successfully completed Lab 2, JSON Collections, and Lab 3, Duality Views. We will rely on the JSON Collections and Duality Views that were created in these labs in this module.
 
 ## Task 1: Install MongoDB Shell and MongoDB Command Line Database Tools
@@ -89,7 +89,7 @@ In this section, you will:
 
 On both Mac and Windows, you can use the built-in 'curl' command to access a URL and download a file from it. The URL to use will vary according to the machine involved.
 
-**Note: If you encounter any issues with the download or the version listed here, then please visit https://www.mongodb.com/try/download/shell or https://www.mongodb.com/try/download/database-tools to download the most recent shell for your operating system.**
+**Note: If you encounter any issues with the download or the version listed here, then please visit https://www.mongodb.com/try/download/shell or https://www.mongodb.com/try/download/database-tools to download the most recent shell for your operating system. All subssequent instructions continue to be the same.**
 
 Copy **ONE** of the following *curl* commands and paste it to the command or terminal window:
 
@@ -99,7 +99,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    curl https://downloads.mongodb.com/compass/mongosh-2.3.0-darwin-x64.zip -o mongosh.zip
+    curl https://downloads.mongodb.com/compass/mongosh-2.5.9-darwin-x64.zip -o mongosh.zip
     </copy>
     ```
 
@@ -107,7 +107,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.10.0.zip -o mongodbtools.zip
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.13.0.zip -o mongodbtools.zip
     </copy>
     ```
 
@@ -117,7 +117,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    curl https://downloads.mongodb.com/compass/mongosh-2.3.0-darwin-arm64.zip -o mongosh.zip
+    curl https://downloads.mongodb.com/compass/mongosh-2.5.9-darwin-arm64.zip -o mongosh.zip
     </copy>
     ```
 
@@ -125,7 +125,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.10.0.zip -o mongodbtools.zip
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.13.0.zip -o mongodbtools.zip
     </copy>
     ```
 
@@ -135,7 +135,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    curl https://downloads.mongodb.com/compass/mongosh-2.3.0-win32-x64.zip -o mongosh.zip
+    curl https://downloads.mongodb.com/compass/mongosh-2.5.9-win32-x64.zip -o mongosh.zip
     </copy>
     ```
 
@@ -143,7 +143,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-windows-x86_64-100.10.0.zip -o mongodbtools.zip
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-windows-x86_64-100.13.0.zip -o mongodbtools.zip
     </copy>
     ```
 
@@ -159,7 +159,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```bash
     <copy>
-    mkdir -p mongodbtools | tar -xvf mongodbtools.zip -C mongosh --strip-components=1
+    mkdir -p mongodbtools | tar -xvf mongodbtools.zip -C mongodbtools --strip-components=1
     </copy>
     ```
 
@@ -167,7 +167,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
 ### 4: Set the PATH to include the mongosh executable
 
-1. On **Mac** (Intel or Apple silicon) run the following command to set your path variable to include the location of the **mongosh** executable. Y
+1. On **Mac** (Intel or Apple silicon) run the following command to set your path variable to include the location of the **mongosh** and **mongoimport** executable.
 
     ```bash
     <copy>
@@ -175,13 +175,13 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
     </copy>
     ```
 
-    If that fails, you'll have to set your path manually to include the 'bin' directory from the files you just downloaded. If you close and reopen your terminal window, you will need to re-run this command. Alternatively, you can always navigate to the directory where you have extracted the software and run the shell with the relative path.
+    If that fails, you'll have to set your path manually to include the 'bin' directories from the zip files you just downloaded. If you close and reopen your terminal window, you will need to re-run this command. Alternatively, you can always navigate to the directory where you have extracted the software and run the shell with the relative path.
 
 2. On **Windows** you can use the following command, assuming you created the 'mongosh' directory in your home directory. If you created it elsewhere, you'll need to edit the path command appropriately.
 
     ```
     <copy>
-    set path=%cd%\[path to]\mongosh\bin\:%cd%\[path to]\mongodbtools\bin\:%PATH%
+    set path=[path to]\mongosh\bin\:[path to]\mongodbtools\bin\:%PATH%
     </copy>
     ```
 
@@ -191,13 +191,13 @@ Mongo Shell is now set up on your PC or Mac.
 
 ### 5: Alternatively, you can install MongoDB Compass, the GUI for MongoDB
 
-1. Identify the appropriate MongoDB Compass download for your local machine on https://www.mongodb.com/try/download/compass, download and install it. MongoDB Compass offers you both a graphical user interface, as well as a built-in MongoDB shell.
+1. Identify the appropriate MongoDB Compass download for your local machine on https://www.mongodb.com/docs/compass/install/?operating-system=linux&package-type=.deb#std-label-download-install, download and install it. MongoDB Compass offers you both a graphical user interface, as well as a built-in MongoDB shell.
 
 This step is optional, so it is not described in more detail here, although the installation itself is intuitive and self-describing.
 
-## Task 2: Use Mongo API to interact with Oracle Database
+## Task 2: Use Mongo API to interact with Oracle AI Database
 
-With our JSON Collection and Duality Viewscreated in the Oracle Database, we can use Mongo APIs to interact with these collections as if we were interacting with a Mongo Database. In this section, we will use native Mongo tools and connect to the Oracle database with a Mongo connection string -- which was configured as a part of the Oracle REST Data Service (ORDS) configuration. From there, we can interact with Mongo tools or SQL Developer Web interchangeably to access our data.
+With our JSON Collection and Duality Views created in the Oracle AI Database, we can use Mongo APIs to interact with these collections as if we were interacting with a Mongo Database. In this section, we will use native Mongo tools and connect to the Oracle AI Database with a Mongo connection string -- which was configured as a part of the Oracle REST Data Service (ORDS) configuration. From there, we can interact with Mongo tools or SQL Developer Web interchangeably to access our data.
 
 ### Objectives
 
@@ -211,7 +211,9 @@ In this section, you will:
 
 1. Add a JSON Collection View
 
-    Oracle allows you to define read-only JSON Collection Views. JSON Collection Views can become arbitrarily complex, and the only requirement is to have a single-column SELECT list, returning a JSON Object. The common use case is to expose some relational reference data to the MongoDB tool that is a shared enterprise-wide. We are quickly creating such a JSON Collection View on a V$ View:
+    Oracle allows you to define read-only JSON Collection Views. JSON Collection Views can become arbitrarily complex, and the only requirement is to have a single-column SELECT list, returning a JSON Object. The common use case is to expose some relational reference data to the MongoDB tool that is a shared enterprise-wide. 
+    
+    We can quickly create such a JSON Collection View on a V$ View using **SQL worksheet in Database Actions or your preferred SQL client tool**:
 
     ```
     <copy>
@@ -223,7 +225,7 @@ In this section, you will:
     ```
     ![JSON Collection View](./images/json-collection-view.png " ")
 
-    **Note**: It is not necessary to have an '_id' field in a JSON Collection View, although it is normally recommended to define such a field. In our simple example with a collection with one document we omit this column.
+    **Note**: It is not necessary to have an '_id' field in a JSON Collection View, although it is normally recommended to define such a field. JSON Collection Views are read only.In our simple example with a collection with one document we omit this column.
 
 
 2. JSON Collections, both tables and views, are automatically compatible with any MongoDB tool, utility, and SDK. You can identify such objects in the database with the **\*\_JSON_COLLECTIONS** family of views. 
@@ -239,11 +241,30 @@ In this section, you will:
 
     Let us look at those with MongoDB tools now.
 
-### Interact with native JSON Collections in the Oracle Database using Mongo API
+### Interact with native JSON Collections in the Oracle AI Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *Tool Configuration* tab.
 
-    ![Copy Mongo URI](./images/copy-mongo-uri.png " ")
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. 
+
+    **Your Autonomous AI Database should be configured with an enabled MongoDB API, ready for you to go. If you don't see the MongoDB API enabled in your environment, then let's enable it quickly.** 
+    
+    You need to do two things:
+
+    1. Enable Access Control Lists (ACLs)
+
+        Due to security precautions, the MongoDB API is not enabled to the public out of the box, but requires some conscious control access. To enable ACLs, go to the details page of your Autonomous AI Database and select to edit the access control lists.
+
+        ![Set ACL](./images/set-acl.png " ")
+
+        Choose an ACL that enables the machine where you have installed the MongoDB tools to access the database. For demonstration purposes, the most pragmatic way to do this is to set the CIDR block to 0.0.0.0/0 which allows full access from the Internet. **This is for demonstration purposes only and never meant for production environment or systems with sensitive data.**
+
+        ![Set CIDR block](./images/set-cidr-block.png " ")
+
+        Save your changes and go back to the detail page of your Autonomous AI Database.        
+
+    2. If the MongoDB API is successfully enabled, it will show you the URI to copy.
+
+    ![Copy Mongo URI](./images/newmonogoapi.png " ")
 
     The MongoDB API URI looks like this:
 
@@ -253,7 +274,10 @@ In this section, you will:
     </copy>
     ```
 
+
     Let's create an environment variable called *URI* which contains the MongoDB URI including the user and password information.
+
+    On Mac or Linux, issue the following command in your shell to set the environment variable. If you close the shell, you need to set this variable again.
 
     ```bash
     $ <copy>
@@ -265,6 +289,14 @@ In this section, you will:
 
     ```
     export URI='mongodb://admin:*redacted*@ATP3834*redacted*.adb.us-ashburn-1.oraclecloudapps.com:27017/admin?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'
+    ```
+
+    On Windows systems, issue the following command in your shell to set the environment variable. If you close the shell, you need to set this variable again.
+
+    ```bash
+    $ <copy>
+    set URI="[user:password@][ADB Instance name].adb.[region].oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true"
+    </copy>
     ```
 
     > **_NOTE:_** Please make sure you replace both the user and password. Also, keep in mind that the **[user]** tag needs to be updated in two places.
@@ -293,21 +325,38 @@ In this section, you will:
     | Replace with      |  %2C  |  %2F  |  %3A  |  %3B  |  %3D  |  %3F  |  %40  |  %5B  |  %5D  |
     {: title="Special characters and their replacements 2"}
 
-     Please check [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn more about Using MongoDB API in the Oracle Database.
+     Please check [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn more about Using MongoDB API in the Oracle AI Database.
 
 
-2. Let's use the first MongoDB utility - mongoimport - to populate our database with data exported from a MongoDB in ndjson format. You will use a document from Object Storage to seed the data in your **movie** collection.
+2. Let's use the first MongoDB utility - mongoimport - to populate our database with data exported from a MongoDB in ndjson (newline delimited JSON) format. You will use a document from Object Storage to seed the data in your **movie** collection.
+
+    On Linux and Mac systems, issue the following command in your shell to use mongoimport and your URI the environment variable. If you closed the shell, you need to set the URI variable again or specify the connect string directly in the command.
 
     ```
     $ <copy>curl -s https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json | mongoimport --collection movies --drop --uri $URI
+    </copy>
+    ```
+
+    On Windows systems, issue the following command in your shell to use mongoimport and your URI the environment variable. If you closed the shell, you need to set the URI variable again or specify the connect string directly in the command.
+
+    ```
+    $ <copy>curl -s https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json | mongoimport --collection movies --drop --uri %URI%
     </copy>
     ```
     ![Populate the database](./images/populate-mongo-db.png " ")
 
 3. Now with the URI set, we can connect to MongoDB Shell. Run the command below to connect.
 
+    On Mac and Linux systems:
+
     ```
     $ <copy>mongosh $URI</copy>
+    ```
+    
+    On Windows systems:
+
+    ```
+    $ <copy>mongosh %URI%</copy>
     ```
     ![Connect to the Mongo Shell](./images/mongo-shell.png " ")
 
@@ -319,7 +368,7 @@ In this section, you will:
     ```
     ![Available JSON collections](./images/mongo-collections.png " ")
 
-    If you ran Lab 2 and Lab 3 as sugggested, you will see the same JSON Collections we had seen in the database earlier in this section.
+    If you ran Lab 2 and Lab 3 as suggested, you will see the same JSON Collections we had seen in the database earlier in this section.
 
 
 5. To show the **movie** collection we created and the count of documents we imported, run the following commands.
@@ -330,7 +379,7 @@ In this section, you will:
     ```
     ![Query result for count](./images/mongo-count.png " ")
 
-5. You can also query for specific documents. Run this query to find the document with title "Zootopia."
+6. You can also query for specific documents. Run this query to find the document with title "Zootopia."
 
     ```
     admin> <copy>db.movies.find( {"title": "Zootopia"} )
@@ -338,7 +387,7 @@ In this section, you will:
     ```
     ![Query result for Zootopia](./images/mongo-zootopia.png " ")
 
-6. Now query for all movies made after 2020.
+7. Now query for all movies made after 2020.
 
     ```
     admin> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
@@ -348,7 +397,7 @@ In this section, you will:
 
     There's only one movie in our library that was released after 2020.
 
-7. You can do the same for your JSON Collection Views, both the read-only View and our Duality Views
+8. You can do the same for your JSON Collection Views, both the read-only View and our Duality Views
 
     ```
     admin> <copy>db.MYVERSION.findOne()
@@ -362,7 +411,7 @@ In this section, you will:
     ```
     ![JSON Collection View](./images/mongo-schedulev.png " ")
 
-8. If you happen to have installed Mongo Compass, this is how the Duality View would look like in MongoDB's GUI:
+9. If you happen to have installed Mongo Compass, this is how the Duality View would look like in MongoDB's GUI:
 
     ![JSON Duality View in Compass](./images/mongo-compass.png " ")
 
@@ -430,7 +479,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ![Update SuperAction Mars in Mongo](./images/mongo-update-superaction-mars.png " ")
 
 
-4. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
+4. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle AI Database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
 
     ```
     <copy>{ "title": "SuperAction Mars" }
@@ -467,16 +516,16 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ```
 	![Schedules](./images/schedules.png)
 
-That was a quick run-through of using JSON Collections with the MongoDB compatible API in Oracle Database. There is obviously more to this - as always - but we hope that it helped you to get started and interested in Oracle's comprehensive JSON capabilities.
+That was a quick run-through of using JSON Collections with the MongoDB compatible API in Oracle AI Database. There is obviously more to this - as always - but we hope that it helped you to get started and interested in Oracle's comprehensive JSON capabilities.
 
 ## Learn More
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html#)
-* [Oracle Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
+* [Oracle AI Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
 
 ## Acknowledgements
 
 * **Authors** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-- **Last Updated By/Date** - Hermann Baer, April 2025
+- **Last Updated By/Date** - Eileen Beck, November 2025

@@ -11,7 +11,6 @@ _Estimated Time:_ 10 minutes
 In this lab, you will be guided through the following task:
 
 - Connect to database using MySQL Shell
-- Add the mysql\_customer\_orders Datato  HeatWave if it is not already there
 
 ### Prerequisites
 
@@ -86,22 +85,6 @@ In this lab, you will be guided through the following task:
 
     ![Databse Tables](./images/mysql-customer-orders-list.png "mysql customer orders list")
 
-## Task 2: Review the HeatWave Cluster Setup
-
-1. Go to Navigation Menu
-    Databases
-        MySQL
-
-2. Click the `heatwave-db` Database System link
-
-    ![Database List](./images/db-list.png "Database List")
-
-3. In the list of DB Systems, click the **heatwave-db** system. On  the **HeatWave Cluster** Section, click on Details
-
-    ![Databse Cluster Detail](./images/mysql-heatwave-more.png "mysql heatwave cluster")
-
-4. The HeatWave Cluster Information section will look like this:
-    ![Completed Cluster Creation](./images/mysql-heat-cluster-complete.png "mysql heat cluster complete ")
 
 You may now **proceed to the next lab**
 

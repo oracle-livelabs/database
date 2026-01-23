@@ -1,0 +1,72 @@
+{
+  "workshoptitle": "Autonomous Database Migration Bootcamp",
+  "support": "https://community.oracle.com/mosc/categories/oracle_database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction to Oracle Data Pump and overview of architecture",
+      "filename": "../../00-introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Migration Strategy",
+      "description": "Migration Strategy",
+      "filename": "../../02-migration-strategy/migration-strategy.md"
+    },
+    {
+      "title": "Lab 3: Evaluate Database Compatibility",
+      "description": "Evaluate Database Compatibility",
+      "filename": "../../03-evaluate-database-compatibility/evaluate-database-compatibility.md"
+    },
+    {
+      "title": "Lab 4: Cloud Migration Advisor",
+      "description": "Cloud Migration Advisor",
+      "filename": "../../04-cloud-migration-advisor/cloud-migration-advisor.md"
+    },
+    {
+      "title": "Lab 5: Latency Test",
+      "description": "Latency Test",
+      "filename": "../../05-latency-test/latency-test.md"
+    },
+    {
+      "title": "Lab 6: Migrate with Data Pump over NFS",
+      "description": "Migrate with Data Pump over NFS",
+      "filename": "../../06-data-pump-nfs/data-pump-nfs.md"
+    },
+    {
+      "title": "Lab 7: Migrate with Data Pump over DB Link",
+      "description": "Migrate with Data Pump over DB Link",
+      "filename": "../../07-data-pump-dblink/data-pump-dblink.md"
+    },
+    {
+      "title": "Lab 8: Check Ruby Migration",
+      "description": "Check Ruby Migration",
+      "filename": "../../08-import-success-ruby/import-success-ruby.md"
+    },
+    {
+      "title": "Lab 9: Check Sapphire Migration",
+      "description": "Check Sapphire Migration",
+      "filename": "../../09-import-success-sapphire/import-success-sapphire.md"
+    },
+    {
+      "title": "Lab 10: Database Actions",
+      "description": "Database Actions",
+      "filename": "../../10-database-actions/database-actions.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

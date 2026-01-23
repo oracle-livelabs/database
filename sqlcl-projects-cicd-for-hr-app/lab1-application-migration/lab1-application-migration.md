@@ -483,7 +483,7 @@ Now, we export our objects to have them included in our project folders.
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 
@@ -514,7 +514,7 @@ Before generating the artifact, you need to establish a new database baseline by
 
     ```sql
     <copy>
-        !git add .
+        !git add --all
     </copy>
     ```
 

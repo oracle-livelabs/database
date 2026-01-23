@@ -34,9 +34,9 @@ In this lab, you will provision the following OCI resources using Resource Manag
     ![Stack Information](images/resource-manager-stack-info.png)
 
 
-3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123). Specify the [supported kubernetes version](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengaboutk8sversions.htm), for example, 1.29.1 and click **Next**.
+3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123). Specify the [supported kubernetes version](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengaboutk8sversions.htm#supportedk8sversions), for example, 1.33.1 and click **Next**.
 
-    ![Stack Variables](images/resource-manager-stack-variables.jpg)
+    ![Stack Variables](images/resource-manager-stack-variables.png)
     > **Note**: Oracle recommends that you use the most recent Kubernetes version that Container Engine for Kubernetes supports
 
 
@@ -68,12 +68,12 @@ Author
 
 
 * Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+* Ryan Kuan, HeatWave Data Architect, MySQL Asia Pacific
 
 Contributors
 
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-Last Updated By/Date - Ryan Kuan, May 2024
+Last Updated By/Date - Ryan Kuan, July 2025
 

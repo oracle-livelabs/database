@@ -26,7 +26,7 @@ This lab is just a short overview of the functionality introduced with Property 
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
 
-    ![click SQL](images/im1.png =50%x*)
+    ![click SQL](../common-images/im1.png =50%x*)
 
 2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
 

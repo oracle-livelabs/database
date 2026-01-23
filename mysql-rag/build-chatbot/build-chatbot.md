@@ -40,7 +40,7 @@ In this lab, you will be guided through the following tasks:
 - Access to Claude 3.7 Sonnet AI assistant  
 - Access to OpenAI API, plus API key for 'gpt-4o-mini'  AI model
 - Basic understanding of HTML, CSS, JavaScript and PHP
-- Completed Lab 2
+- Completed Lab 3
 
 ## Task 1: Build Basic Chat Interface (Full-Screen Version)
 
@@ -600,4 +600,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Craig Shallahamer, Applied AI Scientist, Viscosity North America
 - **Contributor** - Perside Foster, MySQL Solution Engineering 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , April 2025
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering , July 2025

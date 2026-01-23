@@ -6,6 +6,8 @@ Data Pump is a very versatile tool that allows you to customize the exports and 
 
 Estimated Time: 10 Minutes
 
+[Lab 6 walk-through](videohub:1_ujaorx5v)
+
 ### Objectives
 
 In this lab, you will:
