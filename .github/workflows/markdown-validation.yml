@@ -1,0 +1,17 @@
+name: Markdown Validation
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - '.github/scripts/validate-markdown.sh'
+
+jobs:
+  validate-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run LiveLabs Markdown Formatting Validator
+        run: |
+          .github/scripts/validate-markdown.sh
