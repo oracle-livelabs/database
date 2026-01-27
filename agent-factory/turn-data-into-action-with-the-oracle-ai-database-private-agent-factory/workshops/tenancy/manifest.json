@@ -1,0 +1,54 @@
+{
+  "workshoptitle": "Turn Data into Action with the Oracle AI Database Private Agent Factory",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introducing the Private Agent Factory",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Installing the Private Agent Factory from the OCI Marketplace",
+      "filename": "../../install-from-marketplace/install-from-marketplace.md"
+    },
+    {
+      "title": "Installing the Private Agent Factory from source",
+      "filename": "../../install-from-source/install-from-source.md"
+    },
+    {
+      "title": "Log in to the Private Agent Factory",
+      "filename": "../../log-into-the-factory/log-into-the-factory.md"
+    },
+    {
+      "title": "Knowledge Agent: A Pre-Built RAG Agent",
+      "filename": "../../prebuilt-rag/prebuilt-rag.md"
+    },
+    {
+      "title": "Data Analysis Agent: A Pre-Built Database Agent for NL2SQL",
+      "filename": "../../prebuilt-nl2sql/prebuilt-nl2sql.md"
+    },
+    {
+      "title": "Agents Built from Custom Templates",
+      "filename": "../../custom-templates/custom-templates.md"
+    },
+    {
+      "title": "Agent Builder: Build Agents From Scratch",
+      "filename": "../../agent-builder/agent-builder.md"
+    },
+    {
+      "title": "Deploy Agents from the Private Agent Factory",
+      "filename": "../../deploy/deploy.md"
+    },
+    {
+      "title": "Add data sources to Private Agent Factory",
+      "filename": "../../add-data-sources/add-data-sources.md"
+    },
+    {
+      "title": "Configure SSO on Your Private Agent Factory",
+      "filename": "../../configure-sso/configure-sso.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "../../need_help/need_help.md"
+    }
+  ]
+}
