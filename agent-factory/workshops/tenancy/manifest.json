@@ -3,7 +3,7 @@
   "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
     {
-      "title": "Introducing the Private Agent Factory",
+      "title": "Introduction to the Private Agent Factory",
       "filename": "../../introduction/introduction.md"
     },
     {
