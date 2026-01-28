@@ -5,6 +5,8 @@ Building an intelligent agent is only the first half of the journey. To derive r
 
 Following the **S3P3 Framework**, specifically the **Portability** and **Simplicity** pillars, the Factory allows you to turn a visual "Agentic Flow" into a production-grade **REST endpoint** with a single click. This lab will teach you how to move your agent out of the Builder and into the hands of your developers.
 
+**Estimated time:** 10 minutes.
+
 ### Objectives
 *   Publish a custom agent using the Agent Builder interface.
 *   Locate and understand the exposed REST endpoint.
@@ -18,7 +20,7 @@ Following the **S3P3 Framework**, specifically the **Portability** and **Simplic
 
 ***
 
-## 1. Publishing Your Agent
+## Task 1: Publishing Your Agent
 Once you have tested your agent in the **Playground** and are satisfied with its performance, you must publish it to make it available outside of the Agent Factory.
 
 1.  Open your agent flow in the **Agent Builder**.
@@ -26,14 +28,14 @@ Once you have tested your agent in the **Playground** and are satisfied with its
 3.  Click **Publish**. The Factory will validate the flow, ensure all tool connections (like MCP servers or SQL nodes) are active, and generate a unique deployment ID.
 4.  Once the status changes to "Published," your agent is now live and listening for external requests.
 
-## 2. Locating the REST Endpoint
+## Task 2: Locating the REST Endpoint
 The Private Agent Factory is designed to be "Integration Ready." Every published agent exposes a standard REST API. 
 
 1.  Navigate to the **My Custom Flows**, find you agent and click **Run flow**.
 2.  Next click **Copy agent URL**. This will save the endpoint to your clipboard. The endpoint will typically follow a structure similar to: 
     `https://<your-factory-ip>:8080/studio/v1/agentBuilder/run/<agent-id>`
 
-## 3. Obtaining a Bearer Token
+## Task 3: Obtaining a Bearer Token
 To protect your enterprise data, all REST calls to the Factory require a **Bearer Token** for authentication.
 
 **Note:** The following process for retrieving a token is based on standard REST application practices for this platform and may require independent verification depending on your specific SSO configuration.
@@ -42,7 +44,7 @@ To protect your enterprise data, all REST calls to the Factory require a **Beare
 2.  If your environment uses API Keys, click on your profile to **Generate API Token**.
 3.  Alternatively, for local testing, you can often find your current session token by opening your browser's **Developer Tools** (F12), navigating to the **Network** tab, clicking on any internal Factory request, and copying the value of the `Authorization: Bearer <token>` header.
 
-## 4. Calling the Agent from Your Local Machine
+## Task 4: Calling the Agent from Your Local Machine
 With the Endpoint and the Bearer Token, you can now interact with your agent from any terminal. Replace the placeholders in the following example with your actual data:
 
 ```bash
@@ -60,6 +62,10 @@ curl -X POST "https://<your-factory-ip>:8080/studio/v1/agentBuilder/run/<agent-i
 *   **Response:** The agent will process the request through the flow you designed (e.g., querying the database or searching knowledge bases) and return a JSON response containing the grounded answer.
 
 ***
+
+**Next Steps:** You may now **proceed to the next lab**
+
+## Acknowledgements
 
 - **Authors** 
 * Emilio Perez, Member of Technical Staff, Database Applied AI
