@@ -7,6 +7,10 @@
       "filename": "../../introduction/introduction.md"
     },
     {
+      "title": "Get Started",
+      "filename": "../../get-started/get-started.md"
+    },
+    {
       "title": "Lab 1.1: Installation of the Private Agent Factory from the OCI Marketplace",
       "filename": "../../install-from-marketplace/install-from-marketplace.md"
     },
