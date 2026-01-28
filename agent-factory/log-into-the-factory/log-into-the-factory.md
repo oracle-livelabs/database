@@ -72,5 +72,10 @@ This concludes the current module. Your configuration is now complete. The follo
 
 ## Acknowledgements
 
-- **Author** - Emilio Perez, Member of Technical Staff, Database Applied AI
-- **Last Updated By/Date** - Emilio Perez - August 2025
+- **Authors** 
+* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
+- **Last Updated Date** - January, 2026
+
+
