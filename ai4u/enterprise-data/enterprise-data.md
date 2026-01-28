@@ -10,15 +10,15 @@ You'll first ask the LLM business-specific questions it can't answer, then give 
 
 ### The Business Problem
 
-At Seers Equity, a loan officer asked the AI assistant about rates for preferred customers:
+At Seer Equity, a loan officer asked the AI assistant about rates for preferred customers:
 
 > *"I asked the AI what rates we offer preferred customers. It said 6.5%. Our actual preferred rate is 7.9%. I almost quoted wrong rates to a client!"*
 >
 > Marcus, Senior Loan Officer
 
-The chatbot doesn't know Seers Equity's actual rates, policies, or client information. It gives generic answers that sound confident but are confidently wrong.
+The chatbot doesn't know Seer Equity's actual rates, policies, or client information. It gives generic answers that sound confident but are confidently wrong.
 
-Seers Equity needs AI that knows:
+Seer Equity needs AI that knows:
 - **Actual rate tiers**: Preferred is 7.9%, Standard is 12.9%
 - **Lending policies**: Credit requirements, documentation needed
 - **Client details**: Who qualifies for what, what exceptions exist
@@ -27,7 +27,7 @@ Seers Equity needs AI that knows:
 
 This lab shows you the difference between generic AI knowledge and enterprise-connected AI. You'll see the same questions answered wrong (without data) and right (with data access).
 
-**What you'll build:** An agent connected to Seers Equity's loan policies and applicant data.
+**What you'll build:** An agent connected to Seer Equity's loan policies and applicant data.
 
 Estimated Time: 10 minutes
 
@@ -40,23 +40,46 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-5 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
-## Task 1: Experience the Knowledge Gap
+## Task 1: Import the Lab Notebook
+
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import** to expand the Import drop down.
+
+3. Select **Git**.
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
+    <copy>
+    https://github.com/davidastart/database/blob/main/ai4u/enterprise-data/lab6-enterprise-data.json
+    </copy>
+    ```
+
+5. Click **Ok**.
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+
+## Task 2: Experience the Knowledge Gap
 
 Let's see what happens when you ask an LLM about your business without giving it access to your data. We'll use `SELECT AI CHAT` which uses the LLM's general knowledge.
 
-1. Set the AI profile and ask about Seers Equity's rates.
+1. Set the AI profile and ask about Seer Equity's rates.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
     -- Set the AI profile for SELECT AI CHAT
     EXEC DBMS_CLOUD_AI.SET_PROFILE('genai');
 
-    SELECT AI CHAT What interest rates does Seers Equity offer for preferred customers;
+    SELECT AI CHAT What interest rates does Seer Equity offer for preferred customers;
     </copy>
     ```
 
@@ -64,9 +87,11 @@ The LLM gives a generic response. It doesn't know YOUR rates because it has no a
 
 2. Ask about a specific applicant.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
-    SELECT AI CHAT Is applicant Sarah Chen eligible for preferred rates at Seers Equity;
+    SELECT AI CHAT Is applicant Sarah Chen eligible for preferred rates at Seer Equity;
     </copy>
     ```
 
@@ -74,23 +99,29 @@ The LLM can't answer. It has no applicant data. It might make something up or te
 
 3. Ask about lending policy.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
-    SELECT AI CHAT What credit score does Seers Equity require for a mortgage;
+    SELECT AI CHAT What credit score does Seer Equity require for a mortgage;
     </copy>
     ```
 
 Generic answer. Not YOUR policy.
 
-## Task 2: Create Enterprise Data
+## Task 3: Create Enterprise Data
 
-Now let's create the business data that an agent needs.
+Now let's create the business data that an agent needs. This is the key difference—instead of hoping the AI knows your rates and policies, we store them in tables the agent can query.
 
 1. Create loan policy and applicant tables.
 
+    These tables contain Seer Equity's actual business information: real rate tiers, real credit requirements, and real client data. This is what turns a generic AI into YOUR AI.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
-    -- Seers Equity loan policies
+    -- Seer Equity loan policies
     CREATE TABLE loan_policies (
         policy_id    VARCHAR2(20) PRIMARY KEY,
         policy_name  VARCHAR2(100),
@@ -127,7 +158,7 @@ Now let's create the business data that an agent needs.
         'All loan types'
     );
 
-    -- Seers Equity applicant data
+    -- Seer Equity applicant data
     CREATE TABLE se_applicants (
         applicant_id      VARCHAR2(20) PRIMARY KEY,
         name              VARCHAR2(100),
@@ -148,6 +179,10 @@ Now let's create the business data that an agent needs.
     ```
 
 2. Create tool functions to access this data.
+
+    Now we create functions that can look up this information. These functions become the agent's eyes into your enterprise data. When someone asks about rates, the agent can look up the real answer instead of guessing.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -208,14 +243,18 @@ Now let's create the business data that an agent needs.
 
 3. Register the tools.
 
+    We turn these functions into tools the agent can use. The instructions tell the agent to ALWAYS use these tools for policy and applicant questions—never guess. This is how you prevent the agent from making up answers.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'POLICY_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up Seers Equity loan policies. Parameters: P_POLICY_TYPE (e.g. rate, credit, preferred, standard), P_RATE_TIER (PREFERRED or STANDARD, optional). Always use this to answer policy questions - never guess at rates or requirements.",
+            attributes  => '{"instruction": "Look up Seer Equity loan policies. Parameters: P_POLICY_TYPE (e.g. rate, credit, preferred, standard), P_RATE_TIER (PREFERRED or STANDARD, optional). Always use this to answer policy questions - never guess at rates or requirements.",
                             "function": "get_loan_policy"}',
-            description => 'Retrieves Seers Equity loan policies including rates and requirements'
+            description => 'Retrieves Seer Equity loan policies including rates and requirements'
         );
         
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
@@ -229,11 +268,15 @@ Now let's create the business data that an agent needs.
     </copy>
     ```
 
-## Task 3: Create an Informed Agent
+## Task 4: Create an Informed Agent
 
-Now let's create an agent with access to Seers Equity's enterprise data.
+Now let's create an agent with access to Seer Equity's enterprise data. The key difference from a regular chatbot is that this agent has tools to look up real information.
 
 1. Create the informed agent.
+
+    Notice how the role and task both emphasize using tools and not guessing. This is important—you're training the agent to rely on your data rather than its general knowledge.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -241,7 +284,7 @@ Now let's create an agent with access to Seers Equity's enterprise data.
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'INFORMED_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan officer assistant for Seers Equity. You have access to company loan policies and applicant information. Always use your tools to look up real data - never guess at rates, requirements, or applicant details."}',
+                            "role": "You are a loan officer assistant for Seer Equity. You have access to company loan policies and applicant information. Always use your tools to look up real data - never guess at rates, requirements, or applicant details."}',
             description => 'Agent with enterprise data access'
         );
         
@@ -265,27 +308,33 @@ Now let's create an agent with access to Seers Equity's enterprise data.
 
 2. Set the team.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('INFORMED_TEAM');
     </copy>
     ```
 
-## Task 4: Ask the Same Questions Again
+## Task 5: Ask the Same Questions Again
 
 Now let's see the difference. This time we use `SELECT AI AGENT` which has access to our enterprise data tools.
 
 1. Ask about rates for preferred customers.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
-    SELECT AI AGENT What interest rates does Seers Equity offer for preferred customers;
+    SELECT AI AGENT What interest rates does Seer Equity offer for preferred customers;
     </copy>
     ```
 
 **Now you get YOUR actual rate:** 7.9% APR for Preferred tier with credit score 750+.
 
 2. Ask about Sarah Chen specifically.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -297,15 +346,19 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
 
 3. Ask about credit requirements.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
-    SELECT AI AGENT What credit score does Seers Equity require for a mortgage;
+    SELECT AI AGENT What credit score does Seer Equity require for a mortgage;
     </copy>
     ```
 
 **Your actual policy:** Minimum 550 for any loan, 750+ for Preferred tier, 650-749 for Standard.
 
 4. Ask a combination question.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -315,11 +368,13 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
 
 **The agent checks both:** TechStart has credit score 710 (Standard tier), so they qualify for 12.9% APR.
 
-## Task 5: See the Tool Calls
+## Task 6: See the Tool Calls
 
 Let's verify the agent is using enterprise data.
 
 1. Query tool history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -343,11 +398,11 @@ In this lab, you experienced the difference enterprise data makes:
 * `SELECT AI AGENT`: Agent with tools, gave YOUR specific accurate answers
 * Enterprise data transforms generic AI into your AI
 
-**Key takeaway:** Agents don't fail because they're not smart. They fail because they don't know your business. Marcus almost quoted wrong rates because the AI didn't have access to Seers Equity's actual rate tables. Enterprise data is what transforms generic AI into your AI.
+**Key takeaway:** Agents don't fail because they're not smart. They fail because they don't know your business. Marcus almost quoted wrong rates because the AI didn't have access to Seer Equity's actual rate tables. Enterprise data is what transforms generic AI into your AI.
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
@@ -355,6 +410,8 @@ In this lab, you experienced the difference enterprise data makes:
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>

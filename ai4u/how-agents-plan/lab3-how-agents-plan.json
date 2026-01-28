@@ -1,116 +1,462 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## How Agents Plan Their Work at Seers Equity\n\n### The Business Problem\n\nWhen a loan officer at Seers Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.\n\n*\"Give me a complete picture of Acme Industries\"* seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.\n\n### What You'll Learn\n\nIn this lab, you'll see how agents *plan* before they act. When you ask for a \"complete picture\" of a client, the agent:\n\n1. Analyzes what information is needed\n2. Identifies which tools can provide that information\n3. Determines the optimal order to call them\n4. Executes the plan and synthesizes the results\n\nThis planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.\n\n**What you'll build:** A multi-tool agent that plans and coordinates client information retrieval.\n\n**Estimated Time:** 10 minutes",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## How Agents Plan Their Work at Seer Equity\n\n### The Business Problem\n\nWhen a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.\n\n*\"Give me a complete picture of Acme Industries\"* seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.\n\n### What You'll Learn\n\nIn this lab, you'll see how agents *plan* before they act. When you ask for a \"complete picture\" of a client, the agent:\n\n1. Analyzes what information is needed\n2. Identifies which tools can provide that information\n3. Determines the optimal order to call them\n4. Executes the plan and synthesizes the results\n\nThis planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.\n\n**What you'll build:** A multi-tool agent that plans and coordinates client information retrieval.\n\n**Estimated Time:** 10 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>How Agents Plan Their Work at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>When a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.</p>\n\n<p><em>\"Give me a complete picture of Acme Industries\"</em> seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll see how agents <em>plan</em> before they act. When you ask for a \"complete picture\" of a client, the agent:</p>\n\n<ol>\n<li>Analyzes what information is needed</li>\n<li>Identifies which tools can provide that information</li>\n<li>Determines the optimal order to call them</li>\n<li>Executes the plan and synthesizes the results</li>\n</ol>\n\n<p>This planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.</p>\n\n<p><strong>What you'll build:</strong> A multi-tool agent that plans and coordinates client information retrieval.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%md\n## Create Sample Data\n\nYou'll create two related tables—loan applicants and their applications. This gives the agent multiple dimensions of information to work with at Seers Equity.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create Sample Data\n\nFirst, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.\n\nThis gives the agent multiple dimensions of information to work with at Seer Equity.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Sample Data</h2>\n\n<p>First, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.</p>\n\n<p>This gives the agent multiple dimensions of information to work with at Seer Equity.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Applicant table\nCREATE TABLE demo_applicants (\n    applicant_id    VARCHAR2(20) PRIMARY KEY,\n    name            VARCHAR2(100),\n    credit_tier     VARCHAR2(20),\n    contact_email   VARCHAR2(100)\n);\n\nINSERT INTO demo_applicants VALUES ('APPL-001', 'Acme Industries', 'PREFERRED', 'loans@acme.com');\nINSERT INTO demo_applicants VALUES ('APPL-002', 'TechStart LLC', 'STANDARD', 'finance@techstart.com');\n\n-- Application table\nCREATE TABLE demo_applications (\n    application_id  VARCHAR2(20) PRIMARY KEY,\n    applicant_id    VARCHAR2(20),\n    loan_status     VARCHAR2(20),\n    loan_amount     NUMBER(12,2),\n    application_date DATE\n);\n\nINSERT INTO demo_applications VALUES ('LOAN-100', 'APPL-001', 'APPROVED', 150000, SYSDATE - 2);\nINSERT INTO demo_applications VALUES ('LOAN-101', 'APPL-001', 'PENDING', 75000, SYSDATE);\nINSERT INTO demo_applications VALUES ('LOAN-102', 'APPL-002', 'APPROVED', 50000, SYSDATE - 5);\n\nCOMMIT;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create Three Tool Functions\n\nYou'll give the agent three different tools, each accessing different information:\n\n1. **get_applicant** — Basic applicant info (name, credit tier, email)\n2. **get_applicant_loans** — Loan history for an applicant\n3. **check_premium_eligibility** — Whether applicant qualifies for premium rates\n\nThe agent will decide which tools to use based on what's being asked.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create Three Tool Functions\n\nNow we create three different functions, each doing one specific job. This separation is important—instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.\n\n1. **get_applicant**: Basic applicant info (name, credit tier, email)\n2. **get_applicant_loans**: Loan history for an applicant\n3. **check_premium_eligibility**: Whether applicant qualifies for premium rates",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Three Tool Functions</h2>\n\n<p>Now we create three different functions, each doing one specific job. This separation is important—instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.</p>\n\n<ol>\n<li><strong>get_applicant</strong>: Basic applicant info (name, credit tier, email)</li>\n<li><strong>get_applicant_loans</strong>: Loan history for an applicant</li>\n<li><strong>check_premium_eligibility</strong>: Whether applicant qualifies for premium rates</li>\n</ol>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Tool 1: Look up applicant\nCREATE OR REPLACE FUNCTION get_applicant(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT 'Applicant: ' || name || ', Credit Tier: ' || credit_tier || ', Email: ' || contact_email\n    INTO v_result FROM demo_applicants WHERE applicant_id = p_applicant_id;\n    RETURN v_result;\nEXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found: ' || p_applicant_id;\nEND;\n/\n\n-- Tool 2: Get applicant loans\nCREATE OR REPLACE FUNCTION get_applicant_loans(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (SELECT application_id, loan_status, loan_amount, application_date \n                FROM demo_applications WHERE applicant_id = p_applicant_id ORDER BY application_date DESC) LOOP\n        v_result := v_result || rec.application_id || ': ' || rec.loan_status || ', $' || TO_CHAR(rec.loan_amount, '999,999') || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    IF v_count = 0 THEN RETURN 'No loan applications found for applicant.'; END IF;\n    RETURN 'Found ' || v_count || ' loan applications:' || CHR(10) || v_result;\nEND;\n/\n\n-- Tool 3: Check if applicant is eligible for premium rates\nCREATE OR REPLACE FUNCTION check_premium_eligibility(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS\n    v_tier VARCHAR2(20);\nBEGIN\n    SELECT credit_tier INTO v_tier FROM demo_applicants WHERE applicant_id = p_applicant_id;\n    IF v_tier = 'PREFERRED' THEN\n        RETURN 'ELIGIBLE: Applicant has Preferred credit tier - qualifies for premium rates (7.9% APR).';\n    ELSE\n        RETURN 'NOT ELIGIBLE: Applicant has ' || v_tier || ' credit tier - standard rates apply (12.9% APR).';\n    END IF;\nEXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found.';\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Register the Tools\n\nEach tool has an instruction that tells the agent when to use it. The agent reads these instructions to plan which tools apply to a given question.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Register the Tools\n\nEach function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Tools</h2>\n\n<p>Each function becomes a tool that the agent can use. The <code>instruction</code> for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_APPLICANT_TOOL',\n        attributes  => '{\"instruction\": \"Get loan applicant details by ID. Parameter: P_APPLICANT_ID (e.g. APPL-001). Returns name, credit tier, and email.\",\n                        \"function\": \"get_applicant\"}',\n        description => 'Retrieves applicant name, credit tier, and contact email'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_LOANS_TOOL',\n        attributes  => '{\"instruction\": \"Get all loan applications for an applicant. Parameter: P_APPLICANT_ID (e.g. APPL-001). Returns application IDs, statuses, and amounts.\",\n                        \"function\": \"get_applicant_loans\"}',\n        description => 'Retrieves applicant loan application history with status and amounts'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CHECK_PREMIUM_TOOL',\n        attributes  => '{\"instruction\": \"Check if applicant qualifies for premium loan rates. Parameter: P_APPLICANT_ID (e.g. APPL-001). Returns ELIGIBLE or NOT ELIGIBLE with rate information.\",\n                        \"function\": \"check_premium_eligibility\"}',\n        description => 'Checks if applicant credit tier qualifies for premium rates'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create the Agent and Team\n\nThe agent has access to all three tools. The task instruction tells it to use tools rather than making up information.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Agent and Team\n\nNow we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Agent and Team</h2>\n\n<p>Now we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'PLANNING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seers Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information.\"}',\n        description => 'Agent that plans multi-step responses'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'PLANNING_TASK',\n        attributes  => '{\"instruction\": \"Answer loan applicant inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}\",\n                        \"tools\": [\"GET_APPLICANT_TOOL\", \"GET_LOANS_TOOL\", \"CHECK_PREMIUM_TOOL\"]}',\n        description => 'Task with multiple tools for planning demonstration'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"PLANNING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating agent planning'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'PLANNING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seer Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information.\"}',\n        description => 'Agent that plans multi-step responses'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'PLANNING_TASK',\n        attributes  => '{\"instruction\": \"Answer loan applicant inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}\",\n                        \"tools\": [\"GET_APPLICANT_TOOL\", \"GET_LOANS_TOOL\", \"CHECK_PREMIUM_TOOL\"]}',\n        description => 'Task with multiple tools for planning demonstration'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"PLANNING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating agent planning'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Ask a Simple Question (One Tool)\n\nStart with a simple question that only needs one tool. The agent should plan to use just GET_APPLICANT_TOOL.\n\n**What you'll see:** The agent calls only the applicant lookup tool and returns the basic info.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask a Simple Question (One Tool)</h2>\n\n<p>Start with a simple question that only needs one tool. The agent should plan to use just GET_APPLICANT_TOOL.</p>\n\n<p><strong>What you'll see:</strong> The agent calls only the applicant lookup tool and returns the basic info.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');\nSELECT AI AGENT Who is applicant APPL-001;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Check the Tool History\n\nLook at the tool execution history. You should see only GET_APPLICANT_TOOL was called—the agent planned correctly for a simple question.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Check the Tool History\n\nLook at the tool execution history. You should see only GET_APPLICANT_TOOL was called. The agent planned correctly for a simple question.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Tool History</h2>\n\n<p>Look at the tool execution history. You should see only GET_APPLICANT_TOOL was called. The agent planned correctly for a simple question.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Ask a Complex Question (Multiple Tools)\n\nNow ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.\n\n**What you'll see:** The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility—then synthesizes them into a complete response.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Ask a Complex Question (Multiple Tools)\n\nNow ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.\n\n**What you'll see:** The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask a Complex Question (Multiple Tools)</h2>\n\n<p>Now ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.</p>\n\n<p><strong>What you'll see:</strong> The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT Give me a complete picture of applicant APPL-001 including their loan history and rate eligibility;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Examine the Multi-Tool Plan\n\nCheck the tool history again. You should now see multiple tools were called in sequence.\n\n**What you'll see:** The agent called GET_APPLICANT_TOOL first, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL. It determined the logical order based on the question.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Examine the Multi-Tool Plan</h2>\n\n<p>Check the tool history again. You should now see multiple tools were called in sequence.</p>\n\n<p><strong>What you'll see:</strong> The agent called GET_APPLICANT_TOOL first, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL. It determined the logical order based on the question.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Create a Task with Explicit Planning\n\nYou can control planning by being explicit in your instructions. This new task tells the agent to ALWAYS follow a specific sequence.\n\nThis is useful when you need consistent, predictable behavior regardless of how the question is phrased.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create a Task with Explicit Planning</h2>\n\n<p>You can control planning by being explicit in your instructions. This new task tells the agent to ALWAYS follow a specific sequence.</p>\n\n<p>This is useful when you need consistent, predictable behavior regardless of how the question is phrased.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'STRUCTURED_TASK',\n        attributes  => '{\"instruction\": \"For applicant inquiries, ALWAYS follow this exact sequence: 1. First, look up the applicant using GET_APPLICANT_TOOL 2. Then, get their loan history using GET_LOANS_TOOL 3. Finally, check premium rate eligibility using CHECK_PREMIUM_TOOL. Report all findings. User request: {query}\",\n                        \"tools\": [\"GET_APPLICANT_TOOL\", \"GET_LOANS_TOOL\", \"CHECK_PREMIUM_TOOL\"]}',\n        description => 'Task with explicit planning instructions'\n    );\nEND;\n/\n\n-- Update the team to use the new task\nBEGIN\n    DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'PLANNING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"PLANNING_AGENT\", \"task\": \"STRUCTURED_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with structured planning'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Test the Structured Plan\n\nNow ask a simple question. Even though \"tell me about\" could be answered with just applicant info, the structured task will force all three tools to run.\n\n**What you'll see:** All three tools are called in the prescribed order, every time.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test the Structured Plan</h2>\n\n<p>Now ask a simple question. Even though \"tell me about\" could be answered with just applicant info, the structured task will force all three tools to run.</p>\n\n<p><strong>What you'll see:</strong> All three tools are called in the prescribed order, every time.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');\nSELECT AI AGENT Tell me about applicant APPL-001;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Verify the Explicit Plan Was Followed\n\nThe tool history should show the exact sequence: applicant → loans → eligibility.\n\n**What you'll see:** GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL—in that exact order, as specified in the task instructions.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Verify the Explicit Plan Was Followed\n\nThe tool history should show the exact sequence: applicant → loans → eligibility.\n\n**What you'll see:** GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Explicit Plan Was Followed</h2>\n\n<p>The tool history should show the exact sequence: applicant → loans → eligibility.</p>\n\n<p><strong>What you'll see:</strong> GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Why Planning Matters at Seers Equity\n\nPlanning provides:\n\n1. **Predictability** — You can anticipate what the agent will do\n2. **Debuggability** — When something goes wrong, you can see where\n3. **Efficiency** — The agent gathers what it needs without redundant calls\n4. **Control** — You shape the plan through task instructions\n\nFor a financial services company like Seers Equity, this predictability is essential for compliance and audit trails.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Why Planning Matters at Seer Equity\n\nPlanning provides:\n\n1. **Predictability**: You can anticipate what the agent will do\n2. **Debuggability**: When something goes wrong, you can see where\n3. **Efficiency**: The agent gathers what it needs without redundant calls\n4. **Control**: You shape the plan through task instructions\n\nFor a financial services company like Seer Equity, this predictability is essential for compliance and audit trails.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Why Planning Matters at Seer Equity</h2>\n\n<p>Planning provides:</p>\n\n<ol>\n<li><strong>Predictability</strong>: You can anticipate what the agent will do</li>\n<li><strong>Debuggability</strong>: When something goes wrong, you can see where</li>\n<li><strong>Efficiency</strong>: The agent gathers what it needs without redundant calls</li>\n<li><strong>Control</strong>: You shape the plan through task instructions</li>\n</ol>\n\n<p>For a financial services company like Seer Equity, this predictability is essential for compliance and audit trails.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as started,\n    TO_CHAR(end_date, 'HH24:MI:SS') as ended\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## What You Learned\n\nIn this lab, you observed how agents plan their work:\n\n- Simple questions trigger simple plans (one tool)\n- Complex questions trigger multi-tool plans\n- You can control planning with explicit instructions\n- History views show exactly what was planned and executed\n\n**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you observed how agents plan their work:</p>\n\n<ul>\n<li>Simple questions trigger simple plans (one tool)</li>\n<li>Complex questions trigger multi-tool plans</li>\n<li>You can control planning with explicit instructions</li>\n<li>History views show exactly what was planned and executed</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('PLANNING_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_APPLICANT_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_LOANS_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_PREMIUM_TOOL', TRUE);\nDROP TABLE demo_applications PURGE;\nDROP TABLE demo_applicants PURGE;\nDROP FUNCTION get_applicant;\nDROP FUNCTION get_applicant_loans;\nDROP FUNCTION check_premium_eligibility;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
   "name": "Lab 3 - How Agents Plan",
@@ -118,6 +464,8 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
-  "config": { "isZeppelinNotebookCronEnable": false },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
   "info": {}
 }

@@ -1,156 +1,846 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## The Learning Loop at Seers Equity\n\n### The Business Problem\n\nSeers Equity has made progress. They now have agents that can:\n- Remember client preferences (Lab 7)\n- Store four types of memory (Lab 8)\n\nBut these pieces aren't working together yet. The vision is an agent that *learns* from every interaction:\n\n*\"I want an assistant that gets smarter over time. When we make a good decision, it should remember what worked. When we have a problem, it should learn from it. Every conversation should make the system better.\"*\n\n### What You'll Learn\n\nIn this capstone lab, you'll build a fully memory-enabled loan officer assistant that:\n\n1. **Checks memory first** — Before answering about a client, recalls what it knows\n2. **Stores new information** — When loan officers share details, remembers them\n3. **Consults past decisions** — When facing similar situations, learns from history\n4. **Follows corporate policies** — Looks up actual Seers Equity rules\n5. **Records decisions** — Logs what was decided for future reference\n\nThis is the learning loop: every interaction makes the agent smarter, and that knowledge benefits future interactions.\n\n**What you'll build:** A production-ready memory-enabled loan officer assistant.\n\n**Estimated Time:** 20 minutes",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## The Learning Loop at Seer Equity\n\n### The Business Problem\n\nSeer Equity approved a similar loan three months ago. Same amount, same credit profile, same industry. The loan officer who handled it negotiated special terms based on the client's cash flow timing. But today's loan officer has no idea that case exists.\n\n> *\"We keep solving the same problems from scratch. Someone figured out how to handle seasonal cash flow for agricultural clients last quarter, but that knowledge just... disappeared.\"*\n>\n> Jennifer, Senior Loan Officer\n\nThe problem isn't intelligence. It's retrieval. When a new situation arises, the agent can't find similar past situations to learn from. And when keyword search fails (\"seasonal\" vs \"cyclical\" vs \"variable cash flow\"), the connection is lost.\n\n### What You'll Learn\n\nIn this lab, you'll build **semantic search**, the ability to find relevant past loan decisions by *meaning*, not just keywords:\n\n1. **Load an ONNX embedding model** directly into the database\n2. **Add vector columns** to store semantic meaning alongside facts\n3. **Build semantic search** that finds \"seasonal cash flow\" when you search for \"cyclical revenue\"\n4. **Create the learning loop**: decision → outcome → memory → better future decisions\n\nThis is what lets agents learn from experience. Not just store it, but retrieve it when it's relevant.\n\n**What you'll build:** A semantic memory system that finds similar past loan decisions and improves over time.\n\n**Estimated Time:** 20 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Learning Loop at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Seer Equity approved a similar loan three months ago. Same amount, same credit profile, same industry. The loan officer who handled it negotiated special terms based on the client's cash flow timing. But today's loan officer has no idea that case exists.</p>\n\n<blockquote><p><em>\"We keep solving the same problems from scratch. Someone figured out how to handle seasonal cash flow for agricultural clients last quarter, but that knowledge just... disappeared.\"</em></p>\n<p>Jennifer, Senior Loan Officer</p></blockquote>\n\n<p>The problem isn't intelligence. It's retrieval. When a new situation arises, the agent can't find similar past situations to learn from. And when keyword search fails (\"seasonal\" vs \"cyclical\" vs \"variable cash flow\"), the connection is lost.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build <strong>semantic search</strong>, the ability to find relevant past loan decisions by <em>meaning</em>, not just keywords:</p>\n\n<ol>\n<li><strong>Load an ONNX embedding model</strong> directly into the database</li>\n<li><strong>Add vector columns</strong> to store semantic meaning alongside facts</li>\n<li><strong>Build semantic search</strong> that finds \"seasonal cash flow\" when you search for \"cyclical revenue\"</li>\n<li><strong>Create the learning loop</strong>: decision → outcome → memory → better future decisions</li>\n</ol>\n\n<p>This is what lets agents learn from experience. Not just store it, but retrieve it when it's relevant.</p>\n\n<p><strong>What you'll build:</strong> A semantic memory system that finds similar past loan decisions and improves over time.</p>\n\n<p><strong>Estimated Time:</strong> 20 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%md\n## Create the Memory Infrastructure\n\nFirst, create the tables that will hold all four memory types for Seers Equity. This is the same structure from Lab 8, combined into a production-ready setup.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Load the ONNX Embedding Model\n\nEmbedding models convert text into numerical vectors that capture meaning. Instead of calling an external API every time we need an embedding, we load the model directly into the database. This means embeddings happen locally, instantly, and without network latency.\n\nWe're using a pre-trained model called \"all_MiniLM_L12_v2\" that's good at understanding the meaning of sentences.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Load the ONNX Embedding Model</h2>\n\n<p>Embedding models convert text into numerical vectors that capture meaning. Instead of calling an external API every time we need an embedding, we load the model directly into the database. This means embeddings happen locally, instantly, and without network latency.</p>\n\n<p>We're using a pre-trained model called \"all_MiniLM_L12_v2\" that's good at understanding the meaning of sentences.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Main memory table\nCREATE TABLE seers_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    memory_type    VARCHAR2(20) NOT NULL,\n    entity_id      VARCHAR2(100),\n    content        JSON NOT NULL,\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,\n    CONSTRAINT chk_mem_type CHECK (memory_type IN ('FACT', 'DECISION', 'CONTEXT'))\n);\n\n-- Loan policies table (reference knowledge)\nCREATE TABLE seers_policies (\n    policy_id    RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    policy_type  VARCHAR2(50) NOT NULL,\n    policy_name  VARCHAR2(200) NOT NULL,\n    content      JSON NOT NULL,\n    is_active    NUMBER(1) DEFAULT 1\n);\n\n-- Indexes\nCREATE INDEX idx_seers_mem_type ON seers_memory(memory_type);\nCREATE INDEX idx_seers_mem_entity ON seers_memory(entity_id);\nCREATE INDEX idx_seers_policy_type ON seers_policies(policy_type);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Download the ONNX model\nBEGIN\n    DBMS_CLOUD.GET_OBJECT(\n        credential_name => NULL,\n        directory_name  => 'DATA_PUMP_DIR',\n        object_uri      => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/' ||\n                           'p/eLddQappgBJ7jNi6Guz9m9LOtYe2u8LWY19GfgU8flFK4N9YgP4kTlrE9Px3pE12/' ||\n                           'n/adwc4pm/b/OML-Resources/o/all_MiniLM_L12_v2.onnx'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Populate Seers Equity Loan Policies\n\nAdd Seers Equity's loan policies. These are the corporate rules the agent must follow when processing loan applications.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Load the Model into the Database\n\nThis loads the ONNX model into the database so we can use it in SQL. Once loaded, we can call `VECTOR_EMBEDDING()` in any query to convert text to vectors.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Load the Model into the Database</h2>\n\n<p>This loads the ONNX model into the database so we can use it in SQL. Once loaded, we can call <code>VECTOR_EMBEDDING()</code> in any query to convert text to vectors.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Seers Equity Loan Policies\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'rate_policy',\n    'Personal Loan - Preferred Rate',\n    '{\"description\": \"Preferred customers with credit score 750+ qualify for personal loans at 7.9% APR. Maximum loan amount $100,000. No origination fee. Same-day approval for loans under $50,000.\",\n      \"credit_min\": 750, \"apr\": 7.9, \"max_amount\": 100000}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'rate_policy',\n    'Personal Loan - Standard Rate',\n    '{\"description\": \"Standard customers with credit score 650-749 qualify for personal loans at 12.9% APR. Maximum loan amount $50,000. 2% origination fee applies.\",\n      \"credit_min\": 650, \"credit_max\": 749, \"apr\": 12.9, \"max_amount\": 50000}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'rate_policy',\n    'Business Loan - Preferred',\n    '{\"description\": \"Established businesses (3+ years) with strong financials qualify for business loans at 8.5% APR. Maximum $500,000. Requires 2 years tax returns and business plan.\",\n      \"business_years_min\": 3, \"apr\": 8.5, \"max_amount\": 500000}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'escalation_policy',\n    'Risk Escalation Guidelines',\n    '{\"description\": \"Escalation rules: 1) DTI above 35% requires underwriter review, 2) Credit below 650 requires senior underwriter, 3) Loans above $250K require committee approval, 4) Any exception to policy requires manager sign-off.\"}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'exception_policy',\n    'Rate Exception Authority',\n    '{\"description\": \"Rate exceptions may be granted for: 1) Long-term clients (5+ years) - up to 15% discount, 2) Multi-product relationships - up to 10% discount, 3) Strategic accounts - case by case with VP approval. All exceptions must be documented.\"}'\n);\n\nCOMMIT;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Drop model if it already exists\nBEGIN\n    DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\n-- Load the model\nBEGIN\n    DBMS_VECTOR.LOAD_ONNX_MODEL(\n        directory  => 'DATA_PUMP_DIR',\n        file_name  => 'all_MiniLM_L12_v2.onnx',\n        model_name => 'ALL_MINILM_L12_V2'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create Memory Functions\n\nCreate the core memory functions the agent will use:\n\n1. **remember_client_fact** — Store information about a Seers Equity client\n2. **recall_client_info** — Retrieve everything known about a client\n3. **record_loan_decision** — Log a loan decision for audit trail\n4. **find_similar_decisions** — Search past decisions for guidance\n5. **lookup_policy** — Get Seers Equity loan policies",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Verify the Model Is Loaded\n\nConfirm the embedding model is available in the database.\n\n**Watch for:** You should see ALL_MINILM_L12_V2 listed with algorithm and mining function.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Model Is Loaded</h2>\n\n<p>Confirm the embedding model is available in the database.</p>\n\n<p><strong>Watch for:</strong> You should see ALL_MINILM_L12_V2 listed with algorithm and mining function.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Remember a fact about a client\nCREATE OR REPLACE FUNCTION remember_client_fact(\n    p_client      VARCHAR2,\n    p_fact        VARCHAR2,\n    p_category    VARCHAR2 DEFAULT 'general'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO seers_memory (memory_type, entity_id, content)\n    VALUES ('FACT', UPPER(p_client), JSON_OBJECT(\n        'fact' VALUE p_fact,\n        'category' VALUE p_category,\n        'learned' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n    ));\n    COMMIT;\n    RETURN 'Remembered about ' || p_client || ': ' || p_fact;\nEND;\n/\n\n-- Recall everything about a client\nCREATE OR REPLACE FUNCTION recall_client_info(\n    p_client VARCHAR2\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            JSON_VALUE(content, '$.fact') as fact,\n            JSON_VALUE(content, '$.category') as category,\n            TO_CHAR(created_at, 'YYYY-MM-DD') as learned_date\n        FROM seers_memory\n        WHERE memory_type = 'FACT'\n        AND UPPER(entity_id) = UPPER(p_client)\n        ORDER BY created_at DESC\n    ) LOOP\n        v_result := v_result || '- ' || rec.fact || ' [' || rec.category || ', learned ' || rec.learned_date || ']' || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No information found about client ' || p_client || '. This may be a new client.';\n    END IF;\n    RETURN 'Found ' || v_count || ' facts about ' || p_client || ':' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT model_name, algorithm, mining_function \nFROM user_mining_models \nWHERE model_name = 'ALL_MINILM_L12_V2';",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%script\n-- Record a loan decision\nCREATE OR REPLACE FUNCTION record_loan_decision(\n    p_client      VARCHAR2,\n    p_situation   VARCHAR2,\n    p_decision    VARCHAR2,\n    p_outcome     VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO seers_memory (memory_type, entity_id, content)\n    VALUES ('DECISION', UPPER(p_client), JSON_OBJECT(\n        'situation' VALUE p_situation,\n        'decision' VALUE p_decision,\n        'outcome' VALUE NVL(p_outcome, 'Pending'),\n        'recorded' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n    ));\n    COMMIT;\n    RETURN 'Decision recorded for ' || p_client || ': ' || p_decision;\nEND;\n/\n\n-- Find similar past decisions\nCREATE OR REPLACE FUNCTION find_similar_decisions(\n    p_situation VARCHAR2\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            entity_id as client,\n            JSON_VALUE(content, '$.situation') as situation,\n            JSON_VALUE(content, '$.decision') as decision,\n            JSON_VALUE(content, '$.outcome') as outcome\n        FROM seers_memory\n        WHERE memory_type = 'DECISION'\n        AND UPPER(JSON_VALUE(content, '$.situation')) LIKE '%' || UPPER(p_situation) || '%'\n        ORDER BY created_at DESC\n        FETCH FIRST 3 ROWS ONLY\n    ) LOOP\n        v_result := v_result || 'Client: ' || rec.client || CHR(10) ||\n                   'Situation: ' || rec.situation || CHR(10) ||\n                   'Decision: ' || rec.decision || CHR(10) ||\n                   'Outcome: ' || rec.outcome || CHR(10) || '---' || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No similar past decisions found. This appears to be a new type of situation.';\n    END IF;\n    RETURN 'Found ' || v_count || ' similar past decisions:' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%md\n## Create the Memory Infrastructure\n\nCreate tables that will hold Seer Equity's agent memory. The key difference from earlier labs is the VECTOR column—this stores the mathematical representation of what each memory means.\n\nThe `embedding` column with type `VECTOR(384)` stores 384 numbers that capture the meaning of each memory. Two memories with similar meanings will have similar vectors, even if they use different words.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Memory Infrastructure</h2>\n\n<p>Create tables that will hold Seer Equity's agent memory. The key difference from earlier labs is the VECTOR column—this stores the mathematical representation of what each memory means.</p>\n\n<p>The <code>embedding</code> column with type <code>VECTOR(384)</code> stores 384 numbers that capture the meaning of each memory. Two memories with similar meanings will have similar vectors, even if they use different words.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Main memory table with vector embeddings\nCREATE TABLE seers_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    memory_type    VARCHAR2(20) NOT NULL,\n    entity_id      VARCHAR2(100),\n    content        JSON NOT NULL,\n    embedding      VECTOR(384),\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,\n    CONSTRAINT chk_mem_type CHECK (memory_type IN ('FACT', 'DECISION', 'CONTEXT'))\n);\n\n-- Loan policies table (reference knowledge)\nCREATE TABLE seers_policies (\n    policy_id    RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    policy_type  VARCHAR2(50) NOT NULL,\n    policy_name  VARCHAR2(200) NOT NULL,\n    content      JSON NOT NULL,\n    is_active    NUMBER(1) DEFAULT 1\n);\n\n-- Indexes\nCREATE INDEX idx_seers_mem_type ON seers_memory(memory_type);\nCREATE INDEX idx_seers_mem_entity ON seers_memory(entity_id);\nCREATE INDEX idx_seers_policy_type ON seers_policies(policy_type);",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create a Vector Index\n\nA vector index makes similarity searches fast. Without an index, the database would have to compare your query against every single memory. With an index, it can quickly find the most similar ones.\n\nThe index uses \"cosine distance\" which measures how similar two vectors are based on their direction, not their size.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create a Vector Index</h2>\n\n<p>A vector index makes similarity searches fast. Without an index, the database would have to compare your query against every single memory. With an index, it can quickly find the most similar ones.</p>\n\n<p>The index uses \"cosine distance\" which measures how similar two vectors are based on their direction, not their size.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE VECTOR INDEX idx_memory_vector ON seers_memory(embedding)\nORGANIZATION NEIGHBOR PARTITIONS\nDISTANCE COSINE\nWITH TARGET ACCURACY 95;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Populate Seer Equity Loan Policies\n\nAdd Seer Equity's loan policies. These are the corporate rules the agent must follow when processing loan applications.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Populate Seer Equity Loan Policies</h2>\n\n<p>Add Seer Equity's loan policies. These are the corporate rules the agent must follow when processing loan applications.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'rate_policy',\n    'Personal Loan - Preferred Rate',\n    '{\"description\": \"Preferred customers with credit score 750+ qualify for personal loans at 7.9% APR. Maximum loan amount $100,000. No origination fee. Same-day approval for loans under $50,000.\",\n      \"credit_min\": 750, \"apr\": 7.9, \"max_amount\": 100000}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'rate_policy',\n    'Personal Loan - Standard Rate',\n    '{\"description\": \"Standard customers with credit score 650-749 qualify for personal loans at 12.9% APR. Maximum loan amount $50,000. 2% origination fee applies.\",\n      \"credit_min\": 650, \"credit_max\": 749, \"apr\": 12.9, \"max_amount\": 50000}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'rate_policy',\n    'Business Loan - Preferred',\n    '{\"description\": \"Established businesses (3+ years) with strong financials qualify for business loans at 8.5% APR. Maximum $500,000. Requires 2 years tax returns and business plan.\",\n      \"business_years_min\": 3, \"apr\": 8.5, \"max_amount\": 500000}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'escalation_policy',\n    'Risk Escalation Guidelines',\n    '{\"description\": \"Escalation rules: 1) DTI above 35% requires underwriter review, 2) Credit below 650 requires senior underwriter, 3) Loans above $250K require committee approval, 4) Any exception to policy requires manager sign-off.\"}'\n);\n\nINSERT INTO seers_policies (policy_type, policy_name, content) VALUES (\n    'exception_policy',\n    'Rate Exception Authority',\n    '{\"description\": \"Rate exceptions may be granted for: 1) Long-term clients (5+ years) - up to 15% discount, 2) Multi-product relationships - up to 10% discount, 3) Strategic accounts - case by case with VP approval. All exceptions must be documented.\"}'\n);\n\nCOMMIT;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create Memory Functions with Semantic Search\n\nCreate the core memory functions. The key difference from earlier labs: these functions use vector embeddings to store semantic meaning, and `find_similar_decisions` uses vector similarity search to find relevant past decisions by meaning, not just keywords.\n\nFirst, create functions to store and recall client facts.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Memory Functions with Semantic Search</h2>\n\n<p>Create the core memory functions. The key difference from earlier labs: these functions use vector embeddings to store semantic meaning, and <code>find_similar_decisions</code> uses vector similarity search to find relevant past decisions by meaning, not just keywords.</p>\n\n<p>First, create functions to store and recall client facts.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Remember a fact about a client (with semantic embedding)\nCREATE OR REPLACE FUNCTION remember_client_fact(\n    p_client      VARCHAR2,\n    p_fact        VARCHAR2,\n    p_category    VARCHAR2 DEFAULT 'general'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO seers_memory (memory_type, entity_id, content, embedding)\n    VALUES (\n        'FACT', \n        UPPER(p_client), \n        JSON_OBJECT(\n            'fact' VALUE p_fact,\n            'category' VALUE p_category,\n            'learned' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        ),\n        VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING p_fact AS DATA)\n    );\n    COMMIT;\n    RETURN 'Remembered about ' || p_client || ': ' || p_fact;\nEND;\n/\n\n-- Recall everything about a client\nCREATE OR REPLACE FUNCTION recall_client_info(\n    p_client VARCHAR2\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            JSON_VALUE(content, '$.fact') as fact,\n            JSON_VALUE(content, '$.category') as category,\n            TO_CHAR(created_at, 'YYYY-MM-DD') as learned_date\n        FROM seers_memory\n        WHERE memory_type = 'FACT'\n        AND UPPER(entity_id) = UPPER(p_client)\n        ORDER BY created_at DESC\n    ) LOOP\n        v_result := v_result || '- ' || rec.fact || ' [' || rec.category || ', learned ' || rec.learned_date || ']' || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No information found about client ' || p_client || '. This may be a new client.';\n    END IF;\n    RETURN 'Found ' || v_count || ' facts about ' || p_client || ':' || CHR(10) || v_result;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create Decision Functions with Semantic Search\n\nThis is where the magic happens. When we store a decision, we embed the situation description. When we search, we find decisions with similar meaning—even if the words are different.\n\nThe `find_similar_decisions` function uses `VECTOR_DISTANCE()` and `VECTOR_EMBEDDING()` to find semantically similar past decisions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Decision Functions with Semantic Search</h2>\n\n<p>This is where the magic happens. When we store a decision, we embed the situation description. When we search, we find decisions with similar meaning—even if the words are different.</p>\n\n<p>The <code>find_similar_decisions</code> function uses <code>VECTOR_DISTANCE()</code> and <code>VECTOR_EMBEDDING()</code> to find semantically similar past decisions.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Record a loan decision (with semantic embedding)\nCREATE OR REPLACE FUNCTION record_loan_decision(\n    p_client      VARCHAR2,\n    p_situation   VARCHAR2,\n    p_decision    VARCHAR2,\n    p_outcome     VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_search_text VARCHAR2(2000);\nBEGIN\n    v_search_text := p_situation || ' ' || p_decision || ' ' || NVL(p_outcome, '');\n    \n    INSERT INTO seers_memory (memory_type, entity_id, content, embedding)\n    VALUES (\n        'DECISION', \n        UPPER(p_client), \n        JSON_OBJECT(\n            'situation' VALUE p_situation,\n            'decision' VALUE p_decision,\n            'outcome' VALUE NVL(p_outcome, 'Pending'),\n            'recorded' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        ),\n        VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING v_search_text AS DATA)\n    );\n    COMMIT;\n    RETURN 'Decision recorded for ' || p_client || ': ' || p_decision;\nEND;\n/\n\n-- Find similar past decisions using SEMANTIC SEARCH\nCREATE OR REPLACE FUNCTION find_similar_decisions(\n    p_situation VARCHAR2,\n    p_limit     NUMBER DEFAULT 3\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            entity_id as client,\n            JSON_VALUE(content, '$.situation') as situation,\n            JSON_VALUE(content, '$.decision') as decision,\n            JSON_VALUE(content, '$.outcome') as outcome,\n            ROUND(1 - VECTOR_DISTANCE(\n                embedding,\n                VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING p_situation AS DATA),\n                COSINE\n            ), 3) as relevance\n        FROM seers_memory\n        WHERE memory_type = 'DECISION'\n        AND embedding IS NOT NULL\n        ORDER BY VECTOR_DISTANCE(\n            embedding,\n            VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING p_situation AS DATA),\n            COSINE\n        )\n        FETCH FIRST p_limit ROWS ONLY\n    ) LOOP\n        v_result := v_result || \n            'Client: ' || rec.client || CHR(10) ||\n            'Situation: ' || rec.situation || CHR(10) ||\n            'Decision: ' || rec.decision || CHR(10) ||\n            'Outcome: ' || rec.outcome || CHR(10) ||\n            'Relevance: ' || (rec.relevance * 100) || '%' || CHR(10) || '---' || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No similar past decisions found. This appears to be a new type of situation.';\n    END IF;\n    RETURN 'Found ' || v_count || ' similar past decisions:' || CHR(10) || v_result;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Policy Lookup Function\n\nThis function retrieves Seer Equity's loan policies by type or search term.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Policy Lookup Function</h2>\n\n<p>This function retrieves Seer Equity's loan policies by type or search term.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Look up loan policies\nCREATE OR REPLACE FUNCTION lookup_policy(\n    p_policy_type VARCHAR2 DEFAULT NULL,\n    p_search      VARCHAR2 DEFAULT NULL\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            policy_type,\n            policy_name,\n            JSON_VALUE(content, '$.description') as description\n        FROM seers_policies\n        WHERE is_active = 1\n        AND (p_policy_type IS NULL OR UPPER(policy_type) LIKE '%' || UPPER(p_policy_type) || '%')\n        AND (p_search IS NULL OR UPPER(policy_name) LIKE '%' || UPPER(p_search) || '%' \n             OR UPPER(JSON_VALUE(content, '$.description')) LIKE '%' || UPPER(p_search) || '%')\n        ORDER BY policy_type, policy_name\n    ) LOOP\n        v_result := v_result || '[' || rec.policy_type || '] ' || rec.policy_name || ':' || CHR(10) ||\n                   rec.description || CHR(10) || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No matching policies found.';\n    END IF;\n    RETURN 'Found ' || v_count || ' policies:' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Register the Memory Tools\n\nNow register all five functions as agent tools. The instructions tell the agent when to use each tool.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Register the Memory Tools\n\nRegister all five functions as agent tools. The instructions tell the agent when to use each tool. Note that FIND_DECISIONS_TOOL now uses semantic search.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Memory Tools</h2>\n\n<p>Register all five functions as agent tools. The instructions tell the agent when to use each tool. Note that FIND_DECISIONS_TOOL now uses semantic search.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_CLIENT_TOOL',\n        attributes  => '{\"instruction\": \"Store a fact about a Seers Equity client for future reference. Parameters: P_CLIENT (client name), P_FACT (information to remember), P_CATEGORY (optional: contact_preference, rate_exception, relationship, requirement, behavior). Use when loan officers share important client information.\",\n                        \"function\": \"remember_client_fact\"}',\n        description => 'Stores facts about clients in long-term memory'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_CLIENT_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve everything known about a Seers Equity client. Parameter: P_CLIENT (client name to search). Use this FIRST when asked about any client to check what you already know.\",\n                        \"function\": \"recall_client_info\"}',\n        description => 'Retrieves all stored facts about a client'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECORD_DECISION_TOOL',\n        attributes  => '{\"instruction\": \"Record a loan decision for audit trail. Parameters: P_CLIENT (client name), P_SITUATION (what was the request/situation), P_DECISION (what was decided), P_OUTCOME (optional: what happened as a result). Use after making or discussing significant loan decisions.\",\n                        \"function\": \"record_loan_decision\"}',\n        description => 'Records loan decisions for audit and learning'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'FIND_DECISIONS_TOOL',\n        attributes  => '{\"instruction\": \"Search for similar past loan decisions. Parameter: P_SITUATION (describe the situation to search for, e.g. rate exception, marginal credit, large loan). Use when facing a decision to learn from past experience.\",\n                        \"function\": \"find_similar_decisions\"}',\n        description => 'Finds similar past decisions for guidance'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'POLICY_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up Seers Equity loan policies. Parameters: P_POLICY_TYPE (optional: rate_policy, escalation_policy, exception_policy), P_SEARCH (optional: search term). Use when you need to know company lending policy or rates.\",\n                        \"function\": \"lookup_policy\"}',\n        description => 'Retrieves Seers Equity loan policies and guidelines'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_CLIENT_TOOL',\n        attributes  => '{\"instruction\": \"Store a fact about a Seer Equity client for future reference. Parameters: P_CLIENT (client name), P_FACT (information to remember), P_CATEGORY (optional: contact_preference, rate_exception, relationship, requirement, behavior). Use when loan officers share important client information.\",\n                        \"function\": \"remember_client_fact\"}',\n        description => 'Stores facts about clients in long-term memory with semantic embeddings'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_CLIENT_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve everything known about a Seer Equity client. Parameter: P_CLIENT (client name to search). Use this FIRST when asked about any client to check what you already know.\",\n                        \"function\": \"recall_client_info\"}',\n        description => 'Retrieves all stored facts about a client'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECORD_DECISION_TOOL',\n        attributes  => '{\"instruction\": \"Record a loan decision for audit trail. Parameters: P_CLIENT (client name), P_SITUATION (what was the request/situation), P_DECISION (what was decided), P_OUTCOME (optional: what happened as a result). Use after making or discussing significant loan decisions.\",\n                        \"function\": \"record_loan_decision\"}',\n        description => 'Records loan decisions for audit and learning with semantic embeddings'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'FIND_DECISIONS_TOOL',\n        attributes  => '{\"instruction\": \"Search for similar past loan decisions using semantic search. Parameter: P_SITUATION (describe the situation - the search finds similar meanings, not just keywords). Use when facing a decision to learn from past experience.\",\n                        \"function\": \"find_similar_decisions\"}',\n        description => 'Finds similar past decisions using semantic vector search'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'POLICY_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up Seer Equity loan policies. Parameters: P_POLICY_TYPE (optional: rate_policy, escalation_policy, exception_policy), P_SEARCH (optional: search term). Use when you need to know company lending policy or rates.\",\n                        \"function\": \"lookup_policy\"}',\n        description => 'Retrieves Seer Equity loan policies and guidelines'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create the Memory-Enabled Agent\n\nCreate an agent with access to all memory tools. The role instructions tell the agent to use its memory proactively.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Memory-Enabled Agent\n\nCreate an agent with access to all memory tools. The role instructions tell the agent to use its memory proactively and leverage semantic search for finding similar past decisions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Memory-Enabled Agent</h2>\n\n<p>Create an agent with access to all memory tools. The role instructions tell the agent to use its memory proactively and leverage semantic search for finding similar past decisions.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'SEERS_MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seers Equity with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When loan officers share client information, store it (use REMEMBER_CLIENT_TOOL). When making loan decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools.\"}',\n        description => 'Memory-enabled loan officer assistant'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'SEERS_MEMORY_TASK',\n        attributes  => '{\"instruction\": \"Process this loan officer request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL. Record decisions with RECORD_DECISION_TOOL. Do not ask clarifying questions - use your tools. User request: {query}\",\n                        \"tools\": [\"REMEMBER_CLIENT_TOOL\", \"RECALL_CLIENT_TOOL\", \"RECORD_DECISION_TOOL\", \"FIND_DECISIONS_TOOL\", \"POLICY_LOOKUP_TOOL\"]}',\n        description => 'Task with full memory capabilities'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'SEERS_MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"SEERS_MEMORY_AGENT\", \"task\": \"SEERS_MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Memory-enabled loan processing team'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'SEERS_MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seer Equity with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When loan officers share client information, store it (use REMEMBER_CLIENT_TOOL). When making loan decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools.\"}',\n        description => 'Memory-enabled loan officer assistant with semantic search'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'SEERS_MEMORY_TASK',\n        attributes  => '{\"instruction\": \"Process this loan officer request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL (it uses semantic search to find similar situations even with different wording). Record decisions with RECORD_DECISION_TOOL. Do not ask clarifying questions - use your tools. User request: {query}\",\n                        \"tools\": [\"REMEMBER_CLIENT_TOOL\", \"RECALL_CLIENT_TOOL\", \"RECORD_DECISION_TOOL\", \"FIND_DECISIONS_TOOL\", \"POLICY_LOOKUP_TOOL\"]}',\n        description => 'Task with full memory capabilities and semantic search'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'SEERS_MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"SEERS_MEMORY_AGENT\", \"task\": \"SEERS_MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Memory-enabled loan processing team'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Activate the Memory Agent\n\nSet the memory team as active. Now your SELECT AI AGENT commands will go to an agent with full memory capabilities.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Seed Historical Decisions for Learning\n\nAdd historical loan decisions that the agent can learn from. Notice we're using varied wording—\"seasonal cash flow,\" \"cyclical revenue,\" \"variable income\"—to test semantic search later.\n\nEach decision is stored with a vector embedding that captures its meaning.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Seed Historical Decisions for Learning</h2>\n\n<p>Add historical loan decisions that the agent can learn from. Notice we're using varied wording—\"seasonal cash flow,\" \"cyclical revenue,\" \"variable income\"—to test semantic search later.</p>\n\n<p>Each decision is stored with a vector embedding that captures its meaning.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Decision about seasonal business cash flow\nINSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (\n    'DECISION', 'HARVEST FARMS',\n    '{\"situation\": \"Agricultural client with seasonal cash flow requested business loan with flexible payment schedule\",\n      \"decision\": \"Approved loan with quarterly payments aligned to harvest cycles instead of monthly\",\n      \"outcome\": \"Client paid on time, renewed for larger amount next season\",\n      \"recorded\": \"2024-06-15\"}',\n    VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING \n        'Agricultural client with seasonal cash flow requested business loan with flexible payment schedule. Approved loan with quarterly payments aligned to harvest cycles instead of monthly. Client paid on time, renewed for larger amount next season.' AS DATA)\n);\n\n-- Decision about rate exception for long-term client\nINSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (\n    'DECISION', 'GLOBALCO',\n    '{\"situation\": \"Long-term client requested rate exception for expansion loan\",\n      \"decision\": \"Approved 12% rate discount based on 7-year relationship and $2M in previous loans\",\n      \"outcome\": \"Client expanded successfully, referred two new business clients\",\n      \"recorded\": \"2024-08-20\"}',\n    VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING \n        'Long-term client requested rate exception for expansion loan. Approved 12% rate discount based on 7-year relationship and $2M in previous loans. Client expanded successfully, referred two new business clients.' AS DATA)\n);\n\n-- Decision about new client wanting exception (what NOT to do)\nINSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (\n    'DECISION', 'NEWSTART INC',\n    '{\"situation\": \"New business client requested rate exception without established relationship\",\n      \"decision\": \"Denied exception request outright citing policy\",\n      \"outcome\": \"Client went to competitor, later became successful business we lost\",\n      \"recorded\": \"2024-04-10\"}',\n    VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING \n        'New business client requested rate exception without established relationship. Denied exception request outright citing policy. Client went to competitor, later became successful business we lost.' AS DATA)\n);\n\n-- Better approach for new client wanting exception\nINSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (\n    'DECISION', 'TECHSTART LLC',\n    '{\"situation\": \"New business client requested rate exception without established relationship\",\n      \"decision\": \"Offered standard rate with commitment to review for exception after 12 months of on-time payments\",\n      \"outcome\": \"Client accepted, became loyal customer, now qualifies for preferred rates\",\n      \"recorded\": \"2024-05-22\"}',\n    VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING \n        'New business client requested rate exception without established relationship. Offered standard rate with commitment to review for exception after 12 months of on-time payments. Client accepted, became loyal customer, now qualifies for preferred rates.' AS DATA)\n);\n\n-- Decision about client with variable income\nINSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (\n    'DECISION', 'CONSULTING PARTNERS',\n    '{\"situation\": \"Consulting firm with cyclical revenue patterns needed loan for equipment\",\n      \"decision\": \"Structured loan with variable payments tied to quarterly revenue, higher in Q4, lower in Q1\",\n      \"outcome\": \"Client appreciated flexibility, maintained perfect payment record\",\n      \"recorded\": \"2024-07-15\"}',\n    VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING \n        'Consulting firm with cyclical revenue patterns needed loan for equipment. Structured loan with variable payments tied to quarterly revenue, higher in Q4, lower in Q1. Client appreciated flexibility, maintained perfect payment record.' AS DATA)\n);\n\nCOMMIT;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Test Semantic Search Directly\n\nBefore using the agent, let's test semantic search directly. This demonstrates the power of vector search—finding relevant results by meaning, not keywords.\n\nSearch for \"irregular income patterns\" and watch it find \"seasonal cash flow\" and \"cyclical revenue\" even though those exact words aren't in the query.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Semantic Search Directly</h2>\n\n<p>Before using the agent, let's test semantic search directly. This demonstrates the power of vector search—finding relevant results by meaning, not keywords.</p>\n\n<p>Search for \"irregular income patterns\" and watch it find \"seasonal cash flow\" and \"cyclical revenue\" even though those exact words aren't in the query.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT find_similar_decisions('client has irregular income patterns throughout the year') FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Test Another Semantic Search\n\nSearch for \"new customer asking for a discount.\" This should find both the failed approach (NewStart - denied outright) and the successful approach (TechStart - offered path to exception).\n\nThe agent can learn from both successes and failures!",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Another Semantic Search</h2>\n\n<p>Search for \"new customer asking for a discount.\" This should find both the failed approach (NewStart - denied outright) and the successful approach (TechStart - offered path to exception).</p>\n\n<p>The agent can learn from both successes and failures!</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT find_similar_decisions('new customer asking for a discount on their first loan') FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Activate the Memory Agent\n\nSet the memory team as active. Now your SELECT AI AGENT commands will go to an agent with full memory and semantic search capabilities.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Activate the Memory Agent</h2>\n\n<p>Set the memory team as active. Now your SELECT AI AGENT commands will go to an agent with full memory and semantic search capabilities.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_MEMORY_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent about Acme Industries. The agent should use REMEMBER_CLIENT_TOOL to store these facts.\n\n**Watch for:** The agent should confirm it remembered the contact preference, rate exception, and relationship history.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent about Acme Industries. The agent should use REMEMBER_CLIENT_TOOL to store these facts with semantic embeddings.\n\n**Watch for:** The agent should confirm it remembered the contact preference, rate exception, and relationship history.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Teach the Agent About a Client</h2>\n\n<p>Tell the agent about Acme Industries. The agent should use REMEMBER_CLIENT_TOOL to store these facts with semantic embeddings.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered the contact preference, rate exception, and relationship history.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT Acme Industries is one of our best clients. They prefer email contact through their CFO Sarah Chen. They have been with Seers Equity since 2019 and were approved for a 15% rate exception due to their excellent payment history on 4 previous loans. Please remember all of this;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT Acme Industries is one of our best clients. They prefer email contact through their CFO Sarah Chen. They have been with Seer Equity since 2019 and were approved for a 15% rate exception due to their excellent payment history on 4 previous loans. Please remember all of this;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Test Client Recall\n\nAsk about Acme Industries. The agent should use RECALL_CLIENT_TOOL and return all the facts you just taught it.\n\n**Watch for:** All the facts: email preference, Sarah Chen, since 2019, 15% rate exception, 4 previous loans.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Client Recall</h2>\n\n<p>Ask about Acme Industries. The agent should use RECALL_CLIENT_TOOL and return all the facts you just taught it.</p>\n\n<p><strong>Watch for:</strong> All the facts: email preference, Sarah Chen, since 2019, 15% rate exception, 4 previous loans.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT What do you know about Acme Industries;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Ask About Loan Policies\n\nAsk the agent about Seers Equity's personal loan rates. The agent should use POLICY_LOOKUP_TOOL to get the official policies.\n\n**Watch for:** Both Preferred (7.9% APR, 750+ credit) and Standard (12.9% APR, 650-749 credit) rate policies.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Ask for Decision Guidance with Semantic Search\n\nAsk the agent about handling a situation with \"unpredictable revenue.\" Even though we stored decisions about \"seasonal cash flow\" and \"cyclical revenue,\" semantic search will find them.\n\n**Watch for:** The agent should find Harvest Farms (seasonal) and Consulting Partners (cyclical) decisions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask for Decision Guidance with Semantic Search</h2>\n\n<p>Ask the agent about handling a situation with \"unpredictable revenue.\" Even though we stored decisions about \"seasonal cash flow\" and \"cyclical revenue,\" semantic search will find them.</p>\n\n<p><strong>Watch for:</strong> The agent should find Harvest Farms (seasonal) and Consulting Partners (cyclical) decisions.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT What are our personal loan rates and requirements;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT A landscaping company has unpredictable revenue - busy in spring and summer, slow in winter. They want a business loan. What have we done in similar situations;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Seed Some Historical Decisions\n\nBefore testing decision lookup, add some historical decisions directly to the database. This simulates past loan decisions the agent can learn from.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Record a New Decision\n\nRecord a new decision based on the guidance. This decision will be stored with its own vector embedding, making it findable by semantic search in the future.\n\n**Watch for:** The agent should confirm it recorded the decision.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Record a New Decision</h2>\n\n<p>Record a new decision based on the guidance. This decision will be stored with its own vector embedding, making it findable by semantic search in the future.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it recorded the decision.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Add historical decisions for the agent to learn from\nINSERT INTO seers_memory (memory_type, entity_id, content) VALUES (\n    'DECISION', 'TECHSTART LLC',\n    '{\"situation\": \"New business client requested rate exception without established relationship\",\n      \"decision\": \"Offered standard rate with commitment to review for exception after 12 months of on-time payments\",\n      \"outcome\": \"Client accepted, became loyal customer, now qualifies for preferred rates\",\n      \"recorded\": \"2024-06-15\"}'\n);\n\nINSERT INTO seers_memory (memory_type, entity_id, content) VALUES (\n    'DECISION', 'GLOBALCO',\n    '{\"situation\": \"Long-term client requested rate exception for expansion loan\",\n      \"decision\": \"Approved 12% rate discount based on 7-year relationship and $2M in previous loans\",\n      \"outcome\": \"Client expanded successfully, referred two new business clients\",\n      \"recorded\": \"2024-08-20\"}'\n);\n\nINSERT INTO seers_memory (memory_type, entity_id, content) VALUES (\n    'DECISION', 'SMITH CONSULTING',\n    '{\"situation\": \"Client with marginal credit requested business loan\",\n      \"decision\": \"Declined standard loan but offered secured loan option with credit improvement program\",\n      \"outcome\": \"Client accepted secured option, improved credit by 80 points in 18 months\",\n      \"recorded\": \"2024-03-10\"}'\n);\n\nCOMMIT;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
-    },
-    {
-      "text": "%md\n## Ask for Decision Guidance\n\nAsk the agent about handling a rate exception request. The agent should use FIND_DECISIONS_TOOL to search past decisions.\n\n**Watch for:** The agent should find and share the TechStart and GlobalCo decisions, showing what worked before.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
-    },
-    {
-      "text": "%script\nSELECT AI AGENT A new client is asking for a rate exception. What have we done in similar situations before;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT We just approved a $150K equipment loan for GreenScape Landscaping with seasonal payment schedule - higher payments April through October, reduced payments November through March. Record this decision;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## The Critical Test: Session Reset\n\nNow the crucial test—clear the session and start fresh. This simulates logging out and back in, or a new day.\n\nIn Lab 5, this made the forgetful agent lose everything. Let's see what happens with memory tools.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Critical Test: Session Reset</h2>\n\n<p>Now the crucial test—clear the session and start fresh. This simulates logging out and back in, or a new day.</p>\n\n<p>In Lab 5, this made the forgetful agent lose everything. Let's see what happens with memory tools.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_MEMORY_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Ask in the New Session\n\nAsk about Acme Industries in this \"new\" session. The agent has no conversation history—but it has memory tools.\n\n**Watch what happens:** The agent calls RECALL_CLIENT_TOOL and finds all the facts! Because they're stored in the database, they persist across sessions. The agent still remembers the Seers Equity client.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Ask in the New Session\n\nAsk about Acme Industries in this \"new\" session. The agent has no conversation history—but it has memory tools.\n\n**Watch what happens:** The agent calls RECALL_CLIENT_TOOL and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask in the New Session</h2>\n\n<p>Ask about Acme Industries in this \"new\" session. The agent has no conversation history—but it has memory tools.</p>\n\n<p><strong>Watch what happens:</strong> The agent calls RECALL_CLIENT_TOOL and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT Who is the contact for Acme Industries and do they have any special rate arrangements;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT What do you know about Acme Industries and their rate arrangements;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Record a New Decision\n\nNow record a new loan decision. The agent should use RECORD_DECISION_TOOL to log this for the audit trail.\n\n**Watch for:** The agent should confirm it recorded the decision.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Verify the Learning Loop\n\nSearch for seasonal payment decisions. The new GreenScape decision should now appear alongside the original Harvest Farms and Consulting Partners decisions.\n\n**Watch for:** THREE relevant decisions now, including the one you just recorded. The agent is learning!",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Learning Loop</h2>\n\n<p>Search for seasonal payment decisions. The new GreenScape decision should now appear alongside the original Harvest Farms and Consulting Partners decisions.</p>\n\n<p><strong>Watch for:</strong> THREE relevant decisions now, including the one you just recorded. The agent is learning!</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT We just approved a $200K expansion loan for Acme Industries at their exception rate. Record this decision;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT find_similar_decisions('business with seasonal revenue needs flexible payments') FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Check the Tool Execution History\n\nSee exactly what tools the agent called and what results it got. This is full transparency into the agent's memory operations.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Tool Execution History</h2>\n\n<p>See exactly what tools the agent called and what results it got. This is full transparency into the agent's memory operations.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called_at,\n    SUBSTR(output, 1, 80) as result_preview\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 15 ROWS ONLY;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Examine the Memory Core Directly\n\nLook at what's stored in the memory tables. This is the power of database-backed memory—it's visible, queryable, and auditable.\n\nYou can see every fact the agent learned and every decision it recorded.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Examine the Memory Core\n\nLook at what's stored in the memory tables, including which memories have vector embeddings.\n\n**Watch for:** All DECISION records should have embeddings (has_embedding = Yes), enabling semantic search.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Examine the Memory Core</h2>\n\n<p>Look at what's stored in the memory tables, including which memories have vector embeddings.</p>\n\n<p><strong>Watch for:</strong> All DECISION records should have embeddings (has_embedding = Yes), enabling semantic search.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT \n    memory_type,\n    entity_id,\n    JSON_SERIALIZE(content PRETTY) as content,\n    TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created\nFROM seers_memory\nORDER BY created_at DESC;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT \n    memory_type,\n    entity_id,\n    JSON_VALUE(content, '$.situation') as situation,\n    CASE WHEN embedding IS NOT NULL THEN 'Yes' ELSE 'No' END as has_embedding,\n    TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created\nFROM seers_memory\nWHERE memory_type = 'DECISION'\nORDER BY created_at DESC;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## What You Built\n\nCongratulations! You've built a fully memory-enabled agent for Seers Equity:\n\n**Memory Capabilities:**\n- **Client facts** — Stores and recalls everything about Seers Equity clients\n- **Decision logging** — Records loan decisions for audit and learning\n- **Decision guidance** — Searches past decisions for similar situations\n- **Policy lookup** — Retrieves corporate lending policies on demand\n\n**Key Behaviors:**\n- Agent checks memory FIRST when asked about a client\n- Agent stores information when loan officers share it\n- Agent consults past decisions when facing new situations\n- Agent follows corporate policies from the database\n- Memory persists across sessions—no more forgetting\n\n**The Difference:** This agent builds knowledge over time. Every conversation makes it smarter. Every decision it records helps with future decisions. It's not just a chatbot that answers questions—it's an assistant that learns about your Seers Equity clients and remembers them.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## What You Built\n\nCongratulations! You've built the learning loop with semantic search for Seer Equity:\n\n**Memory Capabilities:**\n- **Client facts with embeddings**: Stores and recalls everything about clients\n- **Decision logging with embeddings**: Records loan decisions for audit and learning\n- **Semantic decision search**: Finds similar past decisions by *meaning*, not keywords\n- **Policy lookup**: Retrieves corporate lending policies on demand\n\n**Key Behaviors:**\n- Agent checks memory FIRST when asked about a client\n- Agent stores information when loan officers share it\n- Agent finds similar situations even with different wording (\"irregular income\" → \"seasonal cash flow\")\n- Agent learns from both successes AND failures\n- Memory persists across sessions—no more forgetting\n\n**The Learning Loop:**\n1. New situation arrives\n2. Agent searches for similar past decisions (semantic search)\n3. Agent sees what worked before (and what didn't)\n4. Agent takes informed action\n5. Decision is recorded with embedding\n6. Future searches benefit from this new knowledge\n\nThis is how agents improve. Not magically, but systematically. The AI database powers it all.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Built</h2>\n\n<p>Congratulations! You've built the learning loop with semantic search for Seer Equity:</p>\n\n<p><strong>Memory Capabilities:</strong></p>\n<ul>\n<li><strong>Client facts with embeddings</strong>: Stores and recalls everything about clients</li>\n<li><strong>Decision logging with embeddings</strong>: Records loan decisions for audit and learning</li>\n<li><strong>Semantic decision search</strong>: Finds similar past decisions by <em>meaning</em>, not keywords</li>\n<li><strong>Policy lookup</strong>: Retrieves corporate lending policies on demand</li>\n</ul>\n\n<p><strong>Key Behaviors:</strong></p>\n<ul>\n<li>Agent checks memory FIRST when asked about a client</li>\n<li>Agent stores information when loan officers share it</li>\n<li>Agent finds similar situations even with different wording (\"irregular income\" → \"seasonal cash flow\")</li>\n<li>Agent learns from both successes AND failures</li>\n<li>Memory persists across sessions—no more forgetting</li>\n</ul>\n\n<p><strong>The Learning Loop:</strong></p>\n<ol>\n<li>New situation arrives</li>\n<li>Agent searches for similar past decisions (semantic search)</li>\n<li>Agent sees what worked before (and what didn't)</li>\n<li>Agent takes informed action</li>\n<li>Decision is recorded with embedding</li>\n<li>Future searches benefit from this new knowledge</li>\n</ol>\n\n<p>This is how agents improve. Not magically, but systematically. The AI database powers it all.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('SEERS_MEMORY_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('SEERS_MEMORY_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('SEERS_MEMORY_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REMEMBER_CLIENT_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECALL_CLIENT_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECORD_DECISION_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FIND_DECISIONS_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('POLICY_LOOKUP_TOOL', TRUE);\nDROP TABLE seers_memory PURGE;\nDROP TABLE seers_policies PURGE;\nDROP FUNCTION remember_client_fact;\nDROP FUNCTION recall_client_info;\nDROP FUNCTION record_loan_decision;\nDROP FUNCTION find_similar_decisions;\nDROP FUNCTION lookup_policy;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('SEERS_MEMORY_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('SEERS_MEMORY_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('SEERS_MEMORY_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REMEMBER_CLIENT_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECALL_CLIENT_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECORD_DECISION_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FIND_DECISIONS_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('POLICY_LOOKUP_TOOL', TRUE);\nDROP TABLE seers_memory PURGE;\nDROP TABLE seers_policies PURGE;\nDROP FUNCTION remember_client_fact;\nDROP FUNCTION recall_client_info;\nDROP FUNCTION record_loan_decision;\nDROP FUNCTION find_similar_decisions;\nDROP FUNCTION lookup_policy;\n\n-- Drop the ONNX model\nBEGIN\n    DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
   "name": "Lab 9 - The Learning Loop",
@@ -158,6 +848,8 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
-  "config": { "isZeppelinNotebookCronEnable": false },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
   "info": {}
 }

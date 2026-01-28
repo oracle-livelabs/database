@@ -4,11 +4,11 @@
 
 Most people think AI is just a chatbot. You ask a question, it gives an answer. But agents do more. They don't just respond, they *act*. They look up real data, make decisions based on your systems, and complete tasks.
 
-In this lab, you'll see that difference firsthand at **Seers Equity**, a growing financial services company. You'll create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
+In this lab, you'll see that difference firsthand at **Seer Equity**, a growing financial services company. You'll create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
 
 ### The Business Problem
 
-At Seers Equity, loan officers spend hours every day answering the same question: *"What's my loan status?"*
+At Seer Equity, loan officers spend hours every day answering the same question: *"What's my loan status?"*
 
 When a client calls, the loan officer has to log into the system, navigate to the right screen, find the application, and read out the status. It's tedious. It's slow. And it takes time away from actually helping clients.
 
@@ -16,11 +16,11 @@ The company tried deploying a chatbot. But when a client asked "What's the statu
 
 > *"I asked the AI about my loan and it told me how to look it up. I know how to look it up! I wanted you to just tell me the status."*
 >
-> Frustrated Seers Equity client
+> Frustrated Seer Equity client
 
 ### What You'll Learn
 
-This lab shows you the fundamental difference between a chatbot (explains how) and an agent (actually does it). You'll build an agent that queries real loan data and returns actual answers. This is the first step toward solving Seers Equity's client service challenges.
+This lab shows you the fundamental difference between a chatbot (explains how) and an agent (actually does it). You'll build an agent that queries real loan data and returns actual answers. This is the first step toward solving Seer Equity's client service challenges.
 
 **What you'll build:** A loan application lookup agent with a SQL tool that queries your database.
 
@@ -35,15 +35,48 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* An AI profile named `genai` already configured with your AI provider credentials
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
-## Task 1: Create the Loan Applications Table
+## Task 1: Import the Lab Notebook
+
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+    ![Notebook Information](./images/notebook_launch.png " ")
+
+2. Click **Import** to expand the Import drop down.
+
+    ![Notebook Information](./images/notebook_import.png " ")
+
+3. Select **Git**.
+
+    ![Notebook Information](./images/notebook_git.png " ")
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
+    <copy>
+    https://github.com/davidastart/database/blob/main/ai4u/what-is-agent/lab1-what-is-agent.json
+    </copy>
+    ```
+    ![Notebook Information](./images/notebook_clone.png " ")
+
+5. Click **Ok**.
+
+    ![Notebook Information](./images/notebook_clone.png " ")
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+
+## Task 2: Create the Loan Applications Table
 
 First, let's create a loan applications table. This gives the agent something real to work with, the kind of data that a chatbot would never be able to access.
 
 1. Create the loan applications table.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -58,13 +91,17 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
+    ![Task Information](./images/task2_1.png " ")
+
 2. Add comments so Select AI understands what this table contains.
 
     >**Note:** Select AI reads table and column comments to understand your schema. Good comments make the AI smarter about your data.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
-    COMMENT ON TABLE loan_applications IS 'Seers Equity loan applications including status tracking and amounts';
+    COMMENT ON TABLE loan_applications IS 'Seer Equity loan applications including status tracking and amounts';
     COMMENT ON COLUMN loan_applications.application_id IS 'Unique application identifier like LOAN-12345';
     COMMENT ON COLUMN loan_applications.applicant_name IS 'Full name of the person or business applying for the loan';
     COMMENT ON COLUMN loan_applications.application_date IS 'Date the loan application was submitted';
@@ -74,7 +111,11 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
+    ![Task Information](./images/task2_2.png " ")
+
 3. Add sample loan applications.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -86,7 +127,11 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
+    ![Task Information](./images/task2_3.png " ")
+
 4. Verify the data exists.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -94,13 +139,17 @@ First, let's create a loan applications table. This gives the agent something re
     </copy>
     ```
 
-## Task 2: Add the Table to Your AI Profile
+    ![Task Information](./images/task2_4.png " ")
+
+## Task 3: Add the Table to Your AI Profile
 
 For Select AI to query your table, the profile needs to know about it. We'll add the table to your existing `genai` profile's object list.
 
 1. Add the LOAN_APPLICATIONS table to the genai profile.
 
     >**Note:** The `object_list` tells Select AI which tables it can query. Without this, the AI won't know your table exists.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -115,19 +164,26 @@ For Select AI to query your table, the profile needs to know about it. We'll add
     </copy>
     ```
 
-2. Verify the profile has the table.
+    ![Task Information](./images/task3_1.png " ")
 
-    ```sql
-    <copy>
-    SELECT profile_name, status FROM USER_CLOUD_AI_PROFILES WHERE profile_name = 'genai';
-    </copy>
-    ```
+## Task 4: Create the Agent Components
 
-## Task 3: Create the Agent Components
+Now let's build an agent that can query this data. An agent system has four components that work together:
 
-Now let's build an agent that can query this data. We need four pieces: a tool, an agent, a task, and a team.
+| Component | Purpose |
+|-----------|--------|
+| **Tool** | Defines a specific capability the agent can use (like querying a database) |
+| **Agent** | The AI personality with a role and behavior guidelines |
+| **Task** | Instructions that tell the agent what to do and which tools to use |
+| **Team** | Brings agents and tasks together so you can run them |
 
-1. Create the SQL tool. This gives the agent the ability to query your database.
+Think of it like hiring a new employee: the **tool** is the software they'll use, the **agent** is the person with their job title and responsibilities, the **task** is their job description, and the **team** is the department that coordinates their work.
+
+1. Create the SQL tool.
+
+    A **tool** gives the agent a specific capability. Without tools, an agent can only talk, it can't actually do anything. This SQL tool connects to your AI profile and allows the agent to query the loan applications table. The description helps the agent understand when and how to use this tool.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -143,7 +199,13 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-2. Create the agent with a clear role.
+    ![Task Information](./images/task4_1.png " ")
+
+2. Create the agent.
+
+    An **agent** is the AI entity that will handle requests. The `role` attribute shapes the agent's personality and behavior, it's like giving an employee their job title and explaining how they should approach their work. Here we're telling the agent it's a loan application assistant and should always use its tools rather than asking follow-up questions.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -151,7 +213,7 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'LOAN_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan application assistant for Seers Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find."}',
+                            "role": "You are a loan application assistant for Seer Equity. Always use the LOAN_LOOKUP tool to query the database and provide answers. Never ask clarifying questions - just query the data and report what you find."}',
             description => 'Agent that looks up loan application information'
         );
     END;
@@ -159,14 +221,20 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-3. Create the task that tells the agent what to do and which tools to use.
+    ![Task Information](./images/task4_2.png " ")
+
+3. Create the task.
+
+    A **task** is a set of instructions that tells the agent exactly what to do when it receives a request. It also specifies which tools the agent can use for this task. The `{query}` placeholder is where the user's question gets inserted. Think of the task as the detailed job description that guides the agent's work.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'LOAN_TASK',
-            attributes  => '{"instruction": "Answer questions about Seers Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
+            attributes  => '{"instruction": "Answer questions about Seer Equity loan applications by querying the LOAN_APPLICATIONS table using the LOAN_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
                             "tools": ["LOAN_LOOKUP"]}',
             description => 'Task for handling loan application inquiries'
         );
@@ -175,7 +243,13 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-4. Create the team that connects everything together.
+    ![Task Information](./images/task4_3.png " ")
+
+4. Create the team.
+
+    A **team** is the container that brings everything together. It assigns agents to tasks and defines how they coordinate. The `process` attribute determines how work flows, "sequential" means agents work one after another (in this case we only have one agent). You interact with the team, and the team orchestrates which agent handles your request using which task.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -191,7 +265,11 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
+    ![Task Information](./images/task4_4.png " ")
+
 5. Verify everything is created.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -202,11 +280,15 @@ Now let's build an agent that can query this data. We need four pieces: a tool, 
     </copy>
     ```
 
-## Task 4: See the Agent in Action
+    ![Task Information](./images/task4_5.png " ")
+
+## Task 5: See the Agent in Action
 
 Now let's see the difference between an agent and a chatbot.
 
 1. Set the team for your session.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -214,9 +296,13 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_1.png " ")
+
 2. Ask about a specific loan application.
 
     **This is the key moment.** The agent doesn't explain *how* to check loan status. It actually queries the loan_applications table and tells you the answer.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -224,7 +310,11 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_2.png " ")
+
 3. Ask about another application.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -232,7 +322,11 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
+    ![Task Information](./images/task5_3.png " ")
+
 4. Ask a question that requires reasoning over data.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -240,11 +334,15 @@ Now let's see the difference between an agent and a chatbot.
     </copy>
     ```
 
-## Task 5: See What Happened Behind the Scenes
+    ![Task Information](./images/task5_4.png " ")
+
+## Task 6: See What Happened Behind the Scenes
 
 The agent used a tool to get real answers. Let's see the evidence.
 
 1. Check the tool execution history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -258,7 +356,11 @@ The agent used a tool to get real answers. Let's see the evidence.
     </copy>
     ```
 
+    ![Task Information](./images/task6_1.png " ")
+
 2. Check the team execution history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -272,12 +374,14 @@ The agent used a tool to get real answers. Let's see the evidence.
     </copy>
     ```
 
-## Task 6: The Chatbot vs Agent Difference
+    ![Task Information](./images/task6_2.png " ")
+
+## Task 7: The Chatbot vs Agent Difference
 
 **A chatbot would say:**
 
 > "To check the status of a loan application, you would typically:
-> 1. Log into the Seers Equity portal
+> 1. Log into the Seer Equity portal
 > 2. Navigate to Application Status
 > 3. Enter your application ID
 > 4. View the current status"
@@ -288,24 +392,24 @@ The agent used a tool to get real answers. Let's see the evidence.
 
 Same question. One explains the process. The other runs it.
 
-That's what makes an agent an agent. It doesn't just know things. It *does* things. And that's exactly what Seers Equity's clients need.
+That's what makes an agent an agent. It doesn't just know things. It *does* things. And that's exactly what Seer Equity's clients need.
 
 ## Summary
 
 In this lab, you experienced the fundamental nature of AI agents:
 
 * Created a loan applications table with descriptive comments for Select AI
-* Added the table to your AI profile's object_list
+* Added the table to your AI profile's `object_list`
 * Built an agent with access to a SQL tool
 * Watched it query real loan data to answer questions
 * Saw the execution history proving it took action
 * Understood the difference between explanation and execution
 
-**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Seers Equity, and for your business.
+**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Seer Equity, and for your business.
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
@@ -313,6 +417,8 @@ In this lab, you experienced the fundamental nature of AI agents:
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -323,3 +429,5 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('LOAN_LOOKUP', TRUE);
 DROP TABLE loan_applications PURGE;
 </copy>
 ```
+
+![Cleanup](./images/cleanup.png " ")

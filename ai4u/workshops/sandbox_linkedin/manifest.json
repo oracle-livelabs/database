@@ -1,0 +1,26 @@
+{
+    "workshoptitle": "AI4U",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "About this workshop",
+            "filename": "../../introduction/introduction2.md"
+        },
+        {
+            "title": "Getting Started",
+            "description": "Access your environment",
+            "filename": "../../getting-started/getting_started.md"
+        },
+        {
+            "title": "Lab 1: What Is an AI Agent, Really?",
+            "description": "See an agent in action, experience its limitations",
+            "filename": "../../what-is-agent/what-is-agent.md"
+        },
+        {
+            "title": "Lab 2: Why Agents Beat Zero Shot Prompts",
+            "description": "Compare zero-shot vs agent execution",
+            "filename": "../../agents-vs-zero-shot/agents-vs-zero-shot.md"
+        }
+    ]
+}

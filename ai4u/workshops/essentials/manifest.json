@@ -8,6 +8,11 @@
             "filename": "../../introduction/introduction.md"
         },
         {
+            "title": "Getting Started",
+            "description": "Access your environment",
+            "filename": "../../getting-started/getting_started.md"
+        },
+        {
             "title": "Lab 1: What Is an AI Agent?",
             "description": "See an agent in action",
             "filename": "../../what-is-agent/what-is-agent.md"

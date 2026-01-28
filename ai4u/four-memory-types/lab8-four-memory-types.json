@@ -1,132 +1,526 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## The Four Types of Agent Memory at Seers Equity\n\n### The Business Problem\n\nTwo similar business loan applications came in last quarter at Seers Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.\n\n*\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"*\n\nThe problem isn't just forgetting clients—it's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.\n\n### What You'll Learn\n\nAgents need four types of memory, just like people:\n\n| Memory Type | Purpose | Example at Seers Equity |\n|-------------|---------|-------------------------|\n| **Short-term context** | What's happening right now | \"Working on LOAN-5678 for Acme Industries\" |\n| **Long-term facts** | Stable client information | \"Acme has 15% rate exception\" |\n| **Decisions/outcomes** | What we decided before | \"Approved similar loan last quarter, client paid on time\" |\n| **Reference knowledge** | Corporate policies | \"Preferred rate is 7.9% for 750+ credit\" |\n\nIn this lab, you'll build all four types and see how they work together to make agents consistent and explainable.\n\n**What you'll build:** A complete four-type memory architecture for loan decisions.\n\n**Estimated Time:** 15 minutes",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## The Four Types of Agent Memory at Seer Equity\n\n### The Business Problem\n\nTwo similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.\n\n*\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"*\n\nThe problem isn't just forgetting clients. It's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.\n\n### What You'll Learn\n\nAgents need four types of memory, just like people:\n\n| Memory Type | Purpose | Example at Seer Equity |\n|-------------|---------|-------------------------|\n| **Short-term context** | What's happening right now | \"Working on LOAN-5678 for Sarah Chen\" |\n| **Long-term facts** | Stable client information | \"Sarah Chen has 15% rate exception\" |\n| **Decisions/outcomes** | What we decided before | \"Approved similar loan last quarter, client paid on time\" |\n| **Reference knowledge** | Corporate policies | \"Preferred rate is 7.9% for 750+ credit\" |\n\nIn this lab, you'll build all four types and see how they work together to make agents consistent and explainable.\n\n**What you'll build:** A complete four-type memory architecture for loan decisions.\n\n**Estimated Time:** 15 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Four Types of Agent Memory at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Two similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.</p>\n\n<p><em>\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"</em></p>\n\n<p>The problem isn't just forgetting clients. It's forgetting <em>decisions</em>. Without memory of what worked before, every loan decision starts from scratch.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>Agents need four types of memory, just like people:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Memory Type</th><th style=\"padding: 8px;\">Purpose</th><th style=\"padding: 8px;\">Example at Seer Equity</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>Short-term context</strong></td><td style=\"padding: 8px;\">What's happening right now</td><td style=\"padding: 8px;\">\"Working on LOAN-5678 for Sarah Chen\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Long-term facts</strong></td><td style=\"padding: 8px;\">Stable client information</td><td style=\"padding: 8px;\">\"Sarah Chen has 15% rate exception\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Decisions/outcomes</strong></td><td style=\"padding: 8px;\">What we decided before</td><td style=\"padding: 8px;\">\"Approved similar loan last quarter, client paid on time\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Reference knowledge</strong></td><td style=\"padding: 8px;\">Corporate policies</td><td style=\"padding: 8px;\">\"Preferred rate is 7.9% for 750+ credit\"</td></tr>\n</table>\n\n<p>In this lab, you'll build all four types and see how they work together to make agents consistent and explainable.</p>\n\n<p><strong>What you'll build:</strong> A complete four-type memory architecture for loan decisions.</p>\n\n<p><strong>Estimated Time:</strong> 15 minutes</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n## Create the Memory Tables\n\nYou'll create two tables:\n\n1. **agent_memory** — A unified table for short-term, long-term, and decision memory with a type classifier\n2. **reference_knowledge** — A separate table for loan policies (agents can read but not modify)\n\nNotice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Memory Tables</h2>\n\n<p>You'll create two tables:</p>\n\n<ol>\n<li><strong>agent_memory</strong> — A unified table for short-term, long-term, and decision memory with a type classifier</li>\n<li><strong>reference_knowledge</strong> — A separate table for loan policies (agents can read but not modify)</li>\n</ol>\n\n<p>Notice the <code>memory_type</code> constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nCREATE TABLE agent_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    memory_type    VARCHAR2(20) NOT NULL,  -- SHORTTERM, LONGTERM, DECISION, REFERENCE\n    session_id     VARCHAR2(100),          -- For short-term context\n    entity_id      VARCHAR2(100),          -- What this is about (client or loan)\n    content        JSON NOT NULL,\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,\n    expires_at     TIMESTAMP,              -- For short-term context expiration\n    CONSTRAINT chk_memory_type CHECK (memory_type IN ('SHORTTERM', 'LONGTERM', 'DECISION', 'REFERENCE'))\n);\n\nCREATE INDEX idx_memory_type ON agent_memory(memory_type);\nCREATE INDEX idx_memory_entity ON agent_memory(entity_id);\nCREATE INDEX idx_memory_session ON agent_memory(session_id);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create the Reference Knowledge Table\n\nReference knowledge is different—it's maintained by humans, not agents. Agents can read Seers Equity's loan policies but shouldn't modify them.\n\nNotice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Reference Knowledge Table\n\nReference knowledge is different. It's maintained by humans, not agents. Agents can read Seer Equity's loan policies but shouldn't modify them.\n\nNotice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Reference Knowledge Table</h2>\n\n<p>Reference knowledge is different. It's maintained by humans, not agents. Agents can read Seer Equity's loan policies but shouldn't modify them.</p>\n\n<p>Notice the <code>updated_by</code> column tracks who changed the policy. This is corporate knowledge, not agent learning.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nCREATE TABLE reference_knowledge (\n    ref_id       RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    category     VARCHAR2(100) NOT NULL,\n    name         VARCHAR2(200) NOT NULL,\n    content      JSON NOT NULL,\n    is_active    NUMBER(1) DEFAULT 1,\n    created_at   TIMESTAMP DEFAULT SYSTIMESTAMP,\n    updated_by   VARCHAR2(100)  -- Humans update this, not agents\n);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create Short-Term Context Functions\n\nShort-term context holds what's happening right now—the active information for completing the current loan task.\n\n- **set_context** — Store context for a session/entity (replaces old context, expires in 1 hour)\n- **get_context** — Retrieve context for a session\n\nThis is like a loan officer's working memory—what they're actively thinking about while processing an application.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create Short-Term Context Functions\n\nShort-term context holds what's happening right now: the active information for completing the current loan task.\n\n- **set_context** — Store context for a session/entity (replaces old context, expires in 1 hour)\n- **get_context** — Retrieve context for a session\n\nThis is like a loan officer's working memory: what they're actively thinking about while processing an application.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Short-Term Context Functions</h2>\n\n<p>Short-term context holds what's happening right now: the active information for completing the current loan task.</p>\n\n<ul>\n<li><strong>set_context</strong> — Store context for a session/entity (replaces old context, expires in 1 hour)</li>\n<li><strong>get_context</strong> — Retrieve context for a session</li>\n</ul>\n\n<p>This is like a loan officer's working memory: what they're actively thinking about while processing an application.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Store short-term context\nCREATE OR REPLACE FUNCTION set_context(\n    p_session_id  VARCHAR2,\n    p_entity_id   VARCHAR2,\n    p_context     VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    -- Clear old context for this session/entity\n    DELETE FROM agent_memory \n    WHERE memory_type = 'SHORTTERM' \n    AND session_id = p_session_id \n    AND entity_id = p_entity_id;\n    \n    -- Store new context (expires in 1 hour)\n    INSERT INTO agent_memory (memory_type, session_id, entity_id, content, expires_at)\n    VALUES (\n        'SHORTTERM', \n        p_session_id, \n        p_entity_id,\n        JSON_OBJECT('context' VALUE p_context, 'set_at' VALUE TO_CHAR(SYSTIMESTAMP, 'HH24:MI:SS')),\n        SYSTIMESTAMP + INTERVAL '1' HOUR\n    );\n    COMMIT;\n    RETURN 'Context set for ' || p_entity_id;\nEND;\n/\n\n-- Get short-term context\nCREATE OR REPLACE FUNCTION get_context(\n    p_session_id VARCHAR2,\n    p_entity_id  VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    v_result CLOB := '';\nBEGIN\n    FOR rec IN (\n        SELECT entity_id, JSON_VALUE(content, '$.context') as context\n        FROM agent_memory\n        WHERE memory_type = 'SHORTTERM'\n        AND session_id = p_session_id\n        AND (p_entity_id IS NULL OR entity_id = p_entity_id)\n        AND (expires_at IS NULL OR expires_at > SYSTIMESTAMP)\n    ) LOOP\n        v_result := v_result || rec.entity_id || ': ' || rec.context || CHR(10);\n    END LOOP;\n    \n    IF v_result IS NULL THEN\n        RETURN 'No active context found.';\n    END IF;\n    RETURN v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Test Short-Term Context\n\nSet context for a loan processing session. Imagine a loan officer is working on an application—you need to track the client and the application details.\n\nYou should see both context items returned: the client info and the loan details.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Short-Term Context</h2>\n\n<p>Set context for a loan processing session. Imagine a loan officer is working on an application—you need to track the client and the application details.</p>\n\n<p>You should see both context items returned: the client info and the loan details.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Set context for current loan task\nSELECT set_context('SESSION-001', 'current_client', 'Acme Industries, Preferred tier, discussing business expansion loan') FROM DUAL;\nSELECT set_context('SESSION-001', 'current_application', 'LOAN-5678, $250K business loan, needs financial statements and business plan') FROM DUAL;\n\n-- Retrieve context\nSELECT get_context('SESSION-001') FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Set context for current loan task\nSELECT set_context('SESSION-001', 'current_client', 'Sarah Chen, Preferred tier, discussing personal loan') FROM DUAL;\nSELECT set_context('SESSION-001', 'current_application', 'LOAN-5678, $75K personal loan, needs by Friday') FROM DUAL;\n\n-- Retrieve context\nSELECT get_context('SESSION-001') FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create Long-Term Facts Functions\n\nLong-term facts are stable information about clients that the agent should rely on across all tasks and sessions.\n\n- **store_fact** — Store a fact about a client with an optional category\n- **get_facts** — Retrieve facts about a client, optionally filtered by category\n\nUnlike short-term context, these don't expire. Once Seers Equity learns something about a client, the agent remembers forever.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create Long-Term Facts Functions\n\nLong-term facts are stable information about clients that the agent should rely on across all tasks and sessions.\n\n- **store_fact** — Store a fact about a client with an optional category\n- **get_facts** — Retrieve facts about a client, optionally filtered by category\n\nUnlike short-term context, these don't expire. Once Seer Equity learns something about a client, the agent remembers forever.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Long-Term Facts Functions</h2>\n\n<p>Long-term facts are stable information about clients that the agent should rely on across all tasks and sessions.</p>\n\n<ul>\n<li><strong>store_fact</strong> — Store a fact about a client with an optional category</li>\n<li><strong>get_facts</strong> — Retrieve facts about a client, optionally filtered by category</li>\n</ul>\n\n<p>Unlike short-term context, these don't expire. Once Seer Equity learns something about a client, the agent remembers forever.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Store a long-term fact\nCREATE OR REPLACE FUNCTION store_fact(\n    p_entity_id   VARCHAR2,\n    p_fact        VARCHAR2,\n    p_category    VARCHAR2 DEFAULT 'general'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO agent_memory (memory_type, entity_id, content)\n    VALUES (\n        'LONGTERM',\n        p_entity_id,\n        JSON_OBJECT(\n            'fact'     VALUE p_fact,\n            'category' VALUE p_category,\n            'learned'  VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        )\n    );\n    COMMIT;\n    RETURN 'Fact stored about ' || p_entity_id || ': ' || p_fact;\nEND;\n/\n\n-- Retrieve facts about an entity\nCREATE OR REPLACE FUNCTION get_facts(\n    p_entity_id VARCHAR2,\n    p_category  VARCHAR2 DEFAULT NULL\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            JSON_VALUE(content, '$.fact') as fact,\n            JSON_VALUE(content, '$.category') as category\n        FROM agent_memory\n        WHERE memory_type = 'LONGTERM'\n        AND entity_id = p_entity_id\n        AND (p_category IS NULL OR JSON_VALUE(content, '$.category') = p_category)\n        ORDER BY created_at DESC\n    ) LOOP\n        v_result := v_result || '- ' || rec.fact || ' (' || rec.category || ')' || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No facts found for ' || p_entity_id;\n    END IF;\n    RETURN 'Found ' || v_count || ' facts about ' || p_entity_id || ':' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Store Long-Term Facts About Seers Equity Clients\n\nStore several facts about two clients. Notice the different categories: contact_preference, rate_exception, relationship, requirement.\n\nThese facts will persist across all sessions. Every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Store Long-Term Facts About Seer Equity Clients\n\nStore several facts about two clients. Notice the different categories: contact_preference, rate_exception, relationship, requirement.\n\nThese facts will persist across all sessions. Every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Store Long-Term Facts About Seer Equity Clients</h2>\n\n<p>Store several facts about two clients. Notice the different categories: contact_preference, rate_exception, relationship, requirement.</p>\n\n<p>These facts will persist across all sessions. Every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Facts about Seers Equity clients\nSELECT store_fact('CLIENT-001', 'Prefers email contact, CFO Sarah Chen handles loan communications', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Pacific timezone, best contact time is 9-11am PT', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Approved for 15% rate exception due to 5-year relationship', 'rate_exception') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Client since 2019, excellent payment history on 3 previous loans', 'relationship') FROM DUAL;\n\nSELECT store_fact('CLIENT-002', 'Requires board approval for loans over $500K', 'requirement') FROM DUAL;\nSELECT store_fact('CLIENT-002', 'Annual loan review scheduled for March', 'schedule') FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Facts about Seer Equity clients\nSELECT store_fact('CLIENT-001', 'Prefers email contact, never phone', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Pacific timezone, best contact time is 9-11am PT', 'contact_preference') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Approved for 15% rate exception due to 6-year relationship', 'rate_exception') FROM DUAL;\nSELECT store_fact('CLIENT-001', 'Client since 2018, excellent payment history on 3 previous loans', 'relationship') FROM DUAL;\n\nSELECT store_fact('CLIENT-002', 'Requires all documents via secure portal', 'requirement') FROM DUAL;\nSELECT store_fact('CLIENT-002', 'Annual loan review scheduled for March', 'schedule') FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Retrieve Long-Term Facts\n\nQuery the facts you stored. First get all facts about CLIENT-001, then filter to just contact preferences.\n\nYou should see 4 facts for CLIENT-001, and 2 when filtered to just contact_preference.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Retrieve Long-Term Facts</h2>\n\n<p>Query the facts you stored. First get all facts about CLIENT-001, then filter to just contact preferences.</p>\n\n<p>You should see 4 facts for CLIENT-001, and 2 when filtered to just contact_preference.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Get all facts about a client\nSELECT get_facts('CLIENT-001') as facts FROM DUAL;\n\n-- Get only contact preferences\nSELECT get_facts('CLIENT-001', 'contact_preference') as contact_prefs FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Create Decision/Outcome Functions\n\nDecisions and outcomes are the audit trail—what the agent decided on past loans and what happened as a result.\n\n- **record_decision** — Store a loan decision with its situation, action, outcome, and success flag\n- **find_past_decisions** — Search for similar loan situations to learn from past experience\n\nThis is how agents learn from experience. When facing a new loan situation, they can check what worked (or didn't work) before.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Decision/Outcome Functions</h2>\n\n<p>Decisions and outcomes are the audit trail—what the agent decided on past loans and what happened as a result.</p>\n\n<ul>\n<li><strong>record_decision</strong> — Store a loan decision with its situation, action, outcome, and success flag</li>\n<li><strong>find_past_decisions</strong> — Search for similar loan situations to learn from past experience</li>\n</ul>\n\n<p>This is how agents learn from experience. When facing a new loan situation, they can check what worked (or didn't work) before.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Record a loan decision\nCREATE OR REPLACE FUNCTION record_decision(\n    p_entity_id   VARCHAR2,\n    p_situation   VARCHAR2,\n    p_decision    VARCHAR2,\n    p_outcome     VARCHAR2,\n    p_success     VARCHAR2 DEFAULT 'true'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO agent_memory (memory_type, entity_id, content)\n    VALUES (\n        'DECISION',\n        p_entity_id,\n        JSON_OBJECT(\n            'situation' VALUE p_situation,\n            'decision'  VALUE p_decision,\n            'outcome'   VALUE p_outcome,\n            'success'   VALUE (CASE WHEN UPPER(p_success) = 'TRUE' THEN true ELSE false END),\n            'recorded'  VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        )\n    );\n    COMMIT;\n    RETURN 'Decision recorded: ' || p_decision;\nEND;\n/\n\n-- Find similar past decisions\nCREATE OR REPLACE FUNCTION find_past_decisions(\n    p_situation VARCHAR2,\n    p_limit     NUMBER DEFAULT 3\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            entity_id,\n            JSON_VALUE(content, '$.situation') as situation,\n            JSON_VALUE(content, '$.decision') as decision,\n            JSON_VALUE(content, '$.outcome') as outcome,\n            JSON_VALUE(content, '$.success') as success\n        FROM agent_memory\n        WHERE memory_type = 'DECISION'\n        AND (\n            UPPER(JSON_VALUE(content, '$.situation')) LIKE '%' || UPPER(p_situation) || '%'\n            OR UPPER(p_situation) LIKE '%' || UPPER(SUBSTR(JSON_VALUE(content, '$.situation'), 1, 20)) || '%'\n        )\n        ORDER BY created_at DESC\n        FETCH FIRST p_limit ROWS ONLY\n    ) LOOP\n        v_result := v_result || \n            'Situation: ' || rec.situation || CHR(10) ||\n            'Decision: ' || rec.decision || CHR(10) ||\n            'Outcome: ' || rec.outcome || \n            ' (Success: ' || rec.success || ')' || CHR(10) || '---' || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No similar decisions found.';\n    END IF;\n    RETURN 'Found ' || v_count || ' similar decisions:' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Record Past Loan Decisions\n\nRecord some historical loan decisions—both successful and unsuccessful. This creates a knowledge base the agent can learn from.\n\nNotice the third decision has `success = false`. The agent should learn what NOT to do from failures.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Record Past Loan Decisions\n\nRecord some historical loan decisions, both successful and unsuccessful. This creates a knowledge base the agent can learn from.\n\nNotice the third decision has `success = false`. The agent should learn what NOT to do from failures.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Record Past Loan Decisions</h2>\n\n<p>Record some historical loan decisions, both successful and unsuccessful. This creates a knowledge base the agent can learn from.</p>\n\n<p>Notice the third decision has <code>success = false</code>. The agent should learn what NOT to do from failures.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Record past loan decisions and their outcomes\nSELECT record_decision(\n    'CLIENT-001',\n    'Preferred client requested rate exception for expansion loan',\n    'Approved 15% rate discount based on 5-year relationship and payment history',\n    'Client accepted loan terms, successful disbursement, on-time payments',\n    'true'\n) FROM DUAL;\n\nSELECT record_decision(\n    'CLIENT-002',\n    'Standard client requested larger loan than credit profile supported',\n    'Offered smaller loan amount with path to increase after 12 months good standing',\n    'Client accepted modified terms, built relationship for future business',\n    'true'\n) FROM DUAL;\n\nSELECT record_decision(\n    'CLIENT-003',\n    'Client with marginal credit requested business loan',\n    'Denied application citing credit score without offering alternatives',\n    'Client went to competitor, later became successful business we lost',\n    'false'\n) FROM DUAL;\n\nSELECT record_decision(\n    'CLIENT-003',\n    'Client with marginal credit requested business loan',\n    'Offered secured loan option with credit-building program',\n    'Client accepted, improved credit over 18 months, now Preferred tier',\n    'true'\n) FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Record past loan decisions and their outcomes\nSELECT record_decision(\n    'CLIENT-001',\n    'Preferred client requested rate exception for personal loan',\n    'Approved 15% rate discount based on 6-year relationship and payment history',\n    'Client accepted loan terms, successful disbursement, on-time payments',\n    'true'\n) FROM DUAL;\n\nSELECT record_decision(\n    'CLIENT-002',\n    'Standard client requested larger loan than credit profile supported',\n    'Offered smaller loan amount with path to increase after 12 months good standing',\n    'Client accepted modified terms, built relationship for future business',\n    'true'\n) FROM DUAL;\n\nSELECT record_decision(\n    'CLIENT-003',\n    'Client with marginal credit requested business loan',\n    'Denied application citing credit score without offering alternatives',\n    'Client went to competitor, later became successful business we lost',\n    'false'\n) FROM DUAL;\n\nSELECT record_decision(\n    'CLIENT-003',\n    'Client with marginal credit requested business loan',\n    'Offered secured loan option with credit-building program',\n    'Client accepted, improved credit over 18 months, now Preferred tier',\n    'true'\n) FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Search for Similar Past Decisions\n\nSearch for decisions related to \"rate exception\" and \"marginal credit\". The agent uses this to learn from past experience.\n\nFor rate exception, you should find the successful decision. For marginal credit, you should find BOTH the failed and successful approaches—a warning about what not to do AND what works.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Search for Similar Past Decisions</h2>\n\n<p>Search for decisions related to \"rate exception\" and \"marginal credit\". The agent uses this to learn from past experience.</p>\n\n<p>For rate exception, you should find the successful decision. For marginal credit, you should find BOTH the failed and successful approaches—a warning about what not to do AND what works.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Find decisions about rate exceptions\nSELECT find_past_decisions('rate exception') as rate_decisions FROM DUAL;\n\n-- Find decisions about marginal credit\nSELECT find_past_decisions('marginal credit') as credit_decisions FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create Reference Knowledge Functions\n\nReference knowledge is Seers Equity's policies, procedures, and underwriting guidelines maintained by humans. Agents consult it but don't modify it.\n\n- **add_reference** — Admin function to add policies (tracks who added it)\n- **get_reference** — Agent function to look up policies\n\nThis separation is important: agents should follow corporate lending policies, not rewrite them.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create Reference Knowledge Functions\n\nReference knowledge is Seer Equity's policies, procedures, and underwriting guidelines maintained by humans. Agents consult it but don't modify it.\n\n- **add_reference** — Admin function to add policies (tracks who added it)\n- **get_reference** — Agent function to look up policies\n\nThis separation is important: agents should follow corporate lending policies, not rewrite them.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Reference Knowledge Functions</h2>\n\n<p>Reference knowledge is Seer Equity's policies, procedures, and underwriting guidelines maintained by humans. Agents consult it but don't modify it.</p>\n\n<ul>\n<li><strong>add_reference</strong> — Admin function to add policies (tracks who added it)</li>\n<li><strong>get_reference</strong> — Agent function to look up policies</li>\n</ul>\n\n<p>This separation is important: agents should follow corporate lending policies, not rewrite them.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Add reference knowledge (admin function)\nCREATE OR REPLACE FUNCTION add_reference(\n    p_category    VARCHAR2,\n    p_name        VARCHAR2,\n    p_content     VARCHAR2,\n    p_updated_by  VARCHAR2 DEFAULT USER\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO reference_knowledge (category, name, content, updated_by)\n    VALUES (\n        p_category,\n        p_name,\n        JSON_OBJECT('text' VALUE p_content),\n        p_updated_by\n    );\n    COMMIT;\n    RETURN 'Reference added: ' || p_name;\nEND;\n/\n\n-- Get reference knowledge (agent reads this)\nCREATE OR REPLACE FUNCTION get_reference(\n    p_category VARCHAR2 DEFAULT NULL,\n    p_name     VARCHAR2 DEFAULT NULL\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT category, name, JSON_VALUE(content, '$.text') as text\n        FROM reference_knowledge\n        WHERE is_active = 1\n        AND (p_category IS NULL OR UPPER(category) LIKE '%' || UPPER(p_category) || '%')\n        AND (p_name IS NULL OR UPPER(name) LIKE '%' || UPPER(p_name) || '%')\n        ORDER BY category, name\n    ) LOOP\n        v_result := v_result || '[' || rec.category || '] ' || rec.name || ':' || CHR(10) ||\n                   rec.text || CHR(10) || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No reference knowledge found.';\n    END IF;\n    RETURN 'Found ' || v_count || ' references:' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Add Seers Equity Reference Knowledge (Loan Policies)\n\nAdd Seers Equity's loan policies as an administrator would. These are corporate rules the agent must follow.\n\nNotice the different categories: policy, procedure, guideline. This helps agents find the right type of reference.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Add Seer Equity Reference Knowledge (Loan Policies)\n\nAdd Seer Equity's loan policies as an administrator would. These are corporate rules the agent must follow.\n\nNotice the different categories: policy, procedure, guideline. This helps agents find the right type of reference.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Add Seer Equity Reference Knowledge (Loan Policies)</h2>\n\n<p>Add Seer Equity's loan policies as an administrator would. These are corporate rules the agent must follow.</p>\n\n<p>Notice the different categories: policy, procedure, guideline. This helps agents find the right type of reference.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Add Seers Equity loan policies\nSELECT add_reference('policy', 'Personal Loan - Preferred Rate', \n    'Preferred customers (credit score 750+) qualify for personal loans at 7.9% APR. ' ||\n    'Maximum loan amount $100,000. No origination fee. Same-day approval for amounts under $50,000.') FROM DUAL;\n    \nSELECT add_reference('policy', 'Personal Loan - Standard Rate',\n    'Standard customers (credit score 650-749) qualify for personal loans at 12.9% APR. ' ||\n    'Maximum loan amount $50,000. 2% origination fee applies. Approval within 2 business days.') FROM DUAL;\n    \nSELECT add_reference('procedure', 'Risk Escalation Process',\n    'Loan risk escalation: 1) Agent assesses initial eligibility, 2) If DTI exceeds 35%, ' ||\n    'escalate to underwriter, 3) If credit below 650, escalate to senior underwriter, ' ||\n    '4) Applicant may request manager review of any decision.') FROM DUAL;\n    \nSELECT add_reference('guideline', 'Client Communication Standards',\n    'Always be professional and solution-focused. Acknowledge client concerns before ' ||\n    'explaining policy. When declining, always offer alternatives or a path forward.') FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Add Seer Equity loan policies\nSELECT add_reference('policy', 'Personal Loan - Preferred Rate', \n    'Preferred customers (credit score 750+) qualify for personal loans at 7.9% APR. ' ||\n    'Maximum loan amount $100,000. No origination fee. Same-day approval for amounts under $50,000.') FROM DUAL;\n    \nSELECT add_reference('policy', 'Personal Loan - Standard Rate',\n    'Standard customers (credit score 650-749) qualify for personal loans at 12.9% APR. ' ||\n    'Maximum loan amount $50,000. 2% origination fee applies. Approval within 2 business days.') FROM DUAL;\n    \nSELECT add_reference('procedure', 'Risk Escalation Process',\n    'Loan risk escalation: 1) Agent assesses initial eligibility, 2) If DTI exceeds 35%, ' ||\n    'escalate to underwriter, 3) If credit below 650, escalate to senior underwriter, ' ||\n    '4) Applicant may request manager review of any decision.') FROM DUAL;\n    \nSELECT add_reference('guideline', 'Client Communication Standards',\n    'Always be professional and solution-focused. Acknowledge client concerns before ' ||\n    'explaining policy. When declining, always offer alternatives or a path forward.') FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Query Seers Equity Reference Knowledge\n\nLook up loan policies and procedures. This is what the agent does when it needs to know Seers Equity's rules.\n\nYou should see both rate policies when searching for \"policy\", and the escalation steps when searching for \"escalation\".",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Query Seer Equity Reference Knowledge\n\nLook up loan policies and procedures. This is what the agent does when it needs to know Seer Equity's rules.\n\nYou should see both rate policies when searching for \"policy\", and the escalation steps when searching for \"escalation\".",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Query Seer Equity Reference Knowledge</h2>\n\n<p>Look up loan policies and procedures. This is what the agent does when it needs to know Seer Equity's rules.</p>\n\n<p>You should see both rate policies when searching for \"policy\", and the escalation steps when searching for \"escalation\".</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\n-- Get all loan policies\nSELECT get_reference('policy') as policies FROM DUAL;\n\n-- Get escalation procedure\nSELECT get_reference('procedure', 'escalation') as escalation FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## A Complete Example: Using All Four Memory Types\n\nNow let's trace how an agent would use all four types together when handling a loan inquiry at Seers Equity.\n\n**Scenario:** CLIENT-001 calls about a new loan with marginal documentation.\n\n1. **Short-term context** — Record what's happening now\n2. **Long-term facts** — Check what we know about this client\n3. **Reference knowledge** — Check the relevant policy\n4. **Past decisions** — See what worked before in similar situations\n5. **Record the decision** — Log what we decided and what happened\n6. **Store new fact** — Remember anything new we learned",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## A Complete Example: Using All Four Memory Types\n\nNow let's trace how an agent would use all four types together when handling a loan inquiry at Seer Equity.\n\n**Scenario:** CLIENT-001 (Sarah Chen) calls about a new loan request.\n\n1. **Short-term context** — Record what's happening now\n2. **Long-term facts** — Check what we know about this client\n3. **Reference knowledge** — Check the relevant policy\n4. **Past decisions** — See what worked before in similar situations\n5. **Record the decision** — Log what we decided and what happened\n6. **Store new fact** — Remember anything new we learned",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>A Complete Example: Using All Four Memory Types</h2>\n\n<p>Now let's trace how an agent would use all four types together when handling a loan inquiry at Seer Equity.</p>\n\n<p><strong>Scenario:</strong> CLIENT-001 (Sarah Chen) calls about a new loan request.</p>\n\n<ol>\n<li><strong>Short-term context</strong> — Record what's happening now</li>\n<li><strong>Long-term facts</strong> — Check what we know about this client</li>\n<li><strong>Reference knowledge</strong> — Check the relevant policy</li>\n<li><strong>Past decisions</strong> — See what worked before in similar situations</li>\n<li><strong>Record the decision</strong> — Log what we decided and what happened</li>\n<li><strong>Store new fact</strong> — Remember anything new we learned</li>\n</ol>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Scenario: CLIENT-001 inquires about a loan with incomplete documentation\n\n-- 1. Set short-term context (current task)\nSELECT set_context('SESSION-002', 'client', 'CLIENT-001 calling about expansion loan') as step1_context FROM DUAL;\nSELECT set_context('SESSION-002', 'issue', '$150K request but missing 2 years tax returns') as step1_issue FROM DUAL;\n\n-- 2. Check long-term facts (what do we know about them?)\nSELECT get_facts('CLIENT-001') as step2_facts FROM DUAL;\n\n-- 3. Check reference knowledge (what is the policy?)\nSELECT get_reference('policy', 'preferred') as step3_policy FROM DUAL;\n\n-- 4. Find similar past decisions (what worked before?)\nSELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;\n\n-- 5. Agent makes decision based on all of this, then records it\nSELECT record_decision(\n    'CLIENT-001',\n    'Preferred client CLIENT-001 requested $150K expansion loan but missing 2 years tax returns',\n    'Approved conditional on receiving documentation within 30 days, applied 15% rate exception per client history',\n    'Client agreed to conditional approval, documents received in 2 weeks, loan funded successfully',\n    'true'\n) as step5_decision FROM DUAL;\n\n-- 6. Learn new fact if relevant\nSELECT store_fact('CLIENT-001', 'Responsive to documentation requests - provided tax returns within 2 weeks', 'behavior') as step6_new_fact FROM DUAL;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Scenario: CLIENT-001 (Sarah Chen) inquires about a new loan\n\n-- 1. Set short-term context (current task)\nSELECT set_context('SESSION-002', 'client', 'CLIENT-001 Sarah Chen calling about new personal loan') as step1_context FROM DUAL;\nSELECT set_context('SESSION-002', 'issue', '$75K request, wants to know applicable rate') as step1_issue FROM DUAL;\n\n-- 2. Check long-term facts (what do we know about them?)\nSELECT get_facts('CLIENT-001') as step2_facts FROM DUAL;\n\n-- 3. Check reference knowledge (what is the policy?)\nSELECT get_reference('policy', 'preferred') as step3_policy FROM DUAL;\n\n-- 4. Find similar past decisions (what worked before?)\nSELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;\n\n-- 5. Agent makes decision based on all of this, then records it\nSELECT record_decision(\n    'CLIENT-001',\n    'Preferred client Sarah Chen requested $75K personal loan',\n    'Quoted preferred rate 7.9% with 15% rate exception applied per client history',\n    'Client satisfied with rate, proceeded with application same day',\n    'true'\n) as step5_decision FROM DUAL;\n\n-- 6. Learn new fact if relevant\nSELECT store_fact('CLIENT-001', 'Values quick decisions - appreciates same-day processing', 'preference') as step6_new_fact FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## What You Built for Seers Equity\n\nIn this lab, you built the four types of agent memory:\n\n| Memory Type | Purpose | Lifespan | Who Updates |\n|-------------|---------|----------|-------------|\n| **Short-term** | Current loan task context | Expires (1 hour) | Agent |\n| **Long-term** | Client knowledge | Forever | Agent |\n| **Decision** | Loan decision audit trail | Forever | Agent |\n| **Reference** | Loan policies | Forever | Humans |\n\nTogether, these memories make agents:\n- **Consistent** — Same client, same treatment\n- **Contextual** — Aware of current loan situation\n- **Explainable** — Every loan decision is logged\n- **Compliant** — Following human-defined lending policies",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## What You Built for Seer Equity\n\nIn this lab, you built the four types of agent memory:\n\n| Memory Type | Purpose | Lifespan | Who Updates |\n|-------------|---------|----------|-------------|\n| **Short-term** | Current loan task context | Expires (1 hour) | Agent |\n| **Long-term** | Client knowledge | Forever | Agent |\n| **Decision** | Loan decision audit trail | Forever | Agent |\n| **Reference** | Loan policies | Forever | Humans |\n\nTogether, these memories make agents:\n- **Consistent** — Same client, same treatment\n- **Contextual** — Aware of current loan situation\n- **Explainable** — Every loan decision is logged\n- **Compliant** — Following human-defined lending policies",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Built for Seer Equity</h2>\n\n<p>In this lab, you built the four types of agent memory:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Memory Type</th><th style=\"padding: 8px;\">Purpose</th><th style=\"padding: 8px;\">Lifespan</th><th style=\"padding: 8px;\">Who Updates</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>Short-term</strong></td><td style=\"padding: 8px;\">Current loan task context</td><td style=\"padding: 8px;\">Expires (1 hour)</td><td style=\"padding: 8px;\">Agent</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Long-term</strong></td><td style=\"padding: 8px;\">Client knowledge</td><td style=\"padding: 8px;\">Forever</td><td style=\"padding: 8px;\">Agent</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Decision</strong></td><td style=\"padding: 8px;\">Loan decision audit trail</td><td style=\"padding: 8px;\">Forever</td><td style=\"padding: 8px;\">Agent</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Reference</strong></td><td style=\"padding: 8px;\">Loan policies</td><td style=\"padding: 8px;\">Forever</td><td style=\"padding: 8px;\">Humans</td></tr>\n</table>\n\n<p>Together, these memories make agents:</p>\n<ul>\n<li><strong>Consistent</strong> — Same client, same treatment</li>\n<li><strong>Contextual</strong> — Aware of current loan situation</li>\n<li><strong>Explainable</strong> — Every loan decision is logged</li>\n<li><strong>Compliant</strong> — Following human-defined lending policies</li>\n</ul>"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nDROP TABLE agent_memory PURGE;\nDROP TABLE reference_knowledge PURGE;\nDROP FUNCTION set_context;\nDROP FUNCTION get_context;\nDROP FUNCTION store_fact;\nDROP FUNCTION get_facts;\nDROP FUNCTION record_decision;\nDROP FUNCTION find_past_decisions;\nDROP FUNCTION add_reference;\nDROP FUNCTION get_reference;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
   "name": "Lab 8 - Four Memory Types",
@@ -134,6 +528,8 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
-  "config": { "isZeppelinNotebookCronEnable": false },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
   "info": {}
 }

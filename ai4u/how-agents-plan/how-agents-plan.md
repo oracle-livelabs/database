@@ -10,7 +10,7 @@ You'll give an agent a multi-step task and watch how it decomposes the work.
 
 ### The Business Problem
 
-At Seers Equity, preparing for a client call is tedious. A loan officer needs to pull together information from multiple places:
+At Seer Equity, preparing for a client call is tedious. A loan officer needs to pull together information from multiple places:
 
 - **Contact info**: How does this client prefer to be reached?
 - **Loan history**: What applications do they have pending?
@@ -25,7 +25,7 @@ The loan officers need an agent that can plan and execute a multi-step informati
 
 ### What You'll Learn
 
-This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seers Equity's "gathering" problem.
+This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seer Equity's "gathering" problem.
 
 **What you'll build:** A multi-tool agent that plans information retrieval for loan applicants.
 
@@ -40,16 +40,41 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-2 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
-## Task 1: Create a Multi-Tool Agent
+## Task 1: Import the Lab Notebook
 
-To see planning in action, we need an agent with multiple tools. The agent will decide which tools to use and in what order.
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
+
+1. From the Oracle Machine Learning home page, click **Notebooks**.
+
+2. Click **Import** to expand the Import drop down.
+
+3. Select **Git**.
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
+    <copy>
+    https://github.com/davidastart/database/blob/main/ai4u/how-agents-plan/lab3-how-agents-plan.json
+    </copy>
+    ```
+
+5. Click **Ok**.
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+
+## Task 2: Create a Multi-Tool Agent
+
+To see planning in action, we need an agent with multiple tools. When an agent has several tools available, it has to figure out which ones to use and in what order. This decision-making process is what we call "planning."
 
 1. Create sample data tables.
+
+    First, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -84,6 +109,10 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     ```
 
 2. Create tool functions.
+
+    Now we create three different functions, each doing one specific job. This separation is important—instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -135,6 +164,10 @@ To see planning in action, we need an agent with multiple tools. The agent will 
 
 3. Register the tools.
 
+    Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
@@ -171,13 +204,17 @@ To see planning in action, we need an agent with multiple tools. The agent will 
 
 4. Create the agent and team.
 
+    Now we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'PLANNING_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan officer assistant for Seers Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information."}',
+                            "role": "You are a loan officer assistant for Seer Equity. Use your tools to look up applicant information, loan history, and rate eligibility. Always use the tools - never guess or make up information."}',
             description => 'Agent that plans multi-step responses'
         );
     END;
@@ -205,11 +242,13 @@ To see planning in action, we need an agent with multiple tools. The agent will 
     </copy>
     ```
 
-## Task 2: Observe Single-Tool Planning
+## Task 3: Observe Single-Tool Planning
 
 Let's start with a simple request that needs only one tool.
 
 1. Set the team and ask a simple question.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -219,6 +258,8 @@ Let's start with a simple request that needs only one tool.
     ```
 
 2. Check the tool history to see the plan execution.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -234,11 +275,13 @@ Let's start with a simple request that needs only one tool.
 
 **Observe:** The agent planned to use just GET_APPLICANT_TOOL because that's all the question required.
 
-## Task 3: Observe Multi-Tool Planning
+## Task 4: Observe Multi-Tool Planning
 
 Now let's ask a question that requires multiple tools, just like a loan officer preparing for a client call.
 
 1. Ask a complex question.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -247,6 +290,8 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     ```
 
 2. Check the tool history.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -267,11 +312,13 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
 3. Notice the sequence—the agent determined the logical order.
 
-## Task 4: See How Instructions Shape Planning
+## Task 5: See How Instructions Shape Planning
 
 The task instruction guides how the agent plans. Let's modify it.
 
 1. Create a more specific task.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -301,6 +348,8 @@ The task instruction guides how the agent plans. Let's modify it.
 
 2. Test with the structured instructions.
 
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
@@ -309,6 +358,8 @@ The task instruction guides how the agent plans. Let's modify it.
     ```
 
 3. Check the tool history again.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -323,7 +374,7 @@ The task instruction guides how the agent plans. Let's modify it.
 
 **Observe:** The agent followed the explicit plan: applicant first, then loans, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
 
-## Task 5: Understand Why Planning Matters
+## Task 6: Understand Why Planning Matters
 
 Planning provides:
 
@@ -333,6 +384,8 @@ Planning provides:
 4. **Control**: You shape the plan through instructions
 
 Query the complete execution sequence:
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -355,11 +408,11 @@ In this lab, you observed how agents plan their work:
 * Saw how multi-step questions trigger multi-tool plans
 * Learned how instructions shape the planning process
 
-**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Seers Equity, this means loan officers get complete client summaries in seconds, not minutes.
+**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Seer Equity, this means loan officers get complete client summaries in seconds, not minutes.
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
@@ -367,6 +420,8 @@ In this lab, you observed how agents plan their work:
 * **Last Updated By/Date** - David Start, January 2026
 
 ## Cleanup (Optional)
+
+> This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>

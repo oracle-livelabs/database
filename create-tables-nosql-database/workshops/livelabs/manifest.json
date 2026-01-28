@@ -24,7 +24,8 @@
             "Python" : "Python",
             "Go" : "Go",
             "Node.js" :"Node.js",
-            "C-sharp" : "C#"
+            "C-sharp" : "C#",
+            "Rust" : "Rust"
             }
         },
         {

@@ -17,7 +17,7 @@ In this lab, you will be guided through the following task:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab 1-3
+- HeatWave instance and Compute instance exist
 
 ## Task 1: Stop the HeatWave instance
 
@@ -61,4 +61,4 @@ In this lab, you will be guided through the following task:
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, April 2025
+- **Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
