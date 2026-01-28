@@ -82,18 +82,16 @@ Add **Ingress Rules** for TCP:
 
 ![Open Ports](images/open-ports-1-2.png "Open Ports")
 
-![Open Ports pt2](images/open-ports-3.png "Open Ports pt2")
-
 
 ### 5. Create a Public Subnet
 
-![Create a Public Subnet](images/create-subnet.png "Create a Public Subnet")
+![Create a Public Subnet](images/create-pub-subnet.png "Create a Public Subnet")
 
 * CIDR example: `10.0.1.0/24`
 * Associate with the route table pointing to the Internet Gateway
   * The security list updated above
 
-![Configure Public Subnet](images/config-pub-subnet.png "Configure Public Subnet")
+![Configure Public Subnet](images/config-subnet.png "Configure Public Subnet")
 
 ---
 
@@ -199,7 +197,7 @@ Once the job completes successfully:
 * Copy the application URL, which has the format:
 
 ```
-https://<instance_public_ip>:8080/studio/installation
+https://<<instance_public_ip>>:8080/studio/installation
 ```
 
 ![Agent Factory creation succeeded](images/creation-succeeded.png "Agent Factory creation succeeded")
