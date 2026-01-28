@@ -17,8 +17,8 @@ Throughout this workshop we will cover the following. Users are encouraged to sk
 5.  Agents Built from Custom Templates
 6.  Agent Builder: Build Agents From Scratch
 7.  Deploy Agents from the Private Agent Factory
-8.  Add data sources to Private Agent Factory
-9.  Configure SSO on Your Private Agent Factory
+8.  Add Data Sources to Private Agent Factory
+9.  Configure SSO on the Private Agent Factory
 
 ### Prerequisites
 There are no prerequisites. 
