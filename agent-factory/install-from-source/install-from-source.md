@@ -1,55 +1,252 @@
 # Lab 2.2: Installing the Private Agent Factory from Source
 
 ## Introduction
-While the OCI Marketplace provides the fastest path to deployment, installing the **Private Agent Factory** from source offers maximum flexibility and control for advanced users. This method is ideal for those looking to deploy in highly customized environments, integrate with local container registries, or manage the "Agentic Flows" within specific DevOps pipelines.
 
-By installing from source, you are essentially setting up the **Agent Factory Container** and its associated services manually. This path leverages the **Portability** pillar of the **S3P3 Framework**, allowing the factory to run anywhere—whether on-premises or across various cloud providers—by utilizing the **Open Agent Spec**.
+In this lab session, you will learn how to install and deploy Oracle AI Database Private Agent Factory, a no-code platform that enables business users and engineers to rapidly deploy intelligent agents, without writing a single line of code. The platform enables enterprises to launch smart assistants by leveraging Pre-built Agents, Custom-built Agents and End-to-end Workflows.
+
+> **Note:** The tasks in this lab are optional as each contains the deployment instructions for each of the supported platforms. You may choose and follow the task that best suits your environment.
+
+**Estimated time:** 10 minutes.
 
 ### Objectives
-*   Prepare a Linux compute environment for a manual containerized deployment.
-*   Configure the connection to the **Oracle AI Database 26ai** backend.
-*   Manually pull and initialize the Agent Factory application containers.
-*   Configure the environment variables for LLM providers and database schemas.
+
+By the end of this lab, you will be able to:
+
+- Download the installation kit to your environment.
+- Deploy the Oracle AI Database Private Agent Factory application.
+- Access the Oracle AI Database Private Agent Factory application using a web browser.
 
 ### Prerequisites
-*   A compute instance (VM or Bare Metal) running Oracle Linux 8 or 9.
-*   Root or sudo access to install container runtimes (Docker or Podman).
-*   An existing **Oracle AI Database 26ai** (Autonomous or On-Premises) with network visibility to your compute instance.
-*   Minimum system requirements: 8 OCPUs and 64GB of RAM to ensure smooth performance for agent orchestration.
 
-***
+- Access to an Oracle Pluggable Database (PDB) with SYSDBA credentials.
 
-## 1. Prepare the Host Environment
-Unlike the automated Marketplace stack, a manual installation requires you to configure the operating system and container engine yourself.
-1.  **Install Container Engine:** Ensure Docker or Podman is installed and the service is enabled.
-2.  **Network Setup:** Ensure the firewall on your Linux host allows traffic on port **8080** (for the web interface) and that the host can reach the database on port **1521**.
-3.  **Create Installation Directory:** Create a dedicated directory for the Agent Factory files to manage your configuration and persistent data.
+You will need one of the following environments:
 
-## 2. Secure the Source Files
-You will need the official container images and the configuration templates provided by the Oracle AI Database Products team.
-1.  **Pull Images:** Pull the **Agent Factory Container** and the **Ingestion Service** images from the designated repository.
-2.  **Template Configuration:** Copy the sample environment configuration file (often labeled as `.env.template`). This file will serve as the "brain" for your installation, defining how the containers talk to the outside world.
+- An Oracle Linux 8 (OL8) Virtual Machine (VM) with sudo privileges and at least 60 GB of available disk space.
+- A MacOS device with at least 60 GB of available disk space.
+- Access to an OCI tenancy user allowed to deploy VM from Marketplace.
 
-## 3. Configure the Database Backend
-The Private Agent Factory is a "Converged AI Database" application. It requires a schema and a vector store to manage its long-term memory and agentic state.
-1.  **Schema Creation:** Log into your **Autonomous AI Database** and create a dedicated user/schema for the Factory.
-2.  **Assign Permissions:** Grant the necessary privileges for **Vector AI Search** and **Select AI** integration.
-3.  **Connectivity:** Download the Database Wallet (if using Mutual TLS) or prepare the connection string for standard TCP connections.
+## (Optional) Task 1: Linux systems installation
 
-## 4. Initialize the Factory
-With the images pulled and the database ready, you can now launch the services.
-1.  **Edit Environment Variables:** Update your configuration file with:
-    *   `DB_HOST`, `DB_PORT`, and `DB_SERVICE_NAME`.
-    *   `FACTORY_ADMIN_USER` credentials.
-    *   `LLM_PROVIDER_API_KEYS` (e.g., OCI GenAI, OpenAI, or local vLLM endpoints).
-2.  **Start Containers:** Use your container orchestration tool to start the Factory. This will initialize the **Agent Factory Schema** and the **Vector Store** automatically within your database.
-3.  **Verify Services:** Check the container logs to ensure the application server has successfully connected to the 26ai database and is listening on port 8080.
+### Download Linux installation kit
 
-## 5. Final Registration
-Once the containers are running:
-1.  Access the interface via your browser at `http://<your-server-ip>:8080`.
-2.  Follow the on-screen prompts to complete the **User Configuration** and **LLM Management** setup.
-3.  Test the connection to ensure the Factory can successfully execute **SQL Queries** and **Vector Searches** against your database.
+Download the kit from the official Oracle website Visit the [download page](https://www.oracle.com/database/technologies/private-agent-factory-downloads.html#) to get the installation kit.
+
+![Screenshot of the Oracle AI Database Private Agent Factory kit download webpage, showing a description of the platform, download links for Linux X86-64 and ARM 64 installers, and brief details about each option and its compatibility.](images/download-page-a.png)
+
+You may select the option that best suits your working environment:
+
+- The Linux ARM 64-bit platform installer kit `applied_ai_arm64.tar.gz`.
+- The Linux x86-64 platform installer kit `applied_ai.tar.gz`.
+
+After selecting your platform, review and accept the License Agreement and click download.
+
+![Screenshot of the Oracle Software Delivery Cloud page for downloading Oracle AI Database Private Agent Factory. The user can select platforms (Linux x86-64 or Linux ARM 64-bit), accept the license agreement, and choose software version 25.3.0.0.0 to download.](images/download-page-b.png)
+
+### Set up staging environment
+
+The staging location is a specified directory used to store build artifacts (such as executables and configuration files) needed to create Podman images for the application, and it also includes a Makefile to manage the entire deployment lifecycle. Please note that this directory should not be located on an NFS mount.
+
+1. Create the staging location and copy the downloaded kit to the staging location.
+
+    ```bash
+    mkdir <staging_location>
+    cd <staging_location>
+    cp <path to installation kit> .
+    ```
+
+2. Extract the installation kit in the staging location.
+
+   - For ARM 64:
+
+    ```bash
+    <copy>
+    tar xzf applied_ai_arm64.tar.gz
+    </copy>
+    ```
+
+   - For Linux X86-64:
+
+    ```bash
+    <copy>
+    tar xzf applied_ai.tar.gz
+    </copy>
+    ```
+
+    Before you begin the installation process, if you are inside a corporate VPN, make sure to make sure to configure any required proxies to connect externally.
+
+    ```bash
+    export http_proxy=<your-http-proxy>;
+    export https_proxy=<your-https-proxy>;
+    export no_proxy=<your-domain>;
+    export HTTP_PROXY=<your-http-proxy>;
+    export HTTPS_PROXY=<your-https-proxy>;
+    export NO_PROXY=<your-domain>;
+    ```
+
+### Run Interactive Installer
+
+The `interactive_install.sh` script, included in the installation kit, automates nearly all setup tasks, including environment configuration, dependency installation, and application deployment.
+
+> **Caution:** Run the installation as a non-root user. Podman, a critical component, must be set up and used in rootless mode for Agent Factory installations. Do not perform the installation or deployment steps as the root user.
+
+This file will be present in the staging location once you extract the kit.
+
+1. Run the Interactive Installer
+
+   Now that the kit is unpacked, execute the `interactive_install.sh` script from within the same directory.
+
+   ```bash
+   bash interactive_install.sh --reset (Required if previously installed)
+   bash interactive_install.sh
+   ```
+
+2. When the interactive installer prompts you, select the option that best suits your environment:
+
+   ```
+   Are you on a corporate network that requires an HTTP/HTTPS proxy? (y/N): y
+   Enter 1 if you are on a Standard Oracle Linux machine or 2 if you are on OCI: <user_number_choice>
+   Enter your Linux username: <user_linux_username>
+   Does your default /tmp directory have insufficient space (< 100GB)? (y/N): y
+   [INFO] You can get a token from https://container-registry.oracle.com/
+   Username: <email_registered_on_container_registry>
+   Password: <token_from_container_registry>
+   Do you want to proceed with the manual database setup? (y/N): y
+   [WARNING] Step 1: Create the database user.
+   Enter the DB username you wish to create: <your_db_user>
+   Enter the password for the new DB user: <your_db_user_password>
+   [INFO] Run these SQL commands as a SYSDBA user on your PDB (Pluggable Database):
+   ----------------------------------------------------
+   CREATE USER <your_db_user> IDENTIFIED BY <your_db_user_password> DEFAULT TABLESPACE USERS QUOTA unlimited ON USERS;
+   GRANT CONNECT, RESOURCE, CREATE TABLE, CREATE SYNONYM, CREATE DATABASE LINK, CREATE ANY INDEX, INSERT ANY TABLE, CREATE SEQUENCE, CREATE TRIGGER, CREATE USER, DROP USER TO <your_db_user>;
+   GRANT CREATE SESSION TO <your_db_user> WITH ADMIN OPTION;
+   GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO <your_db_user>;
+   GRANT SELECT ON V_$PARAMETER TO <your_db_user>;
+   exit;
+   ----------------------------------------------------
+   Press [Enter] to continue to the next step...
+   Select installation mode:
+   1) prod
+   2) quickstart
+   Enter choice (1 or 2): 1
+   You selected Production mode. Confirm? (yes/no): yes
+   ```
+
+   The following output indicates that the installation was completed successfully.
+
+   ![Successful Prod Installation](images/prod-installation-output.png "Successful Prod Installation")
+
+Once the installation script finishes successfully, you can access the application at the URL `https://<hostname>:8080/studio/` provided by the script and complete the remaining configuration through your web browser.
+
+You may skip the other tasks and proceed to the next lab.
+
+## (Optional) Task 2: Mac systems installation
+
+### Download Mac installation kit
+
+Download the kit from the official Oracle website Visit the [download page](https://www.oracle.com/database/technologies/private-agent-factory-downloads.html#) to get the installation kit.
+
+![Screenshot of the Oracle AI Database Private Agent Factory kit download webpage, showing a description of the platform, download links for Linux X86-64 and ARM 64 installers, and brief details about each option and its compatibility.](images/download-page-a.png)
+
+You may select the option that best suits your working environment:
+
+- The installer kit for Apple Silicon (M-series) Mac: `applied_ai_arm64.tar.gz`.
+- The installer kit for Intel-based Mac systems: `applied_ai.tar.gz`.
+
+After selecting your platform, review and accept the License Agreement and click download.
+
+![Screenshot of the Oracle Software Delivery Cloud page for downloading Oracle AI Database Private Agent Factory. The user can select platforms (Linux x86-64 or Linux ARM 64-bit), accept the license agreement, and choose software version 25.3.0.0.0 to download.](images/download-page-b.png)
+
+### Set up staging environment
+
+The staging location is a specified directory used to store build artifacts (such as executables and configuration files) needed to create Podman images for the application, and it also includes a Makefile to manage the entire deployment lifecycle. Please note that this directory should not be located on an NFS mount.
+
+1. Create the staging location and copy the downloaded kit to the staging location.
+
+    ```bash
+    mkdir <staging_location>
+    cd <staging_location>
+    cp <path to installation kit> .
+    ```
+
+2. Extract the installation kit in the staging location.
+
+   - For Apple M-Series Mac:
+
+    ```bash
+    <copy>
+    tar xzf applied_ai_arm64.tar.gz
+    </copy>
+    ```
+
+   - For Intel Mac:
+
+    ```bash
+    <copy>
+    tar xzf applied_ai.tar.gz
+    </copy>
+    ```
+
+    Before you begin the installation process, if you are inside a corporate VPN, make sure to make sure to configure any required proxies to connect externally.
+
+    ```bash
+    export http_proxy=<your-http-proxy>;
+    export https_proxy=<your-https-proxy>;
+    export no_proxy=<your-domain>;
+    export HTTP_PROXY=<your-http-proxy>;
+    export HTTPS_PROXY=<your-https-proxy>;
+    export NO_PROXY=<your-domain>;
+    ```
+
+### Run Interactive Installer
+
+The `interactive_install.sh` script, included in the installation kit, automates nearly all setup tasks, including environment configuration, dependency installation, and application deployment.
+
+> **Caution:** Run the installation as a non-root user. Podman, a critical component, must be set up and used in rootless mode for Agent Factory installations. Do not perform the installation or deployment steps as the root user.
+
+This file will be present in the staging location once you extract the kit.
+
+1. Run the Interactive Installer
+
+   Now that the kit is unpacked, execute the `interactive_install.sh` script from within the same directory.
+
+   ```bash
+   bash interactive_install.sh --reset (Required if previously installed)
+   bash interactive_install.sh
+   ```
+
+2. When the interactive installer prompts you, select the option that best suits your environment:
+
+   ```
+   Are you on a corporate network that requires an HTTP/HTTPS proxy? (y/N): y
+   Do you want to use the default specs? (Y/n): y
+   Do you want to proceed with the manual database setup? (y/N): y
+   [WARNING] Step 1: Create the database user.
+   Enter the DB username you wish to create: <your_db_user>
+   Enter the password for the new DB user: <your_db_user_password>
+   [INFO] Run these SQL commands as a SYSDBA user on your PDB (Pluggable Database):
+   ----------------------------------------------------
+   CREATE USER <your_db_user> IDENTIFIED BY <your_db_user_password> DEFAULT TABLESPACE USERS QUOTA unlimited ON USERS;
+   GRANT CONNECT, RESOURCE, CREATE TABLE, CREATE SYNONYM, CREATE DATABASE LINK, CREATE ANY INDEX, INSERT ANY TABLE, CREATE SEQUENCE, CREATE TRIGGER, CREATE USER, DROP USER TO <your_db_user>;
+   GRANT CREATE SESSION TO <your_db_user> WITH ADMIN OPTION;
+   GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO <your_db_user>;
+   GRANT SELECT ON V_$PARAMETER TO <your_db_user>;
+   exit;
+   ----------------------------------------------------
+   Press [Enter] to continue to the next step...
+   Select installation mode:
+   1) prod
+   2) quickstart
+   Enter choice (1 or 2): 1
+   You selected Production mode. Confirm? (yes/no): yes
+   ```
+
+   The following output indicates that the installation was completed successfully.
+
+   ![Successful Prod Installation](images/prod-installation-output.png "Successful Prod Installation")
+
+Once the installation script finishes successfully, you can access the application at the URL `https://<hostname>:8080/studio/` provided by the script and complete the remaining configuration through your web browser.
+
 
 ***
 
