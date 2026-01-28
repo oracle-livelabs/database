@@ -1,7 +1,5 @@
 # Installing the Private Agent Factory from the OCI Marketplace
 
-> **Purpose**: This Live Lab walks customers through deploying the **Private Agent Factory** using the OCI Marketplace.
-
 This lab assumes a *public, internet-reachable* deployment for learning purposes. Production deployments typically use private subnets, bastion access, and stricter security controls.
 
 ---
@@ -89,9 +87,9 @@ Add **Ingress Rules** for TCP:
 
 ![Create a Public Subnet](images/create-pub-subnet.png "Create a Public Subnet")
 
-* CIDR example: `10.0.1.0/24`
+* CIDR example: `10.0.0.0/24`
 * Associate with the route table pointing to the Internet Gateway
-  * The security list updated above
+* Use the security list updated in step 4
 
 ![Configure Public Subnet](images/config-subnet.png "Configure Public Subnet")
 
@@ -199,7 +197,7 @@ Once the job completes successfully:
 * Copy the application URL, which has the format:
 
 ```
-https://<<instance_public_ip>>:8080/studio/installation
+https://<< instance_public_ip >>:8080/studio/installation
 ```
 
 ![Agent Factory creation succeeded](images/creation-succeeded.png "Agent Factory creation succeeded")
