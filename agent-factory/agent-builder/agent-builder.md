@@ -20,7 +20,7 @@ To follow this tutorial, you need access to an Oracle AI Database Private Agent 
 > Note: Screenshots in this tutorial use example files and configurations for illustration purposes. When following along, use resources that are available in your environment.
 
 
-## Explore the agent builder
+## Task 1: Explore the agent builder
 
 The Agent Builder enables you to design, orchestrate, and automate complex processes by combining modular components, such as language models, data connectors, APIs, and specialized agents, without the need for extensive programming.
 
@@ -39,7 +39,7 @@ The following table explores the various types of nodes you can use in the Agent
 | Outputs | - *Chat Output*: Renders or returns model/agent responses in a chat interface. |
 | Data | - *Read CSV*: Imports and parses CSV files for batch or tabular data processing. <br>- *File Upload*: Allows users to upload files for processing or analysis. <br>- *SQL Query*: Executes SQL statements against databases; returns results for workflow use. |
 
-## Create a custom workflow
+## Task 2: Create a custom workflow
 
 In this task you will create a simple workflow to gain hands-on experience with the Agent Builder interface and its capabilities.
 
@@ -97,8 +97,12 @@ In this task you will create a simple workflow to gain hands-on experience with 
 
     ![Scientific Paper Summarizer custom flow test screen showing a user input and the Custom Flow Agent's response with a summary and key points about the data source used. The interface includes options to start a new chat or go back to the builder, and the chat input field is visible at the bottom.](images/step5b.png)
 
+**Next Steps:** You may now **proceed to the next lab**
 
 ## Acknowledgements
 
-- **Author** - Emilio Perez, Member of Technical Staff, Database Applied AI
-- **Last Updated By/Date** - Emilio Perez - August 2025
+- **Authors** 
+* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
+- **Last Updated Date** - January 2026
