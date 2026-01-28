@@ -19,7 +19,7 @@ To follow this tutorial, you need access to an Oracle AI Database Private Agent 
 
 > Note: Screenshots in this tutorial use example files and configurations for illustration purposes. When following along, use resources that are available in your environment.
 
-## Create an agent from the Template Gallery
+## Task 1: Create an agent from the Template Gallery
 
 The Template Gallery offers a curated collection of pre-built agentic templates designed to help you get started quickly with intelligent automation.
 
@@ -55,7 +55,7 @@ Templates may include workflows for tasks such as document summarization, meetin
 
     ![Publish Workflow confirmation dialog open in Agent Builder, asking the user to confirm publishing the '23ai Database New Features' workflow. The dialog has Cancel and Confirm buttons, overlaying the workflow editor with connected nodes for File Upload, Prompt, OCI Agent, and Chat Output.](images/publish_workflow.png)
 
-## Interact with the created workflow
+## Task 2: Interact with the created workflow
 
 After publishing the workflow, go to your workflow gallery. In the sidebar, click **My Custom Workflows**.
 
@@ -72,5 +72,8 @@ Interact with your workflow through the chat interface. Example query prompts wi
 
 ## Acknowledgements
 
-- **Author** - Emilio Perez, Member of Technical Staff, Database Applied AI
-- **Last Updated By/Date** - Emilio Perez - August 2025
+- **Authors** 
+* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
+- **Last Updated Date** - January, 2026
