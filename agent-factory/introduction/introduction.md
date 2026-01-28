@@ -1,6 +1,9 @@
 # Introduction to the Private Agent Factory
 
+## Introduction
 Welcome to the first lab of this 10-part workshop series. In this introductory session, you will gain a foundational understanding of the **Oracle AI Database 26ai Private Agent Factory** and how it enables enterprises to transform their data into autonomous action.
+
+**Estimated time:** 5 minutes.
 
 ### Objectives
 Throughout this workshop we will cover the following. Users are encouraged to skip around to the workshops most pertinent to them.
