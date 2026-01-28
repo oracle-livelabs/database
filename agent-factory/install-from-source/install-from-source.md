@@ -250,6 +250,8 @@ Once the installation script finishes successfully, you can access the applicati
 
 ***
 
+**Next Steps:** You may now **proceed to the next lab**
+
 ## Acknowledgements
 
 - **Authors** 
