@@ -8,8 +8,9 @@ Welcome to the first lab of this 10-part workshop series. In this introductory s
 ### Objectives
 Throughout this workshop we will cover the following. Users are encouraged to skip around to the workshops most pertinent to them.
 
-1a.  Installing the Private Agent Factory from the OCI Marketplace
-1b.  Installing the Private Agent Factory from source
+1.  Installation
+    * 1a. Installation of the Private Agent Factory from the OCI Marketplace
+    * 1b. Installation of the Private Agent Factory from source
 2.  Log in to the Private Agent Factory
 3.  Knowledge Agent: A Pre-Built RAG Agent
 4.  Data Analysis Agent: A Pre-Built Database Agent for NL2SQL
@@ -21,8 +22,8 @@ Throughout this workshop we will cover the following. Users are encouraged to sk
 
 ### Prerequisites
 There are no prerequisites. 
-If users have an OCI Tenancy, follow: **Lab 1a. Installing the Private Agent Factory from the OCI Marketplace**. 
-Otherwise follow: **Lab 1b. Installing the Private Agent Factory from source**. 
+If users have an OCI Tenancy, follow: **Lab 1a. Installation of the Private Agent Factory from the OCI Marketplace**. 
+Otherwise follow: **Lab 1b. Installation of the Private Agent Factory from source**. 
 The rest of the workshop will be the same whether the Agent Factory is installed on OCI or not.
 
 ## Task 1: The Big Picture: From AI to Agentic AI
@@ -66,7 +67,7 @@ Before we can build agents, we must establish the infrastructure. In the upcomin
 *   **Marketplace Installation:** Launching the Factory stack directly from the OCI Marketplace.
 *   **Configuration:** Setting up administrative users and connecting your LLM and embedding providers.
 
-**Next Steps:** If you have an OCI tenancy, go to **Lab 1a. Installing the Private Agent Factory from the OCI Marketplace** to get started building agents. If you don't have an OCI tenancy, go to **Lab 1b. Installing the Private Agent Factory from source**. 
+**Next Steps:** If you have an OCI tenancy, go to **Lab 1a. Installation of the Private Agent Factory from the OCI Marketplace** to get started building agents. If you don't have an OCI tenancy, go to **Lab 1b. Installation of the Private Agent Factory from source**. 
 
 ## Acknowledgements
 
