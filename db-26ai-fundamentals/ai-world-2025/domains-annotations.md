@@ -2,14 +2,14 @@
 
 ## Introduction
 
-Welcome to the **Domains and Annotations** lab! In this hands-on session, you'll learn how Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations work together to solve data governance challenges in the LumenCare demo.
+Welcome to the **Domains and Annotations** lab! In this hands-on session, you'll learn how Oracle AI Database 26ai's Data Use Case Domains and Schema Annotations work together to solve data governance challenges in the LumenCare demo.
 
 As organizations like LumenCare manage increasingly complex data requirements—from regulatory compliance to business workflow automation, traditional database comments and constraints fall short. This lab demonstrates how modern database features can enforce data integrity while maintaining comprehensive metadata documentation for any business domain.
 
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to demonstrate Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for any number of reasons.
+The objective of this lab is to demonstrate Oracle AI Database 26ai's Data Use Case Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for any number of reasons.
 
 **The LumenCare Challenge**
 LumenCare's platform faces several common data governance challenges that many organizations encounter:
@@ -23,17 +23,17 @@ LumenCare's platform faces several common data governance challenges that many o
 - Access to Oracle AI Database 26ai.
 - Basic understanding of SQL concepts.
 
-## What are Data Usecase Domains?
-Data Usecase Domains provide reusable data types with built-in constraints and validation rules. Unlike simple data types, domains can enforce complex business rules and provide consistent metadata across your entire schema, reducing development time and ensuring data quality.
+## What are Data Use Case Domains?
+Data Use Case Domains provide reusable data types with built-in constraints and validation rules. Unlike simple data types, domains can enforce complex business rules and provide consistent metadata across your entire schema, reducing development time and ensuring data quality.
 
   ![click SQL](./images/domains-ll.png =28%x*)
 
 
 Data Use Case Domains also provide consistent metadata for development, analytics, and ETL applications and tools, helping to ensure data consistency and validation throughout the schema.
 
-### Understanding the Four Types of Data Usecase Domains
+### Understanding the Four Types of Data Use Case Domains
 
-Before we dive into our healthcare examples, let's understand the four types of Data Usecase Domains available in Oracle AI Database 26ai:
+Before we dive into our healthcare examples, let's understand the four types of Data Use Case Domains available in Oracle AI Database 26ai:
 
 #### 1. Single Column Domain
 * **Purpose**: Applies constraints and validation rules to a single column across multiple tables.
@@ -46,7 +46,7 @@ Before we dive into our healthcare examples, let's understand the four types of 
 * **Example Scenario**: A `coordinates` domain that ensures latitude is between -90 and 90 degrees and longitude is between -180 and 180 degrees, preventing invalid geographical data.
 
 #### 3. Flexible Domain
-* **Purpose**: Allows dynamic selection of different Data Usecase Domains based on specific conditions or context.
+* **Purpose**: Allows dynamic selection of different Data Use Case Domains based on specific conditions or context.
 * **Common Use Cases**: Contact information that varies by type (personal vs. business), product specifications that differ by category, user profiles with role-based fields
 * **Example Scenario**: A `contact_information` domain that applies different validation rules for personal contacts (requires name and phone) versus business contacts (requires company name, contact person, and phone).
 
@@ -88,7 +88,7 @@ The combination creates a data governance framework that benefits any organizati
 
     ![The Database Actions button is highlighted.](../common-images/simple-db-actions.png =50%x* " ")
 
-1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including annotations.
+1. Now that we understand the four types of Data Use Case Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including annotations.
 
   Let's create single column domains that apply constraints and validation to individual columns that can be reused across multiple tables.
 
@@ -384,7 +384,7 @@ LumenCare can now ensure data consistency, maintain regulatory compliance, and p
 
 ## Learn More
 
-* [Data Usecase Domains Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/cncpt/application-data-usage.html)
+* [Data Use Case Domains Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/cncpt/application-data-usage.html)
 * [Schema Annotations Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/annotations_clause.html)
 
 ## Acknowledgements
