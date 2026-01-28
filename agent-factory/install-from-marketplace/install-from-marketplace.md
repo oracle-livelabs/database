@@ -16,9 +16,11 @@ The OCI Marketplace deployment provides a **pre-built Resource Manager stack** t
 * Supporting networking configuration (using your selected VCN/subnet)
 * Application bootstrap logic that exposes the Agent Factory UI
 
+**Estimated time:** 5 minutes.
+
 ---
 
-## Objectives
+### Objectives
 
 By the end of this lab, you will be able to:
 
@@ -28,7 +30,7 @@ By the end of this lab, you will be able to:
 
 ---
 
-## Prerequisites
+### Prerequisites
 
 * An OCI tenancy with permissions for:
   * Networking (VCN, Subnet, Security Lists)
@@ -215,7 +217,7 @@ In this lab, you:
 * Provisioned an Oracle Autonomous AI Database (26ai)
 * Installed the Private Agent Factory from the OCI Marketplace
 
-You can now proceed to the next labs to:
+You can now **proceed to the next labs** to:
 
 * Log in to the Private Agent Factory
 * Configure the LLMs and Database
@@ -228,6 +230,7 @@ You can now proceed to the next labs to:
 * OCI Marketplace listing: [https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705](https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705)
 * Product documentation: [https://docs.oracle.com/en/database/oracle/agent-factory/](https://docs.oracle.com/en/database/oracle/agent-factory/)
 
+## Acknowledgements
 
 - **Authors** 
 * Emilio Perez, Member of Technical Staff, Database Applied AI
