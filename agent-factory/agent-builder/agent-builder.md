@@ -33,11 +33,11 @@ The following table explores the various types of nodes you can use in the Agent
 | Type | Description |
 |--|--|
 | Language Model | *vLLM*: Node leveraging the vLLM (virtualized Large Language Model) system for fast, efficient LLM inference. |
-| Agents | - *vLLM Agent*: Node utilizing a vLLM instance to carry out instructions, answer questions, or facilitate complex workflows. - *OCI Agent*: Node connected to Oracle Cloud Infrastructure (OCI) services, enabling use of models served by Gen AI Services. |
+| Agents | - *vLLM Agent*: Node utilizing a vLLM instance to carry out instructions, answer questions, or facilitate complex workflows. <br>- *OCI Agent*: Node connected to Oracle Cloud Infrastructure (OCI) services, enabling use of models served by Gen AI Services. |
 | Tools | *MCP Server*: Specialized node for interfacing with AI models using the Model Context Protocol (MCP). (SSE Only) |
-| Inputs | - *Chat Input*: Designed for conversational user input in a chat-based interface. - *Text Input*: Receives plain text input directly from the user. - *Prompt*: For defining or modifying textual instructions sent to a language model. |
+| Inputs | - *Chat Input*: Designed for conversational user input in a chat-based interface. <br>- *Text Input*: Receives plain text input directly from the user. <br>- *Prompt*: For defining or modifying textual instructions sent to a language model. |
 | Outputs | - *Chat Output*: Renders or returns model/agent responses in a chat interface. |
-| Data | - *Read CSV*: Imports and parses CSV files for batch or tabular data processing. - *File Upload*: Allows users to upload files for processing or analysis. - *SQL Query*: Executes SQL statements against databases; returns results for workflow use. |
+| Data | - *Read CSV*: Imports and parses CSV files for batch or tabular data processing. <br>- *File Upload*: Allows users to upload files for processing or analysis. <br>- *SQL Query*: Executes SQL statements against databases; returns results for workflow use. |
 
 ## Create a custom workflow
 
