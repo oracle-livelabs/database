@@ -1,6 +1,6 @@
-# Installing the Oracle AI Database 26ai Private Agent Factory from the OCI Marketplace
+# Installing the Private Agent Factory from the OCI Marketplace
 
-> **Purpose**: This Live Lab walks customers through deploying the **Private Agent Factory** using the OCI Marketplace. It is designed to be accurate, customer-friendly, and aligned with how the product actually behaves today, while preserving the useful screenshots and flow from the original engineer-authored lab.
+> **Purpose**: This Live Lab walks customers through deploying the **Private Agent Factory** using the OCI Marketplace.
 
 This lab assumes a *public, internet-reachable* deployment for learning purposes. Production deployments typically use private subnets, bastion access, and stricter security controls.
 
@@ -25,19 +25,15 @@ By the end of this lab, you will be able to:
 * Prepare networking suitable for a Private Agent Factory deployment
 * Provision an Oracle Autonomous AI Database (26ai)
 * Install the Private Agent Factory from the OCI Marketplace
-* Complete the initial application configuration (user, database, API keys)
 
 ---
 
 ## Prerequisites
 
 * An OCI tenancy with permissions for:
-
   * Networking (VCN, Subnet, Security Lists)
   * Autonomous Databases
   * OCI Marketplace and Resource Manager
-* Access to an OCI region where **Oracle AI Database 26ai** is available
-* Familiarity with the OCI Console
 
 ---
 
@@ -50,17 +46,29 @@ The Agent Factory UI runs as a web application and must be reachable from your b
 * CIDR block: `10.0.0.0/16`
 * Example name: `agent-factory-vcn`
 
+![Create VCN](images/create-vcn.png "Create VCN")
+
 ### 2. Create an Internet Gateway
 
 * Attach the Internet Gateway to the VCN
 * This allows outbound internet access and inbound browser access
 
+![Create Internet Gateway](images/create-internet-gateway.png "Create Internet Gateway")
+
+![Configure Internet Gateway](images/config-internet-gateway.png "Configure Internet Gateway")
+
 ### 3. Update the Route Table
+
+Update the Default Route Table
+
+![Update the Route Table](images/route-table.png "Update the Route Table")
 
 * Add a route rule:
 
   * Destination CIDR: `0.0.0.0/0`
   * Target: Internet Gateway
+ 
+![Add a route rule](images/route-rule.png "Add a route rule")
 
 ### 4. Update Security List Rules
 
@@ -72,14 +80,20 @@ Add **Ingress Rules** for TCP:
 
 > ⚠️ These open rules are for workshop purposes only. In production, restrict source CIDRs and prefer private networking.
 
+![Open Ports](images/open-ports-1-2.png "Open Ports")
+
+![Open Ports pt2](images/open-ports-3.png "Open Ports pt2")
+
+
 ### 5. Create a Public Subnet
 
-* CIDR example: `10.0.1.0/24`
-* Associate with:
+![Create a Public Subnet](images/create-subnet.png "Create a Public Subnet")
 
-  * The route table pointing to the Internet Gateway
+* CIDR example: `10.0.1.0/24`
+* Associate with the route table pointing to the Internet Gateway
   * The security list updated above
-* Enable **Public IPs on VNICs**
+
+![Configure Public Subnet](images/config-pub-subnet.png "Configure Public Subnet")
 
 ---
 
@@ -96,16 +110,24 @@ The Private Agent Factory uses Oracle AI Database to store:
 * Navigate to **Oracle AI Database → Autonomous Database**
 * Choose **Autonomous AI Database**
 
+![Navigate to Oracle AI Autonomous Database](images/adb-in-menu.png "Navigate to Oracle AI Autonomous Database")
+
+![Create Oracle AI Autonomous Database](images/create-adb.png "Create Oracle AI Autonomous Database")
+
 ### 2. Configuration
 
 * Database version: **26ai**
 * Workload type: *Transaction Processing* or *Lakehouse* (either is fine for this lab)
 * Select ECPU and storage appropriate for a demo
 
+![Configure Oracle AI Autonomous Database pt1](images/config-adb-1.png "Configure Oracle AI Autonomous Database pt1")
+
 ### 3. Network Access
 
 * For this lab, you may select **Secure access from everywhere**
 * Alternatively, restrict access to your VCN CIDR
+
+![Configure Oracle AI Autonomous Database pt2](images/config-adb-2.png "Configure Oracle AI Autonomous Database pt2")
 
 ### 4. Credentials (Important)
 
@@ -125,7 +147,7 @@ This task uses a Resource Manager stack published in the OCI Marketplace.
 * Navigate to the **Oracle AI Database – Private Agent Factory** listing:
   [https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705](https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705)
 
-*(Screenshot: Agent Factory Application in Marketplace)*
+![Agent Factory Application in Marketplace](images/agent-factory-marketplace.png "Agent Factory Application in Marketplace")
 
 ### 2. Launch the Stack
 
@@ -133,7 +155,7 @@ This task uses a Resource Manager stack published in the OCI Marketplace.
 * Review the product overview
 * Click **Launch Stack**
 
-*(Screenshot: Launch Stack)*
+![Agent Factory launch stack](images/launch-stack.png "Agent Factory launch stack")
 
 ### 3. Accept Terms
 
@@ -144,15 +166,15 @@ This task uses a Resource Manager stack published in the OCI Marketplace.
 
 Under **General Settings**:
 
-* Select your **Region**
-* Select the **Compartment** where resources will be created
+* Select the **Region** where your VCN was created
+* Select the **Compartment** where your VCN was created
 
 Under **Network Configuration**:
 
 * Select the **VCN** created in Task 1
 * Select the **Public Subnet** created in Task 1
 
-> The stack assumes a subnet that allows public IPs and inbound access on ports 22, 8080, and 1521.
+![Agent Factory configure variables](images/configure-variables.png "Agent Factory configure variables")
 
 ### 5. Compute Configuration
 
@@ -165,9 +187,9 @@ Under **Network Configuration**:
 * Review the configuration
 * Click **Create**
 
-Resource Manager will now run a Terraform **Apply** job to provision the instance and install the Agent Factory container.
+![Agent Factory create apply](images/create-apply.png "Agent Factory create apply")
 
-*(Screenshot: Stack creation in progress)*
+Resource Manager will now run a Terraform **Apply** job to provision the instance and install the Agent Factory container.
 
 ### 7. Retrieve the Application URL
 
@@ -180,53 +202,12 @@ Once the job completes successfully:
 https://<instance_public_ip>:8080/studio/installation
 ```
 
-*(Screenshot: Creation succeeded)*
+![Agent Factory creation succeeded](images/creation-succeeded.png "Agent Factory creation succeeded")
+
+This URL will be the starting point for **Lab 2: Log in to the Private Agent Factory**.
 
 ---
 
-## Task 4: Initial Application Configuration (Warm Start)
-
-### 1. Create the Agent Factory User
-
-* Open the application URL in your browser
-* Set the **username and password** for the Agent Factory administrator
-
-### 2. Configure the Database Connection
-
-Provide the following:
-
-* Upload the **Autonomous Database wallet**
-* Wallet username and password
-* Database user: `ADMIN`
-* Database password
-
-Click **Test Connection** before proceeding.
-
-### 3. Configure AI Provider Access
-
-Provide credentials for your LLM provider, such as:
-
-* OCI Generative AI (using OCI API keys)
-* Other supported providers, depending on your environment
-
-This enables:
-
-* Agent reasoning
-* Embedding generation
-* Evaluation and summarization workflows
-
-### 4. Finalize Setup
-
-* Complete the wizard
-* Log back in to access the Agent Factory UI
-
-You are now ready to start building agents using:
-
-* Pre-built agent templates
-* The visual Agent Builder
-* Open Agent Specification–compatible workflows
-
----
 
 ## Summary
 
@@ -235,20 +216,17 @@ In this lab, you:
 * Prepared networking for a public Agent Factory deployment
 * Provisioned an Oracle Autonomous AI Database (26ai)
 * Installed the Private Agent Factory from the OCI Marketplace
-* Completed the initial configuration and login
 
 You can now proceed to the next labs to:
 
-* Explore pre-built agents
-* Build custom agents with the Agent Builder
-* Connect enterprise data sources
-* Evaluate and govern agent behavior
+* Log in to the Private Agent Factory
+* Configure the LLMs and Database
+* Create a user
 
 ---
 
 ## References
 
-* Private Agent Factory product overview and architecture slides fileciteturn0file0
 * OCI Marketplace listing: [https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705](https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705)
 * Product documentation: [https://docs.oracle.com/en/database/oracle/agent-factory/](https://docs.oracle.com/en/database/oracle/agent-factory/)
 
