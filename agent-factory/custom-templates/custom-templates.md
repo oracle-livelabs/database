@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab session, you will learn how to leverage the Template Gallery within Oracle AI Database Private Agent Factory to accelerate your workflow with minimal setup.
+Agent Factory provides a number of templates to quickly create sophisticated AI Agents with minimal configuration. In this lab, you explore the template gallery to learn about agent templates and use (marketsync/pdf-to-blog) template to create your own agent. 
 
 **Estimated time:** 10 minutes.
 
@@ -10,16 +10,25 @@ In this lab session, you will learn how to leverage the Template Gallery within 
 
 By the end of this lab, you will be able to:
 
-- Explore the Template Gallery to identify and utilize pre-built workflow templates for a wide range of automation scenarios.
-- Learn how to import and configure templates to quickly deploy AI-powered agents.
+- Explore the Template Gallery 
+- Import and configure <> template to create your customized agent in Agent Builder
 
 ### Prerequisites
 
-To follow this tutorial, you need access to an Oracle AI Database Private Agent Factory environment with the necessary permissions to use Template Gallery features. You should also have access to at least one data file (such as a PDF) and an LLM configuration that is available in your environment.
+* same as previous lab (tbd)
 
-> Note: Screenshots in this tutorial use example files and configurations for illustration purposes. When following along, use resources that are available in your environment.
+## Task 1: Explore templates Agent Factory Template Gallery
 
-## Task 1: Create an agent from the Template Gallery
+## Task 2: Import Template
+* PDF-to-Blog Converter Template
+
+## Task 3: Understand Agent Builder Interface 
+
+## Task 4: Configure your Agent in Agent Builder
+
+## Task 5: Test Agent in Playground and Publish
+
+## Task 6: Talk to your production agent
 
 The Template Gallery offers a curated collection of pre-built agentic templates designed to help you get started quickly with intelligent automation.
 

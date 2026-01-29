@@ -2,22 +2,24 @@
 
 ## Introduction
 
-In this lab session, you will learn how to create Pre-Built RAG Agents (known as Knowledge Agents) and connect them to your data sources to safely access your enterprise data.
+Agent Factory comes with ready-to-use agents called Pre-Built Agents: Knowledge Agent and Data Analytics Agent. <blurb about how they work>. You can quickly build your data specific agents by attaching relevant data in Agent Factory. Agent Factory also comes with pre-installed data sources for getting started quickly. In this lab, you'll learn how to create your custom agent using pre-built agents and data.
 
-A **Knowledge Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources.
+A **Knowledge Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources. It is capable of contextual retrieval from unstructured sources and provides grounded responses traceable to enterprise-approved sources. The Knowledge Agent is integration-ready, allowing connections to internal sites, file systems, and more. It also supports un-authenticated web sources for broader knowledge retrieval.
 
-It is capable of contextual retrieval from unstructured sources and provides grounded responses traceable to enterprise-approved sources. The Knowledge Agent is integration-ready, allowing connections to internal sites, file systems, and more. It also supports un-authenticated web sources for broader knowledge retrieval.
+A **Data Analysis Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources.
 
 **Estimated time:** 10 minutes.
 
 ### Objectives
 
-By the end of this lab, you will be able to:
-
-- Create a Knowledge Agent and define its Knowledge Base.
-- Interact with a custom Knowledge Agent by asking questions and receiving responses based on your knowledge base.
+- Build and talk to Knowledge Agent using demo-dataset
+- Build and talk to Data Analysis Agent using demo-dataset
+- Build a custom knowledge agent using a new File Data Source
 
 ### Prerequisites
+
+* You are logged-in to Agent Factory installed in previous lab as Admin or Editor
+* Creativity
 
 To follow this tutorial, it is suggested that you have access to an Oracle AI Database Private Agent Factory environment with permissions to add and manage knowledge agents.
 
