@@ -1,30 +1,31 @@
-# Introduction to the Private Agent Factory
+# Introduction to Oracle AI Database Private Agent Factory
 
 ## Introduction
-Welcome to the first lab of this 10-part workshop series. In this introductory session, you will gain a foundational understanding of the **Oracle AI Database 26ai Private Agent Factory** and how it enables enterprises to transform their data into autonomous action.
+Welcome to the first lab of this 10-part workshop series. In this lab, you will gain understanding of core-concepts and high level featuresof the **Oracle AI Database Private Agent Factory (Agent Factory)** and how it enables enterprises to easily build and deploy Generative AI Agents privately, and securely.
 
 **Estimated time:** 5 minutes.
 
 ### Objectives
-Throughout this workshop we will cover the following. Users are encouraged to skip around to the workshops most pertinent to them.
 
-1.  Installation
+Throughout this workshop we will cover the following:
+
+1. Installation and Configure
     * 1a. Installation of the Private Agent Factory from the OCI Marketplace
     * 1b. Installation of the Private Agent Factory from source
-2.  Log in to the Private Agent Factory
-3.  Knowledge Agent: A Pre-Built RAG Agent
-4.  Data Analysis Agent: A Pre-Built Database Agent for NL2SQL
-5.  Agents Built from Custom Templates
-6.  Agent Builder: Build Agents From Scratch
-7.  Deploy Agents from the Private Agent Factory
-8.  Add Data Sources to Private Agent Factory
-9.  Configure SSO on the Private Agent Factory
+2. Log in to the Private Agent Factory
+3. Knowledge Agent: A Pre-Built RAG Agent
+4. Data Analysis Agent: A Pre-Built Database Agent for NL2SQL
+5. Agents Built from Custom Templates
+6. Agent Builder: Build Agents From Scratch
+7. Deploy Agents from the Private Agent Factory
+8. Add Data Sources to Private Agent Factory
+9. Configure SSO on the Private Agent Factory
+
+Users are encouraged to skip around to the workshops most pertinent to them.
 
 ### Prerequisites
-There are no prerequisites. 
-If users have an OCI Tenancy, follow: **Lab 1a. Installation of the Private Agent Factory from the OCI Marketplace**. 
-Otherwise follow: **Lab 1b. Installation of the Private Agent Factory from source**. 
-The rest of the workshop will be the same whether the Agent Factory is installed on OCI or not.
+
+* OCI Tenancy with ability to create compute instance, Oracle AI Database Autonommous Database, Resource Manager, Marketplace, VCN with public-subnet
 
 ## Task 1: The Big Picture: From AI to Agentic AI
 To understand the Private Agent Factory, we must first look at the broader landscape of artificial intelligence. The evolution of AI moves through several distinct phases:
@@ -37,37 +38,20 @@ To understand the Private Agent Factory, we must first look at the broader lands
 
 The Private Agent Factory is your gateway to this final stage, allowing you to build "Agentic Flows" that just work.
 
-## Task 2: What is the Private Agent Factory?
-The **Private Agent Factory** is a **no-code platform** designed to help enterprises rapidly build and deploy intelligent AI agents. It is built on the fundamental principle that **an agent is only as powerful as the data it can access and the actions it can take.** 
+## Task 2: What is Oracle AI Database Private Agent Factory?
+The **Agent Factory** is a **no-code platform** designed to help enterprises rapidly build and deploy intelligent AI agents. It is built on the fundamental principle that **an agent is only as powerful as the data it can access and the actions it can take.** 
 
-Unlike disparate database strategies that focus on complex integration, the Factory utilizes the **converged AI Database architecture** from Oracle AI Database 26ai. This empowers developers and IT teams to focus on **innovation** rather than plumbing, as data and AI services exist within the same secure ecosystem.
+Unlike disparate database strategies that focus on complex integration, Agent Factory utilizes the **converged AI Database architecture** from Oracle AI Database 26ai. This empowers developers, IT teams, and business users to focus on **innovation** rather than plumbing, as data and AI services exist within the same secure ecosystem.
 
-## Task 3: The S3P3 Framework
-To ensure these agents are enterprise-grade, the Private Agent Factory follows the **S3P3 Framework**:
+## Task 3: Learn Key Tenets of Agent Factory
+Agent Factory allows you to build production grade AI Agents quickly with the following key principles throughout the lifecycle of an agent:
 
-*   **Simplicity:** Features a converged architecture and a drag-and-drop, no-code **Agent Builder**.
-*   **Safety:** Includes built-in guardrails and agent evaluation tools to mitigate hallucinations.
-*   **Security:** Maintains existing data security with **Role-Based Access Control (RBAC)**.
-*   **Portability:** Uses the **Open Agent Spec**, allowing you to import or export agents across OCI, Azure, AWS, and GCP.
-*   **Performance:** Leverages **Vector AI Search** and in-database execution for maximum speed.
-*   **Privacy:** Offers **air-gapped options** for data, LLMs, and agents to ensure your proprietary information never leaves your control.
-
-## Task 4: Choose Your Path
-The Factory meets you where you are by offering three distinct paths for building agents:
-
-1.  **Rapid Deployment:** Use **Pre-Built Agents** for immediate functionality. Examples include the **Knowledge Agent** (for processing documents and web sources) and the **Data Analysis Agent** (for extracting semantic insights from structured databases).
-2.  **Warm Start:** Utilize the **Agent Template Gallery** to customize existing flow templates for specific business needs.
-3.  **From Scratch:** Use the **Agent Builder** to design custom agents. You can combine LLMs (like OCI GenAI or OpenAI), tools (via MCP Servers or REST APIs), and data connectors to create unique workflows.
-
-## Task 5: Workshop Roadmap: Setting Up for Success
-Before we can build agents, we must establish the infrastructure. In the upcoming labs, we will follow the official deployment walkthrough:
-
-*   **Create Networking:** Provisioning a Virtual Cloud Network (VCN) and updating security rules to open essential ports (22, 8080, and 1521).
-*   **Create Database:** Provisioning an **Autonomous AI Database** to serve as the brain and memory for our agents.
-*   **Marketplace Installation:** Launching the Factory stack directly from the OCI Marketplace.
-*   **Configuration:** Setting up administrative users and connecting your LLM and embedding providers.
-
-**Next Steps:** If you have an OCI tenancy, go to **Lab 1a. Installation of the Private Agent Factory from the OCI Marketplace** to get started building agents. If you don't have an OCI tenancy, go to **Lab 1b. Installation of the Private Agent Factory from source**. 
+* **Simplicity:** Features a converged architecture and a drag-and-drop, no-code **Agent Builder**.
+* **Safety:** Includes built-in guardrails and agent evaluation tools to mitigate hallucinations.
+* **Security:** Maintains existing data security with **Role-Based Access Control (RBAC)**.
+* **Portability:** Uses the **Open Agent Spec**, allowing you to import or export agents across OCI, Azure, AWS, and GCP.
+* **Performance:** Leverages **Vector AI Search** and in-database execution for maximum speed.
+* **Privacy:** Offers **air-gapped options** for data, LLMs, and agents to ensure your proprietary information never leaves your control.
 
 ## Acknowledgements
 

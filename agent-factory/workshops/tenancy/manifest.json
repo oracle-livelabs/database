@@ -1,9 +1,9 @@
 {
-  "workshoptitle": "Turn Data into Action with the Oracle AI Database Private Agent Factory",
+  "workshoptitle": "Build your first AI Agent with Oracle AI Database Private Agent Factory on OCI",
   "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
     {
-      "title": "Introduction to the Private Agent Factory",
+      "title": "Introduction to Oracle AI Database Private Agent Factory",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -11,44 +11,20 @@
       "filename": "../../get-started/get-started.md"
     },
     {
-      "title": "Lab 1a: Installation of the Private Agent Factory from the OCI Marketplace",
+      "title": "Lab 1: Install and Configure",
       "filename": "../../install-from-marketplace/install-from-marketplace.md"
     },
     {
-      "title": "Lab 1b: Installation of the Private Agent Factory from source",
-      "filename": "../../install-from-source/install-from-source.md"
-    },
-    {
-      "title": "Lab 2: Log in to the Private Agent Factory",
-      "filename": "../../log-into-the-factory/log-into-the-factory.md"
-    },
-    {
-      "title": "Lab 3: Knowledge Agent: A Pre-Built RAG Agent",
+      "title": "Lab 2: Build your first Agent",
       "filename": "../../prebuilt-rag/prebuilt-rag.md"
     },
     {
-      "title": "Lab 4: Data Analysis Agent: A Pre-Built Database Agent for NL2SQL",
-      "filename": "../../prebuilt-nl2sql/prebuilt-nl2sql.md"
-    },
-    {
-      "title": "Lab 5: Agents Built from Custom Templates",
+      "title": "Lab 3: Build an Agent with using templates",
       "filename": "../../custom-templates/custom-templates.md"
     },
     {
-      "title": "Lab 6: Agent Builder: Build Agents From Scratch",
+      "title": "Lab 4: Build a custom Agent in Agent Builder UI",
       "filename": "../../agent-builder/agent-builder.md"
-    },
-    {
-      "title": "Lab 7: Deploy Agents from the Private Agent Factory",
-      "filename": "../../deploy/deploy.md"
-    },
-    {
-      "title": "Lab 8: Add data sources to Private Agent Factory",
-      "filename": "../../add-data-sources/add-data-sources.md"
-    },
-    {
-      "title": "Lab 9: Configure SSO on Your Private Agent Factory",
-      "filename": "../../configure-sso/configure-sso.md"
     },
     {
       "title": "Need Help?",

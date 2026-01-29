@@ -2,28 +2,39 @@
 
 ## Introduction
 
-In this lab session, you will learn how to create Pre-Built RAG Agents (known as Knowledge Agents) and connect them to your data sources to safely access your enterprise data.
+Agent Factory comes with ready-to-use agents called Pre-Built Agents: Knowledge Agent and Data Analytics Agent. <blurb about how they work>. You can quickly build your data specific agents by attaching relevant data in Agent Factory. Agent Factory also comes with pre-installed data sources for getting started quickly. In this lab, you'll learn how to create your custom agent using pre-built agents and data.
 
-A **Knowledge Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources.
-
-It is capable of contextual retrieval from unstructured sources and provides grounded responses traceable to enterprise-approved sources. The Knowledge Agent is integration-ready, allowing connections to internal sites, file systems, and more. It also supports un-authenticated web sources for broader knowledge retrieval.
 
 **Estimated time:** 10 minutes.
 
 ### Objectives
 
-By the end of this lab, you will be able to:
-
-- Create a Knowledge Agent and define its Knowledge Base.
-- Interact with a custom Knowledge Agent by asking questions and receiving responses based on your knowledge base.
+- Build and talk to Knowledge Agent using demo-dataset
+- Build and talk to Data Analysis Agent using demo-dataset
+- Build a custom knowledge agent using a new File Data Source
 
 ### Prerequisites
 
-To follow this tutorial, it is suggested that you have access to an Oracle AI Database Private Agent Factory environment with permissions to add and manage knowledge agents.
+* You are logged-in to Agent Factory installed in previous lab as Admin or Editor
+* Creativity
 
-## Task 1: Create a Blank Knowledge Agent
+## Task 1: Understand Pre-Built Knowledge and Data Analysis Agents in Agent Factory
 
-In this task you will create a new blank Knowledge Agent.
+1. Knowledge Agents
+A **Knowledge Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources. It is capable of contextual retrieval from unstructured sources and provides grounded responses traceable to enterprise-approved sources. The Knowledge Agent is integration-ready, allowing connections to internal sites, file systems, and more. It also supports un-authenticated web sources for broader knowledge retrieval.
+
+2. Data Analysis Agent
+A **Data Analysis Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources.
+
+## Task 2: Create and talk to a Data Analysis Agent using Netflix dataset
+
+1. use Netflix data 
+2. Auto-analysis, few verified interesting prompts for users to try out
+
+## Task 3: Create and talk to a Knowledge Agent for your own data
+
+1. Add Data for your Knowledge Agent
+2. Create Knowlege Agent for your Data
 
 1. Open Oracle AI Database Private Agent Factory and log in. In the sidebar, click the **Knowledge Agent** section.
 
@@ -43,8 +54,6 @@ In this task you will create a new blank Knowledge Agent.
 
 4. Wait a few moments while the agent is being published. After that you will be able to see it on the Knowledge Agent gallery.
 
-## Task 2: Chat with your custom Knowledge Agent
-
 ![Knowledge Agents gallery screen showing two cards: one for 'My Knowledge Agent' trained on selected documentation, and another for 'Oracle AI Database Private Agent Factory Knowledge Assistant' based on documentation for Oracle AI Database Private Agent Factory. The screen also includes a search bar and a button to create a blank knowledge agent from scratch.](images/kagent_gallery.png)
 
 Continuing from where the last task left off, click the recently created Knowledge Agent.
@@ -52,6 +61,7 @@ Continuing from where the last task left off, click the recently created Knowled
 ![Knowledge Base Chat screen for 'My Knowledge Agent' with tabs for messages, chat history, and help. The main chat area displays the prompt 'Ask a question to your knowledge base' with a message input field at the bottom containing 'How can I help you?'.](images/kagent_chat.png)
 
 Here, you will be able to interact with the agent by asking questions and receiving grounded answers based on the ingested data from its knowledge base.
+
 
 ## Summary
 
