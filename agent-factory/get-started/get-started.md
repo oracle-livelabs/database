@@ -20,10 +20,19 @@ Note: Agent Factory can be installed on OCI, local computer/laptop, or other clo
 ## Task 1: Agent Factory High Level Architecture
 
 ## Task 2: Create and Configure VCN
+1. Create VCN https://docs.oracle.com/en/learn/lab_virtual_network/index.html#create-your-vcn or use VCN Quick Create
+2. Update security list to add port 8080 in the default security list
 
 ## Task 3: Create Oracle AI Database Autonomous AI Database
+1. Refer to https://livelabs.oracle.com/ords/r/dbpm/livelabs/run-workshop?p210_wid=4276&session=105049282417815
+2. Download Database wallet
+3. Create new user for Agent Factory (Optional)
 
-## Task 4: Review installation prerequesites
+## Task 4: Gather installation prerequesites for next lab
+1. VCN Compartment, VCN Name, Public-subnet Name
+2. ADB Instance or Regional Wallet
+3. Database User Name and Password for the 26ai DB from task-3
+(Provide Example here)
 
 
 ## Acknowledgements
