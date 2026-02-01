@@ -10,7 +10,7 @@ This workshop shows how to build AI agents with **agentic memory**: agents that 
 
 ## Meet Seer Equity
 
-Throughout this workshop, you'll build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
+Throughout this workshop, you will build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
 
 Seer Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
 
