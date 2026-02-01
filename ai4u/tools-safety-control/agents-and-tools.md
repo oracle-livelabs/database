@@ -6,33 +6,38 @@ In this capstone lab, you'll build a complete agent system with tools that act, 
 
 ### The Business Problem
 
-Seers Equity is ready to deploy AI agents, but the compliance team has concerns:
+Seer Equity's compliance team has a recurring nightmare: What if someone submits AND approves their own loan? Their current systems don't enforce separation of duties—it's just policy that people are "supposed to follow."
 
-> *"We can't have an AI approving $50,000 expenses automatically. What if it makes a mistake? Where's the audit trail? How do we prove we followed policy?"*
+> *"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this loan approved?', nobody can answer."*
 >
 > Rachel, Compliance Director
 
-Legitimate concerns. The previous labs gave agents memory and intelligence. This lab gives them **boundaries and accountability**:
-
-- **Tools define what's possible**: No tool = no action
-- **Rules define what's allowed**: JSON-configured business logic
-- **Separation of duties**: Different agents for different roles
-- **Audit trails**: Every action logged and traceable
+The company needs agents that:
+- **Enforce role separation** — Loan officers can submit but NOT approve
+- **Automate routine decisions** — Low-risk loans shouldn't need human review
+- **Require human judgment** — High-value or complex loans need underwriters
+- **Log everything** — Complete audit trail for compliance
 
 ### What You'll Learn
 
-In this capstone lab, you'll build a complete expense system with two agents:
+In this capstone lab, you'll build a two-agent loan underwriting system:
 
-| Agent | Role | Tools | Constraint |
-|-------|------|-------|------------|
-| **EXPENSE_AGENT** | Employees submit expenses | Submit only | Can't approve their own |
-| **APPROVAL_AGENT** | Managers review/approve | Approve, Reject | Must review before approving |
+| Agent | Role | Can Do | Cannot Do |
+|-------|------|--------|-----------|
+| **LOAN_AGENT** | Loan Officers | Submit applications | Approve/Deny |
+| **UNDERWRITING_AGENT** | Underwriters | Approve/Deny | Submit applications |
 
-This separation demonstrates real-world agent design: different roles, different capabilities, different tools. It's the foundation for compliant AI deployment.
+The separation isn't just policy—it's architecture. LOAN_AGENT literally doesn't have approval tools.
 
-**What you'll build:** A two-agent expense system with safety rules, separation of duties, and complete audit trails.
+You'll also implement risk-based routing:
+- **Credit < 550** → BLOCKED (cannot proceed)
+- **Personal < $50K** → AUTO_APPROVE
+- **$50K-$250K** → Underwriter review required
+- **$250K+ or Mortgage** → Senior underwriter required
 
-Estimated Time: 25 minutes
+**What you'll build:** A compliant two-agent loan underwriting system with separation of duties and full audit trail.
+
+Estimated Time: 20 minutes
 
 ### Objectives
 
@@ -44,698 +49,672 @@ Estimated Time: 25 minutes
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* Completed Labs 1-9 or have a working agent setup
-* An AI profile named `genai` already configured
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
----
+## Task 1: Import the Lab Notebook
 
-## Part 1: The Data Model
+Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-### Task 1: Create Tables
+1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-1. Create the expense system tables.
+2. Click **Import** to expand the Import drop down.
 
-    ```sql
+3. Select **Git**.
+
+4. Paste the following GitHub URL leaving the credential field blank:
+
+    ```text
     <copy>
-    -- Sequence for request IDs
-    CREATE SEQUENCE expense_seq START WITH 1001;
-
-    -- Employees table
-    CREATE TABLE employees (
-        employee_id   VARCHAR2(20) PRIMARY KEY,
-        name          VARCHAR2(100) NOT NULL,
-        email         VARCHAR2(100) NOT NULL,
-        department    VARCHAR2(50),
-        manager_id    VARCHAR2(20)
-    );
-
-    -- Expense requests
-    CREATE TABLE expense_requests (
-        request_id    VARCHAR2(20) PRIMARY KEY,
-        employee_id   VARCHAR2(20) NOT NULL REFERENCES employees(employee_id),
-        amount        NUMBER(10,2) NOT NULL 
-                      CONSTRAINT chk_positive_amount CHECK (amount > 0),
-        category      VARCHAR2(50) NOT NULL
-                      CONSTRAINT chk_category CHECK (category IN ('travel','meals','supplies','equipment','training')),
-        description   VARCHAR2(500),
-        status        VARCHAR2(30) DEFAULT 'NEEDS_APPROVAL'
-                      CONSTRAINT chk_status CHECK (status IN ('APPROVED','REJECTED','NEEDS_APPROVAL')),
-        submitted_at  TIMESTAMP DEFAULT SYSTIMESTAMP,
-        approved_by   VARCHAR2(100),
-        approved_at   TIMESTAMP
-    );
-
-    -- Safety rules
-    CREATE TABLE safety_rules (
-        rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
-        rule_name    VARCHAR2(200) NOT NULL,
-        rule_type    VARCHAR2(20) NOT NULL 
-                     CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_APPROVAL','AUTO_APPROVE')),
-        rule_config  JSON NOT NULL,
-        priority     NUMBER DEFAULT 100,
-        is_active    NUMBER(1) DEFAULT 1
-    );
-
-    -- Insert sample employees
-    INSERT INTO employees VALUES ('EMP-001', 'Alice Johnson', 'alice@company.com', 'Engineering', NULL);
-    INSERT INTO employees VALUES ('EMP-002', 'Bob Smith', 'bob@company.com', 'Sales', 'EMP-001');
-    INSERT INTO employees VALUES ('EMP-003', 'Carol Davis', 'carol@company.com', 'Marketing', 'EMP-001');
-
-    COMMIT;
+    https://github.com/davidastart/database/blob/main/ai4u/tools-safety-control/lab10-tools-safety-control.json
     </copy>
     ```
 
-### Task 2: Create Safety Rules
+5. Click **Ok**.
 
-1. Add the business rules.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
-    ```sql
-    <copy>
-    -- Block excessive amounts (>$5000)
-    INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
-        'Block Excessive Expense',
-        'BLOCK',
-        '{"field": "amount", "operator": "gt", "value": 5000, "message": "Expenses over $5,000 are not permitted. Contact Finance directly."}',
-        10
-    );
+## Task 2: Create the Database Tables
 
-    -- Require approval for high amounts (>=$1000)
-    INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
-        'High Amount Approval',
-        'REQUIRE_APPROVAL',
-        '{"field": "amount", "operator": "gte", "value": 1000, "message": "Expenses $1,000 and above require manager approval."}',
-        20
-    );
+First, you'll create three tables:
 
-    -- Require approval for equipment (any amount)
-    INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
-        'Equipment Approval',
-        'REQUIRE_APPROVAL',
-        '{"field": "category", "operator": "eq", "value": "equipment", "message": "Equipment purchases require manager approval."}',
-        30
-    );
+1. **loan_applicants**: Sample applicants who will apply for loans
+2. **loan_applications**: Where loan submissions are stored with their status
+3. **underwriting_rules**: JSON-configured business rules the agent will follow
 
-    -- Auto-approve everything else under $1000
-    INSERT INTO safety_rules (rule_name, rule_type, rule_config, priority) VALUES (
-        'Auto-approve Standard',
-        'AUTO_APPROVE',
-        '{"field": "amount", "operator": "lt", "value": 1000, "message": "Expenses under $1,000 are auto-approved."}',
-        100
-    );
+Notice the constraints on `loan_applications` — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
 
-    COMMIT;
-    </copy>
-    ```
+```sql
+<copy>
+-- Sequence for application IDs
+CREATE SEQUENCE loan_app_seq START WITH 1001;
 
----
+-- Applicants table
+CREATE TABLE loan_applicants (
+    applicant_id    VARCHAR2(20) PRIMARY KEY,
+    name            VARCHAR2(100) NOT NULL,
+    email           VARCHAR2(100) NOT NULL,
+    credit_score    NUMBER(3) NOT NULL,
+    annual_income   NUMBER(12,2),
+    employment_years NUMBER(2)
+);
 
-## Part 2: Tool Functions
+-- Loan applications
+CREATE TABLE loan_applications (
+    application_id  VARCHAR2(20) PRIMARY KEY,
+    applicant_id    VARCHAR2(20) NOT NULL REFERENCES loan_applicants(applicant_id),
+    loan_amount     NUMBER(12,2) NOT NULL 
+                    CONSTRAINT chk_positive_amount CHECK (loan_amount > 0),
+    loan_type       VARCHAR2(50) NOT NULL
+                    CONSTRAINT chk_loan_type CHECK (loan_type IN ('personal','auto','mortgage','business')),
+    loan_purpose    VARCHAR2(500),
+    risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'
+                    CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),
+    submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,
+    decided_by      VARCHAR2(100),
+    decided_at      TIMESTAMP
+);
 
-### Task 3: Create the Rules Checker
+-- Underwriting rules
+CREATE TABLE underwriting_rules (
+    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
+    rule_name    VARCHAR2(200) NOT NULL,
+    rule_type    VARCHAR2(20) NOT NULL 
+                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_REVIEW','AUTO_APPROVE')),
+    rule_config  JSON NOT NULL,
+    priority     NUMBER DEFAULT 100,
+    is_active    NUMBER(1) DEFAULT 1
+);
 
-1. Create the function that checks safety rules.
+-- Insert sample applicants with varying credit profiles
+INSERT INTO loan_applicants VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);
+INSERT INTO loan_applicants VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);
+INSERT INTO loan_applicants VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);
+INSERT INTO loan_applicants VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);
 
-    ```sql
-    <copy>
-    CREATE OR REPLACE FUNCTION check_expense_rules(
-        p_amount   NUMBER,
-        p_category VARCHAR2
-    ) RETURN VARCHAR2 AS
-    BEGIN
-        FOR rec IN (
-            SELECT rule_name, rule_type, rule_config
-            FROM safety_rules
-            WHERE is_active = 1
-            ORDER BY priority
-        ) LOOP
-            DECLARE
-                v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');
-                v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');
-                v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');
-                v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');
-                v_match    BOOLEAN := FALSE;
-            BEGIN
-                IF v_field = 'amount' THEN
-                    IF v_operator = 'gt' AND p_amount > TO_NUMBER(v_value) THEN v_match := TRUE;
-                    ELSIF v_operator = 'gte' AND p_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;
-                    ELSIF v_operator = 'lt' AND p_amount < TO_NUMBER(v_value) THEN v_match := TRUE;
-                    END IF;
-                ELSIF v_field = 'category' THEN
-                    IF v_operator = 'eq' AND LOWER(p_category) = LOWER(v_value) THEN v_match := TRUE;
-                    END IF;
+COMMIT;
+</copy>
+```
+
+## Task 3: Define Seer Equity's Underwriting Rules
+
+Now you'll insert the business rules that control what happens to each loan application. These rules are stored as JSON, making them easy to modify without changing code.
+
+The rules are evaluated in priority order (lowest number first):
+1. **Block** applications with credit score below 550 — too high risk for automated processing
+2. **Require review** for loans $50,000 or more — significant exposure needs human judgment
+3. **Require review** for any mortgage — complex product requires underwriter
+4. **Require review** for credit scores 550-650 — borderline creditworthiness
+5. **Auto-approve** everything else — low-risk personal/auto loans with good credit
+
+```sql
+<copy>
+-- Block very low credit scores (<550)
+INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    'Block High Risk - Low Credit',
+    'BLOCK',
+    '{"field": "credit_score", "operator": "lt", "value": 550, "message": "Credit score below 550 does not meet Seer Equity minimum requirements. Application cannot be processed."}',
+    10
+);
+
+-- Require review for large loans (>=$50,000)
+INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    'Large Loan Review',
+    'REQUIRE_REVIEW',
+    '{"field": "loan_amount", "operator": "gte", "value": 50000, "message": "Loans $50,000 and above require underwriter review."}',
+    20
+);
+
+-- Require review for all mortgages (any amount)
+INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    'Mortgage Review',
+    'REQUIRE_REVIEW',
+    '{"field": "loan_type", "operator": "eq", "value": "mortgage", "message": "All mortgage applications require underwriter review."}',
+    30
+);
+
+-- Require review for borderline credit (550-650)
+INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    'Borderline Credit Review',
+    'REQUIRE_REVIEW',
+    '{"field": "credit_score", "operator": "between", "low": 550, "high": 650, "message": "Credit scores 550-650 require underwriter review."}',
+    40
+);
+
+-- Auto-approve everything else (good credit, small loans, non-mortgage)
+INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    'Auto-approve Standard',
+    'AUTO_APPROVE',
+    '{"field": "loan_amount", "operator": "lt", "value": 50000, "message": "Personal and auto loans under $50,000 with good credit are auto-approved."}',
+    100
+);
+
+COMMIT;
+</copy>
+```
+
+## Task 4: Create the Rules Checker Function
+
+This function is the brain of Seer Equity's automated underwriting. It evaluates each application against the rules in priority order and returns the first matching rule.
+
+```sql
+<copy>
+CREATE OR REPLACE FUNCTION check_underwriting_rules(
+    p_loan_amount   NUMBER,
+    p_loan_type     VARCHAR2,
+    p_credit_score  NUMBER
+) RETURN VARCHAR2 AS
+BEGIN
+    FOR rec IN (
+        SELECT rule_name, rule_type, rule_config
+        FROM underwriting_rules
+        WHERE is_active = 1
+        ORDER BY priority
+    ) LOOP
+        DECLARE
+            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');
+            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');
+            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');
+            v_low      VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.low');
+            v_high     VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.high');
+            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');
+            v_match    BOOLEAN := FALSE;
+        BEGIN
+            IF v_field = 'loan_amount' THEN
+                IF v_operator = 'gte' AND p_loan_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;
+                ELSIF v_operator = 'lt' AND p_loan_amount < TO_NUMBER(v_value) THEN v_match := TRUE;
                 END IF;
-                
-                IF v_match THEN
-                    RETURN '{"action": "' || rec.rule_type || '", "rule": "' || rec.rule_name || '", "message": "' || v_message || '"}';
+            ELSIF v_field = 'loan_type' THEN
+                IF v_operator = 'eq' AND LOWER(p_loan_type) = LOWER(v_value) THEN v_match := TRUE;
                 END IF;
-            END;
-        END LOOP;
-        
-        RETURN '{"action": "AUTO_APPROVE", "message": "Standard processing."}';
-    END;
-    /
-    </copy>
-    ```
-
-2. Test the rules.
-
-    ```sql
-    <copy>
-    SELECT '$35 supplies:' as test, check_expense_rules(35, 'supplies') as result FROM DUAL
-    UNION ALL
-    SELECT '$200 meals:', check_expense_rules(200, 'meals') FROM DUAL
-    UNION ALL
-    SELECT '$1500 training:', check_expense_rules(1500, 'training') FROM DUAL
-    UNION ALL
-    SELECT '$150 equipment:', check_expense_rules(150, 'equipment') FROM DUAL
-    UNION ALL
-    SELECT '$7500 travel:', check_expense_rules(7500, 'travel') FROM DUAL;
-    </copy>
-    ```
-
-### Task 4: Create Expense Submission Tool
-
-1. Create the submit function that respects the rules.
-
-    ```sql
-    <copy>
-    CREATE OR REPLACE FUNCTION submit_expense(
-        p_employee_id VARCHAR2,
-        p_amount      NUMBER,
-        p_category    VARCHAR2,
-        p_description VARCHAR2
-    ) RETURN VARCHAR2 AS
-        PRAGMA AUTONOMOUS_TRANSACTION;
-        v_request_id VARCHAR2(20);
-        v_rules      VARCHAR2(500);
-        v_action     VARCHAR2(20);
-        v_status     VARCHAR2(30);
-    BEGIN
-        -- Check rules first
-        v_rules := check_expense_rules(p_amount, p_category);
-        v_action := JSON_VALUE(v_rules, '$.action');
-        
-        -- Handle BLOCK - don't create the expense
-        IF v_action = 'BLOCK' THEN
-            RETURN '{"error": "BLOCKED", "message": "' || JSON_VALUE(v_rules, '$.message') || '"}';
-        END IF;
-        
-        -- Determine status
-        IF v_action = 'AUTO_APPROVE' THEN
-            v_status := 'APPROVED';
-        ELSE
-            v_status := 'NEEDS_APPROVAL';
-        END IF;
-        
-        -- Generate request ID and insert
-        v_request_id := 'EXP-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || expense_seq.NEXTVAL;
-        
-        INSERT INTO expense_requests (request_id, employee_id, amount, category, description, status, approved_by, approved_at)
-        VALUES (
-            v_request_id, 
-            p_employee_id, 
-            p_amount, 
-            LOWER(p_category), 
-            p_description,
-            v_status,
-            CASE WHEN v_status = 'APPROVED' THEN 'AUTO' ELSE NULL END,
-            CASE WHEN v_status = 'APPROVED' THEN SYSTIMESTAMP ELSE NULL END
-        );
-        
-        COMMIT;
-        
-        RETURN '{"request_id": "' || v_request_id || '", "status": "' || v_status || '", "message": "' || 
-               CASE WHEN v_status = 'APPROVED' THEN 'Auto-approved.' ELSE 'Submitted. Awaiting manager approval.' END || '"}';
-    EXCEPTION
-        WHEN OTHERS THEN
-            ROLLBACK;
-            RETURN '{"error": "' || SQLERRM || '"}';
-    END;
-    /
-    </copy>
-    ```
-
-### Task 5: Create Approval Tools
-
-1. Create a function to list expenses needing approval.
-
-    ```sql
-    <copy>
-    CREATE OR REPLACE FUNCTION get_pending_approvals RETURN VARCHAR2 AS
-        v_result VARCHAR2(4000) := '[';
-        v_first  BOOLEAN := TRUE;
-    BEGIN
-        FOR rec IN (
-            SELECT e.request_id, emp.name as employee_name, e.amount, e.category, 
-                   e.description, TO_CHAR(e.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted
-            FROM expense_requests e
-            JOIN employees emp ON e.employee_id = emp.employee_id
-            WHERE e.status = 'NEEDS_APPROVAL'
-            ORDER BY e.submitted_at
-        ) LOOP
-            IF NOT v_first THEN
-                v_result := v_result || ',';
+            ELSIF v_field = 'credit_score' THEN
+                IF v_operator = 'lt' AND p_credit_score < TO_NUMBER(v_value) THEN v_match := TRUE;
+                ELSIF v_operator = 'between' AND p_credit_score >= TO_NUMBER(v_low) AND p_credit_score <= TO_NUMBER(v_high) THEN v_match := TRUE;
+                END IF;
             END IF;
-            v_first := FALSE;
             
-            v_result := v_result || '{"request_id": "' || rec.request_id || '", ' ||
-                        '"employee": "' || rec.employee_name || '", ' ||
-                        '"amount": ' || rec.amount || ', ' ||
-                        '"category": "' || rec.category || '", ' ||
-                        '"description": "' || NVL(rec.description, 'N/A') || '", ' ||
-                        '"submitted": "' || rec.submitted || '"}';
-        END LOOP;
-        
-        v_result := v_result || ']';
-        
-        IF v_result = '[]' THEN
-            RETURN '{"message": "No expenses pending approval."}';
-        END IF;
-        
-        RETURN v_result;
-    END;
-    /
-    </copy>
-    ```
+            IF v_match THEN
+                RETURN '{"action": "' || rec.rule_type || '", "rule": "' || rec.rule_name || '", "message": "' || v_message || '"}';
+            END IF;
+        END;
+    END LOOP;
+    
+    RETURN '{"action": "AUTO_APPROVE", "message": "Application meets all automated approval criteria."}';
+END;
+/
+</copy>
+```
 
-2. Create a function to approve an expense.
+## Task 5: Test Seer Equity's Rules Engine
 
-    ```sql
-    <copy>
-    CREATE OR REPLACE FUNCTION approve_expense(
-        p_request_id VARCHAR2,
-        p_approver   VARCHAR2 DEFAULT 'MANAGER'
-    ) RETURN VARCHAR2 AS
-        PRAGMA AUTONOMOUS_TRANSACTION;
-        v_current_status VARCHAR2(30);
+Before building the agents, let's verify the rules work correctly.
+
+| Test | Expected Result | Why |
+|------|-----------------|-----|
+| $25K personal, 780 credit | AUTO_APPROVE | Good credit, small loan |
+| $35K auto, 695 credit | AUTO_APPROVE | Decent credit, under $50K |
+| $75K personal, 725 credit | REQUIRE_REVIEW | Over $50K threshold |
+| $30K personal, 600 credit | REQUIRE_REVIEW | Borderline credit 550-650 |
+| $20K auto, 520 credit | BLOCK | Credit below 550 |
+
+```sql
+<copy>
+SELECT '$25K personal, 780 credit:' as test, check_underwriting_rules(25000, 'personal', 780) as result FROM DUAL
+UNION ALL
+SELECT '$35K auto, 695 credit:', check_underwriting_rules(35000, 'auto', 695) FROM DUAL
+UNION ALL
+SELECT '$75K personal, 725 credit:', check_underwriting_rules(75000, 'personal', 725) FROM DUAL
+UNION ALL
+SELECT '$30K personal, 600 credit:', check_underwriting_rules(30000, 'personal', 600) FROM DUAL
+UNION ALL
+SELECT '$20K auto, 520 credit:', check_underwriting_rules(20000, 'auto', 520) FROM DUAL;
+</copy>
+```
+
+## Task 6: Create the Loan Submission Function
+
+This is the main tool the LOAN_AGENT will use. It looks up the applicant's credit score, checks the underwriting rules, and creates the application with the appropriate status.
+
+```sql
+<copy>
+CREATE OR REPLACE FUNCTION submit_loan_application(
+    p_applicant_id  VARCHAR2,
+    p_loan_amount   NUMBER,
+    p_loan_type     VARCHAR2,
+    p_loan_purpose  VARCHAR2
+) RETURN VARCHAR2 AS
+    PRAGMA AUTONOMOUS_TRANSACTION;
+    v_application_id VARCHAR2(20);
+    v_credit_score   NUMBER;
+    v_rules          VARCHAR2(500);
+    v_action         VARCHAR2(20);
+    v_status         VARCHAR2(30);
+BEGIN
+    -- Get applicant's credit score
     BEGIN
-        SELECT status INTO v_current_status
-        FROM expense_requests
-        WHERE request_id = p_request_id;
-        
-        IF v_current_status != 'NEEDS_APPROVAL' THEN
-            RETURN '{"error": "Cannot approve. Current status is ' || v_current_status || '."}';
-        END IF;
-        
-        UPDATE expense_requests
-        SET status = 'APPROVED',
-            approved_by = p_approver,
-            approved_at = SYSTIMESTAMP
-        WHERE request_id = p_request_id;
-        
-        COMMIT;
-        RETURN '{"request_id": "' || p_request_id || '", "status": "APPROVED", "approved_by": "' || p_approver || '"}';
+        SELECT credit_score INTO v_credit_score
+        FROM loan_applicants
+        WHERE applicant_id = p_applicant_id;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            RETURN '{"error": "Expense not found: ' || p_request_id || '"}';
-        WHEN OTHERS THEN
-            ROLLBACK;
-            RETURN '{"error": "' || SQLERRM || '"}';
+            RETURN '{"error": "Applicant not found: ' || p_applicant_id || '"}';
     END;
-    /
-    </copy>
-    ```
+    
+    -- Check underwriting rules
+    v_rules := check_underwriting_rules(p_loan_amount, p_loan_type, v_credit_score);
+    v_action := JSON_VALUE(v_rules, '$.action');
+    
+    -- Handle BLOCK - don't create the application
+    IF v_action = 'BLOCK' THEN
+        RETURN '{"error": "BLOCKED", "message": "' || JSON_VALUE(v_rules, '$.message') || '"}';
+    END IF;
+    
+    -- Determine status
+    IF v_action = 'AUTO_APPROVE' THEN
+        v_status := 'AUTO_APPROVED';
+    ELSE
+        v_status := 'PENDING_REVIEW';
+    END IF;
+    
+    -- Generate application ID and insert
+    v_application_id := 'LOAN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || loan_app_seq.NEXTVAL;
+    
+    INSERT INTO loan_applications (application_id, applicant_id, loan_amount, loan_type, loan_purpose, risk_status, decided_by, decided_at)
+    VALUES (
+        v_application_id, 
+        p_applicant_id, 
+        p_loan_amount, 
+        LOWER(p_loan_type), 
+        p_loan_purpose,
+        v_status,
+        CASE WHEN v_status = 'AUTO_APPROVED' THEN 'SYSTEM' ELSE NULL END,
+        CASE WHEN v_status = 'AUTO_APPROVED' THEN SYSTIMESTAMP ELSE NULL END
+    );
+    
+    COMMIT;
+    
+    RETURN '{"application_id": "' || v_application_id || '", "status": "' || v_status || '", "credit_score": ' || v_credit_score || ', "message": "' || 
+           CASE WHEN v_status = 'AUTO_APPROVED' THEN 'Auto-approved based on credit profile and loan parameters.' ELSE 'Submitted for underwriter review.' END || '"}';
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RETURN '{"error": "' || SQLERRM || '"}';
+END;
+/
+</copy>
+```
 
-3. Create a function to reject an expense.
+## Task 7: Create the Underwriter's Functions
 
-    ```sql
-    <copy>
-    CREATE OR REPLACE FUNCTION reject_expense(
-        p_request_id VARCHAR2,
-        p_approver   VARCHAR2 DEFAULT 'MANAGER'
-    ) RETURN VARCHAR2 AS
-        PRAGMA AUTONOMOUS_TRANSACTION;
-        v_current_status VARCHAR2(30);
-    BEGIN
-        SELECT status INTO v_current_status
-        FROM expense_requests
-        WHERE request_id = p_request_id;
-        
-        IF v_current_status != 'NEEDS_APPROVAL' THEN
-            RETURN '{"error": "Cannot reject. Current status is ' || v_current_status || '."}';
+Underwriters need three capabilities: see pending applications, approve, and deny.
+
+```sql
+<copy>
+CREATE OR REPLACE FUNCTION get_pending_reviews RETURN VARCHAR2 AS
+    v_result VARCHAR2(4000) := '[';
+    v_first  BOOLEAN := TRUE;
+BEGIN
+    FOR rec IN (
+        SELECT la.application_id, ap.name as applicant_name, ap.credit_score,
+               la.loan_amount, la.loan_type, la.loan_purpose,
+               TO_CHAR(la.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted
+        FROM loan_applications la
+        JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id
+        WHERE la.risk_status = 'PENDING_REVIEW'
+        ORDER BY la.submitted_at
+    ) LOOP
+        IF NOT v_first THEN
+            v_result := v_result || ',';
         END IF;
+        v_first := FALSE;
         
-        UPDATE expense_requests
-        SET status = 'REJECTED',
-            approved_by = p_approver,
-            approved_at = SYSTIMESTAMP
-        WHERE request_id = p_request_id;
-        
-        COMMIT;
-        RETURN '{"request_id": "' || p_request_id || '", "status": "REJECTED", "rejected_by": "' || p_approver || '"}';
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            RETURN '{"error": "Expense not found: ' || p_request_id || '"}';
-        WHEN OTHERS THEN
-            ROLLBACK;
-            RETURN '{"error": "' || SQLERRM || '"}';
-    END;
-    /
-    </copy>
-    ```
+        v_result := v_result || '{"application_id": "' || rec.application_id || '", ' ||
+                    '"applicant": "' || rec.applicant_name || '", ' ||
+                    '"credit_score": ' || rec.credit_score || ', ' ||
+                    '"amount": ' || rec.loan_amount || ', ' ||
+                    '"type": "' || rec.loan_type || '", ' ||
+                    '"purpose": "' || NVL(rec.loan_purpose, 'N/A') || '", ' ||
+                    '"submitted": "' || rec.submitted || '"}';
+    END LOOP;
+    
+    v_result := v_result || ']';
+    
+    IF v_result = '[]' THEN
+        RETURN '{"message": "No loan applications pending review."}';
+    END IF;
+    
+    RETURN v_result;
+END;
+/
 
----
+CREATE OR REPLACE FUNCTION approve_loan(
+    p_application_id VARCHAR2,
+    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'
+) RETURN VARCHAR2 AS
+    PRAGMA AUTONOMOUS_TRANSACTION;
+    v_current_status VARCHAR2(30);
+BEGIN
+    SELECT risk_status INTO v_current_status
+    FROM loan_applications
+    WHERE application_id = p_application_id;
+    
+    IF v_current_status != 'PENDING_REVIEW' THEN
+        RETURN '{"error": "Cannot approve. Current status is ' || v_current_status || '."}';
+    END IF;
+    
+    UPDATE loan_applications
+    SET risk_status = 'APPROVED',
+        decided_by = p_underwriter,
+        decided_at = SYSTIMESTAMP
+    WHERE application_id = p_application_id;
+    
+    COMMIT;
+    RETURN '{"application_id": "' || p_application_id || '", "status": "APPROVED", "approved_by": "' || p_underwriter || '"}';
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN '{"error": "Application not found: ' || p_application_id || '"}';
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RETURN '{"error": "' || SQLERRM || '"}';
+END;
+/
 
-## Part 3: Create the Agents
+CREATE OR REPLACE FUNCTION deny_loan(
+    p_application_id VARCHAR2,
+    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'
+) RETURN VARCHAR2 AS
+    PRAGMA AUTONOMOUS_TRANSACTION;
+    v_current_status VARCHAR2(30);
+BEGIN
+    SELECT risk_status INTO v_current_status
+    FROM loan_applications
+    WHERE application_id = p_application_id;
+    
+    IF v_current_status != 'PENDING_REVIEW' THEN
+        RETURN '{"error": "Cannot deny. Current status is ' || v_current_status || '."}';
+    END IF;
+    
+    UPDATE loan_applications
+    SET risk_status = 'DENIED',
+        decided_by = p_underwriter,
+        decided_at = SYSTIMESTAMP
+    WHERE application_id = p_application_id;
+    
+    COMMIT;
+    RETURN '{"application_id": "' || p_application_id || '", "status": "DENIED", "denied_by": "' || p_underwriter || '"}';
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN '{"error": "Application not found: ' || p_application_id || '"}';
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RETURN '{"error": "' || SQLERRM || '"}';
+END;
+/
+</copy>
+```
 
-### Task 6: Register Tools
+## Task 8: Register the Tools
 
-1. Register all tools.
+Now you'll register your PL/SQL functions as tools. Notice that SUBMIT_LOAN_TOOL is for loan officers, while the other three are for underwriters.
 
-    ```sql
-    <copy>
-    BEGIN
-        -- Submission tool (for EXPENSE_AGENT)
-        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'SUBMIT_EXPENSE_TOOL',
-            attributes  => '{"instruction": "Submit an expense request. Parameters: P_EMPLOYEE_ID (e.g. EMP-001, EMP-002, EMP-003), P_AMOUNT (number), P_CATEGORY (travel, meals, supplies, equipment, or training), P_DESCRIPTION (text description of the expense).",
-                            "function": "submit_expense"}',
-            description => 'Submits an expense request'
-        );
-        
-        -- Pending list tool (for APPROVAL_AGENT)
-        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'GET_PENDING_TOOL',
-            attributes  => '{"instruction": "Get list of expenses waiting for approval. No parameters needed.",
-                            "function": "get_pending_approvals"}',
-            description => 'Lists expenses needing approval'
-        );
-        
-        -- Approve tool (for APPROVAL_AGENT)
-        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'APPROVE_EXPENSE_TOOL',
-            attributes  => '{"instruction": "Approve an expense request. Parameter: P_REQUEST_ID (e.g. EXP-260108-1001).",
-                            "function": "approve_expense"}',
-            description => 'Approves an expense'
-        );
-        
-        -- Reject tool (for APPROVAL_AGENT)
-        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'REJECT_EXPENSE_TOOL',
-            attributes  => '{"instruction": "Reject an expense request. Parameter: P_REQUEST_ID (e.g. EXP-260108-1001).",
-                            "function": "reject_expense"}',
-            description => 'Rejects an expense'
-        );
-    END;
-    /
-    </copy>
-    ```
+```sql
+<copy>
+BEGIN
+    -- Submission tool (for LOAN_AGENT)
+    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
+        tool_name   => 'SUBMIT_LOAN_TOOL',
+        attributes  => '{"instruction": "Submit a loan application. Parameters: P_APPLICANT_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_LOAN_AMOUNT (number), P_LOAN_TYPE (personal, auto, mortgage, or business), P_LOAN_PURPOSE (text description of loan purpose).",
+                        "function": "submit_loan_application"}',
+        description => 'Submits a loan application for processing'
+    );
+    
+    -- Pending list tool (for UNDERWRITING_AGENT)
+    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
+        tool_name   => 'GET_PENDING_TOOL',
+        attributes  => '{"instruction": "Get list of loan applications waiting for underwriting review. No parameters needed.",
+                        "function": "get_pending_reviews"}',
+        description => 'Lists loan applications needing underwriter review'
+    );
+    
+    -- Approve tool (for UNDERWRITING_AGENT)
+    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
+        tool_name   => 'APPROVE_LOAN_TOOL',
+        attributes  => '{"instruction": "Approve a loan application. Parameter: P_APPLICATION_ID (e.g. LOAN-260108-1001).",
+                        "function": "approve_loan"}',
+        description => 'Approves a loan application'
+    );
+    
+    -- Deny tool (for UNDERWRITING_AGENT)
+    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
+        tool_name   => 'DENY_LOAN_TOOL',
+        attributes  => '{"instruction": "Deny a loan application. Parameter: P_APPLICATION_ID (e.g. LOAN-260108-1001).",
+                        "function": "deny_loan"}',
+        description => 'Denies a loan application'
+    );
+END;
+/
+</copy>
+```
 
-### Task 7: Create the Expense Agent (Employee Role)
+## Task 9: Create the Loan Agent (Loan Officer Role)
 
-1. Create the expense submission agent and team.
+The LOAN_AGENT represents a loan officer submitting applications. It only has access to SUBMIT_LOAN_TOOL — it cannot approve or deny anything.
 
-    ```sql
-    <copy>
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-            agent_name  => 'EXPENSE_AGENT',
-            attributes  => '{"profile_name": "genai",
-                            "role": "You are an expense submission agent for employees. When asked to submit an expense, call SUBMIT_EXPENSE_TOOL with the provided details. Report the result clearly - whether it was auto-approved, needs manager approval, or was blocked."}',
-            description => 'Employee expense submission agent'
-        );
-    END;
-    /
+```sql
+<copy>
+BEGIN
+    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
+        agent_name  => 'LOAN_AGENT',
+        attributes  => '{"profile_name": "genai",
+                        "role": "You are a loan submission agent for Seer Equity loan officers. When asked to submit a loan application, call SUBMIT_LOAN_TOOL with the provided details. Report the result clearly - whether it was auto-approved, needs underwriter review, or was blocked."}',
+        description => 'Loan officer loan submission agent'
+    );
+END;
+/
 
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-            task_name   => 'EXPENSE_TASK',
-            attributes  => '{"instruction": "Process expense submission requests. Call SUBMIT_EXPENSE_TOOL with the employee ID, amount, category, and description. Report the outcome. User request: {query}",
-                            "tools": ["SUBMIT_EXPENSE_TOOL"]}',
-            description => 'Expense submission task'
-        );
-    END;
-    /
+BEGIN
+    DBMS_CLOUD_AI_AGENT.CREATE_TASK(
+        task_name   => 'LOAN_TASK',
+        attributes  => '{"instruction": "Process loan application requests. Call SUBMIT_LOAN_TOOL with the applicant ID, loan amount, loan type, and purpose. Report the outcome. User request: {query}",
+                        "tools": ["SUBMIT_LOAN_TOOL"]}',
+        description => 'Loan submission task'
+    );
+END;
+/
 
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'EXPENSE_TEAM',
-            attributes  => '{"agents": [{"name": "EXPENSE_AGENT", "task": "EXPENSE_TASK"}],
-                            "process": "sequential"}',
-            description => 'Employee expense submission team'
-        );
-    END;
-    /
-    </copy>
-    ```
+BEGIN
+    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
+        team_name   => 'LOAN_TEAM',
+        attributes  => '{"agents": [{"name": "LOAN_AGENT", "task": "LOAN_TASK"}],
+                        "process": "sequential"}',
+        description => 'Loan officer submission team'
+    );
+END;
+/
+</copy>
+```
 
-### Task 8: Create the Approval Agent (Manager Role)
+## Task 10: Create the Underwriting Agent (Underwriter Role)
 
-1. Create the manager approval agent and team.
+The UNDERWRITING_AGENT has access to three tools but NOT SUBMIT_LOAN_TOOL. Proper separation of duties.
 
-    ```sql
-    <copy>
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-            agent_name  => 'APPROVAL_AGENT',
-            attributes  => '{"profile_name": "genai",
-                            "role": "You are an expense approval agent for managers. You can list pending expenses, approve them, or reject them. When asked what needs approval, call GET_PENDING_TOOL. When asked to approve, call APPROVE_EXPENSE_TOOL. When asked to reject, call REJECT_EXPENSE_TOOL."}',
-            description => 'Manager expense approval agent'
-        );
-    END;
-    /
+```sql
+<copy>
+BEGIN
+    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
+        agent_name  => 'UNDERWRITING_AGENT',
+        attributes  => '{"profile_name": "genai",
+                        "role": "You are an underwriting agent for Seer Equity. You can list pending loan applications, approve them, or deny them. When asked what needs review, call GET_PENDING_TOOL. When asked to approve, call APPROVE_LOAN_TOOL. When asked to deny, call DENY_LOAN_TOOL."}',
+        description => 'Underwriter loan review agent'
+    );
+END;
+/
 
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-            task_name   => 'APPROVAL_TASK',
-            attributes  => '{"instruction": "Process expense approval requests. To see pending expenses, call GET_PENDING_TOOL. To approve, call APPROVE_EXPENSE_TOOL with the request ID. To reject, call REJECT_EXPENSE_TOOL with the request ID. User request: {query}",
-                            "tools": ["GET_PENDING_TOOL", "APPROVE_EXPENSE_TOOL", "REJECT_EXPENSE_TOOL"]}',
-            description => 'Expense approval task'
-        );
-    END;
-    /
+BEGIN
+    DBMS_CLOUD_AI_AGENT.CREATE_TASK(
+        task_name   => 'UNDERWRITING_TASK',
+        attributes  => '{"instruction": "Process underwriting review requests. To see pending applications, call GET_PENDING_TOOL. To approve, call APPROVE_LOAN_TOOL with the application ID. To deny, call DENY_LOAN_TOOL with the application ID. User request: {query}",
+                        "tools": ["GET_PENDING_TOOL", "APPROVE_LOAN_TOOL", "DENY_LOAN_TOOL"]}',
+        description => 'Underwriting review task'
+    );
+END;
+/
 
-    BEGIN
-        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'APPROVAL_TEAM',
-            attributes  => '{"agents": [{"name": "APPROVAL_AGENT", "task": "APPROVAL_TASK"}],
-                            "process": "sequential"}',
-            description => 'Manager expense approval team'
-        );
-    END;
-    /
-    </copy>
-    ```
+BEGIN
+    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
+        team_name   => 'UNDERWRITING_TEAM',
+        attributes  => '{"agents": [{"name": "UNDERWRITING_AGENT", "task": "UNDERWRITING_TASK"}],
+                        "process": "sequential"}',
+        description => 'Underwriter review team'
+    );
+END;
+/
+</copy>
+```
 
----
+## Task 11: Test the Loan Officer Path
 
-## Part 4: Test the Workflow
+Become a loan officer and submit applications.
 
-### Task 9: Submit Expenses as an Employee
-
-1. Set the expense submission team.
-
-    ```sql
-    <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('EXPENSE_TEAM');
-    </copy>
-    ```
-
-2. Submit a small expense (auto-approve).
-
-    ```sql
-    <copy>
-    SELECT AI AGENT Submit a $35 expense for supplies for employee EMP-002, description office supplies;
-    </copy>
-    ```
-
-**Expected:** Auto-approved (under $1000, not equipment).
-
-3. Submit a medium expense (auto-approve).
-
-    ```sql
-    <copy>
-    SELECT AI AGENT Submit a $200 expense for meals for employee EMP-003, description team lunch;
-    </copy>
-    ```
-
-**Expected:** Auto-approved (under $1000, not equipment).
-
-4. Submit a high-value expense (needs approval).
-
-    ```sql
-    <copy>
-    SELECT AI AGENT Submit a $1500 expense for training for employee EMP-002, description annual conference registration;
-    </copy>
-    ```
-
-**Expected:** Needs approval ($1000 or more).
-
-5. Submit an equipment expense (needs approval).
-
-    ```sql
-    <copy>
-    SELECT AI AGENT Submit a $150 expense for equipment for employee EMP-002, description new keyboard;
-    </copy>
-    ```
-
-**Expected:** Needs approval (equipment category always requires approval).
-
-6. Try to submit a blocked expense.
-
-    ```sql
-    <copy>
-    SELECT AI AGENT Submit a $7500 expense for travel for employee EMP-001, description international trip;
-    </copy>
-    ```
-
-**Expected:** Blocked (over $5000).
-
-7. Verify the expense records.
-
-    ```sql
-    <copy>
-    SELECT request_id, 
-           (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,
-           amount, 
-           category, 
-           status, 
-           NVL(approved_by, '-') as approved_by
-    FROM expense_requests e
-    ORDER BY submitted_at;
-    </copy>
-    ```
-
-**Expected Results:**
-
-| Amount | Category | Status | Approved By |
-|--------|----------|--------|-------------|
-| $35 | supplies | APPROVED | AUTO |
-| $200 | meals | APPROVED | AUTO |
-| $1500 | training | NEEDS_APPROVAL | - |
-| $150 | equipment | NEEDS_APPROVAL | - |
-
-Note: The $7500 expense was blocked and not created.
-
----
-
-### Task 10: Approve Expenses as a Manager
-
-1. Switch to the approval team.
+1. Set the loan team.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('APPROVAL_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_TEAM');
     </copy>
     ```
 
-2. Ask what expenses need approval.
+2. Submit a small personal loan (auto-approve path).
 
     ```sql
     <copy>
-    SELECT AI AGENT What expenses need my approval;
+    SELECT AI AGENT Submit a $25000 personal loan for applicant APP-001, purpose is debt consolidation;
     </copy>
     ```
 
-**Expected:** Lists the $1500 training and $150 equipment expenses.
-
-3. Approve the training expense.
+3. Submit a large loan (underwriter review path).
 
     ```sql
     <copy>
-    SELECT AI AGENT Approve the training expense;
+    SELECT AI AGENT Submit a $75000 personal loan for applicant APP-004, purpose is home renovation;
     </copy>
     ```
 
-4. Reject the equipment expense.
+4. Submit a mortgage (always requires review).
 
     ```sql
     <copy>
-    SELECT AI AGENT Reject the equipment expense;
+    SELECT AI AGENT Submit a $250000 mortgage for applicant APP-001, purpose is primary residence purchase;
     </copy>
     ```
 
-5. Verify final status of all expenses.
+5. Try to submit a high-risk application (blocked).
 
     ```sql
     <copy>
-    SELECT request_id, 
-           (SELECT name FROM employees WHERE employee_id = e.employee_id) as employee,
-           amount, 
-           category, 
-           status, 
-           NVL(approved_by, '-') as approved_by,
-           TO_CHAR(approved_at, 'HH24:MI:SS') as approved_at
-    FROM expense_requests e
-    ORDER BY submitted_at;
+    SELECT AI AGENT Submit a $20000 auto loan for applicant APP-003, purpose is used car purchase;
     </copy>
     ```
 
-**Expected Final Results:**
+## Task 12: Verify the Applications
 
-| Amount | Category | Status | Approved By |
-|--------|----------|--------|-------------|
-| $35 | supplies | APPROVED | AUTO |
-| $200 | meals | APPROVED | AUTO |
-| $1500 | training | APPROVED | MANAGER |
-| $150 | equipment | REJECTED | MANAGER |
+Check what's in the database.
 
----
+```sql
+<copy>
+SELECT la.application_id, 
+       ap.name as applicant,
+       ap.credit_score,
+       TO_CHAR(la.loan_amount, '$999,999') as amount, 
+       la.loan_type, 
+       la.risk_status, 
+       NVL(la.decided_by, '-') as decided_by
+FROM loan_applications la
+JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id
+ORDER BY la.submitted_at;
+</copy>
+```
 
-## Part 5: Audit Trail
+## Task 13: Test the Underwriter Path
 
-### Task 11: Query the Audit Trail
+Switch to the underwriting agent and review applications.
 
-1. See all tool calls.
+1. Set the underwriting team.
 
     ```sql
     <copy>
-    SELECT 
-        tool_name,
-        TO_CHAR(start_date, 'HH24:MI:SS') as called,
-        SUBSTR(input, 1, 60) as input_preview,
-        SUBSTR(output, 1, 60) as output_preview
-    FROM USER_AI_AGENT_TOOL_HISTORY
-    ORDER BY start_date DESC
-    FETCH FIRST 15 ROWS ONLY;
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('UNDERWRITING_TEAM');
     </copy>
     ```
 
-2. Audit summary by tool.
+2. Check what needs review.
 
     ```sql
     <copy>
-    SELECT 
-        tool_name,
-        COUNT(*) as call_count
-    FROM USER_AI_AGENT_TOOL_HISTORY
-    GROUP BY tool_name
-    ORDER BY call_count DESC;
+    SELECT AI AGENT What loan applications need my review;
     </copy>
     ```
 
----
+3. Approve the applications.
+
+    ```sql
+    <copy>
+    SELECT AI AGENT Approve the personal loan application;
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+    SELECT AI AGENT Approve the mortgage application;
+    </copy>
+    ```
+
+## Task 14: Review the Audit Trail
+
+Every tool call is logged. This is crucial for regulatory compliance.
+
+```sql
+<copy>
+SELECT 
+    tool_name,
+    TO_CHAR(start_date, 'HH24:MI:SS') as called,
+    SUBSTR(input, 1, 60) as input_preview,
+    SUBSTR(output, 1, 60) as output_preview
+FROM USER_AI_AGENT_TOOL_HISTORY
+ORDER BY start_date DESC
+FETCH FIRST 15 ROWS ONLY;
+</copy>
+```
 
 ## Summary
 
-In this capstone lab, you built a complete agent system with:
+In this lab, you built a complete loan underwriting system demonstrating:
 
-**Two Agents with Different Roles:**
-- EXPENSE_AGENT: Employees submit expenses
-- APPROVAL_AGENT: Managers review and decide
+**Role-Based Agents:**
+- LOAN_AGENT for loan officers (submit only)
+- UNDERWRITING_AGENT for underwriters (review and decide)
 
 **Safety Rules:**
-- AUTO_APPROVE: Under $1000 (not equipment)
-- REQUIRE_APPROVAL: $1000+ or equipment
-- BLOCK: Over $5000
+- AUTO_APPROVE: Under $50K, good credit, non-mortgage
+- REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
+- BLOCK: Credit score below 550
 
-**Clean Workflow:**
-1. Employee submits → Auto-approved or queued for approval
-2. Manager reviews queue → Approves or rejects
-3. Everything logged in audit trail
+**The Human-in-the-Loop:**
+- Routine loans are automated
+- Significant loans require human judgment
+- High-risk applications are stopped entirely
 
-**Key Takeaways:**
-- Tools define what's possible
-- Rules define what's allowed
-- Different agents for different roles
-- Humans retain control over important decisions
-- Everything is auditable
+**Audit Trail:**
+- Every action is logged
+- Full input/output captured
+- Explainable and compliant
+
+**Key Insight:** Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything — it doesn't have the tool. This is security through architecture, not just prompts.
 
 ## Learn More
 
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
@@ -746,24 +725,24 @@ In this capstone lab, you built a complete agent system with:
 
 ```sql
 <copy>
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('EXPENSE_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('APPROVAL_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('EXPENSE_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('APPROVAL_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('EXPENSE_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('APPROVAL_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_EXPENSE_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('LOAN_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('UNDERWRITING_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('LOAN_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('UNDERWRITING_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('LOAN_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('UNDERWRITING_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_LOAN_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_PENDING_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPROVE_EXPENSE_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REJECT_EXPENSE_TOOL', TRUE);
-DROP TABLE expense_requests PURGE;
-DROP TABLE employees PURGE;
-DROP TABLE safety_rules PURGE;
-DROP SEQUENCE expense_seq;
-DROP FUNCTION submit_expense;
-DROP FUNCTION check_expense_rules;
-DROP FUNCTION get_pending_approvals;
-DROP FUNCTION approve_expense;
-DROP FUNCTION reject_expense;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPROVE_LOAN_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('DENY_LOAN_TOOL', TRUE);
+DROP TABLE loan_applications PURGE;
+DROP TABLE loan_applicants PURGE;
+DROP TABLE underwriting_rules PURGE;
+DROP SEQUENCE loan_app_seq;
+DROP FUNCTION submit_loan_application;
+DROP FUNCTION check_underwriting_rules;
+DROP FUNCTION get_pending_reviews;
+DROP FUNCTION approve_loan;
+DROP FUNCTION deny_loan;
 </copy>
 ```

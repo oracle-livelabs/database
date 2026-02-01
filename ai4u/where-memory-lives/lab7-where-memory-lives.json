@@ -1,148 +1,590 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## Build the Memory Core at Seers Equity\n\n### The Business Problem\n\nIn Lab 5, you experienced the forgetting problem—the agent forgot everything about Sarah Chen the moment the session ended. That's not acceptable for a financial services company.\n\nSeers Equity needs agents that:\n- Remember client preferences across every interaction\n- Recall rate exceptions without being told again\n- Build relationship knowledge over time\n- Never forget a client's history\n\n### What You'll Learn\n\nIn this lab, you'll build the **memory core**—the database foundation that solves the forgetting problem:\n\n1. **Create memory tables** using Oracle's native JSON for flexible storage\n2. **Build remember/recall functions** that agents can call as tools\n3. **Register the tools** so the agent can use them\n4. **Test across sessions** to prove memory persists\n\nThe key insight: Memory isn't a model capability—it's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.\n\n**What you'll build:** A persistent memory system that survives session boundaries.\n\n**Estimated Time:** 15 minutes",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Build the Memory Core at Seer Equity\n\n### The Business Problem\n\nIn Lab 5, you experienced the forgetting problem. The agent forgot everything about Sarah Chen the moment the session ended. That's not acceptable for a financial services company.\n\nSeer Equity needs agents that:\n- Remember client preferences across every interaction\n- Recall rate exceptions without being told again\n- Build relationship knowledge over time\n- Never forget a client's history\n\n### What You'll Learn\n\nIn this lab, you'll build the **memory core**: the database foundation that solves the forgetting problem:\n\n1. **Create memory tables** using Oracle's native JSON for flexible storage\n2. **Build remember/recall functions** that agents can call as tools\n3. **Register the tools** so the agent can use them\n4. **Test across sessions** to prove memory persists\n\nThe key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.\n\n**What you'll build:** A persistent memory system that survives session boundaries.\n\n**Estimated Time:** 15 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Build the Memory Core at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>In Lab 5, you experienced the forgetting problem. The agent forgot everything about Sarah Chen the moment the session ended. That's not acceptable for a financial services company.</p>\n\n<p>Seer Equity needs agents that:</p>\n<ul>\n<li>Remember client preferences across every interaction</li>\n<li>Recall rate exceptions without being told again</li>\n<li>Build relationship knowledge over time</li>\n<li>Never forget a client's history</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build the <strong>memory core</strong>: the database foundation that solves the forgetting problem:</p>\n\n<ol>\n<li><strong>Create memory tables</strong> using Oracle's native JSON for flexible storage</li>\n<li><strong>Build remember/recall functions</strong> that agents can call as tools</li>\n<li><strong>Register the tools</strong> so the agent can use them</li>\n<li><strong>Test across sessions</strong> to prove memory persists</li>\n</ol>\n\n<p>The key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.</p>\n\n<p><strong>What you'll build:</strong> A persistent memory system that survives session boundaries.</p>\n\n<p><strong>Estimated Time:</strong> 15 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%md\n## Create the Memory Table\n\nThe memory table is the foundation—where the agent stores everything it learns about Seers Equity clients.\n\nNotice we use Oracle's native JSON type for the content column. This gives you flexibility to store any structured information without rigid schemas. You can store facts, preferences, rate exceptions—whatever the agent learns.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Memory Table\n\nThe memory table is the foundation, where the agent stores everything it learns about Seer Equity clients.\n\nNotice we use Oracle's native JSON type for the content column. This gives you flexibility to store any structured information without rigid schemas. You can store facts, preferences, rate exceptions, whatever the agent learns.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Memory Table</h2>\n\n<p>The memory table is the foundation, where the agent stores everything it learns about Seer Equity clients.</p>\n\n<p>Notice we use Oracle's native JSON type for the content column. This gives you flexibility to store any structured information without rigid schemas. You can store facts, preferences, rate exceptions, whatever the agent learns.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nCREATE TABLE agent_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    agent_id       VARCHAR2(100) DEFAULT 'SEERS_AGENT',\n    memory_type    VARCHAR2(20) DEFAULT 'FACT',\n    content        JSON NOT NULL,\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create JSON Indexes\n\nCreate indexes on JSON fields for fast queries. Oracle lets you index directly into JSON properties—no need for a separate search layer.\n\nThe `about` field will be commonly searched (\"What do you know about Acme Industries?\"), so we index it specifically.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create JSON Indexes\n\nCreate indexes on JSON fields for fast queries. Oracle lets you index directly into JSON properties, no need for a separate search layer.\n\nThe `about` field will be commonly searched (\"What do you know about Sarah Chen?\"), so we index it specifically.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create JSON Indexes</h2>\n\n<p>Create indexes on JSON fields for fast queries. Oracle lets you index directly into JSON properties, no need for a separate search layer.</p>\n\n<p>The <code>about</code> field will be commonly searched (\"What do you know about Sarah Chen?\"), so we index it specifically.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nCREATE INDEX idx_memory_about ON agent_memory m (m.content.about.string());\nCREATE INDEX idx_memory_type ON agent_memory(memory_type);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seers Equity client, it calls this function.\n\nThe function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.\n\nThe function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Remember Function</h2>\n\n<p>This function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.</p>\n\n<p>The function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nCREATE OR REPLACE FUNCTION remember_fact(\n    p_fact     VARCHAR2,\n    p_category VARCHAR2 DEFAULT 'general',\n    p_about    VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO agent_memory (memory_type, content)\n    VALUES (\n        'FACT',\n        JSON_OBJECT(\n            'fact'       VALUE p_fact,\n            'category'   VALUE p_category,\n            'about'      VALUE p_about,\n            'source'     VALUE 'loan_officer_conversation',\n            'remembered' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        )\n    );\n    COMMIT;\n    \n    RETURN 'Remembered: ' || p_fact || \n           CASE WHEN p_about IS NOT NULL THEN ' (about ' || p_about || ')' ELSE '' END;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create the Recall Function\n\nThe recall function is the agent's \"search memory\" capability. When asked about a client, the agent calls this function to find relevant memories.\n\nYou can search by client name (\"Acme Industries\") or by category (\"rate_exception\"). The function returns matching facts from the memory table.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Recall Function\n\nThe recall function is the agent's \"search memory\" capability. When asked about a client, the agent calls this function to find relevant memories.\n\nYou can search by client name (\"Sarah Chen\") or by category (\"rate_exception\"). The function returns matching facts from the memory table.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Recall Function</h2>\n\n<p>The recall function is the agent's \"search memory\" capability. When asked about a client, the agent calls this function to find relevant memories.</p>\n\n<p>You can search by client name (\"Sarah Chen\") or by category (\"rate_exception\"). The function returns matching facts from the memory table.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nCREATE OR REPLACE FUNCTION recall_facts(\n    p_about    VARCHAR2 DEFAULT NULL,\n    p_category VARCHAR2 DEFAULT NULL\n) RETURN CLOB AS\n    v_result CLOB := '';\n    v_count  NUMBER := 0;\nBEGIN\n    FOR rec IN (\n        SELECT \n            m.content.fact.string() as fact,\n            m.content.category.string() as category,\n            m.content.about.string() as about,\n            created_at\n        FROM agent_memory m\n        WHERE memory_type = 'FACT'\n        AND (p_about IS NULL OR UPPER(m.content.about.string()) LIKE '%' || UPPER(p_about) || '%')\n        AND (p_category IS NULL OR UPPER(m.content.category.string()) = UPPER(p_category))\n        ORDER BY created_at DESC\n        FETCH FIRST 10 ROWS ONLY\n    ) LOOP\n        v_result := v_result || '- ' || rec.fact;\n        IF rec.about IS NOT NULL THEN\n            v_result := v_result || ' (client: ' || rec.about || ')';\n        END IF;\n        v_result := v_result || CHR(10);\n        v_count := v_count + 1;\n    END LOOP;\n    \n    IF v_count = 0 THEN\n        RETURN 'No facts found matching the criteria.';\n    END IF;\n    \n    RETURN 'Found ' || v_count || ' facts:' || CHR(10) || v_result;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Register the Remember Tool\n\nNow register the remember function as an agent tool. The instruction tells the agent when to use this tool—whenever loan officers share information worth remembering about clients.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Register the Remember Tool\n\nNow register the remember function as an agent tool. The instruction tells the agent when to use this tool, whenever loan officers share information worth remembering about clients.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Remember Tool</h2>\n\n<p>Now register the remember function as an agent tool. The instruction tells the agent when to use this tool, whenever loan officers share information worth remembering about clients.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_TOOL',\n        attributes  => '{\"instruction\": \"Store a fact about a Seers Equity client for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history, etc), P_ABOUT (optional: the client name this fact is about, e.g. Acme Industries). Use this when loan officers share important client information.\",\n                        \"function\": \"remember_fact\"}',\n        description => 'Stores facts about clients in long-term memory for future recall'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_TOOL',\n        attributes  => '{\"instruction\": \"Store a fact about a Seer Equity client for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history, etc), P_ABOUT (optional: the client name this fact is about, e.g. Sarah Chen). Use this when loan officers share important client information.\",\n                        \"function\": \"remember_fact\"}',\n        description => 'Stores facts about clients in long-term memory for future recall'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Register the Recall Tool\n\nRegister the recall function as an agent tool. The instruction tells the agent to use this when asked about a client that might be in memory.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Recall Tool</h2>\n\n<p>Register the recall function as an agent tool. The instruction tells the agent to use this when asked about a client that might be in memory.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve facts about Seers Equity clients from memory. Parameters: P_ABOUT (optional: client name to search for), P_CATEGORY (optional: filter by category like rate_exception). Use this when asked about a client you might have information about.\",\n                        \"function\": \"recall_facts\"}',\n        description => 'Retrieves stored facts about clients from long-term memory'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve facts about Seer Equity clients from memory. Parameters: P_ABOUT (optional: client name to search for), P_CATEGORY (optional: filter by category like rate_exception). Use this when asked about a client you might have information about.\",\n                        \"function\": \"recall_facts\"}',\n        description => 'Retrieves stored facts about clients from long-term memory'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Verify the Tools\n\nConfirm both tools were created and are enabled. You should see REMEMBER_TOOL and RECALL_TOOL with status ENABLED.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Tools</h2>\n\n<p>Confirm both tools were created and are enabled. You should see REMEMBER_TOOL and RECALL_TOOL with status ENABLED.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT tool_name, status, description FROM USER_AI_AGENT_TOOLS;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Create the Seers Equity Memory Agent\n\nCreate an agent that knows how to use its memory tools. The role tells the agent to use REMEMBER_TOOL when loan officers share client information and RECALL_TOOL when they ask questions.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create the Seer Equity Memory Agent\n\nCreate an agent that knows how to use its memory tools. The role tells the agent to use REMEMBER_TOOL when loan officers share client information and RECALL_TOOL when they ask questions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Seer Equity Memory Agent</h2>\n\n<p>Create an agent that knows how to use its memory tools. The role tells the agent to use REMEMBER_TOOL when loan officers share client information and RECALL_TOOL when they ask questions.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seers Equity with persistent memory. When loan officers share information about clients, use REMEMBER_TOOL to store it. When they ask questions about clients, use RECALL_TOOL to check your memory. Always use your tools - never guess about client information.\"}',\n        description => 'An agent with persistent memory for Seers Equity'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seer Equity with persistent memory. When loan officers share information about clients, use REMEMBER_TOOL to store it. When they ask questions about clients, use RECALL_TOOL to check your memory. Always use your tools - never guess about client information.\"}',\n        description => 'An agent with persistent memory for Seer Equity'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Create the Task and Team\n\nCreate a task that ties the agent to its tools, and a team that activates everything.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Task and Team</h2>\n\n<p>Create a task that ties the agent to its tools, and a team that activates everything.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'MEMORY_TASK',\n        attributes  => '{\"instruction\": \"Process this loan officer request. If the loan officer shares information about a client worth remembering, call REMEMBER_TOOL to store it. If the loan officer asks a question about a client, call RECALL_TOOL to search memory first. Do not ask clarifying questions. User request: {query}\",\n                        \"tools\": [\"REMEMBER_TOOL\", \"RECALL_TOOL\"]}',\n        description => 'Task for memory-enabled loan conversations'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"MEMORY_AGENT\", \"task\": \"MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with memory-enabled agent'\n    );\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Activate the Memory Agent\n\nSet the memory team as active for your session.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Activate the Memory Agent</h2>\n\n<p>Set the memory team as active for your session.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('MEMORY_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent about a client's contact preference. The agent should call REMEMBER_TOOL to store this.\n\n**Watch for:** The agent should confirm it remembered the fact about Acme Industries' email preference.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent about a client's contact preference. The agent should call REMEMBER_TOOL to store this.\n\n**Watch for:** The agent should confirm it remembered the fact about Sarah Chen's email preference.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Teach the Agent About a Client</h2>\n\n<p>Tell the agent about a client's contact preference. The agent should call REMEMBER_TOOL to store this.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered the fact about Sarah Chen's email preference.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT Client Acme Industries prefers to be contacted by email, not phone. Their CFO Sarah Chen handles all loan communications;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT Client Sarah Chen prefers to be contacted by email, not phone. Her timezone is Pacific;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Teach the Agent More\n\nAdd more information about the same client, including an important rate exception. The agent should store multiple facts.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Teach the Agent More</h2>\n\n<p>Add more information about the same client, including an important rate exception. The agent should store multiple facts.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT Acme Industries has been a Seers Equity client since 2018 and was approved for a 15% rate discount due to their excellent payment history;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT Sarah Chen has been a Seer Equity client since 2018 and was approved for a 15% rate discount due to her excellent payment history;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Acme Industries. The agent should call RECALL_TOOL and return all the facts it stored.\n\n**Watch for:** The agent should recall the email preference, contact name (Sarah Chen), client since 2018, and the 15% rate discount.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.\n\n**Watch for:** The agent should recall the email preference, timezone, client since 2018, and the 15% rate discount.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask What the Agent Knows</h2>\n\n<p>Now ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.</p>\n\n<p><strong>Watch for:</strong> The agent should recall the email preference, timezone, client since 2018, and the 15% rate discount.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT What do you know about Acme Industries;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT What do you know about Sarah Chen;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## The Crucial Test: Clear the Session\n\nNow the crucial test—simulate a new session by clearing and resetting the team. In Lab 5, this made the forgetful agent lose everything.\n\nLet's see what happens with memory tools.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## The Crucial Test: Clear the Session\n\nNow the crucial test. Simulate a new session by clearing and resetting the team. In Lab 5, this made the forgetful agent lose everything.\n\nLet's see what happens with memory tools.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Crucial Test: Clear the Session</h2>\n\n<p>Now the crucial test. Simulate a new session by clearing and resetting the team. In Lab 5, this made the forgetful agent lose everything.</p>\n\n<p>Let's see what happens with memory tools.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('MEMORY_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Ask in the New Session\n\nAsk about information from the \"previous session.\" This is where a normal chatbot would say \"I don't have that information.\"\n\n**Watch what happens:** The agent calls RECALL_TOOL and finds the facts! Because they're stored in the database, not session memory, they persist across sessions. The agent remembers the Seers Equity client.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Ask in the New Session\n\nAsk about information from the \"previous session.\" This is where a normal chatbot would say \"I don't have that information.\"\n\n**Watch what happens:** The agent calls RECALL_TOOL and finds the facts! Because they're stored in the database, not session memory, they persist across sessions. The agent remembers.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask in the New Session</h2>\n\n<p>Ask about information from the \"previous session.\" This is where a normal chatbot would say \"I don't have that information.\"</p>\n\n<p><strong>Watch what happens:</strong> The agent calls RECALL_TOOL and finds the facts! Because they're stored in the database, not session memory, they persist across sessions. The agent remembers.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT Who is the contact for Acme Industries and what rate discount do they have;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method and what rate discount does she have;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Examine the Memory Core\n\nLook directly at the memory table to see what's stored. You'll see each fact as a JSON document with the fact, category, client, and timestamp.\n\nThis is your memory core—visible, queryable, auditable. Unlike a black-box model, you can see exactly what the agent knows about Seers Equity clients.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Examine the Memory Core\n\nLook directly at the memory table to see what's stored. You'll see each fact as a JSON document with the fact, category, client, and timestamp.\n\nThis is your memory core, visible, queryable, auditable. Unlike a black-box model, you can see exactly what the agent knows about Seer Equity clients.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Examine the Memory Core</h2>\n\n<p>Look directly at the memory table to see what's stored. You'll see each fact as a JSON document with the fact, category, client, and timestamp.</p>\n\n<p>This is your memory core, visible, queryable, auditable. Unlike a black-box model, you can see exactly what the agent knows about Seer Equity clients.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    memory_type,\n    JSON_SERIALIZE(content PRETTY) as content_json,\n    created_at\nFROM agent_memory\nORDER BY created_at DESC;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## What You Built\n\nIn this lab, you built a **memory core** for Seers Equity using Oracle's converged database:\n\n- **Memory table with JSON** — Flexible storage for any client information\n- **Remember function** — Agent can store facts to the database\n- **Recall function** — Agent can search memories by client or category\n- **Persistent memory** — Facts survive session changes\n\n**Key takeaway:** The memory core isn't another model layer—it's a converged database. The agent's intelligence comes from the LLM, but its knowledge of Seers Equity clients comes from your database. One transaction, one security model, one query language.\n\nIn the next lab, you'll expand this to handle multiple types of memory.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## What You Built\n\nIn this lab, you built a **memory core** for Seer Equity using Oracle's converged database:\n\n- **Memory table with JSON**: Flexible storage for any client information\n- **Remember function**: Agent can store facts to the database\n- **Recall function**: Agent can search memories by client or category\n- **Persistent memory**: Facts survive session changes\n\n**Key takeaway:** The memory core isn't another model layer. It's a converged database. The agent's intelligence comes from the LLM, but its knowledge of Seer Equity clients comes from your database. One transaction, one security model, one query language.\n\nIn the next lab, you'll expand this to handle multiple types of memory.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Built</h2>\n\n<p>In this lab, you built a <strong>memory core</strong> for Seer Equity using Oracle's converged database:</p>\n\n<ul>\n<li><strong>Memory table with JSON</strong>: Flexible storage for any client information</li>\n<li><strong>Remember function</strong>: Agent can store facts to the database</li>\n<li><strong>Recall function</strong>: Agent can search memories by client or category</li>\n<li><strong>Persistent memory</strong>: Facts survive session changes</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> The memory core isn't another model layer. It's a converged database. The agent's intelligence comes from the LLM, but its knowledge of Seer Equity clients comes from your database. One transaction, one security model, one query language.</p>\n\n<p>In the next lab, you'll expand this to handle multiple types of memory.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('MEMORY_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('MEMORY_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('MEMORY_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REMEMBER_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECALL_TOOL', TRUE);\nDROP TABLE agent_memory PURGE;\nDROP FUNCTION remember_fact;\nDROP FUNCTION recall_facts;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
   "name": "Lab 7 - Where Memory Lives",
@@ -150,6 +592,8 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
-  "config": { "isZeppelinNotebookCronEnable": false },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
   "info": {}
 }

@@ -1,136 +1,547 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## Experience the Forgetting Problem at Seers Equity\n\n### The Business Problem\n\nLast month, a loan officer quoted standard rates to Sarah Chen from Acme Industries—a client who's been with Seers Equity for six years and has a 15% rate exception on file.\n\nSarah was not happy.\n\n*\"I've told three different people my preferences. I've explained my rate arrangement every time I call. Why doesn't anyone remember?\"*\n\nThe answer: The AI assistants have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned about a client last week, or what exceptions were approved before.\n\n### What You'll Learn\n\nIn this lab, you'll experience this problem firsthand:\n\n1. Tell an agent important information about a client (preferences, rate exceptions, relationship history)\n2. The agent acknowledges and seems to understand\n3. Clear the session (simulating the next day)\n4. Ask the agent what it knows about that client\n5. **It has no idea who you're talking about**\n\nThis is exactly what's happening to Seers Equity's clients. And it's why memory isn't optional—it's essential.\n\n**What you'll experience:** The forgetting problem that frustrates clients and costs business.\n\n**Estimated Time:** 10 minutes",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Experience the Forgetting Problem at Seer Equity\n\n### The Business Problem\n\nLast month, a loan officer quoted standard rates to Sarah Chen, a client who's been with Seer Equity for six years and has a 15% rate exception on file.\n\nSarah was not happy.\n\n*\"I've told three different people my preferences. I've explained my rate arrangement every time I call. Why doesn't anyone remember?\"*\n\nThe answer: The AI assistants have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned about a client last week, or what exceptions were approved before.\n\n### What You'll Learn\n\nIn this lab, you'll experience this problem firsthand:\n\n1. Tell an agent important information about a client (preferences, rate exceptions, relationship history)\n2. The agent acknowledges and seems to understand\n3. Clear the session (simulating the next day)\n4. Ask the agent what it knows about that client\n5. **It has no idea who you're talking about**\n\nThis is exactly what's happening to Seer Equity's clients. And it's why memory isn't optional, it's essential.\n\n**What you'll experience:** The forgetting problem that frustrates clients and costs business.\n\n**Estimated Time:** 10 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Experience the Forgetting Problem at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Last month, a loan officer quoted standard rates to Sarah Chen, a client who's been with Seer Equity for six years and has a 15% rate exception on file.</p>\n\n<p>Sarah was not happy.</p>\n\n<p><em>\"I've told three different people my preferences. I've explained my rate arrangement every time I call. Why doesn't anyone remember?\"</em></p>\n\n<p>The answer: The AI assistants have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned about a client last week, or what exceptions were approved before.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll experience this problem firsthand:</p>\n\n<ol>\n<li>Tell an agent important information about a client (preferences, rate exceptions, relationship history)</li>\n<li>The agent acknowledges and seems to understand</li>\n<li>Clear the session (simulating the next day)</li>\n<li>Ask the agent what it knows about that client</li>\n<li><strong>It has no idea who you're talking about</strong></li>\n</ol>\n\n<p>This is exactly what's happening to Seer Equity's clients. And it's why memory isn't optional, it's essential.</p>\n\n<p><strong>What you'll experience:</strong> The forgetting problem that frustrates clients and costs business.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%md\n## Create an Agent Without Memory\n\nThis agent has no way to store or retrieve information between sessions. It's a typical \"forgetful\" agent.\n\nNotice the role says \"remember any preferences\"—but without memory tools, that's just wishful thinking.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Create an Agent Without Memory\n\nThis agent has no way to store or retrieve information between sessions. It's a typical \"forgetful\" agent.\n\nNotice the role says \"remember any preferences\" but without memory tools, that's just wishful thinking.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create an Agent Without Memory</h2>\n\n<p>This agent has no way to store or retrieve information between sessions. It's a typical \"forgetful\" agent.</p>\n\n<p>Notice the role says \"remember any preferences\" but without memory tools, that's just wishful thinking.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Create a basic SQL tool so the agent can function\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'BASIC_SQL_TOOL',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Basic SQL query tool'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'FORGETFUL_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a helpful loan officer assistant for Seers Equity. Remember any preferences or information clients share with you so you can serve them better on future loan applications.\"}',\n        description => 'Agent without memory capabilities'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'FORGETFUL_TASK',\n        attributes  => '{\"instruction\": \"Help the loan officer with their request. {query}\",\n                        \"tools\": [\"BASIC_SQL_TOOL\"]}',\n        description => 'Task without memory tools'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'FORGETFUL_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating memory limitations'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\n-- Create a basic SQL tool so the agent can function\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'BASIC_SQL_TOOL',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Basic SQL query tool'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'FORGETFUL_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a helpful loan officer assistant for Seer Equity. Remember any preferences or information clients share with you so you can serve them better on future loan applications.\"}',\n        description => 'Agent without memory capabilities'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'FORGETFUL_TASK',\n        attributes  => '{\"instruction\": \"Help the loan officer with their request. {query}\",\n                        \"tools\": [\"BASIC_SQL_TOOL\"]}',\n        description => 'Task without memory tools'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'FORGETFUL_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating memory limitations'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Activate the Agent\n\nSet the team so your SELECT AI AGENT commands go to this forgetful agent.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Activate the Agent</h2>\n\n<p>Set the team so your SELECT AI AGENT commands go to this forgetful agent.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Share Important Information About a Client\n\nTell the agent your client's name, company, preferred contact method, and special circumstances. This is exactly the kind of information a good loan officer assistant should remember.\n\nThe agent will acknowledge this politely. It seems to understand.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Share Important Information About a Client\n\nTell the agent your client's name, preferred contact method, and special circumstances. This is exactly the kind of information a good loan officer assistant should remember.\n\nThe agent will acknowledge this politely. It seems to understand.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Share Important Information About a Client</h2>\n\n<p>Tell the agent your client's name, preferred contact method, and special circumstances. This is exactly the kind of information a good loan officer assistant should remember.</p>\n\n<p>The agent will acknowledge this politely. It seems to understand.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT AI AGENT Client Sarah Chen from Acme Industries prefers email contact and is in Pacific timezone. She has been approved for a 15% rate exception due to her long relationship with Seers Equity. Please remember this for future interactions;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "text": "%script\nSELECT AI AGENT Client Sarah Chen prefers email contact and is in Pacific timezone. She has been approved for a 15% rate exception due to her long relationship with Seer Equity. Please remember this for future interactions;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Test Immediate Recall\n\nAsk the agent about what you just said. In the same session, the context is still available.\n\nYou should get the correct answer: email contact.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Immediate Recall</h2>\n\n<p>Ask the agent about what you just said. In the same session, the context is still available.</p>\n\n<p>You should get the correct answer: email contact.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Test Another Detail\n\nAsk about the rate exception. Still in the same session, so this should work too.\n\nYou should get: 15% rate exception.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Another Detail</h2>\n\n<p>Ask about the rate exception. Still in the same session, so this should work too.</p>\n\n<p>You should get: 15% rate exception.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT What rate exception was Sarah Chen approved for;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Simulate Session End\n\nNow simulate what happens when a session ends—perhaps the loan officer logs out, the connection times out, or a new day begins.\n\nCLEAR_TEAM resets the session context. This is equivalent to starting fresh.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Simulate Session End\n\nNow simulate what happens when a session ends. Perhaps the loan officer logs out, the connection times out, or a new day begins.\n\nCLEAR_TEAM resets the session context. This is equivalent to starting fresh.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Simulate Session End</h2>\n\n<p>Now simulate what happens when a session ends. Perhaps the loan officer logs out, the connection times out, or a new day begins.</p>\n\n<p>CLEAR_TEAM resets the session context. This is equivalent to starting fresh.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Start a New Session\n\nReactivate the team. This is like the loan officer returning the next day.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Start a New Session</h2>\n\n<p>Reactivate the team. This is like the loan officer returning the next day.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Try to Recall the Client's Preferences\n\nAsk the same question you asked before. Watch what happens.\n\n**The agent doesn't know.** It might say it doesn't have that information, or ask you to tell it. Everything you shared about Sarah Chen is gone.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try to Recall the Client's Preferences</h2>\n\n<p>Ask the same question you asked before. Watch what happens.</p>\n\n<p><strong>The agent doesn't know.</strong> It might say it doesn't have that information, or ask you to tell it. Everything you shared about Sarah Chen is gone.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Try to Recall the Rate Exception\n\nAsk about the special rate exception. The agent that just acknowledged her 15% exception now has no idea.\n\n**Gone.** The rate exception, company, everything—forgotten. In financial services, this is a compliance nightmare.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Try to Recall the Rate Exception\n\nAsk about the special rate exception. The agent that just acknowledged her 15% exception now has no idea.\n\n**Gone.** The rate exception, everything, forgotten. In financial services, this is a compliance nightmare.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try to Recall the Rate Exception</h2>\n\n<p>Ask about the special rate exception. The agent that just acknowledged her 15% exception now has no idea.</p>\n\n<p><strong>Gone.</strong> The rate exception, everything, forgotten. In financial services, this is a compliance nightmare.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT What rate exception was Sarah Chen approved for;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## The Business Impact: Day 1\n\nThis isn't just annoying—it breaks real workflows at Seers Equity. Let's simulate a loan scenario.\n\nDay 1: A loan applicant is working through a complex application. The agent acknowledges the details.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## The Business Impact: Day 1\n\nThis isn't just annoying. It breaks real workflows at Seer Equity. Let's simulate a loan scenario.\n\nDay 1: A loan applicant is working through a complex application. The agent acknowledges the details.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Business Impact: Day 1</h2>\n\n<p>This isn't just annoying. It breaks real workflows at Seer Equity. Let's simulate a loan scenario.</p>\n\n<p>Day 1: A loan applicant is working through a complex application. The agent acknowledges the details.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Simulate Day 2\n\nNight passes. New session begins. The loan officer calls back expecting to continue the application.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Simulate Day 2</h2>\n\n<p>Night passes. New session begins. The loan officer calls back expecting to continue the application.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
       "text": "%md\n## Loan Officer Asks for Status\n\nThe loan officer assumes the agent remembers the TechStart application. They ask for an update.\n\n**The agent has no idea what application you're talking about.** The loan officer has to explain everything again. The January 31st deadline? Forgotten. The missing business plan? Lost. They're starting from zero.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Loan Officer Asks for Status</h2>\n\n<p>The loan officer assumes the agent remembers the TechStart application. They ask for an update.</p>\n\n<p><strong>The agent has no idea what application you're talking about.</strong> The loan officer has to explain everything again. The January 31st deadline? Forgotten. The missing business plan? Lost. They're starting from zero.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT AI AGENT What documents are still missing for the TechStart loan application;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## What's Missing\n\nLet's look at what tools this agent has. You'll see it has no memory tools—no way to store or retrieve information persistently.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## What's Missing\n\nLet's look at what tools this agent has. You'll see it has no memory tools, no way to store or retrieve information persistently.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What's Missing</h2>\n\n<p>Let's look at what tools this agent has. You'll see it has no memory tools, no way to store or retrieve information persistently.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT tool_name, description \nFROM USER_AI_AGENT_TOOLS;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## Check the Tool History\n\nLook at recent tool calls. You won't see any REMEMBER or RECALL tools—because this agent doesn't have them.\n\nThe agent can only work with what's in the current conversation context. Once that context is cleared, everything is lost.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## Check the Tool History\n\nLook at recent tool calls. You won't see any REMEMBER or RECALL tools because this agent doesn't have them.\n\nThe agent can only work with what's in the current conversation context. Once that context is cleared, everything is lost.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Tool History</h2>\n\n<p>Look at recent tool calls. You won't see any REMEMBER or RECALL tools because this agent doesn't have them.</p>\n\n<p>The agent can only work with what's in the current conversation context. Once that context is cleared, everything is lost.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as called_at\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '10' MINUTE\nORDER BY start_date DESC;",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     },
     {
-      "text": "%md\n## The Two Types of Memory\n\n**Chat memory** (what this agent has):\n- Lives in the conversation context\n- Cleared when session ends\n- Works for single conversations\n- Fails for ongoing loan relationships\n\n**Agentic memory** (what this agent lacks):\n- Persists in the database\n- Survives session boundaries\n- Builds knowledge over time\n- Enables continuous client service\n\nWithout agentic memory, agents at Seers Equity are like loan officers with amnesia—helpful in the moment, but unable to build client relationships or track application progress.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## The Two Types of Memory\n\n**Chat memory** (what this agent has):\n- Lives in the conversation context\n- Cleared when session ends\n- Works for single conversations\n- Fails for ongoing loan relationships\n\n**Agentic memory** (what this agent lacks):\n- Persists in the database\n- Survives session boundaries\n- Builds knowledge over time\n- Enables continuous client service\n\nWithout agentic memory, agents at Seer Equity are like loan officers with amnesia. They're helpful in the moment, but unable to build client relationships or track application progress.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Two Types of Memory</h2>\n\n<p><strong>Chat memory</strong> (what this agent has):</p>\n<ul>\n<li>Lives in the conversation context</li>\n<li>Cleared when session ends</li>\n<li>Works for single conversations</li>\n<li>Fails for ongoing loan relationships</li>\n</ul>\n\n<p><strong>Agentic memory</strong> (what this agent lacks):</p>\n<ul>\n<li>Persists in the database</li>\n<li>Survives session boundaries</li>\n<li>Builds knowledge over time</li>\n<li>Enables continuous client service</li>\n</ul>\n\n<p>Without agentic memory, agents at Seer Equity are like loan officers with amnesia. They're helpful in the moment, but unable to build client relationships or track application progress.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%md\n## What You Learned\n\nIn this lab, you experienced the forgetting problem:\n\n- **Shared information** — Told the agent about client preferences and loan details\n- **Immediate recall worked** — Context was available within the session\n- **Session ended** — Cleared the team, simulating logout\n- **Everything forgotten** — Agent had no idea about the client or loan\n- **Business impact** — Loan application tracking breaks completely\n\n**Key takeaway:** Chat memory is temporary. Agentic memory is persistent. Without persistent memory, agents at Seers Equity can't maintain client relationships, track loan applications across sessions, or learn from experience.\n\nIn the next lab, you'll see where that memory should live.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "text": "%md\n## What You Learned\n\nIn this lab, you experienced the forgetting problem:\n\n- **Shared information**: Told the agent about client preferences and loan details\n- **Immediate recall worked**: Context was available within the session\n- **Session ended**: Cleared the team, simulating logout\n- **Everything forgotten**: Agent had no idea about the client or loan\n- **Business impact**: Loan application tracking breaks completely\n\n**Key takeaway:** Chat memory is temporary. Agentic memory is persistent. Without persistent memory, agents at Seer Equity can't maintain client relationships, track loan applications across sessions, or learn from experience.\n\nIn the next lab, you'll see where that memory should live.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you experienced the forgetting problem:</p>\n\n<ul>\n<li><strong>Shared information</strong>: Told the agent about client preferences and loan details</li>\n<li><strong>Immediate recall worked</strong>: Context was available within the session</li>\n<li><strong>Session ended</strong>: Cleared the team, simulating logout</li>\n<li><strong>Everything forgotten</strong>: Agent had no idea about the client or loan</li>\n<li><strong>Business impact</strong>: Loan application tracking breaks completely</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> Chat memory is temporary. Agentic memory is persistent. Without persistent memory, agents at Seer Equity can't maintain client relationships, track loan applications across sessions, or learn from experience.</p>\n\n<p>In the next lab, you'll see where that memory should live.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "md" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);",
-      "config": { "colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": { "language": "sql" } }
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
   "name": "Lab 5 - Why Agents Need Memory",
@@ -138,6 +549,8 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
-  "config": { "isZeppelinNotebookCronEnable": false },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
   "info": {}
 }

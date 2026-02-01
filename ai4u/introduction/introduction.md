@@ -10,15 +10,15 @@ This workshop shows how to build AI agents with **agentic memory**: agents that 
 
 ## Meet Seer Equity
 
-Throughout this workshop, you'll build AI agents for **Seers Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
+Throughout this workshop, you'll build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
 
-Seers Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
+Seer Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
 
 ### The Problems Keeping Leadership Up at Night
 
 **"We keep forgetting our best clients."**
 
-Last month, a loan officer quoted standard rates to Sarah Chen from Acme Industries, a client who's been with Seers Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
+Last month, a loan officer quoted standard rates to Sarah Chen, a client who's been with Seer Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
 
 **"Every loan officer handles the same situation differently."**
 
@@ -38,7 +38,7 @@ Compliance requires that the person who submits a loan application can't be the 
 
 ### How Agent Memory Solves These Problems
 
-This workshop walks you through building AI agents that address each of Seers Equity's struggles:
+This workshop walks you through building AI agents that address each of Seer Equity's struggles:
 
 | Business Problem | Agent Solution | You'll Build It In |
 |------------------|----------------|---------------------|
@@ -62,7 +62,7 @@ By the end, you'll have a complete loan processing system where:
 
 ✅ **Start with the basics (Labs 1-4)**
 
-Before solving Seers Equity's problems, you need to understand how agents work:
+Before solving Seer Equity's problems, you need to understand how agents work:
 
 * **Lab 1 – What is an AI Agent?** Build your first agent that queries loan application data. See the difference between a chatbot that *explains* how to check loan status versus an agent that *actually checks it*.
 
@@ -70,15 +70,15 @@ Before solving Seers Equity's problems, you need to understand how agents work:
 
 * **Lab 3 – How Agents Plan** Give an agent a complex request about a loan applicant. Watch it plan which tools to call and in what order. See how explicit instructions create predictable behavior.
 
-* **Lab 4 – How Agents Execute** Build Seers Equity's loan risk assessment workflow. Create tools that evaluate loan applications and route them based on amount and type. See conditional logic in action: auto-approve, underwriter review, or senior underwriter.
+* **Lab 4 – How Agents Execute** Build Seer Equity's loan risk assessment workflow. Create tools that evaluate loan applications and route them based on amount and type. See conditional logic in action: auto-approve, underwriter review, or senior underwriter.
 
 ✅ **Build memory systems (Labs 5-9)**
 
-Now you'll solve the "forgetting" problem that frustrates Seers Equity's clients:
+Now you'll solve the "forgetting" problem that frustrates Seer Equity's clients:
 
-* **Lab 5 – Experience the Forgetting Problem** Tell an agent about Sarah Chen's email preference and 15% rate exception. Clear the session. Ask again. *The agent has no idea who Sarah Chen is.* This is exactly what's happening to Seers Equity's clients.
+* **Lab 5 – Experience the Forgetting Problem** Tell an agent about Sarah Chen's email preference and 15% rate exception. Clear the session. Ask again. *The agent has no idea who Sarah Chen is.* This is exactly what's happening to Seer Equity's clients.
 
-* **Lab 6 – Connect Agents to Enterprise Data** Ask an agent about Seers Equity's loan rates. Without enterprise data, it gives generic answers. Connect it to the actual policy database and watch it quote real rates, requirements, and client-specific information.
+* **Lab 6 – Connect Agents to Enterprise Data** Ask an agent about Seer Equity's loan rates. Without enterprise data, it gives generic answers. Connect it to the actual policy database and watch it quote real rates, requirements, and client-specific information.
 
 * **Lab 7 – Build Your Memory Core** Create memory tables using Oracle's native JSON. Build `remember_fact` and `recall_facts` functions. Register them as agent tools. Now when you tell the agent about Sarah Chen, clear the session, and ask again, *the agent remembers*.
 
@@ -117,54 +117,54 @@ Finally, you'll build the guardrails that make agents safe for financial service
   - Full input and output captured
   - Queryable for compliance review
 
-## The Seers Equity Loan Workflow
+## The Seer Equity Loan Workflow
 
 Here's the complete workflow you'll build across the labs:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     SEERS EQUITY LOAN PROCESSING                │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  CLIENT APPLIES                                                 │
-│       ↓                                                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ LOAN AGENT (Loan Officer)                                │   │
-│  │ • Recalls client history from memory                     │   │
-│  │ • Looks up applicable rates and policies                 │   │
-│  │ • Submits application with risk assessment               │   │
-│  │ • Stores new client information for next time            │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│       ↓                                                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ RISK ASSESSMENT                                          │   │
-│  │ • Credit < 550         → BLOCKED                         │   │
-│  │ • Personal < $50K      → AUTO_APPROVE                    │   │
-│  │ • $50K - $250K         → UNDERWRITER_REVIEW              │   │
-│  │ • > $250K or Mortgage  → SENIOR_UNDERWRITER              │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│       ↓                                                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ UNDERWRITING AGENT (if needed)                           │   │
-│  │ • Reviews pending applications                           │   │
-│  │ • Checks past decisions for similar situations           │   │
-│  │ • Approves or denies with logged rationale               │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│       ↓                                                         │
-│  DECISION RECORDED → AUDIT TRAIL COMPLETE                       │
-│                                                                 │
-├─────────────────────────────────────────────────────────────────┤
-│  RATE TIERS                                                     │
-│  • Preferred (750+ credit): 7.9% APR, up to $100K              │
-│  • Standard (650-749):      12.9% APR, up to $50K              │
-│  • Rate exceptions: Up to 15% discount for 5+ year clients     │
-├─────────────────────────────────────────────────────────────────┤
-│  MEMORY ENABLES                                                 │
-│  • Client preferences persist across sessions                   │
-│  • Rate exceptions are remembered and applied                   │
-│  • Past decisions guide new ones                                │
-│  • Every action is logged for compliance                        │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│                  SEER EQUITY LOAN PROCESSING                  │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│  CLIENT APPLIES                                               │
+│       ↓                                                       │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ LOAN AGENT (Loan Officer)                               │  │
+│  │ • Recalls client history from memory                    │  │
+│  │ • Looks up applicable rates and policies                │  │
+│  │ • Submits application with risk assessment              │  │
+│  │ • Stores new client information for next time           │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│       ↓                                                       │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ RISK ASSESSMENT                                         │  │
+│  │ • Credit < 550         → BLOCKED                        │  │
+│  │ • Personal < $50K      → AUTO_APPROVE                   │  │
+│  │ • $50K - $250K         → UNDERWRITER_REVIEW             │  │
+│  │ • > $250K or Mortgage  → SENIOR_UNDERWRITER             │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│       ↓                                                       │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ UNDERWRITING AGENT (if needed)                          │  │
+│  │ • Reviews pending applications                          │  │
+│  │ • Checks past decisions for similar situations          │  │
+│  │ • Approves or denies with logged rationale              │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│       ↓                                                       │
+│  DECISION RECORDED → AUDIT TRAIL COMPLETE                     │
+│                                                               │
+├───────────────────────────────────────────────────────────────┤
+│  RATE TIERS                                                   │
+│  • Preferred (750+ credit): 7.9% APR, up to $100K             │
+│  • Standard (650-749):      12.9% APR, up to $50K             │
+│  • Rate exceptions: Up to 15% discount for 5+ year clients    │
+├───────────────────────────────────────────────────────────────┤
+│  MEMORY ENABLES                                               │
+│  • Client preferences persist across sessions                 │
+│  • Rate exceptions are remembered and applied                 │
+│  • Past decisions guide new ones                              │
+│  • Every action is logged for compliance                      │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ### Objectives
@@ -180,16 +180,14 @@ By the end of this workshop, you'll be able to:
 
 ### Prerequisites
 
-This lab assumes you have:
+For this workshop, we provide the environment. You'll need:
 
-* An Oracle Cloud account with access to Oracle Database 26ai
-* Access to an AI provider (OCI Generative AI, OpenAI, etc.)
-* Basic knowledge of SQL and PL/SQL
+* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
 ## Learn More
 
 * [Oracle Database 26ai Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
-* [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 * [AI Vector Search Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)
 
 ## Acknowledgements
