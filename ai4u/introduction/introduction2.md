@@ -10,6 +10,8 @@ AI agents are different. They act. Ask an agent about a loan status and it queri
 
 This workshop teaches you to build agents that execute instead of explain.
 
+![Introduction to Seer Equity](./images/intro.png " ")
+
 ## Meet Seer Equity
 
 Throughout this workshop, you'll build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.

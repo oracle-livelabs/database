@@ -4,6 +4,8 @@
 
 Most people think AI is just a chatbot. You ask a question, it gives an answer. But agents do more. They don't just respond, they *act*. They look up real data, make decisions based on your systems, and complete tasks.
 
+![What Is An Agent?](./images/intro-lab1.png " ")
+
 In this lab, you'll see that difference firsthand at **Seer Equity**, a growing financial services company. You'll create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
 
 ### The Business Problem
