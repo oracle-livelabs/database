@@ -6,7 +6,7 @@ Most people think AI is just a chatbot. You ask a question, it gives an answer. 
 
 ![What Is An Agent?](./images/intro-lab1.png " ")
 
-In this lab, you'll see that difference firsthand at **Seer Equity**, a growing financial services company. You'll create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
+In this lab, you will see that difference firsthand at Seer Equity, a fictitional growing financial services company. you will create an agent that can query actual loan application data from your database. It won't explain how to check applications. It will actually check them and give you real answers.
 
 ### The Business Problem
 
@@ -20,13 +20,13 @@ The company tried deploying a chatbot. But when a client asked "What's the statu
 >
 > Frustrated Seer Equity client
 
-### What You'll Learn
+### What you will Learn
 
-This lab shows you the fundamental difference between a chatbot (explains how) and an agent (actually does it). You'll build an agent that queries real loan data and returns actual answers. This is the first step toward solving Seer Equity's client service challenges.
+This lab shows you the fundamental difference between a chatbot (explains how) and an agent (actually does it). you will build an agent that queries real loan data and returns actual answers. This is the first step toward solving Seer Equity's client service challenges.
 
-**What you'll build:** A loan application lookup agent with a SQL tool that queries your database.
+**What you will build:** A loan application lookup agent with a SQL tool that queries your database.
 
-Estimated Time: 10 minutes
+**Estimated Time**: 10 minutes
 
 ### Objectives
 
@@ -37,9 +37,9 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. you will need:
 
-* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
+* Basic knowledge of SQL or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
@@ -411,12 +411,16 @@ In this lab, you experienced the fundamental nature of AI agents:
 
 ## Learn More
 
+* [Get an Autonomous Database for FREE!](https://www.oracle.com/autonomous-database/free-trial/)
+* [Mark Hornick's Select AI Agent Blog](https://blogs.oracle.com/machinelearning/build-your-agentic-solution-using-oracle-adb-select-ai-agent)
+* [Oracle Database Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
 * [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - Kay Malcolm, February 2026
 
 ## Cleanup (Optional)
 
