@@ -30,7 +30,7 @@ The company deployed AI chatbots to help loan officers, but they're black boxes.
 
 **"Small loans take as long to process as big ones."**
 
-A $25,000 personal loan for a client with excellent credit shouldn't require the same scrutiny as a $500,000 mortgage. But without smart routing, everything goes through the same manual review process. Loan officers spend hours on applications that should take minutes.
+A $25,000 loan for a client with excellent credit shouldn't require the same scrutiny as a $500,000 mortgage. But without smart routing, everything goes through the same manual review process. Loan officers spend hours on applications that should take minutes.
 
 **"We can't enforce separation of duties."**
 
