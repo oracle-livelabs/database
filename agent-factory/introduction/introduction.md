@@ -1,31 +1,24 @@
 # Introduction to Oracle AI Database Private Agent Factory
 
 ## Introduction
-Welcome to the first lab of this 10-part workshop series. In this lab, you will gain understanding of core-concepts and high level featuresof the **Oracle AI Database Private Agent Factory (Agent Factory)** and how it enables enterprises to easily build and deploy Generative AI Agents privately, and securely.
+Welcome to this 4-part workshop series. This workshop will guide you through the **Oracle AI Database Private Agent Factory (Agent Factory)**, demonstrating how enterprises rapidly build and deploy Generative AI Agents privately and securely.
 
 **Estimated time:** 5 minutes.
 
 ### Objectives
 
-Throughout this workshop we will cover the following:
+This workshop has 4 core objectives:
 
-1. Installation and Configure
-    * 1a. Installation of the Private Agent Factory from the OCI Marketplace
-    * 1b. Installation of the Private Agent Factory from source
-2. Log in to the Private Agent Factory
-3. Knowledge Agent: A Pre-Built RAG Agent
-4. Data Analysis Agent: A Pre-Built Database Agent for NL2SQL
-5. Agents Built from Custom Templates
-6. Agent Builder: Build Agents From Scratch
-7. Deploy Agents from the Private Agent Factory
-8. Add Data Sources to Private Agent Factory
-9. Configure SSO on the Private Agent Factory
+1. Install and Configure the Private Agent Factory
+2. Build your First Agent
+3. Bootstrap Agents from Templates
+4. Customize Agents with the Agent Builder UI
 
-Users are encouraged to skip around to the workshops most pertinent to them.
+Users are encouraged to skip around to the lab most pertinent to them.
 
 ### Prerequisites
 
-* OCI Tenancy with ability to create compute instance, Oracle AI Database Autonommous Database, Resource Manager, Marketplace, VCN with public-subnet
+* OCI Tenancy with ability to create compute instance, Oracle AI Database Autonommous Database, Resource Manager, Marketplace, VCN with public-subnet.
 
 ## Task 1: The Big Picture: From AI to Agentic AI
 To understand the Private Agent Factory, we must first look at the broader landscape of artificial intelligence. The evolution of AI moves through several distinct phases:
@@ -53,10 +46,13 @@ Agent Factory allows you to build production grade AI Agents quickly with the fo
 * **Performance:** Leverages **Vector AI Search** and in-database execution for maximum speed.
 * **Privacy:** Offers **air-gapped options** for data, LLMs, and agents to ensure your proprietary information never leaves your control.
 
+You may now **proceed to the next lab**
+
 ## Acknowledgements
 
 - **Authors** 
 * Emilio Perez, Member of Technical Staff, Database Applied AI
 * Allen Hosler, Principal Product Manager, Database Applied AI
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
 - **Last Updated Date** - January, 2026
