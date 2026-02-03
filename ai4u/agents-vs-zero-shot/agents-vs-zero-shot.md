@@ -2,9 +2,11 @@
 
 ## Introduction
 
-In this lab, you'll directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seer Equity**.
+In this lab, you will directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seer Equity**.
 
 Zero-shot prompting means: one question, one answer, done. It's useful for general knowledge, but it doesn't execute workflows or access your data. Agents break tasks into steps, use tools, and actually complete the work.
+
+![Agents vs Chatbots](./images/intro-lab2.png " ")
 
 ### The Business Problem
 
@@ -21,13 +23,13 @@ Seer Equity needs AI that can:
 - **Take action**: Update statuses, not just explain how to update them
 - **Coordinate steps**: Check a condition, then act on it
 
-### What You'll Learn
+### What You Will Learn
 
-This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). You'll see exactly where each approach works and where it fails.
+This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). you will see exactly where each approach works and where it fails.
 
-**What you'll build:** A comparison demonstrating when to use chat vs agents, plus an agent that can both read AND update loan data.
+**What you will build:** A comparison demonstrating when to use chat vs agents, plus an agent that can both read AND update loan data.
 
-Estimated Time: 10 minutes
+**Estimated Time**: 10 minutes
 
 ### Objectives
 
@@ -38,9 +40,9 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
-* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
+* Basic knowledge of SQL, or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
@@ -518,12 +520,15 @@ You watched the agent coordinate: check status, decide, act, report. And you ver
 
 ## Learn More
 
+* [Get an Autonomous Database for FREE!](https://www.oracle.com/autonomous-database/free-trial/)
+* [Mark Hornick's Select AI Agent Blog](https://blogs.oracle.com/machinelearning/build-your-agentic-solution-using-oracle-adb-select-ai-agent)
+* [Oracle Database Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
 * [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - Kay Malcolm, February 2026
 
 ## Cleanup (Optional)
 
