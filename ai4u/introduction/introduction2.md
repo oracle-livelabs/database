@@ -10,6 +10,8 @@ AI agents are different. They act. Ask an agent about a loan status and it queri
 
 This workshop teaches you to build agents that execute instead of explain.
 
+![Introduction to Seer Equity](./images/intro.png " ")
+
 ## Meet Seer Equity
 
 Throughout this workshop, you'll build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
@@ -56,7 +58,7 @@ Compliance requires that the person who submits a loan application can't be the 
 
 We'll solve all of these problems in future labs. Here's what Seer Equity will build:
 
-| Business Problem | Agent Solution | You'll Build It In |
+| Business Problem | Agent Solution | you will Build It In |
 |------------------|----------------|---------------------|
 | Forgetting client preferences | Persistent memory that survives sessions | Labs 5, 7, 9 |
 | Inconsistent decisions | Past decision lookup for guidance | Labs 8, 9 |
@@ -77,10 +79,6 @@ This is an ongoing series following Seer Equity as they transform their AI from 
 
 * **Lab 2: Agents vs Zero-Shot.** Compare three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions.
 
-### Objectives
-
-By the end of this workshop, you'll be able to:
-
 * Explain the difference between a chatbot and an agent
 * Create database tables with comments that help Select AI understand your schema
 * Build an agent with a SQL tool using Oracle Select AI Agent framework
@@ -93,14 +91,28 @@ By the end of this workshop, you'll be able to:
 
 For this workshop, we provide the environment. You'll need:
 
-* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
+* Explain the difference between a chatbot and an agent
+* Create database tables with comments that help Select AI understand your schema
+* Build an agent with a SQL tool using Oracle Select AI Agent framework
+* Query the agent using natural language and receive data-driven answers
+* View execution history to see what the agent did
+* Choose the right approach (zero-shot, SELECT AI, or agent) for different use cases
+* Build agents that can update data based on conditional logic
+
+### Prerequisites
+
+For this workshop, we provide the environment. you will need:
+
+* Basic knowledge of SQL, or the ability to follow along with the prompts
 
 ## Learn More
 
+* [Get an Autonomous Database for FREE!](https://www.oracle.com/autonomous-database/free-trial/)
+* [Mark Hornick's Select AI Agent Blog](https://blogs.oracle.com/machinelearning/build-your-agentic-solution-using-oracle-adb-select-ai-agent)
 * [Oracle Database Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
 * [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - Kay Malcolm, February 2026
