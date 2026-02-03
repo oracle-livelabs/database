@@ -89,7 +89,7 @@ This is an ongoing series following Seer Equity as they transform their AI from 
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
 * Explain the difference between a chatbot and an agent
 * Create database tables with comments that help Select AI understand your schema
