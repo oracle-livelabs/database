@@ -71,7 +71,7 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-5. Click **Import**.
+5. Click **Ok**.
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
