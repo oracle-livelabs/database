@@ -101,7 +101,7 @@ For this workshop, we provide the environment. You will need:
 
 ### Prerequisites
 
-For this workshop, we provide the environment. you will need:
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL, or the ability to follow along with the prompts
 
