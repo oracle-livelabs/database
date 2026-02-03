@@ -10,99 +10,113 @@ In this lab session, you will learn how to leverage the Agent Builder within Ora
 
 By the end of this lab, you will be able to:
 
-- Familiarize yourself with the Agent Builder to visually design, assemble, and automate new workflows using diverse components.
-- Gain hands-on experience in creating, testing, and refining your own workflows tailored to specific business needs.
+- Build agent from scratch using the visual Agent Builder tool
+- Publish custom agents
 
 ### Prerequisites
 
-To follow this tutorial, you need access to an Oracle AI Database Private Agent Factory environment with the necessary permissions to use Agent Builder tools. You should also have access to at least one data file (such as a PDF) and an LLM configuration that is available in your environment.
+* an LLM configuration (grok-4 through OCI Gen AI is recommended)
+* The Netflix Dataset imported from the Utilities - Datasets tab on the left-hand menu (This was installed during "Lab 2: Build your First Agent")
 
-> Note: Screenshots in this tutorial use example files and configurations for illustration purposes. When following along, use resources that are available in your environment.
+## Task 1: Open Agent Builder
+
+Navigate to the **Agent builder** tab on the left-hand menu. *If there is already an agent configuration present from a previous lab, click **New Flow**.*
+
+    ![Blank canvas on Agent Builder page](images/blank.png)
+
+## Task 2: Assemble First Agent
+
+### Add components to the canvas
+
+To begin, find the **Chat input** node from the **Components** tool bar. Drag it onto the canvas, or simply click the **+** button.
+
+Next find the **Agent** component near the top of the menu. Drag that onto the canvas.
+
+Find the **Chat output** node near the bottom of the menu, and drag it onto the canvas.
+
+### Connect components
+
+Drag the blue dot from the **Chat input** component to the **Prompt** field of the agent. 
+
+Then drag the **Message** blue dot on the Agent component to the **Message** dot on the **Chat output** component
+
+### Name the agent
+
+Click the pencil icon at the top center of the canvas to rename the agent "Simple Agent".
+
+    ![Simple components on Agent Builder page](images/simple.png)
+
+## Task 3: Experiment with First Agent
+
+Click the **Save** button, then click the **Playground** button.
+
+Ask the agent any question to confirm it is working properly.
+
+    ![Playground for a simple custom agent](images/simple-question.png)
 
 
-## Task 1: Explore the agent builder
+## Task 4: Add data
 
-The Agent Builder enables you to design, orchestrate, and automate complex processes by combining modular components, such as language models, data connectors, APIs, and specialized agents, without the need for extensive programming.
+### Back to agent builder
 
-With the Agent Builder, you can visually construct workflows by connecting nodes that represent specific actions, tools, or data sources using a straightforward drag-and-drop interface. This feature allows you to build intelligent workflows using components like LLMs, chat agents, and data processing tools. You can also define agents that autonomously perform tasks, make decisions, or interact with systems based on your workflows.
+Click the **Go back to builder** button to return to the Agent builder.
 
-Workflows created with the Agent Builder can be seamlessly integrated with enterprise systems, third-party services, cloud APIs, and databases. They are reusable and can easily be modified to meet varying business requirements.
+### Add a data source
 
-The following table explores the various types of nodes you can use in the Agent Builder to create custom workflows. You may mix and match them to tailor workflows to your specific goals.
+Click on the line connecting **Chat input** to **Agent** and hit the *backspace key* on your keyboard to delete the connection.
 
-| Type | Description |
-|--|--|
-| Language Model | *vLLM*: Node leveraging the vLLM (virtualized Large Language Model) system for fast, efficient LLM inference. |
-| Agents | - *vLLM Agent*: Node utilizing a vLLM instance to carry out instructions, answer questions, or facilitate complex workflows. <br>- *OCI Agent*: Node connected to Oracle Cloud Infrastructure (OCI) services, enabling use of models served by Gen AI Services. |
-| Tools | *MCP Server*: Specialized node for interfacing with AI models using the Model Context Protocol (MCP). (SSE Only) |
-| Inputs | - *Chat Input*: Designed for conversational user input in a chat-based interface. <br>- *Text Input*: Receives plain text input directly from the user. <br>- *Prompt*: For defining or modifying textual instructions sent to a language model. |
-| Outputs | - *Chat Output*: Renders or returns model/agent responses in a chat interface. |
-| Data | - *Read CSV*: Imports and parses CSV files for batch or tabular data processing. <br>- *File Upload*: Allows users to upload files for processing or analysis. <br>- *SQL Query*: Executes SQL statements against databases; returns results for workflow use. |
+Find the **SQL query** node and drag it onto the canvas. Within the SQL query node:
 
-## Task 2: Create a custom workflow
+* From the drop-down menu under **Select database** select the **Applied AI Datasets** database.
+* Check the **Include columns** option.
+* And add the following query: "SELECT * FROM ADMIN.AAI_DATASETS_NETFLIX_TITLES_DATASET"
 
-In this task you will create a simple workflow to gain hands-on experience with the Agent Builder interface and its capabilities.
+### Add a prompt
 
-1. **Open Oracle AI Database Private Agent Factory and log in.**
-    In the sidebar, click **Agent Builder**.
+Now you must create a prompt that can accept the SQL data and the **Chat input**.
 
-    ![Main dashboard of Oracle AI Database Private Agent Factory with the left navigation panel expanded. The Agent Builder option under the Utilities section is highlighted, and the Get Started page is displayed with pre-built agent options and a quick start guide on the right.](images/get_started_agent_builder.png)
+First, drag the **Prompt** component onto the canvas.
 
-    ![Agent Builder screen showing a components panel on the left with categories such as Language Model, Agents, Tools, Inputs, Outputs, and Data. The main workspace area is blank, and 'Playground' and 'Publish' buttons are in the upper right corner.](images/agent_builder.png)
+Next add the following prompt:
 
-2. Add nodes.
+``
+Using the data provided, answer the user's query.
 
-    On the left side of the canvas, you will find the available nodes. Drag an Agent node (such as OCI Agent or vLLM Agent) onto the canvas. Configure it with an LLM configuration name from your environment.
+----------
+data:
+{{data}}
 
-    ![Agent Builder screen showing step 2, adding an Agent node. A red arrow curves from the  Agent option in the components panel on the left to a newly added Agent node on the workspace. The node configuration panel displays fields for configuration, tools, custom instructions, prompt, and temperature.](images/step2.png)
+----------
+query:
+{{query}}
+``
 
-    On the top left corner of the canvas type a name for the workflow, such as "Scientific Paper Summarizer".
+And click **Save prompt**.
 
-3. Connect nodes.
+### Link up agent
 
-    Repeat the process and add a **Chat Output** node. On the Chat Output node, click on the blue edge and drag it until it connects with the right edge of the OCI/vLLM Agent node edge, as shown below.
+* connect the **Chat input** component to the **Prompt**'s "query" input
+* connect the **SQL query**'s Message node the **Prompt**'s "data" input
+* connect the **Prompt**'s "Prompt message" output to the **Agent**'s "Prompt" input.
 
-    ![Agent Builder screen showing step 3, adding and connecting a Chat Output node to the workflow. A red arrow connects the Message output of the Agent node to the Message input of the Chat Output node, with both nodes visible and highlighted connection points.](images/step3a.png)
+    ![Fully linked up agent](images/agent-linked.png)
 
-    If you need to remove a connection between two nodes, simply click the connecting line and press Delete on you keyboard.
+## Task 5: Publish Agent
 
-    Add a **Chat Input** node as well, but do not connect it for now.
+Now click **Save**. Click **Publish** then **Confirm**.
 
-    ![Agent Builder screen showing an arrow from the Chat Input component in the left panel to a newly placed Chat Input node in the workspace. The workflow contains three nodes: Chat Input, Agent, and Chat Output, with the Agent connected to the Chat Output.](images/step3b.png)
+Finally, click **Playground** and ask your agent a question about the Netflix data.
 
-4. Enrich prompts.
+    ![Asking agent about Netflix data](images/agent-netflix.png)
 
-    As previously mentioned, the Prompt node allows you to enrich the instructions provided to the AI.
 
-    Add a **Prompt** node and enter instructions in the text box. If you wish to add variable information, encapsulate it in curly braces; this will automatically add a connection edge to the node once saved. Example:
-
-    >Given the provided text, extract all key information and important details. Use this information to automatically generate a easy to understand summary.
-    Provided text : {{user_input}}
-
-    ![Agent Builder screen showing step 4a, adding a Prompt node to the workflow. A red arrow points from the Prompt component in the left panel to a newly created Prompt node placed between the Chat Input and Agent nodes in the workspace. The Prompt node features a template input and save button.](images/step4a.png)
-
-    ![Agent Builder screen showing step 4b, with a Prompt node added between the Chat Input and Agent nodes. The Prompt node contains a filled-in template field describing instructions to generate an easy-to-understand summary, including a variable for user input.](images/step4b.png)
-
-    ![Agent Builder screen showing step 4c, a canvas displaying a workflow with File Upload, Prompt, Agent, and Chat Output nodes. The Prompt node receives input from both the File Upload and Chat Input nodes, and its output is connected to the Prompt input of the Agent. Path connections and active connection points are highlighted in the workflow.](images/step4c.png)
-
-    Connect the nodes as illustrated so that the Chat Input feeds into the Prompt, which feeds into the agent node, which connects to the Chat Output.
-
-    ![Agent Builder screen showing step 4d, with the Chat Input node connected to the Prompt node, the Prompt node connected to the Agent node, and the Agent node connected to the Chat Output node. Arrows indicate the workflow sequence through all nodes, and the Prompt template field is populated with summary instructions and a user input variable.](images/step4d.png)
-
-5. Save and test.
-
-    Save the workflow by clicking the **Save** button in the top-right corner of the canvas. You can test the workflow before publishing it by clicking **Playground**. In the Playground, you may use test text or sample data relevant to your organization for input.
-
-    ![Scientific Paper Summarizer custom flow screen showing a message that the new custom flow has been created. The main area prompts the user to start using the custom flow by typing a message, with options to start a new chat or go back to the builder. The chat input field is visible at the bottom.](images/step5a.png)
-
-    ![Scientific Paper Summarizer custom flow test screen showing a user input and the Custom Flow Agent's response with a summary and key points about the data source used. The interface includes options to start a new chat or go back to the builder, and the chat input field is visible at the bottom.](images/step5b.png)
-
-**Next Steps:** You may now **proceed to the next lab**
+Congratulations, you are now finished with this workshop. You are ready to begin building agents of your own.
 
 ## Acknowledgements
 
 - **Authors** 
 * Emilio Perez, Member of Technical Staff, Database Applied AI
 * Allen Hosler, Principal Product Manager, Database Applied AI
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-- **Last Updated Date** - January 2026
+- **Last Updated Date** - February, 2026
