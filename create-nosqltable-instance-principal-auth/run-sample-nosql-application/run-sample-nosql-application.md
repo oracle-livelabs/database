@@ -438,6 +438,52 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
     ```
 </if>
 
+## Task 3: Explore tables using the Oracle Cloud Infrastructure Console
+
+1. On the left hand menu, click **Databases**. In the **Databases** window, click **Tables** under **Oracle NoSQL Database**.
+
+  ![Click NoSQL Database Tables](images/nosql-cloud.png)
+
+2. Click **HelloWorldTable** to open the details page.
+
+  *If you do not see HelloWorldTable select your correct compartment (that you mentioned in your code) on the left dropdown.*
+
+  ![Click HelloWorldTable](images/open-helloworldtable.png)
+
+3. Click **Columns** under Resources to view the table columns.
+
+  ![View table columns](images/helloworldtable.png)
+
+4. Click **Explore data** under Resources and click **Execute** to execute the select statement and display the record inserted into the table.
+
+  ![Click Execute](images/run-query.png)
+
+Congratulations! You have completed the workshop.
+
+This application accesses Oracle NoSQL Database Cloud Service, but most likely you would want to deploy by running your application inside your own tenancy co-located in the same Oracle Cloud Infrastructure region as your NoSQL table and use the Oracle Cloud Infrastructure Service Gateway to connect to the NoSQL Cloud Service.
+
+## Learn More
+
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
+<if type="Java">
+* [Java API Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html)
+</if>
+<if type="Python">
+* [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html)
+</if>
+<if type="Go">
+* [Go Reference Guide](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb?utm_source=godoc)
+</if>
+<if type="Node.js">
+* [Node.js API Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html)
+</if>
+<if type="C-sharp">
+* [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html)
+</if>
+<if type="Rust">
+* [Rust Reference Guide](https://docs.rs/oracle-nosql-rust-sdk/0.1.1/oracle_nosql_rust_sdk/)
+</if>
+
 ## Acknowledgements
 
 -   **Author** - Aayushi Arora, Database User Assistance Development 

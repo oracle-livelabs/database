@@ -87,6 +87,10 @@ The policy is now created.
 
 You may now proceed to the next lab.
 
+## Learn More
+
+* [Authentication to connect to Oracle NoSQL Database](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html#DTDDT-GUID-B09F1A47-98E4-4F02-AB23-5D4284F481F4)
+
 ## Acknowledgements
 
 -   **Author** - Aayushi Arora, Database User Assistance Development 
