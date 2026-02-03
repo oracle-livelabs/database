@@ -2,42 +2,39 @@
 
 ## Introduction
 
-Agent Factory comes with ready-to-use agents called Pre-Built Agents: Knowledge Agent and Data Analytics Agent. <blurb about how they work>. You can quickly build your data specific agents by attaching relevant data in Agent Factory. Agent Factory also comes with pre-installed data sources for getting started quickly. In this lab, you'll learn how to create your custom agent using pre-built agents and data.
+The Private Agent Factory comes with ready-to-use agents called Pre-Built Agents. This lab will explore two pre-built agents: the Knowledge Agent and the Data Analysis Agent. 
+
+The Knowledge Agent is a super-powered RAG system that allows you to ask questions across your unstructured data (file systems, websites, internal documents). The Knowledge Agent will respond with a synthesized answer and citations pointing to relevant sections of your documents.
+
+The Data Analysis Agent allows you to speak to your structured data. This agent will generate SQL queries, plots, tables, and natural language summaries of your data. It also offers an "exploration" mode, which will generate questions and answers on your data.
+
+You can quickly build your data-defined agents by connecting your data to the Agent Factory. The Agent Factory comes with pre-installed data sources for getting started quickly. In this lab, you'll learn how to create your own custom agent using pre-built agents and data.
 
 
 **Estimated time:** 15 minutes.
 
 ### Objectives
 
-- Build and talk to Knowledge Agent using demo-dataset
-- Build and talk to Data Analysis Agent using demo-dataset
-- Build a custom knowledge agent using a new File Data Source
+- Build and talk to Data Analysis Agent using the (provided) Netflix dataset
+- Build and talk to a Knowledge Agent on your own PDF
 
 ### Prerequisites
 
-* You are logged-in to Agent Factory installed in previous lab as Admin or Editor
-* Creativity
+* You are logged-in to the Agent Factory (installed in Lab 1: Install and Configure) as Admin or Editor
+* (optional) A PDF to use with the Knowledge Agent
 
-## Task 1: Understand Pre-Built Knowledge and Data Analysis Agents in Agent Factory
-
-1. Knowledge Agents
-A **Knowledge Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources. It is capable of contextual retrieval from unstructured sources and provides grounded responses traceable to enterprise-approved sources. The Knowledge Agent is integration-ready, allowing connections to internal sites, file systems, and more. It also supports un-authenticated web sources for broader knowledge retrieval.
-
-2. Data Analysis Agent
-A **Data Analysis Agent** is an AI agent that augments Vector Search & LLM capabilities with enterprise data, enabling accurate, context-rich responses by retrieving relevant information from internal knowledge bases, documents, or web-sources.
-
-## Task 2: Create and talk to a Data Analysis Agent using Netflix dataset
+## Task 1: Create and talk to a Data Analysis Agent using Netflix dataset
 
 1. Navigate to the **Data Analysis Agent** tab.
 2. Click on **Import sample datasets** in the top right.
 
     ![Screenshot of the Data Analysis Agent with the "Import sample datasets" button selected.](images/DA-import.png)
 
-3. Find the datset card titled **Netflix Titles Dataset** and click **import**.
+3. Find the dataset card titled **Netflix Titles Dataset** and click **import**.
 
-4. Navigate back the **Data Analysis Agent** tab. Then select **+ Create Agent** in the top right.
+4. Navigate back to the **Data Analysis Agent** tab. Then select **+ Create Agent** in the top right.
 
-5. Select your preferred database and table. For ths example we will use the *Applied AI Datasets* database and the *ADMIN.AAI_DATASETS_NETFLIX_TITLES_DATASET* table. Then select **Next**.
+5. Select your preferred database and table. For this example, use the *Applied AI Datasets* database and the *ADMIN.AAI_DATASETS_NETFLIX_TITLES_DATASET* table. Then select **Next**.
 
     ![Screenshot of the Data Analysis Agent Creation page.](images/DA-create.png)
 
@@ -57,13 +54,13 @@ A **Data Analysis Agent** is an AI agent that augments Vector Search & LLM capab
 
     ![Screenshot of the Data Analysis Agent Query page.](images/DA-query.png)
 
-10. Now you are ready to use the Data Analysis agent to speak with your structured data and automatically visualize insights. Continue you on the Task 3 to learn how the Knowledge Agent can help you analyze unstructured data like pdfs.
+10. Now you are ready to use the Data Analysis agent to speak with your structured data and automatically visualize insights. Continue on the Task 2 to learn how the Knowledge Agent can help you analyze unstructured data like PDFs.
 
-## Task 3: Create and talk to a Knowledge Agent for your own data
+## Task 2: Create and talk to a Knowledge Agent for your own data
 
-1. Grab your favorite pdf. If you don't have one, you can go to the ![Private Agent Factory Documentation](https://docs.oracle.com/en/database/oracle/agent-factory/25.3/paias/introduction.html), left-click on the page, select print, and then for *Destination* choose *Save to PDF*.
+1. Grab your favorite PDF. If you don't have one, you can go to the [Private Agent Factory Documentation](https://docs.oracle.com/en/database/oracle/agent-factory/25.3/paias/introduction.html), right-click on the page, select print, and then for *Destination* choose *Save to PDF*.
 
-2. Navigate to the **Data sources** tab and click the **+ Add data source** button. For **Source type** select *File Source*. Set your title **Title**, e.g. *Oracle Private Agent Factory Docs*. Set your **Description**, e.g. *A PDF subset of the Oracle Private Agent Factory Documentation*. Finally, drop and drop the pdf from step 1.
+2. Navigate to the **Data sources** tab and click the **+ Add data source** button. For **Source type** select *File Source*. Set your title **Title**, e.g. *Oracle Private Agent Factory Docs*. Set your **Description**, e.g. *A PDF subset of the Oracle Private Agent Factory Documentation*. Finally, drag and drop the PDF from step 1.
 
     ![Screenshot of the adding data sources page.](images/KA-data-add.png)
 
@@ -71,12 +68,12 @@ A **Data Analysis Agent** is an AI agent that augments Vector Search & LLM capab
 
     ![Screenshot of the Knowledge Agent page.](images/KA-page.png)
 
-4. Select your data sources by navigating to **File system** and selecting the pdf you uploaded in step 2 (e.g. Oracle Private Agent Factory Docs). Then select **Next**.
-    > Note: It may take a couple of minutes for the pdf to be fully vectorized and ready to use.
+4. Select your data sources by navigating to **File system** and selecting the PDF you uploaded in step 2 (e.g. Oracle Private Agent Factory Docs). Then select **Next**.
+    > Note: It may take a couple of minutes for the PDF to be fully vectorized and ready to use.
 
     ![Screenshot of the Knowledge Agent data sources.](images/KA-data.png)
 
-5. Give your agent a *Name* and *Description* (e.g. "Oracle Private Agent Factory Documentation Agent", and "A Knowledge Agent to assist with any queries from users of the Private Agent Factory.") Optionally you can provide a *Help Description* which informs other agents on how to use collaborate with this agent. Finally, select **Next**.
+5. Give your agent a *Name* and *Description* (e.g. "Oracle Private Agent Factory Documentation Agent", and "A Knowledge Agent to assist with any queries from users of the Private Agent Factory.") Optionally you can provide a *Help Description* which informs other agents on how to collaborate with this agent. Finally, select **Next**.
 
     ![Screenshot of the Knowledge Agent configuration.](images/KA-config.png)
 
@@ -88,12 +85,12 @@ A **Data Analysis Agent** is an AI agent that augments Vector Search & LLM capab
 
     ![Screenshot of the Knowledge Agent being used.](images/KA-deployed.png)
 
-Note how the Knowledge Agent answers your question, and provides citations into the original document for you to audit if needsbe. Clicking on the blue links will take you to the exact page being referenced. Finally, notice that the agent generates follow-up questions that you might be interested in.
+Note how the Knowledge Agent answers your question, and provides citations into the original document for you to audit if need be. Clicking on the blue links will take you to the exact page being referenced. Finally, notice that the agent generates follow-up questions that you might be interested in.
 
 
 ## Summary
 
-This concludes the current module. You now know how to create Pre-Built Agentss with custom knowledge bases and interact with them to get grounded, specific information in an air-gapped environment. The next module will further explore other features of Oracle AI Database Private Agent Factory. Continue with them so you don't miss out on new discoveries and learning opportunities. You may now **proceed to the next lab**.
+This concludes the current module. You now know how to create Pre-Built Agents with custom knowledge bases and interact with them to get grounded, specific information in an air-gapped environment. The next module will further explore other features of Oracle AI Database Private Agent Factory. Continue with them so you don't miss out on new discoveries and learning opportunities. You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
