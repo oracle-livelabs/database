@@ -94,7 +94,8 @@ This concludes the current module. You now know how to create Pre-Built Agents w
 
 ## Acknowledgements
 
-- **Authors** 
+**Authors** 
+
 * Emilio Perez, Member of Technical Staff, Database Applied AI
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI

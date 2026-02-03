@@ -118,7 +118,8 @@ Congratulations, you are now finished with this workshop. You are ready to begin
 
 ## Acknowledgements
 
-- **Authors** 
+**Authors** 
+
 * Emilio Perez, Member of Technical Staff, Database Applied AI
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI

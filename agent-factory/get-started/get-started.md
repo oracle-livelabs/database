@@ -17,11 +17,11 @@ In this lab you'll gather required data for installating the Agent Factory in OC
 * Basic understanding of OCI Virtual Cloud Network (VCN)
 
 ## Task 1: Create and Configure VCN
-1. ![Refer to the VCN creation guide](https://docs.oracle.com/en/learn/lab_virtual_network/index.html#create-your-vcn) or use the VCN Setup Wizard.
+1. [Refer to the VCN creation guide](https://docs.oracle.com/en/learn/lab_virtual_network/index.html#create-your-vcn) or use the VCN Setup Wizard.
 2. Update the default security list to open ports 8080 and 1521.
 
 ## Task 2: Create Oracle AI Autonomous Database
-1. ![Refer to the Autonomous Database creation guide](https://livelabs.oracle.com/ords/r/dbpm/livelabs/run-workshop?p210_wid=4276&session=105049282417815)
+1. [Refer to the Autonomous Database creation guide](https://livelabs.oracle.com/ords/r/dbpm/livelabs/run-workshop?p210_wid=4276&session=105049282417815)
 2. Download a Database wallet
 3. (Optional) Create new user for Agent Factory 
 
@@ -35,7 +35,8 @@ You may now **proceed to the next lab**
 
 ## Acknowledgements
 
-- **Authors** 
+**Authors** 
+
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
