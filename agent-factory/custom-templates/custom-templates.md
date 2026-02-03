@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Agent Factory provides a number of templates to quickly create sophisticated AI Agents with minimal configuration. In this lab, you explore the template gallery to learn about agent templates and use (marketsync/pdf-to-blog) template to create your own agent. 
+Agent Factory provides a number of templates to quickly create sophisticated AI Agents with minimal configuration. In this lab, you explore the template gallery to learn about agent templates and use the **Market Sync Agent** template to create your own agent. 
 
 **Estimated time:** 10 minutes.
 
@@ -11,78 +11,80 @@ Agent Factory provides a number of templates to quickly create sophisticated AI 
 By the end of this lab, you will be able to:
 
 - Explore the Template Gallery 
-- Import and configure <> template to create your customized agent in Agent Builder
+- Import and configure the **Market Sync Agent** template to create your customized agent in Agent Builder
 
 ### Prerequisites
 
-* same as previous lab (tbd)
+* an LLM configuration (grok-4 through OCI Gen AI is recommended)
+* an internet connection open from your Agent Factory for MCP (either a NAT Gateway or Internet Gateway)
 
 ## Task 1: Explore templates Agent Factory Template Gallery
 
+Navigate the the **Template gallery** tab on the left-hand side.
+
 ## Task 2: Import Template
-* PDF-to-Blog Converter Template
+
+Find the template named **Market Sync Agent** and import it.
+
+    ![Market Sync Agent template from Template gallery page](images/template-ms.png)
 
 ## Task 3: Understand Agent Builder Interface 
 
+After clicking **Import flow**, you will be taken to the Agent Builder. Here you will see a pre-configured set of boxes and wires.
+
+    > Note: Collapse the left-hand menu and Components menu by clicking the icon at the top.
+
+    ![Market Sync Agent template from Agent Builder page](images/template-ms-imported.png)
+
 ## Task 4: Configure your Agent in Agent Builder
+
+This task will walk through each box and explain how it's contributing to the agentic flow.
+
+**Chat input**: (far left) This box informs the agent that it needs to await a user query from a chat interface. The output of this cell will be whatever the user writes into the chat box.
+
+**Sticky Notes**: (top left, blue) These boxes are simply for reference, and do not contribute to the agnetic flow in any way. Sticky Notes are used for agent builders to leave notes for eachother.
+
+**MCP Servers**: (top left) These boxes are "tools" for agents to call. MCP Severs are a way for agent-compatible systems to interact with agents. In this example we have "alphavantage" and "coingecko" providing realtime pricing data through MCP. Agent nodes will know how to call these MCP Servers to get relevant information.
+
+**Prompt**: (bottom left) This box adds extra context to the user's query to provide better responses. In this case, the prompt is explaining to the agent that it is advising the user on their portfolio, and provides guidance on how it should format responses to the user.
+
+    > Note: Prompts accept incoming text by adding a keyword in double brackets. As an exmaple, the *{{user_input}}* text is given in this prompt which create the *user_input* node on the left of the prompt.
+
+**Agent** (middle) This box does a lot of the heavy lifting:
+ * selects the LLM to use (grok-4 is recommended for this lab)
+ * allows for 0 or more tools
+ * allows for 0 or more sub-agents
+ * receives custom instructions
+ * receives the prompt
+ * provides an output
+
+**Chat input**: (far right) Similar to chat input, the chat output node instructs the agentic flow to return a given text to the user through the chatbot.
+
 
 ## Task 5: Test Agent in Playground and Publish
 
+Before testing the agentic flow, rename it to something more memorable, for example "Portfolio Manager". Had a helpful description for later.
+
+Then click **Playground**.
+
+Now ask a question about your portfolio, for example: "I have 10 shares of NVDA, how much is my portfolio worth today?"
+
+    ![Market Sync Agent template from Agent Builder page](images/template-ms-portfolio.png)
+
+
 ## Task 6: Talk to your production agent
 
-The Template Gallery offers a curated collection of pre-built agentic templates designed to help you get started quickly with intelligent automation.
+Click **Go back to builder** in the top right. Then click **Publish** and **Confirm**.
 
-Templates may include workflows for tasks such as document summarization, meeting note extraction, content transformation, and more. You can browse, search, and import any template that fits your needs, customizing them as needed with minimal configuration.
+Now the Agent is published and is accessible via REST. To copy the REST endpoint, click **Playground** and then **Copy agent URL**.
 
-![Main dashboard of Oracle AI Database Private Agent Factory with the left navigation panel expanded. The Template Gallery option under the Studio section is highlighted, and the Get Started page is displayed with pre-built agent options and a quick start guide on the right.](images/get_started_template_gallery.png)
-
-1. Open Oracle AI Database Private Agent Factory and log in. In the sidebar, click **Template Gallery**.
-
-    ![Template Gallery screen displaying a list of template options, each with a description, last updated date, and an 'Import Flow' button. Templates include Draft Release Notes Generator, PDF to Blog Converter, Meeting Summary Item Extractor, Recruitment Optimizer, and Generate Product Pitch.](images/template_gallery.png)
-
-    Here you will find all prebuilt workflows currently offered by Oracle AI Database Private Agent Factory.
-
-2. For this tutorial, we will use the "PDF to Blog Converter" as an example, but you are encouraged to explore other templates based on your needs. Select a template to continue.
-
-    ![Agent Builder workflow for a pdf-to-blog converter, showing nodes for File Upload, Prompt, Vllm (language model), Chat Input, and Chat Output connected in sequence. The File Upload and Chat Input nodes feed into the Prompt node, which sends its output to the Vllm node, and finally to the Chat Output node. Node configuration panels and connection points are visible.](images/pdf-to-blog.png)
-
-3. The prebuilt workflow will be displayed and can be customized using a simple drag-and-drop interface, no code required. To help identify the workflow, you can change its name in the top right corner of the canvas. For this example, type a name such as “Blog Post Generator” or another descriptive name of your choice.
-
-    ![Edit Details modal dialog open in Agent Builder, showing fields to edit the name and description of the custom flow. The background displays the workflow editor with nodes and connections, while the modal has options to cancel or save changes.](images/edit_details.png)
-
-4. When you import a new workflow, make sure to select your desired LLM provider. You can add different LLM providers on the LLM management section.
-
-    ![Agent Builder workflow for pdf-to-blog showing a dropdown menu with an option labeled as OCI_LLM (oci).](images/select_LLM.png)
-
-5. Some templates are designed to process files as inputs, such as PDF files. If the template requires it, use the **Upload File** function to select your file.
-
-    ![Agent Builder workflow showing the File Upload node's, with a PDF file highlighted. The workflow connects File Upload and Chat Input nodes to a Prompt node, which links to an OCI Agent node and then to a Chat Output node.](images/select_placeholder.png)
-
-    You are also able modify the workflow components to suit your needs. For instance, you can remove a node by selecting it and pressing Delete, and you can add a new node by dragging it from the palette and configuring it as needed.
-
-6. Click **Save** and then **Publish** to deploy your customized workflow.
-
-    ![Publish Workflow confirmation dialog open in Agent Builder, asking the user to confirm publishing the '23ai Database New Features' workflow. The dialog has Cancel and Confirm buttons, overlaying the workflow editor with connected nodes for File Upload, Prompt, OCI Agent, and Chat Output.](images/publish_workflow.png)
-
-## Task 2: Interact with the created workflow
-
-After publishing the workflow, go to your workflow gallery. In the sidebar, click **My Custom Workflows**.
-
-![My custom workflows screen displaying a search bar and a card for the 23ai Database New Features workflow, which contains a description, a label indicating it has been published and the last updated date. Buttons for delete, edit and run the workflow appears at the bottom.](images/custom_flows.png)
-
-Select your workflow from the gallery. Here, you can edit, delete, or run your custom workflows. To proceed, click **Run Flow**.
-
-![23ai Database New Features Chat screen with tabs for messages and chat history. The main chat area displays the prompt 'Star using your custom flow' with a message input field at the bottom containing 'How can I help you?'.](images/pdf_to_blog_chat_ui.png)
-
-Interact with your workflow through the chat interface. Example query prompts will depend on your data source contents. For example, if your document is a product release guide, you could ask about new features described within. The workflow will provide responses based only on the information it has processed from your chosen file.
-
-![Chat interface foe the '23ai Database New Features' custom workflow showing a user asking about the new data type added in Oracle Database 23ai and a response from the custom Flow answering the question. The main area displays messages and responses, with chat input available at the bottom.](images/pdf_to_blog_qa.png)
-
+You may now **proceed to the next lab**
 
 ## Acknowledgements
 
 - **Authors** 
 * Emilio Perez, Member of Technical Staff, Database Applied AI
 * Allen Hosler, Principal Product Manager, Database Applied AI
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-- **Last Updated Date** - January, 2026
+- **Last Updated Date** - February, 2026
