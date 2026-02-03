@@ -12,18 +12,18 @@
     },
     {
       "title": "Lab 1: Install and Configure",
-      "filename": "../../install-from-marketplace/install-from-marketplace.md"
+      "filename": "../../install/install.md"
     },
     {
-      "title": "Lab 2: Build your first Agent",
-      "filename": "../../prebuilt-rag/prebuilt-rag.md"
+      "title": "Lab 2: Build your First Agent",
+      "filename": "../../prebuilt/prebuilt.md"
     },
     {
-      "title": "Lab 3: Build an Agent with using templates",
+      "title": "Lab 3: Bootstrap Agents with Templates",
       "filename": "../../custom-templates/custom-templates.md"
     },
     {
-      "title": "Lab 4: Build a custom Agent in Agent Builder UI",
+      "title": "Lab 4: Customize Agents from the Agent Builder UI",
       "filename": "../../agent-builder/agent-builder.md"
     },
     {
