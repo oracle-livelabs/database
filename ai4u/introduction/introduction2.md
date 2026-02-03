@@ -79,6 +79,10 @@ This is an ongoing series following Seer Equity as they transform their AI from 
 
 * **Lab 2: Agents vs Zero-Shot.** Compare three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions.
 
+### Objectives
+
+By the end of this workshop, you will be able to:
+
 * Explain the difference between a chatbot and an agent
 * Create database tables with comments that help Select AI understand your schema
 * Build an agent with a SQL tool using Oracle Select AI Agent framework
