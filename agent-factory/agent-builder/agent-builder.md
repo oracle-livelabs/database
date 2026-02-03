@@ -72,7 +72,9 @@ Find the **SQL query** node and drag it onto the canvas. Within the SQL query no
 * Then add the following query: 
 
 ```
+<copy>
 SELECT * FROM ADMIN.AAI_DATASETS_NETFLIX_TITLES_DATASET
+</copy>
 ```
 
 ### Add a prompt
@@ -84,6 +86,7 @@ First, drag the **Prompt** component onto the canvas.
 Next, add the following prompt:
 
 ```
+<copy>
 Using the data provided, answer the user's query.
 
 ----------
@@ -93,6 +96,7 @@ data:
 ----------
 query:
 {{query}}
+</copy>
 ```
 
 And click **Save Prompt**.
@@ -124,4 +128,4 @@ Congratulations, you are now finished with this workshop. You are ready to begin
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-- **Last Updated Date** - February, 2026
+**Last Updated Date** - February, 2026

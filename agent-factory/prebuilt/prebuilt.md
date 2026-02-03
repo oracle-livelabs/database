@@ -100,4 +100,4 @@ This concludes the current module. You now know how to create Pre-Built Agents w
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-- **Last Updated Date** - February, 2026
+**Last Updated Date** - February, 2026
