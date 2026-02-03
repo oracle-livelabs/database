@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Agent Factory provides a number of templates to quickly create sophisticated AI Agents with minimal configuration. In this lab, you explore the template gallery to learn about agent templates and use the **Market Sync Agent** template to create your own agent. 
+The Agent Factory provides a number of templates to quickly create sophisticated AI Agents with minimal configuration. In this lab, you explore the **Template Gallery** and use the **Market Sync Agent** template to create your own agent. 
 
 **Estimated time:** 10 minutes.
 
@@ -10,8 +10,8 @@ Agent Factory provides a number of templates to quickly create sophisticated AI 
 
 By the end of this lab, you will be able to:
 
-- Explore the Template Gallery 
-- Import and configure the **Market Sync Agent** template to create your customized agent in Agent Builder
+- Import agents from the Template Gallery 
+- Customize the **Market Sync Agent** template from the visual Agent Builder
 
 ### Prerequisites
 
@@ -20,21 +20,21 @@ By the end of this lab, you will be able to:
 
 ## Task 1: Explore templates Agent Factory Template Gallery
 
-Navigate the the **Template gallery** tab on the left-hand side.
+Navigate to the **Template gallery** tab on the left-hand side.
 
 ## Task 2: Import Template
 
 Find the template named **Market Sync Agent** and import it.
 
-    ![Market Sync Agent template from Template gallery page](images/template-ms.png)
+![Market Sync Agent template from Template gallery page](images/template-ms.png)
 
 ## Task 3: Understand Agent Builder Interface 
 
 After clicking **Import flow**, you will be taken to the Agent Builder. Here you will see a pre-configured set of boxes and wires.
 
-    > Note: Collapse the left-hand menu and Components menu by clicking the icon at the top.
+> Note: Collapse the left-hand menu and Components menu by clicking the icon at the top.
 
-    ![Market Sync Agent template from Agent Builder page](images/template-ms-imported.png)
+![Market Sync Agent template from Agent Builder page](images/template-ms-imported.png)
 
 ## Task 4: Configure your Agent in Agent Builder
 
@@ -48,7 +48,7 @@ This task will walk through each box and explain how it's contributing to the ag
 
 **Prompt**: (bottom left) This box adds extra context to the user's query to provide better responses. In this case, the prompt is explaining to the agent that it is advising the user on their portfolio, and provides guidance on how it should format responses to the user.
 
-    > Note: Prompts accept incoming text by adding a keyword in double brackets. As an exmaple, the *{{user_input}}* text is given in this prompt which create the *user_input* node on the left of the prompt.
+> Note: Prompts accept incoming text by adding a keyword in double brackets. As an exmaple, the *{{user_input}}* text is given in this prompt which create the *user_input* node on the left of the prompt.
 
 **Agent** (middle) This box does a lot of the heavy lifting:
  * selects the LLM to use (grok-4 is recommended for this lab)
@@ -69,7 +69,7 @@ Then click **Playground**.
 
 Now ask a question about your portfolio, for example: "I have 10 shares of NVDA, how much is my portfolio worth today?"
 
-    ![Market Sync Agent template from Agent Builder page](images/template-ms-portfolio.png)
+![Market Sync Agent template from Agent Builder page](images/template-ms-portfolio.png)
 
 
 ## Task 6: Talk to your production agent
@@ -82,7 +82,8 @@ You may now **proceed to the next lab**
 
 ## Acknowledgements
 
-- **Authors** 
+**Authors** 
+
 * Emilio Perez, Member of Technical Staff, Database Applied AI
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
