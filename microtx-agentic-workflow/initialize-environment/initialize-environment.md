@@ -127,7 +127,7 @@ Click **Activities** in the remote desktop window, and then go back to the termi
 
     From the output note down the value of `EXTERNAL-IP` for the load balancer. You will use this value later to access MicroTx Workflow.
 
-    Let's consider that the value of the external IP in the above example is 10.107.21.222.
+    Let's consider that the value of the external IP in the above example is 10.107.38.138.
 
 ## Task 4: Start MicroTx Workflow Services
 
@@ -148,20 +148,11 @@ Click **Activities** in the remote desktop window, and then go back to the termi
 
 	![MicroTx Workflow UI](images/deployed-workflow-services.png)
 
-3. Run the following commands to initialize and configure the SQLcl MCP server. The workflow uses this MCP server.
+3. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser. 
 
-    ```
-    <copy>
-    cd $HOME/WorkflowScripts
-    ./initilize_oracledb_mcp_server.sh
-    </copy>
-    ```
+4. Open `http://10.107.38.138/consoleui/` in any browser tab to access the MicroTx Workflow GUI. Replace, `10.107.38.138` with the external IP address of the load balancer that you have copied in the previous step in case the external IP address is different.
 
-4. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser. 
-
-5. Open `http://10.107.21.222/consoleui/` in any browser tab to access the MicroTx Workflow GUI. Replace, `10.107.21.222` with the external IP address of the load balancer that you have copied in the previous step in case the external IP address is different.
-
-6. If the following options are displayed, then click **Workflow**.
+5. If the following options are displayed, then click **Workflow**.
     ![MicroTx Workflow UI Options](images/initial-screen-options.png)
 
 ## Task 5: Create an API Key to Access OpenAI
@@ -176,4 +167,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, September 2025
+* **Last Updated By/Date** - Sylaja Kannan, February 2026

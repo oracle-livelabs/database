@@ -50,8 +50,8 @@ This lab assumes you have:
     ```
     <copy>
     {
-      "loan_application_text": "I am looking for the $3000 loan for 3 years tenure. Provide me best interest rate and terms. My ssn number is 123-45-6789",
-      "document": "/app/samples_for_ocr/driving-license.png"
+      "loan_application_text": "I am looking for the $3000 loan for 3 years tenure. Provide me best interest rate and terms. My SSN number is 123-45-6789",
+      "document": "https://raw.githubusercontent.com/oracle-samples/microtx-samples/2fc203578ddd544af796aaf0bf270ae3978b78e7/workflow/loan-application/ocr-microservice/samples_for_ocr/driving-license.png"
     }
     </copy>
     ```
@@ -82,20 +82,20 @@ The workflow does not progress until a human approves or rejects the loan reques
 2. Open the navigation menu and click **Workflow Notification**.
    ![View the status of the workflow execution](images/workflow-notification.png)
 
-2. Click **Act**.
+3. Click **Act**.
    The **Take Action on Task** dialog box appears.
 
-3. Select **Completed** in the **Status** drop-down list to approve the loan.
+4. Select **Completed** in the **Status** drop-down list to approve the loan.
 
-4. Select the **Approved** check box.
+5. Select the **Approved** check box.
    ![Approve action](images/take-action.png)
 
-5. Click **Submit**.
+6. Click **Submit**.
     A message is displayed that the task was updated successfully.
 
-6. Click **OK**.
+7. Click **OK**.
 
-7. Refresh the browser tab where the status of the workflow execution is displayed in Workbench.
+8. Refresh the browser tab where the status of the workflow execution is displayed in Workbench.
     The human approval task is now marked in green and status of the workflow changes to **Completed**.
     ![Workflow execute complete](images/workflow-run-complete.png)
 
@@ -125,4 +125,4 @@ The workflow does not progress until a human approves or rejects the loan reques
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** -  Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, September 2025
+* **Last Updated By/Date** - Sylaja Kannan, February 2026
