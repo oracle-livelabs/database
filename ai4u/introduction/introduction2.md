@@ -93,7 +93,19 @@ By the end of this workshop, you will be able to:
 
 ### Prerequisites
 
-For this workshop, we provide the environment. you will need:
+For this workshop, we provide the environment. You will need:
+
+* Explain the difference between a chatbot and an agent
+* Create database tables with comments that help Select AI understand your schema
+* Build an agent with a SQL tool using Oracle Select AI Agent framework
+* Query the agent using natural language and receive data-driven answers
+* View execution history to see what the agent did
+* Choose the right approach (zero-shot, SELECT AI, or agent) for different use cases
+* Build agents that can update data based on conditional logic
+
+### Prerequisites
+
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL, or the ability to follow along with the prompts
 
