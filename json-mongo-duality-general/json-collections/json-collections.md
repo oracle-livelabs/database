@@ -15,7 +15,7 @@ In this lab, you will:
 * Create Collection using Database Actions|JSON
 * Insert First Document using Database Actions|JSON
 * Find JSON documents in a collection using Database Actions|JSON
-* Learn about JSON and Constraints 
+* Learn about JSON and Constraints
 
 ### Prerequisites
 
@@ -28,32 +28,26 @@ In this lab, you will:
 
 	![DB Actions](images/dbaction1.png)
 
-
-2. Below you can find the Database Actions homepage.
-
-	![Homepage Database Actions](./images/homepage-dbactions.png)
-
-
-3. On the homepage, click the JSON tile under Development.
+2. On the homepage, click the JSON tile under the Development tab.
 
 	![Homepage Development JSON](./images/homepage-json.png)
 
-4. To create a collection, click **Create Collection**.
+3. To create a collection, click **Create Collection**.
 	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-5. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
+4. In the field **Collection Name**, provide the name **movies**. Leave MongoDB Compatible radio button checked.  Then click **Create**.
 
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
-	![New Collection: movies](./images/collection-name.png)
+	![New Collection: movies](./images/collection-name-mongodb-checked.png)
 
-6. A notification pops up that displays **movies** collections has been created.
+5. A notification pops up that displays **movies** collections has been created.
 
 	![New collection notification](./images/popup.png)
 
-9. Click the refresh button to verify the **movies** collection has been created.
+6. Click the refresh button to verify the **movies** collection has been created.
 
 	![Refresh button](./images/refresh-collection.png)
 
@@ -63,7 +57,7 @@ In this lab, you will:
 
 	![new document button](./images/new-json-doc.png)
 
-3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
+2. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
 	```
 	<copy>
@@ -84,11 +78,11 @@ In this lab, you will:
 
 	![add new document](./images/json-object.png)
 
-4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
+3. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
 	![new document confirmation popup](./images/popup-json-doc.png)
 
-5. Let's repeat this with the following documents:
+4. Let's repeat this with the following documents:
 
 	Click the *New JSON Document* button, copy the following JSON objects one by one, paste it into the worksheet and click **Create**.
 
@@ -210,7 +204,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/development-sql.png)
+	![SQL navigation](./images/homepage-sql.png)
 
 2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle AI Database.**
 
@@ -225,19 +219,20 @@ More generally, constraints can be used to check the data being entered for vari
     Now copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
     ```
-    <copy>alter table "movies" add constraint movies_json_schema
+    <copy>
+	alter table "movies" add constraint movies_json_schema
     check (data is json validate '{   "type": "object",
         "properties": {
             "_id": { "type": "number" },
             "title": { "type": "string"},
             "type": {"type" : "string"},
             "price": {"type" : "number"},
-    "starring": {
-    "type": "array",
-    "minItems": 0,
-    "items": {
-    "type": "string"
-    }
+            "starring": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+            "type": "string"
+        }
     }
         },
         "required": ["_id", "title", "type", "price"]
@@ -352,4 +347,4 @@ You may now proceed to the next lab.
 
 * **Author** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025

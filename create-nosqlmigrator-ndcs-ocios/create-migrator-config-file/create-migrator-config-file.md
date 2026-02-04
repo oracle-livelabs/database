@@ -6,7 +6,7 @@ A configuration file defines all the parameters required for the migration activ
 
 This lab walks you through the steps to identify important source and sink parameters. You will create an Oracle NoSQL Migrator configuration file in the Cloud Shell to migrate data from an Oracle NoSQL Database Cloud Service table to an OCI Object Storage bucket. 
 
-Estimated Lab Time: 10 minutes
+Estimated Lab Time: 15 minutes
 
 ### Objectives
 
@@ -31,7 +31,7 @@ To configure the Migrator utility to copy data from an Oracle NoSQL Database Clo
 
 3. Identify the Oracle NoSQL Database Cloud Service table whose data you want to migrate and note down the table name. 
 
-  Here, you will use the **NDCSupload** table from the **Training_NoSQL** compartment in the **Ashburn** region with following sample data:
+  Here, you will use the **NDCSupload** table with following sample data:
 
     ```
     <copy>
@@ -43,9 +43,9 @@ To configure the Migrator utility to copy data from an Oracle NoSQL Database Clo
     </copy>
     ```
 
-4. Select the **NDCSupload** table. From the *Table details* page, hover over the Compartment OCID field and select the copy option. This copies the compartment OCID of your source table to the clipboard. Save the compartment OCID value.
+4. Select the **NDCSupload** table. On the *Table details* page, hover over the Compartment OCID field and select the copy option. This copies the compartment OCID of your source table to the clipboard. Save the compartment OCID value.
 
-  Note down the endpoint for your source table. You can locate your subscribed region at the upper right corner of the console. For the details on the end points for your subscribed region, see **[Data Regions and Associated Service URLs](https://docs.oracle.com/en/cloud/paas/nosql-cloud/fnsxl/index.html#FNSXL-GUID-D89BB422-A394-404E-8759-1A620C7D8125)**.
+  Note down the endpoint for your source table. You can locate your subscribed region at the upper right corner of the console. For the details on the end points for your subscribed region, see **[Data Regions and Associated Service URLs](https://docs.oracle.com/en/cloud/paas/nosql-cloud/fnsxl/index.html#FNSXL-GUID-D89BB422-A394-404E-8759-1A620C7D8125)**. Copy the **Region Identifier** for your subscribed region to use later in the source configuration template, and save this value. 
 
       ![NoSQL table details](images/console-tabledetails.png)
 
@@ -59,17 +59,17 @@ To configure the Migrator utility to copy data from an Oracle NoSQL Database Clo
     </copy>
     ```
 
-  For example,
+  For example, if you are using the **NDCSupload** table from your compartment with OCID **ocid1.compartment.oc1..aa..tnya** in the **Ashburn** region, you will have:
 
     ```
     <copy>
     endpoint: "us-ashburn-1"
-    compartment: "ocid1.compartment.oc1..aaaaaaaahcrgrgptoaq4cgpoymd32ti2ql4sdpu5puroausdf4og55z4tnya"
+    compartment: "ocid1.compartment.oc1..aa..tnya"
     table: "NDCSupload"
     </copy>
     ```
 
-  The **endpoint** and **compartment** parameter values differ based on your tenancy.
+  Note that the **endpoint** and **compartment** parameter values differ based on your tenancy.
 
 ## Task 2: Identify the Sink Parameters
 
@@ -79,13 +79,14 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
 
 2. Select your compartment and then select the bucket. 
 
-  Here, you will use the **Migrate\_oci** bucket from the **Training_NoSQL** compartment in the **Ashburn** region. 
+  Here, you will use the **Migrate\_oci** bucket. 
 
-  From the bucket details page, copy the **Namespace** name to use in sink configuration parameters.
+  Select the the **Migrate\_oci** bucket. On the bucket details page, copy the **Namespace** name to use later in sink configuration parameters, and save this value.
 
   ![Bucket details](images/objectstorage_latest.png)
 
-3. Identify the endpoint of the OCI Object Storage bucket. You can locate your subscribed region at the upper right corner of the console. For the details on the OCI Object Storage service endpoints for your subscribed region, see **[Object Storage Endpoints](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/)**.
+3. Identify the endpoint of the OCI Object Storage bucket. You can locate your subscribed region at the upper right corner of the console. For the details on the OCI Object Storage service endpoints for your subscribed region, see **[Object Storage Endpoints](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/)**. Copy the **API Endpoint** for your subscribed region and save this value.
+
 4. Decide a prefix, which serves as the directory to store the migrated data within the OCI Object Storage bucket. Oracle NoSQL Migrator copies data to the supplied directory in the OCI Object Storage bucket. 
 
   Here, you will use **Delegation** as the prefix.
@@ -101,29 +102,30 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
     </copy>
     ```
 
-  For example,
+  For example, if you are using the **Migrate\_oci** bucket in the **or....m** namespace with **Delegation** prefix in the **Ashburn** region, you will have:
 
     ```
     <copy>
-    endpoint: "us-ashburn-1"
+    endpoint: "https://objectstorage.us-ashburn-1.oraclecloud.com"
     bucket: "Migrate_oci"
     prefix: "Delegation"
-    namespace: "oradbclouducm" 
+    namespace: "or....m" 
     </copy>
     ```
 
-  The **endpoint** and **namespace** parameter values differ based on your tenancy.
+  Note that the **endpoint** and **namespace** parameter values differ based on your tenancy.
 
 ## Task 3: Create a Configuration File
 
-1. Launch the Cloud Shell from the **Developer tools** menu on your Oracle Cloud console. The web browser opens your home directory.
+1. Launch the Cloud Shell from the **Developer tools** menu on your Oracle Cloud console. The web browser opens your home directory. If you already have the previous Cloud Shell session open, click the **Restore** button on the bottom left corner of your OCI console to reopen the Cloud Shell that you minimized earlier. 
+
 2. Navigate to the directory where you extracted the NoSQL Database Migrator utility. See **Lab - Download Migrator Utility and Upload to Cloud Shell**.
 
     ```
     <copy>cd V1048015-01/nosql-migrator-1.7.0</copy>
     ```
 
-3. Create the configuration file template in a notepad as follows. Update the source and sink parameters with the values that you noted in Task 1 and Task 2 of this lab. 
+3. Create the configuration file template in a notepad as follows. Update the source and sink parameters with the values that you saved in Task 1 and Task 2 of this lab. 
 
   *Note: The endpoints, compartment, and namespace values will differ based on your tenancy.*  
 
@@ -134,7 +136,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
         "type" : "nosqldb_cloud",
         "endpoint" : "us-ashburn-1",
         "table" : "NDCSupload",
-        "compartment" : "ocid1.compartment.oc1.. aaaaaaaahcrgrgptoaq4cgpoymd32ti2ql4sdpu5puroausdf4og55z4tnya",
+        "compartment" : "ocid1.compartment.oc1.. aa..tnya",
         "useDelegationToken" : true,
         "readUnitsPercent" : 90,
         "includeTTL" : true,
@@ -143,8 +145,8 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
     "sink" : {
         "type" : "object_storage_oci",
         "format" : "json",
-        "endpoint" : "us-ashburn-1",
-        "namespace" : "oradbclouducm",
+        "endpoint" : "https://objectstorage.us-ashburn-1.oraclecloud.com",
+        "namespace" : "or....m",
         "bucket" : "Migrate_oci",
         "prefix" : "Delegation",
         "chunkSize" : 32,
@@ -180,4 +182,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, August 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, December 2025

@@ -6,7 +6,7 @@
 
 Estimated Lab Time: 15 minutes
 
-**JSON Duality**
+### About JSON Duality
 
 JSON Relational Duality is a landmark capability in Oracle AI Database, providing game-changing flexibility and simplicity for Oracle AI Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
 
@@ -20,12 +20,16 @@ Key benefits of JSON Relational Duality:
 
 * Enable flexibility and simplicity in building multiple apps on the same set of data. You can use the power of Duality View to define multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
 
-* Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. They eliminate data duplication across documents, whereas consistency is maintained automatically.
+* Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views ensure fully ACID-compliant (atomic, consistent, isolated, and durable) transactions across multiple documents and tables, automatically maintaining data consistency and removing the need for duplicate data.
 
 
 ### Objectives
 
-This lab aims to provide hands-on experience with JSON-relational Duality Views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational Duality Views using SQL and REST.
+This lab aims to provide hands-on experience with JSON-relational Duality Views, demonstrating how to get the strengths of both JSON and relational data models. 
+In this lab, you will:
+* Create tables with SQL and install a relational model
+* Create a JSON Duality view on the previously created relational tables
+* Realize benefits of JSON Duality Views through centralized storage, automatic data consistency, and schema flexibility.
 
 ### Prerequisites
 
@@ -502,4 +506,4 @@ You might have noticed that any JSON document in a Duality View carried addition
 ## Acknowledgements
 * **Author** - Hermann Baer
 * **Contributors** - Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025

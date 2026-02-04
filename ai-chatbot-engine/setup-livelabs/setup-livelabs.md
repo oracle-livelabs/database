@@ -26,7 +26,7 @@ The password is listed in the same popup as well.
 The Jupyter Lab launcher should open.
 ![Jupyter launcher](images/image1.png)
 
-## Task 1: Setup the 23ai database
+## Task 1: Setup the database
 
 1. Open a terminal from the Jupyter Launcher by clicking on the `Terminal` button.
    ![Jupyter terminal](images/image2.png)
@@ -37,7 +37,7 @@ The Jupyter Lab launcher should open.
    <copy>./dba.sh</copy> 
    ```
 
-2. The latest Oracle Database 23ai is already installed in the Lab image, but we need to do a few things first.
+2. The latest Oracle AI Database is already installed in the Lab image, but we need to do a few things first.
 
 ```bash
 <copy>sqlplus sys/freepdb1 as sysdba</copy>
@@ -138,7 +138,7 @@ You may now **proceed to the next lab**
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
 * [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
-* [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
+* [Get Started with Oracle AI Database](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA

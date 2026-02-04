@@ -24,17 +24,11 @@ In this lab, you will:
 
 	![Select your Compartment](images/select-compartment.png)
 
-1. Click in the *Database Actions* dropdown list and select **View all database actions**
+2. Click in the *Database Actions* dropdown list and select **View all database actions**
 
 	![DB Actions](images/dbaction1.png)
 
-
-2. Below you can find the Database Actions homepage.
-
-	![Homepage Database Actions](./images/homepage-dbactions.png)
-
-
-3. On the homepage, click the SQL tile under Development.
+3. On the homepage, go to the Development tab and click the SQL tile.
 
 	![Homepage Development SQL](./images/homepage-sql.png)
 
@@ -55,10 +49,10 @@ In this lab, you will:
 	```
 
 	You can see that you create this table just like any other table. JSON is just another native datatype of the Oracle AI Database. You could become more specific and create the JSON datatype with one of the following JSON column modifiers:
-	- JSON
-	- JSON (object)
-	- JSON (scalar)
-	- JSON (array)
+* JSON
+* JSON (object)
+* JSON (scalar)
+* JSON (array)
 
 	If you specify any of the modifiers, the database will not only enforce proper JSON, but also the type of the JSON column modifier you have chosen. For our example we chose not to define a specific modifier.
 
@@ -70,14 +64,14 @@ In this lab, you will:
 
 	```
 	<copy>
-	insert into movies values (100, 'Coming to America', 'movie', 'DVD', 'acceptable', 1988,
-								'{ "price": 5,
-    							 	"comment": "DVD in excellent condition, cover is blurred",
-    								"starring": ["Eddie Murphy", 
-												 "Arsenio Hall", 
-												 "James Earl Jones", 
-												 "John Amos"],
-    								"decade": "80s"}');
+	insert into movies values ( 100,
+                          'Coming to America',
+                          'movie',
+                          'DVD',
+                          'acceptable',
+                          1988,
+                          '{ "price": 5, "comment": "DVD in excellent condition, cover is blurred",
+            "starring": ["Eddie Murphy", "Arsenio Hall", "James Earl Jones", "John Amos"], "decade": "80s"}' );
 	</copy>
 	```
 
@@ -88,17 +82,11 @@ In this lab, you will:
 	```
 	<copy>
 	insert into movies values (101, 'The Thing', 'movie', 'DVD', 'like new', 1982,
-								 json { 'price': 9.50,
-										'comment': 'still sealed',
-										 'starring': ['Kurt Russel',
-										  			  'Wilford Brimley',
-										  			  'Keith David']}),
-							   (102, 'Aliens', 'movie','VHS', 'unknown, cassette looks ok', 1986,
-    							json { 'price': 2.50,
-									    'starring': ['Sigourney Weaver',
-											         'Michael Bien',
-											         'Carrie Henn'],
-									    'decade': '80s'});
+		json { 'price': 9.50, 'comment': 'still sealed', 'starring': ['Kurt Russel',
+				'Wilford Brimley', 'Keith David']}),
+				(102, 'Aliens', 'movie','VHS', 'unknown, cassette looks ok', 1986,
+    			json { 'price': 2.50, 'starring': ['Sigourney Weaver',
+				'Michael Bien', 'Carrie Henn'], 'decade': '80s'});
 	</copy>
 	```
 
@@ -155,12 +143,12 @@ Your table now consists of relational column and a JSON column, as you will see 
 If you looked closely at the SQL examples in the previous sections you might have spotted that we were using some item methods in the example before to extract only numbers from our field **price** in our JSON column. As you know, with schema flexibility comes the risk of non-conformant (dirty) data.
 
 As you might know, the JSON standard supports only a simple set of data types optimized for readability and ease of use, enabling straightforward data exchange and schema flexibility. These are:
-	•	String: Text enclosed within double quotes, e.g., "hello world".
-	•	Number: Integers or floating-point numbers, e.g., 42 or 3.14.
-	•	Boolean: Logical true or false values, true or false.
-	•	Array: Ordered lists of values enclosed in brackets [ ], e.g., [1, 2, 3].
-	•	Object: Collections of key-value pairs enclosed in curly braces { }, e.g., {"name": "Alice"}.
-	•	Null: Indicates an empty or undefined value, represented as null.
+* String: Text enclosed within double quotes, e.g., "hello world".
+* Number: Integers or floating-point numbers, e.g., 42 or 3.14.
+* Boolean: Logical true or false values, true or false.
+* Array: Ordered lists of values enclosed in brackets [ ], e.g., [1, 2, 3].
+* Object: Collections of key-value pairs enclosed in curly braces { }, e.g., {"name": "Alice"}.
+* Null: Indicates an empty or undefined value, represented as null.
 
 **So how do we handle datatypes in general in JSON columns?**
 
@@ -174,12 +162,12 @@ Let's insert another movie quickly and use the extended textual representation. 
 
 	```
 	<copy>
-	update movies set extras = json_transform(extras, 
-	                           set '$.released' = DATE '1986-07-18') 
+	update movies set extras = json_transform(extras,
+	                           set '$.released' = DATE '1986-07-18')
 	where movie_id = 102;
 
-	update movies set extras = json_transform(extras, 
-	                           set '$.released' = '1982-06-25') 
+	update movies set extras = json_transform(extras,
+	                           set '$.released' = '1982-06-25')
 	where movie_id = 101;
 	</copy>
 	```
@@ -189,14 +177,14 @@ Let's insert another movie quickly and use the extended textual representation. 
 
 	```
 	<copy>
-	select title, json_serialize(extras extended) from movies 
+	select title, json_serialize(extras extended) from movies
 	where movie_id in (101,102);
 
-	select title, json_value(extras,'$.released.type()') from movies 
+	select title, json_value(extras,'$.released.type()') from movies
 	where movie_id in (101,102);
 	</copy>
 	```
-	You'll see that we only have the extended datatype information **$oracleDate** for attributes that we explicitly classified as such. Others were just mapped as-is to conformant basic JSON standard types. 
+	You'll see that we only have the extended datatype information **$oracleDate** for attributes that we explicitly classified as such. Others were just mapped as-is to conformant basic JSON standard types.
 
 	![extended attributes of two movies](./images/extended-attributes-movies.png)
 
@@ -204,7 +192,7 @@ Let's insert another movie quickly and use the extended textual representation. 
 
 	```
 	<copy>
-	select title, json_value(extras,'$.released' returning date) from movies 
+	select title, json_value(extras,'$.released' returning date) from movies
 	where movie_id in (101,102);
 	</copy>
 	```
