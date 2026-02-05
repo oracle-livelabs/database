@@ -22,8 +22,6 @@ This workshop assumes you have:
 * Access to an Oracle Database 26ai environment
 * Basic familiarity with SQL
 
-*This is the "fold"*
-
 
 ## Learn More
 
