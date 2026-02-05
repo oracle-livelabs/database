@@ -15,8 +15,6 @@ In this lab, you will:
 * Initialize a JSON column with a valid object
 * Seed sample data using idempotent SQL statements
 
-*This is the "fold"*
-
 ---
 
 ## Task 1: Create the Base Tables
