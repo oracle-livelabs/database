@@ -10,7 +10,7 @@
     {
       "title": "Introduction",
       "description": "Learn what JSON Relational Duality Views are and what you will build in this lab.",
-      "filename": "../../01-intro/introduction.md"
+      "filename": "../../0-intro/introduction.md"
     },
     {
       "title": "Lab 1: Create a Tiny Relational Schema",
