@@ -1,47 +1,50 @@
 {
-  "workshoptitle": "The Title of the Workshop is defined in the manifest",
-  "help": "livelabs-help-**enterarea**_us@oracle.com",
-  "variables": ["../../variables/variables.json",
-    "../../variables/variables-in-another-file.json"],
+  "workshoptitle": "26ai Duality Views: Build Updatable JSON Documents",
+  "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
     {
+      "title": "Get Started",
+      "description": "Log in and get set up for LiveLabs.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+    },
+    {
       "title": "Introduction",
-      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
-      "filename": "../../introduction/introduction.md"
+      "description": "Learn what JSON Relational Duality Views are and what you will build in this lab.",
+      "filename": "../../01-intro/introduction.md"
     },
     {
-      "title": "Get Started with noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      "title": "Lab 1: Create a Tiny Relational Schema",
+      "description": "Create the base tables and seed data for a small conference schema to use with Duality Views.",
+      "filename": "../../1-create-schema/create-schema.md"
     },
     {
-      "title": "Lab 1: Provision an Instance",
-      "description": "Labs that follow the introduction are numbered, starting with Lab 1",
-      "filename": "../../provision/provision.md"
+      "title": "Lab 2: Single-Table Duality Views",
+      "description": "Create updatable document views over single tables and apply fine-grained controls such as read-only attributes.",
+      "filename": "../../2-single-table-duality/single-table-duality.md"
     },
     {
-      "title": "Lab 2: Setup the Environment",
-      "filename": "../../setup/setup.md"
+      "title": "Lab 3: Multi-Table Duality View",
+      "description": "Create a multi-table duality view that produces one nested document per attendee, including sessions and speakers.",
+      "filename": "../../3-multi-table-duality/multi-table-duality.md"
     },
     {
-      "title": "Lab 3: Load Data into an Instance",
-      "filename": "../../data-load/data-load.md"
+      "title": "Lab 4: CRUD Through Documents",
+      "description": "Insert, update, and delete data using the JSON document interface backed by relational tables.",
+      "filename": "../../4-crud-documents/crud-documents.md"
     },
     {
-      "title": "Lab 4: Query Data",
-      "filename": "../../query/query.md"
+      "title": "Lab 5: Query Documents with SQL",
+      "description": "Query nested JSON documents using SQL and JSON_TABLE to flatten arrays into rows.",
+      "filename": "../../5-query-documents/query-documents.md"
     },
     {
-        "title": "Lab 5: Tables in LiveLabs",
-        "filename": "../../tables/tables.md"
-    },
-    {
-            "title": "Lab 6: Variables in LiveLabs",
-            "filename": "../../variables/variables.md"
+    "title": "Lab 6: Clean Up (Optional)",
+    "description": "Drop the duality views and tables to return the workspace to a clean state.",
+    "filename": "../../6-cleanup/cleanup.md"
     },
     {
       "title": "Need Help?",
-      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "description": "Solutions to common problems and directions for receiving live help.",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]

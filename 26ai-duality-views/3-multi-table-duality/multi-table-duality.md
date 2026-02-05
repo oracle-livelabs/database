@@ -9,8 +9,6 @@ Estimated Lab Time: 4–5 minutes
 * Create a multi-table duality view
 * Produce nested JSON documents from relational data
 
-*fold*
-
 ## Task 1: Create a Multi-Table Duality View
 
 <iframe

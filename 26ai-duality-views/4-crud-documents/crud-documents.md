@@ -10,8 +10,6 @@ Estimated Lab Time: 4–5 minutes
 * Update document fields in place
 * Delete documents
 
-*fold*
-
 ## Task 1: Insert a JSON Document
 
 <iframe

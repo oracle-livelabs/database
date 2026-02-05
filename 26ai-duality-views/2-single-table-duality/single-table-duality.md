@@ -13,8 +13,6 @@ In this lab, you will:
 * Apply a simple field-level control (read-only)
 * Query JSON documents from a duality view
 
-*This is the "fold"*
-
 ---
 
 ## Task 1: Create Duality Views for Attendees and Speakers

@@ -9,8 +9,6 @@ Estimated Lab Time: 4–5 minutes
 * Query nested JSON using SQL
 * Flatten arrays with JSON_TABLE
 
-*fold*
-
 ## Task 1: Query Nested JSON Data
 
 <iframe
