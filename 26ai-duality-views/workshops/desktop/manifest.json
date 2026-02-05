@@ -38,11 +38,6 @@
       "filename": "../../5-query-documents/query-documents.md"
     },
     {
-    "title": "Lab 6: Clean Up (Optional)",
-    "description": "Drop the duality views and tables to return the workspace to a clean state.",
-    "filename": "../../6-cleanup/cleanup.md"
-    },
-    {
       "title": "Need Help?",
       "description": "Solutions to common problems and directions for receiving live help.",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
