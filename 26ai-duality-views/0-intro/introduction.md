@@ -24,7 +24,6 @@ This workshop assumes you have:
 
 *This is the "fold"*
 
-In general, the Introduction does not have tasks.
 
 ## Learn More
 
