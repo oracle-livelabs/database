@@ -10,7 +10,7 @@ This workshop shows how to build AI agents with **agentic memory**: agents that 
 
 ## Meet Seer Equity
 
-Throughout this workshop, you'll build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
+Throughout this workshop, you will build AI agents for **Seer Equity**, a growing financial services company specializing in personal, auto, mortgage, and business loans.
 
 Seer Equity has been growing fast. Maybe too fast. Their loan officers are overwhelmed, and cracks are starting to show.
 
@@ -30,7 +30,7 @@ The company deployed AI chatbots to help loan officers, but they're black boxes.
 
 **"Small loans take as long to process as big ones."**
 
-A $25,000 personal loan for a client with excellent credit shouldn't require the same scrutiny as a $500,000 mortgage. But without smart routing, everything goes through the same manual review process. Loan officers spend hours on applications that should take minutes.
+A $25,000 loan for a client with excellent credit shouldn't require the same scrutiny as a $500,000 mortgage. But without smart routing, everything goes through the same manual review process. Loan officers spend hours on applications that should take minutes.
 
 **"We can't enforce separation of duties."**
 
