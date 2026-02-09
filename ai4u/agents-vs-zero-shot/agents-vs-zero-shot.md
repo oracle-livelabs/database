@@ -2,9 +2,11 @@
 
 ## Introduction
 
-In this lab, you'll directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seer Equity**.
+In this lab, you will directly compare zero-shot prompting with agent-based execution to understand why agents are transforming how work gets done at **Seer Equity**.
 
 Zero-shot prompting means: one question, one answer, done. It's useful for general knowledge, but it doesn't execute workflows or access your data. Agents break tasks into steps, use tools, and actually complete the work.
+
+![Agents vs Chatbots](./images/intro-lab2.png " ")
 
 ### The Business Problem
 
@@ -17,17 +19,17 @@ At Seer Equity, loan officers tried using the AI chatbot to check loan statuses.
 The chatbot was helpful for general questions like "What's a good credit score?" or "How do mortgages work?" But when loan officers needed actual data or wanted to take action, it fell short.
 
 Seer Equity needs AI that can:
-- **Access real data** — Query the actual loan database
-- **Take action** — Update statuses, not just explain how to update them
-- **Coordinate steps** — Check a condition, then act on it
+- **Access real data**: Query the actual loan database
+- **Take action**: Update statuses, not just explain how to update them
+- **Coordinate steps**: Check a condition, then act on it
 
-### What You'll Learn
+### What You Will Learn
 
-This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). You'll see exactly where each approach works and where it fails.
+This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). you will see exactly where each approach works and where it fails.
 
-**What you'll build:** A comparison demonstrating when to use chat vs agents, plus an agent that can both read AND update loan data.
+**What you will build:** A comparison demonstrating when to use chat vs agents, plus an agent that can both read AND update loan data.
 
-Estimated Time: 10 minutes
+**Estimated Time**: 10 minutes
 
 ### Objectives
 
@@ -38,9 +40,9 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
-* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
+* Basic knowledge of SQL, or the ability to follow along with the prompts
 
 ## Task 1: Import the Lab Notebook
 
@@ -48,9 +50,15 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![Notebook Information](./images/task1_1.png " ")
+
 2. Click **Import** to expand the Import drop down.
 
+    ![Notebook Information](./images/task1_2.png " ")
+
 3. Select **Git**.
+
+    ![Notebook Information](./images/task1_3.png " ")
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -60,7 +68,11 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-5. Click **Import**.
+    ![Notebook Information](./images/task1_4.png " ")
+
+5. Click **Ok**.
+
+    ![Notebook Information](./images/task1_5.png " ")
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -70,7 +82,7 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
 1. Set the profile.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it. This first command may take a little longer as it establishes the connection to the notebook.
 
     ```sql
     <copy>
@@ -78,11 +90,13 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
+    ![Task Information](./images/task2_1.png " ")
+
 2. Ask a procedural question using zero-shot.
 
     **Observe:** You get a helpful explanation of the steps. But you still have to do each step yourself.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -90,13 +104,15 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
+    ![Task Information](./images/task2_2.png " ")
+
 3. Now try asking for something that requires YOUR data.
 
     **Observe:** The AI cannot answer this because it has no access to your data. It gives generic advice about how to check loan status, but it does not actually know YOUR loan LOAN-12345.
 
     This is the limitation of zero-shot: great for general knowledge, useless for your specific business data.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -104,11 +120,13 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
+    ![Task Information](./images/task2_3.png " ")
+
 4. Ask it to do something.
 
     **Observe:** The AI explains HOW to update a loan but cannot actually do it. Zero-shot can advise; it cannot act.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -116,13 +134,15 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
     </copy>
     ```
 
+    ![Task Information](./images/task2_4.png " ")
+
 ## Task 3: See What SELECT AI Can Do
 
 Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can do. It can query your data using natural language.
 
 1. Create a sample loan applications table with comments to help Select AI understand the schema.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -153,9 +173,11 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     </copy>
     ```
 
+    ![Task Information](./images/task3_1.png " ")
+
 2. Add the table to your AI profile so SELECT AI knows about it.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -170,11 +192,13 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     </copy>
     ```
 
+    ![Task Information](./images/task3_2.png " ")
+
 3. Use SELECT AI NARRATE to query the loan status.
 
     **Observe:** SELECT AI CAN read your data and answer questions about it.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -182,13 +206,15 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     </copy>
     ```
 
-SELECT AI returned the actual status: UNDER_REVIEW. Compare this to zero-shot which could only give generic advice.
+    ![Task Information](./images/task3_3.png " ")
+
+SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot which could only give generic advice.
 
 4. Now try to update using SELECT AI.
 
     **Observe:** SELECT AI cannot update data. It can only read.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -196,9 +222,11 @@ SELECT AI returned the actual status: UNDER_REVIEW. Compare this to zero-shot wh
     </copy>
     ```
 
+    ![Task Information](./images/task3_4.png " ")
+
 5. Verify the loan was NOT updated.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -206,7 +234,9 @@ SELECT AI returned the actual status: UNDER_REVIEW. Compare this to zero-shot wh
     </copy>
     ```
 
-Still UNDER_REVIEW. SELECT AI can read but cannot write.
+    ![Task Information](./images/task3_5.png " ")
+
+Still `UNDER_REVIEW`. SELECT AI can read but cannot write.
 
 ## Task 4: Create an Agent with Tools
 
@@ -218,7 +248,7 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
 
     This function takes a loan ID and returns the loan details. It's a simple read operation that the agent will use to check on loans before taking action.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -244,11 +274,13 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     </copy>
     ```
 
+    ![Task Information](./images/task4_1.png " ")
+
 2. Create a function to update loan status (write).
 
     This function actually changes data in the database. Notice it first checks the current status, then makes the update. The agent will use this to approve or deny loans.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -283,11 +315,13 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     </copy>
     ```
 
+    ![Task Information](./images/task4_2.png " ")
+
 3. Register both functions as tools.
 
-    Now we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating—this is how you build smart behavior into your agent.
+    Now we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating. This is how you build smart behavior into your agent.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -313,11 +347,13 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     </copy>
     ```
 
+    ![Task Information](./images/task4_3.png " ")
+
 4. Create the agent, task, and team.
 
-    Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable. Notice how we give the agent access to TWO tools—it can decide which one to use based on what you ask.
+    Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable. Notice how we give the agent access to TWO tools. It can decide which one to use based on what you ask.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -353,13 +389,15 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     </copy>
     ```
 
+    ![Task Information](./images/task4_4.png " ")
+
 ## Task 5: See the Agent Coordinate and Act
 
 Now let's see the real power of agents: coordinating multiple tools and making changes.
 
 1. First, check the current status of loan LOAN-12345.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -367,11 +405,13 @@ Now let's see the real power of agents: coordinating multiple tools and making c
     </copy>
     ```
 
-The loan is currently UNDER_REVIEW.
+    ![Task Information](./images/task5_1.png " ")
+
+The loan is currently `UNDER_REVIEW`.
 
 2. Set the team and ask the agent to check and update the loan.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -380,17 +420,19 @@ The loan is currently UNDER_REVIEW.
     </copy>
     ```
 
+    ![Task Information](./images/task5_2.png " ")
+
 **Observe:** The agent:
-1. Called LOAN_LOOKUP_TOOL to check current status (UNDER_REVIEW)
+1. Called `LOAN_LOOKUP_TOOL` to check current status (`UNDER_REVIEW`)
 2. Made a decision based on the result
-3. Called LOAN_UPDATE_TOOL to change it to APPROVED
+3. Called `LOAN_UPDATE_TOOL` to change it to `APPROVED`
 4. Reported what it did
 
 This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
 3. Verify the change actually happened.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -398,11 +440,13 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
     </copy>
     ```
 
-**The status changed from UNDER_REVIEW to APPROVED.** The agent did not just talk about updating - it actually did it.
+    ![Task Information](./images/task5_3.png " ")
+
+**The status changed from `UNDER_REVIEW` to `APPROVED`.** The agent didn't just talk about updating - it actually did it.
 
 4. Try a conditional update that should NOT happen.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -410,7 +454,9 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
     </copy>
     ```
 
-**Observe:** The agent looked up loan LOAN-12346, saw it was PENDING (not UNDER_REVIEW), and correctly decided NOT to update it. This is intelligent coordination.
+    ![Task Information](./images/task5_4.png " ")
+
+**Observe:** The agent looked up loan LOAN-12346, saw it was `PENDING` (not `UNDER_REVIEW`), and correctly decided NOT to update it. This is intelligent coordination.
 
 ## Task 6: See What the Agent Did
 
@@ -418,7 +464,7 @@ Every tool call is logged. Let's see the execution history.
 
 1. Query the tool history.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -432,27 +478,29 @@ Every tool call is logged. Let's see the execution history.
     </copy>
     ```
 
+    ![Task Information](./images/task6_1.png " ")
+
 You can see the sequence: lookup, then update (or just lookup if no update was needed).
 
 ## Task 7: When to Use Each Approach
 
 | Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |
 |----------|---------------------|-----------------|----------------------|
-| SELECT AI CHAT | No | No | No |
-| SELECT AI | Yes | No | No |
-| SELECT AI AGENT | Yes | Yes | Yes |
+| `SELECT AI CHAT` | No | No | No |
+| `SELECT AI` | Yes | No | No |
+| `SELECT AI AGENT` | Yes | Yes | Yes |
 
-**Use zero-shot (SELECT AI CHAT) when:**
+**Use zero-shot (`SELECT AI CHAT`) when:**
 - You need a quick answer from general knowledge
 - No data access is required
 - You want advice or explanation
 
-**Use SELECT AI when:**
+**Use `SELECT AI` when:**
 - You need to query your data with natural language
 - Read-only access is sufficient
 - Single-step retrieval
 
-**Use agents (SELECT AI AGENT) when:**
+**Use agents (`SELECT AI AGENT`) when:**
 - The task requires access to your data
 - You need to READ and WRITE data
 - Decisions depend on data (conditional logic)
@@ -462,26 +510,29 @@ You can see the sequence: lookup, then update (or just lookup if no update was n
 
 In this lab, you directly compared three approaches:
 
-* **SELECT AI CHAT** — Cannot access your data; can only give generic advice
-* **SELECT AI** — Can read your data but cannot modify it
-* **SELECT AI AGENT** — Can read your data, make decisions, and take action
+* **`SELECT AI CHAT`**: Cannot access your data; can only give generic advice
+* **`SELECT AI`**: Can read your data but cannot modify it
+* **`SELECT AI AGENT`**: Can read your data, make decisions, and take action
 
-You watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.
+You watched the agent coordinate: check status, decide, act, report. And you verified the data actually changed.
 
 **Key takeaway:** The difference is not just intelligence. It's action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work. For Seer Equity, that means loan officers can focus on clients instead of data entry.
 
 ## Learn More
 
+* [Get an Autonomous Database for FREE!](https://www.oracle.com/autonomous-database/free-trial/)
+* [Mark Hornick's Select AI Agent Blog](https://blogs.oracle.com/machinelearning/build-your-agentic-solution-using-oracle-adb-select-ai-agent)
+* [Oracle Database Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/)
 * [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - Kay Malcolm, February 2026
 
 ## Cleanup (Optional)
 
-> This command is already in your notebook—just click the play button (▶) to run it.
+> This command is already in your notebook - just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -495,3 +546,5 @@ DROP FUNCTION lookup_loan;
 DROP FUNCTION update_loan_status;
 </copy>
 ```
+
+![Cleanup](./images/cleanup.png " ")
