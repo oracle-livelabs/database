@@ -1,0 +1,12 @@
+/* Only target FreeSQL embedded worksheets */
+#contentBox iframe[src*="freesql.com/embedded"] {
+  width: 100%;
+  max-width: 100% !important;
+
+  /* Override the theme's height:auto which causes squishing */
+  height: 460px !important;
+  min-height: 460px;
+
+  /* Optional: remove theme padding around iframes */
+  padding: 0 !important;
+}
