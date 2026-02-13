@@ -388,7 +388,7 @@ Let's verify the agent is using enterprise data.
     </copy>
     ```
 
-You can see the agent called POLICY_LOOKUP_TOOL and APPLICANT_LOOKUP_TOOL to get real data.
+You can see the agent called `POLICY_LOOKUP_TOOL` and `APPLICANT_LOOKUP_TOOL` to get real data.
 
 ## Summary
 

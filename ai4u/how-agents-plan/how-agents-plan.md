@@ -273,7 +273,7 @@ Let's start with a simple request that needs only one tool.
     </copy>
     ```
 
-**Observe:** The agent planned to use just GET_APPLICANT_TOOL because that's all the question required.
+**Observe:** The agent planned to use just `GET_APPLICANT_TOOL` because that's all the question required.
 
 ## Task 4: Observe Multi-Tool Planning
 
@@ -306,9 +306,9 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     ```
 
 **Observe:** The agent planned to use multiple tools:
-- GET_APPLICANT_TOOL to get basic info
-- GET_LOANS_TOOL to get loan history
-- CHECK_RATES_TOOL to verify rate eligibility
+- `GET_APPLICANT_TOOL` to get basic info
+- `GET_LOANS_TOOL` to get loan history
+- `CHECK_RATES_TOOL` to verify rate eligibility
 
 3. Notice the sequence—the agent determined the logical order.
 
