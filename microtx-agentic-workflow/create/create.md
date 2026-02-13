@@ -380,24 +380,11 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 
 9. Click **Submit**. Your new connector appears in the list of available MCP definitions.
 
-10. View the existing "oracledb\_mcp" MCP definition. To create a new MCP definition, click **New MCP Definition (+)**.
+10. Open the navigation menu and click **Agentic AI**, and then click the **Agent Profile** tab.
 
-11. Click on the edit button to view the oracledb\_mcp definition. Or enter the following information when creating a new MCP server connector for Oracle AI Database.
-    * Name: Enter `oracledb_mcp` as a unique and descriptive name to identify this MCP server definition in workflows.
-    * Description: Enter a description for the tool configuration, such as Oracle AI Database MCP server.
-    * Transport: Select STDIO from the drop-down list to specify the network transport protocol used by the MCP server for communication.
-    * Command: Enter '/app/sqlcl/bin/sql'.
-    * Args: Enter `-mcp` as the command argument.
+11. View the existing "loan\_document\_verification\_agent" Agent Profile definition. To create a new Agent Profile definition, click **New Agent Profile Definition (+)**.
 
-     ![Create an MCP server connector for Oracle AI Database.](images/oracle-mcp2.png)
-
-12. Click **Submit**. Your new connector appears in the list of available MCP definitions.
-
-13. Open the navigation menu and click **Agentic AI**, and then click the **Agent Profile** tab.
-
-14. View the existing "loan\_document\_verification\_agent" Agent Profile definition. To create a new Agent Profile definition, click **New Agent Profile Definition (+)**.
-
-15. Click on the edit button to view the loan\_document\_verification\_agent definition. Or enter the following information when creating a new Agent Profile definition.
+12. Click on the edit button to view the loan\_document\_verification\_agent definition. Or enter the following information when creating a new Agent Profile definition.
     * Name: Enter `loan_document_verification_agent` as a unique and descriptive name to identify this agent profile definition in workflows.
     * Description: Enter a description for the tool configuration, such as Loan Documents Verification Agent.
     * Role: Enter `Loan application documents verification agent` as the intended role or function of the agent.
@@ -421,33 +408,33 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 
     ![Create an Agent profile for loan doc verification.](images/doc-verify-agent-profile.png)
 
-16. Click **Submit**. Your new agent profile appears in the list of available agent profile definitions.
+13. Click **Submit**. Your new agent profile appears in the list of available agent profile definitions.
 
-17. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
+14. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-18. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+15. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
 
-19. In the left pane, click **Agentic Planner** task to view the details of the task in the **Task** tab.
+16. In the left pane, click **Agentic Planner** task to view the details of the task in the **Task** tab.
    ![View task details](images/view-agentic-task-wb.png)
 
-20. Click the **JSON** tab to view the JSON code for the **Agentic Planner** task or add a new *Planner Task* if you are creating a new workflow, configure the planner task as shown in the above image and save your changes. 
+17. Click the **JSON** tab to view the JSON code for the **Agentic Planner** task or add a new *Planner Task* if you are creating a new workflow, configure the planner task as shown in the above image and save your changes. 
 Within the planner add more tasks by clicking on the + icon in the planner.
- ![Add tasks within planner](images/add-tasks-in-planner.png)
+   ![Add tasks within planner](images/add-tasks-in-planner.png)
 
-  20.1 Add *Agentic Task* for loan document verification. Select the agent profile created in the previous step and configure the Agentic Task as shown.
-  ![Add agentic task](images/add-agentic-task.png)
+   17.1 Add *Agentic Task* for loan document verification. Select the agent profile created in the previous step and configure the Agentic Task as shown.
+   ![Add agentic task](images/add-agentic-task.png)
 
-  20.2 Add *HTTP Task* for Compliance check. Configure the Task as shown.
-  ![Add http check task](images/add-loan-check-task.png)
+   17.2 Add *HTTP Task* for Compliance check. Configure the Task as shown.
+   ![Add http check task](images/add-loan-check-task.png)
 
-  20.3 Add *Simple Task* for Loan processing agent task. Configure the Task as shown.
-  ![Add loan processing agent task](images/add-loan-simple-task.png)
+   17.3 Add *Simple Task* for Loan processing agent task. Configure the Task as shown.
+   ![Add loan processing agent task](images/add-loan-simple-task.png)
 
-  20.4 Add *HTTP Task* to notify AML verification failure. Configure the Task as shown.
-  ![Add AML check notification task](images/add-aml-check-notify-task.png)
+   17.4 Add *HTTP Task* to notify AML verification failure. Configure the Task as shown.
+   ![Add AML check notification task](images/add-aml-check-notify-task.png)
 
-   20.5 Add *Human Task* for manual verification. Configure the Task as shown.
-  ![Add AML check human task](images/add-aml-check-human-task.png)
+   17.5 Add *Human Task* for manual verification. Configure the Task as shown.
+   ![Add AML check human task](images/add-aml-check-human-task.png)
 
 The complete JSON representation for the Planner task along with it's nested tasks are given below for reference. You can use this to copy text and values to configure the above tasks. 
 
