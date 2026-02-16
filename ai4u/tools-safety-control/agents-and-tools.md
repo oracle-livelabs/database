@@ -537,7 +537,7 @@ END;
 
 ## Task 10: Create the Underwriting Agent (Underwriter Role)
 
-The UNDERWRITING_AGENT has access to three tools but NOT SUBMIT_LOAN_TOOL. Proper separation of duties.
+The `UNDERWRITING_AGENT` has access to three tools but **not** `SUBMIT_LOAN_TOOL`. Proper separation of duties.
 
 ```sql
 <copy>
