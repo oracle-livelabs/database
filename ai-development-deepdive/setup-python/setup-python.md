@@ -8,9 +8,9 @@ Estimated Time: 15 minutes
 
 ### Objectives
 
-* Define the functions required to:
-- Execute vector search on business date in the Oracle Database in response to a user prompt
-- Use a large langusge model to retrieve a public response the the prompt
+Define the functions required to:
+- Execute vector search on business data in the Oracle Database in response to a user prompt
+- Use a large language model to retrieve a public response to the prompt
 - Use the large language model, augmented by the database vector search response, to retrieve an enriched response using internal and public data
 
 ## Task 1: Overview
@@ -21,7 +21,7 @@ In the "Overview" notebook cell, the vector search, LLM and RAG python functions
 
 ### DB\_AI\_Vector\_Search
 - Oracle Database AI Vector Search lets applications store vector embeddings alongside traditional relational data and use them to perform fast, semantic similarity searches over both structured and unstructured content such as text, images, and audio.
-- It introduces a native VECTOR data type, SQL functions, and vector indexes so developers can generate embeddings, index them, and query by meaning rather than keywords
+- It introduces a native VECTOR data type, SQL functions, and vector indexes so developers can generate embeddings, index them, and query by meaning rather than keywords.
 
 ### LLM\_Search
 - In this context, Large Language Models (LLMs) act as the central **reasoning** and language-understanding engines, interpreting natural-language instructions, breaking goals into steps, and deciding which data, tools or APIs to call to accomplish tasks.
