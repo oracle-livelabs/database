@@ -1,0 +1,66 @@
+{
+    "workshoptitle": "AI Agents with Agentic Memory \u2013 Healthcare Edition",
+    "help": "livelabs-help_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "About this workshop",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Getting Started",
+            "description": "Access your environment",
+            "filename": "../../getting-started/getting_started.md"
+        },
+        {
+            "title": "Lab 1: What Is an AI Agent?",
+            "description": "Build intake agent",
+            "filename": "../../what-is-agent/what-is-agent.md"
+        },
+        {
+            "title": "Lab 2: Agents vs Zero-Shot",
+            "description": "Compare guidance vs execution",
+            "filename": "../../agents-vs-zero-shot/agents-vs-zero-shot.md"
+        },
+        {
+            "title": "Lab 3: How Agents Plan",
+            "description": "Plan cross-team workflow",
+            "filename": "../../how-agents-plan/how-agents-plan.md"
+        },
+        {
+            "title": "Lab 4: How Agents Execute",
+            "description": "Log authorization workflow",
+            "filename": "../../how-agents-execute/how-agents-execute.md"
+        },
+        {
+            "title": "Lab 5: Why Agents Need Memory",
+            "description": "Persist clinical context",
+            "filename": "../../why-agents-need-memory/why-agents-need-memory.md"
+        },
+        {
+            "title": "Lab 6: Enterprise Data",
+            "description": "Integrate payer policies",
+            "filename": "../../enterprise-data/enterprise-data.md"
+        },
+        {
+            "title": "Lab 7: Memory Core",
+            "description": "Persist long-term facts",
+            "filename": "../../memory-core/memory-core.md"
+        },
+        {
+            "title": "Lab 8: Four Memory Types",
+            "description": "Segment clinical memory",
+            "filename": "../../four-memory-types/four-memory-types.md"
+        },
+        {
+            "title": "Lab 9: Learning Loop",
+            "description": "Leverage precedents",
+            "filename": "../../learning-loop/learning-loop.md"
+        },
+        {
+            "title": "Lab 10: Tools, Safety & Control",
+            "description": "Enforce roles & audits",
+            "filename": "../../tools-safety-control/tools-safety-control.md"
+        }
+    ]
+}

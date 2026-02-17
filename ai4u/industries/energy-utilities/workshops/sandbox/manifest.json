@@ -1,0 +1,66 @@
+{
+    "workshoptitle": "AI Agents with Agentic Memory \u2013 Energy Utilities Edition",
+    "help": "livelabs-help_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "About this workshop",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Getting Started",
+            "description": "Access your environment",
+            "filename": "../../getting-started/getting_started.md"
+        },
+        {
+            "title": "Lab 1: What Is an AI Agent?",
+            "description": "Build DER intake agent",
+            "filename": "../../what-is-agent/what-is-agent.md"
+        },
+        {
+            "title": "Lab 2: Agents vs Zero-Shot",
+            "description": "Compare intake vs automation",
+            "filename": "../../agents-vs-zero-shot/agents-vs-zero-shot.md"
+        },
+        {
+            "title": "Lab 3: How Agents Plan",
+            "description": "Coordinate DER studies",
+            "filename": "../../how-agents-plan/how-agents-plan.md"
+        },
+        {
+            "title": "Lab 4: How Agents Execute",
+            "description": "Log engineering workflows",
+            "filename": "../../how-agents-execute/how-agents-execute.md"
+        },
+        {
+            "title": "Lab 5: Why Agents Need Memory",
+            "description": "Retain mitigation context",
+            "filename": "../../why-agents-need-memory/why-agents-need-memory.md"
+        },
+        {
+            "title": "Lab 6: Enterprise Data",
+            "description": "Surface tariff policies",
+            "filename": "../../enterprise-data/enterprise-data.md"
+        },
+        {
+            "title": "Lab 7: Memory Core",
+            "description": "Persist DER facts",
+            "filename": "../../memory-core/memory-core.md"
+        },
+        {
+            "title": "Lab 8: Four Memory Types",
+            "description": "Segment DER memories",
+            "filename": "../../four-memory-types/four-memory-types.md"
+        },
+        {
+            "title": "Lab 9: Learning Loop",
+            "description": "Use DER precedents",
+            "filename": "../../learning-loop/learning-loop.md"
+        },
+        {
+            "title": "Lab 10: Tools, Safety & Control",
+            "description": "Enforce engineer roles",
+            "filename": "../../tools-safety-control/tools-safety-control.md"
+        }
+    ]
+}
