@@ -21,6 +21,11 @@
             "title": "Lab 2: Why Agents Beat Zero Shot Prompts",
             "description": "Compare zero-shot vs agent execution",
             "filename": "../../agents-vs-zero-shot/agents-vs-zero-shot.md"
+        },
+        {
+            "title": "Lab 3: How Agents Plan the Work",
+            "description": "Watch an agent break tasks into steps",
+            "filename": "../../how-agents-plan/how-agents-plan.md"
         }
     ]
 }

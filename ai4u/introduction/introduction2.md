@@ -32,6 +32,12 @@ After deploying the first agent, Seer Equity's technical team had a question: ca
 
 **In Lab 2, we explored this.** We compared three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions. Seer Equity now knows exactly when to deploy each approach.
 
+**"Before every client call, I spend 10-15 minutes just gathering the information I need."**
+
+Loan officers were pulling together client information from multiple places before every call—contact preferences, loan history, rate eligibility, credit tier. By the time they had everything, they'd forgotten why the client called. One agent with one tool wasn't enough; they needed an agent that could plan and execute a multi-step information retrieval.
+
+**In Lab 3, we fixed this.** We built a multi-tool agent that plans its own work. Ask it for a complete picture of a client and it figures out which tools to call, in what order, and synthesizes the results. Jennifer's 10-15 minute prep is now a 10-second agent call. We also saw how instructions shape the planning process, making agent behavior predictable and debuggable.
+
 ### The Problems Still Keeping Leadership Up at Night
 
 **"We keep forgetting our best clients."**
@@ -58,7 +64,7 @@ Compliance requires that the person who submits a loan application can't be the 
 
 We'll solve all of these problems in future labs. Here's what Seer Equity will build:
 
-| Business Problem | Agent Solution | you will Build It In |
+| Business Problem | Agent Solution | You Will Build It In |
 |------------------|----------------|---------------------|
 | Forgetting client preferences | Persistent memory that survives sessions | Labs 5, 7, 9 |
 | Inconsistent decisions | Past decision lookup for guidance | Labs 8, 9 |
@@ -79,17 +85,18 @@ This is an ongoing series following Seer Equity as they transform their AI from 
 
 * **Lab 2: Agents vs Zero-Shot.** Compare three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions.
 
+* **Lab 3: How Agents Plan the Work.** Build a multi-tool agent and watch it plan multi-step operations. See how the agent decides which tools to call, in what order, and how instructions shape the planning process.
+
 ### Objectives
 
 By the end of this workshop, you will be able to:
 
 * Explain the difference between a chatbot and an agent
-* Create database tables with comments that help Select AI understand your schema
-* Build an agent with a SQL tool using Oracle Select AI Agent framework
-* Query the agent using natural language and receive data-driven answers
-* View execution history to see what the agent did
+* Build an agent with SQL tools and query it using natural language
+* View execution history to see what the agent did and why
 * Choose the right approach (zero-shot, SELECT AI, or agent) for different use cases
-* Build agents that can update data based on conditional logic
+* Build agents that can read and write data based on conditional logic
+* Build multi-tool agents and observe how they plan multi-step operations
 
 ### Prerequisites
 
