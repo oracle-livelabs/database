@@ -450,8 +450,8 @@ In this lab, you observed how agents plan their work:
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - David Start, February 2026
 
 ## Cleanup (Optional)
 
