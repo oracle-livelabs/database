@@ -16,7 +16,7 @@
         
         {
           "title": "Lab 1: Connect to the HeatWave Instance from Visual Studio Code",
-          "filename": "../../connect-dbs-vscode/connect-dbs-vscode.md"
+          "filename": "../../connect-dbs-vscode-sandbox/connect-dbs-vscode-sandbox.md"
         },
 
         {
@@ -31,12 +31,7 @@
 
         {
           "title": "Lab 4: Build HeatWave RAG Chat Application",
-          "filename": "../../develop-app/develop-app.md"
-        },
-
-        {
-          "title": "Stop Services",
-          "filename": "../../stop-services/stop-services.md"
+          "filename": "../../develop-app-sandbox/develop-app-sandbox.md"
         },
 
         {
