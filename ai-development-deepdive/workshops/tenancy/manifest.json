@@ -1,0 +1,47 @@
+{
+    "workshoptitle": "Oracle AI Database -- AI Capabilities Tutorial",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to the workshop and the labs that follow",
+             "type": "livelabs",
+           "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 1: Create your Autonomous AI Database Free Instance",
+            "description": "Create an Autonomous AI Database for this workshop",
+            "type": "livelabs",
+            "filename": "../../../23aifree/login-to-abd3/login-to-adb3-json.md"
+        },
+        {
+            "title": "Lab 2: Start the Machine Learning Notebook Lab Environment",
+            "description": "Start the Machine Learning Notebook Lab Environment",
+             "type": "livelabs",
+           "filename": "../../jupyter-tenancy/26ai-notebook.md"
+        },
+        {
+            "title": "Lab 3: Setup the Python Functions",
+            "description": "Setup the dev environment",
+            "type": "livelabs",
+            "filename": "../../setup-python/setup-python.md"
+        },
+        {
+            "title": "Lab 4: Embed End-User Business Documents",
+            "description": "Embed End-User Business Documents",
+            "type": "livelabs",
+            "filename": "../../sentence-transformer/sentence-transformer.md"
+        },
+        {
+            "title": "Lab 5: AI Vector Search and Retrieval-Augmented Generation (RAG)",
+            "description": "AI Vector Search and Retrieval-Augmented Generation (RAG)",
+            "type": "livelabs",
+            "filename": "../../search+llm/search+llm.md"
+        }
+    ]
+}
