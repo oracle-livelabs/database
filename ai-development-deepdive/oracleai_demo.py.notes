@@ -1,0 +1,659 @@
+
+Huggingface Info -->
+
+    To log in, `huggingface_hub` requires a token generated from https://huggingface.co/settings/tokens .
+Enter your token (input will not be visible):
+Add token as git credential? (Y/n) n
+Token is valid (permission: fineGrained).
+The token `gnm_hf_llama_token` has been saved to /home/oracle/.cache/huggingface/stored_tokens
+Your token has been saved to /home/oracle/.cache/huggingface/token
+Login successful.
+The current active token is: `gnm_hf_llama_token`
+
+HEWd1pdKhgface
+
+gnm_hf_llama_token
+
+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
+
+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
+
+/home/oracle/Llama-3.2-1B-Instruct
+
+
+================================================
+
+
+user
+LL184134-USER
+
+Password
+AV5igx_IZ
+
+tenancy
+c4u02
+
+Region
+UK South (London) (uk-london-1)
+
+Generative AI Endpoint Region
+UK South (London) (uk-london-1)
+
+Compartment
+LL184134-COMPARTMENT
+
+Compartment OCID
+ocid1.compartment.oc1..aaaaaaaa6rtojdw5d34ea4eqxeo5fv73loap3n55fftwaqunxdk2h35pzpya
+
+===================================
+
+Direct access to the notenook -->
+http://170.9.231.145:8888/lab/workspaces/auto-h/tree/oracleai_demo.livelab.ADB.code.noStyle.ipynb
+
+http://170.9.231.145/livelabs/vnc.html?password=LiveLabs.Rocks_99&resize=scale&quality=9&autoconnect=true&reconnect=true
+
+password --> 
+59d17e4a8170895959e69b50824df2bd912a6a20af9ff3f6
+
+https://orasenatdpltsecitom03.objectstorage.us-chicago-1.oci.customer-oci.com/p/rzRafuw1pJSYODWowEmEDdfBm3wmGteX-j6_Q8chJYT-321OcTXEMY1SnjzwqaTL/n/orasenatdpltsecitom03/b/bucket-labvcnCHI/o/oracleai_demo.livelab.ADB.code.ipynb
+
+
+curl -v -O -X GET "https://orasenatdpltsecitom03.objectstorage.us-chicago-1.oci.customer-oci.com/p/rzRafuw1pJSYODWowEmEDdfBm3wmGteX-j6_Q8chJYT-321OcTXEMY1SnjzwqaTL/n/orasenatdpltsecitom03/b/bucket-labvcnCHI/o/Station_03.bmp"
+
+
+curl -v -X PUT --data-binary "@G:\ClientFiles\__Service Catalog\database\ai-development-deepdive\sentence-transformer\images\Station_02.png" "https://orasenatdpltsecitom03.objectstorage.us-chicago-1.oci.customer-oci.com/p/rzRafuw1pJSYODWowEmEDdfBm3wmGteX-j6_Q8chJYT-321OcTXEMY1SnjzwqaTL/n/orasenatdpltsecitom03/b/bucket-labvcnCHI/o/Station_02.png"
+
+
+curl -v -X PUT --data-binary "@D:\oracle-ai-database-ee-26ai-1.0-1.el8.x86_64.rpm" "https://orasenatdpltsecitom03.objectstorage.us-chicago-1.oci.customer-oci.com/p/rzRafuw1pJSYODWowEmEDdfBm3wmGteX-j6_Q8chJYT-321OcTXEMY1SnjzwqaTL/n/orasenatdpltsecitom03/b/bucket-labvcnCHI/o/oracle-ai-database-ee-26ai-1.0-1.el8.x86_64.rpm"
+
+oci os object put --bucket-name "bucket-labvcnCHI" --file "/opt/oracle/traders.csv"
+
+
+CREATE DATABASE LINK SWANLINK 
+   CONNECT TO vector IDENTIFIED BY HEWd1pdK##0524 
+   USING
+'(description= (retry_count=20)(retry_delay=3)
+(address=(protocol=tcps)(port=1522)(host=adb.us-chicago-1.oraclecloud.com))
+(connect_data=(service_name=g6141f94dffc5b6_swan1adb_high.adb.oraclecloud.com))
+(security=(ssl_server_dn_match=yes)))';
+
+
+CREATE DIRECTORY dblink_wallet_dir AS 'directory_path_of_your_choice';
+            
+
+
+
+
+
+
+
+Eileen Beck 3:44 PM
+https://github.com/oracle-livelabs/common
+
+Eileen Beck  to  Everyone 3:45 PM
+https://github.com/oracle-livelabs/database
+https://github.com/gmckoy
+Info to reset vscode -->
+
+https://www.google.com/search?q=how+to+remove+vscode+and+all+extensions%2C+registry+entries%2C+and+hidden+and+system+files++from+windows+11&sca_esv=49d605c33f00d0c3&rlz=1C1MMCH_enUS1138US1138&ei=zt2taNu-Nd7niLMPoO6aOQ&ved=0ahUKEwjb3Zfu76iPAxXeM2IAHSC3JgcQ4dUDCBA&oq=how+to+remove+vscode+and+all+extensions%2C+registry+entries%2C+and+hidden+and+system+files++from+windows+11&gs_lp=Egxnd3Mtd2l6LXNlcnAiZ2hvdyB0byByZW1vdmUgdnNjb2RlIGFuZCBhbGwgZXh0ZW5zaW9ucywgcmVnaXN0cnkgZW50cmllcywgYW5kIGhpZGRlbiBhbmQgc3lzdGVtIGZpbGVzICBmcm9tIHdpbmRvd3MgMTFIrcYCUOkHWKOSAnAFeAGQAQGYAbcBoAHTEKoBBDIxLjW4AQzIAQD4AQGYAgKgAl3CAgoQABiwAxjWBBhHwgIEECEYCpgDAIgGAZAGCJIHATKgB_wzsgcBMbgHWsIHAzAuMsgHBA&sclient=gws-wiz-serp
+
+
+https://www.google.com/search?q=how+to+remove+vscode+and+all+extensions%2C+registry+entries%2C+and+hidden+and+system+files++from+windows+11&sca_esv=49d605c33f00d0c3&rlz=1C1MMCH_enUS1138US1138&ei=zt2taNu-Nd7niLMPoO6aOQ&ved=0ahUKEwjb3Zfu76iPAxXeM2IAHSC3JgcQ4dUDCBA&oq=how+to+remove+vscode+and+all+extensions%2C+registry+entries%2C+and+hidden+and+system+files++from+windows+11&gs_lp=Egxnd3Mtd2l6LXNlcnAiZ2hvdyB0byByZW1vdmUgdnNjb2RlIGFuZCBhbGwgZXh0ZW5zaW9ucywgcmVnaXN0cnkgZW50cmllcywgYW5kIGhpZGRlbiBhbmQgc3lzdGVtIGZpbGVzICBmcm9tIHdpbmRvd3MgMTFIrcYCUOkHWKOSAnAFeAGQAQGYAbcBoAHTEKoBBDIxLjW4AQzIAQD4AQGYAgKgAl3CAgoQABiwAxjWBBhHwgIEECEYCpgDAIgGAZAGCJIHATKgB_wzsgcBMbgHWsIHAzAuMsgHBA&sclient=gws-wiz-serp
+
+https://www.google.com/search?q=how+to+remove+%22remote+ssh%22+extension+from+vscode+and+all+extensions%2C+registry+entries%2C+and+hidden+and+system+files+from+windows+11&sca_esv=49d605c33f00d0c3&rlz=1C1MMCH_enUS1138US1138&ei=YOytaLT3K_6jptQP2OvggAE&ved=2ahUKEwj4uPLUgKmPAxUqL1kFHWGyDzAQ0NsOegQIXRAA&uact=5&sclient=gws-wiz-serp&udm=50&fbs=AIIjpHxU7SXXniUZfeShr2fp4giZud1z6kQpMfoEdCJxnpm_3YlUqOpj4OTU_HmqxOd8LCYAmZcz3xp4-s3ijYzIP40LlddfBAhJDuHsBzPcairVH6jEyLRYOBQgKx39vFebUA6gMRyOjUtKr2tAgLt8-riYCxo7cqYvgVIxY_03doEIFjWWiF6brNIzAObqF7XNPBoa6nWqDYwiLKQb2ooNcABsdF3WMg&aep=10&ntc=1&mstk=AUtExfArSkE7DeqPzt-FODjxMbP75D2dVZUELO_9EjdI4Y1NnY-kmJGYusDlaQxzn8m_hYXk0JapiV7t9p5M7QmtouC0K2JOs03GB5u__AhiMJNsBElo2h4cmQcGe-u1-psyasU2Q5zNyB77gA43OXBuzjg5Rd7WlrwFInLvaelOT-WsCgXWOuUep305bDBWFP8z8Sa40_DC-MDR_dFdLTDr1C75pX0Oz7YlVVL5GL2j43koXcSLvti1AChS6Q&csuir=1
+
+
+info to manage copilot chats
+View --> Command Palette ---> Chat: Export Chat
+							  Chat: Import Chat
+
+SET LINESIZE 32767
+COLUMN GEOM_WKT FORMAT A32767
+COLUMN geometry_wkt FORMAT A32767
+
+select ID, BoroCD, Shape_Leng, Shape_Area, GEOM_WKT, SDO_UTIL.TO_WKTGEOMETRY(GEOM_SDO) AS geometry_wkt from cds where BoroCD = 401;
+
+select ID, ElectDist, ShapeArea, ShapeLen, GEOM_WKT, SDO_UTIL.TO_WKTGEOMETRY(GEOM_SDO) AS geometry_wkt from nyc_elect_districts where rownum < 21;
+
+select r.ntaname, r.nta2020, r.cdta2020, r.cdtaname, r.ELECTDIST, r.relationship from (SELECT n.ntaname, n.nta2020, n.cdta2020, n.cdtaname, e.ELECTDIST, SDO_GEOM.RELATE(n.GEOM_SDO, 'determine', e.GEOM_SDO, 0.005) as relationship FROM NTAS n, ELECT_DISTRICTS e) r where r.relationship != 'DISJOINT' ;
+
+select r.ntaname, r.nta2020, r.cdta2020, r.cdtaname, r.ELECTDIST, r.relationship from (SELECT n.ntaname, n.nta2020, n.cdta2020, n.cdtaname, e.ELECTDIST, SDO_GEOM.RELATE(n.GEOM_SDO, 'determine', e.GEOM_SDO, 0.005) as relationship FROM NTAS n, ELECT_DISTRICTS e) r;
+  
+		
+		
+DELETE elect_results WHERE UNIT_NAME IN ('Absentee / Military', 'Affidavit', 'Manually Counted Emergency', 'Special Presidential', 'Scattered');
+
+SELECT r.EVENT, r.ADED, r.UNIT_NAME, r.TOTAL_TALLY, ne.NTANAME, demo.COMMUNITY_DISTRICT, demo.INDICATOR, demo.YR2010, demo.YR2019, demo.YR2022 FROM
+	(SELECT EVENT, ADED, UNIT_NAME, TOTAL_TALLY FROM
+		(SELECT EVENT, ADED, UNIT_NAME, SUM(TALLY) AS TOTAL_TALLY,
+		RANK() OVER (PARTITION BY EVENT, ADED ORDER BY SUM(TALLY) DESC) AS rank_district
+		FROM elect_results
+		GROUP BY EVENT, ADED, UNIT_NAME)
+		WHERE rank_district < 3) r, nta_elect ne, cd_demographics demo
+		WHERE (r.ADED = ne.ELECTDIST) AND (ne.CDTA2020 = demo.COMMUNITY_DISTRICT);
+
+SELECT EVENT, ADED, UNIT_NAME, TOTAL_TALLY, NTANAME, COMMUNITY_DISTRICT, INDICATOR, YR2010, YR2019, YR2022 FROM elect_result_demographics
+		ORDER BY EVENT, ADED, INDICATOR, UNIT_NAME, TOTAL_TALLY;
+
+
+instance-labvcnchi-01 --> 170.9.245.228
+ssh -i ~/.ssh/id_rsa_dbpvt opc@192.168.1.68
+ssh -i ~/.ssh/id_rsa_dbpvt opc@192.168.1.163
+
+sql vector/HEWd1pdK##0126@//swan1-scan.sub05071818321.labvcnchi.oraclevcn.com:1521/swan1_pdb.sub05071818321.labvcnchi.oraclevcn.com
+sql sys/HEWd1pdK##17@//swan1-scan.sub05071818321.labvcnchi.oraclevcn.com:1521/swan1_pdb.sub05071818321.labvcnchi.oraclevcn.com as sysdba
+sql sys/HEWd1pdK##17@//swan1-scan.sub05071818321.labvcnchi.oraclevcn.com:1521/swan1_vwf_ord.sub05071818321.labvcnchi.oraclevcn.com as sysdba
+
+====================================================
+$ORACLE_HOME/perl/bin/perl $ORACLE_HOME/rdbms/admin/catcon.pl -u sys/HEWd1pdK##17 -force_pdb_mode 'READ WRITE' -b dbms_cloud_install -d $ORACLE_HOME/rdbms/admin/ -l /tmp catclouduser.sql
+
+$ORACLE_HOME/perl/bin/perl $ORACLE_HOME/rdbms/admin/catcon.pl -u sys/HEWd1pdK##17 -force_pdb_mode 'READ WRITE' -b dbms_cloud_install -d $ORACLE_HOME/rdbms/admin/ -l /tmp dbms_cloud_install.sql
+
+cd /opt/oracle/dcs/commonstore/wallets/ssl
+orapki wallet create -wallet -pwd HEWd1pdK##0126 -auto_login
+ 
+#! /bin/bash
+for i in $(ls /home/oracle/dbc/*cer)
+do
+orapki wallet add -wallet . -trusted_cert -cert $i -pwd SSL Wallet HEWd1pdK##0126
+done
+
+====================================================
+swan1adb_high=
+(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-chicago-1.oraclecloud.com))(connect_data=(service_name=g6141f94dffc5b6_swan1adb_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+sql vector/HEWd1pdK##0524@swan1adb_high
+
+echo 'export PYENV_ROOT="/opt/.pyenv"' >> ~/.bashrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init - bash)"' >> ~/.bashrc
+echo 'export PYENV_ROOT="/opt/.pyenv"' >> ~/.bash_profile
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(pyenv init - bash)"' >> ~/.bash_profile
+
+yum install -y oracle-epel-release-el8.x86_64
+yum install -y yum-utils
+yum-config-manager --enable ol8_baseos_latest ol8_appstream ol8_addons ol8_developer_EPEL
+yum install -y ocifs git gcc make patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel
+yum install -y perl-Env libffi-devel openssl openssl-devel tk-devel xz-devel zlib-devel bzip2-devel readline-devel libuuid-devel ncurses-devel
+
+-----------------------------------
+
+mkdir -p /home/oracle/.oci
+mkdir -p /home/oracle/bucketCHI
+cd .oci
+
+vi config:
+[DEFAULT]
+user=ocid1.user.oc1..aaaaaaaaodagrsphpqhgftylxraropciicfrs2s56v2ib57mr2g7t7ij5x5q
+fingerprint=de:e1:95:88:5d:bf:dd:9e:1b:d1:4a:b8:76:3f:bd:4b
+tenancy=ocid1.tenancy.oc1..aaaaaaaagctxgby6z2mf5ku3ulentxsuxepzzsqndvtdlarpju72du4shkva
+region=us-chicago-1
+key_file=/home/oracle/.oci/gary.mckoy@oracle.com-2025-05-22T17_05_57.319Z.pem
+
+vi /home/oracle/.oci/gary.mckoy@oracle.com-2025-05-22T17_05_57.319Z.pem:
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCiBrbqWL3y/tbI
+qHQkzCsl6zTU08QOkUNzIfSQJ+Eem4P3SExZrAjOyI4ob7P78ICW69ps1R2MEsfy
+0KSt4n+RCDi5ChyNgieYM1NDbqlVa413Rp6RklBcfgQPI6fmXv1hPuNkxz99c6aO
+tmg3acp5368GEqhG4ZzvvS23onub2SufvrL0dMt+LTnkPq/rIp8qF7nrRSKD4CJm
+HUdnoDb1TsMMpqtxhfE9epOMewHCkHwTj7CS3QauXBmNHCXKmJN4vfb0pJt07a7s
+2sNmv4gDggnsiaCJMYzCttTWS4vNOV+LVZf0zTE861bJ9fBd+AbeuE/xaJ4acpLu
+xcQhqyvbAgMBAAECggEAT+9pGZebasEgHNHCrw7NMMFoCKHLJXa0JJ55Zg9OqIeH
+5R0Vkd3mYIIgZEGrtZ1zC0IjujKwB5WScLBPtnu6fMZmGaAr8wJl31he+TMktoA/
+xDsiauYY4HDJNuDb6jMt5Wadz+/e2lkOsHS8WK5IFrVsx124CHQxNTOLVQAD5KBI
+SEtPCKiAzwtlb4t+QJPsIHPaMzGA2qrgCfPSQGP8bBW3/RTr3CvYNLMDnl/ZoSJN
+w+pqzOme9PJok6DS/taZxduq+hyALF7ZhYq/rwE0zCQXWYTAm3b1LN4RAs7HA7ik
+999jkDPcLajzCpj3cHOREVnxeCaRitACrrCoX2I6hQKBgQDMv8nSo4JEmdULvv2+
+4hpqaSLYBojSKnY7LMCQbzdYpUjcR8DL9QwmHmfhO2/0vvvo4xhXmJcsSPywez55
+Hp1wuytILOzPi/ei6ckjl3NHjECCd1SRl0O97Sr3J5xDffXEI02O777FJKkNPcGW
+ZpDQkkp0YpXH07lKeHVeVLtNhwKBgQDKlUOQYg2nQFjLRflpEUfsIR0VXcW3Piaw
+HzsWJc/eID8RHmKEsF3vlg0PgVNjHpKLe89T4khjR/eh70QnFyqgGCb7rcuk3mMG
+ANeBnxRq5OrblzyieG1JR38UbC5wS07UNUGQ4yQvYKNKLkO4Lh1Y8nrL8H8T6auT
+12D3CwTkDQKBgB1JOXb1iEaDsmNxuB27fYfG7gL0PFHDXRHtvsVqAwKc8aUAZmVF
+8azqIHWo6MSbJLEU+oBdBRKChhJALplodaCQRQqX0m+FV7BnvCtpGEYdm4SNyPzi
+JABgkgq0Ebfdpm+dlRRi2mica8nHEY+PsBsFMb0f9MiWUiSCwlbxy7C1AoGBAKAu
+nhnQLlONAajZT3jQfToshL6cQvW9YwHn7+R3SYGtpbB3ghbBDcWfs/wKmlDJn75C
+y5DcX7iA80FL22u9War07f4bUeavIUVh7QVFL/PFxh6T2xHsfx1uNwGC+MU6Br6s
+zYcu0zHTC8pgApPjgrkOIiKXqyOnpE9mAfnU8K0RAoGAM9A7d23KEvQJxyOObojK
+QOWvnveoBhvFtH7RcKa27NxwysLKkERRPHToaKvfDNiL/9NGvXL3K/na8RjX1R5f
+nnskgiaJWTcVcI+sUpCouYkOTOnYXKoYVk3g2kbFFgaYj1UbG2HOwPB+VsNLFQ01
+oLbjDHpT6PKYiPCEmAgGM0Y=
+-----END PRIVATE KEY-----
+OCI_API_KEY
+
+fusermount -u /home/oracle/bucketCHI
+vi /etc/fstab:
+bucket-labvcnCHI	/home/oracle/bucketCHI	fuse.ocifs	_netdev,auth=api_key,config=/home/oracle/.oci/config,uid=101,gid=1001,allow_other	0 0
+
+requirements2.txt
+--extra-index-url https://download.pytorch.org/whl/cpu
+pandas
+setuptools
+scipy
+matplotlib
+scikit-learn
+numpy
+onnxruntime
+onnxruntime-extensions
+onnx
+torch
+transformers
+sentencepiece
+oracledb==2.4.1
+joblib==1.3.2
+
+pip3 install -r requirements2.txt --target=$ORACLE_HOME/oml4py/modules
+
+---------------------------------
+
+Breast cancer in men
+Family history and personal characteristics
+What is Benign breast conditions
+What are the symptoms of COVID-19
+Are there any drugs for COVID-19
+
+
+CREATE OR REPLACE FUNCTION RETRIEVAL_FUNC (p_query IN VARCHAR2,top_k IN NUMBER) RETURN SYS_REFCURSOR IS
+    v_results SYS_REFCURSOR;
+    v_sql     VARCHAR2(4000);
+BEGIN
+    v_sql := 'SELECT vector_distance(chunk_embedding, (vector_embedding(ALL_MPNET_BASE_V2 USING :1 AS data))) AS SCORE,
+        doc_id AS DOCID, chunk_id AS CHUNKID, chunk_data AS BODY FROM UserInfo_ALL_MPNET_BASE_V2
+        order by SCORE fetch approximate first :2 ROWS ONLY';
+
+    OPEN v_results FOR 
+		v_sql USING p_query, top_k;
+
+    RETURN v_results;	
+END;
+/
+
+
+set serveroutput on;
+DECLARE
+     p_var SYS_REFCURSOR;
+     SCORE number;
+     DOCID number;
+     CHUNKID number;
+     BODY VARCHAR2(4000 BYTE);
+BEGIN
+	 select RETRIEVAL_FUNC('In what business is Accertify',3) into p_var from dual;
+     LOOP
+         FETCH p_var INTO SCORE, DOCID, CHUNKID, BODY;
+         EXIT WHEN p_var%NOTFOUND;
+		 DBMS_OUTPUT.PUT_LINE('-----------------------------');
+		 DBMS_OUTPUT.PUT_LINE('-----------------------------');
+         DBMS_OUTPUT.PUT_LINE(SCORE || ', ' || DOCID || ', ' || CHUNKID);
+         DBMS_OUTPUT.PUT_LINE(BODY);
+    END LOOP;
+    CLOSE p_var;
+END;
+/
+
+==========================================================================================================================================================
+
+
+
+
+select * from dba_role_privs connect by prior granted_role = grantee start with grantee = 'ADMIN' order by 1,2,3;
+select * from dba_sys_privs  where grantee = 'ADMIN' or grantee in (select granted_role from dba_role_privs connect by prior granted_role = grantee start with grantee = 'ADMIN') order by 1,2,3;
+select * from dba_tab_privs  where grantee = 'ADMIN' or grantee in (select granted_role from dba_role_privs connect by prior granted_role = grantee start with grantee = 'ADMIN') order by 1,2,3,4;
+
+SELECT * FROM USER_SYS_PRIVS; 
+SELECT * FROM USER_TAB_PRIVS;
+SELECT * FROM USER_ROLE_PRIVS;
+
+GRANT execute ON dbms_cloud TO vector;
+GRANT read, write ON DIRECTORY DEMO_DIR TO vector;
+ALTER USER vector QUOTA UNLIMITED ON data;
+
+
+
+
+CREATE TABLESPACE vector DATAFILE '+DATA/DBORA_5ZK_SJC/2D5B9FB5740528ECE063ED00000AB76D/DATAFILE/vector' SIZE 200G AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+https://people.oracle.com/apex/f?p=8000:PERSON:406770511824700::::PERSON:carmen.berdant
+
+CSI # 20683816
+
+https://blogs.oracle.com/cloud-infrastructure/post/jfrog-artifactory-and-oracle%C2%A0cloud#:~:text=Artifactory%20centralizes%20control%2C%20storage%2C%20and,centralized%20control%20of%20your%20environment --> "Install Artifactory on a Kubernetes Cluster"
+https://stackoverflow.com/questions/41458801/jfrog-artifactory-and-oracle-repository --> "JFrog Artifactory and Oracle repository"
+https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-oracle-support --> "Artifactory Oracle Support"
+
+support.oracle.com, updates.oracle.com, download.oracle.com, edelivery.oracle.com, etc. where Oracle software and patches are maintained
+
+monday - 9:30 - 10:30 Am
+
+18 March 2025 10_00 AM - 11_00 AM PHX
+
+
+Hi Alec - 
+Thanks again for your proposal. On a different topic, we had some additional follow-up questions re: our 401k's. Can we set up a quick telephone conversation to discuss them.
+
+630-730-6006   Ann Neidenbach/Keybank Cell --> Exadata upgrade w/e 3/20-3/21
+
+ 
+ 
+https://apexadb.oracle.com/ords/r/tech/aide/event-content?session=506726503757531
+
+file:///G:/ClientFiles/Accertify%20Sharding%20Workshop%20-%20Chicago/Pluggables,%20Clones%20and%20Containers%20-%20Oracle%20Multitenant%20Fundamentals_files/image039.png
+
+and manual upgrades using the Parallel Upgrade Utility (catctl.pl) , and the database upgrade scripts dbupgrade and dbupgrade.cmd. Use AutoUpgrade for Oracle Database upgrades. 
+
+
+Pluggables, Clones and Containers:
+Oracle Multitenant Fundamentals
+
+
+https://www.bleepingcomputer.com/news/security/oracle-customers-confirm-data-stolen-in-alleged-cloud-breach-is-valid/amp/
+
+https://www.reuters.com/technology/fbi-investigating-cyberattack-oracle-bloomberg-news-reports-2025-03-28/
+
+
+the ISPDB_MODIFIABLE column in the V$SYSTEM_PARAMETER view indicates whether an initialization parameter can be modified within a PDB (Pluggable Database), meaning its value can be different for each PDB. 
+
+External Registration Page: https://www.oracle.com/database/databaseworld/new-york/
+
+
+jupytext --from py --to ipynb oracleai_demo.ADB.py
+jupytext --from py --to ipynb oracleai_demo.py
+jupytext --from ipynb --to py oracleai_demo.code-RAG.ipynb
+
+/home/oracle/.pyenv/shims/jupyter lab --ip=0.0.0.0 --allow-root&
+
+http://155.248.193.98:8888/lab?token=de098bd4fe0bc877dbfea4095f7e60e4586ddccc9db1d1d8
+
+http://64.181.193.60:8888/lab?token=8b9e767316e24a6ca420a72ac0767d7d0a99544199dfde1e
+
+
+
+
+
+
+# %%
+try:
+	cursor.execute(
+	"""
+	BEGIN
+		CTX_DDL.CREATE_POLICY(
+			policy_name => 'querySummary');
+		CTX_DOC.POLICY_GIST(
+			policy_name => 'querySummary'
+			document => coalesced_top_rows_UserInfo,
+			glevel => 'S',
+			numParagraphs => 1,
+			format => 'TEXT');
+	END;
+	"""
+	)
+except Exception as e:
+	print("Exception --> ", e)
+	
+	
+http://64.181.193.60:8888/lab?token=abaa1ae1fec0f911b8450c8ea7f0a4a8040de4f791a94b2e
+
+
+# %%
+try:
+		params = """\"provider\": \"database\",\"glevel\": \"sentence\",\"numParagraphs\": 1"""
+		sql = """select dbms_vector_chain.utl_to_summary( :queryprompt ,json(:params)) from dual"""
+		cursor.execute(sql, [query_sql_UserInfo, params])
+		print("\nResults for query \"" + query_sql_UserInfo + "\" has been summarized...\n\n",coalesced_top_rows_UserInfo,"\n")
+except Exception as e:
+	print("Exception --> ", e)
+
+
+
+Required for Jupyter:
+	- sudo yum install texlive-*
+
+ 
+sys.path.append('/path/to/your/module1')sudo yum install texlive-latex
+sys.path.append('/path/to/your/module2')
+
+sys.path.append('/home/oracle/.pyenv/versions/3.12.10/lib/python3.13')
+sys.path.append('/home/oracle/.pyenv/versions/3.12.10/lib/python3.13/lib-dynload')
+sys.path.append('/home/oracle/.pyenv/versions/3.12.10/lib/python3.13/site-packages')
+
+sql admin/HEWd1pdK##0524@swan1adb_high
+sql vector/HEWd1pdK##0524@swan1adb_high
+sql sys/HEWd1pdK##17@//oralab-scan.sub02042131490.labvcn.oraclevcn.com:1521/DBORA_5zk_sjc.sub02042131490.labvcn.oraclevcn.com as sysdba
+sql sys/HEWd1pdK##17@//oralab-scan.sub02042131490.labvcn.oraclevcn.com:1521/DBORA_PDB1.sub02042131490.labvcn.oraclevcn.com as sysdba
+sql vector/HEWd1pdK##17@//oralab-scan.sub02042131490.labvcn.oraclevcn.com:1521/DBORA_PDB1.sub02042131490.labvcn.oraclevcn.com
+
+create_vector_index_sql = """drop index Accertify_ALL_MPNET_BASE_V2_hnsw_idx"""
+cursor.execute(create_vector_index_sql)
+
+/usr/lib/oracle/23/client64/lib/network/admin/
+
+
+(DESCRIPTION=(CONNECT_TIMEOUT=5)(TRANSPORT_CONNECT_TIMEOUT=3)(RETRY_COUNT=3)(ADDRESS_LIST=(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.229)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.91)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.217)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=DBCHIPVT_r6f_ord.sub05071818321.labvcnchi.oraclevcn.com)))
+
+perl -Iclient client/client.pl --target /home/oracle/.local/lib/python3.12/site-packages
+
+https://objectstorage.us-sanjose-1.oraclecloud.com/p/p4eiEolBDGiRm_Lgp9bLXfsXOsu4_GiNoQvZiuSzjYwmgsb9TmqmxHQkrcfHTlqk/n/orasenatdpltsecitom03/b/bucket-labvcn/o/
+
+BEGIN
+dbms_output.put_line(RETRIEVAL_FUNC('How do I embed text into a vector column',10));
+END;
+/
+
+
+
+create or replace FUNCTION RETRIEVAL_FUNC (p_query IN VARCHAR2, top_k IN NUMBER) RETURN SYS_REFCURSOR IS
+    v_results SYS_REFCURSOR;
+    query_vec VECTOR;
+BEGIN
+    query_vec := dbms_vector.utl_to_embedding(
+        p_query,
+		json('{
+			"provider":"database",
+			"model":"ALL_MPNET_BASE_V2"
+		}')
+    );
+
+    OPEN v_results FOR
+		SELECT vector_distance(chunk_embedding, query_vec) AS SCORE,
+		doc_id as DOCID, chunk_id as CHUNKID, chunk_data as BODY
+		FROM UserInfo_ALL_MPNET_BASE_V2
+		order by SCORE
+		fetch approximate first top_k rows only;
+
+    RETURN v_results;
+END;
+/
+
+
+https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/embedText
+
+
+json('{"provider":"database","url":"https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/embedText","model":"cohere.embed-english-v3.0"}')
+
+declare
+  jo json_object_t;
+begin
+  jo := json_object_t();
+  jo.put('user_ocid','ocid1.user.oc1..aaaaaaaaodagrsphpqhgftylxraropciicfrs2s56v2ib57mr2g7t7ij5x5q');
+  jo.put('tenancy_ocid','ocid1.tenancy.oc1..aaaaaaaagctxgby6z2mf5ku3ulentxsuxepzzsqndvtdlarpju72du4shkva');
+  jo.put('compartment_ocid','ocid1.compartment.oc1..aaaaaaaarxervkeaci5vxfghashg2vlqpvnopj2lxatx475ghp5jd46dxpfq');
+  jo.put('private_key','MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCiBrbqWL3y/tbIqHQkzCsl6zTU08QOkUNzIfSQJ+Eem4P3SExZrAjOyI4ob7P78ICW69ps1R2MEsfy0KSt4n+RCDi5ChyNgieYM1NDbqlVa413Rp6RklBcfgQPI6fmXv1hPuNkxz99c6aOtmg3acp5368GEqhG4ZzvvS23onub2SufvrL0dMt+LTnkPq/rIp8qF7nrRSKD4CJmHUdnoDb1TsMMpqtxhfE9epOMewHCkHwTj7CS3QauXBmNHCXKmJN4vfb0pJt07a7s2sNmv4gDggnsiaCJMYzCttTWS4vNOV+LVZf0zTE861bJ9fBd+AbeuE/xaJ4acpLuxcQhqyvbAgMBAAECggEAT+9pGZebasEgHNHCrw7NMMFoCKHLJXa0JJ55Zg9OqIeH5R0Vkd3mYIIgZEGrtZ1zC0IjujKwB5WScLBPtnu6fMZmGaAr8wJl31he+TMktoA/xDsiauYY4HDJNuDb6jMt5Wadz+/e2lkOsHS8WK5IFrVsx124CHQxNTOLVQAD5KBISEtPCKiAzwtlb4t+QJPsIHPaMzGA2qrgCfPSQGP8bBW3/RTr3CvYNLMDnl/ZoSJNw+pqzOme9PJok6DS/taZxduq+hyALF7ZhYq/rwE0zCQXWYTAm3b1LN4RAs7HA7ik999jkDPcLajzCpj3cHOREVnxeCaRitACrrCoX2I6hQKBgQDMv8nSo4JEmdULvv2+4hpqaSLYBojSKnY7LMCQbzdYpUjcR8DL9QwmHmfhO2/0vvvo4xhXmJcsSPywez55Hp1wuytILOzPi/ei6ckjl3NHjECCd1SRl0O97Sr3J5xDffXEI02O777FJKkNPcGWZpDQkkp0YpXH07lKeHVeVLtNhwKBgQDKlUOQYg2nQFjLRflpEUfsIR0VXcW3PiawHzsWJc/eID8RHmKEsF3vlg0PgVNjHpKLe89T4khjR/eh70QnFyqgGCb7rcuk3mMGANeBnxRq5OrblzyieG1JR38UbC5wS07UNUGQ4yQvYKNKLkO4Lh1Y8nrL8H8T6auT12D3CwTkDQKBgB1JOXb1iEaDsmNxuB27fYfG7gL0PFHDXRHtvsVqAwKc8aUAZmVF8azqIHWo6MSbJLEU+oBdBRKChhJALplodaCQRQqX0m+FV7BnvCtpGEYdm4SNyPziJABgkgq0Ebfdpm+dlRRi2mica8nHEY+PsBsFMb0f9MiWUiSCwlbxy7C1AoGBAKAunhnQLlONAajZT3jQfToshL6cQvW9YwHn7+R3SYGtpbB3ghbBDcWfs/wKmlDJn75Cy5DcX7iA80FL22u9War07f4bUeavIUVh7QVFL/PFxh6T2xHsfx1uNwGC+MU6Br6szYcu0zHTC8pgApPjgrkOIiKXqyOnpE9mAfnU8K0RAoGAM9A7d23KEvQJxyOObojKQOWvnveoBhvFtH7RcKa27NxwysLKkERRPHToaKvfDNiL/9NGvXL3K/na8RjX1R5fnnskgiaJWTcVcI+sUpCouYkOTOnYXKoYVk3g2kbFFgaYj1UbG2HOwPB+VsNLFQ01oLbjDHpT6PKYiPCEmAgGM0Y=');
+  jo.put('fingerprint','de:e1:95:88:5d:bf:dd:9e:1b:d1:4a:b8:76:3f:bd:4b');
+  dbms_vector_chain.create_credential(
+    credential_name   => 'OCI_CRED',
+    params            => json(jo.to_string));
+end;
+/
+
+
+DBSystem23ai-labvcnCHI-PVT
+
+var params clob;
+BEGIN
+:params := '
+ {
+ "provider": "cohere",
+ "credential_name": "OCI_CRED",
+ "url": "https://api.cohere.ai/v1/embed",
+ "model": "embed-english-v3.0",
+ "input_type": "search_query",
+ "embedding_types": ["ubinary"]
+ }';
+END;
+/
+SELECT TO_VECTOR(FROM_VECTOR(DBMS_VECTOR.UTL_TO_EMBEDDING('hello',
+JSON(:params))),*,BINARY);
+
+SQL> variable search_text varchar2;
+SQL> exec :search_text := 'Tell me about American Express''s business';
+
+PL/SQL procedure successfully completed.
+
+SQL> select vector_distance(vector_data, (vector_embedding(ALL_MPNET_BASE_V2 using :search_text as data))) as distance,
+  2  doc_id,
+  3  chunk_id,
+  4  chunk_data
+  5* from Userinfo_vector_AMEX order by distance fetch first 10 rows only with target accuracy 90;
+
+DISTANCE                  DOC_ID    CHUNK_ID CHUNK_DATA
+______________________ _________ ___________ __________________________________________
+0.3357991379349693             6           3 The Fetch American Express® Card                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0.336574952483912              1          27 Founded in 1850 and headquartered in New York, American Express' brand is built on trust, security, and service, and a rich history of delivering innovation and Membership value for our customers. With a hundred million merchant locations on our global network in around 200 countries and territories, we seek to provide the world's best customer experience every day to a broad range of consumers, small and medium-sized businesses, and large corporations. For more information about American Express, visit americanexpress.com and                   
+0.3415423174106017             4           9 American Express is committed to supporting small businesses and is the proud founder of Shop Small and the Small Business Saturday® movement, which is now in its 16th year. This commitment extends into the dining industry through American Express-owned platforms like Resy and Tock, which serve over 27,000 restaurants and hospitality venues across the U.S.                                                                                                                                                                                                 
+0.35685534769259164            1          26 American Express (NYSE: AXP) is a global, premium payments and lifestyle brand powered by technology. Our colleagues around the world back our customers with differentiated products, services and experiences that enrich lives and build business success.                                                                                                                                                                                                                                                                                                          
+0.395501976132864              1          25 In addition, American Express offers access to unique experiences across the U.S. and around the globe, from motor sports and tennis to music festivals and sporting events, all with the powerful backing of award-winning global servicing and digital capabilities. American Express partners with leading brands on the Platinum Card and plans to announce more as part of the Card refresh.
+
+
+===========================================================
+
+import pandas as pd
+import geopandas as gpd
+import sys
+import os
+import re
+import oracledb
+import keyboard
+import oml
+import oci
+from IPython.display import Markdown
+from shapely.wkt import dumps as wkt_dumps
+pd.set_option('display.max_rows', None) # Display all rows
+pd.set_option('display.max_columns', None) # Display all columns
+
+try:
+	username = "vector"
+	password = "HEWd1pdK##0524"
+	dsn = "swan1-scan.sub05071818321.labvcnchi.oraclevcn.com:1521/swan1_pdb.sub05071818321.labvcnchi.oraclevcn.com"
+	oml.connect(user=username, password=password, dsn=dsn)
+	print("\nOML4Py database connection created...\n")
+except Exception as e:
+	print("Exception --> ", e)
+
+try:
+	# Query: fetch CLOB and convert SDO_GEOMETRY to WKT
+	sql = """
+	SELECT ID,
+			BOROCD,
+			SHAPE_LENG,
+			SHAPE_AREA,
+			DBMS_LOB.SUBSTR(GEOM_WKT, 4000, 1) AS GEOM_WKT,
+			SDO_UTIL.TO_WKTGEOMETRY(GEOM_SDO) AS GEOM_SDO_WKT
+	FROM VECTOR.CDS
+	"""
+	cursor.execute(sql)
+except Exception as e:
+	print("Exception --> ", e)
+
+
+# Write to CSV
+with open("cds_export.csv", "w", newline="", encoding="utf-8") as f:
+	writer = csv.writer(f)
+
+	# Write header
+	col_names = [d[0] for d in cursor.description]
+	writer.writerow(col_names)
+
+	# Write rows
+	for row in cursor:
+		writer.writerow(row)
+
+print("Export completed: cds_export.csv")
+
+cursor.close()
+conn.close()
+
+BEGIN
+  DBMS_CLOUD.create_credential(
+    credential_name => 'OCI_GENERATIVE_AI_CRED’,
+    user_ocid       => 'ocid1.user.oc1..aaaaaaaaodagrsphpqhgftylxraropciicfrs2s56v2ib57mr2g7t7ij5x5q',
+    tenancy_ocid    => 'ocid1.tenancy.oc1..aaaaaaaagctxgby6z2mf5ku3ulentxsuxepzzsqndvtdlarpju72du4shkva',
+    fingerprint     => 'de:e1:95:88:5d:bf:dd:9e:1b:d1:4a:b8:76:3f:bd:4b',
+    private_key     => 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCiBrbqWL3y/tbIqHQkzCsl6zTU08QOkUNzIfSQJ+Eem4P3SExZrAjOyI4ob7P78ICW69ps1R2MEsfy0KSt4n+RCDi5ChyNgieYM1NDbqlVa413Rp6RklBcfgQPI6fmXv1hPuNkxz99c6aOtmg3acp5368GEqhG4ZzvvS23onub2SufvrL0dMt+LTnkPq/rIp8qF7nrRSKD4CJmHUdnoDb1TsMMpqtxhfE9epOMewHCkHwTj7CS3QauXBmNHCXKmJN4vfb0pJt07a7s2sNmv4gDggnsiaCJMYzCttTWS4vNOV+LVZf0zTE861bJ9fBd+AbeuE/xaJ4acpLuxcQhqyvbAgMBAAECggEAT+9pGZebasEgHNHCrw7NMMFoCKHLJXa0JJ55Zg9OqIeH5R0Vkd3mYIIgZEGrtZ1zC0IjujKwB5WScLBPtnu6fMZmGaAr8wJl31he+TMktoA/xDsiauYY4HDJNuDb6jMt5Wadz+/e2lkOsHS8WK5IFrVsx124CHQxNTOLVQAD5KBISEtPCKiAzwtlb4t+QJPsIHPaMzGA2qrgCfPSQGP8bBW3/RTr3CvYNLMDnl/ZoSJNw+pqzOme9PJok6DS/taZxduq+hyALF7ZhYq/rwE0zCQXWYTAm3b1LN4RAs7HA7ik999jkDPcLajzCpj3cHOREVnxeCaRitACrrCoX2I6hQKBgQDMv8nSo4JEmdULvv2+4hpqaSLYBojSKnY7LMCQbzdYpUjcR8DL9QwmHmfhO2/0vvvo4xhXmJcsSPywez55Hp1wuytILOzPi/ei6ckjl3NHjECCd1SRl0O97Sr3J5xDffXEI02O777FJKkNPcGWZpDQkkp0YpXH07lKeHVeVLtNhwKBgQDKlUOQYg2nQFjLRflpEUfsIR0VXcW3PiawHzsWJc/eID8RHmKEsF3vlg0PgVNjHpKLe89T4khjR/eh70QnFyqgGCb7rcuk3mMGANeBnxRq5OrblzyieG1JR38UbC5wS07UNUGQ4yQvYKNKLkO4Lh1Y8nrL8H8T6auT12D3CwTkDQKBgB1JOXb1iEaDsmNxuB27fYfG7gL0PFHDXRHtvsVqAwKc8aUAZmVF8azqIHWo6MSbJLEU+oBdBRKChhJALplodaCQRQqX0m+FV7BnvCtpGEYdm4SNyPziJABgkgq0Ebfdpm+dlRRi2mica8nHEY+PsBsFMb0f9MiWUiSCwlbxy7C1AoGBAKAunhnQLlONAajZT3jQfToshL6cQvW9YwHn7+R3SYGtpbB3ghbBDcWfs/wKmlDJn75Cy5DcX7iA80FL22u9War07f4bUeavIUVh7QVFL/PFxh6T2xHsfx1uNwGC+MU6Br6szYcu0zHTC8pgApPjgrkOIiKXqyOnpE9mAfnU8K0RAoGAM9A7d23KEvQJxyOObojKQOWvnveoBhvFtH7RcKa27NxwysLKkERRPHToaKvfDNiL/9NGvXL3K/na8RjX1R5fnnskgiaJWTcVcI+sUpCouYkOTOnYXKoYVk3g2kbFFgaYj1UbG2HOwPB+VsNLFQ01oLbjDHpT6PKYiPCEmAgGM0Y='
+  );
+END;
+/
+
+==========================================================================================================
+
+declare
+	 jo json_object_t;
+begin
+	 jo := json_object_t();
+	 jo.put('user_ocid','ocid1.user.oc1..aaaaaaaaodagrsphpqhgftylxraropciicfrs2s56v2ib57mr2g7t7ij5x5q');
+	 jo.put('tenancy_ocid','ocid1.tenancy.oc1..aaaaaaaagctxgby6z2mf5ku3ulentxsuxepzzsqndvtdlarpju72du4shkva');
+	 jo.put('compartment_ocid','ocid1.compartment.oc1..aaaaaaaarxervkeaci5vxfghashg2vlqpvnopj2lxatx475ghp5jd46dxpfq');
+	 jo.put('private_key','MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCiBrbqWL3y/tbIqHQkzCsl6zTU08QOkUNzIfSQJ+Eem4P3SExZrAjOyI4ob7P78ICW69ps1R2MEsfy0KSt4n+RCDi5ChyNgieYM1NDbqlVa413Rp6RklBcfgQPI6fmXv1hPuNkxz99c6aOtmg3acp5368GEqhG4ZzvvS23onub2SufvrL0dMt+LTnkPq/rIp8qF7nrRSKD4CJmHUdnoDb1TsMMpqtxhfE9epOMewHCkHwTj7CS3QauXBmNHCXKmJN4vfb0pJt07a7s2sNmv4gDggnsiaCJMYzCttTWS4vNOV+LVZf0zTE861bJ9fBd+AbeuE/xaJ4acpLuxcQhqyvbAgMBAAECggEAT+9pGZebasEgHNHCrw7NMMFoCKHLJXa0JJ55Zg9OqIeH5R0Vkd3mYIIgZEGrtZ1zC0IjujKwB5WScLBPtnu6fMZmGaAr8wJl31he+TMktoA/xDsiauYY4HDJNuDb6jMt5Wadz+/e2lkOsHS8WK5IFrVsx124CHQxNTOLVQAD5KBISEtPCKiAzwtlb4t+QJPsIHPaMzGA2qrgCfPSQGP8bBW3/RTr3CvYNLMDnl/ZoSJNw+pqzOme9PJok6DS/taZxduq+hyALF7ZhYq/rwE0zCQXWYTAm3b1LN4RAs7HA7ik999jkDPcLajzCpj3cHOREVnxeCaRitACrrCoX2I6hQKBgQDMv8nSo4JEmdULvv2+4hpqaSLYBojSKnY7LMCQbzdYpUjcR8DL9QwmHmfhO2/0vvvo4xhXmJcsSPywez55Hp1wuytILOzPi/ei6ckjl3NHjECCd1SRl0O97Sr3J5xDffXEI02O777FJKkNPcGWZpDQkkp0YpXH07lKeHVeVLtNhwKBgQDKlUOQYg2nQFjLRflpEUfsIR0VXcW3PiawHzsWJc/eID8RHmKEsF3vlg0PgVNjHpKLe89T4khjR/eh70QnFyqgGCb7rcuk3mMGANeBnxRq5OrblzyieG1JR38UbC5wS07UNUGQ4yQvYKNKLkO4Lh1Y8nrL8H8T6auT12D3CwTkDQKBgB1JOXb1iEaDsmNxuB27fYfG7gL0PFHDXRHtvsVqAwKc8aUAZmVF8azqIHWo6MSbJLEU+oBdBRKChhJALplodaCQRQqX0m+FV7BnvCtpGEYdm4SNyPziJABgkgq0Ebfdpm+dlRRi2mica8nHEY+PsBsFMb0f9MiWUiSCwlbxy7C1AoGBAKAunhnQLlONAajZT3jQfToshL6cQvW9YwHn7+R3SYGtpbB3ghbBDcWfs/wKmlDJn75Cy5DcX7iA80FL22u9War07f4bUeavIUVh7QVFL/PFxh6T2xHsfx1uNwGC+MU6Br6szYcu0zHTC8pgApPjgrkOIiKXqyOnpE9mAfnU8K0RAoGAM9A7d23KEvQJxyOObojKQOWvnveoBhvFtH7RcKa27NxwysLKkERRPHToaKvfDNiL/9NGvXL3K/na8RjX1R5fnnskgiaJWTcVcI+sUpCouYkOTOnYXKoYVk3g2kbFFgaYj1UbG2HOwPB+VsNLFQ01oLbjDHpT6PKYiPCEmAgGM0Y=');
+	 jo.put('fingerprint','de:e1:95:88:5d:bf:dd:9e:1b:d1:4a:b8:76:3f:bd:4b');
+	 dbms_output.put_line(jo.to_string);
+	 dbms_vector_chain.create_credential(
+	 credential_name => 'OCI_CRED',
+	 params  => json(jo.to_string));
+end;
+/
+
+
+BEGIN
+	   DBMS_CLOUD_AI.DROP_PROFILE(profile_name => 'OCI_GENERATIVE_AI_PROFILE');
+END;
+/
+
+DECLARE
+	 profile_name VARCHAR2(255) := 'OCI_GENERATIVE_AI_PROFILE';
+	 profile_found NUMBER := 0;
+BEGIN
+	SELECT COUNT(*) INTO profile_found FROM USER_CLOUD_AI_PROFILES WHERE profile_name = UPPER(profile_name);
+	IF profile_found = 0  THEN
+		 DBMS_CLOUD_AI.CREATE_PROFILE(
+			 profile_name => 'OCI_GENERATIVE_AI_PROFILE',
+			 attributes => JSON_OBJECT(
+				 'provider' VALUE 'oci',
+				 'region' VALUE 'us-chicago-1',
+				 'oci_compartment_id' VALUE 'ocid1.compartment.oc1..aaaaaaaarxervkeaci5vxfghashg2vlqpvnopj2lxatx475ghp5jd46dxpfq',
+				 'credential_name' VALUE 'OCI_CRED',
+				 'model' VALUE 'meta.llama-3.2-90b-vision-instruct',
+				 'object_list' VALUE JSON_ARRAY(
+					 JSON_OBJECT('owner' VALUE 'VECTOR', 'name' VALUE 'Userinfo_vector'),
+					 JSON_OBJECT('owner' VALUE 'VECTOR', 'name' VALUE 'Amex_stage_tab'),
+					 JSON_OBJECT('owner' VALUE 'VECTOR', 'name' VALUE 'Userinfo_vector_ORCL_docs'),
+					 JSON_OBJECT('owner' VALUE 'SH', 'name' VALUE 'customers'),
+					 JSON_OBJECT('owner' VALUE 'SH', 'name' VALUE 'sales'),
+					 JSON_OBJECT('owner' VALUE 'SH', 'name' VALUE 'products'),
+					 JSON_OBJECT('owner' VALUE 'SH', 'name' VALUE 'countries')
+				 )
+			)
+		);
+	END IF;
+	DBMS_CLOUD_AI.SET_PROFILE(profile_name => 'OCI_GENERATIVE_AI_PROFILE');
+END;
+/
+
+select ai how many customers in San Francisco are married;
+
+==========================================================================================================
+
+select ai chat Tell me about the American Express business;
+
+To block malware attacks -->
+
+sudo iptables -A INPUT -s 205.210.31.209 -j DROP
+
