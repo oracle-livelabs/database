@@ -1,0 +1,132 @@
+name: LiveLabs Markdown Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-validation:
+    name: Validate Markdown Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get markdown files from PR
+        id: changed-files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          PR_SHA="${{ github.sha }}"
+
+          git fetch --no-tags --prune origin "$BASE_SHA:$BASE_SHA" || true
+
+          # Get changed markdown files
+          MD_FILES=$(git diff --name-only --diff-filter=AM "$BASE_SHA" "$PR_SHA" -- '*.md' | grep -v '^\.github/' | grep -v '^node_modules/' || true)
+
+          if [ -z "$MD_FILES" ]; then
+            echo "No markdown files changed"
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changed markdown files:"
+            echo "$MD_FILES"
+            # Store as space-separated for later use
+            echo "all_changed_files<<EOF" >> $GITHUB_OUTPUT
+            echo "$MD_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint-cli
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: npm install -g markdownlint-cli
+
+      - name: Run markdownlint
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Running markdownlint on PR files..."
+          echo "${{ steps.changed-files.outputs.all_changed_files }}" | xargs markdownlint --config .markdownlint.json || true
+
+      - name: Run LiveLabs format validation
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/oracle-livelabs/common/refs/heads/main/.github/scripts/validate-livelabs-markdown.sh -o /tmp/validate-livelabs-markdown.sh
+          chmod +x /tmp/validate-livelabs-markdown.sh
+          echo "${{ steps.changed-files.outputs.all_changed_files }}" | xargs /tmp/validate-livelabs-markdown.sh
+
+      - name: Check image references exist
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Checking if referenced images exist..."
+          MISSING=0
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            dir=$(dirname "$file")
+            # Extract image paths from markdown - handle optional title like ![alt](images/file.png "title")
+            # Use perl regex for non-greedy matching and extract just the path before any space or quote
+            grep -oP '\!\[[^\]]*\]\(images/[^"\s\)]+' "$file" 2>/dev/null | grep -oP 'images/[^"\s\)]+' | while IFS= read -r img; do
+              full_path="$dir/$img"
+              if [ ! -f "$full_path" ]; then
+                echo "ERROR: Missing image in $file: $img"
+                echo "MISSING" > /tmp/missing_flag
+              fi
+            done
+          done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+          if [ -f /tmp/missing_flag ]; then
+            rm -f /tmp/missing_flag
+            echo "Some referenced images are missing!"
+            exit 1
+          fi
+          echo "All referenced images exist."
+
+      - name: Check filename conventions
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Checking filename conventions..."
+          INVALID=0
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            filename=$(basename "$file")
+            lowercase=$(echo "$filename" | tr '[:upper:]' '[:lower:]')
+            if [ "$filename" != "$lowercase" ]; then
+              echo "ERROR: Filename must be lowercase: $file"
+              INVALID=1
+            fi
+            if [[ "$filename" =~ [[:space:]] ]]; then
+              echo "ERROR: Filename contains spaces: $file"
+              INVALID=1
+            fi
+          done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+          if [ $INVALID -eq 1 ]; then
+            exit 1
+          fi
+          echo "All filenames follow conventions."
+
+      - name: Summary
+        if: always() && steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "## Markdown Validation Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Checked files from PR:" >> $GITHUB_STEP_SUMMARY
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            echo "- $file" >> $GITHUB_STEP_SUMMARY
+          done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+
+      - name: No markdown files in PR
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo "No markdown files in this PR."
