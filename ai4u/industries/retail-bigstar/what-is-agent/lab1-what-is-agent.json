@@ -86,7 +86,7 @@
       }
     },
     {
-      "text": "%md\n## Add Sample Item Submissions\n\nAdd some sample item submissions for the agent to query:\n\n| Submission ID | Collector | Status | Declared Value | Item Type |\n|---------------|-----------|--------|----------------|-----------|\n| ITEM-20260115-1042 | Alex Martinez | Authenticating | $7,800 | sports_card |\n| ITEM-20260114-0821 | Jennifer Morales | Submitted | $1,200 | comic |\n| ITEM-20260113-0905 | Priya Desai | Listed | $420 | sneaker |\n| ITEM-20260112-0754 | Marcus Reed | Security Hold | $5,600 | memorabilia |",
+      "text": "%md\n## Add Sample Item Submissions\n\nAdd some sample item submissions for the agent to query:\n\n| Submission ID | Collector | Submission Date | Status | Declared Value | Item Type |\n|---------------|-----------|-----------------|--------|----------------|-----------|\n| ITEM-20260115-1042 | Alex Martinez | 2026-01-15 | Authenticating | $7,800 | sports_card |\n| ITEM-20260114-0821 | Jennifer Morales | 2026-01-14 | Submitted | $1,200 | comic |\n| ITEM-20260113-0905 | Priya Desai | 2026-01-13 | Listed | $420 | sneaker |\n| ITEM-20260112-0754 | Marcus Reed | 2026-01-12 | Security Hold | $5,600 | memorabilia |\n",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -101,7 +101,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Add Sample Item Submissions</h2>\n\n<p>Add some sample item submissions for the agent to query:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Submission ID</th><th style=\"padding: 8px;\">Collector</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Declared Value</th><th style=\"padding: 8px;\">Item Type</th></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260115-1042</td><td style=\"padding: 8px;\">Alex Martinez</td><td style=\"padding: 8px;\">Authenticating</td><td style=\"padding: 8px;\">$7,800</td><td style=\"padding: 8px;\">sports_card</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260114-0821</td><td style=\"padding: 8px;\">Jennifer Morales</td><td style=\"padding: 8px;\">Submitted</td><td style=\"padding: 8px;\">$1,200</td><td style=\"padding: 8px;\">comic</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260113-0905</td><td style=\"padding: 8px;\">Priya Desai</td><td style=\"padding: 8px;\">Listed</td><td style=\"padding: 8px;\">$420</td><td style=\"padding: 8px;\">sneaker</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260112-0754</td><td style=\"padding: 8px;\">Marcus Reed</td><td style=\"padding: 8px;\">Security Hold</td><td style=\"padding: 8px;\">$5,600</td><td style=\"padding: 8px;\">memorabilia</td></tr>\n</table>"
+            "data": "<h2>Add Sample Item Submissions</h2>\n\n<p>Add some sample item submissions for the agent to query:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Submission ID</th><th style=\"padding: 8px;\">Collector</th><th style=\"padding: 8px;\">Submission Date</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Declared Value</th><th style=\"padding: 8px;\">Item Type</th></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260115-1042</td><td style=\"padding: 8px;\">Alex Martinez</td><td style=\"padding: 8px;\">2026-01-15</td><td style=\"padding: 8px;\">Authenticating</td><td style=\"padding: 8px;\">$7,800</td><td style=\"padding: 8px;\">sports_card</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260114-0821</td><td style=\"padding: 8px;\">Jennifer Morales</td><td style=\"padding: 8px;\">2026-01-14</td><td style=\"padding: 8px;\">Submitted</td><td style=\"padding: 8px;\">$1,200</td><td style=\"padding: 8px;\">comic</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260113-0905</td><td style=\"padding: 8px;\">Priya Desai</td><td style=\"padding: 8px;\">2026-01-13</td><td style=\"padding: 8px;\">Listed</td><td style=\"padding: 8px;\">$420</td><td style=\"padding: 8px;\">sneaker</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260112-0754</td><td style=\"padding: 8px;\">Marcus Reed</td><td style=\"padding: 8px;\">2026-01-12</td><td style=\"padding: 8px;\">Security Hold</td><td style=\"padding: 8px;\">$5,600</td><td style=\"padding: 8px;\">memorabilia</td></tr>\n</table>"
           }
         ]
       }
@@ -416,7 +416,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is the status of item submission ITEM-20260115-1042;",
+      "text": "%script\nSELECT AI AGENT What is the status of item submission ITEM-12345;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -448,7 +448,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is the declared value for Priya Desai's submission;",
+      "text": "%script\nSELECT AI AGENT How much did Priya Desai apply for;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -480,7 +480,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Which item submissions are still submitted or in security hold;",
+      "text": "%script\nSELECT AI AGENT Which item submissions are still pending or under review;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -555,7 +555,7 @@
       }
     },
     {
-      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n\n> \"To check the status of a item submission, you would typically:\\n> 1. Log into the Big Star Collectibles portal\\n> 2. Navigate to Submission Status\\n> 3. Enter your submission ID\\n> 4. View the current status\"\n\n**The agent said:**\n\n> \"Item submission ITEM-20260115-1042 for Alex Martinez was submitted on January 15, 2026 with a declared value of $7,800. Current status: Authenticating.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent. It doesn't just know things. It *does* things.",
+      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n\n> \"To check the status of a item submission, you would typically:\\n> 1. Log into the Big Star Collectibles portal\\n> 2. Navigate to Submission Status\\n> 3. Enter your submission ID\\n> 4. View the current status\"\n\n**The agent said:**\n\n> \"Item submission ITEM-12345 for Alex Martinez was submitted on January 2, 2025 for a $45,000 personal item. Current status: Approved.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent. It doesn't just know things. It *does* things.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -570,7 +570,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>The Chatbot vs Agent Difference</h2>\n\n<p><strong>A chatbot would say:</strong></p>\n\n<blockquote>\"To check the status of a item submission, you would typically:<br/>1. Log into the Big Star Collectibles portal<br/>2. Navigate to Submission Status<br/>3. Enter your submission ID<br/>4. View the current status\"</blockquote>\n\n<p><strong>The agent said:</strong></p>\n\n<blockquote>\"Item submission ITEM-20260115-1042 for Alex Martinez was submitted on January 15, 2026 with a declared value of $7,800. Current status: Authenticating.\"</blockquote>\n\n<p>Same question. One explains the process. The other runs it.</p>\n\n<p>That's what makes an agent an agent. It doesn't just know things. It <em>does</em> things.</p>"
+            "data": "<h2>The Chatbot vs Agent Difference</h2>\n\n<p><strong>A chatbot would say:</strong></p>\n\n<blockquote>\"To check the status of a item submission, you would typically:<br/>1. Log into the Big Star Collectibles portal<br/>2. Navigate to Submission Status<br/>3. Enter your submission ID<br/>4. View the current status\"</blockquote>\n\n<p><strong>The agent said:</strong></p>\n\n<blockquote>\"Item submission ITEM-12345 for Alex Martinez was submitted on January 2, 2025 for a $45,000 personal item. Current status: Approved.\"</blockquote>\n\n<p>Same question. One explains the process. The other runs it.</p>\n\n<p>That's what makes an agent an agent. It doesn't just know things. It <em>does</em> things.</p>"
           }
         ]
       }

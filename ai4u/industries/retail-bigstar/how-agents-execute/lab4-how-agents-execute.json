@@ -1,0 +1,113 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# How Agents Actually Get Work Done\n\n## Introduction\n\nIn this lab, you'll trace an agent through its complete execution loop, from understanding a request to taking action and reporting results.\n\nEvery agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.\n\n### The Business Problem\n\nAt Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 authenticating.\n\n> *\"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex authenticating.\"*\n>\n> David, Operations Manager\n\nThe company needs smart routing:\n- **Under $50K with good credit** \u2192 Auto-approve\n- **$50K-$250K** \u2192 Appraiser review\n- **$250K+ or authenticatings** \u2192 Senior appraiser\n\nPlus, everything needs to be logged for compliance. When a regulator asks \"why was this approved?\", there needs to be an answer.\n\n### What You'll Learn\n\nThis lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes items based on amount and type. This is the foundation for solving Big Star Collectibles' processing bottleneck.\n\n**What you'll build:** A item processing workflow with conditional routing and complete audit trails.\n\nEstimated Time: 10 minutes\n\n### Story Sync\n**Story Sync:** Chapter 2.1 \u2013 see the corresponding narrative beat for context.\n\n### Objectives\n\n* Trace the complete agent execution loop\n* Understand the relationship between LLM reasoning and tool actions\n* Use history views to see every step\n* Build conditional routing based on item risk\n\n### Prerequisites\n\nFor this workshop, we provide the environment. You'll need:\n\n* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts\n\n## Task 1: Import the Lab Notebook\n\nBefore you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.\n\n1. From the Oracle Machine Learning home page, click **Notebooks**.\n\n2. Click **Import** to expand the Import drop down.\n\n3. Select **Git**.\n\n4. Paste the following GitHub URL leaving the credential field blank:\n\n    ```text\n    <copy>\n    https://github.com/davidastart/database/blob/main/ai4u/how-agents-execute/lab4-how-agents-execute.json\n    </copy>\n    ```\n\n5. Click **Ok**.\n\nYou should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.\n\n## Task 2: Set Up an Observable Agent\n\nWe'll create an agent with tools that log what's happening so you can see each step clearly. The key here is that our tools will write to a log table as they work, giving us a window into exactly what the agent is doing.\n\n1. Create tables and sequence for tracking.\n\n    We need two tables: one to log every step the agent takes (`workflow_log`) and one to store the actual item requests (`item_requests`). This separation lets us see both what the agent did AND what data it created.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    CREATE SEQUENCE item_requests_seq START WITH 1001;\n\n    CREATE TABLE workflow_log (\n        log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n        step_name   VARCHAR2(100),\n        step_detail VARCHAR2(500),\n        logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n    );\n\n    CREATE TABLE item_requests (\n        request_id    VARCHAR2(20) PRIMARY KEY,\n        collector     VARCHAR2(100),\n        amount        NUMBER(12,2),\n        item_type     VARCHAR2(50),\n        credit_score  NUMBER(3),\n        risk_level    VARCHAR2(30),\n        status        VARCHAR2(30) DEFAULT 'NEW',\n        routed_to     VARCHAR2(50),\n        created_at    TIMESTAMP DEFAULT SYSTIMESTAMP\n    );\n    </copy>\n    ```\n\n2. Create the first tool function - create item request.\n\n    This function does two things: it creates a item request record AND it logs what it's doing. Every time the agent calls this tool, we'll see an entry in our workflow log. This is how we make the agent's work visible.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    CREATE OR REPLACE FUNCTION create_item_request(\n        p_collector    VARCHAR2,\n        p_amount       NUMBER,\n        p_item_type    VARCHAR2,\n        p_credit_score NUMBER\n    ) RETURN VARCHAR2 AS\n        PRAGMA AUTONOMOUS_TRANSACTION;\n        v_request_id VARCHAR2(20);\n    BEGIN\n        v_request_id := 'LN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_requests_seq.NEXTVAL;\n        \n        -- Log the step\n        INSERT INTO workflow_log (step_name, step_detail) \n        VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_collector || \n                ', $' || p_amount || ' ' || p_item_type || ', Credit: ' || p_credit_score);\n        \n        -- Create the request\n        INSERT INTO item_requests (request_id, collector, amount, item_type, credit_score, status)\n        VALUES (v_request_id, p_collector, p_amount, LOWER(p_item_type), p_credit_score, 'SUBMITTED');\n        \n        COMMIT;\n        RETURN 'Created item request ' || v_request_id || ' for $' || p_amount || ' ' || p_item_type;\n    END;\n    /\n    </copy>\n    ```\n\n3. Create the second tool function - assess risk and route.\n\n    This is where the business logic lives. The function looks at the declared value, type, and condition grade, then decides where to route it. It logs both the assessment and the routing decision. This is the kind of conditional logic that makes agents useful - different inputs lead to different outcomes.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    CREATE OR REPLACE FUNCTION assess_and_route(\n        p_request_id VARCHAR2\n    ) RETURN VARCHAR2 AS\n        PRAGMA AUTONOMOUS_TRANSACTION;\n        v_amount       NUMBER;\n        v_item_type    VARCHAR2(50);\n        v_credit_score NUMBER;\n        v_risk_level   VARCHAR2(30);\n        v_route_to     VARCHAR2(50);\n        v_result       VARCHAR2(500);\n    BEGIN\n        -- Get request details\n        SELECT amount, item_type, credit_score\n        INTO v_amount, v_item_type, v_credit_score\n        FROM item_requests WHERE request_id = p_request_id;\n        \n        -- Log the assessment start\n        INSERT INTO workflow_log (step_name, step_detail) \n        VALUES ('ASSESS_RISK', 'Assessing ' || p_request_id || ': $' || v_amount || \n                ', Credit: ' || v_credit_score);\n        \n        -- Apply risk rules\n        IF v_credit_score < 550 THEN\n            v_risk_level := 'BLOCKED';\n            v_route_to := 'REJECTED';\n            v_result := 'BLOCKED: Condition grade ' || v_credit_score || ' below minimum 550.';\n        ELSIF v_item_type = 'personal' AND v_amount < 50000 AND v_credit_score >= 700 THEN\n            v_risk_level := 'LOW';\n            v_route_to := 'AUTO_APPROVED';\n            v_result := 'AUTO_APPROVED: Personal item under $50K with credit ' || v_credit_score || '.';\n        ELSIF v_amount < 250000 AND v_item_type != 'authenticating' THEN\n            v_risk_level := 'MEDIUM';\n            v_route_to := 'APPRAISER';\n            v_result := 'Routed to APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires review.';\n        ELSE\n            v_risk_level := 'HIGH';\n            v_route_to := 'SENIOR_APPRAISER';\n            v_result := 'Routed to SENIOR_APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires senior review.';\n        END IF;\n        \n        -- Log the routing decision\n        INSERT INTO workflow_log (step_name, step_detail) \n        VALUES ('ROUTE_DECISION', p_request_id || ' -> ' || v_route_to || ' (Risk: ' || v_risk_level || ')');\n        \n        -- Update the request\n        UPDATE item_requests\n        SET risk_level = v_risk_level, \n            routed_to = v_route_to,\n            status = CASE WHEN v_route_to IN ('AUTO_APPROVED', 'REJECTED') THEN v_route_to ELSE 'PENDING_REVIEW' END\n        WHERE request_id = p_request_id;\n        \n        COMMIT;\n        RETURN v_result;\n    EXCEPTION\n        WHEN NO_DATA_FOUND THEN\n            RETURN 'Request not found: ' || p_request_id;\n    END;\n    /\n    </copy>\n    ```\n\n4. Register the tools.\n\n    We register both functions as tools. Notice how the instructions tell the agent what each tool does and what parameters it needs. The agent will use CREATE_ITEM_TOOL first to create the request, then ASSESS_ROUTE_TOOL to evaluate and route it.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'CREATE_ITEM_TOOL',\n            attributes  => '{\"instruction\": \"Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.\",\n                            \"function\": \"create_item_request\"}',\n            description => 'Creates a item request and returns the request ID'\n        );\n        \n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'ASSESS_ROUTE_TOOL',\n            attributes  => '{\"instruction\": \"Assess risk and route a item request. Parameter: P_REQUEST_ID (the LN-YYMMDD-NNNN format ID from CREATE_ITEM_TOOL). Returns routing decision.\",\n                            \"function\": \"assess_and_route\"}',\n            description => 'Assesses risk level and routes to appropriate reviewer'\n        );\n    END;\n    /\n    </copy>\n    ```\n\n5. Create the agent and team.\n\n    The agent's role tells it to always complete both steps: create then assess. The task reinforces this with specific instructions. This ensures the agent follows a consistent workflow every time - create the request, get an ID back, then use that ID to assess and route.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n            agent_name  => 'ITEM_EXEC_AGENT',\n            attributes  => '{\"profile_name\": \"genai\",\n                            \"role\": \"You are a item processing agent for Big Star Collectibles. Process items by: 1) Creating the request with CREATE_ITEM_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps.\"}',\n            description => 'Agent demonstrating execution loop'\n        );\n        \n        DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n            task_name   => 'ITEM_EXEC_TASK',\n            attributes  => '{\"instruction\": \"Process the item request: 1. Call CREATE_ITEM_TOOL to create the request 2. Call ASSESS_ROUTE_TOOL with the returned request ID to assess and route. Report the final routing decision. User request: {query}\",\n                            \"tools\": [\"CREATE_ITEM_TOOL\", \"ASSESS_ROUTE_TOOL\"]}',\n            description => 'Task for item execution demo'\n        );\n        \n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'ITEM_EXEC_TEAM',\n            attributes  => '{\"agents\": [{\"name\": \"ITEM_EXEC_AGENT\", \"task\": \"ITEM_EXEC_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Team for execution demo'\n        );\n    END;\n    /\n    </copy>\n    ```\n\n## Task 3: Execute a Complete Workflow\n\nNow let's run a request and trace every step.\n\n1. Clear the log and set the team.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ITEM_EXEC_TEAM');\n    </copy>\n    ```\n\n2. Submit a item request that should auto-approve.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Process a $35000 personal item for John Smith with condition grade 780;\n    </copy>\n    ```\n\n3. Immediately check the workflow log.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT \n        step_name,\n        step_detail,\n        TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time\n    FROM workflow_log\n    ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe the execution sequence:**\n- `CREATE_REQUEST`: The item was created\n- `ASSESS_RISK`: Risk was evaluated\n- `ROUTE_DECISION`: `AUTO_APPROVED` (personal under $50K with 780 credit)\n\n## Task 4: Trace the Agent's Tool Calls\n\nThe history views show what the agent did.\n\n1. Query the tool history.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT \n        tool_name,\n        TO_CHAR(start_date, 'HH24:MI:SS.FF3') as started,\n        TO_CHAR(end_date, 'HH24:MI:SS.FF3') as ended,\n        SUBSTR(output, 1, 60) as result\n    FROM USER_AI_AGENT_TOOL_HISTORY\n    ORDER BY start_date DESC\n    FETCH FIRST 10 ROWS ONLY;\n    </copy>\n    ```\n\n2. Check the item request that was created.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT \n        request_id,\n        collector,\n        amount,\n        item_type,\n        credit_score,\n        risk_level,\n        routed_to,\n        status\n    FROM item_requests\n    ORDER BY created_at DESC;\n    </copy>\n    ```\n\nYou can see the actual record the agent created, with the risk assessment and routing.\n\n## Task 5: Trace Different Execution Paths\n\nDifferent item parameters trigger different routing paths.\n\n1. Submit a item that needs appraiser review.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    SELECT AI AGENT Process a $150000 business item for Acme Corp with condition grade 720;\n    </copy>\n    ```\n\n2. Check the workflow log.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe:** Routed to APPRAISER because $150K business item needs review.\n\n3. Submit a item that needs senior review.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    SELECT AI AGENT Process a $450000 authenticating for Jane Doe with condition grade 750;\n    </copy>\n    ```\n\n4. Check the routing.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe:** Routed to SENIOR_APPRAISER because it's a authenticating over $250K.\n\n5. Submit a item that should be blocked.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    SELECT AI AGENT Process a $25000 personal item for Bob Wilson with condition grade 520;\n    </copy>\n    ```\n\n6. Check the routing.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe:** BLOCKED because condition grade 520 is below minimum 550.\n\n## Task 6: Compare All Items and Their Routes\n\nLet's see all the items and their different routing decisions.\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT \n    request_id,\n    collector,\n    amount,\n    item_type,\n    credit_score,\n    risk_level,\n    routed_to,\n    status\nFROM item_requests\nORDER BY created_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Task 7: Understand the Execution Pattern\n\nEvery agent execution follows this pattern:\n\n1. **Receive request** \u2192 The user submits a query\n2. **LLM understands** \u2192 Interprets the intent\n3. **LLM plans** \u2192 Determines which tools and in what order\n4. **Tool executes** \u2192 First tool runs, returns result\n5. **LLM analyzes** \u2192 Interprets the result\n6. **Next tool** \u2192 Repeat steps 4-5 for each tool (conditionally)\n7. **LLM responds** \u2192 Generates final response\n\nQuery to see the complete execution timeline:\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT \n    'TOOL: ' || tool_name as step,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as time,\n    SUBSTR(output, 1, 50) as output\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE\nORDER BY start_date;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\nCompare with your workflow log:\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT \n    'LOG: ' || step_name as step,\n    TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time,\n    step_detail as output\nFROM workflow_log\nWHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE\nORDER BY logged_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Summary\n\nIn this lab, you traced the complete agent execution loop:\n\n* Created an observable agent with logging tools\n* Watched a multi-step workflow execute with risk assessment\n* Traced tool calls through history views\n* Saw how different inputs lead to different routing paths\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Big Star Collectibles, this means small items auto-approve in seconds, complex items get routed appropriately, and compliance has a complete audit trail.\n\n## Learn More\n\n* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - Kay Malcolm, February 2026\n\n## Cleanup (Optional)\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_EXEC_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_EXEC_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ITEM_EXEC_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ASSESS_ROUTE_TOOL', TRUE);\nDROP TABLE item_requests PURGE;\nDROP TABLE workflow_log PURGE;\nDROP SEQUENCE item_requests_seq;\nDROP FUNCTION create_item_request;\nDROP FUNCTION assess_and_route;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    }
+  ],
+  "name": "Lab 4 - How Agents Execute",
+  "id": "lab4-how-agents-execute",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
