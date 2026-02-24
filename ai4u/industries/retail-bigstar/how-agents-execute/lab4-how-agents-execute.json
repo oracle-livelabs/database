@@ -69,7 +69,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Item Application Tool</h2>\n\n<p>This function creates item submissions. Notice it logs to <code>workflow_log</code> before doing its work\u2014this is how you'll trace execution.</p>\n\n<p>The function generates a unique ID like <code>LOAN-250108-1001</code> and inserts the application with status <code>SUBMITTED</code>.</p>"
+            "data": "<h2>Create the Item Application Tool</h2>\n\n<p>This function creates item submissions. Notice it logs to <code>workflow_log</code> before doing its work\u2014this is how you'll trace execution.</p>\n\n<p>The function generates a unique ID like <code>ITEM-250108-1001</code> and inserts the application with status <code>SUBMITTED</code>.</p>"
           }
         ]
       }
@@ -325,7 +325,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Check the Tool Execution History</h2>\n\n<p>Oracle also maintains its own history of tool calls. This shows you the inputs and outputs of each tool.</p>\n\n<p>You should see CREATE_LOAN_TOOL, ASSESS_RISK_TOOL, and ROUTE_APPRAISER_TOOL in sequence.</p>"
+            "data": "<h2>Check the Tool Execution History</h2>\n\n<p>Oracle also maintains its own history of tool calls. This shows you the inputs and outputs of each tool.</p>\n\n<p>You should see CREATE_ITEM_TOOL, ASSESS_RISK_TOOL, and ROUTE_APPRAISER_TOOL in sequence.</p>"
           }
         ]
       }
