@@ -115,7 +115,7 @@ Finally, you'll build the guardrails that make agents safe for collectibles reta
   - Condition grade below 550 → BLOCKED (submission rejected)
   - Personal items under $50K with good credit → AUTO_APPROVED
   - Items $50K-$250K → Requires APPRAISER review
-  - Items over $250K or any mortgage → Requires SENIOR_APPRAISER
+  - Items over $250K or any authenticating → Requires SENIOR_APPRAISER
   
   **Complete Audit Trail:**
   - Every tool call logged with timestamp

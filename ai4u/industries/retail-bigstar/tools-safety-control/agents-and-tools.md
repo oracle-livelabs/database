@@ -110,7 +110,7 @@ CREATE TABLE item_submissions (
     declared_value     NUMBER(12,2) NOT NULL 
                     CONSTRAINT chk_positive_amount CHECK (declared_value > 0),
     item_type       VARCHAR2(50) NOT NULL
-                    CONSTRAINT chk_item_type CHECK (item_type IN ('personal','auto','mortgage','business')),
+                    CONSTRAINT chk_item_type CHECK (item_type IN ('personal','auto','authenticating','business')),
     item_purpose    VARCHAR2(500),
     risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'
                     CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),
@@ -147,7 +147,7 @@ Now you'll insert the business rules that control what happens to each item subm
 The rules are evaluated in priority order (lowest number first):
 1. **Block** submissions with condition grade below 550  -  too high risk for automated processing
 2. **Require review** for items $50,000 or more  -  significant exposure needs human judgment
-3. **Require review** for any mortgage  -  complex product requires appraiser
+3. **Require review** for any authenticating  -  complex product requires appraiser
 4. **Require review** for condition grades 550-650  -  borderline creditworthiness
 5. **Auto-approve** everything else  -  low-risk personal/auto items with good credit
 
@@ -169,11 +169,11 @@ INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES
     20
 );
 
--- Require review for all mortgages (any amount)
+-- Require review for all authenticatings (any amount)
 INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'rare collectible Review',
     'REQUIRE_REVIEW',
-    '{"field": "item_type", "operator": "eq", "value": "mortgage", "message": "All mortgage submissions require appraiser review."}',
+    '{"field": "item_type", "operator": "eq", "value": "authenticating", "message": "All authenticating submissions require appraiser review."}',
     30
 );
 
@@ -185,7 +185,7 @@ INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES
     40
 );
 
--- Auto-approve everything else (good credit, small items, non-mortgage)
+-- Auto-approve everything else (good credit, small items, non-authenticating)
 INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'Auto-approve Standard',
     'AUTO_APPROVE',
@@ -467,7 +467,7 @@ BEGIN
     -- Submission tool (for INVENTORY_AGENT)
     DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'SUBMIT_ITEM_TOOL',
-        attributes  => '{"instruction": "Submit a item submission. Parameters: P_COLLECTOR_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_DECLARED_VALUE (number), P_ITEM_TYPE (personal, auto, mortgage, or business), P_ITEM_PURPOSE (text description of item purpose).",
+        attributes  => '{"instruction": "Submit a item submission. Parameters: P_COLLECTOR_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_DECLARED_VALUE (number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_ITEM_PURPOSE (text description of item purpose).",
                         "function": "submit_item_submission"}',
         description => 'Submits a item submission for processing'
     );
@@ -604,11 +604,11 @@ Become a inventory specialist and submit submissions.
     </copy>
     ```
 
-4. Submit a mortgage (always requires review).
+4. Submit a authenticating (always requires review).
 
     ```sql
     <copy>
-    SELECT AI AGENT Submit a $250000 mortgage for collector APP-001, purpose is primary residence purchase;
+    SELECT AI AGENT Submit a $250000 authenticating for collector APP-001, purpose is primary residence purchase;
     </copy>
     ```
 
@@ -669,7 +669,7 @@ Switch to the appraisal agent and review submissions.
 
     ```sql
     <copy>
-    SELECT AI AGENT Approve the mortgage submission;
+    SELECT AI AGENT Approve the authenticating submission;
     </copy>
     ```
 
@@ -699,8 +699,8 @@ In this lab, you built a complete item appraisal system demonstrating:
 - APPRAISAL_AGENT for appraisers (review and decide)
 
 **Safety Rules:**
-- AUTO_APPROVE: Under $50K, good credit, non-mortgage
-- REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
+- AUTO_APPROVE: Under $50K, good credit, non-authenticating
+- REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit
 - BLOCK: Condition grade below 550
 
 **The Human-in-the-Loop:**

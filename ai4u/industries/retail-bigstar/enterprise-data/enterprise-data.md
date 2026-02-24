@@ -106,7 +106,7 @@ The LLM can't answer. It has no collector data. It might make something up or te
 
     ```sql
     <copy>
-    SELECT AI CHAT What condition grade does Big Star Collectibles require for a mortgage;
+    SELECT AI CHAT What condition grade does Big Star Collectibles require for a authenticating;
     </copy>
     ```
 
@@ -135,17 +135,17 @@ Now let's create the business data that an agent needs. This is the key differen
 
     INSERT INTO item_policies VALUES (
         'POL-PREF', 'Preferred Rate Tier',
-        'Platinum loyalty pricing is 7.9% APR for customers with condition grade 750+. ' ||
-        'Maximum declared value $500,000. Requires 20% down payment for mortgages. ' ||
+        'Platinum loyalty pricing is 7.9% loyalty pricing tier for customers with condition grade 750+. ' ||
+        'Maximum declared value $500,000. Requires 20% down payment for authenticatings. ' ||
         'Loyalty discount up to 15% discount available for clients with 5+ year history.',
         'PREFERRED',
-        'Personal, Auto, Mortgage, Business'
+        'Personal, Auto, Authenticating, Business'
     );
 
     INSERT INTO item_policies VALUES (
         'POL-STD', 'Standard Rate Tier',
-        'Standard rate is 12.9% APR for customers with condition grade 650-749. ' ||
-        'Maximum declared value $250,000. Requires 25% down payment for mortgages. ' ||
+        'Standard rate is 12.9% loyalty pricing tier for customers with condition grade 650-749. ' ||
+        'Maximum declared value $250,000. Requires 25% down payment for authenticatings. ' ||
         'No loyalty discounts available for this tier.',
         'STANDARD',
         'Personal, Auto, Business'
@@ -333,7 +333,7 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
     </copy>
     ```
 
-**Now you get YOUR actual rate:** 7.9% APR for Preferred tier with condition grade 750+.
+**Now you get YOUR actual rate:** 7.9% loyalty pricing tier for Preferred tier with condition grade 750+.
 
 2. Ask about Alex Martinez specifically.
 
@@ -353,7 +353,7 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
 
     ```sql
     <copy>
-    SELECT AI AGENT What condition grade does Big Star Collectibles require for a mortgage;
+    SELECT AI AGENT What condition grade does Big Star Collectibles require for a authenticating;
     </copy>
     ```
 
@@ -369,7 +369,7 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
     </copy>
     ```
 
-**The agent checks both:** TechStart has condition grade 710 (Standard tier), so they qualify for 12.9% APR.
+**The agent checks both:** TechStart has condition grade 710 (Standard tier), so they qualify for 12.9% loyalty pricing tier.
 
 ## Task 6: See the Tool Calls
 

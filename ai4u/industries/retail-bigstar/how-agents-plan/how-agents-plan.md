@@ -165,11 +165,11 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     BEGIN
         SELECT credit_tier INTO v_tier FROM demo_collectors WHERE collector_id = p_collector_id;
         IF v_tier = 'PREFERRED' THEN
-            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% APR. Up to $500K limit.';
+            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% loyalty pricing tier. Up to $500K limit.';
         ELSIF v_tier = 'STANDARD' THEN
-            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% APR. Up to $100K limit.';
+            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% loyalty pricing tier. Up to $100K limit.';
         ELSE
-            RETURN 'SUBPRIME RATES: Rates starting at 14.9% APR. Up to $25K limit.';
+            RETURN 'SUBPRIME RATES: Rates starting at 14.9% loyalty pricing tier. Up to $25K limit.';
         END IF;
     EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Collector not found.';
     END;

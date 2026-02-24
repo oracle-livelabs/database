@@ -8,16 +8,16 @@ Every agent follows the same pattern: understand, plan, execute tools, analyze r
 
 ### The Business Problem
 
-At Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 mortgage.
+At Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 authenticating.
 
-> *"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex mortgage."*
+> *"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex authenticating."*
 >
 > David, Operations Manager
 
 The company needs smart routing:
 - **Under $50K with good credit** → Auto-approve
 - **$50K-$250K** → Appraiser review
-- **$250K+ or mortgages** → Senior appraiser
+- **$250K+ or authenticatings** → Senior appraiser
 
 Plus, everything needs to be logged for compliance. When a regulator asks "why was this approved?", there needs to be an answer.
 
@@ -175,7 +175,7 @@ We'll create an agent with tools that log what's happening so you can see each s
             v_risk_level := 'LOW';
             v_route_to := 'AUTO_APPROVED';
             v_result := 'AUTO_APPROVED: Personal item under $50K with credit ' || v_credit_score || '.';
-        ELSIF v_amount < 250000 AND v_item_type != 'mortgage' THEN
+        ELSIF v_amount < 250000 AND v_item_type != 'authenticating' THEN
             v_risk_level := 'MEDIUM';
             v_route_to := 'APPRAISER';
             v_result := 'Routed to APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires review.';
@@ -217,7 +217,7 @@ We'll create an agent with tools that log what's happening so you can see each s
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CREATE_ITEM_TOOL',
-            attributes  => '{"instruction": "Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, mortgage, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.",
+            attributes  => '{"instruction": "Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.",
                             "function": "create_item_request"}',
             description => 'Creates a item request and returns the request ID'
         );
@@ -389,7 +389,7 @@ Different item parameters trigger different routing paths.
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Process a $450000 mortgage for Jane Doe with condition grade 750;
+    SELECT AI AGENT Process a $450000 authenticating for Jane Doe with condition grade 750;
     </copy>
     ```
 
@@ -403,7 +403,7 @@ Different item parameters trigger different routing paths.
     </copy>
     ```
 
-**Observe:** Routed to SENIOR_APPRAISER because it's a mortgage over $250K.
+**Observe:** Routed to SENIOR_APPRAISER because it's a authenticating over $250K.
 
 5. Submit a item that should be blocked.
 

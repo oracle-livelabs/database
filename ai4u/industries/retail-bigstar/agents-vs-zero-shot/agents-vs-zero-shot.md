@@ -164,13 +164,13 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     COMMENT ON COLUMN sample_items.collector IS 'Name of the person or business applying for the item';
     COMMENT ON COLUMN sample_items.status IS 'Submission status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';
     COMMENT ON COLUMN sample_items.amount IS 'Requested declared value in US dollars';
-    COMMENT ON COLUMN sample_items.item_type IS 'Type of item: Personal, Auto, Mortgage, or Business';
+    COMMENT ON COLUMN sample_items.item_type IS 'Type of item: sports_card, comic, sneaker, or memorabilia piece';
     COMMENT ON COLUMN sample_items.submission_date IS 'Date the submission was submitted';
 
     -- Insert sample data
     INSERT INTO sample_items VALUES ('ITEM-12345', 'Acme Corp', 'UNDER_REVIEW', 150000, 'Business', SYSDATE - 3);
     INSERT INTO sample_items VALUES ('ITEM-12346', 'TechStart', 'PENDING', 45000, 'Business', SYSDATE - 1);
-    INSERT INTO sample_items VALUES ('ITEM-12347', 'GlobalCo', 'APPROVED', 275000, 'Mortgage', SYSDATE - 7);
+    INSERT INTO sample_items VALUES ('ITEM-12347', 'GlobalCo', 'APPROVED', 275000, 'Authenticating', SYSDATE - 7);
     COMMIT;
     </copy>
     ```
