@@ -107,9 +107,9 @@ First, let's create a item submissions table. This gives the agent something rea
     COMMENT ON COLUMN item_submissions.submission_id IS 'Unique submission identifier like ITEM-12345';
     COMMENT ON COLUMN item_submissions.collector_name IS 'Full name of the person or business applying for the item';
     COMMENT ON COLUMN item_submissions.submission_date IS 'Date the item submission was submitted';
-    COMMENT ON COLUMN item_submissions.item_status IS 'Current status: Pending, Under Review, Approved, or Denied';
+    COMMENT ON COLUMN item_submissions.item_status IS 'Current status: Submitted, Authenticating, Listed, or Security Hold';
     COMMENT ON COLUMN item_submissions.declared_value IS 'Requested declared value in dollars';
-    COMMENT ON COLUMN item_submissions.item_type IS 'Type of item: Personal, Auto, Mortgage, or Business';
+    COMMENT ON COLUMN item_submissions.item_type IS 'Type of item: sports_card, comic, sneaker, or memorabilia piece';
     </copy>
     ```
 
@@ -194,7 +194,7 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
             tool_name   => 'ITEM_LOOKUP',
             attributes  => '{"tool_type": "SQL",
                             "tool_params": {"profile_name": "genai"}}',
-            description => 'Query the ITEM_SUBMISSIONS table. Columns: SUBMISSION_ID, COLLECTOR_NAME, SUBMISSION_DATE, ITEM_STATUS (Pending/Under Review/Approved/Denied), DECLARED_VALUE, ITEM_TYPE (Personal/Auto/Mortgage/Business).'
+            description => 'Query the ITEM_SUBMISSIONS table. Columns: SUBMISSION_ID, COLLECTOR_NAME, SUBMISSION_DATE, ITEM_STATUS (Submitted/Authenticating/Listed/Security Hold), DECLARED_VALUE, ITEM_TYPE (sports_card/comic/sneaker/memorabilia).'
         );
     END;
     /
@@ -236,7 +236,7 @@ Think of it like hiring a new employee: the **tool** is the software they'll use
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'ITEM_TASK',
-            attributes  => '{"instruction": "Answer questions about Big Star Collectibles item submissions by querying the ITEM_SUBMISSIONS table using the ITEM_LOOKUP tool. The table has columns: SUBMISSION_ID, COLLECTOR_NAME, SUBMISSION_DATE, ITEM_STATUS (Pending, Under Review, Approved, Denied), DECLARED_VALUE, ITEM_TYPE (Personal, Auto, Mortgage, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
+            attributes  => '{"instruction": "Answer questions about Big Star Collectibles item submissions by querying the ITEM_SUBMISSIONS table using the ITEM_LOOKUP tool. The table has columns: SUBMISSION_ID, COLLECTOR_NAME, SUBMISSION_DATE, ITEM_STATUS (Submitted, Authenticating, Listed, Security Hold), DECLARED_VALUE, ITEM_TYPE (sports_card, comic, sneaker, memorabilia). Do not ask clarifying questions - query the data and provide the answer. User question: {query}",
                             "tools": ["ITEM_LOOKUP"]}',
             description => 'Task for handling item submission inquiries'
         );

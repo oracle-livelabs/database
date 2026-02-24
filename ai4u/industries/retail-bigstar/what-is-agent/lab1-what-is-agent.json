@@ -224,7 +224,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the LOAN_APPLICATIONS table. Columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending/Under Review/Approved/Denied), LOAN_AMOUNT, LOAN_TYPE (Personal/Auto/Authenticating/Business).'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the LOAN_APPLICATIONS table. Columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Submitted/Authenticating/Listed/Security Hold), LOAN_AMOUNT, LOAN_TYPE (Personal/Auto/Authenticating/Business).'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -288,7 +288,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Big Star Collectibles item submissions by querying the LOAN_APPLICATIONS table using the ITEM_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Pending, Under Review, Approved, Denied), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Authenticating, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"ITEM_LOOKUP\"]}',\n        description => 'Task for handling item submission inquiries'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Big Star Collectibles item submissions by querying the LOAN_APPLICATIONS table using the ITEM_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Submitted, Authenticating, Listed, Security Hold), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Authenticating, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"ITEM_LOOKUP\"]}',\n        description => 'Task for handling item submission inquiries'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
