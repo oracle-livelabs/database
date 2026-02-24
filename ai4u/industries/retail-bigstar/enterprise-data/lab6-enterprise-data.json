@@ -203,7 +203,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'SEERS_ITEM_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item officer assistant for Big Star Collectibles. You have access to company item policies and applicant information. Always use your tools to look up real data - never guess about rates, policies, or applicant details.\"}',\n        description => 'Agent with Big Star Collectibles enterprise data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'SEERS_ITEM_TASK',\n        attributes  => '{\"instruction\": \"Help the item officer by looking up relevant policies and applicant information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}\",\n                        \"tools\": [\"ITEM_POLICY_TOOL\", \"APPLICANT_LOOKUP_TOOL\"]}',\n        description => 'Task with Big Star Collectibles data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'SEERS_ITEM_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"SEERS_ITEM_AGENT\", \"task\": \"SEERS_ITEM_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with Big Star Collectibles enterprise data'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'BIGSTAR_ITEM_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item officer assistant for Big Star Collectibles. You have access to company item policies and applicant information. Always use your tools to look up real data - never guess about rates, policies, or applicant details.\"}',\n        description => 'Agent with Big Star Collectibles enterprise data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'BIGSTAR_ITEM_TASK',\n        attributes  => '{\"instruction\": \"Help the item officer by looking up relevant policies and applicant information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}\",\n                        \"tools\": [\"ITEM_POLICY_TOOL\", \"APPLICANT_LOOKUP_TOOL\"]}',\n        description => 'Task with Big Star Collectibles data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'BIGSTAR_ITEM_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"BIGSTAR_ITEM_AGENT\", \"task\": \"BIGSTAR_ITEM_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with Big Star Collectibles enterprise data'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -235,7 +235,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_ITEM_TEAM');",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('BIGSTAR_ITEM_TEAM');",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -448,7 +448,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('SEERS_ITEM_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('SEERS_ITEM_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('SEERS_ITEM_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ITEM_POLICY_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPLICANT_LOOKUP_TOOL', TRUE);\nDROP TABLE item_policies PURGE;\nDROP TABLE item_applicants PURGE;\nDROP FUNCTION get_item_policy;\nDROP FUNCTION get_applicant_info;",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('BIGSTAR_ITEM_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('BIGSTAR_ITEM_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('BIGSTAR_ITEM_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ITEM_POLICY_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPLICANT_LOOKUP_TOOL', TRUE);\nDROP TABLE item_policies PURGE;\nDROP TABLE item_applicants PURGE;\nDROP FUNCTION get_item_policy;\nDROP FUNCTION get_applicant_info;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
