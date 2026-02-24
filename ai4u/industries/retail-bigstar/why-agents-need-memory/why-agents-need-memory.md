@@ -28,9 +28,6 @@ This lab lets you experience the forgetting problem directly. You'll tell an age
 
 Estimated Time: 10 minutes
 
-### Story Sync
-**Story Sync:** Chapter 2.1 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Experience the forgetting problem directly
@@ -58,7 +55,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/why-agents-need-memory/lab5-why-agents-need-memory.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/why-agents-need-memory/lab5-why-agents-need-memory.json
     </copy>
     ```
 

@@ -39,9 +39,6 @@ You'll also implement risk-based routing:
 
 Estimated Time: 20 minutes
 
-### Story Sync
-**Story Sync:** Chapters 3.3 & 4.2 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Create PL/SQL functions as agent tools
@@ -70,7 +67,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/tools-safety-control/lab10-tools-safety-control.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/tools-safety-control/lab10-tools-safety-control.json
     </copy>
     ```
 

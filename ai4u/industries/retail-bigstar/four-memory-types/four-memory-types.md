@@ -32,9 +32,6 @@ You'll create each type and see how they work together to make agents consistent
 
 Estimated Time: 15 minutes
 
-### Story Sync
-**Story Sync:** Chapter 2.4 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Create the four types of agent memory
@@ -62,7 +59,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/four-memory-types/lab8-four-memory-types.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/four-memory-types/lab8-four-memory-types.json
     </copy>
     ```
 
@@ -72,7 +69,7 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create the Memory Tables
 
-We'll create structures for each memory type. Instead of four sepapricing guides, we use one main table with a `memory_type` column to distinguish between types. This makes it easier to query across all memories when needed.
+We'll create structures for each memory type. Instead of four separate pricing guides, we use one main table with a `memory_type` column to distinguish between types. This makes it easier to query across all memories when needed.
 
 1. Create the unified memory table with type classification.
 

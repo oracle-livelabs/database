@@ -29,8 +29,6 @@ The key insight: Memory isn't a model capability. It's a database capability. Th
 
 Estimated Time: 15 minutes
 
-### Story Sync
-**Story Sync:** Chapter 2.3 – see the corresponding narrative beat for context.
 
 ### Objectives
 
@@ -59,7 +57,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/where-memory-lives/lab7-where-memory-lives.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/where-memory-lives/lab7-where-memory-lives.json
     </copy>
     ```
 

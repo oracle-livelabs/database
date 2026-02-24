@@ -61,7 +61,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/enterprise-data/lab6-enterprise-data.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/enterprise-data/lab6-enterprise-data.json
     </copy>
     ```
 

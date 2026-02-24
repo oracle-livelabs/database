@@ -66,7 +66,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/agents-vs-zero-shot/lab2-agents-vs-zero-shot.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/agents-vs-zero-shot/lab2-agents-vs-zero-shot.json
     </copy>
     ```
 

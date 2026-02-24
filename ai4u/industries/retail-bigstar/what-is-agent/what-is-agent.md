@@ -61,7 +61,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/what-is-agent/lab1-what-is-agent.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/what-is-agent/lab1-what-is-agent.json
     </copy>
     ```
     ![Notebook Information](./images/notebook_clone.png " ")

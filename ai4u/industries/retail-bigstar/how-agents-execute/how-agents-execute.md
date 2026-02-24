@@ -29,9 +29,6 @@ This lab shows you how agents execute conditional workflows with audit logging. 
 
 Estimated Time: 10 minutes
 
-### Story Sync
-**Story Sync:** Chapter 2.1 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Trace the complete agent execution loop
@@ -59,7 +56,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/how-agents-execute/lab4-how-agents-execute.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/how-agents-execute/lab4-how-agents-execute.json
     </copy>
     ```
 

@@ -29,9 +29,6 @@ This is what lets agents learn from experience. Not just store it, but retrieve 
 
 Estimated Time: 20 minutes
 
-### Story Sync
-**Story Sync:** Chapter 3.2 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Load an ONNX embedding model into the database
@@ -60,7 +57,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/learning-loop/lab9-learning-loop.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/learning-loop/lab9-learning-loop.json
     </copy>
     ```
 

@@ -31,9 +31,6 @@ This lab shows you how agents plan multi-tool operations. You'll see the agent d
 
 Estimated Time: 10 minutes
 
-### Story Sync
-**Story Sync:** Chapter 1.2 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Understand how agents break tasks into steps
@@ -67,7 +64,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/how-agents-plan/lab3-how-agents-plan.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/how-agents-plan/lab3-how-agents-plan.json
     </copy>
     ```
 
