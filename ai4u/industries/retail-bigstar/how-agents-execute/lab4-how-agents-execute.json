@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# How Agents Actually Get Work Done\n\n## Introduction\n\nIn this lab, you'll trace an agent through its complete execution loop, from understanding a request to taking action and reporting results.\n\nEvery agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.\n\n### The Business Problem\n\nAt Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 authenticating.\n\n> *\"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex authenticating.\"*\n>\n> David, Operations Manager\n\nThe company needs smart routing:\n- **Under $50K with good credit** \u2192 Auto-approve\n- **$50K-$250K** \u2192 Appraiser review\n- **$250K+ or authenticatings** \u2192 Senior appraiser\n\nPlus, everything needs to be logged for compliance. When a regulator asks \"why was this approved?\", there needs to be an answer.\n\n### What You'll Learn\n\nThis lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes items based on amount and type. This is the foundation for solving Big Star Collectibles' processing bottleneck.\n\n**What you'll build:** A item processing workflow with conditional routing and complete audit trails.\n\nEstimated Time: 10 minutes\n\n### Story Sync\n**Story Sync:** Chapter 2.1 \u2013 see the corresponding narrative beat for context.\n\n### Objectives\n\n* Trace the complete agent execution loop\n* Understand the relationship between LLM reasoning and tool actions\n* Use history views to see every step\n* Build conditional routing based on item risk\n\n### Prerequisites\n\nFor this workshop, we provide the environment. You'll need:\n\n* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts\n\n## Task 1: Import the Lab Notebook\n\nBefore you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.\n\n1. From the Oracle Machine Learning home page, click **Notebooks**.\n\n2. Click **Import** to expand the Import drop down.\n\n3. Select **Git**.\n\n4. Paste the following GitHub URL leaving the credential field blank:\n\n    ```text\n    <copy>\n    https://github.com/davidastart/database/blob/main/ai4u/how-agents-execute/lab4-how-agents-execute.json\n    </copy>\n    ```\n\n5. Click **Ok**.\n\nYou should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.\n\n## Task 2: Set Up an Observable Agent\n\nWe'll create an agent with tools that log what's happening so you can see each step clearly. The key here is that our tools will write to a log table as they work, giving us a window into exactly what the agent is doing.\n\n1. Create tables and sequence for tracking.\n\n    We need two tables: one to log every step the agent takes (`workflow_log`) and one to store the actual item requests (`item_requests`). This separation lets us see both what the agent did AND what data it created.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    CREATE SEQUENCE item_requests_seq START WITH 1001;\n\n    CREATE TABLE workflow_log (\n        log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n        step_name   VARCHAR2(100),\n        step_detail VARCHAR2(500),\n        logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n    );\n\n    CREATE TABLE item_requests (\n        request_id    VARCHAR2(20) PRIMARY KEY,\n        collector     VARCHAR2(100),\n        amount        NUMBER(12,2),\n        item_type     VARCHAR2(50),\n        credit_score  NUMBER(3),\n        risk_level    VARCHAR2(30),\n        status        VARCHAR2(30) DEFAULT 'NEW',\n        routed_to     VARCHAR2(50),\n        created_at    TIMESTAMP DEFAULT SYSTIMESTAMP\n    );\n    </copy>\n    ```\n\n2. Create the first tool function - create item request.\n\n    This function does two things: it creates a item request record AND it logs what it's doing. Every time the agent calls this tool, we'll see an entry in our workflow log. This is how we make the agent's work visible.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    CREATE OR REPLACE FUNCTION create_item_request(\n        p_collector    VARCHAR2,\n        p_amount       NUMBER,\n        p_item_type    VARCHAR2,\n        p_credit_score NUMBER\n    ) RETURN VARCHAR2 AS\n        PRAGMA AUTONOMOUS_TRANSACTION;\n        v_request_id VARCHAR2(20);\n    BEGIN\n        v_request_id := 'LN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_requests_seq.NEXTVAL;\n        \n        -- Log the step\n        INSERT INTO workflow_log (step_name, step_detail) \n        VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_collector || \n                ', $' || p_amount || ' ' || p_item_type || ', Credit: ' || p_credit_score);\n        \n        -- Create the request\n        INSERT INTO item_requests (request_id, collector, amount, item_type, credit_score, status)\n        VALUES (v_request_id, p_collector, p_amount, LOWER(p_item_type), p_credit_score, 'SUBMITTED');\n        \n        COMMIT;\n        RETURN 'Created item request ' || v_request_id || ' for $' || p_amount || ' ' || p_item_type;\n    END;\n    /\n    </copy>\n    ```\n\n3. Create the second tool function - assess risk and route.\n\n    This is where the business logic lives. The function looks at the declared value, type, and condition grade, then decides where to route it. It logs both the assessment and the routing decision. This is the kind of conditional logic that makes agents useful - different inputs lead to different outcomes.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    CREATE OR REPLACE FUNCTION assess_and_route(\n        p_request_id VARCHAR2\n    ) RETURN VARCHAR2 AS\n        PRAGMA AUTONOMOUS_TRANSACTION;\n        v_amount       NUMBER;\n        v_item_type    VARCHAR2(50);\n        v_credit_score NUMBER;\n        v_risk_level   VARCHAR2(30);\n        v_route_to     VARCHAR2(50);\n        v_result       VARCHAR2(500);\n    BEGIN\n        -- Get request details\n        SELECT amount, item_type, credit_score\n        INTO v_amount, v_item_type, v_credit_score\n        FROM item_requests WHERE request_id = p_request_id;\n        \n        -- Log the assessment start\n        INSERT INTO workflow_log (step_name, step_detail) \n        VALUES ('ASSESS_RISK', 'Assessing ' || p_request_id || ': $' || v_amount || \n                ', Credit: ' || v_credit_score);\n        \n        -- Apply risk rules\n        IF v_credit_score < 550 THEN\n            v_risk_level := 'BLOCKED';\n            v_route_to := 'REJECTED';\n            v_result := 'BLOCKED: Condition grade ' || v_credit_score || ' below minimum 550.';\n        ELSIF v_item_type = 'personal' AND v_amount < 50000 AND v_credit_score >= 700 THEN\n            v_risk_level := 'LOW';\n            v_route_to := 'AUTO_APPROVED';\n            v_result := 'AUTO_APPROVED: Personal item under $50K with credit ' || v_credit_score || '.';\n        ELSIF v_amount < 250000 AND v_item_type != 'authenticating' THEN\n            v_risk_level := 'MEDIUM';\n            v_route_to := 'APPRAISER';\n            v_result := 'Routed to APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires review.';\n        ELSE\n            v_risk_level := 'HIGH';\n            v_route_to := 'SENIOR_APPRAISER';\n            v_result := 'Routed to SENIOR_APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires senior review.';\n        END IF;\n        \n        -- Log the routing decision\n        INSERT INTO workflow_log (step_name, step_detail) \n        VALUES ('ROUTE_DECISION', p_request_id || ' -> ' || v_route_to || ' (Risk: ' || v_risk_level || ')');\n        \n        -- Update the request\n        UPDATE item_requests\n        SET risk_level = v_risk_level, \n            routed_to = v_route_to,\n            status = CASE WHEN v_route_to IN ('AUTO_APPROVED', 'REJECTED') THEN v_route_to ELSE 'PENDING_REVIEW' END\n        WHERE request_id = p_request_id;\n        \n        COMMIT;\n        RETURN v_result;\n    EXCEPTION\n        WHEN NO_DATA_FOUND THEN\n            RETURN 'Request not found: ' || p_request_id;\n    END;\n    /\n    </copy>\n    ```\n\n4. Register the tools.\n\n    We register both functions as tools. Notice how the instructions tell the agent what each tool does and what parameters it needs. The agent will use CREATE_ITEM_TOOL first to create the request, then ASSESS_ROUTE_TOOL to evaluate and route it.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'CREATE_ITEM_TOOL',\n            attributes  => '{\"instruction\": \"Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.\",\n                            \"function\": \"create_item_request\"}',\n            description => 'Creates a item request and returns the request ID'\n        );\n        \n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'ASSESS_ROUTE_TOOL',\n            attributes  => '{\"instruction\": \"Assess risk and route a item request. Parameter: P_REQUEST_ID (the LN-YYMMDD-NNNN format ID from CREATE_ITEM_TOOL). Returns routing decision.\",\n                            \"function\": \"assess_and_route\"}',\n            description => 'Assesses risk level and routes to appropriate reviewer'\n        );\n    END;\n    /\n    </copy>\n    ```\n\n5. Create the agent and team.\n\n    The agent's role tells it to always complete both steps: create then assess. The task reinforces this with specific instructions. This ensures the agent follows a consistent workflow every time - create the request, get an ID back, then use that ID to assess and route.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n            agent_name  => 'ITEM_EXEC_AGENT',\n            attributes  => '{\"profile_name\": \"genai\",\n                            \"role\": \"You are a item processing agent for Big Star Collectibles. Process items by: 1) Creating the request with CREATE_ITEM_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps.\"}',\n            description => 'Agent demonstrating execution loop'\n        );\n        \n        DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n            task_name   => 'ITEM_EXEC_TASK',\n            attributes  => '{\"instruction\": \"Process the item request: 1. Call CREATE_ITEM_TOOL to create the request 2. Call ASSESS_ROUTE_TOOL with the returned request ID to assess and route. Report the final routing decision. User request: {query}\",\n                            \"tools\": [\"CREATE_ITEM_TOOL\", \"ASSESS_ROUTE_TOOL\"]}',\n            description => 'Task for item execution demo'\n        );\n        \n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'ITEM_EXEC_TEAM',\n            attributes  => '{\"agents\": [{\"name\": \"ITEM_EXEC_AGENT\", \"task\": \"ITEM_EXEC_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Team for execution demo'\n        );\n    END;\n    /\n    </copy>\n    ```\n\n## Task 3: Execute a Complete Workflow\n\nNow let's run a request and trace every step.\n\n1. Clear the log and set the team.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ITEM_EXEC_TEAM');\n    </copy>\n    ```\n\n2. Submit a item request that should auto-approve.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Process a $35000 personal item for John Smith with condition grade 780;\n    </copy>\n    ```\n\n3. Immediately check the workflow log.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT \n        step_name,\n        step_detail,\n        TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time\n    FROM workflow_log\n    ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe the execution sequence:**\n- `CREATE_REQUEST`: The item was created\n- `ASSESS_RISK`: Risk was evaluated\n- `ROUTE_DECISION`: `AUTO_APPROVED` (personal under $50K with 780 credit)\n\n## Task 4: Trace the Agent's Tool Calls\n\nThe history views show what the agent did.\n\n1. Query the tool history.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT \n        tool_name,\n        TO_CHAR(start_date, 'HH24:MI:SS.FF3') as started,\n        TO_CHAR(end_date, 'HH24:MI:SS.FF3') as ended,\n        SUBSTR(output, 1, 60) as result\n    FROM USER_AI_AGENT_TOOL_HISTORY\n    ORDER BY start_date DESC\n    FETCH FIRST 10 ROWS ONLY;\n    </copy>\n    ```\n\n2. Check the item request that was created.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT \n        request_id,\n        collector,\n        amount,\n        item_type,\n        credit_score,\n        risk_level,\n        routed_to,\n        status\n    FROM item_requests\n    ORDER BY created_at DESC;\n    </copy>\n    ```\n\nYou can see the actual record the agent created, with the risk assessment and routing.\n\n## Task 5: Trace Different Execution Paths\n\nDifferent item parameters trigger different routing paths.\n\n1. Submit a item that needs appraiser review.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    SELECT AI AGENT Process a $150000 business item for Acme Corp with condition grade 720;\n    </copy>\n    ```\n\n2. Check the workflow log.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe:** Routed to APPRAISER because $150K business item needs review.\n\n3. Submit a item that needs senior review.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    SELECT AI AGENT Process a $450000 authenticating for Jane Doe with condition grade 750;\n    </copy>\n    ```\n\n4. Check the routing.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe:** Routed to SENIOR_APPRAISER because it's a authenticating over $250K.\n\n5. Submit a item that should be blocked.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    TRUNCATE TABLE workflow_log;\n    SELECT AI AGENT Process a $25000 personal item for Bob Wilson with condition grade 520;\n    </copy>\n    ```\n\n6. Check the routing.\n\n    > This command is already in your notebook - just click the play button (\u25b6) to run it.\n\n    ```sql\n    <copy>\n    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;\n    </copy>\n    ```\n\n**Observe:** BLOCKED because condition grade 520 is below minimum 550.\n\n## Task 6: Compare All Items and Their Routes\n\nLet's see all the items and their different routing decisions.\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "text": "%md\n## Watch an Agent Think and Act at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 personal item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.\n\n*\"Small items take as long to process as big ones. We spend hours reviewing applications that should just auto-approve.\"*\n\nMeanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior underwriters waste time on $30K personal items while $500K mortgages wait in queue.\n\n### What You'll Learn\n\nIn this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:\n\n1. Create item submissions with proper tracking IDs\n2. Assess risk based on item type and amount\n3. Route appropriately:\n   - **Under $50K personal/auto** \u2192 Auto-approve (low risk)\n   - **$50K-$250K** \u2192 Underwriter review\n   - **Over $250K or mortgages** \u2192 Senior underwriter\n4. Log every step for audit compliance\n\nEvery agent follows the same pattern: **understand \u2192 plan \u2192 execute tools \u2192 analyze results \u2192 respond**. You'll trace this loop with detailed logging.\n\n**What you'll build:** A item risk assessment workflow with conditional routing and audit trail.\n\n**Estimated Time:** 10 minutes",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -11,47 +11,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Watch an Agent Think and Act at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 personal item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.</p>\n\n<p><em>\"Small items take as long to process as big ones. We spend hours reviewing applications that should just auto-approve.\"</em></p>\n\n<p>Meanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior underwriters waste time on $30K personal items while $500K mortgages wait in queue.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:</p>\n\n<ol>\n<li>Create item submissions with proper tracking IDs</li>\n<li>Assess risk based on item type and amount</li>\n<li>Route appropriately:\n<ul>\n<li><strong>Under $50K personal/auto</strong> \u2192 Auto-approve (low risk)</li>\n<li><strong>$50K-$250K</strong> \u2192 Underwriter review</li>\n<li><strong>Over $250K or mortgages</strong> \u2192 Senior underwriter</li>\n</ul></li>\n<li>Log every step for audit compliance</li>\n</ol>\n\n<p>Every agent follows the same pattern: <strong>understand \u2192 plan \u2192 execute tools \u2192 analyze results \u2192 respond</strong>. You'll trace this loop with detailed logging.</p>\n\n<p><strong>What you'll build:</strong> A item risk assessment workflow with conditional routing and audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT \n    request_id,\n    collector,\n    amount,\n    item_type,\n    credit_score,\n    risk_level,\n    routed_to,\n    status\nFROM item_requests\nORDER BY created_at;",
-      "config": {
-        "colWidth": 12.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Task 7: Understand the Execution Pattern\n\nEvery agent execution follows this pattern:\n\n1. **Receive request** \u2192 The user submits a query\n2. **LLM understands** \u2192 Interprets the intent\n3. **LLM plans** \u2192 Determines which tools and in what order\n4. **Tool executes** \u2192 First tool runs, returns result\n5. **LLM analyzes** \u2192 Interprets the result\n6. **Next tool** \u2192 Repeat steps 4-5 for each tool (conditionally)\n7. **LLM responds** \u2192 Generates final response\n\nQuery to see the complete execution timeline:\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
-      "config": {
-        "colWidth": 12.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
-        "editorHide": true
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT \n    'TOOL: ' || tool_name as step,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as time,\n    SUBSTR(output, 1, 50) as output\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE\nORDER BY start_date;",
-      "config": {
-        "colWidth": 12.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\nCompare with your workflow log:\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "text": "%md\n## Create the Tracking Infrastructure\n\nYou'll create tables that log every step the agent takes. This lets you watch the execution unfold like a movie. This is critical for audit trails in financial services.\n\nThe `workflow_log` table captures each step as it happens. The `item_applications` table holds the actual business data the agent creates.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -61,10 +32,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Tracking Infrastructure</h2>\n\n<p>You'll create tables that log every step the agent takes. This lets you watch the execution unfold like a movie. This is critical for audit trails in financial services.</p>\n\n<p>The <code>workflow_log</code> table captures each step as it happens. The <code>item_applications</code> table holds the actual business data the agent creates.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT \n    'LOG: ' || step_name as step,\n    TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time,\n    step_detail as output\nFROM workflow_log\nWHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE\nORDER BY logged_at;",
+      "text": "%script\nCREATE SEQUENCE item_applications_seq START WITH 1001;\n\nCREATE TABLE workflow_log (\n    log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n    step_name   VARCHAR2(100),\n    step_detail VARCHAR2(500),\n    logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP\n);\n\nCREATE TABLE item_applications (\n    application_id  VARCHAR2(20) PRIMARY KEY,\n    applicant_name  VARCHAR2(100),\n    item_amount     NUMBER(12,2),\n    item_type       VARCHAR2(50),\n    risk_status     VARCHAR2(30) DEFAULT 'NEW',\n    created_at      TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -72,11 +51,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you traced the complete agent execution loop:\n\n* Created an observable agent with logging tools\n* Watched a multi-step workflow execute with risk assessment\n* Traced tool calls through history views\n* Saw how different inputs lead to different routing paths\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Big Star Collectibles, this means small items auto-approve in seconds, complex items get routed appropriately, and compliance has a complete audit trail.\n\n## Learn More\n\n* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - Kay Malcolm, February 2026\n\n## Cleanup (Optional)\n\n> This command is already in your notebook - just click the play button (\u25b6) to run it.",
+      "text": "%md\n## Create the Item Application Tool\n\nThis function creates item submissions. Notice it logs to `workflow_log` before doing its work\u2014this is how you'll trace execution.\n\nThe function generates a unique ID like `ITEM-250108-1001` and inserts the application with status `SUBMITTED`.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -86,10 +64,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Item Application Tool</h2>\n\n<p>This function creates item submissions. Notice it logs to <code>workflow_log</code> before doing its work\u2014this is how you'll trace execution.</p>\n\n<p>The function generates a unique ID like <code>LOAN-250108-1001</code> and inserts the application with status <code>SUBMITTED</code>.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_EXEC_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_EXEC_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ITEM_EXEC_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ASSESS_ROUTE_TOOL', TRUE);\nDROP TABLE item_requests PURGE;\nDROP TABLE workflow_log PURGE;\nDROP SEQUENCE item_requests_seq;\nDROP FUNCTION create_item_request;\nDROP FUNCTION assess_and_route;",
+      "text": "%script\nCREATE OR REPLACE FUNCTION create_item_application(\n    p_applicant  VARCHAR2,\n    p_amount     NUMBER,\n    p_item_type  VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_application_id VARCHAR2(20);\nBEGIN\n    v_application_id := 'ITEM-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_applications_seq.NEXTVAL;\n    \n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('CREATE_APPLICATION', 'Created ' || v_application_id || ' for ' || p_applicant || ', $' || TO_CHAR(p_amount, '999,999'));\n    \n    -- Create the application\n    INSERT INTO item_applications (application_id, applicant_name, item_amount, item_type, risk_status)\n    VALUES (v_application_id, p_applicant, p_amount, p_item_type, 'SUBMITTED');\n    \n    COMMIT;\n    RETURN 'Created item submission ' || v_application_id || ' for $' || TO_CHAR(p_amount, '999,999') || ' (' || p_item_type || ' item)';\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -97,11 +83,596 @@
         "editorSetting": {
           "language": "sql"
         }
+      }
+    },
+    {
+      "text": "%md\n## Create the Risk Assessment Tool\n\nThis function determines what risk level applies based on item amount and type. At Big Star Collectibles:\n\n- Personal items under $50K \u2192 **AUTO_APPROVE** (low risk, standard terms)\n- Personal/Auto items $50K-$250K \u2192 **UNDERWRITER_REVIEW** (moderate risk)\n- Any item $250K+ OR all Mortgage items \u2192 **SENIOR_UNDERWRITER** (high value/complexity)\n\nThe agent will use this result to decide whether to route for human review.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Risk Assessment Tool</h2>\n\n<p>This function determines what risk level applies based on item amount and type. At Big Star Collectibles:</p>\n\n<ul>\n<li>Personal items under $50K \u2192 <strong>AUTO_APPROVE</strong> (low risk, standard terms)</li>\n<li>Personal/Auto items $50K-$250K \u2192 <strong>UNDERWRITER_REVIEW</strong> (moderate risk)</li>\n<li>Any item $250K+ OR all Mortgage items \u2192 <strong>SENIOR_UNDERWRITER</strong> (high value/complexity)</li>\n</ul>\n\n<p>The agent will use this result to decide whether to route for human review.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION assess_item_risk(\n    p_amount    NUMBER,\n    p_item_type VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_result VARCHAR2(200);\nBEGIN\n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('ASSESS_RISK', 'Assessing risk for $' || TO_CHAR(p_amount, '999,999') || ' ' || p_item_type || ' item');\n    \n    -- Apply Big Star Collectibles risk rules\n    IF UPPER(p_item_type) = 'MORTGAGE' THEN\n        v_result := 'SENIOR_UNDERWRITER: All mortgage items require senior review';\n    ELSIF p_amount >= 250000 THEN\n        v_result := 'SENIOR_UNDERWRITER: Items $250K+ require senior underwriter';\n    ELSIF p_amount >= 50000 THEN\n        v_result := 'UNDERWRITER_REVIEW: Items $50K-$250K require underwriter review';\n    ELSE\n        v_result := 'AUTO_APPROVE: Personal items under $50K auto-approved';\n    END IF;\n    \n    COMMIT;\n    RETURN v_result;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Routing Tool\n\nThis function routes item submissions for underwriting review by updating their status. The agent should only call this when the risk assessment returns UNDERWRITER_REVIEW or SENIOR_UNDERWRITER.\n\nThis is where you'll see the agent make decisions. It reads the risk assessment and decides whether to call this tool.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Routing Tool</h2>\n\n<p>This function routes item submissions for underwriting review by updating their status. The agent should only call this when the risk assessment returns UNDERWRITER_REVIEW or SENIOR_UNDERWRITER.</p>\n\n<p>This is where you'll see the agent make decisions. It reads the risk assessment and decides whether to call this tool.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION route_for_underwriting(\n    p_application_id  VARCHAR2,\n    p_review_level    VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('ROUTE_UNDERWRITING', 'Routing ' || p_application_id || ' for ' || p_review_level);\n    \n    -- Update status\n    UPDATE item_applications \n    SET risk_status = 'SUBMITTED_' || p_review_level\n    WHERE application_id = p_application_id;\n    \n    COMMIT;\n    RETURN 'Routed ' || p_application_id || ' for ' || p_review_level || ' review';\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Register the Tools with the Agent Framework\n\nEach tool has an `instruction` that tells the agent when and how to use it. Notice the instruction for ROUTE_UNDERWRITING_TOOL says \"Only call this if ASSESS_RISK_TOOL returned UNDERWRITER_REVIEW or SENIOR_UNDERWRITER.\"\n\nThis is how you guide agent behavior: through clear instructions in tool definitions.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Tools with the Agent Framework</h2>\n\n<p>Each tool has an <code>instruction</code> that tells the agent when and how to use it. Notice the instruction for ROUTE_UNDERWRITING_TOOL says \"Only call this if ASSESS_RISK_TOOL returned UNDERWRITER_REVIEW or SENIOR_UNDERWRITER.\"</p>\n\n<p>This is how you guide agent behavior: through clear instructions in tool definitions.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CREATE_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Create a new item submission at Big Star Collectibles. Parameters: P_APPLICANT (applicant name), P_AMOUNT (item amount as number), P_ITEM_TYPE (personal, auto, mortgage, or business). Returns the application ID.\",\n                        \"function\": \"create_item_application\"}',\n        description => 'Creates a item submission and returns the application ID'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ASSESS_ITEM_RISK_TOOL',\n        attributes  => '{\"instruction\": \"Assess risk level for a item submission. Parameters: P_AMOUNT (item amount as number), P_ITEM_TYPE (personal, auto, mortgage, or business). Returns AUTO_APPROVE, UNDERWRITER_REVIEW, or SENIOR_UNDERWRITER.\",\n                        \"function\": \"assess_item_risk\"}',\n        description => 'Returns the required review level based on amount and item type'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ROUTE_AUTHENTICATION_TOOL',\n        attributes  => '{\"instruction\": \"Route a item submission for underwriting review. Only call this if ASSESS_ITEM_RISK_TOOL returned UNDERWRITER_REVIEW or SENIOR_UNDERWRITER. Do NOT call this for AUTO_APPROVE. Parameters: P_APPLICATION_ID (the ITEM-YYMMDD-NNNN format ID), P_REVIEW_LEVEL (UNDERWRITER or SENIOR_UNDERWRITER).\",\n                        \"function\": \"route_for_underwriting\"}',\n        description => 'Routes the item submission to the appropriate underwriter'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Agent and Team\n\nThe agent's role tells it the sequence: create \u2192 assess risk \u2192 route (if needed). The task instruction reinforces this and specifically says NOT to route if risk assessment says AUTO_APPROVE.\n\nThis combination of role + task instruction shapes how the agent plans its work at Big Star Collectibles.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Agent and Team</h2>\n\n<p>The agent's role tells it the sequence: create \u2192 assess risk \u2192 route (if needed). The task instruction reinforces this and specifically says NOT to route if risk assessment says AUTO_APPROVE.</p>\n\n<p>This combination of role + task instruction shapes how the agent plans its work at Big Star Collectibles.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ITEM_EXEC_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item processing agent for Big Star Collectibles. Process item submissions by: 1) Creating the application, 2) Assessing the risk, 3) Only routing for underwriting if risk assessment requires it. If assessment says AUTO_APPROVE, do not route.\"}',\n        description => 'Agent demonstrating item processing execution loop'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_EXEC_TASK',\n        attributes  => '{\"instruction\": \"Process the item submission: 1. Call CREATE_ITEM_TOOL to create the application 2. Call ASSESS_ITEM_RISK_TOOL to determine risk level 3. If result contains UNDERWRITER_REVIEW or SENIOR_UNDERWRITER, call ROUTE_AUTHENTICATION_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_AUTHENTICATION_TOOL - just confirm the item is auto-approved. User request: {query}\",\n                        \"tools\": [\"CREATE_ITEM_TOOL\", \"ASSESS_ITEM_RISK_TOOL\", \"ROUTE_AUTHENTICATION_TOOL\"]}',\n        description => 'Task for item execution demo'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ITEM_EXEC_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"ITEM_EXEC_AGENT\", \"task\": \"ITEM_EXEC_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for item execution demo'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Clear the Log and Activate the Team\n\nBefore running a test, clear the workflow log so you see only the steps from this execution. Then set the team so your SELECT AI AGENT commands go to this agent.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Clear the Log and Activate the Team</h2>\n\n<p>Before running a test, clear the workflow log so you see only the steps from this execution. Then set the team so your SELECT AI AGENT commands go to this agent.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ITEM_EXEC_TEAM');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a $75,000 Auto Item (Underwriter Review Path)\n\nThis $75,000 auto item should trigger the full workflow:\n1. Create the item submission\n2. Assess risk \u2192 returns UNDERWRITER_REVIEW (between $50K and $250K)\n3. Route for underwriter review\n\nWatch the agent's response\u2014it should mention creating the application and routing it for underwriter review.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a $75,000 Auto Item (Underwriter Review Path)</h2>\n\n<p>This $75,000 auto item should trigger the full workflow:</p>\n<ol>\n<li>Create the item submission</li>\n<li>Assess risk \u2192 returns UNDERWRITER_REVIEW (between $50K and $250K)</li>\n<li>Route for underwriter review</li>\n</ol>\n\n<p>Watch the agent's response\u2014it should mention creating the application and routing it for underwriter review.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $75000 auto item submission for John Smith;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Examine the Workflow Log\n\nNow look at exactly what happened, step by step. You should see three entries:\n\n1. **CREATE_APPLICATION**: The item submission was created with a unique ID\n2. **ASSESS_RISK**: Risk was evaluated ($75K auto item requires underwriter)\n3. **ROUTE_UNDERWRITING**: It was routed for underwriter review\n\nThis is the execution trace, proof of what the agent actually did.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Examine the Workflow Log</h2>\n\n<p>Now look at exactly what happened, step by step. You should see three entries:</p>\n\n<ol>\n<li><strong>CREATE_APPLICATION</strong>: The item submission was created with a unique ID</li>\n<li><strong>ASSESS_RISK</strong>: Risk was evaluated ($75K auto item requires underwriter)</li>\n<li><strong>ROUTE_UNDERWRITING</strong>: It was routed for underwriter review</li>\n</ol>\n\n<p>This is the execution trace, proof of what the agent actually did.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    step_name,\n    step_detail,\n    TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time\nFROM workflow_log\nORDER BY log_id;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Check the Tool Execution History\n\nOracle also maintains its own history of tool calls. This shows you the inputs and outputs of each tool.\n\nYou should see CREATE_ITEM_TOOL, ASSESS_ITEM_RISK_TOOL, and ROUTE_AUTHENTICATION_TOOL in sequence.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Tool Execution History</h2>\n\n<p>Oracle also maintains its own history of tool calls. This shows you the inputs and outputs of each tool.</p>\n\n<p>You should see CREATE_LOAN_TOOL, ASSESS_RISK_TOOL, and ROUTE_UNDERWRITING_TOOL in sequence.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as started,\n    TO_CHAR(end_date, 'HH24:MI:SS.FF3') as ended,\n    SUBSTR(output, 1, 60) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify the Item Application Record\n\nLook at the actual database record. You should see John Smith's $75,000 auto item with status **SUBMITTED_UNDERWRITER**.\n\nThis proves the agent didn't just say it routed the item\u2014it actually updated the database.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Item Application Record</h2>\n\n<p>Look at the actual database record. You should see John Smith's $75,000 auto item with status <strong>SUBMITTED_UNDERWRITER</strong>.</p>\n\n<p>This proves the agent didn't just say it routed the item\u2014it actually updated the database.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    application_id,\n    applicant_name,\n    TO_CHAR(item_amount, '$999,999') as item_amount,\n    item_type,\n    risk_status,\n    TO_CHAR(created_at, 'HH24:MI:SS') as created\nFROM item_applications\nORDER BY created_at DESC;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a $25,000 Personal Item (Auto-Approve Path)\n\nNow try a small personal item that should be auto-approved. Clear the log first so you see only this execution.\n\nWith $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call ROUTE_UNDERWRITING_TOOL.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a $25,000 Personal Item (Auto-Approve Path)</h2>\n\n<p>Now try a small personal item that should be auto-approved. Clear the log first so you see only this execution.</p>\n\n<p>With $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call ROUTE_UNDERWRITING_TOOL.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $25000 personal item submission for Jane Doe;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Check the Workflow Log for Auto-Approve\n\nYou should see only TWO steps this time:\n\n1. **CREATE_APPLICATION**: The item submission was created\n2. **ASSESS_RISK**: Risk assessment returned AUTO_APPROVE\n\nNo ROUTE_UNDERWRITING step! The agent correctly decided not to route because the risk assessment said AUTO_APPROVE. This is the agent making a decision based on data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Workflow Log for Auto-Approve</h2>\n\n<p>You should see only TWO steps this time:</p>\n\n<ol>\n<li><strong>CREATE_APPLICATION</strong>: The item submission was created</li>\n<li><strong>ASSESS_RISK</strong>: Risk assessment returned AUTO_APPROVE</li>\n</ol>\n\n<p>No ROUTE_UNDERWRITING step! The agent correctly decided not to route because the risk assessment said AUTO_APPROVE. This is the agent making a decision based on data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT step_name, step_detail FROM workflow_log ORDER BY log_id;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify the Auto-Approved Item\n\nJane's item should have status **SUBMITTED** (not SUBMITTED_UNDERWRITER), because it was auto-approved and didn't need routing.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Auto-Approved Item</h2>\n\n<p>Jane's item should have status <strong>SUBMITTED</strong> (not SUBMITTED_UNDERWRITER), because it was auto-approved and didn't need routing.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT application_id, applicant_name, TO_CHAR(item_amount, '$999,999') as amount, risk_status \nFROM item_applications \nWHERE applicant_name = 'Jane Doe';",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a $350,000 Mortgage (Senior Underwriter Path)\n\nOne more test: a mortgage application that requires senior underwriter review. Mortgages at Big Star Collectibles always require senior review regardless of amount.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a $350,000 Mortgage (Senior Underwriter Path)</h2>\n\n<p>One more test: a mortgage application that requires senior underwriter review. Mortgages at Big Star Collectibles always require senior review regardless of amount.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $350000 mortgage item submission for Bob Wilson;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Check the Senior Underwriter Path\n\nYou should see all THREE steps again, but this time ROUTE_UNDERWRITING shows SENIOR_UNDERWRITER instead of UNDERWRITER.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Senior Underwriter Path</h2>\n\n<p>You should see all THREE steps again, but this time ROUTE_UNDERWRITING shows SENIOR_UNDERWRITER instead of UNDERWRITER.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT step_name, step_detail FROM workflow_log ORDER BY log_id;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify Bob's Mortgage Status\n\nBob's mortgage should have status **SUBMITTED_SENIOR_UNDERWRITER**. The agent correctly routed it to the higher review level.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify Bob's Mortgage Status</h2>\n\n<p>Bob's mortgage should have status <strong>SUBMITTED_SENIOR_UNDERWRITER</strong>. The agent correctly routed it to the higher review level.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT application_id, applicant_name, TO_CHAR(item_amount, '$999,999') as amount, item_type, risk_status \nFROM item_applications \nWHERE applicant_name = 'Bob Wilson';",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Compare All Three Execution Paths\n\nLet's see all item submissions side by side. Notice how different amounts and item types led to different statuses:\n\n| Amount | Type | Status | Why |\n|--------|------|--------|-----|\n| $25,000 | Personal | SUBMITTED | Auto-approved, under $50K |\n| $75,000 | Auto | SUBMITTED_UNDERWRITER | Between $50K-$250K |\n| $350,000 | Mortgage | SUBMITTED_SENIOR_UNDERWRITER | Mortgages require senior review |\n\nSame agent, same tools, but different execution paths based on the data. That is exactly how Big Star Collectibles manages item risk.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Compare All Three Execution Paths</h2>\n\n<p>Let's see all item submissions side by side. Notice how different amounts and item types led to different statuses:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Why</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">Personal</td><td style=\"padding: 8px;\">SUBMITTED</td><td style=\"padding: 8px;\">Auto-approved, under $50K</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">Auto</td><td style=\"padding: 8px;\">SUBMITTED_UNDERWRITER</td><td style=\"padding: 8px;\">Between $50K-$250K</td></tr>\n<tr><td style=\"padding: 8px;\">$350,000</td><td style=\"padding: 8px;\">Mortgage</td><td style=\"padding: 8px;\">SUBMITTED_SENIOR_UNDERWRITER</td><td style=\"padding: 8px;\">Mortgages require senior review</td></tr>\n</table>\n\n<p>Same agent, same tools, but different execution paths based on the data. That is exactly how Big Star Collectibles manages item risk.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    application_id,\n    applicant_name,\n    TO_CHAR(item_amount, '$999,999') as item_amount,\n    item_type,\n    risk_status,\n    CASE \n        WHEN item_amount < 50000 AND item_type != 'mortgage' THEN 'Auto-approved'\n        WHEN item_type = 'mortgage' THEN 'Senior underwriter (mortgage)'\n        WHEN item_amount >= 250000 THEN 'Senior underwriter (high value)'\n        ELSE 'Standard underwriter review'\n    END as routing_reason\nFROM item_applications\nORDER BY created_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## The Execution Pattern\n\nEvery agent execution follows this pattern:\n\n1. **Receive request** \u2192 Inventory specialist submits application\n2. **LLM understands** \u2192 Interprets applicant, amount, item type\n3. **LLM plans** \u2192 Determines which tools, in what order\n4. **Tool executes** \u2192 First tool runs, returns result\n5. **LLM analyzes** \u2192 Interprets the result, decides next step\n6. **Repeat** \u2192 More tools if needed (conditionally)\n7. **LLM responds** \u2192 Generates final response\n\nThe key insight: **step 5 is where decisions happen**. The agent reads the risk assessment and decides whether to route. This is what makes agents intelligent. They adapt based on data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Execution Pattern</h2>\n\n<p>Every agent execution follows this pattern:</p>\n\n<ol>\n<li><strong>Receive request</strong> \u2192 Inventory specialist submits application</li>\n<li><strong>LLM understands</strong> \u2192 Interprets applicant, amount, item type</li>\n<li><strong>LLM plans</strong> \u2192 Determines which tools, in what order</li>\n<li><strong>Tool executes</strong> \u2192 First tool runs, returns result</li>\n<li><strong>LLM analyzes</strong> \u2192 Interprets the result, decides next step</li>\n<li><strong>Repeat</strong> \u2192 More tools if needed (conditionally)</li>\n<li><strong>LLM responds</strong> \u2192 Generates final response</li>\n</ol>\n\n<p>The key insight: <strong>step 5 is where decisions happen</strong>. The agent reads the risk assessment and decides whether to route. This is what makes agents intelligent. They adapt based on data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## What You Learned\n\nIn this lab, you traced the complete agent execution loop at Big Star Collectibles:\n\n- **Logging**: Added workflow_log entries to see each step\n- **Conditional execution**: Agent called routing tool only when risk assessment required it\n- **Three paths**: Auto-approve, underwriter review, senior underwriter review\n- **Verification**: Checked both logs and actual database records\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you traced the complete agent execution loop at Big Star Collectibles:</p>\n\n<ul>\n<li><strong>Logging</strong>: Added workflow_log entries to see each step</li>\n<li><strong>Conditional execution</strong>: Agent called routing tool only when risk assessment required it</li>\n<li><strong>Three paths</strong>: Auto-approve, underwriter review, senior underwriter review</li>\n<li><strong>Verification</strong>: Checked both logs and actual database records</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_EXEC_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_EXEC_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ITEM_EXEC_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ASSESS_ITEM_RISK_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_AUTHENTICATION_TOOL', TRUE);\nDROP TABLE item_applications PURGE;\nDROP TABLE workflow_log PURGE;\nDROP SEQUENCE item_applications_seq;\nDROP FUNCTION create_item_application;\nDROP FUNCTION assess_item_risk;\nDROP FUNCTION route_for_underwriting;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
-  "name": "Lab 4 - How Agents Execute",
+  "name": "Lab 4 - How Agents Execute (Big Star)",
   "id": "lab4-how-agents-execute",
   "noteParams": {},
   "noteForms": {},

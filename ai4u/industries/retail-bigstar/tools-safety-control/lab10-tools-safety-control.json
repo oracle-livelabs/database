@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# Tools, Safety, and Human Control\n\n## Introduction\n\nIn this capstone lab, you'll build a complete agent system with tools that act, rules that constrain, and human oversight that keeps people in control.\n\n### The Business Problem\n\nBig Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties - it's just policy that people are \"supposed to follow.\"\n\n> *\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"*\n>\n> Rachel, Compliance Director\n\nThe company needs agents that:\n- **Enforce role separation**  -  Inventory specialists can submit but NOT approve\n- **Automate routine decisions**  -  Low-risk items shouldn't need human review\n- **Require human judgment**  -  High-value or complex items need appraisers\n- **Log everything**  -  Complete audit trail for compliance\n\n### What You'll Learn\n\nIn this capstone lab, you'll build a two-agent item appraisal system:\n\n| Agent | Role | Can Do | Cannot Do |\n|-------|------|--------|-----------|\n| **INVENTORY_AGENT** | Inventory Specialists | Submit submissions | Approve/Deny |\n| **APPRAISAL_AGENT** | Appraisers | Approve/Deny | Submit submissions |\n\nThe separation isn't just policy - it's architecture. INVENTORY_AGENT literally doesn't have approval tools.\n\nYou'll also implement risk-based routing:\n- **Credit < 550** \u2192 BLOCKED (cannot proceed)\n- **Personal < $50K** \u2192 AUTO_APPROVE\n- **$50K-$250K** \u2192 Appraiser review required\n- **$250K+ or rare collectible** \u2192 Senior appraiser required\n\n**What you'll build:** A compliant two-agent item appraisal system with separation of duties and full audit trail.\n\nEstimated Time: 20 minutes\n\n### Story Sync\n**Story Sync:** Chapters 3.3 & 4.2 \u2013 see the corresponding narrative beat for context.\n\n### Objectives\n\n* Create PL/SQL functions as agent tools\n* Build a safety rules system with JSON configuration\n* Create separate agents for different roles\n* See how agents respect rules and route work appropriately\n* Query the audit trail to see all actions\n\n### Prerequisites\n\nFor this workshop, we provide the environment. You'll need:\n\n* Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts\n\n## Task 1: Import the Lab Notebook\n\nBefore you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.\n\n1. From the Oracle Machine Learning home page, click **Notebooks**.\n\n2. Click **Import** to expand the Import drop down.\n\n3. Select **Git**.\n\n4. Paste the following GitHub URL leaving the credential field blank:\n\n    ```text\n    <copy>\n    https://github.com/davidastart/database/blob/main/ai4u/tools-safety-control/lab10-tools-safety-control.json\n    </copy>\n    ```\n\n5. Click **Ok**.\n\nYou should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.\n\n## Task 2: Create the Database Tables\n\nFirst, you'll create three tables:\n\n1. **item_collectors**: Sample collectors who will apply for items\n2. **item_submissions**: Where item submissions are stored with their status\n3. **appraisal_rules**: JSON-configured business rules the agent will follow\n\nNotice the constraints on `item_submissions`  -  these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.",
+      "text": "%md\n## Tools, Safety, and Human Control at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties\u2014it's just policy that people are \"supposed to follow.\"\n\n*\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"*\n\nThe company needs agents that:\n- **Enforce role separation** \u2014 Item officers can submit but NOT approve\n- **Automate routine decisions** \u2014 Low-risk items shouldn't need human review\n- **Require human judgment** \u2014 High-value or complex items need underwriters\n- **Log everything** \u2014 Complete audit trail for compliance\n\n### What You'll Learn\n\nIn this capstone lab, you'll build a two-agent item underwriting system:\n\n| Agent | Role | Can Do | Cannot Do |\n|-------|------|--------|-----------|\n| **ITEM_AGENT** | Item Officers | Submit applications | Approve/Deny |\n| **UNDERWRITING_AGENT** | Underwriters | Approve/Deny | Submit applications |\n\nThe separation isn't just policy\u2014it's architecture. ITEM_AGENT literally doesn't have approval tools.\n\nYou'll also implement risk-based routing:\n- **Credit < 550** \u2192 BLOCKED (cannot proceed)\n- **Personal < $50K** \u2192 AUTO_APPROVE\n- **$50K-$250K** \u2192 Underwriter review required\n- **$250K+ or Mortgage** \u2192 Senior underwriter required\n\n**What you'll build:** A compliant two-agent item underwriting system with separation of duties and full audit trail.\n\n**Estimated Time:** 20 minutes",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -11,10 +11,39 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Tools, Safety, and Human Control at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties\u2014it's just policy that people are \"supposed to follow.\"</p>\n\n<p><em>\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"</em></p>\n\n<p>The company needs agents that:</p>\n<ul>\n<li><strong>Enforce role separation</strong> \u2014 Item officers can submit but NOT approve</li>\n<li><strong>Automate routine decisions</strong> \u2014 Low-risk items shouldn't need human review</li>\n<li><strong>Require human judgment</strong> \u2014 High-value or complex items need underwriters</li>\n<li><strong>Log everything</strong> \u2014 Complete audit trail for compliance</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this capstone lab, you'll build a two-agent item underwriting system:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Agent</th><th style=\"padding: 8px;\">Role</th><th style=\"padding: 8px;\">Can Do</th><th style=\"padding: 8px;\">Cannot Do</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>ITEM_AGENT</strong></td><td style=\"padding: 8px;\">Item Officers</td><td style=\"padding: 8px;\">Submit applications</td><td style=\"padding: 8px;\">Approve/Deny</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>UNDERWRITING_AGENT</strong></td><td style=\"padding: 8px;\">Underwriters</td><td style=\"padding: 8px;\">Approve/Deny</td><td style=\"padding: 8px;\">Submit applications</td></tr>\n</table>\n\n<p>The separation isn't just policy\u2014it's architecture. ITEM_AGENT literally doesn't have approval tools.</p>\n\n<p>You'll also implement risk-based routing:</p>\n<ul>\n<li><strong>Credit < 550</strong> \u2192 BLOCKED (cannot proceed)</li>\n<li><strong>Personal < $50K</strong> \u2192 AUTO_APPROVE</li>\n<li><strong>$50K-$250K</strong> \u2192 Underwriter review required</li>\n<li><strong>$250K+ or Mortgage</strong> \u2192 Senior underwriter required</li>\n</ul>\n\n<p><strong>What you'll build:</strong> A compliant two-agent item underwriting system with separation of duties and full audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 20 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Sequence for submission IDs\nCREATE SEQUENCE item_app_seq START WITH 1001;\n\n-- Collectors table\nCREATE TABLE item_collectors (\n    collector_id    VARCHAR2(20) PRIMARY KEY,\n    name            VARCHAR2(100) NOT NULL,\n    email           VARCHAR2(100) NOT NULL,\n    credit_score    NUMBER(3) NOT NULL,\n    annual_income   NUMBER(12,2),\n    employment_years NUMBER(2)\n);\n\n-- Item submissions\nCREATE TABLE item_submissions (\n    submission_id  VARCHAR2(20) PRIMARY KEY,\n    collector_id    VARCHAR2(20) NOT NULL REFERENCES item_collectors(collector_id),\n    declared_value     NUMBER(12,2) NOT NULL \n                    CONSTRAINT chk_positive_amount CHECK (declared_value > 0),\n    item_type       VARCHAR2(50) NOT NULL\n                    CONSTRAINT chk_item_type CHECK (item_type IN ('personal','auto','authenticating','business')),\n    item_purpose    VARCHAR2(500),\n    risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'\n                    CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),\n    submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,\n    decided_by      VARCHAR2(100),\n    decided_at      TIMESTAMP\n);\n\n-- Appraisal rules\nCREATE TABLE appraisal_rules (\n    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    rule_name    VARCHAR2(200) NOT NULL,\n    rule_type    VARCHAR2(20) NOT NULL \n                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_REVIEW','AUTO_APPROVE')),\n    rule_config  JSON NOT NULL,\n    priority     NUMBER DEFAULT 100,\n    is_active    NUMBER(1) DEFAULT 1\n);\n\n-- Insert sample collectors with varying credit profiles\nINSERT INTO item_collectors VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);\nINSERT INTO item_collectors VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);\nINSERT INTO item_collectors VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);\nINSERT INTO item_collectors VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);\n\nCOMMIT;",
+      "text": "%md\n## Create the Database Tables\n\nFirst, you'll create three tables:\n\n1. **item_applicants**: Sample applicants who will apply for items\n2. **item_applications**: Where item submissions are stored with their status\n3. **underwriting_rules**: JSON-configured business rules the agent will follow\n\nNotice the constraints on `item_applications` \u2014 these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Database Tables</h2>\n\n<p>First, you'll create three tables:</p>\n\n<ol>\n<li><strong>item_applicants</strong>: Sample applicants who will apply for items</li>\n<li><strong>item_applications</strong>: Where item submissions are stored with their status</li>\n<li><strong>underwriting_rules</strong>: JSON-configured business rules the agent will follow</li>\n</ol>\n\n<p>Notice the constraints on <code>item_applications</code> \u2014 these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Sequence for application IDs\nCREATE SEQUENCE item_app_seq START WITH 1001;\n\n-- Applicants table\nCREATE TABLE item_applicants (\n    applicant_id    VARCHAR2(20) PRIMARY KEY,\n    name            VARCHAR2(100) NOT NULL,\n    email           VARCHAR2(100) NOT NULL,\n    credit_score    NUMBER(3) NOT NULL,\n    annual_income   NUMBER(12,2),\n    employment_years NUMBER(2)\n);\n\n-- Item applications\nCREATE TABLE item_applications (\n    application_id  VARCHAR2(20) PRIMARY KEY,\n    applicant_id    VARCHAR2(20) NOT NULL REFERENCES item_applicants(applicant_id),\n    item_amount     NUMBER(12,2) NOT NULL \n                    CONSTRAINT chk_positive_amount CHECK (item_amount > 0),\n    item_type       VARCHAR2(50) NOT NULL\n                    CONSTRAINT chk_item_type CHECK (item_type IN ('personal','auto','mortgage','business')),\n    item_purpose    VARCHAR2(500),\n    risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'\n                    CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),\n    submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,\n    decided_by      VARCHAR2(100),\n    decided_at      TIMESTAMP\n);\n\n-- Underwriting rules\nCREATE TABLE underwriting_rules (\n    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    rule_name    VARCHAR2(200) NOT NULL,\n    rule_type    VARCHAR2(20) NOT NULL \n                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_REVIEW','AUTO_APPROVE')),\n    rule_config  JSON NOT NULL,\n    priority     NUMBER DEFAULT 100,\n    is_active    NUMBER(1) DEFAULT 1\n);\n\n-- Insert sample applicants with varying credit profiles\nINSERT INTO item_applicants VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);\nINSERT INTO item_applicants VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);\nINSERT INTO item_applicants VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);\nINSERT INTO item_applicants VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);\n\nCOMMIT;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -22,11 +51,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 3: Define Big Star Collectibles' Appraisal Rules\n\nNow you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.\n\nThe rules are evaluated in priority order (lowest number first):\n1. **Block** submissions with condition grade below 550  -  too high risk for automated processing\n2. **Require review** for items $50,000 or more  -  significant exposure needs human judgment\n3. **Require review** for any authenticating  -  complex product requires appraiser\n4. **Require review** for condition grades 550-650  -  borderline creditworthiness\n5. **Auto-approve** everything else  -  low-risk personal/auto items with good credit",
+      "text": "%md\n## Define Big Star Collectibles' Underwriting Rules\n\nNow you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.\n\nThe rules are evaluated in priority order (lowest number first):\n1. **Block** applications with credit score below 550 \u2014 too high risk for automated processing\n2. **Require review** for items $50,000 or more \u2014 significant exposure needs human judgment\n3. **Require review** for any mortgage \u2014 complex product requires underwriter\n4. **Require review** for credit scores 550-650 \u2014 borderline creditworthiness\n5. **Auto-approve** everything else \u2014 low-risk personal/auto items with good credit\n\nThis priority order matters! A $30K personal item with a 600 credit score hits rule 4 before rule 5.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -36,10 +64,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Define Big Star Collectibles' Underwriting Rules</h2>\n\n<p>Now you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.</p>\n\n<p>The rules are evaluated in priority order (lowest number first):</p>\n<ol>\n<li><strong>Block</strong> applications with credit score below 550 \u2014 too high risk for automated processing</li>\n<li><strong>Require review</strong> for items $50,000 or more \u2014 significant exposure needs human judgment</li>\n<li><strong>Require review</strong> for any mortgage \u2014 complex product requires underwriter</li>\n<li><strong>Require review</strong> for credit scores 550-650 \u2014 borderline creditworthiness</li>\n<li><strong>Auto-approve</strong> everything else \u2014 low-risk personal/auto items with good credit</li>\n</ol>\n\n<p>This priority order matters! A $30K personal item with a 600 credit score hits rule 4 before rule 5.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Block very low condition grades (<550)\nINSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Block High Risk - Low Credit',\n    'BLOCK',\n    '{\"field\": \"credit_score\", \"operator\": \"lt\", \"value\": 550, \"message\": \"Condition grade below 550 does not meet Big Star Collectibles minimum requirements. Submission cannot be processed.\"}',\n    10\n);\n\n-- Require review for large items (>=$50,000)\nINSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Large Item Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"declared_value\", \"operator\": \"gte\", \"value\": 50000, \"message\": \"Items $50,000 and above require appraiser review.\"}',\n    20\n);\n\n-- Require review for all authenticatings (any amount)\nINSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'rare collectible Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"item_type\", \"operator\": \"eq\", \"value\": \"authenticating\", \"message\": \"All authenticating submissions require appraiser review.\"}',\n    30\n);\n\n-- Require review for borderline credit (550-650)\nINSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Borderline Credit Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"credit_score\", \"operator\": \"between\", \"low\": 550, \"high\": 650, \"message\": \"Condition grades 550-650 require appraiser review.\"}',\n    40\n);\n\n-- Auto-approve everything else (good credit, small items, non-authenticating)\nINSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Auto-approve Standard',\n    'AUTO_APPROVE',\n    '{\"field\": \"declared_value\", \"operator\": \"lt\", \"value\": 50000, \"message\": \"Personal and auto items under $50,000 with good credit are auto-approved.\"}',\n    100\n);\n\nCOMMIT;",
+      "text": "%script\n-- Block very low credit scores (<550)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Block High Risk - Low Credit',\n    'BLOCK',\n    '{\"field\": \"credit_score\", \"operator\": \"lt\", \"value\": 550, \"message\": \"Credit score below 550 does not meet Big Star Collectibles minimum requirements. Application cannot be processed.\"}',\n    10\n);\n\n-- Require review for large items (>=$50,000)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Large Item Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"item_amount\", \"operator\": \"gte\", \"value\": 50000, \"message\": \"Items $50,000 and above require underwriter review.\"}',\n    20\n);\n\n-- Require review for all mortgages (any amount)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Mortgage Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"item_type\", \"operator\": \"eq\", \"value\": \"mortgage\", \"message\": \"All mortgage applications require underwriter review.\"}',\n    30\n);\n\n-- Require review for borderline credit (550-650)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Borderline Credit Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"credit_score\", \"operator\": \"between\", \"low\": 550, \"high\": 650, \"message\": \"Credit scores 550-650 require underwriter review.\"}',\n    40\n);\n\n-- Auto-approve everything else (good credit, small items, non-mortgage)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Auto-approve Standard',\n    'AUTO_APPROVE',\n    '{\"field\": \"item_amount\", \"operator\": \"lt\", \"value\": 50000, \"message\": \"Personal and auto items under $50,000 with good credit are auto-approved.\"}',\n    100\n);\n\nCOMMIT;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -47,11 +83,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 4: Create the Rules Checker Function\n\nThis function is the brain of Big Star Collectibles' automated appraisal. It evaluates each submission against the rules in priority order and returns the first matching rule.",
+      "text": "%md\n## Create the Rules Checker Function\n\nThis function is the brain of Big Star Collectibles' automated underwriting. It evaluates each application against the rules in priority order and returns the first matching rule.\n\nThe function returns a JSON object telling the caller:\n- **action**: What to do: BLOCK, REQUIRE_REVIEW, or AUTO_APPROVE\n- **rule**: Which rule matched\n- **message**: Human-readable explanation",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -61,10 +96,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Rules Checker Function</h2>\n\n<p>This function is the brain of Big Star Collectibles' automated underwriting. It evaluates each application against the rules in priority order and returns the first matching rule.</p>\n\n<p>The function returns a JSON object telling the caller:</p>\n<ul>\n<li><strong>action</strong>: What to do: BLOCK, REQUIRE_REVIEW, or AUTO_APPROVE</li>\n<li><strong>rule</strong>: Which rule matched</li>\n<li><strong>message</strong>: Human-readable explanation</li>\n</ul>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION check_appraisal_rules(\n    p_declared_value   NUMBER,\n    p_item_type     VARCHAR2,\n    p_credit_score  NUMBER\n) RETURN VARCHAR2 AS\nBEGIN\n    FOR rec IN (\n        SELECT rule_name, rule_type, rule_config\n        FROM appraisal_rules\n        WHERE is_active = 1\n        ORDER BY priority\n    ) LOOP\n        DECLARE\n            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');\n            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');\n            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');\n            v_low      VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.low');\n            v_high     VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.high');\n            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');\n            v_match    BOOLEAN := FALSE;\n        BEGIN\n            IF v_field = 'declared_value' THEN\n                IF v_operator = 'gte' AND p_declared_value >= TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'lt' AND p_declared_value < TO_NUMBER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'item_type' THEN\n                IF v_operator = 'eq' AND LOWER(p_item_type) = LOWER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'credit_score' THEN\n                IF v_operator = 'lt' AND p_credit_score < TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'between' AND p_credit_score >= TO_NUMBER(v_low) AND p_credit_score <= TO_NUMBER(v_high) THEN v_match := TRUE;\n                END IF;\n            END IF;\n            \n            IF v_match THEN\n                RETURN '{\"action\": \"' || rec.rule_type || '\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n            END IF;\n        END;\n    END LOOP;\n    \n    RETURN '{\"action\": \"AUTO_APPROVE\", \"message\": \"Submission meets all automated approval criteria.\"}';\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION check_underwriting_rules(\n    p_item_amount   NUMBER,\n    p_item_type     VARCHAR2,\n    p_credit_score  NUMBER\n) RETURN VARCHAR2 AS\nBEGIN\n    FOR rec IN (\n        SELECT rule_name, rule_type, rule_config\n        FROM underwriting_rules\n        WHERE is_active = 1\n        ORDER BY priority\n    ) LOOP\n        DECLARE\n            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');\n            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');\n            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');\n            v_low      VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.low');\n            v_high     VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.high');\n            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');\n            v_match    BOOLEAN := FALSE;\n        BEGIN\n            IF v_field = 'item_amount' THEN\n                IF v_operator = 'gte' AND p_item_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'lt' AND p_item_amount < TO_NUMBER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'item_type' THEN\n                IF v_operator = 'eq' AND LOWER(p_item_type) = LOWER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'credit_score' THEN\n                IF v_operator = 'lt' AND p_credit_score < TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'between' AND p_credit_score >= TO_NUMBER(v_low) AND p_credit_score <= TO_NUMBER(v_high) THEN v_match := TRUE;\n                END IF;\n            END IF;\n            \n            IF v_match THEN\n                RETURN '{\"action\": \"' || rec.rule_type || '\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n            END IF;\n        END;\n    END LOOP;\n    \n    RETURN '{\"action\": \"AUTO_APPROVE\", \"message\": \"Application meets all automated approval criteria.\"}';\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -72,11 +115,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 5: Test Big Star Collectibles' Rules Engine\n\nBefore building the agents, let's verify the rules work correctly.\n\n| Test | Expected Result | Why |\n|------|-----------------|-----|\n| $25K personal, 780 credit | AUTO_APPROVE | Good credit, small item |\n| $35K auto, 695 credit | AUTO_APPROVE | Decent credit, under $50K |\n| $75K personal, 725 credit | REQUIRE_REVIEW | Over $50K threshold |\n| $30K personal, 600 credit | REQUIRE_REVIEW | Borderline credit 550-650 |\n| $20K auto, 520 credit | BLOCK | Credit below 550 |",
+      "text": "%md\n## Test Big Star Collectibles' Rules Engine\n\nBefore building the agents, let's verify the rules work correctly. You'll test five scenarios:\n\n| Test | Expected Result | Why |\n|------|-----------------|-----|\n| $25K personal, 780 credit | AUTO_APPROVE | Good credit, small item |\n| $35K auto, 695 credit | AUTO_APPROVE | Decent credit, under $50K |\n| $75K personal, 725 credit | REQUIRE_REVIEW | Over $50K threshold |\n| $30K personal, 600 credit | REQUIRE_REVIEW | Borderline credit 550-650 |\n| $20K auto, 520 credit | BLOCK | Credit below 550 |",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -86,10 +128,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Big Star Collectibles' Rules Engine</h2>\n\n<p>Before building the agents, let's verify the rules work correctly. You'll test five scenarios:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Test</th><th style=\"padding: 8px;\">Expected Result</th><th style=\"padding: 8px;\">Why</th></tr>\n<tr><td style=\"padding: 8px;\">$25K personal, 780 credit</td><td style=\"padding: 8px;\">AUTO_APPROVE</td><td style=\"padding: 8px;\">Good credit, small item</td></tr>\n<tr><td style=\"padding: 8px;\">$35K auto, 695 credit</td><td style=\"padding: 8px;\">AUTO_APPROVE</td><td style=\"padding: 8px;\">Decent credit, under $50K</td></tr>\n<tr><td style=\"padding: 8px;\">$75K personal, 725 credit</td><td style=\"padding: 8px;\">REQUIRE_REVIEW</td><td style=\"padding: 8px;\">Over $50K threshold</td></tr>\n<tr><td style=\"padding: 8px;\">$30K personal, 600 credit</td><td style=\"padding: 8px;\">REQUIRE_REVIEW</td><td style=\"padding: 8px;\">Borderline credit 550-650</td></tr>\n<tr><td style=\"padding: 8px;\">$20K auto, 520 credit</td><td style=\"padding: 8px;\">BLOCK</td><td style=\"padding: 8px;\">Credit below 550</td></tr>\n</table>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT '$25K personal, 780 credit:' as test, check_appraisal_rules(25000, 'personal', 780) as result FROM DUAL\nUNION ALL\nSELECT '$35K auto, 695 credit:', check_appraisal_rules(35000, 'auto', 695) FROM DUAL\nUNION ALL\nSELECT '$75K personal, 725 credit:', check_appraisal_rules(75000, 'personal', 725) FROM DUAL\nUNION ALL\nSELECT '$30K personal, 600 credit:', check_appraisal_rules(30000, 'personal', 600) FROM DUAL\nUNION ALL\nSELECT '$20K auto, 520 credit:', check_appraisal_rules(20000, 'auto', 520) FROM DUAL;",
+      "text": "%script\nSELECT '$25K personal, 780 credit:' as test, check_underwriting_rules(25000, 'personal', 780) as result FROM DUAL\nUNION ALL\nSELECT '$35K auto, 695 credit:', check_underwriting_rules(35000, 'auto', 695) FROM DUAL\nUNION ALL\nSELECT '$75K personal, 725 credit:', check_underwriting_rules(75000, 'personal', 725) FROM DUAL\nUNION ALL\nSELECT '$30K personal, 600 credit:', check_underwriting_rules(30000, 'personal', 600) FROM DUAL\nUNION ALL\nSELECT '$20K auto, 520 credit:', check_underwriting_rules(20000, 'auto', 520) FROM DUAL;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -97,11 +147,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 6: Create the Item Submission Function\n\nThis is the main tool the INVENTORY_AGENT will use. It looks up the collector's condition grade, checks the appraisal rules, and creates the submission with the appropriate status.",
+      "text": "%md\n## Create the Item Submission Function\n\nThis is the main tool the ITEM_AGENT will use. It:\n\n1. Looks up the applicant's credit score\n2. Checks the underwriting rules\n3. If BLOCKED \u2014 returns an error without creating the application\n4. If AUTO_APPROVE \u2014 creates the application with status AUTO_APPROVED\n5. If REQUIRE_REVIEW \u2014 creates the application with status PENDING_REVIEW\n\nNotice the function uses `PRAGMA AUTONOMOUS_TRANSACTION` so it can commit independently.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -111,10 +160,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Item Submission Function</h2>\n\n<p>This is the main tool the ITEM_AGENT will use. It:</p>\n\n<ol>\n<li>Looks up the applicant's credit score</li>\n<li>Checks the underwriting rules</li>\n<li>If BLOCKED \u2014 returns an error without creating the application</li>\n<li>If AUTO_APPROVE \u2014 creates the application with status AUTO_APPROVED</li>\n<li>If REQUIRE_REVIEW \u2014 creates the application with status PENDING_REVIEW</li>\n</ol>\n\n<p>Notice the function uses <code>PRAGMA AUTONOMOUS_TRANSACTION</code> so it can commit independently.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION submit_item_submission(\n    p_collector_id  VARCHAR2,\n    p_declared_value   NUMBER,\n    p_item_type     VARCHAR2,\n    p_item_purpose  VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_submission_id VARCHAR2(20);\n    v_credit_score   NUMBER;\n    v_rules          VARCHAR2(500);\n    v_action         VARCHAR2(20);\n    v_status         VARCHAR2(30);\nBEGIN\n    -- Get collector's condition grade\n    BEGIN\n        SELECT credit_score INTO v_credit_score\n        FROM item_collectors\n        WHERE collector_id = p_collector_id;\n    EXCEPTION\n        WHEN NO_DATA_FOUND THEN\n            RETURN '{\"error\": \"Collector not found: ' || p_collector_id || '\"}';\n    END;\n    \n    -- Check appraisal rules\n    v_rules := check_appraisal_rules(p_declared_value, p_item_type, v_credit_score);\n    v_action := JSON_VALUE(v_rules, '$.action');\n    \n    -- Handle BLOCK - don't create the submission\n    IF v_action = 'BLOCK' THEN\n        RETURN '{\"error\": \"BLOCKED\", \"message\": \"' || JSON_VALUE(v_rules, '$.message') || '\"}';\n    END IF;\n    \n    -- Determine status\n    IF v_action = 'AUTO_APPROVE' THEN\n        v_status := 'AUTO_APPROVED';\n    ELSE\n        v_status := 'PENDING_REVIEW';\n    END IF;\n    \n    -- Generate submission ID and insert\n    v_submission_id := 'ITEM-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_app_seq.NEXTVAL;\n    \n    INSERT INTO item_submissions (submission_id, collector_id, declared_value, item_type, item_purpose, risk_status, decided_by, decided_at)\n    VALUES (\n        v_submission_id, \n        p_collector_id, \n        p_declared_value, \n        LOWER(p_item_type), \n        p_item_purpose,\n        v_status,\n        CASE WHEN v_status = 'AUTO_APPROVED' THEN 'SYSTEM' ELSE NULL END,\n        CASE WHEN v_status = 'AUTO_APPROVED' THEN SYSTIMESTAMP ELSE NULL END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"submission_id\": \"' || v_submission_id || '\", \"status\": \"' || v_status || '\", \"credit_score\": ' || v_credit_score || ', \"message\": \"' || \n           CASE WHEN v_status = 'AUTO_APPROVED' THEN 'Auto-approved based on credit profile and item parameters.' ELSE 'Submitted for appraiser review.' END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION submit_item_application(\n    p_applicant_id  VARCHAR2,\n    p_item_amount   NUMBER,\n    p_item_type     VARCHAR2,\n    p_item_purpose  VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_application_id VARCHAR2(20);\n    v_credit_score   NUMBER;\n    v_rules          VARCHAR2(500);\n    v_action         VARCHAR2(20);\n    v_status         VARCHAR2(30);\nBEGIN\n    -- Get applicant's credit score\n    BEGIN\n        SELECT credit_score INTO v_credit_score\n        FROM item_applicants\n        WHERE applicant_id = p_applicant_id;\n    EXCEPTION\n        WHEN NO_DATA_FOUND THEN\n            RETURN '{\"error\": \"Applicant not found: ' || p_applicant_id || '\"}';\n    END;\n    \n    -- Check underwriting rules\n    v_rules := check_underwriting_rules(p_item_amount, p_item_type, v_credit_score);\n    v_action := JSON_VALUE(v_rules, '$.action');\n    \n    -- Handle BLOCK - don't create the application\n    IF v_action = 'BLOCK' THEN\n        RETURN '{\"error\": \"BLOCKED\", \"message\": \"' || JSON_VALUE(v_rules, '$.message') || '\"}';\n    END IF;\n    \n    -- Determine status\n    IF v_action = 'AUTO_APPROVE' THEN\n        v_status := 'AUTO_APPROVED';\n    ELSE\n        v_status := 'PENDING_REVIEW';\n    END IF;\n    \n    -- Generate application ID and insert\n    v_application_id := 'ITEM-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_app_seq.NEXTVAL;\n    \n    INSERT INTO item_applications (application_id, applicant_id, item_amount, item_type, item_purpose, risk_status, decided_by, decided_at)\n    VALUES (\n        v_application_id, \n        p_applicant_id, \n        p_item_amount, \n        LOWER(p_item_type), \n        p_item_purpose,\n        v_status,\n        CASE WHEN v_status = 'AUTO_APPROVED' THEN 'SYSTEM' ELSE NULL END,\n        CASE WHEN v_status = 'AUTO_APPROVED' THEN SYSTIMESTAMP ELSE NULL END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"application_id\": \"' || v_application_id || '\", \"status\": \"' || v_status || '\", \"credit_score\": ' || v_credit_score || ', \"message\": \"' || \n           CASE WHEN v_status = 'AUTO_APPROVED' THEN 'Auto-approved based on credit profile and item parameters.' ELSE 'Submitted for underwriter review.' END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -122,11 +179,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 7: Create the Appraiser's Functions\n\nAppraisers need three capabilities: see pending submissions, approve, and deny.",
+      "text": "%md\n## Create the Underwriter's Functions\n\nUnderwriters need three capabilities:\n\n1. **get_pending_reviews**: See what applications are waiting for review\n2. **approve_item**: Approve a specific application by ID\n3. **deny_item**: Deny a specific application by ID with a reason\n\nThese functions only work on applications with status PENDING_REVIEW. You can't approve something that's already approved or denied.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -136,10 +192,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Underwriter's Functions</h2>\n\n<p>Underwriters need three capabilities:</p>\n\n<ol>\n<li><strong>get_pending_reviews</strong>: See what applications are waiting for review</li>\n<li><strong>approve_item</strong>: Approve a specific application by ID</li>\n<li><strong>deny_item</strong>: Deny a specific application by ID with a reason</li>\n</ol>\n\n<p>These functions only work on applications with status PENDING_REVIEW. You can't approve something that's already approved or denied.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION get_pending_reviews RETURN VARCHAR2 AS\n    v_result VARCHAR2(4000) := '[';\n    v_first  BOOLEAN := TRUE;\nBEGIN\n    FOR rec IN (\n        SELECT la.submission_id, ap.name as collector_name, ap.credit_score,\n               la.declared_value, la.item_type, la.item_purpose,\n               TO_CHAR(la.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted\n        FROM item_submissions la\n        JOIN item_collectors ap ON la.collector_id = ap.collector_id\n        WHERE la.risk_status = 'PENDING_REVIEW'\n        ORDER BY la.submitted_at\n    ) LOOP\n        IF NOT v_first THEN\n            v_result := v_result || ',';\n        END IF;\n        v_first := FALSE;\n        \n        v_result := v_result || '{\"submission_id\": \"' || rec.submission_id || '\", ' ||\n                    '\"collector\": \"' || rec.collector_name || '\", ' ||\n                    '\"credit_score\": ' || rec.credit_score || ', ' ||\n                    '\"amount\": ' || rec.declared_value || ', ' ||\n                    '\"type\": \"' || rec.item_type || '\", ' ||\n                    '\"purpose\": \"' || NVL(rec.item_purpose, 'N/A') || '\", ' ||\n                    '\"submitted\": \"' || rec.submitted || '\"}';\n    END LOOP;\n    \n    v_result := v_result || ']';\n    \n    IF v_result = '[]' THEN\n        RETURN '{\"message\": \"No item submissions pending review.\"}';\n    END IF;\n    \n    RETURN v_result;\nEND;\n/\n\nCREATE OR REPLACE FUNCTION approve_item(\n    p_submission_id VARCHAR2,\n    p_appraiser    VARCHAR2 DEFAULT 'APPRAISER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT risk_status INTO v_current_status\n    FROM item_submissions\n    WHERE submission_id = p_submission_id;\n    \n    IF v_current_status != 'PENDING_REVIEW' THEN\n        RETURN '{\"error\": \"Cannot approve. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE item_submissions\n    SET risk_status = 'APPROVED',\n        decided_by = p_appraiser,\n        decided_at = SYSTIMESTAMP\n    WHERE submission_id = p_submission_id;\n    \n    COMMIT;\n    RETURN '{\"submission_id\": \"' || p_submission_id || '\", \"status\": \"APPROVED\", \"approved_by\": \"' || p_appraiser || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Submission not found: ' || p_submission_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/\n\nCREATE OR REPLACE FUNCTION deny_item(\n    p_submission_id VARCHAR2,\n    p_appraiser    VARCHAR2 DEFAULT 'APPRAISER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT risk_status INTO v_current_status\n    FROM item_submissions\n    WHERE submission_id = p_submission_id;\n    \n    IF v_current_status != 'PENDING_REVIEW' THEN\n        RETURN '{\"error\": \"Cannot deny. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE item_submissions\n    SET risk_status = 'DENIED',\n        decided_by = p_appraiser,\n        decided_at = SYSTIMESTAMP\n    WHERE submission_id = p_submission_id;\n    \n    COMMIT;\n    RETURN '{\"submission_id\": \"' || p_submission_id || '\", \"status\": \"DENIED\", \"denied_by\": \"' || p_appraiser || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Submission not found: ' || p_submission_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION get_pending_reviews RETURN VARCHAR2 AS\n    v_result VARCHAR2(4000) := '[';\n    v_first  BOOLEAN := TRUE;\nBEGIN\n    FOR rec IN (\n        SELECT la.application_id, ap.name as applicant_name, ap.credit_score,\n               la.item_amount, la.item_type, la.item_purpose,\n               TO_CHAR(la.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted\n        FROM item_applications la\n        JOIN item_applicants ap ON la.applicant_id = ap.applicant_id\n        WHERE la.risk_status = 'PENDING_REVIEW'\n        ORDER BY la.submitted_at\n    ) LOOP\n        IF NOT v_first THEN\n            v_result := v_result || ',';\n        END IF;\n        v_first := FALSE;\n        \n        v_result := v_result || '{\"application_id\": \"' || rec.application_id || '\", ' ||\n                    '\"applicant\": \"' || rec.applicant_name || '\", ' ||\n                    '\"credit_score\": ' || rec.credit_score || ', ' ||\n                    '\"amount\": ' || rec.item_amount || ', ' ||\n                    '\"type\": \"' || rec.item_type || '\", ' ||\n                    '\"purpose\": \"' || NVL(rec.item_purpose, 'N/A') || '\", ' ||\n                    '\"submitted\": \"' || rec.submitted || '\"}';\n    END LOOP;\n    \n    v_result := v_result || ']';\n    \n    IF v_result = '[]' THEN\n        RETURN '{\"message\": \"No item submissions pending review.\"}';\n    END IF;\n    \n    RETURN v_result;\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -147,24 +211,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 8: Register the Tools\n\nNow you'll register your PL/SQL functions as tools. Notice that SUBMIT_ITEM_TOOL is for inventory specialists, while the other three are for appraisers.",
-      "config": {
-        "colWidth": 12.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
-        "editorHide": true
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nBEGIN\n    -- Submission tool (for INVENTORY_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'SUBMIT_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Submit a item submission. Parameters: P_COLLECTOR_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_DECLARED_VALUE (number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_ITEM_PURPOSE (text description of item purpose).\",\n                        \"function\": \"submit_item_submission\"}',\n        description => 'Submits a item submission for processing'\n    );\n    \n    -- Pending list tool (for APPRAISAL_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_PENDING_TOOL',\n        attributes  => '{\"instruction\": \"Get list of item submissions waiting for appraisal review. No parameters needed.\",\n                        \"function\": \"get_pending_reviews\"}',\n        description => 'Lists item submissions needing appraiser review'\n    );\n    \n    -- Approve tool (for APPRAISAL_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'APPROVE_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Approve a item submission. Parameter: P_SUBMISSION_ID (e.g. ITEM-260108-1001).\",\n                        \"function\": \"approve_item\"}',\n        description => 'Approves a item submission'\n    );\n    \n    -- Deny tool (for APPRAISAL_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'DENY_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Deny a item submission. Parameter: P_SUBMISSION_ID (e.g. ITEM-260108-1001).\",\n                        \"function\": \"deny_item\"}',\n        description => 'Denies a item submission'\n    );\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION approve_item(\n    p_application_id VARCHAR2,\n    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT risk_status INTO v_current_status\n    FROM item_applications\n    WHERE application_id = p_application_id;\n    \n    IF v_current_status != 'PENDING_REVIEW' THEN\n        RETURN '{\"error\": \"Cannot approve. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE item_applications\n    SET risk_status = 'APPROVED',\n        decided_by = p_underwriter,\n        decided_at = SYSTIMESTAMP\n    WHERE application_id = p_application_id;\n    \n    COMMIT;\n    RETURN '{\"application_id\": \"' || p_application_id || '\", \"status\": \"APPROVED\", \"approved_by\": \"' || p_underwriter || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Application not found: ' || p_application_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -172,24 +222,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 9: Create the Inventory Agent (Inventory Specialist Role)\n\nThe INVENTORY_AGENT represents a inventory specialist submitting submissions. It only has access to SUBMIT_ITEM_TOOL  -  it cannot approve or deny anything.",
-      "config": {
-        "colWidth": 12.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
-        "editorHide": true
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'INVENTORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item submission agent for Big Star Collectibles inventory specialists. When asked to submit a item submission, call SUBMIT_ITEM_TOOL with the provided details. Report the result clearly - whether it was auto-approved, needs appraiser review, or was blocked.\"}',\n        description => 'Inventory specialist item submission agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_TASK',\n        attributes  => '{\"instruction\": \"Process item submission requests. Call SUBMIT_ITEM_TOOL with the collector ID, declared value, item type, and purpose. Report the outcome. User request: {query}\",\n                        \"tools\": [\"SUBMIT_ITEM_TOOL\"]}',\n        description => 'Item submission task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ITEM_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"INVENTORY_AGENT\", \"task\": \"ITEM_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Inventory specialist submission team'\n    );\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION deny_item(\n    p_application_id VARCHAR2,\n    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT risk_status INTO v_current_status\n    FROM item_applications\n    WHERE application_id = p_application_id;\n    \n    IF v_current_status != 'PENDING_REVIEW' THEN\n        RETURN '{\"error\": \"Cannot deny. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE item_applications\n    SET risk_status = 'DENIED',\n        decided_by = p_underwriter,\n        decided_at = SYSTIMESTAMP\n    WHERE application_id = p_application_id;\n    \n    COMMIT;\n    RETURN '{\"application_id\": \"' || p_application_id || '\", \"status\": \"DENIED\", \"denied_by\": \"' || p_underwriter || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Application not found: ' || p_application_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -197,11 +233,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 10: Create the Appraisal Agent (Appraiser Role)\n\nThe `APPRAISAL_AGENT` has access to three tools but **not** `SUBMIT_ITEM_TOOL`. Proper separation of duties.",
+      "text": "%md\n## Register the Tools\n\nNow you'll register your PL/SQL functions as tools the agents can use. Each tool has:\n\n- **instruction**: Tells the LLM when and how to use this tool\n- **function**: The actual PL/SQL function to call\n\nNotice that SUBMIT_ITEM_TOOL is for inventory specialists, while the other three are for underwriters. The agents will only have access to their assigned tools.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -211,10 +246,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Tools</h2>\n\n<p>Now you'll register your PL/SQL functions as tools the agents can use. Each tool has:</p>\n\n<ul>\n<li><strong>instruction</strong>: Tells the LLM when and how to use this tool</li>\n<li><strong>function</strong>: The actual PL/SQL function to call</li>\n</ul>\n\n<p>Notice that SUBMIT_ITEM_TOOL is for inventory specialists, while the other three are for underwriters. The agents will only have access to their assigned tools.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'APPRAISAL_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an appraisal agent for Big Star Collectibles. You can list pending item submissions, approve them, or deny them. When asked what needs review, call GET_PENDING_TOOL. When asked to approve, call APPROVE_ITEM_TOOL. When asked to deny, call DENY_ITEM_TOOL.\"}',\n        description => 'Appraiser item review agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'APPRAISAL_TASK',\n        attributes  => '{\"instruction\": \"Process appraisal review requests. To see pending submissions, call GET_PENDING_TOOL. To approve, call APPROVE_ITEM_TOOL with the submission ID. To deny, call DENY_ITEM_TOOL with the submission ID. User request: {query}\",\n                        \"tools\": [\"GET_PENDING_TOOL\", \"APPROVE_ITEM_TOOL\", \"DENY_ITEM_TOOL\"]}',\n        description => 'Appraisal review task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'APPRAISAL_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"APPRAISAL_AGENT\", \"task\": \"APPRAISAL_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Appraiser review team'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    -- Submission tool (for ITEM_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'SUBMIT_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Submit an item submission. Parameters: P_APPLICANT_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_ITEM_AMOUNT (number), P_ITEM_TYPE (personal, auto, mortgage, or business), P_ITEM_PURPOSE (text description of item purpose).\",\n                        \"function\": \"submit_item_application\"}',\n        description => 'Submits an item submission for processing'\n    );\n    \n    -- Pending list tool (for UNDERWRITING_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_PENDING_TOOL',\n        attributes  => '{\"instruction\": \"Get list of item submissions waiting for underwriting review. No parameters needed.\",\n                        \"function\": \"get_pending_reviews\"}',\n        description => 'Lists item submissions needing underwriter review'\n    );\n    \n    -- Approve tool (for UNDERWRITING_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'APPROVE_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Approve an item submission. Parameter: P_APPLICATION_ID (e.g. ITEM-260108-1001).\",\n                        \"function\": \"approve_item\"}',\n        description => 'Approves an item submission'\n    );\n    \n    -- Deny tool (for UNDERWRITING_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'DENY_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Deny an item submission. Parameter: P_APPLICATION_ID (e.g. ITEM-260108-1001).\",\n                        \"function\": \"deny_item\"}',\n        description => 'Denies an item submission'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -222,11 +265,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 11: Test the Inventory Specialist Path\n\nBecome a inventory specialist and submit submissions.\n\n1. Set the inventory team.\n\n    ```sql\n    <copy>\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ITEM_TEAM');\n    </copy>\n    ```\n\n2. Submit a small personal item (auto-approve path).\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Submit a $25000 personal item for collector APP-001, purpose is debt consolidation;\n    </copy>\n    ```\n\n3. Submit a large item (appraiser review path).\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Submit a $75000 personal item for collector APP-004, purpose is home renovation;\n    </copy>\n    ```\n\n4. Submit a authenticating (always requires review).\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Submit a $250000 authenticating for collector APP-001, purpose is primary residence purchase;\n    </copy>\n    ```\n\n5. Try to submit a high-risk submission (blocked).\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Submit a $20000 auto item for collector APP-003, purpose is used car purchase;\n    </copy>\n    ```\n\n## Task 12: Verify the Submissions\n\nCheck what's in the database.",
+      "text": "%md\n## Create the Item Agent (Item Officer Role)\n\nThe ITEM_AGENT represents a inventory specialist submitting applications. It only has access to SUBMIT_ITEM_TOOL \u2014 it cannot approve or deny anything.\n\nThe agent's role tells it to report results clearly so the inventory specialist knows whether their application was auto-approved or is waiting for underwriting.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -236,10 +278,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Item Agent (Item Officer Role)</h2>\n\n<p>The ITEM_AGENT represents a inventory specialist submitting applications. It only has access to SUBMIT_ITEM_TOOL \u2014 it cannot approve or deny anything.</p>\n\n<p>The agent's role tells it to report results clearly so the inventory specialist knows whether their application was auto-approved or is waiting for underwriting.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nSELECT la.submission_id, \n       ap.name as collector,\n       ap.credit_score,\n       TO_CHAR(la.declared_value, '$999,999') as amount, \n       la.item_type, \n       la.risk_status, \n       NVL(la.decided_by, '-') as decided_by\nFROM item_submissions la\nJOIN item_collectors ap ON la.collector_id = ap.collector_id\nORDER BY la.submitted_at;",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ITEM_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an item submission agent for Big Star Collectibles inventory specialists. When asked to submit an item submission, call SUBMIT_ITEM_TOOL with the provided details. Report the result clearly - whether it was auto-approved, needs underwriter review, or was blocked.\"}',\n        description => 'Item officer item submission agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_TASK',\n        attributes  => '{\"instruction\": \"Process item submission requests. Call SUBMIT_ITEM_TOOL with the applicant ID, item amount, item type, and purpose. Report the outcome. User request: {query}\",\n                        \"tools\": [\"SUBMIT_ITEM_TOOL\"]}',\n        description => 'Item submission task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ITEM_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"ITEM_AGENT\", \"task\": \"ITEM_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Item officer submission team'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -247,11 +297,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Task 13: Test the Appraiser Path\n\nSwitch to the appraisal agent and review submissions.\n\n1. Set the appraisal team.\n\n    ```sql\n    <copy>\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('APPRAISAL_TEAM');\n    </copy>\n    ```\n\n2. Check what needs review.\n\n    ```sql\n    <copy>\n    SELECT AI AGENT What item submissions need my review;\n    </copy>\n    ```\n\n3. Approve the submissions.\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Approve the personal item submission;\n    </copy>\n    ```\n\n    ```sql\n    <copy>\n    SELECT AI AGENT Approve the authenticating submission;\n    </copy>\n    ```\n\n## Task 14: Review the Audit Trail\n\nEvery tool call is logged. This is crucial for regulatory compliance.",
+      "text": "%md\n## Create the Underwriting Agent (Underwriter Role)\n\nThe UNDERWRITING_AGENT represents an underwriter who reviews item submissions. It has access to three tools:\n- GET_PENDING_TOOL \u2014 see what's waiting\n- APPROVE_ITEM_TOOL \u2014 approve by ID\n- DENY_ITEM_TOOL \u2014 deny by ID\n\nCritically, it does NOT have SUBMIT_ITEM_TOOL. Underwriters can't submit item submissions through this agent \u2014 proper separation of duties.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -261,7 +310,431 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Underwriting Agent (Underwriter Role)</h2>\n\n<p>The UNDERWRITING_AGENT represents an underwriter who reviews item submissions. It has access to three tools:</p>\n<ul>\n<li>GET_PENDING_TOOL \u2014 see what's waiting</li>\n<li>APPROVE_ITEM_TOOL \u2014 approve by ID</li>\n<li>DENY_ITEM_TOOL \u2014 deny by ID</li>\n</ul>\n\n<p>Critically, it does NOT have SUBMIT_ITEM_TOOL. Underwriters can't submit item submissions through this agent \u2014 proper separation of duties.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'UNDERWRITING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an underwriting agent for Big Star Collectibles. You can list pending item submissions, approve them, or deny them. When asked what needs review, call GET_PENDING_TOOL. When asked to approve, call APPROVE_ITEM_TOOL. When asked to deny, call DENY_ITEM_TOOL.\"}',\n        description => 'Underwriter item review agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'UNDERWRITING_TASK',\n        attributes  => '{\"instruction\": \"Process underwriting review requests. To see pending applications, call GET_PENDING_TOOL. To approve, call APPROVE_ITEM_TOOL with the application ID. To deny, call DENY_ITEM_TOOL with the application ID. User request: {query}\",\n                        \"tools\": [\"GET_PENDING_TOOL\", \"APPROVE_ITEM_TOOL\", \"DENY_ITEM_TOOL\"]}',\n        description => 'Underwriting review task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'UNDERWRITING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"UNDERWRITING_AGENT\", \"task\": \"UNDERWRITING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Underwriter review team'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Become a Item Officer: Set the Item Team\n\nNow you'll act as a inventory specialist submitting applications. First, activate the ITEM_TEAM so your SELECT AI AGENT commands go to the item submission agent.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Become a Item Officer: Set the Item Team</h2>\n\n<p>Now you'll act as a inventory specialist submitting applications. First, activate the ITEM_TEAM so your SELECT AI AGENT commands go to the item submission agent.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ITEM_TEAM');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a Small Personal Item (Auto-Approve Path)\n\nLet's submit a $25,000 personal item for Alice Johnson (APP-001), who has excellent credit (780). This should be auto-approved immediately.\n\nWatch for the response \u2014 it should say the item was auto-approved with an application ID.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a Small Personal Item (Auto-Approve Path)</h2>\n\n<p>Let's submit a $25,000 personal item for Alice Johnson (APP-001), who has excellent credit (780). This should be auto-approved immediately.</p>\n\n<p>Watch for the response \u2014 it should say the item was auto-approved with an application ID.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $25000 personal item for applicant APP-001, purpose is debt consolidation;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit an Auto Item (Auto-Approve Path)\n\nNow submit a $35,000 auto item for Bob Smith (APP-002), who has decent credit (695). This should also be auto-approved since it's under $50K and credit is above 650.\n\nBoth small items with acceptable credit get the same treatment \u2014 auto-approval because they're within Big Star Collectibles' risk parameters.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit an Auto Item (Auto-Approve Path)</h2>\n\n<p>Now submit a $35,000 auto item for Bob Smith (APP-002), who has decent credit (695). This should also be auto-approved since it's under $50K and credit is above 650.</p>\n\n<p>Both small items with acceptable credit get the same treatment \u2014 auto-approval because they're within Big Star Collectibles' risk parameters.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $35000 auto item for applicant APP-002, purpose is new vehicle purchase;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a Large Item (Underwriter Review Path)\n\nThis $75,000 personal item for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.\n\nThe agent should tell you the application was submitted and is awaiting underwriter review \u2014 it's not rejected, just queued for human decision.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a Large Item (Underwriter Review Path)</h2>\n\n<p>This $75,000 personal item for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.</p>\n\n<p>The agent should tell you the application was submitted and is awaiting underwriter review \u2014 it's not rejected, just queued for human decision.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $75000 personal item for applicant APP-004, purpose is home renovation;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a Mortgage (Always Requires Review)\n\nMortgages are complex products at Big Star Collectibles \u2014 they always require underwriter review regardless of amount or credit score. This $250,000 mortgage goes to the review queue.\n\nThis demonstrates item-type-based rules, not just amount-based rules.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a Mortgage (Always Requires Review)</h2>\n\n<p>Mortgages are complex products at Big Star Collectibles \u2014 they always require underwriter review regardless of amount or credit score. This $250,000 mortgage goes to the review queue.</p>\n\n<p>This demonstrates item-type-based rules, not just amount-based rules.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $250000 mortgage for applicant APP-001, purpose is primary residence purchase;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try to Submit a High-Risk Application (Blocked)\n\nThis $20,000 auto item for Carol Davis (APP-003) should be BLOCKED entirely \u2014 Carol's credit score is 520, below Big Star Collectibles' 550 minimum.\n\nThe agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try to Submit a High-Risk Application (Blocked)</h2>\n\n<p>This $20,000 auto item for Carol Davis (APP-003) should be BLOCKED entirely \u2014 Carol's credit score is 520, below Big Star Collectibles' 550 minimum.</p>\n\n<p>The agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $20000 auto item for applicant APP-003, purpose is used car purchase;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify the Item Application Records\n\nLet's look at what's actually in the database. You should see exactly 4 applications:\n\n| Amount | Type | Status | Decided By |\n|--------|------|--------|------------|\n| $25,000 | personal | AUTO_APPROVED | SYSTEM |\n| $35,000 | auto | AUTO_APPROVED | SYSTEM |\n| $75,000 | personal | PENDING_REVIEW | - |\n| $250,000 | mortgage | PENDING_REVIEW | - |\n\nNotice: No application for Carol Davis exists \u2014 it was blocked before creation. The two auto-approved items show \"SYSTEM\" as the decision maker.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Item Application Records</h2>\n\n<p>Let's look at what's actually in the database. You should see exactly 4 applications:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Decided By</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$35,000</td><td style=\"padding: 8px;\">auto</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n<tr><td style=\"padding: 8px;\">$250,000</td><td style=\"padding: 8px;\">mortgage</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n</table>\n\n<p>Notice: No application for Carol Davis exists \u2014 it was blocked before creation. The two auto-approved items show \"SYSTEM\" as the decision maker.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT la.application_id, \n       ap.name as applicant,\n       ap.credit_score,\n       TO_CHAR(la.item_amount, '$999,999') as amount, \n       la.item_type, \n       la.risk_status, \n       NVL(la.decided_by, '-') as decided_by\nFROM item_applications la\nJOIN item_applicants ap ON la.applicant_id = ap.applicant_id\nORDER BY la.submitted_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Become an Underwriter: Switch to the Underwriting Team\n\nNow you'll switch roles and become an underwriter. Activate the UNDERWRITING_TEAM to access the underwriting agent.\n\nThis is like logging into a different application. Same database, different capabilities.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Become an Underwriter: Switch to the Underwriting Team</h2>\n\n<p>Now you'll switch roles and become an underwriter. Activate the UNDERWRITING_TEAM to access the underwriting agent.</p>\n\n<p>This is like logging into a different application. Same database, different capabilities.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('UNDERWRITING_TEAM');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Check the Underwriting Queue\n\nAs an underwriter, ask what applications need your review. The agent will call GET_PENDING_TOOL and show you the queue.\n\nYou should see two applications waiting:\n- $75,000 personal item (home renovation) - David Chen, 725 credit\n- $250,000 mortgage (primary residence) - Alice Johnson, 780 credit",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Underwriting Queue</h2>\n\n<p>As an underwriter, ask what applications need your review. The agent will call GET_PENDING_TOOL and show you the queue.</p>\n\n<p>You should see two applications waiting:</p>\n<ul>\n<li>$75,000 personal item (home renovation) - David Chen, 725 credit</li>\n<li>$250,000 mortgage (primary residence) - Alice Johnson, 780 credit</li>\n</ul>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What item submissions need my review;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Approve the Large Personal Item\n\nDavid Chen has excellent credit (725) and wants a home renovation item. The amount triggered review, but the profile looks solid. Approve it.\n\nThe agent should call APPROVE_ITEM_TOOL and confirm the item is now approved. The decision maker will be recorded as \"UNDERWRITER\".",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Approve the Large Personal Item</h2>\n\n<p>David Chen has excellent credit (725) and wants a home renovation item. The amount triggered review, but the profile looks solid. Approve it.</p>\n\n<p>The agent should call APPROVE_ITEM_TOOL and confirm the item is now approved. The decision maker will be recorded as \"UNDERWRITER\".</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Approve the personal item submission;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Approve the Mortgage\n\nAlice Johnson has excellent credit (780) and strong financials. The mortgage looks good. Approve it.\n\nThe agent should call APPROVE_ITEM_TOOL and confirm the mortgage is approved.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Approve the Mortgage</h2>\n\n<p>Alice Johnson has excellent credit (780) and strong financials. The mortgage looks good. Approve it.</p>\n\n<p>The agent should call APPROVE_ITEM_TOOL and confirm the mortgage is approved.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Approve the mortgage application;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify Final Status\n\nLet's see the final state of all item submissions. You should see:\n\n| Amount | Type | Status | Decided By |\n|--------|------|--------|------------|\n| $25,000 | personal | AUTO_APPROVED | SYSTEM |\n| $35,000 | auto | AUTO_APPROVED | SYSTEM |\n| $75,000 | personal | APPROVED | UNDERWRITER |\n| $250,000 | mortgage | APPROVED | UNDERWRITER |\n\nThis shows the complete item lifecycle: auto-approval for routine applications, human decision for significant ones.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify Final Status</h2>\n\n<p>Let's see the final state of all item submissions. You should see:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Decided By</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$35,000</td><td style=\"padding: 8px;\">auto</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">APPROVED</td><td style=\"padding: 8px;\">UNDERWRITER</td></tr>\n<tr><td style=\"padding: 8px;\">$250,000</td><td style=\"padding: 8px;\">mortgage</td><td style=\"padding: 8px;\">APPROVED</td><td style=\"padding: 8px;\">UNDERWRITER</td></tr>\n</table>\n\n<p>This shows the complete item lifecycle: auto-approval for routine applications, human decision for significant ones.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT la.application_id, \n       ap.name as applicant,\n       TO_CHAR(la.item_amount, '$999,999') as amount, \n       la.item_type, \n       la.risk_status, \n       NVL(la.decided_by, '-') as decided_by,\n       TO_CHAR(la.decided_at, 'HH24:MI:SS') as decided_at\nFROM item_applications la\nJOIN item_applicants ap ON la.applicant_id = ap.applicant_id\nORDER BY la.submitted_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Review the Audit Trail\n\nEvery tool call is logged. This is crucial for regulatory compliance \u2014 you can see exactly what each agent did and when.\n\nYou should see calls to:\n- SUBMIT_ITEM_TOOL (5 times, 4 created, 1 blocked)\n- GET_PENDING_TOOL (1 time)\n- APPROVE_ITEM_TOOL (2 times)",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Review the Audit Trail</h2>\n\n<p>Every tool call is logged. This is crucial for regulatory compliance \u2014 you can see exactly what each agent did and when.</p>\n\n<p>You should see calls to:</p>\n<ul>\n<li>SUBMIT_ITEM_TOOL (5 times, 4 created, 1 blocked)</li>\n<li>GET_PENDING_TOOL (1 time)</li>\n<li>APPROVE_ITEM_TOOL (2 times)</li>\n</ul>"
+          }
+        ]
+      }
     },
     {
       "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called,\n    SUBSTR(input, 1, 60) as input_preview,\n    SUBSTR(output, 1, 60) as output_preview\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 15 ROWS ONLY;",
@@ -272,11 +745,10 @@
         "editorSetting": {
           "language": "sql"
         }
-      },
-      "results": {}
+      }
     },
     {
-      "text": "%md\n## Summary\n\nIn this lab, you built a complete item appraisal system demonstrating:\n\n**Role-Based Agents:**\n- INVENTORY_AGENT for inventory specialists (submit only)\n- APPRAISAL_AGENT for appraisers (review and decide)\n\n**Safety Rules:**\n- AUTO_APPROVE: Under $50K, good credit, non-authenticating\n- REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit\n- BLOCK: Condition grade below 550\n\n**The Human-in-the-Loop:**\n- Routine items are automated\n- Significant items require human judgment\n- High-risk submissions are stopped entirely\n\n**Audit Trail:**\n- Every action is logged\n- Full input/output captured\n- Explainable and compliant\n\n**Key Insight:** Agents are safe because their boundaries are explicit. The INVENTORY_AGENT literally cannot approve anything  -  it doesn't have the tool. This is security through architecture, not just prompts.\n\n## Learn More\n\n* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)\n\n## Acknowledgements\n\n* **Author** - David Start\n* **Last Updated By/Date** - Kay Malcolm, February 2026\n\n## Cleanup (Optional)",
+      "text": "%md\n## Audit Summary by Tool\n\nThis summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity \u2014 important for fraud detection and compliance.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -286,10 +758,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Audit Summary by Tool</h2>\n\n<p>This summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity \u2014 important for fraud detection and compliance.</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('APPRAISAL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('APPRAISAL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('INVENTORY_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('APPRAISAL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_PENDING_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPROVE_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('DENY_ITEM_TOOL', TRUE);\nDROP TABLE item_submissions PURGE;\nDROP TABLE item_collectors PURGE;\nDROP TABLE appraisal_rules PURGE;\nDROP SEQUENCE item_app_seq;\nDROP FUNCTION submit_item_submission;\nDROP FUNCTION check_appraisal_rules;\nDROP FUNCTION get_pending_reviews;\nDROP FUNCTION approve_item;\nDROP FUNCTION deny_item;",
+      "text": "%script\nSELECT \n    tool_name,\n    COUNT(*) as call_count\nFROM USER_AI_AGENT_TOOL_HISTORY\nGROUP BY tool_name\nORDER BY call_count DESC;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -297,11 +777,63 @@
         "editorSetting": {
           "language": "sql"
         }
+      }
+    },
+    {
+      "text": "%md\n## What You Built for Big Star Collectibles\n\nCongratulations! You've built a complete item underwriting system demonstrating:\n\n**Role-Based Agents:**\n- ITEM_AGENT for inventory specialists (submit only)\n- UNDERWRITING_AGENT for underwriters (review and decide)\n\n**Safety Rules:**\n- AUTO_APPROVE: Under $50K, good credit, non-mortgage\n- REQUIRE_REVIEW: $50K+, mortgages, or borderline credit\n- BLOCK: Credit score below 550\n\n**The Human-in-the-Loop:**\n- Routine items are automated\n- Significant items require human judgment\n- High-risk applications are stopped entirely\n\n**Audit Trail:**\n- Every action is logged\n- Full input/output captured\n- Explainable and compliant\n\n**Key Insight:** Agents are safe because their boundaries are explicit. The ITEM_AGENT literally cannot approve anything \u2014 it doesn't have the tool. This is security through architecture, not just prompts.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Built for Big Star Collectibles</h2>\n\n<p>Congratulations! You've built a complete item underwriting system demonstrating:</p>\n\n<p><strong>Role-Based Agents:</strong></p>\n<ul>\n<li>ITEM_AGENT for inventory specialists (submit only)</li>\n<li>UNDERWRITING_AGENT for underwriters (review and decide)</li>\n</ul>\n\n<p><strong>Safety Rules:</strong></p>\n<ul>\n<li>AUTO_APPROVE: Under $50K, good credit, non-mortgage</li>\n<li>REQUIRE_REVIEW: $50K+, mortgages, or borderline credit</li>\n<li>BLOCK: Credit score below 550</li>\n</ul>\n\n<p><strong>The Human-in-the-Loop:</strong></p>\n<ul>\n<li>Routine items are automated</li>\n<li>Significant items require human judgment</li>\n<li>High-risk applications are stopped entirely</li>\n</ul>\n\n<p><strong>Audit Trail:</strong></p>\n<ul>\n<li>Every action is logged</li>\n<li>Full input/output captured</li>\n<li>Explainable and compliant</li>\n</ul>\n\n<p><strong>Key Insight:</strong> Agents are safe because their boundaries are explicit. The ITEM_AGENT literally cannot approve anything \u2014 it doesn't have the tool. This is security through architecture, not just prompts.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all the objects created in this lab.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all the objects created in this lab.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('UNDERWRITING_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('UNDERWRITING_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ITEM_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('UNDERWRITING_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_PENDING_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPROVE_ITEM_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('DENY_ITEM_TOOL', TRUE);\nDROP TABLE item_applications PURGE;\nDROP TABLE item_applicants PURGE;\nDROP TABLE underwriting_rules PURGE;\nDROP SEQUENCE item_app_seq;\nDROP FUNCTION submit_item_application;\nDROP FUNCTION check_underwriting_rules;\nDROP FUNCTION get_pending_reviews;\nDROP FUNCTION approve_item;\nDROP FUNCTION deny_item;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
     }
   ],
-  "name": "Lab 10 - Tools Safety Control",
+  "name": "Lab 10 - Tools Safety Control (Big Star)",
   "id": "lab10-tools-safety-control",
   "noteParams": {},
   "noteForms": {},
