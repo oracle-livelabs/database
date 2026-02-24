@@ -26,8 +26,6 @@ This lab shows you the fundamental difference between a chatbot (explains how) a
 
 **What you will build:** A item submission lookup agent with a SQL tool that queries your database.
 
-**Story Sync:** Chapter 1.1 – see the corresponding narrative beat for context.
-
 **Estimated Time**: 10 minutes
 
 ### Objectives

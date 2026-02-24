@@ -63,11 +63,6 @@ By the end, you'll have a complete item processing system where:
 - Chapters 2.1–2.4 map to Labs 5–8, covering loyalty memory, provenance packets, and grading tiers.
 - Chapters 3.2–4.2 highlight Priya Desai and Jennifer Morales as governance leads reviewed in Labs 9–10.
 
-## Story Sync
-- Chapters 1.1–1.2 introduce Marcus Reed, Alex Martinez, and the warehouse backlog resolved in Labs 1–4.
-- Chapters 2.1–2.4 map to Labs 5–8, covering loyalty memory, provenance packets, and grading tiers.
-- Chapters 3.2–4.2 highlight Priya Desai and Jennifer Morales as governance leads reviewed in Labs 9–10.
-
 ## Workshop Structure
 
 ✅ **Start with the basics (Labs 1-4)**
