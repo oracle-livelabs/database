@@ -22,7 +22,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Item Submissions Table\n\nFirst, let's create a item submissions table. This gives the agent something real to work with—the kind of data that a chatbot would never be able to access.",
+      "text": "%md\n## Create the Item Submissions Table\n\nFirst, let's create a item submissions table. This gives the agent something real to work with\u2014the kind of data that a chatbot would never be able to access.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -37,13 +37,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Item Submissions Table</h2>\n\n<p>First, let's create a item submissions table. This gives the agent something real to work with—the kind of data that a chatbot would never be able to access.</p>"
+            "data": "<h2>Create the Item Submissions Table</h2>\n\n<p>First, let's create a item submissions table. This gives the agent something real to work with\u2014the kind of data that a chatbot would never be able to access.</p>"
           }
         ]
       }
     },
     {
-      "text": "%script\nCREATE TABLE item_submissions (\n    application_id     VARCHAR2(20) PRIMARY KEY,\n    collector_name     VARCHAR2(100),\n    application_date   DATE,\n    item_status        VARCHAR2(30),\n    declared_value        NUMBER(12,2),\n    item_type          VARCHAR2(30)\n);",
+      "text": "%script\nCREATE TABLE item_submissions (\n    submission_id     VARCHAR2(20) PRIMARY KEY,\n    collector_name    VARCHAR2(100),\n    submission_date   DATE,\n    item_status       VARCHAR2(30),\n    declared_value    NUMBER(12,2),\n    item_type         VARCHAR2(30)\n);",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -75,7 +75,7 @@
       }
     },
     {
-      "text": "%script\nCOMMENT ON TABLE item_submissions IS 'Big Star Collectibles item submissions including status tracking and amounts';\nCOMMENT ON COLUMN item_submissions.application_id IS 'Unique application identifier like LOAN-12345';\nCOMMENT ON COLUMN item_submissions.collector_name IS 'Full name of the person or business applying for the item';\nCOMMENT ON COLUMN item_submissions.application_date IS 'Date the item submission was submitted';\nCOMMENT ON COLUMN item_submissions.item_status IS 'Current status: Submitted, Authenticating, Listed, or Rejected';\nCOMMENT ON COLUMN item_submissions.declared_value IS 'Requested item amount in dollars';\nCOMMENT ON COLUMN item_submissions.item_type IS 'Type of item: Personal, Auto, Authenticating, or Business';",
+      "text": "%script\nCOMMENT ON TABLE item_submissions IS 'Big Star Collectibles item submissions including status tracking and declared values';\nCOMMENT ON COLUMN item_submissions.submission_id IS 'Unique submission identifier like ITEM-12345';\nCOMMENT ON COLUMN item_submissions.collector_name IS 'Full name of the collector submitting the item';\nCOMMENT ON COLUMN item_submissions.submission_date IS 'Date the item submission was created';\nCOMMENT ON COLUMN item_submissions.item_status IS 'Current status: Submitted, Authenticating, Listed, or Security Hold';\nCOMMENT ON COLUMN item_submissions.declared_value IS 'Collector-declared value in dollars';\nCOMMENT ON COLUMN item_submissions.item_type IS 'Item category: sports_card, comic, sneaker, or memorabilia piece';",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -86,7 +86,7 @@
       }
     },
     {
-      "text": "%md\n## Add Sample Item Submissions\n\nAdd some sample item submissions for the agent to query:\n\n| Application ID | Collector | Status | Amount | Type |\n|----------------|-----------|--------|--------|------|\n| LOAN-12345 | Alex Martinez | Approved | $45,000 | Personal |\n| LOAN-12346 | Jennifer Morales | Under Review | $275,000 | Authenticating |\n| LOAN-12347 | Priya Desai | Approved | $32,000 | Auto |\n| LOAN-12348 | Marcus Reed | Pending | $85,000 | Business |",
+      "text": "%md\n## Add Sample Item Submissions\n\nAdd some sample item submissions for the agent to query:\n\n| Submission ID | Collector | Status | Declared Value | Item Type |\n|---------------|-----------|--------|----------------|-----------|\n| ITEM-20260115-1042 | Alex Martinez | Authenticating | $7,800 | sports_card |\n| ITEM-20260114-0821 | Jennifer Morales | Submitted | $1,200 | comic |\n| ITEM-20260113-0905 | Priya Desai | Listed | $420 | sneaker |\n| ITEM-20260112-0754 | Marcus Reed | Security Hold | $5,600 | memorabilia |",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -101,13 +101,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Add Sample Item Submissions</h2>\n\n<p>Add some sample item submissions for the agent to query:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Application ID</th><th style=\"padding: 8px;\">Collector</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th></tr>\n<tr><td style=\"padding: 8px;\">LOAN-12345</td><td style=\"padding: 8px;\">Alex Martinez</td><td style=\"padding: 8px;\">Approved</td><td style=\"padding: 8px;\">$45,000</td><td style=\"padding: 8px;\">Personal</td></tr>\n<tr><td style=\"padding: 8px;\">LOAN-12346</td><td style=\"padding: 8px;\">Jennifer Morales</td><td style=\"padding: 8px;\">Under Review</td><td style=\"padding: 8px;\">$275,000</td><td style=\"padding: 8px;\">Authenticating</td></tr>\n<tr><td style=\"padding: 8px;\">LOAN-12347</td><td style=\"padding: 8px;\">Priya Desai</td><td style=\"padding: 8px;\">Approved</td><td style=\"padding: 8px;\">$32,000</td><td style=\"padding: 8px;\">Auto</td></tr>\n<tr><td style=\"padding: 8px;\">LOAN-12348</td><td style=\"padding: 8px;\">Marcus Reed</td><td style=\"padding: 8px;\">Pending</td><td style=\"padding: 8px;\">$85,000</td><td style=\"padding: 8px;\">Business</td></tr>\n</table>"
+            "data": "<h2>Add Sample Item Submissions</h2>\n\n<p>Add some sample item submissions for the agent to query:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Submission ID</th><th style=\"padding: 8px;\">Collector</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Declared Value</th><th style=\"padding: 8px;\">Item Type</th></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260115-1042</td><td style=\"padding: 8px;\">Alex Martinez</td><td style=\"padding: 8px;\">Authenticating</td><td style=\"padding: 8px;\">$7,800</td><td style=\"padding: 8px;\">sports_card</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260114-0821</td><td style=\"padding: 8px;\">Jennifer Morales</td><td style=\"padding: 8px;\">Submitted</td><td style=\"padding: 8px;\">$1,200</td><td style=\"padding: 8px;\">comic</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260113-0905</td><td style=\"padding: 8px;\">Priya Desai</td><td style=\"padding: 8px;\">Listed</td><td style=\"padding: 8px;\">$420</td><td style=\"padding: 8px;\">sneaker</td></tr>\n<tr><td style=\"padding: 8px;\">ITEM-20260112-0754</td><td style=\"padding: 8px;\">Marcus Reed</td><td style=\"padding: 8px;\">Security Hold</td><td style=\"padding: 8px;\">$5,600</td><td style=\"padding: 8px;\">memorabilia</td></tr>\n</table>"
           }
         ]
       }
     },
     {
-      "text": "%script\nINSERT INTO item_submissions VALUES ('LOAN-12345', 'Alex Martinez', DATE '2025-01-02', 'Approved', 45000, 'Personal');\nINSERT INTO item_submissions VALUES ('LOAN-12346', 'Jennifer Morales', DATE '2025-01-03', 'Under Review', 275000, 'Authenticating');\nINSERT INTO item_submissions VALUES ('LOAN-12347', 'Priya Desai', DATE '2024-12-28', 'Approved', 32000, 'Auto');\nINSERT INTO item_submissions VALUES ('LOAN-12348', 'Marcus Reed', DATE '2025-01-04', 'Pending', 85000, 'Business');\nCOMMIT;",
+      "text": "%script\nINSERT INTO item_submissions VALUES ('ITEM-20260115-1042', 'Alex Martinez', DATE '2026-01-15', 'Authenticating', 7800, 'sports_card');\nINSERT INTO item_submissions VALUES ('ITEM-20260114-0821', 'Jennifer Morales', DATE '2026-01-14', 'Submitted', 1200, 'comic');\nINSERT INTO item_submissions VALUES ('ITEM-20260113-0905', 'Priya Desai', DATE '2026-01-13', 'Listed', 420, 'sneaker');\nINSERT INTO item_submissions VALUES ('ITEM-20260112-0754', 'Marcus Reed', DATE '2026-01-12', 'Security Hold', 5600, 'memorabilia');\nCOMMIT;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -139,7 +139,7 @@
       }
     },
     {
-      "text": "%script\nSELECT application_id, collector_name, item_status, declared_value, item_type FROM item_submissions;",
+      "text": "%script\nSELECT submission_id, collector_name, item_status, declared_value, item_type FROM item_submissions;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -171,7 +171,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"LOAN_APPLICATIONS\"}]'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"ITEM_SUBMISSIONS\"}]'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -224,7 +224,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the LOAN_APPLICATIONS table. Columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Submitted/Authenticating/Listed/Security Hold), LOAN_AMOUNT, LOAN_TYPE (Personal/Auto/Authenticating/Business).'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_LOOKUP',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Query the ITEM_SUBMISSIONS table. Columns: SUBMISSION_ID, COLLECTOR_NAME, SUBMISSION_DATE, ITEM_STATUS (Submitted/Authenticating/Listed/Security Hold), DECLARED_VALUE, ITEM_TYPE (sports_card/comic/sneaker/memorabilia).'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -288,7 +288,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Big Star Collectibles item submissions by querying the LOAN_APPLICATIONS table using the ITEM_LOOKUP tool. The table has columns: APPLICATION_ID, APPLICANT_NAME, APPLICATION_DATE, LOAN_STATUS (Submitted, Authenticating, Listed, Security Hold), LOAN_AMOUNT, LOAN_TYPE (Personal, Auto, Authenticating, Business). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"ITEM_LOOKUP\"]}',\n        description => 'Task for handling item submission inquiries'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_TASK',\n        attributes  => '{\"instruction\": \"Answer questions about Big Star Collectibles item submissions by querying the ITEM_SUBMISSIONS table using the ITEM_LOOKUP tool. The table has columns: SUBMISSION_ID, COLLECTOR_NAME, SUBMISSION_DATE, ITEM_STATUS (Submitted, Authenticating, Listed, Security Hold), DECLARED_VALUE, ITEM_TYPE (sports_card, comic, sneaker, memorabilia). Do not ask clarifying questions - query the data and provide the answer. User question: {query}\",\n                        \"tools\": [\"ITEM_LOOKUP\"]}',\n        description => 'Task for handling item submission inquiries'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -395,7 +395,7 @@
       }
     },
     {
-      "text": "%md\n## Ask About a Specific Item Submission\n\n**This is the key moment.** The agent doesn't explain *how* to check item status. It actually queries the item_submissions table and tells you the answer.\n\n**Watch for:** The agent returns Alex Martinez's actual item status (Approved) from the database.",
+      "text": "%md\n## Ask About a Specific Item Submission\n\n**This is the key moment.** The agent doesn't explain *how* to check item status. It actually queries the item_submissions table and tells you the answer.\n\n**Watch for:** The agent returns Alex Martinez's current status (Authenticating) from the database.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -416,7 +416,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is the status of item submission LOAN-12345;",
+      "text": "%script\nSELECT AI AGENT What is the status of item submission ITEM-20260115-1042;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -427,7 +427,7 @@
       }
     },
     {
-      "text": "%md\n## Ask About Another Application\n\nTry asking about Priya Desai's item amount.\n\n**Watch for:** The agent queries and returns $32,000.",
+      "text": "%md\n## Ask About Another Submission\n\nTry asking about Priya Desai's declared value.\n\n**Watch for:** The agent queries and returns $420.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -448,7 +448,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT How much did Priya Desai apply for;",
+      "text": "%script\nSELECT AI AGENT What is the declared value for Priya Desai's submission;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -459,7 +459,7 @@
       }
     },
     {
-      "text": "%md\n## Ask a Question That Requires Reasoning\n\nAsk a question that requires the agent to filter and reason over the data.\n\n**Watch for:** The agent should find Jennifer Morales (Under Review) and Marcus Reed (Pending).",
+      "text": "%md\n## Ask a Question That Requires Reasoning\n\nAsk a question that requires the agent to filter and reason over the data.\n\n**Watch for:** The agent should find Jennifer Morales (Submitted) and Marcus Reed (Security Hold).",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -480,7 +480,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Which item submissions are still submitted or authenticating;",
+      "text": "%script\nSELECT AI AGENT Which item submissions are still submitted or in security hold;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -555,7 +555,7 @@
       }
     },
     {
-      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n\n> \"To check the status of a item submission, you would typically:\n> 1. Log into the Big Star Collectibles portal\n> 2. Navigate to Application Status\n> 3. Enter your application ID\n> 4. View the current status\"\n\n**The agent said:**\n\n> \"Item application LOAN-12345 for Alex Martinez was submitted on January 2, 2025 for a $45,000 personal item. Current status: Approved.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent. It doesn't just know things. It *does* things.",
+      "text": "%md\n## The Chatbot vs Agent Difference\n\n**A chatbot would say:**\n\n> \"To check the status of a item submission, you would typically:\\n> 1. Log into the Big Star Collectibles portal\\n> 2. Navigate to Submission Status\\n> 3. Enter your submission ID\\n> 4. View the current status\"\n\n**The agent said:**\n\n> \"Item submission ITEM-20260115-1042 for Alex Martinez was submitted on January 15, 2026 with a declared value of $7,800. Current status: Authenticating.\"\n\nSame question. One explains the process. The other runs it.\n\nThat's what makes an agent an agent. It doesn't just know things. It *does* things.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -570,13 +570,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>The Chatbot vs Agent Difference</h2>\n\n<p><strong>A chatbot would say:</strong></p>\n\n<blockquote>\"To check the status of a item submission, you would typically:<br/>1. Log into the Big Star Collectibles portal<br/>2. Navigate to Application Status<br/>3. Enter your application ID<br/>4. View the current status\"</blockquote>\n\n<p><strong>The agent said:</strong></p>\n\n<blockquote>\"Item application LOAN-12345 for Alex Martinez was submitted on January 2, 2025 for a $45,000 personal item. Current status: Approved.\"</blockquote>\n\n<p>Same question. One explains the process. The other runs it.</p>\n\n<p>That's what makes an agent an agent. It doesn't just know things. It <em>does</em> things.</p>"
+            "data": "<h2>The Chatbot vs Agent Difference</h2>\n\n<p><strong>A chatbot would say:</strong></p>\n\n<blockquote>\"To check the status of a item submission, you would typically:<br/>1. Log into the Big Star Collectibles portal<br/>2. Navigate to Submission Status<br/>3. Enter your submission ID<br/>4. View the current status\"</blockquote>\n\n<p><strong>The agent said:</strong></p>\n\n<blockquote>\"Item submission ITEM-20260115-1042 for Alex Martinez was submitted on January 15, 2026 with a declared value of $7,800. Current status: Authenticating.\"</blockquote>\n\n<p>Same question. One explains the process. The other runs it.</p>\n\n<p>That's what makes an agent an agent. It doesn't just know things. It <em>does</em> things.</p>"
           }
         ]
       }
     },
     {
-      "text": "%md\n## What You Learned\n\nIn this lab, you experienced the fundamental nature of AI agents:\n\n- Created a item submissions table with descriptive comments for Select AI\n- Added the table to your AI profile's `object_list`\n- Built an agent with access to a SQL tool\n- Watched it query real item data to answer questions\n- Saw the execution history proving it took action\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Big Star Collectibles—and for your business.",
+      "text": "%md\n## What You Learned\n\nIn this lab, you experienced the fundamental nature of AI agents:\n\n- Created a item submissions table with descriptive comments for Select AI\n- Added the table to your AI profile's `object_list`\n- Built an agent with access to a SQL tool\n- Watched it query real item data to answer questions\n- Saw the execution history proving it took action\n\n**Key takeaway:** An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Big Star Collectibles\u2014and for your business.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -591,7 +591,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you experienced the fundamental nature of AI agents:</p>\n\n<ul>\n<li>Created a item submissions table with descriptive comments for Select AI</li>\n<li>Added the table to your AI profile's <code>object_list</code></li>\n<li>Built an agent with access to a SQL tool</li>\n<li>Watched it query real item data to answer questions</li>\n<li>Saw the execution history proving it took action</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Big Star Collectibles—and for your business.</p>"
+            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you experienced the fundamental nature of AI agents:</p>\n\n<ul>\n<li>Created a item submissions table with descriptive comments for Select AI</li>\n<li>Added the table to your AI profile's <code>object_list</code></li>\n<li>Built an agent with access to a SQL tool</li>\n<li>Watched it query real item data to answer questions</li>\n<li>Saw the execution history proving it took action</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> An agent acts on your systems. A chatbot explains how you could act on your systems. That's the difference that matters for Big Star Collectibles\u2014and for your business.</p>"
           }
         ]
       }
