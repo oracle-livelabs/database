@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## Watch an Agent Think and Act at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 personal item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.\n\n*\"Small items take as long to process as big ones. We spend hours reviewing applications that should just auto-approve.\"*\n\nMeanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior appraisers waste time on $30K personal items while $500K authenticatings wait in queue.\n\n### What You'll Learn\n\nIn this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:\n\n1. Create item submissions with proper tracking IDs\n2. Assess risk based on item type and amount\n3. Route appropriately:\n   - **Under $50K personal/auto** \u2192 Auto-approve (low risk)\n   - **$50K-$250K** \u2192 Appraiser review\n   - **Over $250K or authenticatings** \u2192 Senior appraiser\n4. Log every step for audit compliance\n\nEvery agent follows the same pattern: **understand \u2192 plan \u2192 execute tools \u2192 analyze results \u2192 respond**. You'll trace this loop with detailed logging.\n\n**What you'll build:** A item risk assessment workflow with conditional routing and audit trail.\n\n**Estimated Time:** 10 minutes",
+      "text": "%md\n## Watch an Agent Think and Act at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 collector_card item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.\n\n*\"Small items take as long to process as big ones. We spend hours reviewing applications that should just limited_art-approve.\"*\n\nMeanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior appraisers waste time on $30K collector_card items while $500K authenticatings wait in queue.\n\n### What You'll Learn\n\nIn this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:\n\n1. Create item submissions with proper tracking IDs\n2. Assess risk based on item type and amount\n3. Route appropriately:\n   - **Under $50K collector_card/limited_art** \u2192 Limited_art-approve (low risk)\n   - **$50K-$250K** \u2192 Appraiser review\n   - **Over $250K or authenticatings** \u2192 Senior appraiser\n4. Log every step for audit compliance\n\nEvery agent follows the same pattern: **understand \u2192 plan \u2192 execute tools \u2192 analyze results \u2192 respond**. You'll trace this loop with detailed logging.\n\n**What you'll build:** A item risk assessment workflow with conditional routing and audit trail.\n\n**Estimated Time:** 10 minutes",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -16,7 +16,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Watch an Agent Think and Act at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 personal item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.</p>\n\n<p><em>\"Small items take as long to process as big ones. We spend hours reviewing applications that should just auto-approve.\"</em></p>\n\n<p>Meanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior appraisers waste time on $30K personal items while $500K authenticatings wait in queue.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:</p>\n\n<ol>\n<li>Create item submissions with proper tracking IDs</li>\n<li>Assess risk based on item type and amount</li>\n<li>Route appropriately:\n<ul>\n<li><strong>Under $50K personal/auto</strong> \u2192 Auto-approve (low risk)</li>\n<li><strong>$50K-$250K</strong> \u2192 Appraiser review</li>\n<li><strong>Over $250K or authenticatings</strong> \u2192 Senior appraiser</li>\n</ul></li>\n<li>Log every step for audit compliance</li>\n</ol>\n\n<p>Every agent follows the same pattern: <strong>understand \u2192 plan \u2192 execute tools \u2192 analyze results \u2192 respond</strong>. You'll trace this loop with detailed logging.</p>\n\n<p><strong>What you'll build:</strong> A item risk assessment workflow with conditional routing and audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+            "data": "<h2>Watch an Agent Think and Act at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 collector_card item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.</p>\n\n<p><em>\"Small items take as long to process as big ones. We spend hours reviewing applications that should just limited_art-approve.\"</em></p>\n\n<p>Meanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior appraisers waste time on $30K collector_card items while $500K authenticatings wait in queue.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:</p>\n\n<ol>\n<li>Create item submissions with proper tracking IDs</li>\n<li>Assess risk based on item type and amount</li>\n<li>Route appropriately:\n<ul>\n<li><strong>Under $50K collector_card/limited_art</strong> \u2192 Limited_art-approve (low risk)</li>\n<li><strong>$50K-$250K</strong> \u2192 Appraiser review</li>\n<li><strong>Over $250K or authenticatings</strong> \u2192 Senior appraiser</li>\n</ul></li>\n<li>Log every step for audit compliance</li>\n</ol>\n\n<p>Every agent follows the same pattern: <strong>understand \u2192 plan \u2192 execute tools \u2192 analyze results \u2192 respond</strong>. You'll trace this loop with detailed logging.</p>\n\n<p><strong>What you'll build:</strong> A item risk assessment workflow with conditional routing and audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
           }
         ]
       }
@@ -86,7 +86,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Risk Assessment Tool\n\nThis function determines what risk level applies based on item amount and type. At Big Star Collectibles:\n\n- Personal items under $50K \u2192 **AUTO_APPROVE** (low risk, standard terms)\n- Personal/Auto items $50K-$250K \u2192 **APPRAISER_REVIEW** (moderate risk)\n- Any item $250K+ OR all Authenticating items \u2192 **SENIOR_APPRAISER** (high value/complexity)\n\nThe agent will use this result to decide whether to route for human review.",
+      "text": "%md\n## Create the Risk Assessment Tool\n\nThis function determines what risk level applies based on item amount and type. At Big Star Collectibles:\n\n- Collector_card items under $50K \u2192 **AUTO_APPROVE** (low risk, standard terms)\n- Collector_card/Limited_art items $50K-$250K \u2192 **APPRAISER_REVIEW** (moderate risk)\n- Any item $250K+ OR all Authenticating items \u2192 **SENIOR_APPRAISER** (high value/complexity)\n\nThe agent will use this result to decide whether to route for human review.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -101,13 +101,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Risk Assessment Tool</h2>\n\n<p>This function determines what risk level applies based on item amount and type. At Big Star Collectibles:</p>\n\n<ul>\n<li>Personal items under $50K \u2192 <strong>AUTO_APPROVE</strong> (low risk, standard terms)</li>\n<li>Personal/Auto items $50K-$250K \u2192 <strong>APPRAISER_REVIEW</strong> (moderate risk)</li>\n<li>Any item $250K+ OR all Authenticating items \u2192 <strong>SENIOR_APPRAISER</strong> (high value/complexity)</li>\n</ul>\n\n<p>The agent will use this result to decide whether to route for human review.</p>"
+            "data": "<h2>Create the Risk Assessment Tool</h2>\n\n<p>This function determines what risk level applies based on item amount and type. At Big Star Collectibles:</p>\n\n<ul>\n<li>Collector_card items under $50K \u2192 <strong>AUTO_APPROVE</strong> (low risk, standard terms)</li>\n<li>Collector_card/Limited_art items $50K-$250K \u2192 <strong>APPRAISER_REVIEW</strong> (moderate risk)</li>\n<li>Any item $250K+ OR all Authenticating items \u2192 <strong>SENIOR_APPRAISER</strong> (high value/complexity)</li>\n</ul>\n\n<p>The agent will use this result to decide whether to route for human review.</p>"
           }
         ]
       }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION assess_item_risk(\n    p_amount    NUMBER,\n    p_item_type VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_result VARCHAR2(200);\nBEGIN\n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('ASSESS_RISK', 'Assessing risk for $' || TO_CHAR(p_amount, '999,999') || ' ' || p_item_type || ' item');\n    \n    -- Apply Big Star Collectibles risk rules\n    IF UPPER(p_item_type) = 'AUTHENTICATING' THEN\n        v_result := 'SENIOR_APPRAISER: All authenticating items require senior review';\n    ELSIF p_amount >= 250000 THEN\n        v_result := 'SENIOR_APPRAISER: Items $250K+ require senior appraiser';\n    ELSIF p_amount >= 50000 THEN\n        v_result := 'APPRAISER_REVIEW: Items $50K-$250K require appraiser review';\n    ELSE\n        v_result := 'AUTO_APPROVE: Personal items under $50K auto-approved';\n    END IF;\n    \n    COMMIT;\n    RETURN v_result;\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION assess_item_risk(\n    p_amount    NUMBER,\n    p_item_type VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_result VARCHAR2(200);\nBEGIN\n    -- Log the step\n    INSERT INTO workflow_log (step_name, step_detail) \n    VALUES ('ASSESS_RISK', 'Assessing risk for $' || TO_CHAR(p_amount, '999,999') || ' ' || p_item_type || ' item');\n    \n    -- Apply Big Star Collectibles risk rules\n    IF UPPER(p_item_type) = 'AUTHENTICATING' THEN\n        v_result := 'SENIOR_APPRAISER: All authenticating items require senior review';\n    ELSIF p_amount >= 250000 THEN\n        v_result := 'SENIOR_APPRAISER: Items $250K+ require senior appraiser';\n    ELSIF p_amount >= 50000 THEN\n        v_result := 'APPRAISER_REVIEW: Items $50K-$250K require appraiser review';\n    ELSE\n        v_result := 'AUTO_APPROVE: Collector_card items under $50K limited_art-approved';\n    END IF;\n    \n    COMMIT;\n    RETURN v_result;\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -171,7 +171,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CREATE_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Create a new item submission at Big Star Collectibles. Parameters: P_APPLICANT (applicant name), P_AMOUNT (item amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business). Returns the application ID.\",\n                        \"function\": \"create_item_application\"}',\n        description => 'Creates a item submission and returns the application ID'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ASSESS_ITEM_RISK_TOOL',\n        attributes  => '{\"instruction\": \"Assess risk level for a item submission. Parameters: P_AMOUNT (item amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business). Returns AUTO_APPROVE, APPRAISER_REVIEW, or SENIOR_APPRAISER.\",\n                        \"function\": \"assess_item_risk\"}',\n        description => 'Returns the required review level based on amount and item type'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ROUTE_AUTHENTICATION_TOOL',\n        attributes  => '{\"instruction\": \"Route a item submission for appraisal review. Only call this if ASSESS_ITEM_RISK_TOOL returned APPRAISER_REVIEW or SENIOR_APPRAISER. Do NOT call this for AUTO_APPROVE. Parameters: P_APPLICATION_ID (the ITEM-YYMMDD-NNNN format ID), P_REVIEW_LEVEL (APPRAISER or SENIOR_APPRAISER).\",\n                        \"function\": \"route_for_appraisal\"}',\n        description => 'Routes the item submission to the appropriate appraiser'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'CREATE_ITEM_TOOL',\n        attributes  => '{\"instruction\": \"Create a new item submission at Big Star Collectibles. Parameters: P_APPLICANT (applicant name), P_AMOUNT (item amount as number), P_ITEM_TYPE (collector_card, limited_art, authenticating, or business). Returns the application ID.\",\n                        \"function\": \"create_item_application\"}',\n        description => 'Creates a item submission and returns the application ID'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ASSESS_ITEM_RISK_TOOL',\n        attributes  => '{\"instruction\": \"Assess risk level for a item submission. Parameters: P_AMOUNT (item amount as number), P_ITEM_TYPE (collector_card, limited_art, authenticating, or business). Returns AUTO_APPROVE, APPRAISER_REVIEW, or SENIOR_APPRAISER.\",\n                        \"function\": \"assess_item_risk\"}',\n        description => 'Returns the required review level based on amount and item type'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ROUTE_AUTHENTICATION_TOOL',\n        attributes  => '{\"instruction\": \"Route a item submission for appraisal review. Only call this if ASSESS_ITEM_RISK_TOOL returned APPRAISER_REVIEW or SENIOR_APPRAISER. Do NOT call this for AUTO_APPROVE. Parameters: P_APPLICATION_ID (the ITEM-YYMMDD-NNNN format ID), P_REVIEW_LEVEL (APPRAISER or SENIOR_APPRAISER).\",\n                        \"function\": \"route_for_appraisal\"}',\n        description => 'Routes the item submission to the appropriate appraiser'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -203,7 +203,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ITEM_EXEC_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item processing agent for Big Star Collectibles. Process item submissions by: 1) Creating the application, 2) Assessing the risk, 3) Only routing for appraisal if risk assessment requires it. If assessment says AUTO_APPROVE, do not route.\"}',\n        description => 'Agent demonstrating item processing execution loop'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_EXEC_TASK',\n        attributes  => '{\"instruction\": \"Process the item submission: 1. Call CREATE_ITEM_TOOL to create the application 2. Call ASSESS_ITEM_RISK_TOOL to determine risk level 3. If result contains APPRAISER_REVIEW or SENIOR_APPRAISER, call ROUTE_AUTHENTICATION_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_AUTHENTICATION_TOOL - just confirm the item is auto-approved. User request: {query}\",\n                        \"tools\": [\"CREATE_ITEM_TOOL\", \"ASSESS_ITEM_RISK_TOOL\", \"ROUTE_AUTHENTICATION_TOOL\"]}',\n        description => 'Task for item execution demo'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ITEM_EXEC_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"ITEM_EXEC_AGENT\", \"task\": \"ITEM_EXEC_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for item execution demo'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ITEM_EXEC_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item processing agent for Big Star Collectibles. Process item submissions by: 1) Creating the application, 2) Assessing the risk, 3) Only routing for appraisal if risk assessment requires it. If assessment says AUTO_APPROVE, do not route.\"}',\n        description => 'Agent demonstrating item processing execution loop'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_EXEC_TASK',\n        attributes  => '{\"instruction\": \"Process the item submission: 1. Call CREATE_ITEM_TOOL to create the application 2. Call ASSESS_ITEM_RISK_TOOL to determine risk level 3. If result contains APPRAISER_REVIEW or SENIOR_APPRAISER, call ROUTE_AUTHENTICATION_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_AUTHENTICATION_TOOL - just confirm the item is limited_art-approved. User request: {query}\",\n                        \"tools\": [\"CREATE_ITEM_TOOL\", \"ASSESS_ITEM_RISK_TOOL\", \"ROUTE_AUTHENTICATION_TOOL\"]}',\n        description => 'Task for item execution demo'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ITEM_EXEC_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"ITEM_EXEC_AGENT\", \"task\": \"ITEM_EXEC_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for item execution demo'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -246,7 +246,7 @@
       }
     },
     {
-      "text": "%md\n## Submit a $75,000 Auto Item (Appraiser Review Path)\n\nThis $75,000 auto item should trigger the full workflow:\n1. Create the item submission\n2. Assess risk \u2192 returns APPRAISER_REVIEW (between $50K and $250K)\n3. Route for appraiser review\n\nWatch the agent's response\u2014it should mention creating the application and routing it for appraiser review.",
+      "text": "%md\n## Submit a $75,000 Limited_art Item (Appraiser Review Path)\n\nThis $75,000 limited_art item should trigger the full workflow:\n1. Create the item submission\n2. Assess risk \u2192 returns APPRAISER_REVIEW (between $50K and $250K)\n3. Route for appraiser review\n\nWatch the agent's response\u2014it should mention creating the application and routing it for appraiser review.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -261,13 +261,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Submit a $75,000 Auto Item (Appraiser Review Path)</h2>\n\n<p>This $75,000 auto item should trigger the full workflow:</p>\n<ol>\n<li>Create the item submission</li>\n<li>Assess risk \u2192 returns APPRAISER_REVIEW (between $50K and $250K)</li>\n<li>Route for appraiser review</li>\n</ol>\n\n<p>Watch the agent's response\u2014it should mention creating the application and routing it for appraiser review.</p>"
+            "data": "<h2>Submit a $75,000 Limited_art Item (Appraiser Review Path)</h2>\n\n<p>This $75,000 limited_art item should trigger the full workflow:</p>\n<ol>\n<li>Create the item submission</li>\n<li>Assess risk \u2192 returns APPRAISER_REVIEW (between $50K and $250K)</li>\n<li>Route for appraiser review</li>\n</ol>\n\n<p>Watch the agent's response\u2014it should mention creating the application and routing it for appraiser review.</p>"
           }
         ]
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Submit a $75000 auto item submission for John Smith;",
+      "text": "%script\nSELECT AI AGENT Submit a $75000 limited_art item submission for John Smith;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -278,7 +278,7 @@
       }
     },
     {
-      "text": "%md\n## Examine the Workflow Log\n\nNow look at exactly what happened, step by step. You should see three entries:\n\n1. **CREATE_APPLICATION**: The item submission was created with a unique ID\n2. **ASSESS_RISK**: Risk was evaluated ($75K auto item requires appraiser)\n3. **ROUTE_APPRAISER**: It was routed for appraiser review\n\nThis is the execution trace, proof of what the agent actually did.",
+      "text": "%md\n## Examine the Workflow Log\n\nNow look at exactly what happened, step by step. You should see three entries:\n\n1. **CREATE_APPLICATION**: The item submission was created with a unique ID\n2. **ASSESS_RISK**: Risk was evaluated ($75K limited_art item requires appraiser)\n3. **ROUTE_APPRAISER**: It was routed for appraiser review\n\nThis is the execution trace, proof of what the agent actually did.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -293,7 +293,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Examine the Workflow Log</h2>\n\n<p>Now look at exactly what happened, step by step. You should see three entries:</p>\n\n<ol>\n<li><strong>CREATE_APPLICATION</strong>: The item submission was created with a unique ID</li>\n<li><strong>ASSESS_RISK</strong>: Risk was evaluated ($75K auto item requires appraiser)</li>\n<li><strong>ROUTE_APPRAISER</strong>: It was routed for appraiser review</li>\n</ol>\n\n<p>This is the execution trace, proof of what the agent actually did.</p>"
+            "data": "<h2>Examine the Workflow Log</h2>\n\n<p>Now look at exactly what happened, step by step. You should see three entries:</p>\n\n<ol>\n<li><strong>CREATE_APPLICATION</strong>: The item submission was created with a unique ID</li>\n<li><strong>ASSESS_RISK</strong>: Risk was evaluated ($75K limited_art item requires appraiser)</li>\n<li><strong>ROUTE_APPRAISER</strong>: It was routed for appraiser review</li>\n</ol>\n\n<p>This is the execution trace, proof of what the agent actually did.</p>"
           }
         ]
       }
@@ -342,7 +342,7 @@
       }
     },
     {
-      "text": "%md\n## Verify the Item Application Record\n\nLook at the actual database record. You should see John Smith's $75,000 auto item with status **SUBMITTED_APPRAISER**.\n\nThis proves the agent didn't just say it routed the item\u2014it actually updated the database.",
+      "text": "%md\n## Verify the Item Application Record\n\nLook at the actual database record. You should see John Smith's $75,000 limited_art item with status **SUBMITTED_APPRAISER**.\n\nThis proves the agent didn't just say it routed the item\u2014it actually updated the database.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -357,7 +357,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Verify the Item Application Record</h2>\n\n<p>Look at the actual database record. You should see John Smith's $75,000 auto item with status <strong>SUBMITTED_APPRAISER</strong>.</p>\n\n<p>This proves the agent didn't just say it routed the item\u2014it actually updated the database.</p>"
+            "data": "<h2>Verify the Item Application Record</h2>\n\n<p>Look at the actual database record. You should see John Smith's $75,000 limited_art item with status <strong>SUBMITTED_APPRAISER</strong>.</p>\n\n<p>This proves the agent didn't just say it routed the item\u2014it actually updated the database.</p>"
           }
         ]
       }
@@ -374,7 +374,7 @@
       }
     },
     {
-      "text": "%md\n## Submit a $25,000 Personal Item (Auto-Approve Path)\n\nNow try a small personal item that should be auto-approved. Clear the log first so you see only this execution.\n\nWith $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call ROUTE_APPRAISER_TOOL.",
+      "text": "%md\n## Submit a $25,000 Collector_card Item (Limited_art-Approve Path)\n\nNow try a small collector_card item that should be limited_art-approved. Clear the log first so you see only this execution.\n\nWith $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call ROUTE_APPRAISER_TOOL.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -389,13 +389,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Submit a $25,000 Personal Item (Auto-Approve Path)</h2>\n\n<p>Now try a small personal item that should be auto-approved. Clear the log first so you see only this execution.</p>\n\n<p>With $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call ROUTE_APPRAISER_TOOL.</p>"
+            "data": "<h2>Submit a $25,000 Collector_card Item (Limited_art-Approve Path)</h2>\n\n<p>Now try a small collector_card item that should be limited_art-approved. Clear the log first so you see only this execution.</p>\n\n<p>With $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call ROUTE_APPRAISER_TOOL.</p>"
           }
         ]
       }
     },
     {
-      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $25000 personal item submission for Jane Doe;",
+      "text": "%script\nTRUNCATE TABLE workflow_log;\nSELECT AI AGENT Submit a $25000 collector_card item submission for Jane Doe;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -406,7 +406,7 @@
       }
     },
     {
-      "text": "%md\n## Check the Workflow Log for Auto-Approve\n\nYou should see only TWO steps this time:\n\n1. **CREATE_APPLICATION**: The item submission was created\n2. **ASSESS_RISK**: Risk assessment returned AUTO_APPROVE\n\nNo ROUTE_APPRAISER step! The agent correctly decided not to route because the risk assessment said AUTO_APPROVE. This is the agent making a decision based on data.",
+      "text": "%md\n## Check the Workflow Log for Limited_art-Approve\n\nYou should see only TWO steps this time:\n\n1. **CREATE_APPLICATION**: The item submission was created\n2. **ASSESS_RISK**: Risk assessment returned AUTO_APPROVE\n\nNo ROUTE_APPRAISER step! The agent correctly decided not to route because the risk assessment said AUTO_APPROVE. This is the agent making a decision based on data.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -421,7 +421,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Check the Workflow Log for Auto-Approve</h2>\n\n<p>You should see only TWO steps this time:</p>\n\n<ol>\n<li><strong>CREATE_APPLICATION</strong>: The item submission was created</li>\n<li><strong>ASSESS_RISK</strong>: Risk assessment returned AUTO_APPROVE</li>\n</ol>\n\n<p>No ROUTE_APPRAISER step! The agent correctly decided not to route because the risk assessment said AUTO_APPROVE. This is the agent making a decision based on data.</p>"
+            "data": "<h2>Check the Workflow Log for Limited_art-Approve</h2>\n\n<p>You should see only TWO steps this time:</p>\n\n<ol>\n<li><strong>CREATE_APPLICATION</strong>: The item submission was created</li>\n<li><strong>ASSESS_RISK</strong>: Risk assessment returned AUTO_APPROVE</li>\n</ol>\n\n<p>No ROUTE_APPRAISER step! The agent correctly decided not to route because the risk assessment said AUTO_APPROVE. This is the agent making a decision based on data.</p>"
           }
         ]
       }
@@ -438,7 +438,7 @@
       }
     },
     {
-      "text": "%md\n## Verify the Auto-Approved Item\n\nJane's item should have status **SUBMITTED** (not SUBMITTED_APPRAISER), because it was auto-approved and didn't need routing.",
+      "text": "%md\n## Verify the Limited_art-Approved Item\n\nJane's item should have status **SUBMITTED** (not SUBMITTED_APPRAISER), because it was limited_art-approved and didn't need routing.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -453,7 +453,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Verify the Auto-Approved Item</h2>\n\n<p>Jane's item should have status <strong>SUBMITTED</strong> (not SUBMITTED_APPRAISER), because it was auto-approved and didn't need routing.</p>"
+            "data": "<h2>Verify the Limited_art-Approved Item</h2>\n\n<p>Jane's item should have status <strong>SUBMITTED</strong> (not SUBMITTED_APPRAISER), because it was limited_art-approved and didn't need routing.</p>"
           }
         ]
       }
@@ -566,7 +566,7 @@
       }
     },
     {
-      "text": "%md\n## Compare All Three Execution Paths\n\nLet's see all item submissions side by side. Notice how different amounts and item types led to different statuses:\n\n| Amount | Type | Status | Why |\n|--------|------|--------|-----|\n| $25,000 | Personal | SUBMITTED | Auto-approved, under $50K |\n| $75,000 | Auto | SUBMITTED_APPRAISER | Between $50K-$250K |\n| $350,000 | Authenticating | SUBMITTED_SENIOR_APPRAISER | Authenticatings require senior review |\n\nSame agent, same tools, but different execution paths based on the data. That is exactly how Big Star Collectibles manages item risk.",
+      "text": "%md\n## Compare All Three Execution Paths\n\nLet's see all item submissions side by side. Notice how different amounts and item types led to different statuses:\n\n| Amount | Type | Status | Why |\n|--------|------|--------|-----|\n| $25,000 | Collector_card | SUBMITTED | Limited_art-approved, under $50K |\n| $75,000 | Limited_art | SUBMITTED_APPRAISER | Between $50K-$250K |\n| $350,000 | Authenticating | SUBMITTED_SENIOR_APPRAISER | Authenticatings require senior review |\n\nSame agent, same tools, but different execution paths based on the data. That is exactly how Big Star Collectibles manages item risk.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -581,13 +581,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Compare All Three Execution Paths</h2>\n\n<p>Let's see all item submissions side by side. Notice how different amounts and item types led to different statuses:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Why</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">Personal</td><td style=\"padding: 8px;\">SUBMITTED</td><td style=\"padding: 8px;\">Auto-approved, under $50K</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">Auto</td><td style=\"padding: 8px;\">SUBMITTED_APPRAISER</td><td style=\"padding: 8px;\">Between $50K-$250K</td></tr>\n<tr><td style=\"padding: 8px;\">$350,000</td><td style=\"padding: 8px;\">Authenticating</td><td style=\"padding: 8px;\">SUBMITTED_SENIOR_APPRAISER</td><td style=\"padding: 8px;\">Authenticatings require senior review</td></tr>\n</table>\n\n<p>Same agent, same tools, but different execution paths based on the data. That is exactly how Big Star Collectibles manages item risk.</p>"
+            "data": "<h2>Compare All Three Execution Paths</h2>\n\n<p>Let's see all item submissions side by side. Notice how different amounts and item types led to different statuses:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Why</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">Collector_card</td><td style=\"padding: 8px;\">SUBMITTED</td><td style=\"padding: 8px;\">Limited_art-approved, under $50K</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">Limited_art</td><td style=\"padding: 8px;\">SUBMITTED_APPRAISER</td><td style=\"padding: 8px;\">Between $50K-$250K</td></tr>\n<tr><td style=\"padding: 8px;\">$350,000</td><td style=\"padding: 8px;\">Authenticating</td><td style=\"padding: 8px;\">SUBMITTED_SENIOR_APPRAISER</td><td style=\"padding: 8px;\">Authenticatings require senior review</td></tr>\n</table>\n\n<p>Same agent, same tools, but different execution paths based on the data. That is exactly how Big Star Collectibles manages item risk.</p>"
           }
         ]
       }
     },
     {
-      "text": "%script\nSELECT \n    application_id,\n    applicant_name,\n    TO_CHAR(item_amount, '$999,999') as item_amount,\n    item_type,\n    risk_status,\n    CASE \n        WHEN item_amount < 50000 AND item_type != 'authenticating' THEN 'Auto-approved'\n        WHEN item_type = 'authenticating' THEN 'Senior appraiser (authenticating)'\n        WHEN item_amount >= 250000 THEN 'Senior appraiser (high value)'\n        ELSE 'Standard appraiser review'\n    END as routing_reason\nFROM item_applications\nORDER BY created_at;",
+      "text": "%script\nSELECT \n    application_id,\n    applicant_name,\n    TO_CHAR(item_amount, '$999,999') as item_amount,\n    item_type,\n    risk_status,\n    CASE \n        WHEN item_amount < 50000 AND item_type != 'authenticating' THEN 'Limited_art-approved'\n        WHEN item_type = 'authenticating' THEN 'Senior appraiser (authenticating)'\n        WHEN item_amount >= 250000 THEN 'Senior appraiser (high value)'\n        ELSE 'Standard appraiser review'\n    END as routing_reason\nFROM item_applications\nORDER BY created_at;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -619,7 +619,7 @@
       }
     },
     {
-      "text": "%md\n## What You Learned\n\nIn this lab, you traced the complete agent execution loop at Big Star Collectibles:\n\n- **Logging**: Added workflow_log entries to see each step\n- **Conditional execution**: Agent called routing tool only when risk assessment required it\n- **Three paths**: Auto-approve, appraiser review, senior appraiser review\n- **Verification**: Checked both logs and actual database records\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.",
+      "text": "%md\n## What You Learned\n\nIn this lab, you traced the complete agent execution loop at Big Star Collectibles:\n\n- **Logging**: Added workflow_log entries to see each step\n- **Conditional execution**: Agent called routing tool only when risk assessment required it\n- **Three paths**: Limited_art-approve, appraiser review, senior appraiser review\n- **Verification**: Checked both logs and actual database records\n\n**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -634,7 +634,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you traced the complete agent execution loop at Big Star Collectibles:</p>\n\n<ul>\n<li><strong>Logging</strong>: Added workflow_log entries to see each step</li>\n<li><strong>Conditional execution</strong>: Agent called routing tool only when risk assessment required it</li>\n<li><strong>Three paths</strong>: Auto-approve, appraiser review, senior appraiser review</li>\n<li><strong>Verification</strong>: Checked both logs and actual database records</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.</p>"
+            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you traced the complete agent execution loop at Big Star Collectibles:</p>\n\n<ul>\n<li><strong>Logging</strong>: Added workflow_log entries to see each step</li>\n<li><strong>Conditional execution</strong>: Agent called routing tool only when risk assessment required it</li>\n<li><strong>Three paths</strong>: Limited_art-approve, appraiser review, senior appraiser review</li>\n<li><strong>Verification</strong>: Checked both logs and actual database records</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.</p>"
           }
         ]
       }
