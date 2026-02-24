@@ -2,7 +2,7 @@
 
 ## Introduction
 
-HeatWave GenAI supports four in-database large language models (LLM):
+HeatWave GenAI supports five in-database large language models (LLM):
 - llama3.1-8b-instruct-v1
 - llama3.2-1b-instruct-v1
 - llama3.2-3b-instruct-v1
