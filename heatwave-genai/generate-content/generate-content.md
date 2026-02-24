@@ -2,7 +2,14 @@
 
 ## Introduction
 
-HeatWave GenAI supports two in-database large language models (LLM): mistral-7b-instruct-v3. You can use any of these models to generate response or summarize.
+HeatWave GenAI supports four in-database large language models (LLM):
+- llama3.1-8b-instruct-v1
+- llama3.2-1b-instruct-v1
+- llama3.2-3b-instruct-v1
+- mistral-7b-instruct-v3
+- mistral-7b-instruct-v3  
+
+You can use any of these models to generate response or summarize.
 
 _Estimated Time:_ 10 minutes
 
@@ -20,8 +27,9 @@ In this lab, you will be guided through the following task:
 
 ## Task 1:  Generate response using in-database LLMs
 
-1. Load the LLM in HeatWave, and click **Execute the selection or full block on HeatWave and create a new block**:
+1. Load the LLM in HeatWave. You can load any one of the four LLM’s, but for this lab, we are only using mistral
 
+    - Click **Execute the selection or full block on HeatWave and create a new block**:
     - To load mistral-7b-instruct-v3 model:
 
         ```bash

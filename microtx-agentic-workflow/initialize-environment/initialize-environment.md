@@ -46,11 +46,11 @@ This lab assumes you have:
     FREE Database status: RUNNING
     ```
 
-   This Oracle AI Database 26ai Free instance is configured with two schemas. MicroTx Workflow uses one schema to store the workflow definitions and the execution state data. A SQL task uses the other schema, named `livelabsUser` which stores the loan application data. The Oracle MCP server connects to the `livelabsUser` schema.
+   This Oracle AI Database 26ai Free instance is configured with two schemas. MicroTx Workflows uses one schema to store the workflow definitions and the execution state data. A SQL task uses the other schema, named `livelabsUser` which stores the loan application data. The Oracle MCP server connects to the `livelabsUser` schema.
 
 ## Task 2: Set the Password to Receive Email Notifications
 
-The Thunderbird email client on your remote desktop has been pre-configured with the user name `microtx.user`. MicroTx Workflow sends  emails notifications whenever a loan request requires approval.
+The Thunderbird email client on your remote desktop has been pre-configured with the user name `microtx.user`. MicroTx Workflows sends  emails notifications whenever a loan request requires approval.
 
 1. Run the following command to reset the password for the `microtx.user` user who receives email notifications to approve a loan request.
 
@@ -81,7 +81,7 @@ You can now view your emails in the Thunderbird email client.
 
 ## Task 3: Configure Minikube
 
-Click **Activities** in the remote desktop window, and then go back to the terminal window. Follow the instructions in this section to configure Minikube and start a tunnel between Minikube and MicroTx Workflow.
+Click **Activities** in the remote desktop window, and then go back to the terminal window. Follow the instructions in this section to configure Minikube and start a tunnel between Minikube and MicroTx Workflows.
 
 1. In a new terminal tab, run the following commands to start Minikube and start a tunnel.
 
@@ -109,41 +109,27 @@ Click **Activities** in the remote desktop window, and then go back to the termi
 
     This command also returns the external IP address of the ngnix ingress controller.
 
-2. Run the following command to verify that the external IP address of the load balance which was returned in the previous step is correct.
+2. Run the following command to verify that the external IP address of the load balancer which was returned in the previous step is correct.
 
     ```text
     <copy>
-    kubectl get svc -n ngnix-ingress
+    kubectl get svc -n istio-system
     </copy>
     ```
 
     **Example output**
 
-    ```text
-    NAME                                               TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
-    nginx-ingress-ingress-nginx-controller             LoadBalancer   10.107.........   10.107......  80:31572/TCP,443:32415/TCP   23h
-    nginx-ingress-ingress-nginx-controller-admission   ClusterIP      10.111.........  <none>         443/TCP
-    ```
+    ![Sample response of the external IP address of the load balancer](./images/ip-address-response.png)
 
-    From the output note down the value of `EXTERNAL-IP` for the load balancer. You will use this value later to access MicroTx Workflow.
+    From the output note down the value of `EXTERNAL-IP` for the load balancer. You will use this value later to access MicroTx Workflows.
 
-    Let's consider that the value of the external IP in the above example is 10.107.21.222.
+    Let's consider that the value of the external IP in the above example is 10.107.38.138.
 
-3. Store the external IP address in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
-
-    ```text
-    <copy>
-    export CLUSTER_IPADDR=10.107.21.222
-    </copy>
-    ```
-
-    Note that, if you don't do this, then you must explicitly specify the IP address when required in the commands.
-
-## Task 4: Start MicroTx Workflow Services
+## Task 4: Start Services in MicroTx Workflows
 
 1. From your remote desktop session, open a new terminal tab.
 
-2. As an `oracle` user, run the following commands to deploy and start all the services that are required to run the Loan application processing workflow in MicroTx Workflow.
+2. As an `oracle` user, run the following commands to deploy and start all the services that are required to run the Loan application processing workflow in MicroTx Workflows.
 
     ```
     <copy>
@@ -152,24 +138,18 @@ Click **Activities** in the remote desktop window, and then go back to the termi
     </copy>
     ```
 
-    When you run this script, it starts the following services or processes: document processing agent service, loan processing agent, loan compliance service, Optical Character Recognition (OCR) service, MicroTx Workflow server, and MicroTx Workflow UI.
+    When you run this script, it starts the following services or processes: document processing agent service, loan processing agent, loan compliance service, Optical Character Recognition (OCR) service, MicroTx Workflows server, and MicroTx Workflows UI.
 
     *It can take 5-6 minutes to deploy and start all the services.* Wait until all services are started.
 
-	![MicroTx Workflow UI](images/deployed-workflow-services.png)
+	![MicroTx Workflows UI](images/deployed-workflow-services.png)
 
-3. Run the following commands to initialize and configure the SQLcl MCP server. The workflow uses this MCP server.
+3. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser.
 
-    ```
-    <copy>
-    cd $HOME/WorkflowScripts
-    ./initilize_oracledb_mcp_server.sh
-    </copy>
-    ```
+4. Open `http://10.107.38.138/consoleui/` in any browser tab to access the MicroTx Workflows GUI. Replace, `10.107.38.138` with the external IP address of the load balancer that you have copied in the previous step in case the external IP address is different.
 
-4. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser. Open `http://10.107.21.222/consoleui/` in any browser tab to access the MicroTx Workflow GUI. Replace, `10.107.21.222` with the external IP address of the load balancer that you have copied in the previous step in case the external IP address is different.
-If you see these options on the screen, then click on Workflow.
-        ![MicroTx Workflow UI Options](images/initial-screen-options.png)
+5. If the following options are displayed, then click **Workflow**.
+    ![MicroTx Workflows UI Options](images/initial-screen-options.png)
 
 ## Task 5: Create an API Key to Access OpenAI
 
@@ -183,4 +163,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, September 2025
+* **Last Updated By/Date** - Sylaja Kannan, February 2026

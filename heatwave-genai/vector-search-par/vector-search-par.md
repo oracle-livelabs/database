@@ -21,6 +21,9 @@ In this lab, you will be guided through the following tasks:
 
 - Must complete Lab **Use HeatWave in-database LLM**...
 
+
+
+
 ## Task 1: Download HeatWave files
 
 Download HeatWave files on which we will perform a vector search.
@@ -38,37 +41,41 @@ Download HeatWave files on which we will perform a vector search.
 
 The Object Storage service provides reliable, secure, and scalable object storage. Object Storage uses buckets to organize your files. 
 
-1. Open the **Navigation menu** and click **Storage**. Under **Object Storage & Archive Storage**, click **Buckets**.
+1. From the Oracle Cloud Account, open the **Navigation menu** and click **Storage**. Under **Object Storage & Archive Storage**, click **Buckets**.
 
     ![Click bucket](./images/1-click-bucket.png "Click bucket")
 
-2. In the **heatwave-genai** compartment, click **Create Bucket**. 
+2. Select the  Cloud Account **Region** then  the  **Compartment**
 
-    ![Create bucket](./images/2-create-bucket.png "Create bucket")
+    ![Click Region](./images/41-region-compartment.png "Click Region")    
 
-3. Enter the **Bucket Name**, and accept the defaults for the rest of the fields.
+3. In the selected  compartment, click **Create Bucket**. 
+
+    ![Create bucket](./images/3-create-bucket.png "Create bucket")
+
+4. Enter the **Bucket Name**, and accept the defaults for the rest of the fields.
 
     ```bash
     <copy>bucket-vector-search</copy>
     ```
 
-4. Click **Create**.
+5. Click **Create**.
 
     ![Enter bucket details](./images/3-enter-bucket-details.png "Enter bucket details")
 
-5. Once the bucket is created, click the name of the bucket to open the **Bucket Details** page. 
+6. Once the bucket is created, click the name of the bucket to open the **Bucket Details** page. 
 
     ![Created bucket](./images/4-created-bucket.png "Created bucket")
 
-6. Copy the bucket name and **Namespace**, and paste the it somewhere for future reference.
+7. Copy the bucket name and **Namespace**, and paste the it somewhere for future reference.
 
     ![Bucket namespace](./images/35-bucket-namespace.png "Bucket namespace")
 
-7. Under **Objects**, click **More Actions**, and then click **Create New Folder**.
+8. Under **Objects**, click **More Actions**, and then click **Create New Folder**.
 
     ![Create new folder](./images/31-create-new-folder.png "Create new folder")
 
-8. In the **Create New Folder** page, enter a **Name** of the folder, and note it for future reference.
+9. In the **Create New Folder** page, enter a **Name** of the folder, and note it for future reference.
 
     ```bash
     <copy>bucket-folder-heatwave</copy>
@@ -76,7 +83,7 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
     ![Enter new folder details](./images/32-enter-folder-details.png "Enter new folder details")
 
-9. Click **Create**.
+10. Click **Create**.
 
 ## Task 3: Upload files to the bucket folder
 
@@ -171,12 +178,12 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 4. Ingest the files from Object Storage using the Pre-Authenticated Request URL, create vector embeddings, and load the vector embeddings into HeatWave:
 
     ```bash
-    <copy>call sys.VECTOR_STORE_LOAD('<PAR-URL>', '{"table_name": "VectorStoreTableName"}');</copy>
+    <copy>call sys.VECTOR_STORE_LOAD('<PAR-URL>', '{"table_name": "livelab_embedding "}');</copy>
     ```
     Replace the following:
 
     - **PAR-URL**: The complete Pre-Authenticated Request URL that you copied in Task 4, Step 3. Make sure to include the full URL.
-    - **VectorStoreTableName**: The name you want for the vector store table.
+    - **livelab_embedding**: The name you want for the vector store table.
    
     **Important**: If your files are in a folder within the bucket, you may need to append the folder path to the PAR URL:
     ```
@@ -191,7 +198,8 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 
     ![Ingest files from Object Storage](./images/14-ingest-files.png "Ingest files from Object Storage")
 
-    **Note**: The command returns a `task_id` and a `task_status_query`. Copy the `task_id` for checking the status in the next step.
+    **Note**: The command returns a `task_id` and a `task_status_query`. Copy the `task_id` for checking the status in the next step. Right click on the task_id SQL statement and select `Copy Field Unquoted`
+
 
 5. Check the task status using the `task_id` returned in the previous step:
 
@@ -221,20 +229,27 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
     
     Wait until the status shows `"status": "COMPLETED"` and `"progress": 100` before proceeding.
     
-    **Note**: Vector embedding generation takes approximately 3-7 minutes depending on file size and HeatWave cluster configuration.
+    **Note**: Vector embedding generation takes approximately 20-25 minutes depending on file size and HeatWave cluster configuration.
 
 6. Once the task shows COMPLETED status, verify that embeddings are loaded in the vector embeddings table.
+    
 
     ```bash
     <copy>select count(*) from <EmbeddingsTableName>;</copy>
     ```
-    For example:
+    For example:  
+    - Get a list of tables:
+    ```bash
+    <copy>SHOW TABLES; </copy>
+    ```
+    - Get a count of the table ending in "pdf".:
     ```bash
     <copy>select count(*) from livelab_embedding_pdf; </copy>
     ```
     It takes a couple of minutes to create vector embeddings. You should see a numerical value in the output (e.g., 592), which means your embeddings are successfully loaded in the table.
 
     ![Vector embeddings](./images/15-check-count.png "Vector embeddings")
+
 
 ### Troubleshooting Common Issues
 
@@ -308,6 +323,7 @@ HeatWave retrieves content from the vector store and provide that as context to 
     - The citations section shows the segments and documents it referred to as context.
 
     ![Vector search results](./images/18-vector-search-output.png "Vector search results")
+    
 
 ## Additional Example Queries
 

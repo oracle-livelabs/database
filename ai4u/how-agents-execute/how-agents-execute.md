@@ -305,9 +305,9 @@ Now let's run a request and trace every step.
     ```
 
 **Observe the execution sequence:**
-- CREATE_REQUEST: The loan was created
-- ASSESS_RISK: Risk was evaluated
-- ROUTE_DECISION: AUTO_APPROVED (personal under $50K with 780 credit)
+- `CREATE_REQUEST`: The loan was created
+- `ASSESS_RISK`: Risk was evaluated
+- `ROUTE_DECISION`: `AUTO_APPROVED` (personal under $50K with 780 credit)
 
 ## Task 4: Trace the Agent's Tool Calls
 
