@@ -65,7 +65,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
 5. Click **Ok**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Tables
 
@@ -141,7 +141,7 @@ Short-term context holds what's happening right now - the active information for
         WHERE memory_type = 'SHORTTERM' 
         AND session_id = p_session_id 
         AND entity_id = p_entity_id;
-        
+
         -- Store new context (expires in 1 hour)
         INSERT INTO agent_memory (memory_type, session_id, entity_id, content, expires_at)
         VALUES (
@@ -173,7 +173,7 @@ Short-term context holds what's happening right now - the active information for
         ) LOOP
             v_result := v_result || rec.entity_id || ': ' || rec.context || CHR(10);
         END LOOP;
-        
+
         IF v_result IS NULL THEN
             RETURN 'No active context found.';
         END IF;
@@ -254,7 +254,7 @@ Long-term facts are stable information the agent should rely on across tasks and
             v_result := v_result || '- ' || rec.fact || ' (' || rec.category || ')' || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No facts found for ' || p_entity_id;
         END IF;
@@ -369,7 +369,7 @@ Decisions and outcomes record what the agent decided and what happened. This is 
                 ' (Success: ' || rec.success || ')' || CHR(10) || '---' || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No similar decisions found.';
         END IF;
@@ -483,7 +483,7 @@ Reference knowledge is background information the agent consults but does not ch
                        rec.text || CHR(10) || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No reference knowledge found.';
         END IF;
@@ -503,15 +503,15 @@ Reference knowledge is background information the agent consults but does not ch
     SELECT add_reference('policy', 'Loyalty Discount Policy - Preferred', 
         'Clients with 5+ years history and no missed payments may receive up to 15% rate discount. ' ||
         'Approval required from senior inventory specialist. Document rationale in item notes.') FROM DUAL;
-        
+
     SELECT add_reference('policy', 'Loyalty Discount Policy - Standard',
         'Standard clients may request rate review after 2 years of on-time payments. ' ||
         'Maximum 10% discount. Requires appraiser approval.') FROM DUAL;
-        
+
     SELECT add_reference('procedure', 'Escalation Process',
         'Rate disputes: 1) Inventory specialist reviews history, 2) If over $50K item, escalate to Senior Officer, ' ||
         '3) If unresolved, escalate to Branch Manager, 4) Customer may request formal review.') FROM DUAL;
-        
+
     SELECT add_reference('guideline', 'Client Communication',
         'Always be empathetic and solution-focused. Acknowledge client concerns before ' ||
         'explaining policy. Offer alternatives when declining requests.') FROM DUAL;

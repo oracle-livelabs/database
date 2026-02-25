@@ -61,7 +61,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
 5. Click **Ok**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create an Agent Without Memory
 
@@ -144,7 +144,7 @@ Let's give the agent important information about a client, just like a real inve
     </copy>
     ```
 
-The agent acknowledges and seems to understand. It might even thank you for the information.
+    The agent acknowledges and seems to understand. It might even thank you for the information.
 
 2. Immediately ask about what you just said.
 
@@ -156,7 +156,7 @@ The agent acknowledges and seems to understand. It might even thank you for the 
     </copy>
     ```
 
-The agent can recall this, it's still in the conversation context.
+    The agent can recall this, it's still in the conversation context.
 
 3. Ask another question in the same session.
 
@@ -168,7 +168,7 @@ The agent can recall this, it's still in the conversation context.
     </copy>
     ```
 
-Still works, the context is maintained within the session.
+    Still works, the context is maintained within the session.
 
 ## Task 4: Experience the Forgetting
 
@@ -204,7 +204,7 @@ Now let's simulate what happens when the session ends and a new one begins, like
     </copy>
     ```
 
-**The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
+    **The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
 
 4. Try asking about her loyalty discount.
 
@@ -216,7 +216,7 @@ Now let's simulate what happens when the session ends and a new one begins, like
     </copy>
     ```
 
-**Gone.** Everything you told it has been forgotten. This is exactly what happened when Alex Martinez called Big Star Collectibles and got quoted standard rates.
+    **Gone.** Everything you told it has been forgotten. This is exactly what happened when Alex Martinez called Big Star Collectibles and got quoted standard rates.
 
 ## Task 5: See the Business Impact
 
@@ -253,7 +253,7 @@ This isn't just an inconvenience. It breaks real workflows and damages client re
     </copy>
     ```
 
-**The agent has no idea.** The new inventory specialist might contact the wrong person, call during market hours, or quote the wrong rates. The client gets frustrated. The relationship suffers.
+    **The agent has no idea.** The new inventory specialist might contact the wrong person, call during market hours, or quote the wrong rates. The client gets frustrated. The relationship suffers.
 
 ## Task 6: Understand What's Missing
 
@@ -270,7 +270,7 @@ Let's be clear about what the agent lacks:
     </copy>
     ```
 
-The forgetful agent has no memory tools. It has no way to store or retrieve information persistently.
+    The forgetful agent has no memory tools. It has no way to store or retrieve information persistently.
 
 2. Check if anything was recorded in history.
 
@@ -287,7 +287,7 @@ The forgetful agent has no memory tools. It has no way to store or retrieve info
     </copy>
     ```
 
-The tool calls are logged, but the client information itself? Lost.
+    The tool calls are logged, but the client information itself? Lost.
 
 ## Task 7: The Real Cost to Big Star Collectibles
 

@@ -70,7 +70,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ![Notebook Information](./images/notebook_clone.png " ")
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Item Submissions Table
 

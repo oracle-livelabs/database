@@ -43,7 +43,7 @@
       }
     },
     {
-      "text": "%script\nCREATE TABLE agent_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    agent_id       VARCHAR2(100) DEFAULT 'SEERS_AGENT',\n    memory_type    VARCHAR2(20) DEFAULT 'FACT',\n    content        JSON NOT NULL,\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
+      "text": "%script\nCREATE TABLE agent_memory (\n    memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    agent_id       VARCHAR2(100) DEFAULT 'BIGSTAR_AGENT',\n    memory_type    VARCHAR2(20) DEFAULT 'FACT',\n    content        JSON NOT NULL,\n    created_at     TIMESTAMP DEFAULT SYSTIMESTAMP\n);",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -491,7 +491,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method and what rate discount does she have;",
+      "text": "%script\nSELECT AI AGENT What is Sarah Chens preferred contact method and what rate discount does she have;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,

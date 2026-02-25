@@ -2,6 +2,8 @@
 
 ## About this Workshop
 
+Estimated Workshop Time: 90 minutes
+
 **If AI can't remember what it did yesterday, it can't run your business tomorrow.**
 
 Most AI agents have amnesia. Every conversation starts fresh. They don't remember the customer they helped last week, the decision they made yesterday, or the policy they're supposed to follow. This works for demos. It fails completely in production.
