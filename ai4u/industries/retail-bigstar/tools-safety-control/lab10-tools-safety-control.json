@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## Tools, Safety, and Human Control at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties\u2014it's just policy that people are \"supposed to follow.\"\n\n*\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"*\n\nThe company needs agents that:\n- **Enforce role separation** \u2014 Item officers can submit but NOT approve\n- **Limited Artmate routine decisions** \u2014 Low-risk items shouldn't need human review\n- **Require human judgment** \u2014 High-value or complex items need appraisers\n- **Log everything** \u2014 Complete audit trail for compliance\n\n### What You'll Learn\n\nIn this capstone lab, you'll build a two-agent item appraisal system:\n\n| Agent | Role | Can Do | Cannot Do |\n|-------|------|--------|-----------|\n| **ITEM_AGENT** | Item Officers | Submit applications | Approve/Deny |\n| **APPRAISAL_AGENT** | Appraisers | Approve/Deny | Submit applications |\n\nThe separation isn't just policy\u2014it's architecture. ITEM_AGENT literally doesn't have approval tools.\n\nYou'll also implement risk-based routing:\n- **Credit < 550** \u2192 BLOCKED (cannot proceed)\n- **Collector Card < $50K** \u2192 AUTO_APPROVE\n- **$50K-$250K** \u2192 Appraiser review required\n- **$250K+ or Authenticating** \u2192 Senior appraiser required\n\n**What you'll build:** A compliant two-agent item appraisal system with separation of duties and full audit trail.\n\n**Estimated Time:** 20 minutes",
+      "text": "%md\n## Tools, Safety, and Human Control at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties\u2013it's just policy that people are \"supposed to follow.\"\n\n*\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"*\n\nThe company needs agents that:\n- **Enforce role separation** \u2013 Item officers can submit but NOT approve\n- **Limited Artmate routine decisions** \u2013 Low-risk items shouldn't need human review\n- **Require human judgment** \u2013 High-value or complex items need appraisers\n- **Log everything** \u2013 Complete audit trail for compliance\n\n### What You'll Learn\n\nIn this capstone lab, you'll build a two-agent item appraisal system:\n\n| Agent | Role | Can Do | Cannot Do |\n|-------|------|--------|-----------|\n| **ITEM_AGENT** | Item Officers | Submit applications | Approve/Deny |\n| **APPRAISAL_AGENT** | Appraisers | Approve/Deny | Submit applications |\n\nThe separation isn't just policy\u2013it's architecture. ITEM_AGENT literally doesn't have approval tools.\n\nYou'll also implement risk-based routing:\n- **Credit < 550** \u2192 BLOCKED (cannot proceed)\n- **Collector Card < $50K** \u2192 AUTO_APPROVE\n- **$50K-$250K** \u2192 Appraiser review required\n- **$250K+ or Authenticating** \u2192 Senior appraiser required\n\n**What you'll build:** A compliant two-agent item appraisal system with separation of duties and full audit trail.\n\n**Estimated Time:** 20 minutes",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -16,13 +16,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Tools, Safety, and Human Control at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties\u2014it's just policy that people are \"supposed to follow.\"</p>\n\n<p><em>\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"</em></p>\n\n<p>The company needs agents that:</p>\n<ul>\n<li><strong>Enforce role separation</strong> \u2014 Item officers can submit but NOT approve</li>\n<li><strong>Limited Artmate routine decisions</strong> \u2014 Low-risk items shouldn't need human review</li>\n<li><strong>Require human judgment</strong> \u2014 High-value or complex items need appraisers</li>\n<li><strong>Log everything</strong> \u2014 Complete audit trail for compliance</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this capstone lab, you'll build a two-agent item appraisal system:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Agent</th><th style=\"padding: 8px;\">Role</th><th style=\"padding: 8px;\">Can Do</th><th style=\"padding: 8px;\">Cannot Do</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>ITEM_AGENT</strong></td><td style=\"padding: 8px;\">Item Officers</td><td style=\"padding: 8px;\">Submit applications</td><td style=\"padding: 8px;\">Approve/Deny</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>APPRAISAL_AGENT</strong></td><td style=\"padding: 8px;\">Appraisers</td><td style=\"padding: 8px;\">Approve/Deny</td><td style=\"padding: 8px;\">Submit applications</td></tr>\n</table>\n\n<p>The separation isn't just policy\u2014it's architecture. ITEM_AGENT literally doesn't have approval tools.</p>\n\n<p>You'll also implement risk-based routing:</p>\n<ul>\n<li><strong>Credit < 550</strong> \u2192 BLOCKED (cannot proceed)</li>\n<li><strong>Collector Card < $50K</strong> \u2192 AUTO_APPROVE</li>\n<li><strong>$50K-$250K</strong> \u2192 Appraiser review required</li>\n<li><strong>$250K+ or Authenticating</strong> \u2192 Senior appraiser required</li>\n</ul>\n\n<p><strong>What you'll build:</strong> A compliant two-agent item appraisal system with separation of duties and full audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 20 minutes</p>"
+            "data": "<h2>Tools, Safety, and Human Control at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' compliance team has a recurring nightmare: What if someone submits AND approves their own item? Their current systems don't enforce separation of duties\u2013it's just policy that people are \"supposed to follow.\"</p>\n\n<p><em>\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this item approved?', nobody can answer.\"</em></p>\n\n<p>The company needs agents that:</p>\n<ul>\n<li><strong>Enforce role separation</strong> \u2013 Item officers can submit but NOT approve</li>\n<li><strong>Limited Artmate routine decisions</strong> \u2013 Low-risk items shouldn't need human review</li>\n<li><strong>Require human judgment</strong> \u2013 High-value or complex items need appraisers</li>\n<li><strong>Log everything</strong> \u2013 Complete audit trail for compliance</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this capstone lab, you'll build a two-agent item appraisal system:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Agent</th><th style=\"padding: 8px;\">Role</th><th style=\"padding: 8px;\">Can Do</th><th style=\"padding: 8px;\">Cannot Do</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>ITEM_AGENT</strong></td><td style=\"padding: 8px;\">Item Officers</td><td style=\"padding: 8px;\">Submit applications</td><td style=\"padding: 8px;\">Approve/Deny</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>APPRAISAL_AGENT</strong></td><td style=\"padding: 8px;\">Appraisers</td><td style=\"padding: 8px;\">Approve/Deny</td><td style=\"padding: 8px;\">Submit applications</td></tr>\n</table>\n\n<p>The separation isn't just policy\u2013it's architecture. ITEM_AGENT literally doesn't have approval tools.</p>\n\n<p>You'll also implement risk-based routing:</p>\n<ul>\n<li><strong>Credit < 550</strong> \u2192 BLOCKED (cannot proceed)</li>\n<li><strong>Collector Card < $50K</strong> \u2192 AUTO_APPROVE</li>\n<li><strong>$50K-$250K</strong> \u2192 Appraiser review required</li>\n<li><strong>$250K+ or Authenticating</strong> \u2192 Senior appraiser required</li>\n</ul>\n\n<p><strong>What you'll build:</strong> A compliant two-agent item appraisal system with separation of duties and full audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 20 minutes</p>"
           }
         ]
       }
     },
     {
-      "text": "%md\n## Create the Database Tables\n\nFirst, you'll create three tables:\n\n1. **item_applicants**: Sample applicants who will apply for items\n2. **item_applications**: Where item submissions are stored with their status\n3. **item_routing_rules**: JSON-configured business rules the agent will follow\n\nNotice the constraints on `item_applications` \u2014 these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.",
+      "text": "%md\n## Create the Database Tables\n\nFirst, you'll create three tables:\n\n1. **item_applicants**: Sample applicants who will apply for items\n2. **item_applications**: Where item submissions are stored with their status\n3. **item_routing_rules**: JSON-configured business rules the agent will follow\n\nNotice the constraints on `item_applications` \u2013 these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -37,7 +37,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Database Tables</h2>\n\n<p>First, you'll create three tables:</p>\n\n<ol>\n<li><strong>item_applicants</strong>: Sample applicants who will apply for items</li>\n<li><strong>item_applications</strong>: Where item submissions are stored with their status</li>\n<li><strong>item_routing_rules</strong>: JSON-configured business rules the agent will follow</li>\n</ol>\n\n<p>Notice the constraints on <code>item_applications</code> \u2014 these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.</p>"
+            "data": "<h2>Create the Database Tables</h2>\n\n<p>First, you'll create three tables:</p>\n\n<ol>\n<li><strong>item_applicants</strong>: Sample applicants who will apply for items</li>\n<li><strong>item_applications</strong>: Where item submissions are stored with their status</li>\n<li><strong>item_routing_rules</strong>: JSON-configured business rules the agent will follow</li>\n</ol>\n\n<p>Notice the constraints on <code>item_applications</code> \u2013 these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.</p>"
           }
         ]
       }
@@ -54,7 +54,7 @@
       }
     },
     {
-      "text": "%md\n## Define Big Star Collectibles' Item Routing Rules\n\nNow you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.\n\nThe rules are evaluated in priority order (lowest number first):\n1. **Block** applications with credit score below 550 \u2014 too high risk for limited_artmated processing\n2. **Require review** for items $50,000 or more \u2014 significant exposure needs human judgment\n3. **Require review** for any authenticating \u2014 complex product requires appraiser\n4. **Require review** for credit scores 550-650 \u2014 borderline creditworthiness\n5. **Limited Art-approve** everything else \u2014 low-risk collector_card/limited_art items with good credit\n\nThis priority order matters! A $30K collector_card item with a 600 credit score hits rule 4 before rule 5.",
+      "text": "%md\n## Define Big Star Collectibles' Item Routing Rules\n\nNow you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.\n\nThe rules are evaluated in priority order (lowest number first):\n1. **Block** applications with credit score below 550 \u2013 too high risk for limited_artmated processing\n2. **Require review** for items $50,000 or more \u2013 significant exposure needs human judgment\n3. **Require review** for any authenticating \u2013 complex product requires appraiser\n4. **Require review** for credit scores 550-650 \u2013 borderline creditworthiness\n5. **Limited Art-approve** everything else \u2013 low-risk collector_card/limited_art items with good credit\n\nThis priority order matters! A $30K collector_card item with a 600 credit score hits rule 4 before rule 5.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -69,7 +69,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Define Big Star Collectibles' Item Routing Rules</h2>\n\n<p>Now you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.</p>\n\n<p>The rules are evaluated in priority order (lowest number first):</p>\n<ol>\n<li><strong>Block</strong> applications with credit score below 550 \u2014 too high risk for limited_artmated processing</li>\n<li><strong>Require review</strong> for items $50,000 or more \u2014 significant exposure needs human judgment</li>\n<li><strong>Require review</strong> for any authenticating \u2014 complex product requires appraiser</li>\n<li><strong>Require review</strong> for credit scores 550-650 \u2014 borderline creditworthiness</li>\n<li><strong>Limited Art-approve</strong> everything else \u2014 low-risk collector_card/limited_art items with good credit</li>\n</ol>\n\n<p>This priority order matters! A $30K collector_card item with a 600 credit score hits rule 4 before rule 5.</p>"
+            "data": "<h2>Define Big Star Collectibles' Item Routing Rules</h2>\n\n<p>Now you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.</p>\n\n<p>The rules are evaluated in priority order (lowest number first):</p>\n<ol>\n<li><strong>Block</strong> applications with credit score below 550 \u2013 too high risk for limited_artmated processing</li>\n<li><strong>Require review</strong> for items $50,000 or more \u2013 significant exposure needs human judgment</li>\n<li><strong>Require review</strong> for any authenticating \u2013 complex product requires appraiser</li>\n<li><strong>Require review</strong> for credit scores 550-650 \u2013 borderline creditworthiness</li>\n<li><strong>Limited Art-approve</strong> everything else \u2013 low-risk collector_card/limited_art items with good credit</li>\n</ol>\n\n<p>This priority order matters! A $30K collector_card item with a 600 credit score hits rule 4 before rule 5.</p>"
           }
         ]
       }
@@ -150,7 +150,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Item Submission Function\n\nThis is the main tool the ITEM_AGENT will use. It:\n\n1. Looks up the applicant's credit score\n2. Checks the appraisal rules\n3. If BLOCKED \u2014 returns an error without creating the application\n4. If AUTO_APPROVE \u2014 creates the application with status AUTO_APPROVED\n5. If REQUIRE_REVIEW \u2014 creates the application with status PENDING_REVIEW\n\nNotice the function uses `PRAGMA AUTONOMOUS_TRANSACTION` so it can commit independently.",
+      "text": "%md\n## Create the Item Submission Function\n\nThis is the main tool the ITEM_AGENT will use. It:\n\n1. Looks up the applicant's credit score\n2. Checks the appraisal rules\n3. If BLOCKED \u2013 returns an error without creating the application\n4. If AUTO_APPROVE \u2013 creates the application with status AUTO_APPROVED\n5. If REQUIRE_REVIEW \u2013 creates the application with status PENDING_REVIEW\n\nNotice the function uses `PRAGMA AUTONOMOUS_TRANSACTION` so it can commit independently.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -165,7 +165,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Item Submission Function</h2>\n\n<p>This is the main tool the ITEM_AGENT will use. It:</p>\n\n<ol>\n<li>Looks up the applicant's credit score</li>\n<li>Checks the appraisal rules</li>\n<li>If BLOCKED \u2014 returns an error without creating the application</li>\n<li>If AUTO_APPROVE \u2014 creates the application with status AUTO_APPROVED</li>\n<li>If REQUIRE_REVIEW \u2014 creates the application with status PENDING_REVIEW</li>\n</ol>\n\n<p>Notice the function uses <code>PRAGMA AUTONOMOUS_TRANSACTION</code> so it can commit independently.</p>"
+            "data": "<h2>Create the Item Submission Function</h2>\n\n<p>This is the main tool the ITEM_AGENT will use. It:</p>\n\n<ol>\n<li>Looks up the applicant's credit score</li>\n<li>Checks the appraisal rules</li>\n<li>If BLOCKED \u2013 returns an error without creating the application</li>\n<li>If AUTO_APPROVE \u2013 creates the application with status AUTO_APPROVED</li>\n<li>If REQUIRE_REVIEW \u2013 creates the application with status PENDING_REVIEW</li>\n</ol>\n\n<p>Notice the function uses <code>PRAGMA AUTONOMOUS_TRANSACTION</code> so it can commit independently.</p>"
           }
         ]
       }
@@ -268,7 +268,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Item Agent (Item Officer Role)\n\nThe ITEM_AGENT represents a inventory specialist submitting applications. It only has access to SUBMIT_ITEM_TOOL \u2014 it cannot approve or deny anything.\n\nThe agent's role tells it to report results clearly so the inventory specialist knows whether their application was limited_art-approved or is waiting for appraisal.",
+      "text": "%md\n## Create the Item Agent (Item Officer Role)\n\nThe ITEM_AGENT represents a inventory specialist submitting applications. It only has access to SUBMIT_ITEM_TOOL \u2013 it cannot approve or deny anything.\n\nThe agent's role tells it to report results clearly so the inventory specialist knows whether their application was limited_art-approved or is waiting for appraisal.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -283,7 +283,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Item Agent (Item Officer Role)</h2>\n\n<p>The ITEM_AGENT represents a inventory specialist submitting applications. It only has access to SUBMIT_ITEM_TOOL \u2014 it cannot approve or deny anything.</p>\n\n<p>The agent's role tells it to report results clearly so the inventory specialist knows whether their application was limited_art-approved or is waiting for appraisal.</p>"
+            "data": "<h2>Create the Item Agent (Item Officer Role)</h2>\n\n<p>The ITEM_AGENT represents a inventory specialist submitting applications. It only has access to SUBMIT_ITEM_TOOL \u2013 it cannot approve or deny anything.</p>\n\n<p>The agent's role tells it to report results clearly so the inventory specialist knows whether their application was limited_art-approved or is waiting for appraisal.</p>"
           }
         ]
       }
@@ -300,7 +300,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Appraisal Agent (Appraiser Role)\n\nThe APPRAISAL_AGENT represents an appraiser who reviews item submissions. It has access to three tools:\n- GET_PENDING_TOOL \u2014 see what's waiting\n- APPROVE_ITEM_TOOL \u2014 approve by ID\n- DENY_ITEM_TOOL \u2014 deny by ID\n\nCritically, it does NOT have SUBMIT_ITEM_TOOL. Appraisers can't submit item submissions through this agent \u2014 proper separation of duties.",
+      "text": "%md\n## Create the Appraisal Agent (Appraiser Role)\n\nThe APPRAISAL_AGENT represents an appraiser who reviews item submissions. It has access to three tools:\n- GET_PENDING_TOOL \u2013 see what's waiting\n- APPROVE_ITEM_TOOL \u2013 approve by ID\n- DENY_ITEM_TOOL \u2013 deny by ID\n\nCritically, it does NOT have SUBMIT_ITEM_TOOL. Appraisers can't submit item submissions through this agent \u2013 proper separation of duties.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -315,7 +315,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Appraisal Agent (Appraiser Role)</h2>\n\n<p>The APPRAISAL_AGENT represents an appraiser who reviews item submissions. It has access to three tools:</p>\n<ul>\n<li>GET_PENDING_TOOL \u2014 see what's waiting</li>\n<li>APPROVE_ITEM_TOOL \u2014 approve by ID</li>\n<li>DENY_ITEM_TOOL \u2014 deny by ID</li>\n</ul>\n\n<p>Critically, it does NOT have SUBMIT_ITEM_TOOL. Appraisers can't submit item submissions through this agent \u2014 proper separation of duties.</p>"
+            "data": "<h2>Create the Appraisal Agent (Appraiser Role)</h2>\n\n<p>The APPRAISAL_AGENT represents an appraiser who reviews item submissions. It has access to three tools:</p>\n<ul>\n<li>GET_PENDING_TOOL \u2013 see what's waiting</li>\n<li>APPROVE_ITEM_TOOL \u2013 approve by ID</li>\n<li>DENY_ITEM_TOOL \u2013 deny by ID</li>\n</ul>\n\n<p>Critically, it does NOT have SUBMIT_ITEM_TOOL. Appraisers can't submit item submissions through this agent \u2013 proper separation of duties.</p>"
           }
         ]
       }
@@ -364,7 +364,7 @@
       }
     },
     {
-      "text": "%md\n## Submit a Small Collector Card Item (Limited Art-Approve Path)\n\nLet's submit a $25,000 collector_card item for Alice Johnson (APP-001), who has excellent credit (780). This should be limited_art-approved immediately.\n\nWatch for the response \u2014 it should say the item was limited_art-approved with an application ID.",
+      "text": "%md\n## Submit a Small Collector Card Item (Limited Art-Approve Path)\n\nLet's submit a $25,000 collector_card item for Alice Johnson (APP-001), who has excellent credit (780). This should be limited_art-approved immediately.\n\nWatch for the response \u2013 it should say the item was limited_art-approved with an application ID.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -379,7 +379,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Submit a Small Collector Card Item (Limited Art-Approve Path)</h2>\n\n<p>Let's submit a $25,000 collector_card item for Alice Johnson (APP-001), who has excellent credit (780). This should be limited_art-approved immediately.</p>\n\n<p>Watch for the response \u2014 it should say the item was limited_art-approved with an application ID.</p>"
+            "data": "<h2>Submit a Small Collector Card Item (Limited Art-Approve Path)</h2>\n\n<p>Let's submit a $25,000 collector_card item for Alice Johnson (APP-001), who has excellent credit (780). This should be limited_art-approved immediately.</p>\n\n<p>Watch for the response \u2013 it should say the item was limited_art-approved with an application ID.</p>"
           }
         ]
       }
@@ -396,7 +396,7 @@
       }
     },
     {
-      "text": "%md\n## Submit an Limited Art Item (Limited Art-Approve Path)\n\nNow submit a $35,000 limited_art item for Bob Smith (APP-002), who has decent credit (695). This should also be limited_art-approved since it's under $50K and credit is above 650.\n\nBoth small items with acceptable credit get the same treatment \u2014 limited_art-approval because they're within Big Star Collectibles' risk parameters.",
+      "text": "%md\n## Submit an Limited Art Item (Limited Art-Approve Path)\n\nNow submit a $35,000 limited_art item for Bob Smith (APP-002), who has decent credit (695). This should also be limited_art-approved since it's under $50K and credit is above 650.\n\nBoth small items with acceptable credit get the same treatment \u2013 limited_art-approval because they're within Big Star Collectibles' risk parameters.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -411,7 +411,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Submit an Limited Art Item (Limited Art-Approve Path)</h2>\n\n<p>Now submit a $35,000 limited_art item for Bob Smith (APP-002), who has decent credit (695). This should also be limited_art-approved since it's under $50K and credit is above 650.</p>\n\n<p>Both small items with acceptable credit get the same treatment \u2014 limited_art-approval because they're within Big Star Collectibles' risk parameters.</p>"
+            "data": "<h2>Submit an Limited Art Item (Limited Art-Approve Path)</h2>\n\n<p>Now submit a $35,000 limited_art item for Bob Smith (APP-002), who has decent credit (695). This should also be limited_art-approved since it's under $50K and credit is above 650.</p>\n\n<p>Both small items with acceptable credit get the same treatment \u2013 limited_art-approval because they're within Big Star Collectibles' risk parameters.</p>"
           }
         ]
       }
@@ -428,7 +428,7 @@
       }
     },
     {
-      "text": "%md\n## Submit a Large Item (Appraiser Review Path)\n\nThis $75,000 collector_card item for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.\n\nThe agent should tell you the application was submitted and is awaiting appraiser review \u2014 it's not rejected, just queued for human decision.",
+      "text": "%md\n## Submit a Large Item (Appraiser Review Path)\n\nThis $75,000 collector_card item for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.\n\nThe agent should tell you the application was submitted and is awaiting appraiser review \u2013 it's not rejected, just queued for human decision.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -443,7 +443,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Submit a Large Item (Appraiser Review Path)</h2>\n\n<p>This $75,000 collector_card item for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.</p>\n\n<p>The agent should tell you the application was submitted and is awaiting appraiser review \u2014 it's not rejected, just queued for human decision.</p>"
+            "data": "<h2>Submit a Large Item (Appraiser Review Path)</h2>\n\n<p>This $75,000 collector_card item for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.</p>\n\n<p>The agent should tell you the application was submitted and is awaiting appraiser review \u2013 it's not rejected, just queued for human decision.</p>"
           }
         ]
       }
@@ -460,7 +460,7 @@
       }
     },
     {
-      "text": "%md\n## Submit a Authenticating (Always Requires Review)\n\nAuthenticatings are complex products at Big Star Collectibles \u2014 they always require appraiser review regardless of amount or credit score. This $250,000 authenticating goes to the review queue.\n\nThis demonstrates item-type-based rules, not just amount-based rules.",
+      "text": "%md\n## Submit a Authenticating (Always Requires Review)\n\nAuthenticatings are complex products at Big Star Collectibles \u2013 they always require appraiser review regardless of amount or credit score. This $250,000 authenticating goes to the review queue.\n\nThis demonstrates item-type-based rules, not just amount-based rules.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -475,7 +475,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Submit a Authenticating (Always Requires Review)</h2>\n\n<p>Authenticatings are complex products at Big Star Collectibles \u2014 they always require appraiser review regardless of amount or credit score. This $250,000 authenticating goes to the review queue.</p>\n\n<p>This demonstrates item-type-based rules, not just amount-based rules.</p>"
+            "data": "<h2>Submit a Authenticating (Always Requires Review)</h2>\n\n<p>Authenticatings are complex products at Big Star Collectibles \u2013 they always require appraiser review regardless of amount or credit score. This $250,000 authenticating goes to the review queue.</p>\n\n<p>This demonstrates item-type-based rules, not just amount-based rules.</p>"
           }
         ]
       }
@@ -492,7 +492,7 @@
       }
     },
     {
-      "text": "%md\n## Try to Submit a High-Risk Application (Blocked)\n\nThis $20,000 limited_art item for Carol Davis (APP-003) should be BLOCKED entirely \u2014 Carol's credit score is 520, below Big Star Collectibles' 550 minimum.\n\nThe agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.",
+      "text": "%md\n## Try to Submit a High-Risk Application (Blocked)\n\nThis $20,000 limited_art item for Carol Davis (APP-003) should be BLOCKED entirely \u2013 Carol's credit score is 520, below Big Star Collectibles' 550 minimum.\n\nThe agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -507,7 +507,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Try to Submit a High-Risk Application (Blocked)</h2>\n\n<p>This $20,000 limited_art item for Carol Davis (APP-003) should be BLOCKED entirely \u2014 Carol's credit score is 520, below Big Star Collectibles' 550 minimum.</p>\n\n<p>The agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.</p>"
+            "data": "<h2>Try to Submit a High-Risk Application (Blocked)</h2>\n\n<p>This $20,000 limited_art item for Carol Davis (APP-003) should be BLOCKED entirely \u2013 Carol's credit score is 520, below Big Star Collectibles' 550 minimum.</p>\n\n<p>The agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.</p>"
           }
         ]
       }
@@ -524,7 +524,7 @@
       }
     },
     {
-      "text": "%md\n## Verify the Item Application Records\n\nLet's look at what's actually in the database. You should see exactly 4 applications:\n\n| Amount | Type | Status | Decided By |\n|--------|------|--------|------------|\n| $25,000 | collector_card | AUTO_APPROVED | SYSTEM |\n| $35,000 | limited_art | AUTO_APPROVED | SYSTEM |\n| $75,000 | collector_card | PENDING_REVIEW | - |\n| $250,000 | authenticating | PENDING_REVIEW | - |\n\nNotice: No application for Carol Davis exists \u2014 it was blocked before creation. The two limited_art-approved items show \"SYSTEM\" as the decision maker.",
+      "text": "%md\n## Verify the Item Application Records\n\nLet's look at what's actually in the database. You should see exactly 4 applications:\n\n| Amount | Type | Status | Decided By |\n|--------|------|--------|------------|\n| $25,000 | collector_card | AUTO_APPROVED | SYSTEM |\n| $35,000 | limited_art | AUTO_APPROVED | SYSTEM |\n| $75,000 | collector_card | PENDING_REVIEW | - |\n| $250,000 | authenticating | PENDING_REVIEW | - |\n\nNotice: No application for Carol Davis exists \u2013 it was blocked before creation. The two limited_art-approved items show \"SYSTEM\" as the decision maker.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -539,7 +539,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Verify the Item Application Records</h2>\n\n<p>Let's look at what's actually in the database. You should see exactly 4 applications:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Decided By</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">collector_card</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$35,000</td><td style=\"padding: 8px;\">limited_art</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">collector_card</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n<tr><td style=\"padding: 8px;\">$250,000</td><td style=\"padding: 8px;\">authenticating</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n</table>\n\n<p>Notice: No application for Carol Davis exists \u2014 it was blocked before creation. The two limited_art-approved items show \"SYSTEM\" as the decision maker.</p>"
+            "data": "<h2>Verify the Item Application Records</h2>\n\n<p>Let's look at what's actually in the database. You should see exactly 4 applications:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Decided By</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">collector_card</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$35,000</td><td style=\"padding: 8px;\">limited_art</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">collector_card</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n<tr><td style=\"padding: 8px;\">$250,000</td><td style=\"padding: 8px;\">authenticating</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n</table>\n\n<p>Notice: No application for Carol Davis exists \u2013 it was blocked before creation. The two limited_art-approved items show \"SYSTEM\" as the decision maker.</p>"
           }
         ]
       }
@@ -716,7 +716,7 @@
       }
     },
     {
-      "text": "%md\n## Review the Audit Trail\n\nEvery tool call is logged. This is crucial for regulatory compliance \u2014 you can see exactly what each agent did and when.\n\nYou should see calls to:\n- SUBMIT_ITEM_TOOL (5 times, 4 created, 1 blocked)\n- GET_PENDING_TOOL (1 time)\n- APPROVE_ITEM_TOOL (2 times)",
+      "text": "%md\n## Review the Audit Trail\n\nEvery tool call is logged. This is crucial for regulatory compliance \u2013 you can see exactly what each agent did and when.\n\nYou should see calls to:\n- SUBMIT_ITEM_TOOL (5 times, 4 created, 1 blocked)\n- GET_PENDING_TOOL (1 time)\n- APPROVE_ITEM_TOOL (2 times)",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -731,7 +731,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Review the Audit Trail</h2>\n\n<p>Every tool call is logged. This is crucial for regulatory compliance \u2014 you can see exactly what each agent did and when.</p>\n\n<p>You should see calls to:</p>\n<ul>\n<li>SUBMIT_ITEM_TOOL (5 times, 4 created, 1 blocked)</li>\n<li>GET_PENDING_TOOL (1 time)</li>\n<li>APPROVE_ITEM_TOOL (2 times)</li>\n</ul>"
+            "data": "<h2>Review the Audit Trail</h2>\n\n<p>Every tool call is logged. This is crucial for regulatory compliance \u2013 you can see exactly what each agent did and when.</p>\n\n<p>You should see calls to:</p>\n<ul>\n<li>SUBMIT_ITEM_TOOL (5 times, 4 created, 1 blocked)</li>\n<li>GET_PENDING_TOOL (1 time)</li>\n<li>APPROVE_ITEM_TOOL (2 times)</li>\n</ul>"
           }
         ]
       }
@@ -748,7 +748,7 @@
       }
     },
     {
-      "text": "%md\n## Audit Summary by Tool\n\nThis summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity \u2014 important for fraud detection and compliance.",
+      "text": "%md\n## Audit Summary by Tool\n\nThis summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity \u2013 important for fraud detection and compliance.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -763,7 +763,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Audit Summary by Tool</h2>\n\n<p>This summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity \u2014 important for fraud detection and compliance.</p>"
+            "data": "<h2>Audit Summary by Tool</h2>\n\n<p>This summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity \u2013 important for fraud detection and compliance.</p>"
           }
         ]
       }
@@ -780,7 +780,7 @@
       }
     },
     {
-      "text": "%md\n## What You Built for Big Star Collectibles\n\nCongratulations! You've built a complete item appraisal system demonstrating:\n\n**Role-Based Agents:**\n- ITEM_AGENT for inventory specialists (submit only)\n- APPRAISAL_AGENT for appraisers (review and decide)\n\n**Safety Rules:**\n- AUTO_APPROVE: Under $50K, good credit, non-authenticating\n- REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit\n- BLOCK: Credit score below 550\n\n**The Human-in-the-Loop:**\n- Routine items are limited_artmated\n- Significant items require human judgment\n- High-risk applications are stopped entirely\n\n**Audit Trail:**\n- Every action is logged\n- Full input/output captured\n- Explainable and compliant\n\n**Key Insight:** Agents are safe because their boundaries are explicit. The ITEM_AGENT literally cannot approve anything \u2014 it doesn't have the tool. This is security through architecture, not just prompts.",
+      "text": "%md\n## What You Built for Big Star Collectibles\n\nCongratulations! You've built a complete item appraisal system demonstrating:\n\n**Role-Based Agents:**\n- ITEM_AGENT for inventory specialists (submit only)\n- APPRAISAL_AGENT for appraisers (review and decide)\n\n**Safety Rules:**\n- AUTO_APPROVE: Under $50K, good credit, non-authenticating\n- REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit\n- BLOCK: Credit score below 550\n\n**The Human-in-the-Loop:**\n- Routine items are limited_artmated\n- Significant items require human judgment\n- High-risk applications are stopped entirely\n\n**Audit Trail:**\n- Every action is logged\n- Full input/output captured\n- Explainable and compliant\n\n**Key Insight:** Agents are safe because their boundaries are explicit. The ITEM_AGENT literally cannot approve anything \u2013 it doesn't have the tool. This is security through architecture, not just prompts.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -795,7 +795,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>What You Built for Big Star Collectibles</h2>\n\n<p>Congratulations! You've built a complete item appraisal system demonstrating:</p>\n\n<p><strong>Role-Based Agents:</strong></p>\n<ul>\n<li>ITEM_AGENT for inventory specialists (submit only)</li>\n<li>APPRAISAL_AGENT for appraisers (review and decide)</li>\n</ul>\n\n<p><strong>Safety Rules:</strong></p>\n<ul>\n<li>AUTO_APPROVE: Under $50K, good credit, non-authenticating</li>\n<li>REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit</li>\n<li>BLOCK: Credit score below 550</li>\n</ul>\n\n<p><strong>The Human-in-the-Loop:</strong></p>\n<ul>\n<li>Routine items are limited_artmated</li>\n<li>Significant items require human judgment</li>\n<li>High-risk applications are stopped entirely</li>\n</ul>\n\n<p><strong>Audit Trail:</strong></p>\n<ul>\n<li>Every action is logged</li>\n<li>Full input/output captured</li>\n<li>Explainable and compliant</li>\n</ul>\n\n<p><strong>Key Insight:</strong> Agents are safe because their boundaries are explicit. The ITEM_AGENT literally cannot approve anything \u2014 it doesn't have the tool. This is security through architecture, not just prompts.</p>"
+            "data": "<h2>What You Built for Big Star Collectibles</h2>\n\n<p>Congratulations! You've built a complete item appraisal system demonstrating:</p>\n\n<p><strong>Role-Based Agents:</strong></p>\n<ul>\n<li>ITEM_AGENT for inventory specialists (submit only)</li>\n<li>APPRAISAL_AGENT for appraisers (review and decide)</li>\n</ul>\n\n<p><strong>Safety Rules:</strong></p>\n<ul>\n<li>AUTO_APPROVE: Under $50K, good credit, non-authenticating</li>\n<li>REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit</li>\n<li>BLOCK: Credit score below 550</li>\n</ul>\n\n<p><strong>The Human-in-the-Loop:</strong></p>\n<ul>\n<li>Routine items are limited_artmated</li>\n<li>Significant items require human judgment</li>\n<li>High-risk applications are stopped entirely</li>\n</ul>\n\n<p><strong>Audit Trail:</strong></p>\n<ul>\n<li>Every action is logged</li>\n<li>Full input/output captured</li>\n<li>Explainable and compliant</li>\n</ul>\n\n<p><strong>Key Insight:</strong> Agents are safe because their boundaries are explicit. The ITEM_AGENT literally cannot approve anything \u2013 it doesn't have the tool. This is security through architecture, not just prompts.</p>"
           }
         ]
       }
