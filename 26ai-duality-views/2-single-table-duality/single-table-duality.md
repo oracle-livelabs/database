@@ -24,7 +24,7 @@ Run the script below to create two single-table duality views:
 Run this step as a script.
 
 <iframe
-            id="live-sql-embedded"
+            class="freesql-embed"
             src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAAE5WQy07DMBRE9%252F6K2WVD%252BgHNKkovIigkVeJSsaou%252BIpa5KXYLVSIf0dN2oLEomJnH8uaOROGYO%252BlNSIbs59j1xv2%252FFwLTPeya6T12Ft5j9BwD%252FnwAzuwQ1%252BzbXFfFTn6oetl8AeVlBRrQlGipGUWJzS9l5TFOi3yOMNiFWepfsJjSuvfsYgrVVFGiZ6%252BfCog2FgTAMAcPGNrbo6s5UaCMzteRjrVCkY6ndWXui2Lh0sGGOtU3yHNKyo1VsvFsemCMtIUKRWGcL3wmwzjBltrBNKwrSMM7G37CuswCJuwa%252BsD9pbhtzIO81%252Frn5wr0m7m%252Fki72cV56hWM8NRxNMyLSe68wCkP7soAVCTfa6SLZwsCAAA%253D&code_language=PL_SQL&code_format=false"
             height="460px"
             width="100%"
@@ -47,7 +47,7 @@ Now that the views exist, query `attendee_dv` to view JSON documents stored over
 Run this step as a script.
 
 <iframe
-            id="live-sql-embedded"
+            class="freesql-embed"
             src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAAEx3MMQrCMBQG4D2n%252BAehFowXcGrjU5SYlCQVOoXQvKEqLdjg4OkFvwN8UqJjfgpPmlTAY13muPJ7Sq%252Fpy9ucSoKj0DtzMWcobVt0jkIYajQeeRnFydkbgFQKz5k55o%252Bw7kgOaAdcvTXx3uie%252FtUO1WYfp1zVByElWfUDidNy0n4AAAA%253D&code_language=PL_SQL&code_format=false"
             height="460px"
             width="100%"

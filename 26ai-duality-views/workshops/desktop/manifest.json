@@ -38,6 +38,16 @@
       "filename": "../../5-query-documents/query-documents.md"
     },
     {
+      "title": "Lab 6: SQL*Net access",
+      "description": "Connect your FreeSQL schema to VsCode",
+      "filename": "../../7-sql_net/create-freesql-account-continue-to-vscode.md"
+    },
+    {
+      "title": "Scripts",
+      "description": "See all the SQL scripts found in this LiveLab.",
+      "filename": "../../6-scripts/all-the-scripts.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to common problems and directions for receiving live help.",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

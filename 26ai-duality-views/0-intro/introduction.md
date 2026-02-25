@@ -20,6 +20,7 @@ In this workshop, you will learn how to:
 
 This workshop assumes you have:
 * Basic familiarity with SQL
+* An account created on FreeSQL.com to execute the scripts in each step
 
 
 ## Learn More
