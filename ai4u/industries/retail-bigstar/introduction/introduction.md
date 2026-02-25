@@ -2,6 +2,8 @@
 
 ## About this Workshop
 
+Estimated Workshop Time: 90 minutes
+
 **If AI can't remember what it did yesterday, it can't run your business tomorrow.**
 
 Most AI agents have amnesia. Every conversation starts fresh. They don't remember the customer they helped last week, the decision they made yesterday, or the policy they're supposed to follow. This works for demos. It fails completely in production.
@@ -63,11 +65,6 @@ By the end, you'll have a complete item processing system where:
 - Chapters 2.1–2.4 map to Labs 5–8, covering loyalty memory, provenance packets, and grading tiers.
 - Chapters 3.2–4.2 highlight Priya Desai and Jennifer Morales as governance leads reviewed in Labs 9–10.
 
-## Story Sync
-- Chapters 1.1–1.2 introduce Marcus Reed, Alex Martinez, and the warehouse backlog resolved in Labs 1–4.
-- Chapters 2.1–2.4 map to Labs 5–8, covering loyalty memory, provenance packets, and grading tiers.
-- Chapters 3.2–4.2 highlight Priya Desai and Jennifer Morales as governance leads reviewed in Labs 9–10.
-
 ## Workshop Structure
 
 ✅ **Start with the basics (Labs 1-4)**
@@ -120,7 +117,7 @@ Finally, you'll build the guardrails that make agents safe for collectibles reta
   - Condition grade below 550 → BLOCKED (submission rejected)
   - Personal items under $50K with good credit → AUTO_APPROVED
   - Items $50K-$250K → Requires APPRAISER review
-  - Items over $250K or any mortgage → Requires SENIOR_APPRAISER
+  - Items over $250K or any authenticating → Requires SENIOR_APPRAISER
   
   **Complete Audit Trail:**
   - Every tool call logged with timestamp

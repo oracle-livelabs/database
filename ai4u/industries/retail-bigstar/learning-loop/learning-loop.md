@@ -23,14 +23,11 @@ In this lab, you'll build **semantic search**, the ability to find relevant past
 3. **Build semantic search** that finds "seasonal cash flow" when you search for "cyclical revenue"
 4. **Create the learning loop**: decision → outcome → memory → better future decisions
 
-This is what lets agents learn from experience. Not just store it, but retrieve it when it's relevant.
+    This is what lets agents learn from experience. Not just store it, but retrieve it when it's relevant.
 
-**What you'll build:** A semantic memory system that finds similar past appraisal decisions and improves over time.
+    **What you'll build:** A semantic memory system that finds similar past appraisal decisions and improves over time.
 
-Estimated Time: 20 minutes
-
-### Story Sync
-**Story Sync:** Chapter 3.2 – see the corresponding narrative beat for context.
+    Estimated Time: 20 minutes
 
 ### Objectives
 
@@ -60,13 +57,13 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/learning-loop/lab9-learning-loop.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/learning-loop/lab9-learning-loop.json
     </copy>
     ```
 
 5. Click **Import**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Load the ONNX Embedding Model
 
@@ -143,7 +140,7 @@ Create tables that will hold Big Star Collectibles' agent memory. The key differ
     ```sql
     <copy>
     -- Main memory table with vector embeddings
-    CREATE TABLE seers_memory (
+    CREATE TABLE bigstar_memory (
         memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
         memory_type    VARCHAR2(20) NOT NULL,
         entity_id      VARCHAR2(100),
@@ -154,7 +151,7 @@ Create tables that will hold Big Star Collectibles' agent memory. The key differ
     );
 
     -- Item policies table (reference knowledge)
-    CREATE TABLE seers_policies (
+    CREATE TABLE bigstar_policies (
         policy_id    RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
         policy_type  VARCHAR2(50) NOT NULL,
         policy_name  VARCHAR2(200) NOT NULL,
@@ -163,9 +160,9 @@ Create tables that will hold Big Star Collectibles' agent memory. The key differ
     );
 
     -- Indexes
-    CREATE INDEX idx_seers_mem_type ON seers_memory(memory_type);
-    CREATE INDEX idx_seers_mem_entity ON seers_memory(entity_id);
-    CREATE INDEX idx_seers_policy_type ON seers_policies(policy_type);
+    CREATE INDEX idx_bigstar_mem_type ON bigstar_memory(memory_type);
+    CREATE INDEX idx_bigstar_mem_entity ON bigstar_memory(entity_id);
+    CREATE INDEX idx_bigstar_policy_type ON bigstar_policies(policy_type);
     </copy>
     ```
 
@@ -177,7 +174,7 @@ Create tables that will hold Big Star Collectibles' agent memory. The key differ
 
     ```sql
     <copy>
-    CREATE VECTOR INDEX idx_memory_vector ON seers_memory(embedding)
+    CREATE VECTOR INDEX idx_memory_vector ON bigstar_memory(embedding)
     ORGANIZATION NEIGHBOR PARTITIONS
     DISTANCE COSINE
     WITH TARGET ACCURACY 95;
@@ -192,34 +189,34 @@ Add Big Star Collectibles' authentication policies. These are the corporate rule
 
 ```sql
 <copy>
-INSERT INTO seers_policies (policy_type, policy_name, content) VALUES (
+INSERT INTO bigstar_policies (policy_type, policy_name, content) VALUES (
     'rate_policy',
     'Personal Item - Preferred Rate',
     '{"description": "Preferred customers with condition grade 750+ qualify for personal items at 7.9% loyalty pricing tier. Maximum declared value $100,000. No origination fee. Same-day approval for items under $50,000.",
       "credit_min": 750, "apr": 7.9, "max_amount": 100000}'
 );
 
-INSERT INTO seers_policies (policy_type, policy_name, content) VALUES (
+INSERT INTO bigstar_policies (policy_type, policy_name, content) VALUES (
     'rate_policy',
     'Personal Item - Standard Rate',
     '{"description": "Standard customers with condition grade 650-749 qualify for personal items at 12.9% loyalty pricing tier. Maximum declared value $50,000. 2% origination fee applies.",
       "credit_min": 650, "credit_max": 749, "apr": 12.9, "max_amount": 50000}'
 );
 
-INSERT INTO seers_policies (policy_type, policy_name, content) VALUES (
+INSERT INTO bigstar_policies (policy_type, policy_name, content) VALUES (
     'rate_policy',
     'Business Item - Preferred',
     '{"description": "Established businesses (3+ years) with strong financials qualify for business items at 8.5% loyalty pricing tier. Maximum $500,000. Requires 2 years tax returns and business plan.",
       "business_years_min": 3, "apr": 8.5, "max_amount": 500000}'
 );
 
-INSERT INTO seers_policies (policy_type, policy_name, content) VALUES (
+INSERT INTO bigstar_policies (policy_type, policy_name, content) VALUES (
     'escalation_policy',
     'Risk Escalation Guidelines',
     '{"description": "Escalation rules: 1) DTI above 35% requires appraiser review, 2) Credit below 650 requires senior appraiser, 3) Items above $250K require committee approval, 4) Any exception to policy requires manager sign-off."}'
 );
 
-INSERT INTO seers_policies (policy_type, policy_name, content) VALUES (
+INSERT INTO bigstar_policies (policy_type, policy_name, content) VALUES (
     'exception_policy',
     'Loyalty Discount Authority',
     '{"description": "Loyalty discounts may be granted for: 1) Long-term clients (5+ years) - up to 15% discount, 2) Multi-product relationships - up to 10% discount, 3) Strategic accounts - case by case with VP approval. All exceptions must be documented."}'
@@ -247,7 +244,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
     BEGIN
-        INSERT INTO seers_memory (memory_type, entity_id, content, embedding)
+        INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding)
         VALUES (
             'FACT', 
             UPPER(p_client), 
@@ -275,7 +272,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
                 JSON_VALUE(content, '$.fact') as fact,
                 JSON_VALUE(content, '$.category') as category,
                 TO_CHAR(created_at, 'YYYY-MM-DD') as learned_date
-            FROM seers_memory
+            FROM bigstar_memory
             WHERE memory_type = 'FACT'
             AND UPPER(entity_id) = UPPER(p_client)
             ORDER BY created_at DESC
@@ -283,7 +280,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
             v_result := v_result || '- ' || rec.fact || ' [' || rec.category || ', learned ' || rec.learned_date || ']' || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No information found about client ' || p_client || '. This may be a new client.';
         END IF;
@@ -312,8 +309,8 @@ Create the core memory functions. The key difference from earlier labs: `find_si
         v_search_text VARCHAR2(2000);
     BEGIN
         v_search_text := p_situation || ' ' || p_decision || ' ' || NVL(p_outcome, '');
-        
-        INSERT INTO seers_memory (memory_type, entity_id, content, embedding)
+
+        INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding)
         VALUES (
             'DECISION', 
             UPPER(p_client), 
@@ -349,7 +346,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
                     VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING p_situation AS DATA),
                     COSINE
                 ), 3) as relevance
-            FROM seers_memory
+            FROM bigstar_memory
             WHERE memory_type = 'DECISION'
             AND embedding IS NOT NULL
             ORDER BY VECTOR_DISTANCE(
@@ -367,7 +364,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
                 'Relevance: ' || (rec.relevance * 100) || '%' || CHR(10) || '---' || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No similar past decisions found. This appears to be a new type of situation.';
         END IF;
@@ -396,7 +393,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
                 policy_type,
                 policy_name,
                 JSON_VALUE(content, '$.description') as description
-            FROM seers_policies
+            FROM bigstar_policies
             WHERE is_active = 1
             AND (p_policy_type IS NULL OR UPPER(policy_type) LIKE '%' || UPPER(p_policy_type) || '%')
             AND (p_search IS NULL OR UPPER(policy_name) LIKE '%' || UPPER(p_search) || '%' 
@@ -407,7 +404,7 @@ Create the core memory functions. The key difference from earlier labs: `find_si
                        rec.description || CHR(10) || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No matching policies found.';
         END IF;
@@ -487,7 +484,7 @@ Create an agent with access to all memory tools. The role instructions tell the 
 <copy>
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-        agent_name  => 'SEERS_MEMORY_AGENT',
+        agent_name  => 'bigstar_MEMORY_AGENT',
         attributes  => '{"profile_name": "genai",
                         "role": "You are a inventory specialist assistant for Big Star Collectibles with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When inventory specialists share client information, store it (use REMEMBER_CLIENT_TOOL). When making appraisal decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools."}',
         description => 'Memory-enabled inventory specialist assistant with semantic search'
@@ -497,7 +494,7 @@ END;
 
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-        task_name   => 'SEERS_MEMORY_TASK',
+        task_name   => 'bigstar_MEMORY_TASK',
         attributes  => '{"instruction": "Process this inventory specialist request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL (it uses semantic search to find similar situations even with different wording). Record decisions with RECORD_DECISION_TOOL. Do not ask clarifying questions - use your tools. User request: {query}",
                         "tools": ["REMEMBER_CLIENT_TOOL", "RECALL_CLIENT_TOOL", "RECORD_DECISION_TOOL", "FIND_DECISIONS_TOOL", "POLICY_LOOKUP_TOOL"]}',
         description => 'Task with full memory capabilities and semantic search'
@@ -507,8 +504,8 @@ END;
 
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-        team_name   => 'SEERS_MEMORY_TEAM',
-        attributes  => '{"agents": [{"name": "SEERS_MEMORY_AGENT", "task": "SEERS_MEMORY_TASK"}],
+        team_name   => 'bigstar_MEMORY_TEAM',
+        attributes  => '{"agents": [{"name": "bigstar_MEMORY_AGENT", "task": "bigstar_MEMORY_TASK"}],
                         "process": "sequential"}',
         description => 'Memory-enabled item processing team'
     );
@@ -526,7 +523,7 @@ Add historical appraisal decisions that the agent can learn from. Notice we're u
 ```sql
 <copy>
 -- Decision about seasonal business cash flow
-INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
+INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding) VALUES (
     'DECISION', 'HARVEST FARMS',
     '{"situation": "Agricultural client with seasonal cash flow requested business item with flexible payment schedule",
       "decision": "Approved item with quarterly payments aligned to harvest cycles instead of monthly",
@@ -537,7 +534,7 @@ INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
 );
 
 -- Decision about loyalty discount for long-term client
-INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
+INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding) VALUES (
     'DECISION', 'GLOBALCO',
     '{"situation": "Long-term client requested loyalty discount for expansion item",
       "decision": "Approved 12% rate discount based on 7-year relationship and $2M in previous items",
@@ -548,7 +545,7 @@ INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
 );
 
 -- Decision about new client wanting exception (what NOT to do)
-INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
+INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding) VALUES (
     'DECISION', 'NEWSTART INC',
     '{"situation": "New business client requested loyalty discount without established relationship",
       "decision": "Denied exception request outright citing policy",
@@ -559,7 +556,7 @@ INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
 );
 
 -- Better approach for new client wanting exception
-INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
+INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding) VALUES (
     'DECISION', 'TECHSTART LLC',
     '{"situation": "New business client requested loyalty discount without established relationship",
       "decision": "Offered standard rate with commitment to review for exception after 12 months of on-time payments",
@@ -570,7 +567,7 @@ INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
 );
 
 -- Decision about client with variable income
-INSERT INTO seers_memory (memory_type, entity_id, content, embedding) VALUES (
+INSERT INTO bigstar_memory (memory_type, entity_id, content, embedding) VALUES (
     'DECISION', 'CONSULTING PARTNERS',
     '{"situation": "Consulting firm with cyclical revenue patterns needed item for equipment",
       "decision": "Structured item with variable payments tied to quarterly revenue, higher in Q4, lower in Q1",
@@ -594,7 +591,7 @@ Now test finding relevant decisions by meaning, not keywords. This is where the 
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_MEMORY_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('bigstar_MEMORY_TEAM');
     </copy>
     ```
 
@@ -669,7 +666,7 @@ Clear the session and verify memory persists.
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('SEERS_MEMORY_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('bigstar_MEMORY_TEAM');
     </copy>
     ```
 
@@ -711,7 +708,7 @@ SELECT
     JSON_VALUE(content, '$.situation') as situation,
     CASE WHEN embedding IS NOT NULL THEN 'Yes' ELSE 'No' END as has_embedding,
     TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created
-FROM seers_memory
+FROM bigstar_memory
 WHERE memory_type = 'DECISION'
 ORDER BY created_at DESC;
 </copy>
@@ -736,16 +733,16 @@ In this lab, you built the learning loop with semantic search:
 
 ```sql
 <copy>
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('SEERS_MEMORY_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('SEERS_MEMORY_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('SEERS_MEMORY_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('bigstar_MEMORY_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('bigstar_MEMORY_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('bigstar_MEMORY_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REMEMBER_CLIENT_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECALL_CLIENT_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECORD_DECISION_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FIND_DECISIONS_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('POLICY_LOOKUP_TOOL', TRUE);
-DROP TABLE seers_memory PURGE;
-DROP TABLE seers_policies PURGE;
+DROP TABLE bigstar_memory PURGE;
+DROP TABLE bigstar_policies PURGE;
 DROP FUNCTION remember_client_fact;
 DROP FUNCTION recall_client_info;
 DROP FUNCTION record_item_decision;

@@ -61,13 +61,13 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/enterprise-data/lab6-enterprise-data.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/enterprise-data/lab6-enterprise-data.json
     </copy>
     ```
 
 5. Click **Ok**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Experience the Knowledge Gap
 
@@ -86,7 +86,7 @@ Let's see what happens when you ask an LLM about your business without giving it
     </copy>
     ```
 
-The LLM gives a generic response. It doesn't know YOUR rates because it has no access to your data. It might make up a number or say it doesn't have that information.
+    The LLM gives a generic response. It doesn't know YOUR rates because it has no access to your data. It might make up a number or say it doesn't have that information.
 
 2. Ask about a specific collector.
 
@@ -98,7 +98,7 @@ The LLM gives a generic response. It doesn't know YOUR rates because it has no a
     </copy>
     ```
 
-The LLM can't answer. It has no collector data. It might make something up or tell you it doesn't have access.
+    The LLM can't answer. It has no collector data. It might make something up or tell you it doesn't have access.
 
 3. Ask about collectibles policy.
 
@@ -106,11 +106,11 @@ The LLM can't answer. It has no collector data. It might make something up or te
 
     ```sql
     <copy>
-    SELECT AI CHAT What condition grade does Big Star Collectibles require for a mortgage;
+    SELECT AI CHAT What condition grade does Big Star Collectibles require for a authenticating;
     </copy>
     ```
 
-Generic answer. Not YOUR policy.
+    Generic answer. Not YOUR policy.
 
 ## Task 3: Create Enterprise Data
 
@@ -135,17 +135,17 @@ Now let's create the business data that an agent needs. This is the key differen
 
     INSERT INTO item_policies VALUES (
         'POL-PREF', 'Preferred Rate Tier',
-        'Platinum loyalty pricing is 7.9% APR for customers with condition grade 750+. ' ||
-        'Maximum declared value $500,000. Requires 20% down payment for mortgages. ' ||
+        'Platinum loyalty pricing is 7.9% loyalty pricing tier for customers with condition grade 750+. ' ||
+        'Maximum declared value $500,000. Requires 20% down payment for authenticatings. ' ||
         'Loyalty discount up to 15% discount available for clients with 5+ year history.',
         'PREFERRED',
-        'Personal, Auto, Mortgage, Business'
+        'Personal, Auto, Authenticating, Business'
     );
 
     INSERT INTO item_policies VALUES (
         'POL-STD', 'Standard Rate Tier',
-        'Standard rate is 12.9% APR for customers with condition grade 650-749. ' ||
-        'Maximum declared value $250,000. Requires 25% down payment for mortgages. ' ||
+        'Standard rate is 12.9% loyalty pricing tier for customers with condition grade 650-749. ' ||
+        'Maximum declared value $250,000. Requires 25% down payment for authenticatings. ' ||
         'No loyalty discounts available for this tier.',
         'STANDARD',
         'Personal, Auto, Business'
@@ -206,7 +206,7 @@ Now let's create the business data that an agent needs. This is the key differen
             v_result := v_result || rec.policy_name || ' (' || rec.rate_tier || '): ' || 
                        rec.policy_text || CHR(10) || CHR(10);
         END LOOP;
-        
+
         IF v_result IS NULL THEN
             RETURN 'No policy found for: ' || p_policy_type;
         END IF;
@@ -232,7 +232,7 @@ Now let's create the business data that an agent needs. This is the key differen
         INTO v_result
         FROM se_collectors
         WHERE UPPER(name) LIKE '%' || UPPER(p_collector_name) || '%';
-        
+
         RETURN v_result;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
@@ -259,7 +259,7 @@ Now let's create the business data that an agent needs. This is the key differen
                             "function": "get_item_policy"}',
             description => 'Retrieves Big Star Collectibles authentication policies including rates and requirements'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'COLLECTOR_LOOKUP_TOOL',
             attributes  => '{"instruction": "Look up collector information. Parameter: P_COLLECTOR_NAME (full or partial name). Returns condition grade, rate tier, client history, and any loyalty discounts. Always use this when asked about specific collectors.",
@@ -290,14 +290,14 @@ Now let's create an agent with access to Big Star Collectibles' enterprise data.
                             "role": "You are a inventory specialist assistant for Big Star Collectibles. You have access to company authentication policies and collector information. Always use your tools to look up real data - never guess at rates, requirements, or collector details."}',
             description => 'Agent with enterprise data access'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'INFORMED_TASK',
             attributes  => '{"instruction": "Help the inventory specialist by looking up relevant policies and collector information using your tools. Do not guess - if asked about rates, policies, or collectors, use the tools. User request: {query}",
                             "tools": ["POLICY_LOOKUP_TOOL", "COLLECTOR_LOOKUP_TOOL"]}',
             description => 'Task with data access'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
             team_name   => 'INFORMED_TEAM',
             attributes  => '{"agents": [{"name": "INFORMED_AGENT", "task": "INFORMED_TASK"}],
@@ -333,7 +333,7 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
     </copy>
     ```
 
-**Now you get YOUR actual rate:** 7.9% APR for Preferred tier with condition grade 750+.
+    **Now you get YOUR actual rate:** 7.9% loyalty pricing tier for Preferred tier with condition grade 750+.
 
 2. Ask about Alex Martinez specifically.
 
@@ -345,7 +345,7 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
     </copy>
     ```
 
-**The agent looks up the collector and reports:** Alex Martinez has condition grade 780 (Preferred tier), has been a client since 2019, and has a 15% loyalty discount.
+    **The agent looks up the collector and reports:** Alex Martinez has condition grade 780 (Preferred tier), has been a client since 2019, and has a 15% loyalty discount.
 
 3. Ask about credit requirements.
 
@@ -353,11 +353,11 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
 
     ```sql
     <copy>
-    SELECT AI AGENT What condition grade does Big Star Collectibles require for a mortgage;
+    SELECT AI AGENT What condition grade does Big Star Collectibles require for a authenticating;
     </copy>
     ```
 
-**Your actual policy:** Minimum 550 for any item, 750+ for Preferred tier, 650-749 for Standard.
+    **Your actual policy:** Minimum 550 for any item, 750+ for Preferred tier, 650-749 for Standard.
 
 4. Ask a combination question.
 
@@ -369,7 +369,7 @@ Now let's see the difference. This time we use `SELECT AI AGENT` which has acces
     </copy>
     ```
 
-**The agent checks both:** TechStart has condition grade 710 (Standard tier), so they qualify for 12.9% APR.
+    **The agent checks both:** TechStart has condition grade 710 (Standard tier), so they qualify for 12.9% loyalty pricing tier.
 
 ## Task 6: See the Tool Calls
 
@@ -391,7 +391,7 @@ Let's verify the agent is using enterprise data.
     </copy>
     ```
 
-You can see the agent called `POLICY_LOOKUP_TOOL` and `COLLECTOR_LOOKUP_TOOL` to get real data.
+    You can see the agent called `POLICY_LOOKUP_TOOL` and `COLLECTOR_LOOKUP_TOOL` to get real data.
 
 ## Summary
 

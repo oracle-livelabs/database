@@ -66,7 +66,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/agents-vs-zero-shot/lab2-agents-vs-zero-shot.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/agents-vs-zero-shot/lab2-agents-vs-zero-shot.json
     </copy>
     ```
 
@@ -76,7 +76,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ![Notebook Information](./images/task1_5.png " ")
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Experience Zero-Shot Prompting
 
@@ -164,13 +164,13 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     COMMENT ON COLUMN sample_items.collector IS 'Name of the person or business applying for the item';
     COMMENT ON COLUMN sample_items.status IS 'Submission status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';
     COMMENT ON COLUMN sample_items.amount IS 'Requested declared value in US dollars';
-    COMMENT ON COLUMN sample_items.item_type IS 'Type of item: Personal, Auto, Mortgage, or Business';
+    COMMENT ON COLUMN sample_items.item_type IS 'Type of item: sports_card, comic, sneaker, or memorabilia piece';
     COMMENT ON COLUMN sample_items.submission_date IS 'Date the submission was submitted';
 
     -- Insert sample data
     INSERT INTO sample_items VALUES ('ITEM-12345', 'Acme Corp', 'UNDER_REVIEW', 150000, 'Business', SYSDATE - 3);
     INSERT INTO sample_items VALUES ('ITEM-12346', 'TechStart', 'PENDING', 45000, 'Business', SYSDATE - 1);
-    INSERT INTO sample_items VALUES ('ITEM-12347', 'GlobalCo', 'APPROVED', 275000, 'Mortgage', SYSDATE - 7);
+    INSERT INTO sample_items VALUES ('ITEM-12347', 'GlobalCo', 'APPROVED', 275000, 'Authenticating', SYSDATE - 7);
     COMMIT;
     </copy>
     ```
@@ -210,7 +210,7 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
 
     ![Task Information](./images/task3_3.png " ")
 
-SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot which could only give generic advice.
+    SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot which could only give generic advice.
 
 4. Now try to update using SELECT AI.
 
@@ -238,7 +238,7 @@ SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot 
 
     ![Task Information](./images/task3_5.png " ")
 
-Still `UNDER_REVIEW`. SELECT AI can read but cannot write.
+    Still `UNDER_REVIEW`. SELECT AI can read but cannot write.
 
 ## Task 4: Create an Agent with Tools
 
@@ -266,7 +266,7 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
         INTO v_result
         FROM sample_items
         WHERE submission_id = p_submission_id;
-        
+
         RETURN v_result;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
@@ -297,14 +297,14 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
         SELECT status INTO v_old_status
         FROM sample_items
         WHERE submission_id = p_submission_id;
-        
+
         -- Update the status
         UPDATE sample_items
         SET status = UPPER(p_new_status)
         WHERE submission_id = p_submission_id;
-        
+
         COMMIT;
-        
+
         RETURN 'Item ' || p_submission_id || ' updated from ' || v_old_status || ' to ' || UPPER(p_new_status);
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
@@ -409,7 +409,7 @@ Now let's see the real power of agents: coordinating multiple tools and making c
 
     ![Task Information](./images/task5_1.png " ")
 
-The item is currently `UNDER_REVIEW`.
+    The item is currently `UNDER_REVIEW`.
 
 2. Set the team and ask the agent to check and update the item.
 
@@ -424,13 +424,13 @@ The item is currently `UNDER_REVIEW`.
 
     ![Task Information](./images/task5_2.png " ")
 
-**Observe:** The agent:
+    **Observe:** The agent:
 1. Called `ITEM_LOOKUP_TOOL` to check current status (`UNDER_REVIEW`)
 2. Made a decision based on the result
 3. Called `ITEM_UPDATE_TOOL` to change it to `APPROVED`
 4. Reported what it did
 
-This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
+    This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
 3. Verify the change actually happened.
 
@@ -444,7 +444,7 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
     ![Task Information](./images/task5_3.png " ")
 
-**The status changed from `UNDER_REVIEW` to `APPROVED`.** The agent didn't just talk about updating - it actually did it.
+    **The status changed from `UNDER_REVIEW` to `APPROVED`.** The agent didn't just talk about updating - it actually did it.
 
 4. Try a conditional update that should NOT happen.
 
@@ -458,7 +458,7 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
     ![Task Information](./images/task5_4.png " ")
 
-**Observe:** The agent looked up item ITEM-12346, saw it was `PENDING` (not `UNDER_REVIEW`), and correctly decided NOT to update it. This is intelligent coordination.
+    **Observe:** The agent looked up item ITEM-12346, saw it was `PENDING` (not `UNDER_REVIEW`), and correctly decided NOT to update it. This is intelligent coordination.
 
 ## Task 6: See What the Agent Did
 
@@ -482,7 +482,7 @@ Every tool call is logged. Let's see the execution history.
 
     ![Task Information](./images/task6_1.png " ")
 
-You can see the sequence: lookup, then update (or just lookup if no update was needed).
+    You can see the sequence: lookup, then update (or just lookup if no update was needed).
 
 ## Task 7: When to Use Each Approach
 

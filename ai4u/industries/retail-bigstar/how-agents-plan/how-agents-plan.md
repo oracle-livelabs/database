@@ -31,9 +31,6 @@ This lab shows you how agents plan multi-tool operations. You'll see the agent d
 
 Estimated Time: 10 minutes
 
-### Story Sync
-**Story Sync:** Chapter 1.2 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Understand how agents break tasks into steps
@@ -67,7 +64,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/how-agents-plan/lab3-how-agents-plan.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/how-agents-plan/lab3-how-agents-plan.json
     </copy>
     ```
 
@@ -77,7 +74,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ![Notebook Information](./images/task_1_5.png " ")
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create a Multi-Tool Agent
 
@@ -165,11 +162,11 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     BEGIN
         SELECT credit_tier INTO v_tier FROM demo_collectors WHERE collector_id = p_collector_id;
         IF v_tier = 'PREFERRED' THEN
-            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% APR. Up to $500K limit.';
+            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% loyalty pricing tier. Up to $500K limit.';
         ELSIF v_tier = 'STANDARD' THEN
-            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% APR. Up to $100K limit.';
+            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% loyalty pricing tier. Up to $100K limit.';
         ELSE
-            RETURN 'SUBPRIME RATES: Rates starting at 14.9% APR. Up to $25K limit.';
+            RETURN 'SUBPRIME RATES: Rates starting at 14.9% loyalty pricing tier. Up to $25K limit.';
         END IF;
     EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Collector not found.';
     END;
@@ -298,7 +295,7 @@ Let's start with a simple request that needs only one tool.
 
     ![Task Information](./images/task_3_2.png " ")
 
-**Observe:** The agent planned to use just `GET_COLLECTOR_TOOL` because that's all the question required.
+    **Observe:** The agent planned to use just `GET_COLLECTOR_TOOL` because that's all the question required.
 
 ## Task 4: Observe Multi-Tool Planning
 
@@ -334,10 +331,10 @@ Now let's ask a question that requires multiple tools, just like a inventory spe
 
     ![Task Information](./images/task_4_2.png " ")
 
-**Observe:** The agent planned to use multiple tools:
-- `GET_COLLECTOR_TOOL` to get basic info
-- `GET_ITEMS_TOOL` to get item history
-- `CHECK_RATES_TOOL` to verify rate eligibility
+    **Observe:** The agent planned to use multiple tools:
+    - `GET_COLLECTOR_TOOL` to get basic info
+    - `GET_ITEMS_TOOL` to get item history
+    - `CHECK_RATES_TOOL` to verify rate eligibility
 
 3. Notice the sequence - the agent determined the logical order.
 
@@ -407,7 +404,7 @@ The task instruction guides how the agent plans. Let's modify it.
 
     ![Task Information](./images/task_5_3.png " ")
 
-**Observe:** The agent followed the explicit plan: collector first, then items, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
+    **Observe:** The agent followed the explicit plan: collector first, then items, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
 
 ## Task 6: Understand Why Planning Matters
 
@@ -418,38 +415,38 @@ Planning provides:
 3. **Efficiency**: The agent gathers what it needs without redundant calls
 4. **Control**: You shape the plan through instructions
 
-Query the complete execution sequence:
+    Query the complete execution sequence:
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
-```sql
-<copy>
-SELECT 
+    ```sql
+    <copy>
+    SELECT 
     tool_name,
     TO_CHAR(start_date, 'HH24:MI:SS') as started,
     TO_CHAR(end_date, 'HH24:MI:SS') as ended
-FROM USER_AI_AGENT_TOOL_HISTORY
-ORDER BY start_date DESC
-FETCH FIRST 10 ROWS ONLY;
-</copy>
-```
+    FROM USER_AI_AGENT_TOOL_HISTORY
+    ORDER BY start_date DESC
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
 
-![Task Information](./images/task_6_1.png " ")
+    ![Task Information](./images/task_6_1.png " ")
 
-## Summary
+    ## Summary
 
-In this lab, you observed how agents plan their work:
+    In this lab, you observed how agents plan their work:
 
-* Created an agent with multiple tools
-* Watched the agent choose tools based on the question
-* Saw how multi-step questions trigger multi-tool plans
-* Learned how instructions shape the planning process
+    * Created an agent with multiple tools
+    * Watched the agent choose tools based on the question
+    * Saw how multi-step questions trigger multi-tool plans
+    * Learned how instructions shape the planning process
 
-**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Big Star Collectibles, this means inventory specialists get complete client summaries in seconds, not minutes.
+    **Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Big Star Collectibles, this means inventory specialists get complete client summaries in seconds, not minutes.
 
-## Learn More
+    ## Learn More
 
-* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+    * [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
@@ -458,23 +455,23 @@ In this lab, you observed how agents plan their work:
 
 ## Cleanup (Optional)
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
-```sql
-<copy>
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('PLANNING_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_COLLECTOR_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ITEMS_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RATES_TOOL', TRUE);
-DROP TABLE demo_items PURGE;
-DROP TABLE demo_collectors PURGE;
-DROP FUNCTION get_collector;
-DROP FUNCTION get_collector_items;
-DROP FUNCTION check_rate_eligibility;
-</copy>
-```
+    ```sql
+    <copy>
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('PLANNING_TASK', TRUE);
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_COLLECTOR_TOOL', TRUE);
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ITEMS_TOOL', TRUE);
+    EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RATES_TOOL', TRUE);
+    DROP TABLE demo_items PURGE;
+    DROP TABLE demo_collectors PURGE;
+    DROP FUNCTION get_collector;
+    DROP FUNCTION get_collector_items;
+    DROP FUNCTION check_rate_eligibility;
+    </copy>
+    ```
 
-![Cleanup](./images/cleanup.png " ")
+    ![Cleanup](./images/cleanup.png " ")
