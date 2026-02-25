@@ -257,18 +257,18 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 
     This error means HeatWave cannot find files at the specified PAR URL location. Check:
 
-    1. **Files are in the correct location**: Verify PDFs are inside `bucket-folder-heatwave/` folder, not at bucket root
-    2. **PAR URL includes folder path**: Ensure your URL ends with `/bucket-folder-heatwave/`
-    3. **PAR has Object Listing enabled**: This is required for HeatWave to discover files
-    4. **PAR has not expired**: Check expiration date and create new PAR if needed
+    - **Files are in the correct location**: Verify PDFs are inside `bucket-folder-heatwave/` folder, not at bucket root
+    - **PAR URL includes folder path**: Ensure your URL ends with `/bucket-folder-heatwave/`
+    - **PAR has Object Listing enabled**: This is required for HeatWave to discover files
+    - **PAR has not expired**: Check expiration date and create new PAR if needed
 
-   **Error: "Table is not loaded in HeatWave"**
+    **Error: "Table is not loaded in HeatWave"**
 
-   This means the task is still processing. Wait for the task status to show "COMPLETED" before querying the table.
+    This means the task is still processing. Wait for the task status to show "COMPLETED" before querying the table.
 
-   **Empty tables (0 count)**
+    **Empty tables (0 count)**
 
-   If only `livelab_embedding_pdf` has data and other tables (\_doc, \_html, \_ppt, \_txt) show 0 rows, this is normal - you only uploaded PDF files. HeatWave creates table structures for all supported file types but only populates tables that have corresponding files.
+    If only `livelab_embedding_pdf` has data and other tables (\_doc, \_html, \_ppt, \_txt) show 0 rows, this is normal - you only uploaded PDF files. HeatWave creates table structures for all supported file types but only populates tables that have corresponding files.
 
 ## Task 6: Perform retrieval augmented generation
 

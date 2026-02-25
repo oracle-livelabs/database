@@ -84,7 +84,7 @@ In this lab, you will be guided through the following task:
 
     ![Summarize text](./images/5-summarize-text.png "Summarize text")
 
- 3. LLM generates a summary of your text:
+3. LLM generates a summary of your text:
 
     ![Summarized text](./images/6-summarized-text.png "Summarized text")
 
