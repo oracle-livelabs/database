@@ -70,16 +70,17 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ![Git Clone dialog with GitHub URI field and OK button highlighted](images/task1_5.png)
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Tables
 
 You'll create two tables:
 
 1. **agent_memory** — A unified table for short-term, long-term, and decision memory with a type classifier
+
 2. **reference_knowledge** — A separate table for loan policies (agents can read but not modify)
 
-Notice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.
+    Notice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.
 
 1. Create the unified agent memory table.
 
@@ -601,47 +602,48 @@ Now let's trace how an agent would use all four types together when handling a l
 
 **Scenario:** CLIENT-001 (Sarah Chen) calls about a new loan request.
 
-1. **Short-term context** — Record what's happening now
-2. **Long-term facts** — Check what we know about this client
-3. **Reference knowledge** — Check the relevant policy
-4. **Past decisions** — See what worked before in similar situations
-5. **Record the decision** — Log what we decided and what happened
-6. **Store new fact** — Remember anything new we learned
+* **Short-term context** — Record what's happening now
+* **Long-term facts** — Check what we know about this client
+* **Reference knowledge** — Check the relevant policy
+* **Past decisions** — See what worked before in similar situations
+* **Record the decision** — Log what we decided and what happened
+* **Store new fact** — Remember anything new we learned
 
-> This command is already in your notebook—just click the play button (▶) to run it.
+> This command is already in your notebook - just click the play button (▶) to run it.
 
-```sql
-<copy>
--- Scenario: CLIENT-001 (Sarah Chen) inquires about a new loan
+1. Sarah Chen inquires about a new loan
+    ```sql
+    <copy>
+    -- Scenario: CLIENT-001 (Sarah Chen) inquires about a new loan
+    -- 1. Set short-term context (current task)
+    SELECT set_context('SESSION-002', 'client', 'CLIENT-001 Sarah Chen calling about new personal loan') as step1_context FROM DUAL;
+    SELECT set_context('SESSION-002', 'issue', '$75K request, wants to know applicable rate') as step1_issue FROM DUAL;
 
--- 1. Set short-term context (current task)
-SELECT set_context('SESSION-002', 'client', 'CLIENT-001 Sarah Chen calling about new personal loan') as step1_context FROM DUAL;
-SELECT set_context('SESSION-002', 'issue', '$75K request, wants to know applicable rate') as step1_issue FROM DUAL;
+    -- 2. Check long-term facts (what do we know about them?)
+    SELECT get_facts('CLIENT-001') as step2_facts FROM DUAL;
 
--- 2. Check long-term facts (what do we know about them?)
-SELECT get_facts('CLIENT-001') as step2_facts FROM DUAL;
+    -- 3. Check reference knowledge (what is the policy?)
+    SELECT get_reference('policy', 'preferred') as step3_policy FROM DUAL;
 
--- 3. Check reference knowledge (what is the policy?)
-SELECT get_reference('policy', 'preferred') as step3_policy FROM DUAL;
+    -- 4. Find similar past decisions (what worked before?)
+    SELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;
 
--- 4. Find similar past decisions (what worked before?)
-SELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;
+    -- 5. Agent makes decision based on all of this, then records it
+    SELECT record_decision(
+        'CLIENT-001',
+        'Preferred client Sarah Chen requested $75K personal loan',
+        'Quoted preferred rate 7.9% with 15% rate exception applied per client history',
+        'Client satisfied with rate, proceeded with application same day',
+        'true'
+    ) as step5_decision FROM DUAL;
 
--- 5. Agent makes decision based on all of this, then records it
-SELECT record_decision(
-    'CLIENT-001',
-    'Preferred client Sarah Chen requested $75K personal loan',
-    'Quoted preferred rate 7.9% with 15% rate exception applied per client history',
-    'Client satisfied with rate, proceeded with application same day',
-    'true'
-) as step5_decision FROM DUAL;
+    -- 6. Learn new fact if relevant
+    SELECT store_fact('CLIENT-001', 'Values quick decisions - appreciates same-day processing', 'preference') as step6_new_fact FROM DUAL;
+    </copy>
+    ```
 
--- 6. Learn new fact if relevant
-SELECT store_fact('CLIENT-001', 'Values quick decisions - appreciates same-day processing', 'preference') as step6_new_fact FROM DUAL;
-</copy>
-```
 
-![Complete 6-step scenario showing all four memory types working together for Sarah Chen's loan inquiry](images/task7.png)
+    ![Complete 6-step scenario showing all four memory types working together for Sarah Chen's loan inquiry](images/task7.png)
 
 ## Summary
 

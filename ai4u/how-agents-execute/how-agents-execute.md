@@ -71,7 +71,7 @@ Before you begin, import a notebook that has all of the commands for this lab in
 
     ![Git Clone dialog with GitHub URI field and OK button highlighted](images/task1_5.png)
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Tracking Infrastructure
 
@@ -545,7 +545,7 @@ Every agent execution follows this pattern:
 6. **Repeat** → More tools if needed (conditionally)
 7. **LLM responds** → Generates final response
 
-The key insight: **step 5 is where decisions happen**. The agent reads the risk assessment and decides whether to route. This is what makes agents intelligent—they adapt based on data.
+    The key insight: **step 5 is where decisions happen**. The agent reads the risk assessment and decides whether to route. This is what makes agents intelligent—they adapt based on data.
 
 1. Query the complete execution timeline.
 

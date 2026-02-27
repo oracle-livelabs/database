@@ -13,10 +13,10 @@ Seer Equity's compliance team has a recurring nightmare: What if someone submits
 > Rachel, Compliance Director
 
 The company needs agents that:
-- **Enforce role separation** — Loan officers can submit but NOT approve
-- **Automate routine decisions** — Low-risk loans shouldn't need human review
-- **Require human judgment** — High-value or complex loans need underwriters
-- **Log everything** — Complete audit trail for compliance
+* **Enforce role separation** — Loan officers can submit but NOT approve
+* **Automate routine decisions** — Low-risk loans shouldn't need human review
+* **Require human judgment** — High-value or complex loans need underwriters
+* **Log everything** — Complete audit trail for compliance
 
 ### What You'll Learn
 
@@ -30,10 +30,10 @@ In this capstone lab, you'll build a two-agent loan underwriting system:
 The separation isn't just policy—it's architecture. LOAN_AGENT literally doesn't have approval tools.
 
 You'll also implement risk-based routing:
-- **Credit < 550** → BLOCKED (cannot proceed)
-- **Personal < $50K** → AUTO_APPROVE
-- **$50K-$250K** → Underwriter review required
-- **$250K+ or Mortgage** → Senior underwriter required
+* **Credit < 550** → BLOCKED (cannot proceed)
+* **Personal < $50K** → AUTO_APPROVE
+* **$50K-$250K** → Underwriter review required
+* **$250K+ or Mortgage** → Senior underwriter required
 
 **What you'll build:** A compliant two-agent loan underwriting system with separation of duties and full audit trail.
 
@@ -77,7 +77,7 @@ Before you begin, you are going to import a notebook that has all of the command
 5. Click **Ok**.
     ![Notebook Information](./images/task1_5.png " ")
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Database Tables
 
@@ -89,7 +89,7 @@ First, you'll create three tables:
 
 3. **underwriting_rules**: JSON-configured business rules the agent will follow
 
-Notice the constraints on `loan_applications` — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
+    Notice the constraints on `loan_applications` — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
 
 ```sql
 <copy>
@@ -201,6 +201,7 @@ INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VAL
 COMMIT;
 </copy>
 ```
+
 ![Notebook Information](./images/task3_5.png " ")
 ![Notebook Information](./images/task3_52.png " ")
 
@@ -713,6 +714,7 @@ Switch to the underwriting agent and review applications.
     SELECT AI AGENT What loan applications need my review;
     </copy>
     ```
+
     ![Notebook Information](./images/task13_2.png " ")
 
 3. Approve the applications.
@@ -728,6 +730,7 @@ Switch to the underwriting agent and review applications.
     SELECT AI AGENT Approve the mortgage application;
     </copy>
     ```
+
     ![Notebook Information](./images/task13_3_1.png " ")
     ![Notebook Information](./images/task13_3_2.png " ")
 
@@ -747,6 +750,7 @@ Switch to the underwriting agent and review applications.
     FETCH FIRST 15 ROWS ONLY;
     </copy>
     ```
+
     ![Notebook Information](./images/task14_1.png " ")
 
 2. Show a summary for how many times each tool was called. 
@@ -761,32 +765,32 @@ Switch to the underwriting agent and review applications.
     ORDER BY call_count DESC;
     </copy>
     ```
+
     ![Notebook Information](./images/task14_2.png " ")
 
 ## Summary
-
 In this lab, you built a complete loan underwriting system demonstrating:
 
 **Role-Based Agents:**
-- LOAN_AGENT for loan officers (submit only)
-- UNDERWRITING_AGENT for underwriters (review and decide)
+* LOAN_AGENT for loan officers (submit only)
+* UNDERWRITING_AGENT for underwriters (review and decide)
 
 **Safety Rules:**
-- AUTO_APPROVE: Under $50K, good credit, non-mortgage
-- REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
-- BLOCK: Credit score below 550
+* AUTO_APPROVE: Under $50K, good credit, non-mortgage
+* REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
+* BLOCK: Credit score below 550
 
 **The Human-in-the-Loop:**
-- Routine loans are automated
-- Significant loans require human judgment
-- High-risk applications are stopped entirely
+* Routine loans are automated
+* Significant loans require human judgment
+* High-risk applications are stopped entirely
 
 **Audit Trail:**
-- Every action is logged
-- Full input/output captured
-- Explainable and compliant
+* Every action is logged
+* Full input/output captured
+* Explainable and compliant
 
-**Key Insight:** Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything — it doesn't have the tool. This is security through architecture, not just prompts.
+**Key Insight:** Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything - it doesn't have the tool. This is security through architecture, not just prompts.
 
 ## Learn More
 
@@ -795,7 +799,8 @@ In this lab, you built a complete loan underwriting system demonstrating:
 ## Acknowledgements
 
 * **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Contributors** - Francis Regalado
+* **Last Updated By/Date** - Francis Regalado, February 2026
 
 ## Cleanup (Optional)
 
@@ -822,4 +827,5 @@ DROP FUNCTION approve_loan;
 DROP FUNCTION deny_loan;
 </copy>
 ```
+
 ![Cleanup](./images/cleanup.png " ")
