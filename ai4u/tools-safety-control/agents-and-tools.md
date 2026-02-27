@@ -58,10 +58,13 @@ For this workshop, we provide the environment. You'll need:
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
+    ![Notebook Information](./images/task1_1.png " ")
 
 2. Click **Import** to expand the Import drop down.
+    ![Notebook Information](./images/task1_2.png " ")
 
 3. Select **Git**.
+    ![Notebook Information](./images/task1_3.png " ")
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -72,6 +75,7 @@ Before you begin, you are going to import a notebook that has all of the command
     ```
 
 5. Click **Ok**.
+    ![Notebook Information](./images/task1_5.png " ")
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -80,7 +84,9 @@ You should now be on the screen with the notebook imported. This workshop will h
 First, you'll create three tables:
 
 1. **loan_applicants**: Sample applicants who will apply for loans
+
 2. **loan_applications**: Where loan submissions are stored with their status
+
 3. **underwriting_rules**: JSON-configured business rules the agent will follow
 
 Notice the constraints on `loan_applications` — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
@@ -136,6 +142,8 @@ INSERT INTO loan_applicants VALUES ('APP-004', 'David Chen', 'david@email.com', 
 COMMIT;
 </copy>
 ```
+![Notebook Information](./images/task2_1.png " ")
+![Notebook Information](./images/task2_12.png " ")
 
 ## Task 3: Define Seer Equity's Underwriting Rules
 
@@ -193,6 +201,8 @@ INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VAL
 COMMIT;
 </copy>
 ```
+![Notebook Information](./images/task3_5.png " ")
+![Notebook Information](./images/task3_52.png " ")
 
 ## Task 4: Create the Rules Checker Function
 
@@ -245,6 +255,8 @@ END;
 /
 </copy>
 ```
+![Notebook Information](./images/task4_1.png " ")
+![Notebook Information](./images/task4_12.png " ")
 
 ## Task 5: Test Seer Equity's Rules Engine
 
@@ -271,6 +283,9 @@ UNION ALL
 SELECT '$20K auto, 520 credit:', check_underwriting_rules(20000, 'auto', 520) FROM DUAL;
 </copy>
 ```
+
+![Notebook Information](./images/task5.png " ")
+
 
 ## Task 6: Create the Loan Submission Function
 
@@ -345,114 +360,132 @@ END;
 </copy>
 ```
 
+![Notebook Information](./images/task6_1.png " ")
+![Notebook Information](./images/task6_12.png " ")
+
 ## Task 7: Create the Underwriter's Functions
 
 Underwriters need three capabilities: see pending applications, approve, and deny.
 
-```sql
-<copy>
-CREATE OR REPLACE FUNCTION get_pending_reviews RETURN VARCHAR2 AS
-    v_result VARCHAR2(4000) := '[';
-    v_first  BOOLEAN := TRUE;
-BEGIN
-    FOR rec IN (
-        SELECT la.application_id, ap.name as applicant_name, ap.credit_score,
-               la.loan_amount, la.loan_type, la.loan_purpose,
-               TO_CHAR(la.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted
-        FROM loan_applications la
-        JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id
-        WHERE la.risk_status = 'PENDING_REVIEW'
-        ORDER BY la.submitted_at
-    ) LOOP
-        IF NOT v_first THEN
-            v_result := v_result || ',';
-        END IF;
-        v_first := FALSE;
+1. Get pending reviews.
+    ```sql
+    <copy>
+    CREATE OR REPLACE FUNCTION get_pending_reviews RETURN VARCHAR2 AS
+        v_result VARCHAR2(4000) := '[';
+        v_first  BOOLEAN := TRUE;
+    BEGIN
+        FOR rec IN (
+            SELECT la.application_id, ap.name as applicant_name, ap.credit_score,
+                la.loan_amount, la.loan_type, la.loan_purpose,
+                TO_CHAR(la.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted
+            FROM loan_applications la
+            JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id
+            WHERE la.risk_status = 'PENDING_REVIEW'
+            ORDER BY la.submitted_at
+        ) LOOP
+            IF NOT v_first THEN
+                v_result := v_result || ',';
+            END IF;
+            v_first := FALSE;
+            
+            v_result := v_result || '{"application_id": "' || rec.application_id || '", ' ||
+                        '"applicant": "' || rec.applicant_name || '", ' ||
+                        '"credit_score": ' || rec.credit_score || ', ' ||
+                        '"amount": ' || rec.loan_amount || ', ' ||
+                        '"type": "' || rec.loan_type || '", ' ||
+                        '"purpose": "' || NVL(rec.loan_purpose, 'N/A') || '", ' ||
+                        '"submitted": "' || rec.submitted || '"}';
+        END LOOP;
         
-        v_result := v_result || '{"application_id": "' || rec.application_id || '", ' ||
-                    '"applicant": "' || rec.applicant_name || '", ' ||
-                    '"credit_score": ' || rec.credit_score || ', ' ||
-                    '"amount": ' || rec.loan_amount || ', ' ||
-                    '"type": "' || rec.loan_type || '", ' ||
-                    '"purpose": "' || NVL(rec.loan_purpose, 'N/A') || '", ' ||
-                    '"submitted": "' || rec.submitted || '"}';
-    END LOOP;
-    
-    v_result := v_result || ']';
-    
-    IF v_result = '[]' THEN
-        RETURN '{"message": "No loan applications pending review."}';
-    END IF;
-    
-    RETURN v_result;
-END;
-/
+        v_result := v_result || ']';
+        
+        IF v_result = '[]' THEN
+            RETURN '{"message": "No loan applications pending review."}';
+        END IF;
+        
+        RETURN v_result;
+    END;
+    /
+    </copy>
+    ```
+    ![Notebook Information](./images/task7_1.png " ")
+    ![Notebook Information](./images/task7_12.png " ")
 
-CREATE OR REPLACE FUNCTION approve_loan(
-    p_application_id VARCHAR2,
-    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'
-) RETURN VARCHAR2 AS
-    PRAGMA AUTONOMOUS_TRANSACTION;
-    v_current_status VARCHAR2(30);
-BEGIN
-    SELECT risk_status INTO v_current_status
-    FROM loan_applications
-    WHERE application_id = p_application_id;
-    
-    IF v_current_status != 'PENDING_REVIEW' THEN
-        RETURN '{"error": "Cannot approve. Current status is ' || v_current_status || '."}';
-    END IF;
-    
-    UPDATE loan_applications
-    SET risk_status = 'APPROVED',
-        decided_by = p_underwriter,
-        decided_at = SYSTIMESTAMP
-    WHERE application_id = p_application_id;
-    
-    COMMIT;
-    RETURN '{"application_id": "' || p_application_id || '", "status": "APPROVED", "approved_by": "' || p_underwriter || '"}';
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN '{"error": "Application not found: ' || p_application_id || '"}';
-    WHEN OTHERS THEN
-        ROLLBACK;
-        RETURN '{"error": "' || SQLERRM || '"}';
-END;
-/
+2. Approve the loan.
+    ```sql
+    <copy>
+    CREATE OR REPLACE FUNCTION approve_loan(
+        p_application_id VARCHAR2,
+        p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'
+    ) RETURN VARCHAR2 AS
+        PRAGMA AUTONOMOUS_TRANSACTION;
+        v_current_status VARCHAR2(30);
+    BEGIN
+        SELECT risk_status INTO v_current_status
+        FROM loan_applications
+        WHERE application_id = p_application_id;
+        
+        IF v_current_status != 'PENDING_REVIEW' THEN
+            RETURN '{"error": "Cannot approve. Current status is ' || v_current_status || '."}';
+        END IF;
+        
+        UPDATE loan_applications
+        SET risk_status = 'APPROVED',
+            decided_by = p_underwriter,
+            decided_at = SYSTIMESTAMP
+        WHERE application_id = p_application_id;
+        
+        COMMIT;
+        RETURN '{"application_id": "' || p_application_id || '", "status": "APPROVED", "approved_by": "' || p_underwriter || '"}';
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RETURN '{"error": "Application not found: ' || p_application_id || '"}';
+        WHEN OTHERS THEN
+            ROLLBACK;
+            RETURN '{"error": "' || SQLERRM || '"}';
+    END;
+    /
+    </copy>
+    ```
+    ![Notebook Information](./images/task7_21.png " ")
 
-CREATE OR REPLACE FUNCTION deny_loan(
-    p_application_id VARCHAR2,
-    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'
-) RETURN VARCHAR2 AS
-    PRAGMA AUTONOMOUS_TRANSACTION;
-    v_current_status VARCHAR2(30);
-BEGIN
-    SELECT risk_status INTO v_current_status
-    FROM loan_applications
-    WHERE application_id = p_application_id;
-    
-    IF v_current_status != 'PENDING_REVIEW' THEN
-        RETURN '{"error": "Cannot deny. Current status is ' || v_current_status || '."}';
-    END IF;
-    
-    UPDATE loan_applications
-    SET risk_status = 'DENIED',
-        decided_by = p_underwriter,
-        decided_at = SYSTIMESTAMP
-    WHERE application_id = p_application_id;
-    
-    COMMIT;
-    RETURN '{"application_id": "' || p_application_id || '", "status": "DENIED", "denied_by": "' || p_underwriter || '"}';
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN '{"error": "Application not found: ' || p_application_id || '"}';
-    WHEN OTHERS THEN
-        ROLLBACK;
-        RETURN '{"error": "' || SQLERRM || '"}';
-END;
-/
-</copy>
-```
+3. Deny the loan.
+    ```sql
+    <copy>
+    CREATE OR REPLACE FUNCTION deny_loan(
+        p_application_id VARCHAR2,
+        p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'
+    ) RETURN VARCHAR2 AS
+        PRAGMA AUTONOMOUS_TRANSACTION;
+        v_current_status VARCHAR2(30);
+    BEGIN
+        SELECT risk_status INTO v_current_status
+        FROM loan_applications
+        WHERE application_id = p_application_id;
+        
+        IF v_current_status != 'PENDING_REVIEW' THEN
+            RETURN '{"error": "Cannot deny. Current status is ' || v_current_status || '."}';
+        END IF;
+        
+        UPDATE loan_applications
+        SET risk_status = 'DENIED',
+            decided_by = p_underwriter,
+            decided_at = SYSTIMESTAMP
+        WHERE application_id = p_application_id;
+        
+        COMMIT;
+        RETURN '{"application_id": "' || p_application_id || '", "status": "DENIED", "denied_by": "' || p_underwriter || '"}';
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RETURN '{"error": "Application not found: ' || p_application_id || '"}';
+        WHEN OTHERS THEN
+            ROLLBACK;
+            RETURN '{"error": "' || SQLERRM || '"}';
+    END;
+    /
+    </copy>
+    ```
+    ![Notebook Information](./images/task7_22.png " ")
 
 ## Task 8: Register the Tools
 
@@ -496,6 +529,9 @@ END;
 /
 </copy>
 ```
+    
+![Notebook Information](./images/task8_1.png " ")
+
 
 ## Task 9: Create the Loan Agent (Loan Officer Role)
 
@@ -535,6 +571,9 @@ END;
 </copy>
 ```
 
+![Notebook Information](./images/task9_1.png " ")
+
+
 ## Task 10: Create the Underwriting Agent (Underwriter Role)
 
 The `UNDERWRITING_AGENT` has access to three tools but **not** `SUBMIT_LOAN_TOOL`. Proper separation of duties.
@@ -572,6 +611,8 @@ END;
 /
 </copy>
 ```
+![Notebook Information](./images/task10_1.png " ")
+
 
 ## Task 11: Test the Loan Officer Path
 
@@ -584,6 +625,8 @@ Become a loan officer and submit applications.
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_TEAM');
     </copy>
     ```
+    ![Notebook Information](./images/task11_1.png " ")
+
 
 2. Submit a small personal loan (auto-approve path).
 
@@ -592,30 +635,43 @@ Become a loan officer and submit applications.
     SELECT AI AGENT Submit a $25000 personal loan for applicant APP-001, purpose is debt consolidation;
     </copy>
     ```
+    ![Notebook Information](./images/task11_2.png " ")
 
-3. Submit a large loan (underwriter review path).
+3. Submit a auto loan (auto-approve path).
+
+    ```sql
+    <copy>
+    SELECT AI AGENT Submit a $35000 auto loan for applicant APP-002, purpose is new vehicle purchase;
+    </copy>
+    ```
+    ![Notebook Information](./images/task11_3.png " ")
+
+4. Submit a large loan (underwriter review path).
 
     ```sql
     <copy>
     SELECT AI AGENT Submit a $75000 personal loan for applicant APP-004, purpose is home renovation;
     </copy>
     ```
+    ![Notebook Information](./images/task11_4.png " ")
 
-4. Submit a mortgage (always requires review).
+5. Submit a mortgage (always requires review).
 
     ```sql
     <copy>
     SELECT AI AGENT Submit a $250000 mortgage for applicant APP-001, purpose is primary residence purchase;
     </copy>
     ```
+    ![Notebook Information](./images/task11_5.png " ")
 
-5. Try to submit a high-risk application (blocked).
+6. Try to submit a high-risk application (blocked).
 
     ```sql
     <copy>
     SELECT AI AGENT Submit a $20000 auto loan for applicant APP-003, purpose is used car purchase;
     </copy>
     ```
+    ![Notebook Information](./images/task11_6.png " ")
 
 ## Task 12: Verify the Applications
 
@@ -635,6 +691,7 @@ JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id
 ORDER BY la.submitted_at;
 </copy>
 ```
+![Notebook Information](./images/task12.png " ")
 
 ## Task 13: Test the Underwriter Path
 
@@ -647,6 +704,7 @@ Switch to the underwriting agent and review applications.
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('UNDERWRITING_TEAM');
     </copy>
     ```
+    ![Notebook Information](./images/task13_1.png " ")
 
 2. Check what needs review.
 
@@ -655,6 +713,7 @@ Switch to the underwriting agent and review applications.
     SELECT AI AGENT What loan applications need my review;
     </copy>
     ```
+    ![Notebook Information](./images/task13_2.png " ")
 
 3. Approve the applications.
 
@@ -669,23 +728,40 @@ Switch to the underwriting agent and review applications.
     SELECT AI AGENT Approve the mortgage application;
     </copy>
     ```
+    ![Notebook Information](./images/task13_3_1.png " ")
+    ![Notebook Information](./images/task13_3_2.png " ")
 
 ## Task 14: Review the Audit Trail
 
-Every tool call is logged. This is crucial for regulatory compliance.
+1. Every tool call is logged. This is crucial for regulatory compliance.
 
-```sql
-<copy>
-SELECT 
-    tool_name,
-    TO_CHAR(start_date, 'HH24:MI:SS') as called,
-    SUBSTR(input, 1, 60) as input_preview,
-    SUBSTR(output, 1, 60) as output_preview
-FROM USER_AI_AGENT_TOOL_HISTORY
-ORDER BY start_date DESC
-FETCH FIRST 15 ROWS ONLY;
-</copy>
-```
+    ```sql
+    <copy>
+    SELECT 
+        tool_name,
+        TO_CHAR(start_date, 'HH24:MI:SS') as called,
+        SUBSTR(input, 1, 60) as input_preview,
+        SUBSTR(output, 1, 60) as output_preview
+    FROM USER_AI_AGENT_TOOL_HISTORY
+    ORDER BY start_date DESC
+    FETCH FIRST 15 ROWS ONLY;
+    </copy>
+    ```
+    ![Notebook Information](./images/task14_1.png " ")
+
+2. Show a summary for how many times each tool was called. 
+
+    ```sql
+    <copy>
+        SELECT 
+        tool_name,
+        COUNT(*) as call_count
+    FROM USER_AI_AGENT_TOOL_HISTORY
+    GROUP BY tool_name
+    ORDER BY call_count DESC;
+    </copy>
+    ```
+    ![Notebook Information](./images/task14_2.png " ")
 
 ## Summary
 
@@ -746,3 +822,4 @@ DROP FUNCTION approve_loan;
 DROP FUNCTION deny_loan;
 </copy>
 ```
+![Cleanup](./images/cleanup.png " ")
