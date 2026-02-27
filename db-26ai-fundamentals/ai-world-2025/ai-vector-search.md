@@ -135,17 +135,17 @@ Estimated Lab Time: 25 minutes
 
             TYPE url_array IS VARRAY(100) OF VARCHAR2(2000);
             l_file_urls url_array := url_array(
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/VmOEXelaGdlmUe8hv6fsgEBKrWKx7nFoDSsVB71BdLoU_DfrLc6skHreAXet1ce4/n/oradbclouducm/b/aiworld-demo/o/archived_messages_courtney.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/8hQojUmNUeg18p_JqyBQ1O7s-X7kqdO4aOpzfvAdjZdTtBoH5_CwsGaCVF7KiOXe/n/oradbclouducm/b/aiworld-demo/o/archived_messages_leslie.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/Ir9SipDVumKh2caDBHgNM9DFDuGvw5jtbP77HvlfGp4eVNC25PsLsCyPYWTvGLTO/n/oradbclouducm/b/aiworld-demo/o/archived_messages_ronald.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/2VMjjOiG2lMOJ0SEYh-PuFrQ2J1JsrR1quPwbqIQzAN6SDAfIDb3wcPmC3_iyvrt/n/oradbclouducm/b/aiworld-demo/o/discharge_summary_courtney.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/hibOcvyK0X5b8LNjbnGG4r_1SMtLDchL2FFJvM1tJ5B4RwBva4gnWcFc1jB777Sf/n/oradbclouducm/b/aiworld-demo/o/insurance_authorization.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/Td5lyfX4_fB2TMQdCyza6jd-UWqPmmiSWKTuKnCS6__FtjuflY3eQkCFlKP7enqd/n/oradbclouducm/b/aiworld-demo/o/lab_results_leslie.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/TTxSm_dz3jrrleTW0Ip5yhOaJ27zCO8Mf1Jt2B8Gs4jvbx2YHm5XiTcE2cMExgC0/n/oradbclouducm/b/aiworld-demo/o/nutrition_consultation_leslie.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/FSgzEsNudwY5RiaYf-DB-hJTFTCMsmtUeV3xLFxSkajcOim2umCHXVoOwor4dQRA/n/oradbclouducm/b/aiworld-demo/o/patient_notes_courtney.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/a5Hk74yKQTCxgcJrycf_OO2LN0HYdkBhtlLT5O4ojIE55f1J8l-ZWWhuXCCLlDOL/n/oradbclouducm/b/aiworld-demo/o/physical_therapy_notes.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/zWoDl9Z1c7ZDgeXQ9629e5nIVOJKYZpgs_it-GiC9WjkEGcHbWB5Au-ft4iRb_cG/n/oradbclouducm/b/aiworld-demo/o/radiology_report_ronald.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/Sm7U-Bl04IxZxL99TamivaWmm9ZEOWxxKypNDDc2DJOEptyZJqrZvlh4VRmPkHn5/n/oradbclouducm/b/aiworld-demo/o/specialist_referral_ronald.txt'
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/Q5ut2WEd3LoZGvPDKGQy6YE6Ur1uNh_KPz29_nHc6hOXmf62cZvTnaIJ2Wkvbu3E/n/oradbclouducm/b/aiworld-demo/o/archived_messages_courtney.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/6jvQvMNMkhOVDjanCZNlkWh5TuDDqpwD6yneBAyoaOFiS35WlaGTV8_-8VtF0G_H/n/oradbclouducm/b/aiworld-demo/o/archived_messages_leslie.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/gFU7MYcOkQAV7L85yVbn0813kMnZ2XEY6nzBOfUCaaaGaClIxMsTZOXLwJ_3wKJZ/n/oradbclouducm/b/aiworld-demo/o/archived_messages_ronald.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/uMa84j6GL9htHf8zZ-61M3y1KVhlLAiEMpU8HLJ_IP8TaLIF7ZBvpXAvM7RtlEq-/n/oradbclouducm/b/aiworld-demo/o/discharge_summary_courtney.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/lY01za5tMiWafA-UUkg_w66SWwJ7sORXVCYQeyzGVDCwe-5fMSVqX2QoP6q54ZGY/n/oradbclouducm/b/aiworld-demo/o/insurance_authorization.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/WQQHzniHfe0EOwRiru6JpOyZvNQwDIaeeTPVYtnUHAQ_z37nDtCDdCZmrmNC9zIM/n/oradbclouducm/b/aiworld-demo/o/lab_results_leslie.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/R09NjIXJ6eKtwD89t_QQbQ-vutlhaa9HaZ7MB5qeTa61ajTGCdDXu46n9094CBEr/n/oradbclouducm/b/aiworld-demo/o/nutrition_consultation_leslie.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/sBiIEOZebeZkyFkO875X4ZUDY6Wm1ohQjnnoi8_-rtmO5JLb-WJ6fSYHZP_KYSTy/n/oradbclouducm/b/aiworld-demo/o/patient_notes_courtney.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/k4P9SQUz0lYVsdxdaMWVAlKaL-APGlbPVAEdeFtG36o66_ouSUgaFMbjnMWZeNlo/n/oradbclouducm/b/aiworld-demo/o/physical_therapy_notes.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/531w8azMgZT52eOU94wSk0ZzR_4aBl0814W-1qkaT99J6qlokL1uxIoNvpjd4i9M/n/oradbclouducm/b/aiworld-demo/o/radiology_report_ronald.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/ybYLzGSZ6aHEX_vJn2AjTzDlXKo7lkxuumhRfM8oDqBHQ2xGXtr8-9txP2VUyoZm/n/oradbclouducm/b/aiworld-demo/o/specialist_referral_ronald.txt'
                 );
                 -- add more URLs here
             BEGIN

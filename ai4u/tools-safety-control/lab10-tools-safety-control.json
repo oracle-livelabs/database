@@ -1,0 +1,845 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Tools, Safety, and Human Control at Seer Equity\n\n### The Business Problem\n\nSeer Equity's compliance team has a recurring nightmare: What if someone submits AND approves their own loan? Their current systems don't enforce separation of duties—it's just policy that people are \"supposed to follow.\"\n\n*\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this loan approved?', nobody can answer.\"*\n\nThe company needs agents that:\n- **Enforce role separation** — Loan officers can submit but NOT approve\n- **Automate routine decisions** — Low-risk loans shouldn't need human review\n- **Require human judgment** — High-value or complex loans need underwriters\n- **Log everything** — Complete audit trail for compliance\n\n### What You'll Learn\n\nIn this capstone lab, you'll build a two-agent loan underwriting system:\n\n| Agent | Role | Can Do | Cannot Do |\n|-------|------|--------|-----------|\n| **LOAN_AGENT** | Loan Officers | Submit applications | Approve/Deny |\n| **UNDERWRITING_AGENT** | Underwriters | Approve/Deny | Submit applications |\n\nThe separation isn't just policy—it's architecture. LOAN_AGENT literally doesn't have approval tools.\n\nYou'll also implement risk-based routing:\n- **Credit < 550** → BLOCKED (cannot proceed)\n- **Personal < $50K** → AUTO_APPROVE\n- **$50K-$250K** → Underwriter review required\n- **$250K+ or Mortgage** → Senior underwriter required\n\n**What you'll build:** A compliant two-agent loan underwriting system with separation of duties and full audit trail.\n\n**Estimated Time:** 20 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Tools, Safety, and Human Control at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Seer Equity's compliance team has a recurring nightmare: What if someone submits AND approves their own loan? Their current systems don't enforce separation of duties—it's just policy that people are \"supposed to follow.\"</p>\n\n<p><em>\"We're one mistake away from a regulatory finding. And we have no idea what our AI assistants are actually doing. When a regulator asks 'why was this loan approved?', nobody can answer.\"</em></p>\n\n<p>The company needs agents that:</p>\n<ul>\n<li><strong>Enforce role separation</strong> — Loan officers can submit but NOT approve</li>\n<li><strong>Automate routine decisions</strong> — Low-risk loans shouldn't need human review</li>\n<li><strong>Require human judgment</strong> — High-value or complex loans need underwriters</li>\n<li><strong>Log everything</strong> — Complete audit trail for compliance</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this capstone lab, you'll build a two-agent loan underwriting system:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Agent</th><th style=\"padding: 8px;\">Role</th><th style=\"padding: 8px;\">Can Do</th><th style=\"padding: 8px;\">Cannot Do</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>LOAN_AGENT</strong></td><td style=\"padding: 8px;\">Loan Officers</td><td style=\"padding: 8px;\">Submit applications</td><td style=\"padding: 8px;\">Approve/Deny</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>UNDERWRITING_AGENT</strong></td><td style=\"padding: 8px;\">Underwriters</td><td style=\"padding: 8px;\">Approve/Deny</td><td style=\"padding: 8px;\">Submit applications</td></tr>\n</table>\n\n<p>The separation isn't just policy—it's architecture. LOAN_AGENT literally doesn't have approval tools.</p>\n\n<p>You'll also implement risk-based routing:</p>\n<ul>\n<li><strong>Credit < 550</strong> → BLOCKED (cannot proceed)</li>\n<li><strong>Personal < $50K</strong> → AUTO_APPROVE</li>\n<li><strong>$50K-$250K</strong> → Underwriter review required</li>\n<li><strong>$250K+ or Mortgage</strong> → Senior underwriter required</li>\n</ul>\n\n<p><strong>What you'll build:</strong> A compliant two-agent loan underwriting system with separation of duties and full audit trail.</p>\n\n<p><strong>Estimated Time:</strong> 20 minutes</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Create the Database Tables\n\nFirst, you'll create three tables:\n\n1. **loan_applicants**: Sample applicants who will apply for loans\n2. **loan_applications**: Where loan submissions are stored with their status\n3. **underwriting_rules**: JSON-configured business rules the agent will follow\n\nNotice the constraints on `loan_applications` — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Database Tables</h2>\n\n<p>First, you'll create three tables:</p>\n\n<ol>\n<li><strong>loan_applicants</strong>: Sample applicants who will apply for loans</li>\n<li><strong>loan_applications</strong>: Where loan submissions are stored with their status</li>\n<li><strong>underwriting_rules</strong>: JSON-configured business rules the agent will follow</li>\n</ol>\n\n<p>Notice the constraints on <code>loan_applications</code> — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Sequence for application IDs\nCREATE SEQUENCE loan_app_seq START WITH 1001;\n\n-- Applicants table\nCREATE TABLE loan_applicants (\n    applicant_id    VARCHAR2(20) PRIMARY KEY,\n    name            VARCHAR2(100) NOT NULL,\n    email           VARCHAR2(100) NOT NULL,\n    credit_score    NUMBER(3) NOT NULL,\n    annual_income   NUMBER(12,2),\n    employment_years NUMBER(2)\n);\n\n-- Loan applications\nCREATE TABLE loan_applications (\n    application_id  VARCHAR2(20) PRIMARY KEY,\n    applicant_id    VARCHAR2(20) NOT NULL REFERENCES loan_applicants(applicant_id),\n    loan_amount     NUMBER(12,2) NOT NULL \n                    CONSTRAINT chk_positive_amount CHECK (loan_amount > 0),\n    loan_type       VARCHAR2(50) NOT NULL\n                    CONSTRAINT chk_loan_type CHECK (loan_type IN ('personal','auto','mortgage','business')),\n    loan_purpose    VARCHAR2(500),\n    risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'\n                    CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),\n    submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,\n    decided_by      VARCHAR2(100),\n    decided_at      TIMESTAMP\n);\n\n-- Underwriting rules\nCREATE TABLE underwriting_rules (\n    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,\n    rule_name    VARCHAR2(200) NOT NULL,\n    rule_type    VARCHAR2(20) NOT NULL \n                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_REVIEW','AUTO_APPROVE')),\n    rule_config  JSON NOT NULL,\n    priority     NUMBER DEFAULT 100,\n    is_active    NUMBER(1) DEFAULT 1\n);\n\n-- Insert sample applicants with varying credit profiles\nINSERT INTO loan_applicants VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);\nINSERT INTO loan_applicants VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);\nINSERT INTO loan_applicants VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);\nINSERT INTO loan_applicants VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);\n\nCOMMIT;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Define Seer Equity's Underwriting Rules\n\nNow you'll insert the business rules that control what happens to each loan application. These rules are stored as JSON, making them easy to modify without changing code.\n\nThe rules are evaluated in priority order (lowest number first):\n1. **Block** applications with credit score below 550 — too high risk for automated processing\n2. **Require review** for loans $50,000 or more — significant exposure needs human judgment\n3. **Require review** for any mortgage — complex product requires underwriter\n4. **Require review** for credit scores 550-650 — borderline creditworthiness\n5. **Auto-approve** everything else — low-risk personal/auto loans with good credit\n\nThis priority order matters! A $30K personal loan with a 600 credit score hits rule 4 before rule 5.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Define Seer Equity's Underwriting Rules</h2>\n\n<p>Now you'll insert the business rules that control what happens to each loan application. These rules are stored as JSON, making them easy to modify without changing code.</p>\n\n<p>The rules are evaluated in priority order (lowest number first):</p>\n<ol>\n<li><strong>Block</strong> applications with credit score below 550 — too high risk for automated processing</li>\n<li><strong>Require review</strong> for loans $50,000 or more — significant exposure needs human judgment</li>\n<li><strong>Require review</strong> for any mortgage — complex product requires underwriter</li>\n<li><strong>Require review</strong> for credit scores 550-650 — borderline creditworthiness</li>\n<li><strong>Auto-approve</strong> everything else — low-risk personal/auto loans with good credit</li>\n</ol>\n\n<p>This priority order matters! A $30K personal loan with a 600 credit score hits rule 4 before rule 5.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Block very low credit scores (<550)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Block High Risk - Low Credit',\n    'BLOCK',\n    '{\"field\": \"credit_score\", \"operator\": \"lt\", \"value\": 550, \"message\": \"Credit score below 550 does not meet Seer Equity minimum requirements. Application cannot be processed.\"}',\n    10\n);\n\n-- Require review for large loans (>=$50,000)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Large Loan Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"loan_amount\", \"operator\": \"gte\", \"value\": 50000, \"message\": \"Loans $50,000 and above require underwriter review.\"}',\n    20\n);\n\n-- Require review for all mortgages (any amount)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Mortgage Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"loan_type\", \"operator\": \"eq\", \"value\": \"mortgage\", \"message\": \"All mortgage applications require underwriter review.\"}',\n    30\n);\n\n-- Require review for borderline credit (550-650)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Borderline Credit Review',\n    'REQUIRE_REVIEW',\n    '{\"field\": \"credit_score\", \"operator\": \"between\", \"low\": 550, \"high\": 650, \"message\": \"Credit scores 550-650 require underwriter review.\"}',\n    40\n);\n\n-- Auto-approve everything else (good credit, small loans, non-mortgage)\nINSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (\n    'Auto-approve Standard',\n    'AUTO_APPROVE',\n    '{\"field\": \"loan_amount\", \"operator\": \"lt\", \"value\": 50000, \"message\": \"Personal and auto loans under $50,000 with good credit are auto-approved.\"}',\n    100\n);\n\nCOMMIT;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Rules Checker Function\n\nThis function is the brain of Seer Equity's automated underwriting. It evaluates each application against the rules in priority order and returns the first matching rule.\n\nThe function returns a JSON object telling the caller:\n- **action**: What to do: BLOCK, REQUIRE_REVIEW, or AUTO_APPROVE\n- **rule**: Which rule matched\n- **message**: Human-readable explanation",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Rules Checker Function</h2>\n\n<p>This function is the brain of Seer Equity's automated underwriting. It evaluates each application against the rules in priority order and returns the first matching rule.</p>\n\n<p>The function returns a JSON object telling the caller:</p>\n<ul>\n<li><strong>action</strong>: What to do: BLOCK, REQUIRE_REVIEW, or AUTO_APPROVE</li>\n<li><strong>rule</strong>: Which rule matched</li>\n<li><strong>message</strong>: Human-readable explanation</li>\n</ul>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION check_underwriting_rules(\n    p_loan_amount   NUMBER,\n    p_loan_type     VARCHAR2,\n    p_credit_score  NUMBER\n) RETURN VARCHAR2 AS\nBEGIN\n    FOR rec IN (\n        SELECT rule_name, rule_type, rule_config\n        FROM underwriting_rules\n        WHERE is_active = 1\n        ORDER BY priority\n    ) LOOP\n        DECLARE\n            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');\n            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');\n            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');\n            v_low      VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.low');\n            v_high     VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.high');\n            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');\n            v_match    BOOLEAN := FALSE;\n        BEGIN\n            IF v_field = 'loan_amount' THEN\n                IF v_operator = 'gte' AND p_loan_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'lt' AND p_loan_amount < TO_NUMBER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'loan_type' THEN\n                IF v_operator = 'eq' AND LOWER(p_loan_type) = LOWER(v_value) THEN v_match := TRUE;\n                END IF;\n            ELSIF v_field = 'credit_score' THEN\n                IF v_operator = 'lt' AND p_credit_score < TO_NUMBER(v_value) THEN v_match := TRUE;\n                ELSIF v_operator = 'between' AND p_credit_score >= TO_NUMBER(v_low) AND p_credit_score <= TO_NUMBER(v_high) THEN v_match := TRUE;\n                END IF;\n            END IF;\n            \n            IF v_match THEN\n                RETURN '{\"action\": \"' || rec.rule_type || '\", \"rule\": \"' || rec.rule_name || '\", \"message\": \"' || v_message || '\"}';\n            END IF;\n        END;\n    END LOOP;\n    \n    RETURN '{\"action\": \"AUTO_APPROVE\", \"message\": \"Application meets all automated approval criteria.\"}';\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Test Seer Equity's Rules Engine\n\nBefore building the agents, let's verify the rules work correctly. You'll test five scenarios:\n\n| Test | Expected Result | Why |\n|------|-----------------|-----|\n| $25K personal, 780 credit | AUTO_APPROVE | Good credit, small loan |\n| $35K auto, 695 credit | AUTO_APPROVE | Decent credit, under $50K |\n| $75K personal, 725 credit | REQUIRE_REVIEW | Over $50K threshold |\n| $30K personal, 600 credit | REQUIRE_REVIEW | Borderline credit 550-650 |\n| $20K auto, 520 credit | BLOCK | Credit below 550 |",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Seer Equity's Rules Engine</h2>\n\n<p>Before building the agents, let's verify the rules work correctly. You'll test five scenarios:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Test</th><th style=\"padding: 8px;\">Expected Result</th><th style=\"padding: 8px;\">Why</th></tr>\n<tr><td style=\"padding: 8px;\">$25K personal, 780 credit</td><td style=\"padding: 8px;\">AUTO_APPROVE</td><td style=\"padding: 8px;\">Good credit, small loan</td></tr>\n<tr><td style=\"padding: 8px;\">$35K auto, 695 credit</td><td style=\"padding: 8px;\">AUTO_APPROVE</td><td style=\"padding: 8px;\">Decent credit, under $50K</td></tr>\n<tr><td style=\"padding: 8px;\">$75K personal, 725 credit</td><td style=\"padding: 8px;\">REQUIRE_REVIEW</td><td style=\"padding: 8px;\">Over $50K threshold</td></tr>\n<tr><td style=\"padding: 8px;\">$30K personal, 600 credit</td><td style=\"padding: 8px;\">REQUIRE_REVIEW</td><td style=\"padding: 8px;\">Borderline credit 550-650</td></tr>\n<tr><td style=\"padding: 8px;\">$20K auto, 520 credit</td><td style=\"padding: 8px;\">BLOCK</td><td style=\"padding: 8px;\">Credit below 550</td></tr>\n</table>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT '$25K personal, 780 credit:' as test, check_underwriting_rules(25000, 'personal', 780) as result FROM DUAL\nUNION ALL\nSELECT '$35K auto, 695 credit:', check_underwriting_rules(35000, 'auto', 695) FROM DUAL\nUNION ALL\nSELECT '$75K personal, 725 credit:', check_underwriting_rules(75000, 'personal', 725) FROM DUAL\nUNION ALL\nSELECT '$30K personal, 600 credit:', check_underwriting_rules(30000, 'personal', 600) FROM DUAL\nUNION ALL\nSELECT '$20K auto, 520 credit:', check_underwriting_rules(20000, 'auto', 520) FROM DUAL;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Loan Submission Function\n\nThis is the main tool the LOAN_AGENT will use. It:\n\n1. Looks up the applicant's credit score\n2. Checks the underwriting rules\n3. If BLOCKED — returns an error without creating the application\n4. If AUTO_APPROVE — creates the application with status AUTO_APPROVED\n5. If REQUIRE_REVIEW — creates the application with status PENDING_REVIEW\n\nNotice the function uses `PRAGMA AUTONOMOUS_TRANSACTION` so it can commit independently.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Loan Submission Function</h2>\n\n<p>This is the main tool the LOAN_AGENT will use. It:</p>\n\n<ol>\n<li>Looks up the applicant's credit score</li>\n<li>Checks the underwriting rules</li>\n<li>If BLOCKED — returns an error without creating the application</li>\n<li>If AUTO_APPROVE — creates the application with status AUTO_APPROVED</li>\n<li>If REQUIRE_REVIEW — creates the application with status PENDING_REVIEW</li>\n</ol>\n\n<p>Notice the function uses <code>PRAGMA AUTONOMOUS_TRANSACTION</code> so it can commit independently.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION submit_loan_application(\n    p_applicant_id  VARCHAR2,\n    p_loan_amount   NUMBER,\n    p_loan_type     VARCHAR2,\n    p_loan_purpose  VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_application_id VARCHAR2(20);\n    v_credit_score   NUMBER;\n    v_rules          VARCHAR2(500);\n    v_action         VARCHAR2(20);\n    v_status         VARCHAR2(30);\nBEGIN\n    -- Get applicant's credit score\n    BEGIN\n        SELECT credit_score INTO v_credit_score\n        FROM loan_applicants\n        WHERE applicant_id = p_applicant_id;\n    EXCEPTION\n        WHEN NO_DATA_FOUND THEN\n            RETURN '{\"error\": \"Applicant not found: ' || p_applicant_id || '\"}';\n    END;\n    \n    -- Check underwriting rules\n    v_rules := check_underwriting_rules(p_loan_amount, p_loan_type, v_credit_score);\n    v_action := JSON_VALUE(v_rules, '$.action');\n    \n    -- Handle BLOCK - don't create the application\n    IF v_action = 'BLOCK' THEN\n        RETURN '{\"error\": \"BLOCKED\", \"message\": \"' || JSON_VALUE(v_rules, '$.message') || '\"}';\n    END IF;\n    \n    -- Determine status\n    IF v_action = 'AUTO_APPROVE' THEN\n        v_status := 'AUTO_APPROVED';\n    ELSE\n        v_status := 'PENDING_REVIEW';\n    END IF;\n    \n    -- Generate application ID and insert\n    v_application_id := 'LOAN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || loan_app_seq.NEXTVAL;\n    \n    INSERT INTO loan_applications (application_id, applicant_id, loan_amount, loan_type, loan_purpose, risk_status, decided_by, decided_at)\n    VALUES (\n        v_application_id, \n        p_applicant_id, \n        p_loan_amount, \n        LOWER(p_loan_type), \n        p_loan_purpose,\n        v_status,\n        CASE WHEN v_status = 'AUTO_APPROVED' THEN 'SYSTEM' ELSE NULL END,\n        CASE WHEN v_status = 'AUTO_APPROVED' THEN SYSTIMESTAMP ELSE NULL END\n    );\n    \n    COMMIT;\n    \n    RETURN '{\"application_id\": \"' || v_application_id || '\", \"status\": \"' || v_status || '\", \"credit_score\": ' || v_credit_score || ', \"message\": \"' || \n           CASE WHEN v_status = 'AUTO_APPROVED' THEN 'Auto-approved based on credit profile and loan parameters.' ELSE 'Submitted for underwriter review.' END || '\"}';\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Underwriter's Functions\n\nUnderwriters need three capabilities:\n\n1. **get_pending_reviews**: See what applications are waiting for review\n2. **approve_loan**: Approve a specific application by ID\n3. **deny_loan**: Deny a specific application by ID with a reason\n\nThese functions only work on applications with status PENDING_REVIEW. You can't approve something that's already approved or denied.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Underwriter's Functions</h2>\n\n<p>Underwriters need three capabilities:</p>\n\n<ol>\n<li><strong>get_pending_reviews</strong>: See what applications are waiting for review</li>\n<li><strong>approve_loan</strong>: Approve a specific application by ID</li>\n<li><strong>deny_loan</strong>: Deny a specific application by ID with a reason</li>\n</ol>\n\n<p>These functions only work on applications with status PENDING_REVIEW. You can't approve something that's already approved or denied.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION get_pending_reviews RETURN VARCHAR2 AS\n    v_result VARCHAR2(4000) := '[';\n    v_first  BOOLEAN := TRUE;\nBEGIN\n    FOR rec IN (\n        SELECT la.application_id, ap.name as applicant_name, ap.credit_score,\n               la.loan_amount, la.loan_type, la.loan_purpose,\n               TO_CHAR(la.submitted_at, 'YYYY-MM-DD HH24:MI') as submitted\n        FROM loan_applications la\n        JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id\n        WHERE la.risk_status = 'PENDING_REVIEW'\n        ORDER BY la.submitted_at\n    ) LOOP\n        IF NOT v_first THEN\n            v_result := v_result || ',';\n        END IF;\n        v_first := FALSE;\n        \n        v_result := v_result || '{\"application_id\": \"' || rec.application_id || '\", ' ||\n                    '\"applicant\": \"' || rec.applicant_name || '\", ' ||\n                    '\"credit_score\": ' || rec.credit_score || ', ' ||\n                    '\"amount\": ' || rec.loan_amount || ', ' ||\n                    '\"type\": \"' || rec.loan_type || '\", ' ||\n                    '\"purpose\": \"' || NVL(rec.loan_purpose, 'N/A') || '\", ' ||\n                    '\"submitted\": \"' || rec.submitted || '\"}';\n    END LOOP;\n    \n    v_result := v_result || ']';\n    \n    IF v_result = '[]' THEN\n        RETURN '{\"message\": \"No loan applications pending review.\"}';\n    END IF;\n    \n    RETURN v_result;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION approve_loan(\n    p_application_id VARCHAR2,\n    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT risk_status INTO v_current_status\n    FROM loan_applications\n    WHERE application_id = p_application_id;\n    \n    IF v_current_status != 'PENDING_REVIEW' THEN\n        RETURN '{\"error\": \"Cannot approve. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE loan_applications\n    SET risk_status = 'APPROVED',\n        decided_by = p_underwriter,\n        decided_at = SYSTIMESTAMP\n    WHERE application_id = p_application_id;\n    \n    COMMIT;\n    RETURN '{\"application_id\": \"' || p_application_id || '\", \"status\": \"APPROVED\", \"approved_by\": \"' || p_underwriter || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Application not found: ' || p_application_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION deny_loan(\n    p_application_id VARCHAR2,\n    p_underwriter    VARCHAR2 DEFAULT 'UNDERWRITER'\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_current_status VARCHAR2(30);\nBEGIN\n    SELECT risk_status INTO v_current_status\n    FROM loan_applications\n    WHERE application_id = p_application_id;\n    \n    IF v_current_status != 'PENDING_REVIEW' THEN\n        RETURN '{\"error\": \"Cannot deny. Current status is ' || v_current_status || '.\"}';\n    END IF;\n    \n    UPDATE loan_applications\n    SET risk_status = 'DENIED',\n        decided_by = p_underwriter,\n        decided_at = SYSTIMESTAMP\n    WHERE application_id = p_application_id;\n    \n    COMMIT;\n    RETURN '{\"application_id\": \"' || p_application_id || '\", \"status\": \"DENIED\", \"denied_by\": \"' || p_underwriter || '\"}';\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN '{\"error\": \"Application not found: ' || p_application_id || '\"}';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN '{\"error\": \"' || SQLERRM || '\"}';\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Register the Tools\n\nNow you'll register your PL/SQL functions as tools the agents can use. Each tool has:\n\n- **instruction**: Tells the LLM when and how to use this tool\n- **function**: The actual PL/SQL function to call\n\nNotice that SUBMIT_LOAN_TOOL is for loan officers, while the other three are for underwriters. The agents will only have access to their assigned tools.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Tools</h2>\n\n<p>Now you'll register your PL/SQL functions as tools the agents can use. Each tool has:</p>\n\n<ul>\n<li><strong>instruction</strong>: Tells the LLM when and how to use this tool</li>\n<li><strong>function</strong>: The actual PL/SQL function to call</li>\n</ul>\n\n<p>Notice that SUBMIT_LOAN_TOOL is for loan officers, while the other three are for underwriters. The agents will only have access to their assigned tools.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    -- Submission tool (for LOAN_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'SUBMIT_LOAN_TOOL',\n        attributes  => '{\"instruction\": \"Submit a loan application. Parameters: P_APPLICANT_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_LOAN_AMOUNT (number), P_LOAN_TYPE (personal, auto, mortgage, or business), P_LOAN_PURPOSE (text description of loan purpose).\",\n                        \"function\": \"submit_loan_application\"}',\n        description => 'Submits a loan application for processing'\n    );\n    \n    -- Pending list tool (for UNDERWRITING_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'GET_PENDING_TOOL',\n        attributes  => '{\"instruction\": \"Get list of loan applications waiting for underwriting review. No parameters needed.\",\n                        \"function\": \"get_pending_reviews\"}',\n        description => 'Lists loan applications needing underwriter review'\n    );\n    \n    -- Approve tool (for UNDERWRITING_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'APPROVE_LOAN_TOOL',\n        attributes  => '{\"instruction\": \"Approve a loan application. Parameter: P_APPLICATION_ID (e.g. LOAN-260108-1001).\",\n                        \"function\": \"approve_loan\"}',\n        description => 'Approves a loan application'\n    );\n    \n    -- Deny tool (for UNDERWRITING_AGENT)\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'DENY_LOAN_TOOL',\n        attributes  => '{\"instruction\": \"Deny a loan application. Parameter: P_APPLICATION_ID (e.g. LOAN-260108-1001).\",\n                        \"function\": \"deny_loan\"}',\n        description => 'Denies a loan application'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Loan Agent (Loan Officer Role)\n\nThe LOAN_AGENT represents a loan officer submitting applications. It only has access to SUBMIT_LOAN_TOOL — it cannot approve or deny anything.\n\nThe agent's role tells it to report results clearly so the loan officer knows whether their application was auto-approved or is waiting for underwriting.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Loan Agent (Loan Officer Role)</h2>\n\n<p>The LOAN_AGENT represents a loan officer submitting applications. It only has access to SUBMIT_LOAN_TOOL — it cannot approve or deny anything.</p>\n\n<p>The agent's role tells it to report results clearly so the loan officer knows whether their application was auto-approved or is waiting for underwriting.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'LOAN_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan submission agent for Seer Equity loan officers. When asked to submit a loan application, call SUBMIT_LOAN_TOOL with the provided details. Report the result clearly - whether it was auto-approved, needs underwriter review, or was blocked.\"}',\n        description => 'Loan officer loan submission agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'LOAN_TASK',\n        attributes  => '{\"instruction\": \"Process loan application requests. Call SUBMIT_LOAN_TOOL with the applicant ID, loan amount, loan type, and purpose. Report the outcome. User request: {query}\",\n                        \"tools\": [\"SUBMIT_LOAN_TOOL\"]}',\n        description => 'Loan submission task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'LOAN_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"LOAN_AGENT\", \"task\": \"LOAN_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Loan officer submission team'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Underwriting Agent (Underwriter Role)\n\nThe UNDERWRITING_AGENT represents an underwriter who reviews loan applications. It has access to three tools:\n- GET_PENDING_TOOL — see what's waiting\n- APPROVE_LOAN_TOOL — approve by ID\n- DENY_LOAN_TOOL — deny by ID\n\nCritically, it does NOT have SUBMIT_LOAN_TOOL. Underwriters can't submit loan applications through this agent — proper separation of duties.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Underwriting Agent (Underwriter Role)</h2>\n\n<p>The UNDERWRITING_AGENT represents an underwriter who reviews loan applications. It has access to three tools:</p>\n<ul>\n<li>GET_PENDING_TOOL — see what's waiting</li>\n<li>APPROVE_LOAN_TOOL — approve by ID</li>\n<li>DENY_LOAN_TOOL — deny by ID</li>\n</ul>\n\n<p>Critically, it does NOT have SUBMIT_LOAN_TOOL. Underwriters can't submit loan applications through this agent — proper separation of duties.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'UNDERWRITING_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an underwriting agent for Seer Equity. You can list pending loan applications, approve them, or deny them. When asked what needs review, call GET_PENDING_TOOL. When asked to approve, call APPROVE_LOAN_TOOL. When asked to deny, call DENY_LOAN_TOOL.\"}',\n        description => 'Underwriter loan review agent'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'UNDERWRITING_TASK',\n        attributes  => '{\"instruction\": \"Process underwriting review requests. To see pending applications, call GET_PENDING_TOOL. To approve, call APPROVE_LOAN_TOOL with the application ID. To deny, call DENY_LOAN_TOOL with the application ID. User request: {query}\",\n                        \"tools\": [\"GET_PENDING_TOOL\", \"APPROVE_LOAN_TOOL\", \"DENY_LOAN_TOOL\"]}',\n        description => 'Underwriting review task'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'UNDERWRITING_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"UNDERWRITING_AGENT\", \"task\": \"UNDERWRITING_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Underwriter review team'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Become a Loan Officer: Set the Loan Team\n\nNow you'll act as a loan officer submitting applications. First, activate the LOAN_TEAM so your SELECT AI AGENT commands go to the loan submission agent.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Become a Loan Officer: Set the Loan Team</h2>\n\n<p>Now you'll act as a loan officer submitting applications. First, activate the LOAN_TEAM so your SELECT AI AGENT commands go to the loan submission agent.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_TEAM');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a Small Personal Loan (Auto-Approve Path)\n\nLet's submit a $25,000 personal loan for Alice Johnson (APP-001), who has excellent credit (780). This should be auto-approved immediately.\n\nWatch for the response — it should say the loan was auto-approved with an application ID.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a Small Personal Loan (Auto-Approve Path)</h2>\n\n<p>Let's submit a $25,000 personal loan for Alice Johnson (APP-001), who has excellent credit (780). This should be auto-approved immediately.</p>\n\n<p>Watch for the response — it should say the loan was auto-approved with an application ID.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $25000 personal loan for applicant APP-001, purpose is debt consolidation;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit an Auto Loan (Auto-Approve Path)\n\nNow submit a $35,000 auto loan for Bob Smith (APP-002), who has decent credit (695). This should also be auto-approved since it's under $50K and credit is above 650.\n\nBoth small loans with acceptable credit get the same treatment — auto-approval because they're within Seer Equity's risk parameters.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit an Auto Loan (Auto-Approve Path)</h2>\n\n<p>Now submit a $35,000 auto loan for Bob Smith (APP-002), who has decent credit (695). This should also be auto-approved since it's under $50K and credit is above 650.</p>\n\n<p>Both small loans with acceptable credit get the same treatment — auto-approval because they're within Seer Equity's risk parameters.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $35000 auto loan for applicant APP-002, purpose is new vehicle purchase;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a Large Loan (Underwriter Review Path)\n\nThis $75,000 personal loan for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.\n\nThe agent should tell you the application was submitted and is awaiting underwriter review — it's not rejected, just queued for human decision.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a Large Loan (Underwriter Review Path)</h2>\n\n<p>This $75,000 personal loan for David Chen (APP-004) crosses the $50K threshold. The system should accept it but mark it as PENDING_REVIEW.</p>\n\n<p>The agent should tell you the application was submitted and is awaiting underwriter review — it's not rejected, just queued for human decision.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $75000 personal loan for applicant APP-004, purpose is home renovation;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Submit a Mortgage (Always Requires Review)\n\nMortgages are complex products at Seer Equity — they always require underwriter review regardless of amount or credit score. This $250,000 mortgage goes to the review queue.\n\nThis demonstrates loan-type-based rules, not just amount-based rules.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Submit a Mortgage (Always Requires Review)</h2>\n\n<p>Mortgages are complex products at Seer Equity — they always require underwriter review regardless of amount or credit score. This $250,000 mortgage goes to the review queue.</p>\n\n<p>This demonstrates loan-type-based rules, not just amount-based rules.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $250000 mortgage for applicant APP-001, purpose is primary residence purchase;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try to Submit a High-Risk Application (Blocked)\n\nThis $20,000 auto loan for Carol Davis (APP-003) should be BLOCKED entirely — Carol's credit score is 520, below Seer Equity's 550 minimum.\n\nThe agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try to Submit a High-Risk Application (Blocked)</h2>\n\n<p>This $20,000 auto loan for Carol Davis (APP-003) should be BLOCKED entirely — Carol's credit score is 520, below Seer Equity's 550 minimum.</p>\n\n<p>The agent should explain that the application doesn't meet minimum credit requirements and cannot be processed.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Submit a $20000 auto loan for applicant APP-003, purpose is used car purchase;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify the Loan Application Records\n\nLet's look at what's actually in the database. You should see exactly 4 applications:\n\n| Amount | Type | Status | Decided By |\n|--------|------|--------|------------|\n| $25,000 | personal | AUTO_APPROVED | SYSTEM |\n| $35,000 | auto | AUTO_APPROVED | SYSTEM |\n| $75,000 | personal | PENDING_REVIEW | - |\n| $250,000 | mortgage | PENDING_REVIEW | - |\n\nNotice: No application for Carol Davis exists — it was blocked before creation. The two auto-approved loans show \"SYSTEM\" as the decision maker.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Loan Application Records</h2>\n\n<p>Let's look at what's actually in the database. You should see exactly 4 applications:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Decided By</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$35,000</td><td style=\"padding: 8px;\">auto</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n<tr><td style=\"padding: 8px;\">$250,000</td><td style=\"padding: 8px;\">mortgage</td><td style=\"padding: 8px;\">PENDING_REVIEW</td><td style=\"padding: 8px;\">-</td></tr>\n</table>\n\n<p>Notice: No application for Carol Davis exists — it was blocked before creation. The two auto-approved loans show \"SYSTEM\" as the decision maker.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT la.application_id, \n       ap.name as applicant,\n       ap.credit_score,\n       TO_CHAR(la.loan_amount, '$999,999') as amount, \n       la.loan_type, \n       la.risk_status, \n       NVL(la.decided_by, '-') as decided_by\nFROM loan_applications la\nJOIN loan_applicants ap ON la.applicant_id = ap.applicant_id\nORDER BY la.submitted_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Become an Underwriter: Switch to the Underwriting Team\n\nNow you'll switch roles and become an underwriter. Activate the UNDERWRITING_TEAM to access the underwriting agent.\n\nThis is like logging into a different application. Same database, different capabilities.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Become an Underwriter: Switch to the Underwriting Team</h2>\n\n<p>Now you'll switch roles and become an underwriter. Activate the UNDERWRITING_TEAM to access the underwriting agent.</p>\n\n<p>This is like logging into a different application. Same database, different capabilities.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('UNDERWRITING_TEAM');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Check the Underwriting Queue\n\nAs an underwriter, ask what applications need your review. The agent will call GET_PENDING_TOOL and show you the queue.\n\nYou should see two applications waiting:\n- $75,000 personal loan (home renovation) - David Chen, 725 credit\n- $250,000 mortgage (primary residence) - Alice Johnson, 780 credit",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check the Underwriting Queue</h2>\n\n<p>As an underwriter, ask what applications need your review. The agent will call GET_PENDING_TOOL and show you the queue.</p>\n\n<p>You should see two applications waiting:</p>\n<ul>\n<li>$75,000 personal loan (home renovation) - David Chen, 725 credit</li>\n<li>$250,000 mortgage (primary residence) - Alice Johnson, 780 credit</li>\n</ul>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What loan applications need my review;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Approve the Large Personal Loan\n\nDavid Chen has excellent credit (725) and wants a home renovation loan. The amount triggered review, but the profile looks solid. Approve it.\n\nThe agent should call APPROVE_LOAN_TOOL and confirm the loan is now approved. The decision maker will be recorded as \"UNDERWRITER\".",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Approve the Large Personal Loan</h2>\n\n<p>David Chen has excellent credit (725) and wants a home renovation loan. The amount triggered review, but the profile looks solid. Approve it.</p>\n\n<p>The agent should call APPROVE_LOAN_TOOL and confirm the loan is now approved. The decision maker will be recorded as \"UNDERWRITER\".</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Approve the personal loan application;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Approve the Mortgage\n\nAlice Johnson has excellent credit (780) and strong financials. The mortgage looks good. Approve it.\n\nThe agent should call APPROVE_LOAN_TOOL and confirm the mortgage is approved.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Approve the Mortgage</h2>\n\n<p>Alice Johnson has excellent credit (780) and strong financials. The mortgage looks good. Approve it.</p>\n\n<p>The agent should call APPROVE_LOAN_TOOL and confirm the mortgage is approved.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Approve the mortgage application;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify Final Status\n\nLet's see the final state of all loan applications. You should see:\n\n| Amount | Type | Status | Decided By |\n|--------|------|--------|------------|\n| $25,000 | personal | AUTO_APPROVED | SYSTEM |\n| $35,000 | auto | AUTO_APPROVED | SYSTEM |\n| $75,000 | personal | APPROVED | UNDERWRITER |\n| $250,000 | mortgage | APPROVED | UNDERWRITER |\n\nThis shows the complete loan lifecycle: auto-approval for routine applications, human decision for significant ones.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify Final Status</h2>\n\n<p>Let's see the final state of all loan applications. You should see:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Amount</th><th style=\"padding: 8px;\">Type</th><th style=\"padding: 8px;\">Status</th><th style=\"padding: 8px;\">Decided By</th></tr>\n<tr><td style=\"padding: 8px;\">$25,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$35,000</td><td style=\"padding: 8px;\">auto</td><td style=\"padding: 8px;\">AUTO_APPROVED</td><td style=\"padding: 8px;\">SYSTEM</td></tr>\n<tr><td style=\"padding: 8px;\">$75,000</td><td style=\"padding: 8px;\">personal</td><td style=\"padding: 8px;\">APPROVED</td><td style=\"padding: 8px;\">UNDERWRITER</td></tr>\n<tr><td style=\"padding: 8px;\">$250,000</td><td style=\"padding: 8px;\">mortgage</td><td style=\"padding: 8px;\">APPROVED</td><td style=\"padding: 8px;\">UNDERWRITER</td></tr>\n</table>\n\n<p>This shows the complete loan lifecycle: auto-approval for routine applications, human decision for significant ones.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT la.application_id, \n       ap.name as applicant,\n       TO_CHAR(la.loan_amount, '$999,999') as amount, \n       la.loan_type, \n       la.risk_status, \n       NVL(la.decided_by, '-') as decided_by,\n       TO_CHAR(la.decided_at, 'HH24:MI:SS') as decided_at\nFROM loan_applications la\nJOIN loan_applicants ap ON la.applicant_id = ap.applicant_id\nORDER BY la.submitted_at;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Review the Audit Trail\n\nEvery tool call is logged. This is crucial for regulatory compliance — you can see exactly what each agent did and when.\n\nYou should see calls to:\n- SUBMIT_LOAN_TOOL (5 times, 4 created, 1 blocked)\n- GET_PENDING_TOOL (1 time)\n- APPROVE_LOAN_TOOL (2 times)",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Review the Audit Trail</h2>\n\n<p>Every tool call is logged. This is crucial for regulatory compliance — you can see exactly what each agent did and when.</p>\n\n<p>You should see calls to:</p>\n<ul>\n<li>SUBMIT_LOAN_TOOL (5 times, 4 created, 1 blocked)</li>\n<li>GET_PENDING_TOOL (1 time)</li>\n<li>APPROVE_LOAN_TOOL (2 times)</li>\n</ul>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called,\n    SUBSTR(input, 1, 60) as input_preview,\n    SUBSTR(output, 1, 60) as output_preview\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 15 ROWS ONLY;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Audit Summary by Tool\n\nThis summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity — important for fraud detection and compliance.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Audit Summary by Tool</h2>\n\n<p>This summary shows how many times each tool was called. It's useful for understanding usage patterns and identifying unusual activity — important for fraud detection and compliance.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    COUNT(*) as call_count\nFROM USER_AI_AGENT_TOOL_HISTORY\nGROUP BY tool_name\nORDER BY call_count DESC;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## What You Built for Seer Equity\n\nCongratulations! You've built a complete loan underwriting system demonstrating:\n\n**Role-Based Agents:**\n- LOAN_AGENT for loan officers (submit only)\n- UNDERWRITING_AGENT for underwriters (review and decide)\n\n**Safety Rules:**\n- AUTO_APPROVE: Under $50K, good credit, non-mortgage\n- REQUIRE_REVIEW: $50K+, mortgages, or borderline credit\n- BLOCK: Credit score below 550\n\n**The Human-in-the-Loop:**\n- Routine loans are automated\n- Significant loans require human judgment\n- High-risk applications are stopped entirely\n\n**Audit Trail:**\n- Every action is logged\n- Full input/output captured\n- Explainable and compliant\n\n**Key Insight:** Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything — it doesn't have the tool. This is security through architecture, not just prompts.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Built for Seer Equity</h2>\n\n<p>Congratulations! You've built a complete loan underwriting system demonstrating:</p>\n\n<p><strong>Role-Based Agents:</strong></p>\n<ul>\n<li>LOAN_AGENT for loan officers (submit only)</li>\n<li>UNDERWRITING_AGENT for underwriters (review and decide)</li>\n</ul>\n\n<p><strong>Safety Rules:</strong></p>\n<ul>\n<li>AUTO_APPROVE: Under $50K, good credit, non-mortgage</li>\n<li>REQUIRE_REVIEW: $50K+, mortgages, or borderline credit</li>\n<li>BLOCK: Credit score below 550</li>\n</ul>\n\n<p><strong>The Human-in-the-Loop:</strong></p>\n<ul>\n<li>Routine loans are automated</li>\n<li>Significant loans require human judgment</li>\n<li>High-risk applications are stopped entirely</li>\n</ul>\n\n<p><strong>Audit Trail:</strong></p>\n<ul>\n<li>Every action is logged</li>\n<li>Full input/output captured</li>\n<li>Explainable and compliant</li>\n</ul>\n\n<p><strong>Key Insight:</strong> Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything — it doesn't have the tool. This is security through architecture, not just prompts.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all the objects created in this lab.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all the objects created in this lab.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('LOAN_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('UNDERWRITING_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('LOAN_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('UNDERWRITING_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('LOAN_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('UNDERWRITING_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('SUBMIT_LOAN_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_PENDING_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPROVE_LOAN_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('DENY_LOAN_TOOL', TRUE);\nDROP TABLE loan_applications PURGE;\nDROP TABLE loan_applicants PURGE;\nDROP TABLE underwriting_rules PURGE;\nDROP SEQUENCE loan_app_seq;\nDROP FUNCTION submit_loan_application;\nDROP FUNCTION check_underwriting_rules;\nDROP FUNCTION get_pending_reviews;\nDROP FUNCTION approve_loan;\nDROP FUNCTION deny_loan;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    }
+  ],
+  "name": "Lab 10 - Tools Safety Control",
+  "id": "lab10-tools-safety-control",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

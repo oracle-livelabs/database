@@ -23,11 +23,11 @@ In this lab you will:
 
     ![Oracle NoSQL Downloads page](images/otn-migrator-download.png)
 
-2. Click the latest Oracle NoSQL Migrator package. Here, you will use **nosql-migrator-1.7.0**. This will navigate to Oracle Software Delivery Cloud page.
+2. Click the latest Oracle NoSQL Migrator package. This will navigate to Oracle Software Delivery Cloud page. In this workhop, **nosql-migrator-1.7.0** is used for demonstration purposes.
 
 3. Accept the terms and conditions.
 
-4. Download the Oracle NoSQL Migrator package to your local machine. Here you will use **V1048015-01.zip**.
+4. Download the latest Oracle NoSQL Migrator zip file to your local machine. In this workshop, **V1048015-01.zip** is used as a sample file for demonstration purposes.
 
 ## Task 2: Upload Oracle NoSQL Migrator Utility to the Cloud Shell
 
@@ -49,7 +49,7 @@ In this lab you will:
     <copy>unzip -q V1048015-01.zip</copy>
     ```
 
-9. The resulting folder contains the Oracle NoSQL Migrator utility.
+9. The resulting folder contains the Oracle NoSQL Migrator utility. You can minimize the Cloud Shell window for later use by selecting the minimize icon in the upper right corner.
 
 You may proceed to the next lab.
 
@@ -59,4 +59,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, August 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, December 2025

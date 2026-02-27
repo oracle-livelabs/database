@@ -30,7 +30,7 @@ In this lab, you will be guided through the following tasks:
 
 1. Download the MovieHub application template:
 
-    Click on this link to **Download file** [MovieHub.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/6YBDWd_zSujktgE7KdAP32YYPQ8TsX8QKRRvXY_hizlNVEIx_eX1KiSamC9Ni_V4/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/MovieHub-V2025.zip) to your local machine
+    Click on this link to **Download file** [MovieHub.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/zl2yiRY5R3ExUL1DfVAPLi9BJ0OLTsWIRz_PYGfffOjcNFE2DCBNUcAoCsfwh3sL/n/mysqlpm/b/heatwave-movie-stream/o/moviehub-v2025.zip) to your local machine
 
 ## Task 2: Import the sample application - MovieHub
 

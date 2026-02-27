@@ -16,7 +16,7 @@ In this lab, you will be guided through the following tasks:
 
 ### Prerequisites
 
-- You have completed Lab 2.
+- Your  HeatWave instance  and Compute instance exist.
 - Visual Studio Code is installed. If you do not have it installed, download and install from [here](https://code.visualstudio.com/download).
 
 ## Task 1: Setup MySQL Shell for Visual Studio Code
@@ -158,4 +158,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, August 2024
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025

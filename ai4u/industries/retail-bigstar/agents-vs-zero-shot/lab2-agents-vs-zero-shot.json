@@ -1,0 +1,705 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Why Agents Beat Zero-Shot Prompts at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles' inventory specialists have been using AI chatbots for months, and the reviews are... mixed.\n\n*\"I asked it about a client's item status and it told me how to log into our system. I know how to log in! I wanted the actual status.\"*\n\n*\"It gave me great advice on updating item records, but it can't actually update them. I still have to do everything manually.\"*\n\nThe chatbots are helpful for general questions, but they can't access Big Star Collectibles' data or take action. They explain processes without executing them.\n\n### What You'll Learn\n\nIn this lab, you'll directly compare three approaches to understand why agents are transforming how work gets done:\n\n| Approach | Can Access Data | Can Modify Data | Can Coordinate |\n|----------|-----------------|-----------------|----------------|\n| **SELECT AI CHAT** (zero-shot) | No | No | No |\n| **SELECT AI** | Yes | No | No |\n| **SELECT AI AGENT** | Yes | Yes | Yes |\n\nYou'll ask the same question about item submissions to each approach and see the dramatic difference.\n\n**What you'll build:** A comparison showing exactly when to use each approach.\n\n**Estimated Time:** 10 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Why Agents Beat Zero-Shot Prompts at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles' inventory specialists have been using AI chatbots for months, and the reviews are... mixed.</p>\n\n<p><em>\"I asked it about a client's item status and it told me how to log into our system. I know how to log in! I wanted the actual status.\"</em></p>\n\n<p><em>\"It gave me great advice on updating item records, but it can't actually update them. I still have to do everything manually.\"</em></p>\n\n<p>The chatbots are helpful for general questions, but they can't access Big Star Collectibles' data or take action. They explain processes without executing them.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll directly compare three approaches to understand why agents are transforming how work gets done:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Approach</th><th style=\"padding: 8px;\">Can Access Data</th><th style=\"padding: 8px;\">Can Modify Data</th><th style=\"padding: 8px;\">Can Coordinate</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>SELECT AI CHAT</strong> (zero-shot)</td><td style=\"padding: 8px;\">No</td><td style=\"padding: 8px;\">No</td><td style=\"padding: 8px;\">No</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>SELECT AI</strong></td><td style=\"padding: 8px;\">Yes</td><td style=\"padding: 8px;\">No</td><td style=\"padding: 8px;\">No</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>SELECT AI AGENT</strong></td><td style=\"padding: 8px;\">Yes</td><td style=\"padding: 8px;\">Yes</td><td style=\"padding: 8px;\">Yes</td></tr>\n</table>\n\n<p>You'll ask the same question about item submissions to each approach and see the dramatic difference.</p>\n\n<p><strong>What you'll build:</strong> A comparison showing exactly when to use each approach.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Set Your AI Profile\n\nFirst, activate your AI profile for the zero-shot and SELECT AI comparisons.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Set Your AI Profile</h2>\n\n<p>First, activate your AI profile for the zero-shot and SELECT AI comparisons.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try Zero-Shot: Ask a Procedural Question\n\nZero-shot (SELECT AI CHAT) goes directly to the LLM for general knowledge. Watch what happens when you ask how to process an item submission.\n\n**What you'll see:** A helpful explanation of the steps, but you still have to do each step yourself. The AI advises; it doesn't act.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try Zero-Shot: Ask a Procedural Question</h2>\n\n<p>Zero-shot (SELECT AI CHAT) goes directly to the LLM for general knowledge. Watch what happens when you ask how to process an item submission.</p>\n\n<p><strong>What you'll see:</strong> A helpful explanation of the steps, but you still have to do each step yourself. The AI advises; it doesn't act.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI CHAT How do I process an item submission at Big Star Collectibles;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try Zero-Shot: Ask About YOUR Data\n\nNow try asking about a specific item submission in your system.\n\n**What you'll see:** The AI cannot answer this because it has no access to your data. It gives generic advice about how to check item status, but it doesn't know anything about YOUR submission ITEM-20260115-1042.\n\nThis is the fundamental limitation of zero-shot: great for general knowledge, useless for your specific business data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try Zero-Shot: Ask About YOUR Data</h2>\n\n<p>Now try asking about a specific item submission in your system.</p>\n\n<p><strong>What you'll see:</strong> The AI cannot answer this because it has no access to your data. It gives generic advice about how to check item status, but it doesn't know anything about YOUR submission ITEM-20260115-1042.</p>\n\n<p>This is the fundamental limitation of zero-shot: great for general knowledge, useless for your specific business data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI CHAT What is the status of item submission ITEM-20260115-1042 at Big Star Collectibles;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try Zero-Shot: Ask It to DO Something\n\nWhat happens when you ask the AI to take action on an item submission?\n\n**What you'll see:** The AI explains HOW to update an item status but cannot actually do it. Zero-shot can advise; it cannot act.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try Zero-Shot: Ask It to DO Something</h2>\n\n<p>What happens when you ask the AI to take action on an item submission?</p>\n\n<p><strong>What you'll see:</strong> The AI explains HOW to update an item status but cannot actually do it. Zero-shot can advise; it cannot act.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI CHAT Update item submission ITEM-20260115-1042 to listed;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create Sample Data for SELECT AI\n\nBefore we try SELECT AI (without CHAT or AGENT), we need actual data. Let's create an item submissions table.\n\nNotice the detailed comments. These help Select AI understand what each column contains.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Sample Data for SELECT AI</h2>\n\n<p>Before we try SELECT AI (without CHAT or AGENT), we need actual data. Let's create an item submissions table.</p>\n\n<p>Notice the detailed comments. These help Select AI understand what each column contains.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Create the item submissions table\nCREATE TABLE sample_items (\n    submission_id  VARCHAR2(20) PRIMARY KEY,\n    collector       VARCHAR2(100),\n    item_status     VARCHAR2(20),\n    item_amount     NUMBER(12,2),\n    item_type       VARCHAR2(30),\n    submission_date DATE DEFAULT SYSDATE\n);\n\n-- Add comments so Select AI understands the table\nCOMMENT ON TABLE sample_items IS 'Big Star Collectibles item submissions with collector, status, amount, and type.';\nCOMMENT ON COLUMN sample_items.submission_id IS 'Unique submission identifier. Examples: ITEM-20260115-1042, ITEM-20260114-0821.';\nCOMMENT ON COLUMN sample_items.collector IS 'Name of person or business applying for the item';\nCOMMENT ON COLUMN sample_items.item_status IS 'Submission status: SUBMITTED, AUTHENTICATING, LISTED, or DENIED';\nCOMMENT ON COLUMN sample_items.item_amount IS 'Requested declared value in US dollars';\nCOMMENT ON COLUMN sample_items.item_type IS 'Type of item: collector_card, limited_art, authenticating, or museum_piece';\nCOMMENT ON COLUMN sample_items.submission_date IS 'Date when the submission was submitted';\n\n-- Insert sample data\nINSERT INTO sample_items VALUES ('ITEM-20260115-1042', 'Alex Martinez', 'AUTHENTICATING', 150000, 'authenticating', SYSDATE - 3);\nINSERT INTO sample_items VALUES ('ITEM-20260114-0821', 'Jennifer Morales', 'SUBMITTED', 75000, 'collector_card', SYSDATE - 1);\nINSERT INTO sample_items VALUES ('ITEM-20260113-0905', 'Priya Desai', 'LISTED', 250000, 'limited_art', SYSDATE - 7);\nCOMMIT;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Add the Table to Your AI Profile\n\nSelect AI needs to know which tables it can access. Add your new table to the profile's object list.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Add the Table to Your AI Profile</h2>\n\n<p>Select AI needs to know which tables it can access. Add your new table to the profile's object list.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"SAMPLE_ITEMS\"}]'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try SELECT AI: Query Your Data\n\nNow use SELECT AI NARRATE to ask about item submission ITEM-20260115-1042. This time, SELECT AI CAN read your data.\n\n**What you'll see:** The actual status \"AUTHENTICATING\" from your database. Compare this to zero-shot which could only give generic advice.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try SELECT AI: Query Your Data</h2>\n\n<p>Now use SELECT AI NARRATE to ask about item submission ITEM-20260115-1042. This time, SELECT AI CAN read your data.</p>\n\n<p><strong>What you'll see:</strong> The actual status \"AUTHENTICATING\" from your database. Compare this to zero-shot which could only give generic advice.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI NARRATE What is the status of item submission ITEM-20260115-1042;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Try SELECT AI: Ask It to Update\n\nNow try to update the item submission status using SELECT AI.\n\n**What you'll see:** SELECT AI cannot update data. It can only read. It might generate a SELECT statement or explain what you'd need to do, but it won't actually change anything.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Try SELECT AI: Ask It to Update</h2>\n\n<p>Now try to update the item submission status using SELECT AI.</p>\n\n<p><strong>What you'll see:</strong> SELECT AI cannot update data. It can only read. It might generate a SELECT statement or explain what you'd need to do, but it won't actually change anything.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI NARRATE Update item submission ITEM-20260115-1042 to listed;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify No Update Happened\n\nLet's confirm the item submission was NOT updated.\n\n**What you'll see:** The status is still AUTHENTICATING. SELECT AI can read but cannot write.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify No Update Happened</h2>\n\n<p>Let's confirm the item submission was NOT updated.</p>\n\n<p><strong>What you'll see:</strong> The status is still AUTHENTICATING. SELECT AI can read but cannot write.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT submission_id, item_status FROM sample_items WHERE submission_id = 'ITEM-20260115-1042';",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create an Agent That Can Act\n\nNow let's build an agent that can both READ and WRITE. We'll give it two tools: one to look up items and one to update them.\n\nIn this lab, we're using **function-based tools** instead of SQL tools. A function-based tool wraps a PL/SQL function you write, giving you complete control over what the tool does. This is how you give agents the ability to make changes to your data, not just read it.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create an Agent That Can Act</h2>\n\n<p>Now let's build an agent that can both READ and WRITE. We'll give it two tools: one to look up items and one to update them.</p>\n\n<p>In this lab, we're using <strong>function-based tools</strong> instead of SQL tools. A function-based tool wraps a PL/SQL function you write, giving you complete control over what the tool does. This is how you give agents the ability to make changes to your data, not just read it.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Create the Lookup Function\n\nThis function takes an item ID and returns the item details. It's a simple read operation that the agent will use to check on items before taking action.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Lookup Function</h2>\n\n<p>This function takes an item ID and returns the item details. It's a simple read operation that the agent will use to check on items before taking action.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION lookup_item(\n    p_submission_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\nBEGIN\n    SELECT 'Submission ' || submission_id || ': ' || item_status || \n           ', Collector: ' || collector || \n           ', Amount: $' || TO_CHAR(item_amount, '999,999') ||\n           ', Type: ' || item_type ||\n           ', Date: ' || TO_CHAR(submission_date, 'YYYY-MM-DD')\n    INTO v_result\n    FROM sample_items\n    WHERE submission_id = p_submission_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Item submission ' || p_submission_id || ' not found.';\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Update Function\n\nThis function actually changes data in the database. Notice it first checks the current status, then makes the update. The agent will use this to approve or deny items.\n\nThe `PRAGMA AUTONOMOUS_TRANSACTION` allows it to commit changes independently.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Update Function</h2>\n\n<p>This function actually changes data in the database. Notice it first checks the current status, then makes the update. The agent will use this to approve or deny items.</p>\n\n<p>The <code>PRAGMA AUTONOMOUS_TRANSACTION</code> allows it to commit changes independently.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE FUNCTION update_item_status(\n    p_submission_id VARCHAR2,\n    p_new_status     VARCHAR2\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\n    v_old_status VARCHAR2(20);\nBEGIN\n    -- Get current status\n    SELECT item_status INTO v_old_status\n    FROM sample_items\n    WHERE submission_id = p_submission_id;\n    \n    -- Update the status\n    UPDATE sample_items\n    SET item_status = UPPER(p_new_status)\n    WHERE submission_id = p_submission_id;\n    \n    COMMIT;\n    \n    RETURN 'Submission ' || p_submission_id || ' status updated from ' || v_old_status || ' to ' || UPPER(p_new_status);\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Submission ' || p_submission_id || ' not found. Cannot update.';\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RETURN 'Error updating submission: ' || SQLERRM;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Register the Tools\n\nNow we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the item status before updating\u2014this is how you build smart behavior into your agent.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Tools</h2>\n\n<p>Now we turn these functions into tools the agent can use. The <code>instruction</code> tells the agent when and how to use each tool. Notice how we tell the agent to check the item status before updating\u2014this is how you build smart behavior into your agent.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up item submission status and details by submission ID. Parameter: P_APPLICATION_ID (the submission number, e.g. ITEM-20260115-1042). Use this to check current submission status before making updates.\",\n                        \"function\": \"lookup_item\"}',\n        description => 'Retrieves item submission status, collector, amount, and date by submission ID'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_UPDATE_TOOL',\n        attributes  => '{\"instruction\": \"Update an item submission status. Parameters: P_APPLICATION_ID (the submission number), P_NEW_STATUS (SUBMITTED, AUTHENTICATING, LISTED, or DENIED). Only call this after confirming the current status with ITEM_LOOKUP_TOOL.\",\n                        \"function\": \"update_item_status\"}',\n        description => 'Updates item submission status to a new value'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Agent, Task, and Team\n\nNow we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.\n\nNotice how we give the agent access to TWO tools\u2014it can decide which one to use based on what you ask.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Agent, Task, and Team</h2>\n\n<p>Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.</p>\n\n<p>Notice how we give the agent access to TWO tools\u2014it can decide which one to use based on what you ask.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'ITEM_MGMT_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are an item submission management agent for Big Star Collectibles. You can look up item submissions and update their status. Always look up an submission first before updating it. Never make up submission information - always use your tools.\"}',\n        description => 'Agent that can look up and update item submissions'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'ITEM_MGMT_TASK',\n        attributes  => '{\"instruction\": \"Help with item submission inquiries and status updates. When asked to check an submission, use ITEM_LOOKUP_TOOL. When asked to update an submission, first use ITEM_LOOKUP_TOOL to verify current status, then use ITEM_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}\",\n                        \"tools\": [\"ITEM_LOOKUP_TOOL\", \"ITEM_UPDATE_TOOL\"]}',\n        description => 'Task for item submission lookups and updates'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'ITEM_MGMT_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"ITEM_MGMT_AGENT\", \"task\": \"ITEM_MGMT_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team for item submission management'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Check Current Item Submission Status\n\nBefore testing the agent, verify the current status of item submission ITEM-20260115-1042.\n\n**What you'll see:** Status is AUTHENTICATING.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Check Current Item Submission Status</h2>\n\n<p>Before testing the agent, verify the current status of item submission ITEM-20260115-1042.</p>\n\n<p><strong>What you'll see:</strong> Status is AUTHENTICATING.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT submission_id, collector, item_status FROM sample_items WHERE submission_id = 'ITEM-20260115-1042';",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Ask the Agent to Check and Update\n\nNow ask the agent to check the item submission and list it if it's authenticating. This requires the agent to:\n1. Look up the current status\n2. Make a decision based on what it finds\n3. Take action (update to listed)\n\n**What you'll see:** The agent checks the status (AUTHENTICATING), decides it should be updated, and changes it to LISTED.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask the Agent to Check and Update</h2>\n\n<p>Now ask the agent to check the item submission and list it if it's authenticating. This requires the agent to:</p>\n<ol>\n<li>Look up the current status</li>\n<li>Make a decision based on what it finds</li>\n<li>Take action (update to listed)</li>\n</ol>\n\n<p><strong>What you'll see:</strong> The agent checks the status (AUTHENTICATING), decides it should be updated, and changes it to LISTED.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('ITEM_MGMT_TEAM');\nSELECT AI AGENT Check item submission ITEM-20260115-1042 and if it is authenticating, mark it as listed;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify the Agent Made the Change\n\nLet's confirm the update actually happened.\n\n**What you'll see:** Status is now LISTED. The agent didn't just talk about updating. It actually did it.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Agent Made the Change</h2>\n\n<p>Let's confirm the update actually happened.</p>\n\n<p><strong>What you'll see:</strong> Status is now LISTED. The agent didn't just talk about updating. It actually did it.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT submission_id, collector, item_status FROM sample_items WHERE submission_id = 'ITEM-20260115-1042';",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Test Conditional Logic\n\nNow try the same request on item submission ITEM-20260114-0821, which is SUBMITTED (not authenticating).\n\n**What you'll see:** The agent looks up the submission, sees it's SUBMITTED, and correctly decides NOT to update it because the condition (\"if it's authenticating\") isn't met.\n\nThis is intelligent coordination. The agent makes decisions based on data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Test Conditional Logic</h2>\n\n<p>Now try the same request on item submission ITEM-20260114-0821, which is SUBMITTED (not authenticating).</p>\n\n<p><strong>What you'll see:</strong> The agent looks up the submission, sees it's SUBMITTED, and correctly decides NOT to update it because the condition (\"if it's authenticating\") isn't met.</p>\n\n<p>This is intelligent coordination. The agent makes decisions based on data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Check item submission ITEM-20260114-0821 and if it is authenticating, mark it as listed;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Review the Tool Execution History\n\nEvery tool call is logged. You can see exactly what the agent did.\n\n**What you'll see:** The sequence of tool calls: lookups followed by updates (or just lookups when no update was needed).",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Review the Tool Execution History</h2>\n\n<p>Every tool call is logged. You can see exactly what the agent did.</p>\n\n<p><strong>What you'll see:</strong> The sequence of tool calls: lookups followed by updates (or just lookups when no update was needed).</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called_at,\n    SUBSTR(output, 1, 80) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## The Comparison Summary\n\n| Approach | Can Access Your Data | Can Modify Data | Can Coordinate Steps |\n|----------|---------------------|-----------------|----------------------|\n| SELECT AI CHAT | No | No | No |\n| SELECT AI | Yes | No | No |\n| SELECT AI AGENT | Yes | Yes | Yes |\n\n**Use SELECT AI CHAT when:**\n- You need general knowledge answers\n- No data access required\n- You want advice or explanation\n\n**Use SELECT AI when:**\n- You need to query your data with natural language\n- Read-only access is sufficient\n\n**Use SELECT AI AGENT when:**\n- You need to read AND write data\n- Decisions depend on data (conditional logic)\n- Actions need coordination across multiple steps",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>The Comparison Summary</h2>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Approach</th><th style=\"padding: 8px;\">Can Access Your Data</th><th style=\"padding: 8px;\">Can Modify Data</th><th style=\"padding: 8px;\">Can Coordinate Steps</th></tr>\n<tr><td style=\"padding: 8px;\">SELECT AI CHAT</td><td style=\"padding: 8px;\">No</td><td style=\"padding: 8px;\">No</td><td style=\"padding: 8px;\">No</td></tr>\n<tr><td style=\"padding: 8px;\">SELECT AI</td><td style=\"padding: 8px;\">Yes</td><td style=\"padding: 8px;\">No</td><td style=\"padding: 8px;\">No</td></tr>\n<tr><td style=\"padding: 8px;\">SELECT AI AGENT</td><td style=\"padding: 8px;\">Yes</td><td style=\"padding: 8px;\">Yes</td><td style=\"padding: 8px;\">Yes</td></tr>\n</table>\n\n<p><strong>Use SELECT AI CHAT when:</strong></p>\n<ul>\n<li>You need general knowledge answers</li>\n<li>No data access required</li>\n<li>You want advice or explanation</li>\n</ul>\n\n<p><strong>Use SELECT AI when:</strong></p>\n<ul>\n<li>You need to query your data with natural language</li>\n<li>Read-only access is sufficient</li>\n</ul>\n\n<p><strong>Use SELECT AI AGENT when:</strong></p>\n<ul>\n<li>You need to read AND write data</li>\n<li>Decisions depend on data (conditional logic)</li>\n<li>Actions need coordination across multiple steps</li>\n</ul>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## What You Learned\n\nYou directly compared three approaches:\n\n- **SELECT AI CHAT**: Cannot access your data; can only give generic advice\n- **SELECT AI**: Can read your data but cannot modify it  \n- **SELECT AI AGENT**: Can read your data, make decisions, and take action\n\nYou watched the agent coordinate: check status \u2192 decide \u2192 act \u2192 report. And you verified the data actually changed.\n\n**Key takeaway:** The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Learned</h2>\n\n<p>You directly compared three approaches:</p>\n\n<ul>\n<li><strong>SELECT AI CHAT</strong>: Cannot access your data; can only give generic advice</li>\n<li><strong>SELECT AI</strong>: Can read your data but cannot modify it</li>\n<li><strong>SELECT AI AGENT</strong>: Can read your data, make decisions, and take action</li>\n</ul>\n\n<p>You watched the agent coordinate: check status \u2192 decide \u2192 act \u2192 report. And you verified the data actually changed.</p>\n\n<p><strong>Key takeaway:</strong> The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_MGMT_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_MGMT_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ITEM_MGMT_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ITEM_LOOKUP_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ITEM_UPDATE_TOOL', TRUE);\nDROP TABLE sample_items PURGE;\nDROP FUNCTION lookup_item;\nDROP FUNCTION update_item_status;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    }
+  ],
+  "name": "Lab 2 - Agents vs Zero Shot",
+  "id": "lab2-agents-vs-zero-shot",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
