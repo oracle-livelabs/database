@@ -2,24 +2,31 @@
 
 ## Introduction
 
-In this lab, you will expose relational tables as **updatable JSON documents** using JSON Relational Duality Views. You will create two document views, then query a document to confirm everything works.
+In this lab, you will expose relational tables as **updatable JSON documents** using **JSON Relational Duality Views**. You will create two document views and then query them to confirm the document structure.
 
 Estimated Lab Time: 5 minutes
 
-### Objectives
+## Objectives
 
 In this lab, you will:
+
 * Create single-table JSON Relational Duality Views
-* Apply a simple field-level control (read-only)
-* Query JSON documents from a duality view
+
+* Apply field-level control (read-only)
+
+* Query JSON documents generated from relational data
 
 ---
 
 ## Task 1: Create Duality Views for Attendees and Speakers
 
-Run the script below to create two single-table duality views:
-* `attendee_dv` maps attendees into JSON documents, including the `extras` JSON object.
-* `speaker_dv` maps speakers into JSON documents and makes `rating` read-only.
+In this step, you will create two single-table duality views:
+
+- `attendee_dv` maps relational attendee rows into JSON documents. The `extras` column is exposed as a plain JSON property, meaning the entire JSON object is stored and retrieved as-is.
+
+- `speaker_dv` maps speaker rows into JSON documents, hides the `email` column, and marks `rating` as read-only using `WITH NOUPDATE`.
+
+Both views are fully updatable (`WITH INSERT UPDATE DELETE`), allowing document-style DML over relational tables.
 
 Run this step as a script.
 
@@ -42,7 +49,9 @@ Run this step as a script.
 
 ## Task 2: Query a JSON Document from a Duality View
 
-Now that the views exist, query `attendee_dv` to view JSON documents stored over relational data.
+Now that the duality views exist, query `attendee_dv` to view JSON documents generated from relational data.
+
+This query uses`JSON_SERIALIZE(... PRETTY)` to format the document for readability. Notice that the output includes an automatically generated `_metadata` section, which is managed by the database.
 
 Run this step as a script.
 
@@ -60,11 +69,3 @@ Run this step as a script.
         >FreeSQL Embedded Playground</iframe>
 
 ---
-
-## Learn More
-
-* [JSON Relational Duality Views Developer’s Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/json-relational-duality-developers-guide.pdf)
-
-## Acknowledgements
-* **Author** - Layla Elwakhi, Oracle
-* **Last Updated By/Date** - Layla Elwakhi, January 2026

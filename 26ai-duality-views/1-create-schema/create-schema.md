@@ -8,7 +8,7 @@ The tables include primary keys, foreign keys, and a JSON column to support flex
 
 Estimated Lab Time: 5–7 minutes
 
-### Objectives
+## Objectives
 
 In this lab, you will:
 * Create relational tables with primary and foreign keys
@@ -19,7 +19,15 @@ In this lab, you will:
 
 ## Task 1: Create the Base Tables
 
-Run the following script to create the base tables used throughout the workshop. The `extras` column is defined as a JSON object and initialized with a default value.
+First, we create a small relational schema for a conference system: attendees, speakers, sessions, and schedule. Each table has a primary key, and foreign keys connect sessions to speakers and schedule entries to both attendees and sessions.
+
+The attendee.extras column is defined as `JSON (OBJECT) DEFAULT JSON_OBJECT()`. This does two important things:
+
+* `JSON (OBJECT)` enforces that only JSON objects can be stored in the column.
+
+* `DEFAULT JSON_OBJECT()` ensures every new row automatically starts with `{}`.
+
+This gives us a strongly structured relational foundation with a flexible JSON column ready for document-style extensions.
 
 <iframe
             class="freesql-embed"
@@ -36,7 +44,17 @@ Run the following script to create the base tables used throughout the workshop.
 
 ## Task 2: Seed Sample Data
 
-Insert sample data using idempotent MERGE statements so the script can be safely re-run without duplicating data.
+Next, we seed the schema with sample data using `MERGE` statements instead of plain`INSERT`.
+
+Each `MERGE`:
+
+- Matches rows by primary key.
+
+- Inserts only when a row does not already exist.
+
+This makes the script idempotent. You can re-run it without creating duplicate rows or violating primary key constraints. On a first run, rows are inserted. On subsequent runs, the `MERGE` statements simply do nothing.
+
+This approach is ideal for tutorials and demos where users may execute the script multiple times.
 
 <iframe
             class="freesql-embed"
@@ -53,11 +71,36 @@ Insert sample data using idempotent MERGE statements so the script can be safely
 
 ## Task 3: Ensure Valid JSON Data
 
-Ensure all rows contain a valid JSON object in the extras column.
+Finally, we ensure all existing attendee rows contain a valid JSON object in the extras column:
 
 <iframe
             class="freesql-embed"
             src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAAE0WNsQ6CMBgG9z7FN8LQJyAOiH8iBFrTluhmqv5BHEpCq%252FL4JpjoepfLSQkK8TkzeBljGsOAeXpH3P2L4dFYrTBdHnxNGAPo5ExpRX%252FYlY7gU%252BJwYxaWHADwkmYfsVmrs942VLksF8c9GfrZ2kL1bQttoLRD9sfr61vlhRCV7rraFUJK0tUHRZDlEKcAAAA%253D&code_language=PL_SQL&code_format=false"
+            height="460px"
+            width="100%"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            name="FreeSQL Embedded Playground"
+            title="FreeSQL"
+            style="width: 100%; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;"
+        >FreeSQL Embedded Playground</iframe>
+
+On a fresh run, this will update 0 rows because:
+
+- extras defaults to `{}`.
+
+- The column is constrained to `JSON` objects.
+
+This step is included as a safety check. If legacy or imported data contained NULL values, this statement would normalize those rows to `{}`.
+
+## Task 4: Sanity Check
+
+The following query confirms that every attendee row has a valid JSON object in extras. On a fresh run, both rows should show `OK` and `{}`.
+
+<iframe
+            id="live-sql-embedded"
+            src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAAE02PQU%252BDQBCF7%252Fsr3g2byKVHPS0wbWlxN9lFTXtpRjoJ2IgNbBr594YUqXN782a%252BlxfH8Nw2YUBVS3V%252BglylG8AhSHsSQc09GFtvDb4%252FPqUKaFrIT%252Bi4V54KSktwc3pUuA23%252FCWzSrUn%252FAngfUNm%252BkXub1CbbEdGOVqR3UX3ayo8IUp0Nu%252FIZNB%252BIhz7mi%252F3qBF29ORyXeQHephSHJWvzuRmjTft0o12y8U%252FwqWTEAa1cvZlLqysy8gh2Y%252B1nlUck01%252FAcfIyqQkAQAA&code_language=PL_SQL&code_format=false"
             height="460px"
             width="100%"
             scrolling="no"

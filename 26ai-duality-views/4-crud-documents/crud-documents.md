@@ -5,12 +5,18 @@ Explain document-style DML backed by relational tables.
 
 Estimated Lab Time: 4–5 minutes
 
-### Objectives
+## Objectives
 * Insert JSON documents
 * Update document fields in place
 * Delete documents
 
 ## Task 1: Insert a JSON Document
+
+In this step, you will insert a new attendee document into `attendee_dv`. The insert uses the portable `JSON_OBJECT(... RETURNING JSON)` form, which is easy to generate from application code and works consistently across environments.
+
+After inserting, you will query the view to verify the new document was created and stored over the underlying relational table.
+
+Run this step as a script.
 
 <iframe
             class="freesql-embed"
@@ -27,6 +33,12 @@ Estimated Lab Time: 4–5 minutes
 
 ## Task 2: Update a JSON Document
 
+Now that the document exists, update it in place using `JSON_TRANSFORM`.
+
+This update demonstrates an app-style workflow: you modify a single document, and the database applies the change to the underlying relational row. Here we update the attendee’s `name` and add a new property under `extras` (`twitter`) without replacing the full JSON document.
+
+Run this step as a script.
+
 <iframe
             class="freesql-embed"
             src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAAE2XNQWvCQBAF4Pv%252BincobAJNLj1KoFFXq9RN2WT1GEZ3hJRUJZlq%252B%252B9LaqUH3%252FHxzbwkgT8FEkb02TNKU2F%252F7HDcvvNOsG%252B4DX2s%252FNs0rwxIhA%252BBuQ5nkBosAEoDCSHDsixsXbnclrPCrSKFW67i8b8YLvVDeqAP1sigS2rbb4xTfW%252F4SzrqU7k0Itz96ud%252B4PpGY7V5Mc7gur%252FOX72J%252FhaHB3UTNJypvLMLO4f1q7FxMTI8jVSSmGLyA8jA1rMCAQAA&code_language=PL_SQL&code_format=false"
@@ -41,6 +53,12 @@ Estimated Lab Time: 4–5 minutes
         >FreeSQL Embedded Playground</iframe>
 
 ## Task 3: Delete a JSON Document (Optional)
+
+Finally, you can delete the document from `attendee_dv`. This removes the corresponding relational row behind the scenes.
+
+This step is optional, but it is useful if you want to re-run the insert step later without hitting a duplicate `_id`.
+
+Run this step as a script.
 
 <iframe
             class="freesql-embed"

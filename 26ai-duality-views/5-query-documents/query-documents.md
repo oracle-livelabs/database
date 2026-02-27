@@ -1,13 +1,21 @@
 # Lab 5: Query Documents with SQL
 
 ## Introduction
-Explain blending SQL analytics with JSON documents.
+In this step, you will query nested JSON documents using standard SQL.
 
-Estimated Lab Time: 4–5 minutes
+The `JSON_TABLE` function expands each attendee’s `schedule` array into relational rows. Each session inside the JSON array becomes its own row, allowing you to report on session title, location, and speaker just like any other relational query.
 
-### Objectives
-* Query nested JSON using SQL
-* Flatten arrays with JSON_TABLE
+# Key details:
+
+* `NESTED PATH '$.schedule[*]'` ensures one output row per session in the array.
+
+* Quoted JSON paths such as `'$."sessionId"'` handle camelCase property names.
+
+* `JSON_VALUE(s.data, '$.name')` extracts the attendee’s name from the top level of the document.
+
+This demonstrates how you can store data as nested JSON documents while still performing structured, set-based analytics with SQL.
+
+Run the query below to see the flattened results.
 
 ## Task 1: Query Nested JSON Data
 
