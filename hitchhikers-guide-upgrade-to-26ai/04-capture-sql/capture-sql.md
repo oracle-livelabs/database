@@ -32,8 +32,6 @@ Capture workload information from the workload you generated in lab 3 - Generate
     . upgr
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Run the capture script.
@@ -76,8 +74,6 @@ You now have two SQL Tuning Sets:
     from dba_sqlset 
     where name like 'STS_Capture%';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
