@@ -91,59 +91,60 @@ First, you'll create three tables:
 
     Notice the constraints on `loan_applications` — these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
 
-```sql
-<copy>
--- Sequence for application IDs
-CREATE SEQUENCE loan_app_seq START WITH 1001;
+    ```sql
+    <copy>
+    -- Sequence for application IDs
+    CREATE SEQUENCE loan_app_seq START WITH 1001;
 
--- Applicants table
-CREATE TABLE loan_applicants (
-    applicant_id    VARCHAR2(20) PRIMARY KEY,
-    name            VARCHAR2(100) NOT NULL,
-    email           VARCHAR2(100) NOT NULL,
-    credit_score    NUMBER(3) NOT NULL,
-    annual_income   NUMBER(12,2),
-    employment_years NUMBER(2)
-);
+    -- Applicants table
+    CREATE TABLE loan_applicants (
+        applicant_id    VARCHAR2(20) PRIMARY KEY,
+        name            VARCHAR2(100) NOT NULL,
+        email           VARCHAR2(100) NOT NULL,
+        credit_score    NUMBER(3) NOT NULL,
+        annual_income   NUMBER(12,2),
+        employment_years NUMBER(2)
+    );
 
--- Loan applications
-CREATE TABLE loan_applications (
-    application_id  VARCHAR2(20) PRIMARY KEY,
-    applicant_id    VARCHAR2(20) NOT NULL REFERENCES loan_applicants(applicant_id),
-    loan_amount     NUMBER(12,2) NOT NULL 
-                    CONSTRAINT chk_positive_amount CHECK (loan_amount > 0),
-    loan_type       VARCHAR2(50) NOT NULL
-                    CONSTRAINT chk_loan_type CHECK (loan_type IN ('personal','auto','mortgage','business')),
-    loan_purpose    VARCHAR2(500),
-    risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'
-                    CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),
-    submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,
-    decided_by      VARCHAR2(100),
-    decided_at      TIMESTAMP
-);
+    -- Loan applications
+    CREATE TABLE loan_applications (
+        application_id  VARCHAR2(20) PRIMARY KEY,
+        applicant_id    VARCHAR2(20) NOT NULL REFERENCES loan_applicants(applicant_id),
+        loan_amount     NUMBER(12,2) NOT NULL 
+                        CONSTRAINT chk_positive_amount CHECK (loan_amount > 0),
+        loan_type       VARCHAR2(50) NOT NULL
+                        CONSTRAINT chk_loan_type CHECK (loan_type IN ('personal','auto','mortgage','business')),
+        loan_purpose    VARCHAR2(500),
+        risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'
+                        CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),
+        submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,
+        decided_by      VARCHAR2(100),
+        decided_at      TIMESTAMP
+    );
 
--- Underwriting rules
-CREATE TABLE underwriting_rules (
-    rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
-    rule_name    VARCHAR2(200) NOT NULL,
-    rule_type    VARCHAR2(20) NOT NULL 
-                 CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_REVIEW','AUTO_APPROVE')),
-    rule_config  JSON NOT NULL,
-    priority     NUMBER DEFAULT 100,
-    is_active    NUMBER(1) DEFAULT 1
-);
+    -- Underwriting rules
+    CREATE TABLE underwriting_rules (
+        rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
+        rule_name    VARCHAR2(200) NOT NULL,
+        rule_type    VARCHAR2(20) NOT NULL 
+                    CONSTRAINT chk_rule_type CHECK (rule_type IN ('BLOCK','REQUIRE_REVIEW','AUTO_APPROVE')),
+        rule_config  JSON NOT NULL,
+        priority     NUMBER DEFAULT 100,
+        is_active    NUMBER(1) DEFAULT 1
+    );
 
--- Insert sample applicants with varying credit profiles
-INSERT INTO loan_applicants VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);
-INSERT INTO loan_applicants VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);
-INSERT INTO loan_applicants VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);
-INSERT INTO loan_applicants VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);
+    -- Insert sample applicants with varying credit profiles
+    INSERT INTO loan_applicants VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);
+    INSERT INTO loan_applicants VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);
+    INSERT INTO loan_applicants VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);
+    INSERT INTO loan_applicants VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);
 
-COMMIT;
-</copy>
-```
-![Notebook Information](./images/task2_1.png " ")
-![Notebook Information](./images/task2_12.png " ")
+    COMMIT;
+    </copy>
+    ```
+
+    ![Notebook Information](./images/task2_1.png " ")
+    ![Notebook Information](./images/task2_12.png " ")
 
 ## Task 3: Define Seer Equity's Underwriting Rules
 
@@ -156,106 +157,107 @@ The rules are evaluated in priority order (lowest number first):
 4. **Require review** for credit scores 550-650 — borderline creditworthiness
 5. **Auto-approve** everything else — low-risk personal/auto loans with good credit
 
-```sql
-<copy>
--- Block very low credit scores (<550)
-INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
-    'Block High Risk - Low Credit',
-    'BLOCK',
-    '{"field": "credit_score", "operator": "lt", "value": 550, "message": "Credit score below 550 does not meet Seer Equity minimum requirements. Application cannot be processed."}',
-    10
-);
+    ```sql
+    <copy>
+    -- Block very low credit scores (<550)
+    INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+        'Block High Risk - Low Credit',
+        'BLOCK',
+        '{"field": "credit_score", "operator": "lt", "value": 550, "message": "Credit score below 550 does not meet Seer Equity minimum requirements. Application cannot be processed."}',
+        10
+    );
 
--- Require review for large loans (>=$50,000)
-INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
-    'Large Loan Review',
-    'REQUIRE_REVIEW',
-    '{"field": "loan_amount", "operator": "gte", "value": 50000, "message": "Loans $50,000 and above require underwriter review."}',
-    20
-);
+    -- Require review for large loans (>=$50,000)
+    INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+        'Large Loan Review',
+        'REQUIRE_REVIEW',
+        '{"field": "loan_amount", "operator": "gte", "value": 50000, "message": "Loans $50,000 and above require underwriter review."}',
+        20
+    );
 
--- Require review for all mortgages (any amount)
-INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
-    'Mortgage Review',
-    'REQUIRE_REVIEW',
-    '{"field": "loan_type", "operator": "eq", "value": "mortgage", "message": "All mortgage applications require underwriter review."}',
-    30
-);
+    -- Require review for all mortgages (any amount)
+    INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+        'Mortgage Review',
+        'REQUIRE_REVIEW',
+        '{"field": "loan_type", "operator": "eq", "value": "mortgage", "message": "All mortgage applications require underwriter review."}',
+        30
+    );
 
--- Require review for borderline credit (550-650)
-INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
-    'Borderline Credit Review',
-    'REQUIRE_REVIEW',
-    '{"field": "credit_score", "operator": "between", "low": 550, "high": 650, "message": "Credit scores 550-650 require underwriter review."}',
-    40
-);
+    -- Require review for borderline credit (550-650)
+    INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+        'Borderline Credit Review',
+        'REQUIRE_REVIEW',
+        '{"field": "credit_score", "operator": "between", "low": 550, "high": 650, "message": "Credit scores 550-650 require underwriter review."}',
+        40
+    );
 
--- Auto-approve everything else (good credit, small loans, non-mortgage)
-INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
-    'Auto-approve Standard',
-    'AUTO_APPROVE',
-    '{"field": "loan_amount", "operator": "lt", "value": 50000, "message": "Personal and auto loans under $50,000 with good credit are auto-approved."}',
-    100
-);
+    -- Auto-approve everything else (good credit, small loans, non-mortgage)
+    INSERT INTO underwriting_rules (rule_name, rule_type, rule_config, priority) VALUES (
+        'Auto-approve Standard',
+        'AUTO_APPROVE',
+        '{"field": "loan_amount", "operator": "lt", "value": 50000, "message": "Personal and auto loans under $50,000 with good credit are auto-approved."}',
+        100
+    );
 
-COMMIT;
-</copy>
-```
+    COMMIT;
+    </copy>
+    ```
 
-![Notebook Information](./images/task3_5.png " ")
-![Notebook Information](./images/task3_52.png " ")
+    ![Notebook Information](./images/task3_5.png " ")
+    ![Notebook Information](./images/task3_52.png " ")
 
 ## Task 4: Create the Rules Checker Function
 
 This function is the brain of Seer Equity's automated underwriting. It evaluates each application against the rules in priority order and returns the first matching rule.
 
-```sql
-<copy>
-CREATE OR REPLACE FUNCTION check_underwriting_rules(
-    p_loan_amount   NUMBER,
-    p_loan_type     VARCHAR2,
-    p_credit_score  NUMBER
-) RETURN VARCHAR2 AS
-BEGIN
-    FOR rec IN (
-        SELECT rule_name, rule_type, rule_config
-        FROM underwriting_rules
-        WHERE is_active = 1
-        ORDER BY priority
-    ) LOOP
-        DECLARE
-            v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');
-            v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');
-            v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');
-            v_low      VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.low');
-            v_high     VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.high');
-            v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');
-            v_match    BOOLEAN := FALSE;
-        BEGIN
-            IF v_field = 'loan_amount' THEN
-                IF v_operator = 'gte' AND p_loan_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;
-                ELSIF v_operator = 'lt' AND p_loan_amount < TO_NUMBER(v_value) THEN v_match := TRUE;
+    ```sql
+    <copy>
+    CREATE OR REPLACE FUNCTION check_underwriting_rules(
+        p_loan_amount   NUMBER,
+        p_loan_type     VARCHAR2,
+        p_credit_score  NUMBER
+    ) RETURN VARCHAR2 AS
+    BEGIN
+        FOR rec IN (
+            SELECT rule_name, rule_type, rule_config
+            FROM underwriting_rules
+            WHERE is_active = 1
+            ORDER BY priority
+        ) LOOP
+            DECLARE
+                v_field    VARCHAR2(50) := JSON_VALUE(rec.rule_config, '$.field');
+                v_operator VARCHAR2(10) := JSON_VALUE(rec.rule_config, '$.operator');
+                v_value    VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.value');
+                v_low      VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.low');
+                v_high     VARCHAR2(100) := JSON_VALUE(rec.rule_config, '$.high');
+                v_message  VARCHAR2(500) := JSON_VALUE(rec.rule_config, '$.message');
+                v_match    BOOLEAN := FALSE;
+            BEGIN
+                IF v_field = 'loan_amount' THEN
+                    IF v_operator = 'gte' AND p_loan_amount >= TO_NUMBER(v_value) THEN v_match := TRUE;
+                    ELSIF v_operator = 'lt' AND p_loan_amount < TO_NUMBER(v_value) THEN v_match := TRUE;
+                    END IF;
+                ELSIF v_field = 'loan_type' THEN
+                    IF v_operator = 'eq' AND LOWER(p_loan_type) = LOWER(v_value) THEN v_match := TRUE;
+                    END IF;
+                ELSIF v_field = 'credit_score' THEN
+                    IF v_operator = 'lt' AND p_credit_score < TO_NUMBER(v_value) THEN v_match := TRUE;
+                    ELSIF v_operator = 'between' AND p_credit_score >= TO_NUMBER(v_low) AND p_credit_score <= TO_NUMBER(v_high) THEN v_match := TRUE;
+                    END IF;
                 END IF;
-            ELSIF v_field = 'loan_type' THEN
-                IF v_operator = 'eq' AND LOWER(p_loan_type) = LOWER(v_value) THEN v_match := TRUE;
+                
+                IF v_match THEN
+                    RETURN '{"action": "' || rec.rule_type || '", "rule": "' || rec.rule_name || '", "message": "' || v_message || '"}';
                 END IF;
-            ELSIF v_field = 'credit_score' THEN
-                IF v_operator = 'lt' AND p_credit_score < TO_NUMBER(v_value) THEN v_match := TRUE;
-                ELSIF v_operator = 'between' AND p_credit_score >= TO_NUMBER(v_low) AND p_credit_score <= TO_NUMBER(v_high) THEN v_match := TRUE;
-                END IF;
-            END IF;
-            
-            IF v_match THEN
-                RETURN '{"action": "' || rec.rule_type || '", "rule": "' || rec.rule_name || '", "message": "' || v_message || '"}';
-            END IF;
-        END;
-    END LOOP;
-    
-    RETURN '{"action": "AUTO_APPROVE", "message": "Application meets all automated approval criteria."}';
-END;
-/
-</copy>
-```
+            END;
+        END LOOP;
+        
+        RETURN '{"action": "AUTO_APPROVE", "message": "Application meets all automated approval criteria."}';
+    END;
+    /
+    </copy>
+    ```
+
 ![Notebook Information](./images/task4_1.png " ")
 ![Notebook Information](./images/task4_12.png " ")
 
