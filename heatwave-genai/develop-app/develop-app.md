@@ -243,8 +243,8 @@ _Estimated Time:_ 20 minutes
 
     - DB_SERVER: Specify the IP address of the HeatWave instance.
     - DB_USERNAME: Specify administrator username, **admin**, which you had provided in Lab 1, Task 5, Step 5.
-    - DB_PASSWORD: Specify the password, which you had provided in Lab 1, Task 5, Step 5.
     - DB_NAME: Specify the schema, **mysql**, the testing database.
+    - DB_PASSWORD: Specify the password, which you had provided in Lab 1, Task 5, Step 5. 
 
     ![config.php](./images/config-php.png "config.php")
 
