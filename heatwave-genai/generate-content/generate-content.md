@@ -2,7 +2,7 @@
 
 ## Introduction
 
-HeatWave GenAI supports four in-database large language models (LLM):
+HeatWave GenAI supports five in-database large language models (LLM):
 - llama3.1-8b-instruct-v1
 - llama3.2-1b-instruct-v1
 - llama3.2-3b-instruct-v1
@@ -84,12 +84,11 @@ In this lab, you will be guided through the following task:
 
     ![Summarize text](./images/5-summarize-text.png "Summarize text")
 
- 3. LLM generates a summary of your text:
+3. LLM generates a summary of your text:
 
     ![Summarized text](./images/6-summarized-text.png "Summarized text")
 
-
-You may now **proceed to the next lab**.
+    You may now **proceed to the next lab**.
 
 ## Learn More
 

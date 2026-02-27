@@ -8,16 +8,16 @@ Every agent follows the same pattern: understand, plan, execute tools, analyze r
 
 ### The Business Problem
 
-At Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 mortgage.
+At Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 authenticating.
 
-> *"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex mortgage."*
+> *"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex authenticating."*
 >
 > David, Operations Manager
 
 The company needs smart routing:
 - **Under $50K with good credit** → Auto-approve
 - **$50K-$250K** → Appraiser review
-- **$250K+ or mortgages** → Senior appraiser
+- **$250K+ or authenticatings** → Senior appraiser
 
 Plus, everything needs to be logged for compliance. When a regulator asks "why was this approved?", there needs to be an answer.
 
@@ -28,9 +28,6 @@ This lab shows you how agents execute conditional workflows with audit logging. 
 **What you'll build:** A item processing workflow with conditional routing and complete audit trails.
 
 Estimated Time: 10 minutes
-
-### Story Sync
-**Story Sync:** Chapter 2.1 – see the corresponding narrative beat for context.
 
 ### Objectives
 
@@ -59,13 +56,13 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/how-agents-execute/lab4-how-agents-execute.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/how-agents-execute/lab4-how-agents-execute.json
     </copy>
     ```
 
 5. Click **Ok**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Set Up an Observable Agent
 
@@ -120,16 +117,16 @@ We'll create an agent with tools that log what's happening so you can see each s
         v_request_id VARCHAR2(20);
     BEGIN
         v_request_id := 'LN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_requests_seq.NEXTVAL;
-        
+
         -- Log the step
         INSERT INTO workflow_log (step_name, step_detail) 
         VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_collector || 
                 ', $' || p_amount || ' ' || p_item_type || ', Credit: ' || p_credit_score);
-        
+
         -- Create the request
         INSERT INTO item_requests (request_id, collector, amount, item_type, credit_score, status)
         VALUES (v_request_id, p_collector, p_amount, LOWER(p_item_type), p_credit_score, 'SUBMITTED');
-        
+
         COMMIT;
         RETURN 'Created item request ' || v_request_id || ' for $' || p_amount || ' ' || p_item_type;
     END;
@@ -160,12 +157,12 @@ We'll create an agent with tools that log what's happening so you can see each s
         SELECT amount, item_type, credit_score
         INTO v_amount, v_item_type, v_credit_score
         FROM item_requests WHERE request_id = p_request_id;
-        
+
         -- Log the assessment start
         INSERT INTO workflow_log (step_name, step_detail) 
         VALUES ('ASSESS_RISK', 'Assessing ' || p_request_id || ': $' || v_amount || 
                 ', Credit: ' || v_credit_score);
-        
+
         -- Apply risk rules
         IF v_credit_score < 550 THEN
             v_risk_level := 'BLOCKED';
@@ -175,7 +172,7 @@ We'll create an agent with tools that log what's happening so you can see each s
             v_risk_level := 'LOW';
             v_route_to := 'AUTO_APPROVED';
             v_result := 'AUTO_APPROVED: Personal item under $50K with credit ' || v_credit_score || '.';
-        ELSIF v_amount < 250000 AND v_item_type != 'mortgage' THEN
+        ELSIF v_amount < 250000 AND v_item_type != 'authenticating' THEN
             v_risk_level := 'MEDIUM';
             v_route_to := 'APPRAISER';
             v_result := 'Routed to APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires review.';
@@ -184,18 +181,18 @@ We'll create an agent with tools that log what's happening so you can see each s
             v_route_to := 'SENIOR_APPRAISER';
             v_result := 'Routed to SENIOR_APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires senior review.';
         END IF;
-        
+
         -- Log the routing decision
         INSERT INTO workflow_log (step_name, step_detail) 
         VALUES ('ROUTE_DECISION', p_request_id || ' -> ' || v_route_to || ' (Risk: ' || v_risk_level || ')');
-        
+
         -- Update the request
         UPDATE item_requests
         SET risk_level = v_risk_level, 
             routed_to = v_route_to,
             status = CASE WHEN v_route_to IN ('AUTO_APPROVED', 'REJECTED') THEN v_route_to ELSE 'PENDING_REVIEW' END
         WHERE request_id = p_request_id;
-        
+
         COMMIT;
         RETURN v_result;
     EXCEPTION
@@ -217,11 +214,11 @@ We'll create an agent with tools that log what's happening so you can see each s
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CREATE_ITEM_TOOL',
-            attributes  => '{"instruction": "Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, mortgage, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.",
+            attributes  => '{"instruction": "Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.",
                             "function": "create_item_request"}',
             description => 'Creates a item request and returns the request ID'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'ASSESS_ROUTE_TOOL',
             attributes  => '{"instruction": "Assess risk and route a item request. Parameter: P_REQUEST_ID (the LN-YYMMDD-NNNN format ID from CREATE_ITEM_TOOL). Returns routing decision.",
@@ -248,14 +245,14 @@ We'll create an agent with tools that log what's happening so you can see each s
                             "role": "You are a item processing agent for Big Star Collectibles. Process items by: 1) Creating the request with CREATE_ITEM_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
             description => 'Agent demonstrating execution loop'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'ITEM_EXEC_TASK',
             attributes  => '{"instruction": "Process the item request: 1. Call CREATE_ITEM_TOOL to create the request 2. Call ASSESS_ROUTE_TOOL with the returned request ID to assess and route. Report the final routing decision. User request: {query}",
                             "tools": ["CREATE_ITEM_TOOL", "ASSESS_ROUTE_TOOL"]}',
             description => 'Task for item execution demo'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
             team_name   => 'ITEM_EXEC_TEAM',
             attributes  => '{"agents": [{"name": "ITEM_EXEC_AGENT", "task": "ITEM_EXEC_TASK"}],
@@ -307,10 +304,10 @@ Now let's run a request and trace every step.
     </copy>
     ```
 
-**Observe the execution sequence:**
-- `CREATE_REQUEST`: The item was created
-- `ASSESS_RISK`: Risk was evaluated
-- `ROUTE_DECISION`: `AUTO_APPROVED` (personal under $50K with 780 credit)
+    **Observe the execution sequence:**
+    - `CREATE_REQUEST`: The item was created
+    - `ASSESS_RISK`: Risk was evaluated
+    - `ROUTE_DECISION`: `AUTO_APPROVED` (personal under $50K with 780 credit)
 
 ## Task 4: Trace the Agent's Tool Calls
 
@@ -353,7 +350,7 @@ The history views show what the agent did.
     </copy>
     ```
 
-You can see the actual record the agent created, with the risk assessment and routing.
+    You can see the actual record the agent created, with the risk assessment and routing.
 
 ## Task 5: Trace Different Execution Paths
 
@@ -380,7 +377,7 @@ Different item parameters trigger different routing paths.
     </copy>
     ```
 
-**Observe:** Routed to APPRAISER because $150K business item needs review.
+    **Observe:** Routed to APPRAISER because $150K business item needs review.
 
 3. Submit a item that needs senior review.
 
@@ -389,7 +386,7 @@ Different item parameters trigger different routing paths.
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Process a $450000 mortgage for Jane Doe with condition grade 750;
+    SELECT AI AGENT Process a $450000 authenticating for Jane Doe with condition grade 750;
     </copy>
     ```
 
@@ -403,7 +400,7 @@ Different item parameters trigger different routing paths.
     </copy>
     ```
 
-**Observe:** Routed to SENIOR_APPRAISER because it's a mortgage over $250K.
+    **Observe:** Routed to SENIOR_APPRAISER because it's a authenticating over $250K.
 
 5. Submit a item that should be blocked.
 
@@ -426,7 +423,7 @@ Different item parameters trigger different routing paths.
     </copy>
     ```
 
-**Observe:** BLOCKED because condition grade 520 is below minimum 550.
+    **Observe:** BLOCKED because condition grade 520 is below minimum 550.
 
 ## Task 6: Compare All Items and Their Routes
 
@@ -462,37 +459,37 @@ Every agent execution follows this pattern:
 6. **Next tool** → Repeat steps 4-5 for each tool (conditionally)
 7. **LLM responds** → Generates final response
 
-Query to see the complete execution timeline:
+    Query to see the complete execution timeline:
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
-```sql
-<copy>
-SELECT 
+    ```sql
+    <copy>
+    SELECT 
     'TOOL: ' || tool_name as step,
     TO_CHAR(start_date, 'HH24:MI:SS.FF3') as time,
     SUBSTR(output, 1, 50) as output
-FROM USER_AI_AGENT_TOOL_HISTORY
-WHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE
-ORDER BY start_date;
-</copy>
-```
+    FROM USER_AI_AGENT_TOOL_HISTORY
+    WHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE
+    ORDER BY start_date;
+    </copy>
+    ```
 
-Compare with your workflow log:
+    Compare with your workflow log:
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook - just click the play button (▶) to run it.
 
-```sql
-<copy>
-SELECT 
+    ```sql
+    <copy>
+    SELECT 
     'LOG: ' || step_name as step,
     TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time,
     step_detail as output
-FROM workflow_log
-WHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE
-ORDER BY logged_at;
-</copy>
-```
+    FROM workflow_log
+    WHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE
+    ORDER BY logged_at;
+    </copy>
+    ```
 
 ## Summary
 

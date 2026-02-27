@@ -39,9 +39,6 @@ You'll also implement risk-based routing:
 
 Estimated Time: 20 minutes
 
-### Story Sync
-**Story Sync:** Chapters 3.3 & 4.2 – see the corresponding narrative beat for context.
-
 ### Objectives
 
 * Create PL/SQL functions as agent tools
@@ -70,13 +67,13 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/tools-safety-control/lab10-tools-safety-control.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/tools-safety-control/lab10-tools-safety-control.json
     </copy>
     ```
 
 5. Click **Ok**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Database Tables
 
@@ -86,41 +83,41 @@ First, you'll create three tables:
 2. **item_submissions**: Where item submissions are stored with their status
 3. **appraisal_rules**: JSON-configured business rules the agent will follow
 
-Notice the constraints on `item_submissions`  -  these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
+    Notice the constraints on `item_submissions`  -  these are your database-level safety net. Even if an agent misbehaves, the database won't accept invalid data.
 
-```sql
-<copy>
--- Sequence for submission IDs
-CREATE SEQUENCE item_app_seq START WITH 1001;
+    ```sql
+    <copy>
+    -- Sequence for submission IDs
+    CREATE SEQUENCE item_app_seq START WITH 1001;
 
--- Collectors table
-CREATE TABLE item_collectors (
+    -- Collectors table
+    CREATE TABLE item_collectors (
     collector_id    VARCHAR2(20) PRIMARY KEY,
     name            VARCHAR2(100) NOT NULL,
     email           VARCHAR2(100) NOT NULL,
     credit_score    NUMBER(3) NOT NULL,
     annual_income   NUMBER(12,2),
     employment_years NUMBER(2)
-);
+    );
 
--- Item submissions
-CREATE TABLE item_submissions (
+    -- Item submissions
+    CREATE TABLE item_submissions (
     submission_id  VARCHAR2(20) PRIMARY KEY,
     collector_id    VARCHAR2(20) NOT NULL REFERENCES item_collectors(collector_id),
     declared_value     NUMBER(12,2) NOT NULL 
                     CONSTRAINT chk_positive_amount CHECK (declared_value > 0),
     item_type       VARCHAR2(50) NOT NULL
-                    CONSTRAINT chk_item_type CHECK (item_type IN ('personal','auto','mortgage','business')),
+                    CONSTRAINT chk_item_type CHECK (item_type IN ('personal','auto','authenticating','business')),
     item_purpose    VARCHAR2(500),
     risk_status     VARCHAR2(30) DEFAULT 'PENDING_REVIEW'
                     CONSTRAINT chk_status CHECK (risk_status IN ('APPROVED','DENIED','PENDING_REVIEW','AUTO_APPROVED')),
     submitted_at    TIMESTAMP DEFAULT SYSTIMESTAMP,
     decided_by      VARCHAR2(100),
     decided_at      TIMESTAMP
-);
+    );
 
--- Appraisal rules
-CREATE TABLE appraisal_rules (
+    -- Appraisal rules
+    CREATE TABLE appraisal_rules (
     rule_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
     rule_name    VARCHAR2(200) NOT NULL,
     rule_type    VARCHAR2(20) NOT NULL 
@@ -128,74 +125,74 @@ CREATE TABLE appraisal_rules (
     rule_config  JSON NOT NULL,
     priority     NUMBER DEFAULT 100,
     is_active    NUMBER(1) DEFAULT 1
-);
+    );
 
--- Insert sample collectors with varying credit profiles
-INSERT INTO item_collectors VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);
-INSERT INTO item_collectors VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);
-INSERT INTO item_collectors VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);
-INSERT INTO item_collectors VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);
+    -- Insert sample collectors with varying credit profiles
+    INSERT INTO item_collectors VALUES ('APP-001', 'Alice Johnson', 'alice@email.com', 780, 95000, 8);
+    INSERT INTO item_collectors VALUES ('APP-002', 'Bob Smith', 'bob@email.com', 695, 62000, 3);
+    INSERT INTO item_collectors VALUES ('APP-003', 'Carol Davis', 'carol@email.com', 520, 45000, 1);
+    INSERT INTO item_collectors VALUES ('APP-004', 'David Chen', 'david@email.com', 725, 120000, 12);
 
-COMMIT;
-</copy>
-```
+    COMMIT;
+    </copy>
+    ```
 
-## Task 3: Define Big Star Collectibles' Appraisal Rules
+    ## Task 3: Define Big Star Collectibles' Appraisal Rules
 
-Now you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.
+    Now you'll insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.
 
-The rules are evaluated in priority order (lowest number first):
-1. **Block** submissions with condition grade below 550  -  too high risk for automated processing
-2. **Require review** for items $50,000 or more  -  significant exposure needs human judgment
-3. **Require review** for any mortgage  -  complex product requires appraiser
-4. **Require review** for condition grades 550-650  -  borderline creditworthiness
-5. **Auto-approve** everything else  -  low-risk personal/auto items with good credit
+    The rules are evaluated in priority order (lowest number first):
+    1. **Block** submissions with condition grade below 550  -  too high risk for automated processing
+    2. **Require review** for items $50,000 or more  -  significant exposure needs human judgment
+    3. **Require review** for any authenticating  -  complex product requires appraiser
+    4. **Require review** for condition grades 550-650  -  borderline creditworthiness
+    5. **Auto-approve** everything else  -  low-risk personal/auto items with good credit
 
-```sql
-<copy>
--- Block very low condition grades (<550)
-INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    ```sql
+    <copy>
+    -- Block very low condition grades (<550)
+    INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'Block High Risk - Low Credit',
     'BLOCK',
     '{"field": "credit_score", "operator": "lt", "value": 550, "message": "Condition grade below 550 does not meet Big Star Collectibles minimum requirements. Submission cannot be processed."}',
     10
-);
+    );
 
--- Require review for large items (>=$50,000)
-INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    -- Require review for large items (>=$50,000)
+    INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'Large Item Review',
     'REQUIRE_REVIEW',
     '{"field": "declared_value", "operator": "gte", "value": 50000, "message": "Items $50,000 and above require appraiser review."}',
     20
-);
+    );
 
--- Require review for all mortgages (any amount)
-INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    -- Require review for all authenticatings (any amount)
+    INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'rare collectible Review',
     'REQUIRE_REVIEW',
-    '{"field": "item_type", "operator": "eq", "value": "mortgage", "message": "All mortgage submissions require appraiser review."}',
+    '{"field": "item_type", "operator": "eq", "value": "authenticating", "message": "All authenticating submissions require appraiser review."}',
     30
-);
+    );
 
--- Require review for borderline credit (550-650)
-INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    -- Require review for borderline credit (550-650)
+    INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'Borderline Credit Review',
     'REQUIRE_REVIEW',
     '{"field": "credit_score", "operator": "between", "low": 550, "high": 650, "message": "Condition grades 550-650 require appraiser review."}',
     40
-);
+    );
 
--- Auto-approve everything else (good credit, small items, non-mortgage)
-INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
+    -- Auto-approve everything else (good credit, small items, non-authenticating)
+    INSERT INTO appraisal_rules (rule_name, rule_type, rule_config, priority) VALUES (
     'Auto-approve Standard',
     'AUTO_APPROVE',
     '{"field": "declared_value", "operator": "lt", "value": 50000, "message": "Personal and auto items under $50,000 with good credit are auto-approved."}',
     100
-);
+    );
 
-COMMIT;
-</copy>
-```
+    COMMIT;
+    </copy>
+    ```
 
 ## Task 4: Create the Rules Checker Function
 
@@ -467,7 +464,7 @@ BEGIN
     -- Submission tool (for INVENTORY_AGENT)
     DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'SUBMIT_ITEM_TOOL',
-        attributes  => '{"instruction": "Submit a item submission. Parameters: P_COLLECTOR_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_DECLARED_VALUE (number), P_ITEM_TYPE (personal, auto, mortgage, or business), P_ITEM_PURPOSE (text description of item purpose).",
+        attributes  => '{"instruction": "Submit a item submission. Parameters: P_COLLECTOR_ID (e.g. APP-001, APP-002, APP-003, APP-004), P_DECLARED_VALUE (number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_ITEM_PURPOSE (text description of item purpose).",
                         "function": "submit_item_submission"}',
         description => 'Submits a item submission for processing'
     );
@@ -604,11 +601,11 @@ Become a inventory specialist and submit submissions.
     </copy>
     ```
 
-4. Submit a mortgage (always requires review).
+4. Submit a authenticating (always requires review).
 
     ```sql
     <copy>
-    SELECT AI AGENT Submit a $250000 mortgage for collector APP-001, purpose is primary residence purchase;
+    SELECT AI AGENT Submit a $250000 authenticating for collector APP-001, purpose is primary residence purchase;
     </copy>
     ```
 
@@ -669,7 +666,7 @@ Switch to the appraisal agent and review submissions.
 
     ```sql
     <copy>
-    SELECT AI AGENT Approve the mortgage submission;
+    SELECT AI AGENT Approve the authenticating submission;
     </copy>
     ```
 
@@ -699,8 +696,8 @@ In this lab, you built a complete item appraisal system demonstrating:
 - APPRAISAL_AGENT for appraisers (review and decide)
 
 **Safety Rules:**
-- AUTO_APPROVE: Under $50K, good credit, non-mortgage
-- REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
+- AUTO_APPROVE: Under $50K, good credit, non-authenticating
+- REQUIRE_REVIEW: $50K+, authenticatings, or borderline credit
 - BLOCK: Condition grade below 550
 
 **The Human-in-the-Loop:**

@@ -23,14 +23,12 @@ In this lab, you'll solve the forgetting problem by building a **memory core**, 
 3. **Register the tools** so the agent can store and retrieve facts
 4. **Test across sessions** to prove memory persists
 
-The key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.
+    The key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.
 
-**What you'll build:** A persistent memory system where agents store and recall client information across sessions.
+    **What you'll build:** A persistent memory system where agents store and recall client information across sessions.
 
-Estimated Time: 15 minutes
+    Estimated Time: 15 minutes
 
-### Story Sync
-**Story Sync:** Chapter 2.3 – see the corresponding narrative beat for context.
 
 ### Objectives
 
@@ -59,13 +57,13 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/where-memory-lives/lab7-where-memory-lives.json
+    https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/where-memory-lives/lab7-where-memory-lives.json
     </copy>
     ```
 
 5. Click **Ok**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Core Table
 
@@ -131,7 +129,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
             )
         );
         COMMIT;
-        
+
         RETURN 'Remembered: ' || p_fact || 
                CASE WHEN p_about IS NOT NULL THEN ' (about ' || p_about || ')' ELSE '' END;
     END;
@@ -178,11 +176,11 @@ The recall function is the agent's "search memory" capability. When someone asks
             v_result := v_result || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No facts found matching the criteria.';
         END IF;
-        
+
         RETURN 'Found ' || v_count || ' facts:' || CHR(10) || v_result;
     END;
     /
@@ -347,7 +345,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-The agent recalls the stored facts.
+    The agent recalls the stored facts.
 
 ## Task 8: Verify Persistence Across Sessions
 
@@ -372,7 +370,7 @@ The agent recalls the stored facts.
     </copy>
     ```
 
-**The agent remembers!** Because facts are stored in the database, not session memory.
+    **The agent remembers!** Because facts are stored in the database, not session memory.
 
 3. View the memory core contents.
 

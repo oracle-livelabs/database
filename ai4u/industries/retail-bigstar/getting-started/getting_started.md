@@ -6,8 +6,6 @@ In this lab, you will learn how to access the Oracle Machine Learning (OML) note
 
 Estimated Time: 5 minutes
 
-**Story Sync:** Use this with Chapter 0 facilitator notes to ensure participants launch the same sandbox Marcus Reed uses before the story begins.
-
 ### Objectives
 
 * Access your reservation information
