@@ -1,0 +1,36 @@
+{
+  "workshoptitle": "Private Agent Factory - MSI Workshop",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Get Started",
+      "filename": "../../../get-started/get-started.md"
+    },
+    {
+      "title": "Introduction to Oracle AI Database Private Agent Factory",
+      "filename": "../../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Create Knowledge and Data Analysis Agents (prebuilt)",
+      "filename": "../../../prebuilt/prebuilt.md"
+    },
+    {
+      "title": "Lab 2: EBS Database Agent: Analyze Business Data and AWR Reports",
+      "filename": "../../ebs-sqlcl-mcp/ebs-sqlcl-mcp.md"
+    },
+    { "title": "Lab 3: Build agent with OIC MCP Server (EBS) for complex business processes ",
+      "filename": "../../ebs-db-thru-oic/ebs-db-thru-oic.md"
+    },
+    { "title": "[Working Lunch] Demos and Q&A - APEX App, Invoking Agents from APEX App, etc.",
+      "filename": "../../ebs-db-thru-oic/ebs-db-thru-oic.md"
+    },
+    {
+      "title": "Lab 4: E-Business Contracts Generation Agent live walkthrough",
+      "filename": "../../../agent-builder/agent-builder.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "../../../need_help/need_help.md"
+    }
+  ]
+}
