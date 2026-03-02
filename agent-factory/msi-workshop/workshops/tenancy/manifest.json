@@ -18,15 +18,15 @@
       "title": "Lab 2: EBS Database Agent: Analyze Business Data and AWR Reports",
       "filename": "../../ebs-sqlcl-mcp/ebs-sqlcl-mcp.md"
     },
-    { "title": "Lab 3: Build agent with OIC MCP Server (EBS) for complex business processes ",
+    { "title": "Lab 3: Build Agent for complex business flows with OIC MCP Server",
       "filename": "../../ebs-db-thru-oic/ebs-db-thru-oic.md"
     },
-    { "title": "[Working Lunch] Demos and Q&A - APEX App, Invoking Agents from APEX App, etc.",
-      "filename": "../../ebs-db-thru-oic/ebs-db-thru-oic.md"
+    { "title": "Demos and Q&A - APEX App, Invoking Agents from APEX App, etc. [Working Lunch] ",
+      "filename": "../../apex-demo/apex-demo.md"
     },
     {
       "title": "Lab 4: E-Business Contracts Generation Agent live walkthrough",
-      "filename": "../../../agent-builder/agent-builder.md"
+      "filename": "../../ebs-contract-agent/ebs-contract-agent.md"
     },
     {
       "title": "Need Help?",
