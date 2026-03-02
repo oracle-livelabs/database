@@ -322,11 +322,11 @@ _Estimated Time:_ 20 minutes
     ```bash
     <copy>cd /var/www/html</copy>
     ```
-<!--
-The application source files are in this workshop developHEATWAVE-GENAI/delop-app/files folder
-The PAR bucket is at Tenancy mysqlpm  compartment mysqlpm/livelabs/mysql_gen_ai/php-rag-chat-app/app.zip
-Contact perside.foster@oracle.com for more details
--->
+    <!--
+    The application source files are in this workshop developHEATWAVE-GENAI/delop-app/files folder
+    The PAR bucket is at Tenancy mysqlpm  compartment mysqlpm/livelabs/mysql_gen_ai/php-rag-chat-app/app.zip
+    Contact perside.foster@oracle.com for more details
+    -->
 
 2. Download the application code.
 
@@ -372,7 +372,7 @@ Contact perside.foster@oracle.com for more details
     ```
     ![Provide your administrator details](./images/rag-replace.png "Provide your administrator details")
 
-8.  Replace the followings with values provided  in the Sandbox Reservation information:
+8. Replace the followings with values provided  in the Sandbox Reservation information:
     - **your\_mysql\_host**: Specify the IP address of the HeatWave instance, **heatwave-genai-db**. For example, 10.0.0.123.
     - **your\_username**: Specify the username for the Heatwave instance. **admin**.
     - **your\_password**: Specify the pasword for the HeatWave instance. If the password contains an apostrophe ('), escape it with a backslash: \'. Example: If your password is Pass'word123, enter it as:  **'Pass\'word123'**.
@@ -411,7 +411,6 @@ Contact perside.foster@oracle.com for more details
 
 5. To clear the chat history, click **Clear Chat History**.
 
-You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -421,10 +420,9 @@ You may now **proceed to the next lab**.
 
 - [MySQL Documentation](https://dev.mysql.com/)
 
-You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
 - **Author** - Aijaz Fatima, Product Manager 
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineer
-- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, March 2026
