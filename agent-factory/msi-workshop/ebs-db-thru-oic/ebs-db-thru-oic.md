@@ -17,81 +17,87 @@ In this lab, you will learn you can build agents for complex business flows by l
 * Basic familiarity with AI Agents concepts (tools, MCP server, prompts, etc)
 * Basic understanding of E-Business Suite, and OIC Integrations
 
-## Task 1: Understand OIC + Agent Factory usage patterns
+## Task 1: Understand OIC + Agent Factory Usage Patterns
 
-### Key MCP Concepts
-Table 1: MCP Terminology
-| Concept | Description |
-|---|---|
-| MCP Server | Your OIC project exposed as an MCP server |
-| MCP Client | External applications (OCI ADK, Fusion AI Studio, Postman, Langflow, etc.) that discover and use tools |
-| MCP Server URL | Unique endpoint for discovering available tools |
-| Transport Mechanism | Communication protocol (streamable HTTP) |
-| Security | OAuth 2.0 authentication |
+When deciding between SQLcl MCP and OIC MCP, think scope: 
 
-### Benefits of MCP
-- **Flexibility**: Use OIC tools in any MCP-compatible framework
-- **Interoperability**: Integrate with multiple AI agent platforms
-- **Scalability**: Expose integrations beyond OIC
-- **Security**: OAuth-secured access to tools
-- **Decoupling**: Separate your tools from specific agent implementations
+**SQLcl MCP** is best when the work is primarily **Oracle Database operations** (run SQL/PLSQL, scripts, schema/object tasks) and you want a direct, database-centric toolchain. 
+
+**OIC MCP** is better when the goal is **end-to-end process automation and orchestration** across systems, including **traditional workflows** (steps, approvals, integrations, error handling), **non-deterministic workflows** (where an agent may choose different actions/tools based on context), and stronger **data governance controls** through centralized integration management (consistent connection handling, access control patterns, monitoring/auditing, and standardized interfaces) rather than ad hoc database scripting.
+
+Overall, **OIC MCP** is inherently about orchestrating cross-application processes and governing how data moves between systems, whereas **SQLcl** is a database command-line interface (governance is mostly enforced by the database/security model itself, not by SQLcl as a workflow/orchestration layer).
+
+Please see **Lab 3** of the following for more information on **Discovering Integrations as Tools from an MCP Server**: https://livelabs.oracle.com/ords/r/dbpm/livelabs/run-workshop?p210_wid=4283&p210_wec=&session=14105171758182&cs=1vVIrkqYw44jUJUoyRsGqfhyrQGgRXsF6uuWTAfS_UFqlVUlN0utXMtp8LyR0YBoI9FnLLoKu059LwOULha_OrQ
 
 
-### How MCP Works with OIC 
-##### When you enable MCP for an OIC project:
+## Task 2: Open Agent Builder
+Navigate to the **Agent Builder** tab on the left-hand menu. <span style="color:red;">If there is already an agent configuration present from a previous lab, click **New Flow**.</span>
 
-- Your project becomes an MCP Server
-- All registered agentic AI tools become discoverable through a unique URL
-- External AI agent frameworks (OCI ADK, Fusion AI Studio, Postman, Langflow, etc.) can discover these tools
-- External frameworks can invoke these tools securely using OAuth
+![Open Agent Builder](./images/open-agent-builder.png " ")
 
-
-### OIC Integration MCP tools vs SQLcl MCP
-OIC MCP is mainly for working with Oracle Integration Cloud, like running integrations and connecting different apps and services. SQLcl MCP is mainly for database work, like running SQL and scripts and managing objects in an Oracle Database.
-
-
-## Task 2: Create and configure agent
+## Task 3: Create and Configure an Agent
 
 To assemble a custom agent in Private Agent Factory using your OIC project, we will need our OIC MCP server URL and token. Those two will be provided to you by instructors for the purpose of this lab.
 
-#### Create the agent
+#### Step 1. Add components to the canvas
 
-On the left hand side click the “My custom flows” button and then click “Create flow”. Add in the following components:
-- MCP Server
-- Agent
-- Chat Input
-- Chat Output
+1. To begin, find the **Chat input** node from the Components tool bar. Drag it onto the canvas, or simply click the + button.
 
-In the MCP Server Component you need to:
-- Add the provided MCP URL
-- Auth type = Bearer token
-- Add the Bearer token
+2. Next, find the **Agent** component near the top of the menu. Drag that onto the canvas.
 
-Connect the light blue dot on the MCP Server component to the Tools (light blue dot) on the Agent component.
+3. Find the **MCP Server** component. Drag that onto the canvas.
 
-For the Agent, select the msi-workshop (openai) LLM.
+4. Find the **Chat output** node near the bottom of the menu, and drag it onto the canvas.
 
-Custom instructions for Agent (copy/paste):
+
+#### Step 2. Connect components
+
+Drag the blue dot from the Chat input component to the Prompt field of the agent.
+
+Then drag the Message blue dot on the Agent component to the Message dot on the Chat output component.
+
+Lastly, drag the Tools light blue dot on the MCP Server component to the Tools dot on the Agent component.
+
+
+#### Step 3. Fill out details on components
+
+**3.1 MCP Server Component**
+
+In the MCP Server component you will need to:
+1. Paste in the provided MCP URL
+2. Select Auth type to be Bearer token
+3. Paste in the provided Bearer token
+
+**3.2 Agent Component**
+
+1. In the Agent, for the "Select LLM to use" field select the **msi-workshop (openai) LLM**.
+
+2. In the "Custom instructions" field for Agent copy/paste:
     ```
     <copy>
-    Use the MCP tools to answer questions.
+    When asked for details for a sales order number use the available tool.
     </copy>
     ```
 
-- Drag the dark blue dot on the chat input component to the dark blue dot labeled prompt on the agent.
+<span style="color:red;">Confirm that your agent looks like this:</span>
 
-- Drag the dark blue dot labelled message on the agent component to the dark blue dot labelled message on the Chat Output component.
 
-You're agent should look like the following:
+![Example PAF Agent Builder](./images/OIC-MCP-Workflow.png " ")
 
-![Example PAF Agent Builder](./images/PAF-EBS-Ex.png " ")
+#### Step 4: Save the flow and test!
+1. Click **Save** on the top right hand corner of your page.
 
-- Click save on the top right hand corner of your page.
+2. **Then**, click **Playground**. You should see the following:
 
-- Click Playground.
+![Playground](./images/PAF-Playground.png " ")
 
-- Add the instructor provided prompt and try out questions.
+3. Add the following prompt:
 
+    ```
+    <copy>
+    TODO
+    </copy>
+    ```
 
 
 Congratulations! You have successfully finished this lab.
