@@ -96,7 +96,7 @@ Before you can get started, you must set up a DB Connection to the HeatWave inst
 
 4. Under **Connection Details**, in the **Basic** tab, enter the following:
 
-    - **Hostname or IP Address**: Private IP address of the DB system that you had noted in Lab 1, Task 5, Step 19.
+    - **Hostname or IP Address**: Private IP address of the DB system. Provided  in the Sandbox Reservation information.
 
     - **User Name**: 
 
@@ -118,7 +118,10 @@ Before you can get started, you must set up a DB Connection to the HeatWave inst
 
 7. Enter the following details:
 
-    - **SSH URI**: opc@ComputeIPAddress. Replace ComputeIPAddress with the IP address  from the Sandbox Reservation information
+    - **SSH URI**: opc@ComputeIPAddress:22 . Replace ComputeIPAddress with the Compute public IP address from the Sandbox Reservation information.    
+        - **opc** is the default username for Oracle Cloud Infrastructure (OCI) compute instances
+        - **ComputeIPAddress** is the Compute public IP address from the Sandbox Reservation information
+        - **:22** is the standard SSH port
 
     - **SSH Private Key File**: Browse to the SSH folder and select the SSH key you created when you reserved workshop
 
