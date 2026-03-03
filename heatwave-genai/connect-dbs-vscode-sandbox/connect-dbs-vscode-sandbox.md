@@ -40,7 +40,7 @@ Before you can get started, you must set up a DB Connection to the HeatWave inst
 
     ![My profile](./images/3-profile.png "My profile")
 
-2.  Under **Resources**, click **API keys**, and click **Add API key**.
+2. Under **Resources**, click **API keys**, and click **Add API key**.
 
 3. Click **Download private key**.
     
