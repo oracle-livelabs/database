@@ -28,40 +28,40 @@ This lab assumes you have:
 
 1. Sign in to the Oracle Cloud Console. From the top-left corner, click the **Navigation menu**.
 
-   ![Navigation Menu](images/creating_ADB_1.png "Navigation menu")
+   ![Navigation Menu](images/creating_adb_1.png "Navigation menu")
 
 2. From the navigation menu, select **Oracle AI Database**.
- ![Navigation Menu](images/creating_ADB_2.png "Navigation menu")
+ ![Navigation Menu](images/creating_adb_2.png "Navigation menu")
 
 
 3. In the main content area, click **Autonomous AI Database**.
- ![Navigation Menu](images/creating_ADB_3.png "Navigation menu")
+ ![Navigation Menu](images/creating_adb_3.png "Navigation menu")
 
 
 4. Click **Create Autonomous AI Database**.
- ![Navigation Menu](images/creating_ADB_4.png "Navigation menu")
+ ![Navigation Menu](images/creating_adb_4.png "Navigation menu")
 
 
 5. On the Create Autonomous Database page, provide the following information:
    * Display name (DBMS_Search_ADB)
    * Database name (dbmsSearchADB)
    * Workload type (Lakehouse is recommended for this lab)
-    ![Navigation Menu](images/creating_ADB_5.png "Navigation menu")
+    ![Navigation Menu](images/creating_adb_5.png "Navigation menu")
 
 
 6. Under **Database configuration**, select the appropriate **Database Version** to 26ai.
- ![Navigation Menu](images/creating_ADB_6.png "Navigation menu")
+ ![Navigation Menu](images/creating_adb_6.png "Navigation menu")
 
 
 7. In the **Administrator credentials** section, enter and confirm the **ADMIN** password.
 
    > **Note:** Save this password. You will need it later in the lab.
- ![Navigation Menu](images/creating_ADB_7.png "Navigation menu")
+ ![Navigation Menu](images/creating_adb_7.png "Navigation menu")
 
 8. Click **Create**.
 
    Wait until the database status shows **Available** before continuing.
- ![Navigation Menu](images/creating_ADB_8.png "Navigation menu")
+ ![Navigation Menu](images/creating_adb_8.png "Navigation menu")
 
 ---
 
@@ -69,7 +69,7 @@ This lab assumes you have:
 
 1. From the Autonomous Database details page, click **Database Actions**.
 
- ![Navigation Menu](images/SQL_1.png "Navigation menu")
+ ![Navigation Menu](images/sql_1.png "Navigation menu")
 
 2. When prompted, log in using the **ADMIN** credentials you created earlier.
 
@@ -80,10 +80,10 @@ Past this schema using SQL Developer Web
 
 
 1. From the Database Actions landing page, click **SQL** to open **SQL Developer Web**.
-![Navigation Menu](images/SQL_2.png "Navigation menu")
+![Navigation Menu](images/sql_2.png "Navigation menu")
 
 2. Paste the SQL script provided below for this lab into the SQL worksheet. (Note: We are creating the HR user changing the default password to "OracleDbmsSearch25!")
-![Navigation Menu](images/SQL_3.png "Navigation menu")
+![Navigation Menu](images/sql_3.png "Navigation menu")
 
 <details>
 <summary><b>View full SQL Schema Script</b></summary>
@@ -380,29 +380,29 @@ END;
 </details>
 
 3. Click **Run Script** or press **F5** to execute the script.
-![Navigation Menu](images/SQL_4.png "Navigation menu")
+![Navigation Menu](images/sql_4.png "Navigation menu")
 
 4. Verify that the script completes successfully and returns results without errors.
-![Navigation Menu](images/SQL_5.png "Navigation menu")
+![Navigation Menu](images/sql_5.png "Navigation menu")
 
 ---
 
 ## Task 4: Switch User & Validate Tables and Data
 1. Click the **ADMIN user menu** in the top-right corner and select **Sign Out**.
-![Navigation Menu](images/SQL_6.png "Navigation menu")
-![Navigation Menu](images/SQL_7.png "Navigation menu")
+![Navigation Menu](images/sql_6.png "Navigation menu")
+![Navigation Menu](images/sql_7.png "Navigation menu")
 
 2. Sign back in using the **HR** user credentials provided for the lab. 
-![Navigation Menu](images/SQL_8.png "Navigation menu")
+![Navigation Menu](images/sql_8.png "Navigation menu")
 
 3. From SQL Developer Web, open the **SQL Worksheet selector**.
-![Navigation Menu](images/SQL_9.png "Navigation menu")
+![Navigation Menu](images/sql_9.png "Navigation menu")
 
 4. Navigate to **SQL Data**.
-![Navigation Menu](images/SQL_10.png "Navigation menu")
+![Navigation Menu](images/sql_10.png "Navigation menu")
 
 5. Click **Refresh** to display available tables.
-![Navigation Menu](images/SQL_11.png "Navigation menu")
+![Navigation Menu](images/sql_11.png "Navigation menu")
 
 6. Confirm that the expected tables are present.
 
