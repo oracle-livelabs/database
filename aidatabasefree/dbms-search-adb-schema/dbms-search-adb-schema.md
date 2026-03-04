@@ -380,29 +380,29 @@ Past this schema using SQL Developer Web
     </details>
 
 3. Click **Run Script** or press **F5** to execute the script.
-    ![Navigation Menu](images/sql_4.png "Navigation menu")
+    ![Navigation Menu](images/sql_4.png "navigation menu")
 
 4. Verify that the script completes successfully and returns results without errors.
-    ![Navigation Menu](images/sql_5.png "Navigation menu")
+    ![Navigation Menu](images/sql_5.png "navigation menu")
 
     ---
 
 ## Task 4: Switch User & Validate Tables and Data
 1. Click the **ADMIN user menu** in the top-right corner and select **Sign Out**.
-    ![Navigation Menu](images/sql_6.png "Navigation menu")
-    ![Navigation Menu](images/sql_7.png "Navigation menu")
+    ![Navigation Menu](images/sql_6.png "navigation menu")
+    ![Navigation Menu](images/sql_7.png "navigation menu")
 
 2. Sign back in using the **HR** user credentials provided for the lab. 
-    ![Navigation Menu](images/sql_8.png "Navigation menu")
+    ![Navigation Menu](images/sql_8.png "navigation menu")
 
 3. From SQL Developer Web, open the **SQL Worksheet selector**.
-    ![Navigation Menu](images/sql_9.png "Navigation menu")
+    ![Navigation Menu](images/sql_9.png "navigation menu")
 
 4. Navigate to **SQL Data**.
-    ![Navigation Menu](images/sql_10.png "Navigation menu")
+    ![Navigation Menu](images/sql_10.png "navigation menu")
 
 5. Click **Refresh** to display available tables.
-    ![Navigation Menu](images/sql_11.png "Navigation menu")
+    ![Navigation Menu](images/sql_11.png "navigation menu")
 
 6. Confirm that the expected tables are present.
 
