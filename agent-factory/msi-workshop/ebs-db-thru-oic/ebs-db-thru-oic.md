@@ -70,7 +70,7 @@ In the MCP Server component you will need to:
 
 **3.2 Agent Component**
 
-1. In the Agent, for the "Select LLM to use" field select the **msi-workshop (openai) LLM**.
+1. In the Agent, for the "Select LLM to use" field select the **xai.grok-4**.
 
 2. In the "Custom instructions" field for Agent copy/paste:
     ```
@@ -91,13 +91,23 @@ In the MCP Server component you will need to:
 
 ![Playground](./images/PAF-Playground.png " ")
 
-3. Add the following prompt:
+3. Add the following prompts one after the other:
 
     ```
     <copy>
-    TODO
+    Give me details for order 500000
     </copy>
     ```
+
+    ```
+    <copy>
+    Give me the ordered date and pricing date for order 500000
+    </copy>
+    ```
+
+Please see example output for the above prompts below.
+
+![Lab3-Task3](./images/Lab3-Task3-Output.png " ")
 
 
 Congratulations! You have successfully finished this lab.
