@@ -98,7 +98,7 @@ Data added from source tables is not stored in our DEMO\_IDX table. Only metadat
 
     But what if we want to see the actual data that was indexed? Although that's not stored in the table, there's a package DBMS\_SEARCH.GET\_DOCUMENT which, given the metadata, will go back to the original source table and reassemble the information that was indexed. This information is presented to the indexer in JSON format, so once again we'll need to use json_serialize to see it in human readable form:
 
-2.  This query selects all the information that was indexed. Copy the following and click the "Run" button:
+2. This query selects all the information that was indexed. Copy the following and click the "Run" button:
 
     ```
     <copy>
