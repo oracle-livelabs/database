@@ -55,8 +55,8 @@
           "filename": "../../property-graph/property-graph.md"
       },
       {
-          "title": "Lab: SQL Domains",
-          "description": "Using SQL Domains",
+          "title": "Lab: Data Use Case Domains",
+          "description": "Using Data Use Case Domains",
           "type": "livelabs",
           "filename": "../../domains/domains.md"
       },

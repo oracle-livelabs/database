@@ -139,7 +139,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method;",
+      "text": "%script\nSELECT AI AGENT What is Sarah Chens preferred contact method;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -267,7 +267,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method;",
+      "text": "%script\nSELECT AI AGENT What is Sarah Chens preferred contact method;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,

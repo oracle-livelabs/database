@@ -1,0 +1,34 @@
+{
+  "workshoptitle": "Build your first AI Agent with Oracle AI Database Private Agent Factory on OCI",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction to Oracle AI Database Private Agent Factory",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started/get-started.md"
+    },
+    {
+      "title": "Lab 1: Install and Configure",
+      "filename": "../../install/install.md"
+    },
+    {
+      "title": "Lab 2: Build your First Agent",
+      "filename": "../../prebuilt/prebuilt.md"
+    },
+    {
+      "title": "Lab 3: Bootstrap Agents with Templates",
+      "filename": "../../custom-templates/custom-templates.md"
+    },
+    {
+      "title": "Lab 4: Customize Agents from the Agent Builder UI",
+      "filename": "../../agent-builder/agent-builder.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "../../need_help/need_help.md"
+    }
+  ]
+}
