@@ -171,7 +171,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_TOOL',\n        attributes  => '{\"instruction\": \"Store a fact about a Seer Equity client for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history, etc), P_ABOUT (optional: the client name this fact is about, e.g. Sarah Chen). Use this when loan officers share important client information.\",\n                        \"function\": \"remember_fact\"}',\n        description => 'Stores facts about clients in long-term memory for future recall'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'REMEMBER_TOOL',\n        attributes  => '{\"instruction\": \"Store ONE fact about a Seer Equity client. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history), P_ABOUT (optional: client name, e.g. Sarah Chen). Call this tool ONCE per request, then stop and confirm to the user. Do not call any other tools after storing.\",\n                        \"function\": \"remember_fact\"}',\n        description => 'Stores facts about clients in long-term memory for future recall'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -203,7 +203,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve facts about Seer Equity clients from memory. Parameters: P_ABOUT (optional: client name to search for), P_CATEGORY (optional: filter by category like rate_exception). Use this when asked about a client you might have information about.\",\n                        \"function\": \"recall_facts\"}',\n        description => 'Retrieves stored facts about clients from long-term memory'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'RECALL_TOOL',\n        attributes  => '{\"instruction\": \"Retrieve facts about a Seer Equity client from memory. Parameters: P_ABOUT (optional: client name to search for), P_CATEGORY (optional: filter by category). Call this tool ONCE per request, then stop and return the results directly to the user. Do not call any other tools after retrieving.\",\n                        \"function\": \"recall_facts\"}',\n        description => 'Retrieves stored facts about clients from long-term memory'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -299,7 +299,7 @@
       }
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'MEMORY_TASK',\n        attributes  => '{\"instruction\": \"Process this loan officer request. If the loan officer shares information about a client worth remembering, call REMEMBER_TOOL to store it. If the loan officer asks a question about a client, call RECALL_TOOL to search memory first. Do not ask clarifying questions. User request: {query}\",\n                        \"tools\": [\"REMEMBER_TOOL\", \"RECALL_TOOL\"]}',\n        description => 'Task for memory-enabled loan conversations'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"MEMORY_AGENT\", \"task\": \"MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with memory-enabled agent'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'MEMORY_TASK',\n        attributes  => '{\"instruction\": \"Process this loan officer request using EXACTLY ONE tool call, then stop. If the request shares new information about a client, call REMEMBER_TOOL once and confirm the fact was stored. If the request asks a question about a client, call RECALL_TOOL once and return the results. Never chain tool calls together. User request: {query}\",\n                        \"tools\": [\"REMEMBER_TOOL\", \"RECALL_TOOL\"]}',\n        description => 'Task for memory-enabled loan conversations'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"MEMORY_AGENT\", \"task\": \"MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with memory-enabled agent'\n    );\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -363,7 +363,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Client Sarah Chen prefers to be contacted by email, not phone. Her timezone is Pacific;",
+      "text": "%script\nSELECT AI AGENT Sarah Chen prefers email over phone;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -389,7 +389,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Teach the Agent More</h2>\n\n<p>Add more information about the same client, including an important rate exception. The agent should store multiple facts.</p>"
+            "data": "<h2>Teach the Agent More</h2>\n\n<p>Add the client's rate discount. Keep this to a single fact so the agent makes one clean REMEMBER_TOOL call.</p>"
           }
         ]
       }
@@ -406,7 +406,7 @@
       }
     },
     {
-      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.\n\n**Watch for:** The agent should recall the email preference, timezone, client since 2018, and the 15% rate discount.",
+      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.\n\n**Watch for:** The agent should recall the email preference and the 15% rate discount.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -421,7 +421,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Ask What the Agent Knows</h2>\n\n<p>Now ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.</p>\n\n<p><strong>Watch for:</strong> The agent should recall the email preference, timezone, client since 2018, and the 15% rate discount.</p>"
+            "data": "<h2>Ask What the Agent Knows</h2>\n\n<p>Now ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.</p>\n\n<p><strong>Watch for:</strong> The agent should recall the email preference and the 15% rate discount.</p>"
           }
         ]
       }
