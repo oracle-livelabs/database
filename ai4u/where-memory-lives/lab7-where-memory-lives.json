@@ -105,16 +105,16 @@
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Teach the Agent More\n\nAdd a second fact about the same client. One fact per cell.\n\n**Watch for:** The agent should confirm it stored the rate discount.",
+      "text": "%md\n## Teach the Agent More\n\nAdd a second fact about the same client. One fact per cell.\n\n**Watch for:** The agent should confirm it stored the rate exception and timezone as two separate facts.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Teach the Agent More</h2>"}]}
     },
     {
-      "text": "%script\nSELECT AI AGENT Sarah Chen has a 15 percent rate discount;",
+      "text": "%script\nSELECT AI AGENT Sarah Chen has a 15 percent rate exception and her timezone is Pacific;",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL once and return all stored facts.\n\n**Watch for:** The agent should recall the email preference and the 15% rate discount.",
+      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL once and return all stored facts.\n\n**Watch for:** The agent should recall the email preference, 15% rate exception, and Pacific timezone.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Ask What the Agent Knows</h2>"}]}
     },
@@ -137,7 +137,7 @@
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Ask in the New Session</h2>"}]}
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate discount does she have;",
+      "text": "%script\nSELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate exception does she have;",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {

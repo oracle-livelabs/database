@@ -321,11 +321,11 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT Sarah Chen has a 15 percent rate discount;
+    SELECT AI AGENT Sarah Chen has a 15 percent rate exception and her timezone is Pacific;
     </copy>
     ```
 
-    **Watch for:** One tool call in the tool history, then the agent confirms what was stored.
+    **Watch for:** Two tool calls in the tool history — the agent splits the two facts and stores each separately.
 
 4. Ask about what it knows.
 
@@ -337,7 +337,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-    **Watch for:** The agent returns both the email preference and the 15% rate discount.
+    **Watch for:** The agent returns the email preference, 15% rate exception, and Pacific timezone.
 
 ## Task 8: Verify Persistence Across Sessions
 
@@ -358,7 +358,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate discount does she have;
+    SELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate exception does she have;
     </copy>
     ```
 
