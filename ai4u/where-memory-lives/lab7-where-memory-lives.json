@@ -24,7 +24,7 @@
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.\n\nThe function returns a JSON result confirming what was stored. This gives the agent a concrete, complete result to report back to the loan officer — the same pattern used by other tools in this workshop.",
+      "text": "%md\n## Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.\n\nThe function returns a JSON result confirming what was stored. This gives the agent a concrete, complete result to report back to the loan officer.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Create the Remember Function</h2>"}]}
     },
@@ -42,7 +42,7 @@
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Register the Remember Tool\n\nNow register the remember function as an agent tool. The instruction tells the agent what parameters to pass — the same pattern used throughout this workshop.",
+      "text": "%md\n## Register the Remember Tool\n\nNow register the remember function as an agent tool.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Register the Remember Tool</h2>"}]}
     },
@@ -51,7 +51,7 @@
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Register the Recall Tool\n\nRegister the recall function as an agent tool. The instruction tells the agent when to use it and what parameters are available.",
+      "text": "%md\n## Register the Recall Tool\n\nRegister the recall function as an agent tool.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Register the Recall Tool</h2>"}]}
     },
@@ -69,12 +69,12 @@
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Create the Seer Equity Memory Agent\n\nCreate an agent that knows how to use its memory tools. The role tells the agent to store client information with REMEMBER_TOOL and retrieve it with RECALL_TOOL.",
+      "text": "%md\n## Create the Seer Equity Memory Agent\n\nCreate an agent that knows how to use its memory tools.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Create the Seer Equity Memory Agent</h2>"}]}
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seer Equity. When loan officers share client information, store it with REMEMBER_TOOL and report what was stored. When they ask about a client, retrieve it with RECALL_TOOL and report what was found.\"}',\n        description => 'An agent with persistent memory for Seer Equity'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'MEMORY_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a loan officer assistant for Seer Equity. When loan officers share client information, call REMEMBER_TOOL and confirm to the user what was stored. When they ask about a client, call RECALL_TOOL and tell the user what was found.\"}',\n        description => 'An agent with persistent memory for Seer Equity'\n    );\nEND;\n/",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
@@ -83,7 +83,7 @@
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Create the Task and Team</h2>"}]}
     },
     {
-      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'MEMORY_TASK',\n        attributes  => '{\"instruction\": \"When the loan officer shares client information, call REMEMBER_TOOL with the fact, category, and client name, then report what was stored. When they ask about a client, call RECALL_TOOL with the client name, then report what was found. User request: {query}\",\n                        \"tools\": [\"REMEMBER_TOOL\", \"RECALL_TOOL\"]}',\n        description => 'Task for memory-enabled loan conversations'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"MEMORY_AGENT\", \"task\": \"MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with memory-enabled agent'\n    );\nEND;\n/",
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'MEMORY_TASK',\n        attributes  => '{\"instruction\": \"When the loan officer shares client information, call REMEMBER_TOOL with the fact, category, and client name. Then respond to the user confirming what was remembered. When they ask about a client, call RECALL_TOOL with the client name. Then respond to the user with the facts returned by the tool. User request: {query}\",\n                        \"tools\": [\"REMEMBER_TOOL\", \"RECALL_TOOL\"]}',\n        description => 'Task for memory-enabled loan conversations'\n    );\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'MEMORY_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"MEMORY_AGENT\", \"task\": \"MEMORY_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with memory-enabled agent'\n    );\nEND;\n/",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
@@ -96,7 +96,7 @@
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {
-      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and report back what was stored.\n\n**Watch for:** The agent should confirm it stored Sarah Chen's email preference.",
+      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm what was stored.\n\n**Watch for:** The agent should confirm it stored Sarah Chen's email preference.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Teach the Agent About a Client</h2>"}]}
     },
