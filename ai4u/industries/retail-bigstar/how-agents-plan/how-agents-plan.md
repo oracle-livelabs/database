@@ -1,4 +1,4 @@
-# How Agents Plan the Work
+# How Agents Plan Their Work at Big Star Collectibles
 
 ## Introduction
 
@@ -10,24 +10,26 @@ You'll give an agent a multi-step task and watch how it decomposes the work.
 
 ### The Business Problem
 
-At Big Star Collectibles, preparing for a client call is tedious. A inventory specialist needs to pull together information from multiple places:
+When an inventory specialist at Big Star Collectibles needs to prepare for a client call, they have to pull information from multiple places: client contact info, submission history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.
 
-- **Contact info**: How does this client prefer to be reached?
-- **Item history**: What submissions do they have pending?
-- **Rate eligibility**: What tier are they in?
-- **Credit information**: What credit tier applies?
+*"Give me a complete picture of Alex Martinez"* seems like a simple request, but it requires checking three different systems. The inventory specialists want an assistant that can gather all this information automatically.
 
 > *"Before every client call, I spend 10-15 minutes just gathering the information I need. By the time I'm ready, I've forgotten why they called."*
 >
 > Jennifer, Inventory Specialist
 
-The inventory specialists need an agent that can plan and execute a multi-step information retrieval: analyze what's needed, identify the right tools, determine the order, and synthesize the results.
-
 ### What You'll Learn
 
-This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Big Star Collectibles' "gathering" problem.
+In this lab, you'll see how agents *plan* before they act. When you ask for a "complete picture" of a client, the agent:
 
-**What you'll build:** A multi-tool agent that plans information retrieval for item collectors.
+1. Analyzes what information is needed
+2. Identifies which tools can provide that information
+3. Determines the optimal order to call them
+4. Executes the plan and synthesizes the results
+
+This planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.
+
+**What you'll build:** A multi-tool agent that plans and coordinates client information retrieval.
 
 Estimated Time: 10 minutes
 
@@ -50,17 +52,17 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-    ![Notebook Information](./images/task_1_1.png " ")
+    ![OML home page with Notebooks highlighted](images/task1_1.png " ")
 
 2. Click **Import** to expand the Import drop down.
 
-    ![Notebook Information](./images/task_1_2.png " ")
+    ![Notebooks page with Import button highlighted](images/task1_2.png " ")
 
 3. Select **Git**.
 
-    ![Notebook Information](./images/task_1_3.png " ")
+    ![Import dropdown with Git option highlighted](images/task1_3.png " ")
 
-4. Paste the following GitHub URL leaving the credential field blank:
+4. Paste the following GitHub URL leaving the credential field blank, then click **OK**.
 
     ```text
     <copy>
@@ -68,13 +70,9 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-    ![Notebook Information](./images/task_1_4.png " ")
+    ![Git Clone dialog with URL field and OK button highlighted](images/task1_5.png " ")
 
-5. Click **Ok**.
-
-    ![Notebook Information](./images/task_1_5.png " ")
-
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information, however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create a Multi-Tool Agent
 
@@ -82,114 +80,114 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 
 1. Create sample data tables.
 
-    First, we need some data for the agent to work with. We'll create two tables: one for collectors (with their contact info and credit tier) and one for their items.
+    First, we need some data for the agent to work with. We'll create two tables: one for collectors (with their contact info and credit tier) and one for their item submissions.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Collector table
+    -- Applicant table
     CREATE TABLE demo_collectors (
         collector_id    VARCHAR2(20) PRIMARY KEY,
         name            VARCHAR2(100),
         credit_tier     VARCHAR2(20),
-        contact_email   VARCHAR2(100),
-        contact_pref    VARCHAR2(20)
+        contact_email   VARCHAR2(100)
     );
 
-    INSERT INTO demo_collectors VALUES ('APP-001', 'Acme Corp', 'PREFERRED', 'sarah@acme.com', 'EMAIL');
-    INSERT INTO demo_collectors VALUES ('APP-002', 'TechStart', 'STANDARD', 'info@techstart.com', 'PHONE');
+    INSERT INTO demo_collectors VALUES ('COLL-001', 'Alex Martinez', 'PREFERRED', 'items@acme.com');
+    INSERT INTO demo_collectors VALUES ('COLL-002', 'Jennifer Morales', 'STANDARD', 'finance@techstart.com');
 
-    -- Item submission table
-    CREATE TABLE demo_items (
-        item_id       VARCHAR2(20) PRIMARY KEY,
-        collector_id  VARCHAR2(20),
-        status        VARCHAR2(30),
-        amount        NUMBER(12,2),
-        item_type     VARCHAR2(30),
-        rate          NUMBER(5,2)
+    -- Application table
+    CREATE TABLE demo_applications (
+        application_id  VARCHAR2(20) PRIMARY KEY,
+        collector_id    VARCHAR2(20),
+        item_status     VARCHAR2(20),
+        item_amount     NUMBER(12,2),
+        submission_date DATE
     );
 
-    INSERT INTO demo_items VALUES ('ITEM-100', 'APP-001', 'APPROVED', 150000, 'Business', 7.9);
-    INSERT INTO demo_items VALUES ('ITEM-101', 'APP-001', 'PENDING', 75000, 'Personal', 8.5);
-    INSERT INTO demo_items VALUES ('ITEM-102', 'APP-002', 'UNDER_REVIEW', 45000, 'Auto', 9.9);
+    INSERT INTO demo_applications VALUES ('ITEM-20260115-1042', 'COLL-001', 'APPROVED', 150000, SYSDATE - 2);
+    INSERT INTO demo_applications VALUES ('ITEM-20260114-0821', 'COLL-001', 'PENDING', 75000, SYSDATE);
+    INSERT INTO demo_applications VALUES ('ITEM-20260113-0905', 'COLL-002', 'APPROVED', 50000, SYSDATE - 5);
 
     COMMIT;
     </copy>
     ```
 
-    ![Task Information](./images/task_2_1.png " ")
+    ![CREATE TABLE demo_collectors and demo_applications with sample data inserted](images/task2_1.png " ")
 
 2. Create tool functions.
 
-    Now we create three different functions, each doing one specific job. This separation is important - instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.
+    Now we create three different functions, each doing one specific job. This separation is important — instead of one big function that does everything, we give the agent three focused tools. The agent will then decide which ones it needs based on what you ask.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    1. **get_collector**: Basic collector info (name, credit tier, email)
+    2. **get_collector_items**: Item submission history for a collector
+    3. **check_premium_tier**: Whether the collector qualifies for premium collector perks
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Tool 1: Look up collector
+    -- Tool 1: Look up applicant
     CREATE OR REPLACE FUNCTION get_collector(p_collector_id VARCHAR2) RETURN VARCHAR2 AS
         v_result VARCHAR2(500);
     BEGIN
-        SELECT 'Collector: ' || name || ', Credit Tier: ' || credit_tier || 
-               ', Contact: ' || contact_email || ' (' || contact_pref || ')'
+        SELECT 'Applicant: ' || name || ', Credit Tier: ' || credit_tier || ', Email: ' || contact_email
         INTO v_result FROM demo_collectors WHERE collector_id = p_collector_id;
         RETURN v_result;
-    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Collector not found: ' || p_collector_id;
+    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found: ' || p_collector_id;
     END;
     /
 
-    -- Tool 2: Get collector items
+    -- Tool 2: Get applicant items
     CREATE OR REPLACE FUNCTION get_collector_items(p_collector_id VARCHAR2) RETURN VARCHAR2 AS
         v_result CLOB := '';
         v_count NUMBER := 0;
     BEGIN
-        FOR rec IN (SELECT item_id, status, amount, item_type, rate 
-                    FROM demo_items WHERE collector_id = p_collector_id ORDER BY amount DESC) LOOP
-            v_result := v_result || rec.item_id || ': ' || rec.status || ', $' || rec.amount || 
-                       ' ' || rec.item_type || ' at ' || rec.rate || '%' || CHR(10);
+        FOR rec IN (SELECT application_id, item_status, item_amount, submission_date 
+                    FROM demo_applications WHERE collector_id = p_collector_id ORDER BY submission_date DESC) LOOP
+            v_result := v_result || rec.application_id || ': ' || rec.item_status || ', $' || TO_CHAR(rec.item_amount, '999,999') || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        IF v_count = 0 THEN RETURN 'No items found for collector.'; END IF;
-        RETURN 'Found ' || v_count || ' items:' || CHR(10) || v_result;
+        IF v_count = 0 THEN RETURN 'No item submissions found for applicant.'; END IF;
+        RETURN 'Found ' || v_count || ' item submissions:' || CHR(10) || v_result;
     END;
     /
 
-    -- Tool 3: Check rate eligibility
-    CREATE OR REPLACE FUNCTION check_rate_eligibility(p_collector_id VARCHAR2) RETURN VARCHAR2 AS
+    -- Tool 3: Check if applicant is eligible for premium collector perks
+    CREATE OR REPLACE FUNCTION check_premium_tier(p_collector_id VARCHAR2) RETURN VARCHAR2 AS
         v_tier VARCHAR2(20);
     BEGIN
         SELECT credit_tier INTO v_tier FROM demo_collectors WHERE collector_id = p_collector_id;
         IF v_tier = 'PREFERRED' THEN
-            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% loyalty pricing tier. Up to $500K limit.';
-        ELSIF v_tier = 'STANDARD' THEN
-            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% loyalty pricing tier. Up to $100K limit.';
+            RETURN 'ELIGIBLE: Applicant has Preferred credit tier - qualifies for premium collector perks (7.9% APR).';
         ELSE
-            RETURN 'SUBPRIME RATES: Rates starting at 14.9% loyalty pricing tier. Up to $25K limit.';
+            RETURN 'NOT ELIGIBLE: Applicant has ' || v_tier || ' credit tier - standard rates apply (12.9% APR).';
         END IF;
-    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Collector not found.';
+    EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found.';
     END;
     /
     </copy>
     ```
 
-    ![Task Information](./images/task_2_2.png " ")
+    ![Function GET_COLLECTOR compiled, Function GET_COLLECTOR_ITEMS compiled, Function CHECK_PREMIUM_TIER compiled](images/task2_2a.png " ")
+
+    ![Compilation output showing all three functions successfully compiled](images/task2_2b.png " ")
 
 3. Register the tools.
 
-    Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit - the better the instructions, the smarter the agent's choices.
+    Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit — the better the instructions, the smarter the agent's choices.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'GET_COLLECTOR_TOOL',
-            attributes  => '{"instruction": "Get collector details by ID. Parameter: P_COLLECTOR_ID (e.g. APP-001). Returns name, credit tier, and contact info.",
+            attributes  => '{"instruction": "Get collector details by ID. Parameter: P_APPLICANT_ID (e.g. COLL-001). Returns name, credit tier, and email.",
                             "function": "get_collector"}',
-            description => 'Retrieves collector name, credit tier, and contact preferences'
+            description => 'Retrieves applicant name, credit tier, and contact email'
         );
     END;
     /
@@ -197,40 +195,40 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'GET_ITEMS_TOOL',
-            attributes  => '{"instruction": "Get all items for an collector. Parameter: P_COLLECTOR_ID (e.g. APP-001). Returns item IDs, statuses, amounts, and rates.",
+            attributes  => '{"instruction": "Get all item submissions for an applicant. Parameter: P_APPLICANT_ID (e.g. COLL-001). Returns application IDs, statuses, and amounts.",
                             "function": "get_collector_items"}',
-            description => 'Retrieves collector item history with status and rates'
+            description => 'Retrieves applicant item submission history with status and amounts'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'CHECK_RATES_TOOL',
-            attributes  => '{"instruction": "Check rate eligibility for an collector. Parameter: P_COLLECTOR_ID (e.g. APP-001). Returns eligible rate tier and limits.",
-                            "function": "check_rate_eligibility"}',
-            description => 'Checks what rate tier the collector qualifies for'
+            tool_name   => 'CHECK_PREMIUM_TOOL',
+            attributes  => '{"instruction": "Check if applicant qualifies for premium item rates. Parameter: P_APPLICANT_ID (e.g. COLL-001). Returns ELIGIBLE or NOT ELIGIBLE with rate information.",
+                            "function": "check_premium_tier"}',
+            description => 'Checks if applicant credit tier qualifies for premium collector perks'
         );
     END;
     /
     </copy>
     ```
 
-    ![Task Information](./images/task_2_3.png " ")
+    ![CREATE_TOOL for GET_COLLECTOR_TOOL, GET_ITEMS_TOOL, CHECK_PREMIUM_TOOL — 3× PL/SQL procedure successfully completed](images/task2_3.png " ")
 
-4. Create the agent and team.
+4. Create the agent, task, and team.
 
     Now we create the agent with access to all three tools. When you ask a question, the agent will look at its available tools and plan which ones to use. A simple question might need just one tool; a complex question might need all three.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
-            agent_name  => 'PLANNING_AGENT',
+            agent_name  => 'COLLECTOR_PLANNING_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a inventory specialist assistant for Big Star Collectibles. Use your tools to look up collector information, item history, and rate eligibility. Always use the tools - never guess or make up information."}',
+                            "role": "You are a inventory specialist assistant for Big Star Collectibles. Use your tools to look up applicant information, submission history, and rate eligibility. Always use the tools - never guess or make up information."}',
             description => 'Agent that plans multi-step responses'
         );
     END;
@@ -238,9 +236,9 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
-            task_name   => 'PLANNING_TASK',
-            attributes  => '{"instruction": "Answer inventory specialist inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
-                            "tools": ["GET_COLLECTOR_TOOL", "GET_ITEMS_TOOL", "CHECK_RATES_TOOL"]}',
+            task_name   => 'COLLECTOR_PLANNING_TASK',
+            attributes  => '{"instruction": "Answer collector inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
+                            "tools": ["GET_COLLECTOR_TOOL", "GET_ITEMS_TOOL", "CHECK_PREMIUM_TOOL"]}',
             description => 'Task with multiple tools for planning demonstration'
         );
     END;
@@ -248,8 +246,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'PLANNING_TEAM',
-            attributes  => '{"agents": [{"name": "PLANNING_AGENT", "task": "PLANNING_TASK"}],
+            team_name   => 'COLLECTOR_PLANNING_TEAM',
+            attributes  => '{"agents": [{"name": "COLLECTOR_PLANNING_AGENT", "task": "COLLECTOR_PLANNING_TASK"}],
                             "process": "sequential"}',
             description => 'Team demonstrating agent planning'
         );
@@ -258,28 +256,28 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     </copy>
     ```
 
-    ![Task Information](./images/task_2_4.png " ")
+    ![CREATE_AGENT COLLECTOR_PLANNING_AGENT, CREATE_TASK COLLECTOR_PLANNING_TASK, CREATE_TEAM COLLECTOR_PLANNING_TEAM — all PL/SQL procedures successfully completed](images/task2_4.png " ")
 
 ## Task 3: Observe Single-Tool Planning
 
-Let's start with a simple request that needs only one tool.
+Let's start with a simple request that only needs one tool. The agent should plan to use just `GET_COLLECTOR_TOOL`.
 
 1. Set the team and ask a simple question.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
-    SELECT AI AGENT Who is collector APP-001;
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('COLLECTOR_PLANNING_TEAM');
+    SELECT AI AGENT Who is applicant COLL-001;
     </copy>
     ```
 
-    ![Task Information](./images/task_3_1.png " ")
+    ![SET_TEAM and SELECT AI AGENT query returning Alex Martinez details with credit tier PREFERRED and email items@acme.com](images/task3_1.png " ")
 
 2. Check the tool history to see the plan execution.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -293,29 +291,29 @@ Let's start with a simple request that needs only one tool.
     </copy>
     ```
 
-    ![Task Information](./images/task_3_2.png " ")
+    ![Tool history showing GET_COLLECTOR_TOOL was the only tool called for the simple question](images/task3_2.png " ")
 
-    **Observe:** The agent planned to use just `GET_COLLECTOR_TOOL` because that's all the question required.
+    **Observe:** The agent planned to use just `GET_COLLECTOR_TOOL` because that's all the question required. You can see exactly one tool call in the history.
 
 ## Task 4: Observe Multi-Tool Planning
 
-Now let's ask a question that requires multiple tools, just like a inventory specialist preparing for a client call.
+Now let's ask a question that requires multiple tools — just like an inventory specialist preparing for a client call.
 
-1. Ask a complex question.
+1. Ask a complex question requiring all three tools.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT Give me a complete picture of collector APP-001 including their items and rate eligibility;
+    SELECT AI AGENT Give me a complete picture of applicant COLL-001 including their submission history and rate eligibility;
     </copy>
     ```
 
-    ![Task Information](./images/task_4_1.png " ")
+    ![Agent response synthesizing all three data sources: collector details, submission history, and premium rate eligibility](images/task4_1.png " ")
 
-2. Check the tool history.
+2. Check the tool history to see the full plan.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -329,30 +327,30 @@ Now let's ask a question that requires multiple tools, just like a inventory spe
     </copy>
     ```
 
-    ![Task Information](./images/task_4_2.png " ")
+    ![Tool history showing CHECK_PREMIUM_TOOL, GET_ITEMS_TOOL, and GET_COLLECTOR_TOOL all called in sequence](images/task4_2.png " ")
 
-    **Observe:** The agent planned to use multiple tools:
-    - `GET_COLLECTOR_TOOL` to get basic info
-    - `GET_ITEMS_TOOL` to get item history
-    - `CHECK_RATES_TOOL` to verify rate eligibility
+    **Observe:** The agent planned to use all three tools:
+    - `GET_COLLECTOR_TOOL` to get basic collector info
+    - `GET_ITEMS_TOOL` to get submission history
+    - `CHECK_PREMIUM_TOOL` to verify rate eligibility
 
-3. Notice the sequence - the agent determined the logical order.
+    The agent determined the logical order on its own. This is what replaces Jennifer's 10-15 minute manual prep.
 
 ## Task 5: See How Instructions Shape Planning
 
-The task instruction guides how the agent plans. Let's modify it.
+The task instruction guides how the agent plans. Let's create a new task with an explicit, prescribed sequence and see how that changes behavior.
 
-1. Create a more specific task.
+1. Create a structured task with explicit ordering.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'STRUCTURED_TASK',
-            attributes  => '{"instruction": "For collector inquiries, ALWAYS follow this exact sequence: 1. First, look up the collector using GET_COLLECTOR_TOOL 2. Then, get their items using GET_ITEMS_TOOL 3. Finally, check rate eligibility using CHECK_RATES_TOOL. Report all findings. User request: {query}",
-                            "tools": ["GET_COLLECTOR_TOOL", "GET_ITEMS_TOOL", "CHECK_RATES_TOOL"]}',
+            attributes  => '{"instruction": "For applicant inquiries, ALWAYS follow this exact sequence: 1. First, look up the applicant using GET_COLLECTOR_TOOL 2. Then, get their submission history using GET_ITEMS_TOOL 3. Finally, check premium rate eligibility using CHECK_PREMIUM_TOOL. Report all findings. User request: {query}",
+                            "tools": ["GET_COLLECTOR_TOOL", "GET_ITEMS_TOOL", "CHECK_PREMIUM_TOOL"]}',
             description => 'Task with explicit planning instructions'
         );
     END;
@@ -360,10 +358,10 @@ The task instruction guides how the agent plans. Let's modify it.
 
     -- Update the team to use the new task
     BEGIN
-        DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);
+        DBMS_CLOUD_AI_AGENT.DROP_TEAM('COLLECTOR_PLANNING_TEAM', TRUE);
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
-            team_name   => 'PLANNING_TEAM',
-            attributes  => '{"agents": [{"name": "PLANNING_AGENT", "task": "STRUCTURED_TASK"}],
+            team_name   => 'COLLECTOR_PLANNING_TEAM',
+            attributes  => '{"agents": [{"name": "COLLECTOR_PLANNING_AGENT", "task": "STRUCTURED_TASK"}],
                             "process": "sequential"}',
             description => 'Team with structured planning'
         );
@@ -372,24 +370,26 @@ The task instruction guides how the agent plans. Let's modify it.
     </copy>
     ```
 
-    ![Task Information](./images/task_5_1.png " ")
+    ![CREATE_TASK STRUCTURED_TASK and DROP/recreate COLLECTOR_PLANNING_TEAM pointing to STRUCTURED_TASK — PL/SQL procedures successfully completed](images/task5_1.png " ")
 
-2. Test with the structured instructions.
+2. Test with a simple question under structured instructions.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Even though "tell me about" could be answered with just collector info, the structured task will force all three tools to run in the prescribed order.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
-    SELECT AI AGENT Tell me about collector APP-001;
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('COLLECTOR_PLANNING_TEAM');
+    SELECT AI AGENT Tell me about applicant COLL-001;
     </copy>
     ```
 
-    ![Task Information](./images/task_5_2.png " ")
+    ![SET_TEAM and SELECT AI AGENT query — full response with all three tools fired showing collector details, submissions, and premium eligibility](images/task5_2.png " ")
 
-3. Check the tool history again.
+3. Verify the explicit plan was followed.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -402,51 +402,49 @@ The task instruction guides how the agent plans. Let's modify it.
     </copy>
     ```
 
-    ![Task Information](./images/task_5_3.png " ")
+    ![Tool history showing CHECK_PREMIUM_TOOL 18:33:31, GET_ITEMS_TOOL 18:33:26, GET_COLLECTOR_TOOL 18:33:18 in order](images/task5_3.png " ")
 
-    **Observe:** The agent followed the explicit plan: collector first, then items, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
+    **Observe:** The agent followed the explicit plan — collector first, then items, then premium eligibility — exactly as specified in the task instructions. This is how you guarantee consistent, auditable behavior regardless of how a question is phrased.
 
-## Task 6: Understand Why Planning Matters
+## Task 6: Review the Full Execution Timeline
 
-Planning provides:
+Every tool call is logged with start and end times. Query the complete execution history to see the full picture of what the agent planned and executed across all the tasks in this lab.
 
-1. **Predictability**: You can anticipate what the agent will do
-2. **Debuggability**: When something goes wrong, you can see where
-3. **Efficiency**: The agent gathers what it needs without redundant calls
-4. **Control**: You shape the plan through instructions
+1. Query the complete tool execution timeline.
 
-    Query the complete execution sequence:
-
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     SELECT 
-    tool_name,
-    TO_CHAR(start_date, 'HH24:MI:SS') as started,
-    TO_CHAR(end_date, 'HH24:MI:SS') as ended
+        tool_name,
+        TO_CHAR(start_date, 'HH24:MI:SS') as started,
+        TO_CHAR(end_date, 'HH24:MI:SS') as ended
     FROM USER_AI_AGENT_TOOL_HISTORY
     ORDER BY start_date DESC
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-    ![Task Information](./images/task_6_1.png " ")
+    ![Full tool history showing CHECK_PREMIUM_TOOL, GET_ITEMS_TOOL, and GET_COLLECTOR_TOOL calls with started and ended timestamps across all lab queries](images/task6_1.png " ")
 
-    ## Summary
+    **Observe:** The timeline shows every tool that was called, in what order, and how long each one took. For Big Star Collectibles, this is your audit trail — you can see exactly what the agent did and when.
 
-    In this lab, you observed how agents plan their work:
+## Summary
 
-    * Created an agent with multiple tools
-    * Watched the agent choose tools based on the question
-    * Saw how multi-step questions trigger multi-tool plans
-    * Learned how instructions shape the planning process
+In this lab, you observed how agents plan their work:
 
-    **Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Big Star Collectibles, this means inventory specialists get complete client summaries in seconds, not minutes.
+* Created a multi-tool agent with `GET_COLLECTOR_TOOL`, `GET_ITEMS_TOOL`, and `CHECK_PREMIUM_TOOL`
+* Watched the agent choose tools based on the complexity of the question
+* Saw how multi-step questions trigger multi-tool plans
+* Learned how explicit task instructions shape and enforce the planning process
+* Reviewed the full execution timeline in `USER_AI_AGENT_TOOL_HISTORY`
 
-    ## Learn More
+**Key takeaway:** Planning is what makes agents predictable. Before any action happens, the agent knows the path. You can see that path in the history views. For Big Star Collectibles, this means inventory specialists get complete client summaries in seconds instead of minutes — and every step is logged for compliance.
 
-    * [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+## Learn More
+
+* [`DBMS_CLOUD_AI_AGENT` Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 
 ## Acknowledgements
 
@@ -455,23 +453,23 @@ Planning provides:
 
 ## Cleanup (Optional)
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+> This command is already in your notebook — just click the play button (▶) to run it.
 
-    ```sql
-    <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('PLANNING_TEAM', TRUE);
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('PLANNING_TASK', TRUE);
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_COLLECTOR_TOOL', TRUE);
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ITEMS_TOOL', TRUE);
-    EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RATES_TOOL', TRUE);
-    DROP TABLE demo_items PURGE;
-    DROP TABLE demo_collectors PURGE;
-    DROP FUNCTION get_collector;
-    DROP FUNCTION get_collector_items;
-    DROP FUNCTION check_rate_eligibility;
-    </copy>
-    ```
+```sql
+<copy>
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('COLLECTOR_PLANNING_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('COLLECTOR_PLANNING_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('COLLECTOR_PLANNING_AGENT', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_COLLECTOR_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_ITEMS_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_PREMIUM_TOOL', TRUE);
+DROP TABLE demo_applications PURGE;
+DROP TABLE demo_collectors PURGE;
+DROP FUNCTION get_collector;
+DROP FUNCTION get_collector_items;
+DROP FUNCTION check_premium_tier;
+</copy>
+```
 
-    ![Cleanup](./images/cleanup.png " ")
+![Cleanup — all objects dropped, PL/SQL procedures successfully completed](images/cleanup.png " ")

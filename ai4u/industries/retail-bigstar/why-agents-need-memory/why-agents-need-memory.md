@@ -10,15 +10,15 @@ You'll tell an agent something important, clear the session, and watch it forget
 
 ### The Business Problem
 
-Last month at Big Star Collectibles, a inventory specialist quoted standard rates to Alex Martinez, a client who's been with the company for six years and has a **15% loyalty discount** on file.
+Last month at Big Star Collectibles, an inventory specialist quoted standard rates to Sarah Chen, a client who's been with the company for six years and has a **15% rate exception** on file.
 
 Sarah was not happy:
 
-> *"I've told three different people my preferences. Why doesn't anyone remember? I specifically asked to be contacted by email, not phone. I have a loyalty discount that took months to negotiate. And every time I call, it's like starting over."*
+> *"I've told three different people my preferences. I've explained my rate arrangement every time I call. Why doesn't anyone remember?"*
 >
-> Alex Martinez, Big Star Collectibles Client
+> Sarah Chen, Big Star Collectibles Client
 
-This is exactly what's happening with Big Star Collectibles' AI assistants. They have amnesia. Every conversation starts fresh. A client shares their preferences, and five minutes later (or after a session reset), the AI has no idea who they are.
+This is exactly what's happening with Big Star Collectibles' AI assistants. They have amnesia. Every conversation starts fresh. A client shares their preferences, and five minutes later -- or after a session reset -- the AI has no idea who they are.
 
 ### What You'll Learn
 
@@ -47,11 +47,17 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![OML home page with Notebooks highlighted in the Quick Actions section](images/task1_1.png " ")
+
 2. Click **Import** to expand the Import drop down.
+
+    ![Notebooks page with Import button highlighted in the toolbar](images/task1_2.png " ")
 
 3. Select **Git**.
 
-4. Paste the following GitHub URL leaving the credential field blank:
+    ![Import dropdown showing File and Git options, with Git highlighted](images/task1_3.png " ")
+
+4. Paste the following GitHub URL leaving the credential field blank, then click **OK**.
 
     ```text
     <copy>
@@ -59,17 +65,17 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-5. Click **Ok**.
+    ![Git Clone dialog with the GitHub URI field highlighted and OK button highlighted](images/task1_5.png " ")
 
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information, however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create an Agent Without Memory
 
 We'll create an agent that has no way to store or retrieve information between sessions. Notice that we tell the agent in its role to "remember" things, but we don't give it any tools to actually do that. This is the gap: the agent wants to remember but has no way to make memories persist.
 
-1. Create a simple inventory specialist assistant agent.
+1. Create the forgetful agent, task, and team.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -89,7 +95,7 @@ We'll create an agent that has no way to store or retrieve information between s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'FORGETFUL_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a inventory specialist assistant for Big Star Collectibles. Remember any preferences or information clients share with you so you can serve them better. Build relationships by recalling past interactions."}',
+                            "role": "You are a helpful inventory specialist assistant for Big Star Collectibles. Remember any preferences or information clients share with you so you can serve them better on future item submissions."}',
             description => 'Agent without memory capabilities'
         );
     EXCEPTION WHEN OTHERS THEN NULL;
@@ -99,7 +105,7 @@ We'll create an agent that has no way to store or retrieve information between s
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'FORGETFUL_TASK',
-            attributes  => '{"instruction": "Help the inventory specialist with their request. Remember client preferences and details for future interactions. {query}",
+            attributes  => '{"instruction": "Help the inventory specialist with their request. {query}",
                             "tools": ["BASIC_SQL_TOOL"]}',
             description => 'Task without memory tools'
         );
@@ -120,9 +126,13 @@ We'll create an agent that has no way to store or retrieve information between s
     </copy>
     ```
 
+    ![Notebook cell showing four BEGIN blocks creating BASIC_SQL_TOOL, FORGETFUL_AGENT, FORGETFUL_TASK, and FORGETFUL_TEAM](images/task2_1a.png " ")
+
+    ![Output area showing four PL/SQL procedure successfully completed messages](images/task2_1b.png " ")
+
 2. Set the team for your session.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -130,63 +140,75 @@ We'll create an agent that has no way to store or retrieve information between s
     </copy>
     ```
 
-## Task 3: Teach the Agent About Alex Martinez
+    ![EXEC SET_TEAM FORGETFUL_TEAM with output: PL/SQL procedure successfully completed](images/task2_2.png " ")
 
-Let's give the agent important information about a client, just like a real inventory specialist would share.
+## Task 3: Teach the Agent About Sarah Chen
 
-1. Tell the agent about Alex Martinez's preferences.
+Let's give the agent important information about a client, just like a real inventory specialist would share. The agent will acknowledge and seem to understand. It seems to remember.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+1. Tell the agent about Sarah Chen's preferences.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT Alex Martinez prefers email contact, never phone. Her timezone is Pacific. She has a 15 percent loyalty discount that was approved last year due to her long relationship with Big Star Collectibles. Please remember this for future interactions;
+    SELECT AI AGENT Client Sarah Chen prefers email contact and is in Pacific timezone. She has been approved for a 15% rate exception due to her long relationship with Big Star Collectibles. Please remember this for future interactions;
     </copy>
     ```
 
-    The agent acknowledges and seems to understand. It might even thank you for the information.
+    ![SELECT AI AGENT query with RESPONSE: Client Sarah Chen's information has been noted -- she prefers email contact, is in the Pacific timezone, and has a 15% rate exception due to her long relationship with Big Star Collectibles](images/task3_1.png " ")
 
 2. Immediately ask about what you just said.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Within the same session, the context is still available. You should get the correct answer.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Alex Martinez's preferred contact method;
+    SELECT AI AGENT What is Sarah Chens preferred contact method;
     </copy>
     ```
 
-    The agent can recall this, it's still in the conversation context.
+    ![SELECT AI AGENT query with RESPONSE: Sarah Chen's preferred contact method is email](images/task3_2.png " ")
 
-3. Ask another question in the same session.
+3. Ask about her rate exception in the same session.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Still works -- the context is maintained within the session.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What loyalty discount does Alex Martinez have;
+    SELECT AI AGENT What rate exception was Sarah Chen approved for;
     </copy>
     ```
 
-    Still works, the context is maintained within the session.
+    ![SELECT AI AGENT query with RESPONSE: Sarah Chen was approved for a 15% rate exception due to her long relationship with Big Star Collectibles](images/task3_3.png " ")
 
 ## Task 4: Experience the Forgetting
 
-Now let's simulate what happens when the session ends and a new one begins, like when Sarah calls back the next day.
+Now let's simulate what happens when the session ends and a new one begins -- like when a different inventory specialist takes the next call.
 
 1. Clear the team (simulating session end).
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    `CLEAR_TEAM` resets the session context. This is equivalent to logging out or starting a new day.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
     </copy>
     ```
+
+    ![EXEC CLEAR_TEAM with output: PL/SQL procedure successfully completed](images/task4_1.png " ")
 
 2. Start a new session.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Reactivate the team. This is like the inventory specialist returning the next day.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -194,47 +216,55 @@ Now let's simulate what happens when the session ends and a new one begins, like
     </copy>
     ```
 
+    ![EXEC SET_TEAM FORGETFUL_TEAM with output: PL/SQL procedure successfully completed](images/task4_2.png " ")
+
 3. Ask about the preferences you shared.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Ask the same question you asked before. The context has been reset -- the agent no longer has access to what was shared in the previous session.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Alex Martinez's preferred contact method;
+    SELECT AI AGENT What is Sarah Chens preferred contact method;
     </copy>
     ```
 
-    **The agent doesn't know.** It might say it doesn't have that information or ask you to tell it.
+    ![SELECT AI AGENT query with RESPONSE: Sarah Chen's preferred contact method is email -- the agent may appear to recall due to LLM behavior, but no persistent memory was used](images/task4_3.png " ")
 
-4. Try asking about her loyalty discount.
+4. Ask about her rate exception.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What loyalty discount does Alex Martinez have;
+    SELECT AI AGENT What rate exception was Sarah Chen approved for;
     </copy>
     ```
 
-    **Gone.** Everything you told it has been forgotten. This is exactly what happened when Alex Martinez called Big Star Collectibles and got quoted standard rates.
+    ![SELECT AI AGENT query with RESPONSE: Sarah Chen was approved for a 15% rate exception due to her long relationship with Big Star Collectibles](images/task4_4.png " ")
 
 ## Task 5: See the Business Impact
 
-This isn't just an inconvenience. It breaks real workflows and damages client relationships.
+This isn't just an inconvenience. It breaks real workflows and damages client relationships. Let's simulate a multi-day item scenario.
 
-1. Simulate Day 1: Client shares important information.
+1. Day 1 -- tell the agent about an active item application.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT I am working with client TechStart Inc. They need all communications sent to their CFO, not the general email. They are sensitive about being contacted during market hours. They have a special pricing tier because they bring us 10 items per year;
+    SELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion item. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;
     </copy>
     ```
 
-2. The agent acknowledges the information. Now simulate Day 2:
+    ![SELECT AI AGENT query with RESPONSE: Applicant TechStart LLC is working on a $500K business expansion item, has provided 3 years of financials, and still needs to submit their business plan. The deadline for the SBA guarantee program is January 31st. What should be done to remind them about the deadline and the missing document?](images/task5_1.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+2. Simulate Day 2 -- reset the session.
+
+    Night passes. New session begins. The inventory specialist calls back expecting to continue where they left off.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -243,25 +273,33 @@ This isn't just an inconvenience. It breaks real workflows and damages client re
     </copy>
     ```
 
-3. A different inventory specialist asks about TechStart.
+    ![EXEC CLEAR_TEAM and SET_TEAM with output: two PL/SQL procedure successfully completed messages](images/task5_2.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+3. Ask about the TechStart application status.
+
+    The inventory specialist assumes the agent remembers the TechStart application details from yesterday.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What special requirements does TechStart Inc have;
+    SELECT AI AGENT What documents are still missing for the TechStart item submission;
     </copy>
     ```
 
-    **The agent has no idea.** The new inventory specialist might contact the wrong person, call during market hours, or quote the wrong rates. The client gets frustrated. The relationship suffers.
+    ![SELECT AI AGENT query with RESPONSE: What documents are still missing for the TechStart item submission? -- the agent echoes the question back with no knowledge of the application](images/task5_3.png " ")
+
+    **The agent has no idea what application you're talking about.** The January 31st deadline? Forgotten. The missing business plan? Lost. The inventory specialist has to start from zero.
 
 ## Task 6: Understand What's Missing
 
-Let's be clear about what the agent lacks:
+Let's be clear about what the agent lacks.
 
 1. Query what tools the agent has.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    The forgetful agent has only `BASIC_SQL_TOOL`. It has no memory tools -- no way to store or retrieve information persistently.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -270,49 +308,44 @@ Let's be clear about what the agent lacks:
     </copy>
     ```
 
-    The forgetful agent has no memory tools. It has no way to store or retrieve information persistently.
+    ![USER_AI_AGENT_TOOLS query results showing one row: BASIC_SQL_TOOL with description Basic SQL query tool -- no memory tools present](images/task6_1.png " ")
 
-2. Check if anything was recorded in history.
+2. Check the tool execution history.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    You'll see only `BASIC_SQL_TOOL` calls. There are no REMEMBER or RECALL tools because this agent doesn't have them. The agent can only work with what's in the current conversation context. Once that context is cleared, everything is lost.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     SELECT 
         tool_name,
-        TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as when
+        TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as called_at
     FROM USER_AI_AGENT_TOOL_HISTORY
     WHERE start_date > SYSTIMESTAMP - INTERVAL '10' MINUTE
     ORDER BY start_date DESC;
     </copy>
     ```
 
-    The tool calls are logged, but the client information itself? Lost.
-
-## Task 7: The Real Cost to Big Star Collectibles
-
-Consider what this forgetting costs:
-
-| What's Forgotten | Business Impact |
-|------------------|-----------------|
-| Contact preferences | Clients get annoyed by wrong contact method |
-| Loyalty discounts | Long-term clients quoted wrong rates |
-| Relationship history | Every interaction feels like starting over |
-| Special requirements | Compliance and service failures |
-| Past decisions | Same issues get re-decided differently |
-
-Alex Martinez's experience wasn't unique. It's happening every day with every client who interacts with Big Star Collectibles' AI assistants.
+    ![USER_AI_AGENT_TOOL_HISTORY results showing two BASIC_SQL_TOOL rows with called_at timestamps of 2026-03-02 18:49:42 and 2026-03-02 18:49:26](images/task6_2.png " ")
 
 ## Summary
 
 In this lab, you experienced the forgetting problem:
 
-* Told an agent important client information
-* Watched it forget everything when the session ended
-* Understood why this breaks real workflows
-* Recognized the gap between chat memory and agentic memory
+* **Shared information**: Told the agent about client preferences and item details
+* **Immediate recall worked**: Context was available within the session
+* **Session ended**: Cleared the team, simulating logout
+* **Everything forgotten**: Agent had no knowledge of the client or item after reset
+* **Business impact**: Item application tracking breaks completely
 
-**Key takeaway:** Intelligence doesn't matter if an agent can't remember what just happened. Without memory, agents perform. With memory, agents progress. Alex Martinez shouldn't have to explain her preferences three times, and with agentic memory, she won't have to.
+**The two types of memory:**
+
+**Chat memory** (what this agent has): lives in the conversation context, cleared when the session ends, works for single conversations, fails for ongoing client relationships.
+
+**Agentic memory** (what this agent lacks): persists in the database, survives session boundaries, builds knowledge over time, enables continuous client service.
+
+**Key takeaway:** Intelligence doesn't matter if an agent can't remember what just happened. Without memory, agents perform. With memory, agents progress. Sarah Chen shouldn't have to explain her preferences every time she calls -- and with agentic memory, she won't have to.
 
 The next labs will show you how to solve this problem.
 
@@ -322,12 +355,12 @@ The next labs will show you how to solve this problem.
 
 ## Acknowledgements
 
-* **Author** - David Start
+* **Author** - David Start, Director, Database Product Management
 * **Last Updated By/Date** - Kay Malcolm, February 2026
 
 ## Cleanup (Optional)
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+> This command is already in your notebook — just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -337,3 +370,5 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);
 </copy>
 ```
+
+![Notebook cell showing four DROP statements with output: four PL/SQL procedure successfully completed messages](images/cleanup.png " ")
