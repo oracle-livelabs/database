@@ -101,7 +101,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
 
 1. Create the function to store facts.
 
-    The function returns a neutral `DONE` status rather than echoing back the stored fact. This is important: if the function echoed the fact back, the agent would see client data in the tool result and call the tool again, creating an infinite loop.
+    The function returns `Answer: fact stored.` The Oracle Select AI Agent framework uses a ReAct loop that terminates when it detects the keyword **Answer** in a tool result. Without it, the framework keeps looping waiting for a final answer signal. The `Answer:` prefix is the specific termination keyword the framework checks for.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -127,7 +127,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
         );
         COMMIT;
         
-        RETURN 'DONE';
+        RETURN 'Answer: fact stored.';
     END;
     /
     </copy>
