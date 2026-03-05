@@ -156,11 +156,11 @@ Notice the constraints on `item_applications` - these are your database-level sa
 Insert the business rules that control what happens to each item submission. These rules are stored as JSON, making them easy to modify without changing code.
 
 The rules are evaluated in priority order (lowest number first):
-1. **Block** applications with credit score below 550 - too high risk for automated processing
-2. **Require review** for items $50,000 or more - significant exposure needs human judgment
-3. **Require review** for any authenticating - complex product requires appraiser
-4. **Require review** for credit scores 550-650 - borderline creditworthiness
-5. **Auto-approve** everything else - low-risk collector_card/limited_art items with good credit
+*. **Block** applications with credit score below 550 - too high risk for automated processing
+*. **Require review** for items $50,000 or more - significant exposure needs human judgment
+*. **Require review** for any authenticating - complex product requires appraiser
+*. **Require review** for credit scores 550-650 - borderline creditworthiness
+*. **Auto-approve** everything else - low-risk collector_card/limited_art items with good credit
 
 This priority order matters! A $30K collector_card item with a 600 credit score hits rule 4 before rule 5.
 
