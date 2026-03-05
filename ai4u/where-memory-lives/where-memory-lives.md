@@ -78,7 +78,7 @@ The memory table is the foundation, where the agent stores everything it learns.
     <copy>
     CREATE TABLE agent_memory (
         memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
-        agent_id       VARCHAR2(100) DEFAULT 'DEFAULT_AGENT',
+        agent_id       VARCHAR2(100) DEFAULT 'SEERS_AGENT',
         memory_type    VARCHAR2(20) DEFAULT 'FACT',
         content        JSON NOT NULL,
         created_at     TIMESTAMP DEFAULT SYSTIMESTAMP
@@ -103,7 +103,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
 
 1. Create the function to store facts.
 
-    The function takes a fact (the information), an optional category (like "preference" or "contact"), and an optional "about" field (who or what this fact relates to). It stores everything as JSON and returns a confirmation.
+    The function takes a fact (the information), an optional category (like "rate_exception" or "contact_preference"), and an optional "about" field (who this fact relates to). It stores everything as JSON and returns a confirmation.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -123,7 +123,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
                 'fact'       VALUE p_fact,
                 'category'   VALUE p_category,
                 'about'      VALUE p_about,
-                'source'     VALUE 'conversation',
+                'source'     VALUE 'loan_officer_conversation',
                 'remembered' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')
             )
         );
@@ -142,7 +142,7 @@ The recall function is the agent's "search memory" capability. When someone asks
 
 1. Create the function to retrieve facts.
 
-    This function searches the memory table for facts that match what we're looking for. You can search by entity ("about") or by category. It returns the most recent matching facts.
+    This function searches the memory table for facts that match what we're looking for. You can search by client name ("about") or by category. It returns the most recent matching facts.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -170,7 +170,7 @@ The recall function is the agent's "search memory" capability. When someone asks
         ) LOOP
             v_result := v_result || '- ' || rec.fact;
             IF rec.about IS NOT NULL THEN
-                v_result := v_result || ' (about: ' || rec.about || ')';
+                v_result := v_result || ' (client: ' || rec.about || ')';
             END IF;
             v_result := v_result || CHR(10);
             v_count := v_count + 1;
@@ -188,11 +188,11 @@ The recall function is the agent's "search memory" capability. When someone asks
 
 ## Task 5: Register the Agent Tools
 
-Tools bridge your PL/SQL functions and the AI agent. By registering these functions as tools, we give the agent the ability to remember and recall information. The instructions tell the agent when to use each tool.
+Tools bridge your PL/SQL functions and the AI agent. By registering these functions as tools, we give the agent the ability to remember and recall information. The instructions tell the agent exactly when to use each tool and when to stop — preventing the agent from chaining tool calls in a loop.
 
 1. Register the "remember" tool.
 
-    The instruction tells the agent to use this tool when users share important information. This is how the agent knows to save things.
+    The instruction tells the agent to call this tool once when a loan officer shares client information, then stop immediately and confirm to the user.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -201,9 +201,9 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'REMEMBER_TOOL',
-            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Sarah Chen). Use this when the user shares important information.",
+            attributes  => '{"instruction": "Store ONE fact about a Seer Equity client. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history), P_ABOUT (optional: client name, e.g. Sarah Chen). Call this tool ONCE per request, then stop and confirm to the user. Do not call any other tools after storing.",
                             "function": "remember_fact"}',
-            description => 'Stores facts in long-term memory for future recall'
+            description => 'Stores facts about clients in long-term memory for future recall'
         );
     END;
     /
@@ -212,7 +212,7 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
 2. Register the "recall" tool.
 
-    The instruction tells the agent to search memory when asked about something. This is how the agent knows to look things up before answering.
+    The instruction tells the agent to call this tool once when asked about a client, then stop and return the results directly to the user.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -221,9 +221,9 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'RECALL_TOOL',
-            attributes  => '{"instruction": "Retrieve facts from memory. Parameters: P_ABOUT (optional: entity name to search for), P_CATEGORY (optional: filter by category). Use this when asked about something you might have stored.",
+            attributes  => '{"instruction": "Retrieve facts about a Seer Equity client from memory. Parameters: P_ABOUT (optional: client name to search for), P_CATEGORY (optional: filter by category). Call this tool ONCE per request, then stop and return the results directly to the user. Do not call any other tools after retrieving.",
                             "function": "recall_facts"}',
-            description => 'Retrieves stored facts from long-term memory'
+            description => 'Retrieves stored facts about clients from long-term memory'
         );
     END;
     /
@@ -242,11 +242,9 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
 ## Task 6: Create the Agent, Task, and Team
 
-Now we put it all together. The agent gets both memory tools, and its role tells it to actively use them. This is what makes it different from the forgetful agent in Lab 5, this one has the ability to actually store and retrieve information.
+Now we put it all together. The agent gets both memory tools, and the task instruction enforces a strict one-tool-call-per-request rule. This is what prevents the agent from chaining calls in a loop.
 
 1. Create the agent with memory awareness.
-
-    The role emphasizes using the tools, never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -256,8 +254,8 @@ Now we put it all together. The agent gets both memory tools, and its role tells
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'MEMORY_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a helpful assistant with persistent memory. When users share information, use REMEMBER_TOOL to store it. When users ask questions, use RECALL_TOOL to check your memory. Always use your tools - never guess."}',
-            description => 'An agent with persistent memory'
+                            "role": "You are a loan officer assistant for Seer Equity with persistent memory. When loan officers share information about clients, use REMEMBER_TOOL to store it. When they ask questions about clients, use RECALL_TOOL to check your memory. Always use your tools - never guess about client information."}',
+            description => 'An agent with persistent memory for Seer Equity'
         );
     END;
     /
@@ -266,6 +264,8 @@ Now we put it all together. The agent gets both memory tools, and its role tells
 
 2. Create the task.
 
+    The "EXACTLY ONE tool call, then stop" instruction is the key guard against the agent looping after a tool returns results.
+
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
@@ -273,9 +273,9 @@ Now we put it all together. The agent gets both memory tools, and its role tells
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'MEMORY_TASK',
-            attributes  => '{"instruction": "Process this user request. If the user shares information worth remembering, call REMEMBER_TOOL to store it. If the user asks a question, call RECALL_TOOL to search memory first. Do not ask clarifying questions. User request: {query}",
+            attributes  => '{"instruction": "Process this loan officer request using EXACTLY ONE tool call, then stop. If the request shares new information about a client, call REMEMBER_TOOL once and confirm the fact was stored. If the request asks a question about a client, call RECALL_TOOL once and return the results. Never chain tool calls together. User request: {query}",
                             "tools": ["REMEMBER_TOOL", "RECALL_TOOL"]}',
-            description => 'Task for memory-enabled conversations'
+            description => 'Task for memory-enabled loan conversations'
         );
     END;
     /
@@ -316,13 +316,17 @@ Now let's see memory in action.
 
 2. Tell the agent something to remember.
 
+    > Keep each statement to a single fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.
+
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT Customer Sarah Chen prefers to be contacted by email, not phone;
+    SELECT AI AGENT Sarah Chen prefers email over phone;
     </copy>
     ```
+
+    **Watch for:** The agent should confirm it remembered Sarah Chen's email preference.
 
 3. Tell it more.
 
@@ -334,6 +338,8 @@ Now let's see memory in action.
     </copy>
     ```
 
+    **Watch for:** The agent should confirm it remembered the rate discount.
+
 4. Ask about what it knows.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -344,7 +350,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-The agent recalls the stored facts.
+    **Watch for:** The agent calls RECALL_TOOL once and returns both the email preference and the 15% rate discount.
 
 ## Task 8: Verify Persistence Across Sessions
 
@@ -365,11 +371,11 @@ The agent recalls the stored facts.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Sarah Chen's preferred contact method;
+    SELECT AI AGENT What is Sarah Chen's preferred contact method and what rate discount does she have;
     </copy>
     ```
 
-**The agent remembers!** Because facts are stored in the database, not session memory.
+    **The agent remembers!** Because facts are stored in the database, not session memory, they survive the session reset.
 
 3. View the memory core contents.
 
@@ -392,7 +398,7 @@ In this lab, you built a **memory core** using Oracle's converged database:
 
 * Created a memory table with native JSON
 * Built remember and recall functions
-* Registered them as agent tools
+* Registered them as agent tools with explicit stop conditions to prevent infinite loops
 * Had conversations with an agent that remembers
 * Verified persistence across sessions
 

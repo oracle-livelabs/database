@@ -6,19 +6,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Build the Memory Core at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>In Lab 5, you experienced the forgetting problem. The agent forgot everything about Sarah Chen the moment the session ended. That's not acceptable for a financial services company.</p>\n\n<p>Seer Equity needs agents that:</p>\n<ul>\n<li>Remember client preferences across every interaction</li>\n<li>Recall rate exceptions without being told again</li>\n<li>Build relationship knowledge over time</li>\n<li>Never forget a client's history</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build the <strong>memory core</strong>: the database foundation that solves the forgetting problem:</p>\n\n<ol>\n<li><strong>Create memory tables</strong> using Oracle's native JSON for flexible storage</li>\n<li><strong>Build remember/recall functions</strong> that agents can call as tools</li>\n<li><strong>Register the tools</strong> so the agent can use them</li>\n<li><strong>Test across sessions</strong> to prove memory persists</li>\n</ol>\n\n<p>The key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.</p>\n\n<p><strong>What you'll build:</strong> A persistent memory system that survives session boundaries.</p>\n\n<p><strong>Estimated Time:</strong> 15 minutes</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Build the Memory Core at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>In Lab 5, you experienced the forgetting problem. The agent forgot everything about Sarah Chen the moment the session ended. That's not acceptable for a financial services company.</p>\n\n<p>Seer Equity needs agents that:</p>\n<ul>\n<li>Remember client preferences across every interaction</li>\n<li>Recall rate exceptions without being told again</li>\n<li>Build relationship knowledge over time</li>\n<li>Never forget a client's history</li>\n</ul>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll build the <strong>memory core</strong>: the database foundation that solves the forgetting problem:</p>\n\n<ol>\n<li><strong>Create memory tables</strong> using Oracle's native JSON for flexible storage</li>\n<li><strong>Build remember/recall functions</strong> that agents can call as tools</li>\n<li><strong>Register the tools</strong> so the agent can use them</li>\n<li><strong>Test across sessions</strong> to prove memory persists</li>\n</ol>\n\n<p>The key insight: Memory isn't a model capability. It's a database capability. The LLM provides intelligence; your database provides memory. Together, they create agents that actually remember.</p>\n\n<p><strong>What you'll build:</strong> A persistent memory system that survives session boundaries.</p>\n\n<p><strong>Estimated Time:</strong> 15 minutes</p>"}]
       }
     },
     {
@@ -27,19 +20,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Create the Memory Table</h2>\n\n<p>The memory table is the foundation, where the agent stores everything it learns about Seer Equity clients.</p>\n\n<p>Notice we use Oracle's native JSON type for the content column. This gives you flexibility to store any structured information without rigid schemas. You can store facts, preferences, rate exceptions, whatever the agent learns.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Create the Memory Table</h2>\n\n<p>The memory table is the foundation, where the agent stores everything it learns about Seer Equity clients.</p>\n\n<p>Notice we use Oracle's native JSON type for the content column. This gives you flexibility to store any structured information without rigid schemas. You can store facts, preferences, rate exceptions, whatever the agent learns.</p>"}]
       }
     },
     {
@@ -48,9 +34,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -59,19 +43,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Create JSON Indexes</h2>\n\n<p>Create indexes on JSON fields for fast queries. Oracle lets you index directly into JSON properties, no need for a separate search layer.</p>\n\n<p>The <code>about</code> field will be commonly searched (\"What do you know about Sarah Chen?\"), so we index it specifically.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Create JSON Indexes</h2>\n\n<p>Create indexes on JSON fields for fast queries. Oracle lets you index directly into JSON properties, no need for a separate search layer.</p>\n\n<p>The <code>about</code> field will be commonly searched (\"What do you know about Sarah Chen?\"), so we index it specifically.</p>"}]
       }
     },
     {
@@ -80,9 +57,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -91,19 +66,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Create the Remember Function</h2>\n\n<p>This function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.</p>\n\n<p>The function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Create the Remember Function</h2>\n\n<p>This function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.</p>\n\n<p>The function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.</p>"}]
       }
     },
     {
@@ -112,9 +80,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -123,19 +89,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Create the Recall Function</h2>\n\n<p>The recall function is the agent's \"search memory\" capability. When asked about a client, the agent calls this function to find relevant memories.</p>\n\n<p>You can search by client name (\"Sarah Chen\") or by category (\"rate_exception\"). The function returns matching facts from the memory table.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Create the Recall Function</h2>\n\n<p>The recall function is the agent's \"search memory\" capability. When asked about a client, the agent calls this function to find relevant memories.</p>\n\n<p>You can search by client name (\"Sarah Chen\") or by category (\"rate_exception\"). The function returns matching facts from the memory table.</p>"}]
       }
     },
     {
@@ -144,9 +103,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -155,19 +112,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Register the Remember Tool</h2>\n\n<p>Now register the remember function as an agent tool. The instruction tells the agent when to use this tool, whenever loan officers share information worth remembering about clients.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Register the Remember Tool</h2>\n\n<p>Now register the remember function as an agent tool. The instruction tells the agent when to use this tool, whenever loan officers share information worth remembering about clients.</p>"}]
       }
     },
     {
@@ -176,9 +126,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -187,19 +135,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Register the Recall Tool</h2>\n\n<p>Register the recall function as an agent tool. The instruction tells the agent to use this when asked about a client that might be in memory.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Register the Recall Tool</h2>\n\n<p>Register the recall function as an agent tool. The instruction tells the agent to use this when asked about a client that might be in memory.</p>"}]
       }
     },
     {
@@ -208,9 +149,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -219,19 +158,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Verify the Tools</h2>\n\n<p>Confirm both tools were created and are enabled. You should see REMEMBER_TOOL and RECALL_TOOL with status ENABLED.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Verify the Tools</h2>\n\n<p>Confirm both tools were created and are enabled. You should see REMEMBER_TOOL and RECALL_TOOL with status ENABLED.</p>"}]
       }
     },
     {
@@ -240,9 +172,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -251,19 +181,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Create the Seer Equity Memory Agent</h2>\n\n<p>Create an agent that knows how to use its memory tools. The role tells the agent to use REMEMBER_TOOL when loan officers share client information and RECALL_TOOL when they ask questions.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Create the Seer Equity Memory Agent</h2>\n\n<p>Create an agent that knows how to use its memory tools. The role tells the agent to use REMEMBER_TOOL when loan officers share client information and RECALL_TOOL when they ask questions.</p>"}]
       }
     },
     {
@@ -272,9 +195,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -283,19 +204,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Create the Task and Team</h2>\n\n<p>Create a task that ties the agent to its tools, and a team that activates everything.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Create the Task and Team</h2>\n\n<p>Create a task that ties the agent to its tools, and a team that activates everything.</p>"}]
       }
     },
     {
@@ -304,9 +218,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -315,19 +227,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Activate the Memory Agent</h2>\n\n<p>Set the memory team as active for your session.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Activate the Memory Agent</h2>\n\n<p>Set the memory team as active for your session.</p>"}]
       }
     },
     {
@@ -336,30 +241,21 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
-      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent about a client's contact preference. The agent should call REMEMBER_TOOL to store this.\n\n**Watch for:** The agent should confirm it remembered the fact about Sarah Chen's email preference.",
+      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm.\n\n**Important:** Keep each statement to one fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.\n\n**Watch for:** The agent should confirm it remembered Sarah Chen's email preference.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Teach the Agent About a Client</h2>\n\n<p>Tell the agent about a client's contact preference. The agent should call REMEMBER_TOOL to store this.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered the fact about Sarah Chen's email preference.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Teach the Agent About a Client</h2>\n\n<p>Tell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm.</p>\n\n<p><strong>Important:</strong> Keep each statement to one fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered Sarah Chen's email preference.</p>"}]
       }
     },
     {
@@ -368,30 +264,21 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
-      "text": "%md\n## Teach the Agent More\n\nAdd the client's rate discount. Keep this to a single fact so the agent makes one clean REMEMBER_TOOL call.",
+      "text": "%md\n## Teach the Agent More\n\nAdd a second fact about the same client. One fact per cell.\n\n**Watch for:** The agent should confirm it remembered the rate discount.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Teach the Agent More</h2>\n\n<p>Add the client's rate discount. Keep this to a single fact so the agent makes one clean REMEMBER_TOOL call.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Teach the Agent More</h2>\n\n<p>Add a second fact about the same client. One fact per cell.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered the rate discount.</p>"}]
       }
     },
     {
@@ -400,30 +287,21 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
-      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.\n\n**Watch for:** The agent should recall the email preference and the 15% rate discount.",
+      "text": "%md\n## Ask What the Agent Knows\n\nNow ask about Sarah Chen. The agent should call RECALL_TOOL once and return all stored facts.\n\n**Watch for:** The agent should recall the email preference and the 15% rate discount.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Ask What the Agent Knows</h2>\n\n<p>Now ask about Sarah Chen. The agent should call RECALL_TOOL and return all the facts it stored.</p>\n\n<p><strong>Watch for:</strong> The agent should recall the email preference and the 15% rate discount.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Ask What the Agent Knows</h2>\n\n<p>Now ask about Sarah Chen. The agent should call RECALL_TOOL once and return all stored facts.</p>\n\n<p><strong>Watch for:</strong> The agent should recall the email preference and the 15% rate discount.</p>"}]
       }
     },
     {
@@ -432,9 +310,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -443,19 +319,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>The Crucial Test: Clear the Session</h2>\n\n<p>Now the crucial test. Simulate a new session by clearing and resetting the team. In Lab 5, this made the forgetful agent lose everything.</p>\n\n<p>Let's see what happens with memory tools.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>The Crucial Test: Clear the Session</h2>\n\n<p>Now the crucial test. Simulate a new session by clearing and resetting the team. In Lab 5, this made the forgetful agent lose everything.</p>\n\n<p>Let's see what happens with memory tools.</p>"}]
       }
     },
     {
@@ -464,9 +333,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -475,19 +342,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Ask in the New Session</h2>\n\n<p>Ask about information from the \"previous session.\" This is where a normal chatbot would say \"I don't have that information.\"</p>\n\n<p><strong>Watch what happens:</strong> The agent calls RECALL_TOOL and finds the facts! Because they're stored in the database, not session memory, they persist across sessions. The agent remembers.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Ask in the New Session</h2>\n\n<p>Ask about information from the \"previous session.\" This is where a normal chatbot would say \"I don't have that information.\"</p>\n\n<p><strong>Watch what happens:</strong> The agent calls RECALL_TOOL and finds the facts! Because they're stored in the database, not session memory, they persist across sessions. The agent remembers.</p>"}]
       }
     },
     {
@@ -496,9 +356,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -507,19 +365,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Examine the Memory Core</h2>\n\n<p>Look directly at the memory table to see what's stored. You'll see each fact as a JSON document with the fact, category, client, and timestamp.</p>\n\n<p>This is your memory core, visible, queryable, auditable. Unlike a black-box model, you can see exactly what the agent knows about Seer Equity clients.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Examine the Memory Core</h2>\n\n<p>Look directly at the memory table to see what's stored. You'll see each fact as a JSON document with the fact, category, client, and timestamp.</p>\n\n<p>This is your memory core, visible, queryable, auditable. Unlike a black-box model, you can see exactly what the agent knows about Seer Equity clients.</p>"}]
       }
     },
     {
@@ -528,9 +379,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     },
     {
@@ -539,19 +388,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>What You Built</h2>\n\n<p>In this lab, you built a <strong>memory core</strong> for Seer Equity using Oracle's converged database:</p>\n\n<ul>\n<li><strong>Memory table with JSON</strong>: Flexible storage for any client information</li>\n<li><strong>Remember function</strong>: Agent can store facts to the database</li>\n<li><strong>Recall function</strong>: Agent can search memories by client or category</li>\n<li><strong>Persistent memory</strong>: Facts survive session changes</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> The memory core isn't another model layer. It's a converged database. The agent's intelligence comes from the LLM, but its knowledge of Seer Equity clients comes from your database. One transaction, one security model, one query language.</p>\n\n<p>In the next lab, you'll expand this to handle multiple types of memory.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>What You Built</h2>\n\n<p>In this lab, you built a <strong>memory core</strong> for Seer Equity using Oracle's converged database:</p>\n\n<ul>\n<li><strong>Memory table with JSON</strong>: Flexible storage for any client information</li>\n<li><strong>Remember function</strong>: Agent can store facts to the database</li>\n<li><strong>Recall function</strong>: Agent can search memories by client or category</li>\n<li><strong>Persistent memory</strong>: Facts survive session changes</li>\n</ul>\n\n<p><strong>Key takeaway:</strong> The memory core isn't another model layer. It's a converged database. The agent's intelligence comes from the LLM, but its knowledge of Seer Equity clients comes from your database. One transaction, one security model, one query language.</p>\n\n<p>In the next lab, you'll expand this to handle multiple types of memory.</p>"}]
       }
     },
     {
@@ -560,19 +402,12 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "md"
-        },
+        "editorSetting": {"language": "md"},
         "editorHide": true
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
-          }
-        ]
+        "msg": [{"type": "HTML", "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"}]
       }
     },
     {
@@ -581,9 +416,7 @@
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {
-          "language": "sql"
-        }
+        "editorSetting": {"language": "sql"}
       }
     }
   ],
