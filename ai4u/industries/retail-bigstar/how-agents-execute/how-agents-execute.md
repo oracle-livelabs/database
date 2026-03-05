@@ -1,31 +1,36 @@
-# How Agents Actually Get Work Done
+# Watch an Agent Think and Act at Big Star Collectibles
 
 ## Introduction
 
-In this lab, you'll trace an agent through its complete execution loop, from understanding a request to taking action and reporting results.
+In this lab, you'll trace an agent through its complete execution loop -- from understanding a request to taking action and reporting results.
 
 Every agent follows the same pattern: understand, plan, execute tools, analyze results, and respond. By observing this loop in detail, you'll understand exactly how agents transform requests into outcomes.
 
 ### The Business Problem
 
-At Big Star Collectibles, small items take as long to process as big ones. A $25,000 personal item for a client with excellent credit goes through the same review process as a $500,000 authenticating.
+Big Star Collectibles' inventory specialists are drowning in routine decisions. A $25,000 collector_card item for someone with excellent credit should take minutes, not hours. But without smart routing, every application goes through the same manual review process.
 
-> *"We spend hours reviewing submissions that should just auto-approve. A $25K personal item with 800 credit? That shouldn't take the same time as a complex authenticating."*
+> *"Small items take as long to process as big ones. We spend hours reviewing applications that should just limited_art-approve."*
 >
 > David, Operations Manager
 
-The company needs smart routing:
-- **Under $50K with good credit** → Auto-approve
-- **$50K-$250K** → Appraiser review
-- **$250K+ or authenticatings** → Senior appraiser
-
-Plus, everything needs to be logged for compliance. When a regulator asks "why was this approved?", there needs to be an answer.
+Meanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior appraisers waste time on $30K collector_card items while $500K authenticatings wait in queue.
 
 ### What You'll Learn
 
-This lab shows you how agents execute conditional workflows with audit logging. You'll build a risk assessment system that routes items based on amount and type. This is the foundation for solving Big Star Collectibles' processing bottleneck.
+In this lab, you'll build Big Star Collectibles' risk assessment workflow. The agent will:
 
-**What you'll build:** A item processing workflow with conditional routing and complete audit trails.
+1. Create item submissions with proper tracking IDs
+2. Assess risk based on item type and amount
+3. Route appropriately:
+   - **Under $50K collector_card/limited_art** → Limited_art-approve (low risk)
+   - **$50K–$250K** → Appraiser review
+   - **Over $250K or authenticatings** → Senior appraiser
+4. Log every step for audit compliance
+
+Every agent follows the same pattern: **understand → plan → execute tools → analyze results → respond**. You'll trace this loop with detailed logging.
+
+**What you'll build:** A item risk assessment workflow with conditional routing and audit trail.
 
 Estimated Time: 10 minutes
 
@@ -48,11 +53,17 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![OML home page with Notebooks highlighted in the Quick Actions section](images/task1_1.png " ")
+
 2. Click **Import** to expand the Import drop down.
+
+    ![Notebooks page with Import button highlighted in the toolbar](images/task1_2.png " ")
 
 3. Select **Git**.
 
-4. Paste the following GitHub URL leaving the credential field blank:
+    ![Import dropdown showing File and Git options, with Git highlighted](images/task1_3.png " ")
+
+4. Paste the following GitHub URL leaving the credential field blank, then click **OK**.
 
     ```text
     <copy>
@@ -60,23 +71,21 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-5. Click **Ok**.
+    ![Git Clone dialog with the GitHub URI field highlighted and OK button highlighted](images/task1_5.png " ")
 
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information, however the notebook will have the commands and basic instructions for completing the lab.
 
-## Task 2: Set Up an Observable Agent
+## Task 2: Set Up the Execution Infrastructure
 
-We'll create an agent with tools that log what's happening so you can see each step clearly. The key here is that our tools will write to a log table as they work, giving us a window into exactly what the agent is doing.
+We'll create tables that log every step the agent takes. This lets you watch the execution unfold step by step -- critical for audit trails in financial services. The `workflow_log` table captures each step as it happens. The `item_applications` table holds the actual business data the agent creates.
 
-1. Create tables and sequence for tracking.
+1. Create the sequence and tables.
 
-    We need two tables: one to log every step the agent takes (`workflow_log`) and one to store the actual item requests (`item_requests`). This separation lets us see both what the agent did AND what data it created.
-
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    CREATE SEQUENCE item_requests_seq START WITH 1001;
+    CREATE SEQUENCE item_applications_seq START WITH 1001;
 
     CREATE TABLE workflow_log (
         log_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -85,156 +94,166 @@ We'll create an agent with tools that log what's happening so you can see each s
         logged_at   TIMESTAMP DEFAULT SYSTIMESTAMP
     );
 
-    CREATE TABLE item_requests (
-        request_id    VARCHAR2(20) PRIMARY KEY,
-        collector     VARCHAR2(100),
-        amount        NUMBER(12,2),
-        item_type     VARCHAR2(50),
-        credit_score  NUMBER(3),
-        risk_level    VARCHAR2(30),
-        status        VARCHAR2(30) DEFAULT 'NEW',
-        routed_to     VARCHAR2(50),
-        created_at    TIMESTAMP DEFAULT SYSTIMESTAMP
+    CREATE TABLE item_applications (
+        application_id  VARCHAR2(20) PRIMARY KEY,
+        applicant_name  VARCHAR2(100),
+        item_amount     NUMBER(12,2),
+        item_type       VARCHAR2(50),
+        risk_status     VARCHAR2(30) DEFAULT 'NEW',
+        created_at      TIMESTAMP DEFAULT SYSTIMESTAMP
     );
     </copy>
     ```
 
-2. Create the first tool function - create item request.
+    ![Notebook cell showing CREATE SEQUENCE item_applications_seq, CREATE TABLE workflow_log, CREATE TABLE item_applications with output: Sequence ITEM_APPLICATIONS_SEQ created, Table WORKFLOW_LOG created, Table ITEM_APPLICATIONS created](images/task2_1.png " ")
 
-    This function does two things: it creates a item request record AND it logs what it's doing. Every time the agent calls this tool, we'll see an entry in our workflow log. This is how we make the agent's work visible.
+2. Create the item application function.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    This function creates item submissions. Notice it logs to `workflow_log` before doing its work -- this is how you'll trace execution. The function generates a unique ID like `ITEM-250108-1001` and inserts the application with status `SUBMITTED`.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    CREATE OR REPLACE FUNCTION create_item_request(
-        p_collector    VARCHAR2,
-        p_amount       NUMBER,
-        p_item_type    VARCHAR2,
-        p_credit_score NUMBER
+    CREATE OR REPLACE FUNCTION create_item_application(
+        p_applicant  VARCHAR2,
+        p_amount     NUMBER,
+        p_item_type  VARCHAR2
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
-        v_request_id VARCHAR2(20);
+        v_application_id VARCHAR2(20);
     BEGIN
-        v_request_id := 'LN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_requests_seq.NEXTVAL;
-
+        v_application_id := 'ITEM-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || item_applications_seq.NEXTVAL;
+        
         -- Log the step
         INSERT INTO workflow_log (step_name, step_detail) 
-        VALUES ('CREATE_REQUEST', 'Created ' || v_request_id || ' for ' || p_collector || 
-                ', $' || p_amount || ' ' || p_item_type || ', Credit: ' || p_credit_score);
-
-        -- Create the request
-        INSERT INTO item_requests (request_id, collector, amount, item_type, credit_score, status)
-        VALUES (v_request_id, p_collector, p_amount, LOWER(p_item_type), p_credit_score, 'SUBMITTED');
-
+        VALUES ('CREATE_APPLICATION', 'Created ' || v_application_id || ' for ' || p_applicant || ', $' || TO_CHAR(p_amount, '999,999'));
+        
+        -- Create the application
+        INSERT INTO item_applications (application_id, applicant_name, item_amount, item_type, risk_status)
+        VALUES (v_application_id, p_applicant, p_amount, p_item_type, 'SUBMITTED');
+        
         COMMIT;
-        RETURN 'Created item request ' || v_request_id || ' for $' || p_amount || ' ' || p_item_type;
+        RETURN 'Created item submission ' || v_application_id || ' for $' || TO_CHAR(p_amount, '999,999') || ' (' || p_item_type || ' item)';
     END;
     /
     </copy>
     ```
 
-3. Create the second tool function - assess risk and route.
+    ![Notebook cell showing CREATE OR REPLACE FUNCTION create_item_application with output: Function CREATE_ITEM_APPLICATION compiled](images/task2_2.png " ")
 
-    This is where the business logic lives. The function looks at the declared value, type, and condition grade, then decides where to route it. It logs both the assessment and the routing decision. This is the kind of conditional logic that makes agents useful - different inputs lead to different outcomes.
+3. Create the risk assessment function.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    This function determines what risk level applies based on item amount and type. At Big Star Collectibles: collector_card items under $50K → AUTO_APPROVE; collector_card/limited_art items $50K–$250K → APPRAISER_REVIEW; any item $250K+ or all authenticating items → SENIOR_APPRAISER.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    CREATE OR REPLACE FUNCTION assess_and_route(
-        p_request_id VARCHAR2
+    CREATE OR REPLACE FUNCTION assess_item_risk(
+        p_amount    NUMBER,
+        p_item_type VARCHAR2
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
-        v_amount       NUMBER;
-        v_item_type    VARCHAR2(50);
-        v_credit_score NUMBER;
-        v_risk_level   VARCHAR2(30);
-        v_route_to     VARCHAR2(50);
-        v_result       VARCHAR2(500);
+        v_result VARCHAR2(200);
     BEGIN
-        -- Get request details
-        SELECT amount, item_type, credit_score
-        INTO v_amount, v_item_type, v_credit_score
-        FROM item_requests WHERE request_id = p_request_id;
-
-        -- Log the assessment start
+        -- Log the step
         INSERT INTO workflow_log (step_name, step_detail) 
-        VALUES ('ASSESS_RISK', 'Assessing ' || p_request_id || ': $' || v_amount || 
-                ', Credit: ' || v_credit_score);
-
-        -- Apply risk rules
-        IF v_credit_score < 550 THEN
-            v_risk_level := 'BLOCKED';
-            v_route_to := 'REJECTED';
-            v_result := 'BLOCKED: Condition grade ' || v_credit_score || ' below minimum 550.';
-        ELSIF v_item_type = 'personal' AND v_amount < 50000 AND v_credit_score >= 700 THEN
-            v_risk_level := 'LOW';
-            v_route_to := 'AUTO_APPROVED';
-            v_result := 'AUTO_APPROVED: Personal item under $50K with credit ' || v_credit_score || '.';
-        ELSIF v_amount < 250000 AND v_item_type != 'authenticating' THEN
-            v_risk_level := 'MEDIUM';
-            v_route_to := 'APPRAISER';
-            v_result := 'Routed to APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires review.';
+        VALUES ('ASSESS_RISK', 'Assessing risk for $' || TO_CHAR(p_amount, '999,999') || ' ' || p_item_type || ' item');
+        
+        -- Apply Big Star Collectibles risk rules
+        IF UPPER(p_item_type) = 'AUTHENTICATING' THEN
+            v_result := 'SENIOR_APPRAISER: All authenticating items require senior review';
+        ELSIF p_amount >= 250000 THEN
+            v_result := 'SENIOR_APPRAISER: Items $250K+ require senior appraiser';
+        ELSIF p_amount >= 50000 THEN
+            v_result := 'APPRAISER_REVIEW: Items $50K-$250K require appraiser review';
         ELSE
-            v_risk_level := 'HIGH';
-            v_route_to := 'SENIOR_APPRAISER';
-            v_result := 'Routed to SENIOR_APPRAISER: $' || v_amount || ' ' || v_item_type || ' requires senior review.';
+            v_result := 'AUTO_APPROVE: Collector_card items under $50K limited_art-approved';
         END IF;
-
-        -- Log the routing decision
-        INSERT INTO workflow_log (step_name, step_detail) 
-        VALUES ('ROUTE_DECISION', p_request_id || ' -> ' || v_route_to || ' (Risk: ' || v_risk_level || ')');
-
-        -- Update the request
-        UPDATE item_requests
-        SET risk_level = v_risk_level, 
-            routed_to = v_route_to,
-            status = CASE WHEN v_route_to IN ('AUTO_APPROVED', 'REJECTED') THEN v_route_to ELSE 'PENDING_REVIEW' END
-        WHERE request_id = p_request_id;
-
+        
         COMMIT;
         RETURN v_result;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            RETURN 'Request not found: ' || p_request_id;
     END;
     /
     </copy>
     ```
 
-4. Register the tools.
+    ![Notebook cell showing CREATE OR REPLACE FUNCTION assess_item_risk with output: Function ASSESS_ITEM_RISK compiled](images/task2_3.png " ")
 
-    We register both functions as tools. Notice how the instructions tell the agent what each tool does and what parameters it needs. The agent will use CREATE_ITEM_TOOL first to create the request, then ASSESS_ROUTE_TOOL to evaluate and route it.
+4. Create the routing function.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    This function routes item submissions for appraisal review by updating their status. The agent should only call this when the risk assessment returns APPRAISER_REVIEW or SENIOR_APPRAISER -- this is where you'll see the agent make decisions.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    CREATE OR REPLACE FUNCTION route_for_appraisal(
+        p_application_id  VARCHAR2,
+        p_review_level    VARCHAR2
+    ) RETURN VARCHAR2 AS
+        PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- Log the step
+        INSERT INTO workflow_log (step_name, step_detail) 
+        VALUES ('ROUTE_APPRAISER', 'Routing ' || p_application_id || ' for ' || p_review_level);
+        
+        -- Update status
+        UPDATE item_applications 
+        SET risk_status = 'SUBMITTED_' || p_review_level
+        WHERE application_id = p_application_id;
+        
+        COMMIT;
+        RETURN 'Routed ' || p_application_id || ' for ' || p_review_level || ' review';
+    END;
+    /
+    </copy>
+    ```
+
+    ![Notebook cell showing CREATE OR REPLACE FUNCTION route_for_appraisal with output: Function ROUTE_FOR_APPRAISAL compiled](images/task2_4.png " ")
+
+5. Register the tools with the agent framework.
+
+    Each tool has an `instruction` that tells the agent when and how to use it. Notice the instruction for `ROUTE_AUTHENTICATION_TOOL` says "Only call this if ASSESS_ITEM_RISK_TOOL returned APPRAISER_REVIEW or SENIOR_APPRAISER." This is how you guide agent behavior -- through clear instructions in tool definitions.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'CREATE_ITEM_TOOL',
-            attributes  => '{"instruction": "Create a new item request. Parameters: P_COLLECTOR (name), P_AMOUNT (dollar amount as number), P_ITEM_TYPE (personal, auto, authenticating, or business), P_CREDIT_SCORE (number 300-850). Returns the request ID.",
-                            "function": "create_item_request"}',
-            description => 'Creates a item request and returns the request ID'
+            attributes  => '{"instruction": "Create a new item submission at Big Star Collectibles. Parameters: P_APPLICANT (applicant name), P_AMOUNT (item amount as number), P_ITEM_TYPE (collector_card, limited_art, authenticating, or business). Returns the application ID.",
+                            "function": "create_item_application"}',
+            description => 'Creates a item submission and returns the application ID'
         );
-
+        
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'ASSESS_ROUTE_TOOL',
-            attributes  => '{"instruction": "Assess risk and route a item request. Parameter: P_REQUEST_ID (the LN-YYMMDD-NNNN format ID from CREATE_ITEM_TOOL). Returns routing decision.",
-                            "function": "assess_and_route"}',
-            description => 'Assesses risk level and routes to appropriate reviewer'
+            tool_name   => 'ASSESS_ITEM_RISK_TOOL',
+            attributes  => '{"instruction": "Assess risk level for a item submission. Parameters: P_AMOUNT (item amount as number), P_ITEM_TYPE (collector_card, limited_art, authenticating, or business). Returns AUTO_APPROVE, APPRAISER_REVIEW, or SENIOR_APPRAISER.",
+                            "function": "assess_item_risk"}',
+            description => 'Returns the required review level based on amount and item type'
+        );
+        
+        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
+            tool_name   => 'ROUTE_AUTHENTICATION_TOOL',
+            attributes  => '{"instruction": "Route a item submission for appraisal review. Only call this if ASSESS_ITEM_RISK_TOOL returned APPRAISER_REVIEW or SENIOR_APPRAISER. Do NOT call this for AUTO_APPROVE. Parameters: P_APPLICATION_ID (the ITEM-YYMMDD-NNNN format ID), P_REVIEW_LEVEL (APPRAISER or SENIOR_APPRAISER).",
+                            "function": "route_for_appraisal"}',
+            description => 'Routes the item submission to the appropriate appraiser'
         );
     END;
     /
     </copy>
     ```
 
-5. Create the agent and team.
+    ![Notebook cell showing BEGIN block registering CREATE_ITEM_TOOL, ASSESS_ITEM_RISK_TOOL, and ROUTE_AUTHENTICATION_TOOL with output: PL/SQL procedure successfully completed](images/task2_5.png " ")
 
-    The agent's role tells it to always complete both steps: create then assess. The task reinforces this with specific instructions. This ensures the agent follows a consistent workflow every time - create the request, get an ID back, then use that ID to assess and route.
+6. Create the agent, task, and team.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    The agent's role tells it the sequence: create → assess risk → route (if needed). The task instruction reinforces this and specifically says NOT to route if risk assessment says AUTO_APPROVE. This combination of role + task instruction shapes how the agent plans its work.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -242,35 +261,39 @@ We'll create an agent with tools that log what's happening so you can see each s
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'ITEM_EXEC_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a item processing agent for Big Star Collectibles. Process items by: 1) Creating the request with CREATE_ITEM_TOOL, 2) Assessing and routing with ASSESS_ROUTE_TOOL. Always complete both steps."}',
-            description => 'Agent demonstrating execution loop'
+                            "role": "You are a item processing agent for Big Star Collectibles. Process item submissions by: 1) Creating the application, 2) Assessing the risk, 3) Only routing for appraisal if risk assessment requires it. If assessment says AUTO_APPROVE, do not route."}',
+            description => 'Agent demonstrating item processing execution loop'
         );
-
+        
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'ITEM_EXEC_TASK',
-            attributes  => '{"instruction": "Process the item request: 1. Call CREATE_ITEM_TOOL to create the request 2. Call ASSESS_ROUTE_TOOL with the returned request ID to assess and route. Report the final routing decision. User request: {query}",
-                            "tools": ["CREATE_ITEM_TOOL", "ASSESS_ROUTE_TOOL"]}',
+            attributes  => '{"instruction": "Process the item submission: 1. Call CREATE_ITEM_TOOL to create the application 2. Call ASSESS_ITEM_RISK_TOOL to determine risk level 3. If result contains APPRAISER_REVIEW or SENIOR_APPRAISER, call ROUTE_AUTHENTICATION_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_AUTHENTICATION_TOOL - just confirm the item is limited_art-approved. User request: {query}",
+                            "tools": ["CREATE_ITEM_TOOL", "ASSESS_ITEM_RISK_TOOL", "ROUTE_AUTHENTICATION_TOOL"]}',
             description => 'Task for item execution demo'
         );
-
+        
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
             team_name   => 'ITEM_EXEC_TEAM',
             attributes  => '{"agents": [{"name": "ITEM_EXEC_AGENT", "task": "ITEM_EXEC_TASK"}],
                             "process": "sequential"}',
-            description => 'Team for execution demo'
+            description => 'Team for item execution demo'
         );
     END;
     /
     </copy>
     ```
 
-## Task 3: Execute a Complete Workflow
+    ![Notebook cell showing BEGIN block creating ITEM_EXEC_AGENT, ITEM_EXEC_TASK, and ITEM_EXEC_TEAM with output: PL/SQL procedure successfully completed](images/task2_6.png " ")
 
-Now let's run a request and trace every step.
+## Task 3: Execute the Full Appraiser-Review Path
 
-1. Clear the log and set the team.
+Let's run a $75,000 limited_art submission and trace every step. This amount falls between $50K and $250K, so it should trigger the full three-step workflow: create → assess → route for appraiser review.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+1. Clear the log and activate the team.
+
+    Before running a test, clear the workflow log so you see only the steps from this execution. Then set the team so your `SELECT AI AGENT` commands go to this agent.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -279,19 +302,27 @@ Now let's run a request and trace every step.
     </copy>
     ```
 
-2. Submit a item request that should auto-approve.
+    ![Notebook cell showing TRUNCATE TABLE workflow_log and SET_TEAM with output: Table WORKFLOW_LOG truncated, PL/SQL procedure successfully completed](images/task3_1.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+2. Submit a $75,000 limited_art item.
+
+    Watch the agent's response -- it should mention creating the application and routing it for appraiser review.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT Process a $35000 personal item for John Smith with condition grade 780;
+    SELECT AI AGENT Submit a $75000 limited_art item submission for John Smith;
     </copy>
     ```
 
-3. Immediately check the workflow log.
+    ![Notebook cell showing SELECT AI AGENT query with RESPONSE: The $75000 limited_art item submission for John Smith has been successfully routed for APPRAISER review](images/task3_2png.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+3. Examine the workflow log.
+
+    Look at exactly what happened, step by step. You should see three entries showing the complete execution trace.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -304,18 +335,22 @@ Now let's run a request and trace every step.
     </copy>
     ```
 
+    ![workflow_log query results showing three rows: CREATE_APPLICATION for ITEM-260302-1001 John Smith $75,000, ASSESS_RISK for $75,000 limited_art item, and ROUTE_APPRAISER routing ITEM-260302-1001 for APPRAISER, with timestamps](images/task3_3.png " ")
+
     **Observe the execution sequence:**
-    - `CREATE_REQUEST`: The item was created
-    - `ASSESS_RISK`: Risk was evaluated
-    - `ROUTE_DECISION`: `AUTO_APPROVED` (personal under $50K with 780 credit)
+    - `CREATE_APPLICATION`: The item submission was created with a unique ID (e.g., `ITEM-260302-1001`)
+    - `ASSESS_RISK`: Risk was evaluated ($75K limited_art item requires appraiser)
+    - `ROUTE_APPRAISER`: It was routed for appraiser review
 
-## Task 4: Trace the Agent's Tool Calls
+## Task 4: Check the Tool History and Verify the Record
 
-The history views show what the agent did.
+Oracle also maintains its own history of every tool call. This shows you the inputs and outputs from the agent framework's perspective -- a second audit trail on top of your workflow log.
 
-1. Query the tool history.
+1. Query the tool execution history.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    You should see `CREATE_ITEM_TOOL`, `ASSESS_ITEM_RISK_TOOL`, and `ROUTE_AUTHENTICATION_TOOL` in sequence with timestamps.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -330,46 +365,54 @@ The history views show what the agent did.
     </copy>
     ```
 
-2. Check the item request that was created.
+    ![USER_AI_AGENT_TOOL_HISTORY results showing ROUTE_AUTHENTICATION_TOOL, ASSESS_ITEM_RISK_TOOL, and CREATE_ITEM_TOOL rows with started and ended timestamps and truncated result JSON](images/task4_1.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+2. Verify the item application record.
+
+    Look at the actual database record. You should see John Smith's $75,000 limited_art item with status `SUBMITTED_APPRAISER` -- proof the agent didn't just talk about routing the item, it actually updated the database.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     SELECT 
-        request_id,
-        collector,
-        amount,
+        application_id,
+        applicant_name,
+        TO_CHAR(item_amount, '$999,999') as item_amount,
         item_type,
-        credit_score,
-        risk_level,
-        routed_to,
-        status
-    FROM item_requests
+        risk_status,
+        TO_CHAR(created_at, 'HH24:MI:SS') as created
+    FROM item_applications
     ORDER BY created_at DESC;
     </copy>
     ```
 
-    You can see the actual record the agent created, with the risk assessment and routing.
+    ![item_applications query results showing ITEM-260302-1001, John Smith, $75,000, limited_art, SUBMITTED_APPRAISER, created at 18:38:58](images/task4_2.png " ")
 
-## Task 5: Trace Different Execution Paths
+## Task 5: Trace the Other Execution Paths
 
-Different item parameters trigger different routing paths.
+The same agent, same tools -- but different inputs lead to different routing paths. Let's test the auto-approve path and the senior appraiser path to see the agent make different decisions.
 
-1. Submit a item that needs appraiser review.
+1. Submit a $25,000 collector_card item -- the auto-approve path.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    With $25,000, the risk assessment should return AUTO_APPROVE, and the agent should NOT call `ROUTE_AUTHENTICATION_TOOL`.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Process a $150000 business item for Acme Corp with condition grade 720;
+    SELECT AI AGENT Submit a $25000 collector_card item submission for Jane Doe;
     </copy>
     ```
 
-2. Check the workflow log.
+    ![Notebook cell showing TRUNCATE and SELECT AI AGENT query with output: Table WORKFLOW_LOG truncated, RESPONSE: The $25000 collector_card item submission for Jane Doe has been successfully limited_art-approved](images/task5_1.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+2. Check the workflow log for the auto-approve path.
+
+    You should see only **two** steps this time -- no ROUTE_APPRAISER entry. The agent correctly decided not to route because the risk assessment said AUTO_APPROVE.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -377,22 +420,46 @@ Different item parameters trigger different routing paths.
     </copy>
     ```
 
-    **Observe:** Routed to APPRAISER because $150K business item needs review.
+    ![workflow_log results showing only two rows: CREATE_APPLICATION for ITEM-260302-1002 Jane Doe $25,000 and ASSESS_RISK for $25,000 collector_card item -- no ROUTE_APPRAISER row](images/task5_2.png " ")
 
-3. Submit a item that needs senior review.
+    **Observe:** Only two steps -- `CREATE_APPLICATION` and `ASSESS_RISK`. No routing step. This is the agent making a decision based on data: it read the risk assessment result and chose not to call the routing tool.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+3. Verify Jane's application record.
+
+    Jane's item should have status `SUBMITTED` (not `SUBMITTED_APPRAISER`), because it was auto-approved and didn't need routing.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    SELECT application_id, applicant_name, TO_CHAR(item_amount, '$999,999') as amount, risk_status 
+    FROM item_applications 
+    WHERE applicant_name = 'Jane Doe';
+    </copy>
+    ```
+
+    ![item_applications query result showing ITEM-260302-1002, Jane Doe, $25,000, risk_status SUBMITTED](images/task5_3.png " ")
+
+4. Submit a $350,000 authenticating -- the senior appraiser path.
+
+    Authenticating items at Big Star Collectibles always require senior review regardless of amount. Clear the log first so you see only this execution.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Process a $450000 authenticating for Jane Doe with condition grade 750;
+    SELECT AI AGENT Submit a $350000 authenticating item submission for Bob Wilson;
     </copy>
     ```
 
-4. Check the routing.
+    ![Notebook cell showing TRUNCATE and SELECT AI AGENT query with output: Table WORKFLOW_LOG truncated, RESPONSE: The $350000 authenticating item submission for Bob Wilson has been successfully routed for SENIOR_APPRAISER review](images/task5_4.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+5. Check the workflow log for the senior appraiser path.
+
+    You should see all three steps again -- but this time `ROUTE_APPRAISER` shows `SENIOR_APPRAISER` instead of `APPRAISER`.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -400,107 +467,83 @@ Different item parameters trigger different routing paths.
     </copy>
     ```
 
-    **Observe:** Routed to SENIOR_APPRAISER because it's a authenticating over $250K.
+    ![workflow_log results showing three rows: CREATE_APPLICATION for ITEM-260302-1003 Bob Wilson $350,000, ASSESS_RISK for $350,000 authenticating item, and ROUTE_APPRAISER routing ITEM-260302-1003 for SENIOR_APPRAISER](images/task5_5.png " ")
 
-5. Submit a item that should be blocked.
+6. Verify Bob's application record.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Bob's item should have status `SUBMITTED_SENIOR_APPRAISER`. The agent correctly identified an authenticating item and routed it to the higher review level.
 
-    ```sql
-    <copy>
-    TRUNCATE TABLE workflow_log;
-    SELECT AI AGENT Process a $25000 personal item for Bob Wilson with condition grade 520;
-    </copy>
-    ```
-
-6. Check the routing.
-
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;
+    SELECT application_id, applicant_name, TO_CHAR(item_amount, '$999,999') as amount, item_type, risk_status 
+    FROM item_applications 
+    WHERE applicant_name = 'Bob Wilson';
     </copy>
     ```
 
-    **Observe:** BLOCKED because condition grade 520 is below minimum 550.
+    ![item_applications query result showing ITEM-260302-1003, Bob Wilson, $350,000, authenticating, SUBMITTED_SENIOR_APPRAISER](images/task5_6.png " ")
 
-## Task 6: Compare All Items and Their Routes
+## Task 6: Compare All Three Execution Paths
 
-Let's see all the items and their different routing decisions.
+Let's see all three item submissions side by side with their routing reasons. Same agent, same tools -- but different execution paths based on the data.
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+1. Query all applications with routing logic.
 
-```sql
-<copy>
-SELECT 
-    request_id,
-    collector,
-    amount,
-    item_type,
-    credit_score,
-    risk_level,
-    routed_to,
-    status
-FROM item_requests
-ORDER BY created_at;
-</copy>
-```
-
-## Task 7: Understand the Execution Pattern
-
-Every agent execution follows this pattern:
-
-1. **Receive request** → The user submits a query
-2. **LLM understands** → Interprets the intent
-3. **LLM plans** → Determines which tools and in what order
-4. **Tool executes** → First tool runs, returns result
-5. **LLM analyzes** → Interprets the result
-6. **Next tool** → Repeat steps 4-5 for each tool (conditionally)
-7. **LLM responds** → Generates final response
-
-    Query to see the complete execution timeline:
-
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
     SELECT 
-    'TOOL: ' || tool_name as step,
-    TO_CHAR(start_date, 'HH24:MI:SS.FF3') as time,
-    SUBSTR(output, 1, 50) as output
-    FROM USER_AI_AGENT_TOOL_HISTORY
-    WHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE
-    ORDER BY start_date;
+        application_id,
+        applicant_name,
+        TO_CHAR(item_amount, '$999,999') as item_amount,
+        item_type,
+        risk_status,
+        CASE 
+            WHEN item_amount < 50000 AND item_type != 'authenticating' THEN 'Limited_art-approved'
+            WHEN item_type = 'authenticating' THEN 'Senior appraiser (authenticating)'
+            WHEN item_amount >= 250000 THEN 'Senior appraiser (high value)'
+            ELSE 'Standard appraiser review'
+        END as routing_reason
+    FROM item_applications
+    ORDER BY created_at;
     </copy>
     ```
 
-    Compare with your workflow log:
+    ![item_applications query results showing all three rows: ITEM-260302-1001 John Smith $75,000 limited_art SUBMITTED_APPRAISER Standard appraiser review; ITEM-260302-1002 Jane Doe $25,000 collector_card SUBMITTED Limited_art-approved; ITEM-260302-1003 Bob Wilson $350,000 authenticating SUBMITTED_SENIOR_APPRAISER Senior appraiser (authenticating)](images/task6_1.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    **Observe:** The same agent produced three different statuses based on the data:
 
-    ```sql
-    <copy>
-    SELECT 
-    'LOG: ' || step_name as step,
-    TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time,
-    step_detail as output
-    FROM workflow_log
-    WHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE
-    ORDER BY logged_at;
-    </copy>
-    ```
+    | Amount | Type | Status | Why |
+    |--------|------|--------|-----|
+    | $75,000 | limited_art | SUBMITTED_APPRAISER | Between $50K–$250K |
+    | $25,000 | collector_card | SUBMITTED | Auto-approved, under $50K |
+    | $350,000 | authenticating | SUBMITTED_SENIOR_APPRAISER | Authenticatings always require senior review |
+
+    That is exactly how Big Star Collectibles manages item risk. Small items auto-approve in seconds. Complex items get routed appropriately. And compliance has a complete audit trail for every decision.
 
 ## Summary
 
-In this lab, you traced the complete agent execution loop:
+In this lab, you traced the complete agent execution loop at Big Star Collectibles:
 
-* Created an observable agent with logging tools
-* Watched a multi-step workflow execute with risk assessment
-* Traced tool calls through history views
-* Saw how different inputs lead to different routing paths
+* **Logging**: `workflow_log` entries captured each step as it happened
+* **Conditional execution**: The agent called `ROUTE_AUTHENTICATION_TOOL` only when the risk assessment required it -- and skipped it for AUTO_APPROVE
+* **Three paths**: Auto-approve, appraiser review, and senior appraiser review, all from the same agent
+* **Verification**: Checked both the workflow log and actual database records
 
-**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. For Big Star Collectibles, this means small items auto-approve in seconds, complex items get routed appropriately, and compliance has a complete audit trail.
+**The execution pattern every agent follows:**
+
+1. **Receive request** → Inventory specialist submits application
+2. **LLM understands** → Interprets applicant, amount, item type
+3. **LLM plans** → Determines which tools, in what order
+4. **Tool executes** → First tool runs, returns result
+5. **LLM analyzes** → Interprets the result, decides next step (this is where decisions happen)
+6. **Repeat** → More tools if needed (conditionally)
+7. **LLM responds** → Generates final response
+
+**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services.
 
 ## Learn More
 
@@ -508,12 +551,12 @@ In this lab, you traced the complete agent execution loop:
 
 ## Acknowledgements
 
-* **Author** - David Start
+* **Author** - David Start, Director, Database Product Management
 * **Last Updated By/Date** - Kay Malcolm, February 2026
 
 ## Cleanup (Optional)
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+> This command is already in your notebook — just click the play button (▶) to run it.
 
 ```sql
 <copy>
@@ -521,11 +564,15 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('ITEM_EXEC_TEAM', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('ITEM_EXEC_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('ITEM_EXEC_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CREATE_ITEM_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ASSESS_ROUTE_TOOL', TRUE);
-DROP TABLE item_requests PURGE;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ASSESS_ITEM_RISK_TOOL', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ROUTE_AUTHENTICATION_TOOL', TRUE);
+DROP TABLE item_applications PURGE;
 DROP TABLE workflow_log PURGE;
-DROP SEQUENCE item_requests_seq;
-DROP FUNCTION create_item_request;
-DROP FUNCTION assess_and_route;
+DROP SEQUENCE item_applications_seq;
+DROP FUNCTION create_item_application;
+DROP FUNCTION assess_item_risk;
+DROP FUNCTION route_for_appraisal;
 </copy>
 ```
+
+![Notebook cell showing all DROP and EXEC cleanup statements with output: multiple PL/SQL procedure successfully completed messages](images/cleanup.png " ")
