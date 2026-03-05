@@ -137,7 +137,7 @@
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Ask in the New Session</h2>"}]}
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chen's preferred contact method and what rate discount does she have;",
+      "text": "%script\nSELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate discount does she have;",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "sql"}}
     },
     {

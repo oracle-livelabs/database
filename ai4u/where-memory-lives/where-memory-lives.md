@@ -101,7 +101,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
 
 1. Create the function to store facts.
 
-    The function returns `Answer: fact stored.` The Oracle Select AI Agent framework uses a ReAct loop that terminates when it detects the keyword **Answer** in a tool result. Without it, the framework keeps looping waiting for a final answer signal. The `Answer:` prefix is the specific termination keyword the framework checks for.
+    The function returns a JSON result confirming what was stored. This gives the agent a concrete, complete result to report back to the loan officer — the same pattern used by other tools in this workshop.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -126,8 +126,8 @@ This function becomes the agent's "save to memory" capability. When someone tell
             )
         );
         COMMIT;
-        
-        RETURN 'Answer: fact stored.';
+
+        RETURN '{"stored": true, "fact": "' || p_fact || '", "category": "' || p_category || '", "about": "' || NVL(p_about,'') || '"}';
     END;
     /
     </copy>
@@ -151,7 +151,7 @@ The recall function is the agent's "search memory" capability. When someone asks
         v_count  NUMBER := 0;
     BEGIN
         FOR rec IN (
-            SELECT 
+            SELECT
                 m.content.fact.string() as fact,
                 m.content.category.string() as category,
                 m.content.about.string() as about,
@@ -170,11 +170,11 @@ The recall function is the agent's "search memory" capability. When someone asks
             v_result := v_result || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No facts found matching the criteria.';
         END IF;
-        
+
         RETURN 'Found ' || v_count || ' facts:' || CHR(10) || v_result;
     END;
     /
@@ -183,7 +183,7 @@ The recall function is the agent's "search memory" capability. When someone asks
 
 ## Task 5: Register the Agent Tools
 
-Tools bridge your PL/SQL functions and the AI agent. The tool instructions are deliberately minimal — no confirmation steps, no follow-up actions. The agent calls the tool once and stops. Any additional language describing what to do *after* the tool returns gives the agent room to reason itself into a loop.
+Tools bridge your PL/SQL functions and the AI agent. Each tool's instruction tells the agent what parameters to pass — the same pattern used throughout this workshop.
 
 1. Register the "remember" tool.
 
@@ -194,7 +194,7 @@ Tools bridge your PL/SQL functions and the AI agent. The tool instructions are d
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'REMEMBER_TOOL',
-            attributes  => '{"instruction": "Store a fact. P_FACT: the fact text. P_CATEGORY: optional category. P_ABOUT: optional client name. Call once. When the tool returns, you are finished.",
+            attributes  => '{"instruction": "Store a fact about a client. Parameters: P_FACT (the fact to store), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history), P_ABOUT (optional: client name, e.g. Sarah Chen).",
                             "function": "remember_fact"}',
             description => 'Stores facts about clients in long-term memory for future recall'
         );
@@ -212,7 +212,7 @@ Tools bridge your PL/SQL functions and the AI agent. The tool instructions are d
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'RECALL_TOOL',
-            attributes  => '{"instruction": "Retrieve facts from memory. P_ABOUT: optional client name. P_CATEGORY: optional category. Call once. When the tool returns, you are finished.",
+            attributes  => '{"instruction": "Retrieve stored facts about a client. Parameters: P_ABOUT (optional: client name to search), P_CATEGORY (optional: category filter).",
                             "function": "recall_facts"}',
             description => 'Retrieves stored facts about clients from long-term memory'
         );
@@ -233,7 +233,7 @@ Tools bridge your PL/SQL functions and the AI agent. The tool instructions are d
 
 ## Task 6: Create the Agent, Task, and Team
 
-The agent role and task instruction are both stripped to the minimum. Rich descriptive language gives the LLM room to reason about what to do next — which is how tool-calling loops start. The goal here is a purely mechanical agent: one input, one tool call, stop.
+The agent role describes what the agent does and tells it to report results back to the user. The task instruction describes the concrete action for each request — the same approach used in Lab 10.
 
 1. Create the agent.
 
@@ -245,7 +245,7 @@ The agent role and task instruction are both stripped to the minimum. Rich descr
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'MEMORY_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a memory tool executor. For every request: call one tool, return the result, stop. No retries, no follow-up calls."}',
+                            "role": "You are a loan officer assistant for Seer Equity. When loan officers share client information, call REMEMBER_TOOL and confirm to the user what was stored. When they ask about a client, call RECALL_TOOL and tell the user what was found."}',
             description => 'An agent with persistent memory for Seer Equity'
         );
     END;
@@ -262,7 +262,7 @@ The agent role and task instruction are both stripped to the minimum. Rich descr
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'MEMORY_TASK',
-            attributes  => '{"instruction": "Call one tool, output the result, stop. Do not call any tool a second time under any circumstances. User request: {query}",
+            attributes  => '{"instruction": "When the loan officer shares client information, call REMEMBER_TOOL with the fact, category, and client name. Then respond to the user confirming what was remembered. When they ask about a client, call RECALL_TOOL with the client name. Then respond to the user with the facts returned by the tool. User request: {query}",
                             "tools": ["REMEMBER_TOOL", "RECALL_TOOL"]}',
             description => 'Task for memory-enabled loan conversations'
         );
@@ -313,7 +313,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-    **Watch for:** One tool call in the tool history, then a response.
+    **Watch for:** One tool call in the tool history, then the agent confirms what was stored.
 
 3. Tell it more.
 
@@ -325,7 +325,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-    **Watch for:** One tool call in the tool history, then a response.
+    **Watch for:** One tool call in the tool history, then the agent confirms what was stored.
 
 4. Ask about what it knows.
 
@@ -358,7 +358,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Sarah Chen's preferred contact method and what rate discount does she have;
+    SELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate discount does she have;
     </copy>
     ```
 
@@ -370,7 +370,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         memory_type,
         JSON_SERIALIZE(content PRETTY) as content_json,
         created_at
@@ -384,8 +384,8 @@ Now let's see memory in action.
 In this lab, you built a **memory core** using Oracle's converged database:
 
 * Created a memory table with native JSON
-* Built remember and recall functions — with a neutral `DONE` return value to prevent tool-loop feedback
-* Registered them as agents tools with minimal instructions that give the LLM no room to reason itself into a loop
+* Built remember and recall functions that return concrete JSON results the agent can report to the user
+* Registered them as agent tools with instructions that describe the work, not just the rules
 * Had conversations with an agent that remembers
 * Verified persistence across sessions
 
