@@ -330,7 +330,7 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT Sarah Chen has a 15 percent rate exception and her timezone is Pacific;
+    SELECT AI AGENT Sarah Chen has a 15 percent rate discount;
     </copy>
     ```
 

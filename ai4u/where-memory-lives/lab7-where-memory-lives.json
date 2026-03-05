@@ -374,7 +374,7 @@
       }
     },
     {
-      "text": "%md\n## Teach the Agent More\n\nAdd more information about the same client, including an important rate exception. The agent should store multiple facts.",
+      "text": "%md\n## Teach the Agent More\n\nAdd the client's rate discount. Keep this to a single fact so the agent makes one clean REMEMBER_TOOL call.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -395,7 +395,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Sarah Chen has been a Seer Equity client since 2018 and was approved for a 15% rate discount due to her excellent payment history;",
+      "text": "%script\nSELECT AI AGENT Sarah Chen has a 15 percent rate discount;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
