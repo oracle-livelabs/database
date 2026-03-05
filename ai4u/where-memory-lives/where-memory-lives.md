@@ -103,7 +103,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
 
 1. Create the function to store facts.
 
-    The function takes a fact (the information), an optional category (like "rate_exception" or "contact_preference"), and an optional "about" field (who this fact relates to). It stores everything as JSON and returns a confirmation.
+    The function takes a fact (the information), an optional category (like "rate_exception" or "contact_preference"), and an optional "about" field (who this fact relates to). It stores everything as JSON and returns a neutral `DONE` status — deliberately not echoing back the stored fact, which would cause the agent to see client data in the tool response and loop.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -129,8 +129,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
         );
         COMMIT;
         
-        RETURN 'Remembered: ' || p_fact || 
-               CASE WHEN p_about IS NOT NULL THEN ' (about ' || p_about || ')' ELSE '' END;
+        RETURN 'DONE';
     END;
     /
     </copy>

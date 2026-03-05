@@ -61,7 +61,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.\n\nThe function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.",
+      "text": "%md\n## Create the Remember Function\n\nThis function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.\n\nThe function returns a neutral status string rather than echoing back the stored fact. This prevents the agent from seeing client data in the tool response and looping.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -71,11 +71,11 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [{"type": "HTML", "data": "<h2>Create the Remember Function</h2>\n\n<p>This function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.</p>\n\n<p>The function takes a fact, optionally a category (like \"rate_exception\" or \"contact_preference\"), and optionally what client the fact is about. It stores everything as JSON in the memory table.</p>"}]
+        "msg": [{"type": "HTML", "data": "<h2>Create the Remember Function</h2>\n\n<p>This function becomes the agent's \"save to memory\" capability. When the agent hears something worth remembering about a Seer Equity client, it calls this function.</p>\n\n<p>The function returns a neutral status string rather than echoing back the stored fact. This prevents the agent from seeing client data in the tool response and looping.</p>"}]
       }
     },
     {
-      "text": "%script\nCREATE OR REPLACE FUNCTION remember_fact(\n    p_fact     VARCHAR2,\n    p_category VARCHAR2 DEFAULT 'general',\n    p_about    VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO agent_memory (memory_type, content)\n    VALUES (\n        'FACT',\n        JSON_OBJECT(\n            'fact'       VALUE p_fact,\n            'category'   VALUE p_category,\n            'about'      VALUE p_about,\n            'source'     VALUE 'loan_officer_conversation',\n            'remembered' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        )\n    );\n    COMMIT;\n    \n    RETURN 'Remembered: ' || p_fact || \n           CASE WHEN p_about IS NOT NULL THEN ' (about ' || p_about || ')' ELSE '' END;\nEND;\n/",
+      "text": "%script\nCREATE OR REPLACE FUNCTION remember_fact(\n    p_fact     VARCHAR2,\n    p_category VARCHAR2 DEFAULT 'general',\n    p_about    VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    PRAGMA AUTONOMOUS_TRANSACTION;\nBEGIN\n    INSERT INTO agent_memory (memory_type, content)\n    VALUES (\n        'FACT',\n        JSON_OBJECT(\n            'fact'       VALUE p_fact,\n            'category'   VALUE p_category,\n            'about'      VALUE p_about,\n            'source'     VALUE 'loan_officer_conversation',\n            'remembered' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')\n        )\n    );\n    COMMIT;\n    \n    RETURN 'DONE';\nEND;\n/",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -245,7 +245,7 @@
       }
     },
     {
-      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm.\n\n**Important:** Keep each statement to one fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.\n\n**Watch for:** The agent should confirm it remembered Sarah Chen's email preference.",
+      "text": "%md\n## Teach the Agent About a Client\n\nTell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm.\n\n**Important:** Keep each statement to one fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.\n\n**Watch for:** The agent should confirm it stored Sarah Chen's email preference.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -255,7 +255,7 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [{"type": "HTML", "data": "<h2>Teach the Agent About a Client</h2>\n\n<p>Tell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm.</p>\n\n<p><strong>Important:</strong> Keep each statement to one fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered Sarah Chen's email preference.</p>"}]
+        "msg": [{"type": "HTML", "data": "<h2>Teach the Agent About a Client</h2>\n\n<p>Tell the agent a single fact about a client's contact preference. The agent should call REMEMBER_TOOL once and confirm.</p>\n\n<p><strong>Important:</strong> Keep each statement to one fact. Compound sentences with multiple pieces of information will cause the agent to make multiple tool calls and loop.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it stored Sarah Chen's email preference.</p>"}]
       }
     },
     {
@@ -268,7 +268,7 @@
       }
     },
     {
-      "text": "%md\n## Teach the Agent More\n\nAdd a second fact about the same client. One fact per cell.\n\n**Watch for:** The agent should confirm it remembered the rate discount.",
+      "text": "%md\n## Teach the Agent More\n\nAdd a second fact about the same client. One fact per cell.\n\n**Watch for:** The agent should confirm it stored the rate discount.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -278,7 +278,7 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [{"type": "HTML", "data": "<h2>Teach the Agent More</h2>\n\n<p>Add a second fact about the same client. One fact per cell.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it remembered the rate discount.</p>"}]
+        "msg": [{"type": "HTML", "data": "<h2>Teach the Agent More</h2>\n\n<p>Add a second fact about the same client. One fact per cell.</p>\n\n<p><strong>Watch for:</strong> The agent should confirm it stored the rate discount.</p>"}]
       }
     },
     {
