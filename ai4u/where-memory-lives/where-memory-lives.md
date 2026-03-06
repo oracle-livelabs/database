@@ -70,15 +70,13 @@ The memory table is the foundation, where the agent stores everything it learns.
 
 1. Create the memory core table.
 
-    This table stores all agent memories. Each memory has a type (like FACT), JSON content (the actual information), and a timestamp. The JSON format gives us flexibility, we can store any kind of structured information.
-
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
     CREATE TABLE agent_memory (
         memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
-        agent_id       VARCHAR2(100) DEFAULT 'DEFAULT_AGENT',
+        agent_id       VARCHAR2(100) DEFAULT 'SEERS_AGENT',
         memory_type    VARCHAR2(20) DEFAULT 'FACT',
         content        JSON NOT NULL,
         created_at     TIMESTAMP DEFAULT SYSTIMESTAMP
@@ -103,7 +101,7 @@ This function becomes the agent's "save to memory" capability. When someone tell
 
 1. Create the function to store facts.
 
-    The function takes a fact (the information), an optional category (like "preference" or "contact"), and an optional "about" field (who or what this fact relates to). It stores everything as JSON and returns a confirmation.
+    The function returns a JSON result confirming what was stored. This gives the agent a concrete, complete result to report back to the loan officer — the same pattern used by other tools in this workshop.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -123,14 +121,13 @@ This function becomes the agent's "save to memory" capability. When someone tell
                 'fact'       VALUE p_fact,
                 'category'   VALUE p_category,
                 'about'      VALUE p_about,
-                'source'     VALUE 'conversation',
+                'source'     VALUE 'loan_officer_conversation',
                 'remembered' VALUE TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')
             )
         );
         COMMIT;
-        
-        RETURN 'Remembered: ' || p_fact || 
-               CASE WHEN p_about IS NOT NULL THEN ' (about ' || p_about || ')' ELSE '' END;
+
+        RETURN '{"stored": true, "fact": "' || p_fact || '", "category": "' || p_category || '", "about": "' || NVL(p_about,'') || '"}';
     END;
     /
     </copy>
@@ -141,8 +138,6 @@ This function becomes the agent's "save to memory" capability. When someone tell
 The recall function is the agent's "search memory" capability. When someone asks the agent a question, the agent can search its memory for relevant facts.
 
 1. Create the function to retrieve facts.
-
-    This function searches the memory table for facts that match what we're looking for. You can search by entity ("about") or by category. It returns the most recent matching facts.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -156,7 +151,7 @@ The recall function is the agent's "search memory" capability. When someone asks
         v_count  NUMBER := 0;
     BEGIN
         FOR rec IN (
-            SELECT 
+            SELECT
                 m.content.fact.string() as fact,
                 m.content.category.string() as category,
                 m.content.about.string() as about,
@@ -170,16 +165,16 @@ The recall function is the agent's "search memory" capability. When someone asks
         ) LOOP
             v_result := v_result || '- ' || rec.fact;
             IF rec.about IS NOT NULL THEN
-                v_result := v_result || ' (about: ' || rec.about || ')';
+                v_result := v_result || ' (client: ' || rec.about || ')';
             END IF;
             v_result := v_result || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        
+
         IF v_count = 0 THEN
             RETURN 'No facts found matching the criteria.';
         END IF;
-        
+
         RETURN 'Found ' || v_count || ' facts:' || CHR(10) || v_result;
     END;
     /
@@ -188,11 +183,9 @@ The recall function is the agent's "search memory" capability. When someone asks
 
 ## Task 5: Register the Agent Tools
 
-Tools bridge your PL/SQL functions and the AI agent. By registering these functions as tools, we give the agent the ability to remember and recall information. The instructions tell the agent when to use each tool.
+Tools bridge your PL/SQL functions and the AI agent. Each tool's instruction tells the agent what parameters to pass — the same pattern used throughout this workshop.
 
 1. Register the "remember" tool.
-
-    The instruction tells the agent to use this tool when users share important information. This is how the agent knows to save things.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -201,9 +194,9 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'REMEMBER_TOOL',
-            attributes  => '{"instruction": "Store a fact for future reference. Parameters: P_FACT (the information to remember), P_CATEGORY (optional: general, preference, contact, etc), P_ABOUT (optional: the entity this fact is about, e.g. Sarah Chen). Use this when the user shares important information.",
+            attributes  => '{"instruction": "Store a fact about a client. Parameters: P_FACT (the fact to store), P_CATEGORY (optional: general, rate_exception, contact_preference, loan_history), P_ABOUT (optional: client name, e.g. Sarah Chen).",
                             "function": "remember_fact"}',
-            description => 'Stores facts in long-term memory for future recall'
+            description => 'Stores facts about clients in long-term memory for future recall'
         );
     END;
     /
@@ -212,8 +205,6 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
 2. Register the "recall" tool.
 
-    The instruction tells the agent to search memory when asked about something. This is how the agent knows to look things up before answering.
-
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
@@ -221,9 +212,9 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'RECALL_TOOL',
-            attributes  => '{"instruction": "Retrieve facts from memory. Parameters: P_ABOUT (optional: entity name to search for), P_CATEGORY (optional: filter by category). Use this when asked about something you might have stored.",
+            attributes  => '{"instruction": "Retrieve stored facts about a client. Parameters: P_ABOUT (optional: client name to search), P_CATEGORY (optional: category filter).",
                             "function": "recall_facts"}',
-            description => 'Retrieves stored facts from long-term memory'
+            description => 'Retrieves stored facts about clients from long-term memory'
         );
     END;
     /
@@ -242,11 +233,9 @@ Tools bridge your PL/SQL functions and the AI agent. By registering these functi
 
 ## Task 6: Create the Agent, Task, and Team
 
-Now we put it all together. The agent gets both memory tools, and its role tells it to actively use them. This is what makes it different from the forgetful agent in Lab 5, this one has the ability to actually store and retrieve information.
+The agent role describes what the agent does and tells it to report results back to the user. The task instruction describes the concrete action for each request — the same approach used in Lab 10.
 
-1. Create the agent with memory awareness.
-
-    The role emphasizes using the tools, never guessing. When users share information, use REMEMBER_TOOL. When users ask questions, use RECALL_TOOL first.
+1. Create the agent.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -256,8 +245,8 @@ Now we put it all together. The agent gets both memory tools, and its role tells
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'MEMORY_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a helpful assistant with persistent memory. When users share information, use REMEMBER_TOOL to store it. When users ask questions, use RECALL_TOOL to check your memory. Always use your tools - never guess."}',
-            description => 'An agent with persistent memory'
+                            "role": "You are a loan officer assistant for Seer Equity. When loan officers share client information, call REMEMBER_TOOL and confirm to the user what was stored. When they ask about a client, call RECALL_TOOL and tell the user what was found."}',
+            description => 'An agent with persistent memory for Seer Equity'
         );
     END;
     /
@@ -273,9 +262,9 @@ Now we put it all together. The agent gets both memory tools, and its role tells
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'MEMORY_TASK',
-            attributes  => '{"instruction": "Process this user request. If the user shares information worth remembering, call REMEMBER_TOOL to store it. If the user asks a question, call RECALL_TOOL to search memory first. Do not ask clarifying questions. User request: {query}",
+            attributes  => '{"instruction": "When the loan officer shares client information, call REMEMBER_TOOL with the fact, category, and client name. Then respond to the user confirming what was remembered. When they ask about a client, call RECALL_TOOL with the client name. Then respond to the user with the facts returned by the tool. User request: {query}",
                             "tools": ["REMEMBER_TOOL", "RECALL_TOOL"]}',
-            description => 'Task for memory-enabled conversations'
+            description => 'Task for memory-enabled loan conversations'
         );
     END;
     /
@@ -320,9 +309,11 @@ Now let's see memory in action.
 
     ```sql
     <copy>
-    SELECT AI AGENT Customer Sarah Chen prefers to be contacted by email, not phone;
+    SELECT AI AGENT Sarah Chen prefers email over phone;
     </copy>
     ```
+
+    **Watch for:** One tool call in the tool history, then the agent confirms what was stored.
 
 3. Tell it more.
 
@@ -334,6 +325,8 @@ Now let's see memory in action.
     </copy>
     ```
 
+    **Watch for:** Two tool calls in the tool history — the agent splits the two facts and stores each separately.
+
 4. Ask about what it knows.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -344,7 +337,7 @@ Now let's see memory in action.
     </copy>
     ```
 
-The agent recalls the stored facts.
+    **Watch for:** The agent returns the email preference, 15% rate exception, and Pacific timezone.
 
 ## Task 8: Verify Persistence Across Sessions
 
@@ -365,11 +358,11 @@ The agent recalls the stored facts.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Sarah Chen's preferred contact method;
+    SELECT AI AGENT What is Sarah Chen''s preferred contact method and what rate exception does she have;
     </copy>
     ```
 
-**The agent remembers!** Because facts are stored in the database, not session memory.
+    **The agent remembers!** Because facts are stored in the database, not session memory, they survive the session reset.
 
 3. View the memory core contents.
 
@@ -377,7 +370,7 @@ The agent recalls the stored facts.
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         memory_type,
         JSON_SERIALIZE(content PRETTY) as content_json,
         created_at
@@ -391,8 +384,8 @@ The agent recalls the stored facts.
 In this lab, you built a **memory core** using Oracle's converged database:
 
 * Created a memory table with native JSON
-* Built remember and recall functions
-* Registered them as agent tools
+* Built remember and recall functions that return concrete JSON results the agent can report to the user
+* Registered them as agent tools with instructions that describe the work, not just the rules
 * Had conversations with an agent that remembers
 * Verified persistence across sessions
 
