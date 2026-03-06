@@ -16,13 +16,11 @@ This is a demo only lab. We'll show how you can integrate custom agents created 
 * Familiarity with building custom agents in Agent Factory  
 * Basic knowledge of APEX apps
 
-## Task 1: Watch the demo
-
-** Screenshots, high level overview of APEX app architecture
+## Task 1: Lab instructors will show live demos
 
 ## Acknowledgements
 
-**Authors** 
+**Authors**
 
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 

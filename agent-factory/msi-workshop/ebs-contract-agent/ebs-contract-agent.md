@@ -17,19 +17,17 @@ In this lab, you will learn how build an contracts generation agent. You'll use 
 * Familairty with Agent Factory and AI Agents concepts (data sources, MCP, Prompts, Tools, etc)
 * Understanding of how OIC Integrations are exposed as MCP tools
 
-## Task 1: Understand contract processing flow
+## Task 1:  Contract processing agent builder walkthrough
 
-** details of buisness flow to be automated, pain-points, key manual touchpoints for different teams
+Instructors will do a live walkthrough building the contract renewal agent in Agent Factory.
 
-## Task 2: Contract processing agent builder walkthrough
-
-** inputs: curren/old contract, latest lookups, change prices by +10%, 
-** step-by-step building an agent
-** result: new contract document in agent factory
+![Open Agent Builder](./images/final-agent-contract-renewal.png " ")
 
 ## Acknowledgements
 
 **Authors** 
-* Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - February, 2026
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Aby Joy, Master Principal Cloud Architect
+
+**Last Updated Date** - March, 2026
