@@ -48,5 +48,8 @@ You may now **proceed to the next lab**
 **Authors** 
 
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Aby Joy, Master Principal Cloud Architect
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
 
 **Last Updated Date** - March, 2026
