@@ -1,7 +1,11 @@
 {
-  "workshoptitle": "Private Agent Factory - MSI Workshop",
+  "workshoptitle": "Oracle AI Database Private Agent Factory - Customer Workshop",
   "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
+    {
+      "title": "Get Started",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+    },
     {
       "title": "Introduction to Oracle AI Database Private Agent Factory",
       "filename": "../../workshop-intro/workshop-intro.md"
@@ -17,16 +21,14 @@
     { "title": "Lab 3: Build Agent for complex business flows with OIC MCP Server",
       "filename": "../../ebs-db-thru-oic/ebs-db-thru-oic.md"
     },
-    { "title": "Demos and Q&A - APEX App, Invoking Agents from APEX App, etc. [Working Lunch] ",
-      "filename": "../../apex-demo/apex-demo.md"
-    },
     {
       "title": "Lab 4: E-Business Contracts Generation Agent live walkthrough",
       "filename": "../../ebs-contract-agent/ebs-contract-agent.md"
     },
     {
       "title": "Need Help?",
-      "filename": "../../../need_help/need_help.md"
-    }
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+  }
   ]
 }

@@ -39,7 +39,7 @@ Navigate to the **Agent Builder** tab on the left-hand menu. <span style="color:
 
 To assemble a custom agent in Private Agent Factory using your OIC project, we will need our OIC MCP server URL and token. Those two will be provided to you by instructors for the purpose of this lab.
 
-#### Step 1. Add components to the canvas
+### Step 1. Add components to the canvas
 
 1. To begin, find the **Chat input** node from the Components tool bar. Drag it onto the canvas, or simply click the + button.
 
@@ -49,47 +49,44 @@ To assemble a custom agent in Private Agent Factory using your OIC project, we w
 
 4. Find the **Chat output** node near the bottom of the menu, and drag it onto the canvas.
 
+    1. Drag the blue dot from the Chat input component to the Prompt field of the agent.
 
-#### Step 2. Connect components
+    2. Then drag the Message blue dot on the Agent component to the Message dot on the Chat output component.
 
-Drag the blue dot from the Chat input component to the Prompt field of the agent.
+    3. Lastly, drag the Tools light blue dot on the MCP Server component to the Tools dot on the Agent component.
 
-Then drag the Message blue dot on the Agent component to the Message dot on the Chat output component.
+    #### Step 3. Fill out details on components
 
-Lastly, drag the Tools light blue dot on the MCP Server component to the Tools dot on the Agent component.
+    #### 3.1 MCP Server Component
 
+    In the MCP Server component you will need to:
 
-#### Step 3. Fill out details on components
-
-**3.1 MCP Server Component**
-
-In the MCP Server component you will need to:
 1. Paste in the provided MCP URL
 2. Select Auth type to be Bearer token
 3. Paste in the provided Bearer token
 
-**3.2 Agent Component**
+    #### 3.2 Agent Component
 
 1. In the Agent, for the "Select LLM to use" field select the **xai.grok-4**.
 
 2. In the "Custom instructions" field for Agent copy/paste:
+
     ```
     <copy>
     When asked for details for a sales order number use the available tool.
     </copy>
     ```
 
-<span style="color:red;">Confirm that your agent looks like this:</span>
+    <span style="color:red;">Confirm that your agent looks like this:</span>
 
+    ![Example PAF Agent Builder](./images/OIC-MCP-Workflow.png " ")
 
-![Example PAF Agent Builder](./images/OIC-MCP-Workflow.png " ")
-
-#### Step 4: Save the flow and test!
+    ### Step 4: Save the flow and test!
 1. Click **Save** on the top right hand corner of your page.
 
 2. **Then**, click **Playground**. You should see the following:
 
-![Playground](./images/PAF-Playground.png " ")
+    ![Playground](./images/PAF-Playground.png " ")
 
 3. Add the following prompts one after the other:
 
@@ -105,12 +102,13 @@ In the MCP Server component you will need to:
     </copy>
     ```
 
-Please see example output for the above prompts below.
+    Please see example output for the above prompts below.
 
-![Lab3-Task3](./images/Lab3-Task3-Output.png " ")
+    ![Lab3-Task3](./images/Lab3-Task3-Output.png " ")
 
+    Congratulations! You have successfully finished this lab.
 
-Congratulations! You have successfully finished this lab.
+    You may now proceed to the next lab.
 
 ## Acknowledgements
 

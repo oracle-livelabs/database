@@ -21,7 +21,7 @@ In this lab, you will learn how build an contracts generation agent. You'll use 
 
 Instructors will do a live walkthrough building the contract renewal agent in Agent Factory.
 
-![Open Agent Builder](./images/final-agent-contract-renewal.png " ")
+![Open Agent Builder](./images/final-agent-contract-renewal.png "Contract agent in Agent Builder, showing nodes and components")
 
 ## Acknowledgements
 

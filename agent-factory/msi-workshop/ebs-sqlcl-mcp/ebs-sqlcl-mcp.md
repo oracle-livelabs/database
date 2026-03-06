@@ -40,28 +40,25 @@ To assemble this custom agent in Private Agent Factory we will need our MCP serv
 
 4. Find the **Chat output** node near the bottom of the menu, and drag it onto the canvas.
 
+    1. Drag the blue dot from the Chat input component to the Prompt field of the agent.
 
-#### Step 2. Connect components
+    2. Then drag the Message blue dot on the Agent component to the Message dot on the Chat output component.
 
-Drag the blue dot from the Chat input component to the Prompt field of the agent.
+    3. Lastly, drag the Tools light blue dot on the MCP Server component to the Tools dot on the Agent component.
 
-Then drag the Message blue dot on the Agent component to the Message dot on the Chat output component.
+    #### Step 3. Fill out details on components
 
-Lastly, drag the Tools light blue dot on the MCP Server component to the Tools dot on the Agent component.
+    **3.1 MCP Server Component**
 
-
-#### Step 3. Fill out details on components
-
-**3.1 MCP Server Component**
-
-In the MCP Server component you will need to:
+    In the MCP Server component you will need to:
 1. Paste in the provided MCP URL
 2. Select Auth type to be **None**
 
-**3.2 Agent Component**
+    **3.2 Agent Component**
 
 1. In the Agent, for the "Select LLM to use" field select **xai.grok-4.reasoning**.
-2. In the custom instructions add
+2. In the custom instructions add:
+
     ```
     <copy>
     You are an Oracle DBA expert in analyzing AWR reports. Answer the user's query.
@@ -77,18 +74,16 @@ In the MCP Server component you will need to:
     </copy>
     ```
 
+    <span style="color:red;">Confirm that your agent looks like this:</span>
 
-<span style="color:red;">Confirm that your agent looks like this:</span>
+    ![Example PAF Agent Builder](./images/EBS-Workflow.png " ")
 
-
-![Example PAF Agent Builder](./images/EBS-Workflow.png " ")
-
-#### Step 4: Save the flow and test!
+    #### Step 4: Save the flow and test!
 1. Click **Save** on the top right hand corner of your page.
 
 2. **Then**, click **Playground**. You should see the following:
 
-![Playground](./images/PAF-Playground.png " ")
+    ![Playground](./images/PAF-Playground.png " ")
 
 3. Add the following prompt:
 
@@ -98,9 +93,9 @@ In the MCP Server component you will need to:
     </copy>
     ```
 
-Please see example output for the above prompt below.
+    Please see example output for the above prompt below.
 
-![Playground](./images/Lab2-Task2-Output.png " ")
+    ![Playground](./images/Lab2-Task2-Output.png " ")
 
 4. These are other prompts that may be used to interact with this agent.
 
@@ -153,7 +148,7 @@ We will use the same agent to analyze AWR reports.
 
 1. Start a new chat by clicking the "New chat" button on the right hand side of your chat interface.
 
-![Start new chat](./images/start-new-chat.png " ")
+    ![Start new chat](./images/start-new-chat.png " ")
 
 2. Add the following prompt:
 
@@ -164,11 +159,10 @@ We will use the same agent to analyze AWR reports.
     </copy>
     ```
 
-Please see example output for the above prompt below.
+    Please see example output for the above prompt below.
 
-![Example](./images/run-awr-report-output1.png " ")
-![Example](./images/run-awr-report-output2.png " ")
-
+    ![Example](./images/run-awr-report-output1.png " ")
+    ![Example](./images/run-awr-report-output2.png " ")
 
 3. Other prompts that may be used to interact with this agent:
 
@@ -178,7 +172,9 @@ Please see example output for the above prompt below.
     </copy>
     ```
 
-Congratulations! You have successfully finished this lab.
+    Congratulations! You have successfully finished this lab.
+
+    You may now proceed to the next lab.
 
 ## Acknowledgements
 
