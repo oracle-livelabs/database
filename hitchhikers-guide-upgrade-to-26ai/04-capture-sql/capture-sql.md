@@ -70,8 +70,8 @@ You now have two SQL Tuning Sets:
 
     ``` sql
     <copy>
-    select name, owner, statement_count 
-    from dba_sqlset 
+    select name, owner, statement_count
+    from dba_sqlset
     where name like 'STS_Capture%';
     </copy>
     ```

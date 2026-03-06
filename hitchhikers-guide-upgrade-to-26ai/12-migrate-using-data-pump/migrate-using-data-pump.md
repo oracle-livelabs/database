@@ -958,7 +958,7 @@ You need a few more changes to the new PDB before you can start the import.
     SQL> alter session set container=purple;
 
     Session altered.
-    
+
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
 
     OBJECT_TYPE               COUNT(*)

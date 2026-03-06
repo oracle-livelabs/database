@@ -366,7 +366,7 @@ You check initialization parameters and set some in the CDB. Also, find a list o
             4 undo_tablespace                UNDOTBS1
             5 sga_target                     0
             5 undo_tablespace                UNDOTBS1
-    
+
     9 rows selected.
     ```
 

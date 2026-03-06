@@ -276,7 +276,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 3. Use the `lsj` command.
 
     ``` bash
-    <copy> 
+    <copy>
     lsj -a 10
     </copy>
     ```
@@ -465,21 +465,21 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
     ``` text
     Details
-    
+
     	Job No           101
     	Oracle SID       FTEX
     	Start Time       25/08/01 09:48:23
     	Elapsed (min):   3
     	End time:        N/A
-    
+
     Logfiles
-    
+
     	Logs Base:    /home/oracle/logs/ftex-refresh/FTEX
     	Job logs:     /home/oracle/logs/ftex-refresh/FTEX/101
     	Stage logs:   /home/oracle/logs/ftex-refresh/FTEX/101/dbupgrade
     	TimeZone:     /home/oracle/logs/ftex-refresh/FTEX/temp
     	Remote Dirs:
-    
+
     Stages
     	SETUP            <1 min
     	PREUPGRADE       <1 min
@@ -494,15 +494,15 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     	POSTFIXUPS
     	POSTUPGRADE
     	SYSUPDATES
-    
+
     Stage-Progress Per Container
-    
+
     	+--------+---------+
     	|Database|DBUPGRADE|
     	+--------+---------+
     	|    TEAL|    6  % |
     	+--------+---------+
-    
+
     The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
 

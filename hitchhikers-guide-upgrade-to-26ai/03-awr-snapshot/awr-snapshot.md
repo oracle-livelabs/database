@@ -92,7 +92,7 @@ Start capturing workload information from the cursor cache into a SQL tuning set
     <copy>
     @/home/oracle/scripts/upg-03-capture_cc.sql
     </copy>
- 
+
     -- Be sure to hit RETURN
     ```
 
