@@ -114,7 +114,8 @@ To assemble a custom agent in Private Agent Factory using your OIC project, we w
 
 **Authors** 
 
-* Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Aby Joy, Master Principal Cloud Architect
 * Sania Bolla, Cloud Engineer
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
 **Last Updated Date** - March, 2026

@@ -23,5 +23,6 @@ This is a demo only lab. We'll show how you can integrate custom agents created 
 **Authors**
 
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Aby Joy, Master Principal Cloud Architect
 
 **Last Updated Date** - March, 2026

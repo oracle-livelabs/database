@@ -180,7 +180,9 @@ We will use the same agent to analyze AWR reports.
 
 **Authors** 
 
-* Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Aby Joy, Master Principal Cloud Architect
 * Sania Bolla, Cloud Engineer
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Allen Hosler, Principal Product Manager, Database Applied AI
 
 **Last Updated Date** - March, 2026

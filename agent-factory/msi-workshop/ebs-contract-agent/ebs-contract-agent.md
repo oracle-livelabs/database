@@ -27,7 +27,8 @@ Instructors will do a live walkthrough building the contract renewal agent in Ag
 
 **Authors** 
 
-* Kumar Varun, Senior Principal Product Manager, Database Applied AI
 * Aby Joy, Master Principal Cloud Architect
+* Kumar Varun, Senior Principal Product Manager, Database Applied AI
+* Sania Bolla, Cloud Engineer
 
 **Last Updated Date** - March, 2026
