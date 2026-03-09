@@ -69,3 +69,7 @@ Run this step as a script.
         >FreeSQL Embedded Playground</iframe>
 
 ---
+
+## Acknowledgements
+* **Author** – Layla Elwakhi, Oracle
+* **Last Updated By** – Layla Elwakhi, March 2026

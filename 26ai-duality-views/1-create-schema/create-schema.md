@@ -110,3 +110,8 @@ The following query confirms that every attendee row has a valid JSON object in 
             title="FreeSQL"
             style="width: 100%; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;"
         >FreeSQL Embedded Playground</iframe>
+
+
+## Acknowledgements
+* **Author** – Layla Elwakhi, Oracle
+* **Last Updated By** – Layla Elwakhi, March 2026
