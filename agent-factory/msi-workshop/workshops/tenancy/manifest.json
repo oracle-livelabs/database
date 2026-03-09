@@ -1,0 +1,34 @@
+{
+  "workshoptitle": "Oracle AI Database Private Agent Factory - Customer Workshop",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Get Started",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Introduction to Oracle AI Database Private Agent Factory",
+      "filename": "../../workshop-intro/workshop-intro.md"
+    },
+    {
+      "title": "Lab 1: Create Knowledge and Data Analysis Agents (prebuilt)",
+      "filename": "../../../prebuilt/prebuilt.md"
+    },
+    {
+      "title": "Lab 2: EBS Database Agent: Analyze Business Data and AWR Reports",
+      "filename": "../../ebs-sqlcl-mcp/ebs-sqlcl-mcp.md"
+    },
+    { "title": "Lab 3: Build Agent for complex business flows with OIC MCP Server",
+      "filename": "../../ebs-db-thru-oic/ebs-db-thru-oic.md"
+    },
+    {
+      "title": "Lab 4: E-Business Contracts Generation Agent live walkthrough",
+      "filename": "../../ebs-contract-agent/ebs-contract-agent.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+  }
+  ]
+}
