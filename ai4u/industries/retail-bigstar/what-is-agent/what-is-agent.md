@@ -47,15 +47,15 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
-    ![Notebook Information](./images/notebook_launch.png " ")
+    ![OML home page with Notebooks option highlighted in the navigation menu](images/task1_1.png " ")
 
 2. Click **Import** to expand the Import drop down.
 
-    ![Notebook Information](./images/notebook_import.png " ")
+    ![Notebooks page with Import button highlighted](images/task1_2.png " ")
 
 3. Select **Git**.
 
-    ![Notebook Information](./images/notebook_git.png " ")
+    ![Import dropdown expanded with Git option highlighted](images/task1_3.png " ")
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -64,11 +64,10 @@ Before you begin, you are going to import a notebook that has all of the command
     https://github.com/kaymalcolm/database/blob/main/ai4u/industries/retail-bigstar/what-is-agent/lab1-what-is-agent.json
     </copy>
     ```
-    ![Notebook Information](./images/notebook_clone.png " ")
 
 5. Click **Ok**.
 
-    ![Notebook Information](./images/notebook_clone.png " ")
+    ![Git Clone dialog with URL pasted and Import button highlighted](images/task1_5.png " ")
 
     You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
