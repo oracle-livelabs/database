@@ -17,6 +17,12 @@ By the end of this lab, you will have:
 - Stored, chunked, and vectorized your documents.
 - Used a Large Language Model (LLM) to generate a precise answer to a query you enter based on relevant context stored in Oracle AI database.
 - See the diagram below what you will be learning.
+
+Throughout this tutorial we will be leveraging a Jupyter Notebook to explore Oracle Database AI capabilities. If you are unfamiliar with notebooks here are a few tips to get started:
+- Instructions and code will be mixed together, each having their own blocks. You can use the run button on the code to see it execute. If you accidently hit run on any instructions it will just move to the next block so don't worry.
+- When running a code block it will switch from either a [ ] or a [1] (a number inside) to a [*]. When you see the one with a * that means its running. Wait till it switches to a number before moving on.
+- If you see any warnings, don't worry, they are probably just letting you know that things are changing, depreciating and you should look at updating to the latest standards. You don't need to do anything.
+
  
  ![rag image](images\overview.png " ")
 
