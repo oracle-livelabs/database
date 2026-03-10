@@ -6,7 +6,7 @@
             "title": "Introduction",
             "description": "Introduction to the workshop and the labs that follow",
              "type": "livelabs",
-           "filename": "../../introduction/introduction.md"
+           "filename": "../../../../introduction/introduction.md"
         },
         {
             "title": "Get Started",
@@ -29,13 +29,13 @@
             "title": "Lab 3: Setup the Python Functions",
             "description": "Setup the dev environment",
             "type": "livelabs",
-            "filename": "../../setup-python/setup-python.md"
+            "filename": "../setup-python/setup-python.md"
         },
         {
             "title": "Lab 4: Embed End-User Business Documents",
             "description": "Embed End-User Business Documents",
             "type": "livelabs",
-            "filename": "../../sentence-transformer/sentence-transformer.md"
+            "filename": "sentence-transformer/sentence-transformer.md"
         },
         {
             "title": "Lab 5: AI Vector Search and Retrieval-Augmented Generation (RAG)",
