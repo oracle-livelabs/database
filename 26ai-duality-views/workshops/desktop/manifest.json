@@ -1,0 +1,56 @@
+{
+  "workshoptitle": "26ai Duality Views: Build Updatable JSON Documents",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Get Started",
+      "description": "Log in and get set up for LiveLabs.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+    },
+    {
+      "title": "Introduction",
+      "description": "Learn what JSON Relational Duality Views are and what you will build in this lab.",
+      "filename": "../../0-intro/introduction.md"
+    },
+    {
+      "title": "Lab 1: Create a Tiny Relational Schema",
+      "description": "Create the base tables and seed data for a small conference schema to use with Duality Views.",
+      "filename": "../../1-create-schema/create-schema.md"
+    },
+    {
+      "title": "Lab 2: Single-Table Duality Views",
+      "description": "Create updatable document views over single tables and apply fine-grained controls such as read-only attributes.",
+      "filename": "../../2-single-table-duality/single-table-duality.md"
+    },
+    {
+      "title": "Lab 3: Multi-Table Duality View",
+      "description": "Create a multi-table duality view that produces one nested document per attendee, including sessions and speakers.",
+      "filename": "../../3-multi-table-duality/multi-table-duality.md"
+    },
+    {
+      "title": "Lab 4: CRUD Through Documents",
+      "description": "Insert, update, and delete data using the JSON document interface backed by relational tables.",
+      "filename": "../../4-crud-documents/crud-documents.md"
+    },
+    {
+      "title": "Lab 5: Query Documents with SQL",
+      "description": "Query nested JSON documents using SQL and JSON_TABLE to flatten arrays into rows.",
+      "filename": "../../5-query-documents/query-documents.md"
+    },
+    {
+      "title": "Lab 6: Connect with SQL Developer",
+      "description": "Connect your FreeSQL schema to VsCode",
+      "filename": "../../7-sql_net/create-freesql-account-continue-to-vscode.md"
+    },
+    {
+      "title": "Scripts",
+      "description": "See all the SQL scripts found in this LiveLab.",
+      "filename": "../../6-scripts/all-the-scripts.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving live help.",
+      "filename": "../../8-need_help/need_help.md"
+    }
+  ]
+}

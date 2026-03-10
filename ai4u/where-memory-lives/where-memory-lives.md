@@ -47,10 +47,13 @@ For this workshop, we provide the environment. You'll need:
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
+    ![Notebook Information](./images/task1_1.png " ")
 
 2. Click **Import** to expand the Import drop down.
+    ![Notebook Information](./images/task1_2.png " ")
 
 3. Select **Git**.
+    ![Notebook Information](./images/task1_3.png " ")
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -61,8 +64,9 @@ Before you begin, you are going to import a notebook that has all of the command
     ```
 
 5. Click **Ok**.
+    ![Notebook Information](./images/task1_5.png " ")
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Core Table
 
@@ -84,6 +88,8 @@ The memory table is the foundation, where the agent stores everything it learns.
     </copy>
     ```
 
+    ![Notebook Information](./images/task2_1.png " ")
+
 2. Create indexes for efficient JSON queries.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -94,6 +100,8 @@ The memory table is the foundation, where the agent stores everything it learns.
     CREATE INDEX idx_memory_type ON agent_memory(memory_type);
     </copy>
     ```
+
+    ![Notebook Information](./images/task2_2.png " ")
 
 ## Task 3: Create the Remember Function
 
@@ -132,6 +140,8 @@ This function becomes the agent's "save to memory" capability. When someone tell
     /
     </copy>
     ```
+
+    ![Notebook Information](./images/task3_1.png " ")
 
 ## Task 4: Create the Recall Function
 
@@ -181,6 +191,8 @@ The recall function is the agent's "search memory" capability. When someone asks
     </copy>
     ```
 
+    ![Notebook Information](./images/task4_1.png " ")
+
 ## Task 5: Register the Agent Tools
 
 Tools bridge your PL/SQL functions and the AI agent. Each tool's instruction tells the agent what parameters to pass — the same pattern used throughout this workshop.
@@ -203,6 +215,8 @@ Tools bridge your PL/SQL functions and the AI agent. Each tool's instruction tel
     </copy>
     ```
 
+    ![Notebook Information](./images/task5_1.png " ")
+
 2. Register the "recall" tool.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -221,6 +235,8 @@ Tools bridge your PL/SQL functions and the AI agent. Each tool's instruction tel
     </copy>
     ```
 
+    ![Notebook Information](./images/task5_2.png " ")
+
 3. Verify the tools were created.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -230,6 +246,8 @@ Tools bridge your PL/SQL functions and the AI agent. Each tool's instruction tel
     SELECT tool_name, status, description FROM USER_AI_AGENT_TOOLS;
     </copy>
     ```
+
+    ![Notebook Information](./images/task5_3.png " ")
 
 ## Task 6: Create the Agent, Task, and Team
 
@@ -253,6 +271,8 @@ The agent role describes what the agent does and tells it to report results back
     </copy>
     ```
 
+    ![Notebook Information](./images/task6_1.png " ")
+
 2. Create the task.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -270,6 +290,8 @@ The agent role describes what the agent does and tells it to report results back
     /
     </copy>
     ```
+
+    ![Notebook Information](./images/task6_3.png " ")
 
 3. Create the team.
 
@@ -289,6 +311,8 @@ The agent role describes what the agent does and tells it to report results back
     </copy>
     ```
 
+    ![Notebook Information](./images/task6_3.png " ")
+
 ## Task 7: Talk to Your Agent
 
 Now let's see memory in action.
@@ -303,6 +327,8 @@ Now let's see memory in action.
     </copy>
     ```
 
+    ![Notebook Information](./images/task7_1.png " ")
+
 2. Tell the agent something to remember.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -314,6 +340,8 @@ Now let's see memory in action.
     ```
 
     **Watch for:** One tool call in the tool history, then the agent confirms what was stored.
+
+    ![Notebook Information](./images/task7_2.png " ")
 
 3. Tell it more.
 
@@ -327,6 +355,8 @@ Now let's see memory in action.
 
     **Watch for:** Two tool calls in the tool history — the agent splits the two facts and stores each separately.
 
+    ![Notebook Information](./images/task7_3.png " ")
+
 4. Ask about what it knows.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -338,6 +368,8 @@ Now let's see memory in action.
     ```
 
     **Watch for:** The agent returns the email preference, 15% rate exception, and Pacific timezone.
+
+    ![Notebook Information](./images/task7_4.png " ")
 
 ## Task 8: Verify Persistence Across Sessions
 
@@ -352,6 +384,8 @@ Now let's see memory in action.
     </copy>
     ```
 
+    ![Notebook Information](./images/task8_1.png " ")
+
 2. Ask about previous information.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -363,6 +397,8 @@ Now let's see memory in action.
     ```
 
     **The agent remembers!** Because facts are stored in the database, not session memory, they survive the session reset.
+
+    ![Notebook Information](./images/task8_2.png " ")
 
 3. View the memory core contents.
 
@@ -378,6 +414,8 @@ Now let's see memory in action.
     ORDER BY created_at DESC;
     </copy>
     ```
+
+    ![Notebook Information](./images/task8_3.png " ")
 
 ## Summary
 
@@ -399,7 +437,7 @@ In this lab, you built a **memory core** using Oracle's converged database:
 ## Acknowledgements
 
 * **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Last Updated By/Date** - Francis Regalado, March 2026
 
 ## Cleanup (Optional)
 
@@ -417,3 +455,5 @@ DROP FUNCTION remember_fact;
 DROP FUNCTION recall_facts;
 </copy>
 ```
+
+![Notebook Information](./images/cleanup.png " ")
