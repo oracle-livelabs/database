@@ -1,4 +1,7 @@
-# AI Vector Search and Retrieval-Augmented Generation (RAG)
+# Lab 4: AI Vector Search and Retrieval-Augmented Generation (RAG)
+
+###**<span style="color:blue">( Refer to 'Lab 4' of the Jupyter notebook as go through this lab )</span>**
+<br>
 
 ## Introduction
 

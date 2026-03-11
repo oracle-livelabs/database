@@ -1,4 +1,7 @@
-# Embed End-User Business Documents
+# Lab 3: Embed End-User Business Documents
+
+###**<span style="color:blue">( Refer to 'Lab 3' of the Jupyter notebook as go through this lab )</span>**
+<br>
 
 ## Introduction
 

@@ -31,6 +31,12 @@
             "description": "AI Vector Search and Retrieval-Augmented Generation (RAG)",
             "type": "livelabs",
             "filename": "../../search+llm/search+llm.md"
+        },
+        {
+            "title": "Lab 5: Select AI",
+            "description": "Select AI",
+            "type": "livelabs",
+            "filename": "../../select-ai/select-ai.md"
         }
     ]
 }

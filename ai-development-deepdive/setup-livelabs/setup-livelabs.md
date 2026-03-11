@@ -1,4 +1,7 @@
-# Start the Jupyter Lab Environment
+# Lab 1: Start the Jupyter Lab Environment
+
+###**<span style="color:blue">( Refer to 'Lab 1' of the Jupyter notebook as go through this lab )</span>**
+<br>
 
 ## Introduction
 

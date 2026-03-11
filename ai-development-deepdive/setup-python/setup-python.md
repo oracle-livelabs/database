@@ -1,4 +1,7 @@
-# Setup the Python Functions
+# Lab 2: Setup the Python Functions
+
+###**<span style="color:blue">( Refer to 'Lab 2' of the Jupyter notebook as go through this lab )</span>**
+<br>
 
 ## Introduction
 
