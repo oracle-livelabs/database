@@ -41,8 +41,6 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     . ftex
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 3. Configure the database to store its keystore in the directory you just created. It's a static parameter requiring a restart of the database.
@@ -53,8 +51,6 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     shutdown immediate
     startup
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -115,8 +111,6 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     administer key management set key identified by "oracle_4U" with backup;
     administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -213,8 +207,6 @@ Currently, the *CDB26* database is not encrypted. You must start by preparing th
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 3. Configure the database to store its keystore in the directory you just created. It's a static parameter requiring a restart of the database.
@@ -225,8 +217,6 @@ Currently, the *CDB26* database is not encrypted. You must start by preparing th
     shutdown immediate
     startup
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -287,8 +277,6 @@ Currently, the *CDB26* database is not encrypted. You must start by preparing th
     administer key management set key identified by "oracle_4U" with backup;
     administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/CDB26/wallet/tde' identified by "oracle_4U";
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * You used the same keystore password in *CDB26* as well for simplicity. Realistically, you would choose different keystore passwords.
@@ -799,8 +787,6 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 5. Ensure that the *FTEX* database has been plugged in and is open *READ WRITE* and unrestricted.
@@ -839,8 +825,6 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     alter session set container=CYAN;
     select tablespace_name, encrypted from dba_tablespaces;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
