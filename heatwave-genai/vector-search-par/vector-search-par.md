@@ -45,7 +45,7 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
     ![Click bucket](./images/1-click-bucket.png "Click bucket")
 
-2. Select the  Cloud Account **Region** then  the  **Compartment**
+2. Select the  Cloud Account **Region** then  the  **Compartment**. Ignore the API error, it  will go away after the correct compartment has been selected.
 
     ![Click Region](./images/41-region-compartment.png "Click Region")    
 
@@ -71,7 +71,7 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
     ![Bucket namespace](./images/35-bucket-namespace.png "Bucket namespace")
 
-8. Under **Objects**, click **More Actions**, and then click **Create New Folder**.
+8. Under **Objects**, click **Actions**, and then click **Create New Folder**.
 
     ![Create new folder](./images/31-create-new-folder.png "Create new folder")
 
@@ -91,17 +91,17 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
     ![Click bucket folder](./images/33-click-bucket-folder.png "Click bucket folder")
 
-2.  Click **Upload**.
+2.  Click **Upload Objects**.
 
     ![Click upload](./images/34-click-upload.png "Click upload")
 
-3. Click **select files** to display a file selection dialog box.
+3. Click **Choose Files from your Computer** to display a file selection dialog box.
 
 4. Select the files you had downloaded earlier in Task 1, and click **Upload**.
 
     ![Upload files](./images/6-upload-files.png "Upload files")
 
-5. When the file status shows **Finished**, click **Close** to return to the bucket.
+5. Click **Next**, then **Upload Objects**.  When the file statuses shows **Done**, click **Close** to return to the bucket.
 
     ![Upload files finished](./images/7-upload-files-finished.png "Upload files finished")
 
@@ -110,7 +110,7 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
 Pre-authenticated requests provide a way to let HeatWave access your bucket or objects without requiring dynamic groups or IAM policies. This is a simpler and more direct method for granting access.
 
-1. In the **Bucket Details** page, under **Resources**, click **Pre-Authenticated Requests**, and then click **Create Pre-Authenticated Request**.
+1. On the Objects tab for your bucket, click on the three dots to the far right of the bucket name.  Click **Create pre-authenicated request**. 
 
     ![Create Pre-Authenticated Request](./images/8-create-par.png "Create Pre-Authenticated Request")
 
@@ -178,7 +178,7 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 4. Ingest the files from Object Storage using the Pre-Authenticated Request URL, create vector embeddings, and load the vector embeddings into HeatWave:
 
     ```bash
-    <copy>call sys.VECTOR_STORE_LOAD('<PAR-URL>', '{"table_name": "livelab_embedding "}');</copy>
+    <copy>call sys.VECTOR_STORE_LOAD('<PAR-URL>', '{"table_name": "livelab_embedding"}');</copy>
     ```
     Replace the following:
 
@@ -251,24 +251,24 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
     ![Vector embeddings](./images/15-check-count.png "Vector embeddings")
 
 
-### Troubleshooting Common Issues
+    ### Troubleshooting Common Issues
 
-**Error: "No valid data found for processing"**
+    **Error: "No valid data found for processing"**
 
-This error means HeatWave cannot find files at the specified PAR URL location. Check:
+    This error means HeatWave cannot find files at the specified PAR URL location. Check:
 
-1. **Files are in the correct location**: Verify PDFs are inside `bucket-folder-heatwave/` folder, not at bucket root
-2. **PAR URL includes folder path**: Ensure your URL ends with `/bucket-folder-heatwave/`
-3. **PAR has Object Listing enabled**: This is required for HeatWave to discover files
-4. **PAR has not expired**: Check expiration date and create new PAR if needed
+    - **Files are in the correct location**: Verify PDFs are inside `bucket-folder-heatwave/` folder, not at bucket root
+    - **PAR URL includes folder path**: Ensure your URL ends with `/bucket-folder-heatwave/`
+    - **PAR has Object Listing enabled**: This is required for HeatWave to discover files
+    - **PAR has not expired**: Check expiration date and create new PAR if needed
 
-**Error: "Table is not loaded in HeatWave"**
+    **Error: "Table is not loaded in HeatWave"**
 
-This means the task is still processing. Wait for the task status to show "COMPLETED" before querying the table.
+    This means the task is still processing. Wait for the task status to show "COMPLETED" before querying the table.
 
-**Empty tables (0 count)**
+    **Empty tables (0 count)**
 
-If only `livelab_embedding_pdf` has data and other tables (\_doc, \_html, \_ppt, \_txt) show 0 rows, this is normal - you only uploaded PDF files. HeatWave creates table structures for all supported file types but only populates tables that have corresponding files.
+    If only `livelab_embedding_pdf` has data and other tables (\_doc, \_html, \_ppt, \_txt) show 0 rows, this is normal - you only uploaded PDF files. HeatWave creates table structures for all supported file types but only populates tables that have corresponding files.
 
 ## Task 6: Perform retrieval augmented generation
 

@@ -1,4 +1,4 @@
-# The Four Types of Agent Memory
+# The Four Types of Agent Memory at Seer Equity
 
 ## Introduction
 
@@ -6,29 +6,26 @@ In this lab, you'll build all four types of memory that agents need to operate e
 
 ### The Business Problem
 
-Seer Equity's loan officers are struggling with different kinds of information gaps:
+Two similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.
 
-- **During calls:** *"What did the client just say about their timeline? I was looking up their file."*
-- **Across sessions:** *"Sarah Chen has a rate exception, but I don't remember the details."*
-- **For compliance:** *"Why did we approve that loan at those terms? What was the reasoning?"*
-- **For consistency:** *"What's our policy on credit score requirements? Different people tell me different things."*
+> *"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency."*
 
-These aren't the same problem. They need different solutions. Just like people don't rely on one kind of memory, agents can't either.
+The problem isn't just forgetting clients. It's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.
 
 ### What You'll Learn
 
-In this lab, you'll build the four types of memory that solve these distinct problems:
+Agents need four types of memory, just like people:
 
-| Memory Type | What It Stores | Seer Equity Example |
-|-------------|----------------|----------------------|
-| **Short-term** | Current conversation context | Client's question, active request |
-| **Long-term** | Stable facts about entities | Sarah Chen prefers email, has 15% rate exception |
-| **Episodic** | Decisions and their outcomes | Approved Sarah's loan because of 6-year history |
-| **Reference** | Policies and procedures | Credit requirements, rate tiers, approval rules |
+| Memory Type | Purpose | Example at Seer Equity |
+|-------------|---------|------------------------|
+| **Short-term context** | What's happening right now | "Working on LOAN-5678 for Sarah Chen" |
+| **Long-term facts** | Stable client information | "Sarah Chen has 15% rate exception" |
+| **Decisions/outcomes** | What we decided before | "Approved similar loan last quarter, client paid on time" |
+| **Reference knowledge** | Corporate policies | "Preferred rate is 7.9% for 750+ credit" |
 
-You'll create each type and see how they work together to make agents consistent and explainable.
+In this lab, you'll build all four types and see how they work together to make agents consistent and explainable.
 
-**What you'll build:** A complete memory system with all four memory types working together.
+**What you'll build:** A complete four-type memory architecture for loan decisions.
 
 Estimated Time: 15 minutes
 
@@ -51,9 +48,15 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![OML home page with Notebooks highlighted](images/task1_1.png)
+
 2. Click **Import** to expand the Import drop down.
 
+    ![Notebooks page with Import button highlighted](images/task1_2.png)
+
 3. Select **Git**.
+
+    ![Import dropdown showing Git option highlighted](images/task1_3.png)
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -63,17 +66,23 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-5. Click **Ok**.
+5. Click **OK**.
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    ![Git Clone dialog with GitHub URI field and OK button highlighted](images/task1_5.png)
+
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Tables
 
-We'll create structures for each memory type. Instead of four separate tables, we use one main table with a `memory_type` column to distinguish between types. This makes it easier to query across all memories when needed.
+You'll create two tables:
 
-1. Create the unified memory table with type classification.
+1. **agent_memory** — A unified table for short-term, long-term, and decision memory with a type classifier
 
-    The table stores all four memory types. The `memory_type` column tells us what kind of memory it is. Short-term memories have a `session_id` and `expires_at`. Long-term memories have an `entity_id` to track what they're about.
+2. **reference_knowledge** — A separate table for loan policies (agents can read but not modify)
+
+    Notice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.
+
+1. Create the unified agent memory table.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -83,7 +92,7 @@ We'll create structures for each memory type. Instead of four separate tables, w
         memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
         memory_type    VARCHAR2(20) NOT NULL,  -- SHORTTERM, LONGTERM, DECISION, REFERENCE
         session_id     VARCHAR2(100),          -- For short-term context
-        entity_id      VARCHAR2(100),          -- What this is about
+        entity_id      VARCHAR2(100),          -- What this is about (client or loan)
         content        JSON NOT NULL,
         created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,
         expires_at     TIMESTAMP,              -- For short-term context expiration
@@ -96,9 +105,11 @@ We'll create structures for each memory type. Instead of four separate tables, w
     </copy>
     ```
 
-2. Create a separate reference table for policies (read-only by agents).
+    ![agent_memory table creation with indexes and successful output](images/task2_1.png)
 
-    Reference knowledge is different—it's maintained by humans, not learned by the agent. We put it in a separate table to make this clear. Agents can read it, but they shouldn't change it.
+2. Create the reference knowledge table.
+
+    Reference knowledge is different—it's maintained by humans, not agents. Agents can read Seer Equity's loan policies but shouldn't modify them. Notice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -116,13 +127,16 @@ We'll create structures for each memory type. Instead of four separate tables, w
     </copy>
     ```
 
+    ![reference_knowledge table creation with successful output](images/task2_2.png)
+
 ## Task 3: Short-Term Context (Current Task)
 
-Short-term context holds what's happening right now—the active information for completing the current task. Think of it like your working memory when you're on a phone call: who you're talking to, what they just said, what problem you're solving. It expires when the task is done.
+Short-term context holds what's happening right now—the active information for completing the current loan task. This is like a loan officer's working memory: what they're actively thinking about while processing an application.
 
-1. Create functions for short-term context.
+- **set_context** — Store context for a session/entity (replaces old context, expires in 1 hour)
+- **get_context** — Retrieve context for a session
 
-    The `set_context` function stores temporary information tied to a session. Notice the `expires_at` field—short-term context automatically expires after an hour. The `get_context` function retrieves all active context for a session.
+1. Create the short-term context functions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -183,28 +197,37 @@ Short-term context holds what's happening right now—the active information for
     </copy>
     ```
 
+    ![set_context function (top half) showing session/entity storage logic](images/task3_1a.png)
+
+    ![get_context function (bottom half) with successful compilation output](images/task3_1b.png)
+
 2. Test short-term context.
+
+    Set context for a loan processing session—imagine a loan officer working on an application and tracking both the client and the application details. You should see both context items returned.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set context for current task
-    SELECT set_context('SESSION-001', 'current_customer', 'Sarah Chen, Premium tier, discussing loan application') FROM DUAL;
-    SELECT set_context('SESSION-001', 'current_loan', 'LOAN-5678, personal loan, needs by Friday') FROM DUAL;
+    -- Set context for current loan task
+    SELECT set_context('SESSION-001', 'current_client', 'Sarah Chen, Preferred tier, discussing personal loan') FROM DUAL;
+    SELECT set_context('SESSION-001', 'current_application', 'LOAN-5678, $75K personal loan, needs by Friday') FROM DUAL;
 
     -- Retrieve context
     SELECT get_context('SESSION-001') FROM DUAL;
     </copy>
     ```
 
-## Task 4: Long-Term Facts (Persistent Entity Knowledge)
+    ![Short-term context set and retrieved for SESSION-001 showing current_client and current_application entries](images/task3_2.png)
 
-Long-term facts are stable information the agent should rely on across tasks and sessions. Unlike short-term context, these never expire. They're things like "Sarah prefers email" or "This customer has a rate exception."
+## Task 4: Long-Term Facts (Persistent Client Knowledge)
 
-1. Create functions for long-term facts.
+Long-term facts are stable information about clients that the agent should rely on across all tasks and sessions. Unlike short-term context, these don't expire—once Seer Equity learns something about a client, the agent remembers forever.
 
-    The `store_fact` function saves a fact about an entity. The `get_facts` function retrieves all facts about that entity, optionally filtered by category.
+- **store_fact** — Store a fact about a client with an optional category
+- **get_facts** — Retrieve facts about a client, optionally filtered by category
+
+1. Create the long-term facts functions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -264,54 +287,63 @@ Long-term facts are stable information the agent should rely on across tasks and
     </copy>
     ```
 
-2. Store some long-term facts.
+    ![store_fact function (top half) showing LONGTERM insert logic](images/task4_1a.png)
+
+    ![get_facts function (bottom half) with successful compilation output](images/task4_1b.png)
+
+2. Store long-term facts about Seer Equity clients.
+
+    Store several facts about two clients. Notice the different categories: `contact_preference`, `rate_exception`, `relationship`, `requirement`, `schedule`. These facts will persist across all sessions—every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Facts about customers
-    SELECT store_fact('CUST-001', 'Prefers email contact over phone', 'preference') FROM DUAL;
-    SELECT store_fact('CUST-001', 'Timezone is Pacific', 'preference') FROM DUAL;
-    SELECT store_fact('CUST-001', 'Approved for 15% rate exception', 'exception') FROM DUAL;
-    SELECT store_fact('CUST-001', 'Client since 2018', 'history') FROM DUAL;
+    -- Facts about Seer Equity clients
+    SELECT store_fact('CLIENT-001', 'Prefers email contact, never phone', 'contact_preference') FROM DUAL;
+    SELECT store_fact('CLIENT-001', 'Pacific timezone, best contact time is 9-11am PT', 'contact_preference') FROM DUAL;
+    SELECT store_fact('CLIENT-001', 'Approved for 15% rate exception due to 6-year relationship', 'rate_exception') FROM DUAL;
+    SELECT store_fact('CLIENT-001', 'Client since 2018, excellent payment history on 3 previous loans', 'relationship') FROM DUAL;
 
-    SELECT store_fact('CUST-002', 'Requires all documents via secure portal', 'requirement') FROM DUAL;
-    SELECT store_fact('CUST-002', 'Annual loan review in March', 'schedule') FROM DUAL;
+    SELECT store_fact('CLIENT-002', 'Requires all documents via secure portal', 'requirement') FROM DUAL;
+    SELECT store_fact('CLIENT-002', 'Annual loan review scheduled for March', 'schedule') FROM DUAL;
     </copy>
     ```
 
-3. Retrieve facts.
+    ![Six facts stored about CLIENT-001 and CLIENT-002 with confirmation output](images/task4_2.png)
+
+3. Retrieve long-term facts.
+
+    Query the facts you stored. First get all facts about CLIENT-001, then filter to just contact preferences. You should see 4 facts for CLIENT-001, and 2 when filtered to just `contact_preference`.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set display width for CLOB output
-    SET LONG 5000
-    SET LINESIZE 200
+    -- Get all facts about a client
+    SELECT get_facts('CLIENT-001') as facts FROM DUAL;
 
-    -- Get all facts about a customer
-    SELECT get_facts('CUST-001') as facts FROM DUAL;
-
-    -- Get only preferences
-    SELECT get_facts('CUST-001', 'preference') as preferences FROM DUAL;
+    -- Get only contact preferences
+    SELECT get_facts('CLIENT-001', 'contact_preference') as contact_prefs FROM DUAL;
     </copy>
     ```
+
+    ![All 4 CLIENT-001 facts returned, then 2 contact_preference facts returned](images/task4_3.png)
 
 ## Task 5: Decisions and Outcomes (Audit Trail)
 
-Decisions and outcomes record what the agent decided and what happened. This is your audit trail—when someone asks "why did we do that?", you can look it up. It also helps the agent learn from past decisions.
+Decisions and outcomes are the audit trail—what the agent decided on past loans and what happened as a result. This is how agents learn from experience: when facing a new loan situation, they can check what worked (or didn't work) before.
 
-1. Create functions for decisions and outcomes.
+- **record_decision** — Store a loan decision with its situation, action, outcome, and success flag
+- **find_past_decisions** — Search for similar loan situations to learn from past experience
 
-    The `record_decision` function stores what situation occurred, what decision was made, and whether it worked. The `find_past_decisions` function searches for similar situations to learn from.
+1. Create the decision and outcome functions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Record a decision
+    -- Record a loan decision
     CREATE OR REPLACE FUNCTION record_decision(
         p_entity_id   VARCHAR2,
         p_situation   VARCHAR2,
@@ -379,64 +411,83 @@ Decisions and outcomes record what the agent decided and what happened. This is 
     </copy>
     ```
 
-2. Record some decisions.
+    ![record_decision function (top half) showing DECISION insert logic](images/task5_1a.png)
+
+    ![find_past_decisions function (bottom half) with successful compilation output](images/task5_1b.png)
+
+2. Record past loan decisions.
+
+    Record some historical loan decisions, including both successful and unsuccessful outcomes. This creates a knowledge base the agent can learn from. Notice the third decision has `success = false`—the agent should learn what NOT to do from failures.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Record past decisions and their outcomes
+    -- Record past loan decisions and their outcomes
     SELECT record_decision(
-        'CUST-001',
-        'Long-term customer requested rate exception due to payment history',
-        'Approved 15% rate exception based on 6-year relationship',
-        'Customer satisfied, renewed multiple loans',
+        'CLIENT-001',
+        'Preferred client requested rate exception for personal loan',
+        'Approved 15% rate discount based on 6-year relationship and payment history',
+        'Client accepted loan terms, successful disbursement, on-time payments',
         'true'
     ) FROM DUAL;
 
     SELECT record_decision(
-        'CUST-002',
-        'New customer requested rate exception on first loan',
-        'Declined exception but offered standard preferred rate',
-        'Customer accepted, relationship established',
+        'CLIENT-002',
+        'Standard client requested larger loan than credit profile supported',
+        'Offered smaller loan amount with path to increase after 12 months good standing',
+        'Client accepted modified terms, built relationship for future business',
         'true'
     ) FROM DUAL;
 
     SELECT record_decision(
-        'CUST-003',
-        'Customer with missed payments requested rate exception',
-        'Declined exception citing payment history concerns',
-        'Customer upset but policy was correct',
+        'CLIENT-003',
+        'Client with marginal credit requested business loan',
+        'Denied application citing credit score without offering alternatives',
+        'Client went to competitor, later became successful business we lost',
+        'false'
+    ) FROM DUAL;
+
+    SELECT record_decision(
+        'CLIENT-003',
+        'Client with marginal credit requested business loan',
+        'Offered secured loan option with credit-building program',
+        'Client accepted, improved credit over 18 months, now Preferred tier',
         'true'
     ) FROM DUAL;
     </copy>
     ```
 
-3. Search for relevant past decisions.
+    ![Four decisions recorded showing the code input](images/task5_2a.png)
+
+    ![Decision confirmation output showing all four records stored](images/task5_2b.png)
+
+3. Search for similar past decisions.
+
+    Search for decisions related to "rate exception" and "marginal credit". For rate exception you should find the successful decision. For marginal credit you should find BOTH the failed and successful approaches—a warning about what not to do AND what works.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set display width for CLOB output
-    SET LONG 5000
-    SET LINESIZE 200
-
     -- Find decisions about rate exceptions
     SELECT find_past_decisions('rate exception') as rate_decisions FROM DUAL;
 
-    -- Find decisions about payment history
-    SELECT find_past_decisions('payment') as payment_decisions FROM DUAL;
+    -- Find decisions about marginal credit
+    SELECT find_past_decisions('marginal credit') as credit_decisions FROM DUAL;
     </copy>
     ```
 
+    ![Past decision search results showing 1 rate exception match and 2 marginal credit matches](images/task5_3.png)
+
 ## Task 6: Reference Knowledge (Policies and Procedures)
 
-Reference knowledge is background information the agent consults but does not change. These are your company policies, procedures, and guidelines—things that humans maintain and agents follow.
+Reference knowledge is Seer Equity's policies, procedures, and underwriting guidelines maintained by humans. Agents consult it but don't modify it. This separation is important: agents should follow corporate lending policies, not rewrite them.
 
-1. Create functions for reference knowledge.
+- **add_reference** — Admin function to add policies (tracks who added it)
+- **get_reference** — Agent function to look up policies
 
-    The `add_reference` function is for administrators to add policies. The `get_reference` function lets agents look up what the policy says. Notice agents can read but not write—this keeps your policies under human control.
+1. Create the reference knowledge functions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -493,42 +544,49 @@ Reference knowledge is background information the agent consults but does not ch
     </copy>
     ```
 
-2. Add reference knowledge (policies).
+    ![add_reference function (top half) showing INSERT into reference_knowledge](images/task6_1a.png)
+
+    ![get_reference function (bottom half) with successful compilation output](images/task6_1b.png)
+
+2. Add Seer Equity reference knowledge (loan policies).
+
+    Add Seer Equity's loan policies as an administrator would. These are corporate rules the agent must follow. Notice the different categories: `policy`, `procedure`, `guideline`—this helps agents find the right type of reference.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Add policies
-    SELECT add_reference('policy', 'Rate Exception Policy - Preferred', 
-        'Clients with 5+ years history and no missed payments may receive up to 15% rate discount. ' ||
-        'Approval required from senior loan officer. Document rationale in loan notes.') FROM DUAL;
+    -- Add Seer Equity loan policies
+    SELECT add_reference('policy', 'Personal Loan - Preferred Rate', 
+        'Preferred customers (credit score 750+) qualify for personal loans at 7.9% APR. ' ||
+        'Maximum loan amount $100,000. No origination fee. Same-day approval for amounts under $50,000.') FROM DUAL;
         
-    SELECT add_reference('policy', 'Rate Exception Policy - Standard',
-        'Standard clients may request rate review after 2 years of on-time payments. ' ||
-        'Maximum 10% discount. Requires underwriter approval.') FROM DUAL;
+    SELECT add_reference('policy', 'Personal Loan - Standard Rate',
+        'Standard customers (credit score 650-749) qualify for personal loans at 12.9% APR. ' ||
+        'Maximum loan amount $50,000. 2% origination fee applies. Approval within 2 business days.') FROM DUAL;
         
-    SELECT add_reference('procedure', 'Escalation Process',
-        'Rate disputes: 1) Loan officer reviews history, 2) If over $50K loan, escalate to Senior Officer, ' ||
-        '3) If unresolved, escalate to Branch Manager, 4) Customer may request formal review.') FROM DUAL;
+    SELECT add_reference('procedure', 'Risk Escalation Process',
+        'Loan risk escalation: 1) Agent assesses initial eligibility, 2) If DTI exceeds 35%, ' ||
+        'escalate to underwriter, 3) If credit below 650, escalate to senior underwriter, ' ||
+        '4) Applicant may request manager review of any decision.') FROM DUAL;
         
-    SELECT add_reference('guideline', 'Client Communication',
-        'Always be empathetic and solution-focused. Acknowledge client concerns before ' ||
-        'explaining policy. Offer alternatives when declining requests.') FROM DUAL;
+    SELECT add_reference('guideline', 'Client Communication Standards',
+        'Always be professional and solution-focused. Acknowledge client concerns before ' ||
+        'explaining policy. When declining, always offer alternatives or a path forward.') FROM DUAL;
     </copy>
     ```
 
-3. Query reference knowledge.
+    ![Four Seer Equity policies added with confirmation output](images/task6_2.png)
+
+3. Query Seer Equity reference knowledge.
+
+    Look up loan policies and procedures. You should see both rate policies when searching for `policy`, and the escalation steps when searching for `escalation`.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set display width for CLOB output
-    SET LONG 5000
-    SET LINESIZE 200
-
-    -- Get all policies
+    -- Get all loan policies
     SELECT get_reference('policy') as policies FROM DUAL;
 
     -- Get escalation procedure
@@ -536,57 +594,73 @@ Reference knowledge is background information the agent consults but does not ch
     </copy>
     ```
 
-## Task 7: A Complete Example
+    ![Policy query returning 2 references, escalation query returning 1 reference](images/task6_3.png)
 
-Let's trace how an agent would use all four types together.
+## Task 7: A Complete Example — Using All Four Memory Types
 
-> This command is already in your notebook—just click the play button (▶) to run it.
+Now let's trace how an agent would use all four types together when handling a loan inquiry at Seer Equity.
 
-```sql
-<copy>
--- Set display width for CLOB output
-SET LONG 5000
-SET LINESIZE 200
+**Scenario:** CLIENT-001 (Sarah Chen) calls about a new loan request.
 
--- Scenario: Customer CUST-001 (Sarah Chen) calls about a rate exception request
+* **Short-term context** — Record what's happening now
+* **Long-term facts** — Check what we know about this client
+* **Reference knowledge** — Check the relevant policy
+* **Past decisions** — See what worked before in similar situations
+* **Record the decision** — Log what we decided and what happened
+* **Store new fact** — Remember anything new we learned
 
--- 1. Set short-term context (current task)
-SELECT set_context('SESSION-002', 'customer', 'CUST-001 Sarah Chen calling about rate exception') as step1_context FROM DUAL;
-SELECT set_context('SESSION-002', 'issue', 'Requesting rate review on new $75K personal loan') as step1_issue FROM DUAL;
+> This command is already in your notebook - just click the play button (▶) to run it.
 
--- 2. Check long-term facts (what do we know about them?)
-SELECT get_facts('CUST-001') as step2_facts FROM DUAL;
+1. Sarah Chen inquires about a new loan
+    ```sql
+    <copy>
+    -- Scenario: CLIENT-001 (Sarah Chen) inquires about a new loan
+    -- 1. Set short-term context (current task)
+    SELECT set_context('SESSION-002', 'client', 'CLIENT-001 Sarah Chen calling about new personal loan') as step1_context FROM DUAL;
+    SELECT set_context('SESSION-002', 'issue', '$75K request, wants to know applicable rate') as step1_issue FROM DUAL;
 
--- 3. Check reference knowledge (what is the policy?)
-SELECT get_reference('policy', 'rate exception') as step3_policy FROM DUAL;
+    -- 2. Check long-term facts (what do we know about them?)
+    SELECT get_facts('CLIENT-001') as step2_facts FROM DUAL;
 
--- 4. Find similar past decisions (what worked before?)
-SELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;
+    -- 3. Check reference knowledge (what is the policy?)
+    SELECT get_reference('policy', 'preferred') as step3_policy FROM DUAL;
 
--- 5. Agent makes decision based on all of this, then records it
-SELECT record_decision(
-    'CUST-001',
-    'Long-term client Sarah Chen requested rate exception on new $75K personal loan',
-    'Approved 15% rate exception based on 6-year history and existing exception status',
-    'Client satisfied, loan processed same day',
-    'true'
-) as step5_decision FROM DUAL;
+    -- 4. Find similar past decisions (what worked before?)
+    SELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;
 
--- 6. Learn new fact if relevant
-SELECT store_fact('CUST-001', 'Prefers quick decisions - values efficiency', 'preference') as step6_new_fact FROM DUAL;
-</copy>
-```
+    -- 5. Agent makes decision based on all of this, then records it
+    SELECT record_decision(
+        'CLIENT-001',
+        'Preferred client Sarah Chen requested $75K personal loan',
+        'Quoted preferred rate 7.9% with 15% rate exception applied per client history',
+        'Client satisfied with rate, proceeded with application same day',
+        'true'
+    ) as step5_decision FROM DUAL;
+
+    -- 6. Learn new fact if relevant
+    SELECT store_fact('CLIENT-001', 'Values quick decisions - appreciates same-day processing', 'preference') as step6_new_fact FROM DUAL;
+    </copy>
+    ```
+
+
+    ![Complete 6-step scenario showing all four memory types working together for Sarah Chen's loan inquiry](images/task7.png)
 
 ## Summary
 
 In this lab, you built the four types of agent memory:
 
-* **Short-term context**: Current task inputs (expires with task)
-* **Long-term facts**: Stable entity knowledge (persists forever)
-* **Decisions and outcomes**: Audit trail (persists forever)
-* **Reference knowledge**: Policies and procedures (human-maintained)
+| Memory Type | Purpose | Lifespan | Who Updates |
+|-------------|---------|----------|-------------|
+| **Short-term** | Current loan task context | Expires (1 hour) | Agent |
+| **Long-term** | Client knowledge | Forever | Agent |
+| **Decision** | Loan decision audit trail | Forever | Agent |
+| **Reference** | Loan policies | Forever | Humans |
 
-Together, these memories make agents consistent, contextual, and explainable.
+Together, these memories make agents:
+- **Consistent** — Same client, same treatment
+- **Contextual** — Aware of current loan situation
+- **Explainable** — Every loan decision is logged
+- **Compliant** — Following human-defined lending policies
 
 ## Learn More
 
@@ -600,12 +674,14 @@ Together, these memories make agents consistent, contextual, and explainable.
 
 ## Cleanup (Optional)
 
+Run this to remove all objects created in this lab.
+
 > This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
-DROP TABLE agent_memory;
-DROP TABLE reference_knowledge;
+DROP TABLE agent_memory PURGE;
+DROP TABLE reference_knowledge PURGE;
 DROP FUNCTION set_context;
 DROP FUNCTION get_context;
 DROP FUNCTION store_fact;
@@ -616,3 +692,5 @@ DROP FUNCTION add_reference;
 DROP FUNCTION get_reference;
 </copy>
 ```
+
+![Cleanup commands removing all tables and functions created in this lab](images/cleanup.png)
