@@ -99,7 +99,7 @@ This step is included as a safety check. If legacy or imported data contained NU
 The following query confirms that every attendee row has a valid JSON object in extras. On a fresh run, both rows should show `OK` and `{}`.
 
 <iframe
-            id="freesqk-embedded"
+            id="live-sql-embedded"
             data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAAE02PQU%252BDQBCF7%252Fsr3g2byKVHPS0wbWlxN9lFTXtpRjoJ2IgNbBr594YUqXN782a%252BlxfH8Nw2YUBVS3V%252BglylG8AhSHsSQc09GFtvDb4%252FPqUKaFrIT%252Bi4V54KSktwc3pUuA23%252FCWzSrUn%252FAngfUNm%252BkXub1CbbEdGOVqR3UX3ayo8IUp0Nu%252FIZNB%252BIhz7mi%252F3qBF29ORyXeQHephSHJWvzuRmjTft0o12y8U%252FwqWTEAa1cvZlLqysy8gh2Y%252B1nlUck01%252FAcfIyqQkAQAA&code_language=PL_SQL&code_format=false"
             height="460px"
             width="100%"
