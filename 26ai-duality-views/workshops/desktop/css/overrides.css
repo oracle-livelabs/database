@@ -1,4 +1,5 @@
 /* Only target FreeSQL embedded worksheets */
+#contentBox iframe[data-freesql-src],
 #contentBox iframe[src*="freesql.com/embedded"] {
   display: block;
   width: 100% !important;
@@ -12,4 +13,9 @@
   padding: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
+}
+
+#contentBox iframe.freesql-pending,
+#contentBox iframe.freesql-loading {
+  background: #f8fafc !important;
 }
