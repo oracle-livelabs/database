@@ -3,11 +3,6 @@
   "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
     {
-      "title": "Get Started",
-      "description": "Log in and get set up for LiveLabs.",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
-    },
-    {
       "title": "Introduction",
       "description": "Learn what JSON Relational Duality Views are and what you will build in this lab.",
       "filename": "../../0-intro/introduction.md"
