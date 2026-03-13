@@ -6,29 +6,26 @@ In this lab, you'll build all four types of memory that agents need to operate e
 
 ### The Business Problem
 
-Big Star Collectibles' inventory specialists are struggling with different kinds of information gaps:
+Two similar business item submissions came in last quarter at Big Star Collectibles. Same item amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.
 
-- **During calls:** *"What did the client just say about their timeline? I was looking up their file."*
-- **Across sessions:** *"Alex Martinez has a loyalty discount, but I don't remember the details."*
-- **For compliance:** *"Why did we approve that item at those terms? What was the reasoning?"*
-- **For consistency:** *"What's our policy on condition grade requirements? Different people tell me different things."*
+> *"Every inventory specialist handles the same situation differently. There's no way to learn from past decisions or ensure consistency."*
 
-These aren't the same problem. They need different solutions. Just like people don't rely on one kind of memory, agents can't either.
+The problem isn't just forgetting clients. It's forgetting *decisions*. Without memory of what worked before, every item decision starts from scratch.
 
 ### What You'll Learn
 
-In this lab, you'll build the four types of memory that solve these distinct problems:
+Agents need four types of memory, just like people:
 
-| Memory Type | What It Stores | Big Star Collectibles Example |
-|-------------|----------------|----------------------|
-| **Short-term** | Current conversation context | Client's question, active request |
-| **Long-term** | Stable facts about entities | Alex Martinez prefers email, has 15% loyalty discount |
-| **Episodic** | Decisions and their outcomes | Approved Sarah's item because of 6-year history |
-| **Reference** | Policies and procedures | Credit requirements, rate tiers, approval rules |
+| Memory Type | Purpose | Example at Big Star Collectibles |
+|-------------|---------|-------------------------|
+| **Short-term context** | What's happening right now | "Working on ITEM-5678 for Sarah Chen" |
+| **Long-term facts** | Stable client information | "Sarah Chen has 15% rate exception" |
+| **Decisions/outcomes** | What we decided before | "Approved similar item last quarter, client paid on time" |
+| **Reference knowledge** | Corporate policies | "Preferred rate is 7.9% for 750+ credit" |
 
-You'll create each type and see how they work together to make agents consistent and explainable.
+In this lab, you'll build all four types and see how they work together to make agents consistent and explainable.
 
-**What you'll build:** A complete memory system with all four memory types working together.
+**What you'll build:** A complete four-type memory architecture for item decisions.
 
 Estimated Time: 15 minutes
 
@@ -51,11 +48,17 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![OML home page with Notebooks highlighted in the Quick Actions section](images/task1_1.png " ")
+
 2. Click **Import** to expand the Import drop down.
+
+    ![Notebooks page with Import button highlighted in the toolbar](images/task1_2.png " ")
 
 3. Select **Git**.
 
-4. Paste the following GitHub URL leaving the credential field blank:
+    ![Import dropdown showing File and Git options, with Git highlighted](images/task1_3.png " ")
+
+4. Paste the following GitHub URL leaving the credential field blank, then click **OK**.
 
     ```text
     <copy>
@@ -63,19 +66,19 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
-5. Click **Ok**.
+    ![Git Clone dialog with the GitHub URI field highlighted and OK button highlighted](images/task1_5.png " ")
 
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information, however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Tables
 
-We'll create structures for each memory type. Instead of four separate pricing guides, we use one main table with a `memory_type` column to distinguish between types. This makes it easier to query across all memories when needed.
+You'll create two tables: `agent_memory` for short-term, long-term, and decision memory with a type classifier, and `reference_knowledge` for item policies that agents can read but not modify.
 
-1. Create the unified memory table with type classification.
+1. Create the unified memory table.
 
-    The table stores all four memory types. The `memory_type` column tells us what kind of memory it is. Short-term memories have a `session_id` and `expires_at`. Long-term memories have an `entity_id` to track what they're about.
+    The `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE. Short-term entries have a `session_id` and `expires_at`; long-term and decision entries use `entity_id` to track what they're about.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -83,7 +86,7 @@ We'll create structures for each memory type. Instead of four separate pricing g
         memory_id      RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
         memory_type    VARCHAR2(20) NOT NULL,  -- SHORTTERM, LONGTERM, DECISION, REFERENCE
         session_id     VARCHAR2(100),          -- For short-term context
-        entity_id      VARCHAR2(100),          -- What this is about
+        entity_id      VARCHAR2(100),          -- What this is about (client or item)
         content        JSON NOT NULL,
         created_at     TIMESTAMP DEFAULT SYSTIMESTAMP,
         expires_at     TIMESTAMP,              -- For short-term context expiration
@@ -96,11 +99,13 @@ We'll create structures for each memory type. Instead of four separate pricing g
     </copy>
     ```
 
-2. Create a separate reference table for policies (read-only by agents).
+    ![CREATE TABLE agent_memory with memory_type, session_id, entity_id, content, expires_at columns and CHECK constraint, plus three CREATE INDEX statements, with output: Table AGENT_MEMORY created, Index IDX_MEMORY_TYPE created, Index IDX_MEMORY_ENTITY created, Index IDX_MEMORY_SESSION created](images/task2_1.png " ")
 
-    Reference knowledge is different - it's maintained by humans, not learned by the agent. We put it in a sepapricing guide to make this clear. Agents can read it, but they shouldn't change it.
+2. Create the reference knowledge table.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Reference knowledge is different -- it's maintained by humans, not agents. The `updated_by` column tracks who changed the policy. Agents can read it, but they shouldn't change it.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -116,15 +121,17 @@ We'll create structures for each memory type. Instead of four separate pricing g
     </copy>
     ```
 
+    ![CREATE TABLE reference_knowledge with category, name, content, is_active, updated_by columns, with output: Table REFERENCE_KNOWLEDGE created](images/task2_2.png " ")
+
 ## Task 3: Short-Term Context (Current Task)
 
-Short-term context holds what's happening right now - the active information for completing the current task. Think of it like your working memory when you're on a phone call: who you're talking to, what they just said, what problem you're solving. It expires when the task is done.
+Short-term context holds what's happening right now -- the active information for completing the current item task. Think of it like a inventory specialist's working memory: who they're talking to, what they just said, what problem they're solving. It expires when the task is done.
 
 1. Create functions for short-term context.
 
-    The `set_context` function stores temporary information tied to a session. Notice the `expires_at` field - short-term context automatically expires after an hour. The `get_context` function retrieves all active context for a session.
+    `set_context` stores temporary information tied to a session. Notice the `expires_at` field -- short-term context automatically expires after one hour. `get_context` retrieves all active context for a session.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -183,30 +190,40 @@ Short-term context holds what's happening right now - the active information for
     </copy>
     ```
 
+    ![Notebook cell showing CREATE OR REPLACE FUNCTION set_context with PRAGMA AUTONOMOUS_TRANSACTION, DELETE and INSERT logic for SHORTTERM memory with 1-hour expiry](images/task3_1a.png " ")
+
+    ![Continuation showing get_context function body and output: Function SET_CONTEXT compiled, Function GET_CONTEXT compiled](images/task3_1b.png " ")
+
 2. Test short-term context.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Set context for a item processing session. You should see both context items returned -- the client info and the application details.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set context for current task
-    SELECT set_context('SESSION-001', 'current_customer', 'Alex Martinez, Premium tier, discussing item submission') FROM DUAL;
-    SELECT set_context('SESSION-001', 'current_item', 'ITEM-5678, personal item, needs by Friday') FROM DUAL;
+    -- Set context for current item task
+    SELECT set_context('SESSION-001', 'current_client', 'Sarah Chen, Preferred tier, discussing personal item') FROM DUAL;
+    SELECT set_context('SESSION-001', 'current_application', 'ITEM-5678, $75K personal item, needs by Friday') FROM DUAL;
 
     -- Retrieve context
     SELECT get_context('SESSION-001') FROM DUAL;
     </copy>
     ```
 
+    You should see both context entries returned: `current_client: Sarah Chen, Preferred tier, discussing personal item` and `current_application: ITEM-5678, $75K personal item, needs by Friday`.
+
+    ![set_context calls for SESSION-001 with current_client and current_application, followed by get_context returning both entries: current_client: Sarah Chen Preferred tier discussing personal item, and current_application: ITEM-5678 $75K personal item needs by Friday](images/task3_2.png " ")
+
 ## Task 4: Long-Term Facts (Persistent Entity Knowledge)
 
-Long-term facts are stable information the agent should rely on across tasks and sessions. Unlike short-term context, these never expire. They're things like "Sarah prefers email" or "This customer has a loyalty discount."
+Long-term facts are stable information about clients that the agent should rely on across all tasks and sessions. Unlike short-term context, these never expire.
 
 1. Create functions for long-term facts.
 
-    The `store_fact` function saves a fact about an entity. The `get_facts` function retrieves all facts about that entity, optionally filtered by category.
+    `store_fact` saves a fact about an entity with an optional category. `get_facts` retrieves all facts about that entity, optionally filtered by category.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -264,54 +281,62 @@ Long-term facts are stable information the agent should rely on across tasks and
     </copy>
     ```
 
-2. Store some long-term facts.
+    ![CREATE OR REPLACE FUNCTION store_fact inserting LONGTERM records with fact, category, and learned timestamp](images/task4_1a.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    ![Continuation showing get_facts function body with LONGTERM query, and output: Function STORE_FACT compiled, Function GET_FACTS compiled](images/task4_1b.png " ")
+
+2. Store long-term facts about clients.
+
+    Store several facts about two clients using different categories: `contact_preference`, `rate_exception`, `relationship`, `requirement`, `schedule`. These will persist across all sessions.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Facts about customers
-    SELECT store_fact('CUST-001', 'Prefers email contact over phone', 'preference') FROM DUAL;
-    SELECT store_fact('CUST-001', 'Timezone is Pacific', 'preference') FROM DUAL;
-    SELECT store_fact('CUST-001', 'Approved for 15% loyalty discount', 'exception') FROM DUAL;
-    SELECT store_fact('CUST-001', 'Client since 2018', 'history') FROM DUAL;
+    -- Facts about Big Star Collectibles clients
+    SELECT store_fact('CLIENT-001', 'Prefers email contact, never phone', 'contact_preference') FROM DUAL;
+    SELECT store_fact('CLIENT-001', 'Pacific timezone, best contact time is 9-11am PT', 'contact_preference') FROM DUAL;
+    SELECT store_fact('CLIENT-001', 'Approved for 15% rate exception due to 6-year relationship', 'rate_exception') FROM DUAL;
+    SELECT store_fact('CLIENT-001', 'Client since 2018, excellent payment history on 3 previous items', 'relationship') FROM DUAL;
 
-    SELECT store_fact('CUST-002', 'Requires all documents via secure portal', 'requirement') FROM DUAL;
-    SELECT store_fact('CUST-002', 'Annual item review in March', 'schedule') FROM DUAL;
+    SELECT store_fact('CLIENT-002', 'Requires all documents via secure portal', 'requirement') FROM DUAL;
+    SELECT store_fact('CLIENT-002', 'Annual item review scheduled for March', 'schedule') FROM DUAL;
     </copy>
     ```
+
+    ![Six store_fact calls for CLIENT-001 and CLIENT-002, with output lines confirming each fact stored: Fact stored about CLIENT-001: Prefers email contact never phone, Fact stored about CLIENT-001: Approved for 15% rate exception due to 6-year relationship, etc.](images/task4_2.png " ")
 
 3. Retrieve facts.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    You should see 4 facts for CLIENT-001 when retrieving all, and 2 when filtered to `contact_preference`.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set display width for CLOB output
-    SET LONG 5000
-    SET LINESIZE 200
+    -- Get all facts about a client
+    SELECT get_facts('CLIENT-001') as facts FROM DUAL;
 
-    -- Get all facts about a customer
-    SELECT get_facts('CUST-001') as facts FROM DUAL;
-
-    -- Get only preferences
-    SELECT get_facts('CUST-001', 'preference') as preferences FROM DUAL;
+    -- Get only contact preferences
+    SELECT get_facts('CLIENT-001', 'contact_preference') as contact_prefs FROM DUAL;
     </copy>
     ```
 
+    ![get_facts queries showing FACTS result: Found 4 facts about CLIENT-001 with Client since 2018 visible, and CONTACT_PREFS result: Found 2 facts about CLIENT-001 with Pacific timezone best contact time is 9-11am visible](images/task4_3.png " ")
+
 ## Task 5: Decisions and Outcomes (Audit Trail)
 
-Decisions and outcomes record what the agent decided and what happened. This is your audit trail - when someone asks "why did we do that?", you can look it up. It also helps the agent learn from past decisions.
+Decisions and outcomes record what the agent decided and what happened. This is your audit trail -- when someone asks "why did we do that?", you can look it up. Notice the third decision has `success = false`. The agent should learn what NOT to do from failures too.
 
 1. Create functions for decisions and outcomes.
 
-    The `record_decision` function stores what situation occurred, what decision was made, and whether it worked. The `find_past_decisions` function searches for similar situations to learn from.
+    `record_decision` stores what situation occurred, what decision was made, and whether it worked. `find_past_decisions` searches for similar situations to learn from.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Record a decision
+    -- Record a item decision
     CREATE OR REPLACE FUNCTION record_decision(
         p_entity_id   VARCHAR2,
         p_situation   VARCHAR2,
@@ -379,66 +404,80 @@ Decisions and outcomes record what the agent decided and what happened. This is 
     </copy>
     ```
 
-2. Record some decisions.
+    ![CREATE OR REPLACE FUNCTION record_decision inserting DECISION records with situation, decision, outcome, success boolean, and recorded timestamp](images/task5_1a.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    ![Continuation showing find_past_decisions function with LIKE-based situation matching, and output: Function RECORD_DECISION compiled, Function FIND_PAST_DECISIONS compiled](images/task5_1b.png " ")
+
+2. Record past item decisions.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Record past decisions and their outcomes
+    -- Record past item decisions and their outcomes
     SELECT record_decision(
-        'CUST-001',
-        'Long-term customer requested loyalty discount due to payment history',
-        'Approved 15% loyalty discount based on 6-year relationship',
-        'Customer satisfied, renewed multiple items',
+        'CLIENT-001',
+        'Preferred client requested rate exception for personal item',
+        'Approved 15% rate discount based on 6-year relationship and payment history',
+        'Client accepted item terms, successful disbursement, on-time payments',
         'true'
     ) FROM DUAL;
 
     SELECT record_decision(
-        'CUST-002',
-        'New customer requested loyalty discount on first item',
-        'Declined exception but offered standard platinum loyalty pricing',
-        'Customer accepted, relationship established',
+        'CLIENT-002',
+        'Standard client requested larger item than credit profile supported',
+        'Offered smaller item amount with path to increase after 12 months good standing',
+        'Client accepted modified terms, built relationship for future business',
         'true'
     ) FROM DUAL;
 
     SELECT record_decision(
-        'CUST-003',
-        'Customer with missed payments requested loyalty discount',
-        'Declined exception citing payment history concerns',
-        'Customer upset but policy was correct',
+        'CLIENT-003',
+        'Client with marginal credit requested business item',
+        'Denied application citing credit score without offering alternatives',
+        'Client went to competitor, later became successful business we lost',
+        'false'
+    ) FROM DUAL;
+
+    SELECT record_decision(
+        'CLIENT-003',
+        'Client with marginal credit requested business item',
+        'Offered secured item option with credit-building program',
+        'Client accepted, improved credit over 18 months, now Preferred tier',
         'true'
     ) FROM DUAL;
     </copy>
     ```
 
-3. Search for relevant past decisions.
+    ![Four record_decision calls for CLIENT-001 through CLIENT-003, with output confirming each decision recorded including the false success entry for the denied CLIENT-003 application](images/task5_2.png " ")
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+3. Search for similar past decisions.
+
+    For rate exception you should find 1 similar decision. For marginal credit you should find 2 -- both the failed approach (denied without alternatives) and the successful one (secured item with credit-building program).
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set display width for CLOB output
-    SET LONG 5000
-    SET LINESIZE 200
+    -- Find decisions about rate exceptions
+    SELECT find_past_decisions('rate exception') as rate_decisions FROM DUAL;
 
-    -- Find decisions about loyalty discounts
-    SELECT find_past_decisions('loyalty discount') as rate_decisions FROM DUAL;
-
-    -- Find decisions about payment history
-    SELECT find_past_decisions('payment') as payment_decisions FROM DUAL;
+    -- Find decisions about marginal credit
+    SELECT find_past_decisions('marginal credit') as credit_decisions FROM DUAL;
     </copy>
     ```
+
+    ![find_past_decisions queries showing RATE_DECISIONS result: Found 1 similar decisions with Situation: Preferred client requested rate exception visible, and CREDIT_DECISIONS result: Found 2 similar decisions with Situation: Client with marginal credit requested busi visible](images/task5_3.png " ")
 
 ## Task 6: Reference Knowledge (Policies and Procedures)
 
-Reference knowledge is background information the agent consults but does not change. These are your company policies, procedures, and guidelines - things that humans maintain and agents follow.
+Reference knowledge is Big Star Collectibles' policies, procedures, and guidelines maintained by humans. Agents consult it but don't modify it. This separation is important -- agents should follow corporate policies, not rewrite them.
 
 1. Create functions for reference knowledge.
 
-    The `add_reference` function is for administrators to add policies. The `get_reference` function lets agents look up what the policy says. Notice agents can read but not write - this keeps your policies under human control.
+    `add_reference` is for administrators to add policies (tracks who added it). `get_reference` lets agents look up what the policy says.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
@@ -493,42 +532,49 @@ Reference knowledge is background information the agent consults but does not ch
     </copy>
     ```
 
+    ![CREATE OR REPLACE FUNCTION add_reference inserting into reference_knowledge with category, name, JSON content, and updated_by tracking](images/task6_1a.png " ")
+
+    ![Continuation showing get_reference function querying reference_knowledge by category and name with is_active filter, and output: Function ADD_REFERENCE compiled, Function GET_REFERENCE compiled](images/task6_1b.png " ")
+
 2. Add reference knowledge (policies).
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    Add Big Star Collectibles' item policies as an administrator would. Notice the different categories: `policy`, `procedure`, `guideline`.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Add policies
-    SELECT add_reference('policy', 'Loyalty Discount Policy - Preferred', 
-        'Clients with 5+ years history and no missed payments may receive up to 15% rate discount. ' ||
-        'Approval required from senior inventory specialist. Document rationale in item notes.') FROM DUAL;
-
-    SELECT add_reference('policy', 'Loyalty Discount Policy - Standard',
-        'Standard clients may request rate review after 2 years of on-time payments. ' ||
-        'Maximum 10% discount. Requires appraiser approval.') FROM DUAL;
-
-    SELECT add_reference('procedure', 'Escalation Process',
-        'Rate disputes: 1) Inventory specialist reviews history, 2) If over $50K item, escalate to Senior Officer, ' ||
-        '3) If unresolved, escalate to Branch Manager, 4) Customer may request formal review.') FROM DUAL;
-
-    SELECT add_reference('guideline', 'Client Communication',
-        'Always be empathetic and solution-focused. Acknowledge client concerns before ' ||
-        'explaining policy. Offer alternatives when declining requests.') FROM DUAL;
+    -- Add Big Star Collectibles item policies
+    SELECT add_reference('policy', 'Personal Item - Preferred Rate', 
+        'Preferred customers (credit score 750+) qualify for personal items at 7.9% APR. ' ||
+        'Maximum item amount $100,000. No origination fee. Same-day approval for amounts under $50,000.') FROM DUAL;
+        
+    SELECT add_reference('policy', 'Personal Item - Standard Rate',
+        'Standard customers (credit score 650-749) qualify for personal items at 12.9% APR. ' ||
+        'Maximum item amount $50,000. 2% origination fee applies. Approval within 2 business days.') FROM DUAL;
+        
+    SELECT add_reference('procedure', 'Risk Escalation Process',
+        'Item risk escalation: 1) Agent assesses initial eligibility, 2) If DTI exceeds 35%, ' ||
+        'escalate to underwriter, 3) If credit below 650, escalate to senior underwriter, ' ||
+        '4) Applicant may request manager review of any decision.') FROM DUAL;
+        
+    SELECT add_reference('guideline', 'Client Communication Standards',
+        'Always be professional and solution-focused. Acknowledge client concerns before ' ||
+        'explaining policy. When declining, always offer alternatives or a path forward.') FROM DUAL;
     </copy>
     ```
 
+    ![Four add_reference calls adding Personal Item Preferred Rate, Personal Item Standard Rate, Risk Escalation Process, and Client Communication Standards, with output confirming each reference added](images/task6_2.png " ")
+
 3. Query reference knowledge.
 
-    > This command is already in your notebook - just click the play button (▶) to run it.
+    You should see both rate policies when searching for `policy`, and the escalation steps when searching for `escalation`.
+
+    > This command is already in your notebook — just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    -- Set display width for CLOB output
-    SET LONG 5000
-    SET LINESIZE 200
-
-    -- Get all policies
+    -- Get all item policies
     SELECT get_reference('policy') as policies FROM DUAL;
 
     -- Get escalation procedure
@@ -536,57 +582,63 @@ Reference knowledge is background information the agent consults but does not ch
     </copy>
     ```
 
+    ![get_reference queries showing POLICIES result: Found 2 references with [policy] Personal Item - Preferred Rate: Preferred customers visible, and ESCALATION result: Found 1 references with [procedure] Risk Escalation Process: Item risk escalation: 1 visible](images/task6_3.png " ")
+
 ## Task 7: A Complete Example
 
-Let's trace how an agent would use all four types together.
+Now let's trace how an agent uses all four memory types together when handling a real inquiry at Big Star Collectibles.
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+**Scenario:** CLIENT-001 (Sarah Chen) calls about a new item request.
+
+> This command is already in your notebook — just click the play button (▶) to run it.
 
 ```sql
 <copy>
--- Set display width for CLOB output
-SET LONG 5000
-SET LINESIZE 200
-
--- Scenario: Customer CUST-001 (Alex Martinez) calls about a loyalty discount request
+-- Scenario: CLIENT-001 (Sarah Chen) inquires about a new item
 
 -- 1. Set short-term context (current task)
-SELECT set_context('SESSION-002', 'customer', 'CUST-001 Alex Martinez calling about loyalty discount') as step1_context FROM DUAL;
-SELECT set_context('SESSION-002', 'issue', 'Requesting rate review on new $75K personal item') as step1_issue FROM DUAL;
+SELECT set_context('SESSION-002', 'client', 'CLIENT-001 Sarah Chen calling about new personal item') as step1_context FROM DUAL;
+SELECT set_context('SESSION-002', 'issue', '$75K request, wants to know applicable rate') as step1_issue FROM DUAL;
 
 -- 2. Check long-term facts (what do we know about them?)
-SELECT get_facts('CUST-001') as step2_facts FROM DUAL;
+SELECT get_facts('CLIENT-001') as step2_facts FROM DUAL;
 
 -- 3. Check reference knowledge (what is the policy?)
-SELECT get_reference('policy', 'loyalty discount') as step3_policy FROM DUAL;
+SELECT get_reference('policy', 'preferred') as step3_policy FROM DUAL;
 
 -- 4. Find similar past decisions (what worked before?)
-SELECT find_past_decisions('loyalty discount') as step4_past_decisions FROM DUAL;
+SELECT find_past_decisions('rate exception') as step4_past_decisions FROM DUAL;
 
 -- 5. Agent makes decision based on all of this, then records it
 SELECT record_decision(
-    'CUST-001',
-    'Long-term client Alex Martinez requested loyalty discount on new $75K personal item',
-    'Approved 15% loyalty discount based on 6-year history and existing exception status',
-    'Client satisfied, item processed same day',
+    'CLIENT-001',
+    'Preferred client Sarah Chen requested $75K personal item',
+    'Quoted preferred rate 7.9% with 15% rate exception applied per client history',
+    'Client satisfied with rate, proceeded with application same day',
     'true'
 ) as step5_decision FROM DUAL;
 
 -- 6. Learn new fact if relevant
-SELECT store_fact('CUST-001', 'Prefers quick decisions - values efficiency', 'preference') as step6_new_fact FROM DUAL;
+SELECT store_fact('CLIENT-001', 'Values quick decisions - appreciates same-day processing', 'preference') as step6_new_fact FROM DUAL;
 </copy>
 ```
+
+The agent sets context, pulls long-term facts, checks policy, finds relevant past decisions, records the new decision, and stores a newly learned preference -- all in a single workflow.
+
+![Complete example cell showing all six steps for SESSION-002 with CLIENT-001 Sarah Chen, and output confirming STEP1_CONTEXT: Context set for client, STEP1_ISSUE: Context set for issue](images/task7_1.png " ")
 
 ## Summary
 
 In this lab, you built the four types of agent memory:
 
-* **Short-term context**: Current task inputs (expires with task)
-* **Long-term facts**: Stable entity knowledge (persists forever)
-* **Decisions and outcomes**: Audit trail (persists forever)
-* **Reference knowledge**: Policies and procedures (human-maintained)
+| Memory Type | Purpose | Lifespan | Who Updates |
+|-------------|---------|----------|-------------|
+| **Short-term** | Current item task context | Expires (1 hour) | Agent |
+| **Long-term** | Client knowledge | Forever | Agent |
+| **Decision** | Item decision audit trail | Forever | Agent |
+| **Reference** | Item policies | Forever | Humans |
 
-Together, these memories make agents consistent, contextual, and explainable.
+Together, these memories make agents consistent (same client, same treatment), contextual (aware of current situation), explainable (every decision is logged), and compliant (following human-defined policies).
 
 ## Learn More
 
@@ -595,17 +647,17 @@ Together, these memories make agents consistent, contextual, and explainable.
 
 ## Acknowledgements
 
-* **Author** - David Start
+* **Author** - David Start, Director, Database Product Management
 * **Last Updated By/Date** - Kay Malcolm, February 2026
 
 ## Cleanup (Optional)
 
-> This command is already in your notebook - just click the play button (▶) to run it.
+> This command is already in your notebook — just click the play button (▶) to run it.
 
 ```sql
 <copy>
-DROP TABLE agent_memory;
-DROP TABLE reference_knowledge;
+DROP TABLE agent_memory PURGE;
+DROP TABLE reference_knowledge PURGE;
 DROP FUNCTION set_context;
 DROP FUNCTION get_context;
 DROP FUNCTION store_fact;
@@ -616,3 +668,5 @@ DROP FUNCTION add_reference;
 DROP FUNCTION get_reference;
 </copy>
 ```
+
+![DROP TABLE agent_memory PURGE, DROP TABLE reference_knowledge PURGE, and eight DROP FUNCTION statements, with output showing Table AGENT_MEMORY dropped, Table REFERENCE_KNOWLEDGE dropped, Function SET_CONTEXT dropped, Function GET_CONTEXT dropped](images/cleanup.png " ")

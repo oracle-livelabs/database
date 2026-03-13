@@ -32,50 +32,6 @@ In this lab, you will be guided through the following tasks:
     ![MySQL Shell installed](./images/2-installed-mysql-shell-for-vscode.png "MySQL Shell installed")
 
 
-<!-- ## Task 2:  Connect to the OCI tenancy
-
-Before you can get started, you must set up a DB Connection to the HeatWave instance on the Oracle Cloud Infrastructure (OCI). This has to be done once since MySQL Shell for VS Code will store all registered DB connections.
-
-1. On the right side of the OCI Console, click **Profile**, and select **My Profile**.
-
-    ![My profile](./images/3-profile.png "My profile")
-
-2.  Under **Resources**, click **API keys**, and click **Add API key**.
-
-3. Click **Download private key**.
-    
-    1. Store the API key in a .oci folder inside your home directory.
-
-    2. Rename the API key to oci\_api\_key.pem.
-
-        ```bash
-        <copy>oci_api_key.pem</copy>
-        ```
-
-        ![OCI API Key](./images/17-oci-api-key.png "OCI API Key")
-
-4. Switch to OCI Console, and in the **Add API key** panel, click **Add**.
-    
-    ![Download private key](./images/4-add-api-key.png "Download private key")
-
-5. Copy the configuration file text and switch to VS Code.
-
-    ![Copy configuration file](./images/5-copy-config.png "Copy configuration file")
-
-6. In VS Code, select the **MySQL Shell for VS Code** extension.
-
-7. Click **Configure the OCI Profile List** in the **ORACLE CLOUD INFRASTRUCTURE** view, and paste the configuration file text into the config file.
-
-    - Rename the top section from [DEFAULT] to the name of the tenancy, [TenancyName]
-
-    - Update the path to the API Key you had stored in your home directory.
-
-    ![Save configuration file](./images/6-save-config.png "Save configuration file")
-
-8. Close the file and reload the **ORACLE CLOUD INFRASTRUCTURE** view. Within a couple of minutes, you can browse the resources of your OCI tenancy.
-
-    ![Tenancy details](./images/7-tenancy-details.png "Tenancy details") -->
-
 ## Task 2: Connect to the HeatWave instance
 
 1. In Visual Studio Code, click the **MySQL Shell for VS Code** icon in the activity bar.
@@ -96,7 +52,7 @@ Before you can get started, you must set up a DB Connection to the HeatWave inst
 
 4. Under **Connection Details**, in the **Basic** tab, enter the following:
 
-    - **Hostname or IP Address**: Private IP address of the DB system that you had noted in Lab 1, Task 5, Step 19.
+    - **Hostname or IP Address**: Private IP address of the DB system. Provided  in the Sandbox Reservation information.
 
     - **User Name**: 
 
@@ -118,7 +74,10 @@ Before you can get started, you must set up a DB Connection to the HeatWave inst
 
 7. Enter the following details:
 
-    - **SSH URI**: opc@ComputeIPAddress. Replace ComputeIPAddress with the IP address  from the Sandbox Reservation information
+    - **SSH URI**: opc@ComputeIPAddress:22 . Replace ComputeIPAddress with the Compute public IP address from the Sandbox Reservation information.    
+        - **opc** is the default username for Oracle Cloud Infrastructure (OCI) compute instances
+        - **ComputeIPAddress** is the Compute public IP address from the Sandbox Reservation information
+        - **:22** is the standard SSH port
 
     - **SSH Private Key File**: Browse to the SSH folder and select the SSH key you created when you reserved workshop
 
@@ -144,7 +103,7 @@ Before you can get started, you must set up a DB Connection to the HeatWave inst
 
     ![New Database Connection](./images/12-show-databases.png "New Database Connection")
 
-You may now **proceed to the next lab**.
+    You may now **proceed to the next lab**.
 
 ## Learn More
 

@@ -32,8 +32,6 @@ You start by checking the *CDBRES* database. This database was originally on Ora
     . cdbres
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Start the database.
@@ -342,14 +340,12 @@ Suppose your tests find a critical error and you would like to go back to Oracle
 
 4. Set the environment to the original Oracle home and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdbres
     export ORACLE_HOME=/u01/app/oracle/product/19
     sqlplus / as sysdba
     </copy>
-
-    # Be sure to hit RETURN
     ```
 
 5. Verify that the database is running on Oracle Database 19c.

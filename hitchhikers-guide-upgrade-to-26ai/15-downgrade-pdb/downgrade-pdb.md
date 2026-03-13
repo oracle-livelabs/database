@@ -34,8 +34,6 @@ You start the downgrade process while the PDB is still on the new release of Ora
     . cdb26com
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Start the CDB.
@@ -118,7 +116,7 @@ You start the downgrade process while the PDB is still on the new release of Ora
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> SELECT value FROM v$parameter WHERE name = 'compatible';
+    SQL> select value from v$parameter where name = 'compatible';
 
     VALUE
     --------------------------------------------------------------------------------
@@ -135,8 +133,6 @@ You start the downgrade process while the PDB is still on the new release of Ora
     alter pluggable database yellow close immediate;
     alter pluggable database yellow open downgrade;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * *Downgrade* mode is a special mode - similar to *upgrade* mode. It enables exclusive access to the database and disables a lot of features.
@@ -218,8 +214,6 @@ Now that the PDB is open in downgrade mode, you can start the process.
     alter pluggable database YELLOW close;
     alter pluggable database YELLOW unplug into '/home/oracle/scripts/upg-15-yellow.xml';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -256,8 +250,6 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     . cdb19
     sqlplus / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * Use SQL\*Plus when running downgrade scripts.
@@ -298,8 +290,6 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     create pluggable database YELLOW using '/home/oracle/scripts/upg-15-yellow.xml';
     alter pluggable database YELLOW open upgrade;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -326,8 +316,6 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     @$ORACLE_HOME/rdbms/admin/catrelod.sql
     spool off
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * The script takes 10-15 minutes to complete.
@@ -411,8 +399,6 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     alter pluggable database YELLOW close;
     alter pluggable database YELLOW open;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -441,8 +427,6 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     alter session set container=YELLOW;
     select open_mode, restricted from v$pdbs;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -494,8 +478,6 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     set lines 1000
     select comp_id, version, status from dba_registry;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
