@@ -7,9 +7,9 @@ Oracle Globally Distributed Database provides built-in fault tolerance with Raft
 
 The Raft replication feature creates smaller replication units and distributes them automatically among the shards to handle chunk assignment, chunk movement, workload distribution, and balancing upon scaling (addition or removal of shards), including planned or unplanned shard availability changes.
 
-Raft replication provides a consensus-based, high-performance, low-overhead availability solution, with distributed replicas and fast failover with zero data loss, while automatically maintaining the replication factor if shards fail. With Raft replication management overhead does not increase with the number of shards.
+Raft replication provides a consensus, high-performance, low-overhead availability solution, with distributed replicas and fast failover with zero data loss, while automatically maintaining the replication factor if shards fail. With Raft replication management overhead does not increase with the number of shards.
 
-This workshop is configured with a custom image having all the required podman containers for Oracle Globally Distributed Database using 23ai RDBMS and GSM Images.
+This workshop is configured with a custom image having all the required podman containers for Oracle Globally Distributed AI Database using RDBMS and GSM Images.
 
 In this workshop, we attempt to use minimal resources to show the demonstration, and in the process we chose a single compute instance to install all of the Oracle Globally Distributed Database components and appclient.
 
@@ -239,7 +239,7 @@ Notice that for each RU#s, the values is "Log Index" columns are increased due t
 ![<t4-6-ui-after-workload-increase-count>](./images/t4-6-ui-after-workload-increase-count.png " ")
 
 
-6. You can enter CTRL-C to stop the workload if not already and check the RAFT UI Demo main page to confirm the count is increased. You can also restart this workload as in step 3 and keep running during the next task "Perform Failover Test".
+6. You can enter CTRL-C to stop the workload if not already and check the Raft UI Demo main page to confirm the count is increased. You can also restart this workload as in step 3 and keep running during the next task "Perform Failover Test".
 
 
 ## Task 5: Perform Failover Test
@@ -285,6 +285,9 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
+    ![<t5-config-shard-after-stop-shard1>](./images/t5-config-shard-after-stop-shard1.png " ") 
+
+
     ```
     <copy>
     gdsctl status ru -show_chunks
@@ -293,7 +296,8 @@ Failover test by stopping shard1 to create shard1 down situation.
 
     ![<chunk_status_after_shard1_down>](./images/t5-3-status-chunks-after-shard1-down.png " ")  
 
-    You can verify that shard1 down situation has no impact on either the demo ui application or running the workload.
+    Refresh "Raft Replication Demo: All Customers List" page and you can verify that shard1 down situation has no impact.
+    Similarly running the workload has no impact when shard1 is down.
 
 4. On a terminal window logged in as **oracle**.
 Start the shard1 using the podman start command, to reflect that shard1 is joining back.
@@ -314,6 +318,7 @@ Start the shard1 using the podman start command, to reflect that shard1 is joini
     gdsctl config shard
     </copy>
     ```
+    ![<t5-config-shard-after-start-shard1>](./images/t5-config-shard-after-start-shard1.png " ") 
 
     ```
     <copy>
@@ -348,4 +353,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026
