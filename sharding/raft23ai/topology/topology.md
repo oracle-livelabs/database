@@ -47,7 +47,7 @@ This lab assumes you have:
     
     ![<podman_containers>](./images/t1-podman-containers-1.png " ")
 
-   From top left corner of the Terminal, Click on the "File" and choose first option "New Tab" to open a new tab on the same terminal window: 
+    From top left corner of the Terminal, Click on the "File" and choose first option "New Tab" to open a new tab on the same terminal window: 
 
     ![<click_file_new_tab_from_top_left_terminal_window>](./images/click_file_new_tab_from_top_left_terminal_window.png " ")
    
@@ -183,9 +183,9 @@ The -shard option makes the replication unit member on the specified shard datab
     <copy>
     gdsctl ru -sort
     </copy>
-    ``` 
-    ![<ru_leader_sort_after_change>](./images/t3-6-ru-sort-after-leader-change.png " ")
+    ```
 
+    ![<ru_leader_sort_after_change>](./images/t3-6-ru-sort-after-leader-change.png " ")
 
 
 ## Task 4: Run the workload
@@ -236,7 +236,7 @@ Notice that for each RU#s, the values is "Log Index" columns are increased due t
 
 5. From the browser check the increased value of the count on the demo application ( if not running you can rerun using http://localhost:8080).
 
-![<t4-6-ui-after-workload-increase-count>](./images/t4-6-ui-after-workload-increase-count.png " ")
+    ![<t4-6-ui-after-workload-increase-count>](./images/t4-6-ui-after-workload-increase-count.png " ")
 
 
 6. You can enter CTRL-C to stop the workload if not already and check the Raft UI Demo main page to confirm the count is increased. You can also restart this workload as in step 3 and keep running during the next task "Perform Failover Test".
@@ -258,7 +258,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     ![<podman_containers_status>](./images/t5-1-podman-containers.png " ")  
 
 
-2.  Run the below command as **oracle** to stop shard1.
+2. Run the below command as **oracle** to stop shard1.
 
     ```
     <copy>
@@ -277,7 +277,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
-   Run below in the terminal window that is switched to **gsm1** and check the status of shards, RU's and you will see that database orcl1cdb_orcl1pdb is not present.
+    Run below in the terminal window that is switched to **gsm1** and check the status of shards, RU's and you will see that database orcl1cdb_orcl1pdb is not present.
 
     ```
     <copy>
@@ -299,15 +299,14 @@ Failover test by stopping shard1 to create shard1 down situation.
     Refresh "Raft Replication Demo: All Customers List" page and you can verify that shard1 down situation has no impact.
     Similarly running the workload has no impact when shard1 is down.
 
-4. On a terminal window logged in as **oracle**.
-Start the shard1 using the podman start command, to reflect that shard1 is joining back.
+4. On a terminal window logged in as **oracle**. Start the shard1 using the podman start command, to reflect that shard1 is joining back.
 
     ```
     <copy>
     sudo podman start shard1
     </copy>
     ```
-
+    
     ![<start_shard1>](./images/t5-4-startup-shard1.png " ")
 
 

@@ -58,12 +58,12 @@ You may now proceed to the next lab.
 ## Rate this Workshop
 When you are finished don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
 
-1.  Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
-2.  Click on the **Brown Button** to re-access the workshop  
+1. Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
+2. Click on the **Brown Button** to re-access the workshop  
 
     ![workshop homepage](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
 
-3.  Click **Rate this workshop**
+3. Click **Rate this workshop**
 
     ![rate this workshop](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
 
