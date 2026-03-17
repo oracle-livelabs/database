@@ -34,6 +34,8 @@ You create and configure AI profiles using the **DBMS\_CLOUD\_AI.CREATE\_PROFILE
 
 In addition to specifying tables and views in the AI profile, you can also specify tables mapped with external tables, including those described in Query External Data with Data Catalog. This enables you to query data not just inside the database, but also data stored in a data lake's object store.
 
+<span style="color:blue">[Lab5 Task1:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **create the AI profile** and move to the next task.</span>
+
 ## Task 2: Create Document Summaries
 
 ![image](images/summarize.png)
@@ -45,6 +47,8 @@ Select AI offers summarization of your content in the following ways:
 - Use **summarize** as the Select AI action.
 - Use the **<span style="color:red">DBMS\_CLOUD\_AI.SUMMARIZE</span>** function to specify customizations such as summary length, format, extraction level for a summary and so on with summarization parameters. DBMS\_CLOUD\_AI.SUMMARIZE takes as input text **content** and the **AI profile**. **Parameters** can be passed to customize the summary.  Most importantly, a **natural language request** can be passed for a user to exactly describe the nature of the summary that is desired.
 
+<span style="color:blue">[Lab5 Task2:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **create summaries of each document** and move to the next task.</span>
+
 ## Task 3: Select AI narrate
 
 ![image](images/Station_23_large.png)
@@ -54,6 +58,8 @@ The **<span style="color:red">narrate</span>** action supports both natural lang
 For **NL2SQL**, narrate sends the result of a SQL query run by the database to the **LLM**, which generates a natural language description of that result.
 
 For **RAG**, when the AI profile includes a vector index, the system uses the specified **embedding model (or default transformer)** to create a vector embedding from the prompt for semantic similarity search against the vector store. The system then adds the retrieved content from the vector store to the user prompt and sends it to the LLM to generate a response based on this information.
+
+<span style="color:blue">[Lab5 Task3:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, navigate to the next cell and press **Shift+Enter** twice, or click the **Run Cell** icon twice to **run the Select AI 'narrate' function**, navigate to the next code block and press **Shift+Enter** twice, or click the **Run Cell** icon twice to **run the Select AI 'showsql' function** and move to the next task.</span>
 
 ## Task 4: Select AI chat
 
@@ -66,5 +72,10 @@ For current session-based, short-term **conversations**, if 'conversation' in th
 **Conversations** in Select AI refer to the <u>interactive dialogue between the user and the system</u>, where a sequence of user-provided natural language prompts are stored and managed to support long-term memory for LLM interactions.
 
 Select AI supports **short-term, session-based conversations**, which are enabled in the AI profile, as well as **long-term, named conversations**, which are enabled using specific procedures or functions and conversation IDs.
+
+<span style="color:blue">[Lab5 Task4:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, navigate to the next cell and press **Shift+Enter** twice, or click the **Run Cell** icon twice to **run the Select AI 'chat' function.**</span>
+
+** You have successfully completed the workshop ** 
+
 
 

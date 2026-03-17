@@ -7,7 +7,7 @@
 
 This lab will guide you through setting up the Python functions needed for the workshop.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 
@@ -37,7 +37,7 @@ In the "Overview" notebook cell, the vector search, LLM and RAG python functions
 
 ## Task 2: Define Python functions
 
-When ready, after examining the python code defining the three functions, Press 'Shift-Enter' **twice** or Click the 'Run Cell' icon **twice** to create these functions.
+<span style="color:blue">[Lab2 Task2:]&nbsp;&nbsp;&nbsp;When ready, after examining the python code defining the three functions, Press 'Shift-Enter' **twice** or Click the 'Run Cell' icon **twice** to **create these functions**.</span>
 
 
 You may now **proceed to the next lab**

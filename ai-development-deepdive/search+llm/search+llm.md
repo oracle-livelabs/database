@@ -5,11 +5,11 @@
 
 ## Introduction
 
-This lab guides you through the steps to retrieve database rows containing vectors, and the associated data chunks, that are close to the query/prompt in **vector space**. Then, we will use the most relevant text chunks to augment, or enhance, the query/prompt and present it to the LLM which will present a well-formed natural language response. This is the basic Retrieval-Augmented Generation (RAG) approach.
-
-Estimated Time: 40 minutes
-
 ![overview](images/Station_05.png)
+
+Estimated Time: 10 minutes
+
+This lab guides you through the steps to retrieve database rows containing vectors, and the associated data chunks, that are close to the query/prompt in **vector space**. Then, we will use the most relevant text chunks to augment, or enhance, the query/prompt and present it to the LLM which will present a well-formed natural language response. This is the basic Retrieval-Augmented Generation (RAG) approach.
 
 ### Objectives
 In this lab, you will:
@@ -54,38 +54,22 @@ def DB_AI_Vector_Search(query_sql_UserInfo):
 
 ![overview](images/Station_06a_large.png)
 
-When you have finished examining the python code in the next cell, and ready to Continue, Press 'Shift-Enter' twice, or Click the 'Run Cell' icon above twice to execute the code and move to the next task
+<span style="color:blue">[Lab4 Task1:]&nbsp;&nbsp;&nbsp;After reviewing the steps and the screenshot, Press 'Shift-Enter' <strong><u>twice</strong></u> or Click the 'Run Cell' icon <strong><u>twice</strong></u> to Execute the **DB\_AI\_Vector\_Search"** function below<br><br>
+Stand by for all results to return...</span>
 
 ## Task 2: Large Language Model Query
 - In this step, we will execute the "**LLM\_Search**" function defined in Lab 2.
+
+![overview](images/Station_07.png)
+
 - A LLM will use our prompt to retrieve a publicly available response from the internat.
 - We will use this as a part-1 baseline to compare against a RAG response that we will generate in Task 3.  See an excerpt from LLM_Search below.
 - **LLM\_Search** takes the prompt ( <u>query\_sql\_UserInfo</u> ) as a single parameter.
 
-```
-<copy>
-chat_request=oci.generative_ai_inference.models.GenericChatRequest(
-    messages=[oci.generative_ai_inference.models.UserMessage(
-    context=[oci.generative_ai_inference.models.TextContext(
-    text=query_sql_UserInfo)])],
-    temperature=0.7,
-    top_p=0.7),
-    serving_mode=oci.generative_ai_inference.models.OnDemandServingMode(
-        model_id="meta.llama-3.2-90b-vision-instruct")
-
-chat_response = genai_client.chat(chat_detail)
-
-reply = chat_response.data.chat_response.choices[0].message.content[0].text
-
-print("\nResults for query \"" + query_sql_UserInfo + "\" from the LLM...\n")
-print(reply)
-
-</copy>
-```
-
 ![overview](images/Station_06b_large.png)
 
-When you have finished examining the python code in the next cell, and ready to Continue, Press 'Shift-Enter' twice, or Click the 'Run Cell' icon above twice to execute the code and move to the next task
+<span style="color:blue">[Lab4 Task2:]&nbsp;&nbsp;&nbsp;After reviewing the steps and the screenshot, Press 'Shift-Enter' <strong><u>twice</strong></u> or Click the 'Run Cell' icon <strong><u>twice</strong></u> to Execute the **LLM\_Search** function below<br><br>
+Stand by for all results to return...</span>
 
 ## Task 3: Retrieval-Augmented Generation (RAG) Enhanced Query
 
@@ -118,5 +102,5 @@ chat_request=oci.generative_ai_inference.models.GenericChatRequest(
 
 ![overview](images/Station_06c_large.png)
 
-After reviewing the steps and the screenshot, Press 'Shift-Enter' <strong><u>twice</strong></u> or Click the 'Run Cell' icon <strong><u>twice</strong></u> to Execute the LLM\_Search\_using\_RAG function below
-Stand by for all results to return...
+<span style="color:blue">[Lab4 Task3:]&nbsp;&nbsp;&nbsp;After reviewing the steps and the screenshot, Press 'Shift-Enter' <strong><u>twice</strong></u> or Click the 'Run Cell' icon <strong><u>twice</strong></u> to Execut&nbsp;&nbsp;&nbsp;e the **LLM\_Search\_using\_RAG** function below<br><br>
+Stand by for all results to return...</span>

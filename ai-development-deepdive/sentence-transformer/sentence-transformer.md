@@ -5,11 +5,15 @@
 
 ## Introduction
 
+Estimated Time: 10 minutes
+
 Depending on the type of your data, you can use different pretrained, open-source models to create vector embeddings. For textual data, sentence transformers transform words, sentences, or paragraphs into vector embeddings.
 
 This lab guides you through the code required to download the `ALL_MPNET_BASE_V2` sentence transformer model and ingest it into Oracle AI Database.
 
 ## Task 1: Download the Sentence Transformer
+
+![overview](images/Station_02.png)
 
 Below is an excerpt of the Python code in the next cell that downloads the sentence transformer model and loads it into the database.
 ```python
@@ -34,7 +38,7 @@ We use two Oracle Machine Learning (OML4Py) functions to download and ingest the
 
 - It is defined as **1 − cosine similarity**, so it ranges from **0** (same direction, maximally similar) to **2** (opposite direction, maximally dissimilar).
 
-When you have finished reviewing this code and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to execute the code and move to the next task.
+<span style="color:blue">[Lab3 Task1:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **download the sentence transformer model** and move to the next task.</span>
 
 ## Task 2: Load Unstructured Data From the Lines of Business
 
@@ -55,9 +59,8 @@ Below is an excerpt of the Python code to:
 
 ![overview](images/Station_21_large.png)
 
-![overview](images/Station_21a_large.png)
 
-When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to execute the code and move to the next task.
+<span style="color:blue">[Lab3 Task2:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **load data from the lines of business into the staging table** and move to the next task.</span>
 
 ## Task 3: Transform and Embed End-User Business Documents
 
@@ -89,7 +92,8 @@ The `DBMS_VECTOR_CHAIN` package is used to chain the pipeline functions together
 
 Below are excerpts of the workshop Python code that retrieve your documents from the staging table, run them through the pipeline, and store them in the vector table.
 
-![overview](images/Station_04c_large.png)
+<span style="color:blue">[Lab3 Task3:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **transform and embed the end-user business documents into the vector table** and move to the next task.</span>
+
+You may now **proceed to the next lab**
 
 
-When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to execute the code and move to the next task.

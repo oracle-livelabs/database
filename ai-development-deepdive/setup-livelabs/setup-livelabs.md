@@ -7,7 +7,7 @@
 
 This lab guide will walk you through starting up Jupyter Lab notebook, which is the development environment we will explore Oracle AI Database AI capabilities.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 
@@ -28,16 +28,16 @@ jupyter lab --ip=0.0.0.0 --allow-root&
 
 ![Jupyter server start](images/jupyter01.png)
 
-Copy the highlighted URL and paste it into your browser.  Substitute your IP address in place of the localhost IP address (127.0.0.1) (see below)
+<span style="color:blue">[Lab1 Task1:]&nbsp;&nbsp;&nbsp;Copy the highlighted URL and paste it into your browser</span>.  **Substitute your IP address in place of the localhost IP address (127.0.0.1)** (see below)
 
-Press 'enter' to execute the URL.
-You are now in the lab notebook. Press 'Shift-Enter' or Click the 'Run Cell' icon( ![CellRun](images/RunCellIcon.png) ) to import the required python modules.
+<span style="color:blue">Press 'enter' to execute the URL.
+You are now in the lab notebook.</span> Press 'Shift-Enter' or Click the 'Run Cell' icon( ![CellRun](images/RunCellIcon.png) ) to **import the required python modules**.
 
 ![Jupyter launcher](images/jupyter02.png)
 
 ## Task 2: Verify the valid setup of the workshop environment
 
- The next two notebook cells introduce the workshop and provide an overview of the goals and expectations.  When ready, press 'Shift-Enter' or click the 'Run Cell' icon( ![CellRun](images/RunCellIcon.png) ) in each cell to continue.
+ <span style="color:blue">[Lab1 Task2:]&nbsp;&nbsp;&nbsp;The next two notebook cells introduce the workshop and provide an overview of the goals and expectations.  When ready, press 'Shift-Enter' or click the 'Run Cell' icon( ![CellRun](images/RunCellIcon.png) ) in each cell to continue.</span>
  
 ![python import](images/WorkshopIntroOverview.png)
 
@@ -47,11 +47,15 @@ The next cell verifies and resets the workshop environment. These tasks include:
 - Granting access to the database data pump directory
 - Removing previously deployed sentence transformer models
 
-When ready, press 'Shift-Enter' or click the 'Run Cell' icon( ![CellRun](images/RunCellIcon.png) ) to reset the workshop.
+<span style="color:blue">[Lab1 Task2:]&nbsp;&nbsp;&nbsp;When ready, press 'Shift-Enter' or click the 'Run Cell' icon( ![CellRun](images/RunCellIcon.png) ) to **reset the workshop**.</span>
 
 When the following output is successfully displayed, the workshop has been reset and you may move on to the next Lab
 NOTE: This cell may be rerun until all output is displayed
  
 ![workshop reset](images/reset.png)
+
+You may now **proceed to the next lab**
+
+
 
 
