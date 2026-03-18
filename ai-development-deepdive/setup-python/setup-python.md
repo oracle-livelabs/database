@@ -16,11 +16,15 @@ Define the functions required to:
 - Use a large language model to retrieve a public response to the prompt
 - Use the large language model, augmented by the database vector search response, to retrieve an enriched response using internal and public data
 
+### **Prerequisites**
+This lab assumes you have:
+- All previous labs successfully completed
+
 ## Task 1: Overview
 
-In the "Overview" notebook cell, the vector search, LLM and RAG python functions are described
+In the "Overview" notebook cell, the vector search, LLM and RAG python functions are described.
 
-![overview](images/Station_01a.png)
+![overview](images/station_01a.png)
 
 ### DB\_AI\_Vector\_Search
 - Oracle Database AI Vector Search lets applications store vector embeddings alongside traditional relational data and use them to perform fast, semantic similarity searches over both structured and unstructured content such as text, images, and audio.
@@ -42,3 +46,13 @@ In the "Overview" notebook cell, the vector search, LLM and RAG python functions
 
 You may now **proceed to the next lab**
 
+## Acknowledgements
+**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI <br>
+
+**Contributors** 
+- Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI <br>
+
+**Last Updated By/Date** -  Gary McKoy, March 2026

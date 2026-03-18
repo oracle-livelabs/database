@@ -9,11 +9,18 @@ Estimated Time: 10 minutes
 
 Depending on the type of your data, you can use different pretrained, open-source models to create vector embeddings. For textual data, sentence transformers transform words, sentences, or paragraphs into vector embeddings.
 
+### Objectives
+
 This lab guides you through the code required to download the `ALL_MPNET_BASE_V2` sentence transformer model and ingest it into Oracle AI Database.
+
+### **Prerequisites**
+This lab assumes you have:
+- All previous labs successfully completed
+
 
 ## Task 1: Download the Sentence Transformer
 
-![overview](images/Station_02.png)
+![overview](images/station_02.png)
 
 Below is an excerpt of the Python code in the next cell that downloads the sentence transformer model and loads it into the database.
 ```python
@@ -42,7 +49,7 @@ We use two Oracle Machine Learning (OML4Py) functions to download and ingest the
 
 ## Task 2: Load Unstructured Data From the Lines of Business
 
-![overview](images/Station_03.png)
+![overview](images/station_03.png)
 
 Using embedding models, you can transform unstructured data into vector embeddings that can then be used for semantic queries on business data.
 
@@ -57,7 +64,7 @@ Below is an excerpt of the Python code to:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;<font size="2">**NOTE:** In your environment, object storage can be replaced by file system storage.</font></br>
 - Use SQL to insert these documents into a CLOB column.
 
-![overview](images/Station_21_large.png)
+![overview](images/station_21_large.png)
 
 
 <span style="color:blue">[Lab3 Task2:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **load data from the lines of business into the staging table** and move to the next task.</span>
@@ -66,7 +73,7 @@ Below is an excerpt of the Python code to:
 
 ### The Stages of Data Transformation
 
-![overview](images/Station_03a.png)
+![overview](images/station_03a.png)
 
 Data may travel through different stages before turning into a vector.
 
@@ -88,7 +95,7 @@ The `DBMS_VECTOR_CHAIN` package is used to chain the pipeline functions together
 - Step 3 → Embedding ("vectorizing") (Gray)
 - Step 4 → Inserting vectors into the database table (Red)
 
-![overview](images/Station_04a_large.png)
+![overview](images/station_04a_large.png)
 
 Below are excerpts of the workshop Python code that retrieve your documents from the staging table, run them through the pipeline, and store them in the vector table.
 
@@ -96,4 +103,13 @@ Below are excerpts of the workshop Python code that retrieve your documents from
 
 You may now **proceed to the next lab**
 
+## Acknowledgements
+**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI <br>
 
+**Contributors** 
+- Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI <br>
+
+**Last Updated By/Date** -  Gary McKoy, March 2026

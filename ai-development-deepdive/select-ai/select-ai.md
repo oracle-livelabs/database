@@ -10,6 +10,8 @@
 
 Select AI generates, runs, and explains SQL queries from user-provided natural language prompts. It automates tasks that users would otherwise perform manually using their schema metadata and a large language model (LLM) of their choice. Additionally, it facilitates retrieval augmented generation with vector stores and enables chatting with the LLM.
 
+### Objectives
+
 Here are the steps we will cover in this lab:
 
 1. Create an **AI Profile**.
@@ -24,7 +26,7 @@ This lab assumes you have:
 
 ## Task 1: Create an AI Profile
 
-![image](images/Station_22_large.png)
+![image](images/station_22_large.png)
 
 **Oracle AI Database 26ai**  **<span style="color:red"><u>AI profiles</u></span>**  are used to facilitate and **configure access to an LLM** and to setup for generating, running, and explaining SQL based on natural language prompts. It also facilitates retrieval augmented generation using embedding models and vector indexes and allows for chatting with the LLM.
 
@@ -51,7 +53,7 @@ Select AI offers summarization of your content in the following ways:
 
 ## Task 3: Select AI narrate
 
-![image](images/Station_23_large.png)
+![image](images/station_23_large.png)
 
 The **<span style="color:red">narrate</span>** action supports both natural language to SQL (NL2SQL) and RAG.
 
@@ -63,7 +65,7 @@ For **RAG**, when the AI profile includes a vector index, the system uses the sp
 
 ## Task 4: Select AI chat
 
-![image](images/Station_25_large.png)
+![image](images/station_25_large.png)
 
 Select AI **<span style="color:red">chat</span>** passes a user prompt **directly to the LLM** specified in the AI profile to generate a response, which is presented to the end user.
 
@@ -77,5 +79,13 @@ Select AI supports **short-term, session-based conversations**, which are enable
 
 ** You have successfully completed the workshop ** 
 
+## Acknowledgements
+**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI <br>
 
+**Contributors** 
+- Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
+- Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI <br>
 
+**Last Updated By/Date** -  Gary McKoy, March 2026
