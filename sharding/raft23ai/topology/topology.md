@@ -223,8 +223,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
     
     ![<t4-4-run-workload_and_ctrl_c>](./images/t4-4-run-workload_and_ctrl_c.png " ")
 
-4. Now check the RU details from terminal's 2nd tab which is switched to  **gsm1**.
-Notice that for each RU#s, the values is "Log Index" columns are increased due to read and write operations are performed while running the workload.
+4. Now check the RU details from terminal's 2nd tab which is switched to  **gsm1**. Notice that for each RU#s, the values is "Log Index" columns are increased due to read and write operations are performed while running the workload.
 
     ```
     <copy>
