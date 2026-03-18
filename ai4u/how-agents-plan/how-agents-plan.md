@@ -331,12 +331,12 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
     ![Task Information](./images/task_4_2.png " ")
 
-**Observe:** The agent planned to use multiple tools:
-- `GET_APPLICANT_TOOL` to get basic info
-- `GET_LOANS_TOOL` to get loan history
-- `CHECK_RATES_TOOL` to verify rate eligibility
+    **Observe:** The agent planned to use multiple tools:
+    - `GET_APPLICANT_TOOL` to get basic info
+    - `GET_LOANS_TOOL` to get loan history
+    - `CHECK_RATES_TOOL` to verify rate eligibility
 
-3. Notice the sequence—the agent determined the logical order.
+3. Notice the sequence. The agent determined the logical order.
 
 ## Task 5: See How Instructions Shape Planning
 
