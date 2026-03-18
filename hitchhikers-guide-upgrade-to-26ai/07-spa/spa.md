@@ -29,8 +29,6 @@ This lab assumes:
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Switch to *UPGR*, then check the SQL Tuning Sets and the number of statements in them:
@@ -44,8 +42,6 @@ This lab assumes:
     where sqlset_name like 'STS_Capture%'
     group by sqlset_name order by 2;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -191,8 +187,6 @@ This lab assumes:
     alter system set optimizer_index_cost_adj=10000;
     show parameter optimizer_index_cost_adj
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -316,8 +310,6 @@ This lab assumes:
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 16. Switch to the *UPGR* database, then implement a change and re-test workload. Imagine you have found the root cause of the bad performance. In this case, you know it is *optimizer\_index\_cost\_adj*. Now, you change the parameter back to the default value (100) and repeat the test.
@@ -330,8 +322,6 @@ This lab assumes:
 
     show parameter optimizer_index_cost_adj
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * In a real situation, you could make many other changes. Change statistics preferences, gather new statistics, toggle optimizer fixes with `DBMS_OPTIM_BUNDLE`, or many other things.
