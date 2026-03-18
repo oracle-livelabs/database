@@ -34,8 +34,6 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Switch to the upgraded *UPGR* database, then get a list of plans for the SQL (*0cwuxyv314wcg*).
@@ -49,8 +47,6 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     where sql_id='0cwuxyv314wcg'
     order by 1, child_number, position desc;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     If the previous query returned **“no rows selected”**, run the following script to explicitly load the required SQL into the Library Cache.:
@@ -64,8 +60,6 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     where sql_id='0cwuxyv314wcg'
     order by 1, child_number, position desc;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * The plan with hash value *612465046* is the good plan. It uses an index access path. You want this plan in your SQL plan baseline.
@@ -263,7 +257,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
     ``` sql
     <copy>
-    SELECT sql_handle, plan_name, enabled, accepted, fixed FROM dba_sql_plan_baselines;
+    select sql_handle, plan_name, enabled, accepted, fixed from dba_sql_plan_baselines;
     </copy>
     ```
 
@@ -271,7 +265,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> SELECT sql_handle, plan_name, enabled, accepted, fixed FROM dba_sql_plan_baselines;
+    SQL> select sql_handle, plan_name, enabled, accepted, fixed from dba_sql_plan_baselines;
 
     SQL_HANDLE              PLAN_NAME                         ENABLED    ACCEPTED    FIXED
     _______________________ _________________________________ __________ ___________ ________
@@ -292,8 +286,6 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
 
     show parameter optimizer_index_cost_adj
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -338,8 +330,6 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
 
     select * from table(dbms_xplan.display);
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * The optimizer chooses the index plan for the SQL.
@@ -396,8 +386,6 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 7. Switch to the *UPGR* database, then reset the optimizer hack, changing the parameter back to the default value (100).
@@ -410,8 +398,6 @@ Now, you have a SQL plan baseline that only contains the index plan. You now re-
 
     show parameter optimizer_index_cost_adj
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 8. Exit SQLcl.

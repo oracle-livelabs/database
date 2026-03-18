@@ -50,9 +50,15 @@ Before you begin, you are going to import a notebook that has all of the command
 
 1. From the Oracle Machine Learning home page, click **Notebooks**.
 
+    ![Notebook Information](./images/task_1_1.png " ")
+
 2. Click **Import** to expand the Import drop down.
 
+    ![Notebook Information](./images/task_1_2.png " ")
+
 3. Select **Git**.
+
+    ![Notebook Information](./images/task_1_3.png " ")
 
 4. Paste the following GitHub URL leaving the credential field blank:
 
@@ -62,7 +68,11 @@ Before you begin, you are going to import a notebook that has all of the command
     </copy>
     ```
 
+    ![Notebook Information](./images/task_1_4.png " ")
+
 5. Click **Ok**.
+
+    ![Notebook Information](./images/task_1_5.png " ")
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -107,6 +117,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     COMMIT;
     </copy>
     ```
+
+    ![Task Information](./images/task_2_1.png " ")
 
 2. Create tool functions.
 
@@ -162,6 +174,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     </copy>
     ```
 
+    ![Task Information](./images/task_2_2.png " ")
+
 3. Register the tools.
 
     Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.
@@ -201,6 +215,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     /
     </copy>
     ```
+
+    ![Task Information](./images/task_2_3.png " ")
 
 4. Create the agent and team.
 
@@ -242,6 +258,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     </copy>
     ```
 
+    ![Task Information](./images/task_2_4.png " ")
+
 ## Task 3: Observe Single-Tool Planning
 
 Let's start with a simple request that needs only one tool.
@@ -256,6 +274,8 @@ Let's start with a simple request that needs only one tool.
     SELECT AI AGENT Who is applicant APP-001;
     </copy>
     ```
+
+    ![Task Information](./images/task_3_1.png " ")
 
 2. Check the tool history to see the plan execution.
 
@@ -273,7 +293,9 @@ Let's start with a simple request that needs only one tool.
     </copy>
     ```
 
-**Observe:** The agent planned to use just GET_APPLICANT_TOOL because that's all the question required.
+    ![Task Information](./images/task_3_2.png " ")
+
+**Observe:** The agent planned to use just `GET_APPLICANT_TOOL` because that's all the question required.
 
 ## Task 4: Observe Multi-Tool Planning
 
@@ -288,6 +310,8 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     SELECT AI AGENT Give me a complete picture of applicant APP-001 including their loans and rate eligibility;
     </copy>
     ```
+
+    ![Task Information](./images/task_4_1.png " ")
 
 2. Check the tool history.
 
@@ -305,10 +329,12 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     </copy>
     ```
 
+    ![Task Information](./images/task_4_2.png " ")
+
 **Observe:** The agent planned to use multiple tools:
-- GET_APPLICANT_TOOL to get basic info
-- GET_LOANS_TOOL to get loan history
-- CHECK_RATES_TOOL to verify rate eligibility
+- `GET_APPLICANT_TOOL` to get basic info
+- `GET_LOANS_TOOL` to get loan history
+- `CHECK_RATES_TOOL` to verify rate eligibility
 
 3. Notice the sequence—the agent determined the logical order.
 
@@ -346,6 +372,8 @@ The task instruction guides how the agent plans. Let's modify it.
     </copy>
     ```
 
+    ![Task Information](./images/task_5_1.png " ")
+
 2. Test with the structured instructions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -356,6 +384,8 @@ The task instruction guides how the agent plans. Let's modify it.
     SELECT AI AGENT Tell me about applicant APP-001;
     </copy>
     ```
+
+    ![Task Information](./images/task_5_2.png " ")
 
 3. Check the tool history again.
 
@@ -371,6 +401,8 @@ The task instruction guides how the agent plans. Let's modify it.
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    ![Task Information](./images/task_5_3.png " ")
 
 **Observe:** The agent followed the explicit plan: applicant first, then loans, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
 
@@ -399,6 +431,8 @@ FETCH FIRST 10 ROWS ONLY;
 </copy>
 ```
 
+![Task Information](./images/task_6_1.png " ")
+
 ## Summary
 
 In this lab, you observed how agents plan their work:
@@ -416,8 +450,8 @@ In this lab, you observed how agents plan their work:
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - David Start, February 2026
 
 ## Cleanup (Optional)
 
@@ -439,3 +473,5 @@ DROP FUNCTION get_applicant_loans;
 DROP FUNCTION check_rate_eligibility;
 </copy>
 ```
+
+![Cleanup](./images/cleanup.png " ")
