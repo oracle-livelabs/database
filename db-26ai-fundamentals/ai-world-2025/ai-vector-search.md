@@ -10,6 +10,10 @@ Building on the patient data from our previous labs, you'll learn how to set up 
 
 Estimated Lab Time: 25 minutes
 
+### Objective:
+The objective of this lab is to demonstrate Oracle AI Database 26ai's AI Vector Search. By the end of this lab, you will load an embedding model, generate vectors for healthcare documents, and run semantic similarity searches to find related content based on meaning rather than exact keyword matches.
+
+
 ### What You'll Learn
 
 - How vector search finds documents by meaning, not just keywords
@@ -275,7 +279,7 @@ Estimated Lab Time: 25 minutes
     - Nutrition consultation notes about DASH diet
     - Lab results showing cholesterol levels
    
-   Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
+    Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
 
     ![vecs](./images/v2.png)
 
