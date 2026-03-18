@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## How Agents Plan Their Work at Seer Equity\n\n### The Business Problem\n\nWhen a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.\n\n*\"Give me a complete picture of Acme Industries\"* seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.\n\n### What You'll Learn\n\nIn this lab, you'll see how agents *plan* before they act. When you ask for a \"complete picture\" of a client, the agent:\n\n1. Analyzes what information is needed\n2. Identifies which tools can provide that information\n3. Determines the optimal order to call them\n4. Executes the plan and synthesizes the results\n\nThis planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.\n\n**What you'll build:** A multi-tool agent that plans and coordinates client information retrieval.\n\n**Estimated Time:** 10 minutes",
+      "text": "%md\n## How Agents Plan Their Work at Seer Equity\n\n### The Business Problem\n\nWhen a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.\n\n*\"Give me a complete picture of Acme Industries\"* seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.\n\n### What You Will Learn\n\nIn this lab, you will see how agents *plan* before they act. When you ask for a \"complete picture\" of a client, the agent:\n\n1. Analyzes what information is needed\n2. Identifies which tools can provide that information\n3. Determines the optimal order to call them\n4. Executes the plan and synthesizes the results\n\nThis planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.\n\n**What you will build:** A multi-tool agent that plans and coordinates client information retrieval.\n\n**Estimated Time:** 10 minutes",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -16,7 +16,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>How Agents Plan Their Work at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>When a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.</p>\n\n<p><em>\"Give me a complete picture of Acme Industries\"</em> seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll see how agents <em>plan</em> before they act. When you ask for a \"complete picture\" of a client, the agent:</p>\n\n<ol>\n<li>Analyzes what information is needed</li>\n<li>Identifies which tools can provide that information</li>\n<li>Determines the optimal order to call them</li>\n<li>Executes the plan and synthesizes the results</li>\n</ol>\n\n<p>This planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.</p>\n\n<p><strong>What you'll build:</strong> A multi-tool agent that plans and coordinates client information retrieval.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+            "data": "<h2>How Agents Plan Their Work at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>When a loan officer at Seer Equity needs to prepare for a client call, they have to pull information from multiple places: client contact info, loan history, rate eligibility, credit tier. It takes 10-15 minutes just to get ready for a conversation.</p>\n\n<p><em>\"Give me a complete picture of Acme Industries\"</em> seems like a simple request, but it requires checking three different systems. The loan officers want an assistant that can gather all this information automatically.</p>\n\n<h3>What You Will Learn</h3>\n\n<p>In this lab, you will see how agents <em>plan</em> before they act. When you ask for a \"complete picture\" of a client, the agent:</p>\n\n<ol>\n<li>Analyzes what information is needed</li>\n<li>Identifies which tools can provide that information</li>\n<li>Determines the optimal order to call them</li>\n<li>Executes the plan and synthesizes the results</li>\n</ol>\n\n<p>This planning capability is what makes agents predictable and debuggable. You can see exactly what the agent decided to do before it does it.</p>\n\n<p><strong>What you will build:</strong> A multi-tool agent that plans and coordinates client information retrieval.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
           }
         ]
       }
@@ -150,7 +150,7 @@
       }
     },
     {
-      "text": "%md\n## Ask a Simple Question (One Tool)\n\nStart with a simple question that only needs one tool. The agent should plan to use just GET_APPLICANT_TOOL.\n\n**What you'll see:** The agent calls only the applicant lookup tool and returns the basic info.",
+      "text": "%md\n## Ask a Simple Question (One Tool)\n\nStart with a simple question that only needs one tool. The agent should plan to use just GET_APPLICANT_TOOL.\n\n**What you will see:** The agent calls only the applicant lookup tool and returns the basic info.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -165,7 +165,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Ask a Simple Question (One Tool)</h2>\n\n<p>Start with a simple question that only needs one tool. The agent should plan to use just GET_APPLICANT_TOOL.</p>\n\n<p><strong>What you'll see:</strong> The agent calls only the applicant lookup tool and returns the basic info.</p>"
+            "data": "<h2>Ask a Simple Question (One Tool)</h2>\n\n<p>Start with a simple question that only needs one tool. The agent should plan to use just GET_APPLICANT_TOOL.</p>\n\n<p><strong>What you will see:</strong> The agent calls only the applicant lookup tool and returns the basic info.</p>"
           }
         ]
       }
@@ -214,7 +214,7 @@
       }
     },
     {
-      "text": "%md\n## Ask a Complex Question (Multiple Tools)\n\nNow ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.\n\n**What you'll see:** The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.",
+      "text": "%md\n## Ask a Complex Question (Multiple Tools)\n\nNow ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.\n\n**What you will see:** The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -229,7 +229,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Ask a Complex Question (Multiple Tools)</h2>\n\n<p>Now ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.</p>\n\n<p><strong>What you'll see:</strong> The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.</p>"
+            "data": "<h2>Ask a Complex Question (Multiple Tools)</h2>\n\n<p>Now ask a question that requires a complete picture of the applicant. The agent should plan to use ALL THREE tools.</p>\n\n<p><strong>What you will see:</strong> The agent gathers info from multiple sources—applicant details, loan history, and rate eligibility, then synthesizes them into a complete response.</p>"
           }
         ]
       }
@@ -246,7 +246,7 @@
       }
     },
     {
-      "text": "%md\n## Examine the Multi-Tool Plan\n\nCheck the tool history again. You should now see multiple tools were called in sequence.\n\n**What you'll see:** The agent called GET_APPLICANT_TOOL first, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL. It determined the logical order based on the question.",
+      "text": "%md\n## Examine the Multi-Tool Plan\n\nCheck the tool history again. You should now see multiple tools were called in sequence.\n\n**What you will see:** The agent called GET_APPLICANT_TOOL first, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL. It determined the logical order based on the question.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -261,7 +261,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Examine the Multi-Tool Plan</h2>\n\n<p>Check the tool history again. You should now see multiple tools were called in sequence.</p>\n\n<p><strong>What you'll see:</strong> The agent called GET_APPLICANT_TOOL first, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL. It determined the logical order based on the question.</p>"
+            "data": "<h2>Examine the Multi-Tool Plan</h2>\n\n<p>Check the tool history again. You should now see multiple tools were called in sequence.</p>\n\n<p><strong>What you will see:</strong> The agent called GET_APPLICANT_TOOL first, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL. It determined the logical order based on the question.</p>"
           }
         ]
       }
@@ -310,7 +310,7 @@
       }
     },
     {
-      "text": "%md\n## Test the Structured Plan\n\nNow ask a simple question. Even though \"tell me about\" could be answered with just applicant info, the structured task will force all three tools to run.\n\n**What you'll see:** All three tools are called in the prescribed order, every time.",
+      "text": "%md\n## Test the Structured Plan\n\nNow ask a simple question. Even though \"tell me about\" could be answered with just applicant info, the structured task will force all three tools to run.\n\n**What you will see:** All three tools are called in the prescribed order, every time.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -325,7 +325,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Test the Structured Plan</h2>\n\n<p>Now ask a simple question. Even though \"tell me about\" could be answered with just applicant info, the structured task will force all three tools to run.</p>\n\n<p><strong>What you'll see:</strong> All three tools are called in the prescribed order, every time.</p>"
+            "data": "<h2>Test the Structured Plan</h2>\n\n<p>Now ask a simple question. Even though \"tell me about\" could be answered with just applicant info, the structured task will force all three tools to run.</p>\n\n<p><strong>What you will see:</strong> All three tools are called in the prescribed order, every time.</p>"
           }
         ]
       }
@@ -342,7 +342,7 @@
       }
     },
     {
-      "text": "%md\n## Verify the Explicit Plan Was Followed\n\nThe tool history should show the exact sequence: applicant → loans → eligibility.\n\n**What you'll see:** GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.",
+      "text": "%md\n## Verify the Explicit Plan Was Followed\n\nThe tool history should show the exact sequence: applicant → loans → eligibility.\n\n**What you will see:** GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -357,7 +357,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Verify the Explicit Plan Was Followed</h2>\n\n<p>The tool history should show the exact sequence: applicant → loans → eligibility.</p>\n\n<p><strong>What you'll see:</strong> GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.</p>"
+            "data": "<h2>Verify the Explicit Plan Was Followed</h2>\n\n<p>The tool history should show the exact sequence: applicant → loans → eligibility.</p>\n\n<p><strong>What you will see:</strong> GET_APPLICANT_TOOL, then GET_LOANS_TOOL, then CHECK_PREMIUM_TOOL, in that exact order, as specified in the task instructions.</p>"
           }
         ]
       }

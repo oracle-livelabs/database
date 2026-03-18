@@ -2,11 +2,11 @@
 
 ## Introduction
 
-In this lab, you'll observe how an AI agent plans its work before taking action.
+In this lab, you will observe how an AI agent plans its work before taking action.
 
 Planning is what separates agents from chatbots. Before executing anything, an agent breaks a task into steps, identifies which tools to use, and determines the order of operations. This makes agent behavior predictable and debuggable.
 
-You'll give an agent a multi-step task and watch how it decomposes the work.
+You will give an agent a multi-step task and watch how it decomposes the work.
 
 ### The Business Problem
 
@@ -23,11 +23,11 @@ At Seer Equity, preparing for a client call is tedious. A loan officer needs to 
 
 The loan officers need an agent that can plan and execute a multi-step information retrieval: analyze what's needed, identify the right tools, determine the order, and synthesize the results.
 
-### What You'll Learn
+### What You Will Learn
 
-This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seer Equity's "gathering" problem.
+This lab shows you how agents plan multi-tool operations. You will see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seer Equity's "gathering" problem.
 
-**What you'll build:** A multi-tool agent that plans information retrieval for loan applicants.
+**What you will build:** A multi-tool agent that plans information retrieval for loan applicants.
 
 Estimated Time: 10 minutes
 
@@ -40,7 +40,7 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
@@ -331,12 +331,12 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
     ![Task Information](./images/task_4_2.png " ")
 
-**Observe:** The agent planned to use multiple tools:
-- `GET_APPLICANT_TOOL` to get basic info
-- `GET_LOANS_TOOL` to get loan history
-- `CHECK_RATES_TOOL` to verify rate eligibility
+    **Observe:** The agent planned to use multiple tools:
+    - `GET_APPLICANT_TOOL` to get basic info
+    - `GET_LOANS_TOOL` to get loan history
+    - `CHECK_RATES_TOOL` to verify rate eligibility
 
-3. Notice the sequence—the agent determined the logical order.
+3. Notice the sequence. The agent determined the logical order.
 
 ## Task 5: See How Instructions Shape Planning
 

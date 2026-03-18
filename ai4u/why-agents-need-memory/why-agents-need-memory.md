@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you'll experience the forgetting problem firsthand and understand why memory is essential for agents that do real work.
+In this lab, you will experience the forgetting problem firsthand and understand why memory is essential for agents that do real work.
 
 Most AI agents have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned about a client last week, or what exceptions were approved before. This works for demos. It fails completely in production.
 
@@ -16,9 +16,9 @@ Sarah was not happy:
 
 The answer: The AI assistants have amnesia. Every conversation starts fresh. They don't remember what happened yesterday, what they learned about a client last week, or what exceptions were approved before.
 
-### What You'll Learn
+### What You Will Learn
 
-In this lab, you'll experience this problem firsthand:
+In this lab, you will experience this problem firsthand:
 
 1. Tell an agent important information about a client (preferences, rate exceptions, relationship history)
 2. The agent acknowledges and seems to understand
@@ -28,7 +28,7 @@ In this lab, you'll experience this problem firsthand:
 
 This is exactly what's happening to Seer Equity's clients. And it's why memory isn't optional—it's essential.
 
-**What you'll experience:** The forgetting problem that frustrates clients and costs business.
+**What you will experience:** The forgetting problem that frustrates clients and costs business.
 
 Estimated Time: 10 minutes
 
@@ -41,7 +41,7 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
@@ -309,7 +309,7 @@ This isn't just annoying—it breaks real workflows at Seer Equity. Let's simula
 
 ## Task 6: Understand What's Missing
 
-Let's look at what tools this agent has. You'll see it has no memory tools—no way to store or retrieve information persistently. The agent can only work with what's in the current conversation context. Once that context is cleared, everything is lost.
+Let's look at what tools this agent has. You will see it has no memory tools—no way to store or retrieve information persistently. The agent can only work with what's in the current conversation context. Once that context is cleared, everything is lost.
 
 1. Query what tools the agent has.
 
@@ -373,7 +373,7 @@ In this lab, you experienced the forgetting problem:
 * **Everything forgotten**: Agent had no idea about the client or loan
 * **Business impact**: Loan application tracking breaks completely
 
-**Key takeaway:** Chat memory is temporary. Agentic memory is persistent. Without persistent memory, agents at Seer Equity can't maintain client relationships, track loan applications across sessions, or learn from experience. In the next lab, you'll see where that memory should live.
+**Key takeaway:** Chat memory is temporary. Agentic memory is persistent. Without persistent memory, agents at Seer Equity can't maintain client relationships, track loan applications across sessions, or learn from experience. In the next lab, you will see where that memory should live.
 
 ## Learn More
 
@@ -382,7 +382,7 @@ In this lab, you experienced the forgetting problem:
 ## Acknowledgements
 
 * **Author** - David Start
-* *Contributors** - Francis Regalado
+* **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
 ## Cleanup (Optional)
