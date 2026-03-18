@@ -135,8 +135,8 @@ Estimated Lab Time: 25 minutes
 
             TYPE url_array IS VARRAY(100) OF VARCHAR2(2000);
             l_file_urls url_array := url_array(
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/Q5ut2WEd3LoZGvPDKGQy6YE6Ur1uNh_KPz29_nHc6hOXmf62cZvTnaIJ2Wkvbu3E/n/oradbclouducm/b/aiworld-demo/o/archived_messages_courtney.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/6jvQvMNMkhOVDjanCZNlkWh5TuDDqpwD6yneBAyoaOFiS35WlaGTV8_-8VtF0G_H/n/oradbclouducm/b/aiworld-demo/o/archived_messages_leslie.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/82bFkx_jXzSnFFfjpMC39qOuznaB95McqYOVg0Qg8izK0R-tS3VmAplwLgzSqyB_/n/oradbclouducm/b/aiworld-demo/o/archived_messages_courtney.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/2z3Pxu7zj9j-nn-KvmzJXa64MUdPQw1q5YqObICjhAbvdpYvTWO9xTP8kNqMCcw_/n/oradbclouducm/b/aiworld-demo/o/archived_messages_leslie.txt',
                     'https://objectstorage.us-ashburn-1.oraclecloud.com/p/gFU7MYcOkQAV7L85yVbn0813kMnZ2XEY6nzBOfUCaaaGaClIxMsTZOXLwJ_3wKJZ/n/oradbclouducm/b/aiworld-demo/o/archived_messages_ronald.txt',
                     'https://objectstorage.us-ashburn-1.oraclecloud.com/p/uMa84j6GL9htHf8zZ-61M3y1KVhlLAiEMpU8HLJ_IP8TaLIF7ZBvpXAvM7RtlEq-/n/oradbclouducm/b/aiworld-demo/o/discharge_summary_courtney.txt',
                     'https://objectstorage.us-ashburn-1.oraclecloud.com/p/lY01za5tMiWafA-UUkg_w66SWwJ7sORXVCYQeyzGVDCwe-5fMSVqX2QoP6q54ZGY/n/oradbclouducm/b/aiworld-demo/o/insurance_authorization.txt',
