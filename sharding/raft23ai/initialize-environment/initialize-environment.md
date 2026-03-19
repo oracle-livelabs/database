@@ -19,9 +19,9 @@ This lab assumes you have:
 
 ## Task 1: Verify default browser windows.
 
-1. By default, two browser windows are shown. On the left, "Introduction" About Raft Replication and on the right, "RAFT 23ai LiveLabs Demo: All Customers List" like below:
+1. By default, two browser windows are shown. On the left, "Introduction" About Raft Replication and on the right, "Raft Replication LiveLabs Demo: All Customers List" like below:
 
- ![default_windows_raft_livelabs](images/default_windows_raft_livelabs.png " ")
+    ![default_windows_raft_livelabs](images/default_windows_raft_livelabs.png " ")
 
     You can skip the below stpes if both browser windows are shown.
 
@@ -46,7 +46,7 @@ This lab assumes you have:
     - Three Oracle shard Database containers
     - Appclient Container
 
-2.  Click on Activities (shown on top left) >> Terminal icon (shown on center of the screen which is next to Chrome icon) to Launch the Terminal when its not already opened. Proceed as indicated below to validate the services.
+2. Click on Activities (shown on top left) >> Terminal icon (shown on center of the screen which is next to Chrome icon) to Launch the Terminal when its not already opened. Proceed as indicated below to validate the services.
 
     - Oracle Sharding container Details
 
@@ -83,4 +83,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026

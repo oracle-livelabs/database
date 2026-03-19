@@ -53,9 +53,9 @@ This lab assumes you have:
     </copy>
     ```
 
-## Verify RAFT Demo UI application is running
+## Verify Raft Demo UI application is running
 
-1. How to check if RAFT Demo UI application is running?
+1. How to check if Raft Demo UI application is running?
 
     ```
     <copy>
@@ -64,7 +64,7 @@ This lab assumes you have:
     ```
    ![<verify_raft_ui_app>](./images/verify_raft_ui_app.png " ")
 
-2. For some reasons if you want to restart the RAFT Demo UI, it can be stopped then started:
+2. For some reasons if you want to restart the Raft Demo UI, it can be stopped then started:
     ```
     <copy>
     ps -ef | grep raftLiveLabsApp
@@ -76,7 +76,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    Confirm from browser using http://localhost:8080 that RAFT Demo UI application is running.
+    Confirm from browser using http://localhost:8080 that Raft Demo UI application is running.
 
 
 ## Scenarios: Guide for Raft Replication Test Cases
@@ -199,4 +199,4 @@ This lab assumes you have:
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026
