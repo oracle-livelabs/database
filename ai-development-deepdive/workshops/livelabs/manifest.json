@@ -9,8 +9,8 @@
            "filename": "../../introduction/introduction.md"
         },
         {
-            "title": "Lab 1: Start the Jupyter Lab Environment",
-            "description": "Start the Jupyter Lab Environment",
+            "title": "Lab 1: Get Started",
+            "description": "Get Start the Jupyter Lab Environment",
              "type": "livelabs",
            "filename": "../../setup-livelabs/setup-livelabs.md"
         },
@@ -37,6 +37,12 @@
             "description": "Select AI",
             "type": "livelabs",
             "filename": "../../select-ai/select-ai.md"
+        },
+		{
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "type": "livelabs",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }

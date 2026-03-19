@@ -1,7 +1,6 @@
 # Lab 2: Setup the Python Functions
 
-###**<span style="color:blue">( Refer to 'Lab 2' of the Jupyter notebook as go through this lab )</span>**
-<br>
+**( Refer to 'Lab 2' of the Jupyter notebook as go through this lab )** 
 
 ## Introduction
 
@@ -12,47 +11,55 @@ Estimated Time: 10 minutes
 ### Objectives
 
 Define the functions required to:
+
 - Execute vector search on business data in the Oracle Database in response to a user prompt
 - Use a large language model to retrieve a public response to the prompt
 - Use the large language model, augmented by the database vector search response, to retrieve an enriched response using internal and public data
 
 ### **Prerequisites**
+
 This lab assumes you have:
+
 - All previous labs successfully completed
 
 ## Task 1: Overview
 
 In the "Overview" notebook cell, the vector search, LLM and RAG python functions are described.
 
-![overview](images/station_01a.png)
+![description of the three workshop python function definitions](images/station_01a.png)
 
 ### DB\_AI\_Vector\_Search
+
 - Oracle Database AI Vector Search lets applications store vector embeddings alongside traditional relational data and use them to perform fast, semantic similarity searches over both structured and unstructured content such as text, images, and audio.
 - It introduces a native VECTOR data type, SQL functions, and vector indexes so developers can generate embeddings, index them, and query by meaning rather than keywords.
 
 ### LLM\_Search
+
 - In this context, Large Language Models (LLMs) act as the central **reasoning** and language-understanding engines, interpreting natural-language instructions, breaking goals into steps, and deciding which data, tools or APIs to call to accomplish tasks.
 
 ### LLM\_Search\_using_RAG
+
 - Retrieval-augmented generation (RAG) with Oracle AI Vector Search and Large Language Models (LLMs) combines semantic search over enterprise data with generative reasoning to produce more accurate, grounded answers.
-- Oracle AI Vector Search stores and indexes embeddings for documents and other content, then, at query time, converts a user question into a vector and runs similarity search to retrieve the most relevant chunks from relational, text, JSON, graph, and other data in the Oracle database. 
+- Oracle AI Vector Search stores and indexes embeddings for documents and other content, then, at query time, converts a user question into a vector and runs similarity search to retrieve the most relevant chunks from relational, text, JSON, graph, and other data in the Oracle database.
 - These retrieved chunks are appended to the user’s prompt and sent to an LLM, which synthesizes a response constrained by the supplied context, reducing hallucinations while leveraging both the model’s general knowledge and the organization’s up-to-date private data. 
 
 
 ## Task 2: Define Python functions
 
-<span style="color:blue">[Lab2 Task2:]&nbsp;&nbsp;&nbsp;When ready, after examining the python code defining the three functions, Press 'Shift-Enter' **twice** or Click the 'Run Cell' icon **twice** to **create these functions**.</span>
+**(jupyter notebook) -->**  [Lab2 Task2:]&nbsp;&nbsp;&nbsp;When ready, after examining the python code defining the three functions, Press 'Shift-Enter' **twice** or Click the 'Run Cell' icon **twice** to **create these functions**.
 
 
 You may now **proceed to the next lab**
 
 ## Acknowledgements
-**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI <br>
 
-**Contributors** 
-- Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI <br>
+**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI
+
+**Contributors** -
+
+* Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI
 
 **Last Updated By/Date** -  Gary McKoy, March 2026

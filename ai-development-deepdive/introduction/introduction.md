@@ -1,9 +1,6 @@
 # Oracle AI Database -- AI Capabilities Deep-Dive Tutorial and Workshop
 
-<br><span style="font-size: 25px; text-align: left;"><strong>About this Workshop</strong></span>
-
-<span style="font-size: 22px; text-align: left;"><strong>Prerequisites</strong></span>
-* Basic Linux, Python and SQL knowledge
+## **About this Workshop**
 
 Generative Artificial Intelligence (AI) excels at creating text responses based on large language models (LLMs) where the AI is trained on a massive number of data points. The good news is that the generated text is often easy to read and provides detailed responses that are broadly applicable to the questions asked of the software, often called prompts.
 
@@ -17,28 +14,29 @@ This Livelab workshop walks through the tools within the Oracle AI Database, AI 
 The workshop is intended for application developers who will learn the basics of AI Vector Search and Select AI from the Python and SQL coding perspective. This workshop highlights the capabilities of the Oracle Machine Learning for Python ('OML4Py') tools.
 
 By the end of this lab, you will have:
+
 - Stored, chunked, and vectorized your documents.
 - Used a Large Language Model (LLM) to generate a precise answer to a query you enter based on relevant context stored in Oracle AI database.
 - See the diagram below what you will be learning.
 
-<p style="font-family: Arial, sans-serif; font-size: 20px; text-align: left;color:blue;"><strong>Throughout this tutorial we will be leveraging Jupyter Notebook to explore Oracle Database AI capabilities.</strong></p>
+Throughout this tutorial we will be leveraging Jupyter Notebook to explore Oracle Database AI capabilities.
 
-<p style="font-family: Arial, sans-serif; font-size: 20px; text-align: left;color:blue;">As you proceed through the workshop, 'blue' text will be your indicator to switch to the browser and follow those instructions in the jupyter notebook.</p> 
+As you proceed through the workshop, the **"(jupyter notebook)"** text will be your indicator to switch to the browser and follow those instructions in the jupyter notebook.
 
 If you are unfamiliar with notebooks here are a few tips to get started:
 
-- Instructions and code will be mixed together, each having their own blocks. You can use the run button on the code to see it execute. If you accidently hit run on any instructions, it will just move to the next block so don't worry.
+- Instructions and code will be mixed together, each having their own blocks. You can use the run button on the code to see it execute. If you accidentally hit run on any instructions, it will just move to the next block so don't worry.
 - When running a code block it will switch from either a [ ] or a [1] (a number inside) to a [*]. When you see the one with a * that means its running. Wait till it switches to a number before moving on.
 - If you see any warnings, don't worry, they are probably just letting you know that things are changing, depreciating and you should look at updating to the latest standards. You don't need to do anything.
 
  
- ![rag image](images\overview.png " ")
+ ![vector search and RAG flow of document load and transformation, vector embedding in the database, vector search and RAG](images/overview.png)
 
 **_Estimated Time: 10 Minutes_**
 
 ## About Oracle AI Vector Search
 
-Oracle AI Vector Search is a feature of Oracle Database 26ai that enables efficient searching of AI-generated vectors stored in the database. It supports fast search using various indexing strategies and can handle massive amounts of vector data. This makes it possible for Large Language Models (LLMs) to query private business data using a natural language interface, helping them provide more accurate and relevant results. Additionally, AI Vector Search allows developers to easily add semantic search capabilities to both new and existing applications.
+Oracle AI Vector Search is a feature of Oracle Database 23ai that enables efficient searching of AI-generated vectors stored in the database. It supports fast search using various indexing strategies and can handle massive amounts of vector data. This makes it possible for Large Language Models (LLMs) to query private business data using a natural language interface, helping them provide more accurate and relevant results. Additionally, AI Vector Search allows developers to easily add semantic search capabilities to both new and existing applications.
 
 ## About Select AI
 
@@ -47,12 +45,14 @@ Select AI generates natural language to interact with your database and LLMs thr
 You may now **proceed to the next lab**
 
 ## Acknowledgements
-**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI <br>
 
-**Contributors** 
-- Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI <br>
+**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI
+
+**Contributors** -
+
+* Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI
 
 **Last Updated By/Date** -  Gary McKoy, March 2026

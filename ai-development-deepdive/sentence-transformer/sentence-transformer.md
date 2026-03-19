@@ -1,7 +1,6 @@
 # Lab 3: Embed End-User Business Documents
 
-###**<span style="color:blue">( Refer to 'Lab 3' of the Jupyter notebook as go through this lab )</span>**
-<br>
+**( Refer to 'Lab 3' of the Jupyter notebook as go through this lab )** 
 
 ## Introduction
 
@@ -14,15 +13,18 @@ Depending on the type of your data, you can use different pretrained, open-sourc
 This lab guides you through the code required to download the `ALL_MPNET_BASE_V2` sentence transformer model and ingest it into Oracle AI Database.
 
 ### **Prerequisites**
+
 This lab assumes you have:
-- All previous labs successfully completed
+
+* All previous labs successfully completed
 
 
 ## Task 1: Download the Sentence Transformer
 
-![overview](images/station_02.png)
+![download of the sentence transformer model into the database](images/station_02.png)
 
 Below is an excerpt of the Python code in the next cell that downloads the sentence transformer model and loads it into the database.
+
 ```python
 <copy>
 config = ONNXPipelineConfig.from_template("text", max_seq_length=384, distance_metrics=["COSINE"], quantize_model=True)
@@ -39,17 +41,17 @@ We use two Oracle Machine Learning (OML4Py) functions to download and ingest the
 
 **ONNXPipeline**: Imports the pretrained model `ALL_MPNET_BASE_V2` from **Hugging Face**.
 
-**ONNXPipelineConfig**: Configures the pretrained model attributes. We use the cosine distance metric.
+**ONNXPipelineConfig**: Configures the pre-trained model attributes. We use the cosine distance metric.
 
-- Cosine distance in AI is a measure of how **dissimilar** two vectors are, based on the angle between them
+* Cosine distance in AI is a measure of how **dissimilar** two vectors are, based on the angle between them
 
-- It is defined as **1 − cosine similarity**, so it ranges from **0** (same direction, maximally similar) to **2** (opposite direction, maximally dissimilar).
+* It is defined as **1 − cosine similarity**, so it ranges from **0** (same direction, maximally similar) to **2** (opposite direction, maximally dissimilar).
 
-<span style="color:blue">[Lab3 Task1:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **download the sentence transformer model** and move to the next task.</span>
+**(jupyter notebook) -->**  [Lab3 Task1:]&nbsp;&nbsp;&nbsp;When you have finished reviewing this code and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **download the sentence transformer model** and move to the next task.
 
 ## Task 2: Load Unstructured Data From the Lines of Business
 
-![overview](images/station_03.png)
+![document types overview](images/station_03.png)
 
 Using embedding models, you can transform unstructured data into vector embeddings that can then be used for semantic queries on business data.
 
@@ -60,20 +62,19 @@ Retrieval Augmented Generation is an approach developed to address the limitatio
 First, place your documents in cloud object storage and load them into a staging table.
 
 Below is an excerpt of the Python code to:
-- Retrieve your documents from object storage.
-<br>&nbsp;&nbsp;&nbsp;&nbsp;<font size="2">**NOTE:** In your environment, object storage can be replaced by file system storage.</font></br>
+
+- Retrieve your documents from object storage.&nbsp;&nbsp;&nbsp;&nbsp;
 - Use SQL to insert these documents into a CLOB column.
 
-![overview](images/station_21_large.png)
-
-
-<span style="color:blue">[Lab3 Task2:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **load data from the lines of business into the staging table** and move to the next task.</span>
+**NOTE:** &nbsp;&nbsp;In your environment, object storage can be replaced by file system storage.
+![python example of document database loading](images/station_21_large.png)
+**(jupyter notebook) -->**  [Lab3 Task2:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **load data from the lines of business into the staging table** and move to the next task.
 
 ## Task 3: Transform and Embed End-User Business Documents
 
 ### The Stages of Data Transformation
 
-![overview](images/station_03a.png)
+![vector search and RAG flow highlighting document transformation and vector embedding](images/station_03a.png)
 
 Data may travel through different stages before turning into a vector.
 
@@ -82,34 +83,37 @@ documents, the data passes through a pipeline of optional transformation stages 
 Text** to **Chunks** to **Tokens** to **Vectors**.
 
 The `DBMS_VECTOR` and `DBMS_VECTOR_CHAIN` packages provide APIs to support these stages, with functions used to:
-- Translate user documents to a common Plain Text format
-- Extract Chunks from user data based on configurable tokenizing strategies.
-- Create vector Embeddings from Chunks or directly from source user data.
-- Generate text for a given user query or prompt.
-- Generate vector embeddings from image files using REST API calls to third-party image embedding models.
+
+* Translate user documents to a common Plain Text format
+* Extract Chunks from user data based on configurable tokenizing strategies.
+* Create vector Embeddings from Chunks or directly from source user data.
+* Generate text for a given user query or prompt.
+* Generate vector embeddings from image files using REST API calls to third-party image embedding models.
 
 The `DBMS_VECTOR_CHAIN` package is used to chain the pipeline functions together into a single SQL statement (see below).
 
-- Step 1 → Document transformation (Green)
-- Step 2 → Chunking large documents (Purple)
-- Step 3 → Embedding ("vectorizing") (Gray)
-- Step 4 → Inserting vectors into the database table (Red)
+* Step 1 → Document transformation (Green)
+* Step 2 → Chunking large documents (Purple)
+* Step 3 → Embedding ("vectorizing") (Gray)
+* Step 4 → Inserting vectors into the database table (Red)
 
-![overview](images/station_04a_large.png)
+![highlighted overview of DBMS_VECTOR_CHAIN](images/station_04a_large.png)
 
 Below are excerpts of the workshop Python code that retrieve your documents from the staging table, run them through the pipeline, and store them in the vector table.
 
-<span style="color:blue">[Lab3 Task3:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **transform and embed the end-user business documents into the vector table** and move to the next task.</span>
+**(jupyter notebook) -->**  [Lab3 Task3:]&nbsp;&nbsp;&nbsp;When you have finished reviewing the Python code in the next cell and are ready to continue, press **Shift+Enter** twice, or click the **Run Cell** icon twice to **transform and embed the end-user business documents into the vector table** and move to the next task.
 
 You may now **proceed to the next lab**
 
 ## Acknowledgements
-**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI <br>
 
-**Contributors** 
-- Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI 
-- Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI <br>
+**Author** - Gary McKoy, Master Principal Solution Architect, Data Platform Infrastructure, NACI
+
+**Contributors** -
+
+* Eileen Beck, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Sania Bolla, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Abby Mulry, Cloud Solution Engineer, Data Platform Infrastructure, NACI
+* Richard Piantini Cid, Cloud Solution Engineer, Data Platform Infrastructure, NACI
 
 **Last Updated By/Date** -  Gary McKoy, March 2026
