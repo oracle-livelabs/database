@@ -1,21 +1,17 @@
 {
-  "title": "Getting Started with Oracle Trusted Answer Search",
-  "description": "Learn to build accurate, secure natural-language interfaces that map user questions to vetted enterprise reports.",
-  "filename": "manifest.json",
-  "short_title": "Trusted Answer Search",
-  "duration": 60,
-  "level": "Intermediate",
-  "labs": [
+  "workshoptitle": "Getting Started with Oracle Trusted Answer Search",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
     {
       "title": "Introduction",
       "filename": "../../introduction.md"
     },
     {
-      "title": "Lab 1: Provisioning and Deployment",
+      "title": "Lab 1: Provision and Deploy",
       "filename": "../../lab1-provisioning.md"
     },
     {
-      "title": "Lab 2: Curating the Mapping",
+      "title": "Lab 2: Curate the Search Targets",
       "filename": "../../lab2-curation.md"
     },
     {
