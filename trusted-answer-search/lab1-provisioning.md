@@ -1,9 +1,27 @@
-## Provisioning and Deployment
+# Provisioning and Deployment
 
-Step 1: Provision your Database Start by provisioning an instance of Oracle AI Database 26ai. This platform leverages native AI Vector Search to compare user questions with curated descriptions in milliseconds.
+## Introduction
+Get ready to setup the foundation for Trusted Answer Search by deploying the necessary infrastructure and applications.
 
-Step 2: Install the Administrative Tools Install the Trusted Answer Search Administrator APEX application. This is the command center where you will manage search spaces, targets, and users.
+**Estimated time:** 15 minutes.
 
-Step 3: Deploy the End-User Portal Install the Trusted Answer Search Portal. This out-of-the-box UI allows end users to ask questions immediately after your configuration is complete.
+### Objectives
+* Provision an Oracle AI Database 26ai instance.
+* Deploy the Trusted Answer Search Administrator and Portal APEX applications.
 
-Step 4: Configure Initial Access Control Define Access Control within the Admin application. This ensures that specific "Search Spaces" (e.g., FINANCE or HR) are only accessible to authorized users, maintaining a strong security posture.
+## Task 1: Provision the AI Vector Database
+Oracle Trusted Answer Search runs on **Oracle AI Database 26ai**, which provides the native **AI Vector Search** capabilities needed to rank relevant targets in milliseconds. Use the OCI console to provision a new Autonomous AI Vector Database instance.
+
+## Task 2: Install the APEX Applications
+The platform includes two primary GUI applications: the **Administrator application** for system management and the **Portal application** for end users.
+1.  Download the application files from the official source.
+2.  Import the **Trusted Answer Search Administrator** (Admin) app into your APEX workspace.
+3.  Import the **Trusted Answer Search Portal** app to provide the default user search interface.
+
+You may now **proceed to the next lab**
+
+## Acknowledgements
+**Authors**
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - March, 2026
