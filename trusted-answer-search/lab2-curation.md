@@ -1,9 +1,32 @@
-## Curating the Language-to-Report Mapping
+# Curating the Mapping
 
-Step 1: Create a Search Space Create your first Search Space (e.g., "FINANCE"). Search spaces allow you to group related reports and manage them as a single logical domain.
+## Introduction
+Learn how to build the "language-to-report" foundation by defining search spaces and curated descriptions.
 
-Step 2: Define Search Targets Add Search Targets to your space. Each target represents a specific outcome, such as an HSA activity report or a checking account summary. Every target is associated with a match document (JSON) that tells your application exactly what to do when a match is found.
+**Estimated time:** 25 minutes.
 
-Step 3: Prime the AI with Curated Descriptions For each target, add several sample queries that users might ask (e.g., "How is my HSA doing?"). The system uses vector similarity to rank these curated descriptions against incoming user questions.
+### Objectives
+* Create a Search Space and Search Targets.
+* Configure curated natural-language descriptions.
+* Set up parameter extraction for value-specific answers.
 
-Step 4: Configure Parameter Extraction Set up Target Value Sets to identify specific variables in a query, such as a date, category, or account type. When configured, the system extracts these values and includes them in the returned JSON document, allowing your application to automatically filter reports for the user.
+## Task 1: Create a Search Space and Targets
+Login to the **Search Admin** application. 
+1.  Navigate to **Search Spaces** and create a new space (e.g., "Finance").
+2.  Navigate to **Search Targets** and define a new target, such as "HSA Activity".
+3.  Associate the target with a **match document (JSON)** containing the specific URL or report ID the application should trigger.
+
+## Task 2: Add Sample Queries and Parameters
+To allow the AI to find the right report, you must provide sample natural-language descriptions.
+1.  Add sample questions to your target, such as "How is my HSA doing?"
+2.  Configure **Target Value Sets** to identify parameters (like "checking" or "last Monday") from the user's query.
+3.  Ensure these parameters are mapped to the match document so they can be used for automatic report filtering.
+
+You may now **proceed to the next lab**
+
+## Acknowledgements
+**Authors**
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - March, 2026
+
