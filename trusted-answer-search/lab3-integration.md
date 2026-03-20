@@ -1,12 +1,33 @@
-## Integration and Continuous Improvement
+# Integration
 
-Step 1: Integration Options Choose your integration method:
-Javascript Widget: Embed the provided search widget directly into your existing web page for a quick "plug-and-play" experience.
+## Introduction
+Connect your search service to your applications using the provided developer tools.
 
-PL/SQL API: Use the developer API for full control over the user interface and logic.
+**Estimated time:** 20 minutes.
 
-Step 2: Test User Queries Use the Query Tester to run natural-language questions and verify that the system returns the correct match document (JSON) with any extracted parameters.
+### Objectives
+* Integrate the Javascript search widget.
+* Utilize the PL/SQL API for custom search experiences.
 
-Step 3: Establish the Feedback Loop Review the Query History to see how the system is performing. Monitor user upvotes and downvotes to identify areas where new descriptions or reports may be needed.
+## Task 1: Embed the Javascript Widget
+For a rapid deployment, you can use the out-of-the-box **Javascript search widget** which can be added to any webpage. This widget handles the communication with the backend API and renders search results for the user.
 
-Step 4: Manage Change with Regression Analysis Before rolling out updates to your descriptions, perform regression analysis. This tool runs past questions against your new configuration to ensure that updates haven't "broken" previously successful matches.
+## Task 2: Call the PL/SQL API
+Developers needing full control over the look and feel can call the **PL/SQL API** directly. You can test the underlying vector similarity logic using a SQL statement similar to this to find semantically relevant documents:
+
+```sql
+SELECT match_document 
+FROM   search_targets 
+WHERE  space_id = :my_space 
+ORDER  BY VECTOR_DISTANCE(target_vector, :user_query_vector)
+FETCH FIRST 1 ROWS ONLY;
+```
+The API will return the **JSON match document** for your application to interpret and execute the next deterministic step.
+
+You may now **proceed to the next lab**
+
+## Acknowledgements
+**Authors**
+* Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - March, 2026
