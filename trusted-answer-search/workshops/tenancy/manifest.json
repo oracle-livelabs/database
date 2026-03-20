@@ -3,24 +3,24 @@
   "description": "Learn to build accurate, secure natural-language interfaces that map user questions to vetted enterprise reports.",
   "filename": "manifest.json",
   "short_title": "Trusted Answer Search",
-  "duration": 90,
+  "duration": 60,
   "level": "Intermediate",
   "labs": [
     {
       "title": "Introduction",
-      "filename": "introduction.md"
+      "filename": "../../introduction.md"
     },
     {
       "title": "Lab 1: Provisioning and Deployment",
-      "filename": "lab1-provisioning.md"
+      "filename": "../../lab1-provisioning.md"
     },
     {
       "title": "Lab 2: Curating the Mapping",
-      "filename": "lab2-curation.md"
+      "filename": "../../lab2-curation.md"
     },
     {
       "title": "Lab 3: Integration and Improvement",
-      "filename": "lab3-integration.md"
+      "filename": "../../lab3-integration.md"
     }
   ]
 }
