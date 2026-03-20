@@ -1,10 +1,14 @@
 {
-  "workshoptitle": "Getting Started with Oracle Trusted Answer Search",
+  "workshoptitle": "Get Started with Oracle Trusted Answer Search",
   "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
       "filename": "../../introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started/get-started.md"
     },
     {
       "title": "Lab 1: Provision and Deploy",
