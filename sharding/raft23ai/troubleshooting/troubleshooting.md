@@ -1,7 +1,7 @@
 # Troubleshooting Guide
 
 ## Introduction   
-This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It provides assistance to help you resolve common challenges effectively.
+This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It aids in helping you to resolve common challenges effectively.
 
 *Estimated Time*:  30 minutes
 
@@ -21,7 +21,7 @@ This lab assumes you have:
 
 ## Validate the podman containers are running as expected
 
-1. In general before any troubleshooting steps, Open a terminal session and Verify Oracle Sharding container Details
+1. In general, before any troubleshooting steps, open a terminal session and Verify Oracle Sharding container Details
 
     ```
     <copy>
@@ -193,7 +193,7 @@ This lab assumes you have:
     This application has no explicit mapping for /error, so you are seeing this as a fallback.
     ```
 
-   Please wait and go slow with the delete process. RAPId clicks can cause errors, so allow the operation to complete before clicking again.
+   Please wait and go slow with the delete process. Multiple clicks can cause errors, so allow the operation to complete before clicking again.
 
 
 ## Acknowledgements
