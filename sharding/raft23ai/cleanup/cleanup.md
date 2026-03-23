@@ -8,7 +8,7 @@ Data cannot be recovered from destroyed resources.
 
 This lab walks you through the steps to running a Destroy Job
 
-Estimated Time - 5 minutes
+Estimated Time: 5 minutes
 
 ### Objectives
 
@@ -25,7 +25,8 @@ Estimated Time - 5 minutes
 1. Login to Oracle cloud
 
 2. Open the navigation menu and click **Developer Services**. Under **Resource Manager**, click **Stacks**.
-  ![stack](./images/stack.png " ")
+
+    ![stack](./images/stack.png " ")
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
@@ -51,4 +52,4 @@ You have successfully cleaned up your  instance.
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026

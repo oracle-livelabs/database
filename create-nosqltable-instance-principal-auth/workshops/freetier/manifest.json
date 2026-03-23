@@ -1,0 +1,37 @@
+{
+    "workshoptitle": "NoSQL Cloud Service - Authenticate with Instance Principal",
+    "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+        {
+          "title": "Introduction",
+          "description": "This is the inroduction to the lab",
+          "filename":"../../introduction/introduction.md"
+        },
+        {
+          "title": "Get Started",
+          "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable).",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+          "title": "Lab 1: Setting up Dynamic Groups and Policies for Instance Principal Authentication",
+          "filename":"../../setup-dg-pol/setup-dg-pol.md"
+        },
+		    {
+          "title": "Lab 2: Run the Sample NoSQL Application",
+          "filename": "../../run-sample-nosql-application/run-sample-nosql-application.md",
+          "type": {
+            "Java" : "Java",
+            "Python" : "Python",
+            "Go" : "Go",
+            "Node.js" :"Node.js",
+            "C-sharp" : "C#",
+            "Rust" : "Rust"
+            }
+        },
+        {
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

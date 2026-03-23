@@ -343,7 +343,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     begin
       dbms_cloud_admin.create_database_link(
         db_link_name => 'SOURCE_DBLINK',
-        hostname => 'hol-server',
+        hostname => 'host.containers.internal',
         port => '1522',
         service_name => 'red',
         ssl_server_cert_dn => 'CN=holserv1',
@@ -358,6 +358,8 @@ First, we need to upload the *RED* wallet to ADB directory.
     -- Be sure to hit RETURN
     ```
 
+    * host.containers.internal is the hostname of the machine running the RED database.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -365,7 +367,7 @@ First, we need to upload the *RED* wallet to ADB directory.
     SQL> begin
       2    dbms_cloud_admin.create_database_link(
       3      db_link_name => 'SOURCE_DBLINK',
-      4      hostname => 'hol-server',
+      4      hostname => 'host.containers.internal',
       5      port => '1522',
       6      service_name => 'red',
       7      ssl_server_cert_dn => 'CN=holserv1',

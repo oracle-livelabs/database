@@ -15,7 +15,7 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes you have:
-* Oracle Database 23ai Free Developer Release
+* Oracle AI Database 26ai Free Developer Release
 * All previous labs successfully completed
 * SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
@@ -124,4 +124,4 @@ So far we've just fetched back metadata telling us where the search terms can be
 
 ## Acknowledgements
 * **Author** - Roger Ford
-* **Last Updated By/Date** - Roger Ford, Database Product Management, June 2023
+* **Last Updated By/Date** - Abby Mulry, December 2025

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab we will take a look at populating, querying, and updating Duality Views in the Oracle 23ai database using REST calls. You will see how you can use REST calls to upload data into the database using JSON documents with a POST call. It's important to note that when you make a POST request directly to a Duality View, the data is not stored within the view itself. Instead, the inserted data is stored in the underlying tables that make up the view.
+In this lab we will take a look at populating, querying, and updating Duality Views in the Oracle AI Database using REST calls. You will see how you can use REST calls to upload data into the database using JSON documents with a POST call. It's important to note that when you make a POST request directly to a Duality View, the data is not stored within the view itself. Instead, the inserted data is stored in the underlying tables that make up the view.
 
 Estimated Time: 10 minutes
 
@@ -12,7 +12,7 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-- REST-enable a Duality View 
+- REST-enable a Duality View
 - Query documents via GET
 - Insert a document via POST
 
@@ -21,7 +21,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- Oracle Autonomous Database 23ai provisioned.
+- Oracle Autonomous AI Database provisioned.
 - Created and populated the CLASSMATE schema tables.
 - Already created the `student_schedule` Duality View.
 
@@ -37,13 +37,13 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
   ![showing the views drop-down](./images/lab050101b.png)
 
-2. Right click on the `STUDENT_SCHEDULE`, hover the mouse over **REST** and click **Enable** if it isn't already enabled. 
-   
+2. Right click on the `STUDENT_SCHEDULE`, hover the mouse over **REST** and click **Enable** if it isn't already enabled.
+
    If it is already enabled, it will say Disable... instead.
-   
+
    If you see Disable... you don't have to do anything and can Skip ahead to Step number 5.
 
-    **NOTE**: If you are running macOS, you may need to press the *control-key* while clicking the name of the view for the side panel to appear. 
+    **NOTE**: If you are running macOS, you may need to press the *control-key* while clicking the name of the view for the side panel to appear.
 
   ![showing the REST pop-up menu](./images/lab050102.png)
 
@@ -52,7 +52,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
    ![showing the rest side panel](./images/lab050103a.png)
 
-   After clicking **Enable** at the bottom of the pane, a "Confirmation" will pop-up temporarily at the bottom of the screen. Also a "plug-icon" will be displayed beside the `student_schedule` Duality View to indicate that is now REST-Enabled.  
+   After clicking **Enable** at the bottom of the pane, a "Confirmation" will pop-up temporarily at the bottom of the screen. Also a "plug-icon" will be displayed beside the `student_schedule` Duality View to indicate that is now REST-Enabled.
 
    ![showing the Navigator pane](./images/lab050103b.png)
 
@@ -74,7 +74,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
     </copy>
     ```
     ![showing the sql time to add the PL sql above](./images/lab050104a.png " ")
- 
+
     After the script completes running, click the **refresh-ICON** and you should see the following icon appear alongside the `STUDENT_DUALITY` view.
 
    ![showing the refresh ICON to update the REST setting](./images/lab050104b.png " ")
@@ -94,29 +94,29 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
    ![Click on AutoREST](./images/lab050105c.png " ")
 
-6. Next, for the `student_schedule` view, click the three dots on the right and select **OpenAPI View**. 
+6. Next, for the `student_schedule` view, click the three dots on the right and select **OpenAPI View**.
 
    ![Click on OpenAPI View](./images/lab050106.png " ")
 
 7. Here, you can see the automatically configured REST calls that were enabled on the view.
 
-    Expand the **GET** section. 
+    Expand the **GET** section.
 
     ![Expand the GET section](./images/lab050107.png " ")
 
 8. By default, this section shows sample parameters and responses. However, you can use it to try out the calls themselves.
 
-    Click on **Try it out**. 
+    Click on **Try it out**.
 
     ![Click on Try it out](./images/lab050108.png " ")
 
-9. In the **q** field, enter the following query parameters: 
+9. In the **q** field, enter the following query parameters:
 
     ```
     <copy>{ "student.studentName": "Jane" }</copy>
     ```
 
-   Click **Execute** to run the REST call with the given parameters. 
+   Click **Execute** to run the REST call with the given parameters.
 
 
     ![Execute the query](./images/lab050109.png " ")
@@ -137,7 +137,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
 2. Like the GET section, the POST section shows sample parameters and responses. Click on **Try it out** to test the calls.
 
-    Click on **Try it out**. 
+    Click on **Try it out**.
     ![Click try it out ](./images/lab050202.png " ")
 
 3. In the request body section, copy and paste the following code-
@@ -157,7 +157,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
             }
     </copy>
     ```
-   After pasting the code in the request body pane, click **Execute** - 
+   After pasting the code in the request body pane, click **Execute** -
 
    ![Add a student schedule entry ](./images/lab050203.png " ")
 
@@ -166,7 +166,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
    ![Examine the REST results](./images/lab050204.png " ")
 
-5. We can now return to the database to see the new entry in the `student_schedule`. 
+5. We can now return to the database to see the new entry in the `student_schedule`.
 
    Click the "pancake-menu" in the top lefthand corner of the screen and click **SQL** from the drop-down menu to return to the SQLDeveloper Web console.
 
@@ -176,7 +176,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
    ```
    <copy>
-   SELECT * FROM student_schedule ORDER BY 1 
+   SELECT * FROM student_schedule ORDER BY 1
    </copy>
    ```
 
@@ -190,7 +190,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
    ```
    <copy>
-   SELECT * FROM student_courses ORDER BY 1 
+   SELECT * FROM student_courses ORDER BY 1
    </copy>
    ```
 
@@ -205,8 +205,8 @@ In summary, this lab show-cased the versatility of JSON Relational Duality Views
 
 ## Learn More
 
-* [Oracle Database 23ai Feature Highlights](https://www.oracle.com/database/23ai/?source=v1-DBFree-ChatCTA-j2032-20240709)
-* [Oracle Database 23ai Online Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/index.html)
+* [Oracle AI Database Feature Highlights](https://www.oracle.com/database/23ai/?source=v1-DBFree-ChatCTA-j2032-20240709)
+* [Oracle AI Database Online Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/index.html)
 * [Oracle Developer Guide: Oracle JSON Relational Duality View Overview](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html)
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/index.html)

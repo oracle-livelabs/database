@@ -12,28 +12,31 @@ Estimated Time: 15 minutes
 
 In this lab, you will:
 * Create and pre-populate the tables for the lab
- 
+
 ### Prerequisites
 
 This lab assumes you have:
-* Oracle Autonomous Database 23ai provisioned.
+* Oracle Autonomous AI Database provisioned.
 * ClassMate schema pre-created.
 
-## Task 1: Connect to your Autonomous Database as the user *classmate* 
+## Task 1: Connect to your Autonomous Database as the user *classmate*
 
 1. After logging into your Oracle OCI account and navigating to your *ADB23ai* Autonomous Database instance, click on *"SQL"* under the *"Database Actions"* menu. Refer to the picture below-
 
 
     ![showing the sql drop-down-menu](./images/lab010101.png)
 
-2. Login as the `CLASSMATE` user. To do this, Click on the drop-down arrow to the right of the `ADMIN` user and click *Sign Out* . 
+2. Login as the `CLASSMATE` user. To do this, Click on the drop-down arrow to the right of the `ADMIN` user and click *Sign Out* .
 
    ![showing the schema drop-down-menu](./images/lab010102a.png)
 
    At the Sign-in screen enter:
 
-   Username:  *CLASSMATE*
-   Password:  *College2024#*
+   - Username:  *CLASSMATE*
+   - Password:  *College2024#*
+   ```
+   <copy>College2024#</copy>
+   ```
 
    and click the "Sign in" button.
 
@@ -41,9 +44,9 @@ This lab assumes you have:
 
    This will bring you to the "Database Actions Launchpad".
 
-   (If it's the first time you are accessing the Launchpad, your default homepage will be the "Development" page.  If not, click the "Development" tab to display the development menu.) 
+   (If it's the first time you are accessing the Launchpad, your default homepage will be the "Development" page.  If not, click the "Development" tab to display the development menu.)
 
-   Click "SQL" in the menu on the left hand side of the screen. You will now be at the SQL Worksheet screen. 
+   Click "SQL" in the menu on the left hand side of the screen. You will now be at the SQL Worksheet screen.
 
    ![showing the SQL drop-down-menu](./images/lab010102c.png)
 
@@ -52,7 +55,7 @@ This lab assumes you have:
 
 3. We will start by creating a table called: `student`.
 
-   Copy and paste the following code in the SQL Worksheet pane. Click "Run Script" to execute the code.  
+   Copy and paste the following code in the SQL Worksheet pane. Click "Run Script" to execute the code.
 
     ```
     <copy>
@@ -60,7 +63,7 @@ This lab assumes you have:
        STUDENT_ID           number       not null,
        STUDENT_NAME         varchar2(40) not null,
        STUDENT_INFO         json,
-       PRIMARY KEY          (STUDENT_ID) 
+       PRIMARY KEY          (STUDENT_ID)
       );
     </copy>
     ```
@@ -90,7 +93,7 @@ This lab assumes you have:
 
    ![Showing the terminal](images/lab010104a.png " ")
 
-   You should see 12 rows created. 
+   You should see 12 rows created.
 
    Verify the contents of the table you just created by clicking the "Run Script" button-
 
@@ -112,7 +115,7 @@ This lab assumes you have:
        TEACHER_ID           number       not null,
        TEACHER_NAME         varchar2(40) not null,
        TEACHER_INFO         json,
-       PRIMARY KEY          (TEACHER_ID) 
+       PRIMARY KEY          (TEACHER_ID)
       );
     </copy>
     ```
@@ -166,7 +169,7 @@ This lab assumes you have:
        VIRTUAL                 boolean,
        COURSE_INFO             json,
        FOREIGN KEY(teacher_id) REFERENCES teacher(teacher_Id),
-       PRIMARY KEY             (COURSE_ID) 
+       PRIMARY KEY             (COURSE_ID)
       );
     /
     </copy>
@@ -175,31 +178,31 @@ This lab assumes you have:
    ![Showing the create course](images/lab010107.png " ")
 
 
-   Once the `course` table is created, populate the `course` table with the following entries.
+8. Once the `course` table is created, populate the `course` table with the following entries.
 
     ```
     <copy>
     INSERT INTO course (course_id, course_name, room, time, teacher_id, virtual, course_info) VALUES
-       ('C123', 'MATH_01', 'A102', '14:00', 543, 'FALSE', 
+       ('C123', 'MATH_01', 'A102', '14:00', 543, 'FALSE',
                   '{ "courseNameFull" : "Mathematics 101", "preRequisites" : "none" }'),
-       ('C124', 'MATH_02', 'A102', '16:00', 543, 'FALSE', 
+       ('C124', 'MATH_02', 'A102', '16:00', 543, 'FALSE',
                   '{ "courseNameFull" : "Mathematics 102", "preRequisites" : "MATH_01" }'),
        ('C152', 'CALC_01', 'A104', '10:00', 645, 'FALSE',
                   '{ "courseNameFull" : "Calculus 201", "preRequisites" : "none" }'),
-       ('C203', 'ENGL_01', 'A202', '15:00', 543, 'FALSE', 
+       ('C203', 'ENGL_01', 'A202', '15:00', 543, 'FALSE',
                   '{ "courseNameFull" : "English Literature 1", "preRequisites" : "none" }'),
-       ('C300', 'PHYS_01', 'B405', '10:00', 789, 'FALSE', 
+       ('C300', 'PHYS_01', 'B405', '10:00', 789, 'FALSE',
                   '{ "courseNameFull" : "Physics 101", "preRequisites" : "CALC_01" }'),
-       ('C345', 'SCIE_02', 'B405', '16:00', 789, 'FALSE', 
+       ('C345', 'SCIE_02', 'B405', '16:00', 789, 'FALSE',
                   '{ "courseNameFull" : "Science 102", "preRequisites" : "SCIE_01" }'),
-       ('C450', 'SCIE_03', 'B405', '14:00', 486, 'FALSE', 
+       ('C450', 'SCIE_03', 'B405', '14:00', 486, 'FALSE',
                   '{ "courseNameFull" : "Science 103", "preRequisites" : "SCIE_02" }'),
-       ('C567', 'HIST_01', 'A102', '14:00', 612, 'FALSE', 
+       ('C567', 'HIST_01', 'A102', '14:00', 612, 'FALSE',
                   '{ "courseNameFull" : "History 101", "preRequisites" : "none" }'),
-       ('C568', 'HIST_02', 'A102', '16:00', 612, 'FALSE', 
+       ('C568', 'HIST_02', 'A102', '16:00', 612, 'FALSE',
                   '{ "courseNameFull" : "History 102", "preRequisites" : "HIST_01" }'),
-       ('C789', 'LANG_01', 'A256', '12:00', 543, 'FALSE', 
-                  '{ "courseNameFull" : "Language 101", "preRequisites" : "none" }'), 
+       ('C789', 'LANG_01', 'A256', '12:00', 543, 'FALSE',
+                  '{ "courseNameFull" : "Language 101", "preRequisites" : "none" }'),
        ('C813', 'PSYC_01', 'B301', '11:00', 809, 'FALSE',
                   '{ "courseNameFull" : "Psychology 101", "preRequisites" : "none" }') ;
     </copy>
@@ -228,12 +231,12 @@ This lab assumes you have:
     ```
     <copy>
     CREATE TABLE IF NOT EXISTS student_courses (
-       SCID                     integer generated always as identity, 
+       SCID                     integer generated always as identity,
        STUDENT_ID               number        not null,
        COURSE_ID                varchar2(5)   not null,
        FOREIGN KEY(student_id)  REFERENCES student(student_id),
-       FOREIGN KEY(course_id)   REFERENCES course(course_id), 
-       PRIMARY KEY              (scId) 
+       FOREIGN KEY(course_id)   REFERENCES course(course_id),
+       PRIMARY KEY              (scId)
     );
     </copy>
     ```
@@ -252,14 +255,14 @@ This lab assumes you have:
        ('2560', 'C789'),
        ('1555', 'C450'),
        ('1555', 'C123'),
-       ('1035', 'C152'), 
+       ('1035', 'C152'),
        ('2560', 'C203'),
        ('2560', 'C567'),
        ('5454', 'C203'),
        ('1555', 'C152'),
        ('4533', 'C123'),
        ('5454', 'C300'),
-       ('1035', 'C450'), 
+       ('1035', 'C450'),
        ('1015', 'C345'),
        ('1035', 'C124') ;
     </copy>
@@ -296,17 +299,17 @@ You can refresh the navigator pane by clicking the "Refresh" button in the Navig
 
    ![Showing refresh button after](images/lab010111b.png =60%x*)
 
-You can also view the description of the newly created tables using the Navigator too. Simply Click on arrow on the left hand side of the name of the table to you wish to view.    
+You can also view the description of the newly created tables using the Navigator too. Simply Click on arrow on the left hand side of the name of the table to you wish to view.
 
    ![Showing the navigator view of the course table](images/lab010112.png " ")
 
 
-Congratulations! You have finished the lab. You may now **proceed to the next lab** 
+Congratulations! You have finished the lab. You may now **proceed to the next lab**
 
 ## Learn More
 
-* [Oracle Database 23ai Feature Highlights](https://www.oracle.com/database/23ai/?source=v1-DBFree-ChatCTA-j2032-20240709)
-* [Oracle Database 23ai Online Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/index.html)
+* [Oracle Database 26ai Feature Highlights](https://www.oracle.com/database/23ai/?source=v1-DBFree-ChatCTA-j2032-20240709)
+* [Oracle Database 26ai Online Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/index.html)
 * [Oracle Developer Guide: Oracle JSON Relational Duality View Overview](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/overview-json-relational-duality-views.html)
 
 

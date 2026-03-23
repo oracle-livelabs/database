@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Oracle is a relational database, meaning it typically stores data in rows and columns of tables and JSON can be stored as a column value. For this lab we focus on JSON Collections, a native storage format in the Oracle Database for storing documents in a MongoDB-compatible format. A JSON collection stores JSON documents natively in Oracle's binary OSON format that is optimized for random reads and writes. JSON Collections are MongoDB compatible
+Oracle is a relational database, meaning it typically stores data in rows and columns of tables and JSON can be stored as a column value. For this lab we focus on JSON Collections, a native storage format in the Oracle AI Database for storing documents in a MongoDB-compatible format. A JSON collection stores JSON documents natively in Oracle's binary OSON format that is optimized for random reads and writes. JSON Collections are MongoDB compatible
 
 To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection to store information about movies.
 
@@ -15,11 +15,11 @@ In this lab, you will:
 * Create Collection using Database Actions|JSON
 * Insert First Document using Database Actions|JSON
 * Find JSON documents in a collection using Database Actions|JSON
-* Learn about JSON and Constraints 
+* Learn about JSON and Constraints
 
 ### Prerequisites
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
 - **Ensure that you have dropped the relational table movies prior to this lab, otherwise you won't be able to create your json collection movies.**
 
 ## Task 1: Create Collection
@@ -28,32 +28,26 @@ In this lab, you will:
 
 	![DB Actions](images/dbaction1.png)
 
-
-2. Below you can find the Database Actions homepage.
-
-	![Homepage Database Actions](./images/homepage-dbactions.png)
-
-
-3. On the homepage, click the JSON tile under Development.
+2. On the homepage, click the JSON tile under the Development tab.
 
 	![Homepage Development JSON](./images/homepage-json.png)
 
-4. To create a collection, click **Create Collection**.
+3. To create a collection, click **Create Collection**.
 	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-5. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
+4. In the field **Collection Name**, provide the name **movies**. Leave MongoDB Compatible radio button checked.  Then click **Create**.
 
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
-	![New Collection: movies](./images/collection-name.png)
+	![New Collection: movies](./images/collection-name-mongodb-checked.png)
 
-6. A notification pops up that displays **movies** collections has been created.
+5. A notification pops up that displays **movies** collections has been created.
 
 	![New collection notification](./images/popup.png)
 
-9. Click the refresh button to verify the **movies** collection has been created.
+6. Click the refresh button to verify the **movies** collection has been created.
 
 	![Refresh button](./images/refresh-collection.png)
 
@@ -63,7 +57,7 @@ In this lab, you will:
 
 	![new document button](./images/new-json-doc.png)
 
-3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
+2. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
 	```
 	<copy>
@@ -84,11 +78,11 @@ In this lab, you will:
 
 	![add new document](./images/json-object.png)
 
-4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
+3. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
 	![new document confirmation popup](./images/popup-json-doc.png)
 
-5. Let's repeat this with the following documents:
+4. Let's repeat this with the following documents:
 
 	Click the *New JSON Document* button, copy the following JSON objects one by one, paste it into the worksheet and click **Create**.
 
@@ -210,9 +204,9 @@ More generally, constraints can be used to check the data being entered for vari
 
 1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/development-sql.png)
+	![SQL navigation](./images/homepage-sql.png)
 
-2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle Database 23ai.**
+2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle AI Database.**
 
 	To quickly recap what the documents look like, let's look at the first JSON document quickly. (Don't worry, we will have a closer look into the SQL world with JSON later):
 	```
@@ -225,19 +219,20 @@ More generally, constraints can be used to check the data being entered for vari
     Now copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
     ```
-    <copy>alter table "movies" add constraint movies_json_schema
+    <copy>
+	alter table "movies" add constraint movies_json_schema
     check (data is json validate '{   "type": "object",
         "properties": {
             "_id": { "type": "number" },
             "title": { "type": "string"},
             "type": {"type" : "string"},
             "price": {"type" : "number"},
-    "starring": {
-    "type": "array",
-    "minItems": 0,
-    "items": {
-    "type": "string"
-    }
+            "starring": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+            "type": "string"
+        }
     }
         },
         "required": ["_id", "title", "type", "price"]
@@ -304,7 +299,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create allowed item](./images/create-right-type.png)
 	![doc successfully created](./images/json-doc-created.png)
 
-7. Now that was quite cumbersome to figure out the mistakes manually. But there's a better way: you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle Database 23ai.**
+7. Now that was quite cumbersome to figure out the mistakes manually. But there's a better way: you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle AI Database.**
 
     ```
     <copy>
@@ -327,7 +322,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
 
-8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23ai.**
+8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle AI Database.**
 In the SQL tool, run:
 
     ```
@@ -346,10 +341,10 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-* [Oracle Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
+* [Oracle AI Database API for MongoDB](https://blogs.oracle.com/database/post/mongodb-api)
 
 ## Acknowledgements
 
 * **Author** - Hermann Baer
 * **Contributors** -  Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025

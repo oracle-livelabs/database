@@ -18,31 +18,30 @@ In this final task of loading data we will load data into a table DELIVERY_VENDO
 - Some Experience with MySQL Shell
 - Completed Lab 6
 
-## Task 1: Create the PAR Link for the "delivery_vendor" files
+## Task 1: Create the PAR Link for the delivery_vendor file
 
-1. As in the earlier tasks, we will first create a PAR URL to the file we want to load. Here, the entire data is in a single table
+1. As in the earlier tasks, we will first create a PAR URL to the file we want to load. Here, the entire data is in a single table.
 
-2. To create a PAR URL go to menu **Storage —> Buckets**
+2. To create a PAR URL, go to **Navigation menu**, click **Storage**, and then click **Buckets**.
     ![create a PAR URL](./images/storage-bucket-menu.png "storage bucket menu")
 
-3. Select **lakehouse-files** bucket.
-4. Select the file —> **delivery-vendor.pq** and click the three vertical dots.
-5. Click on **Create Pre-Authenticated Request**
+3. Click **lakehouse-bucket**.
+4. In the **lakehouse-bucket** page, under **Objects**, select the file **delivery-vendor.pq** and click the **Actions** menu.
+5. Click **Create pre-authenticated request**.
 
     ![lakehouse-files 3 dots](./images/storage-create-par-vendor.png "storage create par vendors")
 
-6. The **Object** option will be pre-selected.
-7. Keep **Permit object reads** selected
-8. Kep the other options for **Access Type** unchanged.
-9. Click the **Create Pre-Authenticated Request** button.
+6. Let the **Object** option remain pre-selected.
+7. Keep **Permit object reads** selected.
+8. Click **Create pre-authenticated request**.
 
     ![Create vendor PAR](./images/storage-create-par-vendor-page.png "storage create par  vendors page")
 
-10. Click the **Copy** icon to Copy vendor PAR URL.
+9. Click the **Copy** icon to Copy vendor PAR URL.
 
     ![Copy vendor PAR](./images/storage-create-par-vendor-page-copy.png "storage create par vendors page copy")
 
-11. Save the generated PAR URL; you will need it in the next task
+10. Save the generated PAR URL; you will need it in the next task.
 
 ## Task 2: Load Parquet format data directly from Object Store
 
@@ -123,4 +122,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
+- **Last Updated By/Date** - Aijaz Fatima, Product Manager, September 2025

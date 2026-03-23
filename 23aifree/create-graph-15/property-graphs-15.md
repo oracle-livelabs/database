@@ -8,23 +8,28 @@ In this lab you will create an Operational Property Graph inside of Graph Studio
 Estimated Time: 15 minutes.
 ​
 ### Objectives
+
 * Open up Graph Studio
-* Create an Operational Property Graph 
+* Create an Operational Property Graph
 
 Learn how to:
-- Use SQL/PGQ to define and query a property graph.
+
+* Use SQL/PGQ to define and query a property graph.
 ​
 ### Prerequisites
+
 This lab assumes you have:
-- Access to an Oracle Always Free Autonomous Database 23ai
-- The bank\_accounts and bank\_transfers tables exist. 
-- The database user exists and has the right roles and privileges.
+
+* Access to an Oracle Autonomous AI Database
+* The bank\_accounts and bank\_transfers tables exist.
+* The database user exists and has the right roles and privileges.
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
 [Change password](videohub:1_ovgflc5c)
 </if> -->
 ### Overview
+
 Here is a diagram representing the tables that will be underlying the Operational Property Graph that we will be creating.
 
 | Name | Null? | Type |
@@ -53,7 +58,7 @@ Here is a diagram representing the tables that will be underlying the Operationa
 
     ![Locating the Graph Studio URL](images/2terraformvalues.png)
 
-3. Sign into Graph Studio. 
+3. Sign into Graph Studio.
 
     Username: hol23ai
 
@@ -101,7 +106,7 @@ The BANK_GRAPH is a view on the underlying tables and metadata, this means that 
 
  You can import a notebook that has the graph queries and analytics. Each paragraph in the notebook has an explanation.  You can review the explanation, and then run the query or analytics algorithm.
 
-  [Click here to download the notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/dqjiuqt-1hR0bnn1GJlBo4aNXLmARXMBKEq646U2ZarOlUkmf5K0slE7u2WyEryK/n/c4u04/b/livelabsfiles/o/labfiles/BANK_GRAPH_23ai_alg_15.dsnb) and save it to a folder on your local computer.
+  [Click here to download the notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/gBR_pM9Rzu7d91U6pPkaa-sUZeGRr81D3W9S-7n_3HLz08-hrQZhovqYBvA1mBMN/n/oradbclouducm/b/OperationalPropertyGraphs/o/26ai-property-graph.zip) and save it to a folder on your local computer.
 
  1. Click the **Notebook** icon. Import a notebook by clicking on the notebook icon on the left, and then clicking on the **Import** icon on the far right.
 
@@ -122,7 +127,6 @@ In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH cla
 A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 
 >Note: The following instructions are also written within the notebook. The SQL statements can be run directly by pressing the triangle _play_ button next to each query entry.
-
 
 1. Let's use SQL to find the top 10 accounts by number of transfers the account has received. Run the paragraph with the following query.
     
@@ -167,7 +171,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
     ![Accounts that received a transfer](images/4-accountsreceivingtransfer123hop.png)
 ​
-5. We can use the same query but modify the number of hops to check if there are any 4-hop transfers that start and end at the same account. 
+4. We can use the same query but modify the number of hops to check if there are any 4-hop transfers that start and end at the same account. 
 
     ```
     <copy>
@@ -180,7 +184,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
     ![4hop transfers](images/5-4hop.png)
 ​
-6. Lastly, check if there are any 5-hop transfers that start and end at the same account by just changing the number of hops to 5.
+5. Lastly, check if there are any 5-hop transfers that start and end at the same account by just changing the number of hops to 5.
     ><b>Note:</b> that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle Database 23ai.
    
     ```
@@ -194,7 +198,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
     ![5 hop transfers](images/6-5hop.png)
 
-7. Run the first %python-pgx paragraph, which uses the built-in session object to read the graph into memory from the database and creates a PgXGraph object that handles the loaded graph.
+6. Run the first %python-pgx paragraph, which uses the built-in session object to read the graph into memory from the database and creates a PgXGraph object that handles the loaded graph.
 
     ```
     <copy>
@@ -213,7 +217,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
     ​![load graph into memory](images/7-pgxgraph.png)
 
-8. Accounts 387 and 934 have a high number of transactions.
+7. Accounts 387 and 934 have a high number of transactions.
 
     We are going to start looking at these accounts in detail. Let’s start by identifying the owner of account 387.
 
@@ -227,7 +231,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     Looks like Antonia Mclachlan is the owner of this account.  
 
-9. What about account 934?
+8. What about account 934?
 
     Let's run the same query but for account 934.
 
@@ -241,7 +245,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     The owner of account 934 is Russell Rivera.   
 
-10. Let’s look at the circular transfers that originate and terminate at Russell Rivera's account, and visualize the results.
+9. Let’s look at the circular transfers that originate and terminate at Russell Rivera's account, and visualize the results.
 
     We start with the number of hops equals 4 as specified as []->{4}.
 
@@ -261,7 +265,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     We see 3 circular payment chains 4 hops in length, that start and end in this account.
 
-11. Now we want to look at the circular payment chains when we change the chain length to be 5 hops.
+10. Now we want to look at the circular payment chains when we change the chain length to be 5 hops.
 
     ```
     <copy>
@@ -279,7 +283,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     The number of circular payment chains that start and end in Russell Rivera's account makes it an account we should investigate further.
 
-12. Let us continue our investigation using another algorithm, the PageRank graph analytics algorithm.
+11. Let us continue our investigation using another algorithm, the PageRank graph analytics algorithm.
 
     A %python-pgx paragraph let's you execute Python code snippets. We will use the Python API to run the PageRank algorithm.
     The code snippet below creates a PgxGraph object containing a handle to the BANK_GRAPH loaded into the in-memory graph server.
@@ -295,7 +299,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
     ​![running pagerank](images/12-pythonpgxload.png)
 
-13. Now let's list the PageRank values in descending order to find the accounts with high PageRank values. A high PageRank value indicates that that account is important, which in the context of BANK_GRAPH, a high number of transfers have flown through that account, or the account is connected to accounts with a high number of transfers flowing through them.
+12. Now let's list the PageRank values in descending order to find the accounts with high PageRank values. A high PageRank value indicates that that account is important, which in the context of BANK_GRAPH, a high number of transfers have flown through that account, or the account is connected to accounts with a high number of transfers flowing through them.
 
     ```
     <copy>
@@ -312,7 +316,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     We see that Russell Rivera's is in the top 5. So this metric also indicates that a large number of transactions flow through Russell Rivera's account.
     But he is not at the very top, and interestingly Antonia Mclachlan is at the top of the list.
 
-14. Now let's use the computed PageRank value in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
+13. Now let's use the computed PageRank value in visualizing the result. We use highlights to display the accounts with a high PageRank value with larger circles and red in color.
 
     Execute the paragraph with the following query, which finds the 3-hop payment chains starting at Antonia Mclachlan's account.
 
@@ -331,15 +335,15 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     From this visualization we can quickly see which accounts that are connected to Antonia Maclachlan also have a high pagerank value.
 
-
 You have now completed this lab.
 
 ## Learn More
+
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
-* [SQL Property Graph syntax in Oracle Database 23ai Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+* [Graph Developer's Guide for Property Graph - SQL DDL Statements for Property Graphs](https://docs.oracle.com/en/database/oracle/property-graph/25.4/spgdg/sql-ddl-statements-property-graphs.html)
 
 ## Acknowledgements
 
-- **Author** - Kaylien Phan, Thea Lazarova, William Masdon
-- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
-- **Last Updated By/Date** - Francis Regalado, January 2025
+* **Author** - Kaylien Phan, Thea Lazarova, William Masdon
+* **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
+* **Last Updated By/Date** - Denise Myrick, October 2025

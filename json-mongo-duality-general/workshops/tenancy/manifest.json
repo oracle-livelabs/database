@@ -13,10 +13,10 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
-            "title": "Lab 1: Create your Autonomous Database 23ai Free Instance",
-            "description": "Create an Autonomous Database 23ai for this workshop",
+            "title": "Lab 1: Create your Autonomous AI Database Free Instance",
+            "description": "Create an Autonomous AI Database for this workshop",
             "type": "livelabs",
-            "filename": "../../../23aifree/login-to-abd3/login-to-adb3.md"
+            "filename": "../../../23aifree/login-to-abd3/login-to-adb3-json.md"
         },
         {
             "title": "Lab 2: Schema flexibility for relational tables - the JSON datatype",

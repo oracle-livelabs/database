@@ -50,6 +50,7 @@ In this lab, you will learn how to:
 - An Oracle Cloud Account
 - Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
 
+## Task 1: You may now **proceed to the next lab**
 
 ## Acknowledgements
 

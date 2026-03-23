@@ -8,7 +8,7 @@ Estimated Lab Time: 10 Minutes
 
 ### About Oracle NoSQL Database Cloud Service
 
-Oracle NoSQL Database Cloud Service is a fully managed database cloud service that handles large amounts of data at high velocity. Developers can start using this service in minutes by following the simple steps outlined in this tutorial. To get started with the service, you create a table. Oracle NoSQL Database supports Java, Python, Node.js, Go, and C#.
+Oracle NoSQL Database Cloud Service is a fully managed database cloud service that handles large amounts of data at high velocity. Developers can start using this service in minutes by following the simple steps outlined in this tutorial. To get started with the service, you create a table. Oracle NoSQL Database supports Java, Python, Node.js, Go, C#, and Rust.
 
 ### Prerequisites
 
@@ -150,6 +150,49 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
     </copy>
     ```
   </if>
+
+<if type="Rust">
+
+1.  Open the [Rust download page](https://www.rust-lang.org/tools/install) in your browser and download Rust using the instructions given. This creates a `~/.cargo/bin` directory where all the required tools are installed.
+
+2.  Add the PATH directory in your environment variables.
+    ```
+    <copy>
+    export PATH=~/.cargo/bin:$PATH
+    </copy>
+    ```
+
+3.  Verify the installation using
+    ```
+    <copy>
+    rustc --version
+    </copy>
+    ```
+
+4.  Create a new project directory using
+    ```
+    <copy>
+    cargo new HelloWorld
+    </copy>
+    ```
+
+5.  Navigate to the project directory and update the Cargo.toml file as shown below.
+    ```
+    <copy>
+    [package]
+    name = "HelloWorldRust"
+    version = "0.1.0"
+    edition = "2024"
+
+    [dependencies]
+    tokio = { version = "1.38.0", features = ["full"] }
+    chrono = { version = "0.4.31", features = ["alloc", "std"] }
+    oracle-nosql-rust-sdk = { version = "0.1" }
+    tracing = "0.1.40"
+    tracing-subscriber =  { version = "0.3", features = ["env-filter", "std"] }
+    </copy>
+    ```
+</if>
 
 ## Task 2: Download, build, and run the sample application
 
@@ -364,6 +407,42 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 *Note: In the RunBasicExample method of `HelloWorld.cs`, the section to drop table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 
+<if type="Rust">
+
+1.  Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service/o/helloworld-rsHelloWorld.rs) file, navigate to the `HelloWorld/src` folder, and replace the contents of `main.rs` with those from the downloaded file. Edit the `main.rs` file in editor using
+    ```
+    <copy>
+    vi main.rs
+    </copy>
+    ```
+
+2.  Review the sample application. You can access the [Rust Reference Guide](https://docs.rs/oracle-nosql-rust-sdk/latest/oracle_nosql_rust_sdk/index.html) to reference Rust classes and methods included in this sample application.
+
+    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in main.rs file, replace the placeholder of the compartment in the builder class with the OCID of your compartment. Save the file and close it.
+
+3.  From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
+
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+  ![View config file](images/config-file.png)
+
+4.  Navigate back to the project directory and build then run your project using
+    ```
+    <copy>
+    cargo build
+    </copy>
+    ```
+    
+    ```
+    <copy>
+    cargo run
+    </copy>
+    ```
+
+*Note: In `HelloWorld.rs`, the code for dropping the table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.* 
+</if>
+
 ## Task 3: Explore tables using the Oracle Cloud Infrastructure Console
 
 1. On the left hand menu, click **Databases**. In the **Databases** window, click **Tables** under **Oracle NoSQL Database**.
@@ -406,8 +485,11 @@ This application accesses Oracle NoSQL Database Cloud Service, but most likely y
 <if type="C-sharp">
 * [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html)
 </if>
+<if type="Rust">
+* [Rust Reference Guide](https://docs.rs/oracle-nosql-rust-sdk/0.1.1/oracle_nosql_rust_sdk/)
+</if>
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** - Aayushi Arora, Database User Assistance, March 2025
+* **Last Updated By/Date** - Aayushi Arora, Database User Assistance, January 2026

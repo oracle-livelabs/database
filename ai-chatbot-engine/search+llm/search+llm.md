@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab guides you through the steps to integrate the vector database (Oracle Database 23ai in our case) and retrieve a list of text chunks that are close to the "question" in vector space. Then, we will use the most relevant text chunks to create an LLM prompt and ask the Oracle Generative AI Service to create a nicely worded response for us.
+This lab guides you through the steps to integrate the vector database (Oracle AI Database in our case) and retrieve a list of text chunks that are close to the "question" in vector space. Then, we will use the most relevant text chunks to create an LLM prompt and ask the Oracle Generative AI Service to create a nicely worded response for us.
 
 This is a classical Retrieval-Augmented Generation (RAG) approach. The Retrieval-Augmented Generation architecture combines retrieval-based and generation-based methods to enhance natural language processing tasks. It consists of a retriever, which searches a knowledge base for relevant documents, and a generator, which uses these documents to produce informed responses. This dual approach improves accuracy and detail compared to models relying solely on pre-trained knowledge.
 
@@ -318,7 +318,7 @@ You may now **proceed to the next lab**
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
 * [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
-* [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
+* [Get Started with Oracle AI Database](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA

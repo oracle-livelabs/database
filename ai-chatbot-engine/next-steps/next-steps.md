@@ -35,7 +35,7 @@ This tutorial merely showcased the very basic code and concepts used to build a 
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
-* [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
+* [Get Started with Oracle AI Database](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA

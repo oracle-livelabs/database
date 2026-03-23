@@ -22,7 +22,96 @@ This lab assumes:
 
 This is an optional lab. You can skip it if you are already familiar with CMA.
 
-## Task 1: Download and open CMA
+## Task 1: Prepare the environment
+
+Due to network restrictions in the lab environment, the APEX instance cannot access external resources, such as the Oracle CDN at https://static.oracle.com. To ensure that all required JavaScript, CSS, and image files load correctly, the path for static HTML and supporting files has been redirected to a pre-configured OCI Object Storage location.
+
+1. Use the *yellow* terminal 🟨. Let's first connect on ADB:
+
+    ``` sql
+    <copy>
+    . adb
+    sql admin/Welcome_1234@sapphire_tp
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+2. Change Oracle APEX image location:
+
+    ``` sql
+    <copy>
+    BEGIN
+      APEX_INSTANCE_ADMIN.set_parameter(
+                  p_parameter => 'IMAGE_PREFIX',
+                  p_value => 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/oradbclouducm/b/oracle-jet/o/cdn/apex/24.2.0/');
+      COMMIT;
+    END;
+    /
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
+    SQL> BEGIN
+      2    APEX_INSTANCE_ADMIN.set_parameter(
+      3                p_parameter => 'IMAGE_PREFIX',
+      4                p_value => 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/oradbclouducm/b/oracle-jet/o/cdn/apex/24.2.0/');
+      5    COMMIT;
+      6  END;
+      7* /
+
+    PL/SQL procedure successfully completed.
+    ```
+
+    </details>
+
+3. Set the account to never expire:
+
+    ``` sql
+    <copy>
+    BEGIN
+      APEX_INSTANCE_ADMIN.set_parameter(
+                  p_parameter => 'EXPIRE_FND_USER_ACCOUNTS',
+                  p_value => 'N');
+      COMMIT;
+    END;
+    /
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
+    SQL> BEGIN
+      2    APEX_INSTANCE_ADMIN.set_parameter(
+      3                p_parameter => 'EXPIRE_FND_USER_ACCOUNTS',
+      4                p_value => 'N');
+      5    COMMIT;
+      6  END;
+      7* /
+
+    PL/SQL procedure successfully completed.
+    ```
+
+    </details>
+
+4. Close SQLcl.
+
+    ``` bash
+    <copy>
+    exit
+    </copy>
+    ```
+
+## Task 2: Download and open CMA
 
 CMA is available for everyone and shared on request. The tool is licensed under Oracle Free Use Terms and Conditions (FUTC).
 
@@ -47,7 +136,7 @@ In this lab, CMA is already configured and available at *[https://localhost/ords
 
     ![CMA Home Page](./images/cma-home.png)
 
-## Task 2: Run CMA Guided Mode
+## Task 3: Run CMA Guided Mode
 
 Cloud Migration Advisor is a tool with many options and flows. In this lab, we will use it in a simple mode, just to get the recommended method for the two PDBs that we want to move to ADB.
 
