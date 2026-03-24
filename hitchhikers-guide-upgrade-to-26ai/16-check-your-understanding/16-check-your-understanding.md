@@ -12,7 +12,7 @@ In this lab, you will:
 
 * Review the primary upgrade method for Oracle AI Database 26ai
 * Confirm the supported direct upgrade source releases
-* Check you overall understanding
+* Check your overall understanding
 
 ### Prerequisites
 
