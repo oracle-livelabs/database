@@ -427,7 +427,7 @@
       }
     },
     {
-      "text": "%script\nSELECT find_similar_decisions('client has irregular income patterns throughout the year') FROM DUAL;",
+      "text": "%script\nSELECT DBMS_LOB.SUBSTR(find_similar_decisions('client has irregular income patterns throughout the year'), 4000, 1) AS similar_decisions FROM DUAL;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -459,7 +459,7 @@
       }
     },
     {
-      "text": "%script\nSELECT find_similar_decisions('new customer asking for a discount on their first loan') FROM DUAL;",
+      "text": "%script\nSELECT DBMS_LOB.SUBSTR(find_similar_decisions('new customer asking for a discount on their first loan'), 4000, 1) AS similar_decisions FROM DUAL;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -715,7 +715,7 @@
       }
     },
     {
-      "text": "%script\nSELECT find_similar_decisions('business with seasonal revenue needs flexible payments') FROM DUAL;",
+      "text": "%script\nSELECT DBMS_LOB.SUBSTR(find_similar_decisions('business with seasonal revenue needs flexible payments'), 4000, 1) AS similar_decisions FROM DUAL;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,

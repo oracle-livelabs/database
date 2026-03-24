@@ -641,7 +641,7 @@ Before using the agent, let's test semantic search directly. This demonstrates t
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('client has irregular income patterns throughout the year') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('client has irregular income patterns throughout the year'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
@@ -657,7 +657,7 @@ Before using the agent, let's test semantic search directly. This demonstrates t
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('new customer asking for a discount on their first loan') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('new customer asking for a discount on their first loan'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
@@ -790,7 +790,7 @@ Now the crucial test—clear the session and start fresh. This simulates logging
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('business with seasonal revenue needs flexible payments') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('business with seasonal revenue needs flexible payments'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
