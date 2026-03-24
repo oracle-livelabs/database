@@ -544,8 +544,8 @@
       }
     }
   ],
-  "name": "Lab 5 - Why Agents Need Memory (Import Test)",
-  "id": "lab5-why-agents-need-memory-import-test",
+  "name": "Lab 5 - Why Agents Need Memory",
+  "id": "lab5-why-agents-need-memory",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
