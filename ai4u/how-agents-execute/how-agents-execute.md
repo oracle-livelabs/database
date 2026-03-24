@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, you'll trace an agent through its complete execution loop, from understanding a request to taking action and reporting results.
+In this lab, you will trace an agent through its complete execution loop, from understanding a request to taking action and reporting results.
 
-Every agent follows the same pattern: **understand → plan → execute tools → analyze results → respond**. By observing this loop in detail—with step-by-step logging—you'll understand exactly how agents transform requests into outcomes.
+Every agent follows the same pattern: **understand → plan → execute tools → analyze results → respond**. By observing this loop in detail—with step-by-step logging—you will understand exactly how agents transform requests into outcomes.
 
 ### The Business Problem
 
@@ -14,9 +14,9 @@ Seer Equity's loan officers are drowning in routine decisions. A $25,000 persona
 
 Meanwhile, the high-risk applications that actually need scrutiny get the same attention as routine ones. Senior underwriters waste time on $30K personal loans while $500K mortgages wait in queue.
 
-### What You'll Learn
+### What You Will Learn
 
-In this lab, you'll build Seer Equity's risk assessment workflow. The agent will:
+In this lab, you will build Seer Equity's risk assessment workflow. The agent will:
 
 1. Create loan applications with proper tracking IDs
 2. Assess risk based on loan type and amount
@@ -26,7 +26,7 @@ In this lab, you'll build Seer Equity's risk assessment workflow. The agent will
    - **Over $250K or mortgages** → Senior underwriter
 4. Log every step for audit compliance
 
-**What you'll build:** A loan risk assessment workflow with conditional routing and audit trail.
+**What you will build:** A loan risk assessment workflow with conditional routing and audit trail.
 
 Estimated Time: 10 minutes
 
@@ -39,7 +39,7 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
@@ -75,7 +75,7 @@ Before you begin, import a notebook that has all of the commands for this lab in
 
 ## Task 2: Create the Tracking Infrastructure
 
-You'll create tables that log every step the agent takes. This lets you watch the execution unfold like a movie—critical for audit trails in financial services.
+You will create tables that log every step the agent takes. This lets you watch the execution unfold like a movie—critical for audit trails in financial services.
 
 The `workflow_log` table captures each step as it happens. The `loan_applications` table holds the actual business data the agent creates.
 
@@ -197,7 +197,7 @@ The agent will use this result to decide whether to call the routing tool.
 
 This function routes loan applications for underwriting review by updating their status. The agent should only call this when the risk assessment returns `UNDERWRITER_REVIEW` or `SENIOR_UNDERWRITER`.
 
-This is where you'll see the agent make decisions. It reads the risk assessment and decides whether to call this tool.
+This is where you will see the agent make decisions. It reads the risk assessment and decides whether to call this tool.
 
 1. Create the `route_for_underwriting` function.
 
@@ -408,7 +408,7 @@ Oracle maintains its own history of tool calls. These views show you the inputs 
 
 ## Task 5: Trace Different Execution Paths
 
-Different loan parameters trigger different routing paths—and sometimes skip a tool entirely. This is where you'll see the agent make real decisions based on data.
+Different loan parameters trigger different routing paths—and sometimes skip a tool entirely. This is where you will see the agent make real decisions based on data.
 
 1. Submit a $25,000 personal loan (Auto-Approve path).
 

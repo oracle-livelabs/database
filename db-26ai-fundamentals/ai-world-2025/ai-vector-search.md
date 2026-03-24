@@ -10,6 +10,10 @@ Building on the patient data from our previous labs, you'll learn how to set up 
 
 Estimated Lab Time: 25 minutes
 
+### Objectives
+The objective of this lab is to demonstrate Oracle AI Database 26ai's AI Vector Search. By the end of this lab, you will load an embedding model, generate vectors for healthcare documents, and run semantic similarity searches to find related content based on meaning rather than exact keyword matches.
+
+
 ### What You'll Learn
 
 - How vector search finds documents by meaning, not just keywords
@@ -135,8 +139,8 @@ Estimated Lab Time: 25 minutes
 
             TYPE url_array IS VARRAY(100) OF VARCHAR2(2000);
             l_file_urls url_array := url_array(
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/Q5ut2WEd3LoZGvPDKGQy6YE6Ur1uNh_KPz29_nHc6hOXmf62cZvTnaIJ2Wkvbu3E/n/oradbclouducm/b/aiworld-demo/o/archived_messages_courtney.txt',
-                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/6jvQvMNMkhOVDjanCZNlkWh5TuDDqpwD6yneBAyoaOFiS35WlaGTV8_-8VtF0G_H/n/oradbclouducm/b/aiworld-demo/o/archived_messages_leslie.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/82bFkx_jXzSnFFfjpMC39qOuznaB95McqYOVg0Qg8izK0R-tS3VmAplwLgzSqyB_/n/oradbclouducm/b/aiworld-demo/o/archived_messages_courtney.txt',
+                    'https://objectstorage.us-ashburn-1.oraclecloud.com/p/2z3Pxu7zj9j-nn-KvmzJXa64MUdPQw1q5YqObICjhAbvdpYvTWO9xTP8kNqMCcw_/n/oradbclouducm/b/aiworld-demo/o/archived_messages_leslie.txt',
                     'https://objectstorage.us-ashburn-1.oraclecloud.com/p/gFU7MYcOkQAV7L85yVbn0813kMnZ2XEY6nzBOfUCaaaGaClIxMsTZOXLwJ_3wKJZ/n/oradbclouducm/b/aiworld-demo/o/archived_messages_ronald.txt',
                     'https://objectstorage.us-ashburn-1.oraclecloud.com/p/uMa84j6GL9htHf8zZ-61M3y1KVhlLAiEMpU8HLJ_IP8TaLIF7ZBvpXAvM7RtlEq-/n/oradbclouducm/b/aiworld-demo/o/discharge_summary_courtney.txt',
                     'https://objectstorage.us-ashburn-1.oraclecloud.com/p/lY01za5tMiWafA-UUkg_w66SWwJ7sORXVCYQeyzGVDCwe-5fMSVqX2QoP6q54ZGY/n/oradbclouducm/b/aiworld-demo/o/insurance_authorization.txt',
@@ -275,7 +279,7 @@ Estimated Lab Time: 25 minutes
     - Nutrition consultation notes about DASH diet
     - Lab results showing cholesterol levels
    
-   Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
+    Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
 
     ![vecs](./images/v2.png)
 

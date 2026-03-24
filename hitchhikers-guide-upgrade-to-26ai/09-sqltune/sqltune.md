@@ -33,8 +33,6 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Switch to *UPGR*, then create a SQL Tuning Advisor task.
@@ -45,8 +43,6 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
     @/home/oracle/scripts/upg-09-sta_cc.sql
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 3. Optionally, you can look at the script to understand how you use the SQL Tuning Advisor API.
@@ -255,8 +251,6 @@ In this lab, you will implement some of the recommendations. Namely, those about
     @/home/oracle/scripts/upg-07-spa_elapsed.sql
     @/home/oracle/scripts/upg-07-spa_report_elapsed.sql
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Exit SQLcl
