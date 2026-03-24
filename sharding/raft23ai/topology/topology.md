@@ -11,7 +11,7 @@ Raft replication provides a consensus, high-performance, low-overhead availabili
 
 This workshop is configured with a custom image having all the required podman containers for Oracle Globally Distributed AI Database using RDBMS and GSM Images.
 
-In this workshop, we attempt to use minimal resources to show the demonstration, and in the process we chose a single compute instance to install all of the Oracle Globally Distributed Database components and appclient.
+In this workshop, we attempt to use minimal resources to show the demonstration, and in the process, we chose a single compute instance to install all of the Oracle Globally Distributed Database components and appclient.
 
 
 *Estimated Time*:  30 minutes
@@ -46,7 +46,7 @@ This lab assumes you have:
     
     ![<podman_containers>](./images/t1-podman-containers-1.png " ")
 
-    From top left corner of the Terminal, Click on the "File" and choose first option "New Tab" to open a new tab on the same terminal window: 
+    From top left corner of the Terminal, click on the "File" and choose first option "New Tab" to open a new tab on the same terminal window: 
 
     ![<click_file_new_tab_from_top_left_terminal_window>](./images/click_file_new_tab_from_top_left_terminal_window.png " ")
    
@@ -60,7 +60,7 @@ This lab assumes you have:
 
    ![<terminal_gsm1_tab>](./images/terminal_gsm1_tab.png " ")
 
-   Similarly, open one more tab (from top left corner of the Terminal, Click on the "File" and choose first option "New Tab") and switched to **appclient** container.
+   Similarly, open one more tab (from top left corner of the Terminal, click on the "File" and choose first option "New Tab") and switched to **appclient** container.
 
     ```
     <copy>
@@ -70,20 +70,20 @@ This lab assumes you have:
    
    ![<terminal_appclient_tab>](./images/terminal_appclient_tab.png " ")
 
-    Alternatively, you can open multiple terminals for different tasks from each terminals.
+    Alternatively, you can open multiple terminals for different tasks from each terminal.
 
 ## Task 2: Explore the Raft configuration
 
 When Raft replication is enabled, a sharded database contains multiple replication units. A replication unit (RU) is a set of chunks that have the same replication topology. Each RU has three replicas placed on different shards. The Raft consensus protocol is used to maintain consistency between the replicas in case of failures, network partitioning, message loss, or delay.
 
-Replicas of an RU make up a Raft group, which consists of an elected leader and a number of followers. In Oracle Sharding the number of followers is limited to two. All DMLs for a particular subset of data are executed in the leader and then are replicated to its followers.
+Replicas of an RU make up a Raft group, which consists of an elected leader and a few followers. In Oracle Sharding the number of followers is limited to two. All DMLs for a particular subset of data are executed in the leader and then are replicated to its followers.
 
 Changes to data made by a DML are recorded in the Raft log. A commit record is also recorded at the end of each user transaction. Raft logs are maintained independently from redo logs and contain logical changes to rows. The logical replication reduces failover time because followers are open to incoming transactions and can quickly become the leader.
 
 For more details check [Raft Replication Configuration and Management] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 
-1. Use the terminal tab (2nd tab) that is switched to **gsm1** container. Verify sharding topology using the  **gdsctl config shard** command.
+1. Use the terminal tab (2nd tab) that is switched to **gsm1** container. Verify sharding topology using the **gdsctl config shard** command.
 
     ```
     <copy>
@@ -222,7 +222,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
     
     ![<t4-4-run-workload_and_ctrl_c>](./images/t4-4-run-workload_and_ctrl_c.png " ")
 
-4. Now check the RU details from terminal's 2nd tab which is switched to  **gsm1**. Notice that for each RU#s, the values is "Log Index" columns are increased due to read and write operations are performed while running the workload.
+4. Now check the RU details from terminal's 2nd tab which is switched to **gsm1**. Notice that for each RU#s, the values is "Log Index" columns are increased due to read and write operations are performed while running the workload.
 
     ```
     <copy>
@@ -232,7 +232,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
 
     ![<workload_ru_log_index>](./images/t4-5-workload-log-index.png " ")
 
-5. From the browser check the increased value of the count on the demo application ( if not running you can rerun using http://localhost:8080).
+5. From the browser check the increased value of the count on the demo application (if not running you can rerun using http://localhost:8080).
 
     ![<t4-6-ui-after-workload-increase-count>](./images/t4-6-ui-after-workload-increase-count.png " ")
 
@@ -267,7 +267,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     ![<stop_shard_1>](./images/t5-2-stop-shard1.png " ")  
 
 
-3. From the 2nd tab of the terminal window connected to **gsm1** ( Below command can be used to switch to **gsm1**, if you are using a new terminal/tab).
+3. From the 2nd tab of the terminal window connected to **gsm1** (Below command can be used to switch to **gsm1**, if you are using a new terminal/tab).
 
     ```
     <copy>
@@ -325,7 +325,7 @@ Failover test by stopping shard1 to create shard1 down situation.
 
     ![<chunk_status_after_startup_shard1>](./images/t5-5-status-chunks-after-startup-shard1.png " ")  
     
-    Navigate to the third tab ( using appclient container) where the workload is running and enter CTRL-C to stop the workload.
+    Navigate to the third tab (using appclient container) where the workload is running and enter CTRL-C to stop the workload.
 
 6. Run the below command in terminal that is switched to **GSM** to auto rebalance the leaders.
 
