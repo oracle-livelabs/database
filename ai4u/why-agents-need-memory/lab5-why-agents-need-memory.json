@@ -43,7 +43,7 @@
       }
     },
     {
-      "text": "%script\n    -- Create a basic SQL tool so the agent can function\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'BASIC_SQL_TOOL',\n            attributes  => '{\"tool_type\": \"SQL\",\n                            \"tool_params\": {\"profile_name\": \"genai\"}}',\n            description => 'Basic SQL query tool'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n            agent_name  => 'FORGETFUL_AGENT',\n            attributes  => '{\"profile_name\": \"genai\",\n                            \"role\": \"You are a helpful loan officer assistant for Seer Equity. Remember any preferences or information clients share with you so you can serve them better on future loan applications.\"}',\n            description => 'Agent without memory capabilities'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n            task_name   => 'FORGETFUL_TASK',\n            attributes  => '{\"instruction\": \"Help the loan officer with their request. {query}\",\n                            \"tools\": [\"BASIC_SQL_TOOL\"]}',\n            description => 'Task without memory tools'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'FORGETFUL_TEAM',\n            attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Team demonstrating memory limitations'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /",
+      "text": "%script\n    -- Create a basic SQL tool so the agent can function\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'BASIC_SQL_TOOL',\n            attributes  => '{\"tool_type\": \"SQL\",\n                            \"tool_params\": {\"profile_name\": \"genai\"}}',\n            description => 'Basic SQL query tool'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n            agent_name  => 'FORGETFUL_AGENT',\n            attributes  => '{\"profile_name\": \"genai\",\n                            \"role\": \"You are a helpful loan officer assistant for Seer Equity. Remember any preferences or information clients share with you so you can serve them better on future loan applications.\"}',\n            description => 'Agent without memory capabilities'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n            task_name   => 'FORGETFUL_TASK',\n            attributes  => '{\"instruction\": \"Help the loan officer with their request. {query}\",\n                            \"tools\": [\"BASIC_SQL_TOOL\"]}',\n            description => 'Task without memory tools'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'FORGETFUL_TEAM',\n            attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Team demonstrating memory limitations'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'FORGETFUL_TEAM_SHIFT2',\n            attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Second shift team with no prior conversation context'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -235,7 +235,7 @@
       }
     },
     {
-      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -363,7 +363,7 @@
       }
     },
     {
-      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -533,7 +533,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM_SHIFT2', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
