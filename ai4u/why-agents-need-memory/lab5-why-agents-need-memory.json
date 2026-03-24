@@ -331,7 +331,7 @@
       }
     },
     {
-      "text": "%script\n    SELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');\n    SELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
