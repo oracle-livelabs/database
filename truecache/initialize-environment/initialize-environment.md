@@ -11,7 +11,7 @@ Watch the video for a quick walk through of the Initialize Environment lab.
 [Initialize Environment lab](youtube:e3EXx3BMhec)
 
 Watch the video for a quick walk through of the Lab1.
-[Lab1](videohub:1_2ee2tbuw) 
+[Lab1](videohub:1_y0sporip) 
 
 ### Objectives
 - Initialize the workshop environment.
