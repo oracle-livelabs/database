@@ -129,7 +129,7 @@ We're using a pre-trained model called "all_MiniLM_L12_v2" that's good at unders
 
 3. Verify the model is loaded.
 
-    **Watch for:** You should see ALL_MINILM_L12_V2 listed with algorithm and mining function.
+    **Watch for:** You should see `ALL_MINILM_L12_V2` listed with algorithm and mining function.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -452,7 +452,7 @@ Create the core memory functions. The key difference from earlier labs: these fu
 
 ## Task 6: Register the Memory Tools
 
-Register all five functions as agent tools. The instructions tell the agent when to use each tool. Note that FIND_DECISIONS_TOOL now uses semantic search.
+Register all five functions as agent tools. The instructions tell the agent when to use each tool. Note that `FIND_DECISIONS_TOOL` now uses semantic search.
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -685,7 +685,7 @@ Now use the agent to demonstrate the complete learning loop.
 
 1. Teach the agent about a client.
 
-    Tell the agent about Acme Industries. The agent should use REMEMBER_CLIENT_TOOL to store these facts with semantic embeddings.
+    Tell the agent about Acme Industries. The agent should use `REMEMBER_CLIENT_TOOL` to store these facts with semantic embeddings.
 
     **Watch for:** The agent should confirm it remembered the contact preference, rate exception, and relationship history.
 
@@ -701,7 +701,7 @@ Now use the agent to demonstrate the complete learning loop.
 
 2. Test client recall.
 
-    Ask about Acme Industries. The agent should use RECALL_CLIENT_TOOL and return all the facts you just taught it.
+    Ask about Acme Industries. The agent should use `RECALL_CLIENT_TOOL` and return all the facts you just taught it.
 
     **Watch for:** All the facts: email preference, Sarah Chen, since 2019, 15% rate exception, 4 previous loans.
 
@@ -768,7 +768,7 @@ Now the crucial test—clear the session and start fresh. This simulates logging
 
     The agent has no conversation history—but it has memory tools.
 
-    **Watch what happens:** The agent calls RECALL_CLIENT_TOOL and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.
+    **Watch what happens:** The agent calls `RECALL_CLIENT_TOOL` and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -850,7 +850,7 @@ In this lab, you built the learning loop with semantic search:
 |---|---|---|
 | Client facts | `remember_client_fact` / `recall_client_info` | Stores & retrieves with embeddings |
 | Decision logging | `record_loan_decision` | Audit trail with semantic embedding |
-| Semantic search | `find_similar_decisions` | VECTOR_DISTANCE finds by *meaning* |
+| Semantic search | `find_similar_decisions` | `VECTOR_DISTANCE` finds by *meaning* |
 | Policy lookup | `lookup_policy` | Retrieves corporate lending policies |
 
 **Key Behaviors:**

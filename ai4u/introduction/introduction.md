@@ -98,21 +98,21 @@ Finally, you will build the guardrails that make agents safe for financial servi
 
 * **Lab 10: Tools, Safety, and Human Control.** Build a two-agent system that enforces separation of duties:
   
-  **LOAN_AGENT** (for loan officers):
+  **`LOAN_AGENT`** (for loan officers):
   - Can submit loan applications
   - Cannot approve or deny anything
   - Literally doesn't have the approval tools
   
-  **UNDERWRITING_AGENT** (for underwriters):
+  **`UNDERWRITING_AGENT`** (for underwriters):
   - Can view pending applications
   - Can approve or deny
   - Cannot submit applications
   
   **Automatic Risk Assessment:**
   - Credit score below 550 → BLOCKED (application rejected)
-  - Personal loans under $50K with good credit → AUTO_APPROVED
+  - Personal loans under $50K with good credit → `AUTO_APPROVED`
   - Loans $50K-$250K → Requires UNDERWRITER review
-  - Loans over $250K or any mortgage → Requires SENIOR_UNDERWRITER
+  - Loans over $250K or any mortgage → Requires `SENIOR_UNDERWRITER`
   
   **Complete Audit Trail:**
   - Every tool call logged with timestamp
