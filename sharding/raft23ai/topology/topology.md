@@ -16,6 +16,7 @@ In this workshop, we attempt to use minimal resources to show the demonstration,
 
 *Estimated Time*:  30 minutes
 
+[Explore Raft Replication Topology](videohub:1_6jbzkxit)
 
 ### Objectives
 In this lab, you will:
