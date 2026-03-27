@@ -544,8 +544,8 @@
       }
     }
   ],
-  "name": "Lab 5 - Why Agents Need Memory (Big Star 2)",
-  "id": "lab5-why-agents-need-memory-bigstar2",
+  "name": "Lab 5 - Why Agents Need Memory (Big Star)",
+  "id": "lab5-why-agents-need-memory",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
