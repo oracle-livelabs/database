@@ -7,10 +7,8 @@ In this lab, you will create the transaction processing schema and load data int
 *Estimated Time:* 20 minutes
 
 Watch the video for a quick walk through of the Lab2.
-<if type="nonsandbox">
-[Lab2](videohub:1_mz228rvo)
-[Lab2](videohub:1_yayzolzj)
-</if>
+[Lab2](videohub:1_mz228rvo) 
+[Lab2](videohub:1_yayzolzj) 
 
 ### About Oracle True Cache
 Modern applications often require massive scalability in terms of both the number of connections and the amount of data that can be cached.

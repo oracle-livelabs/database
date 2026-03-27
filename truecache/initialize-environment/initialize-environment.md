@@ -11,9 +11,7 @@ Watch the video for a quick walk through of the Initialize Environment lab.
 [Initialize Environment lab](youtube:e3EXx3BMhec)
 
 Watch the video for a quick walk through of the Lab1.
-<if type="nonsandbox">
-[Lab1](videohub:1_y0sporip)
-</if>
+[Lab1](videohub:1_y0sporip) 
 
 ### Objectives
 - Initialize the workshop environment.
@@ -76,3 +74,4 @@ You may now proceed to the next lab.
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
 * **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
+
