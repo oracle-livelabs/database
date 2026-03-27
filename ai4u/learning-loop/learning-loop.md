@@ -129,7 +129,7 @@ We're using a pre-trained model called "all_MiniLM_L12_v2" that's good at unders
 
 3. Verify the model is loaded.
 
-    **Watch for:** You should see ALL_MINILM_L12_V2 listed with algorithm and mining function.
+    **Watch for:** You should see `ALL_MINILM_L12_V2` listed with algorithm and mining function.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -452,7 +452,7 @@ Create the core memory functions. The key difference from earlier labs: these fu
 
 ## Task 6: Register the Memory Tools
 
-Register all five functions as agent tools. The instructions tell the agent when to use each tool. Note that FIND_DECISIONS_TOOL now uses semantic search.
+Register all five functions as agent tools. The instructions tell the agent when to use each tool. Note that `FIND_DECISIONS_TOOL` now uses semantic search.
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -461,7 +461,7 @@ Register all five functions as agent tools. The instructions tell the agent when
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'REMEMBER_CLIENT_TOOL',
-        attributes  => '{"instruction": "Store a fact about a Seer Equity client for future reference. Parameters: P_CLIENT (client name), P_FACT (information to remember), P_CATEGORY (optional: contact_preference, rate_exception, relationship, requirement, behavior). Use when loan officers share important client information.",
+        attributes  => '{"instruction": "Store a fact about a Seer Equity client for future reference. Parameters: P_CLIENT (client name), P_FACT (information to remember), P_CATEGORY (optional: contact_preference, rate_exception, relationship, requirement, behavior). Use only when the user provides NEW client facts. Do not store the same fact twice in one request. Never call this tool based on prior tool output; only from the original user request. For a multi-fact request, store each distinct fact once, then stop calling tools and respond.",
                         "function": "remember_client_fact"}',
         description => 'Stores facts about clients in long-term memory with semantic embeddings'
     );
@@ -526,7 +526,7 @@ BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'SEERS_MEMORY_AGENT',
         attributes  => '{"profile_name": "genai",
-                        "role": "You are a loan officer assistant for Seer Equity with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When loan officers share client information, store it (use REMEMBER_CLIENT_TOOL). When making loan decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools."}',
+                        "role": "You are a loan officer assistant for Seer Equity with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When loan officers share client information, store it (use REMEMBER_CLIENT_TOOL). When making loan decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools. Never call REMEMBER_CLIENT_TOOL repeatedly for the same fact. Do not call tools from tool output text; call tools only from the user request intent. After completing required tool calls, provide a final answer and stop."}',
         description => 'Memory-enabled loan officer assistant with semantic search'
     );
 END;
@@ -535,7 +535,7 @@ END;
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_TASK(
         task_name   => 'SEERS_MEMORY_TASK',
-        attributes  => '{"instruction": "Process this loan officer request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL (it uses semantic search to find similar situations even with different wording). Record decisions with RECORD_DECISION_TOOL. Do not ask clarifying questions - use your tools. User request: {query}",
+        attributes  => '{"instruction": "Process this loan officer request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL only for distinct new facts in the user request. Never use REMEMBER_CLIENT_TOOL on your own tool outputs or responses. Maximum 3 REMEMBER_CLIENT_TOOL calls per user request. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL (it uses semantic search to find similar situations even with different wording). Record decisions with RECORD_DECISION_TOOL when a decision is made. After relevant tools run, provide the final response and stop. Do not ask clarifying questions. User request: {query}",
                         "tools": ["REMEMBER_CLIENT_TOOL", "RECALL_CLIENT_TOOL", "RECORD_DECISION_TOOL", "FIND_DECISIONS_TOOL", "POLICY_LOOKUP_TOOL"]}',
         description => 'Task with full memory capabilities and semantic search'
     );
@@ -641,7 +641,7 @@ Before using the agent, let's test semantic search directly. This demonstrates t
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('client has irregular income patterns throughout the year') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('client has irregular income patterns throughout the year'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
@@ -657,7 +657,7 @@ Before using the agent, let's test semantic search directly. This demonstrates t
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('new customer asking for a discount on their first loan') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('new customer asking for a discount on their first loan'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
@@ -685,7 +685,7 @@ Now use the agent to demonstrate the complete learning loop.
 
 1. Teach the agent about a client.
 
-    Tell the agent about Acme Industries. The agent should use REMEMBER_CLIENT_TOOL to store these facts with semantic embeddings.
+    Tell the agent about Acme Industries. The agent should use `REMEMBER_CLIENT_TOOL` to store these facts with semantic embeddings.
 
     **Watch for:** The agent should confirm it remembered the contact preference, rate exception, and relationship history.
 
@@ -701,7 +701,7 @@ Now use the agent to demonstrate the complete learning loop.
 
 2. Test client recall.
 
-    Ask about Acme Industries. The agent should use RECALL_CLIENT_TOOL and return all the facts you just taught it.
+    Ask about Acme Industries. The agent should use `RECALL_CLIENT_TOOL` and return all the facts you just taught it.
 
     **Watch for:** All the facts: email preference, Sarah Chen, since 2019, 15% rate exception, 4 previous loans.
 
@@ -768,7 +768,7 @@ Now the crucial test—clear the session and start fresh. This simulates logging
 
     The agent has no conversation history—but it has memory tools.
 
-    **Watch what happens:** The agent calls RECALL_CLIENT_TOOL and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.
+    **Watch what happens:** The agent calls `RECALL_CLIENT_TOOL` and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -790,7 +790,7 @@ Now the crucial test—clear the session and start fresh. This simulates logging
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('business with seasonal revenue needs flexible payments') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('business with seasonal revenue needs flexible payments'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
@@ -850,7 +850,7 @@ In this lab, you built the learning loop with semantic search:
 |---|---|---|
 | Client facts | `remember_client_fact` / `recall_client_info` | Stores & retrieves with embeddings |
 | Decision logging | `record_loan_decision` | Audit trail with semantic embedding |
-| Semantic search | `find_similar_decisions` | VECTOR_DISTANCE finds by *meaning* |
+| Semantic search | `find_similar_decisions` | `VECTOR_DISTANCE` finds by *meaning* |
 | Policy lookup | `lookup_policy` | Retrieves corporate lending policies |
 
 **Key Behaviors:**

@@ -24,14 +24,14 @@ In this capstone lab, you'll build a two-agent loan underwriting system:
 
 | Agent | Role | Can Do | Cannot Do |
 |-------|------|--------|-----------|
-| **LOAN_AGENT** | Loan Officers | Submit applications | Approve/Deny |
-| **UNDERWRITING_AGENT** | Underwriters | Approve/Deny | Submit applications |
+| **`LOAN_AGENT`** | Loan Officers | Submit applications | Approve/Deny |
+| **`UNDERWRITING_AGENT`** | Underwriters | Approve/Deny | Submit applications |
 
-The separation isn't just policy—it's architecture. LOAN_AGENT literally doesn't have approval tools.
+The separation isn't just policy—it's architecture. `LOAN_AGENT` literally doesn't have approval tools.
 
 You'll also implement risk-based routing:
 * **Credit < 550** → BLOCKED (cannot proceed)
-* **Personal < $50K** → AUTO_APPROVE
+* **Personal < $50K** → `AUTO_APPROVE`
 * **$50K-$250K** → Underwriter review required
 * **$250K+ or Mortgage** → Senior underwriter required
 
@@ -267,10 +267,10 @@ Before building the agents, let's verify the rules work correctly.
 
 | Test | Expected Result | Why |
 |------|-----------------|-----|
-| $25K personal, 780 credit | AUTO_APPROVE | Good credit, small loan |
-| $35K auto, 695 credit | AUTO_APPROVE | Decent credit, under $50K |
-| $75K personal, 725 credit | REQUIRE_REVIEW | Over $50K threshold |
-| $30K personal, 600 credit | REQUIRE_REVIEW | Borderline credit 550-650 |
+| $25K personal, 780 credit | `AUTO_APPROVE` | Good credit, small loan |
+| $35K auto, 695 credit | `AUTO_APPROVE` | Decent credit, under $50K |
+| $75K personal, 725 credit | `REQUIRE_REVIEW` | Over $50K threshold |
+| $30K personal, 600 credit | `REQUIRE_REVIEW` | Borderline credit 550-650 |
 | $20K auto, 520 credit | BLOCK | Credit below 550 |
 
 ```sql
@@ -292,7 +292,7 @@ SELECT '$20K auto, 520 credit:', check_underwriting_rules(20000, 'auto', 520) FR
 
 ## Task 6: Create the Loan Submission Function
 
-This is the main tool the LOAN_AGENT will use. It looks up the applicant's credit score, checks the underwriting rules, and creates the application with the appropriate status.
+This is the main tool the `LOAN_AGENT` will use. It looks up the applicant's credit score, checks the underwriting rules, and creates the application with the appropriate status.
 
 ```sql
 <copy>
@@ -492,7 +492,7 @@ Underwriters need three capabilities: see pending applications, approve, and den
 
 ## Task 8: Register the Tools
 
-Now you'll register your PL/SQL functions as tools. Notice that SUBMIT_LOAN_TOOL is for loan officers, while the other three are for underwriters.
+Now you'll register your PL/SQL functions as tools. Notice that `SUBMIT_LOAN_TOOL` is for loan officers, while the other three are for underwriters.
 
 ```sql
 <copy>
@@ -538,7 +538,7 @@ END;
 
 ## Task 9: Create the Loan Agent (Loan Officer Role)
 
-The LOAN_AGENT represents a loan officer submitting applications. It only has access to SUBMIT_LOAN_TOOL — it cannot approve or deny anything.
+The `LOAN_AGENT` represents a loan officer submitting applications. It only has access to `SUBMIT_LOAN_TOOL` — it cannot approve or deny anything.
 
 ```sql
 <copy>
@@ -774,12 +774,12 @@ Switch to the underwriting agent and review applications.
 In this lab, you built a complete loan underwriting system demonstrating:
 
 **Role-Based Agents:**
-* LOAN_AGENT for loan officers (submit only)
-* UNDERWRITING_AGENT for underwriters (review and decide)
+* `LOAN_AGENT` for loan officers (submit only)
+* `UNDERWRITING_AGENT` for underwriters (review and decide)
 
 **Safety Rules:**
-* AUTO_APPROVE: Under $50K, good credit, non-mortgage
-* REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
+* `AUTO_APPROVE`: Under $50K, good credit, non-mortgage
+* `REQUIRE_REVIEW`: $50K+, mortgages, or borderline credit
 * BLOCK: Credit score below 550
 
 **The Human-in-the-Loop:**
@@ -792,7 +792,7 @@ In this lab, you built a complete loan underwriting system demonstrating:
 * Full input/output captured
 * Explainable and compliant
 
-**Key Insight:** Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything - it doesn't have the tool. This is security through architecture, not just prompts.
+**Key Insight:** Agents are safe because their boundaries are explicit. The `LOAN_AGENT` literally cannot approve anything - it doesn't have the tool. This is security through architecture, not just prompts.
 
 ## Learn More
 
