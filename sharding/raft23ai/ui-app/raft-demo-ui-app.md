@@ -16,7 +16,11 @@ All Customers List query is retrieved from the Catalog Database using the proxy-
 
 _Estimated Time_: 30 minutes
 
+<if type="nonsandbox">
+Watch the video for a quick walk through of the Demo Application for Raft Replication.
+
 [Demo App for Raft Replication](videohub:1_m90w4f3p)
+</if>
 
 ### Objectives
 
