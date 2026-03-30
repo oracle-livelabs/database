@@ -8,7 +8,7 @@ Estimated Time: 10 minutes
 
 <if type="nonsandbox">
 Watch the video for a quick walk through of the Lab3.
-[Lab3](videohub:1_yayzolzj)
+[Lab3](videohub:1_wx3n5ug3)
 </if>
 
 ### About True Cache using JDBC
