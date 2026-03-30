@@ -43,7 +43,7 @@
       }
     },
     {
-      "text": "%script\n-- Create a basic SQL tool so the agent can function\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'BASIC_SQL_TOOL',\n        attributes  => '{\"tool_type\": \"SQL\",\n                        \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Basic SQL query tool'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'FORGETFUL_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a helpful loan officer assistant for Seer Equity. Remember any preferences or information clients share with you so you can serve them better on future loan applications.\"}',\n        description => 'Agent without memory capabilities'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'FORGETFUL_TASK',\n        attributes  => '{\"instruction\": \"Help the loan officer with their request. {query}\",\n                        \"tools\": [\"BASIC_SQL_TOOL\"]}',\n        description => 'Task without memory tools'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/\n\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'FORGETFUL_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team demonstrating memory limitations'\n    );\nEXCEPTION WHEN OTHERS THEN NULL;\nEND;\n/",
+      "text": "%script\n    -- Create a basic SQL tool so the agent can function\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n            tool_name   => 'BASIC_SQL_TOOL',\n            attributes  => '{\"tool_type\": \"SQL\",\n                            \"tool_params\": {\"profile_name\": \"genai\"}}',\n            description => 'Basic SQL query tool'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n            agent_name  => 'FORGETFUL_AGENT',\n            attributes  => '{\"profile_name\": \"genai\",\n                            \"role\": \"You are a helpful loan officer assistant for Seer Equity. Remember any preferences or information clients share with you so you can serve them better on future loan applications.\"}',\n            description => 'Agent without memory capabilities'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n            task_name   => 'FORGETFUL_TASK',\n            attributes  => '{\"instruction\": \"Help the loan officer with their request. {query}\",\n                            \"tools\": [\"BASIC_SQL_TOOL\"]}',\n            description => 'Task without memory tools'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'FORGETFUL_TEAM',\n            attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Team demonstrating memory limitations'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n\n    BEGIN\n        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n            team_name   => 'FORGETFUL_TEAM_SHIFT2',\n            attributes  => '{\"agents\": [{\"name\": \"FORGETFUL_AGENT\", \"task\": \"FORGETFUL_TASK\"}],\n                            \"process\": \"sequential\"}',\n            description => 'Second shift team with no prior conversation context'\n        );\n    EXCEPTION WHEN OTHERS THEN NULL;\n    END;\n    /\n",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -75,7 +75,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -107,7 +107,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Client Sarah Chen prefers email contact and is in Pacific timezone. She has been approved for a 15% rate exception due to her long relationship with Seer Equity. Please remember this for future interactions;",
+      "text": "%script\n    SELECT AI AGENT Client Sarah Chen prefers email contact and is in Pacific timezone. She has been approved for a 15% rate exception due to her long relationship with Seer Equity. Please remember this for future interactions;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -139,7 +139,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chens preferred contact method;",
+      "text": "%script\n    SELECT AI AGENT What is Sarah Chens preferred contact method;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -171,7 +171,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What rate exception was Sarah Chen approved for;",
+      "text": "%script\n    SELECT AI AGENT What rate exception was Sarah Chen approved for;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -203,7 +203,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -235,7 +235,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -267,7 +267,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What is Sarah Chens preferred contact method;",
+      "text": "%script\n    SELECT AI AGENT What is Sarah Chens preferred contact method;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -299,7 +299,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What rate exception was Sarah Chen approved for;",
+      "text": "%script\n    SELECT AI AGENT What rate exception was Sarah Chen approved for;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -331,7 +331,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');\n    SELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -363,7 +363,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');",
+      "text": "%script\n    EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;\n    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -395,7 +395,7 @@
       }
     },
     {
-      "text": "%script\nSELECT AI AGENT What documents are still missing for the TechStart loan application;",
+      "text": "%script\n    SELECT AI AGENT What documents are still missing for the TechStart loan application;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -427,7 +427,7 @@
       }
     },
     {
-      "text": "%script\nSELECT tool_name, description \nFROM USER_AI_AGENT_TOOLS;",
+      "text": "%script\n    SELECT tool_name, description \n    FROM USER_AI_AGENT_TOOLS;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -459,7 +459,7 @@
       }
     },
     {
-      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as called_at\nFROM USER_AI_AGENT_TOOL_HISTORY\nWHERE start_date > SYSTIMESTAMP - INTERVAL '10' MINUTE\nORDER BY start_date DESC;",
+      "text": "%script\n    SELECT \n        tool_name,\n        TO_CHAR(start_date, 'YYYY-MM-DD HH24:MI:SS') as called_at\n    FROM USER_AI_AGENT_TOOL_HISTORY\n    WHERE start_date > SYSTIMESTAMP - INTERVAL '10' MINUTE\n    ORDER BY start_date DESC;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -533,7 +533,7 @@
       }
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);",
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM_SHIFT2', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -544,8 +544,8 @@
       }
     }
   ],
-  "name": "Lab 5 - Why Agents Need Memory",
-  "id": "lab5-why-agents-need-memory",
+  "name": "Lab 5 - Why Agents Need Memory (Workshop 2026-03-24)",
+  "id": "lab5-why-agents-need-memory-workshop-20260324",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},

@@ -147,7 +147,7 @@ First, let's create a loan applications table. This gives the agent something re
 
 For Select AI to query your table, the profile needs to know about it. We'll add the table to your existing `genai` profile's object list.
 
-1. Add the LOAN_APPLICATIONS table to the genai profile.
+1. Add the `LOAN_APPLICATIONS` table to the genai profile.
 
     >**Note:** The `object_list` tells Select AI which tables it can query. Without this, the AI won't know your table exists.
 

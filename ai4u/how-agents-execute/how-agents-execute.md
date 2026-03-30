@@ -150,9 +150,9 @@ The function generates a unique ID like `LOAN-250108-1001` and inserts the appli
 
 This function determines the risk level based on loan amount and type. At Seer Equity:
 
-- Personal loans under $50K → **AUTO_APPROVE** (low risk, standard terms)
-- Personal/Auto loans $50K–$250K → **UNDERWRITER_REVIEW** (moderate risk)
-- Any loan $250K+ OR all Mortgage loans → **SENIOR_UNDERWRITER** (high value/complexity)
+- Personal loans under $50K → **`AUTO_APPROVE`** (low risk, standard terms)
+- Personal/Auto loans $50K–$250K → **`UNDERWRITER_REVIEW`** (moderate risk)
+- Any loan $250K+ OR all Mortgage loans → **`SENIOR_UNDERWRITER`** (high value/complexity)
 
 The agent will use this result to decide whether to call the routing tool.
 
@@ -231,7 +231,7 @@ This is where you will see the agent make decisions. It reads the risk assessmen
 
 ## Task 6: Register the Tools with the Agent Framework
 
-Each tool has an `instruction` that tells the agent when and how to use it. Notice the instruction for `ROUTE_UNDERWRITING_TOOL` says "Only call this if ASSESS_RISK_TOOL returned UNDERWRITER_REVIEW or SENIOR_UNDERWRITER."
+Each tool has an `instruction` that tells the agent when and how to use it. Notice the instruction for `ROUTE_UNDERWRITING_TOOL` says "Only call this if `ASSESS_RISK_TOOL` returned `UNDERWRITER_REVIEW` or `SENIOR_UNDERWRITER`."
 
 This is how you guide agent behavior: through clear instructions in tool definitions.
 
@@ -311,7 +311,7 @@ This combination of role + task instruction shapes how the agent plans its work.
 
 ## Task 3: Submit a $75,000 Auto Loan (Underwriter Review Path)
 
-Now let's run a request and trace every step. This $75,000 auto loan should trigger the full three-step workflow: create the application, assess risk (returns UNDERWRITER_REVIEW), then route for underwriter review.
+Now let's run a request and trace every step. This $75,000 auto loan should trigger the full three-step workflow: create the application, assess risk (returns `UNDERWRITER_REVIEW`), then route for underwriter review.
 
 1. Clear the log and activate the team.
 
@@ -386,7 +386,7 @@ Oracle maintains its own history of tool calls. These views show you the inputs 
 
 2. Verify the loan application record.
 
-    Look at the actual database record. You should see John Smith's $75,000 auto loan with status **PENDING_UNDERWRITER**. This proves the agent didn't just say it routed the loan—it actually updated the database.
+    Look at the actual database record. You should see John Smith's $75,000 auto loan with status **`PENDING_UNDERWRITER`**. This proves the agent didn't just say it routed the loan—it actually updated the database.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -441,7 +441,7 @@ Different loan parameters trigger different routing paths—and sometimes skip a
 
 3. Verify the auto-approved loan.
 
-    Jane's loan should have status **SUBMITTED** (not PENDING_UNDERWRITER), because it was auto-approved and didn't need routing.
+    Jane's loan should have status **SUBMITTED** (not `PENDING_UNDERWRITER`), because it was auto-approved and didn't need routing.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -486,7 +486,7 @@ Different loan parameters trigger different routing paths—and sometimes skip a
 
 6. Verify Bob's mortgage status.
 
-    Bob's mortgage should have status **PENDING_SENIOR_UNDERWRITER**. The agent correctly routed it to the higher review level.
+    Bob's mortgage should have status **`PENDING_SENIOR_UNDERWRITER`**. The agent correctly routed it to the higher review level.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -507,8 +507,8 @@ Let's see all loan applications side by side. Notice how different amounts and l
 | Amount | Type | Status | Why |
 |--------|------|--------|-----|
 | $25,000 | Personal | SUBMITTED | Auto-approved, under $50K |
-| $75,000 | Auto | PENDING_UNDERWRITER | Between $50K–$250K |
-| $350,000 | Mortgage | PENDING_SENIOR_UNDERWRITER | Mortgages require senior review |
+| $75,000 | Auto | `PENDING_UNDERWRITER` | Between $50K–$250K |
+| $350,000 | Mortgage | `PENDING_SENIOR_UNDERWRITER` | Mortgages require senior review |
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 

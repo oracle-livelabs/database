@@ -65,7 +65,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ```text
     <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/why-agents-need-memory/lab5-why-agents-need-memory.json
+    https://github.com/davidastart/database/blob/main/ai4u/why-agents-need-memory/lab5-why-agents-need-memory-file.json
     </copy>
     ```
 
