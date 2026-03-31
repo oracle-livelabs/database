@@ -73,6 +73,11 @@
     {
       "title": "Lab 15: Downgrade a PDB",
       "filename": "../../15-downgrade-pdb/downgrade-pdb.md"
+    },
+    {
+      "title": "Lab 16: Check Your Understanding",
+      "description": "Review key upgrade concepts with a scored quiz.",
+      "filename": "../../16-check-your-understanding/16-check-your-understanding.md"
     },    
     {
       "title": "Need Help?",

@@ -29,15 +29,18 @@
     {
       "title": "Lab 3: Initialize Environment",
       "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
+      "filename": "../../initialize-environment/initialize-environment.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Lab 4: Load Data into database",
-      "filename": "../../data-load/data-load_dbw25.md"
+      "filename": "../../data-load/data-load_dbw25.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Lab 5: Use True Cache through jdbc",
-      "filename": "../../jdbc/jdbc_dbw25.md"
+      "filename": "../../jdbc/jdbc_dbw25.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Lab 6 : Clean up Stack and Instances",

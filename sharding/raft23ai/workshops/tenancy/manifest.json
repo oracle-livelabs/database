@@ -5,7 +5,8 @@
     {
       "title": "Introduction",
       "description": "Introduction",
-      "filename": "../../intro/intro.md"
+      "filename": "../../intro/intro.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Get Started",
@@ -27,17 +28,20 @@
     {
       "title": "Lab 3: Initialize Environment",
       "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
+      "filename": "../../initialize-environment/initialize-environment.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Lab 4: Demo UI Application for Raft Replication",
       "description": "Demo UI Application for Raft Replication",
-      "filename": "../../ui-app/raft-demo-ui-app.md"
+      "filename": "../../ui-app/raft-demo-ui-app.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Lab 5: Explore Raft Replication Topology",
       "description": "Exploring Sharding Topology",
-      "filename": "../../topology/topology.md"
+      "filename": "../../topology/topology.md",
+      "type": "nonsandbox"
     },
     {
       "title": "Lab 6: Clean up Stack and Instances",

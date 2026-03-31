@@ -6,8 +6,10 @@ In this lab, you will test the connection to True Cache through JDBC and run the
 
 Estimated Time: 10 minutes
 
+<if type="nonsandbox">
 Watch the video for a quick walk through of the Lab3.
-[Lab3](videohub:1_j4nqgxmz) 
+[Lab3](videohub:1_wx3n5ug3)
+</if>
 
 ### About True Cache using JDBC
 The application maintains one logical connection by using the database application service name of the primary database, and the JDBC Thin driver (Oracle Database 23ai and later) maintains two physical connections. The read/write split between True Cache and the primary database is controlled by the application through special calls to flag the logical connection as read-only or read-write. This mode is only for JDBC-based applications.
@@ -35,7 +37,7 @@ This lab assumes you have:
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
-![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
+    ![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
 
 2. Go to the directory /stage/clientapp 
 
@@ -52,11 +54,14 @@ This lab assumes you have:
      sh TransactionsApp.sh
     </copy>
     ```
-![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp_dbw25.png " ")
+    ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp_dbw25.png " ")
 
 3. Observe the improve in performance while using True Cache.
 
 4. You can change TransactionApp.sh, to increase the number of users and the duration of the test.
+
+5. You might see a error like below while load gets finished, ignore that error, as its coming due to UCP  closing the true cache driver connection.
+    ![transaction app error](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapperror.png " ")
 
 ## Learn More
 
