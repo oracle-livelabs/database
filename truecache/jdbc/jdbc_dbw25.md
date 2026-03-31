@@ -60,6 +60,9 @@ This lab assumes you have:
 
 4. You can change TransactionApp.sh, to increase the number of users and the duration of the test.
 
+5. You might see a error like below while load gets finished, ignore that error, as its coming due to UCP  closing the true cache driver connection.
+    ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapperror.png " ")
+
 ## Learn More
 
 [True Cache documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/using-oracle-true-cache-your-applications.html)
