@@ -16,27 +16,6 @@ This workshop has 4 core objectives:
 
 Users are encouraged to skip around to the lab most pertinent to them.
 
-## GREEN BUTTON USERS
-
-If you have launched this in the Live Lab Tenancy (using the Green Button), you can skip the first Lab and just follow the instructions below:
-
-1. Go to the **View Details** tab in the top left.
-
-  ![Live Lab view details](images/login-1.png "Live Lab view details")
-
-2. Scroll down to **Terraform Outputs** and click **Open Link**.
-
-  ![Live Lab Terraform Outputs](images/login-2.png "Live Lab Terraform Outputs")
-
-Note the username and password, you will need these in the next step.
-
-
-3. Enter your username and password from earlier, and **Sign In**
-
-  ![Agent Factory login](images/login-3.png "Agent Factory login")
-
-You may now skip Lab 1 and proceed to **Lab 2: Build your First Agent**.
-
 ### Prerequisites
 
 * An OCI Tenancy with the permissions to create: a compute instance, an Oracle AI Autonomous Database, a Resource Manager stack, an OCI Marketplace Application, a VCN with a public subnet.
@@ -77,4 +56,4 @@ You may now **proceed to the next lab**
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - February, 2026
+**Last Updated Date** - April, 2026
