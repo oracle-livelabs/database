@@ -18,7 +18,7 @@ This workshop has 2 core objectives:
 
 ## Task 1: Launch the Website for Agent Factory
 
-1. Go to the **View Details** tab in the top left of this page.
+1. Go to the **View Login Info** tab in the top left of this page.
 
   ![Live Lab view details](images/login-1.png "Live Lab view details")
 
