@@ -33,7 +33,7 @@ This workshop has 2 core objectives:
 
 Enter your username and password from the **Terraform Outputs** in Task 1, and **Sign In**
 
-    ![Agent Factory login](images/login-3.png "Agent Factory login")
+![Agent Factory login](images/login-3.png "Agent Factory login")
 
 You may now **proceed to the next lab**
 
