@@ -3,7 +3,7 @@
 ## Introduction
 Welcome to this 4-part workshop series. This workshop will guide you through the **Oracle AI Database Private Agent Factory (Agent Factory)**, and demonstrate how enterprise is rapidly building and deploying Generative AI Agents privately and securely.
 
-**Estimated time:** 5 minutes.
+**Estimated Workshop Time:** 60 minutes.
 
 ### Objectives
 
