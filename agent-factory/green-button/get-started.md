@@ -20,11 +20,11 @@ This workshop has 2 core objectives:
 
 1. Go to the **View Login Info** tab in the top left of this page.
 
-  ![Live Lab view details](images/login-1.png "Live Lab view details")
+    ![Live Lab view details](images/login-1.png "Live Lab view details")
 
 2. Scroll down to **Terraform Outputs** and click **Open Link**.
 
-  ![Live Lab Terraform Outputs](images/login-2.png "Live Lab Terraform Outputs")
+    ![Live Lab Terraform Outputs](images/login-2.png "Live Lab Terraform Outputs")
 
 *Note the username and password, you will need these in Task 2.*
 
@@ -33,7 +33,7 @@ This workshop has 2 core objectives:
 
 Enter your username and password from the **Terraform Outputs** in Task 1, and **Sign In**
 
-  ![Agent Factory login](images/login-3.png "Agent Factory login")
+    ![Agent Factory login](images/login-3.png "Agent Factory login")
 
 You may now **proceed to the next lab**
 
