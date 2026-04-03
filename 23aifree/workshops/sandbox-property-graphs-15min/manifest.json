@@ -11,7 +11,7 @@
         {
             "title": "Get Started",
             "description": "Verify Setup of compute instance",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs.md"
         },
         {
           "title": "Lab 1: Creating and working with Property Graphs",
