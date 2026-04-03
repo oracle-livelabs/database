@@ -14,12 +14,12 @@
       {
           "title": "Get Started",
           "description": "Sign in to Oracle Cloud",
-          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+          "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
       },
       {
           "title": "Provision an Oracle Autonomous Database (Serverless)",
           "description": "Create the necessary database for this lab",
-          "filename": "https://oracle-livelabs.github.io/common/building-blocks/blocks/adb/provision/provision-console.md"
+          "filename": "https://livelabs.oracle.com/cdn/common/building-blocks/blocks/adb/provision/provision-console.md"
       },
       {
           "title": "Lab 1: Get started with JavaScript development using a community module",
