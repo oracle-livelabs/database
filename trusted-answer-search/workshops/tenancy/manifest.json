@@ -1,0 +1,30 @@
+{
+  "workshoptitle": "Build your first AI Agent with Oracle AI Database Private Agent Factory on OCI",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction to Trusted Answer Search",
+      "filename": "../../introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started.md"
+    },
+    {
+      "title": "Lab 1: Import ONNX Emmbedding Model",
+      "filename": "../../embedding.md"
+    },
+    {
+      "title": "Lab 2: Install Trusted Answer Search",
+      "filename": "../../install.md"
+    },
+    {
+      "title": "Lab 3: Trusted Continuous Improvement of Search",
+      "filename": "../../update_search.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "../../need_help.md"
+    }
+  ]
+}
