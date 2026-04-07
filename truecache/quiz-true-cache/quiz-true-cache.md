@@ -3,6 +3,7 @@
 ## Introduction
 
 This quiz reviews the core concepts from the Improve application performance with True Cache workshop. Complete the scored questions to confirm your understanding of Oracle True Cache.
+
 Estimated Time: 10 minutes
 
 ### Objectives
