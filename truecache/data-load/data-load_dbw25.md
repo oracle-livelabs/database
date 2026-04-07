@@ -63,7 +63,7 @@ This lab assumes you have:
     </copy>
     ```
 
-5. Execute step1 as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user.
+5. Execute step1.sql as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user.
 
     ```
     <copy>
@@ -73,7 +73,7 @@ This lab assumes you have:
 
     ![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
 
-6. Exit from the sysdba session by pressing exit 
+6. Exit from the sysdba session by entering exit 
     ```
     <copy>
     exit
@@ -85,7 +85,7 @@ This lab assumes you have:
     hostname
     </copy>
     ```
-8. Logon to SALES1 service as the transaction user using the password specified in step1 in the format hostname:1521/SALES1. To view the password open the file using cat command.
+8. Login to SALES1 service as the transactions user using the password specified in step1.sql in the format hostname:1521/SALES1. To view the password open the file using cat command.
     ```
     <copy>
     cat step1.sql
@@ -93,7 +93,7 @@ This lab assumes you have:
     ```
     sqlplus transactions/<***PASSWORDFROMSTEP1****>@prod:1521/SALES1
 
-9. Execute step2 and step3 sequentially.
+9. Execute step2.sql and step3.sql sequentially.
 
      ```
     <copy>
@@ -111,7 +111,7 @@ This lab assumes you have:
 
 ## Task 2: Load Data into the Tables
 
-1. Run step4 as the transactions user.
+1. Run step4.sql as the transactions user.
 
     ```
     <copy>
@@ -120,7 +120,7 @@ This lab assumes you have:
     ```
     ![dataload step4](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep4.png " ")
 
-2. After completing step4, you should see a commit complete message.
+2. Upon completion, you should see a commit complete message.
     ![dataload commit](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadcommit.png " ")
 
 3. Exit from the sqlplus session by entering exit 
@@ -168,7 +168,7 @@ This lab assumes you have:
     ALTER SYSTEM SET DB_KEEP_CACHE_SIZE=500M scope=both;
     </copy>
     ```
-5. show the pdbs.
+5. View the existing pdbs inside True Cache by using show pdbs.
      ```
     <copy>
     show pdbs;
@@ -180,7 +180,7 @@ This lab assumes you have:
     ALTER SESSION SET CONTAINER=ORCLPDB1;
     </copy>
     ```
-7. Check if the true cache service is running.
+7. Verify whether the true cache service is running.
      ```
     <copy>
     select name from v$active_services;
