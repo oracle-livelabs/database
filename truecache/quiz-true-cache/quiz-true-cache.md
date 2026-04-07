@@ -1,4 +1,21 @@
-# Quiz: True Cache Fundamentals
+# Check Your Understanding
+
+## Introduction
+
+This quiz reviews the core concepts from the Improve application performance with True Cache workshop. Complete the scored questions to confirm your understanding of Oracle True Cache.
+Estimated Time: 10 minutes
+
+### Objectives
+
+In this lab, you will:
+
+* Review the main purpose of Oracle True Cache
+* Distinguish the roles of different containers used in this workshop
+* Identify different functionality of Oracle True Cache.
+
+### Prerequisites
+
+Complete the previous workshop labs before taking this quiz.
 
 ```quiz-config
 passing: 75
@@ -37,3 +54,8 @@ Q: How does the Oracle 23ai JDBC driver manage connections when the application 
 - The driver mirrors every statement to both databases to keep them synchronized without application input.
 > The driver abstracts the split by keeping paired physical connections and letting the app flag when a request can be routed to True Cache.
 ```
+## Acknowledgements
+
+**Authors** Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management
+
+**Last Updated Date** - Sambit Panda, April, 2026
