@@ -17,19 +17,19 @@ Oracle Trusted Answer Search ships two APEX applications: an **Admin App** for m
 3. Locate **Oracle APEX** and click **Copy** next to the **Public access URL**.
 4. Paste the URL into your browser to launch the APEX login screen.
 
-![OCI APEX URL](Apex-from-oci.png)
+![OCI APEX URL](images/Apex-from-oci.png)
 *This tab in the OCI console provides the direct access link to your database's low-code development environment.*
 
 ## Task 2: Create the TASADMIN Workspace
 1. Sign in to the **INTERNAL** workspace using your database `ADMIN` credentials.
 2. From the **Administration Services** dashboard, click the green **Create Workspace** button.
 
-![Administration Services](first-apex-screen.png)
+![Administration Services](images/first-apex-screen.png)
 *The landing page for APEX Instance Administration.*
 
 3. Choose the **Existing Schema** option to associate the workspace with your pre-provisioned TASADMIN backend schema.
 
-![Create Workspace Choice](create-workspace-existing-schema.png)
+![Create Workspace Choice](images/create-workspace-existing-schema.png)
 *Selecting 'Existing Schema' allows applications in your workspace to access data stored within that schema.*
 
 4. **Configure the workspace details**:
@@ -39,18 +39,18 @@ Oracle Trusted Answer Search ships two APEX applications: an **Admin App** for m
     * **Workspace Password:** [Provide a secure password]
 5. Click **Create Workspace**.
 
-![Workspace Configuration](configure-workspace.png)
+![Workspace Configuration](images/configure-workspace.png)
 *Linking the workspace to the TASADMIN database user.*
 
 ## Task 3: Sign In to the New Workspace
 1. **Sign Out** of the INTERNAL workspace by clicking the profile icon in the top-right and selecting **Sign out**.
 
-![Sign Out](sign-out.png)
+![Sign Out](images/sign-out.png)
 *Ensure you exit the internal administration environment before signing in to your app workspace.*
 
 2. On the login screen, select or enter the **TASADMIN** workspace and sign in with the credentials you just created.
 
-![Sign In TASADMIN](sign-in-TAS-workspace.png)
+![Sign In TASADMIN](images/sign-in-TAS-workspace.png)
 *Sign in to the specific workspace where the TAS applications will be hosted.*
 
 ## Task 4: Import the Admin App
@@ -58,17 +58,17 @@ The Admin App is the primary tool for administrators to manage search spaces and
 
 1. From the dashboard, navigate to the **App Builder**.
 
-![Navigate to App Builder](navigate-to-app-builder.png)
+![Navigate to App Builder](images/navigate-to-app-builder.png)
 *The App Builder is where you create and import APEX applications.*
 
 2. Click the **Import** button.
 
-![Import Choice](import-app.png)
+![Import Choice](images/import-app.png)
 *Select the Import option to load the TAS application packages.*
 
 3. Upload the `admin.zip` file. Ensure the **File Character Set** is set to **Unicode UTF-8**.
 
-![Upload Admin Zip](import-admin-app.png)
+![Upload Admin Zip](images/import-admin-app.png)
 *Uploading the Admin App export file.*
 
 4. On the **Install Application** page:
@@ -77,7 +77,7 @@ The Admin App is the primary tool for administrators to manage search spaces and
     * Ensure **Build Status** is set to **Run Application Only**.
 5. Click **Install Application**.
 
-![Configure Admin App](configure-admin-app.png)
+![Configure Admin App](images/configure-admin-app.png)
 *Installation parameters for the Admin App.*
 
 ## Task 5: Import the Portal App
@@ -86,15 +86,13 @@ The Portal App provides a ready-to-use search interface for end-users.
 1. Repeat the import steps from Task 4 using the `portal.zip` file.
 2. Ensure it is installed into the same **TASADMIN** workspace and parsing schema as the Admin app.
 
-![Configure Portal App](configure-portal-app.png)
+![Configure Portal App](images/configure-portal-app.png)
 *Installation parameters for the Portal App.*
 
 ## Task 6: Launch the Admin App
 1. Once installation is complete, click the **Run Application** button.
 2. Sign in using the **TASADMIN** username and the **TASADMIN_PASSWORD** you defined in your `install_backend.conf` file during the backend installation.
 
-![Admin Dashboard](Trusted%20Answer%20Search%20v2.pdf_page_10.png)
-*The Admin App interface allows you to manage search targets and sample queries.*
 
 You have successfully installed the Trusted Answer Search applications! You may now **proceed to the next lab** to begin curating your search mapping.
 
