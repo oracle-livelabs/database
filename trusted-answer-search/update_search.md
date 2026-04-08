@@ -1,61 +1,195 @@
-# Lab 3: Trusted Continuous Improvement of Search
+# **Lab 3: Trusted Continuous Improvement of Search**
 
 ## Introduction
-Trusted Answer Search is a dynamic system designed to improve continuously through **human oversight** and **structured feedback loops**., Unlike generic chatbots, this system allows application experts to review match outcomes and provide feedback that deterministically refines how the AI ranks relevant reports., This lab demonstrates how to manage your search domain and use the **Query Tester** to improve search accuracy.
 
-**Estimated time:** 15 minutes.
+Trusted Answer Search is designed to improve continuously through **human oversight and structured feedback loops**. Unlike traditional AI systems that require retraining or prompt engineering, Trusted Answer Search allows application experts to directly control and refine how natural-language queries map to application outcomes.
+
+In this lab, you will work with real **Wikimedia analytics queries** and actively shape how the system behaves—fixing incorrect rankings, teaching new language patterns, and extending the search experience.
+
+**Estimated time:** 25 minutes.
 
 ### Objectives
-*   Navigate to a Search Space and manage its versions.
-*   Bulk-import search targets and parameter value sets via JSON.
-*   Test natural-language queries and use user feedback to refine result rankings.
+
+* Refine search results using structured feedback.
+* Add new descriptions to improve matching accuracy.
+* Introduce new search targets dynamically.
+* Understand how changes impact system behavior.
 
 ---
 
 ## Task 1: Navigate to the Search Space
-To begin managing your search experience, you must first select the correct logical domain, or **Search Space**, in the administrative interface.,
 
-1.  In the **Search Admin** application sidebar, click on **Search Spaces**.
-2.  Select your desired search space from the list (e.g., `trusted_search`).
-3.  The **Search Space Versions** screen will appear. This screen allows you to manage different iterations of your search domain, enabling you to work on **Draft** versions and perform regression analysis before promoting them to production.,
+1. In the **Search Admin** application sidebar, click on **Search Spaces**.
+2. Select your search space (e.g., `trusted_search`).
+3. Ensure you are working in a **Draft version**.
 
 ![Search Space Versions Screen](images/navigate-to-search-space.png)
-* The **Search Space Versions** screen showing a draft version of the `trusted_search` space.*
 
 ---
 
 ## Task 2: Upload Search Targets and Value Sets
-Instead of manually creating dozens of entries, you can use the **Import** feature to bulk-load your search metadata.
 
-1.  On the **Search Space Versions** screen, click the **Import** button.,
-2.  In the **Import** modal, ensure the correct **Search Space Version** is selected.
-3.  Upload your **Search Targets** file (e.g., `search_target.json`). These targets represent the vetted reports and actions the system will link to.,
-4.  Upload your **Target Value Sets** file (e.g., `target_value_set.json`). These define the parameter classes, such as dates or categories, that the system should extract from user queries.,,
-5.  Click **Import** to populate your search space.
+1. Click **Import**.
+2. Upload:
+
+   * `search_target.json`
+   * `target_value_set.json`
+3. Click **Import**.
+
+These files define:
+
+* The available reports (e.g., page views, edits, editors)
+* The parameter vocabulary (e.g., *last 2 years*, *monthly*, *French Wiktionary*)
+
+These value mappings are what allow the system to interpret phrases like
+“last 2 years” → `period = 2-year` 
 
 ![Import Search Metadata](images/upload-search-targets.png)
-* The **Import** modal used to populate a search space with targets and value sets via JSON files.*
 
 ---
 
-## Task 3: Run and Refine a Search Query
-The **Query Tester** allows you to simulate the user experience and provide the "human-in-the-loop" feedback necessary for continuous improvement.,
+## Task 3: Run an Initial Query
 
-1.  Navigate to the **Query Tester** in the sidebar.
-2.  **Run a search query:** Enter a natural-language question, such as: `Show total page views for all Wikimedia projects by month over the last 2 years.`
-3.  **Review the initial ranking:** The system uses **AI Vector Search** to rank the most relevant targets., In this initial run, **"Total Page Views - All Projects"** appears as **Rank #1**.
+1. Navigate to **Query Tester**.
+2. Run:
+
+   ```
+   Show total page views for all Wikimedia projects by month over the last 2 years
+   ```
+
+This is one of the predefined test queries 
+
+### Observe:
+
+* Ranked results
+* Extracted parameters:
+
+  * `period = 2-year`
+  * `frequency = monthly`
+
+The correct answer should be:
+**Total Page Views - All Projects** 
+
+However, you may initially see a different result ranked #1 (as shown in the lab screenshot).
 
 ![Initial Query Results](images/initial-ranking.png)
-* The **Query Tester** showing initial rankings and extracted parameters (e.g., "monthly" and "2-year") for the Wikimedia query.*
 
-4.  **Provide feedback:** If you determine that a different report is more appropriate for this specific phrasing, you can use feedback to demote the current top answer. Click the **Downvote** button on the **Rank #1** result.,
-5.  **Re-run the query:** Execute the same search query again.
-6.  **Verify the improvement:** Observe that the rankings have updated based on your feedback. The downvoted result has moved lower in the order, and a more relevant target, such as **"New Pages Creation Trend - All Projects"**, has now moved to **Rank #1**.
+---
+
+## Task 4: Fix an Incorrect Result in Real Time
+
+1. Identify the **Rank #1 result** (e.g., *New Pages Creation Trend - All Projects*).
+2. Click **Downvote**.
+3. Re-run the same query.
+
+### Observe:
+
+* The correct result (**Total Page Views - All Projects**) moves to Rank #1
+* The incorrect result is demoted
 
 ![Updated Ranking results](images/updated-ranking.png)
-* The **Query Tester** showing updated rankings after the initial Rank #1 result was downvoted, demonstrating deterministic search improvement.*
 
-You have successfully completed the **Trusted Answer Search** Live Lab! You now have the skills to deploy, curate, and continuously improve a secure, natural-language search interface.
+You just corrected the system **instantly**.
+No retraining, no redeployment, no prompt tuning.
+
+---
+
+## Task 5: Teach the System a New Phrase
+
+Now you will expand the system’s understanding.
+
+1. Navigate to **Search Targets**.
+
+2. Open:
+
+   ```
+   Total Page Views - All Projects
+   ```
+
+3. Add a new description:
+
+   ```
+   Wikimedia traffic trend over time
+   ```
+
+4. Save your changes.
+
+5. Go back to **Query Tester** and run:
+
+   ```
+   Wikimedia traffic trend
+   ```
+
+### Observe:
+
+* The system now maps this new phrasing correctly
+
+You just extended the system’s language understanding using **curation—not training**
+
+---
+
+## Task 6: Add a New Search Target
+
+Now you will introduce new functionality.
+
+1. Navigate to **Search Targets**
+
+2. Click **Create**
+
+3. Define a new target:
+
+   * **Name:** Top Viewed Articles - All Projects
+   * Add descriptions:
+
+     ```
+     most popular pages on Wikimedia
+     top viewed Wikimedia pages
+     ```
+
+4. Save
+
+5. Test:
+
+   ```
+   What are the most popular pages on Wikimedia?
+   ```
+
+### Observe:
+
+* The system routes to your new report
+
+You have **added a new capability instantly**
+
+---
+
+## Task 7: Understand Impact of Changes (Regression Awareness)
+
+1. Modify an existing description (make it more generic, e.g. “page views trend”).
+2. Re-run:
+
+   ```
+   Show total page views for all Wikimedia projects over the last 2 years
+   ```
+
+### Observe:
+
+* Rankings may shift depending on similarity
+
+This is why Trusted Answer Search provides:
+
+* Draft versions
+* Controlled promotion
+* Visibility into changes
+
+---
+
+You have now experienced how Trusted Answer Search enables:
+
+* Deterministic results
+* Real-time correction
+* Controlled evolution
+
+You may now **proceed to the next lab**.
 
 ---
 
