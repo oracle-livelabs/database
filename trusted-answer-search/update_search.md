@@ -19,7 +19,7 @@ To begin managing your search experience, you must first select the correct logi
 2.  Select your desired search space from the list (e.g., `trusted_search`).
 3.  The **Search Space Versions** screen will appear. This screen allows you to manage different iterations of your search domain, enabling you to work on **Draft** versions and perform regression analysis before promoting them to production.,
 
-![Search Space Versions Screen](navigate-to-search-space.png)
+![Search Space Versions Screen](images/navigate-to-search-space.png)
 * The **Search Space Versions** screen showing a draft version of the `trusted_search` space.*
 
 ---
@@ -33,7 +33,7 @@ Instead of manually creating dozens of entries, you can use the **Import** featu
 4.  Upload your **Target Value Sets** file (e.g., `target_value_set.json`). These define the parameter classes, such as dates or categories, that the system should extract from user queries.,,
 5.  Click **Import** to populate your search space.
 
-![Import Search Metadata](upload-search-targets.png)
+![Import Search Metadata](images/upload-search-targets.png)
 * The **Import** modal used to populate a search space with targets and value sets via JSON files.*
 
 ---
@@ -45,14 +45,14 @@ The **Query Tester** allows you to simulate the user experience and provide the 
 2.  **Run a search query:** Enter a natural-language question, such as: `Show total page views for all Wikimedia projects by month over the last 2 years.`
 3.  **Review the initial ranking:** The system uses **AI Vector Search** to rank the most relevant targets., In this initial run, **"Total Page Views - All Projects"** appears as **Rank #1**.
 
-![Initial Query Results](initial-ranking.png)
+![Initial Query Results](images/initial-ranking.png)
 * The **Query Tester** showing initial rankings and extracted parameters (e.g., "monthly" and "2-year") for the Wikimedia query.*
 
 4.  **Provide feedback:** If you determine that a different report is more appropriate for this specific phrasing, you can use feedback to demote the current top answer. Click the **Downvote** button on the **Rank #1** result.,
 5.  **Re-run the query:** Execute the same search query again.
 6.  **Verify the improvement:** Observe that the rankings have updated based on your feedback. The downvoted result has moved lower in the order, and a more relevant target, such as **"New Pages Creation Trend - All Projects"**, has now moved to **Rank #1**.
 
-![Updated Ranking results](updated-ranking.png)
+![Updated Ranking results](images/updated-ranking.png)
 * The **Query Tester** showing updated rankings after the initial Rank #1 result was downvoted, demonstrating deterministic search improvement.*
 
 You have successfully completed the **Trusted Answer Search** Live Lab! You now have the skills to deploy, curate, and continuously improve a secure, natural-language search interface.
