@@ -35,7 +35,7 @@ This VM will be used for both the ONNX model conversion and running the backend 
 3. Add your SSH public key so you can connect to the VM.
 4. Once running, connect via SSH:
    ```sh
-   ssh opc@<public-ip>
+   ssh opc@PUBLIC-IP
    ```
 
 ---
@@ -145,12 +145,12 @@ oci os object put \
 
 The URL will look like:
 ```
-https://objectstorage.<region>.oraclecloud.com/p/<token>/n/<namespace>/b/TAS-models/o/multilingual-e5-base.onnx
+https://objectstorage.{REGION}.oraclecloud.com/p/{PATH}/n/{NAMESPACE}/b/{BUCKET}/o/multilingual-e5-base.onnx
 ```
 
 Verify the URL is reachable from your VM:
 ```sh
-curl -I "<your-PAR-URL>"
+curl -I "{your-PAR-URL}"
 # Expect: HTTP/1.1 200 OK
 ```
 
@@ -183,14 +183,14 @@ sqlplus -version
 From your local machine:
 
 ```sh
-scp -i ~/.ssh/your-private-key Wallet_<db_name>.zip opc@<vm-ip>:~/
+scp -i ~/.ssh/your-private-key Wallet_{db_name}.zip opc@{vm-ip}:~/
 ```
 
 ### 6.3 Unzip and configure the wallet
 
 ```sh
 mkdir -p ~/adb-wallet
-unzip Wallet_<db_name>.zip -d ~/adb-wallet/
+unzip Wallet_{db_name}.zip -d ~/adb-wallet/
 ```
 
 Edit `~/adb-wallet/sqlnet.ora` and replace the `DIRECTORY` value with the
@@ -211,7 +211,7 @@ echo 'export TNS_ADMIN=/home/opc/adb-wallet/' >> ~/.bashrc
 ### 6.5 Verify connectivity
 
 ```sh
-sqlplus ADMIN/<your-admin-password>@<tns-alias>
+sqlplus ADMIN/{your-admin-password}@{tns-alias}
 # e.g. sqlplus ADMIN/mypassword@tasdb_high
 ```
 
@@ -231,14 +231,14 @@ Open it and set the following values:
 
 ```
 # Mandatory - all setups
-DB_CONNECT_STRING=<your-tns-alias>
+DB_CONNECT_STRING={your-tns-alias}
 DB_USER=ADMIN
-DB_PASSWORD=<your-admin-password>
-TASADMIN_PASSWORD=<choose-a-password-for-the-admin-app>
+DB_PASSWORD={your-admin-password}
+TASADMIN_PASSWORD={choose-a-password-for-the-admin-app}
 MODEL_FILE_NAME=multilingual-e5-base.onnx
 
 # Mandatory - ADB-S only
-MODEL_URI=<your-PAR-URL>
+MODEL_URI={your-PAR-URL}
 ```
 
 Leave `CREDENTIAL_NAME` commented out — it is not needed when using a PAR URL,
