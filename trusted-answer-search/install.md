@@ -17,7 +17,7 @@ Oracle Trusted Answer Search ships two APEX applications: an **Admin App** for m
 3. Locate **Oracle APEX** and click **Copy** next to the **Public access URL**.
 4. Paste the URL into your browser to launch the APEX login screen.
 
-![OCI APEX URL](images/Apex-from-oci.png)
+![OCI APEX URL](images/apex-from-oci.png)
 *This tab in the OCI console provides the direct access link to your database's low-code development environment.*
 
 ## Task 2: Create the TASADMIN Workspace
@@ -50,7 +50,7 @@ Oracle Trusted Answer Search ships two APEX applications: an **Admin App** for m
 
 2. On the login screen, select or enter the **TASADMIN** workspace and sign in with the credentials you just created.
 
-![Sign In TASADMIN](images/sign-in-TAS-workspace.png)
+![Sign In TASADMIN](images/sign-in-tas-workspace.png)
 *Sign in to the specific workspace where the TAS applications will be hosted.*
 
 ## Task 4: Import the Admin App
