@@ -26,7 +26,7 @@ This lab assumes you have:
     - Lab: Environment Setup((*Free-tier* and *Paid Tenants* only))
 
 ## Task 1: Validate That Required Processes Are Up and Running.
-1.  Access your remote desktop session and validate your environment before you start the subsequent labs. The following processes should be up and running:
+1. Access your remote desktop session and validate your environment before you start the subsequent labs. The following processes should be up and running:
 
     - Oracle primary database container
     - Oracle True Cache  container
