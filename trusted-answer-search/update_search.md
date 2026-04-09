@@ -20,8 +20,8 @@ In this lab, you will work with real **Wikimedia analytics queries** and activel
 ## Task 1: Navigate to the Search Space
 
 1. In the **Search Admin** application sidebar, click on **Search Spaces**.
-2. Select your search space (e.g., `trusted_search`).
-3. Ensure you are working in a **Draft version**.
+2. Click **Create Search Space**, and give it a name (e.g., `trusted_search`).
+3. Click **Create**.
 
 ![Search Space Versions Screen](images/navigate-to-search-space.png)
 
@@ -29,12 +29,13 @@ In this lab, you will work with real **Wikimedia analytics queries** and activel
 
 ## Task 2: Upload Search Targets and Value Sets
 
-1. Click **Import**.
-2. Upload:
-
+1. Click on your newly created search space. This will take you to the **Search Space Versions** page.
+2. Click **Import**.
+3. Upload:
    * `search_target.json`
    * `target_value_set.json`
-3. Click **Import**.
+  *Note: These can be found in the trusted_answer_search zip in apex_ship/samples/wikimedia*
+4. Click **Import**.
 
 These files define:
 
@@ -54,7 +55,7 @@ These value mappings are what allow the system to interpret phrases like
 2. Run:
 
    ```
-   Show total page views for all Wikimedia projects by month over the last 2 years
+   Show total page views for all Wikimedia projects by month over the last 2 years.
    ```
 
 This is one of the predefined test queries 
@@ -68,9 +69,7 @@ This is one of the predefined test queries
   * `frequency = monthly`
 
 The correct answer should be:
-**Total Page Views - All Projects** 
-
-However, you may initially see a different result ranked #1 (as shown in the lab screenshot).
+**Total Page Views - Wikidata** 
 
 ![Initial Query Results](images/initial-ranking.png)
 
