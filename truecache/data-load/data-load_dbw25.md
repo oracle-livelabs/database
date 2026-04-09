@@ -63,7 +63,7 @@ This lab assumes you have:
     </copy>
     ```
 
-5. Execute step1.sql as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user.
+5. Execute step1.sql as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user. if you see a object exists error like below, please ignore that and continue.
 
     ```
     <copy>
@@ -72,6 +72,8 @@ This lab assumes you have:
     ```
 
     ![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
+
+    ![objectexistserror](https://oracle-livelabs.github.io/database/truecache/data-load/images/objectexistserror.png " ")
 
 6. Exit from the sysdba session by entering exit 
     ```
