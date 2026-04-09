@@ -13,6 +13,7 @@ Estimated Lab Time: 10 Minutes
 ### Objectives
 
 In this lab you will:
+
 * Access the Oracle Cloud Console.  
 * Create an Oracle NoSQL Database Cloud Service table with 50 rows of user data.
 * Create an OCI Object Storage bucket.
@@ -100,5 +101,6 @@ You may proceed to the next lab.
 
 
 ## Acknowledgements
+
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, August 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, April 2026

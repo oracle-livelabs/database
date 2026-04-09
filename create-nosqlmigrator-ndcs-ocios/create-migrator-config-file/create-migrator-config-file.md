@@ -11,6 +11,7 @@ Estimated Lab Time: 15 minutes
 ### Objectives
 
 In this lab you will:
+
 * Identify the source and sink for migrating data.
 * Create a migrator configuration file.
 
@@ -122,7 +123,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
 2. Navigate to the directory where you extracted the NoSQL Database Migrator utility. See **Lab - Download Migrator Utility and Upload to Cloud Shell**.
 
     ```
-    <copy>cd V1048015-01/nosql-migrator-1.7.0</copy>
+    <copy>cd V1053573-01/nosql-migrator-1.8.0</copy>
     ```
 
 3. Create the configuration file template in a notepad as follows. Update the source and sink parameters with the values that you saved in Task 1 and Task 2 of this lab. 
@@ -154,7 +155,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
         "useDelegationToken" : true
       },
     "abortOnError" : true,
-    "migratorVersion" : "1.7.0"
+    "migratorVersion" : "1.8.0"
     }
     </copy>
     ```
@@ -163,7 +164,7 @@ To configure the Migrator utility to copy data into the Object Storage bucket, y
 
   *Note: The Oracle NoSQL Migrator utility also provides an option to create the configuration file interactively when you run the utility from the Cloud Shell's CLI.*  
 
-4. Use the vi editor to create the **migrator-config.json** configuration file. 
+4. Use the vi editor to create the **migrator-config.json** configuration file.
 
   Copy the configuration file template from the notepad to the configuration file and save it. 
 
@@ -181,5 +182,6 @@ You may proceed to the next lab.
 * **[Sink Configuration Templates](https://docs.oracle.com/en/cloud/paas/nosql-cloud/onscl/index.html#ONSCL-GUID-832FE48D-2A90-4DCA-95A6-40687CA7F39B)**
 
 ## Acknowledgements
+
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, December 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, April 2026
