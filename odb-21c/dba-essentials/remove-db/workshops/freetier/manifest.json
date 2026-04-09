@@ -10,7 +10,7 @@
     {
       "title": "Get started",
       "description": "Get a Free Trial",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
     },
     {
       "title": "Lab 1: Prepare setup",
@@ -22,7 +22,7 @@
       "title": "Lab 2: Setup compute instance",
       "description": "How to provision the workshop environment and connect to it",
       "publisheddate": "08/31/2021",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/setup-compute-generic/setup-compute-novnc.md"
     },
     {
       "title": "Lab 3: Deinstall Oracle Database",
@@ -32,7 +32,7 @@
     {
       "title": "Need help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
     }
   ]
 }

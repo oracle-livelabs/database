@@ -10,7 +10,7 @@
     {
       "title": "Lab 1: Setup Kubernetes",
       "description": "Labs that follow the introduction are numbered, starting with Lab 1",
-      "filename": "https://oracle-livelabs.github.io/weblogic/weblogic-kubernetes/setup-oke-ocishell/setup-oke-ocishell.md"
+      "filename": "https://livelabs.oracle.com/cdn/weblogic/weblogic-kubernetes/setup-oke-ocishell/setup-oke-ocishell.md"
     },
     {
       "title": "Lab 2: Setup MySQL",
@@ -27,7 +27,7 @@
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }
