@@ -19,7 +19,7 @@ In this lab you will:
 
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account.
 * OCI Object Storage bucket in your tenancy with appropriate write privileges. For details, see the Livelabs sprint **[How can I create a bucket in Oracle Cloud? .](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=3169&clear=RR,180&session=100208132480736)**
-* Download the **[NDCSupload.json]()** file to your machine.
+* Download the **[NDCSupload.json](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles%2FNDCSupload.json)** file to your machine.
 
 ## Task 1: Upload Data to OCI Object Storage Bucket
 
