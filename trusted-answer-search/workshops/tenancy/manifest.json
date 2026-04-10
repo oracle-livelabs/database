@@ -1,0 +1,34 @@
+{
+  "workshoptitle": "Make Search Trusted, Faster, and Cheaper on your Application with Trusted Answer Search",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction to Trusted Answer Search",
+      "filename": "../../introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started.md"
+    },
+    {
+      "title": "Lab 1: Import ONNX Embedding Model",
+      "filename": "../../embedding.md"
+    },
+    {
+      "title": "Lab 2: Install Trusted Answer Search",
+      "filename": "../../install.md"
+    },
+    {
+      "title": "Lab 3: Trusted Continuous Improvement of Search",
+      "filename": "../../update_search.md"
+    },
+    {
+      "title": "Lab 4: Advanced Capabilities",
+      "filename": "../../advanced.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "../../need_help.md"
+    }
+  ]
+}
