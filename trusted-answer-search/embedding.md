@@ -34,9 +34,10 @@ This VM will be used for both the ONNX model conversion and running the backend 
 2. Select **Oracle Linux 9** as the image and choose a shape with at least 16 GB RAM (e.g. VM.Standard.E4.Flex, 1 OCPU).
 3. Add your SSH public key so you can connect to the VM.
 4. Once running, connect via SSH:
-   ```sh
-   ssh opc@PUBLIC-IP
-   ```
+
+    ```sh
+    ssh opc@PUBLIC-IP
+    ```
 
 ---
 
