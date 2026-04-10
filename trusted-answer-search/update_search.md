@@ -32,10 +32,11 @@ In this lab, you will work with real **Wikimedia analytics queries** and activel
 1. Click on your newly created search space. This will take you to the **Search Space Versions** page.
 2. Click **Import**.
 3. Upload:
-   * `search_target.json`
-   * `target_value_set.json`
-  *Note: These can be found in the trusted_answer_search zip in apex_ship/samples/wikimedia*
-4. Click **Import**.
+
+    * `search_target.json`
+    * `target_value_set.json`
+    *Note: These can be found in the trusted_answer_search zip in apex_ship/samples/wikimedia*
+5. Click **Import**.
 
 These files define:
 
@@ -54,9 +55,9 @@ These value mappings are what allow the system to interpret phrases like
 1. Navigate to **Query Tester**.
 2. Run:
 
-   ```
-   Total page views MoM all projects
-   ```
+    ```
+    Total page views MoM all projects
+    ```
 
 This is how an end user may search for the total number of page views, broken down by month, for all projects.
 
@@ -102,23 +103,23 @@ Now you will expand the system’s understanding.
 
 2. Search for and open:
 
-   ```
-   Total Page Views - All Projects
-   ```
+    ```
+    Total Page Views - All Projects
+    ```
 
 3. Add a new description:
 
-   ```
-   Wikimedia traffic trend over time
-   ```
+    ```
+    Wikimedia traffic trend over time
+    ```
 
 4. Save your changes.
 
 5. Go back to **Query Tester** and run:
 
-   ```
-   Wikimedia traffic trend
-   ```
+    ```
+    Wikimedia traffic trend
+    ```
 
 ### Observe:
 
@@ -141,19 +142,19 @@ Now you will introduce new functionality.
    * **Name:** PLOT
    * Add descriptions:
 
-     ```
-     The type of chart that should be rendered: table, bar, map, line
-     ```
+    ```
+    The type of chart that should be rendered: table, bar, map, line
+    ```
    * For each of these 3 options, type the name into **Value**, then click **+Add**:
 
-     ```
-     table
-     bar
-     line
-     ```
+    ```
+    table
+    bar
+    line
+    ```
 
-  * Than add a 4th value ``map`` , with the **Synonyms** ``globe, choropleth``
-  * Set the **Default Value** to ``table``.
+  * Than add a 4th value *map* , with the **Synonyms** *globe, choropleth*
+  * Set the **Default Value** to *table*.
 
 4. Save
 
@@ -169,9 +170,9 @@ Now you will introduce new functionality.
 
 9. Test. Go to **Query Tester** and run:
 
-   ```
-   page views by country
-   ```
+    ```
+    page views by country
+    ```
 
 10. Note that a new **Target Input** appears: ``Plot: table``
 
@@ -196,9 +197,9 @@ You have **added a new capability instantly**
 1. Modify an existing description (make it more generic, e.g. “page views trend”).
 2. Re-run:
 
-   ```
-   Show total page views for all Wikimedia projects over the last 2 years
-   ```
+    ```
+    Show total page views for all Wikimedia projects over the last 2 years
+    ```
 
 ### Observe:
 
