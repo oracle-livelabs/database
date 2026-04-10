@@ -55,21 +55,22 @@ These value mappings are what allow the system to interpret phrases like
 2. Run:
 
    ```
-   Show total page views for all Wikimedia projects by month over the last 2 years.
+   Total page views MoM all projects
    ```
 
-This is one of the predefined test queries 
+This is how an end user may search for the total number of page views, broken down by month, for all projects.
 
 ### Observe:
 
 * Ranked results
 * Extracted parameters:
 
-  * `period = 2-year`
   * `frequency = monthly`
 
 The correct answer should be:
-**Total Page Views - Wikidata** 
+**Total Page Views - All Projects**
+
+However, instead our desired result is second, and the top result it **Top Viewed Articles - All Projects**. 
 
 ![Initial Query Results](images/initial-ranking.png)
 
@@ -77,7 +78,7 @@ The correct answer should be:
 
 ## Task 4: Fix an Incorrect Result in Real Time
 
-1. Identify the **Rank #1 result** (e.g., *New Pages Creation Trend - All Projects*).
+1. Identify the **Rank #1 result** (e.g., *Top Viewed Articles - All Projects*).
 2. Click **Downvote**.
 3. Re-run the same query.
 
@@ -99,7 +100,7 @@ Now you will expand the system’s understanding.
 
 1. Navigate to **Search Targets**.
 
-2. Open:
+2. Search for and open:
 
    ```
    Total Page Views - All Projects
@@ -127,31 +128,60 @@ You just extended the system’s language understanding using **curation—not t
 
 ---
 
-## Task 6: Add a New Search Target
+## Task 6: Add a New Target Value Set
 
 Now you will introduce new functionality.
 
-1. Navigate to **Search Targets**
+1. Navigate to **Target Value Sets**
 
-2. Click **Create**
+2. Click **Create Target Value Set**
 
 3. Define a new target:
 
-   * **Name:** Top Viewed Articles - All Projects
+   * **Name:** PLOT
    * Add descriptions:
 
      ```
-     most popular pages on Wikimedia
-     top viewed Wikimedia pages
+     The type of chart that should be rendered: table, bar, map, line
      ```
+   * For each of these 3 options, type the name into **Value**, then click **+Add**:
+
+     ```
+     table
+     bar
+     line
+     ```
+
+  * Than add a 4th value ``map`` , with the **Synonyms** ``globe, choropleth``
+  * Set the **Default Value** to ``table``.
 
 4. Save
 
-5. Test:
+5. Go to **Search Targets**, search for **Page Views by Country Map - Wikidata**, then click into it.
+
+7. Click **Edit Target Action**, and replace the URL/SQL with
+
+    ```
+    https://stats.wikimedia.org/#/wikidata.org/reading/page-views-by-country/normal|:plot|last-month|~total|monthly
+    ```
+
+8. Save
+
+9. Test. Go to **Query Tester** and run:
 
    ```
-   What are the most popular pages on Wikimedia?
+   page views by country
    ```
+
+10. Note that a new **Target Input** appears: ``Plot: table``
+
+11. Now search:
+
+    ```
+    page views by country map
+    ```
+
+12. Notice that the new Target Input is now ``Plot: map``
 
 ### Observe:
 
