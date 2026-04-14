@@ -21,7 +21,7 @@ Before you start the labs, open the app and click through the left navigation:
 
 Use this screen capture as a guide:
 
-![Social Commerce application](images/social-commerce-app.png)
+![Social Commerce Application](images/social-commerce-app.png)
 
 You can see these flows in action (based on the app source in `frontend/src/pages`):
 - **Schema & Data**: interactive table model across relational, JSON, graph, vector, spatial, AI, and security tags.
@@ -33,7 +33,7 @@ You can see these flows in action (based on the app source in `frontend/src/page
 - **Ask Your Data**: NL-to-SQL flow with generated SQL inspection.
 - **Agent Console**: multi-agent actions, tool traces, and audit/event views.
 
-Mapped tab-to-lab version:
+Note that this lab uses FreeSQL so 2 of the items from the Social Commerce Application are ommited (Vector Search and OML). Here are the Labs mapped tab-to-lab version:
 
 ![Social Commerce app tabs mapped to workshop labs](images/social-commerce-app-lab-map.png)
 
@@ -46,7 +46,7 @@ Mapped tab-to-lab version:
 5. Lab 5: Orders
 6. Lab 6: Ask Your Data
 7. Lab 7: Agent Console
-8. Lab 8: Cleanup
+8. Lab 8: Cleanup - remove tables items from running this lab.
 
 > Note: Social Vector Trends and OML Analytics are intentionally omitted in this FreeSQL-only path.
 
