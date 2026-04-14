@@ -1,4 +1,4 @@
-# Lab 5: Fulfillment Map
+# Lab 4: Fulfillment Map
 
 ## Introduction
 
@@ -14,6 +14,8 @@ In this lab, you will:
 - Interpret routing tradeoffs between speed and availability.
 
 ## Task 1: Rank Inventory-Ready Centers
+
+This task identifies which active centers can fulfill demand from current stock. It is important because fulfillment decisions must account for real inventory, not just geography.
 
 1. Run this SQL.
 
@@ -47,6 +49,8 @@ In this lab, you will:
 2. Identify which center has the highest available_units.
 
 ## Task 2: Build a Distance-Aware Candidate List
+
+Here you layer spatial distance onto fulfillment options to create routing candidates. This mirrors the demo's operational tradeoff between speed and availability.
 
 1. Run this SQL.
 
@@ -83,6 +87,8 @@ FETCH FIRST 25 ROWS ONLY;
 2. Record the nearest center for at least two customers.
 
 ## Task 3: Check Your Understanding
+
+Use this checkpoint to validate your routing logic. Strong fulfillment decisions come from combining inventory and distance, not optimizing either in isolation.
 
 ```quiz
 Q: Why combine distance and inventory in fulfillment SQL?

@@ -15,6 +15,8 @@ In this lab, you will:
 
 ## Task 1: Verify Lab 1 Prerequisites
 
+This prerequisite check confirms vector foundations are ready before indexing and retrieval. It is important because vector SQL fails quickly when the model or embedding table is missing.
+
 1. Run this SQL to confirm the embedding model and `PRODUCT_EMBEDDINGS` table were created in Lab 1.
 
     ```
@@ -45,6 +47,8 @@ In this lab, you will:
 2. If either row returns `0`, rerun Lab 1 Task 1 and Lab 1 Task 2, then return here.
 
 ## Task 2: Create the Vector Index Used by This Workshop
+
+This task creates the exact vector index used in this workshop path. The index is critical for fast nearest-neighbor lookups that mirror the demo's semantic ranking behavior.
 
 1. Run this SQL.
 
@@ -79,6 +83,8 @@ In this lab, you will:
 
 ## Task 3: Run Semantic Similarity Retrieval
 
+Now you run the retrieval pattern that powers prompt-compatible semantic discovery. This step connects SQL output to what users experience when searching for conceptually similar products.
+
 1. Run this SQL.
 
     ```
@@ -111,6 +117,8 @@ In this lab, you will:
 2. Record the top 3 matches and explain why they fit the query intent.
 
 ## Task 4: Check Your Understanding
+
+Use this checkpoint to confirm the vector execution order is clear. Getting model, embeddings, and indexing sequence right is essential in production workflows.
 
 ```quiz
 Q: Why must `ALL_MINILM_L12_V2` exist before creating `PRODUCT_EMBEDDINGS`?

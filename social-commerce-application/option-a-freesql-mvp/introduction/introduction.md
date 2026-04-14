@@ -4,13 +4,13 @@
 
 This workshop maps directly to the TIM app database workflow and uses FreeSQL SQL prompt capabilities only.
 
-Estimated Workshop Time: 88 minutes
+Estimated Workshop Time: 79 minutes
 
 ### Objectives
 
 In this workshop, you will:
 - Create and seed a social-commerce schema used by the application.
-- Run KPI, vector, graph-style, spatial, JSON, and agent-audit SQL patterns.
+- Run KPI, graph-style, spatial, JSON, and agent-audit SQL patterns.
 - Practice prompt-compatible SQL workflows that mirror real app operations.
 
 ## Walk Through the Application First
@@ -26,7 +26,7 @@ Use this screen capture as a guide:
 You can see these flows in action (based on the app source in `frontend/src/pages`):
 - **Schema & Data**: interactive table model across relational, JSON, graph, vector, spatial, AI, and security tags.
 - **Dashboard**: command-center KPIs for orders, revenue, trends, and operational status.
-- **Social Vector Trends**: semantic search and momentum scoring over social/product signals.
+- **Social Vector Trends**: visible in the app, but omitted in this FreeSQL workshop because vector search support is limited.
 - **Influencer Graph**: SQL/PGQ and network-style traversal patterns.
 - **Fulfillment Map**: spatial routing, nearest-center logic, and delivery coverage.
 - **Orders**: order lifecycle plus JSON duality-style projections.
@@ -41,15 +41,14 @@ Mapped tab-to-lab version:
 
 1. Lab 1: Schema & Data
 2. Lab 2: Dashboard
-3. Lab 3: Social Vector Trends
-4. Lab 4: Influencer Graph
-5. Lab 5: Fulfillment Map
-6. Lab 6: Orders
-7. Lab 8: Ask Your Data
-8. Lab 9: Agent Console
-9. Lab 10: Cleanup
+3. Lab 3: Influencer Graph
+4. Lab 4: Fulfillment Map
+5. Lab 5: Orders
+6. Lab 6: Ask Your Data
+7. Lab 7: Agent Console
+8. Lab 8: Cleanup
 
-> Note: Lab 7 (OML Analytics) is intentionally omitted in this FreeSQL-only MVP path.
+> Note: Social Vector Trends and OML Analytics are intentionally omitted in this FreeSQL-only path.
 
 ## Acknowledgements
 

@@ -1,4 +1,4 @@
-# Lab 6: Orders
+# Lab 5: Orders
 
 ## Introduction
 
@@ -14,6 +14,8 @@ In this lab, you will:
 - Connect social attribution to order outcomes.
 
 ## Task 1: Analyze Order Lifecycle and Attribution
+
+This task summarizes order status performance and social-attributed demand. It is important because lifecycle visibility and attribution are core signals in the Orders experience.
 
 1. Run this SQL.
 
@@ -45,6 +47,8 @@ In this lab, you will:
 2. Identify which status carries the highest total_revenue.
 
 ## Task 2: Build JSON Order Projections
+
+This step transforms relational rows into API-ready JSON documents directly in SQL. That pattern matters because the demo showcases converged data access without extra transformation layers.
 
 1. Run this SQL.
 
@@ -90,6 +94,8 @@ FETCH FIRST 5 ROWS ONLY;
 
 ## Task 3: Check Your Understanding
 
+Use this short review to confirm how relational and JSON patterns work together. The key takeaway is that one SQL workflow can serve both analytics and application payloads.
+
 ```quiz
 Q: Why generate JSON inside SQL for orders?
 * It reduces transformation work for downstream API and UI consumers.
@@ -99,7 +105,7 @@ Q: Why generate JSON inside SQL for orders?
 
 Q: Why track social_source_id in order records?
 * It enables attribution from social activity to completed revenue.
-- It is only used for vector search.
+- It is only used for dashboard colors.
 - It is required to create order items.
 > Correct. Attribution metrics depend on this linkage.
 ```

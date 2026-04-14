@@ -15,15 +15,18 @@ In this lab, you will:
 
 ## Task 1: Create and Seed the Workshop Schema
 
+This task creates the baseline data model the demo relies on. You are building the same core entities used across the app tabs, so every later query has a consistent source of truth.
+
 1. Run the setup script in FreeSQL using **Run Script (F5)**.
 
+    <details>
     ```
     <copy>
 BEGIN
   FOR t IN (
     SELECT table_name FROM user_tables
     WHERE table_name IN (
-      'PRODUCT_EMBEDDINGS','AGENT_ACTIONS','INVENTORY','INFLUENCER_CONNECTIONS',
+      'AGENT_ACTIONS','INVENTORY','INFLUENCER_CONNECTIONS',
       'SOCIAL_POSTS','INFLUENCERS','ORDER_ITEMS','ORDERS','CUSTOMERS',
       'FULFILLMENT_CENTERS','PRODUCTS','BRANDS'
     )
@@ -203,34 +206,14 @@ SET location = SDO_GEOMETRY(2001,4326,SDO_POINT_TYPE(longitude,latitude,NULL),NU
 WHERE longitude IS NOT NULL;
 
 
--- Ensure the embedding model exists before creating PRODUCT_EMBEDDINGS
-DECLARE
-  l_model_count NUMBER;
-  l_model_uri   CONSTANT VARCHAR2(1000) := 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/iPX9W0MZeRkwJKWdFmdJCemmN-iKAl_bFvNGYLW7YqIrw4kKsukL24J2q93Beb9S/n/adwc4pm/b/OML-ai-models/o/all_MiniLM_L12_v2.onnx';
-BEGIN
-  SELECT COUNT(*)
-  INTO l_model_count
-  FROM user_mining_models
-  WHERE model_name = 'ALL_MINILM_L12_V2';
-
-  IF l_model_count = 0 THEN
-    DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD(
-      model_name => 'ALL_MINILM_L12_V2',
-      credential => NULL,
-      uri        => l_model_uri,
-      metadata   => JSON('{"function":"embedding","embeddingOutput":"embedding","input":{"input":["DATA"]}}')
-    );
-  END IF;
-END;
-/
-
 COMMIT;
     </copy>
     ```
+    </details>
 
     <iframe
             class="freesql-embed"
-            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F81ZWXPiSBJ%252B96%252Bo8AuwITA6uNoxGyNA2HQLiZBEu70bG4oCCtAiJFqHj52e%252F75ZpQOBuRzzsNsRjUuqrC%252FPyswqdZWHoXaD0EA3UISGGirDA0Kmoio9C0V46hLbwxuCBoY%252BQnFIApu9DBnZ06NiKEWqHACh0tjQ%252B5OeZSujrtLvD7UHs8SV5AdFs2y5Zw11jT4Pte%252FwQjee2XigThStpxh2T9c0JSPKAE29N5RVe6yblrlHTp90ow%252FrhpYyyp%252FooDcxLX3ExhnMYKIOhqo6ooL04CchTKWlw64ha32zxOgr8FtBqq6P2aPyQ%252BlNLAUNRyOlP5RhVOob%252BhhZcleF8a9fUW1njV%252B%252FSqgnmz25ryBQyLQMeahZJhpPjAeldA%252BAitZn2Pc3MLq%252Fubu56RkKRU3wpgH25iEqs7%252B2M0faBGxpoLExHMnGM%252FqmPHMJUWL977LRe5QNodysVyr3%252B1jbwJ%252FHsyhk%252FkkfTkACwSFHQxmAp8HWZipULlOFK%252BDtS8ELdTY7wxFZ%252BsH7bkZKJmLPiext4MxIyqfM1zmhcnMo%252BywOI39DgkT47Om09DnFvjztVBwn%252BihKGIGQIIv%252F4ngz8mHaxZETxfOinK1kwveW%252BzN8PgN6O76HzL5uPygQhJbx%252FEE1x1u4MQGWVLndwylnr8Do7r5Kh4ihP3Owa2%252F9MHM2jE7b6ijPgrsLAu7LlzieYkfkLUI9Ve9mb8jcxhGyhiPFtOTRmFnDWZPQnvmxF6VMmNVXODjy%252BsUhr8feBtgF39nhzA9yezcgYOjsBhzuRfHGXrh4uTMQhOAHm%252FvBPIslNrwikI6aJg%252FLcoGOCZPA0piKwz1ZdpORH2F3L%252ByZQRLnhX4czMiOK5MlIPjQsqivDOSJaiHz2cxfHtfXdiKySZSmo9M6H5qkoHBiuHJGsbf1jy7Ikk55R8UW%252FYyxF9FtuFPPdTxyxCgflFnE7sJxXepsewY%252FeVZg4zOuTOb%252F7zIC24OhjWeR87JbUjmSKF5AA5pFmQuzp4sKH%252FXLESOWc%252Fq%252F7lbb92yaqQruzadgv5PghWRzZxIiJADPIzNqscTFi8CHuM3nP52sIv%252BvrN5JY0fv20JAiFm8BMRbRqvMhxInsve7yn9CN3u7LvoOlQ%252F05Pbk%252FhgZeEndiAuGSsanQyNZsb8VGokW%252BJiGzWSOvJFZzKZPZDZQauHMqZiHRkiWHmQvqsnNUDMVw0KyqgIZGEnPup7vMnR3JirzXGkSTLE3jt2QlConqASuZJHZSvNf8EkaEbo8gtcDP9icpJEAJ8CO23Xxfyi3tBHmk%252F53HmP3qMx5d5VLXec5kFwjsN0fAvDEo%252B%252FPHQLd5QCHK7BhiWt3ap1O5QyCwIFWshN04zlSoPIRZD3R%252FlRxIXIC33NmYYnjO5dgRApDDfOEo9kKTdwowIcoknQJBTwJsrvkrUs39jjwkUkiqo4TeSSkEJcQGhTh2V9iNIIoGAdk48SbIsJFgzQ5cI8ZbzZOhJoNFXXxbL2F%252F7Thj6O57wclThAuobQoiuy6FgnA0x56dNaOt0Rd34%252FCIhKfynNlCOya1ELkjhyMuoHvrykyPGwcqrDrQ0SAD4RGrdXkW1y1Xa%252FxHb7NaRNVrZwGBD%252BqgIF6OIBUTU9TQOJAKEHsv2FgIdZrQrMlcNVOq9aSRP4SIDjE9Bcgo7aM3wkFMqHJiFwap080TiGh0VCVWrVmvQm4vCDURFG4CCzRiMMrNIYa6gJYn0DBohL3fFAez32QtVNriR2KWZfAzhCmCeaV5i42zrk6sOlKvy%252BSDeZAkrJDHODVbrMfXwRm%252FT2C5PHqRKsNDtaX6EXKxIk2%252BB1fIpUoNM0na%252Bxcn032Wvjc%252BXXQjml4mFSgf0C0%252BMxpGOMlphFRbAirQ3rIBRxUktol9KhPDE4EuDrXEOiPVKfjdrsGhmBN9k6rU5IIHDPbYXJCAaG9O8ILiE%252FkewTaci9anRRHbKbi8EwcgYcfvs3EaUFQcKXACUGpy%252FKIHHPLYX5Cr36wDtHCD9DKh0hkz35M9%252FkJiQQplajDZKH2gdiE32arJl4vD2TL%252BvFchcI4eHFoA7Qi%252BOUdBefcxWfuajWpIA3wEjNUk6%252B1uZIHhYw568qwSs89u0yY1Kg5cUGegMwhIdGU1%252BZYqJ0QCTzWl58rpzFZ1YIduN0yRIkh0q19CrFxCVGkhaMgZZKYORaGp%252BL8EqZEiwAUhxlUHupRTmhdFFRMQT9j7vTYtSsJidXhv8DxjGXlHL2Q0Uvgqf0Ke4xc5JgDaOvAH3YGx%252BiljP46%252BAbHvEFLKJ%252BXxzP0TY5ZmhZu%252FrAwH6NvZfSNnThXGvvYsTDXkibNJxJG6DGeQg1S%252FRDJ3pK4hFblHnYdSBCeAwVZlGr1hkBrEg%252FZUBJbSTzwlevYQOD34CVk0JRTH7surct5fRZqrVYTCn6nWWt1WvXPwcMuUHCuhUZeaa1iA%252FQVKMk7FOo6FNUGMID0ybcEKWdwdVXNTpm5z2n8SWnMQj6Ev5Wz1EJKLXCgX%252BM8rchJLPxErl3npPO0UkoL8SHRzHyeusFJLFKhZYS%252B8zxtM6Vtcc0GlfjTHcjeSbXYjLAiufBd138F74Nv2vXK1cuFpKbNYDmeQtMUkQRD%252BgSGmNShggjNzieWS0nDEeHlkiZeWA1HwWvts38uzUA7NJ7gjAXtikwJSjS1Q%252FcV2VkLY2c9e4kqv9m6MM2Yd6ST%252BT6tk5WLvMEfg90myyQIoCcgNktJH5iCDU%252BXwuuYgheHWeBlLGcrMlvDQdqHX%252Bgq6EZOmifmY144Uy2vYwpuNwA340evRW3s%252BdAxvNNH6EkTBSXpZK0XMl5HPT4Z9%252BklRN78A5W1u%252BP6be%252BWK%252BleJVFocvT1WAcmtvU8Vsr5dRmX3agl54AkcyVHguQz0%252B5ibWgiTbcQndzJcSR3%252Fq8kuqlWkeJBo0dQtCKIbKZkzprzjQ9tDCJvDm0Xp2RB77HZvS6d%252FPi97Kav9FTZUOjdoc3W7l2K3xfex4GD0rsmWbMK32CgXaygL7%252Bh0iqKtuGXuzs8f51J203Nn%252F4bdh34LoAQqsVhFY5N0zjwqnwNmtpa5tYqe%252FA3d9s7Z%252Fyj81Qf%252FYMY69ev357mg838a49sNlrV%252BSa79nTwoj08q0%252Bt55%252FD4FVafwvjtSpIX4WfHbFLph3zzsuY303v9JFaxU6VSR%252Fe%252BXdQKe2R4znqyFZ5wX4RapCR3kr3N930C2Uagz19olnlv%252BXxv2cY%252BiEz%252F065ATTIJgmHm%252BxjZULN7r7AKJCu7NFQG6ZcvwvAkCIPDgz%252BG6oj61HR2EfAfndk2t9BGN2oqbrct3VN%252B2GP9L6i2j1Vn%252FSzT6BFXn8%252Fxiz7JgkxMIeQhaMEJWRxls4kfmX%252FYKbg7YxgQyI8xxFOCL6aulYu%252FXG7iD2WEW6%252F3ObRd8vtxnocbePoYNbx2Ls%252FssE%252Fb2Fjybf%252F%252BvNPduBBqJJ9sxwOCl8s9dFoaN3%252FFyrSJ%252FxJHgAA&code_language=PL_SQL&code_format=false"
+            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F81ZW3OqShZ%252Bz6%252FoN7SK7ZGLopU6VQeVJM6oWIA7kyeqg61SIp2BJtmZ2j9%252BVjcCakRNnYeZB0lDr%252F76W5dea0EG1uN4dofQg%252B0ghsYz1IAbhFxrYg09xPBrRPwY7wh6cOwpylKS%252BOJhKsSenyzHOpQqARCSzEdr5vnm0BvbM1eSpfHsJzywnRcxfpgsrNnQcvyhPZtZhVCx1rWHY3Piz23Xc4%252FE%252BZ3tjGDd2LOm5R0fDBeuZ0%252FFuIB5WEwexpPJlBMZwiUXnDv2aDEUwAPHnI1cScg34dpEE9uei1vrX9Zw4VloPJ1ao7EJI2nk2HPkmYMJjH%252F%252FZq1K8d%252B%252FJTQ03aE5shAo5HqOOZ55LpovnEdLugdAazYS2Pd3MLq%252F%252B%252BPubuhYHDXHe01wvExRQ%252Fz1wyWaLaYDy0FzZzw1nRf0T%252BtFzoVyQ%252F80neGT6aiNbrvZvD%252FGekvoMgtYKlyxv6mBBIHTHR3rAZwKtnb3pEpOTfkA75iForbFbIAZWdPks5rR84ksDpn%252FloQB2e%252FTUNqy2rw75R5kKaM7kuTki7t69qXEMZ%252Fenk7IvlJJGZAELvQ9jAPyZTrCLGTZ8pCnkU%252FQeH08o5QzoHdIY%252BSObP%252FRgiD0nJcvqoXxKsoIbMmVq27qnL0Bo0fHKp0ipjQIceS%252F0bRwNozqbXV2zwN3HxA85pc7nmMz8ouh4cQeFE%252FI0scMeeOp5XrmdC6sEW5J6gc0i9l%252BE2H1DU7OPH4Pyce5pwmOwHd%252BGtCktHcHAobP7sDhMct2%252FirC68pAEIJfbE6TZRFLYnhDIJ01TRmWjQM5QSaH5TGVpUdcqklGGY6Owl4YJHdeSrMkINWugktC8Kll0ch6MBcTD7kvbvnwvL5%252ByMguV5qP6nU%252BNcmBwrnhGoXE0dE%252Fu6BIOo1KSiz6d4Zjxo9hpV4UxuSMUb4os8qiVRhF3Nl%252BAJcyK4jxBVfm8%252F93GUGcwdTHAQvfqyXNM4niHTTgWVS4sLi7qvBZv5wxYqOU%252F%252Ftu9Wns80x14N5yCs47Sd5JMXchIUICiGMScIvlLl4lFOK2nP92smL076yu2Pjs8%252B0gILQiXhISr9mm8KEua%252BJ5VflrdPPftoe%252BQ40TPeUj3l8jA6%252B5G%252FGBofJxfWjkK46PQifXAp%252FTsJvPkV8kyMR0TWYDpVbhktM8NUK%252B9CR7cU3uxjPXcjxkTiYgBkayi67npwndnYsaiiwtklccz7MoJVKzRkqVJY8Emxl9x7UyGnR5BG8faLKrldEBJ8FhNIjwf%252Fhu%252B55XyVvdZYajs5zL7qpk3VZkYD4jcNwfE%252FDEE6XLkEB3%252BYDTDdhQknv9Vr%252FfvICgyqCVGSaDbIksqHwEec%252B8P7UiiJyExmGQSrLSvwajcRhumGfMgg1aRCzBpyi6fg0FPAncI%252FJrwA%252F2PKHIJYyrE7KYpBziGkKHI7zQNUZTiIJ5QnZhtjtEuGqQrgzucbPdLmSo25mgAQ62b%252FDjDX%252FGlpQmkqyq11AMjmJGkUcS8HSMnsJtGK%252FRgFKWHiIpez43hkDVpB5E7jTEaJBQuuXIcLMLucIRhYgAH6idltFVDPlHr91S%252BkpPni0mk2Y9IPhxAhhoiBNI1YBkgkgIoQSx%252FwvDFlq7pXYNVf7RN1qGrinXAMEhLl0Bx9k6%252ByQcyIUmg0U8Tp95nEJC46GqG61uuwu4iqq2NE29CqzziMMbNIcaGgHYiEDB4oyHFJTHSwpc%252By1D63PMtg52hjDNMW8092HjXKoDh076a5UfsBCSlJ%252FiBG%252Bqw35%252BEZj1LwbJ4yNkmx1OttfkNb5JyHb4E18T1Tk0zydbHN6eTY5a%252BNL5bdBOaHiaVKB%252FQLz4LHkY4zXmEXHYEP4Y85dcwEGS3pPQk71wZA3g2nJH5Re9zce9XgsMIZrsSqs6JqoszHaanFBCeO%252BO8AriE9GYQFses00tHa27p6MIOqoCF6Un6BgQFLKUhCkodZ2PJgu3nOYn9EGTbYpWNEEbCpEo7mnGz3kNI1XfM%252BoLLtw%252BEJtw7Rot7XY%252BkC3b53MVSrPkPeQN0Ibg90%252BUXHKXUrjL6HIiHfCSMFRXafVkKYZCJpx1Y1jt33uqTJjXqCWJgE9ClpCQeMrrySLUaiiBx0bmS7MeU1QtOIFvbwJRF4j8aNchdq4harxwHLDME7MswrAuzq9h6rwIQHEIoPJwj8qqcZWotgf9jrn3r11VScitDj9VVsSWzUvyaiGvg6eOK%252Bw5cU0WDuCtg3LaGZyT1wv52%252BA7svAGL6FKWR4vyHdlYWleuJXTwnxO3ijkOxWdG4197rWw1JInzWeSMvSUvUINmtAUmfGaRIRX5SGOQkgQcQgFWdNb7Y7Ka5IC2VDXjDwelOZt20DgD%252BEhZND9TiMcRbwul%252FVZbRlGFwp%252Bv9sy%252Bkb7e%252FBwCixcajEjH7xWiQH6B0iSTyjUbSiqHdgA0qdiqHq5wc1VtXjLLH3O40%252FfxyzkQ%252FjbvCit7qVVGfTrXJbVZF2Enyb32rJ%252BWVbfy0J86DwzX5buyLqIVGgZoe%252B8LNvdyxpyt8MZf7sDOXpTPWxGRJFc0SiiH%252BB98E2v3bx5uZrXtACW41domhjJMfRvYGh5HTqg0O1%252FY7meNxwMr9c88cJqeBW81T7H76UFaJ%252FHE7xjQbticgGJp3bovphftDB%252B0bNLXPndWwTTYvO%252BXpvv93WyeXVv8MdDdcgKBgn0BMQXKenLpmDD%252BlJ426bgxXEReMWWwYYEW3iRpnCFroIf5Lx5Ej5W1AvV8rZNwe0O4Bb78c%252BiPo4pdAyf%252FBZ60lxBXa%252Bt9Wqx11mPL%252BYj%252FhGibP5Byqu%252Bcf159JUr7151Te3K%252FPHchk1872VuNcrPZXLxRS1%252FD8gzV%252F5KkP9HqfqwNnbRzPYQn6x4nMmd%252FytGd0N7Oh179%252F8Fqn76YkgbAAA%253D&code_language=PL_SQL&code_format=false"
             height="460px"
             width="100%"
             scrolling="no"
@@ -244,48 +227,9 @@ COMMIT;
 2. Confirm the script completes successfully before continuing.
 
 
-## Task 2: Create PRODUCT_EMBEDDINGS
+## Task 2: Validate Core Table Readiness
 
-1. Run this SQL in FreeSQL using **Run Script (F5)**.
-
-    ```
-    <copy>
-BEGIN
-  EXECUTE IMMEDIATE 'DROP TABLE product_embeddings CASCADE CONSTRAINTS PURGE';
-EXCEPTION
-  WHEN OTHERS THEN
-    IF SQLCODE != -942 THEN RAISE; END IF;
-END;
-/
-
-CREATE TABLE product_embeddings AS
-SELECT p.product_id,
-       VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING p.product_name||' '||p.category AS DATA) AS embedding
-FROM products p;
-
-ALTER TABLE product_embeddings ADD CONSTRAINT product_embeddings_pk PRIMARY KEY (product_id);
-ALTER TABLE product_embeddings ADD CONSTRAINT product_embeddings_fk FOREIGN KEY (product_id) REFERENCES products(product_id);
-
-COMMIT;
-    </copy>
-    ```
-
-    <iframe
-            class="freesql-embed"
-            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F6VQTW%252FCMAy951d4p4K0Ma3aZap2CIlbouWjJIHBqWK0QwgBFbDDpP74pUgwpn1c5oNl%252BdnvPbuPmdAEACfIRh5BKIVc0FBF3JocPO1LhHq3Ld%252Fmh6Jav1Rludws9sCoY5QjMKOdt1Ro7yAf2QyjhOCEYe6FaYmfB6jB%252BAFaByG3LQCRghtKZsL%252B1SPcPNzHRwwCj8MEUPMwEng0T8gtIcxi6%252BhXL9QRhxKZh7p3gpfl9VEqxDggxhao%252Bsi50FmHSlkooYVUhbyLi3EMIxf6F9ub2bpqmgiipql789mhWmx370EHOPW02xZneZJao06u9lAnhFDp0f5hl%252FOLt%252F0wUdQryK1Q1E7hCafQ%252BTyqm%252Fyf%252FXUFqbEoMv2NHSymaFEzdOeTvqoTZpQSPvkA%252BmiGyDkCAAA%253D&code_language=PL_SQL&code_format=false"
-            height="460px"
-            width="100%"
-            scrolling="no"
-            frameborder="0"
-            allowfullscreen="true"
-            name="FreeSQL Embedded Playground"
-            title="FreeSQL"
-            style="width: 100%; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;"
-        >FreeSQL Embedded Playground</iframe>
-
-2. Confirm the script completes successfully before continuing.
-
-## Task 3: Validate Core Table Readiness
+This validation step confirms your core tables are populated before you move forward. Catching gaps here prevents confusing failures in later dashboard, graph, fulfillment, and orders tasks.
 
 1. Run this validation SQL.
 
@@ -303,8 +247,6 @@ COMMIT;
     UNION ALL
     SELECT 'INFLUENCER_CONNECTIONS', COUNT(*) FROM influencer_connections
     UNION ALL
-    SELECT 'PRODUCT_EMBEDDINGS', COUNT(*) FROM product_embeddings
-    UNION ALL
     SELECT 'AGENT_ACTIONS', COUNT(*) FROM agent_actions
     ORDER BY table_name;
     </copy>
@@ -312,7 +254,7 @@ COMMIT;
 
     <iframe
             class="freesql-embed"
-            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F42SwWrEIBCG7%252FsUc0tbuk%252FQkzHuEkh0UXPoSYzaJZDoooa%252BftNAIbC7occZ5vv4%252BRkAAEEagiUUJUe0EgUgAVn3o1NeT%252B4dMOuofHl7%252Fd3H8J2UCbPPcOKshT5qb9NhkUBHa0YBNc06%252FTkvnFUdlqLYeFbyFoOdTd5jcSckawm%252Fh82ccphc3KMZrx6hIdp9TjBco0ZdmHiQOgUz6FHdQtpNXtNT0xGKCVeYUbrslqt72%252BC%252Fxtl54%252BLSqffO5CH4f7SpSFuSqqrp%252BWmvyk29s3bw1z0fOhMqFXoST1%252Bdz0pvUq2dQvm5%252BY%252BPw%252FFIGP4BouMcBEgCAAA%253D&code_language=SQL&code_format=false"
+            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F32RzYrDIBRG9%252FMUd5dpmTeYlTW2BKwWfxazEmvsEEi1qGFev2mgEGjH5f245%252FBxLwCAJJRgBc1OINbKBpCEYs%252BjN8Fe%252FRdgrpn63G4eeYp%252F2bg4hQJ7wY9wTjb0%252BWOWgGYdZ4AoXaan8yR4q7GSzcqzkLcU%252B8mVGou1VPxIxCvsplzi1acazUX7Do2pr3OS4w5Rc%252BLyTesc3WBHc4u52rxje6oJw0QYzBmbs3nr1TaEyzj54HyabxqCd2WIoeZFB8KUQf%252Fo7K8PxdiVZbkB7H5W%252F%252Fy%252BA%252F5fYDryAQAA&code_language=SQL&code_format=false"
             height="460px"
             width="100%"
             scrolling="no"
@@ -325,7 +267,9 @@ COMMIT;
 
 2. Confirm each table returns non-zero rows.
 
-## Task 4: Validate Join Paths Used in the App
+## Task 3: Validate Join Paths Used in the App
+
+This query validates the join paths used by demo analytics. It shows how products, brands, and order lines combine to power revenue views in the application.
 
 1. Run this SQL to validate product and brand revenue rollups.
 
@@ -346,7 +290,7 @@ COMMIT;
 
     <iframe
             class="freesql-embed"
-            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F2WQzW4CIRRG9z7Ft9REJ9pt46JlsNro0MAYMysyU1iQjMMExj6%252FQG39Y3fhfNxzLwAIuqWkRJ%252F1zqrT9yC7%252BqinI1xPkzWu7tTzA2H7ohxbk5lBH6VRE7wJtKbTXnrbqjuWBzYfi%252F0u8pGRgx3qdjLFS4o5%252FaO7k06RFWc7WKe0k%252FFnD2vS%252FSfbFLhoevRgxY22UVgG8Ka%252BZpK%252FRxMTf9Mkvv8vEvwRLL%252FwXj1u424FiWQ8pzySF2%252FkVJBfeVqSNVYbLkos5mHugwhtt9XraDajjJwBrHZgfXMBAAA%253D&code_language=SQL&code_format=false"
+            data-freesql-src="https://freesql.com/embedded/?layout=vertical&compressed_code=H4sIAAAAAAAC%252F2WQQW%252FCIBiG7%252FsV77Emppm7Lh62ljoXLQbamJ5IKxxIammg%252BvsH6KZObh88L9%252FzfQDAyYZkFcZ0tEaeDpMY2qOav%252BB2urSz7SCfHzJal1VidKondRRazvDB0etBOeFMLx9Y5tk84fU28IERk5nafjbHW4xZdVbDScVIwegWxkplRfjZweh4%252F03XJa6aDiNoeaetJZYevKtvmejv0IXE7zSRH%252F%252BKCK%252B85Q6fzf9tPKwgkpTlhAXy6o2c8OwiT6rsC8Wa8QqLVz%252F3nvu2m%252Bb9B34s4u1tAQAA&code_language=SQL&code_format=false"
             height="460px"
             width="100%"
             scrolling="no"
@@ -359,20 +303,22 @@ COMMIT;
 
 2. Record the top 3 products by revenue.
 
-## Task 5: Check Your Understanding
+## Task 4: Check Your Understanding
+
+Use this quick checkpoint to confirm you understand why setup quality matters. A clean schema start is what makes every later lab deterministic.
 
 ```quiz
-Q: Why run schema and seed SQL before KPI or vector labs?
+Q: Why run schema and seed SQL before downstream analytics labs?
 * It guarantees all downstream queries run against known tables and data.
 - It improves dashboard styling.
 - It removes the need for joins.
 > Correct. The setup step prevents avoidable runtime errors in later labs.
 
-Q: Why include product_embeddings in the seed workflow?
-* Later vector retrieval depends on a ready embedding table.
-- Embeddings are only used for UI themes.
-- Embeddings replace relational keys.
-> Correct. Lab 3 depends on product_embeddings being present and populated.
+Q: Why validate core table row counts after seeding?
+* Later dashboard, graph, fulfillment, and orders queries depend on ready core tables.
+- Table row counts are only useful for UI styling.
+- Validation can be skipped when inserts complete.
+> Correct. Core table readiness prevents downstream query failures and debugging churn.
 ```
 
 ## Acknowledgements

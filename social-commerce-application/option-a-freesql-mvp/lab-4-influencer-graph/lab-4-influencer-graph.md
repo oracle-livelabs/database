@@ -1,4 +1,4 @@
-# Lab 4: Influencer Graph
+# Lab 3: Influencer Graph
 
 ## Introduction
 
@@ -14,6 +14,8 @@ In this lab, you will:
 - Identify high-impact connectors for campaign planning.
 
 ## Task 1: Analyze Direct Influencer Links
+
+This task inspects first-hop relationships between influencers. It matters because direct link strength is the simplest signal for immediate campaign amplification potential.
 
 1. Run this SQL.
 
@@ -47,6 +49,8 @@ In this lab, you will:
 2. Note which link types appear most often.
 
 ## Task 2: Approximate Two-Hop Reach
+
+This step extends analysis from direct links to indirect network reach. It helps you model how influence can propagate beyond a single connection, which is central to the demo narrative.
 
 1. Run this SQL.
 
@@ -82,6 +86,8 @@ FETCH FIRST 20 ROWS ONLY;
 2. Capture one seed_handle with broad indirect reach.
 
 ## Task 3: Check Your Understanding
+
+Use these questions to confirm you can interpret network-style SQL results. The focus is on translating path metrics into practical marketing decisions.
 
 ```quiz
 Q: Why does this lab use SQL joins for network analysis?

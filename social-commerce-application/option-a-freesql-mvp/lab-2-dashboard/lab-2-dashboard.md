@@ -15,6 +15,8 @@ In this lab, you will:
 
 ## Task 1: Build Top-Level KPI Metrics
 
+This task produces the primary business KPIs shown in the dashboard experience. These metrics are important because they establish the baseline view of demand, monetization, and social influence.
+
 1. Run this SQL.
 
     ```
@@ -43,6 +45,8 @@ In this lab, you will:
 2. Record `social_orders` for comparison in later labs.
 
 ## Task 2: Build Category Revenue and Social Attribution
+
+Here you break totals into category-level performance and social-attributed revenue. This matters because operators need both overall revenue and channel contribution to make decisions.
 
 1. Run this SQL.
 
@@ -76,6 +80,8 @@ ORDER BY category_revenue DESC;
 2. Identify the highest revenue category and the highest social_revenue category.
 
 ## Task 3: Check Your Understanding
+
+Use these questions to validate KPI interpretation before moving on. The goal is to connect SQL output to the story the dashboard is telling.
 
 ```quiz
 Q: Why separate category_revenue and social_revenue in one query?

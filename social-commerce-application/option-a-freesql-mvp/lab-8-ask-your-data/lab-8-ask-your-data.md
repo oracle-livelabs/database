@@ -1,4 +1,4 @@
-# Lab 8: Ask Your Data
+# Lab 6: Ask Your Data
 
 ## Introduction
 
@@ -14,6 +14,8 @@ In this lab, you will:
 - Keep analysis reproducible in FreeSQL.
 
 ## Task 1: Translate a Business Question to SQL
+
+This task converts a natural-language question into deterministic SQL. It is important because prompt workflows still need explicit, auditable query logic in production.
 
 1. Start with this question: "What are the top 5 products by revenue?"
 
@@ -46,6 +48,8 @@ FETCH FIRST 5 ROWS ONLY;
 
 ## Task 2: Validate Prompt-to-SQL Quality
 
+This quality pass checks join clarity, row grain, and deterministic ranking. These guardrails are what keep AI-assisted SQL trustworthy and reproducible in the demo.
+
 1. Confirm each generated SQL pattern includes:
 
     - explicit join keys
@@ -55,6 +59,8 @@ FETCH FIRST 5 ROWS ONLY;
 2. Optional follow-up question: "Which category has the most social-attributed revenue?"
 
 ## Task 3: Check Your Understanding
+
+Use this checkpoint to reinforce prompt-to-SQL quality habits. Consistency and auditability are the core goals of this lab.
 
 ```quiz
 Q: Why require deterministic ORDER BY for top-N SQL?

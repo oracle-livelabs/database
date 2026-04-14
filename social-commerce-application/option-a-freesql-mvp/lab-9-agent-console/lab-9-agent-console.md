@@ -1,4 +1,4 @@
-# Lab 9: Agent Console
+# Lab 7: Agent Console
 
 ## Introduction
 
@@ -14,6 +14,8 @@ In this lab, you will:
 - Define one governance signal for production monitoring.
 
 ## Task 1: Query Agent Decision History
+
+This task surfaces recent agent actions, outcomes, and confidence scores. It matters because observability starts with a clear audit trail of what was attempted and when.
 
 1. Run this SQL.
 
@@ -47,6 +49,8 @@ In this lab, you will:
 
 ## Task 2: Summarize Operational Risk Signals
 
+Here you aggregate execution patterns to identify reliability drift. This is directly tied to the demo's governance story around production agent operations.
+
 1. Run this SQL.
 
     ```
@@ -78,6 +82,8 @@ ORDER BY actions_count DESC;
 2. Identify which status pattern would trigger your alert threshold.
 
 ## Task 3: Check Your Understanding
+
+Use these questions to confirm you can turn logs into actionable monitoring signals. The objective is early risk detection, not just historical reporting.
 
 ```quiz
 Q: Why capture execution_status alongside confidence?
