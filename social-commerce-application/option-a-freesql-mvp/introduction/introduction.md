@@ -46,7 +46,7 @@ Note that this lab uses FreeSQL so 2 of the items from the Social Commerce Appli
 5. Lab 5: Orders
 6. Lab 6: Ask Your Data
 7. Lab 7: Agent Console
-8. Lab 8: Cleanup - remove tables items from running this lab.
+8. Lab 8: Cleanup - remove artifacts in FreeSQL from running this lab.
 
 > Note: Social Vector Trends and OML Analytics are intentionally omitted in this FreeSQL-only path.
 
