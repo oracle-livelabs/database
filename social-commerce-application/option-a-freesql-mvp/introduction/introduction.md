@@ -15,9 +15,9 @@ In this workshop, you will:
 
 ## Walk Through the Application First
 
-Before you start the labs, open the app and click through the left navigation:
+Before you start the labs, open the application hosted on Oracle LiveStacks and click through the left navigation. This lab will show you how the Oracle AI Database supports the application with a single, unified converged database reducing risk, complexity and cost:
 
-`http://152.70.54.67:5500/`
+[Social Commerce Application] (https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4387&p180_gb_clicked=Y&session=5746148764389)
 
 Use this screen capture as a guide:
 
@@ -33,7 +33,7 @@ You can see these flows in action (based on the app source in `frontend/src/page
 - **Ask Your Data**: NL-to-SQL flow with generated SQL inspection.
 - **Agent Console**: multi-agent actions, tool traces, and audit/event views.
 
-Note that this lab uses FreeSQL so 2 of the items from the Social Commerce Application are ommited (Vector Search and OML). Here are the Labs mapped tab-to-lab version:
+Note that this lab uses FreeSQL so 2 of the items from the Social Commerce Application are ommited (Vector Search and OML). Here are the tab-to-lab mappings:
 
 ![Social Commerce app tabs mapped to workshop labs](images/social-commerce-app-lab-map.png)
 
