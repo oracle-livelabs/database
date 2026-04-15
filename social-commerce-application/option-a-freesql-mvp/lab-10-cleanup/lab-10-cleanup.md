@@ -133,24 +133,6 @@ This verification confirms teardown was complete across expected schema objects.
         >FreeSQL Embedded Playground</iframe>
 
 
-## Task 4: Check Your Understanding
-
-Use this final checkpoint to reinforce safe cleanup practices. Reliable reset workflows are part of operating repeatable demos.
-
-```quiz
-Q: Why use `CASCADE CONSTRAINTS PURGE` in the cleanup script?
-* It removes dependent referential constraints and purges dropped objects immediately.
-- It preserves all foreign keys for next run.
-- It creates new indexes automatically.
-> Correct. This avoids leftover dependencies and recycle-bin clutter.
-
-Q: Why verify with `USER_OBJECTS` after cleanup?
-* It confirms all expected tables and indexes are actually removed.
-- It rebuilds missing objects.
-- It reloads dropped rows automatically.
-> Correct. Verification prevents partial cleanup states.
-```
-
 ## Acknowledgements
 * **Author** - Pat Shepherd + Codex
 * **Last Updated By/Date** - Codex, April 2026

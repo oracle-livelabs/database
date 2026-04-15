@@ -303,24 +303,6 @@ This query validates the join paths used by demo analytics. It shows how product
 
 2. Record the top 3 products by revenue.
 
-## Task 4: Check Your Understanding
-
-Use this quick checkpoint to confirm you understand why setup quality matters. A clean schema start is what makes every later lab deterministic.
-
-```quiz
-Q: Why run schema and seed SQL before downstream analytics labs?
-* It guarantees all downstream queries run against known tables and data.
-- It improves dashboard styling.
-- It removes the need for joins.
-> Correct. The setup step prevents avoidable runtime errors in later labs.
-
-Q: Why validate core table row counts after seeding?
-* Later dashboard, graph, fulfillment, and orders queries depend on ready core tables.
-- Table row counts are only useful for UI styling.
-- Validation can be skipped when inserts complete.
-> Correct. Core table readiness prevents downstream query failures and debugging churn.
-```
-
 ## Acknowledgements
 * **Author** - Pat Shepherd + Codex
 * **Last Updated By/Date** - Codex, April 2026
