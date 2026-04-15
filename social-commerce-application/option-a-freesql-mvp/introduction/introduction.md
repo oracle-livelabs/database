@@ -18,8 +18,10 @@ In this workshop, you will:
 Before you start the labs, create a reservation for the application hosted on Oracle LiveStacks and follow the instructions in the Lab. Once you have done that, this lab will show you how the Oracle AI Database supports the application with a single, unified converged database reducing risk, complexity and cost:
 
 ![Social Commerce Application](images/social-commerce-app.png)
+Before you start the labs, open the application hosted on Oracle LiveStacks and click through the left navigation. This lab will show you how the Oracle AI Database supports the application with a single, unified converged database reducing risk, complexity and cost:
 
 [Social Commerce Application] (https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4387&p180_gb_clicked=Y&session=5746148764389)
+
 
 
 You can see these flows in action (based on the app source in `frontend/src/pages`):
