@@ -34,8 +34,6 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     . ftex
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Create a user and grant the necessary privileges
@@ -48,8 +46,6 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     grant create pluggable database to dblinkuser;
     grant read on sys.enc$ to dblinkuser;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * You use the user to connect from the target CDB via a database link.
@@ -97,8 +93,6 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 5. Create a database link pointing to the *FTEX* database.
@@ -282,7 +276,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 3. Use the `lsj` command.
 
     ``` bash
-    <copy> 
+    <copy>
     lsj -a 10
     </copy>
     ```
@@ -306,8 +300,6 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     grant dba to sales;
     create table sales.orders as select * from all_objects;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -473,21 +465,21 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
     ``` text
     Details
-    
+
     	Job No           101
     	Oracle SID       FTEX
     	Start Time       25/08/01 09:48:23
     	Elapsed (min):   3
     	End time:        N/A
-    
+
     Logfiles
-    
+
     	Logs Base:    /home/oracle/logs/ftex-refresh/FTEX
     	Job logs:     /home/oracle/logs/ftex-refresh/FTEX/101
     	Stage logs:   /home/oracle/logs/ftex-refresh/FTEX/101/dbupgrade
     	TimeZone:     /home/oracle/logs/ftex-refresh/FTEX/temp
     	Remote Dirs:
-    
+
     Stages
     	SETUP            <1 min
     	PREUPGRADE       <1 min
@@ -502,15 +494,15 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     	POSTFIXUPS
     	POSTUPGRADE
     	SYSUPDATES
-    
+
     Stage-Progress Per Container
-    
+
     	+--------+---------+
     	|Database|DBUPGRADE|
     	+--------+---------+
     	|    TEAL|    6  % |
     	+--------+---------+
-    
+
     The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
 
@@ -547,8 +539,6 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 5. Switch to *TEAL* and ensure that the *SALES.ORDERS* table exist.
@@ -559,8 +549,6 @@ When the upgrade starts, AutoUpgrade executes a final refresh to bring over the 
 
     select count(*) from sales.orders;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * If the query completes without errors, it means the table is present. This proves that changes made after the initial copy of data files are still in the PDB after the migration.
@@ -601,8 +589,6 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
     . ftex
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Start the database.

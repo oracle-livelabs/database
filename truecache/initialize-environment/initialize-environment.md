@@ -6,12 +6,10 @@ In this lab we will review and startup all components required to successfully r
 
 *Estimated Time:* 10 Minutes.
 
-Watch the video for a quick walk through of the Initialize Environment lab.
-
-[Initialize Environment lab](youtube:e3EXx3BMhec)
-
+<if type="nonsandbox">
 Watch the video for a quick walk through of the Lab1.
-[Lab1](videohub:1_2ee2tbuw) 
+[Lab1](videohub:1_y0sporip)
+</if>
 
 ### Objectives
 - Initialize the workshop environment.
@@ -24,15 +22,17 @@ This lab assumes you have:
     - Lab: Environment Setup((*Free-tier* and *Paid Tenants* only))
 
 ## Task 1: Validate That Required Processes Are Up and Running.
-1. With access to your remote desktop session, validate your environment before you start the subsequent labs. The following processes should be up and running:
+0. If you are unable to launch the remote desktop, Click on “View Login Info” on top lefthand side and select Open Link under Terraform Outputs section as shown in the below image.
+    ![terraform url](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/terraformurl.png " ")
+1. Access your remote desktop session and validate your environment before you start the subsequent labs. The following processes should be up and running:
 
     - Oracle primary database container
     - Oracle True Cache  container
     - Client app container
 
-2.  Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal and follow these steps to validate the services.
+2. Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal and follow these steps to validate the services.
 
-![activities_terminal_icon](images/activities_terminal_icon.png " ")
+    ![activities_terminal_icon](images/activities_terminal_icon.png " ")
 
 3. Log in to Podman and check for podman containers.
 
@@ -43,7 +43,7 @@ This lab assumes you have:
         ```
     ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
 
-4. If a container is stopped and not in running state then try to restart it.
+4. If a container is not running, restart it using the following commands.
 
         ```
         <copy>
@@ -55,7 +55,7 @@ This lab assumes you have:
         sudo podman start <container ID/NAME>
         </copy>
         ```
-5. For multiple containers, run the following to restart all at once.
+5. For multiple containers, run the following commands to restart all the containers.
 
         ```
         <copy>
@@ -74,4 +74,3 @@ You may now proceed to the next lab.
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
 * **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
-

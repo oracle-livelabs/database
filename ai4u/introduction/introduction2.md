@@ -6,9 +6,11 @@
 
 Most AI chatbots are helpful explainers. Ask about a loan status and they'll tell you how to log into the portal, navigate to the right screen, and find the information yourself. Helpful, sure. But you wanted the status, not a tutorial.
 
-AI agents are different. They act. Ask an agent about a loan status and it queries the database and tells you the answer. Same question, completely different outcome.
+AI agents are different. They act. Ask an agent about a loan status and it queries the database and tells you the answer. Same question. Better outcome.
 
 This workshop teaches you to build agents that execute instead of explain.
+
+Estimated Time: 1 hour
 
 ![Introduction to Seer Equity](./images/intro.png " ")
 
@@ -34,43 +36,46 @@ After deploying the first agent, Seer Equity's technical team had a question: ca
 
 **"Before every client call, I spend 10-15 minutes just gathering the information I need."**
 
-Loan officers were pulling together client information from multiple places before every call. Contact preferences, loan history, rate eligibility, credit tier. By the time they had everything, they'd forgotten why the client called. One agent with one tool wasn't enough. They needed an agent that could plan and execute a multi-step lookup on its own.
+Loan officers were pulling together client information from multiple places before every call. Contact preferences, loan history, rate eligibility, credit tier. By the time they had everything, they'd forgotten why the client called. One agent with one tool was not enough. They needed an agent that could plan and execute a multi-step lookup on its own.
 
 **In Lab 3, we fixed this.** We built an agent with three tools and let it figure out which ones to call, in what order, and how to combine the results. Jennifer's 10-15 minute prep is now a 10-second agent call. We also saw how instructions control the planning process, so the agent's behavior stays predictable and easy to debug.
 
-### The Problems Still Keeping Leadership Up at Night
+**"Small loans take as long to process as big ones."**
+
+A $25,000 personal loan for a client with excellent credit should not require the same scrutiny as a $500,000 mortgage. But without smart routing, everything goes through the same manual review process. Loan officers spend hours on applications that should take minutes.
+
+**In Lab 4, we fixed this.** We built Seer Equity's loan risk assessment workflow with tools that evaluate applications and route them based on amount and type. Auto-approve, underwriter review, or senior underwriter. We traced the full execution loop, seeing exactly what happens at each step, so every decision is visible and auditable.
 
 **"We keep forgetting our best clients."**
 
-A loan officer quoted standard rates to Sarah Chen, a client who's been with Seer Equity for six years and has a 15% rate exception on file. Sarah was not happy. She'd told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
+A loan officer quoted standard rates to Sarah Chen. She has been with Seer Equity for six years and has a 15% rate exception on file. Sarah was not happy. She had told three different loan officers about her preferences, and none of them remembered. How many other clients are getting this treatment?
+
+**In Lab 5, we experienced this firsthand.** We told an agent about Sarah Chen's email preference and 15% rate exception. Cleared the session. Asked again. The agent had no idea who Sarah Chen was. This is exactly what is happening to Seer Equity's clients. Now we understand why memory has to persist.
+
+**"Our agents make things up when they don't have the right information."**
+
+Loan officers noticed the AI was confidently stating rate requirements and policy details that were just wrong. It was not lying on purpose. It simply did not have access to Seer Equity's actual lending policies, so it filled in the blanks with its best guess. Best guesses don't survive audits.
+
+**In Lab 6, we fixed this.** We asked an agent about Seer Equity's loan rates. Without enterprise data, it gave generic answers. We connected it to the actual policy database and watched it quote real rates, requirements, and client-specific information. No more guessing.
+
+### The Problems Still Keeping Leadership Up at Night
 
 **"Every loan officer handles the same situation differently."**
 
-Two similar business loan applications came in. One got approved at preferred rates; the other got denied outright. Same loan amount, similar credit profiles, similar businesses. The only difference? Which loan officer happened to pick up the phone. There's no way to learn from past decisions or ensure consistency.
+Two similar business loan applications came in. One got approved at preferred rates; the other got denied outright. Same loan amount, similar credit profiles, similar businesses. The only difference? Which loan officer happened to pick up the phone. There is no way to learn from past decisions or ensure consistency.
 
-**"We have no idea what our AI assistants are actually doing."**
+**"We cannot enforce separation of duties."**
 
-The company deployed AI chatbots to help loan officers, but they're black boxes. When a regulator asks "why was this loan approved?", nobody can answer. The chatbots don't log their reasoning, don't follow documented policies, and sometimes make up information about rates and requirements.
+Compliance requires that the person who submits a loan application cannot be the same person who approves it. But their current systems don't enforce this. It is just policy that people are supposed to follow. One mistake away from a regulatory finding.
 
-**"Small loans take as long to process as big ones."**
+### What is Coming
 
-A $25,000 personal loan for a client with excellent credit shouldn't require the same scrutiny as a $500,000 mortgage. But without smart routing, everything goes through the same manual review process. Loan officers spend hours on applications that should take minutes.
-
-**"We can't enforce separation of duties."**
-
-Compliance requires that the person who submits a loan application can't be the same person who approves it. But their current systems don't enforce this. It's just policy that people are supposed to follow. One mistake away from a regulatory finding.
-
-### What's Coming
-
-We'll solve all of these problems in future labs. Here's what Seer Equity will build:
+We will solve these problems in future labs. Here is what Seer Equity will build:
 
 | Business Problem | Agent Solution | You Will Build It In |
 |------------------|----------------|---------------------|
-| Forgetting client preferences | Persistent memory that survives sessions | Labs 5, 7, 9 |
+| Forgetting client preferences | Persistent memory that survives sessions | Labs 7, 9 |
 | Inconsistent decisions | Past decision lookup for guidance | Labs 8, 9 |
-| No audit trail | Automatic logging of every tool call | Labs 4, 10 |
-| No access to policies | Enterprise data integration | Lab 6 |
-| Manual processing of routine loans | Risk-based auto-approval rules | Labs 4, 10 |
 | No separation of duties | Role-based agents with limited tools | Lab 10 |
 
 This is an ongoing series following Seer Equity as they transform their AI from helpful explainers into trusted actors with memory, consistency, and accountability.
@@ -81,11 +86,17 @@ This is an ongoing series following Seer Equity as they transform their AI from 
 
 ✅ **Labs available now:**
 
-* **Lab 1: What is an AI Agent?** Build your first agent that queries loan application data. See the difference between a chatbot that *explains* how to check loan status versus an agent that *actually checks it*.
+* **Lab 1: What Is an AI Agent?** Build your first agent that queries loan application data. See the difference between a chatbot that *explains* how to check loan status versus an agent that *actually checks it*.
 
 * **Lab 2: Agents vs Zero-Shot.** Compare three approaches: zero-shot (no data access), SELECT AI (read-only), and agents (read and write). Watch an agent check a loan's status and update it based on conditions.
 
 * **Lab 3: How Agents Plan the Work.** Give an agent three tools and watch it plan a multi-step client lookup. See how it picks which tools to call, in what order, and how instructions keep the behavior predictable.
+
+* **Lab 4: How Agents Actually Get Work Done.** Build Seer Equity's loan risk assessment workflow. Create tools that evaluate applications and route them based on amount and type. Trace the full execution loop from request to response.
+
+* **Lab 5: Why Agents Need Memory.** Experience the forgetting problem firsthand. Tell an agent about a client's preferences, clear the session, and watch it forget everything. See why memory has to persist across sessions.
+
+* **Lab 6: Why Enterprise Data Matters.** See agents fail when they lack context, then succeed once connected to enterprise data. Watch an agent go from generic guesses to quoting real rates and policies.
 
 ### Objectives
 
@@ -93,10 +104,10 @@ By the end of this workshop, you will be able to:
 
 * Explain the difference between a chatbot and an agent
 * Build an agent with SQL tools and query it using natural language
-* View execution history to see what the agent did and why
 * Choose the right approach (zero-shot, SELECT AI, or agent) for different use cases
-* Build agents that can read and write data based on conditional logic
-* Build multi-tool agents and observe how they plan multi-step operations
+* Trace an agent's execution loop and interpret its reasoning at each step
+* Explain why agents need memory that persists and what happens without it
+* Connect agents to enterprise data sources so they stop guessing
 
 ### Prerequisites
 

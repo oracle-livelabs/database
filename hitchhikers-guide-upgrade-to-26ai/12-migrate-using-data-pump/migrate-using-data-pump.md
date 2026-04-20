@@ -44,8 +44,6 @@ You need to prepare a few things before you can start a Data Pump export.
     . ftex
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
@@ -85,8 +83,6 @@ You need to prepare a few things before you can start a Data Pump export.
     grant read, write on directory expdir to expuser;
     alter user expuser quota unlimited on users;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -317,8 +313,6 @@ in-place upgrade and the PDB conversion.
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Create a new PDB called *PURPLE* and open it.
@@ -329,8 +323,6 @@ in-place upgrade and the PDB conversion.
     alter pluggable database purple open;
     alter pluggable database purple save state;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -359,8 +351,6 @@ in-place upgrade and the PDB conversion.
     alter session set container=purple;
     create tablespace users datafile size 100m autoextend on next 100m maxsize 32767m;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -410,8 +400,6 @@ You need a few more changes to the new PDB before you can start the import.
     grant read, write on directory impdir to impuser;
     alter user impuser quota unlimited on users;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -930,8 +918,6 @@ You need a few more changes to the new PDB before you can start the import.
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 8. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
@@ -961,8 +947,6 @@ You need a few more changes to the new PDB before you can start the import.
     alter session set container=purple;
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * There should be 14 tables and 19 indexes.
@@ -974,7 +958,7 @@ You need a few more changes to the new PDB before you can start the import.
     SQL> alter session set container=purple;
 
     Session altered.
-    
+
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
 
     OBJECT_TYPE               COUNT(*)

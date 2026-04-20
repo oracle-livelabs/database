@@ -2,11 +2,11 @@
 
 ## Introduction
 
-In this lab, you'll see why agents fail without enterprise data, and how connecting them to your business context transforms their usefulness.
+In this lab, you will see why agents fail without enterprise data, and how connecting them to your business context transforms their usefulness.
 
 Agents don't show up understanding your organization. They don't know your policies, your workflows, or how decisions were handled last time. That knowledge lives in your enterprise data.
 
-You'll first ask the LLM business-specific questions it can't answer, then give an agent access to your data and see the difference.
+You will first ask the LLM business-specific questions it can't answer, then give an agent access to your data and see the difference.
 
 ### The Business Problem
 
@@ -18,9 +18,9 @@ Seer Equity deployed AI chatbots to help loan officers answer client questions. 
 
 Without access to enterprise data, AI assistants are worse than useless. They're confidently wrong.
 
-### What You'll Learn
+### What You Will Learn
 
-In this lab, you'll see the transformation that happens when agents get access to real business data:
+In this lab, you will see the transformation that happens when agents get access to real business data:
 
 1. **Without data:** Ask about Seer Equity loan rates. Watch the AI give generic (or wrong) answers.
 2. **With data:** Connect the agent to actual loan policies and client information.
@@ -28,7 +28,7 @@ In this lab, you'll see the transformation that happens when agents get access t
 
 Enterprise data is what turns a generic AI into YOUR AI—one that knows your business.
 
-**What you'll build:** An agent connected to Seer Equity's loan policies and applicant data.
+**What you will build:** An agent connected to Seer Equity's loan policies and applicant data.
 
 Estimated Time: 10 minutes
 
@@ -41,7 +41,7 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
@@ -114,7 +114,7 @@ Let's start by asking the raw LLM (`SELECT AI CHAT`) about Seer Equity's loan pr
 
 ## Task 3: Create Seer Equity's Enterprise Data
 
-Now let's create the business data that makes an agent useful for Seer Equity. You'll create:
+Now let's create the business data that makes an agent useful for Seer Equity. You will create:
 
 - **loan_policies**: Seer Equity's actual loan products, rates, and requirements
 - **loan_applicants**: Real applicant records with credit scores, income, and eligibility
@@ -428,7 +428,7 @@ Look at the tool execution history to confirm the agent queried your enterprise 
 
 ## Summary
 
-In this lab, you experienced the transformative power of enterprise data at Seer Equity:
+In this lab, you experienced the difference enterprise data makes at Seer Equity:
 
 | Approach | Result |
 |----------|--------|

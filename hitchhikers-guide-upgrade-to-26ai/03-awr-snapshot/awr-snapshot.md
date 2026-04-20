@@ -32,8 +32,6 @@ This lab assumes:
     . upgr
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Use the script to generate an AWR snapshot. Take note of the snapshot ID (e.g.: 113). You need it later on.
@@ -90,7 +88,7 @@ Start capturing workload information from the cursor cache into a SQL tuning set
 
 1. Back in the *yellow* terminal 🟨, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
 
-    ``` sql
+    ``` bash
     <copy>
     @/home/oracle/scripts/upg-03-capture_cc.sql
     </copy>

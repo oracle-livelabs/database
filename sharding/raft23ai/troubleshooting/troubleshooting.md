@@ -1,7 +1,7 @@
 # Troubleshooting Guide
 
 ## Introduction   
-This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It provides assistance to help you resolve common challenges effectively.
+This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It aids in helping you to resolve common challenges effectively.
 
 *Estimated Time*:  30 minutes
 
@@ -21,7 +21,7 @@ This lab assumes you have:
 
 ## Validate the podman containers are running as expected
 
-1. In general before any troubleshooting steps, Open a terminal session and Verify Oracle Sharding container Details
+1. In general, before any troubleshooting steps, open a terminal session and Verify Oracle Sharding container Details
 
     ```
     <copy>
@@ -53,9 +53,9 @@ This lab assumes you have:
     </copy>
     ```
 
-## Verify RAFT Demo UI application is running
+## Verify Raft Demo UI application is running
 
-1. How to check if RAFT Demo UI application is running?
+1. How to check if Raft Demo UI application is running?
 
     ```
     <copy>
@@ -64,7 +64,7 @@ This lab assumes you have:
     ```
    ![<verify_raft_ui_app>](./images/verify_raft_ui_app.png " ")
 
-2. For some reasons if you want to restart the RAFT Demo UI, it can be stopped then started:
+2. For some reasons if you want to restart the Raft Demo UI, it can be stopped then started:
     ```
     <copy>
     ps -ef | grep raftLiveLabsApp
@@ -76,7 +76,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    Confirm from browser using http://localhost:8080 that RAFT Demo UI application is running.
+    Confirm from browser using http://localhost:8080 that Raft Demo UI application is running.
 
 
 ## Scenarios: Guide for Raft Replication Test Cases
@@ -193,10 +193,10 @@ This lab assumes you have:
     This application has no explicit mapping for /error, so you are seeing this as a fallback.
     ```
 
-   Please wait and go slow with the delete process. RAPId clicks can cause errors, so allow the operation to complete before clicking again.
+   Please wait and go slow with the delete process. Multiple clicks can cause errors, so allow the operation to complete before clicking again.
 
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026

@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## The Four Types of Agent Memory at Seer Equity\n\n### The Business Problem\n\nTwo similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.\n\n*\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"*\n\nThe problem isn't just forgetting clients. It's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.\n\n### What You'll Learn\n\nAgents need four types of memory, just like people:\n\n| Memory Type | Purpose | Example at Seer Equity |\n|-------------|---------|-------------------------|\n| **Short-term context** | What's happening right now | \"Working on LOAN-5678 for Sarah Chen\" |\n| **Long-term facts** | Stable client information | \"Sarah Chen has 15% rate exception\" |\n| **Decisions/outcomes** | What we decided before | \"Approved similar loan last quarter, client paid on time\" |\n| **Reference knowledge** | Corporate policies | \"Preferred rate is 7.9% for 750+ credit\" |\n\nIn this lab, you'll build all four types and see how they work together to make agents consistent and explainable.\n\n**What you'll build:** A complete four-type memory architecture for loan decisions.\n\n**Estimated Time:** 15 minutes",
+      "text": "%md\n## The Four Types of Agent Memory at Seer Equity\n\n### The Business Problem\n\nTwo similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.\n\n*\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"*\n\nThe problem isn't just forgetting clients. It's forgetting *decisions*. Without memory of what worked before, every loan decision starts from scratch.\n\n### What You Will Learn\n\nAgents need four types of memory, just like people:\n\n| Memory Type | Purpose | Example at Seer Equity |\n|-------------|---------|-------------------------|\n| **Short-term context** | What's happening right now | \"Working on LOAN-5678 for Sarah Chen\" |\n| **Long-term facts** | Stable client information | \"Sarah Chen has 15% rate exception\" |\n| **Decisions/outcomes** | What we decided before | \"Approved similar loan last quarter, client paid on time\" |\n| **Reference knowledge** | Corporate policies | \"Preferred rate is 7.9% for 750+ credit\" |\n\nIn this lab, you will build all four types and see how they work together to make agents consistent and explainable.\n\n**What you will build:** A complete four-type memory architecture for loan decisions.\n\n**Estimated Time:** 15 minutes",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -16,13 +16,13 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>The Four Types of Agent Memory at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Two similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.</p>\n\n<p><em>\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"</em></p>\n\n<p>The problem isn't just forgetting clients. It's forgetting <em>decisions</em>. Without memory of what worked before, every loan decision starts from scratch.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>Agents need four types of memory, just like people:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Memory Type</th><th style=\"padding: 8px;\">Purpose</th><th style=\"padding: 8px;\">Example at Seer Equity</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>Short-term context</strong></td><td style=\"padding: 8px;\">What's happening right now</td><td style=\"padding: 8px;\">\"Working on LOAN-5678 for Sarah Chen\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Long-term facts</strong></td><td style=\"padding: 8px;\">Stable client information</td><td style=\"padding: 8px;\">\"Sarah Chen has 15% rate exception\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Decisions/outcomes</strong></td><td style=\"padding: 8px;\">What we decided before</td><td style=\"padding: 8px;\">\"Approved similar loan last quarter, client paid on time\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Reference knowledge</strong></td><td style=\"padding: 8px;\">Corporate policies</td><td style=\"padding: 8px;\">\"Preferred rate is 7.9% for 750+ credit\"</td></tr>\n</table>\n\n<p>In this lab, you'll build all four types and see how they work together to make agents consistent and explainable.</p>\n\n<p><strong>What you'll build:</strong> A complete four-type memory architecture for loan decisions.</p>\n\n<p><strong>Estimated Time:</strong> 15 minutes</p>"
+            "data": "<h2>The Four Types of Agent Memory at Seer Equity</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Two similar business loan applications came in last quarter at Seer Equity. Same loan amount, similar credit profiles, similar businesses. One got approved at preferred rates; the other got denied outright.</p>\n\n<p><em>\"Every loan officer handles the same situation differently. There's no way to learn from past decisions or ensure consistency.\"</em></p>\n\n<p>The problem isn't just forgetting clients. It's forgetting <em>decisions</em>. Without memory of what worked before, every loan decision starts from scratch.</p>\n\n<h3>What You Will Learn</h3>\n\n<p>Agents need four types of memory, just like people:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Memory Type</th><th style=\"padding: 8px;\">Purpose</th><th style=\"padding: 8px;\">Example at Seer Equity</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>Short-term context</strong></td><td style=\"padding: 8px;\">What's happening right now</td><td style=\"padding: 8px;\">\"Working on LOAN-5678 for Sarah Chen\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Long-term facts</strong></td><td style=\"padding: 8px;\">Stable client information</td><td style=\"padding: 8px;\">\"Sarah Chen has 15% rate exception\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Decisions/outcomes</strong></td><td style=\"padding: 8px;\">What we decided before</td><td style=\"padding: 8px;\">\"Approved similar loan last quarter, client paid on time\"</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>Reference knowledge</strong></td><td style=\"padding: 8px;\">Corporate policies</td><td style=\"padding: 8px;\">\"Preferred rate is 7.9% for 750+ credit\"</td></tr>\n</table>\n\n<p>In this lab, you will build all four types and see how they work together to make agents consistent and explainable.</p>\n\n<p><strong>What you will build:</strong> A complete four-type memory architecture for loan decisions.</p>\n\n<p><strong>Estimated Time:</strong> 15 minutes</p>"
           }
         ]
       }
     },
     {
-      "text": "%md\n## Create the Memory Tables\n\nYou'll create two tables:\n\n1. **agent_memory** — A unified table for short-term, long-term, and decision memory with a type classifier\n2. **reference_knowledge** — A separate table for loan policies (agents can read but not modify)\n\nNotice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.",
+      "text": "%md\n## Create the Memory Tables\n\nYou will create two tables:\n\n1. **agent_memory**: A unified table for short-term, long-term, and decision memory with a type classifier\n2. **reference_knowledge**: A separate table for loan policies (agents can read but not modify)\n\nNotice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -37,7 +37,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Memory Tables</h2>\n\n<p>You'll create two tables:</p>\n\n<ol>\n<li><strong>agent_memory</strong> — A unified table for short-term, long-term, and decision memory with a type classifier</li>\n<li><strong>reference_knowledge</strong> — A separate table for loan policies (agents can read but not modify)</li>\n</ol>\n\n<p>Notice the <code>memory_type</code> constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.</p>"
+            "data": "<h2>Create the Memory Tables</h2>\n\n<p>You will create two tables:</p>\n\n<ol>\n<li><strong>agent_memory</strong>: A unified table for short-term, long-term, and decision memory with a type classifier</li>\n<li><strong>reference_knowledge</strong>: A separate table for loan policies (agents can read but not modify)</li>\n</ol>\n\n<p>Notice the <code>memory_type</code> constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.</p>"
           }
         ]
       }
@@ -118,7 +118,7 @@
       }
     },
     {
-      "text": "%md\n## Test Short-Term Context\n\nSet context for a loan processing session. Imagine a loan officer is working on an application—you need to track the client and the application details.\n\nYou should see both context items returned: the client info and the loan details.",
+      "text": "%md\n## Test Short-Term Context\n\nSet context for a loan processing session. Imagine a loan officer is working on an application. You need to track the client and the application details.\n\nYou should see both context items returned: the client info and the loan details.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -133,7 +133,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Test Short-Term Context</h2>\n\n<p>Set context for a loan processing session. Imagine a loan officer is working on an application—you need to track the client and the application details.</p>\n\n<p>You should see both context items returned: the client info and the loan details.</p>"
+            "data": "<h2>Test Short-Term Context</h2>\n\n<p>Set context for a loan processing session. Imagine a loan officer is working on an application. You need to track the client and the application details.</p>\n\n<p>You should see both context items returned: the client info and the loan details.</p>"
           }
         ]
       }
@@ -246,7 +246,7 @@
       }
     },
     {
-      "text": "%md\n## Create Decision/Outcome Functions\n\nDecisions and outcomes are the audit trail—what the agent decided on past loans and what happened as a result.\n\n- **record_decision** — Store a loan decision with its situation, action, outcome, and success flag\n- **find_past_decisions** — Search for similar loan situations to learn from past experience\n\nThis is how agents learn from experience. When facing a new loan situation, they can check what worked (or didn't work) before.",
+      "text": "%md\n## Create Decision/Outcome Functions\n\nDecisions and outcomes are the audit trail. It captures what the agent decided on past loans and what happened as a result.\n\n- **record_decision** — Store a loan decision with its situation, action, outcome, and success flag\n- **find_past_decisions** — Search for similar loan situations to learn from past experience\n\nThis is how agents learn from experience. When facing a new loan situation, they can check what worked (or didn't work) before.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -261,7 +261,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create Decision/Outcome Functions</h2>\n\n<p>Decisions and outcomes are the audit trail—what the agent decided on past loans and what happened as a result.</p>\n\n<ul>\n<li><strong>record_decision</strong> — Store a loan decision with its situation, action, outcome, and success flag</li>\n<li><strong>find_past_decisions</strong> — Search for similar loan situations to learn from past experience</li>\n</ul>\n\n<p>This is how agents learn from experience. When facing a new loan situation, they can check what worked (or didn't work) before.</p>"
+            "data": "<h2>Create Decision/Outcome Functions</h2>\n\n<p>Decisions and outcomes are the audit trail. It captures what the agent decided on past loans and what happened as a result.</p>\n\n<ul>\n<li><strong>record_decision</strong> — Store a loan decision with its situation, action, outcome, and success flag</li>\n<li><strong>find_past_decisions</strong> — Search for similar loan situations to learn from past experience</li>\n</ul>\n\n<p>This is how agents learn from experience. When facing a new loan situation, they can check what worked (or didn't work) before.</p>"
           }
         ]
       }
@@ -310,7 +310,7 @@
       }
     },
     {
-      "text": "%md\n## Search for Similar Past Decisions\n\nSearch for decisions related to \"rate exception\" and \"marginal credit\". The agent uses this to learn from past experience.\n\nFor rate exception, you should find the successful decision. For marginal credit, you should find BOTH the failed and successful approaches—a warning about what not to do AND what works.",
+      "text": "%md\n## Search for Similar Past Decisions\n\nSearch for decisions related to \"rate exception\" and \"marginal credit\". The agent uses this to learn from past experience.\n\nFor rate exception, you should find the successful decision. For marginal credit, you should find BOTH the failed and successful approaches. That gives you a warning about what not to do AND what works.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -325,7 +325,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Search for Similar Past Decisions</h2>\n\n<p>Search for decisions related to \"rate exception\" and \"marginal credit\". The agent uses this to learn from past experience.</p>\n\n<p>For rate exception, you should find the successful decision. For marginal credit, you should find BOTH the failed and successful approaches—a warning about what not to do AND what works.</p>"
+            "data": "<h2>Search for Similar Past Decisions</h2>\n\n<p>Search for decisions related to \"rate exception\" and \"marginal credit\". The agent uses this to learn from past experience.</p>\n\n<p>For rate exception, you should find the successful decision. For marginal credit, you should find BOTH the failed and successful approaches. That gives you a warning about what not to do AND what works.</p>"
           }
         ]
       }

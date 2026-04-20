@@ -61,6 +61,11 @@
             "title": "Lab 10: Tools, Safety, and Human Control",
             "description": "Build tools, add safety rules, enable human-in-the-loop",
             "filename": "../../tools-safety-control/agents-and-tools.md"
+        },
+        {
+            "title": "Lab 11: Check Your Understanding",
+            "description": "Review the core AI4U concepts with a scored quiz.",
+            "filename": "../../check-your-understanding/check-your-understanding.md"
         }
     ]
 }

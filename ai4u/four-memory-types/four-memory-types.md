@@ -76,9 +76,9 @@ Before you begin, you are going to import a notebook that has all of the command
 
 You'll create two tables:
 
-1. **agent_memory** — A unified table for short-term, long-term, and decision memory with a type classifier
+1. **agent_memory**: A unified table for short-term, long-term, and decision memory with a type classifier
 
-2. **reference_knowledge** — A separate table for loan policies (agents can read but not modify)
+2. **reference_knowledge**: A separate table for loan policies (agents can read but not modify)
 
     Notice the `memory_type` constraint limits values to SHORTTERM, LONGTERM, DECISION, and REFERENCE.
 
@@ -109,7 +109,7 @@ You'll create two tables:
 
 2. Create the reference knowledge table.
 
-    Reference knowledge is different—it's maintained by humans, not agents. Agents can read Seer Equity's loan policies but shouldn't modify them. Notice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.
+    Reference knowledge is different. It is maintained by humans, not agents. Agents can read Seer Equity's loan policies but shouldn't modify them. Notice the `updated_by` column tracks who changed the policy. This is corporate knowledge, not agent learning.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -131,7 +131,7 @@ You'll create two tables:
 
 ## Task 3: Short-Term Context (Current Task)
 
-Short-term context holds what's happening right now—the active information for completing the current loan task. This is like a loan officer's working memory: what they're actively thinking about while processing an application.
+Short-term context holds what is happening right now. It is the active information for completing the current loan task. This is like a loan officer's working memory: what they're actively thinking about while processing an application.
 
 - **set_context** — Store context for a session/entity (replaces old context, expires in 1 hour)
 - **get_context** — Retrieve context for a session
@@ -203,7 +203,7 @@ Short-term context holds what's happening right now—the active information for
 
 2. Test short-term context.
 
-    Set context for a loan processing session—imagine a loan officer working on an application and tracking both the client and the application details. You should see both context items returned.
+    Set context for a loan processing session. Imagine a loan officer working on an application and tracking both the client and the application details. You should see both context items returned.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -222,7 +222,7 @@ Short-term context holds what's happening right now—the active information for
 
 ## Task 4: Long-Term Facts (Persistent Client Knowledge)
 
-Long-term facts are stable information about clients that the agent should rely on across all tasks and sessions. Unlike short-term context, these don't expire—once Seer Equity learns something about a client, the agent remembers forever.
+Long-term facts are stable information about clients that the agent should rely on across all tasks and sessions. Unlike short-term context, these don't expire. Once Seer Equity learns something about a client, the agent remembers forever.
 
 - **store_fact** — Store a fact about a client with an optional category
 - **get_facts** — Retrieve facts about a client, optionally filtered by category
@@ -293,7 +293,7 @@ Long-term facts are stable information about clients that the agent should rely 
 
 2. Store long-term facts about Seer Equity clients.
 
-    Store several facts about two clients. Notice the different categories: `contact_preference`, `rate_exception`, `relationship`, `requirement`, `schedule`. These facts will persist across all sessions—every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.
+    Store several facts about two clients. Notice the different categories: `contact_preference`, `rate_exception`, `relationship`, `requirement`, `schedule`. These facts will persist across all sessions. Every time the agent deals with CLIENT-001, it should know they prefer email and have a rate exception.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -332,7 +332,7 @@ Long-term facts are stable information about clients that the agent should rely 
 
 ## Task 5: Decisions and Outcomes (Audit Trail)
 
-Decisions and outcomes are the audit trail—what the agent decided on past loans and what happened as a result. This is how agents learn from experience: when facing a new loan situation, they can check what worked (or didn't work) before.
+Decisions and outcomes are the audit trail. It captures what the agent decided on past loans and what happened as a result. This is how agents learn from experience: when facing a new loan situation, they can check what worked (or didn't work) before.
 
 - **record_decision** — Store a loan decision with its situation, action, outcome, and success flag
 - **find_past_decisions** — Search for similar loan situations to learn from past experience
@@ -417,7 +417,7 @@ Decisions and outcomes are the audit trail—what the agent decided on past loan
 
 2. Record past loan decisions.
 
-    Record some historical loan decisions, including both successful and unsuccessful outcomes. This creates a knowledge base the agent can learn from. Notice the third decision has `success = false`—the agent should learn what NOT to do from failures.
+    Record some historical loan decisions, including both successful and unsuccessful outcomes. This creates a knowledge base the agent can learn from. Notice the third decision has `success = false`. The agent should learn what NOT to do from failures.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -464,7 +464,7 @@ Decisions and outcomes are the audit trail—what the agent decided on past loan
 
 3. Search for similar past decisions.
 
-    Search for decisions related to "rate exception" and "marginal credit". For rate exception you should find the successful decision. For marginal credit you should find BOTH the failed and successful approaches—a warning about what not to do AND what works.
+    Search for decisions related to "rate exception" and "marginal credit". For rate exception you should find the successful decision. For marginal credit you should find BOTH the failed and successful approaches. That gives you a warning about what not to do AND what works.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -550,7 +550,7 @@ Reference knowledge is Seer Equity's policies, procedures, and underwriting guid
 
 2. Add Seer Equity reference knowledge (loan policies).
 
-    Add Seer Equity's loan policies as an administrator would. These are corporate rules the agent must follow. Notice the different categories: `policy`, `procedure`, `guideline`—this helps agents find the right type of reference.
+    Add Seer Equity's loan policies as an administrator would. These are corporate rules the agent must follow. Notice the different categories: `policy`, `procedure`, `guideline`. This helps agents find the right type of reference.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -596,7 +596,7 @@ Reference knowledge is Seer Equity's policies, procedures, and underwriting guid
 
     ![Policy query returning 2 references, escalation query returning 1 reference](images/task6_3.png)
 
-## Task 7: A Complete Example — Using All Four Memory Types
+## Task 7: A Complete Example Using All Four Memory Types
 
 Now let's trace how an agent would use all four types together when handling a loan inquiry at Seer Equity.
 

@@ -11,7 +11,7 @@
     {
       "title": "Get Started",
       "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
     },
     {
       "title": "Lab 1: Initialize Environment",
@@ -73,11 +73,16 @@
     {
       "title": "Lab 15: Downgrade a PDB",
       "filename": "../../15-downgrade-pdb/downgrade-pdb.md"
+    },
+    {
+      "title": "Lab 16: Check Your Understanding",
+      "description": "Review key upgrade concepts with a scored quiz.",
+      "filename": "../../16-check-your-understanding/16-check-your-understanding.md"
     },    
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }
