@@ -19,20 +19,23 @@ Estimated Time: 10 minutes
 
 ## Task 1: Open the remote Jupyter Lab environment
 
-On your bash shell command line, enter the following:
+On your browser, enter the following URL:
 
 ```python
 <copy>
-jupyter lab --ip=0.0.0.0 --allow-root&
+http://147.224.148.50/livelabs/vnc.html?password=LiveLabs.Rocks_99&resize=scale&quality=9&autoconnect=true&reconnect=true
 </copy>
 ```
 
 ![Jupyter server start](images/jupyter01.png)
 
-**(jupyter notebook) -->**  [Lab1 Task1:]&nbsp;&nbsp;&nbsp;Copy the highlighted URL and paste it into your browser.  Substitute your IP address in place of the localhost IP address (127.0.0.1)** (see below)
+If you have downloaded this workshop to your own tenancy, to execute locally, you may chose to run the jupyter directly in your browser using the following URL:
 
-**(jupyter notebook) -->**  Press 'enter' to execute the URL.
-You are now in the lab notebook. Press 'Shift-Enter' or Click the 'Run Cell' icon( ![CellRun icon](images/run-cell-icon.png) ) to import the required python modules.
+```python
+<copy>
+http://147.224.148.50:8888/lab/workspaces/auto-h/tree/oracleai_demo.livelab.code.local.ipynb
+</copy>
+```
 
 ![Jupyter launcher](images/jupyter02.png)
 
