@@ -39,6 +39,8 @@ http://147.224.148.50:8888/lab/workspaces/auto-h/tree/oracleai_demo.livelab.code
 
 ![Jupyter launcher](images/jupyter02.png)
 
+**NOTE** - To get a larger view of an image, float your cursor over the image and when **'magnifying glass'** appears as the cursor, click it and a **full-screen** view of the image appears.  A second click returns the image to its original dimensions.
+
 ## Task 2: Verify the valid setup of the workshop environment
 
  (switch to browser) [Lab1 Task2:]&nbsp;&nbsp;&nbsp;The next two notebook cells introduce the workshop and provide an overview of the goals and expectations.  When ready, press 'Shift-Enter' or click the 'Run Cell' icon( ![CellRun icon](images/run-cell-icon.png) ) in each cell to continue.
