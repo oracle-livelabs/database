@@ -8,7 +8,7 @@ This workshop walks you through the steps to download the Migrator utility to a 
 
 You can also run this workshop as part of the Migrator series to learn about data backup and restoration using the Migrator utility. Start with the workshop **[Migrate Data from NoSQL Cloud Service to OCI Object Storage,](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4265)** which demonstrates how to copy data from an Oracle NoSQL Database to a JSON file in an OCI Object Storage bucket. After completing that, you only need to run **Lab - Create a Migrator Configuration File** and **Lab - Run the Migrator Utility** from the current workshop - **Migrate Data from OCI Object Storage to NoSQL Cloud Service**, to restore migrated data from the JSON file in OCI Object Storage into an Oracle NoSQL Database Cloud Service table.
 
-Estimated Time: X
+Estimated Workshop Time: 35 minutes
 
 ### About NoSQL Database
 

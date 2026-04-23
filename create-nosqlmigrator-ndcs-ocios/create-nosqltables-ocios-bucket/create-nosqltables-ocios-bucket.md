@@ -34,7 +34,7 @@ In this lab you will:
 
     *Note: Oracle NoSQL Database Cloud Service resources are created in a compartment and are scoped to that compartment. It is recommended not to create the Oracle NoSQL Database Cloud Service table in the "root" compartment, but to create them in your own compartment created under "root".*
 
-   ![Create NoSQL tables](images/console-createtable.png)
+    ![Create NoSQL tables](images/console-createtable.png)
 
 4. In the **Create Table** dialog, select **Simple input** for *Table Creation Mode*. Retain the default capacity mode to **Provisioned Capacity**. Enter the capacity values for the table. In the **Name** field, enter a table name that is unique to your tenancy. In this lab, you will create **NDCSupload** table.
 
@@ -42,7 +42,7 @@ In this lab you will:
 
 5. In the *Primary Key Columns* section, enter primary key details.
 
-    ![Primary key](images/console-createtable-PK.png)
+    ![Primary key](images/console-createtable-pk.png)
 
 6. In the *Columns* section, enter non-primary column details and select **Create Table**.
 
@@ -60,11 +60,11 @@ In this lab you will:
 
     After uploading successfully, the console displays the total number of rows that were inserted. You can close the window.
 
-   ![Upload rows](images/console-table-uploadrows.png)
+    ![Upload rows](images/console-table-uploadrows.png)
 
-9. To verify, you can scroll down to **Explore data**. The SQL query to fetch all the table rows is displayed by default. 
+9. To verify, you can scroll down to **Explore data**. The SQL query to fetch all the table rows is displayed by default.
 
-    Select **Execute** to view the table rows. 
+    Select **Execute** to view the table rows.
 
 
 ## Task 2: Create an OCI Object Storage bucket

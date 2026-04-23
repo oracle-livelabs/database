@@ -31,21 +31,21 @@ In this lab you will:
 
 3. On the **Object Storage & Archive Storage** page, select your compartment and then select your bucket.
 
-   Here, you will use the **Migrate\_oci** bucket.
+    Here, you will use the **Migrate\_oci** bucket.
 
     *Note: OCI resources are created in a compartment and are scoped to that compartment. It is recommended not to create the Object Storage bucket in the "root" compartment, but to create them in your own compartment created under "root".*
 
-4. Select the **Actions** menu and then select **Create new Folder** from the drop-down. Enter the name of   the folder and select **Create folder**. You will later supply this folder name as the prefix parameter in the source configuration template. Here you will give the folder name as **Delegation**.
+4. Select the **Actions** menu and then select **Create new Folder** from the drop-down. Enter the name of the folder and select **Create folder**. You will later supply this folder name as the prefix parameter in the source configuration template. Here you will give the folder name as **Delegation**.
 
 5. Select the **Delegation** folder and then select **Upload objects**.
 
-   Under **Choose Files from you Computer**, either select or drag-drop the **NDCSupload.json** file that you downloaded as a prerequisite. Select **Next**.
+    Under **Choose Files from you Computer**, either select or drag-drop the **NDCSupload.json** file that you downloaded as a prerequisite. Select **Next**.
 
-   ![Upload rows](images/upload.png)
+    ![Upload rows](images/upload.png)
 
 6. On the **Review and upload files** screen, verify the details and select the **Upload objects** button.
 
-   ![Review uploaded rows](images/upload-review.png)
+    ![Review uploaded rows](images/upload-review.png)
 
     After the upload bar indicates completion, you can select **Close**.
     You can view the **NDCSupload.json** file in the Delegations folder.
@@ -56,7 +56,6 @@ You may proceed to the next lab.
 
 * [OCI Object Storage bucket](https://docs.oracle.com/en-us/iaas/Content/Object/Tasks/managingbuckets.htm)
 * [Let users write objects to Object Storage bucket](https://docs.oracle.com/en-us/iaas/Content/Identity/policiescommon/commonpolicies.htm#write-objects-to-buckets)
-
 
 ## Acknowledgements
 
