@@ -23,7 +23,7 @@ On your browser, enter the following URL:
 
 ```python
 <copy>
-http://147.224.148.50/livelabs/vnc.html?password=LiveLabs.Rocks_99&resize=scale&quality=9&autoconnect=true&reconnect=true
+http://64.181.215.189/livelabs/vnc.html?password=LiveLabs.Rocks_99&resize=scale&quality=9&autoconnect=true&reconnect=true
 </copy>
 ```
 
@@ -33,7 +33,7 @@ If you have downloaded this workshop to your own tenancy, to execute locally, yo
 
 ```python
 <copy>
-http://147.224.148.50:8888/lab/workspaces/auto-h/tree/oracleai_demo.livelab.code.local.ipynb
+http://64.181.215.189:8888/lab/workspaces/auto-h/tree/oracleai_demo.livelab.code.local.ipynb
 </copy>
 ```
 
