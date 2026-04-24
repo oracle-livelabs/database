@@ -42,7 +42,7 @@ In this lab you will:
 
 5. In the *Primary Key Columns* section, enter primary key details.
 
-    ![Primary key](images/console-createtable-pk.png)
+    ![Primary key](images/console-createtable-primary.png)
 
 6. In the *Columns* section, enter non-primary column details and select **Create Table**.
 
