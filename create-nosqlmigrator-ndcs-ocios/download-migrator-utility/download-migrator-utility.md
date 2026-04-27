@@ -9,25 +9,26 @@ Estimated Lab Time: 5 minutes
 ### Objectives
 
 In this lab you will:
+
 * Download Oracle NoSQL Migrator utility.
 * Launch the Cloud Shell for an Oracle Cloud user account.
 * Upload the Oracle NoSQL Migrator utility to the Cloud Shell.
 
 ### Prerequisites
 
-*  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
+* An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
 
 ## Task 1: Download the Oracle NoSQL Migrator Utility
 
-1. Open the **[Oracle NoSQL Downloads page](https://www.oracle.com/database/technologies/nosql-database-server-downloads.html)** and scroll down to Oracle NoSQL Database Migrator and Analytics Integrator section.
+1. Open the **[Oracle NoSQL Downloads page](https://www.oracle.com/database/technologies/nosql-database-server-downloads.html)** and scroll down to *NoSQL Database Migrator Integrator* in the Downloads section.
 
-    ![Oracle NoSQL Downloads page](images/otn-migrator-download.png)
+2. Click the latest Oracle NoSQL Database Migrator package. This will navigate to Oracle Software Delivery Cloud page. In this workshop, **nosql-migrator-1.8.0** is used for demonstration purposes.
 
-2. Click the latest Oracle NoSQL Migrator package. This will navigate to Oracle Software Delivery Cloud page. In this workhop, **nosql-migrator-1.7.0** is used for demonstration purposes.
+    *Note: Always download the latest version of the Oracle NoSQL Database Migrator package.*
 
 3. Accept the terms and conditions.
 
-4. Download the latest Oracle NoSQL Migrator zip file to your local machine. In this workshop, **V1048015-01.zip** is used as a sample file for demonstration purposes.
+4. Download the latest Oracle NoSQL Database Migrator zip file to your local machine. In this workshop, **V1053573-01.zip** is used as a sample file for demonstration purposes.
 
 ## Task 2: Upload Oracle NoSQL Migrator Utility to the Cloud Shell
 
@@ -46,10 +47,10 @@ In this lab you will:
 4. Extract the contents of the package using the appropriate command. For example,
 
     ```
-    <copy>unzip -q V1048015-01.zip</copy>
+    <copy>unzip -q V1053573-01.zip</copy>
     ```
 
-9. The resulting folder contains the Oracle NoSQL Migrator utility. You can minimize the Cloud Shell window for later use by selecting the minimize icon in the upper right corner.
+5. The resulting folder contains the Oracle NoSQL Migrator utility. You can minimize the Cloud Shell window for later use by selecting the minimize icon in the upper right corner.
 
 You may proceed to the next lab.
 
@@ -58,5 +59,6 @@ You may proceed to the next lab.
 * [Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 ## Acknowledgements
+
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, December 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, April 2026
