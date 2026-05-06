@@ -6,9 +6,11 @@ In this lab, you will create the transaction processing schema and load data int
 
 *Estimated Time:* 20 minutes
 
+<if type="nonsandbox">
 Watch the video for a quick walk through of the Lab2.
-[Lab2](videohub:1_mz228rvo) 
-[Lab2](videohub:1_yayzolzj) 
+[Lab2](videohub:1_mz228rvo)
+[Lab2](videohub:1_yayzolzj)
+</if>
 
 ### About Oracle True Cache
 Modern applications often require massive scalability in terms of both the number of connections and the amount of data that can be cached.
@@ -61,7 +63,7 @@ This lab assumes you have:
     </copy>
     ```
 
-5. Execute step1 as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user.
+5. Execute step1.sql as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user. if you see a object exists error like below, please ignore that and continue.
 
     ```
     <copy>
@@ -71,7 +73,9 @@ This lab assumes you have:
 
     ![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
 
-6. Exit from the sysdba session by pressing exit 
+    ![objectexistserror](https://oracle-livelabs.github.io/database/truecache/data-load/images/objectexistserror.png " ")
+
+6. Exit from the sysdba session by entering exit 
     ```
     <copy>
     exit
@@ -83,7 +87,7 @@ This lab assumes you have:
     hostname
     </copy>
     ```
-8. Logon to SALES1 service as the transaction user using the password specified in step1 in the format hostname:1521/SALES1. To view the password open the file using cat command.
+8. Login to SALES1 service as the transactions user using the password specified in step1.sql in the format hostname:1521/SALES1. To view the password open the file using cat command.
     ```
     <copy>
     cat step1.sql
@@ -91,7 +95,7 @@ This lab assumes you have:
     ```
     sqlplus transactions/<***PASSWORDFROMSTEP1****>@prod:1521/SALES1
 
-9. Execute step2 and step3 sequentially.
+9. Execute step2.sql and step3.sql sequentially.
 
      ```
     <copy>
@@ -109,7 +113,7 @@ This lab assumes you have:
 
 ## Task 2: Load Data into the Tables
 
-1. Run step4 as the transactions user.
+1. Run step4.sql as the transactions user.
 
     ```
     <copy>
@@ -118,7 +122,7 @@ This lab assumes you have:
     ```
     ![dataload step4](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep4.png " ")
 
-2. After completing step4, you should see a commit complete message.
+2. Upon completion, you should see a commit complete message.
     ![dataload commit](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadcommit.png " ")
 
 3. Exit from the sqlplus session by entering exit 
@@ -137,32 +141,73 @@ This lab assumes you have:
     </copy>
     ```
     ![dataload truecache](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecache.png " ")
+    
+2. If you encounter an error like the one below during True Cache pod startup, follow the steps outlined in Lab 1 to stop and restart the TrueDB container, or follow the steps below:
+    ![truecache startuperror](https://oracle-livelabs.github.io/database/truecache/data-load/images/truecachestartuperror.png " ")
 
-2. Login to truecache as a sysdba user
+    To stop the container
+        ```
+        <copy>
+        sudo podman container stop truedb
+        </copy>
+        ```
+    To start the container
+        ```
+        <copy>
+        sudo podman container start truedb
+        </copy>
+        ```
+
+3. Login to truecache as a sysdba user
      ```
     <copy>
     sqlplus / as sysdba
     </copy>
     ```
-3. Set the db keep cache size.
+4. Set the db keep cache size.
      ```
     <copy>
     ALTER SYSTEM SET DB_KEEP_CACHE_SIZE=500M scope=both;
     </copy>
     ```
-4. Exit from the sqlplus session by entering exit 
+5. View the existing pdbs inside True Cache by using show pdbs.
+     ```
+    <copy>
+    show pdbs;
+    </copy>
+    ```
+6. Change the session to pdb.
+     ```
+    <copy>
+    ALTER SESSION SET CONTAINER=ORCLPDB1;
+    </copy>
+    ```
+7. Verify whether the true cache service is running.
+     ```
+    <copy>
+    select name from v$active_services;
+    </copy>
+    ``` 
+8. if you dont see the SALES1_TC service in the active services, start the service
+     ```
+    <copy>
+    EXEC DBMS_SERVICE.START_SERVICE('SALES1_TC');
+    </copy>
+    ```   
+     ![dataload truecache check service](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachecheckservice.png " ")
+9. Exit from the sqlplus session by entering exit 
     ```
     <copy>
     exit
     </copy>
     ```
-5. Login to the truecache using the transaction user using the format <truecache_hostname>:1521/SALES1_TC
+10. Login to the truecache using the transaction user using the format <truecache_hostname>:1521/SALES1_TC
 
     sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
     ![dataload truecache login](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachelogin.png " ")
 
 
-6. Verify the True Cache role.
+11. Verify the True Cache role.
     ```
     <copy>
     SELECT DATABASE_ROLE FROM V$DATABASE;
@@ -170,7 +215,7 @@ This lab assumes you have:
     ```
     ![dataload truecache verify](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecacheverify.png " ")
 
-7. Execute DBMS_CACHEUTIL.TRUE_CACHE_KEEP for the table.
+12. Execute DBMS_CACHEUTIL.TRUE_CACHE_KEEP for the table.
      ```
     <copy>
     EXECUTE DBMS_CACHEUTIL.TRUE_CACHE_KEEP('TRANSACTIONS','ACCOUNTS');
@@ -178,7 +223,7 @@ This lab assumes you have:
     ```
     ![dataload truecache keep](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachekeep.png " ")
 
-8. Verify the tables are in keep by executing this below query
+13. Verify the tables are in keep by executing this below query
      ```
     <copy>
     set lines 200
@@ -189,7 +234,7 @@ This lab assumes you have:
     ```
     ![dataload truecache keep verify](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachekeepverify.png " ")
 
-9. Exit from the sqlplus session by entering exit 
+14. Exit from the sqlplus session by entering exit 
     ```
     <copy>
     exit

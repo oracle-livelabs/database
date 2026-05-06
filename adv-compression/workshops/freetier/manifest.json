@@ -13,24 +13,24 @@
         {
             "title": "Get Started",
             "description": "This is the prerequisites for customers.",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
         },
         {
             "title": "Lab 1: Generate SSH Key - Cloud Shell",
             "description": "Generate SSH Key",
-            "filename": "https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/generate-ssh-keys-cloud-shell.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/generate-ssh-key-cloud-shell/generate-ssh-keys-cloud-shell.md"
         },
         {
             "title": "Lab 2: Environment Setup",
             "description": "Setup compute instance running 19c using Terraform script and Resource Manager",
             "publisheddate": "3/24/2020",
-            "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute/setup-19c-freetier.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/setup-compute/setup-19c-freetier.md"
         },
         {
             "title": "Lab 3: Sample Schema Setup",
             "description": "Setup Schema",
             "publisheddate": "3/24/2020",
-            "filename": "https://oracle-livelabs.github.io/developer/oracle-db-features-for-developers/setup/setup.md"
+            "filename": "https://livelabs.oracle.com/cdn/developer/oracle-db-features-for-developers/setup/setup.md"
         },
         {
             "title": "Lab 4: Enable OLTP table compression",
@@ -51,7 +51,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }
