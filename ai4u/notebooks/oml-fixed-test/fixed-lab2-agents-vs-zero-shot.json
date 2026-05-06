@@ -693,8 +693,8 @@
       }
     }
   ],
-  "name": "Lab 2 - Agents vs Zero Shot",
-  "id": "lab2-agents-vs-zero-shot",
+  "name": "Fixed Lab 2 - Agents vs Zero Shot",
+  "id": "fixed-lab2-agents-vs-zero-shot",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
