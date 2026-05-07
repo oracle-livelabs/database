@@ -23,7 +23,7 @@ This task uses a Resource Manager stack published in the OCI Marketplace.
 ### 1. Open the Marketplace Listing
 
 * Navigate to the **Oracle AI Database – Private Agent Factory** listing:
-  [https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705](https://cloudmarketplace.oracle.com/marketplace/en_US/listing/201588705)
+  [https://marketplace.oracle.com/app/agentfactory](https://marketplace.oracle.com/app/agentfactory)
 
    ![Agent Factory Application in Marketplace](images/marketplace-listing.png "Agent Factory Application in Marketplace")
 
