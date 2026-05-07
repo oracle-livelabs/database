@@ -395,7 +395,7 @@
       }
     },
     {
-      "text": "%md\n## Register the Tools\n\nNow we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating—this is how you build smart behavior into your agent.",
+      "text": "%md\n## Register the Tools\n\nNow we turn these functions into tools the agent can use. The `instruction` tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating\u2014this is how you build smart behavior into your agent.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -410,7 +410,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Register the Tools</h2>\n\n<p>Now we turn these functions into tools the agent can use. The <code>instruction</code> tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating—this is how you build smart behavior into your agent.</p>"
+            "data": "<h2>Register the Tools</h2>\n\n<p>Now we turn these functions into tools the agent can use. The <code>instruction</code> tells the agent when and how to use each tool. Notice how we tell the agent to check the loan status before updating\u2014this is how you build smart behavior into your agent.</p>"
           }
         ]
       }
@@ -427,7 +427,7 @@
       }
     },
     {
-      "text": "%md\n## Create the Agent, Task, and Team\n\nNow we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.\n\nNotice how we give the agent access to TWO tools—it can decide which one to use based on what you ask.",
+      "text": "%md\n## Create the Agent, Task, and Team\n\nNow we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.\n\nNotice how we give the agent access to TWO tools\u2014it can decide which one to use based on what you ask.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -442,7 +442,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Create the Agent, Task, and Team</h2>\n\n<p>Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.</p>\n\n<p>Notice how we give the agent access to TWO tools—it can decide which one to use based on what you ask.</p>"
+            "data": "<h2>Create the Agent, Task, and Team</h2>\n\n<p>Now we put it all together. The agent gets a role that tells it how to behave. The task gives it specific instructions and access to both tools. The team makes it all runnable.</p>\n\n<p>Notice how we give the agent access to TWO tools\u2014it can decide which one to use based on what you ask.</p>"
           }
         ]
       }
@@ -544,7 +544,7 @@
       }
     },
     {
-      "text": "%script\nSELECT application_id, applicant, loan_status FROM sample_loans WHERE application_id = 'LOAN-12345';",
+      "text": "%script\nSELECT application_id, applicant, loan_status AS status_after_agent\nFROM sample_loans\nWHERE application_id = 'LOAN-12345';",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -640,7 +640,7 @@
       }
     },
     {
-      "text": "%md\n## What You Learned\n\nYou directly compared three approaches:\n\n- **SELECT AI CHAT**: Cannot access your data; can only give generic advice\n- **SELECT AI**: Can read your data but cannot modify it  \n- **SELECT AI AGENT**: Can read your data, make decisions, and take action\n\nYou watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.\n\n**Key takeaway:** The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.",
+      "text": "%md\n## What You Learned\n\nYou directly compared three approaches:\n\n- **SELECT AI CHAT**: Cannot access your data; can only give generic advice\n- **SELECT AI**: Can read your data but cannot modify it  \n- **SELECT AI AGENT**: Can read your data, make decisions, and take action\n\nYou watched the agent coordinate: check status \u2192 decide \u2192 act \u2192 report. And you verified the data actually changed.\n\n**Key takeaway:** The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -655,7 +655,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>What You Learned</h2>\n\n<p>You directly compared three approaches:</p>\n\n<ul>\n<li><strong>SELECT AI CHAT</strong>: Cannot access your data; can only give generic advice</li>\n<li><strong>SELECT AI</strong>: Can read your data but cannot modify it</li>\n<li><strong>SELECT AI AGENT</strong>: Can read your data, make decisions, and take action</li>\n</ul>\n\n<p>You watched the agent coordinate: check status → decide → act → report. And you verified the data actually changed.</p>\n\n<p><strong>Key takeaway:</strong> The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.</p>"
+            "data": "<h2>What You Learned</h2>\n\n<p>You directly compared three approaches:</p>\n\n<ul>\n<li><strong>SELECT AI CHAT</strong>: Cannot access your data; can only give generic advice</li>\n<li><strong>SELECT AI</strong>: Can read your data but cannot modify it</li>\n<li><strong>SELECT AI AGENT</strong>: Can read your data, make decisions, and take action</li>\n</ul>\n\n<p>You watched the agent coordinate: check status \u2192 decide \u2192 act \u2192 report. And you verified the data actually changed.</p>\n\n<p><strong>Key takeaway:</strong> The difference is not just intelligence. It is action. Zero-shot AI tells you what to do. SELECT AI can read. Agents do the work.</p>"
           }
         ]
       }
