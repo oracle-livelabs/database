@@ -48,33 +48,31 @@ For this workshop, we provide the environment. You will need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
+
+2. Unzip the downloaded `notebooks.zip` file on your computer.
+
+3. From the Oracle Machine Learning home page, click **Notebooks**.
 
     ![Notebook Information](./images/task1_1.png " ")
 
-2. Click **Import** to expand the Import drop down.
+4. Click **Import** to expand the Import drop down.
 
     ![Notebook Information](./images/task1_2.png " ")
 
-3. Select **Git**.
+5. Select **From File**.
 
-    ![Notebook Information](./images/task1_3.png " ")
+    ![Notebook Information](./images/task1_5a.png " ")
 
-4. Paste the following GitHub URL leaving the credential field blank:
+6. Select the `lab2-agents-vs-zero-shot.json` file from the unzipped notebook files.
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/agents-vs-zero-shot/lab2-agents-vs-zero-shot.json
-    </copy>
-    ```
+    ![Notebook Information](./images/task1_6.png " ")
 
-    ![Notebook Information](./images/task1_4.png " ")
+7. Click **Open**.
 
-5. Click **Ok**.
+    ![Notebook Information](./images/task1_6.png " ")
 
-    ![Notebook Information](./images/task1_5.png " ")
-
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Experience Zero-Shot Prompting
 
@@ -208,7 +206,7 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
 
     ![Task Information](./images/task3_3.png " ")
 
-SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot which could only give generic advice.
+    SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot which could only give generic advice.
 
 4. Now try to update using SELECT AI.
 
@@ -236,7 +234,7 @@ SELECT AI returned the actual status: `UNDER_REVIEW`. Compare this to zero-shot 
 
     ![Task Information](./images/task3_5.png " ")
 
-Still `UNDER_REVIEW`. SELECT AI can read but cannot write.
+    Still `UNDER_REVIEW`. SELECT AI can read but cannot write.
 
 ## Task 4: Create an Agent with Tools
 
@@ -407,7 +405,7 @@ Now let's see the real power of agents: coordinating multiple tools and making c
 
     ![Task Information](./images/task5_1.png " ")
 
-The loan is currently `UNDER_REVIEW`.
+    The loan is currently `UNDER_REVIEW`.
 
 2. Set the team and ask the agent to check and update the loan.
 
@@ -422,13 +420,13 @@ The loan is currently `UNDER_REVIEW`.
 
     ![Task Information](./images/task5_2.png " ")
 
-**Observe:** The agent:
-1. Called `LOAN_LOOKUP_TOOL` to check current status (`UNDER_REVIEW`)
-2. Made a decision based on the result
-3. Called `LOAN_UPDATE_TOOL` to change it to `APPROVED`
-4. Reported what it did
+    **Observe:** The agent:
+    1. Called `LOAN_LOOKUP_TOOL` to check current status (`UNDER_REVIEW`)
+    2. Made a decision based on the result
+    3. Called `LOAN_UPDATE_TOOL` to change it to `APPROVED`
+    4. Reported what it did
 
-This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
+    This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
 3. Verify the change actually happened.
 
@@ -442,7 +440,7 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
     ![Task Information](./images/task5_3.png " ")
 
-**The status changed from `UNDER_REVIEW` to `APPROVED`.** The agent didn't just talk about updating - it actually did it.
+    **The status changed from `UNDER_REVIEW` to `APPROVED`.** The agent didn't just talk about updating - it actually did it.
 
 4. Try a conditional update that should NOT happen.
 
@@ -456,7 +454,7 @@ This is what SELECT AI cannot do: **coordinate multiple steps and take action**.
 
     ![Task Information](./images/task5_4.png " ")
 
-**Observe:** The agent looked up loan LOAN-12346, saw it was `PENDING` (not `UNDER_REVIEW`), and correctly decided NOT to update it. This is intelligent coordination.
+    **Observe:** The agent looked up loan LOAN-12346, saw it was `PENDING` (not `UNDER_REVIEW`), and correctly decided NOT to update it. This is intelligent coordination.
 
 ## Task 6: See What the Agent Did
 
@@ -480,7 +478,7 @@ Every tool call is logged. Let's see the execution history.
 
     ![Task Information](./images/task6_1.png " ")
 
-You can see the sequence: lookup, then update (or just lookup if no update was needed).
+    You can see the sequence: lookup, then update (or just lookup if no update was needed).
 
 ## Task 7: When to Use Each Approach
 
