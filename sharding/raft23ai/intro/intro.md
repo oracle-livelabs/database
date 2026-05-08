@@ -12,7 +12,11 @@ Raft replication is integrated with transaction execution and is completely tran
 
 ![Raft introduction](images/raft-intro.png " ")
 
+<if type="nonsandbox">
+Watch the video for a quick walk through of the Introduction and verify Lab environment.
+
 [Introduction and verify Lab environment](videohub:1_z6opisia)
+</if>
 
 ### Objectives
 In this workshop, you will gain first-hand experience in utilizing the Raft Replication within Oracle Globally Distributed Database, enabling participants to manage Raft-enabled replication for robust distributed database solutions.
