@@ -77,7 +77,7 @@ Before you begin, you are going to import a notebook that has all of the command
 
     ![Notebook Information](images/task1_6a.png)
 
-You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Memory Table
 
@@ -327,7 +327,7 @@ Now test finding relevant experience by meaning, not keywords. This is where the
     </copy>
     ```
 
-**Observe:** Finds "shipping delay" experience even though we said "late delivery."
+    **Observe:** Finds "shipping delay" experience even though we said "late delivery."
 
 2. Search for a pricing situation.
 
@@ -339,7 +339,7 @@ Now test finding relevant experience by meaning, not keywords. This is where the
     </copy>
     ```
 
-**Observe:** Finds the price match experience.
+    **Observe:** Finds the price match experience.
 
 3. Search for a billing problem.
 
@@ -351,7 +351,7 @@ Now test finding relevant experience by meaning, not keywords. This is where the
     </copy>
     ```
 
-**Observe:** Finds BOTH billing experiences: one that failed and one that succeeded. The agent can learn from both.
+    **Observe:** Finds BOTH billing experiences: one that failed and one that succeeded. The agent can learn from both.
 
 ## Task 8: See the Learning Loop in Action
 
