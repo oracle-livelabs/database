@@ -267,7 +267,7 @@
       }
     },
     {
-      "text": "%script\n    SELECT AI AGENT What is Sarah Chens preferred contact method;",
+      "text": "%script\n    SELECT AI AGENT In this new session, what is Sarah Chens preferred contact method;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -299,7 +299,7 @@
       }
     },
     {
-      "text": "%script\n    SELECT AI AGENT What rate exception was Sarah Chen approved for;",
+      "text": "%script\n    SELECT AI AGENT In this new session, what rate exception was Sarah Chen approved for;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -544,8 +544,8 @@
       }
     }
   ],
-  "name": "Lab 5 - Why Agents Need Memory (Workshop 2026-03-24)",
-  "id": "lab5-why-agents-need-memory-workshop-20260324",
+  "name": "Lab 5 - Why Agents Need Memory",
+  "id": "lab5-why-agents-need-memory",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
