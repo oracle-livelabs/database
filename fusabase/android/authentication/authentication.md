@@ -16,6 +16,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Open AuthRepository.java
 
 1. In Android Studio's **Project** view, expand `app/src/main/java/com/oracle/fusabase/recipeshare/auth/` and open `AuthRepository.java`.
@@ -173,6 +179,8 @@ The auth state listener is the key idea. Once attached, the SDK keeps it informe
 > **Want a clean copy?**
 >
 > A copy of `AuthRepository.java` as it should look after this lab is available at `checkpoints/AuthRepository-after-lab-3.java`. Drop it into `starter/RecipeShare/app/src/main/java/com/oracle/fusabase/recipeshare/auth/` any time you'd like a fresh baseline. Keep your own `app/fusabase-config.json` — checkpoints don't include your project config.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

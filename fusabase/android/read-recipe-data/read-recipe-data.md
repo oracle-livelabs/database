@@ -18,6 +18,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Open RecipeRepository.java
 
 1. In Android Studio, expand `app/src/main/java/com/oracle/fusabase/recipeshare/recipes/` and open `RecipeRepository.java`.
@@ -233,6 +239,8 @@ Two ideas to keep in mind:
 > **Want a clean copy?**
 >
 > A copy of `RecipeRepository.java` as it should look after this lab is available at `checkpoints/RecipeRepository-after-lab-4.java`. Drop it into `starter/RecipeShare/app/src/main/java/com/oracle/fusabase/recipeshare/recipes/` any time you'd like a fresh baseline.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

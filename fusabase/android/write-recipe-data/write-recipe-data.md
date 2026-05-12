@@ -17,6 +17,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Implement createRecipe
 
 1. Open `RecipeRepository.java` and find the `createRecipe(Recipe draft, OnResultListener<String> cb)` stub.
@@ -164,6 +170,8 @@ Two patterns worth internalizing:
 > **Want a clean copy?**
 >
 > A copy of `RecipeRepository.java` as it should look after this lab is available at `checkpoints/RecipeRepository-after-lab-5.java`.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

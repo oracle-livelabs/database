@@ -17,6 +17,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Get the starter project
 
 1. Open a terminal where you keep your projects.
@@ -215,6 +221,8 @@ Take a moment to look at what's now in place:
 - **`network_security_config.xml`** permits cleartext HTTP to `10.0.2.2` so your local development backend works without TLS. Production deployments would use HTTPS and would not need this configuration.
 
 Move on to Lab 3 to wire up authentication.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

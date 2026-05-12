@@ -15,6 +15,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Implement uploadRecipePhoto
 
 1. Open `RecipeRepository.java` and find the `uploadRecipePhoto(...)` stub.
@@ -175,6 +181,8 @@ Two ideas worth keeping:
 > **Want a clean copy?**
 >
 > A copy of `RecipeRepository.java` as it should look after this lab is available at `checkpoints/RecipeRepository-after-lab-6.java`.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
