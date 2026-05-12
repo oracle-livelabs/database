@@ -19,6 +19,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Show the photo field
 
 1. Return to your code editor and open `starter/index.html`.
@@ -179,6 +185,8 @@ Steps 1-4 walk through the storage upload pattern piece by piece. Read each step
 11. Leave the app and console open for the next lab.
 
     If the starter app does not work after this lab, navigate to the `checkpoints` folder in your repo, open `app-after-lab-6.js` and `index-after-lab-6.html`, then use those files' contents to replace `starter/scripts/app.js` and `starter/index.html`. Keep your own `starter/fusabase-config.js`.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

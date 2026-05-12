@@ -18,6 +18,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Get the sample code
 
 1. Clone the GitHub repository from your command line
@@ -249,6 +255,9 @@ If you add an authorized domain, remember that this is backed by an ORDS feature
 
 
 For more detail, see the [Authorized Domains documentation for ORDS](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/25.2/orddg/migrating-mod_plsql-ords.html).
+
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 
 * **Author** - Killian Lynch, Senior Product Manager, Oracle AI Database

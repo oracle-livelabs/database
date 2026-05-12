@@ -18,6 +18,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Review the current rules
 
 1. Return to the Fusabase console.

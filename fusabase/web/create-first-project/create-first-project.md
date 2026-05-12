@@ -15,6 +15,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Create your first project
 
 1. From the workshop page, click **Go** to open Fusabase.
@@ -87,6 +93,8 @@ Estimated Time: 10 minutes
 
     - Username: **`testuser`**
     - Password: **`testpwd`**
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

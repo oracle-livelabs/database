@@ -14,6 +14,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Open the app file
 
 1. Return to your code editor and open the starter app file:
@@ -137,6 +143,8 @@ Steps 1-5 walk through the query pattern piece by piece. Read each step to under
     If `starter/scripts/app.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `app-after-lab-3.js`, and use that file's contents to replace `starter/scripts/app.js`. Keep your own `starter/fusabase-config.js`.
 
     ![Animated GIF showing loading the seed data. ](images/backup.png =85%x*)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

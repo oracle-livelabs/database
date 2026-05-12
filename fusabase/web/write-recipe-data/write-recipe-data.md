@@ -17,6 +17,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Create recipes with the SDK
 
 1. Return to your code editor and open `starter/scripts/app.js`.
@@ -212,6 +218,8 @@ Steps 1-4 walk through the rating write pattern piece by piece. Read each step t
 11. Leave the app and console open for the next lab.
 
     If `starter/scripts/app.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `app-after-lab-5.js`, and use that file's contents to replace `starter/scripts/app.js`. Keep your own `starter/fusabase-config.js`.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

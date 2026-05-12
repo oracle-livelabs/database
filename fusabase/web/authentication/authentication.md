@@ -17,6 +17,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Review the Auth SDK imports
 
 1. Return to your code editor and open `starter/scripts/app.js`.
@@ -235,6 +241,7 @@ Steps 1-2 walk through the startup pattern piece by piece. Read each step to und
 
     ![shows the code. ](images/backup.png =85%x*)
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

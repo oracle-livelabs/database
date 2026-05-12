@@ -1,4 +1,4 @@
-# Set Up Fusabase
+# Get Started
 
 ## Introduction
 
@@ -15,6 +15,12 @@ In this lab, you will:
 
 
 Estimated Time: 15 minutes
+
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
 
 ## Task 1: Understand what this lab sets up
 
@@ -351,6 +357,8 @@ Estimated Time: 15 minutes
     - `pdbadmin` / `Welcome12345`
 
     These credentials are provided only for local development and testing in this workshop. Do not use this setup or these passwords in production.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
