@@ -137,7 +137,7 @@ The two-step flow (create-then-upload) is deliberate: the storage path needs the
 
     The downloaded photo now lives in the emulator's `Download` folder and will show up the next time the Photo Picker opens.
 
-2.  Tap the **+** FAB to open the **New recipe** form.
+2. Tap the **+** FAB to open the **New recipe** form.
 
 4. Fill in the form for a new recipe. Suggested:
 
