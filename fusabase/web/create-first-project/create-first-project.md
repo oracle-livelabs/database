@@ -49,7 +49,7 @@ This lab assumes you have:
 
     ![Fusabase create project dialog with quickstart selected](./images/task-4-console-ready.png =40%x*)
 
-   > This step creates the Fusabase project. A project is like a container for the different applications that you want to create. To learn more about projects, read about them in the docs. [Update link to docs.]
+    > This step creates the Fusabase project. A project is like a container for the different applications that you want to create. To learn more about projects, read about them in the docs. [Update link to docs.]
 
 5. This is the Fusabase project home page after the project is created.
 

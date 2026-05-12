@@ -55,16 +55,16 @@ This lab assumes you have:
 
 4. Make sure your chosen runtime is ready before you move on.
 
-  <style>
-  .runtime-check-tabs {
+    <style>
+    .runtime-check-tabs {
     margin: 1rem 0;
     max-width: 42rem;
     margin-left: 4rem;
-  }
-  .runtime-check-tabs input[type="radio"] {
+    }
+    .runtime-check-tabs input[type="radio"] {
     display: none;
-  }
-  .runtime-check-tabs label {
+    }
+    .runtime-check-tabs label {
     display: inline-block;
     padding: 0.6rem 1rem;
     margin-right: 0.35rem;
@@ -75,8 +75,8 @@ This lab assumes you have:
     cursor: pointer;
     font-weight: 600;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-  .runtime-check-tabs .tab-panel {
+    }
+    .runtime-check-tabs .tab-panel {
     display: none;
     margin-top: 0.85rem;
     border: 1px solid #d9dfe8;
@@ -84,24 +84,24 @@ This lab assumes you have:
     padding: 1rem;
     background: #fbfcfe;
     box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-  }
-  .runtime-check-tabs .tab-panel p {
+    }
+    .runtime-check-tabs .tab-panel p {
     margin-top: 0;
-  }
-  .runtime-check-tabs .tab-panel pre {
+    }
+    .runtime-check-tabs .tab-panel pre {
     margin-bottom: 0;
-  }
-  #tab-check-docker:checked ~ .label-check-docker,
-  #tab-check-podman:checked ~ .label-check-podman {
+    }
+    #tab-check-docker:checked ~ .label-check-docker,
+    #tab-check-podman:checked ~ .label-check-podman {
     background: #c74634;
     border-color: #c74634;
     color: #ffffff;
-  }
-  #tab-check-docker:checked ~ .panel-check-docker,
-  #tab-check-podman:checked ~ .panel-check-podman {
+    }
+    #tab-check-docker:checked ~ .panel-check-docker,
+    #tab-check-podman:checked ~ .panel-check-podman {
     display: block;
-  }
-  </style>
+    }
+    </style>
 
   <div class="runtime-check-tabs">
     <input type="radio" id="tab-check-docker" name="runtime-check-tab" checked>
@@ -175,16 +175,16 @@ This lab assumes you have:
 
 2. Run the workshop startup command.
 
-  <style>
-  .runtime-tabs {
+    <style>
+    .runtime-tabs {
     margin: 1rem 0;
     max-width: 42rem;
     margin-left: 4rem;
-  }
-  .runtime-tabs input[type="radio"] {
+    }
+    .runtime-tabs input[type="radio"] {
     display: none;
-  }
-  .runtime-tabs label {
+    }
+    .runtime-tabs label {
     display: inline-block;
     padding: 0.6rem 1rem;
     margin-right: 0.35rem;
@@ -195,8 +195,8 @@ This lab assumes you have:
     cursor: pointer;
     font-weight: 600;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-  .runtime-tabs .tab-panel {
+    }
+    .runtime-tabs .tab-panel {
     display: none;
     margin-top: 0.85rem;
     border: 1px solid #d9dfe8;
@@ -204,24 +204,24 @@ This lab assumes you have:
     padding: 1rem;
     background: #fbfcfe;
     box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-  }
-  .runtime-tabs .tab-panel p {
+    }
+    .runtime-tabs .tab-panel p {
     margin-top: 0;
-  }
-  .runtime-tabs .tab-panel pre {
+    }
+    .runtime-tabs .tab-panel pre {
     margin-bottom: 0;
-  }
-  #tab-docker:checked ~ .label-docker,
-  #tab-podman:checked ~ .label-podman {
+    }
+    #tab-docker:checked ~ .label-docker,
+    #tab-podman:checked ~ .label-podman {
     background: #c74634;
     border-color: #c74634;
     color: #ffffff;
-  }
-  #tab-docker:checked ~ .panel-docker,
-  #tab-podman:checked ~ .panel-podman {
+    }
+    #tab-docker:checked ~ .panel-docker,
+    #tab-podman:checked ~ .panel-podman {
     display: block;
-  }
-  </style>
+    }
+    </style>
 
   <div class="runtime-tabs">
     <input type="radio" id="tab-docker" name="runtime-tab" checked>
@@ -258,16 +258,16 @@ This lab assumes you have:
 
 1. After the compose has finished, check the status with the command below.
 
-  <style>
-  .runtime-status-tabs {
+    <style>
+    .runtime-status-tabs {
     margin: 1rem 0;
     max-width: 42rem;
     margin-left: 4rem;
-  }
-  .runtime-status-tabs input[type="radio"] {
+    }
+    .runtime-status-tabs input[type="radio"] {
     display: none;
-  }
-  .runtime-status-tabs label {
+    }
+    .runtime-status-tabs label {
     display: inline-block;
     padding: 0.6rem 1rem;
     margin-right: 0.35rem;
@@ -278,8 +278,8 @@ This lab assumes you have:
     cursor: pointer;
     font-weight: 600;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-  .runtime-status-tabs .tab-panel {
+    }
+    .runtime-status-tabs .tab-panel {
     display: none;
     margin-top: 0.85rem;
     border: 1px solid #d9dfe8;
@@ -287,24 +287,24 @@ This lab assumes you have:
     padding: 1rem;
     background: #fbfcfe;
     box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-  }
-  .runtime-status-tabs .tab-panel p {
+    }
+    .runtime-status-tabs .tab-panel p {
     margin-top: 0;
-  }
-  .runtime-status-tabs .tab-panel pre {
+    }
+    .runtime-status-tabs .tab-panel pre {
     margin-bottom: 0;
-  }
-  #tab-status-docker:checked ~ .label-status-docker,
-  #tab-status-podman:checked ~ .label-status-podman {
+    }
+    #tab-status-docker:checked ~ .label-status-docker,
+    #tab-status-podman:checked ~ .label-status-podman {
     background: #c74634;
     border-color: #c74634;
     color: #ffffff;
-  }
-  #tab-status-docker:checked ~ .panel-status-docker,
-  #tab-status-podman:checked ~ .panel-status-podman {
+    }
+    #tab-status-docker:checked ~ .panel-status-docker,
+    #tab-status-podman:checked ~ .panel-status-podman {
     display: block;
-  }
-  </style>
+    }
+    </style>
 
   <div class="runtime-status-tabs">
     <input type="radio" id="tab-status-docker" name="runtime-status-tab" checked>
