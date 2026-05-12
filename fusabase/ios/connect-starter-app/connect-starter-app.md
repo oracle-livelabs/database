@@ -157,7 +157,7 @@ This lab assumes you have:
 
     ![  screenshot showing the build succeeded indicator at the top of Xcode](images/run.png =40%x*)
 
-    ![  screenshot showing the RecipeShare Sign In screen running in the iOS Simulator](images/app.gif =60%x*))
+    ![  screenshot showing the RecipeShare Sign In screen running in the iOS Simulator](images/task-3-sim-signin.png =60%x*)
 
 
 3. If you see network errors instead, see **Appendix → Troubleshooting** below.
