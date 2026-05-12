@@ -30,8 +30,8 @@ This lab assumes you have:
 2. Clone the workshop repository.
 
     ```bash
-    <copy>git clone https://github.com/KillianLynch/fusabase-livelabs.git fusabase-workshop
-    cd fusabase-workshop/android/recipeshare-android</copy>
+    <copy>git clone https://github.com/KillianLynch/fusabase-livelabs-android.git
+    cd fusabase-livelabs-android</copy>
     ```
 
 3. Open the starter project in Android Studio.
