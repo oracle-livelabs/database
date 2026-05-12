@@ -148,13 +148,13 @@ This lab assumes you have:
 3. Clone the repository that contains the Oracle Backend for Firebase Anywhere demo environment.
 
     ```bash
-    <copy>git clone https://github.com/KillianLynch/UPDATE-WITH-CURRENT-COMPOSE.git obfa-demo</copy>
+    <copy>git clone https://github.com/KillianLynch/fusabase-compose.git</copy>
     ```
 
 4. Move into the cloned repository directory.
 
     ```bash
-    <copy>cd obfa-demo</copy>
+    <copy>cd fusabase-compose</copy>
     ```
 
 5. Confirm that the repository includes the files and folders used by the demo environment.
@@ -163,16 +163,15 @@ This lab assumes you have:
 
     - `compose.yml`
     - `oracle/`
-    - `ords_config/`
     - `ords_entrypoint.d/`
 
-    The stack uses the folders listed above together with `compose.yaml`.
+    The stack uses the folders listed above together with `compose.yml`.
 
-    ![The obfa-demo directory showing compose.yaml and the supporting folders for the Oracle Backend for Firebase Anywhere demo environment](images/task-3-demo-files-terminal.png =30%x*)
+    ![The fusabase-compose directory showing compose.yaml and the supporting folders for the Oracle Backend for Firebase Anywhere demo environment](images/task-3-demo-files-terminal.png =30%x*)
 
 ## Task 4: Start the demo environment
 
-1. Make sure you are in the `obfa-demo` directory.
+1. Make sure you are in the `fusabase-compose` directory.
 
 2. Run the workshop startup command.
 
