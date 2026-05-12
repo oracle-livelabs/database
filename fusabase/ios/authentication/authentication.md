@@ -16,6 +16,12 @@ In this lab, you will:
 
 Estimated Time: 10 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Open the auth file
 
 1. In Xcode's **Project navigator**, expand **RecipeShare > Services** and open `AuthService.swift`.
@@ -204,6 +210,8 @@ If sign-up or sign-in throws unexpectedly, see the Appendix.
 > **Want a clean copy?**
 >
 > A copy of `AuthService.swift` as it should look after this lab is available at `checkpoints/AuthService-after-lab-3.swift`. Drop it into `starter/RecipeShare/Services/` any time you'd like a fresh baseline before moving on. Keep your own `starter/RecipeShare/Resources/fusabase-config.json` — checkpoints don't include your project config.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

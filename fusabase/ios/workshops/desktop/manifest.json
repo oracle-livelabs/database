@@ -8,7 +8,7 @@
       "description": "Review the learner journey and workshop architecture for the iOS RecipeShare app."
     },
     {
-      "title": "Setup Oracle Backend for Firebase",
+      "title": "Get Started",
       "filename": "../../start-environment/start-environment.md",
       "description": "Install the runtime, download the local stack, start it, and verify the workshop services are running."
     },
@@ -46,6 +46,11 @@
       "title": "Lab 7: Security Rules",
       "filename": "../../security-rules/security-rules.md",
       "description": "Replace the permissive starter rule with auth-based access controls."
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }

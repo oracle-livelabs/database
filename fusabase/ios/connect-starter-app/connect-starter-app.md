@@ -17,6 +17,12 @@ In this lab, you will:
 
 Estimated Time: 15 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Get the sample code
 
 1. Clone the GitHub repository from your command line. If you don't have git, you could visit the URL below and download a .zip of the repo.
@@ -182,6 +188,7 @@ You've now finished the setup. You have the sample code, the Fusabase iOS SDK is
 
 - **"Build failed: cannot find type AuthService."** Either you opened `finished/` instead of `starter/`, or you opened `starter/` before the Fusabase iOS SDK Swift Package finished resolving. Close Xcode, reopen `starter/RecipeShare.xcodeproj`, and wait for **Resolving package graph…** to disappear before you build.
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

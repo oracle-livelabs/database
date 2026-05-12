@@ -14,6 +14,12 @@ In this lab, you will:
 
 Estimated Time: 12 minutes
 
+### Prerequisites
+
+This lab assumes you have:
+
+- Successfully completed all previous labs.
+
 ## Task 1: Open the service file
 
 1. In Xcode's **Project navigator** (the left sidebar), expand **RecipeShare > Services** and open `RecipeService.swift`.
@@ -140,6 +146,8 @@ If the recipes don't appear after seeding, see the Appendix below.
 > **Want a clean copy?**
 >
 > A copy of `RecipeService.swift` as it should look after this lab is available at `checkpoints/RecipeService-after-lab-4.swift`. Drop it into `starter/RecipeShare/Services/` any time you'd like a fresh baseline before moving on. Keep your own `starter/RecipeShare/Resources/fusabase-config.json` — checkpoints don't include your project config.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
