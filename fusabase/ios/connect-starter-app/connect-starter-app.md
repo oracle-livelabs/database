@@ -27,16 +27,14 @@ This lab assumes you have:
 
 1. Clone the GitHub repository from your command line. If you don't have git, you could visit the URL below and download a .zip of the repo.
 
-    > TODO: replace `UPDATE-WITH-REAL-LINK` with the published repo URL before launching the workshop.
-
     ```bash
-    <copy>git clone https://github.com/KillianLynch/UPDATE-WITH-REAL-LINK.git</copy>
+    <copy>git clone https://github.com/KillianLynch/fusabase-livelabs-ios.git</copy>
     ```
 
 2. Move into the repository root.
 
     ```bash
-    <copy>cd UPDATE-WITH-REAL-LINK</copy>
+    <copy>cd fusabase-livelabs-ios</copy>
     ```
 
     ![  screenshot showing the RecipeShare iOS starter project folder with the starter and finished subdirectories visible](images/task-1-starter-folder.png =40%x*)
