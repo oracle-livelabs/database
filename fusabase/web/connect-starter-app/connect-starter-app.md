@@ -29,13 +29,13 @@ This lab assumes you have:
 1. Clone the GitHub repository from your command line
 
     ```bash
-    <copy>git clone https://github.com/KillianLynch/fusabase-livelabs.git</copy>
+    <copy>git clone https://github.com/KillianLynch/fusabase-livelabs-web.git</copy>
     ```
 
 2. Move into the RecipeShare workshop root.
 
     ```bash
-    <copy>cd fusabase-livelabs/web/recipeShare</copy>
+    <copy>cd fusabase-livelabs-web/starter</copy>
     ```
 
 3. Open or import the project in your code editor. This workshop shows screenshots of VS Code, but any editor is fine.
@@ -59,13 +59,13 @@ This lab assumes you have:
     <copy>npm install -g live-server</copy>
     ```
 
-4. Make sure your terminal is still in `fusabase-livelabs/web/recipeShare` from Task 1. Install the Fusabase JavaScript SDK before you launch the app.
+4. Make sure your terminal is still in `fusabase-livelabs-web/starter` from Task 1. Install the Fusabase JavaScript SDK before you launch the app.
 
     ```bash
     <copy>npm install fusabase</copy>
     ```
 
-5. Run Live Server from `fusabase-livelabs/web/recipeShare`.
+5. Run Live Server from `fusabase-livelabs-web/starter`.
 
     ```bash
     <copy>live-server --port=8000 --host=localhost</copy>
