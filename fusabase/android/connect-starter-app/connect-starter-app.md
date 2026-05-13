@@ -45,11 +45,11 @@ This lab assumes you have:
 5. While Android Studio is indexing, take a quick look at the structure.
 
     - `app/java/com.oracle.fusabase.recipeshare/auth/` — the Authentication code lives here. `AuthRepository.java` is the file you'll edit in Lab 3.
-    ![Fusabase console showing the generated fusabase-config.json](images/auth.png =75%x*)
+    ![Fusabase console showing the generated fusabase-config.json](images/auth.png =65%x*)
 
 
     - `app/java/com.oracle.fusabase.recipeshare/recipeshare/recipes/` — the Database and Storage code lives here. `RecipeRepository.java` is the file you'll edit in Labs 4 through 7.
-    ![Fusabase console showing the generated fusabase-config.json](images/recipes.png =75%x*)
+    ![Fusabase console showing the generated fusabase-config.json](images/recipes.png =65%x*)
 
     - `app/fusabase-config.json` — the config file the Fusabase Gradle plugin reads at build time. You'll fill this in during Task 4 of this lab.
 
@@ -60,7 +60,7 @@ This lab assumes you have:
 
 2. In the project home page, click the Android icon to register a new Android app.
 
-    ![Fusabase console project home with the Android app icon highlighted](images/android.png =85%x*)
+    ![Fusabase console project home with the Android app icon highlighted](images/android.png =65%x*)
 
 3. In the **Register Android app** dialog, enter the application ID from the starter project:
 
@@ -68,7 +68,7 @@ This lab assumes you have:
     <copy>com.oracle.fusabase.recipeshare</copy>
     ```
 
-    ![Fusabase console project home with the Android app icon highlighted](images/register.png =85%x*)
+    ![Fusabase console project home with the Android app icon highlighted](images/register.png =65%x*)
 
 
 4. Click **Register app**. The console generates the integration steps for your app — first the **Add SDK** step, then the **Get config** step.
@@ -81,7 +81,11 @@ The console's **Add SDK** step shows two snippets — one for the project-level 
 
 1. Keep the **Add SDK** step open in the console as a reference. The snippets below match what the console shows on the **Package Manager** tab.
 
-    ![Fusabase console showing the SDK install snippets](images/package.png =85%x*)
+    ![Fusabase console showing the SDK install snippets](images/package.png =75%x*)
+
+2. Switch to the project folder 
+    ![Fusabase console showing the SDK install snippets](images/project.png =45%x*)
+
 
 2. Open the project-level `build.gradle.kts` (at `RecipeShare/build.gradle.kts`, **not** the one inside `app/`). Add a `buildscript` block **below** the existing `plugins` block:
 
@@ -98,12 +102,16 @@ The console's **Add SDK** step shows two snippets — one for the project-level 
     ```
 
     This puts the Fusabase Gradle plugin on the build classpath so the next file can apply it.
+    ![Fusabase console showing the SDK install snippets](images/build.png =55%x*)
+
 
 3. Open `app/build.gradle.kts`. Add the plugin id inside the existing `plugins { ... }` block:
 
     ```kotlin
     <copy>id("com.oracle.mobile.fusabase-gradle-plugin")</copy>
     ```
+    ![Fusabase console showing the SDK install snippets](images/add-sdk.png =55%x*)
+
 
 4. In the same file, add the SDK as a dependency. At the top of the existing `dependencies { ... }` block, add:
 
@@ -126,7 +134,7 @@ The console's **Add SDK** step shows two snippets — one for the project-level 
 
 2. In Android Studio's **Project** view (top left), expand the `app` module. You'll find a placeholder `fusabase-config.json` at the module root with `"PASTE FROM CONSOLE"` strings.
 
-    ![Fusabase console project home with the Android app icon highlighted](images/project.png =85%x*)
+    ![Fusabase console project home with the Android app icon highlighted](images/project.png =45%x*)
 
 3. Open `app/fusabase-config.json` and replace the entire contents with the JSON the console gave you. It looks like:
 
