@@ -604,7 +604,7 @@ In this lab, you traced the complete agent execution loop at Seer Equity:
 * **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 Run this to remove all objects created in this lab.
 

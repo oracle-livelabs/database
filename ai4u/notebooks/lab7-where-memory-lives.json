@@ -155,9 +155,9 @@
       "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>What You Built</h2>"}]}
     },
     {
-      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "text": "%md\n## Cleanup\n\nRun this to remove all objects created in this lab.",
       "config": {"colWidth": 12.0, "enabled": true, "results": {}, "editorSetting": {"language": "md"}, "editorHide": true},
-      "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Cleanup (Optional)</h2>"}]}
+      "results": {"code": "SUCCESS", "msg": [{"type": "HTML", "data": "<h2>Cleanup</h2>"}]}
     },
     {
       "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('MEMORY_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('MEMORY_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('MEMORY_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('REMEMBER_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('RECALL_TOOL', TRUE);\nDROP TABLE agent_memory PURGE;\nDROP FUNCTION remember_fact;\nDROP FUNCTION recall_facts;",

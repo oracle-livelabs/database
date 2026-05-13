@@ -385,7 +385,7 @@ In this lab, you experienced the forgetting problem:
 * **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 Run this to remove all objects created in this lab.
 

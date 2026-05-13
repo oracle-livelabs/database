@@ -448,7 +448,7 @@ The LLM provides the intelligence. Your database provides the knowledge. Togethe
 * **Author** - David Start
 * **Last Updated By/Date** - David Start, January 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 Run this to remove all objects created in this lab.
 

@@ -808,7 +808,7 @@ In this lab, you built a complete loan underwriting system demonstrating:
 * **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 ```sql
 <copy>
