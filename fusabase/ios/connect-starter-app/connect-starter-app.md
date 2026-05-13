@@ -119,9 +119,11 @@ This lab assumes you have:
 
 6. The third screen shows your config JSON. For this demo we wany only the key and value pairs in the JSON object. Copy only those values. See the gif below
 
+    ![  screenshot of the Fusabase console showing the iOS app config JSON with the copy icon visible](images/task-4-config.gif =70%x*)
+
     > Note: If you've already closed the popup before copying the config, you can view all of the applications and configs you've registered under **Project settings** → **Applications**.
 
-    ![  screenshot of the Fusabase console showing the iOS app config JSON with the copy icon visible](images/task-4-config.gif =70%x*)
+    ![  screenshot of the Fusabase console Applications view under Project settings showing registered apps and their configs](images/otherconfig.gif =30%x*)
 
 
     The config is what allows your app to work with Fusabase:

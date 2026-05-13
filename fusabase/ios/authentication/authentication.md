@@ -173,6 +173,8 @@ This lab assumes you have:
 1. Press **Cmd+R** to build and run.
 
 2. The Simulator launches to the **Sign In** screen. Toggle to **Sign Up** mode.
+    ![Xcode project navigator with Services > AuthService.swift selected](images/toggle.png =20%x*)
+
 
 3. Enter a test account (for example `test@test.com` / `test1234`) and tap **Sign Up**.
 
