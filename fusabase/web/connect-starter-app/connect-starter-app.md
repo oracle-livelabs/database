@@ -35,7 +35,7 @@ This lab assumes you have:
 2. Move into the RecipeShare workshop root.
 
     ```bash
-    <copy>cd fusabase-livelabs-web/starter</copy>
+    <copy>cd fusabase-livelabs-web</copy>
     ```
 
 3. Open or import the project in your code editor. This workshop shows screenshots of VS Code, but any editor is fine.
@@ -53,26 +53,29 @@ This lab assumes you have:
 
 2. Live Server needs Node.js and npm. If you do not have them, install Node.js here: [Node.js](https://nodejs.org/en/download/current).
 
-3. Install the server. 
+3. In your terminal, install the server. 
 
     ```bash
     <copy>npm install -g live-server</copy>
     ```
 
-4. Make sure your terminal is still in `fusabase-livelabs-web/starter` from Task 1. Install the Fusabase JavaScript SDK before you launch the app.
+4. Make sure your terminal is still in `fusabase-livelabs-web` from Task 1. Install the Fusabase JavaScript SDK before you launch the app.
 
     ```bash
     <copy>npm install fusabase</copy>
     ```
 
-5. Run Live Server from `fusabase-livelabs-web/starter`.
+5. Run Live Server from `fusabase-livelabs-web`.
 
     ```bash
     <copy>live-server --port=8000 --host=localhost</copy>
     ```
 
 
-6. Open the starter app in your browser.
+6. Open the starter app in your browser. Click the starter folder or the link below
+
+    ![Recipe Share starter app project opened in an editor with the main files visible in the file tree](images/pick.png =60%x*)
+
 
     Use the learner app path:
 

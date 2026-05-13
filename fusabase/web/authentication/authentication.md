@@ -210,6 +210,8 @@ Steps 1-2 walk through the startup pattern piece by piece. Read each step to und
 
 3. Click **Sign in** to open the auth popup with email and password fields.
 
+    ![Xcode project navigator with Services > AuthService.swift selected](images/toggle.png =60%x*)
+
 4. Create a test account:
 
     - enter an email address (for example, `test@example.com`)
