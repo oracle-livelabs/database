@@ -55,60 +55,8 @@ This lab assumes you have:
 
 4. Make sure your chosen runtime is ready before you move on.
 
-    <style>
-    .runtime-check-tabs {
-    margin: 1rem 0;
-    max-width: 42rem;
-    margin-left: 4rem;
-    }
-    .runtime-check-tabs input[type="radio"] {
-    display: none;
-    }
-    .runtime-check-tabs label {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    margin-right: 0.35rem;
-    border: 1px solid #d9dfe8;
-    border-radius: 999px;
-    background: #eef3f8;
-    color: #1f2937;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-    .runtime-check-tabs .tab-panel {
-    display: none;
-    margin-top: 0.85rem;
-    border: 1px solid #d9dfe8;
-    border-radius: 14px;
-    padding: 1rem;
-    background: #fbfcfe;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-    }
-    .runtime-check-tabs .tab-panel p {
-    margin-top: 0;
-    }
-    .runtime-check-tabs .tab-panel pre {
-    margin-bottom: 0;
-    }
-    #tab-check-docker:checked ~ .label-check-docker,
-    #tab-check-podman:checked ~ .label-check-podman {
-    background: #c74634;
-    border-color: #c74634;
-    color: #ffffff;
-    }
-    #tab-check-docker:checked ~ .panel-check-docker,
-    #tab-check-podman:checked ~ .panel-check-podman {
-    display: block;
-    }
-    </style>
-
-  <div class="runtime-check-tabs">
-    <input type="radio" id="tab-check-docker" name="runtime-check-tab" checked>
-    <input type="radio" id="tab-check-podman" name="runtime-check-tab">
-    <label for="tab-check-docker" class="label-check-docker">Docker</label>
-    <label for="tab-check-podman" class="label-check-podman">Podman</label>
-    <div class="tab-panel panel-check-docker">
+    <details>
+    <summary><b>Docker</b></summary>
 
     Run this command if you installed Docker.
 
@@ -116,8 +64,10 @@ This lab assumes you have:
     <copy>docker version</copy>
     ```
 
-    </div>
-    <div class="tab-panel panel-check-podman">
+    </details>
+
+    <details>
+    <summary><b>Podman</b></summary>
 
     Run this command if you installed Podman.
 
@@ -127,8 +77,7 @@ This lab assumes you have:
 
     On macOS or Windows, also confirm that `podman machine list` shows a running machine.
 
-    </div>
-  </div>
+    </details>
 
 5. You should have Docker or Podman installed before continuing to task 3.
 
@@ -175,60 +124,8 @@ This lab assumes you have:
 
 2. Run the workshop startup command.
 
-    <style>
-    .runtime-tabs {
-    margin: 1rem 0;
-    max-width: 42rem;
-    margin-left: 4rem;
-    }
-    .runtime-tabs input[type="radio"] {
-    display: none;
-    }
-    .runtime-tabs label {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    margin-right: 0.35rem;
-    border: 1px solid #d9dfe8;
-    border-radius: 999px;
-    background: #eef3f8;
-    color: #1f2937;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-    .runtime-tabs .tab-panel {
-    display: none;
-    margin-top: 0.85rem;
-    border: 1px solid #d9dfe8;
-    border-radius: 14px;
-    padding: 1rem;
-    background: #fbfcfe;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-    }
-    .runtime-tabs .tab-panel p {
-    margin-top: 0;
-    }
-    .runtime-tabs .tab-panel pre {
-    margin-bottom: 0;
-    }
-    #tab-docker:checked ~ .label-docker,
-    #tab-podman:checked ~ .label-podman {
-    background: #c74634;
-    border-color: #c74634;
-    color: #ffffff;
-    }
-    #tab-docker:checked ~ .panel-docker,
-    #tab-podman:checked ~ .panel-podman {
-    display: block;
-    }
-    </style>
-
-  <div class="runtime-tabs">
-    <input type="radio" id="tab-docker" name="runtime-tab" checked>
-    <input type="radio" id="tab-podman" name="runtime-tab">
-    <label for="tab-docker" class="label-docker">Docker</label>
-    <label for="tab-podman" class="label-podman">Podman</label>
-    <div class="tab-panel panel-docker">
+    <details>
+    <summary><b>Docker</b></summary>
 
     Use this command if you installed Docker.
 
@@ -236,8 +133,10 @@ This lab assumes you have:
     <copy>docker compose up -d</copy>
     ```
 
-    </div>
-    <div class="tab-panel panel-podman">
+    </details>
+
+    <details>
+    <summary><b>Podman</b></summary>
 
     Use this command if you installed Podman.
 
@@ -245,8 +144,7 @@ This lab assumes you have:
     <copy>podman compose up -d</copy>
     ```
 
-    </div>
-  </div>
+    </details>
 
 3. Wait for the stack to finish starting before you continue.
 
@@ -258,74 +156,23 @@ This lab assumes you have:
 
 1. After the compose has finished, check the status with the command below.
 
-    <style>
-    .runtime-status-tabs {
-    margin: 1rem 0;
-    max-width: 42rem;
-    margin-left: 4rem;
-    }
-    .runtime-status-tabs input[type="radio"] {
-    display: none;
-    }
-    .runtime-status-tabs label {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    margin-right: 0.35rem;
-    border: 1px solid #d9dfe8;
-    border-radius: 999px;
-    background: #eef3f8;
-    color: #1f2937;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-    .runtime-status-tabs .tab-panel {
-    display: none;
-    margin-top: 0.85rem;
-    border: 1px solid #d9dfe8;
-    border-radius: 14px;
-    padding: 1rem;
-    background: #fbfcfe;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-    }
-    .runtime-status-tabs .tab-panel p {
-    margin-top: 0;
-    }
-    .runtime-status-tabs .tab-panel pre {
-    margin-bottom: 0;
-    }
-    #tab-status-docker:checked ~ .label-status-docker,
-    #tab-status-podman:checked ~ .label-status-podman {
-    background: #c74634;
-    border-color: #c74634;
-    color: #ffffff;
-    }
-    #tab-status-docker:checked ~ .panel-status-docker,
-    #tab-status-podman:checked ~ .panel-status-podman {
-    display: block;
-    }
-    </style>
-
-  <div class="runtime-status-tabs">
-    <input type="radio" id="tab-status-docker" name="runtime-status-tab" checked>
-    <input type="radio" id="tab-status-podman" name="runtime-status-tab">
-    <label for="tab-status-docker" class="label-status-docker">Docker</label>
-    <label for="tab-status-podman" class="label-status-podman">Podman</label>
-    <div class="tab-panel panel-status-docker">
+    <details>
+    <summary><b>Docker</b></summary>
 
     ```bash
     <copy>docker ps</copy>
     ```
 
-    </div>
-    <div class="tab-panel panel-status-podman">
+    </details>
+
+    <details>
+    <summary><b>Podman</b></summary>
 
     ```bash
     <copy>podman ps</copy>
     ```
 
-    </div>
-  </div>
+    </details>
 
 2. When the services show as running, open the Fusabase console in your browser.
 
