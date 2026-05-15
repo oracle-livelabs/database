@@ -131,6 +131,17 @@ Notice the role says "remember any preferences" but without memory tools, that's
     EXCEPTION WHEN OTHERS THEN NULL;
     END;
     /
+
+    BEGIN
+        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
+            team_name   => 'FORGETFUL_TEAM_SHIFT2',
+            attributes  => '{"agents": [{"name": "FORGETFUL_AGENT", "task": "FORGETFUL_TASK"}],
+                            "process": "sequential"}',
+            description => 'Second shift team with no prior conversation context'
+        );
+    EXCEPTION WHEN OTHERS THEN NULL;
+    END;
+    /
     </copy>
     ```
 
@@ -216,13 +227,13 @@ Now simulate what happens when the session ends—perhaps the loan officer logs 
 
 2. Start a new session.
 
-    Reactivate the team. This is like the loan officer returning the next day.
+    Activate the second-shift team. This is like the loan officer returning the next day with no prior conversation context.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');
     </copy>
     ```
 
@@ -232,13 +243,13 @@ Now simulate what happens when the session ends—perhaps the loan officer logs 
 
     Ask the same question you asked before. Watch what happens.
 
-    **The agent doesn't know.** Everything you shared about Sarah Chen is gone.
+    **The agent doesn't know.** It might say it doesn't have that information, or ask you to tell it. Everything you shared about Sarah Chen is gone.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Sarah Chens preferred contact method;
+    SELECT AI AGENT In this new session, what is Sarah Chens preferred contact method;
     </copy>
     ```
 
@@ -254,7 +265,7 @@ Now simulate what happens when the session ends—perhaps the loan officer logs 
 
     ```sql
     <copy>
-    SELECT AI AGENT What rate exception was Sarah Chen approved for;
+    SELECT AI AGENT In this new session, what rate exception was Sarah Chen approved for;
     </copy>
     ```
 
@@ -266,17 +277,18 @@ This isn't just annoying—it breaks real workflows at Seer Equity. Let's simula
 
 1. Day 1: Share a loan application in progress.
 
-    A loan applicant is working through a complex application. The agent acknowledges the details.
+    A loan applicant is working through a complex application. Share the details with the agent during the Day 1 session.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
     SELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;
     </copy>
     ```
 
-    ![Agent acknowledging TechStart LLC loan application details on Day 1](images/task5_1.png)
+    ![Agent output after receiving TechStart LLC loan application details on Day 1](images/task5_1.png)
 
 2. Simulate Day 2.
 
@@ -287,7 +299,7 @@ This isn't just annoying—it breaks real workflows at Seer Equity. Let's simula
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');
     </copy>
     ```
 
@@ -385,7 +397,7 @@ In this lab, you experienced the forgetting problem:
 * **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 Run this to remove all objects created in this lab.
 
@@ -394,6 +406,7 @@ Run this to remove all objects created in this lab.
 ```sql
 <copy>
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM_SHIFT2', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);
