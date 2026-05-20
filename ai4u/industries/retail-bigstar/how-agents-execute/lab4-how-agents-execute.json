@@ -427,7 +427,7 @@
       }
     },
     {
-      "text": "%script\nSELECT step_name, step_detail FROM workflow_log ORDER BY log_id;",
+      "text": "%script\nSELECT step_name, step_detail AS authenticating_step_detail FROM workflow_log ORDER BY log_id;",
       "config": {
         "colWidth": 12.0,
         "enabled": true,

@@ -491,7 +491,7 @@
       }
     },
     {
-      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "text": "%md\n## Cleanup\n\nRun this to remove all objects created in this lab.",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -506,7 +506,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+            "data": "<h2>Cleanup</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
           }
         ]
       }

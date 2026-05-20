@@ -48,31 +48,29 @@ For this workshop, we provide the environment. You will need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
 
-    ![Notebook Information](./images/task_1_1.png " ")
+2. Unzip the downloaded `notebooks.zip` file on your computer.
 
-2. Click **Import** to expand the Import drop down.
+3. From the Oracle Machine Learning home page, click **Notebooks**.
 
-    ![Notebook Information](./images/task_1_2.png " ")
+    ![Notebook Information](./images/task1_1.png " ")
 
-3. Select **Git**.
+4. Click **Import** to expand the Import drop down.
 
-    ![Notebook Information](./images/task_1_3.png " ")
+    ![Notebook Information](./images/task1_2.png " ")
 
-4. Paste the following GitHub URL leaving the credential field blank:
+5. Select **From File**.
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/how-agents-plan/lab3-how-agents-plan.json
-    </copy>
-    ```
+    ![Notebook Information](./images/task1_5a.png " ")
 
-    ![Notebook Information](./images/task_1_4.png " ")
+6. Select the `lab3-how-agents-plan.json` file from the unzipped notebook files.
 
-5. Click **Ok**.
+    ![Notebook Information](./images/task1_6a.png " ")
 
-    ![Notebook Information](./images/task_1_5.png " ")
+7. Click **Open**.
+
+    ![Notebook Information](./images/task1_6a.png " ")
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -453,7 +451,7 @@ In this lab, you observed how agents plan their work:
 * **Author** - David Start, Director, Database Product Management
 * **Last Updated By/Date** - David Start, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 

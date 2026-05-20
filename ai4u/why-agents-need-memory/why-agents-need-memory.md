@@ -49,31 +49,31 @@ For this workshop, we provide the environment. You will need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
+
+2. Unzip the downloaded `notebooks.zip` file on your computer.
+
+3. From the Oracle Machine Learning home page, click **Notebooks**.
 
     ![OML home page with Notebooks highlighted](images/task1_1.png)
 
-2. Click **Import** to expand the Import drop down.
+4. Click **Import** to expand the Import drop down.
 
     ![Notebooks page with Import button highlighted](images/task1_2.png)
 
-3. Select **Git**.
+5. Select **From File**.
 
-    ![Import dropdown showing Git option highlighted](images/task1_3.png)
+    ![Import dropdown showing From File option highlighted](images/task1_5a.png)
 
-4. Paste the following GitHub URL leaving the credential field blank:
+6. Select the `lab5-why-agents-need-memory.json` file from the unzipped notebook files.
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/why-agents-need-memory/lab5-why-agents-need-memory-file.json
-    </copy>
-    ```
+    ![File picker with lab notebook selected](images/task1_6a.png)
 
-5. Click **OK**.
+7. Click **Open**.
 
-    ![Git Clone dialog with GitHub URI field and OK button highlighted](images/task1_5.png)
+    ![File picker with lab notebook selected](images/task1_6a.png)
 
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create an Agent Without Memory
 
@@ -127,6 +127,17 @@ Notice the role says "remember any preferences" but without memory tools, that's
             attributes  => '{"agents": [{"name": "FORGETFUL_AGENT", "task": "FORGETFUL_TASK"}],
                             "process": "sequential"}',
             description => 'Team demonstrating memory limitations'
+        );
+    EXCEPTION WHEN OTHERS THEN NULL;
+    END;
+    /
+
+    BEGIN
+        DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
+            team_name   => 'FORGETFUL_TEAM_SHIFT2',
+            attributes  => '{"agents": [{"name": "FORGETFUL_AGENT", "task": "FORGETFUL_TASK"}],
+                            "process": "sequential"}',
+            description => 'Second shift team with no prior conversation context'
         );
     EXCEPTION WHEN OTHERS THEN NULL;
     END;
@@ -216,13 +227,13 @@ Now simulate what happens when the session ends—perhaps the loan officer logs 
 
 2. Start a new session.
 
-    Reactivate the team. This is like the loan officer returning the next day.
+    Activate the second-shift team. This is like the loan officer returning the next day with no prior conversation context.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');
     </copy>
     ```
 
@@ -232,13 +243,13 @@ Now simulate what happens when the session ends—perhaps the loan officer logs 
 
     Ask the same question you asked before. Watch what happens.
 
-    **The agent doesn't know.** Everything you shared about Sarah Chen is gone.
+    **The agent doesn't know.** It might say it doesn't have that information, or ask you to tell it. Everything you shared about Sarah Chen is gone.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI AGENT What is Sarah Chens preferred contact method;
+    SELECT AI AGENT In this new session, what is Sarah Chens preferred contact method;
     </copy>
     ```
 
@@ -254,7 +265,7 @@ Now simulate what happens when the session ends—perhaps the loan officer logs 
 
     ```sql
     <copy>
-    SELECT AI AGENT What rate exception was Sarah Chen approved for;
+    SELECT AI AGENT In this new session, what rate exception was Sarah Chen approved for;
     </copy>
     ```
 
@@ -266,17 +277,18 @@ This isn't just annoying—it breaks real workflows at Seer Equity. Let's simula
 
 1. Day 1: Share a loan application in progress.
 
-    A loan applicant is working through a complex application. The agent acknowledges the details.
+    A loan applicant is working through a complex application. Share the details with the agent during the Day 1 session.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
     SELECT AI AGENT Applicant TechStart LLC is working on a $500K business expansion loan. They have provided 3 years of financials but still need to submit their business plan. The deadline for the SBA guarantee program is January 31st;
     </copy>
     ```
 
-    ![Agent acknowledging TechStart LLC loan application details on Day 1](images/task5_1.png)
+    ![Agent output after receiving TechStart LLC loan application details on Day 1](images/task5_1.png)
 
 2. Simulate Day 2.
 
@@ -287,7 +299,7 @@ This isn't just annoying—it breaks real workflows at Seer Equity. Let's simula
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.CLEAR_TEAM;
-    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM');
+    EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FORGETFUL_TEAM_SHIFT2');
     </copy>
     ```
 
@@ -385,7 +397,7 @@ In this lab, you experienced the forgetting problem:
 * **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 Run this to remove all objects created in this lab.
 
@@ -394,6 +406,7 @@ Run this to remove all objects created in this lab.
 ```sql
 <copy>
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM', TRUE);
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FORGETFUL_TEAM_SHIFT2', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FORGETFUL_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FORGETFUL_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('BASIC_SQL_TOOL', TRUE);
