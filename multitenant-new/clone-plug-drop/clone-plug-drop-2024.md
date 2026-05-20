@@ -1294,4 +1294,4 @@ Please *proceed to the next lab*.
 
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Contributors** -  Joseph Bernens, David Start, Brian McGraw, Rene Fontcha, John McHough
-- **Last Updated By/Date** - Kevin Lazarz, Senior Manager, Database Product Management, August 2024
+- **Last Reviewed By/Date** - Kevin Lazarz, Senior Manager, Database Product Management, May 2024
