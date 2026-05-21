@@ -1982,4 +1982,4 @@ The tasks you will do in this step are:
 
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Contributors** -  David Start, Rene Fontcha, Joseph Bernens, Kevin Lazarz
-- **Last Updated By/Date** - Kevin Lazarz, Senior Manager, Database Product Management, August 2024
+- **Last Reviewed By/Date** - Kevin Lazarz, Senior Manager, Database Product Management, August 2026

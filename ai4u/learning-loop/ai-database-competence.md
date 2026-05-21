@@ -415,7 +415,7 @@ In this lab, you built the learning loop:
 
 **Key takeaway:** This is how agents improve. Not magically, but systematically. Action, result, memory, improvement. The AI database powers it all.
 
-## Cleanup (Optional)
+## Cleanup
 
 ```sql
 <copy>

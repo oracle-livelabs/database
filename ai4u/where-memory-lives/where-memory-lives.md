@@ -443,7 +443,7 @@ In this lab, you built a **memory core** using Oracle's converged database:
 * **Author** - David Start
 * **Last Updated By/Date** - Francis Regalado, March 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 

@@ -421,7 +421,7 @@ In this lab, you experienced the fundamental nature of AI agents:
 * **Author** - David Start, Director, Database Product Management
 * **Last Updated By/Date** - Kay Malcolm, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 

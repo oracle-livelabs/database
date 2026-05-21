@@ -872,7 +872,7 @@ In this lab, you built the learning loop with semantic search:
 
 This is how agents improve. Not magically, but systematically. The AI database powers it all.
 
-## Cleanup (Optional)
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
