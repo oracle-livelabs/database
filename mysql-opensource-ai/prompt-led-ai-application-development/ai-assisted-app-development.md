@@ -1,6 +1,6 @@
 # Prompt-Led AI Application Development
 
-## Introduction
+### Introduction
 
 This lab introduces a reusable AI prompt engineering framework for generating production-quality starter applications using modern web technologies and MySQL HeatWave GenAI capabilities. By using a structured prompt template, developers can rapidly create scalable, AI-enabled applications with semantic vector search, chatbot functionality, and intelligent recommendation systems.
 
@@ -11,7 +11,7 @@ The lab demonstrates how to guide AI coding assistants using clearly defined bus
 **Estimated Lab Time:** 30 minutes
 
 
-## Objectives
+### Objectives
 
 In this lab, you will:
 
@@ -23,7 +23,7 @@ In this lab, you will:
 - Prepare applications for deployment and testing
 - Understand HeatWave embedding and vector similarity workflows
 
-## Prerequisites
+### Prerequisites
 
 Before starting this lab, ensure you have:
 
@@ -37,7 +37,7 @@ Before starting this lab, ensure you have:
 
 ## Task 1: Understand the Prompt-Led Development Framework
 
-## Starter Application Generation Template
+### Starter Application Generation Template
 
 ```text
 # STARTER APPLICATION GENERATION TEMPLATE
@@ -54,7 +54,7 @@ Create a production-quality {application_type} web application.
 8. Important
 ```
 
-## Template Section Breakdown
+### Template Section Breakdown
 
 ### 1. Business Objective
 
@@ -359,7 +359,7 @@ Replace:
 
 
 
-## Important Notes
+### Important Notes
 
 This lab provides:
 
@@ -380,19 +380,9 @@ The goal is to accelerate development through effective AI-guided prompt enginee
 
 
 
-## Optional
+### Optional
 
 Enhance your generated application with a **Feedback Summary** feature.
-
-## Requirements
-
-- Use HeatWave native GenAI routines:
-  - `sys.ML_GENERATE`
-- Summarize user reviews and customer feedback
-- Deploy the application to your OCI Compute VM
-- Connect securely to the private HeatWave instance
-- Validate the feature end-to-end
-
 
 
 ## Learn More
@@ -401,7 +391,6 @@ Enhance your generated application with a **Feedback Summary** feature.
 - [MySQL HeatWave GenAI Documentation](https://dev.mysql.com/doc/heatwave/en/mys-hwgenai-routines.html)
 - [OCI Compute Documentation](https://docs.oracle.com/en-us/iaas/Content/Compute/Concepts/computeoverview.htm)
 - [Python Flask Documentation](https://flask.palletsprojects.com/en/stable/)
-
 
 
 

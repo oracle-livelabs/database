@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 Welcome to the **Building AI Applications with OCI Generative AI Service in Visual Studio Code**.
 
 Modern software development is rapidly evolving with the help of Artificial Intelligence. Instead of manually building every component from scratch, developers can now use AI coding assistants and structured prompt engineering techniques to generate production-quality applications in minutes.
@@ -48,7 +42,8 @@ Traditional application development often requires:
 - Researching AI integration patterns
 - Configuring deployment workflows
 
-In this workshop, AI dramatically accelerates the development lifecycle.
+### Objectives
+In this Lab, you will learn how AI can dramatically accelerates the development lifecycle.
 
 You will learn how to:
 
