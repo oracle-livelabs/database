@@ -42,15 +42,6 @@ Before starting this lab, ensure you have:
 
 # Task 1: Understand the Prompt-Led Development Framework
 
-This lab introduces a reusable AI prompt template that helps generate production-quality starter applications.
-
-The template organizes application requirements into clearly defined sections, enabling AI assistants to generate structured and maintainable applications.
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Starter Application Generation Template
 
 ```text
@@ -434,10 +425,10 @@ Enhance your generated application with a **Feedback Summary** feature.
 
 # Learn More
 
-- MySQL HeatWave Documentation  
-- MySQL HeatWave GenAI Documentation  
-- OCI Compute Documentation  
-- Python Flask Documentation
+- [MySQL HeatWave Documentation](https://dev.mysql.com/doc/heatwave/en/mys-hw-about-heatwave.html)
+- [MySQL HeatWave GenAI Documentation](https://dev.mysql.com/doc/heatwave/en/mys-hwgenai-routines.html)
+- [OCI Compute Documentation](https://docs.oracle.com/en-us/iaas/Content/Compute/Concepts/computeoverview.htm)
+- [Python Flask Documentation](https://flask.palletsprojects.com/en/stable/)
 
 ---
 
