@@ -10,7 +10,6 @@ The lab demonstrates how to guide AI coding assistants using clearly defined bus
 
 **Estimated Lab Time:** 30 minutes
 
----
 
 ## Objectives
 

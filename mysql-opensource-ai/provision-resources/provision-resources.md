@@ -5,7 +5,6 @@
 In this lab, you will provision the infrastructure required for the AI-powered eCommerce application using Oracle Cloud Infrastructure (OCI) Resource Manager and Terraform. You will also validate connectivity to the Compute VM and MySQL HeatWave database and configure Visual Studio Code with OCI Generative AI integration.
 
 Estimated Time: 30-40 minutes
----
 
 ## Task 1: Provision Infrastructure Using OCI Resource Manager
 
@@ -17,9 +16,8 @@ Download the ZIP package containing the Terraform infrastructure scripts.
 
 
 2. Login to OCI Console
-
-1. Login to the OCI Console.
-2. Navigate to:
+   1. Login to OCI Console
+   2. Navigate to:
    - **Developer Services → Resource Manager → Stacks**
 
 ![Navigate to resource manager](images/lab1image1.png "Navigate to resource manager")
@@ -28,18 +26,18 @@ Download the ZIP package containing the Terraform infrastructure scripts.
 
 3. Create a Stack
 
-1. Click **Create Stack**
-2. Choose:
+   1. Click **Create Stack**
+   2. Choose:
    - **My Configuration**
-3. Upload the downloaded ZIP file.
+   3. Upload the downloaded ZIP file.
 
 ![Create Stack](images/lab1image3.png "Create Stack")
 
 
 4. Upload Terraform ZIP File
 
-1. Browse and select the ZIP file.
-2. Click **Next**.
+   1. Browse and select the ZIP file.
+   2. Click **Next**.
 
 
 5. Configure Stack Variables
@@ -66,8 +64,8 @@ Click **Save Changes**.
 
 7. Run Terraform Plan
 
-1. Click **Plan**
-2. Wait for validation and resource planning to complete successfully.
+   1. Click **Plan**
+   2. Wait for validation and resource planning to complete successfully.
 
 ![run Plan](images/lab1image7.png "run Plan")
 ![run plan](images/lab1image8.png "run plan")
@@ -76,8 +74,8 @@ Click **Save Changes**.
 8. Apply the Stack
 ![apply plan](images/lab1image9.png "apply plan")
 
-1. Once the plan succeeds, click **Apply**
-2. Wait for the infrastructure deployment to complete.
+   1. Once the plan succeeds, click **Apply**
+   2. Wait for the infrastructure deployment to complete.
 
 Resources created include:
 - Virtual Cloud Network (VCN)
@@ -107,7 +105,6 @@ using the `terraform.tfvars` configuration file.
 
 ![update terraform variables](images/lab1image10.png "update terraform variables")
 
----
 
 ## Task 2: Validate Compute VM Access
 
@@ -161,14 +158,14 @@ Successful connection should display:
 
 ## Task 3: Validate MySQL HeatWave Connectivity
 
-1. Retrieve Database Private IP
+Retrieve Database Private IP
 
 1. Navigate to:
    - **Databases → MySQL HeatWave → DB Systems**
 2. Select the deployed DB System.
 3. Copy the **Private IP Address**.
 
----
+
 
 ## Task 4: Connect MySQL HeatWave Using Visual Studio Code
 
@@ -237,7 +234,6 @@ You should receive the current database server timestamp.
 
 ## Task5: Configure OCI Generative AI with Cline in Visual Studio Code
 
-## Objective
 
 Configure OCI Generative AI integration with the Cline extension inside Visual Studio Code for prompt-driven AI application development.
 
@@ -290,7 +286,7 @@ Provide:
 ![Create API Keys](images/genaikey4.png "Create API Keys")
 
 ![Copy keys](images/genaikey5.png "Copy keys")
----
+
 
 3. Install Cline Extension in VS Code
 
@@ -315,7 +311,7 @@ Open Cline settings and configure:
 | Model ID | ocid1.generativeaimodel.oc1.us-chicago-1.amaaaaaask7dceya3bsfz4ogiuv3yc7gcnlry7gi3zzx6tnikg6jltqszm2q |
 
 ![Cline settings](images/clinesetup.png "Cline settings")
----
+
 
 ## Expected Outcome
 
