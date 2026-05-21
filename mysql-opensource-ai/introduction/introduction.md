@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 Welcome to the **Building AI Applications with OCI Generative AI Service in Visual Studio Code**.
 
 Modern software development is rapidly evolving with the help of Artificial Intelligence. Instead of manually building every component from scratch, developers can now use AI coding assistants and structured prompt engineering techniques to generate production-quality applications in minutes.
@@ -28,6 +34,8 @@ Rather than treating AI as a simple chatbot, this workshop teaches you how to us
 - Deployment instructions
 
 Using carefully structured prompts, developers can guide AI systems to generate complete application foundations with modern architecture, clean UI design, modular code structure, and native AI integration.
+
+Estimated Workshop Time: 120 minutes
 
 ### What Makes This Workshop Different?
 

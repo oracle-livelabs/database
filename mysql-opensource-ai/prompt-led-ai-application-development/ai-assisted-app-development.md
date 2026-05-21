@@ -162,57 +162,57 @@ Task: Build a production-quality E-commerce Web Application for electronics usin
 
 1. Required Web Pages
 
-Generate clean, modular HTML5/Bootstrap 5 templates for the following:
+    Generate clean, modular HTML5/Bootstrap 5 templates for the following:
 
-Home/Landing Page:
-Includes a sticky navigation bar (Home, Orders, Feedback, Logout), a premium hero banner, and a prominent search bar.
+    Home/Landing Page:
+    Includes a sticky navigation bar (Home, Orders, Feedback, Logout), a premium hero banner, and a prominent search bar.
 
-Product Grid:
-A responsive 3-column layout featuring elegant product cards. Each card must include:
-- Product image
-- Title
-- Price
-- Star rating
-- Description
-- Buy button
+    Product Grid:
+    A responsive 3-column layout featuring elegant product cards. Each card must include:
+    - Product image
+    - Title
+    - Price
+    - Star rating
+    - Description
+    - Buy button
 
-Login Page:
-A visually polished authentication form.
+    Login Page:
+    A visually polished authentication form.
 
-Order History Page:
-Dashboard view listing previous purchases.
+    Order History Page:
+    Dashboard view listing previous purchases.
 
-Product Details Page:
-Detailed product information and customer feedback.
+    Product Details Page:
+    Detailed product information and customer feedback.
 
 2. Database Requirements (MySQL HeatWave)
 
-Provide a complete executable SQL script.
+    Provide a complete executable SQL script.
 
-products Table:
-- product_description (TEXT)
-- description_vector (VECTOR)
-- image_url (VARCHAR)
-- id
-- name
-- price
-- category
-- rating
-- quantity
+    products Table:
+    - product_description (TEXT)
+    - description_vector (VECTOR)
+    - image_url (VARCHAR)
+    - id
+    - name
+    - price
+    - category
+    - rating
+    - quantity
 
-Other Tables:
-- users
-- orders
-- feedback
+    Other Tables:
+    - users
+    - orders
+    - feedback
 
-Seed Data:
-Include realistic electronics product data.
+    Seed Data:
+    Include realistic electronics product data.
 
 3. AI Feature: Semantic Vector Search
 
-Implement native Vector Search capability using MySQL HeatWave.
+    Implement native Vector Search capability using MySQL HeatWave.
 
-Use VECTOR_DISTANCE for similarity calculations.
+    Use VECTOR_DISTANCE for similarity calculations.
 
 4. Technical Architecture
 
@@ -229,22 +229,22 @@ To generate AI-powered applications correctly, provide sample HeatWave GenAI SQL
 
 This helps ensure accurate SQL generation and proper GenAI routine usage.
 
-1.  Generate Embeddings
+1. Generate Embeddings
 
-Use the following sample query:
+    Use the following sample query:
 
-```sql
-SELECT sys.ML_EMBED_ROW(
+    ```sql
+    SELECT sys.ML_EMBED_ROW(
     "What is artificial intelligence?",
     JSON_OBJECT("model_id", "all_minilm_l12_v2")
-) INTO @text_embedding;
-```
+    ) INTO @text_embedding;
+    ```
 
-This generates vector embeddings using the `all_minilm_l12_v2` model.
+    This generates vector embeddings using the `all_minilm_l12_v2` model.
 
 
 
-2.  Perform Semantic Vector Search
+2. Perform Semantic Vector Search
 
 Use cosine similarity calculations:
 
@@ -291,23 +291,23 @@ After generating the application:
 
 Update your application configuration with the correct database connection details.
 
-1.  Local Testing via SSH Tunnel
+1. Local Testing via SSH Tunnel
 
-Use:
+    Use:
 
-```text
-localhost
-```
+    ```text
+    localhost
+    ```
 
-or
+    or
 
-```text
-127.0.0.1
-```
+    ```text
+    127.0.0.1
+    ```
 
 
 
-2.  Deployment Inside OCI VCN
+2. Deployment Inside OCI VCN
 
 Use the HeatWave private IP address when deploying the application on a Compute VM within the same Virtual Cloud Network (VCN).
 
@@ -315,31 +315,31 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 
 ## Task 6: Environment Setup and Application Execution
 
-1.  Create a Python Virtual Environment
+1. Create a Python Virtual Environment
 
-```bash
-python3 -m venv venv
-```
+    ```bash
+    python3 -m venv venv
+    ```
 
-Activate the environment:
+    Activate the environment:
 
-```bash
-source venv/bin/activate
-```
+    ```bash
+    source venv/bin/activate
+    ```
 
-Install dependencies:
+    Install dependencies:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 
 
-2.  Run the Application
+2. Run the Application
 
-```bash
-python app.py
-```
+    ```bash
+    python app.py
+    ```
 
 
 

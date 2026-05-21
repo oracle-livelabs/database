@@ -6,71 +6,75 @@ In this lab, participants will connect to the MySQL HeatWave database, create an
 
 Estimated Time: 10 minutes
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Create Database and user
 
 Login to the MySQL HeatWave database using the **admin user credentials** in Visual Studio Code editor as you did in lab1.
 
 Ensure you have administrative access before proceeding with database creation, user provisioning, and privilege grants.
 
-1.  Create Application Database
+1. Create Application Database
 
-```sql
-CREATE DATABASE mydb;
-```
+    ```sql
+    CREATE DATABASE mydb;
+    ```
 
-Verify database creation:
+    Verify database creation:
 
-```sql
-SHOW DATABASES;
-```
+    ```sql
+    SHOW DATABASES;
+    ```
 
-2.  Create Application User
+2. Create Application User
 
-Create a dedicated user for the application instead of using the admin account.
+    Create a dedicated user for the application instead of using the admin account.
 
-```sql
-CREATE USER 'username'@'host' IDENTIFIED BY 'StrongPassword';
-```
+    ```sql
+    CREATE USER 'username'@'host' IDENTIFIED BY 'StrongPassword';
+    ```
 
-Recommended workshop example:
+    Recommended workshop example:
 
-```sql
-CREATE USER 'app_user'@'%' IDENTIFIED BY 'Workshop@1234';
-```
+    ```sql
+    CREATE USER 'app_user'@'%' IDENTIFIED BY 'Workshop@1234';
+    ```
 
-> **Note:** Using `'%'` allows access from any host inside the permitted network. For production, restrict this to a specific host or subnet.
+    > **Note:** Using `'%'` allows access from any host inside the permitted network. For production, restrict this to a specific host or subnet.
 
-3.  Grant Database Access
+3. Grant Database Access
 
-Grant required privileges for the application database:
+    Grant required privileges for the application database:
 
-```sql
-GRANT ALL PRIVILEGES
-ON mydb.*
-TO 'app_user'@'%';
-```
+    ```sql
+    GRANT ALL PRIVILEGES
+    ON mydb.*
+    TO 'app_user'@'%';
+    ```
 
-Apply the changes:
+    Apply the changes:
 
-```sql
-FLUSH PRIVILEGES;
-```
+    ```sql
+    FLUSH PRIVILEGES;
+    ```
 
-4.  Grant Access to GenAI Routines
+4. Grant Access to GenAI Routines
 
-Provide access to call GenAI / HeatWave system routines:
+    Provide access to call GenAI / HeatWave system routines:
 
-```sql
-GRANT EXECUTE ON sys.* TO 'app_user'@'%';
-```
+    ```sql
+    GRANT EXECUTE ON sys.* TO 'app_user'@'%';
+    ```
 
-Apply the changes:
+    Apply the changes:
 
-```sql
-FLUSH PRIVILEGES;
-```
+    ```sql
+    FLUSH PRIVILEGES;
+    ```
 
-5.  Validate User Access
+5. Validate User Access
 
 Create a **new database connection in Visual Studio Code** using the newly created application user credentials.
 
@@ -101,24 +105,24 @@ SHOW TABLES;
 
 To enable the DB system to access OCI services, perform the following steps in OCI.
 
-1.  Create / Update Dynamic Group
+1. Create / Update Dynamic Group
 
-Click on Hamburger Menu and select **Identity & Security → Domains -> select root compartment**.
+    Click on Hamburger Menu and select **Identity & Security → Domains -> select root compartment**.
 
-![Navigate to Domains](images/domain-image.png "Navigate to Domains")
-![Navigate to Domains](images/domain-image2.png "Navigate to Domains")
+    ![Navigate to Domains](images/domain-image.png "Navigate to Domains")
+    ![Navigate to Domains](images/domain-image2.png "Navigate to Domains")
 
-Create a new dynamic group or update an existing one with the following matching rule:
-![Create or update Dynamic group](images/dg-image.png "Create or update Dynamic group")
+    Create a new dynamic group or update an existing one with the following matching rule:
+    ![Create or update Dynamic group](images/dg-image.png "Create or update Dynamic group")
 
 
-```text
-ALL{resource.type = 'mysqldbsystem', resource.compartment.id = 'ocid1.compartment.oc1..AlphanumericString'}
-```
+    ```text
+    ALL{resource.type = 'mysqldbsystem', resource.compartment.id = 'ocid1.compartment.oc1..AlphanumericString'}
+    ```
 
-> **Note:** Replace `ocid1.compartment.oc1..AlphanumericString` with the **Compartment ID of the DB system**. Compartment ID is available under **Identity & Security -> Compartments -> select your compartment and copy the OCID**.
+    > **Note:** Replace `ocid1.compartment.oc1..AlphanumericString` with the **Compartment ID of the DB system**. Compartment ID is available under **Identity & Security -> Compartments -> select your compartment and copy the OCID**.
 
-2.  Add Required Policies
+2. Add Required Policies
 
 Navigate to **Identity & Security → Policies** and add the following policies for the dynamic group:
 
