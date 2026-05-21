@@ -1,4 +1,4 @@
-# Lab 2: Setup access to database 
+# Setup access to database 
 
 ### Objectives
 

@@ -1,4 +1,4 @@
-# Lab 3: Prompt-Led AI Application Development
+# Prompt-Led AI Application Development
 
 ## Introduction
 
@@ -170,7 +170,7 @@ Emphasizes:
 
 ---
 
-# Task 2: Generate an Example AI Application Prompt
+## Task 2: Generate an Example AI Application Prompt
 
 The following example demonstrates how to request a production-quality AI-powered e-commerce application using Python Flask and MySQL HeatWave.
 
@@ -371,7 +371,7 @@ python app.py
 
 ---
 
-# Task 7: Create an SSH Tunnel
+## Task 7: Create an SSH Tunnel
 
 Use the following command to securely connect your local machine to the private HeatWave database:
 

@@ -1,4 +1,4 @@
-# Lab 1: Provision the Required Resources for the Workshop
+# Provision the Required Resources for the Workshop
 
 ### Objectives
 
@@ -15,7 +15,6 @@ Download the ZIP package containing the Terraform infrastructure scripts.
 
 [Download terraform script](https://objectstorage.us-chicago-1.oraclecloud.com/p/3rSJn8VsfglY8wWlj0Q_bxwQZRNvZOnAoURiGMzV3AbbTa0aUj8ZyFsvh_X4Vmzq/n/sehubjapaciaas/b/heatwave_genai/o/Version_3_AI_Demo_infrastructure.zip)
 
----
 
 2. Login to OCI Console
 
@@ -25,7 +24,7 @@ Download the ZIP package containing the Terraform infrastructure scripts.
 
 ![Navigate to resource manager](images/lab1image1.png "Navigate to resource manager")
 ![Navigate to stack](images/lab1image2.png "Navigate to stack")
----
+
 
 3. Create a Stack
 
@@ -35,14 +34,13 @@ Download the ZIP package containing the Terraform infrastructure scripts.
 3. Upload the downloaded ZIP file.
 
 ![Create Stack](images/lab1image3.png "Create Stack")
----
+
 
 4. Upload Terraform ZIP File
 
 1. Browse and select the ZIP file.
 2. Click **Next**.
 
----
 
 5. Configure Stack Variables
 
@@ -57,14 +55,14 @@ Fill in the required details:
 
 ![add details](images/lab1image4.png "add details")
 ![add details](images/lab1image5.png "add details")
----
+
 
 6. Save Stack
 
 Click **Save Changes**.
 
 ![save stack](images/lab1image6.png "save stack")
----
+
 
 7. Run Terraform Plan
 
@@ -73,10 +71,10 @@ Click **Save Changes**.
 
 ![run Plan](images/lab1image7.png "run Plan")
 ![run plan](images/lab1image8.png "run plan")
----
+
 
 8. Apply the Stack
-![apply plan](images/Lab1image9.png "apply plan")
+![apply plan](images/lab1image9.png "apply plan")
 
 1. Once the plan succeeds, click **Apply**
 2. Wait for the infrastructure deployment to complete.
@@ -87,7 +85,7 @@ Resources created include:
 - MySQL HeatWave DB System
 - Networking Components
 
----
+
 
 9. Validate Infrastructure Deployment
 
@@ -115,18 +113,18 @@ using the `terraform.tfvars` configuration file.
 
 1. Retrieve Public IP Address
 
-1. Navigate to:
-   - **Compute → Instances**
-2. Select your VM instance.
-3. Copy the **Public IP Address**.
+   1. Navigate to:
+      - **Compute → Instances**
+   2. Select your VM instance.
+   3. Copy the **Public IP Address**.
 
----
+
 
 2. Locate SSH Private Key
 
 Extract the downloaded infrastructure ZIP package and locate the `.key` file.
 
----
+
 
 3. Set Key Permissions (Linux/macOS)
 
@@ -134,7 +132,6 @@ Extract the downloaded infrastructure ZIP package and locate the `.key` file.
 chmod 400 ~/Downloads/workshop-key.key
 ```
 
----
 
 4.  Connect to the VM
 
@@ -148,7 +145,7 @@ Example:
 ssh -i ~/Downloads/workshop-key.key opc@129.154.xx.xx
 ```
 
----
+
 
 5. Verify SSH Access
 
@@ -177,7 +174,6 @@ Successful connection should display:
 
 Since the database resides in a private subnet, connectivity is established through the Compute VM using SSH tunneling.
 
----
 
 1. Install Required VS Code Extensions
 
@@ -185,15 +181,15 @@ Install:
 - **MySQL Shell Extension**
 
 ![Install mysql shell extension](images/mysqlshell.png "Install mysql shell extension")
----
+
 
 2. Configure Database Connection
 
 In Visual Studio Code:
 
-1. Open the MySQL Shell Extension.
-2. Click **+ New Connection**
-3. Enter the following details:
+   1. Open the MySQL Shell Extension.
+   2. Click **+ New Connection**
+   3. Enter the following details:
 
 | Field | Value |
 |---|---|
@@ -206,7 +202,7 @@ In Visual Studio Code:
 ![Create Connection](images/mysqlconn.png "Create Connection")
 
 ![Add connection details](images/mysqlconn2.png "Add connection details")
----
+
 
 3. Configure SSH Tunnel
 
@@ -219,7 +215,7 @@ Enter:
 | SSH Private Key | Path to private key |
 
 ![Add SSH details](images/mysqlconn3.png "Add SSH details")
----
+
 
 4. Test Database Connectivity
 
@@ -231,15 +227,13 @@ SELECT NOW();
 
 You should receive the current database server timestamp.
 
----
 
-# Final Validation Checklist
+## Final Validation Checklist
 
 - [x] VM accessible through SSH
 - [x] MySQL HeatWave reachable from VS Code
 - [x] Database query execution successful
 
----
 
 ## Task5: Configure OCI Generative AI with Cline in Visual Studio Code
 
@@ -247,7 +241,6 @@ You should receive the current database server timestamp.
 
 Configure OCI Generative AI integration with the Cline extension inside Visual Studio Code for prompt-driven AI application development.
 
----
 
 1. Create IAM Policy for Generative AI Access
 
@@ -268,9 +261,8 @@ Allow any-user to use generative-ai-family in compartment poc-compartment
 This policy grants access to OCI Generative AI services.
 
 Reference Documentation:  
-https://docs.oracle.com/en-us/iaas/Content/Identity/policieshow/Policy_Basics.htm
+[Policy Basics](https://docs.oracle.com/en-us/iaas/Content/Identity/policieshow/Policy_Basics.htm)
 
----
 
 2. Create OCI Generative AI API Key
 
@@ -302,15 +294,15 @@ Provide:
 
 3. Install Cline Extension in VS Code
 
-1. Open Visual Studio Code
-2. Navigate to:
-   - **Extensions**
-3. Search for:
-   - `Cline`
-4. Click **Install**
+   1. Open Visual Studio Code
+   2. Navigate to:
+      - **Extensions**
+   3. Search for:
+      - `Cline`
+   4. Click **Install**
 
 ![Install cline extension](images/cline.png "Install cline extension")
----
+
 
 4. Configure Cline Settings
 

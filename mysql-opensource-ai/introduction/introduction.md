@@ -29,9 +29,7 @@ Rather than treating AI as a simple chatbot, this workshop teaches you how to us
 
 Using carefully structured prompts, developers can guide AI systems to generate complete application foundations with modern architecture, clean UI design, modular code structure, and native AI integration.
 
----
-
-## What Makes This Workshop Different?
+### What Makes This Workshop Different?
 
 Traditional application development often requires:
 
@@ -56,17 +54,17 @@ You will learn how to:
 
 The focus is not just on writing prompts — it is about learning how to **architect applications with AI as your development partner**.
 
----
-
 ## Workshop Learning Path
 
-## Lab 1 — Environment Setup and Connectivity
+---
+
+### Lab 1 — Provision the required resources for the workshop
 
 Set up the foundational development environment and establish secure connectivity to MySQL HeatWave.
 
 ---
 
-## Lab 2 — Database Setup and AI Access Configuration
+### Lab 2 — Database Setup and AI Access Configuration
 
 Create application databases, provision secure users, configure access policies, and enable HeatWave access to OCI Generative AI services.
 
@@ -74,7 +72,7 @@ You will learn how to prepare an enterprise-ready database environment that supp
 
 ---
 
-## Lab 3 — Prompt-Led AI Application Development
+### Lab 3 — Prompt-Led AI Application Development
 
 Use structured prompts to generate production-quality AI applications using:
 
