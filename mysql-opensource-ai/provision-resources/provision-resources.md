@@ -76,7 +76,7 @@ Click **Save Changes**.
 ---
 
 8. Apply the Stack
-![apply plan](images/Lab1Image9.png "apply plan")
+![apply plan](images/Lab1image9.png "apply plan")
 
 1. Once the plan succeeds, click **Apply**
 2. Wait for the infrastructure deployment to complete.
