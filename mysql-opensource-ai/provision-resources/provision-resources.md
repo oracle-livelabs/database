@@ -89,9 +89,8 @@ Resources created include:
 
 After deployment completes successfully, verify that the infrastructure resources are available in your OCI compartment.
 
----
 
-## Important Notes
+### Important Notes
 
 - The delivered ZIP file contains the SSH key pair required for VM access.
 - The compute instance is configured with the public key from the ZIP package.
@@ -154,7 +153,6 @@ Successful connection should display:
 
 > Note: Default Oracle Linux username is `opc`.
 
----
 
 ## Task 3: Validate MySQL HeatWave Connectivity
 
@@ -225,7 +223,7 @@ SELECT NOW();
 You should receive the current database server timestamp.
 
 
-## Final Validation Checklist
+### Final Validation Checklist
 
 - [x] VM accessible through SSH
 - [x] MySQL HeatWave reachable from VS Code

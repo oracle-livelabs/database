@@ -23,8 +23,6 @@ In this lab, you will:
 - Prepare applications for deployment and testing
 - Understand HeatWave embedding and vector similarity workflows
 
----
-
 ## Prerequisites
 
 Before starting this lab, ensure you have:
@@ -36,8 +34,6 @@ Before starting this lab, ensure you have:
   - HTML/CSS/JavaScript
   - Prompt Engineering concepts
 
-
----
 
 ## Task 1: Understand the Prompt-Led Development Framework
 
@@ -58,11 +54,9 @@ Create a production-quality {application_type} web application.
 8. Important
 ```
 
----
-
 ## Template Section Breakdown
 
-## 1. Business Objective
+### 1. Business Objective
 
 Defines the business problem and user goals the application is designed to solve.
 
@@ -72,9 +66,7 @@ Examples:
 - Feedback analytics system
 - Recommendation engine
 
----
-
-## 2. Frontend Requirements
+### 2. Frontend Requirements
 
 Defines:
 
@@ -90,9 +82,7 @@ Examples:
 - Sticky navigation
 - Modern dashboard interfaces
 
----
-
-## 3. Required Features
+### 3. Required Features
 
 Specifies all application functionality such as:
 
@@ -104,9 +94,7 @@ Specifies all application functionality such as:
 - Feedback systems
 - Semantic search
 
----
-
-## 4. Backend Requirements
+### 4. Backend Requirements
 
 Defines backend architecture and implementation details:
 
@@ -117,9 +105,7 @@ Defines backend architecture and implementation details:
 - Service organization
 - API architecture
 
----
-
-## 5. Database Requirements
+### 5. Database Requirements
 
 Ensures executable SQL scripts are generated including:
 
@@ -131,9 +117,7 @@ Ensures executable SQL scripts are generated including:
 - Seed data
 - Vector columns
 
----
-
-## 6. AI / GenAI Features
+### 6. AI / GenAI Features
 
 Defines AI-powered functionality such as:
 
@@ -144,9 +128,7 @@ Defines AI-powered functionality such as:
 - Chatbots
 - HeatWave GenAI integration
 
----
-
-## 7. Deployment Requirements
+### 7. Deployment Requirements
 
 Specifies deployment expectations:
 
@@ -155,9 +137,8 @@ Specifies deployment expectations:
 - Environment setup
 - Runtime dependencies
 
----
 
-## 8. Important
+### 8. Important
 
 Emphasizes:
 
@@ -167,13 +148,12 @@ Emphasizes:
 - Modular architecture
 - Reusable code structure
 
----
 
 ## Task 2: Generate an Example AI Application Prompt
 
 The following example demonstrates how to request a production-quality AI-powered e-commerce application using Python Flask and MySQL HeatWave.
 
-## Example Prompt
+### Example Prompt
 
 ```text
 Role: Senior Full-Stack Engineer.
@@ -243,17 +223,13 @@ Frontend:
 Vanilla JavaScript and responsive Bootstrap UI.
 ```
 
----
-
 ## Task 3: Understand HeatWave GenAI Integration
 
 To generate AI-powered applications correctly, provide sample HeatWave GenAI SQL statements to the AI assistant.
 
 This helps ensure accurate SQL generation and proper GenAI routine usage.
 
----
-
-## Step 1: Generate Embeddings
+1.  Generate Embeddings
 
 Use the following sample query:
 
@@ -266,9 +242,9 @@ SELECT sys.ML_EMBED_ROW(
 
 This generates vector embeddings using the `all_minilm_l12_v2` model.
 
----
 
-## Step 2: Perform Semantic Vector Search
+
+2.  Perform Semantic Vector Search
 
 Use cosine similarity calculations:
 
@@ -282,9 +258,7 @@ SELECT DISTANCE(
 
 This enables semantic similarity matching between embeddings.
 
----
-
-## Why Provide Sample Queries?
+### Why Provide Sample Queries?
 
 Providing example HeatWave GenAI queries helps the AI assistant understand:
 
@@ -296,7 +270,6 @@ Providing example HeatWave GenAI queries helps the AI assistant understand:
 
 This significantly improves generated code quality and reduces integration errors.
 
----
 
 ## Task 4: Initialize the Database
 
@@ -312,13 +285,13 @@ After generating the application:
 
 > **Important:** Database initialization must be performed manually because the HeatWave database is deployed inside a private network.
 
----
+
 
 ## Task 5: Configure Database Connectivity
 
 Update your application configuration with the correct database connection details.
 
-## Local Testing via SSH Tunnel
+1.  Local Testing via SSH Tunnel
 
 Use:
 
@@ -332,17 +305,17 @@ or
 127.0.0.1
 ```
 
----
 
-## Deployment Inside OCI VCN
+
+2.  Deployment Inside OCI VCN
 
 Use the HeatWave private IP address when deploying the application on a Compute VM within the same Virtual Cloud Network (VCN).
 
----
+
 
 ## Task 6: Environment Setup and Application Execution
 
-## Create a Python Virtual Environment
+1.  Create a Python Virtual Environment
 
 ```bash
 python3 -m venv venv
@@ -360,15 +333,15 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
----
 
-## Run the Application
+
+2.  Run the Application
 
 ```bash
 python app.py
 ```
 
----
+
 
 ## Task 7: Create an SSH Tunnel
 
@@ -384,7 +357,7 @@ Replace:
 - `<db_private_ip>` with the HeatWave private IP
 - `<vm_public_ip>` with the Compute VM public IP
 
----
+
 
 ## Important Notes
 
@@ -405,7 +378,7 @@ You are encouraged to:
 
 The goal is to accelerate development through effective AI-guided prompt engineering.
 
----
+
 
 ## Optional
 
@@ -420,7 +393,7 @@ Enhance your generated application with a **Feedback Summary** feature.
 - Connect securely to the private HeatWave instance
 - Validate the feature end-to-end
 
----
+
 
 ## Learn More
 
@@ -429,7 +402,7 @@ Enhance your generated application with a **Feedback Summary** feature.
 - [OCI Compute Documentation](https://docs.oracle.com/en-us/iaas/Content/Compute/Concepts/computeoverview.htm)
 - [Python Flask Documentation](https://flask.palletsprojects.com/en/stable/)
 
----
+
 
 
 ## Acknowledgements
