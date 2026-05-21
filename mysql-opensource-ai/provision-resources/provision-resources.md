@@ -1,17 +1,10 @@
 # Lab 1: Provision the Required Resources for the Workshop
 
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: 30-40 minutes
-
-
 ### Objectives
 
 In this lab, you will provision the infrastructure required for the AI-powered eCommerce application using Oracle Cloud Infrastructure (OCI) Resource Manager and Terraform. You will also validate connectivity to the Compute VM and MySQL HeatWave database and configure Visual Studio Code with OCI Generative AI integration.
 
+Estimated Time: 30-40 minutes
 ---
 
 ## Task 1: Provision Infrastructure Using OCI Resource Manager
@@ -20,8 +13,7 @@ In this lab, you will provision the infrastructure required for the AI-powered e
 
 Download the ZIP package containing the Terraform infrastructure scripts.
 
-**Download URL:**  
-https://objectstorage.us-chicago-1.oraclecloud.com/p/3rSJn8VsfglY8wWlj0Q_bxwQZRNvZOnAoURiGMzV3AbbTa0aUj8ZyFsvh_X4Vmzq/n/sehubjapaciaas/b/heatwave_genai/o/Version_3_AI_Demo_infrastructure.zip
+[Download terraform script](https://objectstorage.us-chicago-1.oraclecloud.com/p/3rSJn8VsfglY8wWlj0Q_bxwQZRNvZOnAoURiGMzV3AbbTa0aUj8ZyFsvh_X4Vmzq/n/sehubjapaciaas/b/heatwave_genai/o/Version_3_AI_Demo_infrastructure.zip)
 
 ---
 
