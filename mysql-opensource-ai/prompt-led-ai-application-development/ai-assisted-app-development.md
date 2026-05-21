@@ -1,4 +1,4 @@
-# Build AI-Powered Starter Applications with Prompt-Led Development
+# Lab 3: Prompt-Led AI Application Development
 
 ## Introduction
 
@@ -12,7 +12,7 @@ The lab demonstrates how to guide AI coding assistants using clearly defined bus
 
 ---
 
-# Objectives
+## Objectives
 
 In this lab, you will:
 
@@ -26,7 +26,7 @@ In this lab, you will:
 
 ---
 
-# Prerequisites
+## Prerequisites
 
 Before starting this lab, ensure you have:
 
@@ -40,7 +40,7 @@ Before starting this lab, ensure you have:
 
 ---
 
-# Task 1: Understand the Prompt-Led Development Framework
+## Task 1: Understand the Prompt-Led Development Framework
 
 ## Starter Application Generation Template
 
@@ -61,7 +61,7 @@ Create a production-quality {application_type} web application.
 
 ---
 
-# Template Section Breakdown
+## Template Section Breakdown
 
 ## 1. Business Objective
 
@@ -246,7 +246,7 @@ Vanilla JavaScript and responsive Bootstrap UI.
 
 ---
 
-# Task 3: Understand HeatWave GenAI Integration
+## Task 3: Understand HeatWave GenAI Integration
 
 To generate AI-powered applications correctly, provide sample HeatWave GenAI SQL statements to the AI assistant.
 
@@ -254,7 +254,7 @@ This helps ensure accurate SQL generation and proper GenAI routine usage.
 
 ---
 
-# Step 1: Generate Embeddings
+## Step 1: Generate Embeddings
 
 Use the following sample query:
 
@@ -269,7 +269,7 @@ This generates vector embeddings using the `all_minilm_l12_v2` model.
 
 ---
 
-# Step 2: Perform Semantic Vector Search
+## Step 2: Perform Semantic Vector Search
 
 Use cosine similarity calculations:
 
@@ -285,7 +285,7 @@ This enables semantic similarity matching between embeddings.
 
 ---
 
-# Why Provide Sample Queries?
+## Why Provide Sample Queries?
 
 Providing example HeatWave GenAI queries helps the AI assistant understand:
 
@@ -299,7 +299,7 @@ This significantly improves generated code quality and reduces integration error
 
 ---
 
-# Task 4: Initialize the Database
+## Task 4: Initialize the Database
 
 ## Run SQL Scripts in HeatWave SQL Editor
 
@@ -315,7 +315,7 @@ After generating the application:
 
 ---
 
-# Task 5: Configure Database Connectivity
+## Task 5: Configure Database Connectivity
 
 Update your application configuration with the correct database connection details.
 
@@ -341,7 +341,7 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 
 ---
 
-# Task 6: Environment Setup and Application Execution
+## Task 6: Environment Setup and Application Execution
 
 ## Create a Python Virtual Environment
 
@@ -387,7 +387,7 @@ Replace:
 
 ---
 
-# Important Notes
+## Important Notes
 
 This lab provides:
 
@@ -408,7 +408,7 @@ The goal is to accelerate development through effective AI-guided prompt enginee
 
 ---
 
-# Optional
+## Optional
 
 Enhance your generated application with a **Feedback Summary** feature.
 
@@ -423,7 +423,7 @@ Enhance your generated application with a **Feedback Summary** feature.
 
 ---
 
-# Learn More
+## Learn More
 
 - [MySQL HeatWave Documentation](https://dev.mysql.com/doc/heatwave/en/mys-hw-about-heatwave.html)
 - [MySQL HeatWave GenAI Documentation](https://dev.mysql.com/doc/heatwave/en/mys-hwgenai-routines.html)

@@ -95,7 +95,7 @@ After deployment completes successfully, verify that the infrastructure resource
 
 ---
 
-# Important Notes
+## Important Notes
 
 - The delivered ZIP file contains the SSH key pair required for VM access.
 - The compute instance is configured with the public key from the ZIP package.
@@ -325,7 +325,7 @@ Open Cline settings and configure:
 ![Cline settings](images/clinesetup.png "Cline settings")
 ---
 
-# Expected Outcome
+## Expected Outcome
 
 At the end of this lab, you will have:
 

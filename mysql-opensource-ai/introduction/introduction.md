@@ -31,7 +31,7 @@ Using carefully structured prompts, developers can guide AI systems to generate 
 
 ---
 
-# What Makes This Workshop Different?
+## What Makes This Workshop Different?
 
 Traditional application development often requires:
 
@@ -58,7 +58,7 @@ The focus is not just on writing prompts — it is about learning how to **archi
 
 ---
 
-# Workshop Learning Path
+## Workshop Learning Path
 
 ## Lab 1 — Environment Setup and Connectivity
 
@@ -95,7 +95,7 @@ This lab demonstrates how AI can generate:
 
 ---
 
-# AI Capabilities Covered
+## AI Capabilities Covered
 
 Throughout the workshop, you will work with real AI-powered development workflows including:
 
@@ -110,7 +110,7 @@ Throughout the workshop, you will work with real AI-powered development workflow
 
 ---
 
-# Technologies Used
+## Technologies Used
 
 - MySQL HeatWave
 - OCI Generative AI
@@ -125,7 +125,7 @@ Throughout the workshop, you will work with real AI-powered development workflow
 
 ---
 
-# Expected Outcomes
+## Expected Outcomes
 
 By the end of this workshop, you will be able to:
 
@@ -140,7 +140,7 @@ By the end of this workshop, you will be able to:
 
 ---
 
-# Key Takeaway
+## Key Takeaway
 
 AI is no longer just a feature inside applications — it is becoming a core part of the software development process itself.
 
@@ -154,7 +154,7 @@ to
 
 ---
 
-# Acknowledgements
+## Acknowledgements
 
 **Authors:**  
 Lohith R and Jayshri Dhar from SEHUB

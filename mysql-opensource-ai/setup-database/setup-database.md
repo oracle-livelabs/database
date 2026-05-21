@@ -1,15 +1,10 @@
-# Lab 2: Database Setup, User Creation & Access Policy
+# Lab 2: Setup access to database 
 
 ### Objectives
 
-In this lab, you will:
-* TODO: Add objectives
-
+In this lab, participants will connect to the MySQL HeatWave database, create an application database, provision a dedicated application user, and grant the required privileges including access to GenAI routines.
 
 Estimated Time: 10 minutes
-
-
-In this lab, participants will connect to the MySQL HeatWave database, create an application database, provision a dedicated application user, and grant the required privileges including access to GenAI routines.
 
 ## Task 1: Create Database and user
 
