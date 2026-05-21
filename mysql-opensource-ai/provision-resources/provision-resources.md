@@ -234,7 +234,6 @@ You should receive the current database server timestamp.
 
 ## Task5: Configure OCI Generative AI with Cline in Visual Studio Code
 
-
 Configure OCI Generative AI integration with the Cline extension inside Visual Studio Code for prompt-driven AI application development.
 
 
