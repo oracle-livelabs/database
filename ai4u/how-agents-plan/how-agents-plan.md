@@ -451,7 +451,7 @@ In this lab, you observed how agents plan their work:
 * **Author** - David Start, Director, Database Product Management
 * **Last Updated By/Date** - David Start, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
