@@ -26,7 +26,7 @@ In this lab, you will:
 
 Before starting this lab, ensure you have:
 
-- Complete Lab1 and Lab2
+- Completed Lab1 and Lab2
 - Basic familiarity with:
   - Python Flask
   - MySQL

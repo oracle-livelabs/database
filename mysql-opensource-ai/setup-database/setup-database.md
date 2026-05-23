@@ -10,6 +10,13 @@ Estimated Time: 10 minutes
 
 Create an application database, provision a dedicated application user, and grant the required privileges including access to GenAI routines.
 
+### Prerequisites
+
+Before starting this lab, ensure you have:
+
+- Completed Lab1
+- All provisioned resources are accessible
+
 ## Task 1: Create Database and user
 
 Login to the MySQL HeatWave database using the **admin user credentials** in Visual Studio Code editor as you did in lab1.
