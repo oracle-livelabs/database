@@ -1,8 +1,8 @@
 # Introduction
 
-Welcome to the **Building AI Applications with OCI Generative AI Service in Visual Studio Code**.
+Estimated Workshop Time: 120 minutes
 
-Modern software development is rapidly evolving with the help of Artificial Intelligence. Instead of manually building every component from scratch, developers can now use AI coding assistants and structured prompt engineering techniques to generate production-quality applications in minutes.
+## About this Workshop:
 
 This workshop demonstrates how to combine the power of:
 
@@ -20,8 +20,6 @@ Rather than treating AI as a simple chatbot, this workshop teaches you how to us
 - Backend APIs
 - Database schemas
 - Seed data
-- Authentication systems
-- Semantic search functionality
 - AI-powered recommendation systems
 - Vector search implementations
 - Summarization workflows
@@ -29,21 +27,8 @@ Rather than treating AI as a simple chatbot, this workshop teaches you how to us
 
 Using carefully structured prompts, developers can guide AI systems to generate complete application foundations with modern architecture, clean UI design, modular code structure, and native AI integration.
 
-Estimated Workshop Time: 120 minutes
-
-### What Makes This Workshop Different?
-
-Traditional application development often requires:
-
-- Manual architecture design
-- Writing boilerplate code
-- Creating database schemas
-- Building repetitive CRUD operations
-- Researching AI integration patterns
-- Configuring deployment workflows
-
 ### Objectives
-In this Lab, you will learn how AI can dramatically accelerates the development lifecycle.
+In this Workshop, you will learn how AI can dramatically accelerates the development lifecycle.
 
 You will learn how to:
 

@@ -1,14 +1,29 @@
 # Provision the Required Resources for the Workshop
 
+## Introduction
+
+In this lab, you will provision the complete cloud infrastructure required for an AI-powered eCommerce application using **Oracle Cloud Infrastructure (OCI) Resource Manager** and **Terraform**.
+
+Modern AI applications require a combination of compute, database, networking, and AI services. Instead of manually creating and configuring each resource through the OCI Console, you will use Infrastructure as Code (IaC) to automate the deployment process using Terraform.
+
+OCI Resource Manager simplifies Terraform execution by providing a fully managed automation service within Oracle Cloud. Using pre-built Terraform scripts, you will provision the foundational infrastructure needed for the workshop environment, including:
+
+- Compute Virtual Machine (VM)
+- MySQL HeatWave Database System
+- Networking resources
+
+After provisioning the infrastructure, you will validate connectivity to the deployed resources and configure your development environment for AI-powered application development.
+
+You will also configure **Visual Studio Code** with **OCI Generative AI integration**, enabling AI-assisted development workflows directly from your coding environment.
+
+By the end of this lab, you will have a fully functional cloud environment ready for building intelligent applications.
+
+Estimated Time: 30-40 minutes
+
 ### Objectives
 
 In this lab, you will provision the infrastructure required for the AI-powered eCommerce application using Oracle Cloud Infrastructure (OCI) Resource Manager and Terraform. You will also validate connectivity to the Compute VM and MySQL HeatWave database and configure Visual Studio Code with OCI Generative AI integration.
 
-Estimated Time: 30-40 minutes
-
-## Introduction
-
-TODO: Add introduction text here.
 
 ## Task 1: Provision Infrastructure Using OCI Resource Manager
 In this task, you will provision the cloud infrastructure required for the workshop using a pre-built Terraform script.

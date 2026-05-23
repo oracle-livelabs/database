@@ -1,6 +1,6 @@
-# Prompt-Led AI Application Development
+# Prompt Led AI Application Development
 
-### Introduction
+## Introduction
 
 This lab introduces a reusable AI prompt engineering framework for generating production-quality starter applications using modern web technologies and MySQL HeatWave GenAI capabilities. By using a structured prompt template, developers can rapidly create scalable, AI-enabled applications with semantic vector search, chatbot functionality, and intelligent recommendation systems.
 
@@ -8,8 +8,7 @@ The lab demonstrates how to guide AI coding assistants using clearly defined bus
 
 > **Note:** This lab focuses on educational prompt engineering and application scaffolding techniques. The generated applications should be reviewed, secured, and optimized before production deployment.
 
-**Estimated Lab Time:** 30 minutes
-
+Estimated Time: 30 minutes
 
 ### Objectives
 
@@ -52,101 +51,101 @@ Create a production-quality {application_type} web application.
 6. AI / GenAI Features
 7. Deployment Requirements
 8. Important
-```
+    ```
 
-### Template Section Breakdown
+    ### Template Section Breakdown
 
-### 1. Business Objective
+    ### 1. Business Objective
 
-Defines the business problem and user goals the application is designed to solve.
+    Defines the business problem and user goals the application is designed to solve.
 
-Examples:
-- E-commerce platform
-- AI chatbot
-- Feedback analytics system
-- Recommendation engine
+    Examples:
+    - E-commerce platform
+    - AI chatbot
+    - Feedback analytics system
+    - Recommendation engine
 
-### 2. Frontend Requirements
+    ### 2. Frontend Requirements
 
-Defines:
+    Defines:
 
-- UI framework
-- Responsiveness
-- Layout expectations
-- Visual styling
-- User experience standards
+    - UI framework
+    - Responsiveness
+    - Layout expectations
+    - Visual styling
+    - User experience standards
 
-Examples:
-- Bootstrap 5
-- Responsive grid layouts
-- Sticky navigation
-- Modern dashboard interfaces
+    Examples:
+    - Bootstrap 5
+    - Responsive grid layouts
+    - Sticky navigation
+    - Modern dashboard interfaces
 
-### 3. Required Features
+    ### 3. Required Features
 
-Specifies all application functionality such as:
+    Specifies all application functionality such as:
 
-- Authentication
-- Product search
-- Order management
-- Dashboards
-- Reports
-- Feedback systems
-- Semantic search
+    - Authentication
+    - Product search
+    - Order management
+    - Dashboards
+    - Reports
+    - Feedback systems
+    - Semantic search
 
-### 4. Backend Requirements
+    ### 4. Backend Requirements
 
-Defines backend architecture and implementation details:
+    Defines backend architecture and implementation details:
 
-- Framework selection
-- Modular project structure
-- Exception handling
-- Logging
-- Service organization
-- API architecture
+    - Framework selection
+    - Modular project structure
+    - Exception handling
+    - Logging
+    - Service organization
+    - API architecture
 
-### 5. Database Requirements
+    ### 5. Database Requirements
 
-Ensures executable SQL scripts are generated including:
+    Ensures executable SQL scripts are generated including:
 
-- Database creation
-- Tables
-- Primary keys
-- Foreign keys
-- Indexes
-- Seed data
-- Vector columns
+    - Database creation
+    - Tables
+    - Primary keys
+    - Foreign keys
+    - Indexes
+    - Seed data
+    - Vector columns
 
-### 6. AI / GenAI Features
+    ### 6. AI / GenAI Features
 
-Defines AI-powered functionality such as:
+    Defines AI-powered functionality such as:
 
-- Vector embeddings
-- Semantic search
-- Recommendations
-- Summarization
-- Chatbots
-- HeatWave GenAI integration
+    - Vector embeddings
+    - Semantic search
+    - Recommendations
+    - Summarization
+    - Chatbots
+    - HeatWave GenAI integration
 
-### 7. Deployment Requirements
+    ### 7. Deployment Requirements
 
-Specifies deployment expectations:
+    Specifies deployment expectations:
 
-- VM deployment
-- Startup instructions
-- Environment setup
-- Runtime dependencies
+    - VM deployment
+    - Startup instructions
+    - Environment setup
+    - Runtime dependencies
 
 
-### 8. Important
+    ### 8. Important
 
-Emphasizes:
+    Emphasizes:
 
-- Production-quality output
-- Clean UI design
-- Deployment readiness
-- Modular architecture
-- Reusable code structure
+    - Production-quality output
+    - Clean UI design
+    - Deployment readiness
+    - Modular architecture
+    - Reusable code structure
 
 
 ## Task 2: Generate an Example AI Application Prompt
