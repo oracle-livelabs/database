@@ -31,9 +31,58 @@ In this lab, you will:
 
 2. Select **Database Actions** and open **SQL Worksheet**.
 
-3. If the workshop schema already exists, connect as `RETAILDB` or use the SQL Worksheet user supplied by the reservation.
+3. At the top of the SQL Worksheet page, open the user dropdown menu and select the main workshop user, usually `LLUSER`. If the login screen appears, confirm that **Username** shows `LLUSER`. Do not select `RETAILDB`; the learner flow uses the main user going forward.
 
-4. Run this check.
+    ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
+
+    *Figure 1: Select the main workshop user, usually LLUSER, before signing in.*
+
+4. Use the same SQL Worksheet pattern throughout the workshop.
+
+    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
+
+    *Figure 2: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
+
+    - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
+    - Paste each workshop SQL block into the editor.
+    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
+    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Use **Navigator** only when you want to inspect tables, views, or other objects.
+
+5. Run this setup block once in SQL Worksheet. It points your session at the main workshop schema, so the remaining labs use the same SQL no matter whether you opened SQL Worksheet as `ADMIN` or the main workshop user.
+
+    The rest of the workshop uses table names such as `orders` and `products` without a schema prefix. Setting the current schema keeps your worksheet pointed at the right retail objects and helps avoid empty or confusing results.
+
+    ```sql
+    <copy>
+    DECLARE
+      v_schema VARCHAR2(128);
+    BEGIN
+      SELECT owner
+      INTO v_schema
+      FROM (
+        SELECT owner
+        FROM all_tables
+        WHERE table_name = 'ORDERS'
+          AND owner IN (USER, 'LLUSER')
+        ORDER BY CASE
+                   WHEN owner = USER THEN 1
+                   WHEN owner = 'LLUSER' THEN 2
+                   ELSE 3
+                 END
+      )
+      WHERE ROWNUM = 1;
+
+      EXECUTE IMMEDIATE 'ALTER SESSION SET CURRENT_SCHEMA = '
+        || DBMS_ASSERT.ENQUOTE_NAME(v_schema, FALSE);
+    END;
+    /
+    </copy>
+    ```
+
+6. Run this check.
+
+    This check confirms both who you are signed in as and which schema SQL Worksheet will use. If these values are wrong, later labs can fail even when the database objects exist.
 
     ```sql
     <copy>
@@ -44,18 +93,18 @@ In this lab, you will:
     </copy>
     ```
 
-    Expected output (example - timestamp varies):
+    Expected output (example - user and timestamp vary):
 
     | User | Schema | Checked At |
     | --- | --- | --- |
-    | RETAILDB | RETAILDB | 19-MAY-26 10.30.00.000000 AM UTC |
+    | ADMIN or LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
     {: title="Connected SQL Worksheet Session"}
 
-5. If the schema is not present, ask the instructor to run the scripts in `backend-provisioning/database-source/` in the order described in the README.
+7. If the schema is not present, ask the instructor to run the scripts in `backend-provisioning/database-source/` in the order described in the README.
 
 You can now continue to the retail labs.
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

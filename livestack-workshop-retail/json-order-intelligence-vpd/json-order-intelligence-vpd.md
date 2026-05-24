@@ -25,26 +25,47 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
+    Application teams often want an order as a JSON document, while database teams need governed relational data. This query shows JSON Relational Duality exposing an application-ready document from the same trusted order data.
+
     ```sql
     <copy>
     SELECT JSON_SERIALIZE(data RETURNING VARCHAR2(4000) PRETTY) AS "Order JSON"
-    FROM RETAILDB.orders_dv
+    FROM orders_dv
+    ORDER BY JSON_VALUE(data, '$._id' RETURNING NUMBER)
     FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
 
+3. SQL Worksheet may truncate the JSON value in the result grid. Click the eyeball icon at the right edge of the `ORDER JSON` cell to expand the value and inspect the full payload before you compare it with the excerpt.
+
+    ![SQL Worksheet eyeball icon for expanding JSON payloads](images/sql-worksheet-json-eyeball-expand.svg " ")
+
+    *Figure 2: Use the eyeball icon in Query Result to open the full JSON document returned by the duality view.*
+
+4. Confirm that the expanded payload starts with the deterministic order document shown here. Seeing the full payload helps you connect the document shape to what an application would receive from the same governed order data.
+
     Expected output excerpt:
 
-    | Order JSON |
-    | --- |
-    | `{ "_id" : 138, ...` |
-    {: title="Sample Order JSON Document"}
-
-3. SQL Worksheet may truncate a large JSON cell. If that happens, open the cell viewer or copy the cell value to inspect the full document.
+    ```json
+    {
+      "_id" : 1,
+      "_metadata" : { ... },
+      "customerId" : 360,
+      "status" : "confirmed",
+      "total" : 917.93,
+      "shippingCost" : 0,
+      "demandScore" : 34.89,
+      "createdAt" : "2026-05-08T04:42:31.703065",
+      "items" : [ ... ]
+    }
+    ```
+    {: title="Sample Order JSON Document Excerpt"}
 
 ## Task 2: Extract document fields with SQL/JSON
 
 1. Run this query against the same duality view.
+
+    JSON does not have to be a black box. SQL/JSON lets you extract specific fields from the document so analysts and applications can use document-shaped data while keeping SQL visibility. The query uses a fixed order ID so your result matches the worksheet output shown here.
 
     ```sql
     <copy>
@@ -52,7 +73,7 @@ Estimated Time: 10 minutes
            jt.status AS "Status",
            jt.order_total AS "Total",
            jt.item_count AS "Items"
-    FROM RETAILDB.orders_dv ov,
+    FROM orders_dv ov,
          JSON_TABLE(ov.data, '$'
            COLUMNS (
              order_id NUMBER PATH '$._id',
@@ -61,7 +82,7 @@ Estimated Time: 10 minutes
              item_count NUMBER PATH '$.items.size()'
            )
          ) jt
-    FETCH FIRST 1 ROW ONLY;
+    WHERE jt.order_id = 138;
     </copy>
     ```
 
@@ -77,7 +98,9 @@ Estimated Time: 10 minutes
 ## Task 3: Compare the document with relational rows
 1. Use the live Unified Order Intelligence context from Figure 1 before you run the SQL.
 
-2. Run this relational query for a sample order with line items.
+2. Run this relational query for order 1, the same deterministic order used in the document example.
+
+    Comparing the relational rows with the document output proves that both views describe the same business order. That is the key value of duality: app-friendly JSON without losing relational correctness.
 
     ```sql
     <copy>
@@ -86,11 +109,9 @@ Estimated Time: 10 minutes
            COUNT(oi.item_id) AS "Lines",
            ROUND(SUM(oi.line_total), 2) AS "Line Total",
            ROUND(MAX(o.order_total), 2) AS "Order Total"
-    FROM RETAILDB.orders o
-    JOIN RETAILDB.order_items oi ON oi.order_id = o.order_id
-    WHERE o.order_id = (
-      SELECT order_id FROM RETAILDB.order_items FETCH FIRST 1 ROW ONLY
-    )
+    FROM orders o
+    JOIN order_items oi ON oi.order_id = o.order_id
+    WHERE o.order_id = 1
     GROUP BY o.order_id, o.order_status;
     </copy>
     ```
@@ -106,36 +127,62 @@ Estimated Time: 10 minutes
 
 ## Task 4: Verify governed access policies
 
-1. Run this VPD policy check.
+1. Run this VPD policy component check.
+
+    Order and fulfillment data can be region-sensitive. This query starts from the two policies the workshop expects, then checks the database catalog and policy functions. Because the expected list drives the result, the worksheet will show a useful `Ready` or `Check setup` status instead of an empty result grid.
 
     ```sql
     <copy>
-    SELECT object_name AS "Table",
-           policy_name AS "Policy",
-           pf_owner || '.' || package || '.' || function AS "Policy Function"
-    FROM all_policies
-    WHERE object_owner = 'RETAILDB'
-      AND policy_name IN ('VPD_ORDERS_REGION','VPD_FC_REGION')
-    ORDER BY policy_name;
+    WITH expected_policies AS (
+      SELECT 'FULFILLMENT_CENTERS' AS table_name,
+             'VPD_FC_REGION' AS policy_name,
+             'VPD_FULFILLMENT_REGION' AS policy_function
+      FROM dual
+      UNION ALL
+      SELECT 'ORDERS',
+             'VPD_ORDERS_REGION',
+             'VPD_ORDERS_REGION'
+      FROM dual
+    )
+    SELECT e.table_name AS "Table",
+           e.policy_name AS "Policy",
+           SYS_CONTEXT('USERENV','CURRENT_SCHEMA') || '.' || e.policy_function AS "Policy Function",
+           CASE
+             WHEN p.policy_name IS NOT NULL AND f.status = 'VALID' THEN 'Ready'
+             ELSE 'Check setup'
+           END AS "Status"
+    FROM expected_policies e
+    LEFT JOIN all_policies p
+      ON p.object_owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+     AND p.object_name = e.table_name
+     AND p.policy_name = e.policy_name
+     AND p.pf_owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+     AND p.function = e.policy_function
+    LEFT JOIN user_objects f
+      ON f.object_name = e.policy_function
+     AND f.object_type = 'FUNCTION'
+    ORDER BY e.policy_name;
     </copy>
     ```
 
     Expected output:
 
-    | Table | Policy | Policy Function |
-    | --- | --- | --- |
-    | `FULFILLMENT_CENTERS` | `VPD_FC_REGION` | `RETAILDB..VPD_FULFILLMENT_REGION` |
-    | ORDERS | `VPD_ORDERS_REGION` | `RETAILDB..VPD_ORDERS_REGION` |
-    {: title="VPD Policies for Retail Data"}
+    | Table | Policy | Policy Function | Status |
+    | --- | --- | --- | --- |
+    | `FULFILLMENT_CENTERS` | `VPD_FC_REGION` | `LLUSER.VPD_FULFILLMENT_REGION` | Ready |
+    | `ORDERS` | `VPD_ORDERS_REGION` | `LLUSER.VPD_ORDERS_REGION` | Ready |
+    {: title="VPD Policy Components for Retail Data"}
 
 2. VPD keeps regional order and fulfillment data governed in the database. The application can switch users, but the policy logic remains close to the protected data.
 
 3. Optional: if the workshop user owns the package, set a seeded admin context value.
 
+    VPD policies often depend on session context, such as the current user role or region. This optional call shows how the database can set that context before policy-protected queries run.
+
     ```sql
     <copy>
     BEGIN
-      RETAILDB.sc_security_ctx.set_user_context('admin_jess');
+      sc_security_ctx.set_user_context('admin_jess');
     END;
     /
     </copy>
@@ -143,12 +190,12 @@ Estimated Time: 10 minutes
 
     Expected output:
 
-    | Result |
-    | --- |
-    | PL/SQL procedure successfully completed. |
+    | Check | Result |
+    | --- | --- |
+    | Security context call | PL/SQL procedure successfully completed. |
     {: title="Security Context Procedure Result"}
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

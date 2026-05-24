@@ -25,12 +25,30 @@ Estimated Time: 10 minutes
 
 2. In SQL Worksheet, run this query.
 
+    Before you analyze retail outcomes, first prove that the shared data foundation exists. This query inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
+
     ```sql
     <copy>
+    WITH schema_ctx AS (
+      SELECT owner AS owner_name
+      FROM (
+        SELECT owner
+        FROM all_tables
+        WHERE table_name = 'ORDERS'
+          AND owner IN (USER, 'LLUSER')
+        ORDER BY CASE
+                   WHEN owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA') THEN 1
+                   WHEN owner = USER THEN 2
+                   WHEN owner = 'LLUSER' THEN 3
+                   ELSE 4
+                 END
+      )
+      WHERE ROWNUM = 1
+    )
     SELECT 'Core retail tables' AS "Area", COUNT(*) AS "Count"
-    FROM all_tables
-    WHERE owner = 'RETAILDB'
-      AND table_name IN (
+    FROM all_tables t
+    JOIN schema_ctx s ON s.owner_name = t.owner
+    WHERE t.table_name IN (
         'BRANDS','PRODUCTS','FULFILLMENT_CENTERS','INVENTORY','CUSTOMERS',
         'ORDERS','ORDER_ITEMS','INFLUENCERS','SOCIAL_POSTS','POST_PRODUCT_MENTIONS',
         'DEMAND_FORECASTS','SHIPMENTS','AGENT_ACTIONS','APP_USERS','EVENT_STREAM',
@@ -39,28 +57,30 @@ Estimated Time: 10 minutes
       )
     UNION ALL
     SELECT 'Retail semantic views', COUNT(*)
-    FROM all_views
-    WHERE owner = 'RETAILDB'
-      AND view_name IN (
+    FROM all_views v
+    JOIN schema_ctx s ON s.owner_name = v.owner
+    WHERE v.view_name IN (
         'RETAIL_RETURNS_WORKFLOW_V','RETAIL_SIGNAL_PRODUCT_V',
         'RETAIL_ORDER_RETURN_V','RETAIL_FULFILLMENT_RISK_V','RETAIL_RETURN_WORKBENCH_V'
       )
     UNION ALL
     SELECT 'Creator influence property graph', COUNT(*)
-    FROM all_property_graphs
-    WHERE owner = 'RETAILDB'
-      AND graph_name = 'INFLUENCER_NETWORK'
+    FROM all_property_graphs g
+    JOIN schema_ctx s ON s.owner_name = g.owner
+    WHERE g.graph_name = 'INFLUENCER_NETWORK'
     UNION ALL
-    SELECT 'MiniLM embedding model', COUNT(*)
-    FROM all_mining_models
-    WHERE owner = 'RETAILDB'
-      AND model_name = 'ALL_MINILM_L12_V2'
+    SELECT 'MiniLM vector artifacts', COUNT(*)
+    FROM all_tab_cols c
+    JOIN schema_ctx s ON s.owner_name = c.owner
+    WHERE c.data_type = 'VECTOR'
+      AND c.table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
+      AND c.column_name = 'EMBEDDING'
     UNION ALL
     SELECT 'Agent tool functions', COUNT(*)
-    FROM all_objects
-    WHERE owner = 'RETAILDB'
-      AND object_type = 'FUNCTION'
-      AND object_name IN (
+    FROM all_objects o
+    JOIN schema_ctx s ON s.owner_name = o.owner
+    WHERE o.object_type = 'FUNCTION'
+      AND o.object_name IN (
         'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',
         'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'
       );
@@ -74,15 +94,17 @@ Estimated Time: 10 minutes
     | Core retail tables | 22 |
     | Retail semantic views | 5 |
     | Creator influence property graph | 1 |
-    | MiniLM embedding model | 1 |
+    | MiniLM vector artifacts | 2 |
     | Agent tool functions | 5 |
     {: title="Retail Object Inventory"}
 
-3. The result confirms that the workshop has a retail data foundation, semantic views for natural-language grounding, a graph, vector artifacts, and PL/SQL tools.
+3. The result confirms that the workshop has a retail data foundation, semantic views for natural-language grounding, a graph, MiniLM-backed vector artifacts, and PL/SQL tools.
 
 ## Task 2: Map retail outcomes to database features
 
 1. Run this capability map.
+
+    The workshop is not a list of random SQL examples. This map connects each retail business outcome to the Oracle Database feature that supports it, so you know what each later lab is proving.
 
     ```sql
     <copy>
@@ -121,16 +143,18 @@ Estimated Time: 10 minutes
 
 1. Run this row-count query.
 
+    Row counts prove that the exercises use a real seeded retail dataset, not static screenshots. They also give you a scale reference for later KPI, vector, graph, spatial, and OML results.
+
     ```sql
     <copy>
-    SELECT 'Brands' AS "Data Group", COUNT(*) AS "Rows" FROM RETAILDB.brands
-    UNION ALL SELECT 'Products', COUNT(*) FROM RETAILDB.products
-    UNION ALL SELECT 'Customers', COUNT(*) FROM RETAILDB.customers
-    UNION ALL SELECT 'Orders', COUNT(*) FROM RETAILDB.orders
-    UNION ALL SELECT 'Social posts', COUNT(*) FROM RETAILDB.social_posts
-    UNION ALL SELECT 'Return requests', COUNT(*) FROM RETAILDB.return_requests
-    UNION ALL SELECT 'Return evidence documents', COUNT(*) FROM RETAILDB.return_documents
-    UNION ALL SELECT 'Agent audit actions', COUNT(*) FROM RETAILDB.agent_actions;
+    SELECT 'Brands' AS "Data Group", COUNT(*) AS "Rows" FROM brands
+    UNION ALL SELECT 'Products', COUNT(*) FROM products
+    UNION ALL SELECT 'Customers', COUNT(*) FROM customers
+    UNION ALL SELECT 'Orders', COUNT(*) FROM orders
+    UNION ALL SELECT 'Social posts', COUNT(*) FROM social_posts
+    UNION ALL SELECT 'Return requests', COUNT(*) FROM return_requests
+    UNION ALL SELECT 'Return evidence documents', COUNT(*) FROM return_documents
+    UNION ALL SELECT 'Agent audit actions', COUNT(*) FROM agent_actions;
     </copy>
     ```
 
@@ -148,9 +172,9 @@ Estimated Time: 10 minutes
     | Agent audit actions | 0 |
     {: title="Retail Data Row Counts"}
 
-2. The counts show why the LiveStack can answer retail questions from governed data instead of mocked screen text.
+2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

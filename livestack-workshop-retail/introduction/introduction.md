@@ -12,7 +12,7 @@ Oracle Database 26ai acts as the governed converged data platform. The same data
 
 - Access to the LiveLabs environment for this workshop.
 - Access to Database Actions and SQL Worksheet for the provisioned Autonomous Database 26ai instance.
-- The retail workshop schema created by the backend provisioning bundle. The recommended schema name is `RETAILDB`.
+- The retail workshop schema created by the backend provisioning bundle. LiveLabs Sandbox reservations use the main workshop user, usually `LLUSER`. In SQL Worksheet, select that main user from the dropdown menu at the top of the page; do not select `RETAILDB`.
 - Basic familiarity with SQL and retail operations concepts.
 
 ### Objectives
@@ -42,5 +42,5 @@ These screenshots come from the running Seer Sporting Goods Retail LiveStack and
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

@@ -25,11 +25,13 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
+    Fulfillment decisions depend on geography. This query verifies that fulfillment centers and demand regions have spatial metadata, which the database needs before it can reason about locations and service areas.
+
     ```sql
     <copy>
     SELECT owner AS "Owner", table_name AS "Table", column_name AS "Geometry", srid AS "SRID"
     FROM all_sdo_geom_metadata
-    WHERE owner = 'RETAILDB'
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND table_name IN ('FULFILLMENT_CENTERS','CUSTOMERS','FULFILLMENT_ZONES','DEMAND_REGIONS')
     ORDER BY table_name, column_name;
     </copy>
@@ -39,10 +41,10 @@ Estimated Time: 10 minutes
 
     | Owner | Table | Geometry | SRID |
     | --- | --- | --- | ---: |
-    | RETAILDB | CUSTOMERS | LOCATION | 4326 |
-    | RETAILDB | `DEMAND_REGIONS` | BOUNDARY | 4326 |
-    | RETAILDB | `FULFILLMENT_CENTERS` | LOCATION | 4326 |
-    | RETAILDB | `FULFILLMENT_ZONES` | `ZONE_BOUNDARY` | 4326 |
+    | LLUSER | CUSTOMERS | LOCATION | 4326 |
+    | LLUSER | `DEMAND_REGIONS` | BOUNDARY | 4326 |
+    | LLUSER | `FULFILLMENT_CENTERS` | LOCATION | 4326 |
+    | LLUSER | `FULFILLMENT_ZONES` | `ZONE_BOUNDARY` | 4326 |
     {: title="Spatial Geometry Metadata"}
 
 ## Task 2: Produce map-ready GeoJSON
@@ -50,13 +52,15 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
+    GeoJSON lets application maps display database-managed shapes. This SQL shows how spatial objects stored in Oracle Database can be exposed in a web-friendly format without moving the source geometry elsewhere.
+
     ```sql
     <copy>
     SELECT center_name AS "Center",
            city AS "City",
            state_province AS "State",
            SUBSTR(SDO_UTIL.TO_GEOJSON(location), 1, 120) AS "GeoJSON"
-    FROM RETAILDB.fulfillment_centers
+    FROM fulfillment_centers
     WHERE location IS NOT NULL
     ORDER BY center_id
     FETCH FIRST 5 ROWS ONLY;
@@ -81,14 +85,16 @@ Estimated Time: 10 minutes
 
 2. Run this distance query.
 
+    The closest facility is often the fastest or lowest-cost fulfillment option. `SDO_DISTANCE` lets the database calculate that routing evidence from governed location data.
+
     ```sql
     <copy>
     SELECT fc.center_name AS "Center",
            fc.city AS "City",
            fc.state_province AS "State",
            ROUND(SDO_GEOM.SDO_DISTANCE(c.location, fc.location, 0.005, 'unit=MILE'), 1) AS "Miles"
-    FROM RETAILDB.customers c
-    CROSS JOIN RETAILDB.fulfillment_centers fc
+    FROM customers c
+    CROSS JOIN fulfillment_centers fc
     WHERE c.customer_id = 1
       AND fc.is_active = 1
     ORDER BY SDO_GEOM.SDO_DISTANCE(c.location, fc.location, 0.005, 'unit=MILE')
@@ -114,6 +120,8 @@ Estimated Time: 10 minutes
 
 2. Run this semantic-view query.
 
+    Routing is not only about distance; inventory pressure matters too. This view combines fulfillment, product, forecast, and inventory evidence so the app can flag risk before a customer promise is missed.
+
     ```sql
     <copy>
     SELECT product_name AS "Product",
@@ -122,7 +130,7 @@ Estimated Time: 10 minutes
            quantity_on_hand AS "On Hand",
            reorder_point AS "Reorder At",
            inventory_risk AS "Risk"
-    FROM RETAILDB.retail_fulfillment_risk_v r
+    FROM retail_fulfillment_risk_v r
     ORDER BY r.inventory_risk DESC, r.quantity_on_hand ASC, r.product_name
     FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -148,5 +156,5 @@ Estimated Time: 10 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026
