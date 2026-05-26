@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
-    Application teams often want an order as a JSON document, while database teams need governed relational data. This query shows JSON Relational Duality exposing an application-ready document from the same trusted order data.
+    Application teams often want an order as a JSON document, while database teams need governed relational data. This block reads the `ORDERS_DV` JSON Relational Duality view and serializes the result with `JSON_SERIALIZE`. It exposes an application-ready document from the same trusted relational order data.
 
     ```sql
     <copy>
@@ -42,7 +42,7 @@ Estimated Time: 10 minutes
 
     *Figure 2: Use the eyeball icon in Query Result to open the full JSON document returned by the duality view.*
 
-4. Confirm that the expanded payload starts with the deterministic order document shown here. Seeing the full payload helps you connect the document shape to what an application would receive from the same governed order data.
+4. Confirm that the expanded payload starts with the fixed order document shown here. Seeing the full payload helps you connect the document shape to what an application would receive from the same governed order data.
 
     Expected output excerpt:
 
@@ -65,7 +65,7 @@ Estimated Time: 10 minutes
 
 1. Run this query against the same duality view.
 
-    JSON does not have to be a black box. SQL/JSON lets you extract specific fields from the document so analysts and applications can use document-shaped data while keeping SQL visibility. The query uses a fixed order ID so your result matches the worksheet output shown here.
+    JSON does not have to be a black box. This block uses `JSON_TABLE` to project fields from the duality-view document into relational columns. Analysts and applications can use document-shaped data while keeping SQL visibility. The query uses a fixed order ID so your result matches the worksheet output shown here.
 
     ```sql
     <copy>
@@ -98,12 +98,17 @@ Estimated Time: 10 minutes
 ## Task 3: Compare the document with relational rows
 1. Use the live Unified Order Intelligence context from Figure 1 before you run the SQL.
 
-2. Run this relational query for order 1, the same deterministic order used in the document example.
+2. Run this relational query for order 1, the same fixed order used in the document example.
 
-    Comparing the relational rows with the document output proves that both views describe the same business order. That is the key value of duality: app-friendly JSON without losing relational correctness.
+    Comparing the relational rows with the document output shows how both views describe the same business order. The block first sets the seeded VPD context so the fixed order is visible, then joins order headers to line items and aggregates totals. That illustrates how the JSON document and relational rows stay aligned.
 
     ```sql
     <copy>
+    BEGIN
+      sc_security_ctx.set_user_context('admin_jess');
+    END;
+    /
+
     SELECT o.order_id AS "Order",
            o.order_status AS "Status",
            COUNT(oi.item_id) AS "Lines",
@@ -129,7 +134,7 @@ Estimated Time: 10 minutes
 
 1. Run this VPD policy component check.
 
-    Order and fulfillment data can be region-sensitive. This query starts from the two policies the workshop expects, then checks the database catalog and policy functions. Because the expected list drives the result, the worksheet will show a useful `Ready` or `Check setup` status instead of an empty result grid.
+    Order and fulfillment data can be region-sensitive. This block starts from the two policies the workshop expects, then compares them with `USER_POLICIES` and `USER_OBJECTS`. It checks both policy attachment and policy-function validity. Because the expected list drives the result, the worksheet shows a useful `Ready` or `Check setup` status for each policy component.
 
     ```sql
     <copy>
@@ -177,7 +182,7 @@ Estimated Time: 10 minutes
 
 3. Optional: if the workshop user owns the package, set a seeded admin context value.
 
-    VPD policies often depend on session context, such as the current user role or region. This optional call shows how the database can set that context before policy-protected queries run.
+    VPD policies often depend on session context, such as the current user role or region. This optional PL/SQL block calls the workshop security package to set session context before policy-protected queries run. The application can switch context while the SQL remains unchanged.
 
     ```sql
     <copy>

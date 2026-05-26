@@ -2,18 +2,18 @@
 
 ## Introduction
 
-A social commerce lead, creator partnerships manager, or merchandising strategist needs to understand which creators and communities can move product demand. Follower counts alone do not show relationship paths, community bridges, brand propagation, or co-creator influence.
+A social commerce lead, creator partnerships manager, or merchandising strategist needs to understand how the signals from Customer Trend Signals move through creator communities. Follower counts alone do not show relationship paths, community bridges, brand propagation, or co-creator influence.
 
-Oracle AI Database helps by modeling creator, brand, product, and post relationships as a property graph over governed retail data. In the application, Creator Influence Network visualizes those communities. In SQL Worksheet, you run graph checks and `GRAPH_TABLE` traversals that prove those relationships are queryable database evidence.
+This lab follows Scene 5, Creator Influence Network, in the runbook. After Lab 3 shows what customers and creators are saying, this lab shows who can amplify that signal. Oracle AI Database models creators, brands, products, and posts as a property graph over governed retail data. In SQL Worksheet, you run graph-style traversals that connect the visual network paths to queryable database evidence.
 
 Estimated Time: 10 minutes
 
 ### Objectives
 
 - Verify the `INFLUENCER_NETWORK` property graph.
-- Count the graph source tables.
-- Run one-hop and two-hop `GRAPH_TABLE` traversals.
-- Connect graph results to creator, community, and product-demand decisions.
+- Count the governed source tables behind the graph.
+- Run `GRAPH_TABLE` traversals for direct relationships and brand propagation.
+- Explain how creator paths can amplify social demand signals from Lab 3.
 
 
 ## Task 1: Verify graph objects and source rows
@@ -21,11 +21,11 @@ Estimated Time: 10 minutes
 
     ![Creator Influence Network graph overview](images/creator-influence-network-overview.png " ")
 
-    *Figure 1: Creator Influence Network shows communities and relationship paths instead of a flat creator list.*
+    *Figure 1: Creator Influence Network shows how creator relationships can amplify product and brand signals.*
 
 2. Run this graph check.
 
-    A creator network is more than a flat list of influencers. This query confirms that the database has a property graph object that can model relationships among creators, brands, products, and posts.
+    A creator network is more than a flat influencer list. This block checks `ALL_PROPERTY_GRAPHS` for the graph object managed by Oracle Database. The graph models how creators, brands, products, and posts connect while keeping the relationship data in the retail schema.
 
     ```sql
     <copy>
@@ -45,7 +45,7 @@ Estimated Time: 10 minutes
 
 3. Count the graph source tables.
 
-    Property graphs are most valuable when they are built from governed source data. Counting the source tables shows that the graph is grounded in actual retail entities, not a separate visualization-only copy.
+    Property graphs are most useful when they come from governed source data. This block counts the relational source tables that feed the graph. It shows that the graph uses the same creators, posts, mentions, and brand links that feed social trend analysis.
 
     ```sql
     <copy>
@@ -73,7 +73,7 @@ Estimated Time: 10 minutes
 
 2. Run this one-hop traversal.
 
-    A one-hop traversal reveals direct creator-to-creator influence paths. Retail teams use those paths to see how a campaign, product mention, or brand signal can move through a creator network.
+    A high-momentum post from Lab 3 is only one signal. This block performs a one-hop traversal pattern with SQL joins over creator relationship edges. Retail teams use these paths to understand where a product mention, campaign, or brand message may spread.
 
     ```sql
     <copy>
@@ -111,9 +111,9 @@ Estimated Time: 10 minutes
     | `@luxe_xena` | `@nexus_cleo` | collaborates | 0.997 |
     {: title="Creator Relationship Traversal"}
 
-3. Run this brand reach query.
+3. Run this brand propagation query.
 
-    Brand reach turns graph relationships into a business metric. This query shows which brands have broader creator coverage and stronger social evidence.
+    Brand propagation turns graph relationships into a business metric. This block combines brand-to-influencer links with creator relationship edges. It shows which creators can promote a brand and which connected creators they can reach through the network.
 
     ```sql
     <copy>
@@ -147,9 +147,9 @@ Estimated Time: 10 minutes
     | `@aura_aria` | `@nexus_liam` | organic |
     | `@aura_aria` | `@nexus_liam` | organic |
     | `@aura_aria` | `@nova_max` | organic |
-    {: title="Brand Reach Paths"}
+    {: title="Brand Propagation Paths"}
 
-4. A merchandiser can use the traversal to find which creator communities may amplify demand or returns exposure for a product category.
+4. This is the handoff from social signal to network action. A merchandiser can use the traversal to find which creator communities may amplify demand, returns exposure, or category momentum after Customer Trend Signals surfaces the initial product story.
 
 ## Acknowledgements
 

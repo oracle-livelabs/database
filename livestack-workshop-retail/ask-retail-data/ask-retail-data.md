@@ -12,7 +12,7 @@ Estimated Time: 8 minutes
 
 - Inspect semantic views used to ground retail questions.
 - Read schema comments that guide natural-language SQL generation.
-- Run deterministic SQL that answers current Ask Retail Data prompts.
+- Run repeatable SQL that answers current Ask Retail Data prompts.
 - Explain why visible SQL improves governance for natural-language data access.
 
 
@@ -25,7 +25,7 @@ Estimated Time: 8 minutes
 
 2. Run this query.
 
-    Natural-language analytics needs safe targets. Semantic views expose approved business shapes so Ask Retail Data can answer questions from governed views instead of raw, ambiguous tables.
+    Natural-language analytics needs safe targets. This block checks `USER_VIEWS` for the semantic views exposed to Ask Retail Data. Semantic views expose approved business shapes, so AI-assisted questions can target clear, governed views.
 
     ```sql
     <copy>
@@ -57,7 +57,7 @@ Estimated Time: 8 minutes
 
 1. Run this query.
 
-    Table comments are part of the semantic layer. They explain the data in business language, which helps AI-assisted SQL generation choose the right objects and produce answers you can audit.
+    Table comments are part of the semantic layer. This block reads `ALL_TAB_COMMENTS` for the core retail tables and uses a schema-detection CTE to stay aligned with the active workshop schema. Comments explain the data in business language, helping AI-assisted SQL generation choose the right objects and produce answers you can audit.
 
     ```sql
     <copy>
@@ -101,9 +101,9 @@ Estimated Time: 8 minutes
 ## Task 3: Answer a signal question with visible SQL
 1. Use the live Ask Retail Data context from Figure 1 before you run the SQL.
 
-2. Run this deterministic version of the current prompt, "Which demand signals mention damaged packaging or sizing complaints?"
+2. Run this repeatable version of the current prompt, "Which demand signals mention damaged packaging or sizing complaints?"
 
-    Visible SQL lets you inspect how a natural-language question becomes a governed answer. This query searches social signals, return requests, and return evidence so the result is explainable instead of a black-box response.
+    Visible SQL lets you inspect how a natural-language question becomes a governed answer. This block uses CTEs to normalize social signals, return requests, and return evidence into one searchable shape. The result is explainable SQL that you can inspect and tune.
 
     ```sql
     <copy>
@@ -186,9 +186,9 @@ Estimated Time: 8 minutes
 
 ## Task 4: Answer a fulfillment risk question with visible SQL
 
-1. Run this deterministic version of the prompt, "Which fulfillment centers have inventory pressure?"
+1. Run this repeatable version of the prompt, "Which fulfillment centers have inventory pressure?"
 
-    The answer should be based on inventory evidence, not language-model guesswork. This query uses the governed risk view to identify centers where product availability needs attention.
+    The answer should start from inventory evidence. This block queries the governed fulfillment risk view, groups by fulfillment center, and calculates pressure metrics from product counts and inventory. It turns a plain-English risk question into auditable SQL.
 
     ```sql
     <copy>
@@ -220,7 +220,7 @@ Estimated Time: 8 minutes
     | Philadelphia Mid-Atlantic | Middletown | 8 | 11 |
     {: title="Visible SQL for Fulfillment Risk"}
 
-2. Required student steps do not call `DBMS_CLOUD_AI.GENERATE`, `CREATE_PROFILE`, `ENABLE_PROFILE`, or `SET_PROFILE`. Live generation depends on profile ownership and OCI Generative AI configuration, so this lab teaches the safe deterministic grounding path.
+2. Required student steps do not call `DBMS_CLOUD_AI.GENERATE`, `CREATE_PROFILE`, `ENABLE_PROFILE`, or `SET_PROFILE`. Live generation depends on profile ownership and OCI Generative AI configuration, so this lab teaches the safe governed grounding path.
 
 ## Acknowledgements
 

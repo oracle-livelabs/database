@@ -6,7 +6,7 @@ Retailers are under pressure to make faster decisions while data is spread acros
 
 In this workshop, you run hands-on exercises in an Autonomous Database 26ai instance. The LiveStack application provides the visible retail scenes: Data Foundation, Retail Command Center, Customer Trend Signals, Creator Influence Network, Intelligent Fulfillment Network, Unified Order Intelligence, Retail OML Analytics, Ask Retail Data, and Retail AI Agent Console. The core learning happens in Database Actions SQL Worksheet, where you inspect the database objects that power those scenes.
 
-Oracle Database 26ai acts as the governed converged data platform. The same database stores relational rows, JSON Duality documents, vector embeddings, graph relationships, spatial locations, OML models, semantic comments, PL/SQL tools, and audit records. That lets a retail team move through a single decision loop instead of copying evidence into disconnected specialty systems.
+Oracle Database 26ai acts as the governed converged data platform. The same database stores relational rows, JSON Duality documents, vector embeddings, graph relationships, spatial locations, OML models, semantic comments, PL/SQL tools, and audit records. That lets a retail team move through a single decision loop with evidence, policies, and AI context in one place.
 
 ### Prerequisites
 

@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
-    Fulfillment decisions depend on geography. This query verifies that fulfillment centers and demand regions have spatial metadata, which the database needs before it can reason about locations and service areas.
+    Fulfillment decisions depend on geography. This block reads `ALL_SDO_GEOM_METADATA` to verify registered geometry columns, dimensions, and SRIDs. Oracle Spatial needs that metadata before it can reason about fulfillment locations and service areas.
 
     ```sql
     <copy>
@@ -52,7 +52,7 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
-    GeoJSON lets application maps display database-managed shapes. This SQL shows how spatial objects stored in Oracle Database can be exposed in a web-friendly format without moving the source geometry elsewhere.
+    GeoJSON lets application maps display database-managed shapes. This block uses `SDO_UTIL.TO_GEOJSON` to serialize `SDO_GEOMETRY` values. Spatial objects stay in Oracle Database, and the result is a web-friendly shape that a frontend map can render.
 
     ```sql
     <copy>
@@ -85,7 +85,7 @@ Estimated Time: 10 minutes
 
 2. Run this distance query.
 
-    The closest facility is often the fastest or lowest-cost fulfillment option. `SDO_DISTANCE` lets the database calculate that routing evidence from governed location data.
+    The closest facility is often the fastest or lowest-cost fulfillment option. This block uses `SDO_GEOM.SDO_DISTANCE` to calculate miles between a customer geometry and active fulfillment-center geometries. The database returns ranked routing evidence from governed location data.
 
     ```sql
     <copy>
@@ -120,7 +120,7 @@ Estimated Time: 10 minutes
 
 2. Run this semantic-view query.
 
-    Routing is not only about distance; inventory pressure matters too. This view combines fulfillment, product, forecast, and inventory evidence so the app can flag risk before a customer promise is missed.
+    Routing is not only about distance; inventory pressure matters too. This block reads a governed semantic view that combines fulfillment, product, forecast, and inventory evidence. The view hides the join complexity and gives the app a stable risk shape.
 
     ```sql
     <copy>

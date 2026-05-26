@@ -81,7 +81,7 @@ badge: images/badge.png
     > In-database models keep scoring close to the feature views and operational controls.
 
     Q: Why does the Ask Retail Data lab avoid required DBMS_CLOUD_AI.GENERATE calls?
-    * Live AI calls depend on profile ownership and OCI AI setup. The lab uses deterministic semantic views, comments, PL/SQL tools, and audit evidence.
+    * Live AI calls depend on profile ownership and OCI AI setup. The lab uses fixed semantic views, comments, PL/SQL tools, and audit evidence.
     - Natural-language workflows should never use database metadata.
     - The database cannot store comments.
     - Agent tools do not need audit records.

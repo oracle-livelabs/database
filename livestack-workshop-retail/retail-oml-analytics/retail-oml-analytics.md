@@ -12,7 +12,7 @@ Estimated Time: 10 minutes
 
 - Verify OML feature views and mining models.
 - Inspect demand, customer, revenue, and product-cluster features.
-- Run deterministic model scoring when models are available.
+- Run repeatable model scoring when models are available.
 - Connect OML outputs to inventory and merchandising action.
 
 
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this view check.
 
-    Machine learning starts with prepared features. This query shows the curated views that feed prediction and clustering while keeping the retail data inside the database.
+    Machine learning starts with prepared features. This block checks `USER_VIEWS` for the curated OML feature views. Those views feed prediction and clustering while keeping the retail data inside the database.
 
     ```sql
     <copy>
@@ -52,7 +52,7 @@ Estimated Time: 10 minutes
 
 3. Run this model inventory.
 
-    A model inventory tells you what the database can actually score. Seeing the model list makes the analytics page more explainable because the predictions are tied to named in-database assets.
+    A model inventory tells you what the database can actually score. This block reads `USER_MINING_MODELS` for model name, mining function, and algorithm. The analytics page becomes more explainable because predictions are tied to named in-database assets.
 
     ```sql
     <copy>
@@ -82,7 +82,7 @@ Estimated Time: 10 minutes
 
 2. Run this scoring query.
 
-    Notice that the scoring happens in SQL, close to the data. That means customer segments can be classified without exporting customer features to a separate tool first.
+    Notice that the scoring happens in SQL, close to the data. This block calls OML scoring functions directly in SQL against feature-view columns. Customer segments can be classified without exporting customer features to a separate tool first.
 
     ```sql
     <copy>
@@ -120,7 +120,7 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
-    Predictions are more useful when they are tied to operating evidence. This query combines demand forecasts, inventory quantities, and risk flags so the result is actionable for retail planning.
+    Predictions are more useful when they are tied to operating evidence. This block reads a semantic view that combines demand forecasts, inventory quantities, product context, and risk flags. The result is actionable for retail planning because the prediction context stays attached to operating evidence.
 
     ```sql
     <copy>

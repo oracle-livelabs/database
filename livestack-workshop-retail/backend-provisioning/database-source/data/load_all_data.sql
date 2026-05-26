@@ -1,13 +1,13 @@
 /*
  * Deprecated random loader - intentionally blocked.
  *
- * The Retail LiveLabs workshop now uses fixed exported data from
- * ../retail_workshop_admin_create_all_exact_data.sql so learner queries and
- * expected results stay deterministic. Do not run this loader for workshop
+ * The Retail LiveLabs workshop now uses fixed compact learner data from
+ * ../retail_workshop_admin_create_lab_seed.sql so learner queries and
+ * expected results stay repeatable. Do not run this loader for workshop
  * provisioning.
  */
 BEGIN
-  RAISE_APPLICATION_ERROR(-20074, 'Deprecated random loader. Use @retail_workshop_admin_create_all_exact_data.sql from ADMIN for deterministic workshop data.');
+  RAISE_APPLICATION_ERROR(-20074, 'Deprecated random loader. Use @retail_workshop_admin_create_lab_seed.sql from ADMIN for compact learner workshop data.');
 END;
 /
 

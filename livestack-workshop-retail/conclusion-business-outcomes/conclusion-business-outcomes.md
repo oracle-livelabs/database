@@ -4,7 +4,7 @@
 
 This closing lab ties the retail story together. The LiveStack connects data foundation, command center visibility, customer trend signals, creator influence, fulfillment, order intelligence, in-database analytics, natural-language SQL, and AI-assisted actions.
 
-The business point is simple: this is one retail decision loop backed by Oracle Database 26ai, not a set of isolated demos.
+The business point is simple: Oracle Database 26ai backs one connected retail decision loop across data, AI, security, and operations.
 
 Estimated Time: 5 minutes
 
@@ -18,7 +18,7 @@ Estimated Time: 5 minutes
 
 1. Review the workshop flow from the database point of view.
 
-    This final query ties every lab back to a retail decision and the database evidence behind it. Use it to explain the workshop as one governed decision loop instead of a set of separate feature demos.
+    This final query ties every lab back to a retail decision and the database evidence behind it. The block uses `UNION ALL` to build a compact evidence map. Use it to explain the workshop as one governed decision loop across the major database features.
 
     ```sql
     <copy>

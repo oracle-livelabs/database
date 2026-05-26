@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this KPI query.
 
-    Use this query to connect the dashboard cards to trusted operational data. Orders, returns, social momentum, and agent activity are summarized directly in the database to create the daily retail operating view.
+    Use this query to connect the dashboard cards to trusted operational data. The block uses scalar subqueries to summarize orders, returns, social momentum, and agent activity directly in the database for the daily retail operating view.
 
     ```sql
     <copy>
@@ -54,7 +54,7 @@ Estimated Time: 10 minutes
 
 2. Run the database version of the command center trending-products query.
 
-    Trending products sit at the intersection of merchandising, inventory, and social engagement. This SQL shows how the app ranks products from governed post, product, brand, and mention data instead of depending on a separate trend service.
+    Trending products sit at the intersection of merchandising, inventory, and social engagement. This block joins posts, product mentions, products, and brands, then aggregates views and momentum. It shows how the app can rank products from governed data in the retail schema.
 
     ```sql
     <copy>
@@ -101,7 +101,7 @@ Estimated Time: 10 minutes
 
 1. Run the category revenue query.
 
-    Category revenue shows where demand is turning into sales. By joining orders, line items, and products in one database, teams can compare revenue with social attribution without copying data into a separate mart first.
+    Category revenue shows where demand is turning into sales. This block joins orders, line items, and products in one database, filters to a recent window, and aggregates revenue by category. Teams can compare revenue with social attribution from the same operational dataset.
 
     ```sql
     <copy>
