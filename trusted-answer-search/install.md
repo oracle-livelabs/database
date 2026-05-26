@@ -158,9 +158,12 @@ You should see the Trusted Answer Search Admin dashboard.
 
 ![Search Space Versions Screen](images/navigate-to-search-space.png)
 
-## Task 8: Import the Wikimedia Sample
+## Task 8: Import the Wikimedia Search Metadata
 
-The Wikimedia sample gives you a realistic set of analytics reports. It includes report targets, controlled parameter values, and test queries.
+The Wikimedia sample gives you a realistic set of analytics reports. The search-space import uses two files:
+
+* `search_target.json` for the trusted reports/actions.
+* `target_value_set.json` for controlled parameter values.
 
 1. On the search space version page, click **Import**.
 2. Upload:
@@ -169,7 +172,6 @@ The Wikimedia sample gives you a realistic set of analytics reports. It includes
     <copy>
     search_target.json
     target_value_set.json
-    test_run.json
     </copy>
     ```
 
@@ -181,9 +183,38 @@ The sample data gives you:
 
 * Search targets such as page views, edits, articles, editors, and country maps.
 * Value sets for period, frequency, project, and language.
-* Test queries for regression checks later in the workshop.
 
-## Task 9: Confirm the Portal App Opens
+## Task 9: Load the Wikimedia Regression Questions
+
+The `test_run.json` file contains curated regression questions for the Wikimedia sample. These are the questions you will use later to measure Top-1, Top-3, and Top-5 accuracy.
+
+1. In the Admin app sidebar, click **Test Runs**.
+2. Find the upload option for test questions.
+3. Upload:
+
+    ```text
+    <copy>
+    test_run.json
+    </copy>
+    ```
+
+4. Confirm that the uploaded questions are available for future test runs.
+
+In the green-button path, Terraform performs this step for you.
+
+## Task 10: Publish the Search Space Version
+
+The Portal app searches the published version of a search space. Publish the version now so Lab 4 starts from the same state as the green-button environment.
+
+1. In the Admin app sidebar, click **Search Spaces**.
+2. Open the `trusted_search` search space.
+3. Open the current draft version.
+4. Click **Publish**.
+5. Confirm the publish action.
+
+After publishing, many edit buttons are disabled for that version. That is expected. Published versions are read-only. In Lab 4, you will clone this published version into a draft before making improvements.
+
+## Task 11: Confirm the Portal App Opens
 
 1. Return to App Builder.
 2. Run **Oracle Trusted Answer Search - Portal App**.
@@ -198,7 +229,16 @@ The sample data gives you:
 
 4. Confirm that the Portal app opens and is using the `trusted_search` search space.
 
-Do not spend much time here. The real story begins in the Admin app.
+Record these two links for the rest of the workshop:
+
+```text
+<copy>
+Admin URL: {URL for Oracle Trusted Answer Search - Admin App}
+Published Wiki Search URL: {URL for Oracle Trusted Answer Search - Portal App}
+</copy>
+```
+
+Do not spend much time testing the Portal app yet. The real story begins in Lab 4.
 
 You may now **proceed to Lab 4**.
 

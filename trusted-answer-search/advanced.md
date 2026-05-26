@@ -28,20 +28,22 @@ This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Sea
 ## Task 1: Run the Regression Test Suite
 
 1. In the left navigation menu, click **Test Runs**.
-2. Select the search-space version you want to evaluate.
+2. If you are using the green-button environment, the Wikimedia uploaded test questions are already loaded and an initial lightweight run may already appear under **View Past Runs**.
+3. Select the search-space version you want to evaluate.
     * Use the **Published** version to see the baseline.
     * Use your **Draft** version to evaluate the changes you made in Lab 4.
-3. Click **Run Tests**.
-4. Keep the available query sources selected, such as:
+4. Click **Run Tests**.
+5. Keep the available query sources selected, such as:
 
+    * Uploaded test questions.
     * Sample queries.
     * Past user queries, if available.
 
-5. Click **Run**.
+6. Click **Run**.
 
 ![Upload Test Runs](images/upload-test-runs.png)
 
-The test run may take a minute. This is the system replaying known questions and checking whether the expected target still appears in the ranked results.
+The uploaded Wikimedia test file contains 25 curated regression questions. Running with sample queries evaluates a much larger set generated from the search target sample queries. Either way, the system is replaying known questions and checking whether the expected target still appears in the ranked results.
 
 ## Task 2: Review the Test Run Metrics
 
@@ -69,20 +71,19 @@ In the current Admin app UI, these may appear as:
 
 * Passed queries.
 
-In the tested green-button environment, the published baseline produced:
+In a green-button environment, you may see a seeded run from the uploaded Wikimedia test questions. If you run the larger sample-query suite, the published baseline should produce results similar to:
 
 ```text
 <copy>
-Total Queries: 802
+Total Queries: about 802
 Status: COMPLETED
-Top-1 accuracy / P1: 99.88
+Top-1 accuracy / P1: about 99.88
 Top-3 accuracy / P3: 100
 Top-5 accuracy / P5: 100
-Passed Queries: 802
 </copy>
 ```
 
-Exact values can vary if you evaluate a draft after making changes, but the important pattern is that search quality is measurable.
+Exact values vary depending on whether you use uploaded questions, sample queries, past user queries, or a draft after making changes. The important pattern is that search quality is measurable.
 
 That is the kind of number an application team can discuss. It is not a vibe. It is a measurable system.
 
