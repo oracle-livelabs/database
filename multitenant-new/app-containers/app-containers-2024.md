@@ -294,7 +294,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ```
 
     ```
-    <copy>cd /home/oracle/labs/workshops/multitenant</copy>
+    <copy>cd /home/oracle/labs/multitenant</copy>
     ```
 
     ```

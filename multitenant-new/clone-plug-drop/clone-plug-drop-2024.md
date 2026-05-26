@@ -75,11 +75,11 @@ Great! Now you have you set common password for your sys and system users which 
 
 First, you will create and explore a new pluggable database **PDB2** in the container database **CDB1**
 
-<!-- 1. All scripts for this lab are stored in the `/home/oracle/labs/workshops/multitenant` folder and are run as the oracle user. Let's navigate to the path now.
+<!-- 1. All scripts for this lab are stored in the `/home/oracle/labs/multitenant` folder and are run as the oracle user. Let's navigate to the path now.
 
     ```
     <copy>
-    cd /home/oracle/labs/workshops/multitenant
+    cd /home/oracle/labs/multitenant
     </copy>
     ``` -->
 
@@ -866,24 +866,24 @@ Prerequisites:
 
     ![Screenshot of terminal output](./images/task7.3-soetable.png " ")
 
- 4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/workshops/multitenant* and execute *create-load.sh*. Keep this window open and running throughout for the rest of this lab.
+ 4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
 
     ![Create a new terminal tab](./images/new-terminal.gif " ")
 
     Execute these commands in the new terminal tab.
 
     ```bash
-    <copy>./dba.sh</copy>
+    <copy>dba.sh</copy>
     ```
 
     ```bash
     <copy>
-    cd /home/oracle/labs/workshops/multitenant
+    cd /home/oracle/labs/multitenant
     </copy>
     ```
 
     ```bash
-    <copy>. create-load.sh</copy>
+    <copy>./write-load.sh</copy>
     ```
 
     ![Screenshot of terminal output](./images/task7.4-writeload-2024.png " ")
@@ -1213,7 +1213,7 @@ The tasks you will do in this step are:
 1. In the **other terminal tab** that was opened in Lab Task 9, make sure the write-load script is still running. If not, you may need to restart the shell script.
 
     ```
-    <copy>. create-load.sh </copy>
+    <copy>./write-load.sh </copy>
     ```
 
 2. Connect to the container **CDB2** and update the LOCAL_LISTENER parameter to point to the listener used by **CDB1**.
