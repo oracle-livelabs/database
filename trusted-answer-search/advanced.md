@@ -15,7 +15,7 @@ That is where metrics, test runs, search history, and structured inputs become i
 In this lab, you will:
 
 * Run a regression test suite.
-* Review Top-1, Top-3, and Top-5 quality metrics.
+* Review P1, P3, and P5 quality metrics.
 * Inspect individual test results.
 * Explore structured input extraction.
 * Review search history and feedback.
@@ -28,40 +28,54 @@ This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Sea
 ## Task 1: Run the Regression Test Suite
 
 1. In the left navigation menu, click **Test Runs**.
-2. Click **Run Tests**.
-3. Select the available query sources, such as:
+2. Select the search-space version you want to evaluate.
+    * Use the **Published** version to see the baseline.
+    * Use your **Draft** version to evaluate the changes you made in Lab 4.
+3. Click **Run Tests**.
+4. Keep the available query sources selected, such as:
 
     * Sample queries.
-    * Uploaded test queries.
     * Past user queries, if available.
 
-4. Click **Run**.
+5. Click **Run**.
 
 ![Upload Test Runs](images/upload-test-runs.png)
 
 The test run may take a minute. This is the system replaying known questions and checking whether the expected target still appears in the ranked results.
 
+## Task 2: Review the Test Run Metrics
+
+1. Click **View Past Runs**.
+2. Open or review the latest completed run.
+
+![Test Run Results](images/test-run-results.jpg)
+
 ### Observe
 
-When the run completes, review:
+Review:
 
 * Total queries evaluated.
-* Successful queries.
-* Top-1 accuracy.
-* Top-3 accuracy.
-* Top-5 accuracy.
+* Progress.
+* Status.
+* P1, P3, and P5 accuracy.
+* Passed queries.
 
-In the tested environment, the run evaluated more than 800 queries and produced:
+In the tested green-button environment, the published baseline produced:
 
 ```text
-Top-1: 99.88%
-Top-3: 100%
-Top-5: 100%
+Total Queries: 802
+Status: COMPLETED
+P1: 99.88
+P3: 100
+P5: 100
+Passed Queries: 802
 ```
+
+Exact values can vary if you evaluate a draft after making changes, but the important pattern is that search quality is measurable.
 
 That is the kind of number an application team can discuss. It is not a vibe. It is a measurable system.
 
-## Task 2: Inspect an Individual Test Result
+## Task 3: Inspect an Individual Test Result
 
 1. Open a completed test run.
 2. Review the query result rows.
@@ -76,7 +90,7 @@ That is the kind of number an application team can discuss. It is not a vibe. It
 
 This is useful when a search result regresses. Instead of guessing why users are unhappy, you can inspect exactly which query moved and which target won.
 
-## Task 3: Explore Structured Intent
+## Task 4: Explore Structured Intent
 
 Go to **Query Tester** and run:
 
@@ -84,9 +98,11 @@ Go to **Query Tester** and run:
 How has French Wiktionary readership changed by month over the last year?
 ```
 
+![Structured Inputs](images/structured-inputs.jpg)
+
 ### Observe
 
-The top result should be a total page views trend target, with structured values similar to:
+The top result should be a total page views trend target, with structured values:
 
 ```text
 Language: fr
@@ -99,7 +115,7 @@ The user did not type `fr`, `wiktionary`, `1-year`, or `monthly` as system codes
 
 That is a big deal for enterprise apps because controlled values are what applications can actually execute safely.
 
-## Task 4: Explore Synonyms and Value Mapping
+## Task 5: Explore Synonyms and Value Mapping
 
 Run:
 
@@ -108,6 +124,12 @@ Show page views for all Wikimedia projects over the past 24 months
 ```
 
 ### Observe
+
+The top result should be:
+
+```text
+Total Page Views - All Projects
+```
 
 The phrase:
 
@@ -123,7 +145,7 @@ maps to the controlled period value:
 
 This is not magic. It is governed vocabulary. Application experts decide which phrases map to which values.
 
-## Task 5: See a Current Limit
+## Task 6: See a Current Limit
 
 Run:
 
@@ -133,7 +155,17 @@ Show page views for all Wikimedia projects this month
 
 ### Observe
 
-The system may not resolve `this month` into an exact current date range. It may fall back to the default period behavior.
+The system should still select a reasonable target:
+
+```text
+Total Page Views - All Projects
+```
+
+But it may not resolve `this month` into an exact current date range. In the tested environment, it fell back to:
+
+```text
+Period: 2-year
+```
 
 This is useful to show honestly. Trusted systems should make limits visible. The goal is not to pretend the system knows everything. The goal is to make behavior inspectable and improvable.
 
@@ -147,7 +179,7 @@ last fiscal year
 
 to exact validated values.
 
-## Task 6: Review Search History
+## Task 7: Review Search History
 
 1. In the left navigation menu, click **Search History**.
 2. Review recent queries.
@@ -162,14 +194,14 @@ Search History shows:
 
 This is the product manager's favorite page and the developer's early-warning system. It tells you what users actually asked, not what the design document hoped they would ask.
 
-## Task 7: Review Additional Feedback
+## Task 8: Review Additional Feedback
 
 1. In the left navigation menu, click **Additional Feedback**.
 2. Review any text feedback captured from users.
 
 This helps teams find phrases, expectations, or complaints that should become new descriptions, sample queries, value synonyms, or test cases.
 
-## Task 8: Connect the Pieces
+## Task 9: Connect the Pieces
 
 Trusted Answer Search is powerful because these features reinforce each other.
 
@@ -180,11 +212,11 @@ Trusted Answer Search is powerful because these features reinforce each other.
 | Draft versions | Safe editing workflow | Experts can improve behavior without changing production immediately. |
 | Feedback | Downvote and correction loop | Bad rankings can be fixed directly. |
 | Descriptions | New phrase matching | Business language can evolve without retraining. |
-| Test runs | Top-1/Top-3/Top-5 metrics | Changes can be measured before promotion. |
+| Test runs | P1/P3/P5 metrics | Changes can be measured before promotion. |
 | Search history | Real user queries | Teams can improve based on actual usage. |
 | Additional feedback | User comments | Qualitative feedback becomes curation input. |
 
-## Task 9: What to Do Next in a Real Application
+## Task 10: What to Do Next in a Real Application
 
 For your own enterprise app, the same pattern applies:
 

@@ -43,7 +43,7 @@ TASADMIN password
 
 Then skip directly to **Lab 4: Trusted Continuous Improvement of Search**.
 
-That is where the story begins.
+Lab 4 is the product story: a bad search result, a governed draft, expert feedback, and a corrected Rank #1 result.
 
 ## Task 2: If You Are Doing the Manual Walkthrough
 
@@ -53,6 +53,8 @@ You will complete the setup labs first:
 2. **Lab 2:** Run the backend installer.
 3. **Lab 3:** Load the Admin app, Portal app, and Wikimedia sample data.
 4. **Lab 4:** Start the main trusted-search storyline.
+
+The setup labs are intentionally practical. They get the database, backend, APEX apps, and sample data ready so that Lab 4 can focus on the value of the product.
 
 ## Task 3: Gather Manual Installation Values
 
