@@ -96,15 +96,19 @@ Published versions represent the current trusted behavior. You do not casually e
 1. In the left navigation menu, click **Search Spaces**.
 2. Open the `trusted_search` search space.
 3. Find the published version.
-4. Open the actions menu for the published version.
-5. Click **Clone**.
-6. Enter a label such as:
+4. If a draft version already exists from an earlier attempt, either use that draft or delete it before cloning.
+
+    > **Note:** A search space can have only one draft version at a time. For the cleanest walkthrough, delete the existing draft, then clone the published version again.
+
+5. If no draft exists, open the actions menu for the published version.
+6. Click **Clone**.
+7. Enter a label such as:
 
     ```text
     LiveLab Draft
     ```
 
-7. Click **Create**.
+8. Click **Create**.
 
 ![Search Space Versions Screen](images/navigate-to-search-space.png)
 
