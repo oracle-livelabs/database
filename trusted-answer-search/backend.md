@@ -37,8 +37,10 @@ This lab assumes you completed Lab 1 and have:
 2. Create a working folder.
 
     ```sh
+    <copy>
     mkdir -p ~/trusted_answer_search
     cd ~/trusted_answer_search
+    </copy>
     ```
 
 3. Copy or download the Trusted Answer Search zip into this folder.
@@ -46,30 +48,38 @@ This lab assumes you completed Lab 1 and have:
 4. Extract the top-level product zip.
 
     ```sh
+    <copy>
     unzip -X trusted_answer_search.zip -d product
     cd product
+    </copy>
     ```
 
 5. Extract the backend installer.
 
     ```sh
+    <copy>
     unzip -X backend_ship.zip -d backend_ship
     cd backend_ship
+    </copy>
     ```
 
 6. Confirm that the installer files are present.
 
     ```sh
+    <copy>
     ls -la
+    </copy>
     ```
 
 You should see:
 
 ```text
+<copy>
 install_backend.sh
 install_backend.conf
 uninstall_backend.sh
 README.md
+</copy>
 ```
 
 ## Task 2: Configure install_backend.conf
@@ -77,7 +87,9 @@ README.md
 1. Make the configuration file writable.
 
     ```sh
+    <copy>
     chmod u+w install_backend.conf
+    </copy>
     ```
 
 2. Open `install_backend.conf` in your preferred text editor.
@@ -85,12 +97,14 @@ README.md
 3. Set these values.
 
     ```text
+    <copy>
     DB_CONNECT_STRING={your-connect-string-or-tns-alias}
     DB_USER=ADMIN
     DB_PASSWORD={your-admin-password}
     TASADMIN_PASSWORD={choose-a-password-for-tasadmin}
     MODEL_FILE_NAME=multilingual-e5-base.onnx
     MODEL_URI={your-model-par-url}
+    </copy>
     ```
 
 4. Leave private-bucket credential values commented out if you are using a PAR URL.
@@ -102,7 +116,9 @@ The PAR URL already contains the short-lived access token. That means the instal
 Run the backend installer.
 
 ```sh
+<copy>
 ./install_backend.sh --config install_backend.conf
+</copy>
 ```
 
 The installer will:
@@ -126,8 +142,10 @@ You will use the `TASADMIN_PASSWORD` value again when signing in to the Admin an
 Save these values somewhere temporary for this workshop:
 
 ```text
+<copy>
 TASADMIN username: TASADMIN
 TASADMIN password: {the password you set}
+</copy>
 ```
 
 ## Task 5: If the Installer Fails
@@ -135,8 +153,10 @@ TASADMIN password: {the password you set}
 If the installer fails partway through, fix the error, uninstall, and rerun.
 
 ```sh
+<copy>
 ./uninstall_backend.sh --config install_backend.conf
 ./install_backend.sh --config install_backend.conf
+</copy>
 ```
 
 Common issues:

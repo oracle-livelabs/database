@@ -8,7 +8,7 @@ Most enterprise applications already know the right answers. The problem is that
 
 This workshop supports two paths:
 
-* **Green button path:** your environment is already provisioned. Start at **Lab 4** and get to the aha moment immediately.
+* **Green button path:** your environment is already provisioned. Start at **Lab 4** and go straight to the product walkthrough.
 * **Manual walkthrough path:** you install the backend, APEX apps, and sample data yourself. Start at **Get Started**, then complete Labs 1-3 before the main demo.
 
 **Estimated workshop time:**
@@ -57,7 +57,7 @@ Then you will act as the application expert:
 5. Watch the correct report move to Rank #1.
 6. Run quality checks before trusting the change.
 
-That is the main aha moment: **human-guided search improvement without retraining, redeployment, or prompt gymnastics**.
+The point is simple: **human-guided search improvement without retraining or redeployment**.
 
 ## Task 3: Choose Your Path
 

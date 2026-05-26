@@ -18,7 +18,7 @@ Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless
 
 For the **green button path**, you need:
 
-* The APEX URL from your LiveLabs reservation or Terraform output.
+* The Admin app URL from your LiveLabs reservation or Terraform `apex_url` output.
 * The `TASADMIN` username.
 * The `TASADMIN` password.
 
@@ -36,9 +36,11 @@ If your environment was provisioned for you, do not install anything manually.
 Confirm that you have these three values:
 
 ```text
-APEX URL
+<copy>
+Admin app URL
 TASADMIN username
 TASADMIN password
+</copy>
 ```
 
 Then skip directly to **Lab 4: Trusted Continuous Improvement of Search**.

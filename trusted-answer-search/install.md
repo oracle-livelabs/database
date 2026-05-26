@@ -133,8 +133,10 @@ The Admin app is the control room. The Portal app is the front door.
 3. Sign in with:
 
     ```text
+    <copy>
     Username: TASADMIN
     Password: {TASADMIN_PASSWORD from install_backend.conf}
+    </copy>
     ```
 
 You should see the Trusted Answer Search Admin dashboard.
@@ -146,7 +148,9 @@ You should see the Trusted Answer Search Admin dashboard.
 3. Enter:
 
     ```text
+    <copy>
     trusted_search
+    </copy>
     ```
 
 4. Click **Create**.
@@ -162,9 +166,11 @@ The Wikimedia sample gives you a realistic set of analytics reports. It includes
 2. Upload:
 
     ```text
+    <copy>
     search_target.json
     target_value_set.json
     test_run.json
+    </copy>
     ```
 
 3. Click **Import**.
@@ -184,8 +190,10 @@ The sample data gives you:
 3. Sign in with:
 
     ```text
+    <copy>
     Username: TASADMIN
     Password: {TASADMIN_PASSWORD from install_backend.conf}
+    </copy>
     ```
 
 4. Confirm that the Portal app opens and is using the `trusted_search` search space.
