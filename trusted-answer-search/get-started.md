@@ -18,7 +18,8 @@ Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless
 
 For the **green button path**, you need:
 
-* The APEX URL from your LiveLabs reservation or Terraform output.
+* The **Admin URL** from your LiveLabs reservation or Terraform `admin_url` output.
+* The **Published Wiki Search URL** from your LiveLabs reservation or Terraform `published_wiki_search_url` output.
 * The `TASADMIN` username.
 * The `TASADMIN` password.
 
@@ -33,17 +34,44 @@ For the **manual walkthrough path**, you need:
 
 If your environment was provisioned for you, do not install anything manually.
 
-Confirm that you have these three values:
+Confirm that you have these values:
 
 ```text
-APEX URL
+<copy>
+Admin URL
+Published Wiki Search URL
 TASADMIN username
 TASADMIN password
+</copy>
 ```
 
 Then skip directly to **Lab 4: Trusted Continuous Improvement of Search**.
 
-Lab 4 is the product story: a bad search result, a governed draft, expert feedback, and a corrected Rank #1 result.
+Lab 4 is the product story: an end-user search experience, a governed draft, expert feedback, and a corrected Rank #1 result.
+
+### If the Direct Admin App URL Does Not Open
+
+The green-button stack normally gives you a direct Admin app URL. If that URL does not open the app, use the APEX home URL instead.
+
+1. Change the URL so it ends with:
+
+    ```text
+    <copy>
+    /ords/apex
+    </copy>
+    ```
+
+2. Sign in to the `TASADMIN` workspace with the same username and password.
+
+    ![Sign in to TAS workspace](images/sign-in-tas-workspace.png)
+
+3. Click **App Builder**.
+
+    ![Navigate to App Builder](images/navigate-to-app-builder.png)
+
+4. Open or run **Oracle Trusted Answer Search - Admin App**.
+
+After the Admin app opens, continue to **Lab 4**.
 
 ## Task 2: If You Are Doing the Manual Walkthrough
 

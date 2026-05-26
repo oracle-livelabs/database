@@ -15,7 +15,7 @@ That is where metrics, test runs, search history, and structured inputs become i
 In this lab, you will:
 
 * Run a regression test suite.
-* Review P1, P3, and P5 quality metrics.
+* Review Top-1, Top-3, and Top-5 quality metrics.
 * Inspect individual test results.
 * Explore structured input extraction.
 * Review search history and feedback.
@@ -28,20 +28,22 @@ This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Sea
 ## Task 1: Run the Regression Test Suite
 
 1. In the left navigation menu, click **Test Runs**.
-2. Select the search-space version you want to evaluate.
+2. If you are using the green-button environment, the Wikimedia uploaded test questions are already loaded and an initial lightweight run may already appear under **View Past Runs**.
+3. Select the search-space version you want to evaluate.
     * Use the **Published** version to see the baseline.
     * Use your **Draft** version to evaluate the changes you made in Lab 4.
-3. Click **Run Tests**.
-4. Keep the available query sources selected, such as:
+4. Click **Run Tests**.
+5. Keep the available query sources selected, such as:
 
+    * Uploaded test questions.
     * Sample queries.
     * Past user queries, if available.
 
-5. Click **Run**.
+6. Click **Run**.
 
 ![Upload Test Runs](images/upload-test-runs.png)
 
-The test run may take a minute. This is the system replaying known questions and checking whether the expected target still appears in the ranked results.
+The uploaded Wikimedia test file contains 25 curated regression questions. Running with sample queries evaluates a much larger set generated from the search target sample queries. Either way, the system is replaying known questions and checking whether the expected target still appears in the ranked results.
 
 ## Task 2: Review the Test Run Metrics
 
@@ -57,21 +59,31 @@ Review:
 * Total queries evaluated.
 * Progress.
 * Status.
-* P1, P3, and P5 accuracy.
+* Top-1, Top-3, and Top-5 accuracy.
+
+In the current Admin app UI, these may appear as:
+
+| UI Label | Meaning |
+| --- | --- |
+| P1 | Top-1 accuracy: the expected target was ranked first. |
+| P3 | Top-3 accuracy: the expected target appeared in the first three results. |
+| P5 | Top-5 accuracy: the expected target appeared in the first five results. |
+
 * Passed queries.
 
-In the tested green-button environment, the published baseline produced:
+In a green-button environment, you may see a seeded run from the uploaded Wikimedia test questions. If you run the larger sample-query suite, the published baseline should produce results similar to:
 
 ```text
-Total Queries: 802
+<copy>
+Total Queries: about 802
 Status: COMPLETED
-P1: 99.88
-P3: 100
-P5: 100
-Passed Queries: 802
+Top-1 accuracy / P1: about 99.88
+Top-3 accuracy / P3: 100
+Top-5 accuracy / P5: 100
+</copy>
 ```
 
-Exact values can vary if you evaluate a draft after making changes, but the important pattern is that search quality is measurable.
+Exact values vary depending on whether you use uploaded questions, sample queries, past user queries, or a draft after making changes. The important pattern is that search quality is measurable.
 
 That is the kind of number an application team can discuss. It is not a vibe. It is a measurable system.
 
@@ -95,7 +107,9 @@ This is useful when a search result regresses. Instead of guessing why users are
 Go to **Query Tester** and run:
 
 ```text
+<copy>
 How has French Wiktionary readership changed by month over the last year?
+</copy>
 ```
 
 ![Structured Inputs](images/structured-inputs.jpg)
@@ -105,10 +119,12 @@ How has French Wiktionary readership changed by month over the last year?
 The top result should be a total page views trend target, with structured values:
 
 ```text
+<copy>
 Language: fr
 Project: wiktionary
 Period: 1-year
 Frequency: monthly
+</copy>
 ```
 
 The user did not type `fr`, `wiktionary`, `1-year`, or `monthly` as system codes. Trusted Answer Search mapped human phrasing to controlled values.
@@ -120,7 +136,9 @@ That is a big deal for enterprise apps because controlled values are what applic
 Run:
 
 ```text
+<copy>
 Show page views for all Wikimedia projects over the past 24 months
+</copy>
 ```
 
 ### Observe
@@ -128,19 +146,25 @@ Show page views for all Wikimedia projects over the past 24 months
 The top result should be:
 
 ```text
+<copy>
 Total Page Views - All Projects
+</copy>
 ```
 
 The phrase:
 
 ```text
+<copy>
 past 24 months
+</copy>
 ```
 
 maps to the controlled period value:
 
 ```text
+<copy>
 2-year
+</copy>
 ```
 
 This is not magic. It is governed vocabulary. Application experts decide which phrases map to which values.
@@ -150,7 +174,9 @@ This is not magic. It is governed vocabulary. Application experts decide which p
 Run:
 
 ```text
+<copy>
 Show page views for all Wikimedia projects this month
+</copy>
 ```
 
 ### Observe
@@ -158,13 +184,17 @@ Show page views for all Wikimedia projects this month
 The system should still select a reasonable target:
 
 ```text
+<copy>
 Total Page Views - All Projects
+</copy>
 ```
 
 But it may not resolve `this month` into an exact current date range. In the tested environment, it fell back to:
 
 ```text
+<copy>
 Period: 2-year
+</copy>
 ```
 
 This is useful to show honestly. Trusted systems should make limits visible. The goal is not to pretend the system knows everything. The goal is to make behavior inspectable and improvable.
@@ -172,9 +202,11 @@ This is useful to show honestly. Trusted systems should make limits visible. The
 Future enhancements can use named entity recognition or date normalization to map phrases like:
 
 ```text
+<copy>
 this month
 last quarter
 last fiscal year
+</copy>
 ```
 
 to exact validated values.
@@ -212,7 +244,7 @@ Trusted Answer Search is powerful because these features reinforce each other.
 | Draft versions | Safe editing workflow | Experts can improve behavior without changing production immediately. |
 | Feedback | Downvote and correction loop | Bad rankings can be fixed directly. |
 | Descriptions | New phrase matching | Business language can evolve without retraining. |
-| Test runs | P1/P3/P5 metrics | Changes can be measured before promotion. |
+| Test runs | Top-1/Top-3/Top-5 metrics | Changes can be measured before promotion. |
 | Search history | Real user queries | Teams can improve based on actual usage. |
 | Additional feedback | User comments | Qualitative feedback becomes curation input. |
 
@@ -247,9 +279,11 @@ You have now completed the Trusted Answer Search LiveLab.
 The closing idea:
 
 ```text
+<copy>
 Trusted Answer Search gives users natural language,
 developers controlled application actions,
 and experts a measurable way to improve the system over time.
+</copy>
 ```
 
 ## Acknowledgements
