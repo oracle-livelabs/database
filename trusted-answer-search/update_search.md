@@ -6,7 +6,7 @@ This is the main story.
 
 You are now the application expert for a Wikimedia analytics app. Users ask questions in normal language. Trusted Answer Search maps those questions to approved application targets and validated inputs.
 
-In this lab, you will catch a bad result, correct it in a governed draft version, and prove that the system learned from expert feedback immediately.
+In this lab, you will catch a bad result, correct it in a governed draft version, and prove that expert feedback changes the search behavior immediately.
 
 No retraining. No redeploy. No prompt ceremony.
 
@@ -52,6 +52,10 @@ If you are using the green button environment, these values are provided for you
 
 If you see the dashboard, you are in the right place.
 
+![Dashboard Metrics](images/dashboard-metrics.jpg)
+
+The dashboard is not the main demo, but it tells you this is an operational system. You will come back to metrics in Lab 5.
+
 ## Task 2: Run a Search That Almost Works
 
 1. In the left navigation menu, click **Query Tester**.
@@ -71,7 +75,7 @@ The expected target is:
 Total Page Views - All Projects
 ```
 
-But the initial top result may be:
+But the initial top result should be:
 
 ```text
 Top Viewed Articles - All Projects
@@ -90,6 +94,18 @@ Before fixing the result, look at the search-space version selector near the top
 If the current version is **Published**, feedback and editing controls are disabled. That is intentional.
 
 Published versions represent the current trusted behavior. You do not casually edit production behavior because someone typed "MoM" with confidence.
+
+![Published Guardrail](images/published-guardrail.jpg)
+
+### Expected result
+
+You should see:
+
+```text
+Rank #1: Top Viewed Articles - All Projects
+Rank #2: Total Page Views - All Projects
+Feedback buttons: disabled
+```
 
 ## Task 4: Clone the Published Version to a Draft
 
@@ -151,11 +167,21 @@ The correct result moves to Rank #1:
 Total Page Views - All Projects
 ```
 
-![Updated Ranking results](images/updated-ranking.png)
+![Corrected Draft Ranking](images/draft-corrected-ranking.jpg)
 
 This is the aha moment.
 
 You just changed the system behavior with expert feedback. The model was not retrained. The app was not redeployed. Nobody had to argue with a prompt for 45 minutes.
+
+### Expected result
+
+After the downvote, the rerun should show:
+
+```text
+Rank #1: Total Page Views - All Projects
+Frequency: monthly
+Period: 2-year
+```
 
 ## Task 7: Inspect the Structured Inputs
 
@@ -221,6 +247,15 @@ Wikimedia traffic trend over time
 ```
 
 You just taught the search system a new business phrase with curation, not training.
+
+### Expected result
+
+The result should show:
+
+```text
+Rank #1: Total Page Views - All Projects
+Matched Description/Sample Query: Wikimedia traffic trend over time
+```
 
 ## Task 10: Run a Deterministic Search
 

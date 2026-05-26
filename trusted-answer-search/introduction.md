@@ -4,12 +4,12 @@
 
 Welcome to **Make Search Trusted, Faster, and Cheaper on your Application with Trusted Answer Search**.
 
-Most enterprise applications already know the right answers. The problem is that users do not always know the exact report name, filter value, URL pattern, or navigation path. Trusted Answer Search solves that problem by mapping natural-language questions to trusted application targets and validated inputs.
+Most enterprise applications already know the right answers. The problem is that users do not always know the exact report name, filter value, URL pattern, or navigation path. Trusted Answer Search maps natural-language questions to trusted application targets and validated inputs, so users get the right action instead of a creative paragraph.
 
 This workshop supports two paths:
 
-* **Green button path:** your environment is already provisioned. Start at **Lab 4**.
-* **Manual walkthrough path:** you install the backend, APEX apps, and sample data yourself. Start at **Get Started**, then continue through Labs 1-3.
+* **Green button path:** your environment is already provisioned. Start at **Lab 4** and get to the aha moment immediately.
+* **Manual walkthrough path:** you install the backend, APEX apps, and sample data yourself. Start at **Get Started**, then complete Labs 1-3 before the main demo.
 
 **Estimated workshop time:**
 
@@ -29,7 +29,7 @@ In this workshop, you will:
 
 ## Task 1: Understand the Core Idea
 
-Traditional generative AI is powerful, but it is not always the right tool for bounded enterprise application navigation. If the application has 80 approved reports, you usually do not want the system to invent report 81 during a dramatic moment.
+Traditional generative AI is powerful, but it is not always the right tool for bounded enterprise application navigation. If the application has 80 approved reports, you usually do not want the system to invent report 81 just because the user sounded confident.
 
 Trusted Answer Search uses Oracle AI Vector Search to match user language against curated descriptions, sample queries, and controlled value sets. The application remains in control of the final action.
 
