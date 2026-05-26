@@ -1,13 +1,11 @@
-/* Stage 4 - run as RETAILDB. Creates VPD policies, comments, PL/SQL agent tools, and readiness checks. */
+/*
+ * Deprecated staged setup - intentionally blocked.
+ *
+ * Do not use this file for learner workshop builds. The canonical deterministic
+ * setup is retail_workshop_admin_create_all_exact_data.sql, run as ADMIN.
+ */
 SET SERVEROUTPUT ON
 BEGIN
-  IF SYS_CONTEXT('USERENV','SESSION_USER') = 'ADMIN' THEN
-    RAISE_APPLICATION_ERROR(-20072, 'Run this script as RETAILDB, not ADMIN.');
-  END IF;
+  RAISE_APPLICATION_ERROR(-20076, 'Deprecated staged finish path. Use @retail_workshop_admin_create_all_exact_data.sql from ADMIN for deterministic workshop setup.');
 END;
 /
-@@schema/06b_security_vpd_as_retaildb.sql
-@@schema/09_safe_retail_comments.sql
-@@schema/08_agent_tool_functions.sql
-@@verify_retail_workshop_ready.sql
-PROMPT Stage 4 complete.

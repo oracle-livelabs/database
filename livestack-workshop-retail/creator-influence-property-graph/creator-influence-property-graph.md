@@ -25,11 +25,13 @@ Estimated Time: 10 minutes
 
 2. Run this graph check.
 
+    A creator network is more than a flat list of influencers. This query confirms that the database has a property graph object that can model relationships among creators, brands, products, and posts.
+
     ```sql
     <copy>
     SELECT owner AS "Owner", graph_name AS "Graph"
     FROM all_property_graphs
-    WHERE owner = 'RETAILDB'
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND graph_name = 'INFLUENCER_NETWORK';
     </copy>
     ```
@@ -38,18 +40,20 @@ Estimated Time: 10 minutes
 
     | Owner | Graph |
     | --- | --- |
-    | RETAILDB | `INFLUENCER_NETWORK` |
+    | LLUSER | `INFLUENCER_NETWORK` |
     {: title="Influencer Property Graph"}
 
 3. Count the graph source tables.
 
+    Property graphs are most valuable when they are built from governed source data. Counting the source tables shows that the graph is grounded in actual retail entities, not a separate visualization-only copy.
+
     ```sql
     <copy>
-    SELECT 'Influencers' AS "Source", COUNT(*) AS "Rows" FROM RETAILDB.influencers
-    UNION ALL SELECT 'Social posts', COUNT(*) FROM RETAILDB.social_posts
-    UNION ALL SELECT 'Influencer connections', COUNT(*) FROM RETAILDB.influencer_connections
-    UNION ALL SELECT 'Brand influencer links', COUNT(*) FROM RETAILDB.brand_influencer_links
-    UNION ALL SELECT 'Post product mentions', COUNT(*) FROM RETAILDB.post_product_mentions;
+    SELECT 'Influencers' AS "Source", COUNT(*) AS "Rows" FROM influencers
+    UNION ALL SELECT 'Social posts', COUNT(*) FROM social_posts
+    UNION ALL SELECT 'Influencer connections', COUNT(*) FROM influencer_connections
+    UNION ALL SELECT 'Brand influencer links', COUNT(*) FROM brand_influencer_links
+    UNION ALL SELECT 'Post product mentions', COUNT(*) FROM post_product_mentions;
     </copy>
     ```
 
@@ -69,13 +73,15 @@ Estimated Time: 10 minutes
 
 2. Run this one-hop traversal.
 
+    A one-hop traversal reveals direct creator-to-creator influence paths. Retail teams use those paths to see how a campaign, product mention, or brand signal can move through a creator network.
+
     ```sql
     <copy>
     SELECT src_handle AS "From",
            dst_handle AS "To",
            connection_type AS "Link",
            strength AS "Strength"
-    FROM GRAPH_TABLE ( RETAILDB.influencer_network
+    FROM GRAPH_TABLE ( influencer_network
       MATCH (src IS influencer) -[e IS connects_to]-> (dst IS influencer)
       COLUMNS (
         src.handle AS src_handle,
@@ -107,12 +113,14 @@ Estimated Time: 10 minutes
 
 3. Run this brand reach query.
 
+    Brand reach turns graph relationships into a business metric. This query shows which brands have broader creator coverage and stronger social evidence.
+
     ```sql
     <copy>
     SELECT promoter AS "Promoter",
            reached AS "Reached",
            relationship_type AS "Relationship"
-    FROM GRAPH_TABLE ( RETAILDB.influencer_network
+    FROM GRAPH_TABLE ( influencer_network
       MATCH (b IS brand) <-[p IS promotes]- (i IS influencer) -[c IS connects_to]-> (j IS influencer)
       COLUMNS (
         i.handle AS promoter,
@@ -145,5 +153,5 @@ Estimated Time: 10 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

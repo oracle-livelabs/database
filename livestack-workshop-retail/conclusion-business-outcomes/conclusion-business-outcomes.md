@@ -18,6 +18,8 @@ Estimated Time: 5 minutes
 
 1. Review the workshop flow from the database point of view.
 
+    This final query ties every lab back to a retail decision and the database evidence behind it. Use it to explain the workshop as one governed decision loop instead of a set of separate feature demos.
+
     ```sql
     <copy>
     SELECT 'Operating picture' AS "Signal", 'Retail Command Center' AS "Scene", 'ORDERS, SOCIAL_POSTS, INVENTORY, RETURN_REQUESTS, and AGENT_ACTIONS' AS "Database Evidence" FROM dual
@@ -59,5 +61,5 @@ Estimated Time: 5 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

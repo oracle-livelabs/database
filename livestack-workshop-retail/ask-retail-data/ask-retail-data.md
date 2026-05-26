@@ -25,11 +25,13 @@ Estimated Time: 8 minutes
 
 2. Run this query.
 
+    Natural-language analytics needs safe targets. Semantic views expose approved business shapes so Ask Retail Data can answer questions from governed views instead of raw, ambiguous tables.
+
     ```sql
     <copy>
     SELECT view_name AS "View", text_length AS "SQL Text"
     FROM all_views
-    WHERE owner = 'RETAILDB'
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND view_name IN (
         'RETAIL_RETURNS_WORKFLOW_V','RETAIL_SIGNAL_PRODUCT_V',
         'RETAIL_ORDER_RETURN_V','RETAIL_FULFILLMENT_RISK_V','RETAIL_RETURN_WORKBENCH_V'
@@ -55,14 +57,32 @@ Estimated Time: 8 minutes
 
 1. Run this query.
 
+    Table comments are part of the semantic layer. They explain the data in business language, which helps AI-assisted SQL generation choose the right objects and produce answers you can audit.
+
     ```sql
     <copy>
-    SELECT table_name AS "Table",
-           comments AS "Business Meaning"
-    FROM all_tab_comments
-    WHERE owner = 'RETAILDB'
-      AND table_name IN ('ORDERS','PRODUCTS','RETURN_REQUESTS','AGENT_ACTIONS')
-    ORDER BY table_name;
+    WITH schema_ctx AS (
+      SELECT owner AS owner_name
+      FROM (
+        SELECT owner
+        FROM all_tables
+        WHERE table_name = 'ORDERS'
+          AND owner IN (USER, 'LLUSER')
+        ORDER BY CASE
+                   WHEN owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA') THEN 1
+                   WHEN owner = USER THEN 2
+                   WHEN owner = 'LLUSER' THEN 3
+                   ELSE 4
+                 END
+      )
+      WHERE ROWNUM = 1
+    )
+    SELECT c.table_name AS "Table",
+           c.comments AS "Business Meaning"
+    FROM all_tab_comments c
+    JOIN schema_ctx s ON s.owner_name = c.owner
+    WHERE c.table_name IN ('ORDERS','PRODUCTS','RETURN_REQUESTS','AGENT_ACTIONS')
+    ORDER BY c.table_name;
     </copy>
     ```
 
@@ -82,6 +102,8 @@ Estimated Time: 8 minutes
 1. Use the live Ask Retail Data context from Figure 1 before you run the SQL.
 
 2. Run this deterministic version of the current prompt, "Which demand signals mention damaged packaging or sizing complaints?"
+
+    Visible SQL lets you inspect how a natural-language question becomes a governed answer. This query searches social signals, return requests, and return evidence so the result is explainable instead of a black-box response.
 
     ```sql
     <copy>
@@ -108,7 +130,7 @@ Estimated Time: 8 minutes
              NVL(rsp.virality_score, 0) AS signal_strength,
              TO_CHAR(SUBSTR(rsp.signal_text, 1, 240)) AS signal_text,
              LOWER(TO_CHAR(SUBSTR(rsp.signal_text, 1, 4000))) AS search_text
-      FROM RETAILDB.retail_signal_product_v rsp
+      FROM retail_signal_product_v rsp
       UNION ALL
       SELECT 'Return request' AS signal_source,
              TO_CHAR(rr.return_id) AS signal_id,
@@ -117,8 +139,8 @@ Estimated Time: 8 minutes
              NVL(rr.return_value, 0) AS signal_strength,
              rr.return_reason || ': ' || TO_CHAR(SUBSTR(rr.damage_description, 1, 220)) AS signal_text,
              LOWER(rr.return_reason || ' ' || TO_CHAR(SUBSTR(rr.damage_description, 1, 4000))) AS search_text
-      FROM RETAILDB.return_requests rr
-      JOIN RETAILDB.products p ON p.product_id = rr.product_id
+      FROM return_requests rr
+      JOIN products p ON p.product_id = rr.product_id
       UNION ALL
       SELECT 'Return evidence' AS signal_source,
              TO_CHAR(rd.document_id) AS signal_id,
@@ -127,9 +149,9 @@ Estimated Time: 8 minutes
              ROUND(NVL(rd.similarity_score, 0) * 100, 2) AS signal_strength,
              rd.title || ': ' || TO_CHAR(SUBSTR(rd.excerpt, 1, 220)) AS signal_text,
              LOWER(rd.title || ' ' || TO_CHAR(SUBSTR(rd.excerpt, 1, 4000))) AS search_text
-      FROM RETAILDB.return_documents rd
-      JOIN RETAILDB.return_requests rr ON rr.return_id = rd.return_id
-      JOIN RETAILDB.products p ON p.product_id = rr.product_id
+      FROM return_documents rd
+      JOIN return_requests rr ON rr.return_id = rd.return_id
+      JOIN products p ON p.product_id = rr.product_id
     )
     WHERE search_text LIKE '%damag%'
        OR search_text LIKE '%packag%'
@@ -166,13 +188,15 @@ Estimated Time: 8 minutes
 
 1. Run this deterministic version of the prompt, "Which fulfillment centers have inventory pressure?"
 
+    The answer should be based on inventory evidence, not language-model guesswork. This query uses the governed risk view to identify centers where product availability needs attention.
+
     ```sql
     <copy>
     SELECT center_name AS "Center",
            city AS "City",
            COUNT(*) AS "At-Risk Products",
            MIN(quantity_on_hand) AS "Lowest On Hand"
-    FROM RETAILDB.retail_fulfillment_risk_v
+    FROM retail_fulfillment_risk_v
     WHERE inventory_risk = 'AT_RISK'
     GROUP BY center_name, city
     ORDER BY COUNT(*) DESC, MIN(quantity_on_hand)
@@ -200,5 +224,5 @@ Estimated Time: 8 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

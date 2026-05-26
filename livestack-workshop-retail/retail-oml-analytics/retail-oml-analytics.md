@@ -25,11 +25,13 @@ Estimated Time: 10 minutes
 
 2. Run this view check.
 
+    Machine learning starts with prepared features. This query shows the curated views that feed prediction and clustering while keeping the retail data inside the database.
+
     ```sql
     <copy>
     SELECT owner AS "Owner", view_name AS "View"
     FROM all_views
-    WHERE owner = 'RETAILDB'
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND view_name IN (
         'OML_DEMAND_TRAINING_V','OML_CUSTOMER_RFM_V',
         'OML_REVENUE_TRAINING_V','OML_PRODUCT_CLUSTER_V'
@@ -42,19 +44,21 @@ Estimated Time: 10 minutes
 
     | Owner | View |
     | --- | --- |
-    | RETAILDB | `OML_CUSTOMER_RFM_V` |
-    | RETAILDB | `OML_DEMAND_TRAINING_V` |
-    | RETAILDB | `OML_PRODUCT_CLUSTER_V` |
-    | RETAILDB | `OML_REVENUE_TRAINING_V` |
+    | LLUSER | `OML_CUSTOMER_RFM_V` |
+    | LLUSER | `OML_DEMAND_TRAINING_V` |
+    | LLUSER | `OML_PRODUCT_CLUSTER_V` |
+    | LLUSER | `OML_REVENUE_TRAINING_V` |
     {: title="OML Training Views"}
 
 3. Run this model inventory.
+
+    A model inventory tells you what the database can actually score. Seeing the model list makes the analytics page more explainable because the predictions are tied to named in-database assets.
 
     ```sql
     <copy>
     SELECT owner AS "Owner", model_name AS "Model", mining_function AS "Use", algorithm AS "Algorithm"
     FROM all_mining_models
-    WHERE owner = 'RETAILDB'
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND model_name IN (
         'DEMAND_SURGE_MODEL','CUSTOMER_SEGMENT_MODEL',
         'REVENUE_PREDICT_MODEL','PRODUCT_CLUSTER_MODEL'
@@ -67,10 +71,10 @@ Estimated Time: 10 minutes
 
     | Owner | Model | Use | Algorithm |
     | --- | --- | --- | --- |
-    | RETAILDB | `CUSTOMER_SEGMENT_MODEL` | CLUSTERING | KMEANS |
-    | RETAILDB | `DEMAND_SURGE_MODEL` | CLASSIFICATION | `RANDOM_FOREST` |
-    | RETAILDB | `PRODUCT_CLUSTER_MODEL` | CLUSTERING | KMEANS |
-    | RETAILDB | `REVENUE_PREDICT_MODEL` | REGRESSION | `GENERALIZED_LINEAR_MODEL` |
+    | LLUSER | `CUSTOMER_SEGMENT_MODEL` | CLUSTERING | KMEANS |
+    | LLUSER | `DEMAND_SURGE_MODEL` | CLASSIFICATION | `RANDOM_FOREST` |
+    | LLUSER | `PRODUCT_CLUSTER_MODEL` | CLUSTERING | KMEANS |
+    | LLUSER | `REVENUE_PREDICT_MODEL` | REGRESSION | `GENERALIZED_LINEAR_MODEL` |
     {: title="OML Mining Models"}
 
 ## Task 2: Score demand surge risk
@@ -78,14 +82,16 @@ Estimated Time: 10 minutes
 
 2. Run this scoring query.
 
+    Notice that the scoring happens in SQL, close to the data. That means customer segments can be classified without exporting customer features to a separate tool first.
+
     ```sql
     <copy>
     SELECT product_id AS "Product ID",
            category AS "Category",
            surge_label AS "Actual",
-           PREDICTION(RETAILDB.DEMAND_SURGE_MODEL USING *) AS "Predicted",
-           ROUND(PREDICTION_PROBABILITY(RETAILDB.DEMAND_SURGE_MODEL, 'SURGE' USING *), 4) AS "Surge Prob"
-    FROM RETAILDB.oml_demand_training_v
+           PREDICTION(DEMAND_SURGE_MODEL USING *) AS "Predicted",
+           ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL, 'SURGE' USING *), 4) AS "Surge Prob"
+    FROM oml_demand_training_v
     ORDER BY product_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -114,6 +120,8 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
+    Predictions are more useful when they are tied to operating evidence. This query combines demand forecasts, inventory quantities, and risk flags so the result is actionable for retail planning.
+
     ```sql
     <copy>
     SELECT product_name AS "Product",
@@ -121,7 +129,7 @@ Estimated Time: 10 minutes
            quantity_on_hand AS "On Hand",
            reorder_point AS "Reorder At",
            inventory_risk AS "Risk"
-    FROM RETAILDB.retail_fulfillment_risk_v r
+    FROM retail_fulfillment_risk_v r
     ORDER BY r.inventory_risk DESC, r.quantity_on_hand ASC, r.product_name
     FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -147,5 +155,5 @@ Estimated Time: 10 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

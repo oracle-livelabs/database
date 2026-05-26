@@ -26,11 +26,13 @@ Estimated Time: 8 minutes
 
 2. Run this query.
 
+    Start here by checking the tools the agent is allowed to use. If these PL/SQL functions are present and valid, the agent workflow has a trusted database action layer instead of an uncontrolled set of prompts.
+
     ```sql
     <copy>
     SELECT object_name AS "Tool", status AS "Status"
     FROM all_objects
-    WHERE owner = 'RETAILDB'
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND object_type = 'FUNCTION'
       AND object_name IN (
         'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',
@@ -58,9 +60,11 @@ Estimated Time: 8 minutes
 
 2. Call one inventory tool with a fixed product name.
 
+    This step shows the bridge between a question and a trusted database action. Instead of inventing an answer, the agent-style function reads inventory evidence from the database and returns a controlled response.
+
     ```sql
     <copy>
-    SELECT SUBSTR(RETAILDB.check_product_inventory('Neon Grid Hoodie'), 1, 500) AS "Inventory"
+    SELECT SUBSTR(check_product_inventory('Neon Grid Hoodie'), 1, 500) AS "Inventory"
     FROM dual;
     </copy>
     ```
@@ -79,9 +83,11 @@ Estimated Time: 8 minutes
 
 2. Run this controlled audit call.
 
+    Enterprise agent workflows need an audit trail. This call creates a simple record of who acted, what action was taken, and what type of retail object was involved.
+
     ```sql
     <copy>
-    SELECT RETAILDB.log_agent_decision(
+    SELECT log_agent_decision(
              'workshop_validation_agent',
              'explain_retail_signal',
              'product',
@@ -93,12 +99,14 @@ Estimated Time: 8 minutes
 
     Expected output:
 
-    | Result |
-    | --- |
-    | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
+    | Check | Result |
+    | --- | --- |
+    | Agent audit insert | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
     {: title="Agent Audit Insert Result"}
 
 3. Verify the audit row.
+
+    Logging only helps when someone can inspect the record afterward. This query lets you see the audit row the database captured for the agent action.
 
     ```sql
     <copy>
@@ -106,7 +114,7 @@ Estimated Time: 8 minutes
            action_type AS "Action",
            entity_type AS "Entity",
            execution_status AS "Status"
-    FROM RETAILDB.agent_actions
+    FROM agent_actions
     WHERE agent_name = 'workshop_validation_agent'
     ORDER BY executed_at DESC
     FETCH FIRST 1 ROW ONLY;
@@ -126,9 +134,11 @@ Estimated Time: 8 minutes
 
 1. Clean up the validation row if your instructor asks for a pristine audit table.
 
+    The previous step intentionally added a workshop test row. Clean it up only when directed so the lab stays tidy, while remembering that real production audit rows should be preserved for review.
+
     ```sql
     <copy>
-    DELETE FROM RETAILDB.agent_actions
+    DELETE FROM agent_actions
     WHERE agent_name = 'workshop_validation_agent';
     COMMIT;
     </copy>
@@ -136,14 +146,14 @@ Estimated Time: 8 minutes
 
     Expected output:
 
-    | Result |
-    | --- |
-    | Rows deleted and committed. |
+    | Check | Result |
+    | --- | --- |
+    | Agent audit cleanup | Rows deleted and committed. |
     {: title="Agent Audit Cleanup Result"}
 
 2. The workshop test row is now gone. Production audit rows should remain for review.
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

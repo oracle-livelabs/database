@@ -1,6 +1,11 @@
-/* Stage 1 - run as ADMIN. Creates or refreshes the RETAILDB schema owner. */
+/*
+ * Deprecated staged setup - intentionally blocked.
+ *
+ * Do not use this file for learner workshop builds. The canonical deterministic
+ * setup is retail_workshop_admin_create_all_exact_data.sql, run as ADMIN.
+ */
 SET SERVEROUTPUT ON
-DEFINE APP_SCHEMA_USER = RETAILDB
-DEFINE APP_SCHEMA_PASSWORD = REPLACE_WITH_STRONG_RETAILDB_PASSWORD
-@@schema/00_setup.sql
-PROMPT Stage 1 complete. Upload all_MiniLM_L12_v2.onnx to DATA_PUMP_DIR if it is not already present, then connect as RETAILDB and run @run_as_retaildb_core.sql.
+BEGIN
+  RAISE_APPLICATION_ERROR(-20077, 'Deprecated staged setup. Use @retail_workshop_admin_create_all_exact_data.sql from ADMIN for deterministic workshop setup.');
+END;
+/
