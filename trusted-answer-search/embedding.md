@@ -218,78 +218,9 @@ sqlplus ADMIN/{your-admin-password}@{tns-alias}
 
 You should reach a `SQL>` prompt. Type `exit` to quit.
 
----
+You now have the model location and database connectivity values needed by the backend installer.
 
-## Task 7: Configure install_backend.conf
-
-Navigate to the backend installer directory and make the config file writable:
-
-```sh
-chmod u+w install_backend.conf
-```
-
-Open it and set the following values:
-
-```
-# Mandatory - all setups
-DB_CONNECT_STRING={your-tns-alias}
-DB_USER=ADMIN
-DB_PASSWORD={your-admin-password}
-TASADMIN_PASSWORD={choose-a-password-for-the-admin-app}
-MODEL_FILE_NAME=multilingual-e5-base.onnx
-
-# Mandatory - ADB-S only
-MODEL_URI={your-PAR-URL}
-```
-
-Leave `CREDENTIAL_NAME` commented out — it is not needed when using a PAR URL,
-since the authentication token is embedded in the URL itself.
-
-Leave `TABLESPACE_NAME` blank — it is not applicable on ADB-S.
-
----
-
-## Task 8: Run the Backend Installer
-
-Execute the installation script from the backend installer directory:
-
-```sh
-./install_backend.sh --config install_backend.conf
-```
-
-The installer will:
-1. Run pre-installation checks (database version, privileges, connectivity)
-2. Create the `TRUSTED_SEARCH` schema
-3. Create the `TASADMIN` user with Search Administrator role
-4. Download and load the ONNX embedding model from Object Storage into the database
-5. Install PL/SQL packages, dictionary tables, indexes, and views
-
-Upon successful completion, the terminal will display a green
-**"Installation Completed Successfully"** banner with all steps marked ✔.
-
-### If you need to re-run after a failed attempt
-
-The installer does not clean up after itself on failure. Run the uninstaller
-first, then re-run:
-
-```sh
-./uninstall_backend.sh --config install_backend.conf
-# Confirm the prompt when asked
-./install_backend.sh --config install_backend.conf
-```
-
----
-
-## Key Troubleshooting Notes
-
-| Error | Cause | Fix |
-|---|---|---|
-| `ORA-54426`: tensor contains multiple variable dimensions | Model was not exported via OML4Py | Re-export using `EmbeddingModel.export2file()` as shown in Task 4 |
-| `ORA-20000`: unexpected internal error during model load | Generic wrapper hiding `ORA-54426` | Run `DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD` manually in SQL*Plus to see the real error |
-| `oracle-instantclient-basic` not found | Instant Client repo not added | Run `sudo dnf install -y oracle-instantclient-release-23ai-el9` first |
-| `sqlplus: command not found` | PATH not set | `export PATH=/usr/lib/oracle/23/client64/bin:$PATH` |
-| Wallet files readonly in editor | Unzipped as root | `sudo chown -R opc:opc ~/adb-wallet/` |
-| `install_backend.conf` readonly | File permissions | `chmod u+w install_backend.conf` |
+You may now **proceed to the next lab**.
 
 ---
 
@@ -299,4 +230,4 @@ first, then re-run:
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
 
-**Last Updated** — April, 2026
+**Last Updated Date** - May, 2026

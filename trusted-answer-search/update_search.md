@@ -1,232 +1,264 @@
-# **Lab 3: Trusted Continuous Improvement of Search**
+# Lab 4: Trusted Continuous Improvement of Search
 
 ## Introduction
 
-Trusted Answer Search is designed to improve continuously through **human oversight and structured feedback loops**. Unlike traditional AI systems that require retraining or prompt engineering, Trusted Answer Search allows application experts to directly control and refine how natural-language queries map to application outcomes.
+This is the main story.
 
-In this lab, you will work with real **Wikimedia analytics queries** and actively shape how the system behaves—fixing incorrect rankings, teaching new language patterns, and extending the search experience.
+You are now the application expert for a Wikimedia analytics app. Users ask questions in normal language. Trusted Answer Search maps those questions to approved application targets and validated inputs.
 
-**Estimated time:** 25 minutes.
+In this lab, you will catch a bad result, correct it in a governed draft version, and prove that the system learned from expert feedback immediately.
+
+No retraining. No redeploy. No prompt ceremony.
+
+**Estimated time:** 25 minutes
 
 ### Objectives
 
-* Refine search results using structured feedback.
-* Add new descriptions to improve matching accuracy.
-* Introduce new search targets dynamically.
-* Understand how changes impact system behavior.
+In this lab, you will:
 
----
+* Run natural-language searches against the Wikimedia sample.
+* Observe how a query maps to a trusted application target.
+* Clone a published search-space version into a draft.
+* Correct a bad ranking with expert feedback.
+* Teach the system a new phrase by adding a curated description.
+* See why this is different from chatbot-style search.
 
-## Task 1: Navigate to the Search Space
+### Prerequisites
 
-1. In the **Search Admin** application sidebar, click on **Search Spaces**.
-2. Click **Create Search Space**, and give it a name (e.g., `trusted_search`).
-3. Click **Create**.
+You need:
 
-![Search Space Versions Screen](images/navigate-to-search-space.png)
+* The Trusted Answer Search Admin app URL.
+* The `TASADMIN` username.
+* The `TASADMIN` password.
+* A loaded `trusted_search` search space.
 
----
+If you are using the green button environment, these values are provided for you.
 
-## Task 2: Upload Search Targets and Value Sets
+## Task 1: Sign In to the Admin App
 
-1. Click on your newly created search space. This will take you to the **Search Space Versions** page.
-2. Click **Import**.
-3. Upload:
+1. Open the Trusted Answer Search Admin app.
+2. Sign in with:
 
-    * `search_target.json`
-    * `target_value_set.json`
-    *Note: These can be found in the trusted_answer_search zip in apex_ship/samples/wikimedia*
-5. Click **Import**.
-
-These files define:
-
-* The available reports (e.g., page views, edits, editors)
-* The parameter vocabulary (e.g., *last 2 years*, *monthly*, *French Wiktionary*)
-
-These value mappings are what allow the system to interpret phrases like
-“last 2 years” → `period = 2-year` 
-
-![Import Search Metadata](images/upload-search-targets.png)
-
----
-
-## Task 3: Run an Initial Query
-
-1. Navigate to **Query Tester**.
-2. Run:
-
+    ```text
+    Username: TASADMIN
+    Password: {your TASADMIN password}
     ```
+
+3. Confirm that the selected search space is:
+
+    ```text
+    trusted_search
+    ```
+
+If you see the dashboard, you are in the right place.
+
+## Task 2: Run a Search That Almost Works
+
+1. In the left navigation menu, click **Query Tester**.
+2. Run this query:
+
+    ```text
     Total page views MoM all projects
     ```
 
-This is how an end user may search for the total number of page views, broken down by month, for all projects.
+This is a realistic user query. It is short, messy, and full of shorthand. In other words, a normal Tuesday.
 
-### Observe:
+### Observe
 
-* Ranked results
-* Extracted parameters:
+The expected target is:
 
-  * `frequency = monthly`
+```text
+Total Page Views - All Projects
+```
 
-The correct answer should be:
-**Total Page Views - All Projects**
+But the initial top result may be:
 
-However, instead our desired result is second, and the top result it **Top Viewed Articles - All Projects**. 
+```text
+Top Viewed Articles - All Projects
+```
+
+The correct result appears below it.
 
 ![Initial Query Results](images/initial-ranking.png)
 
----
+This is exactly the kind of issue that hurts enterprise application search. The system is close, but close is not the same as trusted.
 
-## Task 4: Fix an Incorrect Result in Real Time
+## Task 3: Notice the Governance Guardrail
 
-1. Identify the **Rank #1 result** (e.g., *Top Viewed Articles - All Projects*).
+Before fixing the result, look at the search-space version selector near the top of the page.
+
+If the current version is **Published**, feedback and editing controls are disabled. That is intentional.
+
+Published versions represent the current trusted behavior. You do not casually edit production behavior because someone typed "MoM" with confidence.
+
+## Task 4: Clone the Published Version to a Draft
+
+1. In the left navigation menu, click **Search Spaces**.
+2. Open the `trusted_search` search space.
+3. Find the published version.
+4. Open the actions menu for the published version.
+5. Click **Clone**.
+6. Enter a label such as:
+
+    ```text
+    LiveLab Draft
+    ```
+
+7. Click **Create**.
+
+![Search Space Versions Screen](images/navigate-to-search-space.png)
+
+You now have a draft version. This is where experts safely make improvements before promoting changes.
+
+## Task 5: Rerun the Query on the Draft Version
+
+1. Return to **Query Tester**.
+2. In the search-space version selector, choose your draft version.
+3. Run the same query again:
+
+    ```text
+    Total page views MoM all projects
+    ```
+
+4. Confirm that the bad result is still visible near the top.
+
+You have reproduced the problem in a safe workspace. That matters.
+
+## Task 6: Correct the Ranking
+
+1. Find the incorrect result:
+
+    ```text
+    Top Viewed Articles - All Projects
+    ```
+
 2. Click **Downvote**.
-3. Re-run the same query.
+3. Run the exact same query again:
 
-### Observe:
+    ```text
+    Total page views MoM all projects
+    ```
 
-* The correct result (**Total Page Views - All Projects**) moves to Rank #1
-* The incorrect result is demoted
+### Observe
+
+The correct result moves to Rank #1:
+
+```text
+Total Page Views - All Projects
+```
 
 ![Updated Ranking results](images/updated-ranking.png)
 
-You just corrected the system **instantly**.
-No retraining, no redeployment, no prompt tuning.
+This is the aha moment.
 
----
+You just changed the system behavior with expert feedback. The model was not retrained. The app was not redeployed. Nobody had to argue with a prompt for 45 minutes.
 
-## Task 5: Teach the System a New Phrase
+## Task 7: Inspect the Structured Inputs
 
-Now you will expand the system’s understanding.
+Look under the Rank #1 result.
 
-1. Navigate to **Search Targets**.
+You should see target inputs such as:
 
-2. Search for and open:
+```text
+Frequency: monthly
+Period: 2-year
+```
 
-    ```
+The system did not generate an answer paragraph. It selected a trusted action and extracted controlled values that the application can pass to a report.
+
+That is the difference:
+
+* A chatbot says something.
+* Trusted Answer Search does something your application already trusts.
+
+## Task 8: Teach the System a New Phrase
+
+Now you will expand the system's vocabulary.
+
+1. In the left navigation menu, click **Search Targets**.
+2. Search for:
+
+    ```text
     Total Page Views - All Projects
     ```
 
-3. Add a new description:
+3. Open the target.
+4. In the **Descriptions** region, click **Add Description**.
+5. Enter:
 
-    ```
+    ```text
     Wikimedia traffic trend over time
     ```
 
-4. Save your changes.
+6. Click **Add**.
 
-5. Go back to **Query Tester** and run:
+## Task 9: Test the New Phrase
 
-    ```
+1. Return to **Query Tester**.
+2. Confirm your draft version is still selected.
+3. Run:
+
+    ```text
     Wikimedia traffic trend
     ```
 
-### Observe:
+### Observe
 
-* The system now maps this new phrasing correctly
+The top result should be:
 
-You just extended the system’s language understanding using **curation—not training**
+```text
+Total Page Views - All Projects
+```
 
----
+The matched description should include:
 
-## Task 6: Add a New Target Value Set
+```text
+Wikimedia traffic trend over time
+```
 
-Now you will introduce new functionality.
+You just taught the search system a new business phrase with curation, not training.
 
-1. Navigate to **Target Value Sets**
+## Task 10: Run a Deterministic Search
 
-2. Click **Create Target Value Set**
+Run this query twice:
 
-3. Define a new target:
+```text
+Show total page views for Wikimedia Commons over the last 2 years
+```
 
-   * **Name:** PLOT
-   * Add descriptions:
+### Observe
 
-    ```
-    The type of chart that should be rendered: table, bar, map, line
-    ```
-   * For each of these 3 options, type the name into **Value**, then click **+Add**:
+The Rank #1 result should be the same both times:
 
-    ```
-    table
-    bar
-    line
-    ```
+```text
+Total Page Views - Wikimedia Commons
+```
 
-  * Than add a 4th value *map* , with the **Synonyms** *globe, choropleth*
-  * Set the **Default Value** to *table*.
+This is not a roulette wheel wearing a user interface. For enterprise application navigation, repeatability is a feature.
 
-4. Save
+## Summary
 
-5. Go to **Search Targets**, search for **Page Views by Country Map - Wikidata**, then click into it.
+In this lab, you:
 
-7. Click **Edit Target Action**, and replace the URL/SQL with
+* Found an incorrect top result.
+* Created a governed draft version.
+* Corrected ranking with expert feedback.
+* Added a new trusted description.
+* Confirmed deterministic behavior.
 
-    ```
-    https://stats.wikimedia.org/#/wikidata.org/reading/page-views-by-country/normal|:plot|last-month|~total|monthly
-    ```
+The key takeaway:
 
-8. Save
+```text
+Trusted Answer Search lets application experts improve natural-language search
+inside a governed feedback loop, without retraining or redeploying the app.
+```
 
-9. Test. Go to **Query Tester** and run:
-
-    ```
-    page views by country
-    ```
-
-10. Note that a new **Target Input** appears: ``Plot: table``
-
-11. Now search:
-
-    ```
-    page views by country map
-    ```
-
-12. Notice that the new Target Input is now ``Plot: map``
-
-### Observe:
-
-* The system routes to your new report
-
-You have **added a new capability instantly**
-
----
-
-## Task 7: Understand Impact of Changes (Regression Awareness)
-
-1. Modify an existing description (make it more generic, e.g. “page views trend”).
-2. Re-run:
-
-    ```
-    Show total page views for all Wikimedia projects over the last 2 years
-    ```
-
-### Observe:
-
-* Rankings may shift depending on similarity
-
-This is why Trusted Answer Search provides:
-
-* Draft versions
-* Controlled promotion
-* Visibility into changes
-
----
-
-You have now experienced how Trusted Answer Search enables:
-
-* Deterministic results
-* Real-time correction
-* Controlled evolution
-
-You may now **proceed to the next lab**.
-
----
+You may now **proceed to Lab 5**.
 
 ## Acknowledgements
 
-**Authors** 
+**Authors**
 
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - April, 2026
+**Last Updated Date** - May, 2026
