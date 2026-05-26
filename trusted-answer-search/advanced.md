@@ -1,177 +1,224 @@
-# **Lab 4: Advanced Capabilities**
+# Lab 5: Prove Quality with Metrics and Regression Tests
 
 ## Introduction
 
-In this lab, you will explore how Trusted Answer Search interprets **structured intent from natural language**, using real Wikimedia analytics queries.
+In Lab 4, you improved search behavior. In this lab, you will inspect the evidence.
 
-You will see how the system extracts parameters like:
+Enterprise developers do not just need a cool demo. They need to know what changed, whether it helped, whether it broke something else, and whether the application can explain the decision.
 
-* Time ranges
-* Frequency (daily/monthly)
-* Language and project
+That is where metrics, test runs, search history, and structured inputs become important.
 
-and converts them into structured inputs for reports.
-
-**Estimated time:** 15 minutes.
+**Estimated time:** 20 minutes
 
 ### Objectives
 
-* Understand parameter extraction from natural language queries.
-* Observe how structured values are passed to reports.
-* Explore current limitations and upcoming enhancements.
-* See how this differs from chatbot-style systems.
+In this lab, you will:
 
----
+* Run a regression test suite.
+* Review Top-1, Top-3, and Top-5 quality metrics.
+* Inspect individual test results.
+* Explore structured input extraction.
+* Review search history and feedback.
+* Identify current limits that should be handled deliberately.
 
-## Task 1: Parameter Extraction Across Projects
+### Prerequisites
 
-1. Run:
+This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Search Admin app.
 
-    ```
-    How has French Wiktionary readership changed by month over the last year?
-    ```
+## Task 1: Run the Regression Test Suite
 
-This maps to: 
+1. In the left navigation menu, click **Test Runs**.
+2. Click **Run Tests**.
+3. Select the available query sources, such as:
 
-### Observe:
+    * Sample queries.
+    * Uploaded test queries.
+    * Past user queries, if available.
 
-Extracted parameters:
+4. Click **Run**.
 
-* `language = fr`
-* `project = wiktionary`
-* `period = 1-year`
-* `frequency = monthly`
+![Upload Test Runs](images/upload-test-runs.png)
 
-The system understands:
+The test run may take a minute. This is the system replaying known questions and checking whether the expected target still appears in the ranked results.
 
-* “French” → `fr`
-* “Wiktionary” → project
-* “last year” → `1-year`
+### Observe
 
----
+When the run completes, review:
 
-## Task 2: Parameter Extraction Across Different Dimensions
+* Total queries evaluated.
+* Successful queries.
+* Top-1 accuracy.
+* Top-3 accuracy.
+* Top-5 accuracy.
+
+In the tested environment, the run evaluated more than 800 queries and produced:
+
+```text
+Top-1: 99.88%
+Top-3: 100%
+Top-5: 100%
+```
+
+That is the kind of number an application team can discuss. It is not a vibe. It is a measurable system.
+
+## Task 2: Inspect an Individual Test Result
+
+1. Open a completed test run.
+2. Review the query result rows.
+3. Pick one query and compare:
+
+    * Query text.
+    * Ground truth target.
+    * Matched search target.
+    * Rank.
+    * Pass or fail status.
+    * Target input mismatches, if any.
+
+This is useful when a search result regresses. Instead of guessing why users are unhappy, you can inspect exactly which query moved and which target won.
+
+## Task 3: Explore Structured Intent
+
+Go to **Query Tester** and run:
+
+```text
+How has French Wiktionary readership changed by month over the last year?
+```
+
+### Observe
+
+The top result should be a total page views trend target, with structured values similar to:
+
+```text
+Language: fr
+Project: wiktionary
+Period: 1-year
+Frequency: monthly
+```
+
+The user did not type `fr`, `wiktionary`, `1-year`, or `monthly` as system codes. Trusted Answer Search mapped human phrasing to controlled values.
+
+That is a big deal for enterprise apps because controlled values are what applications can actually execute safely.
+
+## Task 4: Explore Synonyms and Value Mapping
 
 Run:
 
-```
-Show daily unique-device counts for Japanese Wikibooks over the last month
-```
-
-### Observe:
-
-* `language = ja`
-* `project = wikibooks`
-* `period = 1-month`
-* `frequency = daily`
-
-This shows:
-
-* Multi-parameter extraction working together
-* Structured interpretation, not text generation
-
----
-
-## Task 3: Explore Synonyms and Value Mapping
-
-Run:
-
-```
+```text
 Show page views for all Wikimedia projects over the past 24 months
 ```
 
-### Observe:
+### Observe
 
-* “past 24 months” → `period = 2-year` 
+The phrase:
 
-The system maps synonyms deterministically using value sets
+```text
+past 24 months
+```
 
----
+maps to the controlled period value:
 
-## Task 4: Understand Current Limitations
+```text
+2-year
+```
+
+This is not magic. It is governed vocabulary. Application experts decide which phrases map to which values.
+
+## Task 5: See a Current Limit
 
 Run:
 
-```
+```text
 Show page views for all Wikimedia projects this month
 ```
 
-### Observe:
+### Observe
 
-* “this month” may not resolve into exact dates
+The system may not resolve `this month` into an exact current date range. It may fall back to the default period behavior.
 
-Today:
+This is useful to show honestly. Trusted systems should make limits visible. The goal is not to pretend the system knows everything. The goal is to make behavior inspectable and improvable.
 
-* Works with predefined value sets
+Future enhancements can use named entity recognition or date normalization to map phrases like:
 
-Coming soon:
-
-* LLM-powered **Named Entity Recognition (NER)**
-
-  * “this month” → exact date range
-  * “last quarter” → computed values
-
----
-
-## Task 5: Deterministic Behavior
-
-Run the same query multiple times:
-
-```
-Show total page views for Wikimedia Commons over the last 2 years
+```text
+this month
+last quarter
+last fiscal year
 ```
 
-### Observe:
+to exact validated values.
 
-It's the same result every time:
+## Task 6: Review Search History
 
-* No randomness
-* No hallucination
-* No variation
+1. In the left navigation menu, click **Search History**.
+2. Review recent queries.
 
----
+Search History shows:
 
-## Task 6: Structured Output (Conceptual)
+* Query text.
+* User.
+* Rank #1 target.
+* Feedback.
+* Timestamp.
 
-Behind the scenes, this query:
+This is the product manager's favorite page and the developer's early-warning system. It tells you what users actually asked, not what the design document hoped they would ask.
 
-```
-Show total page views for Wikimedia Commons over the last 2 years
-```
+## Task 7: Review Additional Feedback
 
-Maps to a structured action like:
+1. In the left navigation menu, click **Additional Feedback**.
+2. Review any text feedback captured from users.
 
-```json
-{
-  "target": "Total Page Views - Wikimedia Commons",
-  "params": {
-    "period": "2-year",
-    "frequency": "monthly"
-  }
-}
-```
+This helps teams find phrases, expectations, or complaints that should become new descriptions, sample queries, value synonyms, or test cases.
 
-The application then executes:
+## Task 8: Connect the Pieces
 
-* A report URL
-* With validated parameters
+Trusted Answer Search is powerful because these features reinforce each other.
 
----
+| Feature | What You Saw | Why It Matters |
+| --- | --- | --- |
+| Search targets | Trusted report/action catalog | The app controls what can be returned. |
+| Value sets | Language, project, period, frequency | User text becomes validated application inputs. |
+| Draft versions | Safe editing workflow | Experts can improve behavior without changing production immediately. |
+| Feedback | Downvote and correction loop | Bad rankings can be fixed directly. |
+| Descriptions | New phrase matching | Business language can evolve without retraining. |
+| Test runs | Top-1/Top-3/Top-5 metrics | Changes can be measured before promotion. |
+| Search history | Real user queries | Teams can improve based on actual usage. |
+| Additional feedback | User comments | Qualitative feedback becomes curation input. |
+
+## Task 9: What to Do Next in a Real Application
+
+For your own enterprise app, the same pattern applies:
+
+1. List the trusted actions users should be able to reach.
+2. Add descriptions and sample queries for each action.
+3. Define controlled value sets for parameters.
+4. Launch search in a portal, app page, or widget.
+5. Review user behavior.
+6. Fix weak rankings in a draft.
+7. Run regression tests.
+8. Promote the version when quality is acceptable.
+
+This is how search becomes a managed application feature instead of a mysterious text box.
 
 ## Summary
 
-In this lab, you observed that Trusted Answer Search:
+In this lab, you:
 
-* Extracts structured meaning from natural language
-* Uses controlled vocabularies and mappings
-* Produces deterministic, repeatable outcomes
-* Avoids the unpredictability of generated responses
+* Ran a test suite.
+* Reviewed quality metrics.
+* Inspected structured input extraction.
+* Explored synonym mapping.
+* Saw a current limitation.
+* Reviewed search history and feedback.
 
----
+You have now completed the Trusted Answer Search LiveLab.
 
-You have successfully completed the **Trusted Answer Search Live Lab**.
+The closing idea:
 
----
+```text
+Trusted Answer Search gives users natural language,
+developers controlled application actions,
+and experts a measurable way to improve the system over time.
+```
 
 ## Acknowledgements
 
@@ -179,4 +226,4 @@ You have successfully completed the **Trusted Answer Search Live Lab**.
 
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - April, 2026
+**Last Updated Date** - May, 2026
