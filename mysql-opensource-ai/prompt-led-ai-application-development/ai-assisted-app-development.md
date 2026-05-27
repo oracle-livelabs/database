@@ -272,14 +272,14 @@ This significantly improves generated code quality and reduces integration error
 
 ## Task 4: Initialize the Database
 
-## Run SQL Scripts in HeatWave SQL Editor
+Run SQL Scripts in HeatWave SQL Editor
 
 After generating the application:
 
-1. Open the HeatWave SQL Editor
+1. Open the HeatWave SQL Editor in VS code using the same steps as in Lab1, Task 4: Connect MySQL HeatWave Using Visual Studio Code
 2. Run the generated:
-   - CREATE TABLE scripts
-   - Seed data scripts
+    - CREATE TABLE scripts
+    - Seed data scripts
 3. Verify all tables and vector columns are created successfully
 
 > **Important:** Database initialization must be performed manually because the HeatWave database is deployed inside a private network.

@@ -138,9 +138,12 @@ In this task, you will validate connectivity to the VM
 
     1. Navigate to:
       - **Compute → Instances**
-    2. Select your VM instance.
-    3. Copy the **Public IP Address**.
+    2. Select your compartment and region.
+    3. Select your VM isntance
+    4. Copy the **Public IP Address**.
 
+
+    ![Copy Public IP address](images/oci_vm.png "copy the VM's Public IP address and username")
 
 
 2. Locate SSH Private Key
@@ -148,35 +151,70 @@ In this task, you will validate connectivity to the VM
     Extract the downloaded infrastructure ZIP package and locate the `.key` file.
 
 
+3. For MacOS/Linux users.
+    1. Open Terminal 
 
-3. Set Key Permissions (Linux/macOS)
+    2. Set Key Permissions (Linux/macOS)
 
-    ```bash
-    chmod 400 ~/Downloads/workshop-key.key
-    ```
+        ```bash
+        chmod 400 ~/Downloads/workshop-key.key
+        ```
 
+    3. Connect to the VM
 
-4. Connect to the VM
+        ```bash
+        ssh -i ~/Downloads/workshop-key.key opc@<PUBLIC_IP>
+        ```
 
-    ```bash
-    ssh -i ~/Downloads/workshop-key.key opc@<PUBLIC_IP>
-    ```
+        Example:
 
-    Example:
+        ```bash
+        ssh -i ~/Downloads/workshop-key.key opc@129.154.xx.xx
+        ```
 
-    ```bash
-    ssh -i ~/Downloads/workshop-key.key opc@129.154.xx.xx
-    ```
+    4. Verify SSH Access
 
+        Successful connection should display:
 
+        ```bash
+        [opc@workshop-vm ~]$
+        ```
 
-5. Verify SSH Access
+4. For Windows users.
+    1. Open PowerShell
 
-Successful connection should display:
+    2. Navigate to the Folder Containing the SSH Key
 
-```bash
-[opc@workshop-vm ~]$
-```
+        Example:
+
+        ```powershell
+        cd C:\Users\YourUsername\Downloads
+        ```
+
+    3. Run:
+
+        ```powershell
+        ssh -i mykey.pem opc@<VM_PUBLIC_IP>
+        ```
+
+    4. Accept the Fingerprint
+
+        The first time you connect, you may see:
+        ```text
+        Are you sure you want to continue connecting (yes/no)?
+        ```
+
+        Type:
+        ```text
+        yes
+        ```    
+    5. Verify SSH Access
+
+        Successful connection should display:
+
+        ```bash
+        [opc@workshop-vm ~]$
+        ```
 
 > Note: Default Oracle Linux username is `opc`.
 
@@ -189,9 +227,11 @@ Retrieve Database Private IP
 
 1. Navigate to:
     - **Databases → MySQL HeatWave → DB Systems**
-2. Select the deployed DB System.
-3. Copy the **Private IP Address**.
+2. Select your compartment and region.
+3. Select your DB system.
+4. Copy the **Private IP Address**.
 
+![Copy DB Private IP](images/heatwave.png "Copy Private IP of DB system")
 
 
 ## Task 4: Connect MySQL HeatWave Using Visual Studio Code
