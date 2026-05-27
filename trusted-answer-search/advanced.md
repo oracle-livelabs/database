@@ -36,14 +36,14 @@ In Lab 4, the user left feedback in the published portal. Maya now checks whethe
 1. In the Admin app, click **Dashboard**.
 2. Review the feedback regions.
 
-![Dashboard Metrics](images/dashboard-metrics.jpg)
+    ![Dashboard Metrics](images/dashboard-metrics.jpg)
 
-Depending on recent activity, the dashboard can show signals such as:
+    Depending on recent activity, the dashboard can show signals such as:
 
-* Feedback metrics.
-* Top user-upvoted queries.
-* Top user-downvoted queries.
-* Trending queries.
+    * Feedback metrics.
+    * Top user-upvoted queries.
+    * Top user-downvoted queries.
+    * Trending queries.
 
 3. If the feedback does not appear immediately, refresh the page.
 4. In the left navigation menu, click **Search History**.
