@@ -868,7 +868,8 @@ Prerequisites:
 
  4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
 
-    ![Create a new terminal tab](./images/new-terminal.gif " ")
+    <!-- TODO: Replace this clip. It shows the old ./dba.sh command; the replacement should show dba.sh. -->
+    <!-- ![Create a new terminal tab](./images/new-terminal.gif " ") -->
 
     Execute these commands in the new terminal tab.
 
@@ -883,7 +884,7 @@ Prerequisites:
     ```
 
     ```bash
-    <copy>./write-load.sh</copy>
+    <copy>bash write-load.sh</copy>
     ```
 
     ![Screenshot of terminal output](./images/task7.4-writeload-2024.png " ")
@@ -1213,7 +1214,7 @@ The tasks you will do in this step are:
 1. In the **other terminal tab** that was opened in Lab Task 9, make sure the write-load script is still running. If not, you may need to restart the shell script.
 
     ```
-    <copy>./write-load.sh </copy>
+    <copy>bash write-load.sh </copy>
     ```
 
 2. Connect to the container **CDB2** and update the LOCAL_LISTENER parameter to point to the listener used by **CDB1**.
