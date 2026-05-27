@@ -5,11 +5,14 @@ This is a series of 12 hands-on labs designed to familiarize you with the Applic
 
 Estimated Time: 1 hour
 
+### Objectives
+- Create and manage application containers and application PDBs.
+- Explore application upgrades, patches, container queries, and container maps.
 
 ### Prerequisites
 This lab assumes you have:
 - You have completed:
-    - Lab: Login to the Oracle Database 23ai server using JupyterLab
+    - Lab: Login to the Oracle Database 26ai server using JupyterLab
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
@@ -255,7 +258,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
 
     ![Screenshot of terminal output](./images/task1.5-syncseed.png " ")
 
-6.  Provision separate application databases for each of the 4 stores.
+6. Provision separate application databases for each of the 4 stores.
 
     ```
     <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
@@ -294,7 +297,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ```
 
     ```
-    <copy>cd /home/oracle/labs/workshops/multitenant</copy>
+    <copy>cd /home/oracle/labs/multitenant</copy>
     ```
 
     ```
@@ -1526,7 +1529,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
+    ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
 
     ```
     <copy>
