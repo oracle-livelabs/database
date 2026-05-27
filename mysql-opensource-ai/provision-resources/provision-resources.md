@@ -294,9 +294,9 @@ You should receive the current database server timestamp.
 
 ### Final Validation Checklist
 
-- [x] VM accessible through SSH
-- [x] MySQL HeatWave reachable from VS Code
-- [x] Database query execution successful
+-  VM accessible through SSH
+-  MySQL HeatWave reachable from VS Code
+-  Database query execution successful
 
 
 ## Task 5: Configure OCI Generative AI with Cline in Visual Studio Code
@@ -378,7 +378,7 @@ Configure OCI Generative AI integration with the Cline extension inside Visual S
 
     ![Cline settings](images/clinesetup.png "Cline settings")
 
-    > **Note:** If you want to configure other models insteade of xai.grok-4 follow the below steps.
+    > **Note:** The above Model ID is for xai.grok-4, If you want to configure other models insteade of xai.grok-4 follow the below steps.
 
 5. Navigate to:
 
@@ -390,7 +390,7 @@ Configure OCI Generative AI integration with the Cline extension inside Visual S
     - Compartment: Your workshop compartment
     - Region: Chicago
 
-    3. Select **Playground. -> chat**
+    3. Select **Playground -> chat**
     4. Copy model ocid of your prefered model
 
     ![Navigate to playground](images/genaikey6.png "navigate to playground and chat")

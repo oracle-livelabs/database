@@ -276,7 +276,7 @@ Run SQL Scripts in HeatWave SQL Editor
 
 After generating the application:
 
-1. Open the HeatWave SQL Editor in VS code using the same steps as in **Lab 1, Task 4: Connect MySQL HeatWave Using Visual Studio Code**
+1. Open the mysql HeatWave SQL Editor in VS code.
 2. Run the generated:
     - CREATE TABLE scripts
     - Seed data scripts
@@ -314,7 +314,7 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 
 ## Task 6: Environment Setup and Application Execution
 
-1. Create a Python Virtual Environment
+1. Create a Python Virtual Environment OR ask code assist to do it
 
     ```bash
     python3 -m venv venv
@@ -346,13 +346,15 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 
 Use the following command to securely connect your local machine to the private HeatWave database:
 
+1. open Terminal and run the following
+
 ```bash
 ssh -i &lt;private_key&gt; -L 3306:&lt;db_private_ip&gt;:3306 opc@&lt;vm_public_ip&gt;
 ```
 
 Replace:
 
-- `<private_key>` with your SSH private key
+- `<private_key>` with your SSH private key file path
 - `<db_private_ip>` with the HeatWave private IP
 - `<vm_public_ip>` with the Compute VM public IP
 
