@@ -5,11 +5,15 @@ In this lab you will perform many multitenant basic tasks. You will create a plu
 
 Estimated Time: 45 minutes
 
+### Objectives
+- Create, clone, unplug, plug in, and drop pluggable databases.
+- Run hot clone, refresh, snapshot copy, and relocation operations.
+
 ### Prerequisites
 
 This lab assumes you have:
 - You have completed:
-    - Lab: Login to the Oracle Database 23ai server using JupyterLab
+    - Lab: Login to the Oracle Database 26ai server using JupyterLab
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
@@ -75,15 +79,15 @@ Great! Now you have you set common password for your sys and system users which 
 
 First, you will create and explore a new pluggable database **PDB2** in the container database **CDB1**
 
-<!-- 1. All scripts for this lab are stored in the `/home/oracle/labs/workshops/multitenant` folder and are run as the oracle user. Let's navigate to the path now.
+<!-- 1. All scripts for this lab are stored in the `/home/oracle/labs/multitenant` folder and are run as the oracle user. Let's navigate to the path now.
 
     ```
     <copy>
-    cd /home/oracle/labs/workshops/multitenant
+    cd /home/oracle/labs/multitenant
     </copy>
     ``` -->
 
-1.  Connect to **CDB1** using SQLcl.
+1. Connect to **CDB1** using SQLcl.
 
     ```bash
     <copy>
@@ -130,7 +134,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
+    ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
 
 3. Create a pluggable database **PDB2**.
@@ -173,7 +177,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ````
 
-   ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
+    ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
 
 6. Connect as **PDB_ADMIN** to **PDB2**.
 
@@ -191,7 +195,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
+    ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
 
 8. Change back to **SYS** in the container database **CDB1** and show the tablespaces and datafiles created.
 
@@ -256,7 +260,7 @@ The task you will do in this step is:
     show pdbs</copy>
     ```
 
-   ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
+    ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
 
 
 3. Create a pluggable database **PDB3** from the read only database **PDB2**.
@@ -269,7 +273,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3-2024.png " ")
+    ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3-2024.png " ")
 
 4. Change **PDB2** back to read write.
 
@@ -279,7 +283,7 @@ The task you will do in this step is:
     ```
 
 
-   ![Screenshot of terminal output](./images/task2.4-pdb2readwrite-2024.png " ")
+    ![Screenshot of terminal output](./images/task2.4-pdb2readwrite-2024.png " ")
 
 5. Connect to **PDB2** and show the table **MY_TAB**, then run the same SQL against **PDB3** to demonstrate that this is an exact copy of the source PDB.
 
@@ -350,7 +354,7 @@ The task you will do in this step is:
     ```
 
 
-   ![Screenshot of terminal output](./images/task3.2-unplugpdb3-2024.png " ")
+    ![Screenshot of terminal output](./images/task3.2-unplugpdb3-2024.png " ")
 
 3. Remove **PDB3** from **CDB1** but keep the PDB datafiles for future use.
 
@@ -360,7 +364,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
+    ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
 
 4. Show the datafiles in **CDB1** and note that files for PDB3 are no longer part of the container.
     ```
@@ -866,24 +870,25 @@ Prerequisites:
 
     ![Screenshot of terminal output](./images/task7.3-soetable.png " ")
 
- 4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/workshops/multitenant* and execute *create-load.sh*. Keep this window open and running throughout for the rest of this lab.
+4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
 
-    ![Create a new terminal tab](./images/new-terminal.gif " ")
+    <!-- TODO: Replace this clip. It shows the old ./dba.sh command; the replacement should show dba.sh. -->
+    <!-- ![Create a new terminal tab](./images/new-terminal.gif " ") -->
 
     Execute these commands in the new terminal tab.
 
     ```bash
-    <copy>./dba.sh</copy>
+    <copy>dba.sh</copy>
     ```
 
     ```bash
     <copy>
-    cd /home/oracle/labs/workshops/multitenant
+    cd /home/oracle/labs/multitenant
     </copy>
     ```
 
     ```bash
-    <copy>. create-load.sh</copy>
+    <copy>bash write-load.sh</copy>
     ```
 
     ![Screenshot of terminal output](./images/task7.4-writeload-2024.png " ")
@@ -950,7 +955,7 @@ Prerequisites:
 
     ![Screenshot of terminal output](./images/task7.8-dropoedev.png " ")
 
-9.  Leave the **OE** pluggable database open with the load running against it for the rest of the steps in this lab.
+9. Leave the **OE** pluggable database open with the load running against it for the rest of the steps in this lab.
 
 You can see that the clone of the pluggable database worked without having to stop the load on the source database. In the next step, you will look at how to refresh a clone.
 
@@ -1213,7 +1218,7 @@ The tasks you will do in this step are:
 1. In the **other terminal tab** that was opened in Lab Task 9, make sure the write-load script is still running. If not, you may need to restart the shell script.
 
     ```
-    <copy>. create-load.sh </copy>
+    <copy>bash write-load.sh </copy>
     ```
 
 2. Connect to the container **CDB2** and update the LOCAL_LISTENER parameter to point to the listener used by **CDB1**.
@@ -1253,7 +1258,7 @@ The tasks you will do in this step are:
 
     ![Screenshot of terminal output](./images/task10.4-checkcdb1-2024.png " ")
 
-4.  Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).  
+4. Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).
 
     The load program isn't needed anymore, so CTRL-C out of that program and exit from the second terminal window.
 
@@ -1269,7 +1274,7 @@ The tasks you will do in this step are:
 
     ![Screenshot of terminal output](./images/task10.6-resetlistener.png " ")
 
-<!-- ## Task 13: Lab cleanup
+    <!-- ## Task 13: Lab cleanup
 
 1. Exit from the SQL command prompt and reset the container databases back to their original ports. If any errors about dropping databases appear, you can ignore them.
 
