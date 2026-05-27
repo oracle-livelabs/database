@@ -80,27 +80,32 @@ In this task, you will provision the cloud infrastructure required for the works
     ![add details](images/lab1image5.png "add details")
 
 
-6. Save Stack
+6. Create the Stack
 
-    Click **Save Changes**.
+    Click **Create**.
 
-    ![save stack](images/lab1image6.png "save stack")
+    ![create the stack](images/lab1image6.png "create the stack")
 
 
 7. Run Terraform Plan
 
-    1. Click **Plan**
-    2. Wait for validation and resource planning to complete successfully.
+    1. Open created stack.
+    2. Click on **Actions** and **Plan**
+    3. Check the plan name and click on **Plan**
+    4. Wait for validation and resource planning to complete successfully.
 
     ![run Plan](images/lab1image7.png "run Plan")
     ![run plan](images/lab1image8.png "run plan")
 
 
 8. Apply the Stack
-    ![apply plan](images/lab1image9.png "apply plan")
 
-    1. Once the plan succeeds, click **Apply**
-    2. Wait for the infrastructure deployment to complete.
+    1. Once the plan succeeds, click  on **Actions** and **Apply**
+    2. Check the apply job name and under **apply job plan resolution**, select the **latest successfull plan** and click on **Apply**
+    3. Wait for the infrastructure deployment to complete.
+
+    ![apply plan](images/lab1image9.png "apply plan")
+    ![apply plan](images/lab1image11.png "apply plan")
 
     Resources created include:
     - Virtual Cloud Network (VCN)
@@ -378,7 +383,7 @@ Configure OCI Generative AI integration with the Cline extension inside Visual S
 
     ![Cline settings](images/clinesetup.png "Cline settings")
 
-    > **Note:** The above Model ID is for xai.grok-4, If you want to configure other models insteade of xai.grok-4 follow the below steps.
+    > **Note:** The above Model ID is for xai.grok-4, If you want to configure other models instead of xai.grok-4 follow the below steps.
 
 5. Navigate to:
 
