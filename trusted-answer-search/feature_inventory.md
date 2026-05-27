@@ -14,6 +14,7 @@ These are the most important, differentiated Trusted Answer Search features. The
 | Structured input extraction | Human language becomes controlled inputs such as language, project, period, and frequency. | Lab 4 |
 | Controlled value sets and synonyms | Enterprise-safe vocabulary mapping, such as `past 24 months` to `2-year`. | Lab 4 |
 | Executable target actions | TAS returns an application action, such as a URL or SQL-backed report, not just a label. | Lab 4 |
+| Portal user feedback | End-user upvotes/downvotes become admin-visible operational signals. | Lab 4 / Lab 5 |
 | Draft vs published governance | Published behavior is protected; experts clone to draft before changing search behavior. | Lab 4 |
 | Feedback correction loop | Downvote a bad result, rerun the query, and see the correct result move to Rank #1. | Lab 4 |
 | Deterministic search | The same query against the same version returns stable behavior. | Lab 4 |
@@ -66,6 +67,8 @@ These are real features, but they are lower priority for the workshop story.
 | Run a natural-language query | Yes | Lab 4 |
 | Inspect target inputs | Yes | Lab 4 |
 | Open an executable target action | Yes | Lab 4 |
+| Leave portal user feedback | Yes | Lab 4 |
+| Review portal feedback in Admin | Yes | Lab 5 |
 | Clone published version to draft | Yes | Lab 4 |
 | Published-version editing guardrail | Yes | Lab 4 |
 | Downvote a bad result | Yes | Lab 4 |

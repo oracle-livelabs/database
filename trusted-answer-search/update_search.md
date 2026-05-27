@@ -21,6 +21,7 @@ In this lab, you will:
 * Search the published Wikimedia portal using natural language.
 * See a natural-language question map to a trusted report target.
 * Inspect extracted target inputs such as language, project, period, and frequency.
+* Leave end-user feedback in the published portal.
 * Clone a published search-space version into a governed draft.
 * Correct a bad ranking with expert feedback.
 * Teach the system a new business phrase with a curated description.
@@ -149,7 +150,40 @@ Top Viewed Articles - All Projects
 
 The application has the right report, but the query is messy. `MoM` is shorthand. `All projects` is broad. This is exactly where enterprise search usually becomes frustrating: close, plausible, and still wrong.
 
-## Task 5: Create a Governed Draft
+## Task 5: Leave End-User Feedback
+
+Before Maya fixes anything as an administrator, she captures the user signal from the portal.
+
+1. Return to the **Published Wiki Search URL**.
+2. Search again:
+
+    ```text
+    <copy>
+    Total page views MoM all projects
+    </copy>
+    ```
+
+3. If the incorrect result appears near the top, click the thumbs-down icon for:
+
+    ```text
+    <copy>
+    Top Viewed Articles - All Projects
+    </copy>
+    ```
+
+4. If the expected result appears, click the thumbs-up icon for:
+
+    ```text
+    <copy>
+    Total Page Views - All Projects
+    </copy>
+    ```
+
+This does not require Maya to rebuild the app or retrain a model. The portal captured real user feedback that administrators can review.
+
+In Lab 5, you will see this same feedback show up in the Admin app.
+
+## Task 6: Create a Governed Draft
 
 Before Maya changes anything, she creates a draft.
 
@@ -178,7 +212,7 @@ The green-button environment starts with `trusted_search` already published. Tha
 
 You now have a safe workspace for changes. The published portal keeps using the trusted version while Maya experiments in the draft.
 
-## Task 6: Reproduce the Problem in the Draft
+## Task 7: Reproduce the Problem in the Draft
 
 1. In the left navigation menu, click **Query Tester**.
 2. In the search-space version selector, choose your draft version.
@@ -200,7 +234,7 @@ You now have a safe workspace for changes. The published portal keeps using the 
 
 This matters because the correction happens in a draft. You are not changing production behavior by clicking around.
 
-## Task 7: Correct the Ranking with Feedback
+## Task 8: Correct the Ranking with Feedback
 
 1. Find the incorrect result:
 
@@ -245,7 +279,7 @@ Period: 2-year
 </copy>
 ```
 
-## Task 8: Teach a New Business Phrase
+## Task 9: Teach a New Business Phrase
 
 Leadership does not always say "page views." Sometimes they say "traffic trend." Maya can teach the search space that business phrase directly.
 
@@ -270,7 +304,7 @@ Leadership does not always say "page views." Sometimes they say "traffic trend."
 
 6. Click **Add**.
 
-## Task 9: Test the New Phrase
+## Task 10: Test the New Phrase
 
 1. Return to **Query Tester**.
 2. Confirm your draft version is still selected.
@@ -302,7 +336,7 @@ Wikimedia traffic trend over time
 
 You taught the search system new application language with curation, not prompt engineering.
 
-## Task 10: Confirm Controlled Value Mapping
+## Task 11: Confirm Controlled Value Mapping
 
 Run:
 
@@ -340,7 +374,7 @@ Period: 2-year
 
 That mapping comes from a target value set. The user can speak naturally, but the application receives a valid value.
 
-## Task 11: Confirm Deterministic Search
+## Task 12: Confirm Deterministic Search
 
 Run this query twice:
 
@@ -368,6 +402,7 @@ In this lab, you:
 
 * Used a natural-language portal to reach a trusted Wikimedia report.
 * Saw target inputs extracted from normal user language.
+* Left user feedback in the published portal.
 * Created a governed draft from a published version.
 * Corrected a bad ranking with expert feedback.
 * Added a curated description for a new business phrase.

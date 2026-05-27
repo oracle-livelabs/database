@@ -14,6 +14,7 @@ This lab focuses on the deeper operational features that turn Trusted Answer Sea
 
 In this lab, you will:
 
+* See portal user feedback appear in the Admin app.
 * Run regression tests and review Top-1, Top-3, and Top-5 accuracy.
 * Inspect an individual test result.
 * Add a sample query as another form of expert evidence.
@@ -28,7 +29,37 @@ This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Sea
 
 > **Learn more:** For the underlying product model, see the Oracle Database documentation for [Trusted Answer Search overview](https://docs.oracle.com/en/database/oracle/oracle-database/26/otasc/trusted-answer-search-overview.html). The sections on target actions, target inputs, target value sets, feedback-aware relevance, and change management are especially relevant to this lab.
 
-## Task 1: Run the Regression Test Suite
+## Task 1: See Portal Feedback in Admin
+
+In Lab 4, the user left feedback in the published portal. Maya now checks whether that signal reached the admin experience.
+
+1. In the Admin app, click **Dashboard**.
+2. Review the feedback regions.
+
+![Dashboard Metrics](images/dashboard-metrics.jpg)
+
+Depending on recent activity, the dashboard can show signals such as:
+
+* Feedback metrics.
+* Top user-upvoted queries.
+* Top user-downvoted queries.
+* Trending queries.
+
+3. If the feedback does not appear immediately, refresh the page.
+4. In the left navigation menu, click **Search History**.
+5. Find the recent query:
+
+    ```text
+    <copy>
+    Total page views MoM all projects
+    </copy>
+    ```
+
+6. Review the feedback indicators for that query.
+
+This closes the first loop: users do not just search. Their feedback becomes an operational signal for the application team.
+
+## Task 2: Run the Regression Test Suite
 
 Maya fixed one query. Her team needs to know whether the draft is still safe.
 
@@ -52,7 +83,7 @@ Maya fixed one query. Her team needs to know whether the draft is still safe.
 
 The uploaded Wikimedia test file contains curated regression questions. Running with sample queries evaluates a much larger set generated from the search target sample queries. Either way, the system is replaying known questions and checking whether the expected target still appears in the ranked results.
 
-## Task 2: Review Search Quality Metrics
+## Task 3: Review Search Quality Metrics
 
 1. Click **View Past Runs**.
 2. Open or review the latest completed run.
@@ -91,7 +122,7 @@ Top-5 accuracy / P5: 100
 
 Exact values vary depending on whether you use uploaded questions, sample queries, past user queries, or a draft after making changes. The important pattern is that search quality is measurable.
 
-## Task 3: Inspect One Test Result
+## Task 4: Inspect One Test Result
 
 1. Open a completed test run.
 2. Review the query result rows.
@@ -106,7 +137,7 @@ Exact values vary depending on whether you use uploaded questions, sample querie
 
 This is how a team investigates regressions. Instead of arguing about whether search "feels better," you can inspect the query, the expected target, the returned target, and the rank.
 
-## Task 4: Add a Sample Query
+## Task 5: Add a Sample Query
 
 Descriptions explain what a target is. Sample queries show how users ask for it.
 
@@ -133,7 +164,7 @@ Descriptions explain what a target is. Sample queries show how users ask for it.
 
 Sample queries are another way application experts can teach the system without retraining a model.
 
-## Task 5: Inspect the Target Action
+## Task 6: Inspect the Target Action
 
 Maya's engineering lead now asks: "When the user clicks a result, what actually happens?"
 
@@ -162,7 +193,7 @@ Those inputs are resolved from target value sets. That is why `past 24 months` c
 
 Trusted Answer Search returns the target action metadata. The application decides how to execute it.
 
-## Task 6: Review Target Value Sets
+## Task 7: Review Target Value Sets
 
 1. In the left navigation menu, click **Target Value Sets**.
 2. Open the `period` value set.
@@ -187,7 +218,7 @@ Trusted Answer Search returns the target action metadata. The application decide
 
 This is controlled vocabulary. Users can say "past 24 months," but the application receives the canonical value `2-year`.
 
-## Task 7: Review Search History
+## Task 8: Review Search History
 
 1. In the left navigation menu, click **Search History**.
 2. Review recent queries.
@@ -202,14 +233,16 @@ Search History shows:
 
 This is where Maya's team learns what users actually asked, not what the design document hoped they would ask.
 
-## Task 8: Review Additional Feedback
+For the query you used in Lab 4, confirm that the portal feedback is visible as part of the search record.
+
+## Task 9: Review Additional Feedback
 
 1. In the left navigation menu, click **Additional Feedback**.
 2. Review any free-text feedback captured from users.
 
 Additional feedback is useful when users need more than an upvote or downvote. Their comments can become new descriptions, sample queries, synonyms, test questions, or new application targets.
 
-## Task 9: Review the Draft Before Publishing
+## Task 10: Review the Draft Before Publishing
 
 Before Maya promotes the draft, she checks what changed.
 
@@ -232,7 +265,7 @@ If the change list does not look right, do not publish yet. Delete the draft and
 
 ![Published Guardrail](images/published-guardrail.jpg)
 
-## Task 10: Publish the Improved Draft
+## Task 11: Publish the Improved Draft
 
 When the test run looks acceptable and the draft changes make sense, publish the draft.
 
@@ -250,7 +283,7 @@ When the test run looks acceptable and the draft changes make sense, publish the
 
 The portal now uses the improved published version.
 
-## Task 11: Check the Dashboard
+## Task 12: Check the Dashboard
 
 1. In the Admin app, click **Dashboard**.
 2. Review the available operational metrics.
@@ -266,7 +299,7 @@ Depending on recent activity, the dashboard can show signals such as:
 
 This is the operational view. Trusted search is not just a search box. It is a managed application feature.
 
-## Task 12: Know the Recovery Path
+## Task 13: Know the Recovery Path
 
 If a draft goes wrong, you do not need heroics.
 
@@ -281,6 +314,7 @@ The workflow is intentionally boring. Boring is good when production behavior is
 
 In this lab, you:
 
+* Saw portal user feedback appear in the Admin app.
 * Ran regression tests.
 * Reviewed Top-1, Top-3, and Top-5 accuracy.
 * Inspected an individual test result.
