@@ -2,9 +2,9 @@
 
 ## Introduction
 
-An ecommerce operations manager, customer service lead, order platform owner, or partner integration architect needs to understand an order from multiple angles. Retail teams often duplicate order headers, line items, customer data, fulfillment centers, shipment records, and API payloads across separate systems.
+Order data usually has more than one audience. Application teams want a document shape, operations teams need relational detail, and security teams need access rules that do not drift. This gets brittle when order headers, line items, customer data, fulfillment centers, shipment records, and API payloads are duplicated across systems.
 
-Oracle AI Database keeps the order record in one governed data platform while exposing it through the shape each workflow needs. Relational tables provide ACID transactions and operational SQL. JSON Relational Duality exposes the same order as an application-friendly document. In SQL Worksheet, you compare the JSON document view with relational rows and confirm that VPD access policy logic stays in the database.
+Oracle AI Database keeps the order record in one place while exposing it through the shape each workflow needs. Relational tables provide ACID transactions and operational SQL. JSON Relational Duality exposes the same order as an application-friendly document. Virtual Private Database, or VPD, adds row-level security by applying database policy logic to protected tables. In SQL Worksheet, you compare the JSON document view with relational rows and confirm that the access policy stays in the database.
 
 Estimated Time: 10 minutes
 
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
-    Application teams often want an order as a JSON document, while database teams need governed relational data. This query shows JSON Relational Duality exposing an application-ready document from the same trusted order data.
+    Application teams often want an order as a JSON document, while database teams need governed relational data. A **JSON Relational Duality view** lets both needs use the same source tables. This block reads `ORDERS_DV`, then uses `JSON_SERIALIZE` to display the JSON document in SQL Worksheet. `JSON_VALUE` in the `ORDER BY` reads the document `_id` value so the output is stable.
 
     ```sql
     <copy>
@@ -42,7 +42,7 @@ Estimated Time: 10 minutes
 
     *Figure 2: Use the eyeball icon in Query Result to open the full JSON document returned by the duality view.*
 
-4. Confirm that the expanded payload starts with the deterministic order document shown here. Seeing the full payload helps you connect the document shape to what an application would receive from the same governed order data.
+4. Confirm that the expanded payload starts with the fixed order document shown here. Seeing the full payload helps you connect the document shape to what an application would receive from the same governed order data.
 
     Expected output excerpt:
 
@@ -59,13 +59,12 @@ Estimated Time: 10 minutes
       "items" : [ ... ]
     }
     ```
-    {: title="Sample Order JSON Document Excerpt"}
 
 ## Task 2: Extract document fields with SQL/JSON
 
 1. Run this query against the same duality view.
 
-    JSON does not have to be a black box. SQL/JSON lets you extract specific fields from the document so analysts and applications can use document-shaped data while keeping SQL visibility. The query uses a fixed order ID so your result matches the worksheet output shown here.
+    JSON does not have to be a black box. `JSON_TABLE` turns values inside a JSON document into relational columns that SQL can filter, sort, and join. In this block, each `PATH` expression points to a field in the order document. The `$.items.size()` expression counts array elements, so you can see the number of order lines without leaving SQL.
 
     ```sql
     <copy>
@@ -91,19 +90,24 @@ Estimated Time: 10 minutes
     | Order | Status | Total | Items |
     | ---: | --- | ---: | ---: |
     | 138 | processing | 719.95 | 2 |
-    {: title="Order Fields from JSON Duality"}
+    {: title="Order JSON Fields"}
 
 2. JSON Duality helps application developers read order detail as a document without giving up SQL, constraints, and ACID transactions.
 
 ## Task 3: Compare the document with relational rows
 1. Use the live Unified Order Intelligence context from Figure 1 before you run the SQL.
 
-2. Run this relational query for order 1, the same deterministic order used in the document example.
+2. Run this relational query for order 1, the same fixed order used in the document example.
 
-    Comparing the relational rows with the document output proves that both views describe the same business order. That is the key value of duality: app-friendly JSON without losing relational correctness.
+    Comparing the relational rows with the document output shows how both views describe the same business order. The PL/SQL block first sets a seeded security context so the fixed order is visible under the workshop VPD policy. The SQL then joins the order header to its line items and aggregates the line totals. The matching totals show that the document view and relational rows stay aligned.
 
     ```sql
     <copy>
+    BEGIN
+      sc_security_ctx.set_user_context('admin_jess');
+    END;
+    /
+
     SELECT o.order_id AS "Order",
            o.order_status AS "Status",
            COUNT(oi.item_id) AS "Lines",
@@ -121,7 +125,7 @@ Estimated Time: 10 minutes
     | Order | Status | Lines | Line Total | Order Total |
     | ---: | --- | ---: | ---: | ---: |
     | 1 | confirmed | 4 | 917.93 | 917.93 |
-    {: title="Order Line Totals"}
+    {: title="Order Totals"}
 
 3. The document view and relational tables describe the same kind of business event. Retail teams get API-friendly JSON and database teams retain trustworthy relational evidence.
 
@@ -129,7 +133,7 @@ Estimated Time: 10 minutes
 
 1. Run this VPD policy component check.
 
-    Order and fulfillment data can be region-sensitive. This query starts from the two policies the workshop expects, then checks the database catalog and policy functions. Because the expected list drives the result, the worksheet will show a useful `Ready` or `Check setup` status instead of an empty result grid.
+    Order and fulfillment data can be region-sensitive. VPD protects that data by attaching a policy to a table or view. The policy calls a PL/SQL function that returns a predicate, which Oracle applies to SQL automatically. This block creates a small expected list, checks the policy attachments in `ALL_POLICIES`, checks the policy functions in `USER_OBJECTS`, and returns `Ready` when both parts are present.
 
     ```sql
     <copy>
@@ -171,13 +175,13 @@ Estimated Time: 10 minutes
     | --- | --- | --- | --- |
     | `FULFILLMENT_CENTERS` | `VPD_FC_REGION` | `LLUSER.VPD_FULFILLMENT_REGION` | Ready |
     | `ORDERS` | `VPD_ORDERS_REGION` | `LLUSER.VPD_ORDERS_REGION` | Ready |
-    {: title="VPD Policy Components for Retail Data"}
+    {: title="VPD Components"}
 
 2. VPD keeps regional order and fulfillment data governed in the database. The application can switch users, but the policy logic remains close to the protected data.
 
 3. Optional: if the workshop user owns the package, set a seeded admin context value.
 
-    VPD policies often depend on session context, such as the current user role or region. This optional call shows how the database can set that context before policy-protected queries run.
+    VPD policies often depend on session context, such as the current user role or region. A session context is a set of database values attached to your current connection. This optional PL/SQL block calls the workshop security package to set that context before policy-protected queries run. The application can switch context while the SQL remains unchanged.
 
     ```sql
     <copy>
@@ -193,9 +197,10 @@ Estimated Time: 10 minutes
     | Check | Result |
     | --- | --- |
     | Security context call | PL/SQL procedure successfully completed. |
-    {: title="Security Context Procedure Result"}
+    {: title="Security Context"}
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

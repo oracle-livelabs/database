@@ -30,7 +30,7 @@ In this workshop, we will only relay on the the terminal.
 
     ```
     <copy>
-    ./dba.sh
+    dba.sh
     </copy>
     ```
 
@@ -74,19 +74,19 @@ In this workshop, we will only relay on the the terminal.
 
 3. If you see questionable output(s), failure or down component(s), refer to the appendix section to restart the service accordingly
 
-<!-- ## Task 3: Initialize Database for Multitenant Use Cases
+    <!-- ## Task 3: Initialize Database for Multitenant Use Cases
 
 1. Your workshop environment comes preloaded with scripts you may need in part of the workshop. The instructions will describe which scripts you need to execute. For now, please note that the scripts are preloaded on the database server and can be found in the following path: 
 
     ```bash
-    /home/oracle/labs/workshops/multitenant
+    /home/oracle/labs/multitenant
     ```
 
     You can easily change to the directory by typing:
 
     ```bash
     <copy>
-    cd /home/oracle/labs/workshops/multitenant
+    cd /home/oracle/labs/multitenant
     </copy>
     ``` -->
 
