@@ -347,7 +347,7 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 Use the following command to securely connect your local machine to the private HeatWave database:
 
 ```bash
-ssh -i <private_key> -L 3306:<db_private_ip>:3306 opc@<vm_public_ip>
+ssh -i &lt;private_key&gt; -L 3306:&lt;db_private_ip&gt;:3306 opc@&lt;vm_public_ip&gt;
 ```
 
 Replace:
