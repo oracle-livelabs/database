@@ -276,7 +276,7 @@ Run SQL Scripts in HeatWave SQL Editor
 
 After generating the application:
 
-1. Open the HeatWave SQL Editor in VS code using the same steps as in Lab1, Task 4: Connect MySQL HeatWave Using Visual Studio Code
+1. Open the HeatWave SQL Editor in VS code using the same steps as in **Lab 1, Task 4: Connect MySQL HeatWave Using Visual Studio Code**
 2. Run the generated:
     - CREATE TABLE scripts
     - Seed data scripts

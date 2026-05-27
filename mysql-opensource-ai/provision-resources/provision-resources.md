@@ -368,15 +368,36 @@ Configure OCI Generative AI integration with the Cline extension inside Visual S
 
 4. Configure Cline Settings
 
-Open Cline settings and configure:
+    Open Cline settings and configure:
 
-| Field | Value |
-|---|---|
-| Provider | Open AI Compatible |
-| Base URL | https://inference.generativeai.us-chicago-1.oci.oraclecloud.com |
-| Model ID | ocid1.generativeaimodel.oc1.us-chicago-1.amaaaaaask7dceya3bsfz4ogiuv3yc7gcnlry7gi3zzx6tnikg6jltqszm2q |
+    | Field | Value |
+    |---|---|
+    | Provider | Open AI Compatible |
+    | Base URL | https://inference.generativeai.us-chicago-1.oci.oraclecloud.com |
+    | Model ID | ocid1.generativeaimodel.oc1.us-chicago-1.amaaaaaask7dceya3bsfz4ogiuv3yc7gcnlry7gi3zzx6tnikg6jltqszm2q |
 
-![Cline settings](images/clinesetup.png "Cline settings")
+    ![Cline settings](images/clinesetup.png "Cline settings")
+
+    > **Note:** If you want to configure other models insteade of xai.grok-4 follow the below steps.
+
+5. Navigate to:
+
+    1. **Analytics & AI → Generative AI**
+
+    ![Navigate to Generative AI services](images/genaikey.png "Navigate to Generative AI services")
+
+    2. Select:
+    - Compartment: Your workshop compartment
+    - Region: Chicago
+
+    3. Select **Playground. -> chat**
+    4. Copy model ocid of your prefered model
+
+    ![Navigate to playground](images/genaikey6.png "navigate to playground and chat")
+
+    ![Copy model ocid](images/genaikey7.png "Copy model ocid for different model")
+
+    5. paste this in **model ID** under **Cline settings**
 
 
 ## Expected Outcome
