@@ -134,7 +134,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
+    ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
 
 3. Create a pluggable database **PDB2**.
@@ -177,7 +177,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ````
 
-   ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
+    ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
 
 6. Connect as **PDB_ADMIN** to **PDB2**.
 
@@ -195,7 +195,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
+    ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
 
 8. Change back to **SYS** in the container database **CDB1** and show the tablespaces and datafiles created.
 
@@ -260,7 +260,7 @@ The task you will do in this step is:
     show pdbs</copy>
     ```
 
-   ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
+    ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
 
 
 3. Create a pluggable database **PDB3** from the read only database **PDB2**.
@@ -273,7 +273,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3-2024.png " ")
+    ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3-2024.png " ")
 
 4. Change **PDB2** back to read write.
 
@@ -283,7 +283,7 @@ The task you will do in this step is:
     ```
 
 
-   ![Screenshot of terminal output](./images/task2.4-pdb2readwrite-2024.png " ")
+    ![Screenshot of terminal output](./images/task2.4-pdb2readwrite-2024.png " ")
 
 5. Connect to **PDB2** and show the table **MY_TAB**, then run the same SQL against **PDB3** to demonstrate that this is an exact copy of the source PDB.
 
@@ -354,7 +354,7 @@ The task you will do in this step is:
     ```
 
 
-   ![Screenshot of terminal output](./images/task3.2-unplugpdb3-2024.png " ")
+    ![Screenshot of terminal output](./images/task3.2-unplugpdb3-2024.png " ")
 
 3. Remove **PDB3** from **CDB1** but keep the PDB datafiles for future use.
 
@@ -364,7 +364,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
+    ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
 
 4. Show the datafiles in **CDB1** and note that files for PDB3 are no longer part of the container.
     ```
@@ -870,7 +870,7 @@ Prerequisites:
 
     ![Screenshot of terminal output](./images/task7.3-soetable.png " ")
 
- 4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
+4. Open a new terminal tab within in JupyterLab, connect to the database server and then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
 
     <!-- TODO: Replace this clip. It shows the old ./dba.sh command; the replacement should show dba.sh. -->
     <!-- ![Create a new terminal tab](./images/new-terminal.gif " ") -->
@@ -1274,7 +1274,7 @@ The tasks you will do in this step are:
 
     ![Screenshot of terminal output](./images/task10.6-resetlistener.png " ")
 
-<!-- ## Task 13: Lab cleanup
+    <!-- ## Task 13: Lab cleanup
 
 1. Exit from the SQL command prompt and reset the container databases back to their original ports. If any errors about dropping databases appear, you can ignore them.
 

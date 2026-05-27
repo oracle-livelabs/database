@@ -1529,7 +1529,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
+    ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
 
     ```
     <copy>
