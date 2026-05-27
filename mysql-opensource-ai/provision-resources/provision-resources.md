@@ -72,7 +72,7 @@ In this task, you will provision the cloud infrastructure required for the works
     | Parameter | Description |
     |---|---|
     | Compartment OCID | Update with your workshop compartment |
-    | mysql_admin_password | Set your MySQL administrator password |
+    | mysql admin password | Set your MySQL administrator password |
 
     > Note: Other values are automatically populated from the Terraform scripts and can be modified if needed.
 
