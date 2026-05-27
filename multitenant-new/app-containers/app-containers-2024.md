@@ -9,7 +9,7 @@ Estimated Time: 1 hour
 ### Prerequisites
 This lab assumes you have:
 - You have completed:
-    - Lab: Login to the Oracle Database 23ai server using JupyterLab
+    - Lab: Login to the Oracle Database 26ai server using JupyterLab
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
