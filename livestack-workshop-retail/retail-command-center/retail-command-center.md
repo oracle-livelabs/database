@@ -25,15 +25,17 @@ Estimated Time: 10 minutes
 
 2. Run this KPI query.
 
+    Use this query to connect the dashboard cards to trusted operational data. Orders, returns, social momentum, and agent activity are summarized directly in the database to create the daily retail operating view.
+
     ```sql
     <copy>
     SELECT
-      (SELECT COUNT(*) FROM RETAILDB.orders) AS "Total Orders",
-      (SELECT NVL(ROUND(SUM(order_total), 2), 0) FROM RETAILDB.orders) AS "Retail Revenue",
-      (SELECT COUNT(*) FROM RETAILDB.return_requests WHERE status <> 'Closed') AS "Open Returns",
-      (SELECT NVL(ROUND(SUM(return_value), 2), 0) FROM RETAILDB.return_requests WHERE status <> 'Closed') AS "Return Exposure",
-      (SELECT COUNT(*) FROM RETAILDB.social_posts WHERE momentum_flag IN ('viral','mega_viral')) AS "Demand Spikes",
-      (SELECT COUNT(*) FROM RETAILDB.agent_actions) AS "Agent Actions"
+      (SELECT COUNT(*) FROM orders) AS "Total Orders",
+      (SELECT NVL(ROUND(SUM(order_total), 2), 0) FROM orders) AS "Retail Revenue",
+      (SELECT COUNT(*) FROM return_requests WHERE status <> 'Closed') AS "Open Returns",
+      (SELECT NVL(ROUND(SUM(return_value), 2), 0) FROM return_requests WHERE status <> 'Closed') AS "Return Exposure",
+      (SELECT COUNT(*) FROM social_posts WHERE momentum_flag IN ('viral','mega_viral')) AS "Demand Spikes",
+      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions"
     FROM dual;
     </copy>
     ```
@@ -52,6 +54,8 @@ Estimated Time: 10 minutes
 
 2. Run the database version of the command center trending-products query.
 
+    Trending products sit at the intersection of merchandising, inventory, and social engagement. This SQL shows how the app ranks products from governed post, product, brand, and mention data instead of depending on a separate trend service.
+
     ```sql
     <copy>
     SELECT p.product_name AS "Product",
@@ -60,11 +64,11 @@ Estimated Time: 10 minutes
            SUM(sp.views_count) AS "Views",
            ROUND(AVG(sp.virality_score), 2) AS "Avg Momentum",
            MAX(sp.momentum_flag) AS "Peak Momentum"
-    FROM RETAILDB.products p
-    JOIN RETAILDB.brands b ON p.brand_id = b.brand_id
-    JOIN RETAILDB.post_product_mentions ppm ON p.product_id = ppm.product_id
-    JOIN RETAILDB.social_posts sp ON ppm.post_id = sp.post_id
-    WHERE sp.posted_at >= (SELECT MAX(posted_at) FROM RETAILDB.social_posts) - INTERVAL '7' DAY
+    FROM products p
+    JOIN brands b ON p.brand_id = b.brand_id
+    JOIN post_product_mentions ppm ON p.product_id = ppm.product_id
+    JOIN social_posts sp ON ppm.post_id = sp.post_id
+    WHERE sp.posted_at >= (SELECT MAX(posted_at) FROM social_posts) - INTERVAL '7' DAY
     GROUP BY p.product_id, p.product_name, b.brand_name
     ORDER BY "Avg Momentum" DESC, "Views" DESC
     FETCH FIRST 10 ROWS ONLY;
@@ -97,16 +101,18 @@ Estimated Time: 10 minutes
 
 1. Run the category revenue query.
 
+    Category revenue shows where demand is turning into sales. By joining orders, line items, and products in one database, teams can compare revenue with social attribution without copying data into a separate mart first.
+
     ```sql
     <copy>
     SELECT p.category AS "Category",
            COUNT(DISTINCT o.order_id) AS "Orders",
            ROUND(SUM(oi.quantity * oi.unit_price), 2) AS "Revenue",
            COUNT(DISTINCT CASE WHEN o.social_source_id IS NOT NULL THEN o.order_id END) AS "Social-Driven Orders"
-    FROM RETAILDB.order_items oi
-    JOIN RETAILDB.products p ON oi.product_id = p.product_id
-    JOIN RETAILDB.orders o ON oi.order_id = o.order_id
-    WHERE o.created_at >= (SELECT MAX(created_at) FROM RETAILDB.orders) - INTERVAL '30' DAY
+    FROM order_items oi
+    JOIN products p ON oi.product_id = p.product_id
+    JOIN orders o ON oi.order_id = o.order_id
+    WHERE o.created_at >= (SELECT MAX(created_at) FROM orders) - INTERVAL '30' DAY
     GROUP BY p.category
     ORDER BY "Revenue" DESC;
     </copy>
@@ -140,5 +146,5 @@ Estimated Time: 10 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

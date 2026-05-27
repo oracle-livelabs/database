@@ -1,22 +1,17 @@
-/* Stage 2 - run as RETAILDB. Creates core retail objects, data, spatial objects, vectors, returns, semantic views, and OML models. */
+/*
+ * Deprecated staged setup - intentionally blocked.
+ *
+ * Do not use this file for learner workshop builds. The old staged path calls
+ * data/load_all_data.sql and refresh_demo_dates.sql, which use random and
+ * date-based generators. That makes query results drift from the lab markdown.
+ *
+ * Canonical deterministic setup:
+ *   1. Connect as ADMIN.
+ *   2. Run @retail_workshop_admin_create_all_exact_data.sql.
+ *   3. Connect as LLUSER and run @verify_retail_workshop_ready.sql if needed.
+ */
 SET SERVEROUTPUT ON
 BEGIN
-  IF SYS_CONTEXT('USERENV','SESSION_USER') = 'ADMIN' THEN
-    RAISE_APPLICATION_ERROR(-20071, 'Run this script as RETAILDB, not ADMIN.');
-  END IF;
+  RAISE_APPLICATION_ERROR(-20073, 'Deprecated random loader path. Use @retail_workshop_admin_create_all_exact_data.sql from ADMIN for deterministic workshop data.');
 END;
 /
-@@schema/01_tables.sql
-@@schema/02_json_collections.sql
-@@schema/03_graph.sql
-@@schema/04_vector_schema.sql
-@@schema/05_spatial.sql
-@@data/load_all_data.sql
-@@hydrate_retail_after_data.sql
-@@schema/10_returns.sql
-@@data/load_returns.sql
-@@schema/11_retail_semantic_views.sql
-@@data/refresh_demo_dates.sql
-@@data/load_oml_models.sql
-@@data/seed_fulfillment_zones.sql
-PROMPT Stage 2 complete. Reconnect as ADMIN and run @run_as_admin_security.sql.

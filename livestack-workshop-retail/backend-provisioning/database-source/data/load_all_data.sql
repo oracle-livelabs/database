@@ -1,4 +1,17 @@
 /*
+ * Deprecated random loader - intentionally blocked.
+ *
+ * The Retail LiveLabs workshop now uses fixed exported data from
+ * ../retail_workshop_admin_create_all_exact_data.sql so learner queries and
+ * expected results stay deterministic. Do not run this loader for workshop
+ * provisioning.
+ */
+BEGIN
+  RAISE_APPLICATION_ERROR(-20074, 'Deprecated random loader. Use @retail_workshop_admin_create_all_exact_data.sql from ADMIN for deterministic workshop data.');
+END;
+/
+
+/*
  * load_all_data.sql
  * Master data loader — runs all data scripts in order
  * Generates ~5000 social posts, ~187 products, 50 brands,
