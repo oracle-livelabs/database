@@ -5,6 +5,10 @@ In this lab you will perform many multitenant basic tasks. You will create a plu
 
 Estimated Time: 45 minutes
 
+### Objectives
+- Create, clone, unplug, plug in, and drop pluggable databases.
+- Run hot clone, refresh, snapshot copy, and relocation operations.
+
 ### Prerequisites
 
 This lab assumes you have:
@@ -83,7 +87,7 @@ First, you will create and explore a new pluggable database **PDB2** in the cont
     </copy>
     ``` -->
 
-1.  Connect to **CDB1** using SQLcl.
+1. Connect to **CDB1** using SQLcl.
 
     ```bash
     <copy>
@@ -951,7 +955,7 @@ Prerequisites:
 
     ![Screenshot of terminal output](./images/task7.8-dropoedev.png " ")
 
-9.  Leave the **OE** pluggable database open with the load running against it for the rest of the steps in this lab.
+9. Leave the **OE** pluggable database open with the load running against it for the rest of the steps in this lab.
 
 You can see that the clone of the pluggable database worked without having to stop the load on the source database. In the next step, you will look at how to refresh a clone.
 
@@ -1254,7 +1258,7 @@ The tasks you will do in this step are:
 
     ![Screenshot of terminal output](./images/task10.4-checkcdb1-2024.png " ")
 
-4.  Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).  
+4. Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).
 
     The load program isn't needed anymore, so CTRL-C out of that program and exit from the second terminal window.
 

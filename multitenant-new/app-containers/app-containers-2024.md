@@ -5,6 +5,9 @@ This is a series of 12 hands-on labs designed to familiarize you with the Applic
 
 Estimated Time: 1 hour
 
+### Objectives
+- Create and manage application containers and application PDBs.
+- Explore application upgrades, patches, container queries, and container maps.
 
 ### Prerequisites
 This lab assumes you have:
@@ -255,7 +258,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
 
     ![Screenshot of terminal output](./images/task1.5-syncseed.png " ")
 
-6.  Provision separate application databases for each of the 4 stores.
+6. Provision separate application databases for each of the 4 stores.
 
     ```
     <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
