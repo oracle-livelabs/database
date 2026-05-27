@@ -2,9 +2,9 @@
 
 ## Introduction
 
-A fulfillment operations manager, supply chain planner, or omnichannel operations lead needs to understand where customer demand, inventory, shipment activity, and service coverage intersect. That work is difficult when warehouse systems, ecommerce orders, customer geography, carrier data, social demand signals, and forecasting models live in separate applications.
+Fulfillment decisions break down when geography, inventory, demand, shipments, and service coverage are handled as separate questions. A team may know where inventory exists but still miss which center is close enough, stocked enough, or risky enough to change the decision.
 
-Oracle AI Database helps by keeping spatial, relational, inventory, shipment, demand forecast, and security-governed data together. In the application, Intelligent Fulfillment Network shows centers, service zones, demand regions, inventory alerts, and route context. In SQL Worksheet, you inspect the geometry metadata, GeoJSON, distance calculations, and risk view that support that map.
+Oracle AI Database keeps spatial, relational, inventory, shipment, demand forecast, and security-governed data together. The Intelligent Fulfillment Network page shows centers, service zones, demand regions, inventory alerts, and route context. In SQL Worksheet, you inspect the geometry metadata, GeoJSON, distance calculations, and risk view that support that map.
 
 Estimated Time: 10 minutes
 
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this query.
 
-    Fulfillment decisions depend on geography. This block reads `ALL_SDO_GEOM_METADATA` to verify registered geometry columns, dimensions, and SRIDs. Oracle Spatial needs that metadata before it can reason about fulfillment locations and service areas.
+    Fulfillment decisions depend on geography. Oracle Spatial stores locations and shapes in `SDO_GEOMETRY` columns. This block reads `ALL_SDO_GEOM_METADATA`, the catalog view that describes those geometry columns. The SRID value identifies the coordinate system; `4326` is the common GPS latitude/longitude system used by web maps.
 
     ```sql
     <copy>
@@ -45,14 +45,14 @@ Estimated Time: 10 minutes
     | LLUSER | `DEMAND_REGIONS` | BOUNDARY | 4326 |
     | LLUSER | `FULFILLMENT_CENTERS` | LOCATION | 4326 |
     | LLUSER | `FULFILLMENT_ZONES` | `ZONE_BOUNDARY` | 4326 |
-    {: title="Spatial Geometry Metadata"}
+    {: title="Spatial Metadata"}
 
 ## Task 2: Produce map-ready GeoJSON
 1. Use the live Intelligent Fulfillment Network context from Figure 1 before you run the SQL.
 
 2. Run this query.
 
-    GeoJSON lets application maps display database-managed shapes. This block uses `SDO_UTIL.TO_GEOJSON` to serialize `SDO_GEOMETRY` values. Spatial objects stay in Oracle Database, and the result is a web-friendly shape that a frontend map can render.
+    GeoJSON lets application maps display database-managed shapes. This block uses `SDO_UTIL.TO_GEOJSON` to convert `SDO_GEOMETRY` points into web-friendly JSON. The database still stores and manages the geometry, while the application receives a standard map shape with coordinates.
 
     ```sql
     <copy>
@@ -76,7 +76,7 @@ Estimated Time: 10 minutes
     | Chicago Midwest Hub | Joliet | Illinois | { "type": "Point", "coordinates": [-88.0817, 41.525] } |
     | Dallas South Central | Lancaster | Texas | { "type": "Point", "coordinates": [-96.7561, 32.5921] } |
     | Atlanta Southeast | Union City | Georgia | { "type": "Point", "coordinates": [-84.5421, 33.5871] } |
-    {: title="Fulfillment Centers as GeoJSON"}
+    {: title="Fulfillment GeoJSON"}
 
 3. The application can use GeoJSON directly for mapping without moving geometry processing to a separate service.
 
@@ -85,7 +85,7 @@ Estimated Time: 10 minutes
 
 2. Run this distance query.
 
-    The closest facility is often the fastest or lowest-cost fulfillment option. This block uses `SDO_GEOM.SDO_DISTANCE` to calculate miles between a customer geometry and active fulfillment-center geometries. The database returns ranked routing evidence from governed location data.
+    The closest facility is often the fastest or lowest-cost fulfillment option. This block uses a `CROSS JOIN` to compare one customer with every active fulfillment center. `SDO_GEOM.SDO_DISTANCE` calculates the distance between the customer point and each center point. The tolerance value controls spatial calculation precision, and `unit=MILE` returns a business-friendly distance.
 
     ```sql
     <copy>
@@ -120,7 +120,7 @@ Estimated Time: 10 minutes
 
 2. Run this semantic-view query.
 
-    Routing is not only about distance; inventory pressure matters too. This block reads a governed semantic view that combines fulfillment, product, forecast, and inventory evidence. The view hides the join complexity and gives the app a stable risk shape.
+    Routing is not only about distance; inventory pressure matters too. This block reads a governed semantic view that combines fulfillment centers, products, forecasts, and inventory quantities. A semantic view gives the application a stable business shape, so the app can ask for risk evidence without repeating every join.
 
     ```sql
     <copy>
@@ -150,11 +150,12 @@ Estimated Time: 10 minutes
     | Midnight Espresso Blend | Houston Gulf Coast | Texas | 11 | 83 | `AT_RISK` |
     | Moonbeam Highlighter | Phoenix Desert Hub | Arizona | 11 | 30 | `AT_RISK` |
     | Retro Wave Tee | Philadelphia Mid-Atlantic | Delaware | 11 | 49 | `AT_RISK` |
-    {: title="Fulfillment Inventory Risk"}
+    {: title="Inventory Risk"}
 
 3. The semantic view turns raw spatial, inventory, and demand data into a business-ready risk surface.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

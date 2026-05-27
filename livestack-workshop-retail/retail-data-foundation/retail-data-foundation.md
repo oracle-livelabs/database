@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This lab starts the hands-on database work. You will inspect the schema that prepares the Seer Sporting Goods dataset for the rest of the LiveStack. The business point is simple: one governed Oracle Database 26ai schema can support products, customers, orders, inventory, returns data, creator signals, fulfillment geography, AI context, and audit evidence without spreading the workflow across disconnected stores.
+This lab starts the hands-on database work. You will inspect the schema that prepares the Seer Sporting Goods dataset for the rest of the LiveStack. The practical point is simple: one Oracle Database 26ai schema can support the retail workflow. Products, customers, orders, inventory, returns data, creator signals, fulfillment geography, AI context, and audit evidence do not have to live in disconnected stores.
 
-In the LiveStack application, Data Foundation loads or restores the demo dataset and shows what gets loaded. In SQL Worksheet, you explore the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack application shows what the Data Foundation page loads or restores. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
 Estimated Time: 10 minutes
 
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. In SQL Worksheet, run this query.
 
-    Before you analyze retail outcomes, first get oriented to the shared data foundation. This block queries Oracle catalog views such as `USER_OBJECTS`, `USER_PROPERTY_GRAPHS`, and `USER_MINING_MODELS`. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
+    Before you analyze retail outcomes, get oriented to the shared data foundation. This block queries Oracle catalog views such as `USER_OBJECTS`, `USER_PROPERTY_GRAPHS`, and `USER_MINING_MODELS`. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
 
     ```sql
     <copy>
@@ -177,4 +177,5 @@ Estimated Time: 10 minutes
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

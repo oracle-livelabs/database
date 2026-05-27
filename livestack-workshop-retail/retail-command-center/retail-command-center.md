@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The Retail Command Center is built for a retail operations leader, merchandising analyst, or digital commerce manager who needs a daily operating view of the business. Dashboards like this are difficult when orders, fulfillment, customer signals, product demand, returns exposure, analytics, and agent activity live in separate systems.
+A retail command center works only if the daily operating view is easy to trust. That gets difficult when orders, fulfillment, customer signals, product demand, returns exposure, analytics, and agent activity live in separate systems.
 
-Oracle AI Database helps by keeping operational, analytical, JSON, in-memory, and AI-ready data close to the same governed data foundation. In the application, the page brings together live retail KPIs, customer signal velocity, revenue category detail, and product-level evidence. In SQL Worksheet, you inspect the database queries that make those views possible.
+Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The application brings together live retail KPIs, customer signal velocity, revenue category detail, and product-level evidence. In SQL Worksheet, you inspect the database queries behind those views.
 
 Estimated Time: 10 minutes
 
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this KPI query.
 
-    Use this query to connect the dashboard cards to trusted operational data. The block uses scalar subqueries to summarize orders, returns, social momentum, and agent activity directly in the database for the daily retail operating view.
+    Use this query to connect the dashboard cards to trusted operational data. A **scalar subquery** is a query inside a query that returns one value, such as one count or one sum. This block selects from `DUAL`, Oracle's one-row helper table, and uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
 
     ```sql
     <copy>
@@ -45,7 +45,7 @@ Estimated Time: 10 minutes
     | Total Orders | Retail Revenue | Open Returns | Return Exposure | Demand Spikes | Agent Actions |
     | ---: | ---: | ---: | ---: | ---: | ---: |
     | 3000 | 4235872.01 | 5 | 934.93 | 511 | 0 |
-    {: title="Retail Command Center KPI Query"}
+    {: title="Command Center KPIs"}
 
 3. These metrics create the daily triage view. The user can see revenue, demand, return exposure, and agent activity without waiting for copied data or a separate dashboard mart.
 
@@ -54,7 +54,7 @@ Estimated Time: 10 minutes
 
 2. Run the database version of the command center trending-products query.
 
-    Trending products sit at the intersection of merchandising, inventory, and social engagement. This block joins posts, product mentions, products, and brands, then aggregates views and momentum. It shows how the app can rank products from governed data in the retail schema.
+    Trending products sit at the intersection of merchandising, inventory, and social engagement. This block joins four related tables: products, brands, social posts, and the bridge table that records which posts mention which products. `COUNT(DISTINCT ...)` counts unique posts, `SUM` totals views, and `AVG` calculates average momentum. The date filter keeps the result focused on recent activity by comparing each post with the latest seeded post date.
 
     ```sql
     <copy>
@@ -89,19 +89,21 @@ Estimated Time: 10 minutes
     | Resistance Pool Bands | AquaFit | 12 | 5961564 | 37.34 | viral |
     | Crescent Moon Earrings | LunaWear | 10 | 4994691 | 35.81 | viral |
     | Wireless Charging Pad Duo | RapidCharge | 10 | 20816358 | 34.19 | viral |
-    {: title="Trending Product Evidence"}
+    {: title="Trending Products"}
 
 3. A high-ranking product may represent a sales opportunity, an inventory risk, a merchandising action, or a signal that deserves deeper analysis in the Customer Trend Signals lab.
 
 ## Task 3: Connect product detail screens to database evidence
 
-1. Use the live Retail Command Center context from Figure 1 as the visual anchor for product details and JSON Duality patterns. The app view is document-oriented, but the source of truth remains Oracle Database.
+1. Use the live Retail Command Center context from Figure 1 as the visual anchor for product details and JSON Duality patterns.
+
+    Product detail screens often look like documents because the application needs a compact product story: item, brand, category, inventory, demand, and signals. The important point is that the document-style screen does not require a separate document database. Later labs show how Oracle Database can expose document-shaped JSON while preserving relational tables, constraints, security policies, and SQL access.
 
 ## Task 4: Review revenue by category
 
 1. Run the category revenue query.
 
-    Category revenue shows where demand is turning into sales. This block joins orders, line items, and products in one database, filters to a recent window, and aggregates revenue by category. Teams can compare revenue with social attribution from the same operational dataset.
+    Category revenue shows where demand is turning into sales. This block joins order headers, order line items, and products. The line item table supplies quantity and price; the product table supplies category; the order table supplies date and social-source context. The `CASE WHEN` expression counts only orders with a social source, so the result compares total category revenue with orders influenced by social demand.
 
     ```sql
     <copy>
@@ -140,11 +142,12 @@ Estimated Time: 10 minutes
     | Tools | 45 | 11039.04 | 16 |
     | Travel | 85 | 5078.35 | 28 |
     | Food | 78 | 4280.37 | 20 |
-    {: title="Revenue by Category"}
+    {: title="Category Revenue"}
 
 2. The command center shows why converged data matters. Operational orders, social demand signals, inventory context, and AI-assisted actions can start from one governed database foundation.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

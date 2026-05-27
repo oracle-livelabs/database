@@ -2,9 +2,9 @@
 
 ## Introduction
 
-A merchandising analytics manager, demand planner, loyalty analyst, inventory planner, or retail data science lead needs to understand which predictive signals should drive action. Predictive work loses trust when features, scoring jobs, notebooks, CSV exports, BI extracts, and operational systems drift apart.
+Predictive work loses trust when the features, scoring jobs, notebooks, CSV exports, BI extracts, and operational systems drift apart. This lab shows how to inspect the model inputs and scoring patterns close to the retail data they use.
 
-Oracle Machine Learning keeps models close to governed retail data. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`. In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
+Oracle Machine Learning keeps models close to the retail data. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`. In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
 
 Estimated Time: 10 minutes
 
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. Run this view check.
 
-    Machine learning starts with prepared features. This block checks `USER_VIEWS` for the curated OML feature views. Those views feed prediction and clustering while keeping the retail data inside the database.
+    Machine learning starts with prepared features. A feature is a column or derived value that helps a model make a prediction, such as demand score, inventory quantity, or customer behavior. This block checks the curated OML feature views. Those views prepare model-ready rows while keeping retail data inside Oracle Database.
 
     ```sql
     <copy>
@@ -48,11 +48,11 @@ Estimated Time: 10 minutes
     | LLUSER | `OML_DEMAND_TRAINING_V` |
     | LLUSER | `OML_PRODUCT_CLUSTER_V` |
     | LLUSER | `OML_REVENUE_TRAINING_V` |
-    {: title="OML Training Views"}
+    {: title="OML Feature Views"}
 
 3. Run this model inventory.
 
-    A model inventory tells you what the database can actually score. This block reads `USER_MINING_MODELS` for model name, mining function, and algorithm. The analytics page becomes more explainable because predictions are tied to named in-database assets.
+    A model inventory tells you what the database can actually score. This block reads `ALL_MINING_MODELS` for model name, mining function, and algorithm. The mining function explains the type of problem, such as classification, regression, or clustering. The algorithm shows the method Oracle Machine Learning used to build the model.
 
     ```sql
     <copy>
@@ -75,14 +75,14 @@ Estimated Time: 10 minutes
     | LLUSER | `DEMAND_SURGE_MODEL` | CLASSIFICATION | `RANDOM_FOREST` |
     | LLUSER | `PRODUCT_CLUSTER_MODEL` | CLUSTERING | KMEANS |
     | LLUSER | `REVENUE_PREDICT_MODEL` | REGRESSION | `GENERALIZED_LINEAR_MODEL` |
-    {: title="OML Mining Models"}
+    {: title="OML Models"}
 
 ## Task 2: Score demand surge risk
 1. Use the live Retail OML Analytics context from Figure 1 before you run the SQL.
 
 2. Run this scoring query.
 
-    Notice that the scoring happens in SQL, close to the data. This block calls OML scoring functions directly in SQL against feature-view columns. Customer segments can be classified without exporting customer features to a separate tool first.
+    Notice that the scoring happens in SQL, close to the data. `PREDICTION` returns the model's predicted label for each row. `PREDICTION_PROBABILITY` returns the confidence for a requested label, here `SURGE`. The `USING *` clause tells Oracle to use the feature columns from the view as model inputs, so scoring can run without exporting data to a separate tool.
 
     ```sql
     <copy>
@@ -115,12 +115,12 @@ Estimated Time: 10 minutes
 
 3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product.
 
-## Task 3: Inspect inventory risk from OML features
+## Task 3: Inspect the operating evidence behind replenishment risk
 1. Use the live Retail OML Analytics context from Figure 1 before you run the SQL.
 
 2. Run this query.
 
-    Predictions are more useful when they are tied to operating evidence. This block reads a semantic view that combines demand forecasts, inventory quantities, product context, and risk flags. The result is actionable for retail planning because the prediction context stays attached to operating evidence.
+    The previous task produced demand surge predictions. This query does not score another model. It shows the operating evidence a planner needs before acting on a prediction: product, fulfillment center, quantity on hand, reorder point, and inventory risk. The link is practical: a surge prediction matters more when you can compare it with current stock and replenishment thresholds.
 
     ```sql
     <copy>
@@ -149,11 +149,12 @@ Estimated Time: 10 minutes
     | Midnight Espresso Blend | Houston Gulf Coast | 11 | 83 | `AT_RISK` |
     | Moonbeam Highlighter | Phoenix Desert Hub | 11 | 30 | `AT_RISK` |
     | Retro Wave Tee | Philadelphia Mid-Atlantic | 11 | 49 | `AT_RISK` |
-    {: title="Inventory Risk Features"}
+    {: title="Inventory Risk Evidence"}
 
-3. The application can combine OML scores, demand forecasts, and inventory evidence in the database before presenting a risk recommendation.
+3. This result is the operational side of the OML story. A prediction can suggest where demand may rise, but the replenishment decision still needs inventory evidence from Oracle Database.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

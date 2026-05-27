@@ -2,9 +2,9 @@
 
 ## Introduction
 
-A digital merchandising manager, customer insights analyst, or retail marketing strategist needs early signals from shoppers and creators. Those signals often appear before demand shows up in sales reports. This lab follows the Customer Trend Signals scene in the runbook. Semantic Product Discovery turns shopper intent into product matches. Social Trend Intelligence ranks creator posts, customer conversations, sentiment, and social momentum.
+Customer demand often shows up in shopper language and creator activity before it shows up in sales reports. That signal is easy to miss when product language, reviews, social posts, sentiment, and inventory data sit in different places. This lab follows the Customer Trend Signals scene in the runbook and shows how search by meaning can connect shopper intent to products.
 
-Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. In the LiveStack application, Customer Trend Signals connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you verify MiniLM vector structures. You then generate product embeddings and run dynamic semantic search against database-managed product vectors.
+Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. The LiveStack application connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you generate product embeddings and run dynamic semantic search against database-managed product vectors.
 
 Estimated Time: 10 minutes
 
@@ -17,129 +17,26 @@ Estimated Time: 10 minutes
 - Explain how shopper language, social momentum, sentiment, and product demand become governed SQL evidence.
 
 
-## Task 1: Verify MiniLM vector artifacts and indexes
+## Task 1: Review Customer Trend Signals
 1. Review the related application screen before you run the SQL.
 
     ![Customer Trend Signals overview with semantic search and social intelligence](images/customer-trend-signals-overview.png " ")
 
     *Figure 1: Customer Trend Signals connects semantic product discovery with social trend intelligence.*
 
-2. Run this vector column check.
-
-    Before you search by meaning, confirm that the database has vector-ready structures. This block reads `ALL_TAB_COLS` and finds typed `VECTOR` columns in the embedding tables. Those structures support Semantic Product Discovery and Social Trend Intelligence.
-
-    ```sql
-    <copy>
-    WITH schema_ctx AS (
-      SELECT owner
-      FROM all_tab_cols
-      WHERE table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
-        AND column_name = 'EMBEDDING'
-        AND owner IN (SYS_CONTEXT('USERENV','CURRENT_SCHEMA'), USER, 'LLUSER')
-      GROUP BY owner
-      ORDER BY CASE
-                 WHEN owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA') THEN 1
-                 WHEN owner = USER THEN 2
-                 WHEN owner = 'LLUSER' THEN 3
-                 ELSE 4
-               END
-      FETCH FIRST 1 ROW ONLY
-    )
-    SELECT c.table_name AS "Table", c.column_name AS "Column", c.data_type AS "Type"
-    FROM all_tab_cols c
-    JOIN schema_ctx s ON s.owner = c.owner
-    WHERE c.table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
-      AND c.column_name = 'EMBEDDING'
-    ORDER BY c.table_name;
-    </copy>
-    ```
-
-    Expected output:
-
-    | Table | Column | Type |
-    | --- | --- | --- |
-    | `POST_EMBEDDINGS` | `EMBEDDING` | VECTOR |
-    | `PRODUCT_EMBEDDINGS` | `EMBEDDING` | VECTOR |
-    {: title="MiniLM Vector Columns"}
-
-3. The compact learner setup creates the embedding tables and vector indexes. You generate the product embeddings in the next task.
-
-4. Check the vector indexes.
-
-    Vector indexes make similarity search practical for an application. This block checks `ALL_INDEXES` for the expected vector indexes and status. Valid vector indexes help Customer Trend Signals search by meaning and complement keyword matching.
-
-    ```sql
-    <copy>
-    WITH schema_ctx AS (
-      SELECT owner
-      FROM all_indexes
-      WHERE index_name IN ('IDX_PRODUCT_VEC','IDX_POST_VEC')
-        AND owner IN (SYS_CONTEXT('USERENV','CURRENT_SCHEMA'), USER, 'LLUSER')
-      GROUP BY owner
-      ORDER BY CASE
-                 WHEN owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA') THEN 1
-                 WHEN owner = USER THEN 2
-                 WHEN owner = 'LLUSER' THEN 3
-                 ELSE 4
-               END
-      FETCH FIRST 1 ROW ONLY
-    )
-    SELECT i.owner AS "Owner", i.index_name AS "Index", i.table_name AS "Table", i.index_type AS "Type"
-    FROM all_indexes i
-    JOIN schema_ctx s ON s.owner = i.owner
-    WHERE i.index_name IN ('IDX_PRODUCT_VEC','IDX_POST_VEC')
-    ORDER BY i.index_name;
-    </copy>
-    ```
-
-    Expected output:
-
-    | Owner | Index | Table | Type |
-    | --- | --- | --- | --- |
-    | LLUSER | `IDX_POST_VEC` | `POST_EMBEDDINGS` | VECTOR |
-    | LLUSER | `IDX_PRODUCT_VEC` | `PRODUCT_EMBEDDINGS` | VECTOR |
-    {: title="Vector Indexes"}
+    The page shows two connected ideas. Semantic Product Discovery uses vector search to match shopper language to catalog items. Social Trend Intelligence connects product demand to creator posts, platforms, and social momentum. In the next task, you generate the product embeddings that make the semantic search portion work.
 
 ## Task 2: Generate product embeddings
 1. Use the live Customer Trend Signals context from Figure 1 before you run the SQL.
 
-2. Reset the product embedding table.
+2. Generate and confirm the product embeddings.
 
-    This block clears generated product vectors before you rebuild them. That keeps the lab safe to rerun. It also prevents duplicate embeddings from affecting search results.
+    An embedding is a list of numbers that represents meaning. Products with similar language produce vectors that are close to each other. This block rebuilds `PRODUCT_EMBEDDINGS` from active products. It uses product name, category, subcategory, and tags as the source text. The `EMBED_RETAIL_TEXT` helper calls Oracle Database `VECTOR_EMBEDDING` with the MiniLM model, stores one vector per product, and confirms the row count.
 
     ```sql
     <copy>
     TRUNCATE TABLE product_embeddings;
-    </copy>
-    ```
 
-3. Review the source rows that will become embeddings.
-
-    The embedding process starts with ordinary product data. This query shows the text that the next step sends to the MiniLM embedding model. The text combines product name, category, subcategory, and tags. That extra context helps the vector represent product meaning.
-
-    ```sql
-    <copy>
-    SELECT p.product_id AS "Product ID",
-           p.product_name AS "Product",
-           TO_CLOB(
-             p.product_name || ' ' ||
-             p.category || ' ' ||
-             NVL(p.subcategory, '') || ' ' ||
-             NVL(p.tags, '')
-           ) AS "Embedding Text"
-    FROM products p
-    WHERE p.is_active = 1
-    ORDER BY p.product_id
-    FETCH FIRST 5 ROWS ONLY;
-    </copy>
-    ```
-
-4. Generate product embeddings.
-
-    This `INSERT ... SELECT` statement creates one embedding row for each active product. The `SELECT` builds the source text and calls `EMBED_RETAIL_TEXT`. That workshop helper wraps Oracle Database `VECTOR_EMBEDDING` with the MiniLM model. Oracle Database stores each generated vector in `PRODUCT_EMBEDDINGS` for later searches.
-
-    ```sql
-    <copy>
     INSERT INTO product_embeddings (
       product_id,
       embedding_model,
@@ -164,15 +61,7 @@ Estimated Time: 10 minutes
     WHERE p.is_active = 1;
 
     COMMIT;
-    </copy>
-    ```
 
-5. Confirm that the active product catalog now has embeddings.
-
-    This check counts the MiniLM vectors you just generated. The count should match the number of active products in the compact workshop data.
-
-    ```sql
-    <copy>
     SELECT COUNT(*) AS "Product Embeddings"
     FROM product_embeddings
     WHERE embedding_model = 'ALL_MINILM_L12_V2';
@@ -184,14 +73,14 @@ Estimated Time: 10 minutes
     | Product Embeddings |
     | ---: |
     | 187 |
-    {: title="Generated Product Embeddings"}
+    {: title="Product Embeddings"}
 
-6. The product catalog now has vectors that the next query can compare with a shopper-style search phrase.
+3. The product catalog now has vectors that the next query can compare with a shopper-style search phrase.
 
 ## Task 3: Search products by meaning
 1. Run this dynamic semantic search.
 
-    Retail users often ask conceptual questions, such as "summer running shoes lightweight breathable." This block embeds that phrase at query time with `EMBED_RETAIL_TEXT`. It compares the query vector with the product vectors you generated and ranks products by cosine distance. Lower distance means the product is closer in meaning to the search phrase.
+    Retail users often ask conceptual questions, such as "summer running shoes lightweight breathable." This block embeds that phrase at query time with `EMBED_RETAIL_TEXT`. It compares the query vector with the product vectors you generated. `VECTOR_DISTANCE` measures how far apart two vectors are; cosine distance is commonly used for text embeddings. Lower distance means the product is closer in meaning to the search phrase.
 
     ```sql
     <copy>
@@ -222,7 +111,7 @@ Estimated Time: 10 minutes
     | summer running shoes lightweight breathable | Carbon Slim Joggers | Fashion | 0.4327 |
     | summer running shoes lightweight breathable | TrailGrip Hiker | Footwear | 0.4524 |
     | summer running shoes lightweight breathable | AllTerrain Hiking Boots | Outdoor | 0.4627 |
-    {: title="Dynamic Semantic Product Search Results"}
+    {: title="Semantic Search Results"}
 
 2. Try a different shopper phrase.
 
@@ -291,11 +180,12 @@ Estimated Time: 10 minutes
     | rising | tiktok | customer | Reef-Safe Sunscreen SPF30 | 0.7945 |
     | rising | youtube | `@shadow_jace` | Reef-Safe Sunscreen SPF30 | 0.7945 |
     | normal | youtube | `@haze_pia` | Reusable Beeswax Wraps | 0.79096 |
-    {: title="Social Trend Product Matches"}
+    {: title="Social Product Matches"}
 
 3. This result ties the page back to the runbook story. The application is not only searching a catalog. It connects demand to creator handles, platforms, momentum, and social posts. The next lab uses the creator network to show how those signals can spread through communities.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026
