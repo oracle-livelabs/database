@@ -11,7 +11,7 @@ This workshop supports two paths:
 * **Green button path:** your environment is already provisioned. Start at **Lab 4** and go straight to the product walkthrough.
 * **Manual walkthrough path:** you install the backend, APEX apps, and sample data yourself. Start at **Get Started**, then complete Labs 1-3 before the main demo.
 
-**Estimated workshop time:**
+**Estimated Workshop Time:**
 
 * Green button path: 35 minutes.
 * Manual walkthrough path: 90 minutes.
