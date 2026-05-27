@@ -1,37 +1,44 @@
-# Lab 5: Prove Quality with Metrics and Regression Tests
+# Lab 5: Prove and Operate Trusted Search
 
 ## Introduction
 
-In Lab 4, you improved search behavior. In this lab, you will inspect the evidence.
+In Lab 4, Maya improved the Wikimedia search experience. Now her engineering lead asks the next set of questions.
 
-Enterprise developers do not just need a cool demo. They need to know what changed, whether it helped, whether it broke something else, and whether the application can explain the decision.
+What changed? Did the fix help? Did it break anything else? How does this connect to the real application? What happens when users ask things the team did not expect?
 
-That is where metrics, test runs, search history, and structured inputs become important.
+This lab focuses on the deeper operational features that turn Trusted Answer Search from a good demo into a manageable enterprise search capability.
 
-**Estimated time:** 20 minutes
+**Estimated time:** 25 minutes
 
 ### Objectives
 
 In this lab, you will:
 
-* Run a regression test suite.
-* Review Top-1, Top-3, and Top-5 quality metrics.
-* Inspect individual test results.
-* Explore structured input extraction.
-* Review search history and feedback.
-* Identify current limits that should be handled deliberately.
+* Run regression tests and review Top-1, Top-3, and Top-5 accuracy.
+* Inspect an individual test result.
+* Add a sample query as another form of expert evidence.
+* Inspect a target action URL and its target inputs.
+* Review search history and additional feedback.
+* Review draft changes before promotion.
+* Publish the improved draft when quality is acceptable.
 
 ### Prerequisites
 
 This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Search Admin app.
 
+> **Learn more:** For the underlying product model, see the Oracle Database documentation for [Trusted Answer Search overview](https://docs.oracle.com/en/database/oracle/oracle-database/26/otasc/trusted-answer-search-overview.html). The sections on target actions, target inputs, target value sets, feedback-aware relevance, and change management are especially relevant to this lab.
+
 ## Task 1: Run the Regression Test Suite
+
+Maya fixed one query. Her team needs to know whether the draft is still safe.
 
 1. In the left navigation menu, click **Test Runs**.
 2. If you are using the green-button environment, the Wikimedia uploaded test questions are already loaded and an initial lightweight run may already appear under **View Past Runs**.
 3. Select the search-space version you want to evaluate.
-    * Use the **Published** version to see the baseline.
+
+    * Use the **Published** version to see the current baseline.
     * Use your **Draft** version to evaluate the changes you made in Lab 4.
+
 4. Click **Run Tests**.
 5. Keep the available query sources selected, such as:
 
@@ -43,9 +50,9 @@ This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Sea
 
 ![Upload Test Runs](images/upload-test-runs.png)
 
-The uploaded Wikimedia test file contains 25 curated regression questions. Running with sample queries evaluates a much larger set generated from the search target sample queries. Either way, the system is replaying known questions and checking whether the expected target still appears in the ranked results.
+The uploaded Wikimedia test file contains curated regression questions. Running with sample queries evaluates a much larger set generated from the search target sample queries. Either way, the system is replaying known questions and checking whether the expected target still appears in the ranked results.
 
-## Task 2: Review the Test Run Metrics
+## Task 2: Review Search Quality Metrics
 
 1. Click **View Past Runs**.
 2. Open or review the latest completed run.
@@ -60,6 +67,7 @@ Review:
 * Progress.
 * Status.
 * Top-1, Top-3, and Top-5 accuracy.
+* Passed queries.
 
 In the current Admin app UI, these may appear as:
 
@@ -68,8 +76,6 @@ In the current Admin app UI, these may appear as:
 | P1 | Top-1 accuracy: the expected target was ranked first. |
 | P3 | Top-3 accuracy: the expected target appeared in the first three results. |
 | P5 | Top-5 accuracy: the expected target appeared in the first five results. |
-
-* Passed queries.
 
 In a green-button environment, you may see a seeded run from the uploaded Wikimedia test questions. If you run the larger sample-query suite, the published baseline should produce results similar to:
 
@@ -85,9 +91,7 @@ Top-5 accuracy / P5: 100
 
 Exact values vary depending on whether you use uploaded questions, sample queries, past user queries, or a draft after making changes. The important pattern is that search quality is measurable.
 
-That is the kind of number an application team can discuss. It is not a vibe. It is a measurable system.
-
-## Task 3: Inspect an Individual Test Result
+## Task 3: Inspect One Test Result
 
 1. Open a completed test run.
 2. Review the query result rows.
@@ -100,116 +104,88 @@ That is the kind of number an application team can discuss. It is not a vibe. It
     * Pass or fail status.
     * Target input mismatches, if any.
 
-This is useful when a search result regresses. Instead of guessing why users are unhappy, you can inspect exactly which query moved and which target won.
+This is how a team investigates regressions. Instead of arguing about whether search "feels better," you can inspect the query, the expected target, the returned target, and the rank.
 
-## Task 4: Explore Structured Intent
+## Task 4: Add a Sample Query
 
-Go to **Query Tester** and run:
+Descriptions explain what a target is. Sample queries show how users ask for it.
 
-```text
-<copy>
-How has French Wiktionary readership changed by month over the last year?
-</copy>
-```
+1. In the left navigation menu, click **Search Targets**.
+2. Search for:
 
-![Structured Inputs](images/structured-inputs.jpg)
+    ```text
+    <copy>
+    Total Page Views - All Projects
+    </copy>
+    ```
 
-### Observe
+3. Open the target.
+4. In the **Sample Queries** region, click **Add Sample Query**.
+5. Enter:
 
-The top result should be a total page views trend target, with structured values:
+    ```text
+    <copy>
+    Show the overall Wikimedia traffic trend
+    </copy>
+    ```
 
-```text
-<copy>
-Language: fr
-Project: wiktionary
-Period: 1-year
-Frequency: monthly
-</copy>
-```
+6. Click **Add**.
 
-The user did not type `fr`, `wiktionary`, `1-year`, or `monthly` as system codes. Trusted Answer Search mapped human phrasing to controlled values.
+Sample queries are another way application experts can teach the system without retraining a model.
 
-That is a big deal for enterprise apps because controlled values are what applications can actually execute safely.
+## Task 5: Inspect the Target Action
 
-## Task 5: Explore Synonyms and Value Mapping
+Maya's engineering lead now asks: "When the user clicks a result, what actually happens?"
 
-Run:
+1. Stay on the `Total Page Views - All Projects` search target.
+2. Find the **Target Action** region.
+3. Review the URL or SQL action for the target.
 
-```text
-<copy>
-Show page views for all Wikimedia projects over the past 24 months
-</copy>
-```
-
-### Observe
-
-The top result should be:
+For this target, the action is a Wikimedia URL template similar to:
 
 ```text
 <copy>
-Total Page Views - All Projects
+https://stats.wikimedia.org/#/all-projects/reading/total-page-views/normal|bar|:period|~total|:frequency
 </copy>
 ```
 
-The phrase:
+The placeholders are backed by target inputs:
 
 ```text
 <copy>
-past 24 months
+:period
+:frequency
 </copy>
 ```
 
-maps to the controlled period value:
+Those inputs are resolved from target value sets. That is why `past 24 months` can become `2-year`, and `by month` can become `monthly`.
 
-```text
-<copy>
-2-year
-</copy>
-```
+Trusted Answer Search returns the target action metadata. The application decides how to execute it.
 
-This is not magic. It is governed vocabulary. Application experts decide which phrases map to which values.
+## Task 6: Review Target Value Sets
 
-## Task 6: See a Current Limit
+1. In the left navigation menu, click **Target Value Sets**.
+2. Open the `period` value set.
+3. Find the value:
 
-Run:
+    ```text
+    <copy>
+    2-year
+    </copy>
+    ```
 
-```text
-<copy>
-Show page views for all Wikimedia projects this month
-</copy>
-```
+4. Review its synonyms, such as:
 
-### Observe
+    ```text
+    <copy>
+    2 years
+    last 2 years
+    past 24 months
+    last two years
+    </copy>
+    ```
 
-The system should still select a reasonable target:
-
-```text
-<copy>
-Total Page Views - All Projects
-</copy>
-```
-
-But it may not resolve `this month` into an exact current date range. In the tested environment, it fell back to:
-
-```text
-<copy>
-Period: 2-year
-</copy>
-```
-
-This is useful to show honestly. Trusted systems should make limits visible. The goal is not to pretend the system knows everything. The goal is to make behavior inspectable and improvable.
-
-Future enhancements can use named entity recognition or date normalization to map phrases like:
-
-```text
-<copy>
-this month
-last quarter
-last fiscal year
-</copy>
-```
-
-to exact validated values.
+This is controlled vocabulary. Users can say "past 24 months," but the application receives the canonical value `2-year`.
 
 ## Task 7: Review Search History
 
@@ -224,67 +200,107 @@ Search History shows:
 * Feedback.
 * Timestamp.
 
-This is the product manager's favorite page and the developer's early-warning system. It tells you what users actually asked, not what the design document hoped they would ask.
+This is where Maya's team learns what users actually asked, not what the design document hoped they would ask.
 
 ## Task 8: Review Additional Feedback
 
 1. In the left navigation menu, click **Additional Feedback**.
-2. Review any text feedback captured from users.
+2. Review any free-text feedback captured from users.
 
-This helps teams find phrases, expectations, or complaints that should become new descriptions, sample queries, value synonyms, or test cases.
+Additional feedback is useful when users need more than an upvote or downvote. Their comments can become new descriptions, sample queries, synonyms, test questions, or new application targets.
 
-## Task 9: Connect the Pieces
+## Task 9: Review the Draft Before Publishing
 
-Trusted Answer Search is powerful because these features reinforce each other.
+Before Maya promotes the draft, she checks what changed.
 
-| Feature | What You Saw | Why It Matters |
-| --- | --- | --- |
-| Search targets | Trusted report/action catalog | The app controls what can be returned. |
-| Value sets | Language, project, period, frequency | User text becomes validated application inputs. |
-| Draft versions | Safe editing workflow | Experts can improve behavior without changing production immediately. |
-| Feedback | Downvote and correction loop | Bad rankings can be fixed directly. |
-| Descriptions | New phrase matching | Business language can evolve without retraining. |
-| Test runs | Top-1/Top-3/Top-5 metrics | Changes can be measured before promotion. |
-| Search history | Real user queries | Teams can improve based on actual usage. |
-| Additional feedback | User comments | Qualitative feedback becomes curation input. |
+1. In the left navigation menu, click **Search Spaces**.
+2. Open the `trusted_search` search space.
+3. Open your draft version.
+4. Review available draft-change, diff, or version comparison actions.
 
-## Task 10: What to Do Next in a Real Application
+Look for the changes you made:
 
-For your own enterprise app, the same pattern applies:
+```text
+<copy>
+Downvote feedback for Top Viewed Articles - All Projects
+New description: Wikimedia traffic trend over time
+New sample query: Show the overall Wikimedia traffic trend
+</copy>
+```
 
-1. List the trusted actions users should be able to reach.
-2. Add descriptions and sample queries for each action.
-3. Define controlled value sets for parameters.
-4. Launch search in a portal, app page, or widget.
-5. Review user behavior.
-6. Fix weak rankings in a draft.
-7. Run regression tests.
-8. Promote the version when quality is acceptable.
+If the change list does not look right, do not publish yet. Delete the draft and clone the published version again, or return to the affected target and correct the issue.
 
-This is how search becomes a managed application feature instead of a mysterious text box.
+![Published Guardrail](images/published-guardrail.jpg)
+
+## Task 10: Publish the Improved Draft
+
+When the test run looks acceptable and the draft changes make sense, publish the draft.
+
+1. Stay on the draft version for `trusted_search`.
+2. Click **Publish**.
+3. Confirm the publish action.
+4. Return to the **Published Wiki Search URL**.
+5. Search again:
+
+    ```text
+    <copy>
+    Total page views MoM all projects
+    </copy>
+    ```
+
+The portal now uses the improved published version.
+
+## Task 11: Check the Dashboard
+
+1. In the Admin app, click **Dashboard**.
+2. Review the available operational metrics.
+
+![Dashboard Metrics](images/dashboard-metrics.jpg)
+
+Depending on recent activity, the dashboard can show signals such as:
+
+* API call volume and average latency.
+* Feedback metrics.
+* Latest test-run summary.
+* Upvoted, downvoted, and trending queries.
+
+This is the operational view. Trusted search is not just a search box. It is a managed application feature.
+
+## Task 12: Know the Recovery Path
+
+If a draft goes wrong, you do not need heroics.
+
+1. Return to **Search Spaces**.
+2. Open `trusted_search`.
+3. If the bad change is still in a draft, delete the draft and clone the published version again.
+4. If the bad change was already published, clone the last acceptable version into a new draft, validate it, and publish it.
+
+The workflow is intentionally boring. Boring is good when production behavior is involved.
 
 ## Summary
 
 In this lab, you:
 
-* Ran a test suite.
-* Reviewed quality metrics.
-* Inspected structured input extraction.
-* Explored synonym mapping.
-* Saw a current limitation.
-* Reviewed search history and feedback.
+* Ran regression tests.
+* Reviewed Top-1, Top-3, and Top-5 accuracy.
+* Inspected an individual test result.
+* Added a sample query.
+* Reviewed a target action and its target inputs.
+* Reviewed target value set synonyms.
+* Used search history and feedback as improvement signals.
+* Reviewed draft changes before publishing.
+* Published the improved version.
 
-You have now completed the Trusted Answer Search LiveLab.
-
-The closing idea:
+The main idea:
 
 ```text
 <copy>
-Trusted Answer Search gives users natural language,
-developers controlled application actions,
-and experts a measurable way to improve the system over time.
+Trusted Answer Search turns natural-language search into an application
+feature that can be curated, tested, measured, published, and recovered.
 </copy>
 ```
+
+You have now completed the Trusted Answer Search LiveLab.
 
 ## Acknowledgements
 

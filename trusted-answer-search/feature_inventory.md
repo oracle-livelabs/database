@@ -1,134 +1,97 @@
 # Trusted Answer Search LiveLab Feature Inventory
 
-This inventory is based on the shipped Admin APEX app metadata in `trusted_search/apex_ship/f610` and the current LiveLab markdown.
+This inventory is based on the shipped Admin APEX app metadata in `trusted_search/apex_ship/f610`, the Wikimedia sample, and the current LiveLab markdown.
+
+## Priority Model
+
+### P1: Main Story Features
+
+These are the most important, differentiated Trusted Answer Search features. They belong in the primary Lab 4 path.
+
+| Feature | Why It Matters | Where Covered |
+| --- | --- | --- |
+| Natural language to trusted target | Users ask normally, but the app routes to an approved report, URL, or query instead of generating an answer. | Lab 4 |
+| Structured input extraction | Human language becomes controlled inputs such as language, project, period, and frequency. | Lab 4 |
+| Controlled value sets and synonyms | Enterprise-safe vocabulary mapping, such as `past 24 months` to `2-year`. | Lab 4 |
+| Executable target actions | TAS returns an application action, such as a URL or SQL-backed report, not just a label. | Lab 4 |
+| Draft vs published governance | Published behavior is protected; experts clone to draft before changing search behavior. | Lab 4 |
+| Feedback correction loop | Downvote a bad result, rerun the query, and see the correct result move to Rank #1. | Lab 4 |
+| Deterministic search | The same query against the same version returns stable behavior. | Lab 4 |
+
+### P2: Deep-Dive Features
+
+These are natural follow-up questions once the main story lands. They are covered in Lab 5.
+
+| Feature | Natural Follow-Up Question | Where Covered |
+| --- | --- | --- |
+| Regression test runs | Did the fix help, and did it break anything else? | Lab 5 |
+| Top-1/Top-3/Top-5 accuracy | How do we measure search quality? | Lab 5 |
+| Individual test result inspection | Which specific query passed or failed, and why? | Lab 5 |
+| Add sample queries | Besides descriptions, how do experts teach examples of user language? | Lab 5 |
+| Inspect target action URL/SQL | How does TAS connect to my real application workflow? | Lab 5 |
+| Review target value set synonyms | Where do canonical values and synonyms live? | Lab 5 |
+| Search history | What are users actually asking? | Lab 5 |
+| Additional feedback | What did users say beyond upvote/downvote? | Lab 5 |
+| Review draft changes/diff | What exactly changed before publish? | Lab 5 |
+| Publish improved draft | How do approved changes reach the portal app? | Lab 5 |
+| Recovery path | What happens if a draft or published version is wrong? | Lab 5 |
+| Dashboard metrics | How does this feel like an operational system, not just a search box? | Lab 5 |
+
+### P3: Appendix Or Instructor Notes
+
+These are real features, but they are lower priority for the workshop story.
+
+| Feature | Reason Lower Priority |
+| --- | --- |
+| Create/delete search spaces | Setup/admin plumbing; covered only where needed. |
+| Import/export metadata | Important operationally, but not part of the core value moment. |
+| Delete old test runs or cancel active runs | Admin hygiene. |
+| Browse targets as cards or list | Useful UI detail, but implied by Search Targets workflows. |
+| Target maintenance jobs/status | Operational detail for administrators. |
+| Users and search-space access | Enterprise-relevant, but better as an appendix or separate admin lab. |
+| Runtime settings, thresholds, weights, model configuration | Powerful, but can distract from the trusted-search story. |
+| Generate/sync values from table columns | Advanced setup path requiring more application context. |
+| AI-generated value sets | Interesting, but should not compete with the governed deterministic message. |
 
 ## Current Coverage
 
-| Feature | Covered Today | Where |
+| Feature | Covered | Where |
 | --- | --- | --- |
 | Green-button setup | Yes | Get Started |
 | Manual APEX app setup | Yes | Lab 3 |
 | Create a search space | Yes | Lab 3 |
 | Import search targets and target value sets | Yes | Lab 3 |
+| Load regression questions from `test_run.json` | Yes | Lab 3 / Terraform |
+| Publish the sample search space | Yes | Lab 3 / Terraform |
 | Run a natural-language query | Yes | Lab 4 |
+| Inspect target inputs | Yes | Lab 4 |
+| Open an executable target action | Yes | Lab 4 |
 | Clone published version to draft | Yes | Lab 4 |
 | Published-version editing guardrail | Yes | Lab 4 |
 | Downvote a bad result | Yes | Lab 4 |
 | Add a target description | Yes | Lab 4 |
+| Controlled synonym/value mapping | Yes | Lab 4 |
 | Deterministic repeated search | Yes | Lab 4 |
 | Run/view test runs and quality metrics | Yes | Lab 5 |
-| Structured input extraction | Yes | Lab 5 |
-| Search history | Light coverage | Lab 5 |
-| Additional feedback | Light coverage | Lab 5 |
+| Add a sample query | Yes | Lab 5 |
+| Inspect target action URL and inputs | Yes | Lab 5 |
+| Review target value set synonyms | Yes | Lab 5 |
+| Search history | Yes | Lab 5 |
+| Additional feedback | Yes | Lab 5 |
+| Review draft changes/diff | Yes | Lab 5 |
+| Publish improved draft | Yes | Lab 5 |
+| Recovery path | Yes | Lab 5 |
+| Dashboard metrics | Yes | Lab 5 |
 
-## Features Available In The Admin App
+## Remaining Gaps
 
-### Dashboard
+The current workshop intentionally does not walk through every admin feature.
 
-* API call volume and average latency.
-* Feedback metrics.
-* Latest test-run summary.
-* Top upvoted, downvoted, and trending queries.
-* Operational view that makes TAS feel like a managed search system, not just a search box.
+* Creating a brand-new target from a failed query is not shown.
+* Choosing another target when the expected result is not in the top results is not shown.
+* Marking a query as irrelevant is not shown.
+* Editing a target action is not shown; the lab inspects one instead.
+* Creating a new target value set is not shown; the lab reviews an existing one.
+* User administration and runtime settings are not shown.
 
-### Search Spaces
-
-* Create a new search space.
-* Update search-space metadata.
-* Open the version tree.
-* Clone a published version into a draft.
-* Publish a draft.
-* Delete versions/search spaces.
-* Import/export search metadata.
-* Generate diffs between versions.
-* Review current draft changes.
-* Run search-space regression/impact analysis before promotion.
-
-### Search Targets
-
-* Browse targets as cards or list.
-* Create a new target.
-* Open and edit a target.
-* Add/edit/delete descriptions.
-* Add/edit/delete sample queries.
-* Edit target action as URL or SQL.
-* Add target inputs backed by target value sets.
-* Delete targets.
-* Inspect target maintenance jobs/status.
-
-### Target Value Sets
-
-* Create a new target value set.
-* Add values and synonyms manually.
-* Set a default value.
-* Edit/delete values and synonyms.
-* Generate/sync values from a database table column.
-* Generate values with AI, if configured.
-* Delete target value sets.
-
-### Query Tester
-
-* Run a query against a selected search-space version.
-* Inspect ranked targets.
-* Inspect extracted target inputs.
-* Upvote/mark the best target.
-* Downvote bad matches.
-* Choose another target when the expected result is not in the top results.
-* Mark a query as irrelevant.
-* Create a target from a failed/no-good-result query.
-
-### Test Runs
-
-* Upload curated regression questions from `test_run.json`.
-* Run tests from uploaded questions.
-* Run tests from sample queries.
-* Run tests from past user queries.
-* View past test runs.
-* Inspect run status, progress, Top-1/Top-3/Top-5 accuracy, and passed queries.
-* Drill into individual query results and target-input mismatches.
-* Cancel active runs and delete old runs.
-
-### Search History And Feedback
-
-* Review real user queries.
-* Inspect feedback details for a query.
-* Use query history as input for new descriptions, sample queries, and regression tests.
-* Review additional free-text feedback.
-
-### Users And Settings
-
-* Add users.
-* Grant search-space access.
-* Manage runtime settings such as thresholds, weights, model configuration, deduplication, and resource controls.
-
-## Gaps In The Current Story
-
-* Target value set creation is not currently shown, even though it is one of the clearest ways to explain controlled vocabulary.
-* Editing a target action is not shown. This is important because it proves TAS returns executable application actions, not just labels.
-* Adding sample queries is not shown. This is a good companion to adding descriptions because it explains the two kinds of expert evidence.
-* Publishing the draft after validation is only implied. The lab should explicitly close the loop: fix, test, review diff, publish.
-* Rollback/delete-draft behavior is not shown. Enterprise developers will ask how to recover from a bad curation change.
-* Search-space diff/current draft changes are not shown, but they are very useful for the governance story.
-* Query Tester's "Choose another target" and "Mark question as irrelevant" workflows are not shown.
-* Dashboard metrics are only referenced lightly. They should be used as the final proof page.
-
-## Recommended Demo Arc
-
-1. Start with the broken query and correction loop.
-2. Show that the correction is isolated in a draft.
-3. Add a phrase as a description.
-4. Add or edit a target value set synonym to show controlled vocabulary.
-5. Add one sample query to show another form of expert evidence.
-6. Run regression tests.
-7. Review diff/current draft changes.
-8. Publish the draft.
-9. Return to the dashboard and show metrics/history as the operational record.
-
-## Optional Advanced Branches
-
-* Create a brand-new target from a failed query.
-* Edit a target action URL to pass a new target input.
-* Sync a target value set from a database table column.
-* Use search history to create a new regression question.
-* Show user/search-space access control.
-* Show settings only as an admin/operator appendix; avoid making it part of the main story.
+These are good candidates for an optional advanced appendix after the core LiveLab is stable.
