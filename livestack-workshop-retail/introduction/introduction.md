@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Retailers are under pressure to make faster decisions while data is spread across commerce systems, fulfillment networks, customer engagement platforms, social channels, analytics tools, and AI experiments. Seer Sporting Goods uses Oracle AI Database 26ai to bring those workloads together on one governed data foundation.
+Retail teams make better decisions when the evidence is close to the work. That gets harder when orders, fulfillment data, customer signals, social activity, analytics, and AI experiments live in different places. Seer Sporting Goods uses Oracle AI Database 26ai to keep those retail signals in one governed database foundation.
 
-In this workshop, you run hands-on exercises in an Autonomous Database 26ai instance. The LiveStack application provides the visible retail scenes: Data Foundation, Retail Command Center, Customer Trend Signals, Creator Influence Network, Intelligent Fulfillment Network, Unified Order Intelligence, Retail OML Analytics, Ask Retail Data, and Retail AI Agent Console. The core learning happens in Database Actions SQL Worksheet, where you inspect the database objects that power those scenes.
+In this workshop, you run hands-on exercises in an Autonomous Database 26ai instance. The LiveStack application shows the retail workflow across data foundation, command center, customer signals, creator influence, fulfillment, orders, OML analytics, Ask Retail Data, and agent actions. The core learning happens in Database Actions SQL Worksheet, where you inspect the database objects behind those screens.
 
-Oracle Database 26ai acts as the governed converged data platform. The same database stores relational rows, JSON Duality documents, vector embeddings, graph relationships, spatial locations, OML models, semantic comments, PL/SQL tools, and audit records. That lets a retail team move through a single decision loop instead of copying evidence into disconnected specialty systems.
+The same database stores the rows, JSON documents, vectors, graph relationships, spatial locations, OML models, semantic comments, PL/SQL tools, and audit records used in the labs. That means the learner can follow the retail decision path without switching between disconnected stores or guessing where the evidence came from.
 
 ### Prerequisites
 
@@ -20,7 +20,7 @@ Oracle Database 26ai acts as the governed converged data platform. The same data
 In this workshop, you will:
 
 - Query the database foundation behind the Seer Sporting Goods Retail LiveStack.
-- Connect common retail challenges such as fragmented data, fast-changing demand, inventory risk, fulfillment complexity, limited self-service analytics, and governed AI adoption to database-backed evidence.
+- Connect common retail problems, such as fragmented data, fast-changing demand, inventory risk, fulfillment complexity, limited self-service analytics, and governed AI use, to database-backed evidence.
 - Inspect Retail Command Center metrics that combine orders, revenue, social momentum, returns exposure, inventory, and agent activity.
 - Use JSON Relational Duality and VPD to inspect governed order intelligence.
 - Use `ALL_MINILM_L12_V2`, `VECTOR_EMBEDDING`, and `VECTOR_DISTANCE` for semantic product and signal matching.
@@ -34,7 +34,7 @@ Estimated Workshop Time: 90 minutes
 
 ## Application Screens
 
-These screenshots come from the running Seer Sporting Goods Retail LiveStack and show the application flow that the SQL labs explain.
+These screenshots come from the running Seer Sporting Goods Retail LiveStack. They show the application flow that the SQL labs explain.
 
 ![Seer Sporting Goods LiveStack welcome page](images/seer-sporting-goods-welcome.png " ")
 
@@ -43,4 +43,5 @@ These screenshots come from the running Seer Sporting Goods Retail LiveStack and
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026
