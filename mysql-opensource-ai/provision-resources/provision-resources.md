@@ -402,7 +402,7 @@ Configure OCI Generative AI integration with the Cline extension inside Visual S
 
     ![Copy model ocid](images/genaikey7.png "Copy model ocid for different model")
 
-    5. paste this in **model ID** under **Cline settings**
+    5. Paste this in **model ID** under **Cline settings**
 
 
 You may now **proceed to the next lab**.
