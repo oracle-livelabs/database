@@ -2,39 +2,99 @@
 
 ## Introduction
 
-In this lab, you will gather the required data and prepare the environment for installing **Oracle Trusted Answer Search**. This platform is a purpose-built “language-to-report” mapping system that reliably routes natural-language questions to the correct reports or actions. By the end of this lab, you will have the core infrastructure and configuration details ready for the backend installation.
+In this section, you will confirm which workshop path you are using.
 
-> **Note:** Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless (ADB-S)** or **on-premises** using Oracle Database 23ai or later. This workshop specifically focuses on the verified deployment path for **OCI ADB-S**.
+Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless (ADB-S)** or on-premises using Oracle Database 23ai or later. This workshop focuses on OCI ADB-S.
 
-**Estimated time:** 5 minutes.
+**Estimated time:** 5 minutes
 
 ### Objectives
-* Understand prerequisites and gather required information for installation.
-* Provision the foundational OCI resources required for the workshop.
+
+* Choose the green button path or the manual walkthrough path.
+* Gather the values needed for manual installation.
+* Confirm where to start the hands-on labs.
 
 ### Prerequisites
-* Access to an **Oracle Cloud Infrastructure (OCI) tenancy**.
-* Basic familiarity with the **Oracle Autonomous AI Database**.
-* Basic familiarity with **Linux (x86-64)** and **Python** environments.
-* Oracle Database version **23ai or later**.
 
-## Task 1: Create Oracle Autonomous AI Database
-1. In the OCI Console, navigate to **Oracle Database** and create a new **Autonomous Database**.
-2. Ensure you select **Database version 23ai or later** (26ai is recommended).
-3. Set a strong **ADMIN password** and note it down, as it is required for the installation script.
-4. Once provisioned, go to **Database Connection**, download the **Database Wallet**, and note your preferred **TNS alias** (e.g., `_high`).
+For the **green button path**, you need:
 
-## Task 2: Create OCI Compute VM
-1. Create an **Oracle Linux 9 (x86-64)** Compute VM in the same region as your database.
-2. This VM will serve as your environment for converting your **ONNX embedding model** via **OML4Py** and for running the backend installer shell script.
+* The **Admin URL** from your LiveLabs reservation or Terraform `admin_url` output.
+* The **Published Wiki Search URL** from your LiveLabs reservation or Terraform `published_wiki_search_url` output.
+* The `TASADMIN` username.
+* The `TASADMIN` password.
 
-## Task 3: Gather installation prerequisites for the next lab
-1. Your **Database Wallet** zip file and associated **TNS alias**.
-2. Your **Autonomous Database ADMIN password**.
-3. A chosen **TASADMIN password**, which will be used to log in to the APEX Admin App.
-4. A **Pre-Authenticated Request (PAR) URL** for your embedding model (e.g., `multilingual-e5-base.onnx`) stored in OCI Object Storage.
+For the **manual walkthrough path**, you need:
 
-You may now **proceed to the next lab**
+* Access to an Oracle Cloud Infrastructure tenancy.
+* Permission to create an Autonomous Database and a small Compute VM.
+* Basic familiarity with Linux command-line work.
+* Oracle Database 23ai or later. Oracle Database 26ai is recommended.
+
+## Task 1: If You Are Using Green Button
+
+If your environment was provisioned for you, do not install anything manually.
+
+Confirm that you have these values:
+
+```text
+<copy>
+Admin URL
+Published Wiki Search URL
+TASADMIN username
+TASADMIN password
+</copy>
+```
+
+Then skip directly to **Lab 4: Trusted Continuous Improvement of Search**.
+
+Lab 4 is the product story: an end-user search experience, a governed draft, expert feedback, and a corrected Rank #1 result.
+
+### If the Direct Admin App URL Does Not Open
+
+The green-button stack normally gives you a direct Admin app URL. If that URL does not open the app, use the APEX home URL instead.
+
+1. Change the URL so it ends with:
+
+    ```text
+    <copy>
+    /ords/apex
+    </copy>
+    ```
+
+2. Sign in to the `TASADMIN` workspace with the same username and password.
+
+    ![Sign in to TAS workspace](images/sign-in-tas-workspace.png)
+
+3. Click **App Builder**.
+
+    ![Navigate to App Builder](images/navigate-to-app-builder.png)
+
+4. Open or run **Oracle Trusted Answer Search - Admin App**.
+
+After the Admin app opens, continue to **Lab 4**.
+
+## Task 2: If You Are Doing the Manual Walkthrough
+
+You will complete the setup labs first:
+
+1. **Lab 1:** Prepare the ONNX embedding model and database connectivity.
+2. **Lab 2:** Run the backend installer.
+3. **Lab 3:** Load the Admin app, Portal app, and Wikimedia sample data.
+4. **Lab 4:** Start the main trusted-search storyline.
+
+The setup labs are intentionally practical. They get the database, backend, APEX apps, and sample data ready so that Lab 4 can focus on the value of the product.
+
+## Task 3: Gather Manual Installation Values
+
+Before continuing to Lab 1, gather or plan for:
+
+* Autonomous Database `ADMIN` password.
+* A `TASADMIN` password for the Trusted Answer Search admin user.
+* A database connect string or wallet/TNS alias.
+* A Pre-Authenticated Request URL for the ONNX embedding model.
+* The Trusted Answer Search product zip containing `backend_ship.zip` and `apex_ship.zip`.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
@@ -42,4 +102,4 @@ You may now **proceed to the next lab**
 
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - April, 2026
+**Last Updated Date** - May, 2026
