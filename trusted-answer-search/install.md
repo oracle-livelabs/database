@@ -1,103 +1,251 @@
-# Lab 2: Install and Configure Trusted Answer Search
+# Lab 3: Load APEX Apps and Sample Data
 
 ## Introduction
-Oracle Trusted Answer Search ships two APEX applications: an **Admin App** for managing the search system and a **Portal App** for end-users to issue queries. In this lab, you will deploy these applications by creating a dedicated workspace linked to your previously installed backend.
 
-**Estimated time:** 20 minutes.
+In this lab, you will load the Trusted Answer Search APEX applications and the Wikimedia sample search space.
+
+Oracle Trusted Answer Search ships two APEX apps:
+
+* **Admin App:** where application experts manage search spaces, search targets, value sets, feedback, and regression tests.
+* **Portal App:** a simple end-user search experience that shows how Trusted Answer Search can sit in front of an application.
+
+If you are using the green button environment, skip this lab and go directly to **Lab 4**. Your apps and sample data are already loaded.
+
+**Estimated time:** 25 minutes
 
 ### Objectives
-* Access Oracle APEX from the OCI Console.
-* Create and configure a dedicated APEX workspace for **TASADMIN**.
-* Import and configure the Admin and Portal applications.
-* Launch the management interface.
 
-## Task 1: Access Oracle APEX from OCI
-1. In the OCI Console, navigate to your **Autonomous Database** instance.
-2. Click on the **Tool configuration** tab.
-3. Locate **Oracle APEX** and click **Copy** next to the **Public access URL**.
-4. Paste the URL into your browser to launch the APEX login screen.
+In this lab, you will:
+
+* Create the `TASADMIN` APEX workspace.
+* Import the Admin app.
+* Import the Portal app.
+* Load the Wikimedia sample search targets, value sets, and test queries.
+* Confirm that the Admin app is ready for the storyline in Lab 4.
+
+### Prerequisites
+
+This lab assumes you completed Lab 2 and have:
+
+* A working APEX URL for your Autonomous Database.
+* The database `ADMIN` password.
+* The `TASADMIN` password from `install_backend.conf`.
+* `admin.zip` and `portal.zip` from `apex_ship.zip`.
+* The Wikimedia sample files:
+  * `search_target.json`
+  * `target_value_set.json`
+  * `test_run.json`
+
+## Task 1: Open Oracle APEX
+
+1. In the OCI Console, navigate to your **Autonomous Database**.
+2. Click **Tool configuration**.
+3. Find **Oracle APEX** and copy the **Public access URL**.
+4. Open the URL in your browser.
 
 ![OCI APEX URL](images/apex-from-oci.png)
-*This tab in the OCI console provides the direct access link to your database's low-code development environment.*
 
 ## Task 2: Create the TASADMIN Workspace
+
 1. Sign in to the **INTERNAL** workspace using your database `ADMIN` credentials.
-2. From the **Administration Services** dashboard, click the green **Create Workspace** button.
+2. Click **Create Workspace**.
 
     ![Administration Services](images/first-apex-screen.png)
-    *The landing page for APEX Instance Administration.*
 
-4. Choose the **Existing Schema** option to associate the workspace with your pre-provisioned TASADMIN backend schema.
+3. Choose **Existing Schema**.
 
     ![Create Workspace Choice](images/create-workspace-existing-schema.png)
-    *Selecting 'Existing Schema' allows applications in your workspace to access data stored within that schema.*
 
-4. **Configure the workspace details**:
-    * **Database User:** `TASADMIN`
-    * **Workspace Name:** `TASADMIN`
-    * **Workspace Username:** `ADMIN`
-    * **Workspace Password:** [Provide a secure password]
+4. Configure the workspace.
+
+    | Field | Value |
+    | --- | --- |
+    | Database User | `TASADMIN` |
+    | Workspace Name | `TASADMIN` |
+    | Workspace Username | `ADMIN` |
+    | Workspace Password | Choose a temporary APEX workspace admin password |
+
 5. Click **Create Workspace**.
 
 ![Workspace Configuration](images/configure-workspace.png)
-*Linking the workspace to the TASADMIN database user.*
 
-## Task 3: Sign In to the New Workspace
-1. **Sign Out** of the INTERNAL workspace by clicking the profile icon in the top-right and selecting **Sign out**.
+## Task 3: Sign In to the TASADMIN Workspace
+
+1. Sign out of the **INTERNAL** workspace.
 
     ![Sign Out](images/sign-out.png)
-    *Ensure you exit the internal administration environment before signing in to your app workspace.*
 
-2. On the login screen, select or enter the **TASADMIN** workspace and sign in with the credentials you just created.
+2. On the APEX login page, enter the `TASADMIN` workspace.
+3. Sign in with the workspace administrator credentials you created in Task 2.
 
     ![Sign In TASADMIN](images/sign-in-tas-workspace.png)
-    *Sign in to the specific workspace where the TAS applications will be hosted.*
 
 ## Task 4: Import the Admin App
-The Admin App is the primary tool for administrators to manage search spaces and targets.
 
-1. From the dashboard, navigate to the **App Builder**.
+1. From the workspace home page, click **App Builder**.
 
     ![Navigate to App Builder](images/navigate-to-app-builder.png)
-    *The App Builder is where you create and import APEX applications.*
 
-2. Click the **Import** button.
+2. Click **Import**.
 
     ![Import Choice](images/import-app.png)
-    *Select the Import option to load the TAS application packages.*
 
-3. Upload the `admin.zip` file. Ensure the **File Character Set** is set to **Unicode UTF-8**.
+3. Upload `admin.zip`.
 
     ![Upload Admin Zip](images/import-admin-app.png)
-    *Uploading the Admin App export file.*
 
-4. On the **Install Application** page:
-    * Verify the name is **Oracle Trusted Answer Search - Admin App**.
-    * Select the **Parsing Schema** as **TASADMIN**.
-    * Ensure **Build Status** is set to **Run Application Only**.
+4. On the install page, use these settings.
+
+    | Setting | Value |
+    | --- | --- |
+    | Application Name | Oracle Trusted Answer Search - Admin App |
+    | Parsing Schema | `TASADMIN` |
+    | Build Status | Run Application Only |
+    | Install As Application | Auto Assign New Application ID |
+
 5. Click **Install Application**.
 
     ![Configure Admin App](images/configure-admin-app.png)
-    *Installation parameters for the Admin App.*
 
 ## Task 5: Import the Portal App
-The Portal App provides a ready-to-use search interface for end-users.
 
-1. Repeat the import steps from Task 4 using the `portal.zip` file.
-2. Ensure it is installed into the same **TASADMIN** workspace and parsing schema as the Admin app.
+1. Return to **App Builder**.
+2. Click **Import**.
+3. Upload `portal.zip`.
+4. Install it into the same workspace and parsing schema.
 
-    ![Configure Portal App](images/configure-portal-app.png)
-    *Installation parameters for the Portal App.*
+Use these settings.
+
+| Setting | Value |
+| --- | --- |
+| Parsing Schema | `TASADMIN` |
+| Build Status | Run Application Only |
+| Install As Application | Auto Assign New Application ID |
+
+![Configure Portal App](images/configure-portal-app.png)
+
+The Admin app is the control room. The Portal app is the front door.
 
 ## Task 6: Launch the Admin App
-1. Once installation is complete, click the **Run Application** button.
-2. Sign in using the **TASADMIN** username and the **TASADMIN_PASSWORD** you defined in your `install_backend.conf` file during the backend installation.
 
+1. From App Builder, locate **Oracle Trusted Answer Search - Admin App**.
+2. Click **Run Application**.
+3. Sign in with:
 
-You have successfully installed the Trusted Answer Search applications! You may now **proceed to the next lab** to begin curating your search mapping.
+    ```text
+    <copy>
+    Username: TASADMIN
+    Password: {TASADMIN_PASSWORD from install_backend.conf}
+    </copy>
+    ```
+
+You should see the Trusted Answer Search Admin dashboard.
+
+## Task 7: Create a Search Space
+
+1. In the Admin app sidebar, click **Search Spaces**.
+2. Click **Create Search Space**.
+3. Enter:
+
+    ```text
+    <copy>
+    trusted_search
+    </copy>
+    ```
+
+4. Click **Create**.
+5. Open the new search space.
+
+![Search Space Versions Screen](images/navigate-to-search-space.png)
+
+## Task 8: Import the Wikimedia Search Metadata
+
+The Wikimedia sample gives you a realistic set of analytics reports. The search-space import uses two files:
+
+* `search_target.json` for the trusted reports/actions.
+* `target_value_set.json` for controlled parameter values.
+
+1. On the search space version page, click **Import**.
+2. Upload:
+
+    ```text
+    <copy>
+    search_target.json
+    target_value_set.json
+    </copy>
+    ```
+
+3. Click **Import**.
+
+![Import Search Metadata](images/upload-search-targets.png)
+
+The sample data gives you:
+
+* Search targets such as page views, edits, articles, editors, and country maps.
+* Value sets for period, frequency, project, and language.
+
+## Task 9: Load the Wikimedia Regression Questions
+
+The `test_run.json` file contains curated regression questions for the Wikimedia sample. These are the questions you will use later to measure Top-1, Top-3, and Top-5 accuracy.
+
+1. In the Admin app sidebar, click **Test Runs**.
+2. Find the upload option for test questions.
+3. Upload:
+
+    ```text
+    <copy>
+    test_run.json
+    </copy>
+    ```
+
+4. Confirm that the uploaded questions are available for future test runs.
+
+In the green-button path, Terraform performs this step for you.
+
+## Task 10: Publish the Search Space Version
+
+The Portal app searches the published version of a search space. Publish the version now so Lab 4 starts from the same state as the green-button environment.
+
+1. In the Admin app sidebar, click **Search Spaces**.
+2. Open the `trusted_search` search space.
+3. Open the current draft version.
+4. Click **Publish**.
+5. Confirm the publish action.
+
+After publishing, many edit buttons are disabled for that version. That is expected. Published versions are read-only. In Lab 4, you will clone this published version into a draft before making improvements.
+
+## Task 11: Confirm the Portal App Opens
+
+1. Return to App Builder.
+2. Run **Oracle Trusted Answer Search - Portal App**.
+3. Sign in with:
+
+    ```text
+    <copy>
+    Username: TASADMIN
+    Password: {TASADMIN_PASSWORD from install_backend.conf}
+    </copy>
+    ```
+
+4. Confirm that the Portal app opens and is using the `trusted_search` search space.
+
+Record these two links for the rest of the workshop:
+
+```text
+<copy>
+Admin URL: {URL for Oracle Trusted Answer Search - Admin App}
+Published Wiki Search URL: {URL for Oracle Trusted Answer Search - Portal App}
+</copy>
+```
+
+Do not spend much time testing the Portal app yet. The real story begins in Lab 4.
+
+You may now **proceed to Lab 4**.
 
 ## Acknowledgements
+
 **Authors**
+
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - April, 2026
+**Last Updated Date** - May, 2026
