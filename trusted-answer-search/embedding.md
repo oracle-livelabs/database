@@ -36,7 +36,9 @@ This VM will be used for both the ONNX model conversion and running the backend 
 4. Once running, connect via SSH:
 
     ```sh
+    <copy>
     ssh opc@PUBLIC-IP
+    </copy>
     ```
 
 ---
@@ -48,15 +50,19 @@ This VM will be used for both the ONNX model conversion and running the backend 
 Python 3.13 is required by the OML4Py client. It is available via the Oracle Linux EPEL developer repository:
 
 ```sh
+<copy>
 sudo dnf config-manager --enable ol9_developer_EPEL
 sudo dnf install -y python3.13
+</copy>
 ```
 
 ### 3.2 Create a virtual environment
 
 ```sh
+<copy>
 python3.13 -m venv ~/oml4py-env
 source ~/oml4py-env/bin/activate
+</copy>
 ```
 
 ### 3.3 Download the OML4Py client
@@ -69,9 +75,11 @@ source ~/oml4py-env/bin/activate
 ### 3.4 Unzip the OML4Py client
 
 ```sh
+<copy>
 cd ~/oml4py
 unzip oml4py-client-linux-x86_64-2.1.1.zip
 cd client/
+</copy>
 ```
 
 The zip extracts to a `client/` subdirectory containing:
@@ -85,11 +93,13 @@ The zip extracts to a `client/` subdirectory containing:
 Install the dependencies first, then the OML4Py wheel:
 
 ```sh
+<copy>
 pip install oracledb onnxruntime onnx
 pip install ./oml-2.1.1-cp313-cp313-linux_x86_64.whl
 pip install transformers torch onnxruntime_extensions requests sentencepiece
 pip install "optimum[exporters]"
 pip install "optimum[onnxruntime]" --upgrade
+</copy>
 ```
 
 ---
@@ -99,10 +109,12 @@ pip install "optimum[onnxruntime]" --upgrade
 Create and run the following Python script to export the recommended `multilingual-e5-base` model:
 
 ```python
+<copy>
 from oml.utils import EmbeddingModel
 
 em = EmbeddingModel(model_name="intfloat/multilingual-e5-base")
 em.export2file("multilingual-e5-base", output_dir=".")
+</copy>
 ```
 
 Deprecation and TorchScript warnings during export are expected and safe to ignore.
@@ -110,8 +122,10 @@ Deprecation and TorchScript warnings during export are expected and safe to igno
 Verify the output file was created:
 
 ```sh
+<copy>
 ls -lh multilingual-e5-base.onnx
 # Expected: approximately 283 MB
+</copy>
 ```
 
 ---
@@ -131,10 +145,12 @@ follow the prompts for your tenancy OCID, user OCID, region, and API key.
 Then upload the model:
 
 ```sh
+<copy>
 oci os object put \
   --bucket-name TAS-models \
   --file multilingual-e5-base.onnx \
   --name multilingual-e5-base.onnx
+</copy>
 ```
 
 ### 5.3 Generate a Pre-Authenticated Request (PAR) URL
@@ -146,13 +162,17 @@ oci os object put \
 
 The URL will look like:
 ```
+<copy>
 https://objectstorage.{REGION}.oraclecloud.com/p/{PATH}/n/{NAMESPACE}/b/{BUCKET}/o/multilingual-e5-base.onnx
+</copy>
 ```
 
 Verify the URL is reachable from your VM:
 ```sh
+<copy>
 curl -I "{your-PAR-URL}"
 # Expect: HTTP/1.1 200 OK
+</copy>
 ```
 
 ---
@@ -162,21 +182,27 @@ curl -I "{your-PAR-URL}"
 ### 6.1 Install Oracle Instant Client and SQL*Plus
 
 ```sh
+<copy>
 sudo dnf install -y oracle-instantclient-release-23ai-el9
 sudo dnf install -y oracle-instantclient-basic oracle-instantclient-sqlplus
+</copy>
 ```
 
 Add SQL*Plus to your PATH:
 
 ```sh
+<copy>
 export PATH=/usr/lib/oracle/23/client64/bin:$PATH
 echo 'export PATH=/usr/lib/oracle/23/client64/bin:$PATH' >> ~/.bashrc
+</copy>
 ```
 
 Verify:
 
 ```sh
+<copy>
 sqlplus -version
+</copy>
 ```
 
 ### 6.2 Copy the wallet to the VM
@@ -184,112 +210,53 @@ sqlplus -version
 From your local machine:
 
 ```sh
+<copy>
 scp -i ~/.ssh/your-private-key Wallet_{db_name}.zip opc@{vm-ip}:~/
+</copy>
 ```
 
 ### 6.3 Unzip and configure the wallet
 
 ```sh
+<copy>
 mkdir -p ~/adb-wallet
 unzip Wallet_{db_name}.zip -d ~/adb-wallet/
+</copy>
 ```
 
 Edit `~/adb-wallet/sqlnet.ora` and replace the `DIRECTORY` value with the
 absolute path to the wallet folder:
 
 ```
+<copy>
 WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/home/opc/adb-wallet/")))
 SSL_SERVER_DN_MATCH=yes
+</copy>
 ```
 
 ### 6.4 Set the TNS_ADMIN environment variable
 
 ```sh
+<copy>
 export TNS_ADMIN=/home/opc/adb-wallet/
 echo 'export TNS_ADMIN=/home/opc/adb-wallet/' >> ~/.bashrc
+</copy>
 ```
 
 ### 6.5 Verify connectivity
 
 ```sh
+<copy>
 sqlplus ADMIN/{your-admin-password}@{tns-alias}
 # e.g. sqlplus ADMIN/mypassword@tasdb_high
+</copy>
 ```
 
 You should reach a `SQL>` prompt. Type `exit` to quit.
 
----
+You now have the model location and database connectivity values needed by the backend installer.
 
-## Task 7: Configure install_backend.conf
-
-Navigate to the backend installer directory and make the config file writable:
-
-```sh
-chmod u+w install_backend.conf
-```
-
-Open it and set the following values:
-
-```
-# Mandatory - all setups
-DB_CONNECT_STRING={your-tns-alias}
-DB_USER=ADMIN
-DB_PASSWORD={your-admin-password}
-TASADMIN_PASSWORD={choose-a-password-for-the-admin-app}
-MODEL_FILE_NAME=multilingual-e5-base.onnx
-
-# Mandatory - ADB-S only
-MODEL_URI={your-PAR-URL}
-```
-
-Leave `CREDENTIAL_NAME` commented out — it is not needed when using a PAR URL,
-since the authentication token is embedded in the URL itself.
-
-Leave `TABLESPACE_NAME` blank — it is not applicable on ADB-S.
-
----
-
-## Task 8: Run the Backend Installer
-
-Execute the installation script from the backend installer directory:
-
-```sh
-./install_backend.sh --config install_backend.conf
-```
-
-The installer will:
-1. Run pre-installation checks (database version, privileges, connectivity)
-2. Create the `TRUSTED_SEARCH` schema
-3. Create the `TASADMIN` user with Search Administrator role
-4. Download and load the ONNX embedding model from Object Storage into the database
-5. Install PL/SQL packages, dictionary tables, indexes, and views
-
-Upon successful completion, the terminal will display a green
-**"Installation Completed Successfully"** banner with all steps marked ✔.
-
-### If you need to re-run after a failed attempt
-
-The installer does not clean up after itself on failure. Run the uninstaller
-first, then re-run:
-
-```sh
-./uninstall_backend.sh --config install_backend.conf
-# Confirm the prompt when asked
-./install_backend.sh --config install_backend.conf
-```
-
----
-
-## Key Troubleshooting Notes
-
-| Error | Cause | Fix |
-|---|---|---|
-| `ORA-54426`: tensor contains multiple variable dimensions | Model was not exported via OML4Py | Re-export using `EmbeddingModel.export2file()` as shown in Task 4 |
-| `ORA-20000`: unexpected internal error during model load | Generic wrapper hiding `ORA-54426` | Run `DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD` manually in SQL*Plus to see the real error |
-| `oracle-instantclient-basic` not found | Instant Client repo not added | Run `sudo dnf install -y oracle-instantclient-release-23ai-el9` first |
-| `sqlplus: command not found` | PATH not set | `export PATH=/usr/lib/oracle/23/client64/bin:$PATH` |
-| Wallet files readonly in editor | Unzipped as root | `sudo chown -R opc:opc ~/adb-wallet/` |
-| `install_backend.conf` readonly | File permissions | `chmod u+w install_backend.conf` |
+You may now **proceed to the next lab**.
 
 ---
 
@@ -299,4 +266,4 @@ first, then re-run:
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
 
-**Last Updated** — April, 2026
+**Last Updated Date** - May, 2026
