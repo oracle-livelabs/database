@@ -152,16 +152,6 @@ Replace the following values:
 
 > **Note:** If the dynamic group belongs to the default identity domain, you can omit specifying the identity domain name.
 
-## Expected Outcome
-
-| Validation Item | Expected Result |
-|---|---|
-| Database Created | `mydb` visible in `SHOW DATABASES` |
-| User Created | `app_user` login successful |
-| DB Access | Can use `mydb` schema |
-| GenAI Access | `EXECUTE` privilege on `sys` routines |
-
-
 You may now **proceed to the next lab**.
 
 ## Acknowledgements

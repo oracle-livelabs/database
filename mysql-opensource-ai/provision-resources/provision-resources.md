@@ -22,7 +22,7 @@ Estimated Time: 30-40 minutes
 
 ### Objectives
 
-In this lab, you will provision the infrastructure required for the AI-powered eCommerce application using Oracle Cloud Infrastructure (OCI) Resource Manager and Terraform. You will also validate connectivity to the Compute VM and MySQL HeatWave database and configure Visual Studio Code with OCI Generative AI integration.
+In this lab, you will provision the infrastructure required for the AI-powered eCommerce application using Oracle Cloud Infrastructure (OCI) Resource Manager and Terraform. You will also validate connectivity to the Compute VM and MySQL HeatWave database and configure Visual Studio Code with OCI Generative AI integration and Enabled Cline for prompt-driven AI development.
 
 ### Prerequisites
 
@@ -404,17 +404,6 @@ Configure OCI Generative AI integration with the Cline extension inside Visual S
 
     5. paste this in **model ID** under **Cline settings**
 
-
-## Expected Outcome
-
-At the end of this lab, you will have:
-
-- Provisioned OCI infrastructure using Terraform
-- Configured MySQL HeatWave
-- Connected Visual Studio Code to OCI resources
-- Configured OCI Generative AI integration
-- Enabled Cline for prompt-driven AI development
-- Prepared the environment for building the AI-powered eCommerce application
 
 You may now **proceed to the next lab**.
 
