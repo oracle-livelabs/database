@@ -1,0 +1,191 @@
+# Customer Trend Signals with AI Vector Search
+
+## Introduction
+
+Customer demand often shows up in shopper language and creator activity before it shows up in sales reports. That signal is easy to miss when product language, reviews, social posts, sentiment, and inventory data sit in different places. This lab follows the Customer Trend Signals scene in the runbook and shows how search by meaning can connect shopper intent to products.
+
+Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. The LiveStack application connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you generate product embeddings and run dynamic semantic search against database-managed product vectors.
+
+Estimated Time: 10 minutes
+
+### Objectives
+
+- Connect Semantic Product Discovery to product embeddings stored in Oracle Database.
+- Generate product embeddings with the MiniLM embedding model.
+- Run dynamic semantic search with `VECTOR_EMBEDDING` and `VECTOR_DISTANCE`.
+- Connect Social Trend Intelligence to cached creator-post and product matches.
+- Explain how shopper language, social momentum, sentiment, and product demand become governed SQL evidence.
+
+
+## Task 1: Review Customer Trend Signals
+1. Review the related application screen before you run the SQL.
+
+    ![Customer Trend Signals overview with semantic search and social intelligence](images/customer-trend-signals-overview.png " ")
+
+    *Figure 1: Customer Trend Signals connects semantic product discovery with social trend intelligence.*
+
+    The page shows two connected ideas. Semantic Product Discovery uses vector search to match shopper language to catalog items. Social Trend Intelligence connects product demand to creator posts, platforms, and social momentum. In the next task, you generate the product embeddings that make the semantic search portion work.
+
+## Task 2: Generate product embeddings
+1. Use the live Customer Trend Signals context from Figure 1 before you run the SQL.
+
+2. Generate and confirm the product embeddings.
+
+    An embedding is a list of numbers that represents meaning. Products with similar language produce vectors that are close to each other. This block rebuilds `PRODUCT_EMBEDDINGS` from active products. It uses product name, category, subcategory, and tags as the source text. The `EMBED_RETAIL_TEXT` helper calls Oracle Database `VECTOR_EMBEDDING` with the MiniLM model, stores one vector per product, and confirms the row count.
+
+    ```sql
+    <copy>
+    TRUNCATE TABLE product_embeddings;
+
+    INSERT INTO product_embeddings (
+      product_id,
+      embedding_model,
+      embedding_text,
+      embedding
+    )
+    SELECT p.product_id,
+           'ALL_MINILM_L12_V2' AS embedding_model,
+           TO_CLOB(
+             p.product_name || ' ' ||
+             p.category || ' ' ||
+             NVL(p.subcategory, '') || ' ' ||
+             NVL(p.tags, '')
+           ) AS embedding_text,
+           embed_retail_text(
+             p.product_name || ' ' ||
+             p.category || ' ' ||
+             NVL(p.subcategory, '') || ' ' ||
+             NVL(p.tags, '')
+           ) AS embedding
+    FROM products p
+    WHERE p.is_active = 1;
+
+    COMMIT;
+
+    SELECT COUNT(*) AS "Product Embeddings"
+    FROM product_embeddings
+    WHERE embedding_model = 'ALL_MINILM_L12_V2';
+    </copy>
+    ```
+
+    Expected output:
+
+    | Product Embeddings |
+    | ---: |
+    | 187 |
+    {: title="Product Embeddings"}
+
+3. The product catalog now has vectors that the next query can compare with a shopper-style search phrase.
+
+## Task 3: Search products by meaning
+1. Run this dynamic semantic search.
+
+    Retail users often ask conceptual questions, such as "summer running shoes lightweight breathable." This block embeds that phrase at query time with `EMBED_RETAIL_TEXT`. It compares the query vector with the product vectors you generated. `VECTOR_DISTANCE` measures how far apart two vectors are; cosine distance is commonly used for text embeddings. Lower distance means the product is closer in meaning to the search phrase.
+
+    ```sql
+    <copy>
+    WITH query_ctx AS (
+      SELECT 'summer running shoes lightweight breathable' AS query_text,
+             embed_retail_text('summer running shoes lightweight breathable') AS query_vector
+      FROM dual
+    )
+    SELECT q.query_text AS "Search Phrase",
+           p.product_name AS "Product",
+           p.category AS "Category",
+           ROUND(VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), 4) AS "Distance"
+    FROM product_embeddings pe
+    JOIN products p ON p.product_id = pe.product_id
+    CROSS JOIN query_ctx q
+    WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
+    ORDER BY VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), p.product_id
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    Expected output:
+
+    | Search Phrase | Product | Category | Distance |
+    | --- | --- | --- | ---: |
+    | summer running shoes lightweight breathable | AirGlide Runner | Footwear | 0.2682 |
+    | summer running shoes lightweight breathable | Marathon Elite Racer | Footwear | 0.3728 |
+    | summer running shoes lightweight breathable | Carbon Slim Joggers | Fashion | 0.4327 |
+    | summer running shoes lightweight breathable | TrailGrip Hiker | Footwear | 0.4524 |
+    | summer running shoes lightweight breathable | AllTerrain Hiking Boots | Outdoor | 0.4627 |
+    {: title="Semantic Search Results"}
+
+2. Try a different shopper phrase.
+
+    Change the search phrase in both places inside `query_ctx`: the displayed `query_text` value and the value passed into `embed_retail_text`. For example, replace `summer running shoes lightweight breathable` with `soft cotton shirts for travel`.
+
+    ```sql
+    <copy>
+    WITH query_ctx AS (
+      SELECT 'soft cotton shirts for travel' AS query_text,
+             embed_retail_text('soft cotton shirts for travel') AS query_vector
+      FROM dual
+    )
+    SELECT q.query_text AS "Search Phrase",
+           p.product_name AS "Product",
+           p.category AS "Category",
+           ROUND(VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), 4) AS "Distance"
+    FROM product_embeddings pe
+    JOIN products p ON p.product_id = pe.product_id
+    CROSS JOIN query_ctx q
+    WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
+    ORDER BY VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), p.product_id
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+3. The closest products show how shopper language becomes ranked product evidence for promotion, inventory, and trend analysis.
+
+## Task 4: Inspect social trend matches
+1. Use the Social Trend Intelligence region in Figure 1 before you run the SQL.
+
+2. Run this query.
+
+    Social Trend Intelligence is the second half of the scene. It monitors creator posts, customer conversations, sentiment, and momentum. This block joins cached semantic matches to social posts, influencers, and products. The result explains which posts align to which products.
+
+    ```sql
+    <copy>
+    SELECT sp.momentum_flag AS "Momentum",
+           sp.platform AS "Platform",
+           NVL(i.handle, 'customer') AS "Creator",
+           p.product_name AS "Product",
+           ROUND(sm.similarity_score, 5) AS "Score"
+    FROM semantic_matches sm
+    JOIN social_posts sp ON sp.post_id = sm.post_id
+    LEFT JOIN influencers i ON i.influencer_id = sp.influencer_id
+    JOIN products p ON p.product_id = sm.product_id
+    ORDER BY ROUND(sm.similarity_score, 5) DESC,
+             sm.match_rank,
+             p.product_name,
+             sm.post_id,
+             sm.product_id
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
+
+    Expected output:
+
+    | Momentum | Platform | Creator | Product | Score |
+    | --- | --- | --- | --- | ---: |
+    | rising | instagram | `@jade_gus` | Reef-Safe Sunscreen SPF30 | 0.85589 |
+    | normal | twitter | `@zen_omar` | Reef-Safe Sunscreen SPF30 | 0.81837 |
+    | normal | youtube | `@urban_omar` | Reef-Safe Sunscreen SPF30 | 0.81234 |
+    | normal | youtube | `@frost_aria` | SPF50 Invisible Sunscreen | 0.81222 |
+    | normal | tiktok | `@neon_liam` | Reef-Safe Sunscreen SPF30 | 0.8122 |
+    | normal | instagram | `@crystal_maya` | Reclaimed Wood Table | 0.80127 |
+    | normal | tiktok | `@nexus_ava` | Reef-Safe Sunscreen SPF30 | 0.79946 |
+    | rising | tiktok | customer | Reef-Safe Sunscreen SPF30 | 0.7945 |
+    | rising | youtube | `@shadow_jace` | Reef-Safe Sunscreen SPF30 | 0.7945 |
+    | normal | youtube | `@haze_pia` | Reusable Beeswax Wraps | 0.79096 |
+    {: title="Social Product Matches"}
+
+3. This result ties the page back to the runbook story. The application is not only searching a catalog. It connects demand to creator handles, platforms, momentum, and social posts. The next lab uses the creator network to show how those signals can spread through communities.
+
+## Acknowledgements
+
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, May 2026

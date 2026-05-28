@@ -1,24 +1,24 @@
-# Conclusion and Business Outcomes
+# Conclusion
 
 ## Introduction
 
-This closing lab ties the retail story together. The LiveStack connects data foundation, command center visibility, customer trend signals, creator influence, fulfillment, order intelligence, in-database analytics, natural-language SQL, and AI-assisted actions.
+This closing lab ties the retail workflow together. Across the workshop, Seer Sporting Goods connected product demand, customer signals, creator influence, fulfillment routing, order documents, in-database machine learning, natural-language SQL, and auditable agent actions. The common foundation was Oracle Database 26ai.
 
-The business point is simple: this is one retail decision loop backed by Oracle Database 26ai, not a set of isolated demos.
+The practical point is simple: Oracle Database 26ai backs one connected retail decision path across data, AI, security, and operations. Each lab showed a different part of that path: observe the business, understand demand, trace influence, route fulfillment, protect orders, score risk, ask questions, and record agent actions.
 
 Estimated Time: 5 minutes
 
 ### Objectives
 
 - Review the end-to-end scene sequence.
-- Connect each screen to a business decision.
-- Build a concise retail stakeholder story.
+- Connect each screen to a practical retail decision.
+- Explain the workshop flow in plain retail terms.
 
 ## Task 1: Review the final outcome
 
 1. Review the workshop flow from the database point of view.
 
-    This final query ties every lab back to a retail decision and the database evidence behind it. Use it to explain the workshop as one governed decision loop instead of a set of separate feature demos.
+    This final query ties every lab back to a retail decision and the database evidence behind it. `UNION ALL` stacks several short result sets into one evidence map. Each row names a signal, the screen where the learner saw it, and the Oracle Database evidence behind the screen. Use the result to explain the workshop as one governed decision loop across the major database features.
 
     ```sql
     <copy>
@@ -45,21 +45,22 @@ Estimated Time: 5 minutes
     | ML prediction | Retail OML Analytics | `DBMS_DATA_MINING` models and OML feature views |
     | Plain-English analytics | Ask Retail Data | Semantic views, comments, and visible SQL |
     | Agent action | Retail AI Agent Console | PL/SQL tools and `AGENT_ACTIONS` audit rows |
-    {: title="Retail Decision Loop Evidence"}
+    {: title="Decision Loop Evidence"}
 
-2. Each signal supports a retail role, such as operations, merchandising, supply chain, commerce, data science, or executives.
+2. Each signal supports a practical retail question, such as what is selling, what demand is changing, where fulfillment risk appears, which order evidence matters, or what an agent did.
 
-## Task 2: Build the stakeholder narrative
+## Task 2: Explain the workshop flow
 
-1. Use this concise talk track with a retail stakeholder.
+1. Use this concise summary to explain the workshop flow.
 
     ```text
-    Seer Sporting Goods connects product demand, customer signals, creator influence, fulfillment routing, order documents, in-database machine learning, natural-language SQL, and auditable agent actions through one governed Oracle AI Database 26ai foundation.
+    Seer Sporting Goods connects product demand, customer signals, creator influence, fulfillment routing, order documents, in-database machine learning, natural-language SQL, and auditable agent actions through one Oracle AI Database 26ai foundation.
     ```
 
-2. The value is less data movement, clearer decisions, and a governed path from evidence to action.
+2. Close with the same idea that opened the lab: less data movement, clearer decisions, and a direct path from evidence to action. The workshop is not a set of disconnected feature demos. It is one retail operating pattern where Oracle Database 26ai keeps the data, AI, security, analytics, and agent history together.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

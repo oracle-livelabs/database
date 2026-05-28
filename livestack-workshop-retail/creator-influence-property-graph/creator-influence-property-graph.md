@@ -2,18 +2,18 @@
 
 ## Introduction
 
-A social commerce lead, creator partnerships manager, or merchandising strategist needs to understand which creators and communities can move product demand. Follower counts alone do not show relationship paths, community bridges, brand propagation, or co-creator influence.
+Follower counts are useful, but they do not show how a signal moves through a creator community. The confusing part is the relationship path: who collaborates, who amplifies a brand, and which creators connect otherwise separate groups.
 
-Oracle AI Database helps by modeling creator, brand, product, and post relationships as a property graph over governed retail data. In the application, Creator Influence Network visualizes those communities. In SQL Worksheet, you run graph checks and `GRAPH_TABLE` traversals that prove those relationships are queryable database evidence.
+This lab follows Scene 5, Creator Influence Network, in the runbook. After Lab 4 shows what customers and creators are saying, this lab shows who can amplify that signal. Oracle AI Database models creators, brands, products, and posts as a property graph over retail data. In SQL Worksheet, you run graph-style traversals that connect the visual network paths to queryable database evidence.
 
 Estimated Time: 10 minutes
 
 ### Objectives
 
 - Verify the `INFLUENCER_NETWORK` property graph.
-- Count the graph source tables.
-- Run one-hop and two-hop `GRAPH_TABLE` traversals.
-- Connect graph results to creator, community, and product-demand decisions.
+- Count the governed source tables behind the graph.
+- Run `GRAPH_TABLE` traversals for direct relationships and brand propagation.
+- Explain how creator paths can amplify social demand signals from Lab 4.
 
 
 ## Task 1: Verify graph objects and source rows
@@ -21,11 +21,11 @@ Estimated Time: 10 minutes
 
     ![Creator Influence Network graph overview](images/creator-influence-network-overview.png " ")
 
-    *Figure 1: Creator Influence Network shows communities and relationship paths instead of a flat creator list.*
+    *Figure 1: Creator Influence Network shows how creator relationships can amplify product and brand signals.*
 
 2. Run this graph check.
 
-    A creator network is more than a flat list of influencers. This query confirms that the database has a property graph object that can model relationships among creators, brands, products, and posts.
+    A creator network is more than a flat influencer list. This block checks `ALL_PROPERTY_GRAPHS` for the graph object managed by Oracle Database. The graph models how creators, brands, products, and posts connect while keeping the relationship data in the retail schema.
 
     ```sql
     <copy>
@@ -41,11 +41,11 @@ Estimated Time: 10 minutes
     | Owner | Graph |
     | --- | --- |
     | LLUSER | `INFLUENCER_NETWORK` |
-    {: title="Influencer Property Graph"}
+    {: title="Property Graph"}
 
 3. Count the graph source tables.
 
-    Property graphs are most valuable when they are built from governed source data. Counting the source tables shows that the graph is grounded in actual retail entities, not a separate visualization-only copy.
+    Property graphs are most useful when they come from governed source data. This block counts the relational source tables that feed the graph. It shows that the graph uses the same creators, posts, mentions, and brand links that feed social trend analysis.
 
     ```sql
     <copy>
@@ -66,14 +66,28 @@ Estimated Time: 10 minutes
     | Influencer connections | 3042 |
     | Brand influencer links | 1789 |
     | Post product mentions | 3503 |
-    {: title="Graph Source Row Counts"}
+    {: title="Graph Sources"}
 
 ## Task 2: Traverse creator relationships
 1. Use the live Creator Influence Network context from Figure 1 before you run the SQL.
 
-2. Run this one-hop traversal.
+2. Review what the relationship terms mean.
 
-    A one-hop traversal reveals direct creator-to-creator influence paths. Retail teams use those paths to see how a campaign, product mention, or brand signal can move through a creator network.
+    The graph treats each creator as a node and each creator-to-creator interaction as an edge. An edge is a relationship that points from one creator to another. The `connection_type` column describes the social action behind that edge:
+
+    - `collaborates`: two creators worked together on content, a campaign, or a shared promotion.
+    - `duet`: one creator made response content linked to another creator's post, such as a duet or stitched video.
+    - `tagged`: one creator mentioned or tagged another creator in a post.
+    - `reshared`: one creator amplified another creator's content by reposting or sharing it.
+    - `inspired_by`: one creator's content appears to have influenced another creator's content.
+
+    The `strength` value is a score from the seeded workshop data. A higher value means the relationship is stronger in this sample network. In a real retail system, this could come from engagement, frequency, recency, campaign history, or a model score.
+
+3. Run this one-hop traversal.
+
+    A high-momentum post from Lab 4 is only the starting point. Retail teams also need to know who may carry that signal into another audience. This query asks one simple graph question: for each creator, which directly connected creator can they reach next?
+
+    The `GRAPH_TABLE` clause lets SQL query the property graph. The `MATCH` pattern reads from left to right: start at a source creator, follow one `connects_to` relationship, and end at a destination creator. The `COLUMNS` section chooses which graph properties to return as regular SQL columns. The final `ORDER BY` sorts the strongest relationships first so the highest-signal paths appear at the top.
 
     ```sql
     <copy>
@@ -109,11 +123,17 @@ Estimated Time: 10 minutes
     | `@sage_maya` | `@luxe_jace` | collaborates | 0.998 |
     | `@golden_liam` | `@tech_luna` | tagged | 0.997 |
     | `@luxe_xena` | `@nexus_cleo` | collaborates | 0.997 |
-    {: title="Creator Relationship Traversal"}
+    {: title="Creator Relationships"}
 
-3. Run this brand reach query.
+4. Read the result as network paths.
 
-    Brand reach turns graph relationships into a business metric. This query shows which brands have broader creator coverage and stronger social evidence.
+    Each row means: the creator in **From** has a direct relationship to the creator in **To**. The **Link** column explains the type of social connection. The **Strength** column helps rank which paths may matter most. For example, a `collaborates` link suggests a shared audience or campaign relationship. A `reshared` link suggests that one creator can amplify another creator's post. A `tagged` link shows a direct mention that may expose followers to another creator or product story.
+
+5. Run this brand propagation query.
+
+    The first traversal looked only at creator-to-creator relationships. This query adds brands to the path. It asks: which creators promote a brand, and which other creators can they reach through a direct network connection? That pattern helps a retail team connect brand partnerships to likely audience spread.
+
+    In the `MATCH` pattern, the brand node connects to a promoter through a `promotes` edge. The same promoter then connects to another creator through a `connects_to` edge. The query returns the promoter, the reached creator, and the brand relationship type so the path can be reviewed as business evidence.
 
     ```sql
     <copy>
@@ -147,11 +167,12 @@ Estimated Time: 10 minutes
     | `@aura_aria` | `@nexus_liam` | organic |
     | `@aura_aria` | `@nexus_liam` | organic |
     | `@aura_aria` | `@nova_max` | organic |
-    {: title="Brand Reach Paths"}
+    {: title="Brand Paths"}
 
-4. A merchandiser can use the traversal to find which creator communities may amplify demand or returns exposure for a product category.
+6. This is the handoff from social signal to network action. A merchandiser can use the traversal to find creator communities that may amplify demand, returns exposure, or category momentum after Customer Trend Signals surfaces the initial product story.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This lab starts the hands-on database work. You will inspect the schema that prepares the Seer Sporting Goods dataset for the rest of the LiveStack. The business point is simple: one governed Oracle Database 26ai schema can support products, customers, orders, inventory, returns data, creator signals, fulfillment geography, AI context, and audit evidence without spreading the workflow across disconnected stores.
+This lab starts the hands-on database work. You will inspect the schema that prepares the Seer Sporting Goods dataset for the rest of the LiveStack. The practical point is simple: one Oracle Database 26ai schema can support the retail workflow. Products, customers, orders, inventory, returns data, creator signals, fulfillment geography, AI context, and audit evidence do not have to live in disconnected stores.
 
-In the LiveStack application, Data Foundation loads or restores the demo dataset and shows what gets loaded. In SQL Worksheet, you prove that the same foundation exists as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack application shows what the Data Foundation page loads or restores. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
 Estimated Time: 10 minutes
 
@@ -13,7 +13,7 @@ Estimated Time: 10 minutes
 - Confirm that the retail database objects are present.
 - Inventory the object families used by later labs.
 - Map the current retail application flow to Oracle Database 26ai capabilities.
-- Query row counts that prove the workshop uses database data.
+- Query row counts to understand the size of the retail dataset.
 
 
 ## Task 1: Inventory the retail object families
@@ -25,7 +25,7 @@ Estimated Time: 10 minutes
 
 2. In SQL Worksheet, run this query.
 
-    Before you analyze retail outcomes, first prove that the shared data foundation exists. This query inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
+    Before you analyze retail outcomes, get oriented to the shared data foundation. This block queries Oracle catalog views such as `USER_OBJECTS`, `USER_PROPERTY_GRAPHS`, and `USER_MINING_MODELS`. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
 
     ```sql
     <copy>
@@ -104,7 +104,7 @@ Estimated Time: 10 minutes
 
 1. Run this capability map.
 
-    The workshop is not a list of random SQL examples. This map connects each retail business outcome to the Oracle Database feature that supports it, so you know what each later lab is proving.
+    This block uses a small `UNION ALL` result set as a capability map. It connects each retail business outcome to the Oracle Database feature that supports it, so each later lab has a clear technical purpose.
 
     ```sql
     <copy>
@@ -137,13 +137,13 @@ Estimated Time: 10 minutes
     | Retail AI Agent Console | PL/SQL tools, JSON audit payloads, and agent action history |
     {: title="Retail Outcomes and Database Features"}
 
-2. This map is the mental model for the workshop. Each later lab uses SQL to prove how the database creates a visible retail outcome.
+2. This map is the mental model for the workshop. Each later lab uses SQL to show how the database creates a visible retail outcome.
 
 ## Task 3: Count the retail data groups
 
 1. Run this row-count query.
 
-    Row counts prove that the exercises use a real seeded retail dataset, not static screenshots. They also give you a scale reference for later KPI, vector, graph, spatial, and OML results.
+    Row counts help you understand the shape and scale of the retail dataset. This block runs aggregate `COUNT(*)` checks across major retail domains and gives you a scale reference for later KPI, vector, graph, spatial, and OML results.
 
     ```sql
     <copy>
@@ -177,4 +177,5 @@ Estimated Time: 10 minutes
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
 * **Last Updated By/Date** - Oracle Database Product Management, May 2026
