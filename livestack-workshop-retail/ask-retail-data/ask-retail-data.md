@@ -83,7 +83,21 @@ Estimated Time: 10 minutes
       WHERE ROWNUM = 1
     )
     SELECT c.table_name AS "Object",
-           c.comments AS "Business Meaning"
+           COALESCE(
+             c.comments,
+             CASE c.table_name
+               WHEN 'RETAIL_FULFILLMENT_RISK_V' THEN 'Retail fulfillment risk view for inventory levels, reorder points, product demand, and fulfillment center analysis.'
+               WHEN 'RETAIL_ORDER_RETURN_V' THEN 'Retail order view with return context for Ask Retail Data and dashboard narration.'
+               WHEN 'RETAIL_RETURNS_WORKFLOW_V' THEN 'Retail return workflow view for return exposure, policy evidence counts, customer value, risk rating, recommendation, and status.'
+               WHEN 'RETAIL_RETURN_WORKBENCH_V' THEN 'Return queue view used by retail analytics and Ask Retail Data examples.'
+               WHEN 'RETAIL_SIGNAL_PRODUCT_V' THEN 'Retail signal view that maps customer and creator signal events to the products they influence, including demand momentum and return-risk context.'
+               WHEN 'AGENT_ACTIONS' THEN 'Audit log of AI agent decisions and database-backed actions.'
+               WHEN 'ORDERS' THEN 'Customer orders with status, revenue, demand score, fulfillment center, and optional social source.'
+               WHEN 'PRODUCTS' THEN 'Retail products with category, price, tags, and brand relationship.'
+               WHEN 'RETURN_DOCUMENTS' THEN 'Grounding evidence for return decisions, including policy clauses, product notes, image notes, warranty terms, marketplace context, and customer history snippets.'
+               WHEN 'RETURN_REQUESTS' THEN 'Retail return requests with reason, channel, risk rating, recommendation, status, policy evidence, and confidence.'
+             END
+           ) AS "Business Meaning"
     FROM all_tab_comments c
     JOIN schema_ctx s ON s.owner_name = c.owner
     WHERE c.table_name IN (
