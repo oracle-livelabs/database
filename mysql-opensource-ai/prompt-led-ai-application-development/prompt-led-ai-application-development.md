@@ -155,7 +155,7 @@ The following example demonstrates how to request a production-quality AI-powere
 ### Example Prompt
 
 ```text
-Role: Senior Full-Stack Engineer.
+<copy>Role: Senior Full-Stack Engineer.
 
 Task: Build a production-quality E-commerce Web Application for electronics using Python Flask and MySQL HeatWave.
 
@@ -219,7 +219,7 @@ Backend:
 Modular Python Flask architecture using db_utils.py.
 
 Frontend:
-Vanilla JavaScript and responsive Bootstrap UI.
+Vanilla JavaScript and responsive Bootstrap UI.</copy>
 ```
 
 ## Task 3: Understand HeatWave GenAI Integration
@@ -233,10 +233,10 @@ This helps ensure accurate SQL generation and proper GenAI routine usage.
     Use the following sample query:
 
     ```sql
-    SELECT sys.ML_EMBED_ROW(
+    <copy>SELECT sys.ML_EMBED_ROW(
     "What is artificial intelligence?",
     JSON_OBJECT("model_id", "all_minilm_l12_v2")
-    ) INTO @text_embedding;
+    ) INTO @text_embedding;</copy>
     ```
 
     This generates vector embeddings using the `all_minilm_l12_v2` model.
@@ -248,10 +248,10 @@ This helps ensure accurate SQL generation and proper GenAI routine usage.
 Use cosine similarity calculations:
 
 ```sql
-SELECT DISTANCE(
+<copy>SELECT DISTANCE(
     STRING_TO_VECTOR("[1.01231, 2.0123123, 3.0123123, 4.01231231]"),
     STRING_TO_VECTOR("[1, 2, 3, 4]"),
-    "COSINE"
+    "COSINE" </copy>
 );
 ```
 
@@ -295,13 +295,13 @@ Update your application configuration with the correct database connection detai
     Use:
 
     ```text
-    localhost
+    <copy>localhost</copy>
     ```
 
     or
 
     ```text
-    127.0.0.1
+    <copy>127.0.0.1</copy>
     ```
 
 
@@ -317,19 +317,19 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 1. Create a Python Virtual Environment OR ask code assist to do it
 
     ```bash
-    python3 -m venv venv
+    <copy>python3 -m venv venv</copy>
     ```
 
     Activate the environment:
 
     ```bash
-    source venv/bin/activate
+    <copy>source venv/bin/activate</copy>
     ```
 
     Install dependencies:
 
     ```bash
-    pip install -r requirements.txt
+    <copy>pip install -r requirements.txt</copy>
     ```
 
 
@@ -337,7 +337,7 @@ Use the HeatWave private IP address when deploying the application on a Compute 
 2. Run the Application
 
     ```bash
-    python app.py
+    <copy>python app.py</copy>
     ```
 
 
@@ -349,7 +349,7 @@ Use the following command to securely connect your local machine to the private 
 1. open Terminal and run the following
 
     ```bash
-    ssh -i &lt;private_key&gt; -L 3306:&lt;db_private_ip&gt;:3306 opc@&lt;vm_public_ip&gt;
+   <copy> ssh -i &lt;private_key&gt; -L 3306:&lt;db_private_ip&gt;:3306 opc@&lt;vm_public_ip&gt;</copy>
     ```
 
 Replace:
