@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This lab starts the hands-on database work. You will inspect the schema that prepares the Seer Sporting Goods dataset for the rest of the LiveStack. The practical point is simple: one Oracle Database 26ai schema can support the retail workflow. Products, customers, orders, inventory, returns data, creator signals, fulfillment geography, AI context, and audit evidence do not have to live in disconnected stores.
+This lab starts the hands-on database work by confirming that the retail foundation is present and ready. Learners inspect the objects, views, graph metadata, vector artifacts, OML models, and PL/SQL tools that support the Seer Sporting Goods workflow, so later results can be trusted as database-backed evidence.
 
-The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack application shows what the **Data Foundation** page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
-Estimated Time: 10 minutes
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -17,6 +17,9 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Inventory the retail object families
+
+Inventory the object families to confirm that the schema contains the tables, views, graph objects, vector artifacts, OML models, and PL/SQL tools used by later labs.
+
 1. Review the related application screen before you run the SQL.
 
     ![Data Foundation page showing load controls and Oracle Internals](images/data-foundation-load-and-internals.png " ")
@@ -100,7 +103,11 @@ Estimated Time: 10 minutes
 
 3. The result confirms that the workshop has a retail data foundation, semantic views for natural-language grounding, a graph, MiniLM-backed vector artifacts, and PL/SQL tools.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 2: Map retail outcomes to database features
+
+Use the capability map to connect each retail outcome to the database feature that supports it. This helps learners understand why each later SQL exercise exists.
 
 1. Run this capability map.
 
@@ -139,7 +146,11 @@ Estimated Time: 10 minutes
 
 2. This map is the mental model for the workshop. Each later lab uses SQL to show how the database creates a visible retail outcome.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 3: Count the retail data groups
+
+Count the retail data groups to understand the scale of the seeded dataset and to give context for later dashboard, search, graph, spatial, OML, and agent results.
 
 1. Run this row-count query.
 
@@ -172,7 +183,10 @@ Estimated Time: 10 minutes
     | Agent audit actions | 1 |
     {: title="Retail Data Row Counts"}
 
+
 2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 
