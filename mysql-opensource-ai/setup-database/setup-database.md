@@ -26,13 +26,13 @@ Ensure you have administrative access before proceeding with database creation, 
 1. Create Application Database
 
     ```sql
-    CREATE DATABASE mydb;
+    <copy>CREATE DATABASE mydb;</copy>
     ```
 
     Verify database creation:
 
     ```sql
-    SHOW DATABASES;
+    <copy>SHOW DATABASES;</copy>
     ```
 
 2. Create Application User
@@ -40,7 +40,7 @@ Ensure you have administrative access before proceeding with database creation, 
     Create a dedicated user for the application instead of using the admin account.
 
     ```sql
-    CREATE USER 'username'@'host' IDENTIFIED BY 'StrongPassword';
+    <copy>CREATE USER 'username'@'host' IDENTIFIED BY 'StrongPassword';</copy>
     ```
 
     Recommended workshop example:
@@ -56,15 +56,15 @@ Ensure you have administrative access before proceeding with database creation, 
     Grant required privileges for the application database:
 
     ```sql
-    GRANT ALL PRIVILEGES
+    <copy>GRANT ALL PRIVILEGES
     ON mydb.*
-    TO 'app_user'@'%';
+    TO 'app_user'@'%';</copy>
     ```
 
     Apply the changes:
 
     ```sql
-    FLUSH PRIVILEGES;
+   <copy> FLUSH PRIVILEGES;</copy>
     ```
 
 4. Grant Access to GenAI Routines
@@ -72,18 +72,18 @@ Ensure you have administrative access before proceeding with database creation, 
     Provide access to call GenAI / HeatWave system routines:
 
     ```sql
-    GRANT EXECUTE ON sys.* TO 'app_user'@'%';
+   <copy> GRANT EXECUTE ON sys.* TO 'app_user'@'%';</copy>
     ```
 
     Apply the changes:
 
     ```sql
-    FLUSH PRIVILEGES;
+    <copy> FLUSH PRIVILEGES;</copy>
     ```
 
 5. Validate User Access
 
-Create a **new database connection in Visual Studio Code** using the newly created application user credentials.
+Create a **new database connection in Visual Studio Code** using the newly created application user credentials. refer lab 1, task 4.
 
 | Field | Value |
 |---|---|
@@ -96,7 +96,7 @@ Create a **new database connection in Visual Studio Code** using the newly creat
 Once connected, open a new SQL query window and run the following command to validate access:
 
 ```sql
-SHOW DATABASES;
+<copy> SHOW DATABASES;</copy>
 ```
 
 Expected result: the `mydb` database should be visible in the output.
@@ -104,8 +104,8 @@ Expected result: the `mydb` database should be visible in the output.
 You may also run:
 
 ```sql
-USE mydb;
-SHOW TABLES;
+<copy>USE mydb;
+SHOW TABLES;</copy>
 ```
 
 ## Task 2: Enable HeatWave Access to OCI GenAI Services
@@ -124,7 +124,7 @@ To enable the DB system to access OCI services, perform the following steps in O
 
 
     ```text
-    ALL{resource.type = 'mysqldbsystem', resource.compartment.id = 'ocid1.compartment.oc1..AlphanumericString'}
+    <copy> ALL{resource.type = 'mysqldbsystem', resource.compartment.id = 'ocid1.compartment.oc1..AlphanumericString'} </copy>
     ```
 
     > **Note:** Replace `ocid1.compartment.oc1..AlphanumericString` with the **Compartment ID of the DB system**. Compartment ID is available under **Identity & Security -> Compartments -> select your compartment and copy the OCID**.
@@ -137,9 +137,9 @@ Navigate to **Identity & Security → Policies** and add the following policies 
 ![Create Policy](images/policies2.png "Create Policy")
 
 ```text
-allow dynamic-group IdentityDomainName/GroupName to use generative-ai-chat in compartment CompartmentName
+<copy>allow dynamic-group IdentityDomainName/GroupName to use generative-ai-chat in compartment CompartmentName
 allow dynamic-group IdentityDomainName/GroupName to use generative-ai-text-embedding in compartment CompartmentName
-allow dynamic-group IdentityDomainName/GroupName to inspect generative-ai-model in compartment CompartmentName
+allow dynamic-group IdentityDomainName/GroupName to inspect generative-ai-model in compartment CompartmentName</copy>
 ```
 
 Replace the following values:
