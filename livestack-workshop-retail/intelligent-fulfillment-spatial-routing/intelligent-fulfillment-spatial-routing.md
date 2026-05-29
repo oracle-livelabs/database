@@ -23,6 +23,10 @@ Estimated Time: 10 minutes
 
     *Figure 1: Intelligent Fulfillment Network brings together inventory, centers, service areas, and demand geography.*
 
+    ![Fulfillment map layers with service zones and demand regions](images/fulfillment-map-layers.png " ")
+
+    *Figure 2: Service zones and demand regions connect the SQL geometry to the map layers in the runbook.*
+
 2. Run this query.
 
     Fulfillment decisions depend on geography. Oracle Spatial stores locations and shapes in `SDO_GEOMETRY` columns. This block reads `ALL_SDO_GEOM_METADATA`, the catalog view that describes those geometry columns. The SRID value identifies the coordinate system; `4326` is the common GPS latitude/longitude system used by web maps.
@@ -106,11 +110,11 @@ Estimated Time: 10 minutes
 
     | Center | City | State | Miles |
     | --- | --- | --- | ---: |
-    | LA Mega Center | Ontario | California | 34.7 |
-    | Las Vegas West | North Las Vegas | Nevada | 230.7 |
-    | San Francisco Bay | Fremont | California | 318.8 |
-    | Phoenix Desert Hub | Goodyear | Arizona | 342.3 |
-    | Reno West Hub | Sparks | Nevada | 386.2 |
+    | LA Mega Center | Ontario | California | 33.2 |
+    | Las Vegas West | North Las Vegas | Nevada | 229 |
+    | San Francisco Bay | Fremont | California | 319.1 |
+    | Phoenix Desert Hub | Goodyear | Arizona | 340.9 |
+    | Reno West Hub | Sparks | Nevada | 385.7 |
     {: title="Nearest Fulfillment Centers"}
 
 3. A fulfillment manager can combine this result with inventory to route orders quickly without increasing stockout risk.
@@ -140,16 +144,16 @@ Estimated Time: 10 minutes
 
     | Product | Center | State | On Hand | Reorder At | Risk |
     | --- | --- | --- | ---: | ---: | --- |
-    | Carbon Road Bike | Portland Pacific | Oregon | 10 | 38 | `AT_RISK` |
-    | Heritage Leather Belt | Indianapolis Heartland | Indiana | 10 | 84 | `AT_RISK` |
-    | Lavender Diffuser Set | Anchorage Alaska | Alaska | 10 | 71 | `AT_RISK` |
-    | PhantomCase PC Mid Tower | Minneapolis North Central | Minnesota | 10 | 20 | `AT_RISK` |
-    | UltraWide Curved 34 | Portland Pacific | Oregon | 10 | 34 | `AT_RISK` |
-    | 4-Season Tent 3P | Tampa Florida | Florida | 11 | 87 | `AT_RISK` |
-    | LED Festival Jacket | Nashville Central | Tennessee | 11 | 34 | `AT_RISK` |
-    | Midnight Espresso Blend | Houston Gulf Coast | Texas | 11 | 83 | `AT_RISK` |
-    | Moonbeam Highlighter | Phoenix Desert Hub | Arizona | 11 | 30 | `AT_RISK` |
-    | Retro Wave Tee | Philadelphia Mid-Atlantic | Delaware | 11 | 49 | `AT_RISK` |
+    | OmniRing Performance Tracker | Philadelphia Mid-Atlantic | Delaware | 10 | 41 | `AT_RISK` |
+    | DewPoint Hydration Spray | Charlotte Southeast | North Carolina | 11 | 27 | `AT_RISK` |
+    | Matcha Endurance Starter Kit | Salt Lake Mountain | Utah | 11 | 76 | `AT_RISK` |
+    | Recovery Cooling Gel | Honolulu Pacific | Hawaii | 11 | 53 | `AT_RISK` |
+    | Trekking Backpack 45L | Baltimore East Coast | Maryland | 11 | 70 | `AT_RISK` |
+    | CoachMic USB Microphone | NYC Metro Hub | New Jersey | 12 | 86 | `AT_RISK` |
+    | CoachView Curved Display | Memphis Logistics | Mississippi | 12 | 54 | `AT_RISK` |
+    | DrillSwitch Training Controller | LA Mega Center | California | 12 | 44 | `AT_RISK` |
+    | Expedition Power Bank | Detroit Great Lakes | Michigan | 12 | 37 | `AT_RISK` |
+    | RidgeLine Fleece Hoodie | LA Mega Center | California | 12 | 95 | `AT_RISK` |
     {: title="Inventory Risk"}
 
 3. The semantic view turns raw spatial, inventory, and demand data into a business-ready risk surface.

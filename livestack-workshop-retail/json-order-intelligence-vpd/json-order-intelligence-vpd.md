@@ -23,6 +23,10 @@ Estimated Time: 10 minutes
 
     *Figure 1: Unified Order Intelligence gives order operations a governed workspace for order, customer, and fulfillment context.*
 
+    ![Order table and detail region from the runbook](images/order-table-detail.png " ")
+
+    *Figure 2: The order workspace lets the user inspect relational order detail before comparing it with JSON.*
+
 2. Run this query.
 
     Application teams often want an order as a JSON document, while database teams need governed relational data. A **JSON Relational Duality view** lets both needs use the same source tables. This block reads `ORDERS_DV`, then uses `JSON_SERIALIZE` to display the JSON document in SQL Worksheet. `JSON_VALUE` in the `ORDER BY` reads the document `_id` value so the output is stable.
@@ -50,12 +54,12 @@ Estimated Time: 10 minutes
     {
       "_id" : 1,
       "_metadata" : { ... },
-      "customerId" : 360,
+      "customerId" : 1668,
       "status" : "confirmed",
-      "total" : 917.93,
-      "shippingCost" : 0,
-      "demandScore" : 34.89,
-      "createdAt" : "2026-05-08T04:42:31.703065",
+      "total" : 1139.93,
+      "shippingCost" : 7.99,
+      "demandScore" : 86.48,
+      "createdAt" : "2026-03-17T09:17:57",
       "items" : [ ... ]
     }
     ```
@@ -89,7 +93,7 @@ Estimated Time: 10 minutes
 
     | Order | Status | Total | Items |
     | ---: | --- | ---: | ---: |
-    | 138 | processing | 719.95 | 2 |
+    | 138 | processing | 169.96 | 2 |
     {: title="Order JSON Fields"}
 
 2. JSON Duality helps application developers read order detail as a document without giving up SQL, constraints, and ACID transactions.
@@ -124,7 +128,7 @@ Estimated Time: 10 minutes
 
     | Order | Status | Lines | Line Total | Order Total |
     | ---: | --- | ---: | ---: | ---: |
-    | 1 | confirmed | 4 | 917.93 | 917.93 |
+    | 1 | confirmed | 4 | 1139.93 | 1139.93 |
     {: title="Order Totals"}
 
 3. The document view and relational tables describe the same kind of business event. Retail teams get API-friendly JSON and database teams retain trustworthy relational evidence.
