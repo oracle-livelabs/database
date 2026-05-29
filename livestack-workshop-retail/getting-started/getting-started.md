@@ -27,21 +27,21 @@ Launch the LiveLabs environment first so the learner starts from the correct res
 
 4. Select **View Login Info** and keep the database credentials available for the next task.
 
+5. In the Reservation Information drawer, click Open Link for the Database Actions URL. If prompted, use the shown LLUSER credentials.
+
 ## Task 2: Open SQL Worksheet
 
 Open SQL Worksheet and confirm that the selected user is the main workshop user, usually LLUSER. This matters because all SQL examples assume the prepared retail schema is available in the active session.
 
-1. In the OCI Console, open the Autonomous Database provisioned for the workshop.
+1. Select **View Login Info**, use **Open Link**, confirm LLUSER, then open SQL Worksheet.
 
-2. Select **Database Actions** and open **SQL Worksheet**.
-
-3. At the top of the SQL Worksheet page, open the user dropdown menu and select the main workshop user, usually `LLUSER`. If the login screen appears, confirm that **Username** shows `LLUSER`.
+2. At the top of the SQL Worksheet page, open the user dropdown menu and select the main workshop user, usually `LLUSER`. If the login screen appears, confirm that **Username** shows `LLUSER`.
 
     ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
 
     *Figure 1: Select the main workshop user, usually LLUSER, before signing in.*
 
-4. Use the same SQL Worksheet pattern throughout the workshop.
+3. Use the same SQL Worksheet pattern throughout the workshop.
 
     ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
 
@@ -53,7 +53,7 @@ Open SQL Worksheet and confirm that the selected user is the main workshop user,
     - Review the output in **Query Result** or **Script Output**, depending on the step.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
-5. Run this check.
+4. Run this check.
 
     This check reads Oracle session context directly from the database. `USER` shows the authenticated account, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where unqualified table names will resolve. If the user is not `LLUSER`, use the SQL Worksheet user dropdown to switch before continuing.
 
@@ -73,7 +73,7 @@ Open SQL Worksheet and confirm that the selected user is the main workshop user,
     | LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
     {: title="Connected SQL Worksheet Session"}
 
-6. If the schema is not present, ask the instructor to run the scripts in `backend-provisioning/database-source/` in the order described in the README.
+5. If the schema check fails, terminate/recreate the reservation or contact LiveLabs support with the reservation ID.
 
 You can now continue to the retail labs.
 
