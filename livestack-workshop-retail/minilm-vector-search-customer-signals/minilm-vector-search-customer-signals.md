@@ -4,14 +4,14 @@
 
 Customer demand often shows up in shopper language and creator activity before it shows up in sales reports. That signal is easy to miss when product language, reviews, social posts, sentiment, and inventory data sit in different places. This lab follows the Customer Trend Signals scene in the runbook and shows how search by meaning can connect shopper intent to products.
 
-Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. The LiveStack application connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you generate product embeddings and run dynamic semantic search against database-managed product vectors.
+Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. The LiveStack application connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you verify the prebuilt vector artifacts, safely refresh product embeddings, and run dynamic semantic search against database-managed product vectors.
 
 Estimated Time: 10 minutes
 
 ### Objectives
 
 - Connect Semantic Product Discovery to product embeddings stored in Oracle Database.
-- Generate product embeddings with the MiniLM embedding model.
+- Verify and safely refresh product embeddings with the MiniLM embedding model.
 - Run dynamic semantic search with `VECTOR_EMBEDDING` and `VECTOR_DISTANCE`.
 - Connect Social Trend Intelligence to cached creator-post and product matches.
 - Explain how shopper language, social momentum, sentiment, and product demand become governed SQL evidence.
@@ -24,41 +24,56 @@ Estimated Time: 10 minutes
 
     *Figure 1: Customer Trend Signals connects semantic product discovery with social trend intelligence.*
 
-    The page shows two connected ideas. Semantic Product Discovery uses vector search to match shopper language to catalog items. Social Trend Intelligence connects product demand to creator posts, platforms, and social momentum. In the next task, you generate the product embeddings that make the semantic search portion work.
+    ![Oracle Internals sidebar describing VECTOR_EMBEDDING and VECTOR_DISTANCE](images/vector-internals-sidebar.png " ")
 
-## Task 2: Generate product embeddings
+    *Figure 2: The runbook calls out prebuilt product vectors, post vectors, semantic matches, and VPD-governed vector search.*
+
+    The page shows two connected ideas. Semantic Product Discovery uses vector search to match shopper language to catalog items. Social Trend Intelligence connects product demand to creator posts, platforms, and social momentum. The compact loader now prepares the product vectors, post vectors, and semantic matches that the application uses. In the next task, you inspect and safely refresh the product embeddings so you understand how the semantic search portion works.
+
+## Task 2: Verify and refresh product embeddings
 1. Use the live Customer Trend Signals context from Figure 1 before you run the SQL.
 
-2. Generate and confirm the product embeddings.
+2. Verify and refresh the product embeddings.
 
-    An embedding is a list of numbers that represents meaning. Products with similar language produce vectors that are close to each other. This block rebuilds `PRODUCT_EMBEDDINGS` from active products. It uses product name, category, subcategory, and tags as the source text. The `EMBED_RETAIL_TEXT` helper calls Oracle Database `VECTOR_EMBEDDING` with the MiniLM model, stores one vector per product, and confirms the row count.
+    An embedding is a list of numbers that represents meaning. Products with similar language produce vectors that are close to each other. This block uses `MERGE` to refresh `PRODUCT_EMBEDDINGS` from active products without dropping the table or leaving the application without vectors. It uses product name, category, subcategory, and tags as the source text. The `EMBED_RETAIL_TEXT` helper calls Oracle Database `VECTOR_EMBEDDING` with the MiniLM model, stores one vector per product, and confirms the row count.
 
     ```sql
     <copy>
-    TRUNCATE TABLE product_embeddings;
-
-    INSERT INTO product_embeddings (
+    MERGE INTO product_embeddings pe
+    USING (
+      SELECT p.product_id,
+             'ALL_MINILM_L12_V2' AS embedding_model,
+             TO_CLOB(
+               p.product_name || ' ' ||
+               p.category || ' ' ||
+               NVL(p.subcategory, '') || ' ' ||
+               NVL(p.tags, '')
+             ) AS embedding_text,
+             embed_retail_text(
+               p.product_name || ' ' ||
+               p.category || ' ' ||
+               NVL(p.subcategory, '') || ' ' ||
+               NVL(p.tags, '')
+             ) AS embedding
+      FROM products p
+      WHERE p.is_active = 1
+    ) src
+    ON (pe.product_id = src.product_id AND pe.embedding_model = src.embedding_model)
+    WHEN MATCHED THEN UPDATE SET
+      pe.embedding_text = src.embedding_text,
+      pe.embedding = src.embedding,
+      pe.created_at = SYSTIMESTAMP
+    WHEN NOT MATCHED THEN INSERT (
       product_id,
       embedding_model,
       embedding_text,
       embedding
-    )
-    SELECT p.product_id,
-           'ALL_MINILM_L12_V2' AS embedding_model,
-           TO_CLOB(
-             p.product_name || ' ' ||
-             p.category || ' ' ||
-             NVL(p.subcategory, '') || ' ' ||
-             NVL(p.tags, '')
-           ) AS embedding_text,
-           embed_retail_text(
-             p.product_name || ' ' ||
-             p.category || ' ' ||
-             NVL(p.subcategory, '') || ' ' ||
-             NVL(p.tags, '')
-           ) AS embedding
-    FROM products p
-    WHERE p.is_active = 1;
+    ) VALUES (
+      src.product_id,
+      src.embedding_model,
+      src.embedding_text,
+      src.embedding
+    );
 
     COMMIT;
 
@@ -106,11 +121,11 @@ Estimated Time: 10 minutes
 
     | Search Phrase | Product | Category | Distance |
     | --- | --- | --- | ---: |
-    | summer running shoes lightweight breathable | AirGlide Runner | Footwear | 0.2682 |
-    | summer running shoes lightweight breathable | Marathon Elite Racer | Footwear | 0.3728 |
-    | summer running shoes lightweight breathable | Carbon Slim Joggers | Fashion | 0.4327 |
-    | summer running shoes lightweight breathable | TrailGrip Hiker | Footwear | 0.4524 |
-    | summer running shoes lightweight breathable | AllTerrain Hiking Boots | Outdoor | 0.4627 |
+    | summer running shoes lightweight breathable | AirGlide Runner | Footwear | 0.3825 |
+    | summer running shoes lightweight breathable | Marathon Elite Racer | Footwear | 0.4049 |
+    | summer running shoes lightweight breathable | Barefoot Minimalist Shoe | Footwear | 0.4187 |
+    | summer running shoes lightweight breathable | WinterGrip Boot | Footwear | 0.4545 |
+    | summer running shoes lightweight breathable | StreetFlex Sneaker | Footwear | 0.473 |
     {: title="Semantic Search Results"}
 
 2. Try a different shopper phrase.
@@ -170,16 +185,16 @@ Estimated Time: 10 minutes
 
     | Momentum | Platform | Creator | Product | Score |
     | --- | --- | --- | --- | ---: |
-    | rising | instagram | `@jade_gus` | Reef-Safe Sunscreen SPF30 | 0.85589 |
-    | normal | twitter | `@zen_omar` | Reef-Safe Sunscreen SPF30 | 0.81837 |
-    | normal | youtube | `@urban_omar` | Reef-Safe Sunscreen SPF30 | 0.81234 |
-    | normal | youtube | `@frost_aria` | SPF50 Invisible Sunscreen | 0.81222 |
-    | normal | tiktok | `@neon_liam` | Reef-Safe Sunscreen SPF30 | 0.8122 |
-    | normal | instagram | `@crystal_maya` | Reclaimed Wood Table | 0.80127 |
-    | normal | tiktok | `@nexus_ava` | Reef-Safe Sunscreen SPF30 | 0.79946 |
-    | rising | tiktok | customer | Reef-Safe Sunscreen SPF30 | 0.7945 |
-    | rising | youtube | `@shadow_jace` | Reef-Safe Sunscreen SPF30 | 0.7945 |
-    | normal | youtube | `@haze_pia` | Reusable Beeswax Wraps | 0.79096 |
+    | viral | tiktok | `@summit_ruby_470` | Matcha Endurance Starter Kit | 0.83282 |
+    | mega_viral | instagram | `@trail_maya_384` | Matcha Endurance Starter Kit | 0.83282 |
+    | viral | tiktok | `@summit_ruby_470` | Matcha Endurance Starter Kit | 0.82424 |
+    | mega_viral | instagram | `@trail_maya_384` | Matcha Endurance Starter Kit | 0.82424 |
+    | viral | tiktok | `@route_gus_182` | Climbing Harness Pro | 0.82108 |
+    | viral | tiktok | `@summit_ruby_470` | Matcha Endurance Starter Kit | 0.82011 |
+    | mega_viral | instagram | `@trail_maya_384` | Matcha Endurance Starter Kit | 0.82011 |
+    | mega_viral | tiktok | `@climb_lily_390` | ThermoFlask 32oz | 0.81822 |
+    | mega_viral | tiktok | `@terrain_ruby_315` | ThermoFlask 32oz | 0.81822 |
+    | viral | tiktok | `@summit_alex_260` | Adaptogen Recovery Powder | 0.80741 |
     {: title="Social Product Matches"}
 
 3. This result ties the page back to the runbook story. The application is not only searching a catalog. It connects demand to creator handles, platforms, momentum, and social posts. The next lab uses the creator network to show how those signals can spread through communities.

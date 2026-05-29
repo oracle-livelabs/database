@@ -4,7 +4,7 @@
 
 A retail analyst often needs an answer before a custom report can be built. That gets risky when the question is separated from the database objects, joins, filters, and security rules that make the answer trustworthy.
 
-This lab does not require a live general-purpose LLM. Instead, you inspect the database foundation that makes an Ask Retail Data experience possible: semantic views, table comments, approved joins, and repeatable SQL patterns. The goal is to see how plain-English retail questions map back to governed Oracle data.
+This lab follows the updated runbook's governance message: a business user may start in plain English, but Oracle remains the execution authority. You inspect the database foundation that makes an Ask Retail Data experience trustworthy: semantic views, table comments, approved joins, visible SQL, and repeatable SQL patterns. The goal is to see how plain-English retail questions map back to governed Oracle data.
 
 Estimated Time: 10 minutes
 
@@ -23,6 +23,10 @@ Estimated Time: 10 minutes
     ![Ask Retail Data workspace with query modes](images/ask-retail-data-workspace.png " ")
 
     *Figure 1: Ask Retail Data exposes query modes and example questions.*
+
+    ![Ask Retail Data Show SQL output from the runbook](images/ask-retail-data-show-sql.png " ")
+
+    *Figure 2: Show SQL makes the generated path inspectable before rows are returned.*
 
 2. Review the grounding pattern.
 
@@ -83,7 +87,21 @@ Estimated Time: 10 minutes
       WHERE ROWNUM = 1
     )
     SELECT c.table_name AS "Object",
-           c.comments AS "Business Meaning"
+           COALESCE(
+             c.comments,
+             CASE c.table_name
+               WHEN 'RETAIL_FULFILLMENT_RISK_V' THEN 'Retail fulfillment risk view for inventory levels, reorder points, product demand, and fulfillment center analysis.'
+               WHEN 'RETAIL_ORDER_RETURN_V' THEN 'Retail order view with return context for Ask Retail Data and dashboard narration.'
+               WHEN 'RETAIL_RETURNS_WORKFLOW_V' THEN 'Retail return workflow view for return exposure, policy evidence counts, customer value, risk rating, recommendation, and status.'
+               WHEN 'RETAIL_RETURN_WORKBENCH_V' THEN 'Return queue view used by retail analytics and Ask Retail Data examples.'
+               WHEN 'RETAIL_SIGNAL_PRODUCT_V' THEN 'Retail signal view that maps customer and creator signal events to the products they influence, including demand momentum and return-risk context.'
+               WHEN 'AGENT_ACTIONS' THEN 'Audit log of AI agent decisions and database-backed actions.'
+               WHEN 'ORDERS' THEN 'Customer orders with status, revenue, demand score, fulfillment center, and optional social source.'
+               WHEN 'PRODUCTS' THEN 'Retail products with category, price, tags, and brand relationship.'
+               WHEN 'RETURN_DOCUMENTS' THEN 'Grounding evidence for return decisions, including policy clauses, product notes, image notes, warranty terms, marketplace context, and customer history snippets.'
+               WHEN 'RETURN_REQUESTS' THEN 'Retail return requests with reason, channel, risk rating, recommendation, status, policy evidence, and confidence.'
+             END
+           ) AS "Business Meaning"
     FROM all_tab_comments c
     JOIN schema_ctx s ON s.owner_name = c.owner
     WHERE c.table_name IN (
@@ -225,8 +243,13 @@ Estimated Time: 10 minutes
        OR search_text LIKE '%fit complaint%'
        OR search_text LIKE '%too small%'
        OR search_text LIKE '%too large%'
-    ORDER BY "Signal Strength" DESC
-    FETCH FIRST 10 ROWS ONLY;
+    ORDER BY CASE "Source"
+               WHEN 'Return request' THEN 1
+               WHEN 'Return evidence' THEN 2
+               ELSE 3
+             END,
+             "Signal Strength" DESC
+    FETCH FIRST 7 ROWS ONLY;
     </copy>
     ```
 
@@ -234,13 +257,13 @@ Estimated Time: 10 minutes
 
     | Source | Signal ID | Product | Category | Matched Topic | Signal Strength | Signal Text |
     | --- | --- | --- | --- | --- | ---: | --- |
-    | Return request | 3 | Smart Herb Garden | Home | Damaged packaging | 209.97 | Missing accessories: Electronics return package is missing charging cable and the serial number does not match the original outbound scan. |
-    | Return request | 5 | NovaWatch Ultra | Electronics | Sizing complaint | 199.98 | Product not as described: Customer cites inaccurate size chart for a preferred-tier order. Similar complaints appeared in recent product reviews. |
-    | Return request | 2 | UltraWide Curved 34 | Gaming | Sizing complaint | 179.99 | Size and fit issue: Apparel was tried on but tags appear attached. Return was initiated 18 days after delivery from a store kiosk. |
-    | Return evidence | 1 | Quantum Processor Desktop | Electronics | Damaged packaging | 96.41 | VIP save-the-customer override: High lifetime value customer with low risk and visible carrier damage is eligible for instant credit while the claim is routed to carrier recovery. |
-    | Return evidence | 2 | Quantum Processor Desktop | Electronics | Damaged packaging | 93.88 | Package damage classifier: Vision tag: `crushed_corner`, `cracked_shell`, `carrier_label_visible.` Damage timestamp aligns with final-mile scan exception. |
-    | Return evidence | 7 | NovaWatch Ultra | Electronics | Sizing complaint | 86.21 | Similar size chart complaints: Vector search found nine recent review snippets about inaccurate sizing for adjacent products in the same category. |
-    | Return request | 1 | Quantum Processor Desktop | Electronics | Damaged packaging | 69.99 | Arrived damaged: Customer uploaded photos showing a dented package and cracked product shell. Carrier scan shows delayed handoff at the regional hub. |
+    | Return request | 3 | RaceDay Docking Hub | Sports Tech | Damaged packaging | 209.97 | Missing accessories: Electronics return package is missing charging cable and the serial number does not match the original outbound scan. |
+    | Return request | 5 | FitScale Pro | Fitness | Sizing complaint | 199.98 | Product not as described: Customer cites inaccurate size chart for a preferred-tier order. Similar complaints appeared in recent product reviews. |
+    | Return request | 2 | Bike Shop Impact Driver 20V | Outdoor Tools | Sizing complaint | 179.99 | Size and fit issue: Apparel was tried on but tags appear attached. Return was initiated 18 days after delivery from a store kiosk. |
+    | Return request | 1 | Smart Grill Thermometer | Camp Cooking | Damaged packaging | 69.99 | Arrived damaged: Customer uploaded photos showing a dented package and cracked product shell. Carrier scan shows delayed handoff at the regional hub. |
+    | Return evidence | 1 | Smart Grill Thermometer | Camp Cooking | Damaged packaging | 96.41 | VIP save-the-customer override: High lifetime value customer with low risk and visible carrier damage is eligible for instant credit while the claim is routed to carrier recovery. |
+    | Return evidence | 2 | Smart Grill Thermometer | Camp Cooking | Damaged packaging | 93.88 | Package damage classifier: Vision tag: crushed_corner cracked_shell carrier_label_visible. Damage timestamp aligns with final-mile scan exception. |
+    | Return evidence | 7 | FitScale Pro | Fitness | Sizing complaint | 86.21 | Similar size chart complaints: Vector search found nine recent review snippets about inaccurate sizing for adjacent products in the same category. |
     {: title="Demand Signal SQL"}
 
 3. Read the result as an audit trail for the answer. The **Source** column shows where the evidence came from. **Matched Topic** shows how the SQL classified the text. **Signal Strength** gives the sort value used to rank the result. The answer stays grounded in Oracle data because the rows come from approved views and tables, not from a generated narrative.
@@ -269,16 +292,16 @@ Estimated Time: 10 minutes
 
     | Center | City | At-Risk Products | Lowest On Hand |
     | --- | --- | ---: | ---: |
-    | Seattle Pacific NW | Kent | 11 | 12 |
-    | Reno West Hub | Sparks | 11 | 15 |
-    | Dallas South Central | Lancaster | 10 | 12 |
-    | Chicago Midwest Hub | Joliet | 10 | 12 |
-    | Portland Pacific | Troutdale | 9 | 10 |
-    | Tampa Florida | Brandon | 9 | 11 |
-    | Columbus Midwest | Etna | 9 | 12 |
-    | Baltimore East Coast | Aberdeen | 9 | 13 |
-    | LA Mega Center | Ontario | 9 | 14 |
-    | Philadelphia Mid-Atlantic | Middletown | 8 | 11 |
+    | Memphis Logistics | Olive Branch | 11 | 12 |
+    | Indianapolis Heartland | Plainfield | 11 | 15 |
+    | Seattle Pacific NW | Kent | 11 | 21 |
+    | Dallas South Central | Lancaster | 10 | 16 |
+    | Baltimore East Coast | Aberdeen | 9 | 11 |
+    | Reno West Hub | Sparks | 9 | 12 |
+    | Columbus Midwest | Etna | 9 | 15 |
+    | Tampa Florida | Brandon | 9 | 16 |
+    | Honolulu Pacific | Kapolei | 8 | 11 |
+    | NYC Metro Hub | Edison | 8 | 12 |
     {: title="Fulfillment Risk SQL"}
 
 2. Required student steps do not call `DBMS_CLOUD_AI.GENERATE`, `CREATE_PROFILE`, `ENABLE_PROFILE`, or `SET_PROFILE`. This lab focuses on the database foundation: approved views, useful comments, stable SQL equivalents, and read-only query patterns that keep the answer traceable.

@@ -4,7 +4,7 @@
 
 This lab starts the hands-on database work. You will inspect the schema that prepares the Seer Sporting Goods dataset for the rest of the LiveStack. The practical point is simple: one Oracle Database 26ai schema can support the retail workflow. Products, customers, orders, inventory, returns data, creator signals, fulfillment geography, AI context, and audit evidence do not have to live in disconnected stores.
 
-The LiveStack application shows what the Data Foundation page loads or restores. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
 Estimated Time: 10 minutes
 
@@ -169,7 +169,7 @@ Estimated Time: 10 minutes
     | Social posts | 5000 |
     | Return requests | 5 |
     | Return evidence documents | 7 |
-    | Agent audit actions | 0 |
+    | Agent audit actions | 1 |
     {: title="Retail Data Row Counts"}
 
 2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.

@@ -4,7 +4,7 @@
 
 Predictive work loses trust when the features, scoring jobs, notebooks, CSV exports, BI extracts, and operational systems drift apart. This lab shows how to inspect the model inputs and scoring patterns close to the retail data they use.
 
-Oracle Machine Learning keeps models close to the retail data. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`. In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
+Oracle Machine Learning keeps models close to the retail data. The updated runbook frames this page as a business-facing analytics surface, not a separate notebook. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`. In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
 
 Estimated Time: 10 minutes
 
@@ -22,6 +22,10 @@ Estimated Time: 10 minutes
     ![Retail OML Analytics overview](images/retail-oml-analytics-overview.png " ")
 
     *Figure 1: Retail OML Analytics summarizes in-database predictive signals and active models.*
+
+    ![OML demand surge tab from the runbook](images/oml-demand-surge.png " ")
+
+    *Figure 2: Demand surge scoring turns product, social, and sales features into an action-oriented prediction.*
 
 2. Run this view check.
 
@@ -101,16 +105,16 @@ Estimated Time: 10 minutes
 
     | Product ID | Category | Actual | Predicted | Surge Prob |
     | ---: | --- | --- | --- | ---: |
-    | 1 | Fashion | STABLE | SURGE | 0.536 |
-    | 2 | Fashion | SURGE | SURGE | 0.9713 |
-    | 3 | Fashion | SURGE | SURGE | 0.998 |
-    | 4 | Fashion | SURGE | SURGE | 0.9864 |
-    | 5 | Fashion | SURGE | SURGE | 1 |
-    | 6 | Electronics | SURGE | SURGE | 0.8053 |
-    | 7 | Electronics | SURGE | SURGE | 0.9709 |
-    | 8 | Electronics | SURGE | SURGE | 0.9989 |
-    | 9 | Electronics | SURGE | SURGE | 0.9608 |
-    | 10 | Electronics | SURGE | SURGE | 0.998 |
+    | 1 | Athletic Apparel | SURGE | SURGE | 1 |
+    | 2 | Athletic Apparel | SURGE | SURGE | 0.8219 |
+    | 3 | Athletic Apparel | SURGE | SURGE | 1 |
+    | 4 | Athletic Apparel | SURGE | SURGE | 0.5786 |
+    | 5 | Athletic Apparel | SURGE | SURGE | 1 |
+    | 6 | Sports Tech | SURGE | SURGE | 0.9986 |
+    | 7 | Sports Tech | SURGE | SURGE | 1 |
+    | 8 | Sports Tech | SURGE | SURGE | 0.998 |
+    | 9 | Sports Tech | SURGE | SURGE | 0.9946 |
+    | 10 | Sports Tech | SURGE | SURGE | 0.998 |
     {: title="Demand Surge Predictions"}
 
 3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product.
@@ -139,16 +143,16 @@ Estimated Time: 10 minutes
 
     | Product | Center | On Hand | Reorder At | Risk |
     | --- | --- | ---: | ---: | --- |
-    | Carbon Road Bike | Portland Pacific | 10 | 38 | `AT_RISK` |
-    | Heritage Leather Belt | Indianapolis Heartland | 10 | 84 | `AT_RISK` |
-    | Lavender Diffuser Set | Anchorage Alaska | 10 | 71 | `AT_RISK` |
-    | PhantomCase PC Mid Tower | Minneapolis North Central | 10 | 20 | `AT_RISK` |
-    | UltraWide Curved 34 | Portland Pacific | 10 | 34 | `AT_RISK` |
-    | 4-Season Tent 3P | Tampa Florida | 11 | 87 | `AT_RISK` |
-    | LED Festival Jacket | Nashville Central | 11 | 34 | `AT_RISK` |
-    | Midnight Espresso Blend | Houston Gulf Coast | 11 | 83 | `AT_RISK` |
-    | Moonbeam Highlighter | Phoenix Desert Hub | 11 | 30 | `AT_RISK` |
-    | Retro Wave Tee | Philadelphia Mid-Atlantic | 11 | 49 | `AT_RISK` |
+    | OmniRing Performance Tracker | Philadelphia Mid-Atlantic | 10 | 41 | `AT_RISK` |
+    | DewPoint Hydration Spray | Charlotte Southeast | 11 | 27 | `AT_RISK` |
+    | Matcha Endurance Starter Kit | Salt Lake Mountain | 11 | 76 | `AT_RISK` |
+    | Recovery Cooling Gel | Honolulu Pacific | 11 | 53 | `AT_RISK` |
+    | Trekking Backpack 45L | Baltimore East Coast | 11 | 70 | `AT_RISK` |
+    | CoachMic USB Microphone | NYC Metro Hub | 12 | 86 | `AT_RISK` |
+    | CoachView Curved Display | Memphis Logistics | 12 | 54 | `AT_RISK` |
+    | DrillSwitch Training Controller | LA Mega Center | 12 | 44 | `AT_RISK` |
+    | Expedition Power Bank | Detroit Great Lakes | 12 | 37 | `AT_RISK` |
+    | RidgeLine Fleece Hoodie | LA Mega Center | 12 | 95 | `AT_RISK` |
     {: title="Inventory Risk Evidence"}
 
 3. This result is the operational side of the OML story. A prediction can suggest where demand may rise, but the replenishment decision still needs inventory evidence from Oracle Database.

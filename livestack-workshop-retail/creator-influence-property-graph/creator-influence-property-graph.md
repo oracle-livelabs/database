@@ -23,6 +23,10 @@ Estimated Time: 10 minutes
 
     *Figure 1: Creator Influence Network shows how creator relationships can amplify product and brand signals.*
 
+    ![Creator graph workspace with relationship paths](images/creator-graph-workspace.png " ")
+
+    *Figure 2: The graph workspace turns creator relationships into a navigable network instead of a flat influencer list.*
+
 2. Run this graph check.
 
     A creator network is more than a flat influencer list. This block checks `ALL_PROPERTY_GRAPHS` for the graph object managed by Oracle Database. The graph models how creators, brands, products, and posts connect while keeping the relationship data in the retail schema.
@@ -63,9 +67,9 @@ Estimated Time: 10 minutes
     | --- | ---: |
     | Influencers | 483 |
     | Social posts | 5000 |
-    | Influencer connections | 3042 |
-    | Brand influencer links | 1789 |
-    | Post product mentions | 3503 |
+    | Influencer connections | 3008 |
+    | Brand influencer links | 1796 |
+    | Post product mentions | 3508 |
     {: title="Graph Sources"}
 
 ## Task 2: Traverse creator relationships
@@ -112,17 +116,17 @@ Estimated Time: 10 minutes
     Expected output:
 
     | From | To | Link | Strength |
-    | --- | --- | --- | --- |
-    | `@beauty_sarah` | `@beauty_nora` | collaborates | 0.999 |
-    | `@solar_drew` | `@pure_nora` | duet | 0.999 |
-    | `@thunder_sarah` | `@mist_max` | duet | 0.999 |
-    | `@flame_jack` | `@aura_reed` | duet | 0.998 |
-    | `@golden_ruby` | `@fit_zoe` | tagged | 0.998 |
-    | `@luxe_maya` | `@bloom_pia` | `inspired_by` | 0.998 |
-    | `@rift_sarah` | `@urban_tess` | reshared | 0.998 |
-    | `@sage_maya` | `@luxe_jace` | collaborates | 0.998 |
-    | `@golden_liam` | `@tech_luna` | tagged | 0.997 |
-    | `@luxe_xena` | `@nexus_cleo` | collaborates | 0.997 |
+    | --- | --- | --- | ---: |
+    | `@route_lily_295` | `@river_jace_382` | reshared | 1.0 |
+    | `@climb_lily_455` | `@terrain_drew_202` | duet | 0.999 |
+    | `@coach_dane_443` | `@fit_noah_239` | reshared | 0.999 |
+    | `@coach_zoe_225` | `@alpine_mia_18` | mentioned | 0.999 |
+    | `@endurance_maya_221` | `@coach_zoe_160` | `inspired_by` | 0.999 |
+    | `@fit_noah_174` | `@stadium_ivy_343` | tagged | 0.999 |
+    | `@hike_max_148` | `@cycle_dane_150` | `inspired_by` | 0.999 |
+    | `@route_gus_122` | `@endurance_maya_289` | reshared | 0.999 |
+    | `@terrain_alex_420` | `@endurance_maya_91` | `inspired_by` | 0.999 |
+    | `@camp_owen_111` | `@camp_owen_369` | reshared | 0.998 |
     {: title="Creator Relationships"}
 
 4. Read the result as network paths.
@@ -157,16 +161,16 @@ Estimated Time: 10 minutes
 
     | Promoter | Reached | Relationship |
     | --- | --- | --- |
-    | `@aura_aria` | `@crystal_cleo` | organic |
-    | `@aura_aria` | `@crystal_cleo` | organic |
-    | `@aura_aria` | `@crystal_cleo` | organic |
-    | `@aura_aria` | `@foodie_nina` | organic |
-    | `@aura_aria` | `@foodie_nina` | organic |
-    | `@aura_aria` | `@foodie_nina` | organic |
-    | `@aura_aria` | `@nexus_liam` | organic |
-    | `@aura_aria` | `@nexus_liam` | organic |
-    | `@aura_aria` | `@nexus_liam` | organic |
-    | `@aura_aria` | `@nova_max` | organic |
+    | `@alpine_hope_123` | `@camp_marcus_6` | affiliate |
+    | `@alpine_hope_123` | `@camp_marcus_6` | sponsored |
+    | `@alpine_hope_123` | `@camp_marcus_6` | affiliate |
+    | `@alpine_hope_123` | `@camp_marcus_6` | affiliate |
+    | `@alpine_hope_123` | `@camp_marcus_6` | affiliate |
+    | `@alpine_hope_123` | `@camp_marcus_6` | affiliate |
+    | `@alpine_hope_123` | `@camp_owen_309` | affiliate |
+    | `@alpine_hope_123` | `@camp_owen_309` | affiliate |
+    | `@alpine_hope_123` | `@camp_owen_309` | affiliate |
+    | `@alpine_hope_123` | `@camp_owen_309` | affiliate |
     {: title="Brand Paths"}
 
 6. This is the handoff from social signal to network action. A merchandiser can use the traversal to find creator communities that may amplify demand, returns exposure, or category momentum after Customer Trend Signals surfaces the initial product story.
