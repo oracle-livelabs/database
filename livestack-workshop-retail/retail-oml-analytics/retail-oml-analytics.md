@@ -2,11 +2,13 @@
 
 ## Introduction
 
-Predictive work loses trust when the features, scoring jobs, notebooks, CSV exports, BI extracts, and operational systems drift apart. This lab shows how to inspect the model inputs and scoring patterns close to the retail data they use.
+**Retail OML Analytics** turns predictive output into operational evidence. In this lab, learners verify OML views and models, score demand surge risk, and inspect the inventory evidence behind replenishment decisions.
 
-Oracle Machine Learning keeps models close to the retail data. The updated runbook frames this page as a business-facing analytics surface, not a separate notebook. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`. In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
+Oracle Machine Learning keeps models close to the retail data. The updated runbook frames this page as a business-facing analytics surface, not a separate notebook. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`.
 
-Estimated Time: 10 minutes
+In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
+
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -17,6 +19,8 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Verify OML training views and models
+
+Perform the following set of steps to confirm that predictive analytics are built from governed retail data, not disconnected exports.
 1. Review the related application screen before you run the SQL.
 
     ![Retail OML Analytics overview](images/retail-oml-analytics-overview.png " ")
@@ -81,8 +85,13 @@ Estimated Time: 10 minutes
     | LLUSER | `REVENUE_PREDICT_MODEL` | REGRESSION | `GENERALIZED_LINEAR_MODEL` |
     {: title="OML Models"}
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 2: Score demand surge risk
-1. Use the live Retail OML Analytics context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to identify products where demand may require promotion, replenishment, or operational follow-up.
+
+1. Use the live **Retail OML Analytics** context from **Figure 1** before you run the SQL.
 
 2. Run this scoring query.
 
@@ -119,7 +128,12 @@ Estimated Time: 10 minutes
 
 3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 3: Inspect the operating evidence behind replenishment risk
+
+Perform the following set of steps to show that model output should be reviewed alongside inventory, demand, and fulfillment data.
+
 1. Use the live Retail OML Analytics context from Figure 1 before you run the SQL.
 
 2. Run this query.
@@ -156,6 +170,8 @@ Estimated Time: 10 minutes
     {: title="Inventory Risk Evidence"}
 
 3. This result is the operational side of the OML story. A prediction can suggest where demand may rise, but the replenishment decision still needs inventory evidence from Oracle Database.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 

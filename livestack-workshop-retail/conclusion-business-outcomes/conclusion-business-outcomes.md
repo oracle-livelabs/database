@@ -2,11 +2,12 @@
 
 ## Introduction
 
-This closing lab ties the retail workflow together. Across the workshop, Seer Sporting Goods connected product demand, customer signals, creator influence, fulfillment routing, order documents, in-database machine learning, natural-language SQL, and auditable agent actions. The common foundation was Oracle Database 26ai.
+This closing lab ties the workshop together. Learners review how one Oracle Database 26ai foundation supports the retail decision loop: observe the business, understand demand, trace influence, route fulfillment, protect orders, score risk, ask questions, and record agent actions.
+
 
 The practical point is simple: Oracle Database 26ai backs one connected retail decision path across data, AI, security, and operations. Each lab showed a different part of that path: observe the business, understand demand, trace influence, route fulfillment, protect orders, score risk, ask questions, and record agent actions.
 
-Estimated Time: 5 minutes
+Estimated Time: **5 minutes**
 
 ### Objectives
 
@@ -15,6 +16,8 @@ Estimated Time: 5 minutes
 - Explain the workshop flow in plain retail terms.
 
 ## Task 1: Review the final outcome
+
+Perform the following set of steps to connect each lab back to the same retail decision loop and database foundation.
 
 1. Review the workshop flow from the database point of view.
 
@@ -50,6 +53,8 @@ Estimated Time: 5 minutes
 2. Each signal supports a practical retail question, such as what is selling, what demand is changing, where fulfillment risk appears, which order evidence matters, or what an agent did.
 
 ## Task 2: Explain the workshop flow
+
+Perform the following set of steps as one connected retail operating pattern, not a set of disconnected database feature demos.
 
 1. Use this concise summary to explain the workshop flow.
 

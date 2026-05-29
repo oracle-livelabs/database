@@ -2,11 +2,11 @@
 
 ## Introduction
 
-A retail analyst often needs an answer before a custom report can be built. That gets risky when the question is separated from the database objects, joins, filters, and security rules that make the answer trustworthy.
+**Ask Retail Data** helps business users ask questions in plain language while keeping the answer path traceable. In this lab, learners inspect the semantic views, comments, approved objects, and SQL patterns that ground natural-language answers in governed database evidence.
 
-This lab follows the updated runbook's governance message: a business user may start in plain English, but Oracle remains the execution authority. You inspect the database foundation that makes an Ask Retail Data experience trustworthy: semantic views, table comments, approved joins, visible SQL, and repeatable SQL patterns. The goal is to see how plain-English retail questions map back to governed Oracle data.
+This lab follows the updated runbook's governance message: a business user may start in plain English, but Oracle remains the execution authority. You inspect the database foundation that makes an **Ask Retail Data** experience trustworthy: semantic views, table comments, approved joins, visible SQL, and repeatable SQL patterns. The goal is to see how plain-English retail questions map back to governed Oracle data.
 
-Estimated Time: 10 minutes
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -18,6 +18,9 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Inspect semantic views for Ask Retail Data
+
+Perform the following set of steps to show which governed database objects are available for natural-language questions.
+
 1. Review the related application screen before you run the SQL.
 
     ![Ask Retail Data workspace with query modes](images/ask-retail-data-workspace.png " ")
@@ -30,11 +33,11 @@ Estimated Time: 10 minutes
 
 2. Review the grounding pattern.
 
-    Ask Retail Data is useful only when a business question can be tied back to database evidence. In this workshop, that grounding comes from three database assets: semantic views, comments, and repeatable SQL patterns. Semantic views provide approved business shapes. Comments explain what tables and views mean. SQL shows the exact objects, joins, filters, and result columns behind the answer.
+    **Ask Retail Data** is useful only when a business question can be tied back to database evidence. In this workshop, that grounding comes from three database assets: semantic views, comments, and repeatable SQL patterns. Semantic views provide approved business shapes. Comments explain what tables and views mean. SQL shows the exact objects, joins, filters, and result columns behind the answer.
 
 3. Run this query.
 
-    A semantic view is a database view designed around a business question, such as return workflow, fulfillment risk, or demand signals. This block checks `ALL_VIEWS` for the approved retail views exposed to Ask Retail Data. These views reduce ambiguity because Ask Retail Data examples can target business-ready shapes instead of raw tables.
+    A semantic view is a database view designed around a business question, such as return workflow, fulfillment risk, or demand signals. This block checks `ALL_VIEWS` for the approved retail views exposed to Ask Retail Data. These views reduce ambiguity because **Ask Retail Data** examples can target business-ready shapes instead of raw tables.
 
     ```sql
     <copy>
@@ -60,9 +63,13 @@ Estimated Time: 10 minutes
     | `RETAIL_SIGNAL_PRODUCT_V` | 324 |
     {: title="Ask Data Views"}
 
-4. Ask Retail Data should ground answers in these views and metadata, not in copied data or unsupported table guesses.
+4. **Ask Retail Data** should ground answers in these views and metadata, not in copied data or unsupported table guesses.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Task 2: Read comments used for grounding
+
+Perform the following set of steps to see how business language helps map user questions to the right database objects.
 
 1. Run this query.
 
@@ -133,13 +140,15 @@ Estimated Time: 10 minutes
     | `RETURN_REQUESTS` | Retail return requests with reason, channel, risk rating, recommendation, status, policy evidence, and confidence. |
     {: title="Ask Retail Data Metadata"}
 
-2. Comments and semantic views put business meaning next to the data. That matters because a question such as "Which products have return exposure?" should start from approved retail objects, not from a guess about raw table names.
+2. Comments and semantic views put business meaning next to the data. That matters because a question such as *Which products have return exposure?* should start from approved retail objects, not from a guess about raw table names.
 
 ## Task 3: Map questions to database objects
 
+Perform the following set of steps to show how approved tables and views keep natural-language answers grounded and reviewable.
+
 1. Run this query.
 
-    This query shows the database-backed path for common Ask Retail Data questions. Each row maps a plain-English question to the Oracle objects that provide the answer. The point is not that an interface can display SQL. The point is that the answer can be traced to approved views, tables, joins, and filters in Oracle Database.
+    This query shows the database-backed path for common **Ask Retail Data** questions. Each row maps a plain-English question to the Oracle objects that provide the answer. The point is not that an interface can display SQL. The point is that the answer can be traced to approved views, tables, joins, and filters in Oracle Database.
 
     ```sql
     <copy>
@@ -178,7 +187,10 @@ Estimated Time: 10 minutes
 2. Read the map from left to right. The business question is useful because the database already has a safe path to the evidence. The semantic views reduce join ambiguity, the comments explain meaning, and the SQL keeps the result inspectable.
 
 ## Task 4: Answer a signal question with database-backed SQL
-1. Use the live Ask Retail Data context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to show that a plain-English business question can be traced to governed rows and evidence.
+
+1. Use the live **Ask Retail Data** context from **Figure 1** before you run the SQL.
 
 2. Run this repeatable version of the current prompt, "Which demand signals mention damaged packaging or sizing complaints?"
 
@@ -266,9 +278,19 @@ Estimated Time: 10 minutes
     | Return evidence | 7 | FitScale Pro | Fitness | Sizing complaint | 86.21 | Similar size chart complaints: Vector search found nine recent review snippets about inaccurate sizing for adjacent products in the same category. |
     {: title="Demand Signal SQL"}
 
-3. Read the result as an audit trail for the answer. The **Source** column shows where the evidence came from. **Matched Topic** shows how the SQL classified the text. **Signal Strength** gives the sort value used to rank the result. The answer stays grounded in Oracle data because the rows come from approved views and tables, not from a generated narrative.
+3. Read the result as an audit trail for the answer.
+
+- The **Source** column shows where the evidence came from.
+- **Matched Topic** shows how the SQL classified the text.
+- **Signal Strength** gives the sort value used to rank the result.
+
+The answer stays grounded in Oracle data because the rows come from approved views and tables, not from a generated narrative.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Task 5: Answer a fulfillment risk question with database-backed SQL
+
+Perform the following set of steps to identify where inventory, demand, and fulfillment center context may require action.
 
 1. Run this repeatable version of the prompt, "Which fulfillment centers have inventory pressure?"
 
@@ -305,6 +327,8 @@ Estimated Time: 10 minutes
     {: title="Fulfillment Risk SQL"}
 
 2. Required student steps do not call `DBMS_CLOUD_AI.GENERATE`, `CREATE_PROFILE`, `ENABLE_PROFILE`, or `SET_PROFILE`. This lab focuses on the database foundation: approved views, useful comments, stable SQL equivalents, and read-only query patterns that keep the answer traceable.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 

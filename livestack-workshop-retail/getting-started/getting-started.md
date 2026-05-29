@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned Autonomous Database 26ai instance, and prepare SQL Worksheet for the retail exercises. The remaining labs are hands-on database exercises. You will run SQL and PL/SQL in the workshop database and connect each result to the retail application experience.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on retail exercises. This setup matters because every later lab depends on running SQL as the correct workshop user against the prepared retail schema.
 
-Estimated Time: 5 minutes
+Estimated Time: **5 minutes**
 
 ### Objectives
 
@@ -17,6 +17,8 @@ In this lab, you will:
 
 ## Task 1: Launch the LiveLabs environment
 
+Launch the LiveLabs environment first so the learner starts from the correct reservation, tenancy context, and workshop resources.
+
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
 2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
@@ -26,6 +28,8 @@ In this lab, you will:
 4. Select **View Login Info** and keep the database credentials available for the next task.
 
 ## Task 2: Open SQL Worksheet
+
+Open SQL Worksheet and confirm that the selected user is the main workshop user, usually LLUSER. This matters because all SQL examples assume the prepared retail schema is available in the active session.
 
 1. In the OCI Console, open the Autonomous Database provisioned for the workshop.
 
