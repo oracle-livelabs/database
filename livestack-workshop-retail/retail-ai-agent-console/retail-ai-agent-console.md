@@ -24,6 +24,10 @@ Estimated Time: 8 minutes
 
     *Figure 1: Retail AI Agent Console shows the runtime profile, example questions, database tool badges, and recent agent actions.*
 
+    ![Retail AI Agent Console fulfillment response from the runbook](images/agent-console-fulfillment.png " ")
+
+    *Figure 2: Agent answers should expose route context, tool evidence, and audit history instead of behaving like black-box chat.*
+
 2. Run this query.
 
     Start by checking the database tools the agent can use. A tool function is a controlled database API that the application or agent can call instead of generating unrestricted SQL. This block queries `ALL_OBJECTS` for the PL/SQL functions that form the agent tool contract. Each valid function represents a reviewed capability: trend detection, inventory lookup, fulfillment choice, network lookup, or decision logging.
@@ -58,13 +62,13 @@ Estimated Time: 8 minutes
 ## Task 2: Call an inventory tool
 1. Use the live Retail AI Agent Console context from Figure 1 before you run the SQL.
 
-2. Call one inventory tool with a fixed product name.
+2. Call one inventory tool with a current Seer Sporting Goods product name.
 
     This step shows the bridge between a user question and a trusted database action. The query selects from `DUAL` because the function returns one answer, not a set of rows. `CHECK_PRODUCT_INVENTORY` reads current inventory records, formats the evidence, and returns a controlled response. That pattern grounds agent answers in data the business already governs.
 
     ```sql
     <copy>
-    SELECT SUBSTR(check_product_inventory('Neon Grid Hoodie'), 1, 500) AS "Inventory"
+    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory"
     FROM dual;
     </copy>
     ```
@@ -73,7 +77,7 @@ Estimated Time: 8 minutes
 
     | Inventory |
     | --- |
-    | Inventory for "Neon Grid Hoodie" across 14 centers (3947 total units): Kansas City Central (Edwardsville, Kansas): 484 on hand, 19 reserved [OK]... |
+    | Inventory for "AllTerrain Hiking Boots" across 12 centers (3183 total units): Honolulu Pacific (Kapolei, Hawaii): 434 on hand, 10 reserved [OK]... |
     {: title="Inventory Tool Result"}
 
 3. The same pattern can run behind the application. A user sees an agent answer. Oracle AI Database supplies the governed inventory evidence behind it.
