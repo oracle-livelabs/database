@@ -4,7 +4,7 @@
 
 **Retail OML Analytics** turns predictive output into operational evidence. In this lab, learners verify OML views and models, score demand surge risk, and inspect the inventory evidence behind replenishment decisions.
 
-Oracle Machine Learning keeps models close to the retail data. The updated runbook frames this page as a business-facing analytics surface, not a separate notebook. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`.
+Oracle Machine Learning keeps models close to the retail data. The updated runbook frames this page as a business-facing analytics surface, not a separate notebook. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`. In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
 
 In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
 
@@ -110,23 +110,23 @@ Perform the following set of steps to identify products where demand may require
     </copy>
     ```
 
-    Expected output:
+    Expected output (example - probability values can vary if the model is rebuilt):
 
     | Product ID | Category | Actual | Predicted | Surge Prob |
     | ---: | --- | --- | --- | ---: |
     | 1 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 2 | Athletic Apparel | SURGE | SURGE | 0.8219 |
+    | 2 | Athletic Apparel | SURGE | SURGE | 0.6171 |
     | 3 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 4 | Athletic Apparel | SURGE | SURGE | 0.5786 |
+    | 4 | Athletic Apparel | SURGE | SURGE | 0.5438 |
     | 5 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 6 | Sports Tech | SURGE | SURGE | 0.9986 |
+    | 6 | Sports Tech | SURGE | SURGE | 0.9972 |
     | 7 | Sports Tech | SURGE | SURGE | 1 |
-    | 8 | Sports Tech | SURGE | SURGE | 0.998 |
-    | 9 | Sports Tech | SURGE | SURGE | 0.9946 |
+    | 8 | Sports Tech | SURGE | SURGE | 1 |
+    | 9 | Sports Tech | SURGE | SURGE | 0.998 |
     | 10 | Sports Tech | SURGE | SURGE | 0.998 |
     {: title="Demand Surge Predictions"}
 
-3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product.
+3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product. The predicted labels are the key result for this lab. The probability values are confidence scores from the trained model, and they can differ slightly across workshop environments when the Random Forest model is rebuilt from the same feature data.
 
 **Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 

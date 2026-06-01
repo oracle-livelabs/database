@@ -64,10 +64,6 @@ Perform the following set of steps to confirm that agent workflows call approved
 
 ## Task 2: Call an inventory tool
 
-Perform the following set of steps to show how an agent can retrieve operational inventory evidence before recommending an action.
-
-1. Use the live **Retail AI Agent Console** context from **Figure 1** before you run the SQL.
-
 2. Call one inventory tool with a current Seer Sporting Goods product name.
 
     This step shows the bridge between a user question and a trusted database action. The query selects from `DUAL` because the function returns one answer, not a set of rows. `CHECK_PRODUCT_INVENTORY` reads current inventory records, formats the evidence, and returns a controlled response. That pattern grounds agent answers in data the business already governs.
@@ -81,9 +77,9 @@ Perform the following set of steps to show how an agent can retrieve operational
 
     Expected output:
 
-    | Inventory |
-    | --- |
-    | Inventory for "AllTerrain Hiking Boots" across 12 centers (3183 total units): Honolulu Pacific (Kapolei, Hawaii): 434 on hand, 10 reserved [OK]... |
+    | Check | Inventory |
+    | --- | --- |
+    | AllTerrain Hiking Boots | Inventory across 12 centers: 3183 total units. Honolulu Pacific in Kapolei, Hawaii has 434 on hand and 10 reserved. Status: OK. |
     {: title="Inventory Tool Result"}
 
 3. The same pattern can run behind the application. A user sees an agent answer. Oracle AI Database supplies the governed inventory evidence behind it.
@@ -114,9 +110,9 @@ Perform the following set of steps to show that agent activity can be recorded f
 
     Expected output:
 
-    | Result |
-    | --- |
-    | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
+    | Check | Result |
+    | --- | --- |
+    | Agent audit insert | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
     {: title="Agent Audit Insert"}
 
 3. Verify the audit row.

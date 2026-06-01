@@ -4,7 +4,7 @@
 
 This lab starts the hands-on database work by confirming that the retail foundation is present and ready. Learners inspect the objects, views, graph metadata, vector artifacts, OML models, and PL/SQL tools that support the Seer Sporting Goods workflow, so later results can be trusted as database-backed evidence.
 
-The LiveStack application shows what the **Data Foundation** page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
 Estimated Time: **10 minutes**
 

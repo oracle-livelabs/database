@@ -4,7 +4,7 @@
 
 **Retail Command Center** helps teams answer a daily operating question: *What needs attention right now?*
 
-In this lab, learners inspect the SQL behind KPIs, trending products, and revenue by category, then connect those results to merchandising, inventory, returns, and agent activity.
+Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
 
 Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
 
@@ -68,6 +68,10 @@ Review trending products to identify where social momentum may indicate a sales 
 
     *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
 
+    ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
+
+    *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
+
 2. Run the database version of the command center trending-products query.
 
     Trending products sit at the intersection of merchandising, inventory, and social engagement. This block joins four related tables: products, brands, social posts, and the bridge table that records which posts mention which products. `COUNT(DISTINCT ...)` counts unique posts, `SUM` totals views, and `AVG` calculates average momentum. The date filter keeps the result focused on recent activity by comparing each post with the latest seeded post date.
@@ -116,6 +120,14 @@ Review trending products to identify where social momentum may indicate a sales 
 Connect product detail screens to database evidence to show that document-style application experiences can still come from governed relational data.
 
 1. Use the live **Retail Command Center** context from **Figure 1** as the visual anchor for product details and JSON Duality patterns.
+
+    ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
+
+    *Figure 3: Product detail connects the selected product to inventory and social evidence.*
+
+    ![Product JSON Duality view in the product detail modal](images/product-json-duality.png " ")
+
+    *Figure 4: The same product story can also be displayed as document-shaped JSON.*
 
     ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
 

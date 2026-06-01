@@ -4,7 +4,7 @@
 
 **Ask Retail Data** helps business users ask questions in plain language while keeping the answer path traceable. In this lab, learners inspect the semantic views, comments, approved objects, and SQL patterns that ground natural-language answers in governed database evidence.
 
-This lab follows the updated runbook's governance message: a business user may start in plain English, but Oracle remains the execution authority. You inspect the database foundation that makes an **Ask Retail Data** experience trustworthy: semantic views, table comments, approved joins, visible SQL, and repeatable SQL patterns. The goal is to see how plain-English retail questions map back to governed Oracle data.
+This lab follows the updated runbook's governance message: a business user may start in plain English, but Oracle remains the execution authority. You inspect the database foundation that makes an Ask Retail Data experience trustworthy: semantic views, table comments, approved joins, visible SQL, and repeatable SQL patterns. The goal is to see how plain-English retail questions map back to governed Oracle data.
 
 Estimated Time: **10 minutes**
 

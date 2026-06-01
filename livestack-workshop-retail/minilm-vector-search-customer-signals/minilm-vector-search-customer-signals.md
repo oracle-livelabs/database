@@ -31,17 +31,10 @@ Perform the following set of steps to understand how shopper language, product d
 
     *Figure 2: The runbook calls out prebuilt product vectors, post vectors, semantic matches, and VPD-governed vector search.*
 
-    The page shows two connected ideas.
-
-    - **Semantic Product Discovery** uses vector search to match shopper language to catalog items.
-
-    - **Social Trend Intelligence** connects product demand to creator posts, platforms, and social momentum. The compact loader now prepares the product vectors, post vectors, and semantic matches that the application uses. In the next task, you inspect and safely refresh the product embeddings so you understand how the semantic search portion works.
+    The page shows two connected ideas. Semantic Product Discovery uses vector search to match shopper language to catalog items. Social Trend Intelligence connects product demand to creator posts, platforms, and social momentum. The compact loader now prepares the product vectors, post vectors, and semantic matches that the application uses. In the next task, you inspect and safely refresh the product embeddings so you understand how the semantic search portion works.
 
 ## Task 2: Verify and refresh product embeddings
-
-Perform the following set of steps to allow products to be compared by meaning, not only by exact words in the catalog.
-
-1. Use the live **Customer Trend Signals** context from **Figure 1** before you run the SQL.
+1. Use the live Customer Trend Signals context from Figure 1 before you run the SQL.
 
 2. Verify and refresh the product embeddings.
 
