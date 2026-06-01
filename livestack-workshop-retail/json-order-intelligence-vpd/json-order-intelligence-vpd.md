@@ -369,6 +369,12 @@ Updates work in both directions. When you update the retail document, the relati
 
 5. You used both sides of JSON Relational Duality. A document insert created relational rows. A document update changed a relational row. A relational update changed the document result. The application gets JSON flexibility while Oracle Database keeps the data relational, consistent, and available to SQL.
 
+## More JSON Relational Duality labs
+
+This lab is meant to give you a sample of the power of Oracle AI Database's JSON capabilities. For a more full-featured hands-on lab on JSON Relational Duality, go to:
+
+[JSON Relational Duality LiveLab](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3635&session=108731215528653)
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
