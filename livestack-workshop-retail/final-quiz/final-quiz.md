@@ -4,7 +4,7 @@
 
 Use this quiz to check your understanding of how the retail LiveStack uses Oracle Database 26ai to power the Seer Sporting Goods workflow. The questions focus on why each database capability matters to retail decisions.
 
-Estimated Time: 5 minutes
+Estimated Time: **5 minutes**
 
 ### Objectives
 

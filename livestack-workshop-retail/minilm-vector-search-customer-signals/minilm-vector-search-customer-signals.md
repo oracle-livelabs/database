@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Customer demand often shows up in shopper language and creator activity before it shows up in sales reports. That signal is easy to miss when product language, reviews, social posts, sentiment, and inventory data sit in different places. This lab follows the Customer Trend Signals scene in the runbook and shows how search by meaning can connect shopper intent to products.
+**Customer Trend Signals** helps retail teams search by shopper intent instead of exact catalog terms. In this lab, learners generate embeddings, search products by meaning, and connect social trend matches to merchandising and demand-sensing decisions.
 
 Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. The LiveStack application connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you verify the prebuilt vector artifacts, safely refresh product embeddings, and run dynamic semantic search against database-managed product vectors.
 
-Estimated Time: 10 minutes
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -18,6 +18,9 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Review Customer Trend Signals
+
+Perform the following set of steps to understand how shopper language, product data, and social activity become searchable demand evidence.
+
 1. Review the related application screen before you run the SQL.
 
     ![Customer Trend Signals overview with semantic search and social intelligence](images/customer-trend-signals-overview.png " ")
@@ -92,7 +95,11 @@ Estimated Time: 10 minutes
 
 3. The product catalog now has vectors that the next query can compare with a shopper-style search phrase.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 3: Search products by meaning
+
+Perform the following set of steps to show how a merchandising user can turn natural shopper language into relevant product matches.
 1. Run this dynamic semantic search.
 
     Retail users often ask conceptual questions, such as "summer running shoes lightweight breathable." This block embeds that phrase at query time with `EMBED_RETAIL_TEXT`. It compares the query vector with the product vectors you generated. `VECTOR_DISTANCE` measures how far apart two vectors are; cosine distance is commonly used for text embeddings. Lower distance means the product is closer in meaning to the search phrase.
@@ -154,12 +161,17 @@ Estimated Time: 10 minutes
 
 3. The closest products show how shopper language becomes ranked product evidence for promotion, inventory, and trend analysis.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 4: Inspect social trend matches
-1. Use the Social Trend Intelligence region in Figure 1 before you run the SQL.
+
+Perform the following set of steps to see which posts, creators, platforms, and products may deserve merchandising, inventory, or campaign follow-up.
+
+1. Use the **Social Trend Intelligence** region in **Figure 1** before you run the SQL.
 
 2. Run this query.
 
-    Social Trend Intelligence is the second half of the scene. It monitors creator posts, customer conversations, sentiment, and momentum. This block joins cached semantic matches to social posts, influencers, and products. The result explains which posts align to which products.
+    **Social Trend Intelligence** is the second half of the scene. It monitors creator posts, customer conversations, sentiment, and momentum. This block joins cached semantic matches to social posts, influencers, and products. The result explains which posts align to which products.
 
     ```sql
     <copy>
@@ -198,6 +210,8 @@ Estimated Time: 10 minutes
     {: title="Social Product Matches"}
 
 3. This result ties the page back to the runbook story. The application is not only searching a catalog. It connects demand to creator handles, platforms, momentum, and social posts. The next lab uses the creator network to show how those signals can spread through communities.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 

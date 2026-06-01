@@ -2,11 +2,15 @@
 
 ## Introduction
 
-Order data usually has more than one audience. Application teams want a document shape, operations teams need relational detail, and security teams need access rules that do not drift. This gets brittle when order headers, line items, customer data, fulfillment centers, shipment records, and API payloads are duplicated across systems.
+Order data serves many audiences. Application teams need document-shaped access, operations teams need relational detail, and security teams need governed access rules. In this lab, learners compare those views of the same order and verify that access control stays inside the database.Oracle AI Database keeps the order record in one place while exposing it through the shape each workflow needs. Relational tables provide ACID transactions and operational SQL.
 
-Oracle AI Database keeps the order record in one place while exposing it through the shape each workflow needs. Relational tables provide ACID transactions and operational SQL. JSON Relational Duality exposes the same order as an application-friendly document. Virtual Private Database, or VPD, adds row-level security by applying database policy logic to protected tables. In SQL Worksheet, you compare the JSON document view with relational rows and confirm that the access policy stays in the database.
+**JSON Relational Duality** exposes the same order as an application-friendly document. Simply put, **JSON Relational Duality** as one governed order record supporting two shapes: relational tables for operations and document-style JSON for applications or APIs.
 
-Estimated Time: 10 minutes
+**Virtual Private Database**, or **VPD**, adds row-level security by applying database policy logic to protected tables. It is essentially a database-enforced row-level access control, so learners understand how governed order visibility stays close to the data.
+
+In SQL Worksheet, you compare the JSON document view with relational rows and confirm that the access policy stays in the database.
+
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -17,6 +21,9 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Read an order as a JSON document
+
+Doing this shows how application teams can consume order-shaped data while the database preserves the governed source tables.
+
 1. Review the related application screen before you run the SQL.
 
     ![Unified Order Intelligence order workspace](images/unified-order-intelligence-overview.png " ")
@@ -64,7 +71,11 @@ Estimated Time: 10 minutes
     }
     ```
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 2: Extract document fields with SQL/JSON
+
+Perform the following set of steps to show that document data can still be filtered, sorted, counted, and compared with SQL.
 
 1. Run this query against the same duality view.
 
@@ -98,7 +109,12 @@ Estimated Time: 10 minutes
 
 2. JSON Duality helps application developers read order detail as a document without giving up SQL, constraints, and ACID transactions.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 3: Compare the document with relational rows
+
+Perform the following set of steps to prove that the JSON view and the relational tables describe the same governed order.
+
 1. Use the live Unified Order Intelligence context from Figure 1 before you run the SQL.
 
 2. Run this relational query for order 1, the same fixed order used in the document example.
@@ -133,9 +149,13 @@ Estimated Time: 10 minutes
 
 3. The document view and relational tables describe the same kind of business event. Retail teams get API-friendly JSON and database teams retain trustworthy relational evidence.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 4: Verify governed access policies
 
-1. Run this VPD policy component check.
+Perform the following set of steps to show that order and fulfillment visibility can be controlled in the database, not only in the application layer.
+
+1. Run this **VPD** policy component check.
 
     Order and fulfillment data can be region-sensitive. VPD protects that data by attaching a policy to a table or view. The policy calls a PL/SQL function that returns a predicate, which Oracle applies to SQL automatically. This block creates a small expected list, checks the policy attachments in `ALL_POLICIES`, checks the policy functions in `USER_OBJECTS`, and returns `Ready` when both parts are present.
 
@@ -202,6 +222,8 @@ Estimated Time: 10 minutes
     | --- | --- |
     | Security context call | PL/SQL procedure successfully completed. |
     {: title="Security Context"}
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 

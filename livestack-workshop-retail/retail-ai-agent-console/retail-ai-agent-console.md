@@ -2,11 +2,11 @@
 
 ## Introduction
 
-An AI agent answer is not enough if nobody can see what drove it. In retail, a useful agent needs trusted inventory, fulfillment, social signal, or product evidence. It also needs an audit trail, so a team can see what the agent proposed or did.
+Retail AI agents become more useful when their actions are observable. In this lab, learners verify database tool functions, call an inventory tool, write an audit action, and clean it up so they can see how agent workflows stay connected to governed database evidence.
 
 Oracle AI Database gives the agent a controlled action layer. The operational tables, SQL, PL/SQL tool functions, security policies, and audit rows stay in one database. The app can orchestrate the conversation, while important actions still run through controlled database APIs. In this lab, you inspect those APIs, call one directly, and verify the action history.
 
-Estimated Time: 8 minutes
+Estimated Time: **8 minutes**
 
 ### Objectives
 
@@ -18,6 +18,9 @@ Estimated Time: 8 minutes
 
 
 ## Task 1: Verify the agent tool functions
+
+Perform the following set of steps to confirm that agent workflows call approved database tools rather than untracked logic.
+
 1. Review the related application screen before you run the SQL.
 
     ![Retail AI Agent Console overview](images/agent-console-overview.png " ")
@@ -60,7 +63,6 @@ Estimated Time: 8 minutes
 3. These functions form the agent tool contract: the app can ask questions in natural language while the answers still come from reviewed database logic.
 
 ## Task 2: Call an inventory tool
-1. Use the live Retail AI Agent Console context from Figure 1 before you run the SQL.
 
 2. Call one inventory tool with a current Seer Sporting Goods product name.
 
@@ -82,8 +84,13 @@ Estimated Time: 8 minutes
 
 3. The same pattern can run behind the application. A user sees an agent answer. Oracle AI Database supplies the governed inventory evidence behind it.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 3: Log and verify an audit action
-1. Use the live Retail AI Agent Console context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to show that agent activity can be recorded for later review, not treated as a temporary chat response.
+
+1. Use the live **Retail AI Agent Console** context from **Figure 1** before you run the SQL.
 
 2. Run this controlled audit call.
 
@@ -175,6 +182,8 @@ Estimated Time: 8 minutes
 4. The audit row makes the agent workflow observable. For production agents, this record supports debugging, approvals, compliance review, and improvement.
 
 ## Task 4: Clean up the validation row
+
+Perform the following set of steps to so the workshop leaves the audit table in a controlled state after the test action.
 
 1. Clean up the validation row if your instructor asks for a pristine audit table.
 
