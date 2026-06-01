@@ -101,23 +101,23 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-    Expected output:
+    Expected output (example - probability values can vary if the model is rebuilt):
 
     | Product ID | Category | Actual | Predicted | Surge Prob |
     | ---: | --- | --- | --- | ---: |
     | 1 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 2 | Athletic Apparel | SURGE | SURGE | 0.8219 |
+    | 2 | Athletic Apparel | SURGE | SURGE | 0.6171 |
     | 3 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 4 | Athletic Apparel | SURGE | SURGE | 0.5786 |
+    | 4 | Athletic Apparel | SURGE | SURGE | 0.5438 |
     | 5 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 6 | Sports Tech | SURGE | SURGE | 0.9986 |
+    | 6 | Sports Tech | SURGE | SURGE | 0.9972 |
     | 7 | Sports Tech | SURGE | SURGE | 1 |
-    | 8 | Sports Tech | SURGE | SURGE | 0.998 |
-    | 9 | Sports Tech | SURGE | SURGE | 0.9946 |
+    | 8 | Sports Tech | SURGE | SURGE | 1 |
+    | 9 | Sports Tech | SURGE | SURGE | 0.998 |
     | 10 | Sports Tech | SURGE | SURGE | 0.998 |
     {: title="Demand Surge Predictions"}
 
-3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product.
+3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product. The predicted labels are the key result for this lab. The probability values are confidence scores from the trained model, and they can differ slightly across workshop environments when the Random Forest model is rebuilt from the same feature data.
 
 ## Task 3: Inspect the operating evidence behind replenishment risk
 1. Use the live Retail OML Analytics context from Figure 1 before you run the SQL.

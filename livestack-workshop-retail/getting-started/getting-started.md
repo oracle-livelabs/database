@@ -11,7 +11,7 @@ Estimated Time: 5 minutes
 In this lab, you will:
 
 - Launch the LiveLabs workshop environment.
-- Open Database Actions for Autonomous Database 26ai.
+- Use the reservation login information to open Database Actions.
 - Confirm that SQL Worksheet is ready for the retail schema.
 - Find the backend setup bundle if you need to create the schema again.
 
@@ -25,23 +25,43 @@ In this lab, you will:
 
 4. Select **View Login Info** and keep the database credentials available for the next task.
 
+    ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg " ")
+
+    *Figure 1: The Reservation Information dialog shows the `LLUSER` login, password, and Login URL for Database Actions.*
+
 ## Task 2: Open SQL Worksheet
 
-1. In the OCI Console, open the Autonomous Database provisioned for the workshop.
+1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
-2. Select **Database Actions** and open **SQL Worksheet**.
+2. Select **Copy** for **2 - Password**.
 
-3. At the top of the SQL Worksheet page, open the user dropdown menu and select the main workshop user, usually `LLUSER`. If the login screen appears, confirm that **Username** shows `LLUSER`.
+    ![Reservation Information dialog with the Copy button highlighted for the Password row](images/reservation-login-copy-password.svg " ")
+
+    *Figure 2: Copy the `LLUSER` password from the Reservation Information dialog.*
+
+3. Select **Open Link** for **3 - Login URL**.
+
+    ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg " ")
+
+    *Figure 3: Use Open Link for the Login URL, then use the copied password to sign in as `LLUSER`.*
+
+4. On the Database Actions sign-in page, confirm that **Username** shows `LLUSER`, paste the password from the reservation information, and select **Sign in**.
 
     ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
 
-    *Figure 1: Select the main workshop user, usually LLUSER, before signing in.*
+    *Figure 4: Sign in to Database Actions as `LLUSER` with the password from the reservation information.*
 
-4. Use the same SQL Worksheet pattern throughout the workshop.
+5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
+
+    ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
+
+    *Figure 5: Open SQL from the Development tools menu.*
+
+6. Use the same SQL Worksheet pattern throughout the workshop.
 
     ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
 
-    *Figure 2: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
+    *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
     - Paste each workshop SQL block into the editor.
@@ -49,7 +69,7 @@ In this lab, you will:
     - Review the output in **Query Result** or **Script Output**, depending on the step.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
-5. Run this check.
+7. Run this check.
 
     This check reads Oracle session context directly from the database. `USER` shows the authenticated account, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where unqualified table names will resolve. If the user is not `LLUSER`, use the SQL Worksheet user dropdown to switch before continuing.
 
@@ -69,7 +89,7 @@ In this lab, you will:
     | LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
     {: title="Connected SQL Worksheet Session"}
 
-6. If the schema is not present, ask the instructor to run the scripts in `backend-provisioning/database-source/` in the order described in the README.
+8. If the schema is not present, ask the instructor to run the scripts in `backend-provisioning/database-source/` in the order described in the README.
 
 You can now continue to the retail labs.
 

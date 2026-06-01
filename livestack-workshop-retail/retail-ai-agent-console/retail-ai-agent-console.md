@@ -75,9 +75,9 @@ Estimated Time: 8 minutes
 
     Expected output:
 
-    | Inventory |
-    | --- |
-    | Inventory for "AllTerrain Hiking Boots" across 12 centers (3183 total units): Honolulu Pacific (Kapolei, Hawaii): 434 on hand, 10 reserved [OK]... |
+    | Check | Inventory |
+    | --- | --- |
+    | AllTerrain Hiking Boots | Inventory across 12 centers: 3183 total units. Honolulu Pacific in Kapolei, Hawaii has 434 on hand and 10 reserved. Status: OK. |
     {: title="Inventory Tool Result"}
 
 3. The same pattern can run behind the application. A user sees an agent answer. Oracle AI Database supplies the governed inventory evidence behind it.
@@ -103,9 +103,9 @@ Estimated Time: 8 minutes
 
     Expected output:
 
-    | Result |
-    | --- |
-    | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
+    | Check | Result |
+    | --- | --- |
+    | Agent audit insert | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
     {: title="Agent Audit Insert"}
 
 3. Verify the audit row.
