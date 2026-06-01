@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Fulfillment decisions break down when geography, inventory, demand, shipments, and service coverage are handled as separate questions. A team may know where inventory exists but still miss which center is close enough, stocked enough, or risky enough to change the decision.
+Fulfillment decisions depend on location, inventory, service areas, and demand geography. In this lab, learners inspect spatial metadata, produce map-ready GeoJSON, find nearby fulfillment options, and connect spatial evidence to replenishment and routing risk.
 
-Oracle AI Database keeps spatial, relational, inventory, shipment, demand forecast, and security-governed data together. The Intelligent Fulfillment Network page shows centers, service zones, demand regions, inventory alerts, and route context. In SQL Worksheet, you inspect the geometry metadata, GeoJSON, distance calculations, and risk view that support that map.
+Oracle AI Database keeps spatial, relational, inventory, shipment, demand forecast, and security-governed data together. The **Intelligent Fulfillment Network** page shows centers, service zones, demand regions, inventory alerts, and route context. In SQL Worksheet, you inspect the geometry metadata, GeoJSON, distance calculations, and risk view that support that map.
 
-Estimated Time: 10 minutes
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -17,6 +17,9 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Inspect spatial metadata
+
+Perform the following set of steps to confirm that fulfillment centers, customers, and demand regions have governed location data available for routing and proximity analysis.
+
 1. Review the related application screen before you run the SQL.
 
     ![Intelligent Fulfillment Network overview map and KPIs](images/fulfillment-network-overview.png " ")
@@ -30,6 +33,8 @@ Estimated Time: 10 minutes
 2. Run this query.
 
     Fulfillment decisions depend on geography. Oracle Spatial stores locations and shapes in `SDO_GEOMETRY` columns. This block reads `ALL_SDO_GEOM_METADATA`, the catalog view that describes those geometry columns. The SRID value identifies the coordinate system; `4326` is the common GPS latitude/longitude system used by web maps.
+
+    **Note:** Oracle Spatial stores customer, fulfillment, and demand locations as governed map data, with `SDO_GEOMETRY` as the implementation detail.
 
     ```sql
     <copy>
@@ -51,8 +56,13 @@ Estimated Time: 10 minutes
     | LLUSER | `FULFILLMENT_ZONES` | `ZONE_BOUNDARY` | 4326 |
     {: title="Spatial Metadata"}
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 2: Produce map-ready GeoJSON
-1. Use the live Intelligent Fulfillment Network context from Figure 1 before you run the SQL.
+
+Performi the following set of steps to show how database location data can feed map experiences without exporting the spatial story to a separate system.
+
+1. Use the live **Intelligent Fulfillment Network** context from **Figure 1** before you run the SQL.
 
 2. Run this query.
 
@@ -84,8 +94,13 @@ Estimated Time: 10 minutes
 
 3. The application can use GeoJSON directly for mapping without moving geometry processing to a separate service.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 3: Find nearby fulfillment options
-1. Use the live Intelligent Fulfillment Network context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to compare distance, location, and operating context before deciding where an order or demand point should be served.
+
+1. Use the live **Intelligent Fulfillment Network** context from **Figure 1** before you run the SQL.
 
 2. Run this distance query.
 
@@ -119,8 +134,13 @@ Estimated Time: 10 minutes
 
 3. A fulfillment manager can combine this result with inventory to route orders quickly without increasing stockout risk.
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 4: Inspect fulfillment risk semantics
-1. Use the live Intelligent Fulfillment Network context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to connect stock levels, reorder points, demand signals, and center context to replenishment decisions.
+
+1. Use the live **Intelligent Fulfillment Network** context from **Figure 1** before you run the SQL.
 
 2. Run this semantic-view query.
 

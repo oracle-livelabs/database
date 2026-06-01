@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Follower counts are useful, but they do not show how a signal moves through a creator community. The confusing part is the relationship path: who collaborates, who amplifies a brand, and which creators connect otherwise separate groups.
+Creator influence is not only about follower count. In this lab, learners inspect the graph objects behind the **Creator Influence Network** and run relationship queries that show how creator paths can amplify product and brand signals.
 
-This lab follows Scene 5, Creator Influence Network, in the runbook. After Lab 4 shows what customers and creators are saying, this lab shows who can amplify that signal. Oracle AI Database models creators, brands, products, and posts as a property graph over retail data. In SQL Worksheet, you run graph-style traversals that connect the visual network paths to queryable database evidence.
+This lab follows **Scene 5, Creator Influence Network**, in the runbook. After **Lab 4** shows what customers and creators are saying, this lab shows who can amplify that signal. Oracle AI Database models creators, brands, products, and posts as a property graph over retail data. In SQL Worksheet, you run graph-style traversals that connect the visual network paths to queryable database evidence.
 
-Estimated Time: 10 minutes
+Estimated Time: **10 minutes**
 
 ### Objectives
 
@@ -17,6 +17,9 @@ Estimated Time: 10 minutes
 
 
 ## Task 1: Verify graph objects and source rows
+
+Perform the following set of steps to confirm that creator, brand, product, and post relationships are available for influence analysis.
+
 1. Review the related application screen before you run the SQL.
 
     ![Creator Influence Network graph overview](images/creator-influence-network-overview.png " ")
@@ -72,8 +75,12 @@ Estimated Time: 10 minutes
     | Post product mentions | 3508 |
     {: title="Graph Sources"}
 
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 ## Task 2: Traverse creator relationships
-1. Use the live Creator Influence Network context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to show how retail teams can identify who may carry a product signal into another audience.
+1. Use the live **Creator Influence Network** context from **Figure 1** before you run the SQL.
 
 2. Review what the relationship terms mean.
 
@@ -89,7 +96,7 @@ Estimated Time: 10 minutes
 
 3. Run this one-hop traversal.
 
-    A high-momentum post from Lab 4 is only the starting point. Retail teams also need to know who may carry that signal into another audience. This query asks one simple graph question: for each creator, which directly connected creator can they reach next?
+    A high-momentum post from **Lab 4** is only the starting point. Retail teams also need to know who may carry that signal into another audience. This query asks one simple graph question: for each creator, which directly connected creator can they reach next?
 
     The `GRAPH_TABLE` clause lets SQL query the property graph. The `MATCH` pattern reads from left to right: start at a source creator, follow one `connects_to` relationship, and end at a destination creator. The `COLUMNS` section chooses which graph properties to return as regular SQL columns. The final `ORDER BY` sorts the strongest relationships first so the highest-signal paths appear at the top.
 
@@ -131,7 +138,17 @@ Estimated Time: 10 minutes
 
 4. Read the result as network paths.
 
-    Each row means: the creator in **From** has a direct relationship to the creator in **To**. The **Link** column explains the type of social connection. The **Strength** column helps rank which paths may matter most. For example, a `collaborates` link suggests a shared audience or campaign relationship. A `reshared` link suggests that one creator can amplify another creator's post. A `tagged` link shows a direct mention that may expose followers to another creator or product story.
+    Each row means the following:
+
+    - The creator in **From** has a direct relationship to the creator in **To**.
+
+    - The **Link** column explains the type of social connection.
+
+    - The **Strength** column helps rank which paths may matter most. For example, a `collaborates` link suggests a shared audience or campaign relationship.
+
+    - A `reshared` link suggests that one creator can amplify another creator's post.
+
+    - A `tagged` link shows a direct mention that may expose followers to another creator or product story.
 
 5. Run this brand propagation query.
 
@@ -174,6 +191,9 @@ Estimated Time: 10 minutes
     {: title="Brand Paths"}
 
 6. This is the handoff from social signal to network action. A merchandiser can use the traversal to find creator communities that may amplify demand, returns exposure, or category momentum after Customer Trend Signals surfaces the initial product story.
+
+**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+
 
 ## Acknowledgements
 
