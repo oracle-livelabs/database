@@ -23,8 +23,8 @@
       "filename": "../../retail-command-center/retail-command-center.md"
     },
     {
-      "title": "Lab 3: Unified Order Intelligence with JSON Duality and VPD",
-      "description": "Use JSON Relational Duality, SQL/JSON, relational SQL, and VPD policy checks.",
+      "title": "Lab 3: Unified Order Intelligence with JSON Relational Duality",
+      "description": "Use JSON Relational Duality, SQL/JSON, and relational SQL to work with document-shaped data stored relationally.",
       "filename": "../../json-order-intelligence-vpd/json-order-intelligence-vpd.md"
     },
     {
