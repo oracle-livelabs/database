@@ -48,13 +48,13 @@
       "filename": "../../retail-oml-analytics/retail-oml-analytics.md"
     },
     {
-      "title": "Lab 8: Ask Retail Data",
-      "description": "Use semantic views, comments, and visible SQL to ground natural-language retail questions.",
+      "title": "Lab 8: Ask Retail Data: Trusted NL2SQL Answers",
+      "description": "Prepare trusted NL2SQL answers with approved views, visible SQL, and governed database evidence.",
       "filename": "../../ask-retail-data/ask-retail-data.md"
     },
     {
-      "title": "Lab 9: Retail AI Agent Console",
-      "description": "Call database-backed agent tools and verify auditable agent action rows.",
+      "title": "Lab 9: Retail AI Agent Console: Trusted Agent Tools",
+      "description": "Call approved database-backed agent tools, return grounded evidence, and inspect auditable action history.",
       "filename": "../../retail-ai-agent-console/retail-ai-agent-console.md"
     },
     {
