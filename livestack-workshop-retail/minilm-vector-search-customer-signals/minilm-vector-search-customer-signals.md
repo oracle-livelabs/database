@@ -148,37 +148,29 @@ Perform the following set of steps to turn the distance calculation into a seman
 
 1. Search the full product embedding table.
 
-    This query joins the product data to one query vector, orders the products by `VECTOR_DISTANCE`, and fetches the closest rows. The query vector is generated inline from natural language text. Some product names appear more than once in the catalog, so the query groups by product name and category and keeps the best distance for each displayed product.
+    In this step, you turn a normal search phrase into a vector, which is a numeric representation of the phrase's meaning. Then you compare that search vector to the product vectors already stored in the database and return the closest matches.
+
+    `DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING` converts the text you type, such as a shopper's search phrase, into a vector using the MiniLM embedding model. `VECTOR_DISTANCE` compares that new search vector to each stored product vector. A smaller distance means the product is more semantically similar to the search phrase.
+
+    The query sorts by distance so the best matches appear first, even when the product description does not contain the exact same words as the search phrase.
 
     ```sql
     <copy>
-    SELECT q.search_text AS "Search Phrase",
-           p.product_name AS "Product",
-           p.category AS "Category",
-           -- If the catalog has duplicate display names, keep the best match.
-           ROUND(MIN(VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE)), 4) AS "Distance"
-    FROM product_embeddings pe
-
-    -- Add product details to the stored product vector.
-    JOIN products p ON p.product_id = pe.product_id
-
-    -- Create one query vector from the search phrase.
-    CROSS JOIN (
-      SELECT 'summer running shoes lightweight breathable' AS search_text,
-             DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
-               'summer running shoes lightweight breathable',
-               JSON('{"provider":"database","model":"ADMIN.ALL_MINILM_L12_V2"}')
+    WITH search_vector AS (
+      SELECT DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
+               'comfortable shoes for walking all day',
+               JSON('{"provider":"database", "model":"ADMIN.ALL_MINILM_L12_V2"}')
              ) AS query_vector
       FROM dual
-    ) q
+    )
+    SELECT p.product_name AS "Product",
+           p.category AS "Category",
+           ROUND(VECTOR_DISTANCE(pe.embedding, sv.query_vector, COSINE), 4) AS "Distance"
+    FROM products p
+    JOIN product_embeddings pe
+      ON pe.product_id = p.product_id,
+    search_vector sv
     WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
-
-    -- Display each product name/category once.
-    GROUP BY q.search_text,
-             p.product_name,
-             p.category
-
-    -- Closest semantic matches appear first.
     ORDER BY "Distance",
              p.product_name
     FETCH FIRST 5 ROWS ONLY;
@@ -187,48 +179,40 @@ Perform the following set of steps to turn the distance calculation into a seman
 
     Expected output:
 
-    | Search Phrase | Product | Category | Distance |
-    | --- | --- | --- | ---: |
-    | summer running shoes lightweight breathable | AirGlide Runner | Footwear | 0.3825 |
-    | summer running shoes lightweight breathable | Marathon Elite Racer | Footwear | 0.4049 |
-    | summer running shoes lightweight breathable | Barefoot Minimalist Shoe | Footwear | 0.4187 |
-    | summer running shoes lightweight breathable | WinterGrip Boot | Footwear | 0.4545 |
-    | summer running shoes lightweight breathable | StreetFlex Sneaker | Footwear | 0.473 |
+    | Product | Category | Distance |
+    | --- | --- | ---: |
+    | Barefoot Minimalist Shoe | Footwear | 0.5258 |
+    | SlipStream Slide | Footwear | 0.5599 |
+    | StreetFlex Sneaker | Footwear | 0.5913 |
+    | Cyber Mesh Sneakers | Footwear | 0.5919 |
+    | WinterGrip Boot | Footwear | 0.6086 |
     {: title="Semantic Product Search"}
 
-2. Try a different natural language phrase.
+2. Try a different natural language phrase with the same pattern.
 
-    This version changes the text to `sustainable fashion eco friendly clothing`, one of the other natural language search phrases shown in the application. The same SQL pattern still works because the database generates a new query vector at runtime.
+    This version changes the text to `sustainable fashion eco friendly clothing`, one of the other natural language search phrases shown in the application. The same vector-search pattern still works because the database generates a new query vector at runtime.
+
+    Some catalog display names appear more than once. This version groups by product name and category and keeps the smallest distance for each displayed product, so the learner sees one clean row per product.
 
     ```sql
     <copy>
-    SELECT q.search_text AS "Search Phrase",
-           p.product_name AS "Product",
-           p.category AS "Category",
-           -- If the catalog has duplicate display names, keep the best match.
-           ROUND(MIN(VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE)), 4) AS "Distance"
-    FROM product_embeddings pe
-
-    -- Add product details to the stored product vector.
-    JOIN products p ON p.product_id = pe.product_id
-
-    -- Create one query vector from the new search phrase.
-    CROSS JOIN (
-      SELECT 'sustainable fashion eco friendly clothing' AS search_text,
-             DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
+    WITH search_vector AS (
+      SELECT DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
                'sustainable fashion eco friendly clothing',
-               JSON('{"provider":"database","model":"ADMIN.ALL_MINILM_L12_V2"}')
+               JSON('{"provider":"database", "model":"ADMIN.ALL_MINILM_L12_V2"}')
              ) AS query_vector
       FROM dual
-    ) q
+    )
+    SELECT p.product_name AS "Product",
+           p.category AS "Category",
+           ROUND(MIN(VECTOR_DISTANCE(pe.embedding, sv.query_vector, COSINE)), 4) AS "Distance"
+    FROM products p
+    JOIN product_embeddings pe
+      ON pe.product_id = p.product_id,
+    search_vector sv
     WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
-
-    -- Display each product name/category once.
-    GROUP BY q.search_text,
-             p.product_name,
+    GROUP BY p.product_name,
              p.category
-
-    -- Closest semantic matches appear first.
     ORDER BY "Distance",
              p.product_name
     FETCH FIRST 5 ROWS ONLY;
@@ -237,13 +221,13 @@ Perform the following set of steps to turn the distance calculation into a seman
 
     Expected output:
 
-    | Search Phrase | Product | Category | Distance |
-    | --- | --- | --- | ---: |
-    | sustainable fashion eco friendly clothing | RidgeLine Fleece Hoodie | Athletic Apparel | 0.6023 |
-    | sustainable fashion eco friendly clothing | StormRunner Trail Shell | Athletic Apparel | 0.6142 |
-    | sustainable fashion eco friendly clothing | Summit Graphic Training Tee | Athletic Apparel | 0.6288 |
-    | sustainable fashion eco friendly clothing | Stadium Travel Blanket | Outdoor Lifestyle | 0.6365 |
-    | sustainable fashion eco friendly clothing | Ultralight Rain Jacket | Outdoor | 0.6441 |
+    | Product | Category | Distance |
+    | --- | --- | ---: |
+    | RidgeLine Fleece Hoodie | Athletic Apparel | 0.6023 |
+    | StormRunner Trail Shell | Athletic Apparel | 0.6142 |
+    | Summit Graphic Training Tee | Athletic Apparel | 0.6288 |
+    | Stadium Travel Blanket | Outdoor Lifestyle | 0.6365 |
+    | Ultralight Rain Jacket | Outdoor | 0.6441 |
     {: title="Alternate Semantic Product Search"}
 
 3. These rankings become useful merchandising evidence. A retail user can start with natural language, find nearby products, and then connect those products to inventory, orders, promotions, or social demand.
