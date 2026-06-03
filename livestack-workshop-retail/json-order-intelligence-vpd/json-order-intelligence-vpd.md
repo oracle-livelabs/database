@@ -200,17 +200,30 @@ Update ORDERS directly to status confirmed
 
 The status changes are intentional. They let you see the same row move through document-style writes and relational writes.
 
-1. Insert a workshop order document through `ORDERS_DV`.
+1. Delete any previous copy of the workshop order.
 
-    The first delete makes this step safe to rerun in the same workshop session. The insert writes a JSON document, and Oracle stores the order header in `ORDERS` and the line item in `ORDER_ITEMS`.
-
-    Run this block as a script because it contains delete, insert, and commit statements.
+    This makes the task safe to rerun in the same workshop session. Run each SQL block in this task separately so you can see each result before moving to the next step.
 
     ```sql
     <copy>
     DELETE FROM orders_dv dv
     WHERE JSON_VALUE(dv.data, '$._id' RETURNING NUMBER) = 900001;
+    </copy>
+    ```
 
+    Expected output:
+
+    | Check | Result |
+    | --- | --- |
+    | Rerun guard | 0 or 1 row deleted. |
+    {: title="Delete Previous Workshop Order"}
+
+2. Insert a workshop order document through `ORDERS_DV`.
+
+    The insert writes a JSON document, and Oracle stores the order header in `ORDERS` and the line item in `ORDER_ITEMS`.
+
+    ```sql
+    <copy>
     INSERT INTO orders_dv dv VALUES (
       '{
          "_id"          : 900001,
@@ -229,7 +242,20 @@ The status changes are intentional. They let you see the same row move through d
          ]
        }'
     );
+    </copy>
+    ```
 
+    Expected output:
+
+    | Check | Result |
+    | --- | --- |
+    | JSON document insert | 1 row inserted. |
+    {: title="JSON Document Insert"}
+
+3. Commit the insert.
+
+    ```sql
+    <copy>
     COMMIT;
     </copy>
     ```
@@ -238,11 +264,10 @@ The status changes are intentional. They let you see the same row move through d
 
     | Check | Result |
     | --- | --- |
-    | Rerun guard | 0 or 1 row deleted. |
-    | JSON document insert | 1 row inserted and committed. |
-    {: title="JSON Document Insert"}
+    | Commit | Commit complete. |
+    {: title="Commit Inserted Order"}
 
-2. Query `ORDERS_DV` for the inserted document.
+4. Query `ORDERS_DV` for the inserted document.
 
     **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet.
 
@@ -274,7 +299,7 @@ The status changes are intentional. They let you see the same row move through d
     }
     ```
 
-3. Query the relational tables.
+5. Query the relational tables.
 
     ```sql
     <copy>
@@ -298,7 +323,7 @@ The status changes are intentional. They let you see the same row move through d
     | 900001 | 1668 | pending | 149.99 | 1 | 149.99 |
     {: title="Relational Storage"}
 
-4. The insert went through the document view, but the data is stored relationally.
+6. The insert went through the document view, but the data is stored relationally.
 
 ## Task 5: Update both representations
 
@@ -313,12 +338,18 @@ Updates work in both directions. When you update the retail document, the relati
     UPDATE orders_dv dv
     SET data = JSON_TRANSFORM(data, SET '$.status' = 'processing')
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
+    </copy>
+    ```
 
+2. Commit the document update.
+
+    ```sql
+    <copy>
     COMMIT;
     </copy>
     ```
 
-2. Verify the relational row changed.
+3. Verify the relational row changed.
 
     ```sql
     <copy>
@@ -336,7 +367,7 @@ Updates work in both directions. When you update the retail document, the relati
     | 900001 | processing |
     {: title="Document Update Reflected Relationally"}
 
-3. Update the relational table.
+4. Update the relational table.
 
     This changes `ORDERS.ORDER_STATUS` directly.
 
@@ -345,12 +376,18 @@ Updates work in both directions. When you update the retail document, the relati
     UPDATE orders
     SET order_status = 'confirmed'
     WHERE order_id = 900001;
+    </copy>
+    ```
 
+5. Commit the relational update.
+
+    ```sql
+    <copy>
     COMMIT;
     </copy>
     ```
 
-4. Read the JSON document again.
+6. Read the JSON document again.
 
     The query shows the JSON document changed too.
 
@@ -377,7 +414,7 @@ Updates work in both directions. When you update the retail document, the relati
     }
     ```
 
-5. You used both sides of JSON Relational Duality. A document insert created relational rows. A document update changed a relational row. A relational update changed the document result. The application gets JSON flexibility while Oracle Database keeps the data relational, consistent, and available to SQL.
+7. You used both sides of JSON Relational Duality. A document insert created relational rows. A document update changed a relational row. A relational update changed the document result. The application gets JSON flexibility while Oracle Database keeps the data relational, consistent, and available to SQL.
 
 ## More JSON Relational Duality labs
 
