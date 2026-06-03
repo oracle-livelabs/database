@@ -38,30 +38,13 @@ Inventory the object families to confirm that the schema contains the tables, vi
 
 2. In SQL Worksheet, run this query.
 
-    Before you analyze retail outcomes, get oriented to the shared data foundation. This block queries Oracle catalog views such as `USER_OBJECTS`, `USER_PROPERTY_GRAPHS`, and `USER_MINING_MODELS`. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
+    Before you analyze retail outcomes, get oriented to the shared data foundation. This query uses Oracle `USER_*` catalog views because you are connected as the workshop schema user. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
 
     ```sql
     <copy>
-    WITH schema_ctx AS (
-      SELECT owner AS owner_name
-      FROM (
-        SELECT owner
-        FROM all_tables
-        WHERE table_name = 'ORDERS'
-          AND owner IN (USER, 'LLUSER')
-        ORDER BY CASE
-                   WHEN owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA') THEN 1
-                   WHEN owner = USER THEN 2
-                   WHEN owner = 'LLUSER' THEN 3
-                   ELSE 4
-                 END
-      )
-      WHERE ROWNUM = 1
-    )
     SELECT 'Core retail tables' AS "Area", COUNT(*) AS "Count"
-    FROM all_tables t
-    JOIN schema_ctx s ON s.owner_name = t.owner
-    WHERE t.table_name IN (
+    FROM user_tables
+    WHERE table_name IN (
         'BRANDS','PRODUCTS','FULFILLMENT_CENTERS','INVENTORY','CUSTOMERS',
         'ORDERS','ORDER_ITEMS','INFLUENCERS','SOCIAL_POSTS','POST_PRODUCT_MENTIONS',
         'DEMAND_FORECASTS','SHIPMENTS','AGENT_ACTIONS','APP_USERS','EVENT_STREAM',
@@ -70,30 +53,26 @@ Inventory the object families to confirm that the schema contains the tables, vi
       )
     UNION ALL
     SELECT 'Retail semantic views', COUNT(*)
-    FROM all_views v
-    JOIN schema_ctx s ON s.owner_name = v.owner
-    WHERE v.view_name IN (
+    FROM user_views
+    WHERE view_name IN (
         'RETAIL_RETURNS_WORKFLOW_V','RETAIL_SIGNAL_PRODUCT_V',
         'RETAIL_ORDER_RETURN_V','RETAIL_FULFILLMENT_RISK_V','RETAIL_RETURN_WORKBENCH_V'
       )
     UNION ALL
     SELECT 'Creator influence property graph', COUNT(*)
-    FROM all_property_graphs g
-    JOIN schema_ctx s ON s.owner_name = g.owner
-    WHERE g.graph_name = 'INFLUENCER_NETWORK'
+    FROM user_property_graphs
+    WHERE graph_name = 'INFLUENCER_NETWORK'
     UNION ALL
     SELECT 'MiniLM vector artifacts', COUNT(*)
-    FROM all_tab_cols c
-    JOIN schema_ctx s ON s.owner_name = c.owner
-    WHERE c.data_type = 'VECTOR'
-      AND c.table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
-      AND c.column_name = 'EMBEDDING'
+    FROM user_tab_cols
+    WHERE data_type = 'VECTOR'
+      AND table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
+      AND column_name = 'EMBEDDING'
     UNION ALL
     SELECT 'Agent tool functions', COUNT(*)
-    FROM all_objects o
-    JOIN schema_ctx s ON s.owner_name = o.owner
-    WHERE o.object_type = 'FUNCTION'
-      AND o.object_name IN (
+    FROM user_objects
+    WHERE object_type = 'FUNCTION'
+      AND object_name IN (
         'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',
         'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'
       );
