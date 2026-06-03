@@ -64,8 +64,6 @@ Review dashboard metrics to connect the command center cards to trusted operatio
 
 3. These metrics create the daily triage view. The user can see revenue, demand, return exposure, and agent activity without waiting for copied data or a separate dashboard mart.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
-
 ## Task 2: Review trending products
 
 Review trending products to identify where social momentum may indicate a sales opportunity, inventory risk, merchandising action, or follow-up trend analysis.
@@ -120,8 +118,6 @@ Review trending products to identify where social momentum may indicate a sales 
     {: title="Trending Products"}
 
 3. A high-ranking product may represent a sales opportunity, an inventory risk, a merchandising action, or a signal that deserves deeper analysis in the Customer Trend Signals lab.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Task 3: Connect product detail screens to database evidence
 
@@ -194,8 +190,6 @@ Review revenue by category to see where demand is turning into sales and where s
     {: title="Category Revenue"}
 
 2. The command center shows why converged data matters. Operational orders, social demand signals, inventory context, and AI-assisted actions can start from one governed database foundation.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 
