@@ -6,6 +6,16 @@
 
 Oracle AI Database keeps vector search, SQL, security, and operational retail data together. The product catalog and creator posts are still relational retail data, but the database can also store embeddings in `VECTOR` columns and calculate semantic distance with SQL.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Shoppers and creators describe products in natural language that rarely matches exact catalog terms. |
+| What You Will Prove | A shopper phrase can match relevant products and social posts by meaning, not just keywords. |
+| Database Capability | Oracle AI Vector Search stores embeddings and compares vectors with SQL distance functions. |
+| Business Takeaway | Merchandising teams can detect demand and product fit from language signals while the evidence stays in the retail database. |
+{: title="Customer Trend Signals Story"}
+
 Estimated Time: **10 minutes**
 
 ### Objectives

@@ -6,6 +6,16 @@ Retail AI agents are valuable only when their answers and actions are grounded i
 
 This lab does not require a configured in-database agent framework. Instead, it teaches the database foundation that an agent should use: approved PL/SQL tool functions, governed operational data, and durable action history. Lab 8 focused on trusted answers; this lab focuses on trusted actions.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | AI agents can create risk if they answer from guesses, call unreviewed logic, or leave no record of what they did. |
+| What You Will Prove | Agent-facing tools can be approved database functions, and agent activity can be inspected as durable database rows. |
+| Database Capability | PL/SQL tool functions and `AGENT_ACTIONS` provide controlled actions and auditable history. |
+| Business Takeaway | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
+{: title="Trusted Agent Tools Story"}
+
 Estimated Time: **5 minutes**
 
 ### Objectives

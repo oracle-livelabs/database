@@ -12,6 +12,16 @@ In this lab, you use the **Retail OML Analytics** workflow to answer a practical
 
 *Figure 1: Retail data, feature views, OML models, SQL scoring, and business action stay connected inside Oracle AI Database.*
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | A demand surge can turn into a stockout if merchandising waits for lagging reports. |
+| What You Will Prove | In-database models can score product surge risk and connect that prediction to current inventory pressure. |
+| Database Capability | Oracle Machine Learning for SQL stores models in the database and scores feature views with SQL functions. |
+| Business Takeaway | Planners get a short action list: replenish, protect inventory, adjust promotions, or route demand away from constrained centers. |
+{: title="Retail OML Story"}
+
 Estimated Time: **10 minutes**
 
 ### Objectives

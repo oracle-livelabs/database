@@ -6,6 +6,16 @@ Creator influence is not only about follower count. In this lab, you learn how O
 
 After **Lab 4** shows what customers and creators are saying, this lab shows who can amplify that signal. The key learning point is that graph pattern matching lets you describe relationship paths directly. Traditional SQL can answer the same questions, but every additional hop usually means more table aliases, more joins, and more join conditions.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods cannot understand creator influence by looking at isolated posts, products, or follower counts. |
+| What You Will Prove | Creator, brand, product, and post relationships can be traversed as paths instead of assembled through increasingly complex joins. |
+| Database Capability | Oracle Property Graph and SQL/PGQ `GRAPH_TABLE` let you query connected retail relationships as paths. |
+| Business Takeaway | Marketing teams can see how influence propagates through the creator network and identify paths worth acting on. |
+{: title="Creator Influence Story"}
+
 Estimated Time: **10 minutes**
 
 ### Objectives

@@ -7,6 +7,16 @@ This closing lab ties the workshop together. Learners review how one Oracle Data
 
 The practical point is simple: Oracle Database 26ai backs one connected retail decision path across data, AI, security, and operations. Each lab showed a different part of that path: observe the business, understand demand, trace influence, route fulfillment, protect orders, score risk, ask questions, and record agent actions.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Retail teams lose speed and trust when dashboards, AI signals, fulfillment logic, order evidence, and agent actions live in separate systems. |
+| What You Will Prove | The workshop connects each retail decision back to database evidence that can be queried, secured, and explained. |
+| Database Capability | Oracle AI Database 26ai brings multiple data models, AI-ready functions, analytics, security, and audit history into one operating foundation. |
+| Business Takeaway | Seer Sporting Goods can move from feature-by-feature demos to one governed retail decision loop. |
+{: title="Workshop Outcome Story"}
+
 Estimated Time: **5 minutes**
 
 ### Objectives
