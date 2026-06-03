@@ -6,6 +6,16 @@ Order data serves many audiences. Application teams need document-shaped access,
 
 In this lab, you start with relational order tables, define how the JSON duality view can be used, read order documents, insert a JSON order through the duality view, verify that Oracle stored it relationally, and update both representations.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods needs application-friendly order documents without losing relational truth, transactions, or SQL access. |
+| What You Will Prove | The same order can be read and changed as JSON while Oracle stores and protects the underlying relational rows. |
+| Database Capability | JSON Relational Duality maps document-shaped JSON to relational `ORDERS` and `ORDER_ITEMS` tables. |
+| Business Takeaway | Application teams get document APIs while operations and analytics teams keep one governed source of order truth. |
+{: title="Unified Order Intelligence Story"}
+
 Estimated Time: **15 minutes**
 
 ### Objectives

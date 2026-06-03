@@ -6,7 +6,15 @@
 
 Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
 
-Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods leaders need a daily triage view before demand spikes, returns, or inventory pressure become customer problems. |
+| What You Will Prove | Dashboard metrics, trending products, product detail, and revenue categories can be traced back to governed database evidence. |
+| Database Capability | SQL combines orders, order items, products, social posts, returns, inventory, and agent actions without moving data into a separate mart. |
+| Business Takeaway | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
+{: title="Retail Command Center Story"}
 
 Estimated Time: **10 minutes**
 

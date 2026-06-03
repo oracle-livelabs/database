@@ -6,6 +6,16 @@ This lab starts the hands-on database work by confirming that the retail foundat
 
 The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods cannot trust later dashboards, predictions, or agent outputs unless the shared retail data foundation is complete. |
+| What You Will Prove | The schema contains the tables, views, vector artifacts, graph objects, OML models, and PL/SQL tools used by the rest of the workshop. |
+| Database Capability | Oracle catalog views expose the governed database objects that support the retail workflow. |
+| Business Takeaway | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
+{: title="Retail Data Foundation Story"}
+
 Estimated Time: **10 minutes**
 
 ### Objectives

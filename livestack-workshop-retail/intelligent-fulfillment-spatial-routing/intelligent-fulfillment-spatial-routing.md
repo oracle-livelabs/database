@@ -8,6 +8,16 @@ Oracle Spatial lets you keep those location-aware questions inside Oracle AI Dat
 
 The story builds one step at a time: understand the retail locations, produce map-ready data, find nearby centers, check delivery coverage, and finally combine distance with available inventory.
 
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | The closest warehouse is not always the best fulfillment choice if delivery zones or product availability do not line up. |
+| What You Will Prove | Location, service zones, and inventory can be queried together to explain which fulfillment centers are practical choices. |
+| Database Capability | Oracle Spatial stores points and polygons, outputs GeoJSON, and calculates distance alongside relational inventory data. |
+| Business Takeaway | Fulfillment teams can choose faster and cheaper shipping options with evidence the business can inspect. |
+{: title="Intelligent Fulfillment Story"}
+
 Estimated Time: **10 minutes**
 
 ### Objectives
