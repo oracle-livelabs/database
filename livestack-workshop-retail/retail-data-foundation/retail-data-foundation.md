@@ -90,9 +90,7 @@ Inventory the object families to confirm that the schema contains the tables, vi
     | Agent tool functions | 5 |
     {: title="Retail Object Inventory"}
 
-3. The result confirms that the workshop has a retail data foundation, semantic views for natural-language grounding, a graph, MiniLM-backed vector artifacts, and PL/SQL tools.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+3. This inventory shows the database foundation you will use throughout the workshop: retail tables for operational data, semantic views for business-friendly questions, a property graph for creator influence, vector columns for meaning-based search, and PL/SQL functions for trusted agent actions.
 
 ## Task 2: Map retail outcomes to database features
 
@@ -135,8 +133,6 @@ Use the capability map to connect each retail outcome to the database feature th
 
 2. This map is the mental model for the workshop. Each later lab uses SQL to show how the database creates a visible retail outcome.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
-
 ## Task 3: Count the retail data groups
 
 Count the retail data groups to understand the scale of the seeded dataset and to give context for later dashboard, search, graph, spatial, OML, and agent results.
@@ -174,8 +170,6 @@ Count the retail data groups to understand the scale of the seeded dataset and t
 
 
 2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 
