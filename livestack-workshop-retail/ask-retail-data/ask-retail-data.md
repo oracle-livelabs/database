@@ -129,6 +129,16 @@ Before trusting an NL2SQL answer, inspect the generated SQL for these signals:
 
 The larger lesson is that NL2SQL is not just about generating SQL. It is about generating SQL that the business can inspect, run again, and trust.
 
+## Learn More: Select AI
+
+This lab uses a short trusted SQL pattern so you can see what a good natural-language-to-SQL answer should look like: approved data paths, visible filters, and results that can be traced back to governed Oracle data.
+
+For a deeper hands-on walkthrough of Select AI, including configuring AI profiles, asking natural-language questions, showing generated SQL, and using Select AI directly with Autonomous Database, continue with:
+
+- [Chat with your data in Autonomous Database using generative AI](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4222)
+- [Introducing Select AI - Natural Language to SQL Generation on Autonomous Database](https://blogs.oracle.com/database/post/introducing-natural-language-to-sql-generation-on-autonomous-database)
+- [Building AI Apps with Select AI and Virtual Private Database](https://blogs.oracle.com/machinelearning/building-ai-apps-with-select-ai-and-virtual-private-database)
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager

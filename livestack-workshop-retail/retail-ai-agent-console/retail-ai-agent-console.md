@@ -121,6 +121,16 @@ Perform the following set of steps to see how agent workflows become reviewable 
 
 2. The larger lesson is that enterprise agents need more than prompts. They need approved tools, governed data, and an audit trail that makes actions observable after the conversation ends.
 
+## Learn More: In-Database Agents
+
+This lab keeps the agent pattern intentionally small: approved PL/SQL tools, grounded evidence, and an action history that can be reviewed after the request completes.
+
+For a deeper hands-on agentic workflow, including how database-managed agents use tasks and tools, continue with:
+
+- [Build and run agentic workflows with Oracle Autonomous AI Database](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4229)
+- [Build Your Agentic Solution using Oracle Autonomous AI Database Select AI Agent](https://blogs.oracle.com/machinelearning/build-your-agentic-solution-using-oracle-adb-select-ai-agent)
+- [Announcing Oracle Select AI Pre-Built AI Agents](https://blogs.oracle.com/machinelearning/announcing-oracle-select-ai-pre-built-ai-agents)
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
