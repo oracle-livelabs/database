@@ -4,9 +4,17 @@
 
 **Retail Command Center** helps teams answer a daily operating question: *What needs attention right now?*
 
-In this lab, learners inspect the SQL behind KPIs, trending products, and revenue by category, then connect those results to merchandising, inventory, returns, and agent activity.
-
 Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
+
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods leaders need a daily triage view before demand spikes, returns, or inventory pressure become customer problems. |
+| What You Will Prove | Dashboard metrics, trending products, product detail, and revenue categories can be traced back to governed database evidence. |
+| Database Capability | SQL combines orders, order items, products, social posts, returns, inventory, and agent actions without moving data into a separate mart. |
+| Business Takeaway | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
+{: title="Retail Command Center Story"}
 
 Estimated Time: **10 minutes**
 
@@ -56,13 +64,15 @@ Review dashboard metrics to connect the command center cards to trusted operatio
 
 3. These metrics create the daily triage view. The user can see revenue, demand, return exposure, and agent activity without waiting for copied data or a separate dashboard mart.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
-
 ## Task 2: Review trending products
 
 Review trending products to identify where social momentum may indicate a sales opportunity, inventory risk, merchandising action, or follow-up trend analysis.
 
 1. Use the live **Retail Command Center** context from **Figure 1** before you run the SQL.
+
+    ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
+
+    *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
 
     ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
 
@@ -109,13 +119,19 @@ Review trending products to identify where social momentum may indicate a sales 
 
 3. A high-ranking product may represent a sales opportunity, an inventory risk, a merchandising action, or a signal that deserves deeper analysis in the Customer Trend Signals lab.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
-
 ## Task 3: Connect product detail screens to database evidence
 
 Connect product detail screens to database evidence to show that document-style application experiences can still come from governed relational data.
 
 1. Use the live **Retail Command Center** context from **Figure 1** as the visual anchor for product details and JSON Duality patterns.
+
+    ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
+
+    *Figure 3: Product detail connects the selected product to inventory and social evidence.*
+
+    ![Product JSON Duality view in the product detail modal](images/product-json-duality.png " ")
+
+    *Figure 4: The same product story can also be displayed as document-shaped JSON.*
 
     ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
 
@@ -174,8 +190,6 @@ Review revenue by category to see where demand is turning into sales and where s
     {: title="Category Revenue"}
 
 2. The command center shows why converged data matters. Operational orders, social demand signals, inventory context, and AI-assisted actions can start from one governed database foundation.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 

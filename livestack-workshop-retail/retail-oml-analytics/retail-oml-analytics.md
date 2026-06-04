@@ -2,69 +2,56 @@
 
 ## Introduction
 
-**Retail OML Analytics** turns predictive output into operational evidence. In this lab, learners verify OML views and models, score demand surge risk, and inspect the inventory evidence behind replenishment decisions.
+Retail teams need to react before a product surge turns into a stockout. A merchandising planner may see social signals, rising sales, and inventory pressure, but the decision is stronger when the prediction and the operating evidence come from the same governed database.
 
-Oracle Machine Learning keeps models close to the retail data. The updated runbook frames this page as a business-facing analytics surface, not a separate notebook. Models can be trained, persisted, and scored in the database with `DBMS_DATA_MINING`, `PREDICTION`, `PREDICTION_PROBABILITY`, and `CLUSTER_ID`.
+Oracle Machine Learning for SQL keeps machine learning close to the retail data. OML models are database objects, and SQL functions such as `PREDICTION` and `PREDICTION_PROBABILITY` can apply those models without exporting feature data to a separate notebook or scoring service.
 
-In SQL Worksheet, you inspect the feature views and model scoring patterns behind the Retail OML Analytics scene.
+In this lab, you use the **Retail OML Analytics** workflow to answer a practical question: which products are likely to surge, and which inventory positions need attention? The story builds from database model inventory, to model-ready features, to SQL scoring, to a replenishment-focused action list.
+
+![Oracle Machine Learning for SQL flow](images/oml-sql-scoring-flow.svg " ")
+
+*Figure 1: Retail data, feature views, OML models, SQL scoring, and business action stay connected inside Oracle AI Database.*
+
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | A demand surge can turn into a stockout if merchandising waits for lagging reports. |
+| What You Will Prove | In-database models can score product surge risk and connect that prediction to current inventory pressure. |
+| Database Capability | Oracle Machine Learning for SQL stores models in the database and scores feature views with SQL functions. |
+| Business Takeaway | Planners get a short action list: replenish, protect inventory, adjust promotions, or route demand away from constrained centers. |
+{: title="Retail OML Story"}
 
 Estimated Time: **10 minutes**
 
 ### Objectives
 
-- Verify OML feature views and mining models.
-- Inspect demand, customer, revenue, and product-cluster features.
-- Run repeatable model scoring when models are available.
-- Connect OML outputs to inventory and merchandising action.
+- Confirm that OML feature views and mining models are present in Oracle AI Database.
+- Inspect the retail features used to score demand surge.
+- Use SQL scoring functions to apply an in-database OML model.
+- Connect model predictions to inventory evidence for merchandising action.
 
 
-## Task 1: Verify OML training views and models
+## Task 1: Confirm OML models and feature views in the database
 
-Perform the following set of steps to confirm that predictive analytics are built from governed retail data, not disconnected exports.
-1. Review the related application screen before you run the SQL.
+Perform the following set of steps to confirm that predictive analytics are built from governed retail data and persistent in-database model objects.
+
+1. Review the related application screen before you run SQL.
 
     ![Retail OML Analytics overview](images/retail-oml-analytics-overview.png " ")
 
-    *Figure 1: Retail OML Analytics summarizes in-database predictive signals and active models.*
+    *Figure 2: Retail OML Analytics summarizes in-database predictive signals and active models.*
 
-    ![OML demand surge tab from the runbook](images/oml-demand-surge.png " ")
+2. Run this model inventory.
 
-    *Figure 2: Demand surge scoring turns product, social, and sales features into an action-oriented prediction.*
-
-2. Run this view check.
-
-    Machine learning starts with prepared features. A feature is a column or derived value that helps a model make a prediction, such as demand score, inventory quantity, or customer behavior. This block checks the curated OML feature views. Those views prepare model-ready rows while keeping retail data inside Oracle Database.
+    Oracle Machine Learning for SQL models are first-class database objects. This query reads `ALL_MINING_MODELS` to show the models that the current schema can score. The mining function tells you the type of machine learning problem, such as classification, regression, or clustering. The algorithm shows the method used to build the model.
 
     ```sql
     <copy>
-    SELECT owner AS "Owner", view_name AS "View"
-    FROM all_views
-    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
-      AND view_name IN (
-        'OML_DEMAND_TRAINING_V','OML_CUSTOMER_RFM_V',
-        'OML_REVENUE_TRAINING_V','OML_PRODUCT_CLUSTER_V'
-      )
-    ORDER BY view_name;
-    </copy>
-    ```
-
-    Expected output:
-
-    | Owner | View |
-    | --- | --- |
-    | LLUSER | `OML_CUSTOMER_RFM_V` |
-    | LLUSER | `OML_DEMAND_TRAINING_V` |
-    | LLUSER | `OML_PRODUCT_CLUSTER_V` |
-    | LLUSER | `OML_REVENUE_TRAINING_V` |
-    {: title="OML Feature Views"}
-
-3. Run this model inventory.
-
-    A model inventory tells you what the database can actually score. This block reads `ALL_MINING_MODELS` for model name, mining function, and algorithm. The mining function explains the type of problem, such as classification, regression, or clustering. The algorithm shows the method Oracle Machine Learning used to build the model.
-
-    ```sql
-    <copy>
-    SELECT owner AS "Owner", model_name AS "Model", mining_function AS "Use", algorithm AS "Algorithm"
+    SELECT owner AS "Owner",
+           model_name AS "Model",
+           mining_function AS "Use",
+           algorithm AS "Algorithm"
     FROM all_mining_models
     WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND model_name IN (
@@ -85,93 +72,238 @@ Perform the following set of steps to confirm that predictive analytics are buil
     | LLUSER | `REVENUE_PREDICT_MODEL` | REGRESSION | `GENERALIZED_LINEAR_MODEL` |
     {: title="OML Models"}
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+    How to read this result:
 
-## Task 2: Score demand surge risk
+    | Model | Business question |
+    | --- | --- |
+    | `DEMAND_SURGE_MODEL` | Is product demand likely to surge? |
+    | `REVENUE_PREDICT_MODEL` | What revenue outcome should we expect? |
+    | `CUSTOMER_SEGMENT_MODEL` | Which customer behavior group is this customer closest to? |
+    | `PRODUCT_CLUSTER_MODEL` | Which product behavior group is this product closest to? |
+    {: title="What the OML Models Mean"}
 
-Perform the following set of steps to identify products where demand may require promotion, replenishment, or operational follow-up.
+3. Run this feature view check.
 
-1. Use the live **Retail OML Analytics** context from **Figure 1** before you run the SQL.
-
-2. Run this scoring query.
-
-    Notice that the scoring happens in SQL, close to the data. `PREDICTION` returns the model's predicted label for each row. `PREDICTION_PROBABILITY` returns the confidence for a requested label, here `SURGE`. The `USING *` clause tells Oracle to use the feature columns from the view as model inputs, so scoring can run without exporting data to a separate tool.
+    Machine learning starts with prepared features. A feature is a column or derived value that helps a model make a prediction, such as sales volume, sentiment, engagement, recency, order value, or inventory behavior. These curated views prepare model-ready rows while keeping the retail data inside Oracle AI Database.
 
     ```sql
     <copy>
-    SELECT product_id AS "Product ID",
-           category AS "Category",
-           surge_label AS "Actual",
-           PREDICTION(DEMAND_SURGE_MODEL USING *) AS "Predicted",
-           ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL, 'SURGE' USING *), 4) AS "Surge Prob"
-    FROM oml_demand_training_v
-    ORDER BY product_id
-    FETCH FIRST 10 ROWS ONLY;
+    SELECT owner AS "Owner",
+           view_name AS "View"
+    FROM all_views
+    WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+      AND view_name IN (
+        'OML_DEMAND_TRAINING_V','OML_CUSTOMER_RFM_V',
+        'OML_REVENUE_TRAINING_V','OML_PRODUCT_CLUSTER_V'
+      )
+    ORDER BY view_name;
     </copy>
     ```
 
     Expected output:
 
-    | Product ID | Category | Actual | Predicted | Surge Prob |
-    | ---: | --- | --- | --- | ---: |
-    | 1 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 2 | Athletic Apparel | SURGE | SURGE | 0.8219 |
-    | 3 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 4 | Athletic Apparel | SURGE | SURGE | 0.5786 |
-    | 5 | Athletic Apparel | SURGE | SURGE | 1 |
-    | 6 | Sports Tech | SURGE | SURGE | 0.9986 |
-    | 7 | Sports Tech | SURGE | SURGE | 1 |
-    | 8 | Sports Tech | SURGE | SURGE | 0.998 |
-    | 9 | Sports Tech | SURGE | SURGE | 0.9946 |
-    | 10 | Sports Tech | SURGE | SURGE | 0.998 |
+    | Owner | View |
+    | --- | --- |
+    | LLUSER | `OML_CUSTOMER_RFM_V` |
+    | LLUSER | `OML_DEMAND_TRAINING_V` |
+    | LLUSER | `OML_PRODUCT_CLUSTER_V` |
+    | LLUSER | `OML_REVENUE_TRAINING_V` |
+    {: title="OML Feature Views"}
+
+4. This is the first key lesson: the models and the feature views are in the database. The application can score current retail data without moving it into a separate machine learning runtime.
+
+    In business terms, this means the prediction is closer to the truth of the operation. The same database holds the products, orders, social demand signals, inventory evidence, and model objects, so the workflow avoids stale exports and disconnected scoring pipelines.
+
+## Task 2: Inspect demand surge features
+
+Perform the following set of steps to inspect the feature rows used by the demand surge model. Before you trust a prediction, understand the signals the model is scoring.
+
+1. Run this query.
+
+    The demand training view combines product category, social activity, sentiment, engagement, sales, revenue, and the known surge label. In a real retail workflow, these are the kinds of signals a merchandising team would watch before changing promotions or replenishment plans.
+
+    ```sql
+    <copy>
+    SELECT p.product_name AS "Product",
+           d.category AS "Category",
+           d.total_posts AS "Posts",
+           ROUND(d.avg_sentiment, 3) AS "Avg Sentiment",
+           d.rising_posts AS "Rising Posts",
+           d.units_sold AS "Units Sold",
+           ROUND(d.revenue, 2) AS "Revenue",
+           d.surge_label AS "Known Label"
+    FROM oml_demand_training_v d
+    JOIN products p
+      ON p.product_id = d.product_id
+    ORDER BY d.product_id
+    FETCH FIRST 8 ROWS ONLY;
+    </copy>
+    ```
+
+    Expected output:
+
+    | Product | Category | Posts | Avg Sentiment | Rising Posts | Units Sold | Revenue | Known Label |
+    | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+    | StormRunner Trail Shell | Athletic Apparel | 22 | 0.568 | 3 | 103 | 19528.97 | SURGE |
+    | RidgeLine Fleece Hoodie | Athletic Apparel | 21 | 0.56 | 4 | 66 | 5939.34 | SURGE |
+    | TrailFlex Training Joggers | Athletic Apparel | 25 | 0.58 | 9 | 114 | 8548.86 | SURGE |
+    | Summit Graphic Training Tee | Athletic Apparel | 19 | 0.509 | 3 | 104 | 4158.96 | SURGE |
+    | Urban Trail Daypack | Athletic Apparel | 20 | 0.631 | 7 | 89 | 11569.11 | SURGE |
+    | FieldCoach Training Tablet | Sports Tech | 21 | 0.642 | 4 | 67 | 60299.33 | SURGE |
+    | TrailRun Sport Earbuds | Sports Tech | 20 | 0.567 | 4 | 94 | 18799.06 | SURGE |
+    | RaceDay Docking Hub | Sports Tech | 19 | 0.515 | 5 | 87 | 13049.13 | SURGE |
+    {: title="Demand Surge Features"}
+
+2. This table makes the model inputs tangible. The model is not scoring abstract data; it is scoring retail signals that planners already care about.
+
+    How to read the feature columns:
+
+    | Column | What it tells the business |
+    | --- | --- |
+    | `Posts` and `Rising Posts` | Whether social conversation is active and accelerating. |
+    | `Avg Sentiment` | Whether the conversation is favorable enough to support demand. |
+    | `Units Sold` and `Revenue` | Whether interest is already turning into business activity. |
+    | `Known Label` | The historical label used to train or evaluate the classification model. |
+    {: title="Demand Feature Interpretation"}
+
+## Task 3: Score demand surge risk with SQL
+
+Perform the following set of steps to apply the in-database classification model to the demand feature rows.
+
+1. Run this scoring query.
+
+    `PREDICTION` returns the model's predicted label for each row. `PREDICTION_PROBABILITY` returns the confidence for a requested label, here `SURGE`. The `USING d.*` clause tells Oracle to use the feature columns from `OML_DEMAND_TRAINING_V` as model inputs, so scoring runs in SQL against database data.
+
+    The query has three important parts:
+
+    | Query part | Purpose |
+    | --- | --- |
+    | `PREDICTION(DEMAND_SURGE_MODEL USING d.*)` | Ask the model for the predicted class for each product row. |
+    | `PREDICTION_PROBABILITY(..., 'SURGE' USING d.*)` | Ask how confident the model is that the product belongs to the `SURGE` class. |
+    | `JOIN products p` | Add the product name so the result is useful to a business user. |
+    {: title="Scoring Query Breakdown"}
+
+    ```sql
+    <copy>
+    SELECT p.product_name AS "Product",
+           d.category AS "Category",
+           d.surge_label AS "Actual",
+           PREDICTION(DEMAND_SURGE_MODEL USING d.*) AS "Predicted",
+           ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL, 'SURGE' USING d.*), 4) AS "Surge Prob",
+           d.total_posts AS "Posts",
+           d.rising_posts AS "Rising Posts",
+           d.units_sold AS "Units Sold"
+    FROM oml_demand_training_v d
+    JOIN products p
+      ON p.product_id = d.product_id
+    ORDER BY d.product_id
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
+
+    Expected output (probability values can vary if the model is rebuilt):
+
+    | Product | Category | Actual | Predicted | Surge Prob | Posts | Rising Posts | Units Sold |
+    | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+    | StormRunner Trail Shell | Athletic Apparel | SURGE | SURGE | 1 | 22 | 3 | 103 |
+    | RidgeLine Fleece Hoodie | Athletic Apparel | SURGE | SURGE | 0.8219 | 21 | 4 | 66 |
+    | TrailFlex Training Joggers | Athletic Apparel | SURGE | SURGE | 1 | 25 | 9 | 114 |
+    | Summit Graphic Training Tee | Athletic Apparel | SURGE | SURGE | 0.5786 | 19 | 3 | 104 |
+    | Urban Trail Daypack | Athletic Apparel | SURGE | SURGE | 1 | 20 | 7 | 89 |
+    | FieldCoach Training Tablet | Sports Tech | SURGE | SURGE | 0.9986 | 21 | 4 | 67 |
+    | TrailRun Sport Earbuds | Sports Tech | SURGE | SURGE | 1 | 20 | 4 | 94 |
+    | RaceDay Docking Hub | Sports Tech | SURGE | SURGE | 0.998 | 19 | 5 | 87 |
+    | SummitPulse GPS Watch | Sports Tech | SURGE | SURGE | 0.9946 | 17 | 3 | 119 |
+    | Expedition Power Bank | Sports Tech | SURGE | SURGE | 0.998 | 18 | 3 | 121 |
     {: title="Demand Surge Predictions"}
 
-3. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product.
+2. The model score gives the merchandising team a database-grounded way to decide whether to promote, replenish, or watch a product. The predicted labels are the main result. The probability values are confidence scores from the trained model, and they can differ slightly across workshop environments when the Random Forest model is rebuilt from the same feature data.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+    For a business user, a row with `Predicted = SURGE` means "watch this product now." A high `Surge Prob` means the model is more confident. The next step is not to blindly reorder everything; it is to combine the prediction with current inventory and fulfillment evidence.
 
-## Task 3: Inspect the operating evidence behind replenishment risk
+## Task 4: Turn prediction into a replenishment action list
 
-Perform the following set of steps to show that model output should be reviewed alongside inventory, demand, and fulfillment data.
+Perform the following set of steps to combine model output with current inventory evidence. A surge prediction is useful only when the business can decide what to do next.
 
-1. Use the live Retail OML Analytics context from Figure 1 before you run the SQL.
+![Demand surge and inventory action interpretation](images/oml-prediction-inventory-action.svg " ")
 
-2. Run this query.
+*Figure 3: A product becomes operationally urgent when predicted demand pressure meets current inventory risk.*
 
-    The previous task produced demand surge predictions. This query does not score another model. It shows the operating evidence a planner needs before acting on a prediction: product, fulfillment center, quantity on hand, reorder point, and inventory risk. The link is practical: a surge prediction matters more when you can compare it with current stock and replenishment thresholds.
+1. Run this query.
+
+    The common table expression scores each product with `DEMAND_SURGE_MODEL`. The outer query joins those predictions to the fulfillment risk view by `PRODUCT_ID`. The result highlights products predicted to surge where a fulfillment center is already below its reorder threshold.
+
+    Read the query in two stages:
+
+    | Stage | What happens |
+    | --- | --- |
+    | `scored_products` | Scores each product and returns `predicted` plus `surge_prob`. |
+    | Final `SELECT` | Joins scored products to inventory risk and keeps only `SURGE` products at `AT_RISK` centers. |
+    {: title="Action Query Breakdown"}
 
     ```sql
     <copy>
-    SELECT product_name AS "Product",
-           center_name AS "Center",
-           quantity_on_hand AS "On Hand",
-           reorder_point AS "Reorder At",
-           inventory_risk AS "Risk"
-    FROM retail_fulfillment_risk_v r
-    ORDER BY r.inventory_risk DESC, r.quantity_on_hand ASC, r.product_name
+    WITH scored_products AS (
+      SELECT d.product_id,
+             PREDICTION(DEMAND_SURGE_MODEL USING d.*) AS predicted,
+             ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL, 'SURGE' USING d.*), 4) AS surge_prob
+      FROM oml_demand_training_v d
+    )
+    SELECT p.product_name AS "Product",
+           r.center_name AS "Center",
+           r.quantity_on_hand AS "On Hand",
+           r.reorder_point AS "Reorder At",
+           r.inventory_risk AS "Risk",
+           s.predicted AS "Predicted",
+           s.surge_prob AS "Surge Prob"
+    FROM scored_products s
+    JOIN products p
+      ON p.product_id = s.product_id
+    JOIN retail_fulfillment_risk_v r
+      ON r.product_id = s.product_id
+    WHERE s.predicted = 'SURGE'
+      AND r.inventory_risk = 'AT_RISK'
+    ORDER BY s.surge_prob DESC,
+             r.quantity_on_hand ASC,
+             p.product_name,
+             r.center_name
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
     Expected output:
 
-    | Product | Center | On Hand | Reorder At | Risk |
-    | --- | --- | ---: | ---: | --- |
-    | OmniRing Performance Tracker | Philadelphia Mid-Atlantic | 10 | 41 | `AT_RISK` |
-    | DewPoint Hydration Spray | Charlotte Southeast | 11 | 27 | `AT_RISK` |
-    | Matcha Endurance Starter Kit | Salt Lake Mountain | 11 | 76 | `AT_RISK` |
-    | Recovery Cooling Gel | Honolulu Pacific | 11 | 53 | `AT_RISK` |
-    | Trekking Backpack 45L | Baltimore East Coast | 11 | 70 | `AT_RISK` |
-    | CoachMic USB Microphone | NYC Metro Hub | 12 | 86 | `AT_RISK` |
-    | CoachView Curved Display | Memphis Logistics | 12 | 54 | `AT_RISK` |
-    | DrillSwitch Training Controller | LA Mega Center | 12 | 44 | `AT_RISK` |
-    | Expedition Power Bank | Detroit Great Lakes | 12 | 37 | `AT_RISK` |
-    | RidgeLine Fleece Hoodie | LA Mega Center | 12 | 95 | `AT_RISK` |
-    {: title="Inventory Risk Evidence"}
+    | Product | Center | On Hand | Reorder At | Risk | Predicted | Surge Prob |
+    | --- | --- | ---: | ---: | --- | --- | ---: |
+    | Recovery Cooling Gel | Honolulu Pacific | 11 | 53 | AT_RISK | SURGE | 1 |
+    | CoachMic USB Microphone | NYC Metro Hub | 12 | 86 | AT_RISK | SURGE | 1 |
+    | Battle Ropes 50ft | Baltimore East Coast | 13 | 57 | AT_RISK | SURGE | 1 |
+    | Sport Wrap Polarized Shades | Denver Mountain West | 13 | 71 | AT_RISK | SURGE | 1 |
+    | CoachMic USB Microphone | Anchorage Alaska | 16 | 73 | AT_RISK | SURGE | 1 |
+    | CoachMic USB Microphone | Baltimore East Coast | 16 | 98 | AT_RISK | SURGE | 1 |
+    | Recovery Cooling Gel | Memphis Logistics | 16 | 87 | AT_RISK | SURGE | 1 |
+    | StudioRun Training Headphones | Detroit Great Lakes | 16 | 69 | AT_RISK | SURGE | 1 |
+    | SlipStream Slide | Houston Gulf Coast | 17 | 36 | AT_RISK | SURGE | 1 |
+    | Organic Protein Bars 12pk | Columbus Midwest | 19 | 91 | AT_RISK | SURGE | 1 |
+    {: title="Prediction and Inventory Action List"}
 
-3. This result is the operational side of the OML story. A prediction can suggest where demand may rise, but the replenishment decision still needs inventory evidence from Oracle Database.
+2. This is the operating value of in-database machine learning. The model identifies likely demand pressure, and the same SQL statement connects that signal to fulfillment centers where inventory is already risky.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+    How to read the action list:
+
+    | Result pattern | Business meaning |
+    | --- | --- |
+    | `Predicted = SURGE` | Demand may rise for this product. |
+    | `Risk = AT_RISK` | The center is already below its reorder threshold. |
+    | `On Hand` far below `Reorder At` | The replenishment gap is urgent. |
+    | High `Surge Prob` | The model is more confident in the surge signal. |
+    {: title="Action List Interpretation"}
+
+3. A planner now has a short action list: replenish, protect inventory, adjust promotion timing, or route demand away from constrained centers. The important point is that the prediction does not live on an island. It becomes useful because it is joined directly to the operational data that determines the next best action.
+
+## Learn more
+
+This lab gives you a retail-focused sample of Oracle Machine Learning for SQL. For more information, see [Introduction to Oracle Machine Learning for SQL](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/23/dmcon/intro-oracle-machine-learning-SQL.html#GUID-CEDB0D5C-781F-42EF-BFD0-FBDCBC83D430).
 
 ## Acknowledgements
 

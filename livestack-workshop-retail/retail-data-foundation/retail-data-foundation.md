@@ -4,7 +4,17 @@
 
 This lab starts the hands-on database work by confirming that the retail foundation is present and ready. Learners inspect the objects, views, graph metadata, vector artifacts, OML models, and PL/SQL tools that support the Seer Sporting Goods workflow, so later results can be trusted as database-backed evidence.
 
-The LiveStack application shows what the **Data Foundation** page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods cannot trust later dashboards, predictions, or agent outputs unless the shared retail data foundation is complete. |
+| What You Will Prove | The schema contains the tables, views, vector artifacts, graph objects, OML models, and PL/SQL tools used by the rest of the workshop. |
+| Database Capability | Oracle catalog views expose the governed database objects that support the retail workflow. |
+| Business Takeaway | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
+{: title="Retail Data Foundation Story"}
 
 Estimated Time: **10 minutes**
 
@@ -28,30 +38,13 @@ Inventory the object families to confirm that the schema contains the tables, vi
 
 2. In SQL Worksheet, run this query.
 
-    Before you analyze retail outcomes, get oriented to the shared data foundation. This block queries Oracle catalog views such as `USER_OBJECTS`, `USER_PROPERTY_GRAPHS`, and `USER_MINING_MODELS`. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
+    Before you analyze retail outcomes, get oriented to the shared data foundation. This query uses Oracle `USER_*` catalog views because you are connected as the workshop schema user. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
 
     ```sql
     <copy>
-    WITH schema_ctx AS (
-      SELECT owner AS owner_name
-      FROM (
-        SELECT owner
-        FROM all_tables
-        WHERE table_name = 'ORDERS'
-          AND owner IN (USER, 'LLUSER')
-        ORDER BY CASE
-                   WHEN owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA') THEN 1
-                   WHEN owner = USER THEN 2
-                   WHEN owner = 'LLUSER' THEN 3
-                   ELSE 4
-                 END
-      )
-      WHERE ROWNUM = 1
-    )
     SELECT 'Core retail tables' AS "Area", COUNT(*) AS "Count"
-    FROM all_tables t
-    JOIN schema_ctx s ON s.owner_name = t.owner
-    WHERE t.table_name IN (
+    FROM user_tables
+    WHERE table_name IN (
         'BRANDS','PRODUCTS','FULFILLMENT_CENTERS','INVENTORY','CUSTOMERS',
         'ORDERS','ORDER_ITEMS','INFLUENCERS','SOCIAL_POSTS','POST_PRODUCT_MENTIONS',
         'DEMAND_FORECASTS','SHIPMENTS','AGENT_ACTIONS','APP_USERS','EVENT_STREAM',
@@ -60,30 +53,26 @@ Inventory the object families to confirm that the schema contains the tables, vi
       )
     UNION ALL
     SELECT 'Retail semantic views', COUNT(*)
-    FROM all_views v
-    JOIN schema_ctx s ON s.owner_name = v.owner
-    WHERE v.view_name IN (
+    FROM user_views
+    WHERE view_name IN (
         'RETAIL_RETURNS_WORKFLOW_V','RETAIL_SIGNAL_PRODUCT_V',
         'RETAIL_ORDER_RETURN_V','RETAIL_FULFILLMENT_RISK_V','RETAIL_RETURN_WORKBENCH_V'
       )
     UNION ALL
     SELECT 'Creator influence property graph', COUNT(*)
-    FROM all_property_graphs g
-    JOIN schema_ctx s ON s.owner_name = g.owner
-    WHERE g.graph_name = 'INFLUENCER_NETWORK'
+    FROM user_property_graphs
+    WHERE graph_name = 'INFLUENCER_NETWORK'
     UNION ALL
     SELECT 'MiniLM vector artifacts', COUNT(*)
-    FROM all_tab_cols c
-    JOIN schema_ctx s ON s.owner_name = c.owner
-    WHERE c.data_type = 'VECTOR'
-      AND c.table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
-      AND c.column_name = 'EMBEDDING'
+    FROM user_tab_cols
+    WHERE data_type = 'VECTOR'
+      AND table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
+      AND column_name = 'EMBEDDING'
     UNION ALL
     SELECT 'Agent tool functions', COUNT(*)
-    FROM all_objects o
-    JOIN schema_ctx s ON s.owner_name = o.owner
-    WHERE o.object_type = 'FUNCTION'
-      AND o.object_name IN (
+    FROM user_objects
+    WHERE object_type = 'FUNCTION'
+      AND object_name IN (
         'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',
         'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'
       );
@@ -101,9 +90,7 @@ Inventory the object families to confirm that the schema contains the tables, vi
     | Agent tool functions | 5 |
     {: title="Retail Object Inventory"}
 
-3. The result confirms that the workshop has a retail data foundation, semantic views for natural-language grounding, a graph, MiniLM-backed vector artifacts, and PL/SQL tools.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+3. This inventory shows the database foundation you will use throughout the workshop: retail tables for operational data, semantic views for business-friendly questions, a property graph for creator influence, vector columns for meaning-based search, and PL/SQL functions for trusted agent actions.
 
 ## Task 2: Map retail outcomes to database features
 
@@ -146,8 +133,6 @@ Use the capability map to connect each retail outcome to the database feature th
 
 2. This map is the mental model for the workshop. Each later lab uses SQL to show how the database creates a visible retail outcome.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
-
 ## Task 3: Count the retail data groups
 
 Count the retail data groups to understand the scale of the seeded dataset and to give context for later dashboard, search, graph, spatial, OML, and agent results.
@@ -185,8 +170,6 @@ Count the retail data groups to understand the scale of the seeded dataset and t
 
 
 2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.
-
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
 
 ## Acknowledgements
 

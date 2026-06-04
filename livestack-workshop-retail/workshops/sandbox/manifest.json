@@ -23,8 +23,8 @@
       "filename": "../../retail-command-center/retail-command-center.md"
     },
     {
-      "title": "Lab 3: Unified Order Intelligence with JSON Duality and VPD",
-      "description": "Use JSON Relational Duality, SQL/JSON, relational SQL, and VPD policy checks.",
+      "title": "Lab 3: Unified Order Intelligence with JSON Relational Duality",
+      "description": "Use JSON Relational Duality, SQL/JSON, and relational SQL to work with document-shaped data stored relationally.",
       "filename": "../../json-order-intelligence-vpd/json-order-intelligence-vpd.md"
     },
     {
@@ -48,13 +48,13 @@
       "filename": "../../retail-oml-analytics/retail-oml-analytics.md"
     },
     {
-      "title": "Lab 8: Ask Retail Data",
-      "description": "Use semantic views, comments, and visible SQL to ground natural-language retail questions.",
+      "title": "Lab 8: Ask Retail Data: Trusted NL2SQL Answers",
+      "description": "Prepare trusted NL2SQL answers with approved views, visible SQL, and governed database evidence.",
       "filename": "../../ask-retail-data/ask-retail-data.md"
     },
     {
-      "title": "Lab 9: Retail AI Agent Console",
-      "description": "Call database-backed agent tools and verify auditable agent action rows.",
+      "title": "Lab 9: Retail AI Agent Console: Trusted Agent Tools",
+      "description": "Call approved database-backed agent tools, return grounded evidence, and inspect auditable action history.",
       "filename": "../../retail-ai-agent-console/retail-ai-agent-console.md"
     },
     {

@@ -1,43 +1,48 @@
-# Retail AI Agent Console
+# Retail AI Agent Console: Trusted Agent Tools
 
 ## Introduction
 
-Retail AI agents become more useful when their actions are observable. In this lab, learners verify database tool functions, call an inventory tool, write an audit action, and clean it up so they can see how agent workflows stay connected to governed database evidence.
+Retail AI agents are valuable only when their answers and actions are grounded in trusted systems. This lab is about **trusted agent tools**. The learner takeaway is: *How does an AI agent safely use approved database tools, return grounded evidence, and leave an audit trail?*
 
-Oracle AI Database gives the agent a controlled action layer. The operational tables, SQL, PL/SQL tool functions, security policies, and audit rows stay in one database. The app can orchestrate the conversation, while important actions still run through controlled database APIs. In this lab, you inspect those APIs, call one directly, and verify the action history.
+This lab does not require a configured in-database agent framework. Instead, it teaches the database foundation that an agent should use: approved PL/SQL tool functions, governed operational data, and durable action history. Lab 8 focused on trusted answers; this lab focuses on trusted actions.
 
-Estimated Time: **8 minutes**
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | AI agents can create risk if they answer from guesses, call unreviewed logic, or leave no record of what they did. |
+| What You Will Prove | Agent-facing tools can be approved database functions, and agent activity can be inspected as durable database rows. |
+| Database Capability | PL/SQL tool functions and `AGENT_ACTIONS` provide controlled actions and auditable history. |
+| Business Takeaway | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
+{: title="Trusted Agent Tools Story"}
+
+Estimated Time: **5 minutes**
 
 ### Objectives
 
-- Inspect the database functions that act as trusted tools for the retail agent.
-- Call an inventory tool and see how the answer comes from governed operational data.
-- Create and verify an agent audit row that captures action, entity type, status, and timing.
-- Clean up the workshop test row when instructed.
-- Explain how Oracle AI Database improves agent outcomes by grounding actions in data, policy, and observability.
+- Inspect approved database functions that can act as agent tools.
+- Call one inventory tool and verify that the answer comes from governed data.
+- Inspect agent action history as the audit trail for agent workflows.
 
 
-## Task 1: Verify the agent tool functions
+## Task 1: Verify approved agent tools
 
-Perform the following set of steps to confirm that agent workflows call approved database tools rather than untracked logic.
+Perform the following set of steps to confirm that agent workflows can use reviewed database functions instead of unrestricted SQL.
 
-1. Review the related application screen before you run the SQL.
+1. Review the related application screen before you run SQL.
 
     ![Retail AI Agent Console overview](images/agent-console-overview.png " ")
 
     *Figure 1: Retail AI Agent Console shows the runtime profile, example questions, database tool badges, and recent agent actions.*
 
-    ![Retail AI Agent Console fulfillment response from the runbook](images/agent-console-fulfillment.png " ")
-
-    *Figure 2: Agent answers should expose route context, tool evidence, and audit history instead of behaving like black-box chat.*
-
 2. Run this query.
 
-    Start by checking the database tools the agent can use. A tool function is a controlled database API that the application or agent can call instead of generating unrestricted SQL. This block queries `ALL_OBJECTS` for the PL/SQL functions that form the agent tool contract. Each valid function represents a reviewed capability: trend detection, inventory lookup, fulfillment choice, network lookup, or decision logging.
+    A tool function is a controlled database API that an application or agent can call. Each valid function represents a reviewed capability, such as inventory lookup, fulfillment choice, trend detection, network lookup, or decision logging.
 
     ```sql
     <copy>
-    SELECT object_name AS "Tool", status AS "Status"
+    SELECT object_name AS "Tool",
+           status AS "Status"
     FROM all_objects
     WHERE owner = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
       AND object_type = 'FUNCTION'
@@ -58,19 +63,17 @@ Perform the following set of steps to confirm that agent workflows call approved
     | `FIND_BEST_FULFILLMENT` | VALID |
     | `GET_INFLUENCER_NETWORK` | VALID |
     | `LOG_AGENT_DECISION` | VALID |
-    {: title="Agent Tool Functions"}
+    {: title="Approved Agent Tools"}
 
-3. These functions form the agent tool contract: the app can ask questions in natural language while the answers still come from reviewed database logic.
+3. These functions are the tool contract. The agent can ask for help, but the database controls the action.
 
-## Task 2: Call an inventory tool
+## Task 2: Call a trusted inventory tool
 
-Perform the following set of steps to show how an agent can retrieve operational inventory evidence before recommending an action.
+Perform the following set of steps to call one approved tool directly.
 
-1. Use the live **Retail AI Agent Console** context from **Figure 1** before you run the SQL.
+1. Run this query.
 
-2. Call one inventory tool with a current Seer Sporting Goods product name.
-
-    This step shows the bridge between a user question and a trusted database action. The query selects from `DUAL` because the function returns one answer, not a set of rows. `CHECK_PRODUCT_INVENTORY` reads current inventory records, formats the evidence, and returns a controlled response. That pattern grounds agent answers in data the business already governs.
+    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats the answer. The query selects from `DUAL` because the function returns one response, not a table of rows.
 
     ```sql
     <copy>
@@ -81,98 +84,30 @@ Perform the following set of steps to show how an agent can retrieve operational
 
     Expected output:
 
-    | Inventory |
-    | --- |
-    | Inventory for "AllTerrain Hiking Boots" across 12 centers (3183 total units): Honolulu Pacific (Kapolei, Hawaii): 434 on hand, 10 reserved [OK]... |
+    | Product | Inventory Summary |
+    | --- | --- |
+    | AllTerrain Hiking Boots | Inventory across 12 centers: 3183 total units. Honolulu Pacific has 434 on hand, Memphis Logistics has 386 on hand, Houston Gulf Coast has 289 on hand, and additional centers are listed in the tool response. |
     {: title="Inventory Tool Result"}
 
-3. The same pattern can run behind the application. A user sees an agent answer. Oracle AI Database supplies the governed inventory evidence behind it.
+2. This is why database-backed tools matter. The agent-facing answer is grounded in operational inventory data, not a free-form guess.
 
-**Note:** These are sample values from the current workshop dataset and may change after a refresh, seed update, or schema rebuild. Treat these values as an example of the current workshop result. Verify the live output before presenting, then explain the business takeaway: what the values reveal about retail scale, demand, revenue, inventory, fulfillment, order governance, prediction, or agent activity.
+## Task 3: Inspect the action history
 
-## Task 3: Log and verify an audit action
+Perform the following set of steps to see how agent workflows become reviewable data.
 
-Perform the following set of steps to show that agent activity can be recorded for later review, not treated as a temporary chat response.
+1. Run this query.
 
-1. Use the live **Retail AI Agent Console** context from **Figure 1** before you run the SQL.
-
-2. Run this controlled audit call.
-
-    Enterprise agent workflows need durable observability. This block calls a database logging function that inserts an audit row for the agent action. The database captures who the agent is, what action it proposed or completed, which entity type it affected, when it ran, and what payload explains the decision. That record remains reviewable after the chat session ends.
+    Agent actions should not disappear when the chat ends. `AGENT_ACTIONS` stores action type, entity type, status, and timing so the business can inspect what happened later.
 
     ```sql
     <copy>
-    SELECT log_agent_decision(
-             'workshop_validation_agent',
-             'explain_retail_signal',
-             'product',
-             'Workshop test: verified database-grounded retail agent workflow.'
-           ) AS "Result"
-    FROM dual;
-    </copy>
-    ```
-
-    Expected output:
-
-    | Result |
-    | --- |
-    | Decision logged: `explain_retail_signal` by `workshop_validation_agent` |
-    {: title="Agent Audit Insert"}
-
-3. Verify the audit row.
-
-    Logging only helps when someone can inspect the record afterward. This block uses two CTEs. `latest_row` looks for the most recent workshop validation action. `created_row` logs one only if none exists, which makes the step safe to rerun. The final query combines those possibilities and returns one row, showing that agent behavior becomes queryable data you can secure, report on, and review.
-
-    ```sql
-    <copy>
-    WITH latest_row AS (
-      SELECT agent_name,
-             action_type,
-             entity_type,
-             execution_status,
-             executed_at
-      FROM agent_actions
-      WHERE agent_name = 'workshop_validation_agent'
-      ORDER BY executed_at DESC
-      FETCH FIRST 1 ROW ONLY
-    ),
-    created_row AS (
-      SELECT 'workshop_validation_agent' AS agent_name,
-             'explain_retail_signal' AS action_type,
-             'product' AS entity_type,
-             'completed' AS execution_status,
-             SYSTIMESTAMP AS executed_at,
-             log_agent_decision(
-               'workshop_validation_agent',
-               'explain_retail_signal',
-               'product',
-               'Workshop test: verified database-grounded retail agent workflow.'
-             ) AS log_result
-      FROM dual
-      WHERE NOT EXISTS (SELECT 1 FROM latest_row)
-    )
     SELECT agent_name AS "Agent",
            action_type AS "Action",
            entity_type AS "Entity",
            execution_status AS "Status"
-    FROM (
-      SELECT agent_name,
-             action_type,
-             entity_type,
-             execution_status,
-             executed_at
-      FROM latest_row
-      UNION ALL
-      SELECT agent_name,
-             action_type,
-             entity_type,
-             execution_status,
-             executed_at
-      FROM created_row
-      WHERE log_result IS NOT NULL
-    )
+    FROM agent_actions
     ORDER BY executed_at DESC
-    FETCH FIRST 1 ROW ONLY;
+    FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
@@ -180,35 +115,10 @@ Perform the following set of steps to show that agent activity can be recorded f
 
     | Agent | Action | Entity | Status |
     | --- | --- | --- | --- |
-    | `workshop_validation_agent` | `explain_retail_signal` | product | completed |
-    {: title="Latest Agent Action"}
+    | `FULFILLMENT_OPTIMIZATION_AGENT` | `chat_query` | PRODUCT | completed |
+    {: title="Agent Action History"}
 
-4. The audit row makes the agent workflow observable. For production agents, this record supports debugging, approvals, compliance review, and improvement.
-
-## Task 4: Clean up the validation row
-
-Perform the following set of steps to so the workshop leaves the audit table in a controlled state after the test action.
-
-1. Clean up the validation row if your instructor asks for a pristine audit table.
-
-    The previous step intentionally added a workshop test row. This block deletes only the validation agent row and commits the change. In production, preserve real agent audit rows because they explain what the agent did, when it acted, and why the business can trust or challenge the outcome.
-
-    ```sql
-    <copy>
-    DELETE FROM agent_actions
-    WHERE agent_name = 'workshop_validation_agent';
-    COMMIT;
-    </copy>
-    ```
-
-    Expected output:
-
-    | Check | Result |
-    | --- | --- |
-    | Agent audit cleanup | Rows deleted and committed. |
-    {: title="Agent Audit Cleanup"}
-
-2. The workshop test row is now gone. The larger lesson remains: better agent outcomes need more than model orchestration. They need database-grounded tools, governed data access, and durable action history.
+2. The larger lesson is that enterprise agents need more than prompts. They need approved tools, governed data, and an audit trail that makes actions observable after the conversation ends.
 
 ## Acknowledgements
 
