@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Retail AI agents are valuable only when their answers and actions are grounded in trusted systems. Frame this lab around the business question: *How do we let an agent help without giving up control, traceability, or operational trust?*
+Retail AI agents are valuable only when their answers and actions are grounded in trusted systems. This lab is about **trusted agent tools**. The learner takeaway is: *How does an AI agent safely use approved database tools, return grounded evidence, and leave an audit trail?*
 
-This lab does not require a live agent framework. Emphasize that the lesson is architectural and business-focused: approved database tools, governed operational data, and durable action history are what make an agent safe to use.
+This lab does not require a configured in-database agent framework. Instead, it teaches the database foundation that an agent should use: approved PL/SQL tool functions, governed operational data, and durable action history. Lab 8 focused on trusted answers; this lab focuses on trusted actions.
 
 ### Operating Story
 
@@ -13,16 +13,18 @@ This lab does not require a live agent framework. Emphasize that the lesson is a
 | Business Problem | AI agents can create risk if they answer from guesses, call unreviewed logic, or leave no record of what they did. |
 | What You Will Prove | Agent-facing tools can be approved database functions, and agent activity can be inspected as durable database rows. |
 | Database Capability | PL/SQL tool functions and `AGENT_ACTIONS` provide controlled actions and auditable history. |
-| Business Takeaway | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
+| Outcome | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
 {: title="Trusted Agent Tools Story"}
+
+**Persona focus:** Business users want AI assistance they can trust. Application and database teams need agent actions to use approved tools, return grounded evidence, and leave durable history.
 
 Estimated Time: **5 minutes**
 
 ### Objectives
 
-- Inspect the approved database functions that can serve as trusted agent tools.
-- Call one inventory tool and verify that the response is grounded in governed operational data.
-- Inspect agent action history so the business can review what the agent did after the conversation ends.
+- Inspect approved database functions that can act as agent tools.
+- Call one inventory tool and verify that the answer comes from governed data.
+- Inspect agent action history as the audit trail for agent workflows.
 
 
 ## Task 1: Verify approved agent tools
@@ -37,7 +39,7 @@ Perform the following set of steps to confirm that agent workflows can use revie
 
 2. Run this query.
 
-    A tool function is a controlled database API that an application or agent can call. Put the business value first: each approved function limits the agent to reviewed actions, which makes the workflow easier to trust, govern, and audit.
+    A tool function is a controlled database API that an application or agent can call. Each valid function represents a reviewed capability, such as inventory lookup, fulfillment choice, trend detection, network lookup, or decision logging.
 
     ```sql
     <copy>
@@ -54,7 +56,7 @@ Perform the following set of steps to confirm that agent workflows can use revie
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Tool | Status |
     | --- | --- |
@@ -67,24 +69,21 @@ Perform the following set of steps to confirm that agent workflows can use revie
 
 3. These functions are the tool contract. The agent can ask for help, but the database controls the action.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 2: Call a trusted inventory tool
 
 Perform the following set of steps to call one approved tool directly.
 
 1. Run this query.
 
-    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats the answer. The query selects from `DUAL` because the function returns one response, not a table of rows.
+    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats one response. You call the approved function directly, the same way an agent-facing application could call a reviewed database tool.
 
     ```sql
     <copy>
-    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory"
-    FROM dual;
+    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory";
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Product | Inventory Summary |
     | --- | --- |
@@ -92,8 +91,6 @@ Perform the following set of steps to call one approved tool directly.
     {: title="Inventory Tool Result"}
 
 2. This is why database-backed tools matter. The agent-facing answer is grounded in operational inventory data, not a free-form guess.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Verify live output before presenting, then explain the business takeaway.
 
 ## Task 3: Inspect the action history
 
@@ -115,7 +112,7 @@ Perform the following set of steps to see how agent workflows become reviewable 
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Agent | Action | Entity | Status |
     | --- | --- | --- | --- |
@@ -123,8 +120,6 @@ Perform the following set of steps to see how agent workflows become reviewable 
     {: title="Agent Action History"}
 
 2. The larger lesson is that enterprise agents need more than prompts. They need approved tools, governed data, and an audit trail that makes actions observable after the conversation ends.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Verify live output before presenting, then explain the business takeaway.
 
 ## Acknowledgements
 

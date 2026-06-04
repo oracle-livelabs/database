@@ -2,9 +2,11 @@
 
 ## Introduction
 
-**Retail Command Center** helps teams answer a daily operating question: *What needs attention right now, and what evidence supports that call?*
+**Retail Command Center** helps teams answer a daily operating question: *What needs attention right now?*
 
-**Oracle AI Database** keeps operational, analytical, and AI-ready retail evidence close to the same schema. Frame this scene around the business user who needs one trusted view of revenue, demand signals, return exposure, and agent activity without stitching together separate systems.
+Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
+
+The technical challenge is usually integration. A team can spend a lot of time moving data between specialized systems, writing pipelines, and reconciling results before a business user sees one dashboard. This lab shows the simpler pattern: use familiar SQL over one converged database foundation so the command center can combine different kinds of retail evidence without turning the application into an integration project.
 
 ### Operating Story
 
@@ -13,8 +15,10 @@
 | Business Problem | Seer Sporting Goods leaders need a daily triage view before demand spikes, returns, or inventory pressure become customer problems. |
 | What You Will Prove | Dashboard metrics, trending products, product detail, and revenue categories can be traced back to governed database evidence. |
 | Database Capability | SQL combines orders, order items, products, social posts, returns, inventory, and agent actions without moving data into a separate mart. |
-| Business Takeaway | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
+| Outcome | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
 {: title="Retail Command Center Story"}
+
+**Persona focus:** The operations leader wants one daily triage view. The application and database team needs to assemble that view without building fragile pipelines across separate systems for orders, returns, social demand, inventory, and agent activity.
 
 Estimated Time: **10 minutes**
 
@@ -23,12 +27,12 @@ Estimated Time: **10 minutes**
 - Review dashboard KPIs as database-backed operating signals.
 - Query trending products from social momentum and product data.
 - Inspect revenue by category from orders and line items.
-- Connect the command center to the downstream labs so learners see how one operating view expands into trend analysis, fulfillment choices, order intelligence, predictive analytics, trusted answers, and agent-assisted action.
+- Connect the command center to the downstream labs for trend, fulfillment, order, OML, Ask Data, and agent workflows.
 
 
 ## Task 1: Review dashboard operating metrics
 
-Perform the following set of steps to connect command-center cards to the operational evidence behind daily retail triage, including revenue, demand spikes, return exposure, and agent activity.
+Review dashboard metrics to connect the command center cards to trusted operational data. The goal is to show how revenue, demand, return exposure, and agent activity become a daily triage view.
 
 1. Review the related application screen before you run the SQL.
 
@@ -38,9 +42,9 @@ Perform the following set of steps to connect command-center cards to the operat
 
 2. Run this KPI query.
 
-    Use this query to connect each dashboard card to trusted operational data. Explain **scalar subqueries** as a practical way to return one business metric per card, such as orders, revenue, open returns, demand spikes, or agent actions.
+    Use this query to connect the dashboard cards to trusted operational data. A **scalar subquery** is a query inside a query and acts as a convenient way to return one value per dashboard card, such as orders, revenue, returns, demand spikes, or agent actions.
 
-    This block selects from `DUAL`, Oracle's one-row helper table, and uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
+    This block uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
 
     ```sql
     <copy>
@@ -50,12 +54,11 @@ Perform the following set of steps to connect command-center cards to the operat
       (SELECT COUNT(*) FROM return_requests WHERE status <> 'Closed') AS "Open Returns",
       (SELECT NVL(ROUND(SUM(return_value), 2), 0) FROM return_requests WHERE status <> 'Closed') AS "Return Exposure",
       (SELECT COUNT(*) FROM social_posts WHERE momentum_flag IN ('viral','mega_viral')) AS "Demand Spikes",
-      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions"
-    FROM dual;
+      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions";
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Total Orders | Retail Revenue | Open Returns | Return Exposure | Demand Spikes | Agent Actions |
     | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -64,17 +67,11 @@ Perform the following set of steps to connect command-center cards to the operat
 
 3. These metrics create the daily triage view. The user can see revenue, demand, return exposure, and agent activity without waiting for copied data or a separate dashboard mart.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 2: Review trending products
 
-Perform the following set of steps to identify where social momentum may point to a sales opportunity, inventory risk, merchandising action, or follow-up demand analysis.
+Review trending products to identify where social momentum may indicate a sales opportunity, inventory risk, merchandising action, or follow-up trend analysis.
 
 1. Use the live **Retail Command Center** context from **Figure 1** before you run the SQL.
-
-    ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
-
-    *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
 
     ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
 
@@ -103,7 +100,7 @@ Perform the following set of steps to identify where social momentum may point t
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Product | Brand | Mentions | Views | Avg Momentum | Peak Momentum |
     | --- | --- | ---: | ---: | ---: | --- |
@@ -121,11 +118,9 @@ Perform the following set of steps to identify where social momentum may point t
 
 3. A high-ranking product may represent a sales opportunity, an inventory risk, a merchandising action, or a signal that deserves deeper analysis in the Customer Trend Signals lab.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 3: Connect product detail screens to database evidence
 
-Perform the following set of steps to show that a document-style product experience can still come from governed relational retail data.
+Connect product detail screens to database evidence to show that document-style application experiences can still come from governed relational data.
 
 1. Use the live **Retail Command Center** context from **Figure 1** as the visual anchor for product details and JSON Duality patterns.
 
@@ -137,19 +132,11 @@ Perform the following set of steps to show that a document-style product experie
 
     *Figure 4: The same product story can also be displayed as document-shaped JSON.*
 
-    ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
-
-    *Figure 3: Product detail connects the selected product to inventory and social evidence.*
-
-    ![Product JSON Duality view in the product detail modal](images/product-json-duality.png " ")
-
-    *Figure 4: The same product story can also be displayed as document-shaped JSON.*
-
- Product detail screens often look document-shaped because the business wants one compact product story: item, brand, category, inventory, demand, and signals in one place. Emphasize that the experience feels document-first, but the underlying evidence still comes from governed relational retail data.
+    Product detail screens often look like documents because the application needs a compact product story: item, brand, category, inventory, demand, and signals. The important point is that the document-style screen does not require a separate document database. Later labs show how Oracle Database can expose document-shaped JSON while preserving relational tables, constraints, security policies, and SQL access.
 
 ## Task 4: Review revenue by category
 
-Perform the following set of steps to review category revenue so learners can see where demand is converting into sales and where social-driven activity may be influencing performance.
+Review revenue by category to see where demand is turning into sales and where social-driven activity may be influencing category performance.
 
 1. Run the category revenue query.
 
@@ -170,7 +157,7 @@ Perform the following set of steps to review category revenue so learners can se
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Category | Orders | Revenue | Social-Driven Orders |
     | --- | ---: | ---: | ---: |
@@ -194,8 +181,6 @@ Perform the following set of steps to review category revenue so learners can se
     {: title="Category Revenue"}
 
 2. The command center shows why converged data matters. Operational orders, social demand signals, inventory context, and AI-assisted actions can start from one governed database foundation.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

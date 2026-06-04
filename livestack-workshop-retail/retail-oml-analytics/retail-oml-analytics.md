@@ -2,15 +2,17 @@
 
 ## Introduction
 
-Retail teams need to react before a demand surge turns into a stockout. This opening is strongest when it states the decision clearly: *which products need attention now, and which locations are most exposed if demand keeps rising?*
+Retail teams need to react before a product surge turns into a stockout. A merchandising planner may see social signals, rising sales, and inventory pressure, but the decision is stronger when the prediction and the operating evidence come from the same governed database.
 
-**Oracle Machine Learning for SQL** keeps machine learning close to the retail data. Emphasize the business payoff: predictions stay easier to trust when the features, model objects, and operational evidence remain in one governed environment.
+Oracle Machine Learning for SQL keeps machine learning close to the retail data. OML models are database objects, and SQL functions such as `PREDICTION` and `PREDICTION_PROBABILITY` can apply those models without exporting feature data to a separate notebook or scoring service.
 
 In this lab, you use the **Retail OML Analytics** workflow to answer a practical question: which products are likely to surge, and which inventory positions need attention? The story builds from database model inventory, to model-ready features, to SQL scoring, to a replenishment-focused action list.
 
 ![Oracle Machine Learning for SQL flow](images/oml-sql-scoring-flow.svg " ")
 
 *Figure 1: Retail data, feature views, OML models, SQL scoring, and business action stay connected inside Oracle AI Database.*
+
+This lab starts from models that were already created by the workshop seed. That keeps the exercise focused on the operational workflow a planner cares about: inspect the model and feature views, score current retail rows, and connect the prediction to inventory action. In a longer OML workshop, you would also walk through model creation and training. Here, you use the trained model the way an application or analyst would use it after deployment.
 
 ### Operating Story
 
@@ -19,17 +21,19 @@ In this lab, you use the **Retail OML Analytics** workflow to answer a practical
 | Business Problem | A demand surge can turn into a stockout if merchandising waits for lagging reports. |
 | What You Will Prove | In-database models can score product surge risk and connect that prediction to current inventory pressure. |
 | Database Capability | Oracle Machine Learning for SQL stores models in the database and scores feature views with SQL functions. |
-| Business Takeaway | Planners get a short action list: replenish, protect inventory, adjust promotions, or route demand away from constrained centers. |
+| Outcome | Planners get a short action list: replenish, protect inventory, adjust promotions, or route demand away from constrained centers. |
 {: title="Retail OML Story"}
+
+**Persona focus:** The planner wants to act before a demand surge causes stockouts. The technical team needs model scoring to run close to governed feature views and current inventory data.
 
 Estimated Time: **10 minutes**
 
 ### Objectives
 
-- Confirm that the OML feature views and mining models needed for retail scoring are present and ready to support business decisions.
+- Confirm that OML feature views and mining models are present in Oracle AI Database.
 - Inspect the retail features used to score demand surge.
-- Use SQL scoring functions to apply the in-database model and turn current retail signals into a demand-risk assessment.
-- Connect model predictions to inventory evidence so merchandising teams can turn prediction into action.
+- Use SQL scoring functions to apply an in-database OML model.
+- Connect model predictions to inventory evidence for merchandising action.
 
 
 ## Task 1: Confirm OML models and feature views in the database
@@ -45,6 +49,8 @@ Perform the following set of steps to confirm that predictive analytics are buil
 2. Run this model inventory.
 
     Oracle Machine Learning for SQL models are first-class database objects. This query reads `ALL_MINING_MODELS` to show the models that the current schema can score. The mining function tells you the type of machine learning problem, such as classification, regression, or clustering. The algorithm shows the method used to build the model.
+
+    Think of this as the model catalog check. Before using a prediction in an operational workflow, confirm which models exist, what kind of question each model answers, and whether the model can be scored from SQL.
 
     ```sql
     <copy>
@@ -62,7 +68,7 @@ Perform the following set of steps to confirm that predictive analytics are buil
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Owner | Model | Use | Algorithm |
     | --- | --- | --- | --- |
@@ -72,7 +78,7 @@ Perform the following set of steps to confirm that predictive analytics are buil
     | LLUSER | `REVENUE_PREDICT_MODEL` | REGRESSION | `GENERALIZED_LINEAR_MODEL` |
     {: title="OML Models"}
 
-    **How to read this result:**
+    How to read this result:
 
     | Model | Business question |
     | --- | --- |
@@ -84,7 +90,7 @@ Perform the following set of steps to confirm that predictive analytics are buil
 
 3. Run this feature view check.
 
-    Machine learning starts with prepared features. Keep the retail meaning front and center: these columns represent the demand, sentiment, engagement, sales, revenue, and inventory signals a planner would actually want the model to consider.
+    Machine learning starts with prepared features. A feature is a column or derived value that helps a model make a prediction, such as sales volume, sentiment, engagement, recency, order value, or inventory behavior. These curated views prepare model-ready rows while keeping the retail data inside Oracle AI Database.
 
     ```sql
     <copy>
@@ -100,7 +106,7 @@ Perform the following set of steps to confirm that predictive analytics are buil
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Owner | View |
     | --- | --- |
@@ -113,8 +119,6 @@ Perform the following set of steps to confirm that predictive analytics are buil
 4. This is the first key lesson: the models and the feature views are in the database. The application can score current retail data without moving it into a separate machine learning runtime.
 
     In business terms, this means the prediction is closer to the truth of the operation. The same database holds the products, orders, social demand signals, inventory evidence, and model objects, so the workflow avoids stale exports and disconnected scoring pipelines.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 2: Inspect demand surge features
 
@@ -142,7 +146,7 @@ Perform the following set of steps to inspect the feature rows used by the deman
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Product | Category | Posts | Avg Sentiment | Rising Posts | Units Sold | Revenue | Known Label |
     | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
@@ -158,7 +162,7 @@ Perform the following set of steps to inspect the feature rows used by the deman
 
 2. This table makes the model inputs tangible. The model is not scoring abstract data; it is scoring retail signals that planners already care about.
 
-    **How to read the feature columns:**
+    How to read the feature columns:
 
     | Column | What it tells the business |
     | --- | --- |
@@ -168,17 +172,15 @@ Perform the following set of steps to inspect the feature rows used by the deman
     | `Known Label` | The historical label used to train or evaluate the classification model. |
     {: title="Demand Feature Interpretation"}
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 3: Score demand surge risk with SQL
 
 Perform the following set of steps to apply the in-database classification model to the demand feature rows.
 
 1. Run this scoring query.
 
-    `PREDICTION` returns the label and `PREDICTION_PROBABILITY` returns the confidence, but explain the business use in plain language: the result helps planners separate products that merely look noisy from products that genuinely deserve immediate attention.
+    `PREDICTION` returns the model's predicted label for each row. `PREDICTION_PROBABILITY` returns the confidence for a requested label, here `SURGE`. The `USING d.*` clause tells Oracle to use the feature columns from `OML_DEMAND_TRAINING_V` as model inputs, so scoring runs in SQL against database data.
 
-    **The query has three important parts:**
+    The query has three important parts:
 
     | Query part | Purpose |
     | --- | --- |
@@ -205,7 +207,7 @@ Perform the following set of steps to apply the in-database classification model
     </copy>
     ```
 
-    **Expected output (probability values can vary if the model is rebuilt):**
+    Expected output (probability values can vary if the model is rebuilt):
 
     | Product | Category | Actual | Predicted | Surge Prob | Posts | Rising Posts | Units Sold |
     | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
@@ -225,8 +227,6 @@ Perform the following set of steps to apply the in-database classification model
 
     For a business user, a row with `Predicted = SURGE` means "watch this product now." A high `Surge Prob` means the model is more confident. The next step is not to blindly reorder everything; it is to combine the prediction with current inventory and fulfillment evidence.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 4: Turn prediction into a replenishment action list
 
 Perform the following set of steps to combine model output with current inventory evidence. A surge prediction is useful only when the business can decide what to do next.
@@ -237,9 +237,9 @@ Perform the following set of steps to combine model output with current inventor
 
 1. Run this query.
 
-    The common table expression scores each product with `DEMAND_SURGE_MODEL`, and the outer query joins those predictions to fulfillment risk. Make the business takeaway explicit: the action list matters because it combines likely demand pressure with locations that are already exposed.
+    The common table expression scores each product with `DEMAND_SURGE_MODEL`. The outer query joins those predictions to the fulfillment risk view by `PRODUCT_ID`. The result highlights products predicted to surge where a fulfillment center is already below its reorder threshold.
 
-    **Read the query in two stages:**
+    Read the query in two stages:
 
     | Stage | What happens |
     | --- | --- |
@@ -277,7 +277,7 @@ Perform the following set of steps to combine model output with current inventor
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Product | Center | On Hand | Reorder At | Risk | Predicted | Surge Prob |
     | --- | --- | ---: | ---: | --- | --- | ---: |
@@ -295,7 +295,7 @@ Perform the following set of steps to combine model output with current inventor
 
 2. This is the operating value of in-database machine learning. The model identifies likely demand pressure, and the same SQL statement connects that signal to fulfillment centers where inventory is already risky.
 
-    **How to read the action list:**
+    How to read the action list:
 
     | Result pattern | Business meaning |
     | --- | --- |
@@ -306,8 +306,6 @@ Perform the following set of steps to combine model output with current inventor
     {: title="Action List Interpretation"}
 
 3. A planner now has a short action list: replenish, protect inventory, adjust promotion timing, or route demand away from constrained centers. The important point is that the prediction does not live on an island. It becomes useful because it is joined directly to the operational data that determines the next best action.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Learn more
 

@@ -2,11 +2,13 @@
 
 ## Introduction
 
-Fulfillment is where customer experience and operating cost meet. Tighten the opening around the retail decision: the best center is the one that balances speed, coverage, and available stock for the specific order. **Oracle Spatial** keeps those location-aware decisions inside Oracle AI Database next to orders, customers, and inventory. Emphasize that this reduces handoffs between mapping tools and operational systems when the business needs an answer quickly.
+Fulfillment is where customer experience and operating cost meet. A retailer may have inventory in several distribution centers, but the best center is not always the one with the most stock. The business needs to know which centers are close enough, which delivery zones cover the customer, and whether the right product is actually available to ship.
 
-In this lab, you work through a practical fulfillment scenario for a Los Angeles customer ordering **AllTerrain Hiking Boots**. You inspect the spatial data behind the **Intelligent Fulfillment Network** page, then use SQL to move from map data to a shipping decision.
+Oracle Spatial lets you keep those location-aware questions inside Oracle AI Database, next to the retail data the business already uses. In this lab, you work through a practical fulfillment scenario for a Los Angeles customer ordering `AllTerrain Hiking Boots`. You inspect the spatial data behind the **Intelligent Fulfillment Network** page, then use SQL to move from map data to a shipping decision.
 
-The story builds one step at a time: understand the retail locations, produce map-ready data, shortlist nearby centers, confirm service coverage, and then combine geography with stock availability to recommend the best fulfillment option.
+The business user sees a map and wants an answer: which center should ship this order? The technical challenge is that a useful answer needs more than a map. It needs customer location, fulfillment center location, delivery zones, service promises, product availability, and inventory thresholds in the same decision path.
+
+The story builds one step at a time: understand the retail locations, produce map-ready data, find nearby centers, check delivery coverage, and finally combine distance with available inventory.
 
 ### Operating Story
 
@@ -15,8 +17,10 @@ The story builds one step at a time: understand the retail locations, produce ma
 | Business Problem | The closest warehouse is not always the best fulfillment choice if delivery zones or product availability do not line up. |
 | What You Will Prove | Location, service zones, and inventory can be queried together to explain which fulfillment centers are practical choices. |
 | Database Capability | Oracle Spatial stores points and polygons, outputs GeoJSON, and calculates distance alongside relational inventory data. |
-| Business Takeaway | Fulfillment teams can choose faster and cheaper shipping options with evidence the business can inspect. |
+| Outcome | Fulfillment teams can choose faster and cheaper shipping options with evidence the business can inspect. |
 {: title="Intelligent Fulfillment Story"}
+
+**Persona focus:** Fulfillment planners want the best practical shipping choice. The technical team needs to combine customer location, delivery zones, fulfillment centers, and inventory in one queryable system.
 
 Estimated Time: **10 minutes**
 
@@ -24,9 +28,9 @@ Estimated Time: **10 minutes**
 
 - Inspect retail location data stored as Oracle Spatial geometry.
 - Convert database-managed geometry into map-ready GeoJSON.
-- Find nearby fulfillment centers with Spatial distance filtering so the business can narrow the shortlist before comparing service levels and inventory.
-- Use polygon service zones to understand which delivery promises actually cover the customer location.
-- Combine distance and inventory availability so the final fulfillment choice reflects both geography and the stock position the business can act on.
+- Find nearby fulfillment centers with Spatial distance filtering.
+- Use polygon service zones to understand delivery coverage.
+- Combine distance and inventory availability for fulfillment decisions.
 
 
 ## Task 1: Understand the retail spatial data model
@@ -41,6 +45,8 @@ Perform the following set of steps to see how the retail workshop stores locatio
 
 2. Start with the business model behind the map.
 
+    Spatial data supports mapping, but it is more than a picture. Points and polygons are queryable database values. That means the same data can power a map, filter candidate locations, check delivery coverage, and join back to inventory and order tables.
+
     | Retail question | Table and column | Spatial shape |
     | --- | --- | --- |
     | Where are fulfillment centers located? | `FULFILLMENT_CENTERS.LOCATION` | Point |
@@ -49,7 +55,7 @@ Perform the following set of steps to see how the retail workshop stores locatio
     | Where is demand concentrated? | `DEMAND_REGIONS.BOUNDARY` | Polygon |
     {: title="Retail Spatial Model"}
 
-    Points represent places such as customers or fulfillment centers, and polygons represent service areas or demand regions. Keep the business value explicit: storing both shapes in the database lets the retailer answer coverage and routing questions from the same governed operational data.
+    Points represent specific places, such as a customer address or fulfillment center. Polygons represent areas, such as delivery zones or demand regions. Because these shapes live in the same database as orders, customers, products, and inventory, you can ask location-aware retail questions without moving the data to a separate mapping system.
 
 3. Run this query.
 
@@ -70,7 +76,7 @@ Perform the following set of steps to see how the retail workshop stores locatio
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Center | City | State | Latitude | Longitude | Geometry |
     | --- | --- | --- | ---: | ---: | --- |
@@ -82,8 +88,6 @@ Perform the following set of steps to see how the retail workshop stores locatio
     {: title="Fulfillment Center Geometry"}
 
 4. The result shows that fulfillment centers are not just rows with city names. They have governed coordinates that SQL can use for maps, service areas, routing, and proximity analysis.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 2: Produce map-ready GeoJSON
 
@@ -106,7 +110,7 @@ Perform the following set of steps to convert database geometry into a standard 
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Center | City | State | GeoJSON |
     | --- | --- | --- | --- |
@@ -118,8 +122,6 @@ Perform the following set of steps to convert database geometry into a standard 
     {: title="Fulfillment GeoJSON"}
 
 2. Notice that the GeoJSON coordinates also use longitude first, then latitude. This is the format many map tools expect, so the database can supply map-ready shapes directly from the same trusted data used by the rest of the retail application.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 3: Find nearby fulfillment centers
 
@@ -146,7 +148,7 @@ Perform the following set of steps to use location as a fulfillment filter. In t
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Center | City | State | Miles |
     | --- | --- | --- | ---: |
@@ -157,8 +159,6 @@ Perform the following set of steps to use location as a fulfillment filter. In t
     {: title="Nearby Fulfillment Centers"}
 
 2. This is a typical Spatial pattern: first filter by geography, then calculate a business-friendly measure for ranking or display. The output gives the fulfillment team a practical shortlist instead of asking them to compare every center in the network.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 4: Check delivery service zones
 
@@ -186,7 +186,7 @@ Perform the following set of steps to use polygons as delivery coverage areas. A
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Customer | Customer City | Customer State | Center | Service Level | Max Hours |
     | ---: | --- | --- | --- | --- | ---: |
@@ -199,16 +199,13 @@ Perform the following set of steps to use polygons as delivery coverage areas. A
 
 2. The result shows why polygons matter. The same customer may be eligible for multiple service levels from one center and a slower backup option from another center. That gives the business a way to balance speed, cost, and resiliency before committing to a shipment.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 5: Combine distance with inventory availability
 
 Perform the following set of steps to connect spatial proximity with the product stock needed to fulfill an order. This is where the map becomes an operational decision.
 
 1. Run this query.
 
-    Distance alone does not decide fulfillment. Reframe the key business point more directly: the best recommendation balances proximity with available stock, so the retailer can protect service levels without creating avoidable stockouts elsewhere.
-    For example, this query ranks active fulfillment centers for customer `1`, but only for centers that have available units of `AllTerrain Hiking Boots`.
+    Distance alone does not decide fulfillment. The center also needs available inventory. This query ranks active fulfillment centers for customer `1`, but only for centers that have available units of `AllTerrain Hiking Boots`.
 
     ```sql
     <copy>
@@ -233,7 +230,7 @@ Perform the following set of steps to connect spatial proximity with the product
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Center | City | State | Product | Available | Miles |
     | --- | --- | --- | --- | ---: | ---: |
@@ -247,8 +244,6 @@ Perform the following set of steps to connect spatial proximity with the product
 2. This is the converged database value: location, product, inventory, and customer data can be queried together. The result shows that `LA Mega Center` is both close and stocked, making it the strongest fulfillment choice for this order. The other rows provide backup options if the business wants to protect capacity, reduce regional risk, or route around operational constraints.
 
 3. A fulfillment application can now explain the recommendation in business terms: ship from the closest stocked center, keep alternate centers visible, and use the same governed data for the map, the SQL analysis, and the operational decision.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Learn more
 

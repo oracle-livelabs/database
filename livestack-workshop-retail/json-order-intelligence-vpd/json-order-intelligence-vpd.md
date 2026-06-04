@@ -2,9 +2,11 @@
 
 ## Introduction
 
-Order data serves multiple retail audiences at once. Application teams want a compact order object, operations teams want relational detail, and business teams want one governed source of truth. Frame **JSON Relational Duality** as the way **Oracle AI Database** supports all three without duplicating the order record.
+Order data serves many audiences. Application teams need document-shaped access, operations teams need relational detail, and business teams need one governed source of truth. JSON Relational Duality lets Oracle AI Database expose the same relational data as application-friendly JSON documents without copying it into a separate document store.
 
-In this lab, learners move from relational order tables to document-style access, then prove that inserts and updates still land in the same governed business transaction. The point is not just technical flexibility; it is operational consistency.
+In this lab, you start with relational order tables, define how the JSON duality view can be used, read order documents, insert a JSON order through the duality view, verify that Oracle stored it relationally, and update both representations.
+
+The application value is API-friendly access. An order detail screen or service call often wants one order document with header fields and line items together. The database value is that the document is not a disconnected copy. Oracle still stores and protects the order in relational tables that SQL, constraints, transactions, and analytics can use.
 
 ### Operating Story
 
@@ -13,18 +15,20 @@ In this lab, learners move from relational order tables to document-style access
 | Business Problem | Seer Sporting Goods needs application-friendly order documents without losing relational truth, transactions, or SQL access. |
 | What You Will Prove | The same order can be read and changed as JSON while Oracle stores and protects the underlying relational rows. |
 | Database Capability | JSON Relational Duality maps document-shaped JSON to relational `ORDERS` and `ORDER_ITEMS` tables. |
-| Business Takeaway | Application teams get document APIs while operations and analytics teams keep one governed source of order truth. |
+| Outcome | Application teams get document APIs while operations and analytics teams keep one governed source of order truth. |
 {: title="Unified Order Intelligence Story"}
+
+**Persona focus:** Application developers want API-friendly order documents. Database and operations teams need those documents to stay transactional, queryable, and tied to relational order evidence.
 
 Estimated Time: **15 minutes**
 
 ### Objectives
 
-- Inspect the relational order tables that support one governed order record for applications, operations, reporting, and audit needs.
-- Recreate `ORDERS_DV` so learners can see how one governed order record can support document-style insert, update, and delete operations.
+- Inspect the relational order tables behind a JSON Relational Duality view.
+- Recreate `ORDERS_DV` with document operations enabled for the lab.
 - Query retail orders as JSON documents.
-- Insert a retail order through `ORDERS_DV` and verify that the business transaction is stored correctly in the mapped relational tables.
-- Update order data through both the duality view and the relational tables to show that every team is still working from the same governed order record.
+- Insert a JSON document through `ORDERS_DV` and verify relational storage.
+- Update order data through both the duality view and the relational table.
 
 
 ## Task 1: Start with relational order tables
@@ -34,8 +38,6 @@ JSON Relational Duality starts with relational tables. In this retail workshop, 
 ![Diagram showing ORDERS and ORDER_ITEMS flowing through ORDERS_DV into a JSON order document](images/json-relational-duality-order-flow.svg " ")
 
 *Figure 1: `ORDERS_DV` presents the `ORDERS` header row and related `ORDER_ITEMS` rows as one JSON order document.*
-
-Perform the following set of steps to start with the relational order tables that support a document-style order experience for the business.
 
 1. Review the order detail screen before you run the SQL.
 
@@ -63,7 +65,7 @@ Perform the following set of steps to start with the relational order tables tha
     </copy>
     ```
 
-    **Expected output excerpt:**
+    Expected output excerpt:
 
     | Table | Column | Type |
     | --- | --- | --- |
@@ -77,18 +79,19 @@ Perform the following set of steps to start with the relational order tables tha
 
 3. The data is still relational: primary keys, foreign keys, data types, SQL joins, and analytics all continue to work.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 2: Add INSERT, UPDATE, and DELETE to a read-only duality view
 
-A JSON Relational Duality view is more than a read-only JSON projection. It defines the document shape that applications see and the operations they are allowed to perform. As the database user who owns the view, you can decide whether the view should only support reads or whether applications should also be able to insert, update, and delete order documents. 
+A JSON Relational Duality view is more than a read-only JSON projection. It defines the document shape that applications see and the operations they are allowed to perform. As the database user who owns the view, you can decide whether the view should only support reads or whether applications should also be able to insert, update, and delete order documents. In this task, you recreate the existing retail `ORDERS_DV` view with those operations enabled. The important point is how small and declarative the change is: the following SQL adds the document operations while Oracle Database still maps the work back to the relational `ORDERS` and `ORDER_ITEMS` tables.
 
-In this task, you recreate the existing retail `ORDERS_DV` view with those operations enabled. The important point is how small and declarative the change is: the following SQL adds the document operations while Oracle Database still maps the work back to the relational `ORDERS` and `ORDER_ITEMS` tables.
+1. Read the write permissions in the view definition.
 
-Perform the following set of steps to define which document-style order actions the business can allow through `ORDERS_DV` while keeping relational storage and control in place.
+    The `WITH INSERT UPDATE DELETE` clauses are the key syntax in this task. They tell Oracle Database that document-style inserts, updates, and deletes are allowed through this duality view and through the nested `items` array. Without those clauses, the view can still be useful for reading order documents, but it will not support the write operations you use later in the lab.
 
+    In this view, `FROM orders o WITH INSERT UPDATE DELETE` enables writes for the order header, and `FROM order_items oi WITH INSERT UPDATE DELETE` enables writes for the nested line items.
 
-1. Run this block as a script because it contains DDL.
+2. Run this block as a script because it contains DDL.
+
+    In Database Actions SQL Worksheet, use the **Run Script** button for this block. It is the script execution control, not the single-statement green Run Statement control. Run Script is the right choice when a block contains DDL such as `CREATE OR REPLACE`.
 
     ```sql
     <copy>
@@ -116,17 +119,15 @@ Perform the following set of steps to define which document-style order actions 
     </copy>
     ```
 
-2. The view now defines both the business-facing document shape and the allowed document operations. The relational tables remain the governed storage layer, so application flexibility does not break operational control.
+3. The view now defines both the document shape and the allowed document operations. The relational tables are still the storage and SQL foundation.
 
 ## Task 3: Query retail orders as JSON and SQL
 
 Now query the same retail order two ways. First, read it as the JSON document an application might use. Then read the same fields from the relational `ORDERS` and `ORDER_ITEMS` tables. The important learning point is simple: both queries return the same order data. Only the representation changes.
 
-Perform the following set of steps to compare the same retail order in JSON and relational form so learners can see how one governed transaction supports different business uses.
-
 1. Read order `1` as a JSON document.
 
-    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet.
+    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet. In Database Actions, this is the script execution button. It displays the formatted JSON document more reliably than running the statement as a single grid query.
 
     ```sql
     <copy>
@@ -136,7 +137,7 @@ Perform the following set of steps to compare the same retail order in JSON and 
     </copy>
     ```
 
-    **Expected output excerpt:**
+    Expected output excerpt:
 
     ```json
     {
@@ -159,7 +160,7 @@ Perform the following set of steps to compare the same retail order in JSON and 
 
 2. Read the same order from relational tables.
 
-    This query returns the same order evidence in rows and columns. Make the business point explicit: relational results are easier for joins, reporting, controls, and operational detail, while the JSON document is easier for application-style order retrieval.
+    This query returns the same key order fields as rows and columns. The order header values repeat once per line item because relational results are tabular. In the JSON document, those same line items are nested in the `items` array.
 
     ```sql
     <copy>
@@ -178,7 +179,7 @@ Perform the following set of steps to compare the same retail order in JSON and 
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Order | Customer | Status | Order Total | Item | Product | Qty | Unit Price |
     | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: |
@@ -190,15 +191,9 @@ Perform the following set of steps to compare the same retail order in JSON and 
 
 3. You just saw the same order fields in two useful shapes. The JSON view is convenient for applications that want one order document. The relational tables are convenient for SQL, reporting, joins, constraints, and operational detail. The `_metadata` field in the JSON output is generated by the duality view; the business data comes from the relational rows.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 4: Insert a JSON order document
 
-Working through a duality view feels like working with JSON documents, but the database stores the values in the mapped relational tables. 
-
-In this task, you use the existing retail `ORDERS_DV` view to delete a previous copy of one workshop order, insert it again as a JSON document, and then query both the document view and the relational tables to prove they represent the same underlying data. 
-
-In the next task, you update that same order through the JSON duality view and then directly through the relational table. Same data, different views, different access patterns.
+Working through a duality view feels like working with JSON documents, but the database stores the values in the mapped relational tables. In this task, you use the existing retail `ORDERS_DV` view to delete a previous copy of one workshop order, insert it again as a JSON document, and then query both the document view and the relational tables to prove they represent the same underlying data. In the next task, you update that same order through the JSON duality view and then directly through the relational table. Same data, different views, different access patterns.
 
 You will use order `900001` for the rest of the lab. The flow is:
 
@@ -215,7 +210,7 @@ Update order 900001 through ORDERS_DV to status processing
 Update ORDERS directly to status confirmed
 ```
 
-The status changes are intentional because they show one retail order moving through both document-style writes and relational writes. That is the business value of duality: different teams can work in different shapes without splitting the source of truth.
+The status changes are intentional. They let you see the same row move through document-style writes and relational writes.
 
 1. Delete any previous copy of the workshop order.
 
@@ -228,7 +223,7 @@ The status changes are intentional because they show one retail order moving thr
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Check | Result |
     | --- | --- |
@@ -286,7 +281,7 @@ The status changes are intentional because they show one retail order moving thr
 
 4. Query `ORDERS_DV` for the inserted document.
 
-    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet.
+    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet. In Database Actions, this is the script execution button. It displays the formatted JSON document more reliably than running the statement as a single grid query.
 
     ```sql
     <copy>
@@ -296,7 +291,7 @@ The status changes are intentional because they show one retail order moving thr
     </copy>
     ```
 
-    **Expected output excerpt:**
+    Expected output excerpt:
 
     ```json
     {
@@ -342,13 +337,9 @@ The status changes are intentional because they show one retail order moving thr
 
 6. The insert went through the document view, but the data is stored relationally.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 5: Update both representations
 
 Updates work in both directions. When you update the retail document, the relational row reflects it. When you update the relational row, the JSON document reflects it. That is the duality: one governed set of data, two useful access patterns.
-
-Perform the following set of steps to update the same retail order through both representations and prove that the governed data stays synchronized.
 
 1. Update the order document with `JSON_TRANSFORM`.
 
@@ -381,7 +372,7 @@ Perform the following set of steps to update the same retail order through both 
     </copy>
     ```
 
-    **Expected output:**
+    Expected output:
 
     | Order | Relational Status |
     | ---: | --- |
@@ -412,7 +403,7 @@ Perform the following set of steps to update the same retail order through both 
 
     The query shows the JSON document changed too.
 
-    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet.
+    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet. In Database Actions, this is the script execution button. It displays the formatted JSON document more reliably than running the statement as a single grid query.
 
     ```sql
     <copy>
@@ -422,7 +413,7 @@ Perform the following set of steps to update the same retail order through both 
     </copy>
     ```
 
-    **Expected output excerpt:**
+    Expected output excerpt:
 
     ```json
     {
@@ -436,8 +427,6 @@ Perform the following set of steps to update the same retail order through both 
     ```
 
 7. You used both sides of JSON Relational Duality. A document insert created relational rows. A document update changed a relational row. A relational update changed the document result. The application gets JSON flexibility while Oracle Database keeps the data relational, consistent, and available to SQL.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## More JSON Relational Duality labs
 

@@ -79,8 +79,7 @@ Launch the LiveLabs environment first so the learner starts from the correct res
     <copy>
     SELECT USER AS "User",
            SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
-           SYSTIMESTAMP AS "Checked At"
-    FROM dual;
+           SYSTIMESTAMP AS "Checked At";
     </copy>
     ```
 
