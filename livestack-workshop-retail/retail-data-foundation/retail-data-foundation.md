@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This lab starts the hands-on database work by confirming that the retail foundation is present and ready. Learners inspect the objects, views, graph metadata, vector artifacts, OML models, and PL/SQL tools that support the Seer Sporting Goods workflow, so later results can be trusted as database-backed evidence.
+This lab confirms that the retail data foundation is present and ready before learners trust any downstream analysis. By inspecting the supporting objects up front, the team can see that later dashboard, search, fulfillment, and AI results all come from the same governed source.
 
-The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The **LiveStack** application shows what the **Data Foundation** page loads or restores. This scene should make the business point explicit: the data load prepares the shared retail evidence used by planners, analysts, operators, and AI-assisted workflows later in the workshop.
 
 ### Operating Story
 
@@ -22,13 +22,13 @@ Estimated Time: **10 minutes**
 
 - Confirm that the retail database objects are present.
 - Inventory the object families used by later labs.
-- Map the current retail application flow to Oracle Database 26ai capabilities.
+- Map each retail workflow to the **Oracle Database** capability that supports it, so learners can connect platform features to visible business outcomes.
 - Query row counts to understand the size of the retail dataset.
 
 
 ## Task 1: Inventory the retail object families
 
-Inventory the object families to confirm that the schema contains the tables, views, graph objects, vector artifacts, OML models, and PL/SQL tools used by later labs.
+Perform the following set of steps to confirm that the workshop schema contains the core retail tables, views, graph objects, vector artifacts, OML assets, and PL/SQL tools used by later decision workflows.
 
 1. Review the related application screen before you run the SQL.
 
@@ -79,7 +79,7 @@ Inventory the object families to confirm that the schema contains the tables, vi
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Area | Count |
     | --- | ---: |
@@ -92,9 +92,11 @@ Inventory the object families to confirm that the schema contains the tables, vi
 
 3. This inventory shows the database foundation you will use throughout the workshop: retail tables for operational data, semantic views for business-friendly questions, a property graph for creator influence, vector columns for meaning-based search, and PL/SQL functions for trusted agent actions.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Map retail outcomes to database features
 
-Use the capability map to connect each retail outcome to the database feature that supports it. This helps learners understand why each later SQL exercise exists.
+Perform the following set of steps to connect each retail outcome to the database capability that supports it, so learners understand why each later SQL exercise matters to the business story.
 
 1. Run this capability map.
 
@@ -116,7 +118,7 @@ Use the capability map to connect each retail outcome to the database feature th
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Outcome | DB Feature |
     | --- | --- |
@@ -135,7 +137,7 @@ Use the capability map to connect each retail outcome to the database feature th
 
 ## Task 3: Count the retail data groups
 
-Count the retail data groups to understand the scale of the seeded dataset and to give context for later dashboard, search, graph, spatial, OML, and agent results.
+Perform the following set of steps to measure the scale of the seeded retail dataset and give later KPI, search, graph, fulfillment, OML, and agent results the right business context.
 
 1. Run this row-count query.
 
@@ -154,7 +156,7 @@ Count the retail data groups to understand the scale of the seeded dataset and t
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Data Group | Rows |
     | --- | ---: |
@@ -170,6 +172,8 @@ Count the retail data groups to understand the scale of the seeded dataset and t
 
 
 2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 
