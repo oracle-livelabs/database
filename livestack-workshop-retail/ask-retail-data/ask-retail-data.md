@@ -15,8 +15,10 @@ Lab 9 builds on this foundation with **trusted agent tools**, where an AI agent 
 | Business Problem | Business users want plain-English answers, but the company must still know which data and SQL produced the answer. |
 | What You Will Prove | A trusted NL2SQL answer should map to approved views, readable columns, visible filters, and repeatable Oracle SQL. |
 | Database Capability | Semantic views, comments, and inspectable SQL provide the governed answer path behind natural-language questions. |
-| Business Takeaway | Ask Retail Data becomes useful when the answer is not a black box; it is traceable to database evidence. |
+| Outcome | Ask Retail Data becomes useful when the answer is not a black box; it is traceable to database evidence. |
 {: title="Trusted NL2SQL Story"}
+
+**Persona focus:** Business users want plain-English answers. Data and database teams need those answers to map back to approved views, visible filters, and SQL that can be checked.
 
 Estimated Time: **5 minutes**
 

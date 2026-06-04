@@ -6,6 +6,8 @@ Fulfillment is where customer experience and operating cost meet. A retailer may
 
 Oracle Spatial lets you keep those location-aware questions inside Oracle AI Database, next to the retail data the business already uses. In this lab, you work through a practical fulfillment scenario for a Los Angeles customer ordering `AllTerrain Hiking Boots`. You inspect the spatial data behind the **Intelligent Fulfillment Network** page, then use SQL to move from map data to a shipping decision.
 
+The business user sees a map and wants an answer: which center should ship this order? The technical challenge is that a useful answer needs more than a map. It needs customer location, fulfillment center location, delivery zones, service promises, product availability, and inventory thresholds in the same decision path.
+
 The story builds one step at a time: understand the retail locations, produce map-ready data, find nearby centers, check delivery coverage, and finally combine distance with available inventory.
 
 ### Operating Story
@@ -15,8 +17,10 @@ The story builds one step at a time: understand the retail locations, produce ma
 | Business Problem | The closest warehouse is not always the best fulfillment choice if delivery zones or product availability do not line up. |
 | What You Will Prove | Location, service zones, and inventory can be queried together to explain which fulfillment centers are practical choices. |
 | Database Capability | Oracle Spatial stores points and polygons, outputs GeoJSON, and calculates distance alongside relational inventory data. |
-| Business Takeaway | Fulfillment teams can choose faster and cheaper shipping options with evidence the business can inspect. |
+| Outcome | Fulfillment teams can choose faster and cheaper shipping options with evidence the business can inspect. |
 {: title="Intelligent Fulfillment Story"}
+
+**Persona focus:** Fulfillment planners want the best practical shipping choice. The technical team needs to combine customer location, delivery zones, fulfillment centers, and inventory in one queryable system.
 
 Estimated Time: **10 minutes**
 
@@ -40,6 +44,8 @@ Perform the following set of steps to see how the retail workshop stores locatio
     *Figure 1: Intelligent Fulfillment Network brings together inventory, centers, service areas, and demand geography.*
 
 2. Start with the business model behind the map.
+
+    Spatial data supports mapping, but it is more than a picture. Points and polygons are queryable database values. That means the same data can power a map, filter candidate locations, check delivery coverage, and join back to inventory and order tables.
 
     | Retail question | Table and column | Spatial shape |
     | --- | --- | --- |

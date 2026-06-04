@@ -13,8 +13,10 @@ After **Lab 4** shows what customers and creators are saying, this lab shows who
 | Business Problem | Seer Sporting Goods cannot understand creator influence by looking at isolated posts, products, or follower counts. |
 | What You Will Prove | Creator, brand, product, and post relationships can be traversed as paths instead of assembled through increasingly complex joins. |
 | Database Capability | Oracle Property Graph and SQL/PGQ `GRAPH_TABLE` let you query connected retail relationships as paths. |
-| Business Takeaway | Marketing teams can see how influence propagates through the creator network and identify paths worth acting on. |
+| Outcome | Marketing teams can see how influence propagates through the creator network and identify paths worth acting on. |
 {: title="Creator Influence Story"}
+
+**Persona focus:** The marketing team wants to know which creators can amplify a product or brand story. The technical team needs a simpler way to express relationship paths than writing longer chains of self-joins.
 
 Estimated Time: **10 minutes**
 
@@ -47,6 +49,8 @@ Perform the following set of steps to understand the graph model used for influe
     {: title="Influencer Network Graph Sources"}
 
     In relational form, those relationships live in normal tables with keys. In graph form, the same data can be queried as paths: creator to creator, creator to brand, post to product, or combinations of those relationships.
+
+    Conceptually, the graph definition tells Oracle which tables become vertices, which tables become edges, and which columns identify the endpoints of each edge. You do not need to recreate the graph in this short lab; the workshop seed has already created it so you can focus on the relationship question the business cares about.
 
 
 ## Task 2: Traverse creator relationships with PQL-style patterns
@@ -101,7 +105,7 @@ Perform the following set of steps to see why graph pattern matching is easier t
     MATCH (src IS influencer) -[e1 IS connects_to]-> (mid IS influencer) -[e2 IS connects_to]-> (dst IS influencer)
     ```
 
-    That is the core advantage for this lab. The database still returns SQL rows, but the relationship logic is written as a path instead of a growing chain of self-joins.
+    That is the core advantage for this lab. The database still returns SQL rows, but the relationship logic is written as a path instead of a growing chain of self-joins. For a technical team, this can mean less query complexity as the business asks richer relationship questions. For a marketing team, it means the result is easier to explain as a path through the creator network.
 
 3. Run this one-hop traversal.
 
@@ -207,7 +211,7 @@ Perform the following set of steps to see why graph pattern matching is easier t
 
     The result shows brand-connected creators and the creators they can directly reach. This matters because a brand partnership is not isolated to the creator who posted it. If that creator has strong network paths to other creators, the brand or product story may spread into adjacent communities.
 
-    Graph Studio, one of the tools included with Oracle Database, can visualize this kind of property graph path. A visual view of the rows above would show the brand node connected to promoter creator nodes, and those promoter nodes connected to the creators they can reach.
+    Graph Studio, one of the tools included with Oracle Database, can visualize this kind of property graph path. This lab stays SQL-first, but the same relationship paths can also be explored visually in a graph tool. A visual view of the rows above would show the brand node connected to promoter creator nodes, and those promoter nodes connected to the creators they can reach.
 
     ![Diagram showing ApexRide connected to promoter creators and reached creators](images/brand-propagation-graph-studio.svg " ")
 

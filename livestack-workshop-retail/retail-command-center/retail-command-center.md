@@ -6,6 +6,8 @@
 
 Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The updated runbook frames this scene for an operations leader or merchandising analyst who watches revenue, returns, demand spikes, social momentum, inventory exposure, and AI-assisted actions at the same time. In SQL Worksheet, you inspect the database queries behind those views.
 
+The technical challenge is usually integration. A team can spend a lot of time moving data between specialized systems, writing pipelines, and reconciling results before a business user sees one dashboard. This lab shows the simpler pattern: use familiar SQL over one converged database foundation so the command center can combine different kinds of retail evidence without turning the application into an integration project.
+
 ### Operating Story
 
 | Step | Retail focus |
@@ -13,8 +15,10 @@ Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-re
 | Business Problem | Seer Sporting Goods leaders need a daily triage view before demand spikes, returns, or inventory pressure become customer problems. |
 | What You Will Prove | Dashboard metrics, trending products, product detail, and revenue categories can be traced back to governed database evidence. |
 | Database Capability | SQL combines orders, order items, products, social posts, returns, inventory, and agent actions without moving data into a separate mart. |
-| Business Takeaway | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
+| Outcome | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
 {: title="Retail Command Center Story"}
+
+**Persona focus:** The operations leader wants one daily triage view. The application and database team needs to assemble that view without building fragile pipelines across separate systems for orders, returns, social demand, inventory, and agent activity.
 
 Estimated Time: **10 minutes**
 
@@ -40,7 +44,7 @@ Review dashboard metrics to connect the command center cards to trusted operatio
 
     Use this query to connect the dashboard cards to trusted operational data. A **scalar subquery** is a query inside a query and acts as a convenient way to return one value per dashboard card, such as orders, revenue, returns, demand spikes, or agent actions.
 
-    This block selects from `DUAL`, Oracle's one-row helper table, and uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
+    This block uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
 
     ```sql
     <copy>
@@ -50,8 +54,7 @@ Review dashboard metrics to connect the command center cards to trusted operatio
       (SELECT COUNT(*) FROM return_requests WHERE status <> 'Closed') AS "Open Returns",
       (SELECT NVL(ROUND(SUM(return_value), 2), 0) FROM return_requests WHERE status <> 'Closed') AS "Return Exposure",
       (SELECT COUNT(*) FROM social_posts WHERE momentum_flag IN ('viral','mega_viral')) AS "Demand Spikes",
-      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions"
-    FROM dual;
+      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions";
     </copy>
     ```
 
@@ -69,10 +72,6 @@ Review dashboard metrics to connect the command center cards to trusted operatio
 Review trending products to identify where social momentum may indicate a sales opportunity, inventory risk, merchandising action, or follow-up trend analysis.
 
 1. Use the live **Retail Command Center** context from **Figure 1** before you run the SQL.
-
-    ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
-
-    *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
 
     ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
 
@@ -124,14 +123,6 @@ Review trending products to identify where social momentum may indicate a sales 
 Connect product detail screens to database evidence to show that document-style application experiences can still come from governed relational data.
 
 1. Use the live **Retail Command Center** context from **Figure 1** as the visual anchor for product details and JSON Duality patterns.
-
-    ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
-
-    *Figure 3: Product detail connects the selected product to inventory and social evidence.*
-
-    ![Product JSON Duality view in the product detail modal](images/product-json-duality.png " ")
-
-    *Figure 4: The same product story can also be displayed as document-shaped JSON.*
 
     ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
 

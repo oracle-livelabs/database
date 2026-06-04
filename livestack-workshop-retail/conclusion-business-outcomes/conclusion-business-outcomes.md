@@ -14,8 +14,10 @@ The practical point is simple: Oracle Database 26ai backs one connected retail d
 | Business Problem | Retail teams lose speed and trust when dashboards, AI signals, fulfillment logic, order evidence, and agent actions live in separate systems. |
 | What You Will Prove | The workshop connects each retail decision back to database evidence that can be queried, secured, and explained. |
 | Database Capability | Oracle AI Database 26ai brings multiple data models, AI-ready functions, analytics, security, and audit history into one operating foundation. |
-| Business Takeaway | Seer Sporting Goods can move from feature-by-feature demos to one governed retail decision loop. |
+| Outcome | Seer Sporting Goods can move from feature-by-feature demos to one governed retail decision loop. |
 {: title="Workshop Outcome Story"}
+
+**Persona focus:** Business leaders care about faster decisions and explainable outcomes. Technical teams care about reducing integration work while keeping data, AI, security, and audit evidence governed in one database foundation.
 
 Estimated Time: **5 minutes**
 
@@ -59,7 +61,18 @@ Use this final task to connect the technical work to the business outcome.
 
     The power of the workshop is not any single feature in isolation. The power is that the features work together around the same operational data. Oracle AI Database 26ai keeps documents, vectors, graphs, spatial data, machine learning, SQL, security, and agent evidence close to the source of truth. That means fewer copies, fewer disconnected systems, and a clearer path from business question to database evidence to action.
 
-3. The operating pattern
+3. Outcomes by persona
+
+    | Persona | What changed by the end of the workshop |
+    | --- | --- |
+    | Business leader | Sees one retail decision loop instead of disconnected feature demos. |
+    | Merchandising and marketing analyst | Can connect demand, creator influence, product fit, and inventory pressure. |
+    | Fulfillment planner | Can explain shipping choices with distance, service zones, and available inventory. |
+    | Application or database developer | Can support document, vector, graph, spatial, ML, and agent patterns without moving the source data into separate systems. |
+    | Data and AI practitioner | Can keep model scoring, semantic search, trusted answers, and agent evidence close to governed operational data. |
+    {: title="Workshop Outcomes by Persona"}
+
+4. The operating pattern
 
     The retail team does not just get a dashboard, a model, a graph, or an agent. It gets a governed decision loop: observe demand, understand why it is happening, decide how to respond, act through trusted database-backed tools, and prove what happened afterward.
 

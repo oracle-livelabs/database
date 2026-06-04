@@ -4,7 +4,7 @@
 
 This lab starts the hands-on database work by confirming that the retail foundation is present and ready. Learners inspect the objects, views, graph metadata, vector artifacts, OML models, and PL/SQL tools that support the Seer Sporting Goods workflow, so later results can be trusted as database-backed evidence.
 
-The LiveStack application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
+The LiveStack Demo application shows what the Data Foundation page loads or restores. The updated runbook emphasizes that the load prepares products, customers, orders, returns, customer signals, fulfillment geography, vector embeddings, machine learning outputs, and agent audit history. In SQL Worksheet, you inspect the same foundation as database objects, views, graph metadata, vector artifacts, and PL/SQL tools.
 
 ### Operating Story
 
@@ -13,8 +13,10 @@ The LiveStack application shows what the Data Foundation page loads or restores.
 | Business Problem | Seer Sporting Goods cannot trust later dashboards, predictions, or agent outputs unless the shared retail data foundation is complete. |
 | What You Will Prove | The schema contains the tables, views, vector artifacts, graph objects, OML models, and PL/SQL tools used by the rest of the workshop. |
 | Database Capability | Oracle catalog views expose the governed database objects that support the retail workflow. |
-| Business Takeaway | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
+| Outcome | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
 {: title="Retail Data Foundation Story"}
+
+**Persona focus:** The business user wants to know that later dashboards, predictions, and agent results are trustworthy. The technical user confirms that the shared schema contains the database objects the application depends on.
 
 Estimated Time: **10 minutes**
 
@@ -28,7 +30,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Inventory the retail object families
 
-Inventory the object families to confirm that the schema contains the tables, views, graph objects, vector artifacts, OML models, and PL/SQL tools used by later labs.
+Inventory the object families to confirm that the workshop is starting from a complete, governed retail foundation. This is not the business outcome by itself; it is the evidence check that makes the later labs credible.
 
 1. Review the related application screen before you run the SQL.
 
@@ -96,33 +98,14 @@ Inventory the object families to confirm that the schema contains the tables, vi
 
 Use the capability map to connect each retail outcome to the database feature that supports it. This helps learners understand why each later SQL exercise exists.
 
-1. Run this capability map.
+1. Review this capability map.
 
-    This block uses a small `UNION ALL` result set as a capability map. It connects each retail business outcome to the Oracle Database feature that supports it, so each later lab has a clear technical purpose.
-
-    ```sql
-    <copy>
-    SELECT 'Retail command center' AS "Outcome",
-           'Converged SQL over orders, inventory, returns, creators, and audit data' AS "DB Feature"
-    FROM dual
-        UNION ALL SELECT 'Unified order intelligence', 'JSON Relational Duality and SQL/JSON' FROM dual
-    UNION ALL SELECT 'Governed regional access', 'Virtual Private Database policies' FROM dual
-    UNION ALL SELECT 'Customer trend signals', 'AI Vector Search with MiniLM L12 v2 and VECTOR_DISTANCE' FROM dual
-    UNION ALL SELECT 'Creator influence network', 'Property Graph and GRAPH_TABLE SQL/PGQ' FROM dual
-    UNION ALL SELECT 'Intelligent fulfillment', 'Oracle Spatial SDO_GEOMETRY, GeoJSON, and distance analysis' FROM dual
-    UNION ALL SELECT 'Retail OML analytics', 'DBMS_DATA_MINING models and SQL scoring functions' FROM dual
-    UNION ALL SELECT 'Ask Retail Data', 'Semantic views and comments that expose governed business meaning' FROM dual
-    UNION ALL SELECT 'Retail AI Agent Console', 'PL/SQL tools, JSON audit payloads, and agent action history' FROM dual;
-    </copy>
-    ```
-
-    Expected output:
+    The table connects each retail business outcome to the Oracle Database feature that supports it, so each later lab has a clear technical purpose.
 
     | Outcome | DB Feature |
     | --- | --- |
     | Retail command center | Converged SQL over orders, inventory, returns, creators, and audit data |
     | Unified order intelligence | JSON Relational Duality and SQL/JSON |
-    | Governed regional access | Virtual Private Database policies |
     | Customer trend signals | AI Vector Search with MiniLM L12 v2 and `VECTOR_DISTANCE` |
     | Creator influence network | Property Graph and `GRAPH_TABLE` SQL/PGQ |
     | Intelligent fulfillment | Oracle Spatial `SDO_GEOMETRY`, GeoJSON, and distance analysis |

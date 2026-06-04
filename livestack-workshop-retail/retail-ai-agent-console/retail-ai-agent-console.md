@@ -13,8 +13,10 @@ This lab does not require a configured in-database agent framework. Instead, it 
 | Business Problem | AI agents can create risk if they answer from guesses, call unreviewed logic, or leave no record of what they did. |
 | What You Will Prove | Agent-facing tools can be approved database functions, and agent activity can be inspected as durable database rows. |
 | Database Capability | PL/SQL tool functions and `AGENT_ACTIONS` provide controlled actions and auditable history. |
-| Business Takeaway | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
+| Outcome | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
 {: title="Trusted Agent Tools Story"}
+
+**Persona focus:** Business users want AI assistance they can trust. Application and database teams need agent actions to use approved tools, return grounded evidence, and leave durable history.
 
 Estimated Time: **5 minutes**
 
@@ -73,12 +75,11 @@ Perform the following set of steps to call one approved tool directly.
 
 1. Run this query.
 
-    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats the answer. The query selects from `DUAL` because the function returns one response, not a table of rows.
+    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats one response. You call the approved function directly, the same way an agent-facing application could call a reviewed database tool.
 
     ```sql
     <copy>
-    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory"
-    FROM dual;
+    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory";
     </copy>
     ```
 
