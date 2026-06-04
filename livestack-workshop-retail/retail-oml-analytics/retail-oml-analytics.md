@@ -277,7 +277,7 @@ Perform the following set of steps to combine model output with current inventor
     </copy>
     ```
 
-    Expected output:
+    Expected output from the current workshop dataset. Probability values and row order can vary if the model is rebuilt, but the important pattern is the same: the result combines `Predicted = SURGE` with `Risk = AT_RISK`.
 
     | Product | Center | On Hand | Reorder At | Risk | Predicted | Surge Prob |
     | --- | --- | ---: | ---: | --- | --- | ---: |
