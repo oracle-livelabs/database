@@ -12,6 +12,8 @@ In this lab, you use the **Retail OML Analytics** workflow to answer a practical
 
 *Figure 1: Retail data, feature views, OML models, SQL scoring, and business action stay connected inside Oracle AI Database.*
 
+This lab starts from models that were already created by the workshop seed. That keeps the exercise focused on the operational workflow a planner cares about: inspect the model and feature views, score current retail rows, and connect the prediction to inventory action. In a longer OML workshop, you would also walk through model creation and training. Here, you use the trained model the way an application or analyst would use it after deployment.
+
 ### Operating Story
 
 | Step | Retail focus |
@@ -19,8 +21,10 @@ In this lab, you use the **Retail OML Analytics** workflow to answer a practical
 | Business Problem | A demand surge can turn into a stockout if merchandising waits for lagging reports. |
 | What You Will Prove | In-database models can score product surge risk and connect that prediction to current inventory pressure. |
 | Database Capability | Oracle Machine Learning for SQL stores models in the database and scores feature views with SQL functions. |
-| Business Takeaway | Planners get a short action list: replenish, protect inventory, adjust promotions, or route demand away from constrained centers. |
+| Outcome | Planners get a short action list: replenish, protect inventory, adjust promotions, or route demand away from constrained centers. |
 {: title="Retail OML Story"}
+
+**Persona focus:** The planner wants to act before a demand surge causes stockouts. The technical team needs model scoring to run close to governed feature views and current inventory data.
 
 Estimated Time: **10 minutes**
 
@@ -45,6 +49,8 @@ Perform the following set of steps to confirm that predictive analytics are buil
 2. Run this model inventory.
 
     Oracle Machine Learning for SQL models are first-class database objects. This query reads `ALL_MINING_MODELS` to show the models that the current schema can score. The mining function tells you the type of machine learning problem, such as classification, regression, or clustering. The algorithm shows the method used to build the model.
+
+    Think of this as the model catalog check. Before using a prediction in an operational workflow, confirm which models exist, what kind of question each model answers, and whether the model can be scored from SQL.
 
     ```sql
     <copy>
@@ -277,7 +283,7 @@ Perform the following set of steps to combine model output with current inventor
     </copy>
     ```
 
-    **Expected output:**
+    Expected output from the current workshop dataset. Probability values and row order can vary if the model is rebuilt, but the important pattern is the same: the result combines `Predicted = SURGE` with `Risk = AT_RISK`.
 
     | Product | Center | On Hand | Reorder At | Risk | Predicted | Surge Prob |
     | --- | --- | ---: | ---: | --- | --- | ---: |

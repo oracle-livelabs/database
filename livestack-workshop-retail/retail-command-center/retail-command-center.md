@@ -6,6 +6,8 @@
 
 **Oracle AI Database** keeps operational, analytical, and AI-ready retail evidence close to the same schema. Frame this scene around the business user who needs one trusted view of revenue, demand signals, return exposure, and agent activity without stitching together separate systems.
 
+The technical challenge is usually integration. A team can spend a lot of time moving data between specialized systems, writing pipelines, and reconciling results before a business user sees one dashboard. This lab shows the simpler pattern: use familiar SQL over one converged database foundation so the command center can combine different kinds of retail evidence without turning the application into an integration project.
+
 ### Operating Story
 
 | Step | Retail focus |
@@ -13,8 +15,10 @@
 | Business Problem | Seer Sporting Goods leaders need a daily triage view before demand spikes, returns, or inventory pressure become customer problems. |
 | What You Will Prove | Dashboard metrics, trending products, product detail, and revenue categories can be traced back to governed database evidence. |
 | Database Capability | SQL combines orders, order items, products, social posts, returns, inventory, and agent actions without moving data into a separate mart. |
-| Business Takeaway | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
+| Outcome | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
 {: title="Retail Command Center Story"}
+
+**Persona focus:** The operations leader wants one daily triage view. The application and database team needs to assemble that view without building fragile pipelines across separate systems for orders, returns, social demand, inventory, and agent activity.
 
 Estimated Time: **10 minutes**
 
@@ -40,7 +44,7 @@ Perform the following set of steps to connect command-center cards to the operat
 
     Use this query to connect each dashboard card to trusted operational data. Explain **scalar subqueries** as a practical way to return one business metric per card, such as orders, revenue, open returns, demand spikes, or agent actions.
 
-    This block selects from `DUAL`, Oracle's one-row helper table, and uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
+    This block uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
 
     ```sql
     <copy>
@@ -50,8 +54,7 @@ Perform the following set of steps to connect command-center cards to the operat
       (SELECT COUNT(*) FROM return_requests WHERE status <> 'Closed') AS "Open Returns",
       (SELECT NVL(ROUND(SUM(return_value), 2), 0) FROM return_requests WHERE status <> 'Closed') AS "Return Exposure",
       (SELECT COUNT(*) FROM social_posts WHERE momentum_flag IN ('viral','mega_viral')) AS "Demand Spikes",
-      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions"
-    FROM dual;
+      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions";
     </copy>
     ```
 
@@ -71,10 +74,6 @@ Perform the following set of steps to connect command-center cards to the operat
 Perform the following set of steps to identify where social momentum may point to a sales opportunity, inventory risk, merchandising action, or follow-up demand analysis.
 
 1. Use the live **Retail Command Center** context from **Figure 1** before you run the SQL.
-
-    ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
-
-    *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
 
     ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
 

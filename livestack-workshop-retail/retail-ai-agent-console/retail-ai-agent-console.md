@@ -13,8 +13,10 @@ This lab does not require a live agent framework. Emphasize that the lesson is a
 | Business Problem | AI agents can create risk if they answer from guesses, call unreviewed logic, or leave no record of what they did. |
 | What You Will Prove | Agent-facing tools can be approved database functions, and agent activity can be inspected as durable database rows. |
 | Database Capability | PL/SQL tool functions and `AGENT_ACTIONS` provide controlled actions and auditable history. |
-| Business Takeaway | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
+| Outcome | Retail agents become enterprise-ready when actions are grounded, limited, and reviewable. |
 {: title="Trusted Agent Tools Story"}
+
+**Persona focus:** Business users want AI assistance they can trust. Application and database teams need agent actions to use approved tools, return grounded evidence, and leave durable history.
 
 Estimated Time: **5 minutes**
 
@@ -75,12 +77,11 @@ Perform the following set of steps to call one approved tool directly.
 
 1. Run this query.
 
-    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats the answer. The query selects from `DUAL` because the function returns one response, not a table of rows.
+    `CHECK_PRODUCT_INVENTORY` reads current inventory records and formats one response. You call the approved function directly, the same way an agent-facing application could call a reviewed database tool.
 
     ```sql
     <copy>
-    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory"
-    FROM dual;
+    SELECT SUBSTR(check_product_inventory('AllTerrain Hiking Boots'), 1, 500) AS "Inventory";
     </copy>
     ```
 
@@ -125,6 +126,15 @@ Perform the following set of steps to see how agent workflows become reviewable 
 2. The larger lesson is that enterprise agents need more than prompts. They need approved tools, governed data, and an audit trail that makes actions observable after the conversation ends.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Verify live output before presenting, then explain the business takeaway.
+## Learn More: In-Database Agents
+
+This lab keeps the agent pattern intentionally small: approved PL/SQL tools, grounded evidence, and an action history that can be reviewed after the request completes.
+
+For a deeper hands-on agentic workflow, including how database-managed agents use tasks and tools, continue with:
+
+- [Build and run agentic workflows with Oracle Autonomous AI Database](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4229)
+- [Build Your Agentic Solution using Oracle Autonomous AI Database Select AI Agent](https://blogs.oracle.com/machinelearning/build-your-agentic-solution-using-oracle-adb-select-ai-agent)
+- [Announcing Oracle Select AI Pre-Built AI Agents](https://blogs.oracle.com/machinelearning/announcing-oracle-select-ai-pre-built-ai-agents)
 
 ## Acknowledgements
 

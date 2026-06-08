@@ -13,10 +13,13 @@ Retail teams make better decisions when operational evidence stays close to the 
 | Business Problem | Seer Sporting Goods needs to make faster retail decisions without spreading product, order, signal, fulfillment, analytics, and agent evidence across disconnected systems. |
 | What You Will Prove | One Oracle AI Database foundation can support the retail decision loop from dashboard awareness to demand detection, fulfillment, order intelligence, prediction, NL2SQL, and agent tools. |
 | Database Capability | Relational SQL, JSON Relational Duality, vectors, property graph, spatial, OML, semantic views, PL/SQL tools, and audit records work together in one governed database. |
-| Business Takeaway | Retail teams can move from fragmented feature demos to one explainable operating pattern: observe, understand, decide, act, and review. |
+| Outcome | Retail teams can move from fragmented feature demos to one explainable operating pattern: observe, understand, decide, act, and review. |
 {: title="Workshop Operating Story"}
 
 In this workshop, you use **Database Actions SQL Worksheet** to inspect the database objects behind the **Seer Sporting Goods Retail LiveStack**. The application shows the business workflow, and each lab shows how **Oracle AI Database 26ai** keeps that workflow grounded in governed operational evidence.
+**Persona focus:** The business persona wants faster, trusted retail decisions. The technical persona is the application, database, or data engineer who has to deliver those decisions without stitching together many disconnected systems.
+
+In this workshop, you use Database Actions SQL Worksheet to inspect the database objects behind the Seer Sporting Goods Retail LiveStack Demo. The application shows the retail workflow; the labs show how **Oracle AI Database 26ai** supports it.
 
 The same database stores the operational data, JSON documents, vectors, graph relationships, spatial locations, OML models, PL/SQL tools, and audit records used in the labs. This lets you follow the retail decision path without switching between disconnected systems.
 
@@ -46,7 +49,7 @@ Estimated Workshop Time: **90 minutes**
 
 ## Application Screens
 
-These screenshots come from the running Seer Sporting Goods Retail LiveStack. They show the application flow that the SQL labs explain.
+These screenshots come from the running Seer Sporting Goods Retail LiveStack Demo. They show the application flow that the SQL labs explain.
 
 ![Seer Sporting Goods LiveStack welcome page](images/seer-sporting-goods-welcome.png " ")
 

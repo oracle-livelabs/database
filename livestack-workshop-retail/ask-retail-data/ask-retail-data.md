@@ -15,8 +15,10 @@ Lab 9 builds on this foundation by showing how the same governance pattern exten
 | Business Problem | Business users want plain-English answers, but the company must still know which data and SQL produced the answer. |
 | What You Will Prove | A trusted NL2SQL answer should map to approved views, readable columns, visible filters, and repeatable Oracle SQL. |
 | Database Capability | Semantic views, comments, and inspectable SQL provide the governed answer path behind natural-language questions. |
-| Business Takeaway | Ask Retail Data becomes useful when the answer is not a black box; it is traceable to database evidence. |
+| Outcome | Ask Retail Data becomes useful when the answer is not a black box; it is traceable to database evidence. |
 {: title="Trusted NL2SQL Story"}
+
+**Persona focus:** Business users want plain-English answers. Data and database teams need those answers to map back to approved views, visible filters, and SQL that can be checked.
 
 Estimated Time: **5 minutes**
 
@@ -132,6 +134,15 @@ Perform the following set of steps to evaluate whether an NL2SQL answer is groun
 The larger lesson is that NL2SQL is not just about generating SQL. It is about generating SQL that the business can inspect, run again, and trust.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+## Learn More: Select AI
+
+This lab uses a short trusted SQL pattern so you can see what a good natural-language-to-SQL answer should look like: approved data paths, visible filters, and results that can be traced back to governed Oracle data.
+
+For a deeper hands-on walkthrough of Select AI, including configuring AI profiles, asking natural-language questions, showing generated SQL, and using Select AI directly with Autonomous Database, continue with:
+
+- [Chat with your data in Autonomous Database using generative AI](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4222)
+- [Introducing Select AI - Natural Language to SQL Generation on Autonomous Database](https://blogs.oracle.com/database/post/introducing-natural-language-to-sql-generation-on-autonomous-database)
+- [Building AI Apps with Select AI and Virtual Private Database](https://blogs.oracle.com/machinelearning/building-ai-apps-with-select-ai-and-virtual-private-database)
 
 ## Acknowledgements
 

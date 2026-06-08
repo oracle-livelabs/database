@@ -13,8 +13,10 @@
 | Business Problem | Shoppers and creators describe products in natural language that rarely matches exact catalog terms. |
 | What You Will Prove | A shopper phrase can match relevant products and social posts by meaning, not just keywords. |
 | Database Capability | Oracle AI Vector Search stores embeddings and compares vectors with SQL distance functions. |
-| Business Takeaway | Merchandising teams can detect demand and product fit from language signals while the evidence stays in the retail database. |
+| Outcome | Merchandising teams can detect demand and product fit from language signals while the evidence stays in the retail database. |
 {: title="Customer Trend Signals Story"}
+
+**Persona focus:** Merchandising and marketing teams want to understand shopper intent and social language. The technical team needs to compare that language to product data without sending sensitive catalog or signal data to a separate search stack.
 
 Estimated Time: **10 minutes**
 
@@ -39,11 +41,11 @@ Perform the following set of steps to understand how natural language, product d
 
     The page shows two connected ideas. **Semantic Product Discovery** uses vector search to match natural language to catalog items. **Social Trend Intelligence** connects product demand to creator posts, platforms, and social momentum.
 
-2. Understand why the workshop uses `ALL_MINILM_L12_V2`.
+2. Understand the embedding model used in this lab.
 
     The workshop seed loads Oracle's ONNX version of `all-MiniLM-L12-v2` into the database as `ADMIN.ALL_MINILM_L12_V2`. For this audience, lead with why that matters: the model is already available in the environment, so learners can move directly from plain-language retail questions to semantic search without leaving the database workflow.
 
-    That makes it useful for demos and workshops. It is compact enough for quick hands-on labs, but still designed for sentence similarity and text classification scenarios. In this lab, you use it to turn natural language search phrases, product descriptions, and social post text into vectors that can be compared with SQL.
+    In this lab, you use it to turn natural language search phrases, product descriptions, and social post text into vectors that can be compared with SQL. The important learning point is not the specific model name; it is the architecture. The model runs in the database, the vectors are stored in the database, and the search runs against governed retail data without sending the source text to a separate embedding service.
 
 ## Task 2: Create an embedding from natural language
 
@@ -54,8 +56,6 @@ Perform the following set of steps to see how Oracle AI Database turns natural l
     Vector search starts by converting text into numbers. An embedding is a vector that captures the meaning of the text well enough that similar phrases end up close together in vector space. In this first step, you are not searching yet. You are just asking the database to show what it creates from one natural language phrase.
 
     `DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING` calls the embedding model stored in Oracle AI Database and returns a `VECTOR`. Here, the provider is `database` because the MiniLM ONNX model is already loaded in this workshop environment.
-
-    `DUAL` is Oracle's built-in one-row table. In a demo like this, it acts like a temporary source row when you want to start with a literal value instead of data from an application table. Here it produces one row: the search phrase and its generated vector.
 
     ```sql
     <copy>
@@ -69,8 +69,7 @@ Perform the following set of steps to see how Oracle AI Database turns natural l
              ),
              80,
              1
-           ) || ' ...' AS "Vector Preview"
-    FROM dual;
+           ) || ' ...' AS "Vector Preview";
     </copy>
     ```
 
@@ -94,7 +93,7 @@ Perform the following set of steps to see how vector distance turns meaning into
 
     `VECTOR_DISTANCE` measures how close two vectors are in meaning. State the retail takeaway first: a lower cosine distance means the product is more likely to match the shopper's intent, even when the product name does not reuse the same words.
 
-    The `CROSS JOIN` attaches one generated query vector to the product rows being compared. The inner `SELECT ... FROM dual` creates that single query-vector row from a natural language phrase at runtime.
+    The `CROSS JOIN` attaches one generated query vector to the product rows being compared. The inner `SELECT` creates that single query-vector row from a natural language phrase at runtime.
 
     ```sql
     <copy>
@@ -122,7 +121,6 @@ Perform the following set of steps to see how vector distance turns meaning into
                'summer running shoes lightweight breathable',
                JSON('{"provider":"database","model":"ADMIN.ALL_MINILM_L12_V2"}')
              ) AS query_vector
-      FROM dual
     ) q
 
     -- Rank the known products from closest meaning to farthest meaning.
@@ -164,7 +162,6 @@ Perform the following set of steps to turn the distance calculation into a seman
                'comfortable shoes for walking all day',
                JSON('{"provider":"database", "model":"ADMIN.ALL_MINILM_L12_V2"}')
              ) AS query_vector
-      FROM dual
     )
     SELECT p.product_name AS "Product",
            p.category AS "Category",
@@ -204,7 +201,6 @@ Perform the following set of steps to turn the distance calculation into a seman
                'sustainable fashion eco friendly clothing',
                JSON('{"provider":"database", "model":"ADMIN.ALL_MINILM_L12_V2"}')
              ) AS query_vector
-      FROM dual
     )
     SELECT p.product_name AS "Product",
            p.category AS "Category",

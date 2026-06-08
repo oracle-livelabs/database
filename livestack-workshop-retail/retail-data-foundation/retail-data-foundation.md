@@ -13,8 +13,10 @@ The **LiveStack** application shows what the **Data Foundation** page loads or r
 | Business Problem | Seer Sporting Goods cannot trust later dashboards, predictions, or agent outputs unless the shared retail data foundation is complete. |
 | What You Will Prove | The schema contains the tables, views, vector artifacts, graph objects, OML models, and PL/SQL tools used by the rest of the workshop. |
 | Database Capability | Oracle catalog views expose the governed database objects that support the retail workflow. |
-| Business Takeaway | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
+| Outcome | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
 {: title="Retail Data Foundation Story"}
+
+**Persona focus:** The business user wants to know that later dashboards, predictions, and agent results are trustworthy. The technical user confirms that the shared schema contains the database objects the application depends on.
 
 Estimated Time: **10 minutes**
 
@@ -98,7 +100,7 @@ Perform the following set of steps to confirm that the workshop schema contains 
 
 Perform the following set of steps to connect each retail outcome to the database capability that supports it, so learners understand why each later SQL exercise matters to the business story.
 
-1. Run this capability map.
+1. Review this capability map.
 
     This block uses a small `UNION ALL` result set as a capability map. It connects each retail business outcome to the Oracle Database feature that supports it, so each later lab has a clear technical purpose.
 
@@ -124,7 +126,6 @@ Perform the following set of steps to connect each retail outcome to the databas
     | --- | --- |
     | Retail command center | Converged SQL over orders, inventory, returns, creators, and audit data |
     | Unified order intelligence | JSON Relational Duality and SQL/JSON |
-    | Governed regional access | Virtual Private Database policies |
     | Customer trend signals | AI Vector Search with MiniLM L12 v2 and `VECTOR_DISTANCE` |
     | Creator influence network | Property Graph and `GRAPH_TABLE` SQL/PGQ |
     | Intelligent fulfillment | Oracle Spatial `SDO_GEOMETRY`, GeoJSON, and distance analysis |
