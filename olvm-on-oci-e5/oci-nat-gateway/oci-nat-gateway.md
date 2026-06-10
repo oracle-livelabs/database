@@ -40,21 +40,21 @@ This lab assumes you have:
 
 1. From your browser, sign in to OCI.
 
-    ![OCI login.](images/oci-login.png)
+    ![Show OCI login](images/oci-login.png "Show OCI login")
 
 
 2. From the OCI Console navigation menu, click **Networking -> Virtual Cloud Networks**.
 
-    ![The OCI Console navigation menu highlights Virtual Cloud Networks under Networking.](images/oci-home-menu-vcn.png)
+    ![Show OCI Console navigation menu](images/oci-home-menu-vcn.png "how OCI Console navigation menu")
 
 3. Click the name of your Virtual Cloud Network (VCN) in the table. Then click the **Gateway** tab.
     - **Name:** `OLV-VCN`
 
-    ![The Virtual Cloud Networks page lists the VCN used by the lab.](images/oci-vcn.png)
+    ![Show Virtual Cloud Networks page lists](images/oci-vcn.png "Show Virtual Cloud Networks page lists")
 
 4. From the `OLV-VCN` `Gateways page` click **NAT Gateways** tab.
 
-    ![Show the NAT Gateways option.](images/nat-gateway.png)
+    ![Show the NAT Gateways option](images/nat-gateway.png "Show the NAT Gateways option")
 
 5. Click **Create NAT Gateway**.
 
@@ -72,7 +72,7 @@ This lab assumes you have:
 
 1. From the `OLV-VCN` page click **Routing** tab.
 
-    ![Show the NAT Gateways option.](images/route-tables.png)
+    ![Show the NAT Gateways option](images/route-tables.png "Show the NAT Gateways option")
 
 2. Click **Create Route Table**.
 
@@ -94,16 +94,16 @@ This lab assumes you have:
 
 1. From the `OLV-VCN` page click **VLANs** tab, then click the name of the VLAN in the table.
 
-    ![Show the VLANs page for the OLVM network.](images/oci-vcn-vlan-list.png)
+    ![Show the VLANs page for the OLVM network](images/oci-vcn-vlan-list.png "Show the VLANs page for the OLVM network)
 
 
 2. Click **Edit**.
 
-    ![Show the VLANs page for the OLVM network.](images/oci-vcn-vlan-detail.png)
+    ![Show the VLANs page for the OLVM network](images/oci-vcn-vlan-detail.png "Show the VLANs page for the OLVM network")
 
 3. Under **Route Table**, select `vlan-route-table`.
 
-    ![Show the Route Table selection field.](images/edit-vlan.png)
+    ![Show the Route Table selection field](images/edit-vlan.png "Show the Route Table selection field")
 
 4. Click **Save Changes**.
 
@@ -148,7 +148,7 @@ The NAT Gateway only allows the VMs to reach the internet; it does not open a pa
 
     The name lookup and `curl` command should succeed. If SSH through the KVM host works but these commands fail, the VM is alive and the remaining issue is usually the VLAN route table association or NAT Gateway route rule.
 
-    ![VLAN VM connect result.](images/vlan-vm-test.png)
+    ![Show VLAN VM connect result](images/vlan-vm-test.png "how VLAN VM connect result")
 
 6. Exit the VM:
 
@@ -166,6 +166,8 @@ At this point, you should have:
 - Associated the route table with the VLAN used by the OLVM VMs
 - Verified that a VLAN VM can be reached through its KVM host
 - Verified that the VLAN VM has outbound internet access through the NAT Gateway
+
+You may now **proceed to the next lab**
 
 ## Acknowledgements
 

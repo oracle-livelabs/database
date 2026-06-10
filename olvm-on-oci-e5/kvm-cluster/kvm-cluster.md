@@ -91,7 +91,7 @@ This lab assumes you have:
 
 2. Navigate to **Compute -> Hosts**.
 
-    ![The OLVM Administration Portal showing the Hosts pane with both KVM hosts listed.](images/olvm-admin-portal.png)
+    ![Show OLVM Administration Portal](images/olvm-admin-portal.png "Show OLVM Administration Portal")
 
 3. Click **New**.
 
@@ -214,7 +214,7 @@ This lab assumes you have:
 
 8. Wait for `olkvm02` to show status **Up** before you continue.
 
-    ![The OLVM management portal showing the host status transitions during installation.](images/completed-hosts.png)
+    ![Show OLVM management portal  with both active kvm host](images/completed-hosts.png "Show OLVM management portal  with both active kvm host")
 
     **Expected time:** 10-20 minutes.
 
@@ -230,6 +230,8 @@ At this point, you should have:
 - No host installation tasks still running
 
 You are ready for Lab 4 only when all checkpoint items above are complete.
+
+You may now **proceed to the next lab**
 
 ## Learn More
 

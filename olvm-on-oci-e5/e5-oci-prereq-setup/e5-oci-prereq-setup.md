@@ -278,6 +278,8 @@ Before setup, confirm that you have:
 
 4. Confirm learners have the correct private key or approved SSH access method before class begins.
 
+You may now **proceed to the next lab**
+
 ## Acknowledgements
 
 - **Author** - Shawn Kelley, Perside Foster

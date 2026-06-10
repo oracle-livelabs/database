@@ -63,13 +63,13 @@ This lab assumes you have:
 
 4. Click **Setup Host Networks**.
 
-    ![Setup Host Network](images/olvm-setup-host-networks.png)
+    ![Show Host Network dialog](images/olvm-setup-host-networks.png "Show Host Network dialog")
 
 5. Drag `l2-vm-network` from **Unassigned Logical Networks** on the left side into the physical interface box on the right side (for example, `ens5`).
 
     > **Tip:** Look for the interface that does **not** already have `ovirtmgmt` assigned to it. That is the correct interface for VM traffic.
 
-    ![The Setup Host Networks dialog after l2-vm-network has been dragged to the physical interface.](images/olvm-setup-host-networks-assigned.png)
+    ![Show Host Networks dialog after l2-vm-network setup](images/olvm-setup-host-networks-assigned.png "Show Host Networks dialog after l2-vm-network setup")
 
 6. In the same **Setup Host Networks** dialog, configure the `l2-vm-network` address for `olkvm01`.
 
@@ -171,7 +171,7 @@ This lab assumes you have:
     <copy>/tmp</copy>
     ```
 
-    ![Import Template dialog with the File Path.](images/olvm-import-templates.png)
+    ![Show Import Template dialog with the File Path](images/olvm-import-templates.png "Show Import Template dialog with the File Path")
 
 6. Click **Load**.
 
@@ -346,6 +346,8 @@ At this point, you should have:
 - Verified `ol9-vm1` can reach its KVM host on `l2-vm-network`
 
 You are ready for Lab 5 only when all checkpoint items above are complete.
+
+You may now **proceed to the next lab**
 
 ## Learn More
 

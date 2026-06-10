@@ -327,6 +327,8 @@ At this point, you should have verified:
 
 You are ready for Lab 2 only after all checkpoint items above are complete.
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 - Oracle Linux Virtualization Manager install lab (official): https://docs.oracle.com/en/learn/olvm-install/index.html

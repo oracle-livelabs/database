@@ -100,7 +100,7 @@ This lab assumes you have:
 
 3. Go to **Administration** → **Users**.
 
-    ![The OLVM Administration Portal showing the Users pane under the Administration menu.](images/olvm-admin-portal.png)
+    ![Show OLVM Administration Portal with Users pane](images/olvm-admin-portal.png "Show OLVM Administration Portal with Users pane")
 
 4. Under **Search** select **internalsso (internalkeycloak-authz)**
 
@@ -222,6 +222,8 @@ At this point, you should have:
 - A local internal user created with `ovirt-aaa-jdbc-tool`
 - A role assigned to the local user
 - Verified login and access for both user types
+
+You may now **proceed to the next lab**
 
 ## Learn More
 

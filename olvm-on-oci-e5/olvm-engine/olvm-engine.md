@@ -195,7 +195,7 @@ The OLVM Administration Portal must be accessed using the engine's fully qualifi
 
     For example: `https://olvm.pub.olv.oraclevcn.com/ovirt-engine`
 
-    ![The OLVM welcome page showing the Engine CA Certificate and Administration Portal links.](images/olvm-welcome.png)
+    ![Show OLVM welcome page showing the Engine CA Certificate](images/olvm-welcome.png "Show OLVM welcome page showing the Engine CA Certificate")
 
 3. Your browser displays a certificate warning because the lab uses a self-signed certificate. Click **Advanced -> Accept the Risk and Continue** (Firefox) or **Advanced -> Proceed** (Chrome/Edge).
 
@@ -226,7 +226,7 @@ The OLVM Administration Portal must be accessed using the engine's fully qualifi
 
     The Administration Portal should open successfully. If the page is still starting, wait 1-2 minutes and refresh once.
 
-    ![The OLVM Administration Portal dashboard after successful login.](images/olvm-admin-portal.png)
+    ![Show OLVM Administration Portal dashboard after successful login](images/olvm-admin-portal.png "Show OLVM Administration Portal dashboard after successful login")
 
 ## Deploy OLVM Engine Checkpoint
 
@@ -238,6 +238,8 @@ At this point, you should have:
 - The `admin@ovirt` password recorded
 
 Keep your SSH session and browser open for Labs 3-5.
+
+You may now **proceed to the next lab**
 
 ## Learn More
 

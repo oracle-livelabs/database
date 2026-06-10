@@ -52,7 +52,7 @@ This lab assumes you have:
 
 1. In the **Administration Portal**, navigate to **Compute -> Virtual Machines -> Import**.
 
-    ![The Import VM dialog showing Source set to Virtual Appliance OVA and olkvm01 selected as Host.](images/import-vm.png)
+    ![Show Import VM dialog showing Source](images/import-vm.png "Show Import VM dialog showing Source")
 
 2. Set **Data Center** to **Default**.
 
@@ -258,7 +258,7 @@ This lab assumes you have:
     - Clicking **View Employees** opens the employee list
     - The employee list shows eight records
 
-    ![The Employee Directory application running in the browser showing 8 employee records.](images/employee-directory.png)
+    ![Show Employee Directory application](images/employee-directory.png"Show Employee Directory application")
 
 
 ## Deploy Multi Tier Application Checkpoint
@@ -269,6 +269,8 @@ At this point, you should have:
 - `ol9-webapp` running on the same KVM host as `ol9-mysql`
 - Network connectivity between `10.0.10.101` and `10.0.10.100`
 - The Employee Directory application visible in the browser
+
+You may now **proceed to the next lab**
 
 ## Learn More
 
