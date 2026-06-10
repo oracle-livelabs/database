@@ -54,7 +54,7 @@ This lab assumes you have:
     - `olkvm01`
     - `olkvm02`
 
-    ![OLVM Hosts pane showing both KVM hosts in Up status.](images/olvm-hosts-pane.png)
+    ![Show OLVM Hosts pane showing both KVM hosts in Up status](images/olvm-hosts-pane.png "Show OLVM Hosts pane showing both KVM hosts in Up status")
 
 3. Go to **Compute -> Virtual Machines**.
 
