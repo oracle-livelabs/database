@@ -10,7 +10,7 @@
     {
       "title": "Option B: Manual Instructor Setup for E5 OCI Prerequisites",
       "description": "Manually build the OCI network, compute, VNIC, VLAN, storage, and SSH prerequisites before learners begin.",
-      "filename": "../../olvm-instructor/e5-oci-prereq-setup.md"
+      "filename": "../../e5-oci-prereq-setup/e5-oci-prereq-setup.md"
     },
     {
       "title": "Learner Lab 1: Verify E5 OCI Network Prerequisites",
