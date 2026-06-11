@@ -45,7 +45,7 @@ In this task, you will provision the cloud infrastructure required for the works
     2. Navigate to:
     - **Developer Services → Resource Manager → Stacks**
 
-You may now **proceed to the next lab**
+    You may now **proceed to the next lab**
     ![Navigate to stack](images/lab1image2.png "Navigate to stack")
 
 
