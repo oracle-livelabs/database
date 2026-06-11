@@ -14,7 +14,7 @@ Estimated Time: **5 minutes**
 
 ```quiz-config
 passing: 75
-badge: images/livestack-finance-badge.png
+badge: images/livestack-retail-badge.png
 ```
 
 ## Task 1: Check Your Understanding
