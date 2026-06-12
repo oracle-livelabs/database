@@ -179,83 +179,81 @@ The complete JSON representation for the Switch task is given below for referenc
    ```json
     <copy>
     {
-    "name": "Check loan application completeness",
-    "taskReferenceName": "check_loan_application_completeness",
-    "inputParameters": {
+      "name": "Check_loan_application_completeness",
+      "taskReferenceName": "check_loan_application_completeness",
+      "inputParameters": {
         "switchCaseValue": "${extract_loan_details.output.status}"
-    },
-    "type": "SWITCH",
-    "decisionCases": {
+      },
+      "type": "SWITCH",
+      "decisionCases": {
         "FAILED": [
-            {
-                "name": "Notify incomplete loan application",
-                "taskReferenceName": "notify_incomplete_loan_application",
-                "inputParameters": {
-                    "http_request": {
-                        "method": "POST",
-                        "uri": "http://notification-service:8085/email-service/sendMail",
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "body": {
-                            "from": "microtx.user@localhost",
-                            "to": "microtx.user@microtx.com",
-                            "cc": "",
-                            "subject": "Loan application rejected!",
-                            "body": "Loan application rejected due to incomplete details. ${workflow.input.loan_application_text}",
-                            "isEmailBodyText": true
-                        }
-                    }
-                },
-                "type": "HTTP",
-                "decisionCases": {},
-                "defaultCase": [],
-                "forkTasks": [],
-                "startDelay": 0,
-                "joinOn": [],
-                "optional": false,
-                "defaultExclusiveJoinTask": [],
-                "asyncComplete": false,
-                "loopOver": [],
-                "onStateChange": {},
-                "permissive": false
+          {
+            "name": "Notify_Incomplete_Loan_Application",
+            "taskReferenceName": "notify_incomplete_loan_application",
+            "inputParameters": {
+              "method": "POST",
+              "uri": "http://notification-service:8085/email-service/sendMail?isMockSendMail=true",
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "from": "microtx.user@localhost",
+                "to": "microtx.user@microtx.com",
+                "cc": "",
+                "subject": "Loan application rejected!",
+                "body": "Loan application rejected due to incomplete details. ${workflow.input.loan_application_text}",
+                "isEmailBodyText": true
+              }
             },
-            {
-                "name": "terminate",
-                "taskReferenceName": "terminate_ref",
-                "inputParameters": {
-                    "terminationStatus": "TERMINATED",
-                    "terminationReason": "Incomplete loan application details",
-                    "workflowOutput": "${extract_loan_details.output}"
-                },
-                "type": "TERMINATE",
-                "decisionCases": {},
-                "defaultCase": [],
-                "forkTasks": [],
-                "startDelay": 0,
-                "joinOn": [],
-                "optional": false,
-                "defaultExclusiveJoinTask": [],
-                "asyncComplete": false,
-                "loopOver": [],
-                "onStateChange": {},
-                "permissive": false
-            }
+            "type": "HTTP",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "onStateChange": {},
+            "permissive": false
+          },
+          {
+            "name": "terminate",
+            "taskReferenceName": "terminate_ref",
+            "inputParameters": {
+              "terminationStatus": "TERMINATED",
+              "terminationReason": "Incomplete loan application details",
+              "workflowOutput": "${extract_loan_details.output}"
+            },
+            "type": "TERMINATE",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "onStateChange": {},
+            "permissive": false
+          }
         ]
-    },
-    "defaultCase": [],
-    "forkTasks": [],
-    "startDelay": 0,
-    "joinOn": [],
-    "optional": false,
-    "defaultExclusiveJoinTask": [],
-    "asyncComplete": false,
-    "loopOver": [],
-    "evaluatorType": "value-param",
-    "expression": "switchCaseValue",
-    "onStateChange": {},
-    "permissive": false
-    }
+      },
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "evaluatorType": "value-param",
+      "expression": "switchCaseValue",
+      "onStateChange": {},
+      "permissive": false
+    } 
     </copy>
     ```
 

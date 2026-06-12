@@ -18,7 +18,7 @@ This lab assumes you have:
 
     <!-- *Note 1:* If providing a single Stack download for the workshop, use this simple expression. -->
 
-    - [sample-mkplc-freetier.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/ll-orm-mkplc-tenancy.zip)
+    - [ll-orm-mkplc-tenancy.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/cSfwc6gtSBDt5xYEw0tz_6LCAte8xnviulcM6MALFNlBnGWA45ca6j9yyETrghDy/n/c4u02/b/hosted-files/o/ll-orm-mkplc-tenancy.zip)
 
     <!-- *Note 2:* If providing multiple Stacks download for the same workshop, use a conditional expression similar to the below. Keep in mind that the condition or *type* must be paired with a valid entry in the *manifest.json* file. Refer to *freetier-advanced* and *freetier-basics* -->
 
