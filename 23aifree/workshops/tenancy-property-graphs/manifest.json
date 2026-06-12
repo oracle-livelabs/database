@@ -2,9 +2,9 @@
   "workshoptitle": "Explore Operational Property Graphs in Oracle AI Database",
     "help": "livelabs-help-sg_us@oracle.com",
     "include": {
-    "adb-goto-service-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/goto-service-body.md",
-    "adb-provision-body.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/provision-body.md",
-    "adb-provision-body-developer.md":"https://oracle-livelabs.github.io/common/building-blocks/tasks/adb/provision-body-developer.md"
+    "adb-goto-service-body.md":"https://livelabs.oracle.com/cdn/common/building-blocks/tasks/adb/goto-service-body.md",
+    "adb-provision-body.md":"https://livelabs.oracle.com/cdn/common/building-blocks/tasks/adb/provision-body.md",
+    "adb-provision-body-developer.md":"https://livelabs.oracle.com/cdn/common/building-blocks/tasks/adb/provision-body-developer.md"
 },
     "tutorials": [
       {
@@ -16,18 +16,18 @@
       {
         "title": "Getting Started",
         "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
       },
       {
         "title": "Lab 1: Provision an ADB Instance",
         "description": "Provisioning an Autonomous AI Database Instance",
         "type": "freetier",
-        "filename": "https://oracle-livelabs.github.io/common/building-blocks/blocks/adb/provision/provision-console.md"
+        "filename": "https://livelabs.oracle.com/cdn/common/building-blocks/blocks/adb/provision/provision-console.md"
       },
       {
         "title": "Lab 2: Create a Graph User",
         "description": "Create a simple graph and learn how to navigate the user interface.",
-        "filename": "https://oracle-livelabs.github.io/spatial-graph/adb-graph/getting-started-with-graph-studio/create-user/create-user.md"
+        "filename": "https://livelabs.oracle.com/cdn/spatial-graph/adb-graph/getting-started-with-graph-studio/create-user/create-user.md"
       },
        {
         "title": "Lab 3: Setup Property Graph",

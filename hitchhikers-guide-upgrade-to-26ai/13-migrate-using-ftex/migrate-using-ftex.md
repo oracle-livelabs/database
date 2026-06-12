@@ -44,8 +44,6 @@ You need to prepare a few things before you can start FTEX.
     . ftex
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
@@ -100,8 +98,6 @@ You need to prepare a few things before you can start FTEX.
     grant read, write on directory ftexdir to ftexuser;
     alter user ftexuser quota unlimited on system;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * The default user tablespace must be *SYSTEM* or *SYSAUX* because all other tablespaces will be set read-only later on. During export, Data Pump must be able to create a table in the default tablespace.
@@ -381,8 +377,6 @@ You create a new, empty PDB in the new release of Oracle AI Database and import 
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Create a new PDB called *MAROON* and open it.
@@ -393,8 +387,6 @@ You create a new, empty PDB in the new release of Oracle AI Database and import 
     alter pluggable database maroon open;
     alter pluggable database maroon save state;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -427,8 +419,6 @@ You need a few more changes to the new PDB before you can start the import.
     alter session set container=maroon;
     create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -451,8 +441,6 @@ You need a few more changes to the new PDB before you can start the import.
     grant read, write on directory ftexdir to ftexuser;
     alter user ftexuser quota unlimited on system;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -983,8 +971,6 @@ You need a few more changes to the new PDB before you can start the import.
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 9. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
@@ -1044,8 +1030,6 @@ You need a few more changes to the new PDB before you can start the import.
     alter session set container=maroon;
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * There should be 14 tables and 19 indexes.
@@ -1079,8 +1063,6 @@ You need a few more changes to the new PDB before you can start the import.
       and ra.raceid=re.raceid
     order by ra.year, ra.name;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * *Ayrton Senna* won 41 races from 1985 to 1993.
@@ -1168,8 +1150,6 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
     . ftex
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Set the tablespace *READ WRITE*.

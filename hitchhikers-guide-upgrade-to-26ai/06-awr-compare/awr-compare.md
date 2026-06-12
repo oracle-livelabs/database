@@ -34,8 +34,6 @@ Use HammerDB to create a workload.
     . cdb26
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
 2. Create an AWR snapshot. Take note of the snapshot ID (e.g., 130). You need it later on.
@@ -46,8 +44,6 @@ Use HammerDB to create a workload.
 
     @/home/oracle/scripts/upg-06-awr-compare-snap-before.sql
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     <details>

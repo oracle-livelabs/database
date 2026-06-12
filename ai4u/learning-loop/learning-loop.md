@@ -27,7 +27,7 @@ This is what lets agents learn from experience. Not just store it, but retrieve 
 
 **What you'll build:** A semantic memory system that finds similar past loan decisions and improves over time.
 
-Estimated Time: 20 minutes
+**Estimated Time:** 20 minutes
 
 ### Objectives
 
@@ -47,21 +47,29 @@ For this workshop, we provide the environment. You'll need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
 
-2. Click **Import** to expand the Import drop down.
+2. Unzip the downloaded `notebooks.zip` file on your computer.
 
-3. Select **Git**.
+3. From the Oracle Machine Learning home page, click **Notebooks**.
 
-4. Paste the following GitHub URL leaving the credential field blank:
+    ![OML home page with Notebooks highlighted](images/task1_1.png)
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/learning-loop/lab9-learning-loop.json
-    </copy>
-    ```
+4. Click **Import** to expand the Import drop down.
 
-5. Click **Import**.
+    ![Notebooks page with Import button highlighted](images/task1_2.png)
+
+5. Select **From File**.
+
+    ![Import dropdown showing From File option highlighted](images/task1_5a.png)
+
+6. Select the `lab9-learning-loop.json` file from the unzipped notebook files.
+
+    ![File picker with lab notebook selected](images/task1_6a.png)
+
+7. Click **Open**.
+
+    ![File picker with lab notebook selected](images/task1_6a.png)
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -69,9 +77,9 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 Embedding models convert text into numerical vectors that capture meaning. Instead of calling an external API every time we need an embedding, we load the model directly into the database. This means embeddings happen locally, instantly, and without network latency.
 
-1. Download the model.
+We're using a pre-trained model called "all_MiniLM_L12_v2" that's good at understanding the meaning of sentences.
 
-    We're using a pre-trained model called "all_MiniLM_L12_v2" that's good at understanding the meaning of sentences. This downloads the model file to the database server.
+1. Download the model.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -90,7 +98,9 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
     </copy>
     ```
 
-2. Load it into the database.
+    ![Download ONNX model - PL/SQL procedure successfully completed](images/task2_1.png)
+
+2. Load the model into the database.
 
     This loads the ONNX model into the database so we can use it in SQL. Once loaded, we can call `VECTOR_EMBEDDING()` in any query to convert text to vectors.
 
@@ -98,12 +108,14 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
 
     ```sql
     <copy>
+    -- Drop model if it already exists
     BEGIN
         DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'ALL_MINILM_L12_V2', force => true);
     EXCEPTION WHEN OTHERS THEN NULL;
     END;
     /
 
+    -- Load the model
     BEGIN
         DBMS_VECTOR.LOAD_ONNX_MODEL(
             directory  => 'DATA_PUMP_DIR',
@@ -115,7 +127,11 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
     </copy>
     ```
 
+    ![Load ONNX model into database - two PL/SQL procedures successfully completed](images/task2_2.png)
+
 3. Verify the model is loaded.
+
+    **Watch for:** You should see `ALL_MINILM_L12_V2` listed with algorithm and mining function.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -127,13 +143,15 @@ Embedding models convert text into numerical vectors that capture meaning. Inste
     </copy>
     ```
 
+    ![Verify model loaded - ALL_MINILM_L12_V2 with ONNX algorithm and EMBEDDING function](images/task2_3.png)
+
 ## Task 3: Create the Memory Infrastructure
 
 Create tables that will hold Seer Equity's agent memory. The key difference from earlier labs is the VECTOR column—this stores the mathematical representation of what each memory means.
 
-1. Create the memory table with a vector column.
+The `embedding` column with type `VECTOR(384)` stores 384 numbers that capture the meaning of each memory. Two memories with similar meanings will have similar vectors, even if they use different words.
 
-    The `embedding` column with type `VECTOR(384)` stores 384 numbers that capture the meaning of each memory. Two memories with similar meanings will have similar vectors, even if they use different words.
+1. Create the memory and policies tables.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -166,9 +184,13 @@ Create tables that will hold Seer Equity's agent memory. The key difference from
     </copy>
     ```
 
+    ![Create seers_memory and seers_policies tables - both tables created successfully](images/task3_1.png)
+
 2. Create a vector index for fast similarity search.
 
-    The index uses "cosine distance" which measures how similar two vectors are based on their direction, not their size. A 95% accuracy target means the index is optimized for speed while staying very accurate.
+    A vector index makes similarity searches fast. Without an index, the database would have to compare your query against every single memory. With an index, it can quickly find the most similar ones.
+
+    The index uses "cosine distance" which measures how similar two vectors are based on their direction, not their size.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -180,6 +202,8 @@ Create tables that will hold Seer Equity's agent memory. The key difference from
     WITH TARGET ACCURACY 95;
     </copy>
     ```
+
+    ![Create vector index - Vector INDEX created](images/task3_2.png)
 
 ## Task 4: Populate Seer Equity Loan Policies
 
@@ -226,9 +250,11 @@ COMMIT;
 </copy>
 ```
 
+![Insert five loan policies into seers_policies and commit](images/task4_1.png)
+
 ## Task 5: Create Memory Functions with Semantic Search
 
-Create the core memory functions. The key difference from earlier labs: `find_similar_decisions` uses vector similarity search to find relevant past decisions by meaning, not just keywords.
+Create the core memory functions. The key difference from earlier labs: these functions use vector embeddings to store semantic meaning, and `find_similar_decisions` uses vector similarity search to find relevant past decisions by meaning, not just keywords.
 
 1. Create functions to store and recall client facts.
 
@@ -290,9 +316,15 @@ Create the core memory functions. The key difference from earlier labs: `find_si
     </copy>
     ```
 
+    ![remember_client_fact and recall_client_info functions - top half of code](images/task5_1a.png)
+
+    ![recall_client_info function compiled - REMEMBER_CLIENT_FACT and RECALL_CLIENT_INFO compiled](images/task5_1b.png)
+
 2. Create functions to record and find loan decisions with semantic search.
 
     This is where the magic happens. When we store a decision, we embed the situation description. When we search, we find decisions with similar meaning—even if the words are different.
+
+    The `find_similar_decisions` function uses `VECTOR_DISTANCE()` and `VECTOR_EMBEDDING()` to find semantically similar past decisions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -374,6 +406,10 @@ Create the core memory functions. The key difference from earlier labs: `find_si
     </copy>
     ```
 
+    ![record_loan_decision function - top half of code](images/task5_2a.png)
+
+    ![find_similar_decisions function compiled - RECORD_LOAN_DECISION and FIND_SIMILAR_DECISIONS compiled](images/task5_2b.png)
+
 3. Create a function to look up loan policies.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -414,9 +450,11 @@ Create the core memory functions. The key difference from earlier labs: `find_si
     </copy>
     ```
 
+    ![lookup_policy function - LOOKUP_POLICY compiled](images/task5_3.png)
+
 ## Task 6: Register the Memory Tools
 
-Register all five functions as agent tools. The instructions tell the agent when to use each tool.
+Register all five functions as agent tools. The instructions tell the agent when to use each tool. Note that `FIND_DECISIONS_TOOL` now uses semantic search.
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -425,7 +463,7 @@ Register all five functions as agent tools. The instructions tell the agent when
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'REMEMBER_CLIENT_TOOL',
-        attributes  => '{"instruction": "Store a fact about a Seer Equity client for future reference. Parameters: P_CLIENT (client name), P_FACT (information to remember), P_CATEGORY (optional: contact_preference, rate_exception, relationship, requirement, behavior). Use when loan officers share important client information.",
+        attributes  => '{"instruction": "Store a fact about a Seer Equity client for future reference. Parameters: P_CLIENT (client name), P_FACT (information to remember), P_CATEGORY (optional: contact_preference, rate_exception, relationship, requirement, behavior). Use only when the user provides NEW client facts. Do not store the same fact twice in one request. Never call this tool based on prior tool output; only from the original user request. For a multi-fact request, store each distinct fact once, then stop calling tools and respond.",
                         "function": "remember_client_fact"}',
         description => 'Stores facts about clients in long-term memory with semantic embeddings'
     );
@@ -474,9 +512,13 @@ END;
 </copy>
 ```
 
+![Register tools - REMEMBER, RECALL, RECORD, FIND tools visible](images/task6_1a.png)
+
+![Register tools - POLICY_LOOKUP_TOOL and five PL/SQL procedures successfully completed](images/task6_1b.png)
+
 ## Task 7: Create the Memory-Enabled Agent
 
-Create an agent with access to all memory tools. The role instructions tell the agent to use its memory proactively.
+Create an agent with access to all memory tools. The role instructions tell the agent to use its memory proactively and leverage semantic search for finding similar past decisions.
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -486,7 +528,7 @@ BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'SEERS_MEMORY_AGENT',
         attributes  => '{"profile_name": "genai",
-                        "role": "You are a loan officer assistant for Seer Equity with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When loan officers share client information, store it (use REMEMBER_CLIENT_TOOL). When making loan decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools."}',
+                        "role": "You are a loan officer assistant for Seer Equity with full memory capabilities. ALWAYS check your memory first when asked about a client (use RECALL_CLIENT_TOOL). When loan officers share client information, store it (use REMEMBER_CLIENT_TOOL). When making loan decisions, check policy (POLICY_LOOKUP_TOOL) and past decisions (FIND_DECISIONS_TOOL). Record important decisions (RECORD_DECISION_TOOL). Never guess about client information - always check your memory and tools. Never call REMEMBER_CLIENT_TOOL repeatedly for the same fact. Do not call tools from tool output text; call tools only from the user request intent. After completing required tool calls, provide a final answer and stop."}',
         description => 'Memory-enabled loan officer assistant with semantic search'
     );
 END;
@@ -495,7 +537,7 @@ END;
 BEGIN
     DBMS_CLOUD_AI_AGENT.CREATE_TASK(
         task_name   => 'SEERS_MEMORY_TASK',
-        attributes  => '{"instruction": "Process this loan officer request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL (it uses semantic search to find similar situations even with different wording). Record decisions with RECORD_DECISION_TOOL. Do not ask clarifying questions - use your tools. User request: {query}",
+        attributes  => '{"instruction": "Process this loan officer request using your memory tools. When asked about a client, FIRST use RECALL_CLIENT_TOOL. When given client information, use REMEMBER_CLIENT_TOOL only for distinct new facts in the user request. Never use REMEMBER_CLIENT_TOOL on your own tool outputs or responses. Maximum 3 REMEMBER_CLIENT_TOOL calls per user request. When asked about policies or rates, use POLICY_LOOKUP_TOOL. For decision guidance, use FIND_DECISIONS_TOOL (it uses semantic search to find similar situations even with different wording). Record decisions with RECORD_DECISION_TOOL when a decision is made. After relevant tools run, provide the final response and stop. Do not ask clarifying questions. User request: {query}",
                         "tools": ["REMEMBER_CLIENT_TOOL", "RECALL_CLIENT_TOOL", "RECORD_DECISION_TOOL", "FIND_DECISIONS_TOOL", "POLICY_LOOKUP_TOOL"]}',
         description => 'Task with full memory capabilities and semantic search'
     );
@@ -514,9 +556,13 @@ END;
 </copy>
 ```
 
+![Create SEERS_MEMORY_AGENT, SEERS_MEMORY_TASK, and SEERS_MEMORY_TEAM - PL/SQL procedure successfully completed](images/task7_1.png)
+
 ## Task 8: Seed Historical Decisions for Learning
 
-Add historical loan decisions that the agent can learn from. Notice we're using varied wording—"seasonal cash flow," "cyclical revenue," "variable income"—to test semantic search.
+Add historical loan decisions that the agent can learn from. Notice we're using varied wording—"seasonal cash flow," "cyclical revenue," "variable income"—to test semantic search later.
+
+Each decision is stored with a vector embedding that captures its meaning.
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -581,11 +627,49 @@ COMMIT;
 </copy>
 ```
 
-## Task 9: Test Semantic Search
+![Seed historical decisions - first three decisions inserted (HARVEST FARMS, GLOBALCO, NEWSTART INC)](images/task8_1a.png)
 
-Now test finding relevant decisions by meaning, not keywords. This is where the magic happens—we'll search using different words than what we stored.
+![Seed historical decisions - CONSULTING PARTNERS decision inserted, COMMIT, 1 row inserted x3](images/task8_1b.png)
 
-1. Activate the team and set your session.
+## Task 9: Test Semantic Search Directly
+
+Before using the agent, let's test semantic search directly. This demonstrates the power of vector search—finding relevant results by meaning, not keywords.
+
+1. Search for "irregular income patterns."
+
+    Watch it find "seasonal cash flow" and "cyclical revenue" even though those exact words aren't in the query.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('client has irregular income patterns throughout the year'), 4000, 1) AS similar_decisions FROM DUAL;
+    </copy>
+    ```
+
+    **Observe:** Finds Consulting Partners ("cyclical revenue") and Harvest Farms ("seasonal cash flow") even though we said "irregular income patterns."
+
+    ![Semantic search for irregular income - finds CONSULTING PARTNERS first](images/task9_1.png)
+
+2. Search for "new customer asking for a discount."
+
+    This should find both the failed approach (NewStart - denied outright) and the successful approach (TechStart - offered path to exception). The agent can learn from both successes and failures!
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('new customer asking for a discount on their first loan'), 4000, 1) AS similar_decisions FROM DUAL;
+    </copy>
+    ```
+
+    **Observe:** Finds BOTH the failed approach (NewStart) and the successful approach (TechStart).
+
+    ![Semantic search for new customer discount - finds GLOBALCO, NEWSTART, TECHSTART](images/task9_2.png)
+
+3. Activate the memory agent.
+
+    Set the memory team as active. Now your `SELECT AI AGENT` commands will go to an agent with full memory and semantic search capabilities.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -595,35 +679,17 @@ Now test finding relevant decisions by meaning, not keywords. This is where the 
     </copy>
     ```
 
-2. Search for "irregular income patterns" (finds "seasonal cash flow" and "cyclical revenue").
-
-    > This command is already in your notebook—just click the play button (▶) to run it.
-
-    ```sql
-    <copy>
-    SELECT find_similar_decisions('client has irregular income patterns throughout the year') FROM DUAL;
-    </copy>
-    ```
-
-    **Observe:** Finds Harvest Farms ("seasonal cash flow") and Consulting Partners ("cyclical revenue") even though we said "irregular income patterns."
-
-3. Search for "discount request from new customer."
-
-    > This command is already in your notebook—just click the play button (▶) to run it.
-
-    ```sql
-    <copy>
-    SELECT find_similar_decisions('new customer asking for a discount on their first loan') FROM DUAL;
-    </copy>
-    ```
-
-    **Observe:** Finds BOTH the failed approach (NewStart - denied outright) and the successful approach (TechStart - offered path to exception). The agent learns from both!
+    ![SET_TEAM SEERS_MEMORY_TEAM - PL/SQL procedure successfully completed](images/task9_3.png)
 
 ## Task 10: See the Full Learning Loop
 
 Now use the agent to demonstrate the complete learning loop.
 
 1. Teach the agent about a client.
+
+    Tell the agent about Acme Industries. The agent should use `REMEMBER_CLIENT_TOOL` to store these facts with semantic embeddings.
+
+    **Watch for:** The agent should confirm it remembered the contact preference, rate exception, and relationship history.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -633,7 +699,29 @@ Now use the agent to demonstrate the complete learning loop.
     </copy>
     ```
 
-2. Ask for guidance on a new situation.
+    ![Teach agent about Acme Industries - All the given information about Acme Industries has been stored using the REMEMBER_CLIENT_TOOL](images/task10_1.png)
+
+2. Test client recall.
+
+    Ask about Acme Industries. The agent should use `RECALL_CLIENT_TOOL` and return all the facts you just taught it.
+
+    **Watch for:** All the facts: email preference, Sarah Chen, since 2019, 15% rate exception, 4 previous loans.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    SELECT AI AGENT What do you know about Acme Industries;
+    </copy>
+    ```
+
+    ![Recall Acme Industries - agent returns all stored facts about the client](images/task10_2.png)
+
+3. Ask for guidance on a new situation.
+
+    Ask the agent about handling a situation with "unpredictable revenue." Even though we stored decisions about "seasonal cash flow" and "cyclical revenue," semantic search will find them.
+
+    **Watch for:** The agent should find Harvest Farms (seasonal) and Consulting Partners (cyclical) decisions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -643,9 +731,13 @@ Now use the agent to demonstrate the complete learning loop.
     </copy>
     ```
 
-    **Observe:** The semantic search finds Harvest Farms (seasonal) and Consulting Partners (cyclical) even though we said "unpredictable revenue" and "landscaping."
+    ![Ask about landscaping company - agent finds similar past decisions about seasonal/cyclical revenue](images/task10_3.png)
 
-3. Record a new decision.
+4. Record a new decision.
+
+    Record a new decision based on the guidance. This decision will be stored with its own vector embedding, making it findable by semantic search in the future.
+
+    **Watch for:** The agent should confirm it recorded the decision.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -655,9 +747,11 @@ Now use the agent to demonstrate the complete learning loop.
     </copy>
     ```
 
+    ![Record GreenScape decision - The decision to approve a $150K equipment loan for GreenScape Landscaping has been recorded](images/task10_4.png)
+
 ## Task 11: Test Memory Persistence
 
-Clear the session and verify memory persists.
+Now the crucial test—clear the session and start fresh. This simulates logging out and back in, or a new day.
 
 1. Clear and reset the session.
 
@@ -670,7 +764,13 @@ Clear the session and verify memory persists.
     </copy>
     ```
 
+    ![CLEAR_TEAM and SET_TEAM - two PL/SQL procedures successfully completed](images/task11_1.png)
+
 2. Ask about Acme Industries in the "new" session.
+
+    The agent has no conversation history—but it has memory tools.
+
+    **Watch what happens:** The agent calls `RECALL_CLIENT_TOOL` and finds all the facts! Because they're stored in the database with embeddings, they persist across sessions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -680,54 +780,99 @@ Clear the session and verify memory persists.
     </copy>
     ```
 
-    **Observe:** The agent still knows! Because facts are stored in the database with embeddings, they persist across sessions.
+    ![Ask Acme in new session - agent recalls all facts from database memory](images/task11_2.png)
 
-3. Search for seasonal payment decisions (now includes GreenScape).
+3. Verify the learning loop.
+
+    Search for seasonal payment decisions. The new GreenScape decision should now appear alongside the original Harvest Farms and Consulting Partners decisions.
+
+    **Watch for:** THREE relevant decisions now, including the one you just recorded. The agent is learning!
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT find_similar_decisions('business with seasonal revenue needs flexible payments') FROM DUAL;
+    SELECT DBMS_LOB.SUBSTR(find_similar_decisions('business with seasonal revenue needs flexible payments'), 4000, 1) AS similar_decisions FROM DUAL;
     </copy>
     ```
 
-    **Observe:** Now finds THREE relevant decisions: Harvest Farms, Consulting Partners, AND the new GreenScape decision you just recorded. The agent is learning!
+    ![Search seasonal - finds LANDSCAPING COMPANY as top result, 3 similar past decisions](images/task11_3.png)
 
 ## Task 12: Examine the Memory Core
 
-Look at what's stored in the memory tables.
+1. Check the tool execution history.
 
-> This command is already in your notebook—just click the play button (▶) to run it.
+    See exactly what tools the agent called and what results it got. This is full transparency into the agent's memory operations.
 
-```sql
-<copy>
-SELECT 
-    memory_type,
-    entity_id,
-    JSON_VALUE(content, '$.situation') as situation,
-    CASE WHEN embedding IS NOT NULL THEN 'Yes' ELSE 'No' END as has_embedding,
-    TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created
-FROM seers_memory
-WHERE memory_type = 'DECISION'
-ORDER BY created_at DESC;
-</copy>
-```
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    SELECT 
+        tool_name,
+        TO_CHAR(start_date, 'HH24:MI:SS') as called_at,
+        SUBSTR(output, 1, 80) as result_preview
+    FROM USER_AI_AGENT_TOOL_HISTORY
+    ORDER BY start_date DESC
+    FETCH FIRST 15 ROWS ONLY;
+    </copy>
+    ```
+
+    ![Tool execution history - 9 rows showing RECALL, RECORD, FIND, POLICY, REMEMBER tools with timestamps](images/task12_1.png)
+
+2. Examine the memory tables.
+
+    Look at what's stored in the memory tables, including which memories have vector embeddings.
+
+    **Watch for:** All DECISION records should have embeddings (has_embedding = Yes), enabling semantic search.
+
+    > This command is already in your notebook—just click the play button (▶) to run it.
+
+    ```sql
+    <copy>
+    SELECT 
+        memory_type,
+        entity_id,
+        JSON_VALUE(content, '$.situation') as situation,
+        CASE WHEN embedding IS NOT NULL THEN 'Yes' ELSE 'No' END as has_embedding,
+        TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created
+    FROM seers_memory
+    WHERE memory_type = 'DECISION'
+    ORDER BY created_at DESC;
+    </copy>
+    ```
+
+    ![Memory core - 7 DECISION rows all with has_embedding=Yes including GREENSCAPE LANDSCAPING](images/task12_2.png)
 
 ## Summary
 
 In this lab, you built the learning loop with semantic search:
 
-* **Loaded an ONNX embedding model** directly into the database
-* **Added VECTOR columns** to store semantic meaning alongside facts
-* **Built semantic search** that finds "seasonal cash flow" when you search "irregular income"
-* **Created a memory-enabled agent** with five tools
-* **Tested memory persistence** across session boundaries
-* **Watched the agent learn** as new decisions were recorded
+| Capability | What You Built | How It Works |
+|---|---|---|
+| Client facts | `remember_client_fact` / `recall_client_info` | Stores & retrieves with embeddings |
+| Decision logging | `record_loan_decision` | Audit trail with semantic embedding |
+| Semantic search | `find_similar_decisions` | `VECTOR_DISTANCE` finds by *meaning* |
+| Policy lookup | `lookup_policy` | Retrieves corporate lending policies |
 
-**Key takeaway:** This is how agents improve. Not magically, but systematically. Decision → outcome → memory → better future decisions. The semantic search ensures relevant past experience is found even when described differently. The AI database powers it all.
+**Key Behaviors:**
+- Agent checks memory FIRST when asked about a client
+- Agent stores information when loan officers share it
+- Agent finds similar situations even with different wording ("irregular income" → "seasonal cash flow")
+- Agent learns from both successes AND failures
+- Memory persists across sessions—no more forgetting
 
-## Cleanup (Optional)
+**The Learning Loop:**
+1. New situation arrives
+2. Agent searches for similar past decisions (semantic search)
+3. Agent sees what worked before (and what didn't)
+4. Agent takes informed action
+5. Decision is recorded with embedding
+6. Future searches benefit from this new knowledge
+
+This is how agents improve. Not magically, but systematically. The AI database powers it all.
+
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -757,6 +902,8 @@ END;
 /
 </copy>
 ```
+
+![Cleanup - all objects dropped successfully](images/cleanup.png)
 
 ## Learn More
 

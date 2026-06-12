@@ -1,0 +1,66 @@
+{
+    "workshoptitle": "AI4U: Python Edition — Build AI Agents with LangChain and Oracle 26ai",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "About this workshop",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Getting Started",
+            "description": "Set up your Python environment",
+            "filename": "../../getting-started/getting_started.md"
+        },
+        {
+            "title": "Lab 1: What Is an AI Agent, Really?",
+            "description": "Build your first LangChain agent with a SQL tool",
+            "filename": "../../what-is-agent/what-is-agent.md"
+        },
+        {
+            "title": "Lab 2: Why Agents Beat Zero-Shot Prompts",
+            "description": "Compare raw LLM, read-only, and read-write agents",
+            "filename": "../../agents-vs-zero-shot/agents-vs-zero-shot.md"
+        },
+        {
+            "title": "Lab 3: How Agents Plan the Work",
+            "description": "Watch an agent choose tools and order steps",
+            "filename": "../../how-agents-plan/how-agents-plan.md"
+        },
+        {
+            "title": "Lab 4: How Agents Actually Get Work Done",
+            "description": "Build a complete execution loop with routing",
+            "filename": "../../how-agents-execute/how-agents-execute.md"
+        },
+        {
+            "title": "Lab 5: Why Agents Need Memory",
+            "description": "Experience the forgetting problem firsthand",
+            "filename": "../../why-agents-need-memory/why-agents-need-memory.md"
+        },
+        {
+            "title": "Lab 6: Why Enterprise Data Matters",
+            "description": "See agents fail without context, then succeed",
+            "filename": "../../enterprise-data/enterprise-data.md"
+        },
+        {
+            "title": "Lab 7: Where Agent Memory Should Live",
+            "description": "Build the memory core with JSON in Oracle",
+            "filename": "../../where-memory-lives/where-memory-lives.md"
+        },
+        {
+            "title": "Lab 8: The Four Types of Agent Memory",
+            "description": "Create short-term, long-term, decision, and reference memory",
+            "filename": "../../four-memory-types/four-memory-types.md"
+        },
+        {
+            "title": "Lab 9: How Agents Get Better Over Time",
+            "description": "Build semantic search with vector embeddings",
+            "filename": "../../learning-loop/ai-database-competence.md"
+        },
+        {
+            "title": "Lab 10: Tools, Safety, and Human Control",
+            "description": "Enforce separation of duties with role-based agents",
+            "filename": "../../tools-safety-control/agents-and-tools.md"
+        }
+    ]
+}

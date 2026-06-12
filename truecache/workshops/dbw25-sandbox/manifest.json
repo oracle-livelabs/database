@@ -1,8 +1,10 @@
 {
   "workshoptitle": "Improve application performance with True Cache",
   "help": "livelabs-help-**enterarea**_us@oracle.com",
-  "variables": ["../../variables/variables.json",
-    "../../variables/variables-in-another-file.json"],
+  "variables": [
+    "../../variables/variables.json",
+    "../../variables/variables-in-another-file.json"
+  ],
   "tutorials": [
     {
       "title": "Introduction",
@@ -12,20 +14,23 @@
     {
       "title": "Get Started",
       "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-23ai.md"
     },
     {
       "title": "Lab 1: Initialize Environment",
       "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
+      "filename": "../../initialize-environment/initialize-environment.md",
+      "type": "sandbox"
     },
     {
       "title": "Lab 2: Load Data into database",
-      "filename": "../../data-load/data-load_dbw25.md"
+      "filename": "../../data-load/data-load_dbw25.md",
+      "type": "sandbox"
     },
     {
       "title": "Lab 3: Use True Cache through jdbc",
-      "filename": "../../jdbc/jdbc_dbw25.md"
+      "filename": "../../jdbc/jdbc_dbw25.md",
+      "type": "sandbox"
     },
     {
       "title": "Lab 4 : Clean up Stack and Instances",
@@ -35,7 +40,12 @@
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+    },
+    {
+      "title": "Quiz: True Cache Fundamentals",
+      "description": "Check your understanding of Oracle True Cache and the first three labs.",
+      "filename": "../../quiz-true-cache/quiz-true-cache.md"
     }
   ]
 }

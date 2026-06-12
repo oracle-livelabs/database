@@ -2,11 +2,11 @@
 
 ## Introduction
 
-In this lab, you'll observe how an AI agent plans its work before taking action.
+In this lab, you will observe how an AI agent plans its work before taking action.
 
 Planning is what separates agents from chatbots. Before executing anything, an agent breaks a task into steps, identifies which tools to use, and determines the order of operations. This makes agent behavior predictable and debuggable.
 
-You'll give an agent a multi-step task and watch how it decomposes the work.
+You will give an agent a multi-step task and watch how it decomposes the work.
 
 ### The Business Problem
 
@@ -23,11 +23,11 @@ At Seer Equity, preparing for a client call is tedious. A loan officer needs to 
 
 The loan officers need an agent that can plan and execute a multi-step information retrieval: analyze what's needed, identify the right tools, determine the order, and synthesize the results.
 
-### What You'll Learn
+### What You Will Learn
 
-This lab shows you how agents plan multi-tool operations. You'll see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seer Equity's "gathering" problem.
+This lab shows you how agents plan multi-tool operations. You will see the agent decide which tools to call, in what order, and how to combine the results. This is the foundation for solving Seer Equity's "gathering" problem.
 
-**What you'll build:** A multi-tool agent that plans information retrieval for loan applicants.
+**What you will build:** A multi-tool agent that plans information retrieval for loan applicants.
 
 Estimated Time: 10 minutes
 
@@ -40,7 +40,7 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-For this workshop, we provide the environment. You'll need:
+For this workshop, we provide the environment. You will need:
 
 * Basic knowledge of SQL and PL/SQL, or the ability to follow along with the prompts
 
@@ -48,21 +48,29 @@ For this workshop, we provide the environment. You'll need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
 
-2. Click **Import** to expand the Import drop down.
+2. Unzip the downloaded `notebooks.zip` file on your computer.
 
-3. Select **Git**.
+3. From the Oracle Machine Learning home page, click **Notebooks**.
 
-4. Paste the following GitHub URL leaving the credential field blank:
+    ![Notebook Information](./images/task1_1.png " ")
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/how-agents-plan/lab3-how-agents-plan.json
-    </copy>
-    ```
+4. Click **Import** to expand the Import drop down.
 
-5. Click **Ok**.
+    ![Notebook Information](./images/task1_2.png " ")
+
+5. Select **From File**.
+
+    ![Notebook Information](./images/task1_5a.png " ")
+
+6. Select the `lab3-how-agents-plan.json` file from the unzipped notebook files.
+
+    ![Notebook Information](./images/task1_6a.png " ")
+
+7. Click **Open**.
+
+    ![Notebook Information](./images/task1_6a.png " ")
 
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
@@ -107,6 +115,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     COMMIT;
     </copy>
     ```
+
+    ![Task Information](./images/task_2_1.png " ")
 
 2. Create tool functions.
 
@@ -162,6 +172,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     </copy>
     ```
 
+    ![Task Information](./images/task_2_2.png " ")
+
 3. Register the tools.
 
     Each function becomes a tool that the agent can use. The `instruction` for each tool explains what it does and when to use it. Think of these instructions as training the agent on its toolkit—the better the instructions, the smarter the agent's choices.
@@ -201,6 +213,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     /
     </copy>
     ```
+
+    ![Task Information](./images/task_2_3.png " ")
 
 4. Create the agent and team.
 
@@ -242,6 +256,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     </copy>
     ```
 
+    ![Task Information](./images/task_2_4.png " ")
+
 ## Task 3: Observe Single-Tool Planning
 
 Let's start with a simple request that needs only one tool.
@@ -256,6 +272,8 @@ Let's start with a simple request that needs only one tool.
     SELECT AI AGENT Who is applicant APP-001;
     </copy>
     ```
+
+    ![Task Information](./images/task_3_1.png " ")
 
 2. Check the tool history to see the plan execution.
 
@@ -273,7 +291,9 @@ Let's start with a simple request that needs only one tool.
     </copy>
     ```
 
-**Observe:** The agent planned to use just GET_APPLICANT_TOOL because that's all the question required.
+    ![Task Information](./images/task_3_2.png " ")
+
+**Observe:** The agent planned to use just `GET_APPLICANT_TOOL` because that's all the question required.
 
 ## Task 4: Observe Multi-Tool Planning
 
@@ -288,6 +308,8 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     SELECT AI AGENT Give me a complete picture of applicant APP-001 including their loans and rate eligibility;
     </copy>
     ```
+
+    ![Task Information](./images/task_4_1.png " ")
 
 2. Check the tool history.
 
@@ -305,12 +327,14 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     </copy>
     ```
 
-**Observe:** The agent planned to use multiple tools:
-- GET_APPLICANT_TOOL to get basic info
-- GET_LOANS_TOOL to get loan history
-- CHECK_RATES_TOOL to verify rate eligibility
+    ![Task Information](./images/task_4_2.png " ")
 
-3. Notice the sequence—the agent determined the logical order.
+    **Observe:** The agent planned to use multiple tools:
+    - `GET_APPLICANT_TOOL` to get basic info
+    - `GET_LOANS_TOOL` to get loan history
+    - `CHECK_RATES_TOOL` to verify rate eligibility
+
+3. Notice the sequence. The agent determined the logical order.
 
 ## Task 5: See How Instructions Shape Planning
 
@@ -346,6 +370,8 @@ The task instruction guides how the agent plans. Let's modify it.
     </copy>
     ```
 
+    ![Task Information](./images/task_5_1.png " ")
+
 2. Test with the structured instructions.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
@@ -356,6 +382,8 @@ The task instruction guides how the agent plans. Let's modify it.
     SELECT AI AGENT Tell me about applicant APP-001;
     </copy>
     ```
+
+    ![Task Information](./images/task_5_2.png " ")
 
 3. Check the tool history again.
 
@@ -371,6 +399,8 @@ The task instruction guides how the agent plans. Let's modify it.
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    ![Task Information](./images/task_5_3.png " ")
 
 **Observe:** The agent followed the explicit plan: applicant first, then loans, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
 
@@ -399,6 +429,8 @@ FETCH FIRST 10 ROWS ONLY;
 </copy>
 ```
 
+![Task Information](./images/task_6_1.png " ")
+
 ## Summary
 
 In this lab, you observed how agents plan their work:
@@ -416,10 +448,10 @@ In this lab, you observed how agents plan their work:
 
 ## Acknowledgements
 
-* **Author** - David Start
-* **Last Updated By/Date** - David Start, January 2026
+* **Author** - David Start, Director, Database Product Management
+* **Last Updated By/Date** - David Start, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -439,3 +471,5 @@ DROP FUNCTION get_applicant_loans;
 DROP FUNCTION check_rate_eligibility;
 </copy>
 ```
+
+![Cleanup](./images/cleanup.png " ")

@@ -21,6 +21,9 @@ In this lab, you will be guided through the following tasks:
 
 - Must complete Lab **Use HeatWave in-database LLM**...
 
+
+
+
 ## Task 1: Download HeatWave files
 
 Download HeatWave files on which we will perform a vector search.
@@ -38,37 +41,41 @@ Download HeatWave files on which we will perform a vector search.
 
 The Object Storage service provides reliable, secure, and scalable object storage. Object Storage uses buckets to organize your files. 
 
-1. Open the **Navigation menu** and click **Storage**. Under **Object Storage & Archive Storage**, click **Buckets**.
+1. From the Oracle Cloud Account, open the **Navigation menu** and click **Storage**. Under **Object Storage & Archive Storage**, click **Buckets**.
 
     ![Click bucket](./images/1-click-bucket.png "Click bucket")
 
-2. In the **heatwave-genai** compartment, click **Create Bucket**. 
+2. Select the  Cloud Account **Region** then  the  **Compartment**. Ignore the API error, it  will go away after the correct compartment has been selected.
 
-    ![Create bucket](./images/2-create-bucket.png "Create bucket")
+    ![Click Region](./images/41-region-compartment.png "Click Region")    
 
-3. Enter the **Bucket Name**, and accept the defaults for the rest of the fields.
+3. In the selected  compartment, click **Create Bucket**. 
+
+    ![Create bucket](./images/3-create-bucket.png "Create bucket")
+
+4. Enter the **Bucket Name**, and accept the defaults for the rest of the fields.
 
     ```bash
     <copy>bucket-vector-search</copy>
     ```
 
-4. Click **Create**.
+5. Click **Create**.
 
     ![Enter bucket details](./images/3-enter-bucket-details.png "Enter bucket details")
 
-5. Once the bucket is created, click the name of the bucket to open the **Bucket Details** page. 
+6. Once the bucket is created, click the name of the bucket to open the **Bucket Details** page. 
 
     ![Created bucket](./images/4-created-bucket.png "Created bucket")
 
-6. Copy the bucket name and **Namespace**, and paste the it somewhere for future reference.
+7. Copy the bucket name and **Namespace**, and paste the it somewhere for future reference.
 
     ![Bucket namespace](./images/35-bucket-namespace.png "Bucket namespace")
 
-7. Under **Objects**, click **More Actions**, and then click **Create New Folder**.
+8. Under **Objects**, click **Actions**, and then click **Create New Folder**.
 
     ![Create new folder](./images/31-create-new-folder.png "Create new folder")
 
-8. In the **Create New Folder** page, enter a **Name** of the folder, and note it for future reference.
+9. In the **Create New Folder** page, enter a **Name** of the folder, and note it for future reference.
 
     ```bash
     <copy>bucket-folder-heatwave</copy>
@@ -76,7 +83,7 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
     ![Enter new folder details](./images/32-enter-folder-details.png "Enter new folder details")
 
-9. Click **Create**.
+10. Click **Create**.
 
 ## Task 3: Upload files to the bucket folder
 
@@ -84,17 +91,17 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
     ![Click bucket folder](./images/33-click-bucket-folder.png "Click bucket folder")
 
-2.  Click **Upload**.
+2.  Click **Upload Objects**.
 
     ![Click upload](./images/34-click-upload.png "Click upload")
 
-3. Click **select files** to display a file selection dialog box.
+3. Click **Choose Files from your Computer** to display a file selection dialog box.
 
 4. Select the files you had downloaded earlier in Task 1, and click **Upload**.
 
     ![Upload files](./images/6-upload-files.png "Upload files")
 
-5. When the file status shows **Finished**, click **Close** to return to the bucket.
+5. Click **Next**, then **Upload Objects**.  When the file statuses shows **Done**, click **Close** to return to the bucket.
 
     ![Upload files finished](./images/7-upload-files-finished.png "Upload files finished")
 
@@ -103,7 +110,7 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
 Pre-authenticated requests provide a way to let HeatWave access your bucket or objects without requiring dynamic groups or IAM policies. This is a simpler and more direct method for granting access.
 
-1. In the **Bucket Details** page, under **Resources**, click **Pre-Authenticated Requests**, and then click **Create Pre-Authenticated Request**.
+1. On the Objects tab for your bucket, click on the three dots to the far right of the bucket name.  Click **Create pre-authenicated request**. 
 
     ![Create Pre-Authenticated Request](./images/8-create-par.png "Create Pre-Authenticated Request")
 
@@ -171,12 +178,12 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 4. Ingest the files from Object Storage using the Pre-Authenticated Request URL, create vector embeddings, and load the vector embeddings into HeatWave:
 
     ```bash
-    <copy>call sys.VECTOR_STORE_LOAD('<PAR-URL>', '{"table_name": "VectorStoreTableName"}');</copy>
+    <copy>call sys.VECTOR_STORE_LOAD('<PAR-URL>', '{"table_name": "livelab_embedding"}');</copy>
     ```
     Replace the following:
 
     - **PAR-URL**: The complete Pre-Authenticated Request URL that you copied in Task 4, Step 3. Make sure to include the full URL.
-    - **VectorStoreTableName**: The name you want for the vector store table.
+    - **livelab_embedding**: The name you want for the vector store table.
    
     **Important**: If your files are in a folder within the bucket, you may need to append the folder path to the PAR URL:
     ```
@@ -191,7 +198,8 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 
     ![Ingest files from Object Storage](./images/14-ingest-files.png "Ingest files from Object Storage")
 
-    **Note**: The command returns a `task_id` and a `task_status_query`. Copy the `task_id` for checking the status in the next step.
+    **Note**: The command returns a `task_id` and a `task_status_query`. Copy the `task_id` for checking the status in the next step. Right click on the task_id SQL statement and select `Copy Field Unquoted`
+
 
 5. Check the task status using the `task_id` returned in the previous step:
 
@@ -221,14 +229,20 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
     
     Wait until the status shows `"status": "COMPLETED"` and `"progress": 100` before proceeding.
     
-    **Note**: Vector embedding generation takes approximately 3-7 minutes depending on file size and HeatWave cluster configuration.
+    **Note**: Vector embedding generation takes approximately 20-25 minutes depending on file size and HeatWave cluster configuration.
 
 6. Once the task shows COMPLETED status, verify that embeddings are loaded in the vector embeddings table.
+    
 
     ```bash
     <copy>select count(*) from <EmbeddingsTableName>;</copy>
     ```
-    For example:
+    For example:  
+    - Get a list of tables:
+    ```bash
+    <copy>SHOW TABLES; </copy>
+    ```
+    - Get a count of the table ending in "pdf".:
     ```bash
     <copy>select count(*) from livelab_embedding_pdf; </copy>
     ```
@@ -236,24 +250,25 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 
     ![Vector embeddings](./images/15-check-count.png "Vector embeddings")
 
-### Troubleshooting Common Issues
 
-**Error: "No valid data found for processing"**
+    ### Troubleshooting Common Issues
 
-This error means HeatWave cannot find files at the specified PAR URL location. Check:
+    **Error: "No valid data found for processing"**
 
-1. **Files are in the correct location**: Verify PDFs are inside `bucket-folder-heatwave/` folder, not at bucket root
-2. **PAR URL includes folder path**: Ensure your URL ends with `/bucket-folder-heatwave/`
-3. **PAR has Object Listing enabled**: This is required for HeatWave to discover files
-4. **PAR has not expired**: Check expiration date and create new PAR if needed
+    This error means HeatWave cannot find files at the specified PAR URL location. Check:
 
-**Error: "Table is not loaded in HeatWave"**
+    - **Files are in the correct location**: Verify PDFs are inside `bucket-folder-heatwave/` folder, not at bucket root
+    - **PAR URL includes folder path**: Ensure your URL ends with `/bucket-folder-heatwave/`
+    - **PAR has Object Listing enabled**: This is required for HeatWave to discover files
+    - **PAR has not expired**: Check expiration date and create new PAR if needed
 
-This means the task is still processing. Wait for the task status to show "COMPLETED" before querying the table.
+    **Error: "Table is not loaded in HeatWave"**
 
-**Empty tables (0 count)**
+    This means the task is still processing. Wait for the task status to show "COMPLETED" before querying the table.
 
-If only `livelab_embedding_pdf` has data and other tables (\_doc, \_html, \_ppt, \_txt) show 0 rows, this is normal - you only uploaded PDF files. HeatWave creates table structures for all supported file types but only populates tables that have corresponding files.
+    **Empty tables (0 count)**
+
+    If only `livelab_embedding_pdf` has data and other tables (\_doc, \_html, \_ppt, \_txt) show 0 rows, this is normal - you only uploaded PDF files. HeatWave creates table structures for all supported file types but only populates tables that have corresponding files.
 
 ## Task 6: Perform retrieval augmented generation
 
@@ -308,6 +323,7 @@ HeatWave retrieves content from the vector store and provide that as context to 
     - The citations section shows the segments and documents it referred to as context.
 
     ![Vector search results](./images/18-vector-search-output.png "Vector search results")
+    
 
 ## Additional Example Queries
 
