@@ -28,7 +28,7 @@ In this lab, you will:
 
 Estimated Time: **10 minutes**
 
-![Engagement, Revenue, and Retention Forecasts overview](images/L7.png " ")
+![Engagement, Revenue, and Retention Forecasts overview](images/l7.png " ")
 
 *Figure 1: The OML analytics page ties demand, revenue, retention, and capacity forecasts to one launch workflow.*
 
@@ -56,15 +56,15 @@ Perform the following set of steps to confirm the current Media OML models befor
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| MODEL_NAME | MINING_FUNCTION | ALGORITHM |
-| --- | --- | --- |
-| CUSTOMER\_SEGMENT\_MODEL | CLUSTERING | KMEANS |
-| DEMAND\_SURGE\_MODEL | CLASSIFICATION | RANDOM\_FOREST |
-| PRODUCT\_CLUSTER\_MODEL | CLUSTERING | KMEANS |
-| REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
-{: title="Active Media OML Models Table"}
+    | MODEL_NAME | MINING_FUNCTION | ALGORITHM |
+    | --- | --- | --- |
+    | CUSTOMER\_SEGMENT\_MODEL | CLUSTERING | KMEANS |
+    | DEMAND\_SURGE\_MODEL | CLASSIFICATION | RANDOM\_FOREST |
+    | PRODUCT\_CLUSTER\_MODEL | CLUSTERING | KMEANS |
+    | REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
+    {: title="Active Media OML Models Table"}
 
 2. The workshop does not ask the learner to retrain these models. It asks the learner to inspect how their outputs drive launch decisions.
 
@@ -92,19 +92,19 @@ Perform the following set of steps to inspect the highest-demand forecast rows i
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CONTENT_ASSET | REGION | FORECAST_DATE | PREDICTED_DEMAND | AUDIENCE_SIGNAL_FACTOR |
-| --- | --- | --- | ---: | ---: |
-| Trust and Safety Moderation Burst | Phoenix FAST Channel Region | 2026-06-02 | 541 | 1.34 |
-| Subscription Save Offer | Portland Indie Festival Market | 2026-06-02 | 528 | 1.67 |
-| Trust and Safety Moderation Burst | Philadelphia Documentary Forum Market | 2026-06-01 | 523 | 1.31 |
-| Subscription Save Offer | Charlotte Matchday Belt | 2026-06-01 | 513 | 1.64 |
-| Trust and Safety Moderation Burst | Portland Indie Festival Market | 2026-05-31 | 504 | 1.28 |
-| Subscription Save Offer | Honolulu International Drama Market | 2026-05-31 | 499 | 1.61 |
-| Trust and Safety Moderation Burst | Washington Trust and Safety Region | 2026-05-26 | 494 | 1.34 |
-| Subscription Save Offer | Las Vegas Live Event Market | 2026-05-26 | 493 | 1.67 |
-{: title="Highest-Demand Forecast Rows Table"}
+    | CONTENT_ASSET | REGION | FORECAST_DATE | PREDICTED_DEMAND | AUDIENCE_SIGNAL_FACTOR |
+    | --- | --- | --- | ---: | ---: |
+    | Trust and Safety Moderation Burst | Phoenix FAST Channel Region | 2026-06-02 | 541 | 1.34 |
+    | Subscription Save Offer | Portland Indie Festival Market | 2026-06-02 | 528 | 1.67 |
+    | Trust and Safety Moderation Burst | Philadelphia Documentary Forum Market | 2026-06-01 | 523 | 1.31 |
+    | Subscription Save Offer | Charlotte Matchday Belt | 2026-06-01 | 513 | 1.64 |
+    | Trust and Safety Moderation Burst | Portland Indie Festival Market | 2026-05-31 | 504 | 1.28 |
+    | Subscription Save Offer | Honolulu International Drama Market | 2026-05-31 | 499 | 1.61 |
+    | Trust and Safety Moderation Burst | Washington Trust and Safety Region | 2026-05-26 | 494 | 1.34 |
+    | Subscription Save Offer | Las Vegas Live Event Market | 2026-05-26 | 493 | 1.67 |
+    {: title="Highest-Demand Forecast Rows Table"}
 
 2. These rows show why OML matters in the Media stack: the forecast is still tied to a named content asset, region, and audience signal factor.
 
@@ -144,19 +144,19 @@ Perform the following set of steps to compare predicted demand with available ca
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CONTENT_ASSET | CONTENT_CATEGORY | PREDICTED_DEMAND | CAPACITY_UNITS_AVAILABLE | DEMAND_TO_CAPACITY_RATIO |
-| --- | --- | ---: | ---: | ---: |
-| Sports Docuseries Season Access Bundle | Streaming and Live Entertainment | 305 | 1370 | 0.2226 |
-| Subscriber Churn Winback Offer | Streaming and Live Entertainment | 487 | 2211 | 0.2203 |
-| Trust and Safety Moderation Burst | Trust and Safety | 541 | 2940 | 0.1840 |
-| Sports Media Finals Watch Party | Streaming and Live Entertainment | 325 | 1777 | 0.1829 |
-| Audience Rewards Calendar | Streaming and Live Entertainment | 391 | 2260 | 0.1730 |
-| Premium Storefront Creator Bundle | Streaming and Live Entertainment | 424 | 2552 | 0.1661 |
-| Subscription Save Offer | Audience Activation | 528 | 3575 | 0.1477 |
-| Championship Highlights Rights | Sports Rights | 418 | 3032 | 0.1379 |
-{: title="Demand to Capacity Comparison Table"}
+    | CONTENT_ASSET | CONTENT_CATEGORY | PREDICTED_DEMAND | CAPACITY_UNITS_AVAILABLE | DEMAND_TO_CAPACITY_RATIO |
+    | --- | --- | ---: | ---: | ---: |
+    | Sports Docuseries Season Access Bundle | Streaming and Live Entertainment | 305 | 1370 | 0.2226 |
+    | Subscriber Churn Winback Offer | Streaming and Live Entertainment | 487 | 2211 | 0.2203 |
+    | Trust and Safety Moderation Burst | Trust and Safety | 541 | 2940 | 0.1840 |
+    | Sports Media Finals Watch Party | Streaming and Live Entertainment | 325 | 1777 | 0.1829 |
+    | Audience Rewards Calendar | Streaming and Live Entertainment | 391 | 2260 | 0.1730 |
+    | Premium Storefront Creator Bundle | Streaming and Live Entertainment | 424 | 2552 | 0.1661 |
+    | Subscription Save Offer | Audience Activation | 528 | 3575 | 0.1477 |
+    | Championship Highlights Rights | Sports Rights | 418 | 3032 | 0.1379 |
+    {: title="Demand to Capacity Comparison Table"}
 
 2. This is the OML hand-off back to operations: forecast demand becomes useful when the team can compare it to real available capacity in the same governed database.
 

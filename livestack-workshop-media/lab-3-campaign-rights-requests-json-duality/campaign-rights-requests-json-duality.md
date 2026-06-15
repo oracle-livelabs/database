@@ -62,12 +62,12 @@ Perform the following set of steps to inspect one high-value campaign request di
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CAMPAIGN_ORDER_ID | CAMPAIGN_STATUS | CAMPAIGN_VALUE | AUDIENCE_ACCOUNT | AUDIENCE_REGION | DISTRIBUTION_HUB | LINE_COUNT | REQUESTED_UNITS |
-| ---: | --- | ---: | --- | --- | --- | ---: | ---: |
-| 476 | shipped | 768029.99 | Leo Chen | Michigan | Boston Premium Originals Hub | 3 | 6 |
-{: title="Campaign Request Relational Detail Table"}
+    | CAMPAIGN_ORDER_ID | CAMPAIGN_STATUS | CAMPAIGN_VALUE | AUDIENCE_ACCOUNT | AUDIENCE_REGION | DISTRIBUTION_HUB | LINE_COUNT | REQUESTED_UNITS |
+    | ---: | --- | ---: | --- | --- | --- | ---: | ---: |
+    | 476 | shipped | 768029.99 | Leo Chen | Michigan | Boston Premium Originals Hub | 3 | 6 |
+    {: title="Campaign Request Relational Detail Table"}
 
 2. This is the governed operational row that the rest of the lab depends on.
 
@@ -94,12 +94,12 @@ Perform the following set of steps to retrieve the same request as a JSON docume
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| REQUEST_ID | CUSTOMER_ID | STATUS | TOTAL | SHIPPING_COST | DEMAND_SCORE | ITEM_COUNT |
-| ---: | ---: | --- | ---: | ---: | ---: | ---: |
-| 476 | 476 | shipped | 768029.99 | 0 | 96 | 3 |
-{: title="Campaign Request JSON Value Check Table"}
+    | REQUEST_ID | CUSTOMER_ID | STATUS | TOTAL | SHIPPING_COST | DEMAND_SCORE | ITEM_COUNT |
+    | ---: | ---: | --- | ---: | ---: | ---: | ---: |
+    | 476 | 476 | shipped | 768029.99 | 0 | 96 | 3 |
+    {: title="Campaign Request JSON Value Check Table"}
 
 2. The document is app-friendly, but it is not a second truth source. It is the same order exposed through a JSON duality view, and the table proves the JSON path values match the governed relational request.
 
@@ -127,12 +127,12 @@ Perform the following set of steps to connect the same request to the route and 
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| ORDER_ID | DISTRIBUTION_HUB | CARRIER | SHIP_STATUS | DISTANCE_KM | ESTIMATED_HOURS |
-| ---: | --- | --- | --- | ---: | ---: |
-| 476 | Boston Premium Originals Hub | StreamOps | delivered | 89.2 | 27 |
-{: title="Campaign Shipment Route Context Table"}
+    | ORDER_ID | DISTRIBUTION_HUB | CARRIER | SHIP_STATUS | DISTANCE_KM | ESTIMATED_HOURS |
+    | ---: | --- | --- | --- | ---: | ---: |
+    | 476 | Boston Premium Originals Hub | StreamOps | delivered | 89.2 | 27 |
+    {: title="Campaign Shipment Route Context Table"}
 
 2. This is the operating value of JSON Relational Duality in the Media stack: the app can work with a document, while operations can still verify the route, shipment, and relational detail that sits behind it.
 

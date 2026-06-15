@@ -57,16 +57,16 @@ Perform the following set of steps to review the approved Media semantic views t
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| TABLE_NAME | COMMENT_EXCERPT |
-| --- | --- |
-| MEDIA_AUDIENCE_SIGNALS_V | Media semantic view over social_posts and creators. Use this for audienc... |
-| MEDIA_CAMPAIGN_ORDERS_V | Media semantic view over orders, customers, order_items, and fulfillment... |
-| MEDIA_CONTENT_ASSETS_V | Media semantic view over products, brands, inventory, and audience signa... |
-| MEDIA_CREATOR_RELATIONSHIPS_V | Media semantic view over influencers, creator graph edges, and studio or... |
-| MEDIA_DISTRIBUTION_CAPACITY_V | Media semantic view over fulfillment_centers, inventory, products, and d... |
-{: title="Approved Media Semantic Views Table"}
+    | TABLE_NAME | COMMENT_EXCERPT |
+    | --- | --- |
+    | MEDIA_AUDIENCE_SIGNALS_V | Media semantic view over social_posts and creators. Use this for audienc... |
+    | MEDIA_CAMPAIGN_ORDERS_V | Media semantic view over orders, customers, order_items, and fulfillment... |
+    | MEDIA_CONTENT_ASSETS_V | Media semantic view over products, brands, inventory, and audience signa... |
+    | MEDIA_CREATOR_RELATIONSHIPS_V | Media semantic view over influencers, creator graph edges, and studio or... |
+    | MEDIA_DISTRIBUTION_CAPACITY_V | Media semantic view over fulfillment_centers, inventory, products, and d... |
+    {: title="Approved Media Semantic Views Table"}
 
 2. This is the governance checkpoint. Trusted answers should begin from objects that already explain their business meaning.
 
@@ -93,16 +93,16 @@ Perform the following set of steps to answer one launch question with visible SQ
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CONTENT_ASSET | STUDIO_OR_LABEL | CONTENT_CATEGORY | AUDIENCE_SIGNAL_COUNT | AVG_VIRALITY_SCORE |
-| --- | --- | --- | ---: | ---: |
-| Pulse Arena Regional Rights Window | Global Drama House | Sports Rights | 19 | 50.77 |
-| Superfan Loyalty Bonus Content Track | Marquee Media Network | Streaming and Live Entertainment | 19 | 50.68 |
-| Echo Valley Watch Time Personalization Test | AnimeForge | Streaming Placement | 19 | 50.67 |
-| Forge Comics Live Premium Bundle Upsell | Forge Comics Studio | Audience Activation | 19 | 50.58 |
-| WideAngle Matchday Creator Sponsored Journey | StreamWave Network | Creator Campaign | 19 | 50.57 |
-{: title="Top Audience-Signal Content Assets Table"}
+    | CONTENT_ASSET | STUDIO_OR_LABEL | CONTENT_CATEGORY | AUDIENCE_SIGNAL_COUNT | AVG_VIRALITY_SCORE |
+    | --- | --- | --- | ---: | ---: |
+    | Pulse Arena Regional Rights Window | Global Drama House | Sports Rights | 19 | 50.77 |
+    | Superfan Loyalty Bonus Content Track | Marquee Media Network | Streaming and Live Entertainment | 19 | 50.68 |
+    | Echo Valley Watch Time Personalization Test | AnimeForge | Streaming Placement | 19 | 50.67 |
+    | Forge Comics Live Premium Bundle Upsell | Forge Comics Studio | Audience Activation | 19 | 50.58 |
+    | WideAngle Matchday Creator Sponsored Journey | StreamWave Network | Creator Campaign | 19 | 50.57 |
+    {: title="Top Audience-Signal Content Assets Table"}
 
 2. This is the trusted-answer lesson: the business question is simple, but the answer still stays on governed views with a visible SQL path.
 

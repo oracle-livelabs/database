@@ -45,12 +45,12 @@ Perform the following set of steps to inspect the active dataset-state row that 
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| STATE_ID | ACTIVE_SOURCE | ACTIVE_LABEL | ACTIVE_VERSION |
-| ---: | --- | --- | --- |
-| 1 | demo | Media and Entertainment Demo Data | v1 |
-{: title="Active Dataset State Table"}
+    | STATE_ID | ACTIVE_SOURCE | ACTIVE_LABEL | ACTIVE_VERSION |
+    | ---: | --- | --- | --- |
+    | 1 | demo | Media and Entertainment Demo Data | v1 |
+    {: title="Active Dataset State Table"}
 
 2. This is the metadata checkpoint that tells the app whether the seeded launch story or a customer dataset is currently active.
 
@@ -82,21 +82,21 @@ Perform the following set of steps to confirm the import-contract tables that a 
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| TABLE_NAME |
-| --- |
-| BRANDS |
-| CUSTOMERS |
-| DEMAND_FORECASTS |
-| FULFILLMENT_CENTERS |
-| INFLUENCERS |
-| ORDER_ITEMS |
-| ORDERS |
-| POST_PRODUCT_MENTIONS |
-| PRODUCTS |
-| SOCIAL_POSTS |
-{: title="Import Contract Table List"}
+    | TABLE_NAME |
+    | --- |
+    | BRANDS |
+    | CUSTOMERS |
+    | DEMAND_FORECASTS |
+    | FULFILLMENT_CENTERS |
+    | INFLUENCERS |
+    | ORDER_ITEMS |
+    | ORDERS |
+    | POST_PRODUCT_MENTIONS |
+    | PRODUCTS |
+    | SOCIAL_POSTS |
+    {: title="Import Contract Table List"}
 
 2. This is why the import workflow can stay controlled. The schema contract is known before a customer dataset replaces the seeded rows.
 

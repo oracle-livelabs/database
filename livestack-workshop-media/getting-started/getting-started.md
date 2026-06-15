@@ -45,12 +45,12 @@ Perform the following set of steps to confirm that SQL Worksheet is connected to
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CURRENT_USER | CURRENT_SCHEMA | SERVICE_NAME |
-| --- | --- | --- |
-| LLUSER | LLUSER | LM38HD1DQ8ZMCGVB\_LOW |
-{: title="Workshop SQL Session Context Table"}
+    | CURRENT_USER | CURRENT_SCHEMA | SERVICE_NAME |
+    | --- | --- | --- |
+    | LLUSER | LLUSER | LM38HD1DQ8ZMCGVB\_LOW |
+    {: title="Workshop SQL Session Context Table"}
 
 3. If your environment uses a different workshop login, the user or service name can vary. The important check is that you are connected to the schema that owns the Media LiveStack objects you will query in the next labs.
 

@@ -56,12 +56,12 @@ Perform the following set of steps to confirm the launch KPI summary that anchor
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CAMPAIGN_ORDERS_TOTAL | CONTENT_REVENUE_TOTAL | HIGH_MOMENTUM_SIGNALS | CONTENT_DEMAND_ALERTS | AGENT_ACTIONS_TOTAL |
-| ---: | ---: | ---: | ---: | ---: |
-| 3000 | 854515722.41 | 474 | 187 | 0 |
-{: title="Launch KPI Summary Table"}
+    | CAMPAIGN_ORDERS_TOTAL | CONTENT_REVENUE_TOTAL | HIGH_MOMENTUM_SIGNALS | CONTENT_DEMAND_ALERTS | AGENT_ACTIONS_TOTAL |
+    | ---: | ---: | ---: | ---: | ---: |
+    | 3000 | 854515722.41 | 474 | 187 | 0 |
+    {: title="Launch KPI Summary Table"}
 
 2. These totals explain why the command center matters. The team is not reviewing one title or one market in isolation. It is reviewing a launch system with revenue at stake, fast-moving audience pressure, and a place for governed follow-up actions.
 
@@ -88,19 +88,19 @@ Perform the following set of steps to review which content categories carry the 
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CATEGORY | ORDER_COUNT | TOTAL_REVENUE |
-| --- | ---: | ---: |
-| Sports Rights | 706 | 217379750.00 |
-| Streaming and Live Entertainment | 1427 | 183269000.00 |
-| Marketing Assets | 865 | 64852250.00 |
-| Audience Activation | 815 | 61534750.00 |
-| Creator Campaign | 432 | 54985750.00 |
-| Live Event | 385 | 40689750.00 |
-| Streaming Placement | 432 | 37376250.00 |
-| Ad Inventory | 383 | 33979000.00 |
-{: title="Revenue by Content Category Table"}
+    | CATEGORY | ORDER_COUNT | TOTAL_REVENUE |
+    | --- | ---: | ---: |
+    | Sports Rights | 706 | 217379750.00 |
+    | Streaming and Live Entertainment | 1427 | 183269000.00 |
+    | Marketing Assets | 865 | 64852250.00 |
+    | Audience Activation | 815 | 61534750.00 |
+    | Creator Campaign | 432 | 54985750.00 |
+    | Live Event | 385 | 40689750.00 |
+    | Streaming Placement | 432 | 37376250.00 |
+    | Ad Inventory | 383 | 33979000.00 |
+    {: title="Revenue by Content Category Table"}
 
 2. This is the business interpretation to keep in view: launch pressure is not evenly distributed. Rights-heavy and streaming-heavy categories carry outsized revenue, so audience signals in those categories matter more.
 
@@ -134,19 +134,19 @@ Perform the following set of steps to identify the content assets carrying the s
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CONTENT_ASSET | STUDIO_OR_LABEL | MENTION_COUNT | TOTAL_VIEWS | AVG_VIRALITY |
-| --- | --- | ---: | ---: | ---: |
-| Forge Comics Live Regional Rights Window | SportsCast Plus | 19 | 13145741 | 46.6 |
-| Superfan Loyalty Encore Pack | SoundStage Live | 19 | 13038690 | 46.5 |
-| Behind-the-Scenes Creator Clip Pack | Aurora Studios | 19 | 12931639 | 46.4 |
-| Signal Run Premium Purchase Offer | BrightSide Learning | 19 | 12846688 | 48.8 |
-| Nova Kids Journey Regional Rights Window | Oceanic Anime | 19 | 12700617 | 48.7 |
-| BrightSide Lab Watch Time Personalization Test | Mosaic Documentary | 19 | 12554546 | 48.6 |
-| Regional Sports Rights Flash Sale | SportsCast Plus | 19 | 12408475 | 48.5 |
-| Binge Night Featured Carousel | StreamWave Network | 19 | 12262404 | 48.4 |
-{: title="Highest-Pressure Content Demand Alerts Table"}
+    | CONTENT_ASSET | STUDIO_OR_LABEL | MENTION_COUNT | TOTAL_VIEWS | AVG_VIRALITY |
+    | --- | --- | ---: | ---: | ---: |
+    | Forge Comics Live Regional Rights Window | SportsCast Plus | 19 | 13145741 | 46.6 |
+    | Superfan Loyalty Encore Pack | SoundStage Live | 19 | 13038690 | 46.5 |
+    | Behind-the-Scenes Creator Clip Pack | Aurora Studios | 19 | 12931639 | 46.4 |
+    | Signal Run Premium Purchase Offer | BrightSide Learning | 19 | 12846688 | 48.8 |
+    | Nova Kids Journey Regional Rights Window | Oceanic Anime | 19 | 12700617 | 48.7 |
+    | BrightSide Lab Watch Time Personalization Test | Mosaic Documentary | 19 | 12554546 | 48.6 |
+    | Regional Sports Rights Flash Sale | SportsCast Plus | 19 | 12408475 | 48.5 |
+    | Binge Night Featured Carousel | StreamWave Network | 19 | 12262404 | 48.4 |
+    {: title="Highest-Pressure Content Demand Alerts Table"}
 
 2. This is the business hand-off from the dashboard into the deeper labs. Once the team sees which assets carry the strongest pressure, it can investigate the audience language, creator network, rights coverage, and campaign-request details behind those signals.
 

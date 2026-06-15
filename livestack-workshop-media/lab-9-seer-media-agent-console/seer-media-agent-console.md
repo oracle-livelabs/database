@@ -58,16 +58,16 @@ Perform the following set of steps to confirm that the core Media agent function
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| OBJECT_NAME |
-| --- |
-| CHECK_PRODUCT_INVENTORY |
-| DETECT_TRENDING_PRODUCTS |
-| FIND_BEST_FULFILLMENT |
-| GET_INFLUENCER_NETWORK |
-| LOG_AGENT_DECISION |
-{: title="Approved Agent Functions Table"}
+    | OBJECT_NAME |
+    | --- |
+    | CHECK_PRODUCT_INVENTORY |
+    | DETECT_TRENDING_PRODUCTS |
+    | FIND_BEST_FULFILLMENT |
+    | GET_INFLUENCER_NETWORK |
+    | LOG_AGENT_DECISION |
+    {: title="Approved Agent Functions Table"}
 
 2. These functions form the trusted tool surface. They define what the agent is allowed to do.
 
@@ -140,12 +140,12 @@ Perform the following set of steps to review the resulting audit evidence and co
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| AGENT_NAME | ACTION_TYPE | ENTITY_TYPE | EXECUTION_STATUS | CONFIDENCE |
-| --- | --- | --- | --- | ---: |
-| workshop_agent_demo | rights_capacity_review | campaign_order | completed | 0.9 |
-{: title="Agent Audit Evidence Table"}
+    | AGENT_NAME | ACTION_TYPE | ENTITY_TYPE | EXECUTION_STATUS | CONFIDENCE |
+    | --- | --- | --- | --- | ---: |
+    | workshop_agent_demo | rights_capacity_review | campaign_order | completed | 0.9 |
+    {: title="Agent Audit Evidence Table"}
 
 2. This is the trusted-action pattern the workshop wants the learner to remember: approved tool, grounded reason, durable audit row.
 

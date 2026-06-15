@@ -28,11 +28,11 @@ In this lab, you will:
 
 Estimated Time: **10 minutes**
 
-![Audience Momentum and Safety Signals workspace overview](images/L4F1.png " ")
+![Audience Momentum and Safety Signals workspace overview](images/l4f1.png " ")
 
 *Figure 1: The audience signal workspace shows the launch phrase search and the governed signal feed it controls.*
 
-![Audience Momentum and Safety Signals with query controls highlighted](images/L4F2.png " ")
+![Audience Momentum and Safety Signals with query controls highlighted](images/l4f2.png " ")
 
 *Figure 2: The runbook highlights the same query-chip and evidence flow that the SQL lab explains.*
 
@@ -54,12 +54,12 @@ Perform the following set of steps to confirm the embedding model and vector inv
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| MODEL_NAME | MINING_FUNCTION | ALGORITHM |
-| --- | --- | --- |
-| ALL\_MINILM\_L12\_V2 | EMBEDDING | ONNX |
-{: title="Embedding Model Inventory Table"}
+    | MODEL_NAME | MINING_FUNCTION | ALGORITHM |
+    | --- | --- | --- |
+    | ALL\_MINILM\_L12\_V2 | EMBEDDING | ONNX |
+    {: title="Embedding Model Inventory Table"}
 
 2. Run this supporting query to confirm the vector inventory.
 
@@ -110,19 +110,19 @@ Perform the following set of steps to search content assets by meaning with a na
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CONTENT_ASSET | STUDIO_OR_LABEL | CONTENT_CATEGORY | SIMILARITY_PCT |
-| --- | --- | --- | ---: |
-| Championship Highlights Rights | SportsCast Plus | Sports Rights | 67.2 |
-| The Last Laugh Track Sports Highlights Rights | EchoVerse Audio | Sports Rights | 61.8 |
-| Midnight Harbor Sports Highlights Rights | Civic Stream | Sports Rights | 57.5 |
-| Orbit Riders Sports Highlights Rights | ArcLight Originals | Sports Rights | 56.0 |
-| Neon Rift Sports Highlights Rights | IndieFrame | Sports Rights | 55.8 |
-| Lunar Kitchen Sports Highlights Rights | EchoVerse Audio | Sports Rights | 55.5 |
-| Shadow Circuit Sports Highlights Rights | PrimePitch Sports | Sports Rights | 54.5 |
-| Sonic City Sessions Sports Highlights Rights | IndieFrame | Sports Rights | 54.0 |
-{: title="Top Semantic Content Matches Table"}
+    | CONTENT_ASSET | STUDIO_OR_LABEL | CONTENT_CATEGORY | SIMILARITY_PCT |
+    | --- | --- | --- | ---: |
+    | Championship Highlights Rights | SportsCast Plus | Sports Rights | 67.2 |
+    | The Last Laugh Track Sports Highlights Rights | EchoVerse Audio | Sports Rights | 61.8 |
+    | Midnight Harbor Sports Highlights Rights | Civic Stream | Sports Rights | 57.5 |
+    | Orbit Riders Sports Highlights Rights | ArcLight Originals | Sports Rights | 56.0 |
+    | Neon Rift Sports Highlights Rights | IndieFrame | Sports Rights | 55.8 |
+    | Lunar Kitchen Sports Highlights Rights | EchoVerse Audio | Sports Rights | 55.5 |
+    | Shadow Circuit Sports Highlights Rights | PrimePitch Sports | Sports Rights | 54.5 |
+    | Sonic City Sessions Sports Highlights Rights | IndieFrame | Sports Rights | 54.0 |
+    {: title="Top Semantic Content Matches Table"}
 
 2. This is the learning point for the lab. The result is not looking for the exact string `sports rights highlight clips` in a title column. It is comparing meaning with stored embeddings.
 
@@ -147,16 +147,16 @@ Perform the following set of steps to review the content assets already carrying
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CONTENT_ASSET | STUDIO_OR_LABEL | AUDIENCE_SIGNAL_COUNT | AVG_VIRALITY_SCORE |
-| --- | --- | ---: | ---: |
-| Pulse Arena Regional Rights Window | Global Drama House | 19 | 50.77 |
-| Superfan Loyalty Bonus Content Track | Marquee Media Network | 19 | 50.68 |
-| Echo Valley Watch Time Personalization Test | AnimeForge | 19 | 50.67 |
-| Forge Comics Live Premium Bundle Upsell | Forge Comics Studio | 19 | 50.58 |
-| WideAngle Matchday Creator Sponsored Journey | StreamWave Network | 19 | 50.57 |
-{: title="Highest Signal Load Content Assets Table"}
+    | CONTENT_ASSET | STUDIO_OR_LABEL | AUDIENCE_SIGNAL_COUNT | AVG_VIRALITY_SCORE |
+    | --- | --- | ---: | ---: |
+    | Pulse Arena Regional Rights Window | Global Drama House | 19 | 50.77 |
+    | Superfan Loyalty Bonus Content Track | Marquee Media Network | 19 | 50.68 |
+    | Echo Valley Watch Time Personalization Test | AnimeForge | 19 | 50.67 |
+    | Forge Comics Live Premium Bundle Upsell | Forge Comics Studio | 19 | 50.58 |
+    | WideAngle Matchday Creator Sponsored Journey | StreamWave Network | 19 | 50.57 |
+    {: title="Highest Signal Load Content Assets Table"}
 
 2. Together, these queries show why the app can move from audience language to a governed content shortlist without breaking the data boundary.
 

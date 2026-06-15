@@ -27,11 +27,11 @@ In this lab, you will:
 
 Estimated Time: **10 minutes**
 
-![Creator and Community Graph overview with creator list and graph canvas](images/L5F1.png " ")
+![Creator and Community Graph overview with creator list and graph canvas](images/l5f1.png " ")
 
 *Figure 1: The graph workspace shows the creator list, graph canvas, and relationship explorer backed by Oracle Property Graph.*
 
-![Property Graph concept graphic](images/L5F2.png " ")
+![Property Graph concept graphic](images/l5f2.png " ")
 
 *Figure 2: Oracle Property Graph keeps creator, campaign, and studio evidence connected for launch decisions.*
 
@@ -66,19 +66,19 @@ Perform the following set of steps to identify the current creator hubs with SQL
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| SRC_HANDLE | SRC_PLATFORM | SRC_NICHE | SRC_SCORE | SRC_FOLLOWERS | DEGREE | EDGE_TYPES | AVG_STRENGTH |
-| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| @fanbase\_020 | threads | Trailer Reactions | 82.6 | 170380 | 7 | 1 | 0.634 |
-| @fandom\_083 | twitter | Fan Communities | 82.6 | 669277 | 7 | 1 | 0.621 |
-| @premiere\_041 | instagram | Anime Culture | 82.6 | 336679 | 7 | 1 | 0.630 |
-| @streaming\_062 | tiktok | Subscriber Retention | 82.6 | 502978 | 7 | 1 | 0.626 |
-| @trailer\_104 | youtube | International Fandom | 82.6 | 835576 | 7 | 1 | 0.617 |
-| @anime\_089 | youtube | Anime Culture | 82.5 | 716791 | 7 | 1 | 0.647 |
-| @family\_047 | tiktok | Premium Economy | 82.5 | 384193 | 7 | 1 | 0.656 |
-| @globaldrama\_068 | twitter | Trailer Reactions | 82.5 | 550492 | 7 | 1 | 0.651 |
-{: title="Highest-Degree Creator Hubs Table"}
+    | SRC_HANDLE | SRC_PLATFORM | SRC_NICHE | SRC_SCORE | SRC_FOLLOWERS | DEGREE | EDGE_TYPES | AVG_STRENGTH |
+    | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
+    | @fanbase\_020 | threads | Trailer Reactions | 82.6 | 170380 | 7 | 1 | 0.634 |
+    | @fandom\_083 | twitter | Fan Communities | 82.6 | 669277 | 7 | 1 | 0.621 |
+    | @premiere\_041 | instagram | Anime Culture | 82.6 | 336679 | 7 | 1 | 0.630 |
+    | @streaming\_062 | tiktok | Subscriber Retention | 82.6 | 502978 | 7 | 1 | 0.626 |
+    | @trailer\_104 | youtube | International Fandom | 82.6 | 835576 | 7 | 1 | 0.617 |
+    | @anime\_089 | youtube | Anime Culture | 82.5 | 716791 | 7 | 1 | 0.647 |
+    | @family\_047 | tiktok | Premium Economy | 82.5 | 384193 | 7 | 1 | 0.656 |
+    | @globaldrama\_068 | twitter | Trailer Reactions | 82.5 | 550492 | 7 | 1 | 0.651 |
+    {: title="Highest-Degree Creator Hubs Table"}
 
 2. The point is not that seven is a magic number. The point is that the database can expose creator hubs and connected reach without exporting the network elsewhere.
 
@@ -106,14 +106,14 @@ Perform the following set of steps to inspect one creator's connected studio and
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| CREATOR_HANDLE | STUDIO_OR_LABEL | RELATIONSHIP_TYPE | POST_COUNT | CONTENT_REVENUE_ATTRIBUTED | CREATOR_EDGE_COUNT |
-| --- | --- | --- | ---: | ---: | ---: |
-| @retention\_314 | LatinStream | affiliate | 34 | 139943 | 6 |
-| @retention\_314 | Helix Reality League | sponsored | 13 | 123596 | 6 |
-| @retention\_314 | BlueWave Podcasts | competitor\_mention | 34 | 107249 | 6 |
-{: title="Creator Studio and Label Relationship Table"}
+    | CREATOR_HANDLE | STUDIO_OR_LABEL | RELATIONSHIP_TYPE | POST_COUNT | CONTENT_REVENUE_ATTRIBUTED | CREATOR_EDGE_COUNT |
+    | --- | --- | --- | ---: | ---: | ---: |
+    | @retention\_314 | LatinStream | affiliate | 34 | 139943 | 6 |
+    | @retention\_314 | Helix Reality League | sponsored | 13 | 123596 | 6 |
+    | @retention\_314 | BlueWave Podcasts | competitor\_mention | 34 | 107249 | 6 |
+    {: title="Creator Studio and Label Relationship Table"}
 
 2. This is the graph lab's business value: the team can move from one creator handle to the connected studios, labels, and influence paths that matter operationally.
 

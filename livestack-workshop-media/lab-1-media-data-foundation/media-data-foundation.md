@@ -58,18 +58,18 @@ Perform the following set of steps to confirm that the core Media row groups are
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| DATA_GROUP | ROW_COUNT |
-| --- | ---: |
-| Content assets | 187 |
-| Audience signals | 5000 |
-| Campaign orders | 3000 |
-| Content vectors | 187 |
-| Signal vectors | 5000 |
-| Semantic matches | 1422 |
-| Distribution hubs | 30 |
-{: title="Core Media Row Group Counts Table"}
+    | DATA_GROUP | ROW_COUNT |
+    | --- | ---: |
+    | Content assets | 187 |
+    | Audience signals | 5000 |
+    | Campaign orders | 3000 |
+    | Content vectors | 187 |
+    | Signal vectors | 5000 |
+    | Semantic matches | 1422 |
+    | Distribution hubs | 30 |
+    {: title="Core Media Row Group Counts Table"}
 
 2. These counts anchor the rest of the workshop. They show that the app is backed by fixed rows, regenerated embeddings, and governed launch data instead of static screenshots.
 
@@ -113,15 +113,15 @@ Perform the following set of steps to inventory the learner-facing Media surface
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| OBJECT_GROUP | OBJECT_COUNT |
-| --- | ---: |
-| Media semantic views | 5 |
-| JSON duality views | 2 |
-| Property graphs | 1 |
-| Agent functions | 6 |
-{: title="Media Semantic Surface Inventory Table"}
+    | OBJECT_GROUP | OBJECT_COUNT |
+    | --- | ---: |
+    | Media semantic views | 5 |
+    | JSON duality views | 2 |
+    | Property graphs | 1 |
+    | Agent functions | 6 |
+    {: title="Media Semantic Surface Inventory Table"}
 
 2. These are the same surfaces the app, trusted-answer flow, and trusted-action flow rely on later in the workshop.
 
@@ -152,19 +152,19 @@ Perform the following set of steps to connect each Media app scene to the Oracle
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| STACK_SCENE | DATABASE_CAPABILITY |
-| --- | --- |
-| Launch Operations Command Center | SQL aggregation over campaign orders, audience signals, and content assets |
-| Campaign and Rights Requests | JSON Relational Duality plus relational SQL over one request record |
-| Audience Momentum and Safety Signals | VECTOR_EMBEDDING, VECTOR_DISTANCE, and semantic matches |
-| Creator and Community Graph | Property Graph and GRAPH_TABLE SQL/PGQ |
-| Rights, Capacity, and Live Event Coverage | SDO_GEOMETRY, demand regions, and proximity calculations |
-| Engagement, Revenue, and Retention Forecasts | DBMS_DATA_MINING models, forecast rows, and scoring views |
-| Ask Seer Media Data | Approved semantic views, comments, and visible SQL paths |
-| Seer Media Agent Console | PL/SQL tools plus durable audit history |
-{: title="App Scene Capability Map Table"}
+    | STACK_SCENE | DATABASE_CAPABILITY |
+    | --- | --- |
+    | Launch Operations Command Center | SQL aggregation over campaign orders, audience signals, and content assets |
+    | Campaign and Rights Requests | JSON Relational Duality plus relational SQL over one request record |
+    | Audience Momentum and Safety Signals | VECTOR_EMBEDDING, VECTOR_DISTANCE, and semantic matches |
+    | Creator and Community Graph | Property Graph and GRAPH_TABLE SQL/PGQ |
+    | Rights, Capacity, and Live Event Coverage | SDO_GEOMETRY, demand regions, and proximity calculations |
+    | Engagement, Revenue, and Retention Forecasts | DBMS_DATA_MINING models, forecast rows, and scoring views |
+    | Ask Seer Media Data | Approved semantic views, comments, and visible SQL paths |
+    | Seer Media Agent Console | PL/SQL tools plus durable audit history |
+    {: title="App Scene Capability Map Table"}
 
 2. Keep this map in mind as you move through the workshop. Every later lab explains one decision surface from this same governed launch foundation.
 

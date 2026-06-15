@@ -51,15 +51,15 @@ Perform the following set of steps to confirm the spatial surfaces that support 
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| TABLE_NAME | COLUMN_NAME |
-| --- | --- |
-| CUSTOMERS | LOCATION |
-| DEMAND_REGIONS | BOUNDARY |
-| FULFILLMENT_CENTERS | LOCATION |
-| FULFILLMENT_ZONES | ZONE_BOUNDARY |
-{: title="Spatial Metadata Surface Table"}
+    | TABLE_NAME | COLUMN_NAME |
+    | --- | --- |
+    | CUSTOMERS | LOCATION |
+    | DEMAND_REGIONS | BOUNDARY |
+    | FULFILLMENT_CENTERS | LOCATION |
+    | FULFILLMENT_ZONES | ZONE_BOUNDARY |
+    {: title="Spatial Metadata Surface Table"}
 
 2. These are the same spatial surfaces the map layers depend on.
 
@@ -82,12 +82,12 @@ Perform the following set of steps to review the current launch-capacity summary
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| DISTRIBUTION_HUBS | AVAILABLE_RIGHTS_CAPACITY_UNITS | RESERVED_CAPACITY_UNITS | DEMAND_REGIONS |
-| ---: | ---: | ---: | ---: |
-| 30 | 526256 | 49241 | 20 |
-{: title="Launch Capacity Summary Table"}
+    | DISTRIBUTION_HUBS | AVAILABLE_RIGHTS_CAPACITY_UNITS | RESERVED_CAPACITY_UNITS | DEMAND_REGIONS |
+    | ---: | ---: | ---: | ---: |
+    | 30 | 526256 | 49241 | 20 |
+    {: title="Launch Capacity Summary Table"}
 
 2. This is why the page matters: the launch team is balancing capacity and rights readiness across a real operating footprint, not one national average.
 
@@ -117,19 +117,19 @@ Perform the following set of steps to identify the hubs carrying the strongest c
     </copy>
     ```
 
-**Expected output:**
+    **Expected output:**
 
-| DISTRIBUTION_HUB | CITY | STATE_PROVINCE | CAPACITY_UNITS_AVAILABLE | CAPACITY_UNITS_RESERVED | CAPACITY_UNITS_INCOMING |
-| --- | --- | --- | ---: | ---: | ---: |
-| Las Vegas Live Event Hub | Las Vegas | Nevada | 18256 | 1638 | 6620 |
-| San Antonio Spanish-Language Desk | San Antonio | Texas | 18231 | 1655 | 6884 |
-| Austin Creator Monetization Hub | Austin | Texas | 18206 | 1629 | 6296 |
-| Minneapolis Sports Replay Desk | Minneapolis | Minnesota | 18169 | 1695 | 6192 |
-| Atlanta Theatrical Launch Desk | Atlanta | Georgia | 18095 | 1624 | 6292 |
-| Kansas City Rights Capacity Desk | Kansas City | Missouri | 18060 | 1637 | 6680 |
-| Dallas Sports Rights Desk | Dallas | Texas | 18005 | 1682 | 6724 |
-| Philadelphia Documentary Forum Desk | Philadelphia | Pennsylvania | 17938 | 1615 | 6596 |
-{: title="Highest-Capacity Distribution Hubs Table"}
+    | DISTRIBUTION_HUB | CITY | STATE_PROVINCE | CAPACITY_UNITS_AVAILABLE | CAPACITY_UNITS_RESERVED | CAPACITY_UNITS_INCOMING |
+    | --- | --- | --- | ---: | ---: | ---: |
+    | Las Vegas Live Event Hub | Las Vegas | Nevada | 18256 | 1638 | 6620 |
+    | San Antonio Spanish-Language Desk | San Antonio | Texas | 18231 | 1655 | 6884 |
+    | Austin Creator Monetization Hub | Austin | Texas | 18206 | 1629 | 6296 |
+    | Minneapolis Sports Replay Desk | Minneapolis | Minnesota | 18169 | 1695 | 6192 |
+    | Atlanta Theatrical Launch Desk | Atlanta | Georgia | 18095 | 1624 | 6292 |
+    | Kansas City Rights Capacity Desk | Kansas City | Missouri | 18060 | 1637 | 6680 |
+    | Dallas Sports Rights Desk | Dallas | Texas | 18005 | 1682 | 6724 |
+    | Philadelphia Documentary Forum Desk | Philadelphia | Pennsylvania | 17938 | 1615 | 6596 |
+    {: title="Highest-Capacity Distribution Hubs Table"}
 
 2. These rows explain the map in operational terms. Oracle Spatial provides the launch geometry, but the business still needs the hub-level capacity evidence tied to it.
 
