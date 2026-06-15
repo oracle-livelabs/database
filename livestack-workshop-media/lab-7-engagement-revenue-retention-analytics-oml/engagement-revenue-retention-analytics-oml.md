@@ -28,7 +28,7 @@ In this lab, you will:
 
 Estimated Time: **10 minutes**
 
-![Engagement, Revenue, and Retention Forecasts overview](images/l7.png " ")
+![Engagement, Revenue, and Retention Forecasts overview](images/L7.png " ")
 
 *Figure 1: The OML analytics page ties demand, revenue, retention, and capacity forecasts to one launch workflow.*
 
