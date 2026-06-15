@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="660" viewBox="0 0 1320 660" role="img" aria-labelledby="title desc">
+  <title id="title">Oracle Spatial routing concept flow</title>
+  <desc id="desc">Oracle Spatial connects demand regions, launch hubs, route distance, and active operating status in one query flow.</desc>
+  <rect width="1320" height="660" fill="#f6f3ef"/>
+  <rect x="28" y="28" width="1264" height="604" rx="28" fill="#ffffff" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="60" y="76" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#312d2a">How Oracle Spatial Turns Geography into an Operating Decision</text>
+  <rect x="76" y="170" width="260" height="148" rx="22" fill="#fff7f4" stroke="#c74634" stroke-width="2"/>
+  <text x="108" y="212" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#7d2f25">Demand Region</text>
+  <text x="108" y="248" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Where audience demand</text>
+  <text x="108" y="272" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">or rights pressure is rising.</text>
+  <rect x="392" y="136" width="332" height="216" rx="22" fill="#f5efe8" stroke="#aa643b" stroke-width="2"/>
+  <text x="426" y="184" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#714121">Oracle Spatial</text>
+  <text x="426" y="224" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Stores coordinates, measures route distance,</text>
+  <text x="426" y="248" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">and filters only active launch hubs in one</text>
+  <text x="426" y="272" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">SQL decision path.</text>
+  <rect x="820" y="104" width="340" height="138" rx="22" fill="#e9f3f6" stroke="#437c94" stroke-width="2"/>
+  <text x="852" y="146" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#255164">Audience Market</text>
+  <text x="852" y="182" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Nearest account or</text>
+  <text x="852" y="206" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">affected launch region.</text>
+  <rect x="820" y="286" width="340" height="162" rx="22" fill="#edf6ef" stroke="#4c825c" stroke-width="2"/>
+  <text x="852" y="326" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f593b">Active Launch Hubs</text>
+  <text x="852" y="364" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Eligible desks and hubs</text>
+  <text x="852" y="388" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">ranked for operating action.</text>
+  <path d="M336 244 H374" stroke="#c74634" stroke-width="4" fill="none"/>
+  <polygon points="374,244 358,236 358,252" fill="#c74634"/>
+  <path d="M724 206 H796" stroke="#437c94" stroke-width="4" fill="none"/>
+  <polygon points="796,206 780,198 780,214" fill="#437c94"/>
+  <path d="M724 306 H796" stroke="#4c825c" stroke-width="4" fill="none"/>
+  <polygon points="796,306 780,298 780,314" fill="#4c825c"/>
+</svg>
