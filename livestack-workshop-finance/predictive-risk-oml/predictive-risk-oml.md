@@ -70,6 +70,7 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
            PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_surge,
            ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL USING *), 4) AS confidence
     FROM oml_demand_training_v
+    ORDER BY product_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
@@ -78,16 +79,18 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
     | Product Id | Training Label | Predicted Surge | Confidence |
     | --- | --- | --- | --- |
-    | 45 | SURGE | SURGE | 0.5211 |
-    | 52 | SURGE | SURGE | 0.6106 |
-    | 68 | SURGE | SURGE | 0.6009 |
-    | 34 | SURGE | STABLE | 0.6206 |
-    | 2 | SURGE | STABLE | 0.6156 |
-    | 57 | SURGE | SURGE | 0.5205 |
-    | 69 | SURGE | SURGE | 0.5809 |
-    | 58 | SURGE | STABLE | 0.5125 |
-    | 19 | SURGE | SURGE | 0.6009 |
-    | 16 | SURGE | SURGE | 0.59 |
+    | 1 | STABLE | STABLE | 0.9674 |
+    | 2 | SURGE | STABLE | 0.6139 |
+    | 3 | SURGE | STABLE | 0.6128 |
+    | 4 | SURGE | SURGE | 0.5831 |
+    | 5 | STABLE | STABLE | 0.8716 |
+    | 6 | STABLE | STABLE | 0.9361 |
+    | 7 | STABLE | STABLE | 0.6684 |
+    | 8 | STABLE | STABLE | 0.9435 |
+    | 9 | STABLE | STABLE | 0.6597 |
+    | 10 | STABLE | STABLE | 0.5252 |
+
+    The `ORDER BY product_id` clause makes the displayed sample rows stable. The `Confidence` values are OML model scores, not stored source data. The loader uses fixed training rows and a fixed model seed, but small decimal differences can still appear after a database patch, model rebuild, or OML runtime change. Focus on the predicted label and the relative confidence pattern; a slight change in the fourth decimal place is expected.
 
 
 2. Run revenue regression.
