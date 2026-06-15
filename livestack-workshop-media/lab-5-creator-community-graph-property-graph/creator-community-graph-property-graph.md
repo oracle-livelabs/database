@@ -27,11 +27,11 @@ In this lab, you will:
 
 Estimated Time: **10 minutes**
 
-![Creator and Community Graph overview with creator list and graph canvas](images/L5F1.png " ")
+![Creator and Community Graph overview with creator list and graph canvas](images/l5f1.png " ")
 
 *Figure 1: The graph workspace shows the creator list, graph canvas, and relationship explorer backed by Oracle Property Graph.*
 
-![Property Graph concept graphic](images/L5F2.png " ")
+![Property Graph concept graphic](images/l5f2.png " ")
 
 *Figure 2: Oracle Property Graph keeps creator, campaign, and studio evidence connected for launch decisions.*
 
