@@ -28,11 +28,11 @@ In this lab, you will:
 
 Estimated Time: **10 minutes**
 
-![Audience Momentum and Safety Signals workspace overview](images/L4F1.png " ")
+![Audience Momentum and Safety Signals workspace overview](images/audience-momentum-workspace.png " ")
 
 *Figure 1: The audience signal workspace shows the launch phrase search and the governed signal feed it controls.*
 
-![Audience Momentum and Safety Signals with query controls highlighted](images/L4F2.png " ")
+![Audience Momentum and Safety Signals with query controls highlighted](images/audience-vector-search-controls.png " ")
 
 *Figure 2: The runbook highlights the same query-chip and evidence flow that the SQL lab explains.*
 
