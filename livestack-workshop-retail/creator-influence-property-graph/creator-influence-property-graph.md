@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Creator influence is not only about follower count. In this lab, you learn how Oracle AI Database represents creators, brands, products, and posts as a property graph so you can ask relationship questions directly.
+Creator influence is not only about follower count. Frame this lab around the retail question that matters to the business: *Who can move demand, through which relationships, and how quickly can that signal spread?*
 
-After **Lab 4** shows what customers and creators are saying, this lab shows who can amplify that signal. The key learning point is that graph pattern matching lets you describe relationship paths directly. Traditional SQL can answer the same questions, but every additional hop usually means more table aliases, more joins, and more join conditions.
+After the **vector-search lab** shows what customers and creators are talking about, this lab shows who can amplify that signal. Emphasize that graph pattern matching matters because influence analysis quickly becomes a path question, not just a row-and-column question.
 
 ### Operating Story
 
@@ -22,10 +22,10 @@ Estimated Time: **10 minutes**
 
 ### Objectives
 
-- Understand the source tables behind the `INFLUENCER_NETWORK` property graph.
-- Compare traditional SQL joins with property graph pattern matching.
-- Run `GRAPH_TABLE` traversals for direct creator relationships.
-- Add a brand relationship to the path and explain how graph traversals support influence analysis.
+- Understand which governed retail tables feed the `INFLUENCER_NETWORK` graph so learners can trust the business meaning behind each path.
+- Compare traditional SQL joins with graph pattern matching to show when relationship analysis becomes easier to explain and maintain in graph form.
+- Run `GRAPH_TABLE` traversals for direct creator relationships so the business can see who is connected to whom before broadening the influence path.
+- Add a brand relationship to the path and explain how multi-step graph traversals support retail influence analysis, partnership insight, and campaign planning.
 
 
 ## Task 1: Review the creator graph model
@@ -40,7 +40,7 @@ Perform the following set of steps to understand the graph model used for influe
 
 2. Understand the graph object.
 
-    The workshop defines one property graph named `INFLUENCER_NETWORK`. A property graph is built from two kinds of source data:
+    The workshop defines one property graph named `INFLUENCER_NETWORK`. Lead with the business view: this graph turns retail relationships into a queryable network so teams can trace how creators, brands, products, and posts are connected.
 
     | Graph concept | Retail source tables | What they represent |
     | --- | --- | --- |
@@ -59,7 +59,7 @@ Perform the following set of steps to see why graph pattern matching is easier t
 
 1. Compare one hop in SQL and graph pattern form.
 
-    Traditional SQL can find a direct creator-to-creator connection, but it must join the creator table twice and join through the relationship table.
+    Traditional SQL can find a direct creator-to-creator connection, but the business lesson is readability and scale: as influence paths grow longer, graph syntax stays closer to how teams actually describe the relationship question.
 
     ```sql
     -- Traditional SQL shape for one hop.
@@ -131,7 +131,7 @@ Perform the following set of steps to see why graph pattern matching is easier t
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | From | To | Link | Strength |
     | --- | --- | --- | ---: |
@@ -191,7 +191,7 @@ Perform the following set of steps to see why graph pattern matching is easier t
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Brand | Promoter | Reached | Relationship |
     | --- | --- | --- | --- |
@@ -217,8 +217,9 @@ Perform the following set of steps to see why graph pattern matching is easier t
 
     *Figure 3: A visualization of brand propagation paths.*
 
-    For a merchandising or marketing team, this helps answer practical questions: which creators can amplify a product story, which brand relationships may have broader reach, and where follow-up campaigns might create the most network effect after Lab 4 identifies a product or social trend worth watching.
+    For a merchandising or marketing team, this helps answer practical questions: which creators can amplify a product story, which brand relationships may have broader reach, and where follow-up campaigns might create the most network effect after **Lab 4** identifies a product or social trend worth watching.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Learn More
 
