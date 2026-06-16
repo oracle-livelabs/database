@@ -44,9 +44,7 @@ Perform the following set of steps to confirm that the core Media agent function
 
     ```sql
     <copy>
-    SELECT
-      ROW_NUMBER() OVER (ORDER BY object_name) AS function_order,
-      object_name
+    SELECT object_name
     FROM user_objects
     WHERE object_type = 'FUNCTION'
       AND object_name IN (
@@ -62,13 +60,13 @@ Perform the following set of steps to confirm that the core Media agent function
 
     **Expected output:**
 
-    | FUNCTION_ORDER | OBJECT_NAME |
-    | ---: | --- |
-    | 1 | CHECK_PRODUCT_INVENTORY |
-    | 2 | DETECT_TRENDING_PRODUCTS |
-    | 3 | FIND_BEST_FULFILLMENT |
-    | 4 | GET_INFLUENCER_NETWORK |
-    | 5 | LOG_AGENT_DECISION |
+    | OBJECT_NAME |
+    | --- |
+    | CHECK_PRODUCT_INVENTORY |
+    | DETECT_TRENDING_PRODUCTS |
+    | FIND_BEST_FULFILLMENT |
+    | GET_INFLUENCER_NETWORK |
+    | LOG_AGENT_DECISION |
     {: title="Approved Agent Functions Table"}
 
 2. These functions form the trusted tool surface. They define what the agent is allowed to do.
@@ -101,24 +99,22 @@ Perform the following set of steps to create one rerunnable workshop audit row t
 
     ```sql
     <copy>
-    SELECT
-      'LOG_AGENT_DECISION' AS action_check,
-      log_agent_decision(
-        'workshop_agent_demo',
-        'rights_capacity_review',
-        'campaign_order',
-        '{"contentAsset":"Championship Highlights Rights","reason":"Launch planner requested a capacity review before the next rights release wave."}'
-      ) AS log_result
+    SELECT log_agent_decision(
+             'workshop_agent_demo',
+             'rights_capacity_review',
+             'campaign_order',
+             '{"contentAsset":"Championship Highlights Rights","reason":"Launch planner requested a capacity review before the next rights release wave."}'
+           ) AS log_result
     FROM dual;
     </copy>
     ```
 
-    **Expected output:**
+**Expected output:**
 
-    | ACTION_CHECK | LOG_RESULT |
-    | --- | --- |
-    | LOG_AGENT_DECISION | Decision logged: rights_capacity_review by workshop_agent_demo |
-    {: title="Trusted Action Logging Result Table"}
+| LOG_RESULT |
+| --- |
+| Decision logged: rights_capacity_review by workshop_agent_demo |
+{: title="Trusted Action Logging Result Table"}
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
