@@ -6,6 +6,8 @@ This lab scores persisted Oracle Machine Learning models created by the finance 
 
 Prediction adds forward-looking evidence to the operating flow. Instead of only describing current risk and service pressure, the database can score demand surge, customer segments, product clusters, and revenue expectations where the governed data already lives.
 
+This lab shifts the story from current evidence to forward-looking evidence. The same database records used for dashboard, service, and transaction review become model features scored in place.
+
 ![Finance OML scoring flow](images/finance-oml-scoring-flow.svg " ")
 
 ![Predictive Risk Capacity and Revenue page](images/predictive-risk-oml.png " ")
@@ -55,6 +57,8 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
 
 2. Confirm the model list.
+    The query reads the model catalog, so it proves deployed model readiness before any prediction is trusted. That mirrors the foundation lab, but for the predictive layer.
+
     Expected models are CUSTOMER\_SEGMENT\_MODEL, DEMAND\_SURGE\_MODEL, PRODUCT\_CLUSTER\_MODEL, and REVENUE\_PREDICT\_MODEL. The list proves that the database contains deployed models for several finance decisions, not just one isolated prediction.
 
     This inventory is important because a prediction is only operationally useful when teams can verify which model exists, what mining function it performs, and whether it can be scored from SQL.
@@ -122,6 +126,8 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
 
 3. Compare actual target revenue to predicted revenue.
+    The demand query classifies product pressure from stored finance features, and the revenue query estimates a transaction outcome from customer, order, and fulfillment attributes.
+
     The demand query returns predicted surge labels with confidence, which helps product and operations teams decide where to watch capacity or risk pressure. The revenue query compares known target revenue to predicted revenue, which helps reviewers understand whether the model is directionally useful for planning.
 
     Both queries score persisted models without leaving Oracle Database. That keeps sensitive finance records close to the models and gives technical teams SQL evidence for each prediction.

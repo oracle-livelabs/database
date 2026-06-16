@@ -6,6 +6,8 @@ This lab uses database-backed helper functions behind the agent console pattern.
 
 The final operating step is controlled action. An AI-assisted workflow should not only summarize risk; it should use approved tools and leave a durable record of what action was proposed or taken.
 
+This is the last step in the story: after evidence is found, ranked, investigated, and governed, the bank needs an action record. The lab shows that an AI-assisted workflow can use approved database tools and leave an audit row.
+
 ![AI Operations Agent Console](images/agent-console.png " ")
 
 ### Objectives
@@ -47,6 +49,8 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
 
 
 2. Review the summary text.
+    The function packages query logic behind a controlled tool interface. That gives an agent a safe way to summarize current risk without generating unsupported text from outside the database.
+
     Expected output starts with a phrase like `Found 10 critical financial products`. The function turns current signal data into an operations-ready summary that an agent or analyst can use to decide what needs escalation.
 
     This matters because the summary is produced by an approved database function, not by free-form interpretation outside the governed data boundary.
@@ -101,6 +105,8 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
 
 
 3. Confirm the action is recorded.
+    The first query writes the action; the second proves the write is visible in the audit trail. Together they show the difference between an AI suggestion and an operational action the bank can review.
+
     The audit row is the database evidence that the action occurred. It records who the agent acted as, what action was requested, what entity type was affected, the execution status, and the timestamp.
 
     This closes the workshop story: the same database foundation that produced risk evidence also records the AI-assisted operational response for later review.

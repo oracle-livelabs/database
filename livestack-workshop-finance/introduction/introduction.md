@@ -6,7 +6,9 @@ Financial institutions are under pressure to spot emerging risk, investigate fra
 
 In this workshop, Seer Bank uses Oracle Database 26ai as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, in-database machine learning, governed SQL answers, PL/SQL tools, and audit records all operate against connected finance data. The goal is not to show separate features in isolation; it is to show why keeping these capabilities together changes the operating model.
 
-The journey follows one decision flow: risk signals emerge, products and institutions are tied to exposure, fraud networks reveal connected evidence, service and transaction workflows show operational impact, predictive models estimate pressure, governed data access answers business questions, and AI-assisted actions are recorded for review. Each lab starts from a business question, then proves how Oracle Database stores, queries, scores, or audits the evidence behind the answer.
+The journey follows one decision flow. First, you prove the data foundation is present. Then you turn that foundation into dashboard evidence, inspect transaction documents, search risk language by meaning, follow fraud relationships, evaluate service coverage, score predictive models, ground a copilot-style answer, and record an AI-assisted action. Each lab starts from a finance decision and then shows the SQL evidence that makes the decision explainable.
+
+As you move through the labs, treat every query as part of the same operating record. The dashboard numbers are not isolated metrics; they point to products, transactions, signals, relationships, service capacity, predictions, governed answers, and audit rows that all remain inside Oracle Database.
 
 ![Seer Bank Finance LiveStack welcome page](images/seer-bank-welcome.png " ")
 
