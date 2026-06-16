@@ -6,6 +6,8 @@ This lab recreates the evidence behind the application dashboard. You query crit
 
 The dashboard is the workshop's first decision surface. It turns the foundation from Lab 1 into operating measures that risk leaders can use to decide which signals, products, and client exposures need review first.
 
+The key point is traceability. A dashboard can summarize the business, but the bank still needs to prove where the numbers came from. In this lab, each metric is reproducible with SQL over the same finance views and source tables used by the rest of the workshop.
+
 ![Risk and Operations Dashboard page](images/risk-operations-dashboard.png " ")
 
 ### Objectives
@@ -51,6 +53,8 @@ Persona focus: You support the risk operations leader by showing that one databa
 
 
 2. Interpret the result.
+    The query compresses 5,000 monitored signals into the headline measures a risk leader would scan first: volume, average severity, high-risk count, total exposure, and opened cases. These values explain the top row of the dashboard without requiring a separate reporting store.
+
     A risk signal is a monitored event that may require review. In this workshop, signals can come from product mentions, customer activity, transactions, service pressure, or other finance operations data. The total signal count shows how much activity the dashboard is watching, while average criticality shows the overall severity of that activity.
 
     The high-risk count is the number of signals with a criticality score of 80 or higher. A higher count means more issues may need immediate analyst review, case triage, or automated follow-up from the operations agent. It does not mean every item is confirmed fraud or a confirmed incident; it means the dashboard has found more items that cross the bank's review threshold.
@@ -94,6 +98,8 @@ Persona focus: You support the risk operations leader by showing that one databa
 
 
 2. Use the top rows to explain dashboard priority.
+    This query joins signal events to financial products and institutions so the dashboard can move from "risk is rising" to "these products and institutions need attention." The grouping logic turns individual signal rows into a review queue that business users can understand.
+
     Each row shows a financial product associated with monitored risk signals. `Signal Count` is the number of distinct posts or events tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` estimates how many views or interactions those signals reached.
 
     A product with many signals, high average criticality, and high exposure should move to the top of the dashboard review queue. That combination means the issue is showing up repeatedly, scoring as more severe, and reaching more people. For a financial institution, that can raise client, regulatory, reputational, or operational risk.
