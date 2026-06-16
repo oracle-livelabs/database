@@ -1,10 +1,10 @@
-# Customer Trend Signals with AI Vector Search
+# Customer Trend Signals
 
 ## Introduction
 
-**Customer Trend Signals** helps retail teams search by shopper intent instead of exact catalog terms. In this lab, you use Oracle AI Vector Search to create a fresh embedding from natural language, compare that vector to stored product vectors, and connect the same idea to social trend signals.
+**Customer Trend Signals** helps retail teams search by shopper intent instead of exact catalog terms. Frame this lab around a business question: *How do we find the products customers likely mean, not just the words they happened to type?*
 
-Oracle AI Database keeps vector search, SQL, security, and operational retail data together. The product catalog and creator posts are still relational retail data, but the database can also store embeddings in `VECTOR` columns and calculate semantic distance with SQL. That matters for enterprise retail data: product descriptions, customer signals, and social evidence can be embedded and searched in the database instead of being copied to a separate service before the business can act.
+**Oracle AI Database** keeps vector search, SQL, security, and operational retail data together. Emphasize that semantic search becomes more trustworthy when product catalog, creator activity, and business controls all stay in the same governed environment.
 
 ### Operating Story
 
@@ -23,10 +23,10 @@ Estimated Time: **10 minutes**
 ### Objectives
 
 - Review the MiniLM embedding model and the vector tables used by the retail application.
-- Generate a fresh text embedding with `DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING`.
-- Calculate cosine distance between a query vector and product vectors.
-- Run semantic product search with `VECTOR_DISTANCE`.
-- Connect semantic product matches to social posts, creators, and momentum.
+- Generate a new text embedding so learners can see how a plain-language shopper need becomes searchable business evidence.
+- Compare a search phrase to product vectors by cosine distance so the business can rank products by meaning, not just keyword overlap.
+- Run a semantic product search that turns plain-language intent into a shortlist the merchandising or digital-commerce team can act on.
+- Connect semantic product matches to posts, creators, and momentum so the result can inform merchandising, campaign, and inventory decisions.
 
 
 ## Task 1: Review Customer Trend Signals and vector artifacts
@@ -43,7 +43,7 @@ Perform the following set of steps to understand how natural language, product d
 
 2. Understand the embedding model used in this lab.
 
-    The workshop seed loads Oracle's prebuilt, augmented ONNX version of Hugging Face's `all-MiniLM-L12-v2` model into the database as `ADMIN.ALL_MINILM_L12_V2`. Oracle provides this model in ONNX format so it can be loaded directly into Oracle AI Database and used for embedding generation without calling an external service.
+    The workshop seed loads Oracle's ONNX version of `all-MiniLM-L12-v2` into the database as `ADMIN.ALL_MINILM_L12_V2`. For this audience, lead with why that matters: the model is already available in the environment, so learners can move directly from plain-language retail questions to semantic search without leaving the database workflow.
 
     In this lab, you use it to turn natural language search phrases, product descriptions, and social post text into vectors that can be compared with SQL. The important learning point is not the specific model name; it is the architecture. The model runs in the database, the vectors are stored in the database, and the search runs against governed retail data without sending the source text to a separate embedding service.
 
@@ -73,7 +73,7 @@ Perform the following set of steps to see how Oracle AI Database turns natural l
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Search Text | Vector Preview |
     | --- | --- |
@@ -82,6 +82,8 @@ Perform the following set of steps to see how Oracle AI Database turns natural l
 
 2. The preview is only the beginning of the vector. You do not interpret the individual numbers by eye. The important point is that the database generated a vector representation of the phrase, and the next tasks use `VECTOR_DISTANCE` to compare that vector with product vectors.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 
 ## Task 3: Calculate vector distance against known products
 
@@ -89,7 +91,7 @@ Perform the following set of steps to see how vector distance turns meaning into
 
 1. Compare the query vector with a few known product vectors.
 
-    `VECTOR_DISTANCE` calculates how far apart two vectors are. This lab uses cosine distance for text embeddings. Cosine distance compares the direction of two vectors rather than their raw size. For language embeddings, that is useful because two phrases can be close in meaning even if the underlying numbers have different magnitudes. Lower cosine distance means the product vector is closer in meaning to the natural language phrase.
+    `VECTOR_DISTANCE` measures how close two vectors are in meaning. State the retail takeaway first: a lower cosine distance means the product is more likely to match the shopper's intent, even when the product name does not reuse the same words.
 
     The `CROSS JOIN` attaches one generated query vector to the product rows being compared. The inner `SELECT` creates that single query-vector row from a natural language phrase at runtime.
 
@@ -126,7 +128,7 @@ Perform the following set of steps to see how vector distance turns meaning into
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Product | Category | Cosine Distance |
     | --- | --- | ---: |
@@ -139,6 +141,7 @@ Perform the following set of steps to see how vector distance turns meaning into
 
 2. The first three results are all running or shoe products, even though the search phrase did not use the exact product names. That is the key learning point: vector search compares meaning, not just matching words.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 4: Search products by meaning
 
@@ -146,7 +149,7 @@ Perform the following set of steps to turn the distance calculation into a seman
 
 1. Search the full product embedding table.
 
-    In this step, you turn a normal search phrase into a vector, which is a numeric representation of the phrase's meaning. Then you compare that search vector to the product vectors already stored in the database and return the closest matches.
+    In this step, a plain-language phrase becomes a vector and is compared with stored product vectors to return the closest matches. Keep the business value up front: this is how a retailer can surface relevant products when customers describe need, occasion, or style instead of exact SKU names.
 
     `DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING` converts the text you type, such as a shopper's search phrase, into a vector using the MiniLM embedding model. `VECTOR_DISTANCE` compares that new search vector to each stored product vector. A smaller distance means the product is more semantically similar to the search phrase.
 
@@ -174,7 +177,7 @@ Perform the following set of steps to turn the distance calculation into a seman
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Product | Category | Distance |
     | --- | --- | ---: |
@@ -215,7 +218,7 @@ Perform the following set of steps to turn the distance calculation into a seman
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Product | Category | Distance |
     | --- | --- | ---: |
@@ -228,6 +231,7 @@ Perform the following set of steps to turn the distance calculation into a seman
 
 3. These rankings become useful merchandising evidence. A retail user can start with natural language, find nearby products, and then connect those products to inventory, orders, promotions, or social demand.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 5: Inspect social trend matches
 
@@ -282,7 +286,7 @@ Perform the following set of steps to see which posts, creators, platforms, and 
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Momentum | Platform | Creator | Product | Score |
     | --- | --- | --- | --- | ---: |
@@ -300,10 +304,13 @@ Perform the following set of steps to see which posts, creators, platforms, and 
 
 4. Interpret the result.
 
-    These rows came back because the text in viral or mega-viral social posts is semantically close to the product embedding. For example, several high-scoring posts match **Matcha Endurance Starter Kit**, which suggests that multiple creator conversations are using language close to that product's description. The query did not look for exact product names. It compared vectors, so it can find related demand signals even when the post uses different words.
+    These rows came back because the text in viral or mega-viral social posts is semantically close to the product embedding. For example, several high-scoring posts match **Matcha Endurance Starter Kit**, which suggests that multiple creator conversations are using language close to that product's description. 
+    
+    The query did not look for exact product names. It compared vectors, so it can find related demand signals even when the post uses different words. A business user would care because the result connects social momentum to products the retailer can act on. 
+    
+    Merchandising teams can decide which products to feature, marketing teams can see which creators or platforms are driving relevant conversation, and inventory teams can watch products that may need replenishment if social demand keeps building. The database keeps the social signal, product catalog, embeddings, and SQL analysis together, so the result is explainable and tied back to operational data.
 
-    A business user would care because the result connects social momentum to products the retailer can act on. Merchandising teams can decide which products to feature, marketing teams can see which creators or platforms are driving relevant conversation, and inventory teams can watch products that may need replenishment if social demand keeps building. The database keeps the social signal, product catalog, embeddings, and SQL analysis together, so the result is explainable and tied back to operational data.
-
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## More AI Vector Search labs
 

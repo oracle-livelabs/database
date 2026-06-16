@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Ask Retail Data is about **trusted answers**. The learner takeaway is: *How do I ask a business question and trace the answer back to governed SQL and data?*
+**Ask Retail Data** is about trusted answers. Recast the learner takeaway as a business question: *How do I ask for an answer in plain language and still trace it back to governed SQL, approved views, and visible evidence?*
 
-This lab does not require a live GenAI profile. In a Select AI or Ask Data experience, a GenAI model may translate a plain-English question into SQL. Here, you learn the database-side foundation that makes that generated SQL trustworthy: approved views, visible SQL, and repeatable validation against governed Oracle data.
+This lab does not require a live **GenAI profile**. Emphasize that the real lesson is governance: even when AI helps write SQL, the business still needs approved answer paths, visible logic, and results that can be checked.
 
-Lab 9 builds on this foundation with **trusted agent tools**, where an AI agent safely calls approved database functions and leaves an audit trail.
+Lab 9 builds on this foundation by showing how the same governance pattern extends from trusted SQL answers to trusted agent actions and durable audit history.
 
 ### Operating Story
 
@@ -24,9 +24,9 @@ Estimated Time: **5 minutes**
 
 ### Objectives
 
-- Identify the approved database views that should ground NL2SQL answers.
-- Run a simple SQL answer for one plain-English retail question.
-- Explain what to inspect before trusting generated SQL.
+- Identify the approved database views that should ground plain-language business questions.
+- Run a short, inspectable SQL answer for one retail question in plain English so learners can see what a trustworthy answer path looks like.
+- Explain which signals make generated SQL trustworthy before a business user relies on the result.
 
 
 ## Task 1: Start with approved answer paths
@@ -41,7 +41,7 @@ Perform the following set of steps to see which database views should be used to
 
 2. Run this query.
 
-    A trusted NL2SQL experience should not guess randomly across raw tables. It should favor approved database objects that already represent business-ready shapes. This query maps common retail questions to the views that should answer them.
+    A trusted NL2SQL experience should not guess across raw tables. Keep the business point upfront: approved views narrow the answer path to governed data that is easier to explain, validate, and reuse.
 
     ```sql
     <copy>
@@ -63,7 +63,7 @@ Perform the following set of steps to see which database views should be used to
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Approved View | Question It Can Answer |
     | --- | --- |
@@ -76,13 +76,15 @@ Perform the following set of steps to see which database views should be used to
 
 3. This is the key point: NL2SQL is more trustworthy when the database gives it good paths to follow. The approved view keeps the answer focused, explainable, and easier to validate.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Trace one question to SQL
 
 Perform the following set of steps to answer one plain-English question with a short, inspectable SQL pattern.
 
 1. Start with this business question:
 
-    **Which fulfillment centers have inventory pressure?**
+    *Which fulfillment centers have inventory pressure?*
 
 2. Run the trusted SQL answer.
 
@@ -102,7 +104,7 @@ Perform the following set of steps to answer one plain-English question with a s
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Center | Product | On Hand | Reorder At | Risk |
     | --- | --- | ---: | ---: | --- |
@@ -115,9 +117,11 @@ Perform the following set of steps to answer one plain-English question with a s
 
 3. The answer is useful because it is simple and traceable: the question maps to one approved view, the filter is visible, and the returned columns explain why each row matters.
 
+Perform the following set of steps to evaluate whether an NL2SQL answer is grounded, explainable, and safe to use in a retail workflow.
+
 ## Task 3: Know what to trust
 
-Before trusting an NL2SQL answer, inspect the generated SQL for these signals:
+Perform the following set of steps to evaluate whether an NL2SQL answer is grounded, explainable, and safe to use in a retail workflow:
 
 | Check | Why it matters |
 | --- | --- |
@@ -129,6 +133,7 @@ Before trusting an NL2SQL answer, inspect the generated SQL for these signals:
 
 The larger lesson is that NL2SQL is not just about generating SQL. It is about generating SQL that the business can inspect, run again, and trust.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 ## Learn More: Select AI
 
 This lab uses a short trusted SQL pattern so you can see what a good natural-language-to-SQL answer should look like: approved data paths, visible filters, and results that can be traced back to governed Oracle data.
