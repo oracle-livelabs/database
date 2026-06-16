@@ -6,6 +6,8 @@ This lab confirms that the current Seer Bank data foundation is present. You ins
 
 The rest of the workshop depends on this foundation. If these views and object families are missing, later dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows cannot be trusted as one connected operating story.
 
+Think of this lab as the readiness checkpoint before any business decision. The goal is to prove that the same schema can support the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+
 ![Finance Data Foundation page](images/data-foundation.png " ")
 
 ### Objectives
@@ -81,6 +83,8 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
 
 
 2. Review the counts.
+    The query reads Oracle catalog views instead of application tables. That is intentional: before trusting any business output, the platform team needs proof that the database objects behind each later lab exist in the learner schema.
+
     The rows confirm that the workshop schema contains every major capability used later: semantic views for governed SQL, property graphs for fraud reach, vector columns for semantic search, OML models for prediction, and helper functions for controlled agent actions.
 
     Treat this as a readiness check. A zero or lower-than-expected count tells you which later lab would fail or lose business context.
@@ -121,6 +125,8 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
 
 
 2. Use the counts as the baseline for later labs.
+    This query reads the business-facing finance views and core tables that later labs aggregate, search, traverse, score, or audit. It gives learners a concrete sense of the population behind the story before they inspect specific risk and operations results.
+
     These counts establish the scale of the finance scenario: products and institutions provide the business catalog, risk signals and transactions drive the dashboard, service centers and SLA zones support operations, and fraud entities plus relationships support the graph investigation.
 
     The exact number matters because later results are aggregates over this same foundation. When a dashboard count, graph path, or spatial summary looks surprising, this baseline helps you decide whether the issue is data volume, filtering, or business logic.
