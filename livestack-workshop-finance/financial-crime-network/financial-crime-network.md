@@ -6,6 +6,8 @@ This lab investigates a fraud network with **Oracle Property Graph** and **SQL/P
 
 Fraud patterns often hide in relationships rather than in a single transaction row. This lab shows how a suspicious account can lead to connected devices, mule payees, IP addresses, and phone numbers that may explain coordinated activity.
 
+This comes after semantic search because a suspicious signal often leads to the question, "Who or what else is connected?" The graph lets you move from a risky account to relationship evidence that can support escalation.
+
 ![Fraud graph investigation flow](images/fraud-graph-investigation-flow.svg " ")
 
 ![Financial Crime Network graph workspace](images/fraud-network.png " ")
@@ -75,6 +77,8 @@ Perform the following set of steps to trace two-hop fraud reach from ACCT-8841:
 
 
 2. Review the high-risk entities.
+    The query returns connected entities as a prioritized table, not as an abstract graph picture. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and transaction labs.
+
     Expected rows include `DEV-fp-91a7`, `PAYEE-MULE-017`, `IP-198.51.100.44`, and `PHONE-212-0199`. These are not just labels; they are connected entities that help explain why the seed account deserves attention.
 
     The result gives investigators a prioritized reach map. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
@@ -137,6 +141,8 @@ Perform the following set of steps to find accounts that share a device, IP addr
 
 
 2. Use the result to explain investigation priority.
+    This query moves from reach to shared evidence. It identifies account pairs that reuse the same identifiers, which is stronger investigative evidence than a single high-risk score.
+
     A shared device, IP address, phone, or email can connect accounts that look separate in transaction tables. The combined risk score helps prioritize pairs where both sides of the relationship are risky, not just connected.
 
     This is relevant to the overall workshop because it turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.

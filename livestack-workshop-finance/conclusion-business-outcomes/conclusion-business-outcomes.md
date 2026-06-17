@@ -49,7 +49,7 @@ Perform the following set of steps to review what the workshop proved and connec
     | Business pressure | Why a converged Oracle Database foundation matters |
     | --- | --- |
     | Emerging risk and fraud signals | Signal text, product exposure, transactions, and graph relationships can be investigated without moving evidence across systems. |
-    | Regulatory and AML review | Governed SQL, semantic views, security policies, and audit records keep answers reviewable. |
+    | Regulatory and AML review | Governed SQL, semantic views, visible evidence, and audit records keep answers reviewable. |
     | Client service and operational capacity | Spatial coverage, transactions, service centers, and demand indicators can be analyzed together. |
     | Predictive planning | OML scores run close to the finance records that supply model features and business context. |
     | AI-assisted decisions | Copilot answers and agent actions remain tied to approved SQL, PL/SQL tools, and durable database evidence. |
@@ -59,6 +59,8 @@ Perform the following set of steps to review what the workshop proved and connec
     Seer Bank does not need separate architectures for every data type in the decision loop. Oracle Database 26ai lets the bank keep the data model governed while exposing the right access pattern for each job: relational SQL for operations, JSON for applications, vectors for semantic search, graph for financial-crime relationships, spatial for service coverage, OML for prediction, and audit tables for AI-assisted actions.
 
     The result is a stronger finance operating model: fewer copies of sensitive data, fewer reconciliation points, clearer governance, faster investigation, and decisions that can be explained from database evidence.
+
+    The lasting lesson is not that Seer Bank ran many unrelated database features. It is that each feature answered the next finance question without leaving the governed data foundation.
 
 ## Acknowledgements
 

@@ -6,6 +6,8 @@ This lab confirms that the current Seer Bank data foundation is present before a
 
 The rest of the workshop depends on this foundation. If these views and object families are missing, later dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows cannot be trusted as one connected operating story.
 
+Think of this lab as the readiness checkpoint before any business decision. The goal is to prove that the same schema can support the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+
 ![Finance Data Foundation page](images/data-foundation.png " ")
 
 ### Objectives
@@ -128,6 +130,8 @@ Perform the following set of steps to count the current finance data groups and 
 
 
 2. Use the counts as the baseline for later labs.
+    This query reads the business-facing finance views and core tables that later labs aggregate, search, traverse, score, or audit. It gives learners a concrete sense of the population behind the story before they inspect specific risk and operations results.
+
     These counts establish the scale of the finance scenario: products and institutions provide the business catalog, risk signals and transactions drive the dashboard, service centers and SLA zones support operations, and fraud entities plus relationships support the graph investigation.
 
     The exact number should not be the teaching point. Reframe this around interpretation: the baseline helps learners understand whether later results reflect data volume, filtering, or business logic.

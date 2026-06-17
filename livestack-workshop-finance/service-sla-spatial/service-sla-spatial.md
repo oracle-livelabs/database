@@ -6,6 +6,8 @@ This lab uses **Oracle Spatial** to reason about service centers, SLA zones, and
 
 Risk and fraud decisions often create service work: client outreach, case routing, product review, and document handling. Spatial analysis helps operations leaders see whether service capacity is near the demand region that needs support.
 
+This lab follows the investigation labs because every risk decision eventually creates operational work. The bank needs to know not only what is risky, but whether the service network can respond where demand is highest.
+
 ![Spatial service coverage flow](images/spatial-service-coverage-flow.svg " ")
 
 ![Client Service and SLA Coverage map](images/service-sla-spatial.png " ")
@@ -70,6 +72,8 @@ Perform the following set of steps to calculate service-center distance to the N
 
 
 2. Review the nearest service centers.
+    The SQL compares service-center point geometries with a demand-region boundary. That turns location data into a measurable routing signal instead of a static map observation.
+
     Expected nearest service center: Edison Wealth Service Center. New York Metro has demand index 91.
 
     The distance column tells operations which service centers can respond fastest to a high-demand region. The demand index explains why the region matters: a high-demand area may need more capacity, closer routing, or stricter monitoring when risk signals increase.
@@ -106,6 +110,8 @@ Perform the following set of steps to summarize SLA zone coverage for service op
 
 
 2. Compare the service levels.
+    This query summarizes all SLA zones into service promises that operations leaders can compare with case urgency. It connects spatial coverage to the practical question of how quickly the bank can respond.
+
     The result shows how zone type maps to delivery-hour commitments. Express and overnight zones represent faster response promises, while standard and economy zones represent longer service windows.
 
     This matters because risk operations are not finished when a signal is detected. The bank also needs to know whether the service network can meet the response time implied by the case priority.

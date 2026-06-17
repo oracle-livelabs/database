@@ -6,6 +6,8 @@ This lab uses current finance embeddings to search by meaning instead of exact k
 
 Risk analysts often know the intent of a question before they know the exact product name, signal phrase, or table value. Vector search helps them find relevant mortgage, AML, fraud, and exposure evidence even when the source text uses different wording.
 
+This lab extends the dashboard story from numeric exposure to semantic investigation. Instead of only sorting by counts and scores, you ask the database to find products and signal text that mean roughly the same thing as the analyst's question.
+
 ![Financial Product and Exposure Intelligence search](images/vector-product-search.png " ")
 
 ### Objectives
@@ -64,6 +66,8 @@ Perform the following set of steps to search for financial products related to m
 
 
 2. Review the ranked products.
+    The query embeds the analyst phrase at runtime and compares it to stored product embeddings. The `VECTOR_DISTANCE` order ranks products by semantic closeness, while the similarity score gives the analyst a way to compare the strength of each match.
+
     The expected top result is `Mortgage Pre-Approval`, followed by related lending and risk analytics products. The ranking matters because it proves the search is not a simple keyword lookup; it also finds products that are semantically close to the analyst's risk intent.
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or an operations agent action.
@@ -106,6 +110,8 @@ Perform the following set of steps to search risk signals for fraud and AML expo
 
 
 2. Compare the excerpts and scores.
+    This query uses the same pattern against risk signal embeddings. It searches the language of monitored events, not just product metadata, so analysts can find signals that discuss fraud, AML, sanctions, or suspicious activity even when the wording is not identical to the search phrase.
+
     The returned excerpts contain AML, fraud, sanctions, and suspicious activity language even though the search phrase is short. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This supports the workshop story by connecting dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database.
