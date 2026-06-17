@@ -40,19 +40,27 @@ Perform the following set of steps to confirm that SQL Worksheet is connected to
     SELECT
       USER AS current_user,
       SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS current_schema,
-      SYS_CONTEXT('USERENV', 'SERVICE_NAME') AS service_name
+      CASE
+        WHEN EXISTS (
+          SELECT 1
+          FROM user_views
+          WHERE view_name = 'MEDIA_CONTENT_ASSETS_V'
+        )
+        THEN 'MEDIA_SCHEMA_READY'
+        ELSE 'CHECK_SCHEMA'
+      END AS workshop_status
     FROM dual;
     </copy>
     ```
 
     **Expected output:**
 
-    | CURRENT_USER | CURRENT_SCHEMA | SERVICE_NAME |
+    | CURRENT_USER | CURRENT_SCHEMA | WORKSHOP_STATUS |
     | --- | --- | --- |
-    | LLUSER | LLUSER | LM38HD1DQ8ZMCGVB\_LOW |
+    | LLUSER | LLUSER | MEDIA_SCHEMA_READY |
     {: title="Workshop SQL Session Context Table"}
 
-3. If your environment uses a different workshop login, the user or service name can vary. The important check is that you are connected to the schema that owns the Media LiveStack objects you will query in the next labs.
+3. If your environment uses a different workshop login, the user can vary. The important check is that `WORKSHOP_STATUS` returns `MEDIA_SCHEMA_READY`, which means the session can see the Media LiveStack objects used in the next labs.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
