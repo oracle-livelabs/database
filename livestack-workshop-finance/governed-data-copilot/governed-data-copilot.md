@@ -6,6 +6,8 @@ This lab prepares governed questions for a data copilot workflow. The goal is to
 
 Natural-language answers are useful only when risk and governance teams can review the source. This lab shows how a copilot-style answer can stay grounded in approved views and visible SQL instead of relying on untraceable generated text.
 
+This lab follows prediction because answers are only useful if decision-makers can review the data boundary. The copilot pattern here is not "ask anything"; it is "ask against approved finance views and show the SQL."
+
 ![Governed Data Copilot question examples](images/governed-data-copilot.png " ")
 
 ### Objectives
@@ -61,6 +63,8 @@ Persona focus: You support business users who want natural-language answers whil
 
 
 2. Treat these views as the approved data boundary.
+    The query lists the approved view surface before any business question is answered. That gives AI engineers a concrete allowlist instead of relying on prompt instructions alone.
+
     These views expose finance language for institutions, products, signals, transactions, service centers, capacity, and routes. They are the objects a governed copilot should prefer because they already encode business meaning and hide lower-level implementation details.
 
     This matters in the broader workshop because the same foundation that supports dashboards and agents also constrains AI answers to approved database evidence.
@@ -101,6 +105,8 @@ Persona focus: You support business users who want natural-language answers whil
 
 
 2. Use the result to draft a governed answer.
+    The SQL groups risk exposure at the product-category level, which is the kind of summary a business user may ask for in natural language. The visible query makes the answer repeatable and reviewable.
+
     A governed answer should cite the rows and avoid claiming access to objects outside the approved set. For example, the answer can say which product categories have the highest exposure, how many signals support the ranking, and what average criticality was observed.
 
     The returned table is relevant because it gives a business user an answer and gives reviewers the SQL evidence behind that answer. The copilot pattern is trustworthy only when both are present.
