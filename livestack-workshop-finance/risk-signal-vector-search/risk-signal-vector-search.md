@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab uses current finance embeddings to search by meaning instead of exact keywords. You compare natural-language risk phrases to product and signal embeddings using ADMIN.ALL\_MINILM\_L12\_V2.
+This lab uses current finance embeddings to search by meaning instead of exact keywords. Add the analyst payoff up front: risk teams can find relevant products or signals even when the wording in the source data does not match the analyst's phrase exactly.
 
 Risk analysts often know the intent of a question before they know the exact product name, signal phrase, or table value. Vector search helps them find relevant mortgage, AML, fraud, and exposure evidence even when the source text uses different wording.
 
@@ -30,7 +30,9 @@ Persona focus: You support the risk analyst with semantic search while keeping s
 
 ## Task 1: Search products by meaning
 
-1. Search for products related to mortgage pre-approval risk.
+Perform the following set of steps to search for financial products related to mortgage pre-approval risk by meaning:
+
+1. Run the following query:
 
     ```sql
     <copy>
@@ -50,7 +52,7 @@ Persona focus: You support the risk analyst with semantic search while keeping s
     </copy>
     ```
 
-    Expected output: Mortgage Product Matches
+    **Expected output: Mortgage Product Matches**
 
     | Product Name | Category | Similarity |
     | --- | --- | --- |
@@ -66,9 +68,13 @@ Persona focus: You support the risk analyst with semantic search while keeping s
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or an operations agent action.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Search risk signals by meaning
 
-1. Search risk signals for fraud and AML exposure language.
+Perform the following set of steps to search risk signals for fraud and AML exposure language by meaning:
+
+1. Run the following query:
 
     ```sql
     <copy>
@@ -88,7 +94,7 @@ Persona focus: You support the risk analyst with semantic search while keeping s
     </copy>
     ```
 
-    Expected output: AML Signal Matches
+    **Expected output: AML Signal Matches**
 
     | Signal Id | Signal Excerpt | Similarity |
     | --- | --- | --- |
@@ -104,6 +110,7 @@ Persona focus: You support the risk analyst with semantic search while keeping s
 
     This supports the workshop story by connecting dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

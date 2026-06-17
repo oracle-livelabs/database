@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Financial institutions are under pressure to spot emerging risk, investigate fraud, meet regulatory obligations, protect customer trust, and keep service operations moving. That work becomes harder when evidence is fragmented across core banking systems, transaction platforms, fraud tools, compliance workflows, service applications, analytics environments, and AI services. Each copy or pipeline adds latency, reconciliation work, security exposure, and room for a business decision to drift away from governed facts.
+Financial institutions need to spot emerging risk, investigate fraud, meet regulatory obligations, protect customer trust, and keep service operations moving. This opening is strongest when it names the business pressure first: *Teams need fast decisions, but those decisions must remain explainable from the same governed evidence.*
 
-In this workshop, Seer Bank uses Oracle Database 26ai as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, in-database machine learning, governed SQL answers, PL/SQL tools, and audit records all operate against connected finance data. The goal is not to show separate features in isolation; it is to show why keeping these capabilities together changes the operating model.
+In this workshop, **Seer Bank** uses **Oracle Database 26ai** as a converged financial-intelligence foundation. Consider making the payoff more explicit: one database foundation lets risk, operations, analytics, applications, governed AI, and audit workflows share the same evidence instead of reconciling separate copies.
 
 The journey follows one decision flow: risk signals emerge, products and institutions are tied to exposure, fraud networks reveal connected evidence, service and transaction workflows show operational impact, predictive models estimate pressure, governed data access answers business questions, and AI-assisted actions are recorded for review. Each lab starts from a business question, then proves how Oracle Database stores, queries, scores, or audits the evidence behind the answer.
 
@@ -13,7 +13,7 @@ The journey follows one decision flow: risk signals emerge, products and institu
 ### Objectives
 
 - Query the current Seer Bank finance data foundation.
-- Use SQL, JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, OML, and PL/SQL in one workflow.
+- Use SQL, JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, OML, and PL/SQL to support one connected finance decision workflow.
 - Explain why a converged Oracle Database foundation is critical for risk, operations, analytics, governed AI, and auditability.
 - Connect the application pages to repeatable database evidence.
 
@@ -30,7 +30,7 @@ Estimated Workshop Time: **95 minutes**
 | Database Capability | Relational SQL, JSON, vectors, graphs, spatial, OML, semantic views, PL/SQL tools, and audit records work together under one governed data model. |
 | Outcome | Risk, operations, and engineering teams can observe, investigate, decide, act, and review from database-backed evidence instead of reconciling disconnected outputs. |
 
-Persona focus: You act as the technical team supporting finance business users who need timely, explainable decisions without fragmented integration work. Your job is to prove that the business story and the technical architecture are the same story: trusted finance decisions depend on connected, governed data.
+**Persona focus:** You support finance business users who need timely, explainable decisions without fragmented integration work. Your job is to prove that the business story and technical architecture are the same story: trusted finance decisions grounded in governed database evidence.
 
 
 ## Acknowledgements
