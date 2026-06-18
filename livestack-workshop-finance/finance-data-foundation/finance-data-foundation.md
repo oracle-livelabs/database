@@ -2,17 +2,17 @@
 
 ## Introduction
 
-This lab confirms that the current Seer Bank data foundation is present. You inspect finance semantic views, core data groups, vectors, graphs, spatial objects, OML models, and agent functions before relying on later results.
+This lab orients you to the current Seer Bank data foundation. You inspect finance semantic views, core data groups, vectors, graphs, spatial objects, OML models, and agent functions that the application uses across the rest of the workshop.
 
-The rest of the workshop depends on this foundation. If these views and object families are missing, later dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows cannot be trusted as one connected operating story.
+The point is to see the shape of the operating data before you start making decisions with it. Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows all connect back to this shared database foundation.
 
-Think of this lab as the readiness checkpoint before any business decision. The goal is to prove that the same schema can support the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+Think of this lab as the map for the rest of the journey. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
 
 ![Finance Data Foundation page](images/data-foundation.png " ")
 
 ### Objectives
 
-- Confirm the finance semantic views are present.
+- Review the finance semantic views.
 - Check the scale of the current data.
 - Map application pages to Oracle Database 26ai capabilities.
 
@@ -22,18 +22,18 @@ Estimated Time: **10 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Later risk, prediction, and agent outputs are not trustworthy unless the shared finance data foundation is complete. |
-| Technical Challenge | Platform teams must confirm that the same schema supports semantic views, vectors, graphs, spatial data, OML models, and PL/SQL tools. |
-| Persona Focus | Database developers and platform engineers validate the foundation before business users rely on downstream evidence. |
-| What You Will Prove | The schema contains the views and object families used by the current Finance LiveStack application. |
+| Business Problem | Risk, prediction, and agent workflows need a shared view of the finance data they use to make decisions. |
+| Technical Challenge | Platform teams must show how the same schema supports semantic views, vectors, graphs, spatial data, OML models, and PL/SQL tools. |
+| Persona Focus | Database developers and platform engineers map the foundation that business users rely on for downstream evidence. |
+| What You Will Prove | The current Finance LiveStack application uses connected views and object families in one database schema. |
 | Database Capability | Oracle catalog views and finance semantic views expose the governed object inventory. |
-| Outcome | Every later lab starts from a known and queryable finance foundation. |
+| Outcome | Every later lab can connect its result back to the same queryable finance foundation. |
 
-Persona focus: You are the database developer proving that Seer Bank's shared foundation is ready for risk, operations, prediction, and AI workflows.
+Persona focus: You are the database developer showing how Seer Bank's shared foundation supports risk, operations, prediction, and AI workflows.
 
 ## Task 1: Inventory the finance object families
 
-1. Run this inventory query to check the semantic views and database features used later in the workshop.
+1. Run this inventory query to review the semantic views and database features used later in the workshop.
 
     ```sql
     <copy>
@@ -83,11 +83,11 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
 
 
 2. Review the counts.
-    The query reads Oracle catalog views instead of application tables. That is intentional: before trusting any business output, the platform team needs proof that the database objects behind each later lab exist in the learner schema.
+    The query reads Oracle catalog views instead of application tables. That gives you a concise map of the object families behind the application workflow.
 
-    The rows confirm that the workshop schema contains every major capability used later: semantic views for governed SQL, property graphs for fraud reach, vector columns for semantic search, OML models for prediction, and helper functions for controlled agent actions.
+    The rows summarize the major capabilities used later: semantic views for governed SQL, property graphs for fraud reach, vector columns for semantic search, OML models for prediction, and helper functions for controlled agent actions.
 
-    Treat this as a readiness check. A zero or lower-than-expected count tells you which later lab would fail or lose business context.
+    Treat this as the capability map for the workshop. Each row points to a different access pattern that will reappear in a later finance decision.
 
 ## Task 2: Count the current finance data groups
 
