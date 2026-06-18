@@ -6,7 +6,7 @@ Financial institutions need to spot emerging risk, investigate fraud, meet regul
 
 In this workshop, **Seer Bank** uses **Oracle Database 26ai** as a converged financial-intelligence foundation. Consider making the payoff more explicit: one database foundation lets risk, operations, analytics, applications, governed AI, and audit workflows share the same evidence instead of reconciling separate copies.
 
-The journey follows one decision flow. First, you prove the data foundation is present. Then you turn that foundation into dashboard evidence, inspect transaction documents, search risk language by meaning, follow fraud relationships, evaluate service coverage, score predictive models, ground a copilot-style answer, and record an AI-assisted action. Each lab starts from a finance decision and then shows the SQL evidence that makes the decision explainable.
+The journey follows one decision flow. First, you orient yourself to the data foundation. Then you turn that foundation into dashboard evidence, inspect transaction documents, search risk language by meaning, follow fraud relationships, evaluate service coverage, score predictive models, ground a copilot-style answer, and record an AI-assisted action. Each lab starts from a finance decision and then shows the SQL evidence that makes the decision explainable.
 
 As you move through the labs, treat every query as part of the same operating record. The dashboard numbers are not isolated metrics; they point to products, transactions, signals, relationships, service capacity, predictions, governed answers, and audit rows that all remain inside Oracle Database.
 
