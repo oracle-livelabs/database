@@ -8,13 +8,15 @@ The point is to see the shape of the operating data before you start making deci
 
 Think of this lab as the map for the rest of the journey. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
 
+Think of this lab as the readiness checkpoint before any business decision. The goal is to prove that the same schema can support the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+
 ![Finance Data Foundation page](images/data-foundation.png " ")
 
 ### Objectives
 
 - Review the finance semantic views.
 - Check the scale of the current data.
-- Map application pages to Oracle Database 26ai capabilities.
+- Map each application page to the Oracle Database 26ai capability that supports the related finance decision.
 
 Estimated Time: **10 minutes**
 
@@ -71,7 +73,7 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
     </copy>
     ```
 
-    Expected output: Foundation Object Inventory
+    **Expected output: Foundation Object Inventory**
 
     | Area | Count |
     | --- | --- |
@@ -89,9 +91,13 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
 
     Treat this as the capability map for the workshop. Each row points to a different access pattern that will reappear in a later finance decision.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.    
+
 ## Task 2: Count the current finance data groups
 
-1. Run this data group count query.
+Perform the following set of steps to count the current finance data groups and establish a baseline for later dashboard, search, graph, spatial, OML, and audit results:
+
+1. Run this data group count query:
 
     ```sql
     <copy>
@@ -108,7 +114,7 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
     </copy>
     ```
 
-    Expected output: Finance Row Counts
+    **Expected output: Finance Row Counts**
 
     | Data Group | Rows |
     | --- | --- |
@@ -129,8 +135,9 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
 
     These counts establish the scale of the finance scenario: products and institutions provide the business catalog, risk signals and transactions drive the dashboard, service centers and SLA zones support operations, and fraud entities plus relationships support the graph investigation.
 
-    The exact number matters because later results are aggregates over this same foundation. When a dashboard count, graph path, or spatial summary looks surprising, this baseline helps you decide whether the issue is data volume, filtering, or business logic.
+    The exact number should not be the teaching point. Reframe this around interpretation: the baseline helps learners understand whether later results reflect data volume, filtering, or business logic.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

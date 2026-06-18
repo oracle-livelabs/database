@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab recreates the evidence behind the application dashboard. You query critical risk signals, client exposure, transaction value, service pressure, and agent action history directly from the database.
+This lab recreates the evidence behind the application dashboard. Consider leading with the finance decision: risk leaders need to know which signals, products, and client exposures deserve review first, and each dashboard metric must be traceable back to SQL.
 
 The dashboard is the workshop's first decision surface. It turns the foundation from Lab 1 into operating measures that risk leaders can use to decide which signals, products, and client exposures need review first.
 
@@ -32,7 +32,9 @@ Persona focus: You support the risk operations leader by showing that one databa
 
 ## Task 1: Calculate risk signal KPIs
 
-1. Run the dashboard aggregate query.
+Perform the following set of steps to calculate the risk and exposure KPIs behind the dashboard:
+
+1. Run the dashboard aggregate query:
 
     ```sql
     <copy>
@@ -45,7 +47,7 @@ Persona focus: You support the risk operations leader by showing that one databa
     </copy>
     ```
 
-    Expected output: Dashboard KPI Summary
+    **Expected output: Dashboard KPI Summary**
 
     | Total Signals | Avg Criticality | High Risk Signals | Total Exposure | Cases Opened |
     | --- | --- | --- | --- | --- |
@@ -59,9 +61,13 @@ Persona focus: You support the risk operations leader by showing that one databa
 
     The high-risk count is the number of signals with a criticality score of 80 or higher. A higher count means more issues may need immediate analyst review, case triage, or automated follow-up from the operations agent. It does not mean every item is confirmed fraud or a confirmed incident; it means the dashboard has found more items that cross the bank's review threshold.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Find top product exposure
 
-1. Run this product exposure query.
+Perform the following set of steps to find the financial products with the highest monitored exposure:
+
+1. Run this product exposure query:
 
     ```sql
     <copy>
@@ -81,7 +87,7 @@ Persona focus: You support the risk operations leader by showing that one databa
     </copy>
     ```
 
-    Expected output: Top Product Exposure
+    **Expected output: Top Product Exposure**
 
     | Financial Product Name | Institution Name | Product Category | Signal Count | Avg Criticality | Exposure Count |
     | --- | --- | --- | --- | --- | --- |
@@ -104,6 +110,7 @@ Persona focus: You support the risk operations leader by showing that one databa
 
     A product with many signals, high average criticality, and high exposure should move to the top of the dashboard review queue. That combination means the issue is showing up repeatedly, scoring as more severe, and reaching more people. For a financial institution, that can raise client, regulatory, reputational, or operational risk.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 
