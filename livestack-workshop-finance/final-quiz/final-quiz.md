@@ -7,7 +7,7 @@ badge: images/badge.png
 
 ## Introduction
 
-Use this scored quiz to check your understanding of the Seer Bank Finance LiveStack workshop. The questions connect each finance outcome to the database evidence you inspected in the labs.
+Use this scored quiz to check whether learners can connect each Seer Bank finance outcome to the database evidence they inspected in the labs.hop. The questions connect each finance outcome to the database evidence you inspected in the labs.
 
 ### Objectives
 
@@ -36,7 +36,7 @@ Estimated Time: **5 minutes**
     - It removes the need for governed finance views.
     > The dashboard lab is about explainability. SQL aggregates connect the application summary to reviewable signal, exposure, transaction, service, and audit evidence.
 
-    Q: Which persona benefit does JSON Relational Duality provide in the transaction lab?
+    Q: What persona benefit does JSON Relational Duality provide in the transaction lab?
     - Risk teams lose SQL access once the application receives a JSON document.
     - Application teams must copy transaction records into a separate document store.
     * Application developers can serve document-shaped payloads while database teams preserve relational controls.

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab uses Oracle Spatial to reason about service centers, SLA zones, and demand regions. You calculate distance between service centers and the New York Metro demand region, then inspect service pressure.
+This lab uses **Oracle Spatial** to reason about service centers, SLA zones, and demand regions. Consider making the operations decision explicit: after risk is identified, the bank needs to know whether service capacity is close enough to respond.
 
 Risk and fraud decisions often create service work: client outreach, case routing, product review, and document handling. Spatial analysis helps operations leaders see whether service capacity is near the demand region that needs support.
 
@@ -34,7 +34,9 @@ Persona focus: You support a service operations leader by turning location data 
 
 ## Task 1: Calculate service center distance to New York Metro
 
-1. Run this spatial distance query.
+Perform the following set of steps to calculate service-center distance to the New York Metro demand region:
+
+1. Run this spatial distance query:
 
     ```sql
     <copy>
@@ -53,7 +55,7 @@ Persona focus: You support a service operations leader by turning location data 
     </copy>
     ```
 
-    Expected output: New York Service Coverage
+    **Expected output: New York Service Coverage**
 
     | Service Center Name | City | State Province | Boundary Distance Km | Region Name | Demand Index |
     | --- | --- | --- | --- | --- | --- |
@@ -76,9 +78,13 @@ Persona focus: You support a service operations leader by turning location data 
 
     The distance column tells operations which service centers can respond fastest to a high-demand region. The demand index explains why the region matters: a high-demand area may need more capacity, closer routing, or stricter monitoring when risk signals increase.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Summarize SLA zone coverage
 
-1. Run this SLA zone summary.
+Perform the following set of steps to summarize SLA zone coverage for service operations review:
+
+1. Run this SLA zone summary:
 
     ```sql
     <copy>
@@ -93,7 +99,7 @@ Persona focus: You support a service operations leader by turning location data 
     </copy>
     ```
 
-    Expected output: SLA Zone Counts
+    **Expected output: SLA Zone Counts**
 
     | Zone Type | Zones | Min Delivery Hrs | Max Delivery Hrs | Avg Delivery Hrs |
     | --- | --- | --- | --- | --- |
@@ -110,6 +116,7 @@ Persona focus: You support a service operations leader by turning location data 
 
     This matters because risk operations are not finished when a signal is detected. The bank also needs to know whether the service network can meet the response time implied by the case priority.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

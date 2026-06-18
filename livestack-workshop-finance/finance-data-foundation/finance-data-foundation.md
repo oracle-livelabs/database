@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab confirms that the current Seer Bank data foundation is present. You inspect finance semantic views, core data groups, vectors, graphs, spatial objects, OML models, and agent functions before relying on later results.
+This lab confirms that the current Seer Bank data foundation is present before any finance result is trusted. Learners inspect semantic views, core data groups, vectors, graphs, spatial objects, OML models, and agent functions as the shared evidence base for the rest of the workshop.
 
 The rest of the workshop depends on this foundation. If these views and object families are missing, later dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows cannot be trusted as one connected operating story.
 
@@ -14,7 +14,7 @@ Think of this lab as the readiness checkpoint before any business decision. The 
 
 - Confirm the finance semantic views are present.
 - Check the scale of the current data.
-- Map application pages to Oracle Database 26ai capabilities.
+- Map each application page to the Oracle Database 26ai capability that supports the related finance decision.
 
 Estimated Time: **10 minutes**
 
@@ -33,7 +33,9 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
 
 ## Task 1: Inventory the finance object families
 
-1. Run this inventory query to check the semantic views and database features used later in the workshop.
+Perform the following set of steps to inventory the semantic views and database capabilities used later in the workshop:
+
+1. Run this inventory query:
 
     ```sql
     <copy>
@@ -71,7 +73,7 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
     </copy>
     ```
 
-    Expected output: Foundation Object Inventory
+    **Expected output: Foundation Object Inventory**
 
     | Area | Count |
     | --- | --- |
@@ -83,15 +85,18 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
 
 
 2. Review the counts.
-    The query reads Oracle catalog views instead of application tables. That is intentional: before trusting any business output, the platform team needs proof that the database objects behind each later lab exist in the learner schema.
 
     The rows confirm that the workshop schema contains every major capability used later: semantic views for governed SQL, property graphs for fraud reach, vector columns for semantic search, OML models for prediction, and helper functions for controlled agent actions.
 
     Treat this as a readiness check. A zero or lower-than-expected count tells you which later lab would fail or lose business context.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.    
+
 ## Task 2: Count the current finance data groups
 
-1. Run this data group count query.
+Perform the following set of steps to count the current finance data groups and establish a baseline for later dashboard, search, graph, spatial, OML, and audit results:
+
+1. Run this data group count query:
 
     ```sql
     <copy>
@@ -108,7 +113,7 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
     </copy>
     ```
 
-    Expected output: Finance Row Counts
+    **Expected output: Finance Row Counts**
 
     | Data Group | Rows |
     | --- | --- |
@@ -129,8 +134,9 @@ Persona focus: You are the database developer proving that Seer Bank's shared fo
 
     These counts establish the scale of the finance scenario: products and institutions provide the business catalog, risk signals and transactions drive the dashboard, service centers and SLA zones support operations, and fraud entities plus relationships support the graph investigation.
 
-    The exact number matters because later results are aggregates over this same foundation. When a dashboard count, graph path, or spatial summary looks surprising, this baseline helps you decide whether the issue is data volume, filtering, or business logic.
+    The exact number should not be the teaching point. Reframe this around interpretation: the baseline helps learners understand whether later results reflect data volume, filtering, or business logic.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 
