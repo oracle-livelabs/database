@@ -75,32 +75,40 @@ Perform the following set of steps to score demand risk and revenue directly in 
 
     ```sql
     <copy>
-    SELECT product_id,
-           surge_label AS training_label,
-           PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_surge,
-           ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL USING *), 4) AS confidence
-    FROM oml_demand_training_v
-    ORDER BY product_id
+    SELECT s.product_id,
+           p.product_name,
+           s.training_label,
+           s.predicted_surge,
+           s.confidence
+    FROM (
+      SELECT product_id,
+             surge_label AS training_label,
+             PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_surge,
+             ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL USING *), 4) AS confidence
+      FROM oml_demand_training_v
+    ) s
+    JOIN products p ON p.product_id = s.product_id
+    ORDER BY s.product_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
     **Expected output: Surge Prediction Results**
 
-    | Product Id | Training Label | Predicted Surge | Confidence |
-    | --- | --- | --- | --- |
-    | 1 | STABLE | STABLE | 0.9674 |
-    | 2 | SURGE | STABLE | 0.6139 |
-    | 3 | SURGE | STABLE | 0.6128 |
-    | 4 | SURGE | SURGE | 0.5831 |
-    | 5 | STABLE | STABLE | 0.8716 |
-    | 6 | STABLE | STABLE | 0.9361 |
-    | 7 | STABLE | STABLE | 0.6684 |
-    | 8 | STABLE | STABLE | 0.9435 |
-    | 9 | STABLE | STABLE | 0.6597 |
-    | 10 | STABLE | STABLE | 0.5252 |
+    | Product Id | Product Name | Training Label | Predicted Surge | Confidence |
+    | --- | --- | --- | --- | --- |
+    | 1 | Premium Checking Bundle | STABLE | STABLE | 0.9674 |
+    | 2 | High-Yield Savings Account | SURGE | STABLE | 0.6139 |
+    | 3 | Rewards Credit Card | SURGE | STABLE | 0.6128 |
+    | 4 | Small Business Term Loan | SURGE | SURGE | 0.5831 |
+    | 5 | Home Equity Line of Credit | STABLE | STABLE | 0.8716 |
+    | 6 | Robo Advisory Portfolio | STABLE | STABLE | 0.9361 |
+    | 7 | Managed ETF Portfolio | STABLE | STABLE | 0.6684 |
+    | 8 | Municipal Bond Ladder | STABLE | STABLE | 0.9435 |
+    | 9 | Treasury Sweep Account | STABLE | STABLE | 0.6597 |
+    | 10 | Corporate Card Program | STABLE | STABLE | 0.5252 |
 
-    The `ORDER BY product_id` clause makes the displayed sample rows stable. The `Confidence` values are OML model scores, not stored source data. The loader uses fixed training rows and a fixed model seed, but small decimal differences can still appear after a database patch, model rebuild, or OML runtime change. Focus on the predicted label and the relative confidence pattern; a slight change in the fourth decimal place is expected.
+    The inline query scores the same model inputs as the training view, then joins to `PRODUCTS` to show the learner-facing financial product name. The `ORDER BY product_id` clause makes the displayed sample rows stable. The `Confidence` values are OML model scores, not stored source data.
 
 
 2. Run revenue regression.

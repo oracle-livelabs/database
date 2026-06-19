@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. This setup matters because every later lab depends on running SQL as the correct workshop user against the prepared finance schema.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. This setup matters because every later lab uses SQL as the workshop user against the prepared finance schema.
 
 Estimated Time: **5 minutes**
 
@@ -13,7 +13,7 @@ In this lab, you will:
 - Launch the LiveLabs workshop environment.
 - Use the reservation login information to open Database Actions.
 - Confirm that SQL Worksheet is ready for the finance schema.
-- Confirm that the prepared workshop schema is available before continuing.
+- Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
 
@@ -92,7 +92,7 @@ Perform the following set of steps to open SQL Worksheet as the main workshop us
     | LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
 
 
-8. If the schema is not present, ask the instructor to run the workshop handoff loader before continuing.
+8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
 
 You can now continue to the finance labs.
 
