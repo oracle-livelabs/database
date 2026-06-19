@@ -151,10 +151,6 @@ Perform the following set of steps to review the resulting audit evidence and co
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
-    ![Seer Media Agent Console with audit-trail area highlighted](images/image44.png " ")
-
-    *Figure 3: The runbook highlights the same audit review path that the SQL lab makes explicit.*
-
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs Team

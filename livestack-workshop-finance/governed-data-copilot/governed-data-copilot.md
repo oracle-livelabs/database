@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab prepares governed questions for a data copilot workflow. The goal is to require approved finance views, visible SQL, and reviewable database evidence.
+This lab prepares governed questions for a data copilot workflow. Reframe this as a trust pattern: *Natural-language answers are acceptable in finance only when the approved data boundary and SQL path remain visible.*
 
 Natural-language answers are useful only when risk and governance teams can review the source. This lab shows how a copilot-style answer can stay grounded in approved views and visible SQL instead of relying on untraceable generated text.
 
@@ -32,7 +32,9 @@ Persona focus: You support business users who want natural-language answers whil
 
 ## Task 1: Review approved finance views
 
-1. Run this catalog query before asking finance questions.
+Perform the following set of steps to review the approved finance views before asking business questions:
+
+1. Run this catalog query:
 
     ```sql
     <copy>
@@ -48,7 +50,7 @@ Persona focus: You support business users who want natural-language answers whil
     </copy>
     ```
 
-    Expected output: Governed View Comments
+    **Expected output: Governed View Comments**
 
     | View Name | Text Length |
     | --- | --- |
@@ -69,7 +71,11 @@ Persona focus: You support business users who want natural-language answers whil
 
     This matters in the broader workshop because the same foundation that supports dashboards and agents also constrains AI answers to approved database evidence.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Ground a natural-language question in SQL
+
+Perform the following set of steps to ground a natural-language finance question in visible SQL:
 
 1. For the question "Which product categories have the highest current risk exposure?", run visible SQL.
 
@@ -88,7 +94,7 @@ Persona focus: You support business users who want natural-language answers whil
     </copy>
     ```
 
-    Expected output: Exposure by Product Category
+    **Expected output: Exposure by Product Category**
 
     | Product Category | Signal Count | Avg Criticality | Exposure Count |
     | --- | --- | --- | --- |
@@ -111,6 +117,7 @@ Persona focus: You support business users who want natural-language answers whil
 
     The returned table is relevant because it gives a business user an answer and gives reviewers the SQL evidence behind that answer. The copilot pattern is trustworthy only when both are present.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

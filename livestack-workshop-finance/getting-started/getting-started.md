@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. This setup matters because every later lab depends on running SQL as the correct workshop user against the prepared finance schema.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. This setup matters because every later lab uses SQL as the workshop user against the prepared finance schema.
 
 Estimated Time: **5 minutes**
 
@@ -13,11 +13,11 @@ In this lab, you will:
 - Launch the LiveLabs workshop environment.
 - Use the reservation login information to open Database Actions.
 - Confirm that SQL Worksheet is ready for the finance schema.
-- Confirm that the prepared workshop schema is available before continuing.
+- Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
 
-Launch the LiveLabs environment first so the learner starts from the correct reservation, tenancy context, and workshop resources.
+Perform the following set of steps to launch the LiveLabs environment from the correct reservation, tenancy context, and workshop resources:
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -32,6 +32,8 @@ Launch the LiveLabs environment first so the learner starts from the correct res
     *Figure 1: The Reservation Information dialog shows the `LLUSER` login, password, and Login URL for Database Actions.*
 
 ## Task 2: Open SQL Worksheet
+
+Perform the following set of steps to open SQL Worksheet as the main workshop user and confirm the prepared finance schema before continuing:
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -73,7 +75,7 @@ Launch the LiveLabs environment first so the learner starts from the correct res
 
 7. Run this check.
 
-    This check reads Oracle session context directly from the database. `USER` shows the authenticated account, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where unqualified table names will resolve. If the user is not `LLUSER`, use the SQL Worksheet user dropdown to switch before continuing.
+    This check reads Oracle session context directly from the database. Make the business reason explicit: every later finance query depends on running against the prepared workshop schema, so this is the checkpoint that prevents misleading dashboard, risk, or audit results.
 
     ```sql
     <copy>
@@ -83,14 +85,14 @@ Launch the LiveLabs environment first so the learner starts from the correct res
     </copy>
     ```
 
-    Expected output: Connected SQL Worksheet Session
+    **Expected output: Connected SQL Worksheet Session**
 
     | User | Schema | Checked At |
     | --- | --- | --- |
     | LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
 
 
-8. If the schema is not present, ask the instructor to run the workshop handoff loader before continuing.
+8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
 
 You can now continue to the finance labs.
 

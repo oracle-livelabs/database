@@ -135,10 +135,6 @@ Perform the following set of steps to identify the hubs carrying the strongest c
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
-    ![Rights, Capacity, and Live Event Coverage with map and hub table highlighted](images/image22.png " ")
-
-    *Figure 3: The runbook uses the same hub list and map layers to explain where launch coverage is strongest or most constrained.*
-
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs Team

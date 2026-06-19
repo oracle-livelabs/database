@@ -64,7 +64,9 @@ Perform the following set of steps to confirm the import-contract tables that a 
 
     ```sql
     <copy>
-    SELECT table_name
+    SELECT
+      ROW_NUMBER() OVER (ORDER BY table_name) AS contract_order,
+      table_name
     FROM user_tables
     WHERE table_name IN (
       'BRANDS',
@@ -84,27 +86,23 @@ Perform the following set of steps to confirm the import-contract tables that a 
 
     **Expected output:**
 
-    | TABLE_NAME |
-    | --- |
-    | BRANDS |
-    | CUSTOMERS |
-    | DEMAND_FORECASTS |
-    | FULFILLMENT_CENTERS |
-    | INFLUENCERS |
-    | ORDER_ITEMS |
-    | ORDERS |
-    | POST_PRODUCT_MENTIONS |
-    | PRODUCTS |
-    | SOCIAL_POSTS |
+    | CONTRACT_ORDER | TABLE_NAME |
+    | ---: | --- |
+    | 1 | BRANDS |
+    | 2 | CUSTOMERS |
+    | 3 | DEMAND_FORECASTS |
+    | 4 | FULFILLMENT_CENTERS |
+    | 5 | INFLUENCERS |
+    | 6 | ORDER_ITEMS |
+    | 7 | ORDERS |
+    | 8 | POST_PRODUCT_MENTIONS |
+    | 9 | PRODUCTS |
+    | 10 | SOCIAL_POSTS |
     {: title="Import Contract Table List"}
 
 2. This is why the import workflow can stay controlled. The schema contract is known before a customer dataset replaces the seeded rows.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
-    ![Use Your Own Media Data workspace with upload-state area highlighted](images/image48.png " ")
-
-    *Figure 2: The runbook highlights the upload and restore controls that depend on the same dataset-state contract.*
 
 ## Acknowledgements
 

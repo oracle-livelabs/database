@@ -2,7 +2,7 @@
 
 ## Introduction
 
-You followed the Seer Bank Finance LiveStack operating story from foundation to action. A single Oracle Database 26ai foundation supported risk awareness, product exposure, transaction evidence, semantic signal search, fraud traversal, service coverage, prediction, governed answers, and auditable agent actions.
+You followed the **Seer Bank Finance LiveStack** operating story from foundation to action. Consider making the conclusion more outcome-driven: the workshop proved that risk awareness, product exposure, transaction evidence, semantic search, fraud traversal, service coverage, prediction, governed answers, and audit records can stay connected in one Oracle Database 26ai foundation.
 
 The business point is that financial intelligence is only useful when teams can move from signal to evidence to action without losing trust. If each step lives in a different system, Seer Bank must reconcile copies, rebuild security rules, explain inconsistent results, and audit decisions after the fact. With a converged Oracle Database foundation, the same governed data can serve dashboards, APIs, graph investigations, spatial analysis, model scoring, copilot answers, and agent workflows.
 
@@ -17,6 +17,8 @@ That convergence is critical for finance because risk, fraud, AML, service, reve
 Estimated Time: **5 minutes**
 
 ## Task 1: Review what you proved
+
+Perform the following set of steps to review what the workshop proved and connect each outcome back to governed finance evidence:
 
 1. Review the outcome map.
 

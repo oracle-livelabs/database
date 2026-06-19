@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab scores persisted Oracle Machine Learning models created by the finance stack. The models run inside the database, so predictions stay close to risk signals, customers, products, and transactions.
+This lab scores persisted **Oracle Machine Learning** models created by the finance stack. Make the business bridge clearer: predictions become useful when risk, capacity, revenue, and customer signals can be scored where governed finance data already lives.
 
 Prediction adds forward-looking evidence to the operating flow. Instead of only describing current risk and service pressure, the database can score demand surge, customer segments, product clusters, and revenue expectations where the governed data already lives.
 
@@ -34,7 +34,9 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
 ## Task 1: Inventory persisted OML models
 
-1. Run this model inventory query.
+Perform the following set of steps to inventory persisted OML models before trusting predictive output:
+
+1. Run this model inventory query:
 
     ```sql
     <copy>
@@ -63,38 +65,50 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
     This inventory is important because a prediction is only operationally useful when teams can verify which model exists, what mining function it performs, and whether it can be scored from SQL.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Score demand risk and revenue in SQL
+
+The prediction labels are the most important part of this task. The confidence and predicted revenue values are model scores, so your workshop environment may show small decimal differences from the examples. Focus on whether the results tell the same business story: which products are predicted as `SURGE` or `STABLE`, which predictions are stronger or weaker, and whether predicted revenue is directionally close to the target revenue.
 
 1. Run the demand surge classification query.
 
     ```sql
     <copy>
-    SELECT product_id,
-           surge_label AS training_label,
-           PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_surge,
-           ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL USING *), 4) AS confidence
-    FROM oml_demand_training_v
-    ORDER BY product_id
+    SELECT s.product_id,
+           p.product_name,
+           s.training_label,
+           s.predicted_surge,
+           s.confidence
+    FROM (
+      SELECT product_id,
+             surge_label AS training_label,
+             PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_surge,
+             ROUND(PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL USING *), 4) AS confidence
+      FROM oml_demand_training_v
+    ) s
+    JOIN products p ON p.product_id = s.product_id
+    ORDER BY s.product_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-    Expected output: Surge Prediction Results
+    **Expected output: Surge Prediction Results**
 
-    | Product Id | Training Label | Predicted Surge | Confidence |
-    | --- | --- | --- | --- |
-    | 1 | STABLE | STABLE | 0.9674 |
-    | 2 | SURGE | STABLE | 0.6139 |
-    | 3 | SURGE | STABLE | 0.6128 |
-    | 4 | SURGE | SURGE | 0.5831 |
-    | 5 | STABLE | STABLE | 0.8716 |
-    | 6 | STABLE | STABLE | 0.9361 |
-    | 7 | STABLE | STABLE | 0.6684 |
-    | 8 | STABLE | STABLE | 0.9435 |
-    | 9 | STABLE | STABLE | 0.6597 |
-    | 10 | STABLE | STABLE | 0.5252 |
+    | Product Id | Product Name | Training Label | Predicted Surge | Confidence |
+    | --- | --- | --- | --- | --- |
+    | 1 | Premium Checking Bundle | STABLE | STABLE | 0.9674 |
+    | 2 | High-Yield Savings Account | SURGE | STABLE | 0.6139 |
+    | 3 | Rewards Credit Card | SURGE | STABLE | 0.6128 |
+    | 4 | Small Business Term Loan | SURGE | SURGE | 0.5831 |
+    | 5 | Home Equity Line of Credit | STABLE | STABLE | 0.8716 |
+    | 6 | Robo Advisory Portfolio | STABLE | STABLE | 0.9361 |
+    | 7 | Managed ETF Portfolio | STABLE | STABLE | 0.6684 |
+    | 8 | Municipal Bond Ladder | STABLE | STABLE | 0.9435 |
+    | 9 | Treasury Sweep Account | STABLE | STABLE | 0.6597 |
+    | 10 | Corporate Card Program | STABLE | STABLE | 0.5252 |
 
-    The `ORDER BY product_id` clause makes the displayed sample rows stable. The `Confidence` values are OML model scores, not stored source data. The loader uses fixed training rows and a fixed model seed, but small decimal differences can still appear after a database patch, model rebuild, or OML runtime change. Focus on the predicted label and the relative confidence pattern; a slight change in the fourth decimal place is expected.
+    The inline query scores the same model inputs as the training view, then joins to `PRODUCTS` to show the learner-facing financial product name. The `ORDER BY product_id` clause makes the displayed sample rows stable. The `Confidence` values are OML model scores, not stored source data.
 
 
 2. Run revenue regression.
@@ -109,7 +123,7 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
     </copy>
     ```
 
-    Expected output: Revenue Prediction Results
+    **Expected output: Revenue Prediction Results**
 
     | Order Id | Target Revenue | Predicted Revenue |
     | --- | --- | --- |
@@ -132,6 +146,7 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
     Both queries score persisted models without leaving Oracle Database. That keeps sensitive finance records close to the models and gives technical teams SQL evidence for each prediction.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 
