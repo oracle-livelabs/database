@@ -35,7 +35,7 @@ Let's view an LLM connector that includes API details and the list of supported 
 
 3. Identify the definition that you want to view, and then click ![View](images/view.png) (View).
 
-	![LLM Definition details](images/view-openai-connector.png)
+    	![LLM Definition details](images/view-openai-connector.png)
 
 4. Click **Close**.
 
@@ -49,7 +49,7 @@ You can use database profile to define and manage connections to your applicatio
 
 3. Identify the profile that you want to view, and then click ![View](images/view.png) (View).
 
-	![View Database Profile details](images/view-db-profile.png)
+    	![View Database Profile details](images/view-db-profile.png)
 
 4. Click **Close**.
 
@@ -63,7 +63,7 @@ View configuration details of an HTTP tool, which is used in the agentic tasks.
 
 3. Identify the configuration that you want to view, and then click ![View](images/view.png) (View).
 
-	![View Tools Configuration details](images/tools-config-details.png)
+    	![View Tools Configuration details](images/tools-config-details.png)
 
 4. Click **Close**.
 
@@ -76,7 +76,7 @@ View configuration details of an HTTP tool, which is used in the agentic tasks.
 
 3. Identify the connector that you want to view, and then click ![View](images/view.png) (View)
 
-	![View MCP Definition dialog box with values](images/view-mcp-db.png)
+    	![View MCP Definition dialog box with values](images/view-mcp-db.png)
 
 4. Click **Close**.
 
@@ -88,7 +88,7 @@ View configuration details of an HTTP tool, which is used in the agentic tasks.
 
 3. Identify the connector that you want to view, and then click ![View](images/view.png) (View)
 
-	![View MCP Definition dialog box with values](images/mcp-server-2.png)
+    	![View MCP Definition dialog box with values](images/mcp-server-2.png)
 
 4. Click **Close**.
 

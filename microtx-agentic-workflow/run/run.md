@@ -27,11 +27,11 @@ This lab assumes you have:
 ## Task 1: View the Overall Workflow
 
 1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
-   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
+    The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
-   The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks in the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
-  ![View a workflow](images/view-workflow.png)
+    The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks in the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
+    ![View a workflow](images/view-workflow.png)
 
 3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
    ![View a workflow](images/view-workflow-json.png)
@@ -57,7 +57,7 @@ This lab assumes you have:
     ```
 
 5. Click **Execute** to run the selected workflow.
-   ![Select a workflow that you want to view in the Workflow UI](images/workbench-workflow.png)
+    ![Select a workflow that you want to view in the Workflow UI](images/workbench-workflow.png)
 
     Under **History**, a new workflow execution ID is displayed along with the status of the workflow.
 
@@ -80,15 +80,15 @@ The workflow does not progress until a human approves or rejects the loan reques
 1. Open the MicroTx Workflow UI in a new browser tab.
 
 2. Open the navigation menu and click **Workflow Notification**.
-   ![View the status of the workflow execution](images/workflow-notification.png)
+    ![View the status of the workflow execution](images/workflow-notification.png)
 
 3. Click **Act**.
-   The **Take Action on Task** dialog box appears.
+    The **Take Action on Task** dialog box appears.
 
 4. Select **Completed** in the **Status** drop-down list to approve the loan.
 
 5. Select the **Approved** check box.
-   ![Approve action](images/take-action.png)
+    ![Approve action](images/take-action.png)
 
 6. Click **Submit**.
     A message is displayed that the task was updated successfully.

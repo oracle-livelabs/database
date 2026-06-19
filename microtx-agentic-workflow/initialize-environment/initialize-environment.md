@@ -58,7 +58,7 @@ The Thunderbird email client on your remote desktop has been pre-configured with
     <copy>
     sudo passwd microtx.user
     </copy>
-   ```
+    ```
 
 2. You are prompted to enter the password, and then confirm it. The following message is displayed when the password is reset.
 
@@ -69,11 +69,11 @@ The Thunderbird email client on your remote desktop has been pre-configured with
     Remember the password as you must provide this password to access the SMTP server and also provide this password to log into the Thunderbird email client.
 
 3. Click **Activities** in the remote desktop window, and then click **Show Applications**.
-   ![View all applications](./images/thunderbird.png)
+    ![View all applications](./images/thunderbird.png)
 
 4. Click Thunderbird to open the Thunderbird email client on your remote desktop. You are prompted to enter a password for the `microtx.user`.
 
-   ![Enter a new password for microtx.user](./images/email-password.png)
+    ![Enter a new password for microtx.user](./images/email-password.png)
 
 5. Enter the password that you had reset in the previous step, and then click OK.
 
@@ -92,7 +92,7 @@ Click **Activities** in the remote desktop window, and then go back to the termi
     </copy>
     ```
 
-   After a few seconds, the following message is displayed.
+    After a few seconds, the following message is displayed.
 
     ```text
     Minikube started successfully.
@@ -142,7 +142,7 @@ Click **Activities** in the remote desktop window, and then go back to the termi
 
     *It can take 5-6 minutes to deploy and start all the services.* Wait until all services are started.
 
-	![MicroTx Workflows UI](images/deployed-workflow-services.png)
+    	![MicroTx Workflows UI](images/deployed-workflow-services.png)
 
 3. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser.
 
@@ -154,7 +154,7 @@ Click **Activities** in the remote desktop window, and then go back to the termi
 ## Task 5: Create an API Key to Access OpenAI
 
 1. Create a new API key in the [API Keys page](https://platform.openai.com/api-keys) of the OpenAI Developer Platform or use the [OpenAI API](https://platform.openai.com/docs/api-reference/admin-api-keys/create). Use the default settings to create the API key. If you already have an API key or an API key has been provided, you can use that instead of creating a new key. Get an API key [here](https://github.com/oracle-samples/microtx-samples/blob/main/others/sharing.md).
->**Note:**  *An OpenAI API Key has already been added to the default LLM Connector definition. You can skip this task.* In case the existing key has expired or does not work, you can come back and perform this task later.
+    >**Note:**  *An OpenAI API Key has already been added to the default LLM Connector definition. You can skip this task.* In case the existing key has expired or does not work, you can come back and perform this task later.
 
 2. Copy the name and value of the created/existing key and save it safely. You will need to provide this information later.
 
