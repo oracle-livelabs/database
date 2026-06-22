@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab scores persisted Oracle Machine Learning models created by the finance stack. The models run inside the database, so predictions stay close to risk signals, customers, products, and transactions.
+This lab scores persisted **Oracle Machine Learning** models created by the finance stack. Make the business bridge clearer: predictions become useful when risk, capacity, revenue, and customer signals can be scored where governed finance data already lives.
 
 Prediction adds forward-looking evidence to the operating flow. Instead of only describing current risk and service pressure, the database can score demand surge, customer segments, product clusters, and revenue expectations where the governed data already lives.
 
@@ -34,7 +34,9 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
 ## Task 1: Inventory persisted OML models
 
-1. Run this model inventory query.
+Perform the following set of steps to inventory persisted OML models before trusting predictive output:
+
+1. Run this model inventory query:
 
     ```sql
     <copy>
@@ -63,6 +65,8 @@ Persona focus: You bridge the ML engineer and finance decision-maker by showing 
 
     This inventory is important because a prediction is only operationally useful when teams can verify which model exists, what mining function it performs, and whether it can be scored from SQL.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Score demand risk and revenue in SQL
 
 The prediction labels are the most important part of this task. The confidence and predicted revenue values are model scores, so your workshop environment may show small decimal differences from the examples. Focus on whether the results tell the same business story: which products are predicted as `SURGE` or `STABLE`, which predictions are stronger or weaker, and whether predicted revenue is directionally close to the target revenue.
@@ -89,7 +93,7 @@ The prediction labels are the most important part of this task. The confidence a
     </copy>
     ```
 
-    Expected output: Surge Prediction Results
+    **Expected output: Surge Prediction Results**
 
     | Product Id | Product Name | Training Label | Predicted Surge | Confidence |
     | --- | --- | --- | --- | --- |
@@ -119,7 +123,7 @@ The prediction labels are the most important part of this task. The confidence a
     </copy>
     ```
 
-    Expected output: Revenue Prediction Results
+    **Expected output: Revenue Prediction Results**
 
     | Order Id | Target Revenue | Predicted Revenue |
     | --- | --- | --- |
@@ -142,6 +146,7 @@ The prediction labels are the most important part of this task. The confidence a
 
     Both queries score persisted models without leaving Oracle Database. That keeps sensitive finance records close to the models and gives technical teams SQL evidence for each prediction.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

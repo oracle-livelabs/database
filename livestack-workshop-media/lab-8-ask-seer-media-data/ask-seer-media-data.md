@@ -108,10 +108,6 @@ Perform the following set of steps to answer one launch question with visible SQ
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
-    ![Ask Data workspace with SQL-mode result area highlighted](images/image40.png " ")
-
-    *Figure 2: The runbook shows the same SQL-inspection workflow that keeps the answer explainable.*
-
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs Team

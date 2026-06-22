@@ -7,7 +7,7 @@ badge: images/badge.png
 
 ## Introduction
 
-Use this scored quiz to check your understanding of the Seer Bank Finance LiveStack workshop. The questions connect each finance outcome to the database evidence you inspected in the labs.
+Use this scored quiz to check whether learners can connect each Seer Bank finance outcome to the database evidence they inspected in the labs.hop. The questions connect each finance outcome to the database evidence you inspected in the labs.
 
 ### Objectives
 

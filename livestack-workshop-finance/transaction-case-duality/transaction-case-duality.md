@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab uses JSON Relational Duality to inspect transaction-shaped documents over relational tables. The application can consume document-style payloads while the database keeps relational integrity and SQL access.
+This lab uses **JSON Relational Duality** to inspect transaction-shaped documents over relational tables. Make the business value sharper: *Applications can consume document-style transaction payloads while analysts and database developers keep governed relational access for investigation.*
 
 Transaction and case operations need both application-friendly documents and governed relational evidence. This lab shows how one transaction can be exposed as JSON for an application while remaining queryable with SQL for analysts and database developers.
 
@@ -32,7 +32,9 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
 ## Task 1: Inspect document-shaped transactions
 
-1. Run this query against the transaction duality view.
+Perform the following set of steps to inspect a document-shaped transaction from the duality view:
+
+1. Run this query:
 
     ```sql
     <copy>
@@ -42,7 +44,7 @@ Persona focus: You are the application/database developer showing how Seer Bank 
     </copy>
     ```
 
-    Expected output: Transaction Document Excerpt
+    **Expected output: Transaction Document Excerpt**
 
     | Transaction Document |
     | --- |
@@ -56,9 +58,13 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
     This is relevant to the workshop story because risk and operations teams can inspect the same transaction from two angles: API-ready JSON for the application and governed relational rows for analysis.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Project JSON fields with SQL
 
-1. Run this SQL/JSON projection query.
+Perform the following set of steps to project JSON document fields back into SQL columns for review:
+
+1. Run this SQL/JSON projection query:
 
     ```sql
     <copy>
@@ -74,7 +80,7 @@ Persona focus: You are the application/database developer showing how Seer Bank 
     </copy>
     ```
 
-    Expected output: JSON Field Projection
+    **Expected output: JSON Field Projection**
 
     The exact email values may differ by load, but `Transaction Status` and `Client Email` should not be blank.
 
@@ -97,6 +103,7 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
     `Transaction Id` and `Transaction Status` are projected from the JSON document. The document stores the client reference as `customerId`, so the query joins back to `CUSTOMERS` to return `Client Email`. This shows how the application can use document-shaped transaction data while analysts can still join to governed relational tables.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

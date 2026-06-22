@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab uses database-backed helper functions behind the agent console pattern. You call a function that summarizes current risk signals, log an agent decision, and review the audit trail.
+This lab uses database-backed helper functions behind the agent console pattern. Lead with the controlled-action point: an AI-assisted workflow should summarize risk through approved tools and leave a durable record of what was proposed or done.
 
 The final operating step is controlled action. An AI-assisted workflow should not only summarize risk; it should use approved tools and leave a durable record of what action was proposed or taken.
 
@@ -32,6 +32,8 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
 
 ## Task 1: Call the trend detection function
 
+Perform the following set of steps to call the approved PL/SQL helper function for current risk signals:
+
 1. Run the approved PL/SQL helper function.
 
     ```sql
@@ -41,7 +43,7 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
     </copy>
     ```
 
-    Expected output: Risk Signal Tool Summary
+    **Expected output: Risk Signal Tool Summary**
 
     | Risk Signal Summary |
     | --- |
@@ -55,9 +57,13 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
 
     This matters because the summary is produced by an approved database function, not by free-form interpretation outside the governed data boundary.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Log an auditable agent action
 
-1. Log a validation action.
+Perform the following set of steps to log and inspect an auditable agent action:
+
+1. Run this query:
 
     ```sql
     <copy>
@@ -71,7 +77,7 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
     </copy>
     ```
 
-    Expected output: Agent Decision Result
+    **Expected output: Agent Decision Result**
 
     | Result |
     | --- |
@@ -93,7 +99,7 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
     </copy>
     ```
 
-    Expected output: Agent Action Audit Trail
+    **Expected output: Agent Action Audit Trail**
 
     | Agent Name | Action Type | Entity Type | Execution Status | Executed At |
     | --- | --- | --- | --- | --- |
@@ -111,6 +117,7 @@ Persona focus: You support the operations leader by turning an AI-assisted actio
 
     This closes the workshop story: the same database foundation that produced risk evidence also records the AI-assisted operational response for later review.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

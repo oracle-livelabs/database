@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab investigates a fraud network with Oracle Property Graph and SQL/PGQ. You start from suspicious account `ACCT-8841` and trace connected devices, IP addresses, payees, phones, and other entities.
+This lab investigates a fraud network with **Oracle Property Graph** and **SQL/PGQ**. Strengthen the opening by stating the investigator question first: *Once an account looks suspicious, what other accounts, devices, IP addresses, payees, phones, or emails are connected to it?*
 
 Fraud patterns often hide in relationships rather than in a single transaction row. This lab shows how a suspicious account can lead to connected devices, mule payees, IP addresses, and phone numbers that may explain coordinated activity.
 
@@ -34,6 +34,8 @@ Persona focus: You are helping a fraud analyst move from a suspicious account to
 
 ## Task 1: Trace two-hop fraud reach
 
+Perform the following set of steps to trace two-hop fraud reach from ACCT-8841:
+
 1. Run the SQL/PGQ traversal from `ACCT-8841`.
 
     This query treats the fraud data as a graph. In the `MATCH` pattern, `(seed IS entity)` is the starting account, `-[e IS related_to]->{1,2}` means follow one or two relationship hops, and `(reached IS entity)` is every entity reached from that starting point. The `WHERE` clause anchors the search on `ACCT-8841`, and the `COLUMNS` clause projects graph properties back into a normal SQL result table.
@@ -62,7 +64,7 @@ Persona focus: You are helping a fraud analyst move from a suspicious account to
     </copy>
     ```
 
-    Expected output: High Risk Fraud Entities
+    **Expected output: High Risk Fraud Entities**
 
     | Entity Key | Display Name | Entity Type | Risk Score | Risk Level | Total Amount | Channel |
     | --- | --- | --- | --- | --- | --- | --- |
@@ -81,7 +83,11 @@ Persona focus: You are helping a fraud analyst move from a suspicious account to
 
     The result gives investigators a prioritized reach map. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Find accounts sharing device, IP, phone, or email
+
+Perform the following set of steps to find accounts that share a device, IP address, phone, or email:
 
 1. Run this shared-entity graph query.
 
@@ -118,7 +124,7 @@ Persona focus: You are helping a fraud analyst move from a suspicious account to
     </copy>
     ```
 
-    Expected output: Shared Entity Connections
+    **Expected output: Shared Entity Connections**
 
     | Account A | Shared Entity | Shared Type | Account B | A Risk | B Risk | Combined Risk | E1 Type | E2 Type |
     | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -141,6 +147,7 @@ Persona focus: You are helping a fraud analyst move from a suspicious account to
 
     This is relevant to the overall workshop because it turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 
