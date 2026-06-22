@@ -41,6 +41,8 @@ You start like an operations leader: look at the whole situation first, then dri
 
 1. Run this SQL block.
 
+    This query creates the kind of summary an operations leader needs before drilling into details.
+
     <copy>
 SELECT 'Service orders' AS metric, COUNT(*) AS value FROM seer_comms_service_orders_v
 UNION ALL SELECT 'Service revenue', ROUND(SUM(service_value), 0) FROM seer_comms_service_orders_v
@@ -67,6 +69,8 @@ This query shows why a converged data platform matters. The KPI row comes from l
 ## Task 2: Find services under demand pressure
 
 1. Run this SQL block.
+
+    This query ranks services by the number and strength of subscriber-signal matches.
 
     <copy>
 SELECT service_name,
@@ -95,6 +99,8 @@ The important result is not the exact ordering. The business value is that press
 ## Task 3: Inspect one service for API-ready context
 
 1. Run this SQL block.
+
+    This query narrows the investigation to one service identity that later labs can reuse across access patterns.
 
     <copy>
 SELECT service_id,

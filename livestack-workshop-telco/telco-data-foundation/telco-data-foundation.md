@@ -39,6 +39,8 @@ You prove that the workshop has a complete telecom data foundation. The counts a
 
 1. Run this SQL block.
 
+    This query counts the major domains that power the rest of the workshop. You are checking breadth, not just row volume.
+
     <copy>
 SELECT 'Telecom services' AS domain, COUNT(*) AS records FROM seer_comms_services_v
 UNION ALL SELECT 'Subscriber signals', COUNT(*) FROM seer_comms_subscriber_signals_v
@@ -68,6 +70,8 @@ The counts show that the workshop is not a single-feature exercise. The same sch
 
 1. Run this SQL block.
 
+    This query confirms that learners can use telecom-friendly view names instead of the portable source table names.
+
     <copy>
 SELECT view_name
 FROM user_views
@@ -91,6 +95,8 @@ Your output may include additional Seer Comms views. These views are the bridge 
 ## Task 3: Verify Oracle feature objects
 
 1. Run this SQL block.
+
+    This query checks the database objects that make the workshop more than a dashboard exercise.
 
     <copy>
 SELECT object_type, object_name

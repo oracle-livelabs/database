@@ -34,11 +34,15 @@ You investigate relationships after you know a service is under pressure. The gr
 
 ## Scene Evidence
 
+Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+
 ![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png)
 
 ## Task 1: Count graph entities and relationships
 
 1. Run this SQL block.
+
+    This query checks that the graph has both entities and relationships. A graph without edges cannot explain impact.
 
     <copy>
 SELECT 'Impact entities' AS graph_item, COUNT(*) AS records FROM telecom_graph_entities
@@ -57,6 +61,8 @@ Expected output:
 ## Task 2: Find high-impact events
 
 1. Run this SQL block.
+
+    This query surfaces the events and entities that deserve investigation first.
 
     <copy>
 SELECT entity_key, display_name, entity_type, region, affected_count, risk_score, experience_score
@@ -77,6 +83,8 @@ Expected output:
 ## Task 3: Traverse connected impact
 
 1. Run this SQL block.
+
+    This query follows relationships from one named event to the connected sites, subscriber groups, and response context.
 
     <copy>
 SELECT src.display_name AS source_entity,

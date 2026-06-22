@@ -34,11 +34,15 @@ You turn impact into a field decision. The spatial and capacity queries show whe
 
 ## Scene Evidence
 
+Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+
 ![Capacity risk table](images/capacity-risk-table.png)
 
 ## Task 1: Inspect network sites
 
 1. Run this SQL block.
+
+    This query identifies active sites and their current load so the map has operational meaning.
 
     <copy>
 SELECT network_site_name, network_site_type, city, state_province, service_capacity_units, current_capacity_load_pct
@@ -59,6 +63,8 @@ Expected output:
 ## Task 2: Find capacity risk by service and site
 
 1. Run this SQL block.
+
+    This query turns capacity thresholds into a short list of places that may need action.
 
     <copy>
 SELECT service_name,
@@ -84,6 +90,8 @@ Expected output:
 ## Task 3: Review field dispatch evidence
 
 1. Run this SQL block.
+
+    This query connects capacity pressure to active field work that operations teams can coordinate.
 
     <copy>
 SELECT dispatch_id, service_order_id, network_site_name, dispatch_status

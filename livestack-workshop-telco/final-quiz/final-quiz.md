@@ -14,7 +14,9 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-The quiz checks whether you can connect the business workflow to the database capability. Focus on why each capability matters to the operator, not only on the feature name.
+The quiz checks whether you can connect the business workflow to the database capability. Focus on why each capability matters to the operator, not only on the feature name. The badge marks completion of the telecom LiveStack learning path.
+
+![Telco workshop completion badge](images/livestack-badge-telecommunications.png)
 
 ## Task 1: Answer the questions
 
