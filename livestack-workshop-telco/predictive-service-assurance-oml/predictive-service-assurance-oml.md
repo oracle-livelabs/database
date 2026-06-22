@@ -34,6 +34,8 @@ You look ahead after reviewing current operations. The predictive assurance quer
 
 ## Scene Evidence
 
+Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+
 ![Service revenue forecast](images/service-revenue-forecast.png)
 
 ![Retention segments](images/retention-segments.png)
@@ -41,6 +43,8 @@ You look ahead after reviewing current operations. The predictive assurance quer
 ## Task 1: Inspect service demand signals
 
 1. Run this SQL block.
+
+    This query prepares model-style features from current service demand and revenue evidence.
 
     <copy>
 SELECT s.service_name,
@@ -67,6 +71,8 @@ Expected output:
 
 1. Run this SQL block.
 
+    This query groups customer experience signals so retention teams can reason about segments.
+
     <copy>
 SELECT subscriber_tier,
        COUNT(*) AS subscribers,
@@ -88,6 +94,8 @@ Expected output:
 ## Task 3: Join predicted demand to capacity exposure
 
 1. Run this SQL block.
+
+    This query connects forecast demand to available network capacity, turning scores into an action list.
 
     <copy>
 SELECT f.service_name,

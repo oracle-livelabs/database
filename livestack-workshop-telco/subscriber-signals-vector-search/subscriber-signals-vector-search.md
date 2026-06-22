@@ -41,6 +41,8 @@ You move from dashboard symptoms to subscriber language. The vector and semantic
 
 1. Run this SQL block.
 
+    This query confirms that both sides of semantic matching exist: services and subscriber signals.
+
     <copy>
 SELECT 'Service embeddings' AS vector_set, COUNT(*) AS rows_loaded FROM service_embeddings
 UNION ALL
@@ -60,6 +62,8 @@ Embeddings are stored in Oracle AI Database with the rest of the operational dat
 ## Task 2: Rank services by signal similarity history
 
 1. Run this SQL block.
+
+    This query summarizes which services attract the most semantically similar subscriber signals.
 
     <copy>
 SELECT service_name,
@@ -87,6 +91,8 @@ This is the operating signal behind the LiveStack page. Semantic matches show wh
 ## Task 3: Inspect high-priority subscriber signals
 
 1. Run this SQL block.
+
+    This query shows the raw subscriber evidence behind the ranked service pressure.
 
     <copy>
 SELECT signal_channel,

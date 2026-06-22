@@ -40,6 +40,8 @@ You switch from predefined reports to governed questions. The SQL examples show 
 
 1. Run this SQL block.
 
+    This query represents the SQL path behind a plain-English revenue question.
+
     <copy>
 SELECT service_name,
        ROUND(SUM(service_value), 0) AS service_revenue,
@@ -63,6 +65,8 @@ Expected output:
 ## Task 2: Answer a high-urgency signal question
 
 1. Run this SQL block.
+
+    This query represents the SQL path behind a plain-English subscriber-signal question.
 
     <copy>
 SELECT signal_channel,

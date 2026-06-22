@@ -40,6 +40,8 @@ You close the loop with auditable action. The agent action and capacity queries 
 
 1. Run this SQL block.
 
+    This query checks whether assisted actions leave a reviewable operational record.
+
     <copy>
 SELECT agent_name,
        action_type,
@@ -63,6 +65,8 @@ Expected output:
 ## Task 2: Check capacity for a pressure service
 
 1. Run this SQL block.
+
+    This query shows the kind of approved database evidence an agent tool can return.
 
     <copy>
 SELECT network_site_name,

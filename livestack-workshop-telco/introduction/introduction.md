@@ -2,9 +2,11 @@
 
 ## Introduction
 
-A telecommunications provider cannot manage a demand surge from one dashboard alone. Network operations, care, field dispatch, retention, data engineering, and AI teams all need the same trusted evidence, but they usually see different systems and different versions of the truth.
+A telecommunications provider cannot manage a demand surge from one dashboard alone. Network operations, care, field dispatch, retention, data engineering, and AI teams all need the same trusted evidence. In many environments, those teams still work from separate systems and different versions of the truth.
 
-In this workshop, you follow Seer Comms through a South Florida 5G demand-surge scenario. You start with the governed data foundation, then move through the same decision loop an operator would use: observe service pressure, understand subscriber intent, investigate connected impact, locate field capacity, inspect service orders, review predictive signals, ask governed questions, and record auditable AI-assisted action.
+In this workshop, you follow Seer Comms through a South Florida 5G demand-surge scenario. The business problem is simple: subscriber pressure is rising, and the provider needs to decide where to act before experience degrades. The technical lesson is that the evidence for that decision can stay in Oracle AI Database 26ai instead of being fragmented across separate search, graph, spatial, analytics, document, and AI stores.
+
+You start with the governed data foundation, then move through the same decision loop an operator would use: observe service pressure, understand subscriber intent, investigate connected impact, locate field capacity, inspect service orders, review predictive signals, ask governed questions, and record auditable AI-assisted action.
 
 The Seer Comms LiveStack Demo shows the application workflow. These labs show the Oracle AI Database evidence behind that workflow. Each lab asks a business question, runs SQL against the loaded workshop schema, and explains why the result matters to a telecom team.
 
@@ -37,6 +39,8 @@ In this workshop, you will:
 | Outcome | The provider can move from signal detection to explainable, auditable service assurance action. |
 {: title="Workshop story at a glance"}
 
+![Seer Comms operating loop](images/operating-loop.svg)
+
 ## How to Use the Labs
 
 Each lab follows the same pattern:
@@ -47,7 +51,7 @@ Each lab follows the same pattern:
 4. Compare your result with the expected output.
 5. Read the interpretation before moving to the next lab.
 
-The SQL is not just proof that objects exist. It shows how Oracle AI Database keeps the data, search, graph, spatial, prediction, and audit evidence close enough for a real operator workflow.
+The SQL is not just proof that objects exist. It shows how Oracle AI Database keeps data, search, graph, spatial analysis, prediction, document access, and audit evidence close enough for a real operator workflow. When a screenshot includes small interface details, use it as scene grounding; the SQL and explanation underneath tell you exactly what to verify.
 
 ![Seer Comms use case overview](images/welcome-use-cases.png)
 

@@ -29,6 +29,8 @@ You prepare SQL Worksheet and confirm the schema before running any feature labs
 
 1. Run this SQL block.
 
+    This quick check prevents the most common setup issue: running the labs from the wrong schema.
+
     <copy>
     SELECT USER AS connected_user;
     </copy>
@@ -45,6 +47,8 @@ The remaining labs use `LLUSER` objects and semantic views. If the connected use
 ## Task 3: Check telco semantic views
 
 1. Run this SQL block.
+
+    This query lists the Seer Comms views that the remaining labs use. Treat the list as your contract for the workshop vocabulary.
 
     <copy>
     SELECT view_name

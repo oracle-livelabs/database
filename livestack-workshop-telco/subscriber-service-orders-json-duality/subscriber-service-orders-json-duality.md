@@ -34,11 +34,15 @@ You inspect the service order that records operational action. The relational an
 
 ## Scene Evidence
 
+Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+
 ![Service order JSON document](images/service-order-json-document.png)
 
 ## Task 1: Query a service order relationally
 
 1. Run this SQL block.
+
+    This query starts with the traditional operational view of one service order.
 
     <copy>
 SELECT service_order_id, subscriber_name, city, state_province, service_status, service_value, dispatch_cost
@@ -56,6 +60,8 @@ Expected output:
 ## Task 2: Inspect line items for the same order
 
 1. Run this SQL block.
+
+    This query verifies the detail rows that make up the order total and service mix.
 
     <copy>
 SELECT oi.order_id AS service_order_id,
@@ -82,6 +88,8 @@ Expected output:
 ## Task 3: Return the service order document
 
 1. Run this SQL block.
+
+    This query returns the same order through the JSON document shape used by application workflows.
 
     <copy>
 SELECT JSON_SERIALIZE(data PRETTY) AS service_order_document
