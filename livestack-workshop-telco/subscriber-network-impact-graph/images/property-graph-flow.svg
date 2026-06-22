@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" role="img" aria-label="Property Graph for telecom impact investigation">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/></marker></defs>
+<rect width="960" height="260" fill="#ffffff"/>
+<text x="32" y="38" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2933">Property Graph for telecom impact investigation</text>
+<rect x="40" y="80" width="170" height="108" rx="6" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="54" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Impact event</text>
+<text x="54" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Outage, site, case,</text>
+<text x="54" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">crew, subscriber</text>
+<rect x="234" y="80" width="170" height="108" rx="6" fill="#eef5fb" stroke="#6b7280"/>
+<text x="248" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Vertices</text>
+<text x="248" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Telecom entities stay</text>
+<text x="248" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">in tables</text>
+<rect x="428" y="80" width="170" height="108" rx="6" fill="#f5f1fb" stroke="#6b7280"/>
+<text x="442" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Edges</text>
+<text x="442" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Relationships describe</text>
+<text x="442" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">impact paths</text>
+<rect x="622" y="80" width="170" height="108" rx="6" fill="#eff7f1" stroke="#6b7280"/>
+<text x="636" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">SQL/PGQ</text>
+<text x="636" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">GRAPH_TABLE traverses</text>
+<text x="636" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">connections</text>
+<rect x="816" y="80" width="170" height="108" rx="6" fill="#fff6e8" stroke="#6b7280"/>
+<text x="830" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Decision</text>
+<text x="830" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Prioritize connected</text>
+<text x="830" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">subscriber impact</text>
+<line x1="210" y1="134.0" x2="224" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="404" y1="134.0" x2="418" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="598" y1="134.0" x2="612" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="792" y1="134.0" x2="806" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="769.0" y="122.0" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">paths</text>
+</svg>
