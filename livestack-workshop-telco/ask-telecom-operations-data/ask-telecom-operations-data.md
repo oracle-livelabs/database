@@ -62,6 +62,7 @@ You switch from predefined reports to governed questions. The SQL examples show 
     | --- | ---: | ---: |
     | Fixed Wireless Home Internet | 184000 | 230 |
     | Device Upgrade Enrollment | 172000 | 216 |
+    {: title="Revenue answer with visible SQL evidence"}
 
 ## Task 2: Answer a high-urgency signal question
 
@@ -87,6 +88,7 @@ You switch from predefined reports to governed questions. The SQL examples show 
     | --- | ---: | ---: | ---: |
     | threads | 1017 | 19937363 | 95869 |
     | twitter | 1012 | 19576775 | 98830 |
+    {: title="Signal-channel answer with visible SQL evidence"}
 
 ## Task 3: Explain why Show SQL matters
 

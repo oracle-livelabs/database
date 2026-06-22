@@ -62,6 +62,7 @@ You close the loop with auditable action. The agent action and capacity queries 
     | --- | --- | --- | ---: | --- | --- |
     | Network Access Agent | `capacity_check` | `network_capacity` | 0.90 | COMPLETED | Dynamic timestamp |
     | Service Assurance Agent | `signal_triage` | service | 0.88 | COMPLETED | Dynamic timestamp |
+    {: title="Recent agent actions available for review"}
 
 ## Task 2: Check capacity for a pressure service
 
@@ -89,6 +90,7 @@ You close the loop with auditable action. The agent action and capacity queries 
     | --- | ---: | ---: | ---: | ---: |
     | Chicago Midwest NOC | 92 | 31 | 75 | 100 |
     | Miami Connected Life Hub | 104 | 28 | 80 | 100 |
+    {: title="Capacity check returned by the agent tool"}
 
 ## Task 3: Explain the trusted-action pattern
 

@@ -64,6 +64,7 @@ You start like an operations leader: look at the whole situation first, then dri
     | Services under pressure | 32 |
     | Active dispatches | 375 |
     | AI-assisted interventions | 25 |
+    {: title="Operations center health metrics"}
 
 This query shows why a converged data platform matters. The KPI row comes from live operational domains, not a stitched spreadsheet.
 
@@ -94,6 +95,7 @@ This query shows why a converged data platform matters. The KPI row comes from l
     | Fixed Wireless Home Internet | Seer Home Broadband | 57 | 0.89 | High |
     | Device Upgrade Enrollment | Seer Mobile | 55 | 0.88 | High |
     | Gigabit Fiber Install | Seer Fiber | 53 | 0.87 | High |
+    {: title="Services with urgent subscriber signals"}
 
 
 The important result is not the exact ordering. The business value is that pressure can be ranked with service, signal, and customer context still governed by Oracle.
@@ -121,6 +123,7 @@ The important result is not the exact ordering. The business value is that press
     | Service ID | Service Name | Service Category | Service Segment | Service Value Proxy |
     | ---: | --- | --- | --- | ---: |
     | 1001 | Fixed Wireless Home Internet | Broadband | Home Internet | 79.99 |
+    {: title="High-value services to monitor"}
 
 
 The dashboard can start as a simple operations view, then hand the same service identity to JSON, vector, graph, spatial, ML, and agent flows in later labs.

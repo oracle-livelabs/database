@@ -67,6 +67,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | ---: | ---: | ---: |
     | Device Upgrade Enrollment | 107 | 260 | 67600 |
     | Fixed Wireless Home Internet | 102 | 248 | 64100 |
+    {: title="Service demand signals for prediction"}
 
 ## Task 2: Review retention-style customer experience features
 
@@ -92,6 +93,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | ---: | ---: | ---: |
     | Potential | 59 | 1740 | 63.12 |
     | Loyal | 10 | 6180 | 44.70 |
+    {: title="Subscriber tiers for assurance planning"}
 
 ## Task 3: Join predicted demand to capacity exposure
 
@@ -121,6 +123,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | --- | ---: | ---: | ---: | --- |
     | Device Upgrade Enrollment | Boston Family Plan Support Center | 13 | 141 | 1.28 | Access risk |
     | Fixed Wireless Home Internet | Seattle Customer Experience Center | 23 | 139 | 1.24 | Access risk |
+    {: title="Access risks that need action"}
 
 
 

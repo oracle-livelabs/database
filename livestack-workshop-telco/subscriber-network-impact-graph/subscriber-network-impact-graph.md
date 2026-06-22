@@ -58,6 +58,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | ---: |
     | Impact entities | 36 |
     | Impact relationships | 50 |
+    {: title="Impact graph inventory"}
 
 ## Task 2: Find high-impact events
 
@@ -81,6 +82,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | --- | --- | --- | ---: | ---: | ---: |
     | OUT-EVENT-501 | Game-day 5G congestion spike | `outage_event` | Northeast | 31200 | 96 | 35 |
     | OUT-EVENT-502 | Fiber cut affecting enterprise corridor | `outage_event` | Southeast | 7100 | 95 | 38 |
+    {: title="High-risk entities in the impact graph"}
 
 ## Task 3: Traverse connected impact
 
@@ -109,6 +111,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | --- | --- | --- | ---: |
     | Game-day 5G congestion spike | IMPACTS | Miami Connected Life Hub | `network_site` | 88 |
     | Game-day 5G congestion spike | AFFECTS | South Florida family-plan subscribers | `subscriber_cluster` | 86 |
+    {: title="Connected impact paths to investigate"}
 
 
 

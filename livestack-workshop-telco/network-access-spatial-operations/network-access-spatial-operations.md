@@ -60,6 +60,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | --- | --- | --- | ---: | ---: |
     | Atlanta Home Internet Dispatch | NOC / regional operations hub | Atlanta | GA | 5850 | 82 |
     | Dallas 5G Dispatch Center | Fiber or device field hub | Dallas | TX | 5500 | 79 |
+    {: title="Network sites available for spatial analysis"}
 
 ## Task 2: Find capacity risk by service and site
 
@@ -88,6 +89,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | --- | --- | ---: | ---: | ---: | --- |
     | Number Port-In Activation | NYC Network Command Center | 37 | 16 | 50 | Capacity risk |
     | Gigabit Fiber Install | Houston Roaming Operations Hub | 55 | 21 | 60 | Capacity risk |
+    {: title="Capacity risks by service and site"}
 
 ## Task 3: Review field dispatch evidence
 
@@ -111,6 +113,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | ---: | ---: | --- | --- |
     | 1 | 3 | Phoenix Device Logistics Hub | In Progress |
     | 5 | 11 | Houston Roaming Operations Hub | In Progress |
+    {: title="Field dispatches tied to network sites"}
 
 
 

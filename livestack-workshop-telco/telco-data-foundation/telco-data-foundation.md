@@ -63,6 +63,7 @@ You prove that the workshop has a complete telecom data foundation. The counts a
     | Service orders | 3000 |
     | Subscriber signals | 5000 |
     | Telecom services | 32 |
+    {: title="Seeded telecom data volumes"}
 
 The counts show that the workshop is not a single-feature exercise. The same schema carries the operating data needed by dashboard, signal, graph, spatial, service order, ML, answer, and agent workflows.
 
@@ -91,6 +92,7 @@ The counts show that the workshop is not a single-feature exercise. The same sch
     | `SEER_COMMS_SERVICE_ORDERS_V` |
     | `SEER_COMMS_SERVICES_V` |
     | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
+    {: title="Core views for learner queries"}
 
 Your output may include additional Seer Comms views. These views are the bridge between the portable LiveStack schema and telecom language such as service lines, subscriber signals, network capacity, and field dispatches.
 
@@ -125,6 +127,7 @@ Your output may include additional Seer Comms views. These views are the bridge 
     | TABLE | `FULFILLMENT_ZONES` |
     | TABLE | `POST_EMBEDDINGS` |
     | TABLE | `PRODUCT_EMBEDDINGS` |
+    {: title="Oracle objects behind the workshop"}
 
 These objects are the evidence that Oracle AI Database is the protagonist of the workshop. Each later lab uses one or more of these objects to answer a telecom operations question.
 

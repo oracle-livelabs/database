@@ -57,6 +57,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | Service Order ID | Subscriber Name | City | State Province | Service Status | Service Value | Dispatch Cost |
     | ---: | --- | --- | --- | --- | ---: | ---: |
     | 2870 | Jack Hill | Portland | Oregon | Completed | 4160 | 14.99 |
+    {: title="Service order selected for duality review"}
 
 ## Task 2: Inspect line items for the same order
 
@@ -86,6 +87,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | 2870 | LTE Backup Gateway | Devices | 2 | 115 | 230 |
     | 2870 | Fraud Resolution Case | Security | 2 | 45 | 90 |
     | 2870 | Edge Compute Reservation | Enterprise Connectivity | 3 | 640 | 1920 |
+    {: title="Line items inside the service order"}
 
 ## Task 3: Return the service order document
 
@@ -106,6 +108,7 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
     | Service Order Document |
     | --- |
     | JSON document for service order 2870 with subscriber, status, total, dispatch cost, and nested line items. |
+    {: title="Document view of the same service order"}
 
 The JSON document and relational rows come from the same Oracle transaction model. That is the value of JSON Relational Duality for telecom service-order APIs.
 

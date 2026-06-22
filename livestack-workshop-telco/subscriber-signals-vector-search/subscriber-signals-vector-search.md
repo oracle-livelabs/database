@@ -57,6 +57,7 @@ You move from dashboard symptoms to subscriber language. The vector and semantic
     | --- | ---: |
     | Service embeddings | 32 |
     | Signal embeddings | 5000 |
+    {: title="Vector data available for semantic search"}
 
 Embeddings are stored in Oracle AI Database with the rest of the operational data. That reduces the need to move sensitive signal text into a separate search platform.
 
@@ -87,6 +88,7 @@ Embeddings are stored in Oracle AI Database with the rest of the operational dat
     | Fixed Wireless Home Internet | Seer Home Broadband | 57 | 0.89 | 0.72 |
     | Device Upgrade Enrollment | Seer Mobile | 55 | 0.88 | 0.71 |
     | Gigabit Fiber Install | Seer Fiber | 53 | 0.87 | 0.70 |
+    {: title="Services ranked by signal meaning"}
 
 This is the operating signal behind the LiveStack page. Semantic matches show where subscriber language is clustering around services.
 
@@ -115,6 +117,7 @@ This is the operating signal behind the LiveStack page. Semantic matches show wh
     | --- | --- | ---: | ---: | --- |
     | threads | @roamflow_vince | 19937363 | 15923 | Subscribers are asking for clearer instructions after fiber installation and fas |
     | instagram | @signalbridge_leo | 19878738 | 89853 | Subscribers are asking about IoT Sensor Gateway Kit through OrbitMotion IoT |
+    {: title="Subscriber signals behind the match"}
 
 
 Exposure and escalations help triage. The text explains why the issue matters. Oracle keeps both available to SQL, vector search, and security policy enforcement.

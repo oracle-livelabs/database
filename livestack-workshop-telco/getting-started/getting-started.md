@@ -42,6 +42,7 @@ You prepare SQL Worksheet and confirm the schema before running any feature labs
     | Connected User |
     | --- |
     | LLUSER |
+    {: title="Expected database user"}
 
 The remaining labs use `LLUSER` objects and semantic views. If the connected user is different, reconnect before continuing.
 
@@ -76,6 +77,7 @@ The remaining labs use `LLUSER` objects and semantic views. If the connected use
     | `SEER_COMMS_SERVICES_V` |
     | `SEER_COMMS_SIGNAL_MATCHES_V` |
     | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
+    {: title="Views used throughout the workshop"}
 
 These views give the workshop telecom vocabulary while preserving the portable LiveStack table model underneath.
 
