@@ -42,25 +42,26 @@ You switch from predefined reports to governed questions. The SQL examples show 
 
     This query represents the SQL path behind a plain-English revenue question.
 
+    ```sql
     <copy>
-SELECT service_name,
+    SELECT service_name,
        ROUND(SUM(service_value), 0) AS service_revenue,
        COUNT(*) AS service_orders
-FROM seer_comms_service_orders_v o
-JOIN order_items oi ON oi.order_id = o.service_order_id
-JOIN seer_comms_services_v s ON s.service_id = oi.product_id
-GROUP BY service_name
-ORDER BY service_revenue DESC
-FETCH FIRST 5 ROWS ONLY;
+    FROM seer_comms_service_orders_v o
+    JOIN order_items oi ON oi.order_id = o.service_order_id
+    JOIN seer_comms_services_v s ON s.service_id = oi.product_id
+    GROUP BY service_name
+    ORDER BY service_revenue DESC
+    FETCH FIRST 5 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Revenue answer with visible SQL evidence**
 
-| Service Name | Service Revenue | Service Orders |
-| --- | ---: | ---: |
-| Fixed Wireless Home Internet | 184000 | 230 |
-| Device Upgrade Enrollment | 172000 | 216 |
-{: title="Revenue answer with visible SQL evidence"}
+    | Service Name | Service Revenue | Service Orders |
+    | --- | ---: | ---: |
+    | Fixed Wireless Home Internet | 184000 | 230 |
+    | Device Upgrade Enrollment | 172000 | 216 |
 
 ## Task 2: Answer a high-urgency signal question
 
@@ -68,23 +69,24 @@ Expected output:
 
     This query represents the SQL path behind a plain-English subscriber-signal question.
 
+    ```sql
     <copy>
-SELECT signal_channel,
+    SELECT signal_channel,
        COUNT(*) AS signals,
        MAX(exposure_count) AS max_exposure,
        MAX(escalations) AS max_escalations
-FROM seer_comms_subscriber_signals_v
-GROUP BY signal_channel
-ORDER BY signals DESC;
+    FROM seer_comms_subscriber_signals_v
+    GROUP BY signal_channel
+    ORDER BY signals DESC;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Signal-channel answer with visible SQL evidence**
 
-| Signal Channel | Signals | Max Exposure | Max Escalations |
-| --- | ---: | ---: | ---: |
-| threads | 1017 | 19937363 | 95869 |
-| twitter | 1012 | 19576775 | 98830 |
-{: title="Signal-channel answer with visible SQL evidence"}
+    | Signal Channel | Signals | Max Exposure | Max Escalations |
+    | --- | ---: | ---: | ---: |
+    | threads | 1017 | 19937363 | 95869 |
+    | twitter | 1012 | 19576775 | 98830 |
 
 ## Task 3: Explain why Show SQL matters
 

@@ -44,21 +44,22 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
 
     This query identifies active sites and their current load so the map has operational meaning.
 
+    ```sql
     <copy>
-SELECT network_site_name, network_site_type, city, state_province, service_capacity_units, current_capacity_load_pct
-FROM seer_comms_network_sites_v
-WHERE is_active = 1
-ORDER BY current_capacity_load_pct DESC
-FETCH FIRST 8 ROWS ONLY;
+    SELECT network_site_name, network_site_type, city, state_province, service_capacity_units, current_capacity_load_pct
+    FROM seer_comms_network_sites_v
+    WHERE is_active = 1
+    ORDER BY current_capacity_load_pct DESC
+    FETCH FIRST 8 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Network sites available for spatial analysis**
 
-| Network Site Name | Network Site Type | City | State Province | Service Capacity Units | Current Capacity Load Pct |
-| --- | --- | --- | --- | ---: | ---: |
-| Atlanta Home Internet Dispatch | NOC / regional operations hub | Atlanta | GA | 5850 | 82 |
-| Dallas 5G Dispatch Center | Fiber or device field hub | Dallas | TX | 5500 | 79 |
-{: title="Network sites available for spatial analysis"}
+    | Network Site Name | Network Site Type | City | State Province | Service Capacity Units | Current Capacity Load Pct |
+    | --- | --- | --- | --- | ---: | ---: |
+    | Atlanta Home Internet Dispatch | NOC / regional operations hub | Atlanta | GA | 5850 | 82 |
+    | Dallas 5G Dispatch Center | Fiber or device field hub | Dallas | TX | 5500 | 79 |
 
 ## Task 2: Find capacity risk by service and site
 
@@ -66,26 +67,27 @@ Expected output:
 
     This query turns capacity thresholds into a short list of places that may need action.
 
+    ```sql
     <copy>
-SELECT service_name,
+    SELECT service_name,
        network_site_name,
        capacity_available,
        capacity_reserved,
        escalation_threshold,
        CASE WHEN capacity_available <= escalation_threshold THEN 'Capacity risk' ELSE 'Available' END AS capacity_status
-FROM seer_comms_network_capacity_v
-WHERE capacity_available <= escalation_threshold
-ORDER BY capacity_available
-FETCH FIRST 8 ROWS ONLY;
+    FROM seer_comms_network_capacity_v
+    WHERE capacity_available <= escalation_threshold
+    ORDER BY capacity_available
+    FETCH FIRST 8 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Capacity risks by service and site**
 
-| Service Name | Network Site Name | Capacity Available | Capacity Reserved | Escalation Threshold | Capacity Status |
-| --- | --- | ---: | ---: | ---: | --- |
-| Number Port-In Activation | NYC Network Command Center | 37 | 16 | 50 | Capacity risk |
-| Gigabit Fiber Install | Houston Roaming Operations Hub | 55 | 21 | 60 | Capacity risk |
-{: title="Capacity risks by service and site"}
+    | Service Name | Network Site Name | Capacity Available | Capacity Reserved | Escalation Threshold | Capacity Status |
+    | --- | --- | ---: | ---: | ---: | --- |
+    | Number Port-In Activation | NYC Network Command Center | 37 | 16 | 50 | Capacity risk |
+    | Gigabit Fiber Install | Houston Roaming Operations Hub | 55 | 21 | 60 | Capacity risk |
 
 ## Task 3: Review field dispatch evidence
 
@@ -93,21 +95,22 @@ Expected output:
 
     This query connects capacity pressure to active field work that operations teams can coordinate.
 
+    ```sql
     <copy>
-SELECT dispatch_id, service_order_id, network_site_name, dispatch_status
-FROM seer_comms_field_dispatch_v
-WHERE dispatch_status <> 'Completed'
-ORDER BY dispatch_id
-FETCH FIRST 6 ROWS ONLY;
+    SELECT dispatch_id, service_order_id, network_site_name, dispatch_status
+    FROM seer_comms_field_dispatch_v
+    WHERE dispatch_status <> 'Completed'
+    ORDER BY dispatch_id
+    FETCH FIRST 6 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Field dispatches tied to network sites**
 
-| Dispatch ID | Service Order ID | Network Site Name | Dispatch Status |
-| ---: | ---: | --- | --- |
-| 1 | 3 | Phoenix Device Logistics Hub | In Progress |
-| 5 | 11 | Houston Roaming Operations Hub | In Progress |
-{: title="Field dispatches tied to network sites"}
+    | Dispatch ID | Service Order ID | Network Site Name | Dispatch Status |
+    | ---: | ---: | --- | --- |
+    | 1 | 3 | Phoenix Device Logistics Hub | In Progress |
+    | 5 | 11 | Houston Roaming Operations Hub | In Progress |
 
 
 

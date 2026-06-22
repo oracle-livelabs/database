@@ -46,26 +46,27 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
 
     This query prepares model-style features from current service demand and revenue evidence.
 
+    ```sql
     <copy>
-SELECT s.service_name,
+    SELECT s.service_name,
        COUNT(DISTINCT m.signal_id) AS recent_signal_count,
        COUNT(DISTINCT o.service_order_id) AS service_orders,
        ROUND(SUM(o.service_value), 0) AS service_value
-FROM seer_comms_services_v s
-LEFT JOIN seer_comms_signal_matches_v m ON m.service_id = s.service_id
-LEFT JOIN seer_comms_service_orders_v o ON o.source_signal_id = m.signal_id
-GROUP BY s.service_name
-ORDER BY recent_signal_count DESC
-FETCH FIRST 8 ROWS ONLY;
+    FROM seer_comms_services_v s
+    LEFT JOIN seer_comms_signal_matches_v m ON m.service_id = s.service_id
+    LEFT JOIN seer_comms_service_orders_v o ON o.source_signal_id = m.signal_id
+    GROUP BY s.service_name
+    ORDER BY recent_signal_count DESC
+    FETCH FIRST 8 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Service demand signals for prediction**
 
-| Service Name | Recent Signal Count | Service Orders | Service Value |
-| --- | ---: | ---: | ---: |
-| Device Upgrade Enrollment | 107 | 260 | 67600 |
-| Fixed Wireless Home Internet | 102 | 248 | 64100 |
-{: title="Service demand signals for prediction"}
+    | Service Name | Recent Signal Count | Service Orders | Service Value |
+    | --- | ---: | ---: | ---: |
+    | Device Upgrade Enrollment | 107 | 260 | 67600 |
+    | Fixed Wireless Home Internet | 102 | 248 | 64100 |
 
 ## Task 2: Review retention-style customer experience features
 
@@ -73,23 +74,24 @@ Expected output:
 
     This query groups customer experience signals so retention teams can reason about segments.
 
+    ```sql
     <copy>
-SELECT subscriber_tier,
+    SELECT subscriber_tier,
        COUNT(*) AS subscribers,
        ROUND(AVG(service_value), 0) AS avg_lifetime_value,
        ROUND(AVG(avg_demand_score), 2) AS avg_demand_score
-FROM seer_comms_customer_experience_v
-GROUP BY subscriber_tier
-ORDER BY subscribers DESC;
+    FROM seer_comms_customer_experience_v
+    GROUP BY subscriber_tier
+    ORDER BY subscribers DESC;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Subscriber tiers for assurance planning**
 
-| Subscriber Tier | Subscribers | Avg Lifetime Value | Avg Demand Score |
-| --- | ---: | ---: | ---: |
-| Potential | 59 | 1740 | 63.12 |
-| Loyal | 10 | 6180 | 44.70 |
-{: title="Subscriber tiers for assurance planning"}
+    | Subscriber Tier | Subscribers | Avg Lifetime Value | Avg Demand Score |
+    | --- | ---: | ---: | ---: |
+    | Potential | 59 | 1740 | 63.12 |
+    | Loyal | 10 | 6180 | 44.70 |
 
 ## Task 3: Join predicted demand to capacity exposure
 
@@ -97,27 +99,28 @@ Expected output:
 
     This query connects forecast demand to available network capacity, turning scores into an action list.
 
+    ```sql
     <copy>
-SELECT f.service_name,
+    SELECT f.service_name,
        c.network_site_name,
        c.capacity_available,
        f.predicted_service_demand,
        f.signal_factor,
        CASE WHEN c.capacity_available < f.predicted_service_demand THEN 'Access risk' ELSE 'Covered' END AS access_status
-FROM seer_comms_demand_forecasts_v f
-JOIN seer_comms_network_capacity_v c ON c.service_id = f.service_id
-WHERE f.forecast_date = (SELECT MAX(forecast_date) FROM seer_comms_demand_forecasts_v)
-ORDER BY (f.predicted_service_demand - c.capacity_available) DESC
-FETCH FIRST 8 ROWS ONLY;
+    FROM seer_comms_demand_forecasts_v f
+    JOIN seer_comms_network_capacity_v c ON c.service_id = f.service_id
+    WHERE f.forecast_date = (SELECT MAX(forecast_date) FROM seer_comms_demand_forecasts_v)
+    ORDER BY (f.predicted_service_demand - c.capacity_available) DESC
+    FETCH FIRST 8 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Access risks that need action**
 
-| Service Name | Network Site Name | Capacity Available | Predicted Service Demand | Signal Factor | Access Status |
-| --- | --- | ---: | ---: | ---: | --- |
-| Device Upgrade Enrollment | Boston Family Plan Support Center | 13 | 141 | 1.28 | Access risk |
-| Fixed Wireless Home Internet | Seattle Customer Experience Center | 23 | 139 | 1.24 | Access risk |
-{: title="Access risks that need action"}
+    | Service Name | Network Site Name | Capacity Available | Predicted Service Demand | Signal Factor | Access Status |
+    | --- | --- | ---: | ---: | ---: | --- |
+    | Device Upgrade Enrollment | Boston Family Plan Support Center | 13 | 141 | 1.28 | Access risk |
+    | Fixed Wireless Home Internet | Seattle Customer Experience Center | 23 | 139 | 1.24 | Access risk |
 
 
 

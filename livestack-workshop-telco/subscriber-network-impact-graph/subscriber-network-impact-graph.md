@@ -44,19 +44,20 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
 
     This query checks that the graph has both entities and relationships. A graph without edges cannot explain impact.
 
+    ```sql
     <copy>
-SELECT 'Impact entities' AS graph_item, COUNT(*) AS records FROM telecom_graph_entities
-UNION ALL
-SELECT 'Impact relationships', COUNT(*) FROM telecom_graph_relationships;
+    SELECT 'Impact entities' AS graph_item, COUNT(*) AS records FROM telecom_graph_entities
+    UNION ALL
+    SELECT 'Impact relationships', COUNT(*) FROM telecom_graph_relationships;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Impact graph inventory**
 
-| Graph Item | Records |
-| --- | ---: |
-| Impact entities | 36 |
-| Impact relationships | 50 |
-{: title="Impact graph inventory"}
+    | Graph Item | Records |
+    | --- | ---: |
+    | Impact entities | 36 |
+    | Impact relationships | 50 |
 
 ## Task 2: Find high-impact events
 
@@ -64,21 +65,22 @@ Expected output:
 
     This query surfaces the events and entities that deserve investigation first.
 
+    ```sql
     <copy>
-SELECT entity_key, display_name, entity_type, region, affected_count, risk_score, experience_score
-FROM telecom_graph_entities
-WHERE entity_type IN ('outage_event', 'network_site', 'service_line')
-ORDER BY risk_score DESC
-FETCH FIRST 6 ROWS ONLY;
+    SELECT entity_key, display_name, entity_type, region, affected_count, risk_score, experience_score
+    FROM telecom_graph_entities
+    WHERE entity_type IN ('outage_event', 'network_site', 'service_line')
+    ORDER BY risk_score DESC
+    FETCH FIRST 6 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: High-risk entities in the impact graph**
 
-| Entity Key | Display Name | Entity Type | Region | Affected Count | Risk Score | Experience Score |
-| --- | --- | --- | --- | ---: | ---: | ---: |
-| OUT-EVENT-501 | Game-day 5G congestion spike | `outage_event` | Northeast | 31200 | 96 | 35 |
-| OUT-EVENT-502 | Fiber cut affecting enterprise corridor | `outage_event` | Southeast | 7100 | 95 | 38 |
-{: title="High-risk entities in the impact graph"}
+    | Entity Key | Display Name | Entity Type | Region | Affected Count | Risk Score | Experience Score |
+    | --- | --- | --- | --- | ---: | ---: | ---: |
+    | OUT-EVENT-501 | Game-day 5G congestion spike | `outage_event` | Northeast | 31200 | 96 | 35 |
+    | OUT-EVENT-502 | Fiber cut affecting enterprise corridor | `outage_event` | Southeast | 7100 | 95 | 38 |
 
 ## Task 3: Traverse connected impact
 
@@ -86,26 +88,27 @@ Expected output:
 
     This query follows relationships from one named event to the connected sites, subscriber groups, and response context.
 
+    ```sql
     <copy>
-SELECT src.display_name AS source_entity,
+    SELECT src.display_name AS source_entity,
        r.relationship_type,
        dst.display_name AS connected_entity,
        dst.entity_type,
        dst.risk_score
-FROM telecom_graph_relationships r
-JOIN telecom_graph_entities src ON src.entity_id = r.from_entity
-JOIN telecom_graph_entities dst ON dst.entity_id = r.to_entity
-WHERE src.entity_key = 'OUT-EVENT-501'
-ORDER BY dst.risk_score DESC;
+    FROM telecom_graph_relationships r
+    JOIN telecom_graph_entities src ON src.entity_id = r.from_entity
+    JOIN telecom_graph_entities dst ON dst.entity_id = r.to_entity
+    WHERE src.entity_key = 'OUT-EVENT-501'
+    ORDER BY dst.risk_score DESC;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Connected impact paths to investigate**
 
-| Source Entity | Relationship Type | Connected Entity | Entity Type | Risk Score |
-| --- | --- | --- | --- | ---: |
-| Game-day 5G congestion spike | IMPACTS | Miami Connected Life Hub | `network_site` | 88 |
-| Game-day 5G congestion spike | AFFECTS | South Florida family-plan subscribers | `subscriber_cluster` | 86 |
-{: title="Connected impact paths to investigate"}
+    | Source Entity | Relationship Type | Connected Entity | Entity Type | Risk Score |
+    | --- | --- | --- | --- | ---: |
+    | Game-day 5G congestion spike | IMPACTS | Miami Connected Life Hub | `network_site` | 88 |
+    | Game-day 5G congestion spike | AFFECTS | South Florida family-plan subscribers | `subscriber_cluster` | 86 |
 
 
 

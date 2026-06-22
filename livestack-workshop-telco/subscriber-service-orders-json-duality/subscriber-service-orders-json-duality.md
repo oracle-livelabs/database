@@ -44,18 +44,19 @@ Use the screenshot as scene grounding. The SQL tasks below provide the exact val
 
     This query starts with the traditional operational view of one service order.
 
+    ```sql
     <copy>
-SELECT service_order_id, subscriber_name, city, state_province, service_status, service_value, dispatch_cost
-FROM seer_comms_service_orders_v
-WHERE service_order_id = 2870;
+    SELECT service_order_id, subscriber_name, city, state_province, service_status, service_value, dispatch_cost
+    FROM seer_comms_service_orders_v
+    WHERE service_order_id = 2870;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Service order selected for duality review**
 
-| Service Order ID | Subscriber Name | City | State Province | Service Status | Service Value | Dispatch Cost |
-| ---: | --- | --- | --- | --- | ---: | ---: |
-| 2870 | Jack Hill | Portland | Oregon | Completed | 4160 | 14.99 |
-{: title="Service order selected for duality review"}
+    | Service Order ID | Subscriber Name | City | State Province | Service Status | Service Value | Dispatch Cost |
+    | ---: | --- | --- | --- | --- | ---: | ---: |
+    | 2870 | Jack Hill | Portland | Oregon | Completed | 4160 | 14.99 |
 
 ## Task 2: Inspect line items for the same order
 
@@ -63,27 +64,28 @@ Expected output:
 
     This query verifies the detail rows that make up the order total and service mix.
 
+    ```sql
     <copy>
-SELECT oi.order_id AS service_order_id,
+    SELECT oi.order_id AS service_order_id,
        p.product_name AS service_name,
        p.category AS service_category,
        oi.quantity,
        oi.unit_price,
        oi.line_total
-FROM order_items oi
-JOIN products p ON p.product_id = oi.product_id
-WHERE oi.order_id = 2870
-ORDER BY oi.item_id;
+    FROM order_items oi
+    JOIN products p ON p.product_id = oi.product_id
+    WHERE oi.order_id = 2870
+    ORDER BY oi.item_id;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Line items inside the service order**
 
-| Service Order ID | Service Name | Service Category | Quantity | Unit Price | Line Total |
-| ---: | --- | --- | ---: | ---: | ---: |
-| 2870 | LTE Backup Gateway | Devices | 2 | 115 | 230 |
-| 2870 | Fraud Resolution Case | Security | 2 | 45 | 90 |
-| 2870 | Edge Compute Reservation | Enterprise Connectivity | 3 | 640 | 1920 |
-{: title="Line items inside the service order"}
+    | Service Order ID | Service Name | Service Category | Quantity | Unit Price | Line Total |
+    | ---: | --- | --- | ---: | ---: | ---: |
+    | 2870 | LTE Backup Gateway | Devices | 2 | 115 | 230 |
+    | 2870 | Fraud Resolution Case | Security | 2 | 45 | 90 |
+    | 2870 | Edge Compute Reservation | Enterprise Connectivity | 3 | 640 | 1920 |
 
 ## Task 3: Return the service order document
 
@@ -91,18 +93,19 @@ Expected output:
 
     This query returns the same order through the JSON document shape used by application workflows.
 
+    ```sql
     <copy>
-SELECT JSON_SERIALIZE(data PRETTY) AS service_order_document
-FROM orders_dv
-WHERE JSON_VALUE(data, '$._id') = '2870';
+    SELECT JSON_SERIALIZE(data PRETTY) AS service_order_document
+    FROM orders_dv
+    WHERE JSON_VALUE(data, '$._id') = '2870';
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Document view of the same service order**
 
-| Service Order Document |
-| --- |
-| JSON document for service order 2870 with subscriber, status, total, dispatch cost, and nested line items. |
-{: title="Document view of the same service order"}
+    | Service Order Document |
+    | --- |
+    | JSON document for service order 2870 with subscriber, status, total, dispatch cost, and nested line items. |
 
 The JSON document and relational rows come from the same Oracle transaction model. That is the value of JSON Relational Duality for telecom service-order APIs.
 

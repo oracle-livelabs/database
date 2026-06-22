@@ -41,27 +41,28 @@ You prove that the workshop has a complete telecom data foundation. The counts a
 
     This query counts the major domains that power the rest of the workshop. You are checking breadth, not just row volume.
 
+    ```sql
     <copy>
-SELECT 'Telecom services' AS domain, COUNT(*) AS records FROM seer_comms_services_v
-UNION ALL SELECT 'Subscriber signals', COUNT(*) FROM seer_comms_subscriber_signals_v
-UNION ALL SELECT 'Service orders', COUNT(*) FROM seer_comms_service_orders_v
-UNION ALL SELECT 'Network sites', COUNT(*) FROM seer_comms_network_sites_v
-UNION ALL SELECT 'Demand forecasts', COUNT(*) FROM seer_comms_demand_forecasts_v
-UNION ALL SELECT 'AI-assisted actions', COUNT(*) FROM seer_comms_agent_actions_v
-ORDER BY domain;
-</copy>
+    SELECT 'Telecom services' AS domain, COUNT(*) AS records FROM seer_comms_services_v
+    UNION ALL SELECT 'Subscriber signals', COUNT(*) FROM seer_comms_subscriber_signals_v
+    UNION ALL SELECT 'Service orders', COUNT(*) FROM seer_comms_service_orders_v
+    UNION ALL SELECT 'Network sites', COUNT(*) FROM seer_comms_network_sites_v
+    UNION ALL SELECT 'Demand forecasts', COUNT(*) FROM seer_comms_demand_forecasts_v
+    UNION ALL SELECT 'AI-assisted actions', COUNT(*) FROM seer_comms_agent_actions_v
+    ORDER BY domain;
+    </copy>
+    ```
 
-Expected output:
+    **Expected output: Seeded telecom data volumes**
 
-| Domain | Records |
-| --- | ---: |
-| AI-assisted actions | 25 |
-| Demand forecasts | 360 |
-| Network sites | 12 |
-| Service orders | 3000 |
-| Subscriber signals | 5000 |
-| Telecom services | 32 |
-{: title="Seeded telecom data volumes"}
+    | Domain | Records |
+    | --- | ---: |
+    | AI-assisted actions | 25 |
+    | Demand forecasts | 360 |
+    | Network sites | 12 |
+    | Service orders | 3000 |
+    | Subscriber signals | 5000 |
+    | Telecom services | 32 |
 
 The counts show that the workshop is not a single-feature exercise. The same schema carries the operating data needed by dashboard, signal, graph, spatial, service order, ML, answer, and agent workflows.
 
@@ -72,23 +73,24 @@ The counts show that the workshop is not a single-feature exercise. The same sch
 
     This query confirms that learners can use telecom-friendly view names instead of the portable source table names.
 
+    ```sql
     <copy>
-SELECT view_name
-FROM user_views
-WHERE view_name LIKE 'SEER_COMMS%'
-ORDER BY view_name;
-</copy>
+    SELECT view_name
+    FROM user_views
+    WHERE view_name LIKE 'SEER_COMMS%'
+    ORDER BY view_name;
+    </copy>
+    ```
 
-Expected output:
+    **Expected output: Core views for learner queries**
 
-| View Name |
-| --- |
-| `SEER_COMMS_AGENT_ACTIONS_V` |
-| `SEER_COMMS_NETWORK_CAPACITY_V` |
-| `SEER_COMMS_SERVICE_ORDERS_V` |
-| `SEER_COMMS_SERVICES_V` |
-| `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
-{: title="Core views for learner queries"}
+    | View Name |
+    | --- |
+    | `SEER_COMMS_AGENT_ACTIONS_V` |
+    | `SEER_COMMS_NETWORK_CAPACITY_V` |
+    | `SEER_COMMS_SERVICE_ORDERS_V` |
+    | `SEER_COMMS_SERVICES_V` |
+    | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
 
 Your output may include additional Seer Comms views. These views are the bridge between the portable LiveStack schema and telecom language such as service lines, subscriber signals, network capacity, and field dispatches.
 
@@ -98,30 +100,31 @@ Your output may include additional Seer Comms views. These views are the bridge 
 
     This query checks the database objects that make the workshop more than a dashboard exercise.
 
+    ```sql
     <copy>
-SELECT object_type, object_name
-FROM user_objects
-WHERE object_name IN (
-  'ORDERS_DV', 'PRODUCTS_INVENTORY_DV', 'TELECOM_EXPERIENCE_NETWORK',
-  'PRODUCT_EMBEDDINGS', 'POST_EMBEDDINGS', 'FULFILLMENT_ZONES',
-  'DEMAND_REGIONS', 'AGENT_ACTIONS'
-)
-ORDER BY object_type, object_name;
-</copy>
+    SELECT object_type, object_name
+    FROM user_objects
+    WHERE object_name IN (
+      'ORDERS_DV', 'PRODUCTS_INVENTORY_DV', 'TELECOM_EXPERIENCE_NETWORK',
+      'PRODUCT_EMBEDDINGS', 'POST_EMBEDDINGS', 'FULFILLMENT_ZONES',
+      'DEMAND_REGIONS', 'AGENT_ACTIONS'
+    )
+    ORDER BY object_type, object_name;
+    </copy>
+    ```
 
-Expected output:
+    **Expected output: Oracle objects behind the workshop**
 
-| Object Type | Object Name |
-| --- | --- |
-| JSON RELATIONAL DUALITY VIEW | `ORDERS_DV` |
-| JSON RELATIONAL DUALITY VIEW | `PRODUCTS_INVENTORY_DV` |
-| PROPERTY GRAPH | `TELECOM_EXPERIENCE_NETWORK` |
-| TABLE | `AGENT_ACTIONS` |
-| TABLE | `DEMAND_REGIONS` |
-| TABLE | `FULFILLMENT_ZONES` |
-| TABLE | `POST_EMBEDDINGS` |
-| TABLE | `PRODUCT_EMBEDDINGS` |
-{: title="Oracle objects behind the workshop"}
+    | Object Type | Object Name |
+    | --- | --- |
+    | JSON RELATIONAL DUALITY VIEW | `ORDERS_DV` |
+    | JSON RELATIONAL DUALITY VIEW | `PRODUCTS_INVENTORY_DV` |
+    | PROPERTY GRAPH | `TELECOM_EXPERIENCE_NETWORK` |
+    | TABLE | `AGENT_ACTIONS` |
+    | TABLE | `DEMAND_REGIONS` |
+    | TABLE | `FULFILLMENT_ZONES` |
+    | TABLE | `POST_EMBEDDINGS` |
+    | TABLE | `PRODUCT_EMBEDDINGS` |
 
 These objects are the evidence that Oracle AI Database is the protagonist of the workshop. Each later lab uses one or more of these objects to answer a telecom operations question.
 

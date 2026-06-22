@@ -42,25 +42,26 @@ You close the loop with auditable action. The agent action and capacity queries 
 
     This query checks whether assisted actions leave a reviewable operational record.
 
+    ```sql
     <copy>
-SELECT agent_name,
+    SELECT agent_name,
        action_type,
        telecom_entity_type,
        confidence,
        execution_status,
        created_at
-FROM seer_comms_agent_actions_v
-ORDER BY created_at DESC
-FETCH FIRST 8 ROWS ONLY;
+    FROM seer_comms_agent_actions_v
+    ORDER BY created_at DESC
+    FETCH FIRST 8 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Recent agent actions available for review**
 
-| Agent Name | Action Type | Telecom Entity Type | Confidence | Execution Status | Created At |
-| --- | --- | --- | ---: | --- | --- |
-| Network Access Agent | `capacity_check` | `network_capacity` | 0.90 | COMPLETED | Dynamic timestamp |
-| Service Assurance Agent | `signal_triage` | service | 0.88 | COMPLETED | Dynamic timestamp |
-{: title="Recent agent actions available for review"}
+    | Agent Name | Action Type | Telecom Entity Type | Confidence | Execution Status | Created At |
+    | --- | --- | --- | ---: | --- | --- |
+    | Network Access Agent | `capacity_check` | `network_capacity` | 0.90 | COMPLETED | Dynamic timestamp |
+    | Service Assurance Agent | `signal_triage` | service | 0.88 | COMPLETED | Dynamic timestamp |
 
 ## Task 2: Check capacity for a pressure service
 
@@ -68,25 +69,26 @@ Expected output:
 
     This query shows the kind of approved database evidence an agent tool can return.
 
+    ```sql
     <copy>
-SELECT network_site_name,
+    SELECT network_site_name,
        capacity_available,
        capacity_reserved,
        capacity_incoming,
        escalation_threshold
-FROM seer_comms_network_capacity_v
-WHERE service_name = 'Fixed Wireless Home Internet'
-ORDER BY capacity_available
-FETCH FIRST 8 ROWS ONLY;
+    FROM seer_comms_network_capacity_v
+    WHERE service_name = 'Fixed Wireless Home Internet'
+    ORDER BY capacity_available
+    FETCH FIRST 8 ROWS ONLY;
     </copy>
+    ```
 
-Expected output:
+    **Expected output: Capacity check returned by the agent tool**
 
-| Network Site Name | Capacity Available | Capacity Reserved | Capacity Incoming | Escalation Threshold |
-| --- | ---: | ---: | ---: | ---: |
-| Chicago Midwest NOC | 92 | 31 | 75 | 100 |
-| Miami Connected Life Hub | 104 | 28 | 80 | 100 |
-{: title="Capacity check returned by the agent tool"}
+    | Network Site Name | Capacity Available | Capacity Reserved | Capacity Incoming | Escalation Threshold |
+    | --- | ---: | ---: | ---: | ---: |
+    | Chicago Midwest NOC | 92 | 31 | 75 | 100 |
+    | Miami Connected Life Hub | 104 | 28 | 80 | 100 |
 
 ## Task 3: Explain the trusted-action pattern
 

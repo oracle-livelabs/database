@@ -43,19 +43,20 @@ You move from dashboard symptoms to subscriber language. The vector and semantic
 
     This query confirms that both sides of semantic matching exist: services and subscriber signals.
 
+    ```sql
     <copy>
-SELECT 'Service embeddings' AS vector_set, COUNT(*) AS rows_loaded FROM service_embeddings
-UNION ALL
-SELECT 'Signal embeddings', COUNT(*) FROM signal_embeddings;
-</copy>
+    SELECT 'Service embeddings' AS vector_set, COUNT(*) AS rows_loaded FROM service_embeddings
+    UNION ALL
+    SELECT 'Signal embeddings', COUNT(*) FROM signal_embeddings;
+    </copy>
+    ```
 
-Expected output:
+    **Expected output: Vector data available for semantic search**
 
-| Vector Set | Rows Loaded |
-| --- | ---: |
-| Service embeddings | 32 |
-| Signal embeddings | 5000 |
-{: title="Vector data available for semantic search"}
+    | Vector Set | Rows Loaded |
+    | --- | ---: |
+    | Service embeddings | 32 |
+    | Signal embeddings | 5000 |
 
 Embeddings are stored in Oracle AI Database with the rest of the operational data. That reduces the need to move sensitive signal text into a separate search platform.
 
@@ -65,26 +66,27 @@ Embeddings are stored in Oracle AI Database with the rest of the operational dat
 
     This query summarizes which services attract the most semantically similar subscriber signals.
 
+    ```sql
     <copy>
-SELECT service_name,
+    SELECT service_name,
        service_line_name,
        COUNT(*) AS matching_signals,
        ROUND(MAX(similarity_score), 3) AS strongest_similarity,
        ROUND(AVG(similarity_score), 3) AS avg_similarity
-FROM seer_comms_signal_matches_v
-GROUP BY service_name, service_line_name
-ORDER BY matching_signals DESC, strongest_similarity DESC
-FETCH FIRST 8 ROWS ONLY;
-</copy>
+    FROM seer_comms_signal_matches_v
+    GROUP BY service_name, service_line_name
+    ORDER BY matching_signals DESC, strongest_similarity DESC
+    FETCH FIRST 8 ROWS ONLY;
+    </copy>
+    ```
 
-Expected output:
+    **Expected output: Services ranked by signal meaning**
 
-| Service Name | Service Line Name | Matching Signals | Strongest Similarity | Avg Similarity |
-| --- | --- | ---: | ---: | ---: |
-| Fixed Wireless Home Internet | Seer Home Broadband | 57 | 0.89 | 0.72 |
-| Device Upgrade Enrollment | Seer Mobile | 55 | 0.88 | 0.71 |
-| Gigabit Fiber Install | Seer Fiber | 53 | 0.87 | 0.70 |
-{: title="Services ranked by signal meaning"}
+    | Service Name | Service Line Name | Matching Signals | Strongest Similarity | Avg Similarity |
+    | --- | --- | ---: | ---: | ---: |
+    | Fixed Wireless Home Internet | Seer Home Broadband | 57 | 0.89 | 0.72 |
+    | Device Upgrade Enrollment | Seer Mobile | 55 | 0.88 | 0.71 |
+    | Gigabit Fiber Install | Seer Fiber | 53 | 0.87 | 0.70 |
 
 This is the operating signal behind the LiveStack page. Semantic matches show where subscriber language is clustering around services.
 
@@ -94,24 +96,25 @@ This is the operating signal behind the LiveStack page. Semantic matches show wh
 
     This query shows the raw subscriber evidence behind the ranked service pressure.
 
+    ```sql
     <copy>
-SELECT signal_channel,
+    SELECT signal_channel,
        advocate_handle,
        exposure_count,
        escalations,
        SUBSTR(signal_text, 1, 90) AS signal_excerpt
-FROM seer_comms_subscriber_signals_v
-ORDER BY exposure_count DESC, escalations DESC
-FETCH FIRST 5 ROWS ONLY;
-</copy>
+    FROM seer_comms_subscriber_signals_v
+    ORDER BY exposure_count DESC, escalations DESC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
 
-Expected output:
+    **Expected output: Subscriber signals behind the match**
 
-| Signal Channel | Advocate Handle | Exposure Count | Escalations | Signal Excerpt |
-| --- | --- | ---: | ---: | --- |
-| threads | @roamflow_vince | 19937363 | 15923 | Subscribers are asking for clearer instructions after fiber installation and fas |
-| instagram | @signalbridge_leo | 19878738 | 89853 | Subscribers are asking about IoT Sensor Gateway Kit through OrbitMotion IoT |
-{: title="Subscriber signals behind the match"}
+    | Signal Channel | Advocate Handle | Exposure Count | Escalations | Signal Excerpt |
+    | --- | --- | ---: | ---: | --- |
+    | threads | @roamflow_vince | 19937363 | 15923 | Subscribers are asking for clearer instructions after fiber installation and fas |
+    | instagram | @signalbridge_leo | 19878738 | 89853 | Subscribers are asking about IoT Sensor Gateway Kit through OrbitMotion IoT |
 
 
 Exposure and escalations help triage. The text explains why the issue matters. Oracle keeps both available to SQL, vector search, and security policy enforcement.
