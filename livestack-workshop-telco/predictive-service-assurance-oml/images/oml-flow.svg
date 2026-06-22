@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" role="img" aria-label="Oracle Machine Learning for predictive assurance">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/></marker></defs>
+<rect width="960" height="260" fill="#ffffff"/>
+<text x="32" y="38" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2933">Oracle Machine Learning for predictive assurance</text>
+<rect x="40" y="80" width="170" height="108" rx="6" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="54" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Live features</text>
+<text x="54" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Orders, signals,</text>
+<text x="54" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">capacity, service</text>
+<text x="54" y="175" font-family="Arial, sans-serif" font-size="14" fill="#374151">value</text>
+<rect x="234" y="80" width="170" height="108" rx="6" fill="#eef5fb" stroke="#6b7280"/>
+<text x="248" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">OML model</text>
+<text x="248" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">DBMS_DATA_MINING model</text>
+<text x="248" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">in database</text>
+<rect x="428" y="80" width="170" height="108" rx="6" fill="#f5f1fb" stroke="#6b7280"/>
+<text x="442" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">SQL scoring</text>
+<text x="442" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">PREDICTION_PROBABILITY</text>
+<text x="442" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">returns risk</text>
+<rect x="622" y="80" width="170" height="108" rx="6" fill="#eff7f1" stroke="#6b7280"/>
+<text x="636" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Operational join</text>
+<text x="636" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Scores combine with</text>
+<text x="636" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">site capacity</text>
+<rect x="816" y="80" width="170" height="108" rx="6" fill="#fff6e8" stroke="#6b7280"/>
+<text x="830" y="108" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Action</text>
+<text x="830" y="135" font-family="Arial, sans-serif" font-size="14" fill="#374151">Retention and field</text>
+<text x="830" y="155" font-family="Arial, sans-serif" font-size="14" fill="#374151">teams prioritize work</text>
+<line x1="210" y1="134.0" x2="224" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="404" y1="134.0" x2="418" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="598" y1="134.0" x2="612" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="792" y1="134.0" x2="806" y2="134.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="769.0" y="122.0" font-family="Arial, sans-serif" font-size="12" fill="#4b5563">score to act</text>
+</svg>
