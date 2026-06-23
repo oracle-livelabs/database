@@ -480,7 +480,7 @@
       }
     },
     {
-      "text": "%script\nSELECT submission_id, collector, item_status FROM sample_items WHERE submission_id = 'ITEM-20260115-1042';",
+      "text": "%script\nSELECT submission_id, collector, item_status AS status_after_agent FROM sample_items WHERE submission_id = 'ITEM-20260115-1042';",
       "config": {
         "colWidth": 12.0,
         "enabled": true,

@@ -49,31 +49,31 @@ For this workshop, we provide the environment. You will need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
+
+2. Unzip the downloaded `notebooks.zip` file on your computer.
+
+3. From the Oracle Machine Learning home page, click **Notebooks**.
 
     ![OML home page with Notebooks highlighted](images/task1_1.png)
 
-2. Click **Import** to expand the Import drop down.
+4. Click **Import** to expand the Import drop down.
 
     ![Notebooks page with Import button highlighted](images/task1_2.png)
 
-3. Select **Git**.
+5. Select **From File**.
 
-    ![Import dropdown showing Git option highlighted](images/task1_3.png)
+    ![Import dropdown showing From File option highlighted](images/task1_5a.png)
 
-4. Paste the following GitHub URL leaving the credential field blank:
+6. Select the `lab6-enterprise-data.json` file from the unzipped notebook files.
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/enterprise-data/lab6-enterprise-data.json
-    </copy>
-    ```
+    ![File picker with lab notebook selected](images/task1_6a.png)
 
-5. Click **OK**.
+7. Click **Open**.
 
-    ![Git Clone dialog with GitHub URI field and OK button highlighted](images/task1_5.png)
+    ![File picker with lab notebook selected](images/task1_6a.png)
 
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Ask the LLM About Seer Equity Without Data
 
@@ -448,7 +448,7 @@ The LLM provides the intelligence. Your database provides the knowledge. Togethe
 * **Author** - David Start
 * **Last Updated By/Date** - David Start, January 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 Run this to remove all objects created in this lab.
 

@@ -24,14 +24,14 @@ In this capstone lab, you'll build a two-agent loan underwriting system:
 
 | Agent | Role | Can Do | Cannot Do |
 |-------|------|--------|-----------|
-| **LOAN_AGENT** | Loan Officers | Submit applications | Approve/Deny |
-| **UNDERWRITING_AGENT** | Underwriters | Approve/Deny | Submit applications |
+| **`LOAN_AGENT`** | Loan Officers | Submit applications | Approve/Deny |
+| **`UNDERWRITING_AGENT`** | Underwriters | Approve/Deny | Submit applications |
 
-The separation isn't just policy—it's architecture. LOAN_AGENT literally doesn't have approval tools.
+The separation isn't just policy—it's architecture. `LOAN_AGENT` literally doesn't have approval tools.
 
 You'll also implement risk-based routing:
 * **Credit < 550** → BLOCKED (cannot proceed)
-* **Personal < $50K** → AUTO_APPROVE
+* **Personal < $50K** → `AUTO_APPROVE`
 * **$50K-$250K** → Underwriter review required
 * **$250K+ or Mortgage** → Senior underwriter required
 
@@ -57,27 +57,31 @@ For this workshop, we provide the environment. You'll need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. From the Oracle Machine Learning home page, click **Notebooks**.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
+
+2. Unzip the downloaded `notebooks.zip` file on your computer.
+
+3. From the Oracle Machine Learning home page, click **Notebooks**.
+
     ![Notebook Information](./images/task1_1.png " ")
 
-2. Click **Import** to expand the Import drop down.
+4. Click **Import** to expand the Import drop down.
+
     ![Notebook Information](./images/task1_2.png " ")
 
-3. Select **Git**.
-    ![Notebook Information](./images/task1_3.png " ")
+5. Select **From File**.
 
-4. Paste the following GitHub URL leaving the credential field blank:
+    ![Notebook Information](./images/task1_5a.png " ")
 
-    ```text
-    <copy>
-    https://github.com/davidastart/database/blob/main/ai4u/tools-safety-control/lab10-tools-safety-control.json
-    </copy>
-    ```
+6. Select the `lab10-tools-safety-control.json` file from the unzipped notebook files.
 
-5. Click **Ok**.
-    ![Notebook Information](./images/task1_5.png " ")
+    ![Notebook Information](./images/task1_6a.png " ")
 
-    You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
+7. Click **Open**.
+
+    ![Notebook Information](./images/task1_6a.png " ")
+
+You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information however the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Database Tables
 
@@ -267,10 +271,10 @@ Before building the agents, let's verify the rules work correctly.
 
 | Test | Expected Result | Why |
 |------|-----------------|-----|
-| $25K personal, 780 credit | AUTO_APPROVE | Good credit, small loan |
-| $35K auto, 695 credit | AUTO_APPROVE | Decent credit, under $50K |
-| $75K personal, 725 credit | REQUIRE_REVIEW | Over $50K threshold |
-| $30K personal, 600 credit | REQUIRE_REVIEW | Borderline credit 550-650 |
+| $25K personal, 780 credit | `AUTO_APPROVE` | Good credit, small loan |
+| $35K auto, 695 credit | `AUTO_APPROVE` | Decent credit, under $50K |
+| $75K personal, 725 credit | `REQUIRE_REVIEW` | Over $50K threshold |
+| $30K personal, 600 credit | `REQUIRE_REVIEW` | Borderline credit 550-650 |
 | $20K auto, 520 credit | BLOCK | Credit below 550 |
 
 ```sql
@@ -292,7 +296,7 @@ SELECT '$20K auto, 520 credit:', check_underwriting_rules(20000, 'auto', 520) FR
 
 ## Task 6: Create the Loan Submission Function
 
-This is the main tool the LOAN_AGENT will use. It looks up the applicant's credit score, checks the underwriting rules, and creates the application with the appropriate status.
+This is the main tool the `LOAN_AGENT` will use. It looks up the applicant's credit score, checks the underwriting rules, and creates the application with the appropriate status.
 
 ```sql
 <copy>
@@ -492,7 +496,7 @@ Underwriters need three capabilities: see pending applications, approve, and den
 
 ## Task 8: Register the Tools
 
-Now you'll register your PL/SQL functions as tools. Notice that SUBMIT_LOAN_TOOL is for loan officers, while the other three are for underwriters.
+Now you'll register your PL/SQL functions as tools. Notice that `SUBMIT_LOAN_TOOL` is for loan officers, while the other three are for underwriters.
 
 ```sql
 <copy>
@@ -538,7 +542,7 @@ END;
 
 ## Task 9: Create the Loan Agent (Loan Officer Role)
 
-The LOAN_AGENT represents a loan officer submitting applications. It only has access to SUBMIT_LOAN_TOOL — it cannot approve or deny anything.
+The `LOAN_AGENT` represents a loan officer submitting applications. It only has access to `SUBMIT_LOAN_TOOL` — it cannot approve or deny anything.
 
 ```sql
 <copy>
@@ -774,12 +778,12 @@ Switch to the underwriting agent and review applications.
 In this lab, you built a complete loan underwriting system demonstrating:
 
 **Role-Based Agents:**
-* LOAN_AGENT for loan officers (submit only)
-* UNDERWRITING_AGENT for underwriters (review and decide)
+* `LOAN_AGENT` for loan officers (submit only)
+* `UNDERWRITING_AGENT` for underwriters (review and decide)
 
 **Safety Rules:**
-* AUTO_APPROVE: Under $50K, good credit, non-mortgage
-* REQUIRE_REVIEW: $50K+, mortgages, or borderline credit
+* `AUTO_APPROVE`: Under $50K, good credit, non-mortgage
+* `REQUIRE_REVIEW`: $50K+, mortgages, or borderline credit
 * BLOCK: Credit score below 550
 
 **The Human-in-the-Loop:**
@@ -792,7 +796,7 @@ In this lab, you built a complete loan underwriting system demonstrating:
 * Full input/output captured
 * Explainable and compliant
 
-**Key Insight:** Agents are safe because their boundaries are explicit. The LOAN_AGENT literally cannot approve anything - it doesn't have the tool. This is security through architecture, not just prompts.
+**Key Insight:** Agents are safe because their boundaries are explicit. The `LOAN_AGENT` literally cannot approve anything - it doesn't have the tool. This is security through architecture, not just prompts.
 
 ## Learn More
 
@@ -804,7 +808,7 @@ In this lab, you built a complete loan underwriting system demonstrating:
 * **Contributors** - Francis Regalado
 * **Last Updated By/Date** - Francis Regalado, February 2026
 
-## Cleanup (Optional)
+## Cleanup
 
 ```sql
 <copy>
