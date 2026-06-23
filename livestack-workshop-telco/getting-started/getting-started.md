@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab prepares your LiveLabs environment and explains the connection pattern used by the SQL labs. The workshop assumes the platform has loaded the telco handoff schema into `LLUSER`. If you are validating locally, use the `telco-handoff-loader.sql` file in the workshop root with SQLcl.
+This lab prepares your LiveLabs environment and confirms that the SQL labs run against the expected Seer Comms schema. The workshop uses the `LLUSER` schema for the telecom views and objects that support the operating story.
 
 Estimated Time: 10 minutes
 
@@ -12,7 +12,7 @@ In this lab, you will:
 
 - Open Database Actions SQL Worksheet.
 - Confirm that you are connected as `LLUSER`.
-- Review how to run SQL copy blocks.
+- Use SQL copy blocks to run repeatable verification queries.
 - Confirm the Seer Comms semantic views are available.
 
 ## How This Lab Fits the Story
@@ -79,7 +79,7 @@ The remaining labs use `LLUSER` objects and semantic views. If the connected use
     | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
     {: title="Views used throughout the workshop"}
 
-These views give the workshop telecom vocabulary while preserving the portable LiveStack table model underneath.
+These views give the remaining labs a consistent telecom vocabulary for services, subscribers, network capacity, dispatches, signals, and agent actions.
 
 ## Acknowledgements
 

@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Inspect signal embeddings.
-- Run a vector-style semantic match query.
-- Interpret similarity as operational priority.
+- Verify that service and subscriber-signal embeddings are available.
+- Rank services by semantic similarity to subscriber language.
+- Inspect high-priority signals that explain why a service needs attention.
 
 
 ![Subscriber signals page](images/subscriber-signals-page.png)

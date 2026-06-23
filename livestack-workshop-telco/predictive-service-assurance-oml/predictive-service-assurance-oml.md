@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Review the LiveStack scene evidence.
-- Run SQL that proves the database pattern.
-- Connect the result to the next operating decision.
+- Review demand and signal features that indicate service pressure.
+- Compare subscriber tiers that affect assurance planning.
+- Join predicted demand to capacity exposure so teams can prioritize action.
 
 ![Predictive assurance page](images/predictive-assurance-page.png)
 
@@ -34,7 +34,7 @@ You look ahead after reviewing current operations. The predictive assurance quer
 
 ## Scene Evidence
 
-Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+Use the screenshot to orient the predictive assurance scenario. The SQL tasks below show how demand, subscriber, and capacity evidence become an action list.
 
 ![Service revenue forecast](images/service-revenue-forecast.png)
 

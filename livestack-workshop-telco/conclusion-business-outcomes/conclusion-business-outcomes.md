@@ -40,7 +40,7 @@ Estimated Time: 5 minutes
 
 1. Use this summary when you explain the workshop to another learner or stakeholder.
 
-Seer Comms does not solve the demand-surge story by adding one more isolated tool. It solves it by keeping the evidence in one governed database platform. Each lab showed a different access pattern over that foundation. The business user sees an application workflow. The developer and database professional can inspect the SQL, views, graph tables, spatial objects, vector artifacts, JSON documents, and audit records that make the workflow trustworthy.
+Seer Comms does not solve the demand-surge story by adding one more isolated tool. It solves it by keeping the evidence in one governed database platform. Each lab demonstrated a practical operating pattern over that foundation. Business users get a coherent service-assurance workflow, while developers and database professionals can inspect the SQL, views, graph tables, spatial objects, vector artifacts, JSON documents, and audit records that make the workflow trustworthy.
 
 When you explain the workshop, lead with the operating outcome: Oracle AI Database 26ai helps telecom teams act faster because the operational evidence and AI evidence remain connected.
 
@@ -54,7 +54,7 @@ When you explain the workshop, lead with the operating outcome: Oracle AI Databa
 | Semantic search | Add a live query embedding task that compares new subscriber language to stored services. |
 | Impact investigation | Expand the graph lab with SQL/PGQ path patterns and Graph Studio. |
 | Field operations | Add Spatial Studio or route-service integration for richer map workflows. |
-| Predictive assurance | Add model build and evaluation tasks if the environment includes OML setup. |
+| Predictive assurance | Extend the OML lab with model training, evaluation, and score monitoring tasks. |
 | Governed AI | Extend the trusted-answer and trusted-action labs with Select AI or agent configuration. |
 {: title="Recommended next steps by learner interest"}
 

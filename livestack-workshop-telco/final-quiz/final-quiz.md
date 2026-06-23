@@ -26,7 +26,7 @@ The quiz checks whether you can connect the business workflow to the database ca
 
 Why does the workshop start with the telecom data foundation?
 
-- A. To prove the UI has enough screenshots.
+- A. To count images before using the database.
 - B. To show that the operating story starts from governed services, signals, orders, sites, forecasts, graph entities, embeddings, and audit rows.
 - C. To avoid using SQL in later labs.
 - D. To replace the LiveStack Demo with a static report.
@@ -48,7 +48,7 @@ What does AI Vector Search help Seer Comms do?
 
 Why is Property Graph useful in the subscriber and network impact lab?
 
-- A. It stores screenshots in the database.
+- A. It stores presentation images in the database.
 - B. It turns connected outage, service, case, site, subscriber, and crew relationships into traversable impact paths.
 - C. It hides relationships from operators.
 - D. It requires a separate graph-only data copy.

@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Review the LiveStack scene evidence.
-- Run SQL that proves the database pattern.
-- Connect the result to the next operating decision.
+- Query a service order through relational columns.
+- Inspect the line items that explain order value and service mix.
+- Return the same order as a JSON document for application-style access.
 
 ![Service orders page](images/service-orders-page.png)
 
@@ -34,7 +34,7 @@ You inspect the service order that records operational action. The relational an
 
 ## Scene Evidence
 
-Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+Use the screenshot to orient the service-order workflow. The SQL tasks below show how one Oracle transaction supports both operational SQL and document-style access.
 
 ![Service order JSON document](images/service-order-json-document.png)
 

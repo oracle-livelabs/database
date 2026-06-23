@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Review the LiveStack scene evidence.
-- Run SQL that proves the database pattern.
-- Connect the result to the next operating decision.
+- Review recent AI-assisted interventions as auditable database rows.
+- Check capacity evidence that an approved agent tool can return.
+- Explain how tool evidence and action history make assisted decisions reviewable.
 
 ![Agent console workspace](images/agent-console-workspace.png)
 

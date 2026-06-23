@@ -11,17 +11,17 @@ Estimated Time: 10 minutes
 | Business Problem | Teams need one trusted operating picture before responding to service pressure. |
 | Technical Challenge | The data foundation must combine transactional, JSON, vector, graph, spatial, ML, and audit objects without copying data into disconnected stores. |
 | Persona Focus | Platform engineer and database developer. |
-| What You Will Prove | The workshop schema contains the telecom domains and Oracle feature objects used by the LiveStack Demo. |
+| What You Will Prove | The schema contains the telecom domains and Oracle feature objects needed for the full operating loop. |
 | Database Capability | Relational SQL, semantic views, Oracle data dictionary, VECTOR columns, JSON Duality, Spatial, Property Graph. |
 | Outcome | Learners can trust the following labs because the schema has a visible governed foundation. |
 {: title="What this lab proves"}
 
-**Persona focus:** You are the platform engineer proving that the operating story starts from a complete Oracle data foundation, not from separate demo files.
+**Persona focus:** You are the platform engineer proving that the operating story starts from a complete Oracle data foundation, not disconnected data extracts.
 
 ### Objectives
 
 - Count core telco domains.
-- Inspect views that translate the portable stack into Seer Comms vocabulary.
+- Inspect semantic views that express the data in Seer Comms operating language.
 - Verify feature-specific database objects.
 
 
@@ -72,7 +72,7 @@ The counts show that the workshop is not a single-feature exercise. The same sch
 
 1. Run this SQL block.
 
-    This query confirms that learners can use telecom-friendly view names instead of the portable source table names.
+    This query confirms that learners can use telecom-friendly view names for the rest of the workshop.
 
     ```sql
     <copy>
@@ -94,7 +94,7 @@ The counts show that the workshop is not a single-feature exercise. The same sch
     | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
     {: title="Core views for learner queries"}
 
-Your output may include additional Seer Comms views. These views are the bridge between the portable LiveStack schema and telecom language such as service lines, subscriber signals, network capacity, and field dispatches.
+Your output may include additional Seer Comms views. These views give SQL users telecom language such as service lines, subscriber signals, network capacity, and field dispatches.
 
 ## Task 3: Verify Oracle feature objects
 

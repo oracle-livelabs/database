@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Query command-center KPIs.
-- Rank services by demand pressure.
-- Connect service detail to JSON-ready evidence.
+- Query command-center KPIs that summarize service pressure.
+- Rank services by demand, urgency, and subscriber signal strength.
+- Connect high-value service detail to downstream service-order and assurance workflows.
 
 
 ![Operations KPI cards](images/operations-kpis.png)

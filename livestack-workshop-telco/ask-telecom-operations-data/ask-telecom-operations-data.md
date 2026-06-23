@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Review the LiveStack scene evidence.
-- Run SQL that proves the database pattern.
-- Connect the result to the next operating decision.
+- Translate plain-English telecom questions into inspectable SQL paths.
+- Review revenue and signal answers grounded in approved views.
+- Explain why visible SQL makes natural-language analytics governable.
 
 ![Ask data workspace](images/ask-data-workspace.png)
 
@@ -94,7 +94,7 @@ You switch from predefined reports to governed questions. The SQL examples show 
 
 1. Review the explanation and connect it to the lab evidence.
 
-The LiveStack page can ask similar questions in natural language, show generated SQL, and then run read-only SQL against Oracle. The governance pattern is the lesson: the answer is useful because the query path remains visible.
+A governed natural-language interface should show the SQL it proposes and run read-only queries against Oracle. The governance pattern is the lesson: the answer is useful because the query path remains visible.
 
 
 

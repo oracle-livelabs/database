@@ -8,7 +8,7 @@ In this workshop, you follow Seer Comms through a South Florida 5G demand-surge 
 
 You start with the governed data foundation, then move through the same decision loop an operator would use: observe service pressure, understand subscriber intent, investigate connected impact, locate field capacity, inspect service orders, review predictive signals, ask governed questions, and record auditable AI-assisted action.
 
-The Seer Comms LiveStack Demo shows the application workflow. These labs show the Oracle AI Database evidence behind that workflow. Each lab asks a business question, runs SQL against the loaded workshop schema, and explains why the result matters to a telecom team.
+The Seer Comms application shows the operator workflow. These labs expose the Oracle AI Database evidence that makes the workflow trustworthy. Each lab starts with an operating question, runs SQL against the workshop schema, and explains how the result helps a telecom team act with confidence.
 
 Estimated Workshop Time: 2 hours
 
@@ -46,16 +46,15 @@ In this workshop, you will:
 Each lab follows the same pattern:
 
 1. Read the operating story so you know the decision you are trying to support.
-2. Review the screenshot or concept diagram to connect the database work to the LiveStack Demo.
+2. Review the screenshot or concept diagram to understand the operating scenario before you query the database.
 3. Run the SQL block in Database Actions SQL Worksheet.
 4. Compare your result with the expected output.
 5. Read the interpretation before moving to the next lab.
 
-The SQL is not just proof that objects exist. It shows how Oracle AI Database keeps data, search, graph, spatial analysis, prediction, document access, and audit evidence close enough for a real operator workflow. When a screenshot includes small interface details, use it as scene grounding; the SQL and explanation underneath tell you exactly what to verify.
+The SQL is not just a setup check. It shows how Oracle AI Database keeps data, search, graph, spatial analysis, prediction, document access, and audit evidence close enough for a real operator workflow. Use each screenshot or diagram to orient yourself, then use the SQL result and interpretation to understand why the database capability matters.
 
 ![Seer Comms use case overview](images/welcome-use-cases.png)
 
 ## Acknowledgements
 
 - **Author** - Oracle LiveLabs Team
-- **Source material** - Oracle LiveStack source, Seer Comms runbook, and Oracle-owned build notes listed in `TRACEABILITY.md`.

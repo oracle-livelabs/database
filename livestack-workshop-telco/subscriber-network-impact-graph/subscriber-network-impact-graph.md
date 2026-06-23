@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Review the LiveStack scene evidence.
-- Run SQL that proves the database pattern.
-- Connect the result to the next operating decision.
+- Verify that impact entities and relationships are available for graph analysis.
+- Identify high-risk outage, site, and service entities.
+- Traverse connected impact paths from an event to affected subscribers and response context.
 
 ![Impact graph workspace](images/impact-graph-workspace.png)
 
@@ -34,7 +34,7 @@ You investigate relationships after you know a service is under pressure. The gr
 
 ## Scene Evidence
 
-Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+Use the screenshot to orient the impact investigation. The SQL tasks below show how graph relationships turn isolated events into connected response priorities.
 
 ![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png)
 

@@ -20,9 +20,9 @@ Estimated Time: 10 minutes
 
 ### Objectives
 
-- Review the LiveStack scene evidence.
-- Run SQL that proves the database pattern.
-- Connect the result to the next operating decision.
+- Inspect network sites that carry location and capacity context.
+- Use spatially relevant capacity evidence to identify constrained sites.
+- Connect dispatch activity to the network sites that need field attention.
 
 ![Network access map](images/network-access-map.png)
 
@@ -34,7 +34,7 @@ You turn impact into a field decision. The spatial and capacity queries show whe
 
 ## Scene Evidence
 
-Use the screenshot as scene grounding. The SQL tasks below provide the exact values to verify.
+Use the screenshot to orient the field operations scenario. The SQL tasks below show the location, capacity, and dispatch evidence behind the decision.
 
 ![Capacity risk table](images/capacity-risk-table.png)
 
