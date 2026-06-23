@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Agent-assisted service assurance needs observable tools, evidence, and audit history. This lab uses SQL and PL/SQL evidence patterns behind the application rather than treating the agent as a black-box chat surface.
+Agent-assisted service assurance is only useful when people can review what the agent did. Operators need to know which tool ran, what evidence it used, how confident it was, and whether the action was recorded.
+
+This lab uses SQL and PL/SQL evidence patterns instead of treating the agent as a black-box chat surface.
 
 Estimated Time: 10 minutes
 
@@ -30,7 +32,7 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You close the loop with auditable action. The agent action and capacity queries show how an assistant can return useful guidance while Oracle keeps tool evidence and action history reviewable.
+You close the loop with auditable action. The agent action and capacity queries show how an assistant can return useful guidance while Oracle keeps the tool evidence and action history available for review.
 
 ## Scene Evidence
 
@@ -40,7 +42,7 @@ You close the loop with auditable action. The agent action and capacity queries 
 
 1. Run this SQL block.
 
-    This query checks whether assisted actions leave a reviewable operational record.
+    This query checks whether assisted actions leave a reviewable operational record. If an operator follows an AI recommendation, the organization needs a durable record of what happened.
 
     ```sql
     <copy>
@@ -68,7 +70,7 @@ You close the loop with auditable action. The agent action and capacity queries 
 
 1. Run this SQL block.
 
-    This query shows the kind of approved database evidence an agent tool can return.
+    This query shows the kind of approved database evidence an agent tool can return. The agent should not guess about capacity; it should call a trusted path that reads current operational data.
 
     ```sql
     <copy>
@@ -96,7 +98,7 @@ You close the loop with auditable action. The agent action and capacity queries 
 
 1. Review the explanation and connect it to the lab evidence.
 
-The agent console routes a capacity question to an approved path, uses Oracle-backed tools to read evidence, and writes an action record. The audit table is what turns a chat answer into an operationally reviewable intervention.
+The agent console routes a capacity question to an approved path, uses Oracle-backed tools to read evidence, and writes an action record. The audit table turns a helpful chat response into an operational intervention that managers, auditors, and engineers can review later.
 
 
 

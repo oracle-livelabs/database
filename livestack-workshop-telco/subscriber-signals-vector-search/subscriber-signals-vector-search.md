@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Care and network teams need to search subscriber language by meaning, not only by exact keywords. Oracle AI Vector Search keeps signal text, embeddings, vector distance, SQL filters, and governance near the same telecom data.
+Subscribers rarely describe problems in database terms. One person says the internet is lagging, another says video calls keep freezing, and another complains about installation instructions.
+
+AI Vector Search helps care and network teams search by meaning, not only by exact keywords, while Oracle keeps the signal text, embeddings, SQL filters, and governance close to the same telecom data.
 
 Estimated Time: 10 minutes
 
@@ -31,7 +33,7 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You move from dashboard symptoms to subscriber language. The vector and semantic-match queries show how Oracle AI Database can rank telecom intent by meaning while keeping signal text and embeddings governed.
+You move from dashboard symptoms to the words subscribers actually use. The vector and semantic-match queries show how Oracle AI Database can rank telecom intent by meaning while keeping sensitive signal text and embeddings governed.
 
 ## Scene Evidence
 
@@ -59,7 +61,7 @@ You move from dashboard symptoms to subscriber language. The vector and semantic
     | Signal embeddings | 5000 |
     {: title="Vector data available for semantic search"}
 
-Embeddings are stored in Oracle AI Database with the rest of the operational data. That reduces the need to move sensitive signal text into a separate search platform.
+This count confirms that semantic search has material to work with. Services and subscriber signals both have embeddings, so the database can compare meaning without moving sensitive text into a separate search platform.
 
 ## Task 2: Rank services by signal similarity history
 
@@ -90,7 +92,7 @@ Embeddings are stored in Oracle AI Database with the rest of the operational dat
     | Gigabit Fiber Install | Seer Fiber | 53 | 0.87 | 0.70 |
     {: title="Services ranked by signal meaning"}
 
-This is the operating signal behind the LiveStack page. Semantic matches show where subscriber language is clustering around services.
+This result turns noisy feedback into a short list. When many subscriber signals cluster around the same service, care and network teams get a practical place to focus.
 
 ## Task 3: Inspect high-priority subscriber signals
 
@@ -120,7 +122,7 @@ This is the operating signal behind the LiveStack page. Semantic matches show wh
     {: title="Subscriber signals behind the match"}
 
 
-Exposure and escalations help triage. The text explains why the issue matters. Oracle keeps both available to SQL, vector search, and security policy enforcement.
+Exposure and escalations help triage urgency. The excerpt explains what subscribers are experiencing. Keeping both together lets Oracle support SQL review, vector search, and security policy enforcement from the same evidence.
 
 
 ## Learn More

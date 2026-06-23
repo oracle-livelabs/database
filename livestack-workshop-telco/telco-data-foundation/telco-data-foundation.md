@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Seer Comms data foundation prepares the governed data used across the South Florida 5G demand-surge story. Before a network, care, field, or retention team can act, the platform team needs to prove that services, subscriber signals, service orders, network sites, forecasts, graph entities, embeddings, and audit rows are loaded in one schema.
+The Seer Comms data foundation gives every later lab a reliable starting point. Before network, care, field, or retention teams can act, the platform team must prove that the key evidence is present. Services, subscriber signals, service orders, network sites, forecasts, graph entities, embeddings, and audit rows all live in one schema.
 
 Estimated Time: 10 minutes
 
@@ -29,7 +29,7 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You prove that the workshop has a complete telecom data foundation. The counts and object checks explain why later labs can move across dashboard, vector, graph, spatial, JSON, prediction, and audit workflows without switching databases.
+You prove that the telecom data foundation is complete enough to support real operating questions. The counts show breadth. The object checks show capability. Together, they explain why later labs can move from dashboards to vector search, graph, spatial analysis, JSON documents, prediction, and audit history without switching databases.
 
 ## Scene Evidence
 
@@ -65,7 +65,7 @@ You prove that the workshop has a complete telecom data foundation. The counts a
     | Telecom services | 32 |
     {: title="Seeded telecom data volumes"}
 
-The counts show that the workshop is not a single-feature exercise. The same schema carries the operating data needed by dashboard, signal, graph, spatial, service order, ML, answer, and agent workflows.
+The counts are a quick health check. You are confirming that this is not a single-table exercise: the same schema carries the service, subscriber, order, network, forecast, and agent data needed for the full operating loop.
 
 
 ## Task 2: Inspect telecom semantic views
@@ -94,7 +94,7 @@ The counts show that the workshop is not a single-feature exercise. The same sch
     | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
     {: title="Core views for learner queries"}
 
-Your output may include additional Seer Comms views. These views give SQL users telecom language such as service lines, subscriber signals, network capacity, and field dispatches.
+Your output may include additional Seer Comms views. The important point is the naming pattern: SQL users can work in telecom language, such as service lines, subscriber signals, network capacity, and field dispatches, instead of decoding raw table names.
 
 ## Task 3: Verify Oracle feature objects
 
@@ -129,7 +129,7 @@ Your output may include additional Seer Comms views. These views give SQL users 
     | TABLE | `PRODUCT_EMBEDDINGS` |
     {: title="Oracle objects behind the workshop"}
 
-These objects are the evidence that Oracle AI Database is the protagonist of the workshop. Each later lab uses one or more of these objects to answer a telecom operations question.
+These objects show why the database is more than a place to store rows. The same Oracle environment holds document views, graph objects, vector artifacts, spatial tables, and audit records that later labs use to answer telecom operations questions.
 
 
 ## Learn More

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A subscriber service order must support care workflows, field dispatch, operational SQL, and API-friendly JSON without creating separate copies of the same transaction.
+A subscriber service order has to serve many audiences. Care teams need the customer view, field teams need dispatch details, operations teams need SQL, and applications often want JSON. JSON Relational Duality lets those groups work from the same transaction instead of separate copies.
 
 Estimated Time: 10 minutes
 
@@ -34,7 +34,7 @@ You inspect the service order that records operational action. The relational an
 
 ## Scene Evidence
 
-Use the screenshot to orient the service-order workflow. The SQL tasks below show how one Oracle transaction supports both operational SQL and document-style access.
+Use the screenshot to orient the service-order workflow. The SQL tasks below show how one Oracle transaction can look like rows to an analyst and like a document to an application.
 
 ![Service order JSON document](images/service-order-json-document.png)
 
@@ -42,7 +42,7 @@ Use the screenshot to orient the service-order workflow. The SQL tasks below sho
 
 1. Run this SQL block.
 
-    This query starts with the traditional operational view of one service order.
+    This query starts with the traditional operational view of one service order. It gives care and operations teams the basic facts: who, where, status, value, and dispatch cost.
 
     ```sql
     <copy>
@@ -63,7 +63,7 @@ Use the screenshot to orient the service-order workflow. The SQL tasks below sho
 
 1. Run this SQL block.
 
-    This query verifies the detail rows that make up the order total and service mix.
+    This query verifies the detail rows that make up the order total and service mix. Line items matter because they explain what the subscriber is actually receiving.
 
     ```sql
     <copy>
@@ -93,7 +93,7 @@ Use the screenshot to orient the service-order workflow. The SQL tasks below sho
 
 1. Run this SQL block.
 
-    This query returns the same order through the JSON document shape used by application workflows.
+    This query returns the same order through the JSON document shape used by application workflows. The application gets a nested order document, while Oracle preserves the relational source of truth.
 
     ```sql
     <copy>
@@ -110,7 +110,7 @@ Use the screenshot to orient the service-order workflow. The SQL tasks below sho
     | JSON document for service order 2870 with subscriber, status, total, dispatch cost, and nested line items. |
     {: title="Document view of the same service order"}
 
-The JSON document and relational rows come from the same Oracle transaction model. That is the value of JSON Relational Duality for telecom service-order APIs.
+The JSON document and relational rows come from the same Oracle transaction model. That is the practical value of JSON Relational Duality: application teams get document-style access, and operations teams keep SQL truth.
 
 
 

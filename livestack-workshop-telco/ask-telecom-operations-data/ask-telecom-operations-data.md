@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Natural-language analytics is useful only when the user can inspect the SQL path and trust Oracle as the execution authority. This lab teaches the trusted-answer pattern without requiring learners to configure a live GenAI provider.
+Natural-language analytics is useful only when people can trust the path from question to answer. A telecom analyst may ask a plain-English question, but the business still needs to know which SQL ran and which data answered it.
+
+This lab teaches that trusted-answer pattern without requiring you to configure a live GenAI provider.
 
 Estimated Time: 10 minutes
 
@@ -30,7 +32,7 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You switch from predefined reports to governed questions. The SQL examples show the kind of transparent query path that should sit behind natural-language analytics.
+You switch from predefined reports to governed questions. The SQL examples show the transparent query path that should sit behind natural-language analytics, so a quick answer can still be inspected and defended.
 
 ## Scene Evidence
 
@@ -40,7 +42,7 @@ You switch from predefined reports to governed questions. The SQL examples show 
 
 1. Run this SQL block.
 
-    This query represents the SQL path behind a plain-English revenue question.
+    This query represents the SQL path behind a plain-English revenue question. The point is not only the answer; it is that the answer can be traced to approved views and joins.
 
     ```sql
     <copy>
@@ -68,7 +70,7 @@ You switch from predefined reports to governed questions. The SQL examples show 
 
 1. Run this SQL block.
 
-    This query represents the SQL path behind a plain-English subscriber-signal question.
+    This query represents the SQL path behind a plain-English subscriber-signal question. It shows how a business question about urgent channels becomes a governed aggregate over subscriber evidence.
 
     ```sql
     <copy>
@@ -94,7 +96,7 @@ You switch from predefined reports to governed questions. The SQL examples show 
 
 1. Review the explanation and connect it to the lab evidence.
 
-A governed natural-language interface should show the SQL it proposes and run read-only queries against Oracle. The governance pattern is the lesson: the answer is useful because the query path remains visible.
+A governed natural-language interface should show the SQL it proposes and run read-only queries against Oracle. That visibility is the lesson: the answer is useful because a learner, analyst, or reviewer can inspect how it was produced.
 
 
 

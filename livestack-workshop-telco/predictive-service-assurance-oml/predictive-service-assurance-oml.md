@@ -30,11 +30,11 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You look ahead after reviewing current operations. The predictive assurance queries show how service signals, customer experience, demand forecasts, and capacity can become action-oriented risk evidence.
+You look ahead after reviewing current operations. The predictive assurance queries show how service signals, customer experience, demand forecasts, and capacity can become evidence for action, not just charts to monitor.
 
 ## Scene Evidence
 
-Use the screenshot to orient the predictive assurance scenario. The SQL tasks below show how demand, subscriber, and capacity evidence become an action list.
+Use the screenshot to orient the predictive assurance scenario. The SQL tasks below show how demand, subscriber, and capacity evidence become an action list a service assurance team can review.
 
 ![Service revenue forecast](images/service-revenue-forecast.png)
 
@@ -44,7 +44,7 @@ Use the screenshot to orient the predictive assurance scenario. The SQL tasks be
 
 1. Run this SQL block.
 
-    This query prepares model-style features from current service demand and revenue evidence.
+    This query prepares model-style features from current service demand and revenue evidence. You are looking for services where subscriber attention is already turning into measurable business activity.
 
     ```sql
     <copy>
@@ -73,7 +73,7 @@ Use the screenshot to orient the predictive assurance scenario. The SQL tasks be
 
 1. Run this SQL block.
 
-    This query groups customer experience signals so retention teams can reason about segments.
+    This query groups customer experience signals so retention teams can reason about segments. It helps planners see whether a group is large, valuable, or showing demand patterns that deserve attention.
 
     ```sql
     <copy>
@@ -99,7 +99,7 @@ Use the screenshot to orient the predictive assurance scenario. The SQL tasks be
 
 1. Run this SQL block.
 
-    This query connects forecast demand to available network capacity, turning scores into an action list.
+    This query connects forecast demand to available network capacity, turning scores into an action list. The useful result is not just a prediction; it is a specific service and site where the team can act.
 
     ```sql
     <copy>

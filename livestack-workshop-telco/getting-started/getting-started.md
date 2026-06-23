@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab prepares your LiveLabs environment and confirms that the SQL labs run against the expected Seer Comms schema. The workshop uses the `LLUSER` schema for the telecom views and objects that support the operating story.
+This lab gets you into the right database user before the operating labs begin. That small check matters: if you run the queries from the wrong schema, the rest of the workshop can look broken even when the data is loaded correctly. The workshop uses the `LLUSER` schema for the telecom views and objects that support the Seer Comms story.
 
 Estimated Time: 10 minutes
 
@@ -17,7 +17,7 @@ In this lab, you will:
 
 ## How This Lab Fits the Story
 
-You prepare SQL Worksheet and confirm the schema before running any feature labs. This protects you from reading or changing the wrong database user and gives every later result a clear starting point.
+You prepare SQL Worksheet and confirm the schema before running any feature labs. Think of this as checking the address before starting a service call: once you know you are connected to `LLUSER`, every later result has a clear starting point.
 
 ## Task 1: Open SQL Worksheet
 
@@ -44,7 +44,7 @@ You prepare SQL Worksheet and confirm the schema before running any feature labs
     | LLUSER |
     {: title="Expected database user"}
 
-The remaining labs use `LLUSER` objects and semantic views. If the connected user is different, reconnect before continuing.
+The remaining labs use `LLUSER` objects and semantic views. If you see a different user, stop and reconnect before continuing. This prevents confusing object-not-found errors later.
 
 ## Task 3: Check telco semantic views
 
@@ -79,7 +79,7 @@ The remaining labs use `LLUSER` objects and semantic views. If the connected use
     | `SEER_COMMS_SUBSCRIBER_SIGNALS_V` |
     {: title="Views used throughout the workshop"}
 
-These views give the remaining labs a consistent telecom vocabulary for services, subscribers, network capacity, dispatches, signals, and agent actions.
+These views are the vocabulary for the rest of the workshop. Instead of thinking about raw tables, you can ask telecom questions about services, subscribers, network capacity, dispatches, signals, and agent actions.
 
 ## Acknowledgements
 

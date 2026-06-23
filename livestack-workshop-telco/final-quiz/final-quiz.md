@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this quiz to check whether you can connect the telecom operating story to the Oracle Database capabilities used in the workshop.
+Use this quiz to check whether you can explain the telecom operating story in your own words and connect each decision to the Oracle Database capability behind it.
 
 Estimated Time: 10 minutes
 
@@ -14,7 +14,7 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-The quiz checks whether you can connect the business workflow to the database capability. Focus on why each capability matters to the operator, not only on the feature name. The badge marks completion of the telecom LiveStack learning path.
+The quiz checks whether you can connect the business workflow to the database capability. Focus on the operator's reason for using each capability, not only the feature name. The badge marks completion of the telecom LiveStack learning path.
 
 ![Telco workshop completion badge](images/livestack-badge-telecommunications.png)
 
@@ -92,7 +92,7 @@ What makes agent-assisted service assurance trustworthy in this workshop pattern
 
 1. Review the explanation and connect it to the lab evidence.
 
-You have completed the quiz. Review the conclusion if you want to revisit how the labs connect into one operating loop.
+You have completed the quiz. Review the conclusion to revisit how the labs connect into one operating loop, from first signal to auditable action.
 
 ## Acknowledgements
 

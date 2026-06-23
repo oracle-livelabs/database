@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A network operations leader needs to detect where subscriber demand, service orders, revenue exposure, and field work are starting to move. The command center query pattern combines current operations data without forcing the learner into separate reporting tools.
+A network operations leader needs an early read on where trouble is starting. Subscriber demand, service orders, revenue exposure, and field work all tell part of the story. This lab shows how one command-center query can bring those signals together before teams chase separate reports.
 
 Estimated Time: 10 minutes
 
@@ -29,7 +29,7 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You start like an operations leader: look at the whole situation first, then drill into service pressure. The KPI and pressure queries show which services deserve attention before the workflow moves into signal search.
+You start like an operations leader during a busy shift: scan the whole situation first, then drill into the services that need attention. The KPI and pressure queries help you decide where to look before moving into subscriber signal search.
 
 ## Scene Evidence
 
@@ -66,7 +66,7 @@ You start like an operations leader: look at the whole situation first, then dri
     | AI-assisted interventions | 25 |
     {: title="Operations center health metrics"}
 
-This query shows why a converged data platform matters. The KPI row comes from live operational domains, not a stitched spreadsheet.
+This KPI row is the first shared operating picture. It combines service, signal, dispatch, and agent activity so different teams can react to the same numbers instead of comparing separate spreadsheets.
 
 ## Task 2: Find services under demand pressure
 
@@ -98,7 +98,7 @@ This query shows why a converged data platform matters. The KPI row comes from l
     {: title="Services with urgent subscriber signals"}
 
 
-The important result is not the exact ordering. The business value is that pressure can be ranked with service, signal, and customer context still governed by Oracle.
+The exact ordering can change as data changes. The important habit is the ranking pattern: you can sort service pressure by demand and urgency while the service, signal, and customer context stays governed in Oracle.
 
 ## Task 3: Inspect one service for API-ready context
 
@@ -126,7 +126,7 @@ The important result is not the exact ordering. The business value is that press
     {: title="High-value services to monitor"}
 
 
-The dashboard can start as a simple operations view, then hand the same service identity to JSON, vector, graph, spatial, ML, and agent flows in later labs.
+This final service row acts like a handoff token. Once you know the service that matters, later labs can use the same identity for JSON orders, vector matches, graph impact, spatial capacity, predictions, and agent actions.
 
 
 ## Learn More

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Property Graph helps service assurance teams investigate how an outage, service line, case, network site, subscriber cluster, and field crew connect.
+A telecom incident is rarely isolated. One outage can affect a service line, trigger cases, overload a site, and send crews into the field. Property Graph helps service assurance teams follow those connections instead of reading each record separately.
 
 Estimated Time: 10 minutes
 
@@ -30,11 +30,11 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You investigate relationships after you know a service is under pressure. The graph queries show how an outage connects to cases, sites, subscribers, and response teams without exporting the data to a graph-only store.
+You investigate relationships after you know a service is under pressure. The graph queries show how an outage connects to cases, sites, subscribers, and response teams without forcing you to copy the data into a separate graph-only system.
 
 ## Scene Evidence
 
-Use the screenshot to orient the impact investigation. The SQL tasks below show how graph relationships turn isolated events into connected response priorities.
+Use the screenshot to orient the impact investigation. The SQL tasks below show how graph relationships turn isolated records into a response path an escalation team can follow.
 
 ![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png)
 
@@ -42,7 +42,7 @@ Use the screenshot to orient the impact investigation. The SQL tasks below show 
 
 1. Run this SQL block.
 
-    This query checks that the graph has both entities and relationships. A graph without edges cannot explain impact.
+    This query checks that the graph has both the things you care about and the links between them. A list of entities is only an inventory; the relationships explain impact.
 
     ```sql
     <copy>
@@ -64,7 +64,7 @@ Use the screenshot to orient the impact investigation. The SQL tasks below show 
 
 1. Run this SQL block.
 
-    This query surfaces the events and entities that deserve investigation first.
+    This query surfaces the events and entities with the highest risk. It helps an investigator start with the incidents most likely to affect subscribers.
 
     ```sql
     <copy>
@@ -88,7 +88,7 @@ Use the screenshot to orient the impact investigation. The SQL tasks below show 
 
 1. Run this SQL block.
 
-    This query follows relationships from one named event to the connected sites, subscriber groups, and response context.
+    This query follows one named event to the connected sites, subscriber groups, and response context. It turns a single event name into a practical investigation path.
 
     ```sql
     <copy>

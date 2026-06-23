@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Oracle Spatial connects network sites, service zones, demand density, and field dispatch context to the same operational data foundation.
+Location changes the meaning of a network problem. A capacity issue near a high-demand zone needs different action than the same issue in a quiet area. Oracle Spatial connects network sites, service zones, demand density, and field dispatch context to the same operational data foundation.
 
 Estimated Time: 10 minutes
 
@@ -30,11 +30,11 @@ Estimated Time: 10 minutes
 
 ## How This Lab Fits the Story
 
-You turn impact into a field decision. The spatial and capacity queries show where network sites, demand, and dispatch work meet, which helps operations teams decide where capacity relief should start.
+You turn impact into a field decision. The spatial and capacity queries show where network sites, demand, and dispatch work meet, which helps operations teams decide where capacity relief should start first.
 
 ## Scene Evidence
 
-Use the screenshot to orient the field operations scenario. The SQL tasks below show the location, capacity, and dispatch evidence behind the decision.
+Use the screenshot to orient the field operations scenario. The SQL tasks below show the location, capacity, and dispatch evidence an operations team would use before sending work into the field.
 
 ![Capacity risk table](images/capacity-risk-table.png)
 
@@ -42,7 +42,7 @@ Use the screenshot to orient the field operations scenario. The SQL tasks below 
 
 1. Run this SQL block.
 
-    This query identifies active sites and their current load so the map has operational meaning.
+    This query identifies active sites and their current load. On a map, a site marker is only useful when you also know how hard that site is working.
 
     ```sql
     <copy>
@@ -66,7 +66,7 @@ Use the screenshot to orient the field operations scenario. The SQL tasks below 
 
 1. Run this SQL block.
 
-    This query turns capacity thresholds into a short list of places that may need action.
+    This query turns capacity thresholds into a short list of places that may need action. It helps a field operations team separate normal load from sites that are getting too close to the limit.
 
     ```sql
     <copy>
@@ -95,7 +95,7 @@ Use the screenshot to orient the field operations scenario. The SQL tasks below 
 
 1. Run this SQL block.
 
-    This query connects capacity pressure to active field work that operations teams can coordinate.
+    This query connects capacity pressure to active field work. It helps operations teams ask a practical question: do we already have work moving toward the sites that need help?
 
     ```sql
     <copy>
