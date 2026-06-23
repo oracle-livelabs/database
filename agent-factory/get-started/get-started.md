@@ -25,21 +25,21 @@ In this lab you'll gather required data for installing the Agent Factory in OCI 
 2. Download a Database wallet
 3. Create a dedicated database user for Agent Factory using the following SQL statements:
 
-```sql
-<copy>
-CREATE USER <db_user> IDENTIFIED BY <password> DEFAULT TABLESPACE USERS QUOTA unlimited ON USERS;
+    ```sql
+    <copy>
+    CREATE USER <db_user> IDENTIFIED BY <password> DEFAULT TABLESPACE USERS QUOTA unlimited ON USERS;
 
-GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE PROCEDURE, CREATE VIEW, CREATE SYNONYM TO <db_user>;
+    GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE PROCEDURE, CREATE VIEW, CREATE SYNONYM TO <db_user>;
 
-GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO <db_user>;
+    GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO <db_user>;
 
-GRANT SELECT ON V_$PARAMETER TO <db_user>;
+    GRANT SELECT ON V_$PARAMETER TO <db_user>;
 
-CREATE USER AAI_RO_<db_user> IDENTIFIED BY <same_password_as_db_user> ACCOUNT UNLOCK;
+    CREATE USER AAI_RO_<db_user> IDENTIFIED BY <same_password_as_db_user> ACCOUNT UNLOCK;
 
-GRANT CREATE SESSION TO AAI_RO_<db_user>;
-</copy>
-```
+    GRANT CREATE SESSION TO AAI_RO_<db_user>;
+    </copy>
+    ```
 
 > **Note:** Replace <db_user> and <password> with values appropriate for your environment. The read-only user (AAI_RO_<db_user>) should use the same password as the primary Agent Factory database user.
 >
