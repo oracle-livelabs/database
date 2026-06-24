@@ -4,7 +4,7 @@
 
 **Retail Command Center** helps teams answer a daily operating question: *What needs attention right now, and what evidence supports that call?*
 
-**Oracle AI Database** keeps operational, analytical, and AI-ready retail evidence close to the same schema. Frame this scene around the business user who needs one trusted view of revenue, demand signals, return exposure, and agent activity without stitching together separate systems.
+**Oracle AI Database** keeps operational, analytical, and AI-ready retail evidence close to the same schema. This scene is for the business user who needs one trusted view of revenue, demand signals, return exposure, and agent activity without stitching together separate systems.
 
 The technical challenge is usually integration. A team can spend a lot of time moving data between specialized systems, writing pipelines, and reconciling results before a business user sees one dashboard. This lab shows the simpler pattern: use familiar SQL over one converged database foundation so the command center can combine different kinds of retail evidence without turning the application into an integration project.
 
@@ -32,7 +32,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Review dashboard operating metrics
 
-Perform the following set of steps to connect command-center cards to the operational evidence behind daily retail triage, including revenue, demand spikes, return exposure, and agent activity.
+Perform the following set of steps to connect command-center cards to the operational evidence behind daily retail triage, including revenue, demand spikes, return exposure, and agent activity:
 
 1. Review the related application screen before you run the SQL.
 
@@ -42,7 +42,7 @@ Perform the following set of steps to connect command-center cards to the operat
 
 2. Run this KPI query.
 
-    Use this query to connect each dashboard card to trusted operational data. Explain **scalar subqueries** as a practical way to return one business metric per card, such as orders, revenue, open returns, demand spikes, or agent actions.
+    Use this query to connect each dashboard card to trusted operational data. Scalar subqueries return one business metric per card, such as orders, revenue, open returns, demand spikes, or agent actions.
 
     This block uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
 
@@ -71,7 +71,7 @@ Perform the following set of steps to connect command-center cards to the operat
 
 ## Task 2: Review trending products
 
-Perform the following set of steps to identify where social momentum may point to a sales opportunity, inventory risk, merchandising action, or follow-up demand analysis.
+Perform the following set of steps to identify where social momentum may point to a sales opportunity, inventory risk, merchandising action, or follow-up demand analysis:
 
 1. Use the live **Retail Command Center** context from **Figure 1** before you run the SQL.
 
@@ -124,7 +124,7 @@ Perform the following set of steps to identify where social momentum may point t
 
 ## Task 3: Connect product detail screens to database evidence
 
-Perform the following set of steps to show that a document-style product experience can still come from governed relational retail data.
+Perform the following set of steps to show that a document-style product experience can still come from governed relational retail data:
 
 1. Use the live **Retail Command Center** context from **Figure 1** as the visual anchor for product details and JSON Duality patterns.
 
@@ -144,11 +144,11 @@ Perform the following set of steps to show that a document-style product experie
 
     *Figure 4: The same product story can also be displayed as document-shaped JSON.*
 
- Product detail screens often look document-shaped because the business wants one compact product story: item, brand, category, inventory, demand, and signals in one place. Emphasize that the experience feels document-first, but the underlying evidence still comes from governed relational retail data.
+ Product detail screens often look document-shaped because the business wants one compact product story: item, brand, category, inventory, demand, and signals in one place. The experience feels document-first, but the underlying evidence still comes from governed relational retail data.
 
 ## Task 4: Review revenue by category
 
-Perform the following set of steps to review category revenue so learners can see where demand is converting into sales and where social-driven activity may be influencing performance.
+Perform the following set of steps to review category revenue so learners can see where demand is converting into sales and where social-driven activity may be influencing performance:
 
 1. Run the category revenue query.
 

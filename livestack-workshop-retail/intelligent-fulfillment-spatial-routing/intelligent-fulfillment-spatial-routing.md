@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Fulfillment is where customer experience and operating cost meet. Tighten the opening around the retail decision: the best center is the one that balances speed, coverage, and available stock for the specific order. **Oracle Spatial** keeps those location-aware decisions inside Oracle AI Database next to orders, customers, and inventory. Emphasize that this reduces handoffs between mapping tools and operational systems when the business needs an answer quickly.
+Fulfillment is where customer experience and operating cost meet. The best center is the one that balances speed, coverage, and available stock for the specific order.
+
+**Oracle Spatial** keeps location-aware decisions inside Oracle AI Database next to orders, customers, and inventory. This reduces handoffs between mapping tools and operational systems when the business needs an answer quickly.
 
 In this lab, you work through a practical fulfillment scenario for a Los Angeles customer ordering **AllTerrain Hiking Boots**. You inspect the spatial data behind the **Intelligent Fulfillment Network** page, then use SQL to move from map data to a shipping decision.
 
@@ -35,7 +37,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Understand the retail spatial data model
 
-Perform the following set of steps to see how the retail workshop stores locations and map areas as database data. This is the foundation for every routing, service-zone, and fulfillment decision later in the lab.
+Perform the following set of steps to see how the retail workshop stores locations and map areas as database data. This is the foundation for every routing, service-zone, and fulfillment decision later in the lab:
 
 1. Review the related application screen before you run SQL.
 
@@ -55,7 +57,7 @@ Perform the following set of steps to see how the retail workshop stores locatio
     | Where is demand concentrated? | `DEMAND_REGIONS.BOUNDARY` | Polygon |
     {: title="Retail Spatial Model"}
 
-    Points represent places such as customers or fulfillment centers, and polygons represent service areas or demand regions. Keep the business value explicit: storing both shapes in the database lets the retailer answer coverage and routing questions from the same governed operational data.
+    Points represent places such as customers or fulfillment centers, and polygons represent service areas or demand regions. Storing both shapes in the database lets the retailer answer coverage and routing questions from the same governed operational data.
 
 3. Run this query.
 
@@ -93,7 +95,7 @@ Perform the following set of steps to see how the retail workshop stores locatio
 
 ## Task 2: Produce map-ready GeoJSON
 
-Perform the following set of steps to convert database geometry into a standard format that web maps can display. This is how the same governed data can support both SQL analysis and the map experience in the retail application.
+Perform the following set of steps to convert database geometry into a standard format that web maps can display. This is how the same governed data can support both SQL analysis and the map experience in the retail application:
 
 1. Run this query.
 
@@ -129,7 +131,7 @@ Perform the following set of steps to convert database geometry into a standard 
 
 ## Task 3: Find nearby fulfillment centers
 
-Perform the following set of steps to use location as a fulfillment filter. In the business scenario, the retailer first wants a short list of nearby centers before checking service levels or inventory.
+Perform the following set of steps to use location as a fulfillment filter. In the business scenario, the retailer first wants a short list of nearby centers before checking service levels or inventory:
 
 1. Run this query.
 
@@ -213,7 +215,8 @@ Perform the following set of steps to connect spatial proximity with the product
 
 1. Run this query.
 
-    Distance alone does not decide fulfillment. Reframe the key business point more directly: the best recommendation balances proximity with available stock, so the retailer can protect service levels without creating avoidable stockouts elsewhere.
+    Distance alone does not decide fulfillment. The best recommendation balances proximity with available stock, so the retailer can protect service levels without creating avoidable stockouts elsewhere.
+
     For example, this query ranks active fulfillment centers for customer `1`, but only for centers that have available units of `AllTerrain Hiking Boots`.
 
     ```sql

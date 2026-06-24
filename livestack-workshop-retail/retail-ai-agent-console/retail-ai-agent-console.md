@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Retail AI agents are valuable only when their answers and actions are grounded in trusted systems. Frame this lab around the business question: *How do we let an agent help without giving up control, traceability, or operational trust?*
+Retail AI agents are valuable only when their answers and actions are grounded in trusted systems. This lab answers the business question: *How do we let an agent help without giving up control, traceability, or operational trust?*
 
-This lab does not require a live agent framework. Emphasize that the lesson is architectural and business-focused: approved database tools, governed operational data, and durable action history are what make an agent safe to use.
+This lab does not require a live agent framework. The architectural lesson is the focus: approved database tools, governed operational data, and durable action history are what make an agent safe to use.
 
 ### Operating Story
 
@@ -39,7 +39,7 @@ Perform the following set of steps to confirm that agent workflows can use revie
 
 2. Run this query.
 
-    A tool function is a controlled database API that an application or agent can call. Put the business value first: each approved function limits the agent to reviewed actions, which makes the workflow easier to trust, govern, and audit.
+    A tool function is a controlled database API that an application or agent can call. Each approved function limits the agent to reviewed actions, which makes the workflow easier to trust, govern, and audit.
 
     ```sql
     <copy>
