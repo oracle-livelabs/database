@@ -1,7 +1,7 @@
 # Get Started with the Oracle AI Database Private Agent Factory
 
 ## Introduction
-This seection will walk you through launching and logging into the Private Agent Factory
+This section will walk you through launching and logging into the Private Agent Factory
 
 **Estimated time:** 5 minutes.
 
@@ -41,8 +41,8 @@ You may now **proceed to the next lab**
 
 **Authors** 
 
-* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Database Applied AI Technical Staff
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
-**Last Updated Date** - April, 2026
+**Last Updated Date** - June, 2026
