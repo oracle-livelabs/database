@@ -11,12 +11,12 @@ Estimated Time: 10 minutes
 | Business Problem | Teams need one trusted operating picture before responding to service pressure. |
 | Technical Challenge | The data foundation must combine transactional, JSON, vector, graph, spatial, ML, and audit objects without copying data into disconnected stores. |
 | Persona Focus | Platform engineer and database developer. |
-| What You Will Prove | The schema contains the telecom domains and Oracle feature objects needed for the full operating loop. |
+| What You Will Learn | The schema contains the telecom domains and Oracle feature objects needed for the full operating loop. |
 | Database Capability | Relational SQL, semantic views, Oracle data dictionary, VECTOR columns, JSON Duality, Spatial, Property Graph. |
 | Outcome | Learners can trust the following labs because the schema has a visible governed foundation. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
-**Persona focus:** You are the platform engineer proving that the operating story starts from a complete Oracle data foundation, not disconnected data extracts.
+**Persona focus:** You are the platform engineer confirming that the operating story starts from a complete Oracle data foundation, not disconnected data extracts.
 
 ### Objectives
 
@@ -24,6 +24,8 @@ Estimated Time: 10 minutes
 - Inspect semantic views that express the data in Seer Comms operating language.
 - Verify feature-specific database objects.
 
+
+The image below is the data foundation view. It gives a platform engineer a quick read on whether the data domains behind the telecom workflow are present before anyone trusts the downstream analysis.
 
 ![Data foundation overview](images/data-foundation-overview.png)
 
@@ -33,13 +35,15 @@ You prove that the telecom data foundation is complete enough to support real op
 
 ## Scene Evidence
 
+The image below shows the record-count checkpoint from the application. The SQL in this lab recreates that evidence so you can see how the screen is grounded in governed database rows.
+
 ![Data foundation record counts](images/data-foundation-record-counts.png)
 
 ## Task 1: Count the operating domains
 
 1. Run this SQL block.
 
-    This query counts the major domains that power the rest of the workshop. You are checking breadth, not just row volume.
+    This query counts the major domains that power the rest of the workshop. Each `UNION ALL` branch checks one telecom area, such as services, subscriber signals, service orders, sites, forecasts, and agent actions. Look for all domains to return rows, because missing domains would break later operating decisions.
 
     ```sql
     <copy>
@@ -65,14 +69,14 @@ You prove that the telecom data foundation is complete enough to support real op
     | Telecom services | 32 |
     {: title="Seeded telecom data volumes"}
 
-The counts are a quick health check. You are confirming that this is not a single-table exercise: the same schema carries the service, subscriber, order, network, forecast, and agent data needed for the full operating loop.
+The counts are a quick health check. You are confirming that this is not a single-table exercise: the same schema carries the service, subscriber, order, network, forecast, and agent data needed for the full operating loop. Keeping these domains together reduces reconciliation work when teams move from awareness to action.
 
 
 ## Task 2: Inspect telecom semantic views
 
 1. Run this SQL block.
 
-    This query confirms that learners can use telecom-friendly view names for the rest of the workshop.
+    This query reads `USER_VIEWS` to list the Seer Comms semantic views. The `LIKE 'SEER_COMMS%'` filter keeps the result focused on learner-facing telecom views. Look for service, signal, order, and capacity views, because those names become the stable vocabulary for later SQL.
 
     ```sql
     <copy>
@@ -100,7 +104,7 @@ Your output may include additional Seer Comms views. The important point is the 
 
 1. Run this SQL block.
 
-    This query checks the database objects that make the workshop more than a dashboard exercise.
+    This query reads `USER_OBJECTS` for the feature objects used across the labs. The `IN` list highlights JSON Duality views, graph objects, vector tables, spatial tables, and audit tables. Look for multiple object types, because the point is a converged foundation rather than a single reporting table.
 
     ```sql
     <copy>

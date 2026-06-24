@@ -13,12 +13,12 @@ Estimated Time: 10 minutes
 | Business Problem | Operators need recommendations they can review after the conversation ends. |
 | Technical Challenge | External agent tools can hide data access, routing, confidence, and action history. |
 | Persona Focus | Service assurance leader, AI platform owner, and care operations manager. |
-| What You Will Prove | Approved database tools and agent audit rows can make AI-assisted actions reviewable. |
+| What You Will Learn | Approved database tools and agent audit rows can make AI-assisted actions reviewable. |
 | Database Capability | PL/SQL tools, agent action audit table, Oracle-backed execution. |
 | Outcome | AI assistance becomes operationally auditable, not transient chat. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
-**Persona focus:** You are the AI platform owner proving that every assisted action can be traced to database evidence.
+**Persona focus:** You are the AI platform owner confirming that every assisted action can be traced to database evidence.
 
 ### Objectives
 
@@ -26,7 +26,11 @@ Estimated Time: 10 minutes
 - Check capacity evidence that an approved agent tool can return.
 - Explain how tool evidence and action history make assisted decisions reviewable.
 
+The image below is the agent console workspace. Service assurance and AI platform teams use this area to see agent-assisted recommendations and the tool context behind them. The SQL in this lab shows how those actions can be reviewed from Oracle.
+
 ![Agent console workspace](images/agent-console-workspace.png)
+
+The concept diagram below introduces the trusted-action pattern. It shows why an assistant should call approved tools, read governed evidence, and write action history instead of answering from an opaque conversation.
 
 ![Lab 9: AI-Assisted Service Assurance concept diagram](images/trusted-action-flow.svg)
 
@@ -36,13 +40,15 @@ You close the loop with auditable action. The agent action and capacity queries 
 
 ## Scene Evidence
 
+The image below shows agent tool badges. They help a reviewer see which approved capability the agent used. The SQL in this lab checks the durable action records behind that visual cue.
+
 ![Agent tool badges](images/agent-tool-badges.png)
 
 ## Task 1: Review recent AI-assisted interventions
 
 1. Run this SQL block.
 
-    This query checks whether assisted actions leave a reviewable operational record. If an operator follows an AI recommendation, the organization needs a durable record of what happened.
+    This query checks whether assisted actions leave a reviewable operational record. It reads the agent action view, orders by the latest timestamp, and returns agent name, action type, entity, confidence, and status. If an operator follows an AI recommendation, the organization needs a durable record of what happened.
 
     ```sql
     <copy>
@@ -70,7 +76,7 @@ You close the loop with auditable action. The agent action and capacity queries 
 
 1. Run this SQL block.
 
-    This query shows the kind of approved database evidence an agent tool can return. The agent should not guess about capacity; it should call a trusted path that reads current operational data.
+    This query shows the kind of approved database evidence an agent tool can return. It filters capacity rows for a pressure service and orders the tightest capacity first. The agent should not guess about capacity; it should call a trusted path that reads current operational data.
 
     ```sql
     <copy>

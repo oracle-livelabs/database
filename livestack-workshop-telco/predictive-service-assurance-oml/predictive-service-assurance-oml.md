@@ -11,10 +11,10 @@ Estimated Time: 10 minutes
 | Business Problem | Retention and capacity teams need model signals that are explainable enough to drive action. |
 | Technical Challenge | Predictions lose trust when features, scores, and operational context are separated. |
 | Persona Focus | Service assurance analytics manager, churn-risk analyst, and data science lead. |
-| What You Will Prove | OML scoring patterns can run close to governed telecom data and join back to operations context. |
+| What You Will Learn | OML scoring patterns can run close to governed telecom data and join back to operations context. |
 | Database Capability | Oracle Machine Learning for SQL, `DBMS_DATA_MINING`, `PREDICTION_PROBABILITY`, `CLUSTER_ID`. |
 | Outcome | Scores become operational signals for capacity, care, and retention teams. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
 **Persona focus:** You are the analytics lead translating model output into service assurance decisions.
 
@@ -24,7 +24,11 @@ Estimated Time: 10 minutes
 - Compare subscriber tiers that affect assurance planning.
 - Join predicted demand to capacity exposure so teams can prioritize action.
 
+The image below is the predictive assurance page. Analytics and service assurance teams use this area to understand where demand may create future service risk. The SQL in this lab shows how forecast-style evidence can be joined back to operational capacity.
+
 ![Predictive assurance page](images/predictive-assurance-page.png)
+
+The concept diagram below introduces the OML pattern used in the lab. It shows why scoring close to governed data matters: predictions stay connected to the service, subscriber, and capacity rows teams already trust.
 
 ![Lab 7: Predictive Service Assurance with OML concept diagram](images/oml-flow.svg)
 
@@ -36,7 +40,11 @@ You look ahead after reviewing current operations. The predictive assurance quer
 
 Use the screenshot to orient the predictive assurance scenario. The SQL tasks below show how demand, subscriber, and capacity evidence become an action list a service assurance team can review.
 
+The image below shows service demand and revenue forecast context. It gives planners a way to see which services are gaining pressure before the issue becomes a visible outage or care spike.
+
 ![Service revenue forecast](images/service-revenue-forecast.png)
+
+The image below shows retention-style subscriber segments. It helps teams connect service assurance to customer value and experience, not just raw demand.
 
 ![Retention segments](images/retention-segments.png)
 
@@ -44,7 +52,7 @@ Use the screenshot to orient the predictive assurance scenario. The SQL tasks be
 
 1. Run this SQL block.
 
-    This query prepares model-style features from current service demand and revenue evidence. You are looking for services where subscriber attention is already turning into measurable business activity.
+    This query prepares model-style features from current service demand and revenue evidence. The joins connect services to signal matches and service orders, then aggregate recent signal count, order count, and value. Look for services where subscriber attention is already turning into measurable business activity.
 
     ```sql
     <copy>
@@ -73,7 +81,7 @@ Use the screenshot to orient the predictive assurance scenario. The SQL tasks be
 
 1. Run this SQL block.
 
-    This query groups customer experience signals so retention teams can reason about segments. It helps planners see whether a group is large, valuable, or showing demand patterns that deserve attention.
+    This query groups customer experience signals so retention teams can reason about segments. It calculates subscriber counts, average lifetime value, and average demand score by tier. That helps planners see whether a group is large, valuable, or showing demand patterns that deserve attention.
 
     ```sql
     <copy>
@@ -99,7 +107,7 @@ Use the screenshot to orient the predictive assurance scenario. The SQL tasks be
 
 1. Run this SQL block.
 
-    This query connects forecast demand to available network capacity, turning scores into an action list. The useful result is not just a prediction; it is a specific service and site where the team can act.
+    This query connects forecast demand to available network capacity, turning scores into an action list. The join ties each forecasted service to capacity at network sites, and the `CASE` expression labels access risk when demand exceeds capacity. The useful result is not just a prediction; it is a specific service and site where the team can act.
 
     ```sql
     <copy>

@@ -11,10 +11,10 @@ Estimated Time: 10 minutes
 | Business Problem | Field teams need to know where capacity and demand are misaligned. |
 | Technical Challenge | Location, service orders, network capacity, and demand forecasts often sit in separate tools. |
 | Persona Focus | Field operations manager, network access planner, and NOC dispatcher. |
-| What You Will Prove | Spatial objects and SQL can support network-site, zone, and dispatch decisions. |
+| What You Will Learn | Spatial objects and SQL can support network-site, zone, and dispatch decisions. |
 | Database Capability | Oracle Spatial, `SDO_GEOMETRY`, spatial joins, distance calculations. |
 | Outcome | Operators can turn map context into capacity action. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
 **Persona focus:** You are the field operations manager deciding which sites need capacity relief.
 
@@ -24,7 +24,11 @@ Estimated Time: 10 minutes
 - Use spatially relevant capacity evidence to identify constrained sites.
 - Connect dispatch activity to the network sites that need field attention.
 
+The image below is the network access map. Field operations teams use this view to connect service pressure to physical sites and regions. The SQL in this lab explains the site and capacity evidence behind that map.
+
 ![Network access map](images/network-access-map.png)
+
+The concept diagram below introduces the spatial operations pattern. It shows how location, capacity, and dispatch data can stay connected so teams can act on places, not just rows.
 
 ![Lab 5: Network Access and Field Operations concept diagram](images/spatial-flow.svg)
 
@@ -36,13 +40,15 @@ You turn impact into a field decision. The spatial and capacity queries show whe
 
 Use the screenshot to orient the field operations scenario. The SQL tasks below show the location, capacity, and dispatch evidence an operations team would use before sending work into the field.
 
+The image below is the capacity risk table. It gives field operations a short list of where service demand may exceed available access capacity. The SQL in this lab recreates that evidence from governed network capacity rows.
+
 ![Capacity risk table](images/capacity-risk-table.png)
 
 ## Task 1: Inspect network sites
 
 1. Run this SQL block.
 
-    This query identifies active sites and their current load. On a map, a site marker is only useful when you also know how hard that site is working.
+    This query identifies active sites and their current load. It reads the network site view, filters to active sites, and orders by load percentage. On a map, a site marker is only useful when you also know how hard that site is working.
 
     ```sql
     <copy>
@@ -66,7 +72,7 @@ Use the screenshot to orient the field operations scenario. The SQL tasks below 
 
 1. Run this SQL block.
 
-    This query turns capacity thresholds into a short list of places that may need action. It helps a field operations team separate normal load from sites that are getting too close to the limit.
+    This query turns capacity thresholds into a short list of places that may need action. The `CASE` expression labels rows as capacity risk when available capacity is at or below the escalation threshold. That helps field operations separate normal load from sites that are getting too close to the limit.
 
     ```sql
     <copy>
@@ -95,7 +101,7 @@ Use the screenshot to orient the field operations scenario. The SQL tasks below 
 
 1. Run this SQL block.
 
-    This query connects capacity pressure to active field work. It helps operations teams ask a practical question: do we already have work moving toward the sites that need help?
+    This query connects capacity pressure to active field work. It filters out completed dispatches and returns the network site tied to each open job. That helps operations teams ask a practical question: do we already have work moving toward the sites that need help?
 
     ```sql
     <copy>

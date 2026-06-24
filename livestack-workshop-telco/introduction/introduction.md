@@ -29,6 +29,8 @@ In this workshop, you will:
 - Review predictive assurance patterns that join model-style scores to operations data.
 - Explain trusted natural-language answers and AI-assisted actions with visible database evidence.
 
+The image below is the Seer Comms welcome view. It introduces the telecom operations scenario and frames the workshop around a provider that must react before subscriber experience suffers. Use it as the business anchor for the labs that follow.
+
 ![Seer Comms welcome overview](images/welcome-overview.png)
 
 ## Workshop Story
@@ -38,10 +40,12 @@ In this workshop, you will:
 | Business Problem | A mobile demand surge can create subscriber pain before care, network, field, and retention teams share the same picture. |
 | Technical Challenge | Telecom data often spans OSS, BSS, CRM, care, network, dispatch, AI, and analytics systems. |
 | Persona Focus | Network operations leader, care operations lead, service assurance analyst, platform engineer, and telecom data developer. |
-| What You Will Prove | Oracle AI Database can keep operational, AI-ready, graph, spatial, JSON, ML, and audit data close to one governed foundation. |
+| What You Will Learn | Oracle AI Database can keep operational, AI-ready, graph, spatial, JSON, ML, and audit data close to one governed foundation. |
 | Database Capability | Oracle AI Database 26ai converged data platform capabilities. |
 | Outcome | The provider can move from signal detection to explainable, auditable service assurance action. |
 {: title="Workshop story at a glance"}
+
+The diagram below shows the decision loop you follow in the workshop. It connects the business flow, from awareness to investigation to action, to the Oracle Database capabilities that keep the evidence connected.
 
 ![Seer Comms operating loop](images/operating-loop.svg)
 
@@ -58,6 +62,8 @@ Each lab follows the same pattern:
 The SQL is not just a setup check. Treat each query as evidence in an operations review. The result shows how Oracle AI Database keeps data, search, graph, spatial analysis, prediction, document access, and audit history close enough for a real operator workflow.
 
 Use each screenshot or diagram to orient yourself, then use the SQL result and interpretation to see why the database capability matters.
+
+The image below summarizes the use cases behind the labs. It helps you see that each lab is one part of the same telecom response path, not an isolated feature exercise.
 
 ![Seer Comms use case overview](images/welcome-use-cases.png)
 

@@ -11,10 +11,10 @@ Estimated Time: 10 minutes
 | Business Problem | A 5G demand surge can become a subscriber experience issue before teams agree on the operating picture. |
 | Technical Challenge | Dashboards often require data copied from OSS, BSS, care, service-order, dispatch, and analytics systems. |
 | Persona Focus | Network operations leader and service assurance manager. |
-| What You Will Prove | Oracle SQL can combine service orders, subscriber signals, capacity, and agent actions into one command-center evidence set. |
+| What You Will Learn | Oracle SQL can combine service orders, subscriber signals, capacity, and agent actions into one command-center evidence set. |
 | Database Capability | Relational SQL, semantic views, JSON-ready service context. |
 | Outcome | Operators can move from KPI detection to service-level evidence. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
 **Persona focus:** You are the operations leader deciding where to focus first during the South Florida demand surge.
 
@@ -25,6 +25,8 @@ Estimated Time: 10 minutes
 - Connect high-value service detail to downstream service-order and assurance workflows.
 
 
+The image below is the operations KPI area. A network operations leader would use it to see the scale of service pressure, subscriber signals, dispatch activity, and AI-assisted interventions. The SQL in this lab explains how those cards can be traced back to governed rows.
+
 ![Operations KPI cards](images/operations-kpis.png)
 
 ## How This Lab Fits the Story
@@ -33,7 +35,11 @@ You start like an operations leader during a busy shift: scan the whole situatio
 
 ## Scene Evidence
 
+The image below shows service demand pressure. It helps an operations team decide which services deserve the next investigation step. The lab SQL recreates that ranking logic from service, signal, and order evidence.
+
 ![Service demand pressure](images/service-demand-pressure.png)
+
+The image below previews the service detail handoff. Once an operator identifies a pressure service, the same service identity can flow into document, vector, graph, spatial, predictive, and agent workflows without losing context.
 
 ![Service JSON Duality View](images/service-json-duality-view.png)
 
@@ -41,7 +47,7 @@ You start like an operations leader during a busy shift: scan the whole situatio
 
 1. Run this SQL block.
 
-    This query creates the kind of summary an operations leader needs before drilling into details.
+    This query creates the kind of summary an operations leader needs before drilling into details. Each `UNION ALL` branch counts one operating signal, such as orders, revenue, subscriber signals, pressure services, active dispatches, and AI-assisted interventions. Look for one shared KPI set that different teams can use without reconciling separate reports.
 
     ```sql
     <copy>
@@ -72,7 +78,7 @@ This KPI row is the first shared operating picture. It combines service, signal,
 
 1. Run this SQL block.
 
-    This query ranks services by the number and strength of subscriber-signal matches.
+    This query ranks services by the number and strength of subscriber-signal matches. It groups semantic matches by service, counts signal mentions, reports the strongest similarity score, and labels services as `High` or `Watch`. Look for services with many mentions and strong matches, because those are practical candidates for deeper investigation.
 
     ```sql
     <copy>
@@ -104,7 +110,7 @@ The exact ordering can change as data changes. The important habit is the rankin
 
 1. Run this SQL block.
 
-    This query narrows the investigation to one service identity that later labs can reuse across access patterns.
+    This query narrows the investigation to one service identity that later labs can reuse across access patterns. The `WHERE` clause selects `Fixed Wireless Home Internet`, and the returned service fields give the workshop a consistent handoff point. That matters because every later capability should refer to the same service definition.
 
     ```sql
     <copy>

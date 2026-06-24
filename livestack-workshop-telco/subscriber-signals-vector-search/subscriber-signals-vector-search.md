@@ -13,10 +13,10 @@ Estimated Time: 10 minutes
 | Business Problem | Subscriber pain can surface in app feedback, outage reports, care chats, and community posts before traditional KPIs move. |
 | Technical Challenge | Vector search is risky when sensitive signal text and embeddings must leave the governed database. |
 | Persona Focus | Care operations leader, network experience analyst, and AI engineer. |
-| What You Will Prove | Oracle AI Database can rank telecom services and subscriber signals by semantic meaning using in-database vectors. |
+| What You Will Learn | Oracle AI Database can rank telecom services and subscriber signals by semantic meaning using in-database vectors. |
 | Database Capability | Oracle AI Vector Search, VECTOR columns, `VECTOR_DISTANCE`, in-database embedding model. |
 | Outcome | Teams can prioritize urgent subscriber intent without splitting the signal corpus into a separate vector store. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
 **Persona focus:** You are the care operations analyst looking for urgent meaning across subscriber language.
 
@@ -27,7 +27,11 @@ Estimated Time: 10 minutes
 - Inspect high-priority signals that explain why a service needs attention.
 
 
+The image below is the subscriber signals page. Care and network teams use this area to see how subscriber language clusters around services. The SQL in this lab shows how semantic matches behind the page can be queried from Oracle.
+
 ![Subscriber signals page](images/subscriber-signals-page.png)
+
+The concept diagram below introduces the vector search pattern. It shows how text and embeddings stay connected to source service and signal rows, which helps search results remain governed instead of becoming a detached search index.
 
 ![AI Vector Search flow](images/vector-search-flow.svg)
 
@@ -37,13 +41,15 @@ You move from dashboard symptoms to the words subscribers actually use. The vect
 
 ## Scene Evidence
 
+The image below is the signal feed result area. It gives care operations a way to inspect the subscriber words behind a service-pressure score. The SQL in this task returns the raw evidence that explains why a service is being prioritized.
+
 ![Signal feed results](images/signal-feed-results.png)
 
 ## Task 1: Verify signal and service embeddings
 
 1. Run this SQL block.
 
-    This query confirms that both sides of semantic matching exist: services and subscriber signals.
+    This query confirms that both sides of semantic matching exist: service embeddings and subscriber-signal embeddings. The `UNION ALL` result should return counts for both sets. If either side is missing, the database cannot compare subscriber language to services by meaning.
 
     ```sql
     <copy>
@@ -67,7 +73,7 @@ This count confirms that semantic search has material to work with. Services and
 
 1. Run this SQL block.
 
-    This query summarizes which services attract the most semantically similar subscriber signals.
+    This query summarizes which services attract the most semantically similar subscriber signals. It groups `SEER_COMMS_SIGNAL_MATCHES_V` by service, counts matches, and reports strongest and average similarity. Look for services with many matches and high similarity, because those services are where subscriber language is concentrating.
 
     ```sql
     <copy>
@@ -98,7 +104,7 @@ This result turns noisy feedback into a short list. When many subscriber signals
 
 1. Run this SQL block.
 
-    This query shows the raw subscriber evidence behind the ranked service pressure.
+    This query shows the raw subscriber evidence behind the ranked service pressure. It orders signals by exposure and escalations, then returns a short text excerpt. Look for the combination of reach, escalation, and wording so the ranking feels explainable rather than mysterious.
 
     ```sql
     <copy>

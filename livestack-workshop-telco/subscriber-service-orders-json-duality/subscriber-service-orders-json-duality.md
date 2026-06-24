@@ -11,12 +11,12 @@ Estimated Time: 10 minutes
 | Business Problem | Care and partner teams need document-shaped order access while operations teams need relational truth. |
 | Technical Challenge | Duplicating service orders into document stores creates synchronization and governance risk. |
 | Persona Focus | Service operations manager, care lead, and API platform owner. |
-| What You Will Prove | JSON Relational Duality can expose the same service order as relational rows and a nested JSON document. |
+| What You Will Learn | JSON Relational Duality can expose the same service order as relational rows and a nested JSON document. |
 | Database Capability | JSON Relational Duality Views, SQL/JSON, relational constraints. |
 | Outcome | The same transaction can serve operational SQL and application document access. |
-{: title="What this lab proves"}
+{: title="What this lab covers"}
 
-**Persona focus:** You are the API platform owner proving that document-style service-order access does not require a separate document database.
+**Persona focus:** You are the API platform owner confirming that document-style service-order access does not require a separate document database.
 
 ### Objectives
 
@@ -24,7 +24,11 @@ Estimated Time: 10 minutes
 - Inspect the line items that explain order value and service mix.
 - Return the same order as a JSON document for application-style access.
 
+The image below is the service orders page. Care teams use this area to inspect order status, subscriber context, and operational value. The SQL in this lab shows how the same order can serve both operational review and application access.
+
 ![Service orders page](images/service-orders-page.png)
+
+The concept diagram below introduces JSON Relational Duality. It shows how one Oracle transaction can appear as relational rows for analysts and as a JSON document for applications.
 
 ![Lab 6: Subscriber Service Orders with JSON Relational Duality concept diagram](images/json-duality-flow.svg)
 
@@ -36,13 +40,15 @@ You inspect the service order that records operational action. The relational an
 
 Use the screenshot to orient the service-order workflow. The SQL tasks below show how one Oracle transaction can look like rows to an analyst and like a document to an application.
 
+The image below shows the service order document view. Application teams can use this shape without forcing operations teams to give up relational truth. The SQL in this task returns the document-style representation from Oracle.
+
 ![Service order JSON document](images/service-order-json-document.png)
 
 ## Task 1: Query a service order relationally
 
 1. Run this SQL block.
 
-    This query starts with the traditional operational view of one service order. It gives care and operations teams the basic facts: who, where, status, value, and dispatch cost.
+    This query starts with the traditional operational view of one service order. It selects the order identifier, subscriber, location, status, value, and dispatch cost from the service order view. Look for one clear order row that care and operations teams can discuss together.
 
     ```sql
     <copy>
@@ -63,7 +69,7 @@ Use the screenshot to orient the service-order workflow. The SQL tasks below sho
 
 1. Run this SQL block.
 
-    This query verifies the detail rows that make up the order total and service mix. Line items matter because they explain what the subscriber is actually receiving.
+    This query verifies the detail rows that make up the order total and service mix. It joins order items to products so the result includes service names, categories, quantities, and line totals. Line items matter because they explain what the subscriber is actually receiving.
 
     ```sql
     <copy>
@@ -93,7 +99,7 @@ Use the screenshot to orient the service-order workflow. The SQL tasks below sho
 
 1. Run this SQL block.
 
-    This query returns the same order through the JSON document shape used by application workflows. The application gets a nested order document, while Oracle preserves the relational source of truth.
+    This query returns the same order through the JSON document shape used by application workflows. `JSON_SERIALIZE` formats the document, and `JSON_VALUE` filters to the order you already inspected relationally. The application gets a nested order document, while Oracle preserves the relational source of truth.
 
     ```sql
     <copy>
