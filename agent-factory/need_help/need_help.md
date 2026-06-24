@@ -32,7 +32,7 @@ Check out the [Oracle AI Database Private Agent Factory listing](https://cloudma
 
 **Authors** 
 
-* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Database Applied AI Technical Staff
 * Allen Hosler, Principal Product Manager, Database Applied AI
 
 **Last Updated Date** - February, 2026
