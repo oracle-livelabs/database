@@ -1,165 +1,259 @@
-# Customer Trend Signals with AI Vector Search
+# Customer Trend Signals
 
 ## Introduction
 
-Customer demand often shows up in shopper language and creator activity before it shows up in sales reports. That signal is easy to miss when product language, reviews, social posts, sentiment, and inventory data sit in different places. This lab follows the Customer Trend Signals scene in the runbook and shows how search by meaning can connect shopper intent to products.
+**Customer Trend Signals** helps retail teams answer a practical business question: how do we find the products customers likely mean, not just the words they happened to type?
 
-Oracle AI Database keeps vector search, SQL, row-level security, and operational retail data together. The LiveStack application connects product language, creator posts, reviews, returns, demand, and community signals. In SQL Worksheet, you verify the prebuilt vector artifacts, safely refresh product embeddings, and run dynamic semantic search against database-managed product vectors.
+**Oracle AI Database** keeps vector search, SQL, security, and operational retail data together. Semantic search is easier to trust when the product catalog, creator activity, and business controls stay in the same governed environment.
 
-Estimated Time: 10 minutes
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Shoppers and creators describe products in natural language that rarely matches exact catalog terms. |
+| What You Will Prove | A shopper phrase can match relevant products and social posts by meaning, not just keywords. |
+| Database Capability | Oracle AI Vector Search stores embeddings and compares vectors with SQL distance functions. |
+| Outcome | Merchandising teams can detect demand and product fit from language signals while the evidence stays in the retail database. |
+{: title="Customer Trend Signals Story"}
+
+**Persona focus:** Merchandising and marketing teams want to understand shopper intent and social language. The technical team needs to compare that language to product data without sending sensitive catalog or signal data to a separate search stack.
+
+Estimated Time: **10 minutes**
 
 ### Objectives
 
-- Connect Semantic Product Discovery to product embeddings stored in Oracle Database.
-- Verify and safely refresh product embeddings with the MiniLM embedding model.
-- Run dynamic semantic search with `VECTOR_EMBEDDING` and `VECTOR_DISTANCE`.
-- Connect Social Trend Intelligence to cached creator-post and product matches.
-- Explain how shopper language, social momentum, sentiment, and product demand become governed SQL evidence.
+- Review the MiniLM embedding model and the vector tables used by the retail application.
+- Generate a new text embedding so learners can see how a plain-language shopper need becomes searchable business evidence.
+- Compare a search phrase to product vectors by cosine distance so the business can rank products by meaning, not just keyword overlap.
+- Run a semantic product search that turns plain-language intent into a shortlist the merchandising or digital-commerce team can act on.
+- Connect semantic product matches to posts, creators, and momentum so the result can inform merchandising, campaign, and inventory decisions.
 
 
-## Task 1: Review Customer Trend Signals
+## Task 1: Review Customer Trend Signals and vector artifacts
+
+Perform the following set of steps to understand how natural language, product data, and social activity become searchable demand evidence.
+
 1. Review the related application screen before you run the SQL.
 
     ![Customer Trend Signals overview with semantic search and social intelligence](images/customer-trend-signals-overview.png " ")
 
     *Figure 1: Customer Trend Signals connects semantic product discovery with social trend intelligence.*
 
-    ![Oracle Internals sidebar describing VECTOR_EMBEDDING and VECTOR_DISTANCE](images/vector-internals-sidebar.png " ")
+    The page shows two connected ideas. **Semantic Product Discovery** uses vector search to match natural language to catalog items. **Social Trend Intelligence** connects product demand to creator posts, platforms, and social momentum.
 
-    *Figure 2: The runbook calls out prebuilt product vectors, post vectors, semantic matches, and VPD-governed vector search.*
+2. Understand the embedding model used in this lab.
 
-    The page shows two connected ideas. Semantic Product Discovery uses vector search to match shopper language to catalog items. Social Trend Intelligence connects product demand to creator posts, platforms, and social momentum. The compact loader now prepares the product vectors, post vectors, and semantic matches that the application uses. In the next task, you inspect and safely refresh the product embeddings so you understand how the semantic search portion works.
+    The workshop seed loads Oracle's ONNX version of `all-MiniLM-L12-v2` into the database as ADMIN.`ALL_MINILM_L12_V2`. Because the model is already available in the environment, learners can move directly from plain-language retail questions to semantic search without leaving the database workflow.
 
-## Task 2: Verify and refresh product embeddings
-1. Use the live Customer Trend Signals context from Figure 1 before you run the SQL.
+    In this lab, you use it to turn natural language search phrases, product descriptions, and social post text into vectors that can be compared with SQL. The important learning point is not the specific model name; it is the architecture. The model runs in the database, the vectors are stored in the database, and the search runs against governed retail data without sending the source text to a separate embedding service.
 
-2. Verify and refresh the product embeddings.
+## Task 2: Create an embedding from natural language
 
-    An embedding is a list of numbers that represents meaning. Products with similar language produce vectors that are close to each other. This block uses `MERGE` to refresh `PRODUCT_EMBEDDINGS` from active products without dropping the table or leaving the application without vectors. It uses product name, category, subcategory, and tags as the source text. The `EMBED_RETAIL_TEXT` helper calls Oracle Database `VECTOR_EMBEDDING` with the MiniLM model, stores one vector per product, and confirms the row count.
+Perform the following set of steps to see how Oracle AI Database turns natural language text into a vector embedding.
+
+1. Generate a vector for a natural language phrase.
+
+    Vector search starts by converting text into numbers. An embedding is a vector that captures the meaning of the text well enough that similar phrases end up close together in vector space. In this first step, you are not searching yet. You are just asking the database to show what it creates from one natural language phrase.
+
+    `DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING` calls the embedding model stored in Oracle AI Database and returns a `VECTOR`. Here, the provider is `database` because the MiniLM ONNX model is already loaded in this workshop environment.
 
     ```sql
     <copy>
-    MERGE INTO product_embeddings pe
-    USING (
+    SELECT 'summer running shoes lightweight breathable' AS "Search Text",
+           DBMS_LOB.SUBSTR(
+             VECTOR_SERIALIZE(
+               DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
+                 'summer running shoes lightweight breathable',
+                 JSON('{"provider":"database","model":"ADMIN.ALL_MINILM_L12_V2"}')
+               )
+             ),
+             80,
+             1
+           ) || ' ...' AS "Vector Preview";
+    </copy>
+    ```
+
+    **Expected output:**
+
+    | Search Text | Vector Preview |
+    | --- | --- |
+    | summer running shoes lightweight breathable | `[-2.49050539E-002,4.08752263E-002,-3.4535341E-002,-2.54850631E-004,7.1449 ...` |
+    {: title="Generated Query Embedding"}
+
+2. The preview is only the beginning of the vector. You do not interpret the individual numbers by eye. The important point is that the database generated a vector representation of the phrase, and the next tasks use `VECTOR_DISTANCE` to compare that vector with product vectors.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+
+## Task 3: Calculate vector distance against known products
+
+Perform the following set of steps to see how vector distance turns meaning into a ranked result.
+
+1. Compare the query vector with a few known product vectors.
+
+    `VECTOR_DISTANCE` measures how close two vectors are in meaning. A lower cosine distance means the product is more likely to match the shopper's intent, even when the product name does not reuse the same words.
+
+    The `CROSS JOIN` attaches one generated query vector to the product rows being compared. The inner `SELECT` creates that single query-vector row from a natural language phrase at runtime.
+
+    ```sql
+    <copy>
+    -- Pick a small set of known products so the distance calculation is easy to inspect.
+    WITH candidates AS (
       SELECT p.product_id,
-             'ALL_MINILM_L12_V2' AS embedding_model,
-             TO_CLOB(
-               p.product_name || ' ' ||
-               p.category || ' ' ||
-               NVL(p.subcategory, '') || ' ' ||
-               NVL(p.tags, '')
-             ) AS embedding_text,
-             embed_retail_text(
-               p.product_name || ' ' ||
-               p.category || ' ' ||
-               NVL(p.subcategory, '') || ' ' ||
-               NVL(p.tags, '')
-             ) AS embedding
+             p.product_name,
+             p.category,
+             pe.embedding
       FROM products p
-      WHERE p.is_active = 1
-    ) src
-    ON (pe.product_id = src.product_id AND pe.embedding_model = src.embedding_model)
-    WHEN MATCHED THEN UPDATE SET
-      pe.embedding_text = src.embedding_text,
-      pe.embedding = src.embedding,
-      pe.created_at = SYSTIMESTAMP
-    WHEN NOT MATCHED THEN INSERT (
-      product_id,
-      embedding_model,
-      embedding_text,
-      embedding
-    ) VALUES (
-      src.product_id,
-      src.embedding_model,
-      src.embedding_text,
-      src.embedding
-    );
+      JOIN product_embeddings pe ON pe.product_id = p.product_id
+      WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
+        AND p.product_id IN (37, 39, 46, 132, 181)
+    )
+    SELECT c.product_name AS "Product",
+           c.category AS "Category",
+           -- Lower cosine distance means the product is closer in meaning to the phrase.
+           ROUND(VECTOR_DISTANCE(c.embedding, q.query_vector, COSINE), 4) AS "Cosine Distance"
+    FROM candidates c
 
-    COMMIT;
+    -- Create one query vector from the natural language phrase.
+    CROSS JOIN (
+      SELECT 'summer running shoes lightweight breathable' AS search_text,
+             DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
+               'summer running shoes lightweight breathable',
+               JSON('{"provider":"database","model":"ADMIN.ALL_MINILM_L12_V2"}')
+             ) AS query_vector
+    ) q
 
-    SELECT COUNT(*) AS "Product Embeddings"
-    FROM product_embeddings
-    WHERE embedding_model = 'ALL_MINILM_L12_V2';
+    -- Rank the known products from closest meaning to farthest meaning.
+    ORDER BY VECTOR_DISTANCE(c.embedding, q.query_vector, COSINE), c.product_id;
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
-    | Product Embeddings |
-    | ---: |
-    | 187 |
-    {: title="Product Embeddings"}
+    | Product | Category | Cosine Distance |
+    | --- | --- | ---: |
+    | AirGlide Runner | Footwear | 0.3825 |
+    | Marathon Elite Racer | Footwear | 0.4049 |
+    | Barefoot Minimalist Shoe | Footwear | 0.4187 |
+    | AllTerrain Hiking Boots | Outdoor | 0.5394 |
+    | ThermoFlask 32oz | Outdoor | 0.6999 |
+    {: title="Product Vector Distances"}
 
-3. The product catalog now has vectors that the next query can compare with a shopper-style search phrase.
+2. The first three results are all running or shoe products, even though the search phrase did not use the exact product names. That is the key learning point: vector search compares meaning, not just matching words.
 
-## Task 3: Search products by meaning
-1. Run this dynamic semantic search.
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
-    Retail users often ask conceptual questions, such as "summer running shoes lightweight breathable." This block embeds that phrase at query time with `EMBED_RETAIL_TEXT`. It compares the query vector with the product vectors you generated. `VECTOR_DISTANCE` measures how far apart two vectors are; cosine distance is commonly used for text embeddings. Lower distance means the product is closer in meaning to the search phrase.
+## Task 4: Search products by meaning
+
+Perform the following set of steps to turn the distance calculation into a semantic product search:
+
+1. Search the full product embedding table.
+
+    In this step, a plain-language phrase becomes a vector and is compared with stored product vectors to return the closest matches. Keep the business value up front: this is how a retailer can surface relevant products when customers describe need, occasion, or style instead of exact SKU names.
+
+    `DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING` converts the text you type, such as a shopper's search phrase, into a vector using the MiniLM embedding model. `VECTOR_DISTANCE` compares that new search vector to each stored product vector. A smaller distance means the product is more semantically similar to the search phrase.
+
+    The query sorts by distance so the best matches appear first, even when the product description does not contain the exact same words as the search phrase.
 
     ```sql
     <copy>
-    WITH query_ctx AS (
-      SELECT 'summer running shoes lightweight breathable' AS query_text,
-             embed_retail_text('summer running shoes lightweight breathable') AS query_vector
-      FROM dual
+    WITH search_vector AS (
+      SELECT DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
+               'comfortable shoes for walking all day',
+               JSON('{"provider":"database", "model":"ADMIN.ALL_MINILM_L12_V2"}')
+             ) AS query_vector
     )
-    SELECT q.query_text AS "Search Phrase",
-           p.product_name AS "Product",
+    SELECT p.product_name AS "Product",
            p.category AS "Category",
-           ROUND(VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), 4) AS "Distance"
-    FROM product_embeddings pe
-    JOIN products p ON p.product_id = pe.product_id
-    CROSS JOIN query_ctx q
+           ROUND(VECTOR_DISTANCE(pe.embedding, sv.query_vector, COSINE), 4) AS "Distance"
+    FROM products p
+    JOIN product_embeddings pe
+      ON pe.product_id = p.product_id,
+    search_vector sv
     WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
-    ORDER BY VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), p.product_id
+    ORDER BY "Distance",
+             p.product_name
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
-    | Search Phrase | Product | Category | Distance |
-    | --- | --- | --- | ---: |
-    | summer running shoes lightweight breathable | AirGlide Runner | Footwear | 0.3825 |
-    | summer running shoes lightweight breathable | Marathon Elite Racer | Footwear | 0.4049 |
-    | summer running shoes lightweight breathable | Barefoot Minimalist Shoe | Footwear | 0.4187 |
-    | summer running shoes lightweight breathable | WinterGrip Boot | Footwear | 0.4545 |
-    | summer running shoes lightweight breathable | StreetFlex Sneaker | Footwear | 0.473 |
-    {: title="Semantic Search Results"}
+    | Product | Category | Distance |
+    | --- | --- | ---: |
+    | Barefoot Minimalist Shoe | Footwear | 0.5258 |
+    | SlipStream Slide | Footwear | 0.5599 |
+    | StreetFlex Sneaker | Footwear | 0.5913 |
+    | Cyber Mesh Sneakers | Footwear | 0.5919 |
+    | WinterGrip Boot | Footwear | 0.6086 |
+    {: title="Semantic Product Search"}
 
-2. Try a different shopper phrase.
+2. Try a different natural language phrase with the same pattern.
 
-    Change the search phrase in both places inside `query_ctx`: the displayed `query_text` value and the value passed into `embed_retail_text`. For example, replace `summer running shoes lightweight breathable` with `soft cotton shirts for travel`.
+    This version changes the text to `sustainable fashion eco friendly clothing`, one of the other natural language search phrases shown in the application. The same vector-search pattern still works because the database generates a new query vector at runtime.
+
+    Some catalog display names appear more than once. This version groups by product name and category and keeps the smallest distance for each displayed product, so the learner sees one clean row per product.
 
     ```sql
     <copy>
-    WITH query_ctx AS (
-      SELECT 'soft cotton shirts for travel' AS query_text,
-             embed_retail_text('soft cotton shirts for travel') AS query_vector
-      FROM dual
+    WITH search_vector AS (
+      SELECT DBMS_VECTOR_CHAIN.UTL_TO_EMBEDDING(
+               'sustainable fashion eco friendly clothing',
+               JSON('{"provider":"database", "model":"ADMIN.ALL_MINILM_L12_V2"}')
+             ) AS query_vector
     )
-    SELECT q.query_text AS "Search Phrase",
-           p.product_name AS "Product",
+    SELECT p.product_name AS "Product",
            p.category AS "Category",
-           ROUND(VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), 4) AS "Distance"
-    FROM product_embeddings pe
-    JOIN products p ON p.product_id = pe.product_id
-    CROSS JOIN query_ctx q
+           ROUND(MIN(VECTOR_DISTANCE(pe.embedding, sv.query_vector, COSINE)), 4) AS "Distance"
+    FROM products p
+    JOIN product_embeddings pe
+      ON pe.product_id = p.product_id,
+    search_vector sv
     WHERE pe.embedding_model = 'ALL_MINILM_L12_V2'
-    ORDER BY VECTOR_DISTANCE(pe.embedding, q.query_vector, COSINE), p.product_id
+    GROUP BY p.product_name,
+             p.category
+    ORDER BY "Distance",
+             p.product_name
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-3. The closest products show how shopper language becomes ranked product evidence for promotion, inventory, and trend analysis.
+    **Expected output:**
 
-## Task 4: Inspect social trend matches
-1. Use the Social Trend Intelligence region in Figure 1 before you run the SQL.
+    | Product | Category | Distance |
+    | --- | --- | ---: |
+    | RidgeLine Fleece Hoodie | Athletic Apparel | 0.6023 |
+    | StormRunner Trail Shell | Athletic Apparel | 0.6142 |
+    | Summit Graphic Training Tee | Athletic Apparel | 0.6288 |
+    | Stadium Travel Blanket | Outdoor Lifestyle | 0.6365 |
+    | Ultralight Rain Jacket | Outdoor | 0.6441 |
+    {: title="Alternate Semantic Product Search"}
 
-2. Run this query.
+3. These rankings become useful merchandising evidence. A retail user can start with natural language, find nearby products, and then connect those products to inventory, orders, promotions, or social demand.
 
-    Social Trend Intelligence is the second half of the scene. It monitors creator posts, customer conversations, sentiment, and momentum. This block joins cached semantic matches to social posts, influencers, and products. The result explains which posts align to which products.
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## Task 5: Inspect social trend matches
+
+Perform the following set of steps to see which posts, creators, platforms, and products may deserve merchandising, inventory, or campaign follow-up:
+
+1. Use the **Social Trend Intelligence** region in **Figure 1** before you run the SQL.
+
+2. Read the matching pattern.
+
+    The workshop seed already stores product and social post embeddings. To do this with your own data later, use the same four-part pattern:
+
+    | Part | What it does in this query |
+    | --- | --- |
+    | Start with source rows | `SOCIAL_POSTS` provides the post, platform, and momentum context. |
+    | Join to source vectors | `POST_EMBEDDINGS` provides the vector for each social post. |
+    | Compare to candidate vectors | `PRODUCT_EMBEDDINGS` provides product vectors to compare against. |
+    | Score and sort | `1 - VECTOR_DISTANCE(...)` turns distance into a similarity score, then the query sorts highest score first. |
+    {: title="Vector Match Pattern"}
+
+3. Run this query.
+
+    The `SELECT` list returns two kinds of information. `Momentum`, `Platform`, `Creator`, and `Product` are business context columns that make the result readable. `Score` is the vector calculation. `VECTOR_DISTANCE` returns a distance where lower is closer, so the query uses `1 - VECTOR_DISTANCE(...)` to display it as a similarity score where higher is better.
 
     ```sql
     <copy>
@@ -167,21 +261,32 @@ Estimated Time: 10 minutes
            sp.platform AS "Platform",
            NVL(i.handle, 'customer') AS "Creator",
            p.product_name AS "Product",
-           ROUND(sm.similarity_score, 5) AS "Score"
-    FROM semantic_matches sm
-    JOIN social_posts sp ON sp.post_id = sm.post_id
+           ROUND(1 - VECTOR_DISTANCE(post_vec.embedding, prod_vec.embedding, COSINE), 5) AS "Score"
+    FROM social_posts sp
+
+    -- Get the vector for each social post.
+    JOIN post_embeddings post_vec
+      ON post_vec.post_id = sp.post_id
+     AND post_vec.embedding_model = 'ALL_MINILM_L12_V2'
+
+    -- Add human-readable context for the result.
     LEFT JOIN influencers i ON i.influencer_id = sp.influencer_id
-    JOIN products p ON p.product_id = sm.product_id
-    ORDER BY ROUND(sm.similarity_score, 5) DESC,
-             sm.match_rank,
+
+    -- Compare each selected post vector with product vectors.
+    CROSS JOIN product_embeddings prod_vec
+    JOIN products p ON p.product_id = prod_vec.product_id
+
+    WHERE prod_vec.embedding_model = 'ALL_MINILM_L12_V2'
+      AND sp.momentum_flag IN ('viral', 'mega_viral')
+    ORDER BY "Score" DESC,
              p.product_name,
-             sm.post_id,
-             sm.product_id
+             sp.post_id,
+             p.product_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Momentum | Platform | Creator | Product | Score |
     | --- | --- | --- | --- | ---: |
@@ -197,7 +302,19 @@ Estimated Time: 10 minutes
     | viral | tiktok | `@summit_alex_260` | Adaptogen Recovery Powder | 0.80741 |
     {: title="Social Product Matches"}
 
-3. This result ties the page back to the runbook story. The application is not only searching a catalog. It connects demand to creator handles, platforms, momentum, and social posts. The next lab uses the creator network to show how those signals can spread through communities.
+4. Interpret the result.
+
+    These rows came back because the text in viral or mega-viral social posts is semantically close to the product embedding. For example, several high-scoring posts match **Matcha Endurance Starter Kit**, which suggests that multiple creator conversations are using language close to that product's description. 
+    
+    The query did not look for exact product names. It compared vectors, so it can find related demand signals even when the post uses different words. A business user would care because the result connects social momentum to products the retailer can act on. 
+    
+    Merchandising teams can decide which products to feature, marketing teams can see which creators or platforms are driving relevant conversation, and inventory teams can watch products that may need replenishment if social demand keeps building. The database keeps the social signal, product catalog, embeddings, and SQL analysis together, so the result is explainable and tied back to operational data.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## More AI Vector Search labs
+
+This lab is meant to give you a sample of the power of Oracle AI Database's vector capabilities in a retail scenario. For more information and hands-on labs, go to the full [Exploring AI Vector Search LiveLab](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166&session=116494046566967). You can also learn more in the [Oracle AI Vector Search User's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/).
 
 ## Acknowledgements
 

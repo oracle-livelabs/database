@@ -27,11 +27,11 @@ This lab assumes you have:
 ## Task 1: View the Overall Workflow
 
 1. Open the navigation menu and click **Definitions**, and then click the **Workflows** tab.
-   The Workflows list page opens. All the workflows that you have defined are displayed in a table.
+    The Workflows list page opens. All the workflows that you have defined are displayed in a table.
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
-   The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks in the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
-  ![View a workflow](images/view-workflow.png)
+    The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks in the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
+    ![View a workflow](images/view-workflow.png)
 
 3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
    ![View a workflow](images/view-workflow-json.png)
@@ -56,18 +56,18 @@ This lab assumes you have:
     </copy>
     ```
 
-5. Click **Execute Workflow** to run the selected workflow.
-   ![Select a workflow that you want to view in the Workflow UI](images/workbench-workflow.png)
+5. Click **Execute** to run the selected workflow.
+    ![Select a workflow that you want to view in the Workflow UI](images/workbench-workflow.png)
 
-    Under **Execution History**, a new workflow execution ID is displayed along with the status of the workflow.
+    Under **History**, a new workflow execution ID is displayed along with the status of the workflow.
 
     ![View the workflow execution ID](images/execution-history.png)
 
-6. Click the workflow execution ID. The status of the workflow execution is displayed as shown in the following image. Green indicates that the steps have already been executed successfully.
+6. Click the workflow execution ID. The status of the workflow execution is displayed as shown in the following image. Green tick inside a task indicates that the steps have already been executed successfully.
     ![View the status of the workflow execution](images/workflow-execution-status.png)
 
 7. Click **Refresh** to view the updated status of the workflow after a few seconds. It might take 90 seconds or more to execute the workflow completely.
-    When the Send Email notification step turns green as shown in the following image, the workflow stops executing.
+    When a green tick appears on the Send Email notification step as shown in the following image, the workflow stops executing.
     ![View the status of the workflow execution](images/human-task-approval.png)
 
 A notification is sent to the Thunderbird email client that you had configured earlier. As shown in the following figure the notification is a request to approve the loan. Note that the email notification is sent for the highlighted workflow ID. This requires a human being to review the documents and approve the loan request.
@@ -80,15 +80,15 @@ The workflow does not progress until a human approves or rejects the loan reques
 1. Open the MicroTx Workflow UI in a new browser tab.
 
 2. Open the navigation menu and click **Workflow Notification**.
-   ![View the status of the workflow execution](images/workflow-notification.png)
+    ![View the status of the workflow execution](images/workflow-notification.png)
 
 3. Click **Act**.
-   The **Take Action on Task** dialog box appears.
+    The **Take Action on Task** dialog box appears.
 
 4. Select **Completed** in the **Status** drop-down list to approve the loan.
 
 5. Select the **Approved** check box.
-   ![Approve action](images/take-action.png)
+    ![Approve action](images/take-action.png)
 
 6. Click **Submit**.
     A message is displayed that the task was updated successfully.
@@ -96,12 +96,12 @@ The workflow does not progress until a human approves or rejects the loan reques
 7. Click **OK**.
 
 8. Refresh the browser tab where the status of the workflow execution is displayed in Workbench.
-    The human approval task is now marked in green and status of the workflow changes to **Completed**.
+    A green tick mark appears on the human approval task to indicate that the steps have been executed successfully and status of the workflow changes to **Completed**.
     ![Workflow execute complete](images/workflow-run-complete.png)
 
 ## Task 4: Verify the Status of the Loan Application
 
-1. Copy the Workflow ID from the Workbench as shown in the following image.
+1. Copy the Workflow ID from the execution page of the workflow.
     ![Workflow ID](images/workflow-id.png)
 
 1. Open Oracle SQL Developer.
@@ -125,4 +125,4 @@ The workflow does not progress until a human approves or rejects the loan reques
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** -  Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, February 2026
+* **Last Updated By/Date** - Sylaja Kannan, June 2026

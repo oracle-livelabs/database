@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="660" viewBox="0 0 1360 660" role="img" aria-labelledby="title desc">
+  <title id="title">Trusted agent action concept flow</title>
+  <desc id="desc">A media launch question flows through approved PL/SQL tools, grounded evidence, and a durable audit record.</desc>
+  <rect width="1360" height="660" fill="#f6f3ef"/>
+  <rect x="28" y="28" width="1304" height="604" rx="28" fill="#ffffff" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="60" y="76" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#312d2a">Trusted Agent Actions Need a Constrained Database Path</text>
+  <rect x="78" y="188" width="220" height="132" rx="22" fill="#fff7f4" stroke="#c74634" stroke-width="2"/>
+  <text x="110" y="230" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#7d2f25">Launch Question</text>
+  <text x="110" y="262" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">The operating ask</text>
+  <rect x="362" y="140" width="250" height="228" rx="22" fill="#f5efe8" stroke="#aa643b" stroke-width="2"/>
+  <text x="394" y="184" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#714121">Approved Tools</text>
+  <text x="394" y="220" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Only vetted PL/SQL functions</text>
+  <text x="394" y="244" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">can read, search, or update</text>
+  <text x="394" y="268" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">media operations data.</text>
+  <rect x="676" y="140" width="252" height="228" rx="22" fill="#e9f3f6" stroke="#437c94" stroke-width="2"/>
+  <text x="708" y="184" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#255164">Grounded Evidence</text>
+  <text x="708" y="220" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Responses cite governed tables,</text>
+  <text x="708" y="244" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">views, and deterministic query</text>
+  <text x="708" y="268" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">paths instead of hidden logic.</text>
+  <rect x="992" y="176" width="220" height="156" rx="22" fill="#edf6ef" stroke="#4c825c" stroke-width="2"/>
+  <text x="1024" y="220" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f593b">Audit Row</text>
+  <text x="1024" y="256" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Every action is logged for</text>
+  <text x="1024" y="280" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">review, policy, and trust.</text>
+  <path d="M298 254 H342" stroke="#c74634" stroke-width="4" fill="none"/>
+  <polygon points="342,254 326,246 326,262" fill="#c74634"/>
+  <path d="M612 254 H656" stroke="#aa643b" stroke-width="4" fill="none"/>
+  <polygon points="656,254 640,246 640,262" fill="#aa643b"/>
+  <path d="M928 254 H972" stroke="#437c94" stroke-width="4" fill="none"/>
+  <polygon points="972,254 956,246 956,262" fill="#437c94"/>
+</svg>

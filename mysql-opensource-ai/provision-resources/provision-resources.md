@@ -46,6 +46,7 @@ In this task, you will provision the cloud infrastructure required for the works
     - **Developer Services → Resource Manager → Stacks**
 
     ![Navigate to resource manager](images/lab1image1.png "Navigate to resource manager")
+    
     ![Navigate to stack](images/lab1image2.png "Navigate to stack")
 
 
