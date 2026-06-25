@@ -96,7 +96,7 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
     The expected top result is `Mortgage Pre-Approval`, followed by related lending and risk analytics products. The ranking matters because it acts like an analyst assistant: it brings likely matches to the top even when the search phrase and product name are not identical.
 
-    In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or an operations agent action.
+    In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or operational follow-up.
 
 ## Task 2: Search risk signals by meaning
 
