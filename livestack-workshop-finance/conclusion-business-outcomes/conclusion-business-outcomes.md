@@ -6,7 +6,7 @@ You have now walked through the core Seer Bank finance decision path: understand
 
 The important takeaway is practical: you can now explain how one finance question can move across several data types without breaking the chain of evidence.
 
-A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
+A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and case-processing capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
 
 With Oracle Database 26ai, Seer Bank can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, and OML for prediction.
 
@@ -66,7 +66,7 @@ Review what you saw and connect each outcome back to the business question it he
     | --- | --- |
     | Emerging risk and fraud signals | Signal text, product exposure, transactions, and graph relationships can be investigated without moving evidence across systems. |
     | Application delivery | JSON documents and relational analytics can come from the same governed transaction model. |
-    | Client service and operational capacity | Spatial coverage, service centers, demand regions, and SLA zones can be analyzed together. |
+    | Client service and case-processing capacity | Spatial coverage, service centers, demand regions, and SLA zones can be analyzed together. |
     | Predictive planning | OML scores run close to the finance records that supply model features and business context. |
     | Governance and explainability | Teams can point to database-backed evidence instead of reconciling multiple copies of the truth. |
 

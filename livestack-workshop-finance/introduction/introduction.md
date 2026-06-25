@@ -29,7 +29,7 @@ The hands-on work follows one finance decision flow. First, you orient yourself 
 
 Each lab starts with a practical finance question and then shows the SQL evidence behind the answer.
 
-As you move through the labs, treat every query as part of the same operating record. The dashboard numbers are not isolated metrics. They point to products, transactions, signals, relationships, service capacity, and predictions that all remain connected inside Oracle Database.
+As you move through the labs, treat every query as part of the same operating record. The dashboard numbers are not isolated metrics. They point to products, transactions, signals, relationships, case-processing capacity, and predictions that all remain connected inside Oracle Database.
 
 The image below is the Seer Bank Finance LiveStack welcome page. It introduces the application as one connected financial-intelligence journey: monitor risk, investigate exposure, route work, analyze capacity, and use predictive evidence. The workshop uses SQL to explain the database evidence behind those same application pages.
 

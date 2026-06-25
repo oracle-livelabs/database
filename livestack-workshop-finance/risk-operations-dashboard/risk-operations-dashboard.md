@@ -40,7 +40,7 @@ Estimated Time: **10 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Risk teams need a shared view of exposure, transaction pressure, and service capacity. |
+| Business Problem | Risk teams need a shared view of exposure, transaction pressure, and case-processing capacity. |
 | Technical Challenge | App and data teams need one explainable query path instead of separate pipelines for signals, products, transactions, and service data. |
 | Persona Focus | Risk operations leaders read the dashboard; database and application developers show where the dashboard evidence comes from. |
 | What You Will See | Dashboard metrics are database-backed and can be explained with SQL. |
@@ -93,7 +93,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     Exposure adds scale to severity. Criticality tells you how serious a signal appears; exposure tells you how widely that signal may matter. A lower-severity issue with very high exposure may still deserve attention because it can affect many clients, generate more cases, or draw operational and regulatory scrutiny.
 
-    The high-risk count is the number of signals with a criticality score of 80 or higher. A higher count means more issues may need immediate analyst review, case triage, or automated follow-up from the operations agent. It does not mean every item is confirmed fraud or a confirmed incident; it means the dashboard has found more items that cross the bank's review threshold.
+    The high-risk count is the number of signals with a criticality score of 80 or higher. A higher count means more issues may need immediate analyst review, case triage, or operational follow-up. It does not mean every item is confirmed fraud or a confirmed incident; it means the dashboard has found more items that cross the bank review threshold.
 
 ## Task 2: Find top product exposure
 
