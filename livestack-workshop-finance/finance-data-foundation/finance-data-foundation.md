@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab gives you the lay of the land before the hands-on investigation begins. You inspect the main finance views, data groups, vectors, graphs, spatial tables, OML models, and agent functions.
+This lab confirms that the current Seer Bank data foundation is present before any finance result is trusted. Learners inspect semantic views, core data groups, vectors, graphs, spatial objects, OML models, and agent functions as the shared evidence base for the rest of the workshop.
 
 The goal is simple: see how different finance decisions connect to one database before you start using the data.
 
@@ -56,7 +56,9 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
 
 ## Task 1: Inventory the finance object families
 
-1. Run this inventory query to review the semantic views and database features used later in the workshop.
+Perform the following set of steps to inventory the semantic views and database capabilities used later in the workshop:
+
+1. Run this inventory query:
 
     You are building a simple capability map before making any finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What finance capabilities are available in this schema?"
 
@@ -124,6 +126,8 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
     If you are looking at risk metrics, the semantic views are where trusted finance data comes from. If you are investigating fraud, the property graph is what lets you follow relationships. If you need meaning-based search, vector columns support that. If you need predictions, OML models are available. If an AI-assisted workflow needs controlled actions, helper functions provide approved database tools.
 
     Treat this as the capability map for the finance application. Each row points to a business use you will work with in SQL.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.    
 
 ## Task 2: Count the current finance data groups
 

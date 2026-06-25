@@ -99,11 +99,9 @@ Begin by reviewing the persisted OML models available for scoring.
 
 ## Task 2: Score demand risk and revenue in SQL
 
-The prediction labels are the most important part of this task. The confidence and predicted revenue values are model scores, so your workshop environment may show small decimal differences from the examples.
+Perform the following set of steps to score demand risk and revenue directly in SQL:
 
-Focus on the business meaning of the results: which products are predicted as `SURGE` or `STABLE`, which predictions are stronger or weaker, and whether predicted revenue is directionally close to the target revenue.
-
-1. Run the demand surge classification query.
+1. Run the demand surge classification query:
 
     You are scoring product demand pressure and showing the product names behind the model output. The SQL uses `PREDICTION` to classify each row from `OML_DEMAND_TRAINING_V` and `PREDICTION_PROBABILITY` to return confidence.
 
