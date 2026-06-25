@@ -2,13 +2,34 @@
 
 ## Introduction
 
-This lab orients you to the current Seer Bank data foundation. You inspect finance semantic views, core data groups, vectors, graphs, spatial objects, OML models, and agent functions that the application uses across the rest of the workshop.
+This lab gives you the lay of the land before the hands-on investigation begins. You inspect the main finance views, data groups, vectors, graphs, spatial tables, OML models, and agent functions.
 
-The point is to see the shape of the operating data before you start making decisions with it. Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows all connect back to this shared database foundation.
+The goal is simple: see how different finance decisions connect to one database before you start using the data.
 
-Think of this lab as the map for the rest of the journey. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+The point is to understand what is available before you start asking business questions. Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows all connect back to this shared database foundation.
 
-Think of this lab as the readiness checkpoint before any business decision. The goal is to prove that the same schema can support the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+Think of this lab as the map of the finance environment. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+
+<details>
+<summary>Key terms: schema, view, vector, graph, spatial, OML, and PL/SQL</summary>
+
+A **schema** is a named workspace inside the database. It owns objects such as tables, views, functions, models, vectors, and graph definitions. In this workshop, `LLUSER` is the schema you use, so it is the place where the finance evidence is organized and secured.
+
+A **view** is a saved SQL query that presents data in a useful shape. A semantic finance view gives you business-friendly columns, such as products, institutions, transactions, or signals, without making you understand every underlying table. Views help application and analytics teams use consistent definitions instead of rebuilding the same joins in many places.
+
+A **vector** is a numerical representation of meaning. In this workshop, finance product descriptions and risk-signal text can be converted into vectors so the database can compare ideas, not only exact words. That is what lets a search for one phrase find related finance language.
+
+A **property graph** represents entities and relationships. Entities can be accounts, devices, phone numbers, IP addresses, payees, or cases. Relationships explain how those entities are connected, which is essential when a fraud pattern is visible only through shared devices, shared contact details, or multi-hop account links.
+
+**Spatial** data stores location and shape information. A service center can be a point, a demand region can be a boundary, and an SLA zone can be a service area. Oracle Spatial lets you calculate distance and coverage with SQL instead of exporting location data to a separate mapping system.
+
+**OML** means Oracle Machine Learning. It lets you build, store, and score models inside Oracle Database, where the finance records already live. That keeps predictions closer to the governed data that produced them.
+
+**PL/SQL** is Oracle's procedural language for database logic. Teams use it for approved functions, reusable business rules, and controlled operations that should run close to governed data rather than in scattered application code.
+
+</details>
+
+The image below is the Data Foundation page from the Seer Bank application. It shows the shared finance data domains that support the rest of the experience: financial products, clients, transactions, cases, regulatory signals, service geography, vectors, machine learning outputs, and agent audit history. In this lab, you use SQL to inspect that foundation directly instead of treating the application screen as a black box.
 
 ![Finance Data Foundation page](images/data-foundation.png " ")
 
@@ -20,22 +41,35 @@ Think of this lab as the readiness checkpoint before any business decision. The 
 
 Estimated Time: **10 minutes**
 
-### Operating Story
+### Business Scenario
 
 | Step | Finance focus |
 | --- | --- |
 | Business Problem | Risk, prediction, and agent workflows need a shared view of the finance data they use to make decisions. |
 | Technical Challenge | Platform teams must show how the same schema supports semantic views, vectors, graphs, spatial data, OML models, and PL/SQL tools. |
 | Persona Focus | Database developers and platform engineers map the foundation that business users rely on for downstream evidence. |
-| What You Will Prove | The current Finance LiveStack application uses connected views and object families in one database schema. |
+| What You Will See | The current Finance LiveStack application uses connected views and object families in one database schema. |
 | Database Capability | Oracle catalog views and finance semantic views expose the governed object inventory. |
-| Outcome | Every later lab can connect its result back to the same queryable finance foundation. |
+| Outcome | Each finance result can be traced back to the same queryable data foundation. |
 
 Persona focus: You are the database developer showing how Seer Bank's shared foundation supports risk, operations, prediction, and AI workflows.
 
 ## Task 1: Inventory the finance object families
 
 1. Run this inventory query to review the semantic views and database features used later in the workshop.
+
+    You are building a simple capability map before making any finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What finance capabilities are available in this schema?"
+
+    Each section counts one kind of capability: approved finance views for reporting, property graphs for relationship analysis, vector columns for meaning-based search, OML models for prediction, and PL/SQL helper functions for controlled agent actions. The `UNION ALL` lines stack those counts into one easy-to-read table.
+
+    <details>
+    <summary>Why this is easier in a converged database</summary>
+
+    In a fractured environment, you might look in one system for reporting views, another for graph objects, another for vector indexes, another for machine learning models, and another for agent tools. Each system can have its own security, metadata, and operational rules.
+
+    Oracle Database lets you inspect these object families from one schema using SQL catalog views. That makes it easier to understand what is available before you start making finance decisions.
+
+    </details>
 
     ```sql
     <copy>
@@ -85,19 +119,21 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
 
 
 2. Review the counts.
-    The query reads Oracle catalog views instead of application tables. That gives you a concise map of the object families behind the application workflow.
+    Read the result as a capability checklist. The query reads Oracle catalog views instead of application tables, so it tells you what kinds of database objects are available before you start using them.
 
-    The rows summarize the major capabilities used later: semantic views for governed SQL, property graphs for fraud reach, vector columns for semantic search, OML models for prediction, and helper functions for controlled agent actions.
+    If you are looking at risk metrics, the semantic views are where trusted finance data comes from. If you are investigating fraud, the property graph is what lets you follow relationships. If you need meaning-based search, vector columns support that. If you need predictions, OML models are available. If an AI-assisted workflow needs controlled actions, helper functions provide approved database tools.
 
-    Treat this as the capability map for the workshop. Each row points to a different access pattern that will reappear in a later finance decision.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.    
+    Treat this as the capability map for the finance application. Each row points to a business use you will work with in SQL.
 
 ## Task 2: Count the current finance data groups
 
-Perform the following set of steps to count the current finance data groups and establish a baseline for later dashboard, search, graph, spatial, OML, and audit results:
+The next query shows the scale of the finance scenario behind the application pages.
 
 1. Run this data group count query:
+
+    You are sizing the finance scenario so later dashboard, graph, search, spatial, and prediction results have context. The SQL counts rows from the business-facing finance views and core tables, then combines those counts into one table with `UNION ALL`.
+
+    Each row tells you how much data exists for one part of the finance environment.
 
     ```sql
     <copy>
@@ -130,14 +166,12 @@ Perform the following set of steps to count the current finance data groups and 
     | Fraud relationships | 35 |
 
 
-2. Use the counts as the baseline for later labs.
-    This query reads the business-facing finance views and core tables that later labs aggregate, search, traverse, score, or audit. It gives learners a concrete sense of the population behind the story before they inspect specific risk and operations results.
+2. Use the counts as the baseline for later analysis.
+    This query reads the business-facing finance views and core tables that you will aggregate, search, traverse, score, or audit. It gives you a concrete sense of the data population before you inspect specific risk and operations results.
 
     These counts establish the scale of the finance scenario: products and institutions provide the business catalog, risk signals and transactions drive the dashboard, service centers and SLA zones support operations, and fraud entities plus relationships support the graph investigation.
 
-    The exact number should not be the teaching point. Reframe this around interpretation: the baseline helps learners understand whether later results reflect data volume, filtering, or business logic.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+    The baseline helps you interpret focused results. When a query returns only a few rows, you can understand why: the SQL is filtering, ranking, scoring, or following relationships from this larger population.
 
 ## Acknowledgements
 
