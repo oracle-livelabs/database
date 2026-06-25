@@ -11,17 +11,17 @@ In this lab, **exposure** means the reach or scale of monitored risk signals. A 
 The key point is traceability. A dashboard can summarize the business, but the bank still needs to show where the numbers came from. Here, each metric is reproducible with SQL over finance views and source tables.
 
 <details>
-<summary>Key terms: KPI, signal, criticality, exposure, and case</summary>
+<summary><strong>Key terms: KPI, signal, criticality, exposure, and case</strong></summary>
 
-A **KPI** is a key performance indicator. It is a summary measure that helps leaders understand the current operating picture quickly, such as transaction volume, exposure, high-risk signal count, or product review pressure. A useful KPI should still be traceable to the rows behind it.
-
-A **risk signal** is an event, bulletin, alert, or observation that may deserve review. It is not automatically confirmed fraud or confirmed harm; it is a prompt for investigation. In this workshop, signals help Seer Bank decide which products, institutions, or client activities need attention first.
-
-**Criticality** is a severity measure for a risk signal. Higher criticality means the signal appears more urgent or consequential, so the team may review it before lower-severity activity. Criticality helps prioritize work when there are more signals than people can inspect manually.
-
-**Exposure** is the reach or scale of a signal or product risk. A highly exposed issue may affect more clients, higher transaction value, more products, more channels, or more public attention. Exposure helps answer, "How wide could the impact be if this risk is real?"
-
-A **case** is follow-up work opened for review, investigation, or action. Cases turn a signal into operational work, such as analyst review, compliance escalation, client outreach, document handling, or service routing.
+> - A **KPI** is a key performance indicator. It is a summary measure that helps leaders understand the current operating picture quickly, such as transaction volume, exposure, high-risk signal count, or product review pressure. A useful KPI should still be traceable to the rows behind it.
+>
+> - A **risk signal** is an event, bulletin, alert, or observation that may deserve review. It is not automatically confirmed fraud or confirmed harm; it is a prompt for investigation. In this workshop, signals help Seer Bank decide which products, institutions, or client activities need attention first.
+>
+> - **Criticality** is a severity measure for a risk signal. Higher criticality means the signal appears more urgent or consequential, so the team may review it before lower-severity activity. Criticality helps prioritize work when there are more signals than people can inspect manually.
+>
+> - **Exposure** is the reach or scale of a signal or product risk. A highly exposed issue may affect more clients, higher transaction value, more products, more channels, or more public attention. Exposure helps answer, "How wide could the impact be if this risk is real?"
+>
+> - A **case** is follow-up work opened for review, investigation, or action. Cases turn a signal into operational work, such as analyst review, compliance escalation, client outreach, document handling, or service routing.
 
 </details>
 
@@ -55,16 +55,20 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 1. Run the dashboard aggregate query:
 
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
     You are recreating the dashboard's headline risk measures directly from governed signal data. The SQL aggregates all rows in `RISK_SIGNALS_V`, calculates the average criticality, counts signals above the high-risk threshold, and sums exposure and case counts into one KPI row.
+
+    `RISK_SIGNALS_V` is a view, not a raw table. It gives the dashboard a clean risk-signal shape with the columns this lesson needs: severity, exposure, case counts, product context, and signal timing. That is valuable because you can focus on what the dashboard metric means instead of hunting through several lower-level tables to find the same business fields.
 
     The exposure total shows the overall reach of the monitored risk activity. That helps distinguish a small number of isolated alerts from risk signals that may have broad client, product, or reputational impact.
 
     <details>
-    <summary>Why this is better than a separate reporting pipeline</summary>
+    <summary><strong>Why this matters: better than a separate reporting pipeline</strong></summary>
 
-    In a fractured environment, the application may store events in one system, the dashboard may calculate metrics in another, and analysts may investigate details somewhere else. If the numbers do not match, teams must spend time reconciling them.
-
-    With Oracle Database, the dashboard summary and the detail rows can come from the same governed finance data. You can move from the KPI to the SQL behind it without leaving the database.
+    > In a fractured environment, the application may store events in one system, the dashboard may calculate metrics in another, and analysts may investigate details somewhere else. If the numbers do not match, teams must spend time reconciling them.
+    >
+    > With Oracle Database, the dashboard summary and the detail rows can come from the same governed finance data. You can move from the KPI to the SQL behind it without leaving the database.
 
     </details>
 
@@ -102,6 +106,8 @@ Next, move from headline measures to the financial products driving monitored ex
 1. Run this product exposure query:
 
     You are moving from dashboard totals to the products and institutions that drive review priority. The SQL joins product mentions, signal rows, finance products, and institutions, then groups by product.
+
+    This query uses `finance_products_v` and `finance_institutions_v` because the dashboard needs business names and product categories, not just internal IDs. Those views turn product and institution records into reporting-friendly columns, so the returned rows can explain exposure in language a risk leader recognizes.
 
     Each returned row shows signal volume, average criticality, and exposure for a specific financial product. The `SUM(sp.views_count)` expression calculates exposure by adding the reach of all monitored signal events tied to the product.
 

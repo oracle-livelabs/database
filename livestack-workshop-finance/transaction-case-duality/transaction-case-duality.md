@@ -9,17 +9,17 @@ Think of this as one transaction wearing two useful forms. The application gets 
 This matters after the dashboard lab because a KPI is not enough for review. When an analyst or application needs a specific transaction, the database can return an API-shaped document and still preserve the relational joins needed for investigation.
 
 <details>
-<summary>Key terms: JSON, relational tables, JSON Relational Duality, duality view, and projection</summary>
+<summary><strong>Key terms: JSON, relational tables, JSON Relational Duality, duality view, and projection</strong></summary>
 
-**JSON** is a document format that application developers often prefer for APIs because it can represent a complete business object in one payload. A transaction document can hold the transaction ID, status, customer ID, totals, and line items together, which makes it natural for web and mobile applications to request, send, and display. JSON is flexible and developer-friendly, but by itself it is not as strong as a relational model for analytics, joining across many entities, enforcing shared business rules, or asking governed SQL questions across large data sets.
-
-**Relational tables** store data in rows and columns with defined keys, relationships, constraints, and data types. That structure is excellent for analytics because SQL can filter, aggregate, join customers to transactions, enforce data quality rules, and answer questions such as which customers, products, or cases are driving risk. Relational data is less convenient as a direct application payload than JSON, but it is much stronger for governed analysis and operational reporting.
-
-**JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want for APIs, while analysts keep SQL access to governed relational data. That matters because the API document and the analytic rows stay synchronized as two views of the same source.
-
-**Duality view**, often shortened to **DV**, is the database object that defines that document shape. A duality view is created with `CREATE JSON RELATIONAL DUALITY VIEW`. The definition maps relational tables and columns into a JSON structure, so the database knows how to present the same rows as a document. In this lab, `ORDERS_DV` maps transaction rows from `ORDERS` and nested line-item rows from `ORDER_ITEMS` into one transaction document.
-
-**Projection** means presenting the same centralized data in the shape a user, application, or service needs. Oracle Database can store governed data once, then let different consumers access it as relational rows, JSON documents, spatial objects, graph relationships, vectors, or model-ready columns without extracting or synchronizing separate copies. In this lab, SQL/JSON projection means taking fields from a JSON transaction document, such as transaction ID and status, and returning them as normal SQL columns that analysts can filter, sort, and join. The same transaction data can serve an application-friendly JSON API and an analyst-friendly SQL result without moving the data into a separate document store.
+> - **JSON** is a document format that application developers often prefer for APIs because it can represent a complete business object in one payload. A transaction document can hold the transaction ID, status, customer ID, totals, and line items together, which makes it natural for web and mobile applications to request, send, and display. JSON is flexible and developer-friendly, but by itself it is not as strong as a relational model for analytics, joining across many entities, enforcing shared business rules, or asking governed SQL questions across large data sets.
+>
+> - **Relational tables** store data in rows and columns with defined keys, relationships, constraints, and data types. That structure is excellent for analytics because SQL can filter, aggregate, join customers to transactions, enforce data quality rules, and answer questions such as which customers, products, or cases are driving risk. Relational data is less convenient as a direct application payload than JSON, but it is much stronger for governed analysis and operational reporting.
+>
+> - **JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want for APIs, while analysts keep SQL access to governed relational data. That matters because the API document and the analytic rows stay synchronized as two views of the same source.
+>
+> - **Duality view**, often shortened to **DV**, is the database object that defines that document shape. A duality view is created with `CREATE JSON RELATIONAL DUALITY VIEW`. The definition maps relational tables and columns into a JSON structure, so the database knows how to present the same rows as a document. In this lab, `ORDERS_DV` maps transaction rows from `ORDERS` and nested line-item rows from `ORDER_ITEMS` into one transaction document.
+>
+> - **Projection** means presenting the same centralized data in the shape a user, application, or service needs. Oracle Database can store governed data once, then let different consumers access it as relational rows, JSON documents, spatial objects, graph relationships, vectors, or model-ready columns without extracting or synchronizing separate copies. In this lab, SQL/JSON projection means taking fields from a JSON transaction document, such as transaction ID and status, and returning them as normal SQL columns that analysts can filter, sort, and join. The same transaction data can serve an application-friendly JSON API and an analyst-friendly SQL result without moving the data into a separate document store.
 
 </details>
 
@@ -83,14 +83,16 @@ First, inspect the transaction shape an application can consume directly.
 
 1. Run this query:
 
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
     You are viewing a transaction the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view `ORDERS_DV` and uses `JSON_SERIALIZE(... PRETTY)` so SQL Worksheet displays the document shape clearly.
 
     <details>
-    <summary>Why Oracle's converged approach helps here</summary>
+    <summary><strong>Why this matters: Oracle's converged approach helps here</strong></summary>
 
-    In a fractured environment, the application team might keep JSON documents in one system while analysts use relational tables in another. That creates a synchronization problem: which copy is current, which one is governed, and which one should an investigation trust?
-
-    Oracle JSON Relational Duality avoids that split. The JSON document and the relational rows are two views of the same governed data.
+    > In a fractured environment, the application team might keep JSON documents in one system while analysts use relational tables in another. That creates a synchronization problem: which copy is current, which one is governed, and which one should an investigation trust?
+    >
+    > Oracle JSON Relational Duality avoids that split. The JSON document and the relational rows are two views of the same governed data.
 
     </details>
 

@@ -9,15 +9,15 @@ That matters because a risk analyst may ask about "mortgage pre-approval risk" w
 After reviewing numeric exposure, analysts often need to search the language behind the signals. Instead of only sorting by counts and scores, you ask the database to find products and signal text that mean roughly the same thing as the analyst's question.
 
 <details>
-<summary>Key terms: embedding, vector, vector distance, and semantic search</summary>
+<summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-An **embedding** is a numerical profile of what text means. In this lab, product descriptions and risk-signal language can be embedded so similar finance ideas sit near each other mathematically, even when the wording is different.
-
-A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the finance rows they describe, so the meaning-based search stays connected to product names, exposure values, signal counts, and other business columns.
-
-**Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
-
-**Semantic search** means searching by meaning instead of exact words. For example, a search for "fraud signals aml exposure" can find text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
+> - An **embedding** is a numerical profile of what text means. In this lab, product descriptions and risk-signal language can be embedded so similar finance ideas sit near each other mathematically, even when the wording is different.
+>
+> - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the finance rows they describe, so the meaning-based search stays connected to product names, exposure values, signal counts, and other business columns.
+>
+> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
+>
+> - **Semantic search** means searching by meaning instead of exact words. For example, a search for "fraud signals aml exposure" can find text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
 
 </details>
 
@@ -51,14 +51,16 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
 1. Run the following query:
 
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
     You are asking the database to find products related to a risk concept, even when the product text does not use the exact same words. The SQL creates an embedding for the phrase `mortgage pre-approval risk`, compares it with stored product embeddings using cosine vector distance, and orders the result by closest semantic match. The closer the meaning, the higher the result should appear in the review list.
 
     <details>
-    <summary>Why this is better than exporting text to a separate AI search service</summary>
+    <summary><strong>Why this matters: better than exporting text to a separate AI search service</strong></summary>
 
-    In a fractured environment, teams often export text to an external embedding pipeline or search service. That can create extra copies of sensitive finance text and make it harder to explain which data was searched.
-
-    Oracle AI Vector Search keeps the source text, vectors, SQL query, and similarity score close to the governed finance data. That makes semantic search easier to review and safer to operationalize.
+    > In a fractured environment, teams often export text to an external embedding pipeline or search service. That can create extra copies of sensitive finance text and make it harder to explain which data was searched.
+    >
+    > Oracle AI Vector Search keeps the source text, vectors, SQL query, and similarity score close to the governed finance data. That makes semantic search easier to review and safer to operationalize.
 
     </details>
 
