@@ -9,21 +9,21 @@ Risk and fraud decisions often create service work: client outreach, case routin
 Every risk decision can create operational work. The bank needs to know not only what is risky, but whether the service network can respond where demand is highest.
 
 <details>
-<summary>Key terms: spatial data, point, boundary, distance, GeoJSON, SLA, and case-processing capacity</summary>
+<summary><strong>Key terms: spatial data, point, boundary, distance, GeoJSON, SLA, and case-processing capacity</strong></summary>
 
-**Spatial data** describes location or shape. A service center can be stored as a point, a demand region can be stored as a boundary, and an SLA zone can be stored as an area. Spatial data lets operations teams ask location-aware questions with SQL.
-
-A **point** is a precise map location, usually represented by longitude and latitude. In this lab, a service center point tells the database where work can be handled.
-
-A **boundary** is a shape around an area, such as a metro region or service zone. Boundaries let the database compare where demand is located against where case-processing capacity is available.
-
-**Distance** tells you how far one location is from another location or boundary. In service planning, distance helps answer whether a center is close enough to respond, whether case-processing capacity is practical for a region, and where routing pressure may appear.
-
-**GeoJSON** is a JSON format for representing map features such as points, lines, and areas. Oracle can convert spatial objects into GeoJSON so the same governed geometry can support both SQL analysis and map-based application screens.
-
-An **SLA**, or service-level agreement, is a response-time or service-level commitment. In this workshop, SLA coverage connects geography to operations: the question is not only whether a risk exists, but whether the bank has case-processing capacity near the region that needs help.
-
-**Case-processing capacity** means the operational ability of the bank to handle finance-related work, not inventory or data-center capacity. In this lab, that work can include client outreach, fraud follow-up, AML review, dispute handling, onboarding checks, product review, or document processing. The spatial question is whether enough of that handling capacity is close to the region where demand or risk is building.
+> - **Spatial data** describes location or shape. A service center can be stored as a point, a demand region can be stored as a boundary, and an SLA zone can be stored as an area. Spatial data lets operations teams ask location-aware questions with SQL.
+>
+> - A **point** is a precise map location, usually represented by longitude and latitude. In this lab, a service center point tells the database where work can be handled.
+>
+> - A **boundary** is a shape around an area, such as a metro region or service zone. Boundaries let the database compare where demand is located against where case-processing capacity is available.
+>
+> - **Distance** tells you how far one location is from another location or boundary. In service planning, distance helps answer whether a center is close enough to respond, whether case-processing capacity is practical for a region, and where routing pressure may appear.
+>
+> - **GeoJSON** is a JSON format for representing map features such as points, lines, and areas. Oracle can convert spatial objects into GeoJSON so the same governed geometry can support both SQL analysis and map-based application screens.
+>
+> - An **SLA**, or service-level agreement, is a response-time or service-level commitment. In this workshop, SLA coverage connects geography to operations: the question is not only whether a risk exists, but whether the bank has case-processing capacity near the region that needs help.
+>
+> - **Case-processing capacity** means the operational ability of the bank to handle finance-related work, not inventory or data-center capacity. In this lab, that work can include client outreach, fraud follow-up, AML review, dispute handling, onboarding checks, product review, or document processing. The spatial question is whether enough of that handling capacity is close to the region where demand or risk is building.
 
 </details>
 
@@ -50,7 +50,7 @@ Estimated Time: **10 minutes**
 | Technical Challenge | Operations teams need location-aware decisions without moving geography, service centers, and SLA zones into separate mapping systems. |
 | Persona Focus | Service operations leaders evaluate coverage; database developers show distance and SLA evidence with spatial SQL. |
 | What You Will See | Spatial data can quantify distance and regional service pressure in SQL. |
-| Database Capability | SDO\_GEOMETRY, SDO\_GEOM.SDO\_DISTANCE, regions, and SLA zones support coverage analysis. |
+| Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), Oracle Spatial distance functions (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
 | Outcome | Operations teams can prioritize case-processing capacity based on geography and demand. |
 
 Persona focus: You support a service operations leader by turning location data into queryable coverage evidence for case-processing and SLA decisions.
@@ -61,14 +61,18 @@ Start by comparing service-center locations to the New York Metro demand region.
 
 1. Run this spatial distance query:
 
-    You are measuring which service centers are closest to a high-demand region so operations can reason about response coverage. The SQL joins service-center business details to their spatial point locations, compares each point to the New York Metro demand-region boundary with `SDO_GEOM.SDO_DISTANCE`, converts the point to GeoJSON for map-friendly display, and orders the result by nearest distance.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
+    You are measuring which service centers are closest to a high-demand region so operations can reason about response coverage. The SQL joins service-center business details to their spatial point locations, compares each point to the New York Metro demand-region boundary with the Oracle Spatial distance function `SDO_GEOM.SDO_DISTANCE`, uses the Oracle Spatial utility package call `SDO_UTIL.TO_GEOJSON` to convert the point to GeoJSON for map-friendly display, and orders the result by nearest distance.
+
+    `service_centers_v` is the service-center view. It exposes the business details operations leaders need, such as service center name, city, and state, while the underlying `fulfillment_centers` table supplies the stored spatial point. Joining the view to the spatial table keeps the result readable for you while still using precise location geometry for the distance calculation.
 
     <details>
-    <summary>Why spatial analysis is stronger inside the database</summary>
+    <summary><strong>Why this matters: spatial analysis is stronger inside the database</strong></summary>
 
-    In a fractured environment, teams might export service-center data to a mapping tool and separately maintain demand or SLA data somewhere else. That can make maps visually useful but hard to govern, audit, or join back to operational data.
-
-    Oracle Spatial keeps location data, service data, demand regions, and SQL analysis together. You can calculate distance and still join the result to finance and operations data in the same query.
+    > In a fractured environment, teams might export service-center data to a mapping tool and separately maintain demand or SLA data somewhere else. That can make maps visually useful but hard to govern, audit, or join back to operational data.
+    >
+    > Oracle Spatial keeps location data, service data, demand regions, and SQL analysis together. You can calculate distance and still join the result to finance and operations data in the same query.
 
     </details>
 
@@ -109,7 +113,7 @@ Start by comparing service-center locations to the New York Metro demand region.
 
 
 2. Review the nearest service centers.
-    The SQL compares service-center point geometries with a demand-region boundary. An `SDO_GEOMETRY` point is Oracle Spatial's database representation of a single map location, such as a service center longitude and latitude. `SDO_UTIL.TO_GEOJSON` converts that point into GeoJSON, a web-friendly JSON format that mapping tools can display.
+    The SQL compares service-center point geometries with a demand-region boundary. An Oracle Spatial geometry object (`SDO_GEOMETRY`) point is Oracle Spatial's database representation of a single map location, such as a service center longitude and latitude. The Oracle Spatial utility package call `SDO_UTIL.TO_GEOJSON` converts that point into GeoJSON, a web-friendly JSON format that mapping tools can display.
 
     Expected nearest service center: Edison Wealth Service Center. New York Metro has demand index 91.
 
