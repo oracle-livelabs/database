@@ -9,13 +9,13 @@ Natural-language answers can feel simple to the business user, but risk and gove
 Answers are only useful if decision-makers can review the data boundary. The copilot pattern here is not "ask anything"; it is "ask against approved finance views and show the SQL."
 
 <details>
-<summary>Key terms: governed answer, approved view, and visible SQL</summary>
+<summary><strong>Key terms: governed answer, approved view, and visible SQL</strong></summary>
 
-A **governed answer** is an answer that comes from approved data and can be reviewed. In finance, this matters because an answer may influence risk, compliance, client service, or revenue decisions, so the source and query path must be visible.
-
-An **approved view** is a database view that exposes the data a user or application is allowed to use for a business question. Views give a copilot or application a controlled data boundary instead of letting it query every table directly.
-
-**Visible SQL** means the query behind the answer can be inspected. This matters because finance teams must be able to explain where an answer came from, repeat the result, and check whether the logic matches the business question.
+> - A **governed answer** is an answer that comes from approved data and can be reviewed. In finance, this matters because an answer may influence risk, compliance, client service, or revenue decisions, so the source and query path must be visible.
+>
+> - An **approved view** is a database view that exposes the data a user or application is allowed to use for a business question. Views give a copilot or application a controlled data boundary instead of letting it query every table directly.
+>
+> - **Visible SQL** means the query behind the answer can be inspected. This matters because finance teams must be able to explain where an answer came from, repeat the result, and check whether the logic matches the business question.
 
 </details>
 
@@ -49,14 +49,18 @@ Review the approved finance views before answering business questions.
 
 1. Run this catalog query:
 
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
     You are identifying the approved view surface before answering a business question. The SQL reads `USER_VIEWS`, filters to finance and service views that are appropriate for governed answers, and returns the view names with their definition length as a simple catalog check.
 
+    The returned objects are views: saved SQL definitions that expose approved business data without requiring you or the copilot to query every underlying table directly. The finance views provide institution, product, signal, and transaction meaning. The service views provide location, capacity, and route meaning. This matters because a governed copilot should answer from a known view surface rather than improvising over every possible object in the schema.
+
     <details>
-    <summary>Why this is safer than an unguided AI answer</summary>
+    <summary><strong>Why this matters: safer than an unguided AI answer</strong></summary>
 
-    In a fractured or prompt-only environment, a natural-language assistant may answer from unclear context, unapproved tables, or hidden prompts. That is risky in finance because reviewers need to know exactly which data supported the answer.
-
-    Oracle Database gives the copilot a governed data boundary. Approved views and visible SQL make the answer repeatable, reviewable, and easier to secure.
+    > In a fractured or prompt-only environment, a natural-language assistant may answer from unclear context, unapproved tables, or hidden prompts. That is risky in finance because reviewers need to know exactly which data supported the answer.
+    >
+    > Oracle Database gives the copilot a governed data boundary. Approved views and visible SQL make the answer repeatable, reviewable, and easier to secure.
 
     </details>
 
@@ -104,6 +108,8 @@ Ground a natural-language finance question in visible SQL so the answer can be r
 1. For the question "Which product categories have the highest current risk exposure?", run visible SQL.
 
     You are translating a natural-language business question into a reviewable SQL answer. The SQL joins risk signals to product mentions and finance products, groups the result by product category, and ranks categories by total exposure so the answer can cite both the result and the evidence path.
+
+    `risk_signals_v` gives the copilot the approved risk-signal facts, including criticality and exposure. `finance_products_v` gives it the approved product category and product identity. Using those views matters because the answer stays grounded in the same curated business definitions used by the dashboard instead of depending on a hidden prompt or an ad hoc table scan.
 
     ```sql
     <copy>

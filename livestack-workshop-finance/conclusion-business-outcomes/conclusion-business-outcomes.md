@@ -6,22 +6,22 @@ You have now walked through the core Seer Bank finance decision path: understand
 
 The important takeaway is practical: you can now explain how one finance question can move across several data types without breaking the chain of evidence.
 
-A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
+A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and case-processing capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
 
-With Oracle Database 26ai, Seer Bank can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, and OML for prediction.
+With Oracle Database 26ai, Seer Bank can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, and Oracle Machine Learning (OML) for prediction.
 
 That is the punchline for finance: the database is not just where records sit. It becomes the place where risk, fraud, compliance, service, and analytics teams can ask different questions about the same governed facts.
 
 You leave this workshop with a repeatable way to talk about Oracle's converged database value: fewer copies of sensitive data, fewer reconciliation points, stronger governance, faster investigation, and business results that can be explained from SQL-backed evidence.
 
 <details>
-<summary>Why this matters after the workshop</summary>
+<summary><strong>Why this matters: after the workshop</strong></summary>
 
-Real finance decisions rarely fit neatly into one technology category. A product-risk review may need transaction rows, regulatory text, client exposure, fraud relationships, service-center locations, and predictive scores.
-
-In a fractured environment, each of those questions may send the team to a different system. That creates more copies of sensitive data, more security policies to maintain, more integration work, and more room for answers to drift apart.
-
-Oracle Database is a strong fit because it supports the access patterns finance teams actually need while keeping the evidence connected. You can use documents, vectors, graphs, spatial data, and machine learning without turning every new capability into another silo.
+> Real finance decisions rarely fit neatly into one technology category. A product-risk review may need transaction rows, regulatory text, client exposure, fraud relationships, service-center locations, and predictive scores.
+>
+> In a fractured environment, each of those questions may send the team to a different system. That creates more copies of sensitive data, more security policies to maintain, more integration work, and more room for answers to drift apart.
+>
+> Oracle Database is a strong fit because it supports the access patterns finance teams actually need while keeping the evidence connected. You can use documents, vectors, graphs, spatial data, and machine learning without turning every new capability into another silo.
 
 </details>
 
@@ -41,11 +41,11 @@ Review what you saw and connect each outcome back to the business question it he
 
     | Finance question | What you can now explain |
     | --- | --- |
-    | What data is available? | The shared finance schema contains semantic views, transaction data, vectors, graph objects, spatial objects, and OML models. |
+    | What data is available? | The shared finance schema contains semantic views, transaction data, vectors, graph objects, spatial objects, and Oracle Machine Learning (OML) models. |
     | Which risks deserve review first? | Dashboard KPIs can be reproduced with SQL over signal, exposure, transaction, product, and service data. |
     | How can applications use transaction data? | JSON Relational Duality gives developers document-shaped payloads while preserving relational control. |
     | How do analysts search risk language? | AI Vector Search ranks products and signals by meaning, not only exact keywords. |
-    | Why is this account or entity suspicious? | Property Graph and SQL/PGQ expose relationship paths across accounts, devices, IP addresses, payees, phones, and cases. |
+    | Why is this account or entity suspicious? | Property Graph and SQL Property Graph Queries (SQL/PGQ) expose relationship paths across accounts, devices, IP addresses, payees, phones, and cases. |
     | Can service teams respond where demand is building? | Oracle Spatial calculates distance and SLA coverage from governed location data. |
     | Which products or cohorts may need attention next? | OML models can be inventoried and scored with SQL where the finance data already lives. |
 
@@ -66,7 +66,7 @@ Review what you saw and connect each outcome back to the business question it he
     | --- | --- |
     | Emerging risk and fraud signals | Signal text, product exposure, transactions, and graph relationships can be investigated without moving evidence across systems. |
     | Application delivery | JSON documents and relational analytics can come from the same governed transaction model. |
-    | Client service and operational capacity | Spatial coverage, service centers, demand regions, and SLA zones can be analyzed together. |
+    | Client service and case-processing capacity | Spatial coverage, service centers, demand regions, and SLA zones can be analyzed together. |
     | Predictive planning | OML scores run close to the finance records that supply model features and business context. |
     | Governance and explainability | Teams can point to database-backed evidence instead of reconciling multiple copies of the truth. |
 
