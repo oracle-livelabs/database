@@ -163,6 +163,8 @@ Add these nodes:
 4. **OpenAPI Tool:** uses **ACME EBS Action Service** operation `createMarginRecoveryCase`.
 5. **Chat Output:** returns the case ID, audit ID, evidence summary, owner, next action, and status.
 
+![Diagram of the ACME Margin Recovery Case Agent flow. The flow starts with Chat Input, retrieves ERP margin, contract, and CRM evidence, scopes contract knowledge to the Northstar agreement, prepares a case payload with a Prompt/LLM step, calls the createMarginRecoveryCase OpenAPI tool, and returns a case ID and audit ID.](../../images/john-margin-recovery-agent-flow.svg)
+
 SQL Query for the builder-only evidence step:
 
 ```
@@ -239,6 +241,8 @@ Expected agent response:
 - The answer names the owner and next action.
 - The answer does not claim EBS, pricing, or customer records were changed.
 - The answer makes clear that Elena Brooks and the required approval owners now have a governed case to work from.
+
+![Mock output from the ACME Margin Recovery Case Agent showing that a Margin Recovery Case was created for Northstar Mining Ltd. The output includes the order number, pending commercial review status, account owner, audit ID, required approvals, case rationale, and safety boundaries.](../../images/john-margin-recovery-case-output.svg)
 
 Now return to **ACME EBS Action Service** and run `listActionAudit` again.
 
