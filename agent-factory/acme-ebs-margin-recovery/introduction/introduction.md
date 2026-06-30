@@ -8,18 +8,9 @@ This workshop shows a practical answer. You will use Oracle AI Database Private 
 
 The goal is not to replace Oracle E-Business Suite or bypass process controls. The goal is to add an AI control layer over trusted operational systems so teams can move faster without losing governance.
 
-**Estimated time:** 90 minutes
+**Estimated Time:** 90 minutes
 
-### Who This Workshop Is For
-
-This workshop is designed for:
-
-- Executives evaluating where enterprise agents can deliver fast, measurable value.
-- Consultants and transformation leaders looking for repeatable AI patterns across ERP estates.
-- AI Centers of Excellence that need governed examples beyond generic copilots.
-- Finance, Legal, and IT leaders who need agents to work with real controls, not around them.
-
-### What You Will Prove
+### Objectives
 
 In this workshop, you will:
 
@@ -30,7 +21,22 @@ In this workshop, you will:
 - Create governed review artifacts through a narrow OpenAPI action surface.
 - Confirm every action with before-and-after state and audit IDs.
 
-### Scenario
+### Prerequisites
+
+- Access to the workshop Private Agent Factory environment.
+- The username and password provided by the instructor or LiveLab reservation page.
+- No prior Private Agent Factory setup is required for the attendee path.
+
+## Task 1: Understand the Workshop Audience
+
+This workshop is designed for:
+
+- Executives evaluating where enterprise agents can deliver fast, measurable value.
+- Consultants and transformation leaders looking for repeatable AI patterns across ERP estates.
+- AI Centers of Excellence that need governed examples beyond generic copilots.
+- Finance, Legal, and IT leaders who need agents to work with real controls, not around them.
+
+## Task 2: Review the Business Scenario
 
 ACME Precision Components is a US specialty manufacturer. ACME runs EBS for Order Management, Advanced Pricing, tax, inventory, shipping, invoicing, revenue recognition, and reporting.
 
@@ -59,7 +65,7 @@ Other orders and contracts are present to make the environment credible, but thi
 - **John Patel, Finance Contract Manager:** creates the governed recovery case and routes the issue without damaging a strategic account.
 - **Ravi Menon, EBS Architect:** wants automation that respects EBS controls, least privilege, approved APIs, and auditability.
 
-### Quick-Win Pattern
+## Task 3: Review the Quick-Win Pattern
 
 The labs follow the same high-ROI pattern that many ERP customers can reuse:
 
@@ -81,3 +87,14 @@ Private Agent Factory is compelling for EBS and ERP customers because it works w
 - Audit records for every action the agent takes.
 
 The "why now" is simple: PAF lets leaders move from AI experiments to governed agents that improve cycle time, reduce margin leakage, and make cross-functional work easier to explain. The controls stay in place. The work moves faster.
+
+You may now **proceed to the next lab**.
+
+## Acknowledgements
+
+**Authors**
+
+- Database Applied AI Technical Staff
+- Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - June, 2026

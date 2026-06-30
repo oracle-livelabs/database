@@ -8,7 +8,7 @@ In this lab, you use PAF Data Analysis over an AI-ready operational evidence vie
 
 The evidence view is not Maya's dashboard. It is the trusted agent layer that combines EBS-like orders, item costs, absorbed charges, tax matrix signals, pricing-rule signals, and remediation plans so the agent can explain the variance and create the next controlled artifact.
 
-**Estimated time:** 25 minutes
+**Estimated Time:** 25 minutes
 
 ### Objectives
 
@@ -19,6 +19,12 @@ In this lab, you will:
 - Build a margin investigation agent in Builder Studio.
 - Confirm the before-and-after result using the PAF REST source.
 - Show how an AI CoE can convert a recurring finance investigation into a reusable agent pattern.
+
+### Prerequisites
+
+- You have completed the **Get Started** lab.
+- You can sign in to Private Agent Factory.
+- The **ACME EBS AI Database** and **ACME EBS Action Service** sources are available.
 
 Role boundary:
 
@@ -277,3 +283,14 @@ Before PAF, Maya would need Finance Operations, EBS support, Contracts, Pricing,
 - The answer stayed grounded in approved Oracle Database evidence.
 - The agent created a finance review note, not an uncontrolled ERP change.
 - The same pattern can be reused for other recurring investigations: tax variance, rebate leakage, fulfillment cost spikes, service-credit exposure, or revenue-review queues.
+
+You may now **proceed to the next lab**.
+
+## Acknowledgements
+
+**Authors**
+
+- Database Applied AI Technical Staff
+- Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - June, 2026

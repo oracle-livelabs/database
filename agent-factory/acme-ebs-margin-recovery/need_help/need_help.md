@@ -4,7 +4,7 @@
 
 Use this section if you get stuck while running the ACME EBS margin recovery LiveLab or want follow-up resources for Oracle AI Database Private Agent Factory.
 
-**Estimated time:** 3 minutes.
+**Estimated Time:** 3 minutes.
 
 ### Objectives
 

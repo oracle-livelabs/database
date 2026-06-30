@@ -8,7 +8,7 @@ In this lab, you build an operational agent that combines margin evidence, contr
 
 This is the payoff of the workshop. PAF turns scattered EBS-like order data, contract language, CRM account context, private policy, and approved action APIs into one governed business artifact. For executives and AI CoEs, this is the difference between an impressive assistant and a production-shaped agent.
 
-**Estimated time:** 30 minutes
+**Estimated Time:** 30 minutes
 
 ### Objectives
 
@@ -20,6 +20,12 @@ In this lab, you will:
 - Create a governed Margin Recovery Case with required approvals and audit ID.
 - Confirm the before-and-after result using the PAF REST source.
 - Show how agents can take action safely by creating a controlled case instead of changing ERP records directly.
+
+### Prerequisites
+
+- You have completed **Lab 2: Janice Finds the Contract Signal**.
+- You can access the **ACME Margin Recovery Candidate Agent**.
+- The commercial recovery policy source and Northstar contract source are available in Private Agent Factory.
 
 Role boundary:
 
@@ -252,3 +258,14 @@ That is the "why PAF" moment: the agent did not just summarize data. It transfor
 - The output includes owner, next action, approvals, status, and audit ID.
 - CRM context changed the recommendation from "recover the money" to "route an executive-led recovery review."
 - The pattern is repeatable for other high-value ERP workflows where the business needs evidence plus controlled action.
+
+You may now **proceed to the next lab**.
+
+## Acknowledgements
+
+**Authors**
+
+- Database Applied AI Technical Staff
+- Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - June, 2026

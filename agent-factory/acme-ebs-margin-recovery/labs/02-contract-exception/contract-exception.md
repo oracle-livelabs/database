@@ -8,7 +8,7 @@ In this lab, you build an Agent Builder flow that reads EBS-like order evidence,
 
 The business value is speed with control. Janice does not search a shared drive, paste contract text into a public tool, or make an accounting decision. PAF helps her find the relevant contract signal, connect it to the order, and create the right internal package for review.
 
-**Estimated time:** 30 minutes
+**Estimated Time:** 30 minutes
 
 ### Objectives
 
@@ -19,6 +19,12 @@ In this lab, you will:
 - Build an Agent Builder flow with SQL, policy context, prompt, condition, and REST action steps.
 - Confirm the before-and-after result using the PAF REST source.
 - Show how private knowledge can be used without searching every contract in the enterprise.
+
+### Prerequisites
+
+- You have completed **Lab 1: Maya Finds the Margin Leak**.
+- You can access the **ACME EBS AI Database** and **ACME EBS Action Service** sources.
+- The Northstar contract source and revenue policy source are available in Private Agent Factory.
 
 Role boundary:
 
@@ -263,3 +269,14 @@ The important point is not that PAF read a PDF. The important point is that PAF 
 - The agent created a review package, not a final accounting conclusion.
 - Legal and Contracts remain in control of interpretation.
 - The pattern can scale to other contract-heavy processes such as service credits, acceptance terms, rebate programs, termination rights, renewal exposure, and negotiated freight terms.
+
+You may now **proceed to the next lab**.
+
+## Acknowledgements
+
+**Authors**
+
+- Database Applied AI Technical Staff
+- Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - June, 2026

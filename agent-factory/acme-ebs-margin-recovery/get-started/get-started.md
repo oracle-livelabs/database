@@ -32,7 +32,7 @@ SO-48192 | Northstar Mining Ltd. | CONTRACT_ID_1111
 
 The other orders, contracts, and policy sources are present so the workshop feels like a real enterprise environment, but the main runthrough should stay centered on this one path.
 
-**Estimated time:** 10 minutes
+**Estimated Time:** 10 minutes
 
 ### Objectives
 
@@ -44,11 +44,17 @@ In this lab, you will:
 - Confirm that contract retrieval is scoped by contract ID.
 - Understand that the final artifact is a governed Margin Recovery Case, not an ERP update or customer email.
 
+### Prerequisites
+
+- The Private Agent Factory URL supplied by the instructor or LiveLab reservation page.
+- The workshop username and password.
+- The Resource Manager stack has completed successfully.
+
 ## Task 1: Sign In
 
-Open the Private Agent Factory URL.
+1. Open the Private Agent Factory URL.
 
-Sign in with the supplied username and password.
+2. Sign in with the supplied username and password.
 
 If the URL opens an installation page instead of the PAF home page, stop and ask the instructor to refresh the environment. Attendees should not run installation steps.
 
@@ -203,3 +209,14 @@ Examples:
 Do not build one Knowledge Agent across all contracts for this workshop. The point of the contract step is to show reliable, governed retrieval scoped to the contract being reviewed.
 
 This matters in production. A contract agent that searches every agreement can produce an impressive-looking but unreliable answer. A scoped agent gives Finance and Legal a result they can defend.
+
+You may now **proceed to the next lab**.
+
+## Acknowledgements
+
+**Authors**
+
+- Database Applied AI Technical Staff
+- Allen Hosler, Principal Product Manager, Database Applied AI
+
+**Last Updated Date** - June, 2026
