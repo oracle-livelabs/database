@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="500" viewBox="0 0 980 500" role="img" aria-labelledby="title desc">
+  <title id="title">Graph Studio-style brand propagation graph</title>
+  <desc id="desc">ApexRide brand connected to promoter creators, who connect to reached creators.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5f6f6d"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1f2f2d" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="500" rx="0" fill="#f6f7f7"/>
+  <text x="36" y="42" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#1c2423">Brand propagation path</text>
+  <text x="36" y="70" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4d5a58">A brand connects to promoter creators, and each promoter can reach other creator audiences through graph edges.</text>
+
+  <g stroke="#5f6f6d" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M 236 238 C 300 160, 374 136, 444 132"/>
+    <path d="M 236 262 C 300 324, 374 348, 444 354"/>
+    <path d="M 604 126 C 664 92, 714 82, 784 82"/>
+    <path d="M 608 144 C 670 156, 716 166, 784 168"/>
+    <path d="M 608 342 C 670 296, 716 276, 784 266"/>
+    <path d="M 608 364 C 670 392, 716 410, 784 412"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="54" y="190" width="190" height="110" rx="12" fill="#284b63"/>
+    <text x="149" y="230" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#d8eef3">BRAND</text>
+    <text x="149" y="260" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#ffffff">ApexRide</text>
+
+    <rect x="438" y="90" width="220" height="86" rx="12" fill="#5a7d63"/>
+    <text x="548" y="124" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ecf6ed">PROMOTER</text>
+    <text x="548" y="150" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">@alpine_hope_381</text>
+
+    <rect x="438" y="314" width="220" height="86" rx="12" fill="#5a7d63"/>
+    <text x="548" y="348" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ecf6ed">PROMOTER</text>
+    <text x="548" y="374" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">@alpine_mia_143</text>
+
+    <rect x="782" y="48" width="190" height="70" rx="12" fill="#7a5c3a"/>
+    <text x="877" y="76" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff5e6">REACHED CREATOR</text>
+    <text x="877" y="98" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff">@gear_mia_238</text>
+
+    <rect x="782" y="134" width="190" height="70" rx="12" fill="#7a5c3a"/>
+    <text x="877" y="162" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff5e6">REACHED CREATOR</text>
+    <text x="877" y="184" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff">@outdoor_kara_155</text>
+
+    <rect x="782" y="232" width="190" height="70" rx="12" fill="#7a5c3a"/>
+    <text x="877" y="260" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff5e6">REACHED CREATOR</text>
+    <text x="877" y="282" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff">@camp_faye_474</text>
+
+    <rect x="782" y="376" width="190" height="70" rx="12" fill="#7a5c3a"/>
+    <text x="877" y="404" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff5e6">REACHED CREATOR</text>
+    <text x="877" y="426" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff">@recovery_cole_422</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4a5755">
+    <rect x="296" y="168" width="126" height="24" rx="5" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="359" y="184" text-anchor="middle">promotes: organic</text>
+
+    <rect x="296" y="282" width="126" height="24" rx="5" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="359" y="298" text-anchor="middle">promotes: affiliate</text>
+
+    <rect x="672" y="112" width="88" height="22" rx="5" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="716" y="127" text-anchor="middle">connects_to</text>
+
+    <rect x="672" y="180" width="88" height="22" rx="5" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="716" y="195" text-anchor="middle">connects_to</text>
+
+    <rect x="672" y="306" width="88" height="22" rx="5" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="716" y="321" text-anchor="middle">connects_to</text>
+
+    <rect x="672" y="420" width="88" height="22" rx="5" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="716" y="435" text-anchor="middle">connects_to</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#2f3b39">
+    <rect x="42" y="438" width="660" height="34" rx="6" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="60" y="460">Read left to right: brand -> promoter creator -> creators reached through the promoter network.</text>
+  </g>
+</svg>

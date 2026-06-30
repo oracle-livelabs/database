@@ -2,38 +2,37 @@
 
 ## Introduction
 
-This closing lab ties the retail workflow together. Across the workshop, Seer Sporting Goods connected product demand, customer signals, creator influence, fulfillment routing, order documents, in-database machine learning, natural-language SQL, and auditable agent actions. The common foundation was Oracle Database 26ai.
+This closing lab ties the workshop together by showing how one governed **Oracle Database 26ai** foundation supports the full retail decision loop: observe the business, understand demand, trace influence, route fulfillment, protect orders, score risk, ask trusted questions, and review agent actions.
 
-The practical point is simple: Oracle Database 26ai backs one connected retail decision path across data, AI, security, and operations. Each lab showed a different part of that path: observe the business, understand demand, trace influence, route fulfillment, protect orders, score risk, ask questions, and record agent actions.
+The practical point is simple: **Oracle Database 26ai** supports one connected retail decision path across data, AI, security, and operations. Each lab highlighted a different business checkpoint, but the workshop takeaway is that every decision still traces back to the same governed retail evidence.
 
-Estimated Time: 5 minutes
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Retail teams lose speed and trust when dashboards, AI signals, fulfillment logic, order evidence, and agent actions live in separate systems. |
+| What You Will Prove | The workshop connects each retail decision back to database evidence that can be queried, secured, and explained. |
+| Database Capability | Oracle AI Database 26ai brings multiple data models, AI-ready functions, analytics, security, and audit history into one operating foundation. |
+| Outcome | Seer Sporting Goods can move from feature-by-feature demos to one governed retail decision loop. |
+{: title="Workshop Outcome Story"}
+
+**Persona focus:** Business leaders care about faster decisions and explainable outcomes. Technical teams care about reducing integration work while keeping data, AI, security, and audit evidence governed in one database foundation.
+
+Estimated Time: **5 minutes**
 
 ### Objectives
 
-- Review the end-to-end scene sequence.
-- Connect each screen to a practical retail decision.
-- Explain the workshop flow in plain retail terms.
+- Review the full workshop flow as one connected retail decision process rather than a set of isolated technical features.
+- Connect each scene to the business decision it supports, such as demand sensing, fulfillment choice, order governance, or action traceability.
+- Explain the workshop flow in plain retail language so learners can describe the business value without relying on technical shorthand.
 
 ## Task 1: Review the final outcome
 
+Perform the following set of steps to reconnect each lab to the same governed retail decision loop and database foundation.
+
 1. Review the workshop flow from the database point of view.
 
-    This final query ties every lab back to a retail decision and the database evidence behind it. `UNION ALL` stacks several short result sets into one evidence map. Each row names a signal, the screen where the learner saw it, and the Oracle Database evidence behind the screen. Use the result to explain the workshop as one governed decision loop across the major database features.
-
-    ```sql
-    <copy>
-    SELECT 'Operating picture' AS "Signal", 'Retail Command Center' AS "Scene", 'ORDERS, SOCIAL_POSTS, INVENTORY, RETURN_REQUESTS, and AGENT_ACTIONS' AS "Database Evidence" FROM dual
-    UNION ALL SELECT 'Viral demand', 'Customer Trend Signals', 'SOCIAL_POSTS, PRODUCT_EMBEDDINGS, and SEMANTIC_MATCHES' FROM dual
-    UNION ALL SELECT 'Creator propagation', 'Creator Influence Network', 'INFLUENCER_NETWORK property graph' FROM dual
-    UNION ALL SELECT 'Fulfillment distance', 'Intelligent Fulfillment Network', 'SDO_GEOMETRY locations and SDO_DISTANCE' FROM dual
-    UNION ALL SELECT 'Order state', 'Unified Order Intelligence', 'ORDERS_DV JSON Relational Duality view' FROM dual
-    UNION ALL SELECT 'ML prediction', 'Retail OML Analytics', 'DBMS_DATA_MINING models and OML feature views' FROM dual
-    UNION ALL SELECT 'Plain-English analytics', 'Ask Retail Data', 'Semantic views, comments, and visible SQL' FROM dual
-    UNION ALL SELECT 'Agent action', 'Retail AI Agent Console', 'PL/SQL tools and AGENT_ACTIONS audit rows' FROM dual;
-    </copy>
-    ```
-
-    Expected output:
+    This table ties every lab back to a retail decision and the database evidence behind it. Use it as the final business map of the workshop: one governed decision loop supported by one connected retail data foundation.
 
     | Signal | Scene | Database Evidence |
     | --- | --- | --- |
@@ -51,13 +50,30 @@ Estimated Time: 5 minutes
 
 ## Task 2: Explain the workshop flow
 
-1. Use this concise summary to explain the workshop flow.
+Perform the following set of steps to translate the technical walkthrough into a plain-language business story.
 
-    ```text
-    Seer Sporting Goods connects product demand, customer signals, creator influence, fulfillment routing, order documents, in-database machine learning, natural-language SQL, and auditable agent actions through one Oracle AI Database 26ai foundation.
-    ```
+1. From retail signal to trusted action
 
-2. Close with the same idea that opened the lab: less data movement, clearer decisions, and a direct path from evidence to action. The workshop is not a set of disconnected feature demos. It is one retail operating pattern where Oracle Database 26ai keeps the data, AI, security, analytics, and agent history together.
+    **Seer Sporting Goods** can now follow a retail signal from first observation to trusted action. A product starts to trend, the business sees it in the command center, vector search connects customer language to products by meaning, the graph shows how influence spreads, Spatial narrows the fulfillment options, OML highlights likely risk, and approved SQL or agent tools support the final action.
+
+2. One database foundation
+
+    The power of the workshop is not any single feature in isolation. The value is that these capabilities work together around the same operational retail data, so the business can move from signal to action without losing context, governance, or auditability.
+
+3. Outcomes by persona
+
+    | Persona | What changed by the end of the workshop |
+    | --- | --- |
+    | Business leader | Sees one retail decision loop instead of disconnected feature demos. |
+    | Merchandising and marketing analyst | Can connect demand, creator influence, product fit, and inventory pressure. |
+    | Fulfillment planner | Can explain shipping choices with distance, service zones, and available inventory. |
+    | Application or database developer | Can support document, vector, graph, spatial, ML, and agent patterns without moving the source data into separate systems. |
+    | Data and AI practitioner | Can keep model scoring, semantic search, trusted answers, and agent evidence close to governed operational data. |
+    {: title="Workshop Outcomes by Persona"}
+
+4. The operating pattern
+
+    The retail team does not just get a dashboard, a model, a graph, or an agent. It gets a governed decision loop: observe demand, understand why it is changing, decide how to respond, act through trusted database-backed tools, and prove what happened afterward.
 
 ## Acknowledgements
 

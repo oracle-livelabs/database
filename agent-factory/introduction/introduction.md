@@ -52,7 +52,7 @@ You may now **proceed to the next lab**
 
 **Authors** 
 
-* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Database Applied AI Technical Staff
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 
