@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Mock screenshot of John's margin recovery case agent flow">
+  <rect width="1200" height="720" fill="#f7f4ef"/>
+  <rect x="0" y="0" width="1200" height="64" fill="#312d2a"/>
+  <text x="32" y="40" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#ffffff">Private Agent Factory - Builder Studio</text>
+  <text x="930" y="40" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#d9d2c8">ACME Margin Recovery Case Agent</text>
+
+  <rect x="34" y="92" width="1128" height="596" rx="10" fill="#ffffff" stroke="#d8d0c6"/>
+  <text x="60" y="130" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#2f2a24">Agent Flow</text>
+  <text x="60" y="156" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6d6258">Reason across ERP, contract policy, CRM context, and a governed action.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#8a8075"/>
+    </marker>
+    <style>
+      .node-title { font: 700 15px Arial, Helvetica, sans-serif; fill: #2f2a24; }
+      .node-body { font: 13px Arial, Helvetica, sans-serif; fill: #5d554d; }
+      .node { fill: #fbfaf7; stroke: #cfc5ba; stroke-width: 1.5; }
+      .action { fill: #f3f7f4; stroke: #6f9b7b; stroke-width: 1.5; }
+      .prompt { fill: #f6f2fa; stroke: #9b7bb8; stroke-width: 1.5; }
+      .data { fill: #f2f6fa; stroke: #7c95ad; stroke-width: 1.5; }
+      .line { stroke: #8a8075; stroke-width: 2; marker-end: url(#arrow); fill: none; }
+    </style>
+  </defs>
+
+  <rect class="node" x="60" y="220" width="150" height="76" rx="8"/>
+  <text class="node-title" x="78" y="248">Chat Input</text>
+  <text class="node-body" x="78" y="272">order_number</text>
+
+  <rect class="data" x="270" y="170" width="190" height="82" rx="8"/>
+  <text class="node-title" x="288" y="202">ERP Margin SQL</text>
+  <text class="node-body" x="288" y="226">ACME_MARGIN_RECOVERY</text>
+  <text class="node-body" x="288" y="244">CANDIDATE_V</text>
+
+  <rect class="data" x="270" y="270" width="190" height="82" rx="8"/>
+  <text class="node-title" x="288" y="302">Contract SQL</text>
+  <text class="node-body" x="288" y="326">ACME_CONTRACT_</text>
+  <text class="node-body" x="288" y="344">EXCEPTION_PACKET_V</text>
+
+  <rect class="data" x="270" y="370" width="190" height="82" rx="8"/>
+  <text class="node-title" x="288" y="402">CRM SQL</text>
+  <text class="node-body" x="288" y="426">ACME_CRM_ACCOUNT_</text>
+  <text class="node-body" x="288" y="444">CONTEXT_V</text>
+
+  <rect class="node" x="520" y="270" width="190" height="82" rx="8"/>
+  <text class="node-title" x="538" y="302">Knowledge Agent</text>
+  <text class="node-body" x="538" y="326">ACME Northstar</text>
+  <text class="node-body" x="538" y="344">Contract Agent</text>
+
+  <rect class="prompt" x="770" y="230" width="190" height="122" rx="8"/>
+  <text class="node-title" x="788" y="262">Prompt / LLM</text>
+  <text class="node-body" x="788" y="286">Create executive</text>
+  <text class="node-body" x="788" y="304">case brief and</text>
+  <text class="node-body" x="788" y="322">action payload</text>
+
+  <rect class="node" x="770" y="430" width="190" height="82" rx="8"/>
+  <text class="node-title" x="788" y="462">Condition</text>
+  <text class="node-body" x="788" y="486">Low margin +</text>
+  <text class="node-body" x="788" y="504">contract review + CRM</text>
+
+  <rect class="action" x="1010" y="390" width="160" height="102" rx="8"/>
+  <text class="node-title" x="1026" y="424">OpenAPI Tool</text>
+  <text class="node-body" x="1026" y="448">createMargin</text>
+  <text class="node-body" x="1026" y="466">RecoveryCase</text>
+
+  <rect class="node" x="1010" y="545" width="160" height="76" rx="8"/>
+  <text class="node-title" x="1026" y="577">Chat Output</text>
+  <text class="node-body" x="1026" y="601">case_id + audit_id</text>
+
+  <path class="line" d="M210 258 C235 258 242 212 270 212"/>
+  <path class="line" d="M210 258 C235 258 242 312 270 312"/>
+  <path class="line" d="M210 258 C235 258 242 412 270 412"/>
+  <path class="line" d="M460 312 L520 312"/>
+  <path class="line" d="M460 212 C560 210 675 238 770 270"/>
+  <path class="line" d="M460 312 C560 312 675 302 770 296"/>
+  <path class="line" d="M460 412 C560 414 675 344 770 326"/>
+  <path class="line" d="M710 312 L770 312"/>
+  <path class="line" d="M865 352 L865 430"/>
+  <path class="line" d="M960 472 L1010 442"/>
+  <path class="line" d="M1090 492 L1090 545"/>
+
+  <rect x="60" y="615" width="835" height="38" rx="6" fill="#fff5e6" stroke="#e0c38b"/>
+  <text x="78" y="640" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#5f4a1d">Governed boundary: creates a case only. No customer email, pricing change, order release, or legal/accounting conclusion.</text>
+</svg>

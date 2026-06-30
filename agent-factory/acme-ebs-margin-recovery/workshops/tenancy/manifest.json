@@ -1,0 +1,26 @@
+{
+  "workshoptitle": "Fast-Track ERP Agents with Oracle AI Database Private Agent Factory",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started/get-started.md"
+    },
+    {
+      "title": "Lab 1: Maya Finds the Margin Leak",
+      "filename": "../../labs/01-margin-investigator/margin-investigator.md"
+    },
+    {
+      "title": "Lab 2: Janice Finds the Contract Signal",
+      "filename": "../../labs/02-contract-exception/contract-exception.md"
+    },
+    {
+      "title": "Lab 3: John Creates the Governed Recovery Case",
+      "filename": "../../labs/03-margin-recovery/margin-recovery.md"
+    }
+  ]
+}
