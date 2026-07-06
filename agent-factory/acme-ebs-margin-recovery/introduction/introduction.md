@@ -8,7 +8,7 @@ This workshop shows a practical answer. You will use Oracle AI Database Private 
 
 The goal is not to replace Oracle E-Business Suite or bypass process controls. The goal is to add an AI control layer over trusted operational systems so teams can move faster without losing governance.
 
-**Estimated Time:** 90 minutes
+Estimated Workshop Time: 90 minutes
 
 ### Objectives
 

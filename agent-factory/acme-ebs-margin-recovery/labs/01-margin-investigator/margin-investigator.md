@@ -177,77 +177,77 @@ Add these nodes:
 4. **OpenAPI Tool:** uses **ACME EBS Action Service** operation `createMarginInvestigationNote`.
 5. **Chat Output:** returns the note ID, audit ID, and summary.
 
-SQL Query for the builder-only evidence step:
+    SQL Query for the builder-only evidence step:
 
-```
-<copy>
-select
-  order_number,
-  customer_name,
-  ship_to_country,
-  gross_revenue,
-  gross_margin_pct,
-  freight_absorbed,
-  export_tax_absorbed,
-  rebate_accrual,
-  charge_explanation,
-  tax_matrix_status,
-  tax_matrix_evidence,
-  expired_pricing_rule_count,
-  expired_pricing_rules,
-  expired_pricing_rule_end_date,
-  pricing_rule_owner,
-  remediation_owner,
-  remediation_plan,
-  remediation_target_date,
-  review_signal
-from admin.acme_margin_full
-where booked_date between date '2026-06-01' and date '2026-06-30'
-  and (
-    gross_margin_pct < 25
-    or coalesce(freight_absorbed, 0) > 0
-    or coalesce(export_tax_absorbed, 0) > 0
-    or coalesce(rebate_accrual, 0) > 0
-  )
-order by gross_margin_pct
-</copy>
-```
+    ```
+    <copy>
+    select
+      order_number,
+      customer_name,
+      ship_to_country,
+      gross_revenue,
+      gross_margin_pct,
+      freight_absorbed,
+      export_tax_absorbed,
+      rebate_accrual,
+      charge_explanation,
+      tax_matrix_status,
+      tax_matrix_evidence,
+      expired_pricing_rule_count,
+      expired_pricing_rules,
+      expired_pricing_rule_end_date,
+      pricing_rule_owner,
+      remediation_owner,
+      remediation_plan,
+      remediation_target_date,
+      review_signal
+    from admin.acme_margin_full
+    where booked_date between date '2026-06-01' and date '2026-06-30'
+      and (
+        gross_margin_pct < 25
+        or coalesce(freight_absorbed, 0) > 0
+        or coalesce(export_tax_absorbed, 0) > 0
+        or coalesce(rebate_accrual, 0) > 0
+      )
+    order by gross_margin_pct
+    </copy>
+    ```
 
-Prompt/LLM Step:
+    Prompt/LLM Step:
 
-```
-<copy>
-You are a finance operations assistant for ACME Precision Components.
+    ```
+    <copy>
+    You are a finance operations assistant for ACME Precision Components.
 
-Use only the SQL evidence below.
+    Use only the SQL evidence below.
 
-SQL evidence:
-{{SQL Query}}
+    SQL evidence:
+    {{SQL Query}}
 
-Produce:
-1. A concise explanation of why June 2026 industrial pump margin fell below target or required attention.
-2. The affected orders and inferred root causes. Derive the root causes from charge, tax matrix, expired pricing-rule, and remediation evidence columns.
-3. A JSON payload for createMarginInvestigationNote with period_name, finding, root_cause, estimated_margin_impact, and recommended_owner.
+    Produce:
+    1. A concise explanation of why June 2026 industrial pump margin fell below target or required attention.
+    2. The affected orders and inferred root causes. Derive the root causes from charge, tax matrix, expired pricing-rule, and remediation evidence columns.
+    3. A JSON payload for createMarginInvestigationNote with period_name, finding, root_cause, estimated_margin_impact, and recommended_owner.
 
-Use estimated_margin_impact as the sum of freight_absorbed, export_tax_absorbed, and rebate_accrual when those columns are present. For the expected demo evidence, that total is 106035.
-The recommended owner should be Finance Operations.
-Do not claim the underlying EBS data has been fixed. The action creates a controller review note only.
-</copy>
-```
+    Use estimated_margin_impact as the sum of freight_absorbed, export_tax_absorbed, and rebate_accrual when those columns are present. For the expected demo evidence, that total is 106035.
+    The recommended owner should be Finance Operations.
+    Do not claim the underlying EBS data has been fixed. The action creates a controller review note only.
+    </copy>
+    ```
 
-For the OpenAPI tool payload, use the JSON produced by the Prompt/LLM step. If you need a deterministic payload for the first run, use:
+    For the OpenAPI tool payload, use the JSON produced by the Prompt/LLM step. If you need a deterministic payload for the first run, use:
 
-```
-<copy>
-{
-  "period_name": "June 2026",
-  "finding": "Industrial pump margin fell below target or required attention on June orders with low margin and absorbed charges.",
-  "root_cause": "EBS applied EU duties not quoted by CPQ, expired Northstar rebate rules remained active, and emergency freight was absorbed for AX900 backorders.",
-  "estimated_margin_impact": 106035,
-  "recommended_owner": "Finance Operations"
-}
-</copy>
-```
+    ```
+    <copy>
+    {
+      "period_name": "June 2026",
+      "finding": "Industrial pump margin fell below target or required attention on June orders with low margin and absorbed charges.",
+      "root_cause": "EBS applied EU duties not quoted by CPQ, expired Northstar rebate rules remained active, and emergency freight was absorbed for AX900 backorders.",
+      "estimated_margin_impact": 106035,
+      "recommended_owner": "Finance Operations"
+    }
+    </copy>
+    ```
 
 ## Task 6: Run and Confirm the After State
 

@@ -163,65 +163,65 @@ Add these nodes:
 4. **OpenAPI Tool:** uses **ACME EBS Action Service** operation `createMarginRecoveryCase`.
 5. **Chat Output:** returns the case ID, audit ID, evidence summary, owner, next action, and status.
 
-![Diagram of the ACME Margin Recovery Case Agent flow. The flow starts with Chat Input, retrieves ERP margin, contract, and CRM evidence, scopes contract knowledge to the Northstar agreement, prepares a case payload with a Prompt/LLM step, calls the createMarginRecoveryCase OpenAPI tool, and returns a case ID and audit ID.](../../images/john-margin-recovery-agent-flow.svg)
+    ![Diagram of the ACME Margin Recovery Case Agent flow. The flow starts with Chat Input, retrieves ERP margin, contract, and CRM evidence, scopes contract knowledge to the Northstar agreement, prepares a case payload with a Prompt/LLM step, calls the createMarginRecoveryCase OpenAPI tool, and returns a case ID and audit ID.](../../images/john-margin-recovery-agent-flow.svg)
 
-SQL Query for the builder-only evidence step:
+    SQL Query for the builder-only evidence step:
 
-```
-<copy>
-select *
-from admin.acme_margin_recovery_candidate_v
-where order_number = :order_number
-</copy>
-```
+    ```
+    <copy>
+    select *
+    from admin.acme_margin_recovery_candidate_v
+    where order_number = :order_number
+    </copy>
+    ```
 
-Prompt/LLM Step:
+    Prompt/LLM Step:
 
-```
-<copy>
-You are a commercial margin recovery assistant for ACME Precision Components.
+    ```
+    <copy>
+    You are a commercial margin recovery assistant for ACME Precision Components.
 
-Use only the SQL evidence below and the ACME commercial recovery policy principle that the approved deliverable is a governed Margin Recovery Case.
+    Use only the SQL evidence below and the ACME commercial recovery policy principle that the approved deliverable is a governed Margin Recovery Case.
 
-SQL evidence:
-{{SQL Query}}
+    SQL evidence:
+    {{SQL Query}}
 
-Produce:
-1. Customer/order summary.
-2. Margin impact and primary root cause.
-3. Contract signal and contract_id.
-4. CRM account context, including account owner and relationship health.
-5. Recommended recovery path.
-6. Required approvals.
-7. Evidence summary.
-8. A JSON payload for createMarginRecoveryCase with order_number, contract_id, customer_name, account_owner, priority, margin_impact_summary, contract_summary, crm_summary, recommended_next_step, required_approvals, and evidence_summary.
+    Produce:
+    1. Customer/order summary.
+    2. Margin impact and primary root cause.
+    3. Contract signal and contract_id.
+    4. CRM account context, including account owner and relationship health.
+    5. Recommended recovery path.
+    6. Required approvals.
+    7. Evidence summary.
+    8. A JSON payload for createMarginRecoveryCase with order_number, contract_id, customer_name, account_owner, priority, margin_impact_summary, contract_summary, crm_summary, recommended_next_step, required_approvals, and evidence_summary.
 
-Use priority = "HIGH" when relationship_health is "At risk" or estimated_margin_impact is material.
-Do not send a negotiation email.
-Do not update EBS.
-Do not claim pricing, rebate, revenue, or customer records have been changed.
-</copy>
-```
+    Use priority = "HIGH" when relationship_health is "At risk" or estimated_margin_impact is material.
+    Do not send a negotiation email.
+    Do not update EBS.
+    Do not claim pricing, rebate, revenue, or customer records have been changed.
+    </copy>
+    ```
 
-If you need a deterministic payload for the first run, use:
+    If you need a deterministic payload for the first run, use:
 
-```
-<copy>
-{
-  "order_number": "SO-48192",
-  "contract_id": "CONTRACT_ID_1111",
-  "customer_name": "Northstar Mining Ltd.",
-  "account_owner": "Elena Brooks",
-  "priority": "HIGH",
-  "margin_impact_summary": "June 2026 industrial pump order SO-48192 has low margin from expired rebate behavior and emergency freight absorption. The estimated recovery opportunity should be reviewed before any customer engagement.",
-  "contract_summary": "SO-48192 maps to CONTRACT_ID_1111 for Northstar Mining Ltd. Contract and order evidence include a revenue-review signal tied to customer acceptance after installation and site testing.",
-  "crm_summary": "Northstar is a strategic account with relationship health At risk, open expansion pipeline, prior concessions, and account owner Elena Brooks.",
-  "recommended_next_step": "Create an executive-led commercial recovery review with the account owner, CFO delegate, and Pricing Operations before requesting repayment. Required approvals are Revenue Accounting, Account Owner, and Finance Controller.",
-  "required_approvals": ["Revenue Accounting", "Account Owner", "Finance Controller"],
-  "evidence_summary": "Margin, contract, and CRM context support a governed recovery case rather than an automatic EBS update, price change, or customer email."
-}
-</copy>
-```
+    ```
+    <copy>
+    {
+      "order_number": "SO-48192",
+      "contract_id": "CONTRACT_ID_1111",
+      "customer_name": "Northstar Mining Ltd.",
+      "account_owner": "Elena Brooks",
+      "priority": "HIGH",
+      "margin_impact_summary": "June 2026 industrial pump order SO-48192 has low margin from expired rebate behavior and emergency freight absorption. The estimated recovery opportunity should be reviewed before any customer engagement.",
+      "contract_summary": "SO-48192 maps to CONTRACT_ID_1111 for Northstar Mining Ltd. Contract and order evidence include a revenue-review signal tied to customer acceptance after installation and site testing.",
+      "crm_summary": "Northstar is a strategic account with relationship health At risk, open expansion pipeline, prior concessions, and account owner Elena Brooks.",
+      "recommended_next_step": "Create an executive-led commercial recovery review with the account owner, CFO delegate, and Pricing Operations before requesting repayment. Required approvals are Revenue Accounting, Account Owner, and Finance Controller.",
+      "required_approvals": ["Revenue Accounting", "Account Owner", "Finance Controller"],
+      "evidence_summary": "Margin, contract, and CRM context support a governed recovery case rather than an automatic EBS update, price change, or customer email."
+    }
+    </copy>
+    ```
 
 ## Task 5: Run and Confirm the After State
 

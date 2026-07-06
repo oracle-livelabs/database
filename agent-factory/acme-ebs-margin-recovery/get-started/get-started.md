@@ -178,11 +178,11 @@ Before and after each agent run, use PAF to inspect the action state:
 2. Open REST API source **ACME EBS Action Service**.
 3. Run or test the operation:
 
-```
-<copy>
-listActionAudit
-</copy>
-```
+    ```
+    <copy>
+    listActionAudit
+    </copy>
+    ```
 
 On a fresh environment, the response should show empty arrays for:
 

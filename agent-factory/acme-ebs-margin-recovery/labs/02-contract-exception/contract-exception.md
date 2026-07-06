@@ -180,59 +180,59 @@ Add these nodes:
 5. **OpenAPI Tool:** uses **ACME EBS Action Service** operation `createRevenueExceptionPackage`.
 6. **Chat Output:** returns evidence, package ID, and audit ID.
 
-SQL Query for the builder-only evidence step:
+    SQL Query for the builder-only evidence step:
 
-```
-<copy>
-select *
-from admin.acme_contract_exception_packet_v
-where order_number = :order_number
-</copy>
-```
+    ```
+    <copy>
+    select *
+    from admin.acme_contract_exception_packet_v
+    where order_number = :order_number
+    </copy>
+    ```
 
-Prompt/LLM Step:
+    Prompt/LLM Step:
 
-```
-<copy>
-You are a contracts operations assistant for ACME Precision Components.
+    ```
+    <copy>
+    You are a contracts operations assistant for ACME Precision Components.
 
-Use only the SQL evidence below and the ACME revenue policy principle that acceptance after installation, site testing, customer sign-off, milestone acceptance, or other post-shipment acceptance language requires revenue review.
+    Use only the SQL evidence below and the ACME revenue policy principle that acceptance after installation, site testing, customer sign-off, milestone acceptance, or other post-shipment acceptance language requires revenue review.
 
-SQL evidence:
-{{SQL Query}}
+    SQL evidence:
+    {{SQL Query}}
 
-Classify whether the order requires revenue review. If it does, produce:
-1. The exact clause issue.
-2. Why it matters operationally.
-3. A JSON payload for createRevenueExceptionPackage with order_number, customer_name, clause_summary, recommended_hold, and evidence_summary.
+    Classify whether the order requires revenue review. If it does, produce:
+    1. The exact clause issue.
+    2. Why it matters operationally.
+    3. A JSON payload for createRevenueExceptionPackage with order_number, customer_name, clause_summary, recommended_hold, and evidence_summary.
 
-Use recommended_hold = "Revenue review hold" when review is required.
-Do not make final accounting conclusions. Recommend review only.
-Do not claim the EBS order status or revenue treatment has been changed.
-</copy>
-```
+    Use recommended_hold = "Revenue review hold" when review is required.
+    Do not make final accounting conclusions. Recommend review only.
+    Do not claim the EBS order status or revenue treatment has been changed.
+    </copy>
+    ```
 
-Condition:
+    Condition:
 
-```
-<copy>
-Call createRevenueExceptionPackage only when revenue_review_signal = REVENUE_REVIEW_REQUIRED or the Prompt/LLM Step says revenue review is required.
-</copy>
-```
+    ```
+    <copy>
+    Call createRevenueExceptionPackage only when revenue_review_signal = REVENUE_REVIEW_REQUIRED or the Prompt/LLM Step says revenue review is required.
+    </copy>
+    ```
 
-If you need a deterministic payload for the first run, use:
+    If you need a deterministic payload for the first run, use:
 
-```
-<copy>
-{
-  "order_number": "SO-48192",
-  "customer_name": "Northstar Mining Ltd.",
-  "clause_summary": "Customer PO requires acceptance after installation, commissioning, and a 72-hour site performance test.",
-  "recommended_hold": "Revenue review hold",
-  "evidence_summary": "Order packet is marked REVENUE_REVIEW_REQUIRED because acceptance is contingent on post-shipment installation or site testing. Contract context maps SO-48192 to CONTRACT_ID_1111."
-}
-</copy>
-```
+    ```
+    <copy>
+    {
+      "order_number": "SO-48192",
+      "customer_name": "Northstar Mining Ltd.",
+      "clause_summary": "Customer PO requires acceptance after installation, commissioning, and a 72-hour site performance test.",
+      "recommended_hold": "Revenue review hold",
+      "evidence_summary": "Order packet is marked REVENUE_REVIEW_REQUIRED because acceptance is contingent on post-shipment installation or site testing. Contract context maps SO-48192 to CONTRACT_ID_1111."
+    }
+    </copy>
+    ```
 
 ## Task 5: Run and Confirm the After State
 
