@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Retail teams need to react before a demand surge turns into a stockout. This opening is strongest when it states the decision clearly: *which products need attention now, and which locations are most exposed if demand keeps rising?*
+Retail teams need to react before a demand surge turns into a stockout. This lab answers two practical questions: which products need attention now, and which locations are most exposed if demand keeps rising?
 
-**Oracle Machine Learning for SQL** keeps machine learning close to the retail data. Emphasize the business payoff: predictions stay easier to trust when the features, model objects, and operational evidence remain in one governed environment.
+**Oracle Machine Learning** for SQL keeps machine learning close to the retail data. Predictions are easier to trust when the features, model objects, and operational evidence remain in one governed environment.
 
-In this lab, you use the **Retail OML Analytics** workflow to answer a practical question: which products are likely to surge, and which inventory positions need attention? The story builds from database model inventory, to model-ready features, to SQL scoring, to a replenishment-focused action list.
+In this lab, learners move from model inventory to feature inspection, scoring, and action prioritization. The prediction becomes useful when it leads to a replenishment or protection decision.
 
 ![Oracle Machine Learning for SQL flow](images/oml-sql-scoring-flow.svg " ")
 
@@ -38,7 +38,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Confirm OML models and feature views in the database
 
-Perform the following set of steps to confirm that predictive analytics are built from governed retail data and persistent in-database model objects.
+Perform the following set of steps to confirm that predictive analytics are built from governed retail data and persistent in-database model objects:
 
 1. Review the related application screen before you run SQL.
 
@@ -48,7 +48,7 @@ Perform the following set of steps to confirm that predictive analytics are buil
 
 2. Run this model inventory.
 
-    Oracle Machine Learning for SQL models are first-class database objects. This query reads `ALL_MINING_MODELS` to show the models that the current schema can score. The mining function tells you the type of machine learning problem, such as classification, regression, or clustering. The algorithm shows the method used to build the model.
+    **Oracle Machine Learning** for SQL models are first-class database objects. This query shows which predictive capabilities are available to score the current retail workflow without exporting data to a separate environment.
 
     Think of this as the model catalog check. Before using a prediction in an operational workflow, confirm which models exist, what kind of question each model answers, and whether the model can be scored from SQL.
 
@@ -90,7 +90,7 @@ Perform the following set of steps to confirm that predictive analytics are buil
 
 3. Run this feature view check.
 
-    Machine learning starts with prepared features. Keep the retail meaning front and center: these columns represent the demand, sentiment, engagement, sales, revenue, and inventory signals a planner would actually want the model to consider.
+    Machine learning starts with prepared features. These columns represent the demand, sentiment, engagement, sales, revenue, and inventory signals a planner would actually want the model to consider.
 
     ```sql
     <copy>
@@ -182,7 +182,7 @@ Perform the following set of steps to apply the in-database classification model
 
 1. Run this scoring query.
 
-    `PREDICTION` returns the label and `PREDICTION_PROBABILITY` returns the confidence, but explain the business use in plain language: the result helps planners separate products that merely look noisy from products that genuinely deserve immediate attention.
+    `PREDICTION` returns the label and `PREDICTION_PROBABILITY` returns the confidence. The result helps planners separate products that merely look noisy from products that genuinely deserve immediate attention.
 
     **The query has three important parts:**
 
@@ -235,7 +235,7 @@ Perform the following set of steps to apply the in-database classification model
 
 ## Task 4: Turn prediction into a replenishment action list
 
-Perform the following set of steps to combine model output with current inventory evidence. A surge prediction is useful only when the business can decide what to do next.
+Perform the following set of steps to combine model output with current inventory evidence. A surge prediction is useful only when the business can decide what to do next:
 
 ![Demand surge and inventory action interpretation](images/oml-prediction-inventory-action.svg " ")
 
@@ -243,7 +243,7 @@ Perform the following set of steps to combine model output with current inventor
 
 1. Run this query.
 
-    The common table expression scores each product with `DEMAND_SURGE_MODEL`, and the outer query joins those predictions to fulfillment risk. Make the business takeaway explicit: the action list matters because it combines likely demand pressure with locations that are already exposed.
+    The common table expression scores each product with `DEMAND_SURGE_MODEL`, and the outer query joins those predictions to fulfillment risk. The action list matters because it combines likely demand pressure with locations that are already exposed.
 
     **Read the query in two stages:**
 

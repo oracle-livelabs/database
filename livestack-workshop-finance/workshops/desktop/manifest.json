@@ -48,29 +48,19 @@
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
     {
-      "title": "Lab 8: Governed Data Copilot",
-      "description": "Ground trusted answers in approved finance views and visible SQL.",
-      "filename": "../../governed-data-copilot/governed-data-copilot.md"
-    },
-    {
-      "title": "Lab 9: AI Operations Agent Console",
-      "description": "Call trusted PL/SQL tools and inspect action audit history.",
-      "filename": "../../ai-operations-agent-console/ai-operations-agent-console.md"
-    },
-    {
-      "title": "Lab 10: Conclusion",
-      "description": "Connect the finance decision path into one operating pattern.",
+      "title": "Lab 8: Conclusion",
+      "description": "Turn the finance labs into a practical converged database takeaway.",
       "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
     },
     {
-      "title": "Lab 11: Final Quiz",
+      "title": "Lab 9: Final Quiz",
       "description": "Check your understanding with scored questions.",
       "filename": "../../final-quiz/final-quiz.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to common problems and directions for receiving Live Help.",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
     }
   ]
 }

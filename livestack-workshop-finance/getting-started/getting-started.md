@@ -2,7 +2,18 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. This setup matters because every later lab uses SQL as the workshop user against the prepared finance schema.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each finance query runs as the workshop user against the prepared finance schema.
+
+<details>
+<summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
+
+> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
+>
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+>
+> - `LLUSER` is the workshop database user and schema owner for the hands-on finance objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
+
+</details>
 
 Estimated Time: **5 minutes**
 
@@ -17,7 +28,7 @@ In this lab, you will:
 
 ## Task 1: Launch the LiveLabs environment
 
-Perform the following set of steps to launch the LiveLabs environment from the correct reservation, tenancy context, and workshop resources:
+Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -33,7 +44,7 @@ Perform the following set of steps to launch the LiveLabs environment from the c
 
 ## Task 2: Open SQL Worksheet
 
-Perform the following set of steps to open SQL Worksheet as the main workshop user and confirm the prepared finance schema before continuing:
+Open SQL Worksheet as the workshop user before running the finance queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -75,7 +86,7 @@ Perform the following set of steps to open SQL Worksheet as the main workshop us
 
 7. Run this check.
 
-    This check reads Oracle session context directly from the database. Make the business reason explicit: every later finance query depends on running against the prepared workshop schema, so this is the checkpoint that prevents misleading dashboard, risk, or audit results.
+    This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The finance labs use `LLUSER`, so both values should point to the workshop schema.
 
     ```sql
     <copy>

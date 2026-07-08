@@ -4,7 +4,7 @@
 
 This lab confirms that the retail data foundation is present and ready before learners trust any downstream analysis. By inspecting the supporting objects up front, the team can see that later dashboard, search, fulfillment, and AI results all come from the same governed source.
 
-The **LiveStack** application shows what the **Data Foundation** page loads or restores. This scene should make the business point explicit: the data load prepares the shared retail evidence used by planners, analysts, operators, and AI-assisted workflows later in the workshop.
+The LiveStack application shows what the **Data Foundation** page loads or restores. The data load prepares the shared retail evidence used by planners, analysts, operators, and AI-assisted workflows later in the workshop.
 
 ### Operating Story
 
@@ -30,7 +30,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Inventory the retail object families
 
-Perform the following set of steps to confirm that the workshop schema contains the core retail tables, views, graph objects, vector artifacts, OML assets, and PL/SQL tools used by later decision workflows.
+Perform the following set of steps to confirm that the workshop schema contains the core retail tables, views, graph objects, vector artifacts, OML assets, and PL/SQL tools used by later decision workflows:
 
 1. Review the related application screen before you run the SQL.
 
@@ -98,7 +98,7 @@ Perform the following set of steps to confirm that the workshop schema contains 
 
 ## Task 2: Map retail outcomes to database features
 
-Perform the following set of steps to connect each retail outcome to the database capability that supports it, so learners understand why each later SQL exercise matters to the business story.
+Perform the following set of steps to connect each retail outcome to the database capability that supports it, so learners understand why each later SQL exercise matters to the business story:
 
 1. Review this capability map.
 
@@ -136,9 +136,11 @@ Perform the following set of steps to connect each retail outcome to the databas
 
 2. This map is the mental model for the workshop. Each later lab uses SQL to show how the database creates a visible retail outcome.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Count the retail data groups
 
-Perform the following set of steps to measure the scale of the seeded retail dataset and give later KPI, search, graph, fulfillment, OML, and agent results the right business context.
+Perform the following set of steps to measure the scale of the seeded retail dataset and give later KPI, search, graph, fulfillment, OML, and agent results the right business context:
 
 1. Run this row-count query.
 
