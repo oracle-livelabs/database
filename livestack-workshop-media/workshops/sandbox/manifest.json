@@ -1,0 +1,81 @@
+{
+  "workshoptitle": "Build Media Launch Intelligence with Oracle Database 26ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Seer Media Midnight Harbor operating story and workshop goals.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Open Database Actions SQL Worksheet and confirm the workshop schema context.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Media Data Foundation",
+      "description": "Inspect the governed media schema foundation and map scenes to database capabilities.",
+      "filename": "../../lab-1-media-data-foundation/media-data-foundation.md"
+    },
+    {
+      "title": "Lab 2: Launch Operations Command Center",
+      "description": "Query launch KPIs, content revenue, and demand-alert evidence from Oracle Database.",
+      "filename": "../../lab-2-launch-operations-command-center/launch-operations-command-center.md"
+    },
+    {
+      "title": "Lab 3: Campaign and Rights Requests with JSON Relational Duality",
+      "description": "Use JSON Relational Duality, SQL/JSON, and relational SQL over one campaign request truth source.",
+      "filename": "../../lab-3-campaign-rights-requests-json-duality/campaign-rights-requests-json-duality.md"
+    },
+    {
+      "title": "Lab 4: Audience Momentum and Safety Signals with AI Vector Search",
+      "description": "Verify the embedding model and inspect governed semantic matching across content assets and audience signals.",
+      "filename": "../../lab-4-audience-momentum-safety-signals-vector-search/audience-momentum-safety-signals-vector-search.md"
+    },
+    {
+      "title": "Lab 5: Creator and Community Graph with Property Graph",
+      "description": "Use Property Graph and SQL/PGQ to analyze creator reach and connected influence paths.",
+      "filename": "../../lab-5-creator-community-graph-property-graph/creator-community-graph-property-graph.md"
+    },
+    {
+      "title": "Lab 6: Rights, Capacity, and Live Event Coverage with Oracle Spatial",
+      "description": "Use Oracle Spatial, demand regions, and distribution hubs for rights and coverage decisions.",
+      "filename": "../../lab-6-rights-capacity-live-event-coverage-spatial/rights-capacity-live-event-coverage-spatial.md"
+    },
+    {
+      "title": "Lab 7: Engagement, Revenue, and Retention Forecasts with Oracle Machine Learning",
+      "description": "Inspect OML models, forecast views, and capacity-risk evidence from the Media stack.",
+      "filename": "../../lab-7-engagement-revenue-retention-analytics-oml/engagement-revenue-retention-analytics-oml.md"
+    },
+    {
+      "title": "Lab 8: Ask Seer Media Data: Trusted Answers",
+      "description": "Show how approved views, metadata, and visible SQL support trusted media answers.",
+      "filename": "../../lab-8-ask-seer-media-data/ask-seer-media-data.md"
+    },
+    {
+      "title": "Lab 9: Seer Media Agent Console: Trusted Actions",
+      "description": "Call approved tools, inspect grounded evidence, and verify the audit trail.",
+      "filename": "../../lab-9-seer-media-agent-console/seer-media-agent-console.md"
+    },
+    {
+      "title": "Lab 10: Use Your Own Media Data",
+      "description": "Inspect the dataset-state and import workflow behind the bring-your-own-data path.",
+      "filename": "../../lab-10-use-your-own-media-data/use-your-own-media-data.md"
+    },
+    {
+      "title": "Conclusion",
+      "description": "Connect audience signals, rights capacity, forecasts, trusted answers, and agent actions into one media decision loop.",
+      "filename": "../../conclusion-media-outcomes/conclusion-media-outcomes.md"
+    },
+    {
+      "title": "Final Quiz",
+      "description": "Check your understanding with scored outcome-focused questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-label="Oracle Machine Learning for predictive assurance">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/></marker></defs>
+<rect width="960" height="300" fill="#ffffff"/>
+<text x="32" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2933">Oracle Machine Learning for predictive assurance</text>
+<text x="32" y="66" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Prediction matters when scores join back to the operating context.</text>
+<rect x="32" y="92" width="160" height="124" rx="6" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="44" y="120" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Features</text>
+<text x="44" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Orders, signals,</text>
+<text x="44" y="170" font-family="Arial, sans-serif" font-size="13" fill="#374151">capacity, value</text>
+<line x1="192" y1="154.0" x2="202" y2="154.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="214" y="92" width="160" height="124" rx="6" fill="#eef5fb" stroke="#6b7280"/>
+<text x="226" y="120" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">OML model</text>
+<text x="226" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Model artifacts run</text>
+<text x="226" y="170" font-family="Arial, sans-serif" font-size="13" fill="#374151">inside Oracle</text>
+<line x1="374" y1="154.0" x2="384" y2="154.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="396" y="92" width="160" height="124" rx="6" fill="#f5f1fb" stroke="#6b7280"/>
+<text x="408" y="120" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">SQL scoring</text>
+<text x="408" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Scores return</text>
+<text x="408" y="170" font-family="Arial, sans-serif" font-size="13" fill="#374151">risk evidence</text>
+<line x1="556" y1="154.0" x2="566" y2="154.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="578" y="92" width="160" height="124" rx="6" fill="#eff7f1" stroke="#6b7280"/>
+<text x="590" y="120" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Operational join</text>
+<text x="590" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Scores combine</text>
+<text x="590" y="170" font-family="Arial, sans-serif" font-size="13" fill="#374151">with site capacity</text>
+<line x1="738" y1="154.0" x2="748" y2="154.0" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="760" y="92" width="160" height="124" rx="6" fill="#fff6e8" stroke="#6b7280"/>
+<text x="772" y="120" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Action</text>
+<text x="772" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Retention and field</text>
+<text x="772" y="170" font-family="Arial, sans-serif" font-size="13" fill="#374151">teams prioritize</text>
+</svg>

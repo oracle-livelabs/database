@@ -15,15 +15,19 @@
       "filename": "../../embedding.md"
     },
     {
-      "title": "Lab 2: Install Trusted Answer Search",
+      "title": "Lab 2: Run the Backend Installer",
+      "filename": "../../backend.md"
+    },
+    {
+      "title": "Lab 3: Load APEX Apps and Sample Data",
       "filename": "../../install.md"
     },
     {
-      "title": "Lab 3: Trusted Continuous Improvement of Search",
+      "title": "Lab 4: Make Wikimedia Search Trusted",
       "filename": "../../update_search.md"
     },
     {
-      "title": "Lab 4: Advanced Capabilities",
+      "title": "Lab 5: Prove and Operate Trusted Search",
       "filename": "../../advanced.md"
     },
     {

@@ -1,5 +1,14 @@
 # Workshop with a single set of labs
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 ## Instructions - Delete this file when finished
 
 1. Open the sample-workshop template in Atom or Visual Studio Code
@@ -95,3 +104,8 @@ The manifest.json file needs to know the location of each lab relative to where 
 This [APEX Workshop](https://oracle-livelabs.github.io/apex/spreadsheet/workshops/freetier/) is a good example of a workshop with a single set of labs: [https://github.com/oracle-livelabs/apex/tree/main/spreadsheet](https://github.com/oracle-livelabs/apex/tree/main/spreadsheet).
 
 
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

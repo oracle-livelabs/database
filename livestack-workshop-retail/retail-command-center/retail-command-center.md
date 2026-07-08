@@ -2,21 +2,38 @@
 
 ## Introduction
 
-A retail command center works only if the daily operating view is easy to trust. That gets difficult when orders, fulfillment, customer signals, product demand, returns exposure, analytics, and agent activity live in separate systems.
+**Retail Command Center** helps teams answer a daily operating question: *What needs attention right now, and what evidence supports that call?*
 
-Oracle AI Database keeps the operational, analytical, JSON, in-memory, and AI-ready data close to the same retail schema. The application brings together live retail KPIs, customer signal velocity, revenue category detail, and product-level evidence. In SQL Worksheet, you inspect the database queries behind those views.
+**Oracle AI Database** keeps operational, analytical, and AI-ready retail evidence close to the same schema. Frame this scene around the business user who needs one trusted view of revenue, demand signals, return exposure, and agent activity without stitching together separate systems.
 
-Estimated Time: 10 minutes
+The technical challenge is usually integration. A team can spend a lot of time moving data between specialized systems, writing pipelines, and reconciling results before a business user sees one dashboard. This lab shows the simpler pattern: use familiar SQL over one converged database foundation so the command center can combine different kinds of retail evidence without turning the application into an integration project.
+
+### Operating Story
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Seer Sporting Goods leaders need a daily triage view before demand spikes, returns, or inventory pressure become customer problems. |
+| What You Will Prove | Dashboard metrics, trending products, product detail, and revenue categories can be traced back to governed database evidence. |
+| Database Capability | SQL combines orders, order items, products, social posts, returns, inventory, and agent actions without moving data into a separate mart. |
+| Outcome | The command center is not a static screen; it is a live operating picture the business can inspect and challenge. |
+{: title="Retail Command Center Story"}
+
+**Persona focus:** The operations leader wants one daily triage view. The application and database team needs to assemble that view without building fragile pipelines across separate systems for orders, returns, social demand, inventory, and agent activity.
+
+Estimated Time: **10 minutes**
 
 ### Objectives
 
 - Review dashboard KPIs as database-backed operating signals.
 - Query trending products from social momentum and product data.
 - Inspect revenue by category from orders and line items.
-- Connect the command center to the downstream labs for trend, fulfillment, order, OML, Ask Data, and agent workflows.
+- Connect the command center to the downstream labs so learners see how one operating view expands into trend analysis, fulfillment choices, order intelligence, predictive analytics, trusted answers, and agent-assisted action.
 
 
 ## Task 1: Review dashboard operating metrics
+
+Perform the following set of steps to connect command-center cards to the operational evidence behind daily retail triage, including revenue, demand spikes, return exposure, and agent activity.
+
 1. Review the related application screen before you run the SQL.
 
     ![Retail Command Center dashboard with KPI cards and charts](images/command-center-dashboard.png " ")
@@ -25,7 +42,9 @@ Estimated Time: 10 minutes
 
 2. Run this KPI query.
 
-    Use this query to connect the dashboard cards to trusted operational data. A **scalar subquery** is a query inside a query that returns one value, such as one count or one sum. This block selects from `DUAL`, Oracle's one-row helper table, and uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
+    Use this query to connect each dashboard card to trusted operational data. Explain **scalar subqueries** as a practical way to return one business metric per card, such as orders, revenue, open returns, demand spikes, or agent actions.
+
+    This block uses one scalar subquery per KPI. That works well for dashboard cards because each metric can come from the table that owns the evidence. Orders explain revenue, returns explain exposure, social posts explain demand spikes, and agent actions explain automation history.
 
     ```sql
     <copy>
@@ -35,22 +54,30 @@ Estimated Time: 10 minutes
       (SELECT COUNT(*) FROM return_requests WHERE status <> 'Closed') AS "Open Returns",
       (SELECT NVL(ROUND(SUM(return_value), 2), 0) FROM return_requests WHERE status <> 'Closed') AS "Return Exposure",
       (SELECT COUNT(*) FROM social_posts WHERE momentum_flag IN ('viral','mega_viral')) AS "Demand Spikes",
-      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions"
-    FROM dual;
+      (SELECT COUNT(*) FROM agent_actions) AS "Agent Actions";
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Total Orders | Retail Revenue | Open Returns | Return Exposure | Demand Spikes | Agent Actions |
     | ---: | ---: | ---: | ---: | ---: | ---: |
-    | 3000 | 4235872.01 | 5 | 934.93 | 511 | 0 |
+    | 3000 | 4213387.74 | 5 | 934.93 | 474 | 1 |
     {: title="Command Center KPIs"}
 
 3. These metrics create the daily triage view. The user can see revenue, demand, return exposure, and agent activity without waiting for copied data or a separate dashboard mart.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Review trending products
-1. Use the live Retail Command Center context from Figure 1 before you run the SQL.
+
+Perform the following set of steps to identify where social momentum may point to a sales opportunity, inventory risk, merchandising action, or follow-up demand analysis.
+
+1. Use the live **Retail Command Center** context from **Figure 1** before you run the SQL.
+
+    ![Trending products table with AllTerrain Hiking Boots highlighted in the runbook](images/trending-products-table.png " ")
+
+    *Figure 2: The runbook focuses the command center story on current Seer Sporting Goods product momentum.*
 
 2. Run the database version of the command center trending-products query.
 
@@ -75,31 +102,53 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Product | Brand | Mentions | Views | Avg Momentum | Peak Momentum |
     | --- | --- | ---: | ---: | ---: | --- |
-    | Minimalist Wall Clock | NestCraft | 10 | 5275176 | 57.93 | viral |
-    | VoidStrike Gaming Headset | DarkMatter | 4 | 1458179 | 56.98 | viral |
-    | Organic Protein Bars 12pk | GoldenHarvest | 5 | 1795022 | 50.73 | viral |
-    | HeadLamp 1000 Lumens | TrailBlaze | 9 | 15106505 | 49.58 | viral |
-    | NovaCam Action 5K | TechNova | 8 | 2114987 | 49.06 | viral |
-    | Moonbeam Highlighter | MoonGlow | 5 | 810046 | 45.27 | viral |
-    | Smart Jump Rope | PeakForm | 7 | 18185236 | 43.35 | viral |
-    | Resistance Pool Bands | AquaFit | 12 | 5961564 | 37.34 | viral |
-    | Crescent Moon Earrings | LunaWear | 10 | 4994691 | 35.81 | viral |
-    | Wireless Charging Pad Duo | RapidCharge | 10 | 20816358 | 34.19 | viral |
+    | AllTerrain Hiking Boots | TrailBlaze | 12 | 31539321 | 53.15 | viral |
+    | RaceDay Docking Hub | EverGreen | 3 | 481772 | 49.05 | viral |
+    | RouteGuide AR Sport Glasses | OmniWear | 5 | 795617 | 46.28 | viral |
+    | ClipCoach Audio Pod | OmniWear | 8 | 21264575 | 45.71 | viral |
+    | Trail Organizer Cube Set | WildRoam | 8 | 1882282 | 42.22 | viral |
+    | Smart Jump Rope | PeakForm | 4 | 1083691 | 39.89 | viral |
+    | Vitamin Recovery Balm | GlowKin | 8 | 1309193 | 37.87 | viral |
+    | AirGlide Runner | CloudStep | 14 | 25862011 | 37.25 | viral |
+    | Recovery Command Chair | PixelCraft | 3 | 571187 | 37.22 | viral |
+    | TrailGuard Anti-Chafe Balm | NovaSkin | 9 | 13039250 | 36.44 | viral |
     {: title="Trending Products"}
 
 3. A high-ranking product may represent a sales opportunity, an inventory risk, a merchandising action, or a signal that deserves deeper analysis in the Customer Trend Signals lab.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Connect product detail screens to database evidence
 
-1. Use the live Retail Command Center context from Figure 1 as the visual anchor for product details and JSON Duality patterns.
+Perform the following set of steps to show that a document-style product experience can still come from governed relational retail data.
 
-    Product detail screens often look like documents because the application needs a compact product story: item, brand, category, inventory, demand, and signals. The important point is that the document-style screen does not require a separate document database. Later labs show how Oracle Database can expose document-shaped JSON while preserving relational tables, constraints, security policies, and SQL access.
+1. Use the live **Retail Command Center** context from **Figure 1** as the visual anchor for product details and JSON Duality patterns.
+
+    ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
+
+    *Figure 3: Product detail connects the selected product to inventory and social evidence.*
+
+    ![Product JSON Duality view in the product detail modal](images/product-json-duality.png " ")
+
+    *Figure 4: The same product story can also be displayed as document-shaped JSON.*
+
+    ![Product detail modal with operational inventory and signal evidence](images/product-detail-modal.png " ")
+
+    *Figure 3: Product detail connects the selected product to inventory and social evidence.*
+
+    ![Product JSON Duality view in the product detail modal](images/product-json-duality.png " ")
+
+    *Figure 4: The same product story can also be displayed as document-shaped JSON.*
+
+ Product detail screens often look document-shaped because the business wants one compact product story: item, brand, category, inventory, demand, and signals in one place. Emphasize that the experience feels document-first, but the underlying evidence still comes from governed relational retail data.
 
 ## Task 4: Review revenue by category
+
+Perform the following set of steps to review category revenue so learners can see where demand is converting into sales and where social-driven activity may be influencing performance.
 
 1. Run the category revenue query.
 
@@ -120,31 +169,32 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-    Expected output:
+    **Expected output:**
 
     | Category | Orders | Revenue | Social-Driven Orders |
     | --- | ---: | ---: | ---: |
-    | Electronics | 542 | 652916.72 | 169 |
-    | Fitness | 385 | 256676.01 | 128 |
-    | Fashion | 480 | 224985.98 | 139 |
-    | Sports | 56 | 216148.88 | 10 |
-    | Wearables | 200 | 188785.89 | 64 |
-    | Gaming | 254 | 155554.1 | 80 |
-    | Audio | 292 | 152103.93 | 90 |
-    | Home | 367 | 118922.61 | 106 |
-    | Outdoor | 272 | 108168.95 | 90 |
-    | Footwear | 251 | 74734.67 | 81 |
-    | Kitchen | 159 | 33656.59 | 39 |
-    | Beauty | 317 | 32378.45 | 93 |
-    | Eyewear | 106 | 29828.4 | 38 |
-    | Wellness | 154 | 27221.76 | 55 |
-    | Beverages | 184 | 13112.29 | 62 |
-    | Tools | 45 | 11039.04 | 16 |
-    | Travel | 85 | 5078.35 | 28 |
-    | Food | 78 | 4280.37 | 20 |
+    | Sports Tech | 545 | 676482.24 | 161 |
+    | Fitness | 339 | 220292.71 | 89 |
+    | Athletic Apparel | 417 | 181761.78 | 112 |
+    | Training Tech | 261 | 178604.28 | 77 |
+    | Sports Wearables | 163 | 168296.34 | 45 |
+    | Training Audio | 253 | 124964.69 | 67 |
+    | Sports | 38 | 118449.29 | 8 |
+    | Outdoor Lifestyle | 375 | 113745.34 | 97 |
+    | Outdoor | 263 | 107014.08 | 67 |
+    | Footwear | 228 | 68850.03 | 63 |
+    | Camp Cooking | 179 | 36016.14 | 43 |
+    | Outdoor Care | 309 | 34006.78 | 86 |
+    | Recovery | 187 | 32911.19 | 52 |
+    | Sport Eyewear | 107 | 30358.33 | 31 |
+    | Sports Nutrition | 243 | 19365.62 | 70 |
+    | Outdoor Tools | 44 | 9639.19 | 15 |
+    | Outdoor Travel | 76 | 4638.4 | 23 |
     {: title="Category Revenue"}
 
 2. The command center shows why converged data matters. Operational orders, social demand signals, inventory context, and AI-assisted actions can start from one governed database foundation.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

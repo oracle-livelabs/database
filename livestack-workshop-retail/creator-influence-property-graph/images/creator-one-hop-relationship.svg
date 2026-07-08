@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360" role="img" aria-labelledby="title desc">
+  <title id="title">One-hop creator relationship path</title>
+  <desc id="desc">A source creator connected to a destination creator through one reshared relationship.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5f6f6d"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1f2f2d" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="360" rx="0" fill="#f6f7f7"/>
+  <text x="36" y="42" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#1c2423">One-hop creator relationship path</text>
+  <text x="36" y="70" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4d5a58">The graph pattern follows one relationship from a source creator to a directly connected creator.</text>
+
+  <g stroke="#5f6f6d" stroke-width="2.8" fill="none" marker-end="url(#arrow)">
+    <path d="M 304 184 C 410 126, 550 126, 656 184"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="126" width="250" height="112" rx="12" fill="#284b63"/>
+    <text x="195" y="162" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#d8eef3">FROM CREATOR</text>
+    <text x="195" y="190" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">@route_lily_295</text>
+    <text x="195" y="215" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#d8eef3">source influencer node</text>
+
+    <rect x="646" y="126" width="250" height="112" rx="12" fill="#7a5c3a"/>
+    <text x="771" y="162" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff5e6">TO CREATOR</text>
+    <text x="771" y="190" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">@river_jace_382</text>
+    <text x="771" y="215" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#fff5e6">destination influencer node</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4a5755">
+    <rect x="408" y="92" width="172" height="56" rx="8" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="494" y="115" text-anchor="middle" font-weight="700">connects_to edge</text>
+    <text x="494" y="136" text-anchor="middle">link: reshared</text>
+
+    <rect x="328" y="244" width="332" height="34" rx="6" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="494" y="266" text-anchor="middle">strength: 1.0 ranks this direct path highly</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#2f3b39">
+    <rect x="42" y="304" width="660" height="34" rx="6" fill="#ffffff" stroke="#d4dcda"/>
+    <text x="60" y="326">Read left to right: source creator -> relationship edge -> directly connected creator.</text>
+  </g>
+</svg>
