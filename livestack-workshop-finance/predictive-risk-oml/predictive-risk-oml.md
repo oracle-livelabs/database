@@ -1,4 +1,4 @@
-# Predictive Risk, Capacity, and Revenue with OML
+# Predictive Risk, Capacity, and Revenue with Oracle Machine Learning (OML)
 
 ## Introduction
 
@@ -9,27 +9,27 @@ Prediction helps teams look ahead instead of only describing what already happen
 You use the same governed finance records to support planning decisions. The records used for dashboard, service, and transaction review also become model features that can be scored in place.
 
 <details>
-<summary>Key terms: model, feature, classification, regression, clustering, and confidence</summary>
+<summary><strong>Key terms: OML model, feature, classification, regression, clustering, and confidence</strong></summary>
 
-A **model** is a trained pattern that can score new or current data. In this lab, OML models help estimate outcomes such as demand surge, revenue impact, or product grouping from the finance records already in Oracle Database.
-
-A **feature** is an input value used by a model. Features can come from product activity, risk severity, transaction attributes, customer behavior, service capacity, or revenue history. Good features translate raw finance records into signals the model can learn from.
-
-**Classification** predicts a category or label, such as `SURGE` or `STABLE`. This is useful when the business decision is a choice between states, such as whether a product is likely to need more service capacity.
-
-**Regression** predicts a number, such as expected revenue, forecasted load, or estimated impact. This is useful when planners need a measurable value rather than a yes/no label.
-
-**Clustering** groups similar records together without requiring a preassigned label. In finance, clustering can help compare similar products, identify cohorts, or find groups that behave alike for risk, revenue, or service planning.
-
-**Confidence** is the model's estimated strength for a prediction. It helps you compare stronger and weaker predictions, but it is not the same thing as a guaranteed outcome. Treat confidence as decision support: useful for prioritization, but still something to review with business context.
+> - A **model** is a trained pattern that can score new or current data. In this lab, OML models help estimate outcomes such as demand surge, revenue impact, or product grouping from the finance records already in Oracle Database.
+>
+> - A **feature** is an input value used by a model. Features can come from product activity, risk severity, transaction attributes, customer behavior, case-processing capacity, or revenue history. Good features translate raw finance records into signals the model can learn from.
+>
+> - **Classification** predicts a category or label, such as `SURGE` or `STABLE`. This is useful when the business decision is a choice between states, such as whether a product is likely to need more case-processing capacity for reviews, outreach, or support work.
+>
+> - **Regression** predicts a number, such as expected revenue, forecasted load, or estimated impact. This is useful when planners need a measurable value rather than a yes/no label.
+>
+> - **Clustering** groups similar records together without requiring a preassigned label. In finance, clustering can help compare similar products, identify cohorts, or find groups that behave alike for risk, revenue, or service planning.
+>
+> - **Confidence** is the model's estimated strength for a prediction. It helps you compare stronger and weaker predictions, but it is not the same thing as a guaranteed outcome. Treat confidence as decision support: useful for prioritization, but still something to review with business context.
 
 </details>
 
-The first image below explains the OML scoring flow. Product, transaction, risk, client, revenue, and service-capacity data become model features; Oracle Machine Learning scores the models inside the database; and the results return to SQL as labels, clusters, forecasts, probabilities, and operational risk signals.
+The first image below explains the Oracle Machine Learning (OML) scoring flow. Product, transaction, risk, client, revenue, and case-processing capacity data become model features; Oracle Machine Learning scores the models inside the database; and the results return to SQL as labels, clusters, forecasts, probabilities, and operational risk signals.
 
-![Finance OML scoring flow](images/finance-oml-scoring-flow.svg " ")
+![Finance Oracle Machine Learning scoring flow](images/finance-oml-scoring-flow.svg " ")
 
-The second image is the Predictive Risk, Capacity and Revenue page. It gives finance teams a business-facing view of product risk, client segments, revenue forecast quality, product cohorts, and service capacity pressure. The SQL in this lab shows how those predictive results can be inventoried and scored inside Oracle Database instead of being disconnected in a separate notebook or external model service.
+The second image is the Predictive Risk, Capacity and Revenue page. It gives finance teams a business-facing view of product risk, client segments, revenue forecast quality, product cohorts, and case-processing pressure. In this financial-services context, capacity means the ability of teams or service centers to absorb review, support, onboarding, dispute, fraud, or AML work. The SQL in this lab shows how those predictive results can be inventoried and scored inside Oracle Database instead of being disconnected in a separate notebook or external model service.
 
 ![Predictive Risk Capacity and Revenue page](images/predictive-risk-oml.png " ")
 
@@ -48,7 +48,7 @@ Estimated Time: **12 minutes**
 | Technical Challenge | Data science and application teams need deployed models that can be scored from SQL without copying governed finance records elsewhere. |
 | Persona Focus | Risk and revenue leaders use predictions; database developers and ML engineers show how models score inside the database. |
 | What You Will See | Persisted OML models can be inventoried and scored directly in SQL. |
-| Database Capability | DBMS\_DATA\_MINING, PREDICTION, PREDICTION\_PROBABILITY, CLUSTER\_ID, and CLUSTER\_PROBABILITY support in-database ML. |
+| Database Capability | The Oracle Data Mining package (`DBMS_DATA_MINING`), PREDICTION, PREDICTION\_PROBABILITY, CLUSTER\_ID, and CLUSTER\_PROBABILITY support in-database ML. |
 | Outcome | Risk, segmentation, revenue, and product grouping outputs are explainable from SQL. |
 
 Persona focus: You bridge the ML engineer and finance decision-maker by showing how deployed models produce reviewable scores where the data already lives.
@@ -59,14 +59,16 @@ Begin by reviewing the persisted OML models available for scoring.
 
 1. Run this model inventory query:
 
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
     You are confirming which predictive models are available before using them in finance decisions. The SQL reads the Oracle Machine Learning model catalog, returning each model name, mining function, and algorithm so you can distinguish classification, clustering, and regression models before scoring data.
 
     <details>
-    <summary>Why in-database machine learning matters</summary>
+    <summary><strong>Why this matters: in-database machine learning</strong></summary>
 
-    In a fractured environment, data teams often export sensitive finance records to a separate machine learning platform, score the data there, and then send results back to the application or dashboard. That creates copies, governance questions, and extra movement of sensitive data.
-
-    Oracle Machine Learning lets you score models inside Oracle Database. The model, data, SQL evidence, and business context stay close together, which is better for explainability and governance.
+    > In a fractured environment, data teams often export sensitive finance records to a separate machine learning platform, score the data there, and then send results back to the application or dashboard. That creates copies, governance questions, and extra movement of sensitive data.
+    >
+    > Oracle Machine Learning lets you score models inside Oracle Database. The model, data, SQL evidence, and business context stay close together, which is better for explainability and governance.
 
     </details>
 
@@ -99,13 +101,13 @@ Begin by reviewing the persisted OML models available for scoring.
 
 ## Task 2: Score demand risk and revenue in SQL
 
-The prediction labels are the most important part of this task. The confidence and predicted revenue values are model scores, so your workshop environment may show small decimal differences from the examples.
+Perform the following set of steps to score demand risk and revenue directly in SQL:
 
-Focus on the business meaning of the results: which products are predicted as `SURGE` or `STABLE`, which predictions are stronger or weaker, and whether predicted revenue is directionally close to the target revenue.
-
-1. Run the demand surge classification query.
+1. Run the demand surge classification query:
 
     You are scoring product demand pressure and showing the product names behind the model output. The SQL uses `PREDICTION` to classify each row from `OML_DEMAND_TRAINING_V` and `PREDICTION_PROBABILITY` to return confidence.
+
+    `OML_DEMAND_TRAINING_V` is a view that packages the demand-surge model inputs into a repeatable feature set. In this lesson, its value is that the model sees the same governed columns every time it scores: product activity, risk context, and the training label used for comparison. You do not have to reconstruct the feature logic before focusing on what the prediction means.
 
     It then joins the scored rows to `PRODUCTS` so the results are meaningful to a business reviewer.
 
@@ -151,6 +153,8 @@ Focus on the business meaning of the results: which products are predicted as `S
 
     You are estimating revenue outcomes from the persisted regression model. The SQL scores rows from `OML_REVENUE_TRAINING_V` with `REVENUE_PREDICT_MODEL`, rounds the predicted value for review, and returns it next to the known target revenue so you can compare model output with actual business values.
 
+    `OML_REVENUE_TRAINING_V` is the revenue-model feature view. It gives the regression model a consistent set of revenue-related inputs and keeps the scoring example tied to governed database data. That consistency is important because revenue prediction is easier to explain when the model input shape is defined in the database instead of hidden in a separate notebook or script.
+
     ```sql
     <copy>
     SELECT order_id,
@@ -180,7 +184,7 @@ Focus on the business meaning of the results: which products are predicted as `S
 3. Compare actual target revenue to predicted revenue.
     The demand query classifies product pressure from stored finance features, and the revenue query estimates a transaction outcome from customer, order, and fulfillment attributes.
 
-    The demand query returns predicted surge labels with confidence, which helps product and operations teams decide where to watch capacity or risk pressure. The revenue query compares known target revenue to predicted revenue, which helps reviewers understand whether the model is directionally useful for planning.
+    The demand query returns predicted surge labels with confidence, which helps product and operations teams decide where to watch case-processing or risk pressure. The revenue query compares known target revenue to predicted revenue, which helps reviewers understand whether the model is directionally useful for planning.
 
     Both queries score persisted models without leaving Oracle Database. That keeps sensitive finance records close to the models and gives technical teams SQL evidence for each prediction.
 

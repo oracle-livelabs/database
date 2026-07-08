@@ -9,15 +9,15 @@ The final operating step is controlled action. An AI-assisted workflow should no
 After evidence is found, ranked, investigated, and governed, the bank needs an action record. This lab shows that an AI-assisted workflow can use approved database tools and leave an audit row.
 
 <details>
-<summary>Key terms: agent, tool, PL/SQL function, and audit row</summary>
+<summary><strong>Key terms: agent, tool, Procedural Language/Structured Query Language (PL/SQL) function, and audit row</strong></summary>
 
-An **agent** is software that can help summarize information, route a request, or ask an approved tool to perform work. In finance, an agent must be observable because recommendations and actions may affect risk, compliance, service, or client outcomes.
-
-A **tool** is an approved function the agent is allowed to call. Tools keep the agent from acting only through free-form text; they define the controlled operations the agent can perform, such as summarizing risk signals or logging a decision.
-
-A **PL/SQL function** is database logic stored in Oracle Database. In this lab, PL/SQL represents the approved business logic an agent-style workflow can call near governed finance data.
-
-An **audit row** is a database record that shows what happened, who or what performed the action, and when it occurred. Audit rows turn an AI-assisted interaction into durable evidence that an operator or reviewer can inspect later.
+> - An **agent** is software that can help summarize information, route a request, or ask an approved tool to perform work. In finance, an agent must be observable because recommendations and actions may affect risk, compliance, service, or client outcomes.
+>
+> - A **tool** is an approved function the agent is allowed to call. Tools keep the agent from acting only through free-form text; they define the controlled operations the agent can perform, such as summarizing risk signals or logging a decision.
+>
+> - A **PL/SQL function** is database logic stored in Oracle Database. In this lab, PL/SQL represents the approved business logic an agent-style workflow can call near governed finance data.
+>
+> - An **audit row** is a database record that shows what happened, who or what performed the action, and when it occurred. Audit rows turn an AI-assisted interaction into durable evidence that an operator or reviewer can inspect later.
 
 </details>
 
@@ -51,14 +51,16 @@ Call the approved PL/SQL helper function that summarizes current risk signals fo
 
 1. Run the approved PL/SQL helper function.
 
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
     You are calling the same kind of controlled database tool an AI-assisted operations workflow can use. The SQL invokes `DETECT_TRENDING_PRODUCTS` with a 48-hour window and a minimum severity threshold, then returns a concise risk summary produced by approved PL/SQL logic.
 
     <details>
-    <summary>Why agent tools should live close to governed data</summary>
+    <summary><strong>Why this matters: agent tools should live close to governed data</strong></summary>
 
-    In a fractured environment, an AI assistant may summarize data from one system, trigger actions in another, and leave audit history somewhere else. That makes it hard to know what data was used and whether the action was recorded correctly.
-
-    Oracle Database can hold the governed data, the approved PL/SQL tool, and the audit trail together. That makes agent-assisted work more controlled and reviewable.
+    > In a fractured environment, an AI assistant may summarize data from one system, trigger actions in another, and leave audit history somewhere else. That makes it hard to know what data was used and whether the action was recorded correctly.
+    >
+    > Oracle Database can hold the governed data, the approved PL/SQL tool, and the audit trail together. That makes agent-assisted work more controlled and reviewable.
 
     </details>
 

@@ -27,7 +27,7 @@ Estimated Time: **5 minutes**
     * To map the shared data used by each later finance workflow.
     - To replace the application dashboard with catalog reports.
     - To move the finance records into external analysis files.
-    > The foundation lab orients you to the shared database objects behind the application. Later labs reuse that foundation for dashboard evidence, transaction documents, vector search, graph analysis, spatial coverage, and OML scoring.
+    > The foundation lab orients you to the shared database objects behind the application. Later labs reuse that foundation for dashboard evidence, transaction documents, vector search, graph analysis, spatial coverage, and Oracle Machine Learning (OML) scoring.
 
     Q: What is the main business value of recreating dashboard evidence with SQL?
     - It hides supporting rows from the risk operations review process.
