@@ -2,9 +2,9 @@
 
 ## Introduction
 
-**Customer Trend Signals** helps retail teams search by shopper intent instead of exact catalog terms. Frame this lab around a business question: *How do we find the products customers likely mean, not just the words they happened to type?*
+**Customer Trend Signals** helps retail teams answer a practical business question: how do we find the products customers likely mean, not just the words they happened to type?
 
-**Oracle AI Database** keeps vector search, SQL, security, and operational retail data together. Emphasize that semantic search becomes more trustworthy when product catalog, creator activity, and business controls all stay in the same governed environment.
+**Oracle AI Database** keeps vector search, SQL, security, and operational retail data together. Semantic search is easier to trust when the product catalog, creator activity, and business controls stay in the same governed environment.
 
 ### Operating Story
 
@@ -43,7 +43,7 @@ Perform the following set of steps to understand how natural language, product d
 
 2. Understand the embedding model used in this lab.
 
-    The workshop seed loads Oracle's ONNX version of `all-MiniLM-L12-v2` into the database as `ADMIN.ALL_MINILM_L12_V2`. For this audience, lead with why that matters: the model is already available in the environment, so learners can move directly from plain-language retail questions to semantic search without leaving the database workflow.
+    The workshop seed loads Oracle's ONNX version of `all-MiniLM-L12-v2` into the database as ADMIN.`ALL_MINILM_L12_V2`. Because the model is already available in the environment, learners can move directly from plain-language retail questions to semantic search without leaving the database workflow.
 
     In this lab, you use it to turn natural language search phrases, product descriptions, and social post text into vectors that can be compared with SQL. The important learning point is not the specific model name; it is the architecture. The model runs in the database, the vectors are stored in the database, and the search runs against governed retail data without sending the source text to a separate embedding service.
 
@@ -91,7 +91,7 @@ Perform the following set of steps to see how vector distance turns meaning into
 
 1. Compare the query vector with a few known product vectors.
 
-    `VECTOR_DISTANCE` measures how close two vectors are in meaning. State the retail takeaway first: a lower cosine distance means the product is more likely to match the shopper's intent, even when the product name does not reuse the same words.
+    `VECTOR_DISTANCE` measures how close two vectors are in meaning. A lower cosine distance means the product is more likely to match the shopper's intent, even when the product name does not reuse the same words.
 
     The `CROSS JOIN` attaches one generated query vector to the product rows being compared. The inner `SELECT` creates that single query-vector row from a natural language phrase at runtime.
 
@@ -145,7 +145,7 @@ Perform the following set of steps to see how vector distance turns meaning into
 
 ## Task 4: Search products by meaning
 
-Perform the following set of steps to turn the distance calculation into a semantic product search.
+Perform the following set of steps to turn the distance calculation into a semantic product search:
 
 1. Search the full product embedding table.
 
@@ -235,7 +235,7 @@ Perform the following set of steps to turn the distance calculation into a seman
 
 ## Task 5: Inspect social trend matches
 
-Perform the following set of steps to see which posts, creators, platforms, and products may deserve merchandising, inventory, or campaign follow-up.
+Perform the following set of steps to see which posts, creators, platforms, and products may deserve merchandising, inventory, or campaign follow-up:
 
 1. Use the **Social Trend Intelligence** region in **Figure 1** before you run the SQL.
 

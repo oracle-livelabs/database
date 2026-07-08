@@ -2,9 +2,9 @@
 
 ## Introduction
 
-**Ask Retail Data** is about trusted answers. Recast the learner takeaway as a business question: *How do I ask for an answer in plain language and still trace it back to governed SQL, approved views, and visible evidence?*
+**Ask Retail Data** is about trusted answers. The learner takeaway is a business question: *How do I ask for an answer in plain language and still trace it back to governed SQL, approved views, and visible evidence?*
 
-This lab does not require a live **GenAI profile**. Emphasize that the real lesson is governance: even when AI helps write SQL, the business still needs approved answer paths, visible logic, and results that can be checked.
+This lab does not require a live **GenAI profile**. The governance lesson is the focus: even when AI helps write SQL, the business still needs approved answer paths, visible logic, and results that can be checked.
 
 Lab 9 builds on this foundation by showing how the same governance pattern extends from trusted SQL answers to trusted agent actions and durable audit history.
 
@@ -41,7 +41,7 @@ Perform the following set of steps to see which database views should be used to
 
 2. Run this query.
 
-    A trusted NL2SQL experience should not guess across raw tables. Keep the business point upfront: approved views narrow the answer path to governed data that is easier to explain, validate, and reuse.
+    A trusted **NL2SQL experience** should not guess across raw tables. Approved views narrow the answer path to governed data that is easier to explain, validate, and reuse.
 
     ```sql
     <copy>

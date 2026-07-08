@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Creator influence is not only about follower count. Frame this lab around the retail question that matters to the business: *Who can move demand, through which relationships, and how quickly can that signal spread?*
+Creator influence is not only about follower count. This lab asks the retail question that matters to the business: who can move demand, through which relationships, and how quickly can that signal spread?
 
-After the **vector-search lab** shows what customers and creators are talking about, this lab shows who can amplify that signal. Emphasize that graph pattern matching matters because influence analysis quickly becomes a path question, not just a row-and-column question.
+After the **vector-search lab** shows what customers and creators are talking about, this lab shows who can amplify that signal. Graph pattern matching matters because influence analysis quickly becomes a path question, not just a row-and-column question.
 
 ### Operating Story
 
@@ -40,7 +40,7 @@ Perform the following set of steps to understand the graph model used for influe
 
 2. Understand the graph object.
 
-    The workshop defines one property graph named `INFLUENCER_NETWORK`. Lead with the business view: this graph turns retail relationships into a queryable network so teams can trace how creators, brands, products, and posts are connected.
+    The workshop defines one property graph named `INFLUENCER_NETWORK`. This graph turns retail relationships into a queryable network so teams can trace how creators, brands, products, and posts are connected.
 
     | Graph concept | Retail source tables | What they represent |
     | --- | --- | --- |
