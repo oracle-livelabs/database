@@ -106,7 +106,7 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
 1. Run this product-linked signal query:
 
-    This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of 70 or higher, then joins to product and institution views. Task 1 counted the most severe signals at 80 or higher. This query uses 70 or higher so the analyst has a longer product-linked list to review.
+    This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of 80 or higher, then joins to product and institution views. That threshold matches the high-risk count from Task 1.
 
     `POST_PRODUCT_MENTIONS` is a bridge table. It connects a signal to the financial products mentioned by that signal.
 
@@ -128,7 +128,7 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
          ON products.financial_product_id = mentions.product_id
     JOIN finance_institutions_v institutions
          ON institutions.institution_id = products.institution_id
-    WHERE signals.criticality_score >= 70
+    WHERE signals.criticality_score >= 80
     ORDER BY signals.criticality_score DESC, signals.exposure_count DESC, signals.signal_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -138,16 +138,13 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
     | Signal Id | Criticality Score | Exposure Count | Cases Opened Count | Financial Product Name | Institution Name | Product Category |
     | --- | --- | --- | --- | --- | --- | --- |
-    | 2777 | 87 | 19912441 | 40310 | Escrow Account Service | MetaTrust Custody | Specialty Finance |
-    | 3192 | 79 | 19704640 | 34290 | Escrow Account Service | MetaTrust Custody | Specialty Finance |
-    | 4815 | 78.3 | 19370717 | 21625 | Treasury Sweep Account | Horizon Capital | Treasury Services |
-    | 4173 | 78.3 | 8699588 | 26848 | Equipment Finance Lease | Granite Wealth | Commercial Lending |
-    | 1762 | 77.9 | 7208280 | 18110 | Annuity Suitability Review | VoltPay Financial | Insurance |
-    | 4000 | 77.9 | 793197 | 7096 | Risk Tolerance Assessment | PurePAC Portfolio Services | Advisory |
-    | 2216 | 77.6 | 8426896 | 37544 | Portfolio Tax-Loss Harvesting | VoltPay Financial | Wealth Management |
-    | 4214 | 77.5 | 12695419 | 37823 | Investment Policy Statement | Catalyst Insurance Group | Advisory |
-    | 4233 | 77.5 | 11232465 | 30328 | Treasury Sweep Account | Horizon Capital | Treasury Services |
-    | 3236 | 77.5 | 6841895 | 49721 | Secure Document Vault | CleanRate Lending | Digital Banking |
+    | 1 | 96 | 12560000 | 1260 | AML Screening Package | Clearwater Credit Union | Compliance Services |
+    | 2 | 92 | 8840000 | 980 | Wire Transfer Service | Clearwater Credit Union | Payments |
+    | 3 | 88 | 6420000 | 740 | Rate Hedge Advisory | Harvest Commercial Bank | Capital Markets |
+    | 4479 | 87 | 17564089 | 9719 | CECL Reserve Scenario | Greenline Asset Management | Risk Analytics |
+    | 5 | 83 | 2630000 | 410 | Commercial Real Estate Loan | Granite Wealth | Commercial Lending |
+    | 6 | 81 | 1710000 | 290 | Real-Time Payments Service | SecureLedger Compliance | Payments |
+    | 7 | 80 | 980000 | 180 | Adjustable Rate Mortgage | NorthBridge Investments | Mortgage Lending |
 
 
 2. Review the product-linked rows.
@@ -205,6 +202,13 @@ Next, summarize the products tied to monitored exposure.
     | Treasury Management Portal | Harvest Commercial Bank | Treasury Services | 44 | 43.2 | 19033842 |
     | Sanctions Alert Review | Greenline Asset Management | Compliance Services | 35 | 43.2 | 5665456 |
 
+
+2. Review the product summary rows.
+    Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
+
+    `Signal Count` shows how many monitored signals are tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` shows the scale of the monitored exposure tied to those signals.
+
+    Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
 
 2. Review the product summary rows.
     Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.

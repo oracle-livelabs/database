@@ -12,7 +12,7 @@ Think of this lab as the map of the finance environment. The same schema support
 
 Oracle Database 26ai is a converged database: it lets these different finance workloads use one governed database foundation instead of forcing each data type into a separate specialist system.
 
-![Before and after architecture diagram comparing bespoke finance data stores with Oracle Converged Database](images/converged-database-before-after.png " ")
+![Before and after architecture diagram comparing bespoke finance data stores with Oracle Converged Database](images/finance-converged-database-redwood.png " ")
 
 <details>
 <summary><strong>Key terms: schema, view, JSON duality view, vector, graph, spatial, and Oracle Machine Learning (OML)</strong></summary>
@@ -92,9 +92,8 @@ Perform the following set of steps to inventory the semantic views and database 
     )
     UNION ALL
     SELECT 'JSON duality views', COUNT(*)
-    FROM all_duality_views
-    WHERE owner = USER
-      AND duality_view_name = 'ORDERS_DV'
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV'
     UNION ALL
     SELECT 'Finance property graphs', COUNT(*)
     FROM user_property_graphs

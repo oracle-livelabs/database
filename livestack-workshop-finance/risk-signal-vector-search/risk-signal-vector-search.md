@@ -129,7 +129,7 @@ Now apply the same semantic search pattern to risk signal language.
            ), 4) AS similarity
     FROM signal_embeddings se
     JOIN social_posts sp ON sp.post_id = se.post_id
-    ORDER BY similarity DESC
+    ORDER BY similarity DESC, signal_id
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
@@ -161,6 +161,10 @@ Now apply the same semantic search pattern to risk signal language.
     The returned excerpts contain AML, fraud, sanctions, and suspicious activity language even though the search phrase is short. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
+
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched finance product and risk-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
 
 ## Acknowledgements
 
