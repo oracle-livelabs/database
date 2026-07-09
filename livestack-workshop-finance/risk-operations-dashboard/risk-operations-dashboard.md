@@ -88,7 +88,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     | Total Signals | Avg Criticality | High Risk Signals | Total Exposure | Cases Opened |
     | --- | --- | --- | --- | --- |
-    | 5000 | 41.2 | 9 | 1602966769 | 5657933 |
+    | 5000 | 40.9 | 2 | 1461547712 | 5110701 |
 
 
 2. Interpret the result.
@@ -191,17 +191,24 @@ Next, summarize the products tied to monitored exposure.
 
     | Financial Product Name | Institution Name | Product Category | Signal Count | Avg Criticality | Exposure Count |
     | --- | --- | --- | --- | --- | --- |
-    | Carbon Credit Custody | IPA Direct Finance | Carbon Markets | 51 | 46 | 30212024 |
-    | Auto Loan Digital Offer | NorthBridge Investments | Consumer Lending | 48 | 45.9 | 66064101 |
-    | KYC Refresh Workflow | NorthBridge Investments | Compliance Services | 41 | 45.6 | 37993643 |
-    | Managed ETF Portfolio | Horizon Capital | Wealth Management | 29 | 45.3 | 52445042 |
-    | Loan Portfolio Review | LedgerGrade Connect | Risk Analytics | 45 | 45.1 | 42518770 |
-    | 529 Education Savings Plan | Harvest Commercial Bank | Investments | 41 | 45 | 20763811 |
-    | Small Business Term Loan | Meridian Trust Bank | Commercial Lending | 40 | 44.6 | 15504074 |
-    | Corporate Card Program | Horizon Capital | Cards and Payments | 37 | 44 | 4680777 |
-    | Mortgage Pre-Approval | NorthBridge Investments | Mortgage Lending | 46 | 43.9 | 23334598 |
-    | Digital Wallet Account | SecureLedger Compliance | Payments | 48 | 43.8 | 37616607 |
+    | Trade Finance Letter of Credit | Granite Wealth | Trade Finance | 54 | 44.9 | 24435582 |
+    | Real-Time Payments Service | SecureLedger Compliance | Payments | 45 | 44.8 | 31916485 |
+    | Treasury Sweep Account | Horizon Capital | Treasury Services | 45 | 43.6 | 35840171 |
+    | Client Profitability Analysis | Catalyst Insurance Group | Analytics | 53 | 43.4 | 25776477 |
+    | Portfolio Tax-Loss Harvesting | VoltPay Financial | Wealth Management | 39 | 43.4 | 21451493 |
+    | Credit Score Monitoring | SecureLedger Compliance | Consumer Banking | 49 | 43.4 | 15008422 |
+    | Regulatory Filing Review | Greenline Asset Management | Compliance Services | 49 | 43.4 | 11947058 |
+    | Mortgage Pre-Approval | NorthBridge Investments | Mortgage Lending | 43 | 43.3 | 32953876 |
+    | Treasury Management Portal | Harvest Commercial Bank | Treasury Services | 44 | 43.2 | 19033842 |
+    | Sanctions Alert Review | Greenline Asset Management | Compliance Services | 35 | 43.2 | 5665456 |
 
+
+2. Review the product summary rows.
+    Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
+
+    `Signal Count` shows how many monitored signals are tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` shows the scale of the monitored exposure tied to those signals.
+
+    Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
 
 2. Review the product summary rows.
     Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
