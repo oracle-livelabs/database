@@ -88,7 +88,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     | Total Signals | Avg Criticality | High Risk Signals | Total Exposure | Cases Opened |
     | --- | --- | --- | --- | --- |
-    | 5000 | 40.9 | 2 | 1461547712 | 5110701 |
+    | 5000 | 41.2 | 9 | 1602966769 | 5657933 |
 
 
 2. Interpret the result.
@@ -106,7 +106,7 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
 1. Run this product-linked signal query:
 
-    This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of 70 or higher, then joins to product and institution views. Task 1 counted the most severe signals at 80 or higher. This query uses 70 or higher so the analyst has a longer product-linked list to review.
+    This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of 80 or higher, then joins to product and institution views. That threshold matches the high-risk count from Task 1.
 
     `POST_PRODUCT_MENTIONS` is a bridge table. It connects a signal to the financial products mentioned by that signal.
 
@@ -128,7 +128,7 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
          ON products.financial_product_id = mentions.product_id
     JOIN finance_institutions_v institutions
          ON institutions.institution_id = products.institution_id
-    WHERE signals.criticality_score >= 70
+    WHERE signals.criticality_score >= 80
     ORDER BY signals.criticality_score DESC, signals.exposure_count DESC, signals.signal_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -138,16 +138,13 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
     | Signal Id | Criticality Score | Exposure Count | Cases Opened Count | Financial Product Name | Institution Name | Product Category |
     | --- | --- | --- | --- | --- | --- | --- |
-    | 2777 | 87 | 19912441 | 40310 | Escrow Account Service | MetaTrust Custody | Specialty Finance |
-    | 3192 | 79 | 19704640 | 34290 | Escrow Account Service | MetaTrust Custody | Specialty Finance |
-    | 4815 | 78.3 | 19370717 | 21625 | Treasury Sweep Account | Horizon Capital | Treasury Services |
-    | 4173 | 78.3 | 8699588 | 26848 | Equipment Finance Lease | Granite Wealth | Commercial Lending |
-    | 1762 | 77.9 | 7208280 | 18110 | Annuity Suitability Review | VoltPay Financial | Insurance |
-    | 4000 | 77.9 | 793197 | 7096 | Risk Tolerance Assessment | PurePAC Portfolio Services | Advisory |
-    | 2216 | 77.6 | 8426896 | 37544 | Portfolio Tax-Loss Harvesting | VoltPay Financial | Wealth Management |
-    | 4214 | 77.5 | 12695419 | 37823 | Investment Policy Statement | Catalyst Insurance Group | Advisory |
-    | 4233 | 77.5 | 11232465 | 30328 | Treasury Sweep Account | Horizon Capital | Treasury Services |
-    | 3236 | 77.5 | 6841895 | 49721 | Secure Document Vault | CleanRate Lending | Digital Banking |
+    | 1 | 96 | 12560000 | 1260 | AML Screening Package | Clearwater Credit Union | Compliance Services |
+    | 2 | 92 | 8840000 | 980 | Wire Transfer Service | Clearwater Credit Union | Payments |
+    | 3 | 88 | 6420000 | 740 | Rate Hedge Advisory | Harvest Commercial Bank | Capital Markets |
+    | 4479 | 87 | 17564089 | 9719 | CECL Reserve Scenario | Greenline Asset Management | Risk Analytics |
+    | 5 | 83 | 2630000 | 410 | Commercial Real Estate Loan | Granite Wealth | Commercial Lending |
+    | 6 | 81 | 1710000 | 290 | Real-Time Payments Service | SecureLedger Compliance | Payments |
+    | 7 | 80 | 980000 | 180 | Adjustable Rate Mortgage | NorthBridge Investments | Mortgage Lending |
 
 
 2. Review the product-linked rows.
@@ -194,16 +191,16 @@ Next, summarize the products tied to monitored exposure.
 
     | Financial Product Name | Institution Name | Product Category | Signal Count | Avg Criticality | Exposure Count |
     | --- | --- | --- | --- | --- | --- |
-    | Trade Finance Letter of Credit | Granite Wealth | Trade Finance | 54 | 44.9 | 24435582 |
-    | Real-Time Payments Service | SecureLedger Compliance | Payments | 45 | 44.8 | 31916485 |
-    | Treasury Sweep Account | Horizon Capital | Treasury Services | 45 | 43.6 | 35840171 |
-    | Client Profitability Analysis | Catalyst Insurance Group | Analytics | 53 | 43.4 | 25776477 |
-    | Portfolio Tax-Loss Harvesting | VoltPay Financial | Wealth Management | 39 | 43.4 | 21451493 |
-    | Credit Score Monitoring | SecureLedger Compliance | Consumer Banking | 49 | 43.4 | 15008422 |
-    | Regulatory Filing Review | Greenline Asset Management | Compliance Services | 49 | 43.4 | 11947058 |
-    | Mortgage Pre-Approval | NorthBridge Investments | Mortgage Lending | 43 | 43.3 | 32953876 |
-    | Treasury Management Portal | Harvest Commercial Bank | Treasury Services | 44 | 43.2 | 19033842 |
-    | Sanctions Alert Review | Greenline Asset Management | Compliance Services | 35 | 43.2 | 5665456 |
+    | Carbon Credit Custody | IPA Direct Finance | Carbon Markets | 51 | 46 | 30212024 |
+    | Auto Loan Digital Offer | NorthBridge Investments | Consumer Lending | 48 | 45.9 | 66064101 |
+    | KYC Refresh Workflow | NorthBridge Investments | Compliance Services | 41 | 45.6 | 37993643 |
+    | Managed ETF Portfolio | Horizon Capital | Wealth Management | 29 | 45.3 | 52445042 |
+    | Loan Portfolio Review | LedgerGrade Connect | Risk Analytics | 45 | 45.1 | 42518770 |
+    | 529 Education Savings Plan | Harvest Commercial Bank | Investments | 41 | 45 | 20763811 |
+    | Small Business Term Loan | Meridian Trust Bank | Commercial Lending | 40 | 44.6 | 15504074 |
+    | Corporate Card Program | Horizon Capital | Cards and Payments | 37 | 44 | 4680777 |
+    | Mortgage Pre-Approval | NorthBridge Investments | Mortgage Lending | 46 | 43.9 | 23334598 |
+    | Digital Wallet Account | SecureLedger Compliance | Payments | 48 | 43.8 | 37616607 |
 
 
 2. Review the product summary rows.
