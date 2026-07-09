@@ -23,27 +23,27 @@
       "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
     },
     {
-      "title": "Lab 3: Transaction and Case Documents",
+      "title": "Lab 3: Query Transaction Documents with JSON Relational Duality",
       "description": "Use JSON Relational Duality and SQL/JSON for transaction documents.",
       "filename": "../../transaction-case-duality/transaction-case-duality.md"
     },
     {
-      "title": "Lab 4: Risk Signal Intelligence",
+      "title": "Lab 4: Search Risk Signals with AI Vector Search",
       "description": "Run AI Vector Search over product and signal embeddings.",
       "filename": "../../risk-signal-vector-search/risk-signal-vector-search.md"
     },
     {
-      "title": "Lab 5: Financial Crime Network",
+      "title": "Lab 5: Investigate Financial Crime with Property Graph",
       "description": "Use Property Graph and SQL/PGQ to analyze fraud reach.",
       "filename": "../../financial-crime-network/financial-crime-network.md"
     },
     {
-      "title": "Lab 6: Client Service and SLA Coverage",
+      "title": "Lab 6: Map Client Service Coverage with Oracle Spatial",
       "description": "Use Oracle Spatial for service center and SLA region analysis.",
       "filename": "../../service-sla-spatial/service-sla-spatial.md"
     },
     {
-      "title": "Lab 7: Predictive Risk, Capacity, and Revenue",
+      "title": "Lab 7: Score Predictive Risk with Oracle Machine Learning",
       "description": "Inspect and score OML models inside Oracle Database.",
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
