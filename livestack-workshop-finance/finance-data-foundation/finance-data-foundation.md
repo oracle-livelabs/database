@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This lab confirms that the current Seer Bank data foundation is present before any finance result is trusted. Learners inspect semantic views, core data groups, JSON duality, vectors, graphs, spatial objects, and Oracle Machine Learning (OML) models as the shared evidence base for the rest of the workshop.
+This lab confirms that the current **Seer Bank** data foundation is present before any finance result is trusted. You inspect semantic views, core data groups, JSON duality, vectors, graphs, spatial objects, and Oracle Machine Learning (OML) models as the shared evidence base for the rest of the workshop.
 
-The goal is simple: see how different finance decisions connect to one database before you start using the data.
+The goal is simple: *Understand how different finance decisions connect to one governed database before you start using the data.*
 
 The point is to understand what is available before you start asking business questions. Dashboard metrics, JSON documents, vector matches, graph paths, spatial distances, and OML scores all connect back to this shared database foundation.
 
@@ -128,6 +128,7 @@ Perform the following set of steps to inventory the semantic views and database 
     | Spatial metadata layers | 3 |
     | OML mining models | 4 |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 2. Review the counts.
     Read the result as a capability checklist. The query reads Oracle catalog views instead of application tables, so it tells you what kinds of database objects are available before you start using them.
@@ -136,11 +137,11 @@ Perform the following set of steps to inventory the semantic views and database 
 
     Treat this as the capability map for the finance application. Each row points to a business use you will work with in SQL.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.    
+  **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 2: Count the current finance data groups
 
-The next query shows the scale of the finance scenario behind the application pages.
+Perform the following set of steps to count the current finance data groups and establish the baseline for later dashboard, graph, search, spatial, and prediction results:
 
 1. Run this data group count query:
 
@@ -180,6 +181,7 @@ The next query shows the scale of the finance scenario behind the application pa
     | Fraud entities | 25 |
     | Fraud relationships | 35 |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 2. Use the counts as the baseline for later analysis.
     This query reads the business-facing finance views and core tables that you will aggregate, search, traverse, score, or audit. It gives you a concrete sense of the data population before you inspect specific risk and operations results.

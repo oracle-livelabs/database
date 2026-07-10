@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each finance query runs as the workshop user against the prepared finance schema.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare **SQL Worksheet** for the hands-on finance exercises. Think of this as confirming that you are in the correct workspace before the investigation begins: the rest of the workshop depends on running SQL as the correct workshop user against the prepared finance schema.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -30,6 +30,8 @@ In this lab, you will:
 
 Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
 
+Perform the following set of steps to launch the LiveLabs environment from the correct reservation and keep the database sign-in details available:
+
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
 2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
@@ -45,6 +47,8 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 ## Task 2: Open SQL Worksheet
 
 Open SQL Worksheet as the workshop user before running the finance queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+
+Perform the following set of steps to open SQL Worksheet as the workshop user before running the finance queries:
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -104,6 +108,8 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
 
 
 8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 You can now continue to the finance labs.
 

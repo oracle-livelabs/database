@@ -4,7 +4,7 @@
 
 Risk teams often know what they are looking for before they know the exact words used in the data. This lab uses current finance embeddings to search by meaning instead of exact keywords.
 
-That matters because a risk analyst may ask about "mortgage pre-approval risk" while the data uses related phrases such as loan review, lending exposure, or adjustable-rate mortgage. Vector search helps find the right neighborhood of meaning, not just exact text matches.
+After reviewing numeric exposure, analysts often need to search the language behind the signals. Instead of only sorting by counts and scores, you ask the database to find products and signal text that match the analyst's question by meaning.
 
 After reviewing numeric exposure, analysts often need to search the language behind the signals. Instead of only sorting by counts and scores, you ask the database to find products and signal text that match what the analyst is asking.
 
@@ -47,7 +47,7 @@ Persona focus: You support the risk analyst with semantic search while keeping s
 
 ## Task 1: Search products by meaning
 
-Search for financial products related to mortgage pre-approval risk by meaning, not exact keyword match.
+Perform the following set of steps to search for financial products related to mortgage pre-approval risk by meaning, not exact keyword match:
 
 1. Run the following query:
 
@@ -110,9 +110,11 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or operational follow-up.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Search risk signals by meaning
 
-Now apply the same semantic search pattern to risk signal language.
+Perform the following set of steps to apply the same semantic-search pattern to risk signal language:
 
 1. Run the following query:
 
@@ -161,6 +163,8 @@ Now apply the same semantic search pattern to risk signal language.
     The returned excerpts contain AML, fraud, sanctions, and suspicious activity language even though the search phrase is short. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Next Steps
 
