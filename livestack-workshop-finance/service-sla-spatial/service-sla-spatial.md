@@ -2,9 +2,9 @@
 
 ## Introduction
 
-After risk is identified, Seer Bank needs to know whether case-processing capacity is close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and can the bank meet its service-level agreement (SLA) commitments?
+After the risk is identified, **Seer Bank** needs to know whether case-processing capacity is close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and can the bank meet its SLA commitments?
 
-You will help a service operations leader turn location data into coverage evidence for case routing, fraud follow-up, anti-money laundering (AML) review, and SLA planning.
+Risk and fraud decisions often create service work: client outreach, case routing, AML or fraud review, product review, dispute follow-up, onboarding checks, and document handling. Spatial analysis helps operations leaders measure whether case-processing capacity is near the demand region that needs support.
 
 Risk and fraud decisions often create service work: client outreach, case routing, AML or fraud review, product review, dispute follow-up, onboarding checks, and document handling. Spatial analysis helps operations leaders avoid guessing from a map and instead measure whether case-processing capacity is near the demand region that needs support.
 
@@ -57,7 +57,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Calculate service center distance to New York Metro
 
-Start by comparing service-center locations to the New York Metro demand region.
+Perform the following set of steps to compare service-center locations to the New York Metro demand region:
 
 1. Run this spatial distance query:
 
@@ -123,6 +123,7 @@ Start by comparing service-center locations to the New York Metro demand region.
     | Lebanon Central Banking Center | Lebanon | Tennessee | 36.2081 | -86.2911 | {"type":"Point","coordinates":[-86.2911,36.2081]} | 1144.17 | New York Metro | 91.0 |
     | Joliet Midwest Risk Desk | Joliet | Illinois | 41.525 | -88.0817 | {"type":"Point","coordinates":[-88.0817,41.525]} | 1152.2 | New York Metro | 91.0 |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 2. Review the nearest service centers.
     Start with the first row. It shows the nearest service center to the New York Metro boundary: Edison Wealth Service Center in Edison, New Jersey.
@@ -139,7 +140,7 @@ Start by comparing service-center locations to the New York Metro demand region.
 
 ## Task 2: Summarize SLA zone coverage
 
-After locating nearby service centers, summarize the response commitments attached to SLA zones.
+Perform the following set of steps to summarize the response commitments attached to SLA zones:
 
 1. Run this SLA zone summary:
 
@@ -175,6 +176,7 @@ After locating nearby service centers, summarize the response commitments attach
     | standard | 30 | 24 | 24 | 24 |
     | economy | 30 | 72 | 72 | 72 |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 2. Compare the service levels.
     This query summarizes all SLA zones into service promises that operations leaders can compare with case urgency. It connects spatial coverage to the practical question of how quickly the bank can respond.

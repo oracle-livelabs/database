@@ -4,7 +4,7 @@
 
 You have now walked through the core Seer Bank finance decision path: understand the data foundation, explain dashboard risk, inspect transaction evidence, search risk language by meaning, follow financial-crime relationships, evaluate service coverage, and score predictive models.
 
-The important takeaway is practical: you can now explain how one finance question can move across several data types without breaking the chain of evidence.
+The practical takeaway is that one finance question can move across several data types without breaking the chain of evidence.
 
 A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and case-processing capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
 
@@ -15,7 +15,7 @@ That is the punchline for finance: the database is not just where records sit. I
 You leave this workshop with a repeatable way to talk about Oracle's converged database value: fewer copies of sensitive data, fewer reconciliation points, stronger governance, faster investigation, and business results that can be explained from SQL-backed evidence.
 
 <details>
-<summary><strong>Why this matters: after the workshop</strong></summary>
+<summary><strong>Why this matters: After the workshop</strong></summary>
 
 > Real finance decisions rarely fit neatly into one technology category. A product-risk review may need transaction rows, regulatory text, client exposure, fraud relationships, service-center locations, and predictive scores.
 >
@@ -35,7 +35,7 @@ Estimated Time: **5 minutes**
 
 ## Task 1: Review what you saw
 
-Review what you saw and connect each outcome back to the business question it helps answer.
+Perform the following set of steps to review what you saw and connect each outcome back to the business question it helps answer:
 
 1. Review the outcome map.
 

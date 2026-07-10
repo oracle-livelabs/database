@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Applications often need transaction data as a clean JSON document, while analysts still need the same data in relational form for filtering, joining, and investigation. This lab uses **JSON Relational Duality** to satisfy both needs from the same data.
+Applications often need transaction data as a clean JSON document, while analysts still need the same data in relational form for filtering, joining, and investigation. This lab uses **JSON Relational Duality** to support both needs from the same governed transaction data.
 
-Think of this as one transaction wearing two useful forms. The application gets an API-friendly document. Analysts and database developers still get governed SQL access to the underlying facts.
+This matters after the dashboard lab because a KPI is not enough for review. When an analyst or application needs a specific transaction, the database can return an API-shaped document and still preserve the relational joins needed for investigation.
 
 This matters after the dashboard lab because a KPI is not enough for review. When an analyst or application needs a specific transaction, the database can return an API-shaped document and still preserve the relational joins needed for investigation.
 
@@ -23,7 +23,7 @@ This matters after the dashboard lab because a KPI is not enough for review. Whe
 
 </details>
 
-The image below shows the Transaction and Case Operations page in its API document view. The application can show the same transaction as a nested JSON document for API and partner integration use cases, while operations teams still rely on relational transaction, client, product, case, and service data. In this lab, you query the duality view behind that screen to see why developers can get a JSON payload without giving up relational analytics.
+The image below shows the **Transaction** and **Case Operations** page in its API document view. The application can show the same transaction as a nested JSON document for API and partner integration use cases, while operations teams still rely on relational transaction, client, product, case, and service data. In this lab, you query the duality view behind that screen to see why developers can get a JSON payload without giving up relational analytics.
 
 ![Transaction API Document View](images/transaction-json-duality.png " ")
 
@@ -50,7 +50,7 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
 ### What Is a Duality View?
 
-A JSON Relational Duality View is a database view that defines how relational tables should appear as a JSON document. The data still lives in relational tables, with keys, constraints, SQL access, and governance. The duality view adds a document access path over that same data.
+A **JSON Relational Duality View** is a database view that defines how relational tables should appear as a JSON document. The data still lives in relational tables, with keys, constraints, SQL access, and governance. The duality view adds a document access path over that same data.
 
 For this lab, the workshop database already includes `ORDERS_DV`. It was created with a statement shaped like this:
 
@@ -79,7 +79,7 @@ This is better than common alternatives because it avoids splitting ownership of
 
 ## Task 1: Inspect document-shaped transactions
 
-First, inspect the transaction shape an application can consume directly.
+Perform the following set of steps to inspect the transaction shape that an application can consume directly:
 
 1. Run this query:
 
@@ -118,9 +118,11 @@ First, inspect the transaction shape an application can consume directly.
 
     This is useful because risk and operations teams can inspect the same transaction from two angles: API-ready JSON for the application and governed relational rows for analysis.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Project JSON fields with SQL
 
-Now use SQL to project document fields back into reviewable columns. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
+Perform the following set of steps to project JSON document fields back into reviewable SQL columns:
 
 1. Run this SQL/JSON projection query:
 
@@ -168,6 +170,8 @@ Now use SQL to project document fields back into reviewable columns. In this con
     `Transaction Id` and `Transaction Status` are projected from the JSON document into the result table. The document stores the client reference as `customerId`, so the query joins back to `CUSTOMERS` to return `Client Email`.
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Next Steps
 

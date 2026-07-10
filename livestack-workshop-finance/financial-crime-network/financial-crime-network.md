@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Once an account looks suspicious, investigators need to know what other accounts, devices, IP addresses, payees, phones, or emails are connected to it. In this lab, you will investigate fraud networks with **Oracle Property Graph** and **SQL Property Graph Queries (SQL/PGQ)**.
+Fraud patterns often hide in relationships rather than in a single transaction row. This lab uses Oracle Property Graph and SQL/PGQ to start from suspicious account ACCT-8841 and trace connected devices, IP addresses, payees, phones, and other entities.
 
 You will help a fraud analyst move from a suspicious account to relationship evidence without writing long chains of joins.
 
@@ -51,9 +51,9 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Trace two-hop fraud reach
 
-Start from suspicious account `ACCT-8841` and trace the connected entities within two relationship hops.
+Perform the following set of steps to trace connected entities within two relationship hops of suspicious account `ACCT-8841`:
 
-1. Run the SQL/PGQ traversal for suspicious account `ACCT-8841`.
+1. Run this SQL/PGQ query:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -119,20 +119,22 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 2. Review the high-risk entities.
     The query returns connected entities as a prioritized table, not as an abstract graph picture. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and transaction labs.
 
-    The expected rows show the evidence connected to suspicious account `ACCT-8841`. 
+    The expected rows show the evidence connected to suspicious account `ACCT-8841`.
     For example:
-    * `DEV-fp-91a7` is a device 
+    * `DEV-fp-91a7` is a device
     * `PAYEE-MULE-017` is a payee
     * `IP-198.51.100.44` is an IP address
     * `PHONE-212-0199` is a phone number
-    
+
     These rows matter because they show what the suspicious account touched or shared.
 
     The result gives investigators a prioritized reach map. Instead of starting with a large network picture, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Find accounts sharing device, IP, phone, or email
 
-Next, find account pairs that share identifying evidence such as device, IP address, phone, or email.
+Perform the following set of steps to find account pairs that share identifying evidence such as device, IP address, phone, or email:
 
 1. Run this shared-entity graph query.
 
@@ -194,6 +196,8 @@ Next, find account pairs that share identifying evidence such as device, IP addr
     | ACCT-1190 | IP-198.51.100.44 | ip\_address | ACCT-3320 | 91.0 | 81.5 | 86.3 | shared\_ip | shared\_ip |
     | ACCT-5077 | EMAIL-risk-drop-01 | email | ACCT-3320 | 88.0 | 81.5 | 84.8 | same\_email | same\_email |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 
 2. Use the result to explain investigation priority.
     This query moves from reach to shared evidence. It identifies account pairs that reuse the same identifiers, which is stronger investigative evidence than a single high-risk score.
@@ -201,6 +205,7 @@ Next, find account pairs that share identifying evidence such as device, IP addr
     A shared device, IP address, phone, or email can connect accounts that look separate in transaction tables. That is why shared evidence matters: two accounts may look unrelated until the same phone, device, or network shows up in both histories. The combined risk score helps prioritize pairs where both sides of the relationship are risky, not just connected.
 
     This turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
+
 
 ## Next Steps
 

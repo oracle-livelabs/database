@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Finance teams use dashboards to understand what has already happened, but they also need predictions that help them plan what to do next. Those predictions are more useful when analysts can see which model produced the score, which business record was scored, and how the result connects back to product, revenue, or risk decisions.
+This lab scores persisted **Oracle Machine Learning** models created by the finance stack. The models run inside the database, so predictions stay close to the risk signals, customers, products, transactions, and capacity evidence that produced them.
 
 In this lab, you will take on the persona of a database developer supporting both an ML engineer and a finance decision-maker. The ML engineer needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle Database. The finance decision-maker needs results that are easy to review, explain, and use for planning.
 
@@ -21,7 +21,7 @@ You will inventory persisted OML models, score demand-surge and revenue-predicti
 >
 > - **Clustering** groups similar records together without requiring a preassigned label. In finance, clustering can compare products, identify cohorts, or find groups that behave alike.
 >
-> - **Confidence** is the estimated strength of a prediction. It helps you compare stronger and weaker predictions. It is not a guaranteed outcome. Treat confidence as decision support that still needs business review.
+> - **Confidence** is the estimated strength of a prediction. It helps compare stronger and weaker predictions, but it is not a guaranteed outcome. Treat confidence as decision support that still needs business review.
 
 </details>
 
@@ -54,7 +54,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Inventory persisted OML models
 
-Begin by reviewing the persisted OML models available for scoring.
+Perform the following set of steps to inventory the persisted OML models available for scoring:
 
 1. Run this model inventory query:
 
@@ -95,6 +95,8 @@ Begin by reviewing the persisted OML models available for scoring.
     | DEMAND\_SURGE\_MODEL | CLASSIFICATION | RANDOM\_FOREST |
     | PRODUCT\_CLUSTER\_MODEL | CLUSTERING | KMEANS |
     | REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
+
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 
 2. Confirm the model list.
@@ -154,6 +156,8 @@ Perform the following set of steps to score demand risk and revenue directly in 
     | 9 | Treasury Sweep Account | STABLE | STABLE | 0.6597 |
     | 10 | Corporate Card Program | STABLE | STABLE | 0.5252 |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
     Review the predicted surge and confidence together. A `SURGE` prediction can help an analyst decide which products may need more monitoring, outreach, or case-processing capacity. Confidence helps the analyst decide how strongly the model supports that prediction. It does not replace review; it helps rank where to look first.
 
 
@@ -196,7 +200,7 @@ Perform the following set of steps to score demand risk and revenue directly in 
 
     Rows where `ACTUAL_LABEL` and `PREDICTED_LABEL` are the same are matches. Rows where they are different show where the model prediction differs from the label stored in `OML_DEMAND_TRAINING_V`. This is a simple learning check, not a full production model evaluation.
 
-    The workshop uses synthetic demo data to teach the SQL pattern. Do not interpret these scores as a production financial risk model.
+    The workshop uses synthetic demo data to teach the SQL pattern. Do not interpret these scores as production financial-risk model results.
 
 3. Run revenue regression.
 
@@ -234,6 +238,7 @@ Perform the following set of steps to score demand risk and revenue directly in 
     | 10 | 1787.5 | 2654.61 |
     | 11 | 5450 | 7138.97 |
 
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 4. Compare actual target revenue to predicted revenue.
     Look for rows where predicted revenue is close to target revenue, then look for rows where the difference is larger. Close values show where the model estimate lines up with known outcomes. Larger gaps show where an analyst may want more context, such as unusual customer behavior, product mix, or fulfillment timing.

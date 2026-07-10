@@ -2,11 +2,12 @@
 
 ## Introduction
 
+
 Risk leaders cannot inspect every signal one by one. They need to know which signals, products, and client exposures deserve review first. This lab shows the SQL behind the dashboard numbers.
 
-The dashboard is the first place a risk leader looks. It summarizes monitored risk activity, exposure, transactions, and open case work.
+This lab recreates the evidence behind the application dashboard. You calculate critical risk signals, client exposure, transaction value, service pressure, and case volume directly from the database so the dashboard can be explained instead of merely viewed.
 
-In this lab, **exposure** means the reach or scale of monitored risk signals. A signal with low exposure may still matter. A signal with high exposure can affect more clients, products, channels, or public attention. Exposure helps answer a practical question: which issues could have the widest impact?
+In this lab, exposure means the reach or scale of monitored risk signals. A signal with low exposure may still matter. A signal with high exposure can affect more clients, products, channels, or public attention. Exposure helps answer a practical question: *Which issues could have the widest impact?*
 
 The key point is traceability. A dashboard can show a number, but the bank still needs to show where that number came from. In this lab, SQL shows the rows behind the dashboard.
 
@@ -54,24 +55,26 @@ Persona focus: You support the risk operations leader by showing the SQL behind 
 
 Start with the KPI query that explains the top-level dashboard numbers.
 
-1. Run the dashboard aggregate query:
+You are recreating the main dashboard risk measures from signal data. The SQL counts all rows in `RISK_SIGNALS_V`. It also calculates average criticality, counts high-risk signals, and sums exposure and opened cases.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+`RISK_SIGNALS_V` is a view, not a raw table. It gives the dashboard the columns this lesson needs: severity, exposure, case counts, product context, and signal timing.
 
-    You are recreating the main dashboard risk measures from signal data. The SQL counts all rows in `RISK_SIGNALS_V`. It also calculates average criticality, counts high-risk signals, and sums exposure and opened cases.
+The exposure total shows the overall reach of the monitored risk activity. It helps separate isolated alerts from signals that may affect many clients or products.
 
-    `RISK_SIGNALS_V` is a view, not a raw table. It gives the dashboard the columns this lesson needs: severity, exposure, case counts, product context, and signal timing.
-
-    The exposure total shows the overall reach of the monitored risk activity. It helps separate isolated alerts from signals that may affect many clients or products.
-
-    <details>
+<details>
     <summary><strong>Why this matters: better than a separate reporting pipeline</strong></summary>
 
-    > In a fractured environment, the application may store events in one system, the dashboard may calculate metrics in another, and analysts may investigate details somewhere else. If the numbers do not match, teams must spend time reconciling them.
-    >
-    > With Oracle Database, the dashboard summary and the detail rows can come from the same finance data. You can start with the KPI and then inspect the rows behind it.
+> In a fractured environment, the application may store events in one system, the dashboard may calculate metrics in another, and analysts may investigate details somewhere else. If the numbers do not match, teams must spend time reconciling them.
+>
+> With Oracle Database, the dashboard summary and the detail rows can come from the same finance data. You can start with the KPI and then inspect the rows behind it.
 
-    </details>
+</details>
+
+Perform the following set of steps to calculate the risk and exposure KPIs behind the dashboard:
+
+> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
+1. Run the dashboard aggregate query:
 
     ```sql
     <copy>
@@ -92,25 +95,27 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 
 2. Interpret the result.
-    The query summarizes 5,000 monitored signals. It returns the measures a risk leader would scan first: volume, average severity, high-risk count, total exposure, and opened cases.
+    The query summarizes **5,000** monitored signals. It returns the measures a risk leader would scan first: volume, average severity, high-risk count, total exposure, and opened cases.
 
     A risk signal is a monitored event that may require review. In this workshop, signals can come from product mentions, customer activity, transactions, service pressure, or other finance operations data.
 
     Exposure adds scale to severity. Criticality tells you how serious a signal appears. Exposure tells you how widely that signal may matter. A lower-severity issue with very high exposure may still deserve attention.
 
-    The high-risk count is the number of signals with a criticality score of 80 or higher. A higher count means more issues may need analyst review, case triage, or follow-up. It does not mean every item is confirmed fraud. It means more items crossed the bank review threshold.
+    The high-risk count is the number of signals with a criticality score of **80** or higher. A higher count means more issues may need analyst review, case triage, or follow-up. It does not mean every item is confirmed fraud. It means more items crossed the bank review threshold.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 2: Review product-linked risk signal rows
 
-Dashboard KPIs help show where risk is rising. Next, look at the product-linked signal rows an analyst would investigate first.
+This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of **80** or higher, then joins to product and institution views. That threshold matches the high-risk count from Task 1.
+
+`POST_PRODUCT_MENTIONS` is a bridge table. It connects a signal to the financial products mentioned by that signal.
+
+The query uses readable aliases: `signals`, `mentions`, `products`, and `institutions`. It also uses `ORDER BY ... FETCH FIRST` so Oracle returns the same top-10 order each time.
+
+Perform the following set of steps to review product-linked risk signal rows that an analyst would investigate first:
 
 1. Run this product-linked signal query:
-
-    This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of 80 or higher, then joins to product and institution views. That threshold matches the high-risk count from Task 1.
-
-    `POST_PRODUCT_MENTIONS` is a bridge table. It connects a signal to the financial products mentioned by that signal.
-
-    The query uses readable aliases: `signals`, `mentions`, `products`, and `institutions`. It also uses `ORDER BY ... FETCH FIRST` so Oracle returns the same top-10 order each time.
 
     ```sql
     <copy>
@@ -154,9 +159,11 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
     An analyst usually starts with rows that combine high criticality, high exposure, and many opened cases. Those rows point to products that may need faster review, extra staffing, or closer monitoring.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Find top product exposure
 
-Next, summarize the products tied to monitored exposure.
+Perform the following set of steps to summarize the financial products tied to monitored exposure:
 
 1. Run this product exposure query:
 
@@ -210,18 +217,21 @@ Next, summarize the products tied to monitored exposure.
 
     Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
 
-2. Review the product summary rows.
-    Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
+3. Review the product summary rows by looking at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
 
-    `Signal Count` shows how many monitored signals are tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` shows the scale of the monitored exposure tied to those signals.
+- `Signal Count` shows how many monitored signals are tied to the product.
+- `Avg Criticality` shows how severe those signals are on average.
+- `Exposure Count` shows the scale of the monitored exposure tied to those signals.
 
-    Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
+Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
 
-    For a production dashboard, review the execution plan for each KPI query. Useful indexes usually support the filter and join columns used here: `CRITICALITY_SCORE`, `SIGNAL_ID`, `POST_ID`, `PRODUCT_ID`, `FINANCIAL_PRODUCT_ID`, and `INSTITUTION_ID`.
+For a production dashboard, review the execution plan for each KPI query. Useful indexes usually support the filter and join columns used here: `CRITICALITY_SCORE`, `SIGNAL_ID`, `POST_ID`, `PRODUCT_ID`, `FINANCIAL_PRODUCT_ID`, and `INSTITUTION_ID`.
 
-    A materialized view may help when many users run the same dashboard totals. Product-level exposure totals by institution and category could be precomputed for faster dashboard response.
+A materialized view may help when many users run the same dashboard totals. Product-level exposure totals by institution and category could be precomputed for faster dashboard response.
 
-    This lab uses direct SQL instead of a materialized view so the calculation stays visible. KPI totals come from `RISK_SIGNALS_V`. Product-linked rows use the same signal view and join to product details. Product exposure joins back to product and institution context. In production, teams can keep the same logic and move repeated totals into indexed tables or materialized views.
+This lab uses direct SQL instead of a materialized view so the calculation stays visible. KPI totals come from `RISK_SIGNALS_V`. Product-linked rows use the same signal view and join to product details. Product exposure joins back to product and institution context. In production, teams can keep the same logic and move repeated totals into indexed tables or materialized views.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 
