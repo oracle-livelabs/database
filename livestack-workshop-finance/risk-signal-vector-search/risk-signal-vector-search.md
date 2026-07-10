@@ -132,8 +132,8 @@ Now apply the same semantic search pattern to risk signal language.
     | --- | --- | --- |
     | 2290 | AML screening update affects Liquidity Investment Sweep; FraudGuard Operations suspicious ACH and sanctions case review | 0.6478 |
     | 170 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
-    | 1330 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
     | 1610 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
+    | 1330 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
     | 3770 | AML screening update affects High-Yield Savings Account; Meridian Trust Bank suspicious ACH and sanctions case review vo | 0.6117 |
 
 

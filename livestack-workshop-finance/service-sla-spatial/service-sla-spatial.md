@@ -100,16 +100,16 @@ Start by comparing service-center locations to the New York Metro demand region.
 
     | Service Center Name | City | State Province | Latitude | Longitude | Location Geojson | Boundary Distance Km | Region Name | Demand Index |
     | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-    | Edison Wealth Service Center | Edison | New Jersey | 40.5187 | -74.4121 | {"type":"Point","coordinates":[-74.4121,40.5187]} | 9.48 | New York Metro | 91.0 |
-    | Middletown Mid-Atlantic Branch Hub | Middletown | Delaware | 39.4496 | -75.7163 | {"type":"Point","coordinates":[-75.7163,39.4496]} | 160.48 | New York Metro | 91.0 |
-    | Aberdeen East Coast Banking Center | Aberdeen | Maryland | 39.5096 | -76.1641 | {"type":"Point","coordinates":[-76.1641,39.5096]} | 187.21 | New York Metro | 91.0 |
-    | Fall River Northeast Service Hub | Fall River | Massachusetts | 41.7015 | -71.155 | {"type":"Point","coordinates":[-71.155,41.7015]} | 218.48 | New York Metro | 91.0 |
-    | Etna Midwest Specialty Finance Desk | Etna | Ohio | 40.0292 | -82.6852 | {"type":"Point","coordinates":[-82.6852,40.0292]} | 713.52 | New York Metro | 91.0 |
-    | Romulus Great Lakes Mortgage Hub | Romulus | Michigan | 42.2223 | -83.3966 | {"type":"Point","coordinates":[-83.3966,42.2223]} | 767.96 | New York Metro | 91.0 |
-    | Concord Southeast Micro Branch | Concord | North Carolina | 35.4088 | -80.5795 | {"type":"Point","coordinates":[-80.5795,35.4088]} | 781.6 | New York Metro | 91.0 |
-    | Plainfield Heartland Banking Hub | Plainfield | Indiana | 39.7042 | -86.3994 | {"type":"Point","coordinates":[-86.3994,39.7042]} | 1031.93 | New York Metro | 91.0 |
-    | Lebanon Central Banking Center | Lebanon | Tennessee | 36.2081 | -86.2911 | {"type":"Point","coordinates":[-86.2911,36.2081]} | 1144.17 | New York Metro | 91.0 |
-    | Joliet Midwest Risk Desk | Joliet | Illinois | 41.525 | -88.0817 | {"type":"Point","coordinates":[-88.0817,41.525]} | 1152.2 | New York Metro | 91.0 |
+    | Edison Wealth Service Center | Edison | New Jersey | 40.5187 | -74.4121 | { "type": "Point", "coordinates": [-74.4121, 40.5187] } | 9.48 | New York Metro | 91 |
+    | Middletown Mid-Atlantic Branch Hub | Middletown | Delaware | 39.4496 | -75.7163 | { "type": "Point", "coordinates": [-75.7163, 39.4496] } | 160.48 | New York Metro | 91 |
+    | Aberdeen East Coast Banking Center | Aberdeen | Maryland | 39.5096 | -76.1641 | { "type": "Point", "coordinates": [-76.1641, 39.5096] } | 187.21 | New York Metro | 91 |
+    | Fall River Northeast Service Hub | Fall River | Massachusetts | 41.7015 | -71.155 | { "type": "Point", "coordinates": [-71.155, 41.7015] } | 218.48 | New York Metro | 91 |
+    | Etna Midwest Specialty Finance Desk | Etna | Ohio | 39.9576 | -82.6818 | { "type": "Point", "coordinates": [-82.6818, 39.9576] } | 713.52 | New York Metro | 91 |
+    | Romulus Great Lakes Mortgage Hub | Romulus | Michigan | 42.2223 | -83.3963 | { "type": "Point", "coordinates": [-83.3963, 42.2223] } | 767.96 | New York Metro | 91 |
+    | Concord Southeast Micro Branch | Concord | North Carolina | 35.4088 | -80.5795 | { "type": "Point", "coordinates": [-80.5795, 35.4088] } | 781.6 | New York Metro | 91 |
+    | Plainfield Heartland Banking Hub | Plainfield | Indiana | 39.7043 | -86.3994 | { "type": "Point", "coordinates": [-86.3994, 39.7043] } | 1031.93 | New York Metro | 91 |
+    | Lebanon Central Banking Center | Lebanon | Tennessee | 36.2081 | -86.2911 | { "type": "Point", "coordinates": [-86.2911, 36.2081] } | 1144.17 | New York Metro | 91 |
+    | Joliet Midwest Risk Desk | Joliet | Illinois | 41.525 | -88.0817 | { "type": "Point", "coordinates": [-88.0817, 41.525] } | 1152.2 | New York Metro | 91 |
 
 
 2. Review the nearest service centers.

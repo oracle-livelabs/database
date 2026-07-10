@@ -100,7 +100,7 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
 
     | User | Schema | Checked At |
     | --- | --- | --- |
-    | LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
+    | LLUSER | LLUSER | Current SQL Worksheet timestamp |
 
 
 8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.

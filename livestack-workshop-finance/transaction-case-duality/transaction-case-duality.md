@@ -52,28 +52,16 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
 A JSON Relational Duality View is a database view that defines how relational tables should appear as a JSON document. The data still lives in relational tables, with keys, constraints, SQL access, and governance. The duality view adds a document access path over that same data.
 
-For this lab, the workshop database already includes `ORDERS_DV`. It was created with a statement shaped like this:
+For this lab, the workshop database already includes `ORDERS_DV`. The duality view maps relational columns into a document shape like this:
 
-```sql
-CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
-SELECT JSON {
-    '_id'        : o.order_id,
-    'customerId' : o.customer_id,
-    'status'     : o.order_status,
-    'items'      : [
-        SELECT JSON {
-            'itemId'    : oi.item_id,
-            'productId' : oi.product_id,
-            'quantity'  : oi.quantity
-        }
-        FROM order_items oi
-        WHERE oi.order_id = o.order_id
-    ]
-}
-FROM orders o;
-```
+| JSON field | Relational source |
+| --- | --- |
+| `_id` | `ORDERS.ORDER_ID` |
+| `customerId` | `ORDERS.CUSTOMER_ID` |
+| `status` | `ORDERS.ORDER_STATUS` |
+| `items[]` | Related rows from `ORDER_ITEMS` |
 
-That definition tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
+That mapping tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
 
 This is better than common alternatives because it avoids splitting ownership of the same transaction across systems. If teams hand-build JSON in every application service, each service can drift into its own version of the transaction shape. If teams copy transactions into a separate document database, they must synchronize data, duplicate security rules, and resolve conflicts when the document copy and relational source disagree. A duality view keeps one governed source of truth while still giving each consumer the access shape it needs.
 
@@ -108,7 +96,7 @@ First, inspect the transaction shape an application can consume directly.
 
     | Transaction Document |
     | --- |
-    | { "\_id" : 519, "\_metadata" : { "etag" : "A373EE416A88F30340355B478ADC0179", "asof" : "00002AB7EFDA711D" }, "customerId" : 205, "status" : "cancelle... |
+    | { "\_id" : 1, "customerId" : 687, "status" : "confirmed", "total" : 2400, "items" : [ ... ] } |
 
 
 2. Expand the document in SQL Worksheet.
@@ -146,20 +134,20 @@ Now use SQL to project document fields back into reviewable columns. In this con
 
     **Expected output: JSON Field Projection**
 
-    The exact email values may differ by load, but `Transaction Status` and `Client Email` should not be blank.
+    The exact email values may differ after a data refresh, but `Transaction Status` and `Client Email` should not be blank.
 
     | Transaction Id | Transaction Status | Client Email |
     | --- | --- | --- |
-    | 1 | confirmed | client@example.com |
-    | 2 | processing | client@example.com |
-    | 3 | routed | client@example.com |
-    | 4 | completed | client@example.com |
-    | 5 | completed | client@example.com |
-    | 6 | completed | client@example.com |
-    | 7 | cancelled | client@example.com |
-    | 8 | pending | client@example.com |
-    | 9 | confirmed | client@example.com |
-    | 10 | processing | client@example.com |
+    | 1 | confirmed | jessica.parker687@example.com |
+    | 2 | processing | emily.rogers707@example.com |
+    | 3 | routed | kimberly.cook129@example.com |
+    | 4 | completed | timothy.harris240@example.com |
+    | 5 | completed | matthew.gonzalez792@example.com |
+    | 6 | completed | amanda.perez1387@example.com |
+    | 7 | cancelled | ava.lewis1977@example.com |
+    | 8 | pending | layla.green1809@example.com |
+    | 9 | confirmed | sandra.morales125@example.com |
+    | 10 | processing | leo.mendoza174@example.com |
 
 
 2. Review the columns returned from the JSON document.
