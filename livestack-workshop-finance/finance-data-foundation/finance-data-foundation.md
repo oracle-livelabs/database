@@ -128,7 +128,7 @@ Perform the following set of steps to inventory the semantic views and database 
     | Spatial metadata layers | 3 |
     | OML mining models | 4 |
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 2. Review the counts.
     Read the result as a capability checklist. The query reads Oracle catalog views instead of application tables, so it tells you what kinds of database objects are available before you start using them.
@@ -181,7 +181,7 @@ Perform the following set of steps to count the current finance data groups and 
     | Fraud entities | 25 |
     | Fraud relationships | 35 |
 
-  **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+    **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 2. Use the counts as the baseline for later analysis.
     This query reads the business-facing finance views and core tables that you will aggregate, search, traverse, score, or audit. It gives you a concrete sense of the data population before you inspect specific risk and operations results.
