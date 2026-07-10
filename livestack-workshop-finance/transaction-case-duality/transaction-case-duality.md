@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Applications often need transaction data as a clean JSON document, while analysts still need the same data in relational form for filtering, joining, and investigation. This lab uses **JSON Relational Duality** to support both needs from the same governed transaction data.
+Applications often need transaction data as a clean JSON document, while analysts still need the same data in relational form for filtering, joining, and investigation. This lab uses **JSON Relational Duality** to satisfy both needs from the same data.
 
-This matters after the dashboard lab because a KPI is not enough for review. When an analyst or application needs a specific transaction, the database can return an API-shaped document and still preserve the relational joins needed for investigation.
+Think of this as one transaction wearing two useful forms. The application gets an API-friendly document. Analysts and database developers still get governed SQL access to the underlying facts.
 
 This matters after the dashboard lab because a KPI is not enough for review. When an analyst or application needs a specific transaction, the database can return an API-shaped document and still preserve the relational joins needed for investigation.
 
@@ -23,7 +23,7 @@ This matters after the dashboard lab because a KPI is not enough for review. Whe
 
 </details>
 
-The image below shows the **Transaction** and **Case Operations** page in its API document view. The application can show the same transaction as a nested JSON document for API and partner integration use cases, while operations teams still rely on relational transaction, client, product, case, and service data. In this lab, you query the duality view behind that screen to see why developers can get a JSON payload without giving up relational analytics.
+The image below shows the Transaction and Case Operations page in its API document view. The application can show the same transaction as a nested JSON document for API and partner integration use cases, while operations teams still rely on relational transaction, client, product, case, and service data. In this lab, you query the duality view behind that screen to see why developers can get a JSON payload without giving up relational analytics.
 
 ![Transaction API Document View](images/transaction-json-duality.png " ")
 
@@ -50,36 +50,24 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
 ### What Is a Duality View?
 
-A **JSON Relational Duality View** is a database view that defines how relational tables should appear as a JSON document. The data still lives in relational tables, with keys, constraints, SQL access, and governance. The duality view adds a document access path over that same data.
+A JSON Relational Duality View is a database view that defines how relational tables should appear as a JSON document. The data still lives in relational tables, with keys, constraints, SQL access, and governance. The duality view adds a document access path over that same data.
 
-For this lab, the workshop database already includes `ORDERS_DV`. It was created with a statement shaped like this:
+For this lab, the workshop database already includes `ORDERS_DV`. The duality view maps relational columns into a document shape like this:
 
-```sql
-CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
-SELECT JSON {
-    '_id'        : o.order_id,
-    'customerId' : o.customer_id,
-    'status'     : o.order_status,
-    'items'      : [
-        SELECT JSON {
-            'itemId'    : oi.item_id,
-            'productId' : oi.product_id,
-            'quantity'  : oi.quantity
-        }
-        FROM order_items oi
-        WHERE oi.order_id = o.order_id
-    ]
-}
-FROM orders o;
-```
+| JSON field | Relational source |
+| --- | --- |
+| `_id` | `ORDERS.ORDER_ID` |
+| `customerId` | `ORDERS.CUSTOMER_ID` |
+| `status` | `ORDERS.ORDER_STATUS` |
+| `items[]` | Related rows from `ORDER_ITEMS` |
 
-That definition tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
+That mapping tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
 
 This is better than common alternatives because it avoids splitting ownership of the same transaction across systems. If teams hand-build JSON in every application service, each service can drift into its own version of the transaction shape. If teams copy transactions into a separate document database, they must synchronize data, duplicate security rules, and resolve conflicts when the document copy and relational source disagree. A duality view keeps one governed source of truth while still giving each consumer the access shape it needs.
 
 ## Task 1: Inspect document-shaped transactions
 
-Perform the following set of steps to inspect the transaction shape that an application can consume directly:
+First, inspect the transaction shape an application can consume directly.
 
 1. Run this query:
 
@@ -108,7 +96,7 @@ Perform the following set of steps to inspect the transaction shape that an appl
 
     | Transaction Document |
     | --- |
-    | { "\_id" : 519, "\_metadata" : { "etag" : "A373EE416A88F30340355B478ADC0179", "asof" : "00002AB7EFDA711D" }, "customerId" : 205, "status" : "cancelle... |
+    | { "\_id" : 1, "customerId" : 687, "status" : "confirmed", "total" : 2400, "items" : [ ... ] } |
 
 
 2. Expand the document in SQL Worksheet.
@@ -118,11 +106,9 @@ Perform the following set of steps to inspect the transaction shape that an appl
 
     This is useful because risk and operations teams can inspect the same transaction from two angles: API-ready JSON for the application and governed relational rows for analysis.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Task 2: Project JSON fields with SQL
 
-Perform the following set of steps to project JSON document fields back into reviewable SQL columns:
+Now use SQL to project document fields back into reviewable columns. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
 
 1. Run this SQL/JSON projection query:
 
@@ -148,20 +134,20 @@ Perform the following set of steps to project JSON document fields back into rev
 
     **Expected output: JSON Field Projection**
 
-    The exact email values may differ by load, but `Transaction Status` and `Client Email` should not be blank.
+    The exact email values may differ after a data refresh, but `Transaction Status` and `Client Email` should not be blank.
 
     | Transaction Id | Transaction Status | Client Email |
     | --- | --- | --- |
-    | 1 | confirmed | client@example.com |
-    | 2 | processing | client@example.com |
-    | 3 | routed | client@example.com |
-    | 4 | completed | client@example.com |
-    | 5 | completed | client@example.com |
-    | 6 | completed | client@example.com |
-    | 7 | cancelled | client@example.com |
-    | 8 | pending | client@example.com |
-    | 9 | confirmed | client@example.com |
-    | 10 | processing | client@example.com |
+    | 1 | confirmed | jessica.parker687@example.com |
+    | 2 | processing | emily.rogers707@example.com |
+    | 3 | routed | kimberly.cook129@example.com |
+    | 4 | completed | timothy.harris240@example.com |
+    | 5 | completed | matthew.gonzalez792@example.com |
+    | 6 | completed | amanda.perez1387@example.com |
+    | 7 | cancelled | ava.lewis1977@example.com |
+    | 8 | pending | layla.green1809@example.com |
+    | 9 | confirmed | sandra.morales125@example.com |
+    | 10 | processing | leo.mendoza174@example.com |
 
 
 2. Review the columns returned from the JSON document.
@@ -170,12 +156,6 @@ Perform the following set of steps to project JSON document fields back into rev
     `Transaction Id` and `Transaction Status` are projected from the JSON document into the result table. The document stores the client reference as `customerId`, so the query joins back to `CUSTOMERS` to return `Client Email`.
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
-## Next Steps
-
-Congratulations on completing the JSON duality lab. You used JSON Relational Duality to work with finance transaction data as both application-friendly documents and SQL-queryable rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 
