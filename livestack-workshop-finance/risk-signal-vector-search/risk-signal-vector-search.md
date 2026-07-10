@@ -6,7 +6,7 @@ Risk teams often know what they are looking for before they know the exact words
 
 That matters because a risk analyst may ask about "mortgage pre-approval risk" while the data uses related phrases such as loan review, lending exposure, or adjustable-rate mortgage. Vector search helps find the right neighborhood of meaning, not just exact text matches.
 
-After reviewing numeric exposure, analysts often need to search the language behind the signals. Instead of only sorting by counts and scores, you ask the database to find products and signal text that mean roughly the same thing as the analyst's question.
+After reviewing numeric exposure, analysts often need to search the language behind the signals. Instead of only sorting by counts and scores, you ask the database to find products and signal text that match what the analyst is asking.
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -15,7 +15,7 @@ After reviewing numeric exposure, analysts often need to search the language beh
 >
 > - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the finance rows they describe, so the meaning-based search stays connected to product names, exposure values, signal counts, and other business columns.
 >
-> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
+> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match the risk question.
 >
 > - **Semantic search** means searching by meaning instead of exact words. For example, a search for "fraud signals aml exposure" can find text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
 
@@ -69,18 +69,26 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
     SELECT p.product_name,
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
-             pe.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'mortgage pre-approval risk' AS DATA),
-             COSINE), 4) AS similarity
+               pe.embedding,
+               VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING 'mortgage pre-approval risk' AS DATA),
+               COSINE
+           ), 4) AS similarity
     FROM product_embeddings pe
     JOIN products p ON p.product_id = pe.product_id
-    ORDER BY VECTOR_DISTANCE(
-      pe.embedding,
-      VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'mortgage pre-approval risk' AS DATA),
-      COSINE)
+    ORDER BY similarity DESC
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    In order to understand this query, you need to read it in three parts.
+
+    1. `product_embeddings` stores the meaning of each product as a vector.
+
+    2. `VECTOR_EMBEDDING` turns `mortgage pre-approval risk` into a new vector.
+
+    3. `VECTOR_DISTANCE` compares the search phrase vector to each stored product vector.
+
+    The similarity line turns distance into a score. A smaller vector distance means the product meaning is closer to the search phrase. `1 - VECTOR_DISTANCE(...)` changes distance into a score where higher is better. `ROUND(..., 4)` keeps four decimal places. `AS similarity` names the result column. `ORDER BY similarity DESC` puts the closest product matches first.
 
     **Expected output: Mortgage Product Matches**
 
@@ -94,9 +102,11 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
 
 2. Review the ranked products.
-    The query embeds the analyst phrase at runtime and compares it to stored product embeddings. The `VECTOR_DISTANCE` order ranks products by semantic closeness, while the similarity score gives the analyst a way to compare the strength of each match.
+    The query embeds the analyst phrase and compares it to stored product embeddings. The `similarity` score ranks products by semantic closeness and helps the analyst compare the strength of each match.
 
     The expected top result is `Mortgage Pre-Approval`, followed by related lending and risk analytics products. The ranking matters because it acts like an analyst assistant: it brings likely matches to the top even when the search phrase and product name are not identical.
+
+    The finance schema includes vector indexes on the product and signal embedding columns. Those indexes help Oracle search larger vector tables faster.
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or operational follow-up.
 
@@ -113,18 +123,26 @@ Now apply the same semantic search pattern to risk signal language.
     SELECT sp.post_id AS signal_id,
            SUBSTR(sp.post_text, 1, 120) AS signal_excerpt,
            ROUND(1 - VECTOR_DISTANCE(
-             se.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
-             COSINE), 4) AS similarity
+               se.embedding,
+               VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
+               COSINE
+           ), 4) AS similarity
     FROM signal_embeddings se
     JOIN social_posts sp ON sp.post_id = se.post_id
-    ORDER BY VECTOR_DISTANCE(
-      se.embedding,
-      VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
-      COSINE)
+    ORDER BY similarity DESC, signal_id
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    In order to understand this query, you need to read it in three parts.
+
+    1. `signal_embeddings` stores the meaning of each signal as a vector.
+
+    2. `VECTOR_EMBEDDING` turns `fraud signals aml exposure` into a new vector.
+
+    3. `VECTOR_DISTANCE` compares the search phrase vector to each stored signal vector.
+
+    The similarity score works the same way as Task 1. Higher scores mean the signal text is closer in meaning to the search phrase. `SUBSTR(sp.post_text, 1, 120)` shortens the signal text so the result table is easier to read.
 
     **Expected output: AML Signal Matches**
 
@@ -143,6 +161,10 @@ Now apply the same semantic search pattern to risk signal language.
     The returned excerpts contain AML, fraud, sanctions, and suspicious activity language even though the search phrase is short. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
+
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched finance product and risk-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
 
 ## Acknowledgements
 
