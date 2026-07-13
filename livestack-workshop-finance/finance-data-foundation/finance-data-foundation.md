@@ -10,7 +10,7 @@ The point is to understand what is available before you start asking business qu
 
 Think of this lab as the map of the finance environment. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
 
-Oracle Database 26ai is a converged database: it lets these different finance workloads use one governed database foundation instead of forcing each data type into a separate specialist system.
+**Oracle AI Database 26ai** is a converged database: it lets these different finance workloads use one governed database foundation instead of forcing each data type into a separate specialist system.
 
 ![Before and after architecture diagram comparing bespoke finance data stores with Oracle Converged Database](images/converged-database-before-after.png " ")
 
@@ -41,7 +41,7 @@ The image below is the Data Foundation page from the Seer Bank application. It s
 
 - Review the finance semantic views.
 - Check the scale of the current data.
-- Map each application page to the Oracle Database 26ai capability that supports the related finance decision.
+- Map each application page to the Oracle AI Database 26ai capability that supports the related finance decision.
 
 Estimated Time: **10 minutes**
 
@@ -60,7 +60,7 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
 
 ## Task 1: Inventory the finance object families
 
-Perform the following set of steps to inventory the semantic views and database capabilities used later in the workshop:
+Start by inventorying the semantic views and database capabilities that the rest of the workshop depends on:
 
 1. Run this inventory query:
 
@@ -135,7 +135,7 @@ Perform the following set of steps to inventory the semantic views and database 
 
     Treat this as the capability map for the finance application. Each row points to a business use you will work with in SQL.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.    
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 2: Count the current finance data groups
 

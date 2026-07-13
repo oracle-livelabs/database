@@ -8,9 +8,9 @@ The important takeaway is practical: you can now explain how one finance questio
 
 A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and case-processing capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
 
-With Oracle Database 26ai, Seer Bank can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, and Oracle Machine Learning (OML) for prediction.
+With **Oracle AI Database 26ai**, **Seer Bank** can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, and Oracle Machine Learning (OML) for prediction.
 
-That is the punchline for finance: the database is not just where records sit. It becomes the place where risk, fraud, compliance, service, and analytics teams can ask different questions about the same governed facts.
+That is the punchline for finance: *The database is not just where records sit. It becomes the place where risk, fraud, compliance, service, and analytics teams can ask different questions about the same governed facts.*
 
 You leave this workshop with a repeatable way to talk about Oracle's converged database value: fewer copies of sensitive data, fewer reconciliation points, stronger governance, faster investigation, and business results that can be explained from SQL-backed evidence.
 
@@ -83,7 +83,7 @@ Review what you saw and connect each outcome back to the business question it he
     - Oracle Spatial measures service coverage.
     - OML scores predictions close to governed data.
 
-    The lasting lesson is that Oracle Database 26ai lets these jobs reinforce each other. In a real finance environment, that means teams can move from risk awareness to transaction evidence, relationship analysis, service coverage, and predictive planning without losing the governed context behind the decision.
+The lasting lesson is that **Oracle AI Database 26ai** lets these jobs reinforce each other. In a real finance environment, that means teams can move from risk awareness to transaction evidence, relationship analysis, service coverage, and predictive planning without losing the governed context behind the decision.
 
 ## Acknowledgements
 
