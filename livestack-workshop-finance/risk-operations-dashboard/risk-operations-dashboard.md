@@ -55,7 +55,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 1. Run the dashboard aggregate query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are recreating the dashboard's headline risk measures directly from governed signal data. The SQL aggregates all rows in `RISK_SIGNALS_V`, calculates the average criticality, counts signals above the high-risk threshold, and sums exposure and case counts into one KPI row.
 
@@ -99,7 +99,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     The high-risk count is the number of signals with a criticality score of 80 or higher. A higher count means more issues may need immediate analyst review, case triage, or operational follow-up. It does not mean every item is confirmed fraud or a confirmed incident; it means the dashboard has found more items that cross the bank review threshold.
 
-## Task 2: Find top product exposure
+## Task 2: Review product-linked risk signal rows
 
 Dashboard KPIs help show where risk is rising. Next, look at the product-linked signal rows an analyst would investigate first.
 
@@ -159,25 +159,28 @@ Next, summarize the products tied to monitored exposure.
 
 1. Run this product exposure query:
 
-    You are moving from dashboard totals to the products and institutions that drive review priority. The SQL joins product mentions, signal rows, finance products, and institutions, then groups by product.
+    You are grouping risk signals by financial product. The SQL joins risk-signal rows to product mentions, finance products, and institutions.
 
-    This query uses `finance_products_v` and `finance_institutions_v` because the dashboard needs business names and product categories, not just internal IDs. Those views turn product and institution records into reporting-friendly columns, so the returned rows can explain exposure in language a risk leader recognizes.
+    This query uses `finance_products_v` and `finance_institutions_v` so the result shows business names and product categories, not just internal IDs.
 
-    Each returned row shows signal volume, average criticality, and exposure for a specific financial product. The `SUM(sp.views_count)` expression calculates exposure by adding the reach of all monitored signal events tied to the product.
+    Each row shows signal volume, average criticality, and exposure for one financial product. The query uses `risk_signals_v.criticality_score` and `risk_signals_v.exposure_count`. That keeps the result in finance risk terms.
 
     ```sql
     <copy>
-    SELECT fp.financial_product_name,
-           fi.institution_name,
-           fp.product_category,
-           COUNT(DISTINCT sp.post_id) AS signal_count,
-           ROUND(AVG(sp.virality_score), 1) AS avg_criticality,
-           SUM(sp.views_count) AS exposure_count
-    FROM post_product_mentions ppm
-    JOIN social_posts sp ON sp.post_id = ppm.post_id
-    JOIN finance_products_v fp ON fp.financial_product_id = ppm.product_id
-    JOIN finance_institutions_v fi ON fi.institution_id = fp.institution_id
-    GROUP BY fp.financial_product_name, fi.institution_name, fp.product_category
+    SELECT products.financial_product_name,
+           institutions.institution_name,
+           products.product_category,
+           COUNT(DISTINCT signals.signal_id) AS signal_count,
+           ROUND(AVG(signals.criticality_score), 1) AS avg_criticality,
+           SUM(signals.exposure_count) AS exposure_count
+    FROM risk_signals_v signals
+    JOIN post_product_mentions mentions
+         ON mentions.post_id = signals.signal_id
+    JOIN finance_products_v products
+         ON products.financial_product_id = mentions.product_id
+    JOIN finance_institutions_v institutions
+         ON institutions.institution_id = products.institution_id
+    GROUP BY products.financial_product_name, institutions.institution_name, products.product_category
     ORDER BY avg_criticality DESC, exposure_count DESC
     FETCH FIRST 10 ROWS ONLY;
     </copy>
@@ -206,11 +209,13 @@ Next, summarize the products tied to monitored exposure.
 
     Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
 
+    Exposure is important because it changes prioritization. A product with many signals, high average criticality, and high exposure should move to the top of the dashboard review queue. That combination means the issue is showing up repeatedly, scoring as more severe, and reaching more people. For a financial institution, that can raise client, regulatory, reputational, or operational risk.
+
     For a production dashboard, review the execution plan for each KPI query. Useful indexes usually support the filter and join columns used here: `CRITICALITY_SCORE`, `SIGNAL_ID`, `POST_ID`, `PRODUCT_ID`, `FINANCIAL_PRODUCT_ID`, and `INSTITUTION_ID`.
 
-    Each row shows a financial product associated with monitored risk signals. `Signal Count` is the number of distinct posts or events tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` estimates how many views or interactions those signals reached.
+    A materialized view may help when many users run the same dashboard totals. Product-level exposure totals by institution and category could be precomputed for faster dashboard response.
 
-    Exposure is important because it changes prioritization. A product with many signals, high average criticality, and high exposure should move to the top of the dashboard review queue. That combination means the issue is showing up repeatedly, scoring as more severe, and reaching more people. For a financial institution, that can raise client, regulatory, reputational, or operational risk.
+    This lab uses direct SQL instead of a materialized view so the calculation stays visible. KPI totals come from `RISK_SIGNALS_V`. Product-linked rows use the same signal view and join to product details. Product exposure joins back to product and institution context. In production, teams can keep the same logic and move repeated totals into indexed tables or materialized views.
 
 ## Acknowledgements
 

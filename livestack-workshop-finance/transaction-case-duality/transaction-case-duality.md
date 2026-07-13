@@ -71,7 +71,7 @@ First, inspect the transaction shape an application can consume directly.
 
 1. Run this query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are viewing a transaction the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view `ORDERS_DV` and uses `JSON_SERIALIZE(... PRETTY)` so SQL Worksheet displays the document shape clearly.
 
@@ -88,6 +88,7 @@ First, inspect the transaction shape an application can consume directly.
     <copy>
     SELECT JSON_SERIALIZE(data PRETTY) AS transaction_document
     FROM orders_dv
+    ORDER BY JSON_VALUE(data, '$._id' RETURNING NUMBER)
     FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
@@ -96,7 +97,7 @@ First, inspect the transaction shape an application can consume directly.
 
     | Transaction Document |
     | --- |
-    | { "\_id" : 1, "customerId" : 687, "status" : "confirmed", "total" : 2400, "items" : [ ... ] } |
+    | { "\_id" : 1, "\_metadata" : { ... }, "customerId" : 687, "status" : "confirmed", "items" : [ ... ] } |
 
 
 2. Expand the document in SQL Worksheet.

@@ -58,7 +58,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
 1. Run this model inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are confirming which predictive models are available before using them in finance decisions.
 
@@ -83,6 +83,12 @@ Begin by reviewing the persisted OML models available for scoring.
            mining_function,
            algorithm
     FROM user_mining_models
+    WHERE model_name IN (
+      'CUSTOMER_SEGMENT_MODEL',
+      'DEMAND_SURGE_MODEL',
+      'PRODUCT_CLUSTER_MODEL',
+      'REVENUE_PREDICT_MODEL'
+    )
     ORDER BY model_name;
     </copy>
     ```
