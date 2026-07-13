@@ -111,7 +111,18 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 2. Review the high-risk entities.
     The query returns connected entities as a prioritized table, not as an abstract graph picture. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and transaction labs.
 
+<<<<<<< HEAD
     Expected rows include `DEV-fp-91a7`, `PAYEE-MULE-017`, `IP-198.51.100.44`, and `PHONE-212-0199`. These are not just labels; they are connected entities that help explain why the seed account deserves attention.
+=======
+    The expected rows show the evidence connected to suspicious account `ACCT-8841`. 
+    For example:
+    * `DEV-fp-91a7` is a device 
+    * `PAYEE-MULE-017` is a payee
+    * `IP-198.51.100.44` is an IP address
+    * `PHONE-212-0199` is a phone number
+    
+    These rows matter because they show what the suspicious account touched or shared.
+>>>>>>> upstream/main
 
     The result gives investigators a prioritized reach map. Instead of staring at a tangle of connections, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
 
@@ -180,6 +191,13 @@ Next, find account pairs that share identifying evidence such as device, IP addr
 
     This turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
 
+<<<<<<< HEAD
+=======
+## Next Steps
+
+Congratulations on completing the property graph lab. You used graph queries to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
+
+>>>>>>> upstream/main
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager

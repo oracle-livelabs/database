@@ -2,7 +2,11 @@
 
 ## Introduction
 
+<<<<<<< HEAD
 Predictions become useful when they can be explained and used in the same place as the finance data. This lab scores persisted **Oracle Machine Learning** models directly in SQL, so the prediction is not separated from the evidence that produced it.
+=======
+Finance teams use dashboards to understand what has already happened, but they also need predictions that help them plan what to do next. Those predictions are more useful when analysts can see which model produced the score, which business record was scored, and how the result connects back to product, revenue, or risk decisions.
+>>>>>>> upstream/main
 
 Prediction helps teams look ahead instead of only describing what already happened. The database can help answer questions such as "Which products may surge?", "Which customers behave similarly?", and "What revenue outcome should we expect?"
 
@@ -21,7 +25,11 @@ You use the same governed finance records to support planning decisions. The rec
 >
 > - **Clustering** groups similar records together without requiring a preassigned label. In finance, clustering can help compare similar products, identify cohorts, or find groups that behave alike for risk, revenue, or service planning.
 >
+<<<<<<< HEAD
 > - **Confidence** is the model's estimated strength for a prediction. It helps you compare stronger and weaker predictions, but it is not the same thing as a guaranteed outcome. Treat confidence as decision support: useful for prioritization, but still something to review with business context.
+=======
+> - **Confidence** is the estimated strength of a prediction. It helps you compare stronger and weaker predictions. It is not a guaranteed outcome. Treat confidence as decision support that still needs business review.
+>>>>>>> upstream/main
 
 </details>
 
@@ -101,7 +109,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
 ## Task 2: Score demand risk and revenue in SQL
 
-Perform the following set of steps to score demand risk and revenue directly in SQL:
+Now score demand risk and revenue directly in SQL so learners can see how deployed OML models support finance decisions without moving governed data out of the database.
 
 1. Run the demand surge classification query:
 
@@ -146,14 +154,67 @@ Perform the following set of steps to score demand risk and revenue directly in 
     | 9 | Treasury Sweep Account | STABLE | STABLE | 0.6597 |
     | 10 | Corporate Card Program | STABLE | STABLE | 0.5252 |
 
+<<<<<<< HEAD
     The inline query scores the same model inputs as the training view, then joins to `PRODUCTS` to show the business-readable financial product name. The `ORDER BY product_id` clause makes the displayed sample rows stable. The `Confidence` values are OML model scores, not stored source data.
+=======
+    Review the predicted surge and confidence together. A `SURGE` prediction can help an analyst decide which products may need more monitoring, outreach, or case-processing capacity. Confidence helps the analyst decide how strongly the model supports that prediction. It does not replace review; it helps rank where to look first.
+>>>>>>> upstream/main
 
 
 2. Run revenue regression.
 
     You are estimating revenue outcomes from the persisted regression model. The SQL scores rows from `OML_REVENUE_TRAINING_V` with `REVENUE_PREDICT_MODEL`, rounds the predicted value for review, and returns it next to the known target revenue so you can compare model output with actual business values.
 
+<<<<<<< HEAD
     `OML_REVENUE_TRAINING_V` is the revenue-model feature view. It gives the regression model a consistent set of revenue-related inputs and keeps the scoring example tied to governed database data. That consistency is important because revenue prediction is easier to explain when the model input shape is defined in the database instead of hidden in a separate notebook or script.
+=======
+    Before analysts use a model score, they need a quick check that the model is behaving reasonably on the workshop data. This query compares two values for each product: the known label in the training view and the label predicted by the model.
+
+    ```sql
+    <copy>
+    SELECT actual_label,
+           predicted_label,
+           COUNT(*) AS product_count
+    FROM (
+      SELECT surge_label AS actual_label,
+             PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_label
+      FROM oml_demand_training_v
+    )
+    GROUP BY actual_label,
+             predicted_label
+    ORDER BY actual_label,
+             predicted_label;
+    </copy>
+    ```
+
+    **Expected output: Demand Model Agreement Check**
+
+    | Actual Label | Predicted Label | Product Count |
+    | --- | --- | --- |
+    | STABLE | STABLE | 59 |
+    | SURGE | STABLE | 4 |
+    | SURGE | SURGE | 16 |
+
+    In order to understand this query, you need to read it in three parts.
+
+    1. `SURGE_LABEL` comes from `OML_DEMAND_TRAINING_V`. It marks each product as `SURGE` or `STABLE` in the demo data, so the query renames it `ACTUAL_LABEL`.
+    2. `PREDICTION(DEMAND_SURGE_MODEL USING *)` asks the model to predict a label for the same row. In this query, it is renamed `PREDICTED_LABEL`.
+    3. The outer query groups the results so you can count how often each actual and predicted combination appears.
+
+    Rows where `ACTUAL_LABEL` and `PREDICTED_LABEL` are the same are matches. Rows where they are different show where the model prediction differs from the label stored in `OML_DEMAND_TRAINING_V`. This is a simple learning check, not a full production model evaluation.
+
+    The workshop uses synthetic demo data to teach the SQL pattern. Do not interpret these scores as a production financial risk model.
+
+3. Run revenue regression.
+
+    You are estimating revenue outcomes from the persisted regression model.
+
+    In order to understand this query, you need to read it in three parts.
+
+    1. `OML_REVENUE_TRAINING_V` gives the model a consistent set of revenue-related inputs.
+    2. `PREDICTION(REVENUE_PREDICT_MODEL USING *)` returns a numeric revenue estimate for each row.
+    3. The query shows `TARGET_REVENUE` next to `PREDICTED_REVENUE` so the learner can compare the known business value with the model estimate.
+>>>>>>> upstream/main
 
     ```sql
     <copy>

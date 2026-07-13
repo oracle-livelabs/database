@@ -144,6 +144,13 @@ Now apply the same semantic search pattern to risk signal language.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
 
+<<<<<<< HEAD
+=======
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched finance product and risk-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
+
+>>>>>>> upstream/main
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager

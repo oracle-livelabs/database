@@ -157,6 +157,13 @@ Now use SQL to project document fields back into reviewable columns. In this con
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
 
+<<<<<<< HEAD
+=======
+## Next Steps
+
+Congratulations on completing the JSON duality lab. You used JSON Relational Duality to work with finance transaction data as both application-friendly documents and SQL-queryable rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
+
+>>>>>>> upstream/main
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager

@@ -1,4 +1,4 @@
-# Build Financial Intelligence with Oracle Database 26ai
+# Build Financial Intelligence with Oracle AI Database 26ai
 
 ## Introduction
 
@@ -6,8 +6,13 @@ Financial institutions need fast decisions, but speed is not enough. When a risk
 
 Seer Bank risk, fraud, compliance, service, analytics, application, and AI teams all need to work from the same facts instead of reconciling different copies of the truth.
 
-In this workshop, **Seer Bank** uses **Oracle Database 26ai** as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, and in-database machine learning all operate against connected finance data.
+In this workshop, **Seer Bank** uses **Oracle AI Database 26ai** as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, and in-database machine learning all operate against connected finance data.
 
+<<<<<<< HEAD
+=======
+![Workshop overview](images/finance-workshop-intro-journey.png " ")
+
+>>>>>>> upstream/main
 Throughout the workshop, you will see small arrows next to expandable sections. Select the arrow when you want extra context about a term, concept, or Oracle Database capability. These sections are closed by default so the main lab stays focused, but you can expand them whenever you want more explanation.
 
 The example below shows an expandable section before and after it is opened.

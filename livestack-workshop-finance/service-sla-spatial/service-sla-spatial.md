@@ -2,7 +2,13 @@
 
 ## Introduction
 
+<<<<<<< HEAD
 After risk is identified, Seer Bank needs to know whether case-processing capacity is close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and how quickly can the bank respond?
+=======
+After risk is identified, Seer Bank needs to know whether case-processing capacity is close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and can the bank meet its service-level agreement (SLA) commitments?
+
+You will help a service operations leader turn location data into coverage evidence for case routing, fraud follow-up, anti-money laundering (AML) review, and SLA planning.
+>>>>>>> upstream/main
 
 Risk and fraud decisions often create service work: client outreach, case routing, AML or fraud review, product review, dispute follow-up, onboarding checks, and document handling. Spatial analysis helps operations leaders avoid guessing from a map and instead measure whether case-processing capacity is near the demand region that needs support.
 
