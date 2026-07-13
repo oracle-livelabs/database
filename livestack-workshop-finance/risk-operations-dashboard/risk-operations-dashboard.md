@@ -101,7 +101,61 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 ## Task 2: Find top product exposure
 
-Next, move from headline measures to the financial products driving monitored exposure.
+Dashboard KPIs help show where risk is rising. Next, look at the product-linked signal rows an analyst would investigate first.
+
+1. Run this product-linked signal query:
+
+    This query starts with `RISK_SIGNALS_V`. It keeps signals with a score of 80 or higher, then joins to product and institution views. That threshold matches the high-risk count from Task 1.
+
+    `POST_PRODUCT_MENTIONS` is a bridge table. It connects a signal to the financial products mentioned by that signal.
+
+    The query uses readable aliases: `signals`, `mentions`, `products`, and `institutions`. It also uses `ORDER BY ... FETCH FIRST` so Oracle returns the same top-10 order each time.
+
+    ```sql
+    <copy>
+    SELECT signals.signal_id,
+           signals.criticality_score,
+           signals.exposure_count,
+           signals.cases_opened_count,
+           products.financial_product_name,
+           institutions.institution_name,
+           products.product_category
+    FROM risk_signals_v signals
+    JOIN post_product_mentions mentions
+         ON mentions.post_id = signals.signal_id
+    JOIN finance_products_v products
+         ON products.financial_product_id = mentions.product_id
+    JOIN finance_institutions_v institutions
+         ON institutions.institution_id = products.institution_id
+    WHERE signals.criticality_score >= 80
+    ORDER BY signals.criticality_score DESC, signals.exposure_count DESC, signals.signal_id
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
+
+    **Expected output: Product-Linked Risk Signals**
+
+    | Signal Id | Criticality Score | Exposure Count | Cases Opened Count | Financial Product Name | Institution Name | Product Category |
+    | --- | --- | --- | --- | --- | --- | --- |
+    | 1 | 96 | 12560000 | 1260 | AML Screening Package | Clearwater Credit Union | Compliance Services |
+    | 2 | 92 | 8840000 | 980 | Wire Transfer Service | Clearwater Credit Union | Payments |
+    | 3 | 88 | 6420000 | 740 | Rate Hedge Advisory | Harvest Commercial Bank | Capital Markets |
+    | 4479 | 87 | 17564089 | 9719 | CECL Reserve Scenario | Greenline Asset Management | Risk Analytics |
+    | 5 | 83 | 2630000 | 410 | Commercial Real Estate Loan | Granite Wealth | Commercial Lending |
+    | 6 | 81 | 1710000 | 290 | Real-Time Payments Service | SecureLedger Compliance | Payments |
+    | 7 | 80 | 980000 | 180 | Adjustable Rate Mortgage | NorthBridge Investments | Mortgage Lending |
+
+
+2. Review the product-linked rows.
+    Each row connects a risk signal to a financial product. Start with the first row. Ask three questions: which product is involved, which institution owns it, and what type of product is it?
+
+    `Criticality Score` shows how serious the signal is. `Exposure Count` shows how widely the signal may affect customers, accounts, or operations. `Cases Opened Count` shows how much follow-up work already exists.
+
+    An analyst usually starts with rows that combine high criticality, high exposure, and many opened cases. Those rows point to products that may need faster review, extra staffing, or closer monitoring.
+
+## Task 3: Find top product exposure
+
+Next, summarize the products tied to monitored exposure.
 
 1. Run this product exposure query:
 
@@ -145,8 +199,14 @@ Next, move from headline measures to the financial products driving monitored ex
     | Digital Wallet Account | SecureLedger Compliance | Payments | 48 | 43.8 | 37616607 |
 
 
-2. Use the top rows to explain dashboard priority.
-    This query joins signal events to financial products and institutions so the dashboard can move from "risk is rising" to "these products and institutions need attention." The grouping logic turns individual signal rows into a review queue that business users can understand.
+2. Review the product summary rows.
+    Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
+
+    `Signal Count` shows how many monitored signals are tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` shows the scale of the monitored exposure tied to those signals.
+
+    Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
+
+    For a production dashboard, review the execution plan for each KPI query. Useful indexes usually support the filter and join columns used here: `CRITICALITY_SCORE`, `SIGNAL_ID`, `POST_ID`, `PRODUCT_ID`, `FINANCIAL_PRODUCT_ID`, and `INSTITUTION_ID`.
 
     Each row shows a financial product associated with monitored risk signals. `Signal Count` is the number of distinct posts or events tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` estimates how many views or interactions those signals reached.
 
