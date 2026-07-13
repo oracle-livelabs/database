@@ -209,6 +209,8 @@ Next, summarize the products tied to monitored exposure.
 
     Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
 
+    Exposure is important because it changes prioritization. A product with many signals, high average criticality, and high exposure should move to the top of the dashboard review queue. That combination means the issue is showing up repeatedly, scoring as more severe, and reaching more people. For a financial institution, that can raise client, regulatory, reputational, or operational risk.
+
     For a production dashboard, review the execution plan for each KPI query. Useful indexes usually support the filter and join columns used here: `CRITICALITY_SCORE`, `SIGNAL_ID`, `POST_ID`, `PRODUCT_ID`, `FINANCIAL_PRODUCT_ID`, and `INSTITUTION_ID`.
 
     A materialized view may help when many users run the same dashboard totals. Product-level exposure totals by institution and category could be precomputed for faster dashboard response.
