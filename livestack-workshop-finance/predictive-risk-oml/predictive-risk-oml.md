@@ -101,7 +101,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
 ## Task 2: Score demand risk and revenue in SQL
 
-Perform the following set of steps to score demand risk and revenue directly in SQL:
+Now score demand risk and revenue directly in SQL so learners can see how deployed OML models support finance decisions without moving governed data out of the database.
 
 1. Run the demand surge classification query:
 
