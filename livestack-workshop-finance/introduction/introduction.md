@@ -1,4 +1,4 @@
-# Build Financial Intelligence with Oracle Database 26ai
+# Build Financial Intelligence with Oracle AI Database 26ai
 
 ## Introduction
 
@@ -6,7 +6,7 @@ Financial institutions need fast decisions, but speed is not enough. When a risk
 
 Seer Bank risk, fraud, compliance, service, analytics, application, and AI teams all need to work from the same facts instead of reconciling different copies of the truth.
 
-In this workshop, **Seer Bank** uses **Oracle Database 26ai** as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, and in-database machine learning all operate against connected finance data.
+In this workshop, **Seer Bank** uses **Oracle AI Database 26ai** as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, and in-database machine learning all operate against connected finance data.
 
 ![Workshop overview](images/finance-workshop-intro-journey.png " ")
 
@@ -51,7 +51,7 @@ Estimated Workshop Time: **95 minutes**
 | Business Problem | Seer Bank needs faster risk, fraud, compliance, service, and predictive decisions without spreading evidence across disconnected systems. |
 | Technical Challenge | Application, data, and AI teams otherwise stitch together separate stores, services, indexes, pipelines, and governance controls for each data type. |
 | Persona Focus | Database developers, application developers, risk analysts, operations leaders, and AI engineers share one evidence path. |
-| What You Will See | One Oracle Database 26ai foundation can support the finance decision loop from awareness to action. |
+| What You Will See | One Oracle AI Database 26ai foundation can support the finance decision loop from awareness to action. |
 | Database Capability | Relational SQL, JSON, vectors, graphs, spatial, Oracle Machine Learning (OML), and semantic views work together under one governed data model. |
 | Outcome | Risk, operations, and engineering teams can observe, investigate, decide, act, and review from database-backed evidence instead of reconciling disconnected outputs. |
 

@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Build Financial Intelligence with Oracle Database 26ai",
+  "workshoptitle": "Build Financial Intelligence with Oracle AI Database 26ai",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -23,27 +23,27 @@
       "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
     },
     {
-      "title": "Lab 3: Query Transaction Documents with JSON Relational Duality",
+      "title": "Lab 3: Transaction and Case Documents",
       "description": "Use JSON Relational Duality and SQL/JSON for transaction documents.",
       "filename": "../../transaction-case-duality/transaction-case-duality.md"
     },
     {
-      "title": "Lab 4: Search Risk Signals with AI Vector Search",
+      "title": "Lab 4: Risk Signal Intelligence",
       "description": "Run AI Vector Search over product and signal embeddings.",
       "filename": "../../risk-signal-vector-search/risk-signal-vector-search.md"
     },
     {
-      "title": "Lab 5: Investigate Financial Crime with Property Graph",
+      "title": "Lab 5: Financial Crime Network",
       "description": "Use Property Graph and SQL/PGQ to analyze fraud reach.",
       "filename": "../../financial-crime-network/financial-crime-network.md"
     },
     {
-      "title": "Lab 6: Map Client Service Coverage with Oracle Spatial",
+      "title": "Lab 6: Client Service and SLA Coverage",
       "description": "Use Oracle Spatial for service center and SLA region analysis.",
       "filename": "../../service-sla-spatial/service-sla-spatial.md"
     },
     {
-      "title": "Lab 7: Score Predictive Risk with Oracle Machine Learning",
+      "title": "Lab 7: Predictive Risk, Capacity, and Revenue",
       "description": "Inspect and score OML models inside Oracle Database.",
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
