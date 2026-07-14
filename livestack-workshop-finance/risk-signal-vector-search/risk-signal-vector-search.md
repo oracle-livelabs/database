@@ -70,7 +70,7 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
              pe.embedding,
-             VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING 'mortgage pre-approval risk' AS DATA),
+             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'mortgage pre-approval risk' AS DATA),
              COSINE), 4) AS similarity
     FROM product_embeddings pe
     JOIN products p ON p.product_id = pe.product_id
@@ -111,7 +111,7 @@ Now apply the same semantic search pattern to risk signal language.
            SUBSTR(sp.post_text, 1, 120) AS signal_excerpt,
            ROUND(1 - VECTOR_DISTANCE(
              se.embedding,
-             VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
+             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
              COSINE), 4) AS similarity
     FROM signal_embeddings se
     JOIN social_posts sp ON sp.post_id = se.post_id
