@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Audience vector search flow</title>
+  <desc id="desc">Audience phrases become vectors and match content assets inside Oracle Database.</desc>
+  <rect width="900" height="360" rx="18" fill="#faf9f7"/>
+  <text x="36" y="48" font-family="Arial" font-size="24" font-weight="700" fill="#312d2a">Audience intent search stays tied to content data</text>
+  <g font-family="Arial" font-size="15" fill="#374151">
+    <rect x="48" y="98" width="220" height="170" rx="14" fill="#fff" stroke="#d8d2c8"/>
+    <text x="72" y="134" font-weight="700">Search phrase</text>
+    <text x="72" y="170">"sports rights highlight clips"</text>
+    <text x="72" y="208">Business language</text>
+    <text x="72" y="236">from an analyst</text>
+    <rect x="340" y="98" width="220" height="170" rx="14" fill="#fff7ed" stroke="#c74634"/>
+    <text x="364" y="134" font-weight="700">Vector comparison</text>
+    <text x="364" y="170">PRODUCT_EMBEDDINGS</text>
+    <text x="364" y="198">POST_EMBEDDINGS</text>
+    <text x="364" y="226">VECTOR_DISTANCE</text>
+    <rect x="632" y="98" width="220" height="170" rx="14" fill="#fff" stroke="#d8d2c8"/>
+    <text x="656" y="134" font-weight="700">Reviewable result</text>
+    <text x="656" y="170">Content asset</text>
+    <text x="656" y="198">Studio or label</text>
+    <text x="656" y="226">Similarity score</text>
+  </g>
+  <path d="M286 184h34" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M316 168l24 16-24 16z" fill="#7a3e2f"/>
+  <path d="M578 184h34" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M608 168l24 16-24 16z" fill="#7a3e2f"/>
+  <text x="48" y="318" font-family="Arial" font-size="15" fill="#6b7280">Higher similarity means the content asset is closer in meaning to the audience phrase, while the source rows remain queryable.</text>
+</svg>

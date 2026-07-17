@@ -2,58 +2,65 @@
 
 ## Introduction
 
-The **Midnight Harbor** launch story started with one business question: *How can Seer Media act faster without losing the evidence behind the action?*
+You have completed the active Seer Media decision path. You started with the shared data foundation, traced dashboard metrics to SQL, inspected campaign JSON documents, searched audience language by meaning, followed creator relationships, reviewed rights coverage, and connected predictive output to operational capacity.
 
-By the end of the workshop, the answer should feel concrete: each step stayed on one governed Oracle foundation, so the launch decision loop remained explainable from first signal to trusted follow-up.
-
-### Operating Story
-
-| Step | Conclusion focus |
-| --- | --- |
-| Business Problem | Launch teams need a decision loop they can explain and defend. |
-| Technical Challenge | The stack must keep operational rows, AI context, tool execution, and audit evidence together. |
-| Persona Focus | Media operations leader, architect, engineer, or technical decision maker. |
-| What You Will Prove | The same database can support launch observation, signal interpretation, decision support, trusted answers, and trusted actions. |
-| Database Capability | Converged database support for relational, JSON, vector, graph, spatial, OML, semantic views, and agent workflows. |
-| Outcome | You can explain how one Oracle database supported the full Media launch decision loop from signal to trusted action. |
-{: title="Conclusion Operating Story Table"}
-
-Persona focus: this final lab is for the reviewer who needs the whole story to hold together, not just the individual feature scenes.
+The main takeaway is not that each capability exists by itself. The value comes from keeping the evidence connected. A media team can move from a dashboard number to a campaign order, from an audience phrase to a content asset, from a creator relationship to a campaign decision, from a region to capacity, and from a forecast to an action plan without reconciling separate systems.
 
 ### Objectives
 
-In this lab, you will:
-
-- Recap the launch decision loop.
-- Connect each capability to the business value it delivered.
+- Summarize the active media decision path.
+- Connect each lab to a business question.
+- Explain the practical value of a converged Oracle Database foundation.
 
 Estimated Time: **5 minutes**
 
-## Task 1: Recap the launch decision loop
+### Business Scenario
 
-Perform the following set of steps to recap the launch decision loop in one business-facing sequence:
-
-1. **Observe the launch** in the command center and data foundation.
-2. **Understand the signal** with audience search, creator graph, and rights coverage.
-3. **Decide what action matters** with campaign-request detail and OML forecast evidence.
-4. **Review trusted outputs** through visible SQL paths and auditable actions.
-
-## Task 2: Connect the database capabilities to the business outcome
-
-| Capability | Launch outcome |
+| Step | Media focus |
 | --- | --- |
-| Media semantic views | Audience, content, campaign, and capacity questions stayed readable. |
-| JSON Relational Duality | The app used JSON without creating a second source of truth. |
-| AI Vector Search | Audience language became searchable launch evidence. |
-| Property Graph | Creator influence became a connected path, not a disconnected metric. |
-| Oracle Spatial | Rights and launch coverage decisions stayed tied to geography and capacity. |
-| Oracle Machine Learning | Demand and retention forecasts stayed close to the operational data they affected. |
-| Trusted answers and actions | AI stayed reviewable because the SQL path and audit row remained visible. |
-{: title="Capability to Launch Outcome Table"}
+| Business Problem | Media teams need explainable decisions across content, audience, campaign, creator, rights, and forecast workflows. |
+| Technical Challenge | Separate systems make each decision slower to reconcile and harder to audit. |
+| Persona Focus | Business and technical teams need a shared language for database-backed evidence. |
+| What You Saw | SQL, JSON, vector, graph, spatial, and OML evidence worked over connected media data. |
+| Database Capability | Oracle AI Database 26ai supports multiple data models and workloads in one governed foundation. |
+| Outcome | Teams can explain the decision path from awareness to action with repeatable SQL evidence. |
 
-2. This is the core workshop takeaway: the database did not just store the launch data. It kept the launch decision loop explainable, reviewable, and safe to act on.
+## Task 1: Review what you can now explain
+
+1. Review the business questions and evidence path.
+
+    | Business question | Evidence you can now explain |
+    | --- | --- |
+    | What media data foundation supports the application? | Semantic views, duality views, vectors, graph, spatial objects, and OML models in one schema. |
+    | Which launches need attention? | Dashboard KPIs and drill-through SQL over campaign orders, audience signals, and content assets. |
+    | How can applications use campaign documents without copying data? | ORDERS_DV exposes JSON while preserving relational rows. |
+    | How can analysts search by audience intent? | VECTOR_EMBEDDING and VECTOR_DISTANCE compare meaning inside Oracle Database. |
+    | Which creators influence audience momentum? | INFLUENCER_NETWORK and SQL/PGQ reveal relationship evidence. |
+    | Where is rights or distribution coverage constrained? | Oracle Spatial joins location, capacity, and demand evidence. |
+    | Which predictive outputs need action? | OML model metadata and forecast rows join back to content and capacity records. |
+
+2. Review the persona value.
+
+    | Persona | Workshop value |
+    | --- | --- |
+    | Media operations leader | Moves from launch dashboard KPI to reviewable rows. |
+    | Application developer | Serves campaign JSON without creating a separate document copy. |
+    | Audience analyst | Searches by meaning and inspects signal evidence. |
+    | Partnership analyst | Follows creator relationship paths with graph queries. |
+    | Rights planner | Compares location, capacity, and demand with spatial SQL. |
+    | Planning analyst | Reviews predictive output close to the data that produced it. |
+    | Database developer | Explains how each workflow uses one governed database foundation. |
+
+## Task 2: State the practical takeaway
+
+1. Use this takeaway when explaining the workshop to others:
+
+    Seer Media can support launch, audience, campaign, creator, rights, and predictive decisions from one governed Oracle AI Database foundation. SQL, JSON, vector search, graph, spatial, and OML capabilities do different jobs, but they remain connected to the same media evidence.
+
+    That reduces sensitive data copies, cuts reconciliation work, keeps security and governance consistent, and makes each application result easier to explain.
 
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Contributor** - Oracle Database Product Management
+* **Last Updated By/Date** - Oracle Database Product Management, July 2026
