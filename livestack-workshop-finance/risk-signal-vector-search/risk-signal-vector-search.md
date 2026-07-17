@@ -51,7 +51,7 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
 1. Run the following query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are asking the database to find products related to a risk concept, even when the product text does not use the exact same words. The SQL creates an embedding for the phrase `mortgage pre-approval risk`, compares it with stored product embeddings using cosine vector distance, and orders the result by closest semantic match. The closer the meaning, the higher the result should appear in the review list.
 
@@ -74,10 +74,7 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
              COSINE), 4) AS similarity
     FROM product_embeddings pe
     JOIN products p ON p.product_id = pe.product_id
-    ORDER BY VECTOR_DISTANCE(
-      pe.embedding,
-      VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'mortgage pre-approval risk' AS DATA),
-      COSINE)
+    ORDER BY similarity DESC
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
@@ -118,10 +115,7 @@ Now apply the same semantic search pattern to risk signal language.
              COSINE), 4) AS similarity
     FROM signal_embeddings se
     JOIN social_posts sp ON sp.post_id = se.post_id
-    ORDER BY VECTOR_DISTANCE(
-      se.embedding,
-      VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
-      COSINE)
+    ORDER BY similarity DESC, signal_id
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
@@ -132,8 +126,8 @@ Now apply the same semantic search pattern to risk signal language.
     | --- | --- | --- |
     | 2290 | AML screening update affects Liquidity Investment Sweep; FraudGuard Operations suspicious ACH and sanctions case review | 0.6478 |
     | 170 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
-    | 1610 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
     | 1330 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
+    | 1610 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
     | 3770 | AML screening update affects High-Yield Savings Account; Meridian Trust Bank suspicious ACH and sanctions case review vo | 0.6117 |
 
 
@@ -143,6 +137,10 @@ Now apply the same semantic search pattern to risk signal language.
     The returned excerpts contain AML, fraud, sanctions, and suspicious activity language even though the search phrase is short. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
+
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched finance product and risk-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
 
 ## Acknowledgements
 

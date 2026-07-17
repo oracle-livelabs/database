@@ -12,7 +12,7 @@ Think of this lab as the map of the finance environment. The same schema support
 
 **Oracle AI Database 26ai** is a converged database: it lets these different finance workloads use one governed database foundation instead of forcing each data type into a separate specialist system.
 
-![Before and after architecture diagram comparing bespoke finance data stores with Oracle Converged Database](images/converged-database-before-after.png " ")
+![Before and after architecture diagram comparing bespoke finance data stores with Oracle Converged Database](images/finance-converged-database-redwood.png " ")
 
 <details>
 <summary><strong>Key terms: schema, view, vector, graph, spatial, Oracle Machine Learning (OML), and Procedural Language/Structured Query Language (PL/SQL)</strong></summary>
@@ -64,18 +64,18 @@ Start by inventorying the semantic views and database capabilities that the rest
 
 1. Run this inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are building a simple capability map before making any finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What finance capabilities are available in this schema?"
 
-    Each section counts one kind of capability: approved finance views for reporting, property graphs for relationship analysis, vector columns for meaning-based search, OML models for prediction, and PL/SQL helper functions for controlled agent actions. The `UNION ALL` lines stack those counts into one easy-to-read table.
+    Each section counts one kind of capability used by the workshop labs: approved finance views for reporting, JSON duality for transaction documents, the fraud property graph for relationship analysis, vector columns for meaning-based search, spatial metadata for service coverage, and OML models for prediction. The `UNION ALL` lines stack those counts into one easy-to-read table.
 
     The names ending in `_V` are database views. A view is a saved SQL query that presents governed data in a business-ready shape. In this lesson, `FINANCE_INSTITUTIONS_V` and `FINANCE_PRODUCTS_V` describe the finance catalog, `RISK_SIGNALS_V` and `SIGNAL_SOURCES_V` organize risk evidence, `CLIENT_TRANSACTIONS_V` exposes transaction activity, and the `SERVICE_*_V` views support service-center, capacity, and route analysis. Counting those views matters because later labs use them as trusted access points instead of asking you to rebuild the same joins each time.
 
     <details>
     <summary><strong>Why this matters: easier in a converged database</strong></summary>
 
-    > In a fractured environment, you might look in one system for reporting views, another for graph objects, another for vector indexes, another for machine learning models, and another for agent tools. Each system can have its own security, metadata, and operational rules.
+    > In a fractured environment, you might look in one system for reporting views, another for JSON documents, another for graph objects, another for vector indexes, another for spatial metadata, and another for machine learning models. Each system can have its own security, metadata, and operational rules.
     >
     > Oracle Database lets you inspect these object families from one schema using SQL catalog views. That makes it easier to understand what is available before you start making finance decisions.
 
@@ -91,29 +91,29 @@ Start by inventorying the semantic views and database capabilities that the rest
       'SERVICE_CAPACITY_V','SERVICE_ROUTES_V'
     )
     UNION ALL
+    SELECT 'JSON duality views', COUNT(*)
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV'
+    UNION ALL
     SELECT 'Finance property graphs', COUNT(*)
     FROM user_property_graphs
-    WHERE graph_name IN ('FRAUD_NETWORK','INFLUENCER_NETWORK')
+    WHERE graph_name = 'FRAUD_NETWORK'
     UNION ALL
     SELECT 'MiniLM vector columns', COUNT(*)
     FROM user_tab_cols
     WHERE data_type = 'VECTOR'
       AND table_name IN ('PRODUCT_EMBEDDINGS','SIGNAL_EMBEDDINGS')
     UNION ALL
+    SELECT 'Spatial metadata layers', COUNT(*)
+    FROM user_sdo_geom_metadata
+    WHERE table_name IN ('FULFILLMENT_CENTERS','FULFILLMENT_ZONES','DEMAND_REGIONS')
+    UNION ALL
     SELECT 'OML mining models', COUNT(*)
     FROM user_mining_models
     WHERE model_name IN (
       'DEMAND_SURGE_MODEL','CUSTOMER_SEGMENT_MODEL',
       'REVENUE_PREDICT_MODEL','PRODUCT_CLUSTER_MODEL'
-    )
-    UNION ALL
-    SELECT 'Agent helper functions', COUNT(*)
-    FROM user_objects
-    WHERE object_type = 'FUNCTION'
-      AND object_name IN (
-        'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',
-        'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'
-      );
+    );
     </copy>
     ```
 
@@ -122,16 +122,17 @@ Start by inventorying the semantic views and database capabilities that the rest
     | Area | Count |
     | --- | --- |
     | Finance semantic views | 8 |
-    | Finance property graphs | 2 |
+    | JSON duality views | 1 |
+    | Finance property graphs | 1 |
     | MiniLM vector columns | 2 |
+    | Spatial metadata layers | 3 |
     | OML mining models | 4 |
-    | Agent helper functions | 5 |
 
 
 2. Review the counts.
     Read the result as a capability checklist. The query reads Oracle catalog views instead of application tables, so it tells you what kinds of database objects are available before you start using them.
 
-    If you are looking at risk metrics, the semantic views are where trusted finance data comes from. If you are investigating fraud, the property graph is what lets you follow relationships. If you need meaning-based search, vector columns support that. If you need predictions, OML models are available. If an AI-assisted workflow needs controlled actions, helper functions provide approved database tools.
+    If you are looking at risk metrics, the semantic views are where trusted finance data comes from. If an application needs transaction documents, the duality view provides that shape without a separate document copy. If you are investigating fraud, the property graph is what lets you follow relationships. If you need meaning-based search, vector columns support that. If you need service coverage, spatial metadata tells Oracle how to interpret geometry columns. If you need predictions, OML models are available.
 
     Treat this as the capability map for the finance application. Each row points to a business use you will work with in SQL.
 

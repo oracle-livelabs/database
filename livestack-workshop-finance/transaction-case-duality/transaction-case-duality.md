@@ -71,7 +71,7 @@ First, inspect the transaction shape an application can consume directly.
 
 1. Run this query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are viewing a transaction the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view `ORDERS_DV` and uses `JSON_SERIALIZE(... PRETTY)` so SQL Worksheet displays the document shape clearly.
 
@@ -88,6 +88,7 @@ First, inspect the transaction shape an application can consume directly.
     <copy>
     SELECT JSON_SERIALIZE(data PRETTY) AS transaction_document
     FROM orders_dv
+    ORDER BY JSON_VALUE(data, '$._id' RETURNING NUMBER)
     FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
@@ -96,7 +97,7 @@ First, inspect the transaction shape an application can consume directly.
 
     | Transaction Document |
     | --- |
-    | { "\_id" : 1, "customerId" : 687, "status" : "confirmed", "total" : 2400, "items" : [ ... ] } |
+    | { "\_id" : 1, "\_metadata" : { ... }, "customerId" : 687, "status" : "confirmed", "items" : [ ... ] } |
 
 
 2. Expand the document in SQL Worksheet.
@@ -156,6 +157,10 @@ Now use SQL to project document fields back into reviewable columns. In this con
     `Transaction Id` and `Transaction Status` are projected from the JSON document into the result table. The document stores the client reference as `customerId`, so the query joins back to `CUSTOMERS` to return `Client Email`.
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
+
+## Next Steps
+
+Congratulations on completing the JSON duality lab. You used JSON Relational Duality to work with finance transaction data as both application-friendly documents and SQL-queryable rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 
