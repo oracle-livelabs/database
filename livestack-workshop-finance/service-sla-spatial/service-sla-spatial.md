@@ -2,7 +2,9 @@
 
 ## Introduction
 
-After risk is identified, Seer Bank needs to know whether case-processing capacity is close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and how quickly can the bank respond?
+After risk is identified, Seer Bank needs to know whether case-processing capacity is close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and can the bank meet its service-level agreement (SLA) commitments?
+
+You will help a service operations leader turn location data into coverage evidence for case routing, fraud follow-up, anti-money laundering (AML) review, and SLA planning.
 
 Risk and fraud decisions often create service work: client outreach, case routing, AML or fraud review, product review, dispute follow-up, onboarding checks, and document handling. Spatial analysis helps operations leaders avoid guessing from a map and instead measure whether case-processing capacity is near the demand region that needs support.
 
@@ -50,10 +52,8 @@ Estimated Time: **10 minutes**
 | Technical Challenge | Operations teams need location-aware decisions without moving geography, service centers, and SLA zones into separate mapping systems. |
 | Persona Focus | Service operations leaders evaluate coverage; database developers show distance and SLA evidence with spatial SQL. |
 | What You Will See | Spatial data can quantify distance and regional service pressure in SQL. |
-| Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), Oracle Spatial distance functions (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
+| Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), distance calculations (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
 | Outcome | Operations teams can prioritize case-processing capacity based on geography and demand. |
-
-Persona focus: You support a service operations leader by turning location data into queryable coverage evidence for case-processing and SLA decisions.
 
 ## Task 1: Calculate service center distance to New York Metro
 
@@ -61,11 +61,23 @@ Start by comparing service-center locations to the New York Metro demand region.
 
 1. Run this spatial distance query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are measuring which service centers are closest to a high-demand region so operations can reason about response coverage. The SQL joins service-center business details to their spatial point locations, compares each point to the New York Metro demand-region boundary with the Oracle Spatial distance function `SDO_GEOM.SDO_DISTANCE`, uses the Oracle Spatial utility package call `SDO_UTIL.TO_GEOJSON` to convert the point to GeoJSON for map-friendly display, and orders the result by nearest distance.
+    You are measuring which service centers are closest to a high-demand region so operations can reason about response coverage.
 
-    `service_centers_v` is the service-center view. It exposes the business details operations leaders need, such as service center name, city, and state, while the underlying `fulfillment_centers` table supplies the stored spatial point. Joining the view to the spatial table keeps the result readable for you while still using precise location geometry for the distance calculation.
+    In order to understand this query, read it in five parts.
+
+    1. `service_centers_v` gives you business details, such as service center name, city, and state.
+
+    2. `fulfillment_centers` supplies the stored location for each service center. The `location` column is an `SDO_GEOMETRY` point, which is how Oracle Spatial stores a map location.
+
+    3. `demand_regions` supplies the New York Metro boundary. The `WHERE` clause keeps the query focused on that one demand region.
+
+    4. `SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM')` measures the distance in kilometers between each service center point and the New York Metro boundary.
+
+    5. `SDO_UTIL.TO_GEOJSON(fc.location)` converts the service center point into GeoJSON so a map or application screen can display the same location.
+
+    The query orders the result by nearest distance first. That lets an operations leader see which service centers are closest to the demand region before deciding where to route case work.
 
     <details>
     <summary><strong>Why this matters: spatial analysis is stronger inside the database</strong></summary>
@@ -113,11 +125,17 @@ Start by comparing service-center locations to the New York Metro demand region.
 
 
 2. Review the nearest service centers.
-    The SQL compares service-center point geometries with a demand-region boundary. An Oracle Spatial geometry object (`SDO_GEOMETRY`) point is Oracle Spatial's database representation of a single map location, such as a service center longitude and latitude. The Oracle Spatial utility package call `SDO_UTIL.TO_GEOJSON` converts that point into GeoJSON, a web-friendly JSON format that mapping tools can display.
+    Start with the first row. It shows the nearest service center to the New York Metro boundary: Edison Wealth Service Center in Edison, New Jersey.
 
-    Expected nearest service center: Edison Wealth Service Center. New York Metro has demand index 91.
+    Read the result in three parts.
 
-    The distance column tells operations which service centers can respond fastest to a high-demand region. The demand index explains why the region matters: a high-demand area may need more case-processing capacity, closer routing, or stricter monitoring when risk signals increase.
+    1. `Boundary Distance Km` shows how far each service center is from the demand-region boundary. A smaller distance means the center is closer to the region that needs support.
+
+    2. `Demand Index` shows how much service pressure exists in that region. New York Metro has demand index `91`, so it is a high-demand area.
+
+    3. `Location Geojson` shows the same service-center point in a map-friendly format. For WGS84 map data, Oracle stores coordinates as longitude first, then latitude. That is why the GeoJSON point for Edison starts with `-74.4121` before `40.5187`.
+
+    The so what: Edison is the closest center to a high-demand region, so it is the first place an operations leader would check for available case-processing capacity. If Edison is already overloaded, the next closest centers help show where work may need to be routed next.
 
 ## Task 2: Summarize SLA zone coverage
 
@@ -125,24 +143,32 @@ After locating nearby service centers, summarize the response commitments attach
 
 1. Run this SLA zone summary:
 
-    You are summarizing the service commitments that operations teams must meet after risk work creates follow-up demand. The SQL groups all fulfillment zones by `ZONE_TYPE`, counts the zones in each category, and calculates the minimum, maximum, and average delivery-hour commitment for each service level.
+    You are summarizing the service commitments that operations teams must meet after risk work creates follow-up demand. The source column is named `max_delivery_hrs`, but in this finance lab you use it as the maximum response-hour commitment for each SLA zone.
+
+    In order to understand this query, read it in three parts.
+
+    1. `fulfillment_zones` stores the SLA zones used for service response planning.
+
+    2. `GROUP BY zone_type` groups zones into service levels, such as express, overnight, standard, and economy.
+
+    3. `MIN`, `MAX`, and `AVG` summarize the response-hour commitments for each service level.
 
     ```sql
     <copy>
     SELECT zone_type,
            COUNT(*) AS zones,
-           MIN(max_delivery_hrs) AS min_delivery_hrs,
-           MAX(max_delivery_hrs) AS max_delivery_hrs,
-           ROUND(AVG(max_delivery_hrs), 1) AS avg_delivery_hrs
+           MIN(max_delivery_hrs) AS min_response_hrs,
+           MAX(max_delivery_hrs) AS max_response_hrs,
+           ROUND(AVG(max_delivery_hrs), 1) AS avg_response_hrs
     FROM fulfillment_zones
     GROUP BY zone_type
-    ORDER BY avg_delivery_hrs;
+    ORDER BY avg_response_hrs;
     </copy>
     ```
 
     **Expected output: SLA Zone Counts**
 
-    | Zone Type | Zones | Min Delivery Hrs | Max Delivery Hrs | Avg Delivery Hrs |
+    | Zone Type | Zones | Min Response Hrs | Max Response Hrs | Avg Response Hrs |
     | --- | --- | --- | --- | --- |
     | express | 30 | 8 | 8 | 8 |
     | overnight | 30 | 16 | 16 | 16 |
@@ -153,9 +179,13 @@ After locating nearby service centers, summarize the response commitments attach
 2. Compare the service levels.
     This query summarizes all SLA zones into service promises that operations leaders can compare with case urgency. It connects spatial coverage to the practical question of how quickly the bank can respond.
 
-    The result shows how zone type maps to delivery-hour commitments. Express and overnight zones represent faster response promises, while standard and economy zones represent longer service windows.
+    The result shows how zone type maps to response-hour commitments. Express and overnight zones represent faster response promises, while standard and economy zones represent longer service windows.
 
     This matters because risk operations are not finished when a signal is detected. If a case requires outreach, document review, or service follow-up, the bank also needs to know whether the service network can meet the response time implied by the case priority.
+
+## Next Steps
+
+Congratulations on completing the spatial lab. You used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
