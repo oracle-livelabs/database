@@ -2,78 +2,113 @@
 
 ## Introduction
 
-Before you inspect launch signals or AI workflows, confirm that SQL Worksheet is pointed at the correct schema. This lab gives learners one fast checkpoint so the rest of the workshop stays grounded in the Media LiveStack objects they are about to query.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on media exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each media query runs as the workshop user against the prepared media schema.
 
-### Operating Story
+<details>
+<summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
 
-| Step | Workshop-entry focus |
-| --- | --- |
-| Business Problem | Learners need a clean, repeatable way to enter the Media LiveStack database workflow. |
-| Technical Challenge | The SQL exercises only work when Database Actions opens against the workshop schema that owns the Media objects. |
-| Persona Focus | Workshop learner, application developer, database developer, or technical presenter. |
-| What You Will Prove | The current SQL Worksheet session is connected to the expected workshop schema and service. |
-| Database Capability | Database Actions SQL Worksheet, schema context, and Oracle session metadata. |
-| Outcome | You enter the rest of the workshop with the correct database context and a safe validation checkpoint. |
-{: title="Workshop Entry Operating Story Table"}
+> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
+>
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+>
+> - `LLUSER` is the workshop database user and schema owner for the hands-on media objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
-Persona focus: this lab is for the learner who wants to avoid debugging the wrong schema before the real workshop begins.
+</details>
+
+Estimated Time: **5 minutes**
 
 ### Objectives
 
 In this lab, you will:
 
-- Open Database Actions SQL Worksheet.
-- Confirm the current database user, schema, and service.
-- Verify that you are ready to run the Media LiveStack copy blocks.
+- Launch the LiveLabs workshop environment.
+- Use the reservation login information to open Database Actions.
+- Confirm that SQL Worksheet is ready for the media schema.
+- Confirm that SQL Worksheet is connected as the workshop schema user.
 
-Estimated Time: **5 minutes**
+## Task 1: Launch the LiveLabs environment
 
-## Task 1: Confirm the workshop SQL context
+Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
 
-Perform the following set of steps to confirm that SQL Worksheet is connected to the correct Media workshop schema before you run the later launch queries:
+1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
-1. Open **Database Actions**, then open **SQL Worksheet**.
-2. Run this query:
+2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
+
+3. In **My Reservations**, select **Launch Workshop** for this reservation.
+
+4. Select **View Login Info** and keep the database credentials available for the next task.
+
+    ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg " ")
+
+    *Figure 1: The Reservation Information dialog shows the `LLUSER` login, password, and Login URL for Database Actions.*
+
+## Task 2: Open SQL Worksheet
+
+Open SQL Worksheet as the workshop user before running the media queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+
+1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
+
+2. Select **Copy** for **2 - Password**.
+
+    ![Reservation Information dialog with the Copy button highlighted for the Password row](images/reservation-login-copy-password.svg " ")
+
+    *Figure 2: Copy the `LLUSER` password from the Reservation Information dialog.*
+
+3. Select **Open Link** for **3 - Login URL**.
+
+    ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg " ")
+
+    *Figure 3: Use Open Link for the Login URL, then use the copied password to sign in as `LLUSER`.*
+
+4. On the Database Actions sign-in page, confirm that **Username** shows `LLUSER`, paste the password from the reservation information, and select **Sign in**.
+
+    ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
+
+    *Figure 4: Sign in to Database Actions as `LLUSER` with the password from the reservation information.*
+
+5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
+
+    ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
+
+    *Figure 5: Open SQL from the Development tools menu.*
+
+6. Use the same SQL Worksheet pattern throughout the workshop.
+
+    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
+
+    *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
+
+    - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
+    - Paste each workshop SQL block into the editor.
+    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
+    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Use **Navigator** only when you want to inspect tables, views, or other objects.
+
+7. Run this check.
+
+    This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The media labs use `LLUSER`, so both values should point to the workshop schema.
 
     ```sql
     <copy>
-    SELECT
-      USER AS current_user,
-      SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS current_schema,
-      CASE
-        WHEN EXISTS (
-          SELECT 1
-          FROM user_views
-          WHERE view_name = 'MEDIA_CONTENT_ASSETS_V'
-        )
-        THEN 'MEDIA_SCHEMA_READY'
-        ELSE 'CHECK_SCHEMA'
-      END AS workshop_status
-    FROM dual;
+    SELECT USER AS "User",
+           SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
+           SYSTIMESTAMP AS "Checked At";
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: Connected SQL Worksheet Session**
 
-    | CURRENT_USER | CURRENT_SCHEMA | WORKSHOP_STATUS |
+    | User | Schema | Checked At |
     | --- | --- | --- |
-    | LLUSER | LLUSER | MEDIA_SCHEMA_READY |
-    {: title="Workshop SQL Session Context Table"}
+    | LLUSER | LLUSER | Current SQL Worksheet timestamp |
 
-3. If your environment uses a different workshop login, the user can vary. The important check is that `WORKSHOP_STATUS` returns `MEDIA_SCHEMA_READY`, which means the session can see the Media LiveStack objects used in the next labs.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
 
-## Task 2: Keep the workflow aligned with the app
-
-Perform the following set of steps to keep the app view and the SQL evidence aligned while you move through the workshop:
-
-1. Keep SQL Worksheet open in one browser tab.
-2. Keep the Seer Media LiveStack app open in another tab so you can compare what the app shows with what the database returns.
-
-The app shows the workflow. SQL Worksheet shows the evidence behind it.
+You can now continue to the media labs.
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, July 2026
