@@ -2,164 +2,172 @@
 
 ## Introduction
 
-This lab confirms that the retail data foundation is present and ready before learners trust any downstream analysis. By inspecting the supporting objects up front, the team can see that later dashboard, search, fulfillment, and AI results all come from the same governed source.
-
-The LiveStack application shows what the **Data Foundation** page loads or restores. The data load prepares the shared retail evidence used by planners, analysts, operators, and AI-assisted workflows later in the workshop.
-
-### Operating Story
-
-| Step | Retail focus |
-| --- | --- |
-| Business Problem | Seer Sporting Goods cannot trust later dashboards, predictions, or agent outputs unless the shared retail data foundation is complete. |
-| What You Will Prove | The schema contains the tables, views, vector artifacts, graph objects, OML models, and PL/SQL tools used by the rest of the workshop. |
-| Database Capability | Oracle catalog views expose the governed database objects that support the retail workflow. |
-| Outcome | Every later retail decision is grounded in a known, queryable database foundation instead of hidden setup or copied demo data. |
-{: title="Retail Data Foundation Story"}
-
-**Persona focus:** The business user wants to know that later dashboards, predictions, and agent results are trustworthy. The technical user confirms that the shared schema contains the database objects the application depends on.
-
-Estimated Time: **10 minutes**
+Seer Sporting Goods builds stronger dashboards, predictions, and search results when the shared retail data foundation is complete. In this lab, you inspect database catalog views and row counts so later business results stay tied to visible, reviewable database objects. This is the foundation for the decision path you follow in the rest of the workshop.
 
 ### Objectives
 
-- Confirm that the retail database objects are present.
 - Inventory the object families used by later labs.
-- Map each retail workflow to the **Oracle Database** capability that supports it, so learners can connect platform features to visible business outcomes.
-- Query row counts to understand the size of the retail dataset.
+- Confirm the row counts for major retail data groups.
+- Connect the active labs to Oracle Database capabilities.
 
+Estimated Time: **10 minutes**
+
+### Business Scenario
+
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Retail teams need a complete shared data foundation before they act on dashboard, search, fulfillment, or model results. |
+| Technical Challenge | The application uses tables, JSON duality views, vector columns, a property graph, spatial columns, and OML models. |
+| Persona Focus | A database engineer confirms that each workflow has governed database evidence. |
+| Database Capability | Oracle catalog views expose the objects that support the retail workflow. |
+| Outcome | You know which objects support each later lab before you interpret business results. |
+
+<details>
+<summary><strong>Key terms: converged database foundation</strong></summary>
+
+> - **Catalog view**: A database view such as `USER_TABLES` or `USER_MINING_MODELS` that describes objects in your schema.
+> - **Converged database**: One Oracle Database foundation that stores relational rows, JSON documents, vectors, graphs, spatial data, and model artifacts together.
+> - **Governed evidence**: Data that you can inspect with SQL instead of trusting a hidden application result.
+
+</details>
+
+![Retail before and after data architecture](images/retail-before-after-data-architecture.svg " ")
+
+*Figure 1: A fragmented retail architecture spreads operational, search, graph, spatial, and ML evidence across separate database platforms and vendors. Oracle Database 26ai keeps the same evidence connected for Seer Sporting Goods.*
 
 ## Task 1: Inventory the retail object families
 
-Perform the following set of steps to confirm that the workshop schema contains the core retail tables, views, graph objects, vector artifacts, OML assets, and PL/SQL tools used by later decision workflows:
+1. Review the Data Foundation application screen.
 
-1. Review the related application screen before you run the SQL.
+    ![Data Foundation page showing load controls and Oracle internals](images/data-foundation-load-and-internals.png " ")
 
-    ![Data Foundation page showing load controls and Oracle Internals](images/data-foundation-load-and-internals.png " ")
+    *Figure 2: The Data Foundation page shows the shared database capabilities that support the rest of the workshop.*
 
-    *Figure 1: Data Foundation prepares the shared dataset and shows the Oracle capabilities behind the demo.*
+2. Run the object inventory query.
 
-2. In SQL Worksheet, run this query.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    Before you analyze retail outcomes, get oriented to the shared data foundation. This query uses Oracle `USER_*` catalog views because you are connected as the workshop schema user. It inventories the object families that later labs use for dashboards, search, graph, spatial, OML, Ask Data, and agent workflows.
+    This query uses Oracle catalog views. Catalog views are database-provided views that describe your schema; they let you inspect what exists without opening application code.
+
+    Two table names matter later in the retail scenario. `SOCIAL_POSTS` stores creator and customer posts that mention products, demand, and service signals. `POST_EMBEDDINGS` stores the vector representation of those social posts so Oracle AI Vector Search can compare meaning instead of only matching keywords.
+
+    Read the query as a checklist:
+
+    1. Each `SELECT` counts one object family used later in the workshop. The OML row counts the retail model inventory; Lab 7 focuses on demand-surge scoring from that inventory.
+    2. The `WHERE` clauses limit each count to the exact object names this workshop depends on.
+    3. `UNION ALL` stacks those separate count rows into one readable inventory table.
+
+    `UNION ALL` is useful here because the query is building a report, not searching for duplicate rows. Each `SELECT` already produces a different labeled result, such as `Core retail tables` or `JSON duality views`. A plain `UNION` would ask the database to compare the rows and remove duplicates. That extra duplicate-removal step is not needed, and it can hide your intent. `UNION ALL` says: keep every checklist row I wrote, in this combined result.
+
+    You can use this same pattern in your own applications when you need a quick readiness or health-check query. For example, one `SELECT` can count required tables, another can count configuration rows, another can count loaded documents, and another can count generated embeddings. `UNION ALL` turns those separate checks into one small status table that an operator, developer, or automated test can read.
 
     ```sql
     <copy>
     SELECT 'Core retail tables' AS "Area", COUNT(*) AS "Count"
     FROM user_tables
     WHERE table_name IN (
-        'BRANDS','PRODUCTS','FULFILLMENT_CENTERS','INVENTORY','CUSTOMERS',
-        'ORDERS','ORDER_ITEMS','INFLUENCERS','SOCIAL_POSTS','POST_PRODUCT_MENTIONS',
-        'DEMAND_FORECASTS','SHIPMENTS','AGENT_ACTIONS','APP_USERS','EVENT_STREAM',
-        'PRODUCT_EMBEDDINGS','POST_EMBEDDINGS','SEMANTIC_MATCHES',
-        'FULFILLMENT_ZONES','DEMAND_REGIONS','RETURN_REQUESTS','RETURN_DOCUMENTS'
-      )
+      'BRANDS','PRODUCTS','FULFILLMENT_CENTERS','INVENTORY','CUSTOMERS',
+      'ORDERS','ORDER_ITEMS','INFLUENCERS','SOCIAL_POSTS','POST_PRODUCT_MENTIONS',
+      'DEMAND_FORECASTS','SHIPMENTS','PRODUCT_EMBEDDINGS','POST_EMBEDDINGS',
+      'DEMAND_REGIONS'
+    )
     UNION ALL
-    SELECT 'Retail semantic views', COUNT(*)
-    FROM user_views
-    WHERE view_name IN (
-        'RETAIL_RETURNS_WORKFLOW_V','RETAIL_SIGNAL_PRODUCT_V',
-        'RETAIL_ORDER_RETURN_V','RETAIL_FULFILLMENT_RISK_V','RETAIL_RETURN_WORKBENCH_V'
-      )
+    SELECT 'JSON duality views', COUNT(*)
+    FROM user_json_duality_views
+    WHERE view_name IN ('ORDERS_DV','PRODUCTS_INVENTORY_DV')
     UNION ALL
     SELECT 'Creator influence property graph', COUNT(*)
     FROM user_property_graphs
     WHERE graph_name = 'INFLUENCER_NETWORK'
     UNION ALL
-    SELECT 'MiniLM vector artifacts', COUNT(*)
+    SELECT 'MiniLM vector columns', COUNT(*)
     FROM user_tab_cols
     WHERE data_type = 'VECTOR'
       AND table_name IN ('PRODUCT_EMBEDDINGS','POST_EMBEDDINGS')
       AND column_name = 'EMBEDDING'
     UNION ALL
-    SELECT 'Agent tool functions', COUNT(*)
-    FROM user_objects
-    WHERE object_type = 'FUNCTION'
-      AND object_name IN (
-        'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',
-        'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'
-      );
+    SELECT 'OML models', COUNT(*)
+    FROM user_mining_models
+    WHERE model_name IN (
+      'DEMAND_SURGE_MODEL','CUSTOMER_SEGMENT_MODEL',
+      'REVENUE_PREDICT_MODEL','PRODUCT_CLUSTER_MODEL'
+    );
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: Object Inventory**
 
     | Area | Count |
     | --- | ---: |
-    | Core retail tables | 22 |
-    | Retail semantic views | 5 |
+    | Core retail tables | 15 |
+    | JSON duality views | 2 |
     | Creator influence property graph | 1 |
-    | MiniLM vector artifacts | 2 |
-    | Agent tool functions | 5 |
-    {: title="Retail Object Inventory"}
+    | MiniLM vector columns | 2 |
+    | OML models | 4 |
 
-3. This inventory shows the database foundation you will use throughout the workshop: retail tables for operational data, semantic views for business-friendly questions, a property graph for creator influence, vector columns for meaning-based search, and PL/SQL functions for trusted agent actions.
+3. The result shows that later labs are not isolated feature samples. They use one schema that stores operational rows, document views, vectors, graph paths, spatial data, and model artifacts together.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+## Task 2: Count the major data groups
 
-## Task 2: Map retail outcomes to database features
+1. Run the row-count query.
 
-Perform the following set of steps to connect each retail outcome to the database capability that supports it, so learners understand why each later SQL exercise matters to the business story:
+    Row counts give you a scale reference before you interpret KPIs and ranked results. The counts also confirm that the major tables are populated.
 
-1. Review this capability map.
+    Read this query in three parts:
 
-    This block uses a small `UNION ALL` result set as a capability map. It connects each retail business outcome to the Oracle Database feature that supports it, so each later lab has a clear technical purpose.
+    1. Each `SELECT` names one business data group, such as `Brands`, `Products`, or `Orders`.
+    2. `COUNT(*)` counts the rows in that table.
+    3. `UNION ALL` stacks the separate counts into one result. It does not try to merge rows, which is exactly what you want for a simple inventory where each line should remain visible.
 
-    ```sql
-    <copy>
-    SELECT 'Retail command center' AS "Outcome",
-           'Converged SQL over orders, inventory, returns, creators, and audit data' AS "DB Feature"
-    FROM dual
-        UNION ALL SELECT 'Unified order intelligence', 'JSON Relational Duality and SQL/JSON' FROM dual
-    UNION ALL SELECT 'Governed regional access', 'Virtual Private Database policies' FROM dual
-    UNION ALL SELECT 'Customer trend signals', 'AI Vector Search with MiniLM L12 v2 and VECTOR_DISTANCE' FROM dual
-    UNION ALL SELECT 'Creator influence network', 'Property Graph and GRAPH_TABLE SQL/PGQ' FROM dual
-    UNION ALL SELECT 'Intelligent fulfillment', 'Oracle Spatial SDO_GEOMETRY, GeoJSON, and distance analysis' FROM dual
-    UNION ALL SELECT 'Retail OML analytics', 'DBMS_DATA_MINING models and SQL scoring functions' FROM dual
-    UNION ALL SELECT 'Ask Retail Data', 'Semantic views and comments that expose governed business meaning' FROM dual
-    UNION ALL SELECT 'Retail AI Agent Console', 'PL/SQL tools, JSON audit payloads, and agent action history' FROM dual;
-    </copy>
-    ```
+    This is a practical application pattern. When you build your own app, you often need to prove that several related data sets loaded correctly before you trust the screen or API that uses them. A row-count query like this can become a smoke test: if `Products`, `Orders`, or `Post embeddings` unexpectedly returns `0`, you know which part of the application foundation needs attention before users rely on downstream analytics.
 
-    **Expected output:**
-
-    | Outcome | DB Feature |
-    | --- | --- |
-    | Retail command center | Converged SQL over orders, inventory, returns, creators, and audit data |
-    | Unified order intelligence | JSON Relational Duality and SQL/JSON |
-    | Customer trend signals | AI Vector Search with MiniLM L12 v2 and `VECTOR_DISTANCE` |
-    | Creator influence network | Property Graph and `GRAPH_TABLE` SQL/PGQ |
-    | Intelligent fulfillment | Oracle Spatial `SDO_GEOMETRY`, GeoJSON, and distance analysis |
-    | Retail OML analytics | `DBMS_DATA_MINING` models and SQL scoring functions |
-    | Ask Retail Data | Semantic views and comments that expose governed business meaning |
-    | Retail AI Agent Console | PL/SQL tools, JSON audit payloads, and agent action history |
-    {: title="Retail Outcomes and Database Features"}
-
-2. This map is the mental model for the workshop. Each later lab uses SQL to show how the database creates a visible retail outcome.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
-## Task 3: Count the retail data groups
-
-Perform the following set of steps to measure the scale of the seeded retail dataset and give later KPI, search, graph, fulfillment, OML, and agent results the right business context:
-
-1. Run this row-count query.
-
-    Row counts help you understand the shape and scale of the retail dataset. This block runs aggregate `COUNT(*)` checks across major retail domains and gives you a scale reference for later KPI, vector, graph, spatial, and OML results.
+    Use `UNION ALL` for this kind of checklist when each branch returns the same columns and every branch should appear in the final output. Use `UNION` only when you intentionally want the database to remove duplicate rows from two compatible result sets.
 
     ```sql
     <copy>
-    SELECT 'Brands' AS "Data Group", COUNT(*) AS "Rows" FROM brands
-    UNION ALL SELECT 'Products', COUNT(*) FROM products
-    UNION ALL SELECT 'Customers', COUNT(*) FROM customers
-    UNION ALL SELECT 'Orders', COUNT(*) FROM orders
-    UNION ALL SELECT 'Social posts', COUNT(*) FROM social_posts
-    UNION ALL SELECT 'Return requests', COUNT(*) FROM return_requests
-    UNION ALL SELECT 'Return evidence documents', COUNT(*) FROM return_documents
-    UNION ALL SELECT 'Agent audit actions', COUNT(*) FROM agent_actions;
+    SELECT 'Brands' AS "Data Group",
+           COUNT(*) AS "Rows"
+    FROM brands
+    UNION ALL
+    SELECT 'Products',
+           COUNT(*)
+    FROM products
+    UNION ALL
+    SELECT 'Customers',
+           COUNT(*)
+    FROM customers
+    UNION ALL
+    SELECT 'Orders',
+           COUNT(*)
+    FROM orders
+    UNION ALL
+    SELECT 'Order items',
+           COUNT(*)
+    FROM order_items
+    UNION ALL
+    SELECT 'Social posts',
+           COUNT(*)
+    FROM social_posts
+    UNION ALL
+    SELECT 'Influencers',
+           COUNT(*)
+    FROM influencers
+    UNION ALL
+    SELECT 'Fulfillment centers',
+           COUNT(*)
+    FROM fulfillment_centers
+    UNION ALL
+    SELECT 'Shipments',
+           COUNT(*)
+    FROM shipments
+    UNION ALL
+    SELECT 'Post embeddings',
+           COUNT(*)
+    FROM post_embeddings;
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: Data Row Counts**
 
     | Data Group | Rows |
     | --- | ---: |
@@ -167,19 +175,16 @@ Perform the following set of steps to measure the scale of the seeded retail dat
     | Products | 187 |
     | Customers | 2000 |
     | Orders | 3000 |
+    | Order items | 9146 |
     | Social posts | 5000 |
-    | Return requests | 5 |
-    | Return evidence documents | 7 |
-    | Agent audit actions | 1 |
-    {: title="Retail Data Row Counts"}
+    | Influencers | 483 |
+    | Fulfillment centers | 30 |
+    | Shipments | 1500 |
+    | Post embeddings | 5000 |
 
-
-2. The counts show that the workshop schema is closely aligned with the data foundation used by the LiveStack demo application.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+2. These counts are the baseline for the rest of the workshop. Later results should be read as drill-through evidence from this shared data foundation. Next, you use the foundation to explain the Retail Command Center metrics.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Last Updated By/Date** - Oracle Database Product Management, July 2026
