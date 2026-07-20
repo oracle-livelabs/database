@@ -8,11 +8,15 @@ If your instructor or workshop owner already provided a working E5 environment, 
 
 Estimated Time: 45-60 minutes, including 20-35 minutes for the Ansible provisioning run.
 
-### Video Walkthrough
+![Lab 1 bootstrap flow](./images/lab1-bootstrap-flow.png "Show Lab 1 bootstrap flow")
+
+*A temporary bootstrap instance runs the Ansible playbook that provisions the OLVM manager and two KVM hosts on OCI. The bootstrap instance is terminated after the cluster SSH keys are copied to your local machine.*
+
+<!-- ### Video Walkthrough
 
 This walkthrough video is silent and does not include audio narration.
 
-[](video:https://objectstorage.us-ashburn-1.oraclecloud.com/n/idhwewbjlvpy/b/olvm-on-oci/o/videos%2Fvideos_olvm-on-oci-lab1-no-presenter.mp4)
+[](video:https://objectstorage.us-ashburn-1.oraclecloud.com/n/idhwewbjlvpy/b/olvm-on-oci/o/videos%2Fvideos_olvm-on-oci-lab1-no-presenter.mp4) -->
 
 ### Objectives
 
@@ -25,6 +29,7 @@ In this lab, you will:
 - Configure OCI credentials and generate SSH keys used by automation
 - Run the Ansible playbook that provisions `olvm`, `olkvm01`, and `olkvm02`
 - Verify deployed instances and copy the required SSH keys to your local machine
+- Enforce Instance Metadata Service Version 2 (IMDSv2) only on all three deployed instances
 - Terminate the temporary bootstrap instance after validation is complete
 
 ### Prerequisites
@@ -32,53 +37,34 @@ In this lab, you will:
 This lab assumes you have:
 
 - An OCI tenancy with sufficient quotas for the workshop instances
-- **VLAN support (Layer 2 network virtualization) enabled for the tenancy and target region** - see Task 0 below
+- **VLAN support (Layer 2 network virtualization) enabled for the tenancy and target region** - see Task 1 below
 - A target compartment for lab resources
 - Access to the OCI Console
 - Your SSH public key for the initial bootstrap instance login
-- A local Windows PowerShell terminal
+- A local terminal (Windows PowerShell, macOS Terminal, or Linux terminal)
 
 > **Important:** This lab builds the base environment used by every later lab. Continue to Lab 2 only after the setup checkpoint passes.
 
+## Task 1: Verify VLAN Support Is Available
 
-## Task 0: Verify VLAN Support Is Enabled
+The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network used by guest virtual machines. If VLAN support is not available in your target region, the playbook will fail.
 
-The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to provide the OLVM management, migration, and storage networks. OCI VLANs provide Layer 2 network segmentation within a VCN. Some tenancies or regions may require VLAN / Layer 2 networking capability to be enabled or validated before VLAN creation succeeds.
+1. Sign in to the OCI Console and switch to the workshop target region.
 
-> **Warning:** If VLANs are not visible or VLAN creation is not available in your target region, stop here. The playbook in Task 6 will fail if the required VLAN capability is not available. Submit a limit increase or support request and wait for confirmation before continuing.
+2. Go to **Networking -> Virtual Cloud Networks** and open any existing VCN, or create a temporary one.
 
-### To request VLAN support or a limit update, if needed
+3. Under the VCN **Resources** menu, look for **VLANs**.
 
-1. Sign in to the OCI Console.
+    - If **VLANs** is visible and you can access or create VLAN resources, continue with Task 2.
+    - If **VLANs** is not visible, first confirm you are in the correct region, compartment, and IAM group. If those are correct, continue with the steps below to request VLAN support before proceeding.
 
-2. Open the navigation menu and go to **Governance & Administration -> Tenancy Management -> Limits, Quotas and Usage**.
+4. To request VLAN support, go to **Governance & Administration -> Tenancy Management -> Limits, Quotas and Usage** and search for **VLAN** under the **Networking** category.
 
-3. Search for **VLAN** or browse to the **Networking** category.
+5. If a VLAN limit increase option is available, submit the request. If VLANs are not listed, open an Oracle Support request with the following text:
 
-4. If a VLAN-related limit/request option is available, open a limit increase request. If VLANs are not listed or you cannot request the needed item from the Console, open an Oracle Support request.
+    > Please enable Layer 2 network virtualization / VLAN support for tenancy `<tenancy-OCID>` in region `<region>`. This is required to deploy Oracle Linux Virtualization Manager (OLVM) on OCI.
 
-5. Include the following text in your request:
-
-    > Please enable or validate Layer 2 network virtualization / VLAN support for tenancy `<tenancy-OCID>` in region `<region>`. This is required to deploy Oracle Linux Virtualization Manager (OLVM) on OCI and to create the VLANs needed for OLVM management, migration, and storage networks.
-
-6. Replace `<tenancy-OCID>` with your tenancy OCID and `<region>` with your OCI region identifier, for example `us-ashburn-1`.
-
-7. Submit the request and wait for confirmation before continuing.
-
-## Task 1: Verify VLAN Support Is Active Before Running the Playbook
-
-1. In the OCI Console, switch to the workshop target region.
-
-2. Go to **Networking -> Virtual Cloud Networks**.
-
-3. Select an existing VCN in that region, or create/open the workshop bootstrap VCN if one is already available.
-
-4. Under the VCN **Resources** menu, look for **VLANs**.
-
-    - If **VLANs** is visible and you can access or create VLAN resources, continue with the lab.
-    - If **VLANs** is not visible, first confirm you are in the correct region, compartment, and IAM group. If those are correct, do not proceed until Oracle Support confirms VLAN / Layer 2 networking capability or the required limit update has been applied.
-
-    > **Note:** Validate this in the same OCI region the workshop will use. Do not assume VLAN availability or enablement across regions.
+6. Wait for confirmation before continuing. Do not proceed to Task 2 until VLANs are visible in the target region.
 
 ## Task 2: Create Bootstrap VCN (VCN Wizard)
 
@@ -106,6 +92,7 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 5. Click **Next -> Review -> Create**.
 
 6. Wait until all VCN resources show **Available** before you continue. This normally takes 2-5 minutes.
+
 
 ## Task 3: Launch Bootstrap Instance
 
@@ -136,10 +123,10 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 
 4. Record the bootstrap instance **Public IP**.
 
-5. From Windows PowerShell, connect to the bootstrap instance:
+5. From a local terminal (Windows PowerShell, macOS Terminal, or Linux terminal) connect to the bootstrap instance:
 
-    ```powershell
-    <copy>ssh -i C:\Users\<you>\.ssh\<your-key> opc@<bootstrap-public-ip></copy>
+    ```bash
+    <copy>ssh -i ~/.ssh/<your-key> opc@<bootstrap-public-ip></copy>
     ```
 
     > **Warning:** The bootstrap instance is temporary. Do not terminate it until the playbook completes, the cluster keys are copied to your local machine, and you have verified SSH access to `olvm`.
@@ -234,6 +221,16 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
     - Paste the full contents of `/home/opc/.oci/oci_api_key_public.pem` into the dialog.
     - Save the key and wait 2-5 minutes for the new API key to propagate.
 
+    ![Profile Menu User Settings](./images/user-settings.png "Show Profile Menu User Settings")
+
+    ![Add API key button](./images/add-api-key-button.png "Show Add API key button")
+
+    ![Add API key page](./images/add-api-key-page.png "Show Add API key page")
+
+    ![Add API key config](./images/add-api-key-config.png "Show Add API key config")
+
+    ![Saved API key](./images/saved-api-key.png "Show Saved API key")
+
 4. Run a quick validation command. If the command returns a short list of regions, the OCI CLI authentication is working correctly.
 
     ```bash
@@ -242,6 +239,8 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 
     If this command fails immediately after `oci setup config`, wait 2-5 minutes for the key registration to propagate and try again.
     If it still fails, confirm the key appears under **User Settings** -> **Token and Keys** -> **API Keys**, then rerun the command.
+
+    ![OCI IAM List](./images/oci-iam-list.png "Show OCI IAM List")
 
 ## Task 6: Create OCI Components and Run the Playbook
 
@@ -254,7 +253,7 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 2. Set the compartment OCID:
 
     ```bash
-    <copy>export OCI_COMPARTMENT_OCID="ocid1.compartment.oc1..REDACTED"</copy>
+    <copy>export OCI_COMPARTMENT_OCID="<your-compartment-ocid>"</copy>
     ```
 
 3. Display the compartment variable to verify it was set:
@@ -292,7 +291,9 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
     cat instances.yml</copy>
     ```
 
-    **Block volume sizing:** `blk_volume_size_in_gbs` makes the provisioned block volume size configurable during deployment. This workshop uses `512` GB as a defined, lower-cost value instead of the larger default allocation of `1 TB`, while still providing enough capacity for the lab environment. If your environment requires more storage, you can increase this value before running the playbook.
+    > **Notes:**
+    - `use_vnc_on_engine: false` disables VNC on the OLVM manager. This lab uses SSH tunneling to access the OLVM portal instead.
+    - **Block volume sizing:** `blk_volume_size_in_gbs` makes the provisioned block volume size configurable during deployment. This workshop uses `512` GB as a defined, lower-cost value instead of the larger default allocation of `1 TB`, while still providing enough capacity for the lab environment. If your environment requires more storage, you can increase this value before running the playbook.
 
 5. Create the `hosts` inventory so Ansible uses the virtual environment Python:
 
@@ -304,32 +305,66 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
     cat hosts</copy>
     ```
 
-6. Run the Ansible playbook to create the OCI infrastructure and OLVM instances.
+6. Apply the workshop reliability safeguards before running the playbook.
+
+    The downloaded upstream automation attempts to run its SSH waiting task on the new server. If a server is still starting, Ansible cannot connect to run that task. Replace the task with Ansible's connection-aware waiting module, which safely retries from the Ansible controller for up to 15 minutes.
+
+    ```bash
+    <copy>cat > check_instance_available.yml <<'EOF'
+    ---
+    - name: Configure new instances
+      hosts: engine:kvm:!localhost
+      gather_facts: false
+      any_errors_fatal: true
+      vars_files:
+        - default_vars.yml
+        - oci_vars.yml
+
+      tasks:
+        - name: Wait for systems to become reachable using SSH
+          ansible.builtin.wait_for_connection:
+            delay: 15
+            timeout: 900
+            connect_timeout: 10
+            sleep: 10
+        - name: Get a set of all available facts
+          ansible.builtin.setup:
+    EOF
+
+    sed '/    - name: Pause play to interact with the servers/,$d' \
+      create_instance.yml > deploy_instance.yml
+
+    grep -A 6 "wait_for_connection" check_instance_available.yml
+    tail -n 8 deploy_instance.yml</copy>
+    ```
+
+    The generated `deploy_instance.yml` ends after printing the instance details. It cannot enter the upstream automatic resource-removal play. Resource removal remains available separately through `terminate_instance.yml` when the workshop is finished.
+
+7. Run the Ansible playbook to create the OCI infrastructure and OLVM instances.
 
     The playbook uses the `instances.yml` file created in the previous step and overrides the compute shape to `VM.Standard.E5.Flex`.
 
     ```bash
-    <copy>ansible-playbook create_instance.yml -i hosts -e "@instances.yml" -e instance_shape=VM.Standard.E5.Flex</copy>
+    <copy>ansible-playbook deploy_instance.yml -i hosts -e "@instances.yml" -e instance_shape=VM.Standard.E5.Flex</copy>
     ```
 
     **Expected runtime:** 20-35 minutes. If the playbook runs for more than 45 minutes or shows no new task output for more than 10 minutes, stop and contact the instructor or workshop owner before changing the environment manually.
 
-    > **Critical: Preserve the lab environment.**
-    >
-    > When the playbook finishes, you may see a prompt to remove resources.
-    >
-    > - Do **not** press Enter
-    > - Do **not** type `y`
-    > - Press **Ctrl+C**
-    > - Then press **a** to abort safely
-    >
-    > This preserves the deployed OLVM infrastructure for the remaining labs.
+    > **If provisioning fails:** Stop at the failed task and capture the output. The deployment-only playbook will not delete the OCI resources. Do not rerun it against a partially created environment.
+
+    To remove a partial deployment before trying again, run:
+
+    ```bash
+    <copy>ansible-playbook terminate_instance.yml -i hosts -e "@instances.yml"</copy>
+    ```
+
+    Confirm in the OCI Console that the workshop instances, volumes, VCN, gateways, subnets, VLAN, and security resources have been removed. Then begin a clean deployment.
 
     **Expected result:** A successful run reaches `PLAY [Print instances]` and displays the `olvm`, `olkvm01`, and `olkvm02` public and private IP addresses.
 
-    If you abort at the pause prompt to preserve the environment, the recap may show `failed=1` for `olvm` with `user requested abort`. This is expected and does not indicate a deployment failure.
+    ![Playbook output](./images/playbook-output.png "Show Playbook output")
 
-7. Record **both public and private IPs** for:
+8. Record **both public and private IPs** for:
 
     - `olvm`
     - `olkvm01`
@@ -337,25 +372,53 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 
 ## Task 7: Verify and Access Deployed Instances
 
-1. From a new PowerShell window on your local machine, copy the cluster SSH keys from the bootstrap host:
+1. From your local computer, copy the cluster SSH private key from the bootstrap host. Replace `<bootstrap-login-key>` with the filename of the private key that you used to sign in to the bootstrap instance. Do not use `olvm-cluster-id_rsa` as the bootstrap login key because that is the file you are downloading.
+
+    In Windows PowerShell, run:
 
     ```powershell
-    <copy>scp -i C:\Users\<you>\.ssh\<your-key> opc@<bootstrap-public-ip>:~/.ssh/id_rsa C:\Users\<you>\.ssh\olvm-cluster-id_rsa
-    scp -i C:\Users\<you>\.ssh\<your-key> opc@<bootstrap-public-ip>:~/.ssh/id_rsa.pub C:\Users\<you>\.ssh\olvm-cluster-id_rsa.pub</copy>
+    <copy>scp -i "$HOME\.ssh\<bootstrap-login-key>" "opc@<bootstrap-public-ip>:~/.ssh/id_rsa" "$HOME\.ssh\olvm-cluster-id_rsa"</copy>
     ```
 
-2. Verify that you can SSH to the OLVM manager from your local machine:
+    In macOS Terminal or a Linux terminal, run:
+
+    ```bash
+    <copy>scp -i ~/.ssh/<bootstrap-login-key> opc@<bootstrap-public-ip>:~/.ssh/id_rsa ~/.ssh/olvm-cluster-id_rsa</copy>
+    ```
+
+2. Copy the cluster SSH public key:
+
+    In Windows PowerShell, run:
 
     ```powershell
-    <copy>ssh -i C:\Users\<you>\.ssh\olvm-cluster-id_rsa oracle@<olvm-public-ip> "hostname -f"</copy>
+    <copy>scp -i "$HOME\.ssh\<bootstrap-login-key>" "opc@<bootstrap-public-ip>:~/.ssh/id_rsa.pub" "$HOME\.ssh\olvm-cluster-id_rsa.pub"</copy>
     ```
-3. Add an ingress rule to allow HTTPS access to the OLVM Administration Portal from your local browser. Navigate using this path:
 
-    **OLV-VCN -> Subnets -> Public Subnet -> Security -> Default Security List -> Security Rules -> Add Ingress Rules**
+    In macOS Terminal or a Linux terminal, run:
 
+    ```bash
+    <copy>scp -i ~/.ssh/<bootstrap-login-key> opc@<bootstrap-public-ip>:~/.ssh/id_rsa.pub ~/.ssh/olvm-cluster-id_rsa.pub</copy>
+    ```
 
-    ### Select **Default Security List for OLV-VCN**. If two entries appear with the same name, select the one created most recently. 
+3. Verify that you can SSH to the OLVM manager from your local machine:
 
+    In Windows PowerShell, run:
+
+    ```powershell
+    <copy>ssh -i "$HOME\.ssh\olvm-cluster-id_rsa" oracle@<olvm-public-ip> "hostname -f"</copy>
+    ```
+
+    In macOS Terminal or a Linux terminal, run:
+
+    ```bash
+    <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip> "hostname -f"</copy>
+    ```
+
+4. Add an ingress rule to allow HTTPS access to the OLVM Administration Portal from your local browser. Navigate using this path:
+
+    **MENU -> Networking -> Virtual cloud networks -> OLV-VCN -> Subnets -> Public Subnet -> Security -> Default Security List -> Security Rules -> Add Ingress Rules**
+
+    **Select Default Security List for OLV-VCN**. If two entries appear with the same name, select the one created most recently.
 
     Enter the following values:
 
@@ -372,20 +435,87 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 
     > **Note:** OCI security list changes take effect immediately — no reboot is required.
 
-4. Connect to `olvm` as `oracle`.
+    ![olv-vcn](./images/olvcn.png "Show olv-vcn")
+
+    ![olv-vcn Ingress](./images/olvcn-ingress.png "Show olv-vcn Ingress")
+
+5. Connect to `olvm` as `oracle`.
+
+    In Windows PowerShell, run:
 
     ```powershell
-    <copy>ssh -i C:\Users\<you>\.ssh\olvm-cluster-id_rsa oracle@<olvm-public-ip></copy>
+    <copy>ssh -i "$HOME\.ssh\olvm-cluster-id_rsa" oracle@<olvm-public-ip></copy>
     ```
 
-5. From the `olvm` terminal, verify passwordless SSH to both KVM hosts:
+    In macOS Terminal or a Linux terminal, run:
 
     ```bash
-    <copy>ssh olkvm01 hostname -f
-    ssh olkvm02 hostname -f</copy>
+    <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip></copy>
     ```
 
-6. After you confirm SSH access to `olvm` and both KVM hosts, you are ready to terminate the bootstrap instance in the next task. You can skip the Terminate task for later.
+6. From the `olvm` terminal, verify passwordless SSH to `olkvm01`:
+
+    ```bash
+    <copy>ssh olkvm01 hostname -f</copy>
+    ```
+
+7. Verify passwordless SSH to `olkvm02`:
+
+    ```bash
+    <copy>ssh olkvm02 hostname -f</copy>
+    ```
+
+    ![Verified connections](./images/verified-connections.png "Show Verified connections")
+
+8. After you confirm SSH access to `olvm` and both KVM hosts, return to the bootstrap instance and enforce Instance Metadata Service Version 2 (IMDSv2) only on all three deployed instances.
+
+    > **Why:** OCI instances accept both the legacy `/v1` and the `/v2` Instance Metadata Service endpoints by default. IMDSv1 has no built-in request authentication, which makes it more vulnerable to SSRF-style attacks. Oracle Linux 8 platform images support IMDSv2. Because you have now verified access to all three hosts, you can safely disable the legacy `/v1` endpoint. This command uses the OCI CLI already configured on the bootstrap instance and does not reboot the instances.
+
+    ```bash
+    <copy>for name in olvm olkvm01 olkvm02; do
+      instance_id=$(oci compute instance list \
+        --compartment-id "$OCI_COMPARTMENT_OCID" \
+        --display-name "$name" \
+        --lifecycle-state RUNNING \
+        --query "data[0].id" --raw-output)
+
+      echo "Setting IMDSv2-only on $name ($instance_id)"
+
+      oci compute instance update \
+        --instance-id "$instance_id" \
+        --instance-options '{"areLegacyImdsEndpointsDisabled": true}' \
+        --force
+    done
+    sleep 60</copy>
+    ```
+
+9. Verify that each instance now enforces IMDSv2 only:
+
+    ```bash
+    <copy>for name in olvm olkvm01 olkvm02; do
+      instance_id=$(oci compute instance list \
+        --compartment-id "$OCI_COMPARTMENT_OCID" \
+        --display-name "$name" \
+        --lifecycle-state RUNNING \
+        --query "data[0].id" --raw-output)
+
+      echo "$name:"
+      oci compute instance get --instance-id "$instance_id" \
+        --query "data.\"instance-options\""
+    done</copy>
+    ```
+
+    **Expected output** for each instance:
+
+    ```json
+    {
+      "are-legacy-imds-endpoints-disabled": true
+    }
+    ```
+
+    If any instance shows `false` or `null`, re-run the update command in the previous step for that instance name.
+
+10. After the IMDSv2 verification succeeds, you are ready to terminate the bootstrap instance in the next task. You can skip the Terminate task for later if you intentionally want to retain the bootstrap instance for troubleshooting.
 
 ## Task 8: Terminate the Bootstrap Instance
 
@@ -410,7 +540,7 @@ The Ansible provisioning playbook creates OCI VLAN resources inside the VCN to p
 
 7. Wait until the instance state changes to **Terminated**.
 
-## Setup OLVM Infrastructure Checkpoint
+## Set Up OLVM Infrastructure Checkpoint
 
 At this point, you should have:
 
@@ -418,6 +548,7 @@ At this point, you should have:
 - OCI credentials configured on the bootstrap host
 - Three deployed instances: `olvm`, `olkvm01`, and `olkvm02`
 - Public and private IPs recorded for all three instances
+- IMDSv2 enforced (legacy `/v1` metadata endpoints disabled) on all three instances
 - The cluster SSH private key copied to your local machine
 - Verified local SSH access to the OLVM manager
 - Verified SSH from `olvm` to both KVM hosts
@@ -433,6 +564,6 @@ You may now **proceed to the next lab**
 
 ## Acknowledgements
 
-- **Author** - Shawn Kelley, Perside Foster
+- - **Author** - Shawn Kelley, Mark Atkinson, John Priest, Perside Foster
 - **Contributor** - Marvin Kim
-- **Last Updated By/Date** - Perside Foster, May 20, 2026
+- **Last Updated By/Date** - Perside Foster, Jul 2026
