@@ -51,7 +51,9 @@ Estimated Time: **10 minutes**
 
     1. The `ORDERS` subqueries calculate order count, revenue, average order value, and active customers.
     2. The `SHIPMENTS` and `PRODUCTS` subqueries add fulfillment and catalog context from their owning tables.
-    3. `FROM dual` gives Oracle a one-row source, so all six scalar subqueries appear as one dashboard row.
+    3. The outer `SELECT` has no table in its `FROM` clause because each scalar subquery already reads from the table it needs.
+
+    In older Oracle SQL examples, you often see `FROM dual` when a query calculates values without reading from one main table. Oracle Database 26ai does not require that extra one-row table for this pattern. Leaving it out keeps the dashboard query focused on the useful idea: each scalar subquery returns one value, and Oracle combines those values into one compact KPI row.
 
     `TO_CHAR` formats revenue and average order value as dollar amounts. The underlying totals are still calculated from numeric columns; the format simply makes the result easier to read in a dashboard-style table.
 
@@ -63,8 +65,7 @@ Estimated Time: **10 minutes**
       (SELECT COUNT(*) FROM shipments) AS "Shipments",
       (SELECT TO_CHAR(AVG(order_total), 'FM$999G999G990D00') FROM orders) AS "Average Order",
       (SELECT COUNT(DISTINCT customer_id) FROM orders) AS "Active Customers",
-      (SELECT COUNT(*) FROM products) AS "Products"
-    FROM dual;
+      (SELECT COUNT(*) FROM products) AS "Products";
     </copy>
     ```
 

@@ -88,7 +88,15 @@ Estimated Time: **10 minutes**
 
 1. Run the semantic product search query.
 
-    `VECTOR_EMBEDDING` turns the phrase into a query vector by using `ADMIN.ALL_MINILM_L12_V2`. `VECTOR_DISTANCE` compares that query vector to each stored product vector. The closest rows appear first because lower cosine distance means a closer semantic match.
+    This task asks a retail search question in normal business language: which products are closest in meaning to `customer demand digital service product`?
+
+    Read that phrase as a signal, not as a set of exact keywords:
+
+    - `customer demand` points the search toward products that shoppers may want or talk about.
+    - `digital service` points the search toward technology-supported retail experiences, such as coaching, training, audio, displays, or connected devices.
+    - `product` tells the search to look for catalog items, not only social posts or abstract topics.
+
+    A keyword search would look for those exact words in product names or descriptions. That would miss useful matches if the catalog uses different wording, such as microphone, tablet, earbuds, power bank, or display. AI Vector Search works differently. `VECTOR_EMBEDDING` turns the full phrase into a numeric representation of its meaning by using `ADMIN.ALL_MINILM_L12_V2`. `VECTOR_DISTANCE` then compares that query vector to each stored product vector. The closest rows appear first because lower cosine distance means a closer semantic match.
 
     Read the query in four parts:
 
