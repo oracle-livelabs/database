@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 300" font-family="Helvetica,Arial,sans-serif">
+  <title>The three dials — every data-modeling pattern is a bet on these settings</title>
+  <style>
+    .dial   { fill:none; stroke:#312d2a; stroke-width:8; stroke-linecap:round; }
+    .tick   { stroke:#999999; stroke-width:2; }
+    .needle { stroke:#c74634; stroke-width:5; stroke-linecap:round; }
+    .hub    { fill:#c74634; }
+    .name   { fill:#312d2a; font-size:16px; font-weight:bold; text-anchor:middle; }
+    .end    { fill:#666666; font-size:11px; }
+    .bet    { fill:#c74634; font-size:12px; font-weight:bold; text-anchor:middle; }
+    .note   { fill:#666666; font-size:12px; font-style:italic; }
+  </style>
+
+  <!-- Dial 1: pattern complexity (needle LOW/left) -->
+  <g transform="translate(160,150)">
+    <path class="dial" d="M-90,0 A90,90 0 0 1 90,0"/>
+    <line class="tick" x1="-64" y1="-64" x2="-56" y2="-56"/>
+    <line class="tick" x1="0" y1="-90" x2="0" y2="-79"/>
+    <line class="tick" x1="64" y1="-64" x2="56" y2="-56"/>
+    <line class="needle" x1="0" y1="0" x2="-62" y2="-42"/>
+    <circle class="hub" r="8"/>
+    <text class="end" x="-112" y="18">one shape</text>
+    <text class="end" x="62" y="18">many consumers</text>
+    <text class="name" y="52">Pattern complexity</text>
+    <text class="bet" y="74">Lab 2 bet: LOW — one dominant read</text>
+  </g>
+
+  <!-- Dial 2: read/write mix (needle read-heavy/left) -->
+  <g transform="translate(470,150)">
+    <path class="dial" d="M-90,0 A90,90 0 0 1 90,0"/>
+    <line class="tick" x1="-64" y1="-64" x2="-56" y2="-56"/>
+    <line class="tick" x1="0" y1="-90" x2="0" y2="-79"/>
+    <line class="tick" x1="64" y1="-64" x2="56" y2="-56"/>
+    <line class="needle" x1="0" y1="0" x2="-70" y2="-28"/>
+    <circle class="hub" r="8"/>
+    <text class="end" x="-108" y="18">read-heavy</text>
+    <text class="end" x="60" y="18">write-heavy</text>
+    <text class="name" y="52">Read / write mix</text>
+    <text class="bet" y="74">Lab 2 bet: read-heavy — menus rarely change</text>
+  </g>
+
+  <!-- Dial 3: update size vs read size (needle whole-doc reads/left) -->
+  <g transform="translate(780,150)">
+    <path class="dial" d="M-90,0 A90,90 0 0 1 90,0"/>
+    <line class="tick" x1="-64" y1="-64" x2="-56" y2="-56"/>
+    <line class="tick" x1="0" y1="-90" x2="0" y2="-79"/>
+    <line class="tick" x1="64" y1="-64" x2="56" y2="-56"/>
+    <line class="needle" x1="0" y1="0" x2="-62" y2="-42"/>
+    <circle class="hub" r="8"/>
+    <text class="end" x="-118" y="18">whole-doc reads</text>
+    <text class="end" x="58" y="18">tiny updates</text>
+    <text class="name" y="52">Update size vs read size</text>
+    <text class="bet" y="74">Lab 2 bet: whole-document reads (no updates… yet)</text>
+  </g>
+
+  <text class="note" x="20" y="286">Every document pattern is a bet on these three dials. Margin note: what happens when corporate changes one price on a chain-wide item?</text>
+</svg>

@@ -1,0 +1,70 @@
+{
+    "workshoptitle": "One Restaurant, Every Model: From Document Pain to Converged Resolution",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Get Started",
+            "description": "Sign up for a free trial or use your own Oracle Cloud tenancy.",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Introduction",
+            "description": "Multi-model is a storage claim; converged is a guarantees claim. What you will build and why.",
+            "type": "livelabs",
+            "filename": "../../0-intro/introduction.md"
+        },
+        {
+            "title": "Lab 1: Set Up Your Workspace and Run the Preflight",
+            "description": "Open Cloud Shell and Database Actions, connect mongosh, and validate every dependency of the later labs.",
+            "type": "livelabs",
+            "filename": "../../1-get-started/get-started.md"
+        },
+        {
+            "title": "Lab 2: Ship It Like It's 2015 \u2014 The Embedded Menu (MongoDB API)",
+            "description": "Build the classic embedded document model with unchanged mongosh against Autonomous Database.",
+            "type": "livelabs",
+            "filename": "../../2-embedded-menu/embedded-menu.md"
+        },
+        {
+            "title": "Lab 3: Corporate Changes One Price \u2014 The Bet Inverts",
+            "description": "Feel the embedding pattern fail: fleet-wide rewrites, $unwind analytics, and silent type drift.",
+            "type": "livelabs",
+            "filename": "../../3-bet-inverts/bet-inverts.md"
+        },
+        {
+            "title": "Lab 4: Model the Domain \u2014 One Truth (Canonical Schema + SQL/JSON)",
+            "description": "Discover your collection is already a SQL table, then shred it into the canonical restaurant schema.",
+            "type": "livelabs",
+            "filename": "../../4-canonical-model/canonical-model.md"
+        },
+        {
+            "title": "Lab 5: Get the Document Back \u2014 Duality Views and Governance",
+            "description": "Recover the document shape from canonical rows, prove one enforcement domain, and read it through REST.",
+            "type": "livelabs",
+            "filename": "../../5-duality-views/duality-views.md"
+        },
+        {
+            "title": "Lab 6: The Third Door, Writable \u2014 REST ETag Choreography (Optional)",
+            "description": "Lock-free optimistic concurrency through ORDS with zero application code.",
+            "type": "livelabs",
+            "filename": "../../6-rest-etag/rest-etag.md"
+        },
+        {
+            "title": "Lab 7: Orders and the Upsell Graph (SQL/PGQ)",
+            "description": "Store orders as native documents, then project a property graph and answer 'do you want fries with that?'",
+            "type": "livelabs",
+            "filename": "../../7-orders-graph/orders-graph.md"
+        },
+        {
+            "title": "Lab 8: Meaning, Not Keywords \u2014 and the One-Statement Finale",
+            "description": "In-database ONNX vector search over the same tables, then graph + relational + vector in one optimizer plan.",
+            "type": "livelabs",
+            "filename": "../../8-vector-capstone/vector-capstone.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}
