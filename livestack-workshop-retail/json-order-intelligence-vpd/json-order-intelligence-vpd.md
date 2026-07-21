@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you trace dashboard metrics to orders, the next question is how applications should use those orders. Application developers often like JSON because it matches the shape of an API response: one order can include customer fields, status, totals, and an array of line items in a single document. That shape is convenient for application code, but JSON by itself can create problems if it becomes a separate copy of the business record. Teams may have to synchronize documents with order tables, repeat security rules, and explain why an API result differs from a SQL report. JSON Relational Duality helps Oracle Database 26ai solve that problem by giving applications document-shaped JSON while keeping the transactional truth in relational tables.
+After you trace dashboard metrics to orders, the next question is how applications should use those orders. Application teams want compact order documents, operations teams want relational detail, and business teams want one governed source of truth. JSON Relational Duality lets Oracle Database support those shapes without splitting the order record.
 
 ### Objectives
 

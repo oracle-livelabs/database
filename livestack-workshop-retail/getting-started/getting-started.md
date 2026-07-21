@@ -9,8 +9,9 @@ This lab gets you into the LiveLabs environment and opens **Database Actions SQL
 - Open the LiveLabs reservation information.
 - Launch Database Actions for the provisioned Autonomous Database.
 - Open SQL Worksheet as the main workshop schema user.
+- Run a short connection check.
 
-Estimated Time: **5 minutes**
+Estimated Time: **10 minutes**
 
 ## Task 1: Open the LiveLabs environment
 
@@ -43,6 +44,23 @@ Estimated Time: **5 minutes**
     ![SQL Worksheet orientation showing where to paste and run SQL](images/sql-worksheet-orientation.svg " ")
 
     *Figure 2: SQL Worksheet is where you paste each copied SQL block. Use Run Statement for normal queries and Run Script for blocks that contain DDL or formatted JSON output.*
+
+4. Run this connection check.
+
+    This short query confirms that SQL Worksheet is connected as the main workshop schema user, usually `LLUSER`. `USER` is an Oracle SQL expression that returns the current database username, and `FROM dual` gives the query a one-row source.
+
+    ```sql
+    <copy>
+    SELECT USER AS "Connected User"
+    FROM dual;
+    </copy>
+    ```
+
+    **Expected output: Connection Check**
+
+    | Connected User |
+    | --- |
+    | LLUSER |
 
 ## Acknowledgements
 
