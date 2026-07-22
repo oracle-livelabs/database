@@ -18,7 +18,7 @@ In this workshop you will not hear that thesis — you will **run** it, in three
 
 Every lab layers on the artifacts of the one before it. You leave with the same document ergonomics you walked in with — plus one copy of the truth underneath every surface.
 
-Estimated Time: 90 minutes (about 60 minutes hands-on)
+Estimated Workshop Time: 90 minutes (about 60 minutes hands-on)
 
 ### Objectives
 
