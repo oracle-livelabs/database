@@ -1,4 +1,4 @@
-# Lab 4: Model the Domain — One Truth (Canonical Schema + SQL/JSON)
+# Model the Domain — One Truth (Canonical Schema + SQL/JSON)
 
 ## Introduction
 

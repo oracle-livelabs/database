@@ -3,19 +3,25 @@
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
-            "title": "Get Started",
-            "description": "Sign up for a free trial or use your own Oracle Cloud tenancy.",
-            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
-        },
-        {
             "title": "Introduction",
             "description": "Multi-model is a storage claim; converged is a guarantees claim. What you will build and why.",
             "type": "livelabs",
             "filename": "../../0-intro/introduction.md"
         },
         {
-            "title": "Lab 1: Set Up Your Workspace and Run the Preflight",
-            "description": "Open Cloud Shell and Database Actions, connect mongosh, and validate every dependency of the later labs.",
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 0: Create your Autonomous AI Database Free Instance",
+            "description": "Create and configure the Autonomous AI Database instance for this workshop (standard shared chapter).",
+            "type": "livelabs",
+            "filename": "../../../23aifree/login-to-abd3/login-to-adb3-json.md"
+        },
+        {
+            "title": "Lab 1: Connect to Your Environment and Run the Preflight",
+            "description": "Open Database Actions and Cloud Shell against your own instance, connect mongosh, and validate every dependency of the later labs.",
             "type": "livelabs",
             "filename": "../../1-get-started/get-started.md"
         },
@@ -64,7 +70,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }

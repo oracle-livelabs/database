@@ -1,4 +1,4 @@
-# Lab 3: Corporate Changes One Price — The Bet Inverts
+# Corporate Changes One Price — The Bet Inverts
 
 ## Introduction
 

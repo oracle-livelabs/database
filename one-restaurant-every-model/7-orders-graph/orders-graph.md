@@ -1,4 +1,4 @@
-# Lab 7: Orders and the Upsell Graph (SQL/PGQ)
+# Orders and the Upsell Graph (SQL/PGQ)
 
 ## Introduction
 

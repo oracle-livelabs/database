@@ -1,4 +1,4 @@
-# Lab 1: Set Up Your Workspace and Run the Preflight
+# Connect to Your Environment and Run the Preflight
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Lab 2: Ship It Like It's 2015 — The Embedded Menu (MongoDB API)
+# Ship It Like It's 2015 — The Embedded Menu (MongoDB API)
 
 ## Introduction
 

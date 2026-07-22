@@ -1,4 +1,4 @@
-# Lab 8: Meaning, Not Keywords — and the One-Statement Finale
+# Meaning, Not Keywords — and the One-Statement Finale
 
 ## Introduction
 

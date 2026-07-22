@@ -1,4 +1,4 @@
-# Lab 6: The Third Door, Writable — REST ETag Choreography (Optional)
+# The Third Door, Writable — REST ETag Choreography (Optional)
 
 ## Introduction
 

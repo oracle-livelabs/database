@@ -1,4 +1,4 @@
-# Lab 5: Get the Document Back — Duality Views and Governance
+# Get the Document Back — Duality Views and Governance
 
 ## Introduction
 
