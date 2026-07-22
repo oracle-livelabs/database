@@ -67,7 +67,13 @@ Estimated Time: **10 minutes**
 
 1. Run the one-hop graph query.
 
-    `GRAPH_TABLE` turns a graph pattern into a relational result set. The pattern starts at one influencer, follows one `connects_to` edge, and reaches another influencer.
+    This task is the graph equivalent of checking the relationship table before you ask a bigger business question. A campaign planner first needs to know whether the graph has direct creator-to-creator relationships and whether those relationships have useful attributes, such as link type and strength.
+
+    `GRAPH_TABLE` is not a stored business table. It is a SQL function that makes a property graph readable as table-shaped rows. That matters for beginners because it lets you use graph syntax to describe a path, then inspect the result with familiar SQL columns.
+
+    The `INFLUENCER_NETWORK` graph exists to organize relationship data that would be awkward to read as isolated rows. It connects creators, brands, products, and posts as vertices and edges. In this task, you focus on the simplest edge: one creator connected directly to another creator. If this result looks reasonable, the next task can safely add brand context on top of the same graph.
+
+    The pattern starts at one influencer, follows one `connects_to` edge, and reaches another influencer.
 
     Read the graph pattern from left to right: `(src IS influencer)` is the starting creator, `-[e IS connects_to]->` is the relationship, and `(dst IS influencer)` is the reached creator. The `COLUMNS` block chooses which path details become table columns.
 
