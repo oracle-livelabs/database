@@ -2,100 +2,49 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on retail exercises. This setup matters because every later lab depends on running SQL as the correct workshop user against the prepared retail schema.
-
-Estimated Time: **5 minutes**
+This lab gets you into the LiveLabs environment and opens **Database Actions SQL Worksheet**. SQL Worksheet is the evidence bench for the rest of the workshop: you will use it to inspect the same governed data that supports the retail application.
 
 ### Objectives
 
-In this lab, you will:
+- Open the LiveLabs reservation information.
+- Launch Database Actions for the provisioned Autonomous Database.
+- Open SQL Worksheet as the main workshop schema user.
 
-- Launch the LiveLabs workshop environment.
-- Use the reservation login information to open Database Actions.
-- Confirm that SQL Worksheet is ready for the retail schema.
-- Find the backend setup bundle if you need to create the schema again.
+Estimated Time: **5 minutes**
 
-## Task 1: Launch the LiveLabs environment
+## Task 1: Open the LiveLabs environment
 
-Launch the LiveLabs environment first so the learner starts from the correct reservation, tenancy context, and workshop resources.
+1. In your LiveLabs reservation, open the environment details.
 
-1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
+    ![Reservation login information page](images/reservation-login-info.svg " ")
 
-2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
+    *Figure 1: The reservation page provides the database and application links for your environment.*
 
-3. In **My Reservations**, select **Launch Workshop** for this reservation.
+2. Open the Database Actions link from the reservation.
 
-4. Select **View Login Info** and keep the database credentials available for the next task.
+    ![Open Database Actions link](images/reservation-login-open-link.svg " ")
 
-    ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg " ")
+3. Copy the password for the main workshop user when the reservation page provides it.
 
-    *Figure 1: The Reservation Information dialog shows the `LLUSER` login, password, and Login URL for Database Actions.*
+    ![Copy the reservation password](images/reservation-login-copy-password.svg " ")
 
 ## Task 2: Open SQL Worksheet
 
-1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
+1. Sign in to Database Actions as the main workshop user, usually `LLUSER`.
 
-2. Select **Copy** for **2 - Password**.
+    ![Database Actions login for the main workshop user](images/database-actions-login-main-user.svg " ")
 
-    ![Reservation Information dialog with the Copy button highlighted for the Password row](images/reservation-login-copy-password.svg " ")
+2. Open **Development**, then open **SQL**.
 
-    *Figure 2: Copy the `LLUSER` password from the Reservation Information dialog.*
+    ![Open the Development SQL tile](images/database-actions-development-sql.svg " ")
 
-3. Select **Open Link** for **3 - Login URL**.
+3. Use the worksheet shown below for the rest of the workshop.
 
-    ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg " ")
+    ![SQL Worksheet orientation showing where to paste and run SQL](images/sql-worksheet-orientation.svg " ")
 
-    *Figure 3: Use Open Link for the Login URL, then use the copied password to sign in as `LLUSER`.*
-
-4. On the Database Actions sign-in page, confirm that **Username** shows `LLUSER`, paste the password from the reservation information, and select **Sign in**.
-
-    ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
-
-    *Figure 4: Sign in to Database Actions as `LLUSER` with the password from the reservation information.*
-
-5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
-
-    ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
-
-    *Figure 5: Open SQL from the Development tools menu.*
-
-6. Use the same SQL Worksheet pattern throughout the workshop.
-
-    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
-
-    *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
-
-    - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
-    - Paste each workshop SQL block into the editor.
-    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
-    - Review the output in **Query Result** or **Script Output**, depending on the step.
-    - Use **Navigator** only when you want to inspect tables, views, or other objects.
-
-7. Run this check.
-
-    This check reads Oracle session context directly from the database. `USER` shows the authenticated account, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where unqualified table names will resolve. If the user is not `LLUSER`, use the SQL Worksheet user dropdown to switch before continuing.
-
-    ```sql
-    <copy>
-    SELECT USER AS "User",
-           SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
-           SYSTIMESTAMP AS "Checked At";
-    </copy>
-    ```
-
-    Expected output (example - user and timestamp vary):
-
-    | User | Schema | Checked At |
-    | --- | --- | --- |
-    | LLUSER | LLUSER | 19-MAY-26 10.30.00.000000 AM UTC |
-    {: title="Connected SQL Worksheet Session"}
-
-8. If the schema is not present, ask the instructor to run the scripts in `backend-provisioning/database-source/` in the order described in the README.
-
-You can now continue to the retail labs.
+    *Figure 2: SQL Worksheet is where you paste each copied SQL block. Use Run Statement for normal queries and Run Script for blocks that contain DDL or formatted JSON output.*
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Last Updated By/Date** - Oracle Database Product Management, July 2026
