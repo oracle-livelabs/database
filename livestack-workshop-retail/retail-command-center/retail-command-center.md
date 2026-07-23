@@ -73,7 +73,7 @@ Estimated Time: **10 minutes**
 
     | Orders | Revenue | Shipments | Average Order | Active Customers | Products |
     | ---: | ---: | ---: | ---: | ---: | ---: |
-    | 3000 | $4,243,895.72 | 1500 | $1,414.63 | 1560 | 187 |
+    | 3000 | $4,213,387.74 | 1500 | $1,404.46 | 1536 | 187 |
 
 2. The result is the first trust check for the command center. A business user sees the cards; you can show the SQL that produces them.
 
@@ -117,14 +117,14 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Unit Price | Order Lines | Revenue |
     | --- | --- | ---: | ---: | ---: |
-    | SummitPulse GPS Watch | Sports Tech | $3,999.99 | 56 | $435,998.91 |
-    | Carbon Road Bike | Sports | $2,899.99 | 50 | $316,098.91 |
-    | FieldCoach Training Tablet | Sports Tech | $2,499.99 | 45 | $219,999.12 |
-    | PowerRack Home Gym | Fitness | $1,499.99 | 40 | $134,999.10 |
-    | AeroSpin Cycle | Fitness | $1,299.99 | 54 | $131,298.99 |
-    | RouteGuide AR Sport Glasses | Sports Wearables | $1,499.99 | 46 | $127,499.15 |
-    | Indoor Training Garden Kit | Outdoor Lifestyle | $699.99 | 64 | $85,398.78 |
-    | RaceSim Performance GPU | Training Tech | $799.99 | 52 | $79,999.00 |
+    | SummitPulse GPS Watch | Sports Tech | $3,999.99 | 57 | $443,998.89 |
+    | FieldCoach Training Tablet | Sports Tech | $2,499.99 | 51 | $254,998.98 |
+    | Carbon Road Bike | Sports | $2,899.99 | 42 | $217,499.25 |
+    | RouteGuide AR Sport Glasses | Sports Wearables | $1,499.99 | 51 | $169,498.87 |
+    | PowerRack Home Gym | Fitness | $1,499.99 | 46 | $139,499.07 |
+    | AeroSpin Cycle | Fitness | $1,299.99 | 48 | $126,099.03 |
+    | StormRunner Trail Shell | Athletic Apparel | $895.00 | 55 | $98,450.00 |
+    | RaceSim Performance GPU | Training Tech | $799.99 | 59 | $97,598.78 |
 
 3. The ranking matters because it turns the dashboard from a summary into a drill-through path. You can inspect which products or service items drive the top-line number.
 
@@ -155,11 +155,11 @@ Estimated Time: **10 minutes**
 
     | Category | Products | Order Lines | Revenue |
     | --- | ---: | ---: | ---: |
-    | Sports Tech | 26 | 1255 | $1,161,380.13 |
-    | Fitness | 17 | 816 | $440,028.69 |
-    | Athletic Apparel | 21 | 1081 | $397,585.35 |
-    | Sports Wearables | 8 | 400 | $366,802.14 |
-    | Sports | 2 | 97 | $341,347.90 |
+    | Sports Tech | 26 | 1317 | $1,232,589.02 |
+    | Fitness | 17 | 797 | $445,224.69 |
+    | Sports Wearables | 8 | 406 | $404,111.77 |
+    | Athletic Apparel | 21 | 1030 | $397,143.41 |
+    | Training Tech | 12 | 562 | $348,598.50 |
 
 2. Command-center SQL shows why the converged foundation matters. Orders, products, categories, customers, and shipments remain queryable together, so the business can move from a card to evidence.
 

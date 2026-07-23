@@ -175,7 +175,7 @@ Estimated Time: **10 minutes**
     | Products | 187 |
     | Customers | 2000 |
     | Orders | 3000 |
-    | Order items | 9146 |
+    | Order items | 8981 |
     | Social posts | 5000 |
     | Influencers | 483 |
     | Fulfillment centers | 30 |

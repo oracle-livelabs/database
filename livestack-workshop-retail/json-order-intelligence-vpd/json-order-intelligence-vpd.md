@@ -56,7 +56,7 @@ Estimated Time: **15 minutes**
     ```sql
     <copy>
     SELECT view_name AS "Duality View",
-           'Ready for document queries' AS "Status",
+           'Ready for document queries' AS "Readiness",
            'Order JSON is backed by relational tables' AS "Why It Matters"
     FROM user_json_duality_views
     WHERE view_name = 'ORDERS_DV';
@@ -65,7 +65,7 @@ Estimated Time: **15 minutes**
 
     **Expected output: Duality View Readiness Check**
 
-    | Duality View | Status | Why It Matters |
+    | Duality View | Readiness | Why It Matters |
     | --- | --- | --- |
     | ORDERS\_DV | Ready for document queries | Order JSON is backed by relational tables |
 
@@ -89,7 +89,7 @@ Estimated Time: **15 minutes**
 
     | Order Document |
     | --- |
-    | `{"_id":1,"_metadata":{...},"customerId":470,"status":"confirmed","total":967.92,...}` |
+    | `{"_id":1,"_metadata":{...},"customerId":1668,"status":"confirmed","total":1139.93,...}` |
 
 2. The document is useful for application access because one query returns the order header and line items together. The app gets a document shape, while SQL still protects the governed source rows.
 
@@ -117,11 +117,11 @@ Estimated Time: **15 minutes**
 
     | Order | Customer | Status | Total |
     | ---: | ---: | --- | ---: |
-    | 1 | 470 | confirmed | 967.92 |
-    | 2 | 478 | processing | 829.9 |
-    | 3 | 1367 | shipped | 44.99 |
-    | 4 | 446 | delivered | 6869.92 |
-    | 5 | 1021 | delivered | 1929.94 |
+    | 1 | 1668 | confirmed | 1139.93 |
+    | 2 | 731 | processing | 429.9 |
+    | 3 | 1515 | shipped | 539.97 |
+    | 4 | 486 | delivered | 179.99 |
+    | 5 | 1587 | delivered | 209.97 |
 
 2. The result shows the practical value of duality. The application can use a JSON document, and analysts can still use SQL over the same governed order data. Next, you use customer and creator language to find demand signals that may not match catalog keywords exactly.
 
