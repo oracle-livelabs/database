@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="Helvetica,Arial,sans-serif">
+  <title>A duality view is a projection, not a copy: relational rows on one face, a JSON document on the other — reads assemble live, writes decompose in one ACID transaction, governance and ETag concurrency live in the view</title>
+  <style>
+    .head  { fill:#312d2a; font-size:15px; font-weight:bold; text-anchor:middle; }
+    .sub   { fill:#666666; font-size:11.5px; text-anchor:middle; }
+    .tbl   { fill:#ffffff; stroke:#312d2a; stroke-width:1.6; }
+    .th    { fill:#312d2a; }
+    .thT   { fill:#ffffff; font-size:12px; font-weight:bold; }
+    .mono  { font-family:SF Mono,Menlo,Consolas,monospace; font-size:11.5px; fill:#444444; }
+    .monoB { font-family:SF Mono,Menlo,Consolas,monospace; font-size:11.5px; fill:#312d2a; font-weight:bold; }
+    .lock  { fill:#c74634; font-size:11px; font-weight:bold; }
+    .pen   { fill:#2f6b4f; font-size:11px; font-weight:bold; }
+    .lens  { fill:#ffffff; stroke:#c74634; stroke-width:2.5; }
+    .lensT { fill:#c74634; font-size:13px; font-weight:bold; text-anchor:middle; }
+    .lensS { fill:#312d2a; font-size:11px; text-anchor:middle; }
+    .arrR  { stroke:#2f6b4f; stroke-width:2.2; fill:none; marker-end:url(#gr); }
+    .arrW  { stroke:#31708f; stroke-width:2.2; fill:none; marker-end:url(#bl); }
+    .arrT  { font-size:12px; font-weight:bold; }
+    .doc   { fill:#fdfaf5; stroke:#312d2a; stroke-width:1.6; }
+    .etag  { fill:#31708f; }
+    .etagT { fill:#ffffff; font-size:10.5px; font-weight:bold; }
+    .tag   { fill:#312d2a; font-size:13.5px; font-weight:bold; text-anchor:middle; font-style:italic; }
+  </style>
+  <defs>
+    <marker id="gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6b4f"/></marker>
+    <marker id="bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#31708f"/></marker>
+  </defs>
+
+  <text class="head" x="170" y="40">FACE 1: RELATIONAL ROWS</text>
+  <text class="sub"  x="170" y="58">normalized, constrained, Codd-approved</text>
+
+  <!-- item table -->
+  <rect class="th" x="40" y="80" width="270" height="24"/>
+  <text class="thT" x="50" y="97">ITEM&#160;&#160;(corporate-owned)</text>
+  <rect class="tbl" x="40" y="104" width="270" height="72"/>
+  <text class="mono" x="50" y="124">item_id&#160;&#160;1000</text>
+  <text class="mono" x="50" y="144">name&#160;&#160;&#160;&#160;&#160;Classic Cheeseburger</text><text class="lock" x="262" y="144">&#128274; @noupdate</text>
+  <text class="mono" x="50" y="164">price&#160;&#160;&#160;&#160;1499&#160;&#160;CHECK(&gt;0)</text><text class="lock" x="262" y="164">&#128274; @noupdate</text>
+
+  <!-- override table -->
+  <rect class="th" x="40" y="200" width="270" height="24"/>
+  <text class="thT" x="50" y="217">ITEM_OVERRIDE&#160;&#160;(location-owned)</text>
+  <rect class="tbl" x="40" y="224" width="270" height="52"/>
+  <text class="mono" x="50" y="244">item_id&#160;&#160;1000&#160;&#160;store&#160;&#160;s_100</text>
+  <text class="mono" x="50" y="264">override_name&#160;&#160;Lunch Classic…</text><text class="pen" x="256" y="264">&#9998; @update</text>
+
+  <!-- lens -->
+  <ellipse class="lens" cx="480" cy="185" rx="105" ry="82"/>
+  <text class="lensT" x="480" y="165">JSON RELATIONAL</text>
+  <text class="lensT" x="480" y="183">DUALITY VIEW</text>
+  <text class="lensS" x="480" y="205">not a copy — a projection</text>
+  <text class="lensS" x="480" y="221">governance lives HERE</text>
+
+  <!-- document -->
+  <text class="head" x="790" y="40">FACE 2: JSON DOCUMENT</text>
+  <text class="sub"  x="790" y="58">the shape your application wants</text>
+  <rect class="doc" x="650" y="80" width="280" height="220" rx="10"/>
+  <text class="mono" x="662" y="103">{</text>
+  <text class="mono" x="674" y="121">"_id": 1000,</text>
+  <text class="monoB" x="674" y="139">"name": "Classic Cheeseburger",</text>
+  <text class="monoB" x="674" y="157">"price": 1499,</text>
+  <text class="mono" x="674" y="175">"override": [ {</text>
+  <text class="monoB" x="686" y="193">"name": "Lunch Classic…" } ],</text>
+  <text class="mono" x="674" y="211">"_metadata": {</text>
+  <rect class="etag" x="686" y="220" width="196" height="18" rx="4"/>
+  <text class="etagT" x="692" y="233">"etag": "93493B42…"  &#8592; If-Match</text>
+  <text class="mono" x="674" y="256">}</text>
+  <text class="mono" x="662" y="274">}</text>
+
+  <!-- arrows -->
+  <path class="arrR" d="M330,140 C400,120 420,120 640,120"/>
+  <text class="arrT" fill="#2f6b4f" x="360" y="106">READ: assembled live from the rows — never stored</text>
+  <path class="arrW" d="M640,250 C480,300 380,290 320,252"/>
+  <text class="arrT" fill="#31708f" x="368" y="318">WRITE: decomposes back to the right rows — ONE ACID transaction</text>
+
+  <!-- governance strip -->
+  <text class="tag" x="480" y="380">The rules travel with the data, not with the app:</text>
+  <text class="sub" x="480" y="408" font-size="13">&#128274;&#160; corp fields refuse writes from EVERY door (ORA-40939)&#160;&#160;&#160;&#160;&#9998;&#160; the location edits only what it owns</text>
+  <text class="sub" x="480" y="432" font-size="13">CHECK constraints raise the SAME ORA-02290 through mongosh, SQL, and REST</text>
+  <text class="sub" x="480" y="456" font-size="13">the ETag refuses stale writes — lock-free concurrency with zero app code</text>
+  <text class="tag" x="480" y="500">Same bytes. Same transaction. Two faces.</text>
+</svg>

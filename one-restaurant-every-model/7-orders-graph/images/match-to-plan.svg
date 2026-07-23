@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica,Arial,sans-serif">
+  <title>The MATCH pattern's ASCII arrows are joins the optimizer plans like any other — each graph element becomes an ordinary row source in the EXPLAIN PLAN</title>
+  <style>
+    .head  { fill:#312d2a; font-size:15px; font-weight:bold; text-anchor:middle; }
+    .vtx   { fill:#ffffff; stroke:#c74634; stroke-width:2.2; }
+    .vtxT  { fill:#312d2a; font-size:13px; font-weight:bold; text-anchor:middle; }
+    .vtxS  { fill:#666666; font-size:10.5px; text-anchor:middle; }
+    .edge  { stroke:#312d2a; stroke-width:2; fill:none; marker-end:url(#ma); }
+    .edgeT { fill:#312d2a; font-size:12px; font-weight:bold; text-anchor:middle; font-family:SF Mono,Menlo,Consolas,monospace; }
+    .map   { stroke:#2f6b4f; stroke-width:1.6; stroke-dasharray:5 4; fill:none; marker-end:url(#ga); }
+    .rs    { fill:#f0f5f2; stroke:#2f6b4f; stroke-width:1.4; }
+    .rsT   { font-family:SF Mono,Menlo,Consolas,monospace; font-size:11.5px; fill:#312d2a; }
+    .rsH   { fill:#2f6b4f; font-size:12px; font-weight:bold; }
+    .tag   { fill:#312d2a; font-size:13.5px; font-weight:bold; text-anchor:middle; font-style:italic; }
+    .mono  { font-family:SF Mono,Menlo,Consolas,monospace; font-size:12.5px; fill:#444444; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#312d2a"/></marker>
+    <marker id="ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6b4f"/></marker>
+  </defs>
+
+  <text class="head" x="480" y="34">THE MATCH PATTERN…</text>
+  <text class="mono" x="480" y="58">MATCH (c IS customer)-[IS placed]-&gt;(o IS ord)-[IS contains]-&gt;(i IS item)</text>
+
+  <!-- graph glyphs -->
+  <circle class="vtx" cx="180" cy="140" r="46"/>
+  <text class="vtxT" x="180" y="136">(c)</text><text class="vtxS" x="180" y="152">customer</text>
+  <circle class="vtx" cx="480" cy="140" r="46"/>
+  <text class="vtxT" x="480" y="136">(o)</text><text class="vtxS" x="480" y="152">ord</text>
+  <circle class="vtx" cx="780" cy="140" r="46"/>
+  <text class="vtxT" x="780" y="136">(i)</text><text class="vtxS" x="780" y="152">item</text>
+  <path class="edge" d="M228,140 L432,140"/><text class="edgeT" x="330" y="128">-[placed]-&gt;</text>
+  <path class="edge" d="M528,140 L732,140"/><text class="edgeT" x="630" y="128">-[contains]-&gt;</text>
+
+  <text class="head" x="480" y="250">…IS JUST JOINS IN YOUR EXPLAIN PLAN</text>
+
+  <!-- row sources -->
+  <rect class="rs" x="60"  y="280" width="240" height="66" rx="8"/>
+  <text class="rsH" x="72" y="300">vertex (c) becomes:</text>
+  <text class="rsT" x="72" y="318">TABLE ACCESS CUSTOMER</text>
+  <text class="rsT" x="72" y="334">filter CUSTOMER_ID='c_1'</text>
+  <path class="map" d="M180,188 L180,278"/>
+
+  <rect class="rs" x="360" y="280" width="240" height="66" rx="8"/>
+  <text class="rsH" x="372" y="300">edge [placed] becomes:</text>
+  <text class="rsT" x="372" y="318">TABLE ACCESS ORD +</text>
+  <text class="rsT" x="372" y="334">join on ORDER_ID / CUSTOMER_ID</text>
+  <path class="map" d="M480,188 L480,278"/>
+
+  <rect class="rs" x="660" y="280" width="250" height="66" rx="8"/>
+  <text class="rsH" x="672" y="300">edge [contains] + vertex (i):</text>
+  <text class="rsT" x="672" y="318">TABLE ACCESS ORDER_ITEM +</text>
+  <text class="rsT" x="672" y="334">INDEX UNIQUE SCAN on ITEM pk</text>
+  <path class="map" d="M780,188 L780,278"/>
+
+  <rect class="rs" x="200" y="380" width="560" height="52" rx="8"/>
+  <text class="rsH" x="214" y="401">in the plan these appear as SYS_PGQ_* aliases:</text>
+  <text class="rsT" x="214" y="419">access("O"."ORDER_ID"="SYS_PGQ_2"."ORDER_ID")&#160;&#160;filter("SYS_PGQ_2"."CUSTOMER_ID"='c_1')</text>
+
+  <text class="tag" x="480" y="470">No graph runtime bolted on the side: the arrows compile to ordinary row sources,</text>
+  <text class="tag" x="480" y="494">and the SAME cost-based optimizer plans them next to your joins and vectors.</text>
+</svg>
