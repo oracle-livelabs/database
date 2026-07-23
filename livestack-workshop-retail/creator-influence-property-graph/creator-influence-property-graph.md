@@ -2,174 +2,126 @@
 
 ## Introduction
 
-Creator influence is not only about follower count. This lab asks the retail question that matters to the business: who can move demand, through which relationships, and how quickly can that signal spread?
-
-After the **vector-search lab** shows what customers and creators are talking about, this lab shows who can amplify that signal. Graph pattern matching matters because influence analysis quickly becomes a path question, not just a row-and-column question.
-
-### Operating Story
-
-| Step | Retail focus |
-| --- | --- |
-| Business Problem | Seer Sporting Goods cannot understand creator influence by looking at isolated posts, products, or follower counts. |
-| What You Will Prove | Creator, brand, product, and post relationships can be traversed as paths instead of assembled through increasingly complex joins. |
-| Database Capability | Oracle Property Graph and SQL/PGQ `GRAPH_TABLE` let you query connected retail relationships as paths. |
-| Outcome | Marketing teams can see how influence propagates through the creator network and identify paths worth acting on. |
-{: title="Creator Influence Story"}
-
-**Persona focus:** The marketing team wants to know which creators can amplify a product or brand story. The technical team needs a simpler way to express relationship paths than writing longer chains of self-joins.
-
-Estimated Time: **10 minutes**
+After you find demand signals, the next question is where those signals can travel. Creator influence is a relationship question. Follower counts and isolated posts do not show how a message can move through a network. Property Graph lets you express that question as paths while returning rows that business users can read.
 
 ### Objectives
 
-- Understand which governed retail tables feed the `INFLUENCER_NETWORK` graph so learners can trust the business meaning behind each path.
-- Compare traditional SQL joins with graph pattern matching to show when relationship analysis becomes easier to explain and maintain in graph form.
-- Run `GRAPH_TABLE` traversals for direct creator relationships so the business can see who is connected to whom before broadening the influence path.
-- Add a brand relationship to the path and explain how multi-step graph traversals support retail influence analysis, partnership insight, and campaign planning.
+- Confirm the `INFLUENCER\_NETWORK` property graph.
+- Query direct creator-to-creator paths.
+- Add brand promotion paths to explain campaign reach.
 
+Estimated Time: **10 minutes**
 
-## Task 1: Review the creator graph model
+### Business Scenario
 
-Perform the following set of steps to understand the graph model used for influence analysis.
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Marketing teams need to understand connected influence, not isolated creators. |
+| Technical Challenge | Multi-hop relationship questions become hard to maintain as normal joins grow. |
+| Persona Focus | A campaign planner wants to see which creators can carry a product or brand story to other audiences. |
+| Database Capability | Oracle Property Graph and SQL Property Graph Queries (SQL/PGQ) let `GRAPH_TABLE` query relationship paths in SQL. |
+| Outcome | Relationship evidence stays in the database and can be read as a path. |
 
-1. Review the related application screen before you run the SQL.
+<details>
+<summary><strong>Key terms: property graph</strong></summary>
+
+> - **Vertex**: One thing in the network, such as a creator, brand, product, or post. Multiple things are vertices.
+> - **Edge**: A relationship between vertices, such as a creator connection or a brand promotion.
+> - **Path**: A sequence of vertices and edges that answers a relationship question.
+
+</details>
+
+![Creator influence path analysis](images/retail-graph-investigation-flow.svg " ")
+
+*Figure 1: Property graph queries describe influence as paths and return table-shaped evidence.*
+
+## Task 1: Confirm the graph object
+
+1. Review the Creator Influence Network page.
 
     ![Creator Influence Network graph overview](images/creator-influence-network-overview.png " ")
 
-    *Figure 1: Creator Influence Network shows how creator relationships can amplify product and brand signals.*
+    *Figure 2: The visual graph helps business users see relationship paths. The SQL below queries those paths directly.*
 
-2. Understand the graph object.
+2. Run the graph inventory query.
 
-    The workshop defines one property graph named `INFLUENCER_NETWORK`. This graph turns retail relationships into a queryable network so teams can trace how creators, brands, products, and posts are connected.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    | Graph concept | Retail source tables | What they represent |
-    | --- | --- | --- |
-    | Vertices | `INFLUENCERS`, `BRANDS`, `PRODUCTS`, `SOCIAL_POSTS` | The things in the network: creators, brands, products, and posts. |
-    | Edges | `INFLUENCER_CONNECTIONS`, `BRAND_INFLUENCER_LINKS`, `POST_PRODUCT_MENTIONS` | The relationships between those things. |
-    {: title="Influencer Network Graph Sources"}
-
-    In relational form, those relationships live in normal tables with keys. In graph form, the same data can be queried as paths: creator to creator, creator to brand, post to product, or combinations of those relationships.
-
-    Conceptually, the graph definition tells Oracle which tables become vertices, which tables become edges, and which columns identify the endpoints of each edge. You do not need to recreate the graph in this short lab; the workshop seed has already created it so you can focus on the relationship question the business cares about.
-
-
-## Task 2: Traverse creator relationships with PQL-style patterns
-
-Perform the following set of steps to see why graph pattern matching is easier to read as relationship paths become longer.
-
-1. Compare one hop in SQL and graph pattern form.
-
-    Traditional SQL can find a direct creator-to-creator connection, but the business lesson is readability and scale: as influence paths grow longer, graph syntax stays closer to how teams actually describe the relationship question.
-
-    ```sql
-    -- Traditional SQL shape for one hop.
-    SELECT src.handle AS from_creator,
-           dst.handle AS to_creator,
-           c.connection_type,
-           c.strength
-    FROM influencers src
-    JOIN influencer_connections c
-      ON c.from_influencer = src.influencer_id
-    JOIN influencers dst
-      ON dst.influencer_id = c.to_influencer;
-    ```
-
-    The graph pattern says the same thing as a path: start at one influencer, follow one `connects_to` edge, and arrive at another influencer.
-
-    ```sql
-    -- Property graph pattern shape for one hop.
-    MATCH (src IS influencer) -[e IS connects_to]-> (dst IS influencer)
-    ```
-
-2. Notice what happens when you add a hop.
-
-    In traditional SQL, another hop means another relationship-table alias, another creator-table alias, and another join condition.
-
-    ```sql
-    -- Traditional SQL shape for two hops.
-    FROM influencers src
-    JOIN influencer_connections c1
-      ON c1.from_influencer = src.influencer_id
-    JOIN influencers mid
-      ON mid.influencer_id = c1.to_influencer
-    JOIN influencer_connections c2
-      ON c2.from_influencer = mid.influencer_id
-    JOIN influencers dst
-      ON dst.influencer_id = c2.to_influencer
-    ```
-
-    In the graph pattern, the path simply grows by one relationship segment.
-
-    ```sql
-    -- Property graph pattern shape for two hops.
-    MATCH (src IS influencer) -[e1 IS connects_to]-> (mid IS influencer) -[e2 IS connects_to]-> (dst IS influencer)
-    ```
-
-    That is the core advantage for this lab. The database still returns SQL rows, but the relationship logic is written as a path instead of a growing chain of self-joins. For a technical team, this can mean less query complexity as the business asks richer relationship questions. For a marketing team, it means the result is easier to explain as a path through the creator network.
-
-3. Run this one-hop traversal.
-
-    `GRAPH_TABLE` turns a graph pattern match into a relational result set. The `MATCH` clause describes the path. The `COLUMNS` clause chooses which properties from the matched vertices and edges should appear in the output table.
+    This query confirms that the property graph exists before you run path queries against it. `USER_PROPERTY_GRAPHS` is the catalog view for property graph objects in your schema, and the `WHERE` clause limits the check to `INFLUENCER_NETWORK`. A one-row result means the graph definition is available to query.
 
     ```sql
     <copy>
-    SELECT src_handle AS "From",
-           dst_handle AS "To",
+    SELECT graph_name AS "Graph"
+    FROM user_property_graphs
+    WHERE graph_name = 'INFLUENCER_NETWORK';
+    </copy>
+    ```
+
+    **Expected output: Property Graph Inventory**
+
+    | Graph |
+    | --- |
+    | INFLUENCER\_NETWORK |
+
+## Task 2: Traverse direct creator relationships
+
+1. Run the one-hop graph query.
+
+    This task is the graph equivalent of checking the relationship table before you ask a bigger business question. A campaign planner first needs to know whether the graph has direct creator-to-creator relationships and whether those relationships have useful attributes, such as link type and strength.
+
+    `GRAPH_TABLE` is not a stored business table. It is a SQL function that makes a property graph readable as table-shaped rows. That matters for beginners because it lets you use graph syntax to describe a path, then inspect the result with familiar SQL columns.
+
+    The `INFLUENCER_NETWORK` graph exists to organize relationship data that would be awkward to read as isolated rows. It connects creators, brands, products, and posts as vertices and edges. In this task, you focus on the simplest edge: one creator connected directly to another creator. If this result looks reasonable, the next task can safely add brand context on top of the same graph.
+
+    The pattern starts at one influencer, follows one `connects_to` edge, and reaches another influencer.
+
+    Read the graph pattern from left to right: `(src IS influencer)` is the starting creator, `-[e IS connects_to]->` is the relationship, and `(dst IS influencer)` is the reached creator. The `COLUMNS` block chooses which path details become table columns.
+
+    The aliases `AS from_creator` and `AS to_creator` make the relationship direction explicit. That prepares the result for graph pattern queries because you can see which creator starts the path and which creator is reached.
+
+    ```sql
+    <copy>
+    SELECT from_creator AS "From Creator",
+           to_creator AS "To Creator",
            connection_type AS "Link",
            strength AS "Strength"
     FROM GRAPH_TABLE ( influencer_network
       MATCH (src IS influencer) -[e IS connects_to]-> (dst IS influencer)
       COLUMNS (
-        src.handle AS src_handle,
-        dst.handle AS dst_handle,
+        src.handle AS from_creator,
+        dst.handle AS to_creator,
         e.connection_type AS connection_type,
         e.strength AS strength
       )
     )
-    ORDER BY strength DESC, src_handle, dst_handle
-    FETCH FIRST 10 ROWS ONLY;
+    ORDER BY strength DESC, from_creator, to_creator
+    FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: Creator Relationships**
 
-    | From | To | Link | Strength |
+    | From Creator | To Creator | Link | Strength |
     | --- | --- | --- | ---: |
-    | `@route_lily_295` | `@river_jace_382` | reshared | 1.0 |
+    | `@route_lily_295` | `@river_jace_382` | reshared | 1 |
     | `@climb_lily_455` | `@terrain_drew_202` | duet | 0.999 |
     | `@coach_dane_443` | `@fit_noah_239` | reshared | 0.999 |
     | `@coach_zoe_225` | `@alpine_mia_18` | mentioned | 0.999 |
-    | `@endurance_maya_221` | `@coach_zoe_160` | `inspired_by` | 0.999 |
-    | `@fit_noah_174` | `@stadium_ivy_343` | tagged | 0.999 |
-    | `@hike_max_148` | `@cycle_dane_150` | `inspired_by` | 0.999 |
-    | `@route_gus_122` | `@endurance_maya_289` | reshared | 0.999 |
-    | `@terrain_alex_420` | `@endurance_maya_91` | `inspired_by` | 0.999 |
-    | `@camp_owen_111` | `@camp_owen_369` | reshared | 0.998 |
-    {: title="Creator Relationships"}
+    | `@endurance_maya_221` | `@coach_zoe_160` | inspired_by | 0.999 |
 
-    The first row can be visualized as one creator node connected to another creator node through a single relationship edge.
+2. Each row is a direct relationship path. The business can use it to ask which creator relationship deserves follow-up and which audience may hear a campaign message next.
 
-    ![Diagram showing one creator connected to another creator through a reshared relationship](images/creator-one-hop-relationship.svg " ")
+## Task 3: Add brand context to the path
 
-    *Figure 2: A one-hop creator relationship path.*
+1. Run the brand propagation query.
 
-4. Interpret the one-hop result.
+    This pattern asks which creators promote a brand and which creators they can reach through one relationship. It is a compact way to express a multi-step influence question.
 
-    Each row is one direct path from a creator to another creator:
+    Read the graph pattern in three parts:
 
-    | Column | Meaning |
-    | --- | --- |
-    | From | The source creator in the path. |
-    | To | The creator reached by following one relationship. |
-    | Link | The kind of relationship, such as `reshared`, `duet`, `tagged`, `mentioned`, or `inspired_by`. |
-    | Strength | A workshop score for ranking the relationship. Higher values are stronger paths in this sample network. |
-    {: title="Creator Relationship Columns"}
-
-    A business user can read this as possible audience movement. A `reshared` link suggests amplification. A `duet` or `mentioned` link suggests content association. A strong direct link can identify creators who may carry a product or brand story into another audience.
-
-5. Run this brand propagation query.
-
-    Now add a brand to the path. The pattern asks: which creators promote a brand, and which other creators can they reach through one creator-to-creator relationship?
+    1. `(b IS brand) <-[p IS promotes]- (i IS influencer)` finds creators who promote a brand.
+    2. `(i IS influencer) -[c IS connects_to]-> (j IS influencer)` follows each promoter to a creator they can reach.
+    3. `SELECT DISTINCT` keeps the output focused on unique brand, promoter, reached-creator, and relationship combinations.
 
     ```sql
     <copy>
@@ -187,11 +139,11 @@ Perform the following set of steps to see why graph pattern matching is easier t
       )
     )
     ORDER BY brand_name, promoter, reached, relationship_type
-    FETCH FIRST 10 ROWS ONLY;
+    FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: Brand Reach Paths**
 
     | Brand | Promoter | Reached | Relationship |
     | --- | --- | --- | --- |
@@ -200,39 +152,12 @@ Perform the following set of steps to see why graph pattern matching is easier t
     | ApexRide | `@alpine_hope_381` | `@outdoor_kara_155` | organic |
     | ApexRide | `@alpine_hope_381` | `@run_finn_501` | organic |
     | ApexRide | `@alpine_mia_143` | `@alpine_hope_321` | affiliate |
-    | ApexRide | `@alpine_mia_143` | `@camp_faye_474` | affiliate |
-    | ApexRide | `@alpine_mia_143` | `@field_faye_319` | affiliate |
-    | ApexRide | `@alpine_mia_143` | `@field_owen_274` | affiliate |
-    | ApexRide | `@alpine_mia_143` | `@recovery_cole_422` | affiliate |
-    | ApexRide | `@alpine_mia_143` | `@recovery_cole_482` | affiliate |
-    {: title="Brand Paths"}
 
-6. Interpret the brand paths.
+2. The result matters because it connects brand activity to reachable creators. In retail terms, audience movement means a campaign can start with one promoter and reach adjacent creator communities through known relationships. The graph pattern keeps that movement readable even as the business question moves beyond one table or one join.
 
-    The result shows brand-connected creators and the creators they can directly reach. This matters because a brand partnership is not isolated to the creator who posted it. If that creator has strong network paths to other creators, the brand or product story may spread into adjacent communities.
-
-    Graph Studio, one of the tools included with Oracle Database, can visualize this kind of property graph path. This lab stays SQL-first, but the same relationship paths can also be explored visually in a graph tool. A visual view of the rows above would show the brand node connected to promoter creator nodes, and those promoter nodes connected to the creators they can reach.
-
-    ![Diagram showing ApexRide connected to promoter creators and reached creators](images/brand-propagation-graph-studio.svg " ")
-
-    *Figure 3: A visualization of brand propagation paths.*
-
-    For a merchandising or marketing team, this helps answer practical questions: which creators can amplify a product story, which brand relationships may have broader reach, and where follow-up campaigns might create the most network effect after **Lab 4** identifies a product or social trend worth watching.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
-## Learn More
-
-This lab gives you a retail sample of how property graphs make relationship questions easier to express and visualize. For a more complete hands-on lab, see [Build a Graph Database App with Oracle Property Graph](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
-
-For more background, review these Oracle resources:
-
-- [Property Graphs in Oracle Database 23ai: The SQL/PGQ Standard](https://blogs.oracle.com/database/post/property-graphs-in-oracle-database-23ai-the-sql-pgq-standard)
-- [New! Discover connections with SQL Property Graphs in Oracle Autonomous Database](https://blogs.oracle.com/database/post/sql-property-graphs-in-oracle-autonomous-database)
-- [Graph features in Oracle AI Database 26ai](https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/graph.html)
+    Next, you use location and inventory evidence to decide whether demand can be served from practical fulfillment centers.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Last Updated By/Date** - Oracle Database Product Management, July 2026

@@ -14,7 +14,7 @@
     },
     {
       "title": "Lab 1: Build E5 OCI Infrastructure with Ansible",
-      "description": "Use a bootstrap instance and Ansible to build the E5 OCI environment when one has not already been provided.",
+      "description": "Build the network, servers, storage, and access needed for the workshop.",
       "filename": "../../ansible-infrastructure/ansible-infrastructure.md"
     },
     {
