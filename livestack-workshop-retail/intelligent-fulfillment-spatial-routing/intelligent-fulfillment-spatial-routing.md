@@ -86,7 +86,7 @@ Estimated Time: **10 minutes**
 
     `CROSS JOIN` pairs the one selected customer with each active center. The distance function compares the two location points, `0.005` is the tolerance for the spatial calculation, and `'unit=MILE'` makes the result understandable for planners.
 
-    The expected output tells you the customer is in the Los Angeles operating area because the closest active center is `LA Mega Center` in Ontario, California, about 36 miles away. The nearby Nevada, Bay Area, Arizona, and Reno results also fit a Southern California starting point.
+    The expected output tells you the customer is in the Los Angeles operating area because the closest active center is `LA Mega Center` in Ontario, California, about 33 miles away. The nearby Nevada, Bay Area, Arizona, and Reno results also fit a Southern California starting point.
 
     ```sql
     <copy>
@@ -107,11 +107,11 @@ Estimated Time: **10 minutes**
 
     | Center | City | State | Miles |
     | --- | --- | --- | ---: |
-    | LA Mega Center | Ontario | California | 36.4 |
-    | Las Vegas West | North Las Vegas | Nevada | 231 |
-    | San Francisco Bay | Fremont | California | 316.6 |
-    | Phoenix Desert Hub | Goodyear | Arizona | 344 |
-    | Reno West Hub | Sparks | Nevada | 384.4 |
+    | LA Mega Center | Ontario | California | 33.2 |
+    | Las Vegas West | North Las Vegas | Nevada | 229 |
+    | San Francisco Bay | Fremont | California | 319.1 |
+    | Phoenix Desert Hub | Goodyear | Arizona | 340.9 |
+    | Reno West Hub | Sparks | Nevada | 385.7 |
 
 ## Task 3: Combine distance with inventory
 
@@ -156,11 +156,11 @@ Estimated Time: **10 minutes**
 
     | Center | City | State | Product | On Hand | Miles |
     | --- | --- | --- | --- | ---: | ---: |
-    | Phoenix Desert Hub | Goodyear | Arizona | StormRunner Trail Shell | 42 | 344 |
-    | Portland Pacific | Troutdale | Oregon | StormRunner Trail Shell | 160 | 819.5 |
-    | Seattle Pacific NW | Kent | Washington | StormRunner Trail Shell | 297 | 940.2 |
-    | San Antonio South TX | New Braunfels | Texas | StormRunner Trail Shell | 367 | 1220.6 |
-    | Kansas City Central | Edwardsville | Kansas | StormRunner Trail Shell | 119 | 1345.2 |
+    | LA Mega Center | Ontario | California | StormRunner Trail Shell | 393 | 33.2 |
+    | Las Vegas West | North Las Vegas | Nevada | StormRunner Trail Shell | 78 | 229 |
+    | Seattle Pacific NW | Kent | Washington | StormRunner Trail Shell | 293 | 941.4 |
+    | San Antonio South TX | New Braunfels | Texas | StormRunner Trail Shell | 267 | 1217.4 |
+    | Houston Gulf Coast | Missouri City | Texas | StormRunner Trail Shell | 446 | 1366.3 |
 
 2. This is the practical value of spatial data in a converged database. The same query can explain location, product, and inventory evidence without copying map data into another system.
 

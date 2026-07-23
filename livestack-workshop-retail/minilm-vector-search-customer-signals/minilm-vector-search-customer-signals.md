@@ -134,11 +134,11 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Best Distance |
     | --- | --- | ---: |
-    | CoachMic USB Microphone | Training Audio | 0.7549 |
-    | FieldCoach Training Tablet | Sports Tech | 0.762 |
-    | TrailRun Sport Earbuds | Sports Tech | 0.7946 |
-    | Expedition Power Bank | Sports Tech | 0.7988 |
-    | CoachView Curved Display | Training Tech | 0.8092 |
+    | CoachMic USB Microphone | Training Audio | 0.6852 |
+    | Expedition Power Bank | Sports Tech | 0.7042 |
+    | CoachView Curved Display | Training Tech | 0.7327 |
+    | DewPoint Hydration Spray | Outdoor Care | 0.7356 |
+    | Smart Grill Thermometer | Camp Cooking | 0.7401 |
 
 2. The result matters because the match is not limited to exact words. The database compares meaning, then returns normal SQL rows that can be joined to categories, orders, and inventory.
 
@@ -187,11 +187,11 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Best Distance |
     | --- | --- | ---: |
-    | TrailFlex Training Joggers | Athletic Apparel | 0.3108 |
-    | Cyber Mesh Sneakers | Footwear | 0.3463 |
-    | Marathon Elite Racer | Footwear | 0.3566 |
-    | StreetFlex Sneaker | Footwear | 0.3627 |
-    | Barefoot Minimalist Shoe | Footwear | 0.3772 |
+    | Marathon Elite Racer | Footwear | 0.347 |
+    | Barefoot Minimalist Shoe | Footwear | 0.3488 |
+    | Cyber Mesh Sneakers | Footwear | 0.3696 |
+    | TrailFlex Training Joggers | Athletic Apparel | 0.3861 |
+    | AllTerrain Hiking Boots | Outdoor | 0.3943 |
 
 2. Vector search becomes useful when the score is tied back to governed product and signal rows. A merchandising or operations team can follow the match into orders, categories, creator activity, or fulfillment planning.
 

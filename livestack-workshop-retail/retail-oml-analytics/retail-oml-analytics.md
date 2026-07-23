@@ -101,11 +101,11 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Posts | Avg Sentiment | Units Sold | Revenue | Label |
     | --- | --- | ---: | ---: | ---: | ---: | --- |
-    | UrbanDash Trainer | Footwear | 29 | 0.592 | 97 | 13094.03 | SURGE |
-    | TrailRun Sport Earbuds | Sports Tech | 28 | 0.531 | 84 | 16799.16 | SURGE |
-    | 4-Season Tent 3P | Outdoor | 27 | 0.552 | 112 | 61598.88 | SURGE |
-    | AirGlide Runner | Footwear | 27 | 0.614 | 114 | 17098.86 | SURGE |
-    | Trailhead Gear Clock | Outdoor Lifestyle | 27 | 0.546 | 91 | 1728.09 | SURGE |
+    | Locker Room Organizer Set | Outdoor Lifestyle | 33 | 0.528 | 92 | 3955.08 | SURGE |
+    | Trailhead Gear Clock | Outdoor Lifestyle | 32 | 0.6 | 121 | 4233.79 | SURGE |
+    | BlueShield Training Glasses | Sport Eyewear | 30 | 0.446 | 112 | 10078.88 | SURGE |
+    | PracticeStream Capture Card | Training Tech | 28 | 0.58 | 101 | 20198.99 | SURGE |
+    | Expedition Power Bank | Sports Tech | 27 | 0.567 | 95 | 17099.05 | SURGE |
 
 ## Task 3: Score demand surge rows
 
@@ -140,11 +140,11 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Actual Label | Predicted Label | Surge Probability | Posts | Units Sold |
     | --- | --- | --- | --- | ---: | ---: | ---: |
-    | UrbanDash Trainer | Footwear | SURGE | SURGE | 1 | 29 | 97 |
-    | DewPoint Hydration Spray | Outdoor Care | SURGE | SURGE | 1 | 16 | 99 |
-    | Titanium Trail Aviators | Sport Eyewear | SURGE | SURGE | 1 | 20 | 110 |
-    | RouteGuide AR Sport Glasses | Sports Wearables | SURGE | SURGE | 1 | 20 | 85 |
-    | RaceSim Performance GPU | Training Tech | SURGE | SURGE | 1 | 22 | 100 |
+    | RouteGuide AR Sport Glasses | Sports Wearables | SURGE | SURGE | 1 | 19 | 113 |
+    | ClipCoach Audio Pod | Sports Wearables | SURGE | SURGE | 1 | 20 | 98 |
+    | StormRunner Trail Shell | Athletic Apparel | SURGE | SURGE | 1 | 22 | 102 |
+    | 4-Season Tent 3P | Outdoor | SURGE | SURGE | 1 | 17 | 106 |
+    | CoachMic USB Microphone | Training Audio | SURGE | SURGE | 1 | 22 | 89 |
 
 2. The model result is useful because it stays connected to product, signal, and sales context. A planner can inspect why a row was scored and decide what operational follow-up makes sense.
 

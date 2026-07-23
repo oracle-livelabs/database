@@ -103,11 +103,11 @@ Estimated Time: **10 minutes**
 
     | From Creator | To Creator | Link | Strength |
     | --- | --- | --- | ---: |
-    | `@mountain_hope` | `@ridge_cleo` | follows | 1 |
-    | `@trailhead_marcus` | `@league_ruby` | tagged | 0.999 |
-    | `@ascent_hope` | `@pack_dev` | inspired_by | 0.998 |
-    | `@gearhub_hope` | `@pack_beau` | collaborates | 0.998 |
-    | `@recovery_tess` | `@basecamp_hope` | mentioned | 0.998 |
+    | `@route_lily_295` | `@river_jace_382` | reshared | 1 |
+    | `@climb_lily_455` | `@terrain_drew_202` | duet | 0.999 |
+    | `@coach_dane_443` | `@fit_noah_239` | reshared | 0.999 |
+    | `@coach_zoe_225` | `@alpine_mia_18` | mentioned | 0.999 |
+    | `@endurance_maya_221` | `@coach_zoe_160` | inspired_by | 0.999 |
 
 2. Each row is a direct relationship path. The business can use it to ask which creator relationship deserves follow-up and which audience may hear a campaign message next.
 
@@ -147,11 +147,11 @@ Estimated Time: **10 minutes**
 
     | Brand | Promoter | Reached | Relationship |
     | --- | --- | --- | --- |
-    | ApexRide | `@camp_vince` | `@alpine_luna` | organic |
-    | ApexRide | `@camp_vince` | `@boot_jen` | organic |
-    | ApexRide | `@camp_vince` | `@coach_ava` | organic |
-    | ApexRide | `@camp_vince` | `@matchday_tess` | organic |
-    | ApexRide | `@camp_vince` | `@recovery_ella` | organic |
+    | ApexRide | `@alpine_hope_381` | `@gear_mia_238` | organic |
+    | ApexRide | `@alpine_hope_381` | `@gear_mia_436` | organic |
+    | ApexRide | `@alpine_hope_381` | `@outdoor_kara_155` | organic |
+    | ApexRide | `@alpine_hope_381` | `@run_finn_501` | organic |
+    | ApexRide | `@alpine_mia_143` | `@alpine_hope_321` | affiliate |
 
 2. The result matters because it connects brand activity to reachable creators. In retail terms, audience movement means a campaign can start with one promoter and reach adjacent creator communities through known relationships. The graph pattern keeps that movement readable even as the business question moves beyond one table or one join.
 
