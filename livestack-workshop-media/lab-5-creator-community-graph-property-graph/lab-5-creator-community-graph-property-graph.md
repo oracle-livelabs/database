@@ -144,9 +144,9 @@ Finally, connect relationships to media business context.
 
     | Creator Handle | Creator Name | Platform | Studio Or Label | Relationship Type | Creator Edge Count | Avg Relationship Strength |
     | --- | --- | --- | --- | --- | --- | --- |
+    | @sports-media\_077 | Trust and Safety 077 | tiktok | ArcLight Originals | ambassador | 7 | 0.69 |
+    | @docu\_011 | Documentary Forums 011 | instagram | SoundStage Live | competitor\_mention | 7 | 0.69 |
     | @docu\_011 | Documentary Forums 011 | instagram | BetaRealm Studios | ambassador | 7 | 0.69 |
-    | @sports-media\_077 | Trust and Safety 077 | tiktok | OrbitPlay Studios | sponsored | 7 | 0.69 |
-    | @sports-media\_077 | Trust and Safety 077 | tiktok | Metro Fandom Lab | affiliate | 7 | 0.69 |
 
 2. Use the result for campaign planning.
     The result connects graph relationship evidence to campaign planning context: creator, platform, studio or label, and relationship strength. That connection helps media teams act on influence evidence without losing governance.
