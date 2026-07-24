@@ -158,7 +158,7 @@ The next query shows the scale of the media scenario behind the application page
     | Audience signals | 5000 |
     | Campaign orders | 3000 |
     | Creators | 483 |
-    | Creator relationships | At least one row |
+    | Creator relationships | 3008 |
     | Distribution hubs | 30 |
     | Demand regions | 20 |
 

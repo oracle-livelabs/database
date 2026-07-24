@@ -87,7 +87,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     | Campaign Requests | Tracked Revenue | High Momentum Signals | Launch Demand Alerts |
     | --- | --- | --- | --- |
-    | 3000 | Greater than 0 | At least one row | 187 |
+    | 3000 | 854515722 | 169 | 187 |
 
 2. Interpret the result.
     The query compresses the current media operating picture into the headline measures a leader would scan first: campaign volume, tracked revenue, high-momentum signals, and content assets with launch demand alerts. These values explain the top row of the dashboard without requiring a separate reporting store.
