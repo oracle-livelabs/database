@@ -157,6 +157,10 @@ Estimated Time: **10 minutes**
 
     Next, you use location and inventory evidence to decide whether demand can be served from practical fulfillment centers.
 
+## Next Steps
+
+Congratulations on completing the property graph lab. You used graph queries to move from a brand or promoter to connected creator evidence and related campaign relationships. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager

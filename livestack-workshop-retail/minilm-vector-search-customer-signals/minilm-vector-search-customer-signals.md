@@ -199,6 +199,10 @@ Estimated Time: **10 minutes**
 
     Next, you follow the creator relationships behind those signals to understand how campaign influence can move through a network.
 
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched retail product and customer-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
