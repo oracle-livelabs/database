@@ -1,8 +1,8 @@
 -- PREFLIGHT (Lab 1): validates every dependency of Labs 2-8. Read-only.
 SELECT 'SQL worksheet connected as ' || USER AS check_1 FROM dual;
 
-SELECT 'ONNX model present: ' ||
-       NVL(MAX(model_name), '*** MISSING - tell a proctor ***') AS check_2
+SELECT 'Embedding model: ' ||
+       NVL(MAX(model_name), 'not loaded yet - Lab 7 loads it') AS check_2
 FROM   user_mining_models
 WHERE  model_name = 'MENU_MODEL';
 

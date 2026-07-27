@@ -32,7 +32,7 @@ Estimated Lab Time: 9 minutes
     </copy>
     ```
 
-    **What you should see:** `MENU_MODEL`, then the column added, then 6 rows updated. No embedding service, no API key, no copy pipeline — the vector is generated where the row already lives. (If `MENU_MODEL` is missing and the Lab 7 background load hasn't finished, `scripts/07_vector_fallback.sql` ships precomputed vectors for every item *and* every query string in this lab.)
+    **What you should see:** `MENU_MODEL` (loaded in Lab 7), then the column added, then 6 rows updated. No embedding service, no API key, no copy pipeline — the vector is generated where the row already lives. (If `MENU_MODEL` is missing, re-run `scripts/06_model_bg_reload.sql` from Lab 7; `scripts/07_vector_fallback.sql` ships precomputed vectors as a last resort.)
 
 ## Task 2: Search by Meaning
 

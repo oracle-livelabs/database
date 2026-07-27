@@ -16,26 +16,29 @@ Estimated Lab Time: 7 minutes
 
 ## Task 1: Orders as Native Documents
 
-1. In the **SQL worksheet** — warm up Lab 8 first (background, non-blocking; continue immediately), then create the collection:
+1. First, start the embedding model loading — Lab 8 needs it, and doing it now means it is ready by the time you get there. In the **SQL worksheet**, paste and run `scripts/06_model_bg_reload.sql` as a script.
+
+    It downloads Oracle's augmented MiniLM ONNX model directly into the database and loads it as `MENU_MODEL`. Nothing is downloaded to your laptop, and no embedding service or API key is involved. If your environment already has the model, the script says so and does nothing.
+
+    **What you should see:** `MENU_MODEL loaded.` (or `already present`), then a row showing `MENU_MODEL`. It takes about a minute.
+
+2. Now create the collection that will hold orders:
 
     ```
     <copy>
-    @scripts/06_model_bg_reload.sql
     CREATE JSON COLLECTION TABLE "orders";
     </copy>
     ```
 
-    (If your worksheet doesn't support `@`, paste `scripts/06_model_bg_reload.sql` yourself — it is a no-op when the `MENU_MODEL` is already loaded, which the preflight confirmed.)
-
     Quoted lowercase again — so `db.orders` in mongosh binds to **this** table, not a second accidental collection. Two worlds, one namespace.
 
-2. In **mongosh**, seed 40 orders (also in `scripts/06_orders_seed.mongo.js`) — the script builds them deterministically, heavily co-ordering the Classic Cheeseburger with French Fries, line items snapshotting the current 1499 price:
+3. In **mongosh**, seed 40 orders (also in `scripts/06_orders_seed.mongo.js`) — the script builds them deterministically, heavily co-ordering the Classic Cheeseburger with French Fries, line items snapshotting the current 1499 price:
 
     Paste the whole of `scripts/06_orders_seed.mongo.js` into mongosh.
 
     **What you should see:** `insertedCount: 40` (as `acknowledged: true` with 40 ids, `ord_8001`–`ord_8040`).
 
-3. Entry gate, from **SQL**:
+4. Entry gate, from **SQL**:
 
     ```
     <copy>

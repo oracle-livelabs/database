@@ -2,34 +2,116 @@
 
 ## Introduction
 
-You start from an **empty** Autonomous AI Database. In this lab you open the two tools you will use all session, connect standard MongoDB tooling to Oracle, and run a preflight that validates every dependency of every later lab — so any problem surfaces now, not during the finale.
+You start from an **empty** Autonomous AI Database. In this lab you open the two tools you will use all session — the **SQL worksheet** in Database Actions and **Cloud Shell** with the MongoDB shell — and run a preflight that checks every dependency of every later lab, so problems surface now rather than during the finale.
 
-Workspace convention for the whole session: **Cloud Shell (mongosh) in one browser tab, Database Actions (SQL worksheet) in another** — switches should be glances, not tab hunts.
+Workspace convention for the whole session: **Cloud Shell (mongosh) in one browser tab, Database Actions (SQL worksheet) in another** — switching should be a glance, not a tab hunt.
 
-Estimated Lab Time: 5 minutes (runs during the instructor introduction in a live session)
+Estimated Lab Time: 10 minutes
 
 ### Objectives
 
-* Open Database Actions and the SQL worksheet as your schema user
-* Open OCI Cloud Shell and connect `mongosh` to your database's MongoDB API endpoint
-* Run the preflight and see five green PASS lines
+In this lab, you will:
+
+* Navigate the OCI console to your database and open the SQL worksheet
+* Open Cloud Shell and install the MongoDB shell (`mongosh`)
+* Connect `mongosh` to your database's MongoDB API endpoint
+* Run the preflight and confirm you are at the starting line
 
 ### Prerequisites
 
-* A running Autonomous AI Database with the MongoDB API enabled (the LiveLabs sandbox provides this; own-tenancy users run the setup kit in the workshop README first)
-* Your database username and password from the reservation page
+* An Autonomous AI Database with the MongoDB API enabled
+  * **LiveLabs sandbox:** provisioned for you — your username, password, and compartment are on the reservation page ("View Login Info")
+  * **Your own tenancy / Free Trial:** the instance you created in the previous lab
 
-## Task 1: Open Database Actions
+## Task 1: Open Database Actions and the SQL Worksheet
 
-1. From your reservation page (or the OCI console: your database → **Database Actions**), open **Database Actions** and sign in as your schema user.
+1. Sign in to the **Oracle Cloud Console** (`cloud.oracle.com`).
 
-2. Open the **SQL** worksheet. Leave this tab open for the whole session — it is your relational door.
+    * **LiveLabs sandbox:** use the username and password from your reservation page. You will be prompted to change the password on first sign-in.
+    * **Your own tenancy:** sign in as usual.
 
-## Task 2: Connect mongosh in Cloud Shell
+2. Check your **region** in the top-right corner of the console. It must match the region your database was created in — for a LiveLabs sandbox, the region shown on your reservation page.
 
-1. Open **Cloud Shell** from the OCI console header (`>_` icon). `mongosh` is preinstalled.
+    ![Region selector in the upper-right corner of the console](images/region.png " ")
 
-2. Build your connection string: copy your database's MongoDB API URL from **Database Actions → Related Services → Oracle Database API for MongoDB**, then substitute your username and password. It looks like this (one line):
+3. Click the **navigation menu** in the upper-left corner, choose **Oracle AI Database**, then **Autonomous AI Database**.
+
+4. Set the **compartment** in the left-hand *List scope* panel — this is the step most people miss, and an empty list is almost always the wrong compartment:
+
+    * **LiveLabs sandbox:** choose the compartment named on your reservation page (it looks like `LL#####-COMPARTMENT`).
+
+        ![LiveLabs compartment selection](images/livelabs-compartment.png " ")
+
+    * **Your own tenancy:** choose the compartment you created the database in.
+
+        ![Compartment picker in the List scope panel](images/compartments.png " ")
+
+5. Click the **display name** of your database to open its details page.
+
+    ![Database display name in the list](images/database-name.png " ")
+
+6. Click the **Database actions** button, then choose **SQL**.
+
+    ![Database actions button on the database details page](images/dbactions-button.png " ")
+
+    ![Choosing SQL from the Database actions menu](images/dbactions-menu-sql.png " ")
+
+    **What you should see:** the SQL worksheet, with your username shown at the top right. Leave this browser tab open for the whole workshop — it is your relational door.
+
+    > If you are asked to sign in again, use your **database** username and password (the LiveLabs sandbox reservation page lists them), not your cloud account.
+
+## Task 2: Open Cloud Shell and Install the MongoDB Shell
+
+`mongosh` is MongoDB's own shell. It is **not** preinstalled in Cloud Shell, so you will install it into your home directory — no admin rights, no software on your laptop, about a minute.
+
+> **NOTE:** MongoDB Shell is a tool provided by MongoDB Inc. Oracle is not associated with MongoDB Inc. and has no control over the software. These instructions are provided to help you learn about the Oracle Database API for MongoDB. Download links may change without notice — see [the MongoDB download page](https://www.mongodb.com/try/download/shell) for current versions.
+
+1. In the console header (top-right, next to the notification bell), click the **Developer tools** icon — the one that looks like `>_` — and choose **Cloud Shell**. A terminal panel opens at the bottom of the browser.
+
+2. Download and unpack the MongoDB shell, then put it on your `PATH`:
+
+    ```
+    <copy>
+    cd ~
+    curl -LO https://downloads.mongodb.com/compass/mongosh-2.3.8-linux-x64.tgz
+    tar xzf mongosh-2.3.8-linux-x64.tgz
+    export PATH=~/mongosh-2.3.8-linux-x64/bin:$PATH
+    mongosh --version
+    </copy>
+    ```
+
+    **What you should see:** `2.3.8` printed by the last command.
+
+    > The `export PATH` line lasts for this Cloud Shell session. If your session restarts, run it again — or append it to `~/.bashrc` to make it permanent.
+
+## Task 3: Connect mongosh to Your Database
+
+1. Get your MongoDB API URL. Go back to the browser tab with your **database details page**, open the **Tool configuration** tab, and find **Oracle Database API for MongoDB**. Click **Copy** next to its access URL.
+
+    The URL looks like this — note the two placeholders it arrives with:
+
+    ```
+    mongodb://[user:password@]HOST.adb.REGION.oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true
+    ```
+
+2. Edit the URL in a text editor before using it:
+
+    * Replace `[user:password@]` with your database username and password, e.g. `RESTO:MyPassword123@`
+    * Replace `[user]` in the middle with the same username, e.g. `RESTO`
+    * Remove the square brackets entirely
+
+    **IMPORTANT:** if your password contains any of the characters `/ : ? # [ ] @`, URL-encode them:
+
+    | Character | Encode as |
+    | :---: | :---: |
+    | `/` | `%2F` |
+    | `:` | `%3A` |
+    | `#` | `%23` |
+    | `[` | `%5B` |
+    | `]` | `%5D` |
+    | `@` | `%40` |
+
+3. In **Cloud Shell**, run `mongosh` with your edited URL in **single quotes**:
 
     ```
     <copy>
@@ -37,21 +119,20 @@ Estimated Lab Time: 5 minutes (runs during the instructor introduction in a live
     </copy>
     ```
 
-    Replace `USERNAME`, `PASSWORD`, and the host with your values. If your password contains special characters, URL-encode them.
+    **What you should see:** a `mongosh` prompt showing your schema name. Unchanged MongoDB tooling, Oracle endpoint — that is the point of this entire workshop.
 
-3. You should land at a `mongosh` prompt showing your schema name. Unchanged Mongo tooling, Oracle endpoint — that is the point of the whole session.
+    > If the connection hangs or is refused, the usual cause is the database's network access list. Ask a proctor now rather than in Lab 5.
 
-## Task 3: Run the Preflight
+## Task 4: Run the Preflight
 
-1. In the **SQL worksheet**, paste and run the SQL preflight (also in `scripts/00_preflight.sql`):
+1. In the **SQL worksheet**, paste and run this preflight as a script (also in `scripts/00_preflight.sql`):
 
     ```
     <copy>
-    -- PREFLIGHT: validates every dependency of Labs 2-8
     SELECT 'SQL worksheet connected as ' || USER AS check_1 FROM dual;
 
-    SELECT 'ONNX model present: ' ||
-           NVL(MAX(model_name), '*** MISSING - tell a proctor ***') AS check_2
+    SELECT 'Embedding model: ' ||
+           NVL(MAX(model_name), 'not loaded yet - Lab 7 loads it') AS check_2
     FROM   user_mining_models
     WHERE  model_name = 'MENU_MODEL';
 
@@ -63,9 +144,9 @@ Estimated Lab Time: 5 minutes (runs during the instructor introduction in a live
     </copy>
     ```
 
-    **What you should see:** your username, `ONNX model present: MENU_MODEL`, and `Application tables: 0`. The `DM$%` filter matters — the pre-loaded embedding model keeps system backing tables that are *supposed* to be there.
+    **What you should see:** your username, an embedding-model line (either `MENU_MODEL` if your environment already has it, or `not loaded yet` — both are fine, Lab 7 loads it), and `Application tables: 0`.
 
-2. In **mongosh**, run the non-destructive connectivity check (also in `scripts/00_preflight_mongo.js`):
+2. In **mongosh**, run the connectivity check (also in `scripts/00_preflight_mongo.js`):
 
     ```
     <copy>
@@ -73,9 +154,9 @@ Estimated Lab Time: 5 minutes (runs during the instructor introduction in a live
     </copy>
     ```
 
-    **What you should see:** `{ ok: 1 }`. If this fails, the usual cause is the database's network access list — call a proctor now, not in Lab 5.
+    **What you should see:** `{ ok: 1 }`.
 
-3. In mongosh, confirm the schema is empty:
+3. Still in mongosh, confirm the schema is empty:
 
     ```
     <copy>
@@ -83,11 +164,13 @@ Estimated Lab Time: 5 minutes (runs during the instructor introduction in a live
     </copy>
     ```
 
-    **What you should see:** nothing. An empty database, two open doors. You are ready.
+    **What you should see:** nothing at all. An empty database, two open doors. You are ready.
 
 ## Learn More
 
-* [Oracle Database API for MongoDB — connection strings](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/)
+* [Oracle Database API for MongoDB documentation](https://docs.oracle.com/en/database/oracle/mongodb-api/)
+* [Using Oracle Cloud Infrastructure Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
+* [MongoDB Shell downloads](https://www.mongodb.com/try/download/shell)
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
