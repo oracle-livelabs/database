@@ -6,8 +6,11 @@ SELECT 'Embedding model: ' ||
 FROM   user_mining_models
 WHERE  model_name = 'MENU_MODEL';
 
-SELECT 'Application tables: ' || COUNT(*) ||
-       ' (expected 0 - you are at the starting line)' AS check_3
+-- Informational, not an assertion: some sandboxes hand out a schema that
+-- already holds objects. Labs 4-8 create their own tables with DROP ... IF
+-- EXISTS guards, so a non-zero count here is not a problem.
+SELECT 'Workshop tables already present: ' || COUNT(*) ||
+       ' of 8 (a fresh schema shows 0)' AS check_3
 FROM   user_tables
-WHERE  table_name NOT LIKE 'DM$%'
-AND    table_name NOT LIKE 'SYS_%';
+WHERE  table_name IN ('STORE','MENU','CATEGORY','ITEM','EXTRA',
+                      'ITEM_OPTION','ITEM_SPECIAL_HOURS','ITEM_OVERRIDE');

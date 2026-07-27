@@ -1,7 +1,9 @@
 -- Lab 5: the duality views, with explicit updatability annotations.
 -- Duality views are READ-ONLY BY DEFAULT - granting writes per table IS the
--- governance posture. Quoted-lowercase names so mongosh's db.store_menu_dv /
--- db.location_item_dv bind exactly (Mongo collection names are case-sensitive).
+-- governance posture. Names are quoted-lowercase by CONVENTION, not necessity:
+-- Oracle auto-creates an opposite-case synonym, so db.store_menu_dv would find
+-- an unquoted STORE_MENU_DV too. Matching the case keeps the SQL you read and
+-- the name you type in mongosh identical.
 
 CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "store_menu_dv" AS
 store @insert @update @delete

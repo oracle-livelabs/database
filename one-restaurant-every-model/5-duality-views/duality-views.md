@@ -16,7 +16,7 @@ Estimated Lab Time: 11 minutes
 
 ## Task 1: Create the Views (SQL — one paste)
 
-1. In the **SQL worksheet**, run `scripts/04_duality_views.sql` as a script. It creates both views with explicit updatability annotations — duality views are **read-only by default**; you grant writes per table, which *is* the governance posture — and REST-enables the first view. The core of it:
+1. In the **SQL worksheet**, paste this and run it as a script (also in `scripts/04_duality_views.sql`). It creates both views with explicit updatability annotations — duality views are **read-only by default**; you grant writes per table, which *is* the governance posture — and REST-enables the first view.
 
     ```
     <copy>
@@ -73,10 +73,14 @@ Estimated Lab Time: 11 minutes
       ORDS.ENABLE_OBJECT(p_object => 'store_menu_dv', p_object_type => 'VIEW');
     END;
     /
+
+    SELECT (SELECT COUNT(*) FROM "store_menu_dv")    AS store_docs,
+           (SELECT COUNT(*) FROM "location_item_dv") AS item_docs
+    FROM   dual;
     </copy>
     ```
 
-    **What you should see:** both views created, PL/SQL procedure completed.
+    **What you should see:** both views created, PL/SQL procedure completed, and the state check returning `STORE_DOCS 5, ITEM_DOCS 6`.
 
     > **Shape note (validated live):** the 1:1 `override` child projects as a **one-element array** in the duality document on current Autonomous Database — write it via the `override.0.…` path. Whether a 1:1 child projects as a singleton object or a one-element array is version-dependent; the build-phase rehearsal pins it for the target image.
 
@@ -92,7 +96,7 @@ Estimated Lab Time: 11 minutes
     </copy>
     ```
 
-    **What you should see:** **a document, not `null`** — Burger Palace, same nesting you built by hand in Lab 2 (items keyed `_id` per duality convention, plus a `_metadata` block with an `etag`). If you get `null`, the view name case doesn't match — call a proctor; the views must be created quoted-lowercase.
+    **What you should see:** **a document, not `null`** — Burger Palace, same nesting you built by hand in Lab 2 (items keyed `_id` per duality convention, plus a `_metadata` block with an `etag`). If you get `null`, the views did not get created — go back to Task 1 and check the script ran clean.
 
     The difference from Lab 2: this document is **assembled live from the canonical rows**. It is not a copy of anything. *Documents that ARE the relational data.*
 
@@ -124,7 +128,7 @@ Estimated Lab Time: 11 minutes
 
 ## Task 4: Governance the Engine Enforces (mongosh — one script)
 
-1. Run the four probes in `scripts/04_governance_tests.mongo.js` (paste as one block):
+1. Paste these probes into **mongosh** as one block (also in `scripts/04_governance_tests.mongo.js`):
 
     ```
     <copy>
@@ -188,7 +192,42 @@ Estimated Lab Time: 11 minutes
 
 ### Stretch (fast finishers): the read-only computed view
 
-Run `scripts/04_pos_menu_v.sql` — the deck's *read-only* POS menu view with `COALESCE` override resolution and a time-window filter pinned to 13:00 so everyone sees the Lunch menu regardless of timezone. It teaches the distinction this room always asks about: **updatable duality views map 1:1; read-only views compute, filter, and COALESCE freely** — that's the trade for updatability.
+The deck's *read-only* POS menu view: `COALESCE` override resolution and a time-window filter pinned to 13:00, so everyone sees the Lunch menu regardless of conference timezone. Paste it into the **SQL worksheet** (also in `scripts/04_pos_menu_v.sql`):
+
+```
+<copy>
+CREATE OR REPLACE VIEW pos_menu_v AS
+SELECT JSON {
+         '_id'  : s.store_id,
+         'name' : s.merchant_name,
+         'menu' : ( SELECT JSON {
+                      '_id'   : m.menu_id,
+                      'name'  : m.menu_name,
+                      'items' : [ SELECT JSON {
+                                    '_id'    : i.item_id,
+                                    'name'   : COALESCE(ov.override_name, i.item_name),
+                                    'active' : COALESCE(ov.override_active, i.active),
+                                    'price'  : i.price }
+                                  FROM item i
+                                  LEFT JOIN item_override ov
+                                         ON ov.item_id = i.item_id
+                                        AND ov.store_id = s.store_id
+                                  JOIN category c ON c.category_id = i.category_id
+                                  WHERE c.menu_id = m.menu_id ]
+                    }
+                    FROM menu m
+                    WHERE m.store_id = s.store_id
+                    AND   m.active
+                    AND   '13:00' BETWEEN m.start_time AND m.end_time )
+       } AS json_doc
+FROM   store s;
+
+SELECT json_serialize(p.json_doc PRETTY) FROM pos_menu_v p
+WHERE  json_value(p.json_doc, '$._id') = 's_100';
+</copy>
+```
+
+**What you should see:** Burger Palace's lunch menu with the item named **Lunch Classic Special** — the override resolved by `COALESCE`, computed at read time. This teaches the distinction this room always asks about: **updatable duality views map 1:1; read-only views compute, filter, and COALESCE freely** — that's the trade for updatability.
 
 ## Learn More
 

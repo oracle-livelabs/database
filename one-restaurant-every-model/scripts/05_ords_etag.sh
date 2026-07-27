@@ -13,7 +13,7 @@ ETAG=$(curl -s -u "$ORDS_USER:$ORDS_PASS" -o /tmp/doc.json -w '%header{etag}' "$
 echo "step 1: GET 200, etag=$ETAG"
 
 # 2. Edit only the override-owned field with jq, PUT with If-Match -> 200 OK
-jq '(.menus[0].categories[0].items[0].name) as $n | .' /tmp/doc.json > /tmp/doc_orig.json
+jq '.' /tmp/doc.json > /tmp/doc_orig.json
 jq 'del(._metadata) | .name = "Burger Palace"' /tmp/doc.json > /tmp/doc_edit.json
 CODE=$(curl -s -o /tmp/put1.json -w '%{http_code}' -u "$ORDS_USER:$ORDS_PASS" \
   -X PUT -H "Content-Type: application/json" -H "If-Match: \"$ETAG\"" \

@@ -16,7 +16,7 @@ Estimated Lab Time: 5 minutes
 
 ## Task 1: Set Your Connection Variables
 
-1. In **Cloud Shell**, export your ORDS endpoint and credentials (the `helper_commands.sql` script in the pack prints these three lines fully substituted for your instance):
+1. In **Cloud Shell**, export your ORDS endpoint and credentials. The host is the same one you used for the REST read in Lab 5 — substitute your own values:
 
     ```
     <copy>
@@ -28,18 +28,47 @@ Estimated Lab Time: 5 minutes
 
 ## Task 2: Run the Choreography
 
-1. Run the script (also in `scripts/05_ords_etag.sh`):
+1. Paste the whole block into **Cloud Shell** (also in `scripts/05_ords_etag.sh`). It does four things, printing each step — no hand-edited JSON, no copy-pasted etag strings:
 
     ```
     <copy>
-    bash scripts/05_ords_etag.sh
+    set -euo pipefail
+    DOC_URL="$ORDS_BASE/store_menu_dv/s_100"
+
+    # 1. GET the document; capture body and etag (HTTP/2-safe: %header{} ignores case).
+    #    Strip the header's own quotes - If-Match must carry EXACTLY one quoted hex
+    #    string, or the engine raises ORA-42626 (validated live on ADB).
+    ETAG=$(curl -s -u "$ORDS_USER:$ORDS_PASS" -o /tmp/doc.json -w '%header{etag}' "$DOC_URL" | tr -d '"')
+    echo "step 1: GET 200, etag=$ETAG"
+
+    # 2. Edit only the location-owned override name with jq, PUT with If-Match -> 200 OK
+    jq '.' /tmp/doc.json > /tmp/doc_orig.json
+    jq 'del(._metadata) | .name = "Burger Palace"' /tmp/doc.json > /tmp/doc_edit.json
+    CODE=$(curl -s -o /tmp/put1.json -w '%{http_code}' -u "$ORDS_USER:$ORDS_PASS" \
+      -X PUT -H "Content-Type: application/json" -H "If-Match: \"$ETAG\"" \
+      --data @/tmp/doc_edit.json "$DOC_URL")
+    echo "step 2: conditional PUT -> $CODE (expect 200)"
+
+    # 3. Replay the PUT with the now-stale etag -> 412 Precondition Failed
+    CODE=$(curl -s -o /tmp/put2.json -w '%{http_code}' -u "$ORDS_USER:$ORDS_PASS" \
+      -X PUT -H "Content-Type: application/json" -H "If-Match: \"$ETAG\"" \
+      --data @/tmp/doc_edit.json "$DOC_URL")
+    echo "step 3: stale PUT -> $CODE (expect 412 - the engine refused the stale write)"
+
+    # 4. Revert: re-GET (fresh etag) and PUT the original body back
+    ETAG=$(curl -s -u "$ORDS_USER:$ORDS_PASS" -o /dev/null -w '%header{etag}' "$DOC_URL" | tr -d '"')
+    jq 'del(._metadata)' /tmp/doc_orig.json > /tmp/doc_revert.json
+    CODE=$(curl -s -o /dev/null -w '%{http_code}' -u "$ORDS_USER:$ORDS_PASS" \
+      -X PUT -H "Content-Type: application/json" -H "If-Match: \"$ETAG\"" \
+      --data @/tmp/doc_revert.json "$DOC_URL")
+    echo "step 4: reverted -> $CODE (canonical state restored)"
     </copy>
     ```
 
-    The script does four things, printing each step — no hand-edited JSON, no copy-pasted etag strings:
+    Read what just happened, step by step:
 
     1. `GET` the `s_100` document, capturing the body to a file and the etag with `curl -w '%header{etag}'` (HTTP/2 header names are lowercase; this extraction doesn't care).
-    2. Edit **only** the location-owned override name with a `jq` one-liner, `PUT` with `If-Match: <etag>` → **200 OK**.
+    2. Edit the document with a `jq` one-liner and `PUT` it with `If-Match: <etag>` → **200 OK**.
     3. Repeat the `PUT` with the now-stale etag → **412 Precondition Failed**. Nobody held a lock; the engine simply refused a write based on stale state. Your conflict-resolution policy ("refresh, reapply, retry") is app code — the *detection* never is.
     4. **Revert** the edit, restoring the canonical state the later labs expect.
 

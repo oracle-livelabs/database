@@ -66,7 +66,13 @@ In this lab, you will:
 
 > **NOTE:** MongoDB Shell is a tool provided by MongoDB Inc. Oracle is not associated with MongoDB Inc. and has no control over the software. These instructions are provided to help you learn about the Oracle Database API for MongoDB. Download links may change without notice — see [the MongoDB download page](https://www.mongodb.com/try/download/shell) for current versions.
 
-1. In the console header (top-right, next to the notification bell), click the **Developer tools** icon — the one that looks like `>_` — and choose **Cloud Shell**. A terminal panel opens at the bottom of the browser.
+1. In the console header (top-right, between the region name and the notification bell), click the **Developer tools** icon — a small terminal glyph — and choose **Cloud Shell** from the menu that drops down. A terminal panel opens across the bottom of the browser window.
+
+    ![Developer tools icon in the console header, with Cloud Shell in the drop-down menu](images/cloud-shell-menu.png " ")
+
+    **What you should see:** a black terminal panel, then a `username@cloudshell:~ (region)$` prompt after a few seconds. The first launch in a tenancy can take a minute while the machine is created.
+
+    > **If the panel says "Policy missing" or sits on "Creating your Oracle Cloud Shell machine…":** Cloud Shell must be enabled for your tenancy, and your Cloud Shell session region must match the region you are working in (check the region name in the panel's header bar). On a LiveLabs sandbox, tell a proctor. Everything in this workshop that uses `mongosh` can also be driven from a `mongosh` installed on your own laptop against the same endpoint.
 
 2. Download and unpack the MongoDB shell, then put it on your `PATH`:
 
@@ -136,15 +142,15 @@ In this lab, you will:
     FROM   user_mining_models
     WHERE  model_name = 'MENU_MODEL';
 
-    SELECT 'Application tables: ' || COUNT(*) ||
-           ' (expected 0 - you are at the starting line)' AS check_3
+    SELECT 'Workshop tables already present: ' || COUNT(*) ||
+           ' of 8 (a fresh schema shows 0)' AS check_3
     FROM   user_tables
-    WHERE  table_name NOT LIKE 'DM$%'
-    AND    table_name NOT LIKE 'SYS_%';
+    WHERE  table_name IN ('STORE','MENU','CATEGORY','ITEM','EXTRA',
+                          'ITEM_OPTION','ITEM_SPECIAL_HOURS','ITEM_OVERRIDE');
     </copy>
     ```
 
-    **What you should see:** your username, an embedding-model line (either `MENU_MODEL` if your environment already has it, or `not loaded yet` — both are fine, Lab 7 loads it), and `Application tables: 0`.
+    **What you should see:** your username, an embedding-model line (either `MENU_MODEL` if your environment already has it, or `not loaded yet` — both are fine, Lab 7 loads it), and a table count. A fresh schema shows `0`; if yours shows more, you are re-running the workshop and every script below drops and recreates what it needs.
 
 2. In **mongosh**, run the connectivity check (also in `scripts/00_preflight_mongo.js`):
 

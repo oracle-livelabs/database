@@ -26,7 +26,9 @@ Estimated Lab Time: 11 minutes
 
     **What you should see:** your five store names. Same bytes your Mongo shell wrote. No export, no import, no pipeline.
 
-    > **The namespace lesson (once, now):** collections created through the MongoDB API are **case-sensitive**, so in SQL you address them as quoted identifiers — `"stores"`, not `stores`. Two worlds, one namespace. Every shared object in this workshop uses quoted lowercase names for exactly this reason.
+    > **The namespace lesson (once, now):** MongoDB collection names are case-sensitive; SQL identifiers are folded to upper case unless you quote them. Those two rules should collide — and Oracle resolves the collision for you. When the MongoDB API creates the collection `stores`, the database creates a table named `stores` **and** an `STORES` synonym pointing at it; create `ORDERS` from SQL and you get an `orders` synonym for free. So `"stores"`, `stores`, `STORES` and `"STORES"` all reach the same object, and `db.stores` in mongosh reaches it too. Two worlds, one namespace — genuinely one.
+    >
+    > We still write shared objects as quoted lowercase throughout this workshop, by convention rather than necessity: the name you read in the SQL is then byte-for-byte the name you type in mongosh, which is one less thing to hold in your head for the next hour.
 
 2. See the drift from the SQL side — every embedded copy of item 1000, its price, and the JSON type it was stored with:
 
@@ -145,11 +147,92 @@ Estimated Lab Time: 11 minutes
 
 ## Task 3: Shred the Documents Into the Truth
 
-1. Run the shred as a script (also in `scripts/03_shred.sql`). It starts with deletes so a re-run from any partial state is clean, de-duplicates each item into **one corporate row** with deterministic rules (`MAX(price)` — corporate's latest change wins; resolving drift is a decision the migration must own — and `MIN(name)` for the corporate name), and converts `s_100`'s local rename into an `item_override` row. Note how `JSON_TABLE ... NESTED` walks the same path your `$unwind` pipeline did — declaratively.
+1. Paste the shred into the **SQL worksheet** and run it as a script (also in `scripts/03_shred.sql`). It starts with deletes so a re-run from any partial state is clean, de-duplicates each item into **one corporate row** with deterministic rules (`MAX(price)` — corporate's latest change wins; resolving drift is a decision the migration must own — and `MIN(name)` for the corporate name), and converts `s_100`'s local rename into an `item_override` row. Note how `JSON_TABLE ... NESTED` walks the same path your `$unwind` pipeline did — declaratively.
 
-    See `scripts/03_shred.sql` for the full statement set; paste it from the guide's script pack and run it as a script.
+    ```
+    <copy>
+    DELETE FROM item_option;
+    DELETE FROM extra;
+    DELETE FROM item_special_hours;
+    DELETE FROM item_override;
+    DELETE FROM item;
+    DELETE FROM category;
+    DELETE FROM menu;
+    DELETE FROM store;
 
-    **What you should see:** the script's final state check returns `ITEMS: 6  PRICE_1000: 1399  OVERRIDES: 1`. Five embedded copies of the cheeseburger became **one row** — the drifted string copy was normalized on conversion and lost the argument to `MAX(price)`.
+    INSERT INTO store (store_id, merchant_name)
+    SELECT s.data."_id".string(), s.data.name.string()
+    FROM   "stores" s;
+
+    INSERT INTO menu (menu_id, store_id, menu_name)
+    SELECT jt.menu_id, jt.store_id, jt.menu_name
+    FROM   "stores" s,
+           JSON_TABLE(s.data, '$'
+             COLUMNS (
+               store_id VARCHAR2(10) PATH '$._id',
+               NESTED PATH '$.menus[*]'
+               COLUMNS (
+                 menu_id   NUMBER       PATH '$.menu_id',
+                 menu_name VARCHAR2(50) PATH '$.name'))) jt;
+
+    INSERT INTO category (category_id, menu_id, category_name)
+    SELECT jt.category_id, jt.menu_id, jt.category_name
+    FROM   "stores" s,
+           JSON_TABLE(s.data, '$.menus[*]'
+             COLUMNS (
+               menu_id NUMBER PATH '$.menu_id',
+               NESTED PATH '$.categories[*]'
+               COLUMNS (
+                 category_id   NUMBER       PATH '$.category_id',
+                 category_name VARCHAR2(50) PATH '$.name'))) jt;
+
+    -- One corporate row per item. TO_NUMBER normalizes s_104's string "1000"
+    -- on conversion - the drift is resolved BY CONSTRUCTION, per the rules above.
+    INSERT INTO item (item_id, category_id, item_name, description, price)
+    SELECT TO_NUMBER(jt.item_id),
+           MIN(jt.category_id),
+           MIN(jt.item_name),
+           MAX(jt.description),
+           MAX(jt.price)
+    FROM   "stores" s,
+           JSON_TABLE(s.data, '$.menus[*].categories[*]'
+             COLUMNS (
+               category_id NUMBER PATH '$.category_id',
+               NESTED PATH '$.items[*]'
+               COLUMNS (
+                 item_id     VARCHAR2(10)  PATH '$.item_id',
+                 item_name   VARCHAR2(100) PATH '$.name',
+                 description VARCHAR2(400) PATH '$.description',
+                 price       NUMBER        PATH '$.price'))) jt
+    GROUP  BY TO_NUMBER(jt.item_id);
+
+    -- A store whose embedded name differs from the corporate name was a local
+    -- rename: it becomes an item_override row (s_100's "Lunch Classic").
+    INSERT INTO item_override (item_id, store_id, override_name)
+    SELECT TO_NUMBER(jt.item_id), jt.store_id, MIN(jt.item_name)
+    FROM   "stores" s,
+           JSON_TABLE(s.data, '$'
+             COLUMNS (
+               store_id VARCHAR2(10) PATH '$._id',
+               NESTED PATH '$.menus[*].categories[*].items[*]'
+               COLUMNS (
+                 item_id   VARCHAR2(10)  PATH '$.item_id',
+                 item_name VARCHAR2(100) PATH '$.name'))) jt
+    WHERE  jt.item_name <> (SELECT i.item_name
+                            FROM   item i
+                            WHERE  i.item_id = TO_NUMBER(jt.item_id))
+    GROUP  BY TO_NUMBER(jt.item_id), jt.store_id;
+
+    COMMIT;
+
+    SELECT (SELECT COUNT(*) FROM item)                   AS items,
+           (SELECT price FROM item WHERE item_id = 1000) AS price_1000,
+           (SELECT COUNT(*) FROM item_override)          AS overrides
+    FROM   dual;
+    </copy>
+    ```
+
+    **What you should see:** the final state check returns `ITEMS: 6  PRICE_1000: 1399  OVERRIDES: 1`. Five embedded copies of the cheeseburger became **one row** — the drifted string copy was normalized on conversion and lost the argument to `MAX(price)`.
 
 ## Task 4: Replay Corporate's Change — and the Analytics Ask
 

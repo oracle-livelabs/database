@@ -8,6 +8,8 @@
 -- Validated live on Autonomous AI Database (~1 minute end to end).
 -- Run it here in Lab 7 so the model is warm by the time Lab 8 needs it.
 
+SET SERVEROUTPUT ON
+
 DECLARE
   model_count NUMBER;
 BEGIN

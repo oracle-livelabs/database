@@ -83,7 +83,42 @@ Estimated Lab Time: 6 minutes
 
 ### Stretch (fast finishers): the fleet at scale
 
-Run `scripts/02_scale_variant.mongo.js` to clone your fleet to 5,000 stores and re-run the same `updateMany` — then read `modifiedCount` and the collection's data size before and after. Counts and bytes only: we do not measure wall-clock time on shared lab instances.
+Clone your fleet to 5,000 stores, re-run the same `updateMany`, and read `modifiedCount` and the collection's data size before and after. Counts and bytes only — we do not measure wall-clock time on shared lab instances. Paste the whole block into **mongosh** (it also ships as `scripts/02_scale_variant.mongo.js` for instructors):
+
+```
+<copy>
+const before = db.stores.stats().size;
+const clones = [];
+const template = db.stores.findOne({ _id: "s_100" });
+for (let i = 0; i < 4995; i++) {
+  const doc = JSON.parse(JSON.stringify(template));
+  doc._id = "sx_" + (1000 + i);
+  clones.push(doc);
+}
+db.stores.insertMany(clones);
+print("fleet size now: " + db.stores.countDocuments({}));
+
+const res = db.stores.updateMany(
+  {},
+  { $set: { "menus.$[].categories.$[].items.$[i].price": 1401 } },
+  { arrayFilters: [ { "i.item_id": 1000 } ] }
+);
+print("matchedCount: "  + res.matchedCount);
+print("modifiedCount: " + res.modifiedCount + "  <- full-document rewrites to move one number");
+print("collection bytes before: " + before + "  after: " + db.stores.stats().size);
+
+// Clean up the clones and restore the 1399 state the later labs expect
+db.stores.deleteMany({ _id: { $regex: "^sx_" } });
+db.stores.updateMany(
+  {},
+  { $set: { "menus.$[].categories.$[].items.$[i].price": 1399 } },
+  { arrayFilters: [ { "i.item_id": 1000 } ] }
+);
+print("restored fleet: " + db.stores.countDocuments({}) + " stores, price back to 1399");
+</copy>
+```
+
+**What you should see:** ~5,000 stores, `modifiedCount` in the thousands, a collection several megabytes larger — every one of those rewrites to move a single number — then the cleanup line restoring five stores at 1399.
 
 ## Learn More
 
