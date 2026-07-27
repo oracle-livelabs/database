@@ -60,6 +60,7 @@ Estimated Lab Time: 11 minutes
     <copy>
     DROP VIEW  IF EXISTS "store_menu_dv";
     DROP VIEW  IF EXISTS "location_item_dv";
+    DROP VIEW  IF EXISTS pos_menu_v;
     DROP TABLE IF EXISTS item_option        CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS extra              CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS item_special_hours CASCADE CONSTRAINTS;
