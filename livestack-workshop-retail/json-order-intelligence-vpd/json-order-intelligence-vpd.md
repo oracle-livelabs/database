@@ -2,7 +2,10 @@
 
 ## Introduction
 
-After you trace dashboard metrics to orders, the next question is how applications should use those orders. Application developers often like JSON because it matches the shape of an API response: one order can include customer fields, status, totals, and an array of line items in a single document. That shape is convenient for application code, but JSON by itself can create problems if it becomes a separate copy of the business record. Teams may have to synchronize documents with order tables, repeat security rules, and explain why an API result differs from a SQL report. JSON Relational Duality helps Oracle Database 26ai solve that problem by giving applications document-shaped JSON while keeping the transactional truth in relational tables.
+After you trace dashboard metrics to orders, the next question is how applications should use those orders. Application developers often like JSON because it matches the shape of an API response: one order can include customer fields, status, totals, and line items in a single document.  That shape is convenient for application code, but it can create problems if JSON becomes a separate copy of the business record.
+
+Teams may have to synchronize documents with order tables, repeat security rules, and explain why an API result differs from a SQL report. **JSON Relational Duality** helps **Oracle AI Database 26ai** solve that problem by giving applications document-shaped JSON while keeping the governed source in relational tables.
+
 
 ### Objectives
 
@@ -37,6 +40,8 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Inspect the duality view
 
+Start by reviewing the order application screen so the duality-view check connects to the business object learners just saw:
+
 1. Review the order application screen.
 
     ![Unified Order Intelligence overview](images/unified-order-intelligence-overview.png " ")
@@ -56,7 +61,7 @@ Estimated Time: **15 minutes**
     ```sql
     <copy>
     SELECT view_name AS "Duality View",
-           'Ready for document queries' AS "Status",
+           'Ready for document queries' AS "Readiness",
            'Order JSON is backed by relational tables' AS "Why It Matters"
     FROM user_json_duality_views
     WHERE view_name = 'ORDERS_DV';
@@ -65,11 +70,15 @@ Estimated Time: **15 minutes**
 
     **Expected output: Duality View Readiness Check**
 
-    | Duality View | Status | Why It Matters |
+    | Duality View | Readiness | Why It Matters |
     | --- | --- | --- |
     | ORDERS\_DV | Ready for document queries | Order JSON is backed by relational tables |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Read an order as a JSON document
+
+Now read one order from ORDERS_DV as a JSON document so learners can see the API-friendly shape backed by relational data:
 
 1. Query order `1` from `ORDERS_DV`.
 
@@ -89,11 +98,15 @@ Estimated Time: **15 minutes**
 
     | Order Document |
     | --- |
-    | `{"_id":1,"_metadata":{...},"customerId":470,"status":"confirmed","total":967.92,...}` |
+    | `{"_id":1,"_metadata":{...},"customerId":1668,"status":"confirmed","total":1139.93,...}` |
 
 2. The document is useful for application access because one query returns the order header and line items together. The app gets a document shape, while SQL still protects the governed source rows.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Project the same order into relational columns
+
+Next, project the same order document into SQL columns so analysts can filter, sort, and compare document fields without leaving the database:
 
 1. Query document fields as SQL columns.
 
@@ -117,13 +130,19 @@ Estimated Time: **15 minutes**
 
     | Order | Customer | Status | Total |
     | ---: | ---: | --- | ---: |
-    | 1 | 470 | confirmed | 967.92 |
-    | 2 | 478 | processing | 829.9 |
-    | 3 | 1367 | shipped | 44.99 |
-    | 4 | 446 | delivered | 6869.92 |
-    | 5 | 1021 | delivered | 1929.94 |
+    | 1 | 1668 | confirmed | 1139.93 |
+    | 2 | 731 | processing | 429.9 |
+    | 3 | 1515 | shipped | 539.97 |
+    | 4 | 486 | delivered | 179.99 |
+    | 5 | 1587 | delivered | 209.97 |
 
 2. The result shows the practical value of duality. The application can use a JSON document, and analysts can still use SQL over the same governed order data. Next, you use customer and creator language to find demand signals that may not match catalog keywords exactly.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## Next Steps
+
+Congratulations on completing the JSON duality lab. You used JSON Relational Duality to work with retail order data as both application-friendly documents and SQL-queryable rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 

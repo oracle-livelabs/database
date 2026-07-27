@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab gets you into the LiveLabs environment and opens **Database Actions SQL Worksheet**. SQL Worksheet is the evidence bench for the rest of the workshop: you will use it to inspect the same governed data that supports the retail application.
+This lab gets you into the LiveLabs environment and opens **Database Actions SQL Worksheet**. Treat SQL Worksheet as the evidence bench for the rest of the workshop: it is where you inspect the governed data behind the retail application before making dashboard, order, search, fulfillment, or prediction claims.
 
 ### Objectives
 
@@ -13,6 +13,8 @@ This lab gets you into the LiveLabs environment and opens **Database Actions SQL
 Estimated Time: **5 minutes**
 
 ## Task 1: Open the LiveLabs environment
+
+Start by opening the LiveLabs environment so you can find the retail application, database link, and workshop credentials before running any SQL:
 
 1. In your LiveLabs reservation, open the environment details.
 
@@ -30,7 +32,9 @@ Estimated Time: **5 minutes**
 
 ## Task 2: Open SQL Worksheet
 
-1. Sign in to Database Actions as the main workshop user, usually `LLUSER`.
+Next, sign in to **Database Actions** and open **SQL Worksheet** so every later query runs as the workshop user against the prepared retail schema.
+
+1. Sign in to **Database Actions** as the main workshop user, usually `LLUSER`.
 
     ![Database Actions login for the main workshop user](images/database-actions-login-main-user.svg " ")
 

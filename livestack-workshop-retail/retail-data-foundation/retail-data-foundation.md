@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Seer Sporting Goods builds stronger dashboards, predictions, and search results when the shared retail data foundation is complete. In this lab, you inspect database catalog views and row counts so later business results stay tied to visible, reviewable database objects. This is the foundation for the decision path you follow in the rest of the workshop.
+**Seer Sporting Goods** can only trust dashboard, search, fulfillment, and model results if the shared retail foundation is complete. In this lab, you inspect catalog views and row counts so every later business result stays tied to visible, reviewable database objects.
 
 ### Objectives
 
@@ -36,6 +36,8 @@ Estimated Time: **10 minutes**
 *Figure 1: A fragmented retail architecture spreads operational, search, graph, spatial, and ML evidence across separate database platforms and vendors. Oracle Database 26ai keeps the same evidence connected for Seer Sporting Goods.*
 
 ## Task 1: Inventory the retail object families
+
+Start by opening the **Data Foundation** page so you can connect the application view to the database objects that support the rest of the workshop:
 
 1. Review the Data Foundation application screen.
 
@@ -107,7 +109,11 @@ Estimated Time: **10 minutes**
 
 3. The result shows that later labs are not isolated feature samples. They use one schema that stores operational rows, document views, vectors, graph paths, spatial data, and model artifacts together.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Count the major data groups
+
+Now count the major retail data groups so later KPIs, ranked results, and model outputs have a scale reference:
 
 1. Run the row-count query.
 
@@ -175,7 +181,7 @@ Estimated Time: **10 minutes**
     | Products | 187 |
     | Customers | 2000 |
     | Orders | 3000 |
-    | Order items | 9146 |
+    | Order items | 8981 |
     | Social posts | 5000 |
     | Influencers | 483 |
     | Fulfillment centers | 30 |
@@ -183,6 +189,8 @@ Estimated Time: **10 minutes**
     | Post embeddings | 5000 |
 
 2. These counts are the baseline for the rest of the workshop. Later results should be read as drill-through evidence from this shared data foundation. Next, you use the foundation to explain the Retail Command Center metrics.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Acknowledgements
 

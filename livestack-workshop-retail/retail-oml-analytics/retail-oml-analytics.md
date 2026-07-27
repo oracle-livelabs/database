@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you review demand, influence, and fulfillment evidence, the final step is prioritization. Predictive analytics become useful when model output stays connected to operational data. In this lab, you inspect Oracle Machine Learning (OML) models, review the feature view behind demand scoring, and run an in-database prediction query.
+After you review demand, influence, and fulfillment evidence, the final step is prioritization. Predictive analytics become useful when model output stays connected to operational data. In this lab, you inspect **Oracle Machine Learning** models, review the feature view behind demand scoring, and run an in-database prediction query that planners can compare with product, signal, and sales context.
 
 ### Objectives
 
@@ -36,6 +36,8 @@ Estimated Time: **10 minutes**
 *Figure 1: OML scores demand rows where the product and signal evidence already lives.*
 
 ## Task 1: Inspect the model inventory
+
+Start on the Retail OML Analytics page so the model inventory connects to the demand-prioritization view learners are about to inspect:
 
 1. Review the Retail OML Analytics page.
 
@@ -72,7 +74,11 @@ Estimated Time: **10 minutes**
     | PRODUCT\_CLUSTER\_MODEL | CLUSTERING | KMEANS |
     | REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Review demand model features
+
+Now review the demand feature view so learners can see the product, signal, sales, and label inputs behind model scoring:
 
 1. Run the feature-view query.
 
@@ -101,13 +107,17 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Posts | Avg Sentiment | Units Sold | Revenue | Label |
     | --- | --- | ---: | ---: | ---: | ---: | --- |
-    | UrbanDash Trainer | Footwear | 29 | 0.592 | 97 | 13094.03 | SURGE |
-    | TrailRun Sport Earbuds | Sports Tech | 28 | 0.531 | 84 | 16799.16 | SURGE |
-    | 4-Season Tent 3P | Outdoor | 27 | 0.552 | 112 | 61598.88 | SURGE |
-    | AirGlide Runner | Footwear | 27 | 0.614 | 114 | 17098.86 | SURGE |
-    | Trailhead Gear Clock | Outdoor Lifestyle | 27 | 0.546 | 91 | 1728.09 | SURGE |
+    | Locker Room Organizer Set | Outdoor Lifestyle | 33 | 0.528 | 92 | 3955.08 | SURGE |
+    | Trailhead Gear Clock | Outdoor Lifestyle | 32 | 0.6 | 121 | 4233.79 | SURGE |
+    | BlueShield Training Glasses | Sport Eyewear | 30 | 0.446 | 112 | 10078.88 | SURGE |
+    | PracticeStream Capture Card | Training Tech | 28 | 0.58 | 101 | 20198.99 | SURGE |
+    | Expedition Power Bank | Sports Tech | 27 | 0.567 | 95 | 17099.05 | SURGE |
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 3: Score demand surge rows
+
+Next, score demand surge rows so planners can compare predicted labels, confidence, posts, and units sold in one reviewable result:
 
 1. Run the prediction query.
 
@@ -140,15 +150,21 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Actual Label | Predicted Label | Surge Probability | Posts | Units Sold |
     | --- | --- | --- | --- | ---: | ---: | ---: |
-    | UrbanDash Trainer | Footwear | SURGE | SURGE | 1 | 29 | 97 |
-    | DewPoint Hydration Spray | Outdoor Care | SURGE | SURGE | 1 | 16 | 99 |
-    | Titanium Trail Aviators | Sport Eyewear | SURGE | SURGE | 1 | 20 | 110 |
-    | RouteGuide AR Sport Glasses | Sports Wearables | SURGE | SURGE | 1 | 20 | 85 |
-    | RaceSim Performance GPU | Training Tech | SURGE | SURGE | 1 | 22 | 100 |
+    | RouteGuide AR Sport Glasses | Sports Wearables | SURGE | SURGE | 1 | 19 | 113 |
+    | ClipCoach Audio Pod | Sports Wearables | SURGE | SURGE | 1 | 20 | 98 |
+    | StormRunner Trail Shell | Athletic Apparel | SURGE | SURGE | 1 | 22 | 102 |
+    | 4-Season Tent 3P | Outdoor | SURGE | SURGE | 1 | 17 | 106 |
+    | CoachMic USB Microphone | Training Audio | SURGE | SURGE | 1 | 22 | 89 |
 
 2. The model result is useful because it stays connected to product, signal, and sales context. A planner can inspect why a row was scored and decide what operational follow-up makes sense.
 
     This completes the retail decision path: you started with the data foundation, moved through operating evidence and customer signals, checked relationships and fulfillment options, then used model output to prioritize action.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## Next Steps
+
+Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, and used demand predictions with product, signal, and sales context to prioritize follow-up. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
 
 ## Acknowledgements
 

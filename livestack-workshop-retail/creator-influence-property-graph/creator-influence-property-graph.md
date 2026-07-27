@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you find demand signals, the next question is where those signals can travel. Creator influence is a relationship question. Follower counts and isolated posts do not show how a message can move through a network. Property Graph lets you express that question as paths while returning rows that business users can read.
+After you find demand signals, the next question is where those signals can travel. Creator influence is a relationship question: follower counts and isolated posts do not show how a message can move through a network. Property Graph lets you express that question as paths while returning rows that planners and campaign teams can read.
 
 ### Objectives
 
@@ -37,6 +37,8 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Confirm the graph object
 
+Start on the **Creator Influence Network** page so the graph inventory query connects to the relationship view business users see:
+
 1. Review the Creator Influence Network page.
 
     ![Creator Influence Network graph overview](images/creator-influence-network-overview.png " ")
@@ -63,7 +65,11 @@ Estimated Time: **10 minutes**
     | --- |
     | INFLUENCER\_NETWORK |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Traverse direct creator relationships
+
+Now traverse direct creator relationships so planners can confirm the graph contains usable relationship evidence before adding brand context:
 
 1. Run the one-hop graph query.
 
@@ -103,15 +109,19 @@ Estimated Time: **10 minutes**
 
     | From Creator | To Creator | Link | Strength |
     | --- | --- | --- | ---: |
-    | `@mountain_hope` | `@ridge_cleo` | follows | 1 |
-    | `@trailhead_marcus` | `@league_ruby` | tagged | 0.999 |
-    | `@ascent_hope` | `@pack_dev` | inspired_by | 0.998 |
-    | `@gearhub_hope` | `@pack_beau` | collaborates | 0.998 |
-    | `@recovery_tess` | `@basecamp_hope` | mentioned | 0.998 |
+    | `@route_lily_295` | `@river_jace_382` | reshared | 1 |
+    | `@climb_lily_455` | `@terrain_drew_202` | duet | 0.999 |
+    | `@coach_dane_443` | `@fit_noah_239` | reshared | 0.999 |
+    | `@coach_zoe_225` | `@alpine_mia_18` | mentioned | 0.999 |
+    | `@endurance_maya_221` | `@coach_zoe_160` | inspired_by | 0.999 |
 
 2. Each row is a direct relationship path. The business can use it to ask which creator relationship deserves follow-up and which audience may hear a campaign message next.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Add brand context to the path
+
+Next, add brand context to the graph path so campaign reach is explained through promoters, reached creators, and relationship evidence:
 
 1. Run the brand propagation query.
 
@@ -147,15 +157,21 @@ Estimated Time: **10 minutes**
 
     | Brand | Promoter | Reached | Relationship |
     | --- | --- | --- | --- |
-    | ApexRide | `@camp_vince` | `@alpine_luna` | organic |
-    | ApexRide | `@camp_vince` | `@boot_jen` | organic |
-    | ApexRide | `@camp_vince` | `@coach_ava` | organic |
-    | ApexRide | `@camp_vince` | `@matchday_tess` | organic |
-    | ApexRide | `@camp_vince` | `@recovery_ella` | organic |
+    | ApexRide | `@alpine_hope_381` | `@gear_mia_238` | organic |
+    | ApexRide | `@alpine_hope_381` | `@gear_mia_436` | organic |
+    | ApexRide | `@alpine_hope_381` | `@outdoor_kara_155` | organic |
+    | ApexRide | `@alpine_hope_381` | `@run_finn_501` | organic |
+    | ApexRide | `@alpine_mia_143` | `@alpine_hope_321` | affiliate |
 
 2. The result matters because it connects brand activity to reachable creators. In retail terms, audience movement means a campaign can start with one promoter and reach adjacent creator communities through known relationships. The graph pattern keeps that movement readable even as the business question moves beyond one table or one join.
 
     Next, you use location and inventory evidence to decide whether demand can be served from practical fulfillment centers.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## Next Steps
+
+Congratulations on completing the property graph lab. You used graph queries to move from a brand or promoter to connected creator evidence and related campaign relationships. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
 
 ## Acknowledgements
 

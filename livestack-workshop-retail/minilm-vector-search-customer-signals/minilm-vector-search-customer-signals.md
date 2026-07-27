@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you inspect orders, you need to understand the demand language around them. Customers and creators rarely describe needs in the exact words used by a catalog. AI Vector Search helps teams compare meaning instead of only matching keywords. In this lab, you use the in-database MiniLM model and stored vectors to rank products and social signals.
+After you inspect orders, you need to understand the demand language around them. Customers and creators rarely describe needs in the exact words used by a catalog. **AI Vector Search** helps teams compare meaning instead of only matching keywords, so retail teams can connect customer language, product records, and social signals without exporting evidence to a separate search service.
 
 ### Objectives
 
@@ -37,6 +37,8 @@ Estimated Time: **10 minutes**
 *Figure 1: A phrase becomes an embedding, the embedding is compared to stored vectors, and the ranked result remains tied to product and signal rows.*
 
 ## Task 1: Confirm vector artifacts
+
+Start on the **Customer Trend Signals** page so semantic-search results connect back to the demand experience business users see:
 
 1. Review the Customer Trend Signals page.
 
@@ -84,7 +86,11 @@ Estimated Time: **10 minutes**
     | POST\_EMBEDDINGS | 5000 | 5000 | 100 |
     | PRODUCT\_EMBEDDINGS | 187 | 187 | 100 |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Search products by meaning
+
+Now run a semantic product search that asks a retail question in normal business language instead of exact catalog keywords:
 
 1. Run the semantic product search query.
 
@@ -134,17 +140,21 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Best Distance |
     | --- | --- | ---: |
-    | CoachMic USB Microphone | Training Audio | 0.7549 |
-    | FieldCoach Training Tablet | Sports Tech | 0.762 |
-    | TrailRun Sport Earbuds | Sports Tech | 0.7946 |
-    | Expedition Power Bank | Sports Tech | 0.7988 |
-    | CoachView Curved Display | Training Tech | 0.8092 |
+    | CoachMic USB Microphone | Training Audio | 0.6852 |
+    | Expedition Power Bank | Sports Tech | 0.7042 |
+    | CoachView Curved Display | Training Tech | 0.7327 |
+    | DewPoint Hydration Spray | Outdoor Care | 0.7356 |
+    | Smart Grill Thermometer | Camp Cooking | 0.7401 |
 
 2. The result matters because the match is not limited to exact words. The database compares meaning, then returns normal SQL rows that can be joined to categories, orders, and inventory.
 
     The query groups by product and category so you see distinct product choices, then keeps the best semantic distance for each choice.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Connect social signals to product matches
+
+Next, connect social-signal matches back to products so vector scores become reviewable merchandising evidence:
 
 1. Run the signal search query.
 
@@ -187,17 +197,23 @@ Estimated Time: **10 minutes**
 
     | Product | Category | Best Distance |
     | --- | --- | ---: |
-    | TrailFlex Training Joggers | Athletic Apparel | 0.3108 |
-    | Cyber Mesh Sneakers | Footwear | 0.3463 |
-    | Marathon Elite Racer | Footwear | 0.3566 |
-    | StreetFlex Sneaker | Footwear | 0.3627 |
-    | Barefoot Minimalist Shoe | Footwear | 0.3772 |
+    | Marathon Elite Racer | Footwear | 0.347 |
+    | Barefoot Minimalist Shoe | Footwear | 0.3488 |
+    | Cyber Mesh Sneakers | Footwear | 0.3696 |
+    | TrailFlex Training Joggers | Athletic Apparel | 0.3861 |
+    | AllTerrain Hiking Boots | Outdoor | 0.3943 |
 
 2. Vector search becomes useful when the score is tied back to governed product and signal rows. A merchandising or operations team can follow the match into orders, categories, creator activity, or fulfillment planning.
 
     Multiple rows in `POST_EMBEDDINGS` can point to social posts that mention the same product. Grouping keeps the result readable: one product row and the closest semantic distance from the social-post vectors.
 
     Next, you follow the creator relationships behind those signals to understand how campaign influence can move through a network.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched retail product and customer-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
 
 ## Acknowledgements
 

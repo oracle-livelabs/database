@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After demand and influence point to products, fulfillment decides whether the business can serve that demand. The closest center is only useful if it is active, stocked, and appropriate for the customer. Oracle Spatial keeps location-aware analysis inside Oracle Database next to customers, centers, products, and inventory.
+After demand and influence point to products, fulfillment decides whether the business can serve that demand. The closest center is only useful if it is active, stocked, and appropriate for the customer. **Oracle Spatial** keeps location-aware analysis inside **Oracle AI Database**, next to customers, centers, products, and inventory.
 
 ### Objectives
 
@@ -36,6 +36,8 @@ Estimated Time: **10 minutes**
 *Figure 1: Spatial data becomes operational evidence when it joins to products and inventory.*
 
 ## Task 1: Inspect fulfillment center geometry
+
+Start on the fulfillment application page so the geometry query connects map evidence to governed center and location data:
 
 1. Review the fulfillment application page.
 
@@ -78,7 +80,11 @@ Estimated Time: **10 minutes**
     | Dallas South Central | Lancaster | Texas | 32.5921 | -96.7561 | POINT (-96.7561 32.5921) |
     | Atlanta Southeast | Union City | Georgia | 33.5871 | -84.5421 | POINT (-84.5421 33.5871) |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Rank nearby centers
+
+Now rank nearby fulfillment centers so planners can see which active locations are closest to the selected customer:
 
 1. Run the distance query.
 
@@ -86,7 +92,7 @@ Estimated Time: **10 minutes**
 
     `CROSS JOIN` pairs the one selected customer with each active center. The distance function compares the two location points, `0.005` is the tolerance for the spatial calculation, and `'unit=MILE'` makes the result understandable for planners.
 
-    The expected output tells you the customer is in the Los Angeles operating area because the closest active center is `LA Mega Center` in Ontario, California, about 36 miles away. The nearby Nevada, Bay Area, Arizona, and Reno results also fit a Southern California starting point.
+    The expected output tells you the customer is in the Los Angeles operating area because the closest active center is `LA Mega Center` in Ontario, California, about 33 miles away. The nearby Nevada, Bay Area, Arizona, and Reno results also fit a Southern California starting point.
 
     ```sql
     <copy>
@@ -107,13 +113,17 @@ Estimated Time: **10 minutes**
 
     | Center | City | State | Miles |
     | --- | --- | --- | ---: |
-    | LA Mega Center | Ontario | California | 36.4 |
-    | Las Vegas West | North Las Vegas | Nevada | 231 |
-    | San Francisco Bay | Fremont | California | 316.6 |
-    | Phoenix Desert Hub | Goodyear | Arizona | 344 |
-    | Reno West Hub | Sparks | Nevada | 384.4 |
+    | LA Mega Center | Ontario | California | 33.2 |
+    | Las Vegas West | North Las Vegas | Nevada | 229 |
+    | San Francisco Bay | Fremont | California | 319.1 |
+    | Phoenix Desert Hub | Goodyear | Arizona | 340.9 |
+    | Reno West Hub | Sparks | Nevada | 385.7 |
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Task 3: Combine distance with inventory
+
+Next, combine distance with inventory so the fulfillment recommendation reflects both geography and stock availability:
 
 1. Run the stocked-center query.
 
@@ -156,15 +166,21 @@ Estimated Time: **10 minutes**
 
     | Center | City | State | Product | On Hand | Miles |
     | --- | --- | --- | --- | ---: | ---: |
-    | Phoenix Desert Hub | Goodyear | Arizona | StormRunner Trail Shell | 42 | 344 |
-    | Portland Pacific | Troutdale | Oregon | StormRunner Trail Shell | 160 | 819.5 |
-    | Seattle Pacific NW | Kent | Washington | StormRunner Trail Shell | 297 | 940.2 |
-    | San Antonio South TX | New Braunfels | Texas | StormRunner Trail Shell | 367 | 1220.6 |
-    | Kansas City Central | Edwardsville | Kansas | StormRunner Trail Shell | 119 | 1345.2 |
+    | LA Mega Center | Ontario | California | StormRunner Trail Shell | 393 | 33.2 |
+    | Las Vegas West | North Las Vegas | Nevada | StormRunner Trail Shell | 78 | 229 |
+    | Seattle Pacific NW | Kent | Washington | StormRunner Trail Shell | 293 | 941.4 |
+    | San Antonio South TX | New Braunfels | Texas | StormRunner Trail Shell | 267 | 1217.4 |
+    | Houston Gulf Coast | Missouri City | Texas | StormRunner Trail Shell | 446 | 1366.3 |
 
 2. This is the practical value of spatial data in a converged database. The same query can explain location, product, and inventory evidence without copying map data into another system.
 
     Next, you use Oracle Machine Learning to prioritize which products deserve attention after the business has reviewed demand, influence, and fulfillment evidence.
+
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
+## Next Steps
+
+Congratulations on completing the spatial lab. You used spatial queries to connect demand locations, fulfillment centers, and inventory so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
