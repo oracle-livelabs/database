@@ -1,10 +1,10 @@
-# Build Retail Intelligence with Oracle Database 26ai
+# Build Retail Intelligence with Oracle AI Database 26ai
 
 ## Introduction
 
-Retail teams make better decisions when operational evidence stays close to the workflow. In this workshop, you follow a retail decision path for Seer Sporting Goods: start with trusted data, inspect the command center, open the order record, interpret demand signals, understand creator influence, choose fulfillment options, and prioritize action with model output.
+Monday morning starts with a demand spike at **Seer Sporting Goods**. Trail-running products are trending, customers expect fast fulfillment, and merchandising, operations, and analytics teams need the same answer before the day gets away from them. In this workshop, you follow the evidence in SQL: confirm the data foundation, inspect the command center, open the order record, interpret demand signals, follow creator influence, choose fulfillment options, and prioritize action with model output.
 
-The business pressure is familiar: product demand changes quickly, customers expect fast service, and different teams need the same answer without reconciling separate systems. Oracle Database 26ai and Autonomous Database keep relational rows, JSON documents, vectors, graph relationships, spatial data, and in-database analytics connected in one governed environment. The application shows the retail experience; each lab shows the SQL evidence behind it.
+The business pressure is familiar: demand changes quickly, customers expect fast service, and different teams need the same answer without reconciling separate systems. **Oracle AI Database 26ai** and **Autonomous Database** keep relational rows, JSON documents, vectors, graph relationships, spatial data, and in-database analytics connected in one governed environment. The application shows the retail experience; each lab shows the SQL evidence behind it.
 
 ![Workshop overview](images/retail-workshop-intro-journey.svg " ")
 
