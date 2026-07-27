@@ -150,6 +150,10 @@ Estimated Time: **10 minutes**
 
     This completes the retail decision path: you started with the data foundation, moved through operating evidence and customer signals, checked relationships and fulfillment options, then used model output to prioritize action.
 
+## Next Steps
+
+Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, and used demand predictions with product, signal, and sales context to prioritize follow-up. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
