@@ -170,6 +170,8 @@ Estimated Lab Time: 7 minutes
     </copy>
     ```
 
+    **What you should see:** three tables created and `Property graph ORDER_GRAPH created.` — no errors. (The `DROP ... IF EXISTS` lines at the top make this safe to re-run.)
+
     A flatten is *a projection step, not a second source of truth* — the orders collection remains the transaction record. Note the `contains` edge lands on the canonical `item` table from Lab 4: the graph spans document-born data **and** relational truth in one declaration.
 
 2. The recommendation — who ordered the cheeseburger (item 1000) also ordered… Read the MATCH pattern like arrows on a whiteboard: customer → placed → order → contains → item, twice, sharing the customer:

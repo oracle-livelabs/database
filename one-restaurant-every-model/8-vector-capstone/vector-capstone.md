@@ -17,7 +17,7 @@ Estimated Lab Time: 9 minutes
 
 ## Task 1: Embed the Menu in Place
 
-1. In the **SQL worksheet** (all steps also in `scripts/07_vector.sql`) — verify the model, add the column, embed:
+1. In the **SQL worksheet** (also in `scripts/07_vector.sql`) — verify the model, add the column, embed:
 
     ```
     <copy>
@@ -32,7 +32,7 @@ Estimated Lab Time: 9 minutes
     </copy>
     ```
 
-    **What you should see:** `MENU_MODEL` (loaded in Lab 7), then the column added, then 6 rows updated. No embedding service, no API key, no copy pipeline — the vector is generated where the row already lives. (If `MENU_MODEL` is missing, re-run `scripts/06_model_bg_reload.sql` from Lab 7; `scripts/07_vector_fallback.sql` ships precomputed vectors as a last resort.)
+    **What you should see:** `MENU_MODEL` (loaded in Lab 7), then the column added, then 6 rows updated. No embedding service, no API key, no copy pipeline — the vector is generated where the row already lives. (If `MENU_MODEL` is missing, go back to **Lab 7, Task 1** and run that block again — it is idempotent. A precomputed-vector fallback ships as `scripts/07_vector_fallback.sql` for proctors if the model download is blocked.)
 
 ## Task 2: Search by Meaning
 
