@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" font-family="SF Mono,Menlo,Consolas,monospace">
+  <title>The capstone's real EXPLAIN PLAN, captured live on Autonomous AI Database: graph, relational, and vector row sources in one optimizer tree (plan hash 2722765809)</title>
+  <style>
+    .row  { fill:#312d2a; font-size:13px; }
+    .hl   { fill:#ffffff; font-size:13px; font-weight:bold; }
+    .band1 { fill:#c74634; } .band2 { fill:#2f6b4f; } .band3 { fill:#31708f; }
+    .callout { font-family:Helvetica,Arial,sans-serif; font-size:13px; font-weight:bold; fill:#ffffff; }
+    .legend  { font-family:Helvetica,Arial,sans-serif; font-size:13px; fill:#312d2a; }
+    .legendB { font-family:Helvetica,Arial,sans-serif; font-size:13px; font-weight:bold; }
+    .noteTxt { font-family:Helvetica,Arial,sans-serif; font-size:12px; font-style:italic; fill:#666666; }
+    .head    { font-family:Helvetica,Arial,sans-serif; font-size:15px; font-weight:bold; fill:#312d2a; }
+    .bubble  { stroke:#312d2a; stroke-width:1; }
+  </style>
+
+  <text class="head" x="30" y="34">THE CAPSTONE'S REAL PLAN — captured live on Autonomous AI Database (plan hash 2722765809)</text>
+
+  <text class="row" x="30" y="66">| Id | Operation                            | Name         |</text>
+  <text class="row" x="30" y="86">|  0 | SELECT STATEMENT                     |              |</text>
+  <text class="row" x="30" y="106">|  1 |  COUNT STOPKEY                       |              |</text>
+  <text class="row" x="30" y="126">|  2 |   VIEW                               |              |</text>
+
+  <!-- VECTOR -->
+  <rect class="band3" x="24" y="134" width="640" height="22" rx="4"/>
+  <text class="hl" x="30" y="150">|  3 |    SORT ORDER BY STOPKEY             |              |</text>
+  <circle class="band3 bubble" cx="700" cy="145" r="13"/><text class="callout" id="callout-3" x="696" y="150">3</text>
+  <text class="legend" x="724" y="141"><tspan class="legendB">VECTOR</tspan> — the top-k by</text>
+  <text class="legend" x="724" y="157">VECTOR_DISTANCE survives here</text>
+
+  <text class="row" x="30" y="176">|  4 |     HASH JOIN                        |              |</text>
+
+  <!-- GRAPH band ops 5-16 -->
+  <rect class="band1" x="24" y="184" width="640" height="246" rx="4" opacity="0.92"/>
+  <text class="hl" x="30" y="202">|  5 |      VIEW                            |              |</text>
+  <text class="hl" x="30" y="222">|  6 |       HASH UNIQUE                    |              |</text>
+  <text class="hl" x="30" y="242">|  7 |        NESTED LOOPS SEMI             |              |</text>
+  <text class="hl" x="30" y="262">|  8 |         HASH JOIN RIGHT SEMI         |              |</text>
+  <text class="hl" x="30" y="282">|  9 |          TABLE ACCESS STORAGE FULL   | ORD          |</text>
+  <text class="hl" x="30" y="302">| 10 |          HASH JOIN                   |              |</text>
+  <text class="hl" x="30" y="322">| 11 |           MERGE JOIN CARTESIAN       |              |</text>
+  <text class="hl" x="30" y="342">| 12 |            TABLE ACCESS STORAGE FULL | CUSTOMER     |</text>
+  <text class="hl" x="30" y="362">| 13 |            BUFFER SORT               |              |</text>
+  <text class="hl" x="30" y="382">| 14 |             TABLE ACCESS STORAGE FULL| ORDER_ITEM   |</text>
+  <text class="hl" x="30" y="402">| 15 |           TABLE ACCESS STORAGE FULL  | ORD          |</text>
+  <text class="hl" x="30" y="422">| 16 |         INDEX UNIQUE SCAN            | ITEM (pk)    |</text>
+  <circle class="band1 bubble" cx="700" cy="300" r="13"/><text class="callout" id="callout-1" x="696" y="305">1</text>
+  <text class="legend" x="724" y="284"><tspan class="legendB">GRAPH</tspan> — the SQL/PGQ MATCH,</text>
+  <text class="legend" x="724" y="300">compiled to SYS_PGQ_* row sources</text>
+  <text class="legend" x="724" y="316">over ORD / CUSTOMER / ORDER_ITEM.</text>
+  <text class="legend" x="724" y="332">ASCII arrows became ordinary joins</text>
+
+  <!-- RELATIONAL -->
+  <rect class="band2" x="24" y="438" width="640" height="22" rx="4"/>
+  <text class="hl" x="30" y="454">| 17 |      TABLE ACCESS STORAGE FULL       | ITEM         |</text>
+  <circle class="band2 bubble" cx="700" cy="449" r="13"/><text class="callout" id="callout-2" x="696" y="454">2</text>
+  <text class="legend" x="724" y="445"><tspan class="legendB">RELATIONAL</tspan> — the canonical item</text>
+  <text class="legend" x="724" y="461">table, filter("I"."ACTIVE"=TRUE)</text>
+
+  <text class="noteTxt" x="30" y="500">Predicates seen live:  access("O"."ORDER_ID"="SYS_PGQ_2"."ORDER_ID")  ·  filter("SYS_PGQ_2"."CUSTOMER_ID"='c_1')  ·  storage("I"."ACTIVE"=TRUE)</text>
+  <text class="noteTxt" x="30" y="530">Your row order and operators may vary with statistics and version — what must NOT vary: all three numbered</text>
+  <text class="noteTxt" x="30" y="548">landmarks appear in ONE tree, with no federation boundary between them. One optimizer planned all three models.</text>
+  <text class="head" x="30" y="592">One tree. One optimizer. Three data models as ordinary row sources.</text>
+</svg>
