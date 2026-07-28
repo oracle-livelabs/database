@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Lab 6: ORDS ETag optimistic-concurrency choreography.
-# Requires: ORDS_BASE, ORDS_USER, ORDS_PASS in the environment; jq in Cloud Shell.
+# Requires: ORDS_BASE, ORDS_USER, ORDS_PASS in the environment; curl and jq on PATH.
 # Edits ONLY the location-owned override name and reverts it - downstream-inert.
 set -euo pipefail
 

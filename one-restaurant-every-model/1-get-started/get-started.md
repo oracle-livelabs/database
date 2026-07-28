@@ -2,9 +2,9 @@
 
 ## Introduction
 
-You start from an **empty** Autonomous AI Database. In this lab you open the two tools you will use all session — the **SQL worksheet** in Database Actions and **Cloud Shell** with the MongoDB shell — and run a preflight that checks every dependency of every later lab, so problems surface now rather than during the finale.
+You start from an **empty** Autonomous AI Database. In this lab you open the two tools you will use all session — the **SQL worksheet** in Database Actions and the **MongoDB shell** on your own machine — and run a preflight that checks every dependency of every later lab, so problems surface now rather than during the finale.
 
-Workspace convention for the whole session: **Cloud Shell (mongosh) in one browser tab, Database Actions (SQL worksheet) in another** — switching should be a glance, not a tab hunt.
+Workspace convention for the whole session: **a terminal running mongosh beside a browser tab with the SQL worksheet** — switching should be a glance, not a window hunt.
 
 Estimated Lab Time: 10 minutes
 
@@ -13,7 +13,7 @@ Estimated Lab Time: 10 minutes
 In this lab, you will:
 
 * Navigate the OCI console to your database and open the SQL worksheet
-* Open Cloud Shell and install the MongoDB shell (`mongosh`)
+* Install the MongoDB shell (`mongosh`) on your own machine
 * Connect `mongosh` to your database's MongoDB API endpoint
 * Run the preflight and confirm you are at the starting line
 
@@ -60,35 +60,84 @@ In this lab, you will:
 
     > If you are asked to sign in again, use your **database** username and password (the LiveLabs sandbox reservation page lists them), not your cloud account.
 
-## Task 2: Open Cloud Shell and Install the MongoDB Shell
+## Task 2: Install the MongoDB Shell on Your Local Machine
 
-`mongosh` is MongoDB's own shell. It is **not** preinstalled in Cloud Shell, so you will install it into your home directory — no admin rights, no software on your laptop, about a minute.
+`mongosh` is MongoDB's own shell, and running the *unmodified* MongoDB tool against an Oracle endpoint is the whole point of Act I. You install it **on your own laptop** — a download and an unzip, no admin rights, about two minutes.
 
-> **NOTE:** MongoDB Shell is a tool provided by MongoDB Inc. Oracle is not associated with MongoDB Inc. and has no control over the software. These instructions are provided to help you learn about the Oracle Database API for MongoDB. Download links may change without notice — see [the MongoDB download page](https://www.mongodb.com/try/download/shell) for current versions.
+> **Why not Cloud Shell?** OCI Cloud Shell is not reliably available on LiveLabs sandboxes — it reports "Policy missing" and never finishes creating the machine (verified on sandboxes in two different regions). Oracle's own MongoDB API workshops install `mongosh` locally for this reason. If you are running in **your own tenancy** and Cloud Shell works for you, you are welcome to use it instead — the commands below are the same, minus the download URL, which becomes the `linux-x64` build.
 
-1. In the console header (top-right, between the region name and the notification bell), click the **Developer tools** icon — a small terminal glyph — and choose **Cloud Shell** from the menu that drops down. A terminal panel opens across the bottom of the browser window.
+> **NOTE:** MongoDB Shell is a tool provided by MongoDB Inc. Oracle is not associated with MongoDB Inc. and has no control over the software. These instructions are provided to help you learn about the Oracle Database API for MongoDB. Download links change without notice — see [the MongoDB download page](https://www.mongodb.com/try/download/shell) for current versions.
 
-    ![Developer tools icon in the console header, with Cloud Shell in the drop-down menu](images/cloud-shell-menu.png " ")
-
-    **What you should see:** a black terminal panel, then a `username@cloudshell:~ (region)$` prompt after a few seconds. The first launch in a tenancy can take a minute while the machine is created.
-
-    > **If the panel says "Policy missing" or sits on "Creating your Oracle Cloud Shell machine…":** Cloud Shell must be enabled for your tenancy, and your Cloud Shell session region must match the region you are working in (check the region name in the panel's header bar). On a LiveLabs sandbox, tell a proctor. Everything in this workshop that uses `mongosh` can also be driven from a `mongosh` installed on your own laptop against the same endpoint.
-
-2. Download and unpack the MongoDB shell, then put it on your `PATH`:
+1. Open a **terminal** (macOS: Command-space, type "terminal") or **Command Prompt** (Windows: Start, type "cmd"), then make a working directory:
 
     ```
     <copy>
     cd ~
-    curl -LO https://downloads.mongodb.com/compass/mongosh-2.3.8-linux-x64.tgz
-    tar xzf mongosh-2.3.8-linux-x64.tgz
-    export PATH=~/mongosh-2.3.8-linux-x64/bin:$PATH
-    mongosh --version
+    mkdir mongosh-install
+    cd mongosh-install
     </copy>
     ```
 
-    **What you should see:** `2.3.8` printed by the last command.
+2. Download the build for **your** machine — copy **one** of these:
 
-    > The `export PATH` line lasts for this Cloud Shell session. If your session restarts, run it again — or append it to `~/.bashrc` to make it permanent.
+    * **Mac, Apple silicon** (M1/M2/M3/M4):
+
+        ```
+        <copy>
+        curl https://downloads.mongodb.com/compass/mongosh-2.5.9-darwin-arm64.zip -o mongosh.zip
+        </copy>
+        ```
+
+    * **Mac, Intel:**
+
+        ```
+        <copy>
+        curl https://downloads.mongodb.com/compass/mongosh-2.5.9-darwin-x64.zip -o mongosh.zip
+        </copy>
+        ```
+
+    * **Windows:**
+
+        ```
+        <copy>
+        curl https://downloads.mongodb.com/compass/mongosh-2.5.9-win32-x64.zip -o mongosh.zip
+        </copy>
+        ```
+
+    > Not sure which Mac you have? Apple menu → **About This Mac**. "Apple M…" means Apple silicon; "Intel" means Intel.
+
+3. Unpack it (`tar` is built in on macOS and on Windows 10/11):
+
+    ```
+    <copy>
+    mkdir -p mongosh
+    tar -xf mongosh.zip -C mongosh --strip-components=1
+    </copy>
+    ```
+
+4. Put it on your `PATH` and check the version.
+
+    * **Mac:**
+
+        ```
+        <copy>
+        export PATH=$PWD/mongosh/bin:$PATH
+        mongosh --version
+        </copy>
+        ```
+
+    * **Windows:**
+
+        ```
+        <copy>
+        set PATH=%CD%\mongosh\bin;%PATH%
+        mongosh --version
+        </copy>
+        ```
+
+    **What you should see:** `2.5.9`.
+
+    > That `PATH` lasts for this terminal window only. **Keep this window open for the whole workshop.** If you close it, re-run the `PATH` command from this directory.
 
 ## Task 3: Connect mongosh to Your Database
 
@@ -117,7 +166,7 @@ In this lab, you will:
     | `]` | `%5D` |
     | `@` | `%40` |
 
-3. In **Cloud Shell**, run `mongosh` with your edited URL in **single quotes**:
+3. In the **terminal where you installed mongosh**, run it with your edited URL in quotes — **single quotes on Mac**, **double quotes on Windows**:
 
     ```
     <copy>
@@ -175,7 +224,7 @@ In this lab, you will:
 ## Learn More
 
 * [Oracle Database API for MongoDB documentation](https://docs.oracle.com/en/database/oracle/mongodb-api/)
-* [Using Oracle Cloud Infrastructure Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
+* [Oracle Database API for MongoDB — connection strings](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/overview-oracle-database-api-mongodb.html)
 * [MongoDB Shell downloads](https://www.mongodb.com/try/download/shell)
 
 ## Acknowledgements

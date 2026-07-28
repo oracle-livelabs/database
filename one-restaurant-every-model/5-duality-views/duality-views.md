@@ -179,7 +179,7 @@ Estimated Lab Time: 11 minutes
 
 ## Task 5: The Third Door — REST
 
-1. In **Cloud Shell** (not mongosh — use a second tab or `exit` first), read the same document through ORDS. Substitute your Database Actions hostname and schema credentials:
+1. In a **terminal** (not mongosh — open a second terminal window, or `exit` first), read the same document through ORDS with `curl`. Substitute your Database Actions hostname and schema credentials:
 
     ```
     <copy>

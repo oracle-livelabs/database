@@ -1,5 +1,5 @@
 -- CATCH-UP -> state after Lab 2. Run with SQLcl from the scripts directory
--- (Cloud Shell: `sql /nolog` then connect, then @90_catchup_after_m2.sql).
+-- (Or from SQLcl: `sql /nolog`, connect, then @90_catchup_after_m2.sql.)
 -- All catch-ups are SQL so mongosh-blocked attendees can run them.
 @01_seed_stores.sql
 

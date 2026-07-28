@@ -16,7 +16,7 @@ Estimated Lab Time: 5 minutes
 
 ## Task 1: Set Your Connection Variables
 
-1. In **Cloud Shell**, export your ORDS endpoint and credentials. The host is the same one you used for the REST read in Lab 5 — substitute your own values:
+1. In a **terminal**, export your ORDS endpoint and credentials. The host is the same one you used for the REST read in Lab 5 — substitute your own values:
 
     ```
     <copy>
@@ -28,7 +28,7 @@ Estimated Lab Time: 5 minutes
 
 ## Task 2: Run the Choreography
 
-1. Paste the whole block into **Cloud Shell** (also in `scripts/05_ords_etag.sh`). It does four things, printing each step — no hand-edited JSON, no copy-pasted etag strings:
+1. Paste the whole block into the same **terminal** (also in `scripts/05_ords_etag.sh`). It needs `curl` and `jq` — both standard on macOS and Linux; on Windows use Git Bash or WSL. It does four things, printing each step — no hand-edited JSON, no copy-pasted etag strings:
 
     ```
     <copy>
