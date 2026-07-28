@@ -1,5 +1,11 @@
 # ADB Validation Result - Life Sciences Workshop
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 Estimated Time: 5 minutes
 
 Generated: 2026-07-27

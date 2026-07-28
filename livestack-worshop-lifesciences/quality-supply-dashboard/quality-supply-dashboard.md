@@ -143,7 +143,7 @@ Broaden the view from individual signals to regulated product exposure so qualit
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
-**Note:** This query groups product-linked quality signals by regulated product and manufacturer, then calculates how often each product appears, how severe the linked signals are on average, and how much exposure is represented.
+    **Note:** This query groups product-linked quality signals by regulated product and manufacturer, then calculates how often each product appears, how severe the linked signals are on average, and how much exposure is represented.
 
     **Expected output: Top Product Exposure**
 

@@ -47,7 +47,7 @@ Start by calculating the nearest cold-chain sites for a trial site so the respon
 
 1. Run this spatial distance query:
 
-  **Note:**
+    **Note:**
       In order to understand this query, read it in four parts.
 
     1. `LS_TRIAL_SITES_V` gives you the trial-site business context.
@@ -126,7 +126,7 @@ Next, summarize cold-chain capacity so planners can compare controlled storage, 
     </copy>
     ```
 
-  **Note:** The SQL groups supply capacity by cold-chain site, then compares controlled storage capacity, utilization, available units, reserved units, and incoming units.
+    **Note:** The SQL groups supply capacity by cold-chain site, then compares controlled storage capacity, utilization, available units, reserved units, and incoming units.
 
     **Expected output: Cold-Chain Capacity Summary**
 

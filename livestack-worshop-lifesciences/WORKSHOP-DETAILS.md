@@ -6,6 +6,11 @@ This file captures reusable setup metadata for the Seer Lifesciences workshop.
 
 Estimated Time: **5 minutes**
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Short Description
 
 Build a Seer Lifesciences clinical supply intelligence workflow with Oracle AI Database 26ai. Learners trace dashboard, JSON, vector, graph, spatial, and Oracle Machine Learning evidence from one governed database foundation.

@@ -1,5 +1,14 @@
 # LiveLabs Workshop Validation – livestack-worshop-lifesciences
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Generated on 2026-07-28T12:27:57.488902+00:00
 
 ## Structure Check
@@ -103,3 +112,8 @@ Generated on 2026-07-28T12:27:57.488902+00:00
 - ✍️ Lanham score: 3/5
   - 4 sentence(s) exceed 20 words; tighten wording.
   - Heavy nominalization usage; prefer vivid verbs.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year
