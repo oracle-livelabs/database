@@ -84,7 +84,7 @@ In this lab, you will:
 
         ```
         <copy>
-        curl https://downloads.mongodb.com/compass/mongosh-2.5.9-darwin-arm64.zip -o mongosh.zip
+        curl https://downloads.mongodb.com/compass/mongosh-2.9.2-darwin-arm64.zip -o mongosh.zip
         </copy>
         ```
 
@@ -92,7 +92,7 @@ In this lab, you will:
 
         ```
         <copy>
-        curl https://downloads.mongodb.com/compass/mongosh-2.5.9-darwin-x64.zip -o mongosh.zip
+        curl https://downloads.mongodb.com/compass/mongosh-2.9.2-darwin-x64.zip -o mongosh.zip
         </copy>
         ```
 
@@ -100,7 +100,7 @@ In this lab, you will:
 
         ```
         <copy>
-        curl https://downloads.mongodb.com/compass/mongosh-2.5.9-win32-x64.zip -o mongosh.zip
+        curl https://downloads.mongodb.com/compass/mongosh-2.9.2-win32-x64.zip -o mongosh.zip
         </copy>
         ```
 
@@ -135,7 +135,7 @@ In this lab, you will:
         </copy>
         ```
 
-    **What you should see:** `2.5.9`.
+    **What you should see:** `2.9.2`.
 
     > That `PATH` lasts for this terminal window only. **Keep this window open for the whole workshop.** If you close it, re-run the `PATH` command from this directory.
 
