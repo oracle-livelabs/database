@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Expandable details section changing from closed to open</title>
+  <desc id="desc">A neutral LiveLabs details section example showing a closed state and an open state.</desc>
+  <rect width="960" height="360" rx="18" fill="#faf9f7"/>
+  <text x="48" y="52" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#312d2a">Expandable context in the labs</text>
+  <rect x="58" y="96" width="370" height="84" rx="12" fill="#ffffff" stroke="#d8d2c8"/>
+  <text x="86" y="146" font-family="Arial, sans-serif" font-size="18" fill="#374151">› Learn more: database concept</text>
+  <text x="170" y="218" font-family="Arial, sans-serif" font-size="16" fill="#6b7280">Closed by default</text>
+  <path d="M458 140h64" stroke="#7a3e2f" stroke-width="6" stroke-linecap="round"/>
+  <path d="M516 122l34 18-34 18z" fill="#7a3e2f"/>
+  <rect x="582" y="96" width="320" height="178" rx="12" fill="#ffffff" stroke="#d8d2c8"/>
+  <text x="610" y="136" font-family="Arial, sans-serif" font-size="18" fill="#374151">⌄ Learn more: database concept</text>
+  <line x1="610" y1="158" x2="870" y2="158" stroke="#e5e0d8"/>
+  <text x="610" y="190" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">Extra context appears here.</text>
+  <text x="610" y="220" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">You can read it when useful,</text>
+  <text x="610" y="250" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">then keep moving through the task.</text>
+  <text x="694" y="314" font-family="Arial, sans-serif" font-size="16" fill="#6b7280">Open when selected</text>
+</svg>

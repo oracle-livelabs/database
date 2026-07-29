@@ -1,18 +1,20 @@
-# Oracle Linux Virtualization Manager (OLVM) on OCI - Beginner
+# Introduction
 
-## Introduction
+## About this Workshop
 
 Oracle Linux Virtualization Manager (OLVM) provides KVM-based virtualization and centralized management for Oracle Linux environments. In this beginner workshop, you will deploy OLVM on Oracle Cloud Infrastructure (OCI), configure a two-host KVM cluster, set up networking and storage, deploy a multi-tier application, and perform live migration.
 
+> **Note: This tutorial is only for testing and evaluation purposes; Oracle Linux Virtualization Manager support for OCI is under development and is not supported to manage OCI systems.**
+
 **Estimated Workshop Time:** 5-6 hours of hands-on work, including the Ansible setup lab.
 
-## Audience and Delivery Model
+### Audience and Delivery Model
 
 This workshop is designed for instructor-led enablement sessions for Oracle solution engineers and partners. It has been validated in guided delivery.
 
 If you complete the workshop outside a guided session, use each checkpoint before moving on. Do not assume a later lab can be started safely while an earlier lab is still completing long-running work.
 
-## Workshop Flow
+### Workshop Flow
 
 This workshop is organized into the following labs:
 
@@ -25,7 +27,7 @@ This workshop is organized into the following labs:
 
 **End Result:** A working OLVM deployment on OCI with a two-host KVM cluster, shared storage, multiple virtual machines, and a running Employee Directory application.
 
-## Workshop Rules
+### Workshop Rules
 
 Follow these rules throughout the workshop:
 
@@ -49,7 +51,7 @@ In this workshop, you will:
 - Deploy and validate virtual machines
 - Deploy a multi-tier application and perform live migration
 
-## Prerequisites
+### Prerequisites
 
 This workshop assumes you have:
 
@@ -105,14 +107,29 @@ Before workshop day, confirm with your tenancy administrator that VLAN / Layer 2
 
 If VLANs are not available, submit a support or service-limit request before starting the workshop. Lab 1 cannot be completed if the required VLAN capability is not enabled.
 
+## About Product/Technology
 
+**Oracle Linux Virtualization Manager (OLVM)** is an open-source, enterprise-grade virtualization management platform for Oracle Linux KVM environments. It provides a centralized web-based portal for deploying, monitoring, and managing KVM-based virtual machines across one or more hypervisor hosts. OLVM is supported by Oracle and integrates with Oracle Linux.
+
+**KVM, or Kernel-based Virtual Machine,** is the hypervisor built into the Linux kernel. It provides the virtualization layer that allows Oracle Linux hosts to run virtual machines.
+
+**Oracle Cloud Infrastructure (OCI)** is Oracle's cloud platform. In this workshop, OCI provides the compute instances, networking, and storage resources used to host the OLVM environment.
+
+**Ansible** is an automation tool used to define and provision infrastructure consistently. Lab 1 uses an Ansible playbook to create the workshop infrastructure so each participant starts with a consistent environment.
+
+**OCI VLANs** provide the Layer 2 network used by guest virtual machines. This network allows VMs running on the KVM hosts to communicate through the workshop's virtualized network path.
+
+   ![OLVM on OCI workshop topology](./images/olvm-oci-workshop-topology.png "OLVM on OCI workshop topology")
+   *Workshop topology for OLVM on OCI, including the OLVM manager, two KVM hosts, guest VMs, OCI VLAN-based Layer 2 VM networking, and shared storage.*
 
 ## Learn More
 
-- Oracle Linux Virtualization Manager install lab (official): https://docs.oracle.com/en/learn/olvm-install/index.html
+- Oracle Linux Virtualization Manager install lab (official): <https://docs.oracle.com/en/learn/olvm-install/index.html>
+
+- Oracle Linux Virtualization Manager Documentation: <https://docs.oracle.com/en/virtualization/oracle-linux-virtualization-manager/>
 
 ## Acknowledgements
 
-- **Author** - Shawn Kelley, Perside Foster
+- **Author** - Shawn Kelley, Mark Atkinson, John Priest, Perside Foster
 - **Contributor** - Marvin Kim
-- **Last Updated By/Date** - Perside Foster, May 20, 2026
+- **Last Updated By/Date** - Perside Foster, Jul 2026

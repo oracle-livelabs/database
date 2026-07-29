@@ -6,11 +6,10 @@ In this lab, you will create the logical network for guest traffic, add shared s
 
 Estimated Time: 40-60 minutes, including OVA download and template import time.
 
-### Video Walkthrough
+<!-- ### Video Walkthrough
 
 This walkthrough video is silent and does not include audio narration.
-
-[](video:https://objectstorage.us-ashburn-1.oraclecloud.com/n/idhwewbjlvpy/b/olvm-on-oci/o/videos%2Fvideos_olvm-on-oci-lab4-no-presenter.mp4)
+[](video:https://objectstorage.us-ashburn-1.oraclecloud.com/n/idhwewbjlvpy/b/olvm-on-oci/o/videos%2Fvideos_olvm-on-oci-lab4-no-presenter.mp4) -->
 
 ### Objectives
 
@@ -28,7 +27,8 @@ This lab assumes you have:
 
 - Completed the Lab 3 checkpoint
 - Both KVM hosts showing status **Up**
-- Access to the Administration Portal
+- Access to the Administration Portal through the local hosts-file mapping created in Lab 2
+- The `olvm-cluster-id_rsa` private key downloaded in Lab 1
 - SSH access to the OLVM manager from your local machine
 
 > **Important:** Do not start this lab while either host is still `Installing`, `Initializing`, or `Non Operational`.
@@ -45,11 +45,13 @@ This lab assumes you have:
 
 4. For **Name**, enter:
 
-    ```
+    ```bash
     <copy>l2-vm-network</copy>
     ```
 
 5. Leave **VM Network** selected.
+
+    ![Create Logical Network page](./images/create-logical-network.png "Show Create Logical Network page")
 
 6. Click **OK**.
 
@@ -61,15 +63,17 @@ This lab assumes you have:
 
 3. Open the **Network Interfaces** tab.
 
+    ![Network Interface](./images/network-interface.png "Show Network Interface")
+
 4. Click **Setup Host Networks**.
 
-    ![Show Host Network dialog](images/olvm-setup-host-networks.png "Show Host Network dialog")
+    ![Show Host Network dialog](./images/olvm-setup-host-networks.png "Show Host Network dialog")
 
-5. Drag `l2-vm-network` from **Unassigned Logical Networks** on the left side into the physical interface box on the right side (for example, `ens5`).
+5. Drag `l2-vm-network` from **Unassigned Logical Networks** on the left side into the unassigned physical interface box on the right side. This is the VLAN VNIC created by Lab 1.
 
-    > **Tip:** Look for the interface that does **not** already have `ovirtmgmt` assigned to it. That is the correct interface for VM traffic.
+    > **Tip:** Look for the interface that does **not** already have `ovirtmgmt` assigned to it. Interface names differ by instance, so do not rely on an example name. The correct interface is the unassigned VLAN VNIC, not the management interface.
 
-    ![Show Host Networks dialog after l2-vm-network setup](images/olvm-setup-host-networks-assigned.png "Show Host Networks dialog after l2-vm-network setup")
+    ![Show Host Networks dialog after l2-vm-network setup](./images/olvm-setup-host-networks-assigned.png "Show Host Networks dialog after l2-vm-network setup")
 
 6. In the same **Setup Host Networks** dialog, configure the `l2-vm-network` address for `olkvm01`.
 
@@ -85,6 +89,8 @@ This lab assumes you have:
 
     This address is used as the KVM-host access and test address for the VM network. Do not configure a gateway or DNS server on `l2-vm-network`.
 
+    ![Edit Network](./images/edit-network.png "Show Edit Network")
+
 7. Click **OK** and wait for the network setup task to finish before you continue.
 
 ## Task 3: Assign the Logical Network to `olkvm02`
@@ -97,7 +103,7 @@ This lab assumes you have:
 
 4. Click **Setup Host Networks**.
 
-5. Drag `l2-vm-network` from **Unassigned Logical Networks** to the physical interface box on the right, using the same interface you used for `olkvm01`.
+5. Drag `l2-vm-network` from **Unassigned Logical Networks** to the unassigned VLAN physical interface box on the right. Do not use the `ovirtmgmt` interface. The interface name can differ from the name shown for `olkvm01`.
 
 6. In the same **Setup Host Networks** dialog, configure the `l2-vm-network` address for `olkvm02`.
 
@@ -121,9 +127,11 @@ This lab assumes you have:
 
 2. Click **New Domain**.
 
+    ![Storage Domain](./images/storage-domain.png "Show Storage Domain")
+
 3. For **Name**, enter:
 
-    ```
+    ```text
     <copy>amd-storage-domain-01</copy>
     ```
 
@@ -136,6 +144,10 @@ This lab assumes you have:
 7. Set **Host to Use** to **olkvm01**.
 
 8. When the available LUNs appear, click **Add** next to the first LUN ID.
+
+    The available shared LUNs were created by Lab 1 from the `amd-storage-domain-01` and `amd-storage-domain-02` OCI block volumes. Select one LUN for this data domain. Do not create, format, or attach additional OCI volumes during this lab.
+
+    ![Add Storage Domain](./images/add-storage-domain.png "Show Add Storage Domain")
 
 9. Click **OK**.
 
@@ -161,6 +173,8 @@ This lab assumes you have:
 
     **Expected time:** 10-20 minutes, depending on download speed. Wait for the `curl` command to complete and return you to the shell prompt before continuing.
 
+    ![OVA Template](./images/ova-template.png "Show Download OVA Template")
+
 3. Navigate to **Compute -> Templates -> Import**.
 
 4. Keep the default values for **Data Center** and **Source**, and select **olkvm01** for **Host**.
@@ -171,7 +185,7 @@ This lab assumes you have:
     <copy>/tmp</copy>
     ```
 
-    ![Show Import Template dialog with the File Path](images/olvm-import-templates.png "Show Import Template dialog with the File Path")
+    ![Show Import Template dialog with the File Path](./images/olvm-import-templates.png "Show Import Template dialog with the File Path")
 
 6. Click **Load**.
 
@@ -186,6 +200,8 @@ This lab assumes you have:
 11. Wait for the template import status to show **OK** before you continue.
 
     **Expected time:** 10-20 minutes.
+
+    ![OVA Template Import Complete](./images/template-import-complete.png "Show OVA Template Import Complete")
 
     Do not create the test VM until the import finishes successfully.
 
@@ -202,6 +218,8 @@ This lab assumes you have:
 5. Set `nic1` to `l2-vm-network`.
 
     If the dialog shows **vNIC Profile**, select `l2-vm-network` there.
+
+    ![Virtual Machine General](./images/virtual-machine-general.png "Show Virtual Machine General")
 
 6. Click **Show Advanced Options**.
 
@@ -226,6 +244,8 @@ This lab assumes you have:
 
     `10.0.10.1` is the VLAN gateway for the VM network. Use it as the gateway, not as the DNS server.
 
+    ![Virtual Machine Init](./images/virtual-machine-init.png "Show Virtual Machine Init")
+
 10. Click **OK**.
 
 11. Use **Tasks** in the upper-right corner to monitor VM creation.
@@ -240,6 +260,8 @@ This lab assumes you have:
 
 2. Wait for the VM status to change to **Up**.
 
+    ![Virtual Machine Up](./images/virtual-machine-up.png "Show Virtual Machine Up")
+
 3. In the Virtual Machines list, check the **Host** column for `ol9-vm1`.
 
     The VM can run on either `olkvm01` or `olkvm02`. If the VM is running on `olkvm02`, verifying only `olkvm01` is not enough. The host shown in this column must have `l2-vm-network` assigned and up.
@@ -248,10 +270,20 @@ This lab assumes you have:
 
     The interface should be plugged and linked. If `nic1` is missing, unplugged, unlinked, or using the wrong profile, shut down the VM, edit the VM network interface, select `l2-vm-network`, then start the VM again.
 
-5. From your local PowerShell window, connect to the OLVM manager.
+    ![Virtual Machine NIC1](./images/virtual-machine-nic1.png "Show Virtual Machine NIC1")
+
+5. From your local terminal, connect to the OLVM manager.
+
+    In Windows PowerShell, run:
+
+    ```powershell
+    <copy>ssh -i "$HOME\.ssh\olvm-cluster-id_rsa" oracle@<olvm-public-ip></copy>
+    ```
+
+    In macOS Terminal or a Linux terminal, run:
 
     ```bash
-    <copy>ssh -i C:\Users\<you>\.ssh\olvm-cluster-id_rsa oracle@<olvm-public-ip></copy>
+    <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip></copy>
     ```
 
 6. Confirm the KVM host has an address on `l2-vm-network`.
@@ -324,9 +356,13 @@ This lab assumes you have:
     <copy>ping -c 3 <kvm-l2-ip></copy>
     ```
 
+    **Example:** `ping -c 3 10.0.10.254`
+
     Replace `<kvm-l2-ip>` with the address you recorded in step 6.
 
     This ping should succeed. Do not use `10.0.10.1`, DNS, or internet access as the success test in this lab. Guest internet access is not required for Lab 5.
+
+    ![Virtual Machine Test](./images/ol9-vm1-test.png "Show Virtual Machine Test")
 
 10. Exit the VM:
 
@@ -355,6 +391,6 @@ You may now **proceed to the next lab**
 
 ## Acknowledgements
 
-- **Author** - Shawn Kelley, Perside Foster
+- **Author** - Shawn Kelley, Mark Atkinson, John Priest, Perside Foster
 - **Contributor** - Marvin Kim
-- **Last Updated By/Date** - Perside Foster, May 20, 2026
+- **Last Updated By/Date** - Perside Foster, Jul 2026

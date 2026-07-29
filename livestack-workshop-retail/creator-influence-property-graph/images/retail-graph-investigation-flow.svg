@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360">
+<style>
+.bg{fill:#f7f6f2}.panel{fill:#fff;stroke:#d7d2ca;stroke-width:1.5}.title{font-family:Arial,sans-serif;font-size:25px;font-weight:700;fill:#161513}.sub{font-family:Arial,sans-serif;font-size:14px;fill:#4b4741}.head{font-family:Arial,sans-serif;font-size:16px;font-weight:700;fill:#312d2a}.item{font-family:Arial,sans-serif;font-size:13px;fill:#312d2a}.chip{fill:#eef4f2;stroke:#b9c9c2;stroke-width:1}.foot{font-family:Arial,sans-serif;font-size:15px;font-weight:700;fill:#fff}.accent{fill:#8f4235}.arrow{stroke:#8f4235;stroke-width:4;stroke-linecap:round}
+</style>
+<rect class="bg" width="900" height="360"/>
+<text x="42" y="42" class="title">Creator Influence Graph Paths</text>
+<text x="42" y="67" class="sub">Lab 5 uses SQL/PGQ to explain how creators, brands, and audiences connect.</text>
+<rect x="42" y="104" width="250" height="185" rx="12" class="panel"/>
+<rect x="42" y="104" width="250" height="38" rx="12" fill="#8f4235"/>
+<text x="60" y="129" class="head" fill="#fff">Graph objects</text>
+<rect x="60" y="149" width="214" height="25" rx="6" class="chip"/>
+<text x="72" y="166" class="item">INFLUENCER_NETWORK</text>
+<rect x="60" y="180" width="214" height="25" rx="6" class="chip"/>
+<text x="72" y="197" class="item">Influencer vertices</text>
+<rect x="60" y="211" width="214" height="25" rx="6" class="chip"/>
+<text x="72" y="228" class="item">Brand vertices</text>
+<rect x="60" y="242" width="214" height="25" rx="6" class="chip"/>
+<text x="72" y="259" class="item">connects_to edges</text>
+<line x1="299" y1="196" x2="317" y2="196" class="arrow"/>
+<polygon points="321,196 309,188 309,204" class="accent"/>
+<rect x="320" y="104" width="250" height="185" rx="12" class="panel"/>
+<rect x="320" y="104" width="250" height="38" rx="12" fill="#2f6f73"/>
+<text x="338" y="129" class="head" fill="#fff">Path queries</text>
+<rect x="338" y="149" width="214" height="25" rx="6" class="chip"/>
+<text x="350" y="166" class="item">GRAPH_TABLE</text>
+<rect x="338" y="180" width="214" height="25" rx="6" class="chip"/>
+<text x="350" y="197" class="item">One-hop relationships</text>
+<rect x="338" y="211" width="214" height="25" rx="6" class="chip"/>
+<text x="350" y="228" class="item">Brand reach paths</text>
+<rect x="338" y="242" width="214" height="25" rx="6" class="chip"/>
+<text x="350" y="259" class="item">Strength ranking</text>
+<line x1="577" y1="196" x2="595" y2="196" class="arrow"/>
+<polygon points="599,196 587,188 587,204" class="accent"/>
+<rect x="598" y="104" width="250" height="185" rx="12" class="panel"/>
+<rect x="598" y="104" width="250" height="38" rx="12" fill="#5b5f97"/>
+<text x="616" y="129" class="head" fill="#fff">Campaign action</text>
+<rect x="616" y="149" width="214" height="25" rx="6" class="chip"/>
+<text x="628" y="166" class="item">ApexRide reach</text>
+<rect x="616" y="180" width="214" height="25" rx="6" class="chip"/>
+<text x="628" y="197" class="item">Promoter to audience</text>
+<rect x="616" y="211" width="214" height="25" rx="6" class="chip"/>
+<text x="628" y="228" class="item">Prioritize creators</text>
+<rect x="616" y="242" width="214" height="25" rx="6" class="chip"/>
+<text x="628" y="259" class="item">Explain propagation</text>
+<rect x="42" y="310" width="816" height="34" rx="9" class="accent"/>
+<text x="62" y="332" class="foot">Relationship evidence is queryable as paths without exporting the network.</text>
+</svg>

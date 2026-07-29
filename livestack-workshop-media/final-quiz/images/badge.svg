@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+  <title id="title">Oracle LiveLabs LiveStack Media Certificate Badge</title>
+  <desc id="desc">A shield-style Oracle LiveLabs certificate badge for LiveStack Media.</desc>
+  <rect width="720" height="720" rx="64" fill="#f8f7f4"/>
+  <path d="M360 70 590 168v150c0 154-92 267-230 332C222 585 130 472 130 318V168L360 70z" fill="#fff" stroke="#c74634" stroke-width="18"/>
+  <circle cx="360" cy="268" r="112" fill="#fff7ed" stroke="#7a3e2f" stroke-width="10"/>
+  <path d="M296 266h128M318 224h84M318 308h84" stroke="#c74634" stroke-width="18" stroke-linecap="round"/>
+  <text x="360" y="438" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#312d2a">LiveStack</text>
+  <text x="360" y="492" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#c74634">Media</text>
+  <text x="360" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#4b5563">Oracle AI Database 26ai</text>
+</svg>

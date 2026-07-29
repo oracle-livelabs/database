@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Dashboard evidence flow</title>
+  <desc id="desc">Media dashboard KPIs connect to SQL evidence and business action.</desc>
+  <rect width="900" height="360" rx="18" fill="#faf9f7"/>
+  <text x="36" y="48" font-family="Arial" font-size="24" font-weight="700" fill="#312d2a">Launch dashboard to SQL evidence</text>
+  <g font-family="Arial" font-size="15" fill="#374151">
+    <rect x="40" y="92" width="210" height="180" rx="14" fill="#fff" stroke="#d8d2c8"/>
+    <text x="64" y="126" font-weight="700">Dashboard surface</text>
+    <text x="64" y="160">Campaign requests</text>
+    <text x="64" y="188">Tracked revenue</text>
+    <text x="64" y="216">Audience momentum</text>
+    <text x="64" y="244">Launch demand alerts</text>
+    <rect x="344" y="92" width="220" height="180" rx="14" fill="#fff7ed" stroke="#c74634"/>
+    <text x="368" y="126" font-weight="700">SQL evidence</text>
+    <text x="368" y="160">MEDIA_CAMPAIGN_ORDERS_V</text>
+    <text x="368" y="188">MEDIA_AUDIENCE_SIGNALS_V</text>
+    <text x="368" y="216">MEDIA_CONTENT_ASSETS_V</text>
+    <text x="368" y="244">POST_PRODUCT_MENTIONS</text>
+    <rect x="656" y="92" width="204" height="180" rx="14" fill="#fff" stroke="#d8d2c8"/>
+    <text x="680" y="126" font-weight="700">Business action</text>
+    <text x="680" y="160">Prioritize launches</text>
+    <text x="680" y="188">Review high momentum</text>
+    <text x="680" y="216">Plan capacity</text>
+    <text x="680" y="244">Explain the metric</text>
+  </g>
+  <path d="M270 182h52" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M318 166l26 16-26 16z" fill="#7a3e2f"/>
+  <path d="M584 182h50" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M630 166l26 16-26 16z" fill="#7a3e2f"/>
+  <text x="40" y="320" font-family="Arial" font-size="15" fill="#6b7280">The dashboard stays explainable because the summary and detail rows come from the same governed database foundation.</text>
+</svg>

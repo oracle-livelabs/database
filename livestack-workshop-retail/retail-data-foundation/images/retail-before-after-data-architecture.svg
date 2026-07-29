@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="666" viewBox="0 0 1280 666">
+  <style>
+    .bg{fill:#f4f7fb}.title{font-family:Arial,sans-serif;font-size:34px;font-weight:700;fill:#14213d}.sub{font-family:Arial,sans-serif;font-size:18px;fill:#253246}.panel{fill:#fff;stroke:#cfd7df;stroke-width:2}.bar1{fill:#aa2438}.bar2{fill:#10562d}.barText{font-family:Arial,sans-serif;font-size:24px;font-weight:700;fill:#fff}.boxText{font-family:Arial,sans-serif;font-size:18px;font-weight:700;fill:#101827}.chipText{font-family:Arial,sans-serif;font-size:12px;font-weight:700;fill:#111827}.small{font-family:Arial,sans-serif;font-size:15px;fill:#1f2a44}.section{font-family:Arial,sans-serif;font-size:22px;font-weight:700;fill:#aa2438}.greenHead{font-family:Arial,sans-serif;font-size:22px;font-weight:700;fill:#10562d}.dbText{font-family:Arial,sans-serif;font-size:25px;font-weight:700;fill:#10562d}.pillText{font-family:Arial,sans-serif;font-size:15px;font-weight:700;fill:#fff}.conv{font-family:Arial,sans-serif;font-size:16px;font-weight:700;fill:#2c32a0}.icon{fill:none;stroke-width:3}.minus{fill:#ffd8d8}.minusText{font-family:Arial,sans-serif;font-size:18px;font-weight:700;fill:#d63737}.check{fill:#d8f5df}.checkText{font-family:Arial,sans-serif;font-size:18px;font-weight:700;fill:#0b8d3a}
+  </style>
+  <rect class="bg" width="1280" height="666"/>
+  <text x="38" y="52" class="title">Before and After: Retail Data Architecture</text>
+  <text x="38" y="82" class="sub">A fragmented design spreads each data type into a different system.</text>
+  <text x="38" y="108" class="sub">Oracle Database 26ai keeps retail operations, AI search, graph, spatial, ML, SQL, and security together.</text>
+
+  <rect x="38" y="132" width="522" height="514" rx="18" class="panel"/>
+  <path d="M56 132 h486 a18 18 0 0 1 18 18 v35 h-522 v-35 a18 18 0 0 1 18-18z" class="bar1"/>
+  <text x="62" y="166" class="barText">Before: Separate Specialist Stores</text>
+
+  <rect x="66" y="209" width="215" height="73" rx="10" fill="#fff" stroke="#f06445" stroke-width="2.5"/>
+  <rect x="80" y="226" width="39" height="39" rx="8" fill="#f06445"/><ellipse cx="99.5" cy="234" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M85 234 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="134" y="239" class="boxText">Order</text><text x="134" y="256" class="boxText">Store</text><rect x="134" y="257" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="170" y="270" class="chipText">SQL</text>
+
+  <rect x="314" y="209" width="215" height="73" rx="10" fill="#fff" stroke="#ff9a4d" stroke-width="2.5"/>
+  <rect x="328" y="226" width="39" height="39" rx="8" fill="#ff9a4d"/><ellipse cx="347.5" cy="234" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M333 234 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="382" y="239" class="boxText">Product</text><text x="382" y="256" class="boxText">Catalog</text><rect x="382" y="257" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="414" y="270" class="chipText">JSON</text>
+
+  <rect x="66" y="297" width="215" height="73" rx="10" fill="#fff" stroke="#9b51e0" stroke-width="2.5"/>
+  <rect x="80" y="314" width="39" height="39" rx="8" fill="#9b51e0"/><ellipse cx="99.5" cy="322" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M85 322 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="134" y="327" class="boxText">Signal Search</text><text x="134" y="344" class="boxText">Index</text><rect x="134" y="345" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="152" y="358" class="chipText">AI SEARCH</text>
+
+  <rect x="314" y="297" width="215" height="73" rx="10" fill="#fff" stroke="#159a8a" stroke-width="2.5"/>
+  <rect x="328" y="314" width="39" height="39" rx="8" fill="#159a8a"/><ellipse cx="347.5" cy="322" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M333 322 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="382" y="327" class="boxText">Creator Graph</text><text x="382" y="344" class="boxText">Store</text><rect x="382" y="345" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="414" y="358" class="chipText">LINKS</text>
+
+  <rect x="66" y="385" width="215" height="73" rx="10" fill="#fff" stroke="#3d7ea6" stroke-width="2.5"/>
+  <rect x="80" y="402" width="39" height="39" rx="8" fill="#3d7ea6"/><ellipse cx="99.5" cy="410" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M85 410 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="134" y="415" class="boxText">Spatial</text><text x="134" y="432" class="boxText">Routing Store</text><rect x="134" y="433" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="153" y="446" class="chipText">LOCATION</text>
+
+  <rect x="314" y="385" width="215" height="73" rx="10" fill="#fff" stroke="#efc14d" stroke-width="2.5"/>
+  <rect x="328" y="402" width="39" height="39" rx="8" fill="#efc14d"/><ellipse cx="347.5" cy="410" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M333 410 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="382" y="415" class="boxText">ML Feature</text><text x="382" y="432" class="boxText">Store</text><rect x="382" y="433" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="412" y="446" class="chipText">MODELS</text>
+
+  <text x="66" y="508" class="section">Integration and control burden</text>
+  <circle cx="79" cy="532" r="9" class="minus"/><text x="74" y="538" class="minusText">-</text><text x="98" y="538" class="small">Data copied and synchronized between systems</text>
+  <circle cx="79" cy="560" r="9" class="minus"/><text x="74" y="566" class="minusText">-</text><text x="98" y="566" class="small">Security rules rebuilt in multiple products</text>
+  <circle cx="79" cy="588" r="9" class="minus"/><text x="74" y="594" class="minusText">-</text><text x="98" y="594" class="small">Pipelines add delay, drift, and failure points</text>
+  <circle cx="79" cy="616" r="9" class="minus"/><text x="74" y="622" class="minusText">-</text><text x="98" y="622" class="small">Teams reconcile answers when systems disagree</text>
+
+  <rect x="588" y="308" width="105" height="105" rx="15" fill="#e7efff" stroke="#b7c7ff" stroke-width="2"/>
+  <text x="602" y="337" class="conv">Converge</text><path d="M610 370 h50 v-15 l25 27 -25 27 v-15 h-50z" fill="#4a3fe0"/>
+
+  <rect x="720" y="132" width="522" height="514" rx="18" class="panel"/>
+  <path d="M738 132 h486 a18 18 0 0 1 18 18 v35 h-522 v-35 a18 18 0 0 1 18-18z" class="bar2"/>
+  <text x="744" y="166" class="barText">After: Oracle Converged Database</text>
+
+  <ellipse cx="982" cy="313" rx="160" ry="108" fill="#eafbf0" stroke="#79e49b" stroke-width="2.5"/>
+  <path d="M882 265 q100 -26 198 0 v111 q-98 26 -198 0z" fill="#fff" stroke="#0d8a43" stroke-width="3"/>
+  <ellipse cx="981" cy="265" rx="99" ry="12" fill="#e6fff0" stroke="#0d8a43" stroke-width="3"/>
+  <text x="941" y="322" class="dbText">Oracle</text><text x="895" y="353" class="dbText">Database 26ai</text>
+  <rect x="762" y="209" width="139" height="43" rx="8" fill="#eb6a4f"/><text x="782" y="235" class="pillText">SQL analytics</text>
+  <rect x="1044" y="209" width="139" height="43" rx="8" fill="#ffa35a"/><text x="1064" y="235" class="pillText">JSON Duality</text>
+  <rect x="742" y="313" width="122" height="44" rx="8" fill="#efc14d"/><text x="757" y="340" class="boxText" font-size="16">OML models</text>
+  <rect x="1096" y="313" width="136" height="44" rx="8" fill="#9b51e0"/><text x="1104" y="340" class="pillText">AI Vector Search</text>
+  <rect x="762" y="418" width="139" height="44" rx="8" fill="#3d7ea6"/><text x="805" y="445" class="pillText">Spatial</text>
+  <rect x="1044" y="418" width="139" height="44" rx="8" fill="#159a8a"/><text x="1058" y="445" class="pillText">Property Graph</text>
+
+  <text x="762" y="500" class="greenHead">What changes for Seer Sporting Goods</text>
+  <circle cx="775" cy="523" r="9" class="check"/><text x="771" y="529" class="checkText">✓</text><text x="795" y="529" class="small">One governed source for retail evidence</text>
+  <circle cx="775" cy="551" r="9" class="check"/><text x="771" y="557" class="checkText">✓</text><text x="795" y="557" class="small">Consistent security, auditing, and access control</text>
+  <circle cx="775" cy="579" r="9" class="check"/><text x="771" y="585" class="checkText">✓</text><text x="795" y="585" class="small">SQL works across rows, JSON, vectors, graphs, spatial, and ML</text>
+  <circle cx="775" cy="607" r="9" class="check"/><text x="771" y="613" class="checkText">✓</text><text x="795" y="613" class="small">Less data movement and fewer reconciliation gaps</text>
+</svg>

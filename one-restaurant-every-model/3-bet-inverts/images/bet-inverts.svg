@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="Helvetica,Arial,sans-serif">
+  <title>One corporate price change: five embedded copies mean four full-document rewrites and one silent miss — the string-typed drift never matches the numeric filter</title>
+  <style>
+    .memo  { fill:#312d2a; }
+    .memoT { fill:#ffffff; font-size:14px; font-weight:bold; text-anchor:middle; }
+    .memoS { fill:#e8e0d5; font-size:11.5px; text-anchor:middle; }
+    .doc   { fill:#ffffff; stroke:#312d2a; stroke-width:1.6; }
+    .docT  { fill:#312d2a; font-size:12.5px; font-weight:bold; text-anchor:middle; }
+    .mono  { font-family:SF Mono,Menlo,Consolas,monospace; font-size:11px; fill:#444444; }
+    .monoR { font-family:SF Mono,Menlo,Consolas,monospace; font-size:11px; fill:#c74634; font-weight:bold; }
+    .hit   { stroke:#312d2a; stroke-width:1.6; fill:none; marker-end:url(#ba); }
+    .miss  { stroke:#c74634; stroke-width:2; stroke-dasharray:6 4; fill:none; }
+    .stamp { fill:#c74634; font-size:10px; font-weight:bold; text-anchor:middle; }
+    .missT { fill:#c74634; font-size:12px; font-weight:bold; text-anchor:middle; }
+    .strip { fill:#f0f5f2; stroke:#2f6b4f; stroke-width:1.5; }
+    .stripT{ fill:#2f6b4f; font-size:13px; font-weight:bold; text-anchor:middle; }
+    .stripS{ fill:#312d2a; font-size:12.5px; text-anchor:middle; }
+    .x     { stroke:#c74634; stroke-width:3; }
+  </style>
+  <defs>
+    <marker id="ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#312d2a"/></marker>
+  </defs>
+
+  <rect class="memo" x="330" y="20" width="300" height="58" rx="9"/>
+  <text class="memoT" x="480" y="44">CORPORATE MEMO: cheeseburger &#8594; $13.99</text>
+  <text class="memoS" x="480" y="63">updateMany + arrayFilters [ item_id: 1000 ]</text>
+
+  <!-- five embedded docs -->
+  <g transform="translate(30,150)">
+    <rect class="doc" width="160" height="120" rx="8"/>
+    <text class="docT" x="80" y="22">s_100</text>
+    <text class="mono" x="12" y="44">{ items: [ {</text>
+    <text class="mono" x="24" y="60">item_id: 1000,</text>
+    <text class="monoR" x="24" y="76">price: 1399 } ] }</text>
+    <text class="stamp" x="80" y="102">WHOLE DOCUMENT REWRITTEN</text>
+  </g>
+  <g transform="translate(216,150)">
+    <rect class="doc" width="160" height="120" rx="8"/>
+    <text class="docT" x="80" y="22">s_101</text>
+    <text class="mono" x="12" y="44">{ items: [ {</text>
+    <text class="mono" x="24" y="60">item_id: 1000,</text>
+    <text class="monoR" x="24" y="76">price: 1399 } ] }</text>
+    <text class="stamp" x="80" y="102">WHOLE DOCUMENT REWRITTEN</text>
+  </g>
+  <g transform="translate(402,150)">
+    <rect class="doc" width="160" height="120" rx="8"/>
+    <text class="docT" x="80" y="22">s_102</text>
+    <text class="mono" x="12" y="44">{ items: [ {</text>
+    <text class="mono" x="24" y="60">item_id: 1000,</text>
+    <text class="monoR" x="24" y="76">price: 1399 } ] }</text>
+    <text class="stamp" x="80" y="102">WHOLE DOCUMENT REWRITTEN</text>
+  </g>
+  <g transform="translate(588,150)">
+    <rect class="doc" width="160" height="120" rx="8"/>
+    <text class="docT" x="80" y="22">s_103</text>
+    <text class="mono" x="12" y="44">{ items: [ {</text>
+    <text class="mono" x="24" y="60">item_id: 1000,</text>
+    <text class="monoR" x="24" y="76">price: 1399 } ] }</text>
+    <text class="stamp" x="80" y="102">WHOLE DOCUMENT REWRITTEN</text>
+  </g>
+  <g transform="translate(774,150)">
+    <rect class="doc" width="160" height="120" rx="8" stroke="#c74634" stroke-width="2.4"/>
+    <text class="docT" x="80" y="22">s_104</text>
+    <text class="mono" x="12" y="44">{ items: [ {</text>
+    <text class="monoR" x="14" y="60">item_id: "1000",</text>
+    <text class="mono" x="24" y="76">price: 1299 } ] }</text>
+    <text class="missT" x="80" y="102">STILL 1299 — MISSED</text>
+  </g>
+
+  <path class="hit" d="M395,80 L118,146"/>
+  <path class="hit" d="M440,82 L300,146"/>
+  <path class="hit" d="M482,82 L482,146"/>
+  <path class="hit" d="M524,82 L664,146"/>
+  <path class="miss" d="M568,80 L846,143"/>
+  <line class="x" x1="700" y1="97" x2="722" y2="119"/>
+  <line class="x" x1="722" y1="97" x2="700" y2="119"/>
+  <text class="missT" x="762" y="96">the STRING never matches</text>
+  <text class="missT" x="762" y="112">the numeric filter</text>
+
+  <text class="stripS" x="480" y="316">matchedCount: 5&#160;&#160;&#183;&#160;&#160;modifiedCount: 4&#160;&#160;&#183;&#160;&#160;errors: 0&#160;&#160;&#183;&#160;&#160;the data just quietly stopped being true</text>
+
+  <rect class="strip" x="90" y="350" width="780" height="120" rx="10"/>
+  <text class="stripT" x="480" y="380">THE SAME CHANGE ON THE CANONICAL MODEL (Lab 4)</text>
+  <text class="stripS" x="480" y="410" font-family="SF Mono,Menlo,Consolas,monospace">UPDATE item SET price = 1399 WHERE item_id = 1000;&#160;&#160;-- 1 row</text>
+  <text class="stripS" x="480" y="440">One copy of the truth. Nothing to fan out. Nothing to miss. Nothing to rewrite but 4 bytes.</text>
+</svg>

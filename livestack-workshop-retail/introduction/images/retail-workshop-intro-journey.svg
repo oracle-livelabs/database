@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">From retail signals to trusted action</title>
+  <desc id="desc">A four-step retail workshop journey showing unified retail data, demand and influence investigation, fulfillment and AI analytics, and trusted action on an Oracle Database 26ai converged foundation.</desc>
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#ece8e1" stroke-width="1"/>
+    </pattern>
+    <filter id="cardShadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#77736d"/>
+    </marker>
+    <style>
+      .title{font-family:Arial,Helvetica,sans-serif;font-size:36px;font-weight:700;fill:#2b2926}
+      .subtitle{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#3f3b37}
+      .card{fill:#fffdfb;stroke:#d8d1c8;stroke-width:1.5;filter:url(#cardShadow)}
+      .step{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:.02em}
+      .h{font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:700;fill:#2b2926}
+      .body{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#3f3b37}
+      .label{font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;fill:#3f3b37}
+      .pill{fill:#faf8f4;stroke:#d6cec4;stroke-width:1}
+      .pillText{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700}
+      .foundationTitle{font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:700;fill:#c83b2d}
+      .foundationText{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#3f3b37}
+      .bottom{font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;fill:#2b2926}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#fbfaf7"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+
+  <text x="58" y="70" class="title">From Retail Signals to Trusted Action</text>
+  <text x="58" y="101" class="subtitle">Use Oracle Database 26ai to connect retail data, understand demand, optimize fulfillment, and turn evidence into action.</text>
+
+  <!-- Step cards -->
+  <g transform="translate(58 176)">
+    <rect class="card" x="0" y="0" width="264" height="328" rx="12"/>
+    <rect x="0" y="0" width="264" height="8" rx="4" fill="#d44736"/>
+    <circle cx="45" cy="49" r="21" fill="#fff6f3" stroke="#d44736"/>
+    <path d="M34 42c0-6 22-6 22 0v18c0 6-22 6-22 0z" fill="none" stroke="#d44736" stroke-width="1.8"/>
+    <ellipse cx="45" cy="42" rx="11" ry="5" fill="none" stroke="#d44736" stroke-width="1.8"/>
+    <text x="84" y="48" class="step" fill="#d44736">STEP 1</text>
+    <text x="84" y="77" class="h">Unified</text>
+    <text x="84" y="103" class="h">Retail Data</text>
+    <text x="22" y="136" class="body">See how product, order,</text>
+    <text x="22" y="157" class="body">customer, and signal data</text>
+    <text x="22" y="178" class="body">stay organized as relational</text>
+    <text x="22" y="199" class="body">rows and application-friendly</text>
+    <text x="22" y="220" class="body">JSON documents.</text>
+    <text x="22" y="246" class="label">Related labs</text>
+    <rect class="pill" x="22" y="256" width="144" height="26" rx="5"/>
+    <text x="33" y="274" class="pillText" fill="#d44736">Lab 1: Data Foundation</text>
+    <rect class="pill" x="22" y="288" width="117" height="26" rx="5"/>
+    <text x="33" y="306" class="pillText" fill="#d44736">Lab 3: JSON Duality</text>
+  </g>
+
+  <path d="M331 344h31" stroke="#77736d" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <g transform="translate(362 176)">
+    <rect class="card" x="0" y="0" width="264" height="328" rx="12"/>
+    <rect x="0" y="0" width="264" height="8" rx="4" fill="#557a68"/>
+    <circle cx="45" cy="49" r="21" fill="#f2faf6" stroke="#557a68"/>
+    <path d="M45 31l18 33H27z" fill="none" stroke="#557a68" stroke-width="1.8"/>
+    <path d="M45 42v12" stroke="#557a68" stroke-width="2"/>
+    <circle cx="45" cy="59" r="2" fill="#557a68"/>
+    <text x="84" y="48" class="step" fill="#557a68">STEP 2</text>
+    <text x="84" y="77" class="h">Demand +</text>
+    <text x="84" y="103" class="h">Influence</text>
+    <text x="22" y="136" class="body">Use operating metrics,</text>
+    <text x="22" y="157" class="body">semantic product signals,</text>
+    <text x="22" y="178" class="body">and creator relationships</text>
+    <text x="22" y="199" class="body">to understand where retail</text>
+    <text x="22" y="220" class="body">attention should focus.</text>
+    <text x="22" y="246" class="label">Related labs</text>
+    <rect class="pill" x="22" y="256" width="118" height="26" rx="5"/>
+    <text x="33" y="274" class="pillText" fill="#557a68">Lab 2: Dashboard</text>
+    <rect class="pill" x="22" y="288" width="126" height="26" rx="5"/>
+    <text x="33" y="306" class="pillText" fill="#557a68">Lab 4: Vector Search</text>
+    <rect class="pill" x="158" y="288" width="91" height="26" rx="5"/>
+    <text x="169" y="306" class="pillText" fill="#557a68">Lab 5: Graph</text>
+  </g>
+
+  <path d="M635 344h31" stroke="#77736d" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <g transform="translate(666 176)">
+    <rect class="card" x="0" y="0" width="264" height="328" rx="12"/>
+    <rect x="0" y="0" width="264" height="8" rx="4" fill="#4f8397"/>
+    <circle cx="45" cy="49" r="21" fill="#f2f8fb" stroke="#4f8397"/>
+    <circle cx="37" cy="41" r="4" fill="#4f8397"/>
+    <circle cx="54" cy="41" r="4" fill="#4f8397"/>
+    <circle cx="37" cy="59" r="4" fill="#4f8397"/>
+    <circle cx="54" cy="59" r="4" fill="#4f8397"/>
+    <path d="M37 41h17v18H37z" fill="none" stroke="#4f8397" stroke-width="1.8"/>
+    <text x="84" y="48" class="step" fill="#4f8397">STEP 3</text>
+    <text x="84" y="77" class="h">Fulfillment +</text>
+    <text x="84" y="103" class="h">AI Analytics</text>
+    <text x="22" y="136" class="body">Combine location, inventory,</text>
+    <text x="22" y="157" class="body">and model output so teams</text>
+    <text x="22" y="178" class="body">can decide how to serve</text>
+    <text x="22" y="199" class="body">demand before pressure</text>
+    <text x="22" y="220" class="body">becomes a customer issue.</text>
+    <text x="22" y="246" class="label">Related labs</text>
+    <rect class="pill" x="22" y="256" width="111" height="26" rx="5"/>
+    <text x="33" y="274" class="pillText" fill="#4f8397">Lab 6: Spatial</text>
+    <rect class="pill" x="22" y="288" width="91" height="26" rx="5"/>
+    <text x="33" y="306" class="pillText" fill="#4f8397">Lab 7: OML</text>
+  </g>
+
+  <path d="M939 344h31" stroke="#77736d" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <g transform="translate(970 176)">
+    <rect class="card" x="0" y="0" width="264" height="328" rx="12"/>
+    <rect x="0" y="0" width="264" height="8" rx="4" fill="#a67934"/>
+    <circle cx="45" cy="49" r="21" fill="#fff8ed" stroke="#a67934"/>
+    <path d="M32 50l10 10 18-24" fill="none" stroke="#a67934" stroke-width="2.4"/>
+    <text x="84" y="48" class="step" fill="#a67934">STEP 4</text>
+    <text x="84" y="77" class="h">Trusted</text>
+    <text x="84" y="103" class="h">Action</text>
+    <text x="22" y="136" class="body">Connect technical evidence</text>
+    <text x="22" y="157" class="body">to retail decisions and</text>
+    <text x="22" y="178" class="body">confirm the business</text>
+    <text x="22" y="199" class="body">takeaways.</text>
+    <text x="22" y="246" class="label">Related labs</text>
+    <rect class="pill" x="22" y="256" width="122" height="26" rx="5"/>
+    <text x="33" y="274" class="pillText" fill="#a67934">Lab 8: Conclusion</text>
+    <rect class="pill" x="22" y="288" width="84" height="26" rx="5"/>
+    <text x="33" y="306" class="pillText" fill="#a67934">Lab 9: Quiz</text>
+  </g>
+
+  <!-- Foundation connectors -->
+  <path d="M190 512v29" stroke="#c8c0b7" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M494 512v29" stroke="#c8c0b7" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M798 512v29" stroke="#c8c0b7" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M1102 512v29" stroke="#c8c0b7" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <rect x="144" y="542" width="992" height="96" rx="12" fill="#fffdfb" stroke="#d8d1c8" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="640" y="579" class="foundationTitle" text-anchor="middle">Oracle Database 26ai Converged Foundation</text>
+  <text x="640" y="606" class="foundationText" text-anchor="middle">Rows, JSON documents, vectors, graph relationships, spatial location, machine learning,</text>
+  <text x="640" y="623" class="foundationText" text-anchor="middle">SQL access, and security remain connected in one governed database.</text>
+
+  <rect x="144" y="662" width="992" height="39" rx="7" fill="#f7f3ee" stroke="#d8d1c8"/>
+  <text x="640" y="687" class="bottom" text-anchor="middle"><tspan fill="#c83b2d">Oracle Converged Database:</tspan> Connected retail evidence. Faster decisions. Better experiences.</text>
+</svg>
