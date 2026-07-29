@@ -1,5 +1,10 @@
 # Workshop Details
 
+### Objectives
+
+- Provide reusable workshop metadata for the LiveLabs catalog and review process.
+- Keep the workshop summary, outline, and prerequisites in one place.
+
 ## Short Description
 
 Create an Oracle Cloud Infrastructure (OCI) Free Tier account and confirm that you can sign in to the OCI Console. Learn which details to prepare, how to choose a home region, and how to recognize a successful activation.

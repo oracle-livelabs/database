@@ -2,6 +2,11 @@
 
 Estimated Time: 5 minutes
 
+### Objectives
+
+- Record the sources and asset provenance used by this workshop.
+- Identify any attribution or approval requirements.
+
 ## Source Classification
 
 - Oracle-owned/internal sources: OCI Free Tier documentation and OCI sign-up/sign-in documentation listed below.
