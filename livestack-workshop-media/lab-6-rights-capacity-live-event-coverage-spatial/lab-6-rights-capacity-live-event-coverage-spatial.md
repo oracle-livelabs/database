@@ -42,7 +42,7 @@ Estimated Time: **10 minutes**
 | Technical Challenge | Location, capacity, content, and campaign data must remain connected for review. |
 | Persona Focus | Rights planners and distribution operations leaders inspect coverage evidence; database developers show the SQL behind it. |
 | What You Will See | Oracle Spatial calculates distance and coverage context from governed data. |
-| Database Capability | SDO_GEOMETRY, spatial metadata, spatial indexes, and SDO_GEOM.SDO_DISTANCE support location-aware SQL. |
+| Database Capability | `SDO_GEOMETRY`, spatial metadata, spatial indexes, and `SDO_GEOM.SDO_DISTANCE` support location-aware SQL. |
 | Outcome | Teams can explain coverage decisions without exporting sensitive location and campaign data. |
 
 Persona focus: You are the rights planner deciding where audience demand and coverage capacity need attention.
@@ -86,7 +86,7 @@ Now calculate distance from an audience account to active hubs with available ca
 
 1. Run this coverage query:
 
-    The query joins a campaign order to its audience account, compares the account location to active distribution hubs, and returns the nearest hubs. SDO_GEOM.SDO_DISTANCE calculates distance between two SDO_GEOMETRY points.
+    The query joins a campaign order to its audience account, compares the account location to active distribution hubs, and returns the nearest hubs. `SDO_GEOM.SDO_DISTANCE` calculates distance between two `SDO_GEOMETRY` points.
 
     ```sql
     <copy>

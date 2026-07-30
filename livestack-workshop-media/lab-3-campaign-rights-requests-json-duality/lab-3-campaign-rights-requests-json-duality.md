@@ -17,7 +17,7 @@ This matters after the dashboard lab because a KPI is not enough for review. Whe
 >
 > - **JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database.
 >
-> - A **duality view** defines that document shape. In this lab, ORDERS_DV maps campaign order rows from ORDERS and nested line-item rows from ORDER_ITEMS into one campaign document.
+> - A **duality view** defines that document shape. In this lab, `ORDERS_DV` maps campaign order rows from ORDERS and nested line-item rows from `ORDER_ITEMS` into one campaign document.
 >
 > - **Projection** means pulling selected JSON fields into SQL columns. SQL/JSON projection lets analysts inspect document fields with normal SQL.
 
@@ -70,7 +70,7 @@ First, inspect the campaign order shape an application can consume directly.
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are viewing a campaign order the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view ORDERS_DV and uses JSON_SERIALIZE(... PRETTY) so SQL Worksheet displays the document shape clearly.
+    You are viewing a campaign order the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view `ORDERS_DV` and uses `JSON_SERIALIZE(... PRETTY)` so SQL Worksheet displays the document shape clearly.
 
     <details>
     <summary><strong>Why this matters: Oracle's converged approach helps here</strong></summary>
