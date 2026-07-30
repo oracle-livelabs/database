@@ -33,7 +33,7 @@ Estimated Time: **5 minutes**
     | --- | --- |
     | What media data foundation supports the application? | Semantic views, duality views, vectors, graph, spatial objects, and OML models in one schema. |
     | Which launches need attention? | Dashboard KPIs and drill-through SQL over campaign orders, audience signals, and content assets. |
-    | How can applications use campaign documents without copying data? | ORDERS_DV exposes JSON while preserving relational rows. |
+    | How can applications use campaign documents without copying data? | `ORDERS_DV` exposes JSON while preserving relational rows. |
     | How can analysts search by audience intent? | VECTOR_EMBEDDING and VECTOR_DISTANCE compare meaning inside Oracle Database. |
     | Which creators influence audience momentum? | INFLUENCER_NETWORK and SQL/PGQ reveal relationship evidence. |
     | Where is rights or distribution coverage constrained? | Oracle Spatial joins location, capacity, and demand evidence. |

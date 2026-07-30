@@ -61,7 +61,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     You are recreating the dashboard's headline media measures directly from governed order and signal data. The SQL uses scalar subqueries so each metric can come from the best business view: campaign orders for request and revenue volume, audience signals for high-momentum signals, and content assets for launch demand alerts.
 
-    MEDIA_CAMPAIGN_ORDERS_V is a view, not a raw table. It gives the dashboard a clean campaign-order shape with business columns such as campaign status, value, audience account, and distribution hub. MEDIA_AUDIENCE_SIGNALS_V exposes audience signal text, platform, virality, momentum, and creator context.
+    `MEDIA_CAMPAIGN_ORDERS_V` is a view, not a raw table. It gives the dashboard a clean campaign-order shape with business columns such as campaign status, value, audience account, and distribution hub. `MEDIA_AUDIENCE_SIGNALS_V` exposes audience signal text, platform, virality, momentum, and creator context.
 
     <details>
     <summary><strong>Why this matters: better than a separate reporting pipeline</strong></summary>
@@ -98,7 +98,7 @@ Next, move from headline measures to the content assets driving monitored audien
 
 1. Run this content exposure query:
 
-    You are moving from dashboard totals to the content assets and studios that drive review priority. The SQL reads MEDIA_CONTENT_ASSETS_V, which combines content assets, studios or labels, capacity totals, and audience-signal counts into a business-ready view.
+    You are moving from dashboard totals to the content assets and studios that drive review priority. The SQL reads `MEDIA_CONTENT_ASSETS_V`, which combines content assets, studios or labels, capacity totals, and audience-signal counts into a business-ready view.
 
     Each returned row shows signal volume, average virality, and available capacity for a specific content asset. Sorting by virality and signal count creates a practical review queue.
 

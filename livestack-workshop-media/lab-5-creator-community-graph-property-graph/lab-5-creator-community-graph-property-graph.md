@@ -13,7 +13,7 @@ This lab uses **Property Graph** and SQL/PGQ to inspect creator relationships wi
 >
 > - A **vertex** is an entity in the graph, such as a creator or studio.
 >
-> - An **edge** is a relationship between vertices, such as CONNECTS_TO, PROMOTES, or MENTIONS_PRODUCT.
+> - An **edge** is a relationship between vertices, such as `CONNECTS_TO`, `PROMOTES`, or `MENTIONS_PRODUCT`.
 >
 > - A **hop** is one relationship step from one vertex to another. Two hops means the query follows two relationship steps.
 >
@@ -122,7 +122,7 @@ Finally, connect relationships to media business context.
 
 1. Run this creator relationship query:
 
-    MEDIA_CREATOR_RELATIONSHIPS_V is a semantic view over creators, studio or label links, and relationship counts. It gives analysts a business-ready view of graph-adjacent evidence without requiring every user to write SQL/PGQ.
+    `MEDIA_CREATOR_RELATIONSHIPS_V` is a semantic view over creators, studio or label links, and relationship counts. It gives analysts a business-ready view of graph-adjacent evidence without requiring every user to write SQL/PGQ.
 
     ```sql
     <copy>

@@ -55,7 +55,7 @@ Start by listing the in-database models.
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are checking which OML models are available for this media scenario. USER_MINING_MODELS lists mining models owned by the current schema.
+    You are checking which OML models are available for this media scenario. `USER_MINING_MODELS` lists mining models owned by the current schema.
 
     ```sql
     <copy>
@@ -205,7 +205,7 @@ Finally, connect model output to operational capacity.
 2. Explain the action.
     This query shows why in-database prediction matters. The model output is not stranded in a notebook. It joins to operational capacity and content evidence so planners can decide what to review next.
 
-    A `capacity review` row means the model predicts demand pressure and the forecast exceeds the available capacity shown in the media capacity view. A `watch demand` row means the model predicts surge pressure, but the capacity row has not crossed that threshold. `monitor` means the model does not currently classify that asset as a surge case. Confidence helps planners compare rows, but business users should still review the content asset, hub, and demand context before acting.
+    A **capacity review** row means the model predicts demand pressure and the forecast exceeds the available capacity shown in the media capacity view. A *watch demand* row means the model predicts surge pressure, but the capacity row has not crossed that threshold. *monitor* means the model does not currently classify that asset as a surge case. Confidence helps planners compare rows, but business users should still review the content asset, hub, and demand context before acting.
 
 ## Acknowledgements
 
