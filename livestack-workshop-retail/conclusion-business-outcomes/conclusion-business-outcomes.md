@@ -2,7 +2,7 @@
 
 ## Introduction
 
-You have completed the SQL-backed retail decision path for Seer Sporting Goods. You started with the shared data foundation, moved from command-center metrics into order documents, interpreted demand language with vectors, followed creator relationships with graph queries, checked fulfillment options with Spatial, and used OML scoring to prioritize action.
+You have completed the SQL-backed retail decision path for **Seer Sporting Goods**. You started with a demand signal, proved the shared data foundation, moved from command-center metrics into order documents, interpreted demand language with vectors, followed creator relationships with graph queries, checked fulfillment options with Spatial, and used OML scoring to prioritize action.
 
 Estimated Time: **5 minutes**
 
@@ -13,6 +13,8 @@ Estimated Time: **5 minutes**
 - Explain the value of keeping the evidence in one governed database foundation.
 
 ## Task 1: Review what you can now explain
+
+Use this recap to connect each lab outcome back to the retail question it helps answer:
 
 1. Use this table as a recap of the workshop.
 
