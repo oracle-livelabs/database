@@ -100,7 +100,7 @@ Next, move from headline measures to the content assets driving monitored audien
 
 1. Run this content exposure query:
 
-    You are moving from dashboard totals to the content assets and studios that drive review priority. The SQL reads MEDIA_CONTENT_ASSETS_V, which combines content assets, studios or labels, capacity totals, and audience-signal counts into a business-ready view.
+    You are moving from dashboard totals to the content assets and studios that drive review priority. The SQL reads `MEDIA_CONTENT_ASSETS_V`, which combines content assets, studios or labels, capacity totals, and audience-signal counts into a business-ready view.
 
     Each returned row shows signal volume, average virality, and available capacity for a specific content asset. The `avg_virality_score` is the average relative urgency and potential reach of the audience signals associated with that asset, so a higher score calls for earlier review. Sorting by virality and signal count creates a practical review queue.
 

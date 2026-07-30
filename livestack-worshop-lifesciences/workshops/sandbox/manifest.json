@@ -1,0 +1,66 @@
+{
+  "workshoptitle": "Build Life Sciences Intelligence with Oracle AI Database 26ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Seer Lifesciences clinical supply story and workshop goals.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the environment and open Database Actions SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Life Sciences Data Foundation",
+      "description": "Inspect the life sciences schema foundation and current object families.",
+      "filename": "../../life-sciences-data-foundation/life-sciences-data-foundation.md"
+    },
+    {
+      "title": "Lab 2: Quality and Supply Operations Dashboard",
+      "description": "Query clinical supply KPIs, quality signal exposure, and regulated product evidence.",
+      "filename": "../../quality-supply-dashboard/quality-supply-dashboard.md"
+    },
+    {
+      "title": "Lab 3: Clinical Supply Orders and Deviations",
+      "description": "Use JSON Relational Duality and SQL/JSON for clinical supply order documents.",
+      "filename": "../../clinical-supply-duality/clinical-supply-duality.md"
+    },
+    {
+      "title": "Lab 4: Regulatory and Quality Signals",
+      "description": "Run AI Vector Search over product and quality signal embeddings.",
+      "filename": "../../regulatory-quality-vector-search/regulatory-quality-vector-search.md"
+    },
+    {
+      "title": "Lab 5: Signal Propagation Network",
+      "description": "Use Property Graph and SQL/PGQ to analyze regulated signal propagation.",
+      "filename": "../../signal-propagation-network/signal-propagation-network.md"
+    },
+    {
+      "title": "Lab 6: Cold-Chain Service Coverage",
+      "description": "Use Oracle Spatial for cold-chain site and trial-site coverage analysis.",
+      "filename": "../../cold-chain-service-coverage/cold-chain-service-coverage.md"
+    },
+    {
+      "title": "Lab 7: Predictive Quality and Supply Analytics",
+      "description": "Inspect and score OML models inside Oracle Database.",
+      "filename": "../../predictive-quality-supply-oml/predictive-quality-supply-oml.md"
+    },
+    {
+      "title": "Lab 8: Conclusion",
+      "description": "Turn the life sciences labs into a practical converged database takeaway.",
+      "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

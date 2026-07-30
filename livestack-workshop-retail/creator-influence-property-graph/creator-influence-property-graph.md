@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you find demand signals, the next question is where those signals can travel. Creator influence is a relationship question. Follower counts and isolated posts do not show how a message can move through a network. Property Graph lets you express that question as paths while returning rows that business users can read.
+After you find demand signals, the next question is where those signals can travel. Creator influence is a relationship question: follower counts and isolated posts do not show how a message can move through a network. Property Graph lets you express that question as paths while returning rows that planners and campaign teams can read.
 
 ### Objectives
 
@@ -37,6 +37,8 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Confirm the graph object
 
+Start on the **Creator Influence Network** page so the graph inventory query connects to the relationship view business users see:
+
 1. Review the Creator Influence Network page.
 
     ![Creator Influence Network graph overview](images/creator-influence-network-overview.png " ")
@@ -63,7 +65,11 @@ Estimated Time: **10 minutes**
     | --- |
     | INFLUENCER\_NETWORK |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Traverse direct creator relationships
+
+Now traverse direct creator relationships so planners can confirm the graph contains usable relationship evidence before adding brand context:
 
 1. Run the one-hop graph query.
 
@@ -111,7 +117,11 @@ Estimated Time: **10 minutes**
 
 2. Each row is a direct relationship path. The business can use it to ask which creator relationship deserves follow-up and which audience may hear a campaign message next.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Add brand context to the path
+
+Next, add brand context to the graph path so campaign reach is explained through promoters, reached creators, and relationship evidence:
 
 1. Run the brand propagation query.
 

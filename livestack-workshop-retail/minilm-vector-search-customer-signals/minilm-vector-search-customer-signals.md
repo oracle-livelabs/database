@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you inspect orders, you need to understand the demand language around them. Customers and creators rarely describe needs in the exact words used by a catalog. AI Vector Search helps teams compare meaning instead of only matching keywords. In this lab, you use the in-database MiniLM model and stored vectors to rank products and social signals.
+After you inspect orders, you need to understand the demand language around them. Customers and creators rarely describe needs in the exact words used by a catalog. **AI Vector Search** helps teams compare meaning instead of only matching keywords, so retail teams can connect customer language, product records, and social signals without exporting evidence to a separate search service.
 
 ### Objectives
 
@@ -37,6 +37,8 @@ Estimated Time: **10 minutes**
 *Figure 1: A phrase becomes an embedding, the embedding is compared to stored vectors, and the ranked result remains tied to product and signal rows.*
 
 ## Task 1: Confirm vector artifacts
+
+Start on the **Customer Trend Signals** page so semantic-search results connect back to the demand experience business users see:
 
 1. Review the Customer Trend Signals page.
 
@@ -84,7 +86,11 @@ Estimated Time: **10 minutes**
     | POST\_EMBEDDINGS | 5000 | 5000 | 100 |
     | PRODUCT\_EMBEDDINGS | 187 | 187 | 100 |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Search products by meaning
+
+Now run a semantic product search that asks a retail question in normal business language instead of exact catalog keywords:
 
 1. Run the semantic product search query.
 
@@ -144,7 +150,11 @@ Estimated Time: **10 minutes**
 
     The query groups by product and category so you see distinct product choices, then keeps the best semantic distance for each choice.
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Connect social signals to product matches
+
+Next, connect social-signal matches back to products so vector scores become reviewable merchandising evidence:
 
 1. Run the signal search query.
 

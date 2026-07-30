@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After you review demand, influence, and fulfillment evidence, the final step is prioritization. Predictive analytics become useful when model output stays connected to operational data. In this lab, you inspect Oracle Machine Learning (OML) models, review the feature view behind demand scoring, and run an in-database prediction query.
+After you review demand, influence, and fulfillment evidence, the final step is prioritization. Predictive analytics become useful when model output stays connected to operational data. In this lab, you inspect **Oracle Machine Learning** models, review the feature view behind demand scoring, and run an in-database prediction query that planners can compare with product, signal, and sales context.
 
 ### Objectives
 
@@ -36,6 +36,8 @@ Estimated Time: **10 minutes**
 *Figure 1: OML scores demand rows where the product and signal evidence already lives.*
 
 ## Task 1: Inspect the model inventory
+
+Start on the Retail OML Analytics page so the model inventory connects to the demand-prioritization view learners are about to inspect:
 
 1. Review the Retail OML Analytics page.
 
@@ -72,7 +74,11 @@ Estimated Time: **10 minutes**
     | PRODUCT\_CLUSTER\_MODEL | CLUSTERING | KMEANS |
     | REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Review demand model features
+
+Now review the demand feature view so learners can see the product, signal, sales, and label inputs behind model scoring:
 
 1. Run the feature-view query.
 
@@ -107,7 +113,11 @@ Estimated Time: **10 minutes**
     | PracticeStream Capture Card | Training Tech | 28 | 0.58 | 101 | 20198.99 | SURGE |
     | Expedition Power Bank | Sports Tech | 27 | 0.567 | 95 | 17099.05 | SURGE |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Score demand surge rows
+
+Next, score demand surge rows so planners can compare predicted labels, confidence, posts, and units sold in one reviewable result:
 
 1. Run the prediction query.
 

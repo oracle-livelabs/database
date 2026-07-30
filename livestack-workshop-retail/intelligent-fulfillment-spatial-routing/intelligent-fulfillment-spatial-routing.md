@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After demand and influence point to products, fulfillment decides whether the business can serve that demand. The closest center is only useful if it is active, stocked, and appropriate for the customer. Oracle Spatial keeps location-aware analysis inside Oracle Database next to customers, centers, products, and inventory.
+After demand and influence point to products, fulfillment decides whether the business can serve that demand. The closest center is only useful if it is active, stocked, and appropriate for the customer. **Oracle Spatial** keeps location-aware analysis inside **Oracle AI Database**, next to customers, centers, products, and inventory.
 
 ### Objectives
 
@@ -36,6 +36,8 @@ Estimated Time: **10 minutes**
 *Figure 1: Spatial data becomes operational evidence when it joins to products and inventory.*
 
 ## Task 1: Inspect fulfillment center geometry
+
+Start on the fulfillment application page so the geometry query connects map evidence to governed center and location data:
 
 1. Review the fulfillment application page.
 
@@ -78,7 +80,11 @@ Estimated Time: **10 minutes**
     | Dallas South Central | Lancaster | Texas | 32.5921 | -96.7561 | POINT (-96.7561 32.5921) |
     | Atlanta Southeast | Union City | Georgia | 33.5871 | -84.5421 | POINT (-84.5421 33.5871) |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 2: Rank nearby centers
+
+Now rank nearby fulfillment centers so planners can see which active locations are closest to the selected customer:
 
 1. Run the distance query.
 
@@ -113,7 +119,11 @@ Estimated Time: **10 minutes**
     | Phoenix Desert Hub | Goodyear | Arizona | 340.9 |
     | Reno West Hub | Sparks | Nevada | 385.7 |
 
+**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+
 ## Task 3: Combine distance with inventory
+
+Next, combine distance with inventory so the fulfillment recommendation reflects both geography and stock availability:
 
 1. Run the stocked-center query.
 
