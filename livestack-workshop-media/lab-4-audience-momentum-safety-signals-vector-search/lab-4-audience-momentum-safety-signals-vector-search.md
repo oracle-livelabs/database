@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Audience analysts often search in business language: "sports rights highlight clips," "creator backlash on finale," or "regional demand for live event." Exact keyword search can miss useful matches when the audience language and the content catalog use different words.
+Audience analysts often search in business language: "sports rights highlight clips", "creator backlash on finale", or "regional demand for live event."
+Exact keyword search can miss useful matches when the audience language and the content catalog use different words.
 
 This lab uses **AI Vector Search** to compare meaning inside Oracle Database. The same content assets, audience signals, and embeddings remain connected to governed media records, so search results can be reviewed with SQL instead of treated as hidden prompt output.
 
@@ -40,7 +41,7 @@ Estimated Time: **10 minutes**
 | Technical Challenge | Embeddings and search results must stay connected to source content and audience records. |
 | Persona Focus | Audience analysts search by meaning; database developers show the SQL evidence behind the match. |
 | What You Will See | Vector search ranks content assets related to an audience phrase. |
-| Database Capability | VECTOR_EMBEDDING, VECTOR_DISTANCE, and vector columns run inside Oracle Database. |
+| Database Capability | `VECTOR_EMBEDDING`, `VECTOR_DISTANCE`, and vector columns run inside Oracle Database. |
 | Outcome | Analysts can use semantic search while keeping results reviewable and governed. |
 
 Persona focus: You are the audience analyst looking for content and signals that match a business intent, and you need results that can be explained with database evidence.
@@ -53,7 +54,7 @@ Start with a phrase a media analyst might type into the application.
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are asking the database to compare the meaning of a search phrase with content-asset descriptions. VECTOR_EMBEDDING turns the phrase into a vector. VECTOR_DISTANCE compares that query vector with stored vectors in PRODUCT_EMBEDDINGS. The expression 1 - VECTOR_DISTANCE(...) turns distance into a similarity score where higher is better.
+    You are asking the database to compare the meaning of a search phrase with content-asset descriptions. VECTOR_EMBEDDING turns the phrase into a vector. `VECTOR_DISTANCE` compares that query vector with stored vectors in `PRODUCT_EMBEDDINGS`. The expression `1 - VECTOR_DISTANCE(...)` turns distance into a similarity score where higher is better.
 
     ```sql
     <copy>
@@ -94,7 +95,7 @@ Now inspect signals behind content momentum.
 
 1. Run this signal review query:
 
-    You are joining vector-search context back to audience signals. A bridge table, POST_PRODUCT_MENTIONS, connects an audience signal to the content asset it mentions. A bridge table connects an event, signal, document, order, claim, case, or asset to the business object it mentions.
+    You are joining vector-search context back to audience signals. A bridge table, `POST_PRODUCT_MENTIONS`, connects an audience signal to the content asset it mentions. A bridge table connects an event, signal, document, order, claim, case, or asset to the business object it mentions.
 
     ```sql
     <copy>
