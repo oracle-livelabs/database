@@ -19,7 +19,7 @@ Think of this lab as the map of the media environment. The same schema supports 
 
 > - A **schema** is a named workspace inside the database. It owns objects such as tables, views, functions, models, vectors, and graph definitions. In this workshop, LLUSER is the schema you use, so it is the place where the media evidence is organized and secured.
 >
-> - A **semantic view** is a saved SQL query that presents data in a useful business shape. MEDIA_CONTENT_ASSETS_V and MEDIA_AUDIENCE_SIGNALS_V hide lower-level joins so later labs can focus on media decisions.
+> - A **semantic view** is a saved SQL query that presents data in a useful business shape. `MEDIA_CONTENT_ASSETS_V` and `MEDIA_AUDIENCE_SIGNALS_V` hide lower-level joins so later labs can focus on media decisions.
 >
 > - A **vector** is a numerical representation of meaning. In this workshop, content descriptions and audience-signal text can be converted into vectors so the database can compare ideas, not only exact words.
 >
@@ -64,7 +64,7 @@ Start by inventorying the semantic views and database capabilities that the rest
 
 1. Run this inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are building a simple capability map before making any media decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What media capabilities are available in this schema?"
 

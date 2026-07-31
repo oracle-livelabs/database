@@ -1,0 +1,36 @@
+{
+  "workshoptitle": "Create a Compute Instance in Oracle Cloud Infrastructure",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Workshop audience, prerequisites, flow, and expected outcomes.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Sign in to OCI and confirm access to the tenancy and compartment used for this workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Knowing OCI Interfaces",
+      "description": "Locate the OCI Console pages used to create a Compute instance.",
+      "filename": "../../oci-interface/oci-interface.md"
+    },
+    {
+      "title": "Lab 2: Creating a Compute Instance",
+      "description": "Review the required settings used to create a Compute instance.",
+      "filename": "../../create-instance/create-instance.md"
+    },
+    {
+      "title": "Lab 3: Common Issues",
+      "description": "Recognize a common capacity issue and find the Compute FAQ.",
+      "filename": "../../common-issues/common-issues.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Troubleshooting resources and directions for getting assistance during the workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

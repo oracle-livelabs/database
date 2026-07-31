@@ -42,7 +42,7 @@ Estimated Time: **10 minutes**
 | Technical Challenge | Location, capacity, content, and campaign data must remain connected for review. |
 | Persona Focus | Rights planners and distribution operations leaders inspect coverage evidence; database developers show the SQL behind it. |
 | What You Will See | Oracle Spatial calculates distance and coverage context from governed data. |
-| Database Capability | SDO_GEOMETRY, spatial metadata, spatial indexes, and SDO_GEOM.SDO_DISTANCE support location-aware SQL. |
+| Database Capability | `SDO_GEOMETRY`, spatial metadata, spatial indexes, and `SDO_GEOM.SDO_DISTANCE` support location-aware SQL. |
 | Outcome | Teams can explain coverage decisions without exporting sensitive location and campaign data. |
 
 Persona focus: You are the rights planner deciding where audience demand and coverage capacity need attention.
@@ -53,7 +53,7 @@ Start by checking the spatial tables and indexes.
 
 1. Run this spatial inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are confirming that location-aware tables have spatial metadata and indexes. Spatial metadata tells Oracle Database the coordinate bounds and Spatial Reference Identifier (SRID). Spatial indexes make repeated location searches practical.
 
@@ -86,7 +86,7 @@ Now calculate distance from an audience account to active hubs with available ca
 
 1. Run this coverage query:
 
-    The query joins a campaign order to its audience account, compares the account location to active distribution hubs, and returns the nearest hubs. SDO_GEOM.SDO_DISTANCE calculates distance between two SDO_GEOMETRY points.
+    The query compares each audience-account location with each distribution-hub location, then sorts the resulting pairs so the closest hubs appear first. `CROSS JOIN` creates those account-to-hub combinations; the `WHERE` clause removes rows without usable locations and keeps only active hubs. `SDO_GEOM.SDO_DISTANCE` calculates the distance between the two `SDO_GEOMETRY` points in miles, and `current_load_pct` adds operational context so the nearest hub is not mistaken for the only viable one.
 
     ```sql
     <copy>
@@ -119,8 +119,7 @@ Now calculate distance from an audience account to active hubs with available ca
     | audience.account.0484@example.com | Raleigh Sports Media Community Hub | Raleigh | North Carolina | 0 | 69.0 |
     | audience.account.0807@example.com | Chicago Midwest Ad Ops Hub | Joliet | Illinois | 0 | 64.5 |
 
-2. Explain the coverage decision.
-    Distance alone is not the whole decision. It becomes useful when joined to capacity, demand, and content records. The same database can hold the geography and the operating data, which reduces handoffs between mapping tools and operational systems.
+2. The distance results support a coverage decision when considered with capacity, demand, and content records, all of which can remain together in the database instead of being handed between mapping and operational systems.
 
 ## Task 3: Review capacity risk by region
 
@@ -166,6 +165,5 @@ Finally, connect demand forecasts to distribution capacity.
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-
 
 
