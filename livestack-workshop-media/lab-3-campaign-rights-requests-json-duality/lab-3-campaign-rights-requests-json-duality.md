@@ -68,7 +68,7 @@ First, inspect the campaign order shape an application can consume directly.
 
 1. Run this query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are viewing a campaign order the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view `ORDERS_DV` and uses `JSON_SERIALIZE(... PRETTY)` so SQL Worksheet displays the document shape clearly.
 
@@ -83,17 +83,18 @@ First, inspect the campaign order shape an application can consume directly.
 
     ```sql
     <copy>
-    SELECT JSON_SERIALIZE(
-             JSON_OBJECT(
-               '_id' VALUE JSON_VALUE(data, '$._id' RETURNING NUMBER),
-               'customerId' VALUE JSON_VALUE(data, '$.customerId' RETURNING NUMBER),
-               'status' VALUE JSON_VALUE(data, '$.status'),
-               'total' VALUE JSON_VALUE(data, '$.total' RETURNING NUMBER),
-               'demandScore' VALUE JSON_VALUE(data, '$.demandScore' RETURNING NUMBER),
-               'createdAt' VALUE JSON_VALUE(data, '$.createdAt'),
-               'items' VALUE JSON_QUERY(data, '$.items') FORMAT JSON
-             ) PRETTY
-           ) AS campaign_document
+    SELECT
+      JSON_SERIALIZE(
+        JSON_OBJECT(
+          '_id'         VALUE JSON_VALUE(data, '$._id' RETURNING NUMBER),
+          'customerId'  VALUE JSON_VALUE(data, '$.customerId' RETURNING NUMBER),
+          'status'      VALUE JSON_VALUE(data, '$.status'),
+          'total'       VALUE JSON_VALUE(data, '$.total' RETURNING NUMBER),
+          'demandScore' VALUE JSON_VALUE(data, '$.demandScore' RETURNING NUMBER),
+          'createdAt'   VALUE JSON_VALUE(data, '$.createdAt'),
+          'items'       VALUE JSON_QUERY(data, '$.items') FORMAT JSON
+        ) PRETTY
+      ) AS campaign_document
     FROM orders_dv
     ORDER BY JSON_VALUE(data, '$._id' RETURNING NUMBER)
     FETCH FIRST 1 ROW ONLY;
@@ -147,6 +148,5 @@ Now use SQL to project document fields back into reviewable columns. In this con
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-
 
 

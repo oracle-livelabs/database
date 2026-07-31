@@ -53,7 +53,7 @@ Start by checking the spatial tables and indexes.
 
 1. Run this spatial inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are confirming that location-aware tables have spatial metadata and indexes. Spatial metadata tells Oracle Database the coordinate bounds and Spatial Reference Identifier (SRID). Spatial indexes make repeated location searches practical.
 
@@ -119,8 +119,7 @@ Now calculate distance from an audience account to active hubs with available ca
     | audience.account.0484@example.com | Raleigh Sports Media Community Hub | Raleigh | North Carolina | 0 | 69.0 |
     | audience.account.0807@example.com | Chicago Midwest Ad Ops Hub | Joliet | Illinois | 0 | 64.5 |
 
-2. Explain the coverage decision.
-    Distance alone is not the whole decision. It becomes useful when joined to capacity, demand, and content records. The same database can hold the geography and the operating data, which reduces handoffs between mapping tools and operational systems.
+2. The distance results support a coverage decision when considered with capacity, demand, and content records, all of which can remain together in the database instead of being handed between mapping and operational systems.
 
 ## Task 3: Review capacity risk by region
 
@@ -166,6 +165,5 @@ Finally, connect demand forecasts to distribution capacity.
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-
 
 

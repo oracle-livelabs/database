@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/badge.svg
+badge: images/livestack_badge_media_and_entertainment.png
 ```
 
 ## Introduction
@@ -81,7 +81,7 @@ Estimated Time: **5 minutes**
 
 2. Review the completion badge.
 
-    ![Media LiveStack badge](images/badge.svg " ")
+    ![Media LiveStack badge](images/livestack_badge_media_and_entertainment.png " ")
 
 ## Acknowledgements
 

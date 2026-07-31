@@ -209,8 +209,6 @@ Next, connect social-signal matches back to products so vector scores become rev
 
     Next, you follow the creator relationships behind those signals to understand how campaign influence can move through a network.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Next Steps
 
 Congratulations on completing the AI Vector Search lab. You searched retail product and customer-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).

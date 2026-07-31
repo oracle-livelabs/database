@@ -53,7 +53,7 @@ Start by listing the in-database models.
 
 1. Run this model inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are checking which OML models are available for this media scenario. `USER_MINING_MODELS` lists mining models owned by the current schema.
 
@@ -160,7 +160,12 @@ Finally, connect model output to operational capacity.
 
 1. Run this model-to-action query:
 
-    This query connects forecast rows to inventory capacity and distribution hubs. The scored subquery uses `PREDICTION` and `PREDICTION_PROBABILITY` so the capacity review queue includes the model label, confidence, forecast demand, and available capacity.
+    This query turns a demand prediction into a planning queue by combining the model result with forecast, inventory, and distribution-hub evidence. Read it in four parts:
+
+    1. `demand_forecasts`, `PRODUCTS`, `INVENTORY`, and `FULFILLMENT_CENTERS` connect each content asset's forecast to the hub that holds available capacity.
+    2. The `scored` subquery runs `DEMAND_SURGE_MODEL` once for each row in `OML_DEMAND_TRAINING_V`, returning both the predicted demand-surge label and its confidence. The outer query joins those scores back to the matching content asset.
+    3. `capacity_units_available` subtracts reserved units from units on hand. The `CASE` expression then assigns `capacity review` when a predicted surge exceeds that available capacity, `watch demand` for a predicted surge that has not crossed the threshold, and `monitor` otherwise.
+    4. The `WHERE` clause limits the result to active hubs, and the `ORDER BY` clause places the most confident, highest-demand, lowest-capacity rows first. This order gives a planner a focused starting point for review rather than a raw list of predictions.
 
     ```sql
     <copy>
@@ -202,8 +207,7 @@ Finally, connect model output to operational capacity.
     | Trust and Safety Moderation Burst | Minneapolis Sports Replay Desk | Minnesota | STABLE | 1 | 90 | 541 | 1.34 | monitor |
     | Trust and Safety Moderation Burst | Honolulu International Drama Desk | Hawaii | STABLE | 1 | 104 | 541 | 1.34 | monitor |
 
-2. Explain the action.
-    This query shows why in-database prediction matters. The model output is not stranded in a notebook. It joins to operational capacity and content evidence so planners can decide what to review next.
+2. The planning action shows why in-database prediction matters: model output joins directly to operational capacity and content evidence, giving planners a clear next review step instead of leaving predictions in a separate notebook.
 
     A **capacity review** row means the model predicts demand pressure and the forecast exceeds the available capacity shown in the media capacity view. A *watch demand* row means the model predicts surge pressure, but the capacity row has not crossed that threshold. *monitor* means the model does not currently classify that asset as a surge case. Confidence helps planners compare rows, but business users should still review the content asset, hub, and demand context before acting.
 
@@ -212,4 +216,3 @@ Finally, connect model output to operational capacity.
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-

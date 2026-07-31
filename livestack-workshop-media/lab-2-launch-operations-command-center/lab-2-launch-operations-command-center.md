@@ -57,7 +57,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 1. Run the dashboard aggregate query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are recreating the dashboard's headline media measures directly from governed order and signal data. The SQL uses scalar subqueries so each metric can come from the best business view: campaign orders for request and revenue volume, audience signals for high-momentum signals, and content assets for launch demand alerts.
 
@@ -100,7 +100,7 @@ Next, move from headline measures to the content assets driving monitored audien
 
     You are moving from dashboard totals to the content assets and studios that drive review priority. The SQL reads `MEDIA_CONTENT_ASSETS_V`, which combines content assets, studios or labels, capacity totals, and audience-signal counts into a business-ready view.
 
-    Each returned row shows signal volume, average virality, and available capacity for a specific content asset. Sorting by virality and signal count creates a practical review queue.
+    Each returned row shows signal volume, average virality, and available capacity for a specific content asset. The `avg_virality_score` is the average relative urgency and potential reach of the audience signals associated with that asset, so a higher score calls for earlier review. Sorting by virality and signal count creates a practical review queue.
 
     ```sql
     <copy>
@@ -126,8 +126,7 @@ Next, move from headline measures to the content assets driving monitored audien
     | Superfan Loyalty Bonus Content Track | Marquee Media Network | Streaming and Live Entertainment | 19 | 50.68 | 2893 | 264 |
     | Echo Valley Watch Time Personalization Test | AnimeForge | Streaming Placement | 19 | 50.67 | 2795 | 215 |
 
-2. Use the top rows to explain dashboard priority.
-    This query turns individual signal rows into a review queue that business users can understand. A content asset with many signals, high average virality, and constrained capacity should move to the top of the dashboard review queue.
+2. The top rows show dashboard priority by turning individual signal rows into a review queue that business users can understand; a content asset with many signals, high average virality, and constrained capacity belongs near the top of the review queue.
 
 ## Task 3: Drill from dashboard summary to reviewable rows
 
@@ -175,4 +174,3 @@ Dashboard drill-through matters because summary numbers should lead to inspectab
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-
