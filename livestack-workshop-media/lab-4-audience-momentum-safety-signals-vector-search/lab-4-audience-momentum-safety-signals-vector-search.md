@@ -16,7 +16,7 @@ This lab uses **AI Vector Search** to compare meaning inside Oracle Database. Th
 >
 > - **Vector distance** measures how far two vectors are from each other. Lower distance means closer meaning.
 >
-> - A **similarity score** is often calculated as 1 - VECTOR_DISTANCE(...). Higher similarity is better, but decimal values may vary slightly by environment and model.
+> - A **similarity score** is often calculated as 1 - `VECTOR_DISTANCE(...)`. Higher similarity is better, but decimal values may vary slightly by environment and model.
 
 </details>
 
