@@ -1,8 +1,8 @@
-# Configure KVM Cluster
+# Configure Oracle Linux KVM Cluster
 
 ## Introduction
 
-In this lab, you will prepare both KVM hosts and add them to the OLVM default cluster. When the lab is complete, `olkvm01` and `olkvm02` should both reach `Up` status and be ready for networking, storage, and VM placement.
+In this lab, you will prepare both Oracle Linux KVM hosts and add them to the Oracle Linux Virtualization Manager default cluster. When the lab is complete, `olkvm01` and `olkvm02` should both reach `Up` status and be ready for networking, storage, and VM placement.
 
 Estimated Time: 45-60 minutes, including host installation and status transitions.
 
@@ -16,7 +16,7 @@ This walkthrough video is silent and does not include audio narration.
 
 In this lab, you will:
 
-- Configure the required repositories on both KVM hosts
+- Configure the required repositories on both Oracle Linux KVM hosts
 - Add `olkvm01` and `olkvm02` to the **Default** cluster in the Administration Portal
 - Wait for both hosts to reach **Up** status
 - Confirm both hosts are ready for Lab 4
@@ -26,16 +26,16 @@ In this lab, you will:
 This lab assumes you have:
 
 - Completed the Lab 2 checkpoint
-- Access to the OLVM Administration Portal
-- The local hosts-file mapping created in Lab 2 for the OLVM portal
-- SSH access to the OLVM manager from your local machine
-- SSH connectivity from `olvm` to both KVM hosts
+- Access to the Oracle Linux Virtualization Manager Administration Portal
+- The local hosts-file mapping created in Lab 2 for the Oracle Linux Virtualization Manager portal
+- SSH access to the Oracle Linux Virtualization Manager manager from your local machine
+- SSH connectivity from `olvm` to both Oracle Linux KVM hosts
 
 > **Important:** Do not start Lab 4 until both hosts show status `Up`. Starting network or storage tasks while a host is still installing can leave the environment inconsistent.
 
-## Task 1: Configure the First KVM Host (`olkvm01`)
+## Task 1: Configure the First Oracle Linux KVM Host (`olkvm01`)
 
-1. From your local terminal, connect to the OLVM manager.
+1. From your local terminal, connect to the Oracle Linux Virtualization Manager manager.
 
     In Windows PowerShell, run:
 
@@ -63,9 +63,9 @@ This lab assumes you have:
     <copy>sudo dnf update -y oracle-ovirt-release-45-el8</copy>
     ```
 
-    ![Olkvm01-start](./images/olkvm01-start.png "Show Olkvm01-start")
+    ![OlOracle Linux KVM01-start](./images/olkvm01-start.png "Show OlOracle Linux KVM01-start")
 
-    ![Olkvm01-start-complete](./images/olkvm01-start-complete.png "Show Olkvm01-start-complete")
+    ![OlOracle Linux KVM01-start-complete](./images/olkvm01-start-complete.png "Show OlOracle Linux KVM01-start-complete")
 
 3. Reboot `olkvm01`:
 
@@ -97,7 +97,7 @@ This lab assumes you have:
 
     - `ol8_baseos_latest`
     - `ol8_appstream`
-    - `ol8_kvm_appstream`
+    - `ol8_Oracle Linux KVM_appstream`
     - `ol8_addons`
     - `ovirt-4.5`
     - `ovirt-4.5-extra`
@@ -110,7 +110,7 @@ This lab assumes you have:
     <copy>sudo dnf config-manager --enable <repository_name></copy>
     ```
 
-8. Run the OLVM pre-check script:
+8. Run the Oracle Linux Virtualization Manager pre-check script:
 
     ```bash
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
@@ -128,7 +128,7 @@ This lab assumes you have:
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
     ```
 
-    ![Olkvm01 Clean pre-check](./images/olkvm01-clean-pre-check.png "Show Olkvm01 Clean pre-check")
+    ![OlOracle Linux KVM01 Clean pre-check](./images/olkvm01-clean-pre-check.png "Show OlOracle Linux KVM01 Clean pre-check")
 
 9. Exit back to the manager host:
 
@@ -150,7 +150,7 @@ This lab assumes you have:
 
 2. Navigate to **Compute -> Hosts**.
 
-    ![OLVM KVM Host Menu](./images/olvm-kvm-host.png "Show OLVM KVM Host Menu")
+    ![Oracle Linux Virtualization Manager Oracle Linux KVM Host Menu](./images/olvm-kvm-host.png "Show Oracle Linux Virtualization Manager Oracle Linux KVM Host Menu")
 
 3. Click **New**.
 
@@ -168,11 +168,11 @@ This lab assumes you have:
     <copy>vdsm01.priv.olv.oraclevcn.com</copy>
     ```
 
-    Do not use the `olkvm01.pub.olv.oraclevcn.com` name in this field. OLVM must manage the KVM host through the private management network.
+    Do not use the `olkvm01.pub.olv.oraclevcn.com` name in this field. Oracle Linux Virtualization Manager must manage the Oracle Linux KVM host through the private management network.
 
-    If you accidentally use the public hostname and the host becomes **Non Responsive**, remove that host entry from OLVM and add `olkvm01` again with `vdsm01.priv.olv.oraclevcn.com`.
+    If you accidentally use the public hostname and the host becomes **Non Responsive**, remove that host entry from Oracle Linux Virtualization Manager and add `olkvm01` again with `vdsm01.priv.olv.oraclevcn.com`.
 
-    >**Note**: The private management FQDN vdsm01.priv.olv.oraclevcn.com was automatically created by OCI when the Ansible playbook ran in Lab 1. The playbook named the KVM host's private network interface vdsm01 and placed it on a subnet labeled priv inside a VCN labeled olv. OCI combines these names to create a fixed, predictable hostname.
+    >**Note**: The private management FQDN vdsm01.priv.olv.oraclevcn.com was automatically created by OCI when the Ansible playbook ran in Lab 1. The playbook named the Oracle Linux KVM host's private network interface vdsm01 and placed it on a subnet labeled priv inside a VCN labeled olv. OCI combines these names to create a fixed, predictable hostname.
 
 7. Under **Authentication**, select **SSH Public Key**.
 
@@ -196,7 +196,7 @@ This lab assumes you have:
 
 12. Wait for `olkvm01` to show status **Up** before you continue.
 
-## Task 3: Configure the Second KVM Host (`olkvm02`)
+## Task 3: Configure the Second Oracle Linux KVM Host (`olkvm02`)
 
 1. From the manager terminal, connect to `olkvm02` and install the required packages:
 
@@ -244,7 +244,7 @@ This lab assumes you have:
     <copy>sudo dnf config-manager --enable <repository_name></copy>
     ```
 
-6. Run the OLVM pre-check script:
+6. Run the Oracle Linux Virtualization Manager pre-check script:
 
     ```bash
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
@@ -294,9 +294,9 @@ This lab assumes you have:
     <copy>vdsm02.priv.olv.oraclevcn.com</copy>
     ```
 
-    Do not use the `olkvm02.pub.olv.oraclevcn.com` name in this field. OLVM must manage the KVM host through the private management network.
+    Do not use the `olkvm02.pub.olv.oraclevcn.com` name in this field. Oracle Linux Virtualization Manager must manage the Oracle Linux KVM host through the private management network.
 
-    If you accidentally use the public hostname and the host becomes **Non Responsive**, remove that host entry from OLVM and add `olkvm02` again with `vdsm02.priv.olv.oraclevcn.com`.
+    If you accidentally use the public hostname and the host becomes **Non Responsive**, remove that host entry from Oracle Linux Virtualization Manager and add `olkvm02` again with `vdsm02.priv.olv.oraclevcn.com`.
 
 5. Under **Authentication**, select **SSH Public Key**.
 
@@ -310,13 +310,13 @@ This lab assumes you have:
 
 8. Wait for `olkvm02` to show status **Up** before you continue.
 
-    ![Show OLVM management portal with both active KVM hosts](./images/completed-hosts.png "Show OLVM management portal with both active KVM hosts")
+    ![Show Oracle Linux Virtualization Manager management portal with both active Oracle Linux KVM hosts](./images/completed-hosts.png "Show Oracle Linux Virtualization Manager management portal with both active Oracle Linux KVM hosts")
 
     **Expected time:** 10-20 minutes.
 
     If the host does not reach **Up** after 25 minutes, stop and contact the instructor or workshop owner before changing the host manually.
 
-## Configure KVM Cluster Checkpoint
+## Configure Oracle Linux KVM Cluster Checkpoint
 
 At this point, you should have:
 
