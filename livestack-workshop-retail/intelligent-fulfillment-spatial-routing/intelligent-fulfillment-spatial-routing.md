@@ -176,8 +176,6 @@ Next, combine distance with inventory so the fulfillment recommendation reflects
 
     Next, you use Oracle Machine Learning to prioritize which products deserve attention after the business has reviewed demand, influence, and fulfillment evidence.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Next Steps
 
 Congratulations on completing the spatial lab. You used spatial queries to connect demand locations, fulfillment centers, and inventory so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).

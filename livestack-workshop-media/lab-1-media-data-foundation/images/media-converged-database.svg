@@ -51,7 +51,7 @@
   </g>
 
   <line x1="598" y1="316" x2="677" y2="316" stroke="#587083" stroke-width="6" marker-end="url(#arrow)"/>
-  <text x="638" y="292" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#587083">converge</text>
+  <text x="638" y="272" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#587083">converge</text>
 
   <rect x="710" y="124" width="520" height="384" rx="18" fill="#ffffff" stroke="#d7dde3" filter="url(#shadow)"/>
   <text x="740" y="165" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#263238">After: Oracle Converged Database</text>
@@ -73,8 +73,9 @@
   <rect x="48" y="540" width="1182" height="88" rx="18" fill="#ffffff" stroke="#d7dde3"/>
   <text x="78" y="575" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#263238">What changes for Seer Media</text>
   <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#33424d">
-    <circle cx="88" cy="605" r="5" fill="#2f7d69"/><text x="104" y="610">One governed source for media evidence</text>
-    <circle cx="382" cy="605" r="5" fill="#2f7d69"/><text x="398" y="610">Consistent security, auditing, and access control</text>
-    <circle cx="748" cy="605" r="5" fill="#2f7d69"/><text x="764" y="610">SQL works across media data types and AI features</text>
+    <circle cx="88" cy="605" r="5" fill="#2f7d69"/><text x="104" y="605" dominant-baseline="middle">One governed source for media evidence</text>
+    <circle cx="382" cy="605" r="5" fill="#2f7d69"/><text x="398" y="605" dominant-baseline="middle">Consistent security, auditing, and access control</text>
+    <circle cx="748" cy="605" r="5" fill="#2f7d69"/><text x="764" y="605" dominant-baseline="middle">SQL works across media data types and AI features</text>
   </g>
 </svg>
+
