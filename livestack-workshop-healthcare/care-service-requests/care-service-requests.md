@@ -2,11 +2,11 @@
 
 ## Introduction
 
-One elevated signal leads Jessica to service request `170104`. An application developer needs to show the whole request without making the team assemble several screens. The application wants one JSON document with the request and its line items. An analyst still needs rows and columns for filtering, joining, and reporting.
+One elevated signal leads Jessica to service request `170104`. An application developer needs to show the whole request without making the team assemble several screens. The application wants one JSON document with the request and its line items, while an analyst still needs rows and columns for filtering, joining, and reporting.
 
 The same challenge appears when an online order looks like one object to a customer. The company processing it may store many related records. Its order page groups the customer, shipment, payment, and items, while structured tables protect keys, data types, and relationships.
 
-**JSON Relational Duality** gives request `170104` both useful shapes from the same stored facts. The developer can serve one application document. Jessica can query the related request, care site, logistics site, and item rows without waiting for a second copy.
+**JSON Relational Duality** gives request `170104` both useful shapes from the same stored facts. The developer can serve one application document, and Jessica can query the related request, care site, logistics site, and item rows without waiting for a second copy.
 
 <details>
 <summary><strong>Key terms: JSON, relational table, duality view, and projection</strong></summary>
@@ -46,7 +46,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Inspect the request document
 
-Start with the shape an application can consume.
+Start with the request shape an application can consume so learners see why JSON is useful for request `170104`:
 
 1. Run the JSON query.
 
@@ -85,7 +85,7 @@ Start with the shape an application can consume.
 
 ## Task 2: Review the same request with SQL
 
-Now inspect the request in business-friendly rows.
+Next, inspect the same request as business-friendly SQL rows so analysts can filter, join, and report on the same governed facts:
 
 1. Run the request summary query.
 

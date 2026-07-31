@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The quality analyst’s vector search found records with related language, but Jessica’s next question concerns connections. How do people, events, conditions, treatments, and follow-up steps come together around one journey? Similar words can point toward useful records, while relationships explain why those records belong together.
+The quality analyst's vector search found records with related language, but Jessica's next question concerns connections. How do people, events, conditions, treatments, and follow-up steps come together around one journey? Similar words can point toward useful records, while relationships explain why those records belong together.
 
 This kind of problem is not unique to healthcare. A traveler follows connected train stations, while an investigator links people to events. A customer-service team traces an order through payment, warehouse, carrier, and delivery. In every case, the individual records matter, but the links reveal the path.
 
-**Oracle Property Graph** lets a care coordinator query those links with SQL Property Graph Queries, also called **SQL/PGQ**. The graph definition uses relational tables as its source. The coordinator can start with one journey, follow named relationships, and return connected facts without copying the pathway data.
+**Oracle Property Graph** lets a care coordinator query those links with SQL Property Graph Queries, also called SQL/PGQ. The graph definition uses relational tables as its source, so the coordinator can start with one journey, follow named relationships, and return connected facts without copying pathway data.
 
 <details>
 <summary><strong>Key terms: vertex, edge, property graph, and SQL/PGQ</strong></summary>
@@ -52,7 +52,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Follow the first circle of care facts
 
-Start with the patient journey and follow each outgoing relationship.
+Start with the patient journey and follow each outgoing relationship so the first circle of care facts is visible as reviewable rows:
 
 1. Run the one-hop graph query.
 
@@ -110,7 +110,7 @@ Start with the patient journey and follow each outgoing relationship.
 
 ## Task 2: Look around the encounter
 
-Now follow a second hop through the encounter.
+Next, follow a second hop through the encounter so the team can see care-team and follow-up facts connected to the same journey:
 
 1. Run the two-hop query.
 

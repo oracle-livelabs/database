@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Jessica’s dashboard warning raises an immediate question: where did the number come from? Before trusting any result, the team must identify the database objects that hold the evidence. They must also confirm that those objects belong to the same working environment.
+Jessica's dashboard warning raises an immediate question: where did the number come from? Before trusting any result, the team must identify the database objects that hold the evidence and confirm that those objects belong to the same working environment.
 
-A database developer begins by mapping the Seer Health foundation. The developer inventories the application views, JSON duality view, vector columns, property graph, spatial layers, and Oracle Machine Learning model. The next query counts the records that later tasks will use. This resembles checking shelves, an index, and inventory records before investigating a store’s missing-item report.
+A database developer begins by mapping the Seer Health foundation. The developer inventories application views, the JSON duality view, vector columns, the property graph, spatial layers, and the Oracle Machine Learning model. Then the developer counts the records later tasks will use. This resembles checking shelves, an index, and inventory records before investigating a store's missing-item report.
 
 The purpose is not to memorize Oracle catalog names. Instead, you will see how **Oracle AI Database 26ai** keeps different data shapes close to governed facts. That shared foundation lets the team trace each later answer to a known source.
 
@@ -51,7 +51,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Inventory the healthcare object families
 
-Start with a capability map. This query asks Oracle Database which object families are available in `LLUSER`.
+Start with a capability map so Jessica's team can see which database object families are available in `LLUSER` before using them for decisions.
 
 1. Run the inventory query.
 
@@ -130,7 +130,7 @@ Start with a capability map. This query asks Oracle Database which object famili
 
 ## Task 2: Count the healthcare data groups
 
-The next query shows the size of the healthcare scenario behind the application pages.
+Next, count the healthcare data groups so later dashboard, search, graph, routing, and prediction results have a scale reference:
 
 1. Run the count query.
 

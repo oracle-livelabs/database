@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The relationship map helps Jessica understand the care story, but request `170104` still needs a physical service in Miami. A logistics planner must identify a nearby active site. That site must support the diagnostic panel and have enough room in its workload.
+The relationship map helps Jessica understand the care story, but request `170104` still needs a physical service in Miami. A logistics planner must identify a nearby active site that supports the diagnostic panel and has enough room in its workload.
 
 Choosing the nearest site resembles choosing a store for an urgent purchase. The closest store is useless after closing, when it lacks the item, or when stock runs out. A dependable choice combines geography with operating facts that show whether the location can meet the need.
 
@@ -52,7 +52,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Rank the nearest active sites
 
-Start with location and status.
+Start with location and status so the nearest-site ranking considers only active logistics locations:
 
 1. Run the distance query.
 
@@ -115,6 +115,8 @@ Start with location and status.
     Distance makes Hialeah the first site to inspect. It does not finish the decision. The site must also support the requested service and have acceptable load.
 
 ## Task 2: Add service and capacity rules
+
+Next, add service and capacity rules so the routing result reflects diagnostic support and available workload, not distance alone:
 
 1. Run the service and load query.
 
