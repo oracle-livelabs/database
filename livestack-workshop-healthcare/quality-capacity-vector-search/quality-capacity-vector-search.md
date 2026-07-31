@@ -16,7 +16,7 @@ Oracle AI Database turns Jessica's search phrase into an embedding and compares 
 > - **Cosine distance** measures the difference between the directions of two vectors. A smaller distance means the vectors point in more similar directions. That result usually indicates more closely related meaning.
 > - **Similarity** is the score calculated here as `1 - cosine distance`. Higher values represent closer semantic matches. The score ranks items for review, but it does not prove correctness, urgency, or clinical value.
 >
-> Imagine a map where nearby pins represent related ideas instead of nearby streets. Vector search finds the pins closest to the search phrase. The surrounding database columns tell Priya what each match means in the real operation.
+> Imagine a map where nearby pins represent related ideas instead of nearby streets. Vector search finds the pins closest to the search phrase. The surrounding database columns tell Jessica what each match means in the real operation.
 
 </details>
 
