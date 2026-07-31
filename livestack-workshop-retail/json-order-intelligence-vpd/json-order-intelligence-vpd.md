@@ -138,8 +138,6 @@ Next, project the same order document into SQL columns so analysts can filter, s
 
 2. The result shows the practical value of duality. The application can use a JSON document, and analysts can still use SQL over the same governed order data. Next, you use customer and creator language to find demand signals that may not match catalog keywords exactly.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
 ## Next Steps
 
 Congratulations on completing the JSON duality lab. You used JSON Relational Duality to work with retail order data as both application-friendly documents and SQL-queryable rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).

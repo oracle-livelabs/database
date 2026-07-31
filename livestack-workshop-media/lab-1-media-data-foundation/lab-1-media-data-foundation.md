@@ -64,7 +64,7 @@ Start by inventorying the semantic views and database capabilities that the rest
 
 1. Run this inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are building a simple capability map before making any media decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What media capabilities are available in this schema?"
 
