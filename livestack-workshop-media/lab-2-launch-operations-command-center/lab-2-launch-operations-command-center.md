@@ -57,7 +57,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 1. Run the dashboard aggregate query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are recreating the dashboard's headline media measures directly from governed order and signal data. The SQL uses scalar subqueries so each metric can come from the best business view: campaign orders for request and revenue volume, audience signals for high-momentum signals, and content assets for launch demand alerts.
 

@@ -53,7 +53,7 @@ Start by checking the spatial tables and indexes.
 
 1. Run this spatial inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are confirming that location-aware tables have spatial metadata and indexes. Spatial metadata tells Oracle Database the coordinate bounds and Spatial Reference Identifier (SRID). Spatial indexes make repeated location searches practical.
 
