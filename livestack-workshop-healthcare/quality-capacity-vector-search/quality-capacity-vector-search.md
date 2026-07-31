@@ -2,11 +2,11 @@
 
 ## Introduction
 
-After opening request `170104`, Jessica asks a quality analyst to find other records about the same capacity problem. The analyst discovers a common search challenge. One person writes “infusion slots,” another writes “oncology chair capacity,” and a third describes a “continuity lot.”
+After opening request `170104`, Jessica asks a quality analyst to find other records about the same capacity problem. The analyst discovers a common search challenge: one person writes "infusion slots," another writes "oncology chair capacity," and a third describes a "continuity lot."
 
 Anyone who has searched an email inbox or product catalog has faced this problem. Exact keyword search works when the wording matches. It can miss useful results when people express the same idea with different words. **AI Vector Search** addresses that gap by comparing mathematical representations of meaning.
 
-Oracle Database turns Priya’s search phrase into an embedding and compares it with stored service and signal vectors. The query then ranks the closest matches. It keeps each service name, priority, signal type, and similarity score visible for Priya’s review.
+Oracle AI Database turns Jessica's search phrase into an embedding and compares it with stored service and signal vectors. The query then ranks the closest matches while keeping each service name, priority, signal type, and similarity score visible for review.
 
 <details>
 <summary><strong>Key terms: embedding, vector, cosine distance, and similarity</strong></summary>
@@ -47,7 +47,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Search care services by meaning
 
-Search for services related to oncology infusion capacity.
+Start by searching for care services related to oncology infusion capacity so similar service language can surface even when the wording differs:
 
 1. Run the service search.
 
@@ -105,7 +105,7 @@ Search for services related to oncology infusion capacity.
 
 ## Task 2: Search quality signals by meaning
 
-Now use the same phrase against quality and capacity signal text.
+Next, use the same search phrase against quality and capacity signal text so the analyst can compare service matches with related operational signals:
 
 1. Run the signal search.
 
