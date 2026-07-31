@@ -61,9 +61,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     You are recreating the dashboard's headline media measures directly from governed order and signal data. The SQL uses scalar subqueries so each metric can come from the best business view: campaign orders for request and revenue volume, audience signals for high-momentum signals, and content assets for launch demand alerts.
 
-    The final `FROM DUAL` returns one row for the scalar measures. It remains in this query because it was required in earlier Oracle Database releases and is a familiar pattern for many SQL users; Oracle Database 26ai does not require it for this type of `SELECT`.
-
-    MEDIA_CAMPAIGN_ORDERS_V is a view, not a raw table. It gives the dashboard a clean campaign-order shape with business columns such as campaign status, value, audience account, and distribution hub. MEDIA_AUDIENCE_SIGNALS_V exposes audience signal text, platform, virality, momentum, and creator context.
+    `MEDIA_CAMPAIGN_ORDERS_V` is a view, not a raw table. It gives the dashboard a clean campaign-order shape with business columns such as campaign status, value, audience account, and distribution hub. `MEDIA_AUDIENCE_SIGNALS_V` exposes audience signal text, platform, virality, momentum, and creator context.
 
     <details>
     <summary><strong>Why this matters: better than a separate reporting pipeline</strong></summary>

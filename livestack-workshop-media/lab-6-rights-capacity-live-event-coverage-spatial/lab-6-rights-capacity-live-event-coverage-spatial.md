@@ -86,7 +86,7 @@ Now calculate distance from an audience account to active hubs with available ca
 
 1. Run this coverage query:
 
-    The query compares each audience-account location with each distribution-hub location, then sorts the resulting pairs so the closest hubs appear first. `CROSS JOIN` creates those account-to-hub combinations; the `WHERE` clause removes rows without usable locations and keeps only active hubs. `SDO_GEOM.SDO_DISTANCE` calculates the distance between the two `SDO_GEOMETRY` points in miles, and `current_load_pct` adds operational context so the nearest hub is not mistaken for the only viable one.
+    The query joins a campaign order to its audience account, compares the account location to active distribution hubs, and returns the nearest hubs. `SDO_GEOM.SDO_DISTANCE` calculates distance between two `SDO_GEOMETRY` points.
 
     ```sql
     <copy>
