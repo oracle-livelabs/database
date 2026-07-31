@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Jessica now understands the warning, request, related signals, connected facts, and nearest workable site. Her final question looks ahead. If requests and critical alerts keep rising, should Seer Health prepare capacity before today’s pressure becomes tomorrow’s shortage?
+Jessica now understands the warning, request, related signals, connected facts, and nearest workable site. Her final question looks ahead: *If requests and critical alerts keep rising, should Seer Health prepare capacity before today's pressure becomes tomorrow's shortage?*
 
 People make similar choices when a store orders inventory or a school schedules staff. A delivery company also prepares vehicles for a busy week. Historical patterns help, but a responsible planner still examines the model, its inputs, and the strength of its result.
 
-**Oracle Machine Learning (OML)** stores and scores models inside Oracle Database. A capacity planner can use SQL without exporting governed records to another prediction store. The planner inventories the model, ranks forecasts, checks training-row agreement, and scores a scenario near the decision boundary.
+**Oracle Machine Learning (OML)** stores and scores models inside Oracle AI Database. A capacity planner can use SQL without exporting governed records to another prediction store. The planner inventories the model, ranks forecasts, checks training-row agreement, and scores a scenario near the decision boundary.
 
 <details>
 <summary><strong>Key terms: model, feature, classification, prediction, probability, and forecast</strong></summary>
@@ -52,7 +52,7 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Review the model and demand forecast
 
-Begin by confirming the model that will score the operating scenario.
+Begin by confirming the model that will score the operating scenario before reviewing the highest demand forecasts:
 
 1. Run the model inventory query.
 
@@ -119,7 +119,7 @@ Begin by confirming the model that will score the operating scenario.
 
 ## Task 2: Check and score the model
 
-Before scoring new input, look at a simple training-data agreement check.
+Before scoring new input, check how the model behaves on the training rows so the new scenario score has context:
 
 1. Run the agreement query.
 
