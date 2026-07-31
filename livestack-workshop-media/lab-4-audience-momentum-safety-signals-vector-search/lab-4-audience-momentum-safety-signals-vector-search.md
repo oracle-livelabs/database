@@ -12,7 +12,7 @@ This lab uses **AI Vector Search** to compare meaning inside Oracle Database. Th
 
 > - An **embedding** is a numeric representation of text meaning. Content descriptions and audience-signal text can be embedded so similar ideas are near each other in vector space.
 >
-> - A **vector** is the stored numeric value produced by an embedding model. In this workshop, PRODUCT_EMBEDDINGS and POST_EMBEDDINGS hold vectors tied to source media rows.
+> - A **vector** is the stored numeric value produced by an embedding model. In this workshop, `PRODUCT_EMBEDDINGS` and `POST_EMBEDDINGS` hold vectors tied to source media rows.
 >
 > - **Vector distance** measures how far two vectors are from each other. Lower distance means closer meaning.
 >
