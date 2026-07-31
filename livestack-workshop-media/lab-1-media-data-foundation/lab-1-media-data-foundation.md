@@ -64,13 +64,13 @@ Start by inventorying the semantic views and database capabilities that the rest
 
 1. Run this inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are building a simple capability map before making any media decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What media capabilities are available in this schema?"
 
     Each section counts one kind of capability: approved media views for reporting, JSON Relational Duality views for application documents, property graphs for relationship analysis, vector columns for meaning-based search, and OML models for prediction. The UNION ALL lines stack those counts into one easy-to-read table.
 
-    The names ending in _V are database views. A view is a saved SQL query that presents governed data in a business-ready shape. In this lesson, MEDIA_CONTENT_ASSETS_V, MEDIA_CAMPAIGN_ORDERS_V, MEDIA_AUDIENCE_SIGNALS_V, MEDIA_DISTRIBUTION_CAPACITY_V, and MEDIA_CREATOR_RELATIONSHIPS_V describe the media catalog, campaign orders, audience signals, distribution capacity, and creator relationships.
+    The names ending in _V are database views. A view is a saved SQL query that presents governed data in a business-ready shape. In this lesson, MEDIA_CONTENT_ASSETS_V, `MEDIA_CAMPAIGN_ORDERS_V`, `MEDIA_AUDIENCE_SIGNALS_V`, `MEDIA_DISTRIBUTION_CAPACITY_V`, and `MEDIA_CREATOR_RELATIONSHIPS_V` describe the media catalog, campaign orders, audience signals, distribution capacity, and creator relationships.
 
     <details>
     <summary><strong>Why this matters: easier in a converged database</strong></summary>
