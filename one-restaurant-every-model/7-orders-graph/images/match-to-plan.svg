@@ -53,9 +53,10 @@
   <text class="rsT" x="672" y="334">INDEX UNIQUE SCAN on ITEM pk</text>
   <path class="map" d="M780,188 L780,278"/>
 
-  <rect class="rs" x="200" y="380" width="560" height="52" rx="8"/>
-  <text class="rsH" x="214" y="401">in the plan these appear as SYS_PGQ_* aliases:</text>
-  <text class="rsT" x="214" y="419">access("O"."ORDER_ID"="SYS_PGQ_2"."ORDER_ID")&#160;&#160;filter("SYS_PGQ_2"."CUSTOMER_ID"='c_1')</text>
+  <rect class="rs" x="170" y="374" width="620" height="70" rx="8"/>
+  <text class="rsH" x="186" y="395">in the plan these appear as SYS_PGQ_* aliases:</text>
+  <text class="rsT" x="186" y="415">access("O"."ORDER_ID"="SYS_PGQ_2"."ORDER_ID")</text>
+  <text class="rsT" x="186" y="433">filter("SYS_PGQ_2"."CUSTOMER_ID"='c_1')</text>
 
   <text class="tag" x="480" y="470">No graph runtime bolted on the side: the arrows compile to ordinary row sources,</text>
   <text class="tag" x="480" y="494">and the SAME cost-based optimizer plans them next to your joins and vectors.</text>

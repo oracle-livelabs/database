@@ -20,6 +20,7 @@ Estimated Lab Time: 8 minutes
 
     ```
     <copy>
+    db.stores.deleteMany({});
     db.stores.insertMany([
       { "_id": "s_100", "name": "Burger Palace",
         "menus": [ { "menu_id": 10, "name": "Lunch Menu",
