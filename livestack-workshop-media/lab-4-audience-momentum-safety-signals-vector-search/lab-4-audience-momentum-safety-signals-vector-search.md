@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Audience analysts often search in business language: "sports rights highlight clips," "creator backlash on finale," or "regional demand for live event." Exact keyword search can miss useful matches when the audience language and the content catalog use different words.
+Audience analysts often search in business language: "sports rights highlight clips", "creator backlash on finale", or "regional demand for live event."
+Exact keyword search can miss useful matches when the audience language and the content catalog use different words.
 
 This lab uses **AI Vector Search** to compare meaning inside Oracle Database. The same content assets, audience signals, and embeddings remain connected to governed media records, so search results can be reviewed with SQL instead of treated as hidden prompt output.
 
@@ -11,11 +12,11 @@ This lab uses **AI Vector Search** to compare meaning inside Oracle Database. Th
 
 > - An **embedding** is a numeric representation of text meaning. Content descriptions and audience-signal text can be embedded so similar ideas are near each other in vector space.
 >
-> - A **vector** is the stored numeric value produced by an embedding model. In this workshop, PRODUCT_EMBEDDINGS and POST_EMBEDDINGS hold vectors tied to source media rows.
+> - A **vector** is the stored numeric value produced by an embedding model. In this workshop, `PRODUCT_EMBEDDINGS` and `POST_EMBEDDINGS` hold vectors tied to source media rows.
 >
 > - **Vector distance** measures how far two vectors are from each other. Lower distance means closer meaning.
 >
-> - A **similarity score** is often calculated as 1 - VECTOR_DISTANCE(...). Higher similarity is better, but decimal values may vary slightly by environment and model.
+> - A **similarity score** is often calculated as 1 - `VECTOR_DISTANCE(...)`. Higher similarity is better, but decimal values may vary slightly by environment and model.
 
 </details>
 
@@ -40,7 +41,7 @@ Estimated Time: **10 minutes**
 | Technical Challenge | Embeddings and search results must stay connected to source content and audience records. |
 | Persona Focus | Audience analysts search by meaning; database developers show the SQL evidence behind the match. |
 | What You Will See | Vector search ranks content assets related to an audience phrase. |
-| Database Capability | VECTOR_EMBEDDING, VECTOR_DISTANCE, and vector columns run inside Oracle Database. |
+| Database Capability | `VECTOR_EMBEDDING`, `VECTOR_DISTANCE`, and vector columns run inside Oracle Database. |
 | Outcome | Analysts can use semantic search while keeping results reviewable and governed. |
 
 Persona focus: You are the audience analyst looking for content and signals that match a business intent, and you need results that can be explained with database evidence.
@@ -51,9 +52,9 @@ Start with a phrase a media analyst might type into the application.
 
 1. Run this vector search query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are asking the database to compare the meaning of a search phrase with content-asset descriptions. VECTOR_EMBEDDING turns the phrase into a vector. VECTOR_DISTANCE compares that query vector with stored vectors in PRODUCT_EMBEDDINGS. The expression 1 - VECTOR_DISTANCE(...) turns distance into a similarity score where higher is better.
+    You are asking the database to compare the meaning of a search phrase with content-asset descriptions. VECTOR_EMBEDDING turns the phrase into a vector. `VECTOR_DISTANCE` compares that query vector with stored vectors in `PRODUCT_EMBEDDINGS`. The expression `1 - VECTOR_DISTANCE(...)` turns distance into a similarity score where higher is better.
 
     ```sql
     <copy>
@@ -94,7 +95,7 @@ Now inspect signals behind content momentum.
 
 1. Run this signal review query:
 
-    You are joining vector-search context back to audience signals. A bridge table, POST_PRODUCT_MENTIONS, connects an audience signal to the content asset it mentions. A bridge table connects an event, signal, document, order, claim, case, or asset to the business object it mentions.
+    This query traces high-momentum audience signals back to the content assets they mention. `POST_PRODUCT_MENTIONS` is a bridge table that connects an audience signal to the content asset it mentions, while `MEDIA_CONTENT_ASSETS_V` supplies the business-ready content name. The `WHERE` clause keeps only `viral` and `mega_viral` signals, and the sort places the highest `virality_score` first so an analyst can review the most urgent evidence before examining lower-priority activity.
 
     ```sql
     <copy>
@@ -124,12 +125,10 @@ Now inspect signals behind content momentum.
     | 68 | twitter | @globaldrama\_068 | Dreamline Academy Watch Party Kit | mega\_viral | 99.8 | Moderation queues around Horizon Kids Network... |
     | 67 | tiktok | @family\_067 | Festival Social Amplification | mega\_viral | 99.7 | Premium bundle demand for Festival Social Amplification... |
 
-2. Explain the business value.
-    Vector search helps the analyst find related content by meaning. The drill-through query shows why the result matters: it points to creator, platform, signal language, virality, and content context that a media team can review.
+2. These results show the business value of connecting semantic matches to reviewable evidence: the analyst can see the creator, platform, signal language, virality, and content context behind related content.
 
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-
