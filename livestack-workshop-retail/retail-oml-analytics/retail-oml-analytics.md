@@ -47,7 +47,7 @@ Start on the Retail OML Analytics page so the model inventory connects to the de
 
 2. Run the model inventory query.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     `USER_MINING_MODELS` lists the in-database models available to the workshop schema. The retail schema includes four OML models, and this lab focuses on `DEMAND_SURGE_MODEL` for demand-prioritization scoring. `ORDER BY model_name` makes the inventory easy to compare with the expected output.
 
