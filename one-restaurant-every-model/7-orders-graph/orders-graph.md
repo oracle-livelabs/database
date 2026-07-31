@@ -66,43 +66,56 @@ Estimated Lab Time: 7 minutes
 
     Quoted lowercase again — the house convention from Lab 4, so the name you read here is the name you type in mongosh. (Oracle's case-alias synonym means `db.orders` would find an unquoted `ORDERS` too.)
 
-3. In **mongosh**, seed 40 orders. They are built deterministically — no randomness, so every attendee gets the same graph — heavily co-ordering the Classic Cheeseburger with French Fries, with line items snapshotting the current 1499 price. Paste the whole block (also in `scripts/06_orders_seed.mongo.js`):
+3. In **mongosh**, seed 40 orders — ten customers, four orders each. They are built deterministically, so every attendee gets the same graph, and line items snapshot the current 1499 price.
+
+    Notice the shape of the data: customers belong to **cuisine cohorts**. That is not decoration. `GRAPH_TABLE` finds co-orders through a shared *customer*, not a shared order — so if every customer ordered a bit of everything, "people who ordered X also ordered Y" would collapse into "Y is the most popular item on the menu." Diners have habits. Model them, or the graph has nothing to say. Paste the whole block (also in `scripts/06_orders_seed.mongo.js`):
 
     ```
     <copy>
+    const MENU = {
+      1000: { name: "Classic Cheeseburger",   price: 1499 },
+      1002: { name: "French Fries",           price: 499  },
+      1003: { name: "Garden Salad",           price: 899  },
+      2001: { name: "Szechuan Tofu Stir-Fry", price: 1199 },
+      2002: { name: "Beef Chow Fun",          price: 1399 },
+      3001: { name: "Carnitas Taco Plate",    price: 1099 }
+    };
+
+    const COHORTS = [
+      { name: "noodle", customers: ["c_1", "c_2", "c_3"],
+        baskets: [[2001, 2002], [2001, 2002], [2001, 2002], [2002, 1003]] },
+      { name: "burger", customers: ["c_4", "c_5", "c_6", "c_7"],
+        baskets: [[1000, 1002], [1000, 1002], [1000, 1002], [1000, 1003]] },
+      { name: "taco",   customers: ["c_8", "c_9", "c_10"],
+        baskets: [[3001, 1002], [3001, 1002], [3001, 1003], [3001, 1002]] }
+    ];
+
     const ORDERS_TOTAL = 40;
     const orders = [];
-    for (let n = 1; n <= ORDERS_TOTAL; n++) {
-      const id   = "ord_" + (8000 + n);
-      const cust = "c_" + (((n - 1) % 10) + 1);
-      const store = "s_10" + ((n - 1) % 5);
-      let items;
-      if (n <= 24) {
-        items = [
-          { item_id: 1000, name: "Classic Cheeseburger", price: 1499 },
-          { item_id: 1002, name: "French Fries",         price: 499 } ];
-      } else if (n <= 32) {
-        items = [
-          { item_id: 1000, name: "Classic Cheeseburger", price: 1499 },
-          { item_id: 1003, name: "Garden Salad",         price: 899 } ];
-      } else if (n <= 36) {
-        items = [
-          { item_id: 2001, name: "Szechuan Tofu Stir-Fry", price: 1199 },
-          { item_id: 2002, name: "Beef Chow Fun",          price: 1399 } ];
-      } else {
-        items = [
-          { item_id: 3001, name: "Carnitas Taco Plate", price: 1099 },
-          { item_id: 1002, name: "French Fries",        price: 499 } ];
+    let n = 0;
+    for (const cohort of COHORTS) {
+      for (const customer of cohort.customers) {
+        for (const basket of cohort.baskets) {
+          n += 1;
+          const items = basket.map(id => ({
+            item_id: id, name: MENU[id].name, price: MENU[id].price
+          }));
+          orders.push({
+            _id: "ord_" + (8000 + n),
+            customer_id: customer,
+            store_id: "s_10" + ((n - 1) % 5),
+            cohort: cohort.name,
+            status: "closed",
+            opened_at: "2026-07-20T12:" + String(n).padStart(2, "0") + ":00Z",
+            items: items,
+            total: items.reduce((s, i) => s + i.price, 0)
+          });
+        }
       }
-      orders.push({
-        _id: id, customer_id: cust, store_id: store, status: "closed",
-        opened_at: "2026-07-20T12:" + String(n).padStart(2, "0") + ":00Z",
-        items: items,
-        total: items.reduce((s, i) => s + i.price, 0)
-      });
     }
+    db.orders.deleteMany({});
     db.orders.insertMany(orders);
-    print("orders inserted: " + db.orders.countDocuments({}));
+    print("orders inserted: " + db.orders.countDocuments({}) + " (of " + ORDERS_TOTAL + ")");
     </copy>
     ```
 
@@ -190,7 +203,11 @@ Estimated Lab Time: 7 minutes
     </copy>
     ```
 
-    **What you should see:** **French Fries on top** — the kiosk upsell as a two-hop MATCH, over documents your own mongosh session wrote three minutes ago, joined to the relational item table, on one engine.
+    **What you should see:** **French Fries on top with 48**, then Garden Salad with 16 — and *nothing else*. The kiosk upsell as a two-hop MATCH, over documents your own mongosh session wrote three minutes ago, joined to the relational item table, on one engine.
+
+    ![Co-order result: French Fries 48, Garden Salad 16](images/coorder-result.png " ")
+
+    That short result list is the cohort design paying off: the only people who order a cheeseburger are the burger crowd, so the only things that can come back are what the burger crowd eats. A graph over undifferentiated customers would have returned the whole menu in popularity order.
 
     ![The MATCH arrows are just joins — each element becomes a row source in your plan](images/match-to-plan.svg "MATCH to plan")
 
@@ -199,6 +216,8 @@ Estimated Lab Time: 7 minutes
 ### Stretch (fast finishers): predict, then run
 
 Before you run it — which item co-orders most with the Szechuan Tofu Stir-Fry (`item_id 2001`)? Change `1000` to `2001` in the MATCH and check your prediction.
+
+**What you should see:** **Beef Chow Fun with 36**, then Garden Salad with 9. The cheeseburger does not appear at all — the noodle crowd and the burger crowd are different people, and the graph knows it.
 
 ## Learn More
 

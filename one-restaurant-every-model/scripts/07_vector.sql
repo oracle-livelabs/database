@@ -15,7 +15,7 @@ SELECT item_name, price
 FROM   item
 WHERE  active
 ORDER  BY VECTOR_DISTANCE(desc_vec,
-         VECTOR_EMBEDDING(menu_model USING 'spicy vegetarian noodles' AS data),
+         VECTOR_EMBEDDING(menu_model USING 'a vegetarian dish with some heat' AS data),
          COSINE)
 FETCH FIRST 5 ROWS ONLY;
 

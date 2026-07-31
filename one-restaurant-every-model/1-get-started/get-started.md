@@ -64,7 +64,15 @@ In this lab, you will:
 
 `mongosh` is MongoDB's own shell, and running the *unmodified* MongoDB tool against an Oracle endpoint is the whole point of Act I. You install it **on your own laptop** — a download and an unzip, no admin rights, about two minutes.
 
-> **Why not Cloud Shell?** OCI Cloud Shell is not reliably available on LiveLabs sandboxes — it reports "Policy missing" and never finishes creating the machine (verified on sandboxes in two different regions). Oracle's own MongoDB API workshops install `mongosh` locally for this reason. If you are running in **your own tenancy** and Cloud Shell works for you, you are welcome to use it instead — the commands below are the same, minus the download URL, which becomes the `linux-x64` build.
+> **What about Cloud Shell?** If you are in **your own tenancy** and OCI Cloud Shell opens for you, it is a fine place to do this — Cloud Shell runs on Ampere, so grab the **`linux-arm64`** build and it is three lines:
+>
+> ```
+> curl https://downloads.mongodb.com/compass/mongosh-2.9.2-linux-arm64.tgz > mongosh.tgz
+> tar xvf mongosh.tgz
+> cd mongosh-2.9.2-linux-arm64/bin && ./mongosh $URI
+> ```
+>
+> On a **LiveLabs sandbox**, though, Cloud Shell does not come up: it reports "Policy missing" and then sits on *"Creating your Oracle Cloud Shell machine…"* indefinitely (reproduced on sandboxes in two different regions). That is why the local install below is the main path — it works everywhere, including on a sandbox.
 
 > **NOTE:** MongoDB Shell is a tool provided by MongoDB Inc. Oracle is not associated with MongoDB Inc. and has no control over the software. These instructions are provided to help you learn about the Oracle Database API for MongoDB. Download links change without notice — see [the MongoDB download page](https://www.mongodb.com/try/download/shell) for current versions.
 
@@ -138,6 +146,8 @@ In this lab, you will:
     **What you should see:** `2.9.2`.
 
     > That `PATH` lasts for this terminal window only. **Keep this window open for the whole workshop.** If you close it, re-run the `PATH` command from this directory.
+
+    > **Already have MongoDB Compass?** It bundles the same `mongosh`, and its built-in shell works for every step of this workshop — skip this task and use Compass's shell wherever the guide says "in mongosh". Any other route to a working `mongosh` is equally fine; nothing here depends on how you got it.
 
 ## Task 3: Connect mongosh to Your Database
 

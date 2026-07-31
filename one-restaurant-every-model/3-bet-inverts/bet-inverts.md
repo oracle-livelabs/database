@@ -34,6 +34,10 @@ Estimated Lab Time: 6 minutes
 
     > **If you see 4, your lab is working perfectly** — Task 3 shows why it isn't 5.
 
+    ![Real mongosh transcript: matchedCount 5, modifiedCount 4 — one store silently missed](images/silent-miss.svg "The silent miss")
+
+    Sit with that response for a second, because it is the most important thing in this lab. There is no error. There is no warning. There is no list of which document was skipped. The only evidence that something went wrong is that **two numbers in the response disagree** — and you have to already know to compare them.
+
 2. Read the observable. Every *modified* store document was **rewritten in its entirety** to move one 4-byte number. Here that's 4 documents. All five stores sell this item — you saw that in Lab 2 — so at a 7,500-store franchise this same statement is 7,500 full-document rewrites on append-only storage. Write amplification is not a benchmark claim; you just counted it. (For measured at-scale numbers, run the open-source DocBench and sbe-cte-bench harnesses — we deliberately do not measure execution time on shared lab instances.)
 
 ![One memo, five copies: four rewrites, one silent miss](images/bet-inverts.svg "The bet inverts")

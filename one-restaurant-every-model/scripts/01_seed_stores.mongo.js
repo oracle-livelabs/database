@@ -4,6 +4,9 @@
 //   - item_id 1000 is a NUMBER in s_100..s_103 and the STRING "1000" in s_104 (planted drift)
 //   - every item carries a description (Lab 8 embeds name + description)
 //   - prices start at 1299 for item 1000
+// Re-run safe: the _id values are fixed, so a second insertMany would fail
+// with ORA-00001. Clear first, exactly as the SQL scripts DELETE first.
+db.stores.deleteMany({});
 db.stores.insertMany([
   { "_id": "s_100", "name": "Burger Palace",
     "menus": [ { "menu_id": 10, "name": "Lunch Menu",
