@@ -6,6 +6,8 @@ If you use Data Pump to migrate entire databases, you often want it to happen as
 
 Estimated Time: 20 Minutes
 
+[Lab 5 walk-through](videohub:1_kbqkfxpd)
+
 ### Objectives
 
 In this lab, you will:

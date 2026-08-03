@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="1080" viewBox="0 0 1020 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Recipe Share data model</title>
+  <desc id="desc">Simple data model diagram showing the recipes collection, a recipe document, a ratings subcollection, and a rating document.</desc>
+  <style>
+    .bg { fill: #f7f3ec; }
+    .card { fill: #ffffff; stroke: #59636d; stroke-width: 3; }
+    .connector { fill: none; stroke: #59636d; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .label { fill: #2d3640; font-family: Arial, Helvetica, sans-serif; font-size: 24px; font-weight: 700; }
+    .mono { fill: #2d3640; font-family: Menlo, Monaco, Consolas, monospace; }
+    .title { font-size: 36px; font-weight: 700; }
+    .docTitle { font-size: 28px; font-weight: 700; }
+    .field { font-size: 19px; }
+  </style>
+
+  <rect class="bg" width="1020" height="1080" />
+
+  <text x="66" y="78" class="label title">Recipe Share Data Model</text>
+
+  <rect x="66" y="154" width="188" height="62" rx="14" class="card" />
+  <text x="106" y="195" class="mono docTitle">recipes</text>
+
+  <path d="M254 185 H312" class="connector" />
+
+  <rect x="312" y="110" width="380" height="498" rx="22" class="card" />
+  <line x1="312" y1="174" x2="692" y2="174" class="connector" />
+  <text x="344" y="152" class="mono docTitle">recipe document</text>
+  <text x="344" y="216" class="mono field">title</text>
+  <text x="344" y="250" class="mono field">description</text>
+  <text x="344" y="284" class="mono field">category</text>
+  <text x="344" y="318" class="mono field">prepTime</text>
+  <text x="344" y="352" class="mono field">instructions</text>
+  <text x="344" y="386" class="mono field">ingredients</text>
+  <text x="344" y="420" class="mono field">createdAt</text>
+  <text x="344" y="454" class="mono field">averageRating</text>
+  <text x="344" y="488" class="mono field">ratingCount</text>
+  <text x="344" y="522" class="mono field">createdBy</text>
+  <text x="344" y="556" class="mono field">ownerId</text>
+  <text x="344" y="590" class="mono field">photoURL</text>
+
+  <path d="M502 608 V676" class="connector" />
+
+  <rect x="340" y="676" width="260" height="62" rx="14" class="card" />
+  <text x="390" y="717" class="mono docTitle">ratings</text>
+
+  <path d="M600 707 H632" class="connector" />
+
+  <rect x="632" y="612" width="320" height="224" rx="22" class="card" />
+  <line x1="632" y1="676" x2="952" y2="676" class="connector" />
+  <text x="664" y="654" class="mono docTitle">rating document</text>
+  <text x="664" y="722" class="mono field">author</text>
+  <text x="664" y="756" class="mono field">rating</text>
+  <text x="664" y="790" class="mono field">comment</text>
+
+</svg>

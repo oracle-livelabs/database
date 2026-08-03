@@ -11,7 +11,7 @@ HeatWave GenAI is unique because it seamlessly integrates large language models 
 
 In this LiveLab, you will first setup Visual Studio Code. You will then create a HeatWave instance, and connect to it from Visual Studio Code. Subsequently, you will use HeatWave GenAI to generate content in natural language, summarize text, and perform vector search on your enterprise data.
 
-_Estimated Time:_ 1.5 hours
+Estimated Workshop Time: 2 hours
 
 ## About Product/Technology
 
@@ -48,4 +48,4 @@ Please make sure you can sign in to your HeatWave OCI Cloud Account.
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, August 2024
+- **Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025

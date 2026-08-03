@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-label="Oracle AI Database capabilities used in the telecom operating loop">
+<rect width="960" height="360" fill="#ffffff"/>
+<text x="32" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2933">One governed foundation, many telecom workflows</text>
+<text x="32" y="66" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">The workshop shows how different access patterns stay close to the same Oracle AI Database data.</text>
+<rect x="340" y="130" width="280" height="100" rx="10" fill="#5b6f45" stroke="#374151"/>
+<text x="382" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Oracle AI Database 26ai</text>
+<text x="389" y="200" font-family="Arial, sans-serif" font-size="14" fill="#f8fafc">Governed telecom data foundation</text>
+<rect x="52" y="100" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="66" y="126" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">SQL</text>
+<text x="66" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Operational KPIs</text>
+<line x1="127" y1="135" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="258" y="100" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="272" y="126" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Vector</text>
+<text x="272" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Subscriber intent</text>
+<line x1="333" y1="135" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="668" y="100" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="682" y="126" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Graph</text>
+<text x="682" y="150" font-family="Arial, sans-serif" font-size="13" fill="#374151">Connected impact</text>
+<line x1="743" y1="135" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="52" y="230" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="66" y="256" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Spatial</text>
+<text x="66" y="280" font-family="Arial, sans-serif" font-size="13" fill="#374151">Network capacity</text>
+<line x1="127" y1="265" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="258" y="230" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="272" y="256" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">JSON</text>
+<text x="272" y="280" font-family="Arial, sans-serif" font-size="13" fill="#374151">Service orders</text>
+<line x1="333" y1="265" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="668" y="230" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="682" y="256" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">OML</text>
+<text x="682" y="280" font-family="Arial, sans-serif" font-size="13" fill="#374151">Predictive risk</text>
+<line x1="743" y1="265" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="770" y="165" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="784" y="191" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">NL2SQL</text>
+<text x="784" y="215" font-family="Arial, sans-serif" font-size="13" fill="#374151">Trusted questions</text>
+<line x1="845" y1="200" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="416" y="268" width="150" height="70" rx="8" fill="#f7f8f9" stroke="#6b7280"/>
+<text x="430" y="294" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Agents</text>
+<text x="430" y="318" font-family="Arial, sans-serif" font-size="13" fill="#374151">Auditable action</text>
+<line x1="491" y1="303" x2="480" y2="180" stroke="#9ca3af" stroke-width="1.5"/>
+</svg>

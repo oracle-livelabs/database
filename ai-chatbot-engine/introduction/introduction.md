@@ -40,7 +40,7 @@ As a result, the *DMS architecture* provides a comprehensive and efficient frame
 
 In this workshop, you will learn how to:
 
-* Split a folder of text FAQs into chunks and store them as vectors in a vector database (Oracle Database  23ai).
+* Split a folder of text FAQs into chunks and store them as vectors in a vector database (Oracle AI Database).
 * Configure access to Oracle Generative AI Service.
 * Given a user question, retrieve the relevant chunks from the vector database
 * Use an LLM to create a relevant response based on text chunks.
@@ -57,7 +57,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
-* [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
+* [Get Started with Oracle AI Database](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA

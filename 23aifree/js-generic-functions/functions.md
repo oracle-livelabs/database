@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After creating JavaScript modules and environments in the previous lab you will now learn how to expose JavaScript code in SQL and PL/SQL. After completing this step you can call JavaScript code anywhere you can invoke SQL and PL/SQL functions. All client code, regardless whether it's written in Java, Python, or even with `node-oracledb`, can access JavaScript stored procedures.
+After creating JavaScript modules and environments in the previous lab, you will now learn how to expose JavaScript code in SQL and PL/SQL. After completing this step you can call JavaScript code anywhere you can invoke SQL and PL/SQL functions. All client code, regardless whether it's written in Java, Python, or even with `node-oracledb`, can access JavaScript stored procedures.
 
 Estimated Lab Time: 10 minutes
 
@@ -19,7 +19,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- An Oracle Database 23ai Free environment available to use
+- An Oracle AI Database 26ai Free environment available to use
 - Created the `emily` account as per Lab 1
 - Completed Lab 2 where you created a number of JavaScript modules in the database
 
@@ -35,7 +35,7 @@ The call specification replaces the PL/SQL function or procedure's body:
 
 ![PL/SQL procedure source](images/plsql_procedure_source.gif)
 
-> **Note**: For more information about call specifications, including context for the above syntax diagrams, see Oracle Database PL/SQL Language Reference.
+> **Note**: For more information about call specifications, including context for the above syntax diagrams, see the[Oracle AI Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/lnpls/index.html).
 
 You can define call specifications for multiple languages. The JavaScript syntax is defined as follows:
 
@@ -48,17 +48,23 @@ JavaScript developers can choose from 2 options:
 
 Both options will be covered in this lab.
 
-## Task 2: Establish a database connection
+## Task 2: Connect to Database Actions
 
-Connect to `freepdb1` just as you did in the previous labs, and don't forget to substitute the dummy password with yours
+Before starting any of the following tasks, you need to log into Database Actions as EMILY. Make sure to switch to SQL worksheets.
 
-```bash
-<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
-```
+If you forgot the URL to access the Emily account, use the Database Actions dropdown and select Database Users, as shown in this screenshot:
+
+![Screenshot showing how to view/modify and delete Database Users](../js-generic-get-started-example/images/create-user-01.png)
+
+In the ensuing dialog, identify the Emily account and take a note of the URL.
+
+![Screenshot showing all user accounts in the database](../js-generic-modules-environments/images/identify-sdw-url-01.png)
+
+Copy/paste it into your favorite browser and access Database Actions use the option pointed to by the arrow to open Database Actions in a new window.
 
 ## Task 3: Create a simple call specification referring to functions in a module
 
-In this task you will learn how to create a call specification based on the MLE module name and (JavaScript) function.
+In this task you will learn how to create a call specification based on the MLE module name and (JavaScript) function. If you haven't done so already, switch to SQL worksheets.
 
 1. Review the source code for `helper_module_inline`
 
@@ -66,9 +72,6 @@ In this task you will learn how to create a call specification based on the MLE 
 
     ```sql
     <copy>
-    col line for 9999
-    col text for a90
-    set lines 120 pages 100
     select 
         line, 
         text 
@@ -81,62 +84,82 @@ In this task you will learn how to create a call specification based on the MLE 
     You should see the following output:
 
     ```
-    LINE TEXT
-   ----- ------------------------------------------------------------------------------------------
-       1 /**
-       2  * convert a delimited string into key-value pairs and return JSON
-       3  * @param {string} inputString - the input string to be converted
-       4  * @returns {JSON}
-       5  */
-       6 function string2obj(inputString) {
-       7     if ( inputString === undefined ) {
-       8         throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
-       9     }
-      10     let myObject = {};
-      11     if ( inputString.length === 0 ) {
-      12         return myObject;
-      13     }
-      14     const kvPairs = inputString.split(";");
-      15     kvPairs.forEach( pair => {
-      16         const tuple = pair.split("=");
-      17         if ( tuple.length === 1 ) {
-      18             tuple[1] = false;
-      19         } else if ( tuple.length != 2 ) {
-      20             throw "parse error: you need to use exactly one '=' between " +
-      21                     "key and value and not use '=' in either key or value";
-      22         }
-      23         myObject[tuple[0]] = tuple[1];
-      24     });
-      25     return myObject;
-      26 }
-      27 /**
-      28  * convert a JavaScript object to a string
-      29  * @param {object} inputObject - the object to transform to a string
-      30  * @returns {string}
-      31  */
-      32 function obj2String(inputObject) {
-      33     if ( typeof inputObject != 'object' ) {
-      34         throw "inputObject isn't an object";
-      35     }
-      36     return JSON.stringify(inputObject);
-      37 }
-      38 export { string2obj, obj2String }
+    LINE TEXT                                                                               
+    ---- ---------------------------------------------------------------------------------- 
+    1 /**                                                                                
+    2     * convert a delimited string into key-value pairs and return JSON              
+    3     * @param {string} inputString - the input string to be converted               
+    4     * @returns {JSON}                                                              
+    5     */                                                                             
+    6 function string2obj(inputString) {                                                 
+    7     if ( inputString === undefined ) {                                             
+    8         throw `must provide a string in the form of key1=value1;...;keyN=valueN`;  
+    9     }                                                                              
+    10     let myObject = {};                                                             
+    11     if ( inputString.length === 0 ) {                                              
+    12         return myObject;                                                           
+    13     }                                                                              
+    14     const kvPairs = inputString.split(";");                                        
+    15     kvPairs.forEach( pair => {                                                     
+    16         const tuple = pair.split("=");                                             
+    17         if ( tuple.length === 1 ) {                                                
+    18             tuple[1] = false;                                                      
+    19         } else if ( tuple.length != 2 ) {                                          
+    20             throw "parse error: you need to use exactly one '=' between " +        
+    21                     "key and value and not use '=' in either key or value";        
+    22         }                                                                          
+    23         myObject[tuple[0]] = tuple[1];                                             
+    24     });                                                                            
+    25     return myObject;                                                               
+    26 }                                                                                  
+    27                                                                                    
+    28 /**                                                                                
+    29     * convert a JavaScript object to a string                                      
+    30     * @param {object} inputObject - the object to transform to a string            
+    31     * @returns {string}                                                            
+    32     */                                                                             
+    33 function obj2String(inputObject) {                                                 
+    34     if ( typeof inputObject != 'object' ) {                                        
+    35         throw "inputObject isn't an object";                                       
+    36     }                                                                              
+    37     return JSON.stringify(inputObject);                                            
+    38 }                                                                                  
+    39                                                                                    
+    40 export { string2obj, obj2String }   
     ```
 
-    You can see in line 38 that both functions declared in the module are exported.
+    You can see in line 40 that both functions declared in the module are exported.
 
     If you prefer a graphical user interface log into Database Actions and navigate to MLE JS from the Launchpad. Right-click on `HELPER_MODULE_INLINE` and select Edit from the context menu. This brings up the source code for the module:
 
-    ![Source code for HELPER_MODULE_INLINE in Database Actions](images/sdw-source-code.jpg)
+    ![Source code for HELPER_MODULE_INLINE in Database Actions](images/sdw-source-code.png)
 
-2. Create call specification for `helper_module_inline`
+2. Create call specification for `helper_module_inline` using Database Actions's JavaScript editor
 
-    You can see from the output above that both functions in the module are exported (line 38). This allows us to create call specifications. Before you go ahead and create one you need to decide whether you need a PL/SQL function or procedure. In the above case both JavaScript functions return data:
+    You can see from the output above that both functions in the module are exported (line 40). This allows us to create call specifications. Before you go ahead and create one you need to decide whether you need a PL/SQL _function_ or _procedure_. In the above case both JavaScript functions return data:
 
     - `string2obj(string)` returns a JavaScript object
     - `object2String(object)` returns a string
 
-    A PL/SQL function is the best fit (PL/SQL procedures don't provide an option to return a value). You can either create stand-alone functions like you did in lab 1, or as demonstrated in this case you can group the functions in a PL/SQL package. Using the syntax diagrams from task 1 you can create the call specification as follows:
+    A PL/SQL _function_ is the best fit: PL/SQL procedures don't provide an option to return a value.
+
+    You create a call specification by right-clicking the module name > Create > Call Specification.
+
+    ![Create a call specification](./images/sdw-call-spec-01.png)
+
+    This opens a dialog allowing you to provide the call specification's details. You need to complete two of these, once for the `string2obj()` JavaScript function, the other for `obj2string()`. You can use the following screenshots to create the call specifications.
+
+    ![Create a call specification: string2Obj](./images/sdw-call-spec-02.png)
+
+    ![Create a call specification: obj2String](./images/sdw-call-spec-03.png)
+
+3. Create call specification for `helper_module_inline` using Database Action's SQL Worksheet
+
+    In addition to the create call spec wizard available with the JavaScript editor, you can always use SQL Worksheets to create call specifications.
+
+    If you haven't yet, switch to SQL Worksheets to continue with this task.
+
+    Note that you can either create stand-alone functions like earlier, or as demonstrated in this case you can group the functions in a PL/SQL package. Using the syntax diagrams shown earlier you can create the call specification as follows:
 
     ```sql
     <copy>
@@ -161,19 +184,9 @@ In this task you will learn how to create a call specification based on the MLE 
 
     Since `helper_module_inline` does not import functionality from any other module an `ENV` clause is not necessary.
 
-    You can of course create call specifications using Database Actions as well. Whilst still using the MLE JS editor, right-click on `HELPER_MODULE_BFILE` and choose `create call specification` as shown in this screenshot:
+4. Invoke the JavaScript code
 
-    ![Create a call specification for HELPER_MODULE_BFILE in Database Actions](images/sdw-simple-call-spec.jpg)
-
-    Enter the details about your call specification in the wizard using the following screenshot as your reference. Change the defaults in the highlighted input fields.
-
-    ![Create a call specification for HELPER_MODULE_BFILE in Database Actions-Details](images/sdw-simple-call-spec-details.jpg)
-
-    Experiment with the wizard for a bit, you can double-click the function parameters (inputString) and rename them if you like. It is possible to change the type as well should it be needed (not in this example). A click on the "Create" button closes the wizard and creates the call specification.
-
-3. Invoke the JavaScript code
-
-    With the JavaScript code available to SQL and PL/SQL it is time to try it out. Begin by converting a JSON document to a string
+    With the JavaScript code available to SQL and PL/SQL it is time to try it out. Begin by converting a JSON object to a string
 
     ```sql
     <copy>
@@ -225,7 +238,7 @@ Creating call specifications for functions exported by the `business_logic` modu
 create mle module business_logic language javascript as
 import { string2obj } from 'helpers';
 /**
- * A simple function accepting a set of key-value pairs, translates it to JSON bef
+ * A simple function accepting a set of key-value pairs, translates it to JSON before
  * inserting the order in the database.
  * @param {string} orderData a semi-colon separated string containing the order de
  * @returns {boolean} true if the order could be processed successfully, false oth
@@ -245,9 +258,6 @@ Before you can create a call specification for `processOrder()` you must ensure 
 
     ```sql
     <copy>
-    col env_name for a30
-    col import_name for a30
-    col module_name for a30
     select
         env_name,
         import_name,
@@ -287,15 +297,15 @@ Before you can create a call specification for `processOrder()` you must ensure 
     </copy>
     ```
 
-    The same can be achieved in Database Actions. Using the MLE JS view, right-click on `BUSINESS_LOGIC` as you did before with the helper modules. Call specifications for `processOrder()` require knowledge about the environment name. You can set this as shown in this screenshot:
+    The same can be achieved in Database Actions using the familiar workflow. Switch back to the JavaScript editor, then right-click on `BUSINESS_LOGIC` as you did before with the helper modules. Call specifications for `processOrder()` require knowledge about the environment name. You can set this as shown in this screenshot:
 
-    ![Create a call specification for BUSINESS_LOG in Database Actions](images/sdw-call-spec-env-details.jpg)
+    ![Create a call specification for BUSINESS_LOG in Database Actions](images/sdw-call-spec-04.jpg)
 
-    Make sure to assign `BUSINESS_MODULE_ENV` as the Env. Name in the top right corner of the wizard. Click on "Create" to close the wizard and persist the call specification.
+    Click on "Create" to close the wizard and persist the call specification.
 
 3. Invoke the JavaScript code
 
-    Just like in task 3 you can now invoke the code thanks to the call specification you just created.
+    Just like in task 3 you can now invoke the code thanks to the call specification you just created. Switch back to SQL Worksheets, then run the following command
 
     ```sql
     <copy>
@@ -307,7 +317,7 @@ Before you can create a call specification for `processOrder()` you must ensure 
         l_str := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         l_success := business_logic_pkg.process_order(l_str);
 
-        -- you should probably think of a better success/failure evaluation
+        -- Consider a more robust success/failure evaluation
         if l_success then
             dbms_output.put_line('success');
         else
@@ -362,14 +372,14 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
     <copy>
     create or replace function hello("who" varchar2) return varchar2
     as mle language javascript 
-    q'~
+    <<
         return `hello, ${who}`;
-    ~';
+    >>;
     /
     </copy>
     ```
 
-    > **Note** JavaScript identifiers are case sensitive and therefore must be enclosed in double-quotes in the PL/SQL layer or else they won't be recognised in the JavaScript portion of the code.
+    > **Note** JavaScript identifiers are case sensitive and therefore must be enclosed in double-quotes in the PL/SQL layer or else they won't be recognized in the JavaScript portion of the code.
 
     Proceed by executing the function.
 
@@ -399,7 +409,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
         "inputString" varchar2
     ) return JSON
     as mle language javascript
-    q'~
+    <<
         if ( inputString === undefined ) {
             throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
         }
@@ -422,7 +432,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
             myObject[tuple[0]] = tuple[1];
         });
         return myObject;
-    ~';
+    >>;
     /
     </copy>
     ```
@@ -462,17 +472,12 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
 
 ## Task 6: View dictionary information about call specifications
 
-The data dictionary has been enhanced in Oracle Database 23ai Free to provide information about call specifications. A new view, named `USER_MLE_PROCEDURES` provides the mapping between PL/SQL code units and JavaScript. There are of course corresponding _ALL/DBA/CDB_ views as well.
+The data dictionary has been enhanced in Oracle AI Database 26ai Free to provide information about call specifications. A new view, named `USER_MLE_PROCEDURES` provides the mapping between PL/SQL code units and JavaScript. There are of course corresponding _ALL/DBA/CDB_ views as well.
 
 1. Query `USER_MLE_PROCEDURES` to learn more about the existing call specifications
 
     ```sql
     <copy>
-    set lines 120
-    col object_name for a20
-    col procedure_name for a20
-    col module_name for a20
-    col env_name for a20
     select
         object_name, 
         procedure_name, 
@@ -490,18 +495,19 @@ The data dictionary has been enhanced in Oracle Database 23ai Free to provide in
     The following is an example of the output generated by the previous query, you may have additional rows returned.
 
     ```
-    OBJECT_NAME          PROCEDURE_NAME       MODULE_NAME          ENV_NAME
-    -------------------- -------------------- -------------------- --------------------
-    BUSINESS_LOGIC_PKG   PROCESS_ORDER        BUSINESS_LOGIC       BUSINESS_MODULE_ENV
-    HELLO
-    HELPER_PKG           OBJ2STRING           HELPER_MODULE_INLINE
-    HELPER_PKG           STRING2OBJ           HELPER_MODULE_INLINE
-    ISEMAIL                                   VALIDATOR
-    STRING2OBJ
-    STRING_TO_JSON                            HELPER_MODULE_BFILE
+    OBJECT_NAME        PROCEDURE_NAME MODULE_NAME          ENV_NAME            
+    ------------------ -------------- -------------------- ------------------- 
+    BUSINESS_LOGIC_PKG PROCESS_ORDER  BUSINESS_LOGIC       BUSINESS_MODULE_ENV 
+    HELLO              null           null                 null                
+    HELPER_PKG         STRING2OBJ     HELPER_MODULE_INLINE null                
+    HELPER_PKG         OBJ2STRING     HELPER_MODULE_INLINE null                
+    ISEMAIL            null           VALIDATOR_MODULE     null                
+    OBJ2STRING         null           HELPER_MODULE_INLINE null                
+    PROCESS_ORDER      null           BUSINESS_LOGIC       BUSINESS_MODULE_ENV 
+    STRING2OBJ         null           null                 null              
     ```
 
-    Due to the way the view is defined, you will sometimes see both `object_name` and `procedure_name` populated, while sometimes just `object_name` is populated and `procedure_name` is null.
+    Due to the way the view is defined, you will sometimes see both `object_name` and `procedure_name` populated. In other cases, only `object_name` is populated, and `procedure_name` is null.
 
     - When using PL/SQL packages to encapsulate JavaScript functions both columns are populated with `object_name` referring to the package name and `procedure_name` to the function/procedure _within_ the package
     - In case of stand-alone PL/SQL functions and procedures `object_name` is populated and `procedure_name` is null
@@ -511,12 +517,12 @@ You many now proceed to the next lab.
 
 ## Learn More
 
-- [Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/lnpls/index.html)
-- [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes call specifications and inline JavaScript functions in detail
-- [Database Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/index.html) contains the definition of all dictionary views referred to in this lab
+- [Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/lnpls/index.html)
+- JavaScript Developer's Guide describes [modules and environments](https://docs.oracle.com/en/database/oracle/oracle-database/26/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) in more detail. There is an [entire chapter](https://docs.oracle.com/en/database/oracle/oracle-database/26/mlejs/calling-mle-js-functions.html) dedicated to call specifications and inline JavaScript functions
+- [Database Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/refrn/index.html) contains the definition of all dictionary views referred to in this lab
 
 ## Acknowledgements
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 28-NOV-2023
+- **Last Updated By/Date**: Martin Bach 17-DEC-2025

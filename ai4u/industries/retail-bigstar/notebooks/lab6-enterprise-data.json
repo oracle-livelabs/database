@@ -1,0 +1,471 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Connect Agents to Enterprise Data at Big Star Collectibles\n\n### The Business Problem\n\nBig Star Collectibles deployed AI chatbots to help item officers answer client questions. The problem? The chatbots don't know Big Star Collectibles' actual guidelines, policies, or client information.\n\n*\"I asked the AI what guidelines we offer preferred customers. It said 6.5%. Our actual preferred rate is 7.9%. I almost quoted wrong guidelines to a client!\"*\n\n*\"The AI doesn't know our policies. It gives generic answers about 'typical lending practices' when clients need our specific requirements.\"*\n\nWithout access to enterprise data, AI assistants are worse than useless. They're confidently wrong.\n\n### What You'll Learn\n\nIn this lab, you'll see the transformation that happens when agents get access to real business data:\n\n1. **Without data:** Ask about Big Star Collectibles item guidelines. Watch the AI give generic (or wrong) answers.\n2. **With data:** Connect the agent to actual item policies and client information.\n3. **The difference:** The same question now returns real guidelines, real requirements, real client details.\n\nEnterprise data is what turns a generic AI into YOUR AI\u2014one that knows your business.\n\n**What you'll build:** An agent connected to Big Star Collectibles' item policies and applicant data.\n\n**Estimated Time:** 10 minutes",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Connect Agents to Enterprise Data at Big Star Collectibles</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Big Star Collectibles deployed AI chatbots to help item officers answer client questions. The problem? The chatbots don't know Big Star Collectibles' actual guidelines, policies, or client information.</p>\n\n<p><em>\"I asked the AI what guidelines we offer preferred customers. It said 6.5%. Our actual preferred rate is 7.9%. I almost quoted wrong guidelines to a client!\"</em></p>\n\n<p><em>\"The AI doesn't know our policies. It gives generic answers about 'typical lending practices' when clients need our specific requirements.\"</em></p>\n\n<p>Without access to enterprise data, AI assistants are worse than useless. They're confidently wrong.</p>\n\n<h3>What You'll Learn</h3>\n\n<p>In this lab, you'll see the transformation that happens when agents get access to real business data:</p>\n\n<ol>\n<li><strong>Without data:</strong> Ask about Big Star Collectibles item guidelines. Watch the AI give generic (or wrong) answers.</li>\n<li><strong>With data:</strong> Connect the agent to actual item policies and client information.</li>\n<li><strong>The difference:</strong> The same question now returns real guidelines, real requirements, real client details.</li>\n</ol>\n\n<p>Enterprise data is what turns a generic AI into YOUR AI\u2014one that knows your business.</p>\n\n<p><strong>What you'll build:</strong> An agent connected to Big Star Collectibles' item policies and applicant data.</p>\n\n<p><strong>Estimated Time:</strong> 10 minutes</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Ask the LLM About Big Star Collectibles' Item Rates\n\nLet's start by asking the raw LLM (SELECT AI CHAT) about Big Star Collectibles' item products. This goes directly to the LLM with no access to your business data.\n\n**Watch what happens:** The LLM gives a generic response. It might describe typical item guidelines or say it doesn't know. Either way, it can't tell you YOUR guidelines because it has no access to Big Star Collectibles' data.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask the LLM About Big Star Collectibles' Item Rates</h2>\n\n<p>Let's start by asking the raw LLM (SELECT AI CHAT) about Big Star Collectibles' item products. This goes directly to the LLM with no access to your business data.</p>\n\n<p><strong>Watch what happens:</strong> The LLM gives a generic response. It might describe typical item guidelines or say it doesn't know. Either way, it can't tell you YOUR guidelines because it has no access to Big Star Collectibles' data.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Set the AI profile for SELECT AI CHAT\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT AI CHAT What are the current appraisal guidelines for collector card submissions at Big Star Collectibles for preferred customers;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Ask the LLM About a Specific Applicant\n\nNow ask about a specific item applicant in your system.\n\n**Watch what happens:** The LLM has no applicant data. It might make something up (hallucinate), admit it doesn't know, or give generic advice. It cannot tell you anything about YOUR applicant APPL-1001.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask the LLM About a Specific Applicant</h2>\n\n<p>Now ask about a specific item applicant in your system.</p>\n\n<p><strong>Watch what happens:</strong> The LLM has no applicant data. It might make something up (hallucinate), admit it doesn't know, or give generic advice. It cannot tell you anything about YOUR applicant APPL-1001.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI CHAT Is applicant APPL-1001 eligible for a premium rate item at Big Star Collectibles;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create Big Star Collectibles' Enterprise Data\n\nNow let's create the business data that makes an agent useful for Big Star Collectibles. You'll create:\n\n1. **item_policies**: Big Star Collectibles' actual item products, guidelines, and requirements\n2. **item_applicants**: Real applicant records with credit scores, income, and eligibility\n\nThis is the knowledge the agent needs to answer business-specific questions accurately.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create Big Star Collectibles' Enterprise Data</h2>\n\n<p>Now let's create the business data that makes an agent useful for Big Star Collectibles. You'll create:</p>\n\n<ol>\n<li><strong>item_policies</strong>: Big Star Collectibles' actual item products, guidelines, and requirements</li>\n<li><strong>item_applicants</strong>: Real applicant records with credit scores, income, and eligibility</li>\n</ol>\n\n<p>This is the knowledge the agent needs to answer business-specific questions accurately.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Big Star Collectibles Item Policies\nCREATE TABLE item_policies (\n    policy_id      VARCHAR2(20) PRIMARY KEY,\n    policy_name    VARCHAR2(100),\n    policy_text    CLOB,\n    applies_to     VARCHAR2(50)\n);\n\nINSERT INTO item_policies VALUES (\n    'POL-001', 'Collector Card Item - Preferred Rate',\n    'Preferred customers (credit score 750+) qualify for collector card items at 7.9% APR. ' ||\n    'Maximum item amount $100,000. No origination fee. Same-day approval for amounts under $50,000.',\n    'PREFERRED'\n);\n\nINSERT INTO item_policies VALUES (\n    'POL-002', 'Collector Card Item - Standard Rate',\n    'Standard customers (credit score 650-749) qualify for collector card items at 12.9% APR. ' ||\n    'Maximum item amount $50,000. 2% origination fee applies. ' ||\n    'Approval within 2 business days.',\n    'STANDARD'\n);\n\nINSERT INTO item_policies VALUES (\n    'POL-003', 'Authenticating Item Guidelines',\n    'All authenticating item applications require: 1) Minimum credit score 680, 2) Debt-to-income ratio under 43%, ' ||\n    '3) Down payment minimum 10%, 4) Employment verification for past 2 years. ' ||\n    'Senior appraiser review required for all authenticating items.',\n    'ALL'\n);\n\nINSERT INTO item_policies VALUES (\n    'POL-004', 'Limited Art Item - Preferred Rate',\n    'Preferred customers qualify for limited art items at 5.9% APR for new vehicles, 7.9% for used. ' ||\n    'Maximum term 72 months for new, 60 months for used. No down payment required for amounts under $35,000.',\n    'PREFERRED'\n);\n\nINSERT INTO item_policies VALUES (\n    'POL-005', 'Credit Risk Escalation',\n    'Item applications with risk flags: 1) Agent assesses initial eligibility, 2) If debt-to-income exceeds 35%, ' ||\n    'escalate to appraiser, 3) If credit score below 650, escalate to senior appraiser, ' ||\n    '4) Applicant may request manager review of any decision.',\n    'ALL'\n);\n\n-- Big Star Collectibles Applicant Data\nCREATE TABLE item_applicants (\n    applicant_id        VARCHAR2(20) PRIMARY KEY,\n    name                VARCHAR2(100),\n    customer_tier       VARCHAR2(20),\n    credit_score        NUMBER,\n    annual_income       NUMBER(12,2),\n    existing_debt       NUMBER(12,2),\n    member_since        DATE,\n    premium_eligible    VARCHAR2(1)\n);\n\nINSERT INTO item_applicants VALUES ('APPL-1001', 'Acme Industries LLC', 'PREFERRED', 780, 450000, 125000, DATE '2019-03-15', 'Y');\nINSERT INTO item_applicants VALUES ('APPL-1002', 'TechStart Solutions', 'STANDARD', 695, 125000, 45000, DATE '2022-06-01', 'N');\nINSERT INTO item_applicants VALUES ('APPL-1003', 'NewVenture Corp', 'STANDARD', 620, 75000, 35000, DATE '2024-01-10', 'N');\n\nCOMMIT;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Data Access Functions\n\nThese functions become the agent's \"eyes\" into Big Star Collectibles' enterprise data. Each function queries your tables and returns formatted information the agent can use.\n\n- **get_item_policy**: Retrieves item policies by type and optionally by customer tier\n- **get_applicant_info**: Retrieves applicant details including credit score, income, and eligibility",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Data Access Functions</h2>\n\n<p>These functions become the agent's \"eyes\" into Big Star Collectibles' enterprise data. Each function queries your tables and returns formatted information the agent can use.</p>\n\n<ul>\n<li><strong>get_item_policy</strong>: Retrieves item policies by type and optionally by customer tier</li>\n<li><strong>get_applicant_info</strong>: Retrieves applicant details including credit score, income, and eligibility</li>\n</ul>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\n-- Tool to look up item policies\nCREATE OR REPLACE FUNCTION get_item_policy(\n    p_policy_type  VARCHAR2,\n    p_customer_tier VARCHAR2 DEFAULT NULL\n) RETURN VARCHAR2 AS\n    v_result CLOB := '';\nBEGIN\n    FOR rec IN (\n        SELECT policy_name, policy_text \n        FROM item_policies \n        WHERE UPPER(policy_name) LIKE '%' || UPPER(p_policy_type) || '%'\n        AND (applies_to = p_customer_tier OR applies_to = 'ALL' OR p_customer_tier IS NULL)\n    ) LOOP\n        v_result := v_result || rec.policy_name || ': ' || rec.policy_text || CHR(10);\n    END LOOP;\n    \n    IF v_result IS NULL THEN\n        RETURN 'No policy found for: ' || p_policy_type;\n    END IF;\n    RETURN v_result;\nEND;\n/\n\n-- Tool to look up applicant information\nCREATE OR REPLACE FUNCTION get_applicant_info(\n    p_applicant_id VARCHAR2\n) RETURN VARCHAR2 AS\n    v_result VARCHAR2(500);\n    v_dti NUMBER;\nBEGIN\n    SELECT 'Applicant: ' || name || \n           ', Tier: ' || customer_tier || \n           ', Credit Score: ' || credit_score ||\n           ', Annual Income: $' || TO_CHAR(annual_income, '999,999') ||\n           ', Existing Debt: $' || TO_CHAR(existing_debt, '999,999') ||\n           ', Debt-to-Income: ' || ROUND((existing_debt / annual_income) * 100, 1) || '%' ||\n           ', Member Since: ' || TO_CHAR(member_since, 'YYYY-MM-DD') ||\n           ', Premium Rate Eligible: ' || premium_eligible\n    INTO v_result\n    FROM item_applicants\n    WHERE applicant_id = p_applicant_id;\n    \n    RETURN v_result;\nEXCEPTION\n    WHEN NO_DATA_FOUND THEN\n        RETURN 'Applicant not found: ' || p_applicant_id;\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Register the Tools\n\nRegister both functions as agent tools. The instructions tell the agent when to use each tool. Item policy questions use ITEM_POLICY_TOOL, applicant questions use APPLICANT_LOOKUP_TOOL.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Register the Tools</h2>\n\n<p>Register both functions as agent tools. The instructions tell the agent when to use each tool. Item policy questions use ITEM_POLICY_TOOL, applicant questions use APPLICANT_LOOKUP_TOOL.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'ITEM_POLICY_TOOL',\n        attributes  => '{\"instruction\": \"Look up Big Star Collectibles item policies. Parameters: P_POLICY_TYPE (e.g. collector_card, authenticating, limited_art, escalation), P_CUSTOMER_TIER (PREFERRED or STANDARD, optional). Always use this to answer item policy and rate questions.\",\n                        \"function\": \"get_item_policy\"}',\n        description => 'Retrieves Big Star Collectibles item policies including guidelines, requirements, and routing steps'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'APPLICANT_LOOKUP_TOOL',\n        attributes  => '{\"instruction\": \"Look up item applicant information. Parameter: P_APPLICANT_ID (e.g. APPL-1001). Returns credit score, income, debt-to-income ratio, and premium eligibility. Always use this when asked about specific applicants.\",\n                        \"function\": \"get_applicant_info\"}',\n        description => 'Retrieves applicant details including credit score, income, and item eligibility'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Create the Big Star Collectibles Item Agent\n\nCreate an agent that has access to your enterprise data tools. The role tells the agent it works for Big Star Collectibles and should always use its tools. Never guess about guidelines or applicant information.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create the Big Star Collectibles Item Agent</h2>\n\n<p>Create an agent that has access to your enterprise data tools. The role tells the agent it works for Big Star Collectibles and should always use its tools. Never guess about guidelines or applicant information.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n    DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'BIGSTAR_ITEM_AGENT',\n        attributes  => '{\"profile_name\": \"genai\",\n                        \"role\": \"You are a item officer assistant for Big Star Collectibles. You have access to company item policies and applicant information. Always use your tools to look up real data - never guess about guidelines, policies, or applicant details.\"}',\n        description => 'Agent with Big Star Collectibles enterprise data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name   => 'BIGSTAR_ITEM_TASK',\n        attributes  => '{\"instruction\": \"Help the item officer by looking up relevant policies and applicant information using your tools. Do not ask clarifying questions - use the tools and report what you find. User request: {query}\",\n                        \"tools\": [\"ITEM_POLICY_TOOL\", \"APPLICANT_LOOKUP_TOOL\"]}',\n        description => 'Task with Big Star Collectibles data access'\n    );\n    \n    DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name   => 'BIGSTAR_ITEM_TEAM',\n        attributes  => '{\"agents\": [{\"name\": \"BIGSTAR_ITEM_AGENT\", \"task\": \"BIGSTAR_ITEM_TASK\"}],\n                        \"process\": \"sequential\"}',\n        description => 'Team with Big Star Collectibles enterprise data'\n    );\nEND;\n/",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Activate the Big Star Collectibles Agent\n\nSet the team so the Big Star Collectibles agent handles your requests.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Activate the Big Star Collectibles Agent</h2>\n\n<p>Set the team so the Big Star Collectibles agent handles your requests.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('BIGSTAR_ITEM_TEAM');",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Ask About Collector Card Item Rates Again\n\nNow ask the SAME question you asked the raw LLM earlier. This time, the agent has access to Big Star Collectibles' policy data.\n\n**Watch the difference:** Instead of generic advice, you get YOUR actual guidelines: 7.9% APR for preferred customers, $100,000 maximum, no origination fee, same-day approval for amounts under $50K. This is your real business policy, not a guess.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask About Collector Card Item Rates Again</h2>\n\n<p>Now ask the SAME question you asked the raw LLM earlier. This time, the agent has access to Big Star Collectibles' policy data.</p>\n\n<p><strong>Watch the difference:</strong> Instead of generic advice, you get YOUR actual guidelines: 7.9% APR for preferred customers, $100,000 maximum, no origination fee, same-day approval for amounts under $50K. This is your real business policy, not a guess.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What are the current appraisal guidelines for collector card submissions for preferred customers;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Ask About the Specific Applicant Again\n\nNow ask about applicant APPL-1001 again.\n\n**Watch the difference:** The agent looks up the applicant and reports factual information: Acme Industries LLC, PREFERRED tier, 780 credit score, $450K income, 27.8% debt-to-income, premium eligible = YES. Real data, not hallucination.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask About the Specific Applicant Again</h2>\n\n<p>Now ask about applicant APPL-1001 again.</p>\n\n<p><strong>Watch the difference:</strong> The agent looks up the applicant and reports factual information: Acme Industries LLC, PREFERRED tier, 780 credit score, $450K income, 27.8% debt-to-income, premium eligible = YES. Real data, not hallucination.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT Is applicant APPL-1001 eligible for a premium rate item;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Ask About Authenticating Item Requirements\n\nTry another question: what are Big Star Collectibles' authenticating item requirements?\n\n**Watch the result:** Your actual authenticating item guidelines: minimum credit score 680, DTI under 43%, 10% down payment minimum, 2 years employment verification, senior appraiser required. The agent knows your procedures.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask About Authenticating Item Requirements</h2>\n\n<p>Try another question: what are Big Star Collectibles' authenticating item requirements?</p>\n\n<p><strong>Watch the result:</strong> Your actual authenticating item guidelines: minimum credit score 680, DTI under 43%, 10% down payment minimum, 2 years employment verification, senior appraiser required. The agent knows your procedures.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What are the authenticating item requirements at Big Star Collectibles;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Ask About Risk Escalation\n\nAsk about the escalation process for risky applications.\n\n**Watch the result:** Your actual escalation process: initial assessment by agent, appraiser if DTI exceeds 35%, senior appraiser if credit below 650, manager review available. The agent knows your risk management procedures.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask About Risk Escalation</h2>\n\n<p>Ask about the escalation process for risky applications.</p>\n\n<p><strong>Watch the result:</strong> Your actual escalation process: initial assessment by agent, appraiser if DTI exceeds 35%, senior appraiser if credit below 650, manager review available. The agent knows your risk management procedures.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI AGENT What is the escalation process for high-risk item applications;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## Verify the Agent Used Your Data\n\nLook at the tool execution history to confirm the agent queried your enterprise data.\n\nYou should see ITEM_POLICY_TOOL and APPLICANT_LOOKUP_TOOL calls, with results from your actual tables. This proves the agent is using real data, not making things up.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Agent Used Your Data</h2>\n\n<p>Look at the tool execution history to confirm the agent queried your enterprise data.</p>\n\n<p>You should see ITEM_POLICY_TOOL and APPLICANT_LOOKUP_TOOL calls, with results from your actual tables. This proves the agent is using real data, not making things up.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT \n    tool_name,\n    TO_CHAR(start_date, 'HH24:MI:SS') as called_at,\n    SUBSTR(output, 1, 80) as result\nFROM USER_AI_AGENT_TOOL_HISTORY\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    },
+    {
+      "text": "%md\n## What You Learned\n\nIn this lab, you experienced the transformative power of enterprise data at Big Star Collectibles:\n\n| Approach | Result |\n|----------|--------|\n| **SELECT AI CHAT** (LLM only) | Generic answers, no business knowledge |\n| **SELECT AI AGENT** (with tools) | YOUR item guidelines, YOUR applicants, YOUR procedures |\n\n**Key takeaway:** Agents don't fail because they're not smart. They fail because they don't know your business. Enterprise data is what transforms generic AI into Big Star Collectibles' AI.\n\nThe LLM provides the intelligence. Your database provides the knowledge. Together, they create an agent that actually understands your lending business.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>What You Learned</h2>\n\n<p>In this lab, you experienced the transformative power of enterprise data at Big Star Collectibles:</p>\n\n<table border=\"1\" style=\"border-collapse: collapse;\">\n<tr><th style=\"padding: 8px;\">Approach</th><th style=\"padding: 8px;\">Result</th></tr>\n<tr><td style=\"padding: 8px;\"><strong>SELECT AI CHAT</strong> (LLM only)</td><td style=\"padding: 8px;\">Generic answers, no business knowledge</td></tr>\n<tr><td style=\"padding: 8px;\"><strong>SELECT AI AGENT</strong> (with tools)</td><td style=\"padding: 8px;\">YOUR item guidelines, YOUR applicants, YOUR procedures</td></tr>\n</table>\n\n<p><strong>Key takeaway:</strong> Agents don't fail because they're not smart. They fail because they don't know your business. Enterprise data is what transforms generic AI into Big Star Collectibles' AI.</p>\n\n<p>The LLM provides the intelligence. Your database provides the knowledge. Together, they create an agent that actually understands your lending business.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Cleanup (Optional)\n\nRun this to remove all objects created in this lab.",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Cleanup (Optional)</h2>\n\n<p>Run this to remove all objects created in this lab.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('BIGSTAR_ITEM_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('BIGSTAR_ITEM_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('BIGSTAR_ITEM_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('ITEM_POLICY_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('APPLICANT_LOOKUP_TOOL', TRUE);\nDROP TABLE item_policies PURGE;\nDROP TABLE item_applicants PURGE;\nDROP FUNCTION get_item_policy;\nDROP FUNCTION get_applicant_info;",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql"
+        }
+      }
+    }
+  ],
+  "name": "Lab 6 - Enterprise Data (Big Star)",
+  "id": "lab6-enterprise-data",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

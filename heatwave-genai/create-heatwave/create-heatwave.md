@@ -12,8 +12,8 @@ In this lab, you will be guided through the following tasks:
 
 - Create compartment.
 - Create Virtual Cloud Network.
-- Configure security list to allow incoming connections.
-- Configure security list to allow HTTP incoming connections.
+- Configure security list to allow MySQL connections.
+- Configure security list to allow HTTP connections.
 - Create a HeatWave instance.
 
 ### Prerequisites
@@ -178,6 +178,14 @@ In this lab, you will be guided through the following tasks:
 
 5. Enter the administrator credentials. *Note* the administrator credentials as you will need them to connect to the DB system. 
 
+  **administrator**:
+
+    ```bash
+    <copy>admin</copy>
+    ```
+    **password**: *your own value*
+
+
     ![HeatWave DB system details](./images/22-create-dbs-admin.png "HeatWave DB system details")
 
 6. Select **Standalone** instance, and select the VCN, **heatwave-genai-vcn**, and private subnet, **private subnet-heatwave-genai-vcn**, which you created earlier.
@@ -186,7 +194,13 @@ In this lab, you will be guided through the following tasks:
 
 7. Let the **Configure placement** settings remain as is.
 
-8. Under **Configure hardware**, select **Enable HeatWave cluster**, and click **Change shape**.
+8. **HeatWave Configuration**
+
+    - DB System Shape: MySQL.32
+    - HeatWave Cluster: HeatWave.512GB
+    - Database version: 9.5.1-Innovation  or higher version.
+
+    Under **Configure hardware**, select **Enable HeatWave cluster**, and click **Change shape**.
 
    ![Change shape](./images/24-change-shape.png "Change shape")
 
@@ -212,7 +226,7 @@ In this lab, you will be guided through the following tasks:
 
 14. Click **Show advanced options**.
 
-15. Go to the **Configuration** tab, and under **Database version**, select version **9.0.0 - Innovation** or higher version.
+15. Go to the **Configuration** tab, and under **Database version**, select version **9.5.1 - Innovation** or higher version.
 
     ![Select database innovation version](./images/31-innovation-version.png "Select database innovation version")
 
@@ -252,4 +266,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, August 2024
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025

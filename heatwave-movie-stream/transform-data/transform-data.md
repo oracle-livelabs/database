@@ -100,7 +100,7 @@ In this lab, you will be guided through the following tasks:
     Enter the following command at the prompt
 
     ```bash
-    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/SyQ2QLCqljrI8sRvpfFhrPCZ_WVK9TX0XpWQZSJ61JKArVxtf4BHpalgYAkuEwIY/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/scripts.zip</copy>
+    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Tzds9BnVc9yJwjhM2dz5UkdZxUB3lcU6tn-S0-QF36rPecHJVDlnQGezgtOP1cX/n/mysqlpm/b/heatwave-movie-stream/o/scripts.zip</copy>
     ```
 
     Unzip the application code. Be sure to include the -j option to avoid creating a new folder.

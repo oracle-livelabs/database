@@ -31,7 +31,7 @@ In this lab, you will be guided through the following tasks:
 
     ![OCI Navigation VCN Menu](./images/vcn-menu-new.png "navigate-to-vcn")
 
-2. Once on the Virtual Cloud Networks page, click “Start VCN Wizard” and select “Create VCN with Internet Connectivity”
+2. Once on the Virtual Cloud Networks page, click "Actions", then select “Start VCN Wizard”, and select “Create VCN with Internet Connectivity”
 
     ![OCI VCN Page](./images/vcn-wiz-2-new.png "create-vcn")
 
@@ -49,21 +49,23 @@ In this lab, you will be guided through the following tasks:
 
     ![Review VCN Creation Page](./images/review-vcn-new.png "review-vcn-wizard")
 
-5. Once the VCN is created, click “View Virtual Cloud Network”
+5. Once the VCN is created, click “View VCN”
 
     ![VCN Setup Complete Page](./images/view-vcn-new.png "view-vcn-wizard")
 
-6. Once on the MySQL-VCN page, under “Resources” click “Subnets” and go to the “Private-Subnet-MySQL-VCN”
+6. Once on the MySQL-VCN page, click “Subnets” and go to the “private subnet-MySQL-VCN”
 
     ![VCN Subnet Page](./images/resources-vcn-new.png "resources-vcn")
 
-7. On the Private Subnet page, under “Security Lists”, click on “Security List for Private Subnet-MySQL-VCN” and select “Add Ingress Rules”
+7. On the private subnet-MySQL-VCN page, under “Security", click “security list for private subnet-MySQL-VCN”. 
 
     ![Security List VCN Private Subnet](./images/sc-vcn-new.png "seclist-vcn")
 
+8. On the security list for private subnet-MySQL-VCN page, under "Security rules" select “Add Ingress Rules”
+
     ![Add Ingress Rules Button](./images/add-ingr-new.png "add-ingress")
 
-8. For the ‘Source CIDR’ enter “0.0.0.0/0”, select "TCP" for the 'IP Protocol' and for the Destination Port Range, enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
+9. For ‘Source CIDR’ enter “0.0.0.0/0”, select "TCP" for 'IP Protocol' and for "Destination Port Range", enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
 
     ```bash
     <copy>0.0.0.0/0</copy>
@@ -145,7 +147,7 @@ In this lab, you will be guided through the following tasks:
 
     ![Paste Public SSH Key/Create Compute](./images/add-ssh-new.png "pubkey-compute")
 
-5. Your Compute instance will be ready in a few minutes. Copy the Public IP address of your Compute instance afterwards.
+5. Your Compute instance will be ready in a few minutes. From the "Networking" tab, copy the Public IP address of your Compute instance afterwards.
 
     ![Compute Running](./images/ready-compute-new.png "ready-compute")
 
@@ -244,7 +246,7 @@ In this lab, you will be guided through the following tasks:
     ```
 
     ```bash
-    <copy>mysql -u root -p < world.sql </copy>
+    <copy>mysql -u root -p < world.sql</copy>
     ```
 
     ![Download/Unzip the Sample Database](./images/download-sample1.png "download-sample-db")

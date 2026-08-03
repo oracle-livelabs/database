@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" font-family="Helvetica,Arial,sans-serif">
+  <title>One dataset, five doors — every API surface opens onto the same canonical restaurant data, inside one ring of guarantees</title>
+  <style>
+    .core   { fill:#ffffff; stroke:#312d2a; stroke-width:2.5; }
+    .tbl    { fill:#f5efe6; stroke:#312d2a; stroke-width:1; }
+    .door   { fill:#ffffff; stroke:#c74634; stroke-width:2; }
+    .doorT  { fill:#312d2a; font-size:15px; font-weight:bold; text-anchor:middle; }
+    .doorS  { fill:#666666; font-size:12px; text-anchor:middle; }
+    .lab    { fill:#c74634; font-size:11px; font-weight:bold; text-anchor:middle; }
+    .coreT  { fill:#312d2a; font-size:17px; font-weight:bold; text-anchor:middle; }
+    .coreS  { fill:#666666; font-size:12px; text-anchor:middle; }
+    .ring   { fill:none; stroke:#2f6b4f; stroke-width:2; stroke-dasharray:7 5; }
+    .ringT  { fill:#2f6b4f; font-size:12.5px; font-weight:bold; text-anchor:middle; }
+    .arrow  { stroke:#312d2a; stroke-width:1.8; fill:none; marker-end:url(#a2); marker-start:url(#a1); }
+    .tag    { fill:#312d2a; font-size:13px; text-anchor:middle; font-style:italic; }
+    .tblT   { fill:#312d2a; font-size:10.5px; }
+  </style>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#312d2a"/></marker>
+    <marker id="a1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#312d2a"/></marker>
+  </defs>
+
+  <!-- guarantee ring -->
+  <ellipse class="ring" cx="480" cy="330" rx="330" ry="240"/>
+  <text class="ringT" x="480" y="78">ONE ACID TRANSACTION BOUNDARY&#160;&#160;&#183;&#160;&#160;ONE COST-BASED OPTIMIZER</text>
+  <text class="ringT" x="480" y="600">ONE CONSISTENCY MODEL&#160;&#160;&#183;&#160;&#160;ONE GOVERNANCE DOMAIN&#160;&#160;&#183;&#160;&#160;SHARED SURFACES</text>
+
+  <!-- core -->
+  <rect class="core" x="350" y="245" width="260" height="170" rx="12"/>
+  <text class="coreT" x="480" y="275">ONE DATASET</text>
+  <text class="coreS" x="480" y="293">the canonical restaurant schema</text>
+  <rect class="tbl" x="372" y="305" width="100" height="20"/><text class="tblT" x="380" y="319">store · menu</text>
+  <rect class="tbl" x="372" y="329" width="100" height="20"/><text class="tblT" x="380" y="343">category · item</text>
+  <rect class="tbl" x="372" y="353" width="100" height="20"/><text class="tblT" x="380" y="367">item_override …</text>
+  <rect class="tbl" x="488" y="305" width="100" height="20"/><text class="tblT" x="496" y="319">"orders" (JSON)</text>
+  <rect class="tbl" x="488" y="329" width="100" height="20"/><text class="tblT" x="496" y="343">order_graph</text>
+  <rect class="tbl" x="488" y="353" width="100" height="20"/><text class="tblT" x="496" y="367">desc_vec VECTOR</text>
+  <text class="coreS" x="480" y="399">rows · documents · edges · vectors — the same bytes</text>
+
+  <!-- doors -->
+  <rect class="door" x="80" y="130" width="190" height="66" rx="9"/>
+  <text class="doorT" x="175" y="156">mongosh / drivers</text>
+  <text class="doorS" x="175" y="173">MongoDB-compatible API</text>
+  <text class="lab" x="175" y="188">opened in LABS 2–3</text>
+  <path class="arrow" d="M272,196 L362,258"/>
+
+  <rect class="door" x="690" y="130" width="190" height="66" rx="9"/>
+  <text class="doorT" x="785" y="156">SQL worksheet</text>
+  <text class="doorS" x="785" y="173">SQL &#183; SQL/JSON &#183; JSON_TABLE</text>
+  <text class="lab" x="785" y="188">opened in LAB 4</text>
+  <path class="arrow" d="M688,196 L598,258"/>
+
+  <rect class="door" x="60" y="420" width="190" height="66" rx="9"/>
+  <text class="doorT" x="155" y="446">ORDS REST</text>
+  <text class="doorS" x="155" y="463">GET / PUT + ETag If-Match</text>
+  <text class="lab" x="155" y="478">opened in LABS 5–6</text>
+  <path class="arrow" d="M252,428 L360,392"/>
+
+  <rect class="door" x="710" y="420" width="190" height="66" rx="9"/>
+  <text class="doorT" x="805" y="446">GRAPH_TABLE</text>
+  <text class="doorS" x="805" y="463">SQL/PGQ property graph</text>
+  <text class="lab" x="805" y="478">opened in LAB 7</text>
+  <path class="arrow" d="M708,428 L600,392"/>
+
+  <rect class="door" x="385" y="490" width="190" height="66" rx="9"/>
+  <text class="doorT" x="480" y="516">VECTOR_DISTANCE</text>
+  <text class="doorS" x="480" y="533">AI Vector Search + in-DB ONNX</text>
+  <text class="lab" x="480" y="548">opened in LAB 8</text>
+  <path class="arrow" d="M480,488 L480,420"/>
+
+  <!-- duality note -->
+  <rect class="door" x="385" y="108" width="190" height="52" rx="9"/>
+  <text class="doorT" x="480" y="130">Duality Views</text>
+  <text class="doorS" x="480" y="147">documents that ARE the rows — Lab 5</text>
+  <path class="arrow" d="M480,162 L480,242"/>
+
+  <text class="tag" x="480" y="640">Every door opens onto the same bytes. No copies. No pipelines. No sync windows.</text>
+</svg>

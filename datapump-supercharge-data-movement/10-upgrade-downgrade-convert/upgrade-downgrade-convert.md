@@ -6,6 +6,8 @@ Data Pump can move data between different releases of Oracle Database and even b
 
 Estimated Time: 20 Minutes
 
+[Lab 10 walk-through](videohub:1_lr3i2xjc)
+
 ### Objectives
 
 In this lab, you will:

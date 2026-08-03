@@ -55,5 +55,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Thirumalai Thathachary
-* **Last Updated By/Date** - Vivek Vishwanathan ,Software Developer, Oracle Database Product Management, August 2023
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025

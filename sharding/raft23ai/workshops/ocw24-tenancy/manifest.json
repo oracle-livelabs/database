@@ -10,7 +10,7 @@
     {
       "title": "Get Started",
       "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
     },
     {
       "title": "Lab 1: Prepare Setup",
@@ -22,7 +22,7 @@
       "title": "Lab 2: Environment Setup",
       "description": "How to provision the workshop environment and connect to it",
       "publisheddate": "06/30/2020",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/setup-compute-generic/setup-compute-novnc.md"
     },
     {
       "title": "Lab 3: Initialize Environment",
@@ -40,12 +40,7 @@
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 6: Explore Raft Replication Advanced Use-Cases",
-      "description": "Exploring Raft Replication Advanced Use-Cases",
-      "filename": "../../advanced-use-cases/advanced-use-cases.md"
-    },
-    {
-      "title": "Lab 7: Clean up Stack and Instances",
+      "title": "Lab 6: Clean up Stack and Instances",
       "description": "Clean up ORM Stack and instances",
       "filename": "../../cleanup/cleanup.md"
     },
@@ -57,7 +52,7 @@
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
     }
   ]
 }

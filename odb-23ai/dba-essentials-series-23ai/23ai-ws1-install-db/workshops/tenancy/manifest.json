@@ -24,7 +24,7 @@
       "title": "Get started",
       "description": "Get a Free Trial",
       "publisheddate": "03/22/2024",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
     },
     {
       "title": "Lab 1: Install Oracle Database",
@@ -42,7 +42,7 @@
       "title": "Need help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "publisheddate": "05/24/2024",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
     }
   ]
 }

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-label="Seer Comms operating loop from signal to auditable action">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/></marker></defs>
+<rect width="960" height="360" fill="#ffffff"/>
+<text x="32" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2933">Seer Comms operating loop</text>
+<text x="32" y="66" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Each lab proves one decision step over the same governed Oracle AI Database foundation.</text>
+<rect x="42" y="100" width="190" height="86" rx="8" fill="#eef5fb" stroke="#6b7280"/>
+<circle cx="66" cy="126" r="14" fill="#5b6f45"/>
+<text x="62" y="131" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">1</text>
+<text x="90" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Prepare data</text>
+<text x="60" y="160" font-family="Arial, sans-serif" font-size="13" fill="#374151">Services, orders, signals</text>
+<rect x="270" y="100" width="190" height="86" rx="8" fill="#eff7f1" stroke="#6b7280"/>
+<circle cx="294" cy="126" r="14" fill="#5b6f45"/>
+<text x="290" y="131" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">2</text>
+<text x="318" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Observe pressure</text>
+<text x="288" y="160" font-family="Arial, sans-serif" font-size="13" fill="#374151">KPIs and demand</text>
+<rect x="498" y="100" width="190" height="86" rx="8" fill="#f5f1fb" stroke="#6b7280"/>
+<circle cx="522" cy="126" r="14" fill="#5b6f45"/>
+<text x="518" y="131" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">3</text>
+<text x="546" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Understand intent</text>
+<text x="516" y="160" font-family="Arial, sans-serif" font-size="13" fill="#374151">Vector-ranked signals</text>
+<rect x="726" y="100" width="190" height="86" rx="8" fill="#fff6e8" stroke="#6b7280"/>
+<circle cx="750" cy="126" r="14" fill="#5b6f45"/>
+<text x="746" y="131" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">4</text>
+<text x="774" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Trace impact</text>
+<text x="744" y="160" font-family="Arial, sans-serif" font-size="13" fill="#374151">Graph relationships</text>
+<rect x="726" y="230" width="190" height="86" rx="8" fill="#eef5fb" stroke="#6b7280"/>
+<circle cx="750" cy="256" r="14" fill="#5b6f45"/>
+<text x="746" y="261" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">5</text>
+<text x="774" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Locate capacity</text>
+<text x="744" y="290" font-family="Arial, sans-serif" font-size="13" fill="#374151">Spatial site context</text>
+<rect x="498" y="230" width="190" height="86" rx="8" fill="#eff7f1" stroke="#6b7280"/>
+<circle cx="522" cy="256" r="14" fill="#5b6f45"/>
+<text x="518" y="261" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">6</text>
+<text x="546" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Inspect orders</text>
+<text x="516" y="290" font-family="Arial, sans-serif" font-size="13" fill="#374151">Relational plus JSON</text>
+<rect x="270" y="230" width="190" height="86" rx="8" fill="#f5f1fb" stroke="#6b7280"/>
+<circle cx="294" cy="256" r="14" fill="#5b6f45"/>
+<text x="290" y="261" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">7</text>
+<text x="318" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Predict risk</text>
+<text x="288" y="290" font-family="Arial, sans-serif" font-size="13" fill="#374151">Forecast and capacity</text>
+<rect x="42" y="230" width="190" height="86" rx="8" fill="#fff6e8" stroke="#6b7280"/>
+<circle cx="66" cy="256" r="14" fill="#5b6f45"/>
+<text x="62" y="261" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">8</text>
+<text x="90" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Act with audit</text>
+<text x="60" y="290" font-family="Arial, sans-serif" font-size="13" fill="#374151">SQL, tools, history</text>
+<line x1="232" y1="143" x2="250" y2="143" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="460" y1="143" x2="478" y2="143" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="688" y1="143" x2="706" y2="143" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="821" y1="186" x2="821" y2="218" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="916" y1="273" x2="478" y2="273" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="688" y1="273" x2="250" y2="273" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="460" y1="273" x2="22" y2="273" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

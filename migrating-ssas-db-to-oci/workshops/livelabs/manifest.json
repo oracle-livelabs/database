@@ -10,7 +10,7 @@
     {
       "title": "Get Started",
       "description": "Details about How to Register for Free Tier Account on OCI",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
     },
 
     {
@@ -31,7 +31,7 @@
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
   }
   ]
 }

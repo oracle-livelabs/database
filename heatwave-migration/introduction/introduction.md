@@ -41,9 +41,8 @@ In this lab, you will learn how to:
 - Add an API Key in Oracle Cloud Infrastructure (OCI) and setup the 'config' file
 - Create Object Storage Bucket in OCI
 - Perform MySQL Shell dump
-- Provision MySQL HeatWave System and load the data
+- Provision MySQL HeatWave System with a HeatWave cluster and load the data
 - Connect to MySQL HeatWave System and confirm data import
-- Create a MySQL HeatWave cluster
 - Load data into HeatWave cluster
 
 ### Prerequisites
@@ -51,6 +50,7 @@ In this lab, you will learn how to:
 - An Oracle Cloud Account
 - Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
 
+## Task 1: You may now **proceed to the next lab**
 
 ## Acknowledgements
 

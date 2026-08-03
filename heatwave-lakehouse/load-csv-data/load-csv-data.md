@@ -26,22 +26,24 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 ## Task 1: Create the PAR Link for the "delivery_order" files
 
-1. Create a PAR URL for all of the **order folder** objects with a prefix
+1. Create a PAR URL for all the **order folder** objects with a prefix
 
-    - a. From your OCI console, navigate to your lakehouse-files bucket in OCI.
-    - b. Select the folder —> order and click the three vertical dots.
+    - a. Go to **Navigation menu**, click **Storage**, and then click **Buckets**.
+        ![create a PAR URL](./images/storage-bucket-menu.png "storage bucket menu")
+    - b. Click the **Actions** menu on the right hand side of **lakehouse-bucket**.
 
         ![Select  folder](./images/storage-delivery-orders-folder.png "storage delivery order folder")
 
-    - c. Click on ‘Create Pre-Authenticated Request’
-    - d. Click to select the ‘Objects with prefix’ option under ‘PreAuthentcated Request Target’.
-    - e. Leave the ‘Access Type’ option as-is: ‘Permit object reads on those with the specified prefix’.
-    - g. Click to select the ‘Enable Object Listing’ checkbox.
-    - h. Click the ‘Create Pre-Authenticated Request’ button.
+    - c. Click **Create Pre-Authenticated Request**.
+    - d. Select **Objects with prefix** under **Pre-authenticated request target**.
+    - e. Specify **Orders** in **Prefix**.
+    - f. Keep the default settings for **Access Type**, **Permit object reads on those with the specified prefix**.
+    - g. Select the **Enable object listing** checkbox.
+    - h. Click **Create pre-authenticated request**.
 
        ![Create Folder PAR](./images/storage-delivery-orders-folder-page.png "storage delivery order folder page")
 
-    - i. Click the ‘Copy’ icon to copy the PAR URL.
+    - i. Click **Copy** to copy the PAR URL.
     - j. Save the generated PAR URL; you will need it later.
     - k. You can test the URL out by pasting it in your browser. It should return output like this:
 
@@ -214,4 +216,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2023
+- **Last Updated By/Date** - Aijaz Fatima, Product Manager, September 2025

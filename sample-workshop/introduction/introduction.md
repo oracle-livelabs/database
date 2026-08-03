@@ -4,21 +4,21 @@
 
 This introduction covers the complete "parent" workshop. Use this text to set up the story for the workshop. Be engaging - what will the learner get from spending their time on this workshop?
 
-Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.)
+Estimated Workshop Time: ## hours ## minutes
 
 *You may add an option video, using this format: [](youtube:YouTube video id)*
 
   [](youtube:zNKxJjkq0Pw)
 
+Check the [documentation](https://livelabs.oracle.com/how-to) for more information on how to add videos and other content.
+
 ### Objectives
 
-*List objectives for the workshop*
-
-In this workshop, you will learn how to:
-* Provision
-* Setup
-* Load
-* Query
+In this workshop you will:
+- Provision the required environment.
+- Configure (setup) the core components.
+- Load data for a realistic scenario.
+- Query and validate the results.
 
 ### Prerequisites (Optional)
 

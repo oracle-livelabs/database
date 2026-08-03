@@ -2,7 +2,7 @@
 
 ## About This Workshop
 
-Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database. This workshop is based on a compute instance (an online transaction processing application) connected to a primary database configured with True Cache. The demo application is a Java program using the 23ai JDBC driver. Its simulates a high number of transactions for the primary database and how off loading the read only queries to True Cache helps in application performance.
+Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database. This workshop is based on a compute instance (an online transaction processing application) connected to a primary database configured with True Cache. The demo application is a Java program using the 26ai JDBC driver. Its simulates a high number of transactions for the primary database and how off loading the read only queries to True Cache helps in application performance.
 
 ### About Oracle True Cache
 
@@ -35,9 +35,9 @@ Once you complete your setup, the next lab will cover:
 - Familiarity with podman/docker is helpful
 
 ## Learn More
-- [True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
+- [True Cache documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/overview-oracle-true-cache.html)
 
 ## Acknowledgements
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Thirumalai Thathachary
-* **Last Updated By/Date** - Vivek Vishwanathan ,Software Developer, Oracle Database Product Management, August 2023
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025

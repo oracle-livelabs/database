@@ -1,4 +1,4 @@
-# Connect to the Oracle Database 23ai Server
+# Connect to the Oracle Database 26ai Server
 
 ## Introduction
 
@@ -17,7 +17,7 @@ This lab assumes you have completed:
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
 
-## Task 1: Log in to the Oracle Database 23ai server
+## Task 1: Log in to the Oracle Database 26ai server
 
 After you log in to JupyterLabs, you are presented with different options to proceed.
 In this workshop, we will only relay on the the terminal.
@@ -30,7 +30,7 @@ In this workshop, we will only relay on the the terminal.
 
     ```
     <copy>
-    ./dba.sh
+    dba.sh
     </copy>
     ```
 
@@ -68,25 +68,25 @@ In this workshop, we will only relay on the the terminal.
     </copy>
     ```
 
-    ![check pmon is up](./images/check-pmon-up-2024.png " ")
+    ![check pmon is up](./images/check-pmon-up-2026.png " ")
 
     If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
 
 3. If you see questionable output(s), failure or down component(s), refer to the appendix section to restart the service accordingly
 
-<!-- ## Task 3: Initialize Database for Multitenant Use Cases
+    <!-- ## Task 3: Initialize Database for Multitenant Use Cases
 
 1. Your workshop environment comes preloaded with scripts you may need in part of the workshop. The instructions will describe which scripts you need to execute. For now, please note that the scripts are preloaded on the database server and can be found in the following path: 
 
     ```bash
-    /home/oracle/labs/workshops/multitenant
+    /home/oracle/labs/multitenant
     ```
 
     You can easily change to the directory by typing:
 
     ```bash
     <copy>
-    cd /home/oracle/labs/workshops/multitenant
+    cd /home/oracle/labs/multitenant
     </copy>
     ``` -->
 
@@ -95,4 +95,4 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Kevin Lazarz, Senior Manager, Database Product Management
-* **Last Updated By/Date** - Kevin Lazarz, August 2024
+* **Last Updated By/Date** - Kevin Lazarz, May 2026
