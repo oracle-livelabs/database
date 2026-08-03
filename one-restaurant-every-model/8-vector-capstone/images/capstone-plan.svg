@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" font-family="SF Mono,Menlo,Consolas,monospace">
-  <title>The capstone's real EXPLAIN PLAN, captured live on Autonomous AI Database: graph, relational, and vector row sources in one optimizer tree (plan hash 2722765809)</title>
+  <title>The capstone's real EXPLAIN PLAN, captured live on Autonomous AI Database: graph, relational, and vector row sources in one optimizer tree</title>
   <style>
     .row  { fill:#312d2a; font-size:13px; }
     .hl   { fill:#ffffff; font-size:13px; font-weight:bold; }
@@ -12,7 +12,7 @@
     .bubble  { stroke:#312d2a; stroke-width:1; }
   </style>
 
-  <text class="head" x="30" y="34">THE CAPSTONE'S REAL PLAN — captured live on Autonomous AI Database (plan hash 2722765809)</text>
+  <text class="head" x="30" y="34">THE CAPSTONE'S REAL PLAN — captured live on Autonomous AI Database</text>
 
   <text class="row" x="30" y="66">| Id | Operation                            | Name         |</text>
   <text class="row" x="30" y="86">|  0 | SELECT STATEMENT                     |              |</text>

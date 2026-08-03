@@ -2,11 +2,11 @@
 
 ## Introduction
 
-When Jessica opens the Seer Health command center, one number demands attention: five signals have `CRITICAL` or `HIGH` priority. The summary helps her notice a problem quickly, but it cannot identify the affected services. It also cannot explain why each signal matters or which team should respond first.
+When Jessica opens the Seer Health command center, one number demands attention: five signals have **CRITICAL** or **HIGH** priority. The summary helps her notice a problem quickly, but it cannot identify the affected services, explain why each signal matters, or show which team should respond first.
 
 This situation is familiar outside healthcare. A car dashboard may show a warning light, while a school portal may show several absences. A store dashboard may show five delayed orders. Each summary earns attention, while the records behind it explain what happened and what someone can do next.
 
-In this lab, you rebuild the command-center measures with SQL and open the five elevated signals. You then group those signals by service category. Jessica can move from one KPI to named records, affected services, and suggested follow-up.
+In this lab, you rebuild the command-center measures with SQL and open the five elevated signals. Then you group those signals by service category so Jessica can move from one KPI to named records, affected services, and suggested follow-up.
 
 <details>
 <summary><strong>Key terms: KPI, signal, criticality, and watched service</strong></summary>
@@ -47,7 +47,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Calculate the command-center KPIs
 
-Start with the headline numbers shown at the top of the operating view.
+Start with the headline numbers shown at the top of the operating view so the dashboard warning becomes reviewable SQL evidence:
 
 1. Run the KPI query.
 
@@ -93,6 +93,8 @@ Start with the headline numbers shown at the top of the operating view.
 
 ## Task 2: Review the elevated signals
 
+Next, review the elevated signal rows so the KPI becomes a prioritized list of services, priorities, and recorded next steps:
+
 1. Run the signal query.
 
     The `WHERE` clause keeps only `CRITICAL` and `HIGH` signals. The `CASE` expression places critical items first. `SIGNAL_ID` gives the result a stable order inside each priority.
@@ -129,7 +131,7 @@ Start with the headline numbers shown at the top of the operating view.
 
 ## Task 3: Find the categories with the most elevated signals
 
-The final query groups the signal rows into a smaller operating summary.
+Finally, group the elevated signals by service category so the team can see where operational pressure is concentrated:
 
 1. Run the category query.
 

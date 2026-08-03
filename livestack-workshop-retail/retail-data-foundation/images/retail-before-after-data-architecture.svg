@@ -11,29 +11,29 @@
   <path d="M56 132 h486 a18 18 0 0 1 18 18 v35 h-522 v-35 a18 18 0 0 1 18-18z" class="bar1"/>
   <text x="62" y="166" class="barText">Before: Separate Specialist Stores</text>
 
-  <rect x="66" y="209" width="215" height="73" rx="10" fill="#fff" stroke="#f06445" stroke-width="2.5"/>
+  <rect x="66" y="209" width="215" height="80" rx="10" fill="#fff" stroke="#f06445" stroke-width="2.5"/>
   <rect x="80" y="226" width="39" height="39" rx="8" fill="#f06445"/><ellipse cx="99.5" cy="234" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M85 234 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
-  <text x="134" y="239" class="boxText">Order</text><text x="134" y="256" class="boxText">Store</text><rect x="134" y="257" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="170" y="270" class="chipText">SQL</text>
+  <text x="134" y="236" class="boxText">Order</text><text x="134" y="253" class="boxText">Store</text><rect x="134" y="261" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="183.5" y="274" class="chipText" text-anchor="middle">SQL</text>
 
-  <rect x="314" y="209" width="215" height="73" rx="10" fill="#fff" stroke="#ff9a4d" stroke-width="2.5"/>
+  <rect x="314" y="209" width="215" height="80" rx="10" fill="#fff" stroke="#ff9a4d" stroke-width="2.5"/>
   <rect x="328" y="226" width="39" height="39" rx="8" fill="#ff9a4d"/><ellipse cx="347.5" cy="234" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M333 234 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
-  <text x="382" y="239" class="boxText">Product</text><text x="382" y="256" class="boxText">Catalog</text><rect x="382" y="257" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="414" y="270" class="chipText">JSON</text>
+  <text x="382" y="236" class="boxText">Product</text><text x="382" y="253" class="boxText">Catalog</text><rect x="382" y="261" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="431.5" y="274" class="chipText" text-anchor="middle">JSON</text>
 
-  <rect x="66" y="297" width="215" height="73" rx="10" fill="#fff" stroke="#9b51e0" stroke-width="2.5"/>
+  <rect x="66" y="297" width="215" height="80" rx="10" fill="#fff" stroke="#9b51e0" stroke-width="2.5"/>
   <rect x="80" y="314" width="39" height="39" rx="8" fill="#9b51e0"/><ellipse cx="99.5" cy="322" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M85 322 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
-  <text x="134" y="327" class="boxText">Signal Search</text><text x="134" y="344" class="boxText">Index</text><rect x="134" y="345" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="152" y="358" class="chipText">AI SEARCH</text>
+  <text x="134" y="324" class="boxText">Signal Search</text><text x="134" y="341" class="boxText">Index</text><rect x="134" y="349" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="183.5" y="362" class="chipText" text-anchor="middle">AI SEARCH</text>
 
-  <rect x="314" y="297" width="215" height="73" rx="10" fill="#fff" stroke="#159a8a" stroke-width="2.5"/>
+  <rect x="314" y="297" width="215" height="80" rx="10" fill="#fff" stroke="#159a8a" stroke-width="2.5"/>
   <rect x="328" y="314" width="39" height="39" rx="8" fill="#159a8a"/><ellipse cx="347.5" cy="322" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M333 322 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
-  <text x="382" y="327" class="boxText">Creator Graph</text><text x="382" y="344" class="boxText">Store</text><rect x="382" y="345" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="414" y="358" class="chipText">LINKS</text>
+  <text x="382" y="324" class="boxText">Creator Graph</text><text x="382" y="341" class="boxText">Store</text><rect x="382" y="349" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="431.5" y="362" class="chipText" text-anchor="middle">LINKS</text>
 
-  <rect x="66" y="385" width="215" height="73" rx="10" fill="#fff" stroke="#3d7ea6" stroke-width="2.5"/>
+  <rect x="66" y="385" width="215" height="80" rx="10" fill="#fff" stroke="#3d7ea6" stroke-width="2.5"/>
   <rect x="80" y="402" width="39" height="39" rx="8" fill="#3d7ea6"/><ellipse cx="99.5" cy="410" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M85 410 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
-  <text x="134" y="415" class="boxText">Spatial</text><text x="134" y="432" class="boxText">Routing Store</text><rect x="134" y="433" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="153" y="446" class="chipText">LOCATION</text>
+  <text x="134" y="412" class="boxText">Spatial</text><text x="134" y="429" class="boxText">Routing Store</text><rect x="134" y="437" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="183.5" y="450" class="chipText" text-anchor="middle">LOCATION</text>
 
-  <rect x="314" y="385" width="215" height="73" rx="10" fill="#fff" stroke="#efc14d" stroke-width="2.5"/>
+  <rect x="314" y="385" width="215" height="80" rx="10" fill="#fff" stroke="#efc14d" stroke-width="2.5"/>
   <rect x="328" y="402" width="39" height="39" rx="8" fill="#efc14d"/><ellipse cx="347.5" cy="410" rx="14" ry="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M333 410 v26 c0 3 29 3 29 0 v-26" fill="none" stroke="#fff" stroke-width="2"/>
-  <text x="382" y="415" class="boxText">ML Feature</text><text x="382" y="432" class="boxText">Store</text><rect x="382" y="433" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="412" y="446" class="chipText">MODELS</text>
+  <text x="382" y="412" class="boxText">ML Feature</text><text x="382" y="429" class="boxText">Store</text><rect x="382" y="437" width="99" height="18" rx="4" fill="#eef3f7" stroke="#c9d3de"/><text x="431.5" y="450" class="chipText" text-anchor="middle">MODELS</text>
 
   <text x="66" y="508" class="section">Integration and control burden</text>
   <circle cx="79" cy="532" r="9" class="minus"/><text x="74" y="538" class="minusText">-</text><text x="98" y="538" class="small">Data copied and synchronized between systems</text>
