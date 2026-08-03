@@ -41,6 +41,7 @@ Estimated Time: **12 minutes**
 | What You Will See | One request appears as JSON and as normal SQL results. |
 | Database Capability | JSON Relational Duality and SQL keep document and relational access connected. |
 | Outcome | The application and analyst use one governed request source. |
+{: title="Service request scenario"}
 
 **Persona focus:** You work with an application developer to serve one complete request document. At the same time, you preserve relational access to the same facts.
 
@@ -71,15 +72,16 @@ Start with the shape an application can consume.
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 170104;</copy>
     ```
 
-    **Expected output: Request 170104 Document Excerpt**
+    **Expected output: Request JSON**
 
     | Request Document |
     | --- |
-    | { "\_id": 170104, "requestingCareSiteId": 1002, "requestStatus": "DELIVERED", "requestValue": 943.89, "lineItems": [ ...3 items... ] } |
+| { "\_id": 170104, "requestingCareSiteId": 1002, "requestStatus": "DELIVERED", "requestValue": 943.89, "lineItems": [ ...5 items... ] } |
+{: title="Request 170104 JSON"}
 
 2. Read the document shape.
 
-    The top fields describe the request. The `lineItems` array holds three related items. Oracle also adds a `_metadata` section used to manage the document.
+    The top fields describe the request. The `lineItems` array holds five related items. Oracle also adds a `_metadata` section used to manage the document.
 
     The application receives one payload. The source data still lives in relational request and item tables.
 
@@ -89,7 +91,7 @@ Now inspect the request in business-friendly rows.
 
 1. Run the request summary query.
 
-    `CARE_SERVICE_REQUESTS_V` joins the request to its care site and assigned logistics site. The view returns names and locations instead of only internal IDs.
+    `CARE_SERVICE_REQUESTS_V` is a relational view built for people who need to analyze service requests with SQL. It joins each request to the care-site and logistics-site tables, then presents readable names and locations beside the request facts. This matters because an analyst can filter or report on a stable business shape without repeating the joins or trying to remember what internal IDs mean.
 
     ```sql
     <copy>SELECT service_request_id,
@@ -102,21 +104,22 @@ Now inspect the request in business-friendly rows.
     WHERE service_request_id = 170104;</copy>
     ```
 
-    **Expected output: Request 170104 Summary**
+    **Expected output: Request summary**
 
     | Request Id | Care Site | Location | Status | Value | Logistics Site |
     | ---: | --- | --- | --- | ---: | --- |
-    | 170104 | Charlotte Community Care Site | Charlotte, NC | DELIVERED | 943.89 | Lebanon Central Specialty Care Warehouse |
+| 170104 | Penelope Mendoza | Charlotte, NC | DELIVERED | 943.89 | Etna Midwest Specialty Warehouse |
+{: title="Request 170104 summary"}
 
-2. Connect the summary to the document.
+2. Read the relational result beside the JSON document.
 
-    The status and value match the JSON document. The relational view also adds readable care-site and logistics-site names.
+    The status and value are the same in both results because both access paths begin with request `170104`. The view adds Penelope Mendoza’s readable name, the Charlotte location, and the Etna logistics assignment, which are useful for a report but do not need to be repeated inside every source row.
 
-    This is the same request, not a second copy.
+    The important point is that the database did not create a second request for the analyst. It presented the same governed facts in a different shape. If an approved update changes the source request, both the relational view and the duality document can reflect that change instead of waiting for a copy-and-sync process.
 
 3. Run the line-item query.
 
-    The query joins each request item to `HC_CARE_SERVICES`. That join replaces an internal service ID with a readable service name.
+    `HC_CARE_SERVICES` is the service catalog behind the workshop. Each row gives a service ID a readable name, category, provider network, description, value, and embedding. Request items store the service ID so the same catalog definition can be reused across thousands of requests. The join replaces that compact ID with the service name a person expects to see.
 
     `LINE_VALUE` is a virtual column. Oracle calculates it as quantity multiplied by unit cost.
 
@@ -133,17 +136,20 @@ Now inspect the request in business-friendly rows.
     ORDER BY i.item_id;</copy>
     ```
 
-    **Expected output: Request 170104 Line Items**
+    **Expected output: Request line items**
 
     | Item Id | Service | Quantity | Unit Cost | Line Value |
     | ---: | --- | ---: | ---: | ---: |
-    | 4 | Digital Pathology Slide Batch | 2 | 310.00 | 620.00 |
+    | 4 | Digital Pathology Slide Batch | 1 | 310.00 | 310.00 |
     | 5 | Tamper-Evident Carton Batch | 2 | 95.00 | 190.00 |
-    | 6 | qPCR Respiratory Panel | 1 | 133.89 | 133.89 |
+    | 6 | qPCR Respiratory Panel | 1 | 185.00 | 185.00 |
+    | 7 | Infusion Center Slot Bundle | 1 | 125.00 | 125.00 |
+| 8 | Infusion Center Slot Bundle - Continuity Lot 2 | 1 | 133.89 | 133.89 |
+{: title="Request 170104 line items"}
 
 4. Compare the two access shapes.
 
-    The three line values add up to 943.89, which matches the request value in both the summary row and JSON document.
+    The five line values add up to 943.89, which matches the request value in both the summary row and JSON document.
 
     The application gets one useful document. The analyst can filter, join, total, and review the source rows with SQL. Both users work from the same governed request.
 
@@ -153,6 +159,5 @@ You used JSON Relational Duality to read healthcare request data as both an appl
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

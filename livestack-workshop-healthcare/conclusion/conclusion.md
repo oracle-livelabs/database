@@ -33,12 +33,13 @@ Estimated Time: **5 minutes**
     | Healthcare question | What you can now explain |
     | --- | --- |
     | What data and capabilities are available? | Oracle catalog views show the healthcare views, duality view, vectors, graph, spatial layers, and OML model. |
-    | Where should leaders look first? | Command-center KPIs lead to five named elevated signals and a category summary. |
+    | Where should leaders look first? | Command-center KPIs lead from 474 elevated signals to a five-row priority sample and a category summary. |
     | How can an application read a complete request? | JSON Relational Duality presents request 170104 as a document while SQL keeps access to the source rows. |
     | How can analysts search related care language? | AI Vector Search ranks services and signals by semantic similarity. |
     | Which care facts connect to the patient journey? | Property Graph and SQL/PGQ follow one-hop and two-hop relationships. |
     | Which logistics site fits the Miami request? | Oracle Spatial combines distance with service, status, load, and estimated available capacity. |
-    | Where may demand rise? | Forecast rows and an OML classification model provide reviewable planning evidence. |
+| Where may demand rise? | Forecast rows and an OML classification model provide reviewable planning evidence. |
+{: title="Workshop outcomes"}
 
 2. Review how the people connect to those outcomes.
 
@@ -50,7 +51,8 @@ Estimated Time: **5 minutes**
     | Care coordinator | Explains the relationships around a journey and encounter. |
     | Logistics planner | Compares distance, service fit, status, and available capacity. |
     | Capacity planner | Reviews forecasts, model identity, model fit, input features, and prediction probability. |
-    | Database developer | Connects relational, JSON, vector, graph, spatial, and OML evidence in one schema. |
+| Database developer | Connects relational, JSON, vector, graph, spatial, and OML evidence in one schema. |
+{: title="People and outcomes"}
 
 3. Connect the healthcare pressure to convergence.
 
@@ -61,33 +63,24 @@ Estimated Time: **5 minutes**
     | Care-path review | Graph relationships remain close to the source healthcare rows. |
     | Care logistics | Location, service, status, load, and capacity can appear in one query. |
     | Predictive planning | Forecast and OML results stay close to the data and SQL used to explain them. |
-    | Governance and review | Teams can point to database-backed evidence instead of reconciling copied results. |
+| Governance and review | Teams can point to database-backed evidence instead of reconciling copied results. |
+{: title="Why convergence matters"}
 
-## Task 2: Explain the main lesson
+## Task 2: Bring the evidence together
 
-1. Start with the healthcare problem, not a feature list.
+1. Read the completed Seer Health story.
 
-    Seer Health needs faster operating decisions without losing the facts behind them.
+    Jessica’s original dashboard warning became useful only after the team could explain it. SQL showed the size of the operating workload and the signal pressure behind the summary. JSON Relational Duality opened one complete service request for the application while preserving normal relational analysis. Vector search found records with related meaning, and the graph showed how care facts connected. Spatial SQL narrowed the logistics choices, while Oracle Machine Learning gave the planner a forward-looking score with visible inputs and probability.
 
-2. Connect each database capability to a job.
+    The technologies did different jobs, but the story stayed connected. Jessica did not have to treat a screenshot, a copied document, a search result, a map pin, or a prediction as an unexplained answer. Each step returned evidence that another person could inspect and connect to the facts found earlier.
 
-    - SQL explains the operating numbers.
-    - JSON Relational Duality serves the application document.
-    - AI Vector Search finds related meaning.
-    - Property Graph follows connected care facts.
-    - Oracle Spatial measures location and supports routing evidence.
-    - Oracle Machine Learning scores a model near the governed input data.
+    That lesson also makes sense outside healthcare. A retailer could follow a stock warning to an order, search supplier notes, trace product relationships, find a suitable warehouse, and estimate future demand. The names would change, but the need would remain the same: move quickly without losing the reason behind the decision.
 
-3. Carry the pattern forward.
+    The workshop uses synthetic data to teach these database patterns. Its graph scores, forecasts, distances, capacity estimates, and model results support learning and operational review. They do not replace clinical judgment, medical records, healthcare policy, or responsible human decisions.
 
-    Begin with one healthcare question. Identify the data and evidence needed to answer it. Use the best database capability for each part, but keep the results connected to the same governed facts.
-
-    Keep people in the decision. The workshop uses synthetic data to teach database patterns. Its graph scores, forecasts, distances, capacity estimates, and model results support learning and operational review. They do not replace clinical judgment, medical records, or healthcare policy.
-
-The lasting lesson is that **Oracle AI Database 26ai** lets these jobs reinforce each other. Teams can move from awareness to evidence and planning without losing the context behind the decision.
+    The lasting outcome is that **Oracle AI Database 26ai** lets these jobs reinforce one another. Seer Health can move from awareness to evidence and planning while keeping the context behind every result.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

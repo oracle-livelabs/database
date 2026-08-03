@@ -47,6 +47,7 @@ Estimated Time: **10 minutes**
 | What You Will See | Spatial distance and relational operating columns work in the same SQL query. |
 | Database Capability | `SDO_GEOMETRY` stores points and `SDO_GEOM.SDO_DISTANCE` measures distance. |
 | Outcome | The planner identifies the closest active site that supports the service and passes the load rule. |
+{: title="Care logistics scenario"}
 
 **Persona focus:** You help a logistics planner combine distance with operating evidence. The choice uses service, status, and capacity instead of a guess from a map.
 
@@ -100,13 +101,14 @@ Start with location and status.
     FETCH FIRST 3 ROWS ONLY;</copy>
     ```
 
-    **Expected output: Nearest Active Logistics Sites**
+    **Expected output: Nearby logistics sites**
 
     | Logistics Site | City | Service | Status | Miles |
     | --- | --- | --- | --- | ---: |
     | Hialeah Import Compliance Site | Hialeah | qPCR Respiratory Panel | ACTIVE | 8.5 |
     | Concord Southeast Micro Site | Concord | Infusion Center Slot Bundle | ACTIVE | 665.0 |
-    | Lebanon Central Specialty Care Warehouse | Lebanon | Digital Pathology Slide Batch | ACTIVE | 805.1 |
+| Etna Midwest Specialty Warehouse | Lebanon | Digital Pathology Slide Batch | ACTIVE | 805.1 |
+{: title="Nearest active logistics sites"}
 
 2. Review the distance result.
 
@@ -156,11 +158,12 @@ Start with location and status.
     ORDER BY distance_miles;</copy>
     ```
 
-    **Expected output: Matching Diagnostic Site**
+    **Expected output: Qualified diagnostic site**
 
     | Logistics Site | Service | Capacity Units | Current Load Pct | Estimated Available Units | Miles |
     | --- | --- | ---: | ---: | ---: | ---: |
-    | Hialeah Import Compliance Site | qPCR Respiratory Panel | 250000 | 61.5 | 96250 | 8.5 |
+| Hialeah Import Compliance Site | qPCR Respiratory Panel | 250000 | 61.5 | 96250 | 8.5 |
+{: title="Qualified diagnostic logistics site"}
 
 2. Explain the routing evidence.
 
@@ -176,6 +179,5 @@ You used Oracle Spatial to combine healthcare location and operating evidence. F
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

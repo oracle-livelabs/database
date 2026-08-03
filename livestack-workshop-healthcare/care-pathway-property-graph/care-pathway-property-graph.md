@@ -47,6 +47,7 @@ Estimated Time: **12 minutes**
 | What You Will See | One-hop and two-hop graph queries expose the people, events, and follow-up around the journey. |
 | Database Capability | `CARE_PATHWAY_GRAPH` and `GRAPH_TABLE` support SQL/PGQ pattern matching. |
 | Outcome | The reviewer can explain which care facts connect and why each link matters. |
+{: title="Care pathway scenario"}
 
 **Persona focus:** You help a care coordinator follow the relationship path. You also keep the result separate from any clinical recommendation.
 
@@ -94,13 +95,14 @@ Start with the patient journey and follow each outgoing relationship.
     ORDER BY evidence_score DESC;</copy>
     ```
 
-    **Expected output: Patient Journey Connections**
+    **Expected output: Journey links**
 
     | Journey | Relationship | Connected Care Fact | Evidence Score |
     | --- | --- | --- | ---: |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_ENCOUNTER | Inpatient Encounter 4412 | 0.99 |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_CONDITION | Sepsis | 0.96 |
-    | Patient 1001 - Sepsis Readmission Risk | HAS\_CARE\_GAP | Readmission Risk | 0.94 |
+| Patient 1001 - Sepsis Readmission Risk | HAS\_CARE\_GAP | Readmission Risk | 0.94 |
+{: title="Patient journey connections"}
 
 2. Read the first relationship circle.
 
@@ -139,14 +141,15 @@ Now follow a second hop through the encounter.
     ORDER BY evidence_score DESC;</copy>
     ```
 
-    **Expected output: Encounter Care Team and Follow-Up**
+    **Expected output: Encounter links**
 
     | Relationship | Connected Care Fact | Type | Evidence Score |
     | --- | --- | --- | ---: |
     | ATTENDED\_BY | Dr. Hannah Lee - Hospitalist | PROVIDER | 0.95 |
     | SUPPORTED\_BY | Nurse Care Team | CARE\_TEAM | 0.91 |
     | REQUIRES\_FOLLOW\_UP | 48-Hour Follow-Up | CARE\_GAP | 0.88 |
-    | TREATED\_WITH | Piperacillin/Tazobactam | MEDICATION | 0.87 |
+| TREATED\_WITH | Piperacillin/Tazobactam | MEDICATION | 0.87 |
+{: title="Encounter care connections"}
 
 2. Turn the rows into a relationship story.
 
@@ -160,6 +163,5 @@ You used SQL/PGQ to move from one journey to connected healthcare evidence. For 
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

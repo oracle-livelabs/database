@@ -2,11 +2,11 @@
 
 ## Introduction
 
-After opening request `170104`, Jessica asks a quality analyst to find other records about the same capacity problem. The analyst discovers a common search challenge. One person writes “infusion slots,” another writes “oncology chair capacity,” and a third describes a “continuity lot.”
+After opening request `170104`, Jessica asks a quality analyst to find other records about the same capacity problem. The analyst discovers a common search challenge. One person may ask for “more appointment room for cancer treatments,” while stored records use terms such as “chair availability,” “oncology capacity,” or “continuity schedules.”
 
 Anyone who has searched an email inbox or product catalog has faced this problem. Exact keyword search works when the wording matches. It can miss useful results when people express the same idea with different words. **AI Vector Search** addresses that gap by comparing mathematical representations of meaning.
 
-Oracle Database turns Priya’s search phrase into an embedding and compares it with stored service and signal vectors. The query then ranks the closest matches. It keeps each service name, priority, signal type, and similarity score visible for Priya’s review.
+Oracle Database turns Jessica’s search phrase into an embedding and compares it with stored service and signal vectors. The query then ranks the closest matches. It keeps each service name, priority, signal type, and similarity score visible for Jessica and the analyst to review.
 
 <details>
 <summary><strong>Key terms: embedding, vector, cosine distance, and similarity</strong></summary>
@@ -16,7 +16,7 @@ Oracle Database turns Priya’s search phrase into an embedding and compares it 
 > - **Cosine distance** measures the difference between the directions of two vectors. A smaller distance means the vectors point in more similar directions. That result usually indicates more closely related meaning.
 > - **Similarity** is the score calculated here as `1 - cosine distance`. Higher values represent closer semantic matches. The score ranks items for review, but it does not prove correctness, urgency, or clinical value.
 >
-> Imagine a map where nearby pins represent related ideas instead of nearby streets. Vector search finds the pins closest to the search phrase. The surrounding database columns tell Priya what each match means in the real operation.
+> Imagine a map where nearby pins represent related ideas instead of nearby streets. Vector search finds the pins closest to the search phrase. The surrounding database columns tell Jessica what each match means in the real operation.
 
 </details>
 
@@ -42,12 +42,13 @@ Estimated Time: **12 minutes**
 | What You Will See | Vector search ranks healthcare text by semantic similarity. |
 | Database Capability | `VECTOR_EMBEDDING`, stored vector columns, and `VECTOR_DISTANCE` run inside Oracle AI Database. |
 | Outcome | Teams find relevant care evidence even when the wording changes. |
+{: title="Vector search scenario"}
 
 **Persona focus:** You help a quality analyst find related language. You also keep the service, priority, signal type, and similarity evidence visible.
 
 ## Task 1: Search care services by meaning
 
-Search for services related to oncology infusion capacity.
+Search for services related to the need for more treatment appointments. The phrase intentionally avoids the word `infusion`, so the result demonstrates meaning-based matching instead of an obvious keyword match.
 
 1. Run the service search.
 
@@ -73,9 +74,8 @@ Search for services related to oncology infusion capacity.
     <copy>WITH query_vector AS (
       SELECT VECTOR_EMBEDDING(
                ADMIN.ALL_MINILM_L12_V2
-               USING 'oncology infusion slot capacity' AS DATA
+               USING 'more appointment room for cancer treatments' AS DATA
              ) AS embedding
-      FROM dual
     )
     SELECT s.service_name,
            s.provider_network,
@@ -89,17 +89,18 @@ Search for services related to oncology infusion capacity.
     FETCH FIRST 3 ROWS ONLY;</copy>
     ```
 
-    **Expected output: Closest Care Service Matches**
+    **Expected output: Service matches**
 
     | Service | Provider Network | Similarity |
     | --- | --- | ---: |
-    | Infusion Center Slot Bundle - Continuity Lot 2 | Regional Oncology Network | 0.8276 |
-    | Infusion Center Slot Bundle - Continuity Lot 3 | Regional Oncology Network | 0.7995 |
-    | Infusion Center Slot Bundle | Regional Oncology Network | 0.7881 |
+    | Infusion Center Slot Bundle - Continuity Lot 3 | Regional Oncology Network | 0.6033 |
+    | Infusion Center Slot Bundle - Continuity Lot 2 | Regional Oncology Network | 0.5341 |
+| Infusion Center Slot Bundle | Regional Oncology Network | 0.4807 |
+{: title="Closest service descriptions"}
 
 2. Review the ranked services.
 
-    All three results describe infusion capacity. The first result has the highest similarity, so its stored description is the closest match to the search phrase.
+    All three results describe scheduling or capacity for oncology treatment even though the search phrase does not contain the word `infusion`. Continuity Lot 3 ranks first because its stored description about expanded treatment schedules and chair availability is the closest mathematical match to the phrase.
 
     The search phrase and service name do not need to use exactly the same words. That is the value of semantic search.
 
@@ -114,12 +115,13 @@ Now use the same phrase against quality and capacity signal text.
     The result keeps `CRITICALITY`, `SIGNAL_TYPE`, and `SERVICE_NAME` beside the similarity score. Vector ranking finds related language. The other columns help a person decide what to review.
 
     ```sql
+    Oracle Database 26ai allows a `SELECT` that calculates an expression without a `FROM` clause. People who used earlier Oracle Database releases may recognize examples that end this embedding step with `FROM DUAL`. That familiar form still works, but it is not required here.
+
     <copy>WITH query_vector AS (
       SELECT VECTOR_EMBEDDING(
                ADMIN.ALL_MINILM_L12_V2
-               USING 'oncology infusion slot capacity' AS DATA
+               USING 'more appointment room for cancer treatments' AS DATA
              ) AS embedding
-      FROM dual
     )
     SELECT signal_id,
            criticality,
@@ -135,15 +137,16 @@ Now use the same phrase against quality and capacity signal text.
     FETCH FIRST 5 ROWS ONLY;</copy>
     ```
 
-    **Expected output: Closest Quality and Capacity Signals**
+    **Expected output: Signal matches**
 
     | Signal Id | Priority | Signal Type | Service | Similarity |
     | ---: | --- | --- | --- | ---: |
-    | 101 | CRITICAL | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 2 | 0.8556 |
-    | 102 | HIGH | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 3 | 0.4271 |
-    | 108 | LOW | Capacity Alert | Infusion Center Slot Bundle | 0.3586 |
-    | 107 | MEDIUM | Specialty Review | Digital Pathology Slide Batch | 0.3514 |
-    | 103 | CRITICAL | Cold Chain Bulletin | mRNA LNP Clinical Batch | 0.2510 |
+    | 101 | CRITICAL | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 2 | 0.4776 |
+    | 102 | HIGH | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 3 | 0.4091 |
+    | 107 | MEDIUM | Specialty Review | Digital Pathology Slide Batch | 0.3881 |
+    | 105 | MEDIUM | Diagnostic Capacity | qPCR Respiratory Panel | 0.3314 |
+| 106 | HIGH | Patient Flow Alert | Bed Capacity Surge Playbook | 0.2527 |
+{: title="Closest signal descriptions"}
 
 2. Compare meaning with priority.
 
@@ -159,6 +162,5 @@ You searched healthcare service and signal text by meaning. For a deeper worksho
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

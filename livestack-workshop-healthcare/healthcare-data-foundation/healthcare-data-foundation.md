@@ -46,6 +46,7 @@ Estimated Time: **10 minutes**
 | What You Will See | One schema supports relational views, JSON, vectors, graphs, spatial data, and OML. |
 | Database Capability | Oracle catalog views and healthcare views expose the current object and data inventory. |
 | Outcome | Teams can trace each later result to the same healthcare foundation. |
+{: title="Data foundation scenario"}
 
 **Persona focus:** You work with a database developer to show Jessica where the evidence lives. Together, you connect each later question to this shared foundation.
 
@@ -111,7 +112,7 @@ Start with a capability map. This query asks Oracle Database which object famili
     WHERE model_name = 'CARE_DEMAND_RISK_MODEL';</copy>
     ```
 
-    **Expected output: Healthcare Capability Inventory**
+    **Expected output: Available capabilities**
 
     | Area | Object Count |
     | --- | ---: |
@@ -120,7 +121,8 @@ Start with a capability map. This query asks Oracle Database which object famili
     | Healthcare property graphs | 1 |
     | MiniLM vector columns | 2 |
     | Spatial metadata layers | 2 |
-    | OML mining models | 1 |
+| OML mining models | 1 |
+{: title="Available database capabilities"}
 
 2. Read the result as a capability checklist.
 
@@ -128,56 +130,69 @@ Start with a capability map. This query asks Oracle Database which object famili
 
     Each row points to a later lab. Together, they show that Seer Health does not need a different data store for every question.
 
-## Task 2: Count the healthcare data groups
+## Task 2: Confirm the healthcare dataset scale
 
-The next query shows the size of the healthcare scenario behind the application pages.
+The Data Foundation page reports **14,796 tracked records**. That number is not the size of one table. It adds six major layers used by the demo: source services, source signals, source requests, service vectors, signal vectors, and stored semantic matches. The next query rebuilds that total from the loaded `LLUSER` objects.
 
 1. Run the count query.
 
-    Each `SELECT` counts one healthcare data group. `UNION ALL` combines the counts. `ORDER BY` puts the labels in a stable order.
+    The `layer_counts` common table expression counts each layer once. A vector count includes only rows whose embedding was created successfully. The last branch adds the six counts so you can compare the database result with the Data Foundation page.
 
-    These counts give context. Later queries return only a few ranked or filtered rows from this larger set.
+    Care sites, logistics sites, forecasts, and graph records also support the workshop. They are not included in this application KPI, so the total remains comparable with the page rather than mixing two definitions.
 
     ```sql
-    <copy>SELECT 'Care services' AS component, COUNT(*) AS records FROM hc_care_services
-    UNION ALL
-    SELECT 'Quality signals', COUNT(*) FROM hc_quality_signals
-    UNION ALL
-    SELECT 'Care sites', COUNT(*) FROM hc_care_sites
-    UNION ALL
-    SELECT 'Logistics sites', COUNT(*) FROM hc_logistics_sites
-    UNION ALL
-    SELECT 'Service requests', COUNT(*) FROM hc_service_requests
-    UNION ALL
-    SELECT 'Care pathway nodes', COUNT(*) FROM hc_care_nodes
-    UNION ALL
-    SELECT 'Care pathway edges', COUNT(*) FROM hc_care_edges
-    UNION ALL
-    SELECT 'Demand forecasts', COUNT(*) FROM hc_demand_forecasts
-    ORDER BY component;</copy>
+    <copy>WITH layer_counts (display_order, data_layer, records) AS (
+      SELECT 1, 'Care services', COUNT(*)
+      FROM hc_care_services
+      UNION ALL
+      SELECT 2, 'Signal bulletins', COUNT(*)
+      FROM hc_quality_signals
+      UNION ALL
+      SELECT 3, 'Service requests', COUNT(*)
+      FROM hc_service_requests
+      UNION ALL
+      SELECT 4, 'Service vectors', COUNT(*)
+      FROM hc_care_services
+      WHERE service_embedding IS NOT NULL
+      UNION ALL
+      SELECT 5, 'Signal vectors', COUNT(*)
+      FROM hc_quality_signals
+      WHERE signal_embedding IS NOT NULL
+      UNION ALL
+      SELECT 6, 'Semantic matches', COUNT(*)
+      FROM hc_semantic_matches
+    )
+    SELECT data_layer, records
+    FROM (
+      SELECT display_order, data_layer, records
+      FROM layer_counts
+      UNION ALL
+      SELECT 7, 'Total tracked records', SUM(records)
+      FROM layer_counts
+    )
+    ORDER BY display_order;</copy>
     ```
 
-    **Expected output: Healthcare Record Counts**
+    **Expected output: Dataset record layers**
 
-    | Component | Records |
+    | Data Layer | Records |
     | --- | ---: |
-    | Care pathway edges | 9 |
-    | Care pathway nodes | 9 |
-    | Care services | 8 |
-    | Care sites | 5 |
-    | Demand forecasts | 8 |
-    | Logistics sites | 5 |
-    | Quality signals | 8 |
-    | Service requests | 6 |
+    | Care services | 187 |
+    | Signal bulletins | 5,000 |
+    | Service requests | 3,000 |
+    | Service vectors | 187 |
+    | Signal vectors | 5,000 |
+    | Semantic matches | 1,422 |
+| Total tracked records | 14,796 |
+{: title="Tracked healthcare data layers"}
 
 2. Use the counts as the baseline for later analysis.
 
-    Services describe what the network offers. Signals show possible quality or capacity issues. Sites and requests show where work happens. Nodes and edges hold connected care facts. Forecasts help planners look ahead.
+    The 187 care services describe what the network offers, and 5,000 signal bulletins describe possible quality, capacity, access, and supply concerns. The 3,000 requests show the work moving through the network. Service and signal vectors are counted as analytical layers because the application can search them by meaning. The 1,422 semantic-match rows record service-to-signal relationships prepared for the experience.
 
-    A later query may return one request, three vector matches, or five forecasts. Those focused results come from the shared foundation you just mapped.
+    A later query may return one request, three vector matches, or five forecasts, but those focused results now come from the full documented baseline rather than a six-row sample dataset.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026
