@@ -1,111 +1,81 @@
-# Lab 11: Final Quiz
+# Final Quiz
+
+```quiz-config
+passing: 75
+badge: images/livestack-badge-telecommunications.png
+```
 
 ## Introduction
 
-Use this quiz to check whether you can explain the telecom operating story in your own words and connect each decision to the Oracle Database capability behind it.
-
-Estimated Time: 10 minutes
+Use this scored quiz to check whether you can connect a Seer Comms decision to the database evidence behind it.
 
 ### Objectives
 
-- Check your understanding of the Seer Comms operating story.
-- Match business outcomes to Oracle AI Database capabilities.
-- Review governance patterns for trusted answers and trusted actions.
+- Review the seven database capabilities used in the workshop.
+- Explain the business outcome of each SQL pattern.
 
-## How This Lab Fits the Story
+Estimated Time: **5 minutes**
 
-The quiz checks whether you can connect the business workflow to the database capability. Focus on the operator's reason for using each capability, not only the feature name. The badge marks completion, and the questions confirm that you can explain both the business decisions and the Oracle Database capabilities behind them.
+## Task 1: Answer the quiz questions
 
-![Telco workshop completion badge](images/livestack-badge-telecommunications.png)
+1. Follow the steps below.
 
-## Task 1: Answer the questions
+    ```quiz score
+    Q: Why does the Operations Center lab include a drill-through query after a summary?
+    - To replace dashboard evidence with a screenshot.
+    * To show the reviewable network-site rows behind a KPI.
+    - To create a separate reporting database.
+    - To generate a random capacity score.
+    > A dashboard total is useful only when an operations team can inspect the contributing sites and decide what to do next.
 
-1. Answer each question, then review the explanation.
+    Q: What does ORDERS_DV provide for a service-order application?
+    - A second copy of order rows in a document store.
+    * A JSON projection backed by relational order data.
+    - A property graph of service routes.
+    - A vector index for network sites.
+    > JSON Relational Duality lets an application use document-shaped data while SQL continues to use the same governed source.
 
-### Question 1
+    Q: Why does the vector lab show fixed rows from SIGNAL_SERVICE_MATCHES?
+    - It replaces the source signal with an embedding only.
+    * It lets an analyst review the matched service and retained similarity evidence.
+    - It calculates the miles between network sites.
+    - It creates a second service-order document.
+    > The match table keeps the signal, service, score, and match method connected for review.
 
-Why does the workshop start with the telecom data foundation?
+    Q: What does the graph seed case provide?
+    - A random data sample.
+    - A replacement for the subscriber table.
+    * The starting point for an investigation of connected entities.
+    - A model confidence score.
+    > SQL/PGQ starts from the named experience case and follows its relationship evidence.
 
-- A. To count images before using the database.
-- B. To show that the operating story starts from governed services, signals, orders, sites, forecasts, graph entities, embeddings, and audit rows.
-- C. To avoid using SQL in later labs.
-- D. To replace the telecom application with a static report.
+    Q: Why does the field-operations lab use Oracle Spatial?
+    - To replace operational rows with a map image.
+    - To export site coordinates to an unrelated system.
+    - To turn graph edges into vectors.
+    * To calculate point and distance evidence next to operational data.
+    > Keeping geography in the same database makes field-response decisions easier to review and repeat.
 
-**Correct answer:** B
+    Q: What does a capacity-risk prediction in the OML lab provide?
+    - A guaranteed outage outcome.
+    * A model-based priority signal to review beside site capacity and load evidence.
+    - A replacement for the network-site table.
+    - A copy of capacity data in a separate machine-learning system.
+    > A prediction helps a planner decide where to investigate. It does not replace the operational evidence or make the action automatically.
 
-**Explanation:** The data foundation gives every later lab trusted services, signals, orders, sites, forecasts, graph entities, embeddings, and audit rows. Without that foundation, each workflow would need its own copy of the evidence.
+    Q: What is the main advantage of the converged database foundation in this workshop?
+    - Each capability requires a separate specialist store.
+    * SQL, JSON, vector, graph, and spatial evidence stay connected.
+    - Screenshots replace the need for database evidence.
+    - Teams must reconcile copied data before investigating.
+    > The workshop uses several data models, but they remain connected under one governance model.
+    ```
 
-### Question 2
+2. Review your completion badge.
 
-What does AI Vector Search help Seer Comms do?
-
-- A. Search subscriber language by meaning while keeping text, vectors, and SQL close to governed data.
-- B. Replace all service orders with image files.
-- C. Remove the need for access control.
-- D. Run only exact keyword searches.
-
-**Correct answer:** A
-
-**Explanation:** AI Vector Search helps teams find related subscriber intent even when people use different words. Keeping vectors with source rows helps the result stay connected to governed service and signal data.
-
-### Question 3
-
-Why is Property Graph useful in the subscriber and network impact lab?
-
-- A. It stores presentation images in the database.
-- B. It turns connected outage, service, case, site, subscriber, and crew relationships into traversable impact paths.
-- C. It hides relationships from operators.
-- D. It requires a separate graph-only data copy.
-
-**Correct answer:** B
-
-**Explanation:** Property Graph makes connected impact visible. It lets teams follow relationships from an outage to affected services, sites, subscriber groups, cases, and crews without moving sensitive investigation data into a separate graph-only store.
-
-### Question 4
-
-What is the main value of JSON Relational Duality for service orders?
-
-- A. It lets applications use a document-shaped order while Oracle preserves relational truth and transactional consistency.
-- B. It removes every relational table.
-- C. It makes service orders read-only text files.
-- D. It prevents SQL verification.
-
-**Correct answer:** A
-
-**Explanation:** JSON Relational Duality lets application teams work with a document shape while operations teams keep relational SQL, consistency, and governance over the same order.
-
-### Question 5
-
-Why does the Ask Telecom Operations Data lab emphasize visible SQL?
-
-- A. Visible SQL makes natural-language answers inspectable and keeps Oracle as the execution authority.
-- B. Visible SQL is only decorative.
-- C. Visible SQL means the language model owns the data.
-- D. Visible SQL prevents users from seeing result rows.
-
-**Correct answer:** A
-
-**Explanation:** Visible SQL makes natural-language analytics reviewable. A business user can ask a plain-English question, and a reviewer can still inspect the SQL and data path behind the answer.
-
-### Question 6
-
-What makes agent-assisted service assurance trustworthy in this workshop pattern?
-
-- A. The agent never records what happened.
-- B. Approved database tools return evidence and `AGENT_ACTIONS` records the decision for later review.
-- C. The agent bypasses Oracle data.
-- D. The UI hides tool usage.
-
-**Correct answer:** B
-
-**Explanation:** Trusted AI assistance depends on approved tools and durable action records. The agent can help faster, but Oracle keeps the evidence and decision history available for review.
-
-## Task 2: Finish the workshop
-
-1. Review the explanation and connect it to the lab evidence.
-
-You have completed the quiz. Review the conclusion to revisit how the labs connect into one operating loop, from first signal to auditable action.
+    ![Telecommunications LiveStack completion badge](images/livestack-badge-telecommunications.png " ")
 
 ## Acknowledgements
 
-- **Author** - Oracle LiveLabs Team
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Pat Shepherd, July 2026
