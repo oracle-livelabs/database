@@ -47,7 +47,7 @@ Start on the fulfillment application page so the geometry query connects map evi
 
 2. Run the geometry query.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     `SDO_UTIL.TO_WKTGEOMETRY` converts the stored point into readable text. Longitude appears before latitude in the point notation.
 
@@ -175,8 +175,6 @@ Next, combine distance with inventory so the fulfillment recommendation reflects
 2. This is the practical value of spatial data in a converged database. The same query can explain location, product, and inventory evidence without copying map data into another system.
 
     Next, you use Oracle Machine Learning to prioritize which products deserve attention after the business has reviewed demand, influence, and fulfillment evidence.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Next Steps
 

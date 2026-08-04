@@ -48,7 +48,7 @@ Start on the **Customer Trend Signals** page so semantic-search results connect 
 
 2. Run the vector inventory query.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     This query checks the vector-bearing tables and compares them to the source rows they represent. `PRODUCT_EMBEDDINGS` stores vectors generated from product catalog text. `POST_EMBEDDINGS` stores vectors generated from social post text in `SOCIAL_POSTS`.
 
@@ -208,8 +208,6 @@ Next, connect social-signal matches back to products so vector scores become rev
     Multiple rows in `POST_EMBEDDINGS` can point to social posts that mention the same product. Grouping keeps the result readable: one product row and the closest semantic distance from the social-post vectors.
 
     Next, you follow the creator relationships behind those signals to understand how campaign influence can move through a network.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Next Steps
 

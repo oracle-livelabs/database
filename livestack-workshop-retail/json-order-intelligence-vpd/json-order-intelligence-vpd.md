@@ -50,7 +50,7 @@ Start by reviewing the order application screen so the duality-view check connec
 
 2. Query the duality view catalog.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     Use `USER_JSON_DUALITY_VIEWS` to confirm that the order document view exists in the schema. This is safer than assuming the object from application code.
 
@@ -137,8 +137,6 @@ Next, project the same order document into SQL columns so analysts can filter, s
     | 5 | 1587 | delivered | 209.97 |
 
 2. The result shows the practical value of duality. The application can use a JSON document, and analysts can still use SQL over the same governed order data. Next, you use customer and creator language to find demand signals that may not match catalog keywords exactly.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Next Steps
 

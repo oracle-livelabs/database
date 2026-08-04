@@ -13,47 +13,47 @@
       "filename": "../../getting-started/getting-started.md"
     },
     {
-      "title": "Lab 1: Media Data Foundation",
+      "title": "Media Data Foundation",
       "description": "Inspect the media schema foundation and current object families.",
       "filename": "../../lab-1-media-data-foundation/lab-1-media-data-foundation.md"
     },
     {
-      "title": "Lab 2: Launch Operations Dashboard",
+      "title": "Launch Operations Dashboard",
       "description": "Query dashboard KPIs, audience momentum, and content exposure evidence.",
       "filename": "../../lab-2-launch-operations-command-center/lab-2-launch-operations-command-center.md"
     },
     {
-      "title": "Lab 3: Campaign Order Documents",
+      "title": "Campaign Orders with JSON Relational Duality",
       "description": "Use JSON Relational Duality and SQL/JSON for campaign documents.",
       "filename": "../../lab-3-campaign-rights-requests-json-duality/lab-3-campaign-rights-requests-json-duality.md"
     },
     {
-      "title": "Lab 4: Audience Signal Intelligence",
+      "title": "Audience Signal Intelligence with AI Vector Search",
       "description": "Run AI Vector Search over content and audience-signal embeddings.",
       "filename": "../../lab-4-audience-momentum-safety-signals-vector-search/lab-4-audience-momentum-safety-signals-vector-search.md"
     },
     {
-      "title": "Lab 5: Creator Influence Network",
+      "title": "Creator Influence Network with Property Graph",
       "description": "Use Property Graph and SQL/PGQ to analyze creator reach.",
       "filename": "../../lab-5-creator-community-graph-property-graph/lab-5-creator-community-graph-property-graph.md"
     },
     {
-      "title": "Lab 6: Rights and Distribution Coverage",
+      "title": "Rights and Distribution Coverage with Oracle Spatial",
       "description": "Use Oracle Spatial for distribution hub and demand region analysis.",
       "filename": "../../lab-6-rights-capacity-live-event-coverage-spatial/lab-6-rights-capacity-live-event-coverage-spatial.md"
     },
     {
-      "title": "Lab 7: Predictive Demand and Revenue",
+      "title": "Predictive Demand and Revenue with Oracle Machine Learning",
       "description": "Inspect and score OML models inside Oracle Database.",
       "filename": "../../lab-7-engagement-revenue-retention-analytics-oml/lab-7-engagement-revenue-retention-analytics-oml.md"
     },
     {
-      "title": "Lab 8: Conclusion",
+      "title": "Conclusion",
       "description": "Turn the media labs into a practical converged database takeaway.",
       "filename": "../../conclusion-media-outcomes/conclusion-media-outcomes.md"
     },
     {
-      "title": "Lab 9: Final Quiz",
+      "title": "Final Quiz",
       "description": "Check your understanding with scored questions.",
       "filename": "../../final-quiz/final-quiz.md"
     },
