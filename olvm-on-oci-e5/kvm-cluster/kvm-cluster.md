@@ -116,6 +116,8 @@ This lab assumes you have:
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
     ```
 
+    This Oracle Linux KVM host uses an Oracle Cloud Infrastructure image, not an Oracle Linux 8 Minimal installation. Therefore, the pre-check displays an expected minimal-install warning and an expected best-effort package-count failure. The script states that the minimal-install warning can be disregarded for a VM installed from an Oracle template. Do not change the host image to address these expected messages.
+
     - If the pre-check reports extra enabled repositories, disable them:
 
     ```bash
@@ -249,6 +251,8 @@ This lab assumes you have:
     ```bash
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
     ```
+
+    This Oracle Linux KVM host uses an Oracle Cloud Infrastructure image, not an Oracle Linux 8 Minimal installation. Therefore, the pre-check displays an expected minimal-install warning and an expected best-effort package-count failure. The script states that the minimal-install warning can be disregarded for a VM installed from an Oracle template. Do not change the host image to address these expected messages.
 
     - If the pre-check reports extra enabled repositories, disable them:
 
