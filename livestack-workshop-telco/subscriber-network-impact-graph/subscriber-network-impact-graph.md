@@ -1,130 +1,126 @@
-# Lab 4: Subscriber and Network Impact Graph
+# Subscriber and Network Impact Graph
 
 ## Introduction
 
-A telecom incident is rarely isolated. One outage can affect a service line, trigger cases, overload a site, and send crews into the field. Property Graph helps service assurance teams follow those connections instead of reading each record separately.
+One congestion case can affect a subscriber cluster, a network site, an outage event, a support case, and a field crew at the same time. If an investigator misses one of those relationships, the response can be delayed or assigned to the wrong team while subscriber impact grows. You are the impact investigator who must establish the operational reach of a named case before a response is assigned. A property graph represents business entities as vertices and their connections as edges, so the case remains connected to its evidence.
 
-Estimated Time: 10 minutes
+![Telco impact graph flow](images/impact-graph-flow.svg " ")
 
-| Operating Story | Detail |
-| --- | --- |
-| Business Problem | An incident response team needs connected impact, not isolated ticket order. |
-| Technical Challenge | Relationship analysis is hard when telecom entities live in separate OSS, BSS, CRM, NOC, and field systems. |
-| Persona Focus | Network operations analyst and escalation manager. |
-| What You Will Learn | SQL/PGQ can traverse telecom impact relationships stored in Oracle. |
-| Database Capability | Oracle Property Graph and `GRAPH_TABLE` SQL/PGQ. |
-| Outcome | Teams can prioritize response from connected subscriber impact. |
-{: title="What this lab covers"}
+The image below is the Seer Comms SQL/PGQ explorer. An impact investigator uses it to inspect how a case reaches related entities. The SQL in this lab makes that one-hop case-to-entity traversal explicit and repeatable.
 
-**Persona focus:** You are the service assurance investigator moving from a named event to subscribers, sites, cases, and crews.
+![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png " ")
 
 ### Objectives
 
-- Verify that impact entities and relationships are available for graph analysis.
-- Identify high-risk outage, site, and service entities.
-- Traverse connected impact paths from an event to affected subscribers and response context.
+- Confirm the Telco property graph exists.
+- Start from a named experience case.
+- Follow case-to-entity relationship evidence with SQL/PGQ.
 
-The image below is the impact graph workspace. A service assurance investigator would use it to move from a reported event to related sites, subscriber groups, cases, and crews. The SQL in this lab shows the graph evidence behind that investigation path.
+Estimated Time: **12 minutes**
 
-![Impact graph workspace](images/impact-graph-workspace.png)
+### Business Scenario
 
-The concept diagram below introduces the property graph pattern. It shows why relationships matter: the business question is not just what happened, but what else is connected to it and who may be affected.
+| Step | Telco focus |
+| --- | --- |
+| Business Problem | A critical case can spread across entities that are not obvious in a dashboard. |
+| Technical Challenge | Joins become difficult when the investigation follows changing relationship paths. |
+| Persona Focus | You are a network-impact investigator. |
+| What You Will Do | Traverse the entities directly connected to a case. |
+| Database Capability | Property Graph and SQL/PGQ. |
+| Outcome | You can identify the entities that need coordinated review. |
 
-![Lab 4: Subscriber and Network Impact Graph concept diagram](images/property-graph-flow.svg)
+<details>
+<summary><strong>Key terms: property graph, vertex, edge, named seed case, and traversal</strong></summary>
 
-## How This Lab Fits the Story
+> - A **property graph** is a database model for investigating connected entities and the facts held on their relationships. In this lab, `TELECOM_EXPERIENCE_NETWORK` keeps Telco impact relationships governed beside the operational data that explains them.
+>
+> - A **vertex** is a graph entity, such as a site, subscriber cluster, or outage event. In this lab, the graph stores those entities with business-readable names and impact measures.
+>
+> - An **edge** is a relationship that links vertices. The `case_involves` edge connects one experience case to the entities that require review, including why each entity matters and the confidence of that evidence.
+>
+> - A **named seed case** is not special Oracle vocabulary. It is simply the incident reference an analyst deliberately chooses as the start of an investigation, much like a ticket number. Here, `TEL-5G-2026-501` is the selected case, not a random sample.
+>
+> - A **traversal** follows a chosen relationship path from one vertex to another. It lets an investigator ask “what is connected to this case?” without moving the incident data to a separate graph system.
+</details>
 
-You investigate relationships after you know a service is under pressure. The graph queries show how an outage connects to cases, sites, subscribers, and response teams without forcing you to copy the data into a separate graph-only system.
+## Task 1: Confirm the impact graph
 
-## Scene Evidence
+1. Follow the steps below.
 
-Use the screenshot to orient the impact investigation. The SQL tasks below show how graph relationships turn isolated records into a response path an escalation team can follow.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-The image below is the SQL/PGQ query explorer. It shows how graph-style investigation can still be expressed through database-backed query evidence instead of a separate graph-only copy.
-
-![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png)
-
-## Task 1: Count graph entities and relationships
-
-1. Run this SQL block.
-
-    This query checks that the graph has both the things you care about and the links between them. It counts entities and relationships from the graph tables. A list of entities is only an inventory; the relationships explain impact.
-
-    ```sql
-    <copy>
-    SELECT 'Impact entities' AS graph_item, COUNT(*) AS records FROM telecom_graph_entities
-    UNION ALL
-    SELECT 'Impact relationships', COUNT(*) FROM telecom_graph_relationships;
-    </copy>
-    ```
-
-    **Expected output: Impact graph inventory**
-
-    | Graph Item | Records |
-    | --- | ---: |
-    | Impact entities | 36 |
-    | Impact relationships | 50 |
-    {: title="Impact graph inventory"}
-
-## Task 2: Find high-impact events
-
-1. Run this SQL block.
-
-    This query surfaces the events and entities with the highest risk. The `WHERE` clause focuses on outage events, network sites, and service lines, while `ORDER BY risk_score DESC` puts the most urgent records first. That helps an investigator start with incidents most likely to affect subscribers.
+    `USER_PROPERTY_GRAPHS` inventories graph definitions. The result names the graph used for subscriber and network impact investigation.
 
     ```sql
     <copy>
-    SELECT entity_key, display_name, entity_type, region, affected_count, risk_score, experience_score
-    FROM telecom_graph_entities
-    WHERE entity_type IN ('outage_event', 'network_site', 'service_line')
-    ORDER BY risk_score DESC
-    FETCH FIRST 6 ROWS ONLY;
+    SELECT graph_name AS "Property Graph"
+    FROM user_property_graphs
+    WHERE graph_name = 'TELECOM_EXPERIENCE_NETWORK';
     </copy>
     ```
 
-    **Expected output: High-risk entities in the impact graph**
+    **Expected output: Property Graph**
 
-    | Entity Key | Display Name | Entity Type | Region | Affected Count | Risk Score | Experience Score |
-    | --- | --- | --- | --- | ---: | ---: | ---: |
-    | OUT-EVENT-501 | Game-day 5G congestion spike | `outage_event` | Northeast | 31200 | 96 | 35 |
-    | OUT-EVENT-502 | Fiber cut affecting enterprise corridor | `outage_event` | Southeast | 7100 | 95 | 38 |
-    {: title="High-risk entities in the impact graph"}
+    | Property Graph |
+    | --- |
+    | TELECOM\_EXPERIENCE\_NETWORK |
 
-## Task 3: Traverse connected impact
+## Task 2: Find entities linked to an experience case
 
-1. Run this SQL block.
+1. Follow the steps below.
 
-    This query follows one named event to connected sites, subscriber groups, and response context. The joins connect relationship rows to source and destination entities, turning a single event name into a practical investigation path. Keeping those relationships in Oracle avoids copying sensitive investigation data into a separate graph store.
+    The graph pattern starts at the named experience case `TEL-5G-2026-501`, follows its `case_involves` relationships, and returns the connected entities. It is a focused investigation: you deliberately choose this incident reference because its critical priority, 31,200 affected subscribers, and service value at risk merit coordinated review.
+
+    1. `GRAPH_TABLE (telecom_experience_network ...)` selects the governed graph to query.
+    2. `MATCH` starts at the `experience_case` vertex and follows each `case_involves` edge to a connected `entity` vertex.
+    3. The `WHERE` clause selects the one named case an analyst wants to investigate.
+    4. `COLUMNS` chooses the case context, entity details, role, and evidence confidence to return as a normal SQL table.
+    5. `ORDER BY` groups the response roles so the analyst can create a coordinated follow-up list.
 
     ```sql
     <copy>
-    SELECT src.display_name AS source_entity,
-       r.relationship_type,
-       dst.display_name AS connected_entity,
-       dst.entity_type,
-       dst.risk_score
-    FROM telecom_graph_relationships r
-    JOIN telecom_graph_entities src ON src.entity_id = r.from_entity
-    JOIN telecom_graph_entities dst ON dst.entity_id = r.to_entity
-    WHERE src.entity_key = 'OUT-EVENT-501'
-    ORDER BY dst.risk_score DESC;
+    SELECT case_ref AS "Case",
+           priority AS "Priority",
+           subscribers_affected AS "Subscribers Affected",
+           service_value_at_risk AS "Value at Risk",
+           display_name AS "Connected Entity",
+           entity_type AS "Entity Type",
+           role_in_case AS "Role",
+           ROUND(confidence * 100, 1) AS "Evidence Confidence %"
+    FROM GRAPH_TABLE (telecom_experience_network
+      MATCH (c IS experience_case)-[e IS case_involves]->(n IS entity)
+      WHERE c.case_ref = 'TEL-5G-2026-501'
+      COLUMNS (
+        c.case_ref,
+        c.priority,
+        c.subscribers_affected,
+        c.service_value_at_risk,
+        n.display_name,
+        n.entity_type,
+        e.role_in_case,
+        e.confidence
+      )
+    )
+    ORDER BY role_in_case, entity_type, display_name;
     </copy>
     ```
 
-    **Expected output: Connected impact paths to investigate**
+    **Expected output: Case Impact Entities**
 
-    | Source Entity | Relationship Type | Connected Entity | Entity Type | Risk Score |
-    | --- | --- | --- | --- | ---: |
-    | Game-day 5G congestion spike | IMPACTS | Miami Connected Life Hub | `network_site` | 88 |
-    | Game-day 5G congestion spike | AFFECTS | South Florida family-plan subscribers | `subscriber_cluster` | 86 |
-    {: title="Connected impact paths to investigate"}
+    | Case | Priority | Subscribers Affected | Value at Risk | Connected Entity | Entity Type | Role | Evidence Confidence % |
+    | --- | --- | ---: | ---: | --- | --- | --- | ---: |
+    | TEL-5G-2026-501 | critical | 31200 | 2140000 | Hudson Yards 5G macro site | network_site | network_site | 96.5 |
+    | TEL-5G-2026-501 | critical | 31200 | 2140000 | Game-day 5G congestion spike | outage_event | seed_signal | 99.0 |
+    | TEL-5G-2026-501 | critical | 31200 | 2140000 | Stadium district family plan cluster | subscriber | subscriber_cluster | 98.2 |
+    | TEL-5G-2026-501 | critical | 31200 | 2140000 | Capacity reroute case CAP-501 | support_case | support_case | 97.5 |
 
+    Read each row as a coordinated follow-up candidate, not as an automatic action. **Entity Type** tells you what kind of evidence was reached; **Role** tells you why it is relevant to the case; and **Evidence Confidence %** tells you how strongly the relationship is supported in this scenario. The repeated case measures are intentional context: they help each team see the same impact level while reviewing its own entity.
 
+    This relationship evidence stays next to operational facts in the database, reducing data copies and making an investigation more repeatable.
 
-## Learn More
-
-- See `ORACLE_REFERENCE_LINKS.md` in the supporting files directory for official Oracle documentation links.
+    The graph identifies who and what is affected. The next lab adds the location evidence a field-operations planner needs to compare response sites.
 
 ## Acknowledgements
 
-- **Author** - Oracle LiveLabs Team
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Pat Shepherd, July 2026
