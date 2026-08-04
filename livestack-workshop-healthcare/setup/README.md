@@ -1,17 +1,19 @@
 # Healthcare Workshop SQL Loader
 
-Run `healthcare-platform-handoff-loader.sql` while connected as `ADMIN`. The wrapper performs the two required phases:
-
-1. `01-admin-create-lluser.sql` creates or unlocks `LLUSER` and grants the required privileges.
-2. `02-lluser-create-healthcare-objects.sql` reconnects as `LLUSER`, recreates the healthcare objects, loads the deterministic dataset, builds the vectors, graph, spatial indexes, and OML model, and prints validation counts.
-
-The main wrapper now also prints a final, table-shaped summary for all six tracked data layers, their 14,796-record total, the supporting location counts, and the invalid-object count. This makes the updated dataset visible from the platform loader itself instead of requiring someone to inspect the longer LLUSER script.
-
-SQLcl usage:
+Upload `healthcare-platform-handoff-loader.sql` when the sandbox provisioning system accepts one SQL initialization file. Run it through SQLcl while connected as `ADMIN`:
 
 ```text
-@healthcare-platform-handoff-loader.sql "<service-alias>" "<lluser-password>"
+@healthcare-platform-handoff-loader.sql "<lluser-password>" "<service-alias>"
 ```
+
+This is a self-contained loader. It performs both required phases without calling another local file:
+
+1. The ADMIN phase creates `LLUSER` when needed, or unlocks an existing `LLUSER` without forcing a password-policy reset, and grants the required privileges.
+2. `02-lluser-create-healthcare-objects.sql` reconnects as `LLUSER`, recreates the healthcare objects, loads the deterministic dataset, builds the vectors, graph, spatial indexes, and OML model, and prints validation counts.
+
+The two numbered scripts remain available as troubleshooting copies, but they are not required when the self-contained platform loader is uploaded.
+
+The loader prints a final, table-shaped release summary for the connected schema, all six tracked data layers, their 14,796-record total, supporting location counts, OML model, and invalid objects.
 
 The loader does not contain a password, wallet path, or Autonomous Database service name. Supply those values at runtime.
 
