@@ -1,0 +1,88 @@
+-- Run while connected as ADMIN.
+-- Usage: @01-admin-create-lluser.sql "<lluser-password>"
+
+SET DEFINE ON
+SET VERIFY OFF
+SET SERVEROUTPUT ON
+WHENEVER SQLERROR EXIT SQL.SQLCODE
+
+DEFINE lluser_password = '&1'
+
+BEGIN
+  IF USER <> 'ADMIN' THEN
+    RAISE_APPLICATION_ERROR(
+      -20001,
+      'Run this script as ADMIN. Current user: ' || USER
+    );
+  END IF;
+END;
+/
+
+DECLARE
+  user_count PLS_INTEGER;
+BEGIN
+  SELECT COUNT(*)
+    INTO user_count
+    FROM dba_users
+   WHERE username = 'LLUSER';
+
+  IF user_count = 0 THEN
+    EXECUTE IMMEDIATE
+      'CREATE USER LLUSER IDENTIFIED BY "&&lluser_password" ' ||
+      'DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP ' ||
+      'QUOTA UNLIMITED ON USERS ACCOUNT UNLOCK';
+    DBMS_OUTPUT.PUT_LINE('Created LLUSER.');
+  ELSE
+    EXECUTE IMMEDIATE
+      'ALTER USER LLUSER DEFAULT TABLESPACE USERS ' ||
+      'TEMPORARY TABLESPACE TEMP QUOTA UNLIMITED ON USERS ACCOUNT UNLOCK';
+    DBMS_OUTPUT.PUT_LINE('LLUSER already exists; unlocked without password reuse.');
+  END IF;
+END;
+/
+
+GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE PROCEDURE,
+      CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE MINING MODEL,
+      UNLIMITED TABLESPACE
+TO LLUSER;
+
+GRANT GRAPH_DEVELOPER TO LLUSER;
+GRANT EXECUTE ON MDSYS.SDO_GEOM TO LLUSER;
+GRANT EXECUTE ON MDSYS.SDO_UTIL TO LLUSER;
+GRANT EXECUTE ON MDSYS.SDO_CS TO LLUSER;
+GRANT EXECUTE ON DBMS_DATA_MINING TO LLUSER;
+GRANT EXECUTE ON DBMS_VECTOR TO LLUSER;
+
+DECLARE
+  model_count PLS_INTEGER;
+BEGIN
+  SELECT COUNT(*)
+    INTO model_count
+    FROM dba_objects
+   WHERE owner = 'ADMIN'
+     AND object_name = 'ALL_MINILM_L12_V2'
+     AND object_type = 'MINING MODEL';
+
+  IF model_count = 0 THEN
+    RAISE_APPLICATION_ERROR(
+      -20002,
+      'ADMIN.ALL_MINILM_L12_V2 is required for healthcare embeddings.'
+    );
+  END IF;
+
+  DBMS_OUTPUT.PUT_LINE('Verified ADMIN.ALL_MINILM_L12_V2.');
+END;
+/
+
+COLUMN username FORMAT A12
+COLUMN account_status FORMAT A20
+SELECT username, account_status, default_tablespace
+FROM dba_users
+WHERE username = 'LLUSER';
+
+SELECT granted_role
+FROM dba_role_privs
+WHERE grantee = 'LLUSER'
+  AND granted_role = 'GRAPH_DEVELOPER';
+
+UNDEFINE lluser_password
