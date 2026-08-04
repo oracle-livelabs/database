@@ -109,9 +109,17 @@ The notebook alternates explanatory text with four executable SQL paragraphs. Ru
     | 3 | Table | Ranks risky account pairs connected through a shared device, IP address, phone, or email. |
     | 4 | Graph visualization | Draws both accounts, the shared entity, and the connecting relationships. |
 
-4. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account.
+4. In **Exercise 1**, run the visualization paragraph to trace the one-hop and two-hop network from `ACCT-8841`. The red box identifies the triangle **Run** button in the upper-right corner of the paragraph.
 
-5. Keep the notebook open. The next two tasks show the same SQL/PGQ evidence in the SQL Worksheet so you can compare the Graph Studio experience with the underlying query and tabular results.
+    ![Run Exercise 1 to trace one-hop and two-hop fraud reach](images/graph-exercise-1-run-highlighted.png " ")
+
+5. In **Exercise 2**, run the final visualization paragraph to reveal accounts connected through shared devices, IP addresses, phone numbers, or email addresses. Use the same triangle **Run** button highlighted in red.
+
+    ![Run Exercise 2 to find accounts sharing identifying evidence](images/graph-exercise-2-run-highlighted.png " ")
+
+6. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account.
+
+7. Keep the notebook open. The next two tasks show the same SQL/PGQ evidence in the SQL Worksheet so you can compare the Graph Studio experience with the underlying query and tabular results.
 
 > **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
 
