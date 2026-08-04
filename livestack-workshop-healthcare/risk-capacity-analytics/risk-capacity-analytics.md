@@ -84,8 +84,8 @@ Begin by confirming the model that will score the operating scenario.
 
     | Model Name | Mining Function | Algorithm |
     | --- | --- | --- |
-| CARE\_DEMAND\_RISK\_MODEL | CLASSIFICATION | GENERALIZED\_LINEAR\_MODEL |
-{: title="Stored demand-risk model"}
+    | CARE\_DEMAND\_RISK\_MODEL | CLASSIFICATION | GENERALIZED\_LINEAR\_MODEL |
+    {: title="Demand-risk model"}
 
 2. Run the forecast query.
 
@@ -111,8 +111,8 @@ Begin by confirming the model that will score the operating scenario.
     | mRNA LNP Clinical Batch | New York Metro | 2310 | 1.94 |
     | mRNA LNP Clinical Batch | Los Angeles Basin | 2140 | 1.82 |
     | mRNA LNP Clinical Batch | Bay Area (SF) | 1980 | 1.74 |
-| Bed Capacity Surge Playbook | New York Metro | 1810 | 1.68 |
-{: title="Highest demand forecasts"}
+    | Bed Capacity Surge Playbook | New York Metro | 1810 | 1.68 |
+    {: title="Demand forecasts"}
 
 3. Read the planning clue.
 
@@ -148,8 +148,8 @@ Before scoring new input, look at a simple training-data agreement check.
     | Actual Label | Predicted Label | Scenario Count |
     | --- | --- | ---: |
     | HIGH | HIGH | 6 |
-| LOW | LOW | 6 |
-{: title="Actual and predicted training labels"}
+    | LOW | LOW | 6 |
+    {: title="Training comparison"}
 
 2. Interpret the check carefully.
 
@@ -194,8 +194,8 @@ Before scoring new input, look at a simple training-data agreement check.
 
     | Predicted Risk | Model Confidence |
     | --- | ---: |
-| HIGH | 0.5046 |
-{: title="New scenario risk score"}
+    | HIGH | 0.5046 |
+    {: title="Scenario risk"}
 
 4. Explain the score.
 

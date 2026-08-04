@@ -86,8 +86,8 @@ Start with the headline numbers shown at the top of the operating view.
 
     | Service Requests | Tracked Value | Elevated Signals | Watched Services | Completed Actions |
     | ---: | ---: | ---: | ---: | ---: |
-| 3,000 | 4,210,943.89 | 474 | 156 | 1 |
-{: title="Command center measures"}
+    | 3,000 | 4,210,943.89 | 474 | 156 | 1 |
+    {: title="Command-center totals"}
 
 2. Interpret the KPI row.
 
@@ -99,7 +99,7 @@ Start with the headline numbers shown at the top of the operating view.
 
 1. Run the signal query.
 
-    The `WHERE` clause keeps only `CRITICAL` and `HIGH` signals. The first `CASE` places the curated workshop examples before the generated baseline records. The second `CASE` places critical examples before high-priority examples, and `FETCH FIRST 5 ROWS ONLY` keeps the review manageable.
+    The `WHERE` clause keeps only `CRITICAL` and `HIGH` signals. The first `CASE` places the named priority examples before the rest of the baseline. The second `CASE` places critical examples before high-priority examples. After that deterministic ordering, `FETCH FIRST 5 ROWS ONLY` keeps the review manageable.
 
     The result is a sample, not the full elevated-signal population. It shows how each record adds an affected service and a recorded next step to the headline count.
 
@@ -125,8 +125,8 @@ Start with the headline numbers shown at the top of the operating view.
     | 103 | CRITICAL | Cold Chain Bulletin | mRNA LNP Clinical Batch | Check logistics impact |
     | 102 | HIGH | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 3 | Route capacity follow-up |
     | 104 | HIGH | Supply Quality Notice | Tamper-Evident Carton Batch | Open quality review |
-| 106 | HIGH | Patient Flow Alert | Bed Capacity Surge Playbook | Review surge playbook |
-{: title="Five priority signal examples"}
+    | 106 | HIGH | Patient Flow Alert | Bed Capacity Surge Playbook | Review surge playbook |
+    {: title="Priority signals"}
 
 2. Connect the rows to the KPI.
 
@@ -158,8 +158,8 @@ The final query groups the signal rows into a smaller operating summary.
     | Diagnostics | 1,026 | 96 | 32 |
     | Care Operations | 993 | 94 | 31 |
     | Quality and Safety | 993 | 94 | 31 |
-| Pharmacy Support | 928 | 87 | 29 |
-{: title="Signals by service category"}
+    | Pharmacy Support | 928 | 87 | 29 |
+    {: title="Signal categories"}
 
 2. Use the summary to set a review order.
 

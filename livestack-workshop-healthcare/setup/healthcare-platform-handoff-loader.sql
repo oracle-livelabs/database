@@ -52,20 +52,36 @@ BEGIN
       'QUOTA UNLIMITED ON USERS ACCOUNT UNLOCK';
     DBMS_OUTPUT.PUT_LINE('Created LLUSER.');
   ELSE
-    EXECUTE IMMEDIATE
-      'ALTER USER LLUSER DEFAULT TABLESPACE USERS ' ||
-      'TEMPORARY TABLESPACE TEMP ' ||
-      'QUOTA UNLIMITED ON USERS ACCOUNT UNLOCK';
-    DBMS_OUTPUT.PUT_LINE(
-      'LLUSER already exists; preserved its password and unlocked the account.'
-    );
+    BEGIN
+      EXECUTE IMMEDIATE
+        'ALTER USER LLUSER IDENTIFIED ' || 'BY "&&lluser_password" ' ||
+        'DEFAULT TABLESPACE USERS ' ||
+        'TEMPORARY TABLESPACE TEMP ' ||
+        'QUOTA UNLIMITED ON USERS ACCOUNT UNLOCK';
+      DBMS_OUTPUT.PUT_LINE(
+        'Reset the existing LLUSER password and unlocked the account.'
+      );
+    EXCEPTION
+      WHEN OTHERS THEN
+        IF SQLCODE = -28007 THEN
+          EXECUTE IMMEDIATE
+            'ALTER USER LLUSER DEFAULT TABLESPACE USERS ' ||
+            'TEMPORARY TABLESPACE TEMP ' ||
+            'QUOTA UNLIMITED ON USERS ACCOUNT UNLOCK';
+          DBMS_OUTPUT.PUT_LINE(
+            'Oracle password history retained the existing LLUSER password; ' ||
+            'the reconnect step will verify the supplied password.'
+          );
+        ELSE
+          RAISE;
+        END IF;
+    END;
   END IF;
 END;
 /
 
 GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE PROCEDURE,
-      CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE MINING MODEL,
-      UNLIMITED TABLESPACE
+      CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE MINING MODEL
 TO LLUSER;
 
 GRANT GRAPH_DEVELOPER TO LLUSER;

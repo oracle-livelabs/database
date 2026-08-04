@@ -58,7 +58,7 @@ Search for services related to the need for more treatment appointments. The phr
 
     1. The `query_vector` common table expression turns the phrase into an embedding.
     2. `VECTOR_DISTANCE` compares that new vector with each stored service vector.
-    3. `1 - VECTOR_DISTANCE(...)` changes distance into an easier similarity score.
+    3. `1 - VECTOR_DISTANCE(...)` changes cosine distance into an easier similarity score.
     4. `ORDER BY similarity DESC` puts the strongest match first.
 
     <details>
@@ -70,6 +70,8 @@ Search for services related to the need for more treatment appointments. The phr
 
     </details>
 
+    At this workshop scale, Oracle can compare all 187 service vectors exactly. A much larger production catalog may benefit from a vector index and relational filters, but those extra tuning choices are not needed to understand this result.
+
     ```sql
     <copy>WITH query_vector AS (
       SELECT VECTOR_EMBEDDING(
@@ -80,7 +82,11 @@ Search for services related to the need for more treatment appointments. The phr
     SELECT s.service_name,
            s.provider_network,
            ROUND(
-             1 - VECTOR_DISTANCE(s.service_embedding, q.embedding, COSINE),
+             1 - VECTOR_DISTANCE(
+                   s.service_embedding,
+                   q.embedding,
+                   COSINE
+                 ),
              4
            ) AS similarity
     FROM care_services_v s
@@ -95,8 +101,8 @@ Search for services related to the need for more treatment appointments. The phr
     | --- | --- | ---: |
     | Infusion Center Slot Bundle - Continuity Lot 3 | Regional Oncology Network | 0.6033 |
     | Infusion Center Slot Bundle - Continuity Lot 2 | Regional Oncology Network | 0.5341 |
-| Infusion Center Slot Bundle | Regional Oncology Network | 0.4807 |
-{: title="Closest service descriptions"}
+    | Infusion Center Slot Bundle | Regional Oncology Network | 0.4807 |
+    {: title="Service matches"}
 
 2. Review the ranked services.
 
@@ -114,24 +120,28 @@ Now use the same phrase against quality and capacity signal text.
 
     The result keeps `CRITICALITY`, `SIGNAL_TYPE`, and `SERVICE_NAME` beside the similarity score. Vector ranking finds related language. The other columns help a person decide what to review.
 
-    ```sql
-    Oracle Database 26ai allows a `SELECT` that calculates an expression without a `FROM` clause. People who used earlier Oracle Database releases may recognize examples that end this embedding step with `FROM DUAL`. That familiar form still works, but it is not required here.
+    Oracle Database 26ai allows a `SELECT` that calculates an expression without a `FROM` clause. People who used earlier releases may recognize examples that add `FROM DUAL` to the embedding step. That familiar form still works, but Oracle AI Database 26ai does not require it here.
 
+    ```sql
     <copy>WITH query_vector AS (
       SELECT VECTOR_EMBEDDING(
                ADMIN.ALL_MINILM_L12_V2
                USING 'more appointment room for cancer treatments' AS DATA
              ) AS embedding
     )
-    SELECT signal_id,
-           criticality,
-           signal_type,
-           service_name,
+    SELECT s.signal_id,
+           s.criticality,
+           s.signal_type,
+           s.service_name,
            ROUND(
-             1 - VECTOR_DISTANCE(signal_embedding, q.embedding, COSINE),
+             1 - VECTOR_DISTANCE(
+                   s.signal_embedding,
+                   q.embedding,
+                   COSINE
+                 ),
              4
            ) AS similarity
-    FROM quality_capacity_signals_v
+    FROM quality_capacity_signals_v s
     CROSS JOIN query_vector q
     ORDER BY similarity DESC
     FETCH FIRST 5 ROWS ONLY;</copy>
@@ -145,8 +155,8 @@ Now use the same phrase against quality and capacity signal text.
     | 102 | HIGH | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 3 | 0.4091 |
     | 107 | MEDIUM | Specialty Review | Digital Pathology Slide Batch | 0.3881 |
     | 105 | MEDIUM | Diagnostic Capacity | qPCR Respiratory Panel | 0.3314 |
-| 106 | HIGH | Patient Flow Alert | Bed Capacity Surge Playbook | 0.2527 |
-{: title="Closest signal descriptions"}
+    | 106 | HIGH | Patient Flow Alert | Bed Capacity Surge Playbook | 0.2527 |
+    {: title="Signal matches"}
 
 2. Compare meaning with priority.
 

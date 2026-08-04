@@ -79,7 +79,7 @@ Start with a capability map. This query asks Oracle Database which object famili
     </details>
 
     ```sql
-    <copy>SELECT 'Healthcare semantic views' AS area, COUNT(*) AS object_count
+    <copy>SELECT 'Healthcare relational views' AS area, COUNT(*) AS object_count
     FROM user_views
     WHERE view_name IN (
       'CARE_SERVICES_V',
@@ -87,6 +87,7 @@ Start with a capability map. This query asks Oracle Database which object famili
       'CARE_LOGISTICS_SITES_V',
       'CARE_SERVICE_REQUESTS_V',
       'CARE_DEMAND_FORECASTS_V',
+      'HEALTHCARE_AGENT_ACTIONS_V',
       'HEALTHCARE_COMMAND_CENTER_V'
     )
     UNION ALL
@@ -116,17 +117,17 @@ Start with a capability map. This query asks Oracle Database which object famili
 
     | Area | Object Count |
     | --- | ---: |
-    | Healthcare semantic views | 6 |
+    | Healthcare relational views | 7 |
     | JSON duality views | 1 |
     | Healthcare property graphs | 1 |
     | MiniLM vector columns | 2 |
     | Spatial metadata layers | 2 |
-| OML mining models | 1 |
-{: title="Available database capabilities"}
+    | OML mining models | 1 |
+    {: title="Database capabilities"}
 
 2. Read the result as a capability checklist.
 
-    The six views give the application and dashboard stable business shapes. The duality view serves a request as JSON. Two vector columns support meaning-based search. The property graph follows care relationships. The spatial layers describe stored locations. The OML model scores demand risk.
+    The seven relational views give the application, dashboard, and agent-action history stable business shapes. The duality view serves a request as JSON. Two vector columns support meaning-based search. The property graph follows care relationships. The spatial layers describe stored locations. The OML model scores demand risk.
 
     Each row points to a later lab. Together, they show that Seer Health does not need a different data store for every question.
 
@@ -183,8 +184,8 @@ The Data Foundation page reports **14,796 tracked records**. That number is not 
     | Service vectors | 187 |
     | Signal vectors | 5,000 |
     | Semantic matches | 1,422 |
-| Total tracked records | 14,796 |
-{: title="Tracked healthcare data layers"}
+    | Total tracked records | 14,796 |
+    {: title="Healthcare record layers"}
 
 2. Use the counts as the baseline for later analysis.
 

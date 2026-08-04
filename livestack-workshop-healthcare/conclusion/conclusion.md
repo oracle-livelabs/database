@@ -38,8 +38,8 @@ Estimated Time: **5 minutes**
     | How can analysts search related care language? | AI Vector Search ranks services and signals by semantic similarity. |
     | Which care facts connect to the patient journey? | Property Graph and SQL/PGQ follow one-hop and two-hop relationships. |
     | Which logistics site fits the Miami request? | Oracle Spatial combines distance with service, status, load, and estimated available capacity. |
-| Where may demand rise? | Forecast rows and an OML classification model provide reviewable planning evidence. |
-{: title="Workshop outcomes"}
+    | Where may demand rise? | Forecast rows and an OML classification model provide reviewable planning evidence. |
+    {: title="Workshop outcomes"}
 
 2. Review how the people connect to those outcomes.
 
@@ -51,8 +51,8 @@ Estimated Time: **5 minutes**
     | Care coordinator | Explains the relationships around a journey and encounter. |
     | Logistics planner | Compares distance, service fit, status, and available capacity. |
     | Capacity planner | Reviews forecasts, model identity, model fit, input features, and prediction probability. |
-| Database developer | Connects relational, JSON, vector, graph, spatial, and OML evidence in one schema. |
-{: title="People and outcomes"}
+    | Database developer | Connects relational, JSON, vector, graph, spatial, and OML evidence in one schema. |
+    {: title="People and outcomes"}
 
 3. Connect the healthcare pressure to convergence.
 
@@ -63,8 +63,8 @@ Estimated Time: **5 minutes**
     | Care-path review | Graph relationships remain close to the source healthcare rows. |
     | Care logistics | Location, service, status, load, and capacity can appear in one query. |
     | Predictive planning | Forecast and OML results stay close to the data and SQL used to explain them. |
-| Governance and review | Teams can point to database-backed evidence instead of reconciling copied results. |
-{: title="Why convergence matters"}
+    | Governance and review | Teams can point to database-backed evidence instead of reconciling copied results. |
+    {: title="Why convergence matters"}
 
 ## Task 2: Bring the evidence together
 

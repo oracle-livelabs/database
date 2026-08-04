@@ -96,8 +96,8 @@ Open SQL Worksheet as `LLUSER`. You will use the same worksheet pattern for ever
 
     | User | Schema | Checked At |
     | --- | --- | --- |
-| LLUSER | LLUSER | Current SQL Worksheet timestamp |
-{: title="SQL Worksheet connection"}
+    | LLUSER | LLUSER | Current SQL Worksheet timestamp |
+    {: title="SQL Worksheet connection"}
 
 8. Confirm that both **User** and **Schema** show `LLUSER`.
 

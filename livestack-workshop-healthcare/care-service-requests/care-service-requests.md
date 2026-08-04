@@ -76,8 +76,8 @@ Start with the shape an application can consume.
 
     | Request Document |
     | --- |
-| { "\_id": 170104, "requestingCareSiteId": 1002, "requestStatus": "DELIVERED", "requestValue": 943.89, "lineItems": [ ...5 items... ] } |
-{: title="Request 170104 JSON"}
+    | { "\_id": 170104, "requestingCareSiteId": 1002, "requestStatus": "DELIVERED", "requestValue": 943.89, "lineItems": [ ...5 items... ] } |
+    {: title="Request JSON"}
 
 2. Read the document shape.
 
@@ -91,7 +91,7 @@ Now inspect the request in business-friendly rows.
 
 1. Run the request summary query.
 
-    `CARE_SERVICE_REQUESTS_V` is a relational view built for people who need to analyze service requests with SQL. It joins each request to the care-site and logistics-site tables, then presents readable names and locations beside the request facts. This matters because an analyst can filter or report on a stable business shape without repeating the joins or trying to remember what internal IDs mean.
+    `CARE_SERVICE_REQUESTS_V` is a governed relational view for people who analyze service requests with SQL. It joins each request to the care-site and logistics-site tables, then presents readable names and locations beside the request facts. This matters because analysts and reports can use one stable business shape without repeating the joins, exposing implementation details, or trying to remember what internal IDs mean.
 
     ```sql
     <copy>SELECT service_request_id,
@@ -108,8 +108,8 @@ Now inspect the request in business-friendly rows.
 
     | Request Id | Care Site | Location | Status | Value | Logistics Site |
     | ---: | --- | --- | --- | ---: | --- |
-| 170104 | Penelope Mendoza | Charlotte, NC | DELIVERED | 943.89 | Etna Midwest Specialty Warehouse |
-{: title="Request 170104 summary"}
+    | 170104 | Penelope Mendoza | Charlotte, NC | DELIVERED | 943.89 | Etna Midwest Specialty Warehouse |
+    {: title="Request 170104 summary"}
 
 2. Read the relational result beside the JSON document.
 
@@ -119,7 +119,7 @@ Now inspect the request in business-friendly rows.
 
 3. Run the line-item query.
 
-    `HC_CARE_SERVICES` is the service catalog behind the workshop. Each row gives a service ID a readable name, category, provider network, description, value, and embedding. Request items store the service ID so the same catalog definition can be reused across thousands of requests. The join replaces that compact ID with the service name a person expects to see.
+    `HC_CARE_SERVICES` is the shared service catalog behind the workshop. Each row gives a service ID a readable name, category, provider network, description, value, and embedding. Request items store that service ID instead of repeating the complete service description in every line. The foreign-key relationship also prevents a request item from pointing to a service that does not exist. The join replaces the compact ID with the name a person expects to see.
 
     `LINE_VALUE` is a virtual column. Oracle calculates it as quantity multiplied by unit cost.
 
@@ -144,8 +144,8 @@ Now inspect the request in business-friendly rows.
     | 5 | Tamper-Evident Carton Batch | 2 | 95.00 | 190.00 |
     | 6 | qPCR Respiratory Panel | 1 | 185.00 | 185.00 |
     | 7 | Infusion Center Slot Bundle | 1 | 125.00 | 125.00 |
-| 8 | Infusion Center Slot Bundle - Continuity Lot 2 | 1 | 133.89 | 133.89 |
-{: title="Request 170104 line items"}
+    | 8 | Infusion Center Slot Bundle - Continuity Lot 2 | 1 | 133.89 | 133.89 |
+    {: title="Request line items"}
 
 4. Compare the two access shapes.
 

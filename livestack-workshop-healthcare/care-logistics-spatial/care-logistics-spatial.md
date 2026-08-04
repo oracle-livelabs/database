@@ -107,8 +107,8 @@ Start with location and status.
     | --- | --- | --- | --- | ---: |
     | Hialeah Import Compliance Site | Hialeah | qPCR Respiratory Panel | ACTIVE | 8.5 |
     | Concord Southeast Micro Site | Concord | Infusion Center Slot Bundle | ACTIVE | 665.0 |
-| Etna Midwest Specialty Warehouse | Lebanon | Digital Pathology Slide Batch | ACTIVE | 805.1 |
-{: title="Nearest active logistics sites"}
+    | Etna Midwest Specialty Warehouse | Lebanon | Digital Pathology Slide Batch | ACTIVE | 805.1 |
+    {: title="Nearby logistics sites"}
 
 2. Review the distance result.
 
@@ -162,8 +162,8 @@ Start with location and status.
 
     | Logistics Site | Service | Capacity Units | Current Load Pct | Estimated Available Units | Miles |
     | --- | --- | ---: | ---: | ---: | ---: |
-| Hialeah Import Compliance Site | qPCR Respiratory Panel | 250000 | 61.5 | 96250 | 8.5 |
-{: title="Qualified diagnostic logistics site"}
+    | Hialeah Import Compliance Site | qPCR Respiratory Panel | 250000 | 61.5 | 96250 | 8.5 |
+    {: title="Qualified logistics site"}
 
 2. Explain the routing evidence.
 

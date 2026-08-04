@@ -20,7 +20,7 @@ This kind of problem is not unique to healthcare. A traveler follows connected t
 
 </details>
 
-![Healthcare pathway flow from journey to encounter, care team, treatment, and follow-up](images/healthcare-care-pathway-flow.svg " ")
+![Healthcare pathway flow from journey to encounter, care team, treatment, and follow-up](images/healthcare-care-pathway-flow.png " ")
 
 *Figure 1: The graph follows connected care facts without copying them into a separate graph store.*
 
@@ -101,8 +101,8 @@ Start with the patient journey and follow each outgoing relationship.
     | --- | --- | --- | ---: |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_ENCOUNTER | Inpatient Encounter 4412 | 0.99 |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_CONDITION | Sepsis | 0.96 |
-| Patient 1001 - Sepsis Readmission Risk | HAS\_CARE\_GAP | Readmission Risk | 0.94 |
-{: title="Patient journey connections"}
+    | Patient 1001 - Sepsis Readmission Risk | HAS\_CARE\_GAP | Readmission Risk | 0.94 |
+    {: title="Journey connections"}
 
 2. Read the first relationship circle.
 
@@ -148,8 +148,8 @@ Now follow a second hop through the encounter.
     | ATTENDED\_BY | Dr. Hannah Lee - Hospitalist | PROVIDER | 0.95 |
     | SUPPORTED\_BY | Nurse Care Team | CARE\_TEAM | 0.91 |
     | REQUIRES\_FOLLOW\_UP | 48-Hour Follow-Up | CARE\_GAP | 0.88 |
-| TREATED\_WITH | Piperacillin/Tazobactam | MEDICATION | 0.87 |
-{: title="Encounter care connections"}
+    | TREATED\_WITH | Piperacillin/Tazobactam | MEDICATION | 0.87 |
+    {: title="Encounter connections"}
 
 2. Turn the rows into a relationship story.
 
