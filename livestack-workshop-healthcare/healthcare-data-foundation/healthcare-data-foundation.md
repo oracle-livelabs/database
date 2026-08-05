@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Jessica's dashboard warning raises an immediate question: where did the number come from? Before trusting any result, the team must identify the database objects that hold the evidence and confirm that those objects belong to the same working environment.
+Jessica’s dashboard warning raises an immediate question: where did the number come from? Before trusting any result, the team must identify the database objects that hold the evidence. They must also confirm that those objects belong to the same working environment.
 
-A database developer begins by mapping the Seer Health foundation. The developer inventories application views, the JSON duality view, vector columns, the property graph, spatial layers, and the Oracle Machine Learning model. Then the developer counts the records later tasks will use. This resembles checking shelves, an index, and inventory records before investigating a store's missing-item report.
+A database developer begins by mapping the Seer Health foundation. The developer inventories the application views, JSON duality view, vector columns, property graph, spatial layers, and Oracle Machine Learning model. The next query counts the records that later tasks will use. This resembles checking shelves, an index, and inventory records before investigating a store’s missing-item report.
 
 The purpose is not to memorize Oracle catalog names. Instead, you will see how **Oracle AI Database 26ai** keeps different data shapes close to governed facts. That shared foundation lets the team trace each later answer to a known source.
 
@@ -46,12 +46,13 @@ Estimated Time: **10 minutes**
 | What You Will See | One schema supports relational views, JSON, vectors, graphs, spatial data, and OML. |
 | Database Capability | Oracle catalog views and healthcare views expose the current object and data inventory. |
 | Outcome | Teams can trace each later result to the same healthcare foundation. |
+{: title="Data foundation scenario"}
 
 **Persona focus:** You work with a database developer to show Jessica where the evidence lives. Together, you connect each later question to this shared foundation.
 
 ## Task 1: Inventory the healthcare object families
 
-Start with a capability map so Jessica's team can see which database object families are available in `LLUSER` before using them for decisions.
+Start with a capability map. This query asks Oracle Database which object families are available in `LLUSER`.
 
 1. Run the inventory query.
 
@@ -78,7 +79,7 @@ Start with a capability map so Jessica's team can see which database object fami
     </details>
 
     ```sql
-    <copy>SELECT 'Healthcare semantic views' AS area, COUNT(*) AS object_count
+    <copy>SELECT 'Healthcare relational views' AS area, COUNT(*) AS object_count
     FROM user_views
     WHERE view_name IN (
       'CARE_SERVICES_V',
@@ -86,6 +87,7 @@ Start with a capability map so Jessica's team can see which database object fami
       'CARE_LOGISTICS_SITES_V',
       'CARE_SERVICE_REQUESTS_V',
       'CARE_DEMAND_FORECASTS_V',
+      'HEALTHCARE_AGENT_ACTIONS_V',
       'HEALTHCARE_COMMAND_CENTER_V'
     )
     UNION ALL
@@ -111,73 +113,87 @@ Start with a capability map so Jessica's team can see which database object fami
     WHERE model_name = 'CARE_DEMAND_RISK_MODEL';</copy>
     ```
 
-    **Expected output: Healthcare Capability Inventory**
+    **Expected output: Available capabilities**
 
     | Area | Object Count |
     | --- | ---: |
-    | Healthcare semantic views | 6 |
+    | Healthcare relational views | 7 |
     | JSON duality views | 1 |
     | Healthcare property graphs | 1 |
     | MiniLM vector columns | 2 |
     | Spatial metadata layers | 2 |
     | OML mining models | 1 |
+    {: title="Database capabilities"}
 
 2. Read the result as a capability checklist.
 
-    The six views give the application and dashboard stable business shapes. The duality view serves a request as JSON. Two vector columns support meaning-based search. The property graph follows care relationships. The spatial layers describe stored locations. The OML model scores demand risk.
+    The seven relational views give the application, dashboard, and agent-action history stable business shapes. The duality view serves a request as JSON. Two vector columns support meaning-based search. The property graph follows care relationships. The spatial layers describe stored locations. The OML model scores demand risk.
 
     Each row points to a later lab. Together, they show that Seer Health does not need a different data store for every question.
 
-## Task 2: Count the healthcare data groups
+## Task 2: Confirm the healthcare dataset scale
 
-Next, count the healthcare data groups so later dashboard, search, graph, routing, and prediction results have a scale reference:
+The Data Foundation page reports **14,796 tracked records**. That number is not the size of one table. It adds six major layers used by the demo: source services, source signals, source requests, service vectors, signal vectors, and stored semantic matches. The next query rebuilds that total from the loaded `LLUSER` objects.
 
 1. Run the count query.
 
-    Each `SELECT` counts one healthcare data group. `UNION ALL` combines the counts. `ORDER BY` puts the labels in a stable order.
+    The `layer_counts` common table expression counts each layer once. A vector count includes only rows whose embedding was created successfully. The last branch adds the six counts so you can compare the database result with the Data Foundation page.
 
-    These counts give context. Later queries return only a few ranked or filtered rows from this larger set.
+    Care sites, logistics sites, forecasts, and graph records also support the workshop. They are not included in this application KPI, so the total remains comparable with the page rather than mixing two definitions.
 
     ```sql
-    <copy>SELECT 'Care services' AS component, COUNT(*) AS records FROM hc_care_services
-    UNION ALL
-    SELECT 'Quality signals', COUNT(*) FROM hc_quality_signals
-    UNION ALL
-    SELECT 'Care sites', COUNT(*) FROM hc_care_sites
-    UNION ALL
-    SELECT 'Logistics sites', COUNT(*) FROM hc_logistics_sites
-    UNION ALL
-    SELECT 'Service requests', COUNT(*) FROM hc_service_requests
-    UNION ALL
-    SELECT 'Care pathway nodes', COUNT(*) FROM hc_care_nodes
-    UNION ALL
-    SELECT 'Care pathway edges', COUNT(*) FROM hc_care_edges
-    UNION ALL
-    SELECT 'Demand forecasts', COUNT(*) FROM hc_demand_forecasts
-    ORDER BY component;</copy>
+    <copy>WITH layer_counts (display_order, data_layer, records) AS (
+      SELECT 1, 'Care services', COUNT(*)
+      FROM hc_care_services
+      UNION ALL
+      SELECT 2, 'Signal bulletins', COUNT(*)
+      FROM hc_quality_signals
+      UNION ALL
+      SELECT 3, 'Service requests', COUNT(*)
+      FROM hc_service_requests
+      UNION ALL
+      SELECT 4, 'Service vectors', COUNT(*)
+      FROM hc_care_services
+      WHERE service_embedding IS NOT NULL
+      UNION ALL
+      SELECT 5, 'Signal vectors', COUNT(*)
+      FROM hc_quality_signals
+      WHERE signal_embedding IS NOT NULL
+      UNION ALL
+      SELECT 6, 'Semantic matches', COUNT(*)
+      FROM hc_semantic_matches
+    )
+    SELECT data_layer, records
+    FROM (
+      SELECT display_order, data_layer, records
+      FROM layer_counts
+      UNION ALL
+      SELECT 7, 'Total tracked records', SUM(records)
+      FROM layer_counts
+    )
+    ORDER BY display_order;</copy>
     ```
 
-    **Expected output: Healthcare Record Counts**
+    **Expected output: Dataset record layers**
 
-    | Component | Records |
+    | Data Layer | Records |
     | --- | ---: |
-    | Care pathway edges | 9 |
-    | Care pathway nodes | 9 |
-    | Care services | 8 |
-    | Care sites | 5 |
-    | Demand forecasts | 8 |
-    | Logistics sites | 5 |
-    | Quality signals | 8 |
-    | Service requests | 6 |
+    | Care services | 187 |
+    | Signal bulletins | 5,000 |
+    | Service requests | 3,000 |
+    | Service vectors | 187 |
+    | Signal vectors | 5,000 |
+    | Semantic matches | 1,422 |
+    | Total tracked records | 14,796 |
+    {: title="Healthcare record layers"}
 
 2. Use the counts as the baseline for later analysis.
 
-    Services describe what the network offers. Signals show possible quality or capacity issues. Sites and requests show where work happens. Nodes and edges hold connected care facts. Forecasts help planners look ahead.
+    The 187 care services describe what the network offers, and 5,000 signal bulletins describe possible quality, capacity, access, and supply concerns. The 3,000 requests show the work moving through the network. Service and signal vectors are counted as analytical layers because the application can search them by meaning. The 1,422 semantic-match rows record service-to-signal relationships prepared for the experience.
 
-    A later query may return one request, three vector matches, or five forecasts. Those focused results come from the shared foundation you just mapped.
+    A later query may return one request, three vector matches, or five forecasts, but those focused results now come from the full documented baseline rather than a six-row sample dataset.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

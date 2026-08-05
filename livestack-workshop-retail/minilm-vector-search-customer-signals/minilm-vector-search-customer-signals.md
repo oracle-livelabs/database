@@ -52,9 +52,9 @@ Start on the **Customer Trend Signals** page so semantic-search results connect 
 
     This query checks the vector-bearing tables and compares them to the source rows they represent. `PRODUCT_EMBEDDINGS` stores vectors generated from product catalog text. `POST_EMBEDDINGS` stores vectors generated from social post text in `SOCIAL_POSTS`.
 
-    The result has two rows because it is a summary: one row for the product-vector table and one row for the social-post-vector table. The important numbers are the counts inside those rows. A healthy load should show one product embedding for each product and one post embedding for each social post.
+    The result has two rows because it is a summary: one row for the product-vector table and one row for the social-post-vector table. The important numbers are the counts inside those rows. A healthy load should show one embedded source row for each product and one embedded source row for each social post. `Embeddings` remains the raw number of vector rows, so it can reveal duplicate embeddings without making the coverage percentage exceed 100.
 
-    `LEFT JOIN` keeps the source products or posts visible even if an embedding row is missing. `NULLIF(..., 0)` prevents a divide-by-zero error if a source table is empty. Together, those choices make the query useful as a coverage check, not just a count report.
+    `LEFT JOIN` keeps the source products or posts visible even if an embedding row is missing. The coverage calculation counts distinct source keys on both sides of the join, so duplicate embedding rows do not overstate coverage. `NULLIF(..., 0)` prevents a divide-by-zero error if a source table is empty. Together, those choices make the query useful as a coverage check, not just a count report.
 
     `UNION ALL` is useful here because the two branches answer the same question for two different source tables. The first branch checks product coverage. The second branch checks social-post coverage by joining `SOCIAL_POSTS` to `POST_EMBEDDINGS`. `UNION ALL` keeps both checklist rows visible in one result.
 
@@ -63,18 +63,18 @@ Start on the **Customer Trend Signals** page so semantic-search results connect 
     SELECT 'PRODUCT_EMBEDDINGS' AS "Vector Table",
            COUNT(pe.embedding_id) AS "Embeddings",
            COUNT(DISTINCT p.product_id) AS "Source Rows",
-           ROUND(100 * COUNT(pe.embedding_id) / NULLIF(COUNT(DISTINCT p.product_id), 0), 1) AS "Coverage Pct"
+           ROUND(100 * COUNT(DISTINCT pe.product_id) / NULLIF(COUNT(DISTINCT p.product_id), 0), 1) AS "Coverage Pct"
     FROM products p
     LEFT JOIN product_embeddings pe
       ON pe.product_id = p.product_id
     UNION ALL
     SELECT 'POST_EMBEDDINGS',
-           COUNT(pe.embedding_id),
+           COUNT(pse.embedding_id),
            COUNT(DISTINCT sp.post_id),
-           ROUND(100 * COUNT(pe.embedding_id) / NULLIF(COUNT(DISTINCT sp.post_id), 0), 1)
+           ROUND(100 * COUNT(DISTINCT pse.post_id) / NULLIF(COUNT(DISTINCT sp.post_id), 0), 1)
     FROM social_posts sp
-    LEFT JOIN post_embeddings pe
-      ON pe.post_id = sp.post_id
+    LEFT JOIN post_embeddings pse
+      ON pse.post_id = sp.post_id
     ORDER BY "Vector Table";
     </copy>
     ```

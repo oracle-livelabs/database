@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Before Jessica's team can investigate the dashboard warning, they need to enter the correct workspace and use the shared Seer Health facts. This setup resembles arriving at a new workplace: the building, security badge, desk, and tools must match the job before the work can begin.
+Before Jessica’s team can investigate the dashboard warning, they need to enter the correct workspace. They must also use the shared set of Seer Health facts. This setup resembles arriving at a new workplace, where the building, security badge, desk, and tools must match the job.
 
-In this lab, you open the LiveLabs reservation and sign in to the provided **Autonomous Database 26ai** environment. You then prepare **SQL Worksheet** for the investigation. Every later query runs as `LLUSER` and returns results from the prepared Seer Health schema.
+In this lab, you open the LiveLabs reservation and sign in to the provided **Autonomous Database 26ai**. You then prepare SQL Worksheet for the investigation. Every later query runs as `LLUSER` and returns results from the prepared Seer Health schema.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -26,7 +26,7 @@ Estimated Time: **5 minutes**
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so you use the database, application links, and sign-in details prepared for this workshop:
+Start from the LiveLabs reservation so you use the database and sign-in details prepared for this workshop.
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -42,7 +42,7 @@ Start from the LiveLabs reservation so you use the database, application links, 
 
 ## Task 2: Open SQL Worksheet
 
-Next, open **SQL Worksheet** as `LLUSER` so every later healthcare query runs against the prepared Seer Health schema.
+Open SQL Worksheet as `LLUSER`. You will use the same worksheet pattern for every healthcare lab.
 
 1. Confirm that **1 - Login** shows `LLUSER`.
 
@@ -92,11 +92,12 @@ Next, open **SQL Worksheet** as `LLUSER` so every later healthcare query runs ag
            SYSTIMESTAMP AS "Checked At";</copy>
     ```
 
-    **Expected output: Connected SQL Worksheet Session**
+    **Expected output: SQL connection**
 
     | User | Schema | Checked At |
     | --- | --- | --- |
     | LLUSER | LLUSER | Current SQL Worksheet timestamp |
+    {: title="SQL Worksheet connection"}
 
 8. Confirm that both **User** and **Schema** show `LLUSER`.
 
@@ -104,6 +105,5 @@ Next, open **SQL Worksheet** as `LLUSER` so every later healthcare query runs ag
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

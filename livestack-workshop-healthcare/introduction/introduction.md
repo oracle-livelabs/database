@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Imagine arriving on Monday morning and seeing a red warning on a shared operations dashboard. The number looks urgent, but it does not explain what changed, which requests are affected, where help is available, or what may happen next. This problem feels familiar in a hospital, delivery company, school, or busy store: people need a quick answer, but they also need enough evidence to trust it.
+Imagine arriving at work on Monday morning and seeing a red warning on a shared dashboard. The number looks urgent, but it does not explain what changed or which requests the warning affects. It also leaves two important questions unanswered: where is help available, and what may happen next? This problem feels familiar in a hospital, delivery company, school, or busy store. People need a quick answer, along with enough evidence to trust it.
 
-At **Seer Health Network**, active demo user Jessica Chen faces that problem when the command center reports elevated service signals. Jessica asks, "What is behind this number?" and several coworkers help her find the answer. An application developer opens the request, a quality analyst searches related notes, a care coordinator follows connected events, a logistics planner checks nearby capacity, and a capacity planner studies future demand. Each person views the problem from a different angle, but they all need the same evidence path.
+At **Seer Health Network**, active demo user Jessica Chen faces that problem when the command center reports elevated service signals. Jessica asks, “What is behind this number?” and several coworkers help her find the answer. An application developer opens the request, while a quality analyst searches related notes. A care coordinator follows connected events, a logistics planner checks nearby capacity, and a capacity planner studies future demand. Each person views the problem from a different angle, but everyone must work from the same facts.
 
-During this workshop, you follow Jessica's investigation through **Oracle AI Database 26ai**. Relational rows hold dependable records, JSON presents a complete request to an application, vectors find text with similar meaning, a property graph reveals relationships, spatial data measures distance, and an in-database machine learning model scores future operating risk. Together, these capabilities form one connected evidence path rather than a collection of unrelated demonstrations.
+During this workshop, you follow Jessica’s investigation through **Oracle AI Database 26ai**. Relational rows hold dependable records, while JSON presents a complete request to an application. Vectors find text with similar meaning, and a property graph reveals relationships. Spatial data measures distance, while an in-database machine learning model scores future operating risk. Together, these capabilities form one connected evidence path rather than a collection of unrelated demonstrations.
 
 ![Healthcare workshop journey from connected data to trusted care action](images/healthcare-workshop-intro-journey.png " ")
 
@@ -60,11 +60,11 @@ Estimated Workshop Time: **95 minutes**
 | What You Will See | One Oracle AI Database 26ai foundation supports the healthcare decision flow from awareness to planning. |
 | Database Capability | Relational SQL, JSON Relational Duality, vectors, property graphs, Spatial, and Oracle Machine Learning work together. |
 | Outcome | Healthcare teams can observe, investigate, plan, and review decisions with database-backed evidence. |
+{: title="Workshop decision path"}
 
 **Persona focus:** You join Jessica and her coworkers as their database guide. You connect each operating question to facts that another person can review and reproduce.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

@@ -99,8 +99,8 @@ Next, rank product performance so the dashboard can point to the products and ca
     The important clauses are:
 
     1. `JOIN` connects each order line to its product.
-    2. `GROUP BY` rolls many order lines into one row per product.
-    3. `ORDER BY SUM(oi.line_total) DESC` puts the highest-revenue products first. The query orders by the numeric total, not the formatted display text.
+    2. `GROUP BY` rolls many order lines into one row per product ID. Including the ID keeps products separate even if they share a name, category, and unit price.
+    3. `ORDER BY SUM(oi.line_total) DESC, p.product_name, p.product_id` puts the highest-revenue products first and gives tied revenue a stable order. The query orders by the numeric total, not the formatted display text.
 
     ```sql
     <copy>
@@ -112,10 +112,13 @@ Next, rank product performance so the dashboard can point to the products and ca
     FROM products p
     JOIN order_items oi
       ON oi.product_id = p.product_id
-    GROUP BY p.product_name,
+    GROUP BY p.product_id,
+             p.product_name,
              NVL(p.category, 'Uncategorized'),
              p.unit_price
-    ORDER BY SUM(oi.line_total) DESC
+    ORDER BY SUM(oi.line_total) DESC,
+             p.product_name,
+             p.product_id
     FETCH FIRST 8 ROWS ONLY;
     </copy>
     ```
