@@ -3,34 +3,34 @@
   <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#2f2b29">Follow a Healthcare Story with Property Graph</text>
   <text x="60" y="108" font-family="Arial, sans-serif" font-size="19" fill="#4b4744">The graph definition stays over relational rows. SQL/PGQ follows the relationships and returns a table.</text>
   <g font-family="Arial, sans-serif">
-    <rect x="70" y="220" width="245" height="170" rx="18" fill="#fff1ed" stroke="#c74634" stroke-width="3"/>
-    <text x="192" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#c74634">STARTING VERTEX</text>
-    <text x="192" y="315" text-anchor="middle" font-size="24" font-weight="700" fill="#2f2b29">Patient Journey</text>
-    <text x="192" y="350" text-anchor="middle" font-size="16" fill="#4b4744">Patient 1001</text>
+    <rect x="40" y="220" width="245" height="170" rx="18" fill="#fff1ed" stroke="#c74634" stroke-width="3"/>
+    <text x="162" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#c74634">STARTING VERTEX</text>
+    <text x="162" y="315" text-anchor="middle" font-size="24" font-weight="700" fill="#2f2b29">Patient Journey</text>
+    <text x="162" y="350" text-anchor="middle" font-size="16" fill="#4b4744">Patient 1001</text>
 
-    <path d="M315 305H425" stroke="#8d8883" stroke-width="5"/>
-    <path d="M415 292l22 13-22 13z" fill="#8d8883"/>
-    <text x="372" y="282" text-anchor="middle" font-size="14" font-weight="700" fill="#4b4744">HAS_ENCOUNTER</text>
+    <path d="M285 305H405" stroke="#8d8883" stroke-width="5"/>
+    <path d="M395 292l22 13-22 13z" fill="#8d8883"/>
+    <text x="345" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#4b4744">HAS_ENCOUNTER</text>
 
-    <rect x="438" y="220" width="245" height="170" rx="18" fill="#edf7f2" stroke="#3f7d68" stroke-width="3"/>
-    <text x="560" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#3f7d68">SECOND VERTEX</text>
-    <text x="560" y="315" text-anchor="middle" font-size="24" font-weight="700" fill="#2f2b29">Encounter 4412</text>
-    <text x="560" y="350" text-anchor="middle" font-size="16" fill="#4b4744">One more hop reveals context</text>
+    <rect x="420" y="220" width="270" height="170" rx="18" fill="#edf7f2" stroke="#3f7d68" stroke-width="3"/>
+    <text x="555" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#3f7d68">SECOND VERTEX</text>
+    <text x="555" y="315" text-anchor="middle" font-size="24" font-weight="700" fill="#2f2b29">Encounter 4412</text>
+    <text x="555" y="350" text-anchor="middle" font-size="16" fill="#4b4744">One more hop reveals context</text>
 
-    <path d="M683 305H793" stroke="#8d8883" stroke-width="5"/>
-    <path d="M783 292l22 13-22 13z" fill="#8d8883"/>
-    <text x="738" y="282" text-anchor="middle" font-size="14" font-weight="700" fill="#4b4744">FOLLOW LINKS</text>
+    <path d="M690 305H790" stroke="#8d8883" stroke-width="5"/>
+    <path d="M780 292l22 13-22 13z" fill="#8d8883"/>
+    <text x="740" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#4b4744">FOLLOW LINKS</text>
 
-    <rect x="806" y="165" width="400" height="280" rx="18" fill="#edf6f9" stroke="#287c99" stroke-width="3"/>
-    <text x="1006" y="210" text-anchor="middle" font-size="15" font-weight="700" fill="#287c99">CONNECTED CARE FACTS</text>
-    <text x="845" y="258" font-size="19" font-weight="700" fill="#2f2b29">ATTENDED_BY</text>
-    <text x="1055" y="258" font-size="18" fill="#4b4744">Provider</text>
-    <text x="845" y="307" font-size="19" font-weight="700" fill="#2f2b29">SUPPORTED_BY</text>
-    <text x="1055" y="307" font-size="18" fill="#4b4744">Care team</text>
-    <text x="845" y="356" font-size="19" font-weight="700" fill="#2f2b29">TREATED_WITH</text>
-    <text x="1055" y="356" font-size="18" fill="#4b4744">Medication</text>
-    <text x="845" y="405" font-size="19" font-weight="700" fill="#2f2b29">FOLLOW_UP</text>
-    <text x="1055" y="405" font-size="18" fill="#4b4744">Care gap</text>
+    <rect x="800" y="165" width="430" height="280" rx="18" fill="#edf6f9" stroke="#287c99" stroke-width="3"/>
+    <text x="1015" y="210" text-anchor="middle" font-size="15" font-weight="700" fill="#287c99">CONNECTED CARE FACTS</text>
+    <text x="835" y="258" font-size="17" font-weight="700" fill="#2f2b29">ATTENDED_BY</text>
+    <text x="1080" y="258" font-size="18" fill="#4b4744">Provider</text>
+    <text x="835" y="307" font-size="17" font-weight="700" fill="#2f2b29">SUPPORTED_BY</text>
+    <text x="1080" y="307" font-size="18" fill="#4b4744">Care team</text>
+    <text x="835" y="356" font-size="17" font-weight="700" fill="#2f2b29">TREATED_WITH</text>
+    <text x="1080" y="356" font-size="18" fill="#4b4744">Medication</text>
+    <text x="835" y="405" font-size="17" font-weight="700" fill="#2f2b29">REQUIRES_FOLLOW_UP</text>
+    <text x="1080" y="405" font-size="18" fill="#4b4744">Care gap</text>
 
     <rect x="180" y="520" width="920" height="110" rx="18" fill="#fffdfb" stroke="#d8d2cc" stroke-width="2"/>
     <text x="640" y="565" text-anchor="middle" font-size="23" font-weight="700" fill="#c74634">Graph pattern in. Reviewable SQL rows out.</text>
