@@ -23,37 +23,37 @@
       "filename": "../../operations-command-center/operations-command-center.md"
     },
     {
-      "title": "Lab 3: Care Service Requests",
+      "title": "Lab 3: Care Service Requests with JSON Relational Duality",
       "description": "Use relational records and JSON documents from one source.",
       "filename": "../../care-service-requests/care-service-requests.md"
     },
     {
-      "title": "Lab 4: Quality and Capacity Vector Search",
+      "title": "Lab 4: Quality and Capacity Search with AI Vector Search",
       "description": "Search care services and signals by semantic meaning.",
       "filename": "../../quality-capacity-vector-search/quality-capacity-vector-search.md"
     },
     {
-      "title": "Lab 5: Care Pathway Property Graph",
+      "title": "Lab 5: Care Pathway with Property Graph",
       "description": "Traverse patient-journey relationships with SQL/PGQ.",
       "filename": "../../care-pathway-property-graph/care-pathway-property-graph.md"
     },
     {
-      "title": "Lab 6: Care Logistics with Spatial",
+      "title": "Lab 6: Care Logistics with Oracle Spatial",
       "description": "Route care services using proximity and capacity.",
       "filename": "../../care-logistics-spatial/care-logistics-spatial.md"
     },
     {
-      "title": "Lab 7: Risk and Capacity Analytics",
+      "title": "Lab 7: Risk and Capacity Analytics with Oracle Machine Learning",
       "description": "Review forecasts and score demand risk with OML.",
       "filename": "../../risk-capacity-analytics/risk-capacity-analytics.md"
     },
     {
-      "title": "Lab 8: Conclusion",
+      "title": "Conclusion",
       "description": "Review the converged healthcare architecture.",
       "filename": "../../conclusion/conclusion.md"
     },
     {
-      "title": "Lab 9: Final Quiz",
+      "title": "Final Quiz",
       "description": "Check your understanding and earn the healthcare badge.",
       "filename": "../../final-quiz/final-quiz.md"
     },
