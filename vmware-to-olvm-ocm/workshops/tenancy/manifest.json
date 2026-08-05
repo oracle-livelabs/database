@@ -1,0 +1,76 @@
+{
+  "workshoptitle": "VMware to OLVM Migration with Oracle Cloud Migrations",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Review the workshop scope, prerequisites, and end-to-end VMware to OLVM migration flow.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Sign in to OCI and confirm access to the tenancy and compartment used for this workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Create the Migration Compartment",
+      "description": "Create a dedicated OCI compartment for VMware to OLVM migration resources.",
+      "filename": "../../create-migration-compartment/create-migration-compartment.md"
+    },
+    {
+      "title": "Lab 2: Prepare Source VMs for OLVM Migration",
+      "description": "Install or validate VirtIO drivers on Windows and Linux source VMs before replication.",
+      "filename": "../../prepare-source-vms/prepare-source-vms.md"
+    },
+    {
+      "title": "Lab 3: Deploy the OCM Prerequisites Stack",
+      "description": "Configure, plan, apply, and verify the Oracle Cloud Migrations prerequisite stack.",
+      "filename": "../../deploy-ocm-prerequisites/deploy-ocm-prerequisites.md"
+    },
+    {
+      "title": "Lab 4: Upload and Register the VDDK",
+      "description": "Upload the VDDK package to Object Storage and register it as an agent dependency.",
+      "filename": "../../upload-register-vddk/upload-register-vddk.md"
+    },
+    {
+      "title": "Lab 5: Set Up the VMware Source Environment",
+      "description": "Store vCenter credentials, create the source environment, deploy the remote agent appliance, and register the agent.",
+      "filename": "../../setup-vmware-source/setup-vmware-source.md"
+    },
+    {
+      "title": "Lab 6: Run VMware Asset Discovery",
+      "description": "Create the VMware asset source and discover source VMs in Oracle Cloud Migrations inventory.",
+      "filename": "../../discover-vmware-assets/discover-vmware-assets.md"
+    },
+    {
+      "title": "Lab 7: Set Up the OLVM Target Environment",
+      "description": "Store OLVM credentials and certificate material, create the OLVM asset source, and discover target assets.",
+      "filename": "../../setup-olvm-target/setup-olvm-target.md"
+    },
+    {
+      "title": "Lab 8: Create the OLVM Migration Project",
+      "description": "Create an OLVM migration project, add source assets, configure replication, and select target values.",
+      "filename": "../../create-olvm-migration-project/create-olvm-migration-project.md"
+    },
+    {
+      "title": "Lab 9: Replicate and Validate",
+      "description": "Replicate the selected VM, run the migration plan, validate the OLVM VM, and perform cutover when ready.",
+      "filename": "../../replicate-and-validate/replicate-and-validate.md"
+    },
+    {
+      "title": "Lab 10: Mark Complete and Clean Up",
+      "description": "Mark the migration project complete and clean up temporary migration resources.",
+      "filename": "../../mark-complete-cleanup/mark-complete-cleanup.md"
+    },
+    {
+      "title": "Lab 11: Advanced Topics and Troubleshooting",
+      "description": "Review discovery schedules, replication schedules, incremental replications, Windows VirtIO readiness, and common migration troubleshooting steps.",
+      "filename": "../../advanced-topics-troubleshooting/advanced-topics-troubleshooting.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Troubleshooting resources and directions for receiving LiveLabs help.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
