@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will verify that your OCI environment is ready for the OLVM workshop on `VM.Standard.E5.Flex`.
+In this lab, you will verify that your OCI environment is ready for the Oracle Linux Virtualization Manager workshop on `VM.Standard.E5.Flex`.
 
 This is a beginner workshop. You are not expected to design or troubleshoot OCI networking in this lab. The instructor or workshop owner should prepare the OCI resources before the workshop starts. Your job is to confirm that the required resources exist, record the values you need later, and test SSH access.
 
@@ -16,7 +16,7 @@ In this lab, you will:
 
 - Review the required E5 OCI layout
 - Verify the VCN, subnets, VLAN, gateways, route tables, and security rules
-- Verify the OLVM manager and KVM host instances
+- Verify the Oracle Linux Virtualization Manager manager and Oracle Linux KVM host instances
 - Verify the secondary VNICs required by E5 networking
 - Verify shared block volume attachments
 - Test SSH access used by later labs
@@ -197,7 +197,7 @@ This lab assumes you have:
 
 ## Task 4: Verify Linux Sees the Private VNICs
 
-The private-subnet VNICs must be visible inside Oracle Linux before OLVM can use them.
+The private-subnet VNICs must be visible inside Oracle Linux before Oracle Linux Virtualization Manager can use them.
 
 1. From Windows PowerShell, connect to `olvm`:
 
@@ -213,7 +213,7 @@ The private-subnet VNICs must be visible inside Oracle Linux before OLVM can use
 
 3. Confirm that `olvm` has an IP address in `10.0.1.0/24`.
 
-    The IP address may appear on a physical interface such as `enp1s0`, or on an OLVM-managed bridge such as `ovirtmgmt`. Either is acceptable as long as one interface shows an address in `10.0.1.0/24`.
+    The IP address may appear on a physical interface such as `enp1s0`, or on an Oracle Linux Virtualization Manager-managed bridge such as `ovirtmgmt`. Either is acceptable as long as one interface shows an address in `10.0.1.0/24`.
 
 4. Repeat this check on `olkvm01`.
 
@@ -230,7 +230,7 @@ The private-subnet VNICs must be visible inside Oracle Linux before OLVM can use
 
 8. Do not manually configure the VLAN VNIC.
 
-    OLVM uses the VLAN VNIC later when you create the virtual machine logical network.
+    Oracle Linux Virtualization Manager uses the VLAN VNIC later when you create the virtual machine logical network.
 
 ## Task 5: Verify Shared Block Volumes
 
@@ -238,7 +238,7 @@ The private-subnet VNICs must be visible inside Oracle Linux before OLVM can use
 
 2. Open `amd-storage-domain-01`.
 
-3. Confirm it is attached to both KVM hosts.
+3. Confirm it is attached to both Oracle Linux KVM hosts.
 
     | Host | Expected Access |
     |---|---|
@@ -247,7 +247,7 @@ The private-subnet VNICs must be visible inside Oracle Linux before OLVM can use
 
 4. Open `amd-storage-domain-02`.
 
-5. Confirm it is attached to both KVM hosts.
+5. Confirm it is attached to both Oracle Linux KVM hosts.
 
     | Host | Expected Access |
     |---|---|
@@ -256,9 +256,9 @@ The private-subnet VNICs must be visible inside Oracle Linux before OLVM can use
 
 6. Do not format or mount these volumes from Linux.
 
-    OLVM configures them later as shared storage. Formatting or mounting them manually can damage the lab environment.
+    Oracle Linux Virtualization Manager configures them later as shared storage. Formatting or mounting them manually can damage the lab environment.
 
-7. If a volume is missing or not attached to both KVM hosts, stop and ask the instructor for help.
+7. If a volume is missing or not attached to both Oracle Linux KVM hosts, stop and ask the instructor for help.
 
 ## Task 6: Verify Workshop SSH Access
 
@@ -309,7 +309,7 @@ Later labs use the `oracle` user and short hostnames such as `olkvm01`.
 
 2. Keep these values available for later labs.
 
-## Setup OLVM Infrastructure Checkpoint
+## Setup Oracle Linux Virtualization Manager Infrastructure Checkpoint
 
 At this point, you should have verified:
 
@@ -320,9 +320,9 @@ At this point, you should have verified:
 - Three E5 instances are running: `olvm`, `olkvm01`, and `olkvm02`
 - Required secondary VNICs are attached
 - Private secondary VNICs are visible inside Oracle Linux
-- Two shared `1 TB` block volumes are attached to both KVM hosts
+- Two shared `1 TB` block volumes are attached to both Oracle Linux KVM hosts
 - SSH from your workstation to `olvm` as `oracle` works
-- SSH from `olvm` to both KVM hosts works
+- SSH from `olvm` to both Oracle Linux KVM hosts works
 - IP addresses are recorded for later labs
 
 You are ready for Lab 2 only after all checkpoint items above are complete.

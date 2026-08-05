@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Live migration moves a running virtual machine from one KVM host to another without planned downtime. In this beginner lab, you will migrate the standalone `ol9-vm1` test VM created in Lab 4. The Employee Directory application VMs stay together on the same host from Lab 5.
+Live migration moves a running virtual machine from one Oracle Linux KVM host to another without any application downtime. In this beginner lab, you will migrate the standalone `ol9-vm1` test VM created in Lab 4. The Employee Directory application VMs stay together on the same host from Lab 5.
 
 Estimated Time: 10-15 minutes
 
@@ -16,9 +16,9 @@ This walkthrough video is silent and does not include audio narration.
 
 In this lab, you will:
 
-- Verify both KVM hosts are ready for migration
+- Verify both Oracle Linux KVM hosts are ready for migration
 - Confirm `ol9-vm1` is running before migration
-- Migrate `ol9-vm1` from one KVM host to the other
+- Migrate `ol9-vm1` from one Oracle Linux KVM host to the other
 - Verify the VM remains reachable after migration
 
 ### Prerequisites
@@ -26,15 +26,15 @@ In this lab, you will:
 This lab assumes you have:
 
 - Completed the Lab 5 checkpoint, including a working Employee Directory application
-- Both KVM hosts showing status **Up**
+- Both Oracle Linux KVM hosts showing status **Up**
 - A working shared storage domain
 - `ol9-vm1` imported from the Oracle Linux template in Lab 4, connected to `l2-vm-network`, and reachable at `10.0.10.105`
 - Access to the Administration Portal from your local browser
 - The cluster private key downloaded in Lab 1 if you need to open an `olvm` terminal
 
-> **Important:** Do not migrate only one Employee Directory application VM in the beginner path. Lab 5 keeps the application database and web VMs on the same KVM host for reliable application connectivity.
+> **Important:** Do not migrate only one Employee Directory application VM in the beginner path. Lab 5 keeps the application database and web VMs on the same Oracle Linux KVM host for reliable application connectivity.
 
-## Task 1: Refresh the OLVM Engine
+## Task 1: Refresh the Oracle Linux Virtualization Manager Engine
 
 1. From your local terminal, connect to the `olvm` manager if you do not already have an `olvm` terminal open.
 
@@ -50,7 +50,7 @@ This lab assumes you have:
     <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@&lt;olvm-public-ip&gt;</copy>
     ```
 
-2. From the `olvm` terminal, restart the OLVM engine to refresh its internal state before migration:
+2. From the `olvm` terminal, restart the Oracle Linux Virtualization Manager engine to refresh its internal state before migration:
 
     ```bash
     <copy>sudo systemctl restart ovirt-engine</copy>
@@ -69,7 +69,7 @@ This lab assumes you have:
     - `olkvm01`
     - `olkvm02`
 
-    ![Show OLVM Hosts pane showing both KVM hosts in Up status](./images/olvm-hosts-pane.png "Show OLVM Hosts pane showing both KVM hosts in Up status")
+    ![Show Oracle Linux Virtualization Manager Hosts pane showing both Oracle Linux KVM hosts in Up status](./images/olvm-hosts-pane.png "Show Oracle Linux Virtualization Manager Hosts pane showing both Oracle Linux KVM hosts in Up status")
 
 3. Go to **Compute -> Virtual Machines**.
 
@@ -116,7 +116,7 @@ This lab assumes you have:
 
     ![Migrate VM Complete](./images/migrate-vm-complete.png "Show Migrate VM Complete")
 
-2. From the `olvm` terminal, test connectivity through the destination KVM host.
+2. From the `olvm` terminal, test connectivity through the destination Oracle Linux KVM host.
 
     If `ol9-vm1` migrated to `olkvm01`, run:
 
@@ -130,7 +130,7 @@ This lab assumes you have:
     <copy>ssh olkvm02 "ping -c 3 10.0.10.105"</copy>
     ```
 
-3. Connect to the migrated VM through the destination KVM host.
+3. Connect to the migrated VM through the destination Oracle Linux KVM host.
 
     If `ol9-vm1` migrated to `olkvm01`, run:
 
@@ -163,14 +163,14 @@ This lab assumes you have:
 
 At this point, you should have:
 
-- `ol9-vm1` successfully migrated from one KVM host to the other
+- `ol9-vm1` successfully migrated from one Oracle Linux KVM host to the other
 - `ol9-vm1` still showing status **Up**
-- The VM reachable through the destination KVM host
+- The VM reachable through the destination Oracle Linux KVM host
 - The Employee Directory application left unchanged from Lab 5
 
 ## Conclusion
 
-Congratulations. You completed the beginner OLVM on OCI E5 workshop. You built the OCI infrastructure with Ansible, deployed OLVM, configured a two-host KVM cluster, created VM networking and shared storage, deployed the Employee Directory application, and performed live migration.
+Congratulations. You completed the beginner Oracle Linux Virtualization Manager on OCI E5 workshop. You built the OCI infrastructure with Ansible, deployed Oracle Linux Virtualization Manager, configured a two-host Oracle Linux KVM cluster, created VM networking and shared storage, deployed the Employee Directory application, and performed live migration.
 
 ## Learn More
 
