@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will import two prebuilt OVAs: one for a MySQL database VM and one for a Java web application VM. You will run both application VMs on the same KVM host so the beginner E5 lab has a reliable application path.
+In this lab, you will import two prebuilt OVAs: one for a MySQL database VM and one for a Java web application VM. You will run both application VMs on the same Oracle Linux KVM host so the beginner E5 lab has a reliable application path.
 
 Estimated Time: 15-30 minutes, including OVA download, import, and application startup time.
 
@@ -30,19 +30,19 @@ This lab assumes you have:
 - `olkvm01` has `10.0.10.254/24` on `l2-vm-network`
 - `olkvm02` has `10.0.10.253/24` on `l2-vm-network`
 - An active shared storage domain
-- A successful `ol9-vm1` test from Lab 4, including guest-to-KVM-host connectivity
+- A successful `ol9-vm1` test from Lab 4, including guest-to-Oracle Linux KVM-host connectivity
 - The `olvm-cluster-id_rsa` private key downloaded in Lab 1
 - Access to the Administration Portal from your local browser
 
 > **Important:** Complete the database VM import and validation before you start the web application VM import. Do not run both imports in parallel during the workshop.
 >
-> **Important:** In this E5 workshop topology, guest VMs on `l2-vm-network` are reached through the KVM host where the VM is running. Check the VM **Host** column before using SSH.
+> **Important:** In this E5 workshop topology, guest VMs on `l2-vm-network` are reached through the Oracle Linux KVM host where the VM is running. Check the VM **Host** column before using SSH.
 >
-> **Important:** For this beginner E5 lab, run both application VMs on the same KVM host. Cross-host guest VM traffic on `l2-vm-network` is not used as a required success path in this lab.
+> **Important:** For this beginner E5 lab, run both application VMs on the same Oracle Linux KVM host. Cross-host guest VM traffic on `l2-vm-network` is not used as a required success path in this lab.
 
 ## Task 1: Download the `ol9-mysql` OVA
 
-1. From your local terminal, connect to the OLVM manager.
+1. From your local terminal, connect to the Oracle Linux Virtualization Manager manager.
 
     In Windows PowerShell, run:
 
@@ -130,7 +130,7 @@ This lab assumes you have:
     <copy>ssh -tt olkvm02 "ssh opc@10.0.10.100"</copy>
     ```
 
-    If SSH times out, verify the KVM host has the `l2-vm-network` static address configured in Lab 4:
+    If SSH times out, verify the Oracle Linux KVM host has the `l2-vm-network` static address configured in Lab 4:
 
     ```bash
     <copy>ssh olkvm01 "ip -4 -br addr show l2-vm-network"
@@ -257,7 +257,7 @@ This lab assumes you have:
 
 2. From a **new** local terminal, create an SSH tunnel to the webapp VM.
 
-    This tunnel is needed because your browser cannot reach the VM VLAN directly. The tunnel connects your laptop to the OLVM manager first, then to the KVM host, and finally forwards local port `8080` to the web application VM.
+    This tunnel is needed because your browser cannot reach the VM VLAN directly. The tunnel connects your laptop to the Oracle Linux Virtualization Manager manager first, then to the Oracle Linux KVM host, and finally forwards local port `8080` to the web application VM.
 
     Run the command for your local operating system.
 
@@ -318,7 +318,7 @@ This lab assumes you have:
 At this point, you should have:
 
 - `ol9-mysql` running and returning 8 employee records
-- `ol9-webapp` running on the same KVM host as `ol9-mysql`
+- `ol9-webapp` running on the same Oracle Linux KVM host as `ol9-mysql`
 - Network connectivity between `10.0.10.101` and `10.0.10.100`
 - The Employee Directory application visible in the browser
 

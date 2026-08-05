@@ -23,8 +23,8 @@
       "filename": "../../olvm-engine/olvm-engine.md"
     },
     {
-      "title": "Lab 3: Configure KVM Cluster",
-      "description": "Add both KVM hosts to the default cluster and wait for them to reach Up status.",
+      "title": "Lab 3: Configure Oracle Linux KVM Cluster",
+      "description": "Add both Oracle Linux KVM hosts to the default cluster and wait for them to reach Up status.",
       "filename": "../../kvm-cluster/kvm-cluster.md"
     },
     {
