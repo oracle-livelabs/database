@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The quality analyst's vector search found records with related language, but Jessica's next question concerns connections. How do people, events, conditions, treatments, and follow-up steps come together around one journey? Similar words can point toward useful records, while relationships explain why those records belong together.
+The quality analyst’s vector search found records with related language, but Jessica’s next question concerns connections. How do people, events, conditions, treatments, and follow-up steps come together around one journey? Similar words can point toward useful records, while relationships explain why those records belong together.
 
 This kind of problem is not unique to healthcare. A traveler follows connected train stations, while an investigator links people to events. A customer-service team traces an order through payment, warehouse, carrier, and delivery. In every case, the individual records matter, but the links reveal the path.
 
-**Oracle Property Graph** lets a care coordinator query those links with SQL Property Graph Queries, also called SQL/PGQ. The graph definition uses relational tables as its source, so the coordinator can start with one journey, follow named relationships, and return connected facts without copying pathway data.
+**Oracle Property Graph** lets a care coordinator query those links with SQL Property Graph Queries, also called **SQL/PGQ**. The graph definition uses relational tables as its source. The coordinator can start with one journey, follow named relationships, and return connected facts without copying the pathway data.
 
 <details>
 <summary><strong>Key terms: vertex, edge, property graph, and SQL/PGQ</strong></summary>
@@ -20,7 +20,7 @@ This kind of problem is not unique to healthcare. A traveler follows connected t
 
 </details>
 
-![Healthcare pathway flow from journey to encounter, care team, treatment, and follow-up](images/healthcare-care-pathway-flow.svg " ")
+![Healthcare pathway flow from journey to encounter, care team, treatment, and follow-up](images/healthcare-care-pathway-flow.png " ")
 
 *Figure 1: The graph follows connected care facts without copying them into a separate graph store.*
 
@@ -47,12 +47,13 @@ Estimated Time: **12 minutes**
 | What You Will See | One-hop and two-hop graph queries expose the people, events, and follow-up around the journey. |
 | Database Capability | `CARE_PATHWAY_GRAPH` and `GRAPH_TABLE` support SQL/PGQ pattern matching. |
 | Outcome | The reviewer can explain which care facts connect and why each link matters. |
+{: title="Care pathway scenario"}
 
 **Persona focus:** You help a care coordinator follow the relationship path. You also keep the result separate from any clinical recommendation.
 
 ## Task 1: Follow the first circle of care facts
 
-Start with the patient journey and follow each outgoing relationship so the first circle of care facts is visible as reviewable rows:
+Start with the patient journey and follow each outgoing relationship.
 
 1. Run the one-hop graph query.
 
@@ -94,13 +95,14 @@ Start with the patient journey and follow each outgoing relationship so the firs
     ORDER BY evidence_score DESC;</copy>
     ```
 
-    **Expected output: Patient Journey Connections**
+    **Expected output: Journey links**
 
     | Journey | Relationship | Connected Care Fact | Evidence Score |
     | --- | --- | --- | ---: |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_ENCOUNTER | Inpatient Encounter 4412 | 0.99 |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_CONDITION | Sepsis | 0.96 |
     | Patient 1001 - Sepsis Readmission Risk | HAS\_CARE\_GAP | Readmission Risk | 0.94 |
+    {: title="Journey connections"}
 
 2. Read the first relationship circle.
 
@@ -110,7 +112,7 @@ Start with the patient journey and follow each outgoing relationship so the firs
 
 ## Task 2: Look around the encounter
 
-Next, follow a second hop through the encounter so the team can see care-team and follow-up facts connected to the same journey:
+Now follow a second hop through the encounter.
 
 1. Run the two-hop query.
 
@@ -139,7 +141,7 @@ Next, follow a second hop through the encounter so the team can see care-team an
     ORDER BY evidence_score DESC;</copy>
     ```
 
-    **Expected output: Encounter Care Team and Follow-Up**
+    **Expected output: Encounter links**
 
     | Relationship | Connected Care Fact | Type | Evidence Score |
     | --- | --- | --- | ---: |
@@ -147,6 +149,7 @@ Next, follow a second hop through the encounter so the team can see care-team an
     | SUPPORTED\_BY | Nurse Care Team | CARE\_TEAM | 0.91 |
     | REQUIRES\_FOLLOW\_UP | 48-Hour Follow-Up | CARE\_GAP | 0.88 |
     | TREATED\_WITH | Piperacillin/Tazobactam | MEDICATION | 0.87 |
+    {: title="Encounter connections"}
 
 2. Turn the rows into a relationship story.
 
@@ -160,6 +163,5 @@ You used SQL/PGQ to move from one journey to connected healthcare evidence. For 
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026
