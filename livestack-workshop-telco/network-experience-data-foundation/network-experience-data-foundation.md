@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Seer Comms needs one trustworthy map of the evidence behind a network-experience escalation. A high-impact congestion event can affect thousands of subscribers, place recurring revenue at risk, and force operations, service-order, and field teams to coordinate before the next peak window. You are the database developer who gives those teams a common starting point. In this lab, you inspect the Telco objects used later, so every later result has a clear home, owner, and meaning.
+The `TEL-5G-2026-501` investigation starts with a simple question: where does the evidence live? This critical Hudson Yards congestion case affects 31,200 subscribers and puts $2.14M at risk. You are the database developer who gives operations, service-order, and field teams one governed starting point. In this lab, you confirm the tables and specialized objects that support every later step of the investigation.
 
 ![Before-and-after Telco data architecture](images/telco-converged-foundation.svg " ")
 
@@ -57,12 +57,32 @@ Estimated Time: **10 minutes**
     <copy>
     SELECT 'Core Telco tables' AS "Area", COUNT(*) AS "Count"
     FROM user_tables
-    WHERE table_name IN ('SERVICE_LINES','TELECOM_SERVICES','NETWORK_SITES','NETWORK_CAPACITY','SUBSCRIBERS','SUBSCRIBER_SIGNALS','SERVICE_ORDERS')
-    UNION ALL SELECT 'JSON duality views', COUNT(*) FROM user_json_duality_views WHERE view_name = 'ORDERS_DV'
-    UNION ALL SELECT 'Property graphs', COUNT(*) FROM user_property_graphs WHERE graph_name = 'TELECOM_EXPERIENCE_NETWORK'
-    UNION ALL SELECT 'Vector columns', COUNT(*) FROM user_tab_cols WHERE data_type = 'VECTOR' AND table_name IN ('SERVICE_EMBEDDINGS','SIGNAL_EMBEDDINGS')
-    UNION ALL SELECT 'Spatial layers', COUNT(*) FROM user_sdo_geom_metadata WHERE table_name IN ('NETWORK_SITES','SUBSCRIBERS')
-    UNION ALL SELECT 'OML models', COUNT(*) FROM user_mining_models WHERE model_name = 'NETWORK_CAPACITY_SURGE_MODEL';
+    WHERE table_name IN (
+      'SERVICE_LINES', 'TELECOM_SERVICES', 'NETWORK_SITES',
+      'NETWORK_CAPACITY', 'SUBSCRIBERS', 'SUBSCRIBER_SIGNALS',
+      'SERVICE_ORDERS'
+    )
+    UNION ALL
+    SELECT 'JSON duality views', COUNT(*)
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV'
+    UNION ALL
+    SELECT 'Property graphs', COUNT(*)
+    FROM user_property_graphs
+    WHERE graph_name = 'TELECOM_EXPERIENCE_NETWORK'
+    UNION ALL
+    SELECT 'Vector columns', COUNT(*)
+    FROM user_tab_cols
+    WHERE data_type = 'VECTOR'
+      AND table_name IN ('SERVICE_EMBEDDINGS', 'SIGNAL_EMBEDDINGS')
+    UNION ALL
+    SELECT 'Spatial layers', COUNT(*)
+    FROM user_sdo_geom_metadata
+    WHERE table_name IN ('NETWORK_SITES', 'SUBSCRIBERS')
+    UNION ALL
+    SELECT 'OML models', COUNT(*)
+    FROM user_mining_models
+    WHERE model_name = 'NETWORK_CAPACITY_SURGE_MODEL';
     </copy>
     ```
 
@@ -77,22 +97,46 @@ Estimated Time: **10 minutes**
     | Spatial layers | 2 |
     | OML models | 1 |
 
-    Read the five rows as a capability map for the labs ahead. Each row names one object family that stays with the same Telco facts instead of moving to a separate system.
+    Read the six rows as a capability map for the labs ahead. Each row names one object family that stays with the same Telco facts instead of moving to a separate system.
 
-## Task 2: Count the fixed Telco evidence
+## Task 2: Measure network footprint and case impact
 
 1. Run the row-count query.
 
-    This query establishes the scale used throughout the workshop. Each returned count is fixed by the deterministic handoff loader and represents a national Telco scenario, rather than a toy set of four locations. Look for broad site coverage, enough subscriber signals to support semantic search, and enough orders to show that application documents and relational analytics use the same foundation.
+    This query measures the Seer Comms network footprint and the business impact of the critical experience case. The 54 network sites span 50 states. `TEL-5G-2026-501` affects 31,200 subscribers and places $2.14M in service value at risk, so the operations team has a clear reason to prioritize the event-venue congestion response.
+
+    **What is `TEL-5G-2026-501`?** It is the Seer Comms case ID for a critical 5G congestion incident near Hudson Yards during an event period. The ID links the incident to its affected-subscriber estimate, service value at risk, signal, site, support case, and later graph investigation. Treat it as the incident number you would use to coordinate a response, not as a database object or a subscriber ID.
+
+    Read the query in four steps.
+
+    1. Each `COUNT(*)` counts all rows in one named evidence table.
+    2. `COUNT(DISTINCT state_province)` counts coverage states, even when a state has more than one site.
+    3. The case query reads the stored `SUBSCRIBERS_AFFECTED` measure for the critical case. This is the business-reach value an operations leader uses to assess urgency.
+    4. `UNION ALL` stacks the seven independent measures without removing an answer or changing the stored data.
 
     ```sql
     <copy>
-    SELECT 'Telecom services' AS "Evidence", COUNT(*) AS "Rows" FROM telecom_services
-    UNION ALL SELECT 'Network sites', COUNT(*) FROM network_sites
-    UNION ALL SELECT 'Subscribers', COUNT(*) FROM subscribers
-    UNION ALL SELECT 'Subscriber signals', COUNT(*) FROM subscriber_signals
-    UNION ALL SELECT 'Service orders', COUNT(*) FROM service_orders
-    UNION ALL SELECT 'Graph entities', COUNT(*) FROM telecom_graph_entities;
+    SELECT 'Telecom services' AS "Evidence", COUNT(*) AS "Rows"
+    FROM telecom_services
+    UNION ALL
+    SELECT 'Network sites', COUNT(*)
+    FROM network_sites
+    UNION ALL
+    SELECT 'States with network sites', COUNT(DISTINCT state_province)
+    FROM network_sites
+    UNION ALL
+    SELECT 'Subscribers affected by critical case', subscribers_affected
+    FROM telecom_experience_cases
+    WHERE case_ref = 'TEL-5G-2026-501'
+    UNION ALL
+    SELECT 'Subscriber signals', COUNT(*)
+    FROM subscriber_signals
+    UNION ALL
+    SELECT 'Service orders', COUNT(*)
+    FROM service_orders
+    UNION ALL
+    SELECT 'Graph entities', COUNT(*)
+    FROM telecom_graph_entities;
     </copy>
     ```
 
@@ -102,12 +146,13 @@ Estimated Time: **10 minutes**
     | --- | --- |
     | Telecom services | 8 |
     | Network sites | 54 |
-    | Subscribers | 56 |
+    | States with network sites | 50 |
+    | Subscribers affected by critical case | 31200 |
     | Subscriber signals | 62 |
     | Service orders | 58 |
     | Graph entities | 62 |
 
-    Read these counts as the scale of the Seer Comms scenario, not as a generic object checklist. The next lab uses the `NETWORK_SITES` rows to turn this foundation into an operations priority.
+    Read the result as a connected operations picture: national network coverage, subscriber impact, service demand, and the entities that describe the incident all stay in one database. The next lab uses the `NETWORK_SITES` rows to turn this foundation into an operations priority.
 
 ## Acknowledgements
 
