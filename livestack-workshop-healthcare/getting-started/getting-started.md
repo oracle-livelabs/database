@@ -92,11 +92,12 @@ Open SQL Worksheet as `LLUSER`. You will use the same worksheet pattern for ever
            SYSTIMESTAMP AS "Checked At";</copy>
     ```
 
-    **Expected output: Connected SQL Worksheet Session**
+    **Expected output: SQL connection**
 
     | User | Schema | Checked At |
     | --- | --- | --- |
     | LLUSER | LLUSER | Current SQL Worksheet timestamp |
+    {: title="SQL Worksheet connection"}
 
 8. Confirm that both **User** and **Schema** show `LLUSER`.
 
@@ -104,6 +105,5 @@ Open SQL Worksheet as `LLUSER`. You will use the same worksheet pattern for ever
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

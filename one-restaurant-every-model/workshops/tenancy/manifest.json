@@ -17,7 +17,7 @@
             "title": "Lab 0: Create your Autonomous AI Database Free Instance",
             "description": "Create and configure the Autonomous AI Database instance for this workshop (standard shared chapter).",
             "type": "livelabs",
-            "filename": "../../../23aifree/login-to-abd3/login-to-adb3-json.md"
+            "filename": "../../../23aifree/login-to-abd3/login-to-adb3.md"
         },
         {
             "title": "Lab 1: Connect to Your Environment and Run the Preflight",

@@ -50,7 +50,7 @@ Start by reviewing the order application screen so the duality-view check connec
 
 2. Query the duality view catalog.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     Use `USER_JSON_DUALITY_VIEWS` to confirm that the order document view exists in the schema. This is safer than assuming the object from application code.
 
@@ -82,13 +82,13 @@ Now read one order from ORDERS_DV as a JSON document so learners can see the API
 
 1. Query order `1` from `ORDERS_DV`.
 
-    `JSON_SERIALIZE` displays the JSON document returned by the duality view as readable text. The `_id`, customer, status, total, and nested `items` array look like document fields, but the values remain backed by relational order tables.
+    `JSON_SERIALIZE` displays the JSON document returned by the duality view as readable text. This example returns a `CLOB`, so it does not impose a 1,000-character limit as the order document grows. The `_id`, customer, status, total, and nested `items` array look like document fields, but the values remain backed by relational order tables.
 
     The `WHERE` clause uses `JSON_VALUE` to read the `_id` field inside the JSON document, convert it to a number, and return one order. That keeps the example focused on a single document.
 
     ```sql
     <copy>
-    SELECT JSON_SERIALIZE(data RETURNING VARCHAR2(1000)) AS "Order Document"
+    SELECT JSON_SERIALIZE(data RETURNING CLOB PRETTY) AS "Order Document"
     FROM orders_dv
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 1;
     </copy>
