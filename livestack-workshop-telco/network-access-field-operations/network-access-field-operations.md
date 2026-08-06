@@ -2,15 +2,15 @@
 
 ## Introduction
 
-The `TEL-5G-2026-501` graph shows why Hudson Yards needs attention. A field planner must now decide which nearby network location can support the response. Oracle Spatial keeps the Hudson Yards point, other network sites, and the distance calculation connected to the same case, service, and capacity evidence.
+The **TEL-5G-2026-501** graph explains why Hudson Yards needs attention. A field planner now needs to decide which nearby network location can support the response. In this lab, Oracle Spatial keeps the Hudson Yards point, other network sites, and the distance calculation connected to the same case, service, and capacity evidence.
 
 ![Spatial field-operations flow from point locations to a distance-based response decision](images/spatial-point-distance-flow.svg " ")
 
-The flow graphic keeps the stored points, distance calculation, and field review together. The SQL in this lab supplies the geographic evidence for that decision.
+The flow graphic keeps the stored points, distance calculation, and field review together. The SQL in this lab supplies the geographic evidence that helps a planner compare response options.
 
 ### Objectives
 
-- Confirm the spatial layers used for network and field planning.
+- Confirm the spatial metadata used for network-site and subscriber-location planning.
 - Inspect the point layers used for site and subscriber location.
 - Use a distance calculation to compare network sites.
 
@@ -43,7 +43,9 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Confirm spatial layers
 
-1. Follow the steps below.
+Confirm the spatial layers before calculating distance, so the planner knows the site and subscriber points use the expected location reference:
+
+1. Follow the steps below:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -74,7 +76,9 @@ Estimated Time: **12 minutes**
 
 ## Task 2: Compare the distance between network sites
 
-1. Follow the steps below.
+Compare nearby network sites so field planning can pair location evidence with the incident impact already identified in the graph lab:
+
+1. Follow the steps below:
 
     `SDO_GEOM.SDO_DISTANCE` compares two `SDO_GEOMETRY` point values. The query pairs different sites, displays each point in map-readable Well-Known Text (WKT), calculates a distance in miles, and returns the closest examples. WKT writes a point as `POINT (longitude latitude)`, so you can see the source location values used by the calculation.
 
@@ -113,7 +117,7 @@ Estimated Time: **12 minutes**
     | Wilmington Network Access Hub | Wilmington, Delaware | POINT (-75.5398 39.7391) | Philadelphia Network Core | Philadelphia, Pennsylvania | POINT (-75.1652 39.9526) | 24.8 |
     | Boston Service Assurance Hub | Boston, Massachusetts | POINT (-71.0589 42.3601) | Providence Network Hub | Providence, Rhode Island | POINT (-71.4128 41.824) | 41.2 |
 
-    The shortest listed pair is Hudson Yards 5G Macro Site and Newark 5G Core Site, at 9.0 miles. In a live response, a planner would combine this distance with crew availability and the case impact already identified in the graph lab.
+    The shortest listed pair is **Hudson Yards 5G Macro Site** and **Newark 5G Core Site**, at **9.0 miles**. In a live response, a planner would combine distance with crew availability, maintenance windows, and the case impact already identified in the graph lab.
 
 ## Acknowledgements
 

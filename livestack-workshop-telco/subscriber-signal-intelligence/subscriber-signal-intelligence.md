@@ -2,14 +2,14 @@
 
 ## Introduction
 
-The source signal for `TEL-5G-2026-501` says that game-day 5G congestion is affecting families near Hudson Yards. It does not need to use the exact name of a service plan for an analyst to find a relevant response. You are the customer-experience analyst who connects that subscriber language to the likely service concern. Oracle AI Vector Search stores the meaning of the signal and service text as embeddings, while retaining the business text that explains the match.
+The source signal for **TEL-5G-2026-501** describes game-day 5G congestion affecting families near Hudson Yards, but it does not need to name the exact service plan for an analyst to find a relevant response. In this lab, you use Oracle AI Vector Search to connect subscriber language to likely service concerns while keeping the readable business text available for review.
 
 ![Vector signal-to-service flow](images/vector-signal-flow.svg " ")
 
 ### Objectives
 
-- Verify the signal and service vector columns.
-- Search subscriber signals by meaning.
+- Verify that subscriber signals and telecom services have compatible vector evidence.
+- Search subscriber signals by meaning, even when the analyst phrase does not match the stored wording exactly.
 - Interpret cosine distance as a similarity score.
 
 Estimated Time: **12 minutes**
@@ -41,7 +41,9 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Verify the vector evidence
 
-1. Follow the steps below.
+First confirm that the signal and service embeddings use the same vector shape, so later similarity searches are valid:
+
+1. Follow the steps below:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -68,11 +70,13 @@ Estimated Time: **12 minutes**
     | Service embeddings | 384 |
     | Subscriber signal embeddings | 384 |
 
-    Both evidence types use 384 dimensions. That common shape lets the database compare their meaning while retaining the source text and service identity for review.
+    Both evidence types use the same embedding shape. That common structure lets the database compare meaning while keeping the source signal and service identity available for analyst review.
 
 ## Task 2: Search subscriber signals by meaning
 
-1. Follow the steps below.
+Use the analyst phrase to find subscriber signals with the closest meaning, not just matching keywords:
+
+1. Follow the steps below:
 
     This query performs the semantic search. Read it in five parts.
 
@@ -119,7 +123,9 @@ Estimated Time: **12 minutes**
 
 ## Task 3: Match one subscriber signal to related services
 
-1. Follow the steps below.
+Move from the selected subscriber signal to related services so the customer-experience analyst has a review queue, not just a single isolated complaint:
+
+1. Follow the steps below:
 
     Task 2 searched signals using an analyst phrase. This task uses the stored embedding for one high-impact subscriber signal and compares it with every service embedding. It is a genuine vector comparison that helps an analyst move from the subscriber's wording to the service options most likely to be relevant.
 
@@ -167,7 +173,7 @@ Estimated Time: **12 minutes**
     | 501 | Game-day 5G congestion is affecting families near Hudson Yards... | 5G Business Consultation | 0.46385 |
     | 501 | Game-day 5G congestion is affecting families near Hudson Yards... | Gigabit Fiber Install | 0.34430 |
 
-    The highest-ranked service gives the analyst a starting point for investigation, not an automatic decision. Review the subscriber signal, the service description, capacity evidence, and the next lab's relationship context before choosing an action.
+    Use the highest-ranked service as a starting point for investigation, not as an automatic decision. Review the subscriber signal, service description, capacity evidence, and relationship context before choosing an action.
 
 ## Acknowledgements
 

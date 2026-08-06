@@ -2,13 +2,13 @@
   <title id="title">Service order JSON duality evidence</title><desc id="desc">A three-column Telco diagram shows a service order as a JSON document, related relational rows, and the developer outcome from one governed source.</desc>
   <style>.title{font:700 24px Arial,sans-serif;fill:#161513}.sub{font:15px Arial,sans-serif;fill:#4f4f4f}.head{font:700 18px Arial,sans-serif;fill:#fff}.item{font:15px Arial,sans-serif;fill:#292522}.foot{font:600 15px Arial,sans-serif;fill:#4f4f4f}</style>
   <rect width="900" height="360" fill="#f7f8f9"/><text x="42" y="42" class="title">One service order, two governed access paths</text><text x="42" y="67" class="sub">Lab 3 lets an application read JSON while operations retains relational SQL evidence.</text>
-  <rect x="42" y="96" width="216" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="42" y="96" width="216" height="42" rx="12" fill="#d9793a"/><rect x="42" y="126" width="216" height="12" fill="#d9793a"/><text x="62" y="123" class="head">JSON document</text>
+  <rect x="42" y="96" width="220" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="42" y="96" width="220" height="42" rx="12" fill="#d9793a"/><rect x="42" y="126" width="220" height="12" fill="#d9793a"/><text x="62" y="123" class="head">JSON document</text>
   <text x="63" y="168" class="item">ORDERS_DV</text><text x="63" y="196" class="item">_id + subscriberId</text><text x="63" y="224" class="item">status + demandScore</text><text x="63" y="252" class="item">items[] array</text>
-  <path d="M273 193h27v-13l24 13-24 13v-13h-27z" fill="#c74634"/>
-  <rect x="338" y="96" width="236" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="338" y="96" width="236" height="42" rx="12" fill="#397e97"/><rect x="338" y="126" width="236" height="12" fill="#397e97"/><text x="358" y="123" class="head">Relational truth</text>
-  <text x="359" y="168" class="item">SERVICE_ORDERS row</text><text x="359" y="196" class="item">SERVICE_ORDER_ITEMS</text><text x="359" y="224" class="item">Subscriber + site keys</text><text x="359" y="252" class="item">One governed source</text>
-  <path d="M589 193h27v-13l24 13-24 13v-13h-27z" fill="#c74634"/>
-  <rect x="654" y="96" width="204" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="654" y="96" width="204" height="42" rx="12" fill="#557a68"/><rect x="654" y="126" width="204" height="12" fill="#557a68"/><text x="674" y="123" class="head">Outcome</text>
-  <text x="674" y="168" class="item">Serve JSON</text><text x="674" y="192" class="item">for apps</text><text x="674" y="226" class="item">Keep SQL</text><text x="674" y="250" class="item">for review</text>
+  <path d="M282 193h34v-13l24 13-24 13v-13h-34z" fill="#c74634"/>
+  <rect x="340" y="96" width="220" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="340" y="96" width="220" height="42" rx="12" fill="#397e97"/><rect x="340" y="126" width="220" height="12" fill="#397e97"/><text x="360" y="123" class="head">Relational truth</text>
+  <text x="361" y="168" class="item">SERVICE_ORDERS row</text><text x="361" y="196" class="item">SERVICE_ORDER_ITEMS</text><text x="361" y="224" class="item">Subscriber + site keys</text><text x="361" y="252" class="item">One governed source</text>
+  <path d="M580 193h34v-13l24 13-24 13v-13h-34z" fill="#c74634"/>
+  <rect x="638" y="96" width="220" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="638" y="96" width="220" height="42" rx="12" fill="#557a68"/><rect x="638" y="126" width="220" height="12" fill="#557a68"/><text x="658" y="123" class="head">Outcome</text>
+  <text x="658" y="180" class="item">Serve JSON for apps</text><text x="658" y="224" class="item">Keep SQL for review</text>
   <text x="42" y="332" class="foot">Duality prevents a second service-order copy and the synchronization work that comes with it.</text>
 </svg>
