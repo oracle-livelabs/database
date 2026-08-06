@@ -5,15 +5,13 @@
   <rect width="900" height="360" fill="#f7f8f9"/>
   <text x="42" y="42" class="title">Find a service concern by meaning, not matching words</text>
   <text x="42" y="67" class="sub">Lab 4 compares a subscriber signal with service descriptions while retaining the business text that explains each result.</text>
-  <rect x="42" y="96" width="240" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="42" y="96" width="240" height="42" rx="12" fill="#c74634"/><rect x="42" y="126" width="240" height="12" fill="#c74634"/>
-  <text x="62" y="123" class="head">Subscriber language</text><text x="63" y="168" class="item">“congestion near</text><text x="63" y="190" class="item">the event venue”</text><text x="63" y="224" class="item">SUBSCRIBER_SIGNALS</text><text x="63" y="252" class="item">source text stays visible</text>
-  <line x1="294" y1="193" x2="346" y2="193" stroke="#c74634" stroke-width="6" stroke-linecap="round"/>
-  <path d="M346 181 L368 193 L346 205 Z" fill="#c74634"/>
-  <rect x="372" y="96" width="240" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="372" y="96" width="240" height="42" rx="12" fill="#7a5aa6"/><rect x="372" y="126" width="240" height="12" fill="#7a5aa6"/>
-  <text x="392" y="123" class="head">Vector comparison</text><text x="393" y="168" class="item">VECTOR_EMBEDDING</text><text x="393" y="196" class="item">384 dimensions</text><text x="393" y="224" class="item">COSINE distance</text><text x="393" y="252" class="item">higher similarity first</text>
-  <line x1="624" y1="193" x2="652" y2="193" stroke="#c74634" stroke-width="6" stroke-linecap="round"/>
-  <path d="M652 181 L674 193 L652 205 Z" fill="#c74634"/>
-  <rect x="678" y="96" width="180" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="678" y="96" width="180" height="42" rx="12" fill="#557a68"/><rect x="678" y="126" width="180" height="12" fill="#557a68"/>
-  <text x="698" y="123" class="head">Review queue</text><text x="699" y="168" class="item">related service</text><text x="699" y="196" class="item">similarity score</text><text x="699" y="224" class="item">signal excerpt</text><text x="699" y="252" class="item">analyst review</text>
+  <rect x="42" y="96" width="220" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="42" y="96" width="220" height="42" rx="12" fill="#c74634"/><rect x="42" y="126" width="220" height="12" fill="#c74634"/>
+  <text x="62" y="123" class="head">Subscriber language</text><text x="63" y="168" class="item">"congestion near</text><text x="63" y="190" class="item">the event venue"</text><text x="63" y="224" class="item">SUBSCRIBER_SIGNALS</text><text x="63" y="252" class="item">Source text stays visible</text>
+  <path d="M282 193h34v-13l24 13-24 13v-13h-34z" fill="#c74634"/>
+  <rect x="340" y="96" width="220" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="340" y="96" width="220" height="42" rx="12" fill="#7a5aa6"/><rect x="340" y="126" width="220" height="12" fill="#7a5aa6"/>
+  <text x="360" y="123" class="head">Vector comparison</text><text x="361" y="168" class="item">VECTOR_EMBEDDING</text><text x="361" y="196" class="item">384 dimensions</text><text x="361" y="224" class="item">COSINE distance</text><text x="361" y="252" class="item">Higher similarity first</text>
+  <path d="M580 193h34v-13l24 13-24 13v-13h-34z" fill="#c74634"/>
+  <rect x="638" y="96" width="220" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="638" y="96" width="220" height="42" rx="12" fill="#557a68"/><rect x="638" y="126" width="220" height="12" fill="#557a68"/>
+  <text x="658" y="123" class="head">Review queue</text><text x="659" y="168" class="item">Related service</text><text x="659" y="196" class="item">Similarity score</text><text x="659" y="224" class="item">Signal excerpt</text><text x="659" y="252" class="item">Analyst review</text>
   <text x="42" y="332" class="foot">Semantic matches remain joined to the subscriber signal and service record that explain the result.</text>
 </svg>
