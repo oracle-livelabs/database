@@ -2,14 +2,14 @@
 
 ## Introduction
 
-The `TEL-5G-2026-501` investigation explains the current Hudson Yards incident. The next question is whether its 91% load also signals capacity risk that merits action before the next peak period. You are the capacity planner who compares the current incident evidence with a reviewable model prediction. Oracle Machine Learning (OML) scores the Telco capacity features inside Oracle AI Database, where the site, case, and operational evidence already live.
+The **TEL-5G-2026-501** investigation explains the current **Hudson Yards** incident. The next question is whether its **91%** load also signals capacity risk before the next peak period. In this lab, you compare the current incident evidence with a reviewable Oracle Machine Learning (OML) prediction, so capacity planning stays connected to the same governed site, case, and operational evidence.
 
 ![Oracle Machine Learning flow from capacity features to a reviewable service-impact prediction](images/telco-oml-service-assurance.svg " ")
 
 ### Objectives
 
-- Confirm that the Telco capacity-risk model is available in the workshop schema.
-- Score network sites for service-impact risk with SQL.
+- Confirm that the telecom capacity-risk model is available before scoring network sites.
+- Score network sites for service-impact risk directly from SQL.
 - Interpret a model prediction as a planning signal, not as an automatic action.
 
 Estimated Time: **15 minutes**
@@ -42,7 +42,9 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Inventory the capacity-risk model
 
-1. Run the model-inventory query.
+Confirm that the approved capacity-risk model is available before using it to score sites for review:
+
+1. Run the model-inventory query:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -67,11 +69,13 @@ Estimated Time: **15 minutes**
     | --- | --- |
     | NETWORK\_CAPACITY\_SURGE\_MODEL | CLASSIFICATION |
 
-    The model is persisted with the workshop schema. It can be called from SQL without moving the site features or the result to a separate system.
+    The model is persisted with the workshop schema, so it can be called from SQL without moving site features or scores into a separate system.
 
 ## Task 2: Score network sites for service-impact risk
 
-1. Run the site-scoring query.
+Score high-load network sites so the capacity planner can prioritize a review queue before the next peak period:
+
+1. Run the site-scoring query:
 
     In order to understand this query, read it in four parts.
 
@@ -115,7 +119,9 @@ Estimated Time: **15 minutes**
 
 ## Task 3: Compare the prediction with the workshop planning label
 
-1. Run the comparison query.
+Compare the model prediction with the workshop planning label so the learner sees how to treat a prediction as reviewable evidence, not as an automatic command:
+
+1. Run the comparison query:
 
     `NETWORK_CAPACITY_SURGE_TRAINING_V` is a saved SQL view that gives the model a repeatable feature shape. Its `ESCALATION_LABEL` is the deterministic workshop planning label. This simple comparison teaches how to look for agreement between the known label and the model's result; it is not a complete production model evaluation.
 
@@ -153,7 +159,7 @@ Estimated Time: **15 minutes**
     | Miami Service Assurance Hub | ESCALATE | ESCALATE |
     | San Francisco Network Edge | ESCALATE | ESCALATE |
 
-    A matching label shows that the model recognizes the pattern represented by this deterministic scenario. A difference would be a reason to examine the feature values and the operating context—not a reason to ignore the site.
+    A matching label shows that the model recognizes the pattern represented by this deterministic scenario. A difference would be a reason to examine the feature values and operating context, not a reason to ignore the site.
 
 ## Acknowledgements
 
