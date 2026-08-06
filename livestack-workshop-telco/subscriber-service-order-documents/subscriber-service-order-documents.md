@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A service-order application needs document-shaped data, while operations teams need relational columns for reporting. You are the service-order developer who must present both without creating a second, unsynchronized copy. JSON Relational Duality lets one governed source serve the application document and the SQL evidence used by operations.
+After Hudson Yards becomes the priority, the `TEL-5G-2026-501` team must understand the service action tied to the incident. Order `601` links the case's source signal to a subscriber, the Hudson Yards site, and the assigned 5G service. You are the service-order developer who must present that order as application JSON while preserving relational evidence for operations. JSON Relational Duality gives both teams one governed source.
 
 ![JSON Relational Duality for service orders](images/json-duality.svg " ")
 
@@ -86,7 +86,7 @@ Estimated Time: **10 minutes**
            JSON_VALUE(data, '$.demandScore' RETURNING NUMBER) AS "Demand Score",
            JSON_VALUE(data, '$.items[0].serviceId' RETURNING NUMBER) AS "Service ID"
     FROM orders_dv
-    ORDER BY JSON_VALUE(data, '$._id' RETURNING NUMBER)
+    ORDER BY "Order ID"
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
