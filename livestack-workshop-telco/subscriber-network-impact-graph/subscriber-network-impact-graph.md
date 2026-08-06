@@ -2,13 +2,11 @@
 
 ## Introduction
 
-One congestion case can affect a subscriber cluster, a network site, an outage event, a support case, and a field crew at the same time. If an investigator misses one of those relationships, the response can be delayed or assigned to the wrong team while subscriber impact grows. You are the impact investigator who must establish the operational reach of a named case before a response is assigned. A property graph represents business entities as vertices and their connections as edges, so the case remains connected to its evidence.
+Now that you know the Hudson Yards site, the source signal, and the related service order, you need to see the full reach of `TEL-5G-2026-501`. This one congestion case connects a subscriber cluster, a network site, an outage event, and a support case. You are the impact investigator who establishes that operational reach before a response is assigned. A property graph keeps those relationships connected to the case evidence.
 
 ![Telco impact graph flow](images/impact-graph-flow.svg " ")
 
-The image below is the Seer Comms SQL/PGQ explorer. An impact investigator uses it to inspect how a case reaches related entities. The SQL in this lab makes that one-hop case-to-entity traversal explicit and repeatable.
-
-![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png " ")
+The flow graphic names the case, the `GRAPH_TABLE` traversal, and the review queue. The SQL in this lab makes that one-hop case-to-entity traversal explicit and repeatable.
 
 ### Objectives
 
@@ -51,6 +49,10 @@ Estimated Time: **12 minutes**
 
     `USER_PROPERTY_GRAPHS` inventories graph definitions. The result names the graph used for subscriber and network impact investigation.
 
+    1. `USER_PROPERTY_GRAPHS` limits the catalog to graph definitions owned by `LLUSER`.
+    2. `WHERE graph_name = ...` asks for the one graph this lab uses, rather than listing unrelated catalog entries.
+    3. `SELECT graph_name` returns the name the SQL/PGQ query uses in Task 2.
+
     ```sql
     <copy>
     SELECT graph_name AS "Property Graph"
@@ -69,7 +71,7 @@ Estimated Time: **12 minutes**
 
 1. Follow the steps below.
 
-    The graph pattern starts at the named experience case `TEL-5G-2026-501`, follows its `case_involves` relationships, and returns the connected entities. It is a focused investigation: you deliberately choose this incident reference because its critical priority, 31,200 affected subscribers, and service value at risk merit coordinated review.
+    The graph pattern starts at the named experience case `TEL-5G-2026-501`, follows its `case_involves` relationships, and returns the connected entities. This is the case ID for the critical Hudson Yards event-venue congestion incident introduced in Lab 1. It is a focused investigation because 31,200 subscribers are affected and $2.14M of service value is at risk.
 
     1. `GRAPH_TABLE (telecom_experience_network ...)` selects the governed graph to query.
     2. `MATCH` starts at the `experience_case` vertex and follows each `case_involves` edge to a connected `entity` vertex.

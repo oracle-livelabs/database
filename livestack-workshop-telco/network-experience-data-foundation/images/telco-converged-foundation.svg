@@ -38,5 +38,5 @@
   <text x="772" y="483" class="head">What changes for Seer Comms</text>
   <g class="small"><text x="772" y="513">✓ Trace a signal to the site and service it affects</text><text x="772" y="540">✓ Compare meaning, relationships, and distance in SQL</text><text x="772" y="567">✓ Give field teams one reviewable evidence path</text><text x="772" y="594">✓ Reduce copies and reconciliation during response</text></g>
   <rect x="38" y="644" width="1204" height="22" rx="8" fill="#26211f"/>
-  <text x="640" y="661" class="footer" text-anchor="middle">Business impact: move from network pressure to a trusted field-response decision without disconnecting the evidence.</text>
+  <text x="640" y="642" class="footer" text-anchor="middle">Business impact: move from network pressure to a trusted field-response decision without disconnecting the evidence.</text>
 </svg>

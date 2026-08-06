@@ -4,17 +4,17 @@
 
 Seer Comms must decide where subscriber experience is deteriorating, which services and sites are affected, and how to respond before congestion becomes churn, an avoidable service-level breach, or a missed event window. The evidence arrives as operational rows, service-order documents, subscriber signals, relationships, and locations. When those data types live in separate systems, teams copy data, reconcile results, and repeat security work before they can act.
 
-In this workshop, you use **Oracle AI Database 26ai** as the converged foundation for that Telco decision journey. You start with the Seer Comms tables that hold the evidence, trace an operations KPI to reviewable rows, inspect a service order as JSON and SQL, review a semantic signal-to-service match, follow network-impact relationships, and compare network-site locations for field operations.
+In this workshop, you investigate one escalating incident: `TEL-5G-2026-501`, a critical 5G congestion case near Hudson Yards during an event period. It affects 31,200 subscribers and puts $2.14M in service value at risk. You use **Oracle AI Database 26ai** to follow the evidence from the first capacity warning to a reviewable field response: the site, the affected service order, the subscriber signal, the connected case entities, nearby response locations, and the capacity-risk prediction.
 
 ![Seer Comms network-experience decision journey from capacity pressure to response](images/telco-workshop-intro-journey.svg " ")
 
-*Figure 1: The Seer Comms journey keeps the network pressure, service-order, signal, case-impact, and response-location evidence connected. Each hands-on lab explains one part of this path with SQL.*
+*Figure 1: Each lab advances the `TEL-5G-2026-501` investigation, from Hudson Yards capacity pressure to a field-response decision.*
 
 Throughout the workshop, you will see small arrows next to expandable **Key terms**, **Learn more**, and **Why this matters** sections. Select an arrow whenever you want the definition, how the term is used in this workshop, and the Telco reason it matters. These sections are closed by default so the main lab stays focused, but you can open them whenever you want more explanation.
 
-The example below shows an expandable section before and after it is opened.
+The example below shows an expandable Telco section before and after it is opened.
 
-![Expandable details section changing from closed to open](images/details-accordion-expand-flow.png " ")
+![Expandable Telco details section changing from closed to open](images/details-accordion-expand-flow.svg " ")
 
 <details>
 <summary><strong>Learn more: What does converged database mean?</strong></summary>

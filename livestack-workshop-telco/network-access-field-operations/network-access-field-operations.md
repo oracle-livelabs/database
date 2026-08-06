@@ -2,13 +2,11 @@
 
 ## Introduction
 
-Field response depends on more than a ticket number. You are the field-operations planner deciding which network locations are close enough to support a response. Oracle Spatial keeps network-site and subscriber points, plus the distance calculation between them, connected to the same service and capacity evidence.
+The `TEL-5G-2026-501` graph shows why Hudson Yards needs attention. A field planner must now decide which nearby network location can support the response. Oracle Spatial keeps the Hudson Yards point, other network sites, and the distance calculation connected to the same case, service, and capacity evidence.
 
 ![Spatial field-operations flow from point locations to a distance-based response decision](images/spatial-point-distance-flow.svg " ")
 
-The application image below is the Network Sites and Routes map. A field planner uses it to orient a response; the SQL in this lab explains the geographic evidence behind the map.
-
-![Network sites and routes map](images/network-sites-and-routes-map.png " ")
+The flow graphic keeps the stored points, distance calculation, and field review together. The SQL in this lab supplies the geographic evidence for that decision.
 
 ### Objectives
 
@@ -50,6 +48,11 @@ Estimated Time: **12 minutes**
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     The spatial metadata catalog tells Oracle how geometry columns are interpreted. In this lab, each point identifies a network site or subscriber location, and the shared SRID shows that both layers use the same longitude-and-latitude reference system.
+
+    1. `USER_SDO_GEOM_METADATA` reads the spatial metadata owned by the workshop schema, not the point rows themselves.
+    2. The `WHERE ... IN (...)` filter selects only the site and subscriber layers used in this lab.
+    3. `SELECT` returns the layer name, its geometry column, and its spatial reference identifier.
+    4. `ORDER BY table_name` keeps the two-row result stable and easy to compare.
 
     ```sql
     <copy>
@@ -97,7 +100,7 @@ Estimated Time: **12 minutes**
     JOIN network_sites b ON a.network_site_id < b.network_site_id
     WHERE a.location IS NOT NULL
       AND b.location IS NOT NULL
-    ORDER BY SDO_GEOM.SDO_DISTANCE(a.location, b.location, 0.005, 'unit=MILE')
+    ORDER BY "Distance Miles"
     FETCH FIRST 3 ROWS ONLY;
     </copy>
     ```
@@ -110,7 +113,7 @@ Estimated Time: **12 minutes**
     | Wilmington Network Access Hub | Wilmington, Delaware | POINT (-75.5398 39.7391) | Philadelphia Network Core | Philadelphia, Pennsylvania | POINT (-75.1652 39.9526) | 24.8 |
     | Boston Service Assurance Hub | Boston, Massachusetts | POINT (-71.0589 42.3601) | Providence Network Hub | Providence, Rhode Island | POINT (-71.4128 41.824) | 41.2 |
 
-    The shortest listed pair is Atlanta East Fiber Hub and Dallas 5G Dispatch Center. In a live response, a planner would combine this distance with crew availability and the case impact already identified in the graph lab.
+    The shortest listed pair is Hudson Yards 5G Macro Site and Newark 5G Core Site, at 9.0 miles. In a live response, a planner would combine this distance with crew availability and the case impact already identified in the graph lab.
 
 ## Acknowledgements
 

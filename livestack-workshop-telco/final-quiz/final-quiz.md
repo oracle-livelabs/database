@@ -7,12 +7,12 @@ badge: images/livestack-badge-telecommunications.png
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect a Seer Comms decision to the database evidence behind it.
+Use this scored quiz to confirm that you can explain the `TEL-5G-2026-501` response from its business impact to its operational evidence.
 
 ### Objectives
 
-- Review the seven database capabilities used in the workshop.
-- Explain the business outcome of each SQL pattern.
+- Recall the case, impact, and decision at the center of the workshop.
+- Connect each database capability to the evidence it provides for that decision.
 
 Estimated Time: **5 minutes**
 
@@ -21,54 +21,68 @@ Estimated Time: **5 minutes**
 1. Follow the steps below.
 
     ```quiz score
+    Q: What is TEL-5G-2026-501 in this workshop?
+    - A subscriber identifier for the Hudson Yards service order.
+    * The critical Hudson Yards 5G congestion case that anchors the investigation.
+    - The name of the capacity-risk model.
+    - A property graph object.
+    > The case ID connects the incident to its 31,200 affected-subscriber estimate, service value at risk, signal, site, and response evidence.
+
+    Q: Which value establishes the business urgency of TEL-5G-2026-501?
+    - 56 subscriber seed rows.
+    - 54 network sites.
+    * 31,200 subscribers affected.
+    - 8 telecom services.
+    > SUBSCRIBERS_AFFECTED is the case-impact measure, not a count of rows in the subscriber table.
+
     Q: Why does the Operations Center lab include a drill-through query after a summary?
     - To replace dashboard evidence with a screenshot.
-    * To show the reviewable network-site rows behind a KPI.
+    * To show that Hudson Yards is a reviewable 91% load row behind the KPI.
     - To create a separate reporting database.
     - To generate a random capacity score.
-    > A dashboard total is useful only when an operations team can inspect the contributing sites and decide what to do next.
+    > A dashboard total is useful only when the team can inspect the contributing site and decide what to do next.
 
-    Q: What does ORDERS_DV provide for a service-order application?
+    Q: What does ORDERS_DV provide for the service action linked to the case?
     - A second copy of order rows in a document store.
     * A JSON projection backed by relational order data.
     - A property graph of service routes.
     - A vector index for network sites.
-    > JSON Relational Duality lets an application use document-shaped data while SQL continues to use the same governed source.
+    > JSON Relational Duality lets an application inspect order 601 as a document while SQL continues to use the same governed source.
 
-    Q: Why does the vector lab show fixed rows from SIGNAL_SERVICE_MATCHES?
+    Q: What does AI Vector Search add to the TEL-5G-2026-501 investigation?
     - It replaces the source signal with an embedding only.
     * It lets an analyst review the matched service and retained similarity evidence.
     - It calculates the miles between network sites.
     - It creates a second service-order document.
-    > The match table keeps the signal, service, score, and match method connected for review.
+    > It connects the game-day congestion wording in signal 501 to related services while preserving the signal text and similarity evidence.
 
-    Q: What does the graph seed case provide?
+    Q: What does the Property Graph reveal about TEL-5G-2026-501?
     - A random data sample.
     - A replacement for the subscriber table.
     * The starting point for an investigation of connected entities.
     - A model confidence score.
-    > SQL/PGQ starts from the named experience case and follows its relationship evidence.
+    > SQL/PGQ starts from the case and follows its site, outage, subscriber-cluster, and support-case relationships.
 
-    Q: Why does the field-operations lab use Oracle Spatial?
+    Q: What does the Spatial result contribute to the response plan?
     - To replace operational rows with a map image.
     - To export site coordinates to an unrelated system.
     - To turn graph edges into vectors.
-    * To calculate point and distance evidence next to operational data.
-    > Keeping geography in the same database makes field-response decisions easier to review and repeat.
+    * It identifies Hudson Yards and Newark as a nearby 9.0-mile site pair for planning review.
+    > Spatial keeps the distance calculation beside the case and operational records that explain the choice.
 
-    Q: What does a capacity-risk prediction in the OML lab provide?
+    Q: What does the OML result contribute to the Hudson Yards decision?
     - A guaranteed outage outcome.
-    * A model-based priority signal to review beside site capacity and load evidence.
+    * An ESCALATE priority signal to review beside the 91% load and case evidence.
     - A replacement for the network-site table.
     - A copy of capacity data in a separate machine-learning system.
-    > A prediction helps a planner decide where to investigate. It does not replace the operational evidence or make the action automatically.
+    > A prediction helps a planner prioritize investigation. It does not replace the operational evidence or make the action automatic.
 
-    Q: What is the main advantage of the converged database foundation in this workshop?
+    Q: What makes the TEL-5G-2026-501 response explainable instead of a black-box recommendation?
     - Each capability requires a separate specialist store.
-    * SQL, JSON, vector, graph, and spatial evidence stay connected.
+    * SQL, JSON, vector, graph, spatial, and model evidence stay connected to the case.
     - Screenshots replace the need for database evidence.
     - Teams must reconcile copied data before investigating.
-    > The workshop uses several data models, but they remain connected under one governance model.
+    > The team can inspect every part of the response, from the incident impact to the site, order, signal, relationships, distance, and prediction.
     ```
 
 2. Review your completion badge.

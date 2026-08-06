@@ -2,13 +2,9 @@
 
 ## Introduction
 
-A subscriber may report dropped calls, congestion, delayed activation, or unstable home coverage without using the service-plan or network-engineering terms stored in Seer Comms. You are the customer-experience analyst deciding which operational concern a signal is really about before it becomes a churn or capacity response. Oracle AI Vector Search stores the meaning of signal and service text as embeddings, so Seer Comms can preserve a reviewable relationship between the signal and service.
+The source signal for `TEL-5G-2026-501` says that game-day 5G congestion is affecting families near Hudson Yards. It does not need to use the exact name of a service plan for an analyst to find a relevant response. You are the customer-experience analyst who connects that subscriber language to the likely service concern. Oracle AI Vector Search stores the meaning of the signal and service text as embeddings, while retaining the business text that explains the match.
 
 ![Vector signal-to-service flow](images/vector-signal-flow.svg " ")
-
-The application image below shows service-intent search results. The SQL in this lab exposes the vector-based evidence behind meaning-based matches.
-
-![Seer Comms service-intent search results](images/service-intent-search-results.png " ")
 
 ### Objectives
 
@@ -127,10 +123,12 @@ Estimated Time: **12 minutes**
 
     Task 2 searched signals using an analyst phrase. This task uses the stored embedding for one high-impact subscriber signal and compares it with every service embedding. It is a genuine vector comparison that helps an analyst move from the subscriber's wording to the service options most likely to be relevant.
 
-    1. The joins keep the original signal text and service name beside their vectors.
-    2. The `CROSS JOIN` pairs the chosen signal with each service embedding.
-    3. `VECTOR_DISTANCE(..., COSINE)` compares each pair, and `1 - distance` produces a higher-is-better similarity score.
-    4. `ORDER BY` and `FETCH FIRST 3 ROWS ONLY` return the three services worth reviewing first.
+    1. `signal_embeddings` supplies the stored vector for signal `501`; its join to `subscriber_signals` keeps the readable subscriber wording beside that vector.
+    2. `WHERE ss.signal_id = 501` chooses one known, high-impact signal before any comparison happens. The query does not search every signal.
+    3. `CROSS JOIN service_embeddings` makes one comparison pair between that signal and each stored service vector.
+    4. The join to `telecom_services` adds the business-readable service name for each candidate pair.
+    5. `VECTOR_DISTANCE(..., COSINE)` calculates semantic distance. Subtracting it from `1` produces the displayed higher-is-better similarity score.
+    6. `ORDER BY` puts the smallest distance first. `FETCH FIRST 3 ROWS ONLY` keeps the result to the first three services an analyst should review.
 
     ```sql
     <copy>
@@ -138,9 +136,11 @@ Estimated Time: **12 minutes**
            DBMS_LOB.SUBSTR(ss.signal_text, 70, 1) AS "Subscriber Signal",
            ts.service_name AS "Recommended Service",
            ROUND(
-             1 - VECTOR_DISTANCE(signal_embedding.embedding,
-                                 service_embedding.embedding,
-                                 COSINE),
+             1 - VECTOR_DISTANCE(
+                   signal_embedding.embedding,
+                   service_embedding.embedding,
+                   COSINE
+                 ),
              5
            ) AS "Similarity"
     FROM signal_embeddings signal_embedding
@@ -150,9 +150,11 @@ Estimated Time: **12 minutes**
     JOIN telecom_services ts
       ON ts.service_id = service_embedding.service_id
     WHERE ss.signal_id = 501
-    ORDER BY VECTOR_DISTANCE(signal_embedding.embedding,
-                             service_embedding.embedding,
-                             COSINE)
+    ORDER BY VECTOR_DISTANCE(
+               signal_embedding.embedding,
+               service_embedding.embedding,
+               COSINE
+             )
     FETCH FIRST 3 ROWS ONLY;
     </copy>
     ```

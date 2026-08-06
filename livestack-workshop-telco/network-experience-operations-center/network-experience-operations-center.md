@@ -2,13 +2,9 @@
 
 ## Introduction
 
-An operations dashboard is useful only when a leader can move from a total to the sites behind it. A misleading summary can send a crew to the wrong location while congestion, delayed activation, and churn risk continue elsewhere. You are the network operations analyst deciding which capacity issue deserves attention first. In this lab, you use direct SQL against `NETWORK_SITES` to move from a national summary to the named sites that need follow-up.
+The `TEL-5G-2026-501` investigation needs an operational starting point. Hudson Yards is at 91% capacity load, so an operations leader needs to see whether it belongs at the top of the review queue. You are the network operations analyst who moves from a national summary to the named sites behind it. In this lab, direct SQL makes that priority visible and reviewable.
 
-The image below shows the Operations Center page. It gives an operations leader a summary of services, signals, orders, and capacity. The SQL recreates the reviewable rows behind those summaries.
-
-![Seer Comms Network Experience Operations Center](images/network-experience-operations-center.png " ")
-
-The compact flow graphic shows the learning pattern for this lab: a KPI identifies pressure, SQL reveals the contributing rows, and an operations leader uses those rows to prioritize response.
+The compact flow graphic shows the learning pattern for this lab: a KPI identifies pressure, SQL reveals the contributing rows, and an operations leader uses those rows to prioritize response. It uses the validated Hudson Yards load of 91%, not an unverified dashboard total.
 
 ![KPI-to-evidence flow](images/dashboard-evidence.svg " ")
 

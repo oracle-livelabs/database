@@ -72,7 +72,7 @@ Open SQL Worksheet as the workshop user before running the Telco queries. SQL Wo
 
 6. Use the same SQL Worksheet pattern throughout the workshop.
 
-    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation-retail.svg " ")
+    ![Annotated SQL Worksheet showing the LLUSER connection, Telco SQL editor, Run button, and query results](images/sql-worksheet-orientation-telco.svg " ")
 
     *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
 
@@ -85,6 +85,10 @@ Open SQL Worksheet as the workshop user before running the Telco queries. SQL Wo
 7. Run this check.
 
     This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The Telco labs use `LLUSER`, so both values should point to the workshop schema.
+
+    1. `FROM dual` uses Oracle's one-row utility table, so this check needs no Telco table.
+    2. `USER` returns the signed-in database user.
+    3. `SYS_CONTEXT` reads the schema Oracle will use to resolve unqualified table names.
 
     ```sql
     <copy>
