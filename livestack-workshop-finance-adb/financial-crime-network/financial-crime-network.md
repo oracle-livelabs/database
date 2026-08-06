@@ -76,7 +76,7 @@ Graph Studio runs against the same Finance V2 Autonomous AI Database that contai
 
 ## Task 2: Download and import the finance notebook
 
-The supplied `.dsnb` file is a native Graph Studio notebook. It contains the same four finance queries used in this lab plus explanations of the business question and expected investigation pattern.
+The supplied `.dsnb` file is a native Graph Studio notebook. It contains three finance SQL paragraphs plus explanations of the business question and expected investigation pattern.
 
 1. Download [finance-fraud-network-graph-studio.dsnb](files/finance-fraud-network-graph-studio.dsnb).
 
@@ -88,11 +88,11 @@ The supplied `.dsnb` file is a native Graph Studio notebook. It contains the sam
 
 4. Drag the downloaded `finance-fraud-network-graph-studio.dsnb` file into the import window, or browse to the file on your computer.
 
-5. Review the selected filename and click **Import**. Open **Finance Fraud Network** after the import completes.
+5. Review the selected filename and click **Import**. Open **Fraud Network** after the import completes.
 
 ## Task 3: Run and interpret the Graph Studio notebook
 
-The notebook alternates explanatory text with four executable SQL paragraphs. Run the paragraphs in order so that each result answers the business question described immediately above it.
+The notebook alternates explanatory text with three executable SQL paragraphs. Run the paragraphs in order so that each result answers the business question described immediately above it.
 
 1. Read the first explanation, then locate the SQL paragraph beneath it.
 
@@ -100,22 +100,21 @@ The notebook alternates explanatory text with four executable SQL paragraphs. Ru
 
     ![Run an imported Graph Studio notebook paragraph](images/graph-notebook-run.png " ")
 
-3. Run the four SQL paragraphs and review these results:
+3. Run the three SQL paragraphs and review these results:
 
     | Paragraph | Result | Investigation purpose |
     | --- | --- | --- |
     | 1 | Table | Ranks entities reached within one or two hops of `ACCT-8841`. |
     | 2 | Graph visualization | Draws the one-hop and two-hop path from the suspicious account. |
-    | 3 | Table | Ranks risky account pairs connected through a shared device, IP address, phone, or email. |
-    | 4 | Graph visualization | Draws both accounts, the shared entity, and the connecting relationships. |
+    | 3 | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected accounts plus the supporting IP relationship. |
 
 4. In **Exercise 1**, run the visualization paragraph to trace the one-hop and two-hop network from `ACCT-8841`. The red box identifies the triangle **Run** button in the upper-right corner of the paragraph.
 
     ![Run Exercise 1 to trace one-hop and two-hop fraud reach](images/graph-exercise-1-run-highlighted.png " ")
 
-5. In **Exercise 2**, run the final visualization paragraph to reveal accounts connected through shared devices, IP addresses, phone numbers, or email addresses. Use the same triangle **Run** button highlighted in red.
+5. In **Exercise 2**, run the final visualization paragraph to center the investigation on `DEV-fp-91a7`. Review the three accounts that share the device and the IP address connected through the `login_from` relationship. Use the same triangle **Run** button highlighted in red.
 
-    ![Run Exercise 2 to find accounts sharing identifying evidence](images/graph-exercise-2-run-highlighted.png " ")
+    ![Run Exercise 2 to inspect accounts and an IP address connected to DEV-fp-91a7](images/graph-exercise-2-run-highlighted.png " ")
 
 6. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account.
 
