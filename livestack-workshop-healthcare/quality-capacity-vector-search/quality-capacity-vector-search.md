@@ -75,18 +75,18 @@ Search for services related to the need for more treatment appointments. The phr
     ```sql
     <copy>WITH query_vector AS (
       SELECT VECTOR_EMBEDDING(
-               ADMIN.ALL_MINILM_L12_V2
-               USING 'more appointment room for cancer treatments' AS DATA
-             ) AS embedding
+        ADMIN.ALL_MINILM_L12_V2
+        USING 'more appointment room for cancer treatments' AS DATA
+      ) AS embedding
     )
     SELECT s.service_name,
            s.provider_network,
            ROUND(
              1 - VECTOR_DISTANCE(
-                   s.service_embedding,
-                   q.embedding,
-                   COSINE
-                 ),
+               s.service_embedding,
+               q.embedding,
+               COSINE
+             ),
              4
            ) AS similarity
     FROM care_services_v s
@@ -125,9 +125,9 @@ Now use the same phrase against quality and capacity signal text.
     ```sql
     <copy>WITH query_vector AS (
       SELECT VECTOR_EMBEDDING(
-               ADMIN.ALL_MINILM_L12_V2
-               USING 'more appointment room for cancer treatments' AS DATA
-             ) AS embedding
+        ADMIN.ALL_MINILM_L12_V2
+        USING 'more appointment room for cancer treatments' AS DATA
+      ) AS embedding
     )
     SELECT s.signal_id,
            s.criticality,
@@ -135,10 +135,10 @@ Now use the same phrase against quality and capacity signal text.
            s.service_name,
            ROUND(
              1 - VECTOR_DISTANCE(
-                   s.signal_embedding,
-                   q.embedding,
-                   COSINE
-                 ),
+               s.signal_embedding,
+               q.embedding,
+               COSINE
+             ),
              4
            ) AS similarity
     FROM quality_capacity_signals_v s
