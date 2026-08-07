@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">Opening a Telco workshop details section</title>
+  <desc id="desc">A closed Learn more section expands to reveal a concise definition of a converged database for Seer Comms.</desc>
+  <rect width="1280" height="360" fill="#f7f8f9"/>
+  <style>.title{font:700 28px Arial,sans-serif;fill:#292522}.label{font:700 15px Arial,sans-serif;fill:#6a625d}.summary{font:700 21px Arial,sans-serif;fill:#292522}.body{font:18px Arial,sans-serif;fill:#3f3a36}.note{font:700 16px Arial,sans-serif;fill:#0b4974}</style>
+  <text x="56" y="55" class="title">Open details when you want more context</text>
+  <text x="56" y="86" class="body">The main task stays focused. The expanded section adds the Telco definition and why it matters.</text>
+  <text x="58" y="129" class="label">CLOSED</text>
+  <rect x="56" y="146" width="500" height="82" rx="10" fill="#fff" stroke="#d6d3cf"/>
+  <path d="M85 177l12 10-12 10z" fill="#c74634"/>
+  <text x="119" y="193" class="summary">Learn more: What is a converged database?</text>
+  <path d="M604 185h68v-14l29 24-29 24v-14h-68z" fill="#c74634"/>
+  <text x="620" y="146" class="note">Select the arrow</text>
+  <text x="746" y="129" class="label">OPEN</text>
+  <rect x="744" y="146" width="480" height="164" rx="10" fill="#fff" stroke="#d6d3cf"/>
+  <path d="M773 185l10 12 10-12z" fill="#c74634"/>
+  <text x="807" y="193" class="summary">Learn more: What is a converged database?</text>
+  <rect x="777" y="218" width="6" height="62" fill="#c74634"/>
+  <text x="804" y="238" class="body">Rows, JSON documents, vectors, graph relationships, and</text>
+  <text x="804" y="263" class="body">spatial locations stay in one governed database. Seer Comms</text>
+  <text x="804" y="288" class="body">can trace a capacity concern to evidence without copying it.</text>
+</svg>

@@ -2,18 +2,16 @@
 
 ## Introduction
 
-One congestion case can affect a subscriber cluster, a network site, an outage event, a support case, and a field crew at the same time. If an investigator misses one of those relationships, the response can be delayed or assigned to the wrong team while subscriber impact grows. You are the impact investigator who must establish the operational reach of a named case before a response is assigned. A property graph represents business entities as vertices and their connections as edges, so the case remains connected to its evidence.
+Now that you know the Hudson Yards site, the source signal, and the related service order, you need to see the full reach of **TEL-5G-2026-501**. This case connects a subscriber cluster, a network site, an outage event, and a support case. In this lab, you use the property graph to make those relationships visible before a response is assigned.
 
 ![Telco impact graph flow](images/impact-graph-flow.svg " ")
 
-The image below is the Seer Comms SQL/PGQ explorer. An impact investigator uses it to inspect how a case reaches related entities. The SQL in this lab makes that one-hop case-to-entity traversal explicit and repeatable.
-
-![SQL/PGQ query explorer](images/sql-pgq-query-explorer.png " ")
+The flow graphic names the case, the `GRAPH_TABLE` traversal, and the review queue. The SQL in this lab turns the one-hop case-to-entity traversal into a repeatable evidence path for the impact investigator.
 
 ### Objectives
 
-- Confirm the Telco property graph exists.
-- Start from a named experience case.
+- Confirm that the telecom property graph exists before querying case relationships.
+- Start from the named TEL-5G-2026-501 experience case and follow the connected entities.
 - Follow case-to-entity relationship evidence with SQL/PGQ.
 
 Estimated Time: **12 minutes**
@@ -45,11 +43,17 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Confirm the impact graph
 
-1. Follow the steps below.
+Confirm the impact graph before you traverse it, so the case relationship query starts from a known governed graph object:
+
+1. Follow the steps below:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     `USER_PROPERTY_GRAPHS` inventories graph definitions. The result names the graph used for subscriber and network impact investigation.
+
+    1. `USER_PROPERTY_GRAPHS` limits the catalog to graph definitions owned by `LLUSER`.
+    2. `WHERE graph_name = ...` asks for the one graph this lab uses, rather than listing unrelated catalog entries.
+    3. `SELECT graph_name` returns the name the SQL/PGQ query uses in Task 2.
 
     ```sql
     <copy>
@@ -67,9 +71,11 @@ Estimated Time: **12 minutes**
 
 ## Task 2: Find entities linked to an experience case
 
-1. Follow the steps below.
+Trace the entities connected to TEL-5G-2026-501 so each response team can see why it is part of the coordinated review:
 
-    The graph pattern starts at the named experience case `TEL-5G-2026-501`, follows its `case_involves` relationships, and returns the connected entities. It is a focused investigation: you deliberately choose this incident reference because its critical priority, 31,200 affected subscribers, and service value at risk merit coordinated review.
+1. Follow the steps below:
+
+    The graph pattern starts at the named experience case `TEL-5G-2026-501`, follows its `case_involves` relationships, and returns the connected entities. This is the case ID for the critical Hudson Yards event-venue congestion incident introduced in Lab 1. It is a focused investigation because 31,200 subscribers are affected and $2.14M of service value is at risk.
 
     1. `GRAPH_TABLE (telecom_experience_network ...)` selects the governed graph to query.
     2. `MATCH` starts at the `experience_case` vertex and follows each `case_involves` edge to a connected `entity` vertex.
@@ -114,11 +120,11 @@ Estimated Time: **12 minutes**
     | TEL-5G-2026-501 | critical | 31200 | 2140000 | Stadium district family plan cluster | subscriber | subscriber_cluster | 98.2 |
     | TEL-5G-2026-501 | critical | 31200 | 2140000 | Capacity reroute case CAP-501 | support_case | support_case | 97.5 |
 
-    Read each row as a coordinated follow-up candidate, not as an automatic action. **Entity Type** tells you what kind of evidence was reached; **Role** tells you why it is relevant to the case; and **Evidence Confidence %** tells you how strongly the relationship is supported in this scenario. The repeated case measures are intentional context: they help each team see the same impact level while reviewing its own entity.
+    Read each row as a coordinated follow-up candidate, not as an automatic action. **Entity Type** tells you what kind of evidence was reached, **Role** tells you why it matters to the case, and **Evidence Confidence %** shows how strongly the relationship is supported in this scenario.
 
-    This relationship evidence stays next to operational facts in the database, reducing data copies and making an investigation more repeatable.
+    Because the relationship evidence stays beside the operational facts in the database, teams can reduce data copies and repeat the investigation path when a new network-experience case appears.
 
-    The graph identifies who and what is affected. The next lab adds the location evidence a field-operations planner needs to compare response sites.
+    The graph identifies who and what is affected. The next lab adds location evidence so a field-operations planner can compare possible response sites.
 
 ## Acknowledgements
 

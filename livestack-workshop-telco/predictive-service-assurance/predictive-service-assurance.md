@@ -2,14 +2,14 @@
 
 ## Introduction
 
-Capacity pressure is easier to manage before it becomes a visible service problem. You are the capacity planner who needs to decide which locations deserve review before a peak period, using more than a single dashboard threshold. Oracle Machine Learning (OML) trains and scores a Telco-specific capacity-risk model inside Oracle AI Database, where the site capacity and load features already live. That keeps the prediction, its business context, and the SQL evidence together.
+The **TEL-5G-2026-501** investigation explains the current **Hudson Yards** incident. The next question is whether its **91%** load also signals capacity risk before the next peak period. In this lab, you compare the current incident evidence with a reviewable Oracle Machine Learning (OML) prediction, so capacity planning stays connected to the same governed site, case, and operational evidence.
 
 ![Oracle Machine Learning flow from capacity features to a reviewable service-impact prediction](images/telco-oml-service-assurance.svg " ")
 
 ### Objectives
 
-- Confirm that the Telco capacity-risk model is available in the workshop schema.
-- Score network sites for service-impact risk with SQL.
+- Confirm that the telecom capacity-risk model is available before scoring network sites.
+- Score network sites for service-impact risk directly from SQL.
 - Interpret a model prediction as a planning signal, not as an automatic action.
 
 Estimated Time: **15 minutes**
@@ -42,11 +42,17 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Inventory the capacity-risk model
 
-1. Run the model-inventory query.
+Confirm that the approved capacity-risk model is available before using it to score sites for review:
+
+1. Run the model-inventory query:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     `USER_MINING_MODELS` is Oracle's catalog of OML models owned by your schema. This readiness check is useful to a developer or planner because it confirms that the approved, persisted model is available before an application requests a score.
+
+    1. `USER_MINING_MODELS` lists only the OML models owned by the current workshop schema.
+    2. The `WHERE` clause checks for the one capacity-risk model used in Tasks 2 and 3.
+    3. `SELECT` returns its name and mining function, so you can confirm both identity and model type.
 
     ```sql
     <copy>
@@ -63,11 +69,13 @@ Estimated Time: **15 minutes**
     | --- | --- |
     | NETWORK\_CAPACITY\_SURGE\_MODEL | CLASSIFICATION |
 
-    The model is persisted with the workshop schema. It can be called from SQL without moving the site features or the result to a separate system.
+    The model is persisted with the workshop schema, so it can be called from SQL without moving site features or scores into a separate system.
 
 ## Task 2: Score network sites for service-impact risk
 
-1. Run the site-scoring query.
+Score high-load network sites so the capacity planner can prioritize a review queue before the next peak period:
+
+1. Run the site-scoring query:
 
     In order to understand this query, read it in four parts.
 
@@ -111,17 +119,29 @@ Estimated Time: **15 minutes**
 
 ## Task 3: Compare the prediction with the workshop planning label
 
-1. Run the comparison query.
+Compare the model prediction with the workshop planning label so the learner sees how to treat a prediction as reviewable evidence, not as an automatic command:
+
+1. Run the comparison query:
 
     `NETWORK_CAPACITY_SURGE_TRAINING_V` is a saved SQL view that gives the model a repeatable feature shape. Its `ESCALATION_LABEL` is the deterministic workshop planning label. This simple comparison teaches how to look for agreement between the known label and the model's result; it is not a complete production model evaluation.
+
+    Read the query from the data source to the review queue.
+
+    1. `NETWORK_CAPACITY_SURGE_TRAINING_V t` supplies one repeatable feature row and its known planning label.
+    2. The join to `NETWORK_SITES ns` uses `TRAINING_CASE_ID` to add the readable site name; it does not change the model inputs.
+    3. The `WHERE` clause narrows the review to sites at 80% load or higher.
+    4. `PREDICTION` passes only the two named capacity features to `NETWORK_CAPACITY_SURGE_MODEL` and returns its category.
+    5. `ORDER BY` places the most loaded sites first, then `FETCH FIRST 10 ROWS ONLY` keeps the comparison readable.
 
     ```sql
     <copy>
     SELECT ns.network_site_name AS "Network Site",
            t.escalation_label AS "Planning Label",
-           PREDICTION(network_capacity_surge_model USING
-             t.service_capacity_units,
-             t.current_capacity_load_pct
+           PREDICTION(
+             network_capacity_surge_model
+             USING
+               t.service_capacity_units,
+               t.current_capacity_load_pct
            ) AS "Predicted Risk"
     FROM network_capacity_surge_training_v t
     JOIN network_sites ns ON ns.network_site_id = t.training_case_id
@@ -139,7 +159,7 @@ Estimated Time: **15 minutes**
     | Miami Service Assurance Hub | ESCALATE | ESCALATE |
     | San Francisco Network Edge | ESCALATE | ESCALATE |
 
-    A matching label shows that the model recognizes the pattern represented by this deterministic scenario. A difference would be a reason to examine the feature values and the operating context—not a reason to ignore the site.
+    A matching label shows that the model recognizes the pattern represented by this deterministic scenario. A difference would be a reason to examine the feature values and operating context, not a reason to ignore the site.
 
 ## Acknowledgements
 
