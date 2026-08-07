@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this instructor-only setup guide before delivering the beginner OLVM on OCI E5 workshop. Learner Lab 1 is verification-only. The instructor, workshop owner, or automation owner must build the OCI objects described here before students begin.
+Use this instructor-only setup guide before delivering the beginner Oracle Linux Virtualization Manager on OCI E5 workshop. Learner Lab 1 is verification-only. The instructor, workshop owner, or automation owner must build the OCI objects described here before students begin.
 
 This file is not included in the learner workshop manifest. It is a preparation checklist for workshop delivery.
 
@@ -13,9 +13,9 @@ Estimated Time: 60-120 minutes per environment, depending on OCI provisioning ti
 In this setup guide, you will:
 
 - Build the OCI VCN, subnet, VLAN, gateway, route-table, and security prerequisites
-- Create the OLVM manager and two KVM hosts on `VM.Standard.E5.Flex`
+- Create the Oracle Linux Virtualization Manager manager and two Oracle Linux KVM hosts on `VM.Standard.E5.Flex`
 - Attach secondary VNICs for the private and VLAN networks
-- Create two shared block volumes and attach them to both KVM hosts
+- Create two shared block volumes and attach them to both Oracle Linux KVM hosts
 - Prepare the `oracle` workshop user and SSH trust used by learner labs
 - Validate the environment before learners start Lab 1
 
@@ -110,7 +110,7 @@ Before setup, confirm that you have:
 
 ## Task 3: Create the E5 Instances
 
-1. Create the OLVM manager.
+1. Create the Oracle Linux Virtualization Manager manager.
 
     | Field | Value |
     |---|---|
@@ -122,7 +122,7 @@ Before setup, confirm that you have:
     | Primary VNIC | `Public Subnet-OLV-VCN` |
     | Public IP | Yes |
 
-2. Create the first KVM host.
+2. Create the first Oracle Linux KVM host.
 
     | Field | Value |
     |---|---|
@@ -134,7 +134,7 @@ Before setup, confirm that you have:
     | Primary VNIC | `Public Subnet-OLV-VCN` |
     | Public IP | Yes |
 
-3. Create the second KVM host.
+3. Create the second Oracle Linux KVM host.
 
     | Field | Value |
     |---|---|
@@ -187,7 +187,7 @@ Before setup, confirm that you have:
 
 3. Confirm that each host has an address on `10.0.1.0/24`.
 
-4. Do not manually configure the VLAN VNICs on the KVM hosts.
+4. Do not manually configure the VLAN VNICs on the Oracle Linux KVM hosts.
 
 ## Task 6: Create and Attach Shared Block Volumes
 
@@ -196,14 +196,14 @@ Before setup, confirm that you have:
     | Field | Value |
     |---|---|
     | Size | `1 TB` |
-    | Availability Domain | Same availability domain as the KVM hosts |
+    | Availability Domain | Same availability domain as the Oracle Linux KVM hosts |
 
 2. Create `amd-storage-domain-02`.
 
     | Field | Value |
     |---|---|
     | Size | `1 TB` |
-    | Availability Domain | Same availability domain as the KVM hosts |
+    | Availability Domain | Same availability domain as the Oracle Linux KVM hosts |
 
 3. Attach both volumes to `olkvm01`.
 
@@ -232,7 +232,7 @@ Before setup, confirm that you have:
     sudo chmod 440 /etc/sudoers.d/oracle</copy>
     ```
 
-2. On `olvm`, add short hostnames for both KVM hosts.
+2. On `olvm`, add short hostnames for both Oracle Linux KVM hosts.
 
     ```bash
     <copy>sudo tee -a /etc/hosts <<'EOF'
@@ -250,7 +250,7 @@ Before setup, confirm that you have:
 
 4. Add the generated public key to `/home/oracle/.ssh/authorized_keys` on `olkvm01` and `olkvm02`.
 
-5. From `olvm`, verify SSH to both KVM hosts.
+5. From `olvm`, verify SSH to both Oracle Linux KVM hosts.
 
     ```bash
     <copy>ssh olkvm01 hostname -f

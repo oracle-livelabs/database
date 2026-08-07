@@ -16,7 +16,7 @@ This walkthrough video is silent and does not include audio narration.
 In this lab, you will:
 
 - Create the `l2-vm-network` logical network
-- Assign that network to both KVM hosts with static host addresses
+- Assign that network to both Oracle Linux KVM hosts with static host addresses
 - Add a shared Fibre Channel storage domain
 - Import an Oracle Linux template
 - Create and validate the `ol9-vm1` test VM
@@ -26,10 +26,10 @@ In this lab, you will:
 This lab assumes you have:
 
 - Completed the Lab 3 checkpoint
-- Both KVM hosts showing status **Up**
+- Both Oracle Linux KVM hosts showing status **Up**
 - Access to the Administration Portal through the local hosts-file mapping created in Lab 2
 - The `olvm-cluster-id_rsa` private key downloaded in Lab 1
-- SSH access to the OLVM manager from your local machine
+- SSH access to the Oracle Linux Virtualization Manager manager from your local machine
 
 > **Important:** Do not start this lab while either host is still `Installing`, `Initializing`, or `Non Operational`.
 >
@@ -87,7 +87,7 @@ This lab assumes you have:
     | Gateway | Leave blank |
     | DNS Servers | Leave blank |
 
-    This address is used as the KVM-host access and test address for the VM network. Do not configure a gateway or DNS server on `l2-vm-network`.
+    This address is used as the Oracle Linux KVM-host access and test address for the VM network. Do not configure a gateway or DNS server on `l2-vm-network`.
 
     ![Edit Network](./images/edit-network.png "Show Edit Network")
 
@@ -117,7 +117,7 @@ This lab assumes you have:
     | Gateway | Leave blank |
     | DNS Servers | Leave blank |
 
-    This address makes `olkvm02` usable as the access host when OLVM runs a VM on `olkvm02`.
+    This address makes `olkvm02` usable as the access host when Oracle Linux Virtualization Manager runs a VM on `olkvm02`.
 
 7. Click **OK** and wait for the network setup task to finish before you continue.
 
@@ -272,7 +272,7 @@ This lab assumes you have:
 
     ![Virtual Machine NIC1](./images/virtual-machine-nic1.png "Show Virtual Machine NIC1")
 
-5. From your local terminal, connect to the OLVM manager.
+5. From your local terminal, connect to the Oracle Linux Virtualization Manager manager.
 
     In Windows PowerShell, run:
 
@@ -286,7 +286,7 @@ This lab assumes you have:
     <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip></copy>
     ```
 
-6. Confirm the KVM host has an address on `l2-vm-network`.
+6. Confirm the Oracle Linux KVM host has an address on `l2-vm-network`.
 
     If `ol9-vm1` is running on `olkvm01`, run:
 
@@ -304,12 +304,12 @@ This lab assumes you have:
 
     Expected values from Tasks 2 and 3 are:
 
-    | KVM Host | Expected `l2-vm-network` Address |
+    | Oracle Linux KVM Host | Expected `l2-vm-network` Address |
     |---|---|
     | `olkvm01` | `10.0.10.254/24` |
     | `olkvm02` | `10.0.10.253/24` |
 
-7. Connect to `ol9-vm1` through the KVM host shown in the **Host** column.
+7. Connect to `ol9-vm1` through the Oracle Linux KVM host shown in the **Host** column.
 
     If `ol9-vm1` is running on `olkvm01`, run:
 
@@ -336,8 +336,8 @@ This lab assumes you have:
 
     | Result | Meaning | Next Action |
     |---|---|---|
-    | Ping from the KVM host succeeds, SSH fails | VM network works, but guest SSH or login is not ready | Recreate `ol9-vm1` from Task 6 and confirm **Use Cloud-Init/Sysprep** is selected before first boot |
-    | Ping from the KVM host fails | VM is not reachable on `l2-vm-network` | Confirm `nic1` is plugged, linked, and using `l2-vm-network`; then recreate `ol9-vm1` if needed |
+    | Ping from the Oracle Linux KVM host succeeds, SSH fails | VM network works, but guest SSH or login is not ready | Recreate `ol9-vm1` from Task 6 and confirm **Use Cloud-Init/Sysprep** is selected before first boot |
+    | Ping from the Oracle Linux KVM host fails | VM is not reachable on `l2-vm-network` | Confirm `nic1` is plugged, linked, and using `l2-vm-network`; then recreate `ol9-vm1` if needed |
 
     Do not continue troubleshooting from the browser console during a beginner workshop.
 
@@ -350,15 +350,15 @@ This lab assumes you have:
 
     The output should show `10.0.10.105` on the guest network interface. It should also show the static route settings that Cloud-Init applied during first boot.
 
-9. Verify the VM can reach the KVM host on `l2-vm-network`.
+9. Verify the VM can reach the Oracle Linux KVM host on `l2-vm-network`.
 
     ```bash
-    <copy>ping -c 3 <kvm-l2-ip></copy>
+    <copy>ping -c 3 <Oracle Linux KVM-l2-ip></copy>
     ```
 
     **Example:** `ping -c 3 10.0.10.254`
 
-    Replace `<kvm-l2-ip>` with the address you recorded in step 6.
+    Replace `<Oracle Linux KVM-l2-ip>` with the address you recorded in step 6.
 
     This ping should succeed. Do not use `10.0.10.1`, DNS, or internet access as the success test in this lab. Guest internet access is not required for Lab 5.
 
@@ -379,7 +379,7 @@ At this point, you should have:
 - The Fibre Channel storage domain in **Active** state
 - The Oracle Linux template imported successfully
 - `ol9-vm1` running with IP address `10.0.10.105`
-- Verified `ol9-vm1` can reach its KVM host on `l2-vm-network`
+- Verified `ol9-vm1` can reach its Oracle Linux KVM host on `l2-vm-network`
 
 You are ready for Lab 5 only when all checkpoint items above are complete.
 
