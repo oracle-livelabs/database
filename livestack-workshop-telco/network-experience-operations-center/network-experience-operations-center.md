@@ -2,9 +2,9 @@
 
 ## Introduction
 
-**TEL-5G-2026-501** now needs an operations starting point. Hudson Yards is running at **91%** capacity load, so the network operations analyst must decide whether it belongs at the top of the review queue. In this lab, you move from a national capacity summary to the named high-load sites behind it, using direct SQL to make the priority visible and reviewable.
+The `TEL-5G-2026-501` investigation needs an operational starting point. Hudson Yards is at 91% capacity load, so an operations leader needs to see whether it belongs at the top of the review queue. You are the network operations analyst who moves from a national summary to the named sites behind it. In this lab, direct SQL makes that priority visible and reviewable.
 
-The flow graphic shows the lab pattern: a KPI identifies capacity pressure, SQL reveals the contributing rows, and an operations leader uses those rows to prioritize response. The lab uses the validated **Hudson Yards** load of **91%**, so the learner can connect the dashboard-level signal to the operational evidence behind it.
+The compact flow graphic shows the learning pattern for this lab: a KPI identifies pressure, SQL reveals the contributing rows, and an operations leader uses those rows to prioritize response. It uses the validated Hudson Yards load of 91%, not an unverified dashboard total.
 
 ![KPI-to-evidence flow](images/dashboard-evidence.svg " ")
 

@@ -169,7 +169,7 @@ Start with location and status.
 
     Hialeah is active, supports the requested panel, is below the workshop load limit, and is only 8.5 miles away. The simple calculation estimates 96,250 available units.
 
-    This is synthetic workshop data. A real routing decision would also use current inventory, transport time, service rules, patient needs, and local operating policy.
+    Before acting on a routing result, a team would also consider current inventory, transport time, service rules, patient needs, and local operating policy.
 
     The important database pattern is clear: Spatial supplies distance, while relational columns supply the service and operating rules.
 

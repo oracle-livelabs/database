@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After Hudson Yards becomes the priority, the **TEL-5G-2026-501** team needs the service action tied to the incident. **Order 601** links the source signal to a subscriber, the **Hudson Yards** site, and the assigned 5G service. In this lab, you inspect that order as application JSON while preserving relational evidence for operations, so application and operations teams work from the same governed source.
+After Hudson Yards becomes the priority, the `TEL-5G-2026-501` team must understand the service action tied to the incident. Order `601` links the case's source signal to a subscriber, the Hudson Yards site, and the assigned 5G service. You are the service-order developer who must present that order as application JSON while preserving relational evidence for operations. JSON Relational Duality gives both teams one governed source.
 
 ![JSON Relational Duality for service orders](images/json-duality.svg " ")
 

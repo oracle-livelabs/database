@@ -74,9 +74,17 @@ Start with the shape an application can consume.
 
     **Expected output: Request JSON**
 
-    | Request Document |
-    | --- |
-    | { "\_id": 170104, "requestingCareSiteId": 1002, "requestStatus": "DELIVERED", "requestValue": 943.89, "lineItems": [ ...5 items... ] } |
+    ```json
+    {
+      "_id": 170104,
+      "requestingCareSiteId": 1002,
+      "requestStatus": "DELIVERED",
+      "requestValue": 943.89,
+      "lineItems": [
+        ... 5 items ...
+      ]
+    }
+    ```
     {: title="Request JSON"}
 
 2. Read the document shape.

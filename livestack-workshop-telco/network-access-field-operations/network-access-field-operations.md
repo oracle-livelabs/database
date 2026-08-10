@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The **TEL-5G-2026-501** graph explains why Hudson Yards needs attention. A field planner now needs to decide which nearby network location can support the response. In this lab, Oracle Spatial keeps the Hudson Yards point, other network sites, and the distance calculation connected to the same case, service, and capacity evidence.
+The `TEL-5G-2026-501` graph shows why Hudson Yards needs attention. A field planner must now decide which nearby network location can support the response. Oracle Spatial keeps the Hudson Yards point, other network sites, and the distance calculation connected to the same case, service, and capacity evidence.
 
 ![Spatial field-operations flow from point locations to a distance-based response decision](images/spatial-point-distance-flow.svg " ")
 
-The flow graphic keeps the stored points, distance calculation, and field review together. The SQL in this lab supplies the geographic evidence that helps a planner compare response options.
+The flow graphic keeps the stored points, distance calculation, and field review together. The SQL in this lab supplies the geographic evidence for that decision.
 
 ### Objectives
 
@@ -117,7 +117,7 @@ Compare nearby network sites so field planning can pair location evidence with t
     | Wilmington Network Access Hub | Wilmington, Delaware | POINT (-75.5398 39.7391) | Philadelphia Network Core | Philadelphia, Pennsylvania | POINT (-75.1652 39.9526) | 24.8 |
     | Boston Service Assurance Hub | Boston, Massachusetts | POINT (-71.0589 42.3601) | Providence Network Hub | Providence, Rhode Island | POINT (-71.4128 41.824) | 41.2 |
 
-    The shortest listed pair is **Hudson Yards 5G Macro Site** and **Newark 5G Core Site**, at **9.0 miles**. In a live response, a planner would combine distance with crew availability, maintenance windows, and the case impact already identified in the graph lab.
+    The shortest listed pair is Hudson Yards 5G Macro Site and Newark 5G Core Site, at 9.0 miles. In a live response, a planner would combine this distance with crew availability and the case impact already identified in the graph lab.
 
 ## Acknowledgements
 

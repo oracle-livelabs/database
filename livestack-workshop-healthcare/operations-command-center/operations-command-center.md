@@ -93,7 +93,7 @@ Start with the headline numbers shown at the top of the operating view.
 
     Seer Health tracks 3,000 requests worth 4,210,943.89. Of the 5,000 signal bulletins, 474 have `CRITICAL` or `HIGH` priority, and those signals cover 156 watched services. One completed agent action is also recorded.
 
-    The number **474** is too large to read as one worksheet result. You will now inspect five stable examples before summarizing all signals by category.
+    Next, examine five representative elevated signals. Then summarize all 474 signals by category to see where they are concentrated.
 
 ## Task 2: Review the elevated signals
 

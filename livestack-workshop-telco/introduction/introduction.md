@@ -4,11 +4,7 @@
 
 Monday morning starts with a familiar network-operations problem: subscriber experience is slipping, but the evidence is scattered across capacity metrics, service orders, customer signals, case relationships, and location data. At Seer Comms, the incident is **TEL-5G-2026-501**, a critical 5G congestion case near Hudson Yards during an event period.
 
-The case affects 31,200 subscribers and places **$2.14M** in service value at risk. In this workshop, you follow that incident from the first capacity warning to a reviewable field-response decision, using SQL to connect each technical result to the telecom decision it supports.
-
-You use Oracle AI Database 26ai to keep the investigation governed in one place: operational rows, JSON service-order documents, subscriber-signal embeddings, graph relationships, spatial points, and model scores.
-
-By the end, you can explain which site needs attention, which service order and subscriber signal are connected to it, which entities are involved, which nearby locations can support the response, and which sites should enter the capacity-risk review queue.
+In this workshop, you investigate one escalating incident: `TEL-5G-2026-501`, a critical 5G congestion case near Hudson Yards during an event period. It affects 31,200 subscribers and puts $2.14M in service value at risk. You use **Oracle AI Database 26ai** to follow the evidence from the first capacity warning to a reviewable field response: the site, the affected service order, the subscriber signal, the connected case entities, nearby response locations, and the capacity-risk prediction.
 
 ![Seer Comms network-experience decision journey from capacity pressure to response](images/telco-workshop-intro-journey.svg " ")
 
