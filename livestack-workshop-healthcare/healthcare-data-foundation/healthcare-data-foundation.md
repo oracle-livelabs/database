@@ -65,7 +65,8 @@ Start with a capability map. This query asks Oracle Database which object famili
     3. `USER_PROPERTY_GRAPHS` confirms the care-path graph.
     4. `USER_TAB_COLS` counts the stored vector columns.
     5. `USER_SDO_GEOM_METADATA` counts the registered spatial layers.
-    6. `USER_MINING_MODELS` confirms the OML model.
+    6. `USER_MINING_MODELS` confirms the OML model.\
+
 
     `UNION ALL` stacks those counts into one readable result.
 
