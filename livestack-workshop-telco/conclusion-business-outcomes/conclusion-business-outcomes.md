@@ -2,19 +2,21 @@
 
 ## Introduction
 
-You have completed the SQL-backed `TEL-5G-2026-501` investigation. You started with its evidence foundation, confirmed Hudson Yards capacity pressure, inspected the linked service order, interpreted the game-day congestion signal, traced the case impact, compared nearby response locations, and reviewed the Hudson Yards capacity-risk score. Each result uses a different database capability while remaining connected to one governed incident record.
+You have completed the SQL-backed **TEL-5G-2026-501** investigation. You started with the evidence foundation, confirmed **Hudson Yards** capacity pressure, inspected the linked service order, interpreted the game-day congestion signal, traced the case impact, compared nearby response locations, and reviewed the **Hudson Yards** capacity-risk score. Each result uses a different database capability while remaining connected to one governed incident record.
 
 Estimated Time: **5 minutes**
 
 ### Objectives
 
-- Summarize the active Telco decision path.
-- Explain the evidence that supports the `TEL-5G-2026-501` response.
+- Summarize the active telecom decision path from incident signal to response planning.
+- Explain the governed evidence that supports the `TEL-5G-2026-501` response.
 - Carry the same investigation pattern into another network-experience case.
 
 ## Task 1: Review what you can now explain
 
-1. Use this table as a recap of the workshop.
+Use this recap to connect each lab result back to the telecom decision it helps answer:
+
+1. Use this table as a recap of the workshop:
 
     | Telco question | What you can now explain |
     | --- | --- |
@@ -45,9 +47,9 @@ Estimated Time: **5 minutes**
 
 4. Carry the pattern forward.
 
-    For the next incident, begin with a case ID and a business decision. Trace the capacity or service symptom to its governed rows. Read the affected order as JSON where an application needs it. Use Vector Search when the signal wording differs from service terminology. Use Property Graph to reveal connected people, sites, events, and cases. Use Spatial to compare response locations. Use OML as a priority signal beside, never instead of, operational evidence.
+    For the next incident, begin with a case ID and a business decision. Trace the capacity or service symptom to governed rows, read the affected order as **JSON** where an application needs it, use **Vector Search** when signal wording differs from service terminology, use **Property Graph** to reveal connected people, sites, events, and cases, use **Spatial** to compare response locations, and use **OML** as a priority signal beside operational judgment.
 
-    Oracle AI Database 26ai keeps those data models and scores connected under one governance model. That reduces sensitive copies and reconciliation work, and gives the team a repeatable explanation for every response decision.
+    **Oracle AI Database 26ai** keeps these data models and scores connected under one governance model. That reduces sensitive copies and reconciliation work, and gives network, service, field, and planning teams a repeatable explanation for every response decision.
 
 ## Acknowledgements
 

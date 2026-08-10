@@ -2,14 +2,14 @@
 
 ## Introduction
 
-After Hudson Yards becomes the priority, the `TEL-5G-2026-501` team must understand the service action tied to the incident. Order `601` links the case's source signal to a subscriber, the Hudson Yards site, and the assigned 5G service. You are the service-order developer who must present that order as application JSON while preserving relational evidence for operations. JSON Relational Duality gives both teams one governed source.
+After Hudson Yards becomes the priority, the **TEL-5G-2026-501** team needs the service action tied to the incident. **Order 601** links the source signal to a subscriber, the **Hudson Yards** site, and the assigned 5G service. In this lab, you inspect that order as application JSON while preserving relational evidence for operations, so application and operations teams work from the same governed source.
 
 ![JSON Relational Duality for service orders](images/json-duality.svg " ")
 
 ### Objectives
 
-- Confirm the `ORDERS_DV` JSON Relational Duality view exists.
-- Read a service order as a JSON document.
+- Confirm that the `ORDERS_DV` JSON Relational Duality view is available for application-style access.
+- Read selected service-order fields from a JSON document without losing the relational evidence behind it.
 - Relate JSON fields to relational service-order evidence.
 
 Estimated Time: **10 minutes**
@@ -39,7 +39,9 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Confirm the service-order duality view
 
-1. Follow the steps below.
+Confirm the JSON duality view before reading service-order documents, so the application interface is proven before the workshop relies on it:
+
+1. Follow the steps below:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -68,7 +70,9 @@ Estimated Time: **10 minutes**
 
 ## Task 2: Read service-order fields from the JSON document
 
-1. Follow the steps below.
+Project the service-order document into business-readable fields so an application developer can inspect the order without scrolling through a long JSON payload:
+
+1. Follow the steps below:
 
     `ORDERS_DV` returns a JSON document with a root order and nested `items`. Instead of displaying one long document in a worksheet cell, this query projects the fields an application developer most often needs to inspect.
 
@@ -99,9 +103,9 @@ Estimated Time: **10 minutes**
     | 602 | 402 | 202 | Routed | 95 | 95 | 104 |
     | 603 | 404 | 204 | Completed | 25 | 86 | 107 |
 
-    The nested item list helps an application display the order. Keeping it connected to relational rows means reporting, updates, and application reads use one governed source.
+    The nested item list helps an application display the order, while the governed relational source keeps reporting, updates, and application reads aligned.
 
-    You have now connected an operational action to its document representation. The next lab uses signal evidence to explain why a subscriber or service issue may need attention.
+    You have connected an operational action to its document representation. The next lab uses subscriber-signal evidence to explain why the service issue may need attention.
 
 ## Acknowledgements
 
