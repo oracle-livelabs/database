@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="250" viewBox="0 0 900 250" role="img" aria-labelledby="title desc">
+  <title id="title">How expandable details work in this workshop</title>
+  <desc id="desc">A closed details summary on the left expands into a short State and Local Government explanation on the right.</desc>
+  <rect width="900" height="250" rx="14" fill="#f7f8f9"/>
+  <text x="32" y="38" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#312d2a">Select the arrow when you want more context</text>
+  <rect x="32" y="64" width="330" height="72" rx="8" fill="#ffffff" stroke="#b8b8b8" stroke-width="2"/>
+  <text x="54" y="108" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">▶</text>
+  <text x="84" y="108" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#312d2a">Key terms: vector search</text>
+  <path d="M386 100 H468" stroke="#c74634" stroke-width="4" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c74634"/>
+    </marker>
+  </defs>
+  <rect x="492" y="64" width="376" height="152" rx="8" fill="#ffffff" stroke="#b8b8b8" stroke-width="2"/>
+  <text x="514" y="102" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">▼</text>
+  <text x="544" y="102" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#312d2a">Key terms: vector search</text>
+  <line x1="514" y1="119" x2="846" y2="119" stroke="#dddddd"/>
+  <text x="514" y="149" font-family="Arial, sans-serif" font-size="16" fill="#4b4b4b">Vector search compares meaning, even</text>
+  <text x="514" y="174" font-family="Arial, sans-serif" font-size="16" fill="#4b4b4b">when resident and service wording differs.</text>
+  <text x="514" y="199" font-family="Arial, sans-serif" font-size="15" fill="#6b6b6b">Select the arrow again to close the detail.</text>
+  <text x="32" y="205" font-family="Arial, sans-serif" font-size="16" fill="#5b5b5b">Closed by default</text>
+</svg>
