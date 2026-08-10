@@ -14,7 +14,9 @@ Estimated Time: **5 minutes**
 
 ## Task 1: Review what you can now explain
 
-1. Use this table as a recap of the workshop.
+Use this recap to connect each lab result back to the telecom decision it helps answer:
+
+1. Use this table as a recap of the workshop:
 
     | Telco question | What you can now explain |
     | --- | --- |

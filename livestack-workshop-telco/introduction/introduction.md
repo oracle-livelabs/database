@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Seer Comms must decide where subscriber experience is deteriorating, which services and sites are affected, and how to respond before congestion becomes churn, an avoidable service-level breach, or a missed event window. The evidence arrives as operational rows, service-order documents, subscriber signals, relationships, and locations. When those data types live in separate systems, teams copy data, reconcile results, and repeat security work before they can act.
+Monday morning starts with a familiar network-operations problem: subscriber experience is slipping, but the evidence is scattered across capacity metrics, service orders, customer signals, case relationships, and location data. At Seer Comms, the incident is **TEL-5G-2026-501**, a critical 5G congestion case near Hudson Yards during an event period.
 
 In this workshop, you investigate one escalating incident: `TEL-5G-2026-501`, a critical 5G congestion case near Hudson Yards during an event period. It affects 31,200 subscribers and puts $2.14M in service value at risk. You use **Oracle AI Database 26ai** to follow the evidence from the first capacity warning to a reviewable field response: the site, the affected service order, the subscriber signal, the connected case entities, nearby response locations, and the capacity-risk prediction.
 
@@ -10,7 +10,7 @@ In this workshop, you investigate one escalating incident: `TEL-5G-2026-501`, a 
 
 *Figure 1: Each lab advances the `TEL-5G-2026-501` investigation, from Hudson Yards capacity pressure to a field-response decision.*
 
-Throughout the workshop, you will see small arrows next to expandable **Key terms**, **Learn more**, and **Why this matters** sections. Select an arrow whenever you want the definition, how the term is used in this workshop, and the Telco reason it matters. These sections are closed by default so the main lab stays focused, but you can open them whenever you want more explanation.
+Throughout the workshop, expandable **Key terms**, **Learn more**, and **Why this matters** sections give you optional context without interrupting the main investigation. Open them when you want a definition, a telecom example, or the business reason the capability matters; keep them closed when you want to stay focused on the hands-on SQL path.
 
 The example below shows an expandable Telco section before and after it is opened.
 
@@ -36,10 +36,10 @@ The example below shows an expandable Telco section before and after it is opene
 
 ### Objectives
 
-- Query the Seer Comms data foundation through SQL.
-- Use JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, and Oracle Machine Learning (OML) for connected Telco evidence.
-- Explain how a dashboard result can be traced to reviewable database rows.
-- Describe the practical governance benefit of keeping evidence together.
+- Trace the Seer Comms incident evidence through SQL, from the data foundation to a reviewable network-response decision.
+- Use JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, and Oracle Machine Learning (OML) to connect service orders, subscriber signals, impact relationships, locations, and capacity-risk scores.
+- Explain how each dashboard or planning result can be traced back to governed database evidence.
+- Describe how one database foundation reduces duplicate data movement, reconciliation work, and fragmented governance during a telecom incident response.
 
 Estimated Workshop Time: **80 minutes**
 
@@ -54,7 +54,7 @@ Estimated Workshop Time: **80 minutes**
 | Database Capability | SQL, JSON, vectors, graphs, and spatial data operate in one database. |
 | Outcome | You can connect an operational observation to explainable, repeatable evidence. |
 
-The labs follow one escalation: identify the evidence, prioritize loaded sites, inspect the affected order, understand the related signal, map the case impact, then use location evidence to plan a response.
+The labs follow one escalation path: identify the evidence foundation, prioritize loaded sites, inspect the affected service order, interpret the subscriber signal, map the case impact, compare response locations, and review the next capacity-risk decision.
 
 ## Acknowledgements
 

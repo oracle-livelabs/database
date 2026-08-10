@@ -10,7 +10,7 @@ The flow graphic keeps the stored points, distance calculation, and field review
 
 ### Objectives
 
-- Confirm the spatial layers used for network and field planning.
+- Confirm the spatial metadata used for network-site and subscriber-location planning.
 - Inspect the point layers used for site and subscriber location.
 - Use a distance calculation to compare network sites.
 
@@ -43,7 +43,9 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Confirm spatial layers
 
-1. Follow the steps below.
+Confirm the spatial layers before calculating distance, so the planner knows the site and subscriber points use the expected location reference:
+
+1. Follow the steps below:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -74,7 +76,9 @@ Estimated Time: **12 minutes**
 
 ## Task 2: Compare the distance between network sites
 
-1. Follow the steps below.
+Compare nearby network sites so field planning can pair location evidence with the incident impact already identified in the graph lab:
+
+1. Follow the steps below:
 
     `SDO_GEOM.SDO_DISTANCE` compares two `SDO_GEOMETRY` point values. The query pairs different sites, displays each point in map-readable Well-Known Text (WKT), calculates a distance in miles, and returns the closest examples. WKT writes a point as `POINT (longitude latitude)`, so you can see the source location values used by the calculation.
 

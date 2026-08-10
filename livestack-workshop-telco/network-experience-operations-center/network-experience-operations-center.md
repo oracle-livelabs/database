@@ -41,7 +41,9 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Summarize capacity pressure
 
-1. Follow the steps below.
+Start with the capacity summary so you can see where network pressure appears across the national site footprint:
+
+1. Follow the steps below:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
@@ -78,7 +80,9 @@ Estimated Time: **12 minutes**
 
 ## Task 2: Drill into high-load network sites
 
-1. Follow the steps below.
+Drill from the summary into named high-load sites so the operations priority becomes assignable to real locations:
+
+1. Follow the steps below:
 
     The next query drills through to reviewable rows rather than only a dashboard total.
 
@@ -111,9 +115,9 @@ Estimated Time: **12 minutes**
     | Newark 5G Core Site | Newark | New Jersey | 33000 | 28380 | 86.0 |
     | Seattle Network Access Hub | Seattle | Washington | 33000 | 28050 | 85.0 |
 
-    For a production dashboard, indexes on its join and filter columns and, for stable high-volume summaries, a materialized view can reduce repeat aggregation cost. This lab uses direct SQL so you can see exactly how the operational result is formed.
+    For a production dashboard, indexes on join and filter columns can reduce query cost, and a materialized view can help with stable high-volume summaries. This lab keeps the query direct so you can see exactly how the operational result is formed.
 
-    The high-load site list leads into the service-order lab: each operational response must remain connected to the subscriber order it affects.
+    The high-load site list leads into the service-order lab because every operational response must stay connected to the subscriber order it affects.
 
 ## Acknowledgements
 
