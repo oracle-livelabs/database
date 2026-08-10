@@ -1,5 +1,11 @@
 # Source Traceability
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 Estimated Time: **Not applicable**
 
 | Workshop Area | Source | Evidence Type | Notes |
