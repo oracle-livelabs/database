@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="666" viewBox="0 0 1280 666" role="img" aria-labelledby="title desc">
+  <title id="title">Before and after state and local government data architecture</title>
+  <desc id="desc">Six separate specialist systems converge into one Oracle AI Database 26ai foundation for Colorado resident services.</desc>
+  <rect width="1280" height="666" fill="#f7f8fa"/>
+  <style>
+    .h1{font:700 34px Arial,sans-serif;fill:#18243b}.sub{font:18px Arial,sans-serif;fill:#334057}
+    .panel{fill:#fff;stroke:#c8d1dc;stroke-width:2}.ph{font:700 24px Arial,sans-serif;fill:#fff}
+    .box{fill:#fff;stroke-width:2.5}.bt{font:700 17px Arial,sans-serif;fill:#1e293b}.tag{font:700 12px Arial,sans-serif;fill:#334057}
+    .body{font:16px Arial,sans-serif;fill:#26344a}.label{font:700 21px Arial,sans-serif}.chip{font:700 15px Arial,sans-serif;fill:#fff}
+  </style>
+  <text x="38" y="48" class="h1">Before and After: Colorado Resident-Services Data Architecture</text>
+  <text x="38" y="82" class="sub">Separate systems create copies and reconciliation work. Oracle AI Database 26ai keeps service evidence connected.</text>
+
+  <rect x="38" y="112" width="520" height="512" rx="20" class="panel"/>
+  <path d="M38 132a20 20 0 0 1 20-20h480a20 20 0 0 1 20 20v54H38z" fill="#a92b3e"/>
+  <text x="60" y="163" class="ph">Before: Separate Specialist Systems</text>
+
+  <g transform="translate(66 210)">
+    <rect width="214" height="70" rx="11" class="box" stroke="#e76f51"/><text x="20" y="29" class="bt">Case Warehouse</text><text x="20" y="51" class="tag">RELATIONAL SQL</text>
+  </g>
+  <g transform="translate(314 210)">
+    <rect width="214" height="70" rx="11" class="box" stroke="#f4a261"/><text x="20" y="29" class="bt">Document Store</text><text x="20" y="51" class="tag">REQUEST JSON</text>
+  </g>
+  <g transform="translate(66 299)">
+    <rect width="214" height="70" rx="11" class="box" stroke="#8f55d9"/><text x="20" y="29" class="bt">Vector Service</text><text x="20" y="51" class="tag">SEMANTIC SEARCH</text>
+  </g>
+  <g transform="translate(314 299)">
+    <rect width="214" height="70" rx="11" class="box" stroke="#2a9d8f"/><text x="20" y="29" class="bt">Partner Graph</text><text x="20" y="51" class="tag">HANDOFF LINKS</text>
+  </g>
+  <g transform="translate(66 388)">
+    <rect width="214" height="70" rx="11" class="box" stroke="#457b9d"/><text x="20" y="29" class="bt">GIS Platform</text><text x="20" y="51" class="tag">SERVICE ACCESS</text>
+  </g>
+  <g transform="translate(314 388)">
+    <rect width="214" height="70" rx="11" class="box" stroke="#d9aa3e"/><text x="20" y="29" class="bt">ML Platform</text><text x="20" y="51" class="tag">DEMAND MODELS</text>
+  </g>
+  <text x="66" y="500" class="label" fill="#a92b3e">Integration and control burden</text>
+  <g class="body">
+    <text x="66" y="532">⊖ Resident data copied between systems</text>
+    <text x="66" y="560">⊖ Security rules rebuilt in each product</text>
+    <text x="66" y="588">⊖ Teams reconcile conflicting answers</text>
+  </g>
+
+  <g transform="translate(582 280)">
+    <rect width="106" height="126" rx="18" fill="#eef1ff" stroke="#bdc8ff" stroke-width="2"/>
+    <text x="635" y="319" text-anchor="middle" class="bt" fill="#4637c7">Converge</text>
+    <path d="M605 354h48v-18l28 28-28 28v-18h-48z" fill="#5846e8"/>
+  </g>
+
+  <rect x="716" y="112" width="526" height="512" rx="20" class="panel"/>
+  <path d="M716 132a20 20 0 0 1 20-20h486a20 20 0 0 1 20 20v54H716z" fill="#17603a"/>
+  <text x="740" y="163" class="ph">After: Oracle Converged Database</text>
+
+  <ellipse cx="979" cy="333" rx="155" ry="108" fill="#ecfbf2" stroke="#70db9b" stroke-width="2"/>
+  <g transform="translate(884 274)">
+    <ellipse cx="95" cy="16" rx="95" ry="16" fill="#fff" stroke="#159447" stroke-width="3"/>
+    <rect x="0" y="16" width="190" height="92" fill="#fff" stroke="#159447" stroke-width="3"/>
+    <ellipse cx="95" cy="108" rx="95" ry="16" fill="#eefaf2" stroke="#159447" stroke-width="3"/>
+    <text x="95" y="57" text-anchor="middle" class="label" fill="#17603a">Oracle AI</text>
+    <text x="95" y="84" text-anchor="middle" class="label" fill="#17603a">Database 26ai</text>
+  </g>
+  <g>
+    <rect x="758" y="212" width="148" height="44" rx="10" fill="#e76f51"/><text x="832" y="240" text-anchor="middle" class="chip">SQL analytics</text>
+    <rect x="1052" y="212" width="148" height="44" rx="10" fill="#f4a261"/><text x="1126" y="240" text-anchor="middle" class="chip">JSON Duality</text>
+    <rect x="1096" y="312" width="137" height="44" rx="10" fill="#8f55d9"/><text x="1164" y="340" text-anchor="middle" class="chip">Vector Search</text>
+    <rect x="1052" y="414" width="148" height="44" rx="10" fill="#2a9d8f"/><text x="1126" y="442" text-anchor="middle" class="chip">Property Graph</text>
+    <rect x="758" y="414" width="148" height="44" rx="10" fill="#457b9d"/><text x="832" y="442" text-anchor="middle" class="chip">Spatial</text>
+    <rect x="736" y="312" width="137" height="44" rx="10" fill="#e5b94e"/><text x="804" y="340" text-anchor="middle" class="chip" fill="#18243b">OML models</text>
+  </g>
+
+  <text x="756" y="500" class="label" fill="#17603a">What changes for Colorado Resident Services</text>
+  <g class="body">
+    <text x="756" y="532">✓ One governed source for resident-service evidence</text>
+    <text x="756" y="560">✓ Consistent security, auditing, and SQL access</text>
+    <text x="756" y="588">✓ Fewer data copies and reconciliation points</text>
+  </g>
+</svg>
