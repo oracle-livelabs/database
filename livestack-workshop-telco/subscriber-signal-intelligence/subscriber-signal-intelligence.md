@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The source signal for **TEL-5G-2026-501** describes game-day 5G congestion affecting families near Hudson Yards, but it does not need to name the exact service plan for an analyst to find a relevant response. In this lab, you use Oracle AI Vector Search to connect subscriber language to likely service concerns while keeping the readable business text available for review.
+The source signal for `TEL-5G-2026-501` says that game-day 5G congestion is affecting families near Hudson Yards. It does not need to use the exact name of a service plan for an analyst to find a relevant response. You are the customer-experience analyst who connects that subscriber language to the likely service concern. Oracle AI Vector Search stores the meaning of the signal and service text as embeddings, while retaining the business text that explains the match.
 
 ![Vector signal-to-service flow](images/vector-signal-flow.svg " ")
 
