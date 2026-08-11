@@ -42,8 +42,8 @@
 
   <g transform="translate(582 280)">
     <rect width="106" height="126" rx="18" fill="#eef1ff" stroke="#bdc8ff" stroke-width="2"/>
-    <text x="635" y="319" text-anchor="middle" class="bt" fill="#4637c7">Converge</text>
-    <path d="M605 354h48v-18l28 28-28 28v-18h-48z" fill="#5846e8"/>
+    <text x="53" y="39" text-anchor="middle" class="bt" fill="#4637c7">Converge</text>
+    <path d="M23 74h48V56l28 28-28 28V94H23z" fill="#5846e8"/>
   </g>
 
   <rect x="716" y="112" width="526" height="512" rx="20" class="panel"/>
