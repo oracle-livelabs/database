@@ -4,9 +4,13 @@
 
 You have followed the active Colorado resident-services decision path: confirm the data foundation, trace command-center measures, inspect one request as rows and JSON, search demand signals by meaning, follow community-partner relationships, measure service access, and review predictive demand.
 
-The practical takeaway is that different public-service jobs can use different data models without breaking the chain of evidence. Jessica can start with a statewide warning, Maria can inspect a regional request, and analysts can add text, relationship, location, and model evidence while the underlying data remains connected.
+The practical takeaway is that different public-service jobs can use different data models without breaking the chain of evidence:
 
-With **Oracle AI Database 26ai**, Colorado can use relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for partner relationships, Oracle Spatial for access, and Oracle Machine Learning (OML) for prediction.
+- Jessica can start with a statewide warning.
+- Maria can inspect a regional request.
+- Analysts can add text, relationship, location, and model evidence while the underlying data remains connected.
+
+With **Oracle AI Database 26ai**, Colorado can use relational SQL for operations, **JSON Relational Duality** for application documents, **AI Vector Search** for meaning, **Property Graph** for partner relationships, **Oracle Spatial** for access, and **Oracle Machine Learning (OML)** for prediction.
 
 <details>
 <summary><strong>Why this matters: after the workshop</strong></summary>
@@ -26,6 +30,8 @@ With **Oracle AI Database 26ai**, Colorado can use relational SQL for operations
 Estimated Time: **5 minutes**
 
 ## Task 1: Review what you can now explain
+
+Use this recap to connect each lab result back to the public-service decision it helps explain.
 
 1. Review the public-service outcome map.
 

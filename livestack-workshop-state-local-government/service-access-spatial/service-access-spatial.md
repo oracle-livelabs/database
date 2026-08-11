@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Maria Santos now asks whether regional service capacity is close enough to the residents and requests that need it. A useful response plan needs a reachable service location, an available center, and an authorized viewer who can see the supporting records.
+**Maria Santos** now asks whether regional service capacity is close enough to the residents and requests that need it. A useful response plan needs a reachable service location, an available center, and an authorized viewer who can see the supporting records.
 
-You are the regional operations planner supporting Maria. You will measure distance with Oracle Spatial, summarize capacity by Colorado service region, and connect the SQL evidence to the governed statewide, regional, and restricted application views.
+You are the regional operations planner supporting **Maria**. In this lab, you measure distance with **Oracle Spatial**, summarize capacity by Colorado service region, and connect the SQL evidence to governed statewide, regional, and restricted application views.
 
 <details>
 <summary><strong>Key terms: point, boundary, spatial reference system, distance, capacity, and Virtual Private Database</strong></summary>
@@ -27,15 +27,15 @@ The diagram connects resident and center points to distance, regional capacity, 
 
 ![Service access spatial analysis flow](images/service-access-spatial-flow.svg " ")
 
-The application map below shows Colorado service centers and demand regions. The SQL makes those geographic relationships measurable rather than relying on visual judgment.
+The application map below shows Colorado service centers, demand regions, route layers, capacity, and the global VPD context used by Jessica. The full application displays 31 centers; the compact learner dataset uses four centers so the SQL remains quick and deterministic. The SQL makes those geographic relationships measurable rather than relying on visual judgment.
 
 ![Colorado Service Access and Coverage Map](images/service-access-map-layers.png " ")
 
 ### Objectives
 
-- Calculate distance from a resident to service access centers.
+- Calculate distance from a resident location to service access centers.
 - Summarize available and reserved capacity by region.
-- Distinguish spatial evidence from application-enforced VPD scope.
+- Distinguish spatial evidence from application-enforced VPD scope so learners do not treat a distance query as an authorization test.
 
 Estimated Time: **10 minutes**
 
@@ -54,7 +54,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Find service centers nearest to a resident
 
-Use the sample request location for Elena Garcia to rank Colorado service centers.
+Start with the resident's nearest service centers so Maria can connect the request to reachable support options.
 
 1. Run the distance query.
 
@@ -96,12 +96,12 @@ Use the sample request location for Elena Garcia to rank Colorado service center
 
     | Service Access Center Name | City | Service Access Center Type | Distance Km | Center Geojson |
     | --- | --- | --- | --- | --- |
-    | Grand Junction Regional Service Center | Grand Junction | Regional Service Hub | 1.8 | Point coordinates: -108.5506, 39.0639 |
-    | Denver Human Services Hub | Denver | Service Capacity Center | 316.4 | Point coordinates: -104.9903, 39.7392 |
-    | Fort Collins Resident Service Center | Fort Collins | Resident Service Counter | 342.0 | Point coordinates: -105.0844, 40.5853 |
-    | Pueblo Community Access Center | Pueblo | Local Access Point | 355.6 | Point coordinates: -104.6091, 38.2544 |
+    | Grand Junction Regional Service Center | Grand Junction | Regional Service Hub | 1.8 | `{ "type": "Point", "coordinates": [-108.5506, 39.0639] }` |
+    | Denver Human Services Hub | Denver | Service Capacity Center | 317.1 | `{ "type": "Point", "coordinates": [-104.9903, 39.7392] }` |
+    | Fort Collins Resident Service Center | Fort Collins | Resident Service Counter | 342.5 | `{ "type": "Point", "coordinates": [-105.0844, 40.5853] }` |
+    | Pueblo Community Access Center | Pueblo | Local Access Point | 356.4 | `{ "type": "Point", "coordinates": [-104.6091, 38.2544] }` |
 
-    The distance values use the fixed workshop coordinates and one-decimal geodesic rounding. Confirm the serialized GeoJSON text during target ADB validation.
+    These values were captured from the development ADB by using the fixed workshop coordinates and one-decimal geodesic rounding. GeoJSON whitespace can vary by client formatting, but the geometry type and coordinates remain the same.
 
 2. Interpret the distance.
 
@@ -109,7 +109,7 @@ Use the sample request location for Elena Garcia to rank Colorado service center
 
 ## Task 2: Compare regional service capacity
 
-Summarize capacity before recommending an intervention.
+Compare regional service capacity so the distance result sits beside the workload Maria can realistically route or rebalance.
 
 1. Run the capacity query.
 
@@ -148,7 +148,7 @@ Summarize capacity before recommending an intervention.
 
 ## Task 3: Understand governed application views
 
-The application changes protected rows according to trusted VPD context. The global role for Jessica can review statewide operations, Maria sees the Western Slope, and a restricted viewer sees no protected operational rows.
+Review the application screenshots as governed views of the same operational evidence, not as SQL Worksheet proof of VPD behavior.
 
 1. Compare the current regional and restricted screenshots.
 

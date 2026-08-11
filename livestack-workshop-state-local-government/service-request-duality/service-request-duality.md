@@ -2,9 +2,9 @@
 
 ## Introduction
 
-After the command-center review, Maria Santos needs one complete Western Slope request. The application wants a document with the request header and nested line items, while operations analysts still need relational rows for filtering, joins, and governance.
+After the **Command Center** review, **Maria Santos** needs one complete **Western Slope request**. The application wants a document with the request header and nested line items, while operations analysts still need relational rows for filtering, joins, and governance.
 
-You are the application and database developer supporting Maria. You will inspect the same request through a JSON Relational Duality view and then project its document fields into SQL columns. Both shapes come from one governed source.
+You are the application and database developer supporting **Maria**. In this lab, you inspect the same request through a **JSON Relational Duality** view and then project its document fields into SQL columns. Both shapes come from one governed source.
 
 <details>
 <summary><strong>Key terms: JSON, relational tables, duality view, and projection</strong></summary>
@@ -23,15 +23,19 @@ The diagram shows how `ORDERS_DV` presents one relational request and its line i
 
 ![Service request JSON Relational Duality flow](images/service-request-duality-flow.svg " ")
 
-The inherited physical name `ORDERS_DV` remains in the current stack. In the State and Local Government application, it represents public-service requests. The application displays the business alias `SERVICE_REQUESTS_DV`, while learner SQL uses the physical `ORDERS_DV` view. The workbench image below shows the same request in relational and document forms.
+The first application image below is the Service Request Workbench in its relational queue view. It gives Maria a reviewable list of residents, request status, service value, assigned sites, and request-line counts. Selecting a request lets the application switch between its relational details and JSON document shape. The full application screen shows more requests than the compact learner dataset, but both use the same relational-and-document pattern.
+
+![Service Request Workbench relational queue](images/service-request-workbench.png " ")
+
+The inherited physical name `ORDERS_DV` remains in the current stack. In the State and Local Government application, it represents public-service requests. The application displays the business alias `SERVICE_REQUESTS_DV`, while learner SQL uses the physical `ORDERS_DV` view. The next image shows the document form that the first SQL query reads.
 
 ![Service Request Workbench JSON document](images/service-request-json-duality.png " ")
 
 ### Objectives
 
-- Read a service request as a JSON document.
-- Project document fields into business-readable SQL columns.
-- Explain why duality avoids a second document copy.
+- Read a service request as the application consumes it: one JSON document with a request header and nested service lines.
+- Project selected document fields into business-readable SQL columns for analysis.
+- Explain how **JSON Relational Duality** avoids a second document copy for sensitive resident-service data.
 
 Estimated Time: **10 minutes**
 
@@ -50,9 +54,9 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Inspect a document-shaped service request
 
-Start with the request as the application consumes it.
+Start with the request as the application consumes it, so the document shape is clear before you project fields into SQL.
 
-1. Run the document query.
+1. Run the document query to review one complete service-request payload:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet).
 
@@ -75,23 +79,25 @@ Start with the request as the application consumes it.
 
     **Expected output: Service Request Document**
 
+    Oracle Database adds generated `_metadata values` such as an etag and as-of token. Those values can change between executions. Focus on the validated business portion of the document below.
+
     | Service Request Document |
     | --- |
-    | { "\_id" : 1, "customerId" : 1, "status" : "processing", "total" : 12500, "items" : [ { "productId" : 1, "quantity" : 1 } ] } |
+    | { "\_id" : 1, "customerId" : 1, "status" : "processing", "total" : 12500, "routingCost" : 120, "urgencyScore" : 92, "createdAt" : "2026-06-18T08:00:00", "items" : [ { "itemId" : 1, "productId" : 1, "quantity" : 1, "serviceValue" : 12500 } ] } |
 
 2. Review the document shape.
 
     The root fields describe the request. The nested `items` array describes its service lines. Maria can review one complete payload while keys and constraints still live in the relational source.
 
-    The relational tab below shows the same request as joined business fields. Changing the access shape does not create new records or expand the authorized scope for Maria.
+    The relational tab below shows the same request as joined business fields. Changing the access shape does not create new records or expand Maria's authorized scope.
 
     ![Relational detail for the same service request](images/service-request-relational-detail.png " ")
 
 ## Task 2: Project document fields into SQL
 
-Now turn selected JSON fields back into normal SQL columns and join them to public-service context.
+Now project selected JSON fields into normal SQL columns and join them to public-service context.
 
-1. Run the projection query.
+1. Run the projection query so Maria can compare the application document with reviewable request, resident, and service fields:
 
     `JSON_VALUE` extracts the request ID and resident ID. The query joins those values to `SLED_SERVICE_REQUESTS_V`, `SLED_RESIDENTS_V`, and `SLED_SERVICE_REQUEST_LINES_V`. These views hide inherited physical names and present the request in public-service language.
 

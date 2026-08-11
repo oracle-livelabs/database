@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Residents and caseworkers may describe the same service problem in different words. A search for "benefits eligibility appointment backlog" should find relevant services and signals even when the stored text says "application review delay" or "caseworker scheduling."
+Residents and caseworkers may describe the same service problem in different words. A search for benefits eligibility appointment backlog should find relevant services and signals even when the stored text says application review delay or caseworker scheduling.
 
-You are the service intelligence analyst supporting Jessica. You will turn a plain-language concern into an embedding, compare it with stored vectors, and rank the closest public-service evidence.
+You are the service intelligence analyst supporting **Jessica**. In this lab, you turn a plain-language concern into an embedding, compare it with stored vectors, and rank the closest public-service evidence.
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -23,11 +23,13 @@ The concept graphic follows the query from plain-language concern to service act
 
 ![Resident demand semantic-search flow](images/resident-demand-vector-flow.svg " ")
 
-The SQL reproduces the meaning-based search used by the Resident Demand Signals workflow inside Oracle Database.
+The **Resident Demand Signals** page gives the service intelligence analyst a plain-language vector search, a demand summary, and resident-signal evidence to review. The full application uses a larger demonstration dataset; the SQL in this lab reproduces the same meaning-based search pattern over compact deterministic workshop data.
+
+![Resident Demand Signals vector-search page](images/resident-demand-signals.png " ")
 
 ### Objectives
 
-- Search public services by meaning.
+- Search public services by meaning, not just by exact keyword match.
 - Search resident signals with the same vector pattern.
 - Interpret similarity as a ranking signal, not a final decision.
 
@@ -48,7 +50,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Search public services by meaning
 
-Search for services related to a benefits appointment backlog.
+Start with services so Jessica can translate a plain-language concern into the programs and service types most likely to need attention.
 
 1. Run the semantic service query.
 
@@ -85,15 +87,15 @@ Search for services related to a benefits appointment backlog.
 
     **Expected output: Related Public Services**
 
-    **Format-only example:** Similarity decimals and close-result ordering can vary by database model build. Capture the target ADB result before publication. The rows below show the intended result shape, not a runtime-validated ranking.
+    The rows below were validated with the workshop seed data and shared MiniLM model. Similarity decimals can vary slightly if the database model build changes.
 
     | Service Name | Service Category | Similarity |
     | --- | --- | --- |
-    | Medicaid Eligibility Review | Benefits and Health | Representative score around 0.70 |
-    | Benefits Appointment Scheduling | Benefits and Health | Representative score around 0.65 |
-    | SNAP Application Support | Benefits and Health | Representative score around 0.60 |
-    | Child Care Subsidy | Family Services | Representative score around 0.50 |
-    | Housing Assistance Intake | Housing | Representative score around 0.45 |
+    | Benefits Appointment Scheduling | Benefits and Health | 0.7087 |
+    | Medicaid Eligibility Review | Benefits and Health | 0.5255 |
+    | Housing Assistance Intake | Housing | 0.3726 |
+    | Child Care Subsidy | Family Services | 0.3397 |
+    | SNAP Application Support | Benefits and Health | 0.2958 |
 
 2. Interpret the ranking.
 
@@ -101,7 +103,7 @@ Search for services related to a benefits appointment backlog.
 
 ## Task 2: Search resident signals by meaning
 
-Use the same phrase against resident and caseworker observations.
+Search resident signals next so Jessica can compare the service match with the concerns residents and caseworkers actually expressed.
 
 1. Run the signal search.
 
@@ -131,15 +133,15 @@ Use the same phrase against resident and caseworker observations.
 
     **Expected output: Related Resident Signals**
 
-    **Format-only example:** Capture the target ADB ranking before publication. The rows below illustrate the result columns and the range of evidence that the learner should review.
+    These results use the same validated query embedding as the service search. Close scores can shift slightly if the shared model build changes.
 
     | Resident Signal Id | Source Channel | Urgency Band | Signal Excerpt | Similarity |
     | --- | --- | --- | --- | --- |
-    | 1 | caseworker | critical | Eligibility appointments are booking three weeks out in the Western Slope. | Highest representative score |
-    | 2 | resident portal | urgent | My benefits renewal is waiting for eligibility review and I cannot get an appointment. | High representative score |
-    | 6 | partner hotline | urgent | Housing intake and benefits reviews need a shared appointment plan. | High representative score |
-    | 7 | caseworker | rising | Senior transportation requests are delaying scheduled eligibility visits. | Related representative score |
-    | 3 | call center | rising | Permit inspection scheduling is beginning to exceed the published service window. | Lower representative score |
+    | 2 | resident portal | urgent | My benefits renewal is waiting for eligibility review and I cannot get an appointment. | 0.6767 |
+    | 1 | caseworker | critical | Eligibility appointments are booking three weeks out in the Western Slope. | 0.5740 |
+    | 6 | partner hotline | urgent | Housing intake and benefits reviews need a shared appointment plan. | 0.4537 |
+    | 7 | caseworker | rising | Senior transportation requests are delaying scheduled eligibility visits. | 0.3980 |
+    | 5 | partner hotline | steady | Emergency shelter referrals remain available across southern Colorado. | 0.2260 |
 
 2. Compare meaning with urgency.
 

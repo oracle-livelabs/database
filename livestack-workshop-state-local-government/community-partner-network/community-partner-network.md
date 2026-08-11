@@ -2,9 +2,15 @@
 
 ## Introduction
 
-Resident-service resolution can cross program, county, nonprofit, and regional boundaries. Jessica needs to know which organizations connect to Benefits Eligibility and which two-step handoffs can extend the response.
+Resident-service resolution can cross program, county, nonprofit, and regional boundaries. **Jessica** needs to know which organizations connect to **Benefits Eligibility** and which two-step handoffs can extend the response.
 
 You are the community-service coordination analyst supporting Jessica. You will query the `INFLUENCER_NETWORK` property graph. The database retains inherited physical object names: `INFLUENCERS` represent community partners and signal sources, `BRANDS` represent public programs, `PRODUCTS` represent public services, and `SOCIAL_POSTS` represent resident signals.
+
+You are the community-service coordination analyst supporting Jessica. In this lab, you query the `INFLUENCER_NETWORK` property graph and translate inherited physical object names into public-service meaning:
+- `INFLUENCERS` represent community partners and signal sources.
+- `BRANDS` represent public programs.
+- `PRODUCTS` represent public services.
+- `SOCIAL_POSTS` represent resident signals.
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, seed partner, and hop</strong></summary>
@@ -25,13 +31,17 @@ The diagram shows the path from a public program to a partner, then through one 
 
 ![Community partner graph investigation flow](images/community-partner-graph-flow.svg " ")
 
+The application image below is the Community Partner Network Graph. It gives the coordination analyst a broad view of partner reach, relationship types, and multi-hop paths across the full demonstration network. The SQL in this lab narrows that dense network to a named program and reviewable one-hop and two-hop rows.
+
+![Community Partner Network Graph page](images/community-partner-network.png " ")
+
 The property graph query returns the same relationship evidence as a table that teams can review and share. A focused application result appears after the two-hop query.
 
 ### Objectives
 
-- Identify partners connected to Benefits Eligibility.
-- Trace two-hop coordination paths.
-- Explain the business meaning of graph vertices and edges.
+- Identify the partners connected to **Benefits Eligibility** so the response can begin with the right organizations.
+- Trace two-hop coordination paths that reveal indirect handoffs through an intermediary.
+- Explain the public-service meaning of graph vertices, edges, and coordination strength.
 
 Estimated Time: **12 minutes**
 
@@ -50,7 +60,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Find partners connected to Benefits Eligibility
 
-Start with one-hop relationships from organizations already connected to the Benefits Eligibility program.
+Start with the direct Benefits Eligibility partner connections so Jessica can see the first organizations involved in the response network.
 
 1. Run the program-to-partner graph query.
 
@@ -106,7 +116,7 @@ Start with one-hop relationships from organizations already connected to the Ben
 
 ## Task 2: Trace two-hop coordination paths
 
-Follow Colorado Benefits Network through one intermediary to a second organization.
+Trace two-hop paths to find which intermediary partners can connect the starting organization to a broader response network.
 
 1. Run the two-hop query.
 
@@ -150,7 +160,7 @@ Follow Colorado Benefits Network through one intermediary to a second organizati
 
     A two-hop result does not automatically authorize a referral. It tells Jessica which intermediate organization connects the starting partner to a broader response network. That evidence supports a targeted conversation instead of a blanket outreach campaign.
 
-    The Graph Query Explorer below shows the application form of the same SQL/PGQ pattern.
+    The **Graph Query Explorer** below shows the application form of the same SQL/PGQ pattern, so the learner can connect the worksheet query to the experience shown in the application.
 
     ![Public Sector Graph Query Explorer](images/graph-query-explorer.png " ")
 
