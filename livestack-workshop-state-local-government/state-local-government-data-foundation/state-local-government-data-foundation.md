@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Before Jessica Chen acts on the Colorado early warning, she needs to know that service programs, resident requests, demand signals, partner relationships, geographic layers, and predictive models use one governed evidence base.
+Before **Jessica Chen** acts on the Colorado early warning, she needs to know that service programs, resident requests, demand signals, partner relationships, geographic layers, and predictive models share one governed evidence base.
 
-You are the database developer supporting Jessica. In this lab, you inventory only the object families used by the active workshop and then size the public-service data behind them. The result becomes the map for every later question.
+You are the database developer supporting Jessica. In this lab, you inventory only the object families used by the active workshop and then size the public-service data behind them. The result becomes the evidence map for every later question.
 
-Oracle AI Database 26ai is a converged database. It lets each public-service workload use the access pattern it needs while the source records, SQL access, and governance remain connected.
+**Oracle AI Database 26ai** acts as the connected foundation for this investigation. Each public-service workload can use the access pattern it needs while the source records, SQL access, and governance remain connected.
 
 The diagram compares a fragmented architecture with the converged database foundation for Colorado.
 
@@ -29,13 +29,17 @@ The diagram compares a fragmented architecture with the converged database found
 
 </details>
 
+The image below is the Data Foundation page in the State and Local Government LiveStack. It gives the database developer a view of the full application dataset and the public-service domains loaded for the wider demonstration. The SQL in this lab uses a compact deterministic dataset and inventories only the object families required by the seven active workshop labs.
+
+![State and Local Government Data Foundation page](images/data-foundation.png " ")
+
 The SQL in this lab inspects the same connected capability groups directly. The compact workshop dataset keeps the exercises fast and repeatable; the full LiveStack application uses a larger demonstration dataset.
 
 ### Objectives
 
-- Inventory the database capabilities used by the active labs.
-- Count the current public-service data groups.
-- Connect each object family to a later business decision.
+- Inventory the database capabilities used by the active resident-services labs.
+- Count the current public-service data groups so later results have a clear baseline.
+- Connect each object family to the public-service decision it supports later in the workshop.
 
 Estimated Time: **10 minutes**
 
@@ -54,9 +58,9 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Inventory the active object families
 
-Start with the object families that the later labs actually use.
+Start with the object families that later labs actually use, so the foundation check stays tied to the active resident-services workflow:
 
-1. Run the inventory query.
+1. Run the inventory query to confirm the semantic views, JSON duality view, graph, vector columns, spatial layers, and OML models are available:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet).
 
@@ -130,9 +134,9 @@ Start with the object families that the later labs actually use.
 
 ## Task 2: Count the public-service data groups
 
-The next query gives scale to the operating story.
+Give scale to the operating story before you investigate specific requests, services, and regions:
 
-1. Run the data-group count query.
+1. Run the data-group count query to establish the baseline population for the later dashboard, JSON, vector, graph, spatial, and OML results:
 
     The `SLED_*_V` objects save queries that translate inherited physical table names into public-service language. Counting these views gives later dashboard, JSON, vector, graph, spatial, and OML results a clear baseline.
 
