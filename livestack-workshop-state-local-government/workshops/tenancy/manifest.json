@@ -1,0 +1,66 @@
+{
+  "workshoptitle": "Build Connected State and Local Government Service Operations with Oracle AI Database 26ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Colorado resident-services decision story and workshop goals.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the environment and open Database Actions SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Data Foundation",
+      "description": "Inspect the governed service-operation object families used by later labs.",
+      "filename": "../../state-local-government-data-foundation/state-local-government-data-foundation.md"
+    },
+    {
+      "title": "Lab 2: Public Service Command Center",
+      "description": "Trace statewide operating measures to reviewable service-request evidence.",
+      "filename": "../../public-service-command-center/public-service-command-center.md"
+    },
+    {
+      "title": "Lab 3: Service Request Workbench with JSON Relational Duality",
+      "description": "Inspect one governed service request as relational rows and a JSON document.",
+      "filename": "../../service-request-duality/service-request-duality.md"
+    },
+    {
+      "title": "Lab 4: Resident Demand Signals with AI Vector Search",
+      "description": "Find public services and resident signals by meaning rather than exact wording.",
+      "filename": "../../resident-demand-vector-search/resident-demand-vector-search.md"
+    },
+    {
+      "title": "Lab 5: Community Partner Network with Property Graph",
+      "description": "Follow program and partner relationships with SQL Property Graph Queries.",
+      "filename": "../../community-partner-network/community-partner-network.md"
+    },
+    {
+      "title": "Lab 6: Service Access and Coverage Map with Oracle Spatial",
+      "description": "Measure service access, coverage, and capacity with spatial SQL.",
+      "filename": "../../service-access-spatial/service-access-spatial.md"
+    },
+    {
+      "title": "Lab 7: Demand and Capacity Analytics with Oracle Machine Learning (OML)",
+      "description": "Inspect and score in-database models for public-service planning.",
+      "filename": "../../demand-capacity-oml/demand-capacity-oml.md"
+    },
+    {
+      "title": "Lab 8: Conclusion",
+      "description": "Turn the lab evidence into a practical converged database takeaway.",
+      "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

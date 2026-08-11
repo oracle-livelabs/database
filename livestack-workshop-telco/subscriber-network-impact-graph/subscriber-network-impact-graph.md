@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Now that you know the Hudson Yards site, the source signal, and the related service order, you need to see the full reach of **TEL-5G-2026-501**. This case connects a subscriber cluster, a network site, an outage event, and a support case. In this lab, you use the property graph to make those relationships visible before a response is assigned.
+Now that you know the Hudson Yards site, the source signal, and the related service order, you need to see the full reach of `TEL-5G-2026-501`. This one congestion case connects a subscriber cluster, a network site, an outage event, and a support case. You are the impact investigator who establishes that operational reach before a response is assigned. A property graph keeps those relationships connected to the case evidence.
 
 ![Telco impact graph flow](images/impact-graph-flow.svg " ")
 
-The flow graphic names the case, the `GRAPH_TABLE` traversal, and the review queue. The SQL in this lab turns the one-hop case-to-entity traversal into a repeatable evidence path for the impact investigator.
+The flow graphic names the case, the `GRAPH_TABLE` traversal, and the review queue. The SQL in this lab makes that one-hop case-to-entity traversal explicit and repeatable.
 
 ### Objectives
 
