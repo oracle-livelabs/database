@@ -1,5 +1,11 @@
 # Workshop Details
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 Estimated Time: **95 minutes**
 
 ## Workshop Title
