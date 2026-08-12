@@ -122,6 +122,44 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 
     The result gives investigators a prioritized reach map. Instead of staring at a tangle of connections, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
 
+3. 🎯 **Interactive challenge: compare direct and indirect evidence.**
+
+    Starting with the two-hop traversal above, change only `{1,2}` to `{1,1}` so you see entities directly connected to `ACCT-8841`. Run your revised query.
+
+    **Expected output: Direct Fraud Connections**
+
+    The current data returns the device, mule payee, IP address, phone, and branch directly connected to `ACCT-8841`. Restore the two-hop traversal mentally and identify the entity that appears only through an indirect path.
+
+    <details>
+    <summary><strong>Challenge answer: two hops add investigative context</strong></summary>
+
+    > `PAYEE-CRYPTO-3`, Crypto Ramp Wallet 3, appears only after the second hop. It is indirect evidence that warrants follow-up, not an automatic action. Oracle Property Graph keeps this relationship evidence connected to the same governed finance data used for risk review.
+
+    If you need the runnable solution, use this one-hop traversal:
+
+    ```sql
+    <copy>
+    SELECT DISTINCT entity_key, display_name, entity_type,
+           risk_score, risk_level, total_amount, channel
+    FROM GRAPH_TABLE ( fraud_network
+      MATCH (seed IS entity) -[e IS related_to]->{1,1} (reached IS entity)
+      WHERE seed.entity_key = 'ACCT-8841'
+      COLUMNS (
+        reached.entity_key AS entity_key,
+        reached.display_name AS display_name,
+        reached.entity_type AS entity_type,
+        reached.risk_score AS risk_score,
+        reached.risk_level AS risk_level,
+        reached.total_amount AS total_amount,
+        reached.channel AS channel
+      )
+    )
+    ORDER BY risk_score DESC;
+    </copy>
+    ```
+
+    </details>
+
 ## Task 2: Find accounts sharing device, IP, phone, or email
 
 Next, find account pairs that share identifying evidence such as device, IP address, phone, or email.
@@ -186,6 +224,17 @@ Next, find account pairs that share identifying evidence such as device, IP addr
     A shared device, IP address, phone, or email can connect accounts that look separate in transaction tables. That is why shared evidence matters: two accounts may look unrelated until the same phone, device, or network shows up in both histories. The combined risk score helps prioritize pairs where both sides of the relationship are risky, not just connected.
 
     This turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
+
+3. 🎯 **Interactive challenge: choose the human-review priority.**
+
+    Which pair has the strongest basis for human review: `ACCT-8841` and `ACCT-1190`, or `ACCT-8841` and `ACCT-5077`? Record the evidence you would include in the case.
+
+    <details>
+    <summary><strong>Challenge answer: corroboration is stronger than one connection</strong></summary>
+
+    > Choose `ACCT-8841` and `ACCT-1190`. The result contains three separate corroborating rows for that pair: a shared device, IP address, and phone, each with combined risk `93.8`. `ACCT-8841` and `ACCT-5077` share only a device. The graph supports a human review recommendation; it does not make an automatic enforcement decision.
+
+    </details>
 
 ## Next Steps
 

@@ -183,6 +183,43 @@ After locating nearby service centers, summarize the response commitments attach
 
     This matters because risk operations are not finished when a signal is detected. If a case requires outreach, document review, or service follow-up, the bank also needs to know whether the service network can meet the response time implied by the case priority.
 
+3. 🎯 **Interactive challenge: compare a second service region.**
+
+    Start with the New York Metro distance query in Task 1. Change only the `WHERE dr.region_name` value from `New York Metro` to `Chicago Metro`, then run your revised query. Compare the first row with the New York result: which center is now closest, what is its boundary distance, and how does Chicago's demand index change your routing conversation?
+
+    **Expected output: Chicago Service Coverage**
+
+    In the current workshop data, `Joliet Midwest Risk Desk` should become the nearest center at `0` km because its location falls inside the Chicago Metro boundary. Chicago has demand index `78`, lower than New York Metro's `91`.
+
+    <details>
+    <summary><strong>Challenge answer: the region changes the routing evidence</strong></summary>
+
+    > The first row is `Joliet Midwest Risk Desk` at `0` km, showing that it is inside the Chicago Metro boundary. Chicago's demand index is `78`, so it has less current pressure than New York Metro at `91`; however, operations must still confirm available case-processing capacity and the SLA response commitment before routing a time-sensitive case. Oracle Spatial keeps region, distance, demand, and service evidence together for that comparison.
+
+    If you need the runnable solution, use the Task 1 query with this changed filter:
+
+    ```sql
+    <copy>
+    SELECT sc.service_center_name,
+           sc.city,
+           sc.state_province,
+           fc.latitude,
+           fc.longitude,
+           DBMS_LOB.SUBSTR(SDO_UTIL.TO_GEOJSON(fc.location), 120, 1) AS location_geojson,
+           ROUND(SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM'), 2) AS boundary_distance_km,
+           dr.region_name,
+           dr.demand_index
+    FROM service_centers_v sc
+    JOIN fulfillment_centers fc ON fc.center_id = sc.service_center_id
+    CROSS JOIN demand_regions dr
+    WHERE dr.region_name = 'Chicago Metro'
+    ORDER BY SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM')
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
 ## Next Steps
 
 Congratulations on completing the spatial lab. You used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
