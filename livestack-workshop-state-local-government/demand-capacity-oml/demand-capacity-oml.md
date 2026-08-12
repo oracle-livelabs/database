@@ -4,7 +4,7 @@
 
 Jessica has reviewed current requests, resident signals, partner paths, and geographic capacity. She now needs predictive evidence that helps identify which public services may face rising demand.
 
-You are the analytics engineer supporting Jessica. You will inventory the four State and Local Government Oracle Machine Learning (OML) models, score the service-demand classification model, and compare predicted labels with the deterministic training labels.
+You are the analytics engineer supporting Jessica. In this lab, you inventory the four **State and Local Government Oracle Machine Learning (OML) models**, score the service-demand classification model, and compare predicted labels with deterministic training labels.
 
 <details>
 <summary><strong>Key terms: model, feature, classification, regression, clustering, and confidence</strong></summary>
@@ -27,13 +27,17 @@ The diagram follows governed service data into OML models and then back to a pla
 
 ![Public-service OML scoring flow](images/demand-capacity-oml-flow.svg " ")
 
-The SQL exposes deployed models and scores directly. The compact deterministic workshop dataset uses 10 services; the full LiveStack application uses a separate, larger demonstration dataset.
+The application image below is the Demand and Capacity Analytics page. It gives Jessica and the analytics engineer a view of persisted model runs, active models, demand-risk scores, resident segments, service-value forecasts, clusters, and capacity evidence. The SQL in this lab exposes the deployed model catalog and classification scores directly.
+
+![Demand and Capacity Analytics page](images/demand-capacity-analytics.png " ")
+
+The compact deterministic workshop dataset uses 10 services; the full LiveStack application uses a separate, larger demonstration dataset.
 
 ### Objectives
 
-- Inventory the four active SLED OML models.
-- Score service-demand classifications in SQL.
-- Run a simple agreement check between known and predicted labels.
+- Inventory the four active SLED OML models before using their scores.
+- Score service-demand classifications in SQL so model evidence remains connected to service context.
+- Run a simple agreement check between known and predicted labels without presenting it as production accuracy.
 
 Estimated Time: **12 minutes**
 
@@ -52,7 +56,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Inventory the active OML models
 
-Confirm which models are available before using their scores.
+Confirm which models are available before using their scores, so Jessica knows the prediction comes from a persisted model in the workshop schema.
 
 1. Run the model inventory query.
 
@@ -98,7 +102,7 @@ Confirm which models are available before using their scores.
 
 ## Task 2: Score public-service demand
 
-Score each service as `SURGE` or `STABLE`.
+Score each service as `SURGE` or `STABLE` so Jessica can prioritize public services for demand review.
 
 1. Run the classification query.
 
@@ -130,25 +134,30 @@ Score each service as `SURGE` or `STABLE`.
 
     **Expected output: Service Demand Scores**
 
-    **Format-only example:** Known labels come from deterministic sample data. Predicted labels and confidence depend on the model build and need target ADB validation before publication. The table below shows the intended result shape.
+    The development ADB produced the following scores from the deterministic workshop data and tuned compact training configuration.
 
     | Service Id | Service Name | Known Label | Predicted Label | Confidence |
     | --- | --- | --- | --- | --- |
-    | 1 | Medicaid Eligibility Review | SURGE | Target-dependent label | Target-dependent probability |
-    | 2 | SNAP Application Support | STABLE | Target-dependent label | Target-dependent probability |
-    | 3 | Benefits Appointment Scheduling | SURGE | Target-dependent label | Target-dependent probability |
-    | 4 | Building Permit Inspection | STABLE | Target-dependent label | Target-dependent probability |
-    | 5 | Road Repair Request | STABLE | Target-dependent label | Target-dependent probability |
+    | 1 | Medicaid Eligibility Review | SURGE | SURGE | 1 |
+    | 2 | SNAP Application Support | STABLE | STABLE | 1 |
+    | 3 | Benefits Appointment Scheduling | SURGE | SURGE | 1 |
+    | 4 | Building Permit Inspection | STABLE | STABLE | 1 |
+    | 5 | Road Repair Request | STABLE | STABLE | 1 |
+    | 6 | Emergency Shelter Referral | STABLE | STABLE | 1 |
+    | 7 | Housing Assistance Intake | SURGE | SURGE | 1 |
+    | 8 | Child Care Subsidy | STABLE | STABLE | 1 |
+    | 9 | Water Service Restoration | STABLE | STABLE | 1 |
+    | 10 | Senior Transportation | SURGE | SURGE | 1 |
 
 2. Interpret label and confidence together.
 
-    A `SURGE` label helps Jessica prioritize services for capacity review. Confidence ranks model support for that label. It does not authorize an intervention or establish that service capacity caused the eligibility warning.
+    A `SURGE` label helps Jessica prioritize services for capacity review. Confidence ranks model support for that label. Here, confidence of `1` reflects fit on the compact training rows being scored; it is not holdout accuracy or certainty about future demand. The result does not authorize an intervention or establish that service capacity caused the eligibility warning.
 
     The model output supports planning only when Jessica combines it with the capacity, geography, and request evidence from earlier labs.
 
 ## Task 3: Check model agreement
 
-Count how often predicted labels match the known deterministic labels.
+Count how often predicted labels match the known deterministic labels so the learner can verify the SQL scoring path.
 
 1. Run the agreement query.
 
@@ -173,16 +182,14 @@ Count how often predicted labels match the known deterministic labels.
 
     **Expected output: Demand Model Agreement**
 
-    **Format-only example:** The query returns every known and predicted label combination observed on the target system. Capture the actual groups and counts during ADB validation.
-
     | Known Label | Predicted Label | Service Count |
     | --- | --- | --- |
-    | STABLE | STABLE or SURGE | Target-dependent count |
-    | SURGE | STABLE or SURGE | Target-dependent count |
+    | STABLE | STABLE | 6 |
+    | SURGE | SURGE | 4 |
 
 2. Use the check responsibly.
 
-    Agreement on the sample rows confirms that the SQL scoring path is working. A production review would also test holdout data, error rates, fairness, drift, and whether the features remain appropriate for the public-service decision.
+    Agreement on all **10 compact training rows** confirms that the SQL scoring path is working. It is not a production accuracy measure. A production review would also test holdout data, error rates, fairness, drift, and whether the features remain appropriate for the public-service decision.
 
 ## Acknowledgements
 

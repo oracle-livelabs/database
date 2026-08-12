@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the public-service exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each query runs as the workshop user against the prepared State and Local Government schema.
+Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database 26ai** environment, and prepare SQL Worksheet for the public-service exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each query runs as the workshop user against the prepared State and Local Government schema.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -21,14 +21,14 @@ Estimated Time: **5 minutes**
 
 In this lab, you will:
 
-- Launch the LiveLabs workshop environment.
+- Launch the LiveLabs workshop environment for the prepared public-service schema.
 - Use the reservation login information to open Database Actions.
-- Confirm that SQL Worksheet is ready for the State and Local Government schema.
-- Confirm that SQL Worksheet uses the workshop schema user.
+- Confirm that SQL Worksheet is ready for the State and Local Government objects.
+- Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
+Start from the **LiveLabs** reservation so **Database Actions** opens with the correct workshop resources and credentials. This puts you in the governed environment used for the rest of the Colorado resident-services investigation:
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -44,7 +44,7 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 
 ## Task 2: Open SQL Worksheet
 
-Open SQL Worksheet as the workshop user before running the public-service queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+Open **SQL Worksheet** as the workshop user before running the public-service queries. This is where you ask each business question in SQL and immediately review the evidence returned by **Oracle AI Database 26ai**:
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -103,9 +103,9 @@ Open SQL Worksheet as the workshop user before running the public-service querie
     | LLUSER | LLUSER | Current SQL Worksheet timestamp |
 
 
-8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
+8. Use this connection check whenever you need to confirm that SQL Worksheet is still running as `LLUSER` before continuing the resident-services investigation.
 
-You can now continue to the State and Local Government labs.
+With **SQL Worksheet** ready, you can move from setup into the Colorado **Data Foundation**.
 
 ## Acknowledgements
 
