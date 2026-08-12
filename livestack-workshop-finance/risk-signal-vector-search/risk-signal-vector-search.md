@@ -97,6 +97,38 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or operational follow-up.
 
+3. 🎯 **Interactive challenge: change the investigation question.**
+
+    Starting with the baseline query above, replace only `mortgage pre-approval risk` with `loan servicing delinquency concern`. Run your revised query and compare its top five results with the mortgage search.
+
+    **Expected output: Servicing Concern Matches**
+
+    The rankings are dynamic, but `Delinquency Outreach Program` should lead the current workshop data. Compare which products enter, leave, or move within the top five.
+
+    <details>
+    <summary><strong>Challenge answer: the question changes the ranking</strong></summary>
+
+    > `Delinquency Outreach Program` moves to the top because the new phrase emphasizes loan servicing and delinquency rather than mortgage pre-approval. Oracle AI Vector Search compares meaning while the product records and embeddings remain in the same governed database.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT p.product_name,
+           p.category,
+           ROUND(1 - VECTOR_DISTANCE(
+             pe.embedding,
+             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'loan servicing delinquency concern' AS DATA),
+             COSINE), 4) AS similarity
+    FROM product_embeddings pe
+    JOIN products p ON p.product_id = pe.product_id
+    ORDER BY similarity DESC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
 ## Task 2: Search risk signals by meaning
 
 Now apply the same semantic search pattern to risk signal language.
@@ -137,6 +169,38 @@ Now apply the same semantic search pattern to risk signal language.
     The returned excerpts contain AML, fraud, sanctions, and suspicious-activity language even though the search phrase does not use the AML abbreviation. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
+
+3. 🎯 **Interactive challenge: focus the signal review.**
+
+    Starting with the baseline query above, replace its search phrase with `suspicious ACH activity and sanctions review`. Run your revised query. Which kind of signal now dominates the evidence queue?
+
+    **Expected output: Suspicious ACH Signal Matches**
+
+    Rankings and similarity values can vary slightly by environment. In the current workshop data, suspicious-ACH and AML-monitoring language dominates the top results.
+
+    <details>
+    <summary><strong>Challenge answer: semantic evidence follows intent</strong></summary>
+
+    > The revised phrase elevates signals about suspicious ACH bursts, sanctions, and AML monitoring. This is not an exact-keyword lookup: the database compares the meaning of the analyst's question with governed signal text and returns a prioritized review queue.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT sp.post_id AS signal_id,
+           SUBSTR(sp.post_text, 1, 120) AS signal_excerpt,
+           ROUND(1 - VECTOR_DISTANCE(
+             se.embedding,
+             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'suspicious ACH activity and sanctions review' AS DATA),
+             COSINE), 4) AS similarity
+    FROM signal_embeddings se
+    JOIN social_posts sp ON sp.post_id = se.post_id
+    ORDER BY similarity DESC, signal_id
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
 
 ## Next Steps
 
