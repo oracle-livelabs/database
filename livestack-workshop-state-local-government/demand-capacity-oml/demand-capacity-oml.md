@@ -155,6 +155,48 @@ Score each service as `SURGE` or `STABLE` so Jessica can prioritize public servi
 
     The model output supports planning only when Jessica combines it with the capacity, geography, and request evidence from earlier labs.
 
+3. :dart: **Interactive challenge: Build a demand-review queue.**
+
+    Starting with the classification query above, add `WHERE scores.predicted_label = 'SURGE'` before the `ORDER BY` clause to investigate only services with a predicted demand surge. Run your revised query. Which services should enter Jessica's human demand-and-capacity review queue?
+
+    **Expected output: Predicted Surge Review Queue**
+
+    With the current compact model and fixed workshop data, the result should include Medicaid Eligibility Review, Benefits Appointment Scheduling, Housing Assistance Intake, and Senior Transportation. Predicted labels and confidence are model outputs and may change if the model is rebuilt or retrained.
+
+    <details>
+    <summary><strong>Challenge answer: Review predicted-surge services with operating evidence</strong></summary>
+
+    > The predicted-surge services should enter human review, where Jessica can compare them with request, resident-signal, geographic, and capacity evidence. A predicted label and its confidence support prioritization; they are not certainty or authority to intervene. Oracle AI Database 26ai keeps the model, feature rows, scores, and operational context together, so teams can investigate without copying sensitive service data into disconnected systems.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT scores.service_id,
+           services.service_name,
+           scores.known_label,
+           scores.predicted_label,
+           scores.confidence
+    FROM (
+      SELECT product_id AS service_id,
+             surge_flag AS known_label,
+             PREDICTION(
+               SLED_SERVICE_DEMAND_MODEL USING *
+             ) AS predicted_label,
+             ROUND(PREDICTION_PROBABILITY(
+               SLED_SERVICE_DEMAND_MODEL USING *
+             ), 4) AS confidence
+      FROM oml_demand_training_v
+    ) scores
+    JOIN sled_public_services_v services
+      ON services.service_id = scores.service_id
+    WHERE scores.predicted_label = 'SURGE'
+    ORDER BY scores.service_id;
+    </copy>
+    ```
+
+    </details>
+
 ## Task 3: Check model agreement
 
 Count how often predicted labels match the known deterministic labels so the learner can verify the SQL scoring path.

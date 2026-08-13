@@ -10,6 +10,8 @@ The eligibility measure is the early warning, not the whole story. This workshop
 
 You support **Jessica** and **Maria Santos**, a **Western Slope** regional manager, by connecting each public-service question to governed database evidence. You move from the shared data foundation to operating measures, inspect one service request, search demand signals by meaning, follow community-partner relationships, measure service access, and review predictive capacity evidence.
 
+In Labs 3 through 7, an **Interactive challenge** follows the baseline evidence. Try the stated SQL change before opening the collapsed **Challenge answer**; each investigation changes one business parameter and asks you to make one bounded, evidence-based review decision.
+
 ![Seven-stage Colorado resident-services workshop journey](images/state-local-government-workshop-journey.svg " ")
 
 Throughout the workshop, expandable sections provide optional context without interrupting the main service-operations path. Open them when you want a definition, a database explanation, or the public-sector reason the capability matters; keep them closed when you want to stay focused on the hands-on SQL flow.

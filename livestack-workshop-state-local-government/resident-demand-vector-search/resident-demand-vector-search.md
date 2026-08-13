@@ -149,6 +149,45 @@ Search resident signals next so Jessica can compare the service match with the c
 
     The SQL keeps the underlying text and scores reviewable, so a team can compare semantic relevance with urgency before acting.
 
+3. :dart: **Interactive challenge: Reframe the resident-service concern.**
+
+    Starting with the resident-signal query above, replace the phrase `benefits eligibility appointment backlog` with `emergency shelter intake coordination` to investigate a different service concern. Run your revised query. Which returned row should enter Jessica's human review queue first when semantic relevance and urgency are considered together?
+
+    **Expected output: Re-Ranked Resident Signals**
+
+    Emergency-shelter, housing-intake, or partner-coordination evidence should move relative to the eligibility-focused baseline. Exact row order and similarity decimals are dynamic because they depend on the deployed embedding-model build.
+
+    <details>
+    <summary><strong>Challenge answer: Combine semantic relevance with urgency</strong></summary>
+
+    > In the validated result, signal `5` is the closest semantic match, but its urgency band is `steady`. Signal `6` ranks second and is `urgent`, so it should enter Jessica's human review queue first when both signals are weighed together. This is a review priority, not an automatic action; exact rankings can change with the embedding-model build. Oracle AI Database 26ai keeps the source text, vectors, urgency evidence, and service context together, so teams can investigate without copying sensitive resident-service data into disconnected systems.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT signals.resident_signal_id,
+           signals.source_channel,
+           signals.urgency_band,
+           SUBSTR(signals.signal_text, 1, 100) AS signal_excerpt,
+           ROUND(1 - VECTOR_DISTANCE(
+             embeddings.embedding,
+             VECTOR_EMBEDDING(
+               ADMIN.ALL_MINILM_L12_V2
+               USING 'emergency shelter intake coordination' AS DATA
+             ),
+             COSINE
+           ), 4) AS similarity
+    FROM post_embeddings embeddings
+    JOIN sled_resident_signals_v signals
+      ON signals.resident_signal_id = embeddings.post_id
+    ORDER BY similarity DESC, resident_signal_id
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs Team

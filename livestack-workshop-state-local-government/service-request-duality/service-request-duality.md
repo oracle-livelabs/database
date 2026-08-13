@@ -93,6 +93,31 @@ Start with the request as the application consumes it, so the document shape is 
 
     ![Relational detail for the same service request](images/service-request-relational-detail.png " ")
 
+3. :dart: **Interactive challenge: Compare a completed request document.**
+
+    Starting with the baseline query above, change the request ID filter from `1` to `5` to investigate a request at a different lifecycle stage. Run your revised query. Which business fields indicate whether request 5 should remain in the same active-review queue as request 1?
+
+    **Expected output: Completed Request Document**
+
+    The governed business fields should identify request 5 as `delivered`, with an urgency score of `42` and one nested line for product ID `6`. Generated metadata values such as the etag and as-of token can change between executions.
+
+    <details>
+    <summary><strong>Challenge answer: Use lifecycle and urgency together</strong></summary>
+
+    > Request 5 is already `delivered` and has a lower urgency score than the baseline `processing` request, so it should not automatically receive the same active-resolution priority. Those fields support a human queue decision; they do not replace case review. Oracle AI Database 26ai keeps the JSON document, relational request rows, and operational context together, so teams can investigate without copying sensitive resident-service data into disconnected systems.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT JSON_SERIALIZE(data PRETTY) AS service_request_document
+    FROM orders_dv
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 5;
+    </copy>
+    ```
+
+    </details>
+
 ## Task 2: Project document fields into SQL
 
 Now project selected JSON fields into normal SQL columns and join them to public-service context.
