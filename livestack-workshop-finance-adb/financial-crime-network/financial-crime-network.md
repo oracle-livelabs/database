@@ -31,11 +31,11 @@ The second image is the Financial Crime Network application workspace. The left 
 
 ### Objectives
 
-- Open Graph Studio from the Finance V2 Autonomous AI Database.
-- Download and import the supplied finance fraud-network notebook.
-- Run table and graph-visualization paragraphs in Graph Studio.
-- Traverse fraud ring reach from a seed account.
-- Find shared device and IP clusters.
+- Run SQL/PGQ queries for fraud network analysis.
+- Interpret the relationship evidence behind suspicious accounts.
+- Open Graph Studio from Database Actions.
+- Import and run the finance fraud-network notebook.
+- Compare SQL results with graph visualizations.
 
 Estimated Time: **25 minutes**
 
@@ -46,83 +46,15 @@ Estimated Time: **25 minutes**
 | Business Problem | Fraud teams need to see relationships that are hard to detect from transaction tables alone. |
 | Technical Challenge | Investigators need path-based relationship analysis without writing and maintaining long chains of self-joins. |
 | Persona Focus | Fraud analysts interpret the network; database developers provide the graph pattern that explains why entities are connected. |
-| What You Will See | A Graph Studio notebook and SQL/PGQ queries expose fraud ring reach and shared entity clusters. |
+| What You Will See | SQL/PGQ queries and a Graph Studio notebook expose fraud ring reach and shared entity clusters. |
 | Database Capability | FRAUD\_NETWORK and GRAPH\_TABLE support SQL/PGQ traversal. |
 | Outcome | Investigators can explain why entities are related and prioritize high-risk nodes. |
 
 Persona focus: You are helping a fraud analyst move from a suspicious account to explainable relationship evidence without turning the investigation into fragile join logic.
 
-## Task 1: Open Graph Studio from OCI
+## Task 1: Trace two-hop fraud reach in SQL Worksheet
 
-Graph Studio runs against the same Finance V2 Autonomous AI Database that contains `FRAUD_NETWORK`. Use the graph-enabled workshop database user so the imported notebook can see the graph and its finance entities.
-
-1. In **View Login Info**, note your OCI sign-in details, compartment, Autonomous AI Database name, and graph-enabled database credentials. The workshop database user is normally `LLUSER`.
-
-2. Sign in to the OCI Console. Open the **Navigation Menu**, select **Oracle AI Database**, and then select **Autonomous AI Database**.
-
-    ![Open Autonomous AI Database from the OCI navigation menu](images/graph-oci-autonomous-ai-database.png " ")
-
-3. Select the workshop compartment and open the Finance V2 Autonomous AI Database.
-
-4. On the database details page, click **Database Actions**, select **View all database actions**, and open **Graph Studio** from the Development tools.
-
-    ![Open Graph Studio from the Database Actions launchpad](images/graph-database-actions-launchpad.png " ")
-
-5. Sign in with the graph-enabled database user and password from **View Login Info**. Do not use your OCI Console password on the Graph Studio sign-in page.
-
-    ![Sign in to Graph Studio with the graph-enabled database user](images/graph-studio-login.png " ")
-
-6. Confirm that the Graph Studio home page opens. The left navigation provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**. The property graph `FRAUD_NETWORK` is already provisioned for this lab; do not create a replacement graph.
-
-## Task 2: Download and import the finance notebook
-
-The supplied `.dsnb` file is a native Graph Studio notebook. It contains three finance SQL paragraphs plus explanations of the business question and expected investigation pattern.
-
-1. Download [finance-fraud-network-graph-studio.dsnb](files/finance-fraud-network-graph-studio.dsnb).
-
-2. In Graph Studio, click **Notebooks** in the left navigation.
-
-3. Click **Import** in the upper-right corner.
-
-    ![Click Import on the Graph Studio Notebooks page](images/graph-notebook-import.png " ")
-
-4. Drag the downloaded `finance-fraud-network-graph-studio.dsnb` file into the import window, or browse to the file on your computer.
-
-5. Review the selected filename and click **Import**. Open **Fraud Network** after the import completes.
-
-## Task 3: Run and interpret the Graph Studio notebook
-
-The notebook alternates explanatory text with three executable SQL paragraphs. Run the paragraphs in order so that each result answers the business question described immediately above it.
-
-1. Read the first explanation, then locate the SQL paragraph beneath it.
-
-2. Click the triangle **Run** button in the upper-right corner of the SQL paragraph. If Graph Studio is attaching a compute environment, wait until the paragraph finishes before continuing.
-
-    ![Run an imported Graph Studio notebook paragraph](images/graph-notebook-run.png " ")
-
-3. Run the three SQL paragraphs and review these results:
-
-    | Paragraph | Result | Investigation purpose |
-    | --- | --- | --- |
-    | 1 | Table | Ranks entities reached within one or two hops of `ACCT-8841`. |
-    | 2 | Graph visualization | Draws the one-hop and two-hop path from the suspicious account. |
-    | 3 | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected accounts plus the supporting IP relationship. |
-
-4. In **Exercise 1**, run the visualization paragraph to trace the one-hop and two-hop network from `ACCT-8841`. The red box identifies the triangle **Run** button in the upper-right corner of the paragraph.
-
-    ![Run Exercise 1 to trace one-hop and two-hop fraud reach](images/graph-exercise-1-run-highlighted.png " ")
-
-5. In **Exercise 2**, run the final visualization paragraph to center the investigation on `DEV-fp-91a7`. Review the three accounts that share the device and the IP address connected through the `login_from` relationship. Use the same triangle **Run** button highlighted in red.
-
-    ![Run Exercise 2 to inspect accounts and an IP address connected to DEV-fp-91a7](images/graph-exercise-2-run-highlighted.png " ")
-
-6. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account.
-
-7. Keep the notebook open. The next two tasks show the same SQL/PGQ evidence in the SQL Worksheet so you can compare the Graph Studio experience with the underlying query and tabular results.
-
-> **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
-
-## Task 4: Trace two-hop fraud reach
+In this lab, you will investigate the fraud network in two views. First, you will run the SQL/PGQ queries in SQL Worksheet so you can see exactly how Oracle Database traces connected accounts, devices, IP addresses, phone numbers, and emails. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
 
 Start from suspicious account `ACCT-8841` and trace the connected entities within two relationship hops.
 
@@ -184,18 +116,18 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 2. Review the high-risk entities.
     The query returns connected entities as a prioritized table, not as an abstract graph picture. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and transaction labs.
 
-    The expected rows show the evidence connected to suspicious account `ACCT-8841`. 
+    The expected rows show the evidence connected to suspicious account `ACCT-8841`.
     For example:
-    * `DEV-fp-91a7` is a device 
+    * `DEV-fp-91a7` is a device
     * `PAYEE-MULE-017` is a payee
     * `IP-198.51.100.44` is an IP address
     * `PHONE-212-0199` is a phone number
-    
+
     These rows matter because they show what the suspicious account touched or shared.
 
     The result gives investigators a prioritized reach map. Instead of staring at a tangle of connections, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
 
-## Task 5: Find accounts sharing device, IP, phone, or email
+## Task 2: Find accounts sharing device, IP, phone, or email in SQL Worksheet
 
 Next, find account pairs that share identifying evidence such as device, IP address, phone, or email.
 
@@ -260,13 +192,80 @@ Next, find account pairs that share identifying evidence such as device, IP addr
 
     This turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
 
+## Task 3: Open Graph Studio
+
+Start from the Database Actions Launchpad. You will use the `LLUSER` database user and password supplied for the workshop.
+
+1. If the dark-theme message appears, click **Done**.
+
+2. Confirm that the upper-right corner shows `LLUSER`.
+
+    ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
+
+3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/graph-database-actions-launchpad.png " ")
+
+4. Sign in with `LLUSER` and the workshop password.
+
+    ![Sign in to Graph Studio with LLUSER](images/graph-studio-login.png " ")
+
+5. Confirm that the Graph Studio home page opens. The left navigation provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
+
+## Task 4: Download and import the finance notebook
+
+The supplied `.dsnb` file is a native Graph Studio notebook. It contains three finance SQL paragraphs plus explanations of the business question and expected investigation pattern.
+
+1. Download [finance-fraud-network-graph-studio.dsnb](files/finance-fraud-network-graph-studio.dsnb).
+
+2. In Graph Studio, click **Notebooks** in the left navigation.
+
+3. Click **Import** in the upper-right corner.
+
+    ![Click Import on the Graph Studio Notebooks page](images/graph-notebook-import.png " ")
+
+4. Drag the downloaded `finance-fraud-network-graph-studio.dsnb` file into the import window, or browse to the file on your computer.
+
+5. Review the selected filename and click **Import**. Open **Fraud Network** after the import completes.
+
+## Task 5: Run and interpret the Graph Studio notebook
+
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now run the same investigation in Graph Studio so you can compare the query results with the visual graph experience.
+
+1. Read the first explanation, then locate the SQL paragraph beneath it.
+
+2. Click the triangle **Run** button in the upper-right corner of the SQL paragraph. If Graph Studio is attaching a compute environment, wait until the paragraph finishes before continuing.
+
+    ![Run an imported Graph Studio notebook paragraph](images/graph-notebook-run.png " ")
+
+3. Run the three SQL paragraphs and review these results:
+
+    | Paragraph | Result | Investigation purpose |
+    | --- | --- | --- |
+    | 1 | Table | Ranks entities reached within one or two hops of `ACCT-8841`. |
+    | 2 | Graph visualization | Draws the one-hop and two-hop path from the suspicious account. |
+    | 3 | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected accounts plus the supporting IP relationship. |
+
+4. In **Exercise 1**, run the visualization paragraph to trace the one-hop and two-hop network from `ACCT-8841`. The red box identifies the triangle **Run** button in the upper-right corner of the paragraph.
+
+    ![Run Exercise 1 to trace one-hop and two-hop fraud reach](images/graph-exercise-1-run-highlighted.png " ")
+
+5. In **Exercise 2**, run the final visualization paragraph to center the investigation on `DEV-fp-91a7`. Review the three accounts that share the device and the IP address connected through the `login_from` relationship. Use the same triangle **Run** button highlighted in red.
+
+    ![Run Exercise 2 to inspect accounts and an IP address connected to DEV-fp-91a7](images/graph-exercise-2-run-highlighted.png " ")
+
+6. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account.
+
+7. Compare the notebook results with the SQL Worksheet results you ran earlier. The SQL showed the evidence trail; Graph Studio shows the same relationships as a visual investigation map.
+
+> **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
+
 ## Next Steps
 
-Congratulations on completing the property graph lab. You imported and ran a native Graph Studio notebook, then used the same SQL/PGQ patterns to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
+Congratulations on completing the property graph lab. You used SQL/PGQ patterns to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts, then compared the same investigation in Graph Studio. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Source Pattern** - Oracle Graph Studio, *Work with CSV Files* workshop
+* **Authors** - Pat Shepherd, Linda Foinding
+* **Contributors** - Ramu Murakami Gutierrez
 * **Last Updated By/Date** - Oracle Database Product Management, August 2026
