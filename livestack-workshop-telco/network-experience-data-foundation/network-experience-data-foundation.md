@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The **TEL-5G-2026-501** investigation starts with a practical question: where does the evidence live? **The Hudson Yards** congestion case affects **31,200** subscribers and puts **$2.14M** at risk, so operations, service-order, and field teams need one governed starting point. In this lab, you inventory the core tables and database objects that support every later step of the response.
+The `TEL-5G-2026-501` investigation starts with a simple question: where does the evidence live? This critical Hudson Yards congestion case affects 31,200 subscribers and puts $2.14M at risk. You are the database developer who gives operations, service-order, and field teams one governed starting point. In this lab, you confirm the tables and specialized objects that support every later step of the investigation.
 
 ![Before-and-after Telco data architecture](images/telco-converged-foundation.svg " ")
 
@@ -103,9 +103,7 @@ Start by confirming that the evidence layer contains the tables, views, graph, v
 
 ## Task 2: Measure network footprint and case impact
 
-Measure the **Seer Comms** operating footprint before you focus on the incident. The row counts show the national network context, while the critical-case measures show why **TEL-5G-2026-501** deserves attention:
-
-1. Run the row-count query:
+    Read the query in four steps.
 
     This query measures the Seer Comms network footprint and the business impact of the critical experience case. The 54 network sites span 50 states. `TEL-5G-2026-501` affects 31,200 subscribers and places $2.14M in service value at risk, so the operations team has a clear reason to prioritize the event-venue congestion response.
 
@@ -156,7 +154,7 @@ Measure the **Seer Comms** operating footprint before you focus on the incident.
     | Service orders | 58 |
     | Graph entities | 62 |
 
-    Read the result as a connected operations picture: national network coverage, subscriber impact, service demand, and incident entities all remain in one governed database. The next lab uses the `NETWORK_SITES` rows to turn this foundation into an operations priority.
+    Read the result as a connected operations picture: national network coverage, subscriber impact, service demand, and the entities that describe the incident all stay in one database. The next lab uses the `NETWORK_SITES` rows to turn this foundation into an operations priority.
 
 ## Acknowledgements
 

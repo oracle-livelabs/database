@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The **TEL-5G-2026-501** investigation explains the current **Hudson Yards** incident. The next question is whether its **91%** load also signals capacity risk before the next peak period. In this lab, you compare the current incident evidence with a reviewable Oracle Machine Learning (OML) prediction, so capacity planning stays connected to the same governed site, case, and operational evidence.
+The `TEL-5G-2026-501` investigation explains the current Hudson Yards incident. The next question is whether its 91% load also signals capacity risk that merits action before the next peak period. You are the capacity planner who compares the current incident evidence with a reviewable model prediction. Oracle Machine Learning (OML) scores the Telco capacity features inside Oracle AI Database, where the site, case, and operational evidence already live.
 
 ![Oracle Machine Learning flow from capacity features to a reviewable service-impact prediction](images/telco-oml-service-assurance.svg " ")
 
