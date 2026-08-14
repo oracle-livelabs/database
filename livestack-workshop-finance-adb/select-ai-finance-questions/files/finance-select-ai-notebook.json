@@ -1,0 +1,244 @@
+{
+  "name": "finance-select-ai-notebook",
+  "paragraphs": [
+    {
+      "text": "%md\n# Ask Governed Finance Questions with Select AI\n\nThis AI4U-style notebook compares SELECT AI CHAT, SELECT AI SHOWSQL, and SELECT AI NARRATE using the existing Seer Bank Finance LiveStack dataset. Run each paragraph in order.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Activate the governed finance profile\n\nThe FINANCE_V2_GENAI profile limits Select AI to the approved finance objects provisioned for this workshop.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI.SET_PROFILE('FINANCE_V2_GENAI');\n\nSELECT profile_name,\n       status\nFROM user_cloud_ai_profiles\nWHERE profile_name = 'FINANCE_V2_GENAI';",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Experience Select AI Chat\n\nCHAT answers with general model knowledge. It does not query the Seer Bank objects in the profile.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI CHAT What business factors commonly increase fraud and compliance risk at a financial institution?;",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI CHAT Which Seer Bank risk signal currently has the highest criticality score?;",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Verify the existing finance objects\n\nThe Finance version uses the workshop dataset instead of creating AI4U's separate sample loan table.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT object_name,\n       object_type\nFROM user_objects\nWHERE object_name IN (\n  'FINANCE_PRODUCTS_V',\n  'RISK_SIGNALS_V',\n  'SIGNAL_SOURCES_V',\n  'POST_PRODUCT_MENTIONS',\n  'AGENT_ACTIONS'\n)\nORDER BY object_name;",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Show the generated SQL\n\nReview the SQL and confirm that it reads only approved finance objects.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI SHOWSQL Which Seer Bank product categories have the highest current risk exposure?;",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Ask Select AI to query and narrate\n\nUnlike CHAT, NARRATE can ground the answer in the approved Seer Bank data.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI NARRATE Which Seer Bank product categories have the highest current risk exposure?;",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Verify the answer with stable SQL evidence\n\nGenerated wording and aliases can vary. These database rows are the stable evidence check.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT fp.product_category,\n       COUNT(DISTINCT rs.signal_id) AS signal_count,\n       ROUND(AVG(rs.criticality_score), 1) AS avg_criticality,\n       SUM(rs.exposure_count) AS exposure_count\nFROM risk_signals_v rs\nJOIN post_product_mentions ppm\n  ON ppm.post_id = rs.signal_id\nJOIN finance_products_v fp\n  ON fp.financial_product_id = ppm.product_id\nGROUP BY fp.product_category\nORDER BY exposure_count DESC\nFETCH FIRST 5 ROWS ONLY;",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Prove that Select AI remains read-only\n\nThe agent action count must not change when NARRATE answers another finance question.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT COUNT(*) AS actions_before\nFROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT';\n\nSELECT AI NARRATE Which current Seer Bank risk signal should an analyst review first, and why?;\n\nSELECT COUNT(*) AS actions_after\nFROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT';",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "SCRIPT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Result\n\nYou reproduced the AI4U progression with the Finance LiveStack dataset: CHAT explained general knowledge, SHOWSQL exposed the generated statement, and NARRATE queried governed finance data without taking action.",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "title": true,
+        "type": "TEXT"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {}
+    }
+  ],
+  "version": "1.0"
+}
