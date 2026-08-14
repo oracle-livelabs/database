@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on Telco exercises. Each query runs as the workshop user against the prepared Seer Comms schema.
+Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database 26ai** environment, and prepare **SQL Worksheet** for the **Seer Comms** investigation. Each hands-on query runs as the workshop user against the prepared telecom schema, so you can focus on the business evidence instead of environment setup.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -26,7 +26,7 @@ Estimated Time: **5 minutes**
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
+Start from the LiveLabs reservation so **Database Actions** opens with the correct workshop resources and credentials. This puts you in the same governed environment used for the rest of the Seer Comms incident investigation:
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -42,7 +42,7 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 
 ## Task 2: Open SQL Worksheet
 
-Open SQL Worksheet as the workshop user before running the Telco queries. SQL Worksheet is where you ask the database each question and see the returned evidence as a table.
+Open SQL Worksheet as the workshop user before running the telecom queries. This is where you ask each business question in SQL and review the evidence returned by **Oracle AI Database 26ai**:
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -72,7 +72,7 @@ Open SQL Worksheet as the workshop user before running the Telco queries. SQL Wo
 
 6. Use the same SQL Worksheet pattern throughout the workshop.
 
-    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation-retail.svg " ")
+    ![Annotated SQL Worksheet showing the LLUSER connection, Telco SQL editor, Run button, and query results](images/sql-worksheet-orientation-telco.svg " ")
 
     *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
 
@@ -85,6 +85,10 @@ Open SQL Worksheet as the workshop user before running the Telco queries. SQL Wo
 7. Run this check.
 
     This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The Telco labs use `LLUSER`, so both values should point to the workshop schema.
+
+    1. `FROM dual` uses Oracle's one-row utility table, so this check needs no Telco table.
+    2. `USER` returns the signed-in database user.
+    3. `SYS_CONTEXT` reads the schema Oracle will use to resolve unqualified table names.
 
     ```sql
     <copy>
@@ -100,9 +104,9 @@ Open SQL Worksheet as the workshop user before running the Telco queries. SQL Wo
     | --- | --- |
     | LLUSER | LLUSER |
 
-    You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
+    Use this connection check whenever you need to confirm that SQL Worksheet is still running as 'LLUSER' before continuing the telecom investigation.
 
-You can now continue to the Telco labs.
+With SQL Worksheet ready, you can move from setup into the evidence foundation for **TEL-5G-2026-501**.
 
 ## Acknowledgements
 
