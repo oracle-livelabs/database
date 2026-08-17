@@ -155,7 +155,7 @@ Score each service as `SURGE` or `STABLE` so Jessica can prioritize public servi
 
     The model output supports planning only when Jessica combines it with the capacity, geography, and request evidence from earlier labs.
 
-3. :dart: **Interactive challenge: Build a demand-review queue.**
+3. 🎯 **Interactive challenge: Build a demand-review queue.**
 
     Starting with the classification query above, add `WHERE scores.predicted_label = 'SURGE'` before the `ORDER BY` clause to investigate only services with a predicted demand surge. Run your revised query. Which services should enter Jessica's human demand-and-capacity review queue?
 

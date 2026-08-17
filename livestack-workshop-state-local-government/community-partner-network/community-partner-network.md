@@ -10,12 +10,6 @@ You are the community-service coordination analyst supporting Jessica. In this l
 - `PRODUCTS` represent public services.
 - `SOCIAL_POSTS` represent resident signals.
 
-You are the community-service coordination analyst supporting Jessica. In this lab, you query the `INFLUENCER_NETWORK` property graph and translate inherited physical object names into public-service meaning:
-- `INFLUENCERS` represent community partners and signal sources.
-- `BRANDS` represent public programs.
-- `PRODUCTS` represent public services.
-- `SOCIAL_POSTS` represent resident signals.
-
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, seed partner, and hop</strong></summary>
 
@@ -118,7 +112,7 @@ Start with the direct Benefits Eligibility partner connections so Jessica can se
 
     The result explains who starts the handoff, who receives it, and how strong the recorded coordination relationship is. Jessica can prioritize the strongest path while still seeing the program context.
 
-3. :dart: **Interactive challenge: Focus on stronger coordination evidence.**
+3. 🎯 **Interactive challenge: Focus on stronger coordination evidence.**
 
     Starting with the one-hop query above, add `AND handoff.strength >= 0.85` to the `WHERE` clause to investigate only the stronger recorded Benefits Eligibility relationships. Run your revised query. Which partner connections should Jessica use as candidates for initial human outreach?
 

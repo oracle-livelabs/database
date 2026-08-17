@@ -107,7 +107,7 @@ Start with the resident's nearest service centers so Maria can connect the reque
 
     Grand Junction is the nearest center for Elena, so Maria should review its available capacity first. Distance supports prioritization, but it does not decide work assignments by itself.
 
-3. :dart: **Interactive challenge: Recalculate access for another resident.**
+3. 🎯 **Interactive challenge: Recalculate access for another resident.**
 
     Starting with the distance query above, change the resident-name filter from `Elena Garcia` to `Maya Patel` to investigate service access from Pueblo. Run your revised query. Which service center should enter Maria's capacity review first?
 

@@ -93,7 +93,7 @@ Start with the request as the application consumes it, so the document shape is 
 
     ![Relational detail for the same service request](images/service-request-relational-detail.png " ")
 
-3. :dart: **Interactive challenge: Compare a completed request document.**
+3. 🎯 **Interactive challenge: Compare a completed request document.**
 
     Starting with the baseline query above, change the request ID filter from `1` to `5` to investigate a request at a different lifecycle stage. Run your revised query. Which business fields indicate whether request 5 should remain in the same active-review queue as request 1?
 

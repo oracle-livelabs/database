@@ -149,7 +149,7 @@ Search resident signals next so Jessica can compare the service match with the c
 
     The SQL keeps the underlying text and scores reviewable, so a team can compare semantic relevance with urgency before acting.
 
-3. :dart: **Interactive challenge: Reframe the resident-service concern.**
+3. 🎯 **Interactive challenge: Reframe the resident-service concern.**
 
     Starting with the resident-signal query above, replace the phrase `benefits eligibility appointment backlog` with `emergency shelter intake coordination` to investigate a different service concern. Run your revised query. Which returned row should enter Jessica's human review queue first when semantic relevance and urgency are considered together?
 
