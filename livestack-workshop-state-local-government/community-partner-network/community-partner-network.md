@@ -10,6 +10,12 @@ You are the community-service coordination analyst supporting Jessica. In this l
 - `PRODUCTS` represent public services.
 - `SOCIAL_POSTS` represent resident signals.
 
+You are the community-service coordination analyst supporting Jessica. In this lab, you query the `INFLUENCER_NETWORK` property graph and translate inherited physical object names into public-service meaning:
+- `INFLUENCERS` represent community partners and signal sources.
+- `BRANDS` represent public programs.
+- `PRODUCTS` represent public services.
+- `SOCIAL_POSTS` represent resident signals.
+
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, seed partner, and hop</strong></summary>
 

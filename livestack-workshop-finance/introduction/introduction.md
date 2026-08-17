@@ -10,6 +10,12 @@ In this workshop, **Seer Bank** uses **Oracle AI Database 26ai** as a converged 
 
 ![Workshop overview](images/finance-workshop-intro-journey.png " ")
 
+This workshop is your guided look behind the companion Seer Bank Finance LiveStack demo. You will see how Oracle AI Database 26ai and the connected finance data set produce the dashboard, investigation, and operational results shown in the application.
+
+You will also step beyond observation. Several labs include 🎯 interactive challenges where you change an investigation question, compare evidence, or make a review recommendation using the same governed data. These moments let you test how Oracle's converged database brings relational, JSON, vector, graph, spatial, and machine-learning capabilities together for one finance decision flow.
+
+This workshop gives you the connected decision flow across those capabilities. When you want to go deeper on a specific topic—such as JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, or Oracle Machine Learning—use the related deep-dive LiveLabs links in each lab's **Next Steps** section.
+
 Throughout the workshop, you will see small arrows next to expandable sections. Select the arrow when you want extra context about a term, concept, or Oracle Database capability. These sections are closed by default so the main lab stays focused, but you can expand them whenever you want more explanation.
 
 The example below shows an expandable section before and after it is opened.
