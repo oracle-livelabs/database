@@ -4,8 +4,6 @@
 
 Resident-service resolution can cross program, county, nonprofit, and regional boundaries. **Jessica** needs to know which organizations connect to **Benefits Eligibility** and which two-step handoffs can extend the response.
 
-You are the community-service coordination analyst supporting Jessica. You will query the `INFLUENCER_NETWORK` property graph. The database retains inherited physical object names: `INFLUENCERS` represent community partners and signal sources, `BRANDS` represent public programs, `PRODUCTS` represent public services, and `SOCIAL_POSTS` represent resident signals.
-
 You are the community-service coordination analyst supporting Jessica. In this lab, you query the `INFLUENCER_NETWORK` property graph and translate inherited physical object names into public-service meaning:
 - `INFLUENCERS` represent community partners and signal sources.
 - `BRANDS` represent public programs.
@@ -113,6 +111,51 @@ Start with the direct Benefits Eligibility partner connections so Jessica can se
 2. Interpret the one-hop evidence.
 
     The result explains who starts the handoff, who receives it, and how strong the recorded coordination relationship is. Jessica can prioritize the strongest path while still seeing the program context.
+
+3. 🎯 **Interactive challenge: Focus on stronger coordination evidence.**
+
+    Starting with the one-hop query above, add `AND handoff.strength >= 0.85` to the `WHERE` clause to investigate only the stronger recorded Benefits Eligibility relationships. Run your revised query. Which partner connections should Jessica use as candidates for initial human outreach?
+
+    **Expected output: Stronger Benefits Partner Connections**
+
+    Two deterministic paths should remain: Colorado Benefits Network to Western Slope Family Resource Alliance at `0.92`, and Colorado Benefits Network to County Human Services Collaborative at `0.88`. The `0.81` path should leave the result.
+
+    <details>
+    <summary><strong>Challenge answer: Prioritize stronger paths without treating them as authorization</strong></summary>
+
+    > The two remaining paths are the strongest recorded coordination candidates for initial outreach. Relationship strength supports prioritization, but it does not authorize a referral or prove that coordination will succeed. Oracle AI Database 26ai keeps graph relationships, public-program records, and partner context together, so teams can investigate without copying sensitive service-network data into disconnected systems.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT public_program,
+           starting_partner,
+           connected_partner,
+           handoff_type,
+           coordination_strength
+    FROM GRAPH_TABLE (
+      influencer_network
+      MATCH (program IS brand)
+            <-[program_link IS promotes]-
+            (source IS influencer)
+            -[handoff IS connects_to]->
+            (partner IS influencer)
+      WHERE program.brand_name = 'Benefits Eligibility'
+        AND handoff.strength >= 0.85
+      COLUMNS (
+        program.brand_name AS public_program,
+        source.display_name AS starting_partner,
+        partner.display_name AS connected_partner,
+        handoff.connection_type AS handoff_type,
+        handoff.strength AS coordination_strength
+      )
+    )
+    ORDER BY coordination_strength DESC, connected_partner;
+    </copy>
+    ```
+
+    </details>
 
 ## Task 2: Trace two-hop coordination paths
 
