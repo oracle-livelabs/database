@@ -11,8 +11,8 @@ Use this scored quiz to check whether you can connect each Colorado resident-ser
 
 ### Objectives
 
-- Review the active database capabilities.
-- Connect public-service outcomes to supporting evidence.
+- Review the active database capabilities used across the Colorado resident-services decision path.
+- Connect public-service outcomes to the SQL, JSON, vector, graph, spatial, and OML evidence that supports them.
 - Earn the workshop badge.
 
 Estimated Time: **5 minutes**

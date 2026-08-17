@@ -162,6 +162,15 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     Review the predicted surge and confidence together. A `SURGE` prediction can help an analyst decide which products may need more monitoring, outreach, or case-processing capacity. Confidence helps the analyst decide how strongly the model supports that prediction. It does not replace review; it helps rank where to look first.
 
+    🎯 **Interactive challenge: choose a review candidate.** Among the results shown, which product would you review first, and why?
+
+    <details>
+    <summary><strong>Challenge answer: a confident mismatch needs context</strong></summary>
+
+    > Review `High-Yield Savings Account` first. Its training label is `SURGE`, while the model predicts `STABLE` with confidence `0.6139`, slightly higher than the other visible mismatch. Confidence is probability for the predicted label, not business severity or certainty. The mismatch is a reason to investigate the governed evidence, not an automated decision.
+
+    </details>
+
 
 2. Check how often the demand model matches the known label.
 
@@ -245,6 +254,35 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
     Look for rows where predicted revenue is close to target revenue, then look for rows where the difference is larger. Close values show where the model estimate lines up with known outcomes. Larger gaps show where an analyst may want more context, such as unusual customer behavior, product mix, or fulfillment timing.
 
     The demand query helps teams decide which products may need attention. The revenue query helps teams see whether a model estimate is useful for planning. Both queries score persisted models without moving sensitive finance records out of Oracle Database.
+
+    🎯 **Interactive challenge: surface the largest forecast gaps.** Starting with the revenue query above, add a `revenue_gap` column that uses `ABS` to calculate the difference between `target_revenue` and the prediction. Then change the sort so the largest gaps appear first and return only five rows. Which order now leads the review queue, and what additional context would you seek?
+
+    **Expected output: Largest Revenue Forecast Gaps**
+
+    The revised query examines the full training view rather than just the first ten order IDs. The top result can change if the model or workshop data is refreshed.
+
+    <details>
+    <summary><strong>Challenge answer: a gap is evidence, not proof</strong></summary>
+
+    > In the current workshop data, order `2057` leads the full-data review queue with a revenue gap of `7636.72`. Review product mix, customer behavior, and timing before drawing a conclusion. A large gap is evidence to investigate, not proof that the model or business outcome is wrong. Oracle Machine Learning keeps the model score beside the finance evidence needed for that review, rather than sending sensitive data to a separate scoring platform.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT order_id,
+           target_revenue,
+           ROUND(PREDICTION(REVENUE_PREDICT_MODEL USING *), 2) AS predicted_revenue,
+           ROUND(ABS(
+             target_revenue - PREDICTION(REVENUE_PREDICT_MODEL USING *)
+           ), 2) AS revenue_gap
+    FROM oml_revenue_training_v
+    ORDER BY revenue_gap DESC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
 
 ## Next Steps
 

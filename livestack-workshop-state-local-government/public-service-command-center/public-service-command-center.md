@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica Chen begins with an early warning: the Colorado Medicaid Eligibility Error Rate is 2.7%, approaching but still within the stakeholder-provided 3.0% threshold. The measure tells Jessica to investigate, but it does not identify the requests, regions, or services that deserve attention first.
+**Jessica Chen** begins with an early warning: the **Colorado Medicaid Eligibility Error Rate** is **2.7%**, approaching but still within the stakeholder-provided **3.0%** threshold. The measure tells Jessica to investigate, but it does not identify the requests, regions, or services that deserve attention first.
 
 You are the service operations analyst supporting Jessica. In this lab, you recreate the database-backed operating measures around that warning and then drill into the request rows behind them. Application configuration supplies the eligibility rate, so the learner SQL does not claim to calculate it.
 
@@ -23,15 +23,15 @@ The concept graphic shows the path from the command-center summary to reviewable
 
 ![Public Service Command Center evidence flow](images/command-center-evidence.svg " ")
 
-The application page below gives Jessica a statewide operating view. Look for service pressure and request evidence around the eligibility warning. The SQL in this lab explains the database-backed request measures, not the configured warning rate.
+The application page below gives Jessica a statewide operating view. Look for service pressure and request evidence around the eligibility warning. The full application uses a larger demonstration dataset, while the compact learner dataset keeps the SQL repeatable. The SQL explains the database-backed request measures, not the configured warning rate.
 
 ![Public Service Command Center page](images/public-service-command-center.png " ")
 
 ### Objectives
 
-- Calculate request, urgency, and service-value KPIs.
-- Drill from summaries into business-readable request rows.
-- Explain which dashboard measures are database-backed.
+- Calculate request, urgency, and service-value measures that help Jessica understand the current workload.
+- Drill from statewide summaries into business-readable request rows.
+- Explain which command-center measures are database-backed and which measures come from application configuration.
 
 Estimated Time: **10 minutes**
 
@@ -50,9 +50,9 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Calculate statewide operating measures
 
-Start with one row that summarizes the current request workload.
+Start with one summary row so Jessica can see workload size, urgency, and service-value exposure before opening individual requests:
 
-1. Run the KPI query.
+1. Run the KPI query to recreate the database-backed operating measures behind the command-center review:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet).
 
@@ -89,13 +89,15 @@ Start with one row that summarizes the current request workload.
 
     `Total Requests` establishes workload size. `Open Requests` shows work still moving through the lifecycle. `Urgent Requests` identifies rows with an urgency score of at least 80, and `Service Value Exposure` supplies a planning proxy for the public-service value tied to the requests.
 
-    These measures do not prove why the eligibility rate is 2.7%. They tell Jessica which operating evidence to review around that early warning.
+    `Total Requests` establishes workload size. `Open Requests` shows work still moving through the lifecycle. `Urgent Requests` identifies rows with an **urgency score of at least 80**, and `Service Value Exposure` supplies a planning proxy for the public-service value tied to the requests.
+
+    These measures do not prove why the eligibility rate is **2.7%**. They tell Jessica which operating evidence to review around that early warning.
 
 ## Task 2: Drill into the highest-urgency requests
 
-Move from the summary to named services, regions, and centers.
+Move from the summary to named services, regions, and centers so the operating pressure becomes an actionable review queue.
 
-1. Run the drill-through query.
+1. Run the drill-through query to identify the highest-urgency requests and the service centers connected to them:
 
     The query uses the same semantic view as Task 1. `CASE` turns region codes into readable names, and `ORDER BY` places the highest-urgency requests first. Because the loader gives each sample request one primary service line, each request appears once.
 
