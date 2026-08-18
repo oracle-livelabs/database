@@ -30,10 +30,12 @@ The image below shows the Transaction and Case Operations page in its API docume
 ### Objectives
 
 - Read application-friendly transaction documents from a duality view.
+- Turn an update-only duality view into an insert-and-update document API.
+- Create and update a JSON transaction, then inspect its relational rows.
 - Explain why JSON Relational Duality avoids a separate document copy.
 - Use SQL/JSON projection to return document fields as SQL columns for investigation.
 
-Estimated Time: **10 minutes**
+Estimated Time: **15 minutes**
 
 ### Business Scenario
 
@@ -52,28 +54,16 @@ Persona focus: You are the application/database developer showing how Seer Bank 
 
 A JSON Relational Duality View is a database view that defines how relational tables should appear as a JSON document. The data still lives in relational tables, with keys, constraints, SQL access, and governance. The duality view adds a document access path over that same data.
 
-For this lab, the workshop database already includes `ORDERS_DV`. It was created with a statement shaped like this:
+For this lab, the workshop database already includes `ORDERS_DV`. The duality view maps relational columns into a document shape like this:
 
-```sql
-CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
-SELECT JSON {
-    '_id'        : o.order_id,
-    'customerId' : o.customer_id,
-    'status'     : o.order_status,
-    'items'      : [
-        SELECT JSON {
-            'itemId'    : oi.item_id,
-            'productId' : oi.product_id,
-            'quantity'  : oi.quantity
-        }
-        FROM order_items oi
-        WHERE oi.order_id = o.order_id
-    ]
-}
-FROM orders o;
-```
+| JSON field | Relational source |
+| --- | --- |
+| `_id` | `ORDERS.ORDER_ID` |
+| `customerId` | `ORDERS.CUSTOMER_ID` |
+| `status` | `ORDERS.ORDER_STATUS` |
+| `items[]` | Related rows from `ORDER_ITEMS` |
 
-That definition tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
+That mapping tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
 
 This is better than common alternatives because it avoids splitting ownership of the same transaction across systems. If teams hand-build JSON in every application service, each service can drift into its own version of the transaction shape. If teams copy transactions into a separate document database, they must synchronize data, duplicate security rules, and resolve conflicts when the document copy and relational source disagree. A duality view keeps one governed source of truth while still giving each consumer the access shape it needs.
 
@@ -83,7 +73,7 @@ First, inspect the transaction shape an application can consume directly.
 
 1. Run this query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are viewing a transaction the way an application can consume it: as a JSON document. The SQL selects from the JSON Relational Duality view `ORDERS_DV` and uses `JSON_SERIALIZE(... PRETTY)` so SQL Worksheet displays the document shape clearly.
 
@@ -100,6 +90,7 @@ First, inspect the transaction shape an application can consume directly.
     <copy>
     SELECT JSON_SERIALIZE(data PRETTY) AS transaction_document
     FROM orders_dv
+    ORDER BY JSON_VALUE(data, '$._id' RETURNING NUMBER)
     FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
@@ -108,7 +99,7 @@ First, inspect the transaction shape an application can consume directly.
 
     | Transaction Document |
     | --- |
-    | { "\_id" : 519, "\_metadata" : { "etag" : "A373EE416A88F30340355B478ADC0179", "asof" : "00002AB7EFDA711D" }, "customerId" : 205, "status" : "cancelle... |
+    | { "\_id" : 1, "\_metadata" : { ... }, "customerId" : 687, "status" : "confirmed", "items" : [ ... ] } |
 
 
 2. Expand the document in SQL Worksheet.
@@ -118,7 +109,206 @@ First, inspect the transaction shape an application can consume directly.
 
     This is useful because risk and operations teams can inspect the same transaction from two angles: API-ready JSON for the application and governed relational rows for analysis.
 
-## Task 2: Project JSON fields with SQL
+## Task 2: Enable document inserts and updates
+
+The existing `ORDERS_DV` lets an application update an existing transaction document. In this task, you extend that contract so an application can also create a transaction document. The relational tables, keys, and constraints remain the governed source of truth.
+
+1. Check the current document-write capabilities.
+
+    ```sql
+    <copy>
+    SELECT view_name,
+           allow_insert,
+           allow_update,
+           allow_delete
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV';
+    </copy>
+    ```
+
+    **Expected output: Current Document Capabilities**
+
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | ORDERS\_DV | false | true | false |
+
+    The view is currently update-enabled but does not accept a new top-level document. The root `ORDERS` table controls whether a document can be inserted, while the nested `ORDER_ITEMS` rows must also allow inserts so the document can include line items.
+
+2. Enable insert and update for the document and its line items.
+
+    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses tell Oracle Database that developers can create and update the JSON document while the database continues to enforce relational keys and data types underneath.
+
+    ```sql
+    <copy>
+    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
+    SELECT JSON {
+        '_id'         : o.order_id,
+        'customerId'  : o.customer_id,
+        'status'      : o.order_status,
+        'total'       : o.order_total,
+        'shippingCost': o.shipping_cost,
+        'demandScore' : o.demand_score,
+        'createdAt'   : o.created_at,
+        'items' : [
+            SELECT JSON {
+                'itemId'    : oi.item_id,
+                'productId' : oi.product_id,
+                'quantity'  : oi.quantity,
+                'unitPrice' : oi.unit_price
+            }
+            FROM order_items oi WITH INSERT UPDATE
+            WHERE oi.order_id = o.order_id
+        ]
+    }
+    FROM orders o WITH INSERT UPDATE;
+    </copy>
+    ```
+
+    **Expected output: View Definition Updated**
+
+    Oracle confirms that the duality view was created or replaced. Verify the new capabilities in the next step.
+
+3. Run the capability query again.
+
+    ```sql
+    <copy>
+    SELECT view_name,
+           allow_insert,
+           allow_update,
+           allow_delete
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV';
+    </copy>
+    ```
+
+    **Expected output: Document Capabilities Enabled**
+
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | ORDERS\_DV | true | true | false |
+
+    The view can now receive a new JSON transaction document and apply a document update. This environment is temporary, so this learner-created API contract and its test transaction are removed when workshop access expires.
+
+## Task 3: Create and update a JSON transaction
+
+Now act as an application developer. You will create a transaction as one nested JSON document, then confirm that a database developer or analyst can immediately see the same data as structured relational rows.
+
+1. Insert the supplied workshop transaction document.
+
+    The document uses the reserved workshop transaction ID `900001`, customer `1`, and product `1`. It includes one nested line item. This statement is safe to run again: after the transaction exists, it inserts zero rows and preserves the existing record. On the first run, the new transaction has the status `pending`.
+
+    ```sql
+    <copy>
+    INSERT INTO orders_dv (data)
+    SELECT JSON(
+      '{
+        "_id": 900001,
+        "customerId": 1,
+        "status": "pending",
+        "total": 25.00,
+        "shippingCost": 0,
+        "items": [
+          {
+            "itemId": 990001,
+            "productId": 1,
+            "quantity": 2,
+            "unitPrice": 12.50
+          }
+        ]
+      }'
+    )
+    FROM dual
+    WHERE NOT EXISTS (
+      SELECT 1
+      FROM orders
+      WHERE order_id = 900001
+    );
+
+    COMMIT;
+    </copy>
+    ```
+
+    **Expected output: Transaction Document Created**
+
+    On the first run, Oracle inserts one document. On later runs, the `NOT EXISTS` check returns zero rows because the workshop transaction is already present.
+
+2. Confirm the JSON document became relational rows.
+
+    ```sql
+    <copy>
+    SELECT o.order_id AS transaction_id,
+           o.order_status AS transaction_status,
+           c.email AS client_email,
+           oi.item_id,
+           p.product_name,
+           oi.quantity,
+           oi.unit_price,
+           oi.line_total
+    FROM orders o
+    JOIN customers c ON c.customer_id = o.customer_id
+    JOIN order_items oi ON oi.order_id = o.order_id
+    JOIN products p ON p.product_id = oi.product_id
+    WHERE o.order_id = 900001;
+    </copy>
+    ```
+
+    **Expected output: Created Transaction Rows**
+
+    | Transaction Id | Transaction Status | Item Id | Product Name | Quantity | Unit Price | Line Total |
+    | --- | --- | --- | --- | --- | --- | --- |
+    | 900001 | pending | 990001 | Premium Checking Bundle | 2 | 12.5 | 25 |
+
+3. Update the document status through the duality view.
+
+    This update changes JSON data through `ORDERS_DV`. Oracle Database writes the matching relational `ORDERS.ORDER_STATUS` value; no application-side JSON parsing, copy, or synchronization job is required.
+
+    ```sql
+    <copy>
+    UPDATE orders_dv
+    SET data = JSON_TRANSFORM(data, SET '$.status' = 'confirmed')
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
+
+    COMMIT;
+    </copy>
+    ```
+
+    **Expected output: Transaction Status Updated**
+
+    Oracle updates one document. The following query confirms that the relational order row now has status `confirmed`.
+
+    🎯 **Interactive challenge:** Before you run the next query, predict which relational column will change and which line-item values will remain unchanged.
+
+    <details>
+    <summary><strong>Challenge answer: one document, one governed transaction</strong></summary>
+
+    > `ORDERS.ORDER_STATUS` changes from `pending` to `confirmed`. The `ORDER_ITEMS` row stays the same because the document update changes only `status`. The application and the analyst are working with two access shapes over the same live finance data.
+
+    </details>
+
+4. Verify the updated relational status.
+
+    ```sql
+    <copy>
+    SELECT o.order_id AS transaction_id,
+           o.order_status AS transaction_status,
+           oi.item_id,
+           p.product_name,
+           oi.quantity,
+           oi.line_total
+    FROM orders o
+    JOIN order_items oi ON oi.order_id = o.order_id
+    JOIN products p ON p.product_id = oi.product_id
+    WHERE o.order_id = 900001;
+    </copy>
+    ```
+
+    **Expected output: Updated Transaction Rows**
+
+    | Transaction Id | Transaction Status | Item Id | Product Name | Quantity | Line Total |
+    | --- | --- | --- | --- | --- | --- |
+    | 900001 | confirmed | 990001 | Premium Checking Bundle | 2 | 25 |
+
+## Task 4: Project JSON fields with SQL
 
 Now use SQL to project document fields back into reviewable columns. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
 
@@ -138,28 +328,15 @@ Now use SQL to project document fields back into reviewable columns. In this con
     FROM orders_dv od
     JOIN customers c
       ON c.customer_id = JSON_VALUE(od.data, '$.customerId' RETURNING NUMBER)
-    WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) IS NOT NULL
-    ORDER BY transaction_id
-    FETCH FIRST 10 ROWS ONLY;
+    WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) = 900001;
     </copy>
     ```
 
     **Expected output: JSON Field Projection**
 
-    The exact email values may differ by load, but `Transaction Status` and `Client Email` should not be blank.
-
     | Transaction Id | Transaction Status | Client Email |
     | --- | --- | --- |
-    | 1 | confirmed | client@example.com |
-    | 2 | processing | client@example.com |
-    | 3 | routed | client@example.com |
-    | 4 | completed | client@example.com |
-    | 5 | completed | client@example.com |
-    | 6 | completed | client@example.com |
-    | 7 | cancelled | client@example.com |
-    | 8 | pending | client@example.com |
-    | 9 | confirmed | client@example.com |
-    | 10 | processing | client@example.com |
+    | 900001 | confirmed | Existing customer email for customer 1 |
 
 
 2. Review the columns returned from the JSON document.
@@ -168,6 +345,10 @@ Now use SQL to project document fields back into reviewable columns. In this con
     `Transaction Id` and `Transaction Status` are projected from the JSON document into the result table. The document stores the client reference as `customerId`, so the query joins back to `CUSTOMERS` to return `Client Email`.
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
+
+## Next Steps
+
+Congratulations on completing the JSON duality lab. You expanded a JSON API contract, created and updated a transaction as a document, and inspected the same governed data as relational rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 

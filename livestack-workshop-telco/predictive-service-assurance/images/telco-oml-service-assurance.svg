@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Telco predictive service assurance with Oracle Machine Learning</title>
+  <desc id="desc">A three-step diagram shows network-site capacity features, the NETWORK_CAPACITY_SURGE_MODEL in Oracle Database, and a reviewable capacity-risk queue.</desc>
+  <style>.title{font:700 24px Arial,sans-serif;fill:#161513}.sub{font:15px Arial,sans-serif;fill:#4f4f4f}.head{font:700 18px Arial,sans-serif;fill:#fff}.item{font:15px Arial,sans-serif;fill:#292522}.foot{font:600 15px Arial,sans-serif;fill:#4f4f4f}</style>
+  <rect width="900" height="360" fill="#f7f8f9"/>
+  <text x="42" y="42" class="title">Score capacity pressure before it becomes a service incident</text>
+  <text x="42" y="67" class="sub">Lab 7 keeps the model, capacity features, probability, and planner review queue in Oracle AI Database.</text>
+  <rect x="42" y="96" width="216" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="42" y="96" width="216" height="42" rx="12" fill="#4f8397"/><rect x="42" y="126" width="216" height="12" fill="#4f8397"/>
+  <text x="62" y="123" class="head">Capacity features</text><text x="63" y="168" class="item">NETWORK_SITES</text><text x="63" y="196" class="item">capacity units</text><text x="63" y="224" class="item">current load %</text><text x="63" y="252" class="item">governed site context</text>
+  <path d="M273 193h27v-13l24 13-24 13v-13h-27z" fill="#c74634"/>
+  <rect x="338" y="96" width="236" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="338" y="96" width="236" height="42" rx="12" fill="#7a5aa6"/><rect x="338" y="126" width="236" height="12" fill="#7a5aa6"/>
+  <text x="358" y="123" class="head">In-database model</text><text x="359" y="168" class="item">NETWORK_CAPACITY_</text><text x="359" y="190" class="item">SURGE_MODEL</text><text x="359" y="224" class="item">PREDICTION()</text><text x="359" y="252" class="item" font-size="15">PREDICTION_PROBABILITY()</text>
+  <path d="M589 193h27v-13l24 13-24 13v-13h-27z" fill="#c74634"/>
+  <rect x="654" y="96" width="204" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="654" y="96" width="204" height="42" rx="12" fill="#557a68"/><rect x="654" y="126" width="204" height="12" fill="#557a68"/>
+  <text x="674" y="123" class="head">Planner review</text><text x="675" y="168" class="item">ESCALATE</text><text x="675" y="196" class="item">probability</text><text x="675" y="224" class="item">site evidence</text><text x="675" y="252" class="item">human decision</text>
+  <text x="42" y="332" class="foot">A model score prioritizes investigation; capacity, subscriber impact, and field evidence still explain the action.</text>
+</svg>

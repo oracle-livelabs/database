@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Network impact graph investigation</title>
+  <desc id="desc">A three-step Telco graph diagram starts with the TEL-5G-2026-501 experience case, uses GRAPH_TABLE to traverse case relationships, and identifies coordinated follow-up entities.</desc>
+  <style>.title{font:700 24px Arial,sans-serif;fill:#161513}.sub{font:15px Arial,sans-serif;fill:#4f4f4f}.head{font:700 18px Arial,sans-serif;fill:#fff}.item{font:15px Arial,sans-serif;fill:#292522}.foot{font:600 15px Arial,sans-serif;fill:#4f4f4f}</style>
+  <rect width="900" height="360" fill="#f7f8f9"/>
+  <text x="42" y="42" class="title">Trace one high-impact case to its operational reach</text>
+  <text x="42" y="67" class="sub">Lab 5 follows governed relationships from a selected incident instead of rebuilding a fragile sequence of joins.</text>
+  <rect x="42" y="96" width="216" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="42" y="96" width="216" height="42" rx="12" fill="#c74634"/><rect x="42" y="126" width="216" height="12" fill="#c74634"/>
+  <text x="62" y="123" class="head">Named case</text><text x="63" y="168" class="item">TEL-5G-2026-501</text><text x="63" y="196" class="item">critical priority</text><text x="63" y="224" class="item">31,200 affected</text><text x="63" y="252" class="item">$2.14M at risk</text>
+  <path d="M273 193h27v-13l24 13-24 13v-13h-27z" fill="#c74634"/>
+  <rect x="338" y="96" width="236" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="338" y="96" width="236" height="42" rx="12" fill="#397e97"/><rect x="338" y="126" width="236" height="12" fill="#397e97"/>
+  <text x="358" y="123" class="head">Graph traversal</text><text x="359" y="168" class="item">TELECOM graph</text><text x="359" y="196" class="item">GRAPH_TABLE</text><text x="359" y="224" class="item">case_involves edge</text><text x="359" y="252" class="item">evidence confidence</text>
+  <path d="M589 193h27v-13l24 13-24 13v-13h-27z" fill="#c74634"/>
+  <rect x="654" y="96" width="204" height="194" rx="12" fill="#fff" stroke="#d6d3cf"/><rect x="654" y="96" width="204" height="42" rx="12" fill="#557a68"/><rect x="654" y="126" width="204" height="12" fill="#557a68"/>
+  <text x="674" y="123" class="head">Review queue</text><text x="675" y="168" class="item">subscriber cluster</text><text x="675" y="196" class="item">network site</text><text x="675" y="224" class="item">signal and case</text><text x="675" y="252" class="item">response teams</text>
+  <text x="42" y="332" class="foot">Relationship evidence stays governed with Telco operations data while investigators follow the impact path.</text>
+</svg>

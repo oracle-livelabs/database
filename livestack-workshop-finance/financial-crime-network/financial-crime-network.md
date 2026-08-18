@@ -23,7 +23,7 @@ A suspicious signal often leads to the question, "Who or what else is connected?
 
 The first image below is a concept graphic for the financial-crime graph pattern. It shows the idea behind the lab: a suspicious account becomes more meaningful when you can follow its relationships to devices, IP addresses, payees, phone numbers, branches, and cases.
 
-![Fraud graph investigation flow](images/fraud-graph-investigation-flow.svg " ")
+![Fraud graph investigation flow](images/fraud-ring-evidence-labeled.png " ")
 
 The second image is the Financial Crime Network application workspace. The left side ranks connected risk entities, while the graph area shows how a selected account connects through shared infrastructure and mule-payment relationships. The SQL/PGQ queries in this lab reproduce that investigation path so you can see how the visual network is backed by queryable graph evidence.
 
@@ -55,7 +55,7 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 
 1. Run the SQL/PGQ traversal from `ACCT-8841`.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     This query treats the fraud data as a graph. In the `MATCH` pattern, `(seed IS entity)` is the starting account, `-[e IS related_to]->{1,2}` means follow one or two relationship hops, and `(reached IS entity)` is every entity reached from that starting point.
 
@@ -100,20 +100,65 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 
     | Entity Key | Display Name | Entity Type | Risk Score | Risk Level | Total Amount | Channel |
     | --- | --- | --- | --- | --- | --- | --- |
-    | DEV-fp-91a7 | Mobile Fingerprint 91a7 | device | 98.0 | critical | 42211.05 | network |
-    | PAYEE-MULE-017 | Mule Payee 017 | payee | 97.0 | critical | 36110.75 | payments |
-    | IP-198.51.100.44 | Residential Proxy 198.51.100.44 | ip\_address | 95.0 | critical | 38200.25 | network |
-    | PHONE-212-0199 | Reused VOIP 212-0199 | phone | 90.0 | critical | 25110.25 | contact\_center |
-    | PAYEE-CRYPTO-3 | Crypto Ramp Wallet 3 | payee | 87.0 | high | 14325.5 | payments |
-    | BRANCH-NY-014 | NY Midtown Branch 014 | branch | 49.0 | medium | 2800.0 | branch |
+    | DEV-fp-91a7 | Mobile Fingerprint 91a7 | device | 98 | critical | 42211.05 | network |
+    | PAYEE-MULE-017 | Mule Payee 017 | payee | 97 | critical | 36110.75 | payments |
+    | IP-198.51.100.44 | Residential Proxy 198.51.100.44 | ip\_address | 95 | critical | 38200.25 | network |
+    | PHONE-212-0199 | Reused VOIP 212-0199 | phone | 90 | critical | 25110.25 | contact\_center |
+    | PAYEE-CRYPTO-3 | Crypto Ramp Wallet 3 | payee | 87 | high | 14325.5 | payments |
+    | BRANCH-NY-014 | NY Midtown Branch 014 | branch | 49 | medium | 2800 | branch |
 
 
 2. Review the high-risk entities.
     The query returns connected entities as a prioritized table, not as an abstract graph picture. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and transaction labs.
 
-    Expected rows include `DEV-fp-91a7`, `PAYEE-MULE-017`, `IP-198.51.100.44`, and `PHONE-212-0199`. These are not just labels; they are connected entities that help explain why the seed account deserves attention.
+    The expected rows show the evidence connected to suspicious account `ACCT-8841`. 
+    For example:
+    * `DEV-fp-91a7` is a device 
+    * `PAYEE-MULE-017` is a payee
+    * `IP-198.51.100.44` is an IP address
+    * `PHONE-212-0199` is a phone number
+    
+    These rows matter because they show what the suspicious account touched or shared.
 
     The result gives investigators a prioritized reach map. Instead of staring at a tangle of connections, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
+
+3. 🎯 **Interactive challenge: compare direct and indirect evidence.**
+
+    Starting with the two-hop traversal above, change only `{1,2}` to `{1,1}` so you see entities directly connected to `ACCT-8841`. Run your revised query.
+
+    **Expected output: Direct Fraud Connections**
+
+    The current data returns the device, mule payee, IP address, phone, and branch directly connected to `ACCT-8841`. Restore the two-hop traversal mentally and identify the entity that appears only through an indirect path.
+
+    <details>
+    <summary><strong>Challenge answer: two hops add investigative context</strong></summary>
+
+    > `PAYEE-CRYPTO-3`, Crypto Ramp Wallet 3, appears only after the second hop. It is indirect evidence that warrants follow-up, not an automatic action. Oracle Property Graph keeps this relationship evidence connected to the same governed finance data used for risk review.
+
+    If you need the runnable solution, use this one-hop traversal:
+
+    ```sql
+    <copy>
+    SELECT DISTINCT entity_key, display_name, entity_type,
+           risk_score, risk_level, total_amount, channel
+    FROM GRAPH_TABLE ( fraud_network
+      MATCH (seed IS entity) -[e IS related_to]->{1,1} (reached IS entity)
+      WHERE seed.entity_key = 'ACCT-8841'
+      COLUMNS (
+        reached.entity_key AS entity_key,
+        reached.display_name AS display_name,
+        reached.entity_type AS entity_type,
+        reached.risk_score AS risk_score,
+        reached.risk_level AS risk_level,
+        reached.total_amount AS total_amount,
+        reached.channel AS channel
+      )
+    )
+    ORDER BY risk_score DESC;
+    </copy>
+    ```
+
+    </details>
 
 ## Task 2: Find accounts sharing device, IP, phone, or email
 
@@ -160,16 +205,17 @@ Next, find account pairs that share identifying evidence such as device, IP addr
 
     | Account A | Shared Entity | Shared Type | Account B | A Risk | B Risk | Combined Risk | E1 Type | E2 Type |
     | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-    | ACCT-8841 | DEV-fp-91a7 | device | ACCT-1190 | 96.5 | 91.0 | 93.8 | shared\_device | shared\_device |
-    | ACCT-8841 | IP-198.51.100.44 | ip\_address | ACCT-1190 | 96.5 | 91.0 | 93.8 | shared\_ip | shared\_ip |
-    | ACCT-8841 | PHONE-212-0199 | phone | ACCT-1190 | 96.5 | 91.0 | 93.8 | same\_phone | same\_phone |
-    | ACCT-8841 | DEV-fp-91a7 | device | ACCT-5077 | 96.5 | 88.0 | 92.3 | shared\_device | shared\_device |
-    | ACCT-9204 | DEV-emulator-22 | device | ACCT-2188 | 94.0 | 86.0 | 90 | shared\_device | shared\_device |
-    | ACCT-9204 | IP-203.0.113.17 | ip\_address | ACCT-2188 | 94.0 | 86.0 | 90 | shared\_ip | shared\_ip |
-    | ACCT-1190 | DEV-fp-91a7 | device | ACCT-5077 | 91.0 | 88.0 | 89.5 | shared\_device | shared\_device |
+    | ACCT-8841 | DEV-fp-91a7 | device | ACCT-1190 | 96.5 | 91 | 93.8 | shared\_device | shared\_device |
+    | ACCT-8841 | IP-198.51.100.44 | ip\_address | ACCT-1190 | 96.5 | 91 | 93.8 | shared\_ip | shared\_ip |
+    | ACCT-8841 | PHONE-212-0199 | phone | ACCT-1190 | 96.5 | 91 | 93.8 | same\_phone | same\_phone |
+    | ACCT-8841 | DEV-fp-91a7 | device | ACCT-5077 | 96.5 | 88 | 92.3 | shared\_device | shared\_device |
+    | ACCT-9204 | DEV-emulator-22 | device | ACCT-2188 | 94 | 86 | 90 | shared\_device | shared\_device |
+    | ACCT-9204 | IP-203.0.113.17 | ip\_address | ACCT-2188 | 94 | 86 | 90 | shared\_ip | shared\_ip |
+    | ACCT-1190 | DEV-fp-91a7 | device | ACCT-5077 | 91 | 88 | 89.5 | shared\_device | shared\_device |
     | ACCT-8841 | IP-198.51.100.44 | ip\_address | ACCT-3320 | 96.5 | 81.5 | 89 | shared\_ip | shared\_ip |
-    | ACCT-1190 | IP-198.51.100.44 | ip\_address | ACCT-3320 | 91.0 | 81.5 | 86.3 | shared\_ip | shared\_ip |
-    | ACCT-5077 | EMAIL-risk-drop-01 | email | ACCT-3320 | 88.0 | 81.5 | 84.8 | same\_email | same\_email |
+    | ACCT-1190 | IP-198.51.100.44 | ip\_address | ACCT-3320 | 91 | 81.5 | 86.3 | shared\_ip | shared\_ip |
+    | ACCT-5077 | EMAIL-risk-drop-01 | email | ACCT-3320 | 88 | 81.5 | 84.8 | same\_email | same\_email |
+    | ACCT-7712 | DEV-browser-7c | device | ACCT-6642 | 77 | 74 | 75.5 | shared\_device | shared\_device |
 
 
 2. Use the result to explain investigation priority.
@@ -178,6 +224,21 @@ Next, find account pairs that share identifying evidence such as device, IP addr
     A shared device, IP address, phone, or email can connect accounts that look separate in transaction tables. That is why shared evidence matters: two accounts may look unrelated until the same phone, device, or network shows up in both histories. The combined risk score helps prioritize pairs where both sides of the relationship are risky, not just connected.
 
     This turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
+
+3. 🎯 **Interactive challenge: choose the human-review priority.**
+
+    Which pair has the strongest basis for human review: `ACCT-8841` and `ACCT-1190`, or `ACCT-8841` and `ACCT-5077`? Record the evidence you would include in the case.
+
+    <details>
+    <summary><strong>Challenge answer: corroboration is stronger than one connection</strong></summary>
+
+    > Choose `ACCT-8841` and `ACCT-1190`. The result contains three separate corroborating rows for that pair: a shared device, IP address, and phone, each with combined risk `93.8`. `ACCT-8841` and `ACCT-5077` share only a device. The graph supports a human review recommendation; it does not make an automatic enforcement decision.
+
+    </details>
+
+## Next Steps
+
+Congratulations on completing the property graph lab. You used graph queries to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
 
 ## Acknowledgements
 

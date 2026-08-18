@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" font-family="Helvetica,Arial,sans-serif">
+  <title>Canonical restaurant schema — seven core entities plus the optional item_override extension (8 tables)</title>
+  <style>
+    .box { fill:#ffffff; stroke:#312d2a; stroke-width:1.5; rx:6; }
+    .hdr { fill:#312d2a; }
+    .htx { fill:#ffffff; font-size:14px; font-weight:bold; }
+    .col { fill:#444444; font-size:11px; }
+    .pk  { font-weight:bold; }
+    .rel { stroke:#c74634; stroke-width:1.5; fill:none; }
+    .rel-opt { stroke:#c74634; stroke-width:1.5; fill:none; stroke-dasharray:5 4; }
+    .card { fill:#c74634; font-size:11px; font-weight:bold; }
+    .note { fill:#666666; font-size:11px; font-style:italic; }
+  </style>
+
+  <!-- store -->
+  <g transform="translate(30,30)">
+    <rect class="box" width="180" height="86" rx="6"/>
+    <rect class="hdr" width="180" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">STORE</text>
+    <text class="col pk" x="10" y="44">store_id (PK)</text>
+    <text class="col" x="10" y="60">merchant_name</text>
+    <text class="col" x="10" y="76">timezone</text>
+  </g>
+
+  <!-- menu -->
+  <g transform="translate(280,30)">
+    <rect class="box" width="180" height="102" rx="6"/>
+    <rect class="hdr" width="180" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">MENU</text>
+    <text class="col pk" x="10" y="44">menu_id (PK)</text>
+    <text class="col" x="10" y="60">store_id (FK)</text>
+    <text class="col" x="10" y="76">menu_name, active</text>
+    <text class="col" x="10" y="92">start_time, end_time</text>
+  </g>
+
+  <!-- category -->
+  <g transform="translate(530,30)">
+    <rect class="box" width="180" height="86" rx="6"/>
+    <rect class="hdr" width="180" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">CATEGORY</text>
+    <text class="col pk" x="10" y="44">category_id (PK)</text>
+    <text class="col" x="10" y="60">menu_id (FK)</text>
+    <text class="col" x="10" y="76">category_name</text>
+  </g>
+
+  <!-- item -->
+  <g transform="translate(530,200)">
+    <rect class="box" width="200" height="118" rx="6"/>
+    <rect class="hdr" width="200" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">ITEM</text>
+    <text class="col pk" x="10" y="44">item_id (PK)</text>
+    <text class="col" x="10" y="60">category_id (FK)</text>
+    <text class="col" x="10" y="76">item_name, description</text>
+    <text class="col" x="10" y="92">price  CHECK (price &gt; 0)</text>
+    <text class="col" x="10" y="108">active BOOLEAN</text>
+  </g>
+
+  <!-- extra -->
+  <g transform="translate(280,380)">
+    <rect class="box" width="170" height="70" rx="6"/>
+    <rect class="hdr" width="170" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">EXTRA</text>
+    <text class="col pk" x="10" y="44">extra_id (PK)</text>
+    <text class="col" x="10" y="60">item_id (FK), extra_name</text>
+  </g>
+
+  <!-- item_option -->
+  <g transform="translate(30,380)">
+    <rect class="box" width="190" height="86" rx="6"/>
+    <rect class="hdr" width="190" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">ITEM_OPTION</text>
+    <text class="col pk" x="10" y="44">option_id (PK)</text>
+    <text class="col" x="10" y="60">extra_id (FK)</text>
+    <text class="col" x="10" y="76">option_name, price_delta</text>
+  </g>
+
+  <!-- item_special_hours -->
+  <g transform="translate(520,380)">
+    <rect class="box" width="200" height="86" rx="6"/>
+    <rect class="hdr" width="200" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">ITEM_SPECIAL_HOURS</text>
+    <text class="col pk" x="10" y="44">item_special_hours_id (PK)</text>
+    <text class="col" x="10" y="60">item_id (FK), day_index</text>
+    <text class="col" x="10" y="76">start_time, end_time</text>
+  </g>
+
+  <!-- item_override -->
+  <g transform="translate(760,200)">
+    <rect class="box" width="150" height="102" rx="6"/>
+    <rect class="hdr" width="150" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">ITEM_OVERRIDE</text>
+    <text class="col pk" x="10" y="44">item_id (PK, FK)</text>
+    <text class="col" x="10" y="60">store_id (FK)</text>
+    <text class="col" x="10" y="76">override_name</text>
+    <text class="col" x="10" y="92">override_active, sort</text>
+  </g>
+
+  <!-- relationships -->
+  <path class="rel" d="M210,73 L280,73"/>
+  <text class="card" x="230" y="66">1:M</text>
+  <path class="rel" d="M460,73 L530,73"/>
+  <text class="card" x="480" y="66">1:M</text>
+  <path class="rel" d="M620,116 L625,200"/>
+  <text class="card" x="632" y="165">1:M</text>
+  <path class="rel" d="M560,318 L400,380"/>
+  <text class="card" x="452" y="352">1:M</text>
+  <path class="rel" d="M280,412 L220,412"/>
+  <text class="card" x="232" y="405">1:M</text>
+  <path class="rel" d="M615,318 L618,380"/>
+  <text class="card" x="626" y="356">1:M</text>
+  <path class="rel-opt" d="M730,255 L760,255"/>
+  <text class="card" x="728" y="245">1:1</text>
+
+  <text class="note" x="30" y="520">store 1:M menu · menu 1:M category · category 1:M item · item 1:M extra 1:M item_option ·</text>
+  <text class="note" x="30" y="538">item 1:M special_hours · item 1:1 override (optional, dashed). The `option` entity is named ITEM_OPTION — OPTION is reserved in Oracle SQL.</text>
+</svg>

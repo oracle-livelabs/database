@@ -49,7 +49,7 @@ Review the approved finance views before answering business questions.
 
 1. Run this catalog query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are identifying the approved view surface before answering a business question. The SQL reads `USER_VIEWS`, filters to finance and service views that are appropriate for governed answers, and returns the view names with their definition length as a simple catalog check.
 

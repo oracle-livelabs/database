@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="666" viewBox="0 0 1280 666" role="img" aria-labelledby="title desc">
+  <title id="title">Before and after: Seer Comms network-experience evidence</title>
+  <desc id="desc">A Telco-specific before-and-after diagram. Separate service orders, subscriber signals, network locations, semantic search, graph relationships, and capacity records converge into Oracle AI Database 26ai for governed field-response decisions.</desc>
+  <style>
+    .title{font:700 30px Arial,sans-serif;fill:#161513}.sub{font:17px Arial,sans-serif;fill:#4f4f4f}.bar{font:700 19px Arial,sans-serif;fill:#fff}.box{font:600 16px Arial,sans-serif;fill:#25211f}.chip{font:700 10px Arial,sans-serif;fill:#4f4f4f;letter-spacing:.5px}.head{font:700 16px Arial,sans-serif;fill:#356c51}.small{font:15px Arial,sans-serif;fill:#4f4f4f}.pill{font:700 14px Arial,sans-serif;fill:#fff}.db{font:700 27px Arial,sans-serif;fill:#fff}.footer{font:600 17px Arial,sans-serif;fill:#fff}
+  </style>
+  <rect width="1280" height="666" fill="#f7f8f9"/>
+  <text x="38" y="52" class="title">Before and After: Network-Experience Data Architecture</text>
+  <text x="38" y="81" class="sub">Separate systems slow the answer to one urgent question: where should Seer Comms send field capacity?</text>
+  <text x="38" y="107" class="sub">Oracle AI Database 26ai keeps service, signal, relationship, and location evidence connected.</text>
+
+  <rect x="38" y="132" width="480" height="500" rx="15" fill="#fff" stroke="#c8c7c4"/>
+  <rect x="38" y="132" width="480" height="50" rx="15" fill="#4f4f4f"/><rect x="38" y="166" width="480" height="16" fill="#4f4f4f"/>
+  <text x="62" y="164" class="bar">Before: separate specialist stores</text>
+  <g>
+    <rect x="64" y="207" width="185" height="72" rx="9" fill="#e8eff8" stroke="#c9d3de"/><text x="83" y="235" class="box">Service-order</text><text x="83" y="255" class="box">system</text><text x="83" y="270" class="chip">JSON + SQL</text>
+    <rect x="294" y="207" width="185" height="72" rx="9" fill="#f8eee5" stroke="#e2cabc"/><text x="313" y="235" class="box">Subscriber-signal</text><text x="313" y="255" class="box">feed</text><text x="313" y="270" class="chip">TEXT</text>
+    <rect x="64" y="297" width="185" height="72" rx="9" fill="#eef3e6" stroke="#c8d5bd"/><text x="83" y="325" class="box">Network-site</text><text x="83" y="345" class="box">map</text><text x="83" y="360" class="chip">SPATIAL</text>
+    <rect x="294" y="297" width="185" height="72" rx="9" fill="#f2eaf5" stroke="#d4c1df"/><text x="313" y="325" class="box">Relationship</text><text x="313" y="345" class="box">graph</text><text x="313" y="360" class="chip">GRAPH</text>
+    <rect x="64" y="387" width="185" height="72" rx="9" fill="#fbf3df" stroke="#e8d7aa"/><text x="83" y="415" class="box">Meaning-search</text><text x="83" y="435" class="box">index</text><text x="83" y="450" class="chip">VECTOR</text>
+    <rect x="294" y="387" width="185" height="72" rx="9" fill="#e8eff8" stroke="#c9d3de"/><text x="313" y="415" class="box">Capacity and</text><text x="313" y="435" class="box">dispatch records</text><text x="313" y="450" class="chip">ROWS</text>
+  </g>
+  <text x="66" y="494" class="head" fill="#a22e20">Integration and control burden</text>
+  <g class="small"><text x="68" y="523">• Signals and service orders are copied between tools</text><text x="68" y="550">• Location and relationship context arrive late</text><text x="68" y="577">• Teams reconcile different answers during an outage</text><text x="68" y="604">• Security and governance controls multiply</text></g>
+
+  <path d="M558 355h76v-17l31 28-31 28v-17h-76z" fill="#c74634"/><text x="557" y="318" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#c74634">Converge</text>
+
+  <rect x="746" y="132" width="496" height="500" rx="15" fill="#fff" stroke="#c8c7c4"/>
+  <rect x="746" y="132" width="496" height="50" rx="15" fill="#356c51"/><rect x="746" y="166" width="496" height="16" fill="#356c51"/>
+  <text x="770" y="164" class="bar">After: Oracle AI Database 26ai</text>
+  <rect x="865" y="224" width="256" height="154" rx="72" fill="#26211f"/><text x="935" y="287" class="db">Oracle AI</text><text x="916" y="321" class="db">Database 26ai</text><text x="918" y="347" font-family="Arial,sans-serif" font-size="14" fill="#f6f4f2">governed Telco evidence</text>
+  <rect x="772" y="212" width="118" height="38" rx="8" fill="#c74634"/><text x="794" y="236" class="pill">SQL rows</text>
+  <rect x="1098" y="212" width="118" height="38" rx="8" fill="#d9793a"/><text x="1110" y="236" class="pill">JSON Duality</text>
+  <rect x="762" y="329" width="125" height="38" rx="8" fill="#7a5aa6"/><text x="778" y="353" class="pill">AI Vector</text>
+  <rect x="1093" y="329" width="130" height="38" rx="8" fill="#397e97"/><text x="1104" y="353" class="pill">Property Graph</text>
+  <rect x="782" y="405" width="118" height="38" rx="8" fill="#4f8397"/><text x="809" y="429" class="pill">Spatial</text>
+  <rect x="1080" y="405" width="138" height="38" rx="8" fill="#557a68"/><text x="1091" y="429" class="pill">Access controls</text>
+  <text x="772" y="483" class="head">What changes for Seer Comms</text>
+  <g class="small"><text x="772" y="513">✓ Trace a signal to the site and service it affects</text><text x="772" y="540">✓ Compare meaning, relationships, and distance in SQL</text><text x="772" y="567">✓ Give field teams one reviewable evidence path</text><text x="772" y="594">✓ Reduce copies and reconciliation during response</text></g>
+  <rect x="38" y="644" width="1204" height="22" rx="8" fill="#26211f"/>
+  <text x="640" y="642" class="footer" text-anchor="middle">Business impact: move from network pressure to a trusted field-response decision without disconnecting the evidence.</text>
+</svg>

@@ -1,72 +1,62 @@
-# Build Telecom Operations Intelligence with Oracle Database 26ai
+# Build Network Experience Intelligence with Oracle AI Database 26ai
 
 ## Introduction
 
-A telecommunications provider cannot manage a demand surge from one dashboard alone. Network operations teams need to know where capacity is tight. Care teams need to understand what subscribers are saying. Field dispatch needs to know where crews can help.
+Monday morning starts with a familiar network-operations problem: subscriber experience is slipping, but the evidence is scattered across capacity metrics, service orders, customer signals, case relationships, and location data. At Seer Comms, the incident is **TEL-5G-2026-501**, a critical 5G congestion case near Hudson Yards during an event period.
 
-Retention, data engineering, and AI teams need the same evidence, or each team makes a different call from a different version of the truth.
+In this workshop, you investigate one escalating incident: `TEL-5G-2026-501`, a critical 5G congestion case near Hudson Yards during an event period. It affects 31,200 subscribers and puts $2.14M in service value at risk. You use **Oracle AI Database 26ai** to follow the evidence from the first capacity warning to a reviewable field response: the site, the affected service order, the subscriber signal, the connected case entities, nearby response locations, and the capacity-risk prediction.
 
-In this workshop, you follow Seer Comms through a South Florida 5G demand-surge scenario. Subscriber pressure is rising, and the provider needs to act before calls drop, installs slip, or care queues fill up.
+![Seer Comms network-experience decision journey from capacity pressure to response](images/telco-workshop-intro-journey.svg " ")
 
-The technical lesson is practical: the evidence for that decision can stay in Oracle AI Database 26ai instead of being split across separate search, graph, spatial, analytics, document, and AI stores.
+*Figure 1: Each lab advances the `TEL-5G-2026-501` investigation, from Hudson Yards capacity pressure to a field-response decision.*
 
-You start with the governed data foundation, then move through the same decision loop an operator would use on a busy day: see where pressure is building, understand what subscribers mean, investigate who and what is affected, locate capacity, inspect service orders, review predictive signals, ask governed questions, and record AI-assisted action that someone can audit later.
+Throughout the workshop, expandable **Key terms**, **Learn more**, and **Why this matters** sections give you optional context without interrupting the main investigation. Open them when you want a definition, a telecom example, or the business reason the capability matters; keep them closed when you want to stay focused on the hands-on SQL path.
 
-The Seer Comms application shows the operator workflow. These labs expose the Oracle AI Database evidence that makes the workflow trustworthy. Each lab starts with an operating question, runs SQL against the workshop schema, and explains how the result helps a telecom team act with confidence.
+The example below shows an expandable Telco section before and after it is opened.
 
-Estimated Workshop Time: 2 hours
+![Expandable Telco details section changing from closed to open](images/details-accordion-expand-flow.svg " ")
+
+<details>
+<summary><strong>Learn more: What does converged database mean?</strong></summary>
+
+> A **converged database** keeps relational rows, JSON documents, vectors, graphs, and spatial data in one governed database.
+>
+> For Seer Comms, a service-order document, its subscriber, a related signal, a network site, and a dispatch decision stay connected. Teams do not need to copy the same evidence among specialist systems before they can explain a decision.
+
+</details>
+
+<details>
+<summary><strong>Why this matters: Autonomous Database and a connected evidence foundation</strong></summary>
+
+> **Autonomous Database** is Oracle's managed cloud database service. It automates routine operations such as patching, backups, security maintenance, and scaling so database teams can spend more time on the network-experience decision instead of infrastructure upkeep.
+>
+> In this workshop, its converged database capabilities keep SQL rows, JSON documents, vectors, graph relationships, and spatial locations under one security and governance model. That reduces sensitive copies and gives Seer Comms a repeatable path from a capacity concern to the evidence that explains the response.
+
+</details>
 
 ### Objectives
 
-In this workshop, you will:
+- Trace the Seer Comms incident evidence through SQL, from the data foundation to a reviewable network-response decision.
+- Use JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, and Oracle Machine Learning (OML) to connect service orders, subscriber signals, impact relationships, locations, and capacity-risk scores.
+- Explain how each dashboard or planning result can be traced back to governed database evidence.
+- Describe how one database foundation reduces duplicate data movement, reconciliation work, and fragmented governance during a telecom incident response.
 
-- Inspect the Seer Comms data foundation and semantic views.
-- Query telecom KPIs that support a network experience command center.
-- Use AI Vector Search to connect subscriber language to telecom services.
-- Use Property Graph and SQL/PGQ to investigate subscriber and network impact.
-- Use Oracle Spatial to connect demand pressure, network sites, and field capacity.
-- Compare relational service orders with JSON Relational Duality documents.
-- Review predictive assurance patterns that join model-style scores to operations data.
-- Explain trusted natural-language answers and AI-assisted actions with visible database evidence.
+Estimated Workshop Time: **80 minutes**
 
-The image below is the Seer Comms welcome view. It introduces the telecom operations scenario and frames the workshop around a provider that must react before subscriber experience suffers. Use it as the business anchor for the labs that follow.
+### Business Scenario
 
-![Seer Comms welcome overview](images/welcome-overview.png)
-
-## Workshop Story
-
-| Story Element | Description |
+| Step | Telco focus |
 | --- | --- |
-| Business Problem | A mobile demand surge can create subscriber pain before care, network, field, and retention teams share the same picture. |
-| Technical Challenge | Telecom data often spans OSS, BSS, CRM, care, network, dispatch, AI, and analytics systems. |
-| Persona Focus | Network operations leader, care operations lead, service assurance analyst, platform engineer, and telecom data developer. |
-| What You Will Learn | Oracle AI Database can keep operational, AI-ready, graph, spatial, JSON, ML, and audit data close to one governed foundation. |
-| Database Capability | Oracle AI Database 26ai converged data platform capabilities. |
-| Outcome | The provider can move from signal detection to explainable, auditable service assurance action. |
-{: title="Workshop story at a glance"}
+| Business Problem | Network and service teams need a fast, reviewable way to understand a subscriber-experience issue. |
+| Technical Challenge | Orders, signals, relationships, capacity, and geography can otherwise be separated across systems. |
+| Persona Focus | You support network operations leaders, service-order developers, and field planners. |
+| What You Will Do | Query the evidence behind the Seer Comms application decision journey. |
+| Database Capability | SQL, JSON, vectors, graphs, and spatial data operate in one database. |
+| Outcome | You can connect an operational observation to explainable, repeatable evidence. |
 
-The diagram below shows the decision loop you follow in the workshop. It connects the business flow, from awareness to investigation to action, to the Oracle Database capabilities that keep the evidence connected.
-
-![Seer Comms operating loop](images/operating-loop.svg)
-
-## How to Use the Labs
-
-Each lab follows the same pattern:
-
-1. Read the operating story so you know the decision you are trying to support.
-2. Review the screenshot or concept diagram to understand the operating scenario before you query the database.
-3. Run the SQL block in Database Actions SQL Worksheet.
-4. Compare your result with the expected output.
-5. Read the interpretation before moving to the next lab.
-
-The SQL is not just a setup check. Treat each query as evidence in an operations review. The result shows how Oracle AI Database keeps data, search, graph, spatial analysis, prediction, document access, and audit history close enough for a real operator workflow.
-
-Use each screenshot or diagram to orient yourself, then use the SQL result and interpretation to see why the database capability matters.
-
-The image below summarizes the use cases behind the labs. It helps you see that each lab is one part of the same telecom response path, not an isolated feature exercise.
-
-![Seer Comms use case overview](images/welcome-use-cases.png)
+The labs follow one escalation path: identify the evidence foundation, prioritize loaded sites, inspect the affected service order, interpret the subscriber signal, map the case impact, compare response locations, and review the next capacity-risk decision.
 
 ## Acknowledgements
 
-- **Author** - Oracle LiveLabs Team
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Pat Shepherd, July 2026

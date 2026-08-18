@@ -51,7 +51,7 @@ Call the approved PL/SQL helper function that summarizes current risk signals fo
 
 1. Run the approved PL/SQL helper function.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are calling the same kind of controlled database tool an AI-assisted operations workflow can use. The SQL invokes `DETECT_TRENDING_PRODUCTS` with a 48-hour window and a minimum severity threshold, then returns a concise risk summary produced by approved PL/SQL logic.
 

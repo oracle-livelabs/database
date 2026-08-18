@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica,Arial,sans-serif">
+  <title>How to read an EXPLAIN PLAN in 30 seconds: indentation is parentage, the deepest leaves run first, and three landmark shapes tell you the story</title>
+  <style>
+    .head  { fill:#312d2a; font-size:16px; font-weight:bold; }
+    .mono  { font-family:SF Mono,Menlo,Consolas,monospace; font-size:14px; fill:#312d2a; }
+    .band1 { fill:#c74634; } .band2 { fill:#2f6b4f; } .band3 { fill:#31708f; }
+    .hl    { font-family:SF Mono,Menlo,Consolas,monospace; font-size:14px; fill:#ffffff; font-weight:bold; }
+    .callout { font-size:13px; font-weight:bold; fill:#ffffff; }
+    .legend  { font-size:13px; fill:#312d2a; }
+    .legendB { font-size:13px; font-weight:bold; fill:#312d2a; }
+    .rule  { fill:#312d2a; font-size:13.5px; }
+    .ruleB { fill:#c74634; font-size:13.5px; font-weight:bold; }
+    .bubble{ stroke:#312d2a; stroke-width:1; }
+    .tree  { stroke:#999999; stroke-width:1.2; fill:none; }
+  </style>
+
+  <text class="head" x="40" y="40">HOW TO READ A PLAN IN 30 SECONDS</text>
+
+  <!-- sample plan -->
+  <text class="mono" x="60" y="86">SELECT STATEMENT</text>
+
+  <rect class="band3" x="52" y="98" width="470" height="24" rx="4"/>
+  <text class="hl" x="76" y="115">SORT ORDER BY STOPKEY</text>
+  <circle class="band3 bubble" cx="560" cy="110" r="13"/><text class="callout" id="callout-3" x="556" y="115">3</text>
+  <text class="legend" x="584" y="106"><tspan class="legendB">the finisher:</tspan> STOPKEY = only the top-N rows</text>
+  <text class="legend" x="584" y="122">survive — this is your ORDER BY … FETCH FIRST</text>
+
+  <rect class="band2" x="52" y="130" width="470" height="24" rx="4"/>
+  <text class="hl" x="96" y="147">HASH JOIN</text>
+  <circle class="band2 bubble" cx="560" cy="142" r="13"/><text class="callout" id="callout-2" x="556" y="147">2</text>
+  <text class="legend" x="584" y="138"><tspan class="legendB">the combiners:</tspan> joins merge two child</text>
+  <text class="legend" x="584" y="154">row sources — one from each indent below</text>
+
+  <rect class="band1" x="52" y="162" width="470" height="24" rx="4"/>
+  <text class="hl" x="116" y="179">TABLE ACCESS FULL   MENU_ITEMS</text>
+  <circle class="band1 bubble" cx="560" cy="174" r="13"/><text class="callout" id="callout-1" x="556" y="179">1</text>
+  <text class="legend" x="584" y="170"><tspan class="legendB">the leaves:</tspan> tables and indexes actually read.</text>
+  <text class="legend" x="584" y="186">Deepest leaves execute FIRST, then feed upward</text>
+
+  <text class="mono" x="116" y="211">INDEX RANGE SCAN    ORDERS_IX</text>
+
+  <!-- tree guides -->
+  <path class="tree" d="M66,92 L66,174"/>
+  <path class="tree" d="M88,124 L88,206 M88,206 L112,206"/>
+
+  <!-- rules -->
+  <text class="rule" x="40"  y="268"><tspan class="ruleB">Rule 1 — indentation is parentage.</tspan>  Each operation feeds the one it is indented under.</text>
+  <text class="rule" x="40"  y="296"><tspan class="ruleB">Rule 2 — children run first.</tspan>  Execution starts at the deepest leaves and flows up to the SELECT.</text>
+  <text class="rule" x="40"  y="324"><tspan class="ruleB">Rule 3 — hunt landmarks, not rows.</tspan>  Leaves say WHAT was read; joins say HOW it was combined;</text>
+  <text class="rule" x="76"  y="344">STOPKEY says only the best N survived. Costs and row counts vary — the SHAPE is the story.</text>
+
+  <text class="rule" x="40"  y="392"><tspan class="ruleB">Why this matters in a converged database:</tspan>  every data model appears in this ONE tree as ordinary</text>
+  <text class="rule" x="40"  y="412">row sources — graph MATCHes, JSON documents, vector distances — all planned by the same optimizer.</text>
+  <text class="rule" x="40"  y="432">In a portfolio of engines there is no such tree, because no planner can see across the seams.</text>
+
+  <text class="rule" x="40" y="480" font-style="italic">Next: find the three numbered landmarks in the capstone's real plan below.</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Predictive demand OML flow</title>
+  <desc id="desc">Media feature data is scored by Oracle Machine Learning models and returned to business workflows.</desc>
+  <rect width="900" height="360" rx="18" fill="#faf9f7"/>
+  <text x="36" y="48" font-family="Arial" font-size="24" font-weight="700" fill="#312d2a">Predictive media planning inside the database</text>
+  <g font-family="Arial" font-size="15" fill="#374151">
+    <rect x="50" y="96" width="220" height="170" rx="14" fill="#fff" stroke="#d8d2c8"/>
+    <text x="76" y="132" font-weight="700">Model inputs</text>
+    <text x="76" y="166">Content assets</text>
+    <text x="76" y="194">Audience signals</text>
+    <text x="76" y="222">Orders and capacity</text>
+    <rect x="340" y="96" width="220" height="170" rx="14" fill="#fff7ed" stroke="#c74634"/>
+    <text x="366" y="132" font-weight="700">OML models</text>
+    <text x="366" y="166">DEMAND_SURGE_MODEL</text>
+    <text x="366" y="194">REVENUE_PREDICT_MODEL</text>
+    <text x="366" y="222">PRODUCT_CLUSTER_MODEL</text>
+    <rect x="630" y="96" width="220" height="170" rx="14" fill="#fff" stroke="#d8d2c8"/>
+    <text x="656" y="132" font-weight="700">Planner outcome</text>
+    <text x="656" y="166">surge risk</text>
+    <text x="656" y="194">forecast confidence</text>
+    <text x="656" y="222">capacity priority</text>
+  </g>
+  <path d="M290 182h32" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M318 166l24 16-24 16z" fill="#7a3e2f"/>
+  <path d="M580 182h32" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M608 166l24 16-24 16z" fill="#7a3e2f"/>
+  <text x="50" y="318" font-family="Arial" font-size="15" fill="#6b7280">Scores and forecasts stay close to the governed rows that produced them, so planners can review the evidence.</text>
+</svg>

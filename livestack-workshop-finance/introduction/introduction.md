@@ -1,4 +1,4 @@
-# Build Financial Intelligence with Oracle Database 26ai
+# Build Financial Intelligence with Oracle AI Database 26ai
 
 ## Introduction
 
@@ -6,7 +6,15 @@ Financial institutions need fast decisions, but speed is not enough. When a risk
 
 Seer Bank risk, fraud, compliance, service, analytics, application, and AI teams all need to work from the same facts instead of reconciling different copies of the truth.
 
-In this workshop, **Seer Bank** uses **Oracle Database 26ai** as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, and in-database machine learning all operate against connected finance data.
+In this workshop, **Seer Bank** uses **Oracle AI Database 26ai** as a converged financial-intelligence foundation. Relational transactions, JSON documents, vector search, property graph relationships, spatial service coverage, and in-database machine learning all operate against connected finance data.
+
+![Workshop overview](images/finance-workshop-intro-journey.png " ")
+
+This workshop is your guided look behind the companion Seer Bank Finance LiveStack demo. You will see how Oracle AI Database 26ai and the connected finance data set produce the dashboard, investigation, and operational results shown in the application.
+
+You will also step beyond observation. Several labs include 🎯 interactive challenges where you change an investigation question, compare evidence, or make a review recommendation using the same governed data. These moments let you test how Oracle's converged database brings relational, JSON, vector, graph, spatial, and machine-learning capabilities together for one finance decision flow.
+
+This workshop gives you the connected decision flow across those capabilities. When you want to go deeper on a specific topic—such as JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, or Oracle Machine Learning—use the related deep-dive LiveLabs links in each lab's **Next Steps** section.
 
 Throughout the workshop, you will see small arrows next to expandable sections. Select the arrow when you want extra context about a term, concept, or Oracle Database capability. These sections are closed by default so the main lab stays focused, but you can expand them whenever you want more explanation.
 
@@ -49,7 +57,7 @@ Estimated Workshop Time: **95 minutes**
 | Business Problem | Seer Bank needs faster risk, fraud, compliance, service, and predictive decisions without spreading evidence across disconnected systems. |
 | Technical Challenge | Application, data, and AI teams otherwise stitch together separate stores, services, indexes, pipelines, and governance controls for each data type. |
 | Persona Focus | Database developers, application developers, risk analysts, operations leaders, and AI engineers share one evidence path. |
-| What You Will See | One Oracle Database 26ai foundation can support the finance decision loop from awareness to action. |
+| What You Will See | One Oracle AI Database 26ai foundation can support the finance decision loop from awareness to action. |
 | Database Capability | Relational SQL, JSON, vectors, graphs, spatial, Oracle Machine Learning (OML), and semantic views work together under one governed data model. |
 | Outcome | Risk, operations, and engineering teams can observe, investigate, decide, act, and review from database-backed evidence instead of reconciling disconnected outputs. |
 
