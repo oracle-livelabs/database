@@ -107,6 +107,46 @@ Start with the resident's nearest service centers so Maria can connect the reque
 
     Grand Junction is the nearest center for Elena, so Maria should review its available capacity first. Distance supports prioritization, but it does not decide work assignments by itself.
 
+3. 🎯 **Interactive challenge: Recalculate access for another resident.**
+
+    Starting with the distance query above, change the resident-name filter from `Elena Garcia` to `Maya Patel` to investigate service access from Pueblo. Run your revised query. Which service center should enter Maria's capacity review first?
+
+    **Expected output: Maya Patel's Nearest Service Centers**
+
+    Pueblo Community Access Center should rank first at approximately `1.1` kilometers. The remaining Colorado centers should follow at substantially greater distances. With the fixed workshop coordinates, one-decimal distances are stable; GeoJSON whitespace can vary by SQL client.
+
+    <details>
+    <summary><strong>Challenge answer: Review the nearest center before routing work</strong></summary>
+
+    > Pueblo Community Access Center should enter the capacity review first because it is nearest to Maya. Distance supports that priority, but Maria still needs capacity and authorization evidence before assigning work. Oracle AI Database 26ai keeps resident points, center locations, capacity, and operational records together, so teams can investigate without copying sensitive location data into disconnected systems.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT centers.service_access_center_name,
+           centers.city,
+           centers.service_access_center_type,
+           ROUND(SDO_GEOM.SDO_DISTANCE(
+             residents_base.location,
+             centers_base.location,
+             0.005,
+             'unit=KM'
+           ), 1) AS distance_km,
+           SDO_UTIL.TO_GEOJSON(centers_base.location) AS center_geojson
+    FROM sled_residents_v residents
+    JOIN customers residents_base
+      ON residents_base.customer_id = residents.resident_id
+    CROSS JOIN sled_service_access_centers_v centers
+    JOIN fulfillment_centers centers_base
+      ON centers_base.center_id = centers.service_access_center_id
+    WHERE residents.resident_display_name = 'Maya Patel'
+    ORDER BY distance_km;
+    </copy>
+    ```
+
+    </details>
+
 ## Task 2: Compare regional service capacity
 
 Compare regional service capacity so the distance result sits beside the workload Maria can realistically route or rebalance.
