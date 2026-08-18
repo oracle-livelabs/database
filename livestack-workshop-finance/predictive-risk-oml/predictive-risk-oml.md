@@ -38,8 +38,9 @@ The second image is the Predictive Risk, Capacity and Revenue page. It gives fin
 - Inventory the four OML models.
 - Score classification and regression models.
 - Review a simple model quality check.
+- Use the OML AutoML UI to compare candidate demand-surge models without deploying one.
 
-Estimated Time: **12 minutes**
+Estimated Time: **27 minutes**
 
 ### Business Scenario
 
@@ -284,6 +285,126 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     </details>
 
+## Task 3: Build and compare demand-surge models in the OML AutoML UI
+
+The SQL tasks above score the workshop's existing demand model. In this task, you will use the Oracle Machine Learning AutoML UI to compare candidate models for predicting demand surge across financial products and services, such as checking accounts, savings accounts, loans, and credit cards. You will identify the model approach that best supports Jessica's capacity-planning decision. You are still working inside Oracle AI Database 26ai: the Finance data, experiment settings, candidate models, and results remain in one platform.
+
+Jessica is asking questions such as:
+
+- Which financial products and services could create a demand surge before account openings or applications alone reveal it?
+- Are changing customer sentiment and viral attention early signals, or just noise?
+- Which model approach gives her the strongest basis for human capacity planning, and why?
+
+Without AutoML, a data-science team would separately prepare the training data, select algorithms, test feature sets, tune model settings, measure candidates, and document the result before handing a model to the business. Here, you choose the governed Finance view, business target, and success metric. AutoML performs the repeatable candidate-model work so the team can focus its time on the Finance question, review of the evidence, and decision fit.
+
+**Why this matters:** A validated candidate model can become a governed scoring service for Finance. After the team approves a model, it can deploy the model as an Oracle Machine Learning Services endpoint. Finance applications and dashboards can then request current demand-surge predictions and present them to Jessica for capacity planning and human review.
+
+| What you learn | What the Finance business gets |
+| --- | --- |
+| How to turn a governed Finance view and a business label into a repeatable AutoML experiment. | A faster, repeatable way to compare models without exporting the data to a separate machine learning platform. |
+| How the selected metric ranks candidate models and how feature importance explains the inputs used. | A clearer basis for choosing a model to support financial-product demand and capacity planning, with evidence that stays close to the Finance data. |
+
+1. Open the AutoML UI.
+
+    From your Autonomous Database landing page, select **Database Actions** and then **View all database actions**. Under **Development**, select **Machine Learning**. Sign in with your workshop database credentials, then select **AutoML** from the OML home page.
+
+    The first screen shows where to open the full Database Actions launchpad from your Autonomous Database page.
+
+    ![Database Actions menu with View all database actions highlighted](images/open-database-actions.png " ")
+
+    In the launchpad, select **Machine Learning** from the **Development** section.
+
+    ![Database Actions launchpad with Machine Learning highlighted](images/database-actions-md.png " ")
+
+    On the Oracle Cloud sign-in screen, enter the workshop database username and password, then select **Sign in**.
+
+    ![Oracle Cloud sign-in screen for the OML database user](images/oml-login.png " ")
+
+    The OML home page groups the tools you can use with the workshop schema. Select **AutoML** to open the experiment list.
+
+    ![Oracle Machine Learning home page with AutoML quick action](images/oml-home.png " ")
+
+    The experiment list is where you create, rerun, or compare experiments. Select **Create**.
+
+    ![AutoML Experiments page with the Create action](images/experiment-setup.png " ")
+
+2. Create an experiment from the Finance demand-training view.
+
+    Select **Create** and use the following settings. Add your initials to the experiment name so it is easy to recognize during this workshop.
+
+    | Setting | Value |
+    | --- | --- |
+    | Name | `FIN_DEMAND_SURGE_AUTOML_<YOUR_INITIALS>` |
+    | Data Source | Schema: `LLUSER`; View: `OML_DEMAND_TRAINING_V` |
+    | Predict | `SURGE_LABEL` |
+    | Prediction Type | `Classification` |
+    | Case ID | `PRODUCT_ID` |
+
+    `SURGE_LABEL` is the same synthetic demand label you compared with `DEMAND_SURGE_MODEL` in Task 2. `PRODUCT_ID` gives the experiment a stable case identifier for data sampling and split decisions.
+
+    Confirm the experiment name, Finance view, `SURGE_LABEL` prediction target, classification type, and `PRODUCT_ID` case ID before you start.
+
+    ![Create Experiment page configured for the Finance demand-surge experiment](images/create-experiment-settings.png " ")
+
+    When choosing the data source, select the `LLUSER` schema and then `OML_DEMAND_TRAINING_V`.
+
+    ![Select Table dialog with the LLUSER schema and OML_DEMAND_TRAINING_V view selected](images/experiment-setup-2.png " ")
+
+3. Set a short comparison run and start the experiment.
+
+    On the same **Create Experiment** page, scroll down to **Additional Settings**. Set **Maximum Top Models** to `2` and choose **Balanced Accuracy** as the model metric. Keep the remaining settings at their defaults unless your sandbox guidance requires a different service level. Do not start the experiment yet; the next instruction shows how to choose **Faster Results**.
+
+    These settings keep the comparison short while asking AutoML to rank two candidate models by balanced accuracy.
+
+    ![Additional Settings showing two top models and Balanced Accuracy](images/additional-settings-models.png " ")
+
+    Open the arrow beside **Start** and choose **Faster Results**.
+
+    ![Start menu with Faster Results highlighted](images/start-experiment-faster-results.png " ")
+
+    The progress panel shows the experiment stages, such as sampling, feature selection, and model tuning. Wait for the run to complete before reviewing the results.
+
+    ![AutoML progress panel showing completed stages and model tuning in progress](images/start-experiment-processing-progress.png " ")
+
+    When the run completes, inspect the ranked candidate-model list and expand the **Features** grid. The leaderboard does not identify which financial product or service will experience a demand surge. It compares candidate algorithms for predicting `SURGE_LABEL` and ranks them by the metric you selected. The first row is the best candidate in this experiment, not a final business decision. The winning algorithm, scores, and feature rankings are dynamic; do not expect a fixed result.
+
+    For Finance, the result is a faster first assessment of which modeling approach best supports demand and capacity planning. Instead of manually running and documenting multiple candidate approaches, the team receives a ranked starting point for expert review before production deployment.
+
+    ![AutoML leaderboard with two candidate models ranked by Balanced Accuracy](images/candidate-models.png " ")
+
+    The Features grid shows the relative sensitivity of the model to each Finance input. It helps the business ask better follow-up questions, such as which financial-product activity or customer-engagement signals deserve review when planning demand capacity. Importance does not prove causation, and it does not replace Finance judgment.
+
+    ![Features grid with feature-importance bars](images/feature-importance.png " ")
+
+    **What this means for Jessica:** In the illustrated run, `AVG_SENTIMENT`, `VIRAL_POSTS`, and `AVG_VIRALITY` are the strongest visible inputs. Jessica should examine whether changing sentiment or unusually viral attention around a checking account, savings account, loan, or credit card is creating demand pressure, then pair that evidence with units sold and revenue before changing capacity plans.
+
+    **What comes next:** Before using a candidate model for a real Finance decision, the data-science and Finance teams validate it on newer, unseen data; check the important features for quality and leakage; and agree how a `SURGE` prediction will trigger human review or capacity planning. They then select the approved model, assign its URI and version, and deploy it as an Oracle Machine Learning Services scoring endpoint. That endpoint enables a Finance application or dashboard to request predictions for current checking accounts, savings accounts, loans, and credit cards, then show Jessica a governed, reviewable demand-capacity queue.
+
+    🎯 **Interactive challenge: compare the decision criterion.** Create a second experiment from the same view, name it `FIN_DEMAND_SURGE_F1_<YOUR_INITIALS>`, and change only the model metric to **F1 Macro**. Start it with **Faster Results**. Did the same candidate model lead both experiments? If not, which experiment's metric better fits a planning team that wants balanced treatment of both `SURGE` and `STABLE` financial products and services?
+
+    <details>
+    <summary><strong>Challenge answer: choose the metric that matches the planning question</strong></summary>
+
+    > There is no fixed winning algorithm or score. If the candidate ranking changes, the comparison shows that model selection depends on the decision criterion, not only on a single headline score. For a planning team that needs `SURGE` and `STABLE` financial products and services to receive balanced attention, **Balanced Accuracy** is the clearer first comparison because it gives each class equal recall weight. Review the F1 Macro result as complementary evidence because it also considers false positives through precision. Oracle AI Database 26ai keeps those candidate-model results with the governed Finance features that explain the comparison.
+
+    Select **F1** as the model metric and **Macro** as its weight option. Keep the two-model limit so the two experiments are comparable.
+
+    ![Additional Settings configured with F1 and Macro weight option](images/challenge-f1-macro.png " ")
+
+    **Expected output: Two AutoML experiment result sets**
+
+    Both experiments should show ranked candidate models and feature importance after they finish. The ranking can change because **Balanced Accuracy** measures average recall across classes, while **F1 Macro** balances precision and recall equally across classes. Neither result is a production decision by itself; use the results to decide what deserves additional Finance review.
+
+    Compare the F1 Macro leaderboard with the first leaderboard. The metric heading tells you which decision criterion is driving the rank.
+
+    ![AutoML leaderboard with two candidate models ranked by F1 Macro](images/challenge-leader-board.png " ")
+
+    Then review whether the feature-importance pattern remains consistent across the two experiments.
+
+    ![Features grid for the F1 Macro experiment](images/challenge-features.png " ")
+
+    </details>
+
 ## Next Steps
 
 Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, checked how often a prediction matched the demo label, and compared predicted revenue to target revenue. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
@@ -292,4 +413,4 @@ Congratulations on completing the Oracle Machine Learning lab. You inspected mod
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
