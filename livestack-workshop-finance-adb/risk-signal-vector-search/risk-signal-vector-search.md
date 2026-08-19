@@ -17,7 +17,7 @@ After reviewing numeric exposure, analysts often need to search the language beh
 >
 > - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
 >
-> - **Semantic search** means searching by meaning instead of exact words. For example, a search for "fraud signals aml exposure" can find text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
+> - **Semantic search** means searching by meaning instead of exact words. For example, a search for "financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review" can find related text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
 
 </details>
 
@@ -103,7 +103,7 @@ Now apply the same semantic search pattern to risk signal language.
 
 1. Run the following query:
 
-    You are applying the same semantic-search pattern to monitored risk signal text. The SQL embeds the phrase `fraud signals aml exposure`, compares it with stored signal embeddings, joins back to the source signal text, and returns the highest-scoring excerpts for analyst review.
+    You are applying the same semantic-search pattern to monitored risk signal text. The SQL embeds the phrase `Financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review`, compares it with stored signal embeddings, joins back to the source signal text, and returns the highest-scoring excerpts for analyst review.
 
     ```sql
     <copy>
@@ -111,7 +111,7 @@ Now apply the same semantic search pattern to risk signal language.
            SUBSTR(sp.post_text, 1, 120) AS signal_excerpt,
            ROUND(1 - VECTOR_DISTANCE(
              se.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'fraud signals aml exposure' AS DATA),
+             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'Financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review' AS DATA),
              COSINE), 4) AS similarity
     FROM signal_embeddings se
     JOIN social_posts sp ON sp.post_id = se.post_id
@@ -120,21 +120,21 @@ Now apply the same semantic search pattern to risk signal language.
     </copy>
     ```
 
-    **Expected output: AML Signal Matches**
+    **Expected output: Financial Crime Signal Matches**
 
     | Signal Id | Signal Excerpt | Similarity |
     | --- | --- | --- |
-    | 2290 | AML screening update affects Liquidity Investment Sweep; FraudGuard Operations suspicious ACH and sanctions case review | 0.6478 |
-    | 170 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
-    | 1330 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
-    | 1610 | AML screening update affects Deposit Attrition Alert; Catalyst Insurance Group suspicious ACH and sanctions case review | 0.6137 |
-    | 3770 | AML screening update affects High-Yield Savings Account; Meridian Trust Bank suspicious ACH and sanctions case review vo | 0.6117 |
+    | 2290 | AML screening update affects Liquidity Investment Sweep; FraudGuard Operations suspicious ACH and sanctions case review | 0.7352 |
+    | 10 | AML screening update affects Liquidity Stress Test; Civic National Bank suspicious ACH and sanctions case review volume | 0.6762 |
+    | 3310 | AML screening update affects Liquidity Stress Test; Civic National Bank suspicious ACH and sanctions case review volume | 0.6762 |
+    | 2530 | AML screening update affects Secure Document Vault; CleanRate Lending suspicious ACH and sanctions case review volume ex | 0.6553 |
+    | 3010 | AML screening update affects Secure Document Vault; CleanRate Lending suspicious ACH and sanctions case review volume ex | 0.6553 |
 
 
 2. Compare the excerpts and scores.
     This query uses the same pattern against risk signal embeddings. It searches the language of monitored events, not just product metadata, so analysts can find signals that discuss fraud, AML, sanctions, or suspicious activity even when the wording is not identical to the search phrase.
 
-    The returned excerpts contain AML, fraud, sanctions, and suspicious activity language even though the search phrase is short. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
+    The returned excerpts contain AML, fraud, sanctions, and suspicious-activity language even though the search phrase does not use the AML abbreviation. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
 
@@ -144,6 +144,6 @@ Congratulations on completing the AI Vector Search lab. You searched finance pro
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Pat Shepherd, Linda Foinding
+* **Contributors** - Teodor Nechita
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
