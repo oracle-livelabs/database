@@ -1,0 +1,35 @@
+{
+    "workshoptitle": "Building and Operating My AI Staff on Oracle Cloud Infrastructure",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Workshop overview, objectives, and architecture",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Lab 1: Prepare OCI Infrastructure and Database",
+            "description": "Provision compute, network, Autonomous Database 26ai, schema, and vector model",
+            "filename": "../../lab-1-prepare-oci-infrastructure-and-database/lab-1-prepare-oci-infrastructure-and-database.md"
+        },
+        {
+            "title": "Lab 2: Configure the AI Staff Runtime and Slack",
+            "description": "Install runtime dependencies, configure Slack apps, secure env files, and enable services",
+            "filename": "../../lab-2-configure-runtime-and-slack/lab-2-configure-runtime-and-slack.md"
+        },
+        {
+            "title": "Lab 3: Connect Services and Verify the Deployment",
+            "description": "Complete optional integrations and run layered verification through a full workflow",
+            "filename": "../../lab-3-connect-services-and-verify/lab-3-connect-services-and-verify.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to common problems and directions for receiving live help",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}
