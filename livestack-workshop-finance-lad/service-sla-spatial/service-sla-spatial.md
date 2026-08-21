@@ -287,6 +287,6 @@ You used Oracle Spatial to turn points and polygons into a routing decision. For
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Author** - Kevin Lazarz
+* **Contributor** - Eugenio Galiano
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
