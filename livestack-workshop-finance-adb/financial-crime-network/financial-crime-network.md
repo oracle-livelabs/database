@@ -266,6 +266,6 @@ Congratulations on completing the property graph lab. You used SQL/PGQ patterns 
 
 ## Acknowledgements
 
-* **Authors** - Pat Shepherd, Linda Foinding
-* **Contributors** - Ramu Murakami Gutierrez
+* **Authors** - Linda Foinding, Principal Database Product Manager
+* **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd, 
 * **Last Updated By/Date** - Oracle Database Product Management, August 2026
