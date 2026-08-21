@@ -321,4 +321,4 @@ The agent language model does not grant database privileges. Its actions remain 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026

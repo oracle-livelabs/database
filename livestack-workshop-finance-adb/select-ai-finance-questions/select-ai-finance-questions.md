@@ -236,4 +236,4 @@ You compared general chat, generated SQL, governed narration, and read-only beha
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
