@@ -60,6 +60,6 @@ Estimated Workshop Time: **125 minutes**
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Pat Shepherd, Linda Foinding
+* **Contributors** - Teodor Nechita
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026

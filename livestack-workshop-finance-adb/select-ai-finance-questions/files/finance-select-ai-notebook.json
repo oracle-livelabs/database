@@ -1,244 +1,175 @@
 {
-  "name": "finance-select-ai-notebook",
   "paragraphs": [
     {
-      "text": "%md\n# Ask Governed Finance Questions with Select AI\n\nThis AI4U-style notebook compares SELECT AI CHAT, SELECT AI SHOWSQL, and SELECT AI NARRATE using the existing Seer Bank Finance LiveStack dataset. Run each paragraph in order.",
+      "text": "%md\n## Ask Governed Finance Questions with Select AI\n\n### The Seer Bank Story\n\nSeer Bank analysts have followed one risk story across the workshop. They inspected the data foundation, reviewed dashboard evidence, opened transaction documents, searched risk language, traced fraud relationships, checked service coverage, and scored predictive models.\n\nNow the team asks the next question in plain language: which product categories and risk signals deserve attention first?\n\nA general AI chat response can explain finance risk. Seer Bank needs more than a general answer. The analyst needs approved database evidence. The reviewer needs the generated SQL behind the answer.\n\n### What You'll Learn\n\nIn this notebook, you will compare three Select AI actions:\n\n1. **CHAT** for general model knowledge.\n2. **SHOWSQL** to inspect SQL generated from a natural-language question.\n3. **NARRATE** to query approved Seer Bank objects and explain the result.\n\nYou will set the `genai` object list so Select AI knows which workshop objects it can read. Then you will verify the answer with stable SQL evidence.\n\n**Estimated Time:** 18 minutes",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
       },
       "results": {}
     },
     {
-      "text": "%md\n## Activate the governed finance profile\n\nThe FINANCE_V2_GENAI profile limits Select AI to the approved finance objects provisioned for this workshop.",
+      "text": "%script\n-- Set Your AI Profile\n-- Select AI uses the active profile for model access and schema grounding.\n-- Run this first so the remaining SELECT AI paragraphs use the workshop profile.\n\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT profile_name,\n       status\nFROM user_cloud_ai_profiles\nWHERE LOWER(profile_name) = 'genai';\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI.SET_PROFILE('FINANCE_V2_GENAI');\n\nSELECT profile_name,\n       status\nFROM user_cloud_ai_profiles\nWHERE profile_name = 'FINANCE_V2_GENAI';",
+      "text": "%script\n-- Try CHAT: Ask a General Finance Question\n-- SELECT AI CHAT goes directly to the configured language model.\n-- It is useful for general explanation, but it does not generate SQL or read\n-- the Seer Bank objects in this notebook.\n\nSELECT AI CHAT\n  What business factors commonly increase fraud and compliance risk at a financial institution?;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Experience Select AI Chat\n\nCHAT answers with general model knowledge. It does not query the Seer Bank objects in the profile.",
+      "text": "%script\n-- Try CHAT: Ask About Current Seer Bank Data\n-- This question needs live database rows. CHAT can explain what a risk signal is,\n-- but it cannot prove which Seer Bank signal currently has the highest score.\n-- This creates the baseline for the governed Select AI comparison.\n\nSELECT AI CHAT\n  Which Seer Bank risk signal currently has the highest criticality score?;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nSELECT AI CHAT What business factors commonly increase fraud and compliance risk at a financial institution?;",
+      "text": "%script\n-- Set the Governed Object List\n-- Select AI reads the objects listed on the profile. These are the approved\n-- Seer Bank objects used in this lab: product categories, risk signals,\n-- signal sources, post-to-product links, and the action audit table.\n-- The comments on these objects help Select AI understand what the names mean.\n\nBEGIN\n  DBMS_CLOUD_AI.SET_ATTRIBUTE(\n    profile_name    => 'genai',\n    attribute_name  => 'object_list',\n    attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"FINANCE_PRODUCTS_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"RISK_SIGNALS_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"SIGNAL_SOURCES_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"POST_PRODUCT_MENTIONS\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"AGENT_ACTIONS\"}]'\n  );\nEND;\n/\n\nSELECT object_name,\n       object_type\nFROM user_objects\nWHERE object_name IN (\n  'FINANCE_PRODUCTS_V',\n  'RISK_SIGNALS_V',\n  'SIGNAL_SOURCES_V',\n  'POST_PRODUCT_MENTIONS',\n  'AGENT_ACTIONS'\n)\nORDER BY object_name;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nSELECT AI CHAT Which Seer Bank risk signal currently has the highest criticality score?;",
+      "text": "%script\n-- Try SHOWSQL: Review the Generated Query Before Trusting It\n-- SHOWSQL translates the natural-language question into SQL and shows the\n-- statement instead of narrating the answer. Review the generated statement\n-- and confirm it only reads approved objects.\n\nSELECT AI SHOWSQL\n  Which Seer Bank product categories have the highest current risk exposure?;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Verify the existing finance objects\n\nThe Finance version uses the workshop dataset instead of creating AI4U's separate sample loan table.",
+      "text": "%script\n-- Try NARRATE: Ask Select AI to Query and Explain\n-- NARRATE uses the approved object list to generate SQL, run it, and return\n-- an explanation grounded in current Seer Bank rows. This is the key difference\n-- from CHAT: the answer can be checked against database evidence.\n\nSELECT AI NARRATE\n  Which Seer Bank product categories have the highest current risk exposure?;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nSELECT object_name,\n       object_type\nFROM user_objects\nWHERE object_name IN (\n  'FINANCE_PRODUCTS_V',\n  'RISK_SIGNALS_V',\n  'SIGNAL_SOURCES_V',\n  'POST_PRODUCT_MENTIONS',\n  'AGENT_ACTIONS'\n)\nORDER BY object_name;",
+      "text": "%script\n-- Verify the Answer with Stable SQL Evidence\n-- Generated wording and aliases can vary. This SQL returns the stable evidence\n-- behind the question: product category, signal count, average criticality,\n-- and total exposure, ordered by the highest exposure first.\n\nSELECT fp.product_category,\n       COUNT(DISTINCT rs.signal_id) AS signal_count,\n       ROUND(AVG(rs.criticality_score), 1) AS avg_criticality,\n       SUM(rs.exposure_count) AS exposure_count\nFROM risk_signals_v rs\nJOIN post_product_mentions ppm\n  ON ppm.post_id = rs.signal_id\nJOIN finance_products_v fp\n  ON fp.financial_product_id = ppm.product_id\nGROUP BY fp.product_category\nORDER BY exposure_count DESC\nFETCH FIRST 5 ROWS ONLY;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Show the generated SQL\n\nReview the SQL and confirm that it reads only approved finance objects.",
+      "text": "%script\n-- Prove the Read-Only Boundary\n-- SELECT AI NARRATE can read and explain approved data, but it has not been\n-- given an action tool. The AGENT_ACTIONS count should stay unchanged before\n-- and after another narrated risk question.\n\nSELECT COUNT(*) AS actions_before\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT';\n\nSELECT AI NARRATE\n  Which current Seer Bank risk signal should an analyst review first, and why?;\n\nSELECT COUNT(*) AS actions_after\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT';\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nSELECT AI SHOWSQL Which Seer Bank product categories have the highest current risk exposure?;",
+      "text": "%md\n## Result\n\nYou compared general chat, generated SQL, governed narration, and read-only behavior over the Seer Bank dataset. CHAT can explain broad finance risk. SHOWSQL lets you inspect the SQL. NARRATE grounds the answer in approved database objects. The next lab adds controlled agent tools so the system can act only inside a defined boundary.\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Ask Select AI to query and narrate\n\nUnlike CHAT, NARRATE can ground the answer in the approved Seer Bank data.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT AI NARRATE Which Seer Bank product categories have the highest current risk exposure?;",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Verify the answer with stable SQL evidence\n\nGenerated wording and aliases can vary. These database rows are the stable evidence check.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT fp.product_category,\n       COUNT(DISTINCT rs.signal_id) AS signal_count,\n       ROUND(AVG(rs.criticality_score), 1) AS avg_criticality,\n       SUM(rs.exposure_count) AS exposure_count\nFROM risk_signals_v rs\nJOIN post_product_mentions ppm\n  ON ppm.post_id = rs.signal_id\nJOIN finance_products_v fp\n  ON fp.financial_product_id = ppm.product_id\nGROUP BY fp.product_category\nORDER BY exposure_count DESC\nFETCH FIRST 5 ROWS ONLY;",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Prove that Select AI remains read-only\n\nThe agent action count must not change when NARRATE answers another finance question.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT COUNT(*) AS actions_before\nFROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT';\n\nSELECT AI NARRATE Which current Seer Bank risk signal should an analyst review first, and why?;\n\nSELECT COUNT(*) AS actions_after\nFROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT';",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Result\n\nYou reproduced the AI4U progression with the Finance LiveStack dataset: CHAT explained general knowledge, SHOWSQL exposed the generated statement, and NARRATE queried governed finance data without taking action.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
       },
       "results": {}
     }
   ],
-  "version": "1.0"
+  "name": "finance-select-ai-notebook",
+  "id": "b23567c5-a1ef-44b0-b2fd-fe64634d8350",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
 }
