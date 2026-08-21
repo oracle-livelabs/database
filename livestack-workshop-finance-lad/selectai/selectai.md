@@ -53,29 +53,29 @@ Select AI uses an AI profile to identify the AI provider and the database object
 
 1. Run this query:
 
-  ```sql
-  <copy>
-  SELECT profile_name,
-         status,
-         description
-  FROM user_cloud_ai_profiles
-  ORDER BY profile_name;
-  </copy>
-  ```
+    ```sql
+    <copy>
+    SELECT profile_name,
+           status,
+           description
+    FROM user_cloud_ai_profiles
+    ORDER BY profile_name;
+    </copy>
+    ```
 
     The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
-
-  ```sql
-  <copy>
-  SELECT profile_name,
-         attribute_name,
-         attribute_value
-  FROM user_cloud_ai_profile_attributes
-  ORDER BY profile_name, attribute_name;
-  </copy>
-  ```
+  
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    ORDER BY profile_name, attribute_name;
+    </copy>
+    ```
 
     The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
 
@@ -85,35 +85,35 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
 
 1. Add the finance tables to the profile:
 
-  ```sql
-  <copy>
-  BEGIN
-    DBMS_CLOUD_AI.SET_ATTRIBUTE(
-      profile_name    => 'genai',
-      attribute_name  => 'object_list',
-      attribute_value => '[{"owner": "' || USER || '", "name": "PRODUCTS"}, {"owner": "' || USER || '", "name": "ORDERS"}, {"owner": "' || USER || '", "name": "ORDER_ITEMS"}, {"owner": "' || USER || '", "name": "CUSTOMERS"}]'
-    );
-  END;
-  /
-  </copy>
-  ```
+    ```sql
+    <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'genai',
+        attribute_name  => 'object_list',
+        attribute_value => '[{"owner": "' || USER || '", "name": "PRODUCTS"}, {"owner": "' || USER || '", "name": "ORDERS"}, {"owner": "' || USER || '", "name": "ORDER_ITEMS"}, {"owner": "' || USER || '", "name": "CUSTOMERS"}]'
+      );
+    END;
+    /
+    </copy>
+    ```
 
 2. Confirm the object list:
 
-  ```sql
-  <copy>
-  SELECT profile_name,
-         attribute_name,
-         attribute_value
-  FROM user_cloud_ai_profile_attributes
-  WHERE profile_name = 'GENAI'
-    AND attribute_name = 'object_list';
-  </copy>
-  ```
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    WHERE profile_name = 'GENAI'
+      AND attribute_name = 'object_list';
+    </copy>
+    ```
 
-  The result should list `PRODUCTS`, `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
-
-  ![task2](images/task2.png)
+    The result should list `PRODUCTS`, `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
+  
+    ![task2](images/task2.png)
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -123,17 +123,17 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 1. Run the question with the `GENAI` profile:
 
-  ```sql
-  <copy>
-  SELECT DBMS_CLOUD_AI.GENERATE(
-           prompt       => 'Which five products have the highest revenue?',
-           profile_name => 'genai',
-           action       => 'showsql'
-         ) AS generated_sql;
-  </copy>
-  ```
-
-  ![task 3](images/task3.png)
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Which five products have the highest revenue?',
+             profile_name => 'genai',
+             action       => 'showsql'
+           ) AS generated_sql;
+    </copy>
+    ```
+  
+    ![task 3](images/task3.png)
 
 2. Read the generated SQL before running it.
 
@@ -145,17 +145,17 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 1. Run the same question with the `runsql` action:
 
-  ```sql
-  <copy>
-  SELECT DBMS_CLOUD_AI.GENERATE(
-           prompt       => 'Which five products have the highest revenue?',
-           profile_name => 'genai',
-           action       => 'runsql'
-         ) AS answer;
-  </copy>
-    ```
-
-  ![task 4](images/task4.png)
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Which five products have the highest revenue?',
+             profile_name => 'genai',
+             action       => 'runsql'
+           ) AS answer;
+    </copy>
+      ```
+  
+    ![task 4](images/task4.png)
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
@@ -169,31 +169,31 @@ Nina's first question gives her a product ranking, but she also needs enough det
 
 1. Use `showsql` to inspect this revised prompt:
 
-  ```sql
-  <copy>
-  SELECT DBMS_CLOUD_AI.GENERATE(
-           prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
-           profile_name => 'genai',
-           action       => 'showsql'
-         ) AS generated_sql;
-  </copy>
-  ```
-
-  ![task5](images/task5.png)
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
+             profile_name => 'genai',
+             action       => 'showsql'
+           ) AS generated_sql;
+    </copy>
+    ```
+  
+    ![task5](images/task5.png)
 
 2. Review the generated SQL, then run the revised question with `runsql`:
 
-  ```sql
-  <copy>
-  SELECT DBMS_CLOUD_AI.GENERATE(
-           prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
-           profile_name => 'genai',
-           action       => 'runsql'
-         ) AS answer;
-  </copy>
-  ```
-
-  ![task5](images/task52.png)
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
+             profile_name => 'genai',
+             action       => 'runsql'
+           ) AS answer;
+    </copy>
+    ```
+  
+    ![task5](images/task52.png)
 
 3. Compare the first and second questions.
 
@@ -205,17 +205,17 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 1. Run the revised question with the `narrate` action:
 
-  ```sql
-  <copy>
-  SELECT DBMS_CLOUD_AI.GENERATE(
-           prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
-           profile_name => 'genai',
-           action       => 'narrate'
-         ) AS explanation;
-  </copy>
-  ```
-
-  ![task6](images/task6.png)
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
+             profile_name => 'genai',
+             action       => 'narrate'
+           ) AS explanation;
+    </copy>
+    ```
+  
+    ![task6](images/task6.png)
 
 2. Review the explanation against the SQL result.
 
