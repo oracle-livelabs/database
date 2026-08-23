@@ -204,8 +204,8 @@ In this lab, you will:
     SELECT 'Workshop tables already present: ' || COUNT(*) ||
            ' of 8 (a fresh schema shows 0)' AS check_3
     FROM   user_tables
-    WHERE  table_name IN ('STORE','MENU','CATEGORY','ITEM','EXTRA',
-                          'ITEM_OPTION','ITEM_SPECIAL_HOURS','ITEM_OVERRIDE');
+    WHERE  table_name IN ('STORE','MENU','CATEGORY','ITEM','MENU_ITEM','EXTRA',
+                          'ITEM_OPTION','ITEM_SPECIAL_HOURS');
     </copy>
     ```
 

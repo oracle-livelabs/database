@@ -29,20 +29,21 @@
   <text class="head" x="170" y="40">FACE 1: RELATIONAL ROWS</text>
   <text class="sub"  x="170" y="58">normalized, constrained, Codd-approved</text>
 
-  <!-- item table -->
-  <rect class="th" x="40" y="80" width="270" height="24"/>
-  <text class="thT" x="50" y="97">ITEM&#160;&#160;(corporate-owned)</text>
-  <rect class="tbl" x="40" y="104" width="270" height="72"/>
-  <text class="mono" x="50" y="124">item_id&#160;&#160;1000</text>
-  <text class="mono" x="50" y="144">name&#160;&#160;&#160;&#160;&#160;Classic Cheeseburger</text><text class="lock" x="262" y="144">&#128274; @noupdate</text>
-  <text class="mono" x="50" y="164">price&#160;&#160;&#160;&#160;1499&#160;&#160;CHECK(&gt;0)</text><text class="lock" x="262" y="164">&#128274; @noupdate</text>
+  <!-- item: the chain catalog -->
+  <rect class="th" x="40" y="80" width="290" height="24"/>
+  <text class="thT" x="50" y="97">ITEM&#160;&#160;(the chain catalog &#8212; stored once)</text>
+  <rect class="tbl" x="40" y="104" width="290" height="72"/>
+  <text class="mono" x="50" y="124">item_id&#160;&#160;&#160;&#160;&#160;1000</text>
+  <text class="mono" x="50" y="144">item_name&#160;&#160;&#160;Classic Cheeseburger</text><text class="lock" x="238" y="162">&#128274; @noupdate</text>
+  <text class="mono" x="50" y="164">base_price&#160;&#160;1499&#160;&#160;CHECK(&gt;0)</text>
 
-  <!-- override table -->
-  <rect class="th" x="40" y="200" width="270" height="24"/>
-  <text class="thT" x="50" y="217">ITEM_OVERRIDE&#160;&#160;(location-owned)</text>
-  <rect class="tbl" x="40" y="224" width="270" height="52"/>
-  <text class="mono" x="50" y="244">item_id&#160;&#160;1000&#160;&#160;store&#160;&#160;s_100</text>
-  <text class="mono" x="50" y="264">override_name&#160;&#160;Lunch Classic…</text><text class="pen" x="256" y="264">&#9998; @update</text>
+  <!-- menu_item: the location's offer -->
+  <rect class="th" x="40" y="200" width="290" height="24"/>
+  <text class="thT" x="50" y="217">MENU_ITEM&#160;&#160;(what THIS location offers)</text>
+  <rect class="tbl" x="40" y="224" width="290" height="72"/>
+  <text class="mono" x="50" y="244">menu_id&#160;10&#160;&#160;item_id&#160;1000</text>
+  <text class="mono" x="50" y="264">display_name&#160;&#160;Lunch Classic</text><text class="pen" x="262" y="282">&#9998; @update</text>
+  <text class="mono" x="50" y="284">price&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;NULL &#8594; inherits</text>
 
   <!-- lens -->
   <ellipse class="lens" cx="480" cy="185" rx="105" ry="82"/>
@@ -54,28 +55,30 @@
   <!-- document -->
   <text class="head" x="790" y="40">FACE 2: JSON DOCUMENT</text>
   <text class="sub"  x="790" y="58">the shape your application wants</text>
-  <rect class="doc" x="650" y="80" width="280" height="220" rx="10"/>
-  <text class="mono" x="662" y="103">{</text>
-  <text class="mono" x="674" y="121">"_id": 1000,</text>
-  <text class="monoB" x="674" y="139">"name": "Classic Cheeseburger",</text>
-  <text class="monoB" x="674" y="157">"price": 1499,</text>
-  <text class="mono" x="674" y="175">"override": [ {</text>
-  <text class="monoB" x="686" y="193">"name": "Lunch Classic…" } ],</text>
-  <text class="mono" x="674" y="211">"_metadata": {</text>
-  <rect class="etag" x="686" y="220" width="196" height="18" rx="4"/>
-  <text class="etagT" x="692" y="233">"etag": "93493B42…"  &#8592; If-Match</text>
-  <text class="mono" x="674" y="256">}</text>
-  <text class="mono" x="662" y="274">}</text>
+  <rect class="doc" x="620" y="80" width="320" height="252" rx="10"/>
+  <text class="mono" x="632" y="102">{ "_id": "s_100",</text>
+  <text class="mono" x="644" y="120">"name": "Burger Palace Downtown",</text>
+  <text class="mono" x="644" y="138">"menus": [ &#8230; "items": [ {</text>
+  <text class="mono" x="656" y="156">"_id": 1000,</text>
+  <text class="monoB" x="656" y="174">"display": "Lunch Classic",</text><text class="pen" x="880" y="174">&#9998;</text>
+  <text class="monoB" x="656" y="192">"price": null,</text><text class="pen" x="880" y="192">&#9998;</text>
+  <text class="monoB" x="656" y="210">"name": "Classic Cheeseburger",</text><text class="lock" x="880" y="210">&#128274;</text>
+  <text class="monoB" x="656" y="228">"base_price": 1499</text><text class="lock" x="880" y="228">&#128274;</text>
+  <text class="mono" x="644" y="246">} ] ],</text>
+  <text class="mono" x="644" y="264">"_metadata": {</text>
+  <rect class="etag" x="656" y="273" width="196" height="18" rx="4"/>
+  <text class="etagT" x="662" y="286">"etag": "93493B42&#8230;"  &#8592; If-Match</text>
+  <text class="mono" x="644" y="309">} }</text>
 
   <!-- arrows -->
-  <path class="arrR" d="M330,140 C400,120 420,120 640,120"/>
-  <text class="arrT" fill="#2f6b4f" x="360" y="106">READ: assembled live from the rows — never stored</text>
-  <path class="arrW" d="M640,250 C480,300 380,290 320,252"/>
-  <text class="arrT" fill="#31708f" x="368" y="318">WRITE: decomposes back to the right rows — ONE ACID transaction</text>
+  <path class="arrR" d="M340,130 C420,110 440,105 615,105"/>
+  <text class="arrT" fill="#2f6b4f" x="336" y="66">READ: assembled live from the rows — never stored</text>
+  <path class="arrW" d="M615,270 C480,320 400,310 340,272"/>
+  <text class="arrT" fill="#31708f" x="330" y="352">WRITE: decomposes back to the right rows — ONE ACID transaction</text>
 
   <!-- governance strip -->
   <text class="tag" x="480" y="380">The rules travel with the data, not with the app:</text>
-  <text class="sub" x="480" y="408" font-size="13">&#128274;&#160; corp fields refuse writes from EVERY door (ORA-40939)&#160;&#160;&#160;&#160;&#9998;&#160; the location edits only what it owns</text>
+  <text class="sub" x="480" y="408" font-size="13">&#128274;&#160; catalog fields refuse writes from EVERY door (ORA-40940)&#160;&#160;&#160;&#160;&#9998;&#160; the location edits only its own offer</text>
   <text class="sub" x="480" y="432" font-size="13">CHECK constraints raise the SAME ORA-02290 through mongosh, SQL, and REST</text>
   <text class="sub" x="480" y="456" font-size="13">the ETag refuses stale writes — lock-free concurrency with zero app code</text>
   <text class="tag" x="480" y="500">Same bytes. Same transaction. Two faces.</text>

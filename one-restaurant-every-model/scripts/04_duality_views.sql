@@ -1,55 +1,31 @@
--- Lab 5: the duality views, with explicit updatability annotations.
--- Duality views are READ-ONLY BY DEFAULT - granting writes per table IS the
--- governance posture. Names are quoted-lowercase by CONVENTION, not necessity:
--- Oracle auto-creates an opposite-case synonym, so db.store_menu_dv would find
--- an unquoted STORE_MENU_DV too. Matching the case keeps the SQL you read and
--- the name you type in mongosh identical.
-
 CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "store_menu_dv" AS
 store @insert @update @delete
 {
-  _id   : store_id,
-  name  : merchant_name,
+  _id   : store_id
+  name  : merchant_name
   menus : menu @insert @update
   [ {
-      _id        : menu_id,
-      name       : menu_name,
+      _id  : menu_id
+      name : menu_name
       categories : category @insert @update
       [ {
-          _id   : category_id,
-          name  : category_name,
-          items : item @insert @update
+          _id   : category_id
+          name  : category_name
+          items : menu_item @insert @update @delete
           [ {
-              _id   : item_id,
-              name  : item_name,
-              price : price,
-              desc  : description
+              menu_id : menu_id
+              _id     : item_id
+              price   : price
+              display : display_name
+              item @unnest @noinsert @noupdate @nodelete
+              {
+                item_id     : item_id
+                name        : item_name
+                description : description
+                base_price  : base_price
+              }
           } ]
       } ]
-  } ]
-};
-
-CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "location_item_dv" AS
-item @noinsert @noupdate @nodelete
-{
-  _id   : item_id,
-  name  : item_name,
-  price : price,
-  desc  : description,
-  override : item_override @insert @update @delete
-  {
-    _id    : item_id,
-    store  : store_id,
-    name   : override_name,
-    active : override_active,
-    sort   : override_sort_id
-  },
-  schedule : item_special_hours @insert @update @delete
-  [ {
-    _id   : item_special_hours_id,
-    day   : day_index,
-    start : start_time,
-    end   : end_time
   } ]
 };
 
@@ -60,7 +36,5 @@ BEGIN
 END;
 /
 
--- STATE CHECK: both views should return documents, not null
-SELECT (SELECT COUNT(*) FROM "store_menu_dv")    AS store_docs,
-       (SELECT COUNT(*) FROM "location_item_dv") AS item_docs
-FROM   dual;
+-- STATE CHECK: the view returns one document per store
+SELECT COUNT(*) AS store_docs FROM "store_menu_dv";

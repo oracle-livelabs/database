@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The resolution starts with a pivot no bolt-on multi-model system can offer: the collection your Mongo shell created **is already a table**. In this lab you query it from SQL, see the drift from the relational side, then shred it into the canonical restaurant schema from the Ask Tom sessions — seven core entities plus the optional `item_override` extension, eight tables — where the drift becomes structurally impossible and the analytics ask becomes five lines.
+The resolution starts with a pivot no bolt-on multi-model system can offer: the collection your Mongo shell created **is already a table**. In this lab you query it from SQL, see the drift from the relational side, then shred it into the canonical restaurant schema from the Ask Tom sessions — a chain catalog plus the `menu_item` junction that says which location offers what, eight tables — where the drift becomes structurally impossible and the analytics ask becomes five lines.
 
 Estimated Lab Time: 11 minutes
 
@@ -54,28 +54,32 @@ Estimated Lab Time: 11 minutes
 
 ## Task 2: Create the Canonical Schema
 
-1. Paste and run the canonical DDL as a script (also in `scripts/03_canonical_ddl.sql`). Seven core entities plus the optional 1:1 `item_override` — eight tables, 3NF, with primary keys, foreign keys, and a `CHECK` constraint. (The Ask Tom entity `option` is named `item_option` here — `OPTION` is a reserved word in Oracle SQL.)
+1. Paste and run the canonical DDL as a script (also in `scripts/03_canonical_ddl.sql`). Eight tables, 3NF. The shape that matters: **`item` is the chain catalog and has no parent** — an item belongs to the *chain*, not to a store — and **`menu_item`** is the many-to-many that records which location offers it, under what local name, at what local price. That junction is the whole franchise. (The Ask Tom entity `option` is named `item_option` here — `OPTION` is a reserved word in Oracle SQL.)
 
     ```
     <copy>
     DROP VIEW  IF EXISTS "store_menu_dv";
-    DROP VIEW  IF EXISTS "location_item_dv";
     DROP VIEW  IF EXISTS pos_menu_v;
     DROP TABLE IF EXISTS item_option        CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS extra              CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS item_special_hours CASCADE CONSTRAINTS;
-    DROP TABLE IF EXISTS item_override      CASCADE CONSTRAINTS;
-    DROP TABLE IF EXISTS item               CASCADE CONSTRAINTS;
+    DROP TABLE IF EXISTS menu_item          CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS category           CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS menu               CASCADE CONSTRAINTS;
+    DROP TABLE IF EXISTS item               CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS store              CASCADE CONSTRAINTS;
-
     CREATE TABLE store (
       store_id      VARCHAR2(10)  PRIMARY KEY,
       merchant_name VARCHAR2(100) NOT NULL,
       timezone      VARCHAR2(40)  DEFAULT 'America/Los_Angeles' NOT NULL
     );
-
+    CREATE TABLE item (
+      item_id     NUMBER        PRIMARY KEY,
+      item_name   VARCHAR2(100) NOT NULL,
+      description VARCHAR2(400),
+      base_price  NUMBER        NOT NULL CHECK (base_price > 0),
+      active      BOOLEAN       DEFAULT TRUE NOT NULL
+    );
     CREATE TABLE menu (
       menu_id    NUMBER       PRIMARY KEY,
       store_id   VARCHAR2(10) NOT NULL REFERENCES store,
@@ -84,35 +88,34 @@ Estimated Lab Time: 11 minutes
       start_time VARCHAR2(5)  DEFAULT '00:00' NOT NULL,
       end_time   VARCHAR2(5)  DEFAULT '23:59' NOT NULL
     );
-
     CREATE TABLE category (
       category_id   NUMBER       PRIMARY KEY,
       menu_id       NUMBER       NOT NULL REFERENCES menu,
       category_name VARCHAR2(50) NOT NULL
     );
-
-    CREATE TABLE item (
-      item_id     NUMBER        PRIMARY KEY,
-      category_id NUMBER        NOT NULL REFERENCES category,
-      item_name   VARCHAR2(100) NOT NULL,
-      description VARCHAR2(400),
-      price       NUMBER        NOT NULL CHECK (price > 0),
-      active      BOOLEAN       DEFAULT TRUE NOT NULL
+    CREATE TABLE menu_item (
+      menu_id      NUMBER        NOT NULL REFERENCES menu,
+      item_id      NUMBER        NOT NULL REFERENCES item,
+      category_id  NUMBER        NOT NULL REFERENCES category,
+      display_name VARCHAR2(100),
+      price        NUMBER        CHECK (price > 0),
+      active       BOOLEAN,
+      sort_id      NUMBER,
+      CONSTRAINT menu_item_pk PRIMARY KEY (menu_id, item_id)
     );
-
+    CREATE INDEX menu_item_item_ix ON menu_item (item_id);
+    CREATE INDEX menu_item_cat_ix  ON menu_item (category_id);
     CREATE TABLE extra (
       extra_id   NUMBER       PRIMARY KEY,
       item_id    NUMBER       NOT NULL REFERENCES item,
       extra_name VARCHAR2(50) NOT NULL
     );
-
     CREATE TABLE item_option (
       option_id   NUMBER       PRIMARY KEY,
       extra_id    NUMBER       NOT NULL REFERENCES extra,
       option_name VARCHAR2(50) NOT NULL,
       price_delta NUMBER       DEFAULT 0 NOT NULL
     );
-
     CREATE TABLE item_special_hours (
       item_special_hours_id NUMBER      PRIMARY KEY,
       item_id               NUMBER      NOT NULL REFERENCES item,
@@ -120,18 +123,10 @@ Estimated Lab Time: 11 minutes
       start_time            VARCHAR2(5) NOT NULL,
       end_time              VARCHAR2(5) NOT NULL
     );
-
-    CREATE TABLE item_override (
-      item_id          NUMBER       PRIMARY KEY REFERENCES item,
-      store_id         VARCHAR2(10) NOT NULL REFERENCES store,
-      override_name    VARCHAR2(100),
-      override_active  BOOLEAN,
-      override_sort_id NUMBER
-    );
     </copy>
     ```
 
-    ![Canonical restaurant schema ERD — 7 core entities + item_override](images/restaurant-erd.svg "Canonical restaurant schema")
+    ![Canonical chain schema ERD — chain catalog plus the menu_item junction](images/restaurant-erd.svg "Canonical chain schema")
 
 2. Entry gate — one query, one answer:
 
@@ -139,8 +134,8 @@ Estimated Lab Time: 11 minutes
     <copy>
     SELECT COUNT(*) AS application_tables
     FROM   user_tables
-    WHERE  table_name IN ('STORE','MENU','CATEGORY','ITEM','EXTRA',
-                          'ITEM_OPTION','ITEM_SPECIAL_HOURS','ITEM_OVERRIDE');
+    WHERE  table_name IN ('STORE','MENU','CATEGORY','ITEM','MENU_ITEM','EXTRA',
+                          'ITEM_OPTION','ITEM_SPECIAL_HOURS');
     </copy>
     ```
 
@@ -148,25 +143,22 @@ Estimated Lab Time: 11 minutes
 
 ## Task 3: Shred the Documents Into the Truth
 
-1. Paste the shred into the **SQL worksheet** and run it as a script (also in `scripts/03_shred.sql`). It starts with deletes so a re-run from any partial state is clean, de-duplicates each item into **one corporate row** with deterministic rules (`MAX(price)` — corporate's latest change wins; resolving drift is a decision the migration must own — and `MIN(name)` for the corporate name), and converts `s_100`'s local rename into an `item_override` row. Note how `JSON_TABLE ... NESTED` walks the same path your `$unwind` pipeline did — declaratively.
+1. Paste the shred into the **SQL worksheet** and run it as a script (also in `scripts/03_shred.sql`). It starts with deletes so a re-run from any partial state is clean, collapses the embedded copies into **one corporate catalog row per item**, then records every location's offering in `menu_item`. The corporate name and price are the values held by a **majority** of the locations selling that item — not the first one seen. That rule matters: a single location's rename must not become the chain's name, and if an item were sold at only one location that overrode its price, corporate price would be *unrecoverable* from the documents. Note how `JSON_TABLE ... NESTED` walks the same path your `$unwind` pipeline did — declaratively.
 
     ```
     <copy>
     DELETE FROM item_option;
     DELETE FROM extra;
     DELETE FROM item_special_hours;
-    DELETE FROM item_override;
-    DELETE FROM item;
+    DELETE FROM menu_item;
     DELETE FROM category;
     DELETE FROM menu;
+    DELETE FROM item;
     DELETE FROM store;
-
     INSERT INTO store (store_id, merchant_name)
-    SELECT s.data."_id".string(), s.data.name.string()
-    FROM   "stores" s;
-
-    INSERT INTO menu (menu_id, store_id, menu_name)
-    SELECT jt.menu_id, jt.store_id, jt.menu_name
+    SELECT s.data."_id".string(), s.data.name.string() FROM "stores" s;
+    INSERT INTO menu (menu_id, store_id, menu_name, start_time, end_time)
+    SELECT jt.menu_id, jt.store_id, jt.menu_name, jt.st, jt.en
     FROM   "stores" s,
            JSON_TABLE(s.data, '$'
              COLUMNS (
@@ -174,10 +166,11 @@ Estimated Lab Time: 11 minutes
                NESTED PATH '$.menus[*]'
                COLUMNS (
                  menu_id   NUMBER       PATH '$.menu_id',
-                 menu_name VARCHAR2(50) PATH '$.name'))) jt;
-
+                 menu_name VARCHAR2(50) PATH '$.name',
+                 st        VARCHAR2(5)  PATH '$.start_time',
+                 en        VARCHAR2(5)  PATH '$.end_time'))) jt;
     INSERT INTO category (category_id, menu_id, category_name)
-    SELECT jt.category_id, jt.menu_id, jt.category_name
+    SELECT DISTINCT jt.category_id, jt.menu_id, jt.category_name
     FROM   "stores" s,
            JSON_TABLE(s.data, '$.menus[*]'
              COLUMNS (
@@ -186,50 +179,55 @@ Estimated Lab Time: 11 minutes
                COLUMNS (
                  category_id   NUMBER       PATH '$.category_id',
                  category_name VARCHAR2(50) PATH '$.name'))) jt;
-
-    -- One corporate row per item. TO_NUMBER normalizes s_104's string "1000"
-    -- on conversion - the drift is resolved BY CONSTRUCTION, per the rules above.
-    INSERT INTO item (item_id, category_id, item_name, description, price)
-    SELECT TO_NUMBER(jt.item_id),
-           MIN(jt.category_id),
-           MIN(jt.item_name),
-           MAX(jt.description),
-           MAX(jt.price)
-    FROM   "stores" s,
-           JSON_TABLE(s.data, '$.menus[*].categories[*]'
-             COLUMNS (
-               category_id NUMBER PATH '$.category_id',
-               NESTED PATH '$.items[*]'
+    INSERT INTO item (item_id, item_name, description, base_price)
+    WITH flat AS (
+      SELECT TO_NUMBER(jt.item_id) AS item_id, jt.store_id,
+             jt.item_name, jt.description, jt.price
+      FROM   "stores" s,
+             JSON_TABLE(s.data, '$'
                COLUMNS (
-                 item_id     VARCHAR2(10)  PATH '$.item_id',
-                 item_name   VARCHAR2(100) PATH '$.name',
-                 description VARCHAR2(400) PATH '$.description',
-                 price       NUMBER        PATH '$.price'))) jt
-    GROUP  BY TO_NUMBER(jt.item_id);
-
-    -- A store whose embedded name differs from the corporate name was a local
-    -- rename: it becomes an item_override row (s_100's "Lunch Classic").
-    INSERT INTO item_override (item_id, store_id, override_name)
-    SELECT TO_NUMBER(jt.item_id), jt.store_id, MIN(jt.item_name)
+                 store_id VARCHAR2(10) PATH '$._id',
+                 NESTED PATH '$.menus[*].categories[*].items[*]'
+                 COLUMNS (
+                   item_id     VARCHAR2(10)  PATH '$.item_id',
+                   item_name   VARCHAR2(100) PATH '$.name',
+                   description VARCHAR2(400) PATH '$.description',
+                   price       NUMBER        PATH '$.price'))) jt
+    ), ranked_name AS (
+      SELECT item_id, item_name,
+             ROW_NUMBER() OVER (PARTITION BY item_id
+                                ORDER BY COUNT(*) DESC, MIN(store_id)) rn
+      FROM flat GROUP BY item_id, item_name
+    ), ranked_price AS (
+      SELECT item_id, price,
+             ROW_NUMBER() OVER (PARTITION BY item_id
+                                ORDER BY COUNT(*) DESC, MIN(store_id)) rn
+      FROM flat GROUP BY item_id, price
+    )
+    SELECT n.item_id, n.item_name, MAX(f.description), p.price
+    FROM   ranked_name n
+      JOIN ranked_price p ON p.item_id = n.item_id AND p.rn = 1
+      JOIN flat f         ON f.item_id = n.item_id
+    WHERE  n.rn = 1
+    GROUP  BY n.item_id, n.item_name, p.price;
+    INSERT INTO menu_item (menu_id, item_id, category_id, display_name, price)
+    SELECT jt.menu_id, TO_NUMBER(jt.item_id), jt.category_id,
+           CASE WHEN jt.item_name <> i.item_name  THEN jt.item_name END,
+           CASE WHEN jt.price     <> i.base_price THEN jt.price     END
     FROM   "stores" s,
-           JSON_TABLE(s.data, '$'
+           JSON_TABLE(s.data, '$.menus[*]'
              COLUMNS (
-               store_id VARCHAR2(10) PATH '$._id',
-               NESTED PATH '$.menus[*].categories[*].items[*]'
+               menu_id NUMBER PATH '$.menu_id',
+               NESTED PATH '$.categories[*]'
                COLUMNS (
-                 item_id   VARCHAR2(10)  PATH '$.item_id',
-                 item_name VARCHAR2(100) PATH '$.name'))) jt
-    WHERE  jt.item_name <> (SELECT i.item_name
-                            FROM   item i
-                            WHERE  i.item_id = TO_NUMBER(jt.item_id))
-    GROUP  BY TO_NUMBER(jt.item_id), jt.store_id;
-
+                 category_id NUMBER PATH '$.category_id',
+                 NESTED PATH '$.items[*]'
+                 COLUMNS (
+                   item_id     VARCHAR2(10)  PATH '$.item_id',
+                   item_name   VARCHAR2(100) PATH '$.name',
+                   price       NUMBER        PATH '$.price')))) jt
+      JOIN item i ON i.item_id = TO_NUMBER(jt.item_id);
     COMMIT;
-
-    SELECT (SELECT COUNT(*) FROM item)                   AS items,
-           (SELECT price FROM item WHERE item_id = 1000) AS price_1000,
-           (SELECT COUNT(*) FROM item_override)          AS overrides
-    FROM   dual;
     </copy>
     ```
 
@@ -241,7 +239,7 @@ Estimated Lab Time: 11 minutes
 
     ```
     <copy>
-    UPDATE item SET price = 1399 WHERE item_id = 1000;
+    UPDATE item SET base_price = 1399 WHERE item_id = 1000;
     COMMIT;
     </copy>
     ```

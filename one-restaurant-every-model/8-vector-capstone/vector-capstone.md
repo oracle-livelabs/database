@@ -2,7 +2,7 @@
 
 ## Introduction
 
-"Find me a vegetarian dish with some heat" is a question about *meaning*, not keywords — and on this menu, not one item literally contains either word. In this lab you add AI Vector Search to the **same** `item` table you built in Lab 4 — with an ONNX embedding model that runs *inside* the database — and prove the claim vector-sync pipelines can't make: a brand-new item is findable by meaning **on the same commit**.
+"Find me a leafy starter" is a question about *meaning*, not keywords — and on this menu, not one item contains either word. In this lab you add AI Vector Search to the **same** `item` table you built in Lab 4 — with an ONNX embedding model that runs *inside* the database — and prove the claim vector-sync pipelines can't make: a brand-new item is findable by meaning **on the same commit**.
 
 Then the finale: one SQL statement that walks the co-order graph from Lab 7, joins the relational truth from Lab 4, and ranks by vector distance — planned as **one tree by one optimizer**. That is the difference between a multi-model checkbox and a converged guarantee.
 
@@ -32,30 +32,30 @@ Estimated Lab Time: 9 minutes
     </copy>
     ```
 
-    **What you should see:** `MENU_MODEL` (loaded in Lab 7), then the column added, then 6 rows updated. No embedding service, no API key, no copy pipeline — the vector is generated where the row already lives.
+    **What you should see:** `MENU_MODEL` (loaded in Lab 7), then the column added, then 7 rows updated. No embedding service, no API key, no copy pipeline — the vector is generated where the row already lives.
 
     > **If `MENU_MODEL` is missing:** go back to **Lab 7, Task 1** and run that block again — it is idempotent, so re-running is free. If the model still will not load (rare — it usually means object-storage egress is blocked on your tenancy), you can still finish the lab, and the detour is worth running anyway because it shows you exactly what the embedding buys. Also in `scripts/07_vector_fallback.sql`:
     >
     > ```
     > <copy>
-    > SELECT item_name, price
+    > SELECT item_name, base_price
     > FROM   item
     > WHERE  active
-    > AND    (LOWER(item_name || ' ' || description) LIKE '%vegetarian%'
-    >     OR  LOWER(item_name || ' ' || description) LIKE '%heat%');
+    > AND    (LOWER(item_name || ' ' || description) LIKE '%leafy%'
+    >     OR  LOWER(item_name || ' ' || description) LIKE '%starter%');
     >
-    > SELECT item_name, price
+    > SELECT item_name, base_price
     > FROM   item
     > WHERE  active
-    > AND    (LOWER(item_name || ' ' || description) LIKE '%spicy%'
-    >     OR  LOWER(item_name || ' ' || description) LIKE '%noodle%')
+    > AND    (LOWER(item_name || ' ' || description) LIKE '%crisp%'
+    >     OR  LOWER(item_name || ' ' || description) LIKE '%green%')
     > ORDER  BY item_name;
     > </copy>
     > ```
     >
-    > The first query is Task 2's question asked with keywords, and it returns **zero rows**. Nothing on this menu literally says "vegetarian" or "heat" — the dish you want says "vegetables" and "fiery". The second loosens the terms and returns exactly **one row: Beef Chow Fun**, the single dish that is emphatically *not* vegetarian; it matched "noodle", and keyword search has no way to know that "wok-seared beef" disqualifies it.
+    > The first query is Task 2's question asked with keywords, and it returns **zero rows** — nothing on this menu literally says "leafy" or "starter"; the dish you want says "Crisp greens, heirloom tomato, house vinaigrette". The second loosens the terms to words that *do* appear and returns an **unranked pile**, because keyword matching has no notion of "closer".
     >
-    > Nothing, or the wrong answer, with no way to rank by closeness. That gap is the entire reason AI Vector Search exists — and it is the same gap Task 2 closes with one `VECTOR_DISTANCE`. Then ask a proctor to help get the model loaded so you can run the real thing.
+    > Nothing, or a pile with no order to it. That gap is the entire reason AI Vector Search exists — and it is the same gap Task 2 closes with one `VECTOR_DISTANCE`. Then ask a proctor to help get the model loaded so you can run the real thing.
 
 ## Task 2: Search by Meaning
 
@@ -63,21 +63,21 @@ Estimated Lab Time: 9 minutes
 
     ```
     <copy>
-    SELECT item_name, price
+    SELECT item_name, base_price
     FROM   item
     WHERE  active
     ORDER  BY VECTOR_DISTANCE(desc_vec,
-             VECTOR_EMBEDDING(menu_model USING 'a vegetarian dish with some heat' AS data),
+             VECTOR_EMBEDDING(menu_model USING 'leafy starter' AS data),
              COSINE)
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    **What you should see:** **Szechuan Tofu Stir-Fry** at the top, filtered by the relational `active` predicate in the same statement.
+    **What you should see:** **Garden Salad** at the top, filtered by the relational `active` predicate in the same statement.
 
-    ![Semantic search result: Szechuan Tofu Stir-Fry ranked first](images/semantic-search-result.png " ")
+    ![Semantic search result: Garden Salad ranked first for a query sharing no word with it](images/semantic-search-result.png "Search by meaning")
 
-    Look at what just happened. Your query said *vegetarian* and *heat*. That dish's description says *"Crispy tofu, fiery chili-garlic sauce, seasonal vegetables, no meat"* — it contains **neither word**. Not "vegetarian" (it says "vegetables", a different word), not "heat" (it says "fiery"). A keyword search for those terms returns **zero rows** against this menu. The vector search puts the right dish first, and the second-place result is the Carnitas Taco Plate — also spicy, also not what you asked for, and correctly ranked below.
+    Look at what just happened. Your query said *leafy* and *starter*. That dish's description says *"Crisp greens, heirloom tomato, house vinaigrette"* — it contains **neither word**. A keyword search for those terms returns **zero rows** against this menu (try it: the fallback block above does exactly that). The vector search puts the right dish first with a clear margin, because it matched on meaning.
 
     **Why there is no index here, and when you would add one.** What you just ran is an *exact* search: the database compared your query vector against every row's vector and sorted by distance. On a seven-item menu that is the right answer and it is instant — an index would be pure overhead.
 
@@ -102,32 +102,32 @@ Estimated Lab Time: 9 minutes
 
     ```
     <copy>
-    INSERT INTO item (item_id, category_id, item_name, description, price, active)
-    VALUES (2003, 120, 'Vegan Dan Dan Noodles',
-            'Hand-pulled noodles, spicy sesame-chili sauce, plant-based, no meat',
-            1299, TRUE);
+    INSERT INTO item (item_id, item_name, description, base_price)
+    VALUES (1099, 'Brisket Melt',
+            'Slow-smoked barbecue brisket, melted swiss, grilled sourdough', 1549);
 
     UPDATE item
     SET    desc_vec = VECTOR_EMBEDDING(menu_model
                         USING item_name || ' ' || description AS data)
-    WHERE  item_id = 2003;
+    WHERE  item_id = 1099;
     COMMIT;
 
-    SELECT item_name, price
+    SELECT item_name, base_price
     FROM   item
     WHERE  active
     ORDER  BY VECTOR_DISTANCE(desc_vec,
-             VECTOR_EMBEDDING(menu_model USING 'spicy vegetarian noodles' AS data),
+             VECTOR_EMBEDDING(menu_model USING 'smoky barbecue brisket' AS data),
              COSINE)
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    Note this search uses a different probe from Task 2 — `'spicy vegetarian noodles'` — because the dish you just added really *is* a noodle dish, and the question is whether the database can find it the instant it exists.
+    Note this search uses a different probe from Task 2 — `'smoky barbecue brisket'` — because it targets the dish you just added; the question is whether the database can find it the instant it exists.
 
-    **What you should see:** **Vegan Dan Dan Noodles at the top**, ahead of everything that was already on the menu — committed and findable by meaning in the same breath. No sync window, no backfill job, no eventually-consistent index. Fresh on the commit.
+    **What you should see:** **Brisket Melt at the top**, ahead of everything already on the menu — committed and findable by meaning in the same breath.
 
-    ![Freshness proof: Vegan Dan Dan Noodles ranked first in the same script that inserted it](images/freshness-result.png " ")
+    ![Freshness proof: Brisket Melt ranked first in the same script that inserted it](images/freshness-result.png "Same-commit freshness")
+
 
     That is the beat no bolt-on vector store can match. In a sync-pipeline architecture the row is committed here and the embedding lands in the index *later* — seconds if you are lucky, minutes if you are not — and until it does, your newest item is invisible to the search that is supposed to sell it.
 
@@ -137,7 +137,7 @@ Estimated Lab Time: 9 minutes
 
     * **The `ring` subquery is the graph step.** It walks `customer → placed → order → contains → item` for customer `c_1` and collects the distinct items they have actually ordered. That is their taste profile, derived from the order documents mongosh wrote — not a profile table somebody had to maintain.
     * **The join is the relational step.** Those item ids are just numbers; the canonical `item` table from Lab 4 supplies the trustworthy name, the current price, and the `active` flag. Corporate's truth, not a copy frozen inside an order.
-    * **The `ORDER BY` is the vector step.** `VECTOR_DISTANCE` ranks what survived by how close each dish is *in meaning* to a preference string — `'vegan-friendly noodles'` — using the embedding the database generated in Task 1.
+    * **The `ORDER BY` is the vector step.** `VECTOR_DISTANCE` ranks what survived by how close each dish is *in meaning* to a preference string — `'leafy starter'` — using the embedding the database generated in Task 1.
 
     Read top to bottom, it is: *narrow by behaviour, enrich by truth, rank by meaning.* On a polyglot stack those are three systems, two network hops, and a consistency argument about which copy is current. Here it is one statement, one transaction, one optimizer (also in `scripts/07_capstone.sql`):
 
@@ -148,32 +148,24 @@ Estimated Lab Time: 9 minutes
       SELECT DISTINCT gt.item_id
       FROM GRAPH_TABLE (order_graph
         MATCH (c IS customer)-[IS placed]->(o IS ord)-[IS contains]->(i IS item)
-        WHERE c.customer_id = 'c_1'
+        WHERE c.customer_id = 'c_5'
         COLUMNS (i.item_id AS item_id)) gt
     )
-    SELECT i.item_name, i.price               -- RELATIONAL: canonical truth
+    SELECT i.item_name, i.base_price               -- RELATIONAL: canonical truth
     FROM   ring r
       JOIN item i ON i.item_id = r.item_id
     WHERE  i.active
     ORDER  BY VECTOR_DISTANCE(i.desc_vec,     -- VECTOR: ranked by meaning
-             VECTOR_EMBEDDING(menu_model USING 'vegan-friendly noodles' AS data),
+             VECTOR_EMBEDDING(menu_model USING 'leafy starter' AS data),
              COSINE)
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    **What you should see:** three rows. Customer `c_1` belongs to the noodle cohort you seeded in Lab 7, so their ring is **Szechuan Tofu Stir-Fry**, **Beef Chow Fun** and **Garden Salad** — and the two Wok dishes both rank above the Garden Salad, which shares nothing with the probe.
+    **What you should see:** the three items customer `c_5` actually orders, ranked by meaning — **Garden Salad first**.
 
-    The order of the top two is worth a moment, because the probe was chosen to be genuinely hard. `'vegan-friendly noodles'` pulls in two directions, and each dish satisfies exactly one half of it:
+    Customer `c_5` belongs to the **veggie** cohort you seeded in Lab 7, so their ring is the Black Bean Chipotle Burger, the Garden Salad and the French Fries — and the salad ranks first for a probe that shares no word with it.
 
-    | Dish | Description the model embedded | Matches |
-    | :-- | :-- | :-- |
-    | Beef Chow Fun | "**Wide rice noodles**, wok-seared **beef**, scallion" | *noodles*, but explicitly not vegan |
-    | Szechuan Tofu Stir-Fry | "Crispy tofu, fiery chili-garlic sauce, seasonal vegetables, **no meat**" | *vegan-friendly*, but never says noodles |
-
-    **Beef Chow Fun comes first** — the model weighed "noodles" more heavily than "vegan-friendly". You may well disagree with that judgement, and that is the point worth taking away: the ranking is a *model's* opinion about meaning, not a lookup. It is reproducible, it is explainable (one dish matches the noun, the other the qualifier), and it is exactly the kind of trade-off a keyword index cannot even represent — it would have returned the beef dish alone, or nothing.
-
-    If you want the vegan constraint to be non-negotiable rather than a hint, that is what the `WHERE` clause is for — and you already have one in this statement. Semantics rank; predicates decide.
 
     The recommendation is personal (it came from *this* customer's orders), current (it came from the canonical `item` table), and semantic (it was ranked by meaning) — in one statement.
 
@@ -190,14 +182,14 @@ Estimated Lab Time: 9 minutes
       SELECT DISTINCT gt.item_id
       FROM GRAPH_TABLE (order_graph
         MATCH (c IS customer)-[IS placed]->(o IS ord)-[IS contains]->(i IS item)
-        WHERE c.customer_id = 'c_1'
+        WHERE c.customer_id = 'c_5'
         COLUMNS (i.item_id AS item_id)) gt
     )
-    SELECT i.item_name, i.price
+    SELECT i.item_name, i.base_price
     FROM   ring r JOIN item i ON i.item_id = r.item_id
     WHERE  i.active
     ORDER  BY VECTOR_DISTANCE(i.desc_vec,
-             VECTOR_EMBEDDING(menu_model USING 'vegan-friendly noodles' AS data),
+             VECTOR_EMBEDDING(menu_model USING 'leafy starter' AS data),
              COSINE)
     FETCH FIRST 5 ROWS ONLY;
 
