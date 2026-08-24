@@ -93,6 +93,5 @@ The lasting lesson is that **Oracle AI Database 26ai** lets these jobs reinforce
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Author** - Pat Shepherd, Linda Foinding 
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
