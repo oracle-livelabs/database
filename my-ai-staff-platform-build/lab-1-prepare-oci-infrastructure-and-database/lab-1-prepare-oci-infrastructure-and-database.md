@@ -13,7 +13,7 @@ In this lab, you will:
 - Create OCI compute and ingress rules for secure access.
 - Configure DNS for the editor endpoint.
 - Provision Autonomous Database 26ai and wallet files.
-- Create the AI_FOR_YOU schema and load the application DDL.
+- Create the AI FOR YOU schema and load the application DDL.
 - Load and validate the MiniLM ONNX embedding model.
 
 ### Prerequisites
@@ -24,10 +24,11 @@ In this lab, you will:
 
 ## Task 1: Create Compute and Network Access
 
-1. In OCI Console, create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex.
+1. In OCI Console, create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex 
+(If not available choose a similar Shape, check documentation for more info [here](https://docs.oracle.com/es-ww/iaas/Content/Compute/References/computeshapes.htm#flexible)).
 2. Configure the instance to use 4 OCPUs and 24 GB memory.
 3. Reserve a static public IP for the instance.
-4. In the VCN security list, allow inbound access for ports 22, 80, and 443.
+4. In the VCN security list, allow inbound access for port 22 only from your administration network, and ports 80 and 443 for the editor endpoint.
 5. On the instance, open HTTP/HTTPS services in firewalld.
 
     ```
@@ -37,7 +38,7 @@ In this lab, you will:
     </copy>
     ```
 
-6. Keep agent ports 8001 through 8005 loopback-only and do not expose them publicly.
+6. Keep agent ports 8001 through 8005 loopback-only and do not expose them publicly. nginx is the public reverse proxy; internal services bind to `127.0.0.1`.
 
 ## Task 2: Configure DNS for the Editor Host
 
@@ -58,13 +59,13 @@ In this lab, you will:
 1. In OCI Console, create an Autonomous Database with workload type Transaction Processing.
 2. Choose Always Free and Oracle Database 26ai.
 3. Enable secure access and download the wallet.
-4. Copy the wallet zip file to the compute instance and extract it.
+4. Copy the wallet zip file to the compute instance and extract it under the deployment user's home directory.
 
     ```
     <copy>
     mkdir -p ~/oracle/wallet
-    cd ~/oracle/wallet
-    unzip ~/wallet_<db-name>.zip
+    unzip ~/wallet_<db-name>.zip -d ~/oracle/wallet
+    ls ~/oracle/wallet/{sqlnet.ora,tnsnames.ora,cwallet.sso}
     </copy>
     ```
 
@@ -83,8 +84,9 @@ In this lab, you will:
     </copy>
     ```
 
-3. Set current schema and run the full DDL snapshot file from the platform repository.
-4. Ensure table, foreign key, and index creation complete successfully.
+3. Set the current schema, then run `schema/ai_for_you_full_ddl.sql` from the platform repository, top to bottom.
+4. Do not run `agents/data/migrations/` for a new deployment: the files are historical changes already folded into the snapshot. Leave the marked `OAM_*` and `REMINDERS` objects to their owning runtime components.
+5. Ensure table, foreign key, and index creation complete successfully.
 
 ## Task 5: Load and Validate the ONNX Embedding Model
 
@@ -97,7 +99,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Confirm the query returns a vector.
+3. Confirm the query returns a vector. The Data Agent memory endpoints require this model; if it is omitted, recall fails after the rest of the platform appears healthy.
 
 ## Acknowledgements
 
