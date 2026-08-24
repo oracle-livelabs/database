@@ -38,9 +38,7 @@ Do not use the latest VDDK version unless it matches one of the supported versio
 4. Click **Upload**.
     ![Bucket upload](images/bucket-upload.png "Select Bucket upload")
 
-5. Download the VDDK package from the Broadcom VMware Developer Portal.
-    * Open [VMware Virtual Disk Development Kit (VDDK)](https://developer.broadcom.com/sdks/vmware-virtual-disk-development-kit-vddk/latest).
-    * Select `v8.0` and download the VDDK `8.0U3` Linux tarball package for most source environments. This is not the same as the earlier `8.0` or `8.0.1` rows.
+5. Download the VDDK8.0.3 Linux tarball package from the Broadcom VMware Developer Portal.
 
 6. Select the VDDK Linux tarball package file that you downloaded.
 
