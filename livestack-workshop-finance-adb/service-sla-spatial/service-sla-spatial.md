@@ -39,11 +39,11 @@ The second image is the Client Service and SLA Coverage page. It combines a map,
 
 ### Objectives
 
-- Open Spatial Studio for the Finance V2 Autonomous AI Database.
-- Create database-backed datasets for service centers, demand regions, and SLA zones.
-- Build and save a finance coverage project in Spatial Studio.
-- Find service centers nearest to New York Metro.
-- Inspect SLA zone coverage.
+- Run spatial SQL that measures service-center distance to New York Metro.
+- Summarize SLA response-zone commitments.
+- Open Spatial Studio from Database Actions.
+- Create database-backed datasets for service centers and demand regions.
+- Build and save a New York Metro service coverage project.
 
 Estimated Time: **25 minutes**
 
@@ -58,73 +58,9 @@ Estimated Time: **25 minutes**
 | Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), distance calculations (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
 | Outcome | Operations teams can visualize coverage and prioritize case-processing capacity based on geography and demand. |
 
-Persona focus: You are helping a service operations leader map the Finance V2 coverage layers and then verify the map with measurable spatial SQL.
+Persona focus: You are helping a service operations leader measure nearby case-processing capacity, then use Spatial Studio to see the same New York Metro coverage story on a map.
 
-## Task 1: Open Spatial Studio and connect to the Finance ADB
-
-Spatial Studio is a browser application that works with database-backed datasets and saved Projects. It does not use Graph Studio or OML notebook files.
-
-1. In **View Login Info**, note your OCI sign-in details, compartment, Finance V2 Autonomous AI Database name, Spatial Studio URL, and the credentials supplied for the workshop environment.
-
-2. Sign in to the OCI Console. Open the **Navigation Menu**, select **Oracle AI Database**, and then select **Autonomous AI Database**.
-
-    ![Open Autonomous AI Database from the OCI navigation menu](images/spatial-oci-autonomous-database.png " ")
-
-3. Select the workshop compartment and open the Finance V2 Autonomous AI Database.
-
-4. If Spatial Studio asks you to configure an Autonomous Database connection, click **Database connection** on the database details page and download the wallet. Create a wallet password and retain it until the connection is complete.
-
-    ![Open Database connection for the Finance V2 Autonomous AI Database](images/spatial-adb-database-connection.png " ")
-
-5. Open the Spatial Studio URL supplied in **View Login Info**. Sign in with the Spatial Studio credentials provided for the workshop. Do not substitute your OCI Console password unless the login information explicitly tells you to use it.
-
-6. On a first-time Spatial Studio login, select **Autonomous Database**, upload the wallet, and choose the workshop database connection and service level supplied in **View Login Info**. Do not enter example usernames or passwords from another workshop.
-
-    ![Configure an Autonomous Database connection on first Spatial Studio login](images/spatial-first-login-connection.png " ")
-
-7. If Spatial Studio opens directly on the **Projects** page, the connection is already configured and you can continue without downloading or uploading another wallet.
-
-    ![Spatial Studio Projects page](images/spatial-projects-home.png " ")
-
-## Task 2: Create finance datasets and a coverage project
-
-Spatial Studio datasets point to existing Oracle Database tables or views. The Finance V2 loader already created and populated the spatial tables; do not upload replacement CSV, GeoJSON, or shapefile data.
-
-1. In Spatial Studio, open **Datasets** from the left navigation and click **Create Dataset**.
-
-2. Select **Database table/view**, choose the Finance V2 Autonomous Database connection, and click **Create**.
-
-3. Search for and create datasets for these three tables:
-
-    | Database table | Geometry column | Key column | Finance meaning |
-    | --- | --- | --- | --- |
-    | `FULFILLMENT_CENTERS` | `LOCATION` | `CENTER_ID` | Service-center point locations and case-processing capacity. |
-    | `DEMAND_REGIONS` | `BOUNDARY` | `REGION_ID` | Regional demand boundaries, including New York Metro. |
-    | `FULFILLMENT_ZONES` | `ZONE_BOUNDARY` | `ZONE_ID` | SLA response zones and service commitments. |
-
-    If the connection contains many objects, use the search field rather than scrolling through the full list.
-
-4. Confirm that the three datasets appear on the **Datasets** page. If Spatial Studio asks for a key, use the key column shown in the table above.
-
-    > `SERVICE_CENTERS_V` provides business labels for SQL results, but it does not contain an `SDO_GEOMETRY` column. Use `FULFILLMENT_CENTERS.LOCATION` as the service-center map layer.
-
-5. Open **Projects** and click **Create Project**.
-
-    ![Create a project from the Spatial Studio Projects page](images/spatial-create-project.png " ")
-
-6. Name the project `Seer Bank Service and SLA Coverage`.
-
-7. Click **Add Dataset** and add the three finance datasets. Drag them onto the map in this order:
-
-    1. `DEMAND_REGIONS` as the regional boundary layer.
-    2. `FULFILLMENT_ZONES` as the SLA-zone layer.
-    3. `FULFILLMENT_CENTERS` as the point layer on top.
-
-8. Use each layer's settings to make the boundaries partially transparent and keep service-center points visible. Turn layers on and off to compare the demand region, SLA zone, and available service locations.
-
-9. Save the project. The map is the visual investigation; the next two tasks use SQL to measure the distance and SLA evidence behind it.
-
-## Task 3: Calculate service center distance to New York Metro
+## Task 1: Calculate service center distance to New York Metro
 
 Start by comparing service-center locations to the New York Metro demand region.
 
@@ -206,7 +142,7 @@ Start by comparing service-center locations to the New York Metro demand region.
 
     The so what: Edison is the closest center to a high-demand region, so it is the first place an operations leader would check for available case-processing capacity. If Edison is already overloaded, the next closest centers help show where work may need to be routed next.
 
-## Task 4: Summarize SLA zone coverage
+## Task 2: Summarize SLA zone coverage
 
 After locating nearby service centers, summarize the response commitments attached to SLA zones.
 
@@ -251,6 +187,118 @@ After locating nearby service centers, summarize the response commitments attach
     The result shows how zone type maps to response-hour commitments. Express and overnight zones represent faster response promises, while standard and economy zones represent longer service windows.
 
     This matters because risk operations are not finished when a signal is detected. If a case requires outreach, document review, or service follow-up, the bank also needs to know whether the service network can meet the response time implied by the case priority.
+
+## Task 3: Open Spatial Studio from Database Actions
+
+Now move from SQL evidence to the visual map. You will use the `LLUSER` database user and password supplied for the workshop.
+
+1. Return to the **Database Actions Launchpad**.
+
+2. If the dark-theme message appears, click **Done**.
+
+3. Confirm that the upper-right corner shows `LLUSER`.
+
+    ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
+
+4. On the **Development** tab, select **Spatial Studio** from the left-side tool list and click **Open**.
+
+5. If prompted, sign in with `LLUSER` and the workshop password.
+
+6. Confirm that Spatial Studio opens on the **Projects** page.
+
+    ![Spatial Studio Projects page](images/spatial-projects-home.png " ")
+
+## Task 4: Create the New York Metro service coverage project
+
+In this task, you create two database-backed datasets, add them to a map, filter the demand layer to New York Metro, and run a distance analysis to find nearby fulfillment centers.
+
+1. Click **Create project**.
+
+2. In the new project, click **Add dataset**.
+
+    ![Add a dataset to a new Spatial Studio project](images/spatial-project-add-dataset.png " ")
+
+3. Select **Create dataset**, then select **Database**.
+
+4. Choose the database connection for the workshop user.
+
+5. Select these database tables:
+
+    - `DEMAND_REGIONS`
+    - `FULFILLMENT_CENTERS`
+
+6. Click the actions menu and select **Create project**.
+
+    ![Create Spatial Studio datasets from DEMAND_REGIONS and FULFILLMENT_CENTERS](images/spatial-create-datasets.png " ")
+
+7. In the project, drag `FULFILLMENT_CENTERS` onto the map.
+
+    Spatial Studio adds the fulfillment centers as point locations. The demand regions appear as boundary shapes.
+
+    ![Demand regions and fulfillment centers on the Spatial Studio map](images/spatial-map-demand-centers.png " ")
+
+8. In the left panel, open the actions menu for `DEMAND_REGIONS`, then select **Configure**.
+
+9. In **Configure**, select **Filter**.
+
+    ![Open the DEMAND_REGIONS filter configuration](images/spatial-demand-regions-filter.png " ")
+
+10. Create a filter for New York Metro:
+
+    - Column: `REGION_NAME`
+    - Value: `New York Metro`
+
+11. Click **Apply**.
+
+    ![Apply the New York Metro filter to DEMAND_REGIONS](images/spatial-demand-region-apply.png " ")
+
+12. Select the New York Metro region on the map.
+
+    ![Select the New York Metro demand region on the map](images/spatial-select-new-york-region.png " ")
+
+13. Click **Spatial analysis**, then select **Return shapes within a specific distance**.
+
+14. Configure the analysis:
+
+    - Analysis layer: `FULFILLMENT_CENTERS`
+    - Location column: `FULFILLMENT_CENTERS.LOCATION`
+    - Boundary layer: `DEMAND_REGIONS`
+    - Boundary column: `DEMAND_REGIONS.BOUNDARY`
+    - Boundary option: use the selected New York Metro region
+
+    ![Configure the Spatial Studio distance analysis](images/spatial-analysis-setup.png " ")
+
+15. Set the distance to `250,000` meters.
+
+    ![Set the distance analysis to 250000 meters](images/spatial-analysis-distance.png " ")
+
+16. Run the analysis.
+
+17. Rename the analysis layer to `Centers within 250,000 meters of New York Metro`.
+
+18. Hide the original `FULFILLMENT_CENTERS` layer if needed so the analysis results are easier to see.
+
+    ![Spatial Studio results for centers within 250000 meters of New York Metro](images/spatial-analysis-results.png " ")
+
+19. Open **Settings**, then select **Interactions**.
+
+20. Configure the information window for the analysis results. Add these fields:
+
+    - `CENTER_NAME`
+    - `CITY`
+    - `STATE_PROVINCE`
+
+    If the points are hard to select, increase the point radius to `5` or `8`.
+
+    ![Configure the Spatial Studio information window](images/spatial-info-window.png " ")
+
+21. Right-click a result point to view the center details.
+
+    ![View details for a selected service center result](images/spatial-view-center-details.png " ")
+
+22. Click **Save**, then save the project as `New York Metro Service Coverage`.
+
+    ![Save the Spatial Studio project as New York Metro Service Coverage](images/spatial-save-project.png " ")
 
 ## Next Steps
 

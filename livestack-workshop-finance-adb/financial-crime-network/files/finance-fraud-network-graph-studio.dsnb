@@ -16,7 +16,7 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
@@ -54,7 +54,7 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
@@ -98,45 +98,7 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
-        "title" : null,
-        "hasTitle" : false,
-        "message" : [
-          "%md",
-          "",
-          "**Shared Entity Connections**"
-        ],
-        "selectedVisualization" : "html",
-        "visualizationConfig" : null,
-        "hideCode" : true,
-        "hideResult" : false,
-        "hideGutter" : true,
-        "hideVizConfig" : false,
-        "hideInIFrame" : false,
-        "enabled" : true,
-        "forms" : "[]",
-        "result" : {
-          "startTime" : 1786029398380,
-          "endTime" : 1786029398413,
-          "interpreter" : "md",
-          "taskStatus" : "SUCCESS",
-          "status" : "SUCCESS",
-          "results" : [
-            {
-              "message" : "<p><strong>Shared Entity Connections</strong></p>\n",
-              "type" : "HTML"
-            }
-          ],
-          "forms" : "[]"
-        },
-        "relations" : [ ],
-        "dynamicFormParams" : "{}"
-      },
-      {
-        "row" : 0,
-        "col" : 0,
-        "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
@@ -189,7 +151,7 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
@@ -227,7 +189,7 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
@@ -276,7 +238,45 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "**Shared Entity Connections**"
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1786029398380,
+          "endTime" : 1786029398413,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p><strong>Shared Entity Connections</strong></p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
@@ -314,7 +314,7 @@
         "row" : 0,
         "col" : 0,
         "sizeX" : 0,
-        "width" : 0,
+        "width" : 12,
         "title" : null,
         "hasTitle" : false,
         "message" : [
