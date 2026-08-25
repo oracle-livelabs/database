@@ -59,12 +59,12 @@ Estimated Time: **12 minutes**
     </copy>
     ~~~
 
-Expected output: Campus Service Capacity
+    Expected output: Campus Service Capacity
 
-| Campus Service Site Name | City | Capacity Units | Current Load Pct |
-| --- | --- | ---: | ---: |
-| North Campus Advising Hub | Boston | 120 | 82 |
-| Central Student Services | Boston | 180 | 61 |
+    | Campus Service Site Name | City | Capacity Units | Current Load Pct |
+    | --- | --- | ---: | ---: |
+    | North Campus Advising Hub | Boston | 120 | 82 |
+    | Central Student Services | Boston | 180 | 61 |
 
 ## Task 2: Calculate nearby service sites
 
@@ -98,12 +98,12 @@ Expected output: Campus Service Capacity
     </copy>
     ~~~
 
-Expected output: Nearby Service Sites
+    Expected output: Nearby Service Sites
 
-| Campus Service Site Name | Distance Miles | Current Load Pct |
-| --- | ---: | ---: |
-| Central Student Services | 0.8 | 61 |
-| North Campus Advising Hub | 3.6 | 82 |
+    | Campus Service Site Name | Distance Miles | Current Load Pct |
+    | --- | ---: | ---: |
+    | Central Student Services | 0.8 | 61 |
+    | North Campus Advising Hub | 3.6 | 82 |
 
     Location data stays with the same service and request evidence. A planner can explain both distance and capacity before recommending a route.
 

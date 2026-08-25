@@ -60,11 +60,11 @@ Estimated Time: **12 minutes**
     </copy>
     ~~~
 
-Expected output: OML Model Inventory
+    Expected output: OML Model Inventory
 
-| Model Name | Mining Function | Algorithm |
-| --- | --- | --- |
-| DEMAND\_SURGE\_MODEL | CLASSIFICATION | RANDOM\_FOREST |
+    | Model Name | Mining Function | Algorithm |
+    | --- | --- | --- |
+    | DEMAND\_SURGE\_MODEL | CLASSIFICATION | RANDOM\_FOREST |
 
 ## Task 2: Score student-service demand
 
@@ -95,13 +95,13 @@ Expected output: OML Model Inventory
     </copy>
     ~~~
 
-Expected output: Demand Priorities
+    Expected output: Demand Priorities
 
-| Result Pattern | Expected Evidence |
-| --- | --- |
-| Service rows | Five rows, one for each seeded student service |
-| Predicted demand | The model-returned class label for each service |
-| Surge probability | A decimal from 0 to 1, sorted from highest to lowest |
+    | Result Pattern | Expected Evidence |
+    | --- | --- |
+    | Service rows | Five rows, one for each seeded student service |
+    | Predicted demand | The model-returned class label for each service |
+    | Surge probability | A decimal from 0 to 1, sorted from highest to lowest |
 
     The predicted label and `SURGE` probability help a planner decide where to investigate. The probability is not necessarily confidence in the returned label. If you completed the write task in the JSON Relational Duality lab, Tutoring Appointment now has a second request in `OML_DEMAND_TRAINING_V`; its model result can differ from a fresh workshop. The final response should still consider capacity, student context, and the service evidence from earlier labs.
 

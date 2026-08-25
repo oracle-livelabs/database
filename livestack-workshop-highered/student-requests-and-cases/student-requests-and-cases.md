@@ -60,11 +60,11 @@ Estimated Time: **25 minutes**
     </copy>
     ~~~
 
-Expected output: Request Document Capability
+    Expected output: Request Document Capability
 
-| View Name | Allow Insert | Allow Update | Allow Delete |
-| --- | --- | --- | --- |
-| ORDERS\_DV | false | true | false |
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | ORDERS\_DV | false | true | false |
 
 ## Task 2: Read a request as JSON
 
@@ -80,11 +80,11 @@ Expected output: Request Document Capability
     </copy>
     ~~~
 
-Expected output: Request Document Excerpt
+    Expected output: Request Document Excerpt
 
-| Request Document |
-| --- |
-| { "_id" : 1001, "studentId" : 101, "requestStatus" : "OPEN", "demandScore" : 92, "services" : [ { "serviceItemId" : 1, "serviceName" : "First-Year Advising" } ] } |
+    | Request Document |
+    | --- |
+    | { "_id" : 1001, "studentId" : 101, "requestStatus" : "OPEN", "demandScore" : 92, "services" : [ { "serviceItemId" : 1, "serviceName" : "First-Year Advising" } ] } |
 
     The document is not a second request record. It is another governed representation of the same rows that the command-center lab queried with SQL.
 

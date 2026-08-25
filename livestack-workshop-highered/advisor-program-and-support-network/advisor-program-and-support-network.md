@@ -66,13 +66,13 @@ Estimated Time: **12 minutes**
     </copy>
     ~~~
 
-Expected output: Support Network Reach
+    Expected output: Support Network Reach
 
-| Display Name | Advocate Focus | Advocate Score | Direct Connections |
-| --- | --- | ---: | ---: |
-| Maya Torres | First-generation student support | 94 | 2 |
-| Alex Rivera | Academic planning | 89 | 2 |
-| Sam Brooks | Peer tutoring | 84 | 2 |
+    | Display Name | Advocate Focus | Advocate Score | Direct Connections |
+    | --- | --- | ---: | ---: |
+    | Maya Torres | First-generation student support | 94 | 2 |
+    | Alex Rivera | Academic planning | 89 | 2 |
+    | Sam Brooks | Peer tutoring | 84 | 2 |
 
 ## Task 2: Traverse a program-support path
 
@@ -100,12 +100,12 @@ Expected output: Support Network Reach
     </copy>
     ~~~
 
-Expected output: Program Support Relationships
+    Expected output: Program Support Relationships
 
-| Advocate | Academic Program | Relationship Type |
-| --- | --- | --- |
-| Maya Torres | Student Success Office | advocate |
-| Alex Rivera | College of Engineering | partner |
+    | Advocate | Academic Program | Relationship Type |
+    | --- | --- | --- |
+    | Maya Torres | Student Success Office | advocate |
+    | Alex Rivera | College of Engineering | partner |
 
     Graph evidence makes a relationship visible without another data copy. A team can combine it with program ownership and service demand before planning outreach.
 

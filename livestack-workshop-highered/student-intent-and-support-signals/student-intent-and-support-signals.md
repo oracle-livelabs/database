@@ -57,11 +57,11 @@ Estimated Time: **12 minutes**
     </copy>
     ~~~
 
-Expected output: Vector Index
+    Expected output: Vector Index
 
-| Index Name | Index Type |
-| --- | --- |
-| IDX\_PRODUCT\_VEC | VECTOR |
+    | Index Name | Index Type |
+    | --- | --- |
+    | IDX\_PRODUCT\_VEC | VECTOR |
 
 ## Task 2: Match a support need to services
 
@@ -98,13 +98,13 @@ Expected output: Vector Index
     </copy>
     ~~~
 
-Expected output: Service Matches
+    Expected output: Service Matches
 
-| Service Name | Academic Program | Similarity |
-| --- | --- | ---: |
-| First-Year Advising | Student Success Office | Varies slightly by model environment |
-| Tutoring Appointment | Student Success Office | Varies slightly by model environment |
-| Academic Planning Appointment | College of Engineering | Varies slightly by model environment |
+    | Service Name | Academic Program | Similarity |
+    | --- | --- | ---: |
+    | First-Year Advising | Student Success Office | Varies slightly by model environment |
+    | Tutoring Appointment | Student Success Office | Varies slightly by model environment |
+    | Academic Planning Appointment | College of Engineering | Varies slightly by model environment |
 
     The names and order should be meaningful to a support team. Similarity can vary slightly by model environment, so use it to rank candidates and retain human review of the final support response.
 

@@ -56,12 +56,12 @@ Estimated Time: **12 minutes**
     </copy>
     ~~~
 
-Expected output: Request Queue Summary
+    Expected output: Request Queue Summary
 
-| Request Status | Request Count | Average Demand Score |
-| --- | ---: | ---: |
-| OPEN | 3 | 81.7 |
-| IN_PROGRESS | 2 | 62.5 |
+    | Request Status | Request Count | Average Demand Score |
+    | --- | ---: | ---: |
+    | OPEN | 3 | 81.7 |
+    | IN_PROGRESS | 2 | 62.5 |
 
     The summary identifies where staff should begin. A higher demand score does not decide an intervention; it helps the team prioritize review.
 
@@ -89,13 +89,13 @@ Expected output: Request Queue Summary
     </copy>
     ~~~
 
-Expected output: High-Demand Service Requests
+    Expected output: High-Demand Service Requests
 
-| Student | Service Name | Request Status | Demand Score |
-| --- | --- | --- | ---: |
-| Maya Chen | First-Year Advising | OPEN | 92 |
-| Jordan Lee | Financial Aid Navigation | OPEN | 84 |
-| Priya Shah | Tutoring Appointment | IN_PROGRESS | 78 |
+    | Student | Service Name | Request Status | Demand Score |
+    | --- | --- | --- | ---: |
+    | Maya Chen | First-Year Advising | OPEN | 92 |
+    | Jordan Lee | Financial Aid Navigation | OPEN | 84 |
+    | Priya Shah | Tutoring Appointment | IN_PROGRESS | 78 |
 
     Direct SQL makes a command-center metric reviewable. A larger production dashboard may use an index and summary view. This lab uses direct SQL to keep the evidence transparent.
 
