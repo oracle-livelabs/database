@@ -16,7 +16,7 @@ Estimated Lab Time: 7 minutes
 
 ## Task 1: Orders as Native Documents
 
-1. First, start the embedding model loading — Lab 8 needs it, and doing it now means it is ready by the time you get there. In the **SQL worksheet**, paste this and run it as a script (also in `scripts/06_model_bg_reload.sql`).
+1. First, start the embedding model loading — Lab 8 needs it, and doing it now means it is ready by the time you get there. In the **SQL worksheet**, paste this and run it as a script.
 
     It downloads Oracle's augmented MiniLM ONNX model directly into the database and loads it as `MENU_MODEL`. Nothing is downloaded to your laptop, and no embedding service or API key is involved. If your environment already has the model, it says so and does nothing.
 
@@ -66,56 +66,158 @@ Estimated Lab Time: 7 minutes
 
     Quoted lowercase again — the house convention from Lab 4, so the name you read here is the name you type in mongosh. (Oracle's case-alias synonym means `db.orders` would find an unquoted `ORDERS` too.)
 
-3. In **mongosh**, seed 40 orders — ten customers, four orders each. They are built deterministically, so every attendee gets the same graph, and line items snapshot the current 1499 price.
+3. In **mongosh**, seed 40 orders — ten customers, four orders each. They are built deterministically, so every attendee gets the same graph, and line items snapshot the catalog price at the moment of sale.
 
-    Notice the shape of the data: customers belong to **cuisine cohorts**. That is not decoration. `GRAPH_TABLE` finds co-orders through a shared *customer*, not a shared order — so if every customer ordered a bit of everything, "people who ordered X also ordered Y" would collapse into "Y is the most popular item on the menu." Diners have habits. Model them, or the graph has nothing to say. Paste the whole block (also in `scripts/06_orders_seed.mongo.js`):
+    Notice the shape of the data: customers belong to **ordering cohorts**, and each cohort only orders at locations that actually sell its items. That is not decoration. `GRAPH_TABLE` finds co-orders through a shared *customer*, not a shared order — so if every customer ordered a bit of everything, "people who ordered X also ordered Y" would collapse into "Y is the most popular item on the menu." Diners have habits. Model them, or the graph has nothing to say. Paste the whole block:
 
     ```
     <copy>
-    const MENU = {
-      1000: { name: "Classic Cheeseburger",   price: 1499 },
-      1002: { name: "French Fries",           price: 499  },
-      1003: { name: "Garden Salad",           price: 899  },
-      2001: { name: "Szechuan Tofu Stir-Fry", price: 1199 },
-      2002: { name: "Beef Chow Fun",          price: 1399 },
-      3001: { name: "Carnitas Taco Plate",    price: 1099 }
+    const CATALOG = {
+      "1000": {
+        "name": "Classic Cheeseburger",
+        "price": 12.99
+      },
+      "1001": {
+        "name": "Bacon Double Stack",
+        "price": 15.99
+      },
+      "1002": {
+        "name": "French Fries",
+        "price": 4.99
+      },
+      "1003": {
+        "name": "Garden Salad",
+        "price": 8.99
+      },
+      "1004": {
+        "name": "Black Bean Chipotle Burger",
+        "price": 11.99
+      },
+      "1005": {
+        "name": "Buffalo Chicken Sandwich",
+        "price": 13.49
+      },
+      "1006": {
+        "name": "Chocolate Malt Shake",
+        "price": 5.99
+      }
     };
-
     const COHORTS = [
-      { name: "noodle", customers: ["c_1", "c_2", "c_3"],
-        baskets: [[2001, 2002], [2001, 2002], [2001, 2002], [2002, 1003]] },
-      { name: "burger", customers: ["c_4", "c_5", "c_6", "c_7"],
-        baskets: [[1000, 1002], [1000, 1002], [1000, 1002], [1000, 1003]] },
-      { name: "taco",   customers: ["c_8", "c_9", "c_10"],
-        baskets: [[3001, 1002], [3001, 1002], [3001, 1003], [3001, 1002]] }
+      {
+        "name": "classic",
+        "customers": [
+          "c_1",
+          "c_2",
+          "c_3",
+          "c_4"
+        ],
+        "stores": [
+          "s_100",
+          "s_101",
+          "s_102",
+          "s_104"
+        ],
+        "baskets": [
+          [
+            1000,
+            1002
+          ],
+          [
+            1000,
+            1002
+          ],
+          [
+            1000,
+            1002
+          ],
+          [
+            1000,
+            1003
+          ]
+        ]
+      },
+      {
+        "name": "veggie",
+        "customers": [
+          "c_5",
+          "c_6",
+          "c_7"
+        ],
+        "stores": [
+          "s_101",
+          "s_103"
+        ],
+        "baskets": [
+          [
+            1004,
+            1003
+          ],
+          [
+            1004,
+            1003
+          ],
+          [
+            1004,
+            1003
+          ],
+          [
+            1004,
+            1002
+          ]
+        ]
+      },
+      {
+        "name": "indulgent",
+        "customers": [
+          "c_8",
+          "c_9",
+          "c_10"
+        ],
+        "stores": [
+          "s_100",
+          "s_101"
+        ],
+        "baskets": [
+          [
+            1001,
+            1006
+          ],
+          [
+            1001,
+            1006
+          ],
+          [
+            1001,
+            1006
+          ],
+          [
+            1001,
+            1002
+          ]
+        ]
+      }
     ];
 
-    const ORDERS_TOTAL = 40;
     const orders = [];
     let n = 0;
-    for (const cohort of COHORTS) {
-      for (const customer of cohort.customers) {
-        for (const basket of cohort.baskets) {
+    for (const co of COHORTS) {
+      co.customers.forEach((cust, ci) => {
+        co.baskets.forEach((basket, bi) => {
           n += 1;
-          const items = basket.map(id => ({
-            item_id: id, name: MENU[id].name, price: MENU[id].price
-          }));
+          const store = co.stores[(ci + bi) % co.stores.length];
+          const items = basket.map(id => ({ item_id: id, name: CATALOG[id].name, price: CATALOG[id].price }));
           orders.push({
-            _id: "ord_" + (8000 + n),
-            customer_id: customer,
-            store_id: "s_10" + ((n - 1) % 5),
-            cohort: cohort.name,
-            status: "closed",
+            _id: "ord_" + (8000 + n), customer_id: cust, store_id: store,
+            cohort: co.name, status: "closed",
             opened_at: "2026-07-20T12:" + String(n).padStart(2, "0") + ":00Z",
-            items: items,
-            total: items.reduce((s, i) => s + i.price, 0)
+            items: items, total: items.reduce((s, i) => s + i.price, 0)
           });
-        }
-      }
+        });
+      });
     }
-    db.orders.deleteMany({});
+    try { db.orders.deleteMany({}); } catch (e) { /* first run: nothing to clear */ }
     db.orders.insertMany(orders);
-    print("orders inserted: " + db.orders.countDocuments({}) + " (of " + ORDERS_TOTAL + ")");
+    print("orders inserted: " + db.orders.countDocuments({}));
     </copy>
     ```
 
@@ -133,7 +235,7 @@ Estimated Lab Time: 7 minutes
 
 ## Task 2: Project the Graph
 
-1. In the **SQL worksheet**, paste this and run it as a script (also in `scripts/06_graph.sql`). It flattens the collection into three graph tables — `ord` (order header), `customer` (distinct customers), and `order_item` (line items, with a `line_no` so duplicate items stay unique) — then declares the graph over them:
+1. In the **SQL worksheet**, paste this and run it as a script. It flattens the collection into three graph tables — `ord` (order header), `customer` (distinct customers), and `order_item` (line items, with a `line_no` so duplicate items stay unique) — then declares the graph over them:
 
     ```
     <copy>
@@ -141,29 +243,29 @@ Estimated Lab Time: 7 minutes
     DROP TABLE IF EXISTS order_item CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS ord        CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS customer   CASCADE CONSTRAINTS;
-
     CREATE TABLE ord AS
-    SELECT o.data."_id".string()         AS order_id,
-           o.data.customer_id.string()   AS customer_id,
-           o.data.store_id.string()      AS store_id
-    FROM   "orders" o;
-
+    SELECT o.data."_id".string() AS order_id,
+           o.data.customer_id.string() AS customer_id,
+           o.data.store_id.string()    AS store_id
+    FROM "orders" o;
+    ALTER TABLE ord ADD CONSTRAINT ord_pk PRIMARY KEY (order_id);
     CREATE TABLE customer AS
-    SELECT DISTINCT o.data.customer_id.string() AS customer_id
-    FROM   "orders" o;
-
+    SELECT DISTINCT o.data.customer_id.string() AS customer_id FROM "orders" o;
+    ALTER TABLE customer ADD CONSTRAINT customer_pk PRIMARY KEY (customer_id);
     CREATE TABLE order_item AS
     SELECT jt.order_id, jt.line_no, jt.item_id, jt.item_name
-    FROM   "orders" o,
-           JSON_TABLE(o.data, '$'
+    FROM "orders" o,
+         JSON_TABLE(o.data, '$'
+           COLUMNS (
+             order_id VARCHAR2(20) PATH '$._id',
+             NESTED PATH '$.items[*]'
              COLUMNS (
-               order_id VARCHAR2(20) PATH '$._id',
-               NESTED PATH '$.items[*]'
-               COLUMNS (
-                 line_no   FOR ORDINALITY,
-                 item_id   NUMBER        PATH '$.item_id',
-                 item_name VARCHAR2(100) PATH '$.name'))) jt;
-
+               line_no   FOR ORDINALITY,
+               item_id   NUMBER        PATH '$.item_id',
+               item_name VARCHAR2(100) PATH '$.name'))) jt;
+    ALTER TABLE order_item ADD CONSTRAINT order_item_pk PRIMARY KEY (order_id, line_no);
+    CREATE INDEX order_item_item_ix ON order_item (item_id);
+    CREATE INDEX ord_customer_ix    ON ord (customer_id);
     CREATE PROPERTY GRAPH order_graph
       VERTEX TABLES (
         customer KEY (customer_id),
@@ -207,7 +309,7 @@ Estimated Lab Time: 7 minutes
 
     ![Co-order result: French Fries 48, Garden Salad 16](images/coorder-result.png " ")
 
-    That short result list is the cohort design paying off: the only people who order a cheeseburger are the burger crowd, so the only things that can come back are what the burger crowd eats. A graph over undifferentiated customers would have returned the whole menu in popularity order.
+    That short result list is the cohort design paying off: the only people who order the core burger are the classic crowd, so the only things that can come back are what that crowd eats. A graph over undifferentiated customers would have returned the whole menu in popularity order.
 
     ![The MATCH arrows are just joins — each element becomes a row source in your plan](images/match-to-plan.svg "MATCH to plan")
 
@@ -215,9 +317,9 @@ Estimated Lab Time: 7 minutes
 
 ### Stretch (fast finishers): predict, then run
 
-Before you run it — which item co-orders most with the Szechuan Tofu Stir-Fry (`item_id 2001`)? Change `1000` to `2001` in the MATCH and check your prediction.
+Before you run it — which item co-orders most with the Black Bean Chipotle Burger (`item_id 1004`)? Change `1000` to `1004` in the MATCH and check your prediction.
 
-**What you should see:** **Beef Chow Fun with 36**, then Garden Salad with 9. The cheeseburger does not appear at all — the noodle crowd and the burger crowd are different people, and the graph knows it.
+**What you should see:** **Garden Salad with 36**, then French Fries with 12. The cheeseburger does not appear at all — the veggie crowd and the classic crowd are different people, and the graph knows it.
 
 ## Learn More
 
