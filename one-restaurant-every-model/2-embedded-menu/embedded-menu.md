@@ -14,6 +14,10 @@ Estimated Lab Time: 8 minutes
 * Run the point read and projected read that make the document model feel great
 * Record the three-dials bet you just placed
 
+### Prerequisites
+
+* Completed **Lab 1** — `mongosh` connected to your database, and the SQL worksheet open
+
 ## Task 1: Seed the Franchise
 
 1. In **mongosh**, paste the seed. Five stores; note that **all five sell the Classic Cheeseburger (`item_id: 1000`)** — chain menu, chain item. That detail becomes load-bearing in Lab 3.
@@ -82,6 +86,8 @@ The embedded model is the *correct* choice for these settings. Every document pa
 ## Learn More
 
 * [Modeling for the Access Pattern (Ask Tom series)](https://www.youtube.com/watch?v=uJdUnB_cb1c)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform

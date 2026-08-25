@@ -229,6 +229,8 @@ In this lab, you will:
 * [Oracle Database API for MongoDB — connection strings](https://docs.oracle.com/en/database/oracle/mongodb-api/mgapi/overview-oracle-database-api-mongodb.html)
 * [MongoDB Shell downloads](https://www.mongodb.com/try/download/shell)
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
 * **Last Updated By/Date** - Hermann Baer, August 2026

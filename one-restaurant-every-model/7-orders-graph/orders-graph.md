@@ -14,6 +14,10 @@ Estimated Lab Time: 7 minutes
 * Flatten the order documents into graph tables with `JSON_TABLE`
 * Create a property graph and run a co-order recommendation with `GRAPH_TABLE ... MATCH`
 
+### Prerequisites
+
+* Completed **Lab 5** — the canonical schema and duality view in place
+
 ## Task 1: Orders as Native Documents
 
 1. First, start the embedding model loading — Lab 8 needs it, and doing it now means it is ready by the time you get there. In the **SQL worksheet**, paste this and run it as a script.
@@ -324,6 +328,8 @@ Before you run it — which item co-orders most with the Black Bean Chipotle Bur
 ## Learn More
 
 * [SQL/PGQ property graphs in Oracle Database](https://docs.oracle.com/en/database/oracle/property-graph/)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform

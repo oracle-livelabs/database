@@ -49,6 +49,8 @@ Two things we do on purpose. First, in Lab 2 we plant one deliberately drifted d
 * [JSON Relational Duality documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/)
 * [Oracle Database API for MongoDB](https://docs.oracle.com/en/database/oracle/mongodb-api/)
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
 * **Contributors** - Oracle AI World lab working session team

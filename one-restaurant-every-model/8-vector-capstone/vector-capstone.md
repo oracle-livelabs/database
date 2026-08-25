@@ -15,6 +15,10 @@ Estimated Lab Time: 9 minutes
 * Prove same-commit freshness with an insert-then-search
 * Run the graph + relational + vector capstone and read its single `EXPLAIN PLAN` tree
 
+### Prerequisites
+
+* Completed **Lab 7** — the order graph built and `MENU_MODEL` loaded
+
 ## Task 1: Embed the Menu in Place
 
 1. In the **SQL worksheet** — verify the model, add the column, embed:

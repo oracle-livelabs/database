@@ -14,6 +14,10 @@ Estimated Lab Time: 11 minutes
 * Prove one enforcement domain: the same `ORA-02290` through mongosh that SQL got in Lab 4, and a catalog write refused outright
 * Read the same document through REST — the third door
 
+### Prerequisites
+
+* Completed **Lab 4** — the canonical schema created and the documents shredded into it
+
 ## Task 1: Create the Views (SQL — one paste)
 
 1. In the **SQL worksheet**, paste this and run it as a script. Duality views are **read-only by default**; you grant writes per table, which *is* the governance posture. Read the annotations as the franchise rule: `menu_item` is `@update` — the location owns its price and display name — while the `item` catalog block is `@unnest @noupdate`, so its columns appear as ordinary fields in the document but **cannot be written through it**. `@unnest` is what keeps the document the same shape you built by hand in Lab 2.
@@ -213,6 +217,8 @@ The deck's *read-only* POS menu view: `COALESCE` override resolution and a time-
 ## Learn More
 
 * [JSON Relational Duality Views — annotations and updatability](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform

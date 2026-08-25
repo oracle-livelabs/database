@@ -15,6 +15,10 @@ Estimated Lab Time: 10 minutes
 * Shred the documents into canonical rows with `JSON_TABLE`
 * Replay corporate's change as a one-row `UPDATE` and re-run analytics as a five-line join
 
+### Prerequisites
+
+* Completed **Lab 3** — corporate's price change applied, and the drifted copy still in place
+
 ## Task 1: The Pivot — Your Collection Is a Table
 
 1. In the **SQL worksheet**, run:
@@ -293,6 +297,8 @@ But notice what you gave up: Lab 2's one-read application object is gone. Lab 5 
 * [Think Relational, Stay JSON: Oracle's Duality View Revolution](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4223)
 * [JSON_TABLE and SQL/JSON](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/)
 * [OSON, the open binary JSON spec](https://osonspec.org/)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform

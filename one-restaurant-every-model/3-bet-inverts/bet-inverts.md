@@ -12,6 +12,10 @@ Estimated Lab Time: 6 minutes
 * Run cross-store analytics as an aggregation pipeline and feel the fan-out
 * Discover silent type drift — and understand why the engine had no opinion
 
+### Prerequisites
+
+* Completed **Lab 2** — the five store documents seeded through the MongoDB API
+
 ## Task 1: One Number, Fleet-Wide Rewrite
 
 1. In **mongosh**, apply corporate's change to the price for all stores:
@@ -136,6 +140,8 @@ print("restored fleet: " + db.stores.countDocuments({}) + " stores, price back t
 
 * [DocBench — OSON vs BSON field-traversal harness (open source)](https://github.com/oracle-samples)
 * [sbe-cte-bench — 14 reproducible aggregation scenarios](https://github.com/oracle-samples)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
