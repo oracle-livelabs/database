@@ -231,7 +231,7 @@ Estimated Lab Time: 11 minutes
     </copy>
     ```
 
-    **What you should see:** the final state check returns `ITEMS: 6  PRICE_1000: 1399  OVERRIDES: 1`. Five embedded copies of the cheeseburger became **one row** — the drifted string copy was normalized on conversion and lost the argument to `MAX(price)`.
+    **What you should see:** the final state check returns `ITEMS: 7  OFFERINGS: 22  BASE_PRICE_1000: 1399`. Five embedded copies of the cheeseburger collapsed to **one catalog row**, and the twenty-two things the five locations actually sell became twenty-two junction rows. Corporate's name and price are the values held by a **majority** of the locations selling that item — not the first row seen — so one location's local rename can never become the chain's.
 
 ## Task 4: Replay Corporate's Change — and the Analytics Ask
 
@@ -250,25 +250,28 @@ Estimated Lab Time: 11 minutes
 
     ```
     <copy>
-    SELECT s.merchant_name, m.menu_name, c.category_name, i.item_name, i.price
-    FROM   item i
-      JOIN category c ON c.category_id = i.category_id
-      JOIN menu m     ON m.menu_id     = c.menu_id
-      JOIN store s    ON s.store_id    = m.store_id
-    WHERE  i.active
-    ORDER  BY i.price DESC
+    SELECT s.merchant_name, m.menu_name, c.category_name,
+           COALESCE(mi.display_name, i.item_name)  AS item_name,
+           COALESCE(mi.price,        i.base_price) AS price
+    FROM   menu_item mi
+      JOIN item     i ON i.item_id     = mi.item_id
+      JOIN menu     m ON m.menu_id     = mi.menu_id
+      JOIN category c ON c.category_id = mi.category_id
+      JOIN store    s ON s.store_id    = m.store_id
+    WHERE  COALESCE(mi.active, i.active)
+    ORDER  BY price DESC
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-    **What you should see:** the top-10 list — with the cheeseburger at 1399 everywhere, because there is only one price to be wrong.
+    **What you should see:** the top-10 list — the two Bacon Double Stacks at 1599, then the Airport's premium 1499 rows, then the cheeseburger at 1399 wherever it is inherited. Two details worth pausing on: Downtown's row reads **Lunch Classic**, its own name for item 1000, and the Airport's reads 1499 while everyone else reads 1399. Both come from the same `COALESCE` — a location's own value if it set one, corporate's otherwise. There is still only one corporate price that can ever be wrong.
 
 3. Try to break it. The engine now has an opinion:
 
     ```
     <copy>
-    INSERT INTO item (item_id, category_id, item_name, price)
-    VALUES (9999, 100, 'Free Burger', -1);
+    INSERT INTO item (item_id, item_name, base_price)
+    VALUES (9999, 'Free Burger', -1);
     </copy>
     ```
 
