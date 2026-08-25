@@ -4,7 +4,9 @@
 
 Monday morning starts with a demand spike at **Seer Sporting Goods**. Trail-running products are trending, customers expect fast fulfillment, and merchandising, operations, and analytics teams need the same answer before the day gets away from them. In this workshop, you follow the evidence in SQL: confirm the data foundation, inspect the command center, open the order record, interpret demand signals, follow creator influence, choose fulfillment options, and prioritize action with model output.
 
-The business pressure is familiar: demand changes quickly, customers expect fast service, and different teams need the same answer without reconciling separate systems. **Oracle AI Database 26ai** and **Autonomous Database** keep relational rows, JSON documents, vectors, graph relationships, spatial data, and in-database analytics connected in one governed environment. The application shows the retail experience; each lab shows the SQL evidence behind it.
+The business pressure is familiar: demand changes quickly, customers expect fast service, and different teams need the same answer without reconciling separate systems. **Oracle AI Database 26ai** and **Autonomous Database** keep relational rows, JSON documents, vectors, graph relationships, spatial data, and in-database analytics connected in one governed environment. The companion Retail LiveStack demo shows the application experience; each lab shows how Oracle AI Database 26ai produces the underlying result from the same governed demo data.
+
+You will also complete short interactive investigations. After you run a baseline query, you will change one business question, compare the evidence, and make a review recommendation. Complete solutions stay inside collapsed **Challenge answer** sections so you can try each change first. Each feature lab ends with a **Next Steps** link to a capability-specific LiveLabs workshop when you want a deeper technical exercise.
 
 ![Workshop overview](images/retail-workshop-intro-journey.svg " ")
 
@@ -29,13 +31,14 @@ In this workshop, you will:
 
 - Inspect the retail schema objects that support the application workflow.
 - Trace command-center metrics to orders, products, and categories.
-- Query order data through JSON Relational Duality and relational SQL.
+- Create and update an order through JSON Relational Duality, then verify the same relational rows.
 - Use AI Vector Search to match natural-language demand signals to products.
 - Use Property Graph to follow creator and brand relationships.
 - Use Oracle Spatial to combine location and inventory for fulfillment decisions.
 - Use Oracle Machine Learning model outputs from SQL.
+- Change selected business questions and use the resulting evidence to make review decisions.
 
-Estimated Workshop Time: **90 minutes**
+Estimated Workshop Time: **95 minutes**
 
 ### Business Scenario
 
