@@ -1,0 +1,71 @@
+{
+  "workshoptitle": "Build Python Vector Applications with Autonomous AI Vector Database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Workshop overview and objectives.",
+      "type": "livelabs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Provision an Autonomous AI Vector Database",
+      "description": "Create or identify the Vector Database instance and user.",
+      "type": "tenancy",
+      "filename": "../../01-provision-vector-database/01-provision-vector-database.md"
+    },
+    {
+      "title": "Lab 2: Configure a Python Client",
+      "description": "Install the SDK and verify Python connectivity.",
+      "type": "tenancy",
+      "filename": "../../02-configure-python-client/02-configure-python-client.md"
+    },
+    {
+      "title": "Lab 3: Understand Models, Records, and Vector Tables",
+      "description": "Create integrated embedding and bring-your-own-vector tables.",
+      "type": "tenancy",
+      "filename": "../../03-vector-database-foundations/03-vector-database-foundations.md"
+    },
+    {
+      "title": "Lab 4: Create Embeddings and Load Text",
+      "description": "Load sample records and generate embeddings.",
+      "type": "tenancy",
+      "filename": "../../04-create-embeddings/04-create-embeddings.md"
+    },
+    {
+      "title": "Lab 5: Run Baseline Semantic Search",
+      "description": "Search by meaning and filter by metadata.",
+      "type": "tenancy",
+      "filename": "../../05-exhaustive-semantic-search/05-exhaustive-semantic-search.md"
+    },
+    {
+      "title": "Lab 6: Create Indexes for Approximate Search",
+      "description": "Create indexes and compare search settings.",
+      "type": "tenancy",
+      "filename": "../../06-approximate-search-indexes/06-approximate-search-indexes.md"
+    },
+    {
+      "title": "Lab 7: Use Bring-Your-Own Vectors and Metadata Filters",
+      "description": "Map image search to explicit vectors and metadata filters.",
+      "type": "tenancy",
+      "filename": "../../07-multimodal-and-metadata-search/07-multimodal-and-metadata-search.md"
+    },
+    {
+      "title": "Lab 8: Build a Python Search API",
+      "description": "Replace the UI demo with a reusable Python search boundary.",
+      "type": "tenancy",
+      "filename": "../../08-build-python-search-api/08-build-python-search-api.md"
+    },
+    {
+      "title": "Lab 9: Assemble a RAG Retrieval Flow",
+      "description": "Retrieve and package context for a RAG application.",
+      "type": "tenancy",
+      "filename": "../../09-rag-with-vector-database/09-rag-with-vector-database.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving live help.",
+      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
