@@ -207,6 +207,50 @@ Next, connect social-signal matches back to products so vector scores become rev
 
     Multiple rows in `POST_EMBEDDINGS` can point to social posts that mention the same product. Grouping keeps the result readable: one product row and the closest semantic distance from the social-post vectors.
 
+3. 🎯 **Interactive challenge: change the merchandising question.**
+
+    Starting with the signal search above, replace only `viral customer demand for trail running footwear` with `AllTerrain Hiking Boots sizing and trail grip`. Run your revised query. Which products enter, leave, or move within the top five, and which changed match deserves merchandising review?
+
+    <details>
+    <summary><strong>Challenge answer: business intent changes the evidence queue</strong></summary>
+
+    **Expected output: Hiking Boot Signal Matches**
+
+    The ranking and distances are dynamic. With the current workshop data, `AllTerrain Hiking Boots` moves from fifth to first, while `TrailGrip Hiker`, `Summit 65L Backpack`, and `WinterGrip Boot` enter the top five. The revised results favor hiking-footwear and trail-use evidence more strongly than the broader trail-running search.
+
+    > `AllTerrain Hiking Boots` is the strongest changed match in the current data: it moves from fifth to first. The revised phrase narrows the investigation from general trail-running demand to boot sizing and trail-grip concerns. Oracle AI Vector Search compares meaning while the vectors, source posts, product records, and governance remain in the same database. Use the ranking to prioritize human review, not as proof of demand.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT p.product_name AS "Product",
+           p.category AS "Category",
+           ROUND(MIN(VECTOR_DISTANCE(
+             se.embedding,
+             VECTOR_EMBEDDING(
+               ADMIN.ALL_MINILM_L12_V2
+               USING 'AllTerrain Hiking Boots sizing and trail grip' AS DATA
+             ),
+             COSINE
+           )), 4) AS "Best Distance"
+    FROM post_embeddings se
+    JOIN social_posts sp
+      ON sp.post_id = se.post_id
+    JOIN post_product_mentions ppm
+      ON ppm.post_id = sp.post_id
+    JOIN products p
+      ON p.product_id = ppm.product_id
+    GROUP BY p.product_name,
+             p.category
+    ORDER BY "Best Distance",
+             "Product"
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
     Next, you follow the creator relationships behind those signals to understand how campaign influence can move through a network.
 
 ## Next Steps
