@@ -62,8 +62,6 @@ Tiempo estimado del taller: **110 minutos**
 | Capacidad de la base de datos | Oracle AI Database 26ai proporciona la base común para datos, SQL, seguridad, IA y aplicaciones. |
 | Resultado | Seer Bank puede crear y revisar funciones financieras sin mover cada nuevo requisito a otro sistema de datos. |
 
-![Página de bienvenida de Seer Bank Finance LiveStack](images/seer-bank-welcome.png " ")
-
 ## Agradecimientos
 
 * **Autor** - Pat Shepherd, Senior Principal Database Product Manager

@@ -41,28 +41,28 @@ badge: images/livestack-retail-badge.png
     - It stores order screenshots as documents.
     - It removes SQL access to order data.
     - It requires a separate document database for every order.
-    > Duality views expose document-shaped JSON while the business data remains governed in relational tables.
+    > Duality views expose document-shaped JSON while permitted document writes update the same governed relational rows.
 
     Q: Why does AI Vector Search help with customer trend signals?
     - It searches only exact product names.
     - It replaces product rows with images.
     * It compares meaning through embeddings.
     - It calculates fulfillment mileage.
-    > Vector search can rank relevant products or signals even when the wording differs.
+    > Vector search can rank relevant products or signals even when the wording differs, and changing the business phrase can change the review queue.
 
     Q: What does `GRAPH_TABLE` return in the creator influence lab?
     - A static graph image for the dashboard.
     * Table-shaped rows from graph paths.
     - A file export from another graph engine.
     - Hidden scores without SQL output.
-    > `GRAPH_TABLE` lets you query graph paths and read the result as SQL rows.
+    > `GRAPH_TABLE` returns graph matches as SQL rows. When a query allows one- or two-hop paths, review the complete path and hop count before describing the relationship.
 
     Q: How does Oracle Spatial support fulfillment decisions?
     - It stores only map screenshots.
     - It trains the demand model.
     - It hides customer and center locations from planners.
     * It joins distance, location, and stock evidence.
-    > Spatial points and distance calculations can be joined to products, inventory, and customer evidence.
+    > Spatial points and distance calculations can be joined to products, on-hand inventory, and customer evidence. The nearest returned center with positive on-hand quantity is not automatically the best fulfillment choice.
 
     Q: What should you remember about OML prediction probability?
     * It is model confidence, not certainty.

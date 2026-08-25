@@ -3,30 +3,31 @@
 .bg{fill:#f7f6f2}.panel{fill:#fff;stroke:#d7d2ca;stroke-width:1.5}.title{font-family:Arial,sans-serif;font-size:25px;font-weight:700;fill:#161513}.sub{font-family:Arial,sans-serif;font-size:14px;fill:#4b4741}.head{font-family:Arial,sans-serif;font-size:16px;font-weight:700;fill:#312d2a}.item{font-family:Arial,sans-serif;font-size:13px;fill:#312d2a}.chip{fill:#eef4f2;stroke:#b9c9c2;stroke-width:1}.foot{font-family:Arial,sans-serif;font-size:15px;font-weight:700;fill:#fff}.accent{fill:#8f4235}.arrow{stroke:#8f4235;stroke-width:4;stroke-linecap:round}
 </style>
 <rect class="bg" width="900" height="360"/>
-<text x="42" y="42" class="title">JSON Duality Order Evidence</text>
-<text x="42" y="67" class="sub">Lab 3 shows one order as application JSON and governed relational rows.</text>
+<text x="42" y="42" class="title">JSON Duality Read/Write Order Flow</text>
+<text x="42" y="67" class="sub">Lab 3 writes one JSON order and verifies the same governed relational rows.</text>
 <rect x="42" y="104" width="250" height="185" rx="12" class="panel"/>
 <rect x="42" y="104" width="250" height="38" rx="12" fill="#8f4235"/>
-<text x="60" y="129" class="head" fill="#fff">JSON document</text>
+<text x="60" y="129" class="head" fill="#fff">Application document</text>
 <rect x="60" y="149" width="214" height="25" rx="6" class="chip"/>
-<text x="72" y="166" class="item">ORDERS_DV</text>
+<text x="72" y="166" class="item">ORDERS_DV read + write</text>
 <rect x="60" y="180" width="214" height="25" rx="6" class="chip"/>
-<text x="72" y="197" class="item">_id, customerId, status</text>
+<text x="72" y="197" class="item">Reserved order 900001</text>
 <rect x="60" y="211" width="214" height="25" rx="6" class="chip"/>
-<text x="72" y="228" class="item">items[] nested array</text>
+<text x="72" y="228" class="item">items[] nested line item</text>
 <rect x="60" y="242" width="214" height="25" rx="6" class="chip"/>
-<text x="72" y="259" class="item">JSON_SERIALIZE output</text>
+<text x="72" y="259" class="item">JSON_TRANSFORM status</text>
 <line x1="299" y1="196" x2="317" y2="196" class="arrow"/>
 <polygon points="321,196 309,188 309,204" class="accent"/>
+<polygon points="295,196 307,188 307,204" class="accent"/>
 <rect x="320" y="104" width="250" height="185" rx="12" class="panel"/>
 <rect x="320" y="104" width="250" height="38" rx="12" fill="#2f6f73"/>
 <text x="338" y="129" class="head" fill="#fff">Relational truth</text>
 <rect x="338" y="149" width="214" height="25" rx="6" class="chip"/>
-<text x="350" y="166" class="item">ORDERS header row</text>
+<text x="350" y="166" class="item">ORDERS status = confirmed</text>
 <rect x="338" y="180" width="214" height="25" rx="6" class="chip"/>
-<text x="350" y="197" class="item">ORDER_ITEMS line rows</text>
+<text x="350" y="197" class="item">ORDER_ITEMS line = 379.98</text>
 <rect x="338" y="211" width="214" height="25" rx="6" class="chip"/>
-<text x="350" y="228" class="item">SQL controls remain</text>
+<text x="350" y="228" class="item">Keys and constraints remain</text>
 <rect x="338" y="242" width="214" height="25" rx="6" class="chip"/>
 <text x="350" y="259" class="item">No copied document store</text>
 <line x1="577" y1="196" x2="595" y2="196" class="arrow"/>
@@ -35,13 +36,13 @@
 <rect x="598" y="104" width="250" height="38" rx="12" fill="#5b5f97"/>
 <text x="616" y="129" class="head" fill="#fff">Learner proof</text>
 <rect x="616" y="149" width="214" height="25" rx="6" class="chip"/>
-<text x="628" y="166" class="item">Query document order 1</text>
+<text x="628" y="166" class="item">Enable INSERT UPDATE</text>
 <rect x="616" y="180" width="214" height="25" rx="6" class="chip"/>
-<text x="628" y="197" class="item">Extract status and total</text>
+<text x="628" y="197" class="item">Insert JSON order 900001</text>
 <rect x="616" y="211" width="214" height="25" rx="6" class="chip"/>
-<text x="628" y="228" class="item">Compare first 5 orders</text>
+<text x="628" y="228" class="item">Verify relational rows</text>
 <rect x="616" y="242" width="214" height="25" rx="6" class="chip"/>
-<text x="628" y="259" class="item">Explain sync by design</text>
+<text x="628" y="259" class="item">Project JSON fields in SQL</text>
 <rect x="42" y="310" width="816" height="34" rx="9" class="accent"/>
-<text x="62" y="332" class="foot">The document is another governed view of the same order, not a separate copy.</text>
+<text x="62" y="332" class="foot">One JSON write updates governed rows; the next workshop run rebuilds the data.</text>
 </svg>

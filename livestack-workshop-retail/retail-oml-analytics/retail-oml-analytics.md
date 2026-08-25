@@ -141,7 +141,8 @@ Next, score demand surge rows so planners can compare predicted labels, confiden
     FROM oml_demand_training_v d
     JOIN products p
       ON p.product_id = d.product_id
-    ORDER BY "Surge Probability" DESC
+    ORDER BY "Surge Probability" DESC,
+             p.product_name
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
@@ -150,13 +151,66 @@ Next, score demand surge rows so planners can compare predicted labels, confiden
 
     | Product | Category | Actual Label | Predicted Label | Surge Probability | Posts | Units Sold |
     | --- | --- | --- | --- | ---: | ---: | ---: |
-    | RouteGuide AR Sport Glasses | Sports Wearables | SURGE | SURGE | 1 | 19 | 113 |
-    | ClipCoach Audio Pod | Sports Wearables | SURGE | SURGE | 1 | 20 | 98 |
-    | StormRunner Trail Shell | Athletic Apparel | SURGE | SURGE | 1 | 22 | 102 |
     | 4-Season Tent 3P | Outdoor | SURGE | SURGE | 1 | 17 | 106 |
-    | CoachMic USB Microphone | Training Audio | SURGE | SURGE | 1 | 22 | 89 |
+    | Adaptogen Recovery Powder | Recovery | SURGE | SURGE | 1 | 21 | 104 |
+    | AirGlide Runner | Footwear | SURGE | SURGE | 1 | 23 | 89 |
+    | AllTerrain Hiking Boots | Outdoor | SURGE | SURGE | 1 | 25 | 103 |
+    | Camp Chef Knife Set | Camp Cooking | SURGE | SURGE | 1 | 20 | 85 |
+
+    **Note:** Model probabilities can change when the workshop rebuilds the random-forest model. The product-name tie-breaker keeps rows with equal probabilities in a consistent order. The order committed in Lab 3 raises `StormRunner Trail Shell` from 102 to 104 units sold; if that product appears in your result, 104 is the expected current-run value.
 
 2. The model result is useful because it stays connected to product, signal, and sales context. A planner can inspect why a row was scored and decide what operational follow-up makes sense.
+
+3. 🎯 **Interactive challenge: surface model disagreements.**
+
+    Starting with the scoring query above, add a `WHERE` clause after the product join that keeps rows where `d.surge_label` differs from `PREDICTION(demand_surge_model USING *)`. Run your revised query. Which disagreement would you review first, and what product, signal, sales, or inventory context is still missing?
+
+    **Hint:** Start with the `SELECT` and `JOIN` from the scoring query above. A disagreement query generally selects the business columns and model result, filters to rows where two values differ, then sorts the results. In generic form, the pattern is:
+
+    ```sql
+    SELECT business_columns,
+           actual_label,
+           PREDICTION(model_name USING *) AS predicted_label,
+           prediction_score
+    FROM source_view
+    JOIN related_table
+      ON matching_key = matching_key
+    WHERE actual_label <> PREDICTION(model_name USING *)
+    ORDER BY prediction_score DESC
+    FETCH FIRST 5 ROWS ONLY;
+    ```
+
+    <details>
+    <summary><strong>Challenge answer: disagreement creates a review queue</strong></summary>
+
+    **Expected output: Demand Prediction Disagreements**
+
+    Every returned row has a different actual and predicted label. The specific products and probabilities can change when the model is rebuilt, so focus on the disagreement pattern and the evidence needed for review.
+
+    > Start with the first returned disagreement as a review candidate, then inspect its feature values and current operating context before drawing a conclusion. The probability measures model support for the requested class; it is not business severity or certainty. Oracle Machine Learning keeps the prediction beside the governed feature, product, signal, sales, and inventory data needed for human review.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT p.product_name AS "Product",
+           d.category AS "Category",
+           d.surge_label AS "Actual Label",
+           PREDICTION(demand_surge_model USING *) AS "Predicted Label",
+           ROUND(PREDICTION_PROBABILITY(demand_surge_model, 'SURGE' USING *), 4) AS "Surge Probability",
+           d.total_posts AS "Posts",
+           d.units_sold AS "Units Sold"
+    FROM oml_demand_training_v d
+    JOIN products p
+      ON p.product_id = d.product_id
+    WHERE d.surge_label <> PREDICTION(demand_surge_model USING *)
+    ORDER BY "Surge Probability" DESC,
+             p.product_name
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
 
     This completes the retail decision path: you started with the data foundation, moved through operating evidence and customer signals, checked relationships and fulfillment options, then used model output to prioritize action.
 
