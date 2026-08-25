@@ -304,9 +304,9 @@ In this task, you create two database-backed datasets, add them to a map, filter
 
     ![Set the distance analysis to 250000 meters](images/spatial-analysis-distance.png " ")
 
-16. Run the analysis.
+16. Rename the analysis layer to `Centers within 250,000 meters of New York Metro`.
 
-17. Rename the analysis layer to `Centers within 250,000 meters of New York Metro`.
+17. Run the analysis.
 
 18. Hide the original `FULFILLMENT_CENTERS` layer if needed so the analysis results are easier to see.
 

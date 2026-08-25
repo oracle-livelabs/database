@@ -1,6 +1,6 @@
 # LiveLabs Workshop Validation – livestack-workshop-finance
 
-Generated on 2026-08-25T17:44:23.749600+00:00
+Generated on 2026-08-25T22:19:08.508491+00:00
 
 ## Structure Check
 - ✅ Required folders and workshop variants present.
@@ -16,9 +16,10 @@ Generated on 2026-08-25T17:44:23.749600+00:00
 - ✅ Manifest structure looks good.
 
 ## Markdown File Ratings
-### final-quiz/final-quiz.md
+### risk-signal-vector-search/risk-signal-vector-search.md
 - ✅ LiveLabs formatting checks passed.
-- ✍️ Lanham score: 2/5
-  - 8 sentence(s) exceed 20 words; tighten wording.
-  - Passive voice detected in 8 instance(s).
+- ✍️ Lanham score: 1/5
+  - 31 sentence(s) exceed 20 words; tighten wording.
+  - Passive voice detected in 3 instance(s).
+  - Contractions found; expand them per Lanham rules.
   - Heavy nominalization usage; prefer vivid verbs.

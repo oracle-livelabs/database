@@ -1,7 +1,7 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n## Ask Governed Finance Questions with Select AI\n\n### The Seer Bank Story\n\nSeer Bank analysts have followed one risk story across the workshop. They inspected the data foundation, reviewed dashboard evidence, opened transaction documents, searched risk language, traced fraud relationships, checked service coverage, and scored predictive models.\n\nNow the team asks the next question in plain language: which product categories and risk signals deserve attention first?\n\nA general AI chat response can explain finance risk. Seer Bank needs more than a general answer. The analyst needs approved database evidence. The reviewer needs the generated SQL behind the answer.\n\n### What You'll Learn\n\nIn this notebook, you will compare three Select AI actions:\n\n1. **CHAT** for general model knowledge.\n2. **SHOWSQL** to inspect SQL generated from a natural-language question.\n3. **NARRATE** to query approved Seer Bank objects and explain the result.\n\nYou will set the `genai` object list so Select AI knows which workshop objects it can read. Then you will verify the answer with stable SQL evidence.\n\n**Estimated Time:** 18 minutes",
+      "text": "%md\n## Ask Governed Finance Questions with Select AI\n\n### The Business Problem\n\nSeer Bank analysts need quick answers, but they cannot accept guesses. A risk answer must come from approved database evidence, and the reviewer must be able to inspect the SQL behind it.\n\nIn earlier labs, you explored the same operating story through SQL, JSON, vector search, graph analysis, spatial analysis, and machine learning. Now you ask a plain-language question over that evidence.\n\nYou will use AI-ready views so Select AI can answer questions from clear, approved Seer Bank evidence.\n\n### What You'll Learn\n\nThis lab shows how to use Select AI in a governed way.\n\n**What you'll build:** two AI-ready views over Seer Bank risk evidence.\n\n**What you'll practice:** setting the `genai` profile, limiting the object list, checking SQL evidence, using `SHOWSQL`, using `NARRATE`, and checking the current action count.\n\n**Estimated Time:** 18 minutes\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -15,138 +15,18 @@
         },
         "editorHide": true
       },
-      "results": {}
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask Governed Finance Questions with Select AI</h2>\n\n<h3>The Business Problem</h3>\n\n<p>Seer Bank analysts need quick answers, but they cannot accept guesses. A risk answer must come from approved database evidence, and the reviewer must be able to inspect the SQL behind it.</p>\n\n<p>In earlier labs, you explored the same operating story through SQL, JSON, vector search, graph analysis, spatial analysis, and machine learning. Now you ask a plain-language question over that evidence.</p>\n\n<p>You will use AI-ready views so Select AI can answer questions from clear, approved Seer Bank evidence.</p>\n\n<h3>What You&#x27;ll Learn</h3>\n\n<p>This lab shows how to use Select AI in a governed way.</p>\n\n<p><strong>What you&#x27;ll build:</strong> two AI-ready views over Seer Bank risk evidence.</p>\n\n<p><strong>What you&#x27;ll practice:</strong> setting the <code>genai</code> profile, limiting the object list, checking SQL evidence, using <code>SHOWSQL</code>, using <code>NARRATE</code>, and checking the current action count.</p>\n\n<p><strong>Estimated Time:</strong> 18 minutes</p>"
+          }
+        ]
+      }
     },
     {
-      "text": "%script\n-- Set Your AI Profile\n-- Select AI uses the active profile for model access and schema grounding.\n-- Run this first so the remaining SELECT AI paragraphs use the workshop profile.\n\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT profile_name,\n       status\nFROM user_cloud_ai_profiles\nWHERE LOWER(profile_name) = 'genai';\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Try CHAT: Ask a General Finance Question\n-- SELECT AI CHAT goes directly to the configured language model.\n-- It is useful for general explanation, but it does not generate SQL or read\n-- the Seer Bank objects in this notebook.\n\nSELECT AI CHAT\n  What business factors commonly increase fraud and compliance risk at a financial institution?;\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Try CHAT: Ask About Current Seer Bank Data\n-- This question needs live database rows. CHAT can explain what a risk signal is,\n-- but it cannot prove which Seer Bank signal currently has the highest score.\n-- This creates the baseline for the governed Select AI comparison.\n\nSELECT AI CHAT\n  Which Seer Bank risk signal currently has the highest criticality score?;\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Set the Governed Object List\n-- Select AI reads the objects listed on the profile. These are the approved\n-- Seer Bank objects used in this lab: product categories, risk signals,\n-- signal sources, post-to-product links, and the action audit table.\n-- The comments on these objects help Select AI understand what the names mean.\n\nBEGIN\n  DBMS_CLOUD_AI.SET_ATTRIBUTE(\n    profile_name    => 'genai',\n    attribute_name  => 'object_list',\n    attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"FINANCE_PRODUCTS_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"RISK_SIGNALS_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"SIGNAL_SOURCES_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"POST_PRODUCT_MENTIONS\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"AGENT_ACTIONS\"}]'\n  );\nEND;\n/\n\nSELECT object_name,\n       object_type\nFROM user_objects\nWHERE object_name IN (\n  'FINANCE_PRODUCTS_V',\n  'RISK_SIGNALS_V',\n  'SIGNAL_SOURCES_V',\n  'POST_PRODUCT_MENTIONS',\n  'AGENT_ACTIONS'\n)\nORDER BY object_name;\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Try SHOWSQL: Review the Generated Query Before Trusting It\n-- SHOWSQL translates the natural-language question into SQL and shows the\n-- statement instead of narrating the answer. Review the generated statement\n-- and confirm it only reads approved objects.\n\nSELECT AI SHOWSQL\n  Which Seer Bank product categories have the highest current risk exposure?;\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Try NARRATE: Ask Select AI to Query and Explain\n-- NARRATE uses the approved object list to generate SQL, run it, and return\n-- an explanation grounded in current Seer Bank rows. This is the key difference\n-- from CHAT: the answer can be checked against database evidence.\n\nSELECT AI NARRATE\n  Which Seer Bank product categories have the highest current risk exposure?;\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Verify the Answer with Stable SQL Evidence\n-- Generated wording and aliases can vary. This SQL returns the stable evidence\n-- behind the question: product category, signal count, average criticality,\n-- and total exposure, ordered by the highest exposure first.\n\nSELECT fp.product_category,\n       COUNT(DISTINCT rs.signal_id) AS signal_count,\n       ROUND(AVG(rs.criticality_score), 1) AS avg_criticality,\n       SUM(rs.exposure_count) AS exposure_count\nFROM risk_signals_v rs\nJOIN post_product_mentions ppm\n  ON ppm.post_id = rs.signal_id\nJOIN finance_products_v fp\n  ON fp.financial_product_id = ppm.product_id\nGROUP BY fp.product_category\nORDER BY exposure_count DESC\nFETCH FIRST 5 ROWS ONLY;\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\n-- Prove the Read-Only Boundary\n-- SELECT AI NARRATE can read and explain approved data, but it has not been\n-- given an action tool. The AGENT_ACTIONS count should stay unchanged before\n-- and after another narrated risk question.\n\nSELECT COUNT(*) AS actions_before\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT';\n\nSELECT AI NARRATE\n  Which current Seer Bank risk signal should an analyst review first, and why?;\n\nSELECT COUNT(*) AS actions_after\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT';\n",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "results": {},
-        "settings": {
-          "params": {},
-          "forms": {}
-        },
-        "editorSetting": {
-          "language": "sql"
-        }
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Result\n\nYou compared general chat, generated SQL, governed narration, and read-only behavior over the Seer Bank dataset. CHAT can explain broad finance risk. SHOWSQL lets you inspect the SQL. NARRATE grounds the answer in approved database objects. The next lab adds controlled agent tools so the system can act only inside a defined boundary.\n",
+      "text": "%md\n## Activate the Select AI Profile\n\nSelect AI uses the active profile for model access and schema grounding. Start by setting `genai` for this OML session.\n\n**What this does:** `DBMS_CLOUD_AI.SET_PROFILE` tells the session which Select AI profile to use.\n\n**Expected result:** The profile query returns `GENAI` with status `ENABLED`.\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -160,10 +40,346 @@
         },
         "editorHide": true
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Activate the Select AI Profile</h2>\n\n<p>Select AI uses the active profile for model access and schema grounding. Start by setting <code>genai</code> for this OML session.</p>\n\n<p><strong>What this does:</strong> <code>DBMS_CLOUD_AI.SET_PROFILE</code> tells the session which Select AI profile to use.</p>\n\n<p><strong>Expected result:</strong> The profile query returns <code>GENAI</code> with status <code>ENABLED</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT profile_name,\n       status\nFROM user_cloud_ai_profiles\nWHERE LOWER(profile_name) = 'genai';\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
       "results": {}
+    },
+    {
+      "text": "%md\n## Create AI-Ready Views\n\nThe original product-risk evidence comes from several finance objects. That SQL works, but it gives Select AI too much room to guess the wrong join.\n\nCreate two simple views instead:\n\n- `SELECT_AI_PRODUCT_RISK_V` summarizes product categories by signal count, average criticality, and exposure.\n- `SELECT_AI_TOP_SIGNAL_V` exposes the single highest-priority risk signal.\n\n**Why this matters:** Select AI performs better when the profile exposes a clear business object with meaningful comments.\n\n**Expected result:** Both views compile as `VALID`.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Create AI-Ready Views</h2>\n\n<p>The original product-risk evidence comes from several finance objects. That SQL works, but it gives Select AI too much room to guess the wrong join.</p>\n\n<p>Create two simple views instead:</p>\n\n<ul>\n\n<li><code>SELECT_AI_PRODUCT_RISK_V</code> summarizes product categories by signal count, average criticality, and exposure.</li>\n\n<li><code>SELECT_AI_TOP_SIGNAL_V</code> exposes the single highest-priority risk signal.</li>\n\n</ul>\n\n<p><strong>Why this matters:</strong> Select AI performs better when the profile exposes a clear business object with meaningful comments.</p>\n\n<p><strong>Expected result:</strong> Both views compile as <code>VALID</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE VIEW select_ai_product_risk_v AS\nSELECT fp.product_category,\n       COUNT(DISTINCT rs.signal_id) AS signal_count,\n       ROUND(AVG(rs.criticality_score), 1) AS avg_criticality,\n       SUM(rs.exposure_count) AS exposure_count\nFROM risk_signals_v rs\nJOIN post_product_mentions ppm\n  ON ppm.post_id = rs.signal_id\nJOIN finance_products_v fp\n  ON fp.financial_product_id = ppm.product_id\nGROUP BY fp.product_category;\n\nCREATE OR REPLACE VIEW select_ai_top_signal_v AS\nSELECT signal_id,\n       DBMS_LOB.SUBSTR(signal_text, 1000, 1) AS signal_text,\n       criticality_score,\n       severity_band,\n       exposure_count,\n       source_id\nFROM (\n  SELECT signal_id,\n         signal_text,\n         criticality_score,\n         severity_band,\n         exposure_count,\n         source_id\n  FROM risk_signals_v\n  ORDER BY criticality_score DESC,\n           exposure_count DESC,\n           signal_id\n)\nWHERE ROWNUM = 1;\n\nCOMMENT ON TABLE select_ai_product_risk_v IS\n  'AI-ready view of Seer Bank product categories ranked by current risk exposure.';\nCOMMENT ON COLUMN select_ai_product_risk_v.product_category IS\n  'Financial product category.';\nCOMMENT ON COLUMN select_ai_product_risk_v.signal_count IS\n  'Number of current risk signals linked to the product category.';\nCOMMENT ON COLUMN select_ai_product_risk_v.avg_criticality IS\n  'Average risk signal criticality score for the product category.';\nCOMMENT ON COLUMN select_ai_product_risk_v.exposure_count IS\n  'Total exposure count across risk signals for the product category.';\n\nCOMMENT ON TABLE select_ai_top_signal_v IS\n  'AI-ready view containing the single highest-priority current Seer Bank risk signal.';\nCOMMENT ON COLUMN select_ai_top_signal_v.signal_id IS\n  'Identifier of the highest-priority risk signal.';\nCOMMENT ON COLUMN select_ai_top_signal_v.criticality_score IS\n  'Criticality score for the risk signal.';\nCOMMENT ON COLUMN select_ai_top_signal_v.severity_band IS\n  'Severity band for the risk signal.';\nCOMMENT ON COLUMN select_ai_top_signal_v.exposure_count IS\n  'Exposure count for the risk signal.';\n\nSELECT object_name,\n       status\nFROM user_objects\nWHERE object_name IN (\n  'SELECT_AI_PRODUCT_RISK_V',\n  'SELECT_AI_TOP_SIGNAL_V'\n)\nORDER BY object_name;\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Set the Governed Object Boundary\n\nNow limit the `genai` profile to the two AI-ready views.\n\n**What this does:** the `object_list` tells Select AI which objects it may use for this lab.\n\n**Why this matters:** the profile no longer exposes raw tables or the action audit table, so Select AI is less likely to invent unrelated joins.\n\n**Expected result:** The object inventory returns only `SELECT_AI_PRODUCT_RISK_V` and `SELECT_AI_TOP_SIGNAL_V`.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Set the Governed Object Boundary</h2>\n\n<p>Now limit the <code>genai</code> profile to the two AI-ready views.</p>\n\n<p><strong>What this does:</strong> the <code>object_list</code> tells Select AI which objects it may use for this lab.</p>\n\n<p><strong>Why this matters:</strong> the profile no longer exposes raw tables or the action audit table, so Select AI is less likely to invent unrelated joins.</p>\n\n<p><strong>Expected result:</strong> The object inventory returns only <code>SELECT_AI_PRODUCT_RISK_V</code> and <code>SELECT_AI_TOP_SIGNAL_V</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nBEGIN\n  DBMS_CLOUD_AI.SET_ATTRIBUTE(\n    profile_name    => 'genai',\n    attribute_name  => 'object_list',\n    attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"SELECT_AI_PRODUCT_RISK_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"SELECT_AI_TOP_SIGNAL_V\"}]'\n  );\nEND;\n/\n\nSELECT object_name,\n       object_type\nFROM user_objects\nWHERE object_name IN (\n  'SELECT_AI_PRODUCT_RISK_V',\n  'SELECT_AI_TOP_SIGNAL_V'\n)\nORDER BY object_name;\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Verify the Product Risk Evidence with SQL\n\nBefore using natural language, run the view directly.\n\n**What this does:** this query shows the top product categories by exposure count.\n\n**Why this matters:** this is the evidence baseline. If the generated AI response varies in wording, these rows are still the database truth.\n\n**Expected result:** Product categories appear ordered by highest `EXPOSURE_COUNT`.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Verify the Product Risk Evidence with SQL</h2>\n\n<p>Before using natural language, run the view directly.</p>\n\n<p><strong>What this does:</strong> this query shows the top product categories by exposure count.</p>\n\n<p><strong>Why this matters:</strong> this is the evidence baseline. If the generated AI response varies in wording, these rows are still the database truth.</p>\n\n<p><strong>Expected result:</strong> Product categories appear ordered by highest <code>EXPOSURE_COUNT</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT product_category,\n       signal_count,\n       avg_criticality,\n       exposure_count\nFROM select_ai_product_risk_v\nORDER BY exposure_count DESC\nFETCH FIRST 5 ROWS ONLY;\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Ask Select AI to Show the SQL\n\n`SHOWSQL` translates the natural-language request into SQL and returns the generated statement.\n\n**What this does:** it lets you inspect the SQL before trusting the answer.\n\n**Why this matters:** reviewers can confirm the generated statement reads from the AI-ready view instead of unrelated objects.\n\n**Expected result:** Select AI returns a read-only SQL statement over `SELECT_AI_PRODUCT_RISK_V`.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask Select AI to Show the SQL</h2>\n\n<p><code>SHOWSQL</code> translates the natural-language request into SQL and returns the generated statement.</p>\n\n<p><strong>What this does:</strong> it lets you inspect the SQL before trusting the answer.</p>\n\n<p><strong>Why this matters:</strong> reviewers can confirm the generated statement reads from the AI-ready view instead of unrelated objects.</p>\n\n<p><strong>Expected result:</strong> Select AI returns a read-only SQL statement over <code>SELECT_AI_PRODUCT_RISK_V</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI SHOWSQL\n  Show product_category signal_count avg_criticality and exposure_count from select_ai_product_risk_v ordered by exposure_count descending;\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Ask Select AI to Narrate the Highest-Exposure Category\n\n`NARRATE` runs a governed natural-language request over the approved view.\n\nIn this step, you ask for a short, fixed-format answer so the result is easy to review.\n\n**Expected result:** Select AI returns the highest-exposure product category in the requested format.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Ask Select AI to Narrate the Highest-Exposure Category</h2>\n\n<p><code>NARRATE</code> runs a governed natural-language request over the approved view.</p>\n\n<p>In this step, you ask for a short, fixed-format answer so the result is easy to review.</p>\n\n<p><strong>Expected result:</strong> Select AI returns the highest-exposure product category in the requested format.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI NARRATE\n  Using select_ai_product_risk_v, find the row with the largest exposure_count. Reply only with the phrase Highest exposure category, then a colon, then the product_category value;\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Optional: Ask a General Chat Question\n\n`CHAT` uses model knowledge. It can explain general risk concepts, but it is not the database-evidence step.\n\n**What this shows:** the difference between a general model answer and a governed answer grounded in Seer Bank objects.\n\n**Expected result:** The answer explains common fraud and compliance risk factors. Wording can vary.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Optional: Ask a General Chat Question</h2>\n\n<p><code>CHAT</code> uses model knowledge. It can explain general risk concepts, but it is not the database-evidence step.</p>\n\n<p><strong>What this shows:</strong> the difference between a general model answer and a governed answer grounded in Seer Bank objects.</p>\n\n<p><strong>Expected result:</strong> The answer explains common fraud and compliance risk factors. Wording can vary.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT AI CHAT\n  What business factors commonly increase fraud and compliance risk at a financial institution;\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Confirm the Read-Only Boundary\n\n**Expected result:** The count can be `0` or higher depending on whether the agent lab has already run.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Confirm the Read-Only Boundary</h2>\n\n<p><strong>Expected result:</strong> The count can be <code>0</code> or higher depending on whether the agent lab has already run.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%script\nSELECT COUNT(*) AS finance_risk_agent_actions\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT';\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
+      },
+      "results": {}
+    },
+    {
+      "text": "%md\n## Result\n\nYou used Select AI as a governed question-and-answer layer over Seer Bank evidence.\n\nYou created AI-ready views, limited the profile to those views, reviewed generated SQL, used a fixed-format narrated answer, and checked the current action count.\n\nThe next lab adds Select AI Agents so the workflow can act through controlled database tools.\n",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h2>Result</h2>\n\n<p>You used Select AI as a governed question-and-answer layer over Seer Bank evidence.</p>\n\n<p>You created AI-ready views, limited the profile to those views, reviewed generated SQL, used a fixed-format narrated answer, and checked the current action count.</p>\n\n<p>The next lab adds Select AI Agents so the workflow can act through controlled database tools.</p>"
+          }
+        ]
+      }
     }
   ],
-  "name": "finance-select-ai-notebook",
+  "name": "Ask Governed Finance Questions with Select AI",
   "id": "b23567c5-a1ef-44b0-b2fd-fe64634d8350",
   "noteParams": {},
   "noteForms": {},
