@@ -262,6 +262,8 @@ The supplied `.dsnb` file is a native Graph Studio notebook. It contains the fra
 
 1. Download [finance-fraud-network-graph-studio.dsnb](files/finance-fraud-network-graph-studio.dsnb).
 
+    If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
+
 2. In Graph Studio, click **Notebooks** in the left navigation.
 
 3. Click **Import** in the upper-right corner.
