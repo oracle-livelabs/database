@@ -394,4 +394,4 @@ The statement defines the graph structure over the relational tables. It does no
 
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
