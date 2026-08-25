@@ -36,6 +36,8 @@ In this lab, you run the hands-on steps from an Oracle Machine Learning notebook
 
 1. Download [finance-select-ai-notebook.json](files/finance-select-ai-notebook.json).
 
+    If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
+
 2. From the Oracle Machine Learning home page, click **Notebooks**.
 
     ![Oracle Machine Learning Notebooks page](images/oml-notebooks-home.png)
