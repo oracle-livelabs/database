@@ -220,12 +220,124 @@ After locating nearby service centers, summarize the response commitments attach
 
     </details>
 
+## Task 3: Open Spatial Studio from Database Actions
+
+Now move from SQL evidence to the visual map. You will use the `LLUSER` database user and password supplied for the workshop.
+
+1. Return to the **Database Actions Launchpad**.
+
+2. If the dark-theme message appears, click **Done**.
+
+3. Confirm that the upper-right corner shows `LLUSER`.
+
+    ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
+
+4. On the **Development** tab, select **Spatial Studio** from the left-side tool list and click **Open**.
+
+5. If prompted, sign in with `LLUSER` and the workshop password.
+
+6. Confirm that Spatial Studio opens on the **Projects** page.
+
+    ![Spatial Studio Projects page](images/spatial-projects-home.png " ")
+
+## Task 4: Create the New York Metro service coverage project
+
+In this task, you create two database-backed datasets, add them to a map, filter the demand layer to New York Metro, and run a distance analysis to find nearby fulfillment centers.
+
+1. Click **Create project**.
+
+2. In the new project, click **Add dataset**.
+
+    ![Add a dataset to a new Spatial Studio project](images/spatial-project-add-dataset.png " ")
+
+3. Select **Create dataset**, then select **Database**.
+
+4. Choose the database connection for the workshop user.
+
+5. Select these database tables:
+
+    - `DEMAND_REGIONS`
+    - `FULFILLMENT_CENTERS`
+
+6. Click the actions menu and select **Create project**.
+
+    ![Create Spatial Studio datasets from DEMAND_REGIONS and FULFILLMENT_CENTERS](images/spatial-create-datasets.png " ")
+
+7. In the project, drag `FULFILLMENT_CENTERS` onto the map.
+
+    Spatial Studio adds the fulfillment centers as point locations. The demand regions appear as boundary shapes.
+
+    ![Demand regions and fulfillment centers on the Spatial Studio map](images/spatial-map-demand-centers.png " ")
+
+8. In the left panel, open the actions menu for `DEMAND_REGIONS`, then select **Configure**.
+
+9. In **Configure**, select **Filter**.
+
+    ![Open the DEMAND_REGIONS filter configuration](images/spatial-demand-regions-filter.png " ")
+
+10. Create a filter for New York Metro:
+
+    - Column: `REGION_NAME`
+    - Value: `New York Metro`
+
+11. Click **Apply**.
+
+    ![Apply the New York Metro filter to DEMAND_REGIONS](images/spatial-demand-region-apply.png " ")
+
+12. Select the New York Metro region on the map.
+
+    ![Select the New York Metro demand region on the Spatial Studio map](images/spatial-select-new-york-region.png " ")
+
+13. Click **Spatial analysis**, then select **Return shapes within a specific distance**.
+
+14. Configure the analysis:
+
+    - Analysis layer: `FULFILLMENT_CENTERS`
+    - Location column: `FULFILLMENT_CENTERS.LOCATION`
+    - Boundary layer: `DEMAND_REGIONS`
+    - Boundary column: `DEMAND_REGIONS.BOUNDARY`
+    - Boundary option: use the selected New York Metro region
+
+    ![Configure the Spatial Studio distance analysis](images/spatial-analysis-setup.png " ")
+
+15. Set the distance to `250,000` meters.
+
+    ![Set the distance analysis to 250000 meters](images/spatial-analysis-distance.png " ")
+
+16. Run the analysis.
+
+17. Rename the analysis layer to `Centers within 250,000 meters of New York Metro`.
+
+18. Hide the original `FULFILLMENT_CENTERS` layer if needed so the analysis results are easier to see.
+
+    ![Spatial Studio results for centers within 250000 meters of New York Metro](images/spatial-analysis-results.png " ")
+
+19. Open **Settings**, then select **Interactions**.
+
+20. Configure the information window for the analysis results. Add these fields:
+
+    - `CENTER_NAME`
+    - `CITY`
+    - `STATE_PROVINCE`
+
+    If the points are hard to select, increase the point radius to `5` or `8`.
+
+    ![Configure the Spatial Studio information window](images/spatial-info-window.png " ")
+
+21. Right-click a result point to view the center details.
+
+    ![View details for a selected service center result](images/spatial-view-center-details.png " ")
+
+22. Click **Save**, then save the project as `New York Metro Service Coverage`.
+
+    ![Save the Spatial Studio project as New York Metro Service Coverage](images/spatial-save-project.png " ")
+
 ## Next Steps
 
-Congratulations on completing the spatial lab. You used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+Congratulations on completing the spatial lab. You created a Spatial Studio coverage project and used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Linda Foinding, Principal Database Product Manager
+* **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd,
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
