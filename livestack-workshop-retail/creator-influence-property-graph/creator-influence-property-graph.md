@@ -167,6 +167,43 @@ Next, add brand context to the graph path so campaign reach is explained through
 
 2. The result matters because it connects brand activity to reachable creators. In retail terms, audience movement means a campaign can start with one promoter and reach adjacent creator communities through known relationships. The graph pattern keeps that movement readable even as the business question moves beyond one table or one join.
 
+3. 🎯 **Interactive challenge: expand the creator-reach shortlist.**
+
+    Starting with the brand propagation query above, change only the creator-to-creator path from `-[c IS connects_to]->` to `-[c IS connects_to]->{1,2}`. Run your revised query so it can follow either one or two creator relationships. Which reached creator enters the displayed five-row shortlist, and what path evidence would you review before using that creator for a campaign?
+
+    <details>
+    <summary><strong>Challenge answer: expanded reach needs path review</strong></summary>
+
+    **Expected output: Expanded Brand Reach Paths**
+
+    The result keeps the same brand, promoter, reached-creator, and relationship columns. In the current workshop data, `@camp_faye_151` is first in the expanded result and is absent from the displayed five-row direct-path shortlist. The query permits one- or two-hop paths, but these columns do not expose hop count. Exact rows also depend on the graph data and the alphabetical result limit.
+
+    > `@camp_faye_151` is the changed shortlist result to investigate. Its presence shows that allowing one- or two-hop matches changed the displayed queue; it does not prove from these output columns that the path used two hops. Review the complete path and hop count, connection type, strength, audience fit, and recent campaign context before making a recommendation. Oracle Property Graph keeps the evidence connected to governed creator, brand, product, and signal data; it does not turn a connection into an automatic campaign decision.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT DISTINCT brand_name AS "Brand",
+           promoter AS "Promoter",
+           reached AS "Reached",
+           relationship_type AS "Relationship"
+    FROM GRAPH_TABLE ( influencer_network
+      MATCH (b IS brand) <-[p IS promotes]- (i IS influencer) -[c IS connects_to]->{1,2} (j IS influencer)
+      COLUMNS (
+        b.brand_name AS brand_name,
+        i.handle AS promoter,
+        j.handle AS reached,
+        p.relationship_type AS relationship_type
+      )
+    )
+    ORDER BY brand_name, promoter, reached, relationship_type
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
     Next, you use location and inventory evidence to decide whether demand can be served from practical fulfillment centers.
 
 ## Next Steps
