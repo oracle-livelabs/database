@@ -349,7 +349,7 @@ Otto now receives un new activity snapshot para la next reporting period. He sto
 
   Esta es la valor de in-base de datos machine learning. Otto puede return un prediction, la producto name, sales, y social activity in one SQL resultado. There es no necesita un move datos un un external machine learning platform.
 
-  ![resultado](images/resultado.png)
+  ![resultado](images/result.png)
 
 ## Conclusión: Poner la Prediction Beside la Negocio Data
 
