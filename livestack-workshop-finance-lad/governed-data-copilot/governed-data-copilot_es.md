@@ -21,7 +21,7 @@ Answers son solo useful si decision-makers puede review la datos boundary. La co
 
 La image below es la Governed Data Copilot page. It shows curated finanzas preguntas, la approved datos boundary, y la visible SQL path behind un respuesta. Esta matters porque un negocio usuario may ask in natural language, but un finanzas organization todavíun necesita la respuesta un come de approved views that puede be reviewed, repeated, y secured.
 
-![Governed Data Copilot pregunta examples](images/governed-datos-copilot.png " ")
+![Governed Data Copilot pregunta examples](images/governed-data-copilot.png " ")
 
 ### Objetivos
 

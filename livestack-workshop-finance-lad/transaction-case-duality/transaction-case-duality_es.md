@@ -192,7 +192,7 @@ Thomas now tests la documento shape his aplicación puede consume directly.
 
     **Resultado esperado:**
 
-    ![JSON](images/jsondv-resultado.png)
+    ![JSON](images/jsondv-result.png)
 
 2. Expand la documento in SQL Worksheet.
     La consulta reads la duality view como un documento source. Oracle constructs la JSON shape de relacional datos, so la aplicación gets un transaction payload sin un second copy de la transaction record.
@@ -430,7 +430,7 @@ Thomas has confirmed that la aplicación puede display y update la documento. Je
     </copy>
     ```
 
-    ![project relacional](images/json-relacional.png)
+    ![project relacional](images/json-relational.png)
 
     Comparar la resultado con la previous consulta. La transaction ID, status, y client email debe match. Thomas's aplicación es reading la JSON documento, while Jessica's relacional consulta reads la underlying filas.
 

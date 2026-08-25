@@ -256,7 +256,7 @@ Start de suspicious account `ACCT-8841` y trace la connected entities within fou
 
     **Resultado esperado: High Riesgo Fraud Entities**
 
-    ![hraph resultado](images/grafo4resultado.png)
+    ![hraph resultado](images/graph4result.png)
 
 2. Revisar la high-riesgo entities.
     La consulta returns connected entities como un riesgo-sorted tabla, no como un visual network. That makes la grafo resultado usable in la mismo SQL review workflow como la dashboard, vector búsqueda, y transaction labs.

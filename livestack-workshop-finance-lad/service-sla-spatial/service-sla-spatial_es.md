@@ -29,7 +29,7 @@ En este laboratorio, tú follow Moon's approach. Tú start con un single point, 
 
 La Seer Bank Finanzas LiveStack Demo uses la mismo datos in its service coverage page. La map helps usuarios see la resultado; la SQL in this lab shows how Oracle calculates it.
 
-![Client service coverage map](images/espacial-chart.png " ")
+![Client service coverage map](images/spatial-chart.png " ")
 
 ### Objetivos
 
@@ -87,7 +87,7 @@ That es la Oracle AI Base de datos advantage in this lab: one ubicación support
 
     **Resultado esperado: Service Center Points**
 
-    ![resultado](images/task1consulta.png)
+    ![resultado](images/task1query.png)
 
 2. Revisar la point datos.
 

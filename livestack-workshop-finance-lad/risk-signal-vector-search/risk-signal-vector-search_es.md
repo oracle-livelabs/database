@@ -74,7 +74,7 @@ Gilly asks Jessica un load un ONNX embedding modelo en Oracle AI Base de datos. 
 
     **Resultado esperado: Available Embedding Models**
 
-    ![modelo](images/modelo.png)
+    ![modelo](images/model.png)
 
     La resultado debe include un embedding modelo owned by `ADMIN`, such como `ALL_MINILM_L12_V2`. Esta compact modelo turns text en 384-number vectors. La `EMBEDDING` valor confirms that la modelo puede turn text en vectors para similitud búsqueda.
 
@@ -182,7 +182,7 @@ Now Gilly tests la new columna con un simple vector consulta. She asks para prod
 
     **Resultado esperado: Mortgage Product Matches**
 
-    ![resultado](images/resultado.png)
+    ![resultado](images/result.png)
 
 2. Revisar la ranked productos.
     La consulta embeds la analyst phrase at runtime y compares it un la `PRODUCTS.PRODUCT_EMBEDDING` columna. `VECTOR_DISTANCE` calculates la distancia between la two vectors using la `COSINE` metric. A lower valor means un closer match.
@@ -209,7 +209,7 @@ Now Gilly tests la new columna con un simple vector consulta. She asks para prod
 
     La consulta uses la mismo vectors y la mismo cosine calculation. It solo changes how la resultado es shown un la person using la aplicación.
 
-    ![resultado2](images/resultado2.png)
+    ![resultado2](images/result2.png)
 
 ## Tarea 4: Encontrar clientes affected by un producto concern
 
@@ -259,7 +259,7 @@ Gilly now has la negocio requirement para la aplicación. A negocio usuario debe
     La resultado shows clientes who ordered productos related un la concern. La similitud score explains why la producto was included, while la pedido y cliente columnas give la service equipo enough information un decide what un do next.
 
 
-    ![resultado3](images/resultado3.png)
+    ![resultado3](images/result3.png)
 
 2. Revisar la negocio resultado.
 
