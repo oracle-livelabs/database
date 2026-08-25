@@ -1,76 +1,67 @@
 {
-  "workshoptitle": "Build Telecom Operations Intelligence with Oracle Database 26ai",
+  "workshoptitle": "Build Network Experience Intelligence with Oracle AI Database 26ai",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Seer Comms telecom operations story and workshop goals.",
+      "description": "The Seer Comms network-experience decision journey and workshop goals.",
+      "type": "livelabs",
       "filename": "../../introduction/introduction.md"
     },
     {
       "title": "Getting Started",
-      "description": "Open SQL Worksheet and verify the workshop schema.",
+      "description": "Open Database Actions and prepare SQL Worksheet as LLUSER.",
       "filename": "../../getting-started/getting-started.md"
     },
     {
-      "title": "Lab 1: Telecom Data Foundation",
-      "description": "Inspect the schema foundation and feature objects.",
-      "filename": "../../telco-data-foundation/telco-data-foundation.md"
+      "title": "Lab 1: Data Foundation",
+      "description": "Inspect the Seer Comms semantic layer and the connected object families behind the application.",
+      "filename": "../../network-experience-data-foundation/network-experience-data-foundation.md"
     },
     {
-      "title": "Lab 2: Network Experience Operations Center",
-      "description": "Query operational KPIs and service pressure evidence.",
-      "filename": "../../network-experience-command-center/network-experience-command-center.md"
+            "title": "Lab 2: Telecom Service Assurance Dashboard",
+      "description": "Trace operational KPIs to subscriber-signal, service, capacity, and service-order evidence.",
+      "filename": "../../network-experience-operations-center/network-experience-operations-center.md"
     },
     {
-      "title": "Lab 3: Subscriber Signals with AI Vector Search",
-      "description": "Rank subscriber signals and services by semantic meaning.",
-      "filename": "../../subscriber-signals-vector-search/subscriber-signals-vector-search.md"
+      "title": "Lab 3: Subscriber Service Orders",
+      "description": "Use JSON Relational Duality to work with service orders as both documents and relational evidence.",
+      "filename": "../../subscriber-service-order-documents/subscriber-service-order-documents.md"
     },
     {
-      "title": "Lab 4: Subscriber and Network Impact Graph",
-      "description": "Investigate connected telecom impact with graph data.",
+      "title": "Lab 4: Subscriber Experience Signal Feed",
+      "description": "Use AI Vector Search to find services and subscriber signals by meaning.",
+      "filename": "../../subscriber-signal-intelligence/subscriber-signal-intelligence.md"
+    },
+    {
+      "title": "Lab 5: Subscriber and Network Impact Graph",
+      "description": "Use Property Graph and SQL/PGQ to investigate the reach of a network-experience case.",
       "filename": "../../subscriber-network-impact-graph/subscriber-network-impact-graph.md"
     },
     {
-      "title": "Lab 5: Network Access and Field Operations",
-      "description": "Use spatial and capacity evidence for field decisions.",
-      "filename": "../../network-access-spatial-operations/network-access-spatial-operations.md"
+      "title": "Lab 6: Network Access and Field Operations",
+      "description": "Use Oracle Spatial to connect coverage zones, network sites, capacity, and field response.",
+      "filename": "../../network-access-field-operations/network-access-field-operations.md"
     },
-    {
-      "title": "Lab 6: Subscriber Service Orders with JSON Relational Duality",
-      "description": "Compare relational and document-shaped service orders.",
-      "filename": "../../subscriber-service-orders-json-duality/subscriber-service-orders-json-duality.md"
-    },
-    {
-      "title": "Lab 7: Predictive Service Assurance with OML",
-      "description": "Connect model-style scores to capacity and retention decisions.",
-      "filename": "../../predictive-service-assurance-oml/predictive-service-assurance-oml.md"
-    },
-    {
-      "title": "Lab 8: Ask Telecom Operations Data",
-      "description": "Use visible SQL as the trusted-answer pattern.",
-      "filename": "../../ask-telecom-operations-data/ask-telecom-operations-data.md"
-    },
-    {
-      "title": "Lab 9: AI-Assisted Service Assurance",
-      "description": "Review Oracle-backed tool evidence and action audit rows.",
-      "filename": "../../ai-assisted-service-assurance/ai-assisted-service-assurance.md"
-    },
-    {
-      "title": "Lab 10: Conclusion",
-      "description": "Connect the labs into one operating loop.",
-      "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
-    },
-    {
-      "title": "Lab 11: Final Quiz",
-      "description": "Check your understanding with scored questions.",
+        {
+            "title": "Lab 7: Predictive Service Assurance",
+            "description": "Use Oracle Machine Learning to score capacity-risk evidence inside the Telco schema.",
+            "filename": "../../predictive-service-assurance/predictive-service-assurance.md"
+        },
+        {
+            "title": "Lab 8: Conclusion",
+            "description": "Connect the Telco decision journey to a converged database outcome.",
+            "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
+        },
+        {
+            "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding of the connected network-experience evidence journey.",
       "filename": "../../final-quiz/final-quiz.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to common problems and directions for receiving Live Help.",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
     }
   ]
 }

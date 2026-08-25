@@ -1,111 +1,95 @@
-# Lab 11: Final Quiz
+# Final Quiz
+
+```quiz-config
+passing: 75
+badge: images/livestack-badge-telecommunications.png
+```
 
 ## Introduction
 
-Use this quiz to check whether you can explain the telecom operating story in your own words and connect each decision to the Oracle Database capability behind it.
-
-Estimated Time: 10 minutes
+Use this scored quiz to confirm that you can explain the `TEL-5G-2026-501` response from its business impact to its operational evidence.
 
 ### Objectives
 
-- Check your understanding of the Seer Comms operating story.
-- Match business outcomes to Oracle AI Database capabilities.
-- Review governance patterns for trusted answers and trusted actions.
+- Recall the case, impact, and decision at the center of the workshop.
+- Connect each database capability to the evidence it provides for that decision.
 
-## How This Lab Fits the Story
+Estimated Time: **5 minutes**
 
-The quiz checks whether you can connect the business workflow to the database capability. Focus on the operator's reason for using each capability, not only the feature name. The badge marks completion, and the questions confirm that you can explain both the business decisions and the Oracle Database capabilities behind them.
+## Task 1: Answer the quiz questions
 
-![Telco workshop completion badge](images/livestack-badge-telecommunications.png)
+1. Follow the steps below.
 
-## Task 1: Answer the questions
+    ```quiz score
+    Q: What is TEL-5G-2026-501 in this workshop?
+    - A subscriber identifier for the Hudson Yards service order.
+    * The critical Hudson Yards 5G congestion case that anchors the investigation.
+    - The name of the capacity-risk model.
+    - A property graph object.
+    > The case ID connects the incident to its 31,200 affected-subscriber estimate, service value at risk, signal, site, and response evidence.
 
-1. Answer each question, then review the explanation.
+    Q: Which value establishes the business urgency of TEL-5G-2026-501?
+    - 56 subscriber seed rows.
+    - 54 network sites.
+    * 31,200 subscribers affected.
+    - 8 telecom services.
+    > SUBSCRIBERS_AFFECTED is the case-impact measure, not a count of rows in the subscriber table.
 
-### Question 1
+    Q: Why does the Operations Center lab include a drill-through query after a summary?
+    - To replace dashboard evidence with a screenshot.
+    * To show that Hudson Yards is a reviewable 91% load row behind the KPI.
+    - To create a separate reporting database.
+    - To generate a random capacity score.
+    > A dashboard total is useful only when the team can inspect the contributing site and decide what to do next.
 
-Why does the workshop start with the telecom data foundation?
+    Q: What does ORDERS_DV provide for the service action linked to the case?
+    - A second copy of order rows in a document store.
+    * A JSON projection backed by relational order data.
+    - A property graph of service routes.
+    - A vector index for network sites.
+    > JSON Relational Duality lets an application inspect order 601 as a document while SQL continues to use the same governed source.
 
-- A. To count images before using the database.
-- B. To show that the operating story starts from governed services, signals, orders, sites, forecasts, graph entities, embeddings, and audit rows.
-- C. To avoid using SQL in later labs.
-- D. To replace the telecom application with a static report.
+    Q: What does AI Vector Search add to the TEL-5G-2026-501 investigation?
+    - It replaces the source signal with an embedding only.
+    * It lets an analyst review the matched service and retained similarity evidence.
+    - It calculates the miles between network sites.
+    - It creates a second service-order document.
+    > It connects the game-day congestion wording in signal 501 to related services while preserving the signal text and similarity evidence.
 
-**Correct answer:** B
+    Q: What does the Property Graph reveal about TEL-5G-2026-501?
+    - A random data sample.
+    - A replacement for the subscriber table.
+    * The starting point for an investigation of connected entities.
+    - A model confidence score.
+    > SQL/PGQ starts from the case and follows its site, outage, subscriber-cluster, and support-case relationships.
 
-**Explanation:** The data foundation gives every later lab trusted services, signals, orders, sites, forecasts, graph entities, embeddings, and audit rows. Without that foundation, each workflow would need its own copy of the evidence.
+    Q: What does the Spatial result contribute to the response plan?
+    - To replace operational rows with a map image.
+    - To export site coordinates to an unrelated system.
+    - To turn graph edges into vectors.
+    * It identifies Hudson Yards and Newark as a nearby 9.0-mile site pair for planning review.
+    > Spatial keeps the distance calculation beside the case and operational records that explain the choice.
 
-### Question 2
+    Q: What does the OML result contribute to the Hudson Yards decision?
+    - A guaranteed outage outcome.
+    * An ESCALATE priority signal to review beside the 91% load and case evidence.
+    - A replacement for the network-site table.
+    - A copy of capacity data in a separate machine-learning system.
+    > A prediction helps a planner prioritize investigation. It does not replace the operational evidence or make the action automatic.
 
-What does AI Vector Search help Seer Comms do?
+    Q: What makes the TEL-5G-2026-501 response explainable instead of a black-box recommendation?
+    - Each capability requires a separate specialist store.
+    * SQL, JSON, vector, graph, spatial, and model evidence stay connected to the case.
+    - Screenshots replace the need for database evidence.
+    - Teams must reconcile copied data before investigating.
+    > The team can inspect every part of the response, from the incident impact to the site, order, signal, relationships, distance, and prediction.
+    ```
 
-- A. Search subscriber language by meaning while keeping text, vectors, and SQL close to governed data.
-- B. Replace all service orders with image files.
-- C. Remove the need for access control.
-- D. Run only exact keyword searches.
+2. Review your completion badge.
 
-**Correct answer:** A
-
-**Explanation:** AI Vector Search helps teams find related subscriber intent even when people use different words. Keeping vectors with source rows helps the result stay connected to governed service and signal data.
-
-### Question 3
-
-Why is Property Graph useful in the subscriber and network impact lab?
-
-- A. It stores presentation images in the database.
-- B. It turns connected outage, service, case, site, subscriber, and crew relationships into traversable impact paths.
-- C. It hides relationships from operators.
-- D. It requires a separate graph-only data copy.
-
-**Correct answer:** B
-
-**Explanation:** Property Graph makes connected impact visible. It lets teams follow relationships from an outage to affected services, sites, subscriber groups, cases, and crews without moving sensitive investigation data into a separate graph-only store.
-
-### Question 4
-
-What is the main value of JSON Relational Duality for service orders?
-
-- A. It lets applications use a document-shaped order while Oracle preserves relational truth and transactional consistency.
-- B. It removes every relational table.
-- C. It makes service orders read-only text files.
-- D. It prevents SQL verification.
-
-**Correct answer:** A
-
-**Explanation:** JSON Relational Duality lets application teams work with a document shape while operations teams keep relational SQL, consistency, and governance over the same order.
-
-### Question 5
-
-Why does the Ask Telecom Operations Data lab emphasize visible SQL?
-
-- A. Visible SQL makes natural-language answers inspectable and keeps Oracle as the execution authority.
-- B. Visible SQL is only decorative.
-- C. Visible SQL means the language model owns the data.
-- D. Visible SQL prevents users from seeing result rows.
-
-**Correct answer:** A
-
-**Explanation:** Visible SQL makes natural-language analytics reviewable. A business user can ask a plain-English question, and a reviewer can still inspect the SQL and data path behind the answer.
-
-### Question 6
-
-What makes agent-assisted service assurance trustworthy in this workshop pattern?
-
-- A. The agent never records what happened.
-- B. Approved database tools return evidence and `AGENT_ACTIONS` records the decision for later review.
-- C. The agent bypasses Oracle data.
-- D. The UI hides tool usage.
-
-**Correct answer:** B
-
-**Explanation:** Trusted AI assistance depends on approved tools and durable action records. The agent can help faster, but Oracle keeps the evidence and decision history available for review.
-
-## Task 2: Finish the workshop
-
-1. Review the explanation and connect it to the lab evidence.
-
-You have completed the quiz. Review the conclusion to revisit how the labs connect into one operating loop, from first signal to auditable action.
+    ![Telecommunications LiveStack completion badge](images/livestack-badge-telecommunications.png " ")
 
 ## Acknowledgements
 
-- **Author** - Oracle LiveLabs Team
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Pat Shepherd, July 2026

@@ -2,11 +2,11 @@
 
 ## Introduction
 
-When Jessica opens the Seer Health command center, one number demands attention: five signals have **CRITICAL** or **HIGH** priority. The summary helps her notice a problem quickly, but it cannot identify the affected services, explain why each signal matters, or show which team should respond first.
+When Jessica opens the Seer Health command center, one number demands attention: 474 signals have `CRITICAL` or `HIGH` priority. The summary helps her notice the scale of the problem quickly, but it cannot identify which examples deserve a closer look. It also cannot explain why a signal matters or which team should respond first.
 
-This situation is familiar outside healthcare. A car dashboard may show a warning light, while a school portal may show several absences. A store dashboard may show five delayed orders. Each summary earns attention, while the records behind it explain what happened and what someone can do next.
+This situation is familiar outside healthcare. A car dashboard may show a warning light, while a school portal may show several absences. A store dashboard may show hundreds of delayed orders. Each summary earns attention, while a smaller, well-chosen set of records helps a person understand what happened and what someone can do next.
 
-In this lab, you rebuild the command-center measures with SQL and open the five elevated signals. Then you group those signals by service category so Jessica can move from one KPI to named records, affected services, and suggested follow-up.
+In this lab, you rebuild the command-center measures with SQL, review a five-row priority sample, and group all 5,000 signals by service category. Jessica can move from one KPI to named records, affected services, and suggested follow-up without mistaking a small screen result for the size of the underlying dataset.
 
 <details>
 <summary><strong>Key terms: KPI, signal, criticality, and watched service</strong></summary>
@@ -42,23 +42,25 @@ Estimated Time: **12 minutes**
 | What You Will See | SQL reproduces each KPI and opens its supporting rows. |
 | Database Capability | A governed command-center view and signal view provide the summary and detail. |
 | Outcome | Leaders can move from a warning number to the healthcare facts behind it. |
+{: title="Command center scenario"}
 
 **Persona focus:** You support Jessica Chen, the active demo user, as she studies the summary. Together, you turn it into a reviewable list of signals, affected services, and next steps.
 
 ## Task 1: Calculate the command-center KPIs
 
-Start with the headline numbers shown at the top of the operating view so the dashboard warning becomes reviewable SQL evidence:
+Start with the headline numbers shown at the top of the operating view.
 
 1. Run the KPI query.
 
     > **SQL Worksheet reminder:** Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) if you need help running SQL.
 
-    `HEALTHCARE_COMMAND_CENTER_V` is a saved view. It gives the dashboard one governed definition for four measures:
+    `HEALTHCARE_COMMAND_CENTER_V` is a saved view. It gives the dashboard one governed definition for five measures:
 
     1. the number of service requests,
     2. the value tracked by those requests,
     3. the number of `CRITICAL` or `HIGH` signals, and
-    4. the number of services linked to signals.
+    4. the number of services linked to signals, and
+    5. the number of completed agent actions.
 
     The view keeps the KPI logic in the database instead of rebuilding it in each application screen.
 
@@ -75,31 +77,31 @@ Start with the headline numbers shown at the top of the operating view so the da
     <copy>SELECT service_requests,
            tracked_service_value,
            elevated_signals,
-           watched_services
+           watched_services,
+           completed_agent_actions
     FROM healthcare_command_center_v;</copy>
     ```
 
-    **Expected output: Command-Center KPI Summary**
+    **Expected output: Command center measures**
 
-    | Service Requests | Tracked Service Value | Elevated Signals | Watched Services |
-    | ---: | ---: | ---: | ---: |
-    | 6 | 6103.89 | 5 | 8 |
+    | Service Requests | Tracked Value | Elevated Signals | Watched Services | Completed Actions |
+    | ---: | ---: | ---: | ---: | ---: |
+    | 3,000 | 4,210,943.89 | 474 | 156 | 1 |
+    {: title="Command-center totals"}
 
 2. Interpret the KPI row.
 
-    Seer Health tracks six requests worth 6,103.89 in this workshop data. Five signals have `CRITICAL` or `HIGH` priority. Eight services appear in the signal data.
+    Seer Health tracks 3,000 requests worth 4,210,943.89. Of the 5,000 signal bulletins, 474 have `CRITICAL` or `HIGH` priority, and those signals cover 156 watched services. One completed agent action is also recorded.
 
-    The number **5** is the next clue. You will now open those five signal rows.
+    Next, examine five representative elevated signals. Then summarize all 474 signals by category to see where they are concentrated.
 
 ## Task 2: Review the elevated signals
 
-Next, review the elevated signal rows so the KPI becomes a prioritized list of services, priorities, and recorded next steps:
-
 1. Run the signal query.
 
-    The `WHERE` clause keeps only `CRITICAL` and `HIGH` signals. The `CASE` expression places critical items first. `SIGNAL_ID` gives the result a stable order inside each priority.
+    The `WHERE` clause keeps only `CRITICAL` and `HIGH` signals. The first `CASE` places the named priority examples before the rest of the baseline. The second `CASE` places critical examples before high-priority examples. After that deterministic ordering, `FETCH FIRST 5 ROWS ONLY` keeps the review manageable.
 
-    The result returns more than a count. It shows the affected service and the recorded next step.
+    The result is a sample, not the full elevated-signal population. It shows how each record adds an affected service and a recorded next step to the headline count.
 
     ```sql
     <copy>SELECT signal_id,
@@ -109,11 +111,13 @@ Next, review the elevated signal rows so the KPI becomes a prioritized list of s
            next_step
     FROM quality_capacity_signals_v
     WHERE criticality IN ('CRITICAL', 'HIGH')
-    ORDER BY CASE criticality WHEN 'CRITICAL' THEN 1 ELSE 2 END,
-             signal_id;</copy>
+    ORDER BY CASE WHEN signal_id <= 108 THEN 0 ELSE 1 END,
+             CASE criticality WHEN 'CRITICAL' THEN 1 ELSE 2 END,
+             signal_id
+    FETCH FIRST 5 ROWS ONLY;</copy>
     ```
 
-    **Expected output: Elevated Healthcare Signals**
+    **Expected output: Priority signal sample**
 
     | Signal Id | Priority | Signal Type | Service | Next Step |
     | ---: | --- | --- | --- | --- |
@@ -122,16 +126,15 @@ Next, review the elevated signal rows so the KPI becomes a prioritized list of s
     | 102 | HIGH | Capacity Alert | Infusion Center Slot Bundle - Continuity Lot 3 | Route capacity follow-up |
     | 104 | HIGH | Supply Quality Notice | Tamper-Evident Carton Batch | Open quality review |
     | 106 | HIGH | Patient Flow Alert | Bed Capacity Surge Playbook | Review surge playbook |
+    {: title="Priority signals"}
 
 2. Connect the rows to the KPI.
 
-    The query returns five rows. That matches **Elevated Signals** from Task 1.
-
-    Two signals are critical. Three are high. Each row names a service and a next step. The dashboard warning now has evidence that a person can review and route.
+    The query returns five readable examples from the 474 elevated signals. Two are critical and three are high. Each row names a service and a next step, so the dashboard warning now has evidence that a person can review and route. The five-row result should not be read as the total; the KPI remains the complete count.
 
 ## Task 3: Find the categories with the most elevated signals
 
-Finally, group the elevated signals by service category so the team can see where operational pressure is concentrated:
+The final query groups the signal rows into a smaller operating summary.
 
 1. Run the category query.
 
@@ -147,23 +150,24 @@ Finally, group the elevated signals by service category so the team can see wher
     ORDER BY elevated_signals DESC, watched_signals DESC, category;</copy>
     ```
 
-    **Expected output: Signal Pressure by Service Category**
+    **Expected output: Signal counts by category**
 
     | Category | Watched Signals | Elevated Signals | Watched Services |
     | --- | ---: | ---: | ---: |
-    | Specialty Care | 4 | 3 | 4 |
-    | Care Operations | 1 | 1 | 1 |
-    | Quality and Safety | 1 | 1 | 1 |
-    | Diagnostics | 2 | 0 | 2 |
+    | Specialty Care | 1,060 | 103 | 33 |
+    | Diagnostics | 1,026 | 96 | 32 |
+    | Care Operations | 993 | 94 | 31 |
+    | Quality and Safety | 993 | 94 | 31 |
+    | Pharmacy Support | 928 | 87 | 29 |
+    {: title="Signal categories"}
 
 2. Use the summary to set a review order.
 
-    Specialty Care has the most watched signals and the most elevated signals. That makes it the first category to review in this small workshop scenario.
+    Specialty Care has the most watched signals and the most elevated signals. That makes it the first category to review in this synthetic network baseline.
 
     This is a priority clue, not a clinical decision. Leaders still need to inspect staffing, patient needs, service rules, and current operations before acting.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

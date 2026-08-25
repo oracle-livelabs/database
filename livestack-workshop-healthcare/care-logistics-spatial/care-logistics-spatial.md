@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The relationship map helps Jessica understand the care story, but request `170104` still needs a physical service in Miami. A logistics planner must identify a nearby active site that supports the diagnostic panel and has enough room in its workload.
+The relationship map helps Jessica understand the care story, but request `170104` still needs a physical service in Miami. A logistics planner must identify a nearby active site. That site must support the diagnostic panel and have enough room in its workload.
 
 Choosing the nearest site resembles choosing a store for an urgent purchase. The closest store is useless after closing, when it lacks the item, or when stock runs out. A dependable choice combines geography with operating facts that show whether the location can meet the need.
 
@@ -47,12 +47,13 @@ Estimated Time: **10 minutes**
 | What You Will See | Spatial distance and relational operating columns work in the same SQL query. |
 | Database Capability | `SDO_GEOMETRY` stores points and `SDO_GEOM.SDO_DISTANCE` measures distance. |
 | Outcome | The planner identifies the closest active site that supports the service and passes the load rule. |
+{: title="Care logistics scenario"}
 
 **Persona focus:** You help a logistics planner combine distance with operating evidence. The choice uses service, status, and capacity instead of a guess from a map.
 
 ## Task 1: Rank the nearest active sites
 
-Start with location and status so the nearest-site ranking considers only active logistics locations:
+Start with location and status.
 
 1. Run the distance query.
 
@@ -100,13 +101,14 @@ Start with location and status so the nearest-site ranking considers only active
     FETCH FIRST 3 ROWS ONLY;</copy>
     ```
 
-    **Expected output: Nearest Active Logistics Sites**
+    **Expected output: Nearby logistics sites**
 
     | Logistics Site | City | Service | Status | Miles |
     | --- | --- | --- | --- | ---: |
     | Hialeah Import Compliance Site | Hialeah | qPCR Respiratory Panel | ACTIVE | 8.5 |
     | Concord Southeast Micro Site | Concord | Infusion Center Slot Bundle | ACTIVE | 665.0 |
-    | Lebanon Central Specialty Care Warehouse | Lebanon | Digital Pathology Slide Batch | ACTIVE | 805.1 |
+    | Etna Midwest Specialty Warehouse | Lebanon | Digital Pathology Slide Batch | ACTIVE | 805.1 |
+    {: title="Nearby logistics sites"}
 
 2. Review the distance result.
 
@@ -115,8 +117,6 @@ Start with location and status so the nearest-site ranking considers only active
     Distance makes Hialeah the first site to inspect. It does not finish the decision. The site must also support the requested service and have acceptable load.
 
 ## Task 2: Add service and capacity rules
-
-Next, add service and capacity rules so the routing result reflects diagnostic support and available workload, not distance alone:
 
 1. Run the service and load query.
 
@@ -158,17 +158,18 @@ Next, add service and capacity rules so the routing result reflects diagnostic s
     ORDER BY distance_miles;</copy>
     ```
 
-    **Expected output: Matching Diagnostic Site**
+    **Expected output: Qualified diagnostic site**
 
     | Logistics Site | Service | Capacity Units | Current Load Pct | Estimated Available Units | Miles |
     | --- | --- | ---: | ---: | ---: | ---: |
     | Hialeah Import Compliance Site | qPCR Respiratory Panel | 250000 | 61.5 | 96250 | 8.5 |
+    {: title="Qualified logistics site"}
 
 2. Explain the routing evidence.
 
     Hialeah is active, supports the requested panel, is below the workshop load limit, and is only 8.5 miles away. The simple calculation estimates 96,250 available units.
 
-    This is synthetic workshop data. A real routing decision would also use current inventory, transport time, service rules, patient needs, and local operating policy.
+    Before acting on a routing result, a team would also consider current inventory, transport time, service rules, patient needs, and local operating policy.
 
     The important database pattern is clear: Spatial supplies distance, while relational columns supply the service and operating rules.
 
@@ -178,6 +179,5 @@ You used Oracle Spatial to combine healthcare location and operating evidence. F
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026
