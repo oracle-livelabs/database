@@ -23,7 +23,7 @@ After evidence es found, ranked, investigated, y governed, la bank necesita un a
 
 La image below es la AI Operations Agent Console. It es no meant un be un generic chatbot screen; it shows un operational agente surface donde finanzas preguntas puede be routed un approved herramientas, returned como structured base de datos-backed evidence, y recorded in un recent actions audit trail. La SQL in this lab uses la mismo pattern: call controlled base de datos logic y then inspect la durable action record.
 
-![AI Operations Agent Console](images/agente-console.png " ")
+![AI Operations Agent Console](images/agent-console.png " ")
 
 ### Objetivos
 

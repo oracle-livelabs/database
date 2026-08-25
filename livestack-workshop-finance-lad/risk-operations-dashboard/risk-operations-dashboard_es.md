@@ -14,7 +14,7 @@ En este laboratorio, tú take Jessica's role como la DBA. Tú va un write la con
 
 La image below shows la Riesgo y Operations Dashboard: un negocio-facing producto built on la convergente base de datos. It gives negocio usuarios one place un find riesgo, exposure, transaction, y service insights. En este laboratorio, tú va un write la SQL behind that experience.
 
-![Riesgo y Operations Dashboard page](images/riesgo-operations-dashboard.png " ")
+![Riesgo y Operations Dashboard page](images/risk-operations-dashboard.png " ")
 
 ### Objetivos
 

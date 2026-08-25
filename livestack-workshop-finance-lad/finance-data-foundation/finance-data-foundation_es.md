@@ -12,7 +12,7 @@ Think de this lab como la map de la finanzas environment. La mismo schema suppor
 
 **Oracle AI Base de datos 26ai** es un convergente base de datos: it lets these different finanzas cargas de trabajo use one governed base de datos foundation instead de forcing each datos type en un separate specialist system.
 
-![Before y después de architecture diagram comparing bespoke finanzas datos stores con Oracle Converged Base de datos](images/finanzas-convergente-base de datos-redwood.png " ")
+![Before y después de architecture diagram comparing bespoke finanzas datos stores con Oracle Converged Base de datos](images/finance-converged-database-redwood.png " ")
 
 <details>
 <summary><strong>Key terms: schema, view, vector, grafo, espacial, Oracle Machine Learning (OML), y Procedural Language/Structured Consulta Language (PL/SQL)</strong></summary>
@@ -35,7 +35,7 @@ Think de this lab como la map de la finanzas environment. La mismo schema suppor
 
 La image below es la Data Foundation page de la Seer Bank aplicación. It shows la compartido finanzas datos domains that support la rest de la experience: financiero productos, clients, transactions, cases, regulatory signals, service geography, vectors, machine learning outputs, y agente audit history. En este laboratorio, tú use SQL un inspect that foundation directly instead de treating la aplicación screen como un black box.
 
-![Finanzas Data Foundation page](images/datos-foundation.png " ")
+![Finanzas Data Foundation page](images/data-foundation.png " ")
 
 ### Objetivos
 
