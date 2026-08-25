@@ -1,258 +1,175 @@
 {
-  "name": "finance-select-ai-agent-notebook",
   "paragraphs": [
     {
-      "text": "%md\n# Triage Risk Signals with Select AI Agents\n\nThis AI4U-style notebook creates finance tools, an agent, a task, and a team in Oracle Machine Learning. It then runs SELECT AI AGENT and verifies the controlled Seer Bank action.",
+      "text": "%md\n## Triage Risk Signals with Select AI Agents\n\n### The Seer Bank Story\n\nSeer Bank has moved from dashboards and SQL evidence to governed natural-language answers. The risk analyst can ask which product categories have the highest exposure. They can also inspect the SQL behind the answer.\n\nThe next step is action. When a high-priority signal appears, the team needs a consistent way to retrieve evidence, apply the review rule, and leave an audit record.\n\nSelect AI Agents add that controlled action step. The agent does not receive broad permission to change finance data. It receives two narrow tools. One reads the highest-priority risk signal. One creates a simulated analyst-review record only after the database function checks the threshold.\n\n### What You'll Learn\n\nIn this notebook, you will build the agent components used by the workflow:\n\n1. **Tools** expose controlled database functions.\n2. **An agent** defines the role and guardrails.\n3. **A task** tells the agent which steps to follow.\n4. **A team** activates the workflow for `SELECT AI AGENT`.\n\nYou will run the agent, inspect the business action table, review Oracle agent history, and prove the escalation remains idempotent.\n\n**Estimated Time:** 22 minutes",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
       },
       "results": {}
     },
     {
-      "text": "%md\n## Inspect the finance evidence\n\nThe supplied lookup function reads the existing RISK_SIGNALS_V and SIGNAL_SOURCES_V objects.",
+      "text": "%script\n-- Prepare the Profile and Inspect the Finance Evidence\n-- The agent uses the same genai profile and the same approved Seer Bank objects.\n-- The lookup function returns the current highest-priority signal as formatted\n-- evidence that a tool can pass to the agent.\n\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nBEGIN\n  DBMS_CLOUD_AI.SET_ATTRIBUTE(\n    profile_name    => 'genai',\n    attribute_name  => 'object_list',\n    attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"RISK_SIGNALS_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"SIGNAL_SOURCES_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"AGENT_ACTIONS\"}]'\n  );\nEND;\n/\n\nSELECT finance_get_top_signal() AS signal_evidence\nFROM dual;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nSELECT finance_v2_get_top_signal() AS signal_evidence\nFROM dual;\n\nDELETE FROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT';\nCOMMIT;",
+      "text": "%script\n-- Reset Prior Agent Objects and Workshop Action Rows\n-- The loader may provide a ready-to-run copy. Drop those agent objects so you\n-- can rebuild them in this notebook. The DELETE removes only simulated actions\n-- from this workshop agent; it does not change source signals or finance data.\n\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FINANCE_RISK_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FINANCE_RISK_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FINANCE_RISK_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FINANCE_SIGNAL_LOOKUP_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FINANCE_ESCALATE_TOOL', TRUE);\n\nDELETE FROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT';\nCOMMIT;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Reset the supplied agent metadata\n\nThe platform loader creates a ready-to-run copy. Reset those objects so you can build them yourself as in AI4U.",
+      "text": "%script\n-- Create the Agent Tools\n-- Function tools are the agent's controlled abilities. The lookup tool is\n-- read-only. The escalation tool can insert only one analyst-review record\n-- after the database function independently checks the criticality threshold.\n\nBEGIN\n  DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n    tool_name   => 'FINANCE_SIGNAL_LOOKUP_TOOL',\n    attributes  => '{\n      \"instruction\": \"Retrieve the highest-priority current Seer Bank risk signal. This tool has no parameters. Always call it before deciding whether to escalate.\",\n      \"function\": \"finance_get_top_signal\"\n    }',\n    description => 'Returns the highest-priority finance risk signal and its evidence'\n  );\n\n  DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n    tool_name   => 'FINANCE_ESCALATE_TOOL',\n    attributes  => '{\n      \"instruction\": \"Create one analyst-review escalation for the highest-priority risk signal. This tool has no parameters and independently enforces a criticality threshold of 70. Call it only after FINANCE_SIGNAL_LOOKUP_TOOL.\",\n      \"function\": \"finance_escalate_top_signal\"\n    }',\n    description => 'Creates a controlled risk-signal review record when the threshold is met'\n  );\nEND;\n/\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TEAM('FINANCE_V2_RISK_TEAM', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('FINANCE_V2_RISK_TASK', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('FINANCE_V2_RISK_AGENT', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FINANCE_V2_SIGNAL_LOOKUP_TOOL', TRUE);\nEXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('FINANCE_V2_ESCALATE_TOOL', TRUE);",
+      "text": "%script\n-- Create the Agent, Task, and Team\n-- The agent role sets the boundary. The task requires evidence before action.\n-- The team binds the agent to the task so SELECT AI AGENT has one active workflow.\n\nBEGIN\n  DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n    agent_name  => 'FINANCE_RISK_AGENT',\n    attributes  => '{\n      \"profile_name\": \"genai\",\n      \"role\": \"You are a Seer Bank risk-triage agent. Use only the supplied tools. Always retrieve database evidence before deciding. You may create a simulated analyst-review escalation, but you must never change transactions, accounts, balances, products, clients, or the source risk signal.\"\n    }',\n    description => 'Coordinates controlled finance risk-signal triage'\n  );\n\n  DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n    task_name   => 'FINANCE_RISK_TASK',\n    attributes  => '{\n      \"instruction\": \"For each request: 1) call FINANCE_SIGNAL_LOOKUP_TOOL; 2) report the signal ID, criticality, severity, exposure, and source; 3) if the criticality score is at least 70, call FINANCE_ESCALATE_TOOL once; 4) report whether the escalation was created. Never claim a write occurred unless the escalation tool confirms it. User request: {query}\",\n      \"tools\": [\"FINANCE_SIGNAL_LOOKUP_TOOL\", \"FINANCE_ESCALATE_TOOL\"]\n    }',\n    description => 'Looks up the strongest finance risk signal and conditionally escalates it'\n  );\n\n  DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n    team_name   => 'FINANCE_RISK_TEAM',\n    attributes  => '{\n      \"agents\": [{\n        \"name\": \"FINANCE_RISK_AGENT\",\n        \"task\": \"FINANCE_RISK_TASK\"\n      }],\n      \"process\": \"sequential\"\n    }',\n    description => 'Finance risk-triage team'\n  );\nEND;\n/\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Create the finance tools\n\nOne tool retrieves risk evidence. The other can write only a constrained analyst-review record after independently checking the threshold.",
+      "text": "%script\n-- Verify the Agent Components\n-- The inventory should show two enabled tools, one enabled agent, one enabled\n-- task, and one enabled team. This proves the metadata is ready before you run\n-- SELECT AI AGENT.\n\nSELECT 'TOOL' AS object_type,\n       tool_name AS object_name,\n       status\nFROM user_ai_agent_tools\nWHERE tool_name IN (\n  'FINANCE_SIGNAL_LOOKUP_TOOL',\n  'FINANCE_ESCALATE_TOOL'\n)\nUNION ALL\nSELECT 'AGENT', agent_name, status\nFROM user_ai_agents\nWHERE agent_name = 'FINANCE_RISK_AGENT'\nUNION ALL\nSELECT 'TASK', task_name, status\nFROM user_ai_agent_tasks\nWHERE task_name = 'FINANCE_RISK_TASK'\nUNION ALL\nSELECT 'TEAM', agent_team_name, status\nFROM user_ai_agent_teams\nWHERE agent_team_name = 'FINANCE_RISK_TEAM'\nORDER BY object_type, object_name;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nBEGIN\n  DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n    tool_name   => 'FINANCE_V2_SIGNAL_LOOKUP_TOOL',\n    attributes  => '{\n      \"instruction\": \"Retrieve the highest-priority current Seer Bank risk signal. This tool has no parameters. Always call it before deciding whether to escalate.\",\n      \"function\": \"finance_v2_get_top_signal\"\n    }',\n    description => 'Returns the highest-priority finance risk signal and its evidence'\n  );\n\n  DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n    tool_name   => 'FINANCE_V2_ESCALATE_TOOL',\n    attributes  => '{\n      \"instruction\": \"Create one analyst-review escalation for the highest-priority risk signal. This tool has no parameters and independently enforces a criticality threshold of 70. Call it only after FINANCE_V2_SIGNAL_LOOKUP_TOOL.\",\n      \"function\": \"finance_v2_escalate_top_signal\"\n    }',\n    description => 'Creates a controlled risk-signal review record when the threshold is met'\n  );\nEND;\n/",
+      "text": "%script\n-- Run Select AI Agent\n-- SET_TEAM activates the workflow. The natural-language request asks the agent\n-- to retrieve evidence, apply the threshold rule, and create one review record\n-- only if the database tool confirms the signal qualifies.\n\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FINANCE_RISK_TEAM');\n\nSELECT AI AGENT\n  Find the highest-priority current risk signal. If its criticality score is at least 70, create one escalation record for analyst review. Report the signal ID, score, severity, and whether an escalation was created.;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Create the agent, task, and team\n\nThe role defines the protected boundary. The task requires evidence before action. The sequential team binds the task to the agent.",
+      "text": "%script\n-- Review the Business and Native Histories\n-- AGENT_ACTIONS is the business audit table. The Oracle history views show how\n-- the team and tools executed. Together, they make the agent run reviewable.\n\nSELECT action_id,\n       action_type,\n       entity_type,\n       entity_id AS signal_id,\n       execution_status,\n       executed_at\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT'\nORDER BY action_id DESC\nFETCH FIRST 5 ROWS ONLY;\n\nSELECT tool_name,\n       TO_CHAR(start_date, 'HH24:MI:SS') AS called_at,\n       SUBSTR(output, 1, 100) AS result\nFROM user_ai_agent_tool_history\nWHERE tool_name IN (\n  'FINANCE_SIGNAL_LOOKUP_TOOL',\n  'FINANCE_ESCALATE_TOOL'\n)\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;\n\nSELECT team_name,\n       TO_CHAR(start_date, 'HH24:MI:SS') AS started,\n       state\nFROM user_ai_agent_team_history\nWHERE team_name = 'FINANCE_RISK_TEAM'\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%script\nBEGIN\n  DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n    agent_name  => 'FINANCE_V2_RISK_AGENT',\n    attributes  => '{\n      \"profile_name\": \"FINANCE_V2_GENAI\",\n      \"role\": \"You are a Seer Bank risk-triage agent. Use only the supplied tools. Always retrieve database evidence before deciding. You may create a simulated analyst-review escalation, but you must never change transactions, accounts, balances, products, clients, or the source risk signal.\"\n    }',\n    description => 'Coordinates controlled finance risk-signal triage'\n  );\n\n  DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n    task_name   => 'FINANCE_V2_RISK_TASK',\n    attributes  => '{\n      \"instruction\": \"For each request: 1) call FINANCE_V2_SIGNAL_LOOKUP_TOOL; 2) report the signal ID, criticality, severity, exposure, and source; 3) if the criticality score is at least 70, call FINANCE_V2_ESCALATE_TOOL once; 4) report whether the escalation was created. Never claim a write occurred unless the escalation tool confirms it. User request: {query}\",\n      \"tools\": [\"FINANCE_V2_SIGNAL_LOOKUP_TOOL\", \"FINANCE_V2_ESCALATE_TOOL\"]\n    }',\n    description => 'Looks up the strongest finance risk signal and conditionally escalates it'\n  );\n\n  DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n    team_name   => 'FINANCE_V2_RISK_TEAM',\n    attributes  => '{\n      \"agents\": [{\n        \"name\": \"FINANCE_V2_RISK_AGENT\",\n        \"task\": \"FINANCE_V2_RISK_TASK\"\n      }],\n      \"process\": \"sequential\"\n    }',\n    description => 'Finance V2 risk-triage team'\n  );\nEND;\n/",
+      "text": "%script\n-- Prove Idempotency\n-- Run the same request again. The escalation function checks for an existing\n-- review record before inserting, so each signal should have at most one\n-- ESCALATE_REVIEW row from this agent.\n\nSELECT AI AGENT\n  Run the finance risk triage again and report whether an escalation already exists.;\n\nSELECT entity_id AS signal_id,\n       COUNT(*) AS escalation_rows\nFROM agent_actions\nWHERE agent_name = 'FINANCE_RISK_AGENT'\n  AND action_type = 'ESCALATE_REVIEW'\nGROUP BY entity_id\nORDER BY entity_id;\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "sql"
+        }
       },
       "results": {}
     },
     {
-      "text": "%md\n## Verify the agent components\n\nThe inventory should return two tools, one agent, one task, and one team.",
+      "text": "%md\n## Result\n\nYou created a controlled Select AI Agent workflow over Seer Bank risk evidence. The lookup tool reads approved data, the escalation tool writes only a constrained review record, and the history views show what happened. The agent can act, but only through the tools you registered and the rules enforced inside the database.\n",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT 'TOOL' AS object_type,\n       tool_name AS object_name,\n       status\nFROM user_ai_agent_tools\nWHERE tool_name IN (\n  'FINANCE_V2_SIGNAL_LOOKUP_TOOL',\n  'FINANCE_V2_ESCALATE_TOOL'\n)\nUNION ALL\nSELECT 'AGENT', agent_name, status\nFROM user_ai_agents\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT'\nUNION ALL\nSELECT 'TASK', task_name, status\nFROM user_ai_agent_tasks\nWHERE task_name = 'FINANCE_V2_RISK_TASK'\nUNION ALL\nSELECT 'TEAM', agent_team_name, status\nFROM user_ai_agent_teams\nWHERE agent_team_name = 'FINANCE_V2_RISK_TEAM'\nORDER BY object_type, object_name;",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Run Select AI Agent\n\nThe active team coordinates the lookup and conditional escalation tools.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nEXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('FINANCE_V2_RISK_TEAM');\n\nSELECT AI AGENT Find the highest-priority current risk signal. If its criticality score is at least 70, create one escalation record for analyst review. Report the signal ID, score, severity, and whether an escalation was created.;",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Review the business and native histories\n\nAGENT_ACTIONS proves the business action. The Oracle history views prove how the team and tools executed.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT action_id,\n       action_type,\n       entity_type,\n       entity_id AS signal_id,\n       execution_status,\n       executed_at\nFROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT'\nORDER BY action_id DESC\nFETCH FIRST 5 ROWS ONLY;\n\nSELECT tool_name,\n       TO_CHAR(start_date, 'HH24:MI:SS') AS called_at,\n       SUBSTR(output, 1, 100) AS result\nFROM user_ai_agent_tool_history\nWHERE tool_name IN (\n  'FINANCE_V2_SIGNAL_LOOKUP_TOOL',\n  'FINANCE_V2_ESCALATE_TOOL'\n)\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;\n\nSELECT team_name,\n       TO_CHAR(start_date, 'HH24:MI:SS') AS started,\n       state\nFROM user_ai_agent_team_history\nWHERE team_name = 'FINANCE_V2_RISK_TEAM'\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Prove idempotency\n\nRun the same request again. The escalation function should report that the record already exists, leaving at most one row per signal.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%script\nSELECT AI AGENT Run the finance risk triage again and report whether an escalation already exists.;\n\nSELECT entity_id AS signal_id,\n       COUNT(*) AS escalation_rows\nFROM agent_actions\nWHERE agent_name = 'FINANCE_V2_RISK_AGENT'\n  AND action_type = 'ESCALATE_REVIEW'\nGROUP BY entity_id\nORDER BY entity_id;",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "SCRIPT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {}
-    },
-    {
-      "text": "%md\n## Result\n\nYou created and ran a native Select AI Agent over the Finance LiveStack dataset. Its possible actions were limited by registered database tools, and both the business action and native execution remained reviewable.",
-      "config": {
-        "colWidth": 12,
-        "enabled": true,
-        "title": true,
-        "type": "TEXT"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
+        "results": {},
+        "settings": {
+          "params": {},
+          "forms": {}
+        },
+        "editorSetting": {
+          "language": "md"
+        },
+        "editorHide": true
       },
       "results": {}
     }
   ],
-  "version": "1.0"
+  "name": "finance-select-ai-agent-notebook",
+  "id": "f320c531-2600-4871-a41b-4ab4308b81b8",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
 }
