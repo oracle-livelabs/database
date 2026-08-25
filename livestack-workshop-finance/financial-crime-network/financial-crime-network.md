@@ -236,12 +236,91 @@ Next, find account pairs that share identifying evidence such as device, IP addr
 
     </details>
 
+## Task 3: Open Graph Studio
+
+Start from the Database Actions Launchpad. You will use the `LLUSER` database user and password supplied for the workshop.
+
+1. If the dark-theme message appears, click **Done**.
+
+2. Confirm that the upper-right corner shows `LLUSER`.
+
+    ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
+
+3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/graph-database-actions-launchpad.png " ")
+
+4. If prompted, sign in with `LLUSER` and the workshop password.
+
+5. Confirm that the Graph Studio home page opens. The left navigation provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
+
+    ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png " ")
+
+## Task 4: Download and import the finance notebook
+
+The supplied `.dsnb` file is a native Graph Studio notebook. It contains the fraud-network investigation as Markdown explanation paragraphs and SQL paragraphs that you can run inside Graph Studio.
+
+1. Download [finance-fraud-network-graph-studio.dsnb](files/finance-fraud-network-graph-studio.dsnb).
+
+2. In Graph Studio, click **Notebooks** in the left navigation.
+
+3. Click **Import** in the upper-right corner.
+
+    ![Graph Studio Notebooks page for LLUSER with the Import button](images/graph-notebook-import.png " ")
+
+4. The import window opens.
+
+    ![Import the Fraud Network notebook file into Graph Studio](images/graph-notebook-import-dialog.png " ")
+
+5. Drag & drop the `finance-fraud-network-graph-studio.dsnb` file from your local computer into the import window, or browse to the file on your computer. Review the selected filename and click **Import**. Open **Fraud Network** after the import completes.
+
+## Task 5: Run and interpret the Graph Studio notebook
+
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now run the same investigation in Graph Studio so you can compare the query results with the visual graph experience.
+
+1. Start at the top of the **Fraud Network** notebook and read the opening paragraph, **Financial Crime Network with Property Graph**.
+
+    ![Fraud Network notebook open at the top in Graph Studio](images/graph-notebook-task5-top.png " ")
+
+2. Read the explanation for the `ACCT-8841` traversal, then run the SQL paragraph that starts with `SELECT DISTINCT`.
+
+    This is the same first investigation pattern you ran in SQL Worksheet: start from `ACCT-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
+
+3. Continue through the notebook and review these results:
+
+    | Paragraph | Result | Investigation purpose |
+    | --- | --- | --- |
+    | `SELECT DISTINCT ... WHERE seed.entity_key = 'ACCT-8841'` | Table | Ranks entities reached within one or two hops of `ACCT-8841`. |
+    | `Graph Visulization of previous query` | Markdown label | Introduces the visual version of the first traversal. |
+    | `SELECT * ... WHERE src.entity_key = 'ACCT-8841'` | Graph visualization | Draws the one-hop and two-hop path from the suspicious account. |
+    | `Shared Entity Connections` | Markdown label and explanation | Introduces the device-centered relationship view. |
+    | `SELECT * ... WHERE device.entity_key = 'DEV-fp-91a7'` | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected accounts. |
+
+4. Under **Graph Visulization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `ACCT-8841`. Review the graph visualization that appears below the paragraph.
+
+    ![Graph Studio visualization for one-hop and two-hop fraud reach from ACCT-8841](images/graph-two-hop-visualization.png " ")
+
+5. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that anchors on `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph.
+
+    ![Graph Studio visualization for accounts connected to DEV-fp-91a7](images/graph-shared-device-visualization.png " ")
+
+6. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account or device.
+
+7. Compare the notebook results with the SQL Worksheet results you ran earlier. The SQL showed the evidence trail; Graph Studio shows the same relationships as a visual investigation map.
+
+> **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
+
 ## Next Steps
 
-Congratulations on completing the property graph lab. You used graph queries to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
+Congratulations on completing the property graph lab. You used SQL/PGQ patterns to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts, then compared the same investigation in Graph Studio.
+
+For more property graph practice, try these follow-up resources:
+
+* Open the [Oracle Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/run-workshop?p210_wid=770&p210_wec=&session=112325984461564&P0_REDIRECT=Y) for a deeper hands-on introduction to property graph concepts and Graph Studio.
+* Download [getting-started-bank-graph.dsnb](files/getting-started-bank-graph.dsnb) and import it into Graph Studio for an additional bank graph exercise.
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Linda Foinding, Principal Database Product Manager
+* **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd,
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026

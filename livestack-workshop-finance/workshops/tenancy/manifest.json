@@ -48,12 +48,22 @@
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
     {
-      "title": "Lab 8: Conclusion",
+      "title": "Lab 8: Ask Governed Finance Questions with Select AI",
+      "description": "Use the Finance LiveStack application and Oracle Machine Learning to generate visible SQL and governed finance answers.",
+      "filename": "../../select-ai-finance-questions/select-ai-finance-questions.md"
+    },
+    {
+      "title": "Lab 9: Triage Risk Signals with Select AI Agents",
+      "description": "Run a native Select AI Agent in the Finance LiveStack application and inspect the workflow in Oracle Machine Learning.",
+      "filename": "../../select-ai-agent-risk-triage/select-ai-agent-risk-triage.md"
+    },
+    {
+      "title": "Conclusion",
       "description": "Turn the finance labs into a practical converged database takeaway.",
       "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
     },
     {
-      "title": "Lab 9: Final Quiz",
+      "title": "Final Quiz",
       "description": "Check your understanding with scored questions.",
       "filename": "../../final-quiz/final-quiz.md"
     },
