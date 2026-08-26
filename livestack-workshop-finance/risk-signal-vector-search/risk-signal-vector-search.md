@@ -18,6 +18,8 @@ After reviewing numeric exposure, analysts often need to search the language beh
 > - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
 >
 > - **Semantic search** means searching by meaning instead of exact words. For example, a search for "financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review" can find related text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
+>
+> - **ALL\_MINILM\_L12\_V2** is the embedding model used in this lab. A model is the trained pattern that turns text into embeddings. This model reads a phrase such as `mortgage pre-approval risk` and returns a vector that Oracle Database can compare with the stored finance vectors.
 
 </details>
 
@@ -64,6 +66,15 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
     </details>
 
+    <details>
+    <summary><strong>Why does the model name include ADMIN?</strong></summary>
+
+    > `ALL_MINILM_L12_V2` is the shared embedding model available in the workshop database. In this environment, the model is owned by `ADMIN`, so the SQL calls it as `ADMIN.ALL_MINILM_L12_V2`.
+    >
+    > The finance tables and views are in your `LLUSER` schema. Only the shared embedding model uses the `ADMIN.` prefix.
+
+    </details>
+
     ```sql
     <copy>
     SELECT p.product_name,
@@ -96,38 +107,6 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
     The expected top result is `Mortgage Pre-Approval`, followed by related lending and risk analytics products. The ranking matters because it acts like an analyst assistant: it brings likely matches to the top even when the search phrase and product name are not identical.
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or operational follow-up.
-
-3. 🎯 **Interactive challenge: change the investigation question.**
-
-    Starting with the baseline query above, replace only `mortgage pre-approval risk` with `loan servicing delinquency concern`. Run your revised query and compare its top five results with the mortgage search.
-
-    **Expected output: Servicing Concern Matches**
-
-    The rankings are dynamic, but `Delinquency Outreach Program` should lead the current workshop data. Compare which products enter, leave, or move within the top five.
-
-    <details>
-    <summary><strong>Challenge answer: the question changes the ranking</strong></summary>
-
-    > `Delinquency Outreach Program` moves to the top because the new phrase emphasizes loan servicing and delinquency rather than mortgage pre-approval. Oracle AI Vector Search compares meaning while the product records and embeddings remain in the same governed database.
-
-    If you need the runnable solution, use this query:
-
-    ```sql
-    <copy>
-    SELECT p.product_name,
-           p.category,
-           ROUND(1 - VECTOR_DISTANCE(
-             pe.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'loan servicing delinquency concern' AS DATA),
-             COSINE), 4) AS similarity
-    FROM product_embeddings pe
-    JOIN products p ON p.product_id = pe.product_id
-    ORDER BY similarity DESC
-    FETCH FIRST 5 ROWS ONLY;
-    </copy>
-    ```
-
-    </details>
 
 ## Task 2: Search risk signals by meaning
 
@@ -170,44 +149,12 @@ Now apply the same semantic search pattern to risk signal language.
 
     This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
 
-3. 🎯 **Interactive challenge: focus the signal review.**
-
-    Starting with the baseline query above, replace its search phrase with `suspicious ACH activity and sanctions review`. Run your revised query. Which kind of signal now dominates the evidence queue?
-
-    **Expected output: Suspicious ACH Signal Matches**
-
-    Rankings and similarity values can vary slightly by environment. In the current workshop data, suspicious-ACH and AML-monitoring language dominates the top results.
-
-    <details>
-    <summary><strong>Challenge answer: semantic evidence follows intent</strong></summary>
-
-    > The revised phrase elevates signals about suspicious ACH bursts, sanctions, and AML monitoring. This is not an exact-keyword lookup: the database compares the meaning of the analyst's question with governed signal text and returns a prioritized review queue.
-
-    If you need the runnable solution, use this query:
-
-    ```sql
-    <copy>
-    SELECT sp.post_id AS signal_id,
-           SUBSTR(sp.post_text, 1, 120) AS signal_excerpt,
-           ROUND(1 - VECTOR_DISTANCE(
-             se.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'suspicious ACH activity and sanctions review' AS DATA),
-             COSINE), 4) AS similarity
-    FROM signal_embeddings se
-    JOIN social_posts sp ON sp.post_id = se.post_id
-    ORDER BY similarity DESC, signal_id
-    FETCH FIRST 5 ROWS ONLY;
-    </copy>
-    ```
-
-    </details>
-
 ## Next Steps
 
 Congratulations on completing the AI Vector Search lab. You searched finance product and risk-signal text by meaning, not just by matching exact words. For a deeper hands-on workshop focused on AI Vector Search in Oracle Database, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4166).
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Pat Shepherd, Linda Foinding
+* **Contributors** - Teodor Nechita
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026

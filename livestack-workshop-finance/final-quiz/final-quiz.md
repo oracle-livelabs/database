@@ -85,9 +85,23 @@ Estimated Time: **5 minutes**
     - It means the model no longer needs business context.
     > Confidence helps compare stronger and weaker predictions, but it is not certainty. The lab also uses a simple agreement check to compare predicted labels with the demo labels.
 
+    Q: What makes the Select AI answer governed and reviewable?
+    - The model can query every object in the database automatically.
+    - The narrative wording is guaranteed to be identical every time.
+    * The profile restricts approved objects and the generated SQL remains visible.
+    - The answer bypasses the database and uses only general model knowledge.
+    > The finance Select AI profile has a narrow object list. SHOWSQL exposes the generated query, and the direct SQL proof lets reviewers compare the narrative with the database result.
+
+    Q: What is the Select AI Agent allowed to change in the risk-triage lab?
+    * It can create a simulated analyst-review record through the approved escalation tool.
+    - It can update client balances when a signal is critical.
+    - It can rewrite the source risk signal after classification.
+    - It can approve or deny customer transactions.
+    > The agent has only a lookup tool and a controlled escalation tool. The escalation function rechecks the threshold and writes an AGENT_ACTIONS audit row; it cannot change protected financial data.
+
     Q: What is the main advantage of using Oracle Database as the converged foundation for this workshop?
     - Each finance capability must use a separate specialized data store.
-    * SQL, JSON, vector, graph, spatial, and OML evidence stay connected.
+    * SQL, JSON, vector, graph, spatial, OML, Select AI, and agent evidence stay connected.
     - Application screenshots replace the need for database evidence.
     - Risk teams must reconcile copied data before every investigation.
     > The workshop uses different database capabilities for different finance questions, but the value is that they operate from connected governed data. That reduces copying, reconciliation, and fragmented explanations.
@@ -99,6 +113,6 @@ Estimated Time: **5 minutes**
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Pat Shepherd, Linda Foinding
+* **Contributors** - Teodor Nechita
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
