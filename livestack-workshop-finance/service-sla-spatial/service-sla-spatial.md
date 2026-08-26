@@ -39,10 +39,13 @@ The second image is the Client Service and SLA Coverage page. It combines a map,
 
 ### Objectives
 
-- Find service centers nearest to New York Metro.
-- Inspect SLA zone coverage.
+- Run spatial SQL that measures service-center distance to New York Metro.
+- Summarize SLA response-zone commitments.
+- Open Spatial Studio from Database Actions.
+- Create database-backed datasets for service centers and demand regions.
+- Build and save a New York Metro service coverage project.
 
-Estimated Time: **10 minutes**
+Estimated Time: **25 minutes**
 
 ### Business Scenario
 
@@ -54,6 +57,8 @@ Estimated Time: **10 minutes**
 | What You Will See | Spatial data can quantify distance and regional service pressure in SQL. |
 | Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), distance calculations (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
 | Outcome | Operations teams can prioritize case-processing capacity based on geography and demand. |
+
+Persona focus: You are helping a service operations leader measure nearby case-processing capacity, then use Spatial Studio to see the same New York Metro coverage story on a map.
 
 ## Task 1: Calculate service center distance to New York Metro
 

@@ -15,14 +15,23 @@ The agent has two function tools:
 
 The tools cannot change transactions, accounts, balances, products, clients, or source risk signals.
 
+<details>
+<summary><strong>Key terms: Select AI Agent, tool, agent, task, and team</strong></summary>
+
+- A **Select AI Agent** uses approved tools to complete a natural-language request through a controlled database workflow.
+- A **tool** is a database function or procedure that the agent is allowed to call.
+- An **agent** decides which approved tool to use for a specific request.
+- A **task** describes the work the agent should complete.
+- A **team** groups the agent and task so the workflow can run from `SELECT AI AGENT`.
+
+</details>
+
 ### Objectives
 
 - Import and run the supplied Select AI Agent notebook in Oracle Machine Learning.
-- Create helper functions for controlled lookup and escalation.
-- Create Select AI Agent tools, an agent, a task, and a team.
-- Run a conditional finance workflow with `SELECT AI AGENT`.
-- Inspect the business audit record and Oracle agent histories.
-- Prove that repeated requests do not create duplicate escalations.
+- Use an agent to triage a high-priority risk signal.
+- See how approved tools let an agent retrieve evidence and create a review record.
+- Inspect the results of the agent workflow.
 
 Estimated Time: **22 minutes**
 
