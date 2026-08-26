@@ -3,15 +3,15 @@
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
-            "title": "Get Started",
-            "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). This lab is always first.",
-            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
-        },
-        {
             "title": "Introduction",
             "description": "Multi-model is a storage claim; converged is a guarantees claim. What you will build and why.",
             "type": "livelabs",
             "filename": "../../0-intro/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). This lab is always first.",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
             "title": "Lab 1: Connect to Your Environment and Run the Preflight",

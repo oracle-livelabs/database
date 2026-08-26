@@ -36,13 +36,13 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Finance focus                                                                                 |
-| ---------------------| -----------------------------------------------------------------------------------------------|
-| Business Problem    | Nina needs answers from finance data without writing every query from scratch.                |
-| Technical Challenge | The question must be translated into SQL against the governed finance schema.                 |
-| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                    |
-| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.        |
-| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.              |
+| Step                | Finance focus                                                                                |
+| ---------------------| ----------------------------------------------------------------------------------------------|
+| Business Problem    | Nina needs answers from finance data without writing every query from scratch.               |
+| Technical Challenge | The question must be translated into SQL against the governed finance schema.                |
+| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
+| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
+| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
 | Outcome             | Nina gets a repeatable way to ask finance questions while keeping SQL review in the process. |
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
