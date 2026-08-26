@@ -1,6 +1,6 @@
 # Introduction
 
-## About This Workshop
+## Introduction
 
 **Multi-model is a storage claim. Converged is a guarantees claim.**
 
@@ -39,9 +39,9 @@ This workshop assumes:
 * An Oracle Autonomous AI Database 26ai instance, free or paid
 * No Oracle background and no MongoDB background required — every step is copy-paste-and-run with an explanation of what you are seeing
 
-### A note on honesty
+## Task 1: Two Things We Do on Purpose
 
-Two things we do on purpose. First, in Lab 2 we plant one deliberately drifted document — because that is what production drift looks like, and the point is that a schemaless engine has no opinion about it. Second, nothing in this workshop asks you to measure execution time on your lab instance: you might run it on free tier and the data volumes are miniscule, so every observable is a **count** you can verify exactly, and every timing claim points at published, reproducible benchmarks you can run yourself.
+Before you start, know what is deliberate. First, in Lab 2 we plant one deliberately drifted document — because that is what production drift looks like, and the point is that a schemaless engine has no opinion about it. Second, nothing in this workshop asks you to measure execution time on your lab instance: you might run it on free tier and the data volumes are miniscule, so every observable is a **count** you can verify exactly, and every timing claim points at published, reproducible benchmarks you can run yourself.
 
 ## Learn More
 
