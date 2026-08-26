@@ -1,34 +1,24 @@
--- Lab 8 FALLBACK: used only if MENU_MODEL cannot be loaded at all (e.g. the
--- object-storage download is blocked by egress rules on a locked-down tenancy).
---
--- History worth recording: this file used to hold PLACEHOLDERS for precomputed
--- vector literals ('[...384 floats...]') that were never generated, so it was
--- not runnable. Shipping ten 384-float literals inside the guide would also be
--- ~10 KB of unreadable text. This is the honest substitute instead: it needs no
--- model, it runs, and it teaches the contrast directly.
---
--- What you lose: semantic search. What you keep: the ability to finish the lab
--- and to SEE what the embedding was buying you.
+-- Lab 8 FALLBACK: used only if the embedding model cannot be loaded.
+-- Needs no model, runs as written, and demonstrates the gap that motivates
+-- vector search.
 
--- 1. Task 2's question asked with keywords: 'a vegetarian dish with some heat'.
---    Returns ZERO ROWS. Nothing on this menu literally says "vegetarian" or
---    "heat" - the dish you want says "vegetables" and "fiery".
-SELECT item_name, price
+-- 1. Lab 8's question asked with keywords: 'leafy starter'. ZERO ROWS.
+--    Nothing on this menu literally says "leafy" or "starter" - the dish you
+--    want says "Crisp greens, heirloom tomato, house vinaigrette".
+SELECT item_name, base_price
 FROM   item
 WHERE  active
-AND    (LOWER(item_name || ' ' || description) LIKE '%vegetarian%'
-    OR  LOWER(item_name || ' ' || description) LIKE '%heat%');
+AND    (LOWER(item_name || ' ' || description) LIKE '%leafy%'
+    OR  LOWER(item_name || ' ' || description) LIKE '%starter%');
 
--- 2. Loosen the terms. Returns exactly ONE row - Beef Chow Fun - the single
---    dish that is emphatically NOT vegetarian. It matched "noodle"; keyword
---    search cannot know that "wok-seared beef" disqualifies it.
-SELECT item_name, price
+-- 2. Loosen the terms to things that DO appear, and you get the wrong shape of
+--    answer: everything "crisp" or "fresh", ranked by nothing in particular.
+SELECT item_name, base_price
 FROM   item
 WHERE  active
-AND    (LOWER(item_name || ' ' || description) LIKE '%spicy%'
-    OR  LOWER(item_name || ' ' || description) LIKE '%noodle%')
+AND    (LOWER(item_name || ' ' || description) LIKE '%crisp%'
+    OR  LOWER(item_name || ' ' || description) LIKE '%green%')
 ORDER  BY item_name;
 
--- That gap - nothing, or noise, with no way to rank by closeness - is the
--- whole reason AI Vector Search exists. Ask a proctor to help get MENU_MODEL
--- loaded (Lab 7, Task 1) so you can run the real thing.
+-- Nothing, or an unranked pile. That gap is the whole reason AI Vector Search
+-- exists. Ask a proctor to help load the model (Lab 7, Task 1).

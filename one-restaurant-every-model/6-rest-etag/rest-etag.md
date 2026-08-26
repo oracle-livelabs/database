@@ -14,6 +14,11 @@ Estimated Lab Time: 5 minutes
 * Perform a conditional PUT that succeeds, then one that correctly fails with 412
 * Leave the database state exactly as you found it
 
+### Prerequisites
+
+* Completed **Lab 5** — `store_menu_dv` created and REST-enabled
+* A terminal with `curl` and `jq` available
+
 ## Task 1: Set Your Connection Variables
 
 1. In a **terminal**, export your ORDS endpoint and credentials. The host is the same one you used for the REST read in Lab 5 — substitute your own values:
@@ -28,7 +33,7 @@ Estimated Lab Time: 5 minutes
 
 ## Task 2: Run the Choreography
 
-1. Paste the whole block into the same **terminal** (also in `scripts/05_ords_etag.sh`). It needs `curl` and `jq` — both standard on macOS and Linux; on Windows use Git Bash or WSL. It does four things, printing each step — no hand-edited JSON, no copy-pasted etag strings:
+1. Paste the whole block into the same **terminal**. It needs `curl` and `jq` — both standard on macOS and Linux; on Windows use Git Bash or WSL. It does four things, printing each step — no hand-edited JSON, no copy-pasted etag strings:
 
     ```
     <copy>
@@ -77,6 +82,8 @@ Estimated Lab Time: 5 minutes
 ## Learn More
 
 * [ORDS AutoREST and ETags](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform

@@ -174,6 +174,49 @@ Next, combine distance with inventory so the fulfillment recommendation reflects
 
 2. This is the practical value of spatial data in a converged database. The same query can explain location, product, and inventory evidence without copying map data into another system.
 
+3. 🎯 **Interactive challenge: compare a second customer location.**
+
+    Starting with the stocked-center query above, change only `customer_id = 1` to `customer_id = 2`. Run your revised query. Which center with positive on-hand quantity should be reviewed first for the second customer, and why are distance and on-hand quantity not enough to make the fulfillment decision?
+
+    <details>
+    <summary><strong>Challenge answer: distance and on-hand quantity are separate signals</strong></summary>
+
+    **Expected output: Stocked Centers for Customer 2**
+
+    The selected product stays the same, while a different customer location changes the distance ranking. In the current workshop data, `Minneapolis North Central` ranks first at `358.5` miles with `494` units on hand. Only centers with positive on-hand quantity appear; the query does not establish available-to-promise inventory or operating readiness.
+
+    > Review `Minneapolis North Central` first because it is the nearest returned location with positive on-hand quantity for the selected product. Before assigning the order, confirm available-to-promise quantity, active operating status, current center load, delivery commitment, and other constraints. Oracle Spatial keeps customer location, center location, inventory, and product evidence together for that human decision.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT fc.center_name AS "Center",
+           fc.city AS "City",
+           fc.state_province AS "State",
+           p.product_name AS "Product",
+           i.quantity_on_hand AS "On Hand",
+           ROUND(SDO_GEOM.SDO_DISTANCE(fc.location, c.location, 0.005, 'unit=MILE'), 1) AS "Miles"
+    FROM fulfillment_centers fc
+    JOIN inventory i
+      ON i.center_id = fc.center_id
+    JOIN products p
+      ON p.product_id = i.product_id
+    CROSS JOIN (SELECT location FROM customers WHERE customer_id = 2) c
+    WHERE p.product_id = (
+      SELECT product_id
+      FROM products
+      ORDER BY product_id
+      FETCH FIRST 1 ROWS ONLY
+    )
+      AND i.quantity_on_hand > 0
+    ORDER BY "Miles"
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
     Next, you use Oracle Machine Learning to prioritize which products deserve attention after the business has reviewed demand, influence, and fulfillment evidence.
 
 ## Next Steps

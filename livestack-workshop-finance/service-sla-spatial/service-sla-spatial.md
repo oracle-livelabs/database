@@ -39,10 +39,13 @@ The second image is the Client Service and SLA Coverage page. It combines a map,
 
 ### Objectives
 
-- Find service centers nearest to New York Metro.
-- Inspect SLA zone coverage.
+- Run spatial SQL that measures service-center distance to New York Metro.
+- Summarize SLA response-zone commitments.
+- Open Spatial Studio from Database Actions.
+- Create database-backed datasets for service centers and demand regions.
+- Build and save a New York Metro service coverage project.
 
-Estimated Time: **10 minutes**
+Estimated Time: **25 minutes**
 
 ### Business Scenario
 
@@ -54,6 +57,8 @@ Estimated Time: **10 minutes**
 | What You Will See | Spatial data can quantify distance and regional service pressure in SQL. |
 | Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), distance calculations (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
 | Outcome | Operations teams can prioritize case-processing capacity based on geography and demand. |
+
+Persona focus: You are helping a service operations leader measure nearby case-processing capacity, then use Spatial Studio to see the same New York Metro coverage story on a map.
 
 ## Task 1: Calculate service center distance to New York Metro
 
@@ -220,12 +225,140 @@ After locating nearby service centers, summarize the response commitments attach
 
     </details>
 
+## Task 3: Open Spatial Studio from Database Actions
+
+Now move from SQL evidence to the visual map. You will use the `LLUSER` database user and password supplied for the workshop.
+
+1. Return to the **Database Actions Launchpad**.
+
+2. If the dark-theme message appears, click **Done**.
+
+3. Confirm that the upper-right corner shows `LLUSER`.
+
+    ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
+
+4. On the **Development** tab, select **Spatial Studio** from the left-side tool list and click **Open**.
+
+5. If prompted, sign in with `LLUSER` and the workshop password.
+
+6. Confirm that Spatial Studio opens on the **Projects** page.
+
+    ![Spatial Studio Projects page](images/spatial-projects-home.png " ")
+
+## Task 4: Create the New York Metro Service Coverage Project
+
+In this task, you create two database-backed datasets, add them to a map, filter the demand layer to New York Metro, and run a distance analysis to find nearby fulfillment centers.
+
+1. In Spatial Studio, click the **Datasets** icon in the left navigation, then click **Create dataset**.
+
+    ![Open the Spatial Studio Datasets page and click Create dataset](images/spatial-create-dataset.png " ")
+
+2. Select **Database table/view**. Keep `DEFAULT_CONNECTION` selected, then click **Create**.
+
+    ![Create a Spatial Studio dataset from a database table or view](images/spatial-create-database.png " ")
+
+3. Expand `DEFAULT_CONNECTION`, then expand **Tables**.
+
+    ![Expand DEFAULT_CONNECTION and Tables in Spatial Studio](images/spatial-tables.png " ")
+
+4. Select these tables, then click **OK**:
+
+    - `DEMAND_REGIONS`
+    - `FULFILLMENT_CENTERS`
+
+    ![Select DEMAND_REGIONS and FULFILLMENT_CENTERS to create Spatial Studio datasets](images/spatial-select-tables.png " ")
+
+5. If Spatial Studio shows an issues page for `DEMAND_REGIONS`, click **Create Spatial Metadata and Index**, complete the prompt, then return to the dataset list. If you do not see this page, continue to the next step.
+
+    ![Resolve Spatial Studio dataset metadata and index issues if prompted](images/spatial-dataset-issues.png " ")
+
+6. From the dataset list, open the actions menu for `DEMAND_REGIONS`, then click **Create project**.
+
+    ![Create a Spatial Studio project from the DEMAND_REGIONS dataset](images/spatial-create-project-menu.png " ")
+
+7. In the project, click **Add dataset**.
+
+    ![Add another dataset to the Spatial Studio project](images/spatial-add-dataset-project.png " ")
+
+8. Select `FULFILLMENT_CENTERS`, then click **OK**.
+
+    ![Add FULFILLMENT_CENTERS to the Spatial Studio project](images/spatial-add-fulfillment-center.png " ")
+
+9. Drag `DEMAND_REGIONS` and `FULFILLMENT_CENTERS` onto the map.
+
+    Spatial Studio adds `DEMAND_REGIONS` as boundary shapes and `FULFILLMENT_CENTERS` as point locations.
+
+    ![Drag DEMAND_REGIONS and FULFILLMENT_CENTERS onto the Spatial Studio map](images/spatial-drag-drop-into-map.png " ")
+
+10. In the left panel, open the actions menu for `DEMAND_REGIONS`, then select **Configure**.
+
+11. In **Configure**, select **Filter**.
+
+    ![Open the DEMAND_REGIONS filter configuration](images/spatial-demand-regions-filter.png " ")
+
+12. Create a filter for New York Metro:
+
+    - Column: `REGION_NAME`
+    - Value: `New York Metro`
+
+13. Click **Apply**.
+
+    ![Apply the New York Metro filter to DEMAND_REGIONS](images/spatial-demand-region-apply.png " ")
+
+14. Select the New York Metro region on the map.
+
+    ![Select the New York Metro demand region on the map](images/spatial-select-new-york-region.png " ")
+
+15. Click **Spatial analysis**, then select **Return shapes within a specific distance**.
+
+16. Configure the analysis:
+
+    - Analysis layer: `FULFILLMENT_CENTERS`
+    - Location column: `FULFILLMENT_CENTERS.LOCATION`
+    - Boundary layer: `DEMAND_REGIONS`
+    - Boundary column: `DEMAND_REGIONS.BOUNDARY`
+    - Boundary option: use the selected New York Metro region
+
+    ![Configure the Spatial Studio distance analysis](images/spatial-analysis-setup.png " ")
+
+17. Set the distance to `250,000` meters.
+
+    ![Set the distance analysis to 250000 meters](images/spatial-analysis-distance.png " ")
+
+18. Rename the analysis layer to `Centers within 250,000 meters of New York Metro`.
+
+19. Run the analysis.
+
+20. Hide the original `FULFILLMENT_CENTERS` layer if needed so the analysis results are easier to see.
+
+    ![Spatial Studio results for centers within 250000 meters of New York Metro](images/spatial-analysis-results.png " ")
+
+21. Open **Settings**, then select **Interactions**.
+
+22. Configure the information window for the analysis results. Add these fields:
+
+    - `CENTER_NAME`
+    - `CITY`
+    - `STATE_PROVINCE`
+
+    If the points are hard to select, increase the point radius to `5` or `8`.
+
+    ![Configure the Spatial Studio information window](images/spatial-info-window.png " ")
+
+23. Right-click a result point to view the center details.
+
+    ![View details for a selected service center result](images/spatial-view-center-details.png " ")
+
+24. Click **Save**, then save the project as `New York Metro Service Coverage`.
+
+    ![Save the Spatial Studio project as New York Metro Service Coverage](images/spatial-save-project.png " ")
+
 ## Next Steps
 
-Congratulations on completing the spatial lab. You used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+Congratulations on completing the spatial lab. You created a Spatial Studio coverage project and used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can see where service capacity matters most. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Linda Foinding, Principal Database Product Manager
+* **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd, 
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026
