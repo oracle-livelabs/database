@@ -119,7 +119,24 @@ Compare nearby network sites so field planning can pair location evidence with t
 
     The shortest listed pair is Hudson Yards 5G Macro Site and Newark 5G Core Site, at 9.0 miles. In a live response, a planner would combine this distance with crew availability and the case impact already identified in the graph lab.
 
+2. 🎯 **Interactive challenge: decide whether nearest means ready.**
+
+    Use the baseline result to make one bounded decision: should the field planner assign Newark immediately because it is the nearest returned site to Hudson Yards? Identify the additional evidence required before dispatch.
+
+    <details>
+    <summary><strong>Challenge answer: distance narrows options but does not authorize dispatch</strong></summary>
+
+    **Expected output: Field-Response Review Decision**
+
+    > Review Newark first because it is the nearest returned site at 9.0 miles, but do not assign it from distance alone. Confirm available capacity, crew skills and availability, the affected service, maintenance windows, service-level commitments, and the graph's subscriber-impact evidence. Oracle Spatial keeps the geographic calculation joinable to those governed operational records for a human planning decision.
+
+    </details>
+
+## Next Steps
+
+Congratulations on completing the Oracle Spatial lab. You inspected the governed point layers, calculated nearby network-site distances, and decided what evidence must accompany the nearest result. For deeper practice with proximity and containment queries, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=736).
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026
