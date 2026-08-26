@@ -1,0 +1,363 @@
+[
+  {
+    "name" : "Fraud Network",
+    "description" : null,
+    "tags" : null,
+    "version" : "7",
+    "layout" : "zeppelin",
+    "type" : "Default",
+    "snapshot" : false,
+    "isEditable" : true,
+    "isRunnable" : true,
+    "template" : "dsrgmn3y",
+    "templateConfig" : "{\"visualization\":{\"filters\":[{\"_id\":1583324064459,\"type\":\"styling\",\"enabled\":true,\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"target\":\"edge\",\"properties\":{\"colors\":[\"rgba(0, 0, 0, 0.1)\"],\"style\":[\"dashed\"],\"legendTitle\":[\"Hidden Connection\"]}},{\"_id\":1590499315755,\"type\":\"aggregation\",\"enabled\":true,\"conditions\":{\"operator\":\"and\",\"conditions\":[]},\"component\":\"vertex\",\"target\":\"vertex\",\"properties\":{},\"aggregation\":[{\"source\":\"\",\"type\":\"average\"}]}],\"version\":4}}",
+    "paragraphs" : [
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "**Financial Crime Network with Property Graph**"
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1785963541972,
+          "endTime" : 1785963542007,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p><strong>Financial Crime Network with Property Graph</strong></p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "This query treats the fraud data as a graph. In the MATCH pattern, (seed IS entity) is the starting account, -[e IS related_to]->{1,2} means follow one or two relationship hops, and (reached IS entity) is every entity reached from that starting point.",
+          "",
+          "The WHERE clause anchors the search on ACCT-8841, and the COLUMNS clause returns graph properties in a normal SQL result table.",
+          "",
+          "This is much easier than writing the same logic with ordinary joins. Without SQL/PGQ graph pattern matching, you would need separate self-joins for one-hop and two-hop paths, extra union logic for each relationship depth, and more code every time investigators want to follow another type of relationship.",
+          "",
+          "The graph pattern says the investigation in plain terms: start with this account, follow the relationships, and show what is connected."
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1785963514722,
+          "endTime" : 1785963514772,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p>This query treats the fraud data as a graph. In the MATCH pattern, (seed IS entity) is the starting account, -[e IS related_to]-&gt;{1,2} means follow one or two relationship hops, and (reached IS entity) is every entity reached from that starting point.</p>\n<p>The WHERE clause anchors the search on ACCT-8841, and the COLUMNS clause returns graph properties in a normal SQL result table.</p>\n<p>This is much easier than writing the same logic with ordinary joins. Without SQL/PGQ graph pattern matching, you would need separate self-joins for one-hop and two-hop paths, extra union logic for each relationship depth, and more code every time investigators want to follow another type of relationship.</p>\n<p>The graph pattern says the investigation in plain terms: start with this account, follow the relationships, and show what is connected.</p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%sql",
+          "SELECT DISTINCT entity_key, display_name, entity_type,",
+          "       risk_score, risk_level, total_amount, channel",
+          "FROM GRAPH_TABLE ( fraud_network",
+          "  MATCH (seed IS entity) -[e IS related_to]->{1,2} (reached IS entity)",
+          "  WHERE seed.entity_key = 'ACCT-8841'",
+          "  COLUMNS (",
+          "    reached.entity_key AS entity_key,",
+          "    reached.display_name AS display_name,",
+          "    reached.entity_type AS entity_type,",
+          "    reached.risk_score AS risk_score,",
+          "    reached.risk_level AS risk_level,",
+          "    reached.total_amount AS total_amount,",
+          "    reached.channel AS channel",
+          "  )",
+          ")",
+          "ORDER BY risk_score DESC",
+          "FETCH FIRST 25 ROWS ONLY;"
+        ],
+        "selectedVisualization" : "table",
+        "visualizationConfig" : null,
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1785359534648,
+          "endTime" : 1785359535125,
+          "interpreter" : "sql",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "{\"table\":\"ENTITY_KEY\\tDISPLAY_NAME\\tENTITY_TYPE\\tRISK_SCORE\\tRISK_LEVEL\\tTOTAL_AMOUNT\\tCHANNEL\\nDEV-fp-91a7\\tMobile Fingerprint 91a7\\tdevice\\t98\\tcritical\\t42211.05\\tnetwork\\nPAYEE-MULE-017\\tMule Payee 017\\tpayee\\t97\\tcritical\\t36110.75\\tpayments\\nIP-198.51.100.44\\tResidential Proxy 198.51.100.44\\tip_address\\t95\\tcritical\\t38200.25\\tnetwork\\nPHONE-212-0199\\tReused VOIP 212-0199\\tphone\\t90\\tcritical\\t25110.25\\tcontact_center\\nPAYEE-CRYPTO-3\\tCrypto Ramp Wallet 3\\tpayee\\t87\\thigh\\t14325.5\\tpayments\\nBRANCH-NY-014\\tNY Midtown Branch 014\\tbranch\\t49\\tmedium\\t2800\\tbranch\"}",
+              "type" : "TABLE"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "Graph Visulization of previous query"
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1786029456251,
+          "endTime" : 1786029456285,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p>Graph Visulization of previous query</p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%sql",
+          "SELECT *",
+          "FROM GRAPH_TABLE (",
+          "  fraud_network",
+          "  MATCH (src IS entity)-[e IS related_to]->{1,2}(dst IS entity)",
+          "  WHERE src.entity_key = 'ACCT-8841'",
+          "  ONE ROW PER STEP (v1, e1, v2)",
+          "  COLUMNS (",
+          "    vertex_id(src) AS seed_id,",
+          "    vertex_id(v1) AS v1_id,",
+          "    edge_id(e1) AS e1_id,",
+          "    vertex_id(v2) AS v2_id",
+          "  )",
+          ");"
+        ],
+        "selectedVisualization" : "visualization",
+        "visualizationConfig" : "[{\"visualization\":{\"height\":455,\"ruleBasedStyles\":[{\"stylingEnabled\":true,\"visibilityEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"style\":{\"dasharray\":\"5\",\"color\":\"rgba(0, 0, 0, 0.1)\"},\"properties\":{\"style\":[\"dashed\"]},\"_id\":1583324064459,\"target\":\"edge\",\"type\":\"styling\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"legendTitle\":\"Hidden Connection\",\"_fromTemplate\":true},{\"_id\":\"-2c7d101f\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"RELATED_TO\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"RELATED_TO\",\"isDefaultRule\":true},{\"_id\":\"7dfb3494\",\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"ENTITY\"}]},\"properties\":{\"color\":\"yellow\",\"label\":{\"text\":\"${properties['RISK_SCORE']}\",\"color\":\"rgb(16, 14, 14)\",\"font\":{\"size\":14}},\"sizes\":[5],\"colors\":[\"yellow\",\"orange\",\"red\"],\"size\":5},\"aggregation\":[],\"style\":{\"label\":{\"text\":\"${properties['RISK_SCORE']}\",\"color\":\"rgb(16, 14, 14)\",\"font\":{\"size\":14}}},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":true,\"legendTitle\":\"ENTITY\"},{\"_id\":1786028814207,\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"RISK_SCORE\",\"operator\":\">=\",\"value\":\"90\"}]},\"properties\":{\"sizes\":[25],\"size\":25,\"color\":\"red\"},\"aggregation\":[],\"style\":{\"size\":25,\"color\":\"red\"},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":false,\"legendTitle\":\"RISK_SCORE < 90\"},{\"_id\":1786028688458,\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"RISK_SCORE\",\"operator\":\"<\",\"value\":\"90\"}]},\"properties\":{\"sizes\":[20],\"size\":20,\"color\":\"rgb(244, 150, 0)\"},\"aggregation\":[],\"style\":{\"size\":20,\"color\":\"rgb(244, 150, 0)\"},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":false,\"legendTitle\":\"RISK_SCORE < 90\"},{\"_id\":1786028459387,\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"RISK_SCORE\",\"operator\":\"<=\",\"value\":\"50\"}]},\"properties\":{\"sizes\":[15],\"size\":15,\"color\":\"rgb(255, 238, 0)\"},\"aggregation\":[],\"style\":{\"size\":15,\"color\":\"rgb(255, 238, 0)\"},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":false,\"legendTitle\":\" RISK_SCORE <= 50\"}],\"displaySizeOnLoad\":14,\"lastColumns\":[\"SEED_ID\",\"V1_ID\",\"E1_ID\",\"V2_ID\"],\"version\":11}}]",
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1785964168720,
+          "endTime" : 1785964185811,
+          "interpreter" : "sql",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "{\"schema\":\"LLUSER\",\"name\":\"default\",\"resultSetId\":\"14c0bc6c-69c0-4da7-b4bd-872ac507732c\",\"graph\":{\"vertices\":[{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":34,\"RISK_SCORE\":96.5,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"mobile\",\"ENTITY_KEY\":\"ACCT-8841\",\"TOTAL_AMOUNT\":18540.25,\"REGION\":\"New York\",\"ENTITY_ID\":1,\"ENTITY_TYPE\":\"account\",\"DISPLAY_NAME\":\"Premier Checking 8841\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":76,\"RISK_SCORE\":98,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"network\",\"ENTITY_KEY\":\"DEV-fp-91a7\",\"TOTAL_AMOUNT\":42211.05,\"REGION\":\"New York\",\"ENTITY_ID\":11,\"ENTITY_TYPE\":\"device\",\"DISPLAY_NAME\":\"Mobile Fingerprint 91a7\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":14}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":89,\"RISK_SCORE\":95,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"network\",\"ENTITY_KEY\":\"IP-198.51.100.44\",\"TOTAL_AMOUNT\":38200.25,\"REGION\":\"New York\",\"ENTITY_ID\":14,\"ENTITY_TYPE\":\"ip_address\",\"DISPLAY_NAME\":\"Residential Proxy 198.51.100.44\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":16}\",\"properties\":{\"CITY\":\"Brooklyn\",\"EVENT_COUNT\":42,\"RISK_SCORE\":90,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"contact_center\",\"ENTITY_KEY\":\"PHONE-212-0199\",\"TOTAL_AMOUNT\":25110.25,\"REGION\":\"New York\",\"ENTITY_ID\":16,\"ENTITY_TYPE\":\"phone\",\"DISPLAY_NAME\":\"Reused VOIP 212-0199\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":18}\",\"properties\":{\"CITY\":\"Bronx\",\"EVENT_COUNT\":44,\"RISK_SCORE\":97,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"payments\",\"ENTITY_KEY\":\"PAYEE-MULE-017\",\"TOTAL_AMOUNT\":36110.75,\"REGION\":\"New York\",\"ENTITY_ID\":18,\"ENTITY_TYPE\":\"payee\",\"DISPLAY_NAME\":\"Mule Payee 017\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":20}\",\"properties\":{\"CITY\":\"Los Angeles\",\"EVENT_COUNT\":22,\"RISK_SCORE\":87,\"RISK_LEVEL\":\"high\",\"IS_CONFIRMED_FRAUD\":0,\"CHANNEL\":\"payments\",\"ENTITY_KEY\":\"PAYEE-CRYPTO-3\",\"TOTAL_AMOUNT\":14325.5,\"REGION\":\"California\",\"ENTITY_ID\":20,\"ENTITY_TYPE\":\"payee\",\"DISPLAY_NAME\":\"Crypto Ramp Wallet 3\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":24}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":6,\"RISK_SCORE\":49,\"RISK_LEVEL\":\"medium\",\"IS_CONFIRMED_FRAUD\":0,\"CHANNEL\":\"branch\",\"ENTITY_KEY\":\"BRANCH-NY-014\",\"TOTAL_AMOUNT\":2800,\"REGION\":\"New York\",\"ENTITY_ID\":24,\"ENTITY_TYPE\":\"branch\",\"DISPLAY_NAME\":\"NY Midtown Branch 014\"},\"labels\":[\"ENTITY\"]}],\"edges\":[{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":1}\",\"properties\":{\"EVENT_COUNT\":18,\"RELATIONSHIP_TYPE\":\"shared_device\",\"STRENGTH\":0.982,\"TOTAL_AMOUNT\":18540.25},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":4}\",\"properties\":{\"EVENT_COUNT\":22,\"RELATIONSHIP_TYPE\":\"shared_ip\",\"STRENGTH\":0.963,\"TOTAL_AMOUNT\":18540.25},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":14}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":7}\",\"properties\":{\"EVENT_COUNT\":7,\"RELATIONSHIP_TYPE\":\"same_phone\",\"STRENGTH\":0.934,\"TOTAL_AMOUNT\":18540.25},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":16}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":11}\",\"properties\":{\"EVENT_COUNT\":5,\"RELATIONSHIP_TYPE\":\"uses_payee\",\"STRENGTH\":0.971,\"TOTAL_AMOUNT\":14120},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":18}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":15}\",\"properties\":{\"EVENT_COUNT\":6,\"RELATIONSHIP_TYPE\":\"transfers_to\",\"STRENGTH\":0.85,\"TOTAL_AMOUNT\":16980.5},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":18}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":20}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":31}\",\"properties\":{\"EVENT_COUNT\":1,\"RELATIONSHIP_TYPE\":\"opened_with\",\"STRENGTH\":0.694,\"TOTAL_AMOUNT\":0},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":24}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":35}\",\"properties\":{\"EVENT_COUNT\":40,\"RELATIONSHIP_TYPE\":\"login_from\",\"STRENGTH\":0.923,\"TOTAL_AMOUNT\":0},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":14}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\"}],\"numResults\":9,\"graphOwner\":\"LLUSER\",\"graphName\":\"FRAUD_NETWORK\",\"isLastResultSet\":true,\"vertexIdColumnNames\":[\"SEED_ID\",\"V1_ID\",\"V2_ID\"],\"edgeIdColumnNames\":[\"E1_ID\"]},\"table\":\"SEED_ID\\tV1_ID\\tE1_ID\\tV2_ID\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":11}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":4}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":14}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":7}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":16}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":11}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":18}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":31}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":24}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":11}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":18}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":18}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":15}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":20}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":4}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":14}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":14}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":35}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":11}}\"}",
+              "type" : "NETWORK"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "**Shared Entity Connections**"
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1786029398380,
+          "endTime" : 1786029398413,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p><strong>Shared Entity Connections</strong></p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "This visualization narrows the investigation to the device DEV-fp-91a7 and shows every entity directly connected to it. The red device at the center links multiple account vertices, including ACCT-8841, ACCT-5077, and ACCT-1190, revealing that they share the same access device. The additional IP-address connection provides supporting context: it may indicate another shared attribute associated with the same device and should be investigated alongside the linked accounts."
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1785965430827,
+          "endTime" : 1785965430861,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p>This visualization narrows the investigation to the device DEV-fp-91a7 and shows every entity directly connected to it. The red device at the center links multiple account vertices, including ACCT-8841, ACCT-5077, and ACCT-1190, revealing that they share the same access device. The additional IP-address connection provides supporting context: it may indicate another shared attribute associated with the same device and should be investigated alongside the linked accounts.</p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 12,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%sql",
+          "",
+          "SELECT *",
+          "FROM GRAPH_TABLE (",
+          "  fraud_network",
+          "  MATCH (account IS entity) -[e IS related_to]- (device IS entity)",
+          "  WHERE device.entity_key = 'DEV-fp-91a7'",
+          "  COLUMNS (",
+          "    vertex_id(account) AS account_id,",
+          "    edge_id(e)         AS related_to_id,",
+          "    vertex_id(device)  AS device_id",
+          "  )",
+          ");"
+        ],
+        "selectedVisualization" : "visualization",
+        "visualizationConfig" : "[{\"visualization\":{\"height\":355,\"ruleBasedStyles\":[{\"stylingEnabled\":true,\"visibilityEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"style\":{\"dasharray\":\"5\",\"color\":\"rgba(0, 0, 0, 0.1)\"},\"properties\":{\"style\":[\"dashed\"]},\"_id\":1583324064459,\"target\":\"edge\",\"type\":\"styling\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"legendTitle\":\"Hidden Connection\",\"_fromTemplate\":true},{\"_id\":\"7dfb3494\",\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"ENTITY\"}]},\"properties\":{\"color\":\"#8FBFD0\",\"label\":{\"text\":\"${properties['ENTITY_KEY']}\",\"color\":\"rgb(0, 0, 0)\",\"font\":{\"size\":11}}},\"aggregation\":[],\"style\":{\"color\":\"#8FBFD0\",\"label\":{\"text\":\"${properties['ENTITY_KEY']}\",\"color\":\"rgb(0, 0, 0)\",\"font\":{\"size\":11}}},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":true,\"legendTitle\":\"ENTITY\"},{\"_id\":1785965241099,\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"ENTITY_KEY\",\"operator\":\"=\",\"value\":\"DEV-fp-91a7\"}]},\"properties\":{\"color\":\"rgb(223, 0, 0)\",\"icon\":{\"class\":\"fa-mobile\",\"color\":\"white\"},\"shape\":[\"circle\"]},\"aggregation\":[],\"style\":{\"icon\":{\"class\":\"fa-mobile\",\"color\":\"white\"},\"color\":\"rgb(223, 0, 0)\",\"shape\":{\"type\":\"circle\"}},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":false,\"legendTitle\":\"DEV-fp-91a7\"},{\"_id\":\"-2c7d101f\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"RELATED_TO\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"RELATED_TO\",\"isDefaultRule\":true},{\"_id\":1785965201258,\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"ENTITY_TYPE\",\"operator\":\"=\",\"value\":\"ip_address\"}]},\"properties\":{\"color\":\"rgb(0, 103, 167)\",\"icon\":{\"class\":\"fa-network-hub\",\"color\":\"white\"}},\"aggregation\":[],\"style\":{\"icon\":{\"class\":\"fa-network-hub\",\"color\":\"white\"},\"color\":\"rgb(0, 103, 167)\"},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":false,\"legendTitle\":\"IP_ADDRESSES\"},{\"_id\":1785965131834,\"visibilityEnabled\":true,\"stylingEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"ENTITY_TYPE\",\"operator\":\"=\",\"value\":\"account\"}]},\"properties\":{\"color\":\"rgb(4, 212, 49)\",\"icon\":{\"class\":\"fa-bank\",\"color\":\"white\"}},\"aggregation\":[],\"style\":{\"icon\":{\"class\":\"fa-bank\",\"color\":\"white\"},\"color\":\"rgb(4, 212, 49)\"},\"component\":\"vertex\",\"type\":\"styling\",\"target\":\"vertex\",\"isDefaultRule\":false,\"legendTitle\":\"ACCOUNTS\"}],\"displaySizeOnLoad\":9,\"lastColumns\":[\"ACCOUNT_ID\",\"RELATED_TO_ID\",\"DEVICE_ID\"],\"version\":11}}]",
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1785964967444,
+          "endTime" : 1785964969216,
+          "interpreter" : "sql",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "{\"schema\":\"LLUSER\",\"name\":\"default\",\"resultSetId\":\"64abf0d5-22e0-42bf-90a2-1582ab42a2e9\",\"graph\":{\"vertices\":[{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":34,\"RISK_SCORE\":96.5,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"mobile\",\"ENTITY_KEY\":\"ACCT-8841\",\"TOTAL_AMOUNT\":18540.25,\"REGION\":\"New York\",\"ENTITY_ID\":1,\"ENTITY_TYPE\":\"account\",\"DISPLAY_NAME\":\"Premier Checking 8841\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":2}\",\"properties\":{\"CITY\":\"Brooklyn\",\"EVENT_COUNT\":27,\"RISK_SCORE\":91,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"web\",\"ENTITY_KEY\":\"ACCT-1190\",\"TOTAL_AMOUNT\":12420,\"REGION\":\"New York\",\"ENTITY_ID\":2,\"ENTITY_TYPE\":\"account\",\"DISPLAY_NAME\":\"Rewards Credit 1190\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":3}\",\"properties\":{\"CITY\":\"Jersey City\",\"EVENT_COUNT\":21,\"RISK_SCORE\":88,\"RISK_LEVEL\":\"high\",\"IS_CONFIRMED_FRAUD\":0,\"CHANNEL\":\"mobile\",\"ENTITY_KEY\":\"ACCT-5077\",\"TOTAL_AMOUNT\":9450.8,\"REGION\":\"New Jersey\",\"ENTITY_ID\":3,\"ENTITY_TYPE\":\"account\",\"DISPLAY_NAME\":\"Small Business 5077\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":76,\"RISK_SCORE\":98,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"network\",\"ENTITY_KEY\":\"DEV-fp-91a7\",\"TOTAL_AMOUNT\":42211.05,\"REGION\":\"New York\",\"ENTITY_ID\":11,\"ENTITY_TYPE\":\"device\",\"DISPLAY_NAME\":\"Mobile Fingerprint 91a7\"},\"labels\":[\"ENTITY\"]},{\"id\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":14}\",\"properties\":{\"CITY\":\"New York\",\"EVENT_COUNT\":89,\"RISK_SCORE\":95,\"RISK_LEVEL\":\"critical\",\"IS_CONFIRMED_FRAUD\":1,\"CHANNEL\":\"network\",\"ENTITY_KEY\":\"IP-198.51.100.44\",\"TOTAL_AMOUNT\":38200.25,\"REGION\":\"New York\",\"ENTITY_ID\":14,\"ENTITY_TYPE\":\"ip_address\",\"DISPLAY_NAME\":\"Residential Proxy 198.51.100.44\"},\"labels\":[\"ENTITY\"]}],\"edges\":[{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":1}\",\"properties\":{\"EVENT_COUNT\":18,\"RELATIONSHIP_TYPE\":\"shared_device\",\"STRENGTH\":0.982,\"TOTAL_AMOUNT\":18540.25},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":1}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":2}\",\"properties\":{\"EVENT_COUNT\":14,\"RELATIONSHIP_TYPE\":\"shared_device\",\"STRENGTH\":0.941,\"TOTAL_AMOUNT\":12420},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":2}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":3}\",\"properties\":{\"EVENT_COUNT\":9,\"RELATIONSHIP_TYPE\":\"shared_device\",\"STRENGTH\":0.886,\"TOTAL_AMOUNT\":9450.8},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":3}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\"},{\"id\":\"FRAUD_RELATIONSHIPS{\\\"RELATIONSHIP_ID\\\":35}\",\"properties\":{\"EVENT_COUNT\":40,\"RELATIONSHIP_TYPE\":\"login_from\",\"STRENGTH\":0.923,\"TOTAL_AMOUNT\":0},\"labels\":[\"RELATED_TO\"],\"source\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":14}\",\"target\":\"FRAUD_ENTITIES{\\\"ENTITY_ID\\\":11}\"}],\"numResults\":4,\"graphOwner\":\"LLUSER\",\"graphName\":\"FRAUD_NETWORK\",\"isLastResultSet\":true,\"vertexIdColumnNames\":[\"ACCOUNT_ID\",\"DEVICE_ID\"],\"edgeIdColumnNames\":[\"RELATED_TO_ID\"]},\"table\":\"ACCOUNT_ID\\tRELATED_TO_ID\\tDEVICE_ID\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":11}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":11}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":3}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":3}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":11}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":14}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_RELATIONSHIPS\\\",\\\"KEY_VALUE\\\":{\\\"RELATIONSHIP_ID\\\":35}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"FRAUD_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"FRAUD_ENTITIES\\\",\\\"KEY_VALUE\\\":{\\\"ENTITY_ID\\\":11}}\"}",
+              "type" : "NETWORK"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      }
+    ]
+  }
+]
