@@ -31,10 +31,13 @@ The second image is the Financial Crime Network application workspace. The left 
 
 ### Objectives
 
-- Traverse fraud ring reach from a seed account.
-- Find shared device and IP clusters.
+- Run SQL/PGQ queries for fraud network analysis.
+- Interpret the relationship evidence behind suspicious accounts.
+- Open Graph Studio from Database Actions.
+- Import and run the finance fraud-network notebook.
+- Compare SQL results with graph visualizations.
 
-Estimated Time: **12 minutes**
+Estimated Time: **25 minutes**
 
 ### Business Scenario
 
@@ -50,6 +53,8 @@ Estimated Time: **12 minutes**
 Persona focus: You are helping a fraud analyst move from a suspicious account to explainable relationship evidence without turning the investigation into fragile join logic.
 
 ## Task 1: Trace two-hop fraud reach
+
+In this lab, you will investigate the fraud network in two views. First, you will run the SQL/PGQ queries in SQL Worksheet so you can see exactly how Oracle Database traces connected accounts, devices, IP addresses, phone numbers, and emails. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
 
 Start from suspicious account `ACCT-8841` and trace the connected entities within two relationship hops.
 
@@ -237,6 +242,8 @@ Next, find account pairs that share identifying evidence such as device, IP addr
     </details>
 
 ## Task 3: Open Graph Studio
+
+Now move from SQL evidence to the visual graphs. You will use the `LLUSER` database user and password supplied for the workshop.
 
 Start from the Database Actions Launchpad. You will use the `LLUSER` database user and password supplied for the workshop.
 

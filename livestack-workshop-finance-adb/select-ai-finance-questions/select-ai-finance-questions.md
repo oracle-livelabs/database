@@ -8,14 +8,23 @@ In this lab, you run an Oracle Machine Learning notebook. It shows the differenc
 
 > **Important:** Select AI output is generated. Wording and aliases can vary. Review the generated SQL and database results before trusting the answer.
 
+<details>
+<summary><strong>Key terms: Select AI, GenAI profile, Select AI Chat, SHOWSQL, and NARRATE</strong></summary>
+
+- **Select AI** lets you ask natural-language questions and use a database profile to turn those questions into SQL or grounded responses.
+- A **GenAI profile** stores the model provider, credentials, and database grounding settings that Select AI uses for a session.
+- **Select AI Chat** answers general questions with the model. It is useful for explanations, but it is not the same as asking Select AI to generate SQL over approved database objects.
+- **SHOWSQL** shows the SQL that Select AI generated from your natural-language prompt, so you can review the database logic before trusting the answer.
+- **NARRATE** returns a natural-language answer based on database evidence.
+
+</details>
+
 ### Objectives
 
 - Import and run the supplied finance Select AI notebook in Oracle Machine Learning.
-- Create AI-ready views over Seer Bank risk evidence.
-- Limit the `genai` profile to approved objects.
-- Use `SHOWSQL` to review generated SQL.
-- Use `NARRATE` to explain governed database evidence.
-- Check the current finance risk agent action count.
+- Ask governed natural-language questions over Seer Bank data.
+- Review generated SQL before trusting an AI answer.
+- Compare general chat with database-grounded Select AI responses.
 
 Estimated Time: **18 minutes**
 
