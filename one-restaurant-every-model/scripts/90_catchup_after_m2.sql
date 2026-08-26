@@ -3,7 +3,7 @@
 -- All catch-ups are SQL so mongosh-blocked attendees can run them.
 @01_seed_stores.sql
 
--- STATE CHECK: 5 stores; item 1000 at 1299 everywhere; s_104 drift planted
+-- STATE CHECK: 5 stores; item 1000 at 12.99 everywhere; s_104 drift planted
 SELECT s.data."_id".string() AS store_id, jt.item_id, jt.price
 FROM   "stores" s,
        JSON_TABLE(s.data, '$.menus[*].categories[*].items[*]'
