@@ -1,61 +1,153 @@
-// Lab 7: seed 40 orders, deterministically (no randomness - reproducible in
-// every sandbox).
+// Lab 7: seed 40 orders, deterministically.
 //
-// Customers belong to CUISINE COHORTS. This matters more than it looks:
-// GRAPH_TABLE matches co-orders through a shared *customer*, not a shared
-// order. If every customer cycles through every basket, all ten of them
-// eventually order everything, and "people who ordered X also ordered Y"
-// degenerates into "Y is the most popular item on the menu" - which is how an
-// earlier version of this seed had the Szechuan Tofu Stir-Fry recommending a
-// cheeseburger. Real diners have habits; the graph is only interesting if they
-// do.
-//
-// Line items SNAPSHOT the menu at order time (order = transaction truth):
-// item 1000 at the current corporate price 1499.
-const MENU = {
-  1000: { name: "Classic Cheeseburger",   price: 1499 },
-  1002: { name: "French Fries",           price: 499  },
-  1003: { name: "Garden Salad",           price: 899  },
-  2001: { name: "Szechuan Tofu Stir-Fry", price: 1199 },
-  2002: { name: "Beef Chow Fun",          price: 1399 },
-  3001: { name: "Carnitas Taco Plate",    price: 1099 }
+// Customers belong to ORDERING COHORTS. GRAPH_TABLE matches co-orders through a
+// shared CUSTOMER, not a shared order -- so if every customer cycled through
+// every basket they would all end up ordering everything, and "people who
+// ordered X also ordered Y" would collapse into "Y is the most popular item".
+// Each cohort also only orders at stores that actually SELL its items.
+const CATALOG = {
+  "1000": {
+    "name": "Classic Cheeseburger",
+    "price": 12.99
+  },
+  "1001": {
+    "name": "Bacon Double Stack",
+    "price": 15.99
+  },
+  "1002": {
+    "name": "French Fries",
+    "price": 4.99
+  },
+  "1003": {
+    "name": "Garden Salad",
+    "price": 8.99
+  },
+  "1004": {
+    "name": "Black Bean Chipotle Burger",
+    "price": 11.99
+  },
+  "1005": {
+    "name": "Buffalo Chicken Sandwich",
+    "price": 13.49
+  },
+  "1006": {
+    "name": "Chocolate Malt Shake",
+    "price": 5.99
+  }
 };
-
-// Ten customers, four orders each = 40. Each cohort works through its own
-// basket rotation, so the co-order neighbourhoods stay cuisine-coherent.
 const COHORTS = [
-  { name: "noodle", customers: ["c_1", "c_2", "c_3"],
-    baskets: [[2001, 2002], [2001, 2002], [2001, 2002], [2002, 1003]] },
-  { name: "burger", customers: ["c_4", "c_5", "c_6", "c_7"],
-    baskets: [[1000, 1002], [1000, 1002], [1000, 1002], [1000, 1003]] },
-  { name: "taco",   customers: ["c_8", "c_9", "c_10"],
-    baskets: [[3001, 1002], [3001, 1002], [3001, 1003], [3001, 1002]] }
+  {
+    "name": "classic",
+    "customers": [
+      "c_1",
+      "c_2",
+      "c_3",
+      "c_4"
+    ],
+    "stores": [
+      "s_100",
+      "s_101",
+      "s_102",
+      "s_104"
+    ],
+    "baskets": [
+      [
+        1000,
+        1002
+      ],
+      [
+        1000,
+        1002
+      ],
+      [
+        1000,
+        1002
+      ],
+      [
+        1000,
+        1003
+      ]
+    ]
+  },
+  {
+    "name": "veggie",
+    "customers": [
+      "c_5",
+      "c_6",
+      "c_7"
+    ],
+    "stores": [
+      "s_101",
+      "s_103"
+    ],
+    "baskets": [
+      [
+        1004,
+        1003
+      ],
+      [
+        1004,
+        1003
+      ],
+      [
+        1004,
+        1003
+      ],
+      [
+        1004,
+        1002
+      ]
+    ]
+  },
+  {
+    "name": "indulgent",
+    "customers": [
+      "c_8",
+      "c_9",
+      "c_10"
+    ],
+    "stores": [
+      "s_100",
+      "s_101"
+    ],
+    "baskets": [
+      [
+        1001,
+        1006
+      ],
+      [
+        1001,
+        1006
+      ],
+      [
+        1001,
+        1006
+      ],
+      [
+        1001,
+        1002
+      ]
+    ]
+  }
 ];
 
-const ORDERS_TOTAL = 40;
 const orders = [];
 let n = 0;
-for (const cohort of COHORTS) {
-  for (const customer of cohort.customers) {
-    for (const basket of cohort.baskets) {
+for (const co of COHORTS) {
+  co.customers.forEach((cust, ci) => {
+    co.baskets.forEach((basket, bi) => {
       n += 1;
-      const items = basket.map(id => ({
-        item_id: id, name: MENU[id].name, price: MENU[id].price
-      }));
+      const store = co.stores[(ci + bi) % co.stores.length];
+      const items = basket.map(id => ({ item_id: id, name: CATALOG[id].name, price: CATALOG[id].price }));
       orders.push({
-        _id: "ord_" + (8000 + n),
-        customer_id: customer,
-        store_id: "s_10" + ((n - 1) % 5),
-        cohort: cohort.name,
-        status: "closed",
+        _id: "ord_" + (8000 + n), customer_id: cust, store_id: store,
+        cohort: co.name, status: "closed",
         opened_at: "2026-07-20T12:" + String(n).padStart(2, "0") + ":00Z",
-        items: items,
-        total: items.reduce((s, i) => s + i.price, 0)
+        items: items, total: items.reduce((s, i) => s + i.price, 0)
       });
-    }
-  }
+    });
+  });
 }
-// Re-run safe: fixed _id values would collide on a second run.
-db.orders.deleteMany({});
+try { db.orders.deleteMany({}); } catch (e) { /* first run: nothing to clear */ }
 db.orders.insertMany(orders);
-print("orders inserted: " + db.orders.countDocuments({}) + " (of " + ORDERS_TOTAL + ")");
+print("orders inserted: " + db.orders.countDocuments({}));

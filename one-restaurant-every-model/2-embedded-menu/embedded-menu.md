@@ -14,68 +14,27 @@ Estimated Lab Time: 8 minutes
 * Run the point read and projected read that make the document model feel great
 * Record the three-dials bet you just placed
 
+### Prerequisites
+
+* Completed **Lab 1** — `mongosh` connected to your database, and the SQL worksheet open
+
 ## Task 1: Seed the Franchise
 
-1. In **mongosh**, paste the seed (also in `scripts/01_seed_stores.mongo.js`). Five stores; note that **all five sell the Classic Cheeseburger (`item_id: 1000`)** — chain menu, chain item. That detail becomes load-bearing in Lab 3.
+1. In **mongosh**, paste the seed. Five stores; note that **all five sell the Classic Cheeseburger (`item_id: 1000`)** — chain menu, chain item. That detail becomes load-bearing in Lab 3.
+
+    Two deliberate wrinkles, both of which real franchises have. **Downtown lists item 1000 as "Lunch Classic"** — a location marketing the chain's burger under its own name, not drift. And **the Airport charges its own prices**: 14.99 for that burger against the chain's 12.99. Everything else inherits from corporate. Lab 4 gives those local decisions a place to live; Lab 5 shows the engine letting a location change its own name and price while refusing to let it rewrite the chain catalog.
 
     ```
     <copy>
-    db.stores.deleteMany({});
+    try { db.stores.deleteMany({}); } catch (e) { /* first run: nothing to clear */ }
     db.stores.insertMany([
-      { "_id": "s_100", "name": "Burger Palace",
-        "menus": [ { "menu_id": 10, "name": "Lunch Menu",
-          "categories": [ { "category_id": 100, "name": "Burgers",
-            "items": [
-              { "item_id": 1000, "name": "Lunch Classic",
-                "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-                "price": 1299, "active": true },
-              { "item_id": 1002, "name": "French Fries",
-                "description": "Twice-fried golden potato fries with sea salt",
-                "price": 499, "active": true } ] } ] } ] },
-      { "_id": "s_101", "name": "Burger Palace Uptown",
-        "menus": [ { "menu_id": 11, "name": "Lunch Menu",
-          "categories": [ { "category_id": 110, "name": "Burgers",
-            "items": [
-              { "item_id": 1000, "name": "Classic Cheeseburger",
-                "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-                "price": 1299, "active": true },
-              { "item_id": 1003, "name": "Garden Salad",
-                "description": "Crisp greens, heirloom tomato, house vinaigrette",
-                "price": 899, "active": true } ] } ] } ] },
-      { "_id": "s_102", "name": "Noodle House",
-        "menus": [ { "menu_id": 12, "name": "All Day Menu",
-          "categories": [ { "category_id": 120, "name": "Wok",
-            "items": [
-              { "item_id": 2001, "name": "Szechuan Tofu Stir-Fry",
-                "description": "Crispy tofu, fiery chili-garlic sauce, seasonal vegetables, no meat",
-                "price": 1199, "active": true },
-              { "item_id": 2002, "name": "Beef Chow Fun",
-                "description": "Wide rice noodles, wok-seared beef, scallion",
-                "price": 1399, "active": true },
-              { "item_id": 1000, "name": "Classic Cheeseburger",
-                "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-                "price": 1299, "active": true } ] } ] } ] },
-      { "_id": "s_103", "name": "Taco Verde",
-        "menus": [ { "menu_id": 13, "name": "Lunch Menu",
-          "categories": [ { "category_id": 130, "name": "Tacos",
-            "items": [
-              { "item_id": 3001, "name": "Carnitas Taco Plate",
-                "description": "Slow-braised pork, salsa verde, corn tortillas",
-                "price": 1099, "active": true },
-              { "item_id": 1000, "name": "Classic Cheeseburger",
-                "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-                "price": 1299, "active": true } ] } ] } ] },
-      { "_id": "s_104", "name": "Burger Palace Airport",
-        "menus": [ { "menu_id": 14, "name": "All Day Menu",
-          "categories": [ { "category_id": 140, "name": "Burgers",
-            "items": [
-              { "item_id": "1000", "name": "Classic Cheeseburger",
-                "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-                "price": 1299, "active": true },
-              { "item_id": 1002, "name": "French Fries",
-                "description": "Twice-fried golden potato fries with sea salt",
-                "price": 499, "active": true } ] } ] } ] }
-    ])
+      {"_id": "s_100", "name": "Burger Palace Downtown", "menus": [{"menu_id": 10, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 100, "name": "Burgers", "items": [{"item_id": 1000, "name": "Lunch Classic", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1001, "name": "Bacon Double Stack", "description": "Two smash patties, thick-cut bacon, smoked gouda", "price": 15.99, "active": true}]}, {"category_id": 101, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1003, "name": "Garden Salad", "description": "Crisp greens, heirloom tomato, house vinaigrette", "price": 8.99, "active": true}]}]}]},
+      {"_id": "s_101", "name": "Burger Palace Uptown", "menus": [{"menu_id": 11, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 110, "name": "Burgers", "items": [{"item_id": 1000, "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1001, "name": "Bacon Double Stack", "description": "Two smash patties, thick-cut bacon, smoked gouda", "price": 15.99, "active": true}, {"item_id": 1004, "name": "Black Bean Chipotle Burger", "description": "Smoky black bean patty, fiery chipotle aioli, no meat", "price": 11.99, "active": true}]}, {"category_id": 111, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1003, "name": "Garden Salad", "description": "Crisp greens, heirloom tomato, house vinaigrette", "price": 8.99, "active": true}]}]}]},
+      {"_id": "s_102", "name": "Burger Palace Riverside", "menus": [{"menu_id": 12, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 120, "name": "Burgers", "items": [{"item_id": 1000, "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1005, "name": "Buffalo Chicken Sandwich", "description": "Crispy chicken thigh, cayenne hot sauce, blue cheese", "price": 13.49, "active": true}]}, {"category_id": 121, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1006, "name": "Chocolate Malt Shake", "description": "Hand-spun chocolate malt, whole milk, whipped cream", "price": 5.99, "active": true}]}]}]},
+      {"_id": "s_103", "name": "Burger Palace Campus", "menus": [{"menu_id": 13, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 130, "name": "Burgers", "items": [{"item_id": 1000, "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1004, "name": "Black Bean Chipotle Burger", "description": "Smoky black bean patty, fiery chipotle aioli, no meat", "price": 11.99, "active": true}, {"item_id": 1005, "name": "Buffalo Chicken Sandwich", "description": "Crispy chicken thigh, cayenne hot sauce, blue cheese", "price": 13.49, "active": true}]}, {"category_id": 131, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1003, "name": "Garden Salad", "description": "Crisp greens, heirloom tomato, house vinaigrette", "price": 8.99, "active": true}, {"item_id": 1006, "name": "Chocolate Malt Shake", "description": "Hand-spun chocolate malt, whole milk, whipped cream", "price": 5.99, "active": true}]}]}]},
+      {"_id": "s_104", "name": "Burger Palace Airport", "menus": [{"menu_id": 14, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 140, "name": "Burgers", "items": [{"item_id": "1000", "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 14.99, "active": true}, {"item_id": "1005", "name": "Buffalo Chicken Sandwich", "description": "Crispy chicken thigh, cayenne hot sauce, blue cheese", "price": 14.99, "active": true}]}, {"category_id": 141, "name": "Sides", "items": [{"item_id": "1002", "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 6.49, "active": true}]}]}]}
+    ]);
+    print("stores inserted: " + db.stores.countDocuments({}));
     </copy>
     ```
 
@@ -93,7 +52,7 @@ Estimated Lab Time: 8 minutes
     </copy>
     ```
 
-    **What you should see:** the entire Burger Palace menu in one read. That's just your application object — no joins, no ORM, no mapping layer. This is Part 1 of the Ask Tom sessions in one line: *store data the way you use it.*
+    **What you should see:** the entire Burger Palace menu in one read. That's just your application object — no joins, no ORM, no mapping layer. This is Part 1 of the Ask Tom sessions in one line: *store data the way you use it* — see the reference link under Learn More.
 
 2. A projected read — just names and prices:
 
@@ -126,8 +85,10 @@ The embedded model is the *correct* choice for these settings. Every document pa
 
 ## Learn More
 
-* [Modeling for the Access Pattern (Ask Tom series)](https://asktom.oracle.com/)
+* [Modeling for the Access Pattern (Ask Tom series)](https://www.youtube.com/watch?v=uJdUnB_cb1c)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
-* **Last Updated By/Date** - Rick Houlihan, July 2026
+* **Last Updated By/Date** - Hermann Baer, August 2026

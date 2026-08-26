@@ -1,7 +1,7 @@
 -- Lab 5 stretch: the READ-ONLY computed POS view - what a duality view
 -- deliberately won't do (COALESCE, filters), a plain view does freely.
--- The clock is PINNED to 13:00 so every attendee sees the Lunch menu
--- regardless of conference timezone.
+-- With the chain model the COALESCE is the real franchise rule:
+-- local value if the location set one, otherwise the corporate catalog value.
 CREATE OR REPLACE VIEW pos_menu_v AS
 SELECT JSON {
          '_id'  : s.store_id,
@@ -11,15 +11,12 @@ SELECT JSON {
                       'name'  : m.menu_name,
                       'items' : [ SELECT JSON {
                                     '_id'    : i.item_id,
-                                    'name'   : COALESCE(ov.override_name, i.item_name),
-                                    'active' : COALESCE(ov.override_active, i.active),
-                                    'price'  : i.price }
-                                  FROM item i
-                                  LEFT JOIN item_override ov
-                                         ON ov.item_id = i.item_id
-                                        AND ov.store_id = s.store_id
-                                  JOIN category c ON c.category_id = i.category_id
-                                  WHERE c.menu_id = m.menu_id ]
+                                    'name'   : COALESCE(mi.display_name, i.item_name),
+                                    'price'  : COALESCE(mi.price,        i.base_price),
+                                    'active' : COALESCE(mi.active,       i.active) }
+                                  FROM menu_item mi
+                                  JOIN item i ON i.item_id = mi.item_id
+                                  WHERE mi.menu_id = m.menu_id ]
                     }
                     FROM menu m
                     WHERE m.store_id = s.store_id
@@ -28,6 +25,6 @@ SELECT JSON {
        } AS json_doc
 FROM   store s;
 
--- What the POS sees at 13:00 for Burger Palace: override applied, computed, read-only
+-- What the POS sees for the Downtown location: the LOCAL name applied
 SELECT json_serialize(p.json_doc PRETTY) FROM pos_menu_v p
 WHERE  json_value(p.json_doc, '$._id') = 's_100';
