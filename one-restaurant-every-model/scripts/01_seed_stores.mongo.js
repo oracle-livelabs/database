@@ -1,64 +1,27 @@
-// Lab 2 seed: five stores, fully embedded menus.
-// Invariants (load-bearing for later labs — do not change casually):
-//   - ALL FIVE stores sell the Classic Cheeseburger (chain item)
-//   - item_id 1000 is a NUMBER in s_100..s_103 and the STRING "1000" in s_104 (planted drift)
+// Lab 2 seed: 5 locations of ONE chain, fully embedded menus.
+//
+// This is a CHAIN: every store is a Burger Palace location drawing from one
+// corporate catalog. Stores offer different SUBSETS of that catalog and may
+// override the local name or price -- which is what a franchise actually does.
+//
+// Invariants (load-bearing for later labs - do not change casually):
+//   - ALL 5 locations sell the Classic Cheeseburger (item 1000), the chain core
+//   - every catalog item is offered by >= 2 locations, and its corporate price is
+//     held by a strict majority -- otherwise corporate price is UNRECOVERABLE
+//     from the documents (base vs local override becomes indistinguishable)
+//   - item_id 1000 is a NUMBER everywhere except s_104, where it is the
+//     STRING "1000" (planted drift, the point of Lab 3)
+//   - s_100 renames item 1000 locally; s_104 prices 1000/1002/1005 above corporate
 //   - every item carries a description (Lab 8 embeds name + description)
-//   - prices start at 1299 for item 1000
-// Re-run safe: the _id values are fixed, so a second insertMany would fail
-// with ORA-00001. Clear first, exactly as the SQL scripts DELETE first.
-db.stores.deleteMany({});
+// Re-run safe: fixed _id values would collide on a second insertMany. The
+// try/catch matters on a FRESH schema, where the collection does not exist yet
+// -- 26ai Free raises ORA-00942 there, while Autonomous tolerates the no-op.
+try { db.stores.deleteMany({}); } catch (e) { /* first run: nothing to clear */ }
 db.stores.insertMany([
-  { "_id": "s_100", "name": "Burger Palace",
-    "menus": [ { "menu_id": 10, "name": "Lunch Menu",
-      "categories": [ { "category_id": 100, "name": "Burgers",
-        "items": [
-          { "item_id": 1000, "name": "Lunch Classic",
-            "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-            "price": 1299, "active": true },
-          { "item_id": 1002, "name": "French Fries",
-            "description": "Twice-fried golden potato fries with sea salt",
-            "price": 499, "active": true } ] } ] } ] },
-  { "_id": "s_101", "name": "Burger Palace Uptown",
-    "menus": [ { "menu_id": 11, "name": "Lunch Menu",
-      "categories": [ { "category_id": 110, "name": "Burgers",
-        "items": [
-          { "item_id": 1000, "name": "Classic Cheeseburger",
-            "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-            "price": 1299, "active": true },
-          { "item_id": 1003, "name": "Garden Salad",
-            "description": "Crisp greens, heirloom tomato, house vinaigrette",
-            "price": 899, "active": true } ] } ] } ] },
-  { "_id": "s_102", "name": "Noodle House",
-    "menus": [ { "menu_id": 12, "name": "All Day Menu",
-      "categories": [ { "category_id": 120, "name": "Wok",
-        "items": [
-          { "item_id": 2001, "name": "Szechuan Tofu Stir-Fry",
-            "description": "Crispy tofu, fiery chili-garlic sauce, seasonal vegetables, no meat",
-            "price": 1199, "active": true },
-          { "item_id": 2002, "name": "Beef Chow Fun",
-            "description": "Wide rice noodles, wok-seared beef, scallion",
-            "price": 1399, "active": true },
-          { "item_id": 1000, "name": "Classic Cheeseburger",
-            "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-            "price": 1299, "active": true } ] } ] } ] },
-  { "_id": "s_103", "name": "Taco Verde",
-    "menus": [ { "menu_id": 13, "name": "Lunch Menu",
-      "categories": [ { "category_id": 130, "name": "Tacos",
-        "items": [
-          { "item_id": 3001, "name": "Carnitas Taco Plate",
-            "description": "Slow-braised pork, salsa verde, corn tortillas",
-            "price": 1099, "active": true },
-          { "item_id": 1000, "name": "Classic Cheeseburger",
-            "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-            "price": 1299, "active": true } ] } ] } ] },
-  { "_id": "s_104", "name": "Burger Palace Airport",
-    "menus": [ { "menu_id": 14, "name": "All Day Menu",
-      "categories": [ { "category_id": 140, "name": "Burgers",
-        "items": [
-          { "item_id": "1000", "name": "Classic Cheeseburger",
-            "description": "Char-grilled smash patty, aged cheddar, brioche bun",
-            "price": 1299, "active": true },
-          { "item_id": 1002, "name": "French Fries",
-            "description": "Twice-fried golden potato fries with sea salt",
-            "price": 499, "active": true } ] } ] } ] }
+  {"_id": "s_100", "name": "Burger Palace Downtown", "menus": [{"menu_id": 10, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 100, "name": "Burgers", "items": [{"item_id": 1000, "name": "Lunch Classic", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1001, "name": "Bacon Double Stack", "description": "Two smash patties, thick-cut bacon, smoked gouda", "price": 15.99, "active": true}]}, {"category_id": 101, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1003, "name": "Garden Salad", "description": "Crisp greens, heirloom tomato, house vinaigrette", "price": 8.99, "active": true}]}]}]},
+  {"_id": "s_101", "name": "Burger Palace Uptown", "menus": [{"menu_id": 11, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 110, "name": "Burgers", "items": [{"item_id": 1000, "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1001, "name": "Bacon Double Stack", "description": "Two smash patties, thick-cut bacon, smoked gouda", "price": 15.99, "active": true}, {"item_id": 1004, "name": "Black Bean Chipotle Burger", "description": "Smoky black bean patty, fiery chipotle aioli, no meat", "price": 11.99, "active": true}]}, {"category_id": 111, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1003, "name": "Garden Salad", "description": "Crisp greens, heirloom tomato, house vinaigrette", "price": 8.99, "active": true}]}]}]},
+  {"_id": "s_102", "name": "Burger Palace Riverside", "menus": [{"menu_id": 12, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 120, "name": "Burgers", "items": [{"item_id": 1000, "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1005, "name": "Buffalo Chicken Sandwich", "description": "Crispy chicken thigh, cayenne hot sauce, blue cheese", "price": 13.49, "active": true}]}, {"category_id": 121, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1006, "name": "Chocolate Malt Shake", "description": "Hand-spun chocolate malt, whole milk, whipped cream", "price": 5.99, "active": true}]}]}]},
+  {"_id": "s_103", "name": "Burger Palace Campus", "menus": [{"menu_id": 13, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 130, "name": "Burgers", "items": [{"item_id": 1000, "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 12.99, "active": true}, {"item_id": 1004, "name": "Black Bean Chipotle Burger", "description": "Smoky black bean patty, fiery chipotle aioli, no meat", "price": 11.99, "active": true}, {"item_id": 1005, "name": "Buffalo Chicken Sandwich", "description": "Crispy chicken thigh, cayenne hot sauce, blue cheese", "price": 13.49, "active": true}]}, {"category_id": 131, "name": "Sides", "items": [{"item_id": 1002, "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 4.99, "active": true}, {"item_id": 1003, "name": "Garden Salad", "description": "Crisp greens, heirloom tomato, house vinaigrette", "price": 8.99, "active": true}, {"item_id": 1006, "name": "Chocolate Malt Shake", "description": "Hand-spun chocolate malt, whole milk, whipped cream", "price": 5.99, "active": true}]}]}]},
+  {"_id": "s_104", "name": "Burger Palace Airport", "menus": [{"menu_id": 14, "name": "All Day Menu", "start_time": "00:00", "end_time": "23:59", "active": true, "categories": [{"category_id": 140, "name": "Burgers", "items": [{"item_id": "1000", "name": "Classic Cheeseburger", "description": "Char-grilled smash patty, aged cheddar, brioche bun", "price": 14.99, "active": true}, {"item_id": "1005", "name": "Buffalo Chicken Sandwich", "description": "Crispy chicken thigh, cayenne hot sauce, blue cheese", "price": 14.99, "active": true}]}, {"category_id": 141, "name": "Sides", "items": [{"item_id": "1002", "name": "French Fries", "description": "Twice-fried golden potato fries with sea salt", "price": 6.49, "active": true}]}]}]}
 ]);
+print("stores inserted: " + db.stores.countDocuments({}));
