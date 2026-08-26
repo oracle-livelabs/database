@@ -18,6 +18,8 @@ After reviewing numeric exposure, analysts often need to search the language beh
 > - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
 >
 > - **Semantic search** means searching by meaning instead of exact words. For example, a search for "financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review" can find related text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
+>
+> - **ALL\_MINILM\_L12\_V2** is the embedding model used in this lab. A model is the trained pattern that turns text into embeddings. This model reads a phrase such as `mortgage pre-approval risk` and returns a vector that Oracle Database can compare with the stored finance vectors.
 
 </details>
 
@@ -61,6 +63,15 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
     > In a fractured environment, teams often export text to an external embedding pipeline or search service. That can create extra copies of sensitive finance text and make it harder to explain which data was searched.
     >
     > Oracle AI Vector Search keeps the source text, vectors, SQL query, and similarity score close to the governed finance data. That makes semantic search easier to review and safer to operationalize.
+
+    </details>
+
+    <details>
+    <summary><strong>Why does the model name include ADMIN?</strong></summary>
+
+    > `ALL_MINILM_L12_V2` is the shared embedding model available in the workshop database. In this environment, the model is owned by `ADMIN`, so the SQL calls it as `ADMIN.ALL_MINILM_L12_V2`.
+    >
+    > The finance tables and views are in your `LLUSER` schema. Only the shared embedding model uses the `ADMIN.` prefix.
 
     </details>
 
