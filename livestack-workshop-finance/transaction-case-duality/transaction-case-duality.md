@@ -223,8 +223,6 @@ Now act as an application developer. You will create a transaction as one nested
       FROM orders
       WHERE order_id = 900001
     );
-
-    COMMIT;
     </copy>
     ```
 
@@ -232,7 +230,17 @@ Now act as an application developer. You will create a transaction as one nested
 
     On the first run, Oracle inserts one document. On later runs, the `NOT EXISTS` check returns zero rows because the workshop transaction is already present.
 
-2. Confirm the JSON document became relational rows.
+2. Commit the new transaction.
+
+    This `COMMIT;` is required. It makes the inserted document and its relational rows permanent before you verify them in the next step.
+
+    ```sql
+    <copy>
+    COMMIT;
+    </copy>
+    ```
+
+3. Confirm the JSON document became relational rows.
 
     ```sql
     <copy>
@@ -258,7 +266,7 @@ Now act as an application developer. You will create a transaction as one nested
     | --- | --- | --- | --- | --- | --- | --- |
     | 900001 | pending | 990001 | Premium Checking Bundle | 2 | 12.5 | 25 |
 
-3. Update the document status through the duality view.
+4. Update the document status through the duality view.
 
     This update changes JSON data through `ORDERS_DV`. Oracle Database writes the matching relational `ORDERS.ORDER_STATUS` value; no application-side JSON parsing, copy, or synchronization job is required.
 
@@ -267,8 +275,6 @@ Now act as an application developer. You will create a transaction as one nested
     UPDATE orders_dv
     SET data = JSON_TRANSFORM(data, SET '$.status' = 'confirmed')
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
-
-    COMMIT;
     </copy>
     ```
 
@@ -285,7 +291,17 @@ Now act as an application developer. You will create a transaction as one nested
 
     </details>
 
-4. Verify the updated relational status.
+5. Commit the document update.
+
+    This `COMMIT;` is required. It permanently writes the updated JSON document and the matching `ORDERS.ORDER_STATUS` value before you verify the relational result.
+
+    ```sql
+    <copy>
+    COMMIT;
+    </copy>
+    ```
+
+6. Verify the updated relational status.
 
     ```sql
     <copy>

@@ -124,9 +124,58 @@ Trace the entities connected to TEL-5G-2026-501 so each response team can see wh
 
     Because the relationship evidence stays beside the operational facts in the database, teams can reduce data copies and repeat the investigation path when a new network-experience case appears.
 
+2. 🎯 **Interactive challenge: compare a second critical case.**
+
+    Starting with the case-impact query above, replace only `TEL-5G-2026-501` with `TEL-FIBER-2026-224`. Run your revised query. Which entity roles enter or leave the coordinated review, and what does the smaller entity set tell you to investigate next?
+
+    <details>
+    <summary><strong>Challenge answer: each incident produces a different relationship scope</strong></summary>
+
+    **Expected output: Fiber-Outage Impact Entities**
+
+    The fiber case returns an affected enterprise account, the Atlanta network site, and the fiber-cut outage event. The subscriber cluster and support-case roles from the Hudson Yards case are not part of this result.
+
+    > The smaller set narrows the first response conversation to enterprise-account impact, the Atlanta fiber hub, and the outage event. It does not prove that no other entities are affected. Review graph coverage, service orders, current case updates, and field evidence before deciding the full scope. The graph keeps both case patterns queryable beside the relational evidence in Oracle AI Database.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT case_ref AS "Case",
+           priority AS "Priority",
+           subscribers_affected AS "Subscribers Affected",
+           service_value_at_risk AS "Value at Risk",
+           display_name AS "Connected Entity",
+           entity_type AS "Entity Type",
+           role_in_case AS "Role",
+           ROUND(confidence * 100, 1) AS "Evidence Confidence %"
+    FROM GRAPH_TABLE (telecom_experience_network
+      MATCH (c IS experience_case)-[e IS case_involves]->(n IS entity)
+      WHERE c.case_ref = 'TEL-FIBER-2026-224'
+      COLUMNS (
+        c.case_ref,
+        c.priority,
+        c.subscribers_affected,
+        c.service_value_at_risk,
+        n.display_name,
+        n.entity_type,
+        e.role_in_case,
+        e.confidence
+      )
+    )
+    ORDER BY role_in_case, entity_type, display_name;
+    </copy>
+    ```
+
+    </details>
+
     The graph identifies who and what is affected. The next lab adds location evidence so a field-operations planner can compare possible response sites.
+
+## Next Steps
+
+Congratulations on completing the Property Graph lab. You traversed the entities connected to the Hudson Yards case and compared that relationship scope with a critical fiber outage. For deeper practice, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026
