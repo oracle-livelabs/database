@@ -2,33 +2,32 @@
 
 ## Introduction
 
-Seer Bank has moved from dashboards and SQL evidence to governed natural-language answers. The risk analyst can ask which product categories have the highest exposure. They can inspect the SQL behind the answer.
+**Seer Bank** has moved from dashboards and SQL results to natural-language answers over approved views. A risk analyst can ask which product categories have the highest exposure and inspect the SQL behind the answer. The next step is controlled action.
 
-The next step is action. When a high-priority signal appears, the team needs a consistent workflow. It must retrieve evidence, apply the review rule, and leave an audit record.
+When a high-priority signal appears, the team needs a consistent workflow that retrieves the signal, applies the review rule, creates only the allowed review record, and leaves an audit trail.
 
-In this lab, you run an Oracle Machine Learning notebook. It creates function tools, an agent, a task, and a team. Then you run `SELECT AI AGENT` and inspect the action history.
+In this lab, you run an Oracle Machine Learning notebook that creates function tools, an agent, a task, and a team. Then you run `SELECT AI AGENT` and inspect the action history to verify what the workflow did.
 
 The agent has two function tools:
 
 - `FINANCE_SIGNAL_LOOKUP_TOOL` retrieves the highest-priority current risk signal.
 - `FINANCE_ESCALATE_TOOL` checks the score threshold and creates one simulated analyst-review record.
 
-The tools cannot change transactions, accounts, balances, products, clients, or source risk signals.
+The tools cannot modify transactions, accounts, balances, products, clients, or source risk signals. The only controlled write is the simulated analyst-review record created by the escalation tool when the threshold rule is met.
 
 <details>
 <summary><strong>Key terms: Select AI Agent, tool, agent, task, and team</strong></summary>
 
-- A **Select AI Agent** uses approved tools to complete a natural-language request through a controlled database workflow.
-- A **tool** is a database function or procedure that the agent is allowed to call.
-- An **agent** decides which approved tool to use for a specific request.
-- A **task** describes the work the agent should complete.
-- A **team** groups the agent and task so the workflow can run from `SELECT AI AGENT`.
+- Import and run the supplied Select AI Agent notebook in Oracle Machine Learning.
+- Use an agent to triage the highest-priority current risk signal.
+- See how approved tools let an agent retrieve evidence and create one controlled review record.
+- Inspect database action rows and native agent history after the workflow runs.
 
 </details>
 
 ### Objectives
 
-- Import and run the supplied Select AI Agent notebook in Oracle Machine Learning.
+- Import the supplied notebook so the Select AI Agent workflow is already staged in Oracle Machine Learning.
 - Use an agent to triage a high-priority risk signal.
 - See how approved tools let an agent retrieve evidence and create a review record.
 - Inspect the results of the agent workflow.
@@ -40,7 +39,7 @@ Estimated Time: **22 minutes**
 | Step | Finance focus |
 | --- | --- |
 | Business Problem | High-risk signals need consistent triage and a durable review record. |
-| Technical Challenge | An agent must retrieve evidence, apply a rule, and record the outcome without changing protected finance data. |
+| Technical Challenge | An agent must retrieve the top signal, apply the threshold rule, and record the outcome without changing protected finance data. |
 | Persona Focus | A risk operations analyst requests triage; an AI engineer exposes narrow tools; a reviewer inspects the audit history. |
 | What You Will See | A Select AI Agent can coordinate approved read and write tools inside a constrained database boundary. |
 | Database Capability | Oracle Select AI Agents, function tools, OML notebooks, `AGENT_ACTIONS`, and native history views. |
@@ -48,7 +47,7 @@ Estimated Time: **22 minutes**
 
 ## Task 1: Import the Finance Select AI Agent Notebook
 
-In this lab, you run the hands-on steps from an Oracle Machine Learning notebook.
+Import the supplied notebook so the **Select AI Agent** workflow is already staged in **Oracle Machine Learning**:
 
 1. Download [finance-select-ai-agent-notebook.json](files/finance-select-ai-agent-notebook.json).
 
@@ -70,11 +69,11 @@ In this lab, you run the hands-on steps from an Oracle Machine Learning notebook
 
     ![Imported Select AI Agent notebook in Oracle Machine Learning](images/lab9-import-notebook.png)
 
-Leave the notebook open. Tasks 2 through 12 run in this OML notebook. Each SQL paragraph is already included. Click the play button to run each paragraph in order.
+Leave the notebook open. Tasks **2** through **12** run in this OML notebook, and each SQL paragraph is already included. Run the paragraphs in order so the profile, functions, tools, agent, task, team, and verification steps build correctly.
 
 ## Task 2: Activate the Profile
 
-Set the `genai` profile. Then limit the object list to the Seer Bank objects the agent needs.
+Activate the `genai` profile and limit the object list to the Seer Bank objects the agent needs for risk triage:
 
 1. Run the profile setup paragraph.
 
@@ -101,7 +100,7 @@ Set the `genai` profile. Then limit the object list to the Seer Bank objects the
 
 ## Task 3: Create the Helper Functions
 
-The agent tools call database functions. One function reads the highest-priority signal. The other applies the escalation rule and writes one controlled action row.
+Create the helper functions that define what the agent is allowed to do: retrieve the highest-priority signal and create one controlled escalation row when the threshold rule is met:
 
 1. Create the helper functions.
 
@@ -238,7 +237,7 @@ The agent tools call database functions. One function reads the highest-priority
 
 ## Task 4: Test the Lookup Function
 
-Before creating tools, test the read-only helper function directly.
+Test the lookup function directly before exposing it as an agent tool, so the top-signal retrieval step is proven on its own:
 
 1. Inspect the top risk signal.
 
@@ -255,7 +254,7 @@ Before creating tools, test the read-only helper function directly.
 
 ## Task 5: Reset Agent Objects and Action Rows
 
-Before creating the agent objects, remove any earlier workshop copy. This includes the tools, agent, task, team, and simulated action rows.
+Reset prior workshop agent objects and simulated action rows so this run starts from a clean, repeatable state:
 
 1. Reset the workshop agent objects.
 
@@ -304,7 +303,7 @@ Before creating the agent objects, remove any earlier workshop copy. This includ
 
 ## Task 6: Create the Agent Tools
 
-The tools are the agent boundary. They expose only the two database functions needed for risk triage.
+Create the lookup and escalation tools that form the agent boundary. The agent can only act through these approved database functions:
 
 1. Create the lookup and escalation tools.
 
@@ -335,7 +334,7 @@ The tools are the agent boundary. They expose only the two database functions ne
 
 ## Task 7: Create the Agent, Task, and Team
 
-Now build the agent workflow. The role defines the boundary. The task requires evidence before action. The team activates the task for `SELECT AI AGENT`.
+Create the agent, task, and team so the workflow requires the lookup result before any escalation and runs through a sequential controlled process:
 
 1. Create the agent, task, and team.
 
@@ -369,11 +368,11 @@ Now build the agent workflow. The role defines the boundary. The task requires e
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** The agent, task, and sequential team are created and enabled.
+    **Note:** Agent wording and tool-result formatting can vary. Focus on whether the response reports the signal details and states whether an analyst-review escalation was created.
 
 ## Task 8: Verify the Agent Components
 
-Check that the tools, agent, task, and team were created successfully.
+Verify the component inventory before running the agent, so the learner can confirm that the two tools, agent, task, and team are enabled:
 
 1. Verify the component inventory.
 
@@ -409,7 +408,7 @@ Check that the tools, agent, task, and team were created successfully.
 
 ## Task 9: Run the Risk-Triage Agent
 
-Now ask the agent to triage the current highest-priority risk signal. The task requires evidence first. The agent calls the escalation tool only when the threshold is met.
+Run the risk-triage agent only after the components are verified, so the request follows the approved evidence-first workflow:
 
 1. Run the agent request.
 
@@ -423,11 +422,11 @@ Now ask the agent to triage the current highest-priority risk signal. The task r
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** The agent reports the risk signal evidence and whether an analyst-review escalation was created.
+    **Note:** Agent wording and tool-result formatting can vary. Focus on whether the response reports signal evidence and states whether an analyst-review escalation was created.
 
 ## Task 10: Review the Business Action Record
 
-The escalation is not trusted just because the agent says it happened. Verify the database action row.
+Verify the business action record in the database instead of trusting the agent response alone:
 
 1. Inspect the simulated analyst-review action.
 
@@ -452,7 +451,7 @@ The escalation is not trusted just because the agent says it happened. Verify th
 
 ## Task 11: Review the Native Agent History
 
-Oracle records agent execution history. Use the history views to confirm tool calls and team status.
+Review native agent history so the workflow can be audited through tool calls and team execution state, not just the final answer:
 
 1. Review the latest tool and team history.
 
@@ -485,7 +484,7 @@ Oracle records agent execution history. Use the history views to confirm tool ca
 
 ## Task 12: Prove the Escalation Is Idempotent
 
-A triage workflow should not create duplicate review rows for the same question.
+Run the same triage request again to prove the workflow is idempotent and does not create duplicate review rows for the same signal:
 
 1. Run the same request again and confirm the action row count.
 
@@ -507,9 +506,9 @@ A triage workflow should not create duplicate review rows for the same question.
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** The agent reports that the escalation already exists or that no duplicate was created. The grouped count remains `1` for the escalated signal.
+    **Note:** Agent wording and row counts can vary by prior run state. Focus on whether the workflow prevents a duplicate escalation for the same signal.
 
-You created a constrained Select AI Agent workflow. It reads current risk evidence, applies a threshold rule, writes one controlled review record, and leaves audit evidence behind.
+**Congratulations!** You created a constrained **Select AI Agent** workflow. It reads the current top signal, applies a threshold rule, writes one controlled review record, prevents duplicate escalation, and leaves audit history behind.
 
 ## Acknowledgements
 
