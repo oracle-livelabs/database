@@ -12,6 +12,8 @@ Instead, Otto builds and scores the model in the database. The model uses produc
 
 In this lab, you build Otto's demand-surge model and turn its output into a review list for a business user.
 
+![otto](images/otto.png)
+
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
 
