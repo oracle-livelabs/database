@@ -117,9 +117,41 @@ Drill from the summary into named high-load sites so the operations priority bec
 
     For a production dashboard, indexes on join and filter columns can reduce query cost, and a materialized view can help with stable high-volume summaries. This lab keeps the query direct so you can see exactly how the operational result is formed.
 
+2. 🎯 **Interactive challenge: narrow the urgent site queue.**
+
+    Starting with the high-load site query above, change only `current_capacity_load_pct >= 70` to `current_capacity_load_pct >= 85`. Run your revised query. Which named sites remain, and why should the tighter threshold prioritize review rather than automatically dispatch a field team?
+
+    <details>
+    <summary><strong>Challenge answer: a tighter threshold focuses review</strong></summary>
+
+    **Expected output: Sites at 85% Load or Higher**
+
+    The revised result focuses the queue on Hudson Yards, Miami, San Francisco, Newark, and Seattle in the current workshop data.
+
+    > Hudson Yards remains first because its 91% load is the highest named-site result. The tighter threshold reduces the review queue, but load alone does not establish subscriber impact, available capacity, crew readiness, or service commitment. Use it to prioritize human review beside the order, graph, spatial, and model evidence that follows.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT network_site_name AS "Network Site",
+           city AS "City",
+           state_province AS "State",
+           service_capacity_units AS "Capacity Units",
+           ROUND(service_capacity_units * current_capacity_load_pct / 100) AS "Units In Use",
+           current_capacity_load_pct AS "Load %"
+    FROM network_sites
+    WHERE current_capacity_load_pct >= 85
+    ORDER BY current_capacity_load_pct DESC, network_site_name
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
     The high-load site list leads into the service-order lab because every operational response must stay connected to the subscriber order it affects.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026
