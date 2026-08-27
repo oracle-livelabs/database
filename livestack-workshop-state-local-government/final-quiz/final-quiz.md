@@ -95,7 +95,7 @@ Estimated Time: **5 minutes**
 
 2. Review the completion badge.
 
-    ![State and Local Government LiveStack badge](images/state-local-government-badge.svg " ")
+    ![State and Local Government LiveStack badge](images/state-local-government-badge.png " ")
 
 ## Acknowledgements
 
