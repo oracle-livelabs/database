@@ -12,9 +12,7 @@ Jessica sees an opportunity in Oracle AI Database's converged architecture. A co
 
 In this lab, you take Jessica's role as the DBA. You will write the converged SQL query behind the Risk and Operations Dashboard. It combines relational risk data, vector search, JSON transaction data, and spatial service data in one Oracle AI Database, without separate systems or data copies.
 
-The image below shows the Risk and Operations Dashboard: a business-facing product built on the converged database. It gives business users one place to find risk, exposure, transaction, and service insights. In this lab, you will write the SQL behind that experience.
-
-![Risk and Operations Dashboard page](images/risk-operations-dashboard.png " ")
+![jessica](images/jessica.png)
 
 ### Objectives
 

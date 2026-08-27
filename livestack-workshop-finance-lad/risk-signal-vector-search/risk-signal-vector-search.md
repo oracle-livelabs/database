@@ -10,6 +10,8 @@ She could export the text and embeddings to a separate vector service. That woul
 
 In this lab, you review Gilly's implementation from the embedding model to the final customer list. You see why Oracle AI Database fits the job: vector search finds the relevant products, and SQL joins connect them to exact order and customer data in the same database.
 
+![gilly](images/gilly.png)
+
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 

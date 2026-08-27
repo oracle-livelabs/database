@@ -8,6 +8,8 @@ Bob's starting point is simple: fraud patterns often hide in relationships, not 
 
 In this lab, you review Bob's approach. You start with the basic parts of a graph, use SQL/PGQ to follow connections, and finish with a result a business user can understand: which accounts are connected, what they share, and why the relationship deserves review.
 
+![bob](images/bob.png)
+
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
 

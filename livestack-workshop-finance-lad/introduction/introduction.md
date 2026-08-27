@@ -13,6 +13,8 @@ The requests look different, but they share one problem. The data is already in 
 - Otto needs to train and score a product demand model.
 - Nina needs to ask finance questions in plain language and turn the answers into a useful review.
 
+![team](images/team.png)
+
 Jessica's job is to help each team meet its requirement without creating a new data copy or a separate security model for every feature. She uses Oracle AI Database as the shared foundation: relational tables remain the source for finance records, while JSON, vectors, graphs, spatial data, machine learning, and AI services work with those same records.
 
 This workshop follows Jessica and her colleagues as they solve these problems. Each lab focuses on one business requirement, but the database remains the common thread. You will see how the teams use different data types and database capabilities together, and how Jessica keeps access, SQL, and results visible.

@@ -12,6 +12,8 @@ Moon wants operations users to answer a simple question with SQL that can power 
 
 In this lab, you follow Moon's approach. You start with a single point, measure distance to a region, find customers inside that region, and finish with a customer routing result that combines location and service data.
 
+![moon](images/moon.png)
+
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
 
