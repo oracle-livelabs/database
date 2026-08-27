@@ -6,6 +6,8 @@ Monday morning starts with a familiar network-operations problem: subscriber exp
 
 In this workshop, you investigate one escalating incident: `TEL-5G-2026-501`, a critical 5G congestion case near Hudson Yards during an event period. It affects 31,200 subscribers and puts $2.14M in service value at risk. You use **Oracle AI Database 26ai** to follow the evidence from the first capacity warning to a reviewable field response: the site, the affected service order, the subscriber signal, the connected case entities, nearby response locations, and the capacity-risk prediction.
 
+You will also try short interactive investigations using the same governed Telco data. Run and interpret each baseline query first, make the stated change or evidence decision, and open the collapsed **Challenge answer** only when you need help. Each capability lab ends with a **Next Steps** link to a deeper LiveLabs workshop.
+
 ![Seer Comms network-experience decision journey from capacity pressure to response](images/telco-workshop-intro-journey.svg " ")
 
 *Figure 1: Each lab advances the `TEL-5G-2026-501` investigation, from Hudson Yards capacity pressure to a field-response decision.*
@@ -38,10 +40,11 @@ The example below shows an expandable Telco section before and after it is opene
 
 - Trace the Seer Comms incident evidence through SQL, from the data foundation to a reviewable network-response decision.
 - Use JSON Relational Duality, AI Vector Search, Property Graph, Oracle Spatial, and Oracle Machine Learning (OML) to connect service orders, subscriber signals, impact relationships, locations, and capacity-risk scores.
+- Test one meaningful change or evidence decision, then compare your reasoning with a hidden challenge answer.
 - Explain how each dashboard or planning result can be traced back to governed database evidence.
 - Describe how one database foundation reduces duplicate data movement, reconciliation work, and fragmented governance during a telecom incident response.
 
-Estimated Workshop Time: **80 minutes**
+Estimated Workshop Time: **100 minutes**
 
 ### Business Scenario
 
@@ -59,4 +62,4 @@ The labs follow one escalation path: identify the evidence foundation, prioritiz
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026
