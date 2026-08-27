@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This lab confirms that the current Seer Bank data foundation is present before any finance result is trusted. Learners inspect semantic views, core data groups, vectors, graphs, spatial objects, Oracle Machine Learning (OML) models, and agent functions as the shared evidence base for the rest of the workshop.
+This lab confirms that the **Seer Bank** data foundation is ready before you use it for finance analysis. You check the database views, data groups, vectors, graph, spatial objects, **Oracle Machine Learning (OML)** models, and agent functions used later in the workshop.
 
 The goal is simple: see how different finance decisions connect to one database before you start using the data.
 
-The point is to understand what is available before you start asking business questions. Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows all connect back to this shared database foundation.
+Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, Select AI answers, and agent audit rows all connect back to this shared database foundation.
 
-Think of this lab as the map of the finance environment. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
+Think of this lab as a database checklist. You confirm what is available before using the same schema for the risk dashboard, transaction JSON, semantic search, fraud graph, service coverage, prediction, Select AI answers, and agent action history.
 
 **Oracle AI Database 26ai** is a converged database: it lets these different finance workloads use one governed database foundation instead of forcing each data type into a separate specialist system.
 
@@ -39,9 +39,9 @@ The image below is the Data Foundation page from the Seer Bank application. It s
 
 ### Objectives
 
-- Review the finance semantic views.
-- Check the scale of the current data.
-- Map each application page to the Oracle AI Database 26ai capability that supports the related finance decision.
+- Review the finance views used by later labs.
+- Check the scale of the current finance data.
+- Identify which database capability supports each major workshop task.
 
 Estimated Time: **10 minutes**
 
@@ -49,8 +49,8 @@ Estimated Time: **10 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Risk, prediction, and agent workflows need a shared view of the finance data they use to make decisions. |
-| Technical Challenge | Platform teams must show how the same schema supports semantic views, vectors, graphs, spatial data, OML models, and PL/SQL tools. |
+| Business Problem | Risk, prediction, and agent workflows need the same finance data to be available for review before teams use the results in decisions. |
+| Technical Challenge | Platform teams must show that the schema contains the views, vectors, graph, spatial objects, OML models, and PL/SQL functions used by the workshop. |
 | Persona Focus | Database developers and platform engineers map the foundation that business users rely on for downstream evidence. |
 | What You Will See | The current Finance LiveStack application uses connected views and object families in one database schema. |
 | Database Capability | Oracle catalog views and finance semantic views expose the governed object inventory. |
@@ -60,17 +60,17 @@ Persona focus: You are the database developer showing how Seer Bank's shared fou
 
 ## Task 1: Inventory the finance object families
 
-Start by inventorying the semantic views and database capabilities that the rest of the workshop depends on:
+Start by checking the finance views and database objects that the rest of the workshop uses:
 
 1. Run this inventory query:
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are building a simple capability map before making any finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What finance capabilities are available in this schema?"
+    You are building a checklist before making finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, *Which finance objects are available in this schema?*
 
-    Each section counts one kind of capability used by the workshop labs: approved finance views for reporting, JSON duality for transaction documents, the fraud property graph for relationship analysis, vector columns for meaning-based search, spatial metadata for service coverage, and OML models for prediction. The `UNION ALL` lines stack those counts into one easy-to-read table.
+    Each section counts one kind of capability used by the workshop labs: finance views for reporting, **JSON Relational Duality** for returning transaction data as JSON, the fraud graph for relationship analysis, vector columns for meaning-based search, spatial metadata for service coverage, and OML models for prediction.
 
-    The names ending in `_V` are database views. A view is a saved SQL query that presents governed data in a business-ready shape. In this lesson, `FINANCE_INSTITUTIONS_V` and `FINANCE_PRODUCTS_V` describe the finance catalog, `RISK_SIGNALS_V` and `SIGNAL_SOURCES_V` organize risk evidence, `CLIENT_TRANSACTIONS_V` exposes transaction activity, and the `SERVICE_*_V` views support service-center, capacity, and route analysis. Counting those views matters because later labs use them as trusted access points instead of asking you to rebuild the same joins each time.
+    The names ending in `_V` are database views. A view is a saved SQL query that presents data in a reusable shape, so later labs can query the same finance definitions instead of rebuilding the same joins.
 
     <details>
     <summary><strong>Why this matters: easier in a converged database</strong></summary>
@@ -129,12 +129,12 @@ Start by inventorying the semantic views and database capabilities that the rest
     | OML mining models | 4 |
 
 
-2. Review the counts.
-    Read the result as a capability checklist. The query reads Oracle catalog views instead of application tables, so it tells you what kinds of database objects are available before you start using them.
+2. Review the counts as a checklist.
+  The query reads Oracle catalog views instead of application tables, so it tells you which database objects are available before you use them.
 
     If you are looking at risk metrics, the semantic views are where trusted finance data comes from. If an application needs transaction documents, the duality view provides that shape without a separate document copy. If you are investigating fraud, the property graph is what lets you follow relationships. If you need meaning-based search, vector columns support that. If you need service coverage, spatial metadata tells Oracle how to interpret geometry columns. If you need predictions, OML models are available.
 
-    Treat this as the capability map for the finance application. Each row points to a business use you will work with in SQL.
+    Treat this as the database checklist for the finance application. Each row points to a business task you will work with later in SQL.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 

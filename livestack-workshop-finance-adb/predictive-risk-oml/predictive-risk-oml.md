@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Finance teams use dashboards to understand what has already happened, but they also need predictions that help them plan what to do next. Those predictions are more useful when analysts can see which model produced the score, which business record was scored, and how the result connects back to product, revenue, or risk decisions.
+Finance teams use dashboards to understand what has already happened, but they also need predictions to plan what to do next. A prediction is easier to review when analysts can see the model name, the record scored, the score, and the finance context beside it.
 
-In this lab, you will take on the persona of a database developer supporting both an ML engineer and a finance decision-maker. The ML engineer needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle Database. The finance decision-maker needs results that are easy to review, explain, and use for planning.
+In this lab, you support both an ML engineer and a finance decision-maker. The ML engineer needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle Database. The finance decision-maker needs results that are reviewable, explainable, and useful for planning.
 
 You will inventory persisted OML models, score demand-surge and revenue-prediction models in SQL, and review the results next to finance data that business users recognize. By the end of the lab, you will see how in-database machine learning keeps the model, the score, and the supporting finance evidence together.
 
@@ -35,9 +35,9 @@ The second image is the Predictive Risk, Capacity and Revenue page. It gives fin
 
 ### Objectives
 
-- Inventory the four OML models.
-- Score classification and regression models.
-- Review a simple model quality check.
+- Inventory the four persisted OML models.
+- Score demand-surge classification and revenue-regression models in SQL.
+- Review a workshop agreement check between known labels and predicted labels.
 
 Estimated Time: **12 minutes**
 
@@ -54,7 +54,7 @@ Estimated Time: **12 minutes**
 
 ## Task 1: Inventory persisted OML models
 
-Begin by reviewing the persisted OML models available for scoring.
+Begin by reviewing the persisted OML models available for scoring, so each prediction can be tied to a named model before it influences a finance decision:
 
 1. Run this model inventory query:
 
@@ -103,8 +103,8 @@ Begin by reviewing the persisted OML models available for scoring.
     | REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
 
 
-2. Confirm the model list.
-    The query reads the model catalog so you can see which predictive functions are available for finance decisions.
+2. Confirm the model list as a readiness checkpoint.
+    The catalog shows which deployed models exist, what each model predicts, and whether the model can be called from SQL before analysts rely on its scores.
 
     Expected models are CUSTOMER\_SEGMENT\_MODEL, DEMAND\_SURGE\_MODEL, PRODUCT\_CLUSTER\_MODEL, and REVENUE\_PREDICT\_MODEL. The list shows that the database contains deployed models for several finance decisions, not just one isolated prediction. In this lab, you score the demand and revenue models.
 
@@ -112,9 +112,9 @@ Begin by reviewing the persisted OML models available for scoring.
 
 ## Task 2: Score demand risk and revenue in SQL
 
-Now score demand risk and revenue directly in SQL so learners can see how deployed OML models support finance decisions without moving governed data out of the database.
+Score demand risk and revenue directly in SQL so learners can see how deployed OML models support finance decisions without moving governed data out of Oracle Database:
 
-1. Run the demand surge classification query:
+1. Run the demand-surge classification query to identify which products may need additional monitoring, outreach, or case-processing capacity:
 
     You are scoring product demand pressure and showing the product names behind the model output.
 
@@ -160,10 +160,10 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
     | 9 | Treasury Sweep Account | STABLE | STABLE | 0.6597 |
     | 10 | Corporate Card Program | STABLE | STABLE | 0.5252 |
 
-    Review the predicted surge and confidence together. A `SURGE` prediction can help an analyst decide which products may need more monitoring, outreach, or case-processing capacity. Confidence helps the analyst decide how strongly the model supports that prediction. It does not replace review; it helps rank where to look first.
+    Review the predicted surge and confidence together. A `SURGE` prediction helps analysts prioritize products for review, while confidence helps them judge how strongly the model supports that prediction. The score supports review; it does not replace it.
 
 
-2. Check how often the demand model matches the known label.
+2. Check how often the demand model matches the known workshop label, so learners can verify the SQL scoring pattern before discussing the result as decision support.
 
     A model score is the result returned when a trained model evaluates a row of data. For a classification model, the score is the predicted label, such as `SURGE` or `STABLE`. The confidence value is the model probability for that prediction. It is not certainty, and it is not a guarantee that the outcome will happen.
 
@@ -202,9 +202,9 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     Rows where `ACTUAL_LABEL` and `PREDICTED_LABEL` are the same are matches. Rows where they are different show where the model prediction differs from the label stored in `OML_DEMAND_TRAINING_V`. This is a simple learning check, not a full production model evaluation.
 
-    The workshop uses synthetic demo data to teach the SQL pattern. Do not interpret these scores as a production financial risk model.
+    **Important:** This lab uses synthetic demo data to teach the SQL scoring pattern. Treat the scores as workshop output, not as production model validation.
 
-3. Run revenue regression.
+3. Run the revenue-regression query to compare known revenue values with model estimates from the persisted OML model.
 
     You are estimating revenue outcomes from the persisted regression model.
 
@@ -241,14 +241,16 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
     | 11 | 5450 | 7138.97 |
 
 
-4. Compare actual target revenue to predicted revenue.
-    Look for rows where predicted revenue is close to target revenue, then look for rows where the difference is larger. Close values show where the model estimate lines up with known outcomes. Larger gaps show where an analyst may want more context, such as unusual customer behavior, product mix, or fulfillment timing.
+4. Compare target revenue with predicted revenue as planning evidence.
+    Close values show where the estimate lines up with known outcomes, while larger gaps point analysts toward additional context such as unusual customer behavior, product mix, or fulfillment timing.
 
     The demand query helps teams decide which products may need attention. The revenue query helps teams see whether a model estimate is useful for planning. Both queries score persisted models without moving sensitive finance records out of Oracle Database.
 
 ## Next Steps
 
-Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, checked how often a prediction matched the demo label, and compared predicted revenue to target revenue. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
+You have inventoried persisted OML models, generated model scores, checked demand-label agreement, and compared predicted revenue with target revenue. The main takeaway is that model output becomes easier to review when the model, score, and supporting finance evidence stay in Oracle AI Database 26ai.
+
+For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
 
 ## Acknowledgements
 

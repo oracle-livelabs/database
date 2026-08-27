@@ -2,20 +2,19 @@
 
 ## Introduction
 
-Seer Bank analysts need quick answers, but they cannot accept guesses. A risk answer must come from approved database evidence. Reviewers must be able to inspect the SQL behind it.
+Seer Bank analysts need quick answers, but they cannot accept guesses. A risk answer must come from approved database views, and reviewers must be able to inspect the SQL behind it.
 
-In this lab, you run an Oracle Machine Learning notebook. It shows the difference between general AI chat and governed Select AI over Seer Bank data. You create AI-ready views, limit the `genai` profile to approved objects, review generated SQL, ask for a narrated answer, and confirm that the lab stays read-only.
+In this lab, you run an Oracle Machine Learning notebook that shows the difference between general AI chat and Select AI questions over approved Seer Bank views. You create AI-ready views, limit the `genai` profile to approved objects, review generated SQL, ask for a narrated answer, and confirm that the lab stays read-only.
 
-> **Important:** Select AI output is generated. Wording and aliases can vary. Review the generated SQL and database results before trusting the answer.
+> **Important:** Select AI output is generated. Wording, aliases, and SQL shape can vary. Review the generated SQL and database results before trusting the answer.
 
 <details>
 <summary><strong>Key terms: Select AI, GenAI profile, Select AI Chat, SHOWSQL, and NARRATE</strong></summary>
 
-- **Select AI** lets you ask natural-language questions and use a database profile to turn those questions into SQL or grounded responses.
-- A **GenAI profile** stores the model provider, credentials, and database grounding settings that Select AI uses for a session.
-- **Select AI Chat** answers general questions with the model. It is useful for explanations, but it is not the same as asking Select AI to generate SQL over approved database objects.
-- **SHOWSQL** shows the SQL that Select AI generated from your natural-language prompt, so you can review the database logic before trusting the answer.
-- **NARRATE** returns a natural-language answer based on database evidence.
+- Import and run the supplied finance Select AI notebook in **Oracle Machine Learning**.
+- Ask governed natural-language questions over approved Seer Bank data.
+- Review generated SQL before trusting an AI answer.
+- Compare general chat with database-grounded **Select AI** responses.
 
 </details>
 
@@ -32,7 +31,7 @@ Estimated Time: **18 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Seer Bank analysts need fast natural-language answers without losing the evidence trail. |
+| Business Problem | Seer Bank analysts need fast natural-language answers without losing the SQL and database results behind them. |
 | Technical Challenge | Natural-language questions must stay inside an approved data boundary and produce reviewable SQL. |
 | Persona Focus | A risk analyst asks the question; an AI engineer controls the profile and approved objects. |
 | What You Will See | Chat can explain finance concepts. Select AI can query approved Seer Bank data and show generated SQL. |
@@ -41,7 +40,7 @@ Estimated Time: **18 minutes**
 
 ## Task 1: Import the Finance Select AI Notebook
 
-In this lab, you run the hands-on steps from an Oracle Machine Learning notebook.
+Import the supplied notebook so the **Select AI** workflow is already staged in **Oracle Machine Learning**:
 
 1. Download [finance-select-ai-notebook.json](files/finance-select-ai-notebook.json).
 
@@ -63,11 +62,11 @@ In this lab, you run the hands-on steps from an Oracle Machine Learning notebook
 
     ![Imported finance Select AI notebook in Oracle Machine Learning](images/lab8-notebook-imported.png)
 
-Leave the notebook open. Tasks 2 through 9 run in this OML notebook. Each SQL paragraph is already included. Click the play button to run each paragraph in order.
+Leave the notebook open. Tasks **2** through **9** run in this OML notebook, and each SQL paragraph is already included. Run the paragraphs in order so the profile, views, prompts, and checks build on one another.
 
 ## Task 2: Activate the Select AI Profile
 
-Select AI uses the active profile for model access and schema grounding. Set `genai` for this OML session.
+Activate the `genai` profile for this OML session so Select AI uses the intended model access and schema-grounding configuration:
 
 1. Run the profile setup paragraph.
 
@@ -88,7 +87,7 @@ Select AI uses the active profile for model access and schema grounding. Set `ge
 
 ## Task 3: Create AI-Ready Views
 
-Select AI works best with clean business-facing objects. This paragraph creates views with clear names and comments. The natural-language prompts can then map to the right Seer Bank evidence.
+Create AI-ready views with clear names and comments so natural-language prompts map to approved Seer Bank views rather than broad schema objects:
 
 1. Create the views and comments.
 
@@ -164,9 +163,11 @@ Select AI works best with clean business-facing objects. This paragraph creates 
 
     **Expected result:** The notebook returns `SELECT_AI_PRODUCT_RISK_V` and `SELECT_AI_TOP_SIGNAL_V` with status `VALID`.
 
+    **Note:** Generated SQL can vary in aliases and shape. Focus on whether the statement is read-only, uses the approved view, and answers the intended finance question.
+
 ## Task 4: Set the Governed Object Boundary
 
-Now limit the profile to the two AI-ready views. This keeps questions focused on the approved Seer Bank evidence for this lab.
+Limit the profile to the two AI-ready views so each question stays inside the approved evidence boundary for this lab:
 
 1. Set the approved object list.
 
@@ -199,7 +200,7 @@ Now limit the profile to the two AI-ready views. This keeps questions focused on
 
 ## Task 5: Verify the Product Risk Evidence with SQL
 
-Before using natural language, run SQL so you know what evidence Select AI should find.
+Before asking a natural-language question, run SQL against the product-risk view so you know what evidence Select AI should be able to find:
 
 1. Run the product category baseline query.
 
@@ -221,7 +222,7 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
 ## Task 6: Ask Select AI to Show the SQL
 
-`SHOWSQL` turns a natural-language question into SQL without running the final answer. Reviewers can inspect the generated statement first.
+Use `SHOWSQL` to turn the finance question into reviewable SQL before accepting any generated answer.
 
 1. Ask Select AI to generate SQL for the product exposure question.
 
@@ -236,11 +237,13 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     **Expected result:** Select AI generates a read-only statement over `SELECT_AI_PRODUCT_RISK_V`. Table aliases and SQL shape can vary.
 
-2. Review the generated statement. Confirm that it does not contain `INSERT`, `UPDATE`, `DELETE`, `MERGE`, or DDL.
+2. Review the generated statement before trusting the answer. Confirm that it queries `SELECT_AI_PRODUCT_RISK_V` and does not contain `INSERT`, `UPDATE`, `DELETE`, `MERGE`, or DDL.
+
+**Note:** Generated SQL can vary in aliases and shape. Focus on whether the statement is read-only, uses the approved view, and answers the intended finance question.
 
 ## Task 7: Ask Select AI to Narrate the Highest-Exposure Category
 
-`NARRATE` runs a governed natural-language request over the approved view.
+Use NARRATE after reviewing the approved evidence path, so the natural-language answer remains tied to database results.
 
 1. Ask for a short, fixed-format answer for the highest-exposure category.
 
@@ -253,11 +256,11 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** Select AI returns the highest-exposure product category in the requested format.
+    **Note:** **Select AI** wording may vary. Focus on whether the answer identifies the highest-exposure category from the approved view and follows the requested format.
 
 ## Task 8: Optional: Ask a General Chat Question
 
-`CHAT` uses model knowledge. It can explain general risk concepts, but it is not the database-evidence step.
+Ask a general chat question only after the governed database examples, so learners can clearly see the difference between model knowledge and database-grounded evidence:
 
 1. Ask a general finance risk question.
 
@@ -270,9 +273,11 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** The answer explains common fraud and compliance risk factors. Wording can vary.
+    **Note:** General chat answers can vary and are not database evidence. Use this result only to compare general explanation with governed Select AI over approved Seer Bank data.
 
 ## Task 9: Confirm the Read-Only Boundary
+
+Confirm the read-only boundary by checking that this **Select AI** question-and-answer lab did not create agent action records:
 
 1. Check the current finance risk agent action row count.
 
@@ -288,7 +293,7 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     **Expected result:** The count can be `0` or higher depending on whether the agent lab has already run.
 
-You used Select AI as a governed question-and-answer layer over Seer Bank evidence. The next lab adds Select AI Agents. The workflow can then act through controlled database tools.
+You used **Select AI** as a question-and-answer layer over approved Seer Bank views. The next lab adds **Select AI Agents**, where the workflow can act only through controlled database tools.
 
 ## Acknowledgements
 

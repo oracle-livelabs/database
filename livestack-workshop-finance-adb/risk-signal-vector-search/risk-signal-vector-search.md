@@ -2,22 +2,22 @@
 
 ## Introduction
 
-Risk teams often know what they are looking for before they know the exact words used in the data. This lab uses current finance embeddings to search by meaning instead of exact keywords.
+Risk teams often know the concern before they know the exact words used in the data. This lab uses finance embeddings to search by meaning instead of relying only on exact keyword matches.
 
-That matters because a risk analyst may ask about "mortgage pre-approval risk" while the data uses related phrases such as loan review, lending exposure, or adjustable-rate mortgage. Vector search helps find the right neighborhood of meaning, not just exact text matches.
+That matters because a risk analyst may ask about "mortgage pre-approval risk" while the data uses related phrases such as loan review, lending exposure, or adjustable-rate mortgage. Vector search helps find related finance language, not just exact text matches.
 
-After reviewing numeric exposure, analysts often need to search the language behind the signals. Instead of only sorting by counts and scores, you ask the database to find products and signal text that mean roughly the same thing as the analyst's question.
+After reviewing numeric exposure, analysts often need to search the language behind the signals. After reviewing numeric exposure, analysts often need to search the language behind the signals. In this lab, you ask Oracle Database to find products and signal text that mean roughly the same thing as the analyst's question.
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
 > - An **embedding** is a numerical profile of what text means. In this lab, product descriptions and risk-signal language can be embedded so similar finance ideas sit near each other mathematically, even when the wording is different.
 >
-> - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the finance rows they describe, so the meaning-based search stays connected to product names, exposure values, signal counts, and other business columns.
+> - A **vector** is the stored numerical form of an embedding. Oracle Database stores vectors beside the finance rows they describe, so the search result can include product names, exposure values, signal counts, and other business columns.
 >
 > - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
 >
-> - **Semantic search** means searching by meaning instead of exact words. For example, a search for "financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review" can find related text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
+> - **Semantic search** means searching by meaning instead of exact words. In this lab, it helps analysts find related mortgage, AML, fraud, sanctions, or exposure language even when the wording differs.
 >
 > - **ALL\_MINILM\_L12\_V2** is the embedding model used in this lab. A model is the trained pattern that turns text into embeddings. This model reads a phrase such as `mortgage pre-approval risk` and returns a vector that Oracle Database can compare with the stored finance vectors.
 
@@ -29,8 +29,8 @@ The image below is the Risk Signal Intelligence page. The top search area lets a
 
 ### Objectives
 
-- Run semantic product search.
-- Run semantic risk signal search.
+- Search financial products by meaning.
+- Search risk signals by meaning.
 
 Estimated Time: **12 minutes**
 
@@ -39,17 +39,17 @@ Estimated Time: **12 minutes**
 | Step | Finance focus |
 | --- | --- |
 | Business Problem | Risk analysts cannot rely only on keyword matching when signals use different words for similar exposure. |
-| Technical Challenge | AI and data teams need semantic search without exporting governed finance text to an external embedding pipeline. |
+| Technical Challenge | AI and data teams need search by meaning without exporting sensitive finance text to a separate embedding or search pipeline. |
 | Persona Focus | Risk analysts ask by intent; AI engineers and database developers keep embedding and search work inside the database. |
 | What You Will See | Vector search ranks finance products and risk signals by semantic similarity. |
 | Database Capability | VECTOR\_EMBEDDING, vector columns, and VECTOR\_DISTANCE run inside Oracle AI Database. |
 | Outcome | Analysts can find mortgage, AML, fraud, and exposure signals even when wording varies. |
 
-Persona focus: You support the risk analyst with semantic search while keeping source text, embeddings, and similarity scoring in the governed database boundary.
+**Persona focus:** You help the risk analyst search product and signal language by meaning while keeping the source text, vectors, and scores in Oracle AI Database.
 
 ## Task 1: Search products by meaning
 
-Search for financial products related to mortgage pre-approval risk by meaning, not exact keyword match.
+Search for financial products related to mortgage pre-approval risk by meaning, not exact keyword match:
 
 1. Run the following query:
 
@@ -62,7 +62,7 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 
     > In a fractured environment, teams often export text to an external embedding pipeline or search service. That can create extra copies of sensitive finance text and make it harder to explain which data was searched.
     >
-    > Oracle AI Vector Search keeps the source text, vectors, SQL query, and similarity score close to the governed finance data. That makes semantic search easier to review and safer to operationalize.
+    > Oracle AI Vector Search keeps the source text, vectors, SQL query, and similarity score in Oracle AI Database, so analysts can review both the match and the data behind it.
 
     </details>
 
@@ -104,13 +104,13 @@ Search for financial products related to mortgage pre-approval risk by meaning, 
 2. Review the ranked products.
     The query embeds the analyst phrase at runtime and compares it to stored product embeddings. The `VECTOR_DISTANCE` order ranks products by semantic closeness, while the similarity score gives the analyst a way to compare the strength of each match.
 
-    The expected top result is `Mortgage Pre-Approval`, followed by related lending and risk analytics products. The ranking matters because it acts like an analyst assistant: it brings likely matches to the top even when the search phrase and product name are not identical.
+    The expected top result is `Mortgage Pre-Approval`, followed by related lending and risk analytics products. The ranking helps analysts review likely matches first, even when the search phrase and product name are not identical.
 
     In the broader workflow, these ranked products can become the next filter for dashboard review, product exposure analysis, or operational follow-up.
 
 ## Task 2: Search risk signals by meaning
 
-Now apply the same semantic search pattern to risk signal language.
+Now apply the same search-by-meaning pattern to monitored risk signal text:
 
 1. Run the following query:
 
@@ -147,7 +147,7 @@ Now apply the same semantic search pattern to risk signal language.
 
     The returned excerpts contain AML, fraud, sanctions, and suspicious-activity language even though the search phrase does not use the AML abbreviation. The similarity score gives analysts a ranked review queue instead of an unordered pile of signal text.
 
-    This connects dashboard risk signals to semantic investigation. The source text, embeddings, query phrase, and similarity scoring all remain inside Oracle Database, so the analyst can move from a KPI to the language behind the signal without leaving the governed data boundary.
+    This connects dashboard risk signals to the language behind them. The analyst can move from a KPI to the related signal text without exporting the data to another search system.
 
 ## Next Steps
 

@@ -4,7 +4,7 @@
 
 Risk leaders rarely have time to inspect every signal one by one. They need to know which signals, products, and client exposures deserve review first. This lab recreates the evidence behind the application dashboard so each metric can be traced back to SQL.
 
-The dashboard is the workshop's first decision surface. It summarizes monitored risk activity, exposure, transactions, and case pressure into measures that help risk leaders prioritize review.
+The dashboard is where the risk leader starts. It shows which risk and operations measures need review before the team drills into the database rows behind them.
 
 In this lab, **exposure** means the reach or scale of monitored risk signals. A signal with low exposure may still matter, but a signal with high exposure can affect more clients, products, channels, or public attention. Exposure helps answer a practical question: if the team can only review a few issues right now, which ones could have the widest impact?
 
@@ -40,12 +40,12 @@ Estimated Time: **10 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Risk teams need a shared view of exposure, transaction pressure, and case-processing capacity. |
-| Technical Challenge | App and data teams need one explainable query path instead of separate pipelines for signals, products, transactions, and service data. |
+| Business Problem | Risk teams need a shared view of exposure, transaction activity, and case-processing capacity. |
+| Technical Challenge | Use one SQL query to summarize signals, products, transactions, and service data without sending the learner to separate pipelines. |
 | Persona Focus | Risk operations leaders read the dashboard; database and application developers show where the dashboard evidence comes from. |
 | What You Will See | Dashboard metrics are database-backed and can be explained with SQL. |
-| Database Capability | Converged SQL aggregates finance views, transaction data, service records, and audit tables. |
-| Outcome | Operators can move from a dashboard KPI to trusted detail without changing systems. |
+| Database Capability | This query aggregates finance views, transaction data, service records, and audit tables in one place. |
+| Outcome | Risk leaders can move from a dashboard KPI to the detail rows behind it without changing systems. |
 
 Persona focus: You support the risk operations leader by showing that one database query path can explain the dashboard instead of hiding work across integration layers.
 
@@ -57,7 +57,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are recreating the dashboard's headline risk measures directly from governed signal data. The SQL aggregates all rows in `RISK_SIGNALS_V`, calculates the average criticality, counts signals above the high-risk threshold, and sums exposure and case counts into one KPI row.
+    You are recreating the dashboard's risk measures directly from signal data, so the summary can be checked against the rows behind it.
 
     `RISK_SIGNALS_V` is a view, not a raw table. It gives the dashboard a clean risk-signal shape with the columns this lesson needs: severity, exposure, case counts, product context, and signal timing. That is valuable because you can focus on what the dashboard metric means instead of hunting through several lower-level tables to find the same business fields.
 
@@ -91,9 +91,9 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
 
 2. Interpret the result.
-    The query compresses 5,000 monitored signals into the headline measures a risk leader would scan first: volume, average severity, high-risk count, total exposure, and opened cases. These values explain the top row of the dashboard without requiring a separate reporting store.
+    The query counts and summarizes 5,000 monitored signals; it does not compress them.It does this into the headline measures a risk leader would scan first: volume, average severity, high-risk count, total exposure, and opened cases. These values explain the top row of the dashboard without requiring a separate reporting store.
 
-    A risk signal is a monitored event that may require review. In this workshop, signals can come from product mentions, customer activity, transactions, service pressure, or other finance operations data. The total signal count shows how much activity the dashboard is watching, while average criticality shows the overall severity of that activity.
+    A risk signal is a monitored event that may require review. In this workshop, signals can come from product mentions, customer activity, transactions, service activity, or other finance operations data. The total signal count shows how much activity the dashboard is watching, while average criticality shows the overall severity of that activity.
 
     Exposure adds scale to severity. Criticality tells you how serious a signal appears; exposure tells you how widely that signal may matter. A lower-severity issue with very high exposure may still deserve attention because it can affect many clients, generate more cases, or draw operational and regulatory scrutiny.
 
@@ -153,7 +153,7 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
     An analyst usually starts with rows that combine high criticality, high exposure, and many opened cases. Those rows point to products that may need faster review, extra staffing, or closer monitoring.
 
-## Task 3: Find top product exposure
+## Task 3: Find Highest-Criticality Product Categories
 
 Next, summarize the products tied to monitored exposure.
 
@@ -186,7 +186,7 @@ Next, summarize the products tied to monitored exposure.
     </copy>
     ```
 
-    **Expected output: Top Product Exposure**
+    **Expected output: Highest-Criticality Product Categories**
 
     | Financial Product Name | Institution Name | Product Category | Signal Count | Avg Criticality | Exposure Count |
     | --- | --- | --- | --- | --- | --- |
@@ -203,7 +203,7 @@ Next, summarize the products tied to monitored exposure.
 
 
 2. Review the product summary rows.
-    Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
+    These rows show the product categories with the highest average criticality, then use exposure as the tie-breaker.
 
     `Signal Count` shows how many monitored signals are tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` shows the scale of the monitored exposure tied to those signals.
 

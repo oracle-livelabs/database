@@ -2,15 +2,15 @@
 
 ## Introduction
 
-You have now walked through the core Seer Bank finance decision path: understand the data foundation, explain dashboard risk, inspect transaction evidence, search risk language by meaning, follow financial-crime relationships, evaluate service coverage, score predictive models, ask governed questions with Select AI, and record controlled risk triage with a Select AI Agent.
+You have now walked through the core Seer Bank finance decision path: understand the data foundation, explain dashboard risk, inspect transaction data as JSON and rows, search risk language by meaning, follow connected fraud records, evaluate service coverage, score predictive models, ask approved natural-language questions with Select AI, and record controlled risk triage with a Select AI Agent.
 
-The important takeaway is practical: you can now explain how one finance question can move across several data types without breaking the chain of evidence.
+The practical takeaway is that one finance question can move across several data types without losing the records behind the answer.
 
 A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and case-processing capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
 
 With **Oracle AI Database 26ai**, **Seer Bank** can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, Oracle Machine Learning (OML) for prediction, Select AI for governed questions, and Select AI Agents for controlled actions.
 
-That is the punchline for finance: *The database is not just where records sit. It becomes the place where risk, fraud, compliance, service, and analytics teams can ask different questions about the same governed facts.*
+The finance value is practical: risk, fraud, compliance, service, and analytics teams can ask different questions about the same connected records.
 
 You leave this workshop with a repeatable way to talk about Oracle's converged database value: fewer copies of sensitive data, fewer reconciliation points, stronger governance, faster investigation, and business results that can be explained from SQL-backed evidence.
 
