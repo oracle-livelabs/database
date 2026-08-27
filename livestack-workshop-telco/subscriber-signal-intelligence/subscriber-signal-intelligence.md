@@ -175,7 +175,51 @@ Move from the selected subscriber signal to related services so the customer-exp
 
     Use the highest-ranked service as a starting point for investigation, not as an automatic decision. Review the subscriber signal, service description, capacity evidence, and relationship context before choosing an action.
 
+2. 🎯 **Interactive challenge: change the network concern.**
+
+    Starting with the semantic-search query in Task 2, replace only `game-day 5G congestion near Hudson Yards` with `fiber outage affecting business connectivity in Atlanta`. Run your revised query. Which signal enters or moves to the top of the review queue, and what operational evidence should the analyst inspect next?
+
+    <details>
+    <summary><strong>Challenge answer: a new intent changes the evidence queue</strong></summary>
+
+    **Expected output: Atlanta Fiber Signals**
+
+    The Atlanta enterprise-fiber signal should move toward the top because its meaning is closer to the revised phrase. Exact similarity values and nearby rows can vary with the embedding model and environment.
+
+    > Review the Atlanta fiber-outage signal first, then connect it to the affected enterprise account, network site, service order, and field-response evidence. Vector ranking identifies related meaning; it does not establish outage severity or authorize an action. The source text and vectors remain governed together in Oracle AI Database.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    WITH search_phrase AS (
+      SELECT VECTOR_EMBEDDING(
+               ADMIN.ALL_MINILM_L12_V2
+               USING 'fiber outage affecting business connectivity in Atlanta' AS DATA
+             ) AS embedding
+      FROM dual
+    )
+    SELECT ss.signal_id AS "Signal ID",
+           DBMS_LOB.SUBSTR(ss.signal_text, 70, 1) AS "Signal",
+           ROUND(
+             1 - VECTOR_DISTANCE(se.embedding, search_phrase.embedding, COSINE),
+             5
+           ) AS "Similarity"
+    FROM signal_embeddings se
+    JOIN subscriber_signals ss ON ss.signal_id = se.signal_id
+    CROSS JOIN search_phrase
+    ORDER BY VECTOR_DISTANCE(se.embedding, search_phrase.embedding, COSINE)
+    FETCH FIRST 3 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
+
+## Next Steps
+
+Congratulations on completing the AI Vector Search lab. You searched subscriber signals by meaning, connected one signal to related telecom services, and tested how a different operational phrase changes the review queue. For deeper practice, open the [AI Vector Search LiveLabs workshop](https://livelabs.oracle.com/ords/dbpm/r/livelabs/view-workshop?wid=4166).
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026

@@ -161,7 +161,54 @@ Compare the model prediction with the workshop planning label so the learner see
 
     A matching label shows that the model recognizes the pattern represented by this deterministic scenario. A difference would be a reason to examine the feature values and operating context, not a reason to ignore the site.
 
+2. 🎯 **Interactive challenge: surface prediction disagreements.**
+
+    Starting with the comparison query above, replace the `WHERE` condition with one that keeps rows where `t.escalation_label` differs from the model prediction. Run the revised query. If a row appears, which disagreement should be reviewed first? If no rows appear, what can you conclude—and what can you not conclude—from this deterministic workshop data?
+
+    <details>
+    <summary><strong>Challenge answer: agreement is evidence, not production proof</strong></summary>
+
+    **Expected output: Prediction Disagreement Queue**
+
+    The current deterministic workshop data may return no rows because the persisted model reproduces the simple `ESCALATE` and `MONITOR` planning pattern. Any returned row is a review candidate, not an automatic correction.
+
+    > If no rows appear, you can say the model agrees with the stored planning labels for the current workshop rows. You cannot conclude that the model is accurate for new traffic patterns, all network sites, or production decisions. A production evaluation still needs representative holdout data, error analysis, drift monitoring, and operational review.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT ns.network_site_name AS "Network Site",
+           t.escalation_label AS "Planning Label",
+           PREDICTION(
+             network_capacity_surge_model
+             USING
+               t.service_capacity_units,
+               t.current_capacity_load_pct
+           ) AS "Predicted Risk",
+           t.current_capacity_load_pct AS "Load %"
+    FROM network_capacity_surge_training_v t
+    JOIN network_sites ns
+      ON ns.network_site_id = t.training_case_id
+    WHERE t.escalation_label <>
+          PREDICTION(
+            network_capacity_surge_model
+            USING
+              t.service_capacity_units,
+              t.current_capacity_load_pct
+          )
+    ORDER BY t.current_capacity_load_pct DESC,
+             ns.network_site_name;
+    </copy>
+    ```
+
+    </details>
+
+## Next Steps
+
+Congratulations on completing the Oracle Machine Learning lab. You scored network sites, compared predictions with planning labels, and created a disagreement review queue. For deeper practice, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026

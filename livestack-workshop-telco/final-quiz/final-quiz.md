@@ -42,12 +42,12 @@ Estimated Time: **5 minutes**
     - To generate a random capacity score.
     > A dashboard total is useful only when the team can inspect the contributing site and decide what to do next.
 
-    Q: What does ORDERS_DV provide for the service action linked to the case?
-    - A second copy of order rows in a document store.
-    * A JSON projection backed by relational order data.
-    - A property graph of service routes.
-    - A vector index for network sites.
-    > JSON Relational Duality lets an application inspect order 601 as a document while SQL continues to use the same governed source.
+    Q: What does the Lab 3 WITH INSERT UPDATE change prove?
+    - It creates a second service-order copy for application writes.
+    - It enables document deletion for temporary cleanup.
+    * A JSON insert or update can change the governed SERVICE_ORDERS and SERVICE_ORDER_ITEMS rows behind ORDERS_DV.
+    - It converts service-order rows into vector embeddings.
+    > JSON Relational Duality lets an application create and update a document while SQL immediately reads the same governed root and child rows. Delete remains disabled.
 
     Q: What does AI Vector Search add to the TEL-5G-2026-501 investigation?
     - It replaces the source signal with an embedding only.
@@ -92,4 +92,4 @@ Estimated Time: **5 minutes**
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Last Updated By/Date** - Pat Shepherd, July 2026
+* **Last Updated By/Date** - Pat Shepherd, August 2026
