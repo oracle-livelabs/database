@@ -9,8 +9,13 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Lab 1: Provision an Autonomous AI Vector Database",
-      "description": "Create or identify the Vector Database instance and user.",
+      "title": "Get Started: Log In to the LiveLabs Sandbox",
+      "description": "Request a LiveLabs Sandbox reservation and access its login information.",
+      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/cloud-login/cloud-login-livelabs.md"
+    },
+    {
+      "title": "Lab 1: Working with the Vector Database Console",
+      "description": "Retrieve the REST URL, review embedding models, and explore the Vector Database Console.",
       "type": "desktop",
       "filename": "../../01-provision-vector-database/01-provision-vector-database.md"
     },
