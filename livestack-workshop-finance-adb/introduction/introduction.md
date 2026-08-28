@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Financial institutions need fast decisions, but speed is not enough. When a risk alert, fraud pattern, service issue, transaction detail, or prediction is questioned later, teams must be able to explain the evidence behind it.
+Financial institutions need fast decisions, but speed is not enough. When a risk alert, fraud pattern, service issue, transaction detail, prediction, AI answer, or agent action is questioned later, teams must be able to show the database evidence behind it.
 
 Seer Bank risk, fraud, compliance, service, analytics, application, and AI teams all need to work from the same facts instead of reconciling different copies of the truth.
 
@@ -50,13 +50,12 @@ Estimated Workshop Time: **125 minutes**
 | --- | --- |
 | Business Problem | Seer Bank needs faster risk, fraud, compliance, service, and predictive decisions without spreading evidence across disconnected systems. |
 | Technical Challenge | Application, data, and AI teams otherwise stitch together separate stores, services, indexes, pipelines, and governance controls for each data type. |
-| Persona Focus | Database developers, application developers, risk analysts, operations leaders, and AI engineers share one evidence path. |
+| Persona Focus | A risk leader, fraud analyst, service operations leader, finance analyst, and AI engineer each use the same Seer Bank data foundation for different decisions. |
 | What You Will See | One Oracle AI Database 26ai foundation can support the finance decision loop from awareness to action. |
-| Database Capability | Relational SQL, JSON, vectors, graphs, spatial, Oracle Machine Learning (OML), Select AI, Select AI Agents, and semantic views work together under one governed data model. |
+| Database Capability | SQL queries, JSON documents, vector search, graph queries, spatial calculations, OML scoring, Select AI, and Select AI Agents all use connected finance data in Oracle AI Database 26ai. |
 | Outcome | Risk, operations, and engineering teams can observe, investigate, decide, act, and review from database-backed evidence instead of reconciling disconnected outputs. |
 
-**Persona focus:** You support finance business users who need timely, explainable decisions without fragmented integration work. Your job is to connect business decisions to governed database evidence that can be reviewed and repeated.
-
+**Persona focus:** You support finance business users who need timely, explainable decisions. Your job is to connect each business question to database evidence that can be reviewed and repeated.
 
 ## Acknowledgements
 
