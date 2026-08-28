@@ -8,13 +8,12 @@ Estimated Workshop Time: 90 minutes
 
 ### Objectives
 
-- Provision or access an Autonomous AI Vector Database.
 - Configure the `oracle-vecdb` Python SDK.
 - Load text records with integrated embedding.
 - Run semantic search and metadata-filtered search.
 - Create vector indexes for approximate search.
-- Build a small Python search API pattern.
-- Assemble retrieved context for a RAG workflow.
+- Build a small Python memory pattern.
+
 
 ### Prerequisites
 
@@ -31,28 +30,29 @@ Estimated Workshop Time: 90 minutes
 
 ## Task 1: Review the Workshop Flow
 
-1. Use the following sequence to build up the application workflow:
+1. Follow this sequence to build the National Parks semantic-search application:
 
-    - Lab 1 provisions an Autonomous AI Vector Database and confirms access to the Vector Database Console.
-    - Lab 2 configures the Python SDK and creates a reusable client helper.
-    - Lab 3 creates vector tables and confirms model availability.
-    - Lab 4 loads sample park records with integrated embedding.
-    - Lab 5 runs baseline semantic search.
-    - Lab 6 creates indexes and compares approximate search behavior.
-    - Lab 7 maps the image-search lab to a bring-your-own-vector workflow with metadata filters.
-    - Lab 8 replaces the APEX demo with a small Python API pattern.
-    - Lab 9 builds a retrieval step for RAG.
+    - **Get Started: Log In to the LiveLabs Sandbox** provides access to the workshop environment.
+    - **Lab 1: Working with the Vector Database Console** retrieves the REST URL, reviews embedding models, and explores the console.
+    - **Lab 2: Get Started with Oracle Machine Learning Notebooks** opens OML, creates a notebook, and runs Python paragraphs.
+    - **Lab 3: Install oracle-vecdb package** installs the SDK in OML, configures the client, and tests the connection.
+    - **Lab 4: Understand Models, Records, and Vector Tables** reviews models and creates integrated and bring-your-own-vector tables.
+    - **Lab 5: Create Embeddings and Load Text** reads the National Parks data and loads it into the integrated `parks` table.
+    - **Lab 6: Run Baseline Semantic Search** runs natural-language searches and adds metadata filters.
+    - **Lab 7: Create a Query Memory Module** saves user queries and uses them to make memory-aware park searches.
+    - **Lab 8: Create Indexes for Approximate Search** creates and compares approximate-search indexes.
+    - **Lab 9: Use Bring-Your-Own Vectors and Metadata Filters** works with externally generated vectors and metadata filters.
+    - **Lab 10: Build a Python Search API** packages the search workflow behind a reusable Python boundary.
 
-2. Keep these values nearby as you work through the labs:
+2. Keep these workshop values nearby:
 
     ```text
-    VECDB_REST_URL=https://<host>/ords/<schema>/_/db-api/stable/vecdb/
-    VECDB_USERNAME=<vector-database-user>
-    VECDB_PASSWORD=<password>
-    VECDB_ACCESS_TOKEN=<optional-bearer-token>
-    VECDB_EMBED_MODEL=all_MiniLM_L12_v1
+    REST URL=<REST URL copied from the Vector Database Console>
+    USER=VECTOR_USER
+    PWD=<database password>
+    EMBED_MODEL=all_MiniLM_L12_v2
+    PAR_URL=<National Parks Object Storage PAR URL>
     ```
-
 ## Learn More
 
 - [Oracle LiveLabs](https://livelabs.oracle.com/)
@@ -63,3 +63,6 @@ Estimated Workshop Time: 90 minutes
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Source Workshop** - Getting Started with AI Vector Search
 * **Last Updated By/Date** - Codex, May 28, 2026
+
+
+

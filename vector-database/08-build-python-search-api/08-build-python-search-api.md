@@ -24,6 +24,7 @@ Estimated Time: 10 minutes
 
 2. Add this function.
 
+    <copy>
     ```python
     from files.vector_client import make_client
 
@@ -57,22 +58,27 @@ Estimated Time: 10 minutes
             })
         return response
     ```
+    </copy>
 
 ## Task 2: Test the Search Function
 
 1. Add a command-line test block.
 
+    <copy>
     ```python
     if __name__ == "__main__":
         for row in search_parks("Where can I find rainforest and coastline?", region="west", top_k=3):
             print(row)
     ```
+    </copy>
 
 2. Run the script.
 
+    <copy>
     ```bash
     python app_search.py
     ```
+    </copy>
 
 3. Confirm that the output is a list of dictionaries that an API route could return as JSON.
 
@@ -80,6 +86,7 @@ Estimated Time: 10 minutes
 
 1. If you use FastAPI, the same function can sit behind an endpoint.
 
+    <copy>
     ```python
     from fastapi import FastAPI
 
@@ -91,6 +98,7 @@ Estimated Time: 10 minutes
     def search(q: str, region: str | None = None, top_k: int = 5):
         return {"items": search_parks(q, region=region, top_k=top_k)}
     ```
+    </copy>
 
 2. Treat the API layer as optional in this workshop.
 
@@ -105,3 +113,4 @@ Estimated Time: 10 minutes
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Last Updated By/Date** - Codex, May 28, 2026
+

@@ -15,7 +15,7 @@ Estimated Time: 10 minutes
 
 ### Prerequisites
 
-- Successful Python SDK connection from Lab 2.
+- Successful Python SDK connection from Lab 3.
 
 ## Task 1: Inspect Loaded Models
 
@@ -23,6 +23,7 @@ Estimated Time: 10 minutes
 
 2. Add the following imports and client setup.
 
+    <copy>
     ```python
     import os
 
@@ -31,12 +32,15 @@ Estimated Time: 10 minutes
     vecdb = make_client()
     embed_model = os.environ.get("VECDB_EMBED_MODEL", "all_MiniLM_L12_v1")
     ```
+    </copy>
 
 3. List the models that are already loaded.
 
+    <copy>
     ```python
     print_items("Loaded models", vecdb.list_models())
     ```
+    </copy>
 
 4. If `VECDB_EMBED_MODEL` is not loaded, open the Vector Database Console and load it.
 
@@ -44,63 +48,54 @@ Estimated Time: 10 minutes
 
 ## Task 2: Create an Integrated Embedding Table
 
-1. Add the following code to create a table for text records.
+An integrated table creates a dense vector when you insert metadata. `embed_metadata_jsonpath` identifies the metadata field that supplies text. `auto_generate_id=True` tells the database to assign each record ID.
 
+1. Add a new Python paragraph. Copy the following code into it and run it to create the `parks` table.
+
+    <copy>
     ```python
-    TEXT_TABLE = "parks_text"
-
-    try:
-        vecdb.drop_vector_table(TEXT_TABLE)
-    except Exception:
-        pass
-
+    %python
     vecdb.create_vector_table(
-        table_name=TEXT_TABLE,
-        auto_generate_id=False,
-        vector_type="dense",
+        name="parks",
         embed_params={
-            "model": embed_model,
-            "embed_metadata_jsonpath": "content"
+            "model": "all_MiniLM_L12_v2",
+            "embed_metadata_jsonpath": "description",
         },
-        index_params={
-            "indexing": "manual"
-        }
+        table_params={"auto_generate_id": True},
     )
-
-    print_items("Text table", vecdb.describe_vector_table(TEXT_TABLE))
     ```
+    </copy>
 
-2. The `embed_metadata_jsonpath` value tells the service which metadata field contains text to embed.
+2. Confirm that the paragraph completes without an error.
+
+    `create_vector_table()` supports additional options, including a table comment, annotations, index settings, and metadata-index settings. For the full set of options, see [Create a vector table](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/create-vector-table.html).
+
 
 ## Task 3: Create a Bring-Your-Own-Vector Table
 
-1. Add this code for records whose vectors come from another model.
+A bring-your-own-vector table does not create embeddings automatically. In a later lab, you will call an OCI embedding endpoint and load its dense vectors into this table.
 
+Unlike `parks`, `directions` has no `embed_params` setting. The `comment` is optional. Set `auto_index` to `False` to configure the vector index later.
+
+1. Add a new Python paragraph. Copy the following code into it and run it to create the `directions` table.
+
+    <copy>
     ```python
-    IMAGE_TABLE = "park_image_vectors"
-
-    try:
-        vecdb.drop_vector_table(IMAGE_TABLE)
-    except Exception:
-        pass
-
+    %python
     vecdb.create_vector_table(
-        table_name=IMAGE_TABLE,
-        auto_generate_id=False,
-        vector_type="dense",
+        name="directions",
+        comment="Manually managed vector table",
         index_params={
-            "indexing": "manual"
-        }
+            "vector_index_params": {
+                "auto_index": False,
+            }
+        },
     )
-
-    print_items("Image vector table", vecdb.describe_vector_table(IMAGE_TABLE))
     ```
+    </copy>
 
-2. Run the setup script.
+2. Confirm that the paragraph completes without an error.
 
-    ```bash
-    python setup_tables.py
-    ```
 
 ## Learn More
 
@@ -111,3 +106,5 @@ Estimated Time: 10 minutes
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Last Updated By/Date** - Codex, May 28, 2026
+
+

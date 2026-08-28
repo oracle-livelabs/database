@@ -2,118 +2,115 @@
 
 ## Introduction
 
-The original workshop compared exact and approximate vector search. In this lab, you run baseline semantic searches before creating a manual index. This gives you a clear result set to compare with indexed searches in the next lab.
+In this lab, you run semantic searches against the National Parks `parks` table before creating a vector index. Each text query uses the embedding model configured on the table to generate its query vector.
 
 Estimated Time: 10 minutes
 
 ### Objectives
 
-- Search by natural language text.
-- Inspect scores and metadata.
-- Filter by metadata.
-- Use advanced options for high-accuracy baseline search.
+- Run semantic searches with natural-language text.
+- Review formatted National Parks results.
+- Combine semantic search with metadata filters.
 
 ### Prerequisites
 
-- Loaded `parks_text` records from Lab 4.
+- Complete Lab 5: Create Embeddings and Load Text.
+- Keep the `vecdb` client initialized in your OML Notebook.
+- Load the National Parks records into the `parks` table.
 
 ## Task 1: Search by Text
 
-1. Create a file named `search_parks.py`.
+1. Add a new Python paragraph. Copy the following function into it and run it.
 
-2. Add the following code.
+    `format_parks` receives a query response and returns a readable, numbered list of park names, park codes, and states.
 
+    <copy>
     ```python
-    from files.vector_client import make_client
+    %python
+    def format_parks(result):
+        return "\n".join(
+            f"{i}. {r.metadata['name']} ({r.metadata['park_code']}) – {r.metadata['states']}"
+            for i, r in enumerate(result.items or [], 1)
+        )
+    ```
+    </copy>
 
-    vecdb = make_client()
+2. Add a new Python paragraph. Copy the following code into it and run it.
 
-    def show(label, results):
-        print(f"\n{label}")
-        for item in results:
-            metadata = item.get("metadata", {})
-            print(item.get("id"), item.get("score"), metadata.get("park_name"), metadata.get("state"))
+    <copy>
+    ```python
+    %python
+    search_text = "historic battlefield from the civil war"
 
-    results = vecdb.query(
-        table_name="parks_text",
-        query_by={"text": "historic battlefield from the civil war"},
-        top_k=3,
-        advanced_options={
-            "distance_metric": "COSINE",
-            "accuracy": 100
-        }
+    result = vecdb.query(
+        table_name="parks",
+        query_by={"text": search_text},
+        top_k=10,
     )
 
-    show("Civil War search", results)
+    print(format_parks(result))
     ```
+    </copy>
 
-3. Run the search.
-
-    ```bash
-    python search_parks.py
-    ```
-
-4. Confirm that the top results include the record whose content discusses Civil War battlefield landscapes.
+3. Review the results. The table converts the query text into an embedding with its configured model, then returns the ten closest park records.
 
 ## Task 2: Search for Terms Not Present in the Text
 
-1. Add a second query to `search_parks.py`.
+1. Add a new Python paragraph. Copy the following code into it and run it.
 
+    <copy>
     ```python
-    climbing = vecdb.query(
-        table_name="parks_text",
-        query_by={"text": "rock climbing near mountain lakes"},
-        top_k=3,
-        advanced_options={
-            "distance_metric": "COSINE",
-            "accuracy": 100
-        }
+    %python
+    search_text = "rock climbing near mountain lakes"
+
+    result = vecdb.query(
+        table_name="parks",
+        query_by={"text": search_text},
+        top_k=10,
     )
 
-    show("Climbing search", climbing)
+    print(format_parks(result))
     ```
+    </copy>
 
-2. Run the script again.
-
-    ```bash
-    python search_parks.py
-    ```
-
-3. Notice whether records about mountains, climbing, or geology appear even when the exact query words are not all present.
+2. Review the results. Semantic search can return parks related by meaning even when the exact query words do not appear in the park descriptions.
 
 ## Task 3: Add a Metadata Filter
 
-1. Add a filtered search.
+1. Add a new Python paragraph. Copy the following code into it and run it.
 
+    This query combines semantic similarity with metadata filters. It excludes the White House park record and limits results to parks in the District of Columbia or Maryland.
+
+    <copy>
     ```python
-    western_water = vecdb.query(
-        table_name="parks_text",
-        query_by={"text": "waterfalls and rivers"},
-        filters={"region": {"$eq": "west"}},
-        top_k=5,
-        advanced_options={
-            "distance_metric": "COSINE",
-            "accuracy": 100
-        }
+    %python
+    search_text = "We like waterfalls and other natural water features"
+
+    result = vecdb.query(
+        table_name="parks",
+        query_by={"text": search_text},
+        filters={
+            "$and": [
+                {"park_code": {"$ne": "whho"}},
+                {"states": {"$in": ["DC", "MD"]}},
+            ]
+        },
+        top_k=10,
     )
 
-    show("Western water search", western_water)
+    print(format_parks(result))
     ```
+    </copy>
 
-2. Run the script.
-
-    ```bash
-    python search_parks.py
-    ```
-
-3. Confirm that the results show only records whose metadata has `region` set to `west`.
+2. Review the results. Every returned record meets the metadata conditions as well as the semantic-search request.
 
 ## Learn More
 
-- `OracleVecDB.query`
-- Metadata filter operators in the REST API reference
+- [Oracle VecDB Python SDK quick start](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/quickstart.html)
+- [Oracle VecDB query response](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/response-objects/query-response.html)
+- [Oracle VecDB record and metadata concepts](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/record.html)
 
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, May 28, 2026
+* **Last Updated By/Date** - Codex, August 27, 2026

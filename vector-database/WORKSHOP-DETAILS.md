@@ -39,17 +39,19 @@ AI developers and data scientists who know basic Python and want to build semant
 ## Workshop Outline
 
 1. Introduction
-2. Lab 1: Provision an Autonomous AI Vector Database
-3. Lab 2: Configure a Python Client
-4. Lab 3: Understand Models, Records, and Vector Tables
-5. Lab 4: Create Embeddings and Load Text
-6. Lab 5: Run Baseline Semantic Search
-7. Lab 6: Create Indexes for Approximate Search
-8. Lab 7: Use Bring-Your-Own Vectors and Metadata Filters
-9. Lab 8: Build a Python Search API
-10. Lab 9: Assemble a RAG Retrieval Flow
-
+2. Get Started: Log In to the LiveLabs Sandbox
+3. Lab 1: Working with the Vector Database Console
+4. Lab 2: Get Started with Oracle Machine Learning Notebooks
+5. Lab 3: Install oracle-vecdb package
+6. Lab 4: Understand Models, Records, and Vector Tables
+7. Lab 5: Create Embeddings and Load Text
+8. Lab 6: Run Baseline Semantic Search
+9. Lab 7: Create a Query Memory Module
+10. Lab 8: Create Indexes for Approximate Search
+11. Lab 9: Use Bring-Your-Own Vectors and Metadata Filters
+12. Lab 10: Build a Python Search API
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Last Updated By/Date** - Codex, May 28, 2026
+

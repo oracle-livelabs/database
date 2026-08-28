@@ -24,6 +24,7 @@ Estimated Time: 10 minutes
 
 2. Add this code.
 
+    <copy>
     ```python
     from files.vector_client import make_client, print_items
 
@@ -41,17 +42,21 @@ Estimated Time: 10 minutes
     print_items("Index create response", response)
     print_items("Index jobs", vecdb.list_index_jobs())
     ```
+    </copy>
 
 3. Run the script.
 
+    <copy>
     ```bash
     python create_index.py
     ```
+    </copy>
 
 ## Task 2: Inspect the Index
 
 1. Create a file named `describe_index.py`.
 
+    <copy>
     ```python
     from files.vector_client import make_client, print_items
 
@@ -59,12 +64,15 @@ Estimated Time: 10 minutes
 
     print_items("Index description", vecdb.describe_index("parks_text"))
     ```
+    </copy>
 
 2. Run the script.
 
+    <copy>
     ```bash
     python describe_index.py
     ```
+    </copy>
 
 3. If the index is still building, rerun the script after a short wait.
 
@@ -72,6 +80,7 @@ Estimated Time: 10 minutes
 
 1. Create a file named `compare_indexed_search.py`.
 
+    <copy>
     ```python
     from files.vector_client import make_client
 
@@ -92,12 +101,15 @@ Estimated Time: 10 minutes
             metadata = item.get("metadata", {})
             print(item.get("id"), item.get("score"), metadata.get("park_name"))
     ```
+    </copy>
 
 2. Run the script.
 
+    <copy>
     ```bash
     python compare_indexed_search.py
     ```
+    </copy>
 
 3. Compare the result order as the accuracy target changes.
 
@@ -113,3 +125,4 @@ Estimated Time: 10 minutes
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Last Updated By/Date** - Codex, May 28, 2026
+

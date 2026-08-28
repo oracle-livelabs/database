@@ -25,6 +25,7 @@ Estimated Time: 10 minutes
 
 2. Add this code.
 
+    <copy>
     ```python
     import json
     import os
@@ -63,12 +64,15 @@ Estimated Time: 10 minutes
 
     print_items("Incident load", vecdb.upsert_vectors(table_name=table_name, vectors=records))
     ```
+    </copy>
 
 3. Run the script.
 
+    <copy>
     ```bash
     python load_incidents.py
     ```
+    </copy>
 
 ## Task 2: Retrieve Context
 
@@ -76,6 +80,7 @@ Estimated Time: 10 minutes
 
 2. Add the retrieval function.
 
+    <copy>
     ```python
     import os
 
@@ -108,11 +113,13 @@ Estimated Time: 10 minutes
 
         return results
     ```
+    </copy>
 
 ## Task 3: Assemble the Prompt Payload
 
 1. Add a prompt builder to `rag_retrieve.py`.
 
+    <copy>
     ```python
     def build_prompt(q, results):
         context_lines = []
@@ -138,12 +145,15 @@ Estimated Time: 10 minutes
         retrieved = retrieve_context(q)
         print(build_prompt(q, retrieved))
     ```
+    </copy>
 
 2. Run the script.
 
+    <copy>
     ```bash
     python rag_retrieve.py
     ```
+    </copy>
 
 3. Review the prompt payload.
 
@@ -159,3 +169,4 @@ Estimated Time: 10 minutes
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Last Updated By/Date** - Codex, May 28, 2026
+
