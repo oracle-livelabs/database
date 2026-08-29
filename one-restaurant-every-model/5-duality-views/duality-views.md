@@ -135,8 +135,8 @@ Compare the output of both this duality View and the initial JSON collection "st
 
 ```javascript
 <copy>
-db.stores.findOne({_id: "s_100})
-db.store_menu_read_dv.findOne({_id: "s_100})
+db.stores.findOne({_id: "s_100"})
+db.store_menu_read_dv.findOne({_id: "s_100"})
 </copy>
 ```
 
