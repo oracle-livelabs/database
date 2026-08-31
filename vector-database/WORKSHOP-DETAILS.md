@@ -1,6 +1,6 @@
 # Workshop Details
 
-Estimated Time: 5 minutes
+Estimated Time: X
 
 ## Title
 

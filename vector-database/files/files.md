@@ -4,7 +4,7 @@
 
 This folder contains sample data and helper code for the Python labs.
 
-Estimated Time: 5 minutes
+Estimated Time: X
 
 ### Objectives
 

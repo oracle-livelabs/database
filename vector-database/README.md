@@ -2,7 +2,7 @@
 
 This LiveLabs workshop recreates the original "Getting Started with AI Vector Search" flow for Autonomous AI Vector Database and a Python-first development experience.
 
-Estimated Time: 5 minutes
+Estimated Time: X
 
 The workshop keeps the original nine-lab progression and replaces SQL Worksheet and APEX-centered work with:
 

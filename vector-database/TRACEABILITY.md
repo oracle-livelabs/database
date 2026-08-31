@@ -1,6 +1,6 @@
 # Traceability
 
-Estimated Time: 5 minutes
+Estimated Time: X
 
 Use this file to track source material and claims used in the workshop.
 
