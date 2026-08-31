@@ -20,11 +20,11 @@ Estimated Lab Time: 7 minutes
 
 ## Task 1: Orders as Native Documents
 
-1. First, start the embedding model loading — Lab 8 needs it, and doing it now means it is ready by the time you get there. In the **SQL worksheet**, paste this and run it as a script.
+1. First, start the embedding model loading — Lab 7 needs it, and doing it now means it is ready by the time you get there. In the **SQL worksheet**, paste this and run it as a script.
 
     It downloads Oracle's augmented MiniLM ONNX model directly into the database and loads it as `MENU_MODEL`. Nothing is downloaded to your laptop, and no embedding service or API key is involved. If your environment already has the model, it says so and does nothing.
 
-    ```
+    ```sql
     <copy>
     SET SERVEROUTPUT ON
     DECLARE
@@ -58,12 +58,16 @@ Estimated Lab Time: 7 minutes
     </copy>
     ```
 
-    **What you should see:** `MENU_MODEL loaded.` (or `already present`), then a row showing `MENU_MODEL`. It takes about a minute.
+    **What you should see:** `MENU_MODEL loaded.` (or `already present`), then a row showing `MENU_MODEL`. It takes about a minute. Here is the sample output on a system where the model was already loaded:
+
+    ![ONNX model installed](images/onnx-installed.png "ONNX model installed")
+
 
 2. Now create the collection that will hold orders:
 
-    ```
+    ```sql
     <copy>
+    DROP TABLE IF EXISTS "orders" purge;
     CREATE JSON COLLECTION TABLE "orders";
     </copy>
     ```
@@ -74,188 +78,104 @@ Estimated Lab Time: 7 minutes
 
     Notice the shape of the data: customers belong to **ordering cohorts**, and each cohort only orders at locations that actually sell its items. That is not decoration. `GRAPH_TABLE` finds co-orders through a shared *customer*, not a shared order — so if every customer ordered a bit of everything, "people who ordered X also ordered Y" would collapse into "Y is the most popular item on the menu." Diners have habits. Model them, or the graph has nothing to say. Paste the whole block:
 
-    ```
+    ```javascript
     <copy>
     const CATALOG = {
-      "1000": {
-        "name": "Classic Cheeseburger",
-        "price": 12.99
-      },
-      "1001": {
-        "name": "Bacon Double Stack",
-        "price": 15.99
-      },
-      "1002": {
-        "name": "French Fries",
-        "price": 4.99
-      },
-      "1003": {
-        "name": "Garden Salad",
-        "price": 8.99
-      },
-      "1004": {
-        "name": "Black Bean Chipotle Burger",
-        "price": 11.99
-      },
-      "1005": {
-        "name": "Buffalo Chicken Sandwich",
-        "price": 13.49
-      },
-      "1006": {
-        "name": "Chocolate Malt Shake",
-        "price": 5.99
-      }
+    "1000": { "name": "Classic Cheeseburger", "price": 12.99 },
+    "1001": { "name": "Bacon Double Stack", "price": 15.99 },
+    "1002": { "name": "French Fries", "price": 4.99 },
+    "1003": { "name": "Garden Salad", "price": 8.99 },
+    "1004": { "name": "Black Bean Chipotle Burger", "price": 11.99 },
+    "1005": { "name": "Buffalo Chicken Sandwich", "price": 13.49 },
+    "1006": { "name": "Chocolate Malt Shake", "price": 5.99 }
     };
+
     const COHORTS = [
       {
         "name": "classic",
-        "customers": [
-          "c_1",
-          "c_2",
-          "c_3",
-          "c_4"
-        ],
-        "stores": [
-          "s_100",
-          "s_101",
-          "s_102",
-          "s_104"
-        ],
-        "baskets": [
-          [
-            1000,
-            1002
-          ],
-          [
-            1000,
-            1002
-          ],
-          [
-            1000,
-            1002
-          ],
-          [
-            1000,
-            1003
-          ]
-        ]
+        "customers": ["c_1", "c_2", "c_3", "c_4"],
+        "stores": ["s_100", "s_101", "s_102", "s_104"],
+        "baskets": [[1000, 1002], [1000, 1002], [1000, 1002], [1000, 1003]]
       },
       {
         "name": "veggie",
-        "customers": [
-          "c_5",
-          "c_6",
-          "c_7"
-        ],
-        "stores": [
-          "s_101",
-          "s_103"
-        ],
-        "baskets": [
-          [
-            1004,
-            1003
-          ],
-          [
-            1004,
-            1003
-          ],
-          [
-            1004,
-            1003
-          ],
-          [
-            1004,
-            1002
-          ]
-        ]
+        "customers": ["c_5", "c_6", "c_7"],
+        "stores": ["s_101", "s_103"],
+        "baskets": [[1004, 1003], [1004, 1003], [1004, 1003], [1004, 1002]]
       },
       {
         "name": "indulgent",
-        "customers": [
-          "c_8",
-          "c_9",
-          "c_10"
-        ],
-        "stores": [
-          "s_100",
-          "s_101"
-        ],
-        "baskets": [
-          [
-            1001,
-            1006
-          ],
-          [
-            1001,
-            1006
-          ],
-          [
-            1001,
-            1006
-          ],
-          [
-            1001,
-            1002
-          ]
-        ]
+        "customers": ["c_8", "c_9", "c_10"],
+        "stores": ["s_100", "s_101"],
+        "baskets": [[1001, 1006], [1001, 1006], [1001, 1006], [1001, 1002]]
       }
     ];
 
     const orders = [];
     let n = 0;
+
     for (const co of COHORTS) {
       co.customers.forEach((cust, ci) => {
         co.baskets.forEach((basket, bi) => {
           n += 1;
           const store = co.stores[(ci + bi) % co.stores.length];
-          const items = basket.map(id => ({ item_id: id, name: CATALOG[id].name, price: CATALOG[id].price }));
+          const items = basket.map(id => ({
+            item_id: id, name: CATALOG[id].name, price: CATALOG[id].price
+          }));
+
           orders.push({
             _id: "ord_" + (8000 + n), customer_id: cust, store_id: store,
             cohort: co.name, status: "closed",
             opened_at: "2026-07-20T12:" + String(n).padStart(2, "0") + ":00Z",
-            items: items, total: items.reduce((s, i) => s + i.price, 0)
+            items, total: items.reduce((s, i) => s + i.price, 0)
           });
         });
       });
     }
+
     try { db.orders.deleteMany({}); } catch (e) { /* first run: nothing to clear */ }
     db.orders.insertMany(orders);
     print("orders inserted: " + db.orders.countDocuments({}));
-    </copy>
+      </copy>
     ```
 
-    **What you should see:** `acknowledged: true` with 40 ids (`ord_8001`–`ord_8040`), then `orders inserted: 40`.
+    ![Order insertion](images/insert-orders.png "Order insertion")
 
 4. Entry gate, from **SQL**:
 
-    ```
+    ```sql
     <copy>
     SELECT COUNT(*) AS orders_loaded FROM "orders";
     </copy>
     ```
 
-    **What you should see:** `40`. The documents mongosh just wrote, counted by SQL, zero copies in between.
+    **What you should see:** `40`. The documents mongosh just wrote, counted by SQL.
 
 ## Task 2: Project the Graph
 
-1. In the **SQL worksheet**, paste this and run it as a script. It flattens the collection into three graph tables — `ord` (order header), `customer` (distinct customers), and `order_item` (line items, with a `line_no` so duplicate items stay unique) — then declares the graph over them:
+1. In the **SQL worksheet**, paste this and run it as a script. It flattens the collection into three graph tables — `ord` (order header), `customer` (distinct customers), and `order_item` (line items, with a `line_no` so duplicate items stay unique) — then declares the graph over them. 
 
-    ```
+    Issue the following statement in your **SQL Worksheet**:
+
+
+    ```sql
     <copy>
     DROP PROPERTY GRAPH IF EXISTS order_graph;
     DROP TABLE IF EXISTS order_item CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS ord        CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS customer   CASCADE CONSTRAINTS;
+
     CREATE TABLE ord AS
     SELECT o.data."_id".string() AS order_id,
            o.data.customer_id.string() AS customer_id,
            o.data.store_id.string()    AS store_id
     FROM "orders" o;
     ALTER TABLE ord ADD CONSTRAINT ord_pk PRIMARY KEY (order_id);
+    
     CREATE TABLE customer AS
     SELECT DISTINCT o.data.customer_id.string() AS customer_id FROM "orders" o;
     ALTER TABLE customer ADD CONSTRAINT customer_pk PRIMARY KEY (customer_id);
+    
     CREATE TABLE order_item AS
     SELECT jt.order_id, jt.line_no, jt.item_id, jt.item_name
     FROM "orders" o,
@@ -267,9 +187,11 @@ Estimated Lab Time: 7 minutes
                line_no   FOR ORDINALITY,
                item_id   NUMBER        PATH '$.item_id',
                item_name VARCHAR2(100) PATH '$.name'))) jt;
+    
     ALTER TABLE order_item ADD CONSTRAINT order_item_pk PRIMARY KEY (order_id, line_no);
     CREATE INDEX order_item_item_ix ON order_item (item_id);
     CREATE INDEX ord_customer_ix    ON ord (customer_id);
+    
     CREATE PROPERTY GRAPH order_graph
       VERTEX TABLES (
         customer KEY (customer_id),
@@ -295,7 +217,7 @@ Estimated Lab Time: 7 minutes
 
 2. The recommendation — who ordered the cheeseburger (item 1000) also ordered… Read the MATCH pattern like arrows on a whiteboard: customer → placed → order → contains → item, twice, sharing the customer:
 
-    ```
+    ```sql
     <copy>
     SELECT y_name, COUNT(*) AS together
     FROM GRAPH_TABLE (order_graph
@@ -333,4 +255,4 @@ You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
-* **Last Updated By/Date** - Rick Houlihan, July 2026
+* **Last Updated By/Date** - Hermann Baer, August 2026

@@ -19,9 +19,9 @@ In this lab, you will:
 
 ### Prerequisites
 
-* An Autonomous AI Database with the MongoDB API enabled
-  * **LiveLabs sandbox:** provisioned for you — your username, password, and compartment are on the reservation page ("View Login Info")
-  * **Your own tenancy / Free Trial:** the instance you created in the previous lab
+* An Autonomous AI Database with the MongoDB API enabled, alternatively
+    * **LiveLabs sandbox:** provisioned for you — your username, password, and compartment are on the reservation page ("View Login Info")
+    * **Your own tenancy / Free Trial:** the instance you created in the previous lab
 
 ## Task 1: Open Database Actions and the SQL Worksheet
 
@@ -77,7 +77,7 @@ In this lab, you will:
 
         ```
         <copy>
-        curl https://downloads.mongodb.com/compass/mongosh-2.9.2-darwin-arm64.zip -o mongosh.zip
+        curl https://downloads.mongodb.com/compass/mongosh-2.10.0-darwin-arm64.zip -o mongosh.zip
         </copy>
         ```
 
@@ -85,7 +85,7 @@ In this lab, you will:
 
         ```
         <copy>
-        curl https://downloads.mongodb.com/compass/mongosh-2.9.2-darwin-x64.zip -o mongosh.zip
+        curl https://downloads.mongodb.com/compass/mongosh-2.10.0-darwin-x64.zip -o mongosh.zip
         </copy>
         ```
 
@@ -93,7 +93,7 @@ In this lab, you will:
 
         ```
         <copy>
-        curl https://downloads.mongodb.com/compass/mongosh-2.9.2-win32-x64.zip -o mongosh.zip
+        curl https://downloads.mongodb.com/compass/mongosh-2.10.0-win32-x64.zip -o mongosh.zip
         </copy>
         ```
 
@@ -128,7 +128,7 @@ In this lab, you will:
         </copy>
         ```
 
-    **What you should see:** `2.9.2`, or the version you have chosen to download.
+    **What you should see:** `2.10.0`, or the version you have chosen to download.
 
     > That `PATH` lasts for this terminal window only. **Keep this window open for the whole workshop.** If you close it, re-run the `PATH` command from this directory.
 
@@ -143,6 +143,7 @@ In this lab, you will:
     ```
     mongodb://[user:password@]HOST.adb.REGION.oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true
     ```
+    If your database does not have the MongoDB API enabled yet, please follow the instructions in the [documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-8321D7A6-9DBD-44F8-8C16-1B1FBE66AC56) to enable it.
 
 2. Edit the URL in a text editor before using it:
 

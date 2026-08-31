@@ -58,7 +58,7 @@ Estimated Lab Time: 10 minutes
     </copy>
     ```
 
-    **What you should see:** five rows — four `number` at 13.99 and one `string` at 14.99. SQL can *read* the documents, but no query can fix "five copies" being the model.
+    **What you should see:** five rows — four `number` at 13.99 and one `string` at 12.49. SQL can *read* the documents, but no query can fix "five copies" being the model.
 
     ![The cheeseburger's price at every location, read with SQL](images/hamburger-price-sql.png "Item 1000 across the fleet")
 
@@ -70,8 +70,10 @@ Estimated Lab Time: 10 minutes
 
     ```
     <copy>
-    DROP VIEW  IF EXISTS "store_menu_dv";
-    DROP VIEW  IF EXISTS pos_menu_v;
+    DROP VIEW  IF EXISTS "store_menus_dv";
+    DROP VIEW  IF EXISTS "store_menu_read_dv";
+    DROP VIEW  IF EXISTS "store_menu_write_dv";
+    DROP VIEW  IF EXISTS "menu_override_dv";
     DROP TABLE IF EXISTS item_option        CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS extra              CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS item_special_hours CASCADE CONSTRAINTS;
@@ -80,11 +82,13 @@ Estimated Lab Time: 10 minutes
     DROP TABLE IF EXISTS menu               CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS item               CASCADE CONSTRAINTS;
     DROP TABLE IF EXISTS store              CASCADE CONSTRAINTS;
+
     CREATE TABLE store (
       store_id      VARCHAR2(10)  PRIMARY KEY,
       merchant_name VARCHAR2(100) NOT NULL,
       timezone      VARCHAR2(40)  DEFAULT 'America/Los_Angeles' NOT NULL
     );
+    
     CREATE TABLE item (
       item_id     NUMBER        PRIMARY KEY,
       item_name   VARCHAR2(100) NOT NULL,
@@ -92,6 +96,7 @@ Estimated Lab Time: 10 minutes
       base_price  NUMBER        NOT NULL CHECK (base_price > 0),
       active      BOOLEAN       DEFAULT TRUE NOT NULL
     );
+    
     CREATE TABLE menu (
       menu_id    NUMBER       PRIMARY KEY,
       store_id   VARCHAR2(10) NOT NULL REFERENCES store,
@@ -100,11 +105,13 @@ Estimated Lab Time: 10 minutes
       start_time VARCHAR2(5)  DEFAULT '00:00' NOT NULL,
       end_time   VARCHAR2(5)  DEFAULT '23:59' NOT NULL
     );
+    
     CREATE TABLE category (
       category_id   NUMBER       PRIMARY KEY,
       menu_id       NUMBER       NOT NULL REFERENCES menu,
       category_name VARCHAR2(50) NOT NULL
     );
+    
     CREATE TABLE menu_item (
       menu_id      NUMBER        NOT NULL REFERENCES menu,
       item_id      NUMBER        NOT NULL REFERENCES item,
@@ -115,19 +122,26 @@ Estimated Lab Time: 10 minutes
       sort_id      NUMBER,
       CONSTRAINT menu_item_pk PRIMARY KEY (menu_id, item_id)
     );
+    
+    ALTER TABLE menu_item ADD CONSTRAINT menu_item_category_uq
+    UNIQUE (menu_id, category_id, item_id);
+
     CREATE INDEX menu_item_item_ix ON menu_item (item_id);
     CREATE INDEX menu_item_cat_ix  ON menu_item (category_id);
+    
     CREATE TABLE extra (
       extra_id   NUMBER       PRIMARY KEY,
       item_id    NUMBER       NOT NULL REFERENCES item,
       extra_name VARCHAR2(50) NOT NULL
     );
+    
     CREATE TABLE item_option (
       option_id   NUMBER       PRIMARY KEY,
       extra_id    NUMBER       NOT NULL REFERENCES extra,
       option_name VARCHAR2(50) NOT NULL,
       price_delta NUMBER       DEFAULT 0 NOT NULL
     );
+    
     CREATE TABLE item_special_hours (
       item_special_hours_id NUMBER      PRIMARY KEY,
       item_id               NUMBER      NOT NULL REFERENCES item,
@@ -137,10 +151,11 @@ Estimated Lab Time: 10 minutes
     );
     </copy>
     ```
+    Note that the last three tables, `extra`, `item_option`, and `item_special_hours` are not used in this liveLab. They're part of the schema for future Livelabs.
 
     ![Canonical chain schema ERD — chain catalog plus the menu_item junction](images/restaurant-erd.svg "Canonical chain schema")
 
-2. Entry gate — one query, one answer:
+2. Entry gate — one query, one answer. Run the following statement in the **SQL Worksheet**:
 
     ```
     <copy>
@@ -157,6 +172,8 @@ Estimated Lab Time: 10 minutes
 
 1. Paste the shred into the **SQL worksheet** and run it as a script. It starts with deletes so a re-run from any partial state is clean, collapses the embedded copies into **one corporate catalog row per item**, then records every location's offering in `menu_item`. The corporate name and price are the values held by a **majority** of the locations selling that item — not the first one seen. That rule matters: a single location's rename must not become the chain's name, and if an item were sold at only one location that overrode its price, corporate price would be *unrecoverable* from the documents. Note how `JSON_TABLE ... NESTED` walks the same path your `$unwind` pipeline did — declaratively.
 
+
+
     ```
     <copy>
     DELETE FROM item_option;
@@ -167,8 +184,15 @@ Estimated Lab Time: 10 minutes
     DELETE FROM menu;
     DELETE FROM item;
     DELETE FROM store;
+
+    rem 5 stores
+    rem
     INSERT INTO store (store_id, merchant_name)
     SELECT s.data."_id".string(), s.data.name.string() FROM "stores" s;
+    
+    rem 5 menus
+    rem - menus are store-specific. At the moment every store only holds one menu
+    rem
     INSERT INTO menu (menu_id, store_id, menu_name, start_time, end_time)
     SELECT jt.menu_id, jt.store_id, jt.menu_name, jt.st, jt.en
     FROM   "stores" s,
@@ -181,6 +205,10 @@ Estimated Lab Time: 10 minutes
                  menu_name VARCHAR2(50) PATH '$.name',
                  st        VARCHAR2(5)  PATH '$.start_time',
                  en        VARCHAR2(5)  PATH '$.end_time'))) jt;
+    
+    rem 10 categories
+    rem - categories are menu-specific
+    rem
     INSERT INTO category (category_id, menu_id, category_name)
     SELECT DISTINCT jt.category_id, jt.menu_id, jt.category_name
     FROM   "stores" s,
@@ -191,6 +219,13 @@ Estimated Lab Time: 10 minutes
                COLUMNS (
                  category_id   NUMBER       PATH '$.category_id',
                  category_name VARCHAR2(50) PATH '$.name'))) jt;
+    
+    rem 7 normalized items
+    rem - the SQL ranks duplicate items for the same item_id and extracts
+    rem   the corporate values. Any store-specific overrides are not stored
+    rem   in the shared table item
+    rem - the drift of having item_id both as number and string is corrected
+    rem
     INSERT INTO item (item_id, item_name, description, base_price)
     WITH flat AS (
       SELECT TO_NUMBER(jt.item_id) AS item_id, jt.store_id,
@@ -222,6 +257,11 @@ Estimated Lab Time: 10 minutes
       JOIN flat f         ON f.item_id = n.item_id
     WHERE  n.rn = 1
     GROUP  BY n.item_id, n.item_name, p.price;
+    
+    rem 22 menu items
+    rem - this is the intersection table that stores local store menu overrides
+    rem - the drift of having item_id both as number and string is corrected
+    rem
     INSERT INTO menu_item (menu_id, item_id, category_id, display_name, price)
     SELECT jt.menu_id, TO_NUMBER(jt.item_id), jt.category_id,
            CASE WHEN jt.item_name <> i.item_name  THEN jt.item_name END,
@@ -239,6 +279,7 @@ Estimated Lab Time: 10 minutes
                    item_name   VARCHAR2(100) PATH '$.name',
                    price       NUMBER        PATH '$.price')))) jt
       JOIN item i ON i.item_id = TO_NUMBER(jt.item_id);
+    
     COMMIT;
     </copy>
     ```
@@ -251,14 +292,14 @@ Estimated Lab Time: 10 minutes
 
     ```
     <copy>
-    UPDATE item SET base_price = 1399 WHERE item_id = 1000;
+    UPDATE item SET base_price = 13.99 WHERE item_id = 1000;
     COMMIT;
     </copy>
     ```
 
     **What you should see:** `1 row updated.` One row. Done. Compare Lab 3: `modifiedCount: 4` full-document rewrites and one silent miss.
 
-2. The analytics ask, verbatim from the Ask Tom deck — five lines, no fan-out:
+2. The analytics ask, verbatim from the Ask Tom deck — five lines, no fan-out. Run the following statement in the **SQL Worksheet**:
 
     ```
     <copy>
@@ -276,7 +317,9 @@ Estimated Lab Time: 10 minutes
     </copy>
     ```
 
-    **What you should see:** the top-10 list — the two Bacon Double Stacks at 15.99, then the Airport's premium 14.99 rows, then the cheeseburger at 13.99 wherever it is inherited. Two details worth pausing on: Downtown's row reads **Lunch Classic**, its own name for item 1000, and the Airport's reads 14.99 while everyone else reads 13.99. Both come from the same `COALESCE` — a location's own value if it set one, corporate's otherwise. There is still only one corporate price that can ever be wrong.
+    ![Top Ten items in SQL](images/top-ten-items-sql.png "Top Ten Items")
+
+    **What you should see:** the top-10 list — the two Bacon Double Stacks at 15.99, then the Airport's premium 14.99 Buffalo Chicken sandwich, then the cheeseburger at 13.99 wherever it is inherited. Two details worth pausing on: Downtown's row reads **Lunch Classic**, its own name for item 1000, and the Airport's reads 12.49 while everyone else reads 13.99. Both come from the same `COALESCE` — a location's own value if it set one, corporate's otherwise. There is still only one corporate price that can ever be wrong.
 
 3. Try to break it. The engine now has an opinion:
 
@@ -294,7 +337,7 @@ But notice what you gave up: Lab 2's one-read application object is gone. Lab 5 
 ## Learn More
 
 * [Modeling for Access Patterns (Ask Tom)](https://www.youtube.com/watch?v=fFRdtXt4Vak)
-* [Think Relational, Stay JSON: Oracle's Duality View Revolution](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4223)
+* [JSON to Duality Migrator - LiveLabs](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=4223)
 * [JSON_TABLE and SQL/JSON](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/)
 * [OSON, the open binary JSON spec](https://osonspec.org/)
 
