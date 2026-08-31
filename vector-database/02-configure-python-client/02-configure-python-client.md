@@ -4,7 +4,11 @@
 
 Install the `oracle-vecdb` package in an Oracle Machine Learning (OML) notebook. Then configure an Oracle VecDB client and test its connection.
 
-Estimated Time: 15 minutes
+By the end of this lab, you will have an installed SDK, a configured `vecdb` client, and a verified REST connection that you will reuse throughout the workshop.
+
+Throughout this workshop, create a new OML paragraph for each code block, then use the Copy button and run the paragraph. Unless stated otherwise, later paragraphs use variables created in earlier paragraphs.
+
+Estimated Time: X
 
 ### Objectives
 
@@ -22,14 +26,14 @@ Estimated Time: 15 minutes
 
 In OML Notebooks, a **paragraph** is a unit of runnable code. Start it with `%python` to select the Python interpreter.
 
-The OML Python interpreter is a managed environment. Do not install packages into its shared environment with a standard `pip install` command. This code installs the package and a compatible `typing_extensions` version in `/tmp`. It then adds `/tmp` to the current Python path. Run this paragraph again after a notebook-service restart.
+The OML Python interpreter is a managed environment that does not allow you to install packages in its shared environment with a standard `pip install` command. This installation paragraph does four things: it installs `oracle-vecdb` and a compatible `typing_extensions` version in `/tmp`, adds `/tmp` to the active Python path, clears incompatible shared modules, and imports the compatible package. If you shut down this notebook or its Python environment restarts, run this paragraph again.
 
-1. In the `vector-database-workshop` notebook you created in Lab 2, select **Add Paragraph**.
+If you run this lab in a Jupyter notebook outside OML, use the Jupyter installation step later in this task.
 
-2. Copy the following code into the new paragraph, then run it.
+1. In the `vector-database-workshop` notebook you created in Lab 2, add a new Python paragraph below the test paragraph from Lab 2 and run the following code.
 
+    ```
     <copy>
-    ```python
     %python
     import importlib
     import subprocess
@@ -68,51 +72,52 @@ The OML Python interpreter is a managed environment. Do not install packages int
             sys.modules.pop(name, None)
 
     import typing_extensions
-    ```
     </copy>
+    ```
 
-3. Confirm that the paragraph prints `True`.
+2. Confirm that the paragraph prints `True`. This verifies that the compatible `typing_extensions` file was installed in `/tmp`; a successful run without an import error confirms that the package environment is ready.
 
-4. If you are using your own Jupyter environment instead of an OML Notebook, install the package with a standard pip command.
+3. If you are using your own Jupyter environment instead of an OML Notebook, add a new notebook cell and run the following code.
 
+    ```
     <copy>
-    ```bash
-    pip install oracle-vecdb
-    ```
+    %pip install oracle-vecdb
     </copy>
+    ```
 
 ## Task 2: Configure the client
 
-1. Add a new paragraph. Copy the following code into it and run it.
+OML paragraphs share state while the notebook's Python environment remains active. The import, connection settings, and `vecdb` client you create in this task remain available to later paragraphs unless the environment restarts.
+1. Add a new Python paragraph and run the following code.
 
-    `OracleVecDB` is the SDK client for the Vector Database REST API. `Configuration` stores its connection settings.
+    `OracleVecDB` is the SDK client for the Vector Database REST API. `Configuration` stores its connection settings. This step imports the classes; it does not connect to the database yet.
 
+    ```
     <copy>
-    ```python
     %python
     from oracle_vecdb import OracleVecDB, Configuration
-    ```
     </copy>
+    ```
 
-2. Add another paragraph. Production applications normally load credentials from an `.env` file or secret store. For this workshop, enter the Lab 1 REST URL and database credentials directly in the paragraph.
+2. Add a new Python paragraph and run the following code. Production applications normally load credentials from an `.env` file or secret store. For this workshop, replace each placeholder with the REST URL, username, and password you recorded in Lab 1.
 
-    This workshop uses HTTP basic authentication: REST URL, username, and password. It does not use OAuth.
+    This workshop uses HTTP Basic authentication: REST URL, username, and password. It does not use OAuth. Do not include the angle brackets in your values, and do not commit real credentials to source control.
 
+    ```
     <copy>
-    ```python
     %python
     URL = "<REST URL copied in Lab 1>"
     USER = "VECTOR_USER"
     PWD = "<database password>"
-    ```
     </copy>
+    ```
 
-3. Add a new paragraph. Copy the following code into it and run it to create the client.
+3. Add a new Python paragraph and run the following code.
 
-    `Configuration` stores the ORDS REST endpoint and HTTP basic-authentication credentials. `OracleVecDB` uses it for SDK calls.
+    `Configuration` stores the ORDS REST endpoint and HTTP Basic-authentication credentials. `OracleVecDB` uses those settings for SDK calls. Creating this local client object does not validate the connection; Task 3 makes the first service call.
 
+    ```
     <copy>
-    ```python
     %python
     vecdb = OracleVecDB(
         Configuration(
@@ -121,17 +126,17 @@ The OML Python interpreter is a managed environment. Do not install packages int
             password=PWD,
         )
     )
-    ```
     </copy>
+    ```
 
 ## Task 3: Test Connection
 
-1. Add a new paragraph. Copy the following code into it and run it.
+1. Add a new Python paragraph and run the following code.
 
-    `describe_vector_database()` returns model, table, and vector counts. A response confirms that the REST URL and credentials work.
+    `describe_vector_database()` makes an authenticated SDK call and returns a summary of the models, tables, and vectors visible to the connected user.
 
+    ```
     <copy>
-    ```python
     %python
     db_stats = vecdb.describe_vector_database()
     print(
@@ -139,10 +144,10 @@ The OML Python interpreter is a managed environment. Do not install packages int
         f"Tables: {db_stats.total_tables} | "
         f"Vectors: {db_stats.total_vectors:,}"
     )
-    ```
     </copy>
+    ```
 
-2. Confirm that the paragraph displays the number of models, tables, and vectors in the database.
+2. Confirm that the paragraph displays the number of models, tables, and vectors in the database. A successful response proves that the REST URL and credentials work, even if one or more counts are zero. Keep this notebook open; Lab 4 uses the `vecdb` client to inspect models and create vector tables.
 
 ## Learn More
 

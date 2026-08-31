@@ -56,22 +56,10 @@
       "filename": "../../07-create-query-memory-module/07-create-query-memory-module.md"
     },
     {
-      "title": "Lab 8: Create Indexes for Approximate Search",
-      "description": "Create indexes and compare search settings.",
+      "title": "Lab 8: Create Indexes for Approximate Search (Optional)",
+      "description": "Optional HNSW and IVF query-timing comparison.",
       "type": "sandbox",
       "filename": "../../06-approximate-search-indexes/06-approximate-search-indexes.md"
-    },
-    {
-      "title": "Lab 9: Use Bring-Your-Own Vectors and Metadata Filters",
-      "description": "Map image search to explicit vectors and metadata filters.",
-      "type": "sandbox",
-      "filename": "../../07-multimodal-and-metadata-search/07-multimodal-and-metadata-search.md"
-    },
-    {
-      "title": "Lab 10: Build a Python Search API",
-      "description": "Replace the UI demo with a reusable Python search boundary.",
-      "type": "sandbox",
-      "filename": "../../08-build-python-search-api/08-build-python-search-api.md"
     },
     {
       "title": "Need Help?",

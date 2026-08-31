@@ -2,14 +2,14 @@
 
 ## Introduction
 
-In this lab, you switch from the Vector Database Console to Oracle Machine Learning (OML) Notebooks. You open OML, create a project and notebook, then run a Python paragraph. Later labs use this notebook environment to run the Vector Database Python SDK examples.
+In this lab, you switch from the Vector Database Console to Oracle Machine Learning (OML) Notebooks. You open OML, create a notebook, then run a Python paragraph. Later labs use this notebook environment to run the Vector Database Python SDK examples.
 
-Estimated Time: 10 minutes
+Estimated Time: X
 
 ### Objectives
 
 - Open Oracle Machine Learning from your Autonomous AI Vector Database.
-- Create an OML project and notebook.
+- Create an OML notebook.
 - Add and run a `%python` paragraph.
 
 ### Prerequisites
@@ -19,23 +19,25 @@ Estimated Time: 10 minutes
 
 ## Task 1: Open Oracle Machine Learning
 
-1. In the Oracle Cloud Console, open your Autonomous AI Vector Database.
+1. From the Vector Database Console, open the **Database Actions** navigation menu in the upper-left corner and select **Oracle Machine Learning**.
 
-2. Select **Database Actions**. If prompted, sign in with the database username and password provided for the workshop.
+    ![Database Actions navigation menu with Oracle Machine Learning selected.](images/start_oml.png " ")
 
-3. On the Database Actions launchpad, select **Oracle Machine Learning**.
+2. On the Oracle Machine Learning sign-in page, enter the workshop database username and password, then select **Sign In**.
 
-    The OML landing page opens. This is where you organize projects, create notebooks, and run SQL, Python, and other notebook paragraphs.
+    ![Oracle Machine Learning sign-in page.](images/login_oml.png " ")
 
-## Task 2: Create a Project and Notebook
+3. The OML landing page opens. This is where you organize projects, create notebooks, and run SQL, Python, and other notebook paragraphs.
 
-1. In OML, open **Projects** and select **Create**.
+    ![Oracle Machine Learning landing page.](images/oml_landing.png " ")
 
-2. Enter `Vector Database Workshop` for the project name, then select **Create**.
+## Task 2: Create a Notebook
 
-3. Open the new project and select **Create Notebook**.
+1. In OML, click the **Notebooks** icon, then select **Create** to create a new notebook.
 
-4. Enter `vector-database-workshop` for the notebook name, then select **Create**.
+    ![Notebooks page with the Create button.](images/create_notebook.png " ")
+
+2. Enter `vector-database-workshop` for the notebook name, then select **Create**.
 
     The notebook opens with a first paragraph, ready for you to choose the language and enter code.
 
@@ -43,20 +45,26 @@ Estimated Time: 10 minutes
 
 1. In the first notebook paragraph, enter the following code.
 
+    ![Oracle Machine Learning notebook editor with a paragraph ready for code.](images/oml_first_paragraph.png " ")
+
+    ```
     <copy>
-    ```python
     %python
     print("OML notebook is ready for the Vector Database workshop.")
-    ```
     </copy>
+    ```
 
 2. Run the paragraph by selecting the **Run** icon or pressing **Shift+Enter**.
 
-3. Confirm that the output appears below the paragraph.
+    ![Run paragraph icon in Oracle Machine Learning.](images/oml_run_paragraph.png " ")
 
-4. To add another paragraph, select **Add Paragraph**. Use `%python` at the top of a paragraph whenever you want to run Python code in the notebook.
+3. Confirm that the output appears below the paragraph. The first time you run Python, OML starts a Python environment, which can take about a minute.
 
-    Keep this notebook and project open. You will use them to run the Python SDK examples in the next lab.
+4. To add another paragraph, select **Add Paragraph** by moving your mouse just below or between any paragraph. Use `%python` at the top of a paragraph whenever you want to run Python code in the notebook.
+
+    ![Add Paragraph icon in Oracle Machine Learning.](images/oml_add_paragraph.png " ")
+
+    Keep this notebook open. You will use it to run the Python SDK examples in the next lab.
 
 ## Learn More
 

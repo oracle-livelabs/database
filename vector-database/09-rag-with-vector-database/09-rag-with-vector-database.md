@@ -4,7 +4,7 @@
 
 RAG starts with good retrieval. In this lab, you load support records, search for context, rerank results, and build a prompt for an LLM or agent framework.
 
-Estimated Time: 10 minutes
+Estimated Time: X
 
 ### Objectives
 
@@ -25,8 +25,8 @@ Estimated Time: 10 minutes
 
 2. Add this code.
 
+    ```
     <copy>
-    ```python
     import json
     import os
     from pathlib import Path
@@ -63,16 +63,16 @@ Estimated Time: 10 minutes
         records.append({"id": item["id"], "metadata": item})
 
     print_items("Incident load", vecdb.upsert_vectors(table_name=table_name, vectors=records))
-    ```
     </copy>
+    ```
 
 3. Run the script.
 
-    <copy>
-    ```bash
-    python load_incidents.py
     ```
+    <copy>
+    python load_incidents.py
     </copy>
+    ```
 
 ## Task 2: Retrieve Context
 
@@ -80,8 +80,8 @@ Estimated Time: 10 minutes
 
 2. Add the retrieval function.
 
+    ```
     <copy>
-    ```python
     import os
 
     from files.vector_client import make_client
@@ -112,15 +112,15 @@ Estimated Time: 10 minutes
             print("Reranked documents:", reranked)
 
         return results
-    ```
     </copy>
+    ```
 
 ## Task 3: Assemble the Prompt Payload
 
 1. Add a prompt builder to `rag_retrieve.py`.
 
+    ```
     <copy>
-    ```python
     def build_prompt(q, results):
         context_lines = []
         for item in results:
@@ -144,16 +144,16 @@ Estimated Time: 10 minutes
         q = "The camera app times out during authentication. What should I check?"
         retrieved = retrieve_context(q)
         print(build_prompt(q, retrieved))
-    ```
     </copy>
+    ```
 
 2. Run the script.
 
-    <copy>
-    ```bash
-    python rag_retrieve.py
     ```
+    <copy>
+    python rag_retrieve.py
     </copy>
+    ```
 
 3. Review the prompt payload.
 

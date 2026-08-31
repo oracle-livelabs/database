@@ -4,12 +4,13 @@
 
 In this lab, you run semantic searches against the National Parks `parks` table before creating a vector index. Each text query uses the embedding model configured on the table to generate its query vector.
 
-Estimated Time: 10 minutes
+Estimated Time: X
 
 ### Objectives
 
 - Run semantic searches with natural-language text.
 - Review formatted National Parks results.
+- Understand how query text, `top_k`, and metadata filters affect results.
 - Combine semantic search with metadata filters.
 
 ### Prerequisites
@@ -20,11 +21,12 @@ Estimated Time: 10 minutes
 
 ## Task 1: Search by Text
 
-1. Add a new Python paragraph. Copy the following function into it and run it.
+This task establishes the reusable query-and-display pattern used throughout the rest of the workshop.
 
-    `format_parks` receives a query response and returns a readable, numbered list of park names, park codes, and states.
+1. Add a new Python paragraph and run the following code.
 
-    <copy>
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of park names, park codes, and states. If a query returns no items, the function safely returns an empty string.
+
     ```python
     %python
     def format_parks(result):
@@ -33,11 +35,11 @@ Estimated Time: 10 minutes
             for i, r in enumerate(result.items or [], 1)
         )
     ```
-    </copy>
 
-2. Add a new Python paragraph. Copy the following code into it and run it.
+2. Add a new Python paragraph and run the following code.
 
-    <copy>
+    `table_name="parks"` selects the data to search. `query_by={"text": search_text}` tells the table to embed the natural-language text with its configured model. `top_k=10` returns the ten most similar park records.
+
     ```python
     %python
     search_text = "historic battlefield from the civil war"
@@ -50,15 +52,17 @@ Estimated Time: 10 minutes
 
     print(format_parks(result))
     ```
-    </copy>
 
-3. Review the results. The table converts the query text into an embedding with its configured model, then returns the ten closest park records.
+3. Review the results. The table converts the query text into an embedding with its configured model, then returns the ten closest park records. Notice that the query does not need to match a park description word-for-word; it searches for records semantically related to Civil War battlefields.
 
 ## Task 2: Search for Terms Not Present in the Text
 
-1. Add a new Python paragraph. Copy the following code into it and run it.
+This task is a deliberate semantic-search test. The terms “rock climbing” and “mountain lakes” may not appear verbatim in every returned description, but parks with conceptually related activities or features can still rank highly.
 
-    <copy>
+1. Add a new Python paragraph and run the following code.
+
+    Assigning new values to `search_text` and `result` replaces the prior notebook variables only. It does not change the `parks` table or its stored records.
+
     ```python
     %python
     search_text = "rock climbing near mountain lakes"
@@ -71,17 +75,17 @@ Estimated Time: 10 minutes
 
     print(format_parks(result))
     ```
-    </copy>
 
 2. Review the results. Semantic search can return parks related by meaning even when the exact query words do not appear in the park descriptions.
 
 ## Task 3: Add a Metadata Filter
 
-1. Add a new Python paragraph. Copy the following code into it and run it.
+Semantic relevance alone is often insufficient in a real application. Metadata filters let users apply business, geographic, or policy constraints while retaining meaning-based search.
 
-    This query combines semantic similarity with metadata filters. It excludes the White House park record and limits results to parks in the District of Columbia or Maryland.
+1. Add a new Python paragraph and run the following code.
 
-    <copy>
+    `$and` requires both conditions. `$ne` excludes the `whho` White House record, and `$in` limits results to parks associated with the District of Columbia or Maryland.
+
     ```python
     %python
     search_text = "We like waterfalls and other natural water features"
@@ -100,9 +104,10 @@ Estimated Time: 10 minutes
 
     print(format_parks(result))
     ```
-    </copy>
 
-2. Review the results. Every returned record meets the metadata conditions as well as the semantic-search request.
+2. Review the results. Every returned record must satisfy the metadata conditions and be semantically relevant to the request. An empty result is also valid if no records meet both requirements.
+
+You now have a baseline semantic-search pattern. Lab 7 reuses this pattern and enriches it with prior user queries.
 
 ## Learn More
 

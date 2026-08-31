@@ -2,31 +2,25 @@
 
 ## Introduction
 
-Autonomous AI Vector Database gives developers a vector-native service for semantic search, RAG, recommendations, and agent memory. In this workshop, you use Python to connect to a Vector Database endpoint, load sample records, generate or provide vectors, search by meaning, tune search behavior, and assemble a retrieval pipeline that can feed an LLM.
+AI applications are only as useful as the information they can retrieve. Autonomous AI Vector Database helps you build semantic search, retrieval-augmented generation (RAG), and memory-aware applications without having to operate separate infrastructure for vectors, models, and application data.
+
+Using the Oracle VecDB Python SDK, you can create vector tables, generate embeddings, store metadata, and search by meaning through a REST-based API. Because the service is built on Oracle Autonomous AI Database, your application benefits from managed operations, security, scalability, and the ability to keep vector data alongside the enterprise data it helps users find.
+
+In this workshop, you build a National Parks semantic-search application step by step. You will load data from Oracle Object Storage, use integrated embedding to create vectors automatically, bring your own vectors for park directions, combine semantic search with metadata filters, and compare baseline and indexed search behavior. You will also create a small query-memory module that captures prior requests and uses them to make future searches more context-aware.
+
+By the end of the workshop, you will have a practical Python pattern you can adapt for document search, product discovery, support knowledge bases, RAG retrieval, or agent memory. You will understand when to use integrated embedding, when to supply vectors yourself, and how to evolve a working prototype into a more scalable search experience.
 
 Estimated Workshop Time: 90 minutes
 
 ### Objectives
 
-- Configure the `oracle-vecdb` Python SDK.
-- Load text records with integrated embedding.
+- Install the `oracle-vecdb` Python SDK.
+- Create vector tables using integrated embedding and bring-your-own vectors.
+- Load JSON records.
 - Run semantic search and metadata-filtered search.
 - Create vector indexes for approximate search.
 - Build a small Python memory pattern.
 
-
-### Prerequisites
-
-- Oracle Cloud account with permission to create Autonomous AI Vector Database resources.
-- Python 3.10 or later on your development machine.
-- Ability to install Python packages with `pip`.
-- An Autonomous AI Vector Database REST endpoint in this format:
-
-    ```text
-    https://<host>/ords/<schema>/_/db-api/stable/vecdb/
-    ```
-
-- A vector database user name and password, or an OAuth bearer token.
 
 ## Task 1: Review the Workshop Flow
 
@@ -40,19 +34,8 @@ Estimated Workshop Time: 90 minutes
     - **Lab 5: Create Embeddings and Load Text** reads the National Parks data and loads it into the integrated `parks` table.
     - **Lab 6: Run Baseline Semantic Search** runs natural-language searches and adds metadata filters.
     - **Lab 7: Create a Query Memory Module** saves user queries and uses them to make memory-aware park searches.
-    - **Lab 8: Create Indexes for Approximate Search** creates and compares approximate-search indexes.
-    - **Lab 9: Use Bring-Your-Own Vectors and Metadata Filters** works with externally generated vectors and metadata filters.
-    - **Lab 10: Build a Python Search API** packages the search workflow behind a reusable Python boundary.
+    - **Lab 8: Create Indexes for Approximate Search (Optional)** creates and compares approximate-search indexes.
 
-2. Keep these workshop values nearby:
-
-    ```text
-    REST URL=<REST URL copied from the Vector Database Console>
-    USER=VECTOR_USER
-    PWD=<database password>
-    EMBED_MODEL=all_MiniLM_L12_v2
-    PAR_URL=<National Parks Object Storage PAR URL>
-    ```
 ## Learn More
 
 - [Oracle LiveLabs](https://livelabs.oracle.com/)

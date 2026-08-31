@@ -2,93 +2,73 @@
 
 ## Introduction
 
-Inspect the loaded embedding models, explore the National Parks data set, and load its records into the `parks` table.
+Explore the National Parks data set, load it into the `parks` table, and manually embed park directions for the `directions` table.
 
-Estimated Time: 15 minutes
+Estimated Time: X
 
 ### Objectives
 
-- List the embedding models loaded in your vector database.
 - Explore the National Parks JSON data set from Oracle Object Storage.
 - Load National Parks records into the `parks` integrated embedding table.
+- Generate direction embeddings and load them into the bring-your-own-vector `directions` table.
 
 ### Prerequisites
 
 - Complete Lab 3: Install oracle-vecdb package.
+- Complete Lab 4: Understand Models, Records, and Vector Tables.
 - Keep the `vecdb` client initialized in your OML Notebook.
 - Have the National Parks Object Storage PAR URL provided for this workshop.
 
-## Task 1: Confirm Available Embedding Models
+## Task 1: Explore National Parks Data
 
-An integrated table uses an embedding model already loaded in Autonomous AI Vector Database. `list_models()` returns the loaded embedding and reranking models in your schema.
+The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. The workshop PAR URL is provided in the code below. Do not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
 
-1. Add a new Python paragraph to your OML Notebook. Copy the following code into it and run it.
+1. Add a new Python paragraph and run the following code to load the National Parks JSON file.
 
-    <copy>
-    ```
-    %python
-    models = vecdb.list_models(limit=25, offset=0)
-    print([item.model_name for item in models.items or []])
-    ```
-    </copy>
+    `urlopen()` reads the object through the PAR URL, and `json.load()` converts it into a Python list of dictionaries. The resulting `park_data_json` object remains in notebook memory for the remaining tasks in this lab.
 
-2. Confirm that `all_MiniLM_L12_v2` appears in the output. The `parks` table created in Lab 4 uses this model for automatic embeddings.
-
-## Task 2: Explore National Parks data
-
-The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. Paste the workshop PAR URL into the code below. Do not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
-
-1. Add a new Python paragraph. Copy the code below, replace the placeholder with the workshop PAR URL, and run the paragraph.
-
-    The output shows the number of park records and the `description` for the first park.
-
-    <copy>
-    ```
+    ```python
     %python
     import json
     from urllib.request import urlopen
 
-    par_url = "<National Parks Object Storage PAR URL>"
+    par_url = "https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/national_parks.json"
 
     with urlopen(par_url) as response:
         park_data_json = json.load(response)
 
     print(len(park_data_json), park_data_json[0]["description"])
     ```
-    </copy>
 
-2. Add a new Python paragraph. Copy the following code into it and run it to view the complete JSON document.
+    The output confirms that the notebook can access Object Storage and that the file contains a list of park records with a `description` field.
 
-    This output is long because it displays every park record.
+2. Add a new Python paragraph and run the following code to view the first 3000 characters of the JSON document.
 
-    <copy>
-    ```
+    ```python
     %python
-    print(park_data_json)
+    print(json.dumps(park_data_json, indent=2)[:3000])
     ```
-    </copy>
 
-3. Add another Python paragraph. Copy the following code into it and run it to list the keys in the first park record.
+3. Add a new Python paragraph and run the following code to list the keys in the first park record.
 
-    <copy>
-    ```
+    ```python
     %python
     print(list(park_data_json[0].keys()))
     ```
-    </copy>
 
-4. Review the output. The `parks` table embeds records from `description`. A later exercise uses `DIRECTIONS_INFO` to generate external vectors for `directions`.
+    These keys define how later tasks use the data: `description` supplies text for automatic embedding in `parks`, `DIRECTIONS_INFO` supplies text for manually generated vectors, and `park_code` becomes the stable ID for `directions`.
 
-## Task 3: Load National Parks Records into parks
+4. Review the output. The `parks` table embeds records from `description`. Task 3 uses `DIRECTIONS_INFO` to generate bring-your-own vectors for `directions`.
 
-This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again.
+## Task 2: Load National Parks Records into `parks`
 
-1. Add a new Python paragraph. Copy the following code into it and run it to prepare the vector records.
+This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again. In Task 3, the bring-your-own-vector `directions` table requires an ID, dense vector, and metadata because it has no integrated embedding configuration.
 
-    Each record stores one park object as metadata. The filter excludes records without a `description`, because that is the field configured for automatic embedding.
+1. Add a new Python paragraph and run the following code to prepare the vector records.
 
-    <copy>
-    ```
+    Each item has the upsert shape required for an integrated embedding table: a dictionary containing `metadata`. The filter excludes records without a `description`, because that is the field configured for automatic embedding. No ID is provided because `parks` uses `auto_generate_id=True`.
+
+    ```python
     %python
     park_data = [
         {"metadata": park}
@@ -98,32 +78,63 @@ This task loads National Parks records into the `parks` integrated embedding tab
 
     print(f"Prepared {len(park_data):,} park records.")
     ```
-    </copy>
 
-2. Add a new Python paragraph. Copy the following code into it and run it to upload the park data.
+2. Add a new Python paragraph and run the following code to upload the park data.
 
-    <copy>
-    ```
+    ```python
     %python
     vecdb.upsert_vectors(table_name="parks", vectors=park_data)
     ```
-    </copy>
 
-    The database reads each metadata object's `description`, creates its dense vector with `all_MiniLM_L12_v2`, and stores the record in `parks`.
+    In one call, the database stores each metadata object, reads its `description`, creates a dense vector with `all_MiniLM_L12_v2`, and stores the record in `parks`. This step can take longer than the earlier steps because it processes every eligible park record. The paragraph output shows the number of rows processed.
 
-3. Add a new Python paragraph. Copy the following code into it and run it to see how many rows the table contains.
-
-    <copy>
-    ```
-    %python
-    parks_details = vecdb.describe_vector_table(name="parks").to_dict()
-    print(f"Rows uploaded: {parks_details['stats']['total_vectors']:,}")
-    ```
-    </copy>
-
-4. Confirm that the row count matches the number of prepared records.
+3. Review the output from both paragraphs. Confirm that the number of uploaded rows matches the number of prepared records.
 
     The `parks` table automatically generates IDs. Run the upsert paragraph once; running it again creates additional records because the submitted records do not have fixed IDs.
+
+## Task 3: Create Direction Embeddings and Load the Directions Table
+
+The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike the `parks` table, it does not create embeddings automatically. This task follows a different data flow: read `DIRECTIONS_INFO`, generate an embedding, create a record with an ID, dense vector, and metadata, then upsert that record into `directions`.
+
+1. Add a new Python paragraph and run the following code.
+
+    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes about one minute to complete.
+
+    ```python
+    %python
+    direction_vectors = []
+
+    for park in park_data_json:
+        park_id = park.get("park_code")
+        directions_text = park.get("DIRECTIONS_INFO")
+        if not park_id or not isinstance(directions_text, str) or not directions_text.strip():
+            continue
+        embedding_response = vecdb.generate_embedding(
+            model_name="all_MiniLM_L12_v2",
+            inputs=[directions_text],
+        )
+        direction_vectors.append(
+            {
+                "id": park_id,
+                "dense_vector": embedding_response.data[0].embedding,
+                "metadata": park,
+            }
+        )
+
+    print(f"Prepared {len(direction_vectors)} direction vectors.")
+
+    upsert_result = vecdb.upsert_vectors(
+        table_name="directions",
+        vectors=direction_vectors,
+    )
+
+    print(upsert_result)
+    ```
+
+2. Review the output. The embedding step typically takes about one minute. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
+
+    This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
+
 ## Learn More
 
 - [List loaded models](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/list-models.html)
@@ -135,8 +146,3 @@ This task loads National Parks records into the `parks` integrated embedding tab
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Last Updated By/Date** - Codex, August 27, 2026
-
-
-
-
-

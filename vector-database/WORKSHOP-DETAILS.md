@@ -47,9 +47,7 @@ AI developers and data scientists who know basic Python and want to build semant
 7. Lab 5: Create Embeddings and Load Text
 8. Lab 6: Run Baseline Semantic Search
 9. Lab 7: Create a Query Memory Module
-10. Lab 8: Create Indexes for Approximate Search
-11. Lab 9: Use Bring-Your-Own Vectors and Metadata Filters
-12. Lab 10: Build a Python Search API
+10. Lab 8: Create Indexes for Approximate Search (Optional)
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
