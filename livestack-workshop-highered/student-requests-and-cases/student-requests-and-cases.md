@@ -283,13 +283,37 @@ Now create one nested request document, inspect the relational rows Oracle creat
     </copy>
     ~~~
 
-    **Expected output: Commit Complete**
+6. Verify the relational status update.
 
-    Oracle reports `Commit complete.`
+    Run this query after the commit. It reads the request and service item rows directly, so you can see that the JSON update changed the request status while keeping the student, demand score, and service evidence intact.
 
-6. 🎯 **Interactive challenge: predict the relational change.**
+    ~~~sql
+    <copy>
+    SELECT o.order_id AS "Request",
+           o.order_status AS "Status",
+           c.first_name || ' ' || c.last_name AS "Student",
+           o.demand_score AS "Demand Score",
+           oi.item_id AS "Service Item",
+           oi.product_id AS "Service ID",
+           oi.service_name AS "Service Name"
+    FROM orders o
+    JOIN customers c
+      ON c.customer_id = o.customer_id
+    JOIN order_items oi
+      ON oi.order_id = o.order_id
+    WHERE o.order_id = 900001;
+    </copy>
+    ~~~
 
-    Before you run another query, decide which relational column should now contain `IN_PROGRESS`. Should the demand score, service ID, or service name change when the JSON update targets only `requestStatus`?
+    **Expected output: Updated Request as Relational Rows**
+
+    | Request | Status | Student | Demand Score | Service Item | Service ID | Service Name |
+    | ---: | --- | --- | ---: | ---: | ---: | --- |
+    | 900001 | IN_PROGRESS | Priya Shah | 76 | 990001 | 13 | Tutoring Appointment |
+
+7. 🎯 **Interactive challenge: explain the relational change.**
+
+    Use the result you just returned. Which relational column changed because the JSON update targeted only `requestStatus`? Which request and service values stayed the same?
 
     <details>
     <summary><strong>Challenge answer: one document, one governed request</strong></summary>
@@ -299,29 +323,6 @@ Now create one nested request document, inspect the relational rows Oracle creat
     The relational request status changes. The demand score remains `76`, and the service item remains `990001 | 13 | Tutoring Appointment` because the JSON update did not change those fields.
 
     > `ORDERS.ORDER_STATUS` changes from `OPEN` to `IN_PROGRESS`. The related `ORDER_ITEMS` row remains unchanged. The application and student-success analyst use two access shapes over the same governed request, so Oracle Database does not need to reconcile a document copy with a relational copy.
-
-    If you need the runnable solution, use this query:
-
-    ~~~sql
-    <copy>
-    SELECT o.order_id AS "Request",
-           o.order_status AS "Status",
-           o.demand_score AS "Demand Score",
-           oi.item_id AS "Service Item",
-           oi.product_id AS "Service ID",
-           oi.service_name AS "Service Name"
-    FROM orders o
-    JOIN order_items oi
-      ON oi.order_id = o.order_id
-    WHERE o.order_id = 900001;
-    </copy>
-    ~~~
-
-    **Expected output: Updated Relational Request**
-
-    | Request | Status | Demand Score | Service Item | Service ID | Service Name |
-    | ---: | --- | ---: | ---: | ---: | --- |
-    | 900001 | IN_PROGRESS | 76 | 990001 | 13 | Tutoring Appointment |
 
     </details>
 

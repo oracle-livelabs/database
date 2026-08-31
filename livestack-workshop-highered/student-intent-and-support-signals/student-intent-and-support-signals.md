@@ -98,15 +98,15 @@ Estimated Time: **12 minutes**
     </copy>
     ~~~
 
-    Expected output: Service Matches
+    **Expected output: Service Matches**
 
     | Service Name | Academic Program | Similarity |
     | --- | --- | ---: |
-    | First-Year Advising | Student Success Office | Varies slightly by model environment |
-    | Tutoring Appointment | Student Success Office | Varies slightly by model environment |
-    | Academic Planning Appointment | College of Engineering | Varies slightly by model environment |
+    | First-Year Advising | Student Success Office | 0.758 |
+    | Tutoring Appointment | Student Success Office | 0.435 |
+    | Academic Planning Appointment | College of Engineering | 0.366 |
 
-    The names and order should be meaningful to a support team. Similarity can vary slightly by model environment, so use it to rank candidates and retain human review of the final support response.
+    This is a representative result set. Your three-decimal similarity values, and sometimes the lower-ranked order, can vary by model environment. The important result is a three-row ranked list with advising-oriented services near the top. Use the ranking to identify candidates for human review; it does not assign a service automatically.
 
 2. 🎯 **Interactive challenge: change the student-support question.**
 
@@ -117,7 +117,15 @@ Estimated Time: **12 minutes**
 
     **Expected output: Financial-Aid Service Matches**
 
-    `Financial Aid Navigation` should move to the top because its stored description closely matches the revised phrase. The remaining order and all similarity values can vary slightly by model environment.
+    `Financial Aid Navigation` should move to the top because its stored description closely matches the revised phrase. A representative result set is:
+
+    | Service Name | Academic Program | Similarity |
+    | --- | --- | ---: |
+    | Financial Aid Navigation | Student Success Office | 1.000 |
+    | First-Year Advising | Student Success Office | 0.421 |
+    | Academic Planning Appointment | College of Engineering | 0.343 |
+
+    Your three-decimal similarity values, and sometimes the lower-ranked order, can vary by model environment. The important result is that Financial Aid Navigation moves to the top of the revised evidence queue.
 
     > The revised phrase changes the meaning being compared, so the review queue changes without copying service descriptions or vectors to a separate search system. Use the ranking to find candidates for human review; it does not assign a service automatically.
 

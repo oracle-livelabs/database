@@ -72,38 +72,46 @@ Estimated Time: **12 minutes**
 
     Read this query in three parts.
 
-    1. The inner query starts with `OML_DEMAND_TRAINING_V`, the repeatable feature set used by the model.
+    1. `scored_demand` starts with `OML_DEMAND_TRAINING_V`, the repeatable feature set used by the model.
     2. `PREDICTION` returns a class label, while `PREDICTION_PROBABILITY` returns the probability assigned specifically to `SURGE`; neither is a guarantee.
-    3. The outer join adds the service name, and `ORDER BY` makes the review sequence stable when scores tie.
+    3. The final query adds the service name, and `ORDER BY` makes the review sequence stable when scores tie.
 
     ~~~sql
     <copy>
-    SELECT s.service_name,
-           scored.predicted_demand,
-           scored.surge_probability
-    FROM (
+    WITH scored_demand AS (
       SELECT product_id,
              PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_demand,
              ROUND(
-               PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL, 'SURGE' USING *),
+               PREDICTION_PROBABILITY(
+                 DEMAND_SURGE_MODEL,
+                 'SURGE' USING *
+               ),
                3
              ) AS surge_probability
       FROM oml_demand_training_v
-    ) scored
-    JOIN student_services_v s ON s.service_id = scored.product_id
-    ORDER BY scored.surge_probability DESC, s.service_name;
+    )
+    SELECT s.service_name,
+           scored.predicted_demand,
+           scored.surge_probability
+    FROM scored_demand scored
+    JOIN student_services_v s
+      ON s.service_id = scored.product_id
+    ORDER BY scored.surge_probability DESC,
+             s.service_name;
     </copy>
     ~~~
 
-    Expected output: Demand Priorities
+    **Expected output: Demand Priorities**
 
-    | Result Pattern | Expected Evidence |
-    | --- | --- |
-    | Service rows | Five rows, one for each seeded student service |
-    | Predicted demand | The model-returned class label for each service |
-    | Surge probability | A decimal from 0 to 1, sorted from highest to lowest |
+    | Service Name | Predicted Demand | Surge Probability |
+    | --- | --- | ---: |
+    | First-Year Advising | STABLE | 0.380 |
+    | Financial Aid Navigation | STABLE | 0.340 |
+    | Tutoring Appointment | STABLE | 0.260 |
+    | Academic Planning Appointment | STABLE | 0.200 |
+    | Engineering Learning Lab | STABLE | 0.120 |
 
-    The predicted label and `SURGE` probability help a planner decide where to investigate. The probability is not necessarily confidence in the returned label. If you completed the write task in the JSON Relational Duality lab, Tutoring Appointment now has a second request in `OML_DEMAND_TRAINING_V`; its model result can differ from a fresh workshop. The final response should still consider capacity, student context, and the service evidence from earlier labs.
+    This is a representative fresh-run result set. The model-returned labels and `SURGE` probabilities can differ when the model is rebuilt or the feature values differ. If you completed the write task in the JSON Relational Duality lab, Tutoring Appointment has a second request in `OML_DEMAND_TRAINING_V`, so its probability or position can differ from this example. The predicted label and `SURGE` probability help a planner decide where to investigate; probability is not necessarily confidence in the returned label. The final response should still consider capacity, student context, and service evidence from earlier labs.
 
 2. 🎯 **Interactive challenge: surface model disagreements.**
 
@@ -124,12 +132,7 @@ Estimated Time: **12 minutes**
 
     ~~~sql
     <copy>
-    SELECT s.service_name,
-           scored.demand_score,
-           scored.observed_demand,
-           scored.predicted_demand,
-           scored.surge_probability
-    FROM (
+    WITH scored_demand AS (
       SELECT product_id,
              demand_score,
              surge_flag AS observed_demand,
@@ -142,7 +145,13 @@ Estimated Time: **12 minutes**
                3
              ) AS surge_probability
       FROM oml_demand_training_v
-    ) scored
+    )
+    SELECT s.service_name,
+           scored.demand_score,
+           scored.observed_demand,
+           scored.predicted_demand,
+           scored.surge_probability
+    FROM scored_demand scored
     JOIN student_services_v s
       ON s.service_id = scored.product_id
     WHERE scored.observed_demand <> scored.predicted_demand
