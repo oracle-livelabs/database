@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Corporate just raised the Classic Cheeseburger to $13.99 chain-wide. One number. In this lab you feel the embedded bet invert on all three dials at once: the one-number change becomes a fleet-wide document rewrite, a simple analytics question becomes a fan-out pipeline, and the drifted copy you planted in Lab 2 quietly lies to you.
+Corporate just raised the minimum price for a Classic Cheeseburger to $13.99 chain-wide. One number. In this lab you feel the embedded bet invert on all three dials at once: the one-number change becomes a fleet-wide document rewrite, a simple analytics question becomes a fan-out pipeline, and the drifted copy you planted in Lab 2 quietly lies to you.
 
 Estimated Lab Time: 6 minutes
 
@@ -32,13 +32,10 @@ Estimated Lab Time: 6 minutes
 
     **What you should see:**
 
-    ```
-    matchedCount: 5, modifiedCount: 4
-    ```
+    ![Real mongosh transcript: matchedCount 5, modifiedCount 4 — one store silently missed](images/silent-miss.png "The silent miss")
 
-    > **If you see 4, your lab is working perfectly** — Task 3 shows why it isn't 5.
+    > **If you see 4 documents updated, your lab is working perfectly** — Task 3 shows why it isn't 5.
 
-    ![Real mongosh transcript: matchedCount 5, modifiedCount 4 — one store silently missed](images/silent-miss.svg "The silent miss")
 
     Sit with that response for a second, because it is the most important thing in this lab:
       - There is no error. 
@@ -49,7 +46,7 @@ Estimated Lab Time: 6 minutes
 
 2. Read the observable. Every *modified* store document was **rewritten in its entirety** to move one 4-byte number. Here that's 4 documents. All five stores sell this item — you saw that in Lab 2 — so at a 7,500-store franchise this same statement is 7,500 full-document rewrites on append-only storage. Write amplification is not a benchmark claim; you just counted it. (For measured at-scale numbers, run the open-source DocBench and sbe-cte-bench harnesses — we deliberately do not measure execution time on shared lab instances.)
 
-![One memo, five copies: four rewrites, one silent miss](images/bet-inverts.svg "The bet inverts")
+  ![One memo, five copies: four rewrites, one silent miss](images/bet-inverts.png "The bet inverts")
 
 ## Task 2: The Analytics Ask
 
@@ -80,7 +77,7 @@ Estimated Lab Time: 6 minutes
 
 ## Task 3: Spot the Lie
 
-1. `s_104` never moved. It still shows the cheeseburger at 14.99 — the price it carried before the memo — while every other location went to 13.99. Corporate's change simply did not reach it. Find out why:
+1. The Airport store never moved. It still shows the cheeseburger at $12.49 — the price it carried before the memo — while every other location went to $13.99. Corporate's change simply did not reach it. Find out why:
 
     ```
     <copy>
@@ -91,7 +88,7 @@ Estimated Lab Time: 6 minutes
     </copy>
     ```
 
-    **What you should see:** `s_104` — the only store whose ingest script stored `item_id` as the **string** `"1000"`. Your `arrayFilters` matched the number `1000`, so the update skipped it. Nothing errored. Nothing warned. The data just quietly stopped being true.
+    **What you should see:** `s_104` — the only store whose ingest script stored `item_id` as the **string** `"1000"`. Your `arrayFilters` matched the **number** `1000`, so the update skipped it. Nothing errored. Nothing warned. The data just quietly stopped being true.
 
 2. Honest framing, because it matters: **we planted this drift** — it is what production drift looks like, not a comment on anyone's team. You can avoid these kinds of error with JSON Schema enforcement that could have caught the type mismatch.
 
@@ -138,8 +135,8 @@ print("restored fleet: " + db.stores.countDocuments({}) + " stores, price back t
 
 ## Learn More
 
-* [DocBench — OSON vs BSON field-traversal harness (open source)](https://github.com/oracle-samples)
-* [sbe-cte-bench — 14 reproducible aggregation scenarios](https://github.com/oracle-samples)
+* [Not all binary protocols are created equal: the science behind OSON's 529x performance advantage](https://www.youtube.com/watch?v=_fChyzawOps)
+* [Oracle Developers Youtube channel - JSON content ](https://www.youtube.com/@oracledevs/search?query=json)
 
 You may now **proceed to the next lab**.
 
