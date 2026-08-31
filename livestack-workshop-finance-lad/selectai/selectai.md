@@ -10,6 +10,8 @@ Nina still needs to review the generated SQL. The model can misunderstand a ques
 
 In this lab, you check the available Select AI profile, ask a finance question, inspect the SQL behind the answer, and improve the question for a more useful business result.
 
+![nina](images/nina.png)
+
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
