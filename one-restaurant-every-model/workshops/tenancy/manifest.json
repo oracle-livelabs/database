@@ -10,7 +10,7 @@
         },
         {
             "title": "Get Started",
-            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab.",
             "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
@@ -50,22 +50,16 @@
             "filename": "../../5-duality-views/duality-views.md"
         },
         {
-            "title": "Lab 6: The Third Door, Writable \u2014 REST ETag Choreography (Optional)",
-            "description": "Lock-free optimistic concurrency through ORDS with zero application code.",
-            "type": "livelabs",
-            "filename": "../../6-rest-etag/rest-etag.md"
-        },
-        {
-            "title": "Lab 7: Orders and the Upsell Graph (SQL/PGQ)",
+            "title": "Lab 6: Orders and the Upsell Graph (SQL/PGQ)",
             "description": "Store orders as native documents, then project a property graph and answer 'do you want fries with that?'",
             "type": "livelabs",
-            "filename": "../../7-orders-graph/orders-graph.md"
+            "filename": "../../6-orders-graph/orders-graph.md"
         },
         {
-            "title": "Lab 8: Meaning, Not Keywords \u2014 and the One-Statement Finale",
+            "title": "Lab 7: Meaning, Not Keywords \u2014 and the One-Statement Finale",
             "description": "In-database ONNX vector search over the same tables, then graph + relational + vector in one optimizer plan.",
             "type": "livelabs",
-            "filename": "../../8-vector-capstone/vector-capstone.md"
+            "filename": "../../7-vector-capstone/vector-capstone.md"
         },
         {
             "title": "Need Help?",
