@@ -32,7 +32,10 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | Leaders need to see where student-service work is waiting. |
 | Technical Challenge | A dashboard must remain traceable to the records that produced its totals. |
-| Persona Focus | Student-success operations leader and database developer. |
+| Decision Owner | Student-success operations leader. |
+| Decision | Which requests should staff review first? |
+| Information Needed | Request status, student, requested service, demand score, and the rows behind each summary. |
+| Next Action | Assign, investigate, escalate, or continue monitoring a request. |
 | What You Will Do | Query the request summary, then drill into the services behind it. |
 | Database Capability | Relational SQL and governed semantic views. |
 | Outcome | Priorities can be reviewed instead of accepted as an unexplained KPI. |
@@ -132,6 +135,17 @@ Estimated Time: **12 minutes**
     ~~~
 
     </details>
+
+## Business outcome checkpoint
+
+The summary shows where work is accumulating, and the drill-through identifies the students and services behind the totals. An operations leader can use the result to establish a review queue, but the demand threshold does not determine whether a student receives support.
+
+- **Demonstrates:** A command-center measure can be reconciled to the governed request rows that produced it.
+- **Supports:** Faster prioritization and fewer handoffs between dashboard review and request investigation.
+- **Candidate indicators:** Time to first review, age of open requests, percentage of high-priority requests reviewed within the target period, reassignment rate, and escalation rate.
+- **Requires validation:** The institution's priority definition, threshold governance, service capacity, urgency rules, equity review, and staff ownership.
+
+After identifying requests that need attention, Lab 3 shows how an application can create and update the request while reporting continues from the same underlying data.
 
 ## Acknowledgements
 
