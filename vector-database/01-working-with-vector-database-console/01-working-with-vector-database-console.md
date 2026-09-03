@@ -94,6 +94,9 @@ The Vector Database Console includes additional capabilities that you do not nee
 
 2. Continue to the Python exercises. After you have created vector tables and loaded data, return to the console to inspect your tables and test queries.
 
+
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 - [Connect to Oracle Autonomous AI Database using Database Actions](https://github.com/oracle-livelabs/common/blob/main/labs/sqldevweb-login/sqldevweb-login.md)

@@ -66,6 +66,9 @@ Estimated Time: X
 
     Keep this notebook open. You will use it to run the Python SDK examples in the next lab.
 
+
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 - [Oracle Machine Learning Notebooks documentation](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/)

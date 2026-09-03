@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Build Python Vector Applications with Autonomous AI Vector Database",
+  "workshoptitle": "Build AI Applications with Oracle Autonomous AI Vector Database and Python",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -17,7 +17,7 @@
       "title": "Lab 1: Working with the Vector Database Console",
       "description": "Retrieve the REST URL, review embedding models, and explore the Vector Database Console.",
       "type": "sandbox",
-      "filename": "../../01-provision-vector-database/01-provision-vector-database.md"
+      "filename": "../../01-working-with-vector-database-console/01-working-with-vector-database-console.md"
     },
     {
       "title": "Lab 2: Get Started with Oracle Machine Learning Notebooks",
@@ -29,25 +29,25 @@
       "title": "Lab 3: Install oracle-vecdb package",
       "description": "Install oracle-vecdb, configure a client, and test the database connection.",
       "type": "sandbox",
-      "filename": "../../02-configure-python-client/02-configure-python-client.md"
+      "filename": "../../03-install-oracle-vecdb-package/03-install-oracle-vecdb-package.md"
     },
     {
       "title": "Lab 4: Understand Models, Records, and Vector Tables",
       "description": "Create integrated embedding and bring-your-own-vector tables.",
       "type": "sandbox",
-      "filename": "../../03-vector-database-foundations/03-vector-database-foundations.md"
+      "filename": "../../04-understand-models-records-and-vector-tables/04-understand-models-records-and-vector-tables.md"
     },
     {
       "title": "Lab 5: Create Embeddings and Load Text",
       "description": "Load sample records and generate embeddings.",
       "type": "sandbox",
-      "filename": "../../04-create-embeddings/04-create-embeddings.md"
+      "filename": "../../05-create-embeddings-and-load-text/05-create-embeddings-and-load-text.md"
     },
     {
       "title": "Lab 6: Run Baseline Semantic Search",
       "description": "Search by meaning and filter by metadata.",
       "type": "sandbox",
-      "filename": "../../05-exhaustive-semantic-search/05-exhaustive-semantic-search.md"
+      "filename": "../../06-run-baseline-semantic-search/06-run-baseline-semantic-search.md"
     },
     {
       "title": "Lab 7: Create a Query Memory Module",
@@ -59,12 +59,12 @@
       "title": "Lab 8: Create Indexes for Approximate Search (Optional)",
       "description": "Optional HNSW and IVF query-timing comparison.",
       "type": "sandbox",
-      "filename": "../../06-approximate-search-indexes/06-approximate-search-indexes.md"
+      "filename": "../../08-create-indexes-for-approximate-search/08-create-indexes-for-approximate-search.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to common problems and directions for receiving live help.",
-      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }

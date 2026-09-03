@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you run semantic searches against the National Parks `parks` table before creating a vector index. Each text query uses the embedding model configured on the table to generate its query vector.
+In this lab, you run semantic searches against the National Parks `parks` table. Each text query uses the embedding model configured on the table to generate its query vector.
 
 Estimated Time: X
 
@@ -108,6 +108,9 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 2. Review the results. Every returned record must satisfy the metadata conditions and be semantically relevant to the request. An empty result is also valid if no records meet both requirements.
 
 You now have a baseline semantic-search pattern. Lab 7 reuses this pattern and enriches it with prior user queries.
+
+
+You may now **proceed to the next lab.**
 
 ## Learn More
 

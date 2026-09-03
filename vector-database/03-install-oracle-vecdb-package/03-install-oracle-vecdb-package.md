@@ -149,11 +149,13 @@ OML paragraphs share state while the notebook's Python environment remains activ
 
 2. Confirm that the paragraph displays the number of models, tables, and vectors in the database. A successful response proves that the REST URL and credentials work, even if one or more counts are zero. Keep this notebook open; Lab 4 uses the `vecdb` client to inspect models and create vector tables.
 
+
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 - [Oracle VecDB Python SDK quick start](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/quickstart.html)
 - [Oracle VecDB Configuration reference](https://docs.oracle.com/en/cloud/paas/autonomous-vector-database/vcapi/configuration.html)
-- [Use the Python interpreter in an OML Notebook paragraph](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/omlug/run-python-notebook.html)
 
 ## Acknowledgements
 

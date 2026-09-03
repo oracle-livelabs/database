@@ -135,6 +135,9 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
 
     This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
 
+
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 - [List loaded models](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/list-models.html)

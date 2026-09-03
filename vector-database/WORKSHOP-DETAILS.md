@@ -4,7 +4,7 @@ Estimated Time: X
 
 ## Title
 
-Build Python Vector Applications with Autonomous AI Vector Database
+Build AI Applications with Oracle Autonomous AI Vector Database and Python
 
 ## Short Description
 

@@ -16,7 +16,7 @@ Generated on 2026-08-27T21:30:51.857245+00:00
 - ✅ Manifest structure looks good.
 
 ## Markdown File Ratings
-### 01-provision-vector-database\01-provision-vector-database.md
+### 01-working-with-vector-database-console\01-working-with-vector-database-console.md
 - ❌ Formatting issues:
   - Line 20: Task sections must contain numbered steps inside the task.
   - Line 24: Task sections must contain numbered steps inside the task.
@@ -25,7 +25,7 @@ Generated on 2026-08-27T21:30:51.857245+00:00
   - 3 sentence(s) exceed 20 words; tighten wording.
   - Passive voice detected in 3 instance(s).
 
-### 02-configure-python-client\02-configure-python-client.md
+### 03-install-oracle-vecdb-package\03-install-oracle-vecdb-package.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 3/5
   - 5 sentence(s) exceed 20 words; tighten wording.
@@ -36,24 +36,24 @@ Generated on 2026-08-27T21:30:51.857245+00:00
 - ✍️ Lanham score: 4/5
   - 2 sentence(s) exceed 20 words; tighten wording.
 
-### 03-vector-database-foundations\03-vector-database-foundations.md
+### 04-understand-models-records-and-vector-tables\04-understand-models-records-and-vector-tables.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 4/5
   - 1 sentence(s) exceed 20 words; tighten wording.
 
-### 04-create-embeddings\04-create-embeddings.md
+### 05-create-embeddings-and-load-text\05-create-embeddings-and-load-text.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 2/5
   - 7 sentence(s) exceed 20 words; tighten wording.
   - Contractions found; expand them per Lanham rules.
   - Heavy nominalization usage; prefer vivid verbs.
 
-### 05-exhaustive-semantic-search\05-exhaustive-semantic-search.md
+### 06-run-baseline-semantic-search\06-run-baseline-semantic-search.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 4/5
   - 6 sentence(s) exceed 20 words; tighten wording.
 
-### 06-approximate-search-indexes\06-approximate-search-indexes.md
+### 08-create-indexes-for-approximate-search\08-create-indexes-for-approximate-search.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 4/5
   - 4 sentence(s) exceed 20 words; tighten wording.

@@ -18,14 +18,14 @@
         // Add reliable Copy buttons without using <copy> tags in Markdown.
         document.addEventListener("DOMContentLoaded", function () {
             const lab = new URLSearchParams(window.location.search).get("lab");
-            if (!["03-vector-database-foundations", "04-create-embeddings", "05-exhaustive-semantic-search", "07-create-query-memory-module", "06-approximate-search-indexes"].includes(lab)) return;
+            if (!["04-understand-models-records-and-vector-tables", "05-create-embeddings-and-load-text", "06-run-baseline-semantic-search", "07-create-query-memory-module", "08-create-indexes-for-approximate-search"].includes(lab)) return;
 
             function addCopyButtons() {
                 let codeBlocks = document.querySelectorAll("#module-content pre");
-                if (lab === "04-create-embeddings" || lab === "03-vector-database-foundations") {
-                    const targetTasks = lab === "04-create-embeddings"
+                if (lab === "05-create-embeddings-and-load-text" || lab === "04-understand-models-records-and-vector-tables") {
+                    const targetTasks = lab === "05-create-embeddings-and-load-text"
                         ? [
-                            "Task 1: Explore National Parks data",
+                            "Task 1: Explore National Parks Data",
                             "Task 2: Load National Parks Records into parks",
                             "Task 3: Create Direction Embeddings and Load the Directions Table"
                         ]

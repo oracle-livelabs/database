@@ -79,6 +79,9 @@ Unlike `parks`, `directions` has no `embed_params` setting. Each upsert must the
 
 2. Confirm that the paragraph completes without an error.
 
+
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 - [`OracleVecDB.create_vector_table`](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/create-vector-table.html)

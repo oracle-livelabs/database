@@ -178,6 +178,9 @@ Save the current query for future requests. Then use the combined embedding to s
 
 4. Review the results. The memory-aware search may reflect both the new picnic interest and the earlier interest in natural water features. In a production application, use a defined retrieval policy to decide which saved queries should influence the current request.
 
+
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 - [Oracle VecDB integrated embedding and bring-your-own-vector tables](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/vector-table.html)

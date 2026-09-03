@@ -1,4 +1,4 @@
-# Build Python Vector Applications with Autonomous AI Vector Database
+# Build AI Applications with Oracle Autonomous AI Vector Database and Python
 
 This LiveLabs workshop recreates the original "Getting Started with AI Vector Search" flow for Autonomous AI Vector Database and a Python-first development experience.
 
