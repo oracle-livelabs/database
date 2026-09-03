@@ -10,7 +10,7 @@ In this workshop, you build a National Parks semantic-search application step by
 
 By the end of the workshop, you will have a practical Python pattern you can adapt for document search, product discovery, support knowledge bases, RAG retrieval, or agent memory. You will understand when to use integrated embedding, when to supply vectors yourself, and how to evolve a working prototype into a more scalable search experience.
 
-Estimated Time: X
+Estimated Workshop Time: 30 minutes
 
 ### Objectives
 
