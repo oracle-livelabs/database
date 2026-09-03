@@ -33,7 +33,10 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | Teams need to understand who can help amplify a support response. |
 | Technical Challenge | Relationship evidence is cumbersome when it requires many self-joins or a separate graph store. |
-| Persona Focus | Student-success analyst. |
+| Decision Owner | Student-success or outreach analyst. |
+| Decision | Which advocate-to-program relationship merits follow-up review? |
+| Information Needed | Advocate focus, direct connections, academic-program relationship, and relationship type. |
+| Next Action | Confirm the relationship's fit, availability, currency, and contact permissions before planning outreach. |
 | What You Will Do | Review advocate reach and traverse a program-support relationship. |
 | Database Capability | Oracle Property Graph and SQL/PGQ. |
 | Outcome | Relationship evidence can inform outreach without leaving governed data. |
@@ -80,7 +83,7 @@ Estimated Time: **12 minutes**
 
     Read this SQL/PGQ query in three parts.
 
-    1. `MATCH` starts at an `influencer` vertex, follows a `promotes` edge, and reaches a `brand` vertex.
+    1. `MATCH` starts at an `advocate` vertex, follows a `supports` edge, and reaches an `academic_program` vertex.
     2. `COLUMNS` gives the returned graph properties readable SQL column names.
     3. `ORDER BY` creates a stable, easy-to-review relationship list.
 
@@ -88,11 +91,11 @@ Estimated Time: **12 minutes**
     <copy>
     SELECT *
     FROM GRAPH_TABLE (
-      influencer_network
-      MATCH (a IS influencer)-[r IS promotes]->(p IS brand)
+      student_support_network
+      MATCH (a IS advocate)-[r IS supports]->(p IS academic_program)
       COLUMNS (
         a.display_name AS advocate,
-        p.brand_name AS academic_program,
+        p.program_name AS academic_program,
         r.relationship_type AS relationship_type
       )
     )
@@ -130,11 +133,11 @@ Estimated Time: **12 minutes**
     <copy>
     SELECT *
     FROM GRAPH_TABLE (
-      influencer_network
-      MATCH (a IS influencer)-[r IS promotes]->(p IS brand)
+      student_support_network
+      MATCH (a IS advocate)-[r IS supports]->(p IS academic_program)
       COLUMNS (
         a.display_name AS advocate,
-        p.brand_name AS academic_program,
+        p.program_name AS academic_program,
         r.relationship_type AS relationship_type
       )
     )
@@ -144,6 +147,17 @@ Estimated Time: **12 minutes**
     ~~~
 
     </details>
+
+## Business outcome checkpoint
+
+The graph narrows a broad network to a named advocate-to-program relationship that staff can investigate. The relationship adds useful coordination context, but it does not establish availability, suitability, or permission to contact anyone.
+
+- **Demonstrates:** A SQL/PGQ query can reveal direct support relationships that are difficult to see in a row-by-row report.
+- **Supports:** Faster identification of people and programs that may help coordinate a response.
+- **Candidate indicators:** Time to identify an appropriate partner, relationship-record freshness, outreach reassignment rate, and follow-up completion rate.
+- **Requires validation:** Relationship provenance, recency, strength, availability, privacy, consent, and institutional contact policies.
+
+With service and relationship candidates identified, Lab 6 adds location and current capacity to the planning decision.
 
 ## Acknowledgements
 
