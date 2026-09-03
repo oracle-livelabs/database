@@ -1,0 +1,41 @@
+{
+  "workshoptitle": "Search Using MongoDB API for Oracle AI Database",
+  "help": "gael.palomino@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Review the search approaches, prerequisites, and workshop outcomes.",
+      "type": "livelabs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started: Use Your OCI Tenancy",
+      "description": "Sign in to your OCI tenancy, open your database, install mongosh in Cloud Shell, and verify the MongoDB API connection.",
+      "type": "livelabs",
+      "filename": "../../get-started-tenancy/get-started-tenancy.md"
+    },
+    {
+      "title": "Lab 1: Load and Verify the Search Environment",
+      "description": "Load movies, query them through SQL and mongosh, and verify the ONNX model.",
+      "type": "livelabs",
+      "filename": "../../prepare-search-data/prepare-search-data.md"
+    },
+    {
+      "title": "Lab 2: Prepare Search and Run a Keyword Query",
+      "description": "Generate summary embeddings, create search indexes, and run keyword search.",
+      "type": "livelabs",
+      "filename": "../../run-keyword-searches/run-keyword-searches.md"
+    },
+    {
+      "title": "Lab 3: Run Semantic and Combined Searches",
+      "description": "Search summary embeddings, refine results, and combine text and vector branches.",
+      "type": "livelabs",
+      "filename": "../../run-semantic-searches/run-semantic-searches.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Get help with common LiveLabs workshop questions.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
