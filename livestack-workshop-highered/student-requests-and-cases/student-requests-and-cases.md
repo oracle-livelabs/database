@@ -34,7 +34,10 @@ Estimated Time: **25 minutes**
 | --- | --- |
 | Business Problem | Applications need an easy-to-consume request document while staff need SQL reporting. |
 | Technical Challenge | Separate document copies can drift from the operational request record. |
-| Persona Focus | Application developer. |
+| Decision Owner | Application developer supporting the student-service request workflow. |
+| Decision | How should the application create and update a complete request while keeping it available for relational reporting? |
+| Information Needed | Permitted document operations, request fields, request-line fields, relational constraints, and the committed status. |
+| Next Action | Move the committed request into staff follow-up while the application team evaluates the write contract for production use. |
 | What You Will Do | Inspect the governed JSON representation, enable writes, and create and update a reserved student-service request. |
 | Database Capability | JSON Relational Duality and SQL/JSON. |
 | Outcome | Application and reporting teams can create and review one governed request through JSON and relational shapes. |
@@ -47,7 +50,7 @@ Estimated Time: **25 minutes**
 
     > **SQL Worksheet reminder:** Need a reminder on how to use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
-    `USER_JSON_DUALITY_VIEWS` lists JSON Relational Duality views owned by LLUSER. `ORDERS_DV` is the portable implementation name for the student-service request document. The three `ALLOW_` columns show which document operations this starter view permits.
+    `USER_JSON_DUALITY_VIEWS` lists JSON Relational Duality views owned by LLUSER. `STUDENT_SERVICE_REQUESTS_DV` presents student-service requests as application-friendly JSON documents. The three `ALLOW_` columns show which document operations this starter view permits.
 
     ~~~sql
     <copy>
@@ -56,7 +59,7 @@ Estimated Time: **25 minutes**
            allow_update,
            allow_delete
     FROM user_json_duality_views
-    WHERE view_name = 'ORDERS_DV';
+    WHERE view_name = 'STUDENT_SERVICE_REQUESTS_DV';
     </copy>
     ~~~
 
@@ -64,7 +67,7 @@ Estimated Time: **25 minutes**
 
     | View Name | Allow Insert | Allow Update | Allow Delete |
     | --- | --- | --- | --- |
-    | ORDERS\_DV | false | true | false |
+    | STUDENT\_SERVICE\_REQUESTS\_DV | false | true | false |
 
 ## Task 2: Read a request as JSON
 
@@ -75,7 +78,7 @@ Estimated Time: **25 minutes**
     ~~~sql
     <copy>
     SELECT JSON_SERIALIZE(data PRETTY) AS request_document
-    FROM orders_dv
+    FROM student_service_requests_dv
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 1001;
     </copy>
     ~~~
@@ -84,7 +87,7 @@ Estimated Time: **25 minutes**
 
     | Request Document |
     | --- |
-    | { "_id" : 1001, "studentId" : 101, "requestStatus" : "OPEN", "demandScore" : 92, "services" : [ { "serviceItemId" : 1, "serviceName" : "First-Year Advising" } ] } |
+    | { "_id" : 1001, "studentId" : 101, "requestStatus" : "OPEN", "demandScore" : 92, "services" : [ { "requestLineId" : 1, "serviceName" : "First-Year Advising" } ] } |
 
     The document is not a second request record. It is another governed representation of the same rows that the command-center lab queried with SQL.
 
@@ -106,7 +109,7 @@ Estimated Time: **25 minutes**
     ~~~sql
     <copy>
     SELECT JSON_SERIALIZE(data PRETTY) AS request_document
-    FROM orders_dv
+    FROM student_service_requests_dv
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 1002;
     </copy>
     ~~~
@@ -115,39 +118,39 @@ Estimated Time: **25 minutes**
 
 ## Task 3: Enable document inserts and updates
 
-Task 1 showed that the loaded `ORDERS_DV` permits updates but not inserts. In this task, you extend the document contract so an application can also create a complete request with a nested service item. If you already completed this task, `Allow Insert` remains `true` because replacing a view is a data definition language operation that commits automatically.
+Task 1 showed that the loaded `STUDENT_SERVICE_REQUESTS_DV` permits updates but not inserts. In this task, you extend the document contract so an application can also create a complete request with a nested request line. If you already completed this task, `Allow Insert` remains `true` because replacing a view is a data definition language operation that commits automatically.
 
-1. Enable inserts and updates for the request and its nested service items.
+1. Enable inserts and updates for the request and its nested request lines.
 
-    You are changing the duality-view contract, not the loader or the relational tables. The two `WITH INSERT UPDATE` clauses let Oracle map permitted JSON writes to `ORDERS` and `ORDER_ITEMS` while preserving keys, foreign keys, data types, and other constraints.
+    You are changing the duality-view contract, not the loader or the relational tables. The two `WITH INSERT UPDATE` clauses let Oracle map permitted JSON writes to `STUDENT_SERVICE_REQUESTS` and `STUDENT_REQUEST_LINES` while preserving keys, foreign keys, data types, and other constraints.
 
-    The added `serviceId` field maps the JSON service item to `ORDER_ITEMS.PRODUCT_ID`, which is required by the relational table.
+    The added `serviceId` field maps the JSON request line to `STUDENT_REQUEST_LINES.SERVICE_ID`, which is required by the relational table.
 
     ~~~sql
     <copy>
-    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
+    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW student_service_requests_dv AS
     SELECT JSON {
-      '_id' : o.order_id,
-      'studentId' : o.customer_id,
-      'requestStatus' : o.order_status,
-      'demandScore' : o.demand_score,
+      '_id' : r.request_id,
+      'studentId' : r.student_id,
+      'requestStatus' : r.request_status,
+      'demandScore' : r.demand_score,
       'services' : [
         SELECT JSON {
-          'serviceItemId' : oi.item_id,
-          'serviceId' : oi.product_id,
-          'serviceName' : oi.service_name
+          'requestLineId' : l.request_line_id,
+          'serviceId' : l.service_id,
+          'serviceName' : l.service_name
         }
-        FROM order_items oi WITH INSERT UPDATE
-        WHERE oi.order_id = o.order_id
+        FROM student_request_lines l WITH INSERT UPDATE
+        WHERE l.request_id = r.request_id
       ]
     }
-    FROM orders o WITH INSERT UPDATE;
+    FROM student_service_requests r WITH INSERT UPDATE;
     </copy>
     ~~~
 
     **Expected output: View Definition Updated**
 
-    Oracle confirms that view `ORDERS_DV` was created or replaced.
+    Oracle confirms that view `STUDENT_SERVICE_REQUESTS_DV` was created or replaced.
 
     Run the complete code block, including its final semicolon. Do not continue until the capability query in the next step shows `true`, `true`, and `false`. If Oracle reports an error, stop and capture the complete `ORA-` message.
 
@@ -160,7 +163,7 @@ Task 1 showed that the loaded `ORDERS_DV` permits updates but not inserts. In th
            allow_update AS "Allow Update",
            allow_delete AS "Allow Delete"
     FROM user_json_duality_views
-    WHERE view_name = 'ORDERS_DV';
+    WHERE view_name = 'STUDENT_SERVICE_REQUESTS_DV';
     </copy>
     ~~~
 
@@ -168,7 +171,7 @@ Task 1 showed that the loaded `ORDERS_DV` permits updates but not inserts. In th
 
     | View Name | Allow Insert | Allow Update | Allow Delete |
     | --- | --- | --- | --- |
-    | ORDERS\_DV | true | true | false |
+    | STUDENT\_SERVICE\_REQUESTS\_DV | true | true | false |
 
     The application can now read, create, and update request documents. Delete remains disabled. The next task uses reserved identifiers so it does not overwrite a seeded request.
 
@@ -176,7 +179,7 @@ Task 1 showed that the loaded `ORDERS_DV` permits updates but not inserts. In th
 
 Now create one nested request document, inspect the relational rows Oracle creates, and update the request status through the same duality view.
 
-> **Workshop data boundary:** This task commits reserved request `900001` and service item `990001`. They remain in the current workshop schema until it is reset. The rerun guard prevents a duplicate request, and no seeded request is overwritten.
+> **Workshop data boundary:** This task commits reserved request `900001` and request line `990001`. They remain in the current workshop schema until it is reset. The rerun guard prevents a duplicate request, and no seeded request is overwritten.
 
 1. Insert the reserved Higher Education request document.
 
@@ -186,7 +189,7 @@ Now create one nested request document, inspect the relational rows Oracle creat
 
     ~~~sql
     <copy>
-    INSERT INTO orders_dv (data)
+    INSERT INTO student_service_requests_dv (data)
     SELECT JSON(
       '{
         "_id": 900001,
@@ -195,7 +198,7 @@ Now create one nested request document, inspect the relational rows Oracle creat
         "demandScore": 76,
         "services": [
           {
-            "serviceItemId": 990001,
+            "requestLineId": 990001,
             "serviceId": 13,
             "serviceName": "Tutoring Appointment"
           }
@@ -205,8 +208,8 @@ Now create one nested request document, inspect the relational rows Oracle creat
     FROM dual
     WHERE NOT EXISTS (
       SELECT 1
-      FROM orders
-      WHERE order_id = 900001
+      FROM student_service_requests
+      WHERE request_id = 900001
     );
     </copy>
     ~~~
@@ -231,39 +234,39 @@ Now create one nested request document, inspect the relational rows Oracle creat
 
 3. Verify that the JSON document created relational rows.
 
-    This query reads `ORDERS`, `CUSTOMERS`, and `ORDER_ITEMS` directly. It verifies that the application-shaped document created one relational request row and one related service item.
+    This query reads `STUDENT_SERVICE_REQUESTS`, `STUDENTS`, and `STUDENT_REQUEST_LINES` directly. It verifies that the application-shaped document created one relational request row and one related request line.
 
     ~~~sql
     <copy>
-    SELECT o.order_id AS "Request",
-           o.order_status AS "Status",
-           c.first_name || ' ' || c.last_name AS "Student",
-           o.demand_score AS "Demand Score",
-           oi.item_id AS "Service Item",
-           oi.product_id AS "Service ID",
-           oi.service_name AS "Service Name"
-    FROM orders o
-    JOIN customers c
-      ON c.customer_id = o.customer_id
-    JOIN order_items oi
-      ON oi.order_id = o.order_id
-    WHERE o.order_id = 900001;
+    SELECT r.request_id AS "Request",
+           r.request_status AS "Status",
+           s.first_name || ' ' || s.last_name AS "Student",
+           r.demand_score AS "Demand Score",
+           l.request_line_id AS "Request Line",
+           l.service_id AS "Service ID",
+           l.service_name AS "Service Name"
+    FROM student_service_requests r
+    JOIN students s
+      ON s.student_id = r.student_id
+    JOIN student_request_lines l
+      ON l.request_id = r.request_id
+    WHERE r.request_id = 900001;
     </copy>
     ~~~
 
     **Expected output: Inserted Request as Relational Rows**
 
-    | Request | Status | Student | Demand Score | Service Item | Service ID | Service Name |
+    | Request | Status | Student | Demand Score | Request Line | Service ID | Service Name |
     | ---: | --- | --- | ---: | ---: | ---: | --- |
     | 900001 | OPEN | Priya Shah | 76 | 990001 | 13 | Tutoring Appointment |
 
-4. Update the document status through `ORDERS_DV`.
+4. Update the document status through `STUDENT_SERVICE_REQUESTS_DV`.
 
-    `JSON_TRANSFORM` changes only `requestStatus`. Oracle maps that field to `ORDERS.ORDER_STATUS`; no application-side JSON parsing, second request copy, or synchronization job is required.
+    `JSON_TRANSFORM` changes only `requestStatus`. Oracle maps that field to `STUDENT_SERVICE_REQUESTS.REQUEST_STATUS`; no application-side JSON parsing, second request copy, or synchronization job is required.
 
     ~~~sql
     <copy>
-    UPDATE orders_dv
+    UPDATE student_service_requests_dv
     SET data = JSON_TRANSFORM(data, SET '$.requestStatus' = 'IN_PROGRESS')
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
     </copy>
@@ -285,29 +288,29 @@ Now create one nested request document, inspect the relational rows Oracle creat
 
 6. Verify the relational status update.
 
-    Run this query after the commit. It reads the request and service item rows directly, so you can see that the JSON update changed the request status while keeping the student, demand score, and service evidence intact.
+    Run this query after the commit. It reads the request and request-line rows directly, so you can see that the JSON update changed the request status while keeping the student, demand score, and service evidence intact.
 
     ~~~sql
     <copy>
-    SELECT o.order_id AS "Request",
-           o.order_status AS "Status",
-           c.first_name || ' ' || c.last_name AS "Student",
-           o.demand_score AS "Demand Score",
-           oi.item_id AS "Service Item",
-           oi.product_id AS "Service ID",
-           oi.service_name AS "Service Name"
-    FROM orders o
-    JOIN customers c
-      ON c.customer_id = o.customer_id
-    JOIN order_items oi
-      ON oi.order_id = o.order_id
-    WHERE o.order_id = 900001;
+    SELECT r.request_id AS "Request",
+           r.request_status AS "Status",
+           s.first_name || ' ' || s.last_name AS "Student",
+           r.demand_score AS "Demand Score",
+           l.request_line_id AS "Request Line",
+           l.service_id AS "Service ID",
+           l.service_name AS "Service Name"
+    FROM student_service_requests r
+    JOIN students s
+      ON s.student_id = r.student_id
+    JOIN student_request_lines l
+      ON l.request_id = r.request_id
+    WHERE r.request_id = 900001;
     </copy>
     ~~~
 
     **Expected output: Updated Request as Relational Rows**
 
-    | Request | Status | Student | Demand Score | Service Item | Service ID | Service Name |
+    | Request | Status | Student | Demand Score | Request Line | Service ID | Service Name |
     | ---: | --- | --- | ---: | ---: | ---: | --- |
     | 900001 | IN_PROGRESS | Priya Shah | 76 | 990001 | 13 | Tutoring Appointment |
 
@@ -318,13 +321,24 @@ Now create one nested request document, inspect the relational rows Oracle creat
     <details>
     <summary><strong>Challenge answer: one document, one governed request</strong></summary>
 
-    **Expected output: One Status Change, Stable Service Item**
+    **Expected output: One Status Change, Stable Request Line**
 
-    The relational request status changes. The demand score remains `76`, and the service item remains `990001 | 13 | Tutoring Appointment` because the JSON update did not change those fields.
+    The relational request status changes. The demand score remains `76`, and the request line remains `990001 | 13 | Tutoring Appointment` because the JSON update did not change those fields.
 
-    > `ORDERS.ORDER_STATUS` changes from `OPEN` to `IN_PROGRESS`. The related `ORDER_ITEMS` row remains unchanged. The application and student-success analyst use two access shapes over the same governed request, so Oracle Database does not need to reconcile a document copy with a relational copy.
+    > `STUDENT_SERVICE_REQUESTS.REQUEST_STATUS` changes from `OPEN` to `IN_PROGRESS`. The related `STUDENT_REQUEST_LINES` row remains unchanged. The application and student-success analyst use two access shapes over the same governed request, so Oracle Database does not need to reconcile a document copy with a relational copy.
 
     </details>
+
+## Business outcome checkpoint
+
+The insert and update show that an application can work with a request document while campus teams continue to report from relational rows. The two committed checks confirm the application and reporting views describe the same request rather than separately synchronized copies.
+
+- **Demonstrates:** One JSON transaction creates and updates the related relational request data while preserving unchanged service details.
+- **Supports:** Fewer application transformations, duplicate records, and document-to-report reconciliation steps.
+- **Candidate indicators:** Request-processing cycle time, reconciliation defects, failed transactions, application transformation steps, and unauthorized update attempts.
+- **Requires validation:** Application identity, authorization, concurrency behavior, transaction recovery, audit requirements, privacy, and institutional retention rules.
+
+With a request workflow in place, Lab 4 adds the meaning of a student's words so staff can review services that may fit the expressed need.
 
 ## Acknowledgements
 
