@@ -9,6 +9,8 @@ badge: images/badge.png
 
 Use this scored quiz to check whether you can connect each Seer Bank finance outcome to the database evidence you inspected in the labs.
 
+Use the quiz to check that you can follow the same evidence path as Jessica, Jordan, Sam, Priya, and Maya, from a risk signal through investigation, planning, and controlled action.
+
 ### Objectives
 
 - Review the main database capabilities used in the workshop.
@@ -22,7 +24,7 @@ Estimated Time: **5 minutes**
 1. Complete the scored quiz.
 
     ```quiz score
-    Q: Why does the workshop begin with the finance data foundation?
+    Q: Why might you begin with the optional finance data foundation?
     - To manually install every finance table.
     * To map the shared data used by each later finance workflow.
     - To replace the application dashboard with catalog reports.
@@ -107,9 +109,7 @@ Estimated Time: **5 minutes**
     > The workshop uses different database capabilities for different finance questions, but the value is that they operate from connected governed data. That reduces copying, reconciliation, and fragmented explanations.
     ```
 
-2. Review the completion badge.
-
-    ![Finance LiveStack badge](images/livestack-finance-badge.png " ")
+2. When you achieve the passing score, the quiz displays your completion badge.
 
 ## Acknowledgements
 

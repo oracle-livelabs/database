@@ -1,12 +1,20 @@
-# Triage Risk Signals with Select AI Agents
+# Let a Select AI Agent Carry Out a Controlled Review Action
 
 ## Introduction
 
 Seer Bank has moved from dashboards and SQL evidence to governed natural-language answers. The risk analyst can ask which product categories have the highest exposure. They can inspect the SQL behind the answer.
 
+Jessica asks for help triaging the highest-priority risk signal. Priya sets up the limited tools the agent may use, so the workflow can retrieve evidence and create a simulated review record without receiving broad access to finance data.
+
 The next step is action. When a high-priority signal appears, the team needs a consistent workflow. It must retrieve evidence, apply the review rule, and leave an audit record.
 
+The business value is controlled triage: teams can speed up a repeatable review step while keeping the approval rule, permitted actions, and audit record in the same database.
+
+A Select AI Agent is an Oracle Database agent that responds to a request by choosing from approved database tools. It does not receive unrestricted authority; the tools define what it can look up or do. In this lab, the agent retrieves a priority signal and creates a simulated review record only when the governed escalation rule permits it.
+
 In this lab, you run an Oracle Machine Learning notebook. It creates function tools, an agent, a task, and a team. Then you run `SELECT AI AGENT` and inspect the action history.
+
+An Oracle Machine Learning notebook is a runnable, ordered collection of explanation, SQL, and results that runs against your database schema. In this lab, it provides a repeatable way to create and inspect the controlled agent workflow. Select AI Agents add business value by coordinating only approved database tools against risk-signal rows and recording the outcome in the same database.
 
 The agent has two function tools:
 
@@ -41,14 +49,14 @@ Estimated Time: **22 minutes**
 | --- | --- |
 | Business Problem | High-risk signals need consistent triage and a durable review record. |
 | Technical Challenge | An agent must retrieve evidence, apply a rule, and record the outcome without changing protected finance data. |
-| Persona Focus | A risk operations analyst requests triage; an AI engineer exposes narrow tools; a reviewer inspects the audit history. |
-| What You Will See | A Select AI Agent can coordinate approved read and write tools inside a constrained database boundary. |
+| Persona Focus | Jessica requests triage; Priya exposes narrow tools; the team inspects the audit history. |
+| What You Will See | A Select AI Agent can coordinate approved read and write tools in one database. |
 | Database Capability | Oracle Select AI Agents, function tools, OML notebooks, `AGENT_ACTIONS`, and native history views. |
 | Outcome | Seer Bank turns AI-assisted triage into a controlled, reviewable database workflow. |
 
 ## Task 1: Import the Finance Select AI Agent Notebook
 
-In this lab, you run the hands-on steps from an Oracle Machine Learning notebook.
+In this lab, you run the hands-on steps from an Oracle Machine Learning notebook. Importing it gives you the documented sequence for creating the narrow tools, agent, task, and team, then reviewing the resulting database history.
 
 1. Download [finance-select-ai-agent-notebook.json](files/finance-select-ai-agent-notebook.json).
 
@@ -409,7 +417,7 @@ Check that the tools, agent, task, and team were created successfully.
 
 ## Task 9: Run the Risk-Triage Agent
 
-Now ask the agent to triage the current highest-priority risk signal. The task requires evidence first. The agent calls the escalation tool only when the threshold is met.
+Now ask the agent to triage the current highest-priority risk signal. The task requires evidence first. After reading the signal, the agent can request an escalation; the database escalation function independently checks the threshold and decides whether a review record may be written.
 
 1. Run the agent request.
 
@@ -485,7 +493,7 @@ Oracle records agent execution history. Use the history views to confirm tool ca
 
 ## Task 12: Prove the Escalation Is Idempotent
 
-A triage workflow should not create duplicate review rows for the same question.
+A sequential rerun of a triage workflow should not create a duplicate review row for the same question.
 
 1. Run the same request again and confirm the action row count.
 
@@ -507,9 +515,9 @@ A triage workflow should not create duplicate review rows for the same question.
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** The agent reports that the escalation already exists or that no duplicate was created. The grouped count remains `1` for the escalated signal.
+    **Expected result:** The agent reports that the escalation already exists or that no duplicate was created. The grouped count remains `1` for the escalated signal. This checks sequential rerun behavior only; it does not establish concurrency safety for simultaneous requests.
 
-You created a constrained Select AI Agent workflow. It reads current risk evidence, applies a threshold rule, writes one controlled review record, and leaves audit evidence behind.
+You can now let a constrained Select AI Agent carry out a controlled review action. It reads current risk evidence, applies a threshold rule, writes one controlled review record, and leaves audit evidence behind.
 
 ## Acknowledgements
 

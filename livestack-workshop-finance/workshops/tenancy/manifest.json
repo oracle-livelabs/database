@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Build Financial Intelligence with Oracle AI Database 26ai",
+  "workshoptitle": "Build Financial Intelligence with Oracle AI Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -13,7 +13,7 @@
       "filename": "../../getting-started/getting-started.md"
     },
     {
-      "title": "Lab 1: Finance Data Foundation",
+      "title": "Lab 1 (Optional): Finance Data Foundation",
       "description": "Inspect the finance schema foundation and current object families.",
       "filename": "../../finance-data-foundation/finance-data-foundation.md"
     },
@@ -23,7 +23,7 @@
       "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
     },
     {
-      "title": "Lab 3: Transaction and Case Documents with JSON Relational Duality",
+      "title": "Lab 3: Transaction Documents with JSON Relational Duality",
       "description": "Use JSON Relational Duality and SQL/JSON for transaction documents.",
       "filename": "../../transaction-case-duality/transaction-case-duality.md"
     },
@@ -48,13 +48,13 @@
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
     {
-      "title": "Lab 8: Ask Governed Finance Questions with Select AI",
-      "description": "Use the Finance LiveStack application and Oracle Machine Learning to generate visible SQL and governed finance answers.",
+      "title": "Lab 8: Ask a Database Question with Select AI",
+      "description": "Ask a governed database question, then review the SQL and approved finance evidence behind the answer.",
       "filename": "../../select-ai-finance-questions/select-ai-finance-questions.md"
     },
     {
-      "title": "Lab 9: Triage Risk Signals with Select AI Agents",
-      "description": "Run a native Select AI Agent in the Finance LiveStack application and inspect the workflow in Oracle Machine Learning.",
+      "title": "Lab 9: Let a Select AI Agent Carry Out a Controlled Review Action",
+      "description": "Use approved database tools to record a controlled review action, then inspect its action record and history.",
       "filename": "../../select-ai-agent-risk-triage/select-ai-agent-risk-triage.md"
     },
     {

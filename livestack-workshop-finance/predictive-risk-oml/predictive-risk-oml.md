@@ -4,9 +4,11 @@
 
 Finance teams use dashboards to understand what has already happened, but they also need predictions that help them plan what to do next. Those predictions are more useful when analysts can see which model produced the score, which business record was scored, and how the result connects back to product, revenue, or risk decisions.
 
-In this lab, you will take on the persona of a database developer supporting both an ML engineer and a finance decision-maker. The ML engineer needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle Database. The finance decision-maker needs results that are easy to review, explain, and use for planning.
+Priya, Seer Bank's AI engineer, prepares the models that help the team plan ahead. Jessica and Maya need results they can review, explain, and use for risk and service planning. Priya needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle Database.
 
 You will inventory persisted OML models, score demand-surge and revenue-prediction models in SQL, and review the results next to finance data that business users recognize. By the end of the lab, you will see how in-database machine learning keeps the model, the score, and the supporting finance evidence together.
+
+Oracle Machine Learning (OML) is the database capability for building, storing, scoring, and comparing machine-learning models where the finance records already live. The SQL tasks show established models as reviewable results; the later AutoML workbench helps you compare candidate demand-surge models without first exporting Finance data to a separate ML environment.
 
 <details>
 <summary><strong>Key terms: OML model, feature, classification, regression, clustering, and confidence</strong></summary>
@@ -47,8 +49,8 @@ Estimated Time: **27 minutes**
 | Step | Finance focus |
 | --- | --- |
 | Business Problem | Finance teams need prediction without exporting sensitive operating data. |
-| Technical Challenge | Data science and application teams need deployed models that can be scored from SQL without copying governed finance records elsewhere. |
-| Persona Focus | You connect deployed ML models to the finance decision-maker review process. |
+| Technical Challenge | Data science and application teams need deployed models that can be scored from SQL without copying finance records elsewhere. |
+| Persona Focus | Priya connects deployed ML models to Jessica's risk review and Maya's operations planning. |
 | What You Will See | Persisted OML models can be inventoried and scored directly in SQL. |
 | Database Capability | The Oracle Machine Learning model catalog, `PREDICTION`, and `PREDICTION_PROBABILITY` support in-database ML scoring. |
 | Outcome | Risk, segmentation, revenue, and product grouping outputs are explainable from SQL. |
@@ -96,12 +98,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
     Expected output: OML Model Inventory
 
-    | Model Name | Mining Function | Algorithm |
-    | --- | --- | --- |
-    | CUSTOMER\_SEGMENT\_MODEL | CLUSTERING | KMEANS |
-    | DEMAND\_SURGE\_MODEL | CLASSIFICATION | RANDOM\_FOREST |
-    | PRODUCT\_CLUSTER\_MODEL | CLUSTERING | KMEANS |
-    | REVENUE\_PREDICT\_MODEL | REGRESSION | GENERALIZED\_LINEAR\_MODEL |
+    ![Green Button SQL Worksheet showing the OML model inventory](images/green-button-oml-model-inventory.png " ")
 
 
 2. Confirm the model list.
@@ -113,7 +110,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
 ## Task 2: Score demand risk and revenue in SQL
 
-Now score demand risk and revenue directly in SQL so learners can see how deployed OML models support finance decisions without moving governed data out of the database.
+Now score demand risk and revenue directly in SQL so learners can see how deployed OML models support finance decisions without moving finance records out of the database.
 
 1. Run the demand surge classification query:
 
@@ -148,18 +145,7 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     **Expected output: Surge Prediction Results**
 
-    | Product Id | Product Name | Training Label | Predicted Surge | Confidence |
-    | --- | --- | --- | --- | --- |
-    | 1 | Premium Checking Bundle | STABLE | STABLE | 0.9674 |
-    | 2 | High-Yield Savings Account | SURGE | STABLE | 0.6139 |
-    | 3 | Rewards Credit Card | SURGE | STABLE | 0.6128 |
-    | 4 | Small Business Term Loan | SURGE | SURGE | 0.5831 |
-    | 5 | Home Equity Line of Credit | STABLE | STABLE | 0.8716 |
-    | 6 | Robo Advisory Portfolio | STABLE | STABLE | 0.9361 |
-    | 7 | Managed ETF Portfolio | STABLE | STABLE | 0.6684 |
-    | 8 | Municipal Bond Ladder | STABLE | STABLE | 0.9435 |
-    | 9 | Treasury Sweep Account | STABLE | STABLE | 0.6597 |
-    | 10 | Corporate Card Program | STABLE | STABLE | 0.5252 |
+    ![Green Button SQL Worksheet showing demand-surge prediction results](images/green-button-surge-prediction-results.png " ")
 
     Review the predicted surge and confidence together. A `SURGE` prediction can help an analyst decide which products may need more monitoring, outreach, or case-processing capacity. Confidence helps the analyst decide how strongly the model supports that prediction. It does not replace review; it helps rank where to look first.
 
@@ -198,11 +184,7 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     **Expected output: Demand Model Agreement Check**
 
-    | Actual Label | Predicted Label | Product Count |
-    | --- | --- | --- |
-    | STABLE | STABLE | 59 |
-    | SURGE | STABLE | 4 |
-    | SURGE | SURGE | 16 |
+    ![Green Button SQL Worksheet showing demand-model agreement](images/green-button-demand-model-agreement.png " ")
 
     In order to understand this query, you need to read it in three parts.
 
@@ -237,18 +219,7 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     **Expected output: Revenue Prediction Results**
 
-    | Order Id | Target Revenue | Predicted Revenue |
-    | --- | --- | --- |
-    | 1 | 2400 | 2225.21 |
-    | 2 | 11685 | 7647.67 |
-    | 3 | 8470 | 8394.92 |
-    | 4 | 7540 | 6976.93 |
-    | 5 | 4965 | 4240.34 |
-    | 6 | 5830 | 5459.59 |
-    | 8 | 2360 | 1901.23 |
-    | 9 | 6300 | 7593.86 |
-    | 10 | 1787.5 | 2654.61 |
-    | 11 | 5450 | 7138.97 |
+    ![Green Button SQL Worksheet showing revenue prediction results](images/green-button-revenue-prediction-results.png " ")
 
 
 4. Compare actual target revenue to predicted revenue.
@@ -269,6 +240,8 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
     If you need the runnable solution, use this query:
 
+    ![Hint: Green Button SQL Worksheet showing the largest revenue forecast gaps](images/green-button-largest-revenue-gaps.png " ")
+
     ```sql
     <copy>
     SELECT order_id,
@@ -287,7 +260,9 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
 ## Task 3: Build and compare demand-surge models in the OML AutoML UI
 
-The SQL tasks above score the workshop's existing demand model. In this task, you will use the Oracle Machine Learning AutoML UI to compare candidate models for predicting demand surge across financial products and services, such as checking accounts, savings accounts, loans, and credit cards. You will identify the model approach that best supports Jessica's capacity-planning decision. You are still working inside Oracle AI Database 26ai: the Finance data, experiment settings, candidate models, and results remain in one platform.
+The SQL tasks above score the workshop's existing demand model. In this task, you will use the Oracle Machine Learning AutoML UI to compare candidate models for predicting demand surge across financial products and services, such as checking accounts, savings accounts, loans, and credit cards. You will identify the model approach that best supports Jessica's capacity-planning decision. You are still working inside Oracle AI Database: the Finance data, experiment settings, candidate models, and results remain in one platform.
+
+AutoML is the OML workspace for comparing multiple candidate model approaches from a saved view and a business target. It is useful here because the team can evaluate candidate models and feature importance for capacity planning without hand-building every experiment or moving Finance data outside the database.
 
 Jessica is asking questions such as:
 
@@ -295,13 +270,13 @@ Jessica is asking questions such as:
 - Are changing customer sentiment and viral attention early signals, or just noise?
 - Which model approach gives her the strongest basis for human capacity planning, and why?
 
-Without AutoML, a data-science team would separately prepare the training data, select algorithms, test feature sets, tune model settings, measure candidates, and document the result before handing a model to the business. Here, you choose the governed Finance view, business target, and success metric. AutoML performs the repeatable candidate-model work so the team can focus its time on the Finance question, review of the evidence, and decision fit.
+Without AutoML, a data-science team would separately prepare the training data, select algorithms, test feature sets, tune model settings, measure candidates, and document the result before handing a model to the business. Here, you choose the saved Finance view, business target, and success metric. AutoML performs the repeatable candidate-model work so the team can focus on the Finance question, the leaderboard results, and which model approach fits the decision.
 
 **Why this matters:** A validated candidate model can become a governed scoring service for Finance. After the team approves a model, it can deploy the model as an Oracle Machine Learning Services endpoint. Finance applications and dashboards can then request current demand-surge predictions and present them to Jessica for capacity planning and human review.
 
 | What you learn | What the Finance business gets |
 | --- | --- |
-| How to turn a governed Finance view and a business label into a repeatable AutoML experiment. | A faster, repeatable way to compare models without exporting the data to a separate machine learning platform. |
+| How to turn a saved Finance view and a business label into a repeatable AutoML experiment. | A faster, repeatable way to compare models without exporting the data to a separate machine learning platform. |
 | How the selected metric ranks candidate models and how feature importance explains the inputs used. | A clearer basis for choosing a model to support financial-product demand and capacity planning, with evidence that stays close to the Finance data. |
 
 1. Open the AutoML UI.
@@ -385,7 +360,7 @@ Without AutoML, a data-science team would separately prepare the training data, 
     <details>
     <summary><strong>Challenge answer: choose the metric that matches the planning question</strong></summary>
 
-    > There is no fixed winning algorithm or score. If the candidate ranking changes, the comparison shows that model selection depends on the decision criterion, not only on a single headline score. For a planning team that needs `SURGE` and `STABLE` financial products and services to receive balanced attention, **Balanced Accuracy** is the clearer first comparison because it gives each class equal recall weight. Review the F1 Macro result as complementary evidence because it also considers false positives through precision. Oracle AI Database 26ai keeps those candidate-model results with the governed Finance features that explain the comparison.
+    > There is no fixed winning algorithm or score. If the candidate ranking changes, the comparison shows that model selection depends on the decision criterion, not only on a single headline score. For a planning team that needs `SURGE` and `STABLE` financial products and services to receive balanced attention, **Balanced Accuracy** is the clearer first comparison because it gives each class equal recall weight. Review the F1 Macro result as complementary evidence because it also considers false positives through precision. Oracle AI Database keeps those candidate-model results with the governed Finance features that explain the comparison.
 
     Select **F1** as the model metric and **Macro** as its weight option. Keep the two-model limit so the two experiments are comparable.
 
@@ -407,7 +382,7 @@ Without AutoML, a data-science team would separately prepare the training data, 
 
 ## Next Steps
 
-Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, checked how often a prediction matched the demo label, and compared predicted revenue to target revenue. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
+Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, checked how often a prediction matched the demo label, and compared predicted revenue to target revenue. You also created a demand-surge AutoML experiment and compared candidate models by Balanced Accuracy and F1 Macro; use that comparison to select what deserves further review, not as an automatic staffing or capacity decision. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
 
 ## Acknowledgements
 

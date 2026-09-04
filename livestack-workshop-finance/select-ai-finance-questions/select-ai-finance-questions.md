@@ -1,10 +1,18 @@
-# Ask Governed Finance Questions with Select AI
+# Ask a Database Question with Select AI
 
 ## Introduction
 
 Seer Bank analysts need quick answers, but they cannot accept guesses. A risk answer must come from approved database evidence. Reviewers must be able to inspect the SQL behind it.
 
+Jessica needs a quick answer about the finance data without becoming a SQL expert first. Priya configures Select AI so Jessica's question stays within approved views and the team can inspect the SQL behind the answer.
+
+The business value is faster analyst access to finance answers without losing the evidence trail: an analyst can ask in plain language, while a reviewer can inspect the generated SQL and its database result.
+
+Oracle Select AI translates a natural-language question into SQL or a database-grounded response using a configured AI profile and approved database objects. It is not general-purpose chat over the open web; in this workshop, it uses the two saved Seer Bank views listed in Task 4.
+
 In this lab, you run an Oracle Machine Learning notebook. It shows the difference between general AI chat and governed Select AI over Seer Bank data. You create AI-ready views, limit the `genai` profile to approved objects, review generated SQL, ask for a narrated answer, and confirm that the lab stays read-only.
+
+An Oracle Machine Learning notebook is a runnable, ordered collection of explanation, SQL, and results that runs against your database schema. Here it gives every learner the same governed Select AI setup and makes the generated SQL easy to inspect. Select AI adds business value in a converged database because an analyst can ask a finance question in plain language while the answer remains grounded in approved database objects and reviewable SQL.
 
 > **Important:** Select AI output is generated. Wording and aliases can vary. Review the generated SQL and database results before trusting the answer.
 
@@ -34,14 +42,14 @@ Estimated Time: **18 minutes**
 | --- | --- |
 | Business Problem | Seer Bank analysts need fast natural-language answers without losing the evidence trail. |
 | Technical Challenge | Natural-language questions must stay inside an approved data boundary and produce reviewable SQL. |
-| Persona Focus | A risk analyst asks the question; an AI engineer controls the profile and approved objects. |
+| Persona Focus | Jessica asks the question; Priya controls the profile and approved objects. |
 | What You Will See | Chat can explain finance concepts. Select AI can query approved Seer Bank data and show generated SQL. |
-| Database Capability | Oracle Select AI, `DBMS_CLOUD_AI`, finance semantic views, schema comments, and OML notebooks. |
-| Outcome | Analysts receive a narrated answer while reviewers retain the SQL and database evidence. |
+| Database Capability | Oracle Select AI, `DBMS_CLOUD_AI`, saved finance views, schema comments, and OML notebooks. |
+| Outcome | Jessica receives a narrated answer while the team retains the SQL and database evidence. |
 
 ## Task 1: Import the Finance Select AI Notebook
 
-In this lab, you run the hands-on steps from an Oracle Machine Learning notebook.
+In this lab, you run the hands-on steps from an Oracle Machine Learning notebook. Importing the notebook gives you a repeatable, guided Select AI session: its paragraphs create the approved context, run the questions, and show the SQL and database evidence that support each answer.
 
 1. Download [finance-select-ai-notebook.json](files/finance-select-ai-notebook.json).
 
@@ -168,6 +176,8 @@ Select AI works best with clean business-facing objects. This paragraph creates 
 
 Now limit the profile to the two AI-ready views. This keeps questions focused on the approved Seer Bank evidence for this lab.
 
+The approved object list names the only two views this exercise is designed to use. This notebook sets the list but does not set `enforce_object_list=true`, so it is a scoped prompt configuration rather than proof of a hard restriction. Review the generated SQL before relying on an answer.
+
 1. Set the approved object list.
 
     ```sql
@@ -272,9 +282,13 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     **Expected result:** The answer explains common fraud and compliance risk factors. Wording can vary.
 
-## Task 9: Confirm the Read-Only Boundary
+## Task 9: Confirm the Select AI Question Boundary
 
-1. Check the current finance risk agent action row count.
+Tasks 3 and 4 set up the lab by creating AI-ready views and setting the profile's object list. The Select AI question path is different: it asks for and reviews database answers without requesting an agent action. Confirm that boundary before moving to the agent lab.
+
+1. Return to the `SHOWSQL` output from Task 6. Confirm that the generated statement uses `SELECT_AI_PRODUCT_RISK_V` and does not contain `INSERT`, `UPDATE`, `DELETE`, `MERGE`, or DDL. This review is the evidence that the generated question is read-only before you rely on its answer.
+
+2. Optionally check the current finance risk-agent action row count for context.
 
     ```sql
     <copy>
@@ -286,9 +300,9 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     > This command is already in your notebook. Click the play button to run it.
 
-    **Expected result:** The count can be `0` or higher depending on whether the agent lab has already run.
+    **Expected result:** The count can be `0` or higher depending on whether the agent lab has already run. It is context only; it cannot prove whether this lab made changes. The evidence for the Select AI question boundary is the `SHOWSQL` review in Task 6. Tasks 5 through 8 do not use `SELECT AI AGENT` or call an agent-action tool.
 
-You used Select AI as a governed question-and-answer layer over Seer Bank evidence. The next lab adds Select AI Agents. The workflow can then act through controlled database tools.
+You can now ask a database question with Select AI and review the SQL behind the answer before relying on it. The next lab lets a Select AI Agent use controlled database tools to record the next review step.
 
 ## Acknowledgements
 
