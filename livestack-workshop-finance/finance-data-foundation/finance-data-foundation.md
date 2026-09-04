@@ -2,15 +2,15 @@
 
 ## Introduction
 
-This lab confirms that the current Seer Bank data foundation is present before any finance result is trusted. Learners inspect semantic views, core data groups, vectors, graphs, spatial objects, Oracle Machine Learning (OML) models, and agent functions as the shared evidence base for the rest of the workshop.
+This lab establishes the connected data foundation for the rest of the workshop. You inspect semantic views, core data groups, vectors, graphs, spatial objects, Oracle Machine Learning (OML) models, and agent functions before using them to answer finance questions.
 
 The goal is simple: see how different finance decisions connect to one database before you start using the data.
 
-The point is to understand what is available before you start asking business questions. Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, copilot answers, and agent audit rows all connect back to this shared database foundation.
+The point is to understand what is available before you start asking business questions. Dashboard metrics, vector matches, graph paths, spatial distances, OML scores, Select AI answers, and agent action records all connect back to this shared database foundation.
 
 Think of this lab as the map of the finance environment. The same schema supports the risk dashboard, transaction API, semantic search, financial-crime graph, service coverage, prediction, governed answers, and agent action history.
 
-**Oracle AI Database 26ai** is a converged database: it lets these different finance workloads use one governed database foundation instead of forcing each data type into a separate specialist system.
+**Oracle AI Database** brings these finance workloads together so teams can use connected data instead of moving each data type into a separate specialist system.
 
 ![Before and after architecture diagram comparing bespoke finance data stores with Oracle Converged Database](images/finance-converged-database-redwood.png " ")
 
@@ -27,13 +27,13 @@ Think of this lab as the map of the finance environment. The same schema support
 >
 > - **Spatial** data stores location and shape information. A service center can be a point, a demand region can be a boundary, and an SLA zone can be a service area. Oracle Spatial lets you calculate distance and coverage with SQL instead of exporting location data to a separate mapping system.
 >
-> - **Oracle Machine Learning (OML)** lets you build, store, and score models inside Oracle Database, where the finance records already live. That keeps predictions closer to the governed data that produced them.
+> - **Oracle Machine Learning (OML)** lets you build, store, and score models inside Oracle AI Database, where the finance records already live. That keeps predictions closer to the governed data that produced them.
 >
 > - **Procedural Language/Structured Query Language (PL/SQL)** is Oracle's procedural language for database logic. Teams use it for approved functions, reusable business rules, and controlled operations that should run close to governed data rather than in scattered application code.
 
 </details>
 
-The image below is the Data Foundation page from the Seer Bank application. It shows the shared finance data domains that support the rest of the experience: financial products, clients, transactions, cases, regulatory signals, service geography, vectors, machine learning outputs, and agent audit history. In this lab, you use SQL to inspect that foundation directly instead of treating the application screen as a black box.
+The image below is the Data Foundation page from the Seer Bank application. It shows the shared finance data domains that support the rest of the experience: financial products, clients, transactions, cases, regulatory signals, service geography, vectors, machine learning outputs, and agent action history. In this lab, you use SQL to inspect that foundation directly instead of treating the application screen as a black box.
 
 ![Finance Data Foundation page](images/data-foundation.png " ")
 
@@ -41,7 +41,7 @@ The image below is the Data Foundation page from the Seer Bank application. It s
 
 - Review the finance semantic views.
 - Check the scale of the current data.
-- Map each application page to the Oracle AI Database 26ai capability that supports the related finance decision.
+- Map each application page to the Oracle AI Database capability that supports the related finance decision.
 
 Estimated Time: **10 minutes**
 
@@ -66,7 +66,7 @@ Start by inventorying the semantic views and database capabilities that the rest
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
-    You are building a simple capability map before making any finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle Database, "What finance capabilities are available in this schema?"
+    You are building a simple capability map before making any finance decisions. You do not need to memorize this catalog SQL. The purpose is to ask Oracle AI Database, "What finance capabilities are available in this schema?"
 
     Each section counts one kind of capability used by the workshop labs: approved finance views for reporting, JSON duality for transaction documents, the fraud property graph for relationship analysis, vector columns for meaning-based search, spatial metadata for service coverage, and OML models for prediction. The `UNION ALL` lines stack those counts into one easy-to-read table.
 
@@ -77,7 +77,7 @@ Start by inventorying the semantic views and database capabilities that the rest
 
     > In a fractured environment, you might look in one system for reporting views, another for JSON documents, another for graph objects, another for vector indexes, another for spatial metadata, and another for machine learning models. Each system can have its own security, metadata, and operational rules.
     >
-    > Oracle Database lets you inspect these object families from one schema using SQL catalog views. That makes it easier to understand what is available before you start making finance decisions.
+    > Oracle AI Database lets you inspect these object families from one schema using SQL catalog views. That makes it easier to understand what is available before you start making finance decisions.
 
     </details>
 
@@ -188,8 +188,14 @@ The next query shows the scale of the finance scenario behind the application pa
 
     The baseline helps you interpret focused results. When a query returns only a few rows, you can understand why: the SQL is filtering, ranking, scoring, or following relationships from this larger population.
 
+## Business Outcome
+
+You established the shared evidence base for the workshop. A connected foundation can reduce the time teams spend locating data, reconciling copies, and rebuilding the same definitions for each analytics or AI project.
+
+Organizations can evaluate this pattern by tracking duplicate data feeds, reconciliation steps, time to add a new use case, and the number of teams using shared business definitions.
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

@@ -15,7 +15,7 @@ After evidence is found, ranked, investigated, and governed, the bank needs an a
 >
 > - A **tool** is an approved function the agent is allowed to call. Tools keep the agent from acting only through free-form text; they define the controlled operations the agent can perform, such as summarizing risk signals or logging a decision.
 >
-> - A **PL/SQL function** is database logic stored in Oracle Database. In this lab, PL/SQL represents the approved business logic an agent-style workflow can call near governed finance data.
+> - A **PL/SQL function** is database logic stored in Oracle AI Database. In this lab, PL/SQL represents the approved business logic an agent-style workflow can call near governed finance data.
 >
 > - An **audit row** is a database record that shows what happened, who or what performed the action, and when it occurred. Audit rows turn an AI-assisted interaction into durable evidence that an operator or reviewer can inspect later.
 
@@ -60,7 +60,7 @@ Call the approved PL/SQL helper function that summarizes current risk signals fo
 
     > In a fractured environment, an AI assistant may summarize data from one system, trigger actions in another, and leave audit history somewhere else. That makes it hard to know what data was used and whether the action was recorded correctly.
     >
-    > Oracle Database can hold the governed data, the approved PL/SQL tool, and the audit trail together. That makes agent-assisted work more controlled and reviewable.
+    > Oracle AI Database can hold the governed data, the approved PL/SQL tool, and the audit trail together. That makes agent-assisted work more controlled and reviewable.
 
     </details>
 
@@ -153,4 +153,4 @@ Log an agent action and inspect the audit trail that confirms the action was rec
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, June 2026
