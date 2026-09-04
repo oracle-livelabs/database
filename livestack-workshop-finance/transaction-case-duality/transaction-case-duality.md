@@ -15,11 +15,11 @@ This matters after the dashboard lab because a KPI is not enough for review. Whe
 >
 > - **Relational tables** store data in rows and columns with defined keys, relationships, constraints, and data types. That structure is excellent for analytics because SQL can filter, aggregate, join customers to transactions, enforce data quality rules, and answer questions such as which customers, products, or cases are driving risk. Relational data is less convenient as a direct application payload than JSON, but it is much stronger for governed analysis and operational reporting.
 >
-> - **JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want for APIs, while analysts keep SQL access to governed relational data. That matters because the API document and the analytic rows stay synchronized as two views of the same source.
+> - **JSON Relational Duality** lets Oracle AI Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want for APIs, while analysts keep SQL access to governed relational data. That matters because the API document and the analytic rows stay synchronized as two views of the same source.
 >
 > - **Duality view**, often shortened to **DV**, is the database object that defines that document shape. A duality view is created with `CREATE JSON RELATIONAL DUALITY VIEW`. The definition maps relational tables and columns into a JSON structure, so the database knows how to present the same rows as a document. In this lab, `ORDERS_DV` maps transaction rows from `ORDERS` and nested line-item rows from `ORDER_ITEMS` into one transaction document.
 >
-> - **Projection** means presenting the same centralized data in the shape a user, application, or service needs. Oracle Database can store governed data once, then let different consumers access it as relational rows, JSON documents, spatial objects, graph relationships, vectors, or model-ready columns without extracting or synchronizing separate copies. In this lab, SQL/JSON projection means taking fields from a JSON transaction document, such as transaction ID and status, and returning them as normal SQL columns that analysts can filter, sort, and join. The same transaction data can serve an application-friendly JSON API and an analyst-friendly SQL result without moving the data into a separate document store.
+> - **Projection** means presenting the same centralized data in the shape a user, application, or service needs. Oracle AI Database can store governed data once, then let different consumers access it as relational rows, JSON documents, spatial objects, graph relationships, vectors, or model-ready columns without extracting or synchronizing separate copies. In this lab, SQL/JSON projection means taking fields from a JSON transaction document, such as transaction ID and status, and returning them as normal SQL columns that analysts can filter, sort, and join. The same transaction data can serve an application-friendly JSON API and an analyst-friendly SQL result without moving the data into a separate document store.
 
 </details>
 
@@ -63,7 +63,7 @@ For this lab, the workshop database already includes `ORDERS_DV`. The duality vi
 | `status` | `ORDERS.ORDER_STATUS` |
 | `items[]` | Related rows from `ORDER_ITEMS` |
 
-That mapping tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
+That mapping tells Oracle AI Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
 
 This is better than common alternatives because it avoids splitting ownership of the same transaction across systems. If teams hand-build JSON in every application service, each service can drift into its own version of the transaction shape. If teams copy transactions into a separate document database, they must synchronize data, duplicate security rules, and resolve conflicts when the document copy and relational source disagree. A duality view keeps one governed source of truth while still giving each consumer the access shape it needs.
 
@@ -136,7 +136,7 @@ The existing `ORDERS_DV` lets an application update an existing transaction docu
 
 2. Enable insert and update for the document and its line items.
 
-    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses tell Oracle Database that developers can create and update the JSON document while the database continues to enforce relational keys and data types underneath.
+    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses tell Oracle AI Database that developers can create and update the JSON document while the database continues to enforce relational keys and data types underneath.
 
     ```sql
     <copy>
@@ -262,13 +262,13 @@ Now act as an application developer. You will create a transaction as one nested
 
     **Expected output: Created Transaction Rows**
 
-    | Transaction Id | Transaction Status | Item Id | Product Name | Quantity | Unit Price | Line Total |
-    | --- | --- | --- | --- | --- | --- | --- |
-    | 900001 | pending | 990001 | Premium Checking Bundle | 2 | 12.5 | 25 |
+    | Transaction Id | Transaction Status | Client Email | Item Id | Product Name | Quantity | Unit Price | Line Total |
+    | --- | --- | --- | --- | --- | --- | --- | --- |
+    | 900001 | pending | Existing customer email for customer 1 | 990001 | Premium Checking Bundle | 2 | 12.5 | 25 |
 
 4. Update the document status through the duality view.
 
-    This update changes JSON data through `ORDERS_DV`. Oracle Database writes the matching relational `ORDERS.ORDER_STATUS` value; no application-side JSON parsing, copy, or synchronization job is required.
+    This update changes JSON data through `ORDERS_DV`. Oracle AI Database writes the matching relational `ORDERS.ORDER_STATUS` value; no application-side JSON parsing, copy, or synchronization job is required.
 
     ```sql
     <copy>
@@ -362,12 +362,18 @@ Now use SQL to project document fields back into reviewable columns. In this con
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
 
+## Business Outcome
+
+You used one data foundation through both a document interface and relational SQL. This pattern can shorten application delivery and reduce synchronization work when applications need JSON while analysts and operational teams need relational access.
+
+Organizations can evaluate this pattern by tracking API delivery time, duplicated data stores, synchronization defects, and handoffs between application and data teams.
+
 ## Next Steps
 
-Congratulations on completing the JSON duality lab. You expanded a JSON API contract, created and updated a transaction as a document, and inspected the same governed data as relational rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
+Congratulations on completing the JSON duality lab. You expanded a JSON API contract, created and updated a transaction as a document, and inspected the same governed data as relational rows. For a deeper hands-on workshop focused on JSON in Oracle AI Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

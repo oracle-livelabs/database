@@ -44,7 +44,7 @@ Estimated Time: **10 minutes**
 | Technical Challenge | App and data teams need one explainable query path instead of separate pipelines for signals, products, transactions, and service data. |
 | Persona Focus | Risk operations leaders read the dashboard; database and application developers show where the dashboard evidence comes from. |
 | What You Will See | Dashboard metrics are database-backed and can be explained with SQL. |
-| Database Capability | Converged SQL aggregates finance views, transaction data, service records, and audit tables. |
+| Database Capability | Converged SQL aggregates finance views, transaction data, service records, and action tables. |
 | Outcome | Operators can move from a dashboard KPI to trusted detail without changing systems. |
 
 Persona focus: You support the risk operations leader by showing that one database query path can explain the dashboard instead of hiding work across integration layers.
@@ -68,7 +68,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     > In a fractured environment, the application may store events in one system, the dashboard may calculate metrics in another, and analysts may investigate details somewhere else. If the numbers do not match, teams must spend time reconciling them.
     >
-    > With Oracle Database, the dashboard summary and the detail rows can come from the same governed finance data. You can move from the KPI to the SQL behind it without leaving the database.
+    > With Oracle AI Database, the dashboard summary and the detail rows can come from the same governed finance data. You can move from the KPI to the SQL behind it without leaving the database.
 
     </details>
 
@@ -217,8 +217,14 @@ Next, summarize the products tied to monitored exposure.
 
     This lab uses direct SQL instead of a materialized view so the calculation stays visible. KPI totals come from `RISK_SIGNALS_V`. Product-linked rows use the same signal view and join to product details. Product exposure joins back to product and institution context. In production, teams can keep the same logic and move repeated totals into indexed tables or materialized views.
 
+## Business Outcome
+
+You moved from a dashboard summary to the SQL evidence behind the priority list. This pattern helps risk and operations teams focus limited review time on signals and products with the strongest combination of frequency, severity, and exposure.
+
+Organizations can evaluate this pattern by tracking time to identify priorities, backlog age, analyst review effort, and the percentage of dashboard measures that can be traced to repeatable queries.
+
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

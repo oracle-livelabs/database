@@ -2,17 +2,17 @@
 
 ## Introduction
 
-You have now walked through the core Seer Bank finance decision path: understand the data foundation, explain dashboard risk, inspect transaction evidence, search risk language by meaning, follow financial-crime relationships, evaluate service coverage, and score predictive models.
+You have now completed the Seer Bank finance decision path: inspect the data foundation, explain dashboard risk, work with transaction documents, search risk language by meaning, follow financial-crime relationships, evaluate service coverage, score predictive models, ask governed finance questions, and move to a controlled agent action.
 
 The important takeaway is practical: you can now explain how one finance question can move across several data types without breaking the chain of evidence.
 
-A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need distance and case-processing capacity. A planner may need a prediction. Those are different jobs, but they should not require disconnected data copies and separate explanations.
+A risk leader may start with a dashboard KPI. A developer may need the transaction as JSON. A fraud analyst may need relationship paths. A service leader may need location evidence. A planner may need a prediction. An analyst may ask a natural-language question, and an operations team may need a controlled action. Those jobs should not require disconnected data copies and separate explanations.
 
-With **Oracle AI Database 26ai**, **Seer Bank** can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, and Oracle Machine Learning (OML) for prediction.
+With **Oracle AI Database**, **Seer Bank** can use the right capability for each question while keeping the evidence connected: relational SQL for operations, JSON Relational Duality for application documents, AI Vector Search for meaning, Property Graph for relationships, Oracle Spatial for location, Oracle Machine Learning (OML) for prediction, Select AI for natural-language access, and Select AI Agents for controlled workflow steps.
 
 That is the punchline for finance: *The database is not just where records sit. It becomes the place where risk, fraud, compliance, service, and analytics teams can ask different questions about the same governed facts.*
 
-You leave this workshop with a repeatable way to talk about Oracle's converged database value: fewer copies of sensitive data, fewer reconciliation points, stronger governance, faster investigation, and business results that can be explained from SQL-backed evidence.
+You leave this workshop with a repeatable pattern for connecting finance data to insight and controlled action. Organizations can apply the pattern to reduce data movement and reconciliation, shorten investigations, broaden access to approved information, and keep results connected to database evidence.
 
 <details>
 <summary><strong>Why this matters: after the workshop</strong></summary>
@@ -21,7 +21,7 @@ You leave this workshop with a repeatable way to talk about Oracle's converged d
 >
 > In a fractured environment, each of those questions may send the team to a different system. That creates more copies of sensitive data, more security policies to maintain, more integration work, and more room for answers to drift apart.
 >
-> Oracle Database is a strong fit because it supports the access patterns finance teams actually need while keeping the evidence connected. You can use documents, vectors, graphs, spatial data, and machine learning without turning every new capability into another silo.
+> Oracle AI Database supports the access patterns finance teams need while keeping the evidence connected. You can use documents, vectors, graphs, spatial data, machine learning, natural-language access, and agent tools without turning every new capability into another data silo.
 
 </details>
 
@@ -29,7 +29,7 @@ You leave this workshop with a repeatable way to talk about Oracle's converged d
 
 - Review the workshop outcomes.
 - Connect each finance outcome to database evidence.
-- Explain why convergence matters for finance risk, operations, application development, investigation, and analytics.
+- Explain how Oracle AI Database connects finance data, insight, and controlled action.
 
 Estimated Time: **5 minutes**
 
@@ -48,6 +48,8 @@ Review what you saw and connect each outcome back to the business question it he
     | Why is this account or entity suspicious? | Property Graph and SQL Property Graph Queries (SQL/PGQ) expose relationship paths across accounts, devices, IP addresses, payees, phones, and cases. |
     | Can service teams respond where demand is building? | Oracle Spatial calculates distance and SLA coverage from governed location data. |
     | Which products or cohorts may need attention next? | OML models can be inventoried and scored with SQL where the finance data already lives. |
+    | How can an analyst ask a finance question in business language? | Select AI can produce visible SQL and an answer grounded in approved finance objects. |
+    | How can insight move into a controlled workflow? | A Select AI Agent can coordinate approved tools while deterministic PL/SQL applies the action rule. |
 
 2. Review how the personas connect to those outcomes.
 
@@ -58,35 +60,35 @@ Review what you saw and connect each outcome back to the business question it he
     | Fraud investigator | You can explain why a suspicious entity matters by showing the relationships around it. |
     | Service operations leader | You can use spatial distance and SLA zones to reason about coverage pressure. |
     | Data scientist or analytics engineer | You can score models where the operational finance data already lives. |
-    | Database developer | You can trace relational, JSON, vector, graph, spatial, and OML evidence from one schema. |
+    | Business or risk analyst | You can ask a finance question and retain the generated SQL behind the answer. |
+    | Risk operations analyst | You can move from a high-priority signal to a controlled review action. |
+    | Database developer | You can trace relational, JSON, vector, graph, spatial, OML, Select AI, and agent evidence from one schema. |
 
 3. Connect the business use case back to convergence.
 
-    | Business pressure | Why a converged Oracle Database foundation matters |
+    | Business pressure | Why a converged Oracle AI Database foundation matters |
     | --- | --- |
     | Emerging risk and fraud signals | Signal text, product exposure, transactions, and graph relationships can be investigated without moving evidence across systems. |
     | Application delivery | JSON documents and relational analytics can come from the same governed transaction model. |
-    | Client service and case-processing capacity | Spatial coverage, service centers, demand regions, and SLA zones can be analyzed together. |
+    | Client service coverage | Spatial coverage, service centers, demand regions, and SLA zones can be analyzed together. |
     | Predictive planning | OML scores run close to the finance records that supply model features and business context. |
+    | Access to finance insight | Select AI connects business-language questions to visible SQL over approved objects. |
+    | Controlled action | Select AI Agents coordinate narrow tools while database rules control the action. |
     | Governance and explainability | Teams can point to database-backed evidence instead of reconciling multiple copies of the truth. |
 
-4. Take this forward.
+4. Review the connected outcome.
 
-    When you describe this workshop to someone else, do not lead with a list of features. Lead with the finance problem: teams need to make faster risk, fraud, service, and planning decisions without losing the ability to explain the evidence.
+    | Before | With the demonstrated pattern |
+    | --- | --- |
+    | Teams search separate data copies and tools. | Teams use connected data for operational, document, semantic, graph, spatial, predictive, and AI-assisted work. |
+    | Investigators rebuild context across several handoffs. | Investigators move from dashboard priority to supporting signals and relationships. |
+    | Business questions wait for a separate reporting cycle. | Authorized users can ask a question and review the generated SQL. |
+    | Insight stops before the next workflow step. | An agent can coordinate a narrow tool while a database rule controls the action. |
 
-    Then connect each capability to a job:
-
-    - SQL explains the operating metrics.
-    - JSON Relational Duality serves the application shape.
-    - Vector Search finds meaning in risk language.
-    - Property Graph exposes connected financial-crime evidence.
-    - Oracle Spatial measures service coverage.
-    - OML scores predictions close to governed data.
-
-The lasting lesson is that **Oracle AI Database 26ai** lets these jobs reinforce each other. In a real finance environment, that means teams can move from risk awareness to transaction evidence, relationship analysis, service coverage, and predictive planning without losing the governed context behind the decision.
+The lasting lesson is that **Oracle AI Database** connects the jobs around one finance decision. Teams can move from risk awareness to transaction evidence, relationship analysis, service coverage, prediction, governed answers, and controlled action without losing the database context behind the result.
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

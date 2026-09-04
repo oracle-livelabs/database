@@ -4,7 +4,7 @@
 
 Seer Bank analysts need quick answers, but they cannot accept guesses. A risk answer must come from approved database evidence. Reviewers must be able to inspect the SQL behind it.
 
-In this lab, you run an Oracle Machine Learning notebook. It shows the difference between general AI chat and governed Select AI over Seer Bank data. You create AI-ready views, limit the `genai` profile to approved objects, review generated SQL, ask for a narrated answer, and confirm that the lab stays read-only.
+In this lab, you run an Oracle Machine Learning notebook. It shows the difference between general AI chat and Select AI grounded in Seer Bank data. You create AI-ready views, limit the `genai` profile to approved objects, review generated SQL, and ask for a narrated answer. The finance questions read business data; setup tasks also create views, add comments, and set profile configuration for the exercise.
 
 > **Important:** Select AI output is generated. Wording and aliases can vary. Review the generated SQL and database results before trusting the answer.
 
@@ -272,7 +272,7 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     **Expected result:** The answer explains common fraud and compliance risk factors. Wording can vary.
 
-## Task 9: Confirm the Read-Only Boundary
+## Task 9: Confirm No Agent Actions Were Added
 
 1. Check the current finance risk agent action row count.
 
@@ -288,9 +288,15 @@ Before using natural language, run SQL so you know what evidence Select AI shoul
 
     **Expected result:** The count can be `0` or higher depending on whether the agent lab has already run.
 
-You used Select AI as a governed question-and-answer layer over Seer Bank evidence. The next lab adds Select AI Agents. The workflow can then act through controlled database tools.
+The count confirms that this lab did not add a Finance Risk Agent action record. You used Select AI to move from a finance question to visible SQL and a narrated answer grounded in Seer Bank evidence. The next lab adds Select AI Agents so the workflow can act through controlled database tools.
+
+## Business Outcome
+
+You shortened the path from a finance question to reviewable SQL and an answer grounded in approved database objects. This pattern can help authorized users reach information faster while technical teams retain the SQL used to produce the result.
+
+Organizations can evaluate this pattern by tracking question-to-answer time, generated-query accuracy, review time, repeated analyst requests, and corrections.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

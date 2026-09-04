@@ -4,14 +4,14 @@
 
 Finance teams use dashboards to understand what has already happened, but they also need predictions that help them plan what to do next. Those predictions are more useful when analysts can see which model produced the score, which business record was scored, and how the result connects back to product, revenue, or risk decisions.
 
-In this lab, you will take on the persona of a database developer supporting both an ML engineer and a finance decision-maker. The ML engineer needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle Database. The finance decision-maker needs results that are easy to review, explain, and use for planning.
+In this lab, you will take on the persona of a database developer supporting both an ML engineer and a finance decision-maker. The ML engineer needs to show that deployed **Oracle Machine Learning (OML)** models can be scored consistently inside Oracle AI Database. The finance decision-maker needs results that are easy to review, explain, and use for planning.
 
-You will inventory persisted OML models, score demand-surge and revenue-prediction models in SQL, and review the results next to finance data that business users recognize. By the end of the lab, you will see how in-database machine learning keeps the model, the score, and the supporting finance evidence together.
+You will inventory persisted OML models, score synthetic demand-surge and revenue-prediction examples in SQL, and review the results next to finance data that business users recognize. The supplied models demonstrate a reusable in-database prediction pattern; they do not represent a validated model for a financial institution.
 
 <details>
 <summary><strong>Key terms: OML model, feature, classification, regression, clustering, and confidence</strong></summary>
 
-> - A **model** is a trained pattern that can score new or current data. In this lab, OML models estimate demand surge, revenue impact, or product grouping from finance records in Oracle Database.
+> - A **model** is a trained pattern that can score new or current data. In this lab, OML models estimate demand surge, revenue impact, or product grouping from finance records in Oracle AI Database.
 >
 > - A **feature** is an input value used by a model. Features can come from product activity, risk severity, transaction attributes, customer behavior, case-processing capacity, or revenue history. Good features translate raw finance records into signals the model can learn from.
 >
@@ -29,7 +29,7 @@ The first image below explains the Oracle Machine Learning (OML) scoring flow. P
 
 ![Finance Oracle Machine Learning scoring flow](images/finance-oml-scoring-flow.svg " ")
 
-The second image is the Predictive Risk, Capacity and Revenue page. It gives finance teams a business view of product risk, client segments, forecast quality, product cohorts, and case pressure. In this lab, capacity means the ability of teams or service centers to handle review, support, onboarding, dispute, fraud, or AML work. The SQL shows how Oracle Database inventories and scores these predictive results.
+The second image is the Predictive Risk, Capacity and Revenue page. It gives finance teams a business view of product risk, client segments, forecast quality, product cohorts, and case pressure. In this lab, capacity means the ability of teams or service centers to handle review, support, onboarding, dispute, fraud, or AML work. The SQL shows how Oracle AI Database inventories and scores these predictive results.
 
 ![Predictive Risk Capacity and Revenue page](images/predictive-risk-oml.png " ")
 
@@ -74,7 +74,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
     > In a fractured environment, data teams often export sensitive finance records to a separate machine learning platform, score the data there, and then send results back to the application or dashboard. That creates copies, governance questions, and extra movement of sensitive data.
     >
-    > Oracle Machine Learning lets you score models inside Oracle Database. The model, data, SQL evidence, and business context stay close together, which is better for explainability and governance.
+    > Oracle Machine Learning lets you score models inside Oracle AI Database. The model, data, SQL evidence, and business context stay close together, which is better for explainability and governance.
 
     </details>
 
@@ -254,7 +254,7 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 4. Compare actual target revenue to predicted revenue.
     Look for rows where predicted revenue is close to target revenue, then look for rows where the difference is larger. Close values show where the model estimate lines up with known outcomes. Larger gaps show where an analyst may want more context, such as unusual customer behavior, product mix, or fulfillment timing.
 
-    The demand query helps teams decide which products may need attention. The revenue query helps teams see whether a model estimate is useful for planning. Both queries score persisted models without moving sensitive finance records out of Oracle Database.
+    The demand query helps teams decide which products may need attention. The revenue query helps teams see whether a model estimate is useful for planning. Both queries score persisted models without moving sensitive finance records out of Oracle AI Database.
 
     🎯 **Interactive challenge: surface the largest forecast gaps.** Starting with the revenue query above, add a `revenue_gap` column that uses `ABS` to calculate the difference between `target_revenue` and the prediction. Then change the sort so the largest gaps appear first and return only five rows. Which order now leads the review queue, and what additional context would you seek?
 
@@ -287,7 +287,7 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 
 ## Task 3: Build and compare demand-surge models in the OML AutoML UI
 
-The SQL tasks above score the workshop's existing demand model. In this task, you will use the Oracle Machine Learning AutoML UI to compare candidate models for predicting demand surge across financial products and services, such as checking accounts, savings accounts, loans, and credit cards. You will identify the model approach that best supports Jessica's capacity-planning decision. You are still working inside Oracle AI Database 26ai: the Finance data, experiment settings, candidate models, and results remain in one platform.
+The SQL tasks above score the workshop's existing demand model. In this task, you will use the Oracle Machine Learning AutoML UI to compare candidate models for predicting demand surge across financial products and services, such as checking accounts, savings accounts, loans, and credit cards. You will identify the model approach that best supports Jessica's capacity-planning decision. You are still working inside Oracle AI Database: the Finance data, experiment settings, candidate models, and results remain in one platform.
 
 Jessica is asking questions such as:
 
@@ -385,7 +385,7 @@ Without AutoML, a data-science team would separately prepare the training data, 
     <details>
     <summary><strong>Challenge answer: choose the metric that matches the planning question</strong></summary>
 
-    > There is no fixed winning algorithm or score. If the candidate ranking changes, the comparison shows that model selection depends on the decision criterion, not only on a single headline score. For a planning team that needs `SURGE` and `STABLE` financial products and services to receive balanced attention, **Balanced Accuracy** is the clearer first comparison because it gives each class equal recall weight. Review the F1 Macro result as complementary evidence because it also considers false positives through precision. Oracle AI Database 26ai keeps those candidate-model results with the governed Finance features that explain the comparison.
+    > There is no fixed winning algorithm or score. If the candidate ranking changes, the comparison shows that model selection depends on the decision criterion, not only on a single headline score. For a planning team that needs `SURGE` and `STABLE` financial products and services to receive balanced attention, **Balanced Accuracy** is the clearer first comparison because it gives each class equal recall weight. Review the F1 Macro result as complementary evidence because it also considers false positives through precision. Oracle AI Database keeps those candidate-model results with the governed Finance features that explain the comparison.
 
     Select **F1** as the model metric and **Macro** as its weight option. Keep the two-model limit so the two experiments are comparable.
 
@@ -405,6 +405,12 @@ Without AutoML, a data-science team would separately prepare the training data, 
 
     </details>
 
+## Business Outcome
+
+You scored models and compared candidate approaches where the supporting data can be reviewed with SQL. This pattern can shorten the path from model output to operational review and help teams keep predictions connected to the evidence behind them.
+
+Organizations can adapt the pattern to case demand, delinquency, loss-risk prioritization, or service planning. They can evaluate it by tracking scoring time, prediction error, model review time, and human override rates.
+
 ## Next Steps
 
 Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, checked how often a prediction matched the demo label, and compared predicted revenue to target revenue. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
@@ -413,4 +419,4 @@ Congratulations on completing the Oracle Machine Learning lab. You inspected mod
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
