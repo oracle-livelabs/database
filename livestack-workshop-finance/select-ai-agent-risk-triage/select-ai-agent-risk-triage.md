@@ -4,7 +4,7 @@
 
 Seer Bank has moved from dashboards and SQL evidence to governed natural-language answers. The risk analyst can ask which product categories have the highest exposure. They can inspect the SQL behind the answer.
 
-The next step is action. When a high-priority signal appears, the team needs a consistent workflow. It must retrieve evidence, apply the review rule, and leave an audit record.
+The next step is action. When a high-priority signal appears, the team needs a consistent workflow. It must retrieve evidence, apply the review rule, and leave a reviewable action record.
 
 In this lab, you run an Oracle Machine Learning notebook. It creates function tools, an agent, a task, and a team. Then you run `SELECT AI AGENT` and inspect the action history.
 
@@ -41,7 +41,7 @@ Estimated Time: **22 minutes**
 | --- | --- |
 | Business Problem | High-risk signals need consistent triage and a durable review record. |
 | Technical Challenge | An agent must retrieve evidence, apply a rule, and record the outcome without changing protected finance data. |
-| Persona Focus | A risk operations analyst requests triage; an AI engineer exposes narrow tools; a reviewer inspects the audit history. |
+| Persona Focus | A risk operations analyst requests triage; an AI engineer exposes narrow tools; a reviewer inspects the action record and native agent history. |
 | What You Will See | A Select AI Agent can coordinate approved read and write tools inside a constrained database boundary. |
 | Database Capability | Oracle Select AI Agents, function tools, OML notebooks, `AGENT_ACTIONS`, and native history views. |
 | Outcome | Seer Bank turns AI-assisted triage into a controlled, reviewable database workflow. |
@@ -509,9 +509,15 @@ A triage workflow should not create duplicate review rows for the same question.
 
     **Expected result:** The agent reports that the escalation already exists or that no duplicate was created. The grouped count remains `1` for the escalated signal.
 
-You created a constrained Select AI Agent workflow. It reads current risk evidence, applies a threshold rule, writes one controlled review record, and leaves audit evidence behind.
+You created a constrained Select AI Agent workflow. The agent coordinates approved tools, while deterministic PL/SQL applies the threshold rule and writes one demonstration action record. The supplied `0.950` value is part of the demo record; it is not a measured model-confidence score.
+
+## Business Outcome
+
+You moved from a risk question to a controlled review action without giving the agent unrestricted access to protected finance data. This pattern can reduce manual triage handoffs while keeping the action tied to a database rule and execution history.
+
+Organizations can evaluate this pattern by tracking triage time, duplicate actions prevented, human review rates, and the percentage of actions tied to a traceable rule and run history.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
