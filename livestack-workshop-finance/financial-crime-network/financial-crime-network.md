@@ -54,7 +54,7 @@ Persona focus: You are helping a fraud analyst move from a suspicious account to
 
 ## Task 1: Trace two-hop fraud reach
 
-In this lab, you will investigate the fraud network in two views. First, you will run the SQL/PGQ queries in SQL Worksheet so you can see exactly how Oracle Database traces connected accounts, devices, IP addresses, phone numbers, and emails. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
+In this lab, you will investigate the fraud network in two views. First, you will run the SQL/PGQ queries in SQL Worksheet so you can see exactly how Oracle AI Database traces connected accounts, devices, IP addresses, phone numbers, and emails. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
 
 Start from suspicious account `ACCT-8841` and trace the connected entities within two relationship hops.
 
@@ -75,7 +75,7 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 
     > Fraud investigation often starts with transactions but quickly becomes a relationship problem. If graph data lives in a separate graph-only system, teams must move or copy account, device, and transaction evidence before they can investigate it.
     >
-    > Oracle Database keeps relational transaction data and property graph analysis close together. You can use SQL to move from account evidence to relationship evidence without changing databases.
+    > Oracle AI Database keeps relational transaction data and property graph analysis close together. You can use SQL to move from account evidence to relationship evidence without changing databases.
 
     </details>
 
@@ -319,6 +319,12 @@ You already ran the SQL/PGQ patterns in SQL Worksheet. Now run the same investig
 
 > **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
 
+## Business Outcome
+
+You traced connections that are difficult to recognize when accounts, devices, addresses, and counterparties are reviewed separately. This pattern can help investigators focus their next review and explain how entities are connected.
+
+Organizations can evaluate this pattern by tracking investigation cycle time, manual relationship searches, analyst handoffs, and the number of useful connections identified for review. A graph connection is an investigative lead, not a confirmed fraud outcome.
+
 ## Next Steps
 
 Congratulations on completing the property graph lab. You used SQL/PGQ patterns to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts, then compared the same investigation in Graph Studio.
@@ -332,4 +338,4 @@ For more property graph practice, try these follow-up resources:
 
 * **Authors** - Linda Foinding, Principal Database Product Manager
 * **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd,
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

@@ -1,10 +1,10 @@
 {
-  "workshoptitle": "Build Financial Intelligence with Oracle AI Database 26ai",
+  "workshoptitle": "Turn Financial Data into Connected Insight and Controlled Action with Oracle AI Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Seer Bank finance intelligence story and workshop goals.",
+      "description": "Follow the Seer Bank journey from connected finance data to insight and controlled action.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -14,52 +14,52 @@
     },
     {
       "title": "Lab 1: Finance Data Foundation",
-      "description": "Inspect the finance schema foundation and current object families.",
+      "description": "Inspect the connected finance foundation that supports the workshop decisions.",
       "filename": "../../finance-data-foundation/finance-data-foundation.md"
     },
     {
       "title": "Lab 2: Risk and Operations Dashboard",
-      "description": "Query dashboard KPIs, signal exposure, and product risk evidence.",
+      "description": "Use traceable dashboard evidence to focus risk and operations review.",
       "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
     },
     {
       "title": "Lab 3: Transaction and Case Documents with JSON Relational Duality",
-      "description": "Use JSON Relational Duality and SQL/JSON for transaction documents.",
+      "description": "Serve document and relational access from the same transaction data.",
       "filename": "../../transaction-case-duality/transaction-case-duality.md"
     },
     {
       "title": "Lab 4: Risk Signal Intelligence with AI Vector Search",
-      "description": "Run AI Vector Search over product and signal embeddings.",
+      "description": "Find related products and risk signals by meaning, not only keywords.",
       "filename": "../../risk-signal-vector-search/risk-signal-vector-search.md"
     },
     {
       "title": "Lab 5: Financial Crime Network with Property Graph",
-      "description": "Use Property Graph and SQL/PGQ to analyze fraud reach.",
+      "description": "Reveal connected activity that can focus a financial-crime investigation.",
       "filename": "../../financial-crime-network/financial-crime-network.md"
     },
     {
       "title": "Lab 6: Client Service and SLA Coverage with Oracle Spatial",
-      "description": "Use Oracle Spatial for service center and SLA region analysis.",
+      "description": "Add geographic evidence to service-routing and coverage decisions.",
       "filename": "../../service-sla-spatial/service-sla-spatial.md"
     },
     {
       "title": "Lab 7: Predictive Risk, Capacity, and Revenue with Oracle Machine Learning (OML)",
-      "description": "Inspect and score OML models inside Oracle Database.",
+      "description": "Score and compare models where the supporting finance data can be reviewed.",
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
     {
       "title": "Lab 8: Ask Governed Finance Questions with Select AI",
-      "description": "Use the Finance LiveStack application and Oracle Machine Learning to generate visible SQL and governed finance answers.",
+      "description": "Move from a finance question to visible SQL and an answer grounded in approved objects.",
       "filename": "../../select-ai-finance-questions/select-ai-finance-questions.md"
     },
     {
       "title": "Lab 9: Triage Risk Signals with Select AI Agents",
-      "description": "Run a native Select AI Agent in the Finance LiveStack application and inspect the workflow in Oracle Machine Learning.",
+      "description": "Move from insight to a controlled review action through approved database tools.",
       "filename": "../../select-ai-agent-risk-triage/select-ai-agent-risk-triage.md"
     },
     {
       "title": "Conclusion",
-      "description": "Turn the finance labs into a practical converged database takeaway.",
+      "description": "Connect the nine hands-on labs to one practical finance outcome.",
       "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
     },
     {

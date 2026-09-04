@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="982" height="777" viewBox="0 0 982 777" role="img" aria-labelledby="title desc">
-  <title id="title">SQL Worksheet orientation for the retail workshop</title>
+  <title id="title">SQL Worksheet orientation for the finance workshop</title>
   <desc id="desc">Annotated SQL Worksheet screen showing the LLUSER dropdown, Navigator table list, SQL editor, Run Statement button, and Query Result panel.</desc>
   <defs>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -41,16 +41,16 @@
     <text x="22" y="226">▸</text><text x="44" y="226">▦ AGENT_ACTIONS</text>
     <text x="22" y="253">▸</text><text x="44" y="253">▦ APP_DATASET_STATE</text>
     <text x="22" y="280">▸</text><text x="44" y="280">▦ APP_USERS</text>
-    <text x="22" y="307">▸</text><text x="44" y="307">▦ BRANDS</text>
-    <text x="22" y="334">▸</text><text x="44" y="334">▦ BRAND_INFLUENCER_LINKS</text>
-    <text x="22" y="361">▸</text><text x="44" y="361">▦ CUSTOMERS</text>
-    <text x="22" y="388">▸</text><text x="44" y="388">▦ DBTOOLS$EXECUTION_HISTORY</text>
-    <text x="22" y="415">▸</text><text x="44" y="415">▦ DEMAND_FORECASTS</text>
-    <text x="22" y="442">▸</text><text x="44" y="442">▦ DEMAND_REGIONS</text>
-    <text x="22" y="469">▸</text><text x="44" y="469">▦ DM$P5CUSTOMER_SEGMENT_MO...</text>
-    <text x="22" y="496">▸</text><text x="44" y="496">▦ DM$P5DEMAND_SURGE_MODEL</text>
-    <text x="22" y="523">▸</text><text x="44" y="523">▦ DM$PPRODUCT_CLUSTER_MODEL</text>
-    <text x="22" y="550">▸</text><text x="44" y="550">▦ DM$PREVENUE_PREDICT_MODEL</text>
+    <text x="22" y="307">▸</text><text x="44" y="307">▦ CLIENTS</text>
+    <text x="22" y="334">▸</text><text x="44" y="334">▦ FINANCE_INSTITUTIONS</text>
+    <text x="22" y="361">▸</text><text x="44" y="361">▦ FINANCE_PRODUCTS</text>
+    <text x="22" y="388">▸</text><text x="44" y="388">▦ RISK_SIGNALS</text>
+    <text x="22" y="415">▸</text><text x="44" y="415">▦ CLIENT_TRANSACTIONS</text>
+    <text x="22" y="442">▸</text><text x="44" y="442">▦ SERVICE_CENTERS</text>
+    <text x="22" y="469">▸</text><text x="44" y="469">▦ FRAUD_ENTITIES</text>
+    <text x="22" y="496">▸</text><text x="44" y="496">▦ FRAUD_RELATIONSHIPS</text>
+    <text x="22" y="523">▸</text><text x="44" y="523">▦ PRODUCT_EMBEDDINGS</text>
+    <text x="22" y="550">▸</text><text x="44" y="550">▦ SIGNAL_EMBEDDINGS</text>
   </g>
   <rect x="306" y="374" width="8" height="48" fill="#b8b8b8"/>
 
@@ -106,8 +106,8 @@
     <text x="399" y="229" fill="#0000cc">JOIN</text><text x="434" y="229" fill="#111"> schema_ctx s </text><text x="539" y="229" fill="#0000cc">ON</text><text x="562" y="229" fill="#111"> s.owner_name = o.</text><rect x="660" y="216" width="55" height="18" rx="3" fill="#dce8f6"/><text x="662" y="229" fill="#0000cc">owner</text>
     <text x="399" y="249" fill="#0000cc">WHERE</text><text x="444" y="249" fill="#111"> o.object_type = </text><text x="553" y="249" fill="#e00000">'FUNCTION'</text>
     <text x="421" y="268" fill="#0000cc">AND</text><text x="454" y="268" fill="#111"> o.object_name </text><text x="560" y="268" fill="#0000cc">IN</text><text x="582" y="268" fill="#111"> (</text>
-    <text x="443" y="287" fill="#e00000">'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',</text>
-    <text x="443" y="306" fill="#e00000">'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'</text>
+    <text x="443" y="287" fill="#e00000">'FINANCE_INSTITUTIONS_V','FINANCE_PRODUCTS_V',</text>
+    <text x="443" y="306" fill="#e00000">'RISK_SIGNALS_V','CLIENT_TRANSACTIONS_V','SERVICE_CENTERS_V'</text>
     <text x="421" y="325" fill="#111">);</text>
   </g>
 
@@ -138,13 +138,13 @@
     <text x="414" y="548" font-weight="700" fill="#111">AREA</text>
     <text x="554" y="548" font-weight="700" fill="#111">COUNT</text>
     <line x1="318" y1="559" x2="687" y2="559" stroke="#e1e1e1"/>
-    <text x="326" y="580" font-weight="700">1</text><text x="414" y="580">Core retail tables</text><text x="664" y="580">22</text>
+    <text x="326" y="580" font-weight="700">1</text><text x="414" y="580">Finance data objects</text><text x="664" y="580">22</text>
     <rect x="407" y="592" width="280" height="34" fill="#f3f3f3"/>
-    <text x="326" y="613" font-weight="700">2</text><text x="414" y="613">Retail semantic vi...</text><text x="670" y="613">5</text>
-    <text x="326" y="646" font-weight="700">3</text><text x="414" y="646">Creator influence...</text><text x="670" y="646">1</text>
+    <text x="326" y="613" font-weight="700">2</text><text x="414" y="613">Finance semantic vi...</text><text x="670" y="613">5</text>
+    <text x="326" y="646" font-weight="700">3</text><text x="414" y="646">Risk signal data</text><text x="670" y="646">1</text>
     <rect x="407" y="658" width="280" height="34" fill="#f3f3f3"/>
-    <text x="326" y="679" font-weight="700">4</text><text x="414" y="679">MiniLM vector art...</text><text x="670" y="679">2</text>
-    <text x="326" y="712" font-weight="700">5</text><text x="414" y="712">Agent tool functi...</text><text x="670" y="712">5</text>
+    <text x="326" y="679" font-weight="700">4</text><text x="414" y="679">Vector search data</text><text x="670" y="679">2</text>
+    <text x="326" y="712" font-weight="700">5</text><text x="414" y="712">Agent action data</text><text x="670" y="712">5</text>
   </g>
 
   <!-- Annotations -->
