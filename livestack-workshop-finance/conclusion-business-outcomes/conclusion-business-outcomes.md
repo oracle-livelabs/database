@@ -6,7 +6,7 @@ Estimated Time: 1 minutes
 
 You have now walked through the core Seer Bank finance decision path with Jessica, Jordan, Sam, Priya, and Maya: understand the data foundation, explain dashboard risk, inspect transaction evidence, search risk language by meaning, follow financial-crime relationships, evaluate service coverage, score predictive models, ask a database question with Select AI, and record a controlled review action with a Select AI Agent.
 
-## Objectives
+### Objectives
 
 * Review key workshop takeaways
 * Understand complete business value
