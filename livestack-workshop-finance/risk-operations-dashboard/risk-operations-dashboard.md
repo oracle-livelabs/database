@@ -2,9 +2,13 @@
 
 ## Introduction
 
-Risk leaders rarely have time to inspect every signal one by one. They need to know which signals, products, and client exposures deserve review first. This lab recreates the evidence behind the application dashboard so each metric can be traced back to SQL.
+Risk leaders rarely have time to inspect every signal one by one. They need to know which signals, products, and client exposures deserve review first. This lab shows the SQL queries and returned rows behind each application-dashboard metric.
 
-The dashboard is the workshop's first decision surface. It summarizes monitored risk activity, exposure, transactions, and case pressure into measures that help risk leaders prioritize review.
+Jessica, Seer Bank's risk analyst, starts with the dashboard. She needs to understand which risk signals deserve attention and then trace each summary number back to the records behind it.
+
+If you skipped the optional data-foundation lab, start here: this lab uses risk signals, product mentions, finance products, and finance institutions. The task introductions identify the views and tables as you use them; no separate catalog inventory is required.
+
+The dashboard is the workshop's first business summary. It summarizes monitored risk signals, their exposure, and the products connected to them so risk leaders can prioritize review.
 
 In this lab, **exposure** means the reach or scale of monitored risk signals. A signal with low exposure may still matter, but a signal with high exposure can affect more clients, products, channels, or public attention. Exposure helps answer a practical question: if the team can only review a few issues right now, which ones could have the widest impact?
 
@@ -13,7 +17,7 @@ The key point is traceability. A dashboard can summarize the business, but the b
 <details>
 <summary><strong>Key terms: KPI, signal, criticality, exposure, and case</strong></summary>
 
-> - A **KPI** is a key performance indicator. It is a summary measure that helps leaders understand the current operating picture quickly, such as transaction volume, exposure, high-risk signal count, or product review pressure. A useful KPI should still be traceable to the rows behind it.
+> - A **KPI** is a key performance indicator. It is a summary measure that helps leaders understand the current operating picture quickly, such as exposure, high-risk signal count, or product review pressure. A useful KPI should still be traceable to the rows behind it.
 >
 > - A **risk signal** is an event, bulletin, alert, or observation that may deserve review. It is not automatically confirmed fraud or confirmed harm; it is a prompt for investigation. In this workshop, signals help Seer Bank decide which products, institutions, or client activities need attention first.
 >
@@ -25,7 +29,7 @@ The key point is traceability. A dashboard can summarize the business, but the b
 
 </details>
 
-The image below is the Risk and Operations Dashboard. It is the daily operating view for a risk leader or product portfolio manager: KPI cards summarize transaction volume, revenue exposure, critical fraud signals, products under review, and AI decisions logged; charts show signal velocity and revenue exposure by product category; and the product table identifies where review should start. The SQL in this lab recreates the dashboard evidence so you can see how those business measures are calculated from governed data.
+The image below is the Risk and Operations Dashboard. It is the daily operating view for a risk leader or product portfolio manager: KPI cards summarize high-risk signals and exposure; charts show signal activity and exposure by product category; and the product table identifies where review should start. The SQL in this lab shows how those measures are calculated from risk-signal, product, and institution rows.
 
 ![Risk and Operations Dashboard page](images/risk-operations-dashboard.png " ")
 
@@ -40,14 +44,14 @@ Estimated Time: **10 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Risk teams need a shared view of exposure, transaction pressure, and case-processing capacity. |
-| Technical Challenge | App and data teams need one explainable query path instead of separate pipelines for signals, products, transactions, and service data. |
-| Persona Focus | Risk operations leaders read the dashboard; database and application developers show where the dashboard evidence comes from. |
+| Business Problem | Risk teams need a shared view of serious signals, their exposure, and the products and institutions connected to them. |
+| Technical Challenge | App and data teams need one explainable query path instead of separate pipelines for risk signals, product mentions, products, and institutions. |
+| Persona Focus | Jessica reads the dashboard; Jordan shows where its database evidence comes from. |
 | What You Will See | Dashboard metrics are database-backed and can be explained with SQL. |
-| Database Capability | Converged SQL aggregates finance views, transaction data, service records, and action tables. |
-| Outcome | Operators can move from a dashboard KPI to trusted detail without changing systems. |
+| Database Capability | SQL aggregates governed risk-signal, product, and institution views. |
+| Outcome | Operators can move from a dashboard KPI to the products and institutions that need review without changing systems. |
 
-Persona focus: You support the risk operations leader by showing that one database query path can explain the dashboard instead of hiding work across integration layers.
+Persona focus: You join Jessica and Jordan as they use one database query path to explain the dashboard instead of hiding work across integration layers.
 
 ## Task 1: Calculate risk signal KPIs
 
@@ -68,7 +72,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     > In a fractured environment, the application may store events in one system, the dashboard may calculate metrics in another, and analysts may investigate details somewhere else. If the numbers do not match, teams must spend time reconciling them.
     >
-    > With Oracle AI Database, the dashboard summary and the detail rows can come from the same governed finance data. You can move from the KPI to the SQL behind it without leaving the database.
+    > With Oracle Database, the dashboard summary and the detail rows can come from the same finance records. You can move from the KPI to its SQL query without leaving the database.
 
     </details>
 
@@ -85,9 +89,7 @@ Start with the KPI query that explains the top-level dashboard numbers.
 
     **Expected output: Dashboard KPI Summary**
 
-    | Total Signals | Avg Criticality | High Risk Signals | Total Exposure | Cases Opened |
-    | --- | --- | --- | --- | --- |
-    | 5000 | 41.2 | 9 | 1602966769 | 5657933 |
+    ![Green Button SQL Worksheet showing dashboard KPI summary](images/green-button-dashboard-kpis.png " ")
 
 
 2. Interpret the result.
@@ -135,15 +137,7 @@ Dashboard KPIs help show where risk is rising. Next, look at the product-linked 
 
     **Expected output: Product-Linked Risk Signals**
 
-    | Signal Id | Criticality Score | Exposure Count | Cases Opened Count | Financial Product Name | Institution Name | Product Category |
-    | --- | --- | --- | --- | --- | --- | --- |
-    | 1 | 96 | 12560000 | 1260 | AML Screening Package | Clearwater Credit Union | Compliance Services |
-    | 2 | 92 | 8840000 | 980 | Wire Transfer Service | Clearwater Credit Union | Payments |
-    | 3 | 88 | 6420000 | 740 | Rate Hedge Advisory | Harvest Commercial Bank | Capital Markets |
-    | 4479 | 87 | 17564089 | 9719 | CECL Reserve Scenario | Greenline Asset Management | Risk Analytics |
-    | 5 | 83 | 2630000 | 410 | Commercial Real Estate Loan | Granite Wealth | Commercial Lending |
-    | 6 | 81 | 1710000 | 290 | Real-Time Payments Service | SecureLedger Compliance | Payments |
-    | 7 | 80 | 980000 | 180 | Adjustable Rate Mortgage | NorthBridge Investments | Mortgage Lending |
+    ![Green Button SQL Worksheet showing product-linked high-risk signals](images/green-button-product-linked-risk-signals.png " ")
 
 
 2. Review the product-linked rows.
@@ -188,28 +182,17 @@ Next, summarize the products tied to monitored exposure.
 
     **Expected output: Top Product Exposure**
 
-    | Financial Product Name | Institution Name | Product Category | Signal Count | Avg Criticality | Exposure Count |
-    | --- | --- | --- | --- | --- | --- |
-    | Carbon Credit Custody | IPA Direct Finance | Carbon Markets | 51 | 46 | 30212024 |
-    | Auto Loan Digital Offer | NorthBridge Investments | Consumer Lending | 48 | 45.9 | 66064101 |
-    | KYC Refresh Workflow | NorthBridge Investments | Compliance Services | 41 | 45.6 | 37993643 |
-    | Managed ETF Portfolio | Horizon Capital | Wealth Management | 29 | 45.3 | 52445042 |
-    | Loan Portfolio Review | LedgerGrade Connect | Risk Analytics | 45 | 45.1 | 42518770 |
-    | 529 Education Savings Plan | Harvest Commercial Bank | Investments | 41 | 45 | 20763811 |
-    | Small Business Term Loan | Meridian Trust Bank | Commercial Lending | 40 | 44.6 | 15504074 |
-    | Corporate Card Program | Horizon Capital | Cards and Payments | 37 | 44 | 4680777 |
-    | Mortgage Pre-Approval | NorthBridge Investments | Mortgage Lending | 46 | 43.9 | 23334598 |
-    | Digital Wallet Account | SecureLedger Compliance | Payments | 48 | 43.8 | 37616607 |
+    ![Green Button SQL Worksheet showing top product exposure](images/green-button-top-product-exposure.png " ")
 
 
 2. Review the product summary rows.
-    Look at the first few rows in the result. These are the products with the strongest mix of signal volume, average criticality, and exposure.
+    Look at the first few rows in the result. The query orders products by average criticality first, then by exposure when criticality is tied; it does not calculate a combined score.
 
     `Signal Count` shows how many monitored signals are tied to the product. `Avg Criticality` shows how severe those signals are on average. `Exposure Count` shows the scale of the monitored exposure tied to those signals.
 
-    Review products with many signals, high average criticality, and high exposure first. That mix means the issue appears often, scores as more severe, and may affect more clients or business activity.
+    Start with the products that have the highest average criticality, then use exposure to break ties. This helps the risk team identify serious signals and trace them to the products and institutions that need review first.
 
-    Exposure is important because it changes prioritization. A product with many signals, high average criticality, and high exposure should move to the top of the dashboard review queue. That combination means the issue is showing up repeatedly, scoring as more severe, and reaching more people. For a financial institution, that can raise client, regulatory, reputational, or operational risk.
+    Exposure is important when products have the same average criticality because it breaks the tie in the sort order. A product with higher exposure reaches more people, accounts, or operations, which can raise client, regulatory, reputational, or operational risk.
 
     For a production dashboard, review the execution plan for each KPI query. Useful indexes usually support the filter and join columns used here: `CRITICALITY_SCORE`, `SIGNAL_ID`, `POST_ID`, `PRODUCT_ID`, `FINANCIAL_PRODUCT_ID`, and `INSTITUTION_ID`.
 
@@ -217,11 +200,7 @@ Next, summarize the products tied to monitored exposure.
 
     This lab uses direct SQL instead of a materialized view so the calculation stays visible. KPI totals come from `RISK_SIGNALS_V`. Product-linked rows use the same signal view and join to product details. Product exposure joins back to product and institution context. In production, teams can keep the same logic and move repeated totals into indexed tables or materialized views.
 
-## Business Outcome
-
-You moved from a dashboard summary to the SQL evidence behind the priority list. This pattern helps risk and operations teams focus limited review time on signals and products with the strongest combination of frequency, severity, and exposure.
-
-Organizations can evaluate this pattern by tracking time to identify priorities, backlog age, analyst review effort, and the percentage of dashboard measures that can be traced to repeatable queries.
+    The risk team can now identify serious signals and trace them to the products and institutions that need review first.
 
 ## Acknowledgements
 

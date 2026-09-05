@@ -2,13 +2,19 @@
 
 ## Introduction
 
-After risk is identified, Seer Bank needs location evidence for the response. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, which service centers are closest, and which response-time zones cover the region?
+After risk is identified, Seer Bank needs to know which service centers are close enough to respond. This lab uses **Oracle Spatial** to answer a practical operations question: where is demand, where are the service centers, and what response windows apply?
+
+Maya, Seer Bank's service operations leader, receives the work created by Jessica's investigation. Maya needs to decide which service center can respond, how far away it is, and which response commitment applies.
 
 You will help a service operations leader turn location data into coverage evidence for case routing, fraud follow-up, anti-money laundering (AML) review, and SLA planning.
 
-Risk and fraud decisions often create service work: client outreach, case routing, AML or fraud review, product review, dispute follow-up, onboarding checks, and document handling. Spatial analysis helps operations leaders avoid guessing from a map and instead measure proximity and geographic coverage around the region that needs support.
+The business value is a defensible routing conversation. Leaders can compare exact distance, regional demand, and promised response windows before assigning time-sensitive work.
 
-Every risk decision can create operational work. The bank needs to know not only what is risky, but whether the service network can respond where demand is highest.
+Oracle Spatial stores locations and boundaries as database geometry, then lets SQL measure distance and coverage against the same operational records. Spatial Studio is Oracle Database's visual workspace for mapping those database-backed points and regions. SQL remains the repeatable source for precise distance and SLA comparisons; Spatial Studio makes the location and coverage pattern easier to understand and communicate.
+
+Risk and fraud decisions often create service work: client outreach, case routing, AML or fraud review, product review, dispute follow-up, onboarding checks, and document handling. Spatial analysis helps operations leaders avoid guessing from a map and instead measure distance to the demand region that needs support.
+
+Every risk decision can create operational work. The bank needs to know not only what is risky, but how far service centers are from the highest-demand regions and which response commitments apply.
 
 <details>
 <summary><strong>Key terms: spatial data, point, boundary, distance, GeoJSON, and SLA</strong></summary>
@@ -17,13 +23,14 @@ Every risk decision can create operational work. The bank needs to know not only
 >
 > - A **point** is a precise map location, usually represented by longitude and latitude. In this lab, a service center point tells the database where work can be handled.
 >
-> - A **boundary** is a shape around an area, such as a metro region or service zone. Boundaries let the database compare where demand is located with the areas covered by a service zone.
+> - A **boundary** is a shape around an area, such as a metro region or service zone. Boundaries let the database compare where demand is located against service-center locations.
 >
-> - **Distance** tells you how far one location is from another location or boundary. In service planning, distance helps identify nearby centers and where routing pressure may appear.
+> - **Distance** tells you how far one location is from another location or boundary. In service planning, distance helps answer whether a center is close enough to respond and where routing pressure may appear.
 >
 > - **GeoJSON** is a JSON format for representing map features such as points, lines, and areas. Oracle can convert spatial objects into GeoJSON so the same governed geometry can support both SQL analysis and map-based application screens.
 >
-> - An **SLA**, or service-level agreement, is a response-time or service-level commitment. In this workshop, SLA coverage connects geography to operations by showing which response-time zone covers a region. A complete routing decision would also consider staffing, eligibility, operating hours, and current workload, which this exercise does not calculate.
+> - An **SLA**, or service-level agreement, is a response-time or service-level commitment. In this workshop, SLA coverage connects geography to operations: the question is not only whether a risk exists, but which response window applies to the region that needs help.
+>
 
 </details>
 
@@ -31,7 +38,7 @@ The first image below explains the spatial coverage pattern. Service centers are
 
 ![Spatial service coverage flow](images/spatial-service-coverage-flow.svg " ")
 
-The second image is the Client Service and SLA Coverage page. It combines a map, service-center table, regional demand indicators, and coverage alerts so an operations leader can see where demand is building and which centers and response-time zones are nearby. The SQL in this lab queries the same location and SLA data behind that screen.
+The second image is the Client Service and SLA Coverage page. It combines a map, service-center table, regional demand indicators, and response-window information so an operations leader can see where demand is building and which centers are nearby. The SQL in this lab queries the same location and SLA data behind that screen.
 
 ![Client Service and SLA Coverage map](images/service-sla-spatial.png " ")
 
@@ -49,14 +56,14 @@ Estimated Time: **25 minutes**
 
 | Step | Finance focus |
 | --- | --- |
-| Business Problem | Service leaders need to know which centers and response-time zones are closest to high-demand regions. |
+| Business Problem | Service leaders need to know which service centers are closest to high-demand regions and which response windows apply. |
 | Technical Challenge | Operations teams need location-aware decisions without moving geography, service centers, and SLA zones into separate mapping systems. |
-| Persona Focus | Service operations leaders evaluate coverage; database developers show distance and SLA evidence with spatial SQL. |
+| Persona Focus | Maya evaluates coverage; Jordan provides distance and SLA evidence with spatial SQL. |
 | What You Will See | Spatial data can quantify distance and regional service pressure in SQL. |
 | Database Capability | Oracle Spatial geometry objects (`SDO_GEOMETRY`), distance calculations (`SDO_GEOM.SDO_DISTANCE`), regions, and SLA zones support coverage analysis. |
-| Outcome | Operations teams can add geographic evidence to service-routing and coverage decisions. |
+| Outcome | Operations teams can compare distance, demand, and response windows before deciding where to route work. |
 
-Persona focus: You are helping a service operations leader measure distance and coverage, then use Spatial Studio to see the same New York Metro story on a map.
+Persona focus: You join Maya and Jordan as they compare nearby service centers, regional demand, and response windows, then use Spatial Studio to see the New York Metro coverage story on a map.
 
 ## Task 1: Calculate service center distance to New York Metro
 
@@ -70,9 +77,7 @@ Start by comparing service-center locations to the New York Metro demand region.
 
     In order to understand this query, read it in five parts.
 
-    1. `service_centers_v` gives you business details, such as service center name, city, and state.
-
-    2. `fulfillment_centers` supplies the stored location for each service center. The `location` column is an `SDO_GEOMETRY` point, which is how Oracle Spatial stores a map location.
+    1. `fulfillment_centers` supplies both the service-center details and its stored location. The `location` column is an `SDO_GEOMETRY` point, which is how Oracle Spatial stores a map location.
 
     3. `demand_regions` supplies the New York Metro boundary. The `WHERE` clause keeps the query focused on that one demand region.
 
@@ -93,17 +98,16 @@ Start by comparing service-center locations to the New York Metro demand region.
 
     ```sql
     <copy>
-    SELECT sc.service_center_name,
-           sc.city,
-           sc.state_province,
+    SELECT fc.center_name AS service_center_name,
+           fc.city,
+           fc.state_province,
            fc.latitude,
            fc.longitude,
            DBMS_LOB.SUBSTR(SDO_UTIL.TO_GEOJSON(fc.location), 120, 1) AS location_geojson,
            ROUND(SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM'), 2) AS boundary_distance_km,
            dr.region_name,
            dr.demand_index
-    FROM service_centers_v sc
-    JOIN fulfillment_centers fc ON fc.center_id = sc.service_center_id
+    FROM fulfillment_centers fc
     CROSS JOIN demand_regions dr
     WHERE dr.region_name = 'New York Metro'
     ORDER BY SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM')
@@ -113,18 +117,9 @@ Start by comparing service-center locations to the New York Metro demand region.
 
     **Expected output: New York Service Coverage**
 
-    | Service Center Name | City | State Province | Latitude | Longitude | Location Geojson | Boundary Distance Km | Region Name | Demand Index |
-    | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-    | Edison Wealth Service Center | Edison | New Jersey | 40.5187 | -74.4121 | { "type": "Point", "coordinates": [-74.4121, 40.5187] } | 9.48 | New York Metro | 91 |
-    | Middletown Mid-Atlantic Branch Hub | Middletown | Delaware | 39.4496 | -75.7163 | { "type": "Point", "coordinates": [-75.7163, 39.4496] } | 160.48 | New York Metro | 91 |
-    | Aberdeen East Coast Banking Center | Aberdeen | Maryland | 39.5096 | -76.1641 | { "type": "Point", "coordinates": [-76.1641, 39.5096] } | 187.21 | New York Metro | 91 |
-    | Fall River Northeast Service Hub | Fall River | Massachusetts | 41.7015 | -71.155 | { "type": "Point", "coordinates": [-71.155, 41.7015] } | 218.48 | New York Metro | 91 |
-    | Etna Midwest Specialty Finance Desk | Etna | Ohio | 39.9576 | -82.6818 | { "type": "Point", "coordinates": [-82.6818, 39.9576] } | 713.52 | New York Metro | 91 |
-    | Romulus Great Lakes Mortgage Hub | Romulus | Michigan | 42.2223 | -83.3963 | { "type": "Point", "coordinates": [-83.3963, 42.2223] } | 767.96 | New York Metro | 91 |
-    | Concord Southeast Micro Branch | Concord | North Carolina | 35.4088 | -80.5795 | { "type": "Point", "coordinates": [-80.5795, 35.4088] } | 781.6 | New York Metro | 91 |
-    | Plainfield Heartland Banking Hub | Plainfield | Indiana | 39.7043 | -86.3994 | { "type": "Point", "coordinates": [-86.3994, 39.7043] } | 1031.93 | New York Metro | 91 |
-    | Lebanon Central Banking Center | Lebanon | Tennessee | 36.2081 | -86.2911 | { "type": "Point", "coordinates": [-86.2911, 36.2081] } | 1144.17 | New York Metro | 91 |
-    | Joliet Midwest Risk Desk | Joliet | Illinois | 41.525 | -88.0817 | { "type": "Point", "coordinates": [-88.0817, 41.525] } | 1152.2 | New York Metro | 91 |
+    ![Green Button SQL Worksheet showing the New York Metro service-center coverage result](images/green-button-new-york-coverage.png " ")
+
+    Results can vary after a data refresh. Focus on the nearest-center order, boundary distance, and demand index.
 
 
 2. Review the nearest service centers.
@@ -138,7 +133,7 @@ Start by comparing service-center locations to the New York Metro demand region.
 
     3. `Location Geojson` shows the same service-center point in a map-friendly format. For WGS84 map data, Oracle stores coordinates as longitude first, then latitude. That is why the GeoJSON point for Edison starts with `-74.4121` before `40.5187`.
 
-    The so what: Edison is the closest center to a high-demand region, so it is the first location an operations leader would evaluate. The next closest centers provide alternatives, while a real routing decision would also check staffing, eligibility, operating hours, and current workload.
+    The so what: Edison is the closest center to a high-demand region, so it is the first location an operations leader would review when deciding where to route work. The next closest centers provide alternatives; the SLA summary in the next task supplies the response-window context.
 
 ## Task 2: Summarize SLA zone coverage
 
@@ -171,12 +166,7 @@ After locating nearby service centers, summarize the response commitments attach
 
     **Expected output: SLA Zone Counts**
 
-    | Zone Type | Zones | Min Response Hrs | Max Response Hrs | Avg Response Hrs |
-    | --- | --- | --- | --- | --- |
-    | express | 30 | 8 | 8 | 8 |
-    | overnight | 30 | 16 | 16 | 16 |
-    | standard | 30 | 24 | 24 | 24 |
-    | economy | 30 | 72 | 72 | 72 |
+    ![Green Button SQL Worksheet showing SLA zone counts](images/green-button-sla-zone-counts.png " ")
 
 
 2. Compare the service levels.
@@ -192,28 +182,29 @@ After locating nearby service centers, summarize the response commitments attach
 
     **Expected output: Chicago Service Coverage**
 
-    In the current workshop data, `Joliet Midwest Risk Desk` should become the nearest center at `0` km because its location falls inside the Chicago Metro boundary. Chicago has demand index `78`, lower than New York Metro's `91`.
+    In the current workshop data, `Joliet Midwest Risk Desk` is the nearest center at `0` km because its location falls inside the Chicago Metro boundary. Chicago has demand index `78`, lower than New York Metro's `91`.
 
     <details>
     <summary><strong>Challenge answer: the region changes the routing evidence</strong></summary>
 
-    > The first row is `Joliet Midwest Risk Desk` at `0` km, showing that it is inside the Chicago Metro boundary. Chicago's demand index is `78`, lower than New York Metro's `91`. Operations would combine this location evidence with staffing, eligibility, operating hours, and current workload before routing a time-sensitive case.
+    > The first row is `Joliet Midwest Risk Desk` at `0` km, showing that it is inside the Chicago Metro boundary. Chicago's demand index is `78`, so it has less current pressure than New York Metro at `91`; operations should compare the applicable SLA response commitment before routing a time-sensitive case. Oracle Spatial keeps region, distance, demand, and service evidence together for that comparison.
 
     If you need the runnable solution, use the Task 1 query with this changed filter:
 
+    ![Hint: Green Button SQL Worksheet showing Chicago service-center coverage](images/green-button-chicago-coverage.png " ")
+
     ```sql
     <copy>
-    SELECT sc.service_center_name,
-           sc.city,
-           sc.state_province,
+    SELECT fc.center_name AS service_center_name,
+           fc.city,
+           fc.state_province,
            fc.latitude,
            fc.longitude,
            DBMS_LOB.SUBSTR(SDO_UTIL.TO_GEOJSON(fc.location), 120, 1) AS location_geojson,
            ROUND(SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM'), 2) AS boundary_distance_km,
            dr.region_name,
            dr.demand_index
-    FROM service_centers_v sc
-    JOIN fulfillment_centers fc ON fc.center_id = sc.service_center_id
+    FROM fulfillment_centers fc
     CROSS JOIN demand_regions dr
     WHERE dr.region_name = 'Chicago Metro'
     ORDER BY SDO_GEOM.SDO_DISTANCE(fc.location, dr.boundary, 0.005, 'unit=KM')
@@ -225,7 +216,9 @@ After locating nearby service centers, summarize the response commitments attach
 
 ## Task 3: Open Spatial Studio from Database Actions
 
-Now move from SQL evidence to the visual map. You will use the `LLUSER` database user and password supplied for the workshop.
+Spatial Studio is Oracle Database's visual workspace for spatial data. It maps the same database-backed points and boundaries used by the SQL queries, so an operations leader can see service centers relative to a demand region without exporting location data to a separate mapping system.
+
+Use SQL when you need an exact, repeatable distance, ranking, filter, or SLA comparison. Use Spatial Studio when a map helps a reviewer understand location, coverage shape, and nearby-center context at a glance. In this workshop, it complements the New York Metro SQL result by showing the demand boundary and service-center points together; the SLA zones remain part of the SQL comparison rather than a layer in this project.
 
 1. Return to the **Database Actions Launchpad**.
 
@@ -245,7 +238,7 @@ Now move from SQL evidence to the visual map. You will use the `LLUSER` database
 
 ## Task 4: Create the New York Metro Service Coverage Project
 
-In this task, you create two database-backed datasets, add them to a map, filter the demand layer to New York Metro, and run a distance analysis to find nearby fulfillment centers.
+In this task, you create two database-backed datasets, add them to a map, filter the demand layer to New York Metro, and run a distance analysis to find nearby fulfillment centers. The map makes the coverage story easier to communicate, while the SQL from earlier tasks remains the audit-friendly source for exact distances and service-level comparisons.
 
 1. In Spatial Studio, click the **Datasets** icon in the left navigation, then click **Create dataset**.
 
@@ -359,7 +352,7 @@ Organizations can evaluate this pattern by tracking routing time, response time,
 
 ## Next Steps
 
-Congratulations on completing the spatial lab. You created a Spatial Studio coverage project and used spatial queries to connect demand regions, service centers, and response-time zones so operations teams can add geographic evidence to service decisions. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+Congratulations on completing the spatial lab. You created a Spatial Studio coverage project and used spatial queries to compare demand regions, service centers, and response-time zones so operations teams can decide where to route work first. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
