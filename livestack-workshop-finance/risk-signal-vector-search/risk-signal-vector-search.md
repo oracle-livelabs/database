@@ -15,13 +15,13 @@ After reviewing numeric exposure, analysts often need to search the language beh
 
 > - An **embedding** is a numerical profile of what text means. In this lab, product descriptions and risk-signal language can be embedded so similar finance ideas sit near each other mathematically, even when the wording is different.
 >
-> - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the finance rows they describe, so the meaning-based search stays connected to product names, exposure values, signal counts, and other business columns.
+> - A **vector** is the stored numerical form of an embedding. Oracle AI Database can store vectors beside the finance rows they describe, so the meaning-based search stays connected to product names, exposure values, signal counts, and other business columns.
 >
 > - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or signals best match a risk analyst's question.
 >
 > - **Semantic search** means searching by meaning instead of exact words. For example, a search for "financial crime screening update affecting Liquidity Investment Sweep, suspicious ACH activity, sanctions compliance, and case review" can find related text about suspicious ACH, sanctions, or AML review even when the wording is not identical. That is useful in finance because risk language often varies across regulatory notices, market bulletins, internal alerts, and product descriptions.
 >
-> - **ALL\_MINILM\_L12\_V2** is the embedding model used in this lab. A model is the trained pattern that turns text into embeddings. This model reads a phrase such as `mortgage pre-approval risk` and returns a vector that Oracle Database can compare with the stored finance vectors.
+> - **ALL\_MINILM\_L12\_V2** is the embedding model used in this lab. A model is the trained pattern that turns text into embeddings. This model reads a phrase such as `mortgage pre-approval risk` and returns a vector that Oracle AI Database can compare with the stored finance vectors.
 
 </details>
 
@@ -149,4 +149,4 @@ The analyst can find related products and signals even when the wording differs,
 
 * **Authors** - Pat Shepherd, Linda Foinding
 * **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

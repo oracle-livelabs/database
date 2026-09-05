@@ -29,7 +29,7 @@ This workshop shows the sequence from a risk question to a recorded review actio
 - **Maya turns findings into operational response.** She compares location, demand, and service commitments to decide where the bank can respond.
 - **Jessica closes the loop.** She uses the team's evidence to recommend a controlled review action and inspect its audit history.
 
-Throughout the workshop, you will see small arrows next to expandable sections. Select the arrow when you want extra context about a term, concept, or Oracle Database capability. These sections are closed by default so the main lab stays focused, but you can expand them whenever you want more explanation.
+Throughout the workshop, you will see small arrows next to expandable sections. Select the arrow when you want extra context about a term, concept, or Oracle AI Database capability. These sections are closed by default so the main lab stays focused, but you can expand them whenever you want more explanation.
 
 The example below shows an expandable section before and after it is opened.
 
@@ -40,7 +40,7 @@ The example below shows an expandable section before and after it is opened.
 
 > A converged database lets you work with several kinds of data and workloads in one database: rows and columns, JSON documents, vectors for AI search, graphs for relationships, spatial data for location, and machine learning models.
 >
-> In a fractured environment, each capability often lives in a different store or service. That can force teams to copy data, rebuild security rules, reconcile conflicting results, and explain why two systems disagree. Oracle Database is well suited for this finance scenario because the evidence, security model, SQL access, and application data stay connected.
+> In a fractured environment, each capability often lives in a different store or service. That can force teams to copy data, rebuild security rules, reconcile conflicting results, and explain why two systems disagree. Oracle AI Database is well suited for this finance scenario because the evidence, security model, SQL access, and application data stay connected.
 
 </details>
 
@@ -56,7 +56,7 @@ The final two labs complete that flow. In **Lab 8**, you ask a database question
 
 As you move through the labs, treat every query as part of the same operating record. The dashboard numbers are not isolated metrics. They point to products, transactions, signals, relationships, service coverage, predictions, and governed AI interactions that all remain connected inside Oracle Database.
 
-The image below is the Seer Bank Finance LiveStack welcome page. It introduces the application as one connected financial-intelligence journey: monitor risk, investigate exposure, route work, analyze capacity, and use predictive evidence. The workshop uses SQL to explain the database evidence behind those same application pages.
+The image below is the Seer Bank Finance LiveStack welcome page. It introduces one connected financial-intelligence journey: monitor risk, investigate exposure, add service context, anticipate what may happen next, ask questions, and take a controlled action. The workshop exposes the database evidence behind those application pages.
 
 ![Seer Bank Finance LiveStack welcome page](images/seer-bank-welcome.png " ")
 
@@ -91,4 +91,4 @@ Estimated Workshop Time: **95 minutes**
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

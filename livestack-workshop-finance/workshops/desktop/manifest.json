@@ -4,7 +4,7 @@
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Seer Bank finance intelligence story and workshop goals.",
+      "description": "Follow the Seer Bank journey from connected finance data to insight and controlled action.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "title": "Lab 2: Risk and Operations Dashboard",
-      "description": "Query dashboard KPIs, signal exposure, and product risk evidence.",
+      "description": "Use traceable dashboard evidence to focus risk and operations review.",
       "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
     },
     {
@@ -29,22 +29,22 @@
     },
     {
       "title": "Lab 4: Risk Signal Intelligence with AI Vector Search",
-      "description": "Run AI Vector Search over product and signal embeddings.",
+      "description": "Find related products and risk signals by meaning, not only keywords.",
       "filename": "../../risk-signal-vector-search/risk-signal-vector-search.md"
     },
     {
       "title": "Lab 5: Financial Crime Network with Property Graph",
-      "description": "Use Property Graph and SQL/PGQ to analyze fraud reach.",
+      "description": "Reveal connected activity that can focus a financial-crime investigation.",
       "filename": "../../financial-crime-network/financial-crime-network.md"
     },
     {
       "title": "Lab 6: Client Service and SLA Coverage with Oracle Spatial",
-      "description": "Use Oracle Spatial for service center and SLA region analysis.",
+      "description": "Add geographic evidence to service-routing and coverage decisions.",
       "filename": "../../service-sla-spatial/service-sla-spatial.md"
     },
     {
       "title": "Lab 7: Predictive Risk, Capacity, and Revenue with Oracle Machine Learning (OML)",
-      "description": "Inspect and score OML models inside Oracle Database.",
+      "description": "Score and compare models where the supporting finance data can be reviewed.",
       "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
     },
     {
@@ -59,7 +59,7 @@
     },
     {
       "title": "Conclusion",
-      "description": "Turn the finance labs into a practical converged database takeaway.",
+      "description": "Connect the nine hands-on labs to one practical finance outcome.",
       "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
     },
     {

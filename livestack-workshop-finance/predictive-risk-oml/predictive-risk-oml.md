@@ -13,7 +13,7 @@ Oracle Machine Learning (OML) is the database capability for building, storing, 
 <details>
 <summary><strong>Key terms: OML model, feature, classification, regression, clustering, and confidence</strong></summary>
 
-> - A **model** is a trained pattern that can score new or current data. In this lab, OML models estimate demand surge, revenue impact, or product grouping from finance records in Oracle Database.
+> - A **model** is a trained pattern that can score new or current data. In this lab, OML models estimate demand surge, revenue impact, or product grouping from finance records in Oracle AI Database.
 >
 > - A **feature** is an input value used by a model. Features can come from product activity, risk severity, transaction attributes, customer behavior, case-processing capacity, or revenue history. Good features translate raw finance records into signals the model can learn from.
 >
@@ -31,7 +31,7 @@ The first image below explains the Oracle Machine Learning (OML) scoring flow. P
 
 ![Finance Oracle Machine Learning scoring flow](images/finance-oml-scoring-flow.svg " ")
 
-The second image is the Predictive Risk, Capacity and Revenue page. It gives finance teams a business view of product risk, client segments, forecast quality, product cohorts, and case pressure. In this lab, capacity means the ability of teams or service centers to handle review, support, onboarding, dispute, fraud, or AML work. The SQL shows how Oracle Database inventories and scores these predictive results.
+The second image is the Predictive Risk, Capacity and Revenue page. It gives finance teams a business view of product risk, client segments, forecast quality, product cohorts, and case pressure. In this lab, capacity means the ability of teams or service centers to handle review, support, onboarding, dispute, fraud, or AML work. The SQL shows how Oracle AI Database inventories and scores these predictive results.
 
 ![Predictive Risk Capacity and Revenue page](images/predictive-risk-oml.png " ")
 
@@ -76,7 +76,7 @@ Begin by reviewing the persisted OML models available for scoring.
 
     > In a fractured environment, data teams often export sensitive finance records to a separate machine learning platform, score the data there, and then send results back to the application or dashboard. That creates copies, governance questions, and extra movement of sensitive data.
     >
-    > Oracle Machine Learning lets you score models inside Oracle Database. The model, data, SQL evidence, and business context stay close together, which is better for explainability and governance.
+    > Oracle Machine Learning lets you score models inside Oracle AI Database. The model, data, SQL evidence, and business context stay close together, which is better for explainability and governance.
 
     </details>
 
@@ -225,7 +225,7 @@ Now score demand risk and revenue directly in SQL so learners can see how deploy
 4. Compare actual target revenue to predicted revenue.
     Look for rows where predicted revenue is close to target revenue, then look for rows where the difference is larger. Close values show where the model estimate lines up with known outcomes. Larger gaps show where an analyst may want more context, such as unusual customer behavior, product mix, or fulfillment timing.
 
-    The demand query helps teams decide which products may need attention. The revenue query helps teams see whether a model estimate is useful for planning. Both queries score persisted models without moving sensitive finance records out of Oracle Database.
+    The demand query helps teams decide which products may need attention. The revenue query helps teams see whether a model estimate is useful for planning. Both queries score persisted models without moving sensitive finance records out of Oracle AI Database.
 
     🎯 **Interactive challenge: surface the largest forecast gaps.** Starting with the revenue query above, add a `revenue_gap` column that uses `ABS` to calculate the difference between `target_revenue` and the prediction. Then change the sort so the largest gaps appear first and return only five rows. Which order now leads the review queue, and what additional context would you seek?
 
@@ -380,6 +380,12 @@ Without AutoML, a data-science team would separately prepare the training data, 
 
     </details>
 
+## Business Outcome
+
+You scored models and compared candidate approaches where the supporting data can be reviewed with SQL. This pattern can shorten the path from model output to operational review and help teams keep predictions connected to the evidence behind them.
+
+Organizations can adapt the pattern to case demand, delinquency, loss-risk prioritization, or service planning. They can evaluate it by tracking scoring time, prediction error, model review time, and human override rates.
+
 ## Next Steps
 
 Congratulations on completing the Oracle Machine Learning lab. You inspected models, generated model scores, checked how often a prediction matched the demo label, and compared predicted revenue to target revenue. You also created a demand-surge AutoML experiment and compared candidate models by Balanced Accuracy and F1 Macro; use that comparison to select what deserves further review, not as an automatic staffing or capacity decision. For a deeper hands-on workshop focused on Oracle Machine Learning, open the [Oracle Machine Learning LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=922).
@@ -388,4 +394,4 @@ Congratulations on completing the Oracle Machine Learning lab. You inspected mod
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

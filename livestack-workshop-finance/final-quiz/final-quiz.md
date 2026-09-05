@@ -101,7 +101,7 @@ Estimated Time: **5 minutes**
     - It can approve or deny customer transactions.
     > The agent has only a lookup tool and a controlled escalation tool. The escalation function rechecks the threshold and writes an AGENT_ACTIONS audit row; it cannot change protected financial data.
 
-    Q: What is the main advantage of using Oracle Database as the converged foundation for this workshop?
+    Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
     - Each finance capability must use a separate specialized data store.
     * SQL, JSON, vector, graph, spatial, OML, Select AI, and agent evidence stay connected.
     - Application screenshots replace the need for database evidence.
@@ -115,4 +115,4 @@ Estimated Time: **5 minutes**
 
 * **Authors** - Pat Shepherd, Linda Foinding
 * **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026

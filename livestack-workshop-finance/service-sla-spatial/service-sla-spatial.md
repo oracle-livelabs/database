@@ -344,6 +344,12 @@ In this task, you create two database-backed datasets, add them to a map, filter
 
     ![Save the Spatial Studio project as New York Metro Service Coverage](images/spatial-save-project.png " ")
 
+## Business Outcome
+
+You used location data to identify nearby service centers and interpret response-time coverage around demand regions. This pattern can help operations teams add geographic evidence to routing and service planning.
+
+Organizations can evaluate this pattern by tracking routing time, response time, geographic coverage gaps, and SLA attainment. A complete operating decision would combine the spatial result with current capacity and eligibility data.
+
 ## Next Steps
 
 Congratulations on completing the spatial lab. You created a Spatial Studio coverage project and used spatial queries to compare demand regions, service centers, and response-time zones so operations teams can decide where to route work first. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
@@ -352,4 +358,4 @@ Congratulations on completing the spatial lab. You created a Spatial Studio cove
 
 * **Authors** - Linda Foinding, Principal Database Product Manager
 * **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd, 
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
