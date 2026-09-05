@@ -57,6 +57,5 @@
   <text x="256" y="256" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#2b2726">Oracle LiveLabs</text>
   <path d="M197 283 C236 276 276 276 315 283" fill="none" stroke="#7f435f" stroke-width="3" opacity="0.65"/>
 
-  <text x="256" y="344" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" fill="#ffffff">FINANCE WORKSHOP</text>
-  <text x="256" y="382" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Oracle AI Database</text>
+  <text x="256" y="344" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" fill="#ffffff">ORACLE AI Database</text>
 </svg>
