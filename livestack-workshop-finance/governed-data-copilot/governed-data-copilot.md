@@ -153,4 +153,4 @@ Ground a natural-language finance question in visible SQL so the answer can be r
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle AI Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

@@ -307,4 +307,4 @@ You can now ask a database question with Select AI and review the SQL behind the
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

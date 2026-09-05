@@ -2,10 +2,14 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
+Estimated Time: 1 minutes
 
 You have now walked through the core Seer Bank finance decision path with Jessica, Jordan, Sam, Priya, and Maya: understand the data foundation, explain dashboard risk, inspect transaction evidence, search risk language by meaning, follow financial-crime relationships, evaluate service coverage, score predictive models, ask a database question with Select AI, and record a controlled review action with a Select AI Agent.
+
+### Objectives
+
+* Review key workshop takeaways
+* Understand complete business value
 
 The key takeaway: you can now explain how one finance question can move across several data types without breaking the chain of evidence. Oracle AI Database is not just where records sit; it is the governed place where risk, fraud, compliance, service, and analytics teams can ask different questions about the same finance facts.
 
@@ -17,13 +21,8 @@ At Seer Bank, you followed a decision path that was deliberate, connected, and r
 
 You saw the value of a governed Oracle AI Database foundation: teams could make timely decisions without losing the security, context, and audit trail needed to stand behind them.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026
