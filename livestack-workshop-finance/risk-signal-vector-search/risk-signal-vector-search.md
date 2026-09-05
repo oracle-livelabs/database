@@ -149,4 +149,4 @@ The analyst can find related products and signals even when the wording differs,
 
 * **Authors** - Pat Shepherd, Linda Foinding
 * **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

@@ -115,4 +115,4 @@ Estimated Time: **5 minutes**
 
 * **Authors** - Pat Shepherd, Linda Foinding
 * **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

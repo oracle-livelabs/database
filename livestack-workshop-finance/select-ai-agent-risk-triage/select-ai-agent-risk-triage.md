@@ -522,4 +522,4 @@ You can now let a constrained Select AI Agent carry out a controlled review acti
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

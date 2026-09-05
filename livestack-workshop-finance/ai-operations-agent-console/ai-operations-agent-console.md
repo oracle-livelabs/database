@@ -153,4 +153,4 @@ Log an agent action and inspect the audit trail that confirms the action was rec
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle AI Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

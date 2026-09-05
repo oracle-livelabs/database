@@ -358,4 +358,4 @@ Congratulations on completing the spatial lab. You created a Spatial Studio cove
 
 * **Authors** - Linda Foinding, Principal Database Product Manager
 * **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd, 
-* **Last Updated By/Date** - Oracle AI Database Product Management, September 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026
