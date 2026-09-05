@@ -17,13 +17,8 @@ At Seer Bank, you followed a decision path that was deliberate, connected, and r
 
 You saw the value of a governed Oracle AI Database foundation: teams could make timely decisions without losing the security, context, and audit trail needed to stand behind them.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026
