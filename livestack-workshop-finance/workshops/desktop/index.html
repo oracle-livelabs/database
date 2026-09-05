@@ -67,6 +67,24 @@
         </div>
     </footer>
 
+    <script>
+      (function () {
+        function hideConclusionTaskToggle() {
+          var lab = new URLSearchParams(window.location.search).get('lab');
+          var toggle = document.getElementById('btn_toggle');
+          if (lab === 'conclusion-business-outcomes' && toggle) {
+            toggle.style.display = 'none';
+            toggle.setAttribute('aria-hidden', 'true');
+          }
+        }
+
+        var content = document.getElementById('module-content');
+        if (content) {
+          new MutationObserver(hideConclusionTaskToggle).observe(content, { childList: true, subtree: true });
+        }
+        hideConclusionTaskToggle();
+      }());
+    </script>
 
 </body>
 </html>
