@@ -7,7 +7,7 @@ badge: images/state-local-government-badge.svg
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect each Colorado resident-services outcome to the database results and supporting records that Jessica, Jordan, Sam, Priya, and Maya use in the workshop.
+Use this scored quiz to check whether you can connect each Colorado resident-services outcome to the database results and supporting records used by Jessica, Jordan, Sam, Priya, and Maya.
 
 ### Objectives
 
@@ -19,7 +19,7 @@ Estimated Time: **5 minutes**
 
 ## Task 1: Answer the quiz questions
 
-Use the quiz now to check whether you can connect each database result to the public-service decision it supports. As you answer, inspect how the foundation, request, demand, partner, location, model, and governed-answer tasks help Jessica's team move from an early warning to a reviewable response.
+Use the quiz to check whether you can connect each database result to the public-service decision it supports. As you answer, consider how the foundation, request, demand, partner, location, model, and governed-answer tasks move Jessica's team from an early warning to a reviewable response.
 
 1. Complete the scored quiz.
 
@@ -101,7 +101,7 @@ Use the quiz now to check whether you can connect each database result to the pu
 
 ### What have I achieved when the lab ends?
 
-You have checked that you can explain what each result means, why it appears at that point in the investigation, and how it helps the Colorado team make a better-informed review decision.
+You checked that you can explain what each result means, why it appears at that point in the investigation, and how it helps the Colorado team make a better-informed review decision.
 
 ## Acknowledgements
 

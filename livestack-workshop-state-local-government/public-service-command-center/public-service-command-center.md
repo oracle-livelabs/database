@@ -4,7 +4,7 @@
 
 **Jessica**, the State Services Risk Analyst, begins with an early warning: the **Colorado Medicaid Eligibility Error Rate** is **2.7%**, approaching but still within the stakeholder-provided **3.0%** threshold. The measure tells Jessica to investigate, but it does not identify the requests, regions, or services that deserve attention first.
 
-You support Jessica as the service operations analyst, while **Maya**, the Resident Services Operations Leader, prepares the follow-up response. In this lab, you recreate the database-backed operating measures around that warning and then drill into the request rows behind them. Application configuration supplies the eligibility rate, so the learner SQL does not claim to calculate it.
+You support Jessica as the service operations analyst while **Maya**, the Resident Services Operations Leader, prepares the follow-up response. In this lab, you calculate the database-backed operating measures around the warning, then drill into the request rows behind them. Application configuration supplies the eligibility rate, so the learner SQL does not calculate it.
 
 <details>
 <summary><strong>Key terms: early warning, key performance indicator, urgency, and drill-through</strong></summary>
@@ -39,18 +39,18 @@ Estimated Time: **10 minutes**
 
 | Step | State and local government focus |
 | --- | --- |
-| Business Problem | Jessica needs to know where service pressure may narrow the operating margin for Colorado. |
+| Business Problem | Jessica must find where service pressure may narrow Colorado's operating margin. |
 | Technical Challenge | Dashboard summaries must lead to reviewable request and service rows. |
 | Persona Focus | Jessica interprets the warning; Maya plans the service response; Jordan provides the database results behind it. |
 | What You Will Do | Calculate request KPIs and inspect the highest-urgency work. |
-| Database Capability | Converged SQL aggregates and drills through the same SLED semantic view. |
+| Database Capability | SQL aggregates and drills through the same SLED semantic view. |
 | Outcome | Jessica can prioritize review without treating a screenshot as the source of truth. |
 
 **Persona focus:** You join Jessica, Maya, and Jordan as you connect statewide measures to named services, regions, and requests.
 
 ## Task 1: Calculate statewide operating measures
 
-Jessica needs to understand the pressure behind the early warning before Maya can plan a response. Calculate the statewide KPI row now and inspect total requests, open work, urgent work, and service-value exposure; those measures show where the team should focus its review.
+Jessica needs to understand the pressure behind the early warning before Maya plans a response. Calculate the statewide KPI row. Then inspect total requests, open work, urgent work, and service-value exposure to see where the team should focus.
 
 Start with one summary row so Jessica can see workload size, urgency, and service-value exposure before opening individual requests:
 
@@ -87,15 +87,13 @@ Start with one summary row so Jessica can see workload size, urgency, and servic
 
 2. Interpret the measures.
 
-    `Total Requests` establishes workload size. `Open Requests` shows work still moving through the lifecycle. `Urgent Requests` identifies rows with an urgency score of at least 80, and `Service Value Exposure` supplies a planning proxy for the public-service value tied to the requests.
-
     `Total Requests` establishes workload size. `Open Requests` shows work still moving through the lifecycle. `Urgent Requests` identifies rows with an **urgency score of at least 80**, and `Service Value Exposure` supplies a planning proxy for the public-service value tied to the requests.
 
     These measures do not explain why the eligibility rate is **2.7%**. They tell Jessica which operating details to review around that early warning.
 
 ## Task 2: Drill into the highest-urgency requests
 
-The KPI row identifies pressure, but it cannot tell Jessica which service request needs attention first. Drill into the highest-urgency rows now and inspect the named service, region, center, and urgency score so Maya has a reviewable queue for the next conversation.
+The KPI row identifies pressure, but it cannot tell Jessica which request needs attention first. Drill into the highest-urgency rows. Inspect the service, region, center, and urgency score to give Maya a queue for the next conversation.
 
 Move from the summary to named services, regions, and centers so the operating pressure becomes an actionable review queue.
 
@@ -128,7 +126,7 @@ Move from the summary to named services, regions, and centers so the operating p
 
 2. Review the rows as an operations queue.
 
-    Jessica can now see which service, region, and access center sits behind each urgent request. The result supports a concrete next step: inspect one regional request, then compare its details with resident demand, partner, geography, and capacity information.
+    Jessica can now see the service, region, and access center behind each urgent request. Next, inspect one regional request, then compare its details with resident demand, partner, geography, and capacity information.
 
     The application view below highlights services under pressure. Use it to connect the SQL queue to the page Jessica reviews.
 

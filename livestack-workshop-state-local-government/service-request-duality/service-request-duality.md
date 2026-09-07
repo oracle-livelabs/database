@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After the **Command Center** review, **Sam**, the Public-Service Application Developer, needs one complete service request that applications and analysts can use without maintaining separate copies. The application wants a document with a request header and nested service lines, while operations teams need governed relational rows for filtering, joins, and review.
+After the **Command Center** review, **Sam**, the Public-Service Application Developer, needs one complete service request that applications and analysts can use without maintaining separate copies. The application needs a document with a request header and nested service lines. Operations teams need relational rows for filtering, joins, and review.
 
 You work with **Jordan**, the Database Administrator, and support Jessica's review. In this lab, you read an existing request document, expand the document contract to accept inserts, create and update a reserved workshop request through JSON, and verify the same changes in relational rows.
 
@@ -36,9 +36,9 @@ The inherited physical name `ORDERS_DV` remains in the current stack. The applic
 ### Objectives
 
 - Read a request as one JSON document with nested service lines.
-- Inspect and expand the document-write capabilities of `ORDERS_DV`.
+- Inspect and expand the document-write options in `ORDERS_DV`.
 - Insert and update a reserved JSON request, then verify the relational rows.
-- Project document fields into SQL and join governed resident and service context.
+- Project document fields into SQL and join resident and service context.
 - Explain how JSON Relational Duality avoids another copy of sensitive service data.
 
 Estimated Time: **18 minutes**
@@ -51,14 +51,14 @@ Estimated Time: **18 minutes**
 | Technical Challenge | Teams need JSON writes without duplicating requests or weakening relational controls. |
 | Persona Focus | Sam serves the application contract; Jordan preserves relational governance for Jessica's review. |
 | What You Will Do | Read, enable, insert, update, verify, and project a document through `ORDERS_DV`. |
-| Database Capability | JSON Relational Duality and SQL/JSON provide document and relational access over the same governed rows. |
+| Database Capability | JSON Relational Duality and SQL/JSON provide document and relational access to the same rows. |
 | Outcome | One JSON insert creates root and child rows, and one JSON status update changes the root while preserving the related service-line details. |
 
-**Persona focus:** You join Sam and Jordan as they show Jessica that an application document contract can preserve relational keys, joins, and governance.
+**Persona focus:** You join Sam and Jordan as they show Jessica that an application document contract can preserve relational keys, joins, and controls.
 
 ## Task 1: Inspect a document-shaped service request
 
-Sam needs to see the current request shape before changing how the application writes it. Inspect one nested JSON document now and look for its header and service lines; this shows Sam and Jessica that the application view and the governed relational records describe the same request.
+Sam needs to see the current request shape before changing how the application writes it. Inspect one nested JSON document. Its header and service lines show Sam and Jessica that the application view and relational records describe the same request.
 
 Start with the request as the application consumes it so the document shape is clear before you change its write contract.
 
@@ -97,7 +97,7 @@ Start with the request as the application consumes it so the document shape is c
 
 ## Task 2: Enable document inserts and updates
 
-Before Sam creates a request through JSON, Jordan needs to confirm which changes the duality view currently permits. Inspect the view capabilities, enable the required insert and update behavior, and then check the updated capabilities so the team knows the document contract is ready for the controlled exercise.
+Before Sam creates a request through JSON, Jordan confirms which changes the duality view permits. Inspect the current settings, enable inserts and updates, then check the settings again. The team can then use the document contract in this controlled exercise.
 
 The loader-created `ORDERS_DV` allows updates to existing documents but does not allow an application to insert a new request document. Inspect that baseline before expanding the contract.
 
@@ -181,7 +181,7 @@ The loader-created `ORDERS_DV` allows updates to existing documents but does not
 
 ## Task 3: Create and update a JSON service request
 
-With the document contract ready, Sam can create the reserved request without creating a separate document copy. Inspect the returned JSON and the matching relational rows after the insert and update; this lets Jessica review the same service request that an application would use.
+With the document contract ready, Sam can create the reserved request without a separate document copy. Inspect the returned JSON and matching relational rows after the insert and update. Jessica can then review the same request that an application uses.
 
 The reserved identifiers in this task are outside the seed-data range. The committed rows remain for the current workshop reservation and disappear when the environment is rebuilt. The guard prevents a duplicate insert, but a repeated run preserves the latest committed status.
 
@@ -246,7 +246,7 @@ The reserved identifiers in this task are outside the seed-data range. The commi
 
 3. Retrieve the JSON write as relational rows.
 
-    This query joins root and child tables to governed resident, service, and center views. One document insert should produce one request row and one line-item row.
+    This query joins root and child tables to resident, service, and center views. One document insert should produce one request row and one line-item row.
 
     ```sql
     <copy>
@@ -351,9 +351,9 @@ The reserved identifiers in this task are outside the seed-data range. The commi
 
 ## Task 4: Project document fields into SQL
 
-After the application change, Jessica still needs a business-readable way to investigate the request in SQL. Project the document fields and inspect the request status, resident, and service context now; this confirms that Sam's application document remains connected to governed analysis.
+After the application change, Jessica still needs a business-readable way to investigate the request in SQL. Project the document fields and inspect the request status, resident, and service context. The result shows that Sam's application document remains available for SQL analysis.
 
-Project the learner-created document into SQL columns and join it to governed resident and service context.
+Project the learner-created document into SQL columns and join it to resident and service context.
 
 1. Run the projection query.
 
@@ -392,11 +392,11 @@ Project the learner-created document into SQL columns and join it to governed re
 
 ## Next Steps
 
-Congratulations on completing the JSON Relational Duality lab. You expanded a JSON API contract, created and updated a service request as a document, and inspected the same governed data as relational rows. For a deeper hands-on workshop, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
+Congratulations on completing the JSON Relational Duality lab. You expanded a JSON API contract, created and updated a service request as a document, and inspected the same data as relational rows. For a deeper hands-on workshop, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ### What have I achieved when the lab ends?
 
-You have read, enabled, created, updated, and queried one service request through the same governed source. Sam can give applications a complete request document while Jessica and Jordan continue to work with the same governed rows.
+You have read, enabled, created, updated, and queried one service request from the same source. Sam can give applications a complete request document while Jessica and Jordan continue to work with the same relational rows.
 
 ## Acknowledgements
 

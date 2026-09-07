@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Resident-service resolution can cross program, county, nonprofit, and regional boundaries. **Maya**, the Resident Services Operations Leader, needs to know which organizations connect to **Benefits Eligibility** and which two-step handoffs can extend the response.
+Resolving a resident-service issue can cross program, county, nonprofit, and regional boundaries. **Maya**, the Resident Services Operations Leader, needs to know which organizations connect to **Benefits Eligibility** and which two-step handoffs can extend the response.
 
 You work with Maya and **Jordan**, the Database Administrator. In this lab, you query the `INFLUENCER_NETWORK` property graph and translate inherited physical object names into public-service meaning:
 - `INFLUENCERS` represent community partners and signal sources.
@@ -25,11 +25,11 @@ You work with Maya and **Jordan**, the Database Administrator. In this lab, you 
 
 </details>
 
-The diagram shows the path from a public program to a partner, then through one or two relationship hops to other response organizations.
+The diagram follows a public program to a partner, then one or two relationship hops to other response organizations.
 
 ![Community partner graph investigation flow](images/community-partner-graph-flow.svg " ")
 
-The application image below is the Community Partner Network Graph. It gives the coordination analyst a broad view of partner reach, relationship types, and multi-hop paths across the full demonstration network. The SQL in this lab narrows that dense network to a named program and reviewable one-hop and two-hop rows.
+The Community Partner Network Graph gives a coordination analyst a broad view of partner reach, relationship types, and multi-hop paths in the full demonstration network. This lab narrows that network to one named program and clear one-hop and two-hop SQL rows.
 
 ![Community Partner Network Graph page](images/community-partner-network.png " ")
 
@@ -51,7 +51,7 @@ Estimated Time: **20 minutes**
 | --- | --- |
 | Business Problem | Service resolution may require several organizations and handoffs. |
 | Technical Challenge | Flat lists do not explain why partners connect or how a handoff continues. |
-| Persona Focus | Maya coordinates the response; Jordan keeps partner relationships queryable in the governed database. |
+| Persona Focus | Maya coordinates the response; Jordan keeps partner relationships queryable in the database. |
 | What You Will Do | Use `GRAPH_TABLE` to query one-hop and two-hop patterns. |
 | Database Capability | Oracle Property Graph and SQL Property Graph Queries expose relationship paths. |
 | Outcome | Maya can explain which partners are relevant and how coordination can proceed. |
@@ -60,9 +60,9 @@ Estimated Time: **20 minutes**
 
 ## Task 1: Find partners connected to Benefits Eligibility
 
-Maya needs to know which organizations are directly connected to Benefits Eligibility before she starts outreach. Inspect the one-hop partner rows and their relationship strengths now; they give Maya a focused set of organizations to review with Jessica instead of an unstructured list.
+Before Maya starts outreach, she needs to know which organizations connect directly to Benefits Eligibility. Inspect the one-hop rows and their relationship strengths. They give Maya and Jessica a focused set of organizations to review instead of an unstructured list.
 
-Start with the direct Benefits Eligibility partner connections so Maya can see the first organizations involved in the response network.
+Start with the direct Benefits Eligibility connections. Maya can then see the first organizations in the response network.
 
 1. Run the program-to-partner graph query.
 
@@ -110,7 +110,7 @@ Start with the direct Benefits Eligibility partner connections so Maya can see t
 
 2. Interpret the one-hop paths.
 
-    The result explains who starts the handoff, who receives it, and how strong the recorded coordination relationship is. Maya can prioritize the strongest path while still seeing the program context.
+    The result names the organization that starts the handoff, the organization that receives it, and the recorded coordination strength. Maya can prioritize the strongest path while keeping the program context in view.
 
 3. 🎯 **Interactive challenge: Focus on stronger coordination paths.**
 
@@ -159,7 +159,7 @@ Start with the direct Benefits Eligibility partner connections so Maya can see t
 
 ## Task 2: Trace two-hop coordination paths
 
-Direct partners may not show the full response network, so Maya now needs to see who can extend a handoff through an intermediary. Inspect the source, intermediary, destination, and path strength in the two-hop result; this gives her a concrete coordination path to discuss, not an automatic referral decision.
+Direct partners may not reveal the full response network. Trace a handoff through an intermediary and inspect the source, intermediary, destination, and path strength. The result gives Maya a concrete coordination path to discuss, not an automatic referral decision.
 
 Trace two-hop paths to find which intermediary partners can connect the starting organization to a broader response network.
 
@@ -200,7 +200,7 @@ Trace two-hop paths to find which intermediary partners can connect the starting
 
 2. Use the path to support a coordination decision.
 
-    A two-hop result does not automatically authorize a referral. It tells Maya which intermediate organization connects the starting partner to a broader response network. That path supports a targeted conversation instead of a blanket outreach campaign.
+    A two-hop result does not authorize a referral. It identifies the intermediate organization that links the starting partner to a broader response network. Maya can use that path for a targeted conversation rather than a blanket outreach campaign.
 
     The **Graph Query Explorer** below shows the application form of the same SQL/PGQ pattern, so the learner can connect the worksheet query to the experience shown in the application.
 
@@ -208,7 +208,7 @@ Trace two-hop paths to find which intermediary partners can connect the starting
 
 ## Task 3: Open Graph Studio
 
-The SQL/PGQ tasks gave Maya repeatable rows to review. Now open Graph Studio to see the same `INFLUENCER_NETWORK` relationships as an interactive map. SQL gives a precise result set; Graph Studio makes the program, partner, and handoff paths easier to explore and explain.
+The SQL/PGQ tasks returned repeatable rows. Now open Graph Studio to explore the same `INFLUENCER_NETWORK` relationships as an interactive map. SQL gives a precise result set; Graph Studio makes the program, partner, and handoff paths easier to explore and explain.
 
 1. From Database Actions, open **Development** > **Graph Studio**.
 
@@ -220,7 +220,7 @@ The SQL/PGQ tasks gave Maya repeatable rows to review. Now open Graph Studio to 
 
 ## Task 4: Download and import the State and Local Government notebook
 
-The supplied `.dsnb` file is a native Graph Studio notebook. It combines beginner-friendly explanation with runnable graph paragraphs and visualizations, so every learner starts from the same documented State and Local Government graph.
+The supplied `.dsnb` file is a Graph Studio notebook with explanations, runnable graph paragraphs, and visualizations. It gives every learner the same documented State and Local Government graph.
 
 1. Download [state-local-government-community-partner-graph.dsnb](files/state-local-government-community-partner-graph.dsnb).
 
@@ -242,7 +242,7 @@ The supplied `.dsnb` file is a native Graph Studio notebook. It combines beginne
 
 ## Task 5: Run and interpret the Graph Studio notebook
 
-The notebook uses the same `INFLUENCER\_NETWORK` graph as the SQL exercises, but presents the connections as a visual investigation map. In this graph model, a `brand` vertex represents a public-service program and an `influencer` vertex represents a community partner. The visual result supports a coordination conversation and does not authorize a referral.
+The notebook uses the same `INFLUENCER\_NETWORK` graph as the SQL exercises, but draws the connections as an investigation map. Here, a `brand` vertex represents a public-service program and an `influencer` vertex represents a community partner. The visual result supports a coordination conversation; it does not authorize a referral.
 
 1. Read the notebook introduction and **Visual exercise 1: direct partner handoffs**, then run the SQL paragraph below it with its play button. The `MATCH` pattern starts at **Benefits Eligibility**, follows a `promotes` relationship to a source partner, and then follows a `connects_to` handoff to a connected partner. The `WHERE` clause anchors the search on one program, and `COLUMNS` supplies the vertex and edge identifiers that Graph Studio draws.
 
@@ -266,7 +266,7 @@ The notebook uses the same `INFLUENCER\_NETWORK` graph as the SQL exercises, but
 
 ### What have I achieved when the lab ends?
 
-You have traced direct and two-hop partner relationships in SQL and explored the same paths in Graph Studio. Maya can see direct and indirect partner paths, then start a focused coordination conversation with the right organizations.
+You traced direct and two-hop partner relationships in SQL and explored the same paths in Graph Studio. Maya can see direct and indirect partner paths, then begin a focused coordination conversation with the right organizations.
 
 ## Acknowledgements
 

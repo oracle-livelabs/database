@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database** environment, and prepare SQL Worksheet for the public-service exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each query runs as the workshop user against the prepared State and Local Government schema.
+Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database** environment, and prepare SQL Worksheet for the public-service exercises. Like getting the right desk, badge, and notebook before an investigation, this setup ensures that each query runs as the workshop user against the prepared State and Local Government schema.
 
 You will work with the Colorado public-service team throughout the workshop: **Jessica**, the State Services Risk Analyst; **Jordan**, the Database Administrator; **Sam**, the Public-Service Application Developer; **Priya**, the Government AI Engineer; and **Maya**, the Resident Services Operations Leader. These roles give each lab a practical decision owner and a clear reason to inspect the database result.
 
@@ -30,9 +30,9 @@ In this lab, you will:
 
 ## Task 1: Launch the LiveLabs environment
 
-You need the prepared workshop environment before any public-service result is meaningful. Launch it now and keep the reservation details visible, because they give Jordan's team the correct `LLUSER` connection for the records you will inspect in every later lab.
+You need the prepared workshop environment before you can trust a public-service result. Launch it now and keep the reservation details visible. They provide the `LLUSER` connection for every later lab.
 
-Start from the **LiveLabs** reservation so **Database Actions** opens with the correct workshop resources and credentials. This puts you in the governed environment used for the rest of the Colorado resident-services investigation:
+Start from the **LiveLabs** reservation so **Database Actions** opens with the correct workshop resources and credentials:
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -48,7 +48,7 @@ Start from the **LiveLabs** reservation so **Database Actions** opens with the c
 
 ## Task 2: Open SQL Worksheet
 
-Now that you have the reservation details, open SQL Worksheet so you can run and inspect the same database results behind the public-service screens. Confirm that you are connected as `LLUSER`; this gives Jessica, Jordan, Sam, Priya, and Maya one prepared place to review every result in the workshop.
+With the reservation details available, open SQL Worksheet to run and inspect the database results behind the public-service screens. Confirm that you are connected as `LLUSER`. Jessica, Jordan, Sam, Priya, and Maya use this prepared workspace to review every workshop result.
 
 Open **SQL Worksheet** as the workshop user before running the public-service queries. This is where you ask each business question in SQL and immediately review the records and results returned by **Oracle AI Database**:
 

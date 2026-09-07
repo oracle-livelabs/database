@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica has reviewed current requests, resident signals, partner paths, and geographic capacity. **Priya**, the Government AI Engineer, now prepares predictive signals that help identify which public services may face rising demand, while Maya plans the operational response.
+Jessica has reviewed current requests, resident signals, partner paths, and geographic capacity. **Priya**, the Government AI Engineer, now prepares predictive signals to identify public services that may face rising demand. Maya uses that context to plan the operational response.
 
 You work with Priya as the analytics engineer supporting Jessica and Maya. In this lab, you inventory the four **State and Local Government Oracle Machine Learning (OML) models**, score service-demand and service-value models, and compare predicted demand labels with deterministic training labels.
 
@@ -23,11 +23,11 @@ You work with Priya as the analytics engineer supporting Jessica and Maya. In th
 
 </details>
 
-The diagram follows governed service data into OML models and then back to a planning decision.
+The diagram shows governed service data moving through OML models into a planning decision.
 
 ![Public-service OML scoring flow](images/demand-capacity-oml-flow.svg " ")
 
-The application image below is the Demand and Capacity Analytics page. It gives Jessica and the analytics engineer a view of persisted model runs, active models, demand-risk scores, resident segments, service-value forecasts, clusters, and capacity information. The SQL in this lab exposes the deployed model catalog and classification scores directly.
+The application image below shows the Demand and Capacity Analytics page. Jessica and the analytics engineer can inspect persisted model runs, active models, demand-risk scores, resident segments, service-value forecasts, clusters, and capacity. The SQL in this lab directly exposes the deployed model catalog and classification scores.
 
 ![Demand and Capacity Analytics page](images/demand-capacity-analytics.png " ")
 
@@ -57,20 +57,20 @@ Estimated Time: **25 minutes**
 
 ## Task 1: Inventory the active OML models
 
-Priya needs to know which persisted models are available before Jessica uses any prediction in a planning discussion. Inspect the model names, functions, and algorithms now; this shows the team what each model can contribute and keeps the later scores tied to a visible database object.
+Before Jessica uses a prediction in a planning discussion, Priya needs to identify the available persisted models. Inspect their names, functions, and algorithms. This keeps later scores tied to a visible database object.
 
-Confirm which models are available before using their scores, so Jessica knows the prediction comes from a persisted model in the workshop schema.
+Confirm the available models before using their scores. Jessica can then see that each prediction comes from a persisted workshop-schema model.
 
 1. Run the model inventory query.
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet).
 
-    `USER_MINING_MODELS` lists OML models owned by `LLUSER`. The model names identify the public-service decision, while `MINING_FUNCTION` and `ALGORITHM` explain what kind of result the model produces.
+    `USER_MINING_MODELS` lists OML models owned by `LLUSER`. Model names identify the public-service decision. `MINING_FUNCTION` and `ALGORITHM` identify the result type.
 
     <details>
     <summary><strong>Why this matters: model results remain in the database</strong></summary>
 
-    > Exporting service records to another machine learning platform creates more data movement and another governance boundary. OML keeps the model, input rows, SQL score, and business context close together.
+    > Exporting service records to another machine learning platform adds data movement and a governance boundary. OML keeps the model, input rows, SQL score, and business context together.
 
     </details>
 
@@ -96,17 +96,17 @@ Confirm which models are available before using their scores, so Jessica knows t
 
 2. Connect each model to a planning job.
 
-    The classification model predicts service-demand state. The regression model estimates service value. The clustering models group residents and service signals into similar operating patterns. The next two tasks score the two predictive models; the clustering models remain available for segmentation work.
+    The classification model predicts service-demand state, and the regression model estimates service value. The clustering models group residents and service signals into operating patterns. The next two tasks score the predictive models; the clustering models remain available for segmentation work.
 
 ## Task 2: Score public-service demand
 
-Jessica needs an early view of which services may face a demand surge, but the label must be read beside its confidence and service name. Score the services now and inspect the predicted label and probability; Priya can use the result to help Jessica choose which services enter a human planning review.
+Jessica needs an early view of services that may face a demand surge, but she must read each label with its confidence and service name. Score the services and inspect the predicted label and probability. Priya can then help Jessica choose which services enter human planning review.
 
 Score each service as `SURGE` or `STABLE` so Jessica can prioritize public services for demand review.
 
 1. Run the classification query.
 
-    `OML_DEMAND_TRAINING_V` is a saved query that packages consistent model features for each service. `PREDICTION` returns the predicted label, and `PREDICTION_PROBABILITY` returns confidence. The outer query joins `SLED_PUBLIC_SERVICES_V` so the result shows business names rather than only IDs.
+    `OML_DEMAND_TRAINING_V` is a saved query that supplies consistent model features for each service. `PREDICTION` returns the label, and `PREDICTION_PROBABILITY` returns confidence. The outer query joins `SLED_PUBLIC_SERVICES_V` to show business names instead of IDs alone.
 
     ```sql
     <copy>
@@ -134,15 +134,15 @@ Score each service as `SURGE` or `STABLE` so Jessica can prioritize public servi
 
     **Expected output: Service Demand Scores**
 
-    The development ADB produced the following scores from the deterministic workshop data and tuned compact training configuration.
+    The development ADB produced these scores from the deterministic workshop data and tuned compact training configuration.
 
     ![SQL Worksheet result showing public-service demand scores and confidence](images/sql-service-demand-scores.png " ")
 
 2. Interpret label and confidence together.
 
-    A `SURGE` label helps Jessica prioritize services for capacity review. Confidence ranks model support for that label. Here, confidence of `1` reflects fit on the compact training rows being scored; it is not holdout accuracy or certainty about future demand. The result does not authorize an intervention or establish that service capacity caused the eligibility warning.
+    A `SURGE` label helps Jessica prioritize services for capacity review. Confidence ranks model support for the label. Here, confidence of `1` reflects fit on the compact training rows being scored. It is not holdout accuracy or certainty about future demand. The result does not authorize an intervention or establish that service capacity caused the eligibility warning.
 
-    The model output supports planning only when Jessica combines it with the capacity, geography, and request details from earlier labs.
+    Jessica should use the model output with the capacity, geography, and request details from earlier labs.
 
 3. 🎯 **Interactive challenge: Build a demand-review queue.**
 
@@ -155,7 +155,7 @@ Score each service as `SURGE` or `STABLE` so Jessica can prioritize public servi
     <details>
     <summary><strong>Challenge answer: Review predicted-surge services with operating context</strong></summary>
 
-    > The predicted-surge services should enter human review, where Jessica can compare them with request, resident-signal, geographic, and capacity details. A predicted label and its confidence support prioritization; they are not certainty or authority to intervene. Oracle AI Database keeps the model, feature rows, scores, and operational context together, so teams can investigate without copying sensitive service data into disconnected systems.
+    > The predicted-surge services should enter human review. Jessica can compare them with request, resident-signal, geographic, and capacity details. A predicted label and confidence support prioritization; they are not certainty or authority to intervene. Oracle AI Database keeps the model, feature rows, scores, and operational context together, so teams can investigate without copying sensitive service data into disconnected systems.
 
     If you need the runnable solution, use this query:
 
@@ -188,13 +188,13 @@ Score each service as `SURGE` or `STABLE` so Jessica can prioritize public servi
 
 ## Task 3: Estimate service-request value
 
-After identifying possible demand pressure, Jessica needs one more planning input about the relative scale of the affected requests. Inspect the estimated value beside each recognizable service request now; Maya can use the comparison to prepare a more informed capacity conversation, not to make an automatic funding decision.
+After identifying possible demand pressure, Jessica needs one more planning input: the relative scale of affected requests. Inspect the estimated value beside each recognizable service request. Maya can use the comparison to prepare a capacity conversation, not to make an automatic funding decision.
 
-Use the regression model to estimate the value associated with each recognizable service request. Jessica can use this result as one planning input when deciding where a demand surge may have the greatest operational impact.
+Use the regression model to estimate the value of each recognizable service request. Jessica can use this result as one planning input when considering where a demand surge may have the greatest operational impact.
 
 1. Run the regression scoring query.
 
-    `OML_COMMITMENT_VALUE_TRAINING_V` supplies a consistent feature row for each service request. In a regression query, `PREDICTION` returns a number rather than a category. The aliases in this query use public-service language while preserving the underlying governed data structure.
+    `OML_COMMITMENT_VALUE_TRAINING_V` supplies a consistent feature row for each service request. In a regression query, `PREDICTION` returns a number, not a category. The aliases use public-service language while preserving the governed data structure.
 
     ```sql
     <copy>
@@ -218,17 +218,17 @@ Use the regression model to estimate the value associated with each recognizable
 
 2. Keep the result in context.
 
-    A regression estimate helps compare the relative scale of service requests. It does not determine funding, eligibility, or a resident outcome. OML performs this score beside the governed input rows inside Oracle Database, so Jessica's team can review the query and result without exporting operating data to a separate machine learning service.
+    A regression estimate helps compare service-request scale. It does not determine funding, eligibility, or a resident outcome. OML scores the governed input rows inside Oracle Database, so Jessica's team can review the query and result without exporting operating data to a separate machine learning service.
 
 ## Task 4: Check model agreement
 
-Before relying on the score pattern for a training exercise, Priya and Jessica need a simple way to compare known labels with the results of the same SQL path. Inspect the matching and non-matching counts now; this shows what deserves more context without presenting the compact dataset as a production accuracy test.
+Before using the score pattern in this training exercise, Priya and Jessica need a simple comparison of known labels and the results from the same SQL path. Inspect matching and non-matching counts. They show what needs more context without presenting the compact dataset as a production accuracy test.
 
 Count how often predicted labels match the known deterministic labels so the learner can verify the SQL scoring path.
 
 1. Run the agreement query.
 
-    The inner query scores each row. The outer query groups known and predicted combinations. Matching labels provide a quick learning check; mismatches show where a planner should inspect more context. This is not a full production model evaluation.
+    The inner query scores each row. The outer query groups known and predicted combinations. Matching labels provide a quick learning check; mismatches point to rows a planner should inspect in more context. This is not a full production model evaluation.
 
     ```sql
     <copy>
@@ -253,15 +253,15 @@ Count how often predicted labels match the known deterministic labels so the lea
 
 2. Use the check responsibly.
 
-    Agreement on all **10 compact training rows** confirms that the SQL scoring path is working. It is not a production accuracy measure. A production review would also test holdout data, error rates, fairness, drift, and whether the features remain appropriate for the public-service decision.
+    Agreement on all **10 compact training rows** confirms the SQL scoring path. It is not a production accuracy measure. A production review would also test holdout data, error rates, fairness, drift, and whether the features remain appropriate for the public-service decision.
 
 ## Task 5: Build and compare demand-surge models in the OML AutoML UI
 
-The earlier tasks inspected an existing model, and Maya now needs a transparent way to compare candidate approaches before any team considers deployment. Run the AutoML comparison and inspect the completed status, leaderboard, and feature list; these results help Priya, Jessica, and Maya discuss which model criterion supports the planning question.
+The earlier tasks inspected an existing model. Maya now needs a transparent way to compare candidate approaches before a team considers deployment. Run the AutoML comparison and inspect the completed status, leaderboard, and feature list. These results help Priya, Jessica, and Maya discuss which model criterion supports the planning question.
 
-The previous tasks score an existing demand model. In this task, you use the OML AutoML workspace to compare candidate models that predict whether a public service has a `SURGE` or `STABLE` demand state. The data, experiment settings, candidates, and feature analysis remain in Oracle Database.
+The previous tasks score an existing demand model. Here, use the OML AutoML workspace to compare candidates that predict whether a public service has a `SURGE` or `STABLE` demand state. The data, experiment settings, candidates, and feature analysis remain in Oracle Database.
 
-AutoML compares multiple candidate approaches from a saved view and a business label. This gives Jessica a repeatable way to evaluate candidate demand-surge models before a team considers deployment. A leaderboard ranks modeling approaches; it does not determine a staffing, funding, eligibility, or resident-service decision.
+AutoML compares candidates from a saved view and business label. It gives Jessica a repeatable way to evaluate demand-surge models before a team considers deployment. A leaderboard ranks approaches; it does not determine a staffing, funding, eligibility, or resident-service decision.
 
 1. Open the AutoML workspace.
 
@@ -289,7 +289,7 @@ AutoML compares multiple candidate approaches from a saved view and a business l
     | Prediction Type | `Classification` |
     | Case ID | `PRODUCT_ID` |
 
-    `SURGE_FLAG` is the same public-service demand label you scored in Task 2. `PRODUCT_ID` gives the experiment a stable service identifier for sampling and split decisions. Confirm the name, source view, prediction target, classification type, and case ID before you start.
+    `SURGE_FLAG` is the public-service demand label you scored in Task 2. `PRODUCT_ID` gives the experiment a stable service identifier for sampling and split decisions. Before you start, confirm the name, source view, prediction target, classification type, and case ID.
 
     ![Create Experiment page configured for the State and Local Government demand-surge experiment](images/state-local-gov-automl-create-experiment.png " ")
 
@@ -307,11 +307,11 @@ AutoML compares multiple candidate approaches from a saved view and a business l
 
     ![Start menu with Faster Results highlighted for the State and Local Government experiment](images/state-local-gov-automl-faster-results.png " ")
 
-    The progress panel shows stages such as initialization, algorithm selection, adaptive sampling, feature selection, and model tuning. Wait for the run to complete before reviewing the results.
+    The progress panel shows initialization, algorithm selection, adaptive sampling, feature selection, and model tuning. Wait for the run to complete before reviewing results.
 
     ![AutoML progress panel showing completed stages and model tuning in progress](images/state-local-gov-automl-progress.png " ")
 
-    Wait for the status to show **Completed**. The leaderboard will show up to two ranked candidate models and the **Features** grid will show relative feature importance. The winning algorithm, score, and importance ranking can change with the run; do not expect a fixed result.
+    Wait for the status to show **Completed**. The leaderboard shows up to two ranked candidate models, and the **Features** grid shows relative feature importance. The winning algorithm, score, and importance ranking can change with the run; do not expect a fixed result.
 
     ![Completed AutoML progress panel for the State and Local Government experiment](images/state-local-gov-automl-progress-completed.png " ")
 
@@ -323,9 +323,9 @@ AutoML compares multiple candidate approaches from a saved view and a business l
 
 4. Interpret the result for public-service planning.
 
-    Review the top-ranked candidate and the feature list with Jessica. For example, `UNITS_REQUESTED`, service category, public attention, and request activity can help frame follow-up questions about capacity. Feature importance indicates how the candidate used the supplied inputs; it does not prove that any input caused demand pressure.
+    Review the top-ranked candidate and feature list with Jessica. For example, `UNITS_REQUESTED`, service category, public attention, and request activity can frame follow-up questions about capacity. Feature importance indicates how the candidate used the supplied inputs; it does not prove that any input caused demand pressure.
 
-    Before a candidate can support a real public-service decision, teams should evaluate it on newer, unseen data; assess error rates, fairness, feature quality, and drift; and agree on the human review and accountability process. Oracle Database keeps that candidate-model review close to the governed service data rather than moving the data to a separate machine learning platform.
+    Before a candidate can support a real public-service decision, teams should evaluate it on newer, unseen data; assess error rates, fairness, feature quality, and drift; and agree on human review and accountability. Oracle Database keeps that review close to governed service data rather than moving the data to a separate machine learning platform.
 
 5. 🎯 **Interactive challenge: compare the decision criterion.**
 
@@ -336,9 +336,9 @@ AutoML compares multiple candidate approaches from a saved view and a business l
     <details>
     <summary><strong>Challenge answer: choose the metric that matches the planning question</strong></summary>
 
-    > There is no guaranteed winning candidate or score. If the ranking changes, the comparison shows that model selection depends on the decision criterion, not only on one headline result. **Balanced Accuracy** is the clearer first comparison when planners want equal recall weight for `SURGE` and `STABLE` services. Review F1 Macro as a complementary measure because it also accounts for false positives through precision.
+    > There is no guaranteed winning candidate or score. If the ranking changes, it shows that model selection depends on the decision criterion, not one headline result. **Balanced Accuracy** is the clearer first comparison when planners want equal recall weight for `SURGE` and `STABLE` services. Review F1 Macro as a complementary measure because it also accounts for false positives through precision.
 
-    The F1 Macro leaderboard and feature grid provide the second comparison. The metric heading identifies the decision criterion used to rank the candidates, while the feature grid shows the relative importance of the same demand-training inputs. Results are dynamic; use the screenshots as orientation rather than a fixed score target.
+    The F1 Macro leaderboard and feature grid provide the second comparison. The metric heading identifies the criterion that ranks candidates, and the feature grid shows the relative importance of the same demand-training inputs. Results are dynamic; use the screenshots for orientation, not as a fixed score target.
 
     ![F1 Macro AutoML leaderboard for the State and Local Government comparison](images/state-local-gov-automl-f1-results.png " ")
 
@@ -348,11 +348,11 @@ AutoML compares multiple candidate approaches from a saved view and a business l
 
 ## Conclusion
 
-You used persisted OML models to score named public services and service requests directly in Oracle Database, then compared candidate demand-surge models in AutoML. Jessica can combine demand labels, confidence, service-value estimates, candidate rankings, feature context, and earlier capacity details in a human planning review, without exporting governed operating data for scoring elsewhere.
+You used persisted OML models to score named public services and service requests in Oracle Database, then compared candidate demand-surge models in AutoML. Jessica can combine demand labels, confidence, service-value estimates, candidate rankings, feature context, and earlier capacity details in human planning review without exporting governed operating data for scoring elsewhere.
 
 ### What have I achieved when the lab ends?
 
-You have inspected persisted models, scored demand and value, compared known and predicted labels, and reviewed candidate AutoML models. Priya can show which services may need capacity attention and help Jessica and Maya frame the next planning discussion.
+You inspected persisted models, scored demand and value, compared known and predicted labels, and reviewed candidate AutoML models. Priya can show which services may need capacity attention and help Jessica and Maya frame the next planning discussion.
 
 ## Acknowledgements
 

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-**Maya**, the Resident Services Operations Leader, now asks whether regional service capacity is close enough to the residents and requests that need it. A useful response plan needs a reachable service location, an available center, and an authorized viewer who can see the supporting records.
+**Maya**, the Resident Services Operations Leader, needs to know whether regional service capacity is close enough to the residents and requests that need it. She needs a reachable service location, an available center, and an authorized viewer who can see the supporting records.
 
-You work with **Jordan**, the Database Administrator, as the regional operations planner supporting Maya. In this lab, you measure distance with **Oracle Spatial**, summarize capacity by Colorado service region, and connect the SQL results to governed statewide, regional, and restricted application views.
+You work with **Jordan**, the Database Administrator, as Maya's regional operations planner. In this lab, you measure distance with **Oracle Spatial**, summarize capacity by Colorado service region, and compare the SQL results with statewide, regional, and restricted application views.
 
 <details>
 <summary><strong>Key terms: point, boundary, spatial reference system, distance, capacity, and Virtual Private Database</strong></summary>
@@ -23,11 +23,11 @@ You work with **Jordan**, the Database Administrator, as the regional operations
 
 </details>
 
-The diagram connects resident and center points to distance, regional capacity, and an authorized planning decision.
+The diagram connects resident and center points to distance, regional capacity, and a planning decision.
 
 ![Service access spatial analysis flow](images/service-access-spatial-flow.svg " ")
 
-The application map below shows Colorado service centers, demand regions, route layers, capacity, and the global VPD context used by Maya. The full application displays 31 centers; the compact learner dataset uses four centers so the SQL remains quick and deterministic. The SQL makes those geographic relationships measurable rather than relying on visual judgment.
+The application map shows Colorado service centers, demand regions, route layers, capacity, and Maya's VPD context. The application displays 31 centers; the compact learner dataset uses four so the SQL stays quick and repeatable. The SQL measures those geographic relationships instead of relying on visual judgment.
 
 ![Colorado Service Access and Coverage Map](images/service-access-map-layers.png " ")
 
@@ -54,15 +54,15 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Find service centers nearest to a resident
 
-Maya needs a reachable service location before she can discuss a response for a resident. Calculate the nearest centers now and inspect the distance, center name, and available capacity; those rows show which options are practical enough for a capacity review.
+Maya needs a reachable service location before she can discuss a response. Calculate the nearest centers and inspect the distance, center name, and available capacity. Those rows show which options are practical enough for capacity review.
 
-Start with the resident's nearest service centers so Maya can connect the request to reachable support options.
+Start with the resident's nearest centers. Maya can then connect the request to reachable support options.
 
 1. Run the distance query.
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet).
 
-    `CUSTOMERS.LOCATION` and `FULFILLMENT_CENTERS.LOCATION` are `SDO_GEOMETRY` points. The SLED semantic views provide public-service names. `SDO_GEOM.SDO_DISTANCE` measures kilometers between each center and the location for Elena, and `SDO_UTIL.TO_GEOJSON` exposes the same center point in a map-friendly format.
+    `CUSTOMERS.LOCATION` and `FULFILLMENT_CENTERS.LOCATION` are `SDO_GEOMETRY` points. The SLED views provide public-service names. `SDO_GEOM.SDO_DISTANCE` measures kilometers between each center and Elena's location. `SDO_UTIL.TO_GEOJSON` returns the same center point in a map-friendly format.
 
     <details>
     <summary><strong>Why this matters: geography stays with operations data</strong></summary>
@@ -146,9 +146,9 @@ Start with the resident's nearest service centers so Maya can connect the reques
 
 ## Task 2: Compare regional service capacity
 
-Distance alone is not enough, because the nearest center may not have room to take more work. Compare regional capacity now and inspect available work, reserved work, and utilization; Maya can use those totals to decide whether a region can absorb demand or needs a different plan.
+Distance alone is not enough: the nearest center may not have room to take more work. Compare regional capacity and inspect available work, reserved work, and utilization. Maya can use those totals to decide whether a region can absorb demand or needs a different plan.
 
-Compare regional service capacity so the distance result sits beside the workload Maya can realistically route or rebalance.
+Place the distance result beside the workload Maya can realistically route or rebalance.
 
 1. Run the capacity query.
 
@@ -183,9 +183,9 @@ Compare regional service capacity so the distance result sits beside the workloa
 
 ## Task 3: Understand governed application views
 
-Before using the map in an operations discussion, Maya needs to understand what the application shows and what SQL Worksheet does not prove. Compare the regional and restricted views now and inspect which rows are visible in each; this keeps the spatial results separate from the application's authorization behavior.
+Before using the map in an operations discussion, Maya needs to understand what the application shows and what SQL Worksheet cannot prove. Compare the regional and restricted views and inspect which rows are visible in each. Keep the spatial result separate from the application's authorization behavior.
 
-Review the application screenshots as governed views of the same operational results, not as SQL Worksheet proof of VPD behavior.
+Treat the application screenshots as authorized views of the same operational results, not as SQL Worksheet proof of VPD behavior.
 
 1. Compare the current regional and restricted screenshots.
 
@@ -199,15 +199,15 @@ Review the application screenshots as governed views of the same operational res
 
 ## Task 4: Build a Western Slope service access project in Spatial Studio
 
-The SQL results give Maya exact distance and capacity measurements, and a map makes the coverage discussion easier to share with an operations team. Build the Western Slope project now and inspect the demand boundary, service centers, and filtered region together; this gives Maya a visual companion to the repeatable SQL review.
+The SQL gives Maya exact distance and capacity measurements; the map makes the coverage discussion easier to share. Build the Western Slope project and inspect the demand boundary, service centers, and filtered region together. The map complements the repeatable SQL review.
 
-Use Spatial Studio when a map makes location and coverage easier to discuss with an operations team. The project in this task uses the same database-backed `SDO_GEOMETRY` columns as the SQL above: `DEMAND_REGIONS.BOUNDARY` supplies the regional boundary and `FULFILLMENT_CENTERS.LOCATION` supplies center points. The map complements the repeatable SQL distance calculation; it does not replace it.
+Use Spatial Studio when a map makes location and coverage easier to discuss. This project uses the same database-backed `SDO_GEOMETRY` columns as the SQL above: `DEMAND_REGIONS.BOUNDARY` supplies the regional boundary and `FULFILLMENT_CENTERS.LOCATION` supplies center points. The map does not replace the repeatable SQL distance calculation.
 
 1. Return to the **Database Actions Launchpad**. Under **Development**, select **Spatial Studio** and click **Open**. If prompted, sign in as `LLUSER`.
 
     ![Database Actions Development navigation with Spatial Studio selected](images/spatial-studio-launchpad.png " ")
 
-    Spatial Studio opens on the **Projects** page. This is where you can create, reopen, and save map projects backed by your database objects.
+    Spatial Studio opens on the **Projects** page, where you can create, reopen, and save map projects backed by database objects.
 
     ![Spatial Studio Projects page ready to create a service access project](images/spatial-studio-projects-home.png " ")
 
@@ -223,7 +223,7 @@ Use Spatial Studio when a map makes location and coverage easier to discuss with
 
 5. Repeat Steps 2 through 4 for `FULFILLMENT_CENTERS`.
 
-    `DEMAND_REGIONS` appears as a boundary layer because it uses `BOUNDARY`. `FULFILLMENT_CENTERS` appears as a point layer because it uses `LOCATION`. The two datasets remain backed by the database tables; creating a dataset does not export a separate copy of the spatial data.
+    `DEMAND_REGIONS` appears as a boundary layer because it uses `BOUNDARY`. `FULFILLMENT_CENTERS` appears as a point layer because it uses `LOCATION`. Both datasets remain backed by the database tables; creating them does not export a separate copy of the spatial data.
 
     ![Select DEMAND_REGIONS and FULFILLMENT_CENTERS from the database table list](images/spatial-table-selection.png " ")
 
@@ -247,7 +247,7 @@ Use Spatial Studio when a map makes location and coverage easier to discuss with
     - Operator: `=`
     - Value: `Western Slope`
 
-    This focuses the map on the region Maya is reviewing instead of displaying every demand region at once.
+    This leaves Maya's region on the map instead of showing every demand region.
 
     ![Spatial Studio filter configuration for REGION_NAME equals Western Slope](images/spatial-western-slope-filter.png " ")
 
@@ -266,7 +266,7 @@ Use Spatial Studio when a map makes location and coverage easier to discuss with
     - **Distance:** `250000`
     - **Unit:** `Meter`
 
-    Rename the analysis to `Centers within 250,000 meters of Western Slope`, then click **Run**. This returns the service-center points that fall within 250 kilometers of the filtered Western Slope boundary. A confirmation that Spatial Studio is gathering full statistics in the background is informational; the analysis result is already available for the next step.
+    Rename the analysis to `Centers within 250,000 meters of Western Slope`, then click **Run**. It returns service-center points within 250 kilometers of the filtered Western Slope boundary. A message that Spatial Studio is gathering full statistics in the background is informational; you can use the result in the next step.
 
     ![Spatial Studio within-distance analysis configured for service centers and the Western Slope boundary](images/spatial-analysis-configuration.png " ")
 
@@ -284,13 +284,15 @@ Use Spatial Studio when a map makes location and coverage easier to discuss with
     - `CITY`
     - `STATE_PROVINCE`
 
-    This lets a planner select a result point and see the name and location of the service access center without leaving the map.
+    A planner can now select a result point and see the service access center's name and location without leaving the map.
 
     ![Information window configuration for a Spatial Studio analysis result](images/spatial-information-window.png " ")
 
+    **Zoom in:** The red frames show the required sequence: turn on **Show info window**, move `CENTER_NAME`, `CITY`, and `STATE_PROVINCE` into **Columns to show** with **Add info columns**, then verify those three values appear in the selected list.
+
 14. Click **Save**. Name the project `Western Slope Service Access Coverage` and add an optional description such as `Service center coverage within 250 kilometers of the Western Slope demand region.`
 
-    Confirm that the project title changes to **Western Slope Service Access Coverage** and that Spatial Studio displays the saved-project confirmation. The saved project preserves the dataset layers, Western Slope filter, analysis result, and information-window configuration for later review.
+    Confirm that the project title changes to **Western Slope Service Access Coverage** and that Spatial Studio displays the saved-project confirmation. The saved project retains the dataset layers, Western Slope filter, analysis result, and information-window settings for later review.
 
     ![Saved Western Slope Service Access Coverage project](images/spatial-project-saved.png " ")
 
@@ -298,11 +300,11 @@ Use Spatial Studio when a map makes location and coverage easier to discuss with
 
 You created a map-based coverage view that links a regional demand boundary to nearby service access centers. Maya can use this view to start a capacity and service-availability conversation, then use the SQL results from this lab for exact, repeatable distance measurements.
 
-Oracle Spatial keeps the points, boundaries, analysis, and operational rows in the same governed database foundation. That helps teams avoid maintaining separate copies of resident, center, and regional location data in disconnected mapping tools.
+Oracle Spatial keeps points, boundaries, analysis, and operational rows in one database. Teams do not need separate copies of resident, center, and regional location data in disconnected mapping tools.
 
 ### What have I achieved when the lab ends?
 
-You have connected resident location, service-center distance, regional capacity, and governed application views. Maya can weigh travel distance and regional capacity together before discussing where service support may be practical.
+You connected resident location, service-center distance, regional capacity, and authorized application views. Maya can weigh travel distance and regional capacity before discussing practical service support.
 
 ## Acknowledgements
 

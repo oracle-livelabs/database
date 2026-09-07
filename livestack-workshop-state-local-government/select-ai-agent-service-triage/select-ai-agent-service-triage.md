@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica needs a repeatable way to review the highest-urgency service request. **Priya**, the Government AI Engineer, configures the constrained agent, while **Maya**, the Resident Services Operations Leader, reviews the simulated planning record. In this lab, you use an OML notebook to create a constrained agent: it retrieves approved service details and may write one simulated planning-review audit row. It cannot update source service data or trigger an external workflow.
+Jessica needs a repeatable way to review the highest-urgency service request. **Priya**, the Government AI Engineer, configures the constrained agent. **Maya**, the Resident Services Operations Leader, reviews the simulated planning record. In this lab, you use an OML notebook to create a constrained agent that retrieves approved service details and may write one simulated planning-review audit row. It cannot update source service data or trigger an external workflow.
 
 <details>
 <summary><strong>Key terms: agent, tool, audit row, and idempotency</strong></summary>
@@ -37,7 +37,7 @@ Estimated Time: **22 minutes**
 
 ## Task 1: Import and run the constrained Agent notebook
 
-Jessica needs a repeatable review path for the highest-urgency request, and Priya needs the supplied notebook before she can create any agent components. Import and run the notebook now; inspect that its paragraphs are available in order so the team can build and review the controlled workflow consistently.
+Jessica needs a repeatable review path for the highest-urgency request. Priya needs the supplied notebook before she can create agent components. Import and run the notebook, then confirm that its paragraphs are available in order. The team can then build and review the controlled workflow consistently.
 
 1. Download [state-local-government-select-ai-agent-notebook.json](files/state-local-government-select-ai-agent-notebook.json).
 2. In Oracle Machine Learning, select **Notebooks**, select **Import** > **File**, choose the JSON file, and open **Triage State and Local Government Service Requests with Select AI Agents**.
@@ -47,7 +47,7 @@ Jessica needs a repeatable review path for the highest-urgency request, and Priy
 
 ## Task 2: Create and test the controlled database boundary
 
-Before an agent can act, Priya needs to confirm that its database tools return only approved service details. Run the setup and helper query now, then inspect the one priority-request summary; this gives Jessica a transparent starting point for the planning review.
+Before an agent can act, Priya must confirm that its database tools return only approved service details. Run the setup and helper query, then inspect the priority-request summary. This gives Jessica a transparent starting point for planning review.
 
 1. Run the setup paragraph. The notebook activates `genai`, creates the simulated `AGENT_ACTIONS` table only when necessary, and creates two helper functions.
 
@@ -66,9 +66,9 @@ Before an agent can act, Priya needs to confirm that its database tools return o
 
 ## Task 3: Create and verify tools, agent, task, and team
 
-With the narrow helper functions working, Priya can assemble the controlled components that use them. Run the creation paragraphs and inspect the two tools, agent, task, and team; this shows Maya that the workflow has a defined boundary before anyone runs a planning action.
+With the narrow helper functions working, Priya can assemble the controlled components that use them. Run the creation paragraphs and inspect the two tools, agent, task, and team. Maya can then see the workflow boundary before anyone runs a planning action.
 
-1. Run the reset and creation paragraphs. The notebook safely removes only prior objects with the `STATE_LOCAL` names, then creates the two function tools, constrained agent, task, and team.
+1. Run the reset and creation paragraphs. The notebook removes only prior objects with the `STATE_LOCAL` names, then creates the two function tools, constrained agent, task, and team.
 
     **Expected result:** Two tools, one agent, one task, and one team are enabled.
 
@@ -76,7 +76,7 @@ With the narrow helper functions working, Priya can assemble the controlled comp
 
 ## Task 4: Run and audit the agent
 
-Jessica now needs the workflow to retrieve service details and record one simulated planning review that Maya can inspect. Run the agent and inspect its tool result, audit row, and native history; these records show what the workflow did and make the review traceable.
+Jessica now needs the workflow to retrieve service details and record one simulated planning review for Maya to inspect. Run the agent and inspect its tool result, audit row, and native history. These records show what the workflow did and make the review traceable.
 
 1. Run the agent paragraph. The notebook sets `STATE_LOCAL_SERVICE_TEAM` and runs `SELECT AI AGENT`. Review the tool result, then inspect the simulated audit row and native history.
 
@@ -97,9 +97,9 @@ Jessica now needs the workflow to retrieve service details and record one simula
 
 ## Task 5: Prove idempotency
 
-Before the team can rely on the controlled workflow, Maya needs to know that a repeat request will not create duplicate planning records. Run the same request again and inspect the one-row count; this confirms the database rule preserves one review action for the service request.
+Before the team can rely on the controlled workflow, Maya needs to know that a repeat request will not create duplicate planning records. Run the same request again and inspect the one-row count. This confirms that the database rule preserves one review action for the service request.
 
-1. Rerun the same agent request in the final notebook paragraph. Its controlled function checks for the existing review row before inserting.
+1. Rerun the same agent request in the final notebook paragraph. Its controlled function checks for an existing review row before inserting.
 
     **Expected result:** The response reports that the planning review already exists, and the count remains one row for the service request.
 
@@ -107,7 +107,7 @@ Before the team can rely on the controlled workflow, Maya needs to know that a r
 
 ## What have I achieved when the lab ends?
 
-You have built and inspected a constrained agent workflow that retrieves approved service details and records one simulated planning review. Maya can review one controlled planning record and confirm that repeating the same request does not create duplicates.
+You built and inspected a constrained agent workflow that retrieves approved service details and records one simulated planning review. Maya can review the controlled planning record and confirm that repeating the same request does not create duplicates.
 
 ## Acknowledgements
 

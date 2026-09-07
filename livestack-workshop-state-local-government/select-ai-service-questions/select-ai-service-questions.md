@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Service planners need timely answers about demand and request status, while reviewers need to see the SQL and database results behind each answer. **Jessica**, the State Services Risk Analyst, asks the questions, and **Priya**, the Government AI Engineer, prepares the approved Select AI context. In this lab, you run an Oracle Machine Learning notebook that prepares two approved service views and then uses Select AI to ask clear, reviewable questions.
+Service planners need timely answers about demand and request status, and reviewers need to see the SQL and database results behind each answer. **Jessica**, the State Services Risk Analyst, asks the questions. **Priya**, the Government AI Engineer, prepares the approved Select AI context. In this lab, you run an Oracle Machine Learning notebook that prepares two approved service views, then uses Select AI to ask clear, reviewable questions.
 
-Select AI can translate a natural-language request into SQL or a database-grounded response using the active `genai` profile. Generated wording and SQL shape can vary, so review the generated SQL and result before using an answer in planning.
+Select AI uses the active `genai` profile to translate a natural-language request into SQL or a database-grounded response. Generated wording and SQL can vary, so review the SQL and result before using an answer in planning.
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, CHAT, SHOWSQL, and NARRATE</strong></summary>
@@ -39,7 +39,7 @@ Estimated Time: **18 minutes**
 
 ## Task 1: Import the State and Local Government Select AI notebook
 
-Jessica needs a repeatable, approved way to ask service questions before Priya can show any generated answer. Import the notebook now and inspect that it opens with the supplied paragraphs; this gives the team one guided path for preparing, checking, and comparing governed answers.
+Before Priya shows a generated answer, Jessica needs a repeatable, approved way to ask service questions. Import the notebook and confirm that it opens with the supplied paragraphs. The team then has one guided path for preparing, checking, and comparing governed answers.
 
 1. Download [state-local-government-select-ai-notebook.json](files/state-local-government-select-ai-notebook.json).
 
@@ -61,9 +61,9 @@ Jessica needs a repeatable, approved way to ask service questions before Priya c
 
 ## Task 2: Activate the Select AI profile
 
-Before a natural-language question can use approved service context, Priya needs to activate the profile that defines that boundary. Run the setup paragraph now and inspect the enabled `genai` profile; this confirms that the next questions use the intended database connection and context.
+Before a natural-language question can use approved service context, Priya must activate the profile that defines that boundary. Run the setup paragraph and inspect the enabled `genai` profile. This confirms that the next questions use the intended database connection and context.
 
-1. Run the first SQL paragraph to activate `genai` and confirm the profile is enabled. Select AI uses the active profile for the model connection and approved database context.
+1. Run the first SQL paragraph to activate `genai` and confirm that the profile is enabled. Select AI uses the active profile for the model connection and approved database context.
 
     ```sql
     <copy>
@@ -79,7 +79,7 @@ Before a natural-language question can use approved service context, Priya needs
 
 ## Task 3: Create AI-ready service views and comments
 
-Priya now needs clear, limited business names for the service facts that Select AI may describe. Create the views and comments, then inspect that both views are valid; this gives Jessica a focused vocabulary for requests, demand, region, urgency, and value.
+Priya now needs clear, limited business names for the service facts that Select AI may describe. Create the views and comments, then confirm that both views are valid. This gives Jessica a focused vocabulary for requests, demand, region, urgency, and value.
 
 1. Run the next SQL paragraph to create `SELECT_AI_SERVICE_REGION_V` and `SELECT_AI_SERVICE_DEMAND_V`. Their clear business names and comments give Select AI a focused vocabulary for service requests, demand, region, urgency, and value.
 
@@ -89,9 +89,9 @@ Priya now needs clear, limited business names for the service facts that Select 
 
 ## Task 4: Set the approved object list and establish a SQL baseline
 
-Before Jessica trusts a generated answer, the team needs a direct SQL result to compare with it. Set the approved object list and inspect the largest region-and-status groups now; this baseline gives Priya and Jessica a concrete result that later generated SQL and narration must match.
+Before Jessica trusts a generated answer, the team needs a direct SQL result for comparison. Set the approved object list and inspect the largest region-and-status groups. This baseline gives Priya and Jessica a concrete result that later generated SQL and narration must match.
 
-1. Run the object-list and baseline paragraphs. The notebook sets `genai` to the two AI-ready views, then returns the ten largest region-and-status request groups directly with SQL.
+1. Run the object-list and baseline paragraphs. The notebook limits `genai` to the two AI-ready views, then returns the ten largest region-and-status request groups with direct SQL.
 
     ```sql
     <copy>
@@ -108,9 +108,9 @@ Before Jessica trusts a generated answer, the team needs a direct SQL result to 
 
 ## Task 5: Compare a general explanation with governed SQL
 
-Jessica needs to see the difference between a general explanation and an answer grounded in the approved service views. Run `CHAT`, then inspect the generated statement from `SHOWSQL` before accepting it; this lets her and Priya review the exact SQL that Select AI proposes to run.
+Jessica needs to see the difference between a general explanation and an answer grounded in approved service views. Run `CHAT`, then inspect the statement from `SHOWSQL` before accepting it. Jessica and Priya can review the exact SQL that Select AI proposes to run.
 
-1. Run the `CHAT` paragraph for a one-sentence explanation of why planners compare request volume with urgency. Then run `SHOWSQL` and inspect the statement before trusting it.
+1. Run the `CHAT` paragraph for a one-sentence explanation of why planners compare request volume with urgency. Then run `SHOWSQL` and inspect the statement before relying on it.
 
     ```sql
     <copy>
@@ -125,9 +125,9 @@ Jessica needs to see the difference between a general explanation and an answer 
 
 ## Task 6: Ask for a bounded narrated answer
 
-Now that the direct baseline and generated SQL are visible, Jessica can ask for a short answer that is easy to verify. Run the bounded narration and inspect the region, status, and count in its response; this shows whether the plain-language answer agrees with the governed SQL result.
+Now that the direct baseline and generated SQL are visible, Jessica can ask for a short, verifiable answer. Run the bounded narration and inspect the region, status, and count in its response. This shows whether the plain-language answer agrees with the governed SQL result.
 
-1. Run the `NARRATE` paragraph. Its prompt requests exactly one sentence containing the service region, request status, and largest request count, making the response easy to compare with the SQL baseline.
+1. Run the `NARRATE` paragraph. Its prompt requests exactly one sentence with the service region, request status, and largest request count, making it easy to compare with the SQL baseline.
 
     ```sql
     <copy>
@@ -142,13 +142,13 @@ Now that the direct baseline and generated SQL are visible, Jessica can ask for 
 
 ## Task 7: Confirm the read-only question boundary
 
-Before Maya uses the answer in a planning conversation, the team needs to confirm that asking the question did not alter source service data. Inspect the two valid views and the read-only notebook behavior now; this shows that Select AI improved access to information without changing the underlying requests.
+Before Maya uses the answer in a planning conversation, the team must confirm that asking the question did not alter source service data. Inspect the two valid views and the read-only notebook behavior. This shows that Select AI improves access to information without changing the underlying requests.
 
-1. Confirm both approved objects are `VALID` views. The notebook creates or replaces only those two views and their comments; the baseline, `CHAT`, `SHOWSQL`, and `NARRATE` paragraphs do not update source service data.
+1. Confirm that both approved objects are `VALID` views. The notebook creates or replaces only those two views and their comments. The baseline, `CHAT`, `SHOWSQL`, and `NARRATE` paragraphs do not update source service data.
 
 ## What have I achieved when the lab ends?
 
-You have prepared a limited service context, compared direct SQL with generated SQL, and checked a bounded narrated answer against the result. Jessica can ask a faster service question while Priya can show the approved views and SQL behind the answer.
+You prepared a limited service context, compared direct SQL with generated SQL, and checked a bounded narrated answer against the result. Jessica can ask a faster service question, while Priya can show the approved views and SQL behind the answer.
 
 ## Acknowledgements
 

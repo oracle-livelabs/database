@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Jessica began this workshop with a **2.7% Medicaid Eligibility Error Rate** that was approaching its **3.0%** threshold. It was an early warning, not a verdict. You have now followed the connected Colorado resident-services path that helps her understand what to look at next: the shared foundation, command-center measures, one request as rows and JSON, demand signals by meaning, community-partner paths, service access, predictive demand, a checked database answer, and a controlled planning-review action.
+Jessica began this workshop with a **2.7% Medicaid Eligibility Error Rate** approaching its **3.0%** threshold. It was an early warning, not a verdict. You followed the connected Colorado resident-services path that helps her decide what to inspect next: the shared foundation, command-center measures, one request as rows and JSON, demand signals by meaning, community-partner paths, service access, predictive demand, a checked database answer, and a controlled planning-review action.
 
-The full sequence matters because it keeps the planning step connected to the original service question. Jessica can see the request, text, relationships, locations, and predictions that give the warning context. Priya can show the approved views and SQL behind the Select AI answer, then explain the narrow tools behind the agent. Maya can inspect the resulting planning record before deciding what happens next.
+The full sequence keeps the planning step connected to the original service question. Jessica can see the request, text, relationships, locations, and predictions that give the warning context. Priya can show the approved views and SQL behind the Select AI answer, then explain the agent's narrow tools. Maya can inspect the planning record before deciding what happens next.
 
-The practical takeaway is that different public-service jobs can use different data models while staying connected to the same public-service records:
+Different public-service jobs can use different data models while remaining connected to the same public-service records:
 
 - Jessica can start with a statewide warning as the State Services Risk Analyst.
 - Jordan can confirm the shared foundation as the Database Administrator.
@@ -21,7 +21,7 @@ With **Oracle AI Database**, Colorado can use relational SQL for operations, **J
 
 > Public-service decisions rarely fit one technology category. A request may involve resident records, service lines, community signals, partner handoffs, geographic access, and capacity predictions.
 >
-> A fragmented design copies those facts into specialist systems, rebuilds controls, and forces teams to reconcile results. A converged Oracle Database foundation reduces sensitive copies, keeps security and business context connected, and gives teams repeatable SQL-backed results they can inspect together.
+> A fragmented design copies those facts into specialist systems, rebuilds controls, and forces teams to reconcile results. A converged Oracle Database foundation reduces sensitive copies, keeps security and business context together, and gives teams repeatable SQL-backed results they can inspect together.
 
 </details>
 
@@ -35,7 +35,7 @@ Estimated Time: **5 minutes**
 
 ## Task 1: Review what you can now explain
 
-The team has gathered foundation, request, text, relationship, location, model, and AI-assistance context, and now needs to turn that work into a clear public-service story. Review the outcome and persona maps now; they show what Jessica, Jordan, Sam, Priya, and Maya can explain, and how each result supports the next decision.
+The team has gathered foundation, request, text, relationship, location, model, and AI-assistance context. It now needs to turn that work into a clear public-service story. Review the outcome and persona maps. They show what Jessica, Jordan, Sam, Priya, and Maya can explain and how each result supports the next decision.
 
 Use this recap to connect each lab result back to the public-service decision it helps explain.
 
@@ -78,7 +78,7 @@ Use this recap to connect each lab result back to the public-service decision it
 
 4. Take the story forward.
 
-    Lead with the public-service problem, not a feature list: Colorado needs to respond before resident-service performance deteriorates while keeping the details behind each decision connected.
+    Lead with the public-service problem, not a feature list. Colorado needs to respond before resident-service performance deteriorates while keeping the details behind each decision connected.
 
     - SQL explains the operating measures.
     - JSON Relational Duality serves the request document.
@@ -89,11 +89,11 @@ Use this recap to connect each lab result back to the public-service decision it
     - Select AI turns approved service views into a checked natural-language answer.
     - Select AI Agents record a controlled planning-review step through approved tools.
 
-The lasting lesson is that connected information supports faster investigation without sacrificing governance. Oracle AI Database helps teams reduce sensitive data copies, reduce reconciliation points, apply consistent controls, and explain public-service decisions with repeatable database results.
+Connected information supports faster investigation without sacrificing governance. Oracle AI Database helps teams reduce sensitive data copies and reconciliation points, apply consistent controls, and explain public-service decisions with repeatable database results.
 
 ### What have I achieved when the lab ends?
 
-You can now explain one connected path from Jessica's early warning to a reviewable planning action. You checked the transaction, text, relationships, locations, and predictions that give the warning context; asked the database for a checked answer; and used a controlled Select AI Agent action to record the next step. Colorado can respond with the full picture in one governed foundation instead of assembling it from disconnected copies.
+You can now explain one connected path from Jessica's early warning to a reviewable planning action. You checked the transaction, text, relationships, locations, and predictions that give the warning context; asked the database for a checked answer; and used a controlled Select AI Agent action to record the next step. Colorado can respond from one governed foundation instead of assembling a picture from disconnected copies.
 
 ## Acknowledgements
 
