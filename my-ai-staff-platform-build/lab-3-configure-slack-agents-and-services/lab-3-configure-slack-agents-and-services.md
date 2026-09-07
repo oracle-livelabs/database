@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, you import the role-specific Slack manifests supplied with this workshop, define generic bot names in `.env.shared`, populate deployment-specific environment files, and activate the platform services. Slack permissions do not add channel membership, so you explicitly invite every bot to its working channels.
+In this lab, you import the role-specific Slack manifests supplied with this workshop, define generic bot names in `.env.shared`, configure required Google Drive delivery, populate deployment-specific environment files, and activate the platform services. Slack permissions do not add channel membership, so you explicitly invite every bot to its working channels.
 
-Estimated Time: 60 minutes
+Estimated Time: 75 minutes
 
 ### Objectives
 
@@ -13,6 +13,8 @@ In this lab, you will:
 - Create Slack channels and configure seven Socket Mode applications.
 - Map the runtime services to generic Assistant, Content, Creative, Brand, Data, Ops, and Publish agents.
 - Configure protected shared and per-agent environment files.
+- Configure required Google Drive delivery.
+- Configure the Content Kit skill runtime file.
 - Install current systemd units and enable the platform timers.
 
 ### Prerequisites
@@ -433,7 +435,279 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 4: Install Services and Timers
+## Task 4: Configure Required Google Drive Delivery
+
+1. Configure rclone with the Google account that owns the delivery folder. Name the remote exactly `gdrive`.
+
+    ```
+    <copy>
+    rclone config
+    rclone lsd gdrive: --max-depth 1
+    </copy>
+    ```
+
+2. Create or choose the delivery folder in Google Drive. Copy the folder ID from the Drive URL.
+
+3. Set the folder ID in `agents/pipeline/.env` as `GDRIVE_ROOT_FOLDER_ID`.
+
+4. If Drive authorization expires later, reconnect the same remote and then restart the pipeline.
+
+    ```
+    <copy>
+    rclone config reconnect gdrive:
+    sudo systemctl restart contentkit-pipeline
+    </copy>
+    ```
+
+## Task 5: Configure the Content Kit Runtime
+
+The current runtime uses the local Codex plugin. The Content Kit configuration stores machine-specific paths and feature flags only. Never store API keys, OAuth tokens, passwords, or other secrets in this file.
+
+1. Create the Content Kit configuration
+
+Run these commands from the repository root:
+
+```bash
+cd /home/opc/livelabs-ai-staff
+
+export CONTENTKIT_CONFIG=/home/opc/.codex/contentkit/config.json
+
+mkdir -p /home/opc/.codex/contentkit
+chmod 700 /home/opc/.codex/contentkit
+
+cp plugins/livelabsagentic-skills/skills/content-kit/config.json.example \
+  "$CONTENTKIT_CONFIG"
+
+chmod 600 "$CONTENTKIT_CONFIG"
+```
+
+The `export` command is only required for the current shell when using the default path. Systemd services running as user `opc` use the same default path automatically. If a different configuration path is used, `CONTENTKIT_CONFIG` must also be defined in the environment of every service that invokes Content Kit scripts.
+
+2. Edit the configuration
+
+Open the configuration file:
+
+```bash
+vi "$CONTENTKIT_CONFIG"
+```
+
+Replace its contents with valid, strict JSON. Do not include `//` comments or the words `Copy` or `Copymkdir` from rendered documentation.
+
+```json
+{
+  "base_dir": "/home/opc/livelabs-ai-staff",
+  "python": "/home/opc/notebooklm-venv/bin/python3.12",
+  "paths": {
+    "shared": "/home/opc/livelabs-ai-staff/plugins/livelabsagentic-skills/resources/shared",
+    "brand_guide": "/home/opc/livelabs-ai-staff/strategy/profiles/user/brand-guide.md",
+    "content_strategy": "/home/opc/livelabs-ai-staff/strategy/profiles/user/general-strategy.md"
+  },
+  "fonts": {
+    "sans": "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf",
+    "sans_bold": "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf"
+  },
+  "image": {
+    "provider": "cloudflare_workers_ai",
+    "model": "@cf/black-forest-labs/flux-2-klein-9b",
+    "width": 1024,
+    "height": 1024,
+    "guidance": 4.5,
+    "max_reference_images": 4,
+    "reference_max_width": 511,
+    "reference_max_height": 511,
+    "save_prompt_manifest": true,
+    "reference": null
+  },
+  "gdrive": {
+    "remote": "gdrive",
+    "root_id": "",
+    "root_path": "Post Content 2026",
+    "enabled": false
+  },
+  "db": {
+    "nia_url": "http://127.0.0.1:8004",
+    "enabled": false
+  },
+  "headshot": "/home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png",
+  "substack": {
+    "enabled": false,
+    "substackrc": "~/.codex/.substackrc",
+    "mcp_venv": "~/.codex/substack-mcp/venv/bin/python3",
+    "mcp_path": "~/.codex/substack-mcp"
+  }
+}
+```
+
+Replace the following values for the specific deployment:
+
+- `base_dir`: the absolute path of the repository.
+- `python`: the Python 3.12 interpreter that has Pillow and numpy installed.
+- `paths.brand_guide`: the active deployment's brand guide.
+- `paths.content_strategy`: the active deployment's content strategy.
+- `headshot`: the deployment's actual headshot file.
+
+The active strategy profile is selected by:
+
+```text
+strategy/active-profile.md
+```
+
+For the current repository, the user profile files are:
+
+```text
+strategy/profiles/user/brand-guide.md
+strategy/profiles/user/general-strategy.md
+strategy/profiles/user/funnel-strategy.md
+```
+
+The `db.mode` property is intentionally omitted. It is no longer used by the current loader. Keep the `db.nia_url` property because the shared Content Kit database scripts still use that key.
+
+3. Verify the Content Kit configuration
+
+First confirm that the file is strict JSON:
+
+```bash
+python3 -m json.tool "$CONTENTKIT_CONFIG" >/dev/null
+```
+
+Verify the configured interpreter and important files:
+
+```bash
+test -x /home/opc/notebooklm-venv/bin/python3.12
+test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf
+test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf
+test -f /home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png
+```
+
+The configuration file must remain private:
+
+```bash
+chmod 600 "$CONTENTKIT_CONFIG"
+```
+
+4. Verify Data Agent before enabling database tracking
+
+Data Agent runs on port `8004`. Check both the service and its database connection:
+
+```bash
+curl -fsS http://127.0.0.1:8004/health
+echo
+
+curl -fsS http://127.0.0.1:8004/health-db
+echo
+```
+
+Only after `/health-db` reports a healthy database connection, edit the configuration and change:
+
+```json
+"db": {
+  "nia_url": "http://127.0.0.1:8004",
+  "enabled": true
+}
+```
+
+When `db.enabled` is `false`, the shared Content Kit scripts continue in files-only mode and skip database tracking.
+
+### 5. Configure the current Google Drive delivery path
+
+The current preferred-format delivery path uses the project Google OAuth adapter. It does not use `gdrive.root_id`, Content Kit's legacy rclone settings, or `~/.claude`.
+
+Add the Drive folder ID from Task 4 to `.env.shared`:
+
+```text
+AISTAFF_DRIVE_ROOT_FOLDER_ID=<google-drive-folder-id>
+```
+
+The folder should be the deployment's approved AI Staff delivery folder. Do not store this value in the Content Kit JSON unless the legacy rclone integration is also being used.
+
+Validate the shared environment configuration:
+
+```bash
+python3 scripts/validate_config.py --env-only
+```
+
+6. Optional: enable the legacy rclone integration
+
+The `gdrive` section is retained only for legacy Content Kit skills that upload files through rclone.
+
+Install and configure rclone only if that legacy workflow is required:
+
+```bash
+sudo dnf install -y rclone
+rclone config
+rclone lsd gdrive: --max-depth 1
+```
+
+The remote must be named exactly:
+
+```text
+gdrive
+```
+
+If the rclone integration is intentionally enabled, configure its separate publishing root in `config.json`:
+
+```json
+"gdrive": {
+  "remote": "gdrive",
+  "root_id": "<legacy-rclone-folder-id>",
+  "root_path": "Post Content 2026",
+  "enabled": true
+}
+```
+
+The legacy rclone folder ID and `AISTAFF_DRIVE_ROOT_FOLDER_ID` may be different values. Do not assume that the folder created for the current OAuth delivery path is also the legacy rclone root.
+
+If rclone is not part of the deployment, leave the section disabled:
+
+```json
+"gdrive": {
+  "remote": "gdrive",
+  "root_id": "",
+  "root_path": "Post Content 2026",
+  "enabled": false
+}
+```
+
+7. Run the final validation
+
+From the repository root:
+
+```bash
+python3 scripts/validate_config.py --config "$CONTENTKIT_CONFIG"
+```
+
+Also verify the current service endpoints:
+
+```bash
+for url in \
+  http://127.0.0.1:8001/health \
+  http://127.0.0.1:8002/health \
+  http://127.0.0.1:8003/health \
+  http://127.0.0.1:8004/health \
+  http://127.0.0.1:8004/health-db; do
+  curl -fsS "$url"
+  echo
+done
+```
+
+The current runtime requires these local services:
+
+- File Editor: `8001`
+- Brand Agent: `8002`
+- Operations Agent: `8003`
+- Data Agent: `8004`
+- Data Agent database check: `8004/health-db`
+
+Cloudflare image-generation credentials belong in `.env.shared`, not in `config.json`:
+
+```text
+CLOUDFLARE_ACCOUNT_ID=<cloudflare-account-id>
+CLOUDFLARE_API_TOKEN=<cloudflare-api-token>
+```
+
+This configuration is the machine-runtime configuration for the current Codex-based Content Kit installation. Historical references to `~/.claude`, `~/.claude/skills`, or NotebookLM should not be used in a fresh deployment.
+
+## Task 6: Install Services and Timers
 
 1. Use the unit files stored alongside each runtime component. They are the canonical units for this workshop because they reference the `.env.shared` and per-agent `.env` files created in Task 3. Do not bulk-copy `deploy/systemd/*.service`: that directory contains deployment-specific and legacy paths.
 
@@ -452,7 +726,8 @@ In this lab, you will:
     <copy>
     sudo install -d -m 700 /etc/sysconfig
     sudo tee /etc/sysconfig/contentkit-file-editor > /dev/null <<'EOF'
-    EDITOR_DOMAIN=editor.<your-domain>
+    # Required EnvironmentFile for contentkit-file-editor.service.
+    # Leave this file without variables when the editor uses local 127.0.0.1 links.
     EOF
     sudo chmod 600 /etc/sysconfig/contentkit-file-editor
     sudo cp agents/pipeline/contentkit-pipeline.service \

@@ -18,7 +18,7 @@
         },
         {
             "title": "Lab 2: Install the My AI Staff Runtime",
-            "description": "Install dependencies, virtual environments, SELinux labels, nginx, and TLS",
+            "description": "Install dependencies, virtual environments, SELinux labels, and rclone",
             "filename": "../../lab-2-configure-runtime-and-slack/lab-2-configure-runtime-and-slack.md"
         },
         {
@@ -30,6 +30,11 @@
             "title": "Lab 4: Connect Services and Verify the Deployment",
             "description": "Run local, Slack, database, and end-to-end workflow verification",
             "filename": "../../lab-4-connect-services-and-verify/lab-4-connect-services-and-verify.md"
+        },
+        {
+            "title": "Lab 5: Configure External Services",
+            "description": "Configure Gmail, Calendar, voice, email, and publishing integrations",
+            "filename": "../../lab-5-configure-external-services/lab-5-configure-external-services.md"
         },
         {
             "title": "Need Help?",
