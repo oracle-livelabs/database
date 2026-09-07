@@ -2,14 +2,16 @@
 
 ## Introduction
 
-Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database 26ai** environment, and prepare SQL Worksheet for the public-service exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each query runs as the workshop user against the prepared State and Local Government schema.
+Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database** environment, and prepare SQL Worksheet for the public-service exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each query runs as the workshop user against the prepared State and Local Government schema.
+
+You will work with the Colorado public-service team throughout the workshop: **Jessica**, the State Services Risk Analyst; **Jordan**, the Database Administrator; **Sam**, the Public-Service Application Developer; **Priya**, the Government AI Engineer; and **Maya**, the Resident Services Operations Leader. These roles give each lab a practical decision owner and a clear reason to inspect the database result.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
 
 > - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to the database details behind them.
 >
 > - `LLUSER` is the workshop database user and schema owner for the hands-on public-service objects. Using the right user matters because this schema owns the tables, views, models, graph objects, and functions that you query.
 
@@ -28,6 +30,8 @@ In this lab, you will:
 
 ## Task 1: Launch the LiveLabs environment
 
+You need the prepared workshop environment before any public-service result is meaningful. Launch it now and keep the reservation details visible, because they give Jordan's team the correct `LLUSER` connection for the records you will inspect in every later lab.
+
 Start from the **LiveLabs** reservation so **Database Actions** opens with the correct workshop resources and credentials. This puts you in the governed environment used for the rest of the Colorado resident-services investigation:
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
@@ -44,7 +48,9 @@ Start from the **LiveLabs** reservation so **Database Actions** opens with the c
 
 ## Task 2: Open SQL Worksheet
 
-Open **SQL Worksheet** as the workshop user before running the public-service queries. This is where you ask each business question in SQL and immediately review the evidence returned by **Oracle AI Database 26ai**:
+Now that you have the reservation details, open SQL Worksheet so you can run and inspect the same database results behind the public-service screens. Confirm that you are connected as `LLUSER`; this gives Jessica, Jordan, Sam, Priya, and Maya one prepared place to review every result in the workshop.
+
+Open **SQL Worksheet** as the workshop user before running the public-service queries. This is where you ask each business question in SQL and immediately review the records and results returned by **Oracle AI Database**:
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -107,7 +113,11 @@ Open **SQL Worksheet** as the workshop user before running the public-service qu
 
 With **SQL Worksheet** ready, you can move from setup into the Colorado **Data Foundation**.
 
+### What have I achieved when the lab ends?
+
+You have opened the prepared State and Local Government environment and SQL Worksheet as `LLUSER`. Jordan's team can now start each investigation in the right workspace, using the shared public-service schema.
+
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle LiveLabs Team, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

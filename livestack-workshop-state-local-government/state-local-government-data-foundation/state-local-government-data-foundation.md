@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Before **Jessica Chen** acts on the Colorado early warning, she needs to know that service programs, resident requests, demand signals, partner relationships, geographic layers, and predictive models share one governed evidence base.
+Before **Jessica** acts on the Colorado early warning, **Jordan**, the Database Administrator, confirms that the approved list of database objects includes service programs, resident requests, demand signals, partner relationships, geographic layers, and predictive models.
 
-You are the database developer supporting Jessica. In this lab, you inventory only the object families used by the active workshop and then size the public-service data behind them. The result becomes the evidence map for every later question.
+You work with Jordan as the database developer supporting Jessica, Sam, Priya, and Maya. In this lab, you inventory only the object families used by the active workshop and then size the public-service data behind them. The result becomes the shared map for every later question.
 
-**Oracle AI Database 26ai** acts as the connected foundation for this investigation. Each public-service workload can use the access pattern it needs while the source records, SQL access, and governance remain connected.
+**Oracle AI Database** acts as the connected foundation for this investigation. Each public-service workload can use the access pattern it needs while the source records, SQL access, and governance remain connected.
 
 The diagram compares a fragmented architecture with the converged database foundation for Colorado.
 
@@ -47,16 +47,18 @@ Estimated Time: **10 minutes**
 
 | Step | State and local government focus |
 | --- | --- |
-| Business Problem | Colorado cannot act confidently if each team uses a different copy of resident-service evidence. |
+| Business Problem | Colorado cannot act confidently if each team uses a different copy of resident-service information. |
 | Technical Challenge | Platform teams must connect relational, JSON, vector, graph, spatial, and predictive workloads. |
-| Persona Focus | A database developer maps the foundation that Jessica and Maria use later. |
+| Persona Focus | Jordan, the Database Administrator, maps the foundation that Jessica, Sam, Priya, and Maya use later. |
 | What You Will Do | Query Oracle catalog views and SLED semantic views. |
 | Database Capability | One schema exposes business views and specialized database objects. |
 | Outcome | Every later result traces to the same governed foundation. |
 
-**Persona focus:** You are the database developer showing Jessica which governed objects support the active decision path.
+**Persona focus:** You join Jordan as he shows Jessica, Sam, Priya, and Maya which governed objects support the active decision path.
 
 ## Task 1: Inventory the active object families
+
+Jordan needs to confirm the shared foundation before Jessica investigates the warning and before the rest of the team relies on later results. Inspect the capability counts now; they show which views, documents, vectors, graph, spatial layers, and models are available to support the decision path.
 
 Start with the object families that later labs actually use, so the foundation check stays tied to the active resident-services workflow:
 
@@ -64,7 +66,7 @@ Start with the object families that later labs actually use, so the foundation c
 
     > **SQL Worksheet reminder:** Need a reminder on how to open and use SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet).
 
-    The query reads Oracle catalog views. Each branch counts one active capability: SLED semantic views, the `ORDERS_DV` JSON Relational Duality view, the `INFLUENCER_NETWORK` graph, vector columns, spatial layers, and the four SLED OML models. `UNION ALL` stacks the counts into one capability map.
+    The query reads Oracle catalog views. Each branch counts one active capability: SLED semantic views, the `ORDERS_DV` JSON Relational Duality view, the `INFLUENCER_NETWORK` graph, vector columns, spatial layers, and the four SLED OML models. `UNION ALL` stacks the counts into one list of available database objects.
 
     <details>
     <summary><strong>Why this matters: one catalog instead of six inventories</strong></summary>
@@ -119,20 +121,15 @@ Start with the object families that later labs actually use, so the foundation c
 
     **Expected output: Active Object Inventory**
 
-    | Area | Count |
-    | --- | --- |
-    | SLED semantic views | 11 |
-    | JSON duality views | 1 |
-    | Property graphs | 1 |
-    | Vector columns | 2 |
-    | Spatial metadata layers | 4 |
-    | SLED OML models | 4 |
+    ![SQL Worksheet result showing the active State and Local Government object inventory](images/sql-object-inventory.png " ")
 
 2. Read the result as a capability checklist.
 
     The semantic views support dashboard and request analysis. `ORDERS_DV` supplies the application document shape. Vector columns support meaning-based search. `INFLUENCER_NETWORK` supports partner traversal. Spatial metadata explains location columns, and the OML catalog identifies deployed models.
 
 ## Task 2: Count the public-service data groups
+
+Once Jordan knows the object families are present, the team needs a baseline for the resident-service data behind them. Inspect the row counts now so Jessica can understand the population from which later tasks narrow a review queue or identify a priority.
 
 Give scale to the operating story before you investigate specific requests, services, and regions:
 
@@ -155,21 +152,17 @@ Give scale to the operating story before you investigate specific requests, serv
 
     **Expected output: Public-Service Row Counts**
 
-    | Data Group | Rows |
-    | --- | --- |
-    | Public programs | 3 |
-    | Public services | 10 |
-    | Resident signals | 8 |
-    | Service requests | 8 |
-    | Residents | 6 |
-    | Service access centers | 4 |
-    | Demand regions | 3 |
+    ![SQL Worksheet result showing the public-service data group row counts](images/sql-row-counts.png " ")
 
 2. Use the counts as the baseline for later investigation.
 
-    Later labs filter, rank, traverse, or score this population. A short result does not mean the scenario is small; it means SQL has narrowed the governed data to the evidence that matters for one decision.
+    Later labs filter, rank, traverse, or score this population. A short result does not mean the scenario is small; it means SQL has narrowed the governed data to the records that matter for one decision.
+
+### What have I achieved when the lab ends?
+
+You have mapped the governed objects and data groups that Jessica, Sam, Priya, and Maya use throughout the workshop. Jordan gives every member of the team one shared starting point for requests, documents, language, relationships, locations, and models.
 
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle LiveLabs Team, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

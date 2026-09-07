@@ -2,9 +2,9 @@
 
 ## Introduction
 
-**Jessica Chen** begins with an early warning: the **Colorado Medicaid Eligibility Error Rate** is **2.7%**, approaching but still within the stakeholder-provided **3.0%** threshold. The measure tells Jessica to investigate, but it does not identify the requests, regions, or services that deserve attention first.
+**Jessica**, the State Services Risk Analyst, begins with an early warning: the **Colorado Medicaid Eligibility Error Rate** is **2.7%**, approaching but still within the stakeholder-provided **3.0%** threshold. The measure tells Jessica to investigate, but it does not identify the requests, regions, or services that deserve attention first.
 
-You are the service operations analyst supporting Jessica. In this lab, you recreate the database-backed operating measures around that warning and then drill into the request rows behind them. Application configuration supplies the eligibility rate, so the learner SQL does not claim to calculate it.
+You support Jessica as the service operations analyst, while **Maya**, the Resident Services Operations Leader, prepares the follow-up response. In this lab, you recreate the database-backed operating measures around that warning and then drill into the request rows behind them. Application configuration supplies the eligibility rate, so the learner SQL does not claim to calculate it.
 
 <details>
 <summary><strong>Key terms: early warning, key performance indicator, urgency, and drill-through</strong></summary>
@@ -19,11 +19,11 @@ You are the service operations analyst supporting Jessica. In this lab, you recr
 
 </details>
 
-The concept graphic shows the path from the command-center summary to reviewable SQL evidence.
+The concept graphic shows the path from the command-center summary to SQL results the team can inspect.
 
-![Public Service Command Center evidence flow](images/command-center-evidence.svg " ")
+![Public Service Command Center SQL drill-through flow](images/command-center-evidence.svg " ")
 
-The application page below gives Jessica a statewide operating view. Look for service pressure and request evidence around the eligibility warning. The full application uses a larger demonstration dataset, while the compact learner dataset keeps the SQL repeatable. The SQL explains the database-backed request measures, not the configured warning rate.
+The application page below gives Jessica a statewide operating view. Look for service pressure and request details around the eligibility warning. The full application uses a larger demonstration dataset, while the compact learner dataset keeps the SQL repeatable. The SQL explains the database-backed request measures, not the configured warning rate.
 
 ![Public Service Command Center page](images/public-service-command-center.png " ")
 
@@ -41,14 +41,16 @@ Estimated Time: **10 minutes**
 | --- | --- |
 | Business Problem | Jessica needs to know where service pressure may narrow the operating margin for Colorado. |
 | Technical Challenge | Dashboard summaries must lead to reviewable request and service rows. |
-| Persona Focus | A service operations analyst supports the statewide prioritization led by Jessica. |
+| Persona Focus | Jessica interprets the warning; Maya plans the service response; Jordan provides the database results behind it. |
 | What You Will Do | Calculate request KPIs and inspect the highest-urgency work. |
 | Database Capability | Converged SQL aggregates and drills through the same SLED semantic view. |
-| Outcome | Jessica can prioritize review without treating a screenshot as the evidence source. |
+| Outcome | Jessica can prioritize review without treating a screenshot as the source of truth. |
 
-**Persona focus:** You support Jessica by connecting statewide measures to named services, regions, and requests.
+**Persona focus:** You join Jessica, Maya, and Jordan as you connect statewide measures to named services, regions, and requests.
 
 ## Task 1: Calculate statewide operating measures
+
+Jessica needs to understand the pressure behind the early warning before Maya can plan a response. Calculate the statewide KPI row now and inspect total requests, open work, urgent work, and service-value exposure; those measures show where the team should focus its review.
 
 Start with one summary row so Jessica can see workload size, urgency, and service-value exposure before opening individual requests:
 
@@ -81,9 +83,7 @@ Start with one summary row so Jessica can see workload size, urgency, and servic
 
     **Expected output: Statewide Request KPIs**
 
-    | Total Requests | Open Requests | Urgent Requests | Service Value Exposure |
-    | --- | --- | --- | --- |
-    | 8 | 7 | 3 | 50500 |
+    ![SQL Worksheet result showing the statewide public-service request KPIs](images/sql-request-kpis.png " ")
 
 2. Interpret the measures.
 
@@ -91,9 +91,11 @@ Start with one summary row so Jessica can see workload size, urgency, and servic
 
     `Total Requests` establishes workload size. `Open Requests` shows work still moving through the lifecycle. `Urgent Requests` identifies rows with an **urgency score of at least 80**, and `Service Value Exposure` supplies a planning proxy for the public-service value tied to the requests.
 
-    These measures do not prove why the eligibility rate is **2.7%**. They tell Jessica which operating evidence to review around that early warning.
+    These measures do not explain why the eligibility rate is **2.7%**. They tell Jessica which operating details to review around that early warning.
 
 ## Task 2: Drill into the highest-urgency requests
+
+The KPI row identifies pressure, but it cannot tell Jessica which service request needs attention first. Drill into the highest-urgency rows now and inspect the named service, region, center, and urgency score so Maya has a reviewable queue for the next conversation.
 
 Move from the summary to named services, regions, and centers so the operating pressure becomes an actionable review queue.
 
@@ -122,17 +124,11 @@ Move from the summary to named services, regions, and centers so the operating p
 
     **Expected output: Highest-Urgency Service Requests**
 
-    | Service Request Id | Service Region | Request Status | Urgency Score | Service Value Exposure | Service Name | Service Access Center Name |
-    | --- | --- | --- | --- | --- | --- | --- |
-    | 1 | Western Slope | in progress | 92 | 12500 | Medicaid Eligibility Review | Grand Junction Regional Service Center |
-    | 6 | Western Slope | in progress | 88 | 11000 | Housing Assistance Intake | Grand Junction Regional Service Center |
-    | 2 | Front Range | pending | 85 | 8000 | Benefits Appointment Scheduling | Denver Human Services Hub |
-    | 3 | Southern Colorado | confirmed | 78 | 4500 | Building Permit Inspection | Pueblo Community Access Center |
-    | 7 | Western Slope | pending | 71 | 2000 | Senior Transportation | Grand Junction Regional Service Center |
+    ![SQL Worksheet result showing the highest-urgency public-service requests](images/sql-highest-urgency-requests.png " ")
 
 2. Review the rows as an operations queue.
 
-    Jessica can now see which service, region, and access center sits behind each urgent request. The result supports a concrete next step: inspect one regional request, then compare its details with resident demand, partner, geography, and capacity evidence.
+    Jessica can now see which service, region, and access center sits behind each urgent request. The result supports a concrete next step: inspect one regional request, then compare its details with resident demand, partner, geography, and capacity information.
 
     The application view below highlights services under pressure. Use it to connect the SQL queue to the page Jessica reviews.
 
@@ -142,7 +138,11 @@ Move from the summary to named services, regions, and centers so the operating p
 
     In production, indexes on request status, urgency, region, service ID, and center ID can support filters and joins. A materialized view may help when many users run the same statewide totals. This lab uses direct SQL so the calculation remains visible and traceable.
 
+### What have I achieved when the lab ends?
+
+You have connected the command-center summary to the specific service requests behind it. Jessica can turn a statewide measure into a short list of services and requests that deserve attention first, while Maya can use the same results to plan a service response.
+
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle LiveLabs Team, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

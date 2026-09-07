@@ -1,0 +1,101 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Ask Governed State and Local Government Service Questions with Select AI\n\n### The business problem\n\nService planners need timely answers about request demand and service status, while reviewers need to see the database evidence behind each answer. In this notebook, you prepare two small, business-facing views, then use Oracle Select AI to ask questions only over those approved views.\n\nYou will activate the `genai` profile, compare a direct SQL baseline with a generated statement, use a brief narrated response, and keep the service source data unchanged. Generated wording and SQL shape can vary, so review the statement and result before using an answer in planning.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Activate the Select AI profile\n\nThe `genai` profile supplies the model connection and the database context for this session. Run the paragraph below and confirm that `GENAI` is enabled before asking a question.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nEXEC DBMS_CLOUD_AI.SET_PROFILE('genai');\n\nSELECT profile_name,\n       status\nFROM user_cloud_ai_profiles\nWHERE LOWER(profile_name) = 'genai';\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Create AI-ready service views\n\nThe existing service-operation views are useful for detailed analysis. These two compact views give Select AI clear, approved business terms: one summarizes service requests by region and status; the other summarizes requested services. The comments explain the meaning of the columns that Select AI receives as metadata.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nCREATE OR REPLACE VIEW select_ai_service_region_v AS\nSELECT service_region_code,\n       request_status,\n       COUNT(*) AS service_request_count,\n       ROUND(AVG(urgency_score), 2) AS average_urgency_score,\n       ROUND(SUM(service_value_exposure), 2) AS total_service_value_exposure\nFROM sled_service_requests_v\nGROUP BY service_region_code, request_status;\n\nCREATE OR REPLACE VIEW select_ai_service_demand_v AS\nSELECT service_region_code,\n       service_name,\n       COUNT(DISTINCT service_request_id) AS service_request_count,\n       SUM(requested_quantity) AS requested_unit_count,\n       ROUND(SUM(line_service_value), 2) AS total_service_value\nFROM sled_service_request_lines_v\nGROUP BY service_region_code, service_name;\n\nCOMMENT ON TABLE select_ai_service_region_v IS\n  'Approved summary of State and Local Government service requests by region and request status.';\nCOMMENT ON COLUMN select_ai_service_region_v.service_region_code IS\n  'State or local service region code.';\nCOMMENT ON COLUMN select_ai_service_region_v.request_status IS\n  'Current learner-facing status of a service request.';\nCOMMENT ON COLUMN select_ai_service_region_v.service_request_count IS\n  'Number of service requests in the region and status.';\nCOMMENT ON COLUMN select_ai_service_region_v.average_urgency_score IS\n  'Average demand urgency score for the service requests.';\nCOMMENT ON COLUMN select_ai_service_region_v.total_service_value_exposure IS\n  'Total service-value exposure represented by the requests.';\nCOMMENT ON TABLE select_ai_service_demand_v IS\n  'Approved summary of requested public services by service region.';\nCOMMENT ON COLUMN select_ai_service_demand_v.service_name IS\n  'Name of the requested public service.';\nCOMMENT ON COLUMN select_ai_service_demand_v.requested_unit_count IS\n  'Total units requested for the public service.';\n\nSELECT object_name, object_type, status\nFROM user_objects\nWHERE object_name IN ('SELECT_AI_SERVICE_REGION_V', 'SELECT_AI_SERVICE_DEMAND_V')\nORDER BY object_name;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Set the approved object list\n\nSet the `genai` object list to the two AI-ready views. This gives the model a focused vocabulary for this exercise. The next query confirms the objects that provide the baseline evidence.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nBEGIN\n  DBMS_CLOUD_AI.SET_ATTRIBUTE(\n    profile_name    => 'genai',\n    attribute_name  => 'object_list',\n    attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"SELECT_AI_SERVICE_REGION_V\"},' ||\n                       '{\"owner\": \"' || USER || '\", \"name\": \"SELECT_AI_SERVICE_DEMAND_V\"}]'\n  );\nEND;\n/\n\nSELECT object_name, object_type\nFROM user_objects\nWHERE object_name IN ('SELECT_AI_SERVICE_REGION_V', 'SELECT_AI_SERVICE_DEMAND_V')\nORDER BY object_name;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Establish the SQL baseline\n\nRun this direct query before asking in natural language. It returns the regions and request statuses with the largest request counts, giving planners a stable result to compare with the AI-assisted answer.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT service_region_code,\n       request_status,\n       service_request_count,\n       average_urgency_score\nFROM select_ai_service_region_v\nORDER BY service_request_count DESC,\n         service_region_code,\n         request_status\nFETCH FIRST 10 ROWS ONLY;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Ask a general planning question with Select AI Chat\n\n`CHAT` explains a general concept; it is not the evidence query. Use this short prompt to distinguish a general planning explanation from the governed database questions that follow.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI CHAT\n  In one sentence, explain why service planners compare request volume with urgency before changing service capacity;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Review generated SQL with SHOWSQL\n\n`SHOWSQL` produces a statement without running the final database question. Review it and confirm it is a read-only `SELECT` that uses an approved view before relying on any later answer.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI SHOWSQL\n  Show service_region_code, request_status, service_request_count, and average_urgency_score from select_ai_service_region_v ordered by service_request_count descending;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Ask for a bounded narrated answer\n\n`NARRATE` uses the approved view to return a natural-language response. This prompt asks for exactly one sentence and names the required fields, keeping the result easy for a reviewer to compare with the SQL baseline.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT AI NARRATE\n  Using select_ai_service_region_v, identify the service region and request status with the largest service_request_count. Reply in exactly one sentence that includes the region, status, and count;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Confirm the read-only boundary\n\nThis notebook creates or replaces only the two AI-ready views and their comments. The baseline, `CHAT`, `SHOWSQL`, and `NARRATE` paragraphs do not update service requests, resident records, capacity, or routes. Confirm that both approved objects are views, then keep reviewing generated SQL before using it in planning.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    },
+    {
+      "text": "%script\nSELECT object_name,\n       object_type,\n       status\nFROM user_objects\nWHERE object_name IN ('SELECT_AI_SERVICE_REGION_V', 'SELECT_AI_SERVICE_DEMAND_V')\nORDER BY object_name;\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "sql"}},
+      "results": {}
+    },
+    {
+      "text": "%md\n## Conclusion\n\nYou prepared approved State and Local Government service views, established a direct SQL baseline, inspected generated SQL, and received a bounded narrated answer. Select AI can make governed data easier to ask about, while planning teams remain responsible for reviewing the SQL, result, and operational context before making decisions.\n",
+      "config": {"colWidth": 12, "enabled": true, "results": {}, "settings": {"params": {}, "forms": {}}, "editorSetting": {"language": "md"}, "editorHide": true},
+      "results": {}
+    }
+  ],
+  "name": "Ask Governed State and Local Government Service Questions with Select AI",
+  "id": "485a7bd3-9d10-4b77-9bf2-2711ab3d3e5b",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {"isZeppelinNotebookCronEnable": false},
+  "info": {}
+}

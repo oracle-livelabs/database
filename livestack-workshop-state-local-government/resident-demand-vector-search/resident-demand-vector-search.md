@@ -4,7 +4,7 @@
 
 Residents and caseworkers may describe the same service problem in different words. A search for benefits eligibility appointment backlog should find relevant services and signals even when the stored text says application review delay or caseworker scheduling.
 
-You are the service intelligence analyst supporting **Jessica**. In this lab, you turn a plain-language concern into an embedding, compare it with stored vectors, and rank the closest public-service evidence.
+**Jessica**, the State Services Risk Analyst, needs to find related services and resident concerns even when people use different words. **Priya**, the Government AI Engineer, prepares the meaning-based search. In this lab, you turn a plain-language concern into an embedding, compare it with stored vectors, and rank the closest public-service matches.
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -23,7 +23,7 @@ The concept graphic follows the query from plain-language concern to service act
 
 ![Resident demand semantic-search flow](images/resident-demand-vector-flow.svg " ")
 
-The **Resident Demand Signals** page gives the service intelligence analyst a plain-language vector search, a demand summary, and resident-signal evidence to review. The full application uses a larger demonstration dataset; the SQL in this lab reproduces the same meaning-based search pattern over compact deterministic workshop data.
+The **Resident Demand Signals** page gives the service intelligence analyst a plain-language vector search, a demand summary, and resident signals to review. The full application uses a larger demonstration dataset; the SQL in this lab reproduces the same meaning-based search pattern over compact deterministic workshop data.
 
 ![Resident Demand Signals vector-search page](images/resident-demand-signals.png " ")
 
@@ -41,14 +41,16 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | Residents and caseworkers use different language for related service pressure. |
 | Technical Challenge | Analysts need semantic search without exporting governed text to another service. |
-| Persona Focus | A service intelligence analyst supports the statewide investigation led by Jessica. |
+| Persona Focus | Jessica frames the question; Priya keeps embeddings and similarity search inside the governed database. |
 | What You Will Do | Create a query embedding and compare it with stored service and signal vectors. |
 | Database Capability | Oracle AI Vector Search stores vectors and runs similarity SQL in the database. |
 | Outcome | Jessica receives a ranked review queue even when wording differs. |
 
-**Persona focus:** You help Jessica connect an operating concern to relevant services and resident signals.
+**Persona focus:** You join Jessica and Priya as you connect an operating concern to relevant services and resident signals.
 
 ## Task 1: Search public services by meaning
+
+Jessica has a plain-language concern, but the service catalog may use different terms. Search the service descriptions now and inspect the highest similarity scores and matching service names; Priya can use those results to show Jessica which services deserve a closer look.
 
 Start with services so Jessica can translate a plain-language concern into the programs and service types most likely to need attention.
 
@@ -89,13 +91,7 @@ Start with services so Jessica can translate a plain-language concern into the p
 
     The rows below were validated with the workshop seed data and shared MiniLM model. Similarity decimals can vary slightly if the database model build changes.
 
-    | Service Name | Service Category | Similarity |
-    | --- | --- | --- |
-    | Benefits Appointment Scheduling | Benefits and Health | 0.7087 |
-    | Medicaid Eligibility Review | Benefits and Health | 0.5255 |
-    | Housing Assistance Intake | Housing | 0.3726 |
-    | Child Care Subsidy | Family Services | 0.3397 |
-    | SNAP Application Support | Benefits and Health | 0.2958 |
+    ![SQL Worksheet result showing the related public services ranked by vector similarity](images/sql-related-services.png " ")
 
 2. Interpret the ranking.
 
@@ -103,11 +99,13 @@ Start with services so Jessica can translate a plain-language concern into the p
 
 ## Task 2: Search resident signals by meaning
 
+The service matches are useful, but Jessica also needs to know what residents and caseworkers have actually reported. Search the resident signals now and inspect both similarity and urgency; the combined result helps Jessica prioritize a human review rather than relying on wording alone.
+
 Search resident signals next so Jessica can compare the service match with the concerns residents and caseworkers actually expressed.
 
 1. Run the signal search.
 
-    `POST_EMBEDDINGS` stores vectors for signal text, while `SLED_RESIDENT_SIGNALS_V` presents the source, urgency, and public-service wording. The query returns an excerpt so the analyst can read the evidence behind each score.
+    `POST_EMBEDDINGS` stores vectors for signal text, while `SLED_RESIDENT_SIGNALS_V` presents the source, urgency, and public-service wording. The query returns an excerpt so the analyst can read the text behind each score.
 
     ```sql
     <copy>
@@ -135,13 +133,7 @@ Search resident signals next so Jessica can compare the service match with the c
 
     These results use the same validated query embedding as the service search. Close scores can shift slightly if the shared model build changes.
 
-    | Resident Signal Id | Source Channel | Urgency Band | Signal Excerpt | Similarity |
-    | --- | --- | --- | --- | --- |
-    | 2 | resident portal | urgent | My benefits renewal is waiting for eligibility review and I cannot get an appointment. | 0.6767 |
-    | 1 | caseworker | critical | Eligibility appointments are booking three weeks out in the Western Slope. | 0.5740 |
-    | 6 | partner hotline | urgent | Housing intake and benefits reviews need a shared appointment plan. | 0.4537 |
-    | 7 | caseworker | rising | Senior transportation requests are delaying scheduled eligibility visits. | 0.3980 |
-    | 5 | partner hotline | steady | Emergency shelter referrals remain available across southern Colorado. | 0.2260 |
+    ![SQL Worksheet result showing resident signals ranked by vector similarity](images/sql-related-resident-signals.png " ")
 
 2. Compare meaning with urgency.
 
@@ -155,12 +147,12 @@ Search resident signals next so Jessica can compare the service match with the c
 
     **Expected output: Re-Ranked Resident Signals**
 
-    Emergency-shelter, housing-intake, or partner-coordination evidence should move relative to the eligibility-focused baseline. Exact row order and similarity decimals are dynamic because they depend on the deployed embedding-model build.
+    Emergency-shelter, housing-intake, or partner-coordination signals should move relative to the eligibility-focused baseline. Exact row order and similarity decimals are dynamic because they depend on the deployed embedding-model build.
 
     <details>
     <summary><strong>Challenge answer: Combine semantic relevance with urgency</strong></summary>
 
-    > In the validated result, signal `5` is the closest semantic match, but its urgency band is `steady`. Signal `6` ranks second and is `urgent`, so it should enter Jessica's human review queue first when both signals are weighed together. This is a review priority, not an automatic action; exact rankings can change with the embedding-model build. Oracle AI Database 26ai keeps the source text, vectors, urgency evidence, and service context together, so teams can investigate without copying sensitive resident-service data into disconnected systems.
+    > In the validated result, signal `5` is the closest semantic match, but its urgency band is `steady`. Signal `6` ranks second and is `urgent`, so it should enter Jessica's human review queue first when both signals are weighed together. This is a review priority, not an automatic action; exact rankings can change with the embedding-model build. Oracle AI Database keeps the source text, vectors, urgency, and service context together, so teams can investigate without copying sensitive resident-service data into disconnected systems.
 
     If you need the runnable solution, use this query:
 
@@ -188,7 +180,11 @@ Search resident signals next so Jessica can compare the service match with the c
 
     </details>
 
+### What have I achieved when the lab ends?
+
+You have turned one service concern into ranked service and resident-signal matches. Jessica can find related services and resident signals even when the wording differs, then choose what to investigate next.
+
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle LiveLabs Team, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

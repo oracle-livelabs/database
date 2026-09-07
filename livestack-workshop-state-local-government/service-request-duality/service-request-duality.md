@@ -2,9 +2,9 @@
 
 ## Introduction
 
-After the **Command Center** review, **Maria Santos** needs one complete service request that applications and analysts can use without maintaining separate copies. The application wants a document with a request header and nested service lines, while operations teams need governed relational rows for filtering, joins, and review.
+After the **Command Center** review, **Sam**, the Public-Service Application Developer, needs one complete service request that applications and analysts can use without maintaining separate copies. The application wants a document with a request header and nested service lines, while operations teams need governed relational rows for filtering, joins, and review.
 
-You are the application and database developer supporting **Maria**. In this lab, you read an existing request document, expand the document contract to accept inserts, create and update a reserved workshop request through JSON, and verify the same changes in relational rows.
+You work with **Jordan**, the Database Administrator, and support Jessica's review. In this lab, you read an existing request document, expand the document contract to accept inserts, create and update a reserved workshop request through JSON, and verify the same changes in relational rows.
 
 <details>
 <summary><strong>Key terms: JSON, relational tables, duality view, projection, and transaction</strong></summary>
@@ -25,7 +25,7 @@ The diagram shows how `ORDERS_DV` presents one relational request and its line i
 
 ![Service request JSON Relational Duality flow](images/service-request-duality-flow.svg " ")
 
-The Service Request Workbench image below gives Maria a relational queue of residents, statuses, service value, assigned sites, and request-line counts. Selecting a request lets the application switch between relational details and the JSON document shape. The full application shows more requests than the compact learner dataset, but both use the same pattern.
+The Service Request Workbench image below gives Sam a relational queue of residents, statuses, service value, assigned sites, and request-line counts. Selecting a request lets the application switch between relational details and the JSON document shape. The full application shows more requests than the compact learner dataset, but both use the same pattern.
 
 ![Service Request Workbench relational queue](images/service-request-workbench.png " ")
 
@@ -47,16 +47,18 @@ Estimated Time: **18 minutes**
 
 | Step | State and local government focus |
 | --- | --- |
-| Business Problem | Maria needs one request record that applications and analysts can both create, update, and review. |
+| Business Problem | Sam needs one request record that applications and analysts can both create, update, and review. |
 | Technical Challenge | Teams need JSON writes without duplicating requests or weakening relational controls. |
-| Persona Focus | Application and database developers support Maria's regional request review. |
+| Persona Focus | Sam serves the application contract; Jordan preserves relational governance for Jessica's review. |
 | What You Will Do | Read, enable, insert, update, verify, and project a document through `ORDERS_DV`. |
 | Database Capability | JSON Relational Duality and SQL/JSON provide document and relational access over the same governed rows. |
-| Outcome | One JSON insert creates root and child rows, and one JSON status update changes the root while preserving service-line evidence. |
+| Outcome | One JSON insert creates root and child rows, and one JSON status update changes the root while preserving the related service-line details. |
 
-**Persona focus:** You are the developer showing Maria that an application document contract can preserve relational keys, joins, and governance.
+**Persona focus:** You join Sam and Jordan as they show Jessica that an application document contract can preserve relational keys, joins, and governance.
 
 ## Task 1: Inspect a document-shaped service request
+
+Sam needs to see the current request shape before changing how the application writes it. Inspect one nested JSON document now and look for its header and service lines; this shows Sam and Jessica that the application view and the governed relational records describe the same request.
 
 Start with the request as the application consumes it so the document shape is clear before you change its write contract.
 
@@ -85,17 +87,17 @@ Start with the request as the application consumes it so the document shape is c
 
     Oracle Database adds generated `_metadata` values such as an etag and as-of token. Those values can change. Focus on the validated business portion.
 
-    | Service Request Document |
-    | --- |
-    | { "\_id" : 1, "customerId" : 1, "status" : "processing", "total" : 12500, "routingCost" : 120, "urgencyScore" : 92, "createdAt" : "2026-06-18T08:00:00", "items" : [ { "itemId" : 1, "productId" : 1, "quantity" : 1, "serviceValue" : 12500 } ] } |
+    ![SQL Worksheet result showing the service request JSON document and visible payload](images/sql-service-request-document.png " ")
 
 2. Review the document shape.
 
-    Root fields describe the request, and the nested `items` array describes its service lines. Maria can review one complete payload while keys and constraints remain in the relational source.
+    Root fields describe the request, and the nested `items` array describes its service lines. Sam can review one complete payload while keys and constraints remain in the relational source.
 
     ![Relational detail for the same service request](images/service-request-relational-detail.png " ")
 
 ## Task 2: Enable document inserts and updates
+
+Before Sam creates a request through JSON, Jordan needs to confirm which changes the duality view currently permits. Inspect the view capabilities, enable the required insert and update behavior, and then check the updated capabilities so the team knows the document contract is ready for the controlled exercise.
 
 The loader-created `ORDERS_DV` allows updates to existing documents but does not allow an application to insert a new request document. Inspect that baseline before expanding the contract.
 
@@ -116,9 +118,7 @@ The loader-created `ORDERS_DV` allows updates to existing documents but does not
 
     **Expected output: Baseline Document Capabilities**
 
-    | View Name | Allow Insert | Allow Update | Allow Delete |
-    | --- | --- | --- | --- |
-    | ORDERS\_DV | false | true | false |
+    ![SQL Worksheet result showing the baseline ORDERS_DV document capabilities](images/sql-duality-capabilities-baseline.png " ")
 
 2. Enable inserts and updates for the root request and nested service lines.
 
@@ -158,7 +158,7 @@ The loader-created `ORDERS_DV` allows updates to existing documents but does not
 
     **Expected output: Document Contract Updated**
 
-    Oracle confirms that the duality view was created or replaced.
+    ![SQL Worksheet script output confirming that the ORDERS_DV document contract was updated](images/sql-duality-contract-updated.png " ")
 
 3. Run the capability query again.
 
@@ -177,11 +177,11 @@ The loader-created `ORDERS_DV` allows updates to existing documents but does not
 
     **Expected output: Document Capabilities Enabled**
 
-    | View Name | Allow Insert | Allow Update | Allow Delete |
-    | --- | --- | --- | --- |
-    | ORDERS\_DV | true | true | false |
+    ![SQL Worksheet result showing the enabled ORDERS_DV document capabilities](images/sql-duality-capabilities-enabled.png " ")
 
 ## Task 3: Create and update a JSON service request
+
+With the document contract ready, Sam can create the reserved request without creating a separate document copy. Inspect the returned JSON and the matching relational rows after the insert and update; this lets Jessica review the same service request that an application would use.
 
 The reserved identifiers in this task are outside the seed-data range. The committed rows remain for the current workshop reservation and disappear when the environment is rebuilt. The guard prevents a duplicate insert, but a repeated run preserves the latest committed status.
 
@@ -244,7 +244,7 @@ The reserved identifiers in this task are outside the seed-data range. The commi
 
     Oracle confirms that the commit completed.
 
-3. Retrieve the JSON write as relational evidence.
+3. Retrieve the JSON write as relational rows.
 
     This query joins root and child tables to governed resident, service, and center views. One document insert should produce one request row and one line-item row.
 
@@ -274,9 +274,7 @@ The reserved identifiers in this task are outside the seed-data range. The commi
 
     **Expected output: Created Request Rows**
 
-    | Request Id | Status | Resident | Line Id | Service | Quantity | Service Value | Line Value | Center |
-    | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-    | 900001 | pending | Jordan Lee | 990001 | Benefits Appointment Scheduling | 1 | 8000 | 8000 | Denver Human Services Hub |
+    ![SQL Worksheet result showing the created service request, status, resident, and service name](images/sql-created-request-rows.png " ")
 
 4. Update only the document status.
 
@@ -322,7 +320,7 @@ The reserved identifiers in this task are outside the seed-data range. The commi
     <details>
     <summary><strong>Challenge answer: one document, one governed request</strong></summary>
 
-    > `ORDERS.ORDER_STATUS` changes because the JSON update targets only `status`. The nested `ORDER_ITEMS` evidence remains unchanged. Oracle AI Database 26ai keeps the application document, relational request, service line, and public-service context together instead of synchronizing sensitive records across disconnected systems.
+    > `ORDERS.ORDER_STATUS` changes because the JSON update targets only `status`. The nested `ORDER_ITEMS` rows remain unchanged. Oracle AI Database keeps the application document, relational request, service line, and public-service context together instead of synchronizing sensitive records across disconnected systems.
 
     If you need the runnable solution, use this query:
 
@@ -347,11 +345,13 @@ The reserved identifiers in this task are outside the seed-data range. The commi
     </copy>
     ```
 
-    **Expected result:** request `900001` has physical status `processing` and public status `in progress`; line `990001`, Benefits Appointment Scheduling, quantity `1`, and both `8000` values are unchanged.
+    ![SQL Worksheet result showing the relational effect of the JSON status update](images/sql-duality-challenge-answer.png " ")
 
     </details>
 
 ## Task 4: Project document fields into SQL
+
+After the application change, Jessica still needs a business-readable way to investigate the request in SQL. Project the document fields and inspect the request status, resident, and service context now; this confirms that Sam's application document remains connected to governed analysis.
 
 Project the learner-created document into SQL columns and join it to governed resident and service context.
 
@@ -384,19 +384,21 @@ Project the learner-created document into SQL columns and join it to governed re
 
     **Expected output: Projected Learner-Created Request**
 
-    | Request Id | Document Status | Resident | Service |
-    | --- | --- | --- | --- |
-    | 900001 | processing | Jordan Lee | Benefits Appointment Scheduling |
+    ![SQL Worksheet result showing the projected request ID, document status, resident, and service name](images/sql-created-request-rows.png " ")
 
 2. Connect the two access shapes.
 
-    The application inserted and updated one nested document. Maria can immediately review the same root and child evidence with SQL and public-service views. No copied document store, reconciliation process, or second security model is required.
+    The application inserted and updated one nested document. Sam can immediately review the same root and child rows with SQL and public-service views. No copied document store, reconciliation process, or second security model is required.
 
 ## Next Steps
 
 Congratulations on completing the JSON Relational Duality lab. You expanded a JSON API contract, created and updated a service request as a document, and inspected the same governed data as relational rows. For a deeper hands-on workshop, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
+### What have I achieved when the lab ends?
+
+You have read, enabled, created, updated, and queried one service request through the same governed source. Sam can give applications a complete request document while Jessica and Jordan continue to work with the same governed rows.
+
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle LiveLabs Team, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

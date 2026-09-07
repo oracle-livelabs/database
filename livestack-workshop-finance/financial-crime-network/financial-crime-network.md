@@ -6,6 +6,8 @@ Once an account looks suspicious, investigators need to know what other accounts
 
 Jessica follows a suspicious account to see whether it shares devices, contact details, payees, or other connections with risky activity. Jordan keeps those relationships available as governed database evidence, so Jessica can investigate the pattern without relying on a separate graph system.
 
+Jessica follows a suspicious account to see whether it shares devices, contact details, payees, or other connections with risky activity. Jordan keeps those relationships available as governed database evidence, so Jessica can investigate the pattern without relying on a separate graph system.
+
 Fraud patterns often hide in relationships rather than in a single transaction row. One account may not reveal the full picture, but a shared device, reused phone number, mule payee, or repeated IP address can reveal coordinated activity.
 
 A suspicious signal often leads to the question, "Who or what else is connected?" The graph lets you move from a risky account to relationship evidence that can support escalation.
