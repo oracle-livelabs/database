@@ -157,7 +157,7 @@
         "message" : [
           "%md",
           "",
-          "Graph Visulization of previous query"
+          "Graph Visualization of previous query"
         ],
         "selectedVisualization" : "html",
         "visualizationConfig" : null,
@@ -176,7 +176,7 @@
           "status" : "SUCCESS",
           "results" : [
             {
-              "message" : "<p>Graph Visulization of previous query</p>\n",
+              "message" : "<p>Graph Visualization of previous query</p>\n",
               "type" : "HTML"
             }
           ],

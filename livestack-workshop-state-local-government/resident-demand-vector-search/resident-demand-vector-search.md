@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Residents and caseworkers may describe the same service problem in different words. A search for benefits eligibility appointment backlog should find relevant services and signals even when the stored text says application review delay or caseworker scheduling.
+Residents and caseworkers often describe the same service problem in different words. A search for benefits eligibility appointment backlog should still find records that say application review delay or caseworker scheduling.
 
-You are the service intelligence analyst supporting **Jessica**. In this lab, you turn a plain-language concern into an embedding, compare it with stored vectors, and rank the closest public-service evidence.
+**Jessica**, the State Services Risk Analyst, needs to find related services and resident concerns even when people use different words. **Priya**, the Government AI Engineer, prepares the meaning-based search. In this lab, you turn a plain-language concern into an embedding, compare it with stored vectors, and rank the closest public-service matches.
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -19,11 +19,11 @@ You are the service intelligence analyst supporting **Jessica**. In this lab, yo
 
 </details>
 
-The concept graphic follows the query from plain-language concern to service action.
+The concept graphic traces a plain-language concern through the query to a service action.
 
 ![Resident demand semantic-search flow](images/resident-demand-vector-flow.svg " ")
 
-The **Resident Demand Signals** page gives the service intelligence analyst a plain-language vector search, a demand summary, and resident-signal evidence to review. The full application uses a larger demonstration dataset; the SQL in this lab reproduces the same meaning-based search pattern over compact deterministic workshop data.
+The **Resident Demand Signals** page lets an analyst search in plain language, review demand, and inspect resident signals. The application uses a larger demonstration dataset; this lab repeats the same meaning-based search with compact, fixed workshop data.
 
 ![Resident Demand Signals vector-search page](images/resident-demand-signals.png " ")
 
@@ -40,17 +40,19 @@ Estimated Time: **12 minutes**
 | Step | State and local government focus |
 | --- | --- |
 | Business Problem | Residents and caseworkers use different language for related service pressure. |
-| Technical Challenge | Analysts need semantic search without exporting governed text to another service. |
-| Persona Focus | A service intelligence analyst supports the statewide investigation led by Jessica. |
+| Technical Challenge | Analysts need semantic search without sending protected text to another service. |
+| Persona Focus | Jessica frames the question; Priya keeps embeddings and similarity search in the database. |
 | What You Will Do | Create a query embedding and compare it with stored service and signal vectors. |
 | Database Capability | Oracle AI Vector Search stores vectors and runs similarity SQL in the database. |
 | Outcome | Jessica receives a ranked review queue even when wording differs. |
 
-**Persona focus:** You help Jessica connect an operating concern to relevant services and resident signals.
+**Persona focus:** You join Jessica and Priya as you connect an operating concern to relevant services and resident signals.
 
 ## Task 1: Search public services by meaning
 
-Start with services so Jessica can translate a plain-language concern into the programs and service types most likely to need attention.
+Jessica has a plain-language concern, but the service catalog may use different terms. Search the descriptions and inspect the top similarity scores and matching service names. The result tells Jessica which services to examine first.
+
+Start with services. Jessica can turn her plain-language concern into a short list of programs and service types to examine.
 
 1. Run the semantic service query.
 
@@ -89,25 +91,21 @@ Start with services so Jessica can translate a plain-language concern into the p
 
     The rows below were validated with the workshop seed data and shared MiniLM model. Similarity decimals can vary slightly if the database model build changes.
 
-    | Service Name | Service Category | Similarity |
-    | --- | --- | --- |
-    | Benefits Appointment Scheduling | Benefits and Health | 0.7087 |
-    | Medicaid Eligibility Review | Benefits and Health | 0.5255 |
-    | Housing Assistance Intake | Housing | 0.3726 |
-    | Child Care Subsidy | Family Services | 0.3397 |
-    | SNAP Application Support | Benefits and Health | 0.2958 |
+    ![SQL Worksheet result showing the related public services ranked by vector similarity](images/sql-related-services.png " ")
 
 2. Interpret the ranking.
 
-    Similarity helps Jessica decide which service definitions to inspect first. It does not prove that a service caused the early warning. The ranking narrows the review queue while the source rows remain available for normal SQL analysis.
+    Similarity ranks the service definitions Jessica should inspect first. It does not prove that a service caused the early warning. The source rows remain available for normal SQL analysis.
 
 ## Task 2: Search resident signals by meaning
 
-Search resident signals next so Jessica can compare the service match with the concerns residents and caseworkers actually expressed.
+Service matches are only part of the picture. Jessica also needs to know what residents and caseworkers reported. Search the resident signals and inspect both similarity and urgency; together, they help her prioritize human review instead of relying on wording alone.
+
+Next, compare the service match with the concerns residents and caseworkers actually expressed.
 
 1. Run the signal search.
 
-    `POST_EMBEDDINGS` stores vectors for signal text, while `SLED_RESIDENT_SIGNALS_V` presents the source, urgency, and public-service wording. The query returns an excerpt so the analyst can read the evidence behind each score.
+    `POST_EMBEDDINGS` stores vectors for signal text, while `SLED_RESIDENT_SIGNALS_V` presents the source, urgency, and public-service wording. The query returns an excerpt so the analyst can read the text behind each score.
 
     ```sql
     <copy>
@@ -135,19 +133,13 @@ Search resident signals next so Jessica can compare the service match with the c
 
     These results use the same validated query embedding as the service search. Close scores can shift slightly if the shared model build changes.
 
-    | Resident Signal Id | Source Channel | Urgency Band | Signal Excerpt | Similarity |
-    | --- | --- | --- | --- | --- |
-    | 2 | resident portal | urgent | My benefits renewal is waiting for eligibility review and I cannot get an appointment. | 0.6767 |
-    | 1 | caseworker | critical | Eligibility appointments are booking three weeks out in the Western Slope. | 0.5740 |
-    | 6 | partner hotline | urgent | Housing intake and benefits reviews need a shared appointment plan. | 0.4537 |
-    | 7 | caseworker | rising | Senior transportation requests are delaying scheduled eligibility visits. | 0.3980 |
-    | 5 | partner hotline | steady | Emergency shelter referrals remain available across southern Colorado. | 0.2260 |
+    ![SQL Worksheet result showing resident signals ranked by vector similarity](images/sql-related-resident-signals.png " ")
 
 2. Compare meaning with urgency.
 
     A high similarity score means the text is close to the search intent. `Urgency Band` supplies a separate operating signal. Jessica should review both: meaning identifies relevance, while urgency helps prioritize the response.
 
-    The SQL keeps the underlying text and scores reviewable, so a team can compare semantic relevance with urgency before acting.
+    The SQL shows the source text and scores together, so the team can compare relevance with urgency before acting.
 
 3. 🎯 **Interactive challenge: Reframe the resident-service concern.**
 
@@ -155,12 +147,12 @@ Search resident signals next so Jessica can compare the service match with the c
 
     **Expected output: Re-Ranked Resident Signals**
 
-    Emergency-shelter, housing-intake, or partner-coordination evidence should move relative to the eligibility-focused baseline. Exact row order and similarity decimals are dynamic because they depend on the deployed embedding-model build.
+    Emergency-shelter, housing-intake, or partner-coordination signals should move relative to the eligibility-focused baseline. Exact row order and similarity decimals are dynamic because they depend on the deployed embedding-model build.
 
     <details>
     <summary><strong>Challenge answer: Combine semantic relevance with urgency</strong></summary>
 
-    > In the validated result, signal `5` is the closest semantic match, but its urgency band is `steady`. Signal `6` ranks second and is `urgent`, so it should enter Jessica's human review queue first when both signals are weighed together. This is a review priority, not an automatic action; exact rankings can change with the embedding-model build. Oracle AI Database 26ai keeps the source text, vectors, urgency evidence, and service context together, so teams can investigate without copying sensitive resident-service data into disconnected systems.
+    > In the validated result, signal `5` is the closest semantic match, but its urgency band is `steady`. Signal `6` ranks second and is `urgent`, so Jessica should review it first. This is a review priority, not an automatic action; exact rankings can change with the embedding-model build. Oracle AI Database keeps the source text, vectors, urgency, and service context together, so teams can investigate without copying sensitive resident-service data into disconnected systems.
 
     If you need the runnable solution, use this query:
 
@@ -188,7 +180,11 @@ Search resident signals next so Jessica can compare the service match with the c
 
     </details>
 
+### What have I achieved when the lab ends?
+
+You turned one service concern into ranked service and resident-signal matches. Jessica can find related records despite different wording, then choose what to investigate next.
+
 ## Acknowledgements
 
-* **Author** - Oracle LiveLabs Team
-* **Last Updated By/Date** - Oracle LiveLabs Team, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026
