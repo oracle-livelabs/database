@@ -30,11 +30,11 @@ In this lab, you will:
 
 2. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
 
-![Slack Channels Example](./images/01.png)
+    ![Slack Channels Example](./images/01.png)
 
 3. Copy every channel's `C...` ID from Slack and save it in a secure deployment worksheet. Environment files use IDs, not display names.
 
-![Slack Channels ID Example](./images/02.png)
+    ![Slack Channels ID Example](./images/02.png)
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
@@ -42,15 +42,15 @@ In this lab, you will:
 
 2. Import each manifest once. The manifests below are templates. You can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
 
-| Runtime directory | Manifest | Agent name | Required channel membership |
-| --- | --- | --- | --- |
-| `agents/assistant` | Assistant manifest below | Assistant Agent | `#personal`, `#ideas`, `#content-start`, `#publishing`, `#errors`, `#inbox`, `#briefing`, and direct messages |
-| `agents/pipeline` | Content manifest below | Content Agent | `#content-start`, `#content-runs`, `#content-internal`, `#publishing`, `#errors` |
-| `agents/pipeline` | Creative manifest below | Creative Agent | `#creative-studio`, `#content-runs`, `#content-internal`, `#errors` |
-| `agents/brand-agent` | Brand manifest below | Brand Agent | `#content-runs`, `#errors`, and direct messages |
-| `agents/data` | Data manifest below | Data Agent | `#data`, `#errors` |
-| `agents/ops` | Ops manifest below | Ops Agent | `#ops`, `#errors` |
-| `agents/publish` | Publish manifest below | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
+    | Runtime directory | Manifest | Agent name | Required channel membership |
+    | --- | --- | --- | --- |
+    | `agents/assistant` | Assistant manifest below | Assistant Agent | `#personal`, `#ideas`, `#content-start`, `#publishing`, `#errors`, `#inbox`, `#briefing`, and direct messages |
+    | `agents/pipeline` | Content manifest below | Content Agent | `#content-start`, `#content-runs`, `#content-internal`, `#publishing`, `#errors` |
+    | `agents/pipeline` | Creative manifest below | Creative Agent | `#creative-studio`, `#content-runs`, `#content-internal`, `#errors` |
+    | `agents/brand-agent` | Brand manifest below | Brand Agent | `#content-runs`, `#errors`, and direct messages |
+    | `agents/data` | Data manifest below | Data Agent | `#data`, `#errors` |
+    | `agents/ops` | Ops manifest below | Ops Agent | `#ops`, `#errors` |
+    | `agents/publish` | Publish manifest below | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
 
 
 3. Paste this Assistant Agent manifest.
@@ -376,13 +376,13 @@ In this lab, you will:
 
 10. Assistant Agent and Brand Agent are the two apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app in Slack before installing it.
 
-![AGents with Access to direct messages](./images/03.png)
+    ![AGents with Access to direct messages](./images/03.png)
 
 11. Do not create a Slack app for Website Agent. The `agents/website` service exposes a local HTTP API on port 8005.
 
 12. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
 
-![Slack Agents Tokens for Application](./images/04.png)
+    ![Slack Agents Tokens for Application](./images/04.png)
 
 13. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
 
@@ -494,7 +494,7 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
     chmod 600 "$CONTENTKIT_CONFIG"
     ```
 
-The `export` command is only required for the current shell when using the default path. Systemd services running as user `opc` use the same default path automatically. If a different configuration path is used, `CONTENTKIT_CONFIG` must also be defined in the environment of every service that invokes Content Kit scripts.
+    The `export` command is only required for the current shell when using the default path. Systemd services running as user `opc` use the same default path automatically. If a different configuration path is used, `CONTENTKIT_CONFIG` must also be defined in the environment of every service that invokes Content Kit scripts.
 
 2. Edit the configuration
 
@@ -551,13 +551,13 @@ The `export` command is only required for the current shell when using the defau
     }
     ```
 
-Replace the following values for the specific deployment:
+    Replace the following values for the specific deployment:
 
-- `base_dir`: the absolute path of the repository.
-- `python`: the Python 3.12 interpreter that has Pillow and numpy installed.
-- `paths.brand_guide`: the active deployment's brand guide.
-- `paths.content_strategy`: the active deployment's content strategy.
-- `headshot`: the deployment's actual headshot file.
+    - `base_dir`: the absolute path of the repository.
+    - `python`: the Python 3.12 interpreter that has Pillow and numpy installed.
+    - `paths.brand_guide`: the active deployment's brand guide.
+    - `paths.content_strategy`: the active deployment's content strategy.
+    - `headshot`: the deployment's actual headshot file.
 
     The active strategy profile is selected by:
 
@@ -616,7 +616,7 @@ Replace the following values for the specific deployment:
     AISTAFF_DRIVE_ROOT_FOLDER_ID=<google-drive-folder-id>
     ```
 
-The folder should be the deployment's approved AI Staff delivery folder. Do not store this value in the Content Kit JSON unless the legacy rclone integration is also being used.
+    The folder should be the deployment's approved AI Staff delivery folder. Do not store this value in the Content Kit JSON unless the legacy rclone integration is also being used.
 
     Validate the shared environment configuration:
 

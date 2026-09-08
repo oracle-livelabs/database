@@ -24,21 +24,21 @@ In this lab, you will:
 ## Task 1: Create Compute and Network Access
 
 1. In OCI Console, create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex 
-(If not available choose a similar Shape, check documentation for more info [here](https://docs.oracle.com/es-ww/iaas/Content/Compute/References/computeshapes.htm#flexible)).
+    (If not available choose a similar Shape, check documentation for more info [here](https://docs.oracle.com/es-ww/iaas/Content/Compute/References/computeshapes.htm#flexible)).
 2. Configure the instance to use 4 OCPUs and 24 GB memory.
 3. In the VCN security list, allow inbound access for port 22 only from your administration network.
 4. Keep agent ports 8001 through 8005 loopback-only and do not expose them publicly. The runtime services bind to `127.0.0.1`.
 
-![Where to Create a Compute Instance](./images/01_create_instance.png)
+    ![Where to Create a Compute Instance](./images/01_create_instance.png)
 
 ## Task 2: Provision Autonomous Database 26ai
 
 1. In OCI Console, create an Autonomous Database with workload type Transaction Processing.
-![Where to Create an Autonomous Database](./images/02_create_database.png)
+    ![Where to Create an Autonomous Database](./images/02_create_database.png)
 
 2. Choose Always Free and Oracle Database 26ai.
 3. Enable secure access and download the wallet.
-![Where to Download a Wallet](./images/03_wallet_download.png)
+    ![Where to Download a Wallet](./images/03_wallet_download.png)
 4. Copy the wallet zip file to the compute instance and extract it under the deployment user's home directory.
 
     ```
@@ -56,7 +56,7 @@ In this lab, you will:
 ## Task 3: Create Application Schema and Load DDL
 
 1. Connect to the database as ADMIN using SQL Developer Web or SQLcl.
-![Where to Enter SQL Actions](./images/04_sql_actions.png)
+    ![Where to Enter SQL Actions](./images/04_sql_actions.png)
 2. Create the AI_FOR_YOU schema.
 
     ```

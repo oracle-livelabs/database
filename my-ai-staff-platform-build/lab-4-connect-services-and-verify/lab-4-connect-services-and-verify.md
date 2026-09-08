@@ -75,18 +75,18 @@ In this lab, you will:
     agents/data/venv/bin/python3 scripts/smoke_test.py
     </copy>
     ```
-![Smoke Test Example](./images/01.png)
+    ![Smoke Test Example](./images/01.png)
 
 2. Validate each Slack agent with a direct command. Brand Agent strategy validation already happened in Task 1, so this table focuses on the remaining runtime agents.
 
-| Agent | Where to send it | Command | Expected result |
-| --- | --- | --- | --- |
-| Ops Agent | `#ops` | `check agents` | A `Platform Agent Health` summary with configured agents marked `✅`. |
-| Data Agent | `#data` | `status` | A `DB status summary` with no connection errors. |
-| Publish Agent | `#publishing` | `status` | A list of pending publications or a message that no publications are pending. |
-| Assistant Agent | Direct message | `status` | A general platform status response. |
-| Content Agent | `#content-runs` | `status` | A list of active or paused runs, or a message that no runs are active. |
-| Creative Agent | `#creative-studio` | `regen infographic for 1056` | A regeneration confirmation. Replace `1056` with an existing post number from the deployment. |
+    | Agent | Where to send it | Command | Expected result |
+    | --- | --- | --- | --- |
+    | Ops Agent | `#ops` | `check agents` | A `Platform Agent Health` summary with configured agents marked `✅`. |
+    | Data Agent | `#data` | `status` | A `DB status summary` with no connection errors. |
+    | Publish Agent | `#publishing` | `status` | A list of pending publications or a message that no publications are pending. |
+    | Assistant Agent | Direct message | `status` | A general platform status response. |
+    | Content Agent | `#content-runs` | `status` | A list of active or paused runs, or a message that no runs are active. |
+    | Creative Agent | `#creative-studio` | `regen infographic for 1056` | A regeneration confirmation. Replace `1056` with an existing post number from the deployment. |
 
 3. Confirm that each bot answers from the expected app identity and channel. If a bot does not respond, verify channel membership, Socket Mode status, the `xapp-...` app token, and the matching `xoxb-...` bot token from Lab 3.
 
