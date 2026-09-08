@@ -17,7 +17,7 @@ The requests look different, but they share one problem. The data is already in 
 
 Jessica's job is to help each team meet its requirement without creating a new data copy or a separate security model for every feature. She uses Oracle AI Database as the shared foundation: relational tables remain the source for finance records, while JSON, vectors, graphs, spatial data, machine learning, and AI services work with those same records.
 
-This workshop follows Jessica and her colleagues as they solve these problems. Each lab focuses on one business requirement, but the database remains the common thread. You will see how the teams use different data types and database capabilities together, and how Jessica keeps access, SQL, and results visible.
+This workshop follows Jessica and her colleagues as they solve these problems and help the bank innovate for customers. Each lab focuses on one business requirement, but the database remains the common thread. You will see how the teams use different data types and database capabilities together, and how Jessica keeps access, SQL, and results visible.
 
 ### What the team builds
 
@@ -32,7 +32,14 @@ This workshop follows Jessica and her colleagues as they solve these problems. E
 | Nina, risk analyst            | Ask finance questions without writing every query from scratch. | Select AI generates SQL that Nina can inspect, run, and refine. Select AI Agent adds a restricted SQL tool and records the agent activity. |
 
 
-The point is not to use every capability in every query. The point is that Jessica does not have to move the data into a separate database whenever a requirement changes. The same finance records can support an application payload, a vector search, a graph investigation, a spatial calculation, a model score, or a natural-language question.
+The point is not to use every capability in every query. The point is that Jessica does not have to move the data into a separate database whenever a requirement changes. The same finance records can support:
+
+- An application payload.
+- A vector search.
+- A graph investigation.
+- A spatial calculation.
+- A model score.
+- A natural-language question.
 
 <details>
 <summary><strong>Learn more: What does "converged database" mean?</strong></summary>
@@ -57,5 +64,5 @@ Estimated Workshop Time: **90 minutes**
 ## Acknowledgements
 
 * **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Contributor** - Eugenio Galiano, Pat Shepherd
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026
