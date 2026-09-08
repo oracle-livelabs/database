@@ -27,15 +27,20 @@ In this lab, you will:
 
 1. Create `#content-start`, `#content-runs`, `#content-internal`, `#creative-studio`, `#publishing`, `#data`, `#ops`, and `#errors` for the content workflow.
 
+
 2. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
 
+![Slack Channels Example](./images/01.png)
+
 3. Copy every channel's `C...` ID from Slack and save it in a secure deployment worksheet. Environment files use IDs, not display names.
+
+![Slack Channels ID Example](./images/02.png)
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
 1. At `api.slack.com/apps`, select **Create New App**, then **From an app manifest**. Select the deployment workspace and paste the matching JSON manifest from the blocks below.
 
-2. Import each manifest once. The manifests use generic display names and contain only the role's required scopes and events.
+2. Import each manifest once. The manifests below are templates. You can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
 
 | Runtime directory | Manifest | Agent name | Required channel membership |
 | --- | --- | --- | --- |
@@ -47,9 +52,8 @@ In this lab, you will:
 | `agents/ops` | Ops manifest below | Ops Agent | `#ops`, `#errors` |
 | `agents/publish` | Publish manifest below | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
 
-3. Assistant Agent and Brand Agent are the two apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app in Slack before installing it.
 
-4. Paste this Assistant Agent manifest.
+3. Paste this Assistant Agent manifest.
 
     ```json
     <copy>
@@ -103,7 +107,7 @@ In this lab, you will:
     </copy>
     ```
 
-5. Paste this Content Agent manifest.
+4. Paste this Content Agent manifest.
 
     ```json
     <copy>
@@ -146,7 +150,7 @@ In this lab, you will:
     </copy>
     ```
 
-6. Paste this Creative Agent manifest.
+5. Paste this Creative Agent manifest.
 
     ```json
     <copy>
@@ -190,30 +194,32 @@ In this lab, you will:
     </copy>
     ```
 
-7. Paste this Brand Agent manifest.
+6. Paste this Brand Agent manifest.
 
     ```json
     <copy>
     {
       "display_information": {
-        "name": "Brand Agent",
-        "description": "Reviews content against the brand standard."
+        "name": "Brand Agent"
       },
       "features": {
         "bot_user": {
           "display_name": "Brand Agent",
-          "always_online": true
+          "always_online": false
         }
       },
       "oauth_config": {
         "scopes": {
           "bot": [
-            "chat:write",
+            "files:read",
             "channels:history",
             "channels:read",
+            "chat:write",
+            "files:write",
             "im:history",
             "im:read",
-            "im:write"
+            "im:write",
+            "reactions:read"
           ]
         },
         "pkce_enabled": false
@@ -222,11 +228,12 @@ In this lab, you will:
         "event_subscriptions": {
           "bot_events": [
             "message.channels",
-            "message.im"
+            "message.im",
+            "reaction_added"
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -237,7 +244,7 @@ In this lab, you will:
     </copy>
     ```
 
-8. Paste this Data Agent manifest.
+7. Paste this Data Agent manifest.
 
     ```json
     <copy>
@@ -280,7 +287,7 @@ In this lab, you will:
     </copy>
     ```
 
-9. Paste this Ops Agent manifest.
+8. Paste this Ops Agent manifest.
 
     ```json
     <copy>
@@ -323,7 +330,7 @@ In this lab, you will:
     </copy>
     ```
 
-10. Paste this Publish Agent manifest.
+9. Paste this Publish Agent manifest.
 
     ```json
     <copy>
@@ -367,9 +374,15 @@ In this lab, you will:
     </copy>
     ```
 
+10. Assistant Agent and Brand Agent are the two apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app in Slack before installing it.
+
+![AGents with Access to direct messages](./images/03.png)
+
 11. Do not create a Slack app for Website Agent. The `agents/website` service exposes a local HTTP API on port 8005.
 
 12. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
+
+![Slack Agents Tokens for Application](./images/04.png)
 
 13. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
 
@@ -465,78 +478,78 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
 
 1. Create the Content Kit configuration
 
-Run these commands from the repository root:
+    Run these commands from the repository root:
 
-```bash
-cd /home/opc/livelabs-ai-staff
+    ```bash
+    cd /home/opc/livelabs-ai-staff
 
-export CONTENTKIT_CONFIG=/home/opc/.codex/contentkit/config.json
+    export CONTENTKIT_CONFIG=/home/opc/.codex/contentkit/config.json
 
-mkdir -p /home/opc/.codex/contentkit
-chmod 700 /home/opc/.codex/contentkit
+    mkdir -p /home/opc/.codex/contentkit
+    chmod 700 /home/opc/.codex/contentkit
 
-cp plugins/livelabsagentic-skills/skills/content-kit/config.json.example \
-  "$CONTENTKIT_CONFIG"
+    cp plugins/livelabsagentic-skills/skills/content-kit/config.json.example \
+      "$CONTENTKIT_CONFIG"
 
-chmod 600 "$CONTENTKIT_CONFIG"
-```
+    chmod 600 "$CONTENTKIT_CONFIG"
+    ```
 
 The `export` command is only required for the current shell when using the default path. Systemd services running as user `opc` use the same default path automatically. If a different configuration path is used, `CONTENTKIT_CONFIG` must also be defined in the environment of every service that invokes Content Kit scripts.
 
 2. Edit the configuration
 
-Open the configuration file:
+    Open the configuration file:
 
-```bash
-vi "$CONTENTKIT_CONFIG"
-```
+    ```bash
+    vi "$CONTENTKIT_CONFIG"
+    ```
 
-Replace its contents with valid, strict JSON. Do not include `//` comments or the words `Copy` or `Copymkdir` from rendered documentation.
+    Replace its contents with valid, strict JSON. Do not include `//` comments or the words `Copy` or `Copymkdir` from rendered documentation.
 
-```json
-{
-  "base_dir": "/home/opc/livelabs-ai-staff",
-  "python": "/home/opc/notebooklm-venv/bin/python3.12",
-  "paths": {
-    "shared": "/home/opc/livelabs-ai-staff/plugins/livelabsagentic-skills/resources/shared",
-    "brand_guide": "/home/opc/livelabs-ai-staff/strategy/profiles/user/brand-guide.md",
-    "content_strategy": "/home/opc/livelabs-ai-staff/strategy/profiles/user/general-strategy.md"
-  },
-  "fonts": {
-    "sans": "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf",
-    "sans_bold": "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf"
-  },
-  "image": {
-    "provider": "cloudflare_workers_ai",
-    "model": "@cf/black-forest-labs/flux-2-klein-9b",
-    "width": 1024,
-    "height": 1024,
-    "guidance": 4.5,
-    "max_reference_images": 4,
-    "reference_max_width": 511,
-    "reference_max_height": 511,
-    "save_prompt_manifest": true,
-    "reference": null
-  },
-  "gdrive": {
-    "remote": "gdrive",
-    "root_id": "",
-    "root_path": "Post Content 2026",
-    "enabled": false
-  },
-  "db": {
-    "nia_url": "http://127.0.0.1:8004",
-    "enabled": false
-  },
-  "headshot": "/home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png",
-  "substack": {
-    "enabled": false,
-    "substackrc": "~/.codex/.substackrc",
-    "mcp_venv": "~/.codex/substack-mcp/venv/bin/python3",
-    "mcp_path": "~/.codex/substack-mcp"
-  }
-}
-```
+    ```json
+    {
+      "base_dir": "/home/opc/livelabs-ai-staff",
+      "python": "/home/opc/notebooklm-venv/bin/python3.12",
+      "paths": {
+        "shared": "/home/opc/livelabs-ai-staff/plugins/livelabsagentic-skills/resources/shared",
+        "brand_guide": "/home/opc/livelabs-ai-staff/strategy/profiles/user/brand-guide.md",
+        "content_strategy": "/home/opc/livelabs-ai-staff/strategy/profiles/user/general-strategy.md"
+      },
+      "fonts": {
+        "sans": "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf",
+        "sans_bold": "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf"
+      },
+      "image": {
+        "provider": "cloudflare_workers_ai",
+        "model": "@cf/black-forest-labs/flux-2-klein-9b",
+        "width": 1024,
+        "height": 1024,
+        "guidance": 4.5,
+        "max_reference_images": 4,
+        "reference_max_width": 511,
+        "reference_max_height": 511,
+        "save_prompt_manifest": true,
+        "reference": null
+      },
+      "gdrive": {
+        "remote": "gdrive",
+        "root_id": "",
+        "root_path": "Post Content 2026",
+        "enabled": false
+      },
+      "db": {
+        "nia_url": "http://127.0.0.1:8004",
+        "enabled": false
+      },
+      "headshot": "/home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png",
+      "substack": {
+        "enabled": false,
+        "substackrc": "~/.codex/.substackrc",
+        "mcp_venv": "~/.codex/substack-mcp/venv/bin/python3",
+        "mcp_path": "~/.codex/substack-mcp"
+      }
+    }
+    ```
 
 Replace the following values for the specific deployment:
 
@@ -546,149 +559,92 @@ Replace the following values for the specific deployment:
 - `paths.content_strategy`: the active deployment's content strategy.
 - `headshot`: the deployment's actual headshot file.
 
-The active strategy profile is selected by:
+    The active strategy profile is selected by:
 
-```text
-strategy/active-profile.md
-```
+    ```text
+    strategy/active-profile.md
+    ```
 
-For the current repository, the user profile files are:
+    For the current repository, the user profile files are:
 
-```text
-strategy/profiles/user/brand-guide.md
-strategy/profiles/user/general-strategy.md
-strategy/profiles/user/funnel-strategy.md
-```
-
-The `db.mode` property is intentionally omitted. It is no longer used by the current loader. Keep the `db.nia_url` property because the shared Content Kit database scripts still use that key.
+    ```text
+    strategy/profiles/user/brand-guide.md
+    strategy/profiles/user/general-strategy.md
+    strategy/profiles/user/funnel-strategy.md
+    ```
 
 3. Verify the Content Kit configuration
 
-First confirm that the file is strict JSON:
+    First confirm that the file is strict JSON:
 
-```bash
-python3 -m json.tool "$CONTENTKIT_CONFIG" >/dev/null
-```
+    ```bash
+    python3 -m json.tool "$CONTENTKIT_CONFIG" >/dev/null
+    ```
 
-Verify the configured interpreter and important files:
+    Verify the configured interpreter and important files:
 
-```bash
-test -x /home/opc/notebooklm-venv/bin/python3.12
-test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf
-test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf
-test -f /home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png
-```
+    ```bash
+    test -x /home/opc/notebooklm-venv/bin/python3.12
+    test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf
+    test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf
+    test -f /home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png
+    ```
 
-The configuration file must remain private:
+    The configuration file must remain private:
 
-```bash
-chmod 600 "$CONTENTKIT_CONFIG"
-```
+    ```bash
+    chmod 600 "$CONTENTKIT_CONFIG"
+    ```
 
 4. Verify Data Agent before enabling database tracking
 
-Data Agent runs on port `8004`. Check both the service and its database connection:
+    Data Agent runs on port `8004`. Check both the service and its database connection:
 
-```bash
-curl -fsS http://127.0.0.1:8004/health
-echo
+    ```bash
+    curl -fsS http://127.0.0.1:8004/health
+    echo
 
-curl -fsS http://127.0.0.1:8004/health-db
-echo
-```
+    curl -fsS http://127.0.0.1:8004/health-db
+    echo
+    ```
 
-Only after `/health-db` reports a healthy database connection, edit the configuration and change:
+5. Configure the current Google Drive delivery path
 
-```json
-"db": {
-  "nia_url": "http://127.0.0.1:8004",
-  "enabled": true
-}
-```
+    Add the Drive folder ID from Task 4 to `.env.shared`:
 
-When `db.enabled` is `false`, the shared Content Kit scripts continue in files-only mode and skip database tracking.
-
-### 5. Configure the current Google Drive delivery path
-
-The current preferred-format delivery path uses the project Google OAuth adapter. It does not use `gdrive.root_id`, Content Kit's legacy rclone settings, or `~/.claude`.
-
-Add the Drive folder ID from Task 4 to `.env.shared`:
-
-```text
-AISTAFF_DRIVE_ROOT_FOLDER_ID=<google-drive-folder-id>
-```
+    ```text
+    AISTAFF_DRIVE_ROOT_FOLDER_ID=<google-drive-folder-id>
+    ```
 
 The folder should be the deployment's approved AI Staff delivery folder. Do not store this value in the Content Kit JSON unless the legacy rclone integration is also being used.
 
-Validate the shared environment configuration:
+    Validate the shared environment configuration:
 
-```bash
-python3 scripts/validate_config.py --env-only
-```
+    ```bash
+    python3 scripts/validate_config.py --env-only
+    ```
 
-6. Optional: enable the legacy rclone integration
+6. Run the final validation
 
-The `gdrive` section is retained only for legacy Content Kit skills that upload files through rclone.
+    From the repository root:
 
-Install and configure rclone only if that legacy workflow is required:
+    ```bash
+    python3 scripts/validate_config.py --config "$CONTENTKIT_CONFIG"
+    ```
 
-```bash
-sudo dnf install -y rclone
-rclone config
-rclone lsd gdrive: --max-depth 1
-```
+    Also verify the current service endpoints:
 
-The remote must be named exactly:
-
-```text
-gdrive
-```
-
-If the rclone integration is intentionally enabled, configure its separate publishing root in `config.json`:
-
-```json
-"gdrive": {
-  "remote": "gdrive",
-  "root_id": "<legacy-rclone-folder-id>",
-  "root_path": "Post Content 2026",
-  "enabled": true
-}
-```
-
-The legacy rclone folder ID and `AISTAFF_DRIVE_ROOT_FOLDER_ID` may be different values. Do not assume that the folder created for the current OAuth delivery path is also the legacy rclone root.
-
-If rclone is not part of the deployment, leave the section disabled:
-
-```json
-"gdrive": {
-  "remote": "gdrive",
-  "root_id": "",
-  "root_path": "Post Content 2026",
-  "enabled": false
-}
-```
-
-7. Run the final validation
-
-From the repository root:
-
-```bash
-python3 scripts/validate_config.py --config "$CONTENTKIT_CONFIG"
-```
-
-Also verify the current service endpoints:
-
-```bash
-for url in \
-  http://127.0.0.1:8001/health \
-  http://127.0.0.1:8002/health \
-  http://127.0.0.1:8003/health \
-  http://127.0.0.1:8004/health \
-  http://127.0.0.1:8004/health-db; do
-  curl -fsS "$url"
-  echo
-done
-```
+    ```bash
+    for url in \
+      http://127.0.0.1:8001/health \
+      http://127.0.0.1:8002/health \
+      http://127.0.0.1:8003/health \
+      http://127.0.0.1:8004/health \
+      http://127.0.0.1:8004/health-db; do
+      curl -fsS "$url"
+      echo
+    done
+    ```
 
 The current runtime requires these local services:
 
@@ -700,10 +656,10 @@ The current runtime requires these local services:
 
 Cloudflare image-generation credentials belong in `.env.shared`, not in `config.json`:
 
-```text
-CLOUDFLARE_ACCOUNT_ID=<cloudflare-account-id>
-CLOUDFLARE_API_TOKEN=<cloudflare-api-token>
-```
+    ```text
+    CLOUDFLARE_ACCOUNT_ID=<cloudflare-account-id>
+    CLOUDFLARE_API_TOKEN=<cloudflare-api-token>
+    ```
 
 This configuration is the machine-runtime configuration for the current Codex-based Content Kit installation. Historical references to `~/.claude`, `~/.claude/skills`, or NotebookLM should not be used in a fresh deployment.
 
@@ -778,4 +734,5 @@ This configuration is the machine-runtime configuration for the current Codex-ba
 
 ## Acknowledgements
 
-- Author: CYRCE SALINAS ROJAS
+- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
+- Last Updated: Ilan Gomez Guerrero, September 2026

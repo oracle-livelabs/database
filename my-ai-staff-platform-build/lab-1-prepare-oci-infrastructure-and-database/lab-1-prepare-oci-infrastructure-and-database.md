@@ -29,11 +29,16 @@ In this lab, you will:
 3. In the VCN security list, allow inbound access for port 22 only from your administration network.
 4. Keep agent ports 8001 through 8005 loopback-only and do not expose them publicly. The runtime services bind to `127.0.0.1`.
 
+![Where to Create a Compute Instance](./images/01_create_instance.png)
+
 ## Task 2: Provision Autonomous Database 26ai
 
 1. In OCI Console, create an Autonomous Database with workload type Transaction Processing.
+![Where to Create an Autonomous Database](./images/02_create_database.png)
+
 2. Choose Always Free and Oracle Database 26ai.
 3. Enable secure access and download the wallet.
+![Where to Download a Wallet](./images/03_wallet_download.png)
 4. Copy the wallet zip file to the compute instance and extract it under the deployment user's home directory.
 
     ```
@@ -51,6 +56,7 @@ In this lab, you will:
 ## Task 3: Create Application Schema and Load DDL
 
 1. Connect to the database as ADMIN using SQL Developer Web or SQLcl.
+![Where to Enter SQL Actions](./images/04_sql_actions.png)
 2. Create the AI_FOR_YOU schema.
 
     ```
@@ -90,4 +96,5 @@ In this lab, you will:
 
 ## Acknowledgements
 
-- Author: CYRCE SALINAS ROJAS
+- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
+- Last Updated: Ilan Gomez Guerrero, September 2026

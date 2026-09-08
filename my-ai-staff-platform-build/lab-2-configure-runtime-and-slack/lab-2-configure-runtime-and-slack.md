@@ -149,4 +149,5 @@ In this lab, you will:
 
 ## Acknowledgements
 
-- Author: CYRCE SALINAS ROJAS
+- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
+- Last Updated: Cyrce Salinas Rojas, September 2026
