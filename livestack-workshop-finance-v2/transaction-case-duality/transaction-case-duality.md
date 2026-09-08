@@ -4,7 +4,7 @@
 
 Thomas Brune is an application developer at Seer Bank. He and his team are building a new web and mobile application for customers. The team wants a faster customer experience, with fewer round trips and payloads that match the screens and services they are building.
 
-The application requirements are document-shaped. A customer view may contain account details, transaction status, line items, and optional app-specific attributes. JSON gives Thomas the flexibility to evolve that shape as the product changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
+Thomas needs transaction data as a JSON payload that a web or mobile application can consume directly. One payload can group account details, transaction status, line items, and optional app-specific attributes. JSON lets him evolve that payload as the product changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
 
 Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of customer data.
 
@@ -194,7 +194,7 @@ Thomas now tests the document shape his application can consume directly.
 
     **Expected output:**
 
-    ![JSON](images/jsondv-result.png)
+    ![SQL Worksheet showing the transaction document returned by the duality view](images/jsondv-result.png " ")
 
 2. Expand the document in SQL Worksheet.
     The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a transaction payload without a second copy of the transaction record.

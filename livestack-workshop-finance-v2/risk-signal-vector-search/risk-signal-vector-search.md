@@ -17,6 +17,8 @@ In this lab, you review Gilly's implementation from the embedding model to the f
 
 > - An **embedding** is a numerical profile of what text means. In this lab, product data is embedded so similar finance ideas sit near each other mathematically, even when the wording is different.
 >
+> - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the product rows.
+>
 > - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the finance rows they describe, so the search stays connected to product names, exposure values, notice counts, and other business columns.
 >
 > - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which products or risk notices best match a business user's question.
@@ -274,5 +276,5 @@ Gilly has built the search behind the application and connected it to a business
 ## Acknowledgements
 
 * **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Contributor** - Eugenio Galiano, Pat Shepherd
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

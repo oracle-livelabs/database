@@ -96,6 +96,8 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
     </copy>
     ```
 
+    ![SQL Worksheet showing the LLUSER connection check results](images/sql-worksheet-connection-check.png " ")
+
     **Expected output: Connected SQL Worksheet Session**
 
     | User | Schema | Checked At |

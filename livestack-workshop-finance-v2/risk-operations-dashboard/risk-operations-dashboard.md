@@ -39,7 +39,7 @@ Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed 
 
 ## Task 1: Run a converged risk investigation
 
-The dashboard is a starting point, not the whole decision. Run the query below to produce a compact investigation view for high-criticality products.
+The dashboard is a starting point for the decision, not the decision itself. Run the query below to produce a compact investigation view for high-criticality products.
 
 The query intentionally crosses four data models:
 
@@ -181,7 +181,9 @@ The query intentionally crosses four data models:
 
 3. Review the result as the product-level data behind Jessica's dashboard. Each row combines risk, semantic match, transaction activity, and service location. This gives the dashboard a ranked product table and the details a business user needs when deciding what to review.
 
-    Your values may differ after the demo data is refreshed. Check that the result still combines all four data types in one row.
+    ![SQL Worksheet showing the ranked product result behind Jessica's dashboard](images/product-level-dashboard.png " ")
+
+    Your numbers may be different if the demo data has changed. Each row should include all four types of data.
 
 Use the first row to explain the business takeaway: the risk and transaction values show why the product needs attention, the semantic match explains why it fits the question, and the service location shows where follow-up could begin. Jessica now has the query behind the dashboard's ranked product table and detail view, combining relational risk data, vector search, JSON transaction data, and spatial distance in one result that a business user can inspect.
 
