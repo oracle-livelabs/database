@@ -15,7 +15,7 @@ Raft replication is integrated with transaction execution and is completely tran
 <if type="nonsandbox">
 Watch the video for a quick walk through of the Introduction and verify Lab environment.
 
-[Introduction and verify Lab environment](videohub:1_z6opisia)
+[Introduction and verify Lab environment](videohub:1_sbnvc6ip)
 </if>
 
 ### Objectives

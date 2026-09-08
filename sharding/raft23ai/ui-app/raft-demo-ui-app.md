@@ -14,6 +14,12 @@ The Raft Replication Dashboard shows one of the sample customer ID's Shard Datab
 
 _Estimated Time_: 30 minutes
 
+<if type="nonsandbox">
+Watch the video for a quick walk through of the Demo Application for Raft Replication.
+
+[Demo App for Raft Replication](videohub:1_pvsd15at)
+</if>
+
 ### Objectives
 
 In this lab, you will:
