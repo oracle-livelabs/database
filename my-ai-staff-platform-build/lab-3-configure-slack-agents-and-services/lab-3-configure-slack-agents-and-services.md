@@ -30,11 +30,11 @@ In this lab, you will:
 
 2. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
 
-    ![Slack Channels Example](./images/01.png)
+    ![Slack Channels Example](./images/01_channels_example.png)
 
 3. Copy every channel's `C...` ID from Slack and save it in a secure deployment worksheet. Environment files use IDs, not display names.
 
-    ![Slack Channels ID Example](./images/02.png)
+    ![Slack Channels ID Example](./images/02_channel_id.png)
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
@@ -376,13 +376,13 @@ In this lab, you will:
 
 10. Assistant Agent and Brand Agent are the two apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app in Slack before installing it.
 
-    ![AGents with Access to direct messages](./images/03.png)
+    ![Agents with Access to direct messages](./images/03_agent_permission.png)
 
 11. Do not create a Slack app for Website Agent. The `agents/website` service exposes a local HTTP API on port 8005.
 
 12. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
 
-    ![Slack Agents Tokens for Application](./images/04.png)
+    ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
 13. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
 
