@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="982" height="777" viewBox="0 0 982 777" role="img" aria-labelledby="title desc">
+  <title id="title">SQL Worksheet orientation for the retail workshop</title>
+  <desc id="desc">Annotated SQL Worksheet screen showing the LLUSER dropdown, Navigator table list, SQL editor, Run Statement button, and Query Result panel.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#0b6aa2"/>
+    </marker>
+  </defs>
+
+  <rect width="982" height="777" fill="#f5f3ef"/>
+  <rect x="0" y="0" width="982" height="10" fill="#2b2926"/>
+
+  <!-- Left navigator -->
+  <rect x="8" y="18" width="302" height="752" fill="#f7f7f7"/>
+  <rect x="8" y="18" width="132" height="40" fill="#ffffff"/>
+  <line x1="8" y1="58" x2="140" y2="58" stroke="#000" stroke-width="2"/>
+  <text x="42" y="43" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#222">Navigator</text>
+  <text x="204" y="43" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#666">Files</text>
+  <circle cx="287" cy="39" r="8" fill="#fff" stroke="#333"/>
+  <text x="284" y="44" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#333">?</text>
+
+  <rect x="15" y="67" width="283" height="39" rx="3" fill="#fff" stroke="#a6a6a6"/>
+  <text x="30" y="91" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#222">LLUSER</text>
+  <path d="M271 83l5 5 5-5" fill="#111"/>
+  <rect x="15" y="113" width="283" height="39" rx="3" fill="#fff" stroke="#a6a6a6"/>
+  <text x="30" y="137" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#222">Tables</text>
+  <path d="M271 129l5 5 5-5" fill="#111"/>
+  <rect x="15" y="158" width="200" height="39" rx="3" fill="#fff" stroke="#a6a6a6"/>
+  <text x="30" y="183" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#777">Search...</text>
+  <circle cx="197" cy="175" r="6" fill="none" stroke="#222"/>
+  <line x1="202" y1="180" x2="208" y2="186" stroke="#222"/>
+  <rect x="220" y="158" width="37" height="39" rx="3" fill="#fff" stroke="#a6a6a6"/>
+  <text x="232" y="183" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#222">⟳</text>
+  <rect x="262" y="158" width="36" height="39" rx="3" fill="#fff" stroke="#a6a6a6"/>
+  <text x="272" y="184" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#222">•••</text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#222">
+    <text x="22" y="226">▸</text><text x="44" y="226">▦ AGENT_ACTIONS</text>
+    <text x="22" y="253">▸</text><text x="44" y="253">▦ APP_DATASET_STATE</text>
+    <text x="22" y="280">▸</text><text x="44" y="280">▦ APP_USERS</text>
+    <text x="22" y="307">▸</text><text x="44" y="307">▦ BRANDS</text>
+    <text x="22" y="334">▸</text><text x="44" y="334">▦ BRAND_INFLUENCER_LINKS</text>
+    <text x="22" y="361">▸</text><text x="44" y="361">▦ CUSTOMERS</text>
+    <text x="22" y="388">▸</text><text x="44" y="388">▦ DBTOOLS$EXECUTION_HISTORY</text>
+    <text x="22" y="415">▸</text><text x="44" y="415">▦ DEMAND_FORECASTS</text>
+    <text x="22" y="442">▸</text><text x="44" y="442">▦ DEMAND_REGIONS</text>
+    <text x="22" y="469">▸</text><text x="44" y="469">▦ DM$P5CUSTOMER_SEGMENT_MO...</text>
+    <text x="22" y="496">▸</text><text x="44" y="496">▦ DM$P5DEMAND_SURGE_MODEL</text>
+    <text x="22" y="523">▸</text><text x="44" y="523">▦ DM$PPRODUCT_CLUSTER_MODEL</text>
+    <text x="22" y="550">▸</text><text x="44" y="550">▦ DM$PREVENUE_PREDICT_MODEL</text>
+  </g>
+  <rect x="306" y="374" width="8" height="48" fill="#b8b8b8"/>
+
+  <!-- Top toolbar and editor -->
+  <rect x="318" y="18" width="664" height="63" fill="#fff"/>
+  <line x1="318" y1="81" x2="982" y2="81" stroke="#d8d8d8"/>
+  <text x="350" y="55" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#222">[Worksheet] *</text>
+  <path d="M493 42h10l6 6v14h-16z" fill="#fff" stroke="#222"/>
+  <text x="523" y="53" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#222">▾</text>
+  <text x="560" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">▱</text>
+  <text x="598" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">▣</text>
+  <circle cx="644" cy="49" r="8" fill="#38b44a"/>
+  <path d="M641 44l8 5-8 5z" fill="#fff"/>
+  <text x="671" y="53" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#222">▾</text>
+  <text x="697" y="55" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#222">▱</text>
+  <circle cx="710" cy="56" r="4" fill="#33b34a"/>
+  <text x="734" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">▥</text>
+  <circle cx="747" cy="56" r="4" fill="#33b34a"/>
+  <text x="774" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">⊞</text>
+  <text x="812" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">▦</text>
+  <text x="850" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">⇩</text>
+  <text x="889" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#222">☰</text>
+  <text x="930" y="55" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#222">Aa</text>
+  <text x="962" y="53" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#222">▾</text>
+
+  <rect x="318" y="81" width="664" height="343" fill="#fff"/>
+  <rect x="319" y="81" width="78" height="343" fill="#fbfbfb"/>
+  <line x1="397" y1="81" x2="397" y2="424" stroke="#e2e2e2"/>
+  <g font-family="Menlo, Consolas, monospace" font-size="13">
+    <text x="357" y="97" fill="#0075a8">43</text>
+    <text x="357" y="116" fill="#0075a8">44</text>
+    <text x="357" y="135" fill="#0075a8">45</text>
+    <text x="357" y="154" fill="#0075a8">46</text>
+    <text x="357" y="173" fill="#0075a8">47</text>
+    <text x="357" y="192" fill="#0075a8">48</text>
+    <text x="357" y="211" fill="#0075a8">49</text>
+    <text x="357" y="230" fill="#0075a8">50</text>
+    <text x="357" y="249" fill="#0075a8">51</text>
+    <text x="357" y="268" fill="#0075a8">52</text>
+    <text x="357" y="287" fill="#0075a8">53</text>
+    <text x="357" y="306" fill="#0075a8">54</text>
+    <text x="357" y="325" fill="#0075a8">55</text>
+    <text x="357" y="330" fill="#0075a8">56</text>
+  </g>
+  <g font-family="Menlo, Consolas, monospace" font-size="13">
+    <text x="399" y="96" fill="#0000cc">JOIN</text><text x="434" y="96" fill="#111"> schema_ctx s </text><text x="539" y="96" fill="#0000cc">ON</text><text x="562" y="96" fill="#111"> s.owner_name = c.</text><rect x="660" y="83" width="55" height="18" rx="3" fill="#dce8f6"/><text x="662" y="96" fill="#0000cc">owner</text>
+    <text x="399" y="116" fill="#0000cc">WHERE</text><text x="444" y="116" fill="#111"> c.data_type = </text><text x="548" y="116" fill="#e00000">'VECTOR'</text>
+    <text x="421" y="134" fill="#0000cc">AND</text><text x="454" y="134" fill="#111"> c.table_name </text><text x="552" y="134" fill="#0000cc">IN</text><text x="575" y="134" fill="#111"> (</text><text x="587" y="134" fill="#e00000">'PRODUCT_EMBEDDINGS','POST_EMBEDDINGS'</text><text x="846" y="134" fill="#111">)</text>
+    <text x="421" y="153" fill="#0000cc">AND</text><text x="454" y="153" fill="#111"> c.column_name = </text><text x="565" y="153" fill="#e00000">'EMBEDDING'</text>
+    <text x="399" y="172" fill="#0000cc">UNION ALL</text>
+    <text x="399" y="190" fill="#0000cc">SELECT</text><text x="454" y="190" fill="#111"> </text><text x="463" y="190" fill="#e00000">'Agent tool functions'</text><text x="616" y="190" fill="#111">, </text><text x="631" y="190" fill="#0000cc">COUNT</text><text x="671" y="190" fill="#111">(*)</text>
+    <text x="399" y="210" fill="#0000cc">FROM</text><text x="435" y="210" fill="#111"> all_objects o</text>
+    <text x="399" y="229" fill="#0000cc">JOIN</text><text x="434" y="229" fill="#111"> schema_ctx s </text><text x="539" y="229" fill="#0000cc">ON</text><text x="562" y="229" fill="#111"> s.owner_name = o.</text><rect x="660" y="216" width="55" height="18" rx="3" fill="#dce8f6"/><text x="662" y="229" fill="#0000cc">owner</text>
+    <text x="399" y="249" fill="#0000cc">WHERE</text><text x="444" y="249" fill="#111"> o.object_type = </text><text x="553" y="249" fill="#e00000">'FUNCTION'</text>
+    <text x="421" y="268" fill="#0000cc">AND</text><text x="454" y="268" fill="#111"> o.object_name </text><text x="560" y="268" fill="#0000cc">IN</text><text x="582" y="268" fill="#111"> (</text>
+    <text x="443" y="287" fill="#e00000">'DETECT_TRENDING_PRODUCTS','CHECK_PRODUCT_INVENTORY',</text>
+    <text x="443" y="306" fill="#e00000">'FIND_BEST_FULFILLMENT','GET_INFLUENCER_NETWORK','LOG_AGENT_DECISION'</text>
+    <text x="421" y="325" fill="#111">);</text>
+  </g>
+
+  <!-- Result panel -->
+  <rect x="318" y="438" width="664" height="331" fill="#fff"/>
+  <rect x="318" y="438" width="664" height="45" fill="#f7f7f7"/>
+  <text x="335" y="464" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#111">Query Result</text>
+  <line x1="335" y1="479" x2="424" y2="479" stroke="#111" stroke-width="2"/>
+  <text x="452" y="464" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#666">Script Output</text>
+  <text x="573" y="464" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#666">DBMS Output</text>
+  <text x="696" y="464" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#666">Explain Plan</text>
+  <text x="807" y="464" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#666">Autotrace</text>
+  <text x="904" y="464" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#666">SQL History</text>
+  <rect x="318" y="484" width="664" height="42" fill="#fff"/>
+  <line x1="318" y1="526" x2="982" y2="526" stroke="#ddd"/>
+  <text x="340" y="508" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#444">♲</text>
+  <text x="378" y="508" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#444">ⓘ</text>
+  <text x="416" y="508" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#444">▱</text>
+  <text x="456" y="508" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#444">⌘</text>
+  <text x="497" y="508" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#222">Download</text>
+  <text x="574" y="505" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#222">▾</text>
+  <text x="599" y="508" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#666">Execution time: 0.471 seconds</text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15">
+    <rect x="318" y="527" width="369" height="32" fill="#fff" stroke="#e1e1e1"/>
+    <line x1="406" y1="527" x2="406" y2="725" stroke="#e1e1e1"/>
+    <line x1="547" y1="527" x2="547" y2="725" stroke="#e1e1e1"/>
+    <text x="414" y="548" font-weight="700" fill="#111">AREA</text>
+    <text x="554" y="548" font-weight="700" fill="#111">COUNT</text>
+    <line x1="318" y1="559" x2="687" y2="559" stroke="#e1e1e1"/>
+    <text x="326" y="580" font-weight="700">1</text><text x="414" y="580">Core retail tables</text><text x="664" y="580">22</text>
+    <rect x="407" y="592" width="280" height="34" fill="#f3f3f3"/>
+    <text x="326" y="613" font-weight="700">2</text><text x="414" y="613">Retail semantic vi...</text><text x="670" y="613">5</text>
+    <text x="326" y="646" font-weight="700">3</text><text x="414" y="646">Creator influence...</text><text x="670" y="646">1</text>
+    <rect x="407" y="658" width="280" height="34" fill="#f3f3f3"/>
+    <text x="326" y="679" font-weight="700">4</text><text x="414" y="679">MiniLM vector art...</text><text x="670" y="679">2</text>
+    <text x="326" y="712" font-weight="700">5</text><text x="414" y="712">Agent tool functi...</text><text x="670" y="712">5</text>
+  </g>
+
+  <!-- Annotations -->
+  <g filter="url(#shadow)">
+    <rect x="20" y="9" width="235" height="38" rx="18" fill="#fff" stroke="#0b6aa2" stroke-width="2"/>
+    <text x="36" y="34" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#0b4974">1. Confirm LLUSER here</text>
+  </g>
+  <path d="M133 49 C120 60, 100 63, 65 72" fill="none" stroke="#0b6aa2" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="648" y="11" width="205" height="34" rx="17" fill="#fff" stroke="#0b6aa2" stroke-width="2"/>
+    <text x="664" y="34" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#0b4974">2. Run the worksheet SQL</text>
+  </g>
+  <path d="M743 45 C720 55, 680 51, 650 49" fill="none" stroke="#0b6aa2" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="728" y="131" width="235" height="43" rx="18" fill="#fff" stroke="#0b6aa2" stroke-width="2"/>
+    <text x="745" y="157" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#0b4974">3. Paste code in the editor</text>
+  </g>
+  <path d="M735 162 C670 188, 600 204, 500 221" fill="none" stroke="#0b6aa2" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="641" y="382" width="285" height="43" rx="18" fill="#fff" stroke="#0b6aa2" stroke-width="2"/>
+    <text x="658" y="409" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#0b4974">4. Read results in Query Result</text>
+  </g>
+  <path d="M764 427 C748 468, 708 512, 636 543" fill="none" stroke="#0b6aa2" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="24" y="638" width="240" height="43" rx="18" fill="#fff" stroke="#0b6aa2" stroke-width="2"/>
+    <text x="41" y="665" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#0b4974">5. Browse objects if needed</text>
+  </g>
+  <path d="M142 637 C132 540, 120 390, 102 222" fill="none" stroke="#0b6aa2" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
