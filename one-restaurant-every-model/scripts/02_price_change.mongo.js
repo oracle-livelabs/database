@@ -3,6 +3,6 @@
 // s_104 does not match the numeric arrayFilter. That miss IS the lesson.
 db.stores.updateMany(
   {},
-  { $set: { "menus.$[].categories.$[].items.$[i].price": 1399 } },
+  { $set: { "menus.$[].categories.$[].items.$[i].price": 13.99 } },
   { arrayFilters: [ { "i.item_id": 1000 } ] }
 );

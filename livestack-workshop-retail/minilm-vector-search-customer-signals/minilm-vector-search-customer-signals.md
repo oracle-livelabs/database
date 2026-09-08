@@ -48,13 +48,13 @@ Start on the **Customer Trend Signals** page so semantic-search results connect 
 
 2. Run the vector inventory query.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     This query checks the vector-bearing tables and compares them to the source rows they represent. `PRODUCT_EMBEDDINGS` stores vectors generated from product catalog text. `POST_EMBEDDINGS` stores vectors generated from social post text in `SOCIAL_POSTS`.
 
-    The result has two rows because it is a summary: one row for the product-vector table and one row for the social-post-vector table. The important numbers are the counts inside those rows. A healthy load should show one product embedding for each product and one post embedding for each social post.
+    The result has two rows because it is a summary: one row for the product-vector table and one row for the social-post-vector table. The important numbers are the counts inside those rows. A healthy load should show one embedded source row for each product and one embedded source row for each social post. `Embeddings` remains the raw number of vector rows, so it can reveal duplicate embeddings without making the coverage percentage exceed 100.
 
-    `LEFT JOIN` keeps the source products or posts visible even if an embedding row is missing. `NULLIF(..., 0)` prevents a divide-by-zero error if a source table is empty. Together, those choices make the query useful as a coverage check, not just a count report.
+    `LEFT JOIN` keeps the source products or posts visible even if an embedding row is missing. The coverage calculation counts distinct source keys on both sides of the join, so duplicate embedding rows do not overstate coverage. `NULLIF(..., 0)` prevents a divide-by-zero error if a source table is empty. Together, those choices make the query useful as a coverage check, not just a count report.
 
     `UNION ALL` is useful here because the two branches answer the same question for two different source tables. The first branch checks product coverage. The second branch checks social-post coverage by joining `SOCIAL_POSTS` to `POST_EMBEDDINGS`. `UNION ALL` keeps both checklist rows visible in one result.
 
@@ -63,18 +63,18 @@ Start on the **Customer Trend Signals** page so semantic-search results connect 
     SELECT 'PRODUCT_EMBEDDINGS' AS "Vector Table",
            COUNT(pe.embedding_id) AS "Embeddings",
            COUNT(DISTINCT p.product_id) AS "Source Rows",
-           ROUND(100 * COUNT(pe.embedding_id) / NULLIF(COUNT(DISTINCT p.product_id), 0), 1) AS "Coverage Pct"
+           ROUND(100 * COUNT(DISTINCT pe.product_id) / NULLIF(COUNT(DISTINCT p.product_id), 0), 1) AS "Coverage Pct"
     FROM products p
     LEFT JOIN product_embeddings pe
       ON pe.product_id = p.product_id
     UNION ALL
     SELECT 'POST_EMBEDDINGS',
-           COUNT(pe.embedding_id),
+           COUNT(pse.embedding_id),
            COUNT(DISTINCT sp.post_id),
-           ROUND(100 * COUNT(pe.embedding_id) / NULLIF(COUNT(DISTINCT sp.post_id), 0), 1)
+           ROUND(100 * COUNT(DISTINCT pse.post_id) / NULLIF(COUNT(DISTINCT sp.post_id), 0), 1)
     FROM social_posts sp
-    LEFT JOIN post_embeddings pe
-      ON pe.post_id = sp.post_id
+    LEFT JOIN post_embeddings pse
+      ON pse.post_id = sp.post_id
     ORDER BY "Vector Table";
     </copy>
     ```
@@ -206,6 +206,50 @@ Next, connect social-signal matches back to products so vector scores become rev
 2. Vector search becomes useful when the score is tied back to governed product and signal rows. A merchandising or operations team can follow the match into orders, categories, creator activity, or fulfillment planning.
 
     Multiple rows in `POST_EMBEDDINGS` can point to social posts that mention the same product. Grouping keeps the result readable: one product row and the closest semantic distance from the social-post vectors.
+
+3. 🎯 **Interactive challenge: change the merchandising question.**
+
+    Starting with the signal search above, replace only `viral customer demand for trail running footwear` with `AllTerrain Hiking Boots sizing and trail grip`. Run your revised query. Which products enter, leave, or move within the top five, and which changed match deserves merchandising review?
+
+    <details>
+    <summary><strong>Challenge answer: business intent changes the evidence queue</strong></summary>
+
+    **Expected output: Hiking Boot Signal Matches**
+
+    The ranking and distances are dynamic. With the current workshop data, `AllTerrain Hiking Boots` moves from fifth to first, while `TrailGrip Hiker`, `Summit 65L Backpack`, and `WinterGrip Boot` enter the top five. The revised results favor hiking-footwear and trail-use evidence more strongly than the broader trail-running search.
+
+    > `AllTerrain Hiking Boots` is the strongest changed match in the current data: it moves from fifth to first. The revised phrase narrows the investigation from general trail-running demand to boot sizing and trail-grip concerns. Oracle AI Vector Search compares meaning while the vectors, source posts, product records, and governance remain in the same database. Use the ranking to prioritize human review, not as proof of demand.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT p.product_name AS "Product",
+           p.category AS "Category",
+           ROUND(MIN(VECTOR_DISTANCE(
+             se.embedding,
+             VECTOR_EMBEDDING(
+               ADMIN.ALL_MINILM_L12_V2
+               USING 'AllTerrain Hiking Boots sizing and trail grip' AS DATA
+             ),
+             COSINE
+           )), 4) AS "Best Distance"
+    FROM post_embeddings se
+    JOIN social_posts sp
+      ON sp.post_id = se.post_id
+    JOIN post_product_mentions ppm
+      ON ppm.post_id = sp.post_id
+    JOIN products p
+      ON p.product_id = ppm.product_id
+    GROUP BY p.product_name,
+             p.category
+    ORDER BY "Best Distance",
+             "Product"
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
 
     Next, you follow the creator relationships behind those signals to understand how campaign influence can move through a network.
 

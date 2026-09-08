@@ -30,7 +30,7 @@ In this workshop, we will only relay on the the terminal.
 
     ```
     <copy>
-    dba.sh
+    ./dba.sh
     </copy>
     ```
 

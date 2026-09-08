@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="t d">
+  <title id="t">Public Service Command Center evidence flow</title><desc id="d">SLED operations view produces KPIs, drill-through rows, and a prioritized service review.</desc>
+  <rect width="900" height="360" rx="22" fill="#f7f8fa"/><style>.h{font:700 27px Arial;fill:#18243b}.s{font:15px Arial;fill:#41506a}.b{font:700 17px Arial;fill:#1f2937}.c{font:14px Arial;fill:#43516a}</style>
+  <text x="34" y="46" class="h">From Statewide Warning to Reviewable Request Evidence</text><text x="34" y="72" class="s">The configured 2.7% warning starts the investigation; SQL explains the operating evidence around it.</text>
+  <g transform="translate(30 115)"><rect width="180" height="130" rx="15" fill="#fff" stroke="#b35c1e" stroke-width="2"/><text x="90" y="36" text-anchor="middle" class="b">Command Center</text><text x="90" y="66" text-anchor="middle" class="c">Early warning</text><text x="90" y="88" text-anchor="middle" class="c">Service pressure</text></g>
+  <path d="M218 180h24" stroke="#7d8799" stroke-width="4"/><path d="m242 180-13-9v18z" fill="#7d8799"/>
+  <g transform="translate(250 115)"><rect width="180" height="130" rx="15" fill="#fff" stroke="#457b9d" stroke-width="2"/><text x="90" y="36" text-anchor="middle" class="b">SLED View</text><text x="90" y="66" text-anchor="middle" class="c">SLED_OPERATIONS_</text><text x="90" y="87" text-anchor="middle" class="c">DASHBOARD_V</text></g>
+  <path d="M438 180h24" stroke="#7d8799" stroke-width="4"/><path d="m462 180-13-9v18z" fill="#7d8799"/>
+  <g transform="translate(470 115)"><rect width="180" height="130" rx="15" fill="#fff" stroke="#8f55d9" stroke-width="2"/><text x="90" y="36" text-anchor="middle" class="b">SQL Evidence</text><text x="90" y="66" text-anchor="middle" class="c">KPI summary</text><text x="90" y="88" text-anchor="middle" class="c">Request rows</text></g>
+  <path d="M658 180h24" stroke="#7d8799" stroke-width="4"/><path d="m682 180-13-9v18z" fill="#7d8799"/>
+  <g transform="translate(690 115)"><rect width="180" height="130" rx="15" fill="#e9f6ee" stroke="#17603a" stroke-width="2"/><text x="90" y="36" text-anchor="middle" class="b">Action</text><text x="90" y="72" text-anchor="middle" class="c">Prioritize Review</text></g>
+  <rect x="170" y="286" width="560" height="48" rx="12" fill="#e9f6ee"/><text x="450" y="316" text-anchor="middle" class="b" fill="#17603a">Summary and detail stay in one governed query path</text>
+</svg>
