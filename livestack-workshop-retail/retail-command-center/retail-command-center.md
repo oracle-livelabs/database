@@ -46,7 +46,7 @@ Start with the KPI query that explains the top-level command-center metrics:
 1. Run this KPI query.
 
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     The query uses scalar subqueries because each dashboard card needs one value. A scalar subquery is a query inside the `SELECT` list that returns a single result, such as an order count or revenue total.
 
@@ -99,8 +99,8 @@ Next, rank product performance so the dashboard can point to the products and ca
     The important clauses are:
 
     1. `JOIN` connects each order line to its product.
-    2. `GROUP BY` rolls many order lines into one row per product.
-    3. `ORDER BY SUM(oi.line_total) DESC` puts the highest-revenue products first. The query orders by the numeric total, not the formatted display text.
+    2. `GROUP BY` rolls many order lines into one row per product ID. Including the ID keeps products separate even if they share a name, category, and unit price.
+    3. `ORDER BY SUM(oi.line_total) DESC, p.product_name, p.product_id` puts the highest-revenue products first and gives tied revenue a stable order. The query orders by the numeric total, not the formatted display text.
 
     ```sql
     <copy>
@@ -112,10 +112,13 @@ Next, rank product performance so the dashboard can point to the products and ca
     FROM products p
     JOIN order_items oi
       ON oi.product_id = p.product_id
-    GROUP BY p.product_name,
+    GROUP BY p.product_id,
+             p.product_name,
              NVL(p.category, 'Uncategorized'),
              p.unit_price
-    ORDER BY SUM(oi.line_total) DESC
+    ORDER BY SUM(oi.line_total) DESC,
+             p.product_name,
+             p.product_id
     FETCH FIRST 8 ROWS ONLY;
     </copy>
     ```

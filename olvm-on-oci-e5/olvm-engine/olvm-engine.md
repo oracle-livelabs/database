@@ -1,8 +1,8 @@
-# Deploy OLVM Engine
+# Install Oracle Linux Virtualization Manager
 
 ## Introduction
 
-In this lab, you will connect to the manager host created in Lab 1, install the required OLVM packages, run `engine-setup`, and validate access to the Administration Portal directly from your local browser.
+In this lab, you will connect to the `olvm` host created in Lab 1, install the required Oracle Linux Virtualization Manager packages, run `engine-setup`, and validate access to the Administration Portal directly from your local browser. Oracle Linux Virtualization Manager is not running until `engine-setup` completes in Task 2.
 
 Estimated Time: 40-60 minutes, including package download and engine setup time.
 
@@ -16,8 +16,8 @@ This walkthrough video is silent and does not include audio narration.
 
 In this lab, you will:
 
-- Connect to the OLVM manager using SSH from your local terminal
-- Install the required OLVM repositories and engine packages
+- Connect to the `olvm` host using SSH from your local terminal
+- Install the required Oracle Linux Virtualization Manager repositories and engine packages
 - Run `engine-setup` and record the `admin@ovirt` password
 - Log in to the Administration Portal from your local browser and verify the deployment
 
@@ -38,19 +38,19 @@ This lab assumes you have:
 
 Use these connection paths throughout this and later labs:
 
-- **Windows PowerShell -> OLVM manager shell:** `ssh -i "$HOME\.ssh\olvm-cluster-id_rsa" oracle@<olvm-public-ip>`
-- **macOS or Linux -> OLVM manager shell:** `ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip>`
-- **Manager shell -> KVM hosts:** `ssh olkvm01` or `ssh olkvm02`
-- **Manager shell -> guest VMs in later labs:** check the VM **Host** column, then use `ssh -tt <kvm-host> "ssh opc@<vm-ip>"`
+- **Windows PowerShell -> `olvm` host shell:** `ssh -i "$HOME\.ssh\olvm-cluster-id_rsa" oracle@<olvm-public-ip>`
+- **macOS or Linux -> `olvm` host shell:** `ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip>`
+- **`olvm` host shell -> Oracle Linux KVM hosts:** `ssh olkvm01` or `ssh olkvm02`
+- **`olvm` host shell -> guest VMs in later labs:** check the VM **Host** column, then use `ssh -tt <Oracle Linux KVM-host> "ssh opc@<vm-ip>"`
 - **Administration Portal (local browser):** `https://<olvm-fqdn>/ovirt-engine`
 
 
 
-## Task 1: Connect to the Manager via SSH
+## Task 1: Connect to the `olvm` Host via SSH
 
 1. From your local machine, open a terminal.
 
-2. Connect to the OLVM manager.
+2. Connect to the `olvm` host. Oracle Linux Virtualization Manager is installed later in Task 2.
 
     In Windows PowerShell, run:
 
@@ -90,7 +90,7 @@ Use these connection paths throughout this and later labs:
 
     **Important:** Your SSH session will disconnect during the reboot. Wait 2-3 minutes for the system to come back online, then reconnect before continuing.
 
-3. Reconnect to the manager after reboot.
+3. Reconnect to the `olvm` host after reboot.
 
     In Windows PowerShell, run:
 
@@ -104,20 +104,22 @@ Use these connection paths throughout this and later labs:
     <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip></copy>
     ```
 
-4. Prepare DNF and verify the OLVM repositories are available:
+4. Prepare DNF and verify the Oracle Linux Virtualization Manager repositories are available:
 
     ```bash
     <copy>sudo dnf clean all
-    sudo dnf repolist | egrep 'ovirt|kvm|gluster|UEKR7|baseos|appstream|addons'</copy>
+    sudo dnf repolist | egrep 'ovirt|Oracle Linux KVM|gluster|UEKR7|baseos|appstream|addons'</copy>
     ```
 
     ![DNF repolist output](./images/dnf-repolist.png "Show DNF repolist output")
 
-5. Run the OLVM pre-check script:
+5. Run the Oracle Linux Virtualization Manager pre-check script:
 
     ```bash
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
     ```
+
+    The `olvm` host uses an Oracle Cloud Infrastructure image, not an Oracle Linux 8 Minimal installation. Therefore, the pre-check displays an expected minimal-install warning and an expected best-effort package-count failure. The script itself states that the minimal-install warning can be disregarded for a VM installed from an Oracle template. Do not change the host image to address these expected messages.
 
     - If the pre-check reports extra enabled repositories, disable them and rerun the check:
 
@@ -131,9 +133,9 @@ Use these connection paths throughout this and later labs:
     <copy>sudo /usr/local/bin/olvm-pre-check.py</copy>
     ```
 
-    ![OLVM pre-check script output](./images/clean-precheck.png "Show OLVM pre-check script output")
+    ![Oracle Linux Virtualization Manager pre-check output with expected minimal-install messages](./images/clean-precheck.png "Show expected minimal-install messages in the Oracle Linux Virtualization Manager pre-check output")
 
-6. Install the OLVM engine package:
+6. Install the Oracle Linux Virtualization Manager engine package:
 
     ```bash
     <copy>sudo dnf install -y ovirt-engine</copy>
@@ -141,7 +143,7 @@ Use these connection paths throughout this and later labs:
 
     This package install can take 10-15 minutes depending on repository speed.
 
-7. Run the OLVM engine setup:
+7. Run the Oracle Linux Virtualization Manager engine setup:
 
     ```bash
     <copy>sudo engine-setup --accept-defaults</copy>
@@ -179,7 +181,7 @@ Use these connection paths throughout this and later labs:
 
 ## Task 3: Update Your Local Hosts File
 
-The OLVM Administration Portal must be accessed using the engine's fully qualified domain name (FQDN). Because that FQDN is an internal OCI DNS name, your local browser cannot resolve it. Adding a single entry to your local hosts file maps the FQDN to the public IP of the `olvm` instance, which lets your browser reach the portal directly.
+The Oracle Linux Virtualization Manager Administration Portal must be accessed using the engine's fully qualified domain name (FQDN). Because that FQDN is an internal OCI DNS name, your local browser cannot resolve it. Adding a single entry to your local hosts file maps the FQDN to the public IP of the `olvm` instance, which lets your browser reach the portal directly.
 
 1. From your SSH session on the `olvm` instance, get the engine FQDN:
 
@@ -239,7 +241,7 @@ The OLVM Administration Portal must be accessed using the engine's fully qualifi
 
 4. On the landing page, click **Engine CA Certificate** to download it.
 
-    ![Show OLVM welcome page showing the Engine CA Certificate](./images/olvm-welcome.png "Show OLVM welcome page showing the Engine CA Certificate")
+    ![Oracle Linux Virtualization Manager welcome page showing the Engine CA Certificate](./images/olvm-welcome.png "Show Oracle Linux Virtualization Manager welcome page showing the Engine CA Certificate")
 
 5. Import the certificate into your browser:
 
@@ -266,14 +268,14 @@ The OLVM Administration Portal must be accessed using the engine's fully qualifi
 
     The Administration Portal should open successfully. If the page is still starting, wait 1-2 minutes and refresh once.
 
-    ![Show OLVM Administration Portal dashboard after successful login](./images/olvm-admin-portal.png "Show OLVM Administration Portal dashboard after successful login")
+    ![Show Oracle Linux Virtualization Manager Administration Portal dashboard after successful login](./images/olvm-admin-portal.png "Show Oracle Linux Virtualization Manager Administration Portal dashboard after successful login")
 
-## Deploy OLVM Engine Checkpoint
+## Deploy Oracle Linux Virtualization Manager Engine Checkpoint
 
 At this point, you should have:
 
-- SSH access to the OLVM manager from your local machine
-- OLVM engine installed and configured
+- SSH access to the Oracle Linux Virtualization Manager manager from your local machine
+- Oracle Linux Virtualization Manager engine installed and configured
 - The Administration Portal accessible from your local browser
 - The `admin@ovirt` password recorded
 

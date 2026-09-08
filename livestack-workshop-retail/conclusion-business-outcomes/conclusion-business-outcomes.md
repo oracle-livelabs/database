@@ -2,7 +2,7 @@
 
 ## Introduction
 
-You have completed the SQL-backed retail decision path for **Seer Sporting Goods**. You started with a demand signal, proved the shared data foundation, moved from command-center metrics into order documents, interpreted demand language with vectors, followed creator relationships with graph queries, checked fulfillment options with Spatial, and used OML scoring to prioritize action.
+You have completed the SQL-backed retail decision path for **Seer Sporting Goods**. You started with a demand signal, confirmed the shared data foundation, moved from command-center metrics into order documents, interpreted demand language with vectors, followed creator relationships with graph queries, checked fulfillment options with Spatial, and used OML scoring to prioritize action. Along the way, you changed business questions, compared the resulting evidence, and identified what still required human review.
 
 Estimated Time: **5 minutes**
 
@@ -22,11 +22,11 @@ Use this recap to connect each lab outcome back to the retail question it helps 
     | --- | --- |
     | Is the data foundation ready? | How catalog views confirm tables, JSON duality views, vectors, graph objects, and OML models. |
     | What needs attention in the command center? | How KPI cards and product rankings drill back to order, product, category, and shipment evidence. |
-    | How can an application use order documents safely? | How `ORDERS\_DV` exposes JSON while relational tables remain the source of truth. |
-    | How can teams find relevant demand signals? | How embeddings and vector distance compare meaning inside the database. |
-    | How does influence move through a creator network? | How `GRAPH_TABLE` returns readable relationship paths. |
-    | Which fulfillment center is practical? | How Spatial distance joins to inventory and product rows. |
-    | Which products deserve model-guided attention? | How OML predictions remain connected to feature rows and operational evidence. |
+    | How can an application use order documents safely? | How `ORDERS\_DV` maps permitted JSON inserts and updates to the same governed relational rows. |
+    | How can teams find relevant demand signals? | How changing a business phrase changes semantic rankings while vectors remain connected to source rows. |
+    | How does influence move through a creator network? | How allowing one- or two-hop `GRAPH_TABLE` paths changes a shortlist and why the complete path still needs review. |
+    | Which fulfillment center is practical? | How customer location changes the distance ranking and why on-hand quantity and operating context still need review. |
+    | Which products deserve model-guided attention? | How prediction disagreements create a review queue without turning probability into certainty. |
 
 2. Review the persona value.
 

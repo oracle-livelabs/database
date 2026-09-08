@@ -47,7 +47,7 @@ Start on the **Creator Influence Network** page so the graph inventory query con
 
 2. Run the graph inventory query.
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     This query confirms that the property graph exists before you run path queries against it. `USER_PROPERTY_GRAPHS` is the catalog view for property graph objects in your schema, and the `WHERE` clause limits the check to `INFLUENCER_NETWORK`. A one-row result means the graph definition is available to query.
 
@@ -75,15 +75,17 @@ Now traverse direct creator relationships so planners can confirm the graph cont
 
     This task is the graph equivalent of checking the relationship table before you ask a bigger business question. A campaign planner first needs to know whether the graph has direct creator-to-creator relationships and whether those relationships have useful attributes, such as link type and strength.
 
-    `GRAPH_TABLE` is not a stored business table. It is a SQL function that makes a property graph readable as table-shaped rows. That matters for beginners because it lets you use graph syntax to describe a path, then inspect the result with familiar SQL columns.
+    **Notes:**
 
-    The `INFLUENCER_NETWORK` graph exists to organize relationship data that would be awkward to read as isolated rows. It connects creators, brands, products, and posts as vertices and edges. In this task, you focus on the simplest edge: one creator connected directly to another creator. If this result looks reasonable, the next task can safely add brand context on top of the same graph.
+    - `GRAPH_TABLE` is not a stored business table. It is a SQL function that makes a property graph readable as table-shaped rows. That matters for beginners because it lets you use graph syntax to describe a path, then inspect the result with familiar SQL columns.
 
-    The pattern starts at one influencer, follows one `connects_to` edge, and reaches another influencer.
+    - The `INFLUENCER_NETWORK` graph exists to organize relationship data that would be awkward to read as isolated rows. It connects creators, brands, products, and posts as vertices and edges. In this task, you focus on the simplest edge: one creator connected directly to another creator. If this result looks reasonable, the next task can safely add brand context on top of the same graph.
 
-    Read the graph pattern from left to right: `(src IS influencer)` is the starting creator, `-[e IS connects_to]->` is the relationship, and `(dst IS influencer)` is the reached creator. The `COLUMNS` block chooses which path details become table columns.
+    - The pattern starts at one influencer, follows one `connects_to` edge, and reaches another influencer.
 
-    The aliases `AS from_creator` and `AS to_creator` make the relationship direction explicit. That prepares the result for graph pattern queries because you can see which creator starts the path and which creator is reached.
+    - Read the graph pattern from left to right: `(src IS influencer)` is the starting creator, `-[e IS connects_to]->` is the relationship, and `(dst IS influencer)` is the reached creator. The `COLUMNS` block chooses which path details become table columns.
+
+    - The aliases `AS from_creator` and `AS to_creator` make the relationship direction explicit. That prepares the result for graph pattern queries because you can see which creator starts the path and which creator is reached.
 
     ```sql
     <copy>
@@ -131,7 +133,7 @@ Next, add brand context to the graph path so campaign reach is explained through
 
     1. `(b IS brand) <-[p IS promotes]- (i IS influencer)` finds creators who promote a brand.
     2. `(i IS influencer) -[c IS connects_to]-> (j IS influencer)` follows each promoter to a creator they can reach.
-    3. `SELECT DISTINCT` keeps the output focused on unique brand, promoter, reached-creator, and relationship combinations.
+    3. `**SELECT DISTINCT**` keeps the output focused on unique brand, promoter, reached-creator, and relationship combinations.
 
     ```sql
     <copy>
@@ -164,6 +166,43 @@ Next, add brand context to the graph path so campaign reach is explained through
     | ApexRide | `@alpine_mia_143` | `@alpine_hope_321` | affiliate |
 
 2. The result matters because it connects brand activity to reachable creators. In retail terms, audience movement means a campaign can start with one promoter and reach adjacent creator communities through known relationships. The graph pattern keeps that movement readable even as the business question moves beyond one table or one join.
+
+3. 🎯 **Interactive challenge: expand the creator-reach shortlist.**
+
+    Starting with the brand propagation query above, change only the creator-to-creator path from `-[c IS connects_to]->` to `-[c IS connects_to]->{1,2}`. Run your revised query so it can follow either one or two creator relationships. Which reached creator enters the displayed five-row shortlist, and what path evidence would you review before using that creator for a campaign?
+
+    <details>
+    <summary><strong>Challenge answer: expanded reach needs path review</strong></summary>
+
+    **Expected output: Expanded Brand Reach Paths**
+
+    The result keeps the same brand, promoter, reached-creator, and relationship columns. In the current workshop data, `@camp_faye_151` is first in the expanded result and is absent from the displayed five-row direct-path shortlist. The query permits one- or two-hop paths, but these columns do not expose hop count. Exact rows also depend on the graph data and the alphabetical result limit.
+
+    > `@camp_faye_151` is the changed shortlist result to investigate. Its presence shows that allowing one- or two-hop matches changed the displayed queue; it does not prove from these output columns that the path used two hops. Review the complete path and hop count, connection type, strength, audience fit, and recent campaign context before making a recommendation. Oracle Property Graph keeps the evidence connected to governed creator, brand, product, and signal data; it does not turn a connection into an automatic campaign decision.
+
+    If you need the runnable solution, use this query:
+
+    ```sql
+    <copy>
+    SELECT DISTINCT brand_name AS "Brand",
+           promoter AS "Promoter",
+           reached AS "Reached",
+           relationship_type AS "Relationship"
+    FROM GRAPH_TABLE ( influencer_network
+      MATCH (b IS brand) <-[p IS promotes]- (i IS influencer) -[c IS connects_to]->{1,2} (j IS influencer)
+      COLUMNS (
+        b.brand_name AS brand_name,
+        i.handle AS promoter,
+        j.handle AS reached,
+        p.relationship_type AS relationship_type
+      )
+    )
+    ORDER BY brand_name, promoter, reached, relationship_type
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    </details>
 
     Next, you use location and inventory evidence to decide whether demand can be served from practical fulfillment centers.
 

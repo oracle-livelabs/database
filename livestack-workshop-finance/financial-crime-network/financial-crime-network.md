@@ -4,9 +4,17 @@
 
 Once an account looks suspicious, investigators need to know what other accounts, devices, IP addresses, payees, phones, or emails are connected to it. This lab investigates that fraud network with **Oracle Property Graph** and **SQL Property Graph Queries (SQL/PGQ)**.
 
+Jessica follows a suspicious account to see whether it shares devices, contact details, payees, or other connections with risky activity. Jordan keeps those relationships available as governed database evidence, so Jessica can investigate the pattern without relying on a separate graph system.
+
+Jessica follows a suspicious account to see whether it shares devices, contact details, payees, or other connections with risky activity. Jordan keeps those relationships available as governed database evidence, so Jessica can investigate the pattern without relying on a separate graph system.
+
 Fraud patterns often hide in relationships rather than in a single transaction row. One account may not reveal the full picture, but a shared device, reused phone number, mule payee, or repeated IP address can reveal coordinated activity.
 
 A suspicious signal often leads to the question, "Who or what else is connected?" The graph lets you move from a risky account to relationship evidence that can support escalation.
+
+The business value is faster, more explainable investigation without copying relationship data to a separate graph system. Investigators can follow an alert to the shared device, payee, phone, or IP evidence that merits human review.
+
+Oracle Property Graph models business things as nodes and their connections as edges, while SQL/PGQ lets you query those paths with familiar SQL syntax. Graph Studio is Oracle Database's visual workspace for exploring the same graph: SQL/PGQ provides exact, repeatable evidence, and Graph Studio lets an investigator see and explain the connected paths as a network map.
 
 <details>
 <summary><strong>Key terms: property graph, entity, relationship, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
@@ -31,10 +39,13 @@ The second image is the Financial Crime Network application workspace. The left 
 
 ### Objectives
 
-- Traverse fraud ring reach from a seed account.
-- Find shared device and IP clusters.
+- Run SQL/PGQ queries for fraud network analysis.
+- Interpret the relationship evidence behind suspicious accounts.
+- Open Graph Studio from Database Actions.
+- Import and run the finance fraud-network notebook.
+- Compare SQL results with graph visualizations.
 
-Estimated Time: **12 minutes**
+Estimated Time: **25 minutes**
 
 ### Business Scenario
 
@@ -42,14 +53,16 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | Fraud teams need to see relationships that are hard to detect from transaction tables alone. |
 | Technical Challenge | Investigators need path-based relationship analysis without writing and maintaining long chains of self-joins. |
-| Persona Focus | Fraud analysts interpret the network; database developers provide the graph pattern that explains why entities are connected. |
+| Persona Focus | Jessica interprets the network; Jordan provides the graph pattern that explains why entities are connected. |
 | What You Will See | A property graph exposes fraud ring reach and shared entity clusters with SQL. |
 | Database Capability | FRAUD\_NETWORK and GRAPH\_TABLE support SQL/PGQ traversal. |
 | Outcome | Investigators can explain why entities are related and prioritize high-risk nodes. |
 
-Persona focus: You are helping a fraud analyst move from a suspicious account to explainable relationship evidence without turning the investigation into fragile join logic.
+Persona focus: You join Jessica and Jordan as they move from a suspicious account to explainable relationship evidence without turning the investigation into fragile join logic.
 
 ## Task 1: Trace two-hop fraud reach
+
+In this lab, you will investigate the fraud network in two views. First, you will run the SQL/PGQ queries in SQL Worksheet so you can see exactly how Oracle AI Database traces connected accounts, devices, IP addresses, phone numbers, and emails. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
 
 Start from suspicious account `ACCT-8841` and trace the connected entities within two relationship hops.
 
@@ -70,7 +83,7 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 
     > Fraud investigation often starts with transactions but quickly becomes a relationship problem. If graph data lives in a separate graph-only system, teams must move or copy account, device, and transaction evidence before they can investigate it.
     >
-    > Oracle Database keeps relational transaction data and property graph analysis close together. You can use SQL to move from account evidence to relationship evidence without changing databases.
+    > Oracle AI Database keeps relational transaction data and property graph analysis close together. You can use SQL to move from account evidence to relationship evidence without changing databases.
 
     </details>
 
@@ -98,14 +111,7 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
 
     **Expected output: High Risk Fraud Entities**
 
-    | Entity Key | Display Name | Entity Type | Risk Score | Risk Level | Total Amount | Channel |
-    | --- | --- | --- | --- | --- | --- | --- |
-    | DEV-fp-91a7 | Mobile Fingerprint 91a7 | device | 98 | critical | 42211.05 | network |
-    | PAYEE-MULE-017 | Mule Payee 017 | payee | 97 | critical | 36110.75 | payments |
-    | IP-198.51.100.44 | Residential Proxy 198.51.100.44 | ip\_address | 95 | critical | 38200.25 | network |
-    | PHONE-212-0199 | Reused VOIP 212-0199 | phone | 90 | critical | 25110.25 | contact\_center |
-    | PAYEE-CRYPTO-3 | Crypto Ramp Wallet 3 | payee | 87 | high | 14325.5 | payments |
-    | BRANCH-NY-014 | NY Midtown Branch 014 | branch | 49 | medium | 2800 | branch |
+    ![Green Button SQL Worksheet showing high-risk fraud entities](images/green-button-high-risk-fraud-entities.png " ")
 
 
 2. Review the high-risk entities.
@@ -121,6 +127,46 @@ Start from suspicious account `ACCT-8841` and trace the connected entities withi
     These rows matter because they show what the suspicious account touched or shared.
 
     The result gives investigators a prioritized reach map. Instead of staring at a tangle of connections, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require account holds, case escalation, or deeper review before looking at lower-risk branches of the network.
+
+3. 🎯 **Interactive challenge: compare direct and indirect evidence.**
+
+    Starting with the two-hop traversal above, change only `{1,2}` to `{1,1}` so you see entities directly connected to `ACCT-8841`. Run your revised query.
+
+    **Expected output: Direct Fraud Connections**
+
+    The current data returns the device, mule payee, IP address, phone, and branch directly connected to `ACCT-8841`. Restore the two-hop traversal mentally and identify the entity that appears only through an indirect path.
+
+    <details>
+    <summary><strong>Challenge answer: two hops add investigative context</strong></summary>
+
+    > `PAYEE-CRYPTO-3`, Crypto Ramp Wallet 3, appears only after the second hop. It is indirect evidence that warrants follow-up, not an automatic action. Oracle Property Graph keeps this relationship evidence connected to the same governed finance data used for risk review.
+
+    If you need the runnable solution, use this one-hop traversal:
+
+    ![Hint: Green Button SQL Worksheet showing direct fraud connections](images/green-button-direct-fraud-connections.png " ")
+
+    ```sql
+    <copy>
+    SELECT DISTINCT entity_key, display_name, entity_type,
+           risk_score, risk_level, total_amount, channel
+    FROM GRAPH_TABLE ( fraud_network
+      MATCH (seed IS entity) -[e IS related_to]->{1,1} (reached IS entity)
+      WHERE seed.entity_key = 'ACCT-8841'
+      COLUMNS (
+        reached.entity_key AS entity_key,
+        reached.display_name AS display_name,
+        reached.entity_type AS entity_type,
+        reached.risk_score AS risk_score,
+        reached.risk_level AS risk_level,
+        reached.total_amount AS total_amount,
+        reached.channel AS channel
+      )
+    )
+    ORDER BY risk_score DESC;
+    </copy>
+    ```
+
+    </details>
 
 ## Task 2: Find accounts sharing device, IP, phone, or email
 
@@ -165,19 +211,7 @@ Next, find account pairs that share identifying evidence such as device, IP addr
 
     **Expected output: Shared Entity Connections**
 
-    | Account A | Shared Entity | Shared Type | Account B | A Risk | B Risk | Combined Risk | E1 Type | E2 Type |
-    | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-    | ACCT-8841 | DEV-fp-91a7 | device | ACCT-1190 | 96.5 | 91 | 93.8 | shared\_device | shared\_device |
-    | ACCT-8841 | IP-198.51.100.44 | ip\_address | ACCT-1190 | 96.5 | 91 | 93.8 | shared\_ip | shared\_ip |
-    | ACCT-8841 | PHONE-212-0199 | phone | ACCT-1190 | 96.5 | 91 | 93.8 | same\_phone | same\_phone |
-    | ACCT-8841 | DEV-fp-91a7 | device | ACCT-5077 | 96.5 | 88 | 92.3 | shared\_device | shared\_device |
-    | ACCT-9204 | DEV-emulator-22 | device | ACCT-2188 | 94 | 86 | 90 | shared\_device | shared\_device |
-    | ACCT-9204 | IP-203.0.113.17 | ip\_address | ACCT-2188 | 94 | 86 | 90 | shared\_ip | shared\_ip |
-    | ACCT-1190 | DEV-fp-91a7 | device | ACCT-5077 | 91 | 88 | 89.5 | shared\_device | shared\_device |
-    | ACCT-8841 | IP-198.51.100.44 | ip\_address | ACCT-3320 | 96.5 | 81.5 | 89 | shared\_ip | shared\_ip |
-    | ACCT-1190 | IP-198.51.100.44 | ip\_address | ACCT-3320 | 91 | 81.5 | 86.3 | shared\_ip | shared\_ip |
-    | ACCT-5077 | EMAIL-risk-drop-01 | email | ACCT-3320 | 88 | 81.5 | 84.8 | same\_email | same\_email |
-    | ACCT-7712 | DEV-browser-7c | device | ACCT-6642 | 77 | 74 | 75.5 | shared\_device | shared\_device |
+    ![Green Button SQL Worksheet showing shared entity connections](images/green-button-shared-entity-connections.png " ")
 
 
 2. Use the result to explain investigation priority.
@@ -187,12 +221,114 @@ Next, find account pairs that share identifying evidence such as device, IP addr
 
     This turns dashboard suspicion into explainable relationship evidence. The fraud analyst can say which accounts are connected, what they share, and why that connection matters.
 
+3. 🎯 **Interactive challenge: choose the human-review priority.**
+
+    Which pair has the strongest basis for human review: `ACCT-8841` and `ACCT-1190`, or `ACCT-8841` and `ACCT-5077`? Record the evidence you would include in the case.
+
+    <details>
+    <summary><strong>Challenge answer: corroboration is stronger than one connection</strong></summary>
+
+    > Choose `ACCT-8841` and `ACCT-1190`. The result contains three separate corroborating rows for that pair: a shared device, IP address, and phone, each with combined risk `93.8`. `ACCT-8841` and `ACCT-5077` share only a device. The graph supports a human review recommendation; it does not make an automatic enforcement decision.
+
+    </details>
+
+## Task 3: Open Graph Studio
+
+The SQL showed which accounts and identifiers are connected. Now open Graph Studio so you can see those connections as a map and explain them to another investigator.
+
+Graph Studio is Oracle Database's visual workspace for property graphs. It lets an investigator see nodes, edges, and paths as an interactive network while keeping the graph backed by the same governed database data. Use SQL/PGQ when you need a precise, repeatable result set, such as a ranked list of entities or a filtered path count. Use Graph Studio when you need to explore a network visually, select a node, follow adjacent relationships, and explain a fraud ring to another reviewer. In this workshop, you use it to turn the SQL evidence for `ACCT-8841` into an investigation map; it complements SQL rather than replacing it.
+
+Start from the Database Actions Launchpad. You will use the `LLUSER` database user and password supplied for the workshop.
+
+1. If the dark-theme message appears, click **Done**.
+
+2. Confirm that the upper-right corner shows `LLUSER`.
+
+    ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
+
+3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/graph-database-actions-launchpad.png " ")
+
+4. If prompted, sign in with `LLUSER` and the workshop password.
+
+5. Confirm that the Graph Studio home page opens. The left navigation provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
+
+    ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png " ")
+
+## Task 4: Download and import the finance notebook
+
+The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnable investigation guide that combines Markdown explanation with SQL/PGQ paragraphs and graph visualizations. You use it so every learner runs the same documented fraud patterns against the governed Finance graph, then can inspect the visual result without rebuilding the investigation from scratch.
+
+1. Download [finance-fraud-network-graph-studio.dsnb](files/finance-fraud-network-graph-studio.dsnb).
+
+    If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
+
+2. In Graph Studio, click **Notebooks** in the left navigation.
+
+3. Click **Import** in the upper-right corner.
+
+    ![Graph Studio Notebooks page for LLUSER with the Import button](images/graph-notebook-import.png " ")
+
+4. The import window opens.
+
+    ![Import the Fraud Network notebook file into Graph Studio](images/graph-notebook-import-dialog.png " ")
+
+5. Drag & drop the `finance-fraud-network-graph-studio.dsnb` file from your local computer into the import window, or browse to the file on your computer. Review the selected filename and click **Import**. Open **Fraud Network** after the import completes.
+
+## Task 5: Run and interpret the Graph Studio notebook
+
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of that investigation in Graph Studio so you can compare the query results with the visual graph experience. The notebook shows the `ACCT-8841` path and the `DEV-fp-91a7` shared-device view; it does not repeat the full Task 2 shared-entity query exactly. The advantage is investigative context: a table ranks the connected entities, while the visual graph reveals the paths and shared infrastructure that explain why they are connected.
+
+1. Start at the top of the **Fraud Network** notebook and read the opening paragraph, **Financial Crime Network with Property Graph**.
+
+    ![Fraud Network notebook open at the top in Graph Studio](images/graph-notebook-task5-top.png " ")
+
+2. Read the explanation for the `ACCT-8841` traversal, then run the SQL paragraph that starts with `SELECT DISTINCT`.
+
+    This is the same first investigation pattern you ran in SQL Worksheet: start from `ACCT-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
+
+3. Continue through the notebook and review these results:
+
+    | Paragraph | Result | Investigation purpose |
+    | --- | --- | --- |
+    | `SELECT DISTINCT ... WHERE seed.entity_key = 'ACCT-8841'` | Table | Ranks entities reached within one or two hops of `ACCT-8841`. |
+    | `Graph Visualization of previous query` | Markdown label | Introduces the visual version of the first traversal. |
+    | `SELECT * ... WHERE src.entity_key = 'ACCT-8841'` | Graph visualization | Draws the one-hop and two-hop path from the suspicious account. |
+    | `Shared Entity Connections` | Markdown label and explanation | Introduces the device-centered relationship view. |
+    | `SELECT * ... WHERE device.entity_key = 'DEV-fp-91a7'` | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected accounts. |
+
+4. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `ACCT-8841`. Review the graph visualization that appears below the paragraph.
+
+    ![Graph Studio visualization for one-hop and two-hop fraud reach from ACCT-8841](images/graph-two-hop-visualization.png " ")
+
+5. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that anchors on `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph.
+
+    ![Graph Studio visualization for accounts connected to DEV-fp-91a7](images/graph-shared-device-visualization.png " ")
+
+6. For the two visualization paragraphs, select the graph visualization if Graph Studio initially displays a table. Select a node to inspect its properties and follow the relationship evidence back to the seed account or device.
+
+7. Compare the notebook results with the SQL Worksheet results you ran earlier. The SQL showed the evidence trail; Graph Studio shows the same relationships as a visual investigation map.
+
+> **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
+
+## Business Outcome
+
+You traced connections that are difficult to recognize when accounts, devices, addresses, and counterparties are reviewed separately. This pattern can help investigators focus their next review and explain how entities are connected.
+
+Organizations can evaluate this pattern by tracking investigation cycle time, manual relationship searches, analyst handoffs, and the number of useful connections identified for review. A graph connection is an investigative lead, not a confirmed fraud outcome.
+
 ## Next Steps
 
-Congratulations on completing the property graph lab. You used graph queries to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts. For a deeper hands-on workshop focused on graph analysis in Oracle Database, open the [Property Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3978).
+Congratulations on completing the property graph lab. You used SQL/PGQ patterns to move from a suspicious account to connected evidence such as shared devices, IP addresses, phone numbers, and related accounts, then compared the same investigation in Graph Studio.
+
+For more property graph practice, try these follow-up resources:
+
+* Open the [Oracle Graph LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/run-workshop?p210_wid=770&p210_wec=&session=112325984461564&P0_REDIRECT=Y) for a deeper hands-on introduction to property graph concepts and Graph Studio.
+* Download [getting-started-bank-graph.dsnb](files/getting-started-bank-graph.dsnb) and import it into Graph Studio for an additional bank graph exercise.
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Authors** - Linda Foinding, Principal Database Product Manager
+* **Contributors** - Ramu Murakami Gutierrez, Pat Shepherd,
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, you will create and manage users in Oracle Linux Virtualization Manager (OLVM) 4.5.
+In this lab, you will create and manage users in Oracle Linux Virtualization Manager 4.5.
 
-OLVM 4.5 supports more than one user source. Users similar to the default portal administrator (`admin@ovirt`) are created through the integrated Keycloak service. OLVM also supports local internal users, which are created on the engine host with `ovirt-aaa-jdbc-tool`.
+Oracle Linux Virtualization Manager 4.5 supports more than one user source. Users similar to the default portal administrator (`admin@ovirt`) are created through the integrated Keycloak service. Oracle Linux Virtualization Manager also supports local internal users, which are created on the engine host with `ovirt-aaa-jdbc-tool`.
 
 In this lab, you will create both:
 - a Keycloak-backed administrative user
@@ -17,10 +17,10 @@ Estimated Time: 20-30 minutes
 In this lab, you will:
 
 - Create a new user in the Keycloak `Ovirt-internal` realm
-- Import the Keycloak user into OLVM
+- Import the Keycloak user into Oracle Linux Virtualization Manager
 - Assign the `SuperUser` role to the Keycloak user
 - Create a local internal user with `ovirt-aaa-jdbc-tool`
-- Import the local user into OLVM
+- Import the local user into Oracle Linux Virtualization Manager
 - Assign a role to the local user
 - Understand the difference between Keycloak-backed users and local internal users
 
@@ -28,12 +28,12 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- Completed the OLVM Engine deployment
-- Access to the OLVM Administration Portal as `admin@ovirt`
+- Completed the Oracle Linux Virtualization Manager Engine deployment
+- Access to the Oracle Linux Virtualization Manager Administration Portal as `admin@ovirt`
 - Access to the Keycloak Administration Console as `admin`
-- SSH access to the OLVM engine host
+- SSH access to the Oracle Linux Virtualization Manager engine host
 
-> **Important:** In OLVM 4.5, users created with `ovirt-aaa-jdbc-tool` are local internal users. They are different from Keycloak-backed users such as `admin@ovirt`.
+> **Important:** In Oracle Linux Virtualization Manager 4.5, users created with `ovirt-aaa-jdbc-tool` are local internal users. They are different from Keycloak-backed users such as `admin@ovirt`.
 
 ## Task 1: Create a Keycloak-Backed Administrative User
 
@@ -88,9 +88,9 @@ This lab assumes you have:
 
 5. Confirm the password reset when prompted.
 
-## Task 3: Import the Keycloak User into OLVM
+## Task 3: Import the Keycloak User into Oracle Linux Virtualization Manager
 
-1. Return to the **OLVM Administration Portal**.
+1. Return to the **Oracle Linux Virtualization Manager Administration Portal**.
 
 2. Log in as:
 
@@ -100,7 +100,7 @@ This lab assumes you have:
 
 3. Go to **Administration** → **Users**.
 
-    ![Show OLVM Administration Portal with Users pane](images/olvm-admin-portal.png "Show OLVM Administration Portal with Users pane")
+    ![Show Oracle Linux Virtualization Manager Administration Portal with Users pane](images/olvm-admin-portal.png "Show Oracle Linux Virtualization Manager Administration Portal with Users pane")
 
 4. Under **Search** select **internalsso (internalkeycloak-authz)**
 
@@ -136,11 +136,11 @@ This lab assumes you have:
 
 ## Task 5: Create a Local Internal User
 
-> **Important:** In a Keycloak-enabled OLVM 4.5 environment, a local internal user created with `ovirt-aaa-jdbc-tool` may not be usable for normal web portal login. For browser-based administrative access, use a Keycloak-backed user such as the one created in Tasks 1–4.
+> **Important:** In a Keycloak-enabled Oracle Linux Virtualization Manager 4.5 environment, a local internal user created with `ovirt-aaa-jdbc-tool` may not be usable for normal web portal login. For browser-based administrative access, use a Keycloak-backed user such as the one created in Tasks 1–4.
 
-To create a local internal user in OLVM 4.5, use the `ovirt-aaa-jdbc-tool` on the engine host.
+To create a local internal user in Oracle Linux Virtualization Manager 4.5, use the `ovirt-aaa-jdbc-tool` on the engine host.
 
-1. Connect to the OLVM engine host using SSH.
+1. Connect to the Oracle Linux Virtualization Manager engine host using SSH.
 
 2. Create the user account.
 
@@ -164,7 +164,7 @@ To create a local internal user in OLVM 4.5, use the `ovirt-aaa-jdbc-tool` on th
 
 Even after the local user is created, the account will not appear in the Administration Portal until you manually add it.
 
-1. Log in to the OLVM Administration Portal as an administrator.
+1. Log in to the Oracle Linux Virtualization Manager Administration Portal as an administrator.
 
 2. Go to **Administration** → **Users**.
 
@@ -197,7 +197,7 @@ Once added to the portal, you must assign a role.
 
 ## Task 9: Verify User Access
 
-1. Log out of the OLVM Administration Portal.
+1. Log out of the Oracle Linux Virtualization Manager Administration Portal.
 
 2. Log in using the new Keycloak-backed administrative user and verify full access.
 
@@ -210,7 +210,7 @@ Once added to the portal, you must assign a role.
 
 - **Keycloak-backed users** are used for users similar to `admin@ovirt`.
 - **Local internal users** are created with `ovirt-aaa-jdbc-tool`.
-- Both types of users must be added to OLVM and assigned roles before they can be used effectively.
+- Both types of users must be added to Oracle Linux Virtualization Manager and assigned roles before they can be used effectively.
 - A user without permissions can authenticate but may not have usable access in the portal.
 
 ## Manage Users and Roles Checkpoint

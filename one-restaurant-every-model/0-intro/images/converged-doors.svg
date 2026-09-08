@@ -31,7 +31,7 @@
   <text class="coreS" x="480" y="293">the canonical restaurant schema</text>
   <rect class="tbl" x="372" y="305" width="100" height="20"/><text class="tblT" x="380" y="319">store · menu</text>
   <rect class="tbl" x="372" y="329" width="100" height="20"/><text class="tblT" x="380" y="343">category · item</text>
-  <rect class="tbl" x="372" y="353" width="100" height="20"/><text class="tblT" x="380" y="367">item_override …</text>
+  <rect class="tbl" x="372" y="353" width="100" height="20"/><text class="tblT" x="380" y="367">menu_item …</text>
   <rect class="tbl" x="488" y="305" width="100" height="20"/><text class="tblT" x="496" y="319">"orders" (JSON)</text>
   <rect class="tbl" x="488" y="329" width="100" height="20"/><text class="tblT" x="496" y="343">order_graph</text>
   <rect class="tbl" x="488" y="353" width="100" height="20"/><text class="tblT" x="496" y="367">desc_vec VECTOR</text>

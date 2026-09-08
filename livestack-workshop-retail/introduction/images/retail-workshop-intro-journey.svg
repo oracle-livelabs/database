@@ -50,9 +50,9 @@
     <text x="22" y="220" class="body">JSON documents.</text>
     <text x="22" y="246" class="label">Related labs</text>
     <rect class="pill" x="22" y="256" width="144" height="26" rx="5"/>
-    <text x="33" y="274" class="pillText" fill="#d44736">Lab 1: Data Foundation</text>
+    <text x="94" y="274" class="pillText" fill="#d44736" text-anchor="middle">Lab 1: Data Foundation</text>
     <rect class="pill" x="22" y="288" width="117" height="26" rx="5"/>
-    <text x="33" y="306" class="pillText" fill="#d44736">Lab 3: JSON Duality</text>
+    <text x="80.5" y="306" class="pillText" fill="#d44736" text-anchor="middle">Lab 3: JSON Duality</text>
   </g>
 
   <path d="M331 344h31" stroke="#77736d" stroke-width="4" marker-end="url(#arrow)"/>
@@ -72,13 +72,13 @@
     <text x="22" y="178" class="body">and creator relationships</text>
     <text x="22" y="199" class="body">to understand where retail</text>
     <text x="22" y="220" class="body">attention should focus.</text>
-    <text x="22" y="246" class="label">Related labs</text>
-    <rect class="pill" x="22" y="256" width="118" height="26" rx="5"/>
-    <text x="33" y="274" class="pillText" fill="#557a68">Lab 2: Dashboard</text>
-    <rect class="pill" x="22" y="288" width="126" height="26" rx="5"/>
-    <text x="33" y="306" class="pillText" fill="#557a68">Lab 4: Vector Search</text>
-    <rect class="pill" x="158" y="288" width="91" height="26" rx="5"/>
-    <text x="169" y="306" class="pillText" fill="#557a68">Lab 5: Graph</text>
+    <text x="22" y="236" class="label">Related labs</text>
+    <rect class="pill" x="22" y="242" width="150" height="26" rx="5"/>
+    <text x="33" y="260" class="pillText" fill="#557a68">Lab 2: Dashboard</text>
+    <rect class="pill" x="22" y="270" width="150" height="26" rx="5"/>
+    <text x="33" y="288" class="pillText" fill="#557a68">Lab 4: Vector Search</text>
+    <rect class="pill" x="22" y="298" width="150" height="26" rx="5"/>
+    <text x="33" y="316" class="pillText" fill="#557a68">Lab 5: Graph</text>
   </g>
 
   <path d="M635 344h31" stroke="#77736d" stroke-width="4" marker-end="url(#arrow)"/>
@@ -102,9 +102,9 @@
     <text x="22" y="220" class="body">becomes a customer issue.</text>
     <text x="22" y="246" class="label">Related labs</text>
     <rect class="pill" x="22" y="256" width="111" height="26" rx="5"/>
-    <text x="33" y="274" class="pillText" fill="#4f8397">Lab 6: Spatial</text>
+    <text x="77.5" y="274" class="pillText" fill="#4f8397" text-anchor="middle">Lab 6: Spatial</text>
     <rect class="pill" x="22" y="288" width="91" height="26" rx="5"/>
-    <text x="33" y="306" class="pillText" fill="#4f8397">Lab 7: OML</text>
+    <text x="67.5" y="306" class="pillText" fill="#4f8397" text-anchor="middle">Lab 7: OML</text>
   </g>
 
   <path d="M939 344h31" stroke="#77736d" stroke-width="4" marker-end="url(#arrow)"/>
@@ -123,9 +123,9 @@
     <text x="22" y="199" class="body">takeaways.</text>
     <text x="22" y="246" class="label">Related labs</text>
     <rect class="pill" x="22" y="256" width="122" height="26" rx="5"/>
-    <text x="33" y="274" class="pillText" fill="#a67934">Lab 8: Conclusion</text>
+    <text x="83" y="274" class="pillText" fill="#a67934" text-anchor="middle">Lab 8: Conclusion</text>
     <rect class="pill" x="22" y="288" width="84" height="26" rx="5"/>
-    <text x="33" y="306" class="pillText" fill="#a67934">Lab 9: Quiz</text>
+    <text x="64" y="306" class="pillText" fill="#a67934" text-anchor="middle">Lab 9: Quiz</text>
   </g>
 
   <!-- Foundation connectors -->

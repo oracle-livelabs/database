@@ -1,10 +1,10 @@
 -- CATCH-UP -> state after Lab 3 (run with SQLcl from the scripts directory).
--- Produces: four stores at 1399; s_104's drifted string copy ("1000") intact
--- at 1299 - Lab 4's see-the-drift step depends on it.
+-- Produces: four stores at 13.99; s_104's drifted string copy ("1000") untouched
+-- at its local premium of 14.99 - Lab 4's see-the-drift step depends on it.
+-- STATE CHECK below: expect s_100..s_103 = 13.99, s_104 = 14.99.
 @01_seed_stores.sql
 @02_price_change.sql
 
--- STATE CHECK: expect s_100..s_103 = 1399, s_104 = 1299
 SELECT s.data."_id".string() AS store_id, jt.price
 FROM   "stores" s,
        JSON_TABLE(s.data, '$.menus[*].categories[*].items[*]'

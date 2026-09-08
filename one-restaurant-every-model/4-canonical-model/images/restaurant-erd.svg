@@ -1,116 +1,138 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" font-family="Helvetica,Arial,sans-serif">
-  <title>Canonical restaurant schema — seven core entities plus the optional item_override extension (8 tables)</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" font-family="Helvetica,Arial,sans-serif">
+  <title>Canonical chain schema - eight tables. item is the chain catalog and has no parent; menu_item is the many-to-many that records which location offers which item, under what local name and price.</title>
   <style>
-    .box { fill:#ffffff; stroke:#312d2a; stroke-width:1.5; rx:6; }
-    .hdr { fill:#312d2a; }
-    .htx { fill:#ffffff; font-size:14px; font-weight:bold; }
-    .col { fill:#444444; font-size:11px; }
-    .pk  { font-weight:bold; }
-    .rel { stroke:#c74634; stroke-width:1.5; fill:none; }
-    .rel-opt { stroke:#c74634; stroke-width:1.5; fill:none; stroke-dasharray:5 4; }
+    .box  { fill:#ffffff; stroke:#312d2a; stroke-width:1.5; }
+    .hdr  { fill:#312d2a; }
+    .hdrA { fill:#1a5c38; }
+    .hdrB { fill:#c74634; }
+    .htx  { fill:#ffffff; font-size:14px; font-weight:bold; }
+    .hsub { fill:#ffffff; font-size:10px; font-style:italic; }
+    .col  { fill:#444444; font-size:11px; }
+    .pk   { font-weight:bold; }
+    .null { fill:#7a736c; font-size:11px; font-style:italic; }
+    .rel  { stroke:#c74634; stroke-width:1.5; fill:none; }
     .card { fill:#c74634; font-size:11px; font-weight:bold; }
-    .note { fill:#666666; font-size:11px; font-style:italic; }
+    .note { fill:#666666; font-size:11.5px; font-style:italic; }
+    .noteB{ fill:#312d2a; font-size:11.5px; font-weight:bold; font-style:normal; }
+    .tag  { fill:#1a5c38; font-size:11px; font-weight:bold; }
+    .tagB { fill:#c74634; font-size:11px; font-weight:bold; }
   </style>
 
   <!-- store -->
-  <g transform="translate(30,30)">
+  <g transform="translate(30,40)">
     <rect class="box" width="180" height="86" rx="6"/>
     <rect class="hdr" width="180" height="26" rx="6"/>
     <text class="htx" x="10" y="18">STORE</text>
-    <text class="col pk" x="10" y="44">store_id (PK)</text>
-    <text class="col" x="10" y="60">merchant_name</text>
-    <text class="col" x="10" y="76">timezone</text>
+    <text class="col pk" x="10" y="46">store_id (PK)</text>
+    <text class="col" x="10" y="63">merchant_name</text>
+    <text class="col" x="10" y="80">timezone</text>
   </g>
 
   <!-- menu -->
-  <g transform="translate(280,30)">
-    <rect class="box" width="180" height="102" rx="6"/>
-    <rect class="hdr" width="180" height="26" rx="6"/>
+  <g transform="translate(270,40)">
+    <rect class="box" width="190" height="102" rx="6"/>
+    <rect class="hdr" width="190" height="26" rx="6"/>
     <text class="htx" x="10" y="18">MENU</text>
-    <text class="col pk" x="10" y="44">menu_id (PK)</text>
-    <text class="col" x="10" y="60">store_id (FK)</text>
-    <text class="col" x="10" y="76">menu_name, active</text>
-    <text class="col" x="10" y="92">start_time, end_time</text>
+    <text class="col pk" x="10" y="46">menu_id (PK)</text>
+    <text class="col" x="10" y="63">store_id (FK)</text>
+    <text class="col" x="10" y="80">menu_name, active</text>
+    <text class="col" x="10" y="97">start_time, end_time</text>
   </g>
 
   <!-- category -->
-  <g transform="translate(530,30)">
+  <g transform="translate(520,40)">
     <rect class="box" width="180" height="86" rx="6"/>
     <rect class="hdr" width="180" height="26" rx="6"/>
     <text class="htx" x="10" y="18">CATEGORY</text>
-    <text class="col pk" x="10" y="44">category_id (PK)</text>
-    <text class="col" x="10" y="60">menu_id (FK)</text>
-    <text class="col" x="10" y="76">category_name</text>
+    <text class="col pk" x="10" y="46">category_id (PK)</text>
+    <text class="col" x="10" y="63">menu_id (FK)</text>
+    <text class="col" x="10" y="80">category_name</text>
   </g>
 
-  <!-- item -->
-  <g transform="translate(530,200)">
-    <rect class="box" width="200" height="118" rx="6"/>
-    <rect class="hdr" width="200" height="26" rx="6"/>
-    <text class="htx" x="10" y="18">ITEM</text>
-    <text class="col pk" x="10" y="44">item_id (PK)</text>
-    <text class="col" x="10" y="60">category_id (FK)</text>
-    <text class="col" x="10" y="76">item_name, description</text>
-    <text class="col" x="10" y="92">price  CHECK (price &gt; 0)</text>
-    <text class="col" x="10" y="108">active BOOLEAN</text>
+  <!-- item : the chain catalog -->
+  <g transform="translate(690,200)">
+    <rect class="box" width="230" height="132" rx="6"/>
+    <rect class="hdrA" width="230" height="38" rx="6"/>
+    <text class="htx"  x="10" y="17">ITEM</text>
+    <text class="hsub" x="10" y="31">the chain catalog — no parent</text>
+    <text class="col pk" x="10" y="58">item_id (PK)</text>
+    <text class="col" x="10" y="75">item_name, description</text>
+    <text class="col" x="10" y="92">base_price  CHECK (&gt; 0)</text>
+    <text class="col" x="10" y="109">active BOOLEAN</text>
+    <text class="tag" x="10" y="126">stored once for 7,500 stores</text>
   </g>
 
-  <!-- extra -->
-  <g transform="translate(280,380)">
-    <rect class="box" width="170" height="70" rx="6"/>
-    <rect class="hdr" width="170" height="26" rx="6"/>
-    <text class="htx" x="10" y="18">EXTRA</text>
-    <text class="col pk" x="10" y="44">extra_id (PK)</text>
-    <text class="col" x="10" y="60">item_id (FK), extra_name</text>
-  </g>
-
-  <!-- item_option -->
-  <g transform="translate(30,380)">
-    <rect class="box" width="190" height="86" rx="6"/>
-    <rect class="hdr" width="190" height="26" rx="6"/>
-    <text class="htx" x="10" y="18">ITEM_OPTION</text>
-    <text class="col pk" x="10" y="44">option_id (PK)</text>
-    <text class="col" x="10" y="60">extra_id (FK)</text>
-    <text class="col" x="10" y="76">option_name, price_delta</text>
+  <!-- menu_item : the junction -->
+  <g transform="translate(300,220)">
+    <rect class="box" width="260" height="166" rx="6"/>
+    <rect class="hdrB" width="260" height="38" rx="6"/>
+    <text class="htx"  x="10" y="17">MENU_ITEM</text>
+    <text class="hsub" x="10" y="31">the many-to-many junction</text>
+    <text class="col pk" x="10" y="58">menu_id (PK, FK)</text>
+    <text class="col pk" x="10" y="75">item_id (PK, FK)</text>
+    <text class="col" x="10" y="92">category_id (FK)</text>
+    <text class="col" x="10" y="109">display_name</text>
+    <text class="col" x="10" y="126">price  CHECK (&gt; 0)</text>
+    <text class="col" x="10" y="143">active, sort_id</text>
+    <text class="tagB" x="10" y="160">NULL here = inherit from ITEM</text>
   </g>
 
   <!-- item_special_hours -->
-  <g transform="translate(520,380)">
-    <rect class="box" width="200" height="86" rx="6"/>
-    <rect class="hdr" width="200" height="26" rx="6"/>
+  <g transform="translate(30,450)">
+    <rect class="box" width="240" height="86" rx="6"/>
+    <rect class="hdr" width="240" height="26" rx="6"/>
     <text class="htx" x="10" y="18">ITEM_SPECIAL_HOURS</text>
-    <text class="col pk" x="10" y="44">item_special_hours_id (PK)</text>
-    <text class="col" x="10" y="60">item_id (FK), day_index</text>
-    <text class="col" x="10" y="76">start_time, end_time</text>
+    <text class="col pk" x="10" y="46">item_special_hours_id (PK)</text>
+    <text class="col" x="10" y="63">item_id (FK), day_index</text>
+    <text class="col" x="10" y="80">start_time, end_time</text>
   </g>
 
-  <!-- item_override -->
-  <g transform="translate(760,200)">
-    <rect class="box" width="150" height="102" rx="6"/>
-    <rect class="hdr" width="150" height="26" rx="6"/>
-    <text class="htx" x="10" y="18">ITEM_OVERRIDE</text>
-    <text class="col pk" x="10" y="44">item_id (PK, FK)</text>
-    <text class="col" x="10" y="60">store_id (FK)</text>
-    <text class="col" x="10" y="76">override_name</text>
-    <text class="col" x="10" y="92">override_active, sort</text>
+  <!-- extra -->
+  <g transform="translate(720,400)">
+    <rect class="box" width="200" height="70" rx="6"/>
+    <rect class="hdr" width="200" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">EXTRA</text>
+    <text class="col pk" x="10" y="46">extra_id (PK)</text>
+    <text class="col" x="10" y="63">item_id (FK), extra_name</text>
+  </g>
+
+  <!-- item_option -->
+  <g transform="translate(700,530)">
+    <rect class="box" width="220" height="86" rx="6"/>
+    <rect class="hdr" width="220" height="26" rx="6"/>
+    <text class="htx" x="10" y="18">ITEM_OPTION</text>
+    <text class="col pk" x="10" y="46">option_id (PK)</text>
+    <text class="col" x="10" y="63">extra_id (FK)</text>
+    <text class="col" x="10" y="80">option_name, price_delta</text>
   </g>
 
   <!-- relationships -->
-  <path class="rel" d="M210,73 L280,73"/>
-  <text class="card" x="230" y="66">1:M</text>
-  <path class="rel" d="M460,73 L530,73"/>
-  <text class="card" x="480" y="66">1:M</text>
-  <path class="rel" d="M620,116 L625,200"/>
-  <text class="card" x="632" y="165">1:M</text>
-  <path class="rel" d="M560,318 L400,380"/>
-  <text class="card" x="452" y="352">1:M</text>
-  <path class="rel" d="M280,412 L220,412"/>
-  <text class="card" x="232" y="405">1:M</text>
-  <path class="rel" d="M615,318 L618,380"/>
-  <text class="card" x="626" y="356">1:M</text>
-  <path class="rel-opt" d="M730,255 L760,255"/>
-  <text class="card" x="728" y="245">1:1</text>
+  <path class="rel" d="M210,83 L270,83"/>
+  <text class="card" x="226" y="76">1:M</text>
 
-  <text class="note" x="30" y="520">store 1:M menu · menu 1:M category · category 1:M item · item 1:M extra 1:M item_option ·</text>
-  <text class="note" x="30" y="538">item 1:M special_hours · item 1:1 override (optional, dashed). The `option` entity is named ITEM_OPTION — OPTION is reserved in Oracle SQL.</text>
+  <path class="rel" d="M460,83 L520,83"/>
+  <text class="card" x="476" y="76">1:M</text>
+
+  <path class="rel" d="M340,142 L340,220"/>
+  <text class="card" x="348" y="186">1:M</text>
+
+  <path class="rel" d="M600,126 L600,190 L520,190 L520,220"/>
+  <text class="card" x="528" y="212">1:M</text>
+
+  <path class="rel" d="M690,270 L560,270"/>
+  <text class="card" x="606" y="263">1:M</text>
+
+  <path class="rel" d="M820,332 L820,400"/>
+  <text class="card" x="828" y="370">1:M</text>
+
+  <path class="rel" d="M820,470 L820,530"/>
+  <text class="card" x="828" y="504">1:M</text>
+
+  <path class="rel" d="M700,332 L700,420 L150,420 L150,450"/>
+  <text class="card" x="158" y="443">1:M</text>
+
+  <text class="noteB" x="30" y="588">Read the middle row first.</text>
+  <text class="note"  x="172" y="588">A location does not own its items — it <tspan class="noteB">offers</tspan> them. MENU_ITEM is that offer:</text>
+  <text class="note"  x="30" y="606">one row per location-and-item, holding only what is <tspan class="noteB">local</tspan> about it. Leave display_name or price NULL and the</text>
+  <text class="note"  x="30" y="624">location inherits corporate's. Change the chain price and you change one row in ITEM, not one row per store.</text>
 </svg>
