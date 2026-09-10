@@ -19,16 +19,21 @@ In this lab, you will:
 
 - Completion of Lab 1.
 - SSH access to the OCI compute instance.
-- Slack admin rights for your target workspace.
+- A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for workshop identities or OAuth consent.
+- Slack admin rights for your personal target workspace.
 
 ## Task 1: Install Runtime Packages and Tooling
 
-1. Connect to your compute instance and update system packages.
+1. Connect to the OCI compute instance from your laptop. Use either method:
+   - **VS Code:** Open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open a new terminal with **Terminal > New Terminal**. The commands below must run in that remote terminal.
+   - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below. The `my-ai-staff-oci` alias and key are configured in Lab 1 Task 1.
+
+   Once connected, update system packages:
 
     ```
     <copy>
     sudo dnf update -y
-    sudo dnf install -y dnf-plugins-core git python3.12 policycoreutils-python-utils
+    sudo dnf install -y dnf-plugins-core git curl unzip python3.12 policycoreutils-python-utils
     sudo dnf config-manager --set-enabled ol9_developer_EPEL
     sudo dnf install -y rclone
     sudo dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
@@ -48,23 +53,25 @@ In this lab, you will:
     </copy>
     ```
 
-4. Install Claude Code only when you enable the optional AI Staff email, intake, or triage flows. Those components still invoke `claude -p`; it is not required for the core content pipeline.
+## Task 2: Download the Platform ZIP, Install Its Codex Plugin, and Build Virtual Environments
 
-## Task 2: Clone the Platform and Build Virtual Environments
-
-1. Clone the platform repository into your home directory. Use `~/livelabs-ai-staff`; the service units co-located with the agents use this path.
+1. Download the supplied platform ZIP and extract it into your home directory. The archive already contains the complete `livelabs-ai-staff/` directory; it is not a Git repository, so do not run `git clone` or expect a repository remote. Use `~/livelabs-ai-staff`; the service units co-located with the agents use this path.
 
     ```
     <copy>
     cd ~
-    git clone <your-repository-remote> livelabs-ai-staff
+    curl -fL --retry 3 'https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/livelabs-ai-staff.zip' -o /tmp/livelabs-ai-staff.zip
+    test ! -e ~/livelabs-ai-staff || { echo 'Remove or rename the existing ~/livelabs-ai-staff directory before continuing.'; exit 1; }
+    unzip -q /tmp/livelabs-ai-staff.zip -d ~
     cd ~/livelabs-ai-staff
     mkdir -p posts pending-posts
-    git status --short
+    test -f schema/ai_for_you_full_ddl.sql
+    test -f .agents/plugins/marketplace.json
+    find . -maxdepth 1 -type d -print | sort
     </copy>
     ```
 
-2. Install the repository's local Codex skills plugin, then start a new Codex session so the skills list refreshes.
+2. Install the ZIP's included local Codex skills plugin from the repository root, then start a new Codex session so the skills list refreshes. The marketplace file registers the plugin as `livelabsagentic-skills@personal`. After extraction and plugin installation, return to Lab 1 Task 3 step 4 to run the application DDL before continuing with the runtime setup.
 
     ```
     <copy>
@@ -144,7 +151,7 @@ In this lab, you will:
 ## Task 3: Prepare for Slack Configuration
 
 1. Confirm the generic role mapping: Assistant Agent/`assistant`, Content Agent and Creative Agent/`pipeline`, Brand Agent/`brand-agent`, Data Agent/`data`, Ops Agent/`ops`, and Publish Agent/`publish`.
-2. Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. You will use them in Lab 3.
+2. Lab 3 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
 3. Do not create a Slack app for Website Agent/`website`; it is the HTTP-only intake service on port 8005.
 
 ## Acknowledgements

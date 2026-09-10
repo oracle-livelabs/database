@@ -13,7 +13,7 @@ Estimated Workshop Time: 315 minutes
 In this workshop, you will:
 
 - Provision OCI compute, networking, and Autonomous Database 26ai for the platform.
-- Configure the AI_FOR_YOU application schema and load an in-database ONNX embedding model.
+- Configure the `AI_FOR_YOU` application schema and load an in-database ONNX embedding model.
 - Configure runtime services, secure environment files, and seven Slack agent integrations.
 - Configure required Google Drive delivery with rclone.
 - Run layered verification and execute one complete Slack-driven content workflow.
@@ -24,9 +24,14 @@ In this workshop, you will:
 This workshop assumes you have:
 
 - Access to an OCI tenancy with permissions to create Compute, VCN ingress rules, and Autonomous Database resources.
+- A laptop or desktop with a current web browser, an SSH client, and a way to edit remote files. [Visual Studio Code](https://code.visualstudio.com/Download) with the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) is recommended; any equivalent editor and OpenSSH client are also supported. Lab 1 explains when to create or download the SSH key and configure the connection, after the instance receives its public IP.
+- `scp` (included with OpenSSH) or an equivalent browser upload method for transferring the database wallet after the instance is reachable.
 - Access to create and configure a Slack workspace, channels, and apps.
+- A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for the workshop identities or OAuth consent flow.
 - Basic Linux administration and shell-command familiarity.
 - Basic familiarity with OCI networking and Oracle Autonomous Database.
+
+The OCI Console and SQL Developer Web are browser-based. Commands in the lab code blocks run on the OCI instance unless the step explicitly says **on your laptop**. The instance needs outbound HTTPS/DNS access to download the platform ZIP and install packages.
 
 ## Deployment Values Checklist
 
@@ -35,9 +40,9 @@ Before you start, create a secure worksheet for values that are unique to the cu
 | Category | Values to capture |
 | --- | --- |
 | Customer intake | Business name, owner email, owner timezone, delivery targets, and enabled external integrations |
-| OCI | Tenancy access, region, compute public IP, Autonomous Database name, ADMIN password, `AI FOR YOU` password, wallet zip, and wallet directory |
+| OCI | Tenancy access, region, compute public IP, Autonomous Database name, ADMIN password, `AI_FOR_YOU` password, wallet zip, and wallet directory |
 | Slack | Workspace name, seven bot tokens, seven app-level tokens, `ASSISTANT_BOT_ID`, deployment owner member ID, and every channel ID |
-| Runtime | Codex account or API key, `CODEX_BIN` path when non-default, repository URL, and deployment path |
+| Runtime | Codex account or API key, `CODEX_BIN` path when non-default, ZIP download URL, and deployment path |
 | Content Kit | `base_dir`, NotebookLM Python path, font paths, Data Agent URL, headshot path, rclone remote, and Google Drive folder ID |
 | External services | Google OAuth client ID and secret, Google refresh token, SMTP host/user/password/from address, Substack config, and Instagram cookies when those integrations are enabled |
 

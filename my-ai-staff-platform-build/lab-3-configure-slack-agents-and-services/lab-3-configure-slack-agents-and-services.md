@@ -20,7 +20,8 @@ In this lab, you will:
 ### Prerequisites
 
 - Completion of Lab 2.
-- Slack workspace administrator access.
+- Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
+- A personal Slack account with administrator access to the workshop workspace.
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
 
 ## Task 1: Create Channels and Capture IDs
@@ -38,7 +39,7 @@ In this lab, you will:
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
-1. At `api.slack.com/apps`, select **Create New App**, then **From an app manifest**. Select the deployment workspace and paste the matching JSON manifest from the blocks below.
+1. At [Slack API: Your Apps](https://api.slack.com/apps), select **Create New App**, then **From an app manifest**. Select the personal workshop workspace and paste the matching JSON manifest from the blocks below.
 
 2. Import each manifest once. The manifests below are templates. You can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
 
