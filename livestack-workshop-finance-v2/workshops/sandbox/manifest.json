@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Build Connected Finance Solutions with Oracle AI Database 26ai",
+  "workshoptitle": "Build Connected Finance Solutions with Oracle AI Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -51,6 +51,11 @@
       "title": "Lab 8: Build a Finance Agent with Select AI Agent",
       "description": "Create a read-only finance agent that uses an approved SQL tool.",
       "filename": "../../selectai-agent/selectai-agent.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
     },
     {
       "title": "Need Help?",

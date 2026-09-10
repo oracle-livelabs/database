@@ -1,4 +1,4 @@
-# Build Connected Finance Solutions with Oracle AI Database 26ai
+# Build Connected Finance Solutions with Oracle AI Database
 
 ## Introduction
 
@@ -64,5 +64,5 @@ Estimated Workshop Time: **90 minutes**
 ## Acknowledgements
 
 * **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd
+* **Contributor** - Eugenio Galiano, Pat Shepherd, Linda Foinding
 * **Last Updated By/Date** - Oracle Database Product Management, September 2026
