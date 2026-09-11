@@ -75,7 +75,7 @@ In this lab, you will:
     agents/data/venv/bin/python3 scripts/smoke_test.py
     </copy>
     ```
-    ![Smoke Test Example](./images/01.png)
+    ![Smoke Test Example](./images/01_smoke_test.png)
 
 2. Validate each Slack agent with a direct command. Brand Agent strategy validation already happened in Task 1, so this table focuses on the remaining runtime agents.
 

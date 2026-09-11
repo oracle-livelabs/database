@@ -20,7 +20,8 @@ In this lab, you will:
 ### Prerequisites
 
 - Completion of Lab 2.
-- Slack workspace administrator access.
+- Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
+- A personal Slack account with administrator access to the workshop workspace.
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
 
 ## Task 1: Create Channels and Capture IDs
@@ -30,15 +31,15 @@ In this lab, you will:
 
 2. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
 
-    ![Slack Channels Example](./images/01.png)
+    ![Slack Channels Example](./images/01_channels_example.png)
 
 3. Copy every channel's `C...` ID from Slack and save it in a secure deployment worksheet. Environment files use IDs, not display names.
 
-    ![Slack Channels ID Example](./images/02.png)
+    ![Slack Channels ID Example](./images/02_channel_id.png)
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
-1. At `api.slack.com/apps`, select **Create New App**, then **From an app manifest**. Select the deployment workspace and paste the matching JSON manifest from the blocks below.
+1. At [Slack API: Your Apps](https://api.slack.com/apps), select **Create New App**, then **From an app manifest**. Select the personal workshop workspace and paste the matching JSON manifest from the blocks below.
 
 2. Import each manifest once. The manifests below are templates. You can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
 
@@ -60,7 +61,8 @@ In this lab, you will:
     {
       "display_information": {
         "name": "Assistant Agent",
-        "description": "Personal assistant and AI Staff coordinator."
+        "description": "Assistant",
+        "background_color": "#2c2d30"
       },
       "features": {
         "bot_user": {
@@ -71,16 +73,14 @@ In this lab, you will:
       "oauth_config": {
         "scopes": {
           "bot": [
-            "chat:write",
+            "files:read",
             "channels:history",
             "channels:read",
-            "groups:history",
-            "groups:read",
+            "chat:write",
+            "files:write",
             "im:history",
             "im:read",
             "im:write",
-            "files:read",
-            "files:write",
             "reactions:read"
           ]
         },
@@ -90,13 +90,12 @@ In this lab, you will:
         "event_subscriptions": {
           "bot_events": [
             "message.channels",
-            "message.groups",
             "message.im",
             "reaction_added"
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -127,7 +126,9 @@ In this lab, you will:
           "bot": [
             "chat:write",
             "channels:history",
-            "channels:read"
+            "channels:read",
+            "files:write",
+            "reactions:read"
           ]
         },
         "pkce_enabled": false
@@ -135,11 +136,12 @@ In this lab, you will:
       "settings": {
         "event_subscriptions": {
           "bot_events": [
-            "message.channels"
+            "message.channels",
+            "reaction_added"
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -183,7 +185,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -264,7 +266,8 @@ In this lab, you will:
           "bot": [
             "chat:write",
             "channels:history",
-            "channels:read"
+            "channels:read",
+            "files:write"
           ]
         },
         "pkce_enabled": false
@@ -276,7 +279,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -307,7 +310,8 @@ In this lab, you will:
           "bot": [
             "chat:write",
             "channels:history",
-            "channels:read"
+            "channels:read",
+            "files:write"
           ]
         },
         "pkce_enabled": false
@@ -319,7 +323,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -363,7 +367,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -374,15 +378,15 @@ In this lab, you will:
     </copy>
     ```
 
-10. Assistant Agent and Brand Agent are the two apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app in Slack before installing it.
+10. Assistant Agent and Brand Agent are the only apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app before installing it.
 
-    ![AGents with Access to direct messages](./images/03.png)
+    ![Agents with Access to direct messages](./images/03_agent_permission.png)
 
 11. Do not create a Slack app for Website Agent. The `agents/website` service exposes a local HTTP API on port 8005.
 
 12. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
 
-    ![Slack Agents Tokens for Application](./images/04.png)
+    ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
 13. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
 

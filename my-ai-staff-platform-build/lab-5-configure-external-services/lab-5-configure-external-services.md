@@ -19,13 +19,14 @@ In this lab, you will:
 
 - Completion of Lab 4.
 - Customer intake values for each external service you plan to enable.
-- Access to the target Google account, email sender, and publishing accounts.
+- A personal Gmail account for the workshop OAuth flow. Do not use a corporate or customer-owned Google account.
+- Access to the email sender and publishing accounts.
 
 ## Task 1: Configure Google OAuth for AI Staff
 
 1. Use this task when AI Staff email or calendar workflows are enabled. Current email support is Gmail-only; do not configure Outlook, Yahoo, IMAP, or Microsoft Graph for this build.
 
-2. In Google Cloud, create a small project and enable the Gmail API and Google Calendar API.
+2. In [Google Cloud Console](https://console.cloud.google.com/), create a small project and enable the Gmail API and Google Calendar API. Sign in with the personal Gmail account selected for this workshop.
 
 3. Configure the OAuth consent screen as External and Testing mode. Add the target mailbox as the test user.
 

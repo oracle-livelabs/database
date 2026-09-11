@@ -19,17 +19,40 @@ In this lab, you will:
 
 - Completion of the workshop Introduction.
 - OCI tenancy access with permissions to create compute and database resources.
-- SSH key pair ready for instance access.
+- A laptop with an SSH client. You will create or download the SSH key and configure the connection after the instance is created and its public IP is assigned.
+- A browser for OCI Console and SQL Developer Web, or SQLcl installed on the instance.
 
 ## Task 1: Create Compute and Network Access
 
 1. In OCI Console, create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex 
     (If not available choose a similar Shape, check documentation for more info [here](https://docs.oracle.com/es-ww/iaas/Content/Compute/References/computeshapes.htm#flexible)).
 2. Configure the instance to use 4 OCPUs and 24 GB memory.
-3. In the VCN security list, allow inbound access for port 22 only from your administration network.
-4. Keep agent ports 8001 through 8005 loopback-only and do not expose them publicly. The runtime services bind to `127.0.0.1`.
+3. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
+4. In the VCN security list, allow inbound access for port 22 only from your administration network.
+5. Keep agent ports 8001 through 8005 loopback-only and do not expose them publicly. The runtime services bind to `127.0.0.1`.
 
     ![Where to Create a Compute Instance](./images/01_create_instance.png)
+
+6. After the instance reaches **Running** state, copy its public IP from OCI Console and configure the downloaded key on your laptop. Replace the placeholder values in this example:
+
+    ```bash
+    mkdir -p ~/.ssh
+    chmod 700 ~/.ssh
+    mv ~/Downloads/<downloaded-private-key> ~/.ssh/my-ai-staff-oci.key
+    chmod 600 ~/.ssh/my-ai-staff-oci.key
+    ```
+
+    Add this host entry to `~/.ssh/config`:
+
+    ```ssh
+    Host my-ai-staff-oci
+        HostName <instance-public-ip>
+        User opc
+        IdentityFile ~/.ssh/my-ai-staff-oci.key
+        IdentitiesOnly yes
+    ```
+
+    Test the connection with `ssh my-ai-staff-oci`. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select the same host. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
 
 ## Task 2: Provision Autonomous Database 26ai
 
@@ -75,7 +98,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Run `schema/ai_for_you_full_ddl.sql` from the platform repository, top to bottom. The file is the current schema snapshot for a fresh deployment, not a migration sequence.
+4. The platform ZIP is downloaded and extracted in Lab 2. After completing Lab 2 Task 2, return to this task and run `~/livelabs-ai-staff/schema/ai_for_you_full_ddl.sql` from the extracted platform files, top to bottom. Do not try to run this step before the ZIP has been installed. The file is the current schema snapshot for a fresh deployment, not a migration sequence.
 5. Do not run `agents/data/migrations/` for a new deployment: the files are historical changes already folded into the snapshot.
 6. Skip only the DDL blocks marked in the file for `OAM_*` and `REMINDERS`. The memory package creates `OAM_*` objects on first memory use, and Assistant Agent creates `REMINDERS` on first reminder use.
 7. Run the remaining content pipeline tables, `AISTAFF_*` tables, `AGENT_*` memory tables, foreign keys, duality views, and indexes. The `*_SUB_UX` unique indexes are required for public-intake idempotency.
