@@ -1,0 +1,125 @@
+#!/bin/bash
+set -Eeuo pipefail
+exec > >(tee -a /var/log/my-ai-staff-bootstrap.log) 2>&1
+
+readonly APP_HOME=/home/opc/livelabs-ai-staff
+readonly WALLET_DIR=/home/opc/oracle/wallet
+readonly MODEL_FILE=/var/tmp/all_MiniLM_L12_v2.onnx
+readonly SQL=/opt/sqlcl/bin/sql
+trap 'echo "Bootstrap failed at line $LINENO" >&2' ERR
+
+mkdir -p "$WALLET_DIR" /var/tmp/my-ai-staff
+chmod 700 "$WALLET_DIR" /var/tmp/my-ai-staff
+dnf update -y
+dnf install -y dnf-plugins-core git curl unzip python3.12 java-17-openjdk-headless nodejs oci-cli policycoreutils-python-utils
+dnf config-manager --set-enabled ol9_developer_EPEL
+dnf install -y rclone
+dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
+dnf install -y ffmpeg
+npm install --global @openai/codex
+curl -fL --retry 3 https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip -o /var/tmp/sqlcl.zip
+unzip -q /var/tmp/sqlcl.zip -d /opt
+
+# The generated wallet is sensitive. It is neither printed nor made a stack output.
+printf '%s' '${wallet_base64}' | base64 --decode > /var/tmp/wallet.zip
+unzip -q /var/tmp/wallet.zip -d "$WALLET_DIR"
+rm -f /var/tmp/wallet.zip
+chown -R opc:opc /home/opc/oracle
+chmod 700 "$WALLET_DIR"
+chmod 600 "$WALLET_DIR"/*
+
+curl -fL --retry 3 '${platform_zip_url}' -o /var/tmp/livelabs-ai-staff.zip
+test ! -e "$APP_HOME"
+unzip -q /var/tmp/livelabs-ai-staff.zip -d /home/opc
+test -f "$APP_HOME/schema/ai_for_you_full_ddl.sql"
+install -d -o opc -g opc "$APP_HOME/posts" "$APP_HOME/pending-posts"
+
+for agent in pipeline assistant brand-agent ops publish website; do
+  python3 -m venv "$APP_HOME/agents/$agent/venv"
+  "$APP_HOME/agents/$agent/venv/bin/pip" install --upgrade pip
+  "$APP_HOME/agents/$agent/venv/bin/pip" install -r "$APP_HOME/agents/$agent/requirements.txt"
+  "$APP_HOME/agents/$agent/venv/bin/pip" install -r "$APP_HOME/agents/shared/requirements.txt"
+done
+python3.12 -m venv "$APP_HOME/agents/data/venv"
+"$APP_HOME/agents/data/venv/bin/pip" install --upgrade pip
+"$APP_HOME/agents/data/venv/bin/pip" install -r "$APP_HOME/agents/data/requirements.txt"
+python3 -m venv "$APP_HOME/apps/file-editor/venv"
+"$APP_HOME/apps/file-editor/venv/bin/pip" install --upgrade pip
+"$APP_HOME/apps/file-editor/venv/bin/pip" install -r "$APP_HOME/apps/file-editor/requirements.txt"
+"$APP_HOME/apps/file-editor/venv/bin/pip" install -r "$APP_HOME/agents/shared/requirements.txt"
+chown -R opc:opc "$APP_HOME"
+
+# Install canonical units but do not enable or start them. Lab 4 writes the
+# integration-specific environment files and activates only eligible services.
+install -d -m 700 /etc/sysconfig
+install -m 600 /dev/null /etc/sysconfig/contentkit-file-editor
+cp "$APP_HOME/agents/pipeline/contentkit-pipeline.service" \
+  "$APP_HOME/agents/assistant/contentkit-assistant.service" \
+  "$APP_HOME/agents/assistant/contentkit-assistant-reminder.service" \
+  "$APP_HOME/agents/assistant/contentkit-assistant-reminder.timer" \
+  "$APP_HOME/agents/brand-agent/contentkit-brand.service" \
+  "$APP_HOME/agents/data/contentkit-data.service" \
+  "$APP_HOME/agents/ops/contentkit-ops.service" \
+  "$APP_HOME/agents/publish/contentkit-publish.service" \
+  "$APP_HOME/apps/file-editor/contentkit-file-editor.service" \
+  /etc/systemd/system/
+systemctl daemon-reload
+
+# Fetch from the selected public upstream, verify the bytes, then use the host
+# principal to upload to this stack's private bucket. The database consumes a
+# read-only pre-authenticated Object Storage URL, never upstream credentials.
+curl -fL --retry 3 '${model_url}' -o "$MODEL_FILE"
+echo '${model_sha256}  '"$MODEL_FILE" | sha256sum -c -
+until oci os object put --auth instance_principal \
+  --namespace '${model_namespace}' \
+  --bucket-name '${model_bucket}' \
+  --name all_MiniLM_L12_v2.onnx \
+  --file "$MODEL_FILE" \
+  --force; do
+  echo 'Waiting for instance-principal policy propagation before model upload.'
+  sleep 30
+done
+rm -f "$MODEL_FILE"
+
+cat >/var/tmp/my-ai-staff/create-schema.sql <<'SQL'
+WHENEVER SQLERROR EXIT SQL.SQLCODE
+CREATE USER AI_FOR_YOU IDENTIFIED BY "${ai_for_you_password}";
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO AI_FOR_YOU;
+ALTER USER AI_FOR_YOU QUOTA UNLIMITED ON DATA;
+ALTER SESSION SET CURRENT_SCHEMA = AI_FOR_YOU;
+@/home/opc/livelabs-ai-staff/schema/ai_for_you_full_ddl.sql
+EXIT
+SQL
+
+cat >/var/tmp/my-ai-staff/load-model.sql <<'SQL'
+WHENEVER SQLERROR EXIT SQL.SQLCODE
+BEGIN
+  DBMS_VECTOR.DROP_ONNX_MODEL(model_name => 'MINILM_V2', force => TRUE);
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+BEGIN
+  DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD(
+    model_name => 'MINILM_V2', credential => NULL, uri => '${model_par_url}'
+  );
+END;
+/
+SELECT VECTOR_EMBEDDING(MINILM_V2 USING 'hello' AS data) FROM DUAL;
+EXIT
+SQL
+chmod 600 /var/tmp/my-ai-staff/*.sql
+
+# ADB can still be starting after the Terraform create operation. Keep retries
+# bounded and leave any final failure in the cloud-init log.
+for attempt in $(seq 1 40); do
+  if TNS_ADMIN="$WALLET_DIR" "$SQL" -L "admin/${adb_admin_password}@${adb_service_name}_high" @/var/tmp/my-ai-staff/create-schema.sql && \
+     TNS_ADMIN="$WALLET_DIR" "$SQL" -L "admin/${adb_admin_password}@${adb_service_name}_high" @/var/tmp/my-ai-staff/load-model.sql; then
+    touch /var/lib/my-ai-staff-bootstrap.complete
+    echo 'My AI Staff bootstrap completed successfully.'
+    exit 0
+  fi
+  echo "Database is not ready; retrying ($attempt/40)."
+  sleep 30
+done
+echo 'Bootstrap failed: database schema or vector model setup did not complete.' >&2
+exit 1

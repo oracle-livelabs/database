@@ -19,7 +19,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Completion of Lab 2.
+- Completion of Lab 3 on the manual path, or Lab 2 on the fast path.
 - Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
 - A personal Slack account with administrator access to the workshop workspace.
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
@@ -708,7 +708,7 @@ This configuration is the machine-runtime configuration for the current Codex-ba
     </copy>
     ```
 
-3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 2.
+3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 3 on the manual path or Lab 2 on the fast path.
 
     ```
     <copy>

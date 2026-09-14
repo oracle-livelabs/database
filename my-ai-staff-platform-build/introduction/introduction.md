@@ -48,11 +48,12 @@ Before you start, create a secure worksheet for values that are unique to the cu
 
 ## Workshop Labs
 
-1. Lab 1: Prepare OCI Infrastructure and Database
-2. Lab 2: Install the My AI Staff Runtime
-3. Lab 3: Configure Slack Agents, Environment Files, and Services
-4. Lab 4: Connect Services and Verify the Deployment
-5. Lab 5: Configure External Services
+1. Lab 1: Prepare OCI Infrastructure and Database (manual path)
+2. Lab 2: Click the Magic Button (fast path; alternative to Labs 1 and 3)
+3. Lab 3: Install the My AI Staff Runtime (manual path)
+4. Lab 4: Configure Slack Agents, Environment Files, and Services
+5. Lab 5: Connect Services and Verify the Deployment
+6. Lab 6: Configure External Services
 
 ## Acknowledgements
 
