@@ -1,0 +1,45 @@
+{
+    "workshoptitle": "Building and Operating My AI Staff on Oracle Cloud Infrastructure",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Workshop overview, objectives, and architecture",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Lab 1: Prepare OCI Infrastructure and Oracle AI Database",
+            "description": "Provision OCI, load the current schema snapshot, and validate the vector model",
+            "filename": "../../lab-1-prepare-oci-infrastructure-and-database/lab-1-prepare-oci-infrastructure-and-database.md"
+        },
+        {
+            "title": "Lab 2: Install the My AI Staff Runtime",
+            "description": "Install dependencies, virtual environments, SELinux labels, and rclone",
+            "filename": "../../lab-2-configure-runtime-and-slack/lab-2-configure-runtime-and-slack.md"
+        },
+        {
+            "title": "Lab 3: Configure Slack Agents, Environment Files, and Services",
+            "description": "Import seven Slack apps, configure current identities, and enable systemd",
+            "filename": "../../lab-3-configure-slack-agents-and-services/lab-3-configure-slack-agents-and-services.md"
+        },
+        {
+            "title": "Lab 4: Connect Services and Verify the Deployment",
+            "description": "Run local, Slack, database, and end-to-end workflow verification",
+            "filename": "../../lab-4-connect-services-and-verify/lab-4-connect-services-and-verify.md"
+        },
+        {
+            "title": "Lab 5: Configure External Services",
+            "description": "Configure Gmail, Calendar, voice, email, and publishing integrations",
+            "filename": "../../lab-5-configure-external-services/lab-5-configure-external-services.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to common problems and directions for receiving live help",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}
