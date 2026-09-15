@@ -12,32 +12,32 @@
             "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
-            "title": "Lab 1: Prepare OCI Infrastructure and Oracle AI Database (Manual Path)",
+            "title": "Fast Path: Click the Magic Button",
+            "description": "Alternative to Labs 1 and 2: bootstrap OCI, database, runtime, local plugin, and SELinux labels, then continue with Lab 3",
+            "filename": "../../lab-2-click-the-magic-button/lab-2-click-the-magic-button.md"
+        },
+        {
+            "title": "Lab 1: Prepare OCI Infrastructure and Database (Manual Path)",
             "description": "Manual deployment path: provision OCI, load the schema snapshot, and validate the vector model",
             "filename": "../../lab-1-prepare-oci-infrastructure-and-database/lab-1-prepare-oci-infrastructure-and-database.md"
         },
         {
-            "title": "Lab 2: Click the Magic Button (Fast Path)",
-            "description": "Alternative deployment path: create a Resource Manager stack and bootstrap OCI, database, and runtime",
-            "filename": "../../lab-2-click-the-magic-button/lab-2-click-the-magic-button.md"
-        },
-        {
-            "title": "Lab 3: Install the My AI Staff Runtime (Manual Path)",
+            "title": "Lab 2: Install the My AI Staff Runtime (Manual Path)",
             "description": "Manual deployment path: install dependencies, virtual environments, SELinux labels, and rclone",
             "filename": "../../lab-2-configure-runtime-and-slack/lab-2-configure-runtime-and-slack.md"
         },
         {
-            "title": "Lab 4: Configure Slack Agents, Environment Files, and Services",
+            "title": "Lab 3: Configure Slack Agents, Environment Files, and Services",
             "description": "Import seven Slack apps, configure current identities, and enable systemd",
             "filename": "../../lab-3-configure-slack-agents-and-services/lab-3-configure-slack-agents-and-services.md"
         },
         {
-            "title": "Lab 5: Connect Services and Verify the Deployment",
+            "title": "Lab 4: Connect Services and Verify the Deployment",
             "description": "Run local, Slack, database, and end-to-end workflow verification",
             "filename": "../../lab-4-connect-services-and-verify/lab-4-connect-services-and-verify.md"
         },
         {
-            "title": "Lab 6: Configure External Services",
+            "title": "Lab 5: Configure External Services",
             "description": "Configure Gmail, Calendar, voice, email, and publishing integrations",
             "filename": "../../lab-5-configure-external-services/lab-5-configure-external-services.md"
         },

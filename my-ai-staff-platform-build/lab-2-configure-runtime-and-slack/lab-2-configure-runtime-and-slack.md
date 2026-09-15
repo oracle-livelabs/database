@@ -1,8 +1,8 @@
-# Install the My AI Staff Runtime (Manual Path)
+# Lab 2: Install the My AI Staff Runtime (Manual Path)
 
 ## Introduction
 
-In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 4 so each deployment phase has explicit verification steps. If you completed Lab 2: Click the Magic Button, skip this lab and continue to Lab 4.
+In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
 
 Estimated Time: 90 minutes
 
@@ -81,8 +81,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`. Do not follow old build-guide directory names such as `sasha`, `nia`, `amara`, `ida`, or `imani`.
-
+3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
     ```
     <copy>
     cd ~/livelabs-ai-staff
@@ -151,7 +150,7 @@ In this lab, you will:
 ## Task 3: Prepare for Slack Configuration
 
 1. Confirm the generic role mapping: Assistant Agent/`assistant`, Content Agent and Creative Agent/`pipeline`, Brand Agent/`brand-agent`, Data Agent/`data`, Ops Agent/`ops`, and Publish Agent/`publish`.
-2. Lab 4 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
+2. Lab 3 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
 3. Do not create a Slack app for Website Agent/`website`; it is the HTTP-only intake service on port 8005.
 
 ## Acknowledgements

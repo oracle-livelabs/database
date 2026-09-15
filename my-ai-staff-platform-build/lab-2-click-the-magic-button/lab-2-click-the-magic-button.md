@@ -1,9 +1,9 @@
-# Click the Magic Button
+# Fast Path: Click the Magic Button
 
 ## Introduction
 
 This is the fast deployment path for My AI Staff. It is an alternative to the
-manual infrastructure work in Lab 1 and the runtime installation in Lab 3. The
+manual infrastructure work in Lab 1 and the runtime installation in Lab 2. The
 Deploy to Oracle Cloud button creates an OCI Resource Manager stack that
 provisions the network, ARM host, Autonomous AI Database, wallet, and a
 bootstrap environment.
@@ -17,8 +17,8 @@ In this lab, you will:
 
 - Create an OCI Resource Manager stack from the versioned My AI Staff Terraform ZIP.
 - Provision a VCN, SSH-only public host, Always Free Autonomous AI Database, and database wallet.
-- Bootstrap the platform files, virtual environments, application schema, and `MINILM_V2` model.
-- Verify the deployment before continuing directly to Lab 4.
+- Bootstrap the platform files, local Codex plugin, labeled virtual environments, application schema, and `MINILM_V2` model.
+- Verify the deployment before continuing directly to Lab 3.
 
 ### Before You Begin
 
@@ -38,15 +38,69 @@ In this lab, you will:
    page with the versioned Terraform configuration already selected. The button
    uses the read-only pre-authenticated Object Storage URL for the release ZIP.
 
-    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https%3A%2F%2Fobjectstorage.us-ashburn-1.oraclecloud.com%2Fp%2F9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3%2Fn%2Fc4u02%2Fb%2Fhosted-files%2Fo%2Fmy-ai-staff-oci-stack-v1.0.0.zip)
+    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https%3A%2F%2Fc4u02.objectstorage.us-ashburn-1.oci.customer-oci.com%2Fp%2F9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3%2Fn%2Fc4u02%2Fb%2Fhosted-files%2Fo%2Fmy-ai-staff-oci-stack-v1.0.0.zip)
 
 2. Sign in if prompted. Give the stack a non-sensitive name, select the target
    compartment, select Terraform 1.5.x, and select **Next**.
-3. Supply the required values. Use the same region as the stack, your tenancy
-   OCID, and the target compartment OCID. For **Administrator SSH CIDR**, use
-   one trusted network only; do not use `0.0.0.0/0`.
-4. Paste only the contents of the public half of your SSH key into **SSH public
-   key**. Enter the three passwords in their masked fields.
+3. Supply the required values. Use the following guidance for each field:
+
+   - **Compartment:** Select the compartment where you want to create the
+     workshop resources. If you are using a tenancy provided for this
+     workshop, this is usually the assigned or root compartment.
+   - **Tenancy OCID:** Paste your tenancy OCID. In OCI Console, open your
+     profile menu, select **Tenancy**, and copy the value labeled **OCID**. It
+     starts with `ocid1.tenancy...`.
+   - **Region:** Select the OCI region where you want to deploy. Use the same
+     region selected for the stack and make sure it offers the Always Free ARM
+     shape and Autonomous Database 26ai.
+   - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
+     or network you will use to connect, followed by `/32`. To find it, open a
+     browser and search for **what is my IP**, or visit a site that displays
+     your public IP, such as [ifconfig.me](https://ifconfig.me). For example, if
+     the site shows `203.0.113.10`, enter `203.0.113.10/32`. Do not enter a
+     private address such as `192.168.x.x` or `10.x.x.x`, and do not use
+     `0.0.0.0/0`. If your public IP changes or you connect from another
+     network, update the security rule before connecting.
+
+4. Provide the SSH public key:
+
+   - If you do not already have an SSH key pair, run these commands in a
+     terminal on your computer:
+
+     ```bash
+     mkdir -p ~/.ssh
+     chmod 700 ~/.ssh
+     ssh-keygen -t ed25519 -f ~/.ssh/my-ai-staff-oci.key -C "my-ai-staff-oci"
+     ```
+
+     Accept the suggested file path if prompted. The command creates the
+     private key at `~/.ssh/my-ai-staff-oci.key` and the public key at
+     `~/.ssh/my-ai-staff-oci.key.pub`. Protect the private key and never paste
+     or upload it to Resource Manager.
+   - Copy only the public key. On macOS, run:
+
+     ```bash
+     pbcopy < ~/.ssh/my-ai-staff-oci.key.pub
+     ```
+
+     On Linux, you can display it and copy the complete single line manually:
+
+     ```bash
+     cat ~/.ssh/my-ai-staff-oci.key.pub
+     ```
+
+     Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
+
+   - **Autonomous Database ADMIN password:** Create a strong password of at
+     least 12 characters. This is the password for the database `ADMIN` user.
+   - **Wallet password:** Create a different strong password of at least 12
+     characters. This protects the downloaded database wallet.
+   - **AI_FOR_YOU password:** Create a third different strong password of at
+     least 12 characters. This is used for the `AI_FOR_YOU` application schema.
+
+     Use letters, numbers, and symbols, do not reuse your OCI password, and
+     keep all three values in a secure password manager. Resource Manager masks
+     these fields; do not save the passwords in the workshop repository.
 5. Leave the pinned ZIP and ONNX model URL/checksum unchanged unless you are
    intentionally deploying a reviewed replacement. The default model source is
    public, but bootstrap verifies its SHA-256 before importing it.
@@ -66,7 +120,7 @@ In this lab, you will:
 3. Connect using the private key that matches the supplied public key:
 
     ```bash
-    ssh opc@<instance_public_ip>
+    ssh -i ~/.ssh/my-ai-staff-oci.key opc@<instance_public_ip>
     ```
 
 4. Follow the bootstrap log until completion. It may take time while packages,
@@ -78,7 +132,7 @@ In this lab, you will:
 
 5. A successful bootstrap creates `/var/lib/my-ai-staff-bootstrap.complete`.
    If it does not appear, preserve the log and correct the reported failure
-   before moving forward. Do not rerun the manual Lab 1 DDL or Lab 3 runtime
+   before moving forward. Do not rerun the manual Lab 1 DDL or Lab 2 runtime
    installation tasks on this host.
 
 ## Task 3: Verify the Fast Path
@@ -94,7 +148,7 @@ In this lab, you will:
 
 2. Confirm that ports 8001 through 8005 are not publicly allowed. The stack
    security list permits inbound TCP/22 only from the CIDR entered in Task 1.
-3. Continue with **Lab 4: Configure Slack Agents, Environment Files, and
+3. Continue with **Lab 3: Configure Slack Agents, Environment Files, and
    Services**. That lab configures the interactive identities and credentials
    intentionally excluded from this bootstrap: Codex login, Slack, Google, and
    publishing integrations.

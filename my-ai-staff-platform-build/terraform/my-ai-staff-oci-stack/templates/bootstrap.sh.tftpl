@@ -32,24 +32,46 @@ curl -fL --retry 3 '${platform_zip_url}' -o /var/tmp/livelabs-ai-staff.zip
 test ! -e "$APP_HOME"
 unzip -q /var/tmp/livelabs-ai-staff.zip -d /home/opc
 test -f "$APP_HOME/schema/ai_for_you_full_ddl.sql"
+test -f "$APP_HOME/.agents/plugins/marketplace.json"
 install -d -o opc -g opc "$APP_HOME/posts" "$APP_HOME/pending-posts"
+
+label_venv() {
+  local venv_dir="$1"
+  chcon -R -t bin_t "$venv_dir/bin/"
+  chcon -h -t bin_t "$venv_dir/bin/python"*
+  semanage fcontext -a -t bin_t "$venv_dir/bin(/.*)?" || \
+    semanage fcontext -m -t bin_t "$venv_dir/bin(/.*)?"
+}
 
 for agent in pipeline assistant brand-agent ops publish website; do
   python3 -m venv "$APP_HOME/agents/$agent/venv"
   "$APP_HOME/agents/$agent/venv/bin/pip" install --upgrade pip
   "$APP_HOME/agents/$agent/venv/bin/pip" install -r "$APP_HOME/agents/$agent/requirements.txt"
   "$APP_HOME/agents/$agent/venv/bin/pip" install -r "$APP_HOME/agents/shared/requirements.txt"
+  label_venv "$APP_HOME/agents/$agent/venv"
 done
 python3.12 -m venv "$APP_HOME/agents/data/venv"
 "$APP_HOME/agents/data/venv/bin/pip" install --upgrade pip
 "$APP_HOME/agents/data/venv/bin/pip" install -r "$APP_HOME/agents/data/requirements.txt"
+label_venv "$APP_HOME/agents/data/venv"
 python3 -m venv "$APP_HOME/apps/file-editor/venv"
 "$APP_HOME/apps/file-editor/venv/bin/pip" install --upgrade pip
 "$APP_HOME/apps/file-editor/venv/bin/pip" install -r "$APP_HOME/apps/file-editor/requirements.txt"
 "$APP_HOME/apps/file-editor/venv/bin/pip" install -r "$APP_HOME/agents/shared/requirements.txt"
+label_venv "$APP_HOME/apps/file-editor/venv"
+restorecon -Rv "$APP_HOME/agents" "$APP_HOME/apps/file-editor"
 chown -R opc:opc "$APP_HOME"
 
-# Install canonical units but do not enable or start them. Lab 4 writes the
+# Register the included local Codex skills plugin for the deployment user.
+# Running this as root would install it for root instead of opc.
+runuser -u opc -- bash -lc '
+  set -Eeuo pipefail
+  cd /home/opc/livelabs-ai-staff
+  codex plugin marketplace add .agents/plugins
+  codex plugin add livelabsagentic-skills@personal
+'
+
+# Install canonical units but do not enable or start them. Lab 3 writes the
 # integration-specific environment files and activates only eligible services.
 install -d -m 700 /etc/sysconfig
 install -m 600 /dev/null /etc/sysconfig/contentkit-file-editor

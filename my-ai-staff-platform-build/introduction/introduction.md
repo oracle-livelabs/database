@@ -46,14 +46,28 @@ Before you start, create a secure worksheet for values that are unique to the cu
 | Content Kit | `base_dir`, NotebookLM Python path, font paths, Data Agent URL, headshot path, rclone remote, and Google Drive folder ID |
 | External services | Google OAuth client ID and secret, Google refresh token, SMTP host/user/password/from address, Substack config, and Instagram cookies when those integrations are enabled |
 
+## Choose a Deployment Path
+
+Choose one deployment path before starting the numbered labs. Do not run both
+paths on the same host.
+
+**Manual path:** Lab 1 → Lab 2 → Lab 3 → Lab 4 → Lab 5
+
+**Fast path:** Fast Path: Click the Magic Button → Lab 3 → Lab 4 → Lab 5
+
+The Fast Path replaces Labs 1 and 2. It provisions OCI, Autonomous Database,
+the platform files, the local Codex plugin, labeled virtual environments, the
+application schema, the vector model, and the base systemd unit files. Lab 3
+is still required because Slack apps, tokens, channels, environment values,
+Google Drive authorization, and service activation are deployment-specific.
+
 ## Workshop Labs
 
 1. Lab 1: Prepare OCI Infrastructure and Database (manual path)
-2. Lab 2: Click the Magic Button (fast path; alternative to Labs 1 and 3)
-3. Lab 3: Install the My AI Staff Runtime (manual path)
-4. Lab 4: Configure Slack Agents, Environment Files, and Services
-5. Lab 5: Connect Services and Verify the Deployment
-6. Lab 6: Configure External Services
+2. Lab 2: Install the My AI Staff Runtime (manual path)
+3. Lab 3: Configure Slack Agents, Environment Files, and Services
+4. Lab 4: Connect Services and Verify the Deployment
+5. Lab 5: Configure External Services
 
 ## Acknowledgements
 

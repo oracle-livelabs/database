@@ -1,4 +1,4 @@
-# Connect Services and Verify the Deployment
+# Lab 4: Connect Services and Verify the Deployment
 
 ## Introduction
 
@@ -19,13 +19,13 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Completion of Lab 4.
+- Completion of Lab 3.
 - Active runtime services.
-- Access to Slack workspace and channels configured in Lab 4.
+- Access to Slack workspace and channels configured in Lab 3.
 
 ## Task 1: Create a Personalized Strategy with the Brand Agent
 
-1. Open a direct message with the Brand Agent configured in Lab 4. This app is the brand and strategy owner for the deployment.
+1. Open a direct message with the Brand Agent configured in Lab 3. This app is the brand and strategy owner for the deployment.
 
 2. Start the threaded strategy setup interview.
 
@@ -51,7 +51,7 @@ In this lab, you will:
 
 1. Validate that `contentkit-assistant`, `contentkit-pipeline`, `contentkit-brand`, `contentkit-data`, `contentkit-ops`, and `contentkit-publish` are active. Also validate `contentkit-website` when the public intake service is enabled.
 2. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003), Data Agent (8004), and Website Agent (8005 when enabled).
-3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or fast-path Lab 2 was not loaded or the wallet/database configuration is wrong.
+3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
 
     ```
     <copy>
@@ -64,7 +64,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or Lab 2 on the fast path.
+4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
 
 ## Task 3: Run Tier 2 and Tier 3 Slack Validation
 
@@ -88,7 +88,7 @@ In this lab, you will:
     | Content Agent | `#content-runs` | `status` | A list of active or paused runs, or a message that no runs are active. |
     | Creative Agent | `#creative-studio` | `regen infographic for 1056` | A regeneration confirmation. Replace `1056` with an existing post number from the deployment. |
 
-3. Confirm that each bot answers from the expected app identity and channel. If a bot does not respond, verify channel membership, Socket Mode status, the `xapp-...` app token, and the matching `xoxb-...` bot token from Lab 4.
+3. Confirm that each bot answers from the expected app identity and channel. If a bot does not respond, verify channel membership, Socket Mode status, the `xapp-...` app token, and the matching `xoxb-...` bot token from Lab 3.
 
 4. Confirm Assistant Agent reminders and approval interactions are functioning.
 

@@ -21,8 +21,9 @@ create an Object Read pre-authenticated request (PAR) for that object. Replace
 Do not use a repository source archive: Resource Manager requires this Terraform
 configuration at the ZIP root.
 
-The bootstrap deliberately installs but does not configure credentials for
-Codex, Slack, Google, or publishing integrations. It logs to
-`/var/log/my-ai-staff-bootstrap.log` and creates
+The bootstrap installs the local Codex skills plugin for the `opc` user, labels
+the created virtual environments for SELinux, and deliberately does not
+configure credentials for Codex, Slack, Google, or publishing integrations. It
+logs to `/var/log/my-ai-staff-bootstrap.log` and creates
 `/var/lib/my-ai-staff-bootstrap.complete` only after the schema and model smoke
 test succeed.

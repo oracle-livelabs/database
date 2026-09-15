@@ -1,4 +1,4 @@
-# Prepare OCI Infrastructure and Database
+# Lab 1: Prepare OCI Infrastructure and Database (Manual Path)
 
 ## Introduction
 
@@ -24,7 +24,7 @@ In this lab, you will:
 
 ## Task 1: Create Compute and Network Access
 
-1. In OCI Console, create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex 
+1. In [OCI Console](https://www.oracle.com/latam/cloud/sign-in.html), create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex
     (If not available choose a similar Shape, check documentation for more info [here](https://docs.oracle.com/es-ww/iaas/Content/Compute/References/computeshapes.htm#flexible)).
 2. Configure the instance to use 4 OCPUs and 24 GB memory.
 3. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
@@ -74,7 +74,7 @@ In this lab, you will:
 
 5. Verify the extracted wallet files include `sqlnet.ora`, `tnsnames.ora`, `cwallet.sso`, `ewallet.p12`, and `ewallet.pem`.
 
-6. Record the wallet directory as `ADB_WALLET_DIR` for Lab 4. The agents pass the database ADMIN password as the wallet passphrase because `ewallet.pem` is passphrase-protected; do not confuse it with the separate password used when downloading the wallet zip.
+6. Record the wallet directory as `ADB_WALLET_DIR` for Lab 3. The agents pass the database ADMIN password as the wallet passphrase because `ewallet.pem` is passphrase-protected; do not confuse it with the separate password used when downloading the wallet zip.
 
 ## Task 3: Create Application Schema and Load DDL
 
@@ -98,7 +98,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. The platform ZIP is downloaded and extracted in Lab 3. After completing Lab 3 Task 2, return to this task and run `~/livelabs-ai-staff/schema/ai_for_you_full_ddl.sql` from the extracted platform files, top to bottom. Do not try to run this step before the ZIP has been installed. The file is the current schema snapshot for a fresh deployment, not a migration sequence.
+4. The platform ZIP is downloaded and extracted in Lab 2. After completing Lab 2 Task 2, return to this task and run `~/livelabs-ai-staff/schema/ai_for_you_full_ddl.sql` from the extracted platform files, top to bottom. Do not try to run this step before the ZIP has been installed. The file is the current schema snapshot for a fresh deployment, not a migration sequence.
 5. Do not run `agents/data/migrations/` for a new deployment: the files are historical changes already folded into the snapshot.
 6. Skip only the DDL blocks marked in the file for `OAM_*` and `REMINDERS`. The memory package creates `OAM_*` objects on first memory use, and Assistant Agent creates `REMINDERS` on first reminder use.
 7. Run the remaining content pipeline tables, `AISTAFF_*` tables, `AGENT_*` memory tables, foreign keys, duality views, and indexes. The `*_SUB_UX` unique indexes are required for public-intake idempotency.

@@ -1,8 +1,8 @@
-# Configure External Services
+# Lab 5: Configure External Services
 
 ## Introduction
 
-In this lab, you connect intake, voice, email, and publishing helpers for deployments that use external services. Google Drive delivery was configured in Lab 4 because it is required for this deployment.
+In this lab, you connect intake, voice, email, and publishing helpers for deployments that use external services. Google Drive delivery was configured in Lab 3 because it is required for this deployment.
 
 Estimated Time: 30 minutes
 
@@ -17,7 +17,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Completion of Lab 5.
+- Completion of Lab 4.
 - Customer intake values for each external service you plan to enable.
 - A personal Gmail account for the workshop OAuth flow. Do not use a corporate or customer-owned Google account.
 - Access to the email sender and publishing accounts.
@@ -56,7 +56,7 @@ In this lab, you will:
 
 1. Use this task when the deployment needs audio transcription. The current runtime uses `faster-whisper` through the AI Staff requirements and needs `ffmpeg`.
 
-2. Confirm `ffmpeg` is installed from Lab 3 on the manual path or Lab 2 on the fast path.
+2. Confirm `ffmpeg` is installed from Lab 2 on the manual path or the Fast Path.
 
     ```
     <copy>
