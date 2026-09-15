@@ -38,7 +38,7 @@ In this lab, you will:
     page with the versioned Terraform configuration already selected. The button
     uses the read-only pre-authenticated Object Storage URL for the release ZIP.
 
-    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https%3A%2F%2Fc4u02.objectstorage.us-ashburn-1.oci.customer-oci.com%2Fp%2F9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3%2Fn%2Fc4u02%2Fb%2Fhosted-files%2Fo%2Fmy-ai-staff-oci-stack-v1.0.0.zip)
+    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https%3A%2F%2Fobjectstorage.us-ashburn-1.oraclecloud.com%2Fp%2F9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3%2Fn%2Fc4u02%2Fb%2Fhosted-files%2Fo%2Fmy-ai-staff-oci-stack-v1.0.0.zip)
 
 2. Sign in if prompted. Give the stack a non-sensitive name, select the target
     compartment, select Terraform 1.5.x, and select **Next**.
