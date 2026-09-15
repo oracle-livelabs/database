@@ -710,11 +710,9 @@ This configuration is the machine-runtime configuration for the current Codex-ba
     </copy>
     ```
 
-<<<<<<< HEAD
-3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 2 on the manual path or the Fast Path.
-=======
-3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 2.
->>>>>>> upstream/main
+3. Enable Website Agent only when you expose the public intake surface. It
+    depends on Data Agent and requires its own venv from Lab 2 on the manual
+    path or the Fast Path.
 
     ```
     <copy>
