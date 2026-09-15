@@ -19,7 +19,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Completion of Lab 2 on the manual path, or the Fast Path: Click the Magic Button.
+- Completion of Lab 2.
 - Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
 - A personal Slack account with administrator access to the workshop workspace.
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
@@ -72,16 +72,14 @@ In this lab, you will:
       "oauth_config": {
         "scopes": {
           "bot": [
-            "chat:write",
+            "files:read",
             "channels:history",
             "channels:read",
-            "groups:history",
-            "groups:read",
+            "chat:write",
+            "files:write",
             "im:history",
             "im:read",
             "im:write",
-            "files:read",
-            "files:write",
             "reactions:read"
           ]
         },
@@ -91,13 +89,12 @@ In this lab, you will:
         "event_subscriptions": {
           "bot_events": [
             "message.channels",
-            "message.groups",
             "message.im",
             "reaction_added"
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -128,7 +125,9 @@ In this lab, you will:
           "bot": [
             "chat:write",
             "channels:history",
-            "channels:read"
+            "channels:read",
+            "files:write",
+            "reactions:read"
           ]
         },
         "pkce_enabled": false
@@ -136,11 +135,12 @@ In this lab, you will:
       "settings": {
         "event_subscriptions": {
           "bot_events": [
-            "message.channels"
+            "message.channels",
+            "reaction_added"
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -184,7 +184,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -265,7 +265,8 @@ In this lab, you will:
           "bot": [
             "chat:write",
             "channels:history",
-            "channels:read"
+            "channels:read",
+            "files:write"
           ]
         },
         "pkce_enabled": false
@@ -277,7 +278,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -308,7 +309,8 @@ In this lab, you will:
           "bot": [
             "chat:write",
             "channels:history",
-            "channels:read"
+            "channels:read",
+            "files:write"
           ]
         },
         "pkce_enabled": false
@@ -320,7 +322,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -364,7 +366,7 @@ In this lab, you will:
           ]
         },
         "interactivity": {
-          "is_enabled": false
+          "is_enabled": true
         },
         "org_deploy_enabled": false,
         "socket_mode_enabled": true,
@@ -375,7 +377,7 @@ In this lab, you will:
     </copy>
     ```
 
-10. Assistant Agent and Brand Agent are the two apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app in Slack before installing it.
+10. Assistant Agent and Brand Agent are the only apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app before installing it.
 
     ![Agents with Access to direct messages](./images/03_agent_permission.png)
 
@@ -708,7 +710,11 @@ This configuration is the machine-runtime configuration for the current Codex-ba
     </copy>
     ```
 
+<<<<<<< HEAD
 3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 2 on the manual path or the Fast Path.
+=======
+3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 2.
+>>>>>>> upstream/main
 
     ```
     <copy>

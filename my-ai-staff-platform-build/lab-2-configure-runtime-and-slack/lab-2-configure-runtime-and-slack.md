@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 # Lab 2: Install the My AI Staff Runtime (Manual Path)
 
 ## Introduction
 
 In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
+=======
+# Install the My AI Staff Runtime
+
+## Introduction
+
+In this lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps.
+>>>>>>> upstream/main
 
 Estimated Time: 90 minutes
 
@@ -25,10 +33,17 @@ In this lab, you will:
 ## Task 1: Install Runtime Packages and Tooling
 
 1. Connect to the OCI compute instance from your laptop. Use either method:
+<<<<<<< HEAD
    - **VS Code:** Open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open a new terminal with **Terminal > New Terminal**. The commands below must run in that remote terminal.
    - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below. The `my-ai-staff-oci` alias and key are configured in Lab 1 Task 1.
 
    Once connected, update system packages:
+=======
+    - **VS Code:** Open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open a new terminal with **Terminal > New Terminal**. The commands below must run in that remote terminal.
+    - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below. The `my-ai-staff-oci` alias and key are configured in Lab 1 Task 1.
+
+    Once connected, update system packages:
+>>>>>>> upstream/main
 
     ```
     <copy>
@@ -81,7 +96,12 @@ In this lab, you will:
     </copy>
     ```
 
+<<<<<<< HEAD
 3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
+=======
+3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`. Do not follow old build-guide directory names such as `sasha`, `nia`, `amara`, `ida`, or `imani`.
+
+>>>>>>> upstream/main
     ```
     <copy>
     cd ~/livelabs-ai-staff
