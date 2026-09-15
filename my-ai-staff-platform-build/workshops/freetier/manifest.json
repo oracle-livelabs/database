@@ -9,16 +9,21 @@
         },
         {
             "title": "Get Started",
-            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
         },
         {
-            "title": "Lab 1: Prepare OCI Infrastructure and Oracle AI Database",
-            "description": "Provision OCI, load the current schema snapshot, and validate the vector model",
+            "title": "Fast Path: Click the Magic Button",
+            "description": "Alternative to Labs 1 and 2: bootstrap OCI, database, runtime, local plugin, and SELinux labels, then continue with Lab 3",
+            "filename": "../../lab-2-click-the-magic-button/lab-2-click-the-magic-button.md"
+        },
+        {
+            "title": "Lab 1: Prepare OCI Infrastructure and Database (Manual Path)",
+            "description": "Manual deployment path: provision OCI, load the schema snapshot, and validate the vector model",
             "filename": "../../lab-1-prepare-oci-infrastructure-and-database/lab-1-prepare-oci-infrastructure-and-database.md"
         },
         {
-            "title": "Lab 2: Install the My AI Staff Runtime",
-            "description": "Install dependencies, virtual environments, SELinux labels, and rclone",
+            "title": "Lab 2: Install the My AI Staff Runtime (Manual Path)",
+            "description": "Manual deployment path: install dependencies, virtual environments, SELinux labels, and rclone",
             "filename": "../../lab-2-configure-runtime-and-slack/lab-2-configure-runtime-and-slack.md"
         },
         {
