@@ -1,9 +1,8 @@
-# Install the My AI Staff Runtime
+# Lab 2: Install the My AI Staff Runtime (Manual Path)
 
 ## Introduction
 
-In this lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps.
-
+In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
 Estimated Time: 90 minutes
 
 ### Objectives
@@ -81,8 +80,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`. Do not follow old build-guide directory names such as `sasha`, `nia`, `amara`, `ida`, or `imani`.
-
+3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
     ```
     <copy>
     cd ~/livelabs-ai-staff

@@ -1,4 +1,4 @@
-# Configure Slack Agents, Environment Files, and Services
+# Lab 3: Configure Slack Agents, Environment Files, and Services
 
 ## Introduction
 
@@ -61,8 +61,7 @@ In this lab, you will:
     {
       "display_information": {
         "name": "Assistant Agent",
-        "description": "Assistant",
-        "background_color": "#2c2d30"
+        "description": "Personal assistant and AI Staff coordinator."
       },
       "features": {
         "bot_user": {
@@ -711,7 +710,9 @@ This configuration is the machine-runtime configuration for the current Codex-ba
     </copy>
     ```
 
-3. Enable Website Agent only when you expose the public intake surface. It depends on Data Agent and requires its own venv from Lab 2.
+3. Enable Website Agent only when you expose the public intake surface. It
+    depends on Data Agent and requires its own venv from Lab 2 on the manual
+    path or the Fast Path.
 
     ```
     <copy>
