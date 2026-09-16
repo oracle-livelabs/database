@@ -1,4 +1,4 @@
-# Prepare OCI Infrastructure and Database
+# Lab 1: Prepare OCI Infrastructure and Database (Manual Path)
 
 ## Introduction
 
@@ -24,7 +24,7 @@ In this lab, you will:
 
 ## Task 1: Create Compute and Network Access
 
-1. In OCI Console, create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex 
+1. In [OCI Console](https://www.oracle.com/latam/cloud/sign-in.html), create one Oracle Linux 9 ARM instance using shape VM.Standard.A1.Flex
     (If not available choose a similar Shape, check documentation for more info [here](https://docs.oracle.com/es-ww/iaas/Content/Compute/References/computeshapes.htm#flexible)).
 2. Configure the instance to use 4 OCPUs and 24 GB memory.
 3. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
