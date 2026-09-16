@@ -23,6 +23,7 @@ None.
     ``` bash
     <copy>
     cd
+    clear
     cat scripts/pt-02-install-oracle-home.cfg
     </copy>
 
@@ -65,7 +66,7 @@ None.
     </copy>
     ```
 
-    * AutoUpgrade may display *Processing config file ...* for a while as it reads and catalogs the ZIP files in */home/oracle/patch-repo*.
+3. AutoUpgrade may display *Processing config file ...* for a while as it reads and catalogs the ZIP files in */home/oracle/patch-repo*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -73,11 +74,6 @@ None.
     ``` text
     $ java -jar autoupgrade.jar -config scripts/pt-02-install-oracle-home.cfg -patch -mode create_home
     Processing config file ...
-    +-----------------------------------------+
-    | Starting AutoUpgrade Patching execution |
-    +-----------------------------------------+
-    Type 'help' to list console commands
-    patch>
     ```
 
     </details>

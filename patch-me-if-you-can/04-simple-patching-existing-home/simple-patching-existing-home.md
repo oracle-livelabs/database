@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will patch an Oracle AI Database using AutoUpgrade. You perform an out-of-place patch and use an existing Oracle home.
+In this lab, you will patch an Oracle AI Database using *AutoUpgrade*. You perform an out-of-place patch and use an existing Oracle home.
 
 Estimated Time: 10 Minutes
 
@@ -26,6 +26,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     ``` bash
     <copy>
     cd
+    clear
     cat scripts/pt-04-simple-patching-existing-home.cfg
     </copy>
 
@@ -111,7 +112,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     * You can see that you're patching the *UPGR* database.
     * You can also see that you're patching from 19.31 to 19.32.
-    * In the end, you can see that all checks passed and there's no manual intervention needed.
+    * In the end, you can see that *Check passed and no manual intervention needed*.
     * This database was found to be ready for patching.
 
     <details>

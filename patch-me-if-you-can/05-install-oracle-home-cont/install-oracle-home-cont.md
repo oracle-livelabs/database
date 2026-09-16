@@ -131,6 +131,7 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     ```
 
     * In the AutoUpgrade config file, you selected to create a gold image of the new Oracle home using the parameter `create_gold_image`. 
+    * After creating the Oracle home, AutoUpgrade creates a gold image. 
     * AutoUpgrade stores the gold image in the `download_folder` together with all the patches.
 
     <details>
@@ -150,6 +151,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 
     ``` bash
     <copy>
+    clear
     cat ~/scripts/pt-05-install-from-gold-image.cfg
     </copy>
     ```
@@ -249,6 +251,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * Installing the Oracle home from scratch and applying the Release Update and other patches takes 24 minutes. This includes the creation of the gold image so the installation time is probably around 18-20 minutes.
     * Installing from a gold image takes only two minutes.
     * Your numbers may vary.
+    * It is *much faster* to install a gold image, than installing from scratch and applying all the patches. 
 
     <details>
     <summary>*click to see the output*</summary>

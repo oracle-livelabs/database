@@ -274,7 +274,9 @@ In Task 1, you left AutoUpgrade while it performed the rollback of *UPGR*.
 
 In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to complete the rollback.
 
-1. Switch back to the *blue* terminal 🟦. Datapatch should be done by now. Check the output. 
+1. Switch back to the *blue* terminal 🟦. 
+
+2. Datapatch should be done by now. Check the output. 
 
     * 19.32 Release Update and matching bundle patches were rolled back.
     * 19.31 Release Update and matching bundle patches were applied.

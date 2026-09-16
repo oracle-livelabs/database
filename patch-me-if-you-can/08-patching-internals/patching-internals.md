@@ -27,6 +27,7 @@ Datapatch stores patching information inside the database. Understanding these t
 
     ``` sql
     <copy>
+    clear
     . upgr
     sql / as sysdba
     </copy>
@@ -291,7 +292,8 @@ Datapatch also stores log files in the file system.
     * In the example below, you can see recompilation after patching a container database.
     * For each container, you can see the number of invalid objects before patching (in the prerequisite phase).
     * You can also see the number of invalid objects after patching.
-    * Datapatch always tries to recompile all Oracle-maintained objects invalidated by the patching.
+    * Datapatch always recompile all Oracle-maintained objects invalidated by the patching.
+    * After the Datapatch recompilation there shouldn't be any invalid objects. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -453,7 +455,7 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
 
     </details>
 
-3. Delete the inactive patches. When prompted to proceed, enter *Y*.
+3. Delete the inactive patches. 
 
     ``` bash
     <copy>
@@ -461,8 +463,9 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     </copy>
     ```
 
+    * When prompted to proceed, enter *Y*.
     * OPatch keeps one inactive patch and deletes the rest of the inactive patches.
-    * Keeping one inactive patch—the latest—ensures that you can always roll back to the previous patch. Going back even further would require that you restore the files or simply install a new Oracle home with the required patches.
+    * Keeping one inactive patch - the latest - ensures that you can always roll back to the previous patch. Going back even further would require that you restore the files or simply install a new Oracle home with the required patches.
     * The number of inactive patches to keep is configurable.
     * If OPatch runs slowly in your own environment, try to clear out inactive patching metadata.
     * If you patch out of place, you do not need this functionality.

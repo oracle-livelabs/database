@@ -2,7 +2,9 @@
 
 ## Introduction
 
-In this lab, you will manually patch a container database. The *CDB19* database is running on 19.31 and you will patch it to an existing Oracle home on 19.32. In addition, you will check how PDBs behave during patching.
+In this lab, you will *manually* patch a container database. The *CDB19* database is running on 19.31 and you will patch it to an existing Oracle home on 19.32. In addition, you will check how PDBs behave during patching.
+
+It is safer and easier to patch a database using AutoUpgrade. By patching a database manually, you can compare the two methods and see the benefits of AutoUpgrade. 
 
 Estimated Time: 15 Minutes
 
