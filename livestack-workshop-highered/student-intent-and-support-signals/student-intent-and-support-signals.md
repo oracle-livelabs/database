@@ -33,7 +33,10 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | A student signal may not use the exact words in a service catalog. |
 | Technical Challenge | Meaning-based retrieval should remain connected to governed service records. |
-| Persona Focus | AI engineer and student-support analyst. |
+| Decision Owner | Student-support analyst, supported by an AI engineer. |
+| Decision | Which services should staff review as likely matches for the need expressed by a student? |
+| Information Needed | The student's phrase, service descriptions, ranked matches, and similarity values. |
+| Next Action | Review the highest-ranked candidates with the student's current request and circumstances before recommending a service. |
 | What You Will Do | Generate a query embedding and compare it to stored service embeddings. |
 | Database Capability | Oracle AI Vector Search. |
 | Outcome | Staff can find relevant services from the intent expressed in a signal. |
@@ -53,7 +56,7 @@ Estimated Time: **12 minutes**
     SELECT index_name,
            index_type
     FROM user_indexes
-    WHERE index_name = 'IDX_PRODUCT_VEC';
+    WHERE index_name = 'IDX_SERVICE_VEC';
     </copy>
     ~~~
 
@@ -61,7 +64,7 @@ Estimated Time: **12 minutes**
 
     | Index Name | Index Type |
     | --- | --- |
-    | IDX\_PRODUCT\_VEC | VECTOR |
+    | IDX\_SERVICE\_VEC | VECTOR |
 
 ## Task 2: Match a support need to services
 
@@ -79,17 +82,17 @@ Estimated Time: **12 minutes**
            s.academic_program,
            ROUND(
              1 - VECTOR_DISTANCE(
-               pe.embedding,
+               se.embedding,
                VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
                  USING 'help choosing courses and meeting an advisor' AS DATA),
                COSINE
              ),
              3
            ) AS similarity
-    FROM product_embeddings pe
-    JOIN student_services_v s ON s.service_id = pe.product_id
+    FROM service_embeddings se
+    JOIN student_services_v s ON s.service_id = se.service_id
     ORDER BY VECTOR_DISTANCE(
-      pe.embedding,
+      se.embedding,
       VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
         USING 'help choosing courses and meeting an advisor' AS DATA),
       COSINE
@@ -102,9 +105,9 @@ Estimated Time: **12 minutes**
 
     | Service Name | Academic Program | Similarity |
     | --- | --- | ---: |
-    | First-Year Advising | Student Success Office | 0.758 |
-    | Tutoring Appointment | Student Success Office | 0.435 |
-    | Academic Planning Appointment | College of Engineering | 0.366 |
+    | First-Year Advising | Student Success Office | 0.725 |
+    | Tutoring Appointment | Student Success Office | 0.511 |
+    | Academic Planning Appointment | College of Engineering | 0.402 |
 
     This is a representative result set. Your three-decimal similarity values, and sometimes the lower-ranked order, can vary by model environment. The important result is a three-row ranked list with advising-oriented services near the top. Use the ranking to identify candidates for human review; it does not assign a service automatically.
 
@@ -122,8 +125,8 @@ Estimated Time: **12 minutes**
     | Service Name | Academic Program | Similarity |
     | --- | --- | ---: |
     | Financial Aid Navigation | Student Success Office | 1.000 |
-    | First-Year Advising | Student Success Office | 0.421 |
-    | Academic Planning Appointment | College of Engineering | 0.343 |
+    | First-Year Advising | Student Success Office | 0.549 |
+    | Tutoring Appointment | Student Success Office | 0.391 |
 
     Your three-decimal similarity values, and sometimes the lower-ranked order, can vary by model environment. The important result is that Financial Aid Navigation moves to the top of the revised evidence queue.
 
@@ -137,17 +140,17 @@ Estimated Time: **12 minutes**
            s.academic_program,
            ROUND(
              1 - VECTOR_DISTANCE(
-               pe.embedding,
+               se.embedding,
                VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
                  USING 'financial aid form deadline and student account guidance' AS DATA),
                COSINE
              ),
              3
            ) AS similarity
-    FROM product_embeddings pe
-    JOIN student_services_v s ON s.service_id = pe.product_id
+    FROM service_embeddings se
+    JOIN student_services_v s ON s.service_id = se.service_id
     ORDER BY VECTOR_DISTANCE(
-      pe.embedding,
+      se.embedding,
       VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
         USING 'financial aid form deadline and student account guidance' AS DATA),
       COSINE
@@ -157,6 +160,17 @@ Estimated Time: **12 minutes**
     ~~~
 
     </details>
+
+## Business outcome checkpoint
+
+Changing the phrase changes the ranked service candidates, showing how meaning-based retrieval can enrich the broader request workflow even when a student uses different wording from the catalog. A support analyst still reviews the matches with the student's circumstances before recommending a service.
+
+- **Demonstrates:** Oracle AI Vector Search can rank governed service descriptions against two differently worded support needs.
+- **Supports:** A shorter path from a student's words to relevant services for staff review.
+- **Candidate indicators:** Time to identify a suitable service, reviewed-match relevance, search reformulation rate, and staff override rate.
+- **Requires validation:** Retrieval quality with institutional language, privacy and retention for student text, approved model versions, access controls, and the effect of model changes on ranking.
+
+After finding candidate services, Lab 5 examines which advocate and program relationships could help coordinate follow-up.
 
 ## Acknowledgements
 

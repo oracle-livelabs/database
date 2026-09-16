@@ -1,8 +1,10 @@
-# Transaction and Case Documents with JSON Relational Duality
+# Transaction Documents with JSON Relational Duality
 
 ## Introduction
 
 Applications often need transaction data as a clean JSON document, while analysts still need the same data in relational form for filtering, joining, and investigation. This lab uses **JSON Relational Duality** to satisfy both needs from the same data.
+
+Sam, Seer Bank's application developer, needs a transaction in a format an application can use easily. Jessica still needs the same transaction facts for review. This lab shows how they can both use the same transaction rows instead of separate copies.
 
 Think of this as one transaction wearing two useful forms. The application gets an API-friendly document. Analysts and database developers still get governed SQL access to the underlying facts.
 
@@ -15,15 +17,15 @@ This matters after the dashboard lab because a KPI is not enough for review. Whe
 >
 > - **Relational tables** store data in rows and columns with defined keys, relationships, constraints, and data types. That structure is excellent for analytics because SQL can filter, aggregate, join customers to transactions, enforce data quality rules, and answer questions such as which customers, products, or cases are driving risk. Relational data is less convenient as a direct application payload than JSON, but it is much stronger for governed analysis and operational reporting.
 >
-> - **JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want for APIs, while analysts keep SQL access to governed relational data. That matters because the API document and the analytic rows stay synchronized as two views of the same source.
+> - **JSON Relational Duality** lets Oracle AI Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want for APIs, while analysts keep SQL access to governed relational data. That matters because the API document and the analytic rows stay synchronized as two views of the same source.
 >
 > - **Duality view**, often shortened to **DV**, is the database object that defines that document shape. A duality view is created with `CREATE JSON RELATIONAL DUALITY VIEW`. The definition maps relational tables and columns into a JSON structure, so the database knows how to present the same rows as a document. In this lab, `ORDERS_DV` maps transaction rows from `ORDERS` and nested line-item rows from `ORDER_ITEMS` into one transaction document.
 >
-> - **Projection** means presenting the same centralized data in the shape a user, application, or service needs. Oracle Database can store governed data once, then let different consumers access it as relational rows, JSON documents, spatial objects, graph relationships, vectors, or model-ready columns without extracting or synchronizing separate copies. In this lab, SQL/JSON projection means taking fields from a JSON transaction document, such as transaction ID and status, and returning them as normal SQL columns that analysts can filter, sort, and join. The same transaction data can serve an application-friendly JSON API and an analyst-friendly SQL result without moving the data into a separate document store.
+> - **Projection** means presenting the same centralized data in the shape a user, application, or service needs. Oracle Database can store transaction rows once, then let different consumers access them as relational rows, JSON documents, spatial objects, graph relationships, vectors, or model-ready columns without extracting or synchronizing separate copies. In this lab, SQL/JSON projection means taking fields from a JSON transaction document, such as transaction ID and status, and returning them as normal SQL columns that analysts can filter, sort, and join. The same transaction data can serve an application-friendly JSON API and an analyst-friendly SQL result without moving the data into a separate document store.
 
 </details>
 
-The image below shows the Transaction and Case Operations page in its API document view. The application can show the same transaction as a nested JSON document for API and partner integration use cases, while operations teams still rely on relational transaction, client, product, case, and service data. In this lab, you query the duality view behind that screen to see why developers can get a JSON payload without giving up relational analytics.
+The image below shows the Transaction and Case Operations page in its API document view. The application can show the same transaction as a nested JSON document for API and partner integration use cases, while analysts and application developers can still use its relational transaction and line-item data. In this lab, you query the duality view behind that screen to see why developers can get a JSON payload without giving up relational analytics.
 
 ![Transaction API Document View](images/transaction-json-duality.png " ")
 
@@ -43,12 +45,12 @@ Estimated Time: **15 minutes**
 | --- | --- |
 | Business Problem | Application teams want document-shaped transaction data, while risk teams need relational controls. |
 | Technical Challenge | Developers need API-friendly JSON without copying transaction records into a separate document store. |
-| Persona Focus | Application developers serve document payloads while database developers preserve relational governance and SQL access. |
+| Persona Focus | Sam serves application-ready transaction documents while Jordan preserves relational governance and SQL access. |
 | What You Will See | JSON Relational Duality exposes transaction documents without duplicating data. |
 | Database Capability | Duality views and SQL/JSON functions expose JSON and relational access together. |
 | Outcome | Transaction operations can serve application and analytics needs from one source. |
 
-Persona focus: You are the application/database developer showing how Seer Bank can expose transaction documents while keeping governed relational evidence intact.
+Persona focus: You join Sam and Jordan as they expose transaction documents while keeping governed relational evidence intact.
 
 ### What Is a Duality View?
 
@@ -63,9 +65,9 @@ For this lab, the workshop database already includes `ORDERS_DV`. The duality vi
 | `status` | `ORDERS.ORDER_STATUS` |
 | `items[]` | Related rows from `ORDER_ITEMS` |
 
-That mapping tells Oracle Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
+That mapping tells Oracle AI Database how to present an order row and its related line-item rows as one JSON transaction document. The application can read a transaction in the shape developers prefer for APIs, while analysts can still query the underlying rows with SQL.
 
-This is better than common alternatives because it avoids splitting ownership of the same transaction across systems. If teams hand-build JSON in every application service, each service can drift into its own version of the transaction shape. If teams copy transactions into a separate document database, they must synchronize data, duplicate security rules, and resolve conflicts when the document copy and relational source disagree. A duality view keeps one governed source of truth while still giving each consumer the access shape it needs.
+This is better than common alternatives because it avoids splitting ownership of the same transaction across systems. If teams hand-build JSON in every application service, each service can drift into its own version of the transaction shape. If teams copy transactions into a separate document database, they must synchronize data, duplicate security rules, and resolve conflicts when the document copy and relational source disagree. A duality view keeps one set of transaction rows while still giving each consumer the access shape it needs.
 
 ## Task 1: Inspect document-shaped transactions
 
@@ -82,7 +84,7 @@ First, inspect the transaction shape an application can consume directly.
 
     > In a fractured environment, the application team might keep JSON documents in one system while analysts use relational tables in another. That creates a synchronization problem: which copy is current, which one is governed, and which one should an investigation trust?
     >
-    > Oracle JSON Relational Duality avoids that split. The JSON document and the relational rows are two views of the same governed data.
+    > Oracle JSON Relational Duality avoids that split. The JSON document and the relational rows are two views of the same transaction data.
 
     </details>
 
@@ -97,9 +99,9 @@ First, inspect the transaction shape an application can consume directly.
 
     **Expected output: Transaction Document Excerpt**
 
-    | Transaction Document |
-    | --- |
-    | { "\_id" : 1, "\_metadata" : { ... }, "customerId" : 687, "status" : "confirmed", "items" : [ ... ] } |
+    ![Green Button SQL Worksheet showing a transaction document returned from ORDERS_DV](images/green-button-transaction-json.png " ")
+
+    Your generated metadata values can differ. Focus on the transaction fields and nested `items` array.
 
 
 2. Expand the document in SQL Worksheet.
@@ -111,7 +113,7 @@ First, inspect the transaction shape an application can consume directly.
 
 ## Task 2: Enable document inserts and updates
 
-The existing `ORDERS_DV` lets an application update an existing transaction document. In this task, you extend that contract so an application can also create a transaction document. The relational tables, keys, and constraints remain the governed source of truth.
+The existing `ORDERS_DV` lets an application update an existing transaction document. In this task, you extend that contract so an application can also create a transaction document. The relational tables, keys, and constraints remain the source of truth.
 
 1. Check the current document-write capabilities.
 
@@ -128,15 +130,13 @@ The existing `ORDERS_DV` lets an application update an existing transaction docu
 
     **Expected output: Current Document Capabilities**
 
-    | View Name | Allow Insert | Allow Update | Allow Delete |
-    | --- | --- | --- | --- |
-    | ORDERS\_DV | false | true | false |
+    ![Green Button SQL Worksheet showing the current ORDERS_DV document capabilities](images/green-button-current-document-capabilities.png " ")
 
     The view is currently update-enabled but does not accept a new top-level document. The root `ORDERS` table controls whether a document can be inserted, while the nested `ORDER_ITEMS` rows must also allow inserts so the document can include line items.
 
 2. Enable insert and update for the document and its line items.
 
-    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses tell Oracle Database that developers can create and update the JSON document while the database continues to enforce relational keys and data types underneath.
+    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses tell Oracle AI Database that developers can create and update the JSON document while the database continues to enforce relational keys and data types underneath.
 
     ```sql
     <copy>
@@ -183,9 +183,7 @@ The existing `ORDERS_DV` lets an application update an existing transaction docu
 
     **Expected output: Document Capabilities Enabled**
 
-    | View Name | Allow Insert | Allow Update | Allow Delete |
-    | --- | --- | --- | --- |
-    | ORDERS\_DV | true | true | false |
+    ![Green Button result showing ORDERS_DV with insert and update enabled](images/green-button-document-capabilities-enabled.png " ")
 
     The view can now receive a new JSON transaction document and apply a document update. This environment is temporary, so this learner-created API contract and its test transaction are removed when workshop access expires.
 
@@ -262,13 +260,11 @@ Now act as an application developer. You will create a transaction as one nested
 
     **Expected output: Created Transaction Rows**
 
-    | Transaction Id | Transaction Status | Item Id | Product Name | Quantity | Unit Price | Line Total |
-    | --- | --- | --- | --- | --- | --- | --- |
-    | 900001 | pending | 990001 | Premium Checking Bundle | 2 | 12.5 | 25 |
+    ![Green Button result showing the created pending transaction and its relational item row](images/green-button-created-transaction-rows.png " ")
 
 4. Update the document status through the duality view.
 
-    This update changes JSON data through `ORDERS_DV`. Oracle Database writes the matching relational `ORDERS.ORDER_STATUS` value; no application-side JSON parsing, copy, or synchronization job is required.
+    This update changes JSON data through `ORDERS_DV`. Oracle AI Database writes the matching relational `ORDERS.ORDER_STATUS` value; no application-side JSON parsing, copy, or synchronization job is required.
 
     ```sql
     <copy>
@@ -320,9 +316,7 @@ Now act as an application developer. You will create a transaction as one nested
 
     **Expected output: Updated Transaction Rows**
 
-    | Transaction Id | Transaction Status | Item Id | Product Name | Quantity | Line Total |
-    | --- | --- | --- | --- | --- | --- |
-    | 900001 | confirmed | 990001 | Premium Checking Bundle | 2 | 25 |
+    ![Green Button result showing the confirmed transaction and its relational item row](images/green-button-updated-transaction-rows.png " ")
 
 ## Task 4: Project JSON fields with SQL
 
@@ -350,9 +344,7 @@ Now use SQL to project document fields back into reviewable columns. In this con
 
     **Expected output: JSON Field Projection**
 
-    | Transaction Id | Transaction Status | Client Email |
-    | --- | --- | --- |
-    | 900001 | confirmed | Existing customer email for customer 1 |
+    ![Green Button result projecting the confirmed transaction ID, status, and customer email from JSON](images/green-button-json-field-projection.png " ")
 
 
 2. Review the columns returned from the JSON document.
@@ -362,12 +354,18 @@ Now use SQL to project document fields back into reviewable columns. In this con
 
     The business value is consistency. A developer can serve a clean transaction document to an application, while a risk analyst can still ask normal SQL questions about transaction status and customer contact details. Both users are working from the same source of truth.
 
+## Business Outcome
+
+You used one data foundation through both a document interface and relational SQL. This pattern can shorten application delivery and reduce synchronization work when applications need JSON while analysts and operational teams need relational access.
+
+Organizations can evaluate this pattern by tracking API delivery time, duplicated data stores, synchronization defects, and handoffs between application and data teams.
+
 ## Next Steps
 
-Congratulations on completing the JSON duality lab. You expanded a JSON API contract, created and updated a transaction as a document, and inspected the same governed data as relational rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
+Congratulations on completing the JSON duality lab. You expanded a JSON API contract, created and updated a transaction as a document, and inspected the same transaction as relational rows. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, June 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

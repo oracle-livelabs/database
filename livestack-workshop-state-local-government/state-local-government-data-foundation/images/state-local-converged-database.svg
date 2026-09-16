@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="666" viewBox="0 0 1280 666" role="img" aria-labelledby="title desc">
   <title id="title">Before and after state and local government data architecture</title>
-  <desc id="desc">Six separate specialist systems converge into one Oracle AI Database 26ai foundation for Colorado resident services.</desc>
+  <desc id="desc">Six separate specialist systems converge into one Oracle AI Database foundation for Colorado resident services.</desc>
   <rect width="1280" height="666" fill="#f7f8fa"/>
   <style>
     .h1{font:700 34px Arial,sans-serif;fill:#18243b}.sub{font:18px Arial,sans-serif;fill:#334057}
@@ -9,7 +9,7 @@
     .body{font:16px Arial,sans-serif;fill:#26344a}.label{font:700 21px Arial,sans-serif}.chip{font:700 15px Arial,sans-serif;fill:#fff}
   </style>
   <text x="38" y="48" class="h1">Before and After: Colorado Resident-Services Data Architecture</text>
-  <text x="38" y="82" class="sub">Separate systems create copies and reconciliation work. Oracle AI Database 26ai keeps service evidence connected.</text>
+  <text x="38" y="82" class="sub">Separate systems create copies and reconciliation work. Oracle AI Database keeps service evidence connected.</text>
 
   <rect x="38" y="112" width="520" height="512" rx="20" class="panel"/>
   <path d="M38 132a20 20 0 0 1 20-20h480a20 20 0 0 1 20 20v54H38z" fill="#a92b3e"/>
@@ -56,7 +56,7 @@
     <rect x="0" y="16" width="190" height="92" fill="#fff" stroke="#159447" stroke-width="3"/>
     <ellipse cx="95" cy="108" rx="95" ry="16" fill="#eefaf2" stroke="#159447" stroke-width="3"/>
     <text x="95" y="57" text-anchor="middle" class="label" fill="#17603a">Oracle AI</text>
-    <text x="95" y="84" text-anchor="middle" class="label" fill="#17603a">Database 26ai</text>
+    <text x="95" y="84" text-anchor="middle" class="label" fill="#17603a">Database</text>
   </g>
   <g>
     <rect x="758" y="212" width="148" height="44" rx="10" fill="#e76f51"/><text x="832" y="240" text-anchor="middle" class="chip">SQL analytics</text>
