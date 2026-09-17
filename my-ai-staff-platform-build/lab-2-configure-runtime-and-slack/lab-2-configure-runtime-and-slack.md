@@ -70,7 +70,7 @@ In this lab, you will:
     </copy>
     ```
 
-2. Install the ZIP's included local Codex skills plugin from the repository root, then start a new Codex session so the skills list refreshes. The marketplace file registers the plugin as `livelabsagentic-skills@personal`. After extraction and plugin installation, return to Lab 1 Task 3 step 4 to run the application DDL before continuing with the runtime setup.
+2. Install the ZIP's included local Codex skills plugin from the repository root, then start a new Codex session so the skills list refreshes. The marketplace file registers the plugin as `livelabsagentic-skills@personal`. The database schema was completed in Lab 1; do not return to Lab 1 or run the DDL again.
 
     ```
     <copy>

@@ -172,11 +172,14 @@ In this lab, you will:
 
 7. Record the wallet directory as `ADB_WALLET_DIR` for Lab 3. The agents pass the database ADMIN password as the wallet passphrase because `ewallet.pem` is passphrase-protected; do not confuse it with the separate password used when downloading the wallet zip.
 
-## Task 3: Create Application Schema and Load DDL
+## Task 3: Create the Application Schema and Run the Fresh-Build DDL
 
-1. Connect to the database as ADMIN using SQL Developer Web or SQLcl.
+1. Download the [fresh-build AI_FOR_YOU DDL script](./sql/ai_for_you_fresh_ddl.sql) to your laptop. This is the workshop's executable schema script. It includes the application tables, foreign keys, indexes, and duality views required by a new deployment; it does not include objects that the memory package or Assistant Agent creates automatically.
+
+2. In the Autonomous Database Console, open **Database Actions** and choose **SQL**. Connect as `ADMIN`.
     ![Where to Enter SQL Actions](./images/04_sql_actions.png)
-2. Create the AI_FOR_YOU schema.
+
+3. Create the AI_FOR_YOU schema. Use a strong password that does not contain a double quote, because it is entered in the quoted SQL literal below.
 
     ```
     <copy>
@@ -186,32 +189,49 @@ In this lab, you will:
     </copy>
     ```
 
-3. Set the current schema before you run application DDL. The platform connects as `admin` and uses `ALTER SESSION SET CURRENT_SCHEMA = AI_FOR_YOU`; keep that convention unless you also update every database module.
+4. Open the downloaded `ai_for_you_fresh_ddl.sql` in the SQL worksheet and choose **Run Script**. The first lines set `CURRENT_SCHEMA` and stop execution on the first SQL error. Run the file from top to bottom; do not run the historical migration files and do not edit the script to skip sections.
 
-    ```
-    <copy>
-    ALTER SESSION SET CURRENT_SCHEMA = AI_FOR_YOU;
-    </copy>
-    ```
-
-4. The platform ZIP is downloaded and extracted in Lab 2. After completing Lab 2 Task 2, return to this task and run `~/livelabs-ai-staff/schema/ai_for_you_full_ddl.sql` from the extracted platform files, top to bottom. Do not try to run this step before the ZIP has been installed. The file is the current schema snapshot for a fresh deployment, not a migration sequence.
-5. Do not run `agents/data/migrations/` for a new deployment: the files are historical changes already folded into the snapshot.
-6. Skip only the DDL blocks marked in the file for `OAM_*` and `REMINDERS`. The memory package creates `OAM_*` objects on first memory use, and Assistant Agent creates `REMINDERS` on first reminder use.
-7. Run the remaining content pipeline tables, `AISTAFF_*` tables, `AGENT_*` memory tables, foreign keys, duality views, and indexes. The `*_SUB_UX` unique indexes are required for public-intake idempotency.
-8. Ensure table, foreign key, duality view, and index creation complete successfully.
+5. Confirm that the script reports `Fresh-build AI_FOR_YOU schema DDL completed.` and returns counts for the tables and duality views. If SQL Developer Web reports an error, stop at that statement and resolve it before continuing; do not replay the entire script over a partially created schema.
 
 ## Task 4: Load and Validate the ONNX Embedding Model
 
-1. As ADMIN, load the all-MiniLM-L12-v2 ONNX model into Oracle Database with model name MINILM_V2.
-2. Validate model availability with a VECTOR_EMBEDDING test query.
+1. Oracle publishes the prebuilt `all_MiniLM_L12_v2` model in its [ONNX pretrained-model download table](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/import-pretrained-models-onnx-format-vector-generation-database.html). The current direct Oracle download is [all_MiniLM_L12_v2.onnx](https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/iPX9W0MZeRkwJKWdFmdJCemmN-iKAl_bFvNGYLW7YqIrw4kKsukL24J2q93Beb9S/n/adwc4pm/b/OML-ai-models/o/all_MiniLM_L12_v2.onnx). If Oracle rotates that pre-authenticated URL, open the documentation page and use the current download link.
+
+2. In the same `ADMIN` SQL worksheet, run the following block. It uses Oracle's documented [`DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD`](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/load_onnx_model_cloud.html) procedure. The `credential => NULL` setting is correct for a pre-authenticated Object Storage URL. The existence check makes the block safe to run again without manually skipping a load section.
 
     ```
     <copy>
-    SELECT VECTOR_EMBEDDING(ADMIN.MINILM_V2 USING 'hello' AS data) FROM DUAL;
+    WHENEVER SQLERROR EXIT SQL.SQLCODE
+
+    DECLARE
+      l_model_count NUMBER;
+    BEGIN
+      SELECT COUNT(*)
+        INTO l_model_count
+        FROM USER_MINING_MODELS
+       WHERE MODEL_NAME = 'MINILM_V2';
+
+      IF l_model_count = 0 THEN
+        DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD(
+          model_name => 'ADMIN.MINILM_V2',
+          credential => NULL,
+          uri        => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/iPX9W0MZeRkwJKWdFmdJCemmN-iKAl_bFvNGYLW7YqIrw4kKsukL24J2q93Beb9S/n/adwc4pm/b/OML-ai-models/o/all_MiniLM_L12_v2.onnx'
+        );
+      END IF;
+    END;
+    /
+
+    SELECT MODEL_NAME, ALGORITHM, MINING_FUNCTION
+      FROM USER_MINING_MODELS
+     WHERE MODEL_NAME = 'MINILM_V2';
+
+    SELECT VECTOR_EMBEDDING(ADMIN.MINILM_V2 USING 'hello' AS data);
     </copy>
     ```
 
-3. Confirm the query returns a vector. The Data Agent memory endpoints require this model; if it is omitted, recall fails after the rest of the platform appears healthy.
+3. Confirm that the first query returns `MINILM_V2` and that the second query returns a vector. The model must be owned by `ADMIN` as `ADMIN.MINILM_V2`; the Data Agent memory endpoints require this model.
+
+4. Lab 1 is complete. Continue directly to **Lab 2: Install the My AI Staff Runtime (Manual Path)**. Do not return to Lab 1 after starting Lab 2.
 
 ## Acknowledgements
 
