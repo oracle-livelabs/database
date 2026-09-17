@@ -1,4 +1,4 @@
-# Connect Services and Verify the Deployment
+# Lab 4: Connect Services and Verify the Deployment
 
 ## Introduction
 
@@ -51,7 +51,7 @@ In this lab, you will:
 
 1. Validate that `contentkit-assistant`, `contentkit-pipeline`, `contentkit-brand`, `contentkit-data`, `contentkit-ops`, and `contentkit-publish` are active. Also validate `contentkit-website` when the public intake service is enabled.
 2. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003), Data Agent (8004), and Website Agent (8005 when enabled).
-3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 was not loaded or the wallet/database configuration is wrong.
+3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
 
     ```
     <copy>
@@ -64,7 +64,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1.
+4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
 
 ## Task 3: Run Tier 2 and Tier 3 Slack Validation
 
@@ -75,7 +75,7 @@ In this lab, you will:
     agents/data/venv/bin/python3 scripts/smoke_test.py
     </copy>
     ```
-    ![Smoke Test Example](./images/01.png)
+    ![Smoke Test Example](./images/01_smoke_test.png)
 
 2. Validate each Slack agent with a direct command. Brand Agent strategy validation already happened in Task 1, so this table focuses on the remaining runtime agents.
 

@@ -23,10 +23,10 @@ Estimated Time: **3 minutes**
     ```quiz score
     Q: What does JSON Relational Duality help Seer Bank do in the transaction lab?
     - Copy transaction documents into a separate document database.
-    * Serve transaction data as JSON while keeping SQL access to the same source.
+    * Use the same transaction data as JSON documents or relational tables without maintaining duplicate records.
     - Remove relational tables from the transaction review process.
     - Force analysts to manually read raw JSON for every review.
-    > JSON Relational Duality lets the application read a transaction as a JSON document while analysts can still project fields back into SQL columns and join to governed relational data.
+    > A duality view presents relational rows as a JSON document. Applications get the payload they need, while analysts still use SQL, keys, joins, and database controls against the same source.
 
     Q: In the vector lab, what does the similarity score help an analyst do?
     - Prove that a risk signal is confirmed fraud.
@@ -42,12 +42,12 @@ Estimated Time: **3 minutes**
     - It replaces relationship evidence with flat product totals.
     > The graph lab focuses on relationship evidence. A fraud analyst can prioritize connected accounts, devices, payees, IP addresses, and phones without relying on fragile chains of manual joins.
 
-    Q: Why does the service coverage lab use spatial data?
+    Q: Why does Seer Bank use spatial data in the service coverage lab?
     - To make coverage decisions outside the governed database.
     - To hide capacity evidence from service operations leaders.
-    * To compare service-center distance, demand regions, and SLA response zones.
+    * To find the closest service center for a customer or high-demand region and combine that location with center capacity and current workload.
     - To replace spatial queries with static labels.
-    > Spatial data lets operations teams measure which service centers are near high-demand regions and whether response-time commitments can support the case work.
+    > Spatial functions calculate distance and location relationships. SQL combines those results with customer, service-center, capacity, and demand data to support routing decisions.
 
     Q: In the OML lab, what does model confidence mean?
     - It guarantees that the prediction will happen.
@@ -65,10 +65,10 @@ Estimated Time: **3 minutes**
 
     Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
     - Each finance capability must use a separate specialized data store.
-    * SQL, JSON, vector, graph, spatial, OML, Select AI, and agent evidence stay connected.
+    * One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same governed data.
     - Application screenshots replace the need for database evidence.
     - Risk teams must reconcile copied data before every investigation.
-    > The workshop uses different database capabilities for different finance questions, but the value is that they operate from connected governed data. That reduces copying, reconciliation, and fragmented explanations.
+    > Each lab uses a different capability, but the teams work from connected data in one database. This reduces duplicate copies and separate integration paths while preserving database controls.
     ```
 
 2. When you achieve the passing score, the quiz displays your completion badge.

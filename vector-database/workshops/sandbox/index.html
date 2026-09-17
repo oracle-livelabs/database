@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Oracle LiveLabs gives you access to Oracle products so you can run hands-on labs and workshops in a guided environment.">
+    <title>Oracle LiveLabs</title>
+
+    <script src="https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-1.11.0.min.js"></script>
+    <script src="https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js"></script>
+    <script>
+        // Keep the local authoring preview from reusing cached Markdown lab files.
+        $.ajaxSetup({ cache: false });
+    </script>
+    <script>
+        // Add reliable Copy buttons without using <copy> tags in Markdown.
+        document.addEventListener("DOMContentLoaded", function () {
+            const lab = new URLSearchParams(window.location.search).get("lab");
+            if (!["04-understand-models-records-and-vector-tables", "05-create-embeddings-and-load-text", "06-run-baseline-semantic-search", "07-create-query-memory-module", "08-create-indexes-for-approximate-search"].includes(lab)) return;
+
+            function addCopyButtons() {
+                let codeBlocks = document.querySelectorAll("#module-content pre");
+                if (lab === "05-create-embeddings-and-load-text" || lab === "04-understand-models-records-and-vector-tables") {
+                    const targetTasks = lab === "05-create-embeddings-and-load-text"
+                        ? [
+                            "Task 1: Explore National Parks Data",
+                            "Task 2: Load National Parks Records into parks",
+                            "Task 3: Create Direction Embeddings and Load the Directions Table"
+                        ]
+                        : [
+                            "Task 1: Confirm Available Embedding Models",
+                            "Task 2: Create an Integrated Embedding Table",
+                            "Task 3: Create a Bring-Your-Own-Vector Table"
+                        ];
+                    const taskHeadings = Array.from(document.querySelectorAll("#module-content h2"))
+                        .filter(function (heading) {
+                            return targetTasks.includes(heading.textContent.trim());
+                        });
+                    if (!taskHeadings.length) return;
+                    const taskBlocks = [];
+                    taskHeadings.forEach(function (taskHeading) {
+                        let sibling = taskHeading.nextElementSibling;
+                        while (sibling && sibling.tagName !== "H2") {
+                            if (sibling.tagName === "PRE") taskBlocks.push(sibling);
+                            taskBlocks.push.apply(taskBlocks, sibling.querySelectorAll("pre"));
+                            sibling = sibling.nextElementSibling;
+                        }
+                    });
+                    codeBlocks = taskBlocks;
+                }
+                codeBlocks.forEach(function (pre) {
+                    if (pre.querySelector(".preview-copy-button")) return;
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "copy-button preview-copy-button";
+                    button.textContent = "Copy";
+                    button.addEventListener("click", function () {
+                        const code = pre.querySelector("code");
+                        const text = code ? code.textContent : pre.textContent;
+                        navigator.clipboard.writeText(text).then(function () {
+                            button.textContent = "Copied";
+                            setTimeout(function () { button.textContent = "Copy"; }, 1200);
+                        });
+                    });
+                    pre.insertBefore(button, pre.firstChild);
+                });
+            }
+
+            new MutationObserver(addCopyButtons).observe(document.getElementById("module-content"), {
+                childList: true,
+                subtree: true
+            });
+            addCopyButtons();
+        });
+    </script>
+    <link rel="stylesheet" href="https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css">
+    <link rel="shortcut icon" href="https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico">
+</head>
+<body>
+    <header class="hol-Header" role="banner">
+        <div class="hol-Header-wrap">
+            <div class="hol-Header-logo"><span>Oracle LiveLabs</span></div>
+            <a href="https://livelabs.oracle.com" target="_blank" id="livelabs" title="Oracle LiveLabs"></a>
+            <div class="hol-Header-actions">
+                <button id="openNav" class="hol-Header-button hol-Header-button--menu rightNav" aria-label="Open Menu" title="Open Menu">
+                    <span class="hol-Header-toggleIcon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="container">
+        <div id="leftNav">
+            <div id="toc"></div>
+        </div>
+        <div id="contentBox">
+            <main class="hol-Content" id="module-content"></main>
+        </div>
+    </div>
+
+    <footer class="hol-Footer">
+        <a class="hol-Footer-topLink" href="#top">Return to Top</a>
+        <div id="footer-banner">
+            <div class="footer-row">
+                <div class="footer-content">
+                    <ul class="footer-links">
+                        <li><a href="https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr" target="_blank">&copy; Oracle</a></li>
+                        <li><a href="https://www.oracle.com/corporate/index.html" target="_blank">About Oracle</a></li>
+                        <li><a href="https://www.oracle.com/corporate/contact/" target="_blank">Contact Us</a></li>
+                        <li class="footer-links-break"></li>
+                        <li><a href="https://docs.oracle.com/en/browseall.html" target="_blank">Products A-Z</a></li>
+                        <li><a href="https://www.oracle.com/legal/privacy/" target="_blank">Terms of Use & Privacy</a></li>
+                        <li><a href="https://www.oracle.com/legal/privacy/privacy-policy.html#11" target="_blank">Cookie Preferences</a></li>
+                        <li><a href="https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html#adchoices" target="_blank">Ad Choices</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
