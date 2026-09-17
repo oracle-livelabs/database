@@ -26,7 +26,7 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
 
 1. Review the questions before submitting your answers.
 
-2. Complete the scored quizzes below. You need a score of 75% or higher to pass. 
+2. Complete the scored quizzes below. You need a score of 75% or higher to pass.
 
     ```quiz score
     Q: What is the recommended patching concept?
@@ -42,7 +42,7 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
     * Yes
     - No
     - Only Release Updates
-    > AutoUpgrade is an easy and convenient way of downloading patches. Supply your MOS credentials and decide which patches to download and AutoUpgrade takes care of the rest. 
+    > AutoUpgrade is an easy and convenient way of downloading patches. Supply your MOS credentials and decide which patches to download and AutoUpgrade takes care of the rest.
     ```
 
     ```quiz score
@@ -79,7 +79,7 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
     * Only open PDBs are patched
     - Datapatch never touches the root container (CDB$ROOT)
     > OPatch updates and patches the files in the Oracle home. Datapatch works only inside the database. OUI is used to attach the Oracle home to the local inventory and do installation tasks only.
-    ``` 
+    ```
 
     ```quiz score
     Q: Which tool is responsible for patching the Oracle home?
@@ -88,7 +88,7 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
     - Datapatch and OPatch in combination
     - Oracle Universal Installer (runInstaller)
     > OPatch updates and patches the files in the Oracle home. Datapatch works only inside the database. OUI is used to attach the Oracle home to the local inventory and do installation tasks only.
-    ```    
+    ```
 
     ```quiz score
     Q: Where does Datapatch store information?
@@ -96,8 +96,8 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
     - In the hidden .patch_storage directory in the Oracle home
     - In XML files in diagnostic destination
     - Datapatch never stores information, just log files in $ORACLE_BASE
-    > Datapatch stores patching related information and rollback scripts inside the database in the data dictionary. 
-    ```    
+    > Datapatch stores patching related information and rollback scripts inside the database in the data dictionary.
+    ```
 
     ```quiz score
     Q: Which of the following statements is incorrect?
@@ -106,7 +106,7 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
     - AutoUpgrade works on all platforms
     - AutoUpgrade can install Oracle homes and create gold images
     > AutoUpgrade can patch a database to a new or existing Oracle home. You can create a new Oracle home separately and later patch the database.
-    ``` 
+    ```
 
     ```quiz score
     Q: What license is required for using AutoUpgrade?

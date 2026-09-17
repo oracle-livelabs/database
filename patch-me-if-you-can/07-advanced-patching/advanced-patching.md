@@ -54,7 +54,6 @@ In Lab 4, you patched the *UPGR* database to 19.32. Imagine that you found a cri
 
 You can also roll back manually. In Lab 6, you patched the *CDB19* database to 19.32. Now, you will roll back to 19.31.
 
-
 1. Use the *blue* terminal 🟦. Set the environment to the *CDB19* database and connect.
 
     ``` sql
@@ -62,8 +61,6 @@ You can also roll back manually. In Lab 6, you patched the *CDB19* database to 1
     . cdb19
     sql / as sysdba
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
 2. Shut down the database.
@@ -76,7 +73,7 @@ You can also roll back manually. In Lab 6, you patched the *CDB19* database to 1
 
 3. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
@@ -147,7 +144,7 @@ You can also roll back manually. In Lab 6, you patched the *CDB19* database to 1
 
 7. Connect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
@@ -161,8 +158,6 @@ You can also roll back manually. In Lab 6, you patched the *CDB19* database to 1
     alter pluggable database all open;
     exit
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
 9. Run Datapatch to rollback the SQL changes from the database. It takes a few minutes. Leave Datapatch running and move to the next task. Do not close the terminal.
@@ -191,13 +186,13 @@ In Task 1, you left AutoUpgrade while it performed the rollback of *UPGR*.
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs restored                  [1]
     Jobs failed                    [0]
     Please check the summary report at:
     /home/oracle/logs/simple-patching-existing-home/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/simple-patching-existing-home/cfgtoollogs/upgrade/auto/status/status.log
-    Exiting    
+    Exiting
     ```
 
     </details>
@@ -230,20 +225,18 @@ In Task 1, you left AutoUpgrade while it performed the rollback of *UPGR*.
 
     </details>
 
-4. Set the environment and connect to *UPGR*. 
+4. Set the environment and connect to *UPGR*.
 
-    ``` bash
+    ``` sql
     <copy>
     . upgr
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-6. Verify the database version.
+5. Verify the database version.
 
-    ``` bash
+    ``` sql
     <copy>
     select version_full from v$instance;
     </copy>
@@ -257,26 +250,26 @@ In Task 1, you left AutoUpgrade while it performed the rollback of *UPGR*.
     ``` text
        VERSION_FULL
     _______________
-    19.31.0.0.0    
+    19.31.0.0.0
     ```
 
     </details>
 
-7. Exit SQLcl.
+6. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
 ## Task 4: Manual Rollback, Continued
 
 In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to complete the rollback.
 
-1. Switch back to the *blue* terminal 🟦. 
+1. Switch back to the *blue* terminal 🟦.
 
-2. Datapatch should be done by now. Check the output. 
+2. Datapatch should be done by now. Check the output.
 
     * 19.32 Release Update and matching bundle patches were rolled back.
     * 19.31 Release Update and matching bundle patches were applied.
@@ -288,20 +281,20 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
     ``` text
     SQL Patching tool version 19.31.0.0.0 Production on Wed Sep  2 09:16:32 2026
     Copyright (c) 2012, 2026, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_126847_2026_09_02_09_16_32/sqlpatch_invocation.log
-    
+
     Connecting to database...OK
     Gathering database info...done
-    
+
     Note:  Datapatch will only apply or rollback SQL fixes for PDBs
            that are in an open state, no patches will be applied to closed PDBs.
            Please refer to Note: Datapatch: Database 12c Post Patch SQL Automation
            (Doc ID 1585822.1)
-    
+
     Bootstrapping registry and package to current versions...done
     Determining current state...done
-    
+
     Current state of interim SQL patches:
     Interim patch 38194382 (OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382)):
       Binary registry: Not installed
@@ -366,7 +359,7 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
       PDB PDB$SEED: Applied successfully on 02-SEP-26 08.40.42.210025 AM
       PDB TERRACOTTA: Applied successfully on 02-SEP-26 08.40.42.928391 AM
       PDB INDIGO: Applied successfully on 02-SEP-26 08.40.42.928391 AM
-    
+
     Current state of release update SQL patches:
       Binary registry:
         19.31.0.0.0 Release_Update 260514003012: Installed
@@ -379,8 +372,8 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
       PDB TERRACOTTA:
         Applied 19.32.0.0.0 Release_Update 260705220710 successfully on 02-SEP-26 08.40.34.380717 AM
       PDB INDIGO:
-        Applied 19.32.0.0.0 Release_Update 260705220710 successfully on 02-SEP-26 08.40.34.380717 AM  
-    
+        Applied 19.32.0.0.0 Release_Update 260705220710 successfully on 02-SEP-26 08.40.34.380717 AM
+
     Adding patches to installation queue and performing prereq checks...done
     Installation queue:
       For the following PDBs: CDB$ROOT PDB$SEED ORANGE TERRACOTTA INDIGO
@@ -392,10 +385,10 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
         The following interim patches will be applied:
           38906621 (OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621))
           39196236 (DATAPUMP BUNDLE PATCH 19.31.0.0.0)
-    
+
     Installing patches...
     Patch installation complete.  Total patches installed: 20
-    
+
     Validating logfiles...done
     Patch 39222882 rollback (pdb CDB$ROOT): SUCCESS
       logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_rollback_CDB19_CDBROOT_2026Sep02_09_16_58.log (no errors)
@@ -446,21 +439,21 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
     Patch 38906621 apply (pdb INDIGO): SUCCESS
       logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_apply_CDB19_INDIGO_2026Sep02_09_17_40.log (no errors)
     Patch 39196236 apply (pdb INDIGO): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_apply_CDB19_INDIGO_2026Sep02_09_17_50.log (no errors)      
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_apply_CDB19_INDIGO_2026Sep02_09_17_50.log (no errors)
     SQL Patching tool complete on Wed Sep  2 09:18:19 2026
     ```
 
     </details>
 
-2. Connect to the database.
+3. Connect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
     ```
 
-3. Update the directories that points to the Oracle home.
+4. Update the directories that points to the Oracle home.
 
     ``` python
     <copy>
@@ -504,14 +497,12 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
 
     </details>
 
-4. Check the directories.
+5. Check the directories.
 
     ``` sql
     <copy>
     select directory_name , directory_path from dba_directories where owner='SYS' order by 2;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * All of them now points to the current Oracle home.
@@ -543,13 +534,13 @@ In Task 2, you left Datapatch while it applied the SQL changes to *CDB19* to com
 
     </details>
 
-5. Exit SQLcl.
+6. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
 ## Task 5: Check Software Components
 
@@ -628,7 +619,7 @@ In the Oracle home you find other software components, that is patched together 
     Java HotSpot(TM) 64-Bit Server VM (build 25.491-b10, mixed mode)
     ```
 
-    </details>    
+    </details>
 
 3. Compare the version of the Perl components.
 
@@ -654,7 +645,7 @@ In the Oracle home you find other software components, that is patched together 
     This is perl 5, version 38, subversion 4 (v5.38.4) built for x86_64-linux-thread-multi
     ```
 
-    </details>    
+    </details>
 
 ## Task 6: Enable Optimizer Fixes
 
@@ -662,13 +653,11 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
 1. Switch to the *yellow* terminal 🟨. Set the environment to the *BEIGE* database and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . beige
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
 2. List all the optimizer fixes that were added by the last Release Update.
@@ -678,8 +667,6 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
     set serveroutput on;
     execute dbms_optim_bundle.getBugsforBundle;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * *BEIGE* has already been patched to 19.31.
@@ -695,14 +682,14 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
         Bug: 31495387,  fix_controls: 31495387
         Bug: 33875479,  fix_controls: 32455005
         Bug: 34396205,  fix_controls: 34396205
-    
-    
+
+
     PL/SQL procedure successfully completed.
     ```
 
     </details>
 
-2. List all the previous Release Updates that has optimizer fixes.
+3. List all the previous Release Updates that has optimizer fixes.
 
     ``` sql
     <copy>
@@ -748,7 +735,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-3. Check which fixes were included in the 19.4 Release Update.
+4. Check which fixes were included in the 19.4 Release Update.
 
     ``` sql
     <copy>
@@ -772,7 +759,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-4. The state of each optimizer fix is recorded in the parameter `_fix_control`. Check the value of it.
+5. The state of each optimizer fix is recorded in the parameter `_fix_control`. Check the value of it.
 
     ``` sql
     <copy>
@@ -793,7 +780,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-5. Turn all fixes *ON*.
+6. Turn all fixes *ON*.
 
     ``` sql
     <copy>
@@ -820,7 +807,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-6. Check the setting of the `_fix_control` parameter.
+7. Check the setting of the `_fix_control` parameter.
 
     ``` sql
     <copy>
@@ -845,7 +832,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-7. Format the output in a more readable way.
+8. Format the output in a more readable way.
 
     ``` sql
     <copy>
@@ -855,8 +842,6 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
        connect by level <= length ( str ) - length ( replace ( str, ',' ) ) + 1
     ) order by 1;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * Each bug is now in a separate row.
@@ -892,7 +877,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-8. Selectively turn a fix *OFF*.
+9. Selectively turn a fix *OFF*.
 
     ``` sql
     <copy>
@@ -911,29 +896,29 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
     DBMS_OPTIM command: dbms_optim_bundle.set_fix_controls('37818321:0', '*','BOTH', 'NO')
 
     1) Current _fix_control setting for spfile:
-    28965084:1  28776811:1	28567417:1  29132869:1	31444353:0  30927440:1
-    24561942:1  17295505:1	30646077:1  29463553:1	31580374:1  28173995:1
-    29867728:1  31974424:1	28708585:1  26758837:1	32205825:1  31912834:1
-    31843716:0  33443834:1	34028486:1  34816383:0	35330506:1  30001331:0
+    28965084:1  28776811:1  28567417:1  29132869:1  31444353:0  30927440:1
+    24561942:1  17295505:1  30646077:1  29463553:1  31580374:1  28173995:1
+    29867728:1  31974424:1  28708585:1  26758837:1  32205825:1  31912834:1
+    31843716:0  33443834:1  34028486:1  34816383:0  35330506:1  30001331:0
     ....
     (output truncated)
     ....
-    31009032:1  30235691:1	28234255:3  31143146:1	32578113:1  32800137:0
-    31050103:1  32856375:1	32396085:1  31582179:1	30978868:1  34092979:0
-    18101156:0  29499077:1	31487332:1  25869323:1	33421972:0
-    
+    31009032:1  30235691:1  28234255:3  31143146:1  32578113:1  32800137:0
+    31050103:1  32856375:1  32396085:1  31582179:1  30978868:1  34092979:0
+    18101156:0  29499077:1  31487332:1  25869323:1  33421972:0
+
     3) Current _fix_control setting in memory for sid = BEIGE
     37818321:1
-    
+
     4) Final _fix_control setting for memory considering current_setting_precedence is NO
     37818321:0
-    
+
     PL/SQL procedure successfully completed.
     ```
 
     </details>
 
-9. Check the parameter *\_fix\_control* again and see that the value has changed for bug 37818321 from *1* to *0*.
+10. Check the parameter *\_fix\_control* again and see that the value has changed for bug 37818321 from *1* to *0*.
 
     ``` sql
     <copy>
@@ -958,7 +943,7 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-10. Create a PFile.
+11. Create a PFile.
 
     ``` sql
     <copy>
@@ -977,15 +962,15 @@ Optimizer fixes are provided as part of the Release Update. However, optimizer f
 
     </details>
 
-11. Exit SQLcl.
+12. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
     ```
 
-12. Check the lengthy *\_fix\_control* parameter in the PFile.
+13. Check the lengthy *\_fix\_control* parameter in the PFile.
 
     ``` bash
     <copy>

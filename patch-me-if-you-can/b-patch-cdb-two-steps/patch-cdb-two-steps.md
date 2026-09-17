@@ -103,8 +103,9 @@ None.
     </details>
 
 4. **Installing a new 26ai Oracle home takes approximately 5 minutes.**
-  * It is faster to create a 26ai Oracle home than a 19c Oracle home.
-  * Starting with 26ai, Oracle delivers up-to-date gold images that contain the newest Release Update, JDK, and OCW components. You avoid the time it takes to apply those patches.
+
+    * It is faster to create a 26ai Oracle home than a 19c Oracle home.
+    * Starting with 26ai, Oracle delivers up-to-date gold images that contain the newest Release Update, JDK, and OCW components. You avoid the time it takes to apply those patches.
 
 5. Wait for AutoUpgrade to complete.
 
@@ -174,7 +175,7 @@ None.
     39593097;DATAPUMP BUNDLE PATCH 23.26.3.0.0
     39578859;OCW RELEASE UPDATE 23.26.3.0.0 (39578859) Gold Image
     39578879;Database Release Update : 23.26.3.0.0 (39578879) Gold Image
-    
+
     OPatch succeeded.
     ```
 
@@ -218,18 +219,16 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
 3. Set the environment and connect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
 4. Open all PDBs.
 
-    ``` bash
+    ``` sql
     <copy>
     alter pluggable database all open;
     </copy>
@@ -240,7 +239,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     ``` text
     SQL> alter pluggable database all open;
-    
+
     Pluggable database altered.
     ```
 
@@ -248,13 +247,13 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
 5. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
-6. Re-analyze the database. 
+6. Re-analyze the database.
 
     ``` bash
     <copy>
@@ -334,6 +333,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     # Be sure to press RETURN
     ```
+
 10. Close Firefox.
 
 ## Task 3: Patch Database
@@ -384,21 +384,21 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
 
     ``` text
     Details
-    
+
         Job No           102
         Oracle SID       CDB26
         Start Time       26/09/03 08:29:53
         Elapsed (min):   0
         End time:        N/A
-    
+
     Logfiles
-    
+
         Logs Base:    /home/oracle/logs/two-step-patching/CDB26
         Job logs:     /home/oracle/logs/two-step-patching/CDB26/102
         Stage logs:   /home/oracle/logs/two-step-patching/CDB26/102/prefixups
         TimeZone:     /home/oracle/logs/two-step-patching/CDB26/temp
         Remote Dirs:
-    
+
     Stages
         SETUP            <1 min
         GRP              <1 min
@@ -411,9 +411,9 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
         POSTFIXUPS
         POSTUPGRADE
         SYSUPDATES
-    
+
     Stage-Progress Per Container
-    
+
         +--------+---------+
         |Database|PREFIXUPS|
         +--------+---------+
@@ -423,7 +423,7 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
         |    BLUE|    0  % |
         |   GREEN|    0  % |
         +--------+---------+
-    
+
     The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
 
@@ -440,13 +440,13 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
     Jobs restored                  [0]
     Jobs pending                   [0]
-    
-    
+
+
     Please check the summary report at:
     /home/oracle/logs/simple-patching-existing-home/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/simple-patching-existing-home/cfgtoollogs/upgrade/auto/status/status.log
@@ -462,20 +462,18 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
     </copy>
     ```
 
-7. Set the environment and connect.
+6. Set the environment and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-8. Check the version.
+7. Check the version.
 
-    ``` bash
+    ``` sql
     <copy>
     select version_full from v$instance;
     </copy>
@@ -492,17 +490,17 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
 
     </details>
 
-9. Exit SQLcl.
+8. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
-10. You have now patched your Oracle AI Database.
+9. You have now patched your Oracle AI Database.
 
-This is the end of *Patch Me If You Can*. 
+This is the end of *Patch Me If You Can*.
 
 ## Acknowledgements
 

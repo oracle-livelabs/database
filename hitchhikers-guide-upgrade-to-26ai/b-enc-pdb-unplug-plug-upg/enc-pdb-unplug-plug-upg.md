@@ -16,26 +16,24 @@ In this lab, you will:
 
 ### Prerequisites
 
-None. 
+None.
 
 ## Task 1: Start Databases
 
 1. Start a new terminal or use an existing one. You can use any terminal for this lab.
 
-1. Set the environment to the 26ai target CDB, *CDB26ENC*, and connect.
+2. Set the environment to the 26ai target CDB, *CDB26ENC*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26enc
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-2. Start the database.
+3. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
@@ -43,35 +41,32 @@ None.
 
     * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.
 
-3. Exit SQLcl.
+4. Exit SQLcl.
 
     ``` bash
     <copy>
     exit
     </copy>
-    ```        
+    ```
 
-4. Set the environment to the 19c source CDB, *CDB19ENC*, and connect.
+5. Set the environment to the 19c source CDB, *CDB19ENC*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb19enc
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-5. Start the database.
+6. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
     ```
 
-    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.    
-
+    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.
 
 ## Task 2: Encrypt PDB
 
@@ -79,19 +74,17 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
 1. Connect to the *PLUM* PDB, create an encryption key, and an encrypted tablespace.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=PLUM;
     administer key management set key force keystore identified by "oracle_4U" with backup;
     create tablespace users datafile size 50m autoextend on next 50m encryption using 'AES256' encrypt;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * The PDB is configured to use a unified keystore. This is the default configuration.
     * You must use the CDB keystore password (`oracle_4U`) to create a new encryption key in the PDB.
-    * The tablespace uses the AES256 encryption algorithm. This is a stronger algorithm than AES128, the default in Oracle Database 19c. 
+    * The tablespace uses the AES256 encryption algorithm. This is a stronger algorithm than AES128, the default in Oracle Database 19c.
     * In Oracle AI Database 26ai, the default changes to AES256 to meet modern security requirements.
 
     <details>
@@ -115,17 +108,15 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
 2. Create a schema and sample data in the encrypted tablespace.
 
-    ``` bash
+    ``` sql
     <copy>
     create user appuser no authentication;
     grant resource to appuser;
     alter user appuser quota unlimited on users;
-    create table appuser.t1 
-        tablespace users 
-        as select systimestamp as ts, 'Hello' as msg from dual;    
+    create table appuser.t1
+        tablespace users
+        as select systimestamp as ts, 'Hello' as msg from dual;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * Notice the *NO AUTHENTICATION* clause on the `CREATE USER` statement.
@@ -152,19 +143,17 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
       2     tablespace users
       3*    as select systimestamp as ts, 'Hello' as msg from dual;
 
-    Table APPUSER.T1 created.    
+    Table APPUSER.T1 created.
     ```
 
     </details>
 
 3. Verify that the sample data is stored in the encrypted tablespace, *USERS*.
 
-    ``` bash
+    ``` sql
     <copy>
     select tablespace_name, encrypted from dba_tablespaces;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     <details>
@@ -177,7 +166,7 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     SYSAUX             NO
     UNDOTBS1           NO
     TEMP               NO
-    USERS              YES    
+    USERS              YES
     ```
 
     </details>
@@ -188,7 +177,8 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     <copy>
     exit
     </copy>
-    ```    
+    ```
+
 ## Task 3: Analyze the database
 
 Analyze the *PLUM* PDB for upgrade readiness.
@@ -202,11 +192,11 @@ Analyze the *PLUM* PDB for upgrade readiness.
     ```
 
     * AutoUpgrade has its own keystore where it can store sensitive information, such as database keystore passwords.
-    * The location for the AutoUpgrade keystore is defined by `global.keystore`. 
+    * The location for the AutoUpgrade keystore is defined by `global.keystore`.
     * Do not confuse the AutoUpgrade keystore with the database keystore, which holds the tablespace encryption keys.
     * `sid` and `target_cdb` identify the source and target CDBs, respectively.
     * `pdbs` is the PDB to upgrade, or a comma-separated list of PDBs.
-    * You want to plug in the PDB and reuse its data files, so you omit `target_pdb_copy_option`. 
+    * You want to plug in the PDB and reuse its data files, so you omit `target_pdb_copy_option`.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -371,7 +361,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
           ------------------------------  ----------------------------------------
           ORACLE_SID                      Action Required
           CDB19ENC                        Add TDE password
-          CDB26ENC                        Add TDE password      
+          CDB26ENC                        Add TDE password
     ```
 
 5. Load the database keystore passwords into the AutoUpgrade keystore. Start the password loader.
@@ -393,7 +383,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
     Enter password:
     ```
 
-7. Because this is the first time you are starting the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password. Use the following AutoUpgrade keystore password twice:
+6. Because this is the first time you are starting the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password. Use the following AutoUpgrade keystore password twice:
 
     ``` bash
     <copy>
@@ -414,7 +404,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-8. Add the database keystore password for *CDB19ENC*.
+7. Add the database keystore password for *CDB19ENC*.
 
     ``` bash
     <copy>
@@ -441,7 +431,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-9. Add the database keystore password for *CDB26ENC*.
+8. Add the database keystore password for *CDB26ENC*.
 
     ``` bash
     <copy>
@@ -468,7 +458,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-10. Save the AutoUpgrade keystore and convert it to an auto-login keystore.
+9. Save the AutoUpgrade keystore and convert it to an auto-login keystore.
 
     ``` bash
     <copy>
@@ -490,7 +480,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-11. Exit the AutoUpgrade password loader.
+10. Exit the AutoUpgrade password loader.
 
     ``` bash
     <copy>
@@ -509,7 +499,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-12. Re-analyze the database for upgrade readiness. Now that you have added the database keystore passwords to the AutoUpgrade keystore, you can re-analyze the PDB to verify that it meets the requirements. The analysis takes a short while. Wait for it to complete.
+11. Re-analyze the database for upgrade readiness. Now that you have added the database keystore passwords to the AutoUpgrade keystore, you can re-analyze the PDB to verify that it meets the requirements. The analysis takes a short while. Wait for it to complete.
 
     ``` bash
     <copy>
@@ -518,7 +508,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
     ```
 
     * Notice the console messages about the AutoUpgrade keystore.
-    * Since you've created an AutoUpgrade keystore, AutoUpgrade now reads it on startup. 
+    * Since you've created an AutoUpgrade keystore, AutoUpgrade now reads it on startup.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -546,7 +536,7 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-13. Check the results in the summary report.
+12. Check the results in the summary report.
 
     ``` bash
     <copy>
@@ -586,11 +576,11 @@ Analyze the *PLUM* PDB for upgrade readiness.
 
     </details>
 
-## Task 4: Upgrade 
+## Task 4: Upgrade
 
 All prerequisites have been met. You can now start the upgrade.
 
-1. Start the upgrade using AutoUpgrade in deploy mode. 
+1. Start the upgrade using AutoUpgrade in deploy mode.
 
     ``` bash
     <copy>
@@ -663,7 +653,7 @@ All prerequisites have been met. You can now start the upgrade.
 
 4. Set the environment to *CDB26ENC* and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26enc
     sql / as sysdba
@@ -672,7 +662,7 @@ All prerequisites have been met. You can now start the upgrade.
 
 5. Ensure that the *PLUM* PDB has been plugged in and is open in *READ WRITE* mode and unrestricted.
 
-    ``` bash
+    ``` sql
     <copy>
     show pdbs
     </copy>
@@ -694,7 +684,7 @@ All prerequisites have been met. You can now start the upgrade.
 
 6. Switch to the *PLUM* PDB and ensure the *USERS* tablespace is still encrypted.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=PLUM;
     select tablespace_name, encrypted from dba_tablespaces;
@@ -718,14 +708,14 @@ All prerequisites have been met. You can now start the upgrade.
     UNDOTBS1                       NO
     TEMP                           NO
     USERS                          YES
-    
+
     ```
 
     </details>
 
 7. Verify that the PDB is using a keystore.
 
-    ``` bash
+    ``` sql
     <copy>
     select wrl_type, status, wallet_type, keystore_mode from v$encryption_wallet;
     </copy>

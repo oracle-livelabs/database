@@ -28,10 +28,10 @@ None.
     </copy>
     ```
 
-    * You only use AutoUpgrade only for the pre-upgrade analysis and fixups. 
+    * You only use AutoUpgrade only for the pre-upgrade analysis and fixups.
     * `sid` and `target_cdb` specify the SID of the source and target CDB.
     * `pdbs` is the PDB to upgrade, or a comma-separated list of PDBs.
-    
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -67,7 +67,6 @@ None.
     * The report states *Check passed and no manual intervention needed*.
     * Oracle recommends that you examine the detailed preupgrade report, but to save time in this lab, you skip it.
 
-
     <details>
     <summary>*click to see the output*</summary>
 
@@ -100,7 +99,7 @@ None.
 
 During your maintenance window, you perform the upgrade.
 
-1. Still in the *blue* 🟦 terminal. Now, you start the pre-upgrade fixups. This prepares the database for the upgrade. 
+1. Still in the *blue* 🟦 terminal. Now, you start the pre-upgrade fixups. This prepares the database for the upgrade.
 
     * **In the interest of time, you skip this step in the lab.**
     * The command is shown only for learning purposes.
@@ -113,7 +112,7 @@ During your maintenance window, you perform the upgrade.
 
 2. Set the environment to the source CDB, *CDB19*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb19
     sql / as sysdba
@@ -122,14 +121,12 @@ During your maintenance window, you perform the upgrade.
 
 3. Unplug the *TERRACOTTA* PDB and remove it.
 
-    ``` bash
+    ``` sql
     <copy>
     alter pluggable database terracotta close;
     alter pluggable database terracotta unplug into '/home/oracle/scripts/terracotta.xml';
-    drop pluggable database terracotta keep datafiles;     
+    drop pluggable database terracotta keep datafiles;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * First, you close the PDB.
@@ -150,7 +147,7 @@ During your maintenance window, you perform the upgrade.
 
     SQL> drop pluggable database terracotta keep datafiles;
 
-    Pluggable database TERRACOTTA dropped.    
+    Pluggable database TERRACOTTA dropped.
     ```
 
     </details>
@@ -162,26 +159,28 @@ During your maintenance window, you perform the upgrade.
     exit
     </copy>
     ```
+
 5. Now set the environment to the target CDB, *CDB26*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
     </copy>
     ```
+
 6. Plug in the *TERRACOTTA* PDB.
 
-    ``` bash
+    ``` sql
     <copy>
     create pluggable database terracotta using '/home/oracle/scripts/terracotta.xml' NOCOPY;
     </copy>
     ```
 
     * The target CDB now reads the manifest file and plugs the *TERRACOTTA* PDB into the CDB.
-    * It reuses the data files in their current location because the `NOCOPY` clause is specified. 
+    * It reuses the data files in their current location because the `NOCOPY` clause is specified.
     * You can copy or move the data files by modifying the `CREATE PLUGGABLE DATABASE` statement accordingly.
-    
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -195,17 +194,17 @@ During your maintenance window, you perform the upgrade.
 
 7. Ensure Replay Upgrade is enabled.
 
-    ``` bash
+    ``` sql
     <copy>
-    select property_name, property_value 
-    from   database_properties 
+    select property_name, property_value
+    from   database_properties
     where  property_name like '%ON_OPEN';
     </copy>
     ```
 
     * `UPGRADE_PDB_ON_OPEN` is true, so Replay Upgrade is turned on.
-    * There is also a property called `CONVERT_NONCDB_ON_OPEN`. This controls whether non-CDB databases are automatically converted instead of manually calling the `noncdb_to_pdb.sql` script. 
-    
+    * There is also a property called `CONVERT_NONCDB_ON_OPEN`. This controls whether non-CDB databases are automatically converted instead of manually calling the `noncdb_to_pdb.sql` script.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -220,7 +219,7 @@ During your maintenance window, you perform the upgrade.
 
 8. Open the PDB.
 
-    ``` bash
+    ``` sql
     <copy>
     set timing on
     alter pluggable database terracotta open;
@@ -236,13 +235,13 @@ During your maintenance window, you perform the upgrade.
 
     ``` text
     SQL> alter pluggable database terracotta open;
-    
-    
+
+
     ```
 
     </details>
 
-9. Leave the upgrade running. Do not exit. 
+9. Leave the upgrade running. Do not exit.
 
 10. You return to this upgrade in a later lab.
 

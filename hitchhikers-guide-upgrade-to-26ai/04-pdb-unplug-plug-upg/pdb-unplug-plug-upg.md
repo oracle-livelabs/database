@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will upgrade a single PDB using an unplug-plug upgrade. You unplug the PDB from the 19c CDB, plug it into a 26ai CDB, and perform the upgrade. Unplug-plug upgrades are faster than full CDB upgrades because you only need to upgrade the PDB, not the full CDB. You will copy the data files during plug-in. This takes longer but provides a better rollback option. 
+In this lab, you will upgrade a single PDB using an unplug-plug upgrade. You unplug the PDB from the 19c CDB, plug it into a 26ai CDB, and perform the upgrade. Unplug-plug upgrades are faster than full CDB upgrades because you only need to upgrade the PDB, not the full CDB. You will copy the data files during plug-in. This takes longer but provides a better rollback option.
 
 Estimated Time: 10 minutes
 
@@ -22,29 +22,25 @@ None.
 
 You can plug it into an existing 26ai CDB on the same machine. AutoUpgrade handles the entire process. You start by checking the source database for upgrade readiness.
 
-1. Use the *yellow* 🟨 terminal. Set the environment to *CDB19* and connect. 
+1. Use the *yellow* 🟨 terminal. Set the environment to *CDB19* and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb19
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
 2. Switch to the *ORANGE* PDB and check the `COMPATIBLE` parameter.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=ORANGE;
     select value from v$parameter where name='compatible';
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-    * The `COMPATIBLE` parameter is set to `19.0.0`. 
+    * The `COMPATIBLE` parameter is set to `19.0.0`.
     * You will learn more about this parameter in a later lab.
 
     <details>
@@ -64,7 +60,7 @@ You can plug it into an existing 26ai CDB on the same machine. AutoUpgrade handl
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
 4. For this lab, you use a precreated config file. Examine the precreated config file.
 
@@ -76,8 +72,8 @@ You can plug it into an existing 26ai CDB on the same machine. AutoUpgrade handl
 
     * `sid` and `target_cdb` specify the SID of the source and target CDB. respectively.
     * `pdbs` is a comma-separated list of PDBs to upgrade.
-    * `target_pdb_copy_option` instructs AutoUpgrade to copy the data files during plug-in. Because this environment uses Oracle Managed Files (OMF), the configuration specifies `file_name_convert=none`. 
-    
+    * `target_pdb_copy_option` instructs AutoUpgrade to copy the data files during plug-in. Because this environment uses Oracle Managed Files (OMF), the configuration specifies `file_name_convert=none`.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -177,12 +173,12 @@ During your maintenance window, start AutoUpgrade to perform the upgrade.
     </copy>
     ```
 
-    * AutoUpgrade now unplugs the PDB from *CDB19*. 
+    * AutoUpgrade now unplugs the PDB from *CDB19*.
     * When plugging the PDB into *CDB26*, AutoUpgrade instructs the CDB to copy the data files.
     * This preserves the original data files for rollback.
-    * Finally, it upgrades the PDB. 
+    * Finally, it upgrades the PDB.
 
-3. Leave the upgrade running. Do not exit AutoUpgrade. 
+3. Leave the upgrade running. Do not exit AutoUpgrade.
 
 4. You will return to this upgrade in a later lab.
 
@@ -195,7 +191,6 @@ Upgrading a single PDB using an unplug-plug upgrade is faster than performing a 
 * Webinar, [Move to Oracle Database 23ai – Everything you need to know about Oracle Multitenant – Part 2](https://www.youtube.com/watch?v=Sm75OIWagkE&t=3185s)
 * Slides, [Move to Oracle Database 23ai – Everything you need to know about Oracle Multitenant – Part 2](https://dohdatabase.com/wp-content/uploads/2024/06/vc20_multitenant_part2-1.pdf)
 * Blog post, [Upgrade Oracle Database 19c PDB to 26ai](https://dohdatabase.com/2026/02/17/upgrade-oracle-database-19c-pdb-to-26ai/)
-
 
 ## Acknowledgements
 

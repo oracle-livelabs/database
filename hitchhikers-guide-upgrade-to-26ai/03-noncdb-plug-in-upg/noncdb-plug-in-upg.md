@@ -35,7 +35,7 @@ You can plug in to an existing CDB on the same machine. AutoUpgrade handles the 
     * `target_cdb` is the CDB into which you want to plug in.
     * `timezone_upg` instructs AutoUpgrade to skip the upgrade of the timezone file to save time. You can upgrade it later.
     * `run_dictionary_health` executes a dictionary check. This checks for corruptions in the data dictionary.
-    
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -137,17 +137,17 @@ Inside your maintenance window, you start AutoUpgrade to perform the upgrade and
 
     * AutoUpgrade now upgrades the database.
 
-3. Leave the upgrade running. Do not exit AutoUpgrade. 
+3. Leave the upgrade running. Do not exit AutoUpgrade.
 
 ## Task 3: Further Information
 
-1. In this lab, you instruct AutoUpgrade to reuse the data files. 
-    * After shutting down the non-CDB, AutoUpgrade creates the PDB and points to the existing data files. 
-    * This is faster but you must consider your rollback options. If something goes wrong during the upgrade or conversion to a PDB, you cannot use Flashback Database to reverse the PDB conversion. It can't undo the PDB conversion. 
+1. In this lab, you instruct AutoUpgrade to reuse the data files.
+    * After shutting down the non-CDB, AutoUpgrade creates the PDB and points to the existing data files.
+    * This is faster but you must consider your rollback options. If something goes wrong during the upgrade or conversion to a PDB, you cannot use Flashback Database to reverse the PDB conversion. It can't undo the PDB conversion.
     * You must have other rollback options, such as RMAN backups or storage snapshots.
 
-2. An alternative approach is to copy the data files during the plug-in. 
-    * This creates a copy of the data files and thus preserves the source non-CDB in case you must roll back. 
+2. An alternative approach is to copy the data files during the plug-in.
+    * This creates a copy of the data files and thus preserves the source non-CDB in case you must roll back.
     * However, it takes time and requires additional disk space to copy the data files.
     * f you want to copy the data files during the plug-in, use the config file parameter `target_pdb_copy_option`. If you use OMF or ASM, specify the following:
 
@@ -157,7 +157,7 @@ Inside your maintenance window, you start AutoUpgrade to perform the upgrade and
 
 ## Task 4: Install Oracle Home
 
-While the upgrade continues, you use AutoUpgrade to install an Oracle home. The Oracle home is not used in this lab, but the task is for educational purposes while the upgrade completes. 
+While the upgrade continues, you use AutoUpgrade to install an Oracle home. The Oracle home is not used in this lab, but the task is for educational purposes while the upgrade completes.
 
 1. Switch to the *blue* 🟦 terminal. Examine the following config file:
 
@@ -168,9 +168,9 @@ While the upgrade continues, you use AutoUpgrade to install an Oracle home. The 
     ```
 
     * AutoUpgrade creates a new Oracle home in the `target_home` location.
-    * It copies the settings (language, groups, options, etc.) from the `source_home`. 
+    * It copies the settings (language, groups, options, etc.) from the `source_home`.
     * AutoUpgrade also installs the recommended patches specified by the `patch` parameter.
-    * The `RECOMMENDED` keyword gives you the latest Release Update, latest OPatch, latest MRP and Data Pump bundle patch. 
+    * The `RECOMMENDED` keyword gives you the latest Release Update, latest OPatch, latest MRP and Data Pump bundle patch.
     * The target must be a 26ai Oracle home.
 
     <details>
@@ -182,7 +182,7 @@ While the upgrade continues, you use AutoUpgrade to install an Oracle home. The 
     upg1.target_home=/u01/app/oracle/product/dbhome_263
     upg1.download_folder=/home/oracle/patch-repo
     upg1.patch=RECOMMENDED
-    upg1.target_version=26    
+    upg1.target_version=26
     ```
 
     </details>
@@ -210,16 +210,16 @@ While the upgrade continues, you use AutoUpgrade to install an Oracle home. The 
 
     </details>
 
-3. The installation of an Oracle home is much faster with Oracle AI Database 26ai. 
-    * Oracle provides fully updated gold images that you can extract and install directly. 
+3. The installation of an Oracle home is much faster with Oracle AI Database 26ai.
+    * Oracle provides fully updated gold images that you can extract and install directly.
     * OPatch is already updated, and the gold image comes with an updated OCW component and the latest JDK updates.
 
-4. When you upgrade, you need an Oracle home on the new release. 
-    * Most likely, you want the new Oracle home to look exactly like the old Oracle home, but on the new release. 
-    * AutoUpgrade makes this very easy. You just specify the source Oracle home, and it will copy all the settings, like language, OS groups and other options. 
+4. When you upgrade, you need an Oracle home on the new release.
+    * Most likely, you want the new Oracle home to look exactly like the old Oracle home, but on the new release.
+    * AutoUpgrade makes this very easy. You just specify the source Oracle home, and it will copy all the settings, like language, OS groups and other options.
 
-5. In this lab, the gold images and patches have already been downloaded. 
-    * You can also use AutoUpgrade to download patches from My Oracle Support. 
+5. In this lab, the gold images and patches have already been downloaded.
+    * You can also use AutoUpgrade to download patches from My Oracle Support.
     * Instead of manually finding and downloading the patches, you just create a simple config file and AutoUpgrade downloads the patches for you.
     * Due to security reasons, downloading of patches is not possible in this workshop.
 
@@ -240,7 +240,7 @@ While the upgrade continues, you use AutoUpgrade to install an Oracle home. The 
 
     Please check the summary report at:
     /home/oracle/logs/upg-plugin-install-home/cfgtoollogs/patch/auto/status/status.html
-    /home/oracle/logs/upg-plugin-install-home/cfgtoollogs/patch/auto/status/status.log    
+    /home/oracle/logs/upg-plugin-install-home/cfgtoollogs/patch/auto/status/status.log
     ```
 
     </details>
@@ -278,7 +278,7 @@ While the upgrade continues, you use AutoUpgrade to install an Oracle home. The 
     39578859;OCW RELEASE UPDATE 23.26.3.0.0 (39578859) Gold Image
     39578879;Database Release Update : 23.26.3.0.0 (39578879) Gold Image
 
-    OPatch succeeded.    
+    OPatch succeeded.
     ```
 
     </details>
@@ -290,7 +290,7 @@ While the upgrade continues, you use AutoUpgrade to install an Oracle home. The 
 While the upgrade continues (check on it if you want), you take a closer look at the preupgrade report.
 
 1. Stay in the blue 🟦 terminal. Ealier in the lab, you examined the preupgrade summary report. It references a more detailed preupgrade report. Examine the preupgrade report:
-    
+
     ``` bash
     <copy>
     more /home/oracle/logs/upg-plugin-upgr/UPGR/100/prechecks/upgr_preupgrade.log
@@ -298,11 +298,11 @@ While the upgrade continues (check on it if you want), you take a closer look at
     ```
 
     * In the previous lab, you saw an HTML version of a preupgrade report. Now, you look at the text version.
-    * Scroll through the report using the *SPACEBAR*. 
+    * Scroll through the report using the *SPACEBAR*.
     * First, you see details about the database.
     * Next, the preupgrade findings are grouped into *before upgrade* and *after upgrade*.
-    * Within the groups the individual findings are grouped by severity. 
-    * Notice how many findings have *FixUp Available Yes*. AutoUpgrade clears these findings for you automatically. 
+    * Within the groups the individual findings are grouped by severity.
+    * Notice how many findings have *FixUp Available Yes*. AutoUpgrade clears these findings for you automatically.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -755,14 +755,14 @@ While the upgrade continues (check on it if you want), you take a closer look at
 
     Please check the summary report at:
     /home/oracle/logs/upg-plugin-upgr/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/upg-plugin-upgr/cfgtoollogs/upgrade/auto/status/status.log    
+    /home/oracle/logs/upg-plugin-upgr/cfgtoollogs/upgrade/auto/status/status.log
     ```
 
     </details>
 
 2. Set the environment to the *CDB26* database and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
@@ -771,7 +771,7 @@ While the upgrade continues (check on it if you want), you take a closer look at
 
 3. Check the new PDB.
 
-    ``` bash
+    ``` sql
     <copy>
     select open_mode, restricted from v$pdbs where name='UPGR';
     </copy>
@@ -793,13 +793,11 @@ While the upgrade continues (check on it if you want), you take a closer look at
 
 4. Check the version.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=UPGR;
     select version_full from v$instance;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     <details>
@@ -808,7 +806,7 @@ While the upgrade continues (check on it if you want), you take a closer look at
     ``` text
     VERSION_FULL
     _______________
-    23.26.3.0.0    
+    23.26.3.0.0
     ```
 
     </details>

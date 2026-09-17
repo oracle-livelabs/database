@@ -10,7 +10,7 @@ Estimated Time: 35 minutes
 
 In this lab, you will:
 
-* Upgrade an encrypted PDB *CORAL* and rename it *CHERRY*. 
+* Upgrade an encrypted PDB *CORAL* and rename it *CHERRY*.
 * Create a refreshable clone PDB in the 26ai CDB, *CDB26ENC*.
 * Refresh and upgrade.
 * Use the AutoUpgrade keystore.
@@ -23,44 +23,40 @@ None.
 
 The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
-1. Start a new terminal or use an existing one. This terminal is called *terminal A*. 
+1. Start a new terminal or use an existing one. This terminal is called *terminal A*.
 
-1. Set the environment to the 19c source CDB, *CDB19ENC*, and connect.
+2. Set the environment to the 19c source CDB, *CDB19ENC*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb19enc
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-2. Start the database.
+3. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
     ```
 
-    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.    
+    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.
 
-1. Connect to the *CORAL* PDB, create an encryption key and an encrypted tablespace.
+4. Connect to the *CORAL* PDB, create an encryption key and an encrypted tablespace.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=CORAL;
     administer key management set key force keystore identified by "oracle_4U" with backup;
     create tablespace users datafile size 50m autoextend on next 50m encryption using 'AES256' encrypt;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * The PDB is configured to use a unified keystore. This is the default configuration.
     * You must use the CDB keystore password (`oracle_4U`) to create a new encryption key in the PDB.
-    * The tablespace uses the AES256 encryption algorithm. This is a stronger algorithm than the default, AES128. 
+    * The tablespace uses the AES256 encryption algorithm. This is a stronger algorithm than the default, AES128.
     * In Oracle AI Database 26ai, the default changes to AES256 to meet modern security requirements.
 
     <details>
@@ -82,19 +78,17 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
     </details>
 
-2. Create a schema and sample data in the encrypted tablespace.
+5. Create a schema and sample data in the encrypted tablespace.
 
-    ``` bash
+    ``` sql
     <copy>
     create user appuser no authentication;
     grant resource to appuser;
     alter user appuser quota unlimited on users;
-    create table appuser.t1 
-        tablespace users 
-        as select systimestamp as ts, 'Hello' as msg from dual;    
+    create table appuser.t1
+        tablespace users
+        as select systimestamp as ts, 'Hello' as msg from dual;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * Notice the *NO AUTHENCATION* clause on the `CREATE USER` statement.
@@ -121,19 +115,17 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
       2     tablespace users
       3*    as select systimestamp as ts, 'Hello' as msg from dual;
 
-    Table APPUSER.T1 created.    
+    Table APPUSER.T1 created.
     ```
 
     </details>
 
-3. Verify that the sample data is stored in the encrypted tablespace, *USERS*.
+6. Verify that the sample data is stored in the encrypted tablespace, *USERS*.
 
-    ``` bash
+    ``` sql
     <copy>
     select tablespace_name, encrypted from dba_tablespaces;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     <details>
@@ -146,14 +138,14 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     SYSAUX             NO
     UNDOTBS1           NO
     TEMP               NO
-    USERS              YES    
+    USERS              YES
     ```
 
     </details>
 
-5. Create a user and grant the necessary privileges. You use the user to connect via the database link.
+7. Create a user and grant the necessary privileges. You use the user to connect via the database link.
 
-    ``` bash
+    ``` sql
     <copy>
     create user dblinkuser identified by dblinkuser;
     grant create session to dblinkuser;
@@ -191,32 +183,30 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     Grant succeeded.
     ```
 
-    </details>    
+    </details>
 
-5. Exit SQLcl.
+8. Exit SQLcl.
 
     ``` bash
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
 ## Task 2: Prepare Target CDB
 
 1. Set the environment to the 26ai target CDB, *CDB26ENC*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26enc
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
 2. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
@@ -226,7 +216,7 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
 3. Create a database link pointing to the *CORAL* database.
 
-    ``` bash
+    ``` sql
     <copy>
     create database link clonepdb
     connect to dblinkuser
@@ -253,7 +243,7 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
 4. Ensure that the database link works.
 
-    ``` bash
+    ``` sql
     <copy>
     select * from dual@clonepdb;
     </copy>
@@ -264,13 +254,13 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
 
     ``` text
     SQL> select * from dual@clonepdb;
-    
+
     DUMMY
     ________
     X
     ```
 
-    </details>    
+    </details>
 
 5. Exit SQLcl.
 
@@ -278,7 +268,7 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     <copy>
     exit
     </copy>
-    ```        
+    ```
 
 ## Task 3: Analyze the Database
 
@@ -293,13 +283,13 @@ Analyze the *CORAL* PDB for upgrade readiness.
     ```
 
     * AutoUpgrade has its own keystore where it can store sensitive information, such as database keystore passwords.
-    * The location for the AutoUpgrade keystore is defined by `global.keystore`. 
+    * The location for the AutoUpgrade keystore is defined by `global.keystore`.
     * The AutoUpgrade keystore is not to be confused with the database keystore (which holds the tablespace encryption keys).
     * `sid` and `target_cdb` specifies the source and target CDBs, respectively.
     * `pdbs` is a comma-separated list of PDBs to upgrade.
     * `source_dblink` specifies the database link and the refresh interval in seconds. 60 is unrealistically low and used only for the purpose of this exercise.
-    * `target_pdb_name` allows you to rename the PDB to *CHERRY*. 
-    * `target_pdb_copy_option` pecifies where to create the data files. You use OMF and set it to `file_name_convert=none`. 
+    * `target_pdb_name` allows you to rename the PDB to *CHERRY*.
+    * `target_pdb_copy_option` pecifies where to create the data files. You use OMF and set it to `file_name_convert=none`.
     * `parallel_pdb_creation_clause` is used to avoid overloading the source CDB. Only two channels are used for the initial copy of the database.
     * `start_time` is set to 100 hours from starting AutoUpgrade. We set the process start time far in the future so we can later control the execution using the *proceed* command.
     * `timezone_upg` is used to disable the upgrade of the timezone file. You do this to save time.
@@ -472,7 +462,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
           ORACLE_SID                      Action Required
           ------------------------------  ----------------------------------------
           ORACLE_SID                      Action Required
-          CDB26ENC                        Add TDE password      
+          CDB26ENC                        Add TDE password
     ```
 
 5. Load the database keystore password into the AutoUpgrade keystore. Start the password loader.
@@ -494,7 +484,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
     Enter password:
     ```
 
-7. Because this is the first time you are starting the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password. Use the following AutoUpgrade keystore password twice:
+6. Because this is the first time you are starting the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password. Use the following AutoUpgrade keystore password twice:
 
     ``` bash
     <copy>
@@ -515,7 +505,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
 
     </details>
 
-9. Add the database keystore password for *CDB26ENC*.
+7. Add the database keystore password for *CDB26ENC*.
 
     ``` bash
     <copy>
@@ -542,7 +532,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
 
     </details>
 
-10. Save the AutoUpgrade keystore and convert it to an auto-login keystore.
+8. Save the AutoUpgrade keystore and convert it to an auto-login keystore.
 
     ``` bash
     <copy>
@@ -564,7 +554,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
 
     </details>
 
-11. Exit the AutoUpgrade password loader.
+9. Exit the AutoUpgrade password loader.
 
     ``` bash
     <copy>
@@ -583,7 +573,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
 
     </details>
 
-12. Re-analyze the database for upgrade readiness. Now that you have added the database keystore password to the AutoUpgrade keystore, you can re-analyze the PDB to verify that it meets the requirements. It takes a short while. Wait for it to complete.
+10. Re-analyze the database for upgrade readiness. Now that you have added the database keystore password to the AutoUpgrade keystore, you can re-analyze the PDB to verify that it meets the requirements. It takes a short while. Wait for it to complete.
 
     ``` bash
     <copy>
@@ -592,9 +582,9 @@ Analyze the *CORAL* PDB for upgrade readiness.
     ```
 
     * The analysis must run on the source system. Since the source and target are the same in this lab, you don't need to worry about it.
-    * If the target is on a remote host, you can use the parameter `target_is_remote`. 
+    * If the target is on a remote host, you can use the parameter `target_is_remote`.
     * Notice the console messages about the AutoUpgrade keystore.
-    * Since you've created an AutoUpgrade keystore, AutoUpgrade now reads it on startup. 
+    * Since you've created an AutoUpgrade keystore, AutoUpgrade now reads it on startup.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -622,7 +612,7 @@ Analyze the *CORAL* PDB for upgrade readiness.
 
     </details>
 
-13. Check the results in the summary report.
+11. Check the results in the summary report.
 
     ``` bash
     <copy>
@@ -666,13 +656,14 @@ Analyze the *CORAL* PDB for upgrade readiness.
 
 All prerequisites have been met. You can now start the initial clone of the PDB.
 
-1. Start AutoUpgrade in deploy mode. 
+1. Start AutoUpgrade in deploy mode.
 
     ``` bash
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/upg-coral.cfg -mode deploy
     </copy>
     ```
+
     * AutoUpgrade in deploy mode must run on the target system. Since source and target are on the same system in this lab, you don't need to worry about it.
     * AutoUpgrade creates the clone by copying the data files over the database link.
 
@@ -720,7 +711,7 @@ All prerequisites have been met. You can now start the initial clone of the PDB.
     +----+--------+----------+---------+-------+----------+-------+-----------------------+
     Total jobs 1
 
-    The command lsj is running every 30 seconds. PRESS ENTER TO EXIT    
+    The command lsj is running every 30 seconds. PRESS ENTER TO EXIT
     ```
 
     </details>
@@ -731,11 +722,11 @@ All prerequisites have been met. You can now start the initial clone of the PDB.
 
 So far, you've created a copy of the *CORAL* PDB in the *CDB26ENC* database. Every 60 seconds, *CDB26ENC* fetches redo over the database link and keeps *CHERRY* current.
 
-1. **Start a new terminal, *B*.** 
+1. **Start a new terminal, *B*.**
 
 2. Set the environment to the *CDB19ENC* database and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb19enc
     sql / as sysdba
@@ -744,14 +735,12 @@ So far, you've created a copy of the *CORAL* PDB in the *CDB26ENC* database. Eve
 
 3. Add more test data to the source PDB.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=CORAL;
     insert into appuser.t1 values(systimestamp, 'World');
     commit;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     <details>
@@ -789,7 +778,7 @@ The *REFRESHPDB* phase would normally remain active for the next 100 hours. We s
 
 When the upgrade starts, AutoUpgrade performs a final refresh to apply the latest changes from the source PDB. After the final refresh, no further changes from the source are applied to the clone. AutoUpgrade then stops refreshing the PDB and starts the upgrade.
 
-1. **Remain in the terminal *B*.** 
+1. **Remain in the terminal *B*.**
 
 2. Start the pre-upgrade fixups.
 
@@ -802,7 +791,7 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
 
 3. **Switch back to the terminal *A*.**
 
-3. Press ENTER to stop *lsj* from displaying the job status. Next, run the `proceed` command to force the start of the upgrade process **now**.
+4. Press ENTER to stop *lsj* from displaying the job status. Next, run the `proceed` command to force the start of the upgrade process **now**.
 
     ``` bash
     <copy>
@@ -823,7 +812,7 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
 
     </details>
 
-4. Monitor the progress.
+5. Monitor the progress.
 
     ``` bash
     <copy>
@@ -842,49 +831,49 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
     ``` text
     Details
 
-    	Job No           102
-    	Oracle SID       CDB19ENC
-    	Start Time       26/08/14 12:57:07
-    	Elapsed (min):   0
-    	End time:        N/A
+        Job No           102
+        Oracle SID       CDB19ENC
+        Start Time       26/08/14 12:57:07
+        Elapsed (min):   0
+        End time:        N/A
 
     Logfiles
 
-    	Logs Base:    /home/oracle/logs/upg-coral/CDB19ENC
-    	Job logs:     /home/oracle/logs/upg-coral/CDB19ENC/102
-    	Stage logs:   /home/oracle/logs/upg-coral/CDB19ENC/102/dbupgrade
-    	TimeZone:     /home/oracle/logs/upg-coral/CDB19ENC/temp
-    	Remote Dirs:
+        Logs Base:    /home/oracle/logs/upg-coral/CDB19ENC
+        Job logs:     /home/oracle/logs/upg-coral/CDB19ENC/102
+        Stage logs:   /home/oracle/logs/upg-coral/CDB19ENC/102/dbupgrade
+        TimeZone:     /home/oracle/logs/upg-coral/CDB19ENC/temp
+        Remote Dirs:
 
     Stages
-    	SETUP            <1 min
-    	PREUPGRADE       <1 min
-    	DRAIN            <1 min
-    	CLONEPDB         <1 min
-    	REFRESHPDB       54 min
-    	DISPATCH         <1 min
-    	DISPATCH         <1 min
-    	DBUPGRADE        ~0 min (RUNNING)
-    	UNPLUGWORK
-    	POSTCHECKS
-    	POSTFIXUPS
-    	POSTUPGRADE
-    	SYSUPDATES
+        SETUP            <1 min
+        PREUPGRADE       <1 min
+        DRAIN            <1 min
+        CLONEPDB         <1 min
+        REFRESHPDB       54 min
+        DISPATCH         <1 min
+        DISPATCH         <1 min
+        DBUPGRADE        ~0 min (RUNNING)
+        UNPLUGWORK
+        POSTCHECKS
+        POSTFIXUPS
+        POSTUPGRADE
+        SYSUPDATES
 
     Stage-Progress Per Container
 
-    	+--------+---------+
-    	|Database|DBUPGRADE|
-    	+--------+---------+
-    	|  CHERRY|    0  % |
-    	+--------+---------+
+        +--------+---------+
+        |Database|DBUPGRADE|
+        +--------+---------+
+        |  CHERRY|    0  % |
+        +--------+---------+
 
     The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
 
     </details>
 
-5. The upgrade takes 10-15 minutes. Leave the process running. In the end, AutoUpgrade displays *Job 102 completed* and exits.
+6. The upgrade takes 10-15 minutes. Leave the process running. In the end, AutoUpgrade displays *Job 102 completed* and exits.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -907,18 +896,18 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
 
     </details>
 
-6. Set the environment to *CDB26ENC* and connect.
+7. Set the environment to *CDB26ENC* and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26enc
     sql / as sysdba
     </copy>
     ```
 
-7. Ensure that the *CHERRY* PDB has been plugged in and is open *READ WRITE* and unrestricted.
+8. Ensure that the *CHERRY* PDB has been plugged in and is open *READ WRITE* and unrestricted.
 
-    ``` bash
+    ``` sql
     <copy>
     show pdbs
     </copy>
@@ -938,9 +927,9 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
 
     </details>
 
-8. Drop the database link used for the migration.
+9. Drop the database link used for the migration.
 
-    ``` bash
+    ``` sql
     <copy>
     drop database link clonepdb;
     </copy>
@@ -959,9 +948,9 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
 
     </details>
 
-9. Switch to the *CHERRY* PDB and ensure the *USERS* tablespace is still encrypted.
+10. Switch to the *CHERRY* PDB and ensure the *USERS* tablespace is still encrypted.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=CHERRY;
     select tablespace_name, encrypted from dba_tablespaces;
@@ -985,14 +974,14 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
     UNDOTBS1                       NO
     TEMP                           NO
     USERS                          YES
-    
+
     ```
 
     </details>
 
-10. Verify that the PDB is using a keystore.
+11. Verify that the PDB is using a keystore.
 
-    ``` bash
+    ``` sql
     <copy>
     select wrl_type, status, wallet_type, keystore_mode from v$encryption_wallet;
     </copy>
@@ -1011,15 +1000,15 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
 
     </details>
 
-11. Ensure all data is present in the application.
+12. Ensure all data is present in the application.
 
-    ``` bash
+    ``` sql
     <copy>
     select * from appuser.t1 order by ts;
     </copy>
     ```
 
-    * Both records are present. 
+    * Both records are present.
     * The *Hello* record was created initially, and the *World* record was created shortly before the final refresh.
     * This proves that changes made after the initial copy of data files are still in the PDB after the upgrade.
 
@@ -1030,12 +1019,12 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
     TS                                     MSG
     ______________________________________ ________
     14-AUG-26 11.57.02.258264000 AM GMT    Hello
-    14-AUG-26 12.48.24.185881000 PM GMT    World    
+    14-AUG-26 12.48.24.185881000 PM GMT    World
     ```
 
     </details>
 
-12. Exit SQLcl.
+13. Exit SQLcl.
 
     ``` bash
     <copy>
@@ -1043,10 +1032,11 @@ When the upgrade starts, AutoUpgrade performs a final refresh to apply the lates
     </copy>
     ```
 
-13. AutoUpgrade stops the source PDB immediately after the final refresh when the source CDB and target CDB are on the same system. 
-    * This ensures no one enters data into the wrong database during the migration, or adds new data to it. 
-    * You can control this behavior with the `close_source` config file parameter. 
-    * If the databases are on different systems, you must manually shut down the source PDB after the migration.    
+14. AutoUpgrade stops the source PDB immediately after the final refresh when the source CDB and target CDB are on the same system.
+
+    * This ensures no one enters data into the wrong database during the migration, or adds new data to it.
+    * You can control this behavior with the `close_source` config file parameter.
+    * If the databases are on different systems, you must manually shut down the source PDB after the migration.
 
 **Congratulations!** You have now upgraded your encrypted PDB to a new release of Oracle AI Database.
 

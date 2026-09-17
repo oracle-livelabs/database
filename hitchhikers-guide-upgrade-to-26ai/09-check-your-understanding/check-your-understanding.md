@@ -27,7 +27,7 @@ badge: ../../09-check-your-understanding/images/upgrade-badge.png
 
 1. Review the questions before submitting your answers.
 
-2. Complete the scored quizzes below. You need a score of 75% or higher to pass. 
+2. Complete the scored quizzes below. You need a score of 75% or higher to pass.
 
     ```quiz score
     Q: Which tool is recommended as the primary method to upgrade to Oracle AI Database 26ai?

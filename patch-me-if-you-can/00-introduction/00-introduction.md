@@ -23,11 +23,13 @@ You can switch between environments with the shortcuts shown in the last column 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
 The workshop contains:
+
 * 11 labs total
 * 9 labs on the main track
 * 2 optional labs
 
 Guidance:
+
 * Start by completing labs 1 through 9 in the specified order.
 * Then, you can complete the optional labs in any order.
 
@@ -57,4 +59,3 @@ You may now [*proceed to the next lab*](#next).
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich, Alejandro Diaz
 * **Last Updated By/Date** - Daniel Overby Hansen, September 2026
-

@@ -10,7 +10,7 @@ Estimated Time: 10 Minutes
 
 In this lab, you will:
 
-* Analyze a database 
+* Analyze a database
 * Patch a database
 
 ### Prerequisites
@@ -32,7 +32,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     # Be sure to press RETURN
     ```
-    
+
     * `source_home` and `sid` describe the current database.
     * `target_home` is the location of the new Oracle home. It has already been created.
     * Also, you specify which database to patch using `sid`.
@@ -48,7 +48,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     ```
 
     </details>
- 
+
 2. Analyze the database.
 
     ``` bash
@@ -168,7 +168,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     -rw-r-----. 1 oracle oinstall   6953 Sep  2 04:39 upgr_checklist.json
     -rw-r-----. 1 oracle oinstall   6573 Sep  2 04:39 upgr_checklist.xml
     -rw-r-----. 1 oracle oinstall  23951 Sep  2 04:39 upgr_preupgrade.html
-    -rw-r-----. 1 oracle oinstall  11468 Sep  2 04:39 upgr_preupgrade.log    
+    -rw-r-----. 1 oracle oinstall  11468 Sep  2 04:39 upgr_preupgrade.log
     ```
 
     </details>
@@ -193,7 +193,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
     ``` text
     Upgrade-To version: 19.0.0.0.0
-    
+
     =======================================
     Status of the database prior to upgrade
     =======================================
@@ -209,11 +209,11 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
       Database log mode:  ARCHIVELOG
                Readonly:  false
                 Edition:  EE
-    
+
       Oracle Component                       Upgrade Action    Current Status
       ----------------                       --------------    --------------
       None
-    
+
       *
       * ALL Components in This Database Registry:
       *
@@ -225,11 +225,11 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
       OWM         19.31.0.0.0  VALID        19.29.0.0.0               WMSYS
       RAC         19.31.0.0.0  OPTION OFF   19.29.0.0.0               SYS
       XDB         19.31.0.0.0  VALID        19.29.0.0.0               XDB
-    
+
     ==============
     BEFORE UPGRADE
     ==============
-    
+
     (output truncated)
     ```
 
@@ -243,7 +243,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     </copy>
     ```
 
-    * The HTML report is much easier to read. 
+    * The HTML report is much easier to read.
     * However, it requires a desktop environment which is not always present on database servers.
 
 9. Close Firefox.
@@ -252,7 +252,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
 Patching a single instance Oracle AI Database requires downtime. Downtime starts now.
 
-1. Remain in the *blue* terminal 🟦. 
+1. Remain in the *blue* terminal 🟦.
 
 2. Start patching the database.
 
@@ -324,21 +324,21 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
 
     ``` text
     Details
-    
+
         Job No           101
         Oracle SID       UPGR
         Start Time       26/09/02 05:01:11
         Elapsed (min):   3
         End time:        N/A
-    
+
     Logfiles
-    
+
         Logs Base:    /home/oracle/logs/simple-patching-existing-home/UPGR
         Job logs:     /home/oracle/logs/simple-patching-existing-home/UPGR/101
         Stage logs:   /home/oracle/logs/simple-patching-existing-home/UPGR/101/postfixups
         TimeZone:     /home/oracle/logs/simple-patching-existing-home/UPGR/temp
         Remote Dirs:
-    
+
     Stages
         SETUP            <1 min
         PREUPGRADE       <1 min
@@ -352,16 +352,16 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
         POSTFIXUPS       ~0 min (RUNNING)
         POSTUPGRADE
         SYSUPDATES
-    
+
     Stage-Progress Per Container
-    
+
         +--------+----------+
         |Database|POSTFIXUPS|
         +--------+----------+
         |    UPGR|     33 % |
         +--------+----------+
-    
-    The command status is running every 10 seconds. PRESS ENTER TO EXIT    
+
+    The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
 
     </details>
@@ -377,13 +377,13 @@ Patching a single instance Oracle AI Database requires downtime. Downtime starts
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
     Jobs restored                  [0]
     Jobs pending                   [0]
-    
-    
+
+
     Please check the summary report at:
     /home/oracle/logs/simple-patching-existing-home/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/simple-patching-existing-home/cfgtoollogs/upgrade/auto/status/status.log
@@ -447,12 +447,12 @@ When AutoUpgrade completes patching, you can start using the database. You may h
     -rw-r--r--. 1 oracle oinstall 3079 May 14  2015 init.ora
     -rw-r-----. 1 oracle oinstall   24 Sep  2 05:02 lkUPGR
     -rw-r-----. 1 oracle oinstall 2048 Sep  1 13:11 orapwUPGR
-    -rw-r-----. 1 oracle oinstall 3584 Sep  2 05:08 spfileUPGR.ora    
+    -rw-r-----. 1 oracle oinstall 3584 Sep  2 05:08 spfileUPGR.ora
     ```
 
     </details>
 
-5. AutoUpgrade also executes Datapatch. Find the Datapatch log files.
+4. AutoUpgrade also executes Datapatch. Find the Datapatch log files.
 
     ``` bash
     <copy>
@@ -463,7 +463,7 @@ When AutoUpgrade completes patching, you can start using the database. You may h
     # Be sure to press RETURN
     ```
 
-    * AutoUpgrade stores the Datapatch log files in the job logs directory in a subdirectory named `dbupgrade`. 
+    * AutoUpgrade stores the Datapatch log files in the job logs directory in a subdirectory named `dbupgrade`.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -484,12 +484,12 @@ When AutoUpgrade completes patching, you can start using the database. You may h
     -rw-r-----. 1 oracle oinstall  2921038 Sep  2 05:04 applysqlpatch_invocation.log
     -rw-r-----. 1 oracle oinstall        0 Sep  2 05:04 applyupgr.success
     -rw-r-----. 1 oracle oinstall     1963 Sep  2 05:04 datapatch_summary.log
-    -rw-r-----. 1 oracle oinstall     3761 Sep  2 05:02 during_upgrade_pfile_catctl.ora    
+    -rw-r-----. 1 oracle oinstall     3761 Sep  2 05:02 during_upgrade_pfile_catctl.ora
     ```
 
     </details>
 
-6. Examine one of the Datapatch log files.
+5. Examine one of the Datapatch log files.
 
     ``` bash
     <copy>
@@ -506,14 +506,14 @@ When AutoUpgrade completes patching, you can start using the database. You may h
     ``` text
     SQL Patching tool version 19.32.0.0.0 Production on Wed Sep  2 05:03:30 2026
     Copyright (c) 2012, 2026, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_88330_2026_09_02_05_03_30/sqlpatch_invocation.log
-    
+
     Connecting to database...OK
     Gathering database info...done
     Bootstrapping registry and package to current versions...done
     Determining current state...done
-    
+
     Current state of interim SQL patches:
     Interim patch 38194382 (OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382)):
       Binary registry: Not installed
@@ -542,13 +542,13 @@ When AutoUpgrade completes patching, you can start using the database. You may h
     Interim patch 39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0):
       Binary registry: Installed
       SQL registry: Not installed
-    
+
     Current state of release update SQL patches:
       Binary registry:
         19.32.0.0.0 Release_Update 260705220710: Installed
       SQL registry:
         Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 01-SEP-26 01.38.30.009869 PM
-    
+
     Adding patches to installation queue and performing prereq checks...done
     Installation queue:
       The following interim patches will be rolled back:
@@ -559,10 +559,10 @@ When AutoUpgrade completes patching, you can start using the database. You may h
       The following interim patches will be applied:
         39222882 (OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882))
         39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0)
-    
+
     Installing patches...
     Patch installation complete.  Total patches installed: 5
-    
+
     Validating logfiles...done
     Patch 38906621 rollback: SUCCESS
       logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_rollback_UPGR_2026Sep02_05_03_36.log (no errors)
@@ -574,12 +574,12 @@ When AutoUpgrade completes patching, you can start using the database. You may h
       logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_apply_UPGR_2026Sep02_05_03_36.log (no errors)
     Patch 39657094 apply: SUCCESS
       logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39657094/28915841/39657094_apply_UPGR_2026Sep02_05_04_01.log (no errors)
-    SQL Patching tool complete on Wed Sep  2 05:04:30 2026    
+    SQL Patching tool complete on Wed Sep  2 05:04:30 2026
     ```
 
     </details>
 
-7. You have patched your Oracle AI Database.
+6. You have patched your Oracle AI Database.
 
 You may now [*proceed to the next lab*](#next).
 

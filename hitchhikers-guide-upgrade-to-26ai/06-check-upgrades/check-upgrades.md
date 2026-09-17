@@ -15,6 +15,7 @@ In this lab, you will:
 ### Prerequisites
 
 You have completed:
+
 * Lab 4: Upgrade PDB Using Unplug-Plug
 * Lab 5: Upgrade PDB Using Replay Upgrade
 
@@ -45,33 +46,29 @@ You have completed:
 
 2. Set the environment and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
 3. Switch to the *ORANGE* PDB and check the `COMPATIBLE` parameter.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=ORANGE;
     select value from v$parameter where name='compatible';
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * The `COMPATIBLE` parameter is set to `23.0.0`.
     * Do you remember the previous setting? Before the upgrade, it was set to `19.0.0`.
     * You did not use the config file parameter `raise_compatible`, so why did the value change?
-    * This is a consequence of the multitenant architecture. Within a CDB, all PDBs must have the same `COMPATIBLE` setting. 
+    * This is a consequence of the multitenant architecture. Within a CDB, all PDBs must have the same `COMPATIBLE` setting.
     * During plug-in, `COMPATIBLE` was automatically adjusted. This happens for all plug-in operations, whether or not you use AutoUpgrade.
     * Although the new `COMPATIBLE` setting allows the use of all new functionality, it also means that you can no longer downgrade the PDB.
-    * If you want to preserve the possibility of downgrading, you must plug the PDB into a 26ai CDB with `COMPATIBLE` set to `19.0.0`. 
+    * If you want to preserve the possibility of downgrading, you must plug the PDB into a 26ai CDB with `COMPATIBLE` set to `19.0.0`.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -86,15 +83,15 @@ You have completed:
 
 4. Check the data file locations.
 
-    ``` bash
+    ``` sql
     <copy>
     select name from v$datafile;
     </copy>
     ```
 
     * You instructed AutoUpgrade to copy the data files on plug-in.
-    * All data files are located in the OMF-compliant location. 
-    * Notice that *CDB26* is part of the directory structure. 
+    * All data files are located in the OMF-compliant location.
+    * Notice that *CDB26* is part of the directory structure.
     * The identifier after *CDB26* is the PDB GUID, which is also part of the OMF-compliant directory structure.
 
     <details>
@@ -116,8 +113,7 @@ You have completed:
     <copy>
     exit
     </copy>
-    ```    
-
+    ```
 
 ## Task 2: Check Replay Upgrade
 
@@ -135,7 +131,7 @@ You have completed:
     Pluggable database TERRACOTTA altered.
     ```
 
-    * This is expected. 
+    * This is expected.
     * The `open` command runs most of the upgrade, but you must still run Datapatch to complete it.
     * In the next lab, you learn how to diagnose Replay Upgrade.
 
@@ -223,14 +219,14 @@ You have completed:
     Processing bypass install queue:
       Patch 39578879 apply (pdb TERRACOTTA): SUCCESS (bypass_install)
 
-    SQL Patching tool complete on Wed Aug 12 07:49:06 2026    
+    SQL Patching tool complete on Wed Aug 12 07:49:06 2026
     ```
 
     </details>
 
 4. Reconnect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
@@ -238,14 +234,12 @@ You have completed:
 
 5. Restart the PDB.
 
-    ``` bash
+    ``` sql
     <copy>
     alter pluggable database terracotta close;
     alter pluggable database terracotta open;
     select open_mode, restricted from v$pdbs where name='TERRACOTTA';
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * The PDB now opens without problems in *READ WRITE* mode and unrestricted.
@@ -273,19 +267,17 @@ You have completed:
 
 6. Check the data files locations.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=TERRACOTTA;
     select name from v$datafile;
     </copy>
-
-    # Be sure to press RETURN
     ```
 
     * You instructed the target CDB, *CDB26*, to reuse the data files on plug-in.
-    * All data files are located in the OMF-compliant location of the source CDB, *CDB19*. 
-    * Notice that *CDB19* is part of the directory structure. 
-    * This violates the OMF naming standard, but it does not prevent the database from using the data files. 
+    * All data files are located in the OMF-compliant location of the source CDB, *CDB19*.
+    * Notice that *CDB19* is part of the directory structure.
+    * This violates the OMF naming standard, but it does not prevent the database from using the data files.
     * However, you might want to move the data files to avoid this naming anomaly.
 
     <details>
@@ -300,14 +292,14 @@ You have completed:
     ```
 
     </details>
-    
+
 7. Exit SQLcl.
 
     ``` bash
     <copy>
     exit
     </copy>
- 
+
     ```
 
 8. Execute the post-upgrade fixups.
@@ -340,7 +332,7 @@ You have completed:
 
     Please check the summary report at:
     /home/oracle/logs/upg-replay-upg-terracotta/postfixups/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/upg-replay-upg-terracotta/postfixups/cfgtoollogs/upgrade/auto/status/status.log    
+    /home/oracle/logs/upg-replay-upg-terracotta/postfixups/cfgtoollogs/upgrade/auto/status/status.log
     ```
 
     </details>
@@ -353,7 +345,7 @@ You've now upgraded both PDBs. Compare the methods.
 
 * AutoUpgrade completely automates the process. You can monitor the progress and customize the upgrade.
 
-* Replay Upgrade allows you to run the commands separately. Some prefer this method for automation, although AutoUpgrade integrates easily with automation as well. 
+* Replay Upgrade allows you to run the commands separately. Some prefer this method for automation, although AutoUpgrade integrates easily with automation as well.
 
 You may now [*proceed to the next lab*](#next).
 

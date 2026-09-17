@@ -24,7 +24,7 @@ A refreshable clone PDB uses a database link. You must create a user and grant t
 
 1. Use the *yellow* 🟨 terminal. Set the environment to the source non-CDB database (*BEIGE*) and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . beige
     sql / as sysdba
@@ -33,7 +33,7 @@ A refreshable clone PDB uses a database link. You must create a user and grant t
 
 2. Create a user and grant the necessary privileges.
 
-    ``` bash
+    ``` sql
     <copy>
     create user dblinkuser identified by dblinkuser;
     grant create session to dblinkuser;
@@ -83,7 +83,7 @@ A refreshable clone PDB uses a database link. You must create a user and grant t
 
 4. Set the environment to the target CDB (*CDB26*) and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
@@ -92,7 +92,7 @@ A refreshable clone PDB uses a database link. You must create a user and grant t
 
 5. Create a database link pointing to the *BEIGE* database.
 
-    ``` bash
+    ``` sql
     <copy>
     create database link clonepdb
     connect to dblinkuser
@@ -117,7 +117,7 @@ A refreshable clone PDB uses a database link. You must create a user and grant t
 
 6. Ensure that the database link works.
 
-    ``` bash
+    ``` sql
     <copy>
     select * from dual@clonepdb;
     </copy>
@@ -128,7 +128,7 @@ A refreshable clone PDB uses a database link. You must create a user and grant t
 
     ``` text
     SQL> select * from dual@clonepdb;
-    
+
     DUMMY
     ________
     X
@@ -186,7 +186,7 @@ You check the source database for upgrade readiness.
 2. Start AutoUpgrade in *analyze* mode. The check usually completes very fast. Wait for it to complete.
 
     * The analysis must run on the source system. Since the source and target are the same in this lab, you don't need to worry about it.
-    * If the target is on a remote host, you can use the parameter `target_is_remote`. 
+    * If the target is on a remote host, you can use the parameter `target_is_remote`.
 
     ``` bash
     <copy>
@@ -237,9 +237,9 @@ You check the source database for upgrade readiness.
     * The preupgrade report comes in a number of formats.
     * The HTML report is easier to read and provides a good overview of the findings. However, it requires a desktop environment which is not always present on database servers.
     * The text format is a regular file that you can read in a terminal.
-    * The XML and JSON formats are useful for scripting and automation. 
+    * The XML and JSON formats are useful for scripting and automation.
 
-5. Examine the detailed preupgrade HTML report. 
+5. Examine the detailed preupgrade HTML report.
 
     ``` bash
     <copy>
@@ -247,7 +247,7 @@ You check the source database for upgrade readiness.
     </copy>
     ```
 
-6. Close Firefox.  
+6. Close Firefox.
 
 7. Proceed with the pre-upgrade fixups.
 
@@ -294,31 +294,31 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     </copy>
     ```
 
-    * AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quickly. 
+    * AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quickly.
     * Then it refreshes the PDB periodically in the *REFRESHPDB* phase.
-    * Notice the *Starts in 5,996 minutes* message. In the config file, you set `start_time` to *plus 10 hours*. This means that AutoUpgrade will refresh the PDB for 10 hours before moving on with the upgrade. Of course, you don't want to wait 10 hours for the upgrade, so later you will use the `PROCEED` command in AutoUpgrade. The command moves `start_now` to `now` and this allows you control the exact time of the final refresh and the start of the upgrade.  
+    * Notice the *Starts in 5,996 minutes* message. In the config file, you set `start_time` to *plus 10 hours*. This means that AutoUpgrade will refresh the PDB for 10 hours before moving on with the upgrade. Of course, you don't want to wait 10 hours for the upgrade, so later you will use the `PROCEED` command in AutoUpgrade. The command moves `start_now` to `now` and this allows you control the exact time of the final refresh and the start of the upgrade.
 
 4. Do not exit AutoUpgrade. Leave it running.
 
 5. Switch to the blue 🟦 terminal. Set the environment to the *BEIGE* database.
 
-    ``` bash
+    ``` sql
     <copy>
     . beige
     sql / as sysdba
     </copy>
     ```
 
-5. Create test data.
+6. Create test data.
 
-    ``` bash
+    ``` sql
     <copy>
     create user sales identified by oracle default tablespace users;
     grant dba to sales;
     create table sales.orders as select * from all_objects;
     </copy>
     ```
-    
+
     * You will enter some data to the *BEIGE* database. This allows you to verify that changes made after the initial data file copy are propagated to the PDB in the PDB after the migration.
     * Later, you will use the test data to ensure that no data is lost.
 
@@ -341,7 +341,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     </details>
 
-6. Exit SQLcl.
+7. Exit SQLcl.
 
     ``` bash
     <copy>
@@ -367,7 +367,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     * AutoUpgrade will start shortly.
     * You can also specify a new start time using *proceed -job <#> -newStartTime [dd/mm/yyyy hh:mm:ss, +<#>h<#>m]*.
-    * AutoUpgrade executes a final refresh to bring over the latest changes. So no more changes will be captured from the source database. 
+    * AutoUpgrade executes a final refresh to bring over the latest changes. So no more changes will be captured from the source database.
     * Then, it starts the upgrade and conversion to PDB.
 
     <details>
@@ -400,41 +400,41 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     ``` text
     Details
 
-    	Job No           101
-    	Oracle SID       BEIGE
-    	Start Time       26/08/10 09:32:19
-    	Elapsed (min):   3
-    	End time:        N/A
+        Job No           101
+        Oracle SID       BEIGE
+        Start Time       26/08/10 09:32:19
+        Elapsed (min):   3
+        End time:        N/A
 
     Logfiles
 
-    	Logs Base:    /home/oracle/logs/beige-refresh/BEIGE
-    	Job logs:     /home/oracle/logs/beige-refresh/BEIGE/101
-    	Stage logs:   /home/oracle/logs/beige-refresh/BEIGE/101/dbupgrade
-    	TimeZone:     /home/oracle/logs/beige-refresh/BEIGE/temp
-    	Remote Dirs:
+        Logs Base:    /home/oracle/logs/beige-refresh/BEIGE
+        Job logs:     /home/oracle/logs/beige-refresh/BEIGE/101
+        Stage logs:   /home/oracle/logs/beige-refresh/BEIGE/101/dbupgrade
+        TimeZone:     /home/oracle/logs/beige-refresh/BEIGE/temp
+        Remote Dirs:
 
     Stages
-    	SETUP            <1 min
-    	PREUPGRADE       <1 min
-    	DRAIN            <1 min
-    	CLONEPDB         <1 min
-    	REFRESHPDB       3 min
-    	DISPATCH         <1 min
-    	DBUPGRADE        ~2 min (RUNNING)
-    	NONCDBTOPDB
-    	POSTCHECKS
-    	POSTFIXUPS
-    	POSTUPGRADE
-    	SYSUPDATES
+        SETUP            <1 min
+        PREUPGRADE       <1 min
+        DRAIN            <1 min
+        CLONEPDB         <1 min
+        REFRESHPDB       3 min
+        DISPATCH         <1 min
+        DBUPGRADE        ~2 min (RUNNING)
+        NONCDBTOPDB
+        POSTCHECKS
+        POSTFIXUPS
+        POSTUPGRADE
+        SYSUPDATES
 
     Stage-Progress Per Container
 
-    	+--------+---------+
-    	|Database|DBUPGRADE|
-    	+--------+---------+
-    	|    TEAL|    6  % |
-    	+--------+---------+
+        +--------+---------+
+        |Database|DBUPGRADE|
+        +--------+---------+
+        |    TEAL|    6  % |
+        +--------+---------+
 
     The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
@@ -522,7 +522,7 @@ While the upgrade runs, let's look at some of the details.
 
     </details>
 
-3. Let's examine the AutoUpgrade log files. Go to the *Logs Base* directory. You can find this location using the AutoUpgrade console command `status`. 
+3. Let's examine the AutoUpgrade log files. Go to the *Logs Base* directory. You can find this location using the AutoUpgrade console command `status`.
 
     ``` bash
     <copy>
@@ -559,7 +559,7 @@ While the upgrade runs, let's look at some of the details.
     # Be sure to press RETURN
     ```
 
-    * Each phase (*preupgrade*, *prefixups*, *drain*, *dbupgrade*, etc.) has its own subdirectory. 
+    * Each phase (*preupgrade*, *prefixups*, *drain*, *dbupgrade*, etc.) has its own subdirectory.
     * If you need to troubleshoot, you can go to the relevant subdirectory and examine the log files.
 
     <details>
@@ -618,7 +618,7 @@ While the upgrade runs, let's look at some of the details.
     ```
 
     * There are four log files because AutoUpgrade uses four threads for the upgrade.
-    * Each thread logs to a separate file. 
+    * Each thread logs to a separate file.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -639,11 +639,11 @@ While the upgrade runs, let's look at some of the details.
     tail -100f catupgrd*teal0.log
     </copy>
     ```
-    
+
     * Before AutoUpgrade, this was an effective way of monitoring the upgrade.
     * AutoUpgrade now provides more meaningful output and monitors the upgrade for you.
 
-8. Stop tailing. Press *CTRL+C*. 
+8. Stop tailing. Press *CTRL+C*.
 
 9. Examine some of the other log files.
 
@@ -674,7 +674,7 @@ While the upgrade runs, let's look at some of the details.
     build.type production
     build.label (HEAD, tag: v26.5, origin/stable_devel, stable_devel)
     build.MOS_NOTE KB123450
-    build.MOS_LINK https://support.oracle.com/support/?anchorId=&kmContentId=2485457&page=sptemplate&sptemplate=km-article 
+    build.MOS_LINK https://support.oracle.com/support/?anchorId=&kmContentId=2485457&page=sptemplate&sptemplate=km-article
     ```
 
     </details>
@@ -684,7 +684,7 @@ While the upgrade runs, let's look at some of the details.
     ``` bash
     <copy>
     cd
-    java -jar autoupgrade.jar -help    
+    java -jar autoupgrade.jar -help
     </copy>
 
     # Be sure to press RETURN
@@ -696,18 +696,18 @@ While the upgrade runs, let's look at some of the details.
     ``` text
     Usage: java -jar autoupgrade.jar (misc_options | run_options | patch_options |
                                       legacy_options)
-    
+
       The AutoUpgrade utility is designed to automate the upgrade process, both
       before starting upgrades, during upgrade deployments, and during postupgrade
       checks and configuration migration.
-    
+
     misc_options = -help |
                    -version |
                    -create_sample_file (config [filename] [<type>] |
                                         settings [filename]) |
                    -listchecks [<checkName>]
                    -error_code [<errorcode>]
-    
+
     run_options = (-config <filename> | -config_values "<config_values>")
                   [-settings <filename>]
                   [-mode (analyze|fixups|deploy|upgrade|postfixups)]
@@ -721,79 +721,79 @@ While the upgrade runs, let's look at some of the details.
                   [-zip [-sid <sid>] [-d <dir>] [-zip_exclusion_list <list>]]
                   [-regen_hash]
                   [-debug]
-    
+
     patch_options = -patch (misc_options | run_options)
-    
+
     legacy_options = (-preupgrade <preupgrade>)
                      [-mode (analyze|fixups|postfixups)]
                      [-debug]
-    
+
     Options:
       -help                           Displays available options.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -help
-    
+
       -version                        Displays the AutoUpgrade version.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -version
-    
+
       -auto_config
                                       Automatically creates a configuration file
                                       with default settings for upgrading
                                       specified database(s).
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar -auto_config
-    
+
                                       java -jar autoupgrade.jar -auto_config -mode analyze
-    
+
       -create_sample_file (config [filename] [<type>] | settings [filename])
                                       Creates a sample configuration file or
                                       internal settings file.
-    
+
                                       type = [full | unplug | noncdbtopdb]
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar
                                       -create_sample_file settings settings.cfg
-    
+
                                       java -jar autoupgrade.jar
                                       -create_sample_file config config.cfg
-    
+
                                       java -jar autoupgrade.jar
                                       -create_sample_file config config.cfg unplug
-    
+
       -listchecks [<checkName>]       Lists all checks or specified check.
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar -listchecks
-    
+
                                       java -jar autoupgrade.jar
                                       -listchecks ORACLE_RESERVED_USERS
-    
+
       -error_code [<errorcode>]       Displays the AutoUpgrade error codes.
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar -error_code
                                       java -jar autoupgrade.jar
                                       -error_code UPG-3101
-    
+
       -config <filename>              Specifies the user config file with the
                                       database(s) to upgrade or patch.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar
                                       -config config.cfg -mode analyze
-    
+
       -config_values "<param>=<value>[,<param>=<value>]"
                                       Specifies the content of the configuration
                                       file without creating one, it will read the
@@ -802,26 +802,26 @@ While the upgrade runs, let's look at some of the details.
                                       environmental variables. Each database
                                       configuration is separated by an asterisk
                                       (*).
-    
+
                                       Example:
                                       java -jar autoupgrade.jar -config_values
                                       "source_home=value,...,*,source_home=..."
                                       -mode analyze
-    
+
       -settings <filename>            Overwrites the default internal settings.
                                       This is not needed for most cases.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar
                                       -settings settings.cfg -config config.cfg
                                       -mode analyze
-    
+
       -mode (analyze|fixups|deploy|upgrade|postfixups)
                                       Operational mode for AutoUpgrade.
-    
+
                                       Modes:
-    
+
                                       analyze  -   Executes the checks in the
                                                    source home database readiness
                                                    status.
@@ -837,60 +837,60 @@ While the upgrade runs, let's look at some of the details.
                                                    running in the target home.
                                       postfixups - Executes the postfixups in the
                                                    target home.
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -mode analyze
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -mode deploy
-    
+
                                       java -jar autoupgrade.jar -preupgrade
                                       "target_version=21" -mode fixups
-    
+
       -restore -jobs <job#,job#,...>  Executes a system-level restoration of the
                                       specified jobs. The databases are flashed
                                       back to the Guarantee Restore Point (GRP).
                                       The GRP must have been created by AutoUpgrade
                                       prior this command is run. The console is
                                       disabled by default.
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -restore -jobs 111
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -restore -jobs 111,222 -noconsole
-    
+
       -rollback -jobs <job#,job#,...> Execute in the same manner as -restore except
                                       it uses Datapatch to rollback the databases to
                                       the previous version.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -rollback -jobs 111
-    
+
       -restore_on_fail                If present, when a job fails, the database
                                       is restored automatically. Errors in PDBs are
                                       not considered irrecoverable, only errors in
                                       CDB$ROOT or Non-CDBs.
-    
+
       -load_password                  Initiates an interactive console allowing
                                       passwords to be loaded into AutoUpgrade's
                                       keystore.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -load_password
-    
+
       -load_win_credential <sid>      Opens a WinCredential cmdlet which prompts
                                       for user name and password and stores the
                                       values into an encrypted credential.
-    
+
                                       If no SID is provided as an option to
                                       -load_win_credential, and only one database
                                       is specified in the config file, then the
@@ -898,15 +898,15 @@ While the upgrade runs, let's look at some of the details.
                                       two or more SIDs are specified in the config
                                       file, and no SID is provided as an option to
                                       -load_win_credential, the result is an error.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -load_win_credential db19300
-    
+
       -noconsole                      Starts the AutoUpgrade with the console
                                       disabled.
-    
+
       -clear_recovery_data [-jobs <job#,job#,...>]
                                       Removes the recovery information which causes
                                       AutoUpgrade to start from scratch on the
@@ -918,19 +918,19 @@ While the upgrade runs, let's look at some of the details.
                                       reset the jobid counter, only the AutoUpgrade
                                       files used to keep track of the progress of
                                       each job.
-    
+
                                       Examples:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -clear_recovery_data
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -clear_recovery_data -jobs 111,222
-    
+
       -zip [-sid <sid>] [-d <dir>] [-zip_exclusion_list <list>]
                                       Zips up log files required for filing an
                                       AutoUpgrade service request.
-    
+
                                       Options:
                                         [-sid <sid>] - Specify SIDs to include in
                                         the zip.
@@ -939,66 +939,66 @@ While the upgrade runs, let's look at some of the details.
                                         [-zip_exclusion_list <list>] - Files
                                         matching this list will be excluded from
                                         the zip.
-    
+
                                       Examples:
-    
-    
+
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -zip
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -zip -sid db18700
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -zip -sid db18700,db19300
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -zip -zip_exclusion_list "db18700/.*"
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -zip -sid db18700 -d /tmp/
-    
+
       -regen_hash                     Skips safety check that requires the same
                                       autoupgrade.jar file when resuming.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -patch -config
                                       config.cfg -mode deploy -regen_hash
-    
+
       -debug                          Enables debug logging. All debug messages
                                       are printed to the screen.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -config config.cfg
                                       -mode deploy -debug
-    
+
       -patch (misc_options | run_options)
                                       Executes AutoUpgrade Patching. For more details
                                       please run:
-    
+
                                       java -jar autoupgrade.jar -patch -help
-    
+
       -preupgrade <preupgrade>        Makes the autoupgrade behave as the legacy
                                       preupgrade tool, it will read the target
                                       ORACLE_HOME and ORACLE_VERSION from the
                                       environmental variables.
-    
+
                                       Example:
-    
+
                                       java -jar autoupgrade.jar -preupgrade
                                       "target_version=21,dir=/tmp/log"
-                                      -mode fixups    
+                                      -mode fixups
     ```
 
     </details>
 
 ## Task 6: Check Upgrade
 
-1. Use the *yellow* 🟨 terminal. Wait for AutoUpgrade to complete the migration. 
+1. Use the *yellow* 🟨 terminal. Wait for AutoUpgrade to complete the migration.
 
-2. When the job completes, AutoUpgrade prints *Job 101 completed*. 
+2. When the job completes, AutoUpgrade prints *Job 101 completed*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1022,18 +1022,18 @@ While the upgrade runs, let's look at some of the details.
 
     </details>
 
-2. Set the environment to the *CDB26* database and connect.
+3. Set the environment to the *CDB26* database and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
     </copy>
     ```
 
-3. Switch to *TEAL* and ensure that the *SALES.ORDERS* table exists.
+4. Switch to *TEAL* and ensure that the *SALES.ORDERS* table exists.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=TEAL;
 
@@ -1060,7 +1060,7 @@ While the upgrade runs, let's look at some of the details.
 
     </details>
 
-4. Exit SQLcl.
+5. Exit SQLcl.
 
     ``` bash
     <copy>
@@ -1068,11 +1068,12 @@ While the upgrade runs, let's look at some of the details.
     </copy>
     ```
 
-5. AutoUpgrade stops the source non-CDB immediately after the final refresh when the source non-CDB and target CDB are on the same system. 
+6. AutoUpgrade stops the source non-CDB immediately after the final refresh when the source non-CDB and target CDB are on the same system.
+
     * This ensures that no one enters data into the wrong database or adds new data to the source database after the migration.
-    * You can control this behavior with the `close_source` config file parameter. 
+    * You can control this behavior with the `close_source` config file parameter.
     * If the databases are on different systems, you must manually shut down the source non-CDB after the migration.
-    
+
 **Congratulations!** You have now:
 
 * Upgraded the *BEIGE* database

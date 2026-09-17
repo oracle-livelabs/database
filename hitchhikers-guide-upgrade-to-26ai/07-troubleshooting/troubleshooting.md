@@ -16,6 +16,7 @@ In this lab, you will:
 ### Prerequisites
 
 You have completed:
+
 * Lab 4: Upgrade PDB Using Unplug-Plug
 * Lab 5: Upgrade PDB Using Replay Upgrade
 
@@ -37,7 +38,7 @@ AutoUpgrade logs extensively. If you need to work with Oracle Support, create a 
 
     * The `-zip` parameter instructs AutoUpgrade to create a zip package.
     * The `-d` parameter specifies where to create the package.
-    * There is no `-mode` parameter. 
+    * There is no `-mode` parameter.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -76,7 +77,7 @@ AutoUpgrade logs extensively. If you need to work with Oracle Support, create a 
     drwxr-xr-x. 5 oracle oinstall       40 Aug 12 09:30 CDB19
     drwxr-xr-x. 3 oracle oinstall       21 Aug 12 09:30 cfgtoollogs
     -rw-r--r--. 1 oracle oinstall      263 Aug 12 09:29 upg-unplug-plug-orange.cfg
-    drwxr-xr-x. 2 oracle oinstall       79 Aug 12 09:30 trace    
+    drwxr-xr-x. 2 oracle oinstall       79 Aug 12 09:30 trace
     ```
 
     </details>
@@ -103,7 +104,7 @@ AutoUpgrade logs extensively. If you need to work with Oracle Support, create a 
     total 324
     -rw-r--r--. 1 oracle oinstall  86166 Aug 12 09:29 alert_CDB19.log
     -rw-r--r--. 1 oracle oinstall 225867 Aug 12 09:29 alert_CDB26.log
-    -rw-r--r--. 1 oracle oinstall  10403 Aug 12 09:29 attention_CDB26.log    
+    -rw-r--r--. 1 oracle oinstall  10403 Aug 12 09:29 attention_CDB26.log
     ```
 
     </details>
@@ -172,7 +173,7 @@ Replay Upgrade has fewer log files than a classic upgrade, so you need to look i
     Errors reported while opening PDB (ContainerId: 1) and have been recorded in pdb_alert$ table.
     TERRACOTTA(1) Error Violation: OPTION, Cause: Database option CATPROC mismatch: PDB installed version 19.0.0.0. 0. CDB installed version 23.0.0.0.0., Action: Fix the database option in the PDB or the CDB
     --ATTENTION--
-    Errors reported while opening PDB (ContainerId: 1) and have been recorded in pdb_alert$ table.    
+    Errors reported while opening PDB (ContainerId: 1) and have been recorded in pdb_alert$ table.
     TERRACOTTA(1) Error Violation: OPTION, Cause: Database option OWM mismatch: PDB installed version 19.0.0.0.0.   CDB installed version 23.0.0.0.0., Action: Fix the database option in the PDB or the CDB
     --ATTENTION--
     Errors reported while opening PDB (ContainerId: 1) and have been recorded in pdb_alert$ table.
@@ -200,7 +201,7 @@ Replay Upgrade has fewer log files than a classic upgrade, so you need to look i
     TERRACOTTA(9):Completed: alter pluggable database application APP$CDB$CATALOG begin upgrade
       '19.0.0.0.0' to '23.0.0.0.0.partial' on error capture
 
-    (output truncated)  
+    (output truncated)
     ```
 
     </details>
@@ -249,7 +250,7 @@ Replay Upgrade has fewer log files than a classic upgrade, so you need to look i
     CDB26_p000_15871.trc:Replay Upgrade, PDB 8: suc seq# 52, elapsed 00:00:00.000, text: CREATE TABLE registry$upg_resume(
     CDB26_p000_15871.trc:Replay Upgrade, PDB 8: suc seq# 53, elapsed 00:00:00.001, text: DELETE FROM registry$upg_resume
     CDB26_p000_15871.trc:Replay Upgrade, PDB 8: suc seq# 54, elapsed 00:00:00.000, text: alter session set ddl_lock_timeout=900
-    
+
     (output truncated)
     ```
 
@@ -257,7 +258,7 @@ Replay Upgrade has fewer log files than a classic upgrade, so you need to look i
 
 3. There are also views in the database that you can examine.
 
-    ``` bash
+    ``` sql
     SELECT * FROM dba_replay_upgrade_errors;
     SELECT * FROM dba_applications WHERE app_name='APP$CDB$CATALOG';
     ```
@@ -266,7 +267,7 @@ Replay Upgrade has fewer log files than a classic upgrade, so you need to look i
 
 4. You can also disable Replay Upgrade completely.
 
-    ``` bash
+    ``` sql
     ALTER DATABASE UPGRADE SYNC OFF;
     ```
 
