@@ -23,11 +23,13 @@ You can switch between environments with the shortcuts shown in the last column 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
 The lab contains:
+
 * 15 labs total
 * 9 labs on the main track
 * 6 optional labs
 
 Guidance:
+
 * Start by completing labs 1 through 9 in the specified order.
 * Then, you may complete the optional labs in any order.
 * You may also start an optional lab when time allows. For instance, if you're waiting for an upgrade to complete.

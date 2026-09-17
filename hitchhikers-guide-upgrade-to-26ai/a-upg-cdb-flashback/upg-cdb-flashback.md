@@ -23,25 +23,23 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
 
 1. Start a new terminal or use an existing one. You can use any terminal for this lab.
 
-1. Set the environment and connect.
+2. Set the environment and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cobalt
     sqlplus / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
-2. Start the database.
+3. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
     ```
-    
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -61,9 +59,9 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
 
     </details>
 
-3. List all the PDBs.
+4. List all the PDBs.
 
-    ``` bash
+    ``` sql
     <copy>
     show pdbs
     </copy>
@@ -83,7 +81,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
 
     </details>
 
-4. Exit.
+5. Exit.
 
     ``` bash
     <copy>
@@ -91,7 +89,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     </copy>
     ```
 
-5. Examine the AutoUpgrade config file.
+6. Examine the AutoUpgrade config file.
 
     ``` bash
     <copy>
@@ -114,7 +112,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     upg1.target_home=/u01/app/oracle/product/26
     upg1.sid=COBALT
     upg1.restoration=YES
-    upg1.timezone_upg=NO    
+    upg1.timezone_upg=NO
     ```
 
     </details>
@@ -128,7 +126,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     ```
 
     * The preupgrade analysis usually completes quickly. Wait for it to complete.
-    * Notice that AutoUpgrade informs you that it will analyze one CDB plus two PDBs. 
+    * Notice that AutoUpgrade informs you that it will analyze one CDB plus two PDBs.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -162,7 +160,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     </copy>
     ```
 
-    * It reports: *Check passed and no manual intervention needed*. 
+    * It reports: *Check passed and no manual intervention needed*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -200,7 +198,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     </copy>
     ```
 
-    * The report is different since you upgrade an entire CDB. 
+    * The report is different since you upgrade an entire CDB.
     * Now, it contains three sections, one for each container: *CDB$ROOT*, *PDB$SEED* and *MOCHA*.
     * Notice that *Container Name: CDB$ROOT* appears near the beginning of the report.
     * Use *PAGE UP* and *PAGE DOWN* to scroll through the report.
@@ -242,7 +240,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
       *
       Component   Current      Current      Original     Previous     Component
       CID         Version      Status       Version      Version      Schema
-      ----------  -----------  -----------  -----------  -----------  ------------    
+      ----------  -----------  -----------  -----------  -----------  ------------
         CATALOG     19.31.0.0.0  VALID        19.31.0.0.0               SYS
       CATPROC     19.31.0.0.0  VALID        19.31.0.0.0               SYS
       OWM         19.31.0.0.0  VALID        19.31.0.0.0               WMSYS
@@ -272,7 +270,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
           the database after the upgrade process. This is intended as a temporary
           measure until you have time to convert to unified audit. Refer to MOS
 
-    (output truncated)      
+    (output truncated)
     ```
 
     </details>
@@ -300,9 +298,8 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     * AutoUpgrade now re-analyzes the database and executes any pre-upgrade actions.
     * It creates a guaranteed restore point before restarting the database in the target Oracle home.
     * Next, the upgrade starts with CDB$ROOT. Then it moves on with PDB$SEED and MOCHA in parallel.
-    * Finally, AutoUpgrade runs the post-upgrade actions. 
-    * It takes around 30-40 minutes. 
-
+    * Finally, AutoUpgrade runs the post-upgrade actions.
+    * It takes around 30-40 minutes.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -327,10 +324,10 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     </copy>
     ```
 
-4. Wait for the upgrade to complete. Do not exit AutoUpgrade.
+3. Wait for the upgrade to complete. Do not exit AutoUpgrade.
     * You can open a new terminal and work on other labs while the upgrade runs.
 
-5. When the upgrade completes, AutoUpgrade writes information to the console.
+4. When the upgrade completes, AutoUpgrade writes information to the console.
 
     * There is a guaranteed restore point (GRP) which you should drop when no longer needed.
     * Links to the upgrade summary report.
@@ -355,12 +352,12 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
 
     Please check the summary report at:
     /home/oracle/logs/upg-cdb-restore/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/upg-cdb-restore/cfgtoollogs/upgrade/auto/status/status.log    
+    /home/oracle/logs/upg-cdb-restore/cfgtoollogs/upgrade/auto/status/status.log
     ```
 
     </details>
 
-6. Set the environment and connect.
+5. Set the environment and connect.
 
     ``` bash
     <copy>
@@ -373,9 +370,9 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     # Be sure to press RETURN
     ```
 
-7. Check the database release.
+6. Check the database release.
 
-    ``` bash
+    ``` sql
     <copy>
     select version_full from v$instance;
     </copy>
@@ -394,9 +391,9 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
 
     </details>
 
-8. Check the PDBs.
+7. Check the PDBs.
 
-    ``` bash
+    ``` sql
     <copy>
     show pdbs
     </copy>
@@ -417,13 +414,13 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
 
     </details>
 
-9. Exit SQLcl.
+8. Exit SQLcl.
 
     ``` bash
     <copy>
     exit
     </copy>
-    ```    
+    ```
 
 ## Task 3: Undo the Upgrade
 
@@ -469,7 +466,7 @@ Suppose your tests identify a critical error and you need to return to Oracle Da
     Total jobs being restored: 1
     +--------------------------------+
     | Starting AutoUpgrade execution |
-    +--------------------------------+    
+    +--------------------------------+
     ```
 
     </details>
@@ -499,7 +496,7 @@ Suppose your tests identify a critical error and you need to return to Oracle Da
 
 4. Set the environment to the original Oracle home and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cobalt
     sql / as sysdba
@@ -508,7 +505,7 @@ Suppose your tests identify a critical error and you need to return to Oracle Da
 
 5. Verify that the database is running on Oracle Database 19c.
 
-    ``` bash
+    ``` sql
     <copy>
     select instance_name, version from v$instance;
     </copy>

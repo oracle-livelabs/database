@@ -25,7 +25,7 @@ You need to prepare a few things before you can start FTEX.
 
 1. Start a new terminal or use an existing one. You can use any terminal for this lab.
 
-1. Data Pump needs access to a directory where it can put dump and log files. Create a directory in the file system.
+2. Data Pump needs access to a directory where it can put dump and log files. Create a directory in the file system.
 
     ``` bash
     <copy>
@@ -33,30 +33,30 @@ You need to prepare a few things before you can start FTEX.
     </copy>
     ```
 
-2. Set the environment to the source database and connect.
+3. Set the environment to the source database and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . ftex
     sql / as sysdba
     </copy>
     ```
 
-3. Start the database.
+4. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
     ```
 
-    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.        
+    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.
 
-3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary statistics before starting a Data Pump export job.
+5. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary statistics before starting a Data Pump export job.
 
     **(In the interest of time, you skip this step in this lab.)**
 
-    ``` bash
+    ``` sql
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
     ```
@@ -76,9 +76,9 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-4. Create a database directory object. It must point to the operating system directory you just created.
+6. Create a database directory object. It must point to the operating system directory you just created.
 
-    ``` bash
+    ``` sql
     <copy>
     create or replace directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
     </copy>
@@ -95,9 +95,9 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-5. Create a dedicated user that you can use for the Data Pump export job.
+7. Create a dedicated user that you can use for the Data Pump export job.
 
-    ``` bash
+    ``` sql
     <copy>
     create user ftexuser identified by ftexuser default tablespace system;
     grant exp_full_database to ftexuser;
@@ -131,9 +131,9 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-6. Generate a list of tablespaces to set read-only mode.
+8. Generate a list of tablespaces to set read-only mode.
 
-    ``` bash
+    ``` sql
     <copy>
     select
        tablespace_name
@@ -164,9 +164,9 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-7. Set the tablespace to read-only mode.
+9. Set the tablespace to read-only mode.
 
-    ``` bash
+    ``` sql
     <copy>
     ALTER TABLESPACE USERS READ ONLY;
     </copy>
@@ -183,7 +183,7 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-8. Exit SQLcl.
+10. Exit SQLcl.
 
     ``` bash
     <copy>
@@ -191,7 +191,7 @@ You need to prepare a few things before you can start FTEX.
     </copy>
     ```
 
-9. Examine the precreated Data Pump parameter file.
+11. Examine the precreated Data Pump parameter file.
 
     ``` bash
     <copy>
@@ -222,7 +222,7 @@ You need to prepare a few things before you can start FTEX.
 
     </details>
 
-10. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created.
+12. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created.
 
     ``` bash
     <copy>
@@ -369,7 +369,7 @@ You need to prepare a few things before you can start FTEX.
     18-AUG-26 13:32:29.366:   /u02/oradata/FTEX/users01.dbf
     18-AUG-26 13:34:31.959: Datafiles required for transportable tablespace USERS:
     18-AUG-26 13:34:31.963:   /u02/oradata/FTEX/datafile/o1_mf_users_o65jdt89_.dbf
-    18-AUG-26 13:34:31.963:   /u02/oradata/FTEX/datafile/o1_mf_users_o7y9xcfx_.dbf    
+    18-AUG-26 13:34:31.963:   /u02/oradata/FTEX/datafile/o1_mf_users_o7y9xcfx_.dbf
     18-AUG-26 13:32:29.389: Job "FTEXUSER"."SYS_EXPORT_FULL_01" successfully completed at Wed May 29 13:32:29 2024 elapsed 0 00:01:18
     ```
 
@@ -381,7 +381,7 @@ You create a new, empty PDB running the new release of Oracle AI Database and im
 
 1. Set the environment to the target database, *CDB26*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
@@ -390,7 +390,7 @@ You create a new, empty PDB running the new release of Oracle AI Database and im
 
 2. Create a new PDB called *MAROON* and open it.
 
-    ``` bash
+    ``` sql
     <copy>
     create pluggable database maroon admin user admin identified by admin;
     alter pluggable database maroon open;
@@ -423,7 +423,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 1. Create a database directory object that points to the same operating system directory that you created in the previous task. In this lab, the export and import share the same directory. This enables Data Pump to find the dump files. If you import on a remote system, you must copy the dump files.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=maroon;
     create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
@@ -447,7 +447,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 2. Create a dedicated user for the Data Pump import.
 
-    ``` bash
+    ``` sql
     <copy>
     create user ftexuser identified by ftexuser default tablespace system;
     grant imp_full_database to ftexuser;
@@ -979,7 +979,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 8. Set the environment to the target database, *CDB26*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
@@ -990,7 +990,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
     **(In the interest of time, you skip it in this lab.)**
 
-    ``` bash
+    ``` sql
     alter session set container=maroon;
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
@@ -1019,7 +1019,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
     **(In the interest of time, you skip it in this lab.)**
 
-    ``` bash
+    ``` sql
     exec dbms_stats.gather_database_stats;
     ```
 
@@ -1038,7 +1038,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 11. Verify that your data has been imported. Check the number of objects in the *F1* schema.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=maroon;
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
@@ -1063,7 +1063,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 12. Perform a more extensive check. Verify the actual data. Find all the races won by the legend, *Ayrton Senna*.
 
-    ``` bash
+    ``` sql
     <copy>
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra,
@@ -1158,7 +1158,7 @@ You might need the *FTEX* database in another lab. In a real migration, you do n
 
 1. Set the tablespace to *READ WRITE* again.
 
-    ``` bash
+    ``` sql
     <copy>
     . ftex
     sql / as sysdba
@@ -1167,7 +1167,7 @@ You might need the *FTEX* database in another lab. In a real migration, you do n
 
 2. Set the tablespace *READ WRITE*.
 
-    ``` bash
+    ``` sql
     <copy>
     ALTER TABLESPACE USERS READ WRITE;
     </copy>

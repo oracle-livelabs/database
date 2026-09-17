@@ -26,7 +26,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     ``` sql
     <copy>
-    cd 
+    cd
     . cdb26
     sql sys/oracle@//localhost:1521/red as sysdba
     </copy>
@@ -79,7 +79,6 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     ```
 
     </details>
-
 
 4. Connect as the *DEMO* user and create the *TRIVIA* table.
 
@@ -167,7 +166,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
        311 A French 75 contains Gin, lemon juice, simple syrup, Champagne.
        312 An Aperol Spritz contains Aperol, prosecco, soda water.
        313 A Cuba Libre contains White rum, cola, lime juice.
-    
+
     15 rows selected.
     ```
 
@@ -175,7 +174,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     ``` sql
     <copy>
-    select * 
+    select *
     from   trivia
     where  lower(facts) like '%cocktail%';
     </copy>
@@ -185,7 +184,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> select * 
+    SQL> select *
     2    from   trivia
     3*   where  lower(facts) like '%cocktail%';
 
@@ -311,18 +310,18 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-    FACTS										 VEC
-    -------------------------------------------------------------------------------- ----------------------------------------
-    Atlanta is located in Georgia.							 [3.0079985E-002,-5.27411886E-003,-3.8773
-    Boston is located in Massachusetts.						 [9.21797678E-002,-1.03325688E-003,8.2331
-    Chicago is located in Illinois. 						 [4.39825356E-002,-1.2022635E-002,1.72175
-    Denver is located in Colorado.							 [1.2066979E-001,-4.58574202E-003,1.11382
-    Houston is located in Texas.							 [1.45818507E-002,-3.98688689E-002,3.8565
-    Miami is located in Florida.							 [1.86449513E-002,-1.30586907E-001,-1.443
-    Nashville is located in Tennessee.						 [-6.88686385E-004,8.72113407E-002,8.0254
-    Phoenix is located in Arizona.							 [1.34541601E-001,-3.95113677E-002,-8.865
-    Seattle is located in Washington.						 [1.05677709E-001,7.45320544E-002,7.75661
-    Philadelphia is located in Pennsylvania 					 [1.3837832E-002,-5.05678244E-002,7.70600
+    FACTS                                      VEC
+    ------------------------------------------ ----------------------------------------
+    Atlanta is located in Georgia.             [3.0079985E-002,-5.27411886E-003,-3.8773
+    Boston is located in Massachusetts.        [9.21797678E-002,-1.03325688E-003,8.2331
+    Chicago is located in Illinois.            [4.39825356E-002,-1.2022635E-002,1.72175
+    Denver is located in Colorado.             [1.2066979E-001,-4.58574202E-003,1.11382
+    Houston is located in Texas.               [1.45818507E-002,-3.98688689E-002,3.8565
+    Miami is located in Florida.               [1.86449513E-002,-1.30586907E-001,-1.443
+    Nashville is located in Tennessee.         [-6.88686385E-004,8.72113407E-002,8.0254
+    Phoenix is located in Arizona.             [1.34541601E-001,-3.95113677E-002,-8.865
+    Seattle is located in Washington.          [1.05677709E-001,7.45320544E-002,7.75661
+    Philadelphia is located in Pennsylvania    [1.3837832E-002,-5.05678244E-002,7.70600
 
     10 rows selected.
     ```
@@ -335,7 +334,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <copy>
     col segment_name format a20
     select segment_name, bytes/1024 as kbytes
-    from   user_segments 
+    from   user_segments
     where  segment_name like 'TRIVIA%';
     </copy>
     ```
@@ -347,7 +346,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-    SEGMENT_NAME		     KBYTES
+    SEGMENT_NAME         KBYTES
     -------------------- ----------
     TRIVIA                       64
     TRIVIA_VEC                  768
@@ -355,7 +354,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     </details>
 
-12. Create a vector embedding for the word *cocktail*.
+13. Create a vector embedding for the word *cocktail*.
 
     ``` sql
     <copy>
@@ -374,7 +373,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     </details>
 
-13. Now, use semantic search to find the trivia entries that are semantically closest to the word *cocktail*.
+14. Now, use semantic search to find the trivia entries that are semantically closest to the word *cocktail*.
 
     ``` sql
     <copy>
@@ -391,7 +390,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-    	PK FACTS
+    PK         FACTS
     ---------- --------------------------------------------------------------------------------
            291 A Margarita contains Tequila, lime juice, triple sec.
            318 A Vesper contains Gin, vodka, Lillet Blanc.
@@ -401,7 +400,8 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     </details>
 
-14. Repeat the search to find the entries semantically closest to *suzuki*.
+15. Repeat the search to find the entries semantically closest to *suzuki*.
+
     ``` sql
     <copy>
     select   pk, facts
@@ -411,13 +411,13 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     </copy>
     ```
 
-    * The results are related to cars and automobile manufacturers even though none of the entries contains *suzuki*. This demonstrates that vector similarity search finds semantic relationships rather than exact text matches. 
+    * The results are related to cars and automobile manufacturers even though none of the entries contains *suzuki*. This demonstrates that vector similarity search finds semantic relationships rather than exact text matches.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
-    	PK FACTS
+    PK         FACTS
     ---------- --------------------------------------------------------------------------------
            139 CR-V is made by Honda.
            112 Accord is made by Honda.
@@ -427,7 +427,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     </details>
 
-15. Repeat the search using the phrase *fastest running dog*.
+16. Repeat the search using the phrase *fastest running dog*.
 
     ``` sql
     <copy>
@@ -442,7 +442,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-    	PK FACTS
+    PK         FACTS
     ---------- --------------------------------------------------------------------------------
            231 Greyhounds can run up to 45 mph.
            238 Dogs have an excellent sense of time.
@@ -452,7 +452,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
 
     </details>
 
-16. Exit SQL*Plus.
+17. Exit SQL*Plus.
 
     ``` bash
     <copy>

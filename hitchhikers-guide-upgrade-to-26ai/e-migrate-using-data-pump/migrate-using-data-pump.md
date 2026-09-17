@@ -25,7 +25,7 @@ You need to prepare a few things before you can start the Data Pump export.
 
 1. Start a new terminal or use an existing one. You can use any terminal for this lab.
 
-1. Data Pump needs access to a directory where it can put dump and log files. Create a directory in the file system.
+2. Data Pump needs access to a directory where it can put dump and log files. Create a directory in the file system.
 
     ``` bash
     <copy>
@@ -33,37 +33,37 @@ You need to prepare a few things before you can start the Data Pump export.
     </copy>
     ```
 
-2. Set the environment to the source database and connect.
+3. Set the environment to the source database and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . ftex
     sql / as sysdba
     </copy>
     ```
 
-3. Start the database.
+4. Start the database.
 
-    ``` bash
+    ``` sql
     <copy>
     startup
     </copy>
     ```
 
-    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.        
+    * If the database is already running, you get `ORA-01081: cannot start already-running ORACLE - shut it down first`. Ignore it and continue.
 
-3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary statistics before starting a Data Pump export job.
+5. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary statistics before starting a Data Pump export job.
 
     **(In the interest of time, you skip it in this lab.)**
 
-    ``` bash
+    ``` sql
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
     ```
 
-4. Create a database directory object that points to the operating system directory you just created.
+6. Create a database directory object that points to the operating system directory you just created.
 
-    ``` bash
+    ``` sql
     <copy>
     create directory expdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
@@ -80,9 +80,9 @@ You need to prepare a few things before you can start the Data Pump export.
 
     </details>
 
-5. Create a dedicated user that you can use for the Data Pump export job.
+7. Create a dedicated user that you can use for the Data Pump export job.
 
-    ``` bash
+    ``` sql
     <copy>
     create user expuser identified by expuser default tablespace users;
     grant exp_full_database to expuser;
@@ -114,7 +114,7 @@ You need to prepare a few things before you can start the Data Pump export.
 
     </details>
 
-6. Exit SQLcl.
+8. Exit SQLcl.
 
     ``` bash
     <copy>
@@ -122,7 +122,7 @@ You need to prepare a few things before you can start the Data Pump export.
     </copy>
     ```
 
-7. Examine the precreated Data Pump parameter file.
+9. Examine the precreated Data Pump parameter file.
 
     ``` bash
     <copy>
@@ -154,7 +154,7 @@ You need to prepare a few things before you can start the Data Pump export.
 
     </details>
 
-8. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created.
+10. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created.
 
     ``` bash
     <copy>
@@ -313,7 +313,7 @@ Create a new, empty PDB in the target release and import the data directly into 
 
 1. Set the environment to the target database, *CDB26*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
@@ -322,7 +322,7 @@ Create a new, empty PDB in the target release and import the data directly into 
 
 2. Create a new PDB called *PURPLE* and open it.
 
-    ``` bash
+    ``` sql
     <copy>
     create pluggable database purple admin user admin identified by admin;
     alter pluggable database purple open;
@@ -351,7 +351,7 @@ Create a new, empty PDB in the target release and import the data directly into 
 
 3. Create a *USERS* tablespace in the new PDB.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=purple;
     create tablespace users datafile size 100m autoextend on next 100m maxsize 32767m;
@@ -379,7 +379,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 1. Create a database directory object that points to the same operating system directory you created in the previous task.
 
-    ``` bash
+    ``` sql
     <copy>
     create directory impdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
@@ -398,7 +398,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 2. Create a dedicated user for the Data Pump import.
 
-    ``` bash
+    ``` sql
     <copy>
     create user impuser identified by impuser default tablespace users;
     grant imp_full_database to impuser;
@@ -918,7 +918,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 7. Set the environment to the target database, *CDB26*, and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . cdb26
     sql / as sysdba
@@ -929,7 +929,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
     **(In the interest of time, you skip it in this lab.)**
 
-    ``` bash
+    ``` sql
     alter session set container=purple;
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
@@ -939,7 +939,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
     **(In the interest of time, you skip it in this lab.)**
 
-    ``` bash
+    ``` sql
     exec dbms_stats.gather_database_stats;
     ```
 
@@ -947,7 +947,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 10. Verify that your data has been imported. Check the number of objects in the *F1* schema.
 
-    ``` bash
+    ``` sql
     <copy>
     alter session set container=purple;
     select object_type, count(*) from all_objects where owner='F1' group by object_type;
@@ -976,7 +976,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 11. Perform a more extensive check. Verify the actual data. Find the best race of the Danish driver, *Kevin Magnussen*.
 
-    ``` bash
+    ``` sql
     <copy>
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra,
