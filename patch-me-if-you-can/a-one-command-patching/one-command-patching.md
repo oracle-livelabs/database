@@ -137,7 +137,7 @@ This lab uses the *BEIGE* non-CDB.
 
     * You can see that you are patching the *BEIGE* database.
     * You can also see that you are patching from 19.31 to 19.32.
-    * In this lab, you can only use already downloaded patches. When this lab was created, 19.32 was the latest Release Update. 
+    * In this lab, you can only use already downloaded patches. When this lab was created, 19.32 was the latest Release Update.
     * In your own environment, when AutoUpgrade downloads patches, it will always take the latest available Release Update from MOS when you specify *patch=recommended*.
     * Finally, all checks passed, and no manual intervention was needed.
     * This database was found to be ready for patching.
@@ -253,21 +253,21 @@ Patching a single instance Oracle AI Database requires downtime.
 
     ``` text
     Details
-    
+
         Job No           101
         Oracle SID       BEIGE
         Start Time       26/09/03 07:39:34
         Elapsed (min):   0
         End time:        N/A
-    
+
     Logfiles
-    
+
         Logs Base:    /home/oracle/logs/one-command-patching/BEIGE
         Job logs:     /home/oracle/logs/one-command-patching/BEIGE/101
         Stage logs:   /home/oracle/logs/one-command-patching/BEIGE/101/prechecks
         TimeZone:     /home/oracle/logs/one-command-patching/BEIGE/temp
         Remote Dirs:
-    
+
     Stages
         PENDING          <1 min
         GRP              <1 min
@@ -284,15 +284,15 @@ Patching a single instance Oracle AI Database requires downtime.
         POSTCHECKS
         POSTFIXUPS
         POSTACTIONS
-    
+
     Stage-Progress Per Container
-    
+
         +--------+---------+
         |Database|PRECHECKS|
         +--------+---------+
         |   BEIGE|    97 % |
         +--------+---------+
-    
+
     The command status is running every 10 seconds. PRESS ENTER TO EXIT
     ```
 
@@ -316,15 +316,15 @@ Patching a single instance Oracle AI Database requires downtime.
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
     Jobs restored                  [0]
     Jobs pending                   [0]
-    
+
     ---- Drop GRP at your convenience once you consider it is no longer needed ----
     Drop GRP from BEIGE: drop restore point AU_PATCHING_9212_BEIGE1931000
-    
+
     Please check the summary report at:
     /home/oracle/logs/one-command-patching/cfgtoollogs/patch/auto/status/status.html
     /home/oracle/logs/one-command-patching/cfgtoollogs/patch/auto/status/status.log
@@ -342,18 +342,16 @@ Patching a single instance Oracle AI Database requires downtime.
 
 7. Set the environment and connect.
 
-    ``` bash
+    ``` sql
     <copy>
     . beige
     sql / as sysdba
     </copy>
-
-    # Be sure to press RETURN
     ```
 
 8. Check the version.
 
-    ``` bash
+    ``` sql
     <copy>
     select version_full from v$instance;
     </copy>
@@ -372,13 +370,13 @@ Patching a single instance Oracle AI Database requires downtime.
 
 9. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
     ```
 
-10. Check the Oracle home. 
+10. Check the Oracle home.
 
     ``` bash
     <copy>
@@ -402,11 +400,11 @@ Patching a single instance Oracle AI Database requires downtime.
     39657094;DATAPUMP BUNDLE PATCH 19.32.0.0.0
     39472050;Database Release Update : 19.32.0.0.260721 (39472050)
     29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
-    
+
     OPatch succeeded.
     ```
 
-    </details>    
+    </details>
 
 11. You have now patched your Oracle AI Database with one command, including the following:
 

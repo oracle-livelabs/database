@@ -96,7 +96,7 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
 
     * Here is the patch specification from the AutoUpgrade config file: `patch=RECOMMENDED,OCW,JDK,SDOBP,29213893`.
     * When this lab was created, *19.32* was the latest Release Update, which AutoUpgrade installed because of the `RECOMMENDED` keyword.
-    * Notice that the OCW component has been updated as well. It is now on *19.32.0.0.0*. 
+    * Notice that the OCW component has been updated as well. It is now on *19.32.0.0.0*.
     * The *Fix for Bug* entries are patches from the MRP.
 
     <details>
@@ -113,7 +113,7 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     39222882;OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882)
     39657094;DATAPUMP BUNDLE PATCH 19.32.0.0.0
     39472050;Database Release Update : 19.32.0.0.260721 (39472050)
-    
+
     OPatch succeeded.
     ```
 
@@ -130,8 +130,8 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     # Be sure to press RETURN
     ```
 
-    * In the AutoUpgrade config file, you selected to create a gold image of the new Oracle home using the parameter `create_gold_image`. 
-    * After creating the Oracle home, AutoUpgrade creates a gold image. 
+    * In the AutoUpgrade config file, you selected to create a gold image of the new Oracle home using the parameter `create_gold_image`.
+    * After creating the Oracle home, AutoUpgrade creates a gold image.
     * AutoUpgrade stores the gold image in the `download_folder` together with all the patches.
 
     <details>
@@ -170,7 +170,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     patch1.download_folder=/home/oracle/patch-repo
     patch1.patch=GOLDIMAGE:gold_image_dbhome_1932.zip
     patch1.home_settings.edition=EE
-    patch1.home_settings.oracle_base=/u01/app/oracle    
+    patch1.home_settings.oracle_base=/u01/app/oracle
     ```
 
     </details>
@@ -207,21 +207,23 @@ Gold images are a convenient way of installing Oracle homes on many different se
     </copy>
     ```
 
-3. It takes a few minutes to extract and install the gold image. Leave AutoUpgrade running.
+4. It takes a few minutes to extract and install the gold image. Leave AutoUpgrade running.
 
-4. You can use the gold image created by AutoUpgrade many times on the same or different servers. The advantages of using gold images are:
+5. You can use the gold image created by AutoUpgrade many times on the same or different servers. The advantages of using gold images are:
+
     * You know all servers get the exact same Oracle home.
     * You can install faster because you do not need to apply all the patches.
     * They fit very well with automation.
     * They're easier to test and work well with configuration management.
 
-5. You can also use the gold image created by AutoUpgrade to install a new Oracle home manually. 
+6. You can also use the gold image created by AutoUpgrade to install a new Oracle home manually.
+
     * You unzip the gold image to the new Oracle home location.
     * Run the installer with appropriate settings.
 
-6. What are your thoughts about installing a new Oracle home using AutoUpgrade? How do you think it compares to installing Oracle homes manually?
+7. What are your thoughts about installing a new Oracle home using AutoUpgrade? How do you think it compares to installing Oracle homes manually?
 
-7. Wait for AutoUpgrade to complete the installation. When done, AutoUpgrade prints *Job 100 completed*.
+8. Wait for AutoUpgrade to complete the installation. When done, AutoUpgrade prints *Job 100 completed*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -230,20 +232,20 @@ Gold images are a convenient way of installing Oracle homes on many different se
     Job 100 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
     Jobs restored                  [0]
     Jobs pending                   [0]
-    
+
     Please check the summary report at:
     /home/oracle/logs/install-from-gold-image/cfgtoollogs/patch/auto/status/status.html
-    /home/oracle/logs/install-from-gold-image/cfgtoollogs/patch/auto/status/status.log    
+    /home/oracle/logs/install-from-gold-image/cfgtoollogs/patch/auto/status/status.log
     ```
 
     </details>
 
-8. In Lab 2, you installed another Oracle home from scratch. Compare the time it took to use the gold image.
+9. In Lab 2, you installed another Oracle home from scratch. Compare the time it took to use the gold image.
 
     ``` bash
     <copy>
@@ -258,7 +260,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * Installing the Oracle home from scratch and applying the Release Update and other patches takes 24 minutes. This includes the creation of the gold image so the installation time is probably around 18-20 minutes.
     * Installing from a gold image takes only two minutes.
     * Your numbers may vary.
-    * It is *much faster* to install a gold image, than installing from scratch and applying all the patches. 
+    * It is *much faster* to install a gold image, than installing from scratch and applying all the patches.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -270,7 +272,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 
     </details>
 
-9. Check the patches installed.
+10. Check the patches installed.
 
     ``` bash
     <copy>
@@ -298,7 +300,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     39222882;OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882)
     39657094;DATAPUMP BUNDLE PATCH 19.32.0.0.0
     39472050;Database Release Update : 19.32.0.0.260721 (39472050)
-    
+
     OPatch succeeded.
     ```
 

@@ -31,8 +31,6 @@ Datapatch stores patching information inside the database. Understanding these t
     . upgr
     sql / as sysdba
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
 2. Datapatch uses two tables to keep track of patching activities. Examine the two tables.
@@ -42,8 +40,6 @@ Datapatch stores patching information inside the database. Understanding these t
     desc REGISTRY$SQLPATCH_RU_INFO
     desc REGISTRY$SQLPATCH
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * Datapatch uses `REGISTRY$SQLPATCH_RU_INFO` to hold information about Release Updates, whereas it uses `REGISTRY$SQLPATCH` for all patches.
@@ -99,8 +95,6 @@ Datapatch stores patching information inside the database. Understanding these t
     from     dba_registry_sqlpatch
     order by action_time;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * This database was first patched from the base release, 19.3, to 19.29, including the OJVM and Data Pump bundle patches.
@@ -128,7 +122,7 @@ Datapatch stores patching information inside the database. Understanding these t
        38844733 ROLLBACK    SUCCESS    04-SEP-26 10.21.50.192497000 AM    DATAPUMP BUNDLE PATCH 19.30.0.0.0
        39034528 APPLY       SUCCESS    04-SEP-26 10.22.00.370013000 AM    Database Release Update : 19.31.0.0.260421 (REL-APR2026) (39034528)
        39196236 APPLY       SUCCESS    04-SEP-26 10.22.22.775483000 AM    DATAPUMP BUNDLE PATCH 19.31.0.0.0
-    
+
     15 rows selected.
     ```
 
@@ -143,8 +137,6 @@ Datapatch stores patching information inside the database. Understanding these t
     where  description like 'Database Release Update : 19.31%'
            and action='APPLY';
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     <details>
@@ -165,7 +157,7 @@ Datapatch stores patching information inside the database. Understanding these t
 
 5. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
@@ -258,10 +250,10 @@ Datapatch also stores log files in the file system.
       2         SYSTIMESTAMP FROM dual;
     Starting apply for patch 39034528/28740323 on 04-SEP-26 10.21.50.203980 AM +00:0
     0
-    
-    
+
+
     1 row selected.
-    
+
     Elapsed: 00:00:00.00
     SQL> SET PAGESIZE 10
     SQL>
@@ -293,7 +285,7 @@ Datapatch also stores log files in the file system.
     * For each container, you can see the number of invalid objects before patching (in the prerequisite phase).
     * You can also see the number of invalid objects after patching.
     * Datapatch always recompile all Oracle-maintained objects invalidated by the patching.
-    * After the Datapatch recompilation there shouldn't be any invalid objects. 
+    * After the Datapatch recompilation there shouldn't be any invalid objects.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -404,33 +396,33 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     ``` text
     Oracle Interim Patch Installer version 12.2.0.1.52
     Copyright (c) 2026, Oracle Corporation.  All rights reserved.
-    
-    
+
+
     Oracle Home       : /u01/app/oracle/product/19
     Central Inventory : /u01/app/oraInventory
        from           : /u01/app/oracle/product/19/oraInst.loc
     OPatch version    : 12.2.0.1.52
     OUI version       : 12.2.0.7.0
     Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2026-09-02_10-36-32AM_1.log
-    
+
     Invoking utility "listorderedinactivepatches"
     List Inactive patches option provided
-    
+
     The oracle home has the following inactive patch(es) and their respective overlay patches:
-    
+
     The number of RU chains is  2
-    
+
     ***** There are 3 inactive RU patches in chain 1
     -Inactive RU/BP 29517242:Database Release Update : 19.3.0.0.190416 (29517242), installed on: Thu Apr 18 07:21:17 GMT 2019, with no overlays
     -Inactive RU/BP 38291812:Database Release Update : 19.29.0.0.251021 (38291812), installed on: Tue Sep 01 12:21:53 GMT 2026, with no overlays
     -Inactive RU/BP 38632161:Database Release Update : 19.30.0.0.260120(REL-JAN260130) (38632161), installed on: Tue Sep 01 13:17:09 GMT 2026, with no overlays
     -Active RU/BP 39034528:Database Release Update : 19.31.0.0.260421 (REL-APR2026) (39034528), installed on: Tue Sep 01 13:29:45 GMT 2026, with no overlays
-    
+
     ***** There are 2 inactive RU patches in chain 2
     -Inactive RU/BP 38194382:OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382), installed on: Tue Sep 01 12:25:14 GMT 2026, with no overlays
     -Inactive RU/BP 38523609:OJVM RELEASE UPDATE: 19.30.0.0.260120 (38523609), installed on: Tue Sep 01 13:21:44 GMT 2026, with overlays: 38844367
     -Active RU/BP 38906621:OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621), installed on: Tue Sep 01 13:35:29 GMT 2026, with no overlays
-    
+
     OPatch succeeded.
     ```
 
@@ -450,12 +442,12 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     <summary>*click to see the output*</summary>
 
     ``` text
-    9.4G	/u01/app/oracle/product/19/.patch_storage
+    9.4G  /u01/app/oracle/product/19/.patch_storage
     ```
 
     </details>
 
-3. Delete the inactive patches. 
+3. Delete the inactive patches.
 
     ``` bash
     <copy>
@@ -476,41 +468,41 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     ``` text
     Oracle Interim Patch Installer version 12.2.0.1.52
     Copyright (c) 2026, Oracle Corporation.  All rights reserved.
-    
-    
+
+
     Oracle Home       : /u01/app/oracle/product/19
     Central Inventory : /u01/app/oraInventory
        from           : /u01/app/oracle/product/19/oraInst.loc
     OPatch version    : 12.2.0.1.52
     OUI version       : 12.2.0.7.0
     Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2026-09-02_10-41-15AM_1.log
-    
+
     Invoking utility "deleteinactivepatches"
     Inactive Patches Cleanup option provided
     Delete Inactive Patches .......
-    
+
     ***** There are 3 inactive RU patches in chain 1
-    
+
     ***** 2 inactive patches will be deleted
     -To be deleted inactive RU/BP 29517242:Database Release Update : 19.3.0.0.190416 (29517242), installed on: Thu Apr 18 07:21:17 GMT 2019, with no overlays
     -To be deleted inactive RU/BP 38291812:Database Release Update : 19.29.0.0.251021 (38291812), installed on: Tue Sep 01 12:21:53 GMT 2026, with no overlays
     -To be retained inactive RU/BP 38632161:Database Release Update : 19.30.0.0.260120(REL-JAN260130) (38632161), installed on: Tue Sep 01 13:17:09 GMT 2026, with no overlays
     -Active RU/BP 39034528:Database Release Update : 19.31.0.0.260421 (REL-APR2026) (39034528), installed on: Tue Sep 01 13:29:45 GMT 2026, with no overlays
-    
+
     ***** There are 2 inactive RU patches in chain 2
-    
+
     ***** 1 inactive patches will be deleted
     -To be deleted inactive RU/BP 38194382:OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382), installed on: Tue Sep 01 12:25:14 GMT 2026, with no overlays
     -To be retained inactive RU/BP 38523609:OJVM RELEASE UPDATE: 19.30.0.0.260120 (38523609), installed on: Tue Sep 01 13:21:44 GMT 2026, with overlays: 38844367
     -Active RU/BP 38906621:OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621), installed on: Tue Sep 01 13:35:29 GMT 2026, with no overlays
-    
+
     Do you want to proceed? [y|n]
     y
     User Responded with: Y
     Deleted RU/BP patch: 29517242
     Deleted RU/BP patch: 38291812
     Deleted RU/BP patch: 38194382
-    
+
     OPatch succeeded.
     ```
 
@@ -531,7 +523,7 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     <summary>*click to see the output*</summary>
 
     ``` text
-    6.2G	/u01/app/oracle/product/19/.patch_storage
+    6.2G  /u01/app/oracle/product/19/.patch_storage
     ```
 
     </details>
@@ -583,8 +575,6 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
     . upgr
     sql / as sysdba
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
 2. Generate a list of rollback scripts and the size of them.
@@ -623,7 +613,7 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
     Release Update 19.3.0.0.0                                                       4
     Release Update 19.30.0.0.0                                                    223
     Release Update 19.31.0.0.0                                                    233
-    
+
     11 rows selected.
     ```
 
@@ -631,7 +621,7 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
 
 3. Exit SQLcl
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
@@ -656,14 +646,14 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
     ``` text
     SQL Patching tool version 19.31.0.0.0 Production on Wed Sep  2 10:45:23 2026
     Copyright (c) 2012, 2026, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_135655_2026_09_02_10_45_23/sqlpatch_invocation.log
-    
+
     Connecting to database...OK
     Gathering database info...done
     Bootstrapping registry and package to current versions...done
     Determining current state...done
-    
+
     Current state of interim SQL patches:
     Interim patch 38194382 (OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382)):
       Binary registry: Not installed
@@ -692,19 +682,19 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
     Interim patch 39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0):
       Binary registry: Not installed
       SQL registry: Rolled back successfully on 02-SEP-26 08.59.58.184537 AM
-    
+
     Current state of release update SQL patches:
       Binary registry:
         19.31.0.0.0 Release_Update 260514003012: Installed
       SQL registry:
         Rolled back to 19.31.0.0.0 Release_Update 260514003012 successfully on 02-SEP-26 09.00.16.186360 AM
-    
+
       Purging old patch metadata process started...
-    
+
     CAUTION: This could be I/O intensive sometimes due to cleanup of BLOB columns. If you find this process taking unusually long time or if you are seeing any impact to the     database performance, then abort this datapatch process and reschedule this clean up activity in a quiet maintenance window.
-    
+
       Purge old patch metadata process completed.
-    
+
     SQL Patching tool complete on Wed Sep  2 10:45:55 2026
     ```
 
@@ -712,7 +702,7 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
 
 5. Reconnect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
@@ -755,7 +745,7 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
     Release Update 19.3.0.0.0
     Release Update 19.30.0.0.0
     Release Update 19.31.0.0.0                                                    233
-    
+
     13 rows selected.
     ```
 

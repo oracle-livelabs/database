@@ -33,7 +33,7 @@ None.
 
     * Patch files come from My Oracle Support as ZIP files.
     * The patch zip file you are extracting is the 19.32 Release Update.
-    * It takes a minute or two to unzip. Just watch the characters fly by on screen as if you were part of the *Matrix* movies. 
+    * It takes a minute or two to unzip. Just watch the characters fly by on screen as if you were part of the *Matrix* movies.
 
 2. Switch to the directory where you extracted the Release Update. The patch metadata is stored in PatchSearch.xml.
 
@@ -439,23 +439,19 @@ You can use the *queryable inventory* inside the database to get information fro
 
 1. Remain in the *blue* terminal 🟦. Connect to the *UPGR* database.
 
-     ``` sql
+    ``` sql
     <copy>
     . upgr
     sql / as sysdba
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
 2. Get information about the Oracle home.
 
-     ``` sql
+    ``` sql
     <copy>
     select xmltransform(dbms_qopatch.get_opatch_install_info, dbms_qopatch.get_opatch_xslt) as install_info from dual;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     <details>
@@ -505,8 +501,6 @@ You can use the *queryable inventory* inside the database to get information fro
     from inv,
          xmltable('InventoryInstance/patches/*' passing inv.output columns patch_id number path 'patchID', patch_unique_id number path 'uniquePatchID', description varchar2(80) path 'patchDescription') patches;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * The output is a very detailed XML document.
@@ -529,12 +523,11 @@ You can use the *queryable inventory* inside the database to get information fro
 
 5. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
-    ```    
-
+    ```
 
 ## Task 4: Use Datapatch
 
@@ -576,7 +569,7 @@ Datapatch applies or rolls back SQL changes to the database.
     ``` text
     SQL Patching tool version 19.31.0.0.0 Production on Mon Aug 31 14:58:23 2026
     Copyright (c) 2012, 2026, Oracle.  All rights reserved.
-    
+
     Build label: RDBMS_19.31.0.0.0DBRU_LINUX.X64_260424.2
     SQL Patching tool complete on Mon Aug 31 14:58:23 2026
     ```
@@ -594,20 +587,20 @@ Datapatch applies or rolls back SQL changes to the database.
     * Datapatch operates on one database at a time.
     * This nonintrusive check examines the database and determines whether Datapatch needs to install patches.
     * Datapatch reports that no patches need to be applied.
-    
+
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
     SQL Patching tool version 19.31.0.0.0 Production on Mon Aug 31 14:58:41 2026
     Copyright (c) 2012, 2026, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_64086_2026_08_31_14_58_41/sqlpatch_invocation.log
-    
+
     Connecting to database...OK
     Gathering database info...done
     Determining current state...done
-    
+
     Current state of interim SQL patches:
     Interim patch 38194382 (OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382)):
       Binary registry: Not installed
@@ -630,19 +623,19 @@ Datapatch applies or rolls back SQL changes to the database.
     Interim patch 39196236 (DATAPUMP BUNDLE PATCH 19.31.0.0.0):
       Binary registry: Installed
       SQL registry: Applied successfully on 21-AUG-26 06.48.04.650842 AM
-    
+
     Current state of release update SQL patches:
       Binary registry:
         19.31.0.0.0 Release_Update 260514003012: Installed
       SQL registry:
         Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 21-AUG-26 06.47.42.474544 AM
-    
+
     Adding patches to installation queue and performing prereq checks...done
     Installation queue:
       No interim patches need to be rolled back
       No release update patches need to be installed
       No interim patches need to be applied
-    
+
     SQL Patching tool complete on Mon Aug 31 14:59:07 2026
     ```
 
@@ -665,14 +658,14 @@ Datapatch applies or rolls back SQL changes to the database.
     ``` text
     SQL Patching sanity checks version 19.31.0.0.0 on Mon 31 Aug 2026 03:04:15 PM GMT
     Copyright (c) 2021, 2026, Oracle.  All rights reserved.
-    
+
     Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sanity_checks_20260831_150415_65004/sanity_checks_20260831_150415_65004.log
-    
+
     Running checks
     Use of uninitialized value $pdb in concatenation (.) or string at /u01/app/oracle/product/19/sqlpatch/sqlpatch_sanity_checks.pm line 1300.
     JSON report generated in /u01/app/oracle/cfgtoollogs/sqlpatch/sanity_checks_20260831_150415_65004/sqlpatch_sanity_checks_summary.json file
     Checks completed. Printing report:
-    
+
     Check: Database component status - OK
     Check: PDB Violations - OK
     Check: Invalid System Objects - OK
@@ -727,10 +720,10 @@ Datapatch applies or rolls back SQL changes to the database.
     Check: Imperva processes - OK
     Check: Guardium processes - OK
     Check: Locale - OK
-    
+
     Refer to MOS Note 2975965.1 and debug log
     /u01/app/oracle/cfgtoollogs/sqlpatch/sanity_checks_20260831_150415_65004/sanity_checks_debug_20260831_150415_65004.log
-    
+
     SQL Patching sanity checks completed on Mon 31 Aug 2026 03:04:17 PM GMT
     ```
 
@@ -738,7 +731,7 @@ Datapatch applies or rolls back SQL changes to the database.
 
 5. Connect to the *UPGR* database.
 
-     ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
@@ -756,8 +749,6 @@ Datapatch applies or rolls back SQL changes to the database.
     from dba_registry_sqlpatch
     order by action_time;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     * Datapatch keeps track of all apply and rollback actions in a database.
@@ -785,7 +776,7 @@ Datapatch applies or rolls back SQL changes to the database.
     2026-08-21       38844733 INTERIM       ROLLBACK    DATAPUMP BUNDLE PATCH 19.30.0.0.0
     2026-08-21       39034528 RU            APPLY       Database Release Update : 19.31.0.0.260421 (REL-APR2026) (39034528)
     2026-08-21       39196236 INTERIM       APPLY       DATAPUMP BUNDLE PATCH 19.31.0.0.0
-    
+
     15 rows selected.
     ```
 
@@ -801,8 +792,6 @@ Here are a few useful queries that provide information about the database.
     <copy>
     select sys_context('USERENV','ORACLE_HOME') as oracle_home from dual;
     </copy>
-
-    -- Be sure to press RETURN
     ```
 
     <details>
@@ -874,7 +863,7 @@ Here are a few useful queries that provide information about the database.
 
 4. Exit SQLcl.
 
-    ``` 
+    ``` bash
     <copy>
     exit
     </copy>
@@ -916,7 +905,7 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
 
     </details>
 
-You may now [*proceed to the next lab*](#next). 
+You may now [*proceed to the next lab*](#next).
 
 ## Acknowledgements
 
