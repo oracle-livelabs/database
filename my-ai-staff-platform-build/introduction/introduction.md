@@ -27,6 +27,7 @@ This workshop assumes you have:
 - A laptop or desktop with a current web browser, an SSH client, and a way to edit remote files. [Visual Studio Code](https://code.visualstudio.com/Download) with the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) is recommended; any equivalent editor and OpenSSH client are also supported. Lab 1 explains when to create or download the SSH key and configure the connection, after the instance receives its public IP.
 - `scp` (included with OpenSSH) or an equivalent browser upload method for transferring the database wallet after the instance is reachable.
 - Access to create and configure a Slack workspace, channels, and apps.
+- An OpenAI account or subscription that can create an API key for `OPENAI_API_KEY`.
 - A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for the workshop identities or OAuth consent flow.
 - Basic Linux administration and shell-command familiarity.
 - Basic familiarity with OCI networking and Oracle Autonomous Database.
@@ -42,7 +43,7 @@ Before you start, create a secure worksheet for values that are unique to the cu
 | Customer intake | Business name, owner email, owner timezone, delivery targets, and enabled external integrations |
 | OCI | Tenancy access, region, compute public IP, Autonomous Database name, ADMIN password, `AI_FOR_YOU` password, wallet zip, and wallet directory |
 | Slack | Workspace name, seven bot tokens, seven app-level tokens, `ASSISTANT_BOT_ID`, deployment owner member ID, and every channel ID |
-| Runtime | Codex account or API key, `CODEX_BIN` path when non-default, ZIP download URL, and deployment path |
+| Runtime | Codex account or API key, OpenAI API key, `CODEX_BIN` path when non-default, ZIP download URL, and deployment path |
 | Content Kit | `base_dir`, NotebookLM Python path, font paths, Data Agent URL, headshot path, rclone remote, and Google Drive folder ID |
 | External services | Google OAuth client ID and secret, Google refresh token, SMTP host/user/password/from address, Substack config, and Instagram cookies when those integrations are enabled |
 

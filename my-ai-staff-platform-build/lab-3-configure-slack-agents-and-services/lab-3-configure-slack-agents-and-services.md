@@ -22,6 +22,7 @@ In this lab, you will:
 - Completion of Lab 2.
 - Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
 - A personal Slack account with administrator access to the workshop workspace.
+- An OpenAI account or subscription with an API key available for `OPENAI_API_KEY`.
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
 
 ## Task 1: Create Channels and Capture IDs
