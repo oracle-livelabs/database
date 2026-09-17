@@ -100,7 +100,7 @@ badge: ../09-check-your-understanding/images/upgrade-badge.png
     ```    
 
     ```quiz score
-    Q: Which of the following statements are incorrect?
+    Q: Which of the following statements is incorrect?
     * AutoUpgrade only patches the database to an existing Oracle home
     - AutoUpgrade can download patches
     - AutoUpgrade works on all platforms

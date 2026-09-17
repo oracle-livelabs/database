@@ -200,6 +200,13 @@ Gold images are a convenient way of installing Oracle homes on many different se
 
     </details>
 
+3. Monitor the progress
+
+    ``` bash
+    lsj -a 10
+    </copy>
+    ```
+
 3. It takes a few minutes to extract and install the gold image. Leave AutoUpgrade running.
 
 4. You can use the gold image created by AutoUpgrade many times on the same or different servers. The advantages of using gold images are:
