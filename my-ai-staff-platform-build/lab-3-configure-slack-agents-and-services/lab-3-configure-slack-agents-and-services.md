@@ -21,26 +21,42 @@ In this lab, you will:
 
 - Completion of Lab 2.
 - Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
-- A personal Slack account with administrator access to the workshop workspace.
+- A Slack account and a workshop Slack workspace. You can use an existing workspace where you can create channels and install internal apps, or create a new workspace at [Slack: Create a workspace](https://slack.com/get-started#/createnew).
+- Permission to create channels and install custom Slack apps. If your organization restricts app installation, ask a Workspace Owner or app manager to approve the seven internal apps you create in this lab.
 - An OpenAI account or subscription with an API key available for `OPENAI_API_KEY`.
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
 
-## Task 1: Create Channels and Capture IDs
+## Task 1: Prepare Slack, Create Channels, and Capture IDs
 
-1. Create `#content-start`, `#content-runs`, `#content-internal`, `#creative-studio`, `#publishing`, `#data`, `#ops`, and `#errors` for the content workflow.
+1. Choose the Slack workspace for this workshop.
 
+    If you already have a workshop workspace, sign in to Slack and open that workspace. If you need a new one, go to [Slack: Create a workspace](https://slack.com/get-started#/createnew), enter your email address, confirm the code from Slack, and follow the prompts. The person who creates a new workspace becomes the Workspace Primary Owner.
 
-2. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
+    ![Slack Workspace Creation](./images/05_create_slack_workspace.png)
+
+2. Confirm that your Slack user can create channels and install internal apps.
+
+    In most workspaces, members can create channels from the plus sign in the Slack sidebar. Some company workspaces restrict channel creation or app installation. If you cannot create channels, ask a Workspace Owner for help before continuing. If app approval is enabled, ask the Workspace Owner or app manager to approve the internal apps after you import their manifests in Task 2.
+
+    ![Slack Channel Creation Button](./images/06_create_channel.png)
+
+3. Create `#content-start`, `#content-runs`, `#content-internal`, `#creative-studio`, `#publishing`, `#data`, `#ops`, and `#errors` for the content workflow.
+
+4. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
 
     ![Slack Channels Example](./images/01_channels_example.png)
 
-3. Copy every channel's `C...` ID from Slack and save it in a secure deployment worksheet. Environment files use IDs, not display names.
+5. Copy every channel's `C...` ID from Slack and save it in a secure deployment worksheet. Environment files use IDs, not display names.
+
+    ![Select Slack Channel](./images/07_select_channel.png)
 
     ![Slack Channels ID Example](./images/02_channel_id.png)
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
-1. At [Slack API: Your Apps](https://api.slack.com/apps), select **Create New App**, then **From an app manifest**. Select the personal workshop workspace and paste the matching JSON manifest from the blocks below.
+1. At [Slack API: Your Apps](https://api.slack.com/apps), select **Create New App**, then **From an app manifest**. Select the workshop workspace and paste the matching JSON manifest from the blocks below.
+
+    ![Create a New App](./images/08_create_new_app.png)
 
 2. Import each manifest once. The manifests below are templates. You can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
 
@@ -54,6 +70,16 @@ In this lab, you will:
     | `agents/ops` | Ops manifest below | Ops Agent | `#ops`, `#errors` |
     | `agents/publish` | Publish manifest below | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
 
+
+    ![Import from Manifest](./images/09_app_from_manifest.png)
+
+    ![Where to Add your Manifest](./images/10_where_manifest.png)
+
+    ![Change the Display Name of the Bot](./images/11_app_display_name.png)
+
+    ![Select Workspace for App](./images/12_select_workspace.png)
+
+    ![Create App](./images/13_create_app.png)
 
 3. Paste this Assistant Agent manifest.
 
@@ -380,11 +406,15 @@ In this lab, you will:
 
 10. Assistant Agent and Brand Agent are the only apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app before installing it.
 
+    ![Where to Activate DM](./images/14_direct_messages.png)
+
     ![Agents with Access to direct messages](./images/03_agent_permission.png)
 
 11. Do not create a Slack app for Website Agent. The `agents/website` service exposes a local HTTP API on port 8005.
 
 12. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
+
+    ![Where to get App Tokens](./images/15_where_app_tokens.png)
 
     ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
@@ -434,7 +464,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Use the current token names for a new deployment: `ASSISTANT_*`, `CONTENT_*`, `CREATIVE_*`, `BRAND_*`, `DATA_*`, `OPS_*`, and `PUBLISH_*`. The pipeline accepts legacy `ZORA_*` and `ZURI_*` keys, but they are not required for a new configuration.
+4. Use the current token names for a new deployment: `ASSISTANT_*`, `CONTENT_*`, `CREATIVE_*`, `BRAND_*`, `DATA_*`, `OPS_*`, and `PUBLISH_*`.
 
 5. Set the same channel ID wherever it is shared. For example, `SLACK_PUBLISHING_CHANNEL` is used by pipeline, assistant, and publish.
 

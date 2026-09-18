@@ -42,9 +42,38 @@ In this lab, you will:
     </copy>
     ```
 
-2. Install and authenticate Codex CLI with the account used for this deployment. Core platform agents invoke Codex from the path configured by `CODEX_BIN` or `/home/opc/.local/bin/codex`.
+2. Install Codex CLI on the compute instance with the Linux standalone installer. This avoids installing Node.js or npm on the server just to get the `codex` binary.
 
-3. Verify the CLI from the instance shell using a non-destructive test.
+    ```
+    <copy>
+    curl -fsSL https://chatgpt.com/codex/install.sh | sh
+    export PATH="$HOME/.local/bin:$PATH"
+    command -v codex
+    codex --version
+    </copy>
+    ```
+
+    If `command -v codex` does not print a path, close and reopen the remote shell, or add the installer output directory to `PATH`. Record the printed path for `CODEX_BIN` in Lab 3.
+
+3. Start Codex CLI and sign in with ChatGPT.
+
+    ```
+    <copy>
+    codex
+    </copy>
+    ```
+
+    In the Codex interface, select **Sign in with ChatGPT** and complete the browser flow. On a remote OCI instance, the browser may not open automatically. If Codex prints a login URL or device code, copy it from the terminal, open it in your laptop browser, complete the sign-in, and return to the remote shell prompt before continuing.
+
+    If your deployment uses API-key authentication instead of browser sign-in, set `OPENAI_API_KEY` only in the secure environment files configured in Lab 3. Do not paste API keys into screenshots, chat messages, or shared validation evidence.
+
+    After signing in Codex should see like this:
+
+    ![Codex Terminal in Visual Studio Code](./images/03_codex_vsc.png)
+
+    ![Codex Terminal in Terminal](./images/04_codex_terminal.png)
+
+4. Verify the CLI from the instance shell using a non-destructive test.
 
     ```
     <copy>
@@ -80,7 +109,12 @@ In this lab, you will:
     </copy>
     ```
 
+    The next steps create Python virtual environments that systemd services run later in Lab 3. Oracle Linux uses SELinux to enforce extra access controls beyond standard Linux permissions. The `chcon`, `semanage fcontext`, and `restorecon` commands label only the virtual-environment executable directories as `bin_t`, so systemd can execute the Python interpreters inside those directories.
+
+    This does not disable SELinux, open network ports, or make the project directory public. It grants the minimum persistent SELinux file context needed for these service executables. Do not apply these labels broadly to the whole home directory or to files that contain secrets.
+
 3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
+
     ```
     <copy>
     cd ~/livelabs-ai-staff
@@ -114,7 +148,7 @@ In this lab, you will:
     </copy>
     ```
 
-5. Create and label the File Editor virtual environment. The editor serves local edit links on port 8001.
+5. Create and label the File Editor virtual environment. This step does not start the editor service. It only installs the Python dependencies and SELinux labels needed later. Lab 3 installs and starts `contentkit-file-editor.service`; after that service is active, File Editor serves local edit links on `127.0.0.1:8001`.
 
     ```
     <copy>
