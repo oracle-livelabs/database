@@ -1,5 +1,7 @@
 # Ask Hospitality Questions with Select AI
 
+![Nina — hospitality lab banner](images/nina.png)
+
 ## Introduction
 
 > **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
@@ -264,12 +266,6 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
-
-## Live database capture
-
-Live Select AI revenue answer. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Live Select AI revenue answer](images/live-07-select-ai-answer.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

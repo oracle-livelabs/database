@@ -126,6 +126,7 @@ You can now continue to the hospitality labs.
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal, Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal, Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026
+

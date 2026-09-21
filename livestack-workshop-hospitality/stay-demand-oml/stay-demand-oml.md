@@ -1,5 +1,7 @@
 # Build a Stay Offer Demand Watchlist with Oracle Machine Learning
 
+![Otto — hospitality lab banner](images/otto.png)
+
 ## Introduction
 
 > **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
@@ -136,6 +138,8 @@ This task is optional. AutoML can take several minutes to complete, so you can c
   
   The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
 
+  ![AutoML model comparison](images/oml-model-comparison.jpg)
+
   Inspect the confusion matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
 
   During testing on 21 September 2026, all five AutoML candidates reached 1.0000 balanced accuracy: Decision Tree, Generalized Linear Model, Ridge GLM, Neural Network, and Random Forest. The GLM confusion matrix classified 65.91% of rows correctly as STABLE and 34.09% correctly as SURGE, with no errors. These scores describe the small sample dataset; they do not show how well the model would predict future bookings. The next task creates a separate GLM using SQL.
@@ -218,6 +222,8 @@ If you skipped the optional AutoML task, use this setting as the example model f
     WHERE model_name = 'OTTO_STAY_DEMAND_SURGE_MODEL';
     </copy>
     ```
+
+    ![Created demand model in SQL Worksheet](images/sql-oml-model.jpg)
 
     The result should show `CLASSIFICATION` and `GENERALIZED_LINEAR_MODEL`. Otto now has a database model that SQL can call.
 
@@ -372,12 +378,6 @@ Oracle AI Database makes the model part of the dashboard query. A business user 
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
-
-## Live database capture
-
-Predictions from the trained hospitality model. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Predictions from the trained hospitality model](images/live-06-demand-model.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

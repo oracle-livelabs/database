@@ -386,6 +386,54 @@
       "status": "reviewed",
       "finding": "Authentic local-demo screenshot, visually inspected and OCR checked. Separate application story and graph naming accepted by the user.",
       "ocr_text": "ORACLE\nHospitality LiveStack\ncommana center\nIN-MEMORY\nNATIVE JSON\nIF Guest & Demand Signal\nIntelligence\nVECTOR SEARCH\nVPD\nGuest Experience Network\nGraph\nPROPERTY GRAPH\nSQL/PGQ\nHousekeeping &\nMaintenance Coverage Map\nORACLE SPATIAL VPD\nReservation & Folio\nOperations\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data \u2022 9/18/2026, 11:24:45\nAM\nAva Chen\nAC\n2500\nHI! 7 rows returned\n\u2022 23 ms\nEXECUTED SQL/PGQ\n-- SQL/PGQ: Guest profiles converging on shared booking channels\nSELECT source_guest_profile, shared_channel, related_guest_profile,\nsource_amount, related_amount,\nsource_risk, related_risk\nFROM GRAPH_TABLE ( fraud_network\nMATCH (src IS entity)\n-(el IS related_to\u2192> (channel IS entity)\n<-[e2 IS related_to]- (other IS entity)\nWHERE src.entity_type = 'guest_profile'\nAND\nother.entity_type = guest_profile'\nAND src.entity_id < other-entity_id\nAND channel.entity_type = 'booking_channel'\nAND el. total_amount >= 2500\nCOLUMNS (\nsrc.entity_key AS source_guest_profile,\nchannel.entity_key AS shared_channel,\nother.entity_key AS related_guest_profile,\nel.total_amount AS source_amount,\ne2. total_amount AS related_amount,\nsrc. risk_score AS source_risk,\nother. risk_score AS related_risk\n\u2192 Run Query\nHide SQL\nORDER BY source_amount DESC, source_risk DESC\nFETCH FIRST 25 ROWS ONLY;\nSOURCE_GUEST_PROFILE\nSHARED_CHANNEL\nGUEST-8841\nCHANNEL-0TA-017\nGUEST-8841\nCHANNEL-OTA-017\nRELATED_GUEST_PROFILE\nGUEST-1190\nGUEST-3320\nSOURCE_AMOUNT\n14,120\n14,120\n1 ^ 192\nRELATED_AMOUNT\n11130.750\n4,040\nSOURCE_RISK\n96.500\n96.500\nRELATED.\n91\n81.500"
+    },
+    "stay-demand-oml/images/sql-oml-model.jpg": {
+      "sha256": "0a2c83c19605d533f39c7ff5a2a60ab3765cbafe102b7132453d6a11853bcdfe",
+      "status": "reviewed",
+      "finding": "Authentic screenshot reviewed visually and checked with OCR.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nData Load\nSELECT model_name,\nmining_function,\nalgorithm\nFROM user_mining_models\nWHERE model_name =- 'OTTO_STAY_DEMAND_SURGE_MODEL';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.008 seconds\nMODEL_NAME\nMININGFUNCTIO ALGORITHM\nOTTO_STAY_DE...\nCLASSIFICATION GENERALIZED_LI.\n* 1 A 0 503 1 1 6:31:36 PM - 1 rows total\nLLUSER V\nLOW\n60\n\u2022\u2022.\nPowered by ORDS"
+    },
+    "stay-demand-oml/images/oml-model-comparison.jpg": {
+      "sha256": "fa51ff65f0e81888a6625d748534b6e85ff9687c392c6e46ee2475e7234adf4b",
+      "status": "reviewed",
+      "finding": "Authentic screenshot reviewed visually and checked with OCR.",
+      "ocr_text": "= ORACLE Marhing\nDeploy\nRename\nCreate Notebook\nAlgorithm -\nModel\nName\nDecision Tree\nDT_48A3312EC4 1.0000\nGeneralized ... GLM_024BA54E53 1.0000\nGeneralized...\nGLMR_FF6921671.0000\nNeural Netw...\nNN_B51F3CC76* 1.0000\nRandom For...\nRF_042D035367 1.0000\nLLUSER Project\nLLUSER Workspace\nMetrics\nLLUSER V ?\nBalanced Accuracy\n\u2022 Features\nO Refresh\nFilter\nName\nImportance =\nType -\nAVG_SENTIMENT\nROOM_NIGHTS_BOOKED\nAVG_VIRALITY\nU\nNUMBER\nNUMBER\nNUMBER"
+    },
+    "guest-concern-vector-search/images/gilly.png": {
+      "sha256": "6aa368d4a7f2f1648d7bd84cd6fb67c94acd52bbd8c886343072849caac90473",
+      "status": "reviewed",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 3: Search Stay Offers by Meaning\nFind guests affected by\nan accessible-room concern.\nGilly\nAl Engineer"
+    },
+    "booking-abuse-network/images/bob.png": {
+      "sha256": "049925943ec6511a8f474ac297909d0ef24654e5693e4f2336052ca0c9f4fdf0",
+      "status": "reviewed",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 4: Investigate a Booking Abuse Network\nFollow connections between\nsuspicious reservations.\nBob\nGraph Specialist"
+    },
+    "guest-routing-spatial/images/moon.png": {
+      "sha256": "48cd11c82b9f468209dca2154db947d6e0291fefae7d5f0eee346c8ee90cbe1c",
+      "status": "reviewed",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 5: Route Guests to the Closest Hotel\nHelp guests find the closest\nsuitable hotel.\nMoon\nSpatial & Geo\nSpecialist"
+    },
+    "stay-demand-oml/images/otto.png": {
+      "sha256": "933d03bd88c7aa1ef188a9c1cdf045b34565c95f8ee289827c5f7d9e1333e02a",
+      "status": "reviewed",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 6: Build a Stay Offer Demand Watchlist\nUse booking activity to flag\nstay offers for review.\nOtto\nData Scientist"
+    },
+    "selectai/images/nina.png": {
+      "sha256": "337c8db37b79d092e3188bd1f4df2dfa8464466dcc8daff2a0a668e5db80f92e",
+      "status": "reviewed",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Labs 7 & 8: Ask Hospitality Questions and Build an Al Agent\nAsk questions about\nhotel data and review\nthe answers.\nJessica\nDBA\nNina\nGuest Experience Analyst"
+    },
+    "selectai-agent/images/nina.png": {
+      "sha256": "337c8db37b79d092e3188bd1f4df2dfa8464466dcc8daff2a0a668e5db80f92e",
+      "status": "reviewed",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Labs 7 & 8: Ask Hospitality Questions and Build an Al Agent\nAsk questions about\nhotel data and review\nthe answers.\nJessica\nDBA\nNina\nGuest Experience Analyst"
     }
   }
 }

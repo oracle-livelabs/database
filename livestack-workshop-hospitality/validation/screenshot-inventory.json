@@ -36,8 +36,8 @@
   },
   {
     "target_asset": "guest-routing-spatial/images/moon.png",
-    "status": "illustration_removed",
-    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
     "asset_id": "A006"
   },
   {
@@ -70,8 +70,8 @@
   },
   {
     "target_asset": "stay-demand-oml/images/otto.png",
-    "status": "illustration_removed",
-    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
     "asset_id": "A011"
   },
   {
@@ -179,8 +179,8 @@
   },
   {
     "target_asset": "guest-concern-vector-search/images/gilly.png",
-    "status": "illustration_removed",
-    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
     "asset_id": "A028"
   },
   {
@@ -283,8 +283,8 @@
   },
   {
     "target_asset": "selectai/images/nina.png",
-    "status": "illustration_removed",
-    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
     "asset_id": "A043"
   },
   {
@@ -408,8 +408,8 @@
   },
   {
     "target_asset": "booking-abuse-network/images/bob.png",
-    "status": "illustration_removed",
-    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
     "asset_id": "A062"
   },
   {
@@ -653,5 +653,23 @@
     "target_asset": "guest-operations-dashboard/images/demo-dashboard-charts.jpg",
     "status": "regenerated_live_capture",
     "reason": "Live demo dashboard chart capture; separate portfolio fixture."
+  },
+  {
+    "asset_id": "N_SCREEN_MODEL",
+    "target_asset": "stay-demand-oml/images/sql-oml-model.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live LLUSER screenshot placed beside the matching OML instruction."
+  },
+  {
+    "asset_id": "N_SCREEN_COMPARISON",
+    "target_asset": "stay-demand-oml/images/oml-model-comparison.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live LLUSER screenshot placed beside the matching OML instruction."
+  },
+  {
+    "asset_id": "N_BANNER_AGENT",
+    "target_asset": "selectai-agent/images/nina.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot."
   }
 ]

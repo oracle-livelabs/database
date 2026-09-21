@@ -1,5 +1,7 @@
 # Investigate a Booking Abuse Network
 
+![Bob — hospitality lab banner](images/bob.png)
+
 ## Introduction
 
 > **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
@@ -378,7 +380,7 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 
 3. Select **Import** in the upper-right corner.
 
-    ![Notebooks page with the hospitality notebook and Import control](images/graph-notebooks.jpg)
+    ![Graph Studio notebook import dialog](images/graph-import-dialog.jpg)
 
     
 
@@ -513,24 +515,6 @@ The statement defines the graph structure over the relational tables. It does no
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
-
-## Live database capture
-
-Booking relationships returned by SQL/PGQ. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Booking relationships returned by SQL/PGQ](images/live-04-booking-graph-sql.jpg)
-
-## Live Graph Studio captures
-
-The supplied notebook was imported and all eight paragraphs ran in Chrome as LLUSER. The investigation table and both graph views rendered successfully. The shared-device view confirms RSV-8841, RSV-5077 and RSV-1190 connected to DEV-fp-91a7.
-
-![Live Graph Studio result](images/live-09-graph-notebook-table.jpg)
-
-![Live Graph Studio result](images/live-10-graph-reservation-network.jpg)
-
-![Live Graph Studio result](images/live-11-graph-shared-device.jpg)
-
-The supplied display filters are active: the reservation network shows 6 of 7 vertices and 8 of 10 edges; the shared-device view shows 4 of 5 vertices and 5 of 7 edges. These are filtered visualizations, not the complete query result.
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026
