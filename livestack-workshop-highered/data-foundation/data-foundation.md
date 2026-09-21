@@ -4,14 +4,14 @@
 
 Student-success work starts with trusted context. Advisors need student records, programs, services, requests, signals, locations, and predictions to describe one situation. They should not have to reconcile competing versions.
 
-In this lab, you act as a database developer. You will inspect business-ready views that translate the portable LiveStack schema into higher-education terms.
+In this lab, you act as a database developer. You will inspect business-ready views that present the Higher Education tables in consistent reporting shapes.
 
 ![Before and after: student-success evidence in separate tools becomes one Oracle AI Database foundation](images/highered-converged-data-foundation.svg " ")
 
 <details>
 <summary><strong>Key terms: semantic view and governed data</strong></summary>
 
-> A **semantic view** gives stored data business-friendly names without creating another copy. Here, views translate portable table names into student, service, request, and campus service site.
+> A **semantic view** presents stored data in a consistent, business-ready shape without creating another copy. Here, views organize student, service, request, program, and campus-site data for reporting.
 >
 > **Governed data** means access, definitions, and changes can be managed from the same database foundation.
 
@@ -30,7 +30,10 @@ Estimated Time: **10 minutes**
 | --- | --- |
 | Business Problem | Staff need a complete view of student support demand. |
 | Technical Challenge | Operational data is easier to govern when teams do not copy it into separate specialist stores. |
-| Persona Focus | Database developer supporting student-success applications and analysts. |
+| Decision Owner | Database developer supporting student-success applications and analysts. |
+| Decision | Are the required workshop capability families available, and where is current program pressure concentrated? |
+| Information Needed | Available object families, academic programs, services, request volumes, open work, and demand scores. |
+| Next Action | Confirm that the required workshop objects are available, then direct the operations team to the programs with the greatest current pressure. |
 | What You Will Do | Map the governed object families, then compare program-level service demand. |
 | Database Capability | Relational SQL, semantic views, JSON, vector, graph, spatial, and OML catalog views. |
 | Outcome | A shared capability map and a first view of the support pressure that later labs explain. |
@@ -64,22 +67,22 @@ Estimated Time: **10 minutes**
     SELECT 'JSON duality views',
            COUNT(*)
     FROM user_json_duality_views
-    WHERE view_name = 'ORDERS_DV'
+    WHERE view_name = 'STUDENT_SERVICE_REQUESTS_DV'
     UNION ALL
     SELECT 'Property graphs',
            COUNT(*)
     FROM user_property_graphs
-    WHERE graph_name = 'INFLUENCER_NETWORK'
+    WHERE graph_name = 'STUDENT_SUPPORT_NETWORK'
     UNION ALL
     SELECT 'Vector indexes',
            COUNT(*)
     FROM user_indexes
-    WHERE index_name = 'IDX_PRODUCT_VEC'
+    WHERE index_name = 'IDX_SERVICE_VEC'
     UNION ALL
     SELECT 'Spatial metadata layers',
            COUNT(*)
     FROM user_sdo_geom_metadata
-    WHERE table_name IN ('CUSTOMERS', 'FULFILLMENT_CENTERS')
+    WHERE table_name IN ('STUDENTS', 'CAMPUS_SERVICE_SITES')
     UNION ALL
     SELECT 'OML mining models',
            COUNT(*)
@@ -142,6 +145,17 @@ Expected output: Program Service Pressure
 | College of Engineering | 2 | 2 | 1 | 58.0 |
 
     Student Success Office has more open work and the higher average demand score in this starter dataset. Lab 2 drills from this program-level picture into the specific student-service requests that need review.
+
+## Business outcome checkpoint
+
+The result reveals where current support pressure is concentrated and confirms that the named workshop capability families are available for later labs. It does not establish production or data readiness. A student-success operations leader can use the program summary to decide where to investigate first.
+
+- **Demonstrates:** Catalog and relational queries can establish the available foundation and compare current program-level workload.
+- **Supports:** Less time spent locating and reconciling separate sources before reviewing student-service demand.
+- **Candidate indicators:** Time to assemble a program-level workload view, open-request age, unresolved data-quality exceptions, and manual reconciliation steps.
+- **Requires validation:** Institutional definitions, source completeness, data lineage, access controls, refresh timing, and reconciliation with operating systems.
+
+With the shared context established, Lab 2 moves from program-level pressure to the individual requests behind the command-center totals.
 
 ## Acknowledgements
 
