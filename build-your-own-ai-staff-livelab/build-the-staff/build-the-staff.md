@@ -58,6 +58,16 @@ Every role uses the following rules:
 
 1. Open a private GPT configuration or role chat named `Maya Coordinator`.
 
+    ![Where to Access Projects or GPTs](./images/05_projects_gpts.png)
+
+    ![Where to create your Own GPT](./images/04_where_to_create.png)
+
+    OR
+
+    ![Where to access the Project](./images/06_click_project.png)
+
+    ![Create a New Chat](./images/07_new_chat.png)
+
 2. Paste these instructions. Replace `[OWNER NAME]` and `[REPEAT TASK]` with values from the Task Brief.
 
     ```text
