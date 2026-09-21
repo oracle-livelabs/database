@@ -1,16 +1,18 @@
 # Investigate a Booking Abuse Network
 
+![Bob — hospitality lab banner](images/bob.png)
+
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
 
-Bob Green is a seasoned graph specialist at Seer Hotels. He has worked on booking abuse detection and investigation for the past decade. When the hotel group needs to improve how it finds and investigates booking abuse, Bob recommends a property graph.
+Bob Green is a graph specialist at Seer Hotels. He uses property graphs to investigate booking abuse.
 
-Bob's starting point is simple: booking abuse patterns often hide in relationships, not in one reservation row. One reservation may not reveal the full picture, but a shared device, reused phone number, reused payment token, or repeated IP address can reveal coordinated activity.
+A reservation row may not show coordinated activity. Shared devices, phone numbers, payment tokens, or IP addresses can reveal connections between reservations.
 
-In this lab, you will use Bob's approach to investigate the booking abuse network in two views. You will start with the basic parts of a graph, use SQL/PGQ to follow connections. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
+First, use SQL/PGQ to follow connections between reservations. Then open Graph Studio to view the same relationships as an interactive network.
 
-Graph Studio is Oracle Database's visual workspace for property graphs. It lets an investigator see nodes, edges, and paths as an interactive network while keeping the graph backed by the same shared database data. Bob uses SQL/PGQ when he needs a precise, repeatable result set, such as a ranked list of entities or a filtered path count. He then uses Graph Studio when he needs to explore a network visually, select a node, follow adjacent relationships, and explain a coordinated booking-abuse pattern to another reviewer. Later in this workshop, you use it to turn the SQL evidence for `RSV-8841` into an investigation map.
+Graph Studio is Oracle Database’s visual workspace for property graphs. SQL/PGQ returns tables you can sort and compare. Graph Studio shows nodes, edges, and paths you can explore. You will use both to investigate reservation `RSV-8841`.
 
 
 <details>
@@ -24,15 +26,23 @@ Graph Studio is Oracle Database's visual workspace for property graphs. It lets 
 >
 > - A **hop** is one step across an edge from one vertex to another. `RSV-8841` to a device is one hop. `RSV-8841` to that device and then to another reservation is two hops. The hop count tells investigators how far the search travels from the starting reservation; it does not describe physical distance or reservation time.
 >
-> - **SQL Property Graph Queries (SQL/PGQ)** let you describe graph patterns in SQL, such as "start with this reservation and follow related entities." That lets investigators ask relationship questions in SQL without moving booking abuse evidence into a separate graph-only database.
+> - **SQL Property Graph Queries (SQL/PGQ)** let you describe graph patterns in SQL, such as "start with this reservation and follow related entities." That lets investigators ask relationship questions in SQL without moving booking abuse data into a separate graph-only database.
 
 </details>
+
+The local Hospitality LiveStack demo illustrates a related application story using a separate dataset. Its identifiers and results differ from the Seer Hotels SQL exercises below.
+
+![Local demo guest experience network](images/demo-network-overview.jpg)
+
+The application also exposes its own query details. Use the workshop SQL below for the Seer Hotels exercises.
+
+![Local demo network query and results](images/demo-network-query.jpg)
 
 ### Objectives
 
 - Identify vertices and edges in a property graph.
 - Follow connections from a suspicious reservation.
-- Find reservation pairs that share identifying evidence.
+- Find reservation pairs that share identifying information.
 - Open Graph Studio from Database Actions.
 - Import and run the hospitality booking-abuse-network notebook.
 - Explain the result in terms a business user can act on.
@@ -44,7 +54,7 @@ Estimated Time: **10 minutes**
 | Step                | Hospitality focus                                                                                                  |
 | ---------------------| ----------------------------------------------------------------------------------------------------------------|
 | Business Problem    | Booking Abuse teams need to see relationships that are hard to detect from reservation tables alone.                   |
-| Technical Challenge | Bob needs to follow paths and find shared evidence without writing long chains of self-joins.                  |
+| Technical Challenge | Bob needs to follow paths and find shared identifiers without writing long chains of self-joins.                  |
 | Persona Focus       | You review Bob's graph design and interpret its results for a booking abuse review.                                     |
 | What You Will See   | A property graph shows connected entities and reservation pairs with SQL.                                           |
 | Database Capability | BOOKING\_ABUSE\_NETWORK and GRAPH\_TABLE support SQL/PGQ traversal.                                                     |
@@ -52,7 +62,7 @@ Estimated Time: **10 minutes**
 
 Persona focus: You are reviewing Bob's graph solution with a booking abuse analyst.
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step instructions for pasting and running SQL statements.
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Follow a suspicious reservation with SQL
 
@@ -181,7 +191,7 @@ In this lab, a **hop** means one relationship step. The reservation to a device 
 
     Jessica now needs four separate SELECT statements. The first branch follows one relationship step, the second follows two, the third follows three, and the fourth follows four. Each additional hop adds another relationship join and another entity join. The `UNION` combines the four path lengths and removes duplicate rows. This returns the same one-through-four-hop range as Bob's graph query, but it is much longer and harder to change.
 
-3. Review how the SQL grows more complex when it does not use  graph query.
+3. Review how the SQL grows more complex when it does not use a graph query.
 
     Jessica can add another relationship step, but she must join `BOOKING_ENTITIES` and `BOOKING_RELATIONSHIPS` again. Four hops need four relationship joins and five instances of the entity table. If she wants to support several possible path lengths, the query needs more joins, unions, and duplicate handling. The SQL becomes harder to read just as the investigation becomes more important.
 
@@ -216,6 +226,10 @@ In graph terms, the reservation and connected objects are **vertices**. The row 
     ORDER BY connected_risk DESC;
     </copy>
     ```
+
+    ![Live hospitality result — graph direct](images/sql-graph-direct.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
 
     In the `MATCH` pattern, `reservation` and `connected` are vertices. `edge` is the edge between them, so this pattern follows one hop. `IS entity` and `IS related_to` refer to the labels defined in `BOOKING_ABUSE_NETWORK`.
 
@@ -259,6 +273,10 @@ Start from suspicious reservation `RSV-8841` and trace the connected entities wi
     </copy>
     ```
 
+    ![Live hospitality result — graph four hop](images/sql-graph-four-hop.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `RSV-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
 
     **Expected output: High Risk Booking Abuse Entities**
@@ -268,7 +286,7 @@ Start from suspicious reservation `RSV-8841` and trace the connected entities wi
 2. Review the high-risk entities.
     The query returns connected entities as a risk-sorted table, not as a visual network. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and reservation labs.
 
-    The expected rows show the evidence connected to suspicious reservation `RSV-8841`. 
+    The expected rows show the entities connected to suspicious reservation `RSV-8841`. 
     For example:
     * `DEV-fp-91a7` is a device 
     * `TOKEN-REUSED-017` is a tokenized payment reference reused across reservations
@@ -316,6 +334,10 @@ Bob now moves from one suspicious reservation to a broader booking abuse questio
     </copy>
     ```
 
+    ![Live hospitality result — graph shared](images/sql-graph-shared.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     The pattern starts at reservation `a`, follows an edge to a shared entity, and follows another edge back to reservation `b`. The two reservations can therefore be connected through the same device, IP address, phone number, or email address. `a.entity_id < b.entity_id` keeps the result from returning the same pair twice in reverse order.
 
 2. Review the business result.
@@ -326,17 +348,17 @@ Bob now moves from one suspicious reservation to a broader booking abuse questio
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
-Now, what if Bob wanted people to be able to have pattern visualization at their disposal? The SQL above showed which reservations and identifiers are connected; the same relationships can also be shown visually. With Oracle Graph Studio, Bob can use the same reservations and turn them into an interactive network. This will help Bob spot clusters, shared devices, and visualize links between reservations.
+Oracle Graph Studio displays the reservations and identifiers as an interactive network. Bob can select nodes and follow relationships to find clusters, shared devices, and links between reservations.
 
-In the following tasks, you will use Graph Studio to turn the SQL evidence for `RSV-8841` into an investigation map.
+In the following tasks, use Graph Studio to turn the SQL results for `RSV-8841` into an investigation map.
 
 1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
-    ![Database Actions Launchpad for the LLUSER workshop user](images/database-actions-launchpad.png " ")
+    ![Database Actions Launchpad for the LLUSER workshop user](images/graph-launch.jpg " ")
 
 3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
 
-    ![Open Graph Studio from the Database Actions launchpad](images/graph-database-actions-launchpad.png " ")
+    ![Open Graph Studio from the Database Actions launchpad](images/graph-launch.jpg " ")
 
 4. If prompted, sign in with the `LLUSER` and the workshop password supplied.
 
@@ -354,13 +376,17 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 
 2. In Graph Studio, click **Notebooks** in the landing page.
 
-    ![Graph Studio home page for LLUSER with Notebooks highlighted](images/open-notbook.png " ")
+    ![Graph Studio Notebooks page for LLUSER](images/graph-notebooks.jpg " ")
 
 3. Select **Import** in the upper-right corner.
+
+    ![Graph Studio notebook import dialog](images/graph-import-dialog.jpg)
 
     
 
 4. Once the import notebooks tab opens, drag & drop the `hospitality-booking-abuse-graph-studio.dsnb` file from your local computer into the import window, or browse to the file on your computer. Review the selected filename and click **Import**. Open **Booking Abuse Network** after the import completes.
+
+    ![Hospitality notebook selected for import](images/graph-import-file.jpg)
 
     
 
@@ -369,13 +395,17 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 
 You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of that investigation in Graph Studio so you can compare the query results with the visual graph experience. The notebook shows the `RSV-8841` path and the `DEV-fp-91a7` shared-device view.
 
-The advantage of Graph Studio is investigative context: a table ranks the connected entities, while the visual graph reveals the paths and shared infrastructure that explain why they are connected.
+Use the table to rank connected entities. Use the graph to follow the paths and shared identifiers that connect them.
 
 1. Start at the top of the **Booking Abuse Network** notebook. Read the explanation for the `RSV-8841` traversal, then run the first SQL paragraph.
+
+    ![Booking Abuse Network notebook introduction](images/graph-notebook-top.jpg)
 
     
 
 2. Review the results in table format in the graph studio notebook:
+
+    ![Ranked booking results in Graph Studio](images/live-09-graph-notebook-table.jpg)
 
     This uses the investigation pattern from Task 3 with a shorter one-to-two-hop limit: start from `RSV-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
 
@@ -387,19 +417,25 @@ The advantage of Graph Studio is investigative context: a table ranks the connec
     | `Shared Entity Connections` | Markdown label and explanation | Introduces the device-centered relationship view. |
     | `SELECT * ... WHERE device.entity_key = 'DEV-fp-91a7'` | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected reservations. |
 
-3. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `RSV-8841`. Review the graph visualization that appears below the paragraph. 
+3. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `RSV-8841`. Review the graph visualization that appears below the paragraph.
+
+    ![Reservation graph from RSV-8841](images/live-10-graph-reservation-network.jpg)
     Note how the reservations and devices in the previous query were turned into vertices and edges in Graph Studio to display an interactive network.
 
     
 
-4. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that anchors on `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph. This visualization narrows the investigation to the device DEV-fp-91a7 and shows every entity directly connected to it.
+4. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that anchors on `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph. This visualization narrows the investigation to the device DEV-fp-91a7.
+
+    ![Reservations linked to the shared device](images/live-11-graph-shared-device.jpg)
+
+    The supplied display filters show four of five vertices and five of seven edges.
 
     
 The fixture requires device `DEV-fp-91a7` to link reservation vertices RSV-8841, RSV-5077, and RSV-1190. These links illustrate how reservations can share a booking device; verify the edges in your loaded data. This graph matters because it shows what the suspicious reservation touched or shared.
 
-> **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
+> **Result note:** Graph layouts and node positions can vary between runs. Compare entity keys, relationships, and query results.
 
-Congratulations, you have successfully navigated Graph Studio. In this workshop, you used SQL/PGQ for a precise, repeatable result set, such as a ranked list of entities or a filtered path count. You then used Graph Studio to explore a network visually, select a node, follow adjacent relationships, and understand a coordinated booking-abuse pattern. And finally, you used it to turn the SQL evidence for `RSV-8841` into an investigation map!
+You have used SQL/PGQ to list connected entities and Graph Studio to explore their relationships. Together, these views help you explain the connections around `RSV-8841`.
 
 ### Optional graph-algorithms extension
 
@@ -409,7 +445,7 @@ The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb)
 
 Bob's graph queries show why a property graph fits booking-abuse investigations. Bob can start with one suspicious reservation, follow its relationships, limit the search to a chosen number of hops, and find reservation pairs that share identifying information. The queries stay readable as the network grows, while the results still include the risk and activity details needed for review.
 
-The same relationships were shown visually in Graph Studio. The graphical interface turned vertices and edges into an interactive network. Bob compared the notebook results with the SQL Worksheet results ran earlier. The SQL showed the evidence trail while Graph Studio showed the same relationships as a visual investigation map. This helps a business user spot clusters, shared devices, and links between reservations.
+Graph Studio displayed the same relationships as an interactive network. Bob compared the notebook results with the earlier SQL Worksheet results, then explored clusters, shared devices, and links between reservations.
 
 ## Appendix: Create the Property Graph
 
@@ -479,6 +515,6 @@ The statement defines the graph structure over the relational tables. It does no
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

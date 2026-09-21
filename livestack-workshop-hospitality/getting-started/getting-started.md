@@ -2,30 +2,30 @@
 
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+> **Image status:** This lab includes a live SQL Worksheet capture and generic sign-in illustrations. See the [image inventory](../validation/screenshots.md) for the source of each image.
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on hospitality exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each hospitality query runs as the workshop user against the prepared hospitality schema.
+Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and prepare SQL Worksheet. Run the hospitality exercises as `LLUSER`, the workshop database user.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
 
-> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database guest.
+> - **Database Actions** is the browser workspace for Oracle Database. You use it to run SQL, browse objects, load data, and open development tools without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+> - **SQL Worksheet** is the Database Actions tool where you paste and run SQL. It displays query results, script output, and errors.
 >
 > - `LLUSER` is the workshop database user and schema owner for the hands-on hospitality objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
 </details>
 
-The retained sign-in graphics are source navigation illustrations. They are not screenshots captured from a hospitality deployment.
+The sign-in graphics illustrate the navigation steps. The SQL Worksheet capture shows the tested hospitality database.
 
 ### Environment prerequisites
 
-This guide expects a provisioned hospitality dataset in `LLUSER` on Autonomous Database 26ai. The Phase 1 repository does not provision it. Before starting, the instructor must deploy the Phase 2 package and verify the [hospitality schema contract](../validation/schema-contract.md).
+Before starting, the instructor must load the hospitality dataset into `LLUSER` on Autonomous Database 26ai and check the [hospitality schema contract](../validation/schema-contract.md). The supplied loader and labs were tested on a manually provisioned database.
 
 Required capabilities are Database Actions SQL Worksheet, Graph Studio, native JSON and duality views, Oracle Spatial, Oracle Machine Learning, access to `ADMIN.ALL_MINILM_L12_V2`, and an enabled `GENAI` profile with an approved provider. Labs 1 and 4 require preloaded embeddings and a precreated booking graph. Lab 3 creates a separate teaching vector column. Lab 8 depends on Lab 7. AutoML and the supplemental PGX notebook also need their respective services and privileges.
 
-The source supplies the same sandbox launch flow for both navigation variants. A tenancy-specific deployment procedure is pending the Phase 2 package. Do not launch an unrelated reservation to substitute for the hospitality environment.
+Both workshop navigation options currently show the sandbox launch steps below. LiveLabs green-button and tenancy provisioning still need testing. If you use a manually provisioned database, open the Database Actions URL supplied by your instructor and sign in as `LLUSER`.
 
 Estimated Time: **5 minutes**
 
@@ -40,7 +40,7 @@ In this lab, you will:
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
+Open the LiveLabs reservation for this workshop. It contains the database link and sign-in details.
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -56,7 +56,7 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 
 ## Task 2: Open SQL Worksheet
 
-Open SQL Worksheet as the workshop user before running the hospitality queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+Open SQL Worksheet as `LLUSER`. Run each query there and review the returned table.
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -107,7 +107,11 @@ Open SQL Worksheet as the workshop user before running the hospitality queries. 
     </copy>
     ```
 
-    ![SQL Worksheet showing the LLUSER connection check results](images/sql-worksheet-connection-check.png " ")
+    ![Live hospitality result — connection](images/sql-connection.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
+    ![SQL Worksheet showing the LLUSER connection check results](images/sql-connection.jpg " ")
 
     **Expected output: Connected SQL Worksheet Session**
 
@@ -122,6 +126,7 @@ You can now continue to the hospitality labs.
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Stay offer Manager
-* **Contributor** - Linda Foinding, Principal Database Stay offer Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026
+

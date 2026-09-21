@@ -1,8 +1,10 @@
 # Ask Hospitality Questions with Select AI
 
+![Nina — hospitality lab banner](images/nina.png)
+
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
 
 Nina Patel is a guest experience analyst at Seer Hotels. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
@@ -48,7 +50,7 @@ Estimated Time: **10 minutes**
 | Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
 | Outcome             | Nina gets a repeatable way to ask hospitality questions while keeping SQL review in the process. |
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step instructions for pasting and running SQL statements.
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Check the Select AI profile
 
@@ -66,7 +68,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If the query shows a different profile name, use that name in the following tasks.
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also support on-demand inference in the profile’s region. The verified test uses `meta.llama-3.3-70b-instruct` in `us-chicago-1`, while the database itself is in Ashburn. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
   
@@ -114,6 +116,10 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
+    ![Live hospitality result — ai object list](images/sql-ai-object-list.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     The result should list `STAY_OFFERS`, `RESERVATIONS`, `RESERVATION_NIGHTS`, and `GUESTS`. Select AI can now use these tables when it translates Nina's questions into SQL.
   
     
@@ -135,6 +141,10 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
            ) AS generated_sql;
     </copy>
     ```
+
+    ![Live hospitality result — ai generated](images/sql-ai-generated.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -157,6 +167,10 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
            ) AS answer;
     </copy>
       ```
+
+    ![Live hospitality result — ai answer](images/sql-ai-answer.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -181,6 +195,10 @@ Nina's first question gives her a stay offer ranking, but she also needs enough 
            ) AS generated_sql;
     </copy>
     ```
+
+    ![Live hospitality result — ai refined generated](images/sql-ai-refined-generated.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -195,12 +213,16 @@ Nina's first question gives her a stay offer ranking, but she also needs enough 
            ) AS answer;
     </copy>
     ```
+
+    ![Live hospitality result — ai refined answer](images/sql-ai-refined-answer.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
   
     
 
 3. Compare the first and second questions.
 
-  The second prompt gives Nina a result she can take into a review meeting. The business user did not need to know the table names or write the joins, but Nina still checked the SQL and made the requested columns explicit.
+  The revised prompt asks for the columns Nina needs in her review. She still checks that the SQL uses the right joins, totals, and reservation statuses.
 
 ## Task 6: Explain the result
 
@@ -217,6 +239,10 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
            ) AS explanation;
     </copy>
     ```
+
+    ![Live hospitality result — ai narration](images/sql-ai-narration.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -228,9 +254,9 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina used Select AI to turn a hospitality question into SQL, reviewed the generated statement, ran it in Oracle AI Database, and refined the question when the first result lacked the details she needed. Select AI reduces the amount of SQL a business user has to write, while SQL review keeps the database operation visible.
+Nina asked a hospitality question, inspected the generated SQL, ran it, and refined the prompt. Select AI reduced the SQL she needed to write. Reviewing the query helped her check that it answered her question.
 
-This is the practical value of Select AI in Oracle AI Database. The question, generated SQL, and result stay connected to the shared hospitality schema. Nina can ask in ordinary language, but she does not have to give up database access controls or the ability to inspect the query behind the answer.
+Nina can ask questions in ordinary language and inspect the queries behind the answers. The queries use the shared hospitality schema and run with the database user’s access rights.
 
 Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
 
@@ -240,6 +266,6 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

@@ -1,14 +1,16 @@
 # Route Guests to the Closest Hotel Property
 
+![Moon — hospitality lab banner](images/moon.png)
+
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
 
 Moon Kai is Seer Hotels’ spatial specialist. Operations teams ask Moon for help when location affects a service decision: which property is closest to a region with growing demand, and which guests should it handle?
 
-The hotel group already stores the required data in Oracle AI Database. Hotel properties and guests are stored as map points. Demand regions are stored as map areas, and each region has a demand score.
+Oracle AI Database stores hotel and guest locations as map points. It stores demand regions as map areas, each with a demand score.
 
-Moon wants operations users to answer a simple question with SQL that can power a business-user dashboard and map:
+Moon wants a query that a service team can use in a dashboard and map:
 
 > Guests in a high-demand region need help finding another hotel. **Which guests are in that region, and which property is closest to each one?**
 
@@ -30,7 +32,11 @@ In this lab, you follow Moon's approach. You start with a single point, measure 
 >
 </details>
 
-The planned Seer Hotels application can use these same locations on a guest-relocation map. The SQL in this lab calculates the distances behind that view.
+Oracle Spatial can support a guest-relocation map using the distances calculated in this lab.
+
+The local Hospitality LiveStack demo illustrates a related application story using a separate dataset. Its identifiers and results differ from the Seer Hotels SQL exercises below.
+
+![Local demo hotel coverage map](images/demo-spatial-map.jpg)
 
 
 ### Objectives
@@ -54,7 +60,7 @@ Estimated Time: **10 minutes**
 | Database Capability | `SDO_GEOMETRY`, `SDO_GEOM.SDO_DISTANCE`, `SDO_GEOM.RELATE`, and GeoJSON conversion support the analysis. |
 | Outcome | An operations user can see which guests need service in a region and which property is closest to each one. |
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step instructions for pasting and running SQL statements.
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Look at the locations as points
 
@@ -64,7 +70,7 @@ An `SDO_GEOMETRY` point is Oracle Spatial's structured representation of one loc
 
 `SDO_UTIL.TO_GEOJSON` converts that geometry into a standard JSON map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`. The application can send this object to a map without maintaining a second location format or a separate conversion service. Oracle uses the same stored geometry for SQL analysis and application display.
 
-That is the Oracle AI Database advantage in this lab: one location supports spatial calculations, relational joins, and JSON map output without copying the data between systems.
+The same stored location supports distance calculations, relational joins, and JSON map output.
 
 1. Run this query:
 
@@ -85,6 +91,10 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
     </copy>
     ```
 
+    ![Live hospitality result — spatial points](images/sql-spatial-points.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
     **Expected output: Hotel Property Points**
@@ -95,7 +105,7 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
 
     Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
 
-    This is the converged-database advantage. Moon can keep the property's location beside its name, capacity, operating status, and current load. SQL can calculate distance and return those property details, while `SDO_UTIL.TO_GEOJSON` gives the application the same location for a map. The team does not have to copy coordinates into a separate mapping system and keep the copies synchronized.
+    Moon keeps each property’s location beside its name, capacity, status, and current load. SQL returns the distance and property details. `SDO_UTIL.TO_GEOJSON` returns the same location for the application map.
 
 ## Task 2: Find the closest properties to a demand region
 
@@ -126,6 +136,10 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
     </copy>
     ```
 
+    ![Live hospitality result — spatial new york](images/sql-spatial-new-york.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     `SDO_GEOM.SDO_DISTANCE` compares the hotel-property point with the demand-region polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
     The four arguments in this query have simple roles:
@@ -141,7 +155,7 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
 
     **Expected output: New York Service Coverage**
 
-    Review the closest property and its calculated distance. The exact distance and ranking depend on the hospitality geometry loaded in Phase 2; they have not been measured for this edition.
+    Review the closest property and its distance. Rankings depend on the data your loader supplied. The live capture below shows the tested dataset.
 
     
 
@@ -179,6 +193,10 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
+
+    ![Live hospitality result — spatial chicago](images/sql-spatial-chicago.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
 
     
 
@@ -261,13 +279,17 @@ Moon now needs a result that an operations application can use: guests inside Ne
     </copy>
     ```
 
+    ![Live hospitality result — spatial routing](images/sql-spatial-routing.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     `SDO_GEOM.RELATE` keeps guests whose point falls inside or touches the New York Visitor Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching guest to every active property. `ROW_NUMBER` keeps the nearest property for each guest.
 
 2. Review the result as an operations decision.
 
     Guest `LOCATION` is the requested arrival or relocation point. Each row gives a business user a guest to contact, the closest property, and the information needed to decide where the work should go. The result combines the region's demand score, guest details, property capacity, current load, and spatial distance in one SQL result.
 
-    This is the business outcome. A dashboard can let a user select a region and immediately show the guests affected, the property that should handle each request, and the distance involved. The user does not need to compare a map with a separate guest list or operations report.
+    A dashboard can use this result to show guests in the selected region and the closest hotel to each guest. The service team can review the location and capacity details together before arranging a relocation.
 
     
 
@@ -281,9 +303,9 @@ Moon now needs a result that an operations application can use: guests inside Ne
 
 ## Conclusion: Turn Location into a Service Decision
 
-Moon's analysis moves from a point, to distance, to guest routing. A business user can select a high-demand region and get a list of guests, their closest hotel property, and the distance to that property. That is a useful dashboard result because it tells the user what action to take, not just where the data is located.
+Moon used points and polygons to find guests in a demand region and rank nearby hotels. The result gives the service team guests to contact and properties to check for suitable rooms.
 
-This shows why Spatial in Oracle AI Database matters. One convergent query can identify guests with spatial functions, join them to relational guest and property data, and include capacity and current load in the same result. The dashboard can show the map and the business details from one database, without moving data between a mapping system, a guest system, and an operations system.
+One SQL query finds guests by location, joins their records to hotel details, and returns distance, capacity, and current load. A dashboard can use these results for both its map and guest list.
 
 ## Next Steps
 
@@ -291,6 +313,6 @@ You used Oracle Spatial to turn points and polygons into a routing decision. For
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

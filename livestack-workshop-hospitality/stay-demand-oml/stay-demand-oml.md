@@ -1,8 +1,10 @@
 # Build a Stay Offer Demand Watchlist with Oracle Machine Learning
 
+![Otto — hospitality lab banner](images/otto.png)
+
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
 
 Otto Spencer is Seer Hotels’ data scientist. His team supplies the predictions used in analytics charts and dashboards.
 
@@ -52,7 +54,7 @@ Estimated Time: **10 minutes**
 | Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
 | Outcome             | A watchlist for a dashboard combines the model result with the stay offer and activity data behind it.                  |
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step instructions for pasting and running SQL statements.
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Read the training data
 
@@ -80,6 +82,10 @@ The view also contains `SURGE_LABEL`. This is the known label used during traini
     </copy>
     ```
 
+    ![Live hospitality result — oml training](images/sql-oml-training.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
 2. Identify the parts of each row.
 
     The numeric and category columns are the model inputs. `SURGE_LABEL` is the answer the model learns to predict. `OFFER_ID` identifies the stay offer but is not a business feature for this example.
@@ -102,9 +108,11 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     
     
     
+![Machine Learning launch from Database Actions](images/oml-launch.jpg)
+
 2. Click **AutoML**.
 
-    ![automl](images/automl.png) 
+    ![automl](images/oml-home.jpg) 
 
 3. Create a new experiment with these settings:
   
@@ -116,25 +124,35 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     | Prediction type | `Classification`        |
     | Case ID         | `OFFER_ID`            |
   
-    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
+    ![Hospitality classification experiment settings](images/oml-settings.jpg)
+
+    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime varies; this fixture completed in about two minutes during validation.
 
     
 
 4. Review the leaderboard and model details.
 
+    ![Completed Stay Offer Demand Surge leaderboard](images/oml-leaderboard.jpg)
+
   
   
   The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
 
+  ![AutoML model comparison](images/oml-model-comparison.jpg)
+
   Inspect the confusion matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
 
-  The next task uses a Generalized Linear Model to preserve the SQL training and scoring exercise. No hospitality leaderboard, confusion matrix, or feature-importance result has been measured yet. After Phase 2, compare this model with the AutoML candidates and record the result instead of assuming it is the best model.
+  During testing on 21 September 2026, all five AutoML candidates reached 1.0000 balanced accuracy: Decision Tree, Generalized Linear Model, Ridge GLM, Neural Network, and Random Forest. The GLM confusion matrix classified 65.91% of rows correctly as STABLE and 34.09% correctly as SURGE, with no errors. These scores describe the small sample dataset; they do not show how well the model would predict future bookings. The next task creates a separate GLM using SQL.
 
-  Review prediction impact for the selected model. Social-post counts and sentiment may help explain a prediction, but influence is not evidence of causation.
+  ![Measured GLM confusion matrix](images/oml-confusion-matrix.jpg)
+
+  Review prediction impact for the selected model. This AutoML GLM used ROOM_NIGHTS_BOOKED with normalized prediction impact 1.000. A feature’s influence on a prediction does not prove that it causes the outcome.
+
+  ![Measured GLM prediction impact](images/oml-prediction-impact.jpg)
 
 ## Task 3: Create the selected model in SQL Developer Web
 
-If you ran AutoML, use its results to compare models. He now moves to SQL Developer Web to create a named model that a SQL query can call repeatedly. The model is stored in Oracle AI Database under the name `OTTO_STAY_DEMAND_SURGE_MODEL`.
+If you ran AutoML, compare its results with the SQL model. Now create `OTTO_STAY_DEMAND_SURGE_MODEL` in SQL Developer Web so you can call it from a query.
 
 The settings table tells Oracle to use the **Generalized Linear Model** used in this exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns.
 
@@ -205,11 +223,13 @@ If you skipped the optional AutoML task, use this setting as the example model f
     </copy>
     ```
 
+    ![Created demand model in SQL Worksheet](images/sql-oml-model.jpg)
+
     The result should show `CLASSIFICATION` and `GENERALIZED_LINEAR_MODEL`. Otto now has a database model that SQL can call.
 
 ## Task 4: Score new stay offer activity in SQL
 
-Otto creates a synthetic scoring snapshot by perturbing rows from the training view. This demonstrates scoring a separate table without passing the target label. Because it derives from training data, it is not an independent holdout set and cannot establish predictive accuracy.
+Otto creates sample scoring data by changing values from the training view. This shows how to score a separate table without including the target label. Because the rows come from training data, they cannot measure accuracy on new, independent data.
 
 1. Create the scoring table and add the new activity snapshot:
 
@@ -336,24 +356,28 @@ Otto creates a synthetic scoring snapshot by perturbing rows from the training v
     </copy>
     ```
 
+    ![Live hospitality result — oml scoring](images/sql-oml-scoring.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
 3. Read the result as a dashboard user.
 
   `PREDICTED_SURGE` tells the dashboard which label the model selected. `SURGE_SCORE` is the model value between 0 and 1, while `SURGE_PCT` presents the same value as a percentage for a dashboard user. The bookings and activity columns give the business user something to review alongside the prediction.
 
-  This is the value of in-database machine learning. Otto can return a prediction, the stay offer name, bookings, and social activity in one SQL result. There is no need to move data to an external machine learning platform.
+  One SQL result returns the prediction, stay offer name, bookings, and social activity. Otto can use the model without moving the data to an external machine learning platform.
 
   
 
 ## Conclusion: Put the Prediction Beside the Business Data
 
-Otto used AutoML to compare models, used the Generalized Linear Model as the SQL example, recreated it in SQL Developer Web, and scored a new activity snapshot. The query returns a watchlist that a dashboard can show alongside the stay offer activity behind each score.
+You trained a Generalized Linear Model in SQL Developer Web and scored sample stay offer activity. If you completed the optional AutoML task, you also compared candidate models. The final query returns a watchlist with the activity values behind each score.
 
-This is the business benefit of OML in the database. The model, the training data, the prediction, and the stay offer details stay together. Otto does not have to copy sensitive hospitality data to a separate machine learning platform, and the dashboard does not have to combine scores from one system with business data from another.
+The model, training data, scores, and stay offer details stay in the database. The dashboard can query them together without combining results from separate systems.
 
 Oracle AI Database makes the model part of the dashboard query. A business user can read the watchlist, inspect the supporting values, and repeat the query using the same access controls that protect the source data.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

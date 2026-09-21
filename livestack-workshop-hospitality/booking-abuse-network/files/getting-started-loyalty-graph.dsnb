@@ -22,9 +22,9 @@
         "message": [
           "%md",
           "# Loyalty Points Investigation",
-          "This optional notebook accompanies the hospitality workshop's booking-abuse graph lab. It preserves the PGX algorithm exercises using transferable hotel loyalty points. It is not the SQL/PGQ booking-evidence graph.",
+          "This optional notebook accompanies the hospitality workshop's booking-abuse graph lab. It preserves the PGX algorithm exercises using transferable hotel loyalty points. It is not the SQL/PGQ booking-abuse graph.",
           "Prerequisites: a PGQL property graph named LOYALTY_GRAPH over LOYALTY_MEMBERS and LOYALTY_POINT_TRANSFERS, the TRANSFERS edge label, the MEMBER_ID vertex property, and access to the in-memory PGX server. The Phase 2 loader must create these objects before this notebook can run.",
-          "Members 534, 597, 934, 387, and 406 are synthetic fixture IDs. Outputs have been cleared. Run every paragraph in sequence to produce results; rankings, paths, and counts depend on the loaded graph."
+          "Members 534, 597, 934, 387, and 406 are sample dataset IDs. Outputs have been cleared. Run every paragraph in sequence to produce results; rankings, paths, and counts depend on the loaded graph."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -48,7 +48,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "First, load the graph into the in-memory graph server if it still needs to be loaded since we will execute some graph algorithms.",
+          "First, load the graph into the in-memory graph server so you can run the graph algorithms.",
           "",
           "Run the first %python-pgx paragraph, which uses the built-in session object to read the graph into memory from the database and creates a PgXGraph object that handles the loaded graph."
         ],
@@ -228,7 +228,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Next, let's use PGQL to find the top 10 members regarding the number of transfers.",
+          "Use PGQL to find the 10 members with the most transfers.",
           "",
           "PGQL has built-in functions **IN_DEGREE** and **OUT_DEGREE**, which return the number of incoming and outgoing edges of a node. So we can use them in this query.",
           "",
@@ -284,7 +284,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Review the members with the highest degree. The fixture includes member 934 as a starting point for a circular points-transfer investigation. A high degree is a review cue, not evidence of abuse. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge."
+          "Review the members with the highest degree. The fixture includes member 934 as a starting point for a circular points-transfer investigation. A high degree is a review cue, not proof of abuse. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -490,7 +490,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Compare the ranking with the degree query. Do not assume a particular member ranks first. The following six-hop query starts at fixture member 934. In the graph visualization, highlight members with higher PageRank; the supplied style threshold is illustrative and may need adjustment."
+          "Compare the ranking with the degree query. Do not assume a particular member ranks first. The following six-hop query starts at sample member 934. In the graph visualization, highlight members with higher PageRank; the supplied style threshold is illustrative and may need adjustment."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -543,8 +543,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Now let us compare the **PageRank** values of members with the **number of points transfers** going through ",
-          "those members (that we had looked at earlier)."
+          "Compare each member\u2019s **PageRank** with the **number of points transfers** you counted earlier."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -624,7 +623,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Degree and PageRank measure different graph properties, so the two lists can differ. Now inspect paths between fixture members 934 and 387. Review the intermediate members and the transfer evidence before drawing conclusions."
+          "Degree and PageRank measure different graph properties, so the two lists can differ. Now inspect paths between sample members 934 and 387. Review the intermediate members and the transfer records before drawing conclusions."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -831,7 +830,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Review the personalized PageRank results from your run. Then inspect fixture member 406 and its immediate neighbors. No position in the ranking is assumed."
+          "Review the personalized PageRank results from your run. Then inspect sample member 406 and its immediate neighbors. No position in the ranking is assumed."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -1116,7 +1115,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Compare member 406 with the degree, personalized PageRank, and hop-distance results from your run. The final query visualizes two-hop paths from fixture members 934 and 387. Verify whether 406 appears instead of assuming a connection."
+          "Compare member 406 with the degree, personalized PageRank, and hop-distance results from your run. The final query visualizes two-hop paths from sample members 934 and 387. Verify whether 406 appears instead of assuming a connection."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
