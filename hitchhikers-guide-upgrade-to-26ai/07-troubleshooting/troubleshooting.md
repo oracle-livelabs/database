@@ -258,20 +258,20 @@ Replay Upgrade has fewer log files than a classic upgrade, so you need to look i
 
 3. There are also views in the database that you can examine.
 
+    * **Don't run the queries. It's beyond the scope of this exercise.**
+
     ``` sql
     SELECT * FROM dba_replay_upgrade_errors;
     SELECT * FROM dba_applications WHERE app_name='APP$CDB$CATALOG';
     ```
 
-    * Don't run the queries. It's beyond the scope of this exercise.
-
 4. You can also disable Replay Upgrade completely.
+
+    * **Don't run the command. It's beyond the scope of this exercise.**
 
     ``` sql
     ALTER DATABASE UPGRADE SYNC OFF;
     ```
-
-    * Don't run the command. It's beyond the scope of this exercise.
 
 5. AutoUpgrade also has a config file parameter to control the use of Replay Upgrade.
 

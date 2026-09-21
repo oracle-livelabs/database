@@ -203,6 +203,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 3. Monitor the progress
 
     ``` bash
+    <copy>
     lsj -a 10
     </copy>
     ```

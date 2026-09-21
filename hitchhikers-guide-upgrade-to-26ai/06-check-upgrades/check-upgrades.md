@@ -74,7 +74,7 @@ You have completed:
     <summary>*click to see the output*</summary>
 
     ``` text
-        VALUE
+    VALUE
     _________
     23.0.0
     ```

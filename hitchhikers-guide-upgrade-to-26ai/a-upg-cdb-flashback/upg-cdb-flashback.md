@@ -406,7 +406,7 @@ You will upgrade the *COBALT* database. It's a CDB with one PDB, *MOCHA*. It's c
     <summary>*click to see the output*</summary>
 
     ``` text
-       CON_ID CON_NAME    OPEN MODE     RESTRICTED
+    CON_ID    CON_NAME    OPEN MODE     RESTRICTED
     _________ ___________ _____________ _____________
             2 PDB$SEED    READ ONLY     NO
             3 MOCHA       READ WRITE    NO
