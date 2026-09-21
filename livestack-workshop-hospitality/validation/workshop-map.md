@@ -14,7 +14,7 @@ Both launch variants use the Oracle-hosted LiveLabs renderer, CSS, and navigatio
 | 1 | CTEs, relational aggregation, VECTOR_EMBEDDING / VECTOR_DISTANCE, JSON_TABLE, SDO_DISTANCE | Rank stay offers needing guest assistance; preloaded OFFER_EMBEDDINGS, RESERVATIONS_DV, service posts, properties and polygons |
 | 2 | Native JSON column, JSON collection WITH ETAG, updatable JSON Relational Duality, insert/update/projection | Guest reservation payload with property, stay dates, and room-night charges; creates THOMAS_APP_DATA / THOMAS_RESERVATION_DOCS and changes RESERVATIONS_DV |
 | 3 | ONNX model catalog, VECTOR(384), in-database embeddings, distance and similarity, relational joins | Find accessible stay offers and guests booked on them; creates STAY_OFFERS.OFFER_EMBEDDING separately from the preloaded dashboard embeddings |
-| 4 | Relational self-joins, SQL/PGQ, one-to-four-hop traversal, shared identifiers, Graph Studio import/visualization | Review booking abuse evidence from RSV-8841 and shared devices; loader creates BOOKING_ABUSE_NETWORK |
+| 4 | Relational self-joins, SQL/PGQ, one-to-four-hop traversal, shared identifiers, Graph Studio import/visualization | Review booking abuse relationships from RSV-8841 and shared devices; loader creates BOOKING_ABUSE_NETWORK |
 | 5 | SDO_GEOMETRY points/polygons, GeoJSON conversion, distance units, ANYINTERACT, ROW_NUMBER | Recommend the nearest active hotel to a guest arrival/relocation point; recommendations require a separate date-specific availability check |
 | 6 | Optional AutoML, GLM settings, DBMS_DATA_MINING, classification, PREDICTION and probability | Stay-demand watchlist; synthetic labels and scoring perturbation remain teaching examples, not measured forecast quality |
 | 7 | Select AI profile/object list, showsql, runsql, narrate | Ask for booked room revenue by offer with explicit reservation-status filters |
@@ -36,7 +36,7 @@ The reference graph lesson has two Task 5 headings. The target keeps all seven t
 | SERVICE_FEE | Optional hospitality fee, excluded from booked room revenue |
 | SERVICE_ALERTS_V / POST_OFFER_MENTIONS | Service disruptions and affected-reservation counts |
 | Accessible-room semantic search | Find offers with step-free access and guests booked on them |
-| Booking evidence graph | Reservation, device, contact and token links for manual booking-abuse review |
+| Booking relationship graph | Reservation, device, contact and token links for manual booking-abuse review |
 | Visitor-region polygons | Spatial demand context; actual distances depend on the new loader |
 | Booked room revenue | Nightly-charge totals for confirmed, checked_in and checked_out reservations |
 | Loyalty-points graph | Optional PGX algorithm exercises using transfers between hotel loyalty members |
@@ -49,6 +49,6 @@ Individual room assignment, restaurant operations, employees, payment settlement
 
 ## Changes to derived content
 
-Both notebook exports have all cached results cleared and obsolete runtime graph metadata/positions removed. Their query paragraphs and visualization styles remain, with hospitality identifiers and a reservation calendar icon. Five embedded Python paragraphs pass syntax parsing. The notebooks must be imported and run in Graph Studio after provisioning to validate runtime compatibility.
+Both notebook exports have all cached results cleared and obsolete runtime graph metadata/positions removed. Their query paragraphs and visualization styles remain, with hospitality identifiers and a reservation calendar icon. Five embedded Python paragraphs pass syntax parsing. The main booking-abuse notebook was imported and run in Graph Studio during manual-database testing. The supplemental loyalty PGX notebook requires separate runtime validation; see the live validation report.
 
 The [image inventory](screenshots.md) accounts for every source asset. Native SVGs are diagrams or badges; no edited image is represented as a real database capture. File-level provenance and reference hashes are preserved in a separate migration-evidence deliverable. Asset IDs connect that archive to this workshop’s image inventory without embedding reference filenames here.

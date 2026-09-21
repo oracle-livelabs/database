@@ -7,7 +7,7 @@ Jessica Chan is the database administrator at Seer Hotels. Her teams are buildin
 The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team wants to use it in a different way:
 
 - Thomas needs guest reservations as JSON for a web and mobile application.
-- Gilly needs semantic search that can find stay offers by meaning, not only by matching words.
+- Gilly needs semantic search that can find stay offers by meaning, as well as by matching words.
 - Bob needs to follow relationships between reservations and other entities to investigate booking abuse.
 - Moon needs to calculate distances between guests, hotel properties, and demand regions.
 - Otto needs to train and score a stay offer demand model.
@@ -21,11 +21,11 @@ Seer Hotels is a fictional hotel group. This diagram shows how guests, hotels, r
 
 *One room per reservation. A stay offer combines a room type and a rate plan. Nightly-charge lines record room nights and rates.* [Open the full-size diagram](images/seer-hotels-erd.png) or see the [complete schema and supporting entities](../validation/schema-contract.md).
 
-> **Phase 1 availability:** This edition defines the hospitality workshop and its required schema. Its provisioning package and hospitality dataset will be integrated in Phase 2. A running hospitality application and new database screenshots have not yet been produced. Continue with hands-on SQL only after the instructor confirms the prerequisites in Getting Started.
+> **Workshop status:** The hospitality loader, dataset, and lab screenshots are ready. The core SQL labs, Graph Studio notebook, and optional AutoML experiment were tested on a manually provisioned database. LiveLabs green-button provisioning still needs testing. Before starting, confirm the prerequisites in Getting Started.
 
-Jessica's job is to help each team meet its requirement without creating a new data copy or a separate security model for every feature. She uses Oracle AI Database as the shared foundation: relational tables remain the source for hospitality records, while JSON, vectors, graphs, spatial data, machine learning, and AI services work with those same records.
+Jessica helps each team use the same hospitality records. Oracle AI Database stores the relational tables and lets the teams work with them through JSON, vectors, graphs, spatial queries, machine learning, and AI services. Each team keeps the database access controls that apply to its work.
 
-This workshop follows Jessica and her colleagues as they solve these problems and help the hotel group improve guest stays. Each lab focuses on one business requirement, but the database remains the common thread. You will see how the teams use different data types and database capabilities together, and how Jessica keeps access, SQL, and results visible.
+Each lab follows one team member as they solve a hospitality problem. You will run the queries, inspect the results, and see how the database supports each task.
 
 ### What the team builds
 
@@ -40,7 +40,7 @@ This workshop follows Jessica and her colleagues as they solve these problems an
 | Nina, guest experience analyst            | Ask hospitality questions without writing every query from scratch. | Select AI generates SQL that Nina can inspect, run, and refine. Select AI Agent adds a restricted SQL tool and records the agent activity. |
 
 
-The point is not to use every capability in every query. The point is that Jessica does not have to move the data into a separate database whenever a requirement changes. The same hospitality records can support:
+Jessica can meet new requirements without moving the hospitality records to another database. Those records can support:
 
 - An application payload.
 - A vector search.
@@ -52,9 +52,9 @@ The point is not to use every capability in every query. The point is that Jessi
 <details>
 <summary><strong>Learn more: What does "converged database" mean?</strong></summary>
 
-> A converged database supports different data types and workloads on one database foundation. In this workshop, that includes relational rows, JSON documents, vectors, graphs, geographic data, machine learning models, and AI-assisted SQL.
+> A **converged database** handles several data types and kinds of work in one database. Here, teams use relational rows, JSON documents, vectors, graphs, geographic data, machine learning models, and AI-assisted SQL.
 >
-> The advantage is practical. Teams can use the data in the form their application or analysis needs while keeping the records, privileges, and SQL access connected. They do not need to copy hospitality data into a document store, vector service, graph database, mapping system, or separate scoring service for each requirement.
+> Teams use the form their application needs and keep the records and access controls together. They can query these data types without maintaining a separate store for each one.
 
 </details>
 
@@ -74,3 +74,9 @@ Estimated Workshop Time: **90 minutes**
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano, Pat Shepherd, Linda Foinding
 * **Last Updated By/Date** - Oracle Database Product Management, September 2026
+
+## Running hospitality demo
+
+This screenshot shows the local Hospitality LiveStack demo. It uses a separate dataset from the Seer Hotels workshop. Compare expected records and counts with the lab SQL results.
+
+![Hospitality LiveStack welcome page](images/demo-welcome.jpg)

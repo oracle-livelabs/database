@@ -171,7 +171,7 @@ for raw in re.findall(r"SELECT JSON\(\s*'(\{.*?\})'\s*\)",dual,re.S):
 checks['json_fixture_contract']='passed'
 # All source images accounted for; only approved generic PNGs may remain.
 assets=json.loads((v/'screenshot-inventory.json').read_text());actual_png={str(f.relative_to(root)) for f in (p for p in root.rglob('*') if p.suffix in ['.png','.jpg','.jpeg'])}
-allowed={x['target_asset'] for x in assets if x['status'] in ['retained_generic','regenerated_local_capture','generated_illustration'] and x['target_asset'].endswith(('.png','.jpg','.jpeg'))}
+allowed={x['target_asset'] for x in assets if x['status'] in ['retained_generic','regenerated_local_capture','regenerated_live_capture','generated_illustration'] and x['target_asset'].endswith(('.png','.jpg','.jpeg'))}
 require(actual_png==allowed,'Unclassified or missing raster assets')
 checks['source_assets_accounted_for']=sum(x['asset_id'].startswith('A') for x in assets)
 checks['new_image_assets']=sum(not x['asset_id'].startswith('A') for x in assets)

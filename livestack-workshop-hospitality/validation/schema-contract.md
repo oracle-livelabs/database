@@ -1,6 +1,6 @@
 # Hospitality schema contract
 
-This is the Phase 1 implementation contract for the forthcoming loader. It specifies required objects; it does not claim that they already exist in a running database. The [machine-readable contract](schema-contract.json) supports static checks.
+This contract lists the objects the hospitality loader and labs need. The [machine-readable contract](schema-contract.json) supports static checks. See the [live validation report](live-validation.md) for the completed manual-database tests and remaining provisioning checks.
 
 ## Naming and relationships
 
@@ -187,7 +187,7 @@ table; created by `loader`.
 | `EVENT_COUNT` | NUMBER |
 | `TOTAL_AMOUNT` | NUMBER(12,2) |
 
-Directed evidence links; use USES_DEVICE, USES_TOKEN, USES_PHONE, USES_IP, AT_PROPERTY, and IDENTIFIES_RESERVATION. Reverse evidence links must be explicit when directed multi-hop paths require them.
+Directed relationships use USES_DEVICE, USES_TOKEN, USES_PHONE, USES_IP, AT_PROPERTY, and IDENTIFIES_RESERVATION. Add reverse edges explicitly when a query needs to follow a relationship in the other direction.
 
 ### BOOKING_CASES
 
@@ -279,7 +279,7 @@ view; created by `loader`.
 | `REVENUE` | NUMBER |
 | `SURGE_LABEL` | VARCHAR2(10) |
 
-One row per active offer. Preaggregate posts separately from reservation lines to prevent join fanout. Booked room revenue sums LINE_TOTAL for confirmed/checked_in/checked_out only. Seed both SURGE and STABLE labels. Record synthetic label rules, aggregation window, and thresholds in the Phase 2 loader; they are not validated forecasts.
+One row per active offer. Aggregate posts and reservation lines separately before joining them, so the join does not count rows more than once. Booked room revenue sums LINE_TOTAL for confirmed/checked_in/checked_out only. Seed both SURGE and STABLE labels. Record synthetic label rules, aggregation window, and thresholds in the Phase 2 loader; they are not validated forecasts.
 
 ### RESERVATIONS_DV
 
@@ -343,7 +343,7 @@ table; created by `lab6`.
 | `ROOM_NIGHTS_BOOKED` | NUMBER |
 | `REVENUE` | NUMBER |
 
-Synthetic perturbation of training rows; no SURGE_LABEL and not an independent holdout.
+Sample scoring rows created by changing training values. They exclude SURGE_LABEL but are not an independent test dataset.
 
 ### LOYALTY_MEMBERS
 
@@ -400,12 +400,12 @@ Directed transfer of hotel loyalty points. PGQL edge label TRANSFERS.
 - Enforce check-out after check-in, positive integral room nights, nonnegative prices/fees, valid statuses, severity and demand indices in 0–100, occupancy in 0–100, and active flags in 0/1. Enforce cross-table property/date consistency through loader validation or suitable database logic; do not invent an invalid cross-table CHECK constraint. For the fixture, RESERVATION_TOTAL equals room-line totals plus SERVICE_FEE.
 - Include at least 12 active offers across standard rooms, accessible rooms, family suites, and extended stays. Include step-free-access wording in offer names/category/subcategory because those three fields form the embedding text. Do not promise exact similarity rankings.
 - Include posts with severity ≥80, linked to offers, and positive affected-reservation/service-case counts. Avoid duplicate POST_OFFER_MENTIONS rows. Training data needs both SURGE and STABLE, nonconstant features, and enough examples for the chosen training split. The synthetic labels demonstrate APIs, not future demand accuracy.
-- Geometry uses SRID 8307 (WGS84), longitude first, with latitude/longitude columns matching property points. Seed properties 1, 3, and 16; guest arrival points inside both visitor regions; active hotels near them; valid region polygons. New York Visitor Region and Chicago Visitor Region use synthetic demand indices 91 and 78. Names such as Seer Edison Hotel and Seer Joliet Hotel are fictional. Exact distances are unmeasured.
+- Geometry uses SRID 8307 (WGS84), longitude first, with latitude/longitude columns matching property points. Seed properties 1, 3, and 16; guest arrival points inside both visitor regions; active hotels near them; valid region polygons. New York Visitor Region and Chicago Visitor Region use synthetic demand indices 91 and 78. Names such as Seer Edison Hotel and Seer Joliet Hotel are fictional. Use the spatial lab’s live results to compare distances for the tested dataset.
 - BOOKING_ABUSE_NETWORK is precreated before Lab 4 using the appendix definition. Seed RSV-8841, RSV-5077, RSV-1190 as reservation vertices tied to corresponding reservation rows; connect them to DEV-fp-91a7. Include TOKEN-REUSED-017, IP-198.51.100.44, and a synthetic phone. At least one shared-identifier pair needs a risk score ≥70. Include directed paths of one through four hops and a case edge. No graph score is proof of misconduct; tokens contain no card details.
 - Optional LOYALTY_GRAPH is a PGQL graph, loaded with `session.read_graph_by_name(..., "PG_PGQL")`. It is not interchangeable with the SQL property graph. Seed members 534, 597, 934, 387, and 406 and explicit points-transfer cycles of four and five hops, a six-hop path, and multiple paths between 934 and 387. Each member maps to a guest. Graph Studio import must preserve the `LOYALTY_MEMBERS(id)` vertex identity expected by PGX. Verify the actual identity format after provisioning.
 - Before Lab 1, preload OFFER_EMBEDDINGS and RESERVATIONS_DV. Leave STAY_OFFERS.OFFER_EMBEDDING absent until Lab 3. Before Lab 6, prepare OML_STAY_DEMAND_TRAINING_V with all 13 feature columns and SURGE_LABEL. Lab-created objects must initially be absent; use a fresh workshop schema for a full rerun.
 - GENAI needs a configured provider, credential reference, network access, and appropriate package privileges. Its object list is STAY_OFFERS, RESERVATIONS, RESERVATION_NIGHTS, GUESTS. The object list guides generation; grants and row-level policies enforce access. Do not put credentials in the repository.
-- The source's sandbox and tenancy launch pages share the same flow. Phase 2 must reconcile the actual Terraform outputs and deployment instructions for each route.
+- The source's sandbox and tenancy launch pages share the same flow. Check the Terraform outputs and deployment instructions for each route during provisioning validation.
 
 ## Technical references
 
