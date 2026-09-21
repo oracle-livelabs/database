@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-21",
+  "method": "Visual inspection plus macOS Vision OCR of retained images; refreshed introduction captures and new ERD reviewed after brand update.",
+  "images": {
+    "booking-abuse-network/images/database-actions-launchpad.png": {
+      "sha256": "eb334cfc8b268c6699be67bc381868d04e220ecd773a539692dbd9a24053e9df",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "booking-abuse-network/images/graph-database-actions-launchpad.png": {
+      "sha256": "9e3290c2fd9fd4b7d62df140a742eb24b1fd5d41075d1195938bf90a52e21591",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "booking-abuse-network/images/graph-studio-overview.jpg": {
+      "sha256": "6ef6de0acc9835f3927d824f6792b04151020012b174c14335a0c5b73eb7d77c",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "booking-abuse-network/images/open-notbook.png": {
+      "sha256": "914e773eda6e308cc2f03affb8aa78a41f4430bc1e3adcc384976e438be77012",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "getting-started/images/sql-worksheet-connection-check.png": {
+      "sha256": "613bb247bd9206de894e29a89a4ba776d11c2a11b761e2c70eab4afa5e299b05",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "guest-concern-vector-search/images/model.png": {
+      "sha256": "ecda6f4a56fba8f824925936f153abe158b2be4bd5238308c25f8fee57d754f1",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "guest-operations-dashboard/images/jessica.png": {
+      "sha256": "a1f2a4dd5cf9f2024db1c27a3ccec2456fbd20fd13b58c20acf06c22b2339886",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "introduction/images/details-accordion-closed.jpg": {
+      "sha256": "e5315eae18da472b4e97240c9678fc1c692749a6002f16d9d3f087bbcf1ab810",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "introduction/images/details-accordion-expanded.jpg": {
+      "sha256": "dc2a5b0226c4b54ba0ea94d2a2c160240bb37937840eaba4679d347a456d141e",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "reservation-duality/images/thomas.png": {
+      "sha256": "be57372ab953b5802eddfd956be34169b97d03d729c519243b38108b3e202cd7",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "stay-demand-oml/images/automl.png": {
+      "sha256": "b04d86c9448a6cd9ffd000f440cfd6f1491d090d06b52e46d1b39d0c7c2f6dcd",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "introduction/images/seer-hotels-erd.png": {
+      "sha256": "d557a03c5fbd0dbc1e8d3e629b88aa11a8069c463df3d9d8072476a3187e9002",
+      "status": "reviewed",
+      "finding": "Seer Hotels cartoon ERD; five entities, primary and foreign keys, and all five 1:N relationships checked against schema-contract.json. Illustration only."
+    }
+  }
+}

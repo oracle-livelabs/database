@@ -1,0 +1,524 @@
+[
+  {
+    "target_asset": "guest-routing-spatial/images/task31.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A001"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/task32.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A002"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/task1query.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A003"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/task22.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A004"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/task21.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A005"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/moon.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A006"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/spatial-chart.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A007"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/leaderboard.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A008"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/startml.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A009"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/result.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A010"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/otto.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A011"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/imapct.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A012"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/goodmodel.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A013"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/automl.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A014"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/open-ml.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A015"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/training.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A016"
+  },
+  {
+    "target_asset": "final-quiz/images/livestack-hospitality-badge.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A017"
+  },
+  {
+    "target_asset": "final-quiz/images/livestack-hospitality-badge.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A018"
+  },
+  {
+    "target_asset": "final-quiz/images/badge.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A019"
+  },
+  {
+    "target_asset": "introduction/images/team.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A020"
+  },
+  {
+    "target_asset": "introduction/images/seer-hotels-welcome.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A021"
+  },
+  {
+    "target_asset": "introduction/images/hospitality-workshop-intro-journey.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A022"
+  },
+  {
+    "target_asset": "introduction/images/details-accordion-closed.jpg",
+    "status": "regenerated_local_capture",
+    "reason": "Captured from the actual local hospitality LiveLabs page, with the converged-database disclosure open or closed. This is workshop UI evidence, not a database execution screenshot.",
+    "asset_id": "A023"
+  },
+  {
+    "target_asset": "introduction/images/seer-hotels-welcome.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A024"
+  },
+  {
+    "target_asset": "introduction/images/seer-hotels-welcome-runbook.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A025"
+  },
+  {
+    "target_asset": "introduction/images/details-accordion-expanded.jpg",
+    "status": "regenerated_local_capture",
+    "reason": "Captured from the actual local hospitality LiveLabs page, with the converged-database disclosure open or closed. This is workshop UI evidence, not a database execution screenshot.",
+    "asset_id": "A026"
+  },
+  {
+    "target_asset": "introduction/images/details-accordion-expand-flow.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A027"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/gilly.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A028"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/result3.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A029"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/result2.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A030"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/vector.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A031"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/result.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A032"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/model.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A033"
+  },
+  {
+    "target_asset": "selectai-agent/images/task52.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A034"
+  },
+  {
+    "target_asset": "selectai-agent/images/task5.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A035"
+  },
+  {
+    "target_asset": "selectai-agent/images/task4.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A036"
+  },
+  {
+    "target_asset": "selectai/images/task52.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A037"
+  },
+  {
+    "target_asset": "selectai/images/task3.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A038"
+  },
+  {
+    "target_asset": "selectai/images/task2.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A039"
+  },
+  {
+    "target_asset": "selectai/images/task6.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A040"
+  },
+  {
+    "target_asset": "selectai/images/task5.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A041"
+  },
+  {
+    "target_asset": "selectai/images/task4.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A042"
+  },
+  {
+    "target_asset": "selectai/images/nina.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A043"
+  },
+  {
+    "target_asset": "reservation-duality/images/json-success.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A044"
+  },
+  {
+    "target_asset": "reservation-duality/images/json-relational.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A045"
+  },
+  {
+    "target_asset": "reservation-duality/images/json-project.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A046"
+  },
+  {
+    "target_asset": "reservation-duality/images/json-update-confirm.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A047"
+  },
+  {
+    "target_asset": "reservation-duality/images/jsondv-result.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A048"
+  },
+  {
+    "target_asset": "reservation-duality/images/jsondv-insert.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A049"
+  },
+  {
+    "target_asset": "reservation-duality/images/jsondv-contract.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A050"
+  },
+  {
+    "target_asset": "reservation-duality/images/thomas.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A051"
+  },
+  {
+    "target_asset": "getting-started/images/sql-worksheet-orientation.svg",
+    "status": "capture_pending",
+    "reason": "Source SVG simulates a worksheet containing legacy tables and fabricated-looking result counts. Excluded; use written worksheet instructions until an actual hospitality capture is available.",
+    "asset_id": "A052"
+  },
+  {
+    "target_asset": "getting-started/images/sql-worksheet-connection-check.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A053"
+  },
+  {
+    "target_asset": "getting-started/images/reservation-login-info.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A054"
+  },
+  {
+    "target_asset": "getting-started/images/reservation-login-copy-password.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A055"
+  },
+  {
+    "target_asset": "getting-started/images/database-actions-development-sql.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A056"
+  },
+  {
+    "target_asset": "getting-started/images/sql-worksheet-orientation-hospitality.svg",
+    "status": "capture_pending",
+    "reason": "Source SVG simulates a worksheet containing legacy tables and fabricated-looking result counts. Excluded; use written worksheet instructions until an actual hospitality capture is available.",
+    "asset_id": "A057"
+  },
+  {
+    "target_asset": "getting-started/images/database-actions-login-main-user.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A058"
+  },
+  {
+    "target_asset": "getting-started/images/reservation-login-open-link.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A059"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-network.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A060"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-graph-investigation-flow.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A061"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/bob.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A062"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-evidence-labeled.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A063"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/green-button-direct-booking-connections.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A064"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/open-notbook.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A065"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-notebook-import.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A066"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-two-hop-visualization.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A067"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/database-actions-launchpad.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A068"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-database-actions-launchpad.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A069"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/investigate.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A070"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-notebook-import-dialog.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A071"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph4result.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A072"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-network-runbook.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A073"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/import-graph.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A074"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/image-graph.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A075"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-graph.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A076"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-notebook-task5-top.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A077"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/green-button-high-risk-booking-entities.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A078"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-shared-device-visualization.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A079"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-import-file.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A080"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/green-button-shared-entity-connections.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A081"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-studio-overview.jpg",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A082"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/guest-operations-dashboard.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A083"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/2026-08-18-004703.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A084"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/jessica.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A085"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/stay-offer-dashboard.png",
+    "status": "capture_pending",
+    "reason": "Contains prior-domain labels, objects, examples, or prior execution results. No deployed hospitality database/application or Graph Studio session is available; excluded from target rather than presented as hospitality evidence.",
+    "asset_id": "A086"
+  },
+  {
+    "asset_id": "N001",
+    "target_asset": "introduction/images/seer-hotels-erd.png",
+    "status": "generated_illustration",
+    "reason": "New static cartoon ERD, created with built-in image generation and visually checked against the five core foreign-key relationships. This is an illustration, not runtime evidence."
+  }
+]
