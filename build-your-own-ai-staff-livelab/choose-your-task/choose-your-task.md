@@ -85,6 +85,10 @@ Estimated Time: **7 minutes**
 
 3. Review the brief. Resolve every required `UNKNOWN`, then save the completed version. Use the same version in the remaining labs.
 
+    ![Solve any UNKNOWN Issue](./images/01_unknown_issue.png)
+
+    ![Complete Details](./images/02_complete_details.png)
+
 ### Expected Result: Task Brief Ready
 
 You have one focused GPT task, a safe boundary, a definition of done, and a saved brief for the agent team.

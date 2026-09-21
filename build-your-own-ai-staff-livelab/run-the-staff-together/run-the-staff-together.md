@@ -57,6 +57,8 @@ Estimated Time: **13 minutes**
 
 5. If Tessa returns `READY`, review the exact result yourself. Approve it only if you accept the facts, scope, sources, and safeguards. If Tessa returns `REVISE` or `STOP`, keep the concern visible and fix or stop before continuing.
 
+    ![Tessa returns READY](./images/01_tessa_ready.png)
+
 ### Expected Result: Visible Handoff Chain
 
 The request moves from Maya to Nova to Tessa. Each role receives the approved context, and the owner makes the final decision.
@@ -72,6 +74,8 @@ The request moves from Maya to Nova to Tessa. Each role receives the approved co
     ```
 
 2. Compare both versions. Confirm that wording and organization changed, but facts, sources, scope, and safeguards did not.
+
+    ![Try the Second Version](./images/02_second_version.png)
 
 3. Run at least three of these safe-stop tests in the role that should handle the request:
 

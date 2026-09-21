@@ -20,6 +20,8 @@ Estimated Time: **3 minutes**
 
 2. Sign in, or create an account if your class instructions allow it. Product menus and account features can change. Use [ChatGPT Learn](https://learn.chatgpt.com/) for current navigation help.
 
+    ![Login into Chat GPT](./images/01_login_chatgpt.png)
+
 3. Create a private Project named `My AI Staff`, if Projects are available. Otherwise, create a regular private chat named `Staff Room`.
 
 4. Use this short message in the coordination space:
