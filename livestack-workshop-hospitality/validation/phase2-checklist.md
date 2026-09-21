@@ -1,0 +1,16 @@
+# Phase 2 integration checklist
+
+Phase 2 has not started. Inspect the supplied archive recursively before editing or deploying it.
+
+1. Trace Terraform resources, modules, variables, outputs, secrets handling, download URLs, schema creation, loader entry points, embedded SQL and generated data. Map each actual implementation object to the Phase 1 schema contract.
+2. Implement core properties/offers/guests/reservations/nightly charges and all 18 specified foreign keys. Verify hotel, dates, rates, room-night totals, default timestamps, allowed statuses, and reserved exercise IDs. Keep the source workshop immutable.
+3. Reconcile the exact RESERVATIONS_DV contract, initial update-only flags, child primary/foreign keys, generated LINE_TOTAL, and JSON date conversion. Run every Lab 2 block and confirm that one JSON insert creates both parent and child rows and that the status update agrees in JSON and SQL.
+4. Preload OFFER_EMBEDDINGS for Lab 1 using ADMIN.ALL_MINILM_L12_V2; leave the teaching column for Lab 3. Validate dimensions, privileges, nonempty vectors, and semantically useful offer text. Run both search phrases and record actual outputs.
+5. Create the service-alert and reporting views without duplicate post/offer joins. Distinguish alert totals from unique reservation counts. Run the converged query and verify the four data-model components.
+6. Seed valid WGS84 points/polygons, properties 1/3/16, guests in both visitor regions, and active properties. Recompute all spatial results; never carry forward the reference's rankings or distances. Document the gap between nearest active property and date-specific availability.
+7. Create BOOKING_ABUSE_NETWORK and import the eight-paragraph primary notebook. Verify one-, two-, and four-hop traversal, shared identifiers, vertex/edge labels, and case relationships. Capture actual tables and visualizations. Separately create the optional PGQL LOYALTY_GRAPH, confirm vertex IDs, and run all 43 PGX notebook paragraphs.
+8. Define documented synthetic label thresholds and aggregation windows for OML_STAY_DEMAND_TRAINING_V; aggregate social metrics and bookings separately. Seed both classes and sufficient training examples. Run AutoML, GLM training, and scoring; report measured results and keep synthetic scoring separate from holdout evaluation.
+9. Configure GENAI provider/credentials/network access through deployment mechanisms, never source files. Verify the hospitality object list, package grants, showsql/runsql/narrate, agent registration, RUN_TEAM and history views. Check the generated revenue status filters and fee exclusion. A successful model response is not proof that the query is correct.
+10. Reconcile both sandbox and tenancy launch instructions with actual Terraform outputs and service links. The reference supplies identical launch instructions for both variants.
+11. Regenerate each pending image from the final implementation using the image inventory. Update prose with measured outputs, and rerun source hashes, file/link/identifier checks, LiveLabs navigation, copy controls, and the quiz.
+12. Record which checks were run, their actual results, and remaining environment limits. Do not mark SQL execution, deployment, notebook imports, or screenshot capture complete based only on static checks.
