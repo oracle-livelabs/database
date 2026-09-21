@@ -60,6 +60,8 @@ Estimated Time: **10 minutes**
 
 3. Send only the exact result that the owner approved after the Tessa review. Ask Lumen to return the memory decision. A `SAVE` proposal does not save memory.
 
+    ![Lumen Memory Confirmation](./images/01_lumen_memory.png)
+
 ### Expected Result: Memory Decision
 
 Lumen returns `SAVE`, `DO NOT SAVE`, or `NEEDS REVIEW`, plus the candidate, source, scope, sensitivity, and retention or review decision.

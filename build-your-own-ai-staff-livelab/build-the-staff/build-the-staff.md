@@ -95,6 +95,8 @@ Every role uses the following rules:
 
 3. Send the Task Brief. Confirm that Maya returns a complete handoff card. If it does not, ask Maya to return every card field and write `UNKNOWN` instead of guessing.
 
+    ![Get the Hand Off Card](./images/01_hand_off_card.png)
+
 ### Expected Result: Maya Handoff
 
 Maya produces a focused request, a next role, and a complete HANDOFF CARD with a visible approval status.
@@ -140,6 +142,8 @@ Maya produces a focused request, a next role, and a complete HANDOFF CARD with a
 
 3. Paste the complete Maya HANDOFF CARD and ask Nova to prepare the first pass for Tessa. If Nova claims to have searched or verified something without a provided source, ask Nova to label the gap as `UNKNOWN`.
 
+    ![Get the Hand Off Card](./images/02_nova_hand_off.png)
+
 ### Expected Result: Nova First Pass
 
 Nova returns findings, source gaps, uncertainty, a first draft, and a handoff for Tessa.
@@ -184,6 +188,8 @@ Nova returns findings, source gaps, uncertainty, a first draft, and a handoff fo
     ```
 
 3. Paste the complete Maya HANDOFF CARD and the full Nova first pass. Ask Tessa to return `READY`, `REVISE`, or `STOP`. Keep the review visible to the owner.
+
+    ![Get READY Status with Tessa](./images/03_tessa_reviewer.png)
 
 ### Expected Result: Tessa Review
 
