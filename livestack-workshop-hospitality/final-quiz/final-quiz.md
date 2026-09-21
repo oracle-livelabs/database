@@ -7,7 +7,7 @@ badge: images/livestack-hospitality-badge.svg
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect the Seer Hotels hospitality outcomes to the database evidence you inspected in the labs.
+Use this quiz to check how the database results support the Seer Hotels tasks you completed.
 
 ### Objectives
 
@@ -39,12 +39,12 @@ Estimated Time: **3 minutes**
     - It scores future revenue for stay offers and segments.
     * It explains connections across reservations and shared entities.
     - It stores service coverage regions for operations teams.
-    - It replaces relationship evidence with flat stay offer totals.
-    > The graph lab focuses on relationship evidence. A booking abuse analyst can prioritize connected reservations, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
+    - It replaces relationship data with flat stay offer totals.
+    > The graph lab focuses on relationship data. A booking abuse analyst can prioritize connected reservations, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
 
     Q: Why does Seer Hotels use spatial data in the guest-routing lab?
     - To make coverage decisions outside the shared database.
-    - To hide capacity evidence from service operations leaders.
+    - To hide capacity data from service operations leaders.
     * To find the closest hotel property for a guest or high-demand region and combine that location with property capacity and current workload.
     - To replace spatial queries with static labels.
     > Spatial functions calculate distance and location relationships. SQL combines those results with guest, hotel-property, capacity, and demand data to support routing decisions.
@@ -66,7 +66,7 @@ Estimated Time: **3 minutes**
     Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
     - Each hospitality capability must use a separate specialized data store.
     * One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same shared data.
-    - Application screenshots replace the need for database evidence.
+    - Application screenshots replace the need for database results.
     - Guest service teams must reconcile copied data before every investigation.
     > Each lab uses a different capability, but the teams work from connected data in one database. This reduces duplicate copies and separate integration paths while preserving database controls.
     ```

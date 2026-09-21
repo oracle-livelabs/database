@@ -2,11 +2,11 @@
 
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
 
-Thomas Brune is an application developer at Seer Hotels. He and his team are building a new web and mobile application for guests. The team wants a faster guest experience, with fewer round trips and payloads that match the screens and services they are building.
+Thomas Brune develops guest applications at Seer Hotels. His team needs reservation documents that match its web and mobile screens and reduce calls to the database.
 
-Thomas needs reservation data as a JSON payload that a web or mobile application can consume directly. One payload can group guest and property identifiers, stay dates, reservation status, nightly charges, and optional app-specific attributes. JSON lets him evolve that payload as the application evolves. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
+Thomas wants each JSON document to group guest and property IDs, stay dates, status, nightly charges, and optional app fields. He needs to change the document as the application grows while keeping relational keys, SQL access, transactions, and database controls.
 
 Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of guest data.
 
@@ -68,9 +68,9 @@ Persona focus: You are Thomas, working with Jessica to decide how the new applic
 
 Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes in a relational table. A JSON Collection Table holds documents owned by the application. A duality view assembles a document from existing relational tables. Thomas uses the document shape in the application, while Jessica works with the underlying rows using SQL.
 
-This keeps the reservation in one database and avoids complex, expensive integration between separate systems. Thomas gets the document shape his application needs, and Jessica keeps the relational rows, SQL access, and database controls.
+Thomas gets the JSON document his application needs. Jessica keeps SQL access, relational rows, and database controls in the same database.
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide on how to run SQL statements.
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Store flexible application data as JSON
 
@@ -199,6 +199,10 @@ Thomas now tests the document shape his application can consume directly.
     </copy>
     ```
 
+    ![Live hospitality result — duality document](images/sql-duality-document.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     **Expected output:**
 
     
@@ -214,7 +218,7 @@ Thomas now tests the document shape his application can consume directly.
 
 ## Task 4: Enable document inserts and updates
 
-The existing `RESERVATIONS_DV` lets an application update an existing reservation document. In this task, you extend that contract so the application can also create one. The database continues to control the relational tables, keys, and constraints. The duality view can also act as a security boundary. Thomas's application receives only the document fields and write operations exposed by the view, without direct access to the underlying tables.
+The existing `RESERVATIONS_DV` lets an application update reservation documents. Here, you also allow inserts. Oracle still enforces the table keys and constraints. An application granted access only to the view can use only the fields and write operations that the view allows.
 
 1. Check the current document-write capabilities.
 
@@ -287,6 +291,10 @@ The existing `RESERVATIONS_DV` lets an application update an existing reservatio
     </copy>
     ```
 
+    ![Live hospitality result — duality contract](images/sql-duality-contract.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     **Expected output: Document Capabilities Enabled**
 
     `RESERVATIONS_DV` should report insert and update enabled; delete remains disabled.
@@ -299,7 +307,9 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
 
 1. Insert the supplied workshop reservation document.
 
-    The `INSERT` targets `RESERVATIONS_DV`, the JSON Relational Duality View, rather than the underlying `RESERVATIONS` or `RESERVATION_NIGHTS` tables. The database uses the view definition to write the document to those relational tables. The document uses reservation ID `900001`, guest `1`, property `1`, and stay offer `1`. It includes one nightly-charge line for a two-night stay at 125.00 per night. These are fictional fixture values in one workshop currency. The loader must seed guest 1 and offer 1 at property 1. Reservation 900001 and night-line 990001 are reserved for this exercise. Dates must satisfy check-out after check-in; this example keeps fixed dates for repeatability. The statement is safe to run again: after the reservation exists, it inserts zero rows and preserves the existing record. On the first run, the new reservation has status `pending`.
+    The `INSERT` writes through `RESERVATIONS_DV`; Oracle uses the view definition to update the relational tables. The sample uses reservation `900001`, guest `1`, property `1`, offer `1`, and night-line `990001`. Its two-night stay costs 125.00 per night, for a total of 250.00 in the workshop currency.
+
+    The loader must supply guest 1 and offer 1 at property 1. The reservation and night-line IDs are reserved for this exercise. The fixed dates make the exercise repeatable and put check-out after check-in. On the first run, the reservation has status `pending`. Running the insert again adds no rows and preserves the existing record.
 
     ```sql
     <copy>
@@ -362,11 +372,11 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
 
     **Expected output: Created Reservation Rows**
 
-    The fixture row should contain reservation 900001, night-line 990001, two room nights at 125.00, line total 250.00, and status `pending` on the first run. Read the guest email and offer name from the loaded rows.
+    The sample row should contain reservation 900001, night-line 990001, two room nights at 125.00, line total 250.00, and status `pending` on the first run. Read the guest email and offer name from the loaded rows.
 
 3. Update the document status through the duality view.
 
-    This update changes JSON data through `RESERVATIONS_DV`. This statement changes only the document's `status` field, mapped to `RESERVATIONS.RESERVATION_STATUS`. The view definition permits other exposed fields to be updated too; a field-specific restriction would require a narrower contract. He does not need application-side parsing or a second reservation store.
+    This statement updates only `status` through `RESERVATIONS_DV`. Oracle maps it to `RESERVATIONS.RESERVATION_STATUS`. The view also allows updates to other exposed fields; restricting writes to status alone would require a more limited view definition. Thomas does not need to parse the document in the application.
 
     ```sql
     <copy>
@@ -399,13 +409,17 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
     </copy>
     ```
 
+    ![Live hospitality result — duality confirmed](images/sql-duality-confirmed.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     **Expected output: Updated Reservation Rows**
 
     Reservation 900001 should now have status `confirmed`, with the same night-line values.
 
 ## Task 6: Project JSON fields with SQL
 
-Thomas has confirmed that the application can display and update the document. Jessica now checks the same reservation with SQL before the feature goes live. She uses the relational tables for normal reporting and analysis. Here, she queries `RESERVATIONS_DV` to verify the exact JSON contract that Thomas's application receives. She can also project fields from the document to test guest-service searches and status filters. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
+Thomas has checked that the application can display and update a document. Jessica now queries `RESERVATIONS_DV` to check the fields the application receives. She extracts selected JSON values as SQL columns, a step called **projection**. She can use those columns for guest-service searches and status filters.
 
 1. Run this SQL/JSON projection query:
 
@@ -427,9 +441,13 @@ Thomas has confirmed that the application can display and update the document. J
     </copy>
     ```
 
+    ![Live hospitality result — duality projection](images/sql-duality-projection.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+
     **Expected output: JSON Field Projection**
 
-    Compare reservation ID 900001, status `confirmed`, and the loaded guest email with the following relational query. These are expected fixture checks, not captured execution results.
+    Compare reservation ID 900001, status `confirmed`, and the loaded guest email with the following relational query. The live captures below show these sample-data checks against the workshop database.
 
 2. Run the equivalent query against the relational tables.
 
@@ -444,6 +462,10 @@ Thomas has confirmed that the application can display and update the document. J
     WHERE r.reservation_id = 900001;
     </copy>
     ```
+
+    ![Live hospitality result — duality relational](images/sql-duality-relational.jpg)
+
+    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
 
     
 
@@ -467,3 +489,9 @@ For Thomas, `RESERVATIONS_DV` is the right choice for the reservation feature be
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Database Product Management, August 2026
+
+## Live database capture
+
+Confirmed reservation after the JSON update. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
+
+![Confirmed reservation after the JSON update](images/live-02-duality-confirmed.jpg)

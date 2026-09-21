@@ -5,7 +5,7 @@
     "erd_relationships": 5,
     "local_labs": 11,
     "navigation_variants": 2,
-    "local_links": 47,
+    "local_links": 106,
     "task_counts": {
       "booking-abuse-network": 7,
       "final-quiz": 1,
@@ -18,6 +18,7 @@
       "selectai": 6,
       "selectai-agent": 5,
       "stay-demand-oml": 4,
+      "live-validation": 0,
       "screenshots": 0,
       "schema-contract": 0,
       "workshop-map": 0,
@@ -26,10 +27,9 @@
       "PHASE1": 0
     },
     "sql_blocks": 60,
-    "source_files_unchanged": 104,
     "domain_audit": {
-      "text_files": 41,
-      "raster_files": 12,
+      "text_files": 42,
+      "raster_files": 65,
       "paths": "all files and directories",
       "nested_json": "decoded recursively",
       "raster_review": "hash-bound visual and OCR review",
@@ -97,7 +97,7 @@
     "qualified_columns_checked": 259,
     "json_fixture_contract": "passed",
     "source_assets_accounted_for": 86,
-    "new_image_assets": 1,
+    "new_image_assets": 13,
     "limits": [
       "No Oracle SQL execution or compilation",
       "No live DDL, grants, loader, AI-provider, or notebook-import validation",

@@ -51,9 +51,9 @@
           "",
           "The WHERE clause anchors the search on RSV-8841, and the COLUMNS clause returns graph properties in a normal SQL result table.",
           "",
-          "This is much easier than writing the same logic with ordinary joins. Without SQL/PGQ graph pattern matching, you would need separate self-joins for one-hop and two-hop paths, extra union logic for each relationship depth, and more code every time investigators want to follow another type of relationship.",
+          "This pattern follows one or two hops in a single query. Ordinary SQL would need separate self-joins for each path length and a union to combine the results.",
           "",
-          "The graph pattern says the investigation in plain terms: start with this reservation, follow the relationships, and show what is connected."
+          "Start with the reservation, follow its relationships, and inspect the connected entities."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
