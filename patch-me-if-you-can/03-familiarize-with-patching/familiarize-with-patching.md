@@ -819,7 +819,7 @@ Here are a few useful queries that provide information about the database.
     <summary>*click to see the output*</summary>
 
     ``` text
-       VERSION_FULL
+    VERSION_FULL
     _______________
     19.31.0.0.0
     ```

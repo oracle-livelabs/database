@@ -47,7 +47,7 @@ You can plug it into an existing 26ai CDB on the same machine. AutoUpgrade handl
     <summary>*click to see the output*</summary>
 
     ``` text
-        VALUE
+    VALUE
     _________
     19.0.0
     ```
