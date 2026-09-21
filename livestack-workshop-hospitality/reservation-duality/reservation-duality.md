@@ -486,12 +486,6 @@ For Thomas, `RESERVATIONS_DV` is the right choice for the reservation feature be
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
-
-## Live database capture
-
-Confirmed reservation after the JSON update. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Confirmed reservation after the JSON update](images/live-02-duality-confirmed.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

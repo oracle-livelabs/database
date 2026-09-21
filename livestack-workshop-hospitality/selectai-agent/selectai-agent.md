@@ -1,5 +1,7 @@
 # Build a Hospitality Agent with Select AI Agent
 
+![Nina — hospitality lab banner](images/nina.png)
+
 ## Introduction
 
 > **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
@@ -289,12 +291,6 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
-
-## Live database capture
-
-Live hospitality agent answer. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Live hospitality agent answer](images/live-08-agent-answer.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

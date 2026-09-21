@@ -71,9 +71,9 @@ Estimated Workshop Time: **90 minutes**
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026
 
 ## Running hospitality demo
 

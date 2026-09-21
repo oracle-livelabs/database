@@ -1,5 +1,7 @@
 # Review a Semantic Guest Concern Search
 
+![Gilly — hospitality lab banner](images/gilly.png)
+
 ## Introduction
 
 > **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
@@ -292,12 +294,6 @@ Gilly has built the search behind the application and connected it to a business
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
-
-## Live database capture
-
-Accessible-room similarity ranking. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Accessible-room similarity ranking](images/live-03-vector-search.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

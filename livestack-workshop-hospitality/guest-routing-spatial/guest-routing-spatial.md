@@ -1,5 +1,7 @@
 # Route Guests to the Closest Hotel Property
 
+![Moon — hospitality lab banner](images/moon.png)
+
 ## Introduction
 
 > **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
@@ -311,12 +313,6 @@ You used Oracle Spatial to turn points and polygons into a routing decision. For
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
-
-## Live database capture
-
-Hotel distances to the New York visitor region. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Hotel distances to the New York visitor region](images/live-05-spatial-routing.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

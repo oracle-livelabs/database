@@ -225,15 +225,9 @@ Next, use JSON Relational Duality to expose the same reservation data as JSON fo
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
-
-## Live database capture
-
-Dashboard investigation. This screenshot shows the visible portion of the real Database Actions result; use the query to inspect all rows and columns.
-
-![Dashboard investigation](images/live-01-dashboard.jpg)
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026
 
 ## Application example
 
