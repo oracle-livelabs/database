@@ -77,7 +77,7 @@ This lab assumes you have:
 
     ![<workload_completed_and_shard_stopped>](./images/workload_completed_and_shard_stopped.png " ")
 
-   The leadership has automatically moved to another shard, indicating re-routing of the request and switchover of RU to another shard is completed.
+    The leadership has automatically moved to another shard, indicating re-routing of the request and switchover of RU to another shard is completed.
 
 8. Scroll down to see "GDD Workload Report" which has visual chart for TPS during the workload and additional details.
 
@@ -122,7 +122,7 @@ This lab assumes you have:
 ## Task 3: Startup the previously shutdown shard
 
 1. As you verified that application kept running while one of the shards was down, now bring that shard back.
-   For example, since shard3 was shutdown in a previous Task 1's step 3 earlier, now to bring it back, click the "Start Shard1" link.
+    For example, since shard3 was shutdown in a previous Task 1's step 3 earlier, now to bring it back, click the "Start Shard1" link.
 
     ![<restart_the_shard>](./images/restart_the_shard.png " ")
 
