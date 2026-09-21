@@ -55,10 +55,18 @@ In this lab, you will:
 ## Task 2: Enable AI Staff Voice Support
 
 1. Use this task when the deployment needs audio transcription. The current
-    runtime uses the AI Staff virtual environment and its installed
-    requirements.
+    runtime uses `faster-whisper` through the AI Staff requirements and needs
+    `ffmpeg`.
 
-2. Verify transcription with a small local audio file.
+2. Confirm `ffmpeg` is installed from Lab 2 on the manual path or the Fast Path.
+
+    ```
+    <copy>
+    ffmpeg -version
+    </copy>
+    ```
+
+3. Verify transcription with a small local audio file.
 
     ```
     <copy>

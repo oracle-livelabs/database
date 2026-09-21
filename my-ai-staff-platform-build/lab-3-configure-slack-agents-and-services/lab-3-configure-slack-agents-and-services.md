@@ -453,51 +453,20 @@ In this lab, you will:
 
 ## Task 4: Configure Required Google Drive Delivery
 
-1. On your laptop, open a new terminal and start the rclone OAuth tunnel. Leave this terminal open until rclone finishes authentication.
-
-    ```
-    <copy>
-    ssh -N -L 53682:127.0.0.1:53682 my-ai-staff-oci
-    </copy>
-    ```
-
-    The `my-ai-staff-oci` alias was configured in Lab 1. This command does not open a public OCI port. It only forwards your laptop's `localhost:53682` to the compute instance's `localhost:53682` through SSH.
-
-2. Open a second terminal on your laptop and connect to the compute instance.
-
-    ```
-    <copy>
-    ssh my-ai-staff-oci
-    </copy>
-    ```
-
-3. From the compute instance shell, configure rclone with the Google account that owns the delivery folder. Name the remote exactly `gdrive`.
+1. Configure rclone with the Google account that owns the delivery folder. Name the remote exactly `gdrive`.
 
     ```
     <copy>
     rclone config
-    </copy>
-    ```
-
-    When rclone asks whether to use a web browser for authentication, answer `Y`. rclone prints a link similar to `http://127.0.0.1:53682/auth?state=...`.
-
-4. Copy the `127.0.0.1:53682` link from the compute instance terminal and open it in the browser on your laptop.
-
-    Because the SSH tunnel is running, your laptop browser reaches the rclone authorization listener on the compute instance. Complete the Google sign-in and authorization flow, then return to the compute instance terminal. rclone should finish the token exchange.
-
-5. Verify the Google Drive remote from the compute instance.
-
-    ```
-    <copy>
     rclone lsd gdrive: --max-depth 1
     </copy>
     ```
 
-6. Create or choose the delivery folder in Google Drive. Copy the folder ID from the Drive URL.
+2. Create or choose the delivery folder in Google Drive. Copy the folder ID from the Drive URL.
 
-7. Set the folder ID in `agents/pipeline/.env` as `GDRIVE_ROOT_FOLDER_ID`.
+3. Set the folder ID in `agents/pipeline/.env` as `GDRIVE_ROOT_FOLDER_ID`.
 
-8. If Drive authorization expires later, reconnect the same remote and then restart the pipeline.
+4. If Drive authorization expires later, reconnect the same remote and then restart the pipeline.
 
     ```
     <copy>
@@ -505,12 +474,6 @@ In this lab, you will:
     sudo systemctl restart contentkit-pipeline
     </copy>
     ```
-
-    Use the same SSH tunnel pattern before reconnecting if rclone opens another `127.0.0.1:53682` authorization link.
-
-9. Keep rclone private to localhost.
-
-    Do not open port `53682` in the OCI security list, do not bind rclone to `0.0.0.0`, and do not install rclone on the laptop for this workshop path. The SSH tunnel is the standardized path for remote browser authentication.
 
 ## Task 5: Configure the Content Kit Runtime
 

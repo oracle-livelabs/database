@@ -35,6 +35,9 @@ In this lab, you will:
     sudo dnf install -y dnf-plugins-core git curl unzip python3.12 policycoreutils-python-utils
     sudo dnf config-manager --set-enabled ol9_developer_EPEL
     sudo dnf install -y rclone
+    sudo dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
+    sudo dnf install -y ffmpeg
+    ffmpeg -version
     rclone version
     </copy>
     ```
