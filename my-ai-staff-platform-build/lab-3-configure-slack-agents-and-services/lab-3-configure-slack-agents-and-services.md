@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you import the role-specific Slack manifests supplied with this workshop, define generic bot names in `.env.shared`, configure required Google Drive delivery, populate deployment-specific environment files, and activate the platform services. Slack permissions do not add channel membership, so you explicitly invite every bot to its working channels.
+In this lab, you import the role-specific Slack manifests supplied with this workshop, define generic bot names in `.env.shared`, populate deployment-specific environment files, and prepare the platform configuration. Google OAuth and external-service activation happen in Lab 4 and Lab 5 so this lab can be completed in the same order on both deployment paths. Slack permissions do not add channel membership, so you explicitly invite every bot to its working channels.
 
 Estimated Time: 75 minutes
 
@@ -13,9 +13,8 @@ In this lab, you will:
 - Create Slack channels and configure seven Socket Mode applications.
 - Map the runtime services to generic Assistant, Content, Creative, Brand, Data, Ops, and Publish agents.
 - Configure protected shared and per-agent environment files.
-- Configure required Google Drive delivery.
 - Configure the Content Kit skill runtime file.
-- Install current systemd units and enable the platform timers.
+- Prepare the service configuration for activation after external integrations are configured.
 
 ### Prerequisites
 
@@ -42,7 +41,7 @@ In this lab, you will:
 
 3. Create `#content-start`, `#content-runs`, `#content-internal`, `#creative-studio`, `#publishing`, `#data`, `#ops`, and `#errors` for the content workflow.
 
-4. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff. Create private `#website-inbox` if website intake approvals need a dedicated destination.
+4. Create `#personal` (private), `#ideas`, `#inbox`, and `#briefing` for the Assistant Agent and AI Staff.
 
     ![Slack Channels Example](./images/01_channels_example.png)
 
@@ -410,17 +409,15 @@ In this lab, you will:
 
     ![Agents with Access to direct messages](./images/03_agent_permission.png)
 
-11. Do not create a Slack app for Website Agent. The `agents/website` service exposes a local HTTP API on port 8005.
-
-12. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
+11. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
 
     ![Where to get App Tokens](./images/15_where_app_tokens.png)
 
     ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
-13. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
+12. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
 
-14. In your shell, export the Assistant Agent bot token temporarily, then obtain its bot ID and record it as `ASSISTANT_BOT_ID`. It is the only bot allowlisted to issue specialist-agent commands.
+13. In your shell, export the Assistant Agent bot token temporarily, then obtain its bot ID and record it as `ASSISTANT_BOT_ID`. It is the only bot allowlisted to issue specialist-agent commands.
 
     ```
     <copy>
@@ -431,7 +428,7 @@ In this lab, you will:
     </copy>
     ```
 
-15. Record the deployment owner's member ID as `SLACK_ASSISTANT_USER_ID`; the Assistant Agent uses it for reminders and privileged routing.
+14. Record the deployment owner's member ID as `SLACK_ASSISTANT_USER_ID`; the Assistant Agent uses it for reminders and privileged routing.
 
 ## Task 3: Configure and Protect Environment Files
 
@@ -460,7 +457,6 @@ In this lab, you will:
     DATA_BOT_NAME="Data Agent"
     OPS_BOT_NAME="Ops Agent"
     PUBLISH_BOT_NAME="Publish Agent"
-    WEBSITE_BOT_NAME="Website Agent"
     </copy>
     ```
 
@@ -482,68 +478,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 4: Configure Required Google Drive Delivery
-
-1. On your laptop, open a new terminal and start the rclone OAuth tunnel. Leave this terminal open until rclone finishes authentication.
-
-    ```
-    <copy>
-    ssh -N -L 53682:127.0.0.1:53682 my-ai-staff-oci
-    </copy>
-    ```
-
-    The `my-ai-staff-oci` alias was configured in Lab 1. This command does not open a public OCI port. It only forwards your laptop's `localhost:53682` to the compute instance's `localhost:53682` through SSH.
-
-2. Open a second terminal on your laptop and connect to the compute instance.
-
-    ```
-    <copy>
-    ssh my-ai-staff-oci
-    </copy>
-    ```
-
-3. From the compute instance shell, configure rclone with the Google account that owns the delivery folder. Name the remote exactly `gdrive`.
-
-    ```
-    <copy>
-    rclone config
-    </copy>
-    ```
-
-    When rclone asks whether to use a web browser for authentication, answer `Y`. rclone prints a link similar to `http://127.0.0.1:53682/auth?state=...`.
-
-4. Copy the `127.0.0.1:53682` link from the compute instance terminal and open it in the browser on your laptop.
-
-    Because the SSH tunnel is running, your laptop browser reaches the rclone authorization listener on the compute instance. Complete the Google sign-in and authorization flow, then return to the compute instance terminal. rclone should finish the token exchange.
-
-5. Verify the Google Drive remote from the compute instance.
-
-    ```
-    <copy>
-    rclone lsd gdrive: --max-depth 1
-    </copy>
-    ```
-
-6. Create or choose the delivery folder in Google Drive. Copy the folder ID from the Drive URL.
-
-7. Set the folder ID in `agents/pipeline/.env` as `GDRIVE_ROOT_FOLDER_ID`.
-
-8. If Drive authorization expires later, reconnect the same remote and then restart the pipeline.
-
-    ```
-    <copy>
-    rclone config reconnect gdrive:
-    sudo systemctl restart contentkit-pipeline
-    </copy>
-    ```
-
-    Use the same SSH tunnel pattern before reconnecting if rclone opens another `127.0.0.1:53682` authorization link.
-
-9. Keep rclone private to localhost.
-
-    Do not open port `53682` in the OCI security list, do not bind rclone to `0.0.0.0`, and do not install rclone on the laptop for this workshop path. The SSH tunnel is the standardized path for remote browser authentication.
-
-## Task 5: Configure the Content Kit Runtime
+## Task 4: Configure the Content Kit Runtime
 
 The current runtime uses the local Codex plugin. The Content Kit configuration stores machine-specific paths and feature flags only. Never store API keys, OAuth tokens, passwords, or other secrets in this file.
 
@@ -602,12 +537,6 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
         "save_prompt_manifest": true,
         "reference": null
       },
-      "gdrive": {
-        "remote": "gdrive",
-        "root_id": "",
-        "root_path": "Post Content 2026",
-        "enabled": false
-      },
       "db": {
         "nia_url": "http://127.0.0.1:8004",
         "enabled": false
@@ -630,19 +559,6 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
     - `paths.content_strategy`: the active deployment's content strategy.
     - `headshot`: the deployment's actual headshot file.
 
-    The active strategy profile is selected by:
-
-    ```text
-    strategy/active-profile.md
-    ```
-
-    For the current repository, the user profile files are:
-
-    ```text
-    strategy/profiles/user/brand-guide.md
-    strategy/profiles/user/general-strategy.md
-    strategy/profiles/user/funnel-strategy.md
-    ```
 
 3. Verify the Content Kit configuration
 
@@ -667,143 +583,10 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
     chmod 600 "$CONTENTKIT_CONFIG"
     ```
 
-4. Verify Data Agent before enabling database tracking
-
-    Data Agent runs on port `8004`. Check both the service and its database connection:
-
-    ```bash
-    curl -fsS http://127.0.0.1:8004/health
-    echo
-
-    curl -fsS http://127.0.0.1:8004/health-db
-    echo
-    ```
-
-5. Configure the current Google Drive delivery path
-
-    Add the Drive folder ID from Task 4 to `.env.shared`:
-
-    ```text
-    AISTAFF_DRIVE_ROOT_FOLDER_ID=<google-drive-folder-id>
-    ```
-
-    The folder should be the deployment's approved AI Staff delivery folder. Do not store this value in the Content Kit JSON unless the legacy rclone integration is also being used.
-
-    Validate the shared environment configuration:
-
-    ```bash
-    python3 scripts/validate_config.py --env-only
-    ```
-
-6. Run the final validation
-
-    From the repository root:
-
-    ```bash
-    python3 scripts/validate_config.py --config "$CONTENTKIT_CONFIG"
-    ```
-
-    Also verify the current service endpoints:
-
-    ```bash
-    for url in \
-      http://127.0.0.1:8001/health \
-      http://127.0.0.1:8002/health \
-      http://127.0.0.1:8003/health \
-      http://127.0.0.1:8004/health \
-      http://127.0.0.1:8004/health-db; do
-      curl -fsS "$url"
-      echo
-    done
-    ```
-
-The current runtime requires these local services:
-
-- File Editor: `8001`
-- Brand Agent: `8002`
-- Operations Agent: `8003`
-- Data Agent: `8004`
-- Data Agent database check: `8004/health-db`
-
-Cloudflare image-generation credentials belong in `.env.shared`, not in `config.json`:
-
-    ```text
-    CLOUDFLARE_ACCOUNT_ID=<cloudflare-account-id>
-    CLOUDFLARE_API_TOKEN=<cloudflare-api-token>
-    ```
-
-This configuration is the machine-runtime configuration for the current Codex-based Content Kit installation. Historical references to `~/.claude`, `~/.claude/skills`, or NotebookLM should not be used in a fresh deployment.
-
-## Task 6: Install Services and Timers
-
-1. Use the unit files stored alongside each runtime component. They are the canonical units for this workshop because they reference the `.env.shared` and per-agent `.env` files created in Task 3. Do not bulk-copy `deploy/systemd/*.service`: that directory contains deployment-specific and legacy paths.
-
-    ```
-    <copy>
-    cd ~/livelabs-ai-staff
-    rg -n 'WorkingDirectory|EnvironmentFile|ExecStart' \
-      agents/{assistant,pipeline,brand-agent,data,ops,publish,website}/contentkit-*.service \
-      apps/file-editor/contentkit-file-editor.service
-    </copy>
-    ```
-
-2. Create the File Editor environment file required by its unit, then install the required core units. This command deliberately omits Website Agent and AI Staff intake automation; configure those optional capabilities only when their required credentials and integrations are ready.
-
-    ```
-    <copy>
-    sudo install -d -m 700 /etc/sysconfig
-    sudo tee /etc/sysconfig/contentkit-file-editor > /dev/null <<'EOF'
-    # Required EnvironmentFile for contentkit-file-editor.service.
-    # Leave this file without variables when the editor uses local 127.0.0.1 links.
-    EOF
-    sudo chmod 600 /etc/sysconfig/contentkit-file-editor
-    sudo cp agents/pipeline/contentkit-pipeline.service \
-      agents/assistant/contentkit-assistant.service \
-      agents/assistant/contentkit-assistant-reminder.service \
-      agents/assistant/contentkit-assistant-reminder.timer \
-      agents/brand-agent/contentkit-brand.service \
-      agents/data/contentkit-data.service \
-      agents/ops/contentkit-ops.service \
-      agents/publish/contentkit-publish.service \
-      apps/file-editor/contentkit-file-editor.service \
-      /etc/systemd/system/
-    sudo systemctl daemon-reload
-    for unit in contentkit-data contentkit-brand contentkit-ops contentkit-publish \
-                contentkit-assistant contentkit-pipeline contentkit-file-editor; do
-      sudo systemctl enable --now "$unit"
-      systemctl is-active "$unit"
-    done
-    sudo systemctl enable --now contentkit-assistant-reminder.timer
-    systemctl list-timers 'contentkit-*'
-    </copy>
-    ```
-
-3. Enable Website Agent only when you expose the public intake surface. It
-    depends on Data Agent and requires its own venv from Lab 2 on the manual
-    path or the Fast Path.
-
-    ```
-    <copy>
-    sudo cp agents/website/contentkit-website.service /etc/systemd/system/
-    sudo systemctl daemon-reload
-    sudo systemctl enable --now contentkit-website
-    systemctl is-active contentkit-website
-    </copy>
-    ```
-
-4. Enable AI Staff intake automation only after its Gmail, Calendar, and intake configuration is complete.
-
-    ```
-    <copy>
-    sudo cp agents/aistaff/aistaff-intake-watch.service \
-      agents/aistaff/aistaff-intake-watch.timer /etc/systemd/system/
-    sudo systemctl daemon-reload
-    sudo systemctl enable --now aistaff-intake-watch.timer
-    systemctl list-timers 'aistaff-*'
-    </copy>
-    ```
-
-5. If a unit reports `Failed to load environment files`, restore the `etc_t` label. If it reports `203/EXEC`, restore the `bin_t` label on the virtual environment and use `chcon -h` for the `python*` symlink.
+The Content Kit configuration is now prepared for Lab 5, when the services are
+activated after Google OAuth and the external integrations are complete.
+Historical references to `~/.claude`, `~/.claude/skills`, or NotebookLM should
+not be used in a fresh deployment.
 
 ## Acknowledgements
 

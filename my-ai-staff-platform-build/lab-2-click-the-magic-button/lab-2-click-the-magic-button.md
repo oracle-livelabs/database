@@ -152,8 +152,10 @@ In this lab, you will:
     security list permits inbound TCP/22 only from the CIDR entered in Task 1.
 3. Continue with **Lab 3: Configure Slack Agents, Environment Files, and
     Services**. That lab configures the interactive identities and credentials
-    intentionally excluded from this bootstrap: Codex login, Slack, Google, and
-    publishing integrations.
+    intentionally excluded from this bootstrap: Codex login, Slack, and the
+    base runtime environment. Google OAuth, Cloudflare, and other external
+    integrations are configured in **Lab 4: Configure External Services**;
+    service activation and complete verification happen in Lab 5.
 
 ## Acknowledgements
 

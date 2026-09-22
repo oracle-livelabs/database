@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
+In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps and environment files are covered in Lab 3; external integrations and systemd activation are covered in Labs 4 and 5. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
 Estimated Time: 90 minutes
 
 ### Objectives
@@ -11,7 +11,7 @@ In this lab, you will:
 
 - Install platform dependencies and runtime tools.
 - Configure per-agent Python virtual environments.
-- Install rclone for required Google Drive delivery.
+- Prepare the runtime for external integrations configured later.
 - Prepare the current agent directories for Slack configuration and service activation.
 
 ### Prerequisites
@@ -34,8 +34,6 @@ In this lab, you will:
     sudo dnf update -y
     sudo dnf install -y dnf-plugins-core git curl unzip python3.12 policycoreutils-python-utils
     sudo dnf config-manager --set-enabled ol9_developer_EPEL
-    sudo dnf install -y rclone
-    rclone version
     </copy>
     ```
 
@@ -106,16 +104,16 @@ In this lab, you will:
     </copy>
     ```
 
-    The next steps create Python virtual environments that systemd services run later in Lab 3. Oracle Linux uses SELinux to enforce extra access controls beyond standard Linux permissions. The `chcon`, `semanage fcontext`, and `restorecon` commands label only the virtual-environment executable directories as `bin_t`, so systemd can execute the Python interpreters inside those directories.
+    The next steps create Python virtual environments that systemd services run later in Lab 5. Oracle Linux uses SELinux to enforce extra access controls beyond standard Linux permissions. The `chcon`, `semanage fcontext`, and `restorecon` commands label only the virtual-environment executable directories as `bin_t`, so systemd can execute the Python interpreters inside those directories.
 
     This does not disable SELinux, open network ports, or make the project directory public. It grants the minimum persistent SELinux file context needed for these service executables. Do not apply these labels broadly to the whole home directory or to files that contain secrets.
 
-3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
+3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, and `publish`.
 
     ```
     <copy>
     cd ~/livelabs-ai-staff
-    for agent in pipeline assistant brand-agent ops publish website; do
+    for agent in pipeline assistant brand-agent ops publish; do
       python3 -m venv "agents/$agent/venv"
       "agents/$agent/venv/bin/pip" install --upgrade pip
       "agents/$agent/venv/bin/pip" install -r "agents/$agent/requirements.txt"
@@ -145,7 +143,7 @@ In this lab, you will:
     </copy>
     ```
 
-5. Create and label the File Editor virtual environment. This step does not start the editor service. It only installs the Python dependencies and SELinux labels needed later. Lab 3 installs and starts `contentkit-file-editor.service`; after that service is active, File Editor serves local edit links on `127.0.0.1:8001`.
+5. Create and label the File Editor virtual environment. This step does not start the editor service. It only installs the Python dependencies and SELinux labels needed later. Lab 5 installs and starts `contentkit-file-editor.service`; after that service is active, File Editor serves local edit links on `127.0.0.1:8001`.
 
     ```
     <copy>
@@ -181,8 +179,6 @@ In this lab, you will:
 
 1. Confirm the generic role mapping: Assistant Agent/`assistant`, Content Agent and Creative Agent/`pipeline`, Brand Agent/`brand-agent`, Data Agent/`data`, Ops Agent/`ops`, and Publish Agent/`publish`.
 2. Lab 3 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
-3. Do not create a Slack app for Website Agent/`website`; it is the HTTP-only intake service on port 8005.
-
 ## Acknowledgements
 
 - Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
