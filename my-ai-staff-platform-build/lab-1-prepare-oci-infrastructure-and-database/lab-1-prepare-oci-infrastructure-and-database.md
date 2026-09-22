@@ -31,17 +31,21 @@ In this lab, you will:
 
     ![Image Selection Example](./images/08_image_instance.png)
 
-2. Configure the instance to use 4 OCPUs and 24 GB memory.
+2. Configure the instance to use 2 OCPUs and 12 GB memory.
 
     ![Shape Selection Example](./images/08_instance_shape.png)
 
     ![Shape Details](./images/09_shape_details.png)
 
-3. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
+3. Create a new VCN and a Public Subnet.
+
+    ![Creation of new VCN](./images/13_vcn_creation.png)
+
+4. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
 
     ![Example to Generate SSH Keys](./images/10_ssh_keys.png)
 
-4. Find the security list for the instance subnet. In OCI Console, open the running instance, locate the **Primary VNIC** or **Subnet** link, open the subnet, and then open its attached **Security Lists**.
+5. Find the security list for the instance subnet. In OCI Console, open the running instance, locate the **Primary VNIC** or **Subnet** link, open the subnet, and then open its attached **Security Lists**.
 
     ![Click into Instance Details](./images/11_instance_details.png)
 
@@ -49,7 +53,7 @@ In this lab, you will:
 
     ![Where is the Security Lists](./images/05_security_list.png)
 
-5. Add an **Ingress Rule**, not an egress rule, for SSH access. Use these values:
+6. Add an **Ingress Rule**, not an egress rule, for SSH access. Use these values:
 
     ![Where to add Ingress Rules](./images/06_ingress_rules.png)
 
@@ -63,13 +67,13 @@ In this lab, you will:
 
     Leave the default egress rules unchanged unless your tenancy has a custom network policy. Egress controls outbound traffic from the instance; SSH access from your laptop uses an ingress rule.
 
-6. Do not add ingress rules for ports `8001` through `8005`. These are internal agent service ports.
+7. Do not add ingress rules for ports `8001` through `8005`. These are internal agent service ports.
 
     Loopback-only means the services listen on `127.0.0.1`, which is the instance's local-only network address. A service bound to `127.0.0.1:8002` can be reached from the same VM with `curl http://127.0.0.1:8002/health`, but it is not reachable from the public internet. Keep these ports closed in OCI security lists and on the instance firewall.
 
-7. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Primary VNIC** > **Public IPv4 address**. If the instance has no public IP, edit the VNIC or recreate the instance in a public subnet with public IP assignment enabled.
+8. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Primary VNIC** > **Public IPv4 address**. If the instance has no public IP, edit the VNIC or recreate the instance in a public subnet with public IP assignment enabled.
 
-8. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
+9. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
 
     For macOS or Linux, open Terminal and run:
 
@@ -114,14 +118,20 @@ In this lab, you will:
 
     If Windows reports that `ssh` is not recognized, install the OpenSSH Client optional feature or use VS Code Remote - SSH.
 
-9. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select `my-ai-staff-oci`. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
+10. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select `my-ai-staff-oci`. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
 
 ## Task 2: Provision Autonomous Database 26ai
 
 1. In OCI Console, create an Autonomous Database with workload type Transaction Processing.
+
     ![Where to Create an Autonomous Database](./images/02_create_database.png)
 
+    ![Workload Type](./images/14_db_type.png)
+
 2. Choose Always Free and Oracle Database 26ai.
+
+    ![Select 26ai](./images/15_db_data_processing.png)
+
 3. Enable secure access and download the wallet.
 
     ![How to Connect to the Database](./images/07_adb_wallet_button.png)
@@ -172,36 +182,78 @@ In this lab, you will:
 
 7. Record the wallet directory as `ADB_WALLET_DIR` for Lab 3. The agents pass the database ADMIN password as the wallet passphrase because `ewallet.pem` is passphrase-protected; do not confuse it with the separate password used when downloading the wallet zip.
 
-## Task 3: Create the Application Schema and Run the Fresh-Build DDL
+## Task 3: Create a Clean Application Schema and Run the Fresh-Build DDL
 
-1. Download the [fresh-build AI_FOR_YOU DDL script](./sql/ai_for_you_fresh_ddl.sql) to your laptop. This is the workshop's executable schema script. It includes the application tables, foreign keys, indexes, and duality views required by a new deployment; it does not include objects that the memory package or Assistant Agent creates automatically.
+1. Understand the database identities used by the platform.
 
-2. In the Autonomous Database Console, open **Database Actions** and choose **SQL**. Connect as `ADMIN`.
+    `ADMIN` owns the in-database embedding model and is the runtime connection user. `AI_FOR_YOU` owns the application tables, views, indexes, and runtime data. In Lab 3, set `ADB_USER=ADMIN` and set `ADB_PASSWORD` to the `ADMIN` database password. The runtime automatically sets `CURRENT_SCHEMA=AI_FOR_YOU` after connecting.
+
+2. Download the [SQL AI FOR YOU Script](./sql/ai_for_you_fresh_ddl.sql) to your laptop. This is the workshop's executable schema script. It recreates the `AI_FOR_YOU` schema, creates the application tables, foreign keys, indexes, and duality views, and prints validation counts at the end.
+
+    This script is for a new lab environment. It drops and recreates `AI_FOR_YOU`. Do not run it against an environment that contains data you need to keep.
+
+3. In the Autonomous Database Console, open **Database Actions** and choose **SQL**. Connect as `ADMIN`.
+
     ![Where to Enter SQL Actions](./images/04_sql_actions.png)
 
-3. Create the AI_FOR_YOU schema. Use a strong password that does not contain a double quote, because it is entered in the quoted SQL literal below.
+4. Open the downloaded `ai_for_you_fresh_ddl.sql` in the SQL worksheet. Replace `<replace-with-strong-password>` near the top of the file with a strong `AI_FOR_YOU` schema password that does not contain a double quote.
+
+    ![Change the Preset Password](./images/16_db_load_sql.png)
 
     ```
     <copy>
-    CREATE USER AI_FOR_YOU IDENTIFIED BY "<strong-password>";
-    GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO AI_FOR_YOU;
-    ALTER USER AI_FOR_YOU QUOTA UNLIMITED ON DATA;
+    CREATE USER AI_FOR_YOU IDENTIFIED BY "<replace-with-strong-password>";
     </copy>
     ```
 
-4. Open the downloaded `ai_for_you_fresh_ddl.sql` in the SQL worksheet and choose **Run Script**. The first lines set `CURRENT_SCHEMA` and stop execution on the first SQL error. Run the file from top to bottom; do not run the historical migration files and do not edit the script to skip sections.
+    ![Change the Preset Password](./images/17_db_password.png)
 
-5. Confirm that the script reports `Fresh-build AI_FOR_YOU schema DDL completed.` and returns counts for the tables and duality views. If SQL Developer Web reports an error, stop at that statement and resolve it before continuing; do not replay the entire script over a partially created schema.
+5. Choose **Run Script**. Run the file from top to bottom. Do not run historical migration files and do not edit the script to skip sections.
+
+    ![Run Modified Script](./images/18_db_run_script.png)
+
+6. Confirm that the script reports `Fresh-build AI_FOR_YOU schema DDL completed.` and returns the final `CHECK_NAME` and `CHECK_VALUE` result table.
+
+    Before continuing, confirm:
+
+    - `TABLE_COUNT` has a `CHECK_VALUE` greater than `0`.
+    - `VIEW_COUNT` has a `CHECK_VALUE` of `2`.
+
+    ![Check the Validation](./images/19_db_validation.png)
+
+    If you do not see the final result table, run this validation query in the same SQL worksheet:
+
+    ```sql
+    <copy>
+    SELECT 'TABLE_COUNT' AS CHECK_NAME,
+           COUNT(*) AS CHECK_VALUE
+      FROM ALL_TABLES
+     WHERE OWNER = 'AI_FOR_YOU'
+       AND TABLE_NAME NOT LIKE 'OAM_%'
+       AND TABLE_NAME <> 'REMINDERS'
+    UNION ALL
+    SELECT 'VIEW_COUNT' AS CHECK_NAME,
+           COUNT(*) AS CHECK_VALUE
+      FROM ALL_OBJECTS
+     WHERE OWNER = 'AI_FOR_YOU'
+       AND OBJECT_NAME IN ('AISTAFF_CLIENT_DV', 'POST_CONTENT_DV')
+       AND OBJECT_TYPE LIKE '%VIEW%';
+    </copy>
+    ```
+
 
 ## Task 4: Load and Validate the ONNX Embedding Model
 
-1. Oracle publishes the prebuilt `all_MiniLM_L12_v2` model in its [ONNX pretrained-model download table](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/import-pretrained-models-onnx-format-vector-generation-database.html). The current direct Oracle download is [all_MiniLM_L12_v2.onnx](https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/iPX9W0MZeRkwJKWdFmdJCemmN-iKAl_bFvNGYLW7YqIrw4kKsukL24J2q93Beb9S/n/adwc4pm/b/OML-ai-models/o/all_MiniLM_L12_v2.onnx). If Oracle rotates that pre-authenticated URL, open the documentation page and use the current download link.
+1. Understand why the ONNX model is required.
 
-2. In the same `ADMIN` SQL worksheet, run the following block. It uses Oracle's documented [`DBMS_VECTOR.LOAD_ONNX_MODEL_CLOUD`](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/load_onnx_model_cloud.html) procedure. The `credential => NULL` setting is correct for a pre-authenticated Object Storage URL. The existence check makes the block safe to run again without manually skipping a load section.
+    The agents do not call an external embedding API. Oracle AI Database generates embeddings internally with Oracle AI Vector Search. To enable that, load Oracle's prebuilt `all_MiniLM_L12_v2` ONNX model into the `ADMIN` schema as `MINILM_V2`. The SQL block in the next step loads the model directly from Oracle Object Storage; no manual model download is required.
+
+2. In the same `ADMIN` SQL worksheet, run the following block. The existence check makes the block safe to run again without manually skipping a load section.
 
     ```
     <copy>
-    WHENEVER SQLERROR EXIT SQL.SQLCODE
+    SET DEFINE OFF
+    SET ECHO ON
 
     DECLARE
       l_model_count NUMBER;
@@ -229,9 +281,20 @@ In this lab, you will:
     </copy>
     ```
 
-3. Confirm that the first query returns `MINILM_V2` and that the second query returns a vector. The model must be owned by `ADMIN` as `ADMIN.MINILM_V2`; the Data Agent memory endpoints require this model.
+    ![Load ONNX Embedding Model](./images/20_run_embedding_model.png)
 
-4. Lab 1 is complete. Continue directly to **Lab 2: Install the My AI Staff Runtime (Manual Path)**. Do not return to Lab 1 after starting Lab 2.
+3. Confirm that the model validation succeeds.
+
+    Before continuing, confirm:
+
+    - The model query returns `MINILM_V2`, `ONNX`, and `EMBEDDING`.
+    - The embedding query returns a vector.
+
+    The model must be owned by `ADMIN` as `ADMIN.MINILM_V2`; the Data Agent memory endpoints require this model.
+
+    ![Validate Embedding Model](./images/21_embedding_validation.png)
+
+4. Lab 1 is complete. Continue directly to **Lab 2: Install the My AI Staff Runtime (Manual Path)**.
 
 ## Acknowledgements
 

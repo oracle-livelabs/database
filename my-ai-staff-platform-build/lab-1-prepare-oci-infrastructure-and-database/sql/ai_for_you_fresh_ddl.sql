@@ -1,6 +1,23 @@
-WHENEVER SQLERROR EXIT SQL.SQLCODE
 SET DEFINE OFF
 SET ECHO ON
+
+-- Fresh-build reset. This workshop script is for new lab environments.
+-- It drops and recreates AI_FOR_YOU so the full file can be run from top
+-- to bottom without manually skipping partially completed sections.
+BEGIN
+  EXECUTE IMMEDIATE 'DROP USER AI_FOR_YOU CASCADE';
+EXCEPTION
+  WHEN OTHERS THEN
+    IF SQLCODE != -1918 THEN
+      RAISE;
+    END IF;
+END;
+/
+
+CREATE USER AI_FOR_YOU IDENTIFIED BY "<replace-with-strong-password>";
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO AI_FOR_YOU;
+ALTER USER AI_FOR_YOU QUOTA UNLIMITED ON DATA;
+
 ALTER SESSION SET CURRENT_SCHEMA = AI_FOR_YOU;
 
 -- =====================================================================
@@ -25,9 +42,8 @@ ALTER SESSION SET CURRENT_SCHEMA = AI_FOR_YOU;
 -- never fails; secondary indexes after that. Companion doc:
 -- docs/architecture/08-full-platform-data-model.md
 --
--- Run as the AI_FOR_YOU schema owner, or as ADMIN after
--- ALTER SESSION SET CURRENT_SCHEMA = AI_FOR_YOU. This fresh-build
--- script contains only objects that should be created by hand.
+-- Run as ADMIN in a new lab environment. Replace the password placeholder
+-- near the top of this file, then run the entire file as a script.
 -- =====================================================================
 
 
@@ -823,5 +839,16 @@ CREATE OR REPLACE FORCE EDITIONABLE JSON RELATIONAL DUALITY VIEW "AI_FOR_YOU"."P
   };
 
 PROMPT Fresh-build AI_FOR_YOU schema DDL completed.
-SELECT COUNT(*) AS TABLE_COUNT FROM USER_TABLES WHERE TABLE_NAME NOT LIKE 'OAM_%' AND TABLE_NAME <> 'REMINDERS';
-SELECT COUNT(*) AS VIEW_COUNT FROM USER_VIEWS WHERE VIEW_NAME IN ('AISTAFF_CLIENT_DV', 'POST_CONTENT_DV');
+SELECT 'TABLE_COUNT' AS CHECK_NAME,
+       COUNT(*) AS CHECK_VALUE
+  FROM ALL_TABLES
+ WHERE OWNER = 'AI_FOR_YOU'
+   AND TABLE_NAME NOT LIKE 'OAM_%'
+   AND TABLE_NAME <> 'REMINDERS'
+UNION ALL
+SELECT 'VIEW_COUNT' AS CHECK_NAME,
+       COUNT(*) AS CHECK_VALUE
+  FROM ALL_OBJECTS
+ WHERE OWNER = 'AI_FOR_YOU'
+   AND OBJECT_NAME IN ('AISTAFF_CLIENT_DV', 'POST_CONTENT_DV')
+   AND OBJECT_TYPE LIKE '%VIEW%';
