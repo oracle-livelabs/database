@@ -4,7 +4,7 @@
 
 - Map each authentic database capture to the workshop instruction it supports.
 
-Estimated Time: **5 minutes**
+Estimated Time: 5 minutes
 
 All 43 planned captures were taken from the manually provisioned database as LLUSER and placed beside their matching instructions. Five generic platform captures are retained. Persona banners and introduction illustrations remain separate from this count.
 
