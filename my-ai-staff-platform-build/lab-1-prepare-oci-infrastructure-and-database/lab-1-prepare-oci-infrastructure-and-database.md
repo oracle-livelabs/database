@@ -37,13 +37,15 @@ In this lab, you will:
 
     ![Shape Details](./images/09_shape_details.png)
 
-3. Create a new VCN and a Public Subnet.
+3. Create a new VCN and a Public Subnet, with a CIDR Block in the default 10.0.0.0/24
 
     ![Creation of new VCN](./images/13_vcn_creation.png)
 
 4. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
 
     ![Example to Generate SSH Keys](./images/10_ssh_keys.png)
+
+    After that all Instance Configuration left can be left as default.
 
 5. Find the security list for the instance subnet. In OCI Console, open the running instance, locate the **Primary VNIC** or **Subnet** link, open the subnet, and then open its attached **Security Lists**.
 
@@ -71,7 +73,23 @@ In this lab, you will:
 
     Loopback-only means the services listen on `127.0.0.1`, which is the instance's local-only network address. A service bound to `127.0.0.1:8002` can be reached from the same VM with `curl http://127.0.0.1:8002/health`, but it is not reachable from the public internet. Keep these ports closed in OCI security lists and on the instance firewall.
 
-8. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Primary VNIC** > **Public IPv4 address**. If the instance has no public IP, edit the VNIC or recreate the instance in a public subnet with public IP assignment enabled.
+8. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Networking** > **Primary VNIC** > **Public IPv4 address**.
+
+    Complete the following public IP assignment steps only if the public IP field shows `-`. If a public IP already appears, copy it and skip to step 9.
+
+    On the instance details page, open **Networking**, then click the **Primary VNIC** name under **Attached VNICs**.
+
+    ![Open the instance Networking tab and select the primary VNIC](./images/22_public_ip_networking.png)
+
+    In the VNIC page, open **IP administration**. In the private IP row, open the actions menu and choose **Edit**.
+
+    ![Edit the private IP address from IP administration](./images/23_public_ip_edit_private_ip.png)
+
+    In **Edit Private IP Address**, select **Ephemeral public IP** for a temporary lab IP, or **Reserved public IP** if wanted. Keep **Use VCN, subnet or VNIC route table** selected, then choose **Update**.
+
+    ![Assign an ephemeral or reserved public IP address](./images/24_public_ip_assign.png)
+
+    Return to the instance details page and copy the new **Public IPv4 address**. Use this value as `<instance-public-ip>` in the SSH commands below.
 
 9. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
 
@@ -86,14 +104,26 @@ In this lab, you will:
     </copy>
     ```
 
-    Add this host entry to `~/.ssh/config`:
+    Open or create your SSH config file:
+
+    ```bash
+    <copy>
+    touch ~/.ssh/config
+    chmod 600 ~/.ssh/config
+    nano ~/.ssh/config
+    </copy>
+    ```
+
+    In `nano`, paste this host entry at the end of the file. Replace `<instance-public-ip>` with the public IP from step 8. Save with `Ctrl+O`, press `Enter`, then exit with `Ctrl+X`.
 
     ```ssh
+    <copy>
     Host my-ai-staff-oci
         HostName <instance-public-ip>
         User opc
         IdentityFile ~/.ssh/my-ai-staff-oci.key
         IdentitiesOnly yes
+    </copy>
     ```
 
     Test the connection:
@@ -138,6 +168,8 @@ In this lab, you will:
 
     ![Where to Download a Wallet](./images/03_wallet_download.png)
 
+    When OCI asks for the wallet password or passphrase, enter the same password you use for the Autonomous Database `ADMIN` user. The runtime uses the `ADMIN` database password as the wallet passphrase in later labs.
+
 4. Copy the wallet zip file to the compute instance.
 
     When you download the wallet from Autonomous Database, your browser saves a file similar to `wallet_<db-name>.zip` on your laptop. Upload that ZIP to the `opc` user's home directory on the compute instance before you try to unzip it.
@@ -180,7 +212,7 @@ In this lab, you will:
 
 6. Verify the extracted wallet files include `sqlnet.ora`, `tnsnames.ora`, `cwallet.sso`, `ewallet.p12`, and `ewallet.pem`.
 
-7. Record the wallet directory as `ADB_WALLET_DIR` for Lab 3. The agents pass the database ADMIN password as the wallet passphrase because `ewallet.pem` is passphrase-protected; do not confuse it with the separate password used when downloading the wallet zip.
+7. Record the wallet directory as `ADB_WALLET_DIR` for Lab 3. The wallet password or passphrase must match the Autonomous Database `ADMIN` password because the runtime uses `ADB_PASSWORD` for both database login and wallet access.
 
 ## Task 3: Create a Clean Application Schema and Run the Fresh-Build DDL
 

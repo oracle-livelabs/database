@@ -23,7 +23,7 @@ In this lab, you will:
 - Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
 - A Slack account and a workshop Slack workspace. You can use an existing workspace where you can create channels and install internal apps, or create a new workspace at [Slack: Create a workspace](https://slack.com/get-started#/createnew).
 - Permission to create channels and install custom Slack apps. If your organization restricts app installation, ask a Workspace Owner or app manager to approve the seven internal apps you create in this lab.
-- An OpenAI account or subscription with an API key available for `OPENAI_API_KEY`.
+- An OpenAI account
 - Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
 
 ## Task 1: Prepare Slack, Create Channels, and Capture IDs
@@ -457,7 +457,7 @@ In this lab, you will:
     </copy>
     ```
 
-    `AI_FOR_YOU` is the application schema, but the runtime connects as `ADMIN` and sets `CURRENT_SCHEMA=AI_FOR_YOU` automatically. The OpenAI key is required by the core visual-generation preflight. Add SMTP and AI Staff channel values only when those optional integrations are enabled.
+    `ADB_PASSWORD` must be the Autonomous Database `ADMIN` password. It must also match the wallet passphrase from Lab 1. `AI_FOR_YOU` is the application schema, but the runtime connects as `ADMIN` and sets `CURRENT_SCHEMA=AI_FOR_YOU` automatically. The OpenAI key is required by the core visual-generation preflight. Add SMTP and AI Staff channel values only when those optional integrations are enabled.
 
 3. Define all generic display names in `.env.shared`. This is required because the current runtime loads `.env.shared` first, then loads each agent-specific `.env`; do not set competing `*_BOT_NAME` values in the per-agent files.
 

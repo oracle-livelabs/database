@@ -2,7 +2,8 @@
 
 ## Introduction
 
-In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps, environment files, and systemd activation are covered in Lab 3 so each deployment phase has explicit verification steps. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
+In this manual-path lab, you install the runtime tools, copy the workshop ZIP, install Codex skills, and create the Python virtual environments. Lab 3 covers Slack apps, environment files, and service activation. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
+
 Estimated Time: 90 minutes
 
 ### Objectives
@@ -18,14 +19,18 @@ In this lab, you will:
 
 - Completion of Lab 1.
 - SSH access to the OCI compute instance.
-- A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for workshop identities or OAuth consent.
-- Slack admin rights for your personal target workspace.
+- A personal Gmail account and a personal Slack account/workspace for this workshop.
+- Do not use a corporate or customer-owned account for workshop identities or OAuth consent.
+- Slack admin rights for that workspace.
 
 ## Task 1: Install Runtime Packages and Tooling
 
 1. Connect to the OCI compute instance from your laptop. Use either method:
-    - **VS Code:** Open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open a new terminal with **Terminal > New Terminal**. The commands below must run in that remote terminal.
-    - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below. The `my-ai-staff-oci` alias and key are configured in Lab 1 Task 1.
+    - **VS Code:** Open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open **Terminal > New Terminal**. Run the commands below in that remote terminal.
+
+    ![Where to Create SSH Connection in Visual Studio Code](./images/05_ssh_connection_vsc.png)
+
+    - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below.
 
     Once connected, update system packages:
 
@@ -39,7 +44,7 @@ In this lab, you will:
     </copy>
     ```
 
-2. Install Codex CLI on the compute instance with the Linux standalone installer. This avoids installing Node.js or npm on the server just to get the `codex` binary.
+2. Install Codex CLI on the compute instance with the Linux standalone installer.
 
     ```
     <copy>
@@ -50,7 +55,7 @@ In this lab, you will:
     </copy>
     ```
 
-    If `command -v codex` does not print a path, close and reopen the remote shell, or add the installer output directory to `PATH`. Record the printed path for `CODEX_BIN` in Lab 3.
+    If `command -v codex` does not print a path, close and reopen the remote shell. Then run the verification commands again. Record the printed path for `CODEX_BIN` in Lab 3.
 
 3. Start Codex CLI and sign in with ChatGPT.
 
@@ -60,11 +65,9 @@ In this lab, you will:
     </copy>
     ```
 
-    In the Codex interface, select **Sign in with ChatGPT** and complete the browser flow. On a remote OCI instance, the browser may not open automatically. If Codex prints a login URL or device code, copy it from the terminal, open it in your laptop browser, complete the sign-in, and return to the remote shell prompt before continuing.
+    In the Codex interface, select **Sign in with ChatGPT** and complete the browser flow. On a remote OCI instance, the browser may not open automatically. If Codex prints a login URL or device code, copy it from the terminal. Open it in your laptop browser, complete the sign-in, and return to the remote shell.
 
-    If your deployment uses API-key authentication instead of browser sign-in, set `OPENAI_API_KEY` only in the secure environment files configured in Lab 3. Do not paste API keys into screenshots, chat messages, or shared validation evidence.
-
-    After signing in Codex should see like this:
+    After signing in, you should see a Codex session similar to these examples:
 
     ![Codex Terminal in Visual Studio Code](./images/03_codex_vsc.png)
 
@@ -78,9 +81,9 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 2: Download the Platform ZIP, Install Its Codex Plugin, and Build Virtual Environments
+## Task 2: Download the Platform ZIP, Install Its Codex Skills, and Build Virtual Environments
 
-1. Download the supplied platform ZIP and extract it into your home directory. The archive already contains the complete `livelabs-ai-staff/` directory; it is not a Git repository, so do not run `git clone` or expect a repository remote. Use `~/livelabs-ai-staff`; the service units co-located with the agents use this path.
+1. Download the supplied platform ZIP and extract it into your home directory. The archive already contains the complete `livelabs-ai-staff/` directory, so do not run `git clone`. Use `~/livelabs-ai-staff`; later services expect this path.
 
     ```
     <copy>
@@ -91,26 +94,26 @@ In this lab, you will:
     cd ~/livelabs-ai-staff
     mkdir -p posts pending-posts
     test -f schema/ai_for_you_full_ddl.sql
-    test -f .agents/plugins/marketplace.json
     find . -maxdepth 1 -type d -print | sort
     </copy>
     ```
 
-2. Install the ZIP's included local Codex skills plugin from the repository root, then start a new Codex session so the skills list refreshes. The marketplace file registers the plugin as `livelabsagentic-skills@personal`. The database schema was completed in Lab 1; do not return to Lab 1 or run the DDL again.
+2. Install the Codex skills included in the ZIP. Then verify that Codex can discover them.
 
     ```
     <copy>
     cd ~/livelabs-ai-staff
-    codex plugin marketplace add .agents/plugins
-    codex plugin add livelabsagentic-skills@personal
+    mkdir -p ~/.codex/skills
+    cp -a /home/opc/livelabs-ai-staff/plugins/livelabsagentic-skills/skills/. ~/.codex/skills/
+    find ~/.codex/skills -maxdepth 2 -name SKILL.md | wc -l
     </copy>
     ```
 
-    The next steps create Python virtual environments that systemd services run later in Lab 3. Oracle Linux uses SELinux to enforce extra access controls beyond standard Linux permissions. The `chcon`, `semanage fcontext`, and `restorecon` commands label only the virtual-environment executable directories as `bin_t`, so systemd can execute the Python interpreters inside those directories.
+    The verification command must return a number greater than `0`. Start a new Codex session after copying the skills.
 
-    This does not disable SELinux, open network ports, or make the project directory public. It grants the minimum persistent SELinux file context needed for these service executables. Do not apply these labels broadly to the whole home directory or to files that contain secrets.
+    The next steps create Python virtual environments for services that start in Lab 3. The SELinux commands label only the virtual-environment executable directories. This lets systemd run those Python interpreters. It does not disable SELinux, open network ports, or make the project directory public.
 
-3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
+3. Build Python 3.9 virtual environments for `pipeline`, `assistant`, `brand-agent`, `ops`, `publish`, and `website`.
 
     ```
     <copy>
@@ -129,7 +132,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Create the Data Agent `agents/data/venv` with Python 3.12; its memory dependencies require Python 3.10 or later.
+4. Create the Data Agent `agents/data/venv` with Python 3.12. Its memory dependencies require Python 3.10 or later.
 
     ```
     <copy>
@@ -145,7 +148,7 @@ In this lab, you will:
     </copy>
     ```
 
-5. Create and label the File Editor virtual environment. This step does not start the editor service. It only installs the Python dependencies and SELinux labels needed later. Lab 3 installs and starts `contentkit-file-editor.service`; after that service is active, File Editor serves local edit links on `127.0.0.1:8001`.
+5. Create and label the File Editor virtual environment. This step installs dependencies only; Lab 3 starts the editor service.
 
     ```
     <copy>
@@ -161,7 +164,7 @@ In this lab, you will:
     </copy>
     ```
 
-6. Create the AI Staff virtual environment only when you plan to enable its Gmail, Calendar, email, or public-intake automation. This optional component is not required for the core content workflow.
+6. Create the AI Staff virtual environment only when you plan to enable Gmail, Calendar, email, or public-intake automation.
 
     ```
     <copy>
@@ -179,9 +182,9 @@ In this lab, you will:
 
 ## Task 3: Prepare for Slack Configuration
 
-1. Confirm the generic role mapping: Assistant Agent/`assistant`, Content Agent and Creative Agent/`pipeline`, Brand Agent/`brand-agent`, Data Agent/`data`, Ops Agent/`ops`, and Publish Agent/`publish`.
-2. Lab 3 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
-3. Do not create a Slack app for Website Agent/`website`; it is the HTTP-only intake service on port 8005.
+1. Confirm the role mapping: Assistant Agent/`assistant`, Content Agent and Creative Agent/`pipeline`, Brand Agent/`brand-agent`, Data Agent/`data`, Ops Agent/`ops`, and Publish Agent/`publish`.
+2. In Lab 3, you create the Slack apps. You also record each token, channel ID, owner member ID, and Assistant Agent bot ID in `.env.shared`.
+3. Do not create a Slack app for Website Agent/`website`; it is the HTTP-only intake service.
 
 ## Acknowledgements
 
