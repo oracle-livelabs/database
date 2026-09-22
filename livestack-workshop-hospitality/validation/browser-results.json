@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-21",
+  "method": "Actual local LiveLabs renderer in the connected in-app browser",
+  "checks": {
+    "sandbox_navigation": "Introduction, Getting Started and all nine labs opened",
+    "task_expansion": "Expand All Tasks worked on Getting Started and all nine labs",
+    "tenancy_navigation": "Introduction and reservation, graph and setup pages opened; same nine lab links present",
+    "cross_lab_link": "Graph lesson shortcut navigated to Getting Started Task 2",
+    "notebook_links": "Both transformed notebook download links rendered and resolved to existing files",
+    "copy_control": "Clicked Lab 2 first SQL Copy button and confirmed clipboard contains CREATE TABLE thomas_app_data and reservation SQL",
+    "quiz": "All seven answers submitted; 7/7 correct (100%); passing message and loaded hospitality SVG badge observed",
+    "disclosure": "Introduction converged-database explanation opened and closed; both states captured",
+    "console": "No warning/error entries returned at the reservation-copy check"
+  },
+  "limits": [
+    "Not an exhaustive responsive or accessibility audit",
+    "No Oracle database execution or Graph Studio import",
+    "Public resource loading through the browser succeeded, but direct HTTP checks of 19 Oracle URLs timed out"
+  ],
+  "follow_up_domain_audit": {
+    "date": "2026-09-21",
+    "quiz": "Revised answers checked in actual local LiveLabs renderer: 7/7 (100%), passing badge displayed",
+    "graph_lesson": "Updated lesson loaded in actual renderer",
+    "scope": "Targeted follow-up; original full-navigation results above describe the earlier Phase 1 run"
+  },
+  "seer_hotels_update": {
+    "date": "2026-09-21",
+    "introduction": "Rendered the shorter introduction and final ERD in the local tenancy launch route; confirmed readable entity labels and all five relationship endpoints at normal page width",
+    "captures": "Actually recaptured the open and closed introduction disclosure with the current name",
+    "scope": "Targeted introduction check; earlier full-navigation and quiz runs remain historical evidence"
+  }
+}
