@@ -160,7 +160,7 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     <summary>*click to see the output*</summary>
 
     ``` text
-       TABLESPACE_NAME    ENCRYPTED
+    TABLESPACE_NAME       ENCRYPTED
     __________________ ____________
     SYSTEM             NO
     SYSAUX             NO
@@ -674,10 +674,10 @@ All prerequisites have been met. You can now start the upgrade.
     ``` text
     SQL> show pdbs
 
-        CON_ID CON_NAME                        OPEN MODE  RESTRICTED
+    CON_ID     CON_NAME                       OPEN MODE  RESTRICTED
     ---------- ------------------------------ ---------- ----------
-        2 PDB$SEED                           READ ONLY  NO
-        3 PLUM                               READ WRITE NO
+             2 PDB$SEED                       READ ONLY  NO
+             3 PLUM                           READ WRITE NO
     ```
 
     </details>
