@@ -328,8 +328,8 @@
     },
     {
       "path": "quality-review-oml/quality-review-oml.md",
-      "bytes": 17187,
-      "sha256": "c0177aa4a9d8f6c8193795a165ab0520abd5c885d1b2f780cf73cfe3733169be"
+      "bytes": 17191,
+      "sha256": "1bce48f5e6b8d75289c5ee702da1002793e5535f00c8012bad591314f8b0dbdc"
     },
     {
       "path": "selectai/images/nina.png",
@@ -398,8 +398,8 @@
     },
     {
       "path": "selectai-agent/selectai-agent.md",
-      "bytes": 14054,
-      "sha256": "3ace71030099a582e3d088e76cb14ae6c1a6f9439297d2ce22802e117953a420"
+      "bytes": 14058,
+      "sha256": "f2fcda6b68a5f1675d1f0085bed891b7c2903c7c86b691a16774bb6c111468d4"
     },
     {
       "path": "stack/README.md",
@@ -468,8 +468,8 @@
     },
     {
       "path": "validation/copy-review.md",
-      "bytes": 7621,
-      "sha256": "3180ad68dd093c1e1faa00f9d238d89911e5b66b3f99d62786cf1f322d8c0dea"
+      "bytes": 7878,
+      "sha256": "228c4feb97ffddfca079d17b28bd9b41819e28cc3867d5df55eaa26819e3dfd2"
     },
     {
       "path": "validation/current-image-ocr.json",
@@ -493,8 +493,8 @@
     },
     {
       "path": "validation/green-button-checklist.md",
-      "bytes": 1128,
-      "sha256": "caea0b5729673a2909dccd790d20f4db2c01c7d786768029352c619cf9a6eeb7"
+      "bytes": 1379,
+      "sha256": "d82571ef532e7305a0a3c3bfe6d83ad2ec2490cfc5a944fda934ff267e87d328"
     },
     {
       "path": "validation/image-review.json",
@@ -523,8 +523,8 @@
     },
     {
       "path": "validation/manual-database-checklist.md",
-      "bytes": 1403,
-      "sha256": "656258b2689aeeeb798c57b315b640ebd012184947e6828531ef958205148dbd"
+      "bytes": 1679,
+      "sha256": "39bc8a02388d3294dc6da33761139cb82ea12fad46b00fbba66b5deed5ae519e"
     },
     {
       "path": "validation/model-restoration.json",
@@ -548,8 +548,8 @@
     },
     {
       "path": "validation/schema-contract.md",
-      "bytes": 12525,
-      "sha256": "8682a15dfff4104ee7b80208b5364a962ecade1d7500f3a329f3c729ac81eafa"
+      "bytes": 12776,
+      "sha256": "473fe1d51ca9779a5d2b564a0b3a8fe81011a8d0825f7bc37d0360823860a9fa"
     },
     {
       "path": "validation/screenshot-coverage.json",
@@ -558,8 +558,8 @@
     },
     {
       "path": "validation/screenshots.md",
-      "bytes": 7957,
-      "sha256": "bf7f3a4e18c2a3a11b32e679de3477009854640a7f9df2e918ebbef80bc621e2"
+      "bytes": 8192,
+      "sha256": "ff92f58ea664556475c6e329294d3de1917dbdb0d2e270a516406032bfc63b37"
     },
     {
       "path": "validation/source-preservation.json",
@@ -583,13 +583,13 @@
     },
     {
       "path": "validation/validation-report.md",
-      "bytes": 6783,
-      "sha256": "0745d6ef69aa82140e04f5e980197f572c3445af6012160dd6abf799ff96dc76"
+      "bytes": 7052,
+      "sha256": "a0b43cb86541c5d6e519a1e99a74ec89213232bcf6159f9ed45d3170196babc6"
     },
     {
       "path": "validation/workshop-map.md",
-      "bytes": 2594,
-      "sha256": "176cf2c076ddc60940c86c38e26f064c323a6a258366ba84ff1abecc3b1c4e5c"
+      "bytes": 2858,
+      "sha256": "c148fbc37a24ba91a3c92ea8face8e9d9f5448be24f8a78c019914514ecec907"
     },
     {
       "path": "workshops/sandbox/index.html",

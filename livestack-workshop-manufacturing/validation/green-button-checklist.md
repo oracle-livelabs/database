@@ -1,5 +1,11 @@
 # Deferred green-button phase
 
+### Objectives
+
+- List the deployment and provisioning checks that remain for the LiveLabs green-button phase.
+
+Estimated Time: **5 minutes**
+
 No Terraform initialization, validation, planning, application, or LiveLabs green-button launch was performed.
 
 After manual database execution and screenshots pass:
@@ -10,3 +16,8 @@ After manual database execution and screenshots pass:
 - Confirm timing and permissions for Database Actions, Graph Studio, Spatial Studio, OML and Select AI Agent using the learner identity.
 - Launch a fresh LiveLabs reservation through the approved green-button workflow; verify both navigation variants, login outputs, loader completion, every lab and the quiz.
 - Verify repeatability, failure reporting, resource cleanup and absence of secrets in logs and the deliverable. Rebuild the release archive with verified captures.
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Last Updated By/Date** - Matt Kowalik, September 2026

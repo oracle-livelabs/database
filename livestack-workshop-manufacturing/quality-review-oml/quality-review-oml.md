@@ -106,7 +106,7 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     
     
     
-![Machine Learning launch from Database Actions](images/oml-launch.jpg)
+    ![Machine Learning launch from Database Actions](images/oml-launch.jpg)
 
 2. Click **AutoML**.
 

@@ -92,7 +92,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-  The workshop objects use names beginning with `NINA_MANUFACTURING_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
+    The workshop objects use names beginning with `NINA_MANUFACTURING_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
 
 4. Use the model verified for this agent exercise. First record the current model from `USER_CLOUD_AI_PROFILE_ATTRIBUTES` so you can restore it after Task 5. The supplied stack starts with `cohere.command-a-03-2025`.
 
@@ -283,7 +283,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
 
   
 
-  The history should show `NINA_MANUFACTURING_SQL_TOOL`. Nina and Jessica can use it to check which tool the agent called.
+    The history should show `NINA_MANUFACTURING_SQL_TOOL`. Nina and Jessica can use it to check which tool the agent called.
 
 3. Restore the original model, including if the agent request fails. The value below is the supplied stack default; replace it with the value you recorded in Task 1 if yours differs. Run with **Run Script (F5)**.
 

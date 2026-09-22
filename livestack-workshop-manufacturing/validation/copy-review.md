@@ -1,5 +1,11 @@
 # SEER MANUFACTURING: wording review
 
+### Objectives
+
+- Record the workshop-wide jargon and antislop review, its preservation checks, and its limitations.
+
+Estimated Time: **5 minutes**
+
 Completed 22 September 2026 using the supplied JARGONCHECK rubric and the antislop core skill. The user authorized wording fixes while preserving SQL, structure, artwork, and Oracle UI labels. The attached rubric's financial examples were treated as editing examples; the workshop remains about manufacturing.
 
 ## Coverage and changes
@@ -72,3 +78,8 @@ No database objects, profiles, grants, or data were changed. Fresh SQLcl bootstr
 - `validation/validation-report.md`
 - `validation/workshop-map.md`
 - `validation/manual-database-checklist.md`
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Last Updated By/Date** - Matt Kowalik, September 2026

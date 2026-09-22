@@ -1,5 +1,11 @@
 # Validation report: 22 September 2026
 
+### Objectives
+
+- Summarize the completed workshop validation, recorded results, and checks deferred to the green-button phase.
+
+Estimated Time: **10 minutes**
+
 **Manual workshop walkthrough complete; green-button phase not started.** All 43 planned manufacturing screenshots are installed beside the matching instructions. The main labs, primary graph notebook, optional PGX notebook, AutoML, Select AI, agent test and quiz were exercised.
 
 ## Data model and loader alignment
@@ -46,3 +52,8 @@ No Terraform or LiveLabs green-button provisioning was attempted. That phase mus
 ## Wording review update, 22 September 2026
 
 The [jargon and antislop review](copy-review.md) updated 20 files while preserving all SQL, notebook code, task headings, and navigation. All 11 pages rendered and the revised quiz passed 7/7. No image writes were made by the wording edit. Ten illustration files changed outside those edits, including eight with changed dimensions. Earlier exact-pixel banner comparisons are historical; see [current image checks](copy-review-image-changes.json) and [fresh OCR](current-image-ocr.json). All 43 authentic database captures remain byte-identical.
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Last Updated By/Date** - Matt Kowalik, September 2026

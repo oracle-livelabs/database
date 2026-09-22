@@ -1,5 +1,11 @@
 # Manufacturing screenshot coverage
 
+### Objectives
+
+- Map each authentic database capture to the workshop instruction it supports.
+
+Estimated Time: **5 minutes**
+
 All 43 planned captures were taken from the manually provisioned database as LLUSER and placed beside their matching instructions. Five generic platform captures are retained. Persona banners and introduction illustrations remain separate from this count.
 
 | ID | Lesson | Instruction | Capture |
@@ -49,3 +55,8 @@ All 43 planned captures were taken from the manually provisioned database as LLU
 | CAP-043 | component-quality-vector-search | Task 4: Find customer sites affected by a component concern | [component customer follow-up](../component-quality-vector-search/images/sql-vector-customer-sites.png) |
 
 Exact file paths and placement are in [screenshot-coverage.json](screenshot-coverage.json). Captures are unaltered browser screenshots. Oracle-provided example cards and tags visible in Graph Studio are platform content, not workshop fixtures.
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Last Updated By/Date** - Matt Kowalik, September 2026

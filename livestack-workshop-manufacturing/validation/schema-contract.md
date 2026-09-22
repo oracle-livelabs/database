@@ -1,5 +1,11 @@
 # Manufacturing data model and loader contract
 
+### Objectives
+
+- Document the manufacturing schema, loader fixtures, relationships, and lab-created objects.
+
+Estimated Time: **10 minutes**
+
 The canonical SQL creates 15 tables, four reporting views, one JSON Relational Duality view, and the SQL property graph `PRODUCTION_QUALITY_NETWORK`. There are 18 foreign keys. `COMPONENT_EMBEDDINGS` receives 192 vectors at runtime; the manual database walkthrough verified these using the Oracle embedding model.
 
 ## Operational rules
@@ -318,3 +324,8 @@ Lab 3 adds `COMPONENTS.COMPONENT_EMBEDDING`; the dashboard uses the separately p
 The supplemental 43-paragraph notebook uses work centers and physical material transfers. Its `MATERIAL_FLOW_GRAPH` PGQL setup is provided at the end of the loader and must be run separately in Graph Studio. Rework paths explain cycles. It teaches paths, degree, PageRank, shortest path, personalized PageRank, and hop distance. The main eight-paragraph notebook uses SQL/PGQ.
 
 See [machine-readable contract](schema-contract.json), [exact fixture rows](fixture-data.json), and [static validation](static-results.json).
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Last Updated By/Date** - Matt Kowalik, September 2026
