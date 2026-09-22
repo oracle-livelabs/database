@@ -1,0 +1,1064 @@
+{
+  "date": "2026-09-22",
+  "scope": "Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.",
+  "passed": true,
+  "errors": [],
+  "checks": {
+    "insert_arity_plants": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_components": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_customer_sites": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_production_orders": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_production_order_lines": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_quality_observations": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_observation_components": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_demand_regions": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_trace_entities": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_trace_relationships": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_quality_cases": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_quality_case_entities": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_work_centers": {
+      "pass": true,
+      "detail": null
+    },
+    "insert_arity_material_transfers": {
+      "pass": true,
+      "detail": null
+    },
+    "loader_fixture_exact_alignment": {
+      "pass": true,
+      "detail": {
+        "plants": 16,
+        "components": 192,
+        "customer_sites": 1024,
+        "production_orders": 3739,
+        "production_order_lines": 4985,
+        "quality_observations": 1536,
+        "observation_components": 1536,
+        "demand_regions": 2,
+        "trace_entities": 12,
+        "trace_relationships": 24,
+        "quality_cases": 2,
+        "quality_case_entities": 10,
+        "work_centers": 105,
+        "material_transfers": 114
+      }
+    },
+    "foreign_key_integrity": {
+      "pass": true,
+      "detail": 18
+    },
+    "order_totals": {
+      "pass": true,
+      "detail": null
+    },
+    "component_plant_alignment": {
+      "pass": true,
+      "detail": null
+    },
+    "inspection_percentages": {
+      "pass": true,
+      "detail": null
+    },
+    "exercise_order_id_unused": {
+      "pass": true,
+      "detail": null
+    },
+    "exercise_line_id_unused": {
+      "pass": true,
+      "detail": null
+    },
+    "oml_classes": {
+      "pass": true,
+      "detail": {
+        "REVIEW": 96,
+        "STABLE": 96
+      }
+    },
+    "independent_quantity_and_schedule": {
+      "pass": true,
+      "detail": null
+    },
+    "shared_lot_pairs": {
+      "pass": true,
+      "detail": [
+        [
+          "PO-8841",
+          "PO-5077",
+          "LOT-ST-91A7"
+        ],
+        [
+          "PO-8841",
+          "PO-1190",
+          "LOT-ST-91A7"
+        ],
+        [
+          "PO-5077",
+          "PO-1190",
+          "LOT-ST-91A7"
+        ]
+      ]
+    },
+    "optional_pgx_seed_ids": {
+      "pass": true,
+      "detail": null
+    },
+    "reserved_component": {
+      "pass": true,
+      "detail": null
+    },
+    "graph_ddl_lab_loader_exact": {
+      "pass": true,
+      "detail": null
+    },
+    "duality_ddl_lab_loader_alignment": {
+      "pass": true,
+      "detail": null
+    },
+    "notebook_no_cached_results": {
+      "pass": true,
+      "detail": null
+    },
+    "notebook_structure": {
+      "pass": true,
+      "detail": {
+        "paragraphs": {
+          "production-quality-network/files/getting-started-material-flow-graph.dsnb": 43,
+          "production-quality-network/files/manufacturing-production-quality-graph-studio.dsnb": 8
+        },
+        "python_paragraphs": 5
+      }
+    },
+    "manifests_synchronized": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_introduction": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_getting-started": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_production-operations-dashboard": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_production-order-duality": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_component-quality-vector-search": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_production-quality-network": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_plant-routing-spatial": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_quality-review-oml": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_selectai": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_selectai-agent": {
+      "pass": true,
+      "detail": null
+    },
+    "manifest_final-quiz": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_README.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_README.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/copy-review.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/workshop-map.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/schema-contract.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/screenshots.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/manual-database-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:validation/green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_README.md:stack/README.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_production-operations-dashboard/production-operations-dashboard.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_production-operations-dashboard/production-operations-dashboard.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-operations-dashboard/production-operations-dashboard.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/jessica.png": {
+      "pass": true,
+      "detail": null
+    },
+    "nav_?lab=getting-started#Task2:OpenSQLWorksheet": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/sql-dashboard.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/sql-dashboard-followup.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_quality-review-oml/quality-review-oml.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_quality-review-oml/quality-review-oml.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/otto.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/sql-oml-training.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-launch.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-home.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-settings.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-leaderboard.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-model-comparison.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-confusion-matrix.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/oml-prediction-impact.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/sql-oml-model.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_quality-review-oml/quality-review-oml.md:images/sql-oml-scoring.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_production-order-duality/production-order-duality.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_production-order-duality/production-order-duality.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:images/thomas.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:images/sql-duality-document.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:images/sql-duality-contract.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:images/sql-duality-released.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:images/sql-duality-projection.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-order-duality/production-order-duality.md:images/sql-duality-relational.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_final-quiz/final-quiz.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_final-quiz/final-quiz.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_introduction/introduction.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_introduction/introduction.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_introduction/introduction.md:images/seer-manufacturing-introduction.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_introduction/introduction.md:images/seer-manufacturing-erd-illustrated.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_introduction/introduction.md:images/seer-manufacturing-erd.svg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_introduction/introduction.md:../validation/schema-contract.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_introduction/introduction.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_plant-routing-spatial/plant-routing-spatial.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_plant-routing-spatial/plant-routing-spatial.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/moon.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-points.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-new-york.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-chicago.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-routing.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_selectai-agent/selectai-agent.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_selectai-agent/selectai-agent.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai-agent/selectai-agent.md:images/nina.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai-agent/selectai-agent.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "nav_?lab=selectai": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai-agent/selectai-agent.md:images/sql-agent-answer.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai-agent/selectai-agent.md:images/sql-agent-history.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai-agent/selectai-agent.md:images/sql-agent-tools.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_selectai/selectai.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_selectai/selectai.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/nina.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/sql-ai-object-list.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/sql-ai-generated.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/sql-ai-answer.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/sql-ai-refined-generated.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/sql-ai-refined-answer.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_selectai/selectai.md:images/sql-ai-narration.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_production-quality-network/production-quality-network.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_production-quality-network/production-quality-network.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/bob.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/sql-graph-direct.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/sql-graph-four-hop.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/sql-graph-shared.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/graph-launch.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/graph-studio-overview.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:files/manufacturing-production-quality-graph-studio.dsnb": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/graph-notebooks.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/graph-import-dialog.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/graph-import-file.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/graph-notebook-top.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/live-09-graph-notebook-table.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/live-10-graph-production-network.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/live-11-graph-shared-lot.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:files/getting-started-material-flow-graph.dsnb": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_component-quality-vector-search/component-quality-vector-search.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_component-quality-vector-search/component-quality-vector-search.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:images/gilly.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:images/sql-embedding-model.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:images/sql-vector-values.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:images/sql-vector-distance.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:images/sql-vector-similarity.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_component-quality-vector-search/component-quality-vector-search.md:images/sql-vector-customer-sites.png": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_getting-started/getting-started.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_getting-started/getting-started.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:../validation/screenshots.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:../validation/schema-contract.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:images/reservation-login-info.svg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:images/reservation-login-copy-password.svg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:images/reservation-login-open-link.svg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:images/database-actions-login-main-user.svg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:images/database-actions-development-sql.svg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_getting-started/getting-started.md:images/sql-connection.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_stack/README.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_stack/README.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_stack/README.md:load_data/manufacturing-platform-handoff-loader.sql": {
+      "pass": true,
+      "detail": null
+    },
+    "link_stack/README.md:../validation/manual-database-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_stack/README.md:../validation/green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/copy-review.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/copy-review.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/screenshots.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/screenshots.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-operations-dashboard/images/sql-dashboard.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-operations-dashboard/images/sql-dashboard-followup.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/sql-oml-training.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/oml-settings.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/oml-leaderboard.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/oml-model-comparison.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/oml-confusion-matrix.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/oml-prediction-impact.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/sql-oml-model.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../quality-review-oml/images/sql-oml-scoring.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-document.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-contract.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-released.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-projection.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-relational.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-points.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-new-york.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-chicago.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-routing.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai-agent/images/sql-agent-answer.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai-agent/images/sql-agent-history.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai-agent/images/sql-agent-tools.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai/images/sql-ai-object-list.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai/images/sql-ai-generated.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai/images/sql-ai-answer.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai/images/sql-ai-refined-generated.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai/images/sql-ai-refined-answer.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../selectai/images/sql-ai-narration.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/sql-graph-direct.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/sql-graph-four-hop.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/sql-graph-shared.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/graph-studio-overview.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/graph-notebooks.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/graph-import-dialog.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/graph-import-file.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/graph-notebook-top.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/live-09-graph-notebook-table.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/live-10-graph-production-network.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../production-quality-network/images/live-11-graph-shared-lot.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-values.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-distance.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-similarity.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-customer-sites.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/screenshots.md:screenshot-coverage.json": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/schema-contract.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/schema-contract.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/schema-contract.md:schema-contract.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/schema-contract.md:fixture-data.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/schema-contract.md:static-results.json": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:live-validation.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:live-sql-results.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:pgx-results.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:schema-contract.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:validate.py": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:screenshots.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:image-review.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:domain-audit.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:structure-comparison.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:source-preservation.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:copy-review.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:copy-review-image-changes.json": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/validation-report.md:current-image-ocr.json": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/workshop-map.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/workshop-map.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/manual-database-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/manual-database-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/manual-database-checklist.md:validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "fences_validation/green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "copy_validation/green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "schema_references": {
+      "pass": true,
+      "detail": []
+    },
+    "lesson_count": {
+      "pass": true,
+      "detail": null
+    },
+    "quiz": {
+      "pass": true,
+      "detail": null
+    },
+    "loader_entrypoint": {
+      "pass": true,
+      "detail": null
+    },
+    "base_table_and_view_columns": {
+      "pass": true,
+      "detail": []
+    }
+  },
+  "table_counts": {
+    "plants": 16,
+    "components": 192,
+    "customer_sites": 1024,
+    "production_orders": 3739,
+    "production_order_lines": 4985,
+    "quality_observations": 1536,
+    "observation_components": 1536,
+    "demand_regions": 2,
+    "trace_entities": 12,
+    "trace_relationships": 24,
+    "quality_cases": 2,
+    "quality_case_entities": 10,
+    "work_centers": 105,
+    "material_transfers": 114
+  },
+  "foreign_keys": 18,
+  "task_counts": {
+    "production-operations-dashboard": 2,
+    "quality-review-oml": 4,
+    "production-order-duality": 6,
+    "final-quiz": 1,
+    "introduction": 0,
+    "plant-routing-spatial": 3,
+    "selectai-agent": 5,
+    "selectai": 6,
+    "production-quality-network": 7,
+    "component-quality-vector-search": 4,
+    "getting-started": 2
+  },
+  "sql_blocks": {
+    "production-operations-dashboard": 1,
+    "quality-review-oml": 5,
+    "production-order-duality": 14,
+    "final-quiz": 0,
+    "introduction": 0,
+    "plant-routing-spatial": 4,
+    "selectai-agent": 15,
+    "selectai": 9,
+    "production-quality-network": 6,
+    "component-quality-vector-search": 8,
+    "getting-started": 1
+  },
+  "image_references": 63,
+  "unique_images_referenced": 63,
+  "external_links": [
+    "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm",
+    "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
+    "https://livelabs.oracle.com",
+    "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
+    "https://ocw.mit.edu/courses/21l-007j-after-columbus-fall-2003/4cceed8afab4e80aba65fc83b8ec27ed_how_to_3.pdf"
+  ],
+  "authentic_manufacturing_screenshots": 43,
+  "pending_capture_positions": 0,
+  "manual_oracle_validation": "see live-validation.json (separate from these static checks)",
+  "green_button_validation": "not_run"
+}
