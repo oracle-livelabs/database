@@ -5,7 +5,7 @@
     "erd_relationships": 5,
     "local_labs": 11,
     "navigation_variants": 2,
-    "local_links": 103,
+    "local_links": 104,
     "task_counts": {
       "booking-abuse-network": 7,
       "final-quiz": 1,
@@ -29,7 +29,7 @@
     "sql_blocks": 60,
     "domain_audit": {
       "text_files": 42,
-      "raster_files": 73,
+      "raster_files": 74,
       "paths": "all files and directories",
       "nested_json": "decoded recursively",
       "raster_review": "hash-bound visual and OCR review",
@@ -86,7 +86,7 @@
     "qualified_columns_checked": 259,
     "json_fixture_contract": "passed",
     "source_assets_accounted_for": 86,
-    "new_image_assets": 16,
+    "new_image_assets": 17,
     "limits": [
       "No Oracle SQL execution or compilation",
       "No live DDL, grants, loader, AI-provider, or notebook-import validation",

@@ -1,0 +1,236 @@
+Clear output
+Download script output
+LAB2_BLOCK_1
+
+
+Copy to clipboard
+
+Table THOMAS_APP_DATA created.
+
+Elapsed: 00:00:00.085
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.092
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.003
+
+
+Copy to clipboard
+LAB2_BLOCK_2
+
+
+Copy to clipboard
+ORDER_ID SCREEN_NAME          SHOW_TOTAL APP_FEATURES                             
+-------- -------------------- ---------- ---------------------------------------- 
+    1190 service-order-detail true       ["live-status","activation-preferences"] 
+
+
+Elapsed: 00:00:00.014
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_3
+
+
+Copy to clipboard
+
+JSON collection table THOMAS_ORDER_DOCS created.
+
+Elapsed: 00:00:00.037
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.078
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.001
+
+
+Copy to clipboard
+LAB2_BLOCK_4
+
+
+Copy to clipboard
+ORDER_DOCUMENT                                                                                                                                                                                                                                                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+{
+  "_id" : 1190,
+  "_metadata" :
+  {
+    "etag" : "5C267C198856656CE0636210000AB8F7"
+  },
+  "subscriberId" : 3,
+  "siteId" : 1,
+  "periodStart" : "2026-09-01",
+  "periodEnd" : "2026-10-01",
+  "status" : "confirmed",
+  "items" :
+  [
+    {
+      "orderLineId" : 3843,
+      "planId" : 1,
+      "connectionCount" : 2,
+      "monthlyFee" : 145
+    }
+  ]
+} 
+
+
+Elapsed: 00:00:00.013
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_5
+
+
+Copy to clipboard
+ORDER_DOCUMENT                                                                                                                                                                                                                                                                                                                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+{"demandScore":86,"periodStart":"2026-09-01T00:00:00","activationFee":0,"createdAt":"2026-08-20T10:00:00","subscriberId":332,"items":[{"orderLineId":480,"planId":24,"connectionCount":4,"monthlyFee":38}],"_id":10480,"siteId":2,"periodEnd":"2026-10-01T00:00:00","_metadata":{"etag":"CB9CAC36EA7E1F85589DE441BBFA87AF","asof":"00002E143CC30683"},"status":"cancelled","total":152} 
+
+
+Elapsed: 00:00:00.011
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_6
+
+
+Copy to clipboard
+VIEW_NAME         ALLOW_INSERT ALLOW_UPDATE ALLOW_DELETE 
+----------------- ------------ ------------ ------------ 
+SERVICE_ORDERS_DV false        true         false        
+
+
+Elapsed: 00:00:00.074
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_7
+
+
+Copy to clipboard
+
+View SERVICE_ORDERS_DV created.
+
+Elapsed: 00:00:00.096
+
+
+Copy to clipboard
+LAB2_BLOCK_8
+
+
+Copy to clipboard
+VIEW_NAME         ALLOW_INSERT ALLOW_UPDATE ALLOW_DELETE 
+----------------- ------------ ------------ ------------ 
+SERVICE_ORDERS_DV true         true         false        
+
+
+Elapsed: 00:00:00.004
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_9
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.028
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.002
+
+
+Copy to clipboard
+LAB2_BLOCK_10
+
+
+Copy to clipboard
+ORDER_ID ORDER_STATUS SUBSCRIBER_EMAIL           ORDER_LINE_ID PLAN_NAME                            CONNECTION_COUNT MONTHLY_FEE LINE_TOTAL 
+-------- ------------ -------------------------- ------------- ------------------------------------ ---------------- ----------- ---------- 
+  900001 pending      subscriber0001@example.com        990001 Edison Mobile Plus - Monthly rolling                2         125        250 
+
+
+Elapsed: 00:00:00.019
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_11
+
+
+Copy to clipboard
+
+1 row updated.
+
+Elapsed: 00:00:00.031
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.002
+
+
+Copy to clipboard
+LAB2_BLOCK_12
+
+
+Copy to clipboard
+ORDER_ID ORDER_STATUS ORDER_LINE_ID PLAN_NAME                            CONNECTION_COUNT LINE_TOTAL 
+-------- ------------ ------------- ------------------------------------ ---------------- ---------- 
+  900001 confirmed           990001 Edison Mobile Plus - Monthly rolling                2        250 
+
+
+Elapsed: 00:00:00.009
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_13
+
+
+Copy to clipboard
+ORDER_ID ORDER_STATUS SUBSCRIBER_EMAIL           
+-------- ------------ -------------------------- 
+  900001 confirmed    subscriber0001@example.com 
+
+
+Elapsed: 00:00:00.010
+1 rows selected.
+
+Copy to clipboard
+LAB2_BLOCK_14
+
+
+Copy to clipboard
+ORDER_ID ORDER_STATUS SUBSCRIBER_EMAIL           
+-------- ------------ -------------------------- 
+  900001 confirmed    subscriber0001@example.com 
+
+
+Elapsed: 00:00:00.007
+1 rows selected.
+
+Copy to clipboard

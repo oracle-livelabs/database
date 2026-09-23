@@ -434,6 +434,12 @@
       "status": "reviewed",
       "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
       "ocr_text": "Labs 7 & 8: Ask Hospitality Questions and Build an Al Agent\nAsk questions about\nhotel data and review\nthe answers.\nJessica\nDBA\nNina\nGuest Experience Analyst"
+    },
+    "introduction/images/seer-hotels-introduction.png": {
+      "sha256": "16f90df560e2e18b146f5d6bb3ca64380f147fa7ab9ff0afd4a8b17f30515208",
+      "status": "reviewed",
+      "finding": "Visually inspected: Seer Hotels lobby, Jessica and Thomas, room concern, affected reservations, guest assistance. All visible wording is hospitality-specific.",
+      "visible_text": "SEER HOTELS. Help guests affected by a room concern. Review the room concern. Find affected reservations. Plan guest assistance. HOTEL."
     }
   }
 }
