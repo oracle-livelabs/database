@@ -35,7 +35,7 @@ Estimated Time: **5 minutes**
     - It hides the detailed signal rows from the reviewer.
     * It connects summary numbers to reviewable healthcare evidence.
     - It removes the need for governed database views.
-    > The KPI query returns the summary. The next queries show the five elevated signals and the service categories behind that summary.
+    > The KPI query returns the complete summary. The next queries show five priority examples and the service-category counts behind the 474 elevated signals.
 
     Q: What does JSON Relational Duality provide for request 170104?
     - A separate JSON copy that requires an hourly synchronization job.
@@ -100,6 +100,5 @@ Estimated Time: **5 minutes**
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

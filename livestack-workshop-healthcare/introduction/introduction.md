@@ -60,11 +60,11 @@ Estimated Workshop Time: **95 minutes**
 | What You Will See | One Oracle AI Database 26ai foundation supports the healthcare decision flow from awareness to planning. |
 | Database Capability | Relational SQL, JSON Relational Duality, vectors, property graphs, Spatial, and Oracle Machine Learning work together. |
 | Outcome | Healthcare teams can observe, investigate, plan, and review decisions with database-backed evidence. |
+{: title="Workshop decision path"}
 
 **Persona focus:** You join Jessica and her coworkers as their database guide. You connect each operating question to facts that another person can review and reproduce.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

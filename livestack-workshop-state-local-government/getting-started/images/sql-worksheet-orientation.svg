@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">SQL Worksheet orientation for the State and Local Government workshop</title>
+  <desc id="desc">A labeled Oracle Database Actions SQL Worksheet showing the LLUSER connection, Navigator, SQL editor, Run Statement button, and Query Result panel.</desc>
+  <rect width="1280" height="720" fill="#f7f8f9"/>
+  <rect x="40" y="35" width="1200" height="650" rx="16" fill="#ffffff" stroke="#b8b8b8" stroke-width="2"/>
+  <rect x="40" y="35" width="1200" height="64" rx="16" fill="#312d2a"/>
+  <rect x="40" y="83" width="1200" height="16" fill="#312d2a"/>
+  <text x="72" y="75" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Database Actions · SQL Worksheet</text>
+  <rect x="1000" y="51" width="205" height="34" rx="6" fill="#ffffff"/>
+  <circle cx="1023" cy="68" r="7" fill="#2e7d32"/>
+  <text x="1040" y="75" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#312d2a">LLUSER</text>
+
+  <rect x="58" y="118" width="270" height="540" rx="8" fill="#f1f3f4" stroke="#c7c9ca"/>
+  <text x="80" y="153" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#312d2a">Navigator</text>
+  <text x="80" y="190" font-family="Arial, sans-serif" font-size="17" fill="#312d2a">Tables</text>
+  <text x="98" y="224" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">ORDERS</text>
+  <text x="98" y="252" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">ORDER_ITEMS</text>
+  <text x="98" y="280" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">PRODUCT_EMBEDDINGS</text>
+  <text x="80" y="326" font-family="Arial, sans-serif" font-size="17" fill="#312d2a">Views</text>
+  <text x="98" y="360" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">SLED_PUBLIC_SERVICES_V</text>
+  <text x="98" y="388" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">SLED_RESIDENT_SIGNALS_V</text>
+  <text x="98" y="416" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">ORDERS_DV</text>
+  <text x="80" y="462" font-family="Arial, sans-serif" font-size="17" fill="#312d2a">Analytics</text>
+  <text x="98" y="496" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">INFLUENCER_NETWORK</text>
+  <text x="98" y="524" font-family="Consolas, monospace" font-size="15" fill="#4b4b4b">SLED_*_MODEL</text>
+
+  <rect x="350" y="118" width="872" height="330" rx="8" fill="#ffffff" stroke="#c7c9ca"/>
+  <rect x="350" y="118" width="872" height="50" rx="8" fill="#eef4f8"/>
+  <rect x="374" y="129" width="165" height="30" rx="5" fill="#c74634"/>
+  <text x="392" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff">Run Statement</text>
+  <text x="380" y="213" font-family="Consolas, monospace" font-size="19" fill="#1f1f1f">SELECT service_name, service_domain</text>
+  <text x="380" y="246" font-family="Consolas, monospace" font-size="19" fill="#1f1f1f">FROM sled_public_services_v</text>
+  <text x="380" y="279" font-family="Consolas, monospace" font-size="19" fill="#1f1f1f">ORDER BY service_name;</text>
+  <text x="380" y="415" font-family="Arial, sans-serif" font-size="18" fill="#5b5b5b">Paste one workshop SQL block, then select Run Statement.</text>
+
+  <rect x="350" y="468" width="872" height="190" rx="8" fill="#ffffff" stroke="#c7c9ca"/>
+  <rect x="350" y="468" width="872" height="42" rx="8" fill="#eef4f8"/>
+  <text x="374" y="495" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#312d2a">Query Result</text>
+  <line x1="375" y1="550" x2="1195" y2="550" stroke="#c7c9ca"/>
+  <text x="380" y="538" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#312d2a">SERVICE_NAME</text>
+  <text x="760" y="538" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#312d2a">SERVICE_DOMAIN</text>
+  <text x="380" y="583" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Benefits Appointment Scheduling</text>
+  <text x="760" y="583" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Benefits and Health</text>
+  <text x="380" y="620" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Building Permit Inspection</text>
+  <text x="760" y="620" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Permits and Licensing</text>
+
+  <line x1="1110" y1="100" x2="1110" y2="51" stroke="#c74634" stroke-width="3"/>
+  <text x="980" y="115" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#c74634">1. Confirm LLUSER</text>
+  <line x1="525" y1="168" x2="525" y2="185" stroke="#c74634" stroke-width="3"/>
+  <text x="550" y="188" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#c74634">2. Paste SQL here</text>
+  <text x="553" y="151" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">3. Run</text>
+  <text x="990" y="650" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#c74634">4. Review results</text>
+</svg>

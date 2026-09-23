@@ -47,6 +47,7 @@ Estimated Time: **15 minutes**
 | What You Will See | SQL inventories and scores a stored classification model. |
 | Database Capability | `USER_MINING_MODELS`, `PREDICTION`, and `PREDICTION_PROBABILITY` support in-database scoring. |
 | Outcome | The planner can connect a risk label to its model, input features, and probability. |
+{: title="Risk analytics scenario"}
 
 **Persona focus:** You help a capacity planner interpret a forecast and model score. The planner uses them as evidence rather than an automatic decision.
 
@@ -79,11 +80,12 @@ Begin by confirming the model that will score the operating scenario.
     WHERE model_name = 'CARE_DEMAND_RISK_MODEL';</copy>
     ```
 
-    **Expected output: Healthcare OML Model**
+    **Expected output: Stored OML model**
 
     | Model Name | Mining Function | Algorithm |
     | --- | --- | --- |
     | CARE\_DEMAND\_RISK\_MODEL | CLASSIFICATION | GENERALIZED\_LINEAR\_MODEL |
+    {: title="Demand-risk model"}
 
 2. Run the forecast query.
 
@@ -101,7 +103,7 @@ Begin by confirming the model that will score the operating scenario.
     FETCH FIRST 5 ROWS ONLY;</copy>
     ```
 
-    **Expected output: Highest Demand Forecasts**
+    **Expected output: Top demand forecasts**
 
     | Service | Region | Predicted Demand | Risk Factor |
     | --- | --- | ---: | ---: |
@@ -110,6 +112,7 @@ Begin by confirming the model that will score the operating scenario.
     | mRNA LNP Clinical Batch | Los Angeles Basin | 2140 | 1.82 |
     | mRNA LNP Clinical Batch | Bay Area (SF) | 1980 | 1.74 |
     | Bed Capacity Surge Playbook | New York Metro | 1810 | 1.68 |
+    {: title="Demand forecasts"}
 
 3. Read the planning clue.
 
@@ -140,12 +143,13 @@ Before scoring new input, look at a simple training-data agreement check.
     ORDER BY actual_label, predicted_label;</copy>
     ```
 
-    **Expected output: Training-Row Agreement Check**
+    **Expected output: Training-label comparison**
 
     | Actual Label | Predicted Label | Scenario Count |
     | --- | --- | ---: |
     | HIGH | HIGH | 6 |
     | LOW | LOW | 6 |
+    {: title="Training comparison"}
 
 2. Interpret the check carefully.
 
@@ -155,7 +159,14 @@ Before scoring new input, look at a simple training-data agreement check.
 
 3. Score a new scenario near the model boundary.
 
-    This input has 17 current requests, 6 signals, a capacity ratio of 1.06, and 2 critical alerts.
+    The new row describes one planning period with four features:
+
+    - **17 current requests** is the amount of active work waiting for service or fulfillment. A larger number can add pressure because more work is competing for the same people, time, and supplies.
+    - **6 signals** means six quality, access, supply, or capacity bulletins are connected to that operating period. Signals do not prove a problem, but several at once can give the planner more reasons to review conditions.
+    - **A capacity ratio of 1.06** compares available capacity with expected demand. A value of `1.00` means they are equal, so `1.06` represents about six percent more capacity than demand. That is a small cushion, not a large reserve.
+    - **2 critical alerts** counts the most urgent signals inside the larger group of six. The model treats that concentration of urgent evidence as a separate input.
+
+    Together, the values describe a network that still has a little room but is carrying meaningful workload and alert pressure. The model compares this combination with the patterns in its synthetic training rows.
 
     `PREDICTION` returns the label. `PREDICTION_PROBABILITY` returns the probability for that predicted label.
 
@@ -172,23 +183,23 @@ Before scoring new input, look at a simple training-data agreement check.
              4
            ) AS model_confidence
     FROM (
-      SELECT 17 AS current_requests,
-             6 AS signal_count,
+      SELECT 17   AS current_requests,
+             6    AS signal_count,
              1.06 AS capacity_ratio,
-             2 AS critical_alerts
-      FROM dual
+             2    AS critical_alerts
     );</copy>
     ```
 
-    **Expected output: New Demand-Risk Score**
+    **Expected output: Scenario risk score**
 
     | Predicted Risk | Model Confidence |
     | --- | ---: |
     | HIGH | 0.5046 |
+    {: title="Scenario risk"}
 
 4. Explain the score.
 
-    The model returns `HIGH`, but the probability is close to `0.5`. That means the result is near the model boundary and needs careful review.
+    The model returns `HIGH`, but the probability is close to `0.5`. That means the combination of 17 requests, six signals, a small six-percent capacity cushion, and two critical alerts sits near the model’s boundary between `LOW` and `HIGH`.
 
     This is more useful than treating every model label as certain. The planner can see the label, the input features, and the strength of the result.
 
@@ -200,6 +211,5 @@ You inventoried and scored an OML model with SQL. For a deeper workshop about Or
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, July 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Linda Foinding, Principal Database Product Manager, August 2026

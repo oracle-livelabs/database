@@ -1,0 +1,681 @@
+[
+  {
+    "target_asset": "guest-routing-spatial/images/sql-spatial-routing.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A001",
+    "original_target_asset": "guest-routing-spatial/images/task31.png"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/sql-spatial-routing.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A002",
+    "original_target_asset": "guest-routing-spatial/images/task32.png"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/sql-spatial-points.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A003",
+    "original_target_asset": "guest-routing-spatial/images/task1query.png"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/sql-spatial-chicago.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A004",
+    "original_target_asset": "guest-routing-spatial/images/task22.png"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/sql-spatial-new-york.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A005",
+    "original_target_asset": "guest-routing-spatial/images/task21.png"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/moon.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
+    "asset_id": "A006"
+  },
+  {
+    "target_asset": "guest-routing-spatial/images/demo-spatial-map.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live local-demo capture approved by the user on 21 September 2026. The separate hospitality application story and dataset are intentional; the application is unchanged.",
+    "asset_id": "A007",
+    "original_target_asset": "guest-routing-spatial/images/spatial-chart.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/oml-leaderboard.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A008",
+    "original_target_asset": "stay-demand-oml/images/leaderboard.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/oml-settings.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A009",
+    "original_target_asset": "stay-demand-oml/images/startml.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/sql-oml-scoring.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A010",
+    "original_target_asset": "stay-demand-oml/images/result.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/otto.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
+    "asset_id": "A011"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/oml-prediction-impact.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A012",
+    "original_target_asset": "stay-demand-oml/images/imapct.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/oml-confusion-matrix.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A013",
+    "original_target_asset": "stay-demand-oml/images/goodmodel.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/oml-home.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A014",
+    "original_target_asset": "stay-demand-oml/images/automl.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/oml-launch.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A015",
+    "original_target_asset": "stay-demand-oml/images/open-ml.png"
+  },
+  {
+    "target_asset": "stay-demand-oml/images/sql-oml-training.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A016",
+    "original_target_asset": "stay-demand-oml/images/training.png"
+  },
+  {
+    "target_asset": "final-quiz/images/livestack-hospitality-badge.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A017"
+  },
+  {
+    "target_asset": "final-quiz/images/livestack-hospitality-badge.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A018"
+  },
+  {
+    "target_asset": "final-quiz/images/badge.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A019"
+  },
+  {
+    "target_asset": "introduction/images/team.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A020"
+  },
+  {
+    "target_asset": "introduction/images/demo-welcome.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A021",
+    "original_target_asset": "introduction/images/seer-hotels-welcome.png"
+  },
+  {
+    "target_asset": "introduction/images/hospitality-workshop-intro-journey.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A022"
+  },
+  {
+    "target_asset": "introduction/images/details-accordion-closed.jpg",
+    "status": "regenerated_local_capture",
+    "reason": "Captured from the actual local hospitality LiveLabs page, with the converged-database disclosure open or closed. This is workshop UI evidence, not a database execution screenshot.",
+    "asset_id": "A023"
+  },
+  {
+    "target_asset": "introduction/images/seer-hotels-welcome.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A024"
+  },
+  {
+    "target_asset": "introduction/images/demo-welcome.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A025",
+    "original_target_asset": "introduction/images/seer-hotels-welcome-runbook.png"
+  },
+  {
+    "target_asset": "introduction/images/details-accordion-expanded.jpg",
+    "status": "regenerated_local_capture",
+    "reason": "Captured from the actual local hospitality LiveLabs page, with the converged-database disclosure open or closed. This is workshop UI evidence, not a database execution screenshot.",
+    "asset_id": "A026"
+  },
+  {
+    "target_asset": "introduction/images/details-accordion-expand-flow.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A027"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/gilly.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
+    "asset_id": "A028"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/sql-vector-guests.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A029",
+    "original_target_asset": "guest-concern-vector-search/images/result3.png"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/sql-vector-similarity.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A030",
+    "original_target_asset": "guest-concern-vector-search/images/result2.png"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/sql-vector-values.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A031",
+    "original_target_asset": "guest-concern-vector-search/images/vector.png"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/sql-vector-distance.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A032",
+    "original_target_asset": "guest-concern-vector-search/images/result.png"
+  },
+  {
+    "target_asset": "guest-concern-vector-search/images/sql-embedding-model.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A033",
+    "original_target_asset": "guest-concern-vector-search/images/model.png"
+  },
+  {
+    "target_asset": "selectai-agent/images/sql-agent-tools.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A034",
+    "original_target_asset": "selectai-agent/images/task52.png"
+  },
+  {
+    "target_asset": "selectai-agent/images/sql-agent-history.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A035",
+    "original_target_asset": "selectai-agent/images/task5.png"
+  },
+  {
+    "target_asset": "selectai-agent/images/sql-agent-answer.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A036",
+    "original_target_asset": "selectai-agent/images/task4.png"
+  },
+  {
+    "target_asset": "selectai/images/sql-ai-refined-answer.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A037",
+    "original_target_asset": "selectai/images/task52.png"
+  },
+  {
+    "target_asset": "selectai/images/sql-ai-generated.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A038",
+    "original_target_asset": "selectai/images/task3.png"
+  },
+  {
+    "target_asset": "selectai/images/sql-ai-object-list.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A039",
+    "original_target_asset": "selectai/images/task2.png"
+  },
+  {
+    "target_asset": "selectai/images/sql-ai-narration.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A040",
+    "original_target_asset": "selectai/images/task6.png"
+  },
+  {
+    "target_asset": "selectai/images/sql-ai-refined-generated.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A041",
+    "original_target_asset": "selectai/images/task5.png"
+  },
+  {
+    "target_asset": "selectai/images/sql-ai-answer.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A042",
+    "original_target_asset": "selectai/images/task4.png"
+  },
+  {
+    "target_asset": "selectai/images/nina.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
+    "asset_id": "A043"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-confirmed.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A044",
+    "original_target_asset": "reservation-duality/images/json-success.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-relational.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A045",
+    "original_target_asset": "reservation-duality/images/json-relational.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-projection.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A046",
+    "original_target_asset": "reservation-duality/images/json-project.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-confirmed.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A047",
+    "original_target_asset": "reservation-duality/images/json-update-confirm.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-document.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A048",
+    "original_target_asset": "reservation-duality/images/jsondv-result.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-contract.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A049",
+    "original_target_asset": "reservation-duality/images/jsondv-insert.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/sql-duality-contract.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A050",
+    "original_target_asset": "reservation-duality/images/jsondv-contract.png"
+  },
+  {
+    "target_asset": "reservation-duality/images/thomas.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A051"
+  },
+  {
+    "target_asset": "getting-started/images/sql-connection.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A052",
+    "original_target_asset": "getting-started/images/sql-worksheet-orientation.svg"
+  },
+  {
+    "target_asset": "getting-started/images/sql-connection.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A053",
+    "original_target_asset": "getting-started/images/sql-worksheet-connection-check.png"
+  },
+  {
+    "target_asset": "getting-started/images/reservation-login-info.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A054"
+  },
+  {
+    "target_asset": "getting-started/images/reservation-login-copy-password.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A055"
+  },
+  {
+    "target_asset": "getting-started/images/database-actions-development-sql.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A056"
+  },
+  {
+    "target_asset": "getting-started/images/sql-connection.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A057",
+    "original_target_asset": "getting-started/images/sql-worksheet-orientation-hospitality.svg"
+  },
+  {
+    "target_asset": "getting-started/images/database-actions-login-main-user.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A058"
+  },
+  {
+    "target_asset": "getting-started/images/reservation-login-open-link.svg",
+    "status": "retained_generic_svg",
+    "reason": "Generic source navigation illustration; retained as an illustration, not a new screenshot.",
+    "asset_id": "A059"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/demo-network-overview.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live local-demo capture approved by the user on 21 September 2026. The separate hospitality application story and dataset are intentional; the application is unchanged.",
+    "asset_id": "A060",
+    "original_target_asset": "booking-abuse-network/images/booking-abuse-network.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-graph-investigation-flow.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A061"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/bob.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot.",
+    "asset_id": "A062"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-evidence-labeled.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A063"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/sql-graph-direct.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A064",
+    "original_target_asset": "booking-abuse-network/images/green-button-direct-booking-connections.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-notebooks.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A065",
+    "original_target_asset": "booking-abuse-network/images/open-notbook.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-notebooks.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A066",
+    "original_target_asset": "booking-abuse-network/images/graph-notebook-import.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/live-10-graph-reservation-network.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Verified notebook result. Supplied visualization filters remain active; counts are disclosed in the lab.",
+    "asset_id": "A067",
+    "original_target_asset": "booking-abuse-network/images/graph-two-hop-visualization.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-launch.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A068",
+    "original_target_asset": "booking-abuse-network/images/database-actions-launchpad.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-launch.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Fresh LLUSER screen capture on 21 September 2026. AutoML completed against the hospitality training view; model scores describe the synthetic fixture.",
+    "asset_id": "A069",
+    "original_target_asset": "booking-abuse-network/images/graph-database-actions-launchpad.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/sql-graph-shared.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A070",
+    "original_target_asset": "booking-abuse-network/images/investigate.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-import-dialog.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A071",
+    "original_target_asset": "booking-abuse-network/images/graph-notebook-import-dialog.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/sql-graph-four-hop.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A072",
+    "original_target_asset": "booking-abuse-network/images/graph4result.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/demo-network-query.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live local-demo capture approved by the user on 21 September 2026. The separate hospitality application story and dataset are intentional; the application is unchanged.",
+    "asset_id": "A073",
+    "original_target_asset": "booking-abuse-network/images/booking-abuse-network-runbook.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-import-dialog.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A074",
+    "original_target_asset": "booking-abuse-network/images/import-graph.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/image-graph.png",
+    "status": "illustration_removed",
+    "reason": "Prior-domain illustration, badge, or reference-page capture; excluded. Equivalent learning context remains in prose; the badge uses the edited native SVG.",
+    "asset_id": "A075"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/booking-abuse-graph.svg",
+    "status": "native_svg_updated",
+    "reason": "Edited existing vector illustration for hospitality; diagram/badge, not a screenshot and not execution evidence.",
+    "asset_id": "A076"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-notebook-top.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A077",
+    "original_target_asset": "booking-abuse-network/images/graph-notebook-task5-top.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/sql-graph-four-hop.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A078",
+    "original_target_asset": "booking-abuse-network/images/green-button-high-risk-booking-entities.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/live-11-graph-shared-device.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Verified notebook result. Supplied visualization filters remain active; counts are disclosed in the lab.",
+    "asset_id": "A079",
+    "original_target_asset": "booking-abuse-network/images/graph-shared-device-visualization.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-import-file.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A080",
+    "original_target_asset": "booking-abuse-network/images/graph-import-file.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/live-11-graph-shared-device.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Shared-device notebook result verified against the hospitality fixture. Supplied visualization filters remain active.",
+    "asset_id": "A081",
+    "original_target_asset": "booking-abuse-network/images/green-button-shared-entity-connections.png"
+  },
+  {
+    "target_asset": "booking-abuse-network/images/graph-studio-overview.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A082",
+    "original_target_asset": "booking-abuse-network/images/graph-studio-overview.jpg"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/demo-dashboard.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Authentic capture from the running hospitality application or Graph Studio on 21 September 2026. Demo dataset differs from the lab fixture and is labelled accordingly.",
+    "asset_id": "A083",
+    "original_target_asset": "guest-operations-dashboard/images/guest-operations-dashboard.png"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/sql-dashboard-followup.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A084",
+    "original_target_asset": "guest-operations-dashboard/images/2026-08-18-004703.png"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/jessica.png",
+    "status": "retained_generic",
+    "reason": "Visually inspected: generic Oracle navigation/model metadata or domain-neutral persona illustration; copied unchanged, not regenerated.",
+    "asset_id": "A085"
+  },
+  {
+    "target_asset": "guest-operations-dashboard/images/sql-dashboard.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Actual LLUSER query result or OML screen captured on 21 September 2026. Viewport shows only visible rows/columns. Duality captures show the existing completed exercise; inserts were not repeated.",
+    "asset_id": "A086",
+    "original_target_asset": "guest-operations-dashboard/images/stay-offer-dashboard.png"
+  },
+  {
+    "asset_id": "N001",
+    "target_asset": "introduction/images/seer-hotels-erd.png",
+    "status": "generated_illustration",
+    "reason": "New static cartoon ERD, created with built-in image generation and visually checked against the five core foreign-key relationships. This is an illustration, not runtime evidence."
+  },
+  {
+    "asset_id": "N101",
+    "target_asset": "booking-abuse-network/images/live-04-booking-graph-sql.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N102",
+    "target_asset": "guest-concern-vector-search/images/live-03-vector-search.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N103",
+    "target_asset": "guest-operations-dashboard/images/live-01-dashboard.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N104",
+    "target_asset": "guest-routing-spatial/images/live-05-spatial-routing.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N105",
+    "target_asset": "reservation-duality/images/live-02-duality-confirmed.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N106",
+    "target_asset": "selectai/images/live-07-select-ai-answer.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N107",
+    "target_asset": "selectai-agent/images/live-08-agent-answer.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N108",
+    "target_asset": "stay-demand-oml/images/live-06-demand-model.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Real Database Actions viewport capture on 21 September 2026; SQL execution verified, visual content and recognized text reviewed."
+  },
+  {
+    "asset_id": "N201",
+    "target_asset": "booking-abuse-network/images/live-09-graph-notebook-table.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Graph Studio notebook executed in Chrome on 21 September 2026. Actual result visually inspected and OCR reviewed."
+  },
+  {
+    "asset_id": "N202",
+    "target_asset": "booking-abuse-network/images/live-10-graph-reservation-network.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Graph Studio notebook executed in Chrome on 21 September 2026. Actual result visually inspected and OCR reviewed."
+  },
+  {
+    "asset_id": "N203",
+    "target_asset": "booking-abuse-network/images/live-11-graph-shared-device.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Graph Studio notebook executed in Chrome on 21 September 2026. Actual result visually inspected and OCR reviewed."
+  },
+  {
+    "asset_id": "N301",
+    "target_asset": "guest-operations-dashboard/images/demo-dashboard-charts.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live demo dashboard chart capture; separate portfolio fixture."
+  },
+  {
+    "asset_id": "N_SCREEN_MODEL",
+    "target_asset": "stay-demand-oml/images/sql-oml-model.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live LLUSER screenshot placed beside the matching OML instruction."
+  },
+  {
+    "asset_id": "N_SCREEN_COMPARISON",
+    "target_asset": "stay-demand-oml/images/oml-model-comparison.jpg",
+    "status": "regenerated_live_capture",
+    "reason": "Live LLUSER screenshot placed beside the matching OML instruction."
+  },
+  {
+    "asset_id": "N_BANNER_AGENT",
+    "target_asset": "selectai-agent/images/nina.png",
+    "status": "generated_illustration",
+    "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot."
+  },
+  {
+    "asset_id": "N_INTRO_SCENE",
+    "target_asset": "introduction/images/seer-hotels-introduction.png",
+    "status": "generated_illustration",
+    "reason": "Redwood-style hospitality introduction scene with Jessica and Thomas. Visually reviewed; illustration, not a database screenshot."
+  }
+]

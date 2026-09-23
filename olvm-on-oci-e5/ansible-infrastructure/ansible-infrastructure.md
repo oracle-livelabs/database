@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this setup lab, you will use a temporary bootstrap instance as the Ansible controller for the workshop environment. You will create a VCN, launch the bootstrap host, install required software, configure OCI credentials, run the provisioning playbook with `VM.Standard.E5.Flex`, and verify access to the three instances used in later labs: `olvm`, `olkvm01`, and `olkvm02`.
+In this setup lab, you will use a temporary bootstrap instance as the Ansible controller for the workshop environment. You will create a VCN, launch the bootstrap host, install required software, configure OCI credentials, run the provisioning playbook with `VM.Standard.E5.Flex`, and verify access to the three instances used in later labs: `olvm`, `olkvm01`, and `olkvm02`. Lab 1 provisions the `olvm` host only. Lab 2 installs and configures Oracle Linux Virtualization Manager on that host.
 
 If your instructor or workshop owner already provided a working E5 environment, skip this lab and begin with Lab 2.
 
@@ -10,7 +10,7 @@ Estimated Time: 45-60 minutes, including 20-35 minutes for the Ansible provision
 
 ![Lab 1 bootstrap flow](./images/lab1-bootstrap-flow.png "Show Lab 1 bootstrap flow")
 
-*A temporary bootstrap instance runs the Ansible playbook that provisions the OLVM manager and two KVM hosts on OCI. The bootstrap instance is terminated after the cluster SSH keys are copied to your local machine.*
+*A temporary bootstrap instance runs the Ansible playbook that provisions the `olvm` host and two Oracle Linux KVM hosts on OCI. Lab 2 installs Oracle Linux Virtualization Manager on the `olvm` host. The bootstrap instance is terminated after the cluster SSH keys are copied to your local machine.*
 
 <!-- ### Video Walkthrough
 
@@ -62,7 +62,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
 
 5. If a VLAN limit increase option is available, submit the request. If VLANs are not listed, open an Oracle Support request with the following text:
 
-    > Please enable Layer 2 network virtualization / VLAN support for tenancy `<tenancy-OCID>` in region `<region>`. This is required to deploy Oracle Linux Virtualization Manager (OLVM) on OCI.
+    > Please enable Layer 2 network virtualization / VLAN support for tenancy `<tenancy-OCID>` in region `<region>`. This is required to deploy Oracle Linux Virtualization Manager on OCI.
 
 6. Wait for confirmation before continuing. Do not proceed to Task 2 until VLANs are visible in the target region.
 
@@ -87,7 +87,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
     **Networking guidance:**
     - Use the public subnet only for the temporary bootstrap instance.
     - Leave the route tables, security lists, and DHCP options created by the wizard at their defaults.
-    - Do not add any VNC ingress rule. Lab 2 uses SSH tunneling to the OLVM manager instead.
+    - Do not add any VNC ingress rule. In Lab 2, you use SSH to configure the `olvm` host, then access the Administration Portal over HTTPS after the installation completes.
 
 5. Click **Next -> Review -> Create**.
 
@@ -292,7 +292,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
     ```
 
     > **Notes:**
-    - `use_vnc_on_engine: false` disables VNC on the OLVM manager. This lab uses SSH tunneling to access the OLVM portal instead.
+    - `use_vnc_on_engine: false` disables VNC on the `olvm` host. This workshop uses SSH for host administration and HTTPS for the Administration Portal after Lab 2 completes.
     - **Block volume sizing:** `blk_volume_size_in_gbs` makes the provisioned block volume size configurable during deployment. This workshop uses `512` GB as a defined, lower-cost value instead of the larger default allocation of `1 TB`, while still providing enough capacity for the lab environment. If your environment requires more storage, you can increase this value before running the playbook.
 
 5. Create the `hosts` inventory so Ansible uses the virtual environment Python:
@@ -340,7 +340,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
 
     The generated `deploy_instance.yml` ends after printing the instance details. It cannot enter the upstream automatic resource-removal play. Resource removal remains available separately through `terminate_instance.yml` when the workshop is finished.
 
-7. Run the Ansible playbook to create the OCI infrastructure and OLVM instances.
+7. Run the Ansible playbook to create the OCI infrastructure and workshop instances.
 
     The playbook uses the `instances.yml` file created in the previous step and overrides the compute shape to `VM.Standard.E5.Flex`.
 
@@ -400,7 +400,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
     <copy>scp -i ~/.ssh/<bootstrap-login-key> opc@<bootstrap-public-ip>:~/.ssh/id_rsa.pub ~/.ssh/olvm-cluster-id_rsa.pub</copy>
     ```
 
-3. Verify that you can SSH to the OLVM manager from your local machine:
+3. Verify that you can SSH to the `olvm` host from your local machine:
 
     In Windows PowerShell, run:
 
@@ -414,7 +414,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
     <copy>ssh -i ~/.ssh/olvm-cluster-id_rsa oracle@<olvm-public-ip> "hostname -f"</copy>
     ```
 
-4. Add an ingress rule to allow HTTPS access to the OLVM Administration Portal from your local browser. Navigate using this path:
+4. Add an ingress rule to allow HTTPS access to the Oracle Linux Virtualization Manager Administration Portal from your local browser. Navigate using this path:
 
     **MENU -> Networking -> Virtual cloud networks -> OLV-VCN -> Subnets -> Public Subnet -> Security -> Default Security List -> Security Rules -> Add Ingress Rules**
 
@@ -427,7 +427,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
     | Source CIDR | `0.0.0.0/0` |
     | IP Protocol | TCP |
     | Destination Port Range | `443` |
-    | Description | `Allow HTTPS access to OLVM Administration Portal` |
+    | Description | `Allow HTTPS access to Oracle Linux Virtualization Manager Administration Portal` |
 
     For a more restrictive rule, use your workstation public IP address with `/32` instead of `0.0.0.0/0`.
 
@@ -467,7 +467,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
 
     ![Verified connections](./images/verified-connections.png "Show Verified connections")
 
-8. After you confirm SSH access to `olvm` and both KVM hosts, return to the bootstrap instance and enforce Instance Metadata Service Version 2 (IMDSv2) only on all three deployed instances.
+8. After you confirm SSH access to `olvm` and both Oracle Linux KVM hosts, return to the bootstrap instance and enforce Instance Metadata Service Version 2 (IMDSv2) only on all three deployed instances.
 
     > **Why:** OCI instances accept both the legacy `/v1` and the `/v2` Instance Metadata Service endpoints by default. IMDSv1 has no built-in request authentication, which makes it more vulnerable to SSRF-style attacks. Oracle Linux 8 platform images support IMDSv2. Because you have now verified access to all three hosts, you can safely disable the legacy `/v1` endpoint. This command uses the OCI CLI already configured on the bootstrap instance and does not reboot the instances.
 
@@ -540,7 +540,7 @@ The Ansible provisioning playbook creates an OCI VLAN for the Layer 2 network us
 
 7. Wait until the instance state changes to **Terminated**.
 
-## Set Up OLVM Infrastructure Checkpoint
+## Set Up Oracle Linux Virtualization Manager Infrastructure Checkpoint
 
 At this point, you should have:
 
@@ -550,8 +550,8 @@ At this point, you should have:
 - Public and private IPs recorded for all three instances
 - IMDSv2 enforced (legacy `/v1` metadata endpoints disabled) on all three instances
 - The cluster SSH private key copied to your local machine
-- Verified local SSH access to the OLVM manager
-- Verified SSH from `olvm` to both KVM hosts
+- Verified local SSH access to the `olvm` host
+- Verified SSH from `olvm` to both Oracle Linux KVM hosts
 - Bootstrap instance terminated, unless you intentionally kept it for troubleshooting
 
 Continue to Lab 2 after all checkpoint items above are complete.

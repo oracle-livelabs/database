@@ -2,237 +2,383 @@
 
 ## Introduction
 
-In Lab 4 you traded your document ergonomics for one copy of the truth. This lab ends the trade-off: a **JSON Relational Duality View** gives you back Lab 2's document read — same nesting, assembled live from the canonical rows — and adds things the embedded model never had: per-field write governance the engine enforces against *every* API, and one consistency model you can witness across surfaces in the same commit.
+In Lab 4 you traded your document ergonomics for one relational copy of the truth. This lab ends the trade-off: a **JSON Relational Duality View** gives you back Lab 2's document read — same nesting, assembled live from the canonical rows — and adds things the embedded model never had: per-field write governance the engine enforces against *every* API, appropriate JSON document projections for different application modules, proper handling of the Corporate menu and local overrides, and one consistency model you can witness across surfaces in the same commit.
 
-Estimated Lab Time: 11 minutes
+The canonical schema stores one chain catalog and each location's menu offering separately. You will create several Duality Views - JSON document projections - giving the store manager application three deliberate data API interfaces over that same data:
+
+* a writable store/menu/category/menu-item document
+* an exact-shape read document with effective values
+* a narrow view for changing local menu-item overrides
+
+The catalog `item` table is never writable through these views. Managing core items is reserved for Corporate, but would follow a similar schema. Oracle enforces that rule, together with the relational foreign keys and check constraints,for SQL, MongoDB, and REST alike.
+
+Estimated Lab Time: 10 minutes
 
 ### Objectives
 
-* Create two duality views: the store menu document and a governance-annotated location view
-* Recover the Lab 2 document read through the MongoDB API
-* Witness the cross-surface commit: one SQL row update, every document projection current
-* Prove one enforcement domain: the same `ORA-02290` through mongosh that SQL got in Lab 4
-* Read the same document through REST — the third door
+* A quick recap of the concept of Duality Views
+* Assemble the original `store → menus → categories → items` document shape with the local store overrides
+* Keep the store, menu, category, and menu-item levels writable
+* Keep the chain catalog read-only
+* Manage local name, price, and active overrides explicitly
+* See view governance and relational constraints reject invalid MongoDB writes
 
-## Task 1: Create the Views (SQL — one paste)
+### Prerequisites
 
-1. In the **SQL worksheet**, paste this and run it as a script (also in `scripts/04_duality_views.sql`). It creates both views with explicit updatability annotations — duality views are **read-only by default**; you grant writes per table, which *is* the governance posture — and REST-enables the first view.
+* Completed **Lab 4** — the original eight-table canonical schema exists and
+  has been populated from the `stores` JSON collection
 
-    ```
-    <copy>
-    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "store_menu_dv" AS
-    store @insert @update @delete
-    {
-      _id   : store_id,
-      name  : merchant_name,
-      menus : menu @insert @update
-      [ {
-          _id        : menu_id,
-          name       : menu_name,
-          categories : category @insert @update
-          [ {
-              _id   : category_id,
-              name  : category_name,
-              items : item @insert @update
-              [ {
-                  _id   : item_id,
-                  name  : item_name,
-                  price : price,
-                  desc  : description
-              } ]
-          } ]
-      } ]
-    };
+## Task 0: A Short Recap of Duality Views
 
-    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "location_item_dv" AS
-    item @noinsert @noupdate @nodelete
-    {
-      _id   : item_id,
-      name  : item_name,
-      price : price,
-      desc  : description,
-      override : item_override @insert @update @delete
-      {
-        _id    : item_id,
-        store  : store_id,
-        name   : override_name,
-        active : override_active,
-        sort   : override_sort_id
-      },
-      schedule : item_special_hours @insert @update @delete
-      [ {
-        _id   : item_special_hours_id,
-        day   : day_index,
-        start : start_time,
-        end   : end_time
-      } ]
-    };
+A JSON Relational Duality View is a live document projection over relational tables. It does not copy the data: reads assemble the document from rows, and write annotations determine which tables or fields an application may change. Different views can expose the same rows in different shapes for different jobs. You can control the visibility of attributes as well, just as generate attributes at runtime for read and write operations.
 
-    BEGIN
-      ORDS.ENABLE_SCHEMA;
-      ORDS.ENABLE_OBJECT(p_object => 'store_menu_dv', p_object_type => 'VIEW');
-    END;
-    /
+This small read-only view is the simplest example — one store document with its store information and menus:
 
-    SELECT (SELECT COUNT(*) FROM "store_menu_dv")    AS store_docs,
-           (SELECT COUNT(*) FROM "location_item_dv") AS item_docs
-    FROM   dual;
-    </copy>
-    ```
-
-    **What you should see:** both views created, PL/SQL procedure completed, and the state check returning `STORE_DOCS 5, ITEM_DOCS 6`.
-
-    > **Shape note (validated live):** the 1:1 `override` child projects as a **one-element array** in the duality document on current Autonomous Database — write it via the `override.0.…` path. Whether a 1:1 child projects as a singleton object or a one-element array is version-dependent; the build-phase rehearsal pins it for the target image.
-
-![Two faces, same bytes — reads assemble live, writes decompose, governance lives in the view](images/duality-two-faces.svg "A duality view is a projection, not a copy")
-
-## Task 2: The Document Comes Back (mongosh)
-
-1. In **mongosh**:
-
-    ```
-    <copy>
-    db.store_menu_dv.findOne({ _id: "s_100" })
-    </copy>
-    ```
-
-    **What you should see:** **a document, not `null`** — Burger Palace, same nesting you built by hand in Lab 2 (items keyed `_id` per duality convention, plus a `_metadata` block with an `etag`). If you get `null`, the views did not get created — go back to Task 1 and check the script ran clean.
-
-    The difference from Lab 2: this document is **assembled live from the canonical rows**. It is not a copy of anything. *Documents that ARE the relational data.*
-
-## Task 3: The Cross-Surface Commit Witness
-
-1. In the **SQL worksheet** — corporate raises the price again:
-
-    ```
-    <copy>
-    UPDATE item SET price = 1499 WHERE item_id = 1000;
-    COMMIT;
-    </copy>
-    ```
-
-2. Back in **mongosh** — every store's document, one paste:
-
-    ```
-    <copy>
-    db.store_menu_dv.find(
-      {},
-      { name: 1, "menus.categories.items.name": 1, "menus.categories.items.price": 1 }
-    )
-    </copy>
-    ```
-
-    **What you should see:** the projection already shows **1499** — current on the same commit, no refresh, no pipeline. And notice something your embedding instincts didn't expect: item 1000 now appears on exactly **one** menu. In Lab 2 you had five copies to chase (and missed one); the canonical model homes each item **once**, so there is exactly one price that can ever be wrong. Say it with us: *same bytes, same transaction, two faces.* Compare Lab 3's `updateMany` — and its silent miss.
-
-    > Meanwhile `db.stores` — the Lab 2 collection — still holds the old embedded world, drift and all. It stays, on purpose, as a **museum piece**: that contrast *is* the lab.
-
-## Task 4: Governance the Engine Enforces (mongosh — one script)
-
-1. Paste these probes into **mongosh** as one block (also in `scripts/04_governance_tests.mongo.js`):
-
-    ```
-    <copy>
-    // 1. Location manager tries to change the corporate price via the location view
-    try {
-      db.location_item_dv.updateOne({ _id: 1000 }, { $set: { price: 99 } });
-    } catch (e) { print("corp field write: " + e.message); }
-
-    // 2. Location manager edits the field they own - succeeds.
-    //    Note the array path: the 1:1 override child projects as a
-    //    ONE-ELEMENT ARRAY in the duality document.
-    db.location_item_dv.updateOne(
-      { _id: 1000 },
-      { $set: { "override.0.name": "Lunch Classic Special" } }
-    );
-
-    // 3. Negative price through the updatable menu view - meets the CHECK constraint
-    try {
-      db.store_menu_dv.updateOne(
-        { _id: "s_100" },
-        { $set: { "menus.0.categories.0.items.0.price": -1 } }
-      );
-    } catch (e) { print("negative price: " + e.message); }
-    </copy>
-    ```
-
-    **What you should see** (captured live on Autonomous Database):
-    - Probe 1 **rejected by the engine**: `ORA-40939: Cannot update table 'ITEM' in JSON Relational Duality View 'location_item_dv': Missing UPDATE annotation or NOUPDATE annotation specified.` — governance enforced below every API.
-    - Probe 2 succeeds (`modifiedCount: 1`) — the location owns its override.
-    - Probe 3 rejected with a two-line error ending in the star of the show:
-      ```
-      ORA-42692: Cannot update JSON Relational Duality View 'RESTO'.'store_menu_dv': Error while updating table 'ITEM'
-      ORA-02290: check constraint violated
-      ```
-      The *same* `ORA-02290` your SQL insert hit in Lab 4. One rulebook, every door. *There is no per-surface validation layer to drift out of agreement, because there is nothing to keep in agreement.*
-
-2. In the **SQL worksheet**, watch the document write land as a relational row:
-
-    ```
-    <copy>
-    SELECT item_id, store_id, override_name FROM item_override;
-    </copy>
-    ```
-
-    **What you should see:** one row — `1000, s_100, Lunch Classic Special` (`modifiedCount: 1` above — the value changed from the shred's original). The mongosh `$set` decomposed to an `UPDATE` on a table, in one ACID transaction. Governance lives in the view, not in app code.
-
-    > Identity check, worth ten seconds: everything you have done this session — mongosh writes, SQL DDL, and (next task) REST reads — executes as the **same database user under one privilege model and one audit trail**. On a polyglot stack that is three user stores and three audit systems.
-
-## Task 5: The Third Door — REST
-
-1. In a **terminal** (not mongosh — open a second terminal window, or `exit` first), read the same document through ORDS with `curl`. Substitute your Database Actions hostname and schema credentials:
-
-    ```
-    <copy>
-    curl -s -u 'USERNAME:PASSWORD' \
-      "https://HOST.adb.REGION.oraclecloudapps.com/ords/USERNAME/store_menu_dv/s_100"
-    </copy>
-    ```
-
-    **What you should see:** the same Burger Palace document, third door — with `"_metadata": { "etag": ... }`. That etag powers lock-free optimistic concurrency, which is Lab 6 (optional) — the write choreography with `If-Match` and the teaching `412`.
-
-### Stretch (fast finishers): the read-only computed view
-
-The deck's *read-only* POS menu view: `COALESCE` override resolution and a time-window filter pinned to 13:00, so everyone sees the Lunch menu regardless of conference timezone. Paste it into the **SQL worksheet** (also in `scripts/04_pos_menu_v.sql`):
-
-```
+```sql
 <copy>
-CREATE OR REPLACE VIEW pos_menu_v AS
-SELECT JSON {
-         '_id'  : s.store_id,
-         'name' : s.merchant_name,
-         'menu' : ( SELECT JSON {
-                      '_id'   : m.menu_id,
-                      'name'  : m.menu_name,
-                      'items' : [ SELECT JSON {
-                                    '_id'    : i.item_id,
-                                    'name'   : COALESCE(ov.override_name, i.item_name),
-                                    'active' : COALESCE(ov.override_active, i.active),
-                                    'price'  : i.price }
-                                  FROM item i
-                                  LEFT JOIN item_override ov
-                                         ON ov.item_id = i.item_id
-                                        AND ov.store_id = s.store_id
-                                  JOIN category c ON c.category_id = i.category_id
-                                  WHERE c.menu_id = m.menu_id ]
-                    }
-                    FROM menu m
-                    WHERE m.store_id = s.store_id
-                    AND   m.active
-                    AND   '13:00' BETWEEN m.start_time AND m.end_time )
-       } AS json_doc
-FROM   store s;
+CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "store_menus_dv" AS
+store {
+  _id      : store_id,
+  name     : merchant_name,
+  timezone,
+  menus : menu @insert @update [{
+    _id        : menu_id,
+    name       : menu_name,
+    start_time,
+    end_time,
+    active
+  }]
+};
+</copy>
+```
+This view combines the store and menu information in its object-document model definition. It allows the insertion and update of menus but no modification to the store information. 
 
-SELECT json_serialize(p.json_doc PRETTY) FROM pos_menu_v p
-WHERE  json_value(p.json_doc, '$._id') = 's_100';
+Let us quickly insert a new menu:
+
+```javascript
+<copy>
+db.store_menus_dv.updateOne(
+  {_id: "s_103"},
+  {$push: {
+    menus: {
+      _id: 15,
+      name: "Happy Hour Menu",
+      start_time: "15:00",
+      end_time: "19:00",
+      active: true
+    }
+  }}
+);
 </copy>
 ```
 
-**What you should see:** Burger Palace's lunch menu with the item named **Lunch Classic Special** — the override resolved by `COALESCE`, computed at read time. This teaches the distinction this room always asks about: **updatable duality views map 1:1; read-only views compute, filter, and COALESCE freely** — that's the trade for updatability.
+![Addition of menu via mongosh](images/add-new-menu.png "Add a new Happy Hour Menu")
+
+This operation added a new store menu in the underlying relational menu table for store "s_103":
+
+```sql
+<copy>
+select * from menu where store_id = 's_103';
+</copy>
+```
+![New menu entry in menu table](images/new-menu-in-table.png "New menu entry in menu table")
+
+
+Look at the menus for store `s_103`, and you will see the new menu option for this store as part of the business object:
+
+```javascript
+<copy>
+db.store_menus_dv.findOne({_id: "s_103"});
+</copy>
+```
+![New menu was added](images/new-menu-added.png "The Happy Hour Menu")
+
+In the following sections, we will create different duality views on top of the canonical relational schema. The views have different attribute exposure and data governance enforcement, ensuring a proper business object representation and manipulation for the store manager application.
+
+## Task 1: Create a JSON document representation matching the original json collection
+
+The first view gives us the same store menu view as the JSON collection, including the identical JSON documents as initially stored, where local overrides of price and item name silently change the content without proper identification. Since this view does not distinguish whether the item information is coming from Corporate or from a local store, this JSON collection representation is read only.
+
+```sql
+<copy>
+CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "store_menu_read_dv" AS
+store {
+  _id   : store_id,
+  name  : merchant_name,
+  menus : menu [{
+    menu_id,
+    name : menu_name,
+    start_time,
+    end_time,
+    active,
+    categories : category [{
+      category_id,
+      name : category_name,
+      items : menu_item [{
+        menu_id     : menu_id @hidden,
+        category_id : category_id @hidden,
+        item @unnest {
+          item_id,
+          description,
+          name @generated(sql: "coalesce(display_name, item_name)"),
+          price @generated(sql: "coalesce(price, base_price)"),
+          active @generated(sql: "coalesce(active, active)")
+        }
+      }]
+    }]
+  }]
+};
+</copy>
+```
+
+Compare the output of both this duality View and the initial JSON collection "stores" side-by-side. Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+db.stores.findOne({_id: "s_100"})
+db.store_menu_read_dv.findOne({_id: "s_100"})
+</copy>
+```
+
+![json documents side-by-side](images/orig-json-side-by-side.png "JSON documents side-by-side")
+
+## Task 2: Create a Duality View exposing the business model of chain items with local override
+
+The second duality view exposes more of the inner working of our chain stores: it exposes both the Corporate item prices and labeling, as well as the local overrides explicitly. The read view hides those implementation columns and computes the effective `name`, `price`, and `active` values.
+
+Run the following in your **SQL Worksheet**:
+
+```sql
+<copy>
+CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "store_menu_write_dv" AS
+store @insert @update @delete {
+  _id   : store_id,
+  name  : merchant_name,
+  menus : menu @insert @update @delete [{
+    _id        : menu_id,
+    name       : menu_name,
+    start_time,
+    end_time,
+    active,
+    categories : category @insert @update @delete [{
+      _id  : category_id,
+      name : category_name,
+      items : menu_item @insert @update @delete [{
+        menu_id      : menu_id,
+        _id          : item_id,
+        display      : display_name,
+        local_price  : price,
+        local_active : active,
+        item @unnest @noinsert @noupdate @nodelete {
+          item_id,
+          name        : item_name,
+          description,
+          base_price,
+          active
+        }
+      }]
+    }]
+  }]
+};
+</copy>
+```
+This Duality View lets you:
+- create a menu
+- add/remove categories
+- add/remove catalog items from a menu
+- set local display/price/active values
+
+Let's look at the initial read-only Duality View and its writeable counterpart side by side. Remember, these are two collections when accessed with a document store API such as mongosh, but the data is only stored **once**. One source of truth.
+
+Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+db.store_menu_write_dv.findOne({name: "Burger Palace Campus"})
+db.store_menu_read_dv.findOne({name: "Burger Palace Campus"})
+</copy>
+```
+
+![json documents in comparison](images/json-comp-side-by-side1.png "JSON documents side-by-side")
+
+Remember this item.
+
+## Task 3: Manage a Local Override using a purpose-build data API with Duality Views
+
+This view lets you manage the menu items of a given store as a branch manager. The functionality this view provides is solely to manage the local menus of a store. For any item, you can change
+- display
+- local_price
+- local_active
+
+Issue the following statement in your **SQL Worksheet**:
+```sql
+<copy>
+CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW "menu_override_dv" AS
+menu @noinsert @noupdate @nodelete {
+  _id : menu_id,
+
+  store @noinsert @noupdate @nodelete {
+    _id  : store_id,
+    name : merchant_name
+  },
+
+  name       : menu_name,
+  start_time,
+  end_time,
+  active,
+
+  items : menu_item @update [{
+    menu_id,
+    _id             : item_id,
+    category_id,
+    override_name   : display_name,
+    override_price  : price,
+    override_active : active,
+
+    item @unnest @noinsert @noupdate @nodelete {
+      item_id,
+      name        : item_name,
+      description,
+      base_price,
+      active
+    }
+  }]
+};
+</copy>
+```
+
+Let's have a look at one store and see whether it has any local override, meaning menu items that digress from the Corporate catalog.
+
+Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+db.menu_override_dv.findOne({"store.name": 'Burger Palace Campus'})
+</copy>
+```
+
+As you will see, there are no items that have an override. This matches the output of the previous duality view (see screenshot above), where the menu reflects the Corporate items.
+
+![No overrides](images/no-overrides.png "No local overrides")
+
+Our store **Burger Palace Campus** decided to digress from the Corporate menu, going in big on fancy burgers. The store manager decides to override the menu temporarily. This can be done very easily and safely with the menu override view.
+
+Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+db.menu_override_dv.updateOne(
+  {
+    "store.name": "Burger Palace Campus",
+    "items.name": "Classic Cheeseburger"
+  },
+  {
+    $set: {
+      "items.$[i].override_name": "Super Duper Special Burger",
+      "items.$[i].override_price": 19.99
+    }
+  },
+  {
+    arrayFilters: [
+      {"i.name": "Classic Cheeseburger"}
+    ]
+  }
+);
+</copy>
+```
+
+This change is instantly reflected in the published read only menu, and the inner workings can be seen in the writeable view. Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+db.store_menu_write_dv.findOne({name: "Burger Palace Campus"})
+db.store_menu_read_dv.findOne({name: "Burger Palace Campus"})
+</copy>
+```
+
+![see the local override in action](images/json-comp-side-by-side2.png "See a local override in action")
+
+
+## Task 4: Watch the Rules Reject Invalid Writes (mongosh)
+
+Using Duality Views as data API interface allows you to have fine-grained control over individual attributes within a single JSON document. Unlike document stores, you do not have to code such rules in the application layer but can rely on the security enforced in the database. The following section illustrates this with simple examples.
+
+Let's try to change a Corporate item as part of the menu maintenance in a store. It will fail. Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+try {
+  db.store_menu_write_dv.updateOne(
+    {_id: "s_100"},
+    {$set: {"menus.0.categories.0.items.0.name": "Hijacked Burger"}}
+  );
+} catch (e) { print("catalog write rejected: " + e.message); }
+</copy>
+```
+
+![invalid corporate item update](images/invalid-item-dml.png "invalid corporate item update")
+
+Now let's try to manage the menus. Remember that we added a new **Happy Hour** menu (id 15) just recently? Well, it turns out we are not ready for it, and we want to remove it.
+
+The store manager, having limited override privileges, tries it with their interface `menu_override_dv`, and it fails. It requires the power of a regional manager with access to `store_menu_write_dv` to accomplish this. Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+try {
+  db.menu_override_dv.deleteOne({_id: 15});
+} catch (e) {
+  print("override delete rejected: " + e.message);
+}
+
+db.store_menu_write_dv.updateOne(
+  {_id: "s_103"},
+  {$pull: {menus: {_id: 15}}}
+);
+
+db.store_menus_dv.findOne(
+  {_id: "s_103", "menus._id": 15}
+);
+</copy>
+```
+
+![menu removal](images/menu-removal.png "Menu removal")
+
+## Task 5: Witness One Catalog Update Everywhere (SQL + mongosh)
+
+Corporate decided to raise the price for **Classical Cheeseburgers** again to $14.77. With the canonical model and the relational storage, this is ONE row update, that will be atomically reflected to any store and menu that adheres to the Corporate menu items and pricing.
+
+Issue the following statement in your **SQL Worksheet**:
+
+```sql
+<copy>
+UPDATE item SET base_price = 14.77 WHERE item_id = 1000;
+COMMIT;
+</copy>
+```
+
+Run the following statements in **mongosh**:
+
+```javascript
+<copy>
+db.store_menu_write_dv.find(
+  {},
+  {name: 1, "menus.categories.items.name": 1,
+   "menus.categories.items.base_price": 1,
+   "menus.categories.items.local_price": 1}
+);
+</copy>
+```
+
+![New base price](images/new-base-price.png "New base price")
+
+Stores without a local override show the new catalog price immediately. A store with a local override keeps its deliberate local value. Both views are projections of the same relational rows; no document copy or synchronization job is involved.
 
 ## Learn More
 
 * [JSON Relational Duality Views — annotations and updatability](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/)
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 * **Author** - Rick Houlihan, Field CTO, Oracle Data & AI Platform
-* **Last Updated By/Date** - Rick Houlihan, July 2026
+* **Last Updated By/Date** - Hermann Baer, August 2026

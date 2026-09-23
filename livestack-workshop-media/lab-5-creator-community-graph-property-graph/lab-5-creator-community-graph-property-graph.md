@@ -13,7 +13,7 @@ This lab uses **Property Graph** and SQL/PGQ to inspect creator relationships wi
 >
 > - A **vertex** is an entity in the graph, such as a creator or studio.
 >
-> - An **edge** is a relationship between vertices, such as CONNECTS_TO, PROMOTES, or MENTIONS_PRODUCT.
+> - An **edge** is a relationship between vertices, such as `CONNECTS_TO`, `PROMOTES`, or `MENTIONS_PRODUCT`.
 >
 > - A **hop** is one relationship step from one vertex to another. Two hops means the query follows two relationship steps.
 >
@@ -53,7 +53,7 @@ Start by confirming the graph object exists.
 
 1. Run this graph inventory query:
 
-    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](/workshops/sandbox/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-media/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
     You are checking that the workshop has the graph definition used by the application. The graph object INFLUENCER_NETWORK maps relational tables into graph vertices and edges.
 
@@ -122,7 +122,7 @@ Finally, connect relationships to media business context.
 
 1. Run this creator relationship query:
 
-    MEDIA_CREATOR_RELATIONSHIPS_V is a semantic view over creators, studio or label links, and relationship counts. It gives analysts a business-ready view of graph-adjacent evidence without requiring every user to write SQL/PGQ.
+    `MEDIA_CREATOR_RELATIONSHIPS_V` is a semantic view: a saved query that combines creator details, studio or label links, relationship types, and graph-derived relationship counts into a business-ready result. It lets analysts examine relationship evidence without writing SQL/PGQ against the underlying graph tables. The `WHERE creator_edge_count > 0` clause excludes creators with no recorded graph connections, keeping the result focused on creators whose relationship evidence can inform campaign or partnership planning.
 
     ```sql
     <copy>
@@ -156,4 +156,3 @@ Finally, connect relationships to media business context.
 * **Author** - Oracle LiveLabs Team
 * **Contributor** - Oracle Database Product Management
 * **Last Updated By/Date** - Oracle Database Product Management, July 2026
-

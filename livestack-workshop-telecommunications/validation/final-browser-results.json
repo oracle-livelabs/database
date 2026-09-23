@@ -1,0 +1,349 @@
+{
+  "date": "2026-09-23",
+  "scope": "Nine revised lesson pages: expanded tasks and scrolled through lazy-loaded images. Earlier quiz/introduction checks remain in browser-results.json.",
+  "pages": [
+    {
+      "heading": "Build a Telecom Agent with Select AI Agent",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../selectai-agent/images/nina.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai-agent/images/sql-agent-answer.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai-agent/images/app-agent-console.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai-agent/images/sql-agent-history.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai-agent/images/sql-agent-tools.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=selectai-agent&review=final-20260923"
+    },
+    {
+      "heading": "Investigate an Activation Fraud Network",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/bob.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/sql-graph-direct.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/app-impact-graph.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/sql-graph-four-hop.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/sql-graph-shared.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/graph-launch.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/graph-studio-overview.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/graph-notebooks.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/graph-import-dialog.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/graph-import-file.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/graph-notebook-top.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/live-09-graph-notebook-table.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/live-10-graph-order-network.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/live-11-graph-shared-device.png"
+        },
+        {
+          "loaded": true,
+          "src": "http://127.0.0.1:8767/activation-fraud-network/images/bob.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=activation-fraud-network&review=final-20260923#Task2:Readthesameconnectionsasagraph"
+    },
+    {
+      "heading": "Build a Service Plan Demand Watchlist with Oracle Machine Learning",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/otto.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/sql-oml-training.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-launch.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-home.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-settings.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-leaderboard.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-model-comparison.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-confusion-matrix.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/oml-prediction-impact.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/sql-oml-model.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/sql-oml-scoring.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/app-predictive-assurance.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=plan-demand-oml&review=final-20260923"
+    },
+    {
+      "heading": "Build a JSON Application Model",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/thomas.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/sql-duality-document.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/app-service-orders.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/sql-duality-contract.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/sql-duality-confirmed.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/sql-duality-projection.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/sql-duality-relational.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=service-order-duality&review=final-20260923"
+    },
+    {
+      "heading": "Search Service Plans by Meaning",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/gilly.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/sql-embedding-model.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/sql-vector-values.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/sql-vector-distance.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/sql-vector-similarity.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/app-vector-search.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/sql-vector-subscribers.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=subscriber-concern-vector-search&review=final-20260923"
+    },
+    {
+      "heading": "Find Nearby Network Sites",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/moon.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/sql-spatial-points.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/sql-spatial-new-york.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/sql-spatial-chicago.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/app-spatial-map.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/sql-spatial-routing.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=network-site-spatial&review=final-20260923"
+    },
+    {
+      "heading": "Ask Telecom Questions with Select AI",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../selectai/images/nina.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-object-list.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-generated.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/app-ask-data.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-answer.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-refined-generated.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-refined-answer.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-narration.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=selectai&review=final-20260923"
+    },
+    {
+      "heading": "Build a Converged Dashboard Query",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../subscriber-operations-dashboard/images/jessica.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-operations-dashboard/images/sql-dashboard.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-operations-dashboard/images/app-dashboard.png"
+        },
+        {
+          "loaded": true,
+          "src": "../../subscriber-operations-dashboard/images/sql-dashboard-followup.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=subscriber-operations-dashboard&review=final-20260923"
+    },
+    {
+      "heading": "Getting Started",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../getting-started/images/reservation-login-info.svg"
+        },
+        {
+          "loaded": true,
+          "src": "../../getting-started/images/reservation-login-copy-password.svg"
+        },
+        {
+          "loaded": true,
+          "src": "../../getting-started/images/reservation-login-open-link.svg"
+        },
+        {
+          "loaded": true,
+          "src": "../../getting-started/images/database-actions-login-main-user.svg"
+        },
+        {
+          "loaded": true,
+          "src": "../../getting-started/images/database-actions-development-sql.svg"
+        },
+        {
+          "loaded": true,
+          "src": "../../getting-started/images/sql-connection.png"
+        }
+      ],
+      "pending": false,
+      "url": "http://127.0.0.1:8767/workshops/tenancy/index.html?lab=getting-started&review=final-20260923"
+    }
+  ]
+}
