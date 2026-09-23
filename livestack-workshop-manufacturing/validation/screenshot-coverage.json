@@ -1,0 +1,500 @@
+{
+  "status": "complete",
+  "authentic_manufacturing_captures": 49,
+  "retained_generic_captures": 5,
+  "pending": [],
+  "completed": [
+    {
+      "id": "CAP-001",
+      "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+      "task": "## Task 1: Run a converged production investigation",
+      "required_capture": "Converged production-quality query result",
+      "replacement_path": "production-operations-dashboard/images/sql-dashboard.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-002",
+      "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+      "task": "## Task 2: Change the investigation question",
+      "required_capture": "Result after changing the investigation phrase",
+      "replacement_path": "production-operations-dashboard/images/sql-dashboard-followup.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-003",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 1: Read the training data",
+      "required_capture": "Manufacturing inspection training rows",
+      "replacement_path": "quality-review-oml/images/sql-oml-training.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-009",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 3: Create the selected model in SQL Developer Web",
+      "required_capture": "Created quality model in SQL Worksheet",
+      "replacement_path": "quality-review-oml/images/sql-oml-model.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-010",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 4: Score new component inspection measurements in SQL",
+      "required_capture": " oml scoring",
+      "replacement_path": "quality-review-oml/images/sql-oml-scoring.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-011",
+      "lesson": "production-order-duality/production-order-duality.md",
+      "task": "## Task 3: Read a customer site document from relational data",
+      "required_capture": " duality document",
+      "replacement_path": "production-order-duality/images/sql-duality-document.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-012",
+      "lesson": "production-order-duality/production-order-duality.md",
+      "task": "## Task 4: Enable document inserts and updates",
+      "required_capture": " duality contract",
+      "replacement_path": "production-order-duality/images/sql-duality-contract.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-013",
+      "lesson": "production-order-duality/production-order-duality.md",
+      "task": "## Task 5: Create and update a JSON production order",
+      "required_capture": " duality released",
+      "replacement_path": "production-order-duality/images/sql-duality-released.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-014",
+      "lesson": "production-order-duality/production-order-duality.md",
+      "task": "## Task 6: Project JSON fields with SQL",
+      "required_capture": " duality projection",
+      "replacement_path": "production-order-duality/images/sql-duality-projection.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-015",
+      "lesson": "production-order-duality/production-order-duality.md",
+      "task": "## Task 6: Project JSON fields with SQL",
+      "required_capture": " duality relational",
+      "replacement_path": "production-order-duality/images/sql-duality-relational.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-016",
+      "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+      "task": "## Task 1: Look at the locations as points",
+      "required_capture": " spatial points",
+      "replacement_path": "plant-routing-spatial/images/sql-spatial-points.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-017",
+      "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+      "task": "## Task 2: Find the closest plants to a demand region",
+      "required_capture": " spatial new york",
+      "replacement_path": "plant-routing-spatial/images/sql-spatial-new-york.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-018",
+      "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+      "task": "## Task 2: Find the closest plants to a demand region",
+      "required_capture": " spatial chicago",
+      "replacement_path": "plant-routing-spatial/images/sql-spatial-chicago.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-019",
+      "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+      "task": "## Task 3: Route customer sites to the closest plant",
+      "required_capture": " spatial routing",
+      "replacement_path": "plant-routing-spatial/images/sql-spatial-routing.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-023",
+      "lesson": "selectai/selectai.md",
+      "task": "## Task 2: Add the manufacturing tables to the profile",
+      "required_capture": " ai object list",
+      "replacement_path": "selectai/images/sql-ai-object-list.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-024",
+      "lesson": "selectai/selectai.md",
+      "task": "## Task 3: Ask a question and inspect the SQL",
+      "required_capture": " ai generated",
+      "replacement_path": "selectai/images/sql-ai-generated.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-025",
+      "lesson": "selectai/selectai.md",
+      "task": "## Task 4: Run the question in the database",
+      "required_capture": " ai answer",
+      "replacement_path": "selectai/images/sql-ai-answer.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-026",
+      "lesson": "selectai/selectai.md",
+      "task": "## Task 5: Improve the business question",
+      "required_capture": " ai refined generated",
+      "replacement_path": "selectai/images/sql-ai-refined-generated.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-027",
+      "lesson": "selectai/selectai.md",
+      "task": "## Task 5: Improve the business question",
+      "required_capture": " ai refined answer",
+      "replacement_path": "selectai/images/sql-ai-refined-answer.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-028",
+      "lesson": "selectai/selectai.md",
+      "task": "## Task 6: Explain the result",
+      "required_capture": " ai narration",
+      "replacement_path": "selectai/images/sql-ai-narration.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-029",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 2: Read the same connections as a graph",
+      "required_capture": " graph direct",
+      "replacement_path": "production-quality-network/images/sql-graph-direct.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-030",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 3: Trace four-hop quality traceability",
+      "required_capture": " graph four hop",
+      "replacement_path": "production-quality-network/images/sql-graph-four-hop.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-031",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 4: Find production orders that share traceability records",
+      "required_capture": " graph shared",
+      "replacement_path": "production-quality-network/images/sql-graph-shared.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-040",
+      "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+      "task": "## Task 2: Create a component vector",
+      "required_capture": " vector values",
+      "replacement_path": "component-quality-vector-search/images/sql-vector-values.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-041",
+      "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+      "task": "## Task 3: Test the component vector",
+      "required_capture": " vector distance",
+      "replacement_path": "component-quality-vector-search/images/sql-vector-distance.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-042",
+      "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+      "task": "## Task 3: Test the component vector",
+      "required_capture": " vector similarity",
+      "replacement_path": "component-quality-vector-search/images/sql-vector-similarity.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-043",
+      "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+      "task": "## Task 4: Find customer sites affected by a component concern",
+      "required_capture": " component customer follow-up",
+      "replacement_path": "component-quality-vector-search/images/sql-vector-customer-sites.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-032",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 5: Visualize the relationship using Oracle Graph Studio",
+      "required_capture": "Graph Studio overview page signed in as LLUSER",
+      "replacement_path": "production-quality-network/images/graph-studio-overview.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-033",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 6: Download and import the manufacturing notebook",
+      "required_capture": "Graph Studio Notebooks page for LLUSER",
+      "replacement_path": "production-quality-network/images/graph-notebooks.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-034",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 6: Download and import the manufacturing notebook",
+      "required_capture": "Graph Studio notebook import dialog",
+      "replacement_path": "production-quality-network/images/graph-import-dialog.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-035",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 6: Download and import the manufacturing notebook",
+      "required_capture": "Manufacturing notebook selected for import",
+      "replacement_path": "production-quality-network/images/graph-import-file.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-036",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 7: Run and interpret the Graph Studio notebook",
+      "required_capture": "Production Quality Network notebook introduction",
+      "replacement_path": "production-quality-network/images/graph-notebook-top.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-037",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 7: Run and interpret the Graph Studio notebook",
+      "required_capture": "Ranked production order results in Graph Studio",
+      "replacement_path": "production-quality-network/images/live-09-graph-notebook-table.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-038",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 7: Run and interpret the Graph Studio notebook",
+      "required_capture": "Production order graph from PO-8841",
+      "replacement_path": "production-quality-network/images/live-10-graph-production-network.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-039",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "## Task 7: Run and interpret the Graph Studio notebook",
+      "required_capture": "Production orders linked to the shared material lot",
+      "replacement_path": "production-quality-network/images/live-11-graph-shared-lot.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-004",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 2: Compare models with AutoML (optional)",
+      "required_capture": "Manufacturing classification experiment settings",
+      "replacement_path": "quality-review-oml/images/oml-settings.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-005",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 2: Compare models with AutoML (optional)",
+      "required_capture": "Completed Component Quality Review leaderboard",
+      "replacement_path": "quality-review-oml/images/oml-leaderboard.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-006",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 2: Compare models with AutoML (optional)",
+      "required_capture": "AutoML model comparison",
+      "replacement_path": "quality-review-oml/images/oml-model-comparison.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-007",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 2: Compare models with AutoML (optional)",
+      "required_capture": "Measured GLM confusion matrix",
+      "replacement_path": "quality-review-oml/images/oml-confusion-matrix.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-008",
+      "lesson": "quality-review-oml/quality-review-oml.md",
+      "task": "## Task 2: Compare models with AutoML (optional)",
+      "required_capture": "Measured GLM prediction impact",
+      "replacement_path": "quality-review-oml/images/oml-prediction-impact.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-020",
+      "lesson": "selectai-agent/selectai-agent.md",
+      "task": "## Task 4: Run a manufacturing question",
+      "required_capture": " agent answer",
+      "replacement_path": "selectai-agent/images/sql-agent-answer.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-021",
+      "lesson": "selectai-agent/selectai-agent.md",
+      "task": "## Task 5: Inspect what the agent did",
+      "required_capture": " agent history",
+      "replacement_path": "selectai-agent/images/sql-agent-history.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "CAP-022",
+      "lesson": "selectai-agent/selectai-agent.md",
+      "task": "## Task 5: Inspect what the agent did",
+      "required_capture": " agent tools",
+      "replacement_path": "selectai-agent/images/sql-agent-tools.png",
+      "status": "captured_live_LLUSER",
+      "placement": "beside matching instruction",
+      "captured_date": "2026-09-22"
+    },
+    {
+      "id": "APP-001",
+      "lesson": "introduction/introduction.md",
+      "task": "## Running the manufacturing demo",
+      "required_capture": "SEER MANUFACTURING LiveStack welcome page",
+      "replacement_path": "introduction/images/demo-welcome.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-002",
+      "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+      "task": "## Application example",
+      "required_capture": "SEER MANUFACTURING operations command center",
+      "replacement_path": "production-operations-dashboard/images/demo-dashboard.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-003",
+      "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+      "task": "## Application example",
+      "required_capture": "SEER MANUFACTURING operations charts",
+      "replacement_path": "production-operations-dashboard/images/demo-dashboard-charts.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-004",
+      "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+      "task": "Introduction",
+      "required_capture": "SEER MANUFACTURING plant capacity and routing map",
+      "replacement_path": "plant-routing-spatial/images/demo-spatial-map.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-005",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "Introduction",
+      "required_capture": "SEER MANUFACTURING risk graph",
+      "replacement_path": "production-quality-network/images/demo-network-overview.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-006",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "Introduction",
+      "required_capture": "SEER MANUFACTURING risk graph query and results",
+      "replacement_path": "production-quality-network/images/demo-network-query.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    }
+  ],
+  "database_captures": 43,
+  "demo_application_captures": 6
+}

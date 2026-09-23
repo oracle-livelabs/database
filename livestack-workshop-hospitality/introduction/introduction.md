@@ -2,7 +2,13 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator at Seer Hotels. Her teams are building new guest applications, improving guest-service and booking-abuse reviews, routing service work, and adding AI to hospitality dashboards.
+Jessica Chan, the DBA at Seer Hotels, starts the morning with a question from guest services. A hotel has reported an accessible-room availability concern. Which guests have booked the affected stay offers, and what should the team check before arranging assistance?
+
+![Jessica and Thomas review an accessible-room concern and affected reservations in the Seer Hotels lobby.](images/seer-hotels-introduction.png)
+
+Thomas needs reservation details as JSON for the guest application. Gilly will find related stay offers, and Moon will identify nearby hotels for the service team to consider. Bob will investigate suspicious booking connections, Otto will build a demand watchlist, and Nina will ask questions about the same hospitality data.
+
+Jessica brings the team together around the records already held in Oracle AI Database. Each lab follows one part of their work. Before arranging a relocation, the service team still needs to check room availability, accessibility requirements, and stay dates.
 
 The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team wants to use it in a different way:
 
