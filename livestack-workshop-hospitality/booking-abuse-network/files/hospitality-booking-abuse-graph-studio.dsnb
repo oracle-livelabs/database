@@ -228,7 +228,6 @@
         "hasTitle": false,
         "message": [
           "%sql",
-          "",
           "SELECT *",
           "FROM GRAPH_TABLE (",
           "  booking_abuse_network",

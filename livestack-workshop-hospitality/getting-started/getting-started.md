@@ -21,11 +21,11 @@ The sign-in graphics illustrate the navigation steps. The SQL Worksheet capture 
 
 ### Environment prerequisites
 
-Before starting, the instructor must load the hospitality dataset into `LLUSER` on Autonomous Database 26ai and check the [hospitality schema contract](../validation/schema-contract.md). The supplied loader and labs were tested on a manually provisioned database.
+The LiveLabs green-button flow provisions the hospitality dataset in `LLUSER` on Autonomous Database 26ai. For a separately provisioned database, the instructor must run the supplied loader and check the [hospitality schema contract](../validation/schema-contract.md). Both paths have been tested.
 
 Required capabilities are Database Actions SQL Worksheet, Graph Studio, native JSON and duality views, Oracle Spatial, Oracle Machine Learning, access to `ADMIN.ALL_MINILM_L12_V2`, and an enabled `GENAI` profile with an approved provider. Labs 1 and 4 require preloaded embeddings and a precreated booking graph. Lab 3 creates a separate teaching vector column. Lab 8 depends on Lab 7. AutoML and the supplemental PGX notebook also need their respective services and privileges.
 
-Both workshop navigation options currently show the sandbox launch steps below. LiveLabs green-button and tenancy provisioning still need testing. If you use a manually provisioned database, open the Database Actions URL supplied by your instructor and sign in as `LLUSER`.
+The steps below were validated through the LiveLabs green-button sandbox flow on 23 September 2026. If you use a separately provisioned database, open the Database Actions URL supplied by your instructor and sign in as `LLUSER`.
 
 Estimated Time: **5 minutes**
 
