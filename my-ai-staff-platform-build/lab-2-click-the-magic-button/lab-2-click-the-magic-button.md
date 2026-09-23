@@ -41,10 +41,11 @@ In this lab, you will:
     page with the versioned Terraform configuration already selected. The button
     uses the read-only pre-authenticated Object Storage URL for the release ZIP.
 
-    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.0.zip)
+    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip)
 
     The button loads this published release ZIP:
-    [my-ai-staff-oci-stack-v1.0.0.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.0.zip).
+    
+    [my-ai-staff-oci-stack-v1.0.0.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip).
 
 2. Sign in if prompted. Give the stack a non-sensitive name, select the target
     compartment, select Terraform 1.5.x, and select **Next**.
