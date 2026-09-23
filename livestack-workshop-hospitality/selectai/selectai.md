@@ -68,7 +68,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also support on-demand inference in the profile’s region. The verified test uses `meta.llama-3.3-70b-instruct` in `us-chicago-1`, while the database itself is in Ashburn. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also support on-demand inference in the provider region configured by the profile. The manually provisioned validation used `meta.llama-3.3-70b-instruct` in `us-chicago-1`; the LiveLabs green-button deployment in Jeddah also completed `showsql`, `runsql`, and the agent flow with its provisioned `GENAI` profile. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before a separate deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
   

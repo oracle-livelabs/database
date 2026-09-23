@@ -27,7 +27,7 @@ Seer Hotels is a fictional hotel group. This diagram shows how guests, hotels, r
 
 *One room per reservation. A stay offer combines a room type and a rate plan. Nightly-charge lines record room nights and rates.* [Open the full-size diagram](images/seer-hotels-erd.png) or see the [complete schema and supporting entities](../validation/schema-contract.md).
 
-> **Workshop status:** The hospitality loader, dataset, and lab screenshots are ready. The core SQL labs, Graph Studio notebook, and optional AutoML experiment were tested on a manually provisioned database. LiveLabs green-button provisioning still needs testing. Before starting, confirm the prerequisites in Getting Started.
+> **Workshop status:** The hospitality loader, dataset, core SQL labs, Select AI, Select AI Agent, Graph Studio notebook, and optional AutoML workflow have been tested. LiveLabs green-button provisioning was validated end to end on 23 September 2026. Before starting, confirm the prerequisites in Getting Started.
 
 Jessica helps each team use the same hospitality records. Oracle AI Database stores the relational tables and lets the teams work with them through JSON, vectors, graphs, spatial queries, machine learning, and AI services. Each team keeps the database access controls that apply to its work.
 
