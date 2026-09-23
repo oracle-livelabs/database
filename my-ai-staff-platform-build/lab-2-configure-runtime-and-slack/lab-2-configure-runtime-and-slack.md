@@ -58,11 +58,15 @@ In this lab, you will:
     </copy>
     ```
 
-    In the Codex interface, select **Sign in with ChatGPT** and complete the browser flow. On a remote OCI instance, the browser may not open automatically. If Codex prints a login URL or device code, copy it from the terminal, open it in your laptop browser, complete the sign-in, and return to the remote shell prompt before continuing.
+    In the Codex interface, select **Sign in with Device Code** when the browser does not open automatically from the remote OCI instance.
 
-    If your deployment uses API-key authentication instead of browser sign-in, set `OPENAI_API_KEY` only in the secure environment files configured in Lab 3. Do not paste API keys into screenshots, chat messages, or shared validation evidence.
+    ![Codex Device Code Sign In Option](./images/06_codex_device_code_option.png)
 
-    After signing in Codex should see like this:
+    Copy the login URL and one-time code from the terminal. Open the URL in your laptop browser, complete the sign-in, and return to the remote shell prompt before continuing.
+
+    ![Codex Device Code Login URL](./images/07_codex_device_code_url.png)
+
+    After signing in, Codex should look like this:
 
     ![Codex Terminal in Visual Studio Code](./images/03_codex_vsc.png)
 
