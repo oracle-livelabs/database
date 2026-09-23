@@ -80,7 +80,7 @@
           "graph = session.get_graph(GRAPH_NAME)",
           "# if it does not exist read it into memory",
           "if (graph == None) :",
-          "    session.read_graph_by_name(GRAPH_NAME, \"PG_PGQL\")",
+          "    session.read_graph_by_name(GRAPH_NAME, \"pg_pgql\")",
           "    print(\"Graph \"+ GRAPH_NAME + \" successfully loaded\")",
           "    graph = session.get_graph(GRAPH_NAME)",
           "else :",
@@ -175,7 +175,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "This shows the use of bind parameters in a query. The account id value is entered at runtime.",
+          "This shows the use of bind parameters in a query. You enter the account ID when you run the query.",
           "",
           "Enter **534** as the account id, and then execute the paragraph."
         ],
@@ -284,7 +284,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Review the accounts with the highest degree. The fixture includes account 934 as a starting point for a circular airtime-transfer investigation. A high degree is a review cue, not proof of abuse. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge."
+          "Review the accounts with the highest degree. The sample data includes account 934 as a starting point for a circular airtime-transfer investigation. Many transfers are a reason to look closer, not proof of abuse. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -336,7 +336,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Compare the four-hop paths with the following five-hop query. Count the cycles in your results; no telecommunications cycle counts have been measured for this edition."
+          "Compare the four-hop paths with the following five-hop query. Count the cycles in your results and distinguish complete paths from the one-row-per-step output."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -438,7 +438,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "List PageRank values in descending order. A high rank means that a account has incoming links from accounts that themselves carry rank. This is a structural graph measure; it does not prove abuse or measure airtime volume."
+          "List PageRank values in descending order. A high rank means that an account has incoming links from accounts that themselves carry rank. This is a structural graph measure; it does not prove abuse or measure airtime volume."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -543,7 +543,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Compare each account\u2019s **PageRank** with the **number of airtime transfers** you counted earlier."
+          "Compare each account’s **PageRank** with the **number of airtime transfers** you counted earlier."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -752,7 +752,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Treat accounts 934 and 387 as synthetic review seeds, not confirmed offenders. Personalized PageRank ranks graph proximity to this seed set. It helps prioritize review; it is not a probability of abuse.",
+          "Treat accounts 934 and 387 as sample starting points for review, not confirmed offenders. Personalized PageRank ranks graph proximity to this seed set. It helps prioritize review; it is not a probability of abuse.",
           "The next Python paragraph uses vertices from PREPAID_ACCOUNTS and the built-in analyst object."
         ],
         "selectedVisualization": "html",

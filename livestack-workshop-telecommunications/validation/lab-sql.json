@@ -217,32 +217,32 @@
   {
     "lesson": "selectai/selectai.md",
     "block": 5,
-    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.',\n             profile_name => 'genai',\n             action       => 'showsql'\n           ) AS generated_sql;"
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase).',\n             profile_name => 'genai',\n             action       => 'showsql'\n           ) AS generated_sql;"
   },
   {
     "lesson": "selectai/selectai.md",
     "block": 6,
-    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.',\n             profile_name => 'genai',\n             action       => 'runsql'\n           ) AS answer;"
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase).',\n             profile_name => 'genai',\n             action       => 'runsql'\n           ) AS answer;"
   },
   {
     "lesson": "selectai/selectai.md",
     "block": 7,
-    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'showsql'\n           ) AS generated_sql;"
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'showsql'\n           ) AS generated_sql;"
   },
   {
     "lesson": "selectai/selectai.md",
     "block": 8,
-    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'runsql'\n           ) AS answer;"
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'runsql'\n           ) AS answer;"
   },
   {
     "lesson": "selectai/selectai.md",
     "block": 9,
-    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'narrate'\n           ) AS explanation;"
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'narrate'\n           ) AS explanation;"
   },
   {
     "lesson": "selectai-agent/selectai-agent.md",
     "block": 1,
-    "sql": "SELECT profile_name,\n           status\n    FROM user_cloud_ai_profiles\n    WHERE profile_name = 'GENAI';"
+    "sql": "SELECT profile_name,\n           status\n    FROM user_cloud_ai_profiles\n    WHERE profile_name IN ('GENAI', 'GENAI_AGENT');"
   },
   {
     "lesson": "selectai-agent/selectai-agent.md",
@@ -267,12 +267,12 @@
   {
     "lesson": "selectai-agent/selectai-agent.md",
     "block": 6,
-    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'NINA_TELECOM_AGENT',\n        attributes  => '{\"profile_name\": \"genai\", \"role\": \"You are Nina Patel''s telecommunications data assistant. Answer questions using the approved SQL tool. Use database results for service plan, service order, monthly service charge, and subscriber facts. Do not invent values.\"}',\n        description => 'Telecommunications assistant for Nina Patel'\n      );\n    END;\n    /"
+    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'NINA_TELECOM_AGENT',\n        attributes  => '{\"profile_name\": \"GENAI_AGENT\", \"role\": \"You are Nina Patel''s telecommunications data assistant. Answer questions using the approved SQL tool. Use database results for service plan, service order, monthly service charge, and subscriber facts. Do not invent values.\"}',\n        description => 'Telecommunications assistant for Nina Patel'\n      );\n    END;\n    /"
   },
   {
     "lesson": "selectai-agent/selectai-agent.md",
     "block": 7,
-    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name  => 'NINA_TELECOM_TASK',\n        attributes => '{\"instruction\": \"Answer Nina''s telecommunications question: {query}. Use NINA_TELECOM_SQL_TOOL once to retrieve the required data. Return a concise answer based on the database result. Do not repeat the same tool call and do not make changes to database records.\", \"tools\": [\"NINA_TELECOM_SQL_TOOL\"], \"enable_human_tool\": \"false\"}',\n        description => 'Answer read-only service plan and subscriber questions'\n      );\n    END;\n    /"
+    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name  => 'NINA_TELECOM_TASK',\n        attributes => '{\"instruction\": \"Answer this telecommunications question: {query}. Send the complete question as natural language to NINA_TELECOM_SQL_TOOL with action runsql. The SQL tool generates SQL itself, so do not write SQL in its query argument. Call the tool only once. When the tool returns status success, immediately finish the task and give the user that result. Do not call the tool again after success. Do not change database records. Connections means SUM(service_order_lines.connection_count), not a count of orders.\", \"tools\": [\"NINA_TELECOM_SQL_TOOL\"], \"enable_human_tool\": \"false\"}',\n        description => 'Answer read-only service plan and subscriber questions'\n      );\n    END;\n    /"
   },
   {
     "lesson": "selectai-agent/selectai-agent.md",
@@ -282,7 +282,7 @@
   {
     "lesson": "selectai-agent/selectai-agent.md",
     "block": 9,
-    "sql": "SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(\n             team_name   => 'NINA_TELECOM_TEAM',\n             user_prompt => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders. Include the service plan name, category, total monthly charges, and connections ordered.',\n             params      => '{\"conversation_id\": \"' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '\"}'\n           ) AS agent_answer;"
+    "sql": "SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(\n             team_name   => 'NINA_TELECOM_TEAM',\n             user_prompt => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase). Include the service plan name, category, total monthly charges, and SUM(service_order_lines.connection_count) as connections ordered. Send this full question unchanged as natural language to the SQL tool, then finish with its successful result.',\n             params      => '{\"conversation_id\": \"' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '\"}'\n           ) AS agent_answer;"
   },
   {
     "lesson": "selectai-agent/selectai-agent.md",

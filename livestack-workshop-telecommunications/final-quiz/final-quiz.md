@@ -26,7 +26,7 @@ Estimated Time: **3 minutes**
     * Use the same service order data as JSON documents or relational tables without maintaining duplicate records.
     - Remove relational tables from the service order review process.
     - Force analysts to manually read raw JSON for every review.
-    > A duality view presents relational rows as a JSON document. Applications get the payload they need, while analysts still use SQL, keys, joins, and database controls against the same source.
+    > A duality view presents relational rows as a JSON document. Applications get the document they need, while analysts still use SQL, keys, joins, and database controls against the same source.
 
     Q: In the vector lab, what does the similarity score help an analyst do?
     - Prove that a subscriber concern confirms activation fraud.
@@ -40,7 +40,7 @@ Estimated Time: **3 minutes**
     * It explains connections across service orders and shared entities.
     - It stores service coverage regions for operations teams.
     - It replaces relationship data with flat service plan totals.
-    > The graph lab focuses on relationship data. A activation fraud analyst can prioritize connected service_orders, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
+    > The graph lab focuses on relationship data. An activation fraud analyst can prioritize connected service orders, devices, payment tokens, IP addresses, and phones without writing a separate chain of joins for each path length.
 
     Q: Why does SEER Telecomms use spatial data in the network-site lab?
     - To make coverage decisions outside the shared database.
@@ -61,9 +61,9 @@ Estimated Time: **3 minutes**
     - The narrative wording is guaranteed to be identical every time.
     * The profile lists the intended objects and the generated SQL remains visible.
     - The answer bypasses the database and uses only general model knowledge.
-    > The telecommunications Select AI profile has a narrow object list to guide generation; database privileges enforce access. SHOWSQL exposes the generated query, and SQL review lets reviewers compare the narrative with the database result.
+    > The telecommunications Select AI profile has a narrow object list to guide generation; database privileges enforce access. SHOWSQL shows the generated query, and SQL review lets reviewers compare the narrative with the database result.
 
-    Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
+    Q: What is the main advantage of using Oracle AI Database as the shared database for this workshop?
     - Each telecommunications capability must use a separate specialized data store.
     * One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same shared data.
     - Application screenshots replace the need for database results.

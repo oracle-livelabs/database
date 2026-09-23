@@ -4,7 +4,7 @@
 
 ## Introduction
 
-> **Validation status:** Database execution and result screenshots are pending a manually provisioned environment. Run the loader before these exercises.
+> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Bob Green is a graph specialist at SEER Telecomms. He uses property graphs to investigate activation fraud.
 
@@ -37,7 +37,7 @@ Graph Studio is Oracle Database’s visual workspace for property graphs. SQL/PG
 - Find service order pairs that share identifying information.
 - Open Graph Studio from Database Actions.
 - Import and run the telecommunications activation-fraud-network notebook.
-- Explain the result in terms a business user can act on.
+- Explain the result in terms a fraud analyst can act on.
 
 Estimated Time: **10 minutes**
 
@@ -45,12 +45,12 @@ Estimated Time: **10 minutes**
 
 | Step                | Telecommunications focus                                                                                                  |
 | ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Activation Fraud teams need to see relationships that are hard to detect from service order tables alone.                   |
-| Technical Challenge | Bob needs to follow paths and find shared identifiers without writing long chains of self-joins.                  |
-| Persona Focus       | You review Bob's graph design and interpret its results for an activation fraud review.                                     |
+| Problem    | Activation Fraud teams need to see relationships that are hard to detect from service order tables alone.                   |
+| Database task | Bob needs to follow paths and find shared identifiers without writing long chains of self-joins.                  |
+| Your role       | You review Bob's graph design and interpret its results for an activation fraud review.                                     |
 | What You Will See   | A property graph shows connected entities and service order pairs with SQL.                                           |
-| Database Capability | ACTIVATION\_FRAUD\_NETWORK and GRAPH\_TABLE support SQL/PGQ traversal.                                                     |
-| Outcome             | A business user can see which service orders are connected, what they share, and which relationships deserve review. |
+| Oracle features | ACTIVATION\_FRAUD\_NETWORK and GRAPH\_TABLE support SQL/PGQ traversal.                                                     |
+| Result             | A fraud analyst can see which service orders are connected, what they share, and which relationships deserve review. |
 
 Persona focus: You are reviewing Bob's graph solution with an activation fraud analyst.
 
@@ -220,7 +220,9 @@ In graph terms, the service order and connected objects are **vertices**. The ro
     ```
 
     <!-- capture:CAP-08 -->
-    > **Capture pending (CAP-08):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Read the same connections as a graph](images/sql-graph-direct.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     In the `MATCH` pattern, `service order` and `connected` are vertices. `edge` is the edge between them, so this pattern follows one hop. `IS entity` and `IS related_to` refer to the labels defined in `ACTIVATION_FRAUD_NETWORK`.
@@ -229,7 +231,7 @@ In graph terms, the service order and connected objects are **vertices**. The ro
 
 <!-- application-capture:APP-05 -->
 
-For an application example of hop-limited exploration, open **Subscriber and Network Impact Graph** and select **2 Steps** for the game-day congestion event. The demo follows incident impact across sites, services and crews. This illustrates graph traversal; the activation-evidence graph in this lab has different entities and relationships.
+For an application example of following a set number of graph connections, open **Subscriber and Network Impact Graph** and select **2 Steps** for the game-day congestion event. The demo follows incident impact across sites, services and crews. This illustrates graph traversal; the activation-evidence graph in this lab has different entities and relationships.
 
 ![Live two-step incident-impact graph; this is not a Graph Studio notebook result.](images/app-impact-graph.png)
 
@@ -243,7 +245,7 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
 
     This query treats the activation fraud data as a graph. In the `MATCH` pattern, `(seed IS entity)` is the starting service order, `-[e IS related_to]->{1,4}` means follow a path of one, two, three, or four hops, and `(reached IS entity)` is every entity reached from that starting point. The database counts each relationship in the path as one hop. `COUNT(e.relationship_type)` returns that count as `relationship_hops`; `relationship_type` is an edge property exposed by the graph definition.
 
-    The `WHERE` clause anchors the search on `ORD-8841`, and the `COLUMNS` clause returns graph properties in a normal SQL result table.
+    The `WHERE` clause starts the search at `ORD-8841`, and the `COLUMNS` clause returns graph properties in a normal SQL result table.
 
     This is much easier than writing the same logic with ordinary joins. Without SQL/PGQ graph pattern matching, you would need separate self-joins for one-hop and four-hop paths, extra union logic for each hop level, and more code every time investigators want to follow another type of relationship.
 
@@ -274,14 +276,16 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
     ```
 
     <!-- capture:CAP-09 -->
-    > **Capture pending (CAP-09):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Trace activation evidence across four hops](images/sql-graph-four-hop.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `ORD-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
 
     **Expected output: High Risk Activation Fraud Entities**
 
-    Inspect the columns described above after executing the statement; a captured database result is pending.
+    Compare the returned columns with the capture above.
 
 2. Review the high-risk entities.
     The query returns connected entities as a risk-sorted table, not as a visual network. That makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and service order labs.
@@ -295,7 +299,7 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
     
     These rows matter because they show what the suspicious service order touched or shared.
 
-    The result gives investigators a risk-sorted list of connected entities. Instead of reviewing a tangle of connections, the analyst gets a table sorted by risk. High risk scores and large amounts point to entities that may require manual activation review, case escalation, or deeper review before looking at lower-risk connections.
+    The result gives investigators a risk-sorted list of connected entities. Instead of reviewing a tangle of connections, the analyst gets a table sorted by risk score. High risk scores and large amounts point to entities that may require manual activation review, case escalation, or deeper review before looking at lower-risk connections.
 
 ## Task 4: Find service orders that share identifying information
 
@@ -335,7 +339,9 @@ Bob now moves from one suspicious service order to a broader activation fraud qu
     ```
 
     <!-- capture:CAP-10 -->
-    > **Capture pending (CAP-10):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Find service orders that share identifying information](images/sql-graph-shared.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     The pattern starts at service order `a`, follows an edge to a shared entity, and follows another edge back to service order `b`. The two service orders can therefore be connected through the same device, IP address, phone number, or email address. `a.entity_id < b.entity_id` keeps the result from returning the same pair twice in reverse order.
@@ -355,7 +361,9 @@ In the following tasks, use Graph Studio to turn the SQL results for `ORD-8841` 
 1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
     <!-- capture:CAP-11 -->
-    > **Capture pending (CAP-11):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Graph Studio on the LLUSER development launchpad.](images/graph-launch.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
 
@@ -365,7 +373,9 @@ In the following tasks, use Graph Studio to turn the SQL results for `ORD-8841` 
 5. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
 
     <!-- capture:CAP-12 -->
-    > **Capture pending (CAP-12):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Visualize the relationship using Oracle Graph Studio](images/graph-studio-overview.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 ## Task 6: Download and import the telecommunications notebook
 
@@ -378,19 +388,25 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 2. In Graph Studio, click **Notebooks** in the landing page.
 
     <!-- capture:CAP-13 -->
-    > **Capture pending (CAP-13):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Download and import the telecommunications notebook](images/graph-notebooks.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 3. Select **Import** in the upper-right corner.
 
     <!-- capture:CAP-14 -->
-    > **Capture pending (CAP-14):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Download and import the telecommunications notebook](images/graph-import-dialog.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
     
 
 4. Once the import notebooks tab opens, drag & drop the `telecommunications-activation-fraud-graph-studio.dsnb` file from your local computer into the import window, or browse to the file on your computer. Review the selected filename and click **Import**. Open **Activation Fraud Network** after the import completes.
 
     <!-- capture:CAP-15 -->
-    > **Capture pending (CAP-15):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Telecommunications notebook selected for import.](images/graph-import-file.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
     
 
@@ -404,16 +420,20 @@ Use the table to rank connected entities. Use the graph to follow the paths and 
 1. Start at the top of the **Activation Fraud Network** notebook. Read the explanation for the `ORD-8841` traversal, then run the first SQL paragraph.
 
     <!-- capture:CAP-16 -->
-    > **Capture pending (CAP-16):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Activation Fraud Network notebook introduction.](images/graph-notebook-top.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
     
 
 2. Review the results in table format in the graph studio notebook:
 
     <!-- capture:CAP-17 -->
-    > **Capture pending (CAP-17):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Activation evidence reached from service order ORD-8841.](images/live-09-graph-notebook-table.png)
 
-    This uses the investigation pattern from Task 3 with a shorter one-to-two-hop limit: start from `ORD-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
+    *Live LLUSER capture, 23 September 2026.*
+
+    This uses the investigation pattern from Task 3 with a shorter one-to-two-hop limit: start from `ORD-8841`, follow one or two relationship hops, and return the connected entities as a table sorted by risk score.
 
     | Paragraph | Result | Investigation purpose |
     | --- | --- | --- |
@@ -423,23 +443,27 @@ Use the table to rank connected entities. Use the graph to follow the paths and 
     | `Shared Entity Connections` | Markdown label and explanation | Introduces the device-centered relationship view. |
     | `SELECT * ... WHERE device.entity_key = 'DEV-fp-91a7'` | Graph visualization | Centers on `DEV-fp-91a7` and draws its directly connected service orders. |
 
-3. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `ORD-8841`. Review the graph visualization that appears below the paragraph.
+3. Under **Graph Visualization of previous query**, run the SQL paragraph that begins with `SELECT *` and follows connections from `ORD-8841`. Review the graph visualization that appears below the paragraph.
 
     <!-- capture:CAP-18 -->
-    > **Capture pending (CAP-18):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Seven vertices and ten edges reached across the activation network; labels show risk scores.](images/live-10-graph-order-network.png)
+
+    *Live LLUSER capture, 23 September 2026.*
     Note how the service orders and devices in the previous query were turned into vertices and edges in Graph Studio to display an interactive network.
 
     
 
-4. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that anchors on `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph. This visualization narrows the investigation to the device DEV-fp-91a7.
+4. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that starts at `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph. This visualization narrows the investigation to the device DEV-fp-91a7.
 
     <!-- capture:CAP-19 -->
-    > **Capture pending (CAP-19):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Shared activation device linked to three service orders and a network address.](images/live-11-graph-shared-device.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
     Check that the visualization includes ORD-8841, ORD-5077, and ORD-1190 around the shared device; display filters can hide graph elements.
 
     
-The fixture requires device `DEV-fp-91a7` to link service order vertices ORD-8841, ORD-5077, and ORD-1190. These links illustrate how service orders can share a activation device; verify the edges in your loaded data. This graph matters because it shows what the suspicious service order touched or shared.
+The sample data requires device `DEV-fp-91a7` to link service order vertices ORD-8841, ORD-5077, and ORD-1190. These links illustrate how service orders can share an activation device; verify the edges in your loaded data. This graph matters because it shows what the suspicious service order touched or shared.
 
 > **Result note:** Graph layouts and node positions can vary between runs. Compare entity keys, relationships, and query results.
 
@@ -447,7 +471,7 @@ You have used SQL/PGQ to list connected entities and Graph Studio to explore the
 
 ### Optional graph-algorithms extension
 
-The companion [airtime graph notebook](files/getting-started-airtime-graph.dsnb) preserves the separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `AIRTIME_GRAPH`, with prepaid account holders connected by consented airtime transfers. It is separate from `ACTIVATION_FRAUD_NETWORK` and requires the optional PGQL graph and PGX service described in the schema contract. Do not run it until the manual-database prerequisites are provisioned. Graph proximity is a review cue, not proof of abuse.
+The companion [airtime graph notebook](files/getting-started-airtime-graph.dsnb) preserves the separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `AIRTIME_GRAPH`, with prepaid account holders connected by sample airtime transfers. It is separate from `ACTIVATION_FRAUD_NETWORK` and requires the optional PGQL graph and PGX service described in the schema contract. Before running it, ask the administrator to create the PGQL graph and enable PGX. Closely connected accounts deserve a closer look, but their connections do not prove abuse.
 
 ## Conclusion: Make Relationships Easy to Review
 

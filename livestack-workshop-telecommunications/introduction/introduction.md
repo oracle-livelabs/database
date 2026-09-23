@@ -21,19 +21,19 @@ The teams need different ways to use the same records:
 
 ### SEER Telecomms data model
 
-SEER Telecomms is a fictional communications provider. All people, sites, orders, observations, and graph evidence are synthetic workshop fixtures.
+SEER Telecomms is a fictional communications provider. All people, sites, orders, observations, and graph evidence are made-up sample data for this workshop.
 
 ![SEER Telecomms model: subscribers and network sites connect to service orders; sites have service plans; orders have lines linked to plans.](images/seer-telecomms-erd.png)
 
-*A service order covers one initial monthly period. Each line selects a site-scoped plan and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete schema contract](../validation/schema-contract.md).
+*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete table and sample-data reference](../validation/schema-contract.md).
 
-Plans cover mobile voice and data, fixed wireless, fiber, and IoT. Each plan includes access technology, advertised downstream speed, and a data allowance; a null allowance means unlimited. The site association is a workshop service-area variant, not a claim that commercial mobile plans belong to one radio tower. Subscriber locations are service addresses, not live handset tracking.
+Plans cover mobile voice and data, fixed wireless, fiber, and IoT. Each plan includes access technology, advertised download speed, and a data allowance; a null allowance means unlimited. The workshop links each plan to a site to represent a service area. Commercial mobile plans are not tied to a single radio tower. Subscriber locations are service addresses, not live handset tracking.
 
-> **Workshop status:** Repository checks and live application captures are complete. Manual workshop database execution, Graph Studio import, AutoML, Select AI calls, and database-result screenshots remain deferred until a workshop environment is supplied. LiveLabs green-button and Terraform provisioning are a separate later phase. See [Getting Started](?lab=getting-started).
+> **Workshop status:** Repository checks, manual database validation, Graph Studio notebooks, AutoML, Select AI and the agent example are complete. Authentic captures show the validated run. SQLcl launch step and LiveLabs green-button/Terraform provisioning checks remain for the next phase. See [Getting Started](?lab=getting-started).
 
 <!-- application-capture:APP-01 -->
 
-The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop fixture and teaching personas. Application captures below illustrate the user interface; they do not validate the lab SQL.
+The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop sample data and teaching personas. Application captures below illustrate the user interface; they do not validate the lab SQL.
 
 ![Welcome page of the supplied telecom operations demo.](images/app-welcome.png)
 
@@ -49,7 +49,7 @@ The [running telecom application](http://141.144.192.27:8505/) follows a game-da
 | Bob, graph specialist | Review suspicious activation connections. | SQL/PGQ and Graph Studio show shared devices, payment tokens, contacts, and paths. |
 | Moon, spatial specialist | Find sites near subscribers needing support. | Spatial SQL filters service addresses by region and ranks active sites by distance. |
 | Otto, data scientist | Build a service-plan demand watchlist. | Oracle Machine Learning classifies synthetic demand and joins scores to supporting activity. |
-| Nina, subscriber experience analyst | Review monthly charges without writing every query. | Select AI exposes generated SQL; an agent uses its SQL tool and records the activity. |
+| Nina, subscriber experience analyst | Review monthly charges without writing every query. | Select AI shows generated SQL; an agent uses its SQL tool and records the activity. |
 
 The relational records also support documents, semantic search, graph investigations, spatial analysis, model scores, and natural-language questions. The teams can combine those results without maintaining separate copies for each database capability.
 
@@ -67,8 +67,8 @@ The relational records also support documents, semantic search, graph investigat
 - Follow the SEER Telecomms team through subscriber support, activation review, network planning, and commercial analysis.
 - Use relational SQL, JSON, vectors, graphs, spatial data, Oracle Machine Learning, Select AI, and Select AI Agent.
 - Explain how these capabilities work on connected records without separate stores.
-- Distinguish AI instructions and profile metadata from database-enforced privileges.
-- Review each result against its source data and the limits of the synthetic fixture.
+- Distinguish AI instructions and AI profile settings from database-enforced privileges.
+- Review each result against its source data and the limits of the sample data.
 
 Estimated Workshop Time: **90 minutes**
 

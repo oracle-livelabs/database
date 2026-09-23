@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> **Image status:** Sign-in images are generic navigation illustrations. Database screenshots are deferred until the manual-database run.
+> **Image status:** Sign-in images illustrate the navigation. The SQL Worksheet screenshot shows the manual database run on 23 September 2026.
 
 Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and prepare SQL Worksheet. Run the telecommunications exercises as `LLUSER`, the workshop database user.
 
@@ -17,11 +17,11 @@ Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and pre
 
 </details>
 
-The sign-in graphics illustrate the navigation steps. A capture marker identifies where to add the new SQL Worksheet result.
+The sign-in graphics illustrate the navigation steps. The SQL Worksheet capture appears beside the connection check.
 
 ### Environment prerequisites
 
-Before starting, the instructor must load the telecommunications dataset into `LLUSER` on Autonomous Database 26ai and check the [telecommunications schema contract](../validation/schema-contract.md). Database execution is pending. Use the [stack runbook](../stack/README.md) to prepare a fresh schema and run the loader; do not run it over an occupied schema.
+Before starting, the instructor must load the telecommunications dataset into `LLUSER` on Autonomous Database 26ai and check the [telecommunications tables and sample data](../validation/schema-contract.md). The labs were tested in a manually provisioned database on 23 September 2026. Use the [stack runbook](../stack/README.md) to prepare a fresh schema and run the loader; do not run it over an occupied schema.
 
 Required capabilities are Database Actions SQL Worksheet, Graph Studio, native JSON and duality views, Oracle Spatial, Oracle Machine Learning, access to `ADMIN.ALL_MINILM_L12_V2`, and an enabled `GENAI` profile with an approved provider. Labs 1 and 4 require preloaded embeddings and a precreated activation graph. Lab 3 creates a separate teaching vector column. Lab 8 depends on Lab 7. AutoML and the supplemental PGX notebook also need their respective services and privileges.
 
@@ -108,7 +108,9 @@ Open SQL Worksheet as `LLUSER`. Run each query there and review the returned tab
     ```
 
     <!-- capture:CAP-47 -->
-    > **Capture pending (CAP-47):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![LLUSER connection and current schema.](images/sql-connection.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     **Expected output: Connected SQL Worksheet Session**
