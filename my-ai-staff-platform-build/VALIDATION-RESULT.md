@@ -1,13 +1,12 @@
 # LiveLabs Workshop Validation – my-ai-staff-platform-build
 
-Generated on 2026-09-23T14:57:44.392905+00:00
+Generated on 2026-09-23T16:06:27.435789+00:00
 
 ## Structure Check
 - ✅ Required folders and workshop variants present.
 - ⚠️ Warnings:
   - introduction missing images/ folder (required for screenshots).
   - lab-2-click-the-magic-button missing images/ folder (required for screenshots).
-  - lab-4-configure-external-services missing images/ folder (required for screenshots).
 
 ## Manifest Review
 ### workshops/freetier/manifest.json
@@ -35,8 +34,8 @@ Generated on 2026-09-23T14:57:44.392905+00:00
 ### lab-2-click-the-magic-button/lab-2-click-the-magic-button.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 1/5
-  - 17 sentence(s) exceed 20 words; tighten wording.
-  - Passive voice detected in 5 instance(s).
+  - 16 sentence(s) exceed 20 words; tighten wording.
+  - Passive voice detected in 4 instance(s).
   - Contractions found; expand them per Lanham rules.
   - Heavy nominalization usage; prefer vivid verbs.
 
@@ -58,9 +57,8 @@ Generated on 2026-09-23T14:57:44.392905+00:00
 
 ### lab-4-configure-external-services/lab-4-configure-external-services.md
 - ✅ LiveLabs formatting checks passed.
-- ✍️ Lanham score: 2/5
-  - 7 sentence(s) exceed 20 words; tighten wording.
-  - Passive voice detected in 6 instance(s).
+- ✍️ Lanham score: 3/5
+  - 9 sentence(s) exceed 20 words; tighten wording.
   - Heavy nominalization usage; prefer vivid verbs.
 
 ### lab-5-connect-services-and-verify/lab-5-connect-services-and-verify.md
