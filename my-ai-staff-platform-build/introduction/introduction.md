@@ -45,7 +45,7 @@ Before you start, create a secure worksheet for values that are unique to the cu
 | Slack | Workspace name, seven bot tokens, seven app-level tokens, `ASSISTANT_BOT_ID`, deployment owner member ID, and every channel ID |
 | Runtime | Codex account or API key, OpenAI API key, `CODEX_BIN` path when non-default, ZIP download URL, and deployment path |
 | Content Kit | `base_dir`, NotebookLM Python path, font paths, Data Agent URL, and headshot path |
-| External services | Google OAuth client ID, secret, refresh token, Drive roots, SMTP host/user/password/from address, Substack config, and Instagram cookies when those integrations are enabled |
+| External services | Google OAuth client ID, secret, refresh token, publication Drive folder, SMTP host/user/password/from address, Substack config, and Instagram cookies when those integrations are enabled |
 
 ## Choose a Deployment Path
 
@@ -56,12 +56,14 @@ paths on the same host.
 
 **Fast path:** Fast Path: Click the Magic Button → Lab 3 → Lab 4 → Lab 5
 
-The Fast Path replaces Labs 1 and 2. It provisions OCI, Autonomous Database,
-the platform files, the local Codex plugin, labeled virtual environments, the
-application schema, the vector model, and the base systemd unit files. Lab 3
-is still required because Slack apps, tokens, channels, and environment values
-are deployment-specific. Lab 4 configures Google OAuth and the other external
-services; Lab 5 activates and verifies the complete deployment.
+The Fast Path replaces the non-interactive work in Labs 1 and 2. It provisions
+OCI, Autonomous Database, the platform files, the local Codex plugin, labeled
+virtual environments, the application schema, the vector model, and the base
+systemd unit files. After bootstrap, complete the interactive Codex login and
+smoke test before Lab 3. Lab 3 is still required because Slack apps, tokens,
+channels, and environment values are deployment-specific. Lab 4 configures
+Google OAuth and the other external services; Lab 5 activates and verifies the
+complete deployment.
 
 ## Workshop Labs
 
