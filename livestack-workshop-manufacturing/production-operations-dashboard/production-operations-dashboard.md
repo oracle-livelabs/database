@@ -229,3 +229,10 @@ Next, use JSON Relational Duality to expose the same production order data as JS
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
 
+## Application example
+
+The live SEER MANUFACTURING application presents plant, work-order, quality, supplier, and agent indicators in its Operations Command Center. It uses the separate AX-400 demo dataset, so its values are not expected output from the workshop SQL query.
+
+![SEER MANUFACTURING operations command center](images/demo-dashboard.jpg)
+
+![SEER MANUFACTURING operations charts](images/demo-dashboard-charts.jpg)

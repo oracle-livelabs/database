@@ -2,6 +2,120 @@
   "ocr_engine" : "macOS Vision accurate",
   "rasters" : [
     {
+      "height" : 642,
+      "path" : "component-quality-vector-search\/images\/gilly.png",
+      "text" : "Lab 3: Search Components by Meaning\nFind production orders affected\nby a component quality concern.\nGilly\nAl Engineer",
+      "width" : 1280
+    },
+    {
+      "height" : 734,
+      "path" : "component-quality-vector-search\/images\/sql-embedding-model.jpg",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nAa -\nData Load\n60\nmodel_name,\nalgorithm,\nmining_function\nFROM all\nmining_models\nWHERE mining function = EMBEDDING\"\nORDER BY owner, model_name;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nOWNER\nADMIN\nDownload - Execution time: 0.025 seconds\nMODEL_NAME\nALGORITHM\nALL_MINILM_L12... ONNX\nMINING_FUNCTIO\nEMBEDDING\n* 6 A 0 203 0 1 6:44:04 PM - 1 rows total\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "component-quality-vector-search\/images\/sql-vector-customer-sites.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]* -\nConsumer group:\nLOW Y\nData Load\n6id\n15\n25\n26\n27\n28\n29\n30\n31\nSELECT matched_component.component_name,\nFROM matched_components matched_component\nJOIN\nproduction_order_lines rn ON rn. component_id = matched_component.comp\nJOIN production_orders r ON r. production_order_id = rn.production_order_id\nJOIN\ncustomer_sites g ON g. customer_site_id = r.customer_site_id\nWHERE r.order_status IN (planned', released', in production)\nORDER BY matched_component.similarity DESC,\nr. created_at DESC;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n4\nDownload - Execution time: 0.285 seconds\nCOMPONENT_NAI SIMILARITY\nSITE_NAME\nPrecision bearing...\nPrecision bearing...\nPrecision bearing...\nPrecision bearing...\nPrecision bearing...\nCONTACT_NAME EMAIL\n0.7899 Industrial Custom... Contact0056 Exa... producti\n0.7899 Industrial Custom... Contact1016 Exa...\nproducti\n0.7899 Industrial Custom... Contact0120 Exa...\nproducti\n0.7899 Industrial Custom... Contact0888 Exa... producti\n0.7899 Industrial Custom... Contact0840 Exa... producti\n5:23:41 PM - 59 rows total\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "component-quality-vector-search\/images\/sql-vector-distance.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\n8\n9\n* = Aa -\nE\nData Load\nSELECT so. component_name,\nVECTOR_DISTANCE (\nso. component_embedding,\nVECTOR_EMBEDDING (ADMIN.ALL_MINILM_L12_V2 USING precision bearing\nCOSINE) AS vector_distance\nFROM components so\nORDER BY vector_distance\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n4\n* 04 0\nDownload - Execution time: 0.277 seconds\nCOMPONENT_NAI CATEGORY\nVECTOR_DISTANC\nPrecision bearing... Motion assemblies 0.20865975953...\nPrecision bearing...\nMotion assemblies\n0.2101160976671...\nPrecision bearing...\nMotion assemblies\n0.213112590985...\nPrecision bearing...\nMotion assemblies\n0.213469037845...\nPrecision bearing. Motion assemblies\n0.2154110897128...\n5:23:11 PM - 5 rows total\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "component-quality-vector-search\/images\/sql-vector-similarity.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\n9\n* = Aa -\nData Load\nSELECT so. component_name,\nROUND (1 - VECTOR_DISTANCE\nso. component_embedding,\nVECTOR_EMBEDDING (ADMIN.ALL_MINILM_L12_V2 USING ' precision bearing\nCOSINE), 4) AS similarity\nFROM components so\nORDER BY similarity DESC\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\n1\n4\nA\nScript Output\nDBMS Output\nExplain Plan\nDownload - Execution time: 0.269 seconds\nCOMPONENT_NAI CATEGORY\nPrecision bearing... Motion assemblies\nSIMILARITY\n0.7913\nPrecision bearing...\nMotion assemblies\nPrecision bearing...\nMotion assemblies\nPrecision bearing...\nMotion assemblies\nPrecision bearing... Motion assemblies\n0.7899\n0.7869\n0.7865\n0.7846\n5:23:26 PM - 5 rows total\nAutotrace\n•••\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "component-quality-vector-search\/images\/sql-vector-values.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nData Load\nSELECT component_id,\ncomponent_name,\ncomponent_embedding\nFROM components;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload Execution time: 0.037 seconds\nCOMPONENT_ID COMPONENT_NAI COMPONENT_EMI\n4\n61 Precision bearing... [-0.0023995263,...\n75 Drive shaft P07 R... [0.041819375,-....\n90 Valve spool P08 ...\n[0.042097736,0...\n104 Motor bracket PO... [-0.015709646,0....\n108\nHeat exchanger p.. [0.0050412687,0\n* 0 A\n0 | 5:22:59 PM - 192 rows total\nLLUSER V\nLOW -\n60\n••.\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "getting-started\/images\/sql-connection.jpg",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nE\nData Load\nSELECT USER AS\n• \"User\",\nSYS_CONTEXT 'USEREN', 'CURRENT_SCHEMA') AS\n\"Schema\",\nSYSTIMESTAMP AS \"Checked At\";\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nUSER\nLLUSER\nDownload - Execution time: 0.003 seconds\nSCHEMA\nLLUSER\nCHECKED AT\n09\/21\/2026, 06:2...\n* 1 A 0 203 0 1 6:29:34 PM - 1 rows total\nLLUSER V\nLOW Y\n60\n•••\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 716,
+      "path" : "introduction\/images\/demo-welcome.jpg",
+      "text" : "ORACLE\nSeer Manufacturing LiveStack\nWelcome\nORACLE AI DATABASE 26AI\nCONVERGED DATA\nData Foundation\nJSON DUALITY GRAPH\nOperations Command\nCenter\nIN-MEMORY\nNATIVE JSON\nProduction Signal Monitor\nVECTOR SEARCH\nVPD\nNINE USE CASES, ONE AA-40U KELOVERT SIURTI\nThe demo follows Servo Drive Controller AX-400 from supplier delay and constrained PCB material through production signals,\nwork-order schedule risk, plant capacity decisions, OML scoring, natural-language analysis, and Al-assisted corrective action.\nEach scene proves how the same governed Oracle Al Database 26ai foundation supports a complete manufacturing operations\nconversation.\nData Foundation\nLoad the Seer Manufacturing dataset that\nlinks AX-400 parts, WO-4501, CircuitForge,\nPCB Rev C, plants, signals, graph evidence,\nOML outputs, and agent audit history.\nSupplier and Production-Risk Graph\nTrace the path from CircuitForge to PCB Rev\nC, AX-400, WO-4501, Detroit Line A, scrap\nrisk, and schedule recovery actions.\nOML Demand and Capacity Analytics\nScore demand, capacity planning, scrap\nexposure, downtime risk, customer\ncommitments, and manufactured-part\nclusters with in-database OML.\nOperations Command Center\nSpot reduced throughput, rising quality\ndefects, AX-400 schedule variance, supplier\npressure, capacity exposure, and agent\nactivity in one operating view.\nPlant Capacity and Routing Map\nFind which plants and production lines can\nabsorb AX-400 demand, where OEE and line\ncapacity are tight, and how work-order routes\naffect recovery options.\nAsk Manufacturing Data\nAsk natural-language questions about WO-\n4501, AX-400, supplier delay, scrap,\ndowntime, and plant capacity against\ngoverned Oracle views.\nProduction Signal Monitor\nSearch telemetry, quality bulletins, supplier\nupdates, and demand signals to understand\nwhy Servo Drive Controller AX-400 is under\npressure.\nWork Orders\nInspect governed work-order rows and JSON\nduality documents so production teams see\nthe same AX-400 context through both\ninterfaces.\nManufacturing Agent Console\nTurn findings into supplier follow-up, line-\nbalancing, maintenance windows, quality\ncontainment, and corrective actions through\naudited Al agent workflows.\nLD\nStart the demo\nDemo customer name\nACTIVE MANUFACTURING DATASET\nDemo Data - 9\/10\/2026, 1:39:42\nPM\nJC\nJessica Chen\nGlobal Admin\nKey Manufacturing Use Cases Featured\nShowing 1-3 of 9\nData Foundation\nOperations Command Center\nProduction and Quality Signals",
+      "width" : 1272
+    },
+    {
+      "height" : 1280,
+      "path" : "introduction\/images\/seer-manufacturing-erd-illustrated.png",
+      "text" : "SEER MANUFACTURING\nThe core data model\nCUSTOMER_SITES\nPK CUSTOMER_SITE_ID\nSITE_NAME\nREQUIREMENTS (JSON)\n1\nPLANTS\nPK PLANT_ID\nPLANT_NAME\nDAILY_CAPACITY_UNITS\n1\n1\nPRODUCTION\nN\nNy\nPRODUCTION_ORDERS\nPK PRODUCTION_ORDER_ID\nFK CUSTOMER_SITE_ID\nFK\nPLANT_ID\nSCHEDULED_START \/ DUE_DATE\nORDER_STATUS\n1\nN\nCOMPONENTS\nPK\nCOMPONENTD\nFK PLANT_ID\nMATERIAL_ GRADE\nPROCESS_ROUTE\nUNIT_COST\n1\nN\nPRODUCTION_ORDER_LINES\nPK ORDER_LINE_ID\nFK PRODUCTION_ORDER_ID\nFK COMPONENT_D\nQUANTITY\nUNIT_COST \/ LINE_TOTAL\nPK = primary key\nFK = foreign key\n1:N = one-to-many\nOne plant per production order. Quantities are independent of scheduled dates.",
+      "width" : 960
+    },
+    {
+      "height" : 720,
+      "path" : "introduction\/images\/seer-manufacturing-introduction.png",
+      "text" : "SEER MANUFACTURING\nOne component concern. One connected team.\nInspect the\ncomponent\nTrace affected\norders\nPlan the response\nCNC\nMILL",
+      "width" : 1280
+    },
+    {
+      "height" : 716,
+      "path" : "plant-routing-spatial\/images\/demo-spatial-map.jpg",
+      "text" : "ORACLE\nSeer Manufacturing LiveStack\nIF\nVECTOR SEARCH\nVPD\nManufacturing Risk Graph\nPROPERTY GRAPH\nSQL\/PGQ\nPlant Capacity & Routing\nMap\nORACLE SPATIAL\nVPD\nWork Orders\nJSON DUALITY\nVPD\nOML Demand & Capacity\nAnninind\nDemo customer name\nACTIVE MANUFACTURING DATASET\nDemo Data - 9\/10\/2026, 1:39:42\nPM\nJC\nJessica Chen\nGlobal Admin\n12\nACTIVE PLANTS\ncapacity centers online\n74.0K\nAVAILABLE CAPACITY\nunits available for scheduling\n1.1K\nACTIVE WORK ORDERS\nqueued across plant routes\nJessica Chen\nGlobal Admin\n12 plants visible\n= MAP LAYERS\n• Customer Commitment Risk\n• Plants & Production Lines\nWork Order Production Routes\n• Maintenance & Capacity Zones\n• Customer Account Density\n• Capacity Planning Regions\nADA\nMEXICO\n• Final assembly\nOEE load target 85%:\n• Production line\n• below target\n• Supplier\/prototype cell\n65-84% near target\n85%+ overloaded\nVENEZUELA\nCOLOMBIA\n24\nCAPACITY ALERTS\nrisk items needing review\n• VPD global\nSDO_GEOMETRY production routing\nNearest routing: ACTIVE - IDX_FC_SPATIAL",
+      "width" : 1272
+    },
+    {
+      "height" : 661,
+      "path" : "plant-routing-spatial\/images\/moon.png",
+      "text" : "Lab 5: Find the Closest Manufacturing Plant\nFind nearby plants for\ncustomer production work.\nMoon\nSpatial & Geo\nSpecialist",
+      "width" : 1280
+    },
+    {
+      "height" : 734,
+      "path" : "plant-routing-spatial\/images\/sql-spatial-chicago.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n* = Aa -\nConsumer group:\nData Load\nLOW Y\n6id\n20\n21\n22\n23\n24\n25\n26\nSELECT hp.plant_name,\ndr. region_name,\ndr. demand_index\nFROM plants hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = Chicago Manufacturing Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\n-\nQuery Result\n4\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload - Execution time: 0.013 seconds\nPLANT_NAME\nCITY\nSEER Aurora Plant\nAurora\nSEER Chicago Pl...\nChicago\nSEER Joliet Plant\nJoliet\nSEER Milwaukee ...\nMilwaukee\nSEER Indianapoli...\nIndianapolis\n5:26:15 PM - 10 rows total\nSTATE_PROVINCE BOUNDARY_DISTA BOUND.\nIllinois\nIllinois\nIllinois\nWisconsin\n82.02\nIndiana\n200.04\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "plant-routing-spatial\/images\/sql-spatial-new-york.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nData Load\n6id\n12\n13\n14\n15\n16\n17\n18\nSELECT hp.plant_name,\ndr. regionname,\ndr. demand_index\nFROM plants hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = New York Manufacturing Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n4\nDownload - Execution time: 0.012 seconds\nPLANT_NAME\nCITY\nSEER Edison Plant\nEdison\nSEER Newark Plant Newark\nSEER Brooklyn Pl... Brooklyn\nSEER Jersey City... Jersey City\nSEER Stamford Pl... Stamford\n0 | 5:26:03 PM - 10 rows total\nSTATE_PROVINCE BOUNDARY_DISTA REGION\nNew Jersey\nNew Jersey\nNew York\nNew Jersey\nConnecticut\n0 New Yor\n0 New Yor\n0 New Yor\n0 New Yor\n0 New Yor\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "plant-routing-spatial\/images\/sql-spatial-points.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\n* = Aa -\nData Load\n6id\n10\n11\n12\nSELECT hp.plant_id,\nDBMS_LOB. SUBSTR\n) AS location_geojson\nFROM plants hp\nWHERE hp.plant_id IN (1, 3, 16)\nORDER BY hp.plant_id;\nQuery Result\nPLANT_ID\n1\nScript Output\nDBMS Output\nExplain Plan\nDownload Execution time: 0.126 seconds\nPLANT_NAME\nCITY\n1 SEER Edison Plant\nEdison\n3 SEER Brooklyn PI...\nBrooklyn\n16 SEER Chicago PL...\nChicago\nAutotrace\n•••\nSTATE_PROVINCE LATITUI\nNew Jersey\nNew York\nIllinois\nx 0 A\n0\n0 | 5:25:39 PM - 3 rows total\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "plant-routing-spatial\/images\/sql-spatial-routing.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nC\n* = Aa -\nData Load\n6id\n52\n61\n62\n63\n64\n65\n66\n67\nSELECT region_name,\ndaily_capacity_units,\ncapacity_utilization_pct,\nsite_plant_distance_km\nFROM ranked_plants\nWHERE plant_rank = 1\nORDER BY site_plant_distance_km, customer_site_id\nFETCH FIRST 25 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n4\nDownload Execution time: 0.557 seconds\nREGIONNAME\nDEMAND_INDEX\nCONTAI\nNew York Manufa...\nNew York Manufa...\nNew York Manufa...\nNew York Manufa...\nNew York Manufa...\nCUSTOMER_SITE. SITE_NAME\n91\n91\n91\n91\n91\n5:26:29 PM - 25 rows total\n421 Industrial Custom... Contacti\n643 Industrial Custom... Contacti\n537 Industrial Custom... Contacti\n389 Industrial Custom... Contacti\n101 Industrial Custom... Contacti\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 716,
+      "path" : "production-operations-dashboard\/images\/demo-dashboard-charts.jpg",
+      "text" : "ORACLE\nSeer Manufacturing LiveStack\nURALLE AEUAIADASE COMI\nCONVERGED DATA\nData Foundation\nJSON DUALITY\nGRAPH\nOperations Command\nCenter\nIN-MEMORY\nNATIVE JSON\nProduction Signal Monitor\nVECTOR SEARCH\nVPD\nManufacturing Risk Graph\nDemo customer name\nACTIVE MANUFACTURING DATASET\nDemo Data - 9\/10\/2026, 1:39:42\nPM\nJC\nJessica Chen\nGlobal Admin\naverage active plant load\nunits released last 7d\n3.0K\nWork Orders\n1.5K last 30d\n$26,302,655.00\nWork Order Value\n$13,311,676.00 last 30d\n468\nCritical Production\nSignals\n1.1K elevated\n1h\n24h\n48h\n7d\n1 Production Signal Velocity\n180000 |\n135000-\n90000-\n45000-\n21:00\n21:00\n30d\n21:00\n21:00\n21:00\n21:00\n21:00\n21:00\nforecast signal lift\n7d average units\nIF\n31\nHigh-Risk\nManufactured Parts\n2\nAgent Actions\n5.OK total signals\n375 active work-order\nroutes\n$ Order Value by Part Category\n30-day work-order value by manufactured-\npart category.\n49%\n2%\n2%\n2%\n2%\n32%\n5%\n6%\nCATEGORIES\n• Industrial Automation $6,200,980.00\nFlexible Assembly $4,064,090.00\n• Machine Tools $778,010.00\n• Mobility Components $601,740.00\n• Advanced Materials $291,620.00",
+      "width" : 1272
+    },
+    {
+      "height" : 716,
+      "path" : "production-operations-dashboard\/images\/demo-dashboard.jpg",
+      "text" : "ORACLE\nSeer Manufacturing LiveStack\nWelcome\nORACLE AI DATABASE 26AI\nCONVERGED DATA\nData Foundation\nJSON DUALITY\nGRAPH\nOperations Command\nCenter\nIN-MEMORY\nNATIVE JSON\nIF\nProduction Signal Monitor\nVECTOR SEARCH\nVPD\nDemo customer name\nACTIVE MANUFACTURING DATASET\nDemo Data - 9\/10\/2026, 1:39:42\nPM\nJC\nJessica Chen\nGlobal Admin\nOperations Command Center\nIN-MEMORY\nNATIVE JSON\nUse Your Own Manufacturing Data\nSeer Manufacturing Command Center\nMonitor the AX-400 production recovery story across work orders, supplier pressure, production signals, plant capacity,\nOML risk, and Al agent activity.\n& Refresh\nSCENE 2 - DETECT THE OPERATING ISSUE\nSpot reduced throughput and quality defects before they\nbecome missed output.\nThe command center turns the AX-400 recovery story into a live operating\npicture: reduced throughput on Detroit Line A, rising scrap and quality\ndefects, supplier pressure for PCB Rev C, work-order schedule variance,\nhigh-demand manufactured parts, routed work, and audited agent actions\nall come from the same Oracle foundation.\nWatch throughput, work-order activity, and\nproduction signals move together.\nLook for AX-400 demand pressure, line-capacity\nexposure, OEE degradation, and scrap risk.\nUse the dashboard as the handoff into signals,\ngraph, capacity, OML, and agents.\nDetect the Operating Issue\nMomentum categories and operating indicators summarize where throughput, OEE load, scrap watch, and demand variance are moving together.\n© Critical urgent production signal with high amplification urgency 85-100\nEscalating rapidly increasing supplier or quality pressure urgency 65-84\n• Rising early signal trend to watch this shift urgency 45-64\n• Stable baseline operating signal level <45\n3.6%\nOEE LOAD\n4.4%\nSCRAP WATCH\n2.1K\nTHROUGHPUT\n82.3%\nDEMAND VARIANCE\n296.1\/day\nPRODUCTION RATE",
+      "width" : 1272
+    },
+    {
+      "height" : 616,
+      "path" : "production-operations-dashboard\/images\/jessica.png",
+      "text" : "Lab 1: Build a Converged Dashboard Query\nFind components that need\nquality review before production.\nJessica\nDBA",
+      "width" : 1280
+    },
+    {
       "height" : 734,
       "path" : "production-operations-dashboard\/images\/sql-dashboard-followup.png",
       "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nData Load\n60\n114\n115\n116\n117\n118\n119\n120\n121\nproduction_activity activity\nity.component_id = impact.component_id\nnearest_plant nearest_plant_row\nponents closest to the investigation question first.\nimpact breaks ties so the result still favors larger business impact.\nm. semantic_similarity DESC NULLS LAST,\nmpact. affected_orders DESC\nT 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.363 seconds\n4\nCOMPONENT_NAI PLANT_NAME\nDrive shaft P15 R... SEER Joliet Plant\nDrive shaft P14 R... SEER Aurora Plant\nDrive shaft P16 R... SEER Chicago Pl...\nDrive shaft P13 R...\nSEER Milwaukee ...\nCOMPONENT_CAT\nDrive train\nDrive train\nDrive train\nDrive train\nDrive shaft P10 R. SEER Detroit Plant\nDrive train\nURGENT_QUALITY AVG_SE\n8\n8\n8\n8\n8\n5:19:23 PM - 10 rows total\n& Powered by ORDS",
@@ -14,28 +128,130 @@
       "width" : 736
     },
     {
-      "height" : 616,
-      "path" : "production-operations-dashboard\/images\/jessica.png",
-      "text" : "Lab 1: Build a Converged Dashboard Query\nFind components that need\nquality review before production.\nJessica\nDBA",
-      "width" : 1280
-    },
-    {
       "height" : 734,
-      "path" : "quality-review-oml\/images\/oml-prediction-impact.png",
-      "text" : "= ORACLE Marhing\nE LLUSER Project\nLLUSER Workspace\nLLUSER V ?\nLeac\nDer\nAlg\nDer\nGel\nGel\nNei\nRar\nModel Detail - GLM_69E9113CB9\nPrediction Impacts\nName =\nPrediction Impact\nAVG_DEFECT_RATE...\nConfusion Matrix\nU I\nAVG_DEFECT_RATE_PCT\nAVG DOWNTIME MINUTES\nNUMBER\nNUMBER",
+      "path" : "production-order-duality\/images\/sql-duality-contract.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\nAa -\nData Load\n60\nSELECT view_name,\nallow_insert,\nallow_update,\nallow_delete\nFROM user_json_duality_views\nWHERE view_name = PRODUCTION_ORDERS_DV';\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nVIEW_NAME\nPRODUCTION_O...\nDownload Execution time: 0.024 seconds\nALLOW_INSERT\nALLOW_UPDATE\ntrue\ntrue\nALLOW_DELETE\nfalse\n* 0A 0 2030 5:20:52 PM - 1 rows total\nPowered by ORDS",
       "width" : 736
     },
     {
       "height" : 734,
-      "path" : "quality-review-oml\/images\/oml-home.jpg",
-      "text" : "= ORACLE Marhing\n› What's New\nLLUSER Project\nLLUSER Workspace\nLLUSER V |\nv Recent Notebooks\nNothing to Display\nv Quick Actions\nv Recent Experiments\nNothing to Display\nAutoML\nCreate and run\nAutoML\nExperiments\nWorkflows\nCreate and run OML\nWorkflows\nv Recent Workflows\nNothing to Display\nData Science\nAgent\nChat with Data\nScience Agent\nModels\nManage and Deploy\nMachine Learning\nModels\nNotebooks\nThe place for data\ndiscovery and\nanalytics\nData Monitors\nMonitor Data Drift\nModel Monitors\nMonitor Model Drift\nScratchpad\nRun Scratchpad",
+      "path" : "production-order-duality\/images\/sql-duality-document.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\nData Load\n60\nSELECT data AS production_order_document\nFROM production_orders_dv\nFETCH FIRST 1 ROW ONLY;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload - Execution time: 0.008 seconds\nColumn \"PRODUCTION_ORDER_DOCUMENT\" row 1\n\"customerSiteId\": 185,\n\"scheduledStart\": \"2026-09-2300: 00: 00\",\n\"priorityScore\": 83,\n\"setupCost\": 0,\n\"dueDate\": \"2026-09-29T00: 00:00\",\n\"createdAt\": \"2026-08-2010: 00: 00\",\n\"items\": [\n5:20:04 PM - 1 rows total\nPowered by ORDS",
       "width" : 736
     },
     {
-      "height" : 649,
-      "path" : "quality-review-oml\/images\/otto.png",
-      "text" : "Lab 6: Build a Quality Review Watchlist\nUse inspection measurements\nto flag components for review.\nOtto\nData Scientist",
+      "height" : 734,
+      "path" : "production-order-duality\/images\/sql-duality-projection.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nEa\nAa -\nData Load\n6id\nSELECT JSON_VALUE(rd. data, 's._id' RETURNING NUMBER) AS\nproduction_order_i\ng.email AS contact_email\nFROM production_orders_d rd\nJOIN customer_sites g\nON g. customer_site_id = JSON_VALUE(rd.data, '$.customerSiteId' RETURNING\nWHERE JON_VALUE rd.data, '$_id' RETURNING NUMBER) = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.008 seconds\nPRODUCTION_OR ORDER_STATUS\nCONTACT_EMAIL\n900001 released\nproduction0001...\n* 0 A 0 20 0 1 5:21:50 PM - 1 rows total\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-order-duality\/images\/sql-duality-relational.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nData Load\nSELECT r.production_order_id AS production_order_id,\ng. email AS contact_email\nFROM production_orders r\nJOIN customer_sites g\nONg. customer_site_id = r.customer_site_id\nWHERE r.production_order_id = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.014 seconds\nPRODUCTION_OR ORDER_STATUS\n900001 released\nCONTACT_EMAIL\nproduction0001..\n* 0M 0 20 0 5:22:08 PM - 1 rows total\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-order-duality\/images\/sql-duality-released.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• A\nConsumer group:\nLOW Y\n₺= A - I\nData Load\n10\nSELECT .production_order_id AS production_order_id,\nrn. line_total\nFROM production_orders r\nJOIN production_order_lines rn ON rn.production_order_id = r.production_or\nJOIN components so ON so. component_id = rn.component_id\nWHERE r.production_order_id = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.007 seconds\nPRODUCTION_OR ORDER_STATUS\nORDER_LINE_ID\nCOMPONENT_NAI QUANTI\n900001|\nreleased\n990001\nPrecision bearing...\n* 0 A 0 2030 5:21:27 PM - 1 rows total\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 693,
+      "path" : "production-order-duality\/images\/thomas.png",
+      "text" : "Lab 2: Build a JSON Application Model\nManage production orders\nas JSON documents.\nThomas\nDeveloper",
       "width" : 1280
+    },
+    {
+      "height" : 753,
+      "path" : "production-quality-network\/images\/bob.png",
+      "text" : "Lab 4: Trace a Production Quality Network\nFollow shared material lots\nacross production orders.\nBob\nGraph Specialist",
+      "width" : 1280
+    },
+    {
+      "height" : 716,
+      "path" : "production-quality-network\/images\/demo-network-overview.jpg",
+      "text" : "ORACLE\nSeer Manufacturing LiveStack\nCenter\nIN-MEMORY\nNATIVE JSON\nIF\nProduction Signal Monitor\nVECTOR SEARCH\nVPD\nManufacturing Risk Graph\nPROPERTY GRAPH\nSQL\/PGQ\nPlant Capacity & Routing\nMap\nORACLE SPATIAL\nVPD\n- Work Orders\nDemo customer name\nACTIVE MANUFACTURING DATASET\nDemo Data - 9\/10\/2026, 1:39:42\nPM\nJC\nJessica Chen\nGlobal Admin\nCENTER ENTITY\nProduction Signal 23442 • Pro\nGRAPH DEPTH (HOPS)\nhop\nhops\nhops\nhops\nTraverse up to 2 relationship layers\nhops\n8.1K\nGRAPH ENTITIES\ncurrent dataset\n15.9K\nRELATIONSHIPS\ncurrent dataset\n19\nVISIBLE CASES\n2 hops traversed\nSQL\/PGQ TRAVERSAL\nProduction Signal 23442\n10 rendered \/ 380 traversed entities 9 rendered \/ 379 traversed relationships 5 GRAPH_TABLE executions\nPlant: Detroit Fi...\nSupplier: Precis.\nWork Order: WO-5266\nPlant: Phoenix In...\nProduction Signal...\nManufactured Part....\nProduction Signa...\nProduction Signa...\nWork Order: WO-6862ylant: Dallas Mob....\n• Part\n• Plant\n• Production Signal\n• Supplier\n• Work Order\nCenter Entity\nProduction Signal 23442\nOperations huddle: prioritize PrecisionCast Foundry\nWelded Structural Bracket Set before the weekend\nproduction surge\n99.8\nRISK SCORE\nProduction Signal\n9.4M\nVOLUME\nProduction Signals\nENTITY KEY\nSIGNAL-23442\nSOURCE OBJECT\nMANUFACTURING_PRODUCTI\nON_SIGNALS\nSOURCE KEY\n23442\nDATASET VERSION\nv1\nPROVENANCE\nSource-linked relational row\nSOURCE VERIFICATION Verified\n• San Diego, California",
+      "width" : 1272
+    },
+    {
+      "height" : 716,
+      "path" : "production-quality-network\/images\/demo-network-query.jpg",
+      "text" : "ORACLE\nSeer Manufacturing LiveStack\nCenter\nIN-MEMORY\nNATIVE ISON\nIF\nProduction Signal Monitor\nVECTOR SEARCH\nVPD\nManufacturing Risk Graph\nPROPERTY GRAPH\nSQL\/PGQ\nPlant Capacity & Routing\nMap\nORACLE SPATIAL\nVPD\n- Work Orders\nDemo customer name\nACTIVE MANUFACTURING DATASET\nDemo Data - 9\/10\/2026, 1:39:42\nPM\nJC\nJessica Chen\nGlobal Admin\nManufacturing Risk\nGraph\nPROPERTY GRAPH\nSQL\/PGQ\nUse Your Own Manufacturing Data\n6 Manufacturing Risk Graph\nOracle graph paths connect suppliers, parts, plants, work orders, and production signals\nrebuilt from the active relational dataset.\nSCENE 4 - TRACE THE RISK PATH\nFollow the supplier-to-work-\norder chain behind WO-4501.\nThe graph scene rebuilds current\nsupplier-to-part-to-work-order-to-plant\npaths and connects production signals\nto the parts and work orders they\nsupport. The findings panel turns those\nlive relational paths into supplier,\ncapacity, and schedule actions.\nSelect suppliers, parts, plants, work\norders, production signals, or risk\ncases.\nIncrease graph depth to expose\nmulti-hop supplier, capacity, signal,\nand schedule paths.\nUse production-risk findings to\ndecide where recovery work should\nstart.\nCENTER ENTITY\nProduction Signal 23442 • Prc -\nGRAPH DEPTH (HOPS)\nhop\nhops\nhops\nhops\nTraverse up to 2 relationship layers\nhops\n8.1K\nGRAPH\ncurrent\nORACLE INTERNALS\nORACLE RUNTIME EVIDENCE\nThe network is traversed directly through Oracle\nSQL Property Graph queries. The values below\ncome from the active API response.\nSQL Property Graph\nSQL\/PGQ GRAPH_TABLE\nPer-vertex provenance\nVPD-aware execution\nSOURCE OBJECT\nMANUFACTURING_PRODUCTION_NE\nTWORK\nEXECUTION\nsql-property-graph\nQUERY KEY\nmanufacturing-network-\nbounded-sql-pgq-bfs-v2\nDATASET\ndemo \/ v1\nSELECT DISTINCT *\nFROM GRAPH_TABLE (\nmanufacturing_production_network\nMATCH\n(seed IS manufacturing_entity\nWHERE seed.entity_id IN (:seede))\n-(relationship IS production_link)-\n(neighbor IS manufacturing_entity)\nCOLUMNS (\nrelationship. relationship_id AS relationshi\nrelationship. from_entity_id AS from_entity.\nrelationship.to_entity_id AS to_entity_id,\nrelationship. relationship_type AS relations\nrelationship.strength AS strength,\nrelationship. interaction_count AS interacti\nrelationship.evidence_text AS evidence_text\nSQL\/PGQ TRAVERSAL",
+      "width" : 1272
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/graph-import-dialog.png",
+      "text" : "• Notebooks\nType to search\nintroduction\npg\nImport notebooks)\nDrag and Drop\nSelect or drop files here.\nNo files selected.\nCancel\nDETACHED\n& LLUSER -\nImporting notebooks...\nCreate\nIS\nrdf\n>\nLast Edit\nImport\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/graph-import-file.png",
+      "text" : "• Notebooks\nType to search\nintroduction\npg\nImport notebooks)\nDrag and Drop\nSelect or drop files here.\nSelected files:\nmanufacturing-production-\nquality-graph-studio.dsnb\nCancel\nDETACHED\n& LLUSER -\nImporting notebooks...\nCreate\nIS\nrdf\n>\nLast Edit\nDelete\nImport\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/graph-launch.jpg",
+      "text" : "ORACLE' | Launchpad\nSearch Database (*+K)\n& LLUSER V\nPinned & Recently Visited\nDevelopment\nData Studio\nDownloads\nBaL SQL\nI Data Modeler\n* REST\nEo Liquibase\nC) JSON\nGraph Studio\nGraph Studio automates the creation of property and\nRDF graphs for knowledge graphs and other graph\napplications, and includes interactive tools to query,\nanalyze, and visualize them in Autonomous Al\nDatabase.\n4 0 2 40\nREXx\nIla Charts\nCo Scheduling\nDocumentation\nUsing Graph Studio\nEs JavaScript\n* Machine Learning\nDo APEX\n• Graph Studio\nOpen\n• Spatial Studio\n6:32:36 PM - REST call resolved successfully.\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/graph-notebook-top.png",
+      "text" : "ATTACHED\n& LLUSER -\nI\n• sta\n<\/>\nProduction Quality Network with Property Graph\n<\/>\nThis query treats the production quality data as a graph. In the MATCH pattern, (seed IS\nentity) is the starting production order, -[e IS related_to]->(1,2} means follow one or two\nrelationship hops, and (reached IS entity) is every entity reached from that starting point.\nThe WHERE clause anchors the search on PO-8841, and the COLUMNS clause returns graph\nproperties in a normal SQL result table.\nTL:-. .-u-... L-11-\n.........cn..1...1---\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/graph-notebooks.png",
+      "text" : "• Notebooks\nType to search\nintroduction\npgql\ngraph server\nName\nGetting Started\nUse Cases\nDETACHED\nO LLUSER -\nImport\nCreate\nmoviestream\npgx\nproperty graphs\nrdf\nAuthor\nLast Edit\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/graph-studio-overview.png",
+      "text" : "• DETACHED 8, LLUSER -\n• Overview\nPick up active workstreams or launch something new.\nQuickstart\nCreate Graph\nDefine a graph from database tables.\nNew Notebook\nAnalyze graphs interactively.\nGraph Explorer\nExplore and visualize property graphs.\nCompute Environment Configuration\nManage the compute environment.\nJobs\nView All\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/live-09-graph-notebook-table.png",
+      "text" : "ATTACHED\n& LLUSER -\nC\nMIln\nType to search\nENTITY_KEY =\nPO-8841\nLOT-ST-91A7\nPO-5077\nINSPECTION-0199\nMACHINE-CNC-017\nPage\nDISPLAY_NAME =\nProduction order 8841\nMaterial lot ST-91A7\nProduction order 5077\nDimensional inspection 0199\nCNC machine 017\n1\nof 2(1-5 of 9 items)\n2\nENTITY_TYPE -\nproduction_order\nmaterial_lot\nproduction_order\ninspection\nmachine\n•\nRISK\n96\n94\n91\n89\n88\nLoad More\n249ms @a few seconds ago\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/live-10-graph-production-network.png",
+      "text" : "4\nvertex 1a(v1) As V1_10,\nedge_id (el) AS elid,\nvertex_id (v2) AS v2_id\n80\n฿ - 83\n• N\nQ Search = @\nMACHINE-CN...\nPLANT-001\nINSPECTION..\nPO-5077\nPO-8841\nLOT-ST-91A...\nCERT-ST-91...\nPO-1190\nSUPPLIER-O...\n• ATTACHED\nLLUSER Y\n* ENTITY_KEY\nENTITY\nRISK_SCORE >= 90\nRISK SCORE < 90\nRISK_SCORE <= 50\nv Edges\nHidden Connection\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/live-11-graph-shared-lot.png",
+      "text" : "E\nO\neage_ale\/\nAS relatea_to_1a,\nvertex_id (material_lot) AS material_lot_id\n00\n\" 4-\nEl\nSUPPLIER-O...\nPO-1190\nLOT-ST-91A...\n6 of 6 vertices\nof 16 elements, 100.00%\n10 of 10 edges1...\nATTACHED\n& LLUSER\na Search = 8\nPO-8841\nPO-5077\n16\n707ms @ 33 minutes ago\nCopyright © 2026 Oracle and\/or its affiliates.",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/sql-graph-direct.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nEa\n* = A - I\nFROM\nGRAPH_TABLE production_quality_network\nCOLUMNS\nconnected. risk_score AS connected_risk\nData Load\nLOW\n60\n14\n15\n16\n17\nORDER BY connected_risk DESC;\n-\nQuery Result\n1\n2\n4\nScript Output\nDBMS Output\nExplain Plan\nDownload Execution time: 0.007 seconds\nPRODUCTION_OR CONNECTED_KEY CONNECTED_TYP\nPO-8841\nLOT-ST-91A7\nmaterial_lot\nPO-8841\nINSPECTION-0199\ninspection\nPO-8841\nPO-8841\nMACHINE-CNC-..\nPLANT-001\nmachine\nplant\nAutotrace\n••.\nRELATIONSHIP_T) CONNE\nUSES_LOT\nHAS_INSPECTION\nPROCESSED_ON\nAT_PLANT\nx 0 A 0\n0 | 5:24:30 PM - 4 rows total\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/sql-graph-four-hop.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nEa\n* = A - I\nFROM\nGRAPH_TABLE production_quality_network\nCOLUMNS\nreached. material_value AS material_value,\nreached. source_system AS source_system\nData Load\n60\n14\n15\n16\n17\n18\n19\nORDER BY risk_score DESC\nFETCH FIRST 25 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n1\n4\nx)\nDownload Execution time: 0.026 seconds\nENTITY_KEY\nPO-8841\nPO-8841\nLOT-ST-91A7\nLOT-ST-91A7\nPO-5077\nDISPLAY_NAME\nENTITY_TYPE\nProduction order... production_order\nProduction order... production_order\nMaterial lot ST-91... material_lot\nMaterial lot ST-91... material_lot\nProduction order... production_order\n0 | 5:24:45 PM - 21 rows total\nRELATIONSHIP_HI\nRISK_SI\n2\n4\n1\n3\n2\n& Powered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "production-quality-network\/images\/sql-graph-shared.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nData Load\nLOW -\nEa\n* = Aa - #\nFROM GRAPH_TABLE ( production_quality_network\nCOLUMNS (\ne1. relationship_type AS e1_type,\ne2. relationship_type AS e2_type\n14\n21\n22\n23\n24\n25\n26\n)\nORDER BY combined_risk DESC, shared_entity\nFETCH FIRST 25 ROWS ONLY;\n-\nQuery Result\n1\n2\nORDER_A\nPO-8841\nPO-8841\nPO-5077\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.025 seconds\nSHARED_ENTITY\nSHARED_TYPE\nLOT-ST-91A7\nmaterial_lot\nLOT-ST-91A7\nmaterial_lot\nLOT-ST-91A7\nmaterial_lot\nORDER_B\nPO-5077\nPO-1190\nPO-1190\n••.\nA_RISK\n0 A 0 203 0 1 5:24:59 PM - 3 rows total\n& Powered by ORDS",
+      "width" : 736
     },
     {
       "height" : 734,
@@ -45,26 +261,8 @@
     },
     {
       "height" : 734,
-      "path" : "quality-review-oml\/images\/sql-oml-scoring.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• g\nConsumer group:\nLOW -\nC\nData Load\n26\n37\n38\n39\n40\n41\nSELECT so. component_id,\nFROM scored_components scored_component\nJOIN components so\nON\nso. component_id = scored_component.component_id\nORDER BY scored_component. review_score DESC,\nso. component_id;\n-\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.015 seconds\nCOMPONENT_ID\nCOMPONENT_NAI CATEGORY\n4\n1 Precision bearing... Motion assemblies\n3 Drive shaft P01 R...\nDrive train\n5 Hydraulic manifol... Fluid control\n7 Pump impeller PO... Fluid control\n9 Sensor enclosure... Controls\nx 0 A 0\n0|5:28:35 PM - 12 rows total\nPREDICTED_REVIE REVIEW\nREVIEW\nREVIEW\nREVIEW\nREVIEW\nREVIEW\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "quality-review-oml\/images\/sql-oml-model.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\n* = A -\nData Load\nSELECT model_name,\nmining_function,\nalgorithm\nFROM\nuser_mining_models\nWHERE model_name = 'OTTO_QUALITY_REVIEW MODEL';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload Execution time: 0.007 seconds\nMODEL_NAME\nMININGFUNCTIO ALGORITHM\nOTTO_QUALITY_... CLASSIFICATION GENERALIZED_LI..\n* 0 4 0 203 0 1 5:28:06 PM - 1 rows total\nLLUSER V\nLOW\n60\n••.\nPowered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "quality-review-oml\/images\/sql-oml-training.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nData Load\n6id\n10\n11\n12\n13\nSELECT component_id,\nmaterial_value,\nreview_label\nFROM oml_quality_training_v\nORDER BY component_id\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nExplain Plan\n1\n4\nDBMS Output\nDownload - Execution time: 0.034 seconds\nCOMPONENT_ID\nCATEGORY\nMotion assemblies\n2 Motion assemblies\n3 Drive train\nUNIT_COST\n4 Drive train\n5 Fluid control\n* 0A 0 2030 5:26:56 PM - 10 rows total\nAutotrace\n...\n125\n85\n170\n210\n155\nTOTAL_OBSERVAT AVG_DE\n8\n8\n8\n8\n8\n4 Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "quality-review-oml\/images\/oml-settings.png",
-      "text" : "= ORACLE Maching\nComponent Quality Review\nComment\nData Source\nLLUSER.OML_QUALITY_TRAINING_\nPrediction Type\nClassification\n› Additional Settings\n• Features\nO Refresh\nName =\nLLUSER Project\nLLUSER Workspace\nPredict\nQ\nREVIEW_LABEL\nCase ID\nCOMPONENT_ID\nFilter\nType =",
+      "path" : "quality-review-oml\/images\/oml-home.jpg",
+      "text" : "= ORACLE Marhing\n› What's New\nLLUSER Project\nLLUSER Workspace\nLLUSER V |\nv Recent Notebooks\nNothing to Display\nv Quick Actions\nv Recent Experiments\nNothing to Display\nAutoML\nCreate and run\nAutoML\nExperiments\nWorkflows\nCreate and run OML\nWorkflows\nv Recent Workflows\nNothing to Display\nData Science\nAgent\nChat with Data\nScience Agent\nModels\nManage and Deploy\nMachine Learning\nModels\nNotebooks\nThe place for data\ndiscovery and\nanalytics\nData Monitors\nMonitor Data Drift\nModel Monitors\nMonitor Model Drift\nScratchpad\nRun Scratchpad",
       "width" : 736
     },
     {
@@ -87,87 +285,45 @@
     },
     {
       "height" : 734,
-      "path" : "production-order-duality\/images\/sql-duality-contract.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\nAa -\nData Load\n60\nSELECT view_name,\nallow_insert,\nallow_update,\nallow_delete\nFROM user_json_duality_views\nWHERE view_name = PRODUCTION_ORDERS_DV';\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nVIEW_NAME\nPRODUCTION_O...\nDownload Execution time: 0.024 seconds\nALLOW_INSERT\nALLOW_UPDATE\ntrue\ntrue\nALLOW_DELETE\nfalse\n* 0A 0 2030 5:20:52 PM - 1 rows total\nPowered by ORDS",
+      "path" : "quality-review-oml\/images\/oml-prediction-impact.png",
+      "text" : "= ORACLE Marhing\nE LLUSER Project\nLLUSER Workspace\nLLUSER V ?\nLeac\nDer\nAlg\nDer\nGel\nGel\nNei\nRar\nModel Detail - GLM_69E9113CB9\nPrediction Impacts\nName =\nPrediction Impact\nAVG_DEFECT_RATE...\nConfusion Matrix\nU I\nAVG_DEFECT_RATE_PCT\nAVG DOWNTIME MINUTES\nNUMBER\nNUMBER",
       "width" : 736
     },
     {
       "height" : 734,
-      "path" : "production-order-duality\/images\/sql-duality-released.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• A\nConsumer group:\nLOW Y\n₺= A - I\nData Load\n10\nSELECT .production_order_id AS production_order_id,\nrn. line_total\nFROM production_orders r\nJOIN production_order_lines rn ON rn.production_order_id = r.production_or\nJOIN components so ON so. component_id = rn.component_id\nWHERE r.production_order_id = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.007 seconds\nPRODUCTION_OR ORDER_STATUS\nORDER_LINE_ID\nCOMPONENT_NAI QUANTI\n900001|\nreleased\n990001\nPrecision bearing...\n* 0 A 0 2030 5:21:27 PM - 1 rows total\nPowered by ORDS",
+      "path" : "quality-review-oml\/images\/oml-settings.png",
+      "text" : "= ORACLE Maching\nComponent Quality Review\nComment\nData Source\nLLUSER.OML_QUALITY_TRAINING_\nPrediction Type\nClassification\n› Additional Settings\n• Features\nO Refresh\nName =\nLLUSER Project\nLLUSER Workspace\nPredict\nQ\nREVIEW_LABEL\nCase ID\nCOMPONENT_ID\nFilter\nType =",
+      "width" : 736
+    },
+    {
+      "height" : 649,
+      "path" : "quality-review-oml\/images\/otto.png",
+      "text" : "Lab 6: Build a Quality Review Watchlist\nUse inspection measurements\nto flag components for review.\nOtto\nData Scientist",
+      "width" : 1280
+    },
+    {
+      "height" : 734,
+      "path" : "quality-review-oml\/images\/sql-oml-model.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\n* = A -\nData Load\nSELECT model_name,\nmining_function,\nalgorithm\nFROM\nuser_mining_models\nWHERE model_name = 'OTTO_QUALITY_REVIEW MODEL';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload Execution time: 0.007 seconds\nMODEL_NAME\nMININGFUNCTIO ALGORITHM\nOTTO_QUALITY_... CLASSIFICATION GENERALIZED_LI..\n* 0 4 0 203 0 1 5:28:06 PM - 1 rows total\nLLUSER V\nLOW\n60\n••.\nPowered by ORDS",
       "width" : 736
     },
     {
       "height" : 734,
-      "path" : "production-order-duality\/images\/sql-duality-relational.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nData Load\nSELECT r.production_order_id AS production_order_id,\ng. email AS contact_email\nFROM production_orders r\nJOIN customer_sites g\nONg. customer_site_id = r.customer_site_id\nWHERE r.production_order_id = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.014 seconds\nPRODUCTION_OR ORDER_STATUS\n900001 released\nCONTACT_EMAIL\nproduction0001..\n* 0M 0 20 0 5:22:08 PM - 1 rows total\nPowered by ORDS",
+      "path" : "quality-review-oml\/images\/sql-oml-scoring.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• g\nConsumer group:\nLOW -\nC\nData Load\n26\n37\n38\n39\n40\n41\nSELECT so. component_id,\nFROM scored_components scored_component\nJOIN components so\nON\nso. component_id = scored_component.component_id\nORDER BY scored_component. review_score DESC,\nso. component_id;\n-\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.015 seconds\nCOMPONENT_ID\nCOMPONENT_NAI CATEGORY\n4\n1 Precision bearing... Motion assemblies\n3 Drive shaft P01 R...\nDrive train\n5 Hydraulic manifol... Fluid control\n7 Pump impeller PO... Fluid control\n9 Sensor enclosure... Controls\nx 0 A 0\n0|5:28:35 PM - 12 rows total\nPREDICTED_REVIE REVIEW\nREVIEW\nREVIEW\nREVIEW\nREVIEW\nREVIEW\n& Powered by ORDS",
       "width" : 736
     },
     {
       "height" : 734,
-      "path" : "production-order-duality\/images\/sql-duality-projection.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nEa\nAa -\nData Load\n6id\nSELECT JSON_VALUE(rd. data, 's._id' RETURNING NUMBER) AS\nproduction_order_i\ng.email AS contact_email\nFROM production_orders_d rd\nJOIN customer_sites g\nON g. customer_site_id = JSON_VALUE(rd.data, '$.customerSiteId' RETURNING\nWHERE JON_VALUE rd.data, '$_id' RETURNING NUMBER) = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.008 seconds\nPRODUCTION_OR ORDER_STATUS\nCONTACT_EMAIL\n900001 released\nproduction0001...\n* 0 A 0 20 0 1 5:21:50 PM - 1 rows total\nPowered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-order-duality\/images\/sql-duality-document.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\nData Load\n60\nSELECT data AS production_order_document\nFROM production_orders_dv\nFETCH FIRST 1 ROW ONLY;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload - Execution time: 0.008 seconds\nColumn \"PRODUCTION_ORDER_DOCUMENT\" row 1\n\"customerSiteId\": 185,\n\"scheduledStart\": \"2026-09-2300: 00: 00\",\n\"priorityScore\": 83,\n\"setupCost\": 0,\n\"dueDate\": \"2026-09-29T00: 00:00\",\n\"createdAt\": \"2026-08-2010: 00: 00\",\n\"items\": [\n5:20:04 PM - 1 rows total\nPowered by ORDS",
+      "path" : "quality-review-oml\/images\/sql-oml-training.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nData Load\n6id\n10\n11\n12\n13\nSELECT component_id,\nmaterial_value,\nreview_label\nFROM oml_quality_training_v\nORDER BY component_id\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nExplain Plan\n1\n4\nDBMS Output\nDownload - Execution time: 0.034 seconds\nCOMPONENT_ID\nCATEGORY\nMotion assemblies\n2 Motion assemblies\n3 Drive train\nUNIT_COST\n4 Drive train\n5 Fluid control\n* 0A 0 2030 5:26:56 PM - 10 rows total\nAutotrace\n...\n125\n85\n170\n210\n155\nTOTAL_OBSERVAT AVG_DE\n8\n8\n8\n8\n8\n4 Powered by ORDS",
       "width" : 736
     },
     {
       "height" : 693,
-      "path" : "production-order-duality\/images\/thomas.png",
-      "text" : "Lab 2: Build a JSON Application Model\nManage production orders\nas JSON documents.\nThomas\nDeveloper",
+      "path" : "selectai-agent\/images\/nina.png",
+      "text" : "Labs 7 & 8: Ask Manufacturing Questions and Build an Al Agent\nAsk about production orders\nand review the answers.\nJessica\nDBA\nNina\nProduction Analyst",
       "width" : 1280
-    },
-    {
-      "height" : 720,
-      "path" : "introduction\/images\/seer-manufacturing-introduction.png",
-      "text" : "SEER MANUFACTURING\nOne component concern. One connected team.\nInspect the\ncomponent\nTrace affected\norders\nPlan the response\nCNC\nMILL",
-      "width" : 1280
-    },
-    {
-      "height" : 1280,
-      "path" : "introduction\/images\/seer-manufacturing-erd-illustrated.png",
-      "text" : "SEER MANUFACTURING\nThe core data model\nCUSTOMER_SITES\nPK CUSTOMER_SITE_ID\nSITE_NAME\nREQUIREMENTS (JSON)\n1\nPLANTS\nPK PLANT_ID\nPLANT_NAME\nDAILY_CAPACITY_UNITS\n1\n1\nPRODUCTION\nN\nNy\nPRODUCTION_ORDERS\nPK PRODUCTION_ORDER_ID\nFK CUSTOMER_SITE_ID\nFK\nPLANT_ID\nSCHEDULED_START \/ DUE_DATE\nORDER_STATUS\n1\nN\nCOMPONENTS\nPK\nCOMPONENTD\nFK PLANT_ID\nMATERIAL_ GRADE\nPROCESS_ROUTE\nUNIT_COST\n1\nN\nPRODUCTION_ORDER_LINES\nPK ORDER_LINE_ID\nFK PRODUCTION_ORDER_ID\nFK COMPONENT_D\nQUANTITY\nUNIT_COST \/ LINE_TOTAL\nPK = primary key\nFK = foreign key\n1:N = one-to-many\nOne plant per production order. Quantities are independent of scheduled dates.",
-      "width" : 960
-    },
-    {
-      "height" : 734,
-      "path" : "plant-routing-spatial\/images\/sql-spatial-chicago.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n* = Aa -\nConsumer group:\nData Load\nLOW Y\n6id\n20\n21\n22\n23\n24\n25\n26\nSELECT hp.plant_name,\ndr. region_name,\ndr. demand_index\nFROM plants hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = Chicago Manufacturing Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\n-\nQuery Result\n4\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload - Execution time: 0.013 seconds\nPLANT_NAME\nCITY\nSEER Aurora Plant\nAurora\nSEER Chicago Pl...\nChicago\nSEER Joliet Plant\nJoliet\nSEER Milwaukee ...\nMilwaukee\nSEER Indianapoli...\nIndianapolis\n5:26:15 PM - 10 rows total\nSTATE_PROVINCE BOUNDARY_DISTA BOUND.\nIllinois\nIllinois\nIllinois\nWisconsin\n82.02\nIndiana\n200.04\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "plant-routing-spatial\/images\/sql-spatial-points.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\n* = Aa -\nData Load\n6id\n10\n11\n12\nSELECT hp.plant_id,\nDBMS_LOB. SUBSTR\n) AS location_geojson\nFROM plants hp\nWHERE hp.plant_id IN (1, 3, 16)\nORDER BY hp.plant_id;\nQuery Result\nPLANT_ID\n1\nScript Output\nDBMS Output\nExplain Plan\nDownload Execution time: 0.126 seconds\nPLANT_NAME\nCITY\n1 SEER Edison Plant\nEdison\n3 SEER Brooklyn PI...\nBrooklyn\n16 SEER Chicago PL...\nChicago\nAutotrace\n•••\nSTATE_PROVINCE LATITUI\nNew Jersey\nNew York\nIllinois\nx 0 A\n0\n0 | 5:25:39 PM - 3 rows total\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 661,
-      "path" : "plant-routing-spatial\/images\/moon.png",
-      "text" : "Lab 5: Find the Closest Manufacturing Plant\nFind nearby plants for\ncustomer production work.\nMoon\nSpatial & Geo\nSpecialist",
-      "width" : 1280
-    },
-    {
-      "height" : 734,
-      "path" : "plant-routing-spatial\/images\/sql-spatial-new-york.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nData Load\n6id\n12\n13\n14\n15\n16\n17\n18\nSELECT hp.plant_name,\ndr. regionname,\ndr. demand_index\nFROM plants hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = New York Manufacturing Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n4\nDownload - Execution time: 0.012 seconds\nPLANT_NAME\nCITY\nSEER Edison Plant\nEdison\nSEER Newark Plant Newark\nSEER Brooklyn Pl... Brooklyn\nSEER Jersey City... Jersey City\nSEER Stamford Pl... Stamford\n0 | 5:26:03 PM - 10 rows total\nSTATE_PROVINCE BOUNDARY_DISTA REGION\nNew Jersey\nNew Jersey\nNew York\nNew Jersey\nConnecticut\n0 New Yor\n0 New Yor\n0 New Yor\n0 New Yor\n0 New Yor\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "plant-routing-spatial\/images\/sql-spatial-routing.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nC\n* = Aa -\nData Load\n6id\n52\n61\n62\n63\n64\n65\n66\n67\nSELECT region_name,\ndaily_capacity_units,\ncapacity_utilization_pct,\nsite_plant_distance_km\nFROM ranked_plants\nWHERE plant_rank = 1\nORDER BY site_plant_distance_km, customer_site_id\nFETCH FIRST 25 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n4\nDownload Execution time: 0.557 seconds\nREGIONNAME\nDEMAND_INDEX\nCONTAI\nNew York Manufa...\nNew York Manufa...\nNew York Manufa...\nNew York Manufa...\nNew York Manufa...\nCUSTOMER_SITE. SITE_NAME\n91\n91\n91\n91\n91\n5:26:29 PM - 25 rows total\n421 Industrial Custom... Contacti\n643 Industrial Custom... Contacti\n537 Industrial Custom... Contacti\n389 Industrial Custom... Contacti\n101 Industrial Custom... Contacti\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "selectai-agent\/images\/sql-agent-tools.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLEUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\nAa -\nData Load\n6id\n8\n9\nSELECT tool_name,\nagent_name,\ntask_name,\nstart_date,\nend_date\nFROM user_ai_agent_tool history\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan Autotrace\n••.\n4\nx) 1\nDownload Execution time: 0.003 seconds\nTOOL_NAME\nINVOCATIO ID AE NAME\nSTART-\nNINA_MANUFAC...\nNINA_MANUFAC...\nNINA_MANUFAC...\nNINA_MANUFAC...\nNINA_MANUFAC....\nTASK_NAME\n7 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n6 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n5 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n4 NINA_MANUFAC... NINA_MANUFAC.. 09\/22\/21\n3 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n0 | 5:55:50 PM - 7 rows total\n& Powered by ORDS",
-      "width" : 736
     },
     {
       "height" : 734,
@@ -182,16 +338,16 @@
       "width" : 736
     },
     {
-      "height" : 693,
-      "path" : "selectai-agent\/images\/nina.png",
-      "text" : "Labs 7 & 8: Ask Manufacturing Questions and Build an Al Agent\nAsk about production orders\nand review the answers.\nJessica\nDBA\nNina\nProduction Analyst",
-      "width" : 1280
+      "height" : 734,
+      "path" : "selectai-agent\/images\/sql-agent-tools.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLEUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\nAa -\nData Load\n6id\n8\n9\nSELECT tool_name,\nagent_name,\ntask_name,\nstart_date,\nend_date\nFROM user_ai_agent_tool history\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan Autotrace\n••.\n4\nx) 1\nDownload Execution time: 0.003 seconds\nTOOL_NAME\nINVOCATIO ID AE NAME\nSTART-\nNINA_MANUFAC...\nNINA_MANUFAC...\nNINA_MANUFAC...\nNINA_MANUFAC...\nNINA_MANUFAC....\nTASK_NAME\n7 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n6 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n5 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n4 NINA_MANUFAC... NINA_MANUFAC.. 09\/22\/21\n3 NINA_MANUFAC... NINA_MANUFAC... 09\/22\/21\n0 | 5:55:50 PM - 7 rows total\n& Powered by ORDS",
+      "width" : 736
     },
     {
-      "height" : 734,
-      "path" : "selectai\/images\/sql-ai-refined-answer.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nEa\nAa -\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\n→> 'Show the five components with the highest schedu\nprofile_name\n→ 'genai',\naction\n= 'runsql'\n) AS answer;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nDownload Execution time: 8.415 seconds\nAutotrace\n...\nColumn \"ANSWER\" row 1\n1\n\"Component Name\" : \"Pump impeller P15 Rev A\",\n\"Category\": \"Fluid control\",\nClose\n* 0 A 0 203 0 1 5:33:35 PM - 1 rows total\nPowered by ORDS",
-      "width" : 736
+      "height" : 693,
+      "path" : "selectai\/images\/nina.png",
+      "text" : "Labs 7 & 8: Ask Manufacturing Questions and Build an Al Agent\nAsk about production orders\nand review the answers.\nJessica\nDBA\nNina\nProduction Analyst",
+      "width" : 1280
     },
     {
       "height" : 734,
@@ -207,146 +363,26 @@
     },
     {
       "height" : 734,
-      "path" : "selectai\/images\/sql-ai-object-list.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nData Load\nSELECT profile_name,\nattribute_name,\nattribute_value\nFROM\nuser_cloud_ai_profile_attributes\nWHERE profile_name = 'GENAI'\nAND attribute_name = 'object_list';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nPROFILE_NAME\nGENAI\nDownload Execution time: 0.01 seconds\nATTRIBUTE_NAME ATTRIBUTE_VALU\nobject_list\nK\"owner\": \"LLUS...\n* 0 A 0 203 0 1 5:29:26 PM - 1 rows total\nLLUSER V\nLOW\n60\n•••\nPowered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
       "path" : "selectai\/images\/sql-ai-narration.png",
       "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\n→> 'Show the five components with the highest schedu\nprofile_name → genai',\naction\n= 'narrate'\n) AS explanation;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 14.128 seconds\n1\nColumn \"EXPLANATION\" row 1\nThe top five components with the highest scheduled material value are:\nf1. **Pump impeller P15 Rev A** (Fluid control)\n2. **Pump impeller P07 Rev A** (Fluid control)\nClose\n* 0 A 0 20 0 5:34:14 PM - 1 rows total\nPowered by ORDS",
       "width" : 736
     },
     {
       "height" : 734,
+      "path" : "selectai\/images\/sql-ai-object-list.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nData Load\nSELECT profile_name,\nattribute_name,\nattribute_value\nFROM\nuser_cloud_ai_profile_attributes\nWHERE profile_name = 'GENAI'\nAND attribute_name = 'object_list';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nPROFILE_NAME\nGENAI\nDownload Execution time: 0.01 seconds\nATTRIBUTE_NAME ATTRIBUTE_VALU\nobject_list\nK\"owner\": \"LLUS...\n* 0 A 0 203 0 1 5:29:26 PM - 1 rows total\nLLUSER V\nLOW\n60\n•••\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
+      "path" : "selectai\/images\/sql-ai-refined-answer.png",
+      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nEa\nAa -\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\n→> 'Show the five components with the highest schedu\nprofile_name\n→ 'genai',\naction\n= 'runsql'\n) AS answer;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nDownload Execution time: 8.415 seconds\nAutotrace\n...\nColumn \"ANSWER\" row 1\n1\n\"Component Name\" : \"Pump impeller P15 Rev A\",\n\"Category\": \"Fluid control\",\nClose\n* 0 A 0 203 0 1 5:33:35 PM - 1 rows total\nPowered by ORDS",
+      "width" : 736
+    },
+    {
+      "height" : 734,
       "path" : "selectai\/images\/sql-ai-refined-generated.png",
       "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\n→> 'Show the five components with the highest schedu\nprofile_name\n→ 'genai',\naction\n='showsql\"\n) AS generated_sql;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload Execution time: 8.052 seconds\n1\nColumn \"GENERATED_SQL\" row 1\nSELECT\nc.COMPONENT_NAME AS \"Component Name\",\nc.CATEGORY AS \"Category\",\nSUM(pol.LINE_TOTAL) AS \"Summed Line Total\",\nClose\n* 0 A 0 20 0 5:32:45 PM - 1 rows total\nPowered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 693,
-      "path" : "selectai\/images\/nina.png",
-      "text" : "Labs 7 & 8: Ask Manufacturing Questions and Build an Al Agent\nAsk about production orders\nand review the answers.\nJessica\nDBA\nNina\nProduction Analyst",
-      "width" : 1280
-    },
-    {
-      "height" : 753,
-      "path" : "production-quality-network\/images\/bob.png",
-      "text" : "Lab 4: Trace a Production Quality Network\nFollow shared material lots\nacross production orders.\nBob\nGraph Specialist",
-      "width" : 1280
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/live-11-graph-shared-lot.png",
-      "text" : "E\nO\neage_ale\/\nAS relatea_to_1a,\nvertex_id (material_lot) AS material_lot_id\n00\n\" 4-\nEl\nSUPPLIER-O...\nPO-1190\nLOT-ST-91A...\n6 of 6 vertices\nof 16 elements, 100.00%\n10 of 10 edges1...\nATTACHED\n& LLUSER\na Search = 8\nPO-8841\nPO-5077\n16\n707ms @ 33 minutes ago\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/sql-graph-four-hop.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nEa\n* = A - I\nFROM\nGRAPH_TABLE production_quality_network\nCOLUMNS\nreached. material_value AS material_value,\nreached. source_system AS source_system\nData Load\n60\n14\n15\n16\n17\n18\n19\nORDER BY risk_score DESC\nFETCH FIRST 25 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n1\n4\nx)\nDownload Execution time: 0.026 seconds\nENTITY_KEY\nPO-8841\nPO-8841\nLOT-ST-91A7\nLOT-ST-91A7\nPO-5077\nDISPLAY_NAME\nENTITY_TYPE\nProduction order... production_order\nProduction order... production_order\nMaterial lot ST-91... material_lot\nMaterial lot ST-91... material_lot\nProduction order... production_order\n0 | 5:24:45 PM - 21 rows total\nRELATIONSHIP_HI\nRISK_SI\n2\n4\n1\n3\n2\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/graph-notebooks.png",
-      "text" : "• Notebooks\nType to search\nintroduction\npgql\ngraph server\nName\nGetting Started\nUse Cases\nDETACHED\nO LLUSER -\nImport\nCreate\nmoviestream\npgx\nproperty graphs\nrdf\nAuthor\nLast Edit\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/live-09-graph-notebook-table.png",
-      "text" : "ATTACHED\n& LLUSER -\nC\nMIln\nType to search\nENTITY_KEY =\nPO-8841\nLOT-ST-91A7\nPO-5077\nINSPECTION-0199\nMACHINE-CNC-017\nPage\nDISPLAY_NAME =\nProduction order 8841\nMaterial lot ST-91A7\nProduction order 5077\nDimensional inspection 0199\nCNC machine 017\n1\nof 2(1-5 of 9 items)\n2\nENTITY_TYPE -\nproduction_order\nmaterial_lot\nproduction_order\ninspection\nmachine\n•\nRISK\n96\n94\n91\n89\n88\nLoad More\n249ms @a few seconds ago\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/sql-graph-direct.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nEa\n* = A - I\nFROM\nGRAPH_TABLE production_quality_network\nCOLUMNS\nconnected. risk_score AS connected_risk\nData Load\nLOW\n60\n14\n15\n16\n17\nORDER BY connected_risk DESC;\n-\nQuery Result\n1\n2\n4\nScript Output\nDBMS Output\nExplain Plan\nDownload Execution time: 0.007 seconds\nPRODUCTION_OR CONNECTED_KEY CONNECTED_TYP\nPO-8841\nLOT-ST-91A7\nmaterial_lot\nPO-8841\nINSPECTION-0199\ninspection\nPO-8841\nPO-8841\nMACHINE-CNC-..\nPLANT-001\nmachine\nplant\nAutotrace\n••.\nRELATIONSHIP_T) CONNE\nUSES_LOT\nHAS_INSPECTION\nPROCESSED_ON\nAT_PLANT\nx 0 A 0\n0 | 5:24:30 PM - 4 rows total\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/graph-import-dialog.png",
-      "text" : "• Notebooks\nType to search\nintroduction\npg\nImport notebooks)\nDrag and Drop\nSelect or drop files here.\nNo files selected.\nCancel\nDETACHED\n& LLUSER -\nImporting notebooks...\nCreate\nIS\nrdf\n>\nLast Edit\nImport\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/sql-graph-shared.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nData Load\nLOW -\nEa\n* = Aa - #\nFROM GRAPH_TABLE ( production_quality_network\nCOLUMNS (\ne1. relationship_type AS e1_type,\ne2. relationship_type AS e2_type\n14\n21\n22\n23\n24\n25\n26\n)\nORDER BY combined_risk DESC, shared_entity\nFETCH FIRST 25 ROWS ONLY;\n-\nQuery Result\n1\n2\nORDER_A\nPO-8841\nPO-8841\nPO-5077\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.025 seconds\nSHARED_ENTITY\nSHARED_TYPE\nLOT-ST-91A7\nmaterial_lot\nLOT-ST-91A7\nmaterial_lot\nLOT-ST-91A7\nmaterial_lot\nORDER_B\nPO-5077\nPO-1190\nPO-1190\n••.\nA_RISK\n0 A 0 203 0 1 5:24:59 PM - 3 rows total\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/graph-launch.jpg",
-      "text" : "ORACLE' | Launchpad\nSearch Database (*+K)\n& LLUSER V\nPinned & Recently Visited\nDevelopment\nData Studio\nDownloads\nBaL SQL\nI Data Modeler\n* REST\nEo Liquibase\nC) JSON\nGraph Studio\nGraph Studio automates the creation of property and\nRDF graphs for knowledge graphs and other graph\napplications, and includes interactive tools to query,\nanalyze, and visualize them in Autonomous Al\nDatabase.\n4 0 2 40\nREXx\nIla Charts\nCo Scheduling\nDocumentation\nUsing Graph Studio\nEs JavaScript\n* Machine Learning\nDo APEX\n• Graph Studio\nOpen\n• Spatial Studio\n6:32:36 PM - REST call resolved successfully.\nPowered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/graph-import-file.png",
-      "text" : "• Notebooks\nType to search\nintroduction\npg\nImport notebooks)\nDrag and Drop\nSelect or drop files here.\nSelected files:\nmanufacturing-production-\nquality-graph-studio.dsnb\nCancel\nDETACHED\n& LLUSER -\nImporting notebooks...\nCreate\nIS\nrdf\n>\nLast Edit\nDelete\nImport\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/live-10-graph-production-network.png",
-      "text" : "4\nvertex 1a(v1) As V1_10,\nedge_id (el) AS elid,\nvertex_id (v2) AS v2_id\n80\n฿ - 83\n• N\nQ Search = @\nMACHINE-CN...\nPLANT-001\nINSPECTION..\nPO-5077\nPO-8841\nLOT-ST-91A...\nCERT-ST-91...\nPO-1190\nSUPPLIER-O...\n• ATTACHED\nLLUSER Y\n* ENTITY_KEY\nENTITY\nRISK_SCORE >= 90\nRISK SCORE < 90\nRISK_SCORE <= 50\nv Edges\nHidden Connection\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/graph-studio-overview.png",
-      "text" : "• DETACHED 8, LLUSER -\n• Overview\nPick up active workstreams or launch something new.\nQuickstart\nCreate Graph\nDefine a graph from database tables.\nNew Notebook\nAnalyze graphs interactively.\nGraph Explorer\nExplore and visualize property graphs.\nCompute Environment Configuration\nManage the compute environment.\nJobs\nView All\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "production-quality-network\/images\/graph-notebook-top.png",
-      "text" : "ATTACHED\n& LLUSER -\nI\n• sta\n<\/>\nProduction Quality Network with Property Graph\n<\/>\nThis query treats the production quality data as a graph. In the MATCH pattern, (seed IS\nentity) is the starting production order, -[e IS related_to]->(1,2} means follow one or two\nrelationship hops, and (reached IS entity) is every entity reached from that starting point.\nThe WHERE clause anchors the search on PO-8841, and the COLUMNS clause returns graph\nproperties in a normal SQL result table.\nTL:-. .-u-... L-11-\n.........cn..1...1---\nCopyright © 2026 Oracle and\/or its affiliates.",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "component-quality-vector-search\/images\/sql-embedding-model.jpg",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nAa -\nData Load\n60\nmodel_name,\nalgorithm,\nmining_function\nFROM all\nmining_models\nWHERE mining function = EMBEDDING\"\nORDER BY owner, model_name;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nOWNER\nADMIN\nDownload - Execution time: 0.025 seconds\nMODEL_NAME\nALGORITHM\nALL_MINILM_L12... ONNX\nMINING_FUNCTIO\nEMBEDDING\n* 6 A 0 203 0 1 6:44:04 PM - 1 rows total\nPowered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 642,
-      "path" : "component-quality-vector-search\/images\/gilly.png",
-      "text" : "Lab 3: Search Components by Meaning\nFind production orders affected\nby a component quality concern.\nGilly\nAl Engineer",
-      "width" : 1280
-    },
-    {
-      "height" : 734,
-      "path" : "component-quality-vector-search\/images\/sql-vector-customer-sites.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]* -\nConsumer group:\nLOW Y\nData Load\n6id\n15\n25\n26\n27\n28\n29\n30\n31\nSELECT matched_component.component_name,\nFROM matched_components matched_component\nJOIN\nproduction_order_lines rn ON rn. component_id = matched_component.comp\nJOIN production_orders r ON r. production_order_id = rn.production_order_id\nJOIN\ncustomer_sites g ON g. customer_site_id = r.customer_site_id\nWHERE r.order_status IN (planned', released', in production)\nORDER BY matched_component.similarity DESC,\nr. created_at DESC;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n4\nDownload - Execution time: 0.285 seconds\nCOMPONENT_NAI SIMILARITY\nSITE_NAME\nPrecision bearing...\nPrecision bearing...\nPrecision bearing...\nPrecision bearing...\nPrecision bearing...\nCONTACT_NAME EMAIL\n0.7899 Industrial Custom... Contact0056 Exa... producti\n0.7899 Industrial Custom... Contact1016 Exa...\nproducti\n0.7899 Industrial Custom... Contact0120 Exa...\nproducti\n0.7899 Industrial Custom... Contact0888 Exa... producti\n0.7899 Industrial Custom... Contact0840 Exa... producti\n5:23:41 PM - 59 rows total\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "component-quality-vector-search\/images\/sql-vector-distance.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\n8\n9\n* = Aa -\nE\nData Load\nSELECT so. component_name,\nVECTOR_DISTANCE (\nso. component_embedding,\nVECTOR_EMBEDDING (ADMIN.ALL_MINILM_L12_V2 USING precision bearing\nCOSINE) AS vector_distance\nFROM components so\nORDER BY vector_distance\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n4\n* 04 0\nDownload - Execution time: 0.277 seconds\nCOMPONENT_NAI CATEGORY\nVECTOR_DISTANC\nPrecision bearing... Motion assemblies 0.20865975953...\nPrecision bearing...\nMotion assemblies\n0.2101160976671...\nPrecision bearing...\nMotion assemblies\n0.213112590985...\nPrecision bearing...\nMotion assemblies\n0.213469037845...\nPrecision bearing. Motion assemblies\n0.2154110897128...\n5:23:11 PM - 5 rows total\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "component-quality-vector-search\/images\/sql-vector-values.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nData Load\nSELECT component_id,\ncomponent_name,\ncomponent_embedding\nFROM components;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload Execution time: 0.037 seconds\nCOMPONENT_ID COMPONENT_NAI COMPONENT_EMI\n4\n61 Precision bearing... [-0.0023995263,...\n75 Drive shaft P07 R... [0.041819375,-....\n90 Valve spool P08 ...\n[0.042097736,0...\n104 Motor bracket PO... [-0.015709646,0....\n108\nHeat exchanger p.. [0.0050412687,0\n* 0 A\n0 | 5:22:59 PM - 192 rows total\nLLUSER V\nLOW -\n60\n••.\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "component-quality-vector-search\/images\/sql-vector-similarity.png",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\n9\n* = Aa -\nData Load\nSELECT so. component_name,\nROUND (1 - VECTOR_DISTANCE\nso. component_embedding,\nVECTOR_EMBEDDING (ADMIN.ALL_MINILM_L12_V2 USING ' precision bearing\nCOSINE), 4) AS similarity\nFROM components so\nORDER BY similarity DESC\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\n1\n4\nA\nScript Output\nDBMS Output\nExplain Plan\nDownload - Execution time: 0.269 seconds\nCOMPONENT_NAI CATEGORY\nPrecision bearing... Motion assemblies\nSIMILARITY\n0.7913\nPrecision bearing...\nMotion assemblies\nPrecision bearing...\nMotion assemblies\nPrecision bearing...\nMotion assemblies\nPrecision bearing... Motion assemblies\n0.7899\n0.7869\n0.7865\n0.7846\n5:23:26 PM - 5 rows total\nAutotrace\n•••\n& Powered by ORDS",
-      "width" : 736
-    },
-    {
-      "height" : 734,
-      "path" : "getting-started\/images\/sql-connection.jpg",
-      "text" : "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nE\nData Load\nSELECT USER AS\n• \"User\",\nSYS_CONTEXT 'USEREN', 'CURRENT_SCHEMA') AS\n\"Schema\",\nSYSTIMESTAMP AS \"Checked At\";\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nUSER\nLLUSER\nDownload - Execution time: 0.003 seconds\nSCHEMA\nLLUSER\nCHECKED AT\n09\/21\/2026, 06:2...\n* 1 A 0 203 0 1 6:29:34 PM - 1 rows total\nLLUSER V\nLOW Y\n60\n•••\nPowered by ORDS",
       "width" : 736
     }
   ]

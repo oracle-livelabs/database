@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 1579,
-      "sha256": "42ce71ea2c1508c5b1c78e568960464cd34ec81660aed9e31d48ecdd598e78ae"
+      "bytes": 1608,
+      "sha256": "d22d73e36801eb00f05c7dbe54e84ffd4589457952ae75e9df38e3347fd0fe73"
     },
     {
       "path": "component-quality-vector-search/component-quality-vector-search.md",
@@ -87,6 +87,11 @@
       "sha256": "ca924d773ec01fe1695c61ab50c5796c9a10c78db0dd1cf67645c52b65141294"
     },
     {
+      "path": "introduction/images/demo-welcome.jpg",
+      "bytes": 126493,
+      "sha256": "2ec77cf28b28cb60c78118a472b03a2df48177b13827310858ee5e980deb36b6"
+    },
+    {
       "path": "introduction/images/seer-manufacturing-erd-illustrated.png",
       "bytes": 1244765,
       "sha256": "00013e3c19b8a2b57021258a70c6bee7b860343bae423daed83926359e795354"
@@ -103,8 +108,13 @@
     },
     {
       "path": "introduction/introduction.md",
-      "bytes": 7199,
-      "sha256": "3be8f5e2b1673e4430dd733035caa5265ab3b7e53b6ce2a7a8aa099e71f7debc"
+      "bytes": 7530,
+      "sha256": "5190f01de5e8ae5f701406448b8c7f6db153c9d589ca082894717ee755134195"
+    },
+    {
+      "path": "plant-routing-spatial/images/demo-spatial-map.jpg",
+      "bytes": 79231,
+      "sha256": "b909f07b42d7b0512e93632f5caaf2406cb9400195f7082f09d8fad8f247caad"
     },
     {
       "path": "plant-routing-spatial/images/moon.png",
@@ -133,8 +143,18 @@
     },
     {
       "path": "plant-routing-spatial/plant-routing-spatial.md",
-      "bytes": 14833,
-      "sha256": "70886a863eb4a0a41e0b12387aedf1d9810cd6256182a9742074efbb8e62c0a6"
+      "bytes": 15123,
+      "sha256": "ffd42d6fb5b1407c22db5cbdec75035e9a54d89e9c9fb0712d1a04142c13cc08"
+    },
+    {
+      "path": "production-operations-dashboard/images/demo-dashboard-charts.jpg",
+      "bytes": 82565,
+      "sha256": "f007b9003284de0fcb0668c755a7d10bb0963a83276593bb1463bee8338393f6"
+    },
+    {
+      "path": "production-operations-dashboard/images/demo-dashboard.jpg",
+      "bytes": 116596,
+      "sha256": "d88af727b3d3d1459eb10d51f695facad45312e0fc08beb2f5538413db9f4245"
     },
     {
       "path": "production-operations-dashboard/images/jessica.png",
@@ -153,8 +173,8 @@
     },
     {
       "path": "production-operations-dashboard/production-operations-dashboard.md",
-      "bytes": 12300,
-      "sha256": "495dec4908e75f7a699ac3cff78b851a97e9af7bd933031c00ec5d8217216227"
+      "bytes": 12726,
+      "sha256": "c08e366f70e912694149b55c0e194f0472084fcaef0c6661a7c9a9c3006c9d29"
     },
     {
       "path": "production-order-duality/images/sql-duality-contract.png",
@@ -205,6 +225,16 @@
       "path": "production-quality-network/images/bob.png",
       "bytes": 640968,
       "sha256": "204471ce231761b351be8cfc1f5cfb59cd99246f9115c57d5b0a8120151b74d5"
+    },
+    {
+      "path": "production-quality-network/images/demo-network-overview.jpg",
+      "bytes": 82796,
+      "sha256": "178bc216500bf35839a326c25a5b516d735fd82ca71a4d8be378d0d56ff7c80c"
+    },
+    {
+      "path": "production-quality-network/images/demo-network-query.jpg",
+      "bytes": 129221,
+      "sha256": "210e63ad9ad2ffe6a70498c4cbae74bf8887a2d6545563a117c291799015848f"
     },
     {
       "path": "production-quality-network/images/graph-import-dialog.png",
@@ -268,8 +298,8 @@
     },
     {
       "path": "production-quality-network/production-quality-network.md",
-      "bytes": 27412,
-      "sha256": "07028f24f8cd3acf2f8037e706b7dbf518fe7d11c385acf2c611ec79ede58645"
+      "bytes": 27896,
+      "sha256": "b9bace3b316139aa0823ea855a6be1b8c4b9c31955097bea8422e7d1dc926d81"
     },
     {
       "path": "quality-review-oml/images/oml-confusion-matrix.png",
@@ -473,13 +503,13 @@
     },
     {
       "path": "validation/current-image-ocr.json",
-      "bytes": 40253,
-      "sha256": "d3c65b0451c8b18c152cd734981a4b854836935285d317ae66664a2eef744f88"
+      "bytes": 51612,
+      "sha256": "38ebcf1de56b9412613392ac6c46eef41338c9e596e43867dbb05dde2c726115"
     },
     {
       "path": "validation/domain-audit.json",
-      "bytes": 982,
-      "sha256": "702976517e34b3ff87c29945ed39aa81cc99488759c1456b6db2c44e007ae9d9"
+      "bytes": 1049,
+      "sha256": "a33b23529a1a8f100853dde5b7aaebac45416ecf46dd6ebdce67e5c735aacb5d"
     },
     {
       "path": "validation/external-links.json",
@@ -523,8 +553,8 @@
     },
     {
       "path": "validation/manual-database-checklist.md",
-      "bytes": 1679,
-      "sha256": "39bc8a02388d3294dc6da33761139cb82ea12fad46b00fbba66b5deed5ae519e"
+      "bytes": 1797,
+      "sha256": "17d07f45bfbc96deacc203a8959296728adf4af98a283b8f0cde12f46699b3c8"
     },
     {
       "path": "validation/model-restoration.json",
@@ -553,13 +583,13 @@
     },
     {
       "path": "validation/screenshot-coverage.json",
-      "bytes": 18706,
-      "sha256": "c246f8af561034e17345a19128db3f03eda182229c1ff784beb4580879ecb243"
+      "bytes": 21385,
+      "sha256": "eca0e8c0dfb2fc3a9a64cec9f9f2b7395036e40a8f380b588df0c0783ce2a518"
     },
     {
       "path": "validation/screenshots.md",
-      "bytes": 8192,
-      "sha256": "ff92f58ea664556475c6e329294d3de1917dbdb0d2e270a516406032bfc63b37"
+      "bytes": 9889,
+      "sha256": "a09d2e00cd1065baf637e01af53f49c14e7584c0d9f8642ec959c37299aa58c4"
     },
     {
       "path": "validation/source-preservation.json",
@@ -568,8 +598,8 @@
     },
     {
       "path": "validation/static-results.json",
-      "bytes": 31475,
-      "sha256": "e25cc56b07c37563c730d18964f8752ddb1547800d566dd502ebf866a5ae71d4"
+      "bytes": 26041,
+      "sha256": "abfd10af89965ed952b084f87ce5d2c48ebe13b670517d63d5ff4f20a7216720"
     },
     {
       "path": "validation/structure-comparison.json",
@@ -579,17 +609,17 @@
     {
       "path": "validation/validate.py",
       "bytes": 12532,
-      "sha256": "3e20b4c2db4d111e70726f79ac9ac385ce9570bf8317b83555acc0741fb9d671"
+      "sha256": "cac9a2f236cb9244db09e29b3c379a4772e931f7dfb02d72f3c580b3bbe1813f"
     },
     {
       "path": "validation/validation-report.md",
-      "bytes": 7052,
-      "sha256": "a0b43cb86541c5d6e519a1e99a74ec89213232bcf6159f9ed45d3170196babc6"
+      "bytes": 7172,
+      "sha256": "c6060d55abad6577ee73260e0b07deff380aa2412d7463eab38efffe750cec40"
     },
     {
       "path": "validation/workshop-map.md",
-      "bytes": 2858,
-      "sha256": "c148fbc37a24ba91a3c92ea8face8e9d9f5448be24f8a78c019914514ecec907"
+      "bytes": 2949,
+      "sha256": "f5a942db6f0e2124100968ab953be336449fba5f6667908b34a886aae27d39ea"
     },
     {
       "path": "workshops/sandbox/index.html",

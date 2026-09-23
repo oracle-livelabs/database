@@ -1,4 +1,4 @@
-# Validation report: 22 September 2026
+# Validation report: 23 September 2026
 
 ### Objectives
 
@@ -6,7 +6,7 @@
 
 Estimated Time: **10 minutes**
 
-**Manual workshop walkthrough complete; green-button phase not started.** All 43 planned manufacturing screenshots are installed beside the matching instructions. The main labs, primary graph notebook, optional PGX notebook, AutoML, Select AI, agent test and quiz were exercised.
+**Manual workshop walkthrough complete; green-button phase not started.** All 43 planned database screenshots and six live-application examples are installed beside the matching instructions. The main labs, primary graph notebook, optional PGX notebook, AutoML, Select AI, agent test and quiz were exercised.
 
 ## Data model and loader alignment
 
@@ -37,9 +37,9 @@ After the labs, there are 3,740 orders and 4,986 lines, and the teaching vector 
 
 ## Images, structure and residue
 
-All 11 lesson pages were rendered again after screenshot replacement: 63 image references loaded successfully, with no broken images. [Screenshot coverage](screenshots.md) records all 43 authentic captures and their inline placement. Five generic platform screenshots remain. There are no pending capture markers.
+All 11 lesson pages were rendered again after screenshot replacement: 69 image references loaded successfully, with no broken images. [Screenshot coverage](screenshots.md) records 43 authentic database captures and six live-application captures with their inline placement. Five generic platform screenshots remain. There are no pending capture markers.
 
-Seven original persona banners have zero changed pixels outside their caption masks; the repeated Nina banner is byte-identical. Captions reflect manufacturing roles and scenarios. The introduction retains its static Redwood-style Jessica/Thomas scene and illustrated five-table ERD; the linked technical SVG and five relationships match the loader contract. OCR covers all 58 raster files. See [image review](image-review.json), [domain audit](domain-audit.json), and [structure comparison](structure-comparison.json).
+Seven original persona banners have zero changed pixels outside their caption masks; the repeated Nina banner is byte-identical. Captions reflect manufacturing roles and scenarios. The introduction retains its static Redwood-style Jessica/Thomas scene and illustrated five-table ERD; the linked technical SVG and five relationships match the loader contract. OCR covers all 64 raster files. See [image review](image-review.json), [domain audit](domain-audit.json), and [structure comparison](structure-comparison.json).
 
 The source workshop was not a write target. All 116 current source files match the existing source archive byte-for-byte. Eleven existing files differ from the original starting snapshot, including six banners, and one introduction image was added. The cause was not established; this conversion did not write to or restore the source. This distinction remains recorded in [source preservation](source-preservation.json).
 
@@ -51,7 +51,7 @@ No Terraform or LiveLabs green-button provisioning was attempted. That phase mus
 
 ## Wording review update, 22 September 2026
 
-The [jargon and antislop review](copy-review.md) updated 20 files while preserving all SQL, notebook code, task headings, and navigation. All 11 pages rendered and the revised quiz passed 7/7. No image writes were made by the wording edit. Ten illustration files changed outside those edits, including eight with changed dimensions. Earlier exact-pixel banner comparisons are historical; see [current image checks](copy-review-image-changes.json) and [fresh OCR](current-image-ocr.json). All 43 authentic database captures remain byte-identical.
+The [jargon and antislop review](copy-review.md) updated 20 files while preserving all SQL, notebook code, task headings, and navigation. All 11 pages rendered and the revised quiz passed 7/7. No image writes were made by the wording edit. Ten illustration files changed outside those edits, including eight with changed dimensions. Earlier exact-pixel banner comparisons are historical; see [current image checks](copy-review-image-changes.json) and [fresh OCR](current-image-ocr.json). All 43 authentic database captures remain byte-identical; this follow-up adds six live-application captures.
 
 ## Acknowledgements
 

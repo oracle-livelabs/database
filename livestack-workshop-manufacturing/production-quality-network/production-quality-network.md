@@ -30,6 +30,14 @@ Graph Studio is Oracle Database’s visual workspace for property graphs. SQL/PG
 
 </details>
 
+The live SEER MANUFACTURING application shows a related supplier and production-risk graph using the separate AX-400 demo dataset. Its entities and results differ from the workshop SQL fixture.
+
+![SEER MANUFACTURING risk graph](images/demo-network-overview.jpg)
+
+The application also exposes the graph query and supporting records. Use the workshop SQL below for the workshop traceability exercises.
+
+![SEER MANUFACTURING risk graph query and results](images/demo-network-query.jpg)
+
 ### Objectives
 
 - Identify vertices and edges in a property graph.

@@ -81,3 +81,8 @@ Estimated Workshop Time: **90 minutes**
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
 
+## Running the manufacturing demo
+
+The live SEER MANUFACTURING application follows the AX-400 production-recovery story. It uses a separate demo dataset from the workshop SQL fixture, so its identifiers and totals are not expected results for the lab queries.
+
+![SEER MANUFACTURING LiveStack welcome page](images/demo-welcome.jpg)
