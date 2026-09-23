@@ -1,0 +1,386 @@
+[
+  {
+    "id": "CAP-01",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "task": "Task 1: Check the embedding model",
+    "asset": "subscriber-concern-vector-search/images/sql-embedding-model.jpg",
+    "status": "pending_manual_database",
+    "subject": "model"
+  },
+  {
+    "id": "CAP-02",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "task": "Task 2: Create a service plan vector",
+    "asset": "subscriber-concern-vector-search/images/sql-vector-values.jpg",
+    "status": "pending_manual_database",
+    "subject": " vector values"
+  },
+  {
+    "id": "CAP-03",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "task": "Task 3: Test the service plan vector",
+    "asset": "subscriber-concern-vector-search/images/sql-vector-distance.jpg",
+    "status": "pending_manual_database",
+    "subject": " vector distance"
+  },
+  {
+    "id": "CAP-04",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "task": "Task 3: Test the service plan vector",
+    "asset": "subscriber-concern-vector-search/images/sql-vector-similarity.jpg",
+    "status": "pending_manual_database",
+    "subject": " vector similarity"
+  },
+  {
+    "id": "CAP-05",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "task": "Task 4: Find subscribers affected by a service plan concern",
+    "asset": "subscriber-concern-vector-search/images/sql-vector-subscribers.jpg",
+    "status": "pending_manual_database",
+    "subject": " vector subscribers"
+  },
+  {
+    "id": "CAP-08",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 2: Read the same connections as a graph",
+    "asset": "activation-fraud-network/images/sql-graph-direct.jpg",
+    "status": "pending_manual_database",
+    "subject": " graph direct"
+  },
+  {
+    "id": "CAP-09",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 3: Trace activation evidence across four hops",
+    "asset": "activation-fraud-network/images/sql-graph-four-hop.jpg",
+    "status": "pending_manual_database",
+    "subject": " graph four hop"
+  },
+  {
+    "id": "CAP-10",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 4: Find service_orders that share identifying information",
+    "asset": "activation-fraud-network/images/sql-graph-shared.jpg",
+    "status": "pending_manual_database",
+    "subject": " graph shared"
+  },
+  {
+    "id": "CAP-11",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 5: Visualize the relationship using Oracle Graph Studio",
+    "asset": "activation-fraud-network/images/graph-launch.jpg",
+    "status": "pending_manual_database",
+    "subject": "Database Actions Launchpad for the LLUSER workshop user"
+  },
+  {
+    "id": "CAP-12",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 5: Visualize the relationship using Oracle Graph Studio",
+    "asset": "activation-fraud-network/images/graph-studio-overview.jpg",
+    "status": "pending_manual_database",
+    "subject": "Graph Studio overview page signed in as LLUSER"
+  },
+  {
+    "id": "CAP-13",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 6: Download and import the telecommunications notebook",
+    "asset": "activation-fraud-network/images/graph-notebooks.jpg",
+    "status": "pending_manual_database",
+    "subject": "Graph Studio Notebooks page for LLUSER"
+  },
+  {
+    "id": "CAP-14",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 6: Download and import the telecommunications notebook",
+    "asset": "activation-fraud-network/images/graph-import-dialog.jpg",
+    "status": "pending_manual_database",
+    "subject": "Graph Studio notebook import dialog"
+  },
+  {
+    "id": "CAP-15",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 6: Download and import the telecommunications notebook",
+    "asset": "activation-fraud-network/images/graph-import-file.jpg",
+    "status": "pending_manual_database",
+    "subject": "Telecommunications notebook selected for import"
+  },
+  {
+    "id": "CAP-16",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 7: Run and interpret the Graph Studio notebook",
+    "asset": "activation-fraud-network/images/graph-notebook-top.jpg",
+    "status": "pending_manual_database",
+    "subject": "Activation Fraud Network notebook introduction"
+  },
+  {
+    "id": "CAP-17",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 7: Run and interpret the Graph Studio notebook",
+    "asset": "activation-fraud-network/images/live-09-graph-notebook-table.jpg",
+    "status": "pending_manual_database",
+    "subject": "Ranked activation results in Graph Studio"
+  },
+  {
+    "id": "CAP-18",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 7: Run and interpret the Graph Studio notebook",
+    "asset": "activation-fraud-network/images/live-10-graph-order-network.jpg",
+    "status": "pending_manual_database",
+    "subject": "Service Order graph from ORD-8841"
+  },
+  {
+    "id": "CAP-19",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "task": "Task 7: Run and interpret the Graph Studio notebook",
+    "asset": "activation-fraud-network/images/live-11-graph-shared-device.jpg",
+    "status": "pending_manual_database",
+    "subject": "Service Orders linked to the shared device"
+  },
+  {
+    "id": "CAP-21",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "task": "Task 4: Run a telecommunications question",
+    "asset": "selectai-agent/images/sql-agent-answer.jpg",
+    "status": "pending_manual_database",
+    "subject": " agent answer"
+  },
+  {
+    "id": "CAP-22",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "task": "Task 5: Inspect what the agent did",
+    "asset": "selectai-agent/images/sql-agent-history.jpg",
+    "status": "pending_manual_database",
+    "subject": " agent history"
+  },
+  {
+    "id": "CAP-23",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "task": "Task 5: Inspect what the agent did",
+    "asset": "selectai-agent/images/sql-agent-tools.jpg",
+    "status": "pending_manual_database",
+    "subject": " agent tools"
+  },
+  {
+    "id": "CAP-24",
+    "lesson": "selectai/selectai.md",
+    "task": "Task 2: Add the telecommunications tables to the profile",
+    "asset": "selectai/images/sql-ai-object-list.jpg",
+    "status": "pending_manual_database",
+    "subject": " ai object list"
+  },
+  {
+    "id": "CAP-25",
+    "lesson": "selectai/selectai.md",
+    "task": "Task 3: Ask a question and inspect the SQL",
+    "asset": "selectai/images/sql-ai-generated.jpg",
+    "status": "pending_manual_database",
+    "subject": " ai generated"
+  },
+  {
+    "id": "CAP-26",
+    "lesson": "selectai/selectai.md",
+    "task": "Task 4: Run the question in the database",
+    "asset": "selectai/images/sql-ai-answer.jpg",
+    "status": "pending_manual_database",
+    "subject": " ai answer"
+  },
+  {
+    "id": "CAP-27",
+    "lesson": "selectai/selectai.md",
+    "task": "Task 5: Improve the business question",
+    "asset": "selectai/images/sql-ai-refined-generated.jpg",
+    "status": "pending_manual_database",
+    "subject": " ai refined generated"
+  },
+  {
+    "id": "CAP-28",
+    "lesson": "selectai/selectai.md",
+    "task": "Task 5: Improve the business question",
+    "asset": "selectai/images/sql-ai-refined-answer.jpg",
+    "status": "pending_manual_database",
+    "subject": " ai refined answer"
+  },
+  {
+    "id": "CAP-29",
+    "lesson": "selectai/selectai.md",
+    "task": "Task 6: Explain the result",
+    "asset": "selectai/images/sql-ai-narration.jpg",
+    "status": "pending_manual_database",
+    "subject": " ai narration"
+  },
+  {
+    "id": "CAP-30",
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "task": "Task 1: Run a converged service investigation",
+    "asset": "subscriber-operations-dashboard/images/sql-dashboard.jpg",
+    "status": "pending_manual_database",
+    "subject": " dashboard"
+  },
+  {
+    "id": "CAP-31",
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "task": "Task 2: Change the investigation question",
+    "asset": "subscriber-operations-dashboard/images/sql-dashboard-followup.jpg",
+    "status": "pending_manual_database",
+    "subject": "result after changing the investigation phrase"
+  },
+  {
+    "id": "CAP-34",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 1: Read the training data",
+    "asset": "plan-demand-oml/images/sql-oml-training.jpg",
+    "status": "pending_manual_database",
+    "subject": " oml training"
+  },
+  {
+    "id": "CAP-35",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-launch.jpg",
+    "status": "pending_manual_database",
+    "subject": "Machine Learning launch from Database Actions"
+  },
+  {
+    "id": "CAP-36",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-home.jpg",
+    "status": "pending_manual_database",
+    "subject": "automl"
+  },
+  {
+    "id": "CAP-37",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-settings.jpg",
+    "status": "pending_manual_database",
+    "subject": "Telecommunications classification experiment settings"
+  },
+  {
+    "id": "CAP-38",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-leaderboard.jpg",
+    "status": "pending_manual_database",
+    "subject": "Service Plan Demand Surge leaderboard"
+  },
+  {
+    "id": "CAP-39",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-model-comparison.jpg",
+    "status": "pending_manual_database",
+    "subject": "AutoML model comparison"
+  },
+  {
+    "id": "CAP-40",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-confusion-matrix.jpg",
+    "status": "pending_manual_database",
+    "subject": "GLM confusion matrix"
+  },
+  {
+    "id": "CAP-41",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 2: Compare models with AutoML (optional)",
+    "asset": "plan-demand-oml/images/oml-prediction-impact.jpg",
+    "status": "pending_manual_database",
+    "subject": "GLM prediction impact"
+  },
+  {
+    "id": "CAP-42",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 3: Create the selected model in SQL Developer Web",
+    "asset": "plan-demand-oml/images/sql-oml-model.jpg",
+    "status": "pending_manual_database",
+    "subject": "Created demand model in SQL Worksheet"
+  },
+  {
+    "id": "CAP-43",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "task": "Task 4: Score new service plan activity in SQL",
+    "asset": "plan-demand-oml/images/sql-oml-scoring.jpg",
+    "status": "pending_manual_database",
+    "subject": " oml scoring"
+  },
+  {
+    "id": "CAP-47",
+    "lesson": "getting-started/getting-started.md",
+    "task": "Task 2: Open SQL Worksheet",
+    "asset": "getting-started/images/sql-connection.jpg",
+    "status": "pending_manual_database",
+    "subject": " connection"
+  },
+  {
+    "id": "CAP-49",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "task": "Task 1: Look at the locations as points",
+    "asset": "network-site-spatial/images/sql-spatial-points.jpg",
+    "status": "pending_manual_database",
+    "subject": " spatial points"
+  },
+  {
+    "id": "CAP-50",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "task": "Task 2: Find the closest sites to a demand region",
+    "asset": "network-site-spatial/images/sql-spatial-new-york.jpg",
+    "status": "pending_manual_database",
+    "subject": " spatial new york"
+  },
+  {
+    "id": "CAP-51",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "task": "Task 2: Find the closest sites to a demand region",
+    "asset": "network-site-spatial/images/sql-spatial-chicago.jpg",
+    "status": "pending_manual_database",
+    "subject": " spatial chicago"
+  },
+  {
+    "id": "CAP-52",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "task": "Task 3: Route Subscribers to the closest site",
+    "asset": "network-site-spatial/images/sql-spatial-routing.jpg",
+    "status": "pending_manual_database",
+    "subject": " spatial routing"
+  },
+  {
+    "id": "CAP-53",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "task": "Task 3: Read a subscriber document from relational data",
+    "asset": "service-order-duality/images/sql-duality-document.jpg",
+    "status": "pending_manual_database",
+    "subject": " duality document"
+  },
+  {
+    "id": "CAP-54",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "task": "Task 4: Enable document inserts and updates",
+    "asset": "service-order-duality/images/sql-duality-contract.jpg",
+    "status": "pending_manual_database",
+    "subject": " duality contract"
+  },
+  {
+    "id": "CAP-55",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "task": "Task 5: Create and update a JSON service order",
+    "asset": "service-order-duality/images/sql-duality-confirmed.jpg",
+    "status": "pending_manual_database",
+    "subject": " duality confirmed"
+  },
+  {
+    "id": "CAP-56",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "task": "Task 6: Project JSON fields with SQL",
+    "asset": "service-order-duality/images/sql-duality-projection.jpg",
+    "status": "pending_manual_database",
+    "subject": " duality projection"
+  },
+  {
+    "id": "CAP-57",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "task": "Task 6: Project JSON fields with SQL",
+    "asset": "service-order-duality/images/sql-duality-relational.jpg",
+    "status": "pending_manual_database",
+    "subject": " duality relational"
+  }
+]
