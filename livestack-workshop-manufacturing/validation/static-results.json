@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-22",
+  "date": "2026-09-23",
   "scope": "Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.",
   "passed": true,
   "errors": [],
@@ -280,6 +280,14 @@
       "pass": true,
       "detail": null
     },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/demo-dashboard.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/demo-dashboard-charts.jpg": {
+      "pass": true,
+      "detail": null
+    },
     "fences_quality-review-oml/quality-review-oml.md": {
       "pass": true,
       "detail": null
@@ -408,6 +416,10 @@
       "pass": true,
       "detail": null
     },
+    "link_introduction/introduction.md:images/demo-welcome.jpg": {
+      "pass": true,
+      "detail": null
+    },
     "fences_plant-routing-spatial/plant-routing-spatial.md": {
       "pass": true,
       "detail": null
@@ -421,6 +433,10 @@
       "detail": null
     },
     "link_plant-routing-spatial/plant-routing-spatial.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/demo-spatial-map.jpg": {
       "pass": true,
       "detail": null
     },
@@ -525,6 +541,14 @@
       "detail": null
     },
     "link_production-quality-network/production-quality-network.md:../validation/validation-report.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/demo-network-overview.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/demo-network-query.jpg": {
       "pass": true,
       "detail": null
     },
@@ -693,182 +717,6 @@
       "detail": null
     },
     "copy_validation/screenshots.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-operations-dashboard/images/sql-dashboard.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-operations-dashboard/images/sql-dashboard-followup.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/sql-oml-training.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/oml-settings.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/oml-leaderboard.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/oml-model-comparison.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/oml-confusion-matrix.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/oml-prediction-impact.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/sql-oml-model.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../quality-review-oml/images/sql-oml-scoring.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-document.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-contract.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-released.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-projection.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-order-duality/images/sql-duality-relational.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-points.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-new-york.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-chicago.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../plant-routing-spatial/images/sql-spatial-routing.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai-agent/images/sql-agent-answer.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai-agent/images/sql-agent-history.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai-agent/images/sql-agent-tools.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai/images/sql-ai-object-list.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai/images/sql-ai-generated.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai/images/sql-ai-answer.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai/images/sql-ai-refined-generated.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai/images/sql-ai-refined-answer.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../selectai/images/sql-ai-narration.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/sql-graph-direct.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/sql-graph-four-hop.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/sql-graph-shared.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/graph-studio-overview.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/graph-notebooks.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/graph-import-dialog.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/graph-import-file.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/graph-notebook-top.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/live-09-graph-notebook-table.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/live-10-graph-production-network.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../production-quality-network/images/live-11-graph-shared-lot.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-values.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-distance.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-similarity.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:../component-quality-vector-search/images/sql-vector-customer-sites.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_validation/screenshots.md:screenshot-coverage.json": {
       "pass": true,
       "detail": null
     },
@@ -1048,8 +896,8 @@
     "component-quality-vector-search": 8,
     "getting-started": 1
   },
-  "image_references": 63,
-  "unique_images_referenced": 63,
+  "image_references": 69,
+  "unique_images_referenced": 69,
   "external_links": [
     "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm",
     "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
@@ -1057,7 +905,7 @@
     "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
     "https://ocw.mit.edu/courses/21l-007j-after-columbus-fall-2003/4cceed8afab4e80aba65fc83b8ec27ed_how_to_3.pdf"
   ],
-  "authentic_manufacturing_screenshots": 43,
+  "authentic_manufacturing_screenshots": 49,
   "pending_capture_positions": 0,
   "manual_oracle_validation": "see live-validation.json (separate from these static checks)",
   "green_button_validation": "not_run"

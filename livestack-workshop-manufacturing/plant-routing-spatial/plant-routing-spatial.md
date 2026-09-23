@@ -34,6 +34,10 @@ In this lab, you follow Moon's approach. You start with a single point, measure 
 
 Oracle Spatial can support a production-routing map using the distances calculated in this lab.
 
+The live SEER MANUFACTURING application shows a related plant-capacity and routing map using the separate AX-400 demo dataset. Its plants, work orders, and map results differ from the workshop SQL fixture.
+
+![SEER MANUFACTURING plant capacity and routing map](images/demo-spatial-map.jpg)
+
 ### Objectives
 
 - Identify spatial points and polygons in the manufacturing data.

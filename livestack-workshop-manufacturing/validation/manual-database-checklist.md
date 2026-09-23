@@ -11,9 +11,10 @@ Estimated Time: **5 minutes**
 - [x] Walk through JSON, vectors, graph, spatial, OML, Select AI and agent exercises.
 - [x] Import and run both native graph notebooks, including optional PGQL setup and PGX algorithms.
 - [x] Complete AutoML comparison and inspect the confusion matrix and prediction impact.
-- [x] Capture all 43 planned screenshots and place them beside their instructions.
+- [x] Capture all 43 planned database screenshots and place them beside their instructions.
+- [x] Capture the six related live-application views and place them beside the matching lesson explanations.
 - [x] Verify original persona artwork outside updated caption masks and OCR all raster images.
-- [x] Render all 11 pages, load all 63 images, and pass the quiz with 7/7.
+- [x] Render all 11 pages, load all 69 images, and pass the quiz with 7/7.
 - [x] Run static validation, residue audit and complete ZIP integrity/content checks.
 
 The loader execution was staged in Database Actions, not a fresh SQLcl run. Preserve the post-lab database for review; do not rerun initial-state assertions into it. The optional destructive reset appendix was not run. Details and remaining platform checks are in the [validation report](validation-report.md).

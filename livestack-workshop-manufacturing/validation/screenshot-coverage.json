@@ -1,6 +1,6 @@
 {
   "status": "complete",
-  "authentic_manufacturing_captures": 43,
+  "authentic_manufacturing_captures": 49,
   "retained_generic_captures": 5,
   "pending": [],
   "completed": [
@@ -433,6 +433,68 @@
       "status": "captured_live_LLUSER",
       "placement": "beside matching instruction",
       "captured_date": "2026-09-22"
+    },
+    {
+      "id": "APP-001",
+      "lesson": "introduction/introduction.md",
+      "task": "## Running the manufacturing demo",
+      "required_capture": "SEER MANUFACTURING LiveStack welcome page",
+      "replacement_path": "introduction/images/demo-welcome.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-002",
+      "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+      "task": "## Application example",
+      "required_capture": "SEER MANUFACTURING operations command center",
+      "replacement_path": "production-operations-dashboard/images/demo-dashboard.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-003",
+      "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+      "task": "## Application example",
+      "required_capture": "SEER MANUFACTURING operations charts",
+      "replacement_path": "production-operations-dashboard/images/demo-dashboard-charts.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-004",
+      "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+      "task": "Introduction",
+      "required_capture": "SEER MANUFACTURING plant capacity and routing map",
+      "replacement_path": "plant-routing-spatial/images/demo-spatial-map.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-005",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "Introduction",
+      "required_capture": "SEER MANUFACTURING risk graph",
+      "replacement_path": "production-quality-network/images/demo-network-overview.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
+    },
+    {
+      "id": "APP-006",
+      "lesson": "production-quality-network/production-quality-network.md",
+      "task": "Introduction",
+      "required_capture": "SEER MANUFACTURING risk graph query and results",
+      "replacement_path": "production-quality-network/images/demo-network-query.jpg",
+      "status": "captured_live_demo_application",
+      "placement": "beside matching explanation",
+      "captured_date": "2026-09-23"
     }
-  ]
+  ],
+  "database_captures": 43,
+  "demo_application_captures": 6
 }
