@@ -1,0 +1,302 @@
+[
+  {
+    "lesson": "getting-started/getting-started.md",
+    "block": 1,
+    "sql": "SELECT USER AS \"User\",\n           SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS \"Schema\",\n           SYSTIMESTAMP AS \"Checked At\";"
+  },
+  {
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "block": 1,
+    "sql": "-- RELATIONAL DATA: aggregate high-severity records and join them\n    -- to shared service plan and site views.\n    WITH offer_service_impact AS (\n        SELECT sov.plan_id,\n               sov.plan_name,\n               hpv.site_name,\n               sov.plan_category,\n               COUNT(DISTINCT sa.alert_id) AS urgent_service_alerts,\n               ROUND(AVG(sa.severity_score), 1) AS avg_severity,\n               SUM(sa.affected_subscribers) AS affected_subscribers,\n               SUM(sa.service_cases_opened) AS cases_opened\n        FROM service_alerts_v sa\n        JOIN report_plan_mentions pom\n          ON pom.report_id = sa.alert_id\n        JOIN service_plans_v sov\n          ON sov.plan_id = pom.plan_id\n        JOIN network_sites_v hpv\n          ON hpv.site_id = sov.site_id\n        WHERE sa.severity_score >= 80\n        GROUP BY sov.plan_id,\n                 sov.plan_name,\n                 hpv.site_name,\n                 sov.plan_category\n    ),\n    -- VECTOR DATA: compare the investigation question with stored\n    -- service plan embeddings to rank service plans by meaning, not exact wording.\n    semantic_match AS (\n        SELECT so.plan_id,\n               ROUND(1 - VECTOR_DISTANCE(\n               oe.embedding,\n                   VECTOR_EMBEDDING(\n                       ADMIN.ALL_MINILM_L12_V2\n                       USING 'weak indoor mobile coverage and dropped calls requiring subscriber support' AS DATA\n                   ),\n                   COSINE\n               ), 4) AS semantic_similarity\n        FROM plan_embeddings oe\n        JOIN service_plans so\n          ON so.plan_id = oe.plan_id\n    ),\n    -- JSON DATA: read service order documents from the duality view and\n    -- project nested line items into relational rows with JSON_TABLE.\n    order_activity AS (\n        SELECT jt.plan_id,\n               COUNT(DISTINCT jt.order_id) AS active_service_orders,\n               SUM(jt.connection_count) AS active_connections\n        FROM service_orders_dv rd\n        CROSS APPLY JSON_TABLE(\n            rd.data,\n            '$'\n            COLUMNS (\n                order_id NUMBER PATH '$._id',\n                order_status VARCHAR2(30) PATH '$.status',\n                NESTED PATH '$.items[*]' COLUMNS (\n                    plan_id NUMBER PATH '$.planId',\n                    connection_count NUMBER PATH '$.connectionCount'\n                )\n            )\n        ) jt\n        WHERE jt.order_status IN ('pending', 'confirmed')\n        GROUP BY jt.plan_id\n    ),\n    -- SPATIAL DATA: calculate the distance from each network-site point\n    -- to the New York Network Region demand-region boundary.\n    nearest_site AS (\n        SELECT routing_site.site_name,\n               routing_site.city,\n               routing_site.state_province,\n               dr.region_name,\n               dr.demand_index,\n               ROUND(\n                   SDO_GEOM.SDO_DISTANCE(\n                       hp.location,\n                       dr.boundary,\n                       0.005,\n                       'unit=KM'\n                   ),\n                   2\n               ) AS distance_to_demand_region_km\n        FROM network_sites_v routing_site\n        JOIN network_sites hp\n          ON hp.site_id = routing_site.site_id\n        CROSS JOIN network_regions dr\n        WHERE dr.region_name = 'New York Network Region'\n          AND hp.is_active = 1\n        ORDER BY SDO_GEOM.SDO_DISTANCE(\n                     hp.location,\n                     dr.boundary,\n                     0.005,\n                     'unit=KM'\n                 )\n        FETCH FIRST 1 ROW ONLY\n    )\n    -- CONVERGED RESULT: join the outputs of the four data-model operations\n    -- into one dashboard investigation result.\n    SELECT impact.plan_name,\n           impact.site_name,\n           impact.plan_category,\n           impact.urgent_service_alerts,\n           impact.avg_severity,\n           impact.affected_subscribers,\n           impact.cases_opened,\n           sm.semantic_similarity,\n           NVL(activity.active_service_orders, 0) AS active_service_orders,\n           NVL(activity.active_connections, 0) AS active_connections,\n           nearest_site_row.site_name AS nearest_site,\n           nearest_site_row.city || ', ' || nearest_site_row.state_province AS site_location,\n           nearest_site_row.region_name AS demand_region,\n           nearest_site_row.demand_index,\n           nearest_site_row.distance_to_demand_region_km\n    FROM offer_service_impact impact\n    LEFT JOIN semantic_match sm\n      ON sm.plan_id = impact.plan_id\n    LEFT JOIN order_activity activity\n      ON activity.plan_id = impact.plan_id\n    CROSS JOIN nearest_site nearest_site_row\n    -- Put service plans closest to the investigation question first.\n    -- Service impact breaks ties so the result still favors larger business impact.\n    ORDER BY sm.semantic_similarity DESC NULLS LAST,\n             impact.affected_subscribers DESC\n    FETCH FIRST 10 ROWS ONLY;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 1,
+    "sql": "CREATE TABLE thomas_app_data (\n        order_id  NUMBER PRIMARY KEY,\n        app_data  JSON NOT NULL\n    );\n\n    INSERT INTO thomas_app_data (order_id, app_data)\n    SELECT order_id,\n           JSON_OBJECT(\n               'screen'    VALUE 'service-order-detail',\n               'showTotal' VALUE 'true' FORMAT JSON,\n               'features'  VALUE JSON_ARRAY('live-status', 'activation-preferences')\n               RETURNING JSON\n           )\n    FROM (\n        SELECT order_id\n        FROM service_orders\n        ORDER BY order_id\n        FETCH FIRST 1 ROW ONLY\n    );\n\n    COMMIT;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 2,
+    "sql": "SELECT order_id,\n           JSON_VALUE(app_data, '$.screen') AS screen_name,\n           JSON_VALUE(app_data, '$.showTotal' RETURNING BOOLEAN) AS show_total,\n           JSON_QUERY(app_data, '$.features') AS app_features\n    FROM thomas_app_data;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 3,
+    "sql": "CREATE JSON COLLECTION TABLE thomas_order_docs\n    WITH ETAG;\n\n    INSERT INTO thomas_order_docs (data)\n    SELECT JSON_OBJECT(\n               '_id'        VALUE r.order_id,\n               'subscriberId' VALUE r.subscriber_id,\n               'siteId' VALUE r.site_id,\n               'periodStart' VALUE TO_CHAR(r.period_start, 'YYYY-MM-DD'),\n               'periodEnd' VALUE TO_CHAR(r.period_end, 'YYYY-MM-DD'),\n               'status'     VALUE r.order_status,\n               'items'      VALUE (\n                   SELECT JSON_ARRAYAGG(\n                              JSON_OBJECT(\n                                  'orderLineId'    VALUE rn.order_line_id,\n                                  'planId' VALUE rn.plan_id,\n                                  'connectionCount'  VALUE rn.connection_count,\n                                  'monthlyFee' VALUE rn.monthly_fee\n                                  RETURNING JSON\n                              ) ORDER BY rn.order_line_id RETURNING JSON\n                          )\n                   FROM service_order_lines rn\n                   WHERE rn.order_id = r.order_id\n               ) FORMAT JSON\n               RETURNING JSON\n           )\n    FROM service_orders r\n    JOIN thomas_app_data t ON t.order_id = r.order_id;\n\n    COMMIT;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 4,
+    "sql": "SELECT JSON_SERIALIZE(data PRETTY) AS order_document\n    FROM thomas_order_docs\n    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) =\n          (SELECT order_id FROM thomas_app_data);"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 5,
+    "sql": "SELECT data AS order_document\n    FROM service_orders_dv\n    FETCH FIRST 1 ROW ONLY;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 6,
+    "sql": "SELECT view_name,\n           allow_insert,\n           allow_update,\n           allow_delete\n    FROM user_json_duality_views\n    WHERE view_name = 'SERVICE_ORDERS_DV';"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 7,
+    "sql": "CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW service_orders_dv AS\n    SELECT JSON {\n        '_id'         : r.order_id,\n        'subscriberId'  : r.subscriber_id,\n        'siteId' : r.site_id,\n        'periodStart'     : r.period_start,\n        'periodEnd'    : r.period_end,\n        'status'      : r.order_status,\n        'total'       : r.order_total,\n        'activationFee': r.activation_fee,\n        'demandScore' : r.demand_score,\n        'createdAt'   : r.created_at,\n        'items' : [\n            SELECT JSON {\n                'orderLineId'    : rn.order_line_id,\n                'planId' : rn.plan_id,\n                'connectionCount'  : rn.connection_count,\n                'monthlyFee' : rn.monthly_fee\n            }\n            FROM service_order_lines rn WITH INSERT UPDATE\n            WHERE rn.order_id = r.order_id\n        ]\n    }\n    FROM service_orders r WITH INSERT UPDATE;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 8,
+    "sql": "SELECT view_name,\n           allow_insert,\n           allow_update,\n           allow_delete\n    FROM user_json_duality_views\n    WHERE view_name = 'SERVICE_ORDERS_DV';"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 9,
+    "sql": "INSERT INTO service_orders_dv (data)\n    SELECT JSON(\n      '{\n        \"_id\": 900001,\n        \"subscriberId\": 1,\n        \"siteId\": 1,\n        \"periodStart\": \"2026-09-01\",\n        \"periodEnd\": \"2026-10-01\",\n        \"status\": \"pending\",\n        \"total\": 250.00,\n        \"activationFee\": 0,\n        \"items\": [\n          {\n            \"orderLineId\": 990001,\n            \"planId\": 1,\n            \"connectionCount\": 2,\n            \"monthlyFee\": 125.00\n          }\n        ]\n      }'\n    )\n    WHERE NOT EXISTS (\n      SELECT 1\n      FROM service_orders\n      WHERE order_id = 900001\n    );\n\n    COMMIT;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 10,
+    "sql": "SELECT r.order_id AS order_id,\n           r.order_status AS order_status,\n           g.email AS subscriber_email,\n           rn.order_line_id,\n           so.plan_name,\n           rn.connection_count,\n           rn.monthly_fee,\n           rn.line_total\n    FROM service_orders r\n    JOIN subscribers g ON g.subscriber_id = r.subscriber_id\n    JOIN service_order_lines rn ON rn.order_id = r.order_id\n    JOIN service_plans so ON so.plan_id = rn.plan_id\n    WHERE r.order_id = 900001;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 11,
+    "sql": "UPDATE service_orders_dv\n    SET data = JSON_TRANSFORM(data, SET '$.status' = 'confirmed')\n    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;\n\n    COMMIT;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 12,
+    "sql": "SELECT r.order_id AS order_id,\n           r.order_status AS order_status,\n           rn.order_line_id,\n           so.plan_name,\n           rn.connection_count,\n           rn.line_total\n    FROM service_orders r\n    JOIN service_order_lines rn ON rn.order_id = r.order_id\n    JOIN service_plans so ON so.plan_id = rn.plan_id\n    WHERE r.order_id = 900001;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 13,
+    "sql": "SELECT JSON_VALUE(rd.data, '$._id' RETURNING NUMBER) AS order_id,\n           JSON_VALUE(rd.data, '$.status') AS order_status,\n           g.email AS subscriber_email\n    FROM service_orders_dv rd\n    JOIN subscribers g\n      ON g.subscriber_id = JSON_VALUE(rd.data, '$.subscriberId' RETURNING NUMBER)\n    WHERE JSON_VALUE(rd.data, '$._id' RETURNING NUMBER) = 900001;"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 14,
+    "sql": "SELECT r.order_id AS order_id,\n           r.order_status AS order_status,\n           g.email AS subscriber_email\n    FROM service_orders r\n    JOIN subscribers g\n      ON g.subscriber_id = r.subscriber_id\n    WHERE r.order_id = 900001;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 1,
+    "sql": "SELECT owner,\n           model_name,\n           algorithm,\n           mining_function\n    FROM all_mining_models\n    WHERE mining_function = 'EMBEDDING'\n    ORDER BY owner, model_name;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 2,
+    "sql": "SELECT plan_id,\n           plan_name,\n           category,\n           subcategory,\n           plan_name || '. Category: ' || category ||\n             '. Subcategory: ' || subcategory AS embedding_text\n    FROM service_plans\n    FETCH FIRST 5 ROWS ONLY;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 3,
+    "sql": "ALTER TABLE service_plans ADD (plan_embedding VECTOR(384));"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 4,
+    "sql": "UPDATE service_plans\n    SET plan_embedding = VECTOR_EMBEDDING(\n      ADMIN.ALL_MINILM_L12_V2 USING\n        plan_name || '. Category: ' || category ||\n        '. Subcategory: ' || subcategory AS DATA)\n    WHERE plan_embedding IS NULL;\n\n    COMMIT;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 5,
+    "sql": "SELECT plan_id,\n           plan_name,\n           plan_embedding\n    FROM service_plans;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 6,
+    "sql": "SELECT so.plan_name,\n           so.category,\n           VECTOR_DISTANCE(\n             so.plan_embedding,\n             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'weak indoor mobile coverage with Wi-Fi calling' AS DATA),\n             COSINE) AS vector_distance\n    FROM service_plans so\n    ORDER BY vector_distance\n    FETCH FIRST 5 ROWS ONLY;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 7,
+    "sql": "SELECT so.plan_name,\n           so.category,\n           ROUND(1 - VECTOR_DISTANCE(\n             so.plan_embedding,\n             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'weak indoor mobile coverage with Wi-Fi calling' AS DATA),\n             COSINE), 4) AS similarity\n    FROM service_plans so\n    ORDER BY similarity DESC\n    FETCH FIRST 5 ROWS ONLY;"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 8,
+    "sql": "WITH matched_offers AS (\n        SELECT so.plan_id,\n               so.plan_name,\n               ROUND(1 - VECTOR_DISTANCE(\n                 so.plan_embedding,\n                 VECTOR_EMBEDDING(\n                   ADMIN.ALL_MINILM_L12_V2\n                   USING 'weak indoor mobile coverage with Wi-Fi calling' AS DATA\n                 ),\n                 COSINE), 4) AS similarity\n        FROM service_plans so\n        ORDER BY similarity DESC\n        FETCH FIRST 5 ROWS ONLY\n    )\n    SELECT matched_offer.plan_name,\n           matched_offer.similarity,\n           g.first_name || ' ' || g.last_name AS subscriber_name,\n           g.email,\n           r.order_id,\n           r.order_status,\n           r.created_at,\n           rn.connection_count,\n           rn.line_total\n    FROM matched_offers matched_offer\n    JOIN service_order_lines rn ON rn.plan_id = matched_offer.plan_id\n    JOIN service_orders r ON r.order_id = rn.order_id\n    JOIN subscribers g ON g.subscriber_id = r.subscriber_id\n    WHERE r.order_status IN ('pending', 'confirmed', 'active')\n    ORDER BY matched_offer.similarity DESC,\n             r.created_at DESC;"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 1,
+    "sql": "SELECT order_node.entity_key AS order_key,\n           connected.entity_key AS connected_key,\n           connected.entity_type AS connected_type,\n           rel.relationship_type,\n           connected.risk_score AS connected_risk\n    FROM activation_entities order_node\n    JOIN activation_relationships rel\n      ON rel.from_entity = order_node.entity_id\n    JOIN activation_entities connected\n      ON connected.entity_id = rel.to_entity\n    WHERE order_node.entity_key = 'ORD-8841'\n    ORDER BY connected_risk DESC;"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 2,
+    "sql": "SELECT order_key, connected_key, connected_type,\n           relationship_path, connected_risk\n    FROM (\n      SELECT seed.entity_key AS order_key,\n             reached.entity_key AS connected_key,\n             reached.entity_type AS connected_type,\n             r1.relationship_type AS relationship_path,\n             reached.risk_score AS connected_risk\n      FROM activation_entities seed\n      JOIN activation_relationships r1\n        ON r1.from_entity = seed.entity_id\n      JOIN activation_entities reached\n        ON reached.entity_id = r1.to_entity\n      WHERE seed.entity_key = 'ORD-8841'\n\n      UNION\n\n      SELECT seed.entity_key,\n             reached.entity_key,\n             reached.entity_type,\n             r1.relationship_type || ' -> ' || r2.relationship_type,\n             reached.risk_score\n      FROM activation_entities seed\n      JOIN activation_relationships r1\n        ON r1.from_entity = seed.entity_id\n      JOIN activation_entities v1\n        ON v1.entity_id = r1.to_entity\n      JOIN activation_relationships r2\n        ON r2.from_entity = v1.entity_id\n      JOIN activation_entities reached\n        ON reached.entity_id = r2.to_entity\n      WHERE seed.entity_key = 'ORD-8841'\n\n      UNION\n\n      SELECT seed.entity_key,\n             reached.entity_key,\n             reached.entity_type,\n             r1.relationship_type || ' -> ' ||\n               r2.relationship_type || ' -> ' ||\n               r3.relationship_type,\n             reached.risk_score\n      FROM activation_entities seed\n      JOIN activation_relationships r1\n        ON r1.from_entity = seed.entity_id\n      JOIN activation_entities v1\n        ON v1.entity_id = r1.to_entity\n      JOIN activation_relationships r2\n        ON r2.from_entity = v1.entity_id\n      JOIN activation_entities v2\n        ON v2.entity_id = r2.to_entity\n      JOIN activation_relationships r3\n        ON r3.from_entity = v2.entity_id\n      JOIN activation_entities reached\n        ON reached.entity_id = r3.to_entity\n      WHERE seed.entity_key = 'ORD-8841'\n\n      UNION\n\n      SELECT seed.entity_key,\n             reached.entity_key,\n             reached.entity_type,\n             r1.relationship_type || ' -> ' ||\n               r2.relationship_type || ' -> ' ||\n               r3.relationship_type || ' -> ' ||\n               r4.relationship_type,\n             reached.risk_score\n      FROM activation_entities seed\n      JOIN activation_relationships r1\n        ON r1.from_entity = seed.entity_id\n      JOIN activation_entities v1\n        ON v1.entity_id = r1.to_entity\n      JOIN activation_relationships r2\n        ON r2.from_entity = v1.entity_id\n      JOIN activation_entities v2\n        ON v2.entity_id = r2.to_entity\n      JOIN activation_relationships r3\n        ON r3.from_entity = v2.entity_id\n      JOIN activation_entities v3\n        ON v3.entity_id = r3.to_entity\n      JOIN activation_relationships r4\n        ON r4.from_entity = v3.entity_id\n      JOIN activation_entities reached\n        ON reached.entity_id = r4.to_entity\n      WHERE seed.entity_key = 'ORD-8841'\n    ) paths\n    ORDER BY connected_risk DESC;"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 3,
+    "sql": "SELECT order_key,\n           connected_key,\n           connected_type,\n           relationship_type,\n           connected_risk\n    FROM GRAPH_TABLE ( activation_fraud_network\n      MATCH (order_node IS entity) -[edge IS related_to]-> (connected IS entity)\n      WHERE order_node.entity_key = 'ORD-8841'\n      COLUMNS (\n        order_node.entity_key AS order_key,\n        connected.entity_key AS connected_key,\n        connected.entity_type AS connected_type,\n        edge.relationship_type AS relationship_type,\n        connected.risk_score AS connected_risk\n      )\n    )\n    ORDER BY connected_risk DESC;"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 4,
+    "sql": "SELECT DISTINCT entity_key, display_name, entity_type,\n           relationship_hops, risk_score, risk_level,\n           total_amount, channel\n    FROM GRAPH_TABLE ( activation_fraud_network\n      MATCH (seed IS entity) -[e IS related_to]->{1,4} (reached IS entity)\n      WHERE seed.entity_key = 'ORD-8841'\n      COLUMNS (\n        reached.entity_key AS entity_key,\n        reached.display_name AS display_name,\n        reached.entity_type AS entity_type,\n        COUNT(e.relationship_type) AS relationship_hops,\n        reached.risk_score AS risk_score,\n        reached.risk_level AS risk_level,\n        reached.total_amount AS total_amount,\n        reached.channel AS channel\n      )\n    )\n    ORDER BY risk_score DESC\n    FETCH FIRST 25 ROWS ONLY;"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 5,
+    "sql": "SELECT order_a, shared_entity, shared_type, order_b,\n           a_risk, b_risk,\n           ROUND((a_risk + b_risk) / 2, 1) AS combined_risk,\n           e1_type, e2_type\n    FROM GRAPH_TABLE ( activation_fraud_network\n        MATCH (a IS entity)\n              -[e1 IS related_to]-> (shared IS entity)\n              <-[e2 IS related_to]- (b IS entity)\n        WHERE a.entity_type = 'service_order'\n          AND b.entity_type = 'service_order'\n          AND a.entity_id < b.entity_id\n          AND shared.entity_type IN ('device','ip_address','phone','email')\n          AND (a.risk_score >= 70 OR b.risk_score >= 70)\n        COLUMNS (\n            a.entity_key AS order_a,\n            shared.entity_key AS shared_entity,\n            shared.entity_type AS shared_type,\n            b.entity_key AS order_b,\n            a.risk_score AS a_risk,\n            b.risk_score AS b_risk,\n            e1.relationship_type AS e1_type,\n            e2.relationship_type AS e2_type\n        )\n    )\n    ORDER BY combined_risk DESC, shared_entity\n    FETCH FIRST 25 ROWS ONLY;"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 6,
+    "sql": "CREATE PROPERTY GRAPH activation_fraud_network\n  VERTEX TABLES (\n    activation_entities KEY (entity_id)\n      LABEL entity\n      PROPERTIES (\n        entity_id,\n        entity_key,\n        display_name,\n        entity_type,\n        risk_score,\n        risk_level,\n        channel,\n        total_amount,\n        event_count,\n        is_confirmed_fraud\n      ),\n    activation_cases KEY (case_id)\n      LABEL activation_case\n      PROPERTIES (\n        case_id,\n        case_ref,\n        case_type,\n        status,\n        risk_score,\n        loss_amount,\n        event_count\n      )\n  )\n  EDGE TABLES (\n    activation_relationships KEY (relationship_id)\n      SOURCE KEY (from_entity)\n        REFERENCES activation_entities (entity_id)\n      DESTINATION KEY (to_entity)\n        REFERENCES activation_entities (entity_id)\n      LABEL related_to\n      PROPERTIES (\n        relationship_type,\n        strength,\n        event_count,\n        total_amount\n      ),\n    activation_case_entities KEY (case_entity_id)\n      SOURCE KEY (case_id)\n        REFERENCES activation_cases (case_id)\n      DESTINATION KEY (entity_id)\n        REFERENCES activation_entities (entity_id)\n      LABEL contains_entity\n      PROPERTIES (\n        role,\n        evidence_score\n      )\n  );"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 1,
+    "sql": "SELECT hp.site_id,\n           hp.site_name,\n           hp.city,\n           hp.state_province,\n           hp.latitude,\n           hp.longitude,\n           DBMS_LOB.SUBSTR(\n             SDO_UTIL.TO_GEOJSON(hp.location), 120, 1\n           ) AS location_geojson\n    FROM network_sites hp\n    WHERE hp.site_id IN (1, 3, 16)\n    ORDER BY hp.site_id;"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 2,
+    "sql": "SELECT hp.site_name,\n           hp.city,\n           hp.state_province,\n           ROUND(\n             SDO_GEOM.SDO_DISTANCE(\n               hp.location,\n               dr.boundary,\n               0.005,\n               'unit=KM'\n             ), 2\n           ) AS boundary_distance_km,\n           dr.region_name,\n           dr.demand_index\n    FROM network_sites hp\n    CROSS JOIN network_regions dr\n    WHERE dr.region_name = 'New York Network Region'\n    ORDER BY boundary_distance_km\n    FETCH FIRST 10 ROWS ONLY;"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 3,
+    "sql": "SELECT hp.site_name,\n           hp.city,\n           hp.state_province,\n           ROUND(\n             SDO_GEOM.SDO_DISTANCE(\n               hp.location,\n               dr.boundary,\n               0.005,\n               'unit=KM'\n             ), 2\n           ) AS boundary_distance_km,\n           ROUND(\n             SDO_GEOM.SDO_DISTANCE(\n               hp.location,\n               dr.boundary,\n               0.005,\n               'unit=MILE'\n             ), 2\n           ) AS boundary_distance_miles,\n           dr.region_name,\n           dr.demand_index\n    FROM network_sites hp\n    CROSS JOIN network_regions dr\n    WHERE dr.region_name = 'Chicago Network Region'\n    ORDER BY boundary_distance_km\n    FETCH FIRST 10 ROWS ONLY;"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 4,
+    "sql": "WITH regional_subscribers AS (\n      SELECT dr.region_name,\n             dr.demand_index,\n             g.subscriber_id,\n             g.first_name || ' ' || g.last_name AS subscriber_name,\n             g.email,\n             g.customer_segment,\n             g.location\n      FROM subscribers g\n      CROSS JOIN network_regions dr\n      WHERE dr.region_name = 'New York Network Region'\n        AND SDO_GEOM.RELATE(\n              dr.boundary,\n              'ANYINTERACT',\n              g.location,\n              0.005\n            ) = 'TRUE'\n    ), ranked_sites AS (\n      SELECT rg.region_name,\n             rg.demand_index,\n             rg.subscriber_id,\n             rg.subscriber_name,\n             rg.email,\n             rg.customer_segment,\n             hp.site_name,\n             hp.city AS site_city,\n             hp.capacity_mbps,\n             hp.utilization_pct,\n             ROUND(\n               SDO_GEOM.SDO_DISTANCE(\n                 rg.location,\n                 hp.location,\n                 0.005,\n                 'unit=KM'\n               ), 2\n             ) AS subscriber_site_distance_km,\n             ROW_NUMBER() OVER (\n               PARTITION BY rg.subscriber_id\n               ORDER BY SDO_GEOM.SDO_DISTANCE(\n                          rg.location,\n                          hp.location,\n                          0.005,\n                          'unit=KM'\n                        )\n             ) AS site_rank\n      FROM regional_subscribers rg\n      CROSS JOIN network_sites hp\n      WHERE hp.is_active = 1\n    )\n    SELECT region_name,\n           demand_index,\n           subscriber_id,\n           subscriber_name,\n           email,\n           customer_segment,\n           site_name,\n           site_city,\n           capacity_mbps,\n           utilization_pct,\n           subscriber_site_distance_km\n    FROM ranked_sites\n    WHERE site_rank = 1\n    ORDER BY subscriber_site_distance_km, subscriber_id\n    FETCH FIRST 25 ROWS ONLY;"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 1,
+    "sql": "SELECT plan_id,\n           category,\n           monthly_fee,\n           total_reports,\n           avg_sentiment,\n           congested_intervals,\n           busy_intervals,\n           connections_ordered,\n           monthly_charges,\n           surge_label\n    FROM oml_plan_demand_training_v\n    ORDER BY plan_id\n    FETCH FIRST 10 ROWS ONLY;"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 2,
+    "sql": "DROP TABLE IF EXISTS otto_plan_demand_settings;\n    \n    CREATE TABLE otto_plan_demand_settings (\n          setting_name  VARCHAR2(30),\n          setting_value VARCHAR2(4000)\n        );\n\n    INSERT INTO otto_plan_demand_settings (setting_name, setting_value)\n    VALUES ('ALGO_NAME', 'ALGO_GENERALIZED_LINEAR_MODEL');\n\n    INSERT INTO otto_plan_demand_settings (setting_name, setting_value)\n    VALUES ('PREP_AUTO', 'ON');\n\n    INSERT INTO otto_plan_demand_settings (setting_name, setting_value)\n    VALUES ('ODMS_RANDOM_SEED', '20260604');\n\n    COMMIT;\n\n    DECLARE\n      l_model_count NUMBER;\n    BEGIN\n      SELECT COUNT(*)\n      INTO l_model_count\n      FROM user_mining_models\n      WHERE model_name = 'OTTO_PLAN_DEMAND_SURGE_MODEL';\n\n      IF l_model_count > 0 THEN\n        DBMS_DATA_MINING.DROP_MODEL('OTTO_PLAN_DEMAND_SURGE_MODEL');\n      END IF;\n    END;\n    /\n\n    BEGIN\n      DBMS_DATA_MINING.CREATE_MODEL(\n        model_name           => 'OTTO_PLAN_DEMAND_SURGE_MODEL',\n        mining_function      => DBMS_DATA_MINING.CLASSIFICATION,\n        data_table_name      => 'OML_PLAN_DEMAND_TRAINING_V',\n        case_id_column_name  => 'PLAN_ID',\n        target_column_name   => 'SURGE_LABEL',\n        settings_table_name  => 'OTTO_PLAN_DEMAND_SETTINGS'\n      );\n    END;\n    /"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 3,
+    "sql": "SELECT model_name,\n           mining_function,\n           algorithm\n    FROM user_mining_models\n    WHERE model_name = 'OTTO_PLAN_DEMAND_SURGE_MODEL';"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 4,
+    "sql": "DROP TABLE IF EXISTS otto_plan_demand_scoring_data;\n\n    CREATE TABLE otto_plan_demand_scoring_data (\n      plan_id    NUMBER,\n      category      VARCHAR2(100),\n      monthly_fee    NUMBER,\n      total_reports   NUMBER,\n      avg_sentiment NUMBER,\n      dropped_sessions   NUMBER,\n      outage_minutes  NUMBER,\n      data_volume_gb   NUMBER,\n      avg_utilization_pct  NUMBER,\n      congested_intervals   NUMBER,\n      busy_intervals  NUMBER,\n      connections_ordered    NUMBER,\n      monthly_charges       NUMBER\n    );\n\n    INSERT INTO otto_plan_demand_scoring_data (\n      plan_id,\n      category,\n      monthly_fee,\n      total_reports,\n      avg_sentiment,\n      dropped_sessions,\n      outage_minutes,\n      data_volume_gb,\n      avg_utilization_pct,\n      congested_intervals,\n      busy_intervals,\n      connections_ordered,\n      monthly_charges\n    )\n    SELECT plan_id,\n           category,\n           monthly_fee,\n           total_reports + 4,\n           avg_sentiment,\n           dropped_sessions + 25,\n           outage_minutes + 10,\n           data_volume_gb + 500,\n           LEAST(avg_utilization_pct + 5, 100),\n           congested_intervals + 1,\n           busy_intervals + 1,\n           connections_ordered + 3,\n           monthly_charges + (monthly_fee * 3)\n    FROM (\n      SELECT plan_id,\n             category,\n             monthly_fee,\n             total_reports,\n             avg_sentiment,\n             dropped_sessions,\n             outage_minutes,\n             data_volume_gb,\n             avg_utilization_pct,\n             congested_intervals,\n             busy_intervals,\n             connections_ordered,\n             monthly_charges,\n             ROW_NUMBER() OVER (ORDER BY plan_id) AS row_num\n      FROM oml_plan_demand_training_v\n    )\n    WHERE row_num <= 12;\n\n    COMMIT;"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 5,
+    "sql": "WITH scored_offers AS (\n      SELECT plan_id,\n             category,\n             connections_ordered,\n             monthly_charges,\n             total_reports,\n             congested_intervals,\n             busy_intervals,\n             PREDICTION(\n               OTTO_PLAN_DEMAND_SURGE_MODEL USING\n               category, monthly_fee, total_reports, avg_sentiment,\n               dropped_sessions, outage_minutes, data_volume_gb, avg_utilization_pct,\n               congested_intervals, busy_intervals, connections_ordered, monthly_charges\n             ) AS predicted_surge,\n             ROUND(\n               PREDICTION_PROBABILITY(\n                 OTTO_PLAN_DEMAND_SURGE_MODEL,\n                 'SURGE' USING\n                 category, monthly_fee, total_reports, avg_sentiment,\n                 dropped_sessions, outage_minutes, data_volume_gb, avg_utilization_pct,\n                 congested_intervals, busy_intervals, connections_ordered, monthly_charges\n               ), 8\n             ) AS surge_score\n      FROM otto_plan_demand_scoring_data\n    )\n    SELECT so.plan_id,\n           so.plan_name,\n           scored_offer.category,\n           scored_offer.predicted_surge,\n           scored_offer.surge_score,\n           ROUND(scored_offer.surge_score * 100, 2) AS surge_pct,\n           scored_offer.connections_ordered,\n           scored_offer.monthly_charges,\n           scored_offer.total_reports,\n           scored_offer.congested_intervals,\n           scored_offer.busy_intervals\n    FROM scored_offers scored_offer\n    JOIN service_plans so\n      ON so.plan_id = scored_offer.plan_id\n    ORDER BY scored_offer.surge_score DESC,\n             so.plan_id;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 1,
+    "sql": "SELECT profile_name,\n           status,\n           description\n    FROM user_cloud_ai_profiles\n    ORDER BY profile_name;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 2,
+    "sql": "SELECT profile_name,\n           attribute_name,\n           attribute_value\n    FROM user_cloud_ai_profile_attributes\n    ORDER BY profile_name, attribute_name;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 3,
+    "sql": "BEGIN\n      DBMS_CLOUD_AI.SET_ATTRIBUTE(\n        profile_name    => 'genai',\n        attribute_name  => 'object_list',\n        attribute_value => '[{\"owner\": \"' || USER || '\", \"name\": \"SERVICE_PLANS\"}, {\"owner\": \"' || USER || '\", \"name\": \"SERVICE_ORDERS\"}, {\"owner\": \"' || USER || '\", \"name\": \"SERVICE_ORDER_LINES\"}, {\"owner\": \"' || USER || '\", \"name\": \"SUBSCRIBERS\"}]'\n      );\n    END;\n    /"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 4,
+    "sql": "SELECT profile_name,\n           attribute_name,\n           attribute_value\n    FROM user_cloud_ai_profile_attributes\n    WHERE profile_name = 'GENAI'\n      AND attribute_name = 'object_list';"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 5,
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.',\n             profile_name => 'genai',\n             action       => 'showsql'\n           ) AS generated_sql;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 6,
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.',\n             profile_name => 'genai',\n             action       => 'runsql'\n           ) AS answer;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 7,
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'showsql'\n           ) AS generated_sql;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 8,
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'runsql'\n           ) AS answer;"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 9,
+    "sql": "SELECT DBMS_CLOUD_AI.GENERATE(\n             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',\n             profile_name => 'genai',\n             action       => 'narrate'\n           ) AS explanation;"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 1,
+    "sql": "SELECT profile_name,\n           status\n    FROM user_cloud_ai_profiles\n    WHERE profile_name = 'GENAI';"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 2,
+    "sql": "SELECT profile_name,\n           attribute_name,\n           attribute_value\n    FROM user_cloud_ai_profile_attributes\n    WHERE profile_name = 'GENAI'\n      AND attribute_name = 'object_list';"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 3,
+    "sql": "SELECT agent_name,\n           status\n    FROM user_ai_agents\n    ORDER BY agent_name;"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 4,
+    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_TOOL(\n        tool_name   => 'NINA_TELECOM_SQL_TOOL',\n        attributes  => '{\"tool_type\": \"SQL\", \"tool_params\": {\"profile_name\": \"genai\"}}',\n        description => 'Read-only SQL access to the workshop telecommunications tables'\n      );\n    END;\n    /"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 5,
+    "sql": "SELECT tool_name,\n           status,\n           description\n    FROM user_ai_agent_tools\n    WHERE tool_name = 'NINA_TELECOM_SQL_TOOL';"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 6,
+    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_AGENT(\n        agent_name  => 'NINA_TELECOM_AGENT',\n        attributes  => '{\"profile_name\": \"genai\", \"role\": \"You are Nina Patel''s telecommunications data assistant. Answer questions using the approved SQL tool. Use database results for service plan, service order, monthly service charge, and subscriber facts. Do not invent values.\"}',\n        description => 'Telecommunications assistant for Nina Patel'\n      );\n    END;\n    /"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 7,
+    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_TASK(\n        task_name  => 'NINA_TELECOM_TASK',\n        attributes => '{\"instruction\": \"Answer Nina''s telecommunications question: {query}. Use NINA_TELECOM_SQL_TOOL once to retrieve the required data. Return a concise answer based on the database result. Do not repeat the same tool call and do not make changes to database records.\", \"tools\": [\"NINA_TELECOM_SQL_TOOL\"], \"enable_human_tool\": \"false\"}',\n        description => 'Answer read-only service plan and subscriber questions'\n      );\n    END;\n    /"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 8,
+    "sql": "BEGIN\n      DBMS_CLOUD_AI_AGENT.CREATE_TEAM(\n        team_name  => 'NINA_TELECOM_TEAM',\n        attributes => '{\"agents\": [{\"name\": \"NINA_TELECOM_AGENT\", \"task\": \"NINA_TELECOM_TASK\"}], \"process\": \"sequential\"}',\n        description => 'Read-only telecommunications question team'\n      );\n    END;\n    /"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 9,
+    "sql": "SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(\n             team_name   => 'NINA_TELECOM_TEAM',\n             user_prompt => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders. Include the service plan name, category, total monthly charges, and connections ordered.',\n             params      => '{\"conversation_id\": \"' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '\"}'\n           ) AS agent_answer;"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 10,
+    "sql": "SELECT team_name,\n         team_exec_id,\n         state,\n         start_date,\n         end_date\n    FROM user_ai_agent_team_history\n    ORDER BY start_date DESC\n    FETCH FIRST 5 ROWS ONLY;"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 11,
+    "sql": "SELECT tool_name,\n         invocation_id,\n         agent_name,\n         task_name,\n         start_date,\n         end_date\n    FROM user_ai_agent_tool_history\n    ORDER BY start_date DESC\n    FETCH FIRST 10 ROWS ONLY;"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 12,
+    "sql": "BEGIN\n  DBMS_CLOUD_AI_AGENT.DROP_TEAM('NINA_TELECOM_TEAM', TRUE);\n  DBMS_CLOUD_AI_AGENT.DROP_TASK('NINA_TELECOM_TASK', TRUE);\n  DBMS_CLOUD_AI_AGENT.DROP_AGENT('NINA_TELECOM_AGENT', TRUE);\n  DBMS_CLOUD_AI_AGENT.DROP_TOOL('NINA_TELECOM_SQL_TOOL', TRUE);\nEND;\n/"
+  }
+]

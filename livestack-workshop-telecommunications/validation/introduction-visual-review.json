@@ -1,0 +1,119 @@
+{
+  "method": "Built-in image generation, visual review and macOS Vision OCR",
+  "style": "Powtoon-style characters and diagrams with Redwood-inspired warm neutral, teal and terracotta palette",
+  "images": [
+    {
+      "path": "introduction/images/seer-telecomms-introduction.png",
+      "text": [
+        "SEER Telecomms",
+        "Help subscribers affected by dropped calls.",
+        "Review the",
+        "reports",
+        "Find affected",
+        "subscribers",
+        "Check network",
+        "sites",
+        "8"
+      ],
+      "sha256": "aebb783d3059caf4090d25cc9fe69b443c025ee835a5b14313c8c90853c960fe"
+    },
+    {
+      "path": "introduction/images/seer-telecomms-erd.png",
+      "text": [
+        "SEER Telecomms",
+        "The core data model",
+        "SUBSCRIBERS",
+        "PK",
+        "SUBSCRIBER_ID",
+        "FIRST_NAME",
+        "LAST_NAME",
+        "1",
+        "1",
+        "NETWORK_SITES",
+        "PK SITE_ID",
+        "SITE_NAME",
+        "CITY",
+        "1",
+        "N",
+        "SERVICE_ORDERS",
+        "PK ORDER_ID",
+        "FK SUBSCRIBER_ID",
+        "FK SITE_ID",
+        "PERIOD_START / PERIOD_END",
+        "ORDER_STATUS",
+        "1",
+        "N",
+        "SERVICE_PLANS",
+        "PK PLAN_ID",
+        "FK SITE_ID",
+        "SERVICE_TYPE /",
+        "BILLING_MODEL",
+        "MONTHLY_FEE",
+        "1",
+        "N",
+        "SERVICE_ORDER_LINES",
+        "PK ORDER_LINE_ID",
+        "FK ORDER_ID",
+        "FK PLAN_ID",
+        "CONNECTION_COUNT",
+        "MONTHLY_FEE / LINE_TOTAL",
+        "\u2022\u2022..",
+        "PK = primary key",
+        "FK = foreign key",
+        "1:N = one-to-many",
+        "One initial monthly period per order. Lines count simultaneous connections."
+      ],
+      "sha256": "54c6f197c68efef69ccbd9ed636c2f2b0c9d64433b4583ab497b39665f655dae"
+    }
+  ],
+  "schema_fields_checked": {
+    "subscribers": [
+      "subscriber_id",
+      "first_name",
+      "last_name"
+    ],
+    "network_sites": [
+      "site_id",
+      "site_name",
+      "city"
+    ],
+    "service_orders": [
+      "order_id",
+      "subscriber_id",
+      "site_id",
+      "period_start",
+      "period_end",
+      "order_status"
+    ],
+    "service_plans": [
+      "plan_id",
+      "site_id",
+      "service_type",
+      "billing_model",
+      "monthly_fee"
+    ],
+    "service_order_lines": [
+      "order_line_id",
+      "order_id",
+      "plan_id",
+      "connection_count",
+      "monthly_fee",
+      "line_total"
+    ]
+  },
+  "relationship_review": "Five 1:N connectors visually verified: subscribers to orders, sites to orders, sites to plans, orders to lines, plans to lines.",
+  "placement": "Opening scene follows first story paragraph; illustrated ERD appears under the data model heading. The SVG remains linked as a text-based companion.",
+  "result_capture_claim": false,
+  "browser_check": {
+    "introduction_images_loaded": true,
+    "full_size_erd_link_loaded": true,
+    "opening_image_size": [
+      1672,
+      941
+    ],
+    "erd_image_size": [
+      1122,
+      1402
+    ]
+  }
+}

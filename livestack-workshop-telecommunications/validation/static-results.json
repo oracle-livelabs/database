@@ -1,0 +1,326 @@
+{
+  "scope": "Offline only; does not compile Oracle SQL or execute database APIs.",
+  "checks": [
+    {
+      "check": "insert_arity",
+      "passed": true,
+      "instances": 11491,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "15_loader_tables",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "15"
+    },
+    {
+      "check": "18_foreign_keys",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "18"
+    },
+    {
+      "check": "unique_primary_keys",
+      "passed": true,
+      "instances": 14,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "insert_columns_exist",
+      "passed": true,
+      "instances": 14,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "foreign_key_fixture",
+      "passed": true,
+      "instances": 18,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "fixture_matches_every_seed_insert",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "11491"
+    },
+    {
+      "check": "order_line_site",
+      "passed": true,
+      "instances": 3843,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "order_line_quantity_price",
+      "passed": true,
+      "instances": 3843,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "order_totals",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "3843"
+    },
+    {
+      "check": "one_month_fixture",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "reserved_ids_absent",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "lab2_plan",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "oml_classes",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "{'STABLE': 96, 'SURGE': 96}"
+    },
+    {
+      "check": "support_features_bounded",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "technology_variants",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "wgs84_point",
+      "passed": true,
+      "instances": 1040,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "point_bounds",
+      "passed": true,
+      "instances": 1040,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "point_columns",
+      "passed": true,
+      "instances": 16,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "region_ring_closed",
+      "passed": true,
+      "instances": 2,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "shared_device",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "shared_identifier_pairs",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "6"
+    },
+    {
+      "check": "graph_hop_fixture",
+      "passed": true,
+      "instances": 4,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "airtime_cycle",
+      "passed": true,
+      "instances": 2,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "airtime_six_hop",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "fresh_schema_guard",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "separate_vector_column",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "deployment_loader_path",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "manifest_variants_match",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "manifest_target",
+      "passed": true,
+      "instances": 11,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "balanced_fences",
+      "passed": true,
+      "instances": 11,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "copy_wrappers",
+      "passed": true,
+      "instances": 11,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "details_tags",
+      "passed": true,
+      "instances": 11,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "local_link",
+      "passed": true,
+      "instances": 48,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "lab_link",
+      "passed": true,
+      "instances": 9,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "11_lessons",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "11"
+    },
+    {
+      "check": "40_task_headings",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "40"
+    },
+    {
+      "check": "60_sql_blocks",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "60"
+    },
+    {
+      "check": "seven_quiz_answers",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "notebook_outputs_clear",
+      "passed": true,
+      "instances": 51,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "51_notebook_paragraphs",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "51"
+    },
+    {
+      "check": "5_python_paragraphs",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": "5"
+    },
+    {
+      "check": "qualified_column",
+      "passed": true,
+      "instances": 258,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "duality_ddl_matches",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    },
+    {
+      "check": "graph_ddl_matches",
+      "passed": true,
+      "instances": 1,
+      "failures": [],
+      "detail": ""
+    }
+  ],
+  "passed": true,
+  "seed_rows": 11491,
+  "sql_blocks": 60,
+  "task_headings": 40,
+  "local_links_checked": 48,
+  "columns_checked": 258
+}
