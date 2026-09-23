@@ -21,13 +21,8 @@ In this lab, you will:
 - Completion of Lab 3.
 - Customer intake values for each external service you plan to enable.
 - A personal Gmail account for the workshop OAuth flow. Do not use a corporate or customer-owned Google account.
-<<<<<<< HEAD
-- A Google Cloud project, Desktop OAuth client, and one approved Drive folder named `AI Staff Approved` for all published AI Staff artifacts.
-- A Cloudflare account ID and API token when image generation is enabled.
-=======
 - The folder ID of the approved Google Drive root for AI Staff.
 - A Cloudflare account ID and API token if you plan to generate images.
->>>>>>> db722177cd660e6242797bb47ffc215361550fb6
 - Access to the email sender and publishing accounts.
 
 ## Task 1: Configure Google OAuth for AI Staff
@@ -38,9 +33,6 @@ In this lab, you will:
 
     ![Open the Google Cloud project selector](./images/01-google-cloud-select-project.jpg "Open the Google Cloud project selector")
 
-<<<<<<< HEAD
-4. Create or identify one Drive folder named `AI Staff Approved`. This is the only production Drive root; published posts, assets, receipts, and documents are stored below it. Create a Desktop OAuth client ID and secret, then create the protected integration file before adding the values:
-=======
 3. In the **Select a project** window, select **New project**.
 
     ![Select New project in Google Cloud](./images/02-google-cloud-new-project.jpg "Select New project in Google Cloud")
@@ -133,7 +125,6 @@ In this lab, you will:
     ![Copy the Google OAuth client credentials](./images/20-google-auth-copy-client-credentials.jpeg "Copy the Google OAuth client credentials")
 
 24. On the compute instance, create the protected integration file before adding the values:
->>>>>>> db722177cd660e6242797bb47ffc215361550fb6
 
     ```bash
     <copy>
@@ -150,12 +141,7 @@ In this lab, you will:
     <copy>
     AISTAFF_GOOGLE_CLIENT_ID="<google-client-id>"
     AISTAFF_GOOGLE_CLIENT_SECRET="<google-client-secret>"
-<<<<<<< HEAD
     AISTAFF_DRIVE_ROOT_FOLDER_ID="<approved-published-folder-id>"
-=======
-    AISTAFF_GOOGLE_LOGIN_HINT="<workshop-gmail-address>"
-    AISTAFF_DRIVE_ROOT_FOLDER_ID="<approved-ai-staff-folder-id>"
->>>>>>> db722177cd660e6242797bb47ffc215361550fb6
     </copy>
     ```
 
@@ -252,50 +238,8 @@ In this lab, you will:
     </copy>
     ```
 
-<<<<<<< HEAD
 
 ## Task 4: Validate the External-Service Handoff
-=======
-10. Do not place the Cloudflare token in `config.json`, an agent `.env`, Terraform variables, or `user_data`.
-
-## Task 3: Enable AI Staff Voice Support
-
-1. Use this task when the deployment needs audio transcription. The current
-    runtime uses the AI Staff virtual environment and its installed
-    requirements.
-
-2. Verify transcription with a small local audio file.
-
-    ```
-    <copy>
-    cd ~/livelabs-ai-staff
-    agents/aistaff/venv/bin/python agents/aistaff/transcribe.py /path/to/sample.m4a
-    </copy>
-    ```
-
-## Task 4: Configure Email and Publishing Helpers
-
-1. Configure OCI Email Delivery if the deployment needs pause-reminder email. In OCI Console, create an approved sender and SMTP credentials, then add the values to `.env.shared`.
-
-    ```
-    <copy>
-    SMTP_HOST="<smtp-host>"
-    SMTP_PORT="587"
-    SMTP_USER="<smtp-user>"
-    SMTP_PASS="<smtp-password>"
-    SMTP_FROM="<approved-sender-email>"
-    NOTIFY_EMAIL="<notification-recipient>"
-    </copy>
-    ```
-
-2. Configure Substack only when the customer publishes to Substack. Substack uses a third-party MCP flow with local patches, so read the repository gotchas before enabling it. If its config file is absent, Publish Agent skips the Substack step.
-
-3. Configure Instagram cookies only if the deployment needs Instagram intake. Store cookies outside the repository, for example `~/.config/myapp/cookies.txt`, because the file grants account access.
-
-4. Leave Buffer parked unless the deployment explicitly requires manual Buffer scheduling.
-
-## Task 5: Validate the External-Service Handoff
->>>>>>> db722177cd660e6242797bb47ffc215361550fb6
 
 1. Validate the external configuration before activating services.
 
