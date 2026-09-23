@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Energy and Utilities LiveStack Workshop Badge</title>
+  <desc id="desc">A circular Oracle red and deep blue completion badge with a lightning bolt and water drop.</desc>
+  <circle cx="400" cy="400" r="370" fill="#0b1f33" stroke="#c74634" stroke-width="28"/>
+  <circle cx="400" cy="400" r="302" fill="#f5f4f2" stroke="#63a7d9" stroke-width="12"/>
+  <path d="M425 165 290 430h112l-47 205 158-292H397z" fill="#f2b134" stroke="#0b1f33" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M525 470c0-47 62-113 62-113s62 66 62 113a62 62 0 1 1-124 0z" fill="#2d8bc9" stroke="#0b1f33" stroke-width="9"/>
+  <text x="400" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff">ORACLE LIVESTACK</text>
+  <text x="400" y="705" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#ffffff">ENERGY &amp; UTILITIES</text>
+  <text x="400" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#ffffff">WORKSHOP COMPLETE</text>
+</svg>
