@@ -235,7 +235,7 @@
     {
       "check": "local_link",
       "passed": true,
-      "instances": 48,
+      "instances": 99,
       "failures": [],
       "detail": ""
     },
@@ -321,6 +321,6 @@
   "seed_rows": 11491,
   "sql_blocks": 60,
   "task_headings": 40,
-  "local_links_checked": 48,
+  "local_links_checked": 99,
   "columns_checked": 258
 }

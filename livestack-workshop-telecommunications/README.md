@@ -6,11 +6,11 @@ Open `workshops/sandbox/index.html` or `workshops/tenancy/index.html` through a 
 
 ## Release state
 
-The repository conversion and offline checks are complete. Nine live application screenshots are included beside the related instructions; their captions distinguish the demo dataset and local AI runtime from the workshop. Database execution, Graph Studio import, AutoML, Select AI calls and authentic database-result screenshots are deferred until a manual database is available. LiveLabs green-button and Terraform validation have not been run. This is a reviewable handoff, not a runtime-certified release.
+The repository conversion, offline checks and manual database validation are complete. The loader statements, lab SQL, both Graph Studio notebooks, AutoML and Select AI/agent examples were exercised as LLUSER. Authentic demo and database screenshots are placed beside their instructions. See [manual validation](validation/manual-results.md) for results, corrected failures and limits. The SQLcl launch step, LiveLabs green-button and Terraform provisioning remain untested.
 
 - [Workshop map](validation/workshop-map.md)
-- [Schema and fixture contract](validation/schema-contract.md)
-- [Canonical loader and manual run sequence](stack/README.md)
+- [Tables and sample data](validation/schema-contract.md)
+- [Main loader and manual run sequence](stack/README.md)
 - [Screenshot placement and capture queue](validation/screenshots.md)
 - [Validation evidence](validation/README.md)
 

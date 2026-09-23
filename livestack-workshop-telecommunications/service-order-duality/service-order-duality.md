@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> **Validation status:** Database execution and result screenshots are pending a manually provisioned environment. Run the loader before these exercises.
+> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Thomas Brune develops subscriber applications at SEER Telecomms. His team needs service order documents that match its web and mobile screens and reduce calls to the database.
 
@@ -24,7 +24,7 @@ Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Or
 
 </details>
 
-Thomas's application needs a payload with the service order and its monthly service-charge lines together, such as this:
+Thomas's application needs a document with the service order and its monthly service-charge lines together, such as this:
 
 ```json
 {
@@ -40,7 +40,7 @@ Thomas's application needs a payload with the service order and its monthly serv
 }
 ```
 
-The application uses this document shape, while the database keeps the service order and monthly service-charge lines in relational form. In this lab, you build and read this type of payload in three ways.
+The application uses this document shape, while the database keeps the service order and monthly service-charge lines in relational form. In this lab, you build and read this type of document in three ways.
 
 ### Objectives
 
@@ -55,12 +55,12 @@ Estimated Time: **10 minutes**
 
 | Step | Telecommunications focus |
 | --- | --- |
-| Business Problem | Thomas's team needs flexible JSON payloads for a new subscriber web and mobile application. |
-| Technical Challenge | The team needs application-friendly documents while the database keeps relational keys, joins, and controls. |
-| Persona Focus | Thomas tests JSON storage, collections, and duality with Jessica's database guidance. |
+| Problem | Thomas's team needs flexible JSON documents for a new subscriber web and mobile application. |
+| Database task | The team needs documents that match the application’s screens while the database keeps relational keys, joins, and controls. |
+| Your role | Thomas tests JSON storage, collections, and duality with Jessica's database guidance. |
 | What You Will See | One Oracle AI Database supports several JSON access patterns over the telecommunications data. |
-| Database Capability | Native JSON, SQL/JSON functions, and JSON Relational Duality work together. |
-| Outcome | Thomas can choose an application shape without creating a second subscriber-data store. |
+| Oracle features | Native JSON, SQL/JSON functions, and JSON Relational Duality work together. |
+| Result | Thomas can choose a document structure without creating a second subscriber-data store. |
 
 Persona focus: You are Thomas, working with Jessica to decide how the new application should store, assemble, and read subscriber service order data.
 
@@ -76,7 +76,7 @@ Thomas gets the JSON document his application needs. Jessica keeps SQL access, r
 
 Thomas starts with data that belongs to the application but does not need its own relational columns. The workshop database already contains the service order rows. He adds a small application-data table with a native `JSON` column for optional screen and subscriber-experience settings.
 
-1. Create the application-data table and add one sample payload.
+1. Create the application-data table and add one sample document.
 
     ```sql
     <copy>
@@ -187,7 +187,7 @@ Thomas now tests the document shape his application can consume directly.
     <summary><strong>Why this matters to Thomas</strong></summary>
 
     > Thomas can use a JSON Collection Table when the application owns the document. But the service order already has relational tables that Jessica and other teams rely on.
-    > The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the service order into another store.
+    > The duality view gives Thomas a document over those existing rows. He can choose the document structure without copying the service order into another store.
 
     </details>
 
@@ -200,7 +200,9 @@ Thomas now tests the document shape his application can consume directly.
     ```
 
     <!-- capture:CAP-53 -->
-    > **Capture pending (CAP-53):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Read a subscriber document from relational data](images/sql-duality-document.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     **Expected output:**
@@ -208,9 +210,9 @@ Thomas now tests the document shape his application can consume directly.
     
 
 2. Expand the document in SQL Worksheet.
-    The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a service order payload without a second copy of the service order record.
+    The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a service order document without a second copy of the service order record.
 
-    The \_id value appears in the JSON document while the source data remains relational. The payload includes `subscriberId`, `status`, totals, timestamps, and monthly service-charge lines. The application gets these fields without a second service order store.
+    The \_id value appears in the JSON document while the source data remains relational. The document includes `subscriberId`, `status`, totals, timestamps, and monthly service-charge lines. The application gets these fields without a second service order store.
 
     The same service order now has two useful forms: API-ready JSON for the application and relational rows for analysis.
 
@@ -218,7 +220,7 @@ Thomas now tests the document shape his application can consume directly.
 
 <!-- application-capture:APP-03 -->
 
-In the running demo, open **Subscriber Service Orders** to see an application list of subscriber commitments. This is an order-list example. The demo document contract differs from `SERVICE_ORDERS_DV`, so use the SQL and JSON keys above for this lab.
+In the running demo, open **Subscriber Service Orders** to see an application list of subscriber commitments. This is an order-list example. The demo document structure differs from `SERVICE_ORDERS_DV`, so use the SQL and JSON keys above for this lab.
 
 ![Live subscriber service-order list; separate application data.](images/app-service-orders.png)
 
@@ -300,7 +302,9 @@ The existing `SERVICE_ORDERS_DV` lets an application update service order docume
     ```
 
     <!-- capture:CAP-54 -->
-    > **Capture pending (CAP-54):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Enable document inserts and updates](images/sql-duality-contract.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     **Expected output: Document Capabilities Enabled**
@@ -317,7 +321,7 @@ Thomas now tests a complete subscriber service order. He creates it as one neste
 
     The `INSERT` writes through `SERVICE_ORDERS_DV`; Oracle uses the view definition to update the relational tables. The sample uses service order `900001`, subscriber `1`, site `1`, plan `1`, and order-line `990001`. Its two-connection service order costs 125.00 per connection per month, for a total of 250.00 in the workshop currency.
 
-    The loader must supply subscriber 1 and plan 1 at site 1. The service order and order-line IDs are reserved for this exercise. The fixed dates cover September 2026, with an exclusive end date of 1 October. The quantity is two connections, independent of the number of days. This fixture does not calculate proration or taxes. On the first run, the service order has status `pending`. Running the insert again adds no rows and preserves the existing record.
+    The loader must supply subscriber 1 and plan 1 at site 1. The service order and order-line IDs are reserved for this exercise. The fixed dates cover September 2026, with an exclusive end date of 1 October. The quantity is two connections, independent of the number of days. This example does not calculate proration or taxes. On the first run, the service order has status `pending`. Running the insert again adds no rows and preserves the existing record.
 
     ```sql
     <copy>
@@ -384,7 +388,7 @@ Thomas now tests a complete subscriber service order. He creates it as one neste
 
 3. Update the document status through the duality view.
 
-    This statement updates only `status` through `SERVICE_ORDERS_DV`. Oracle maps it to `SERVICE_ORDERS.ORDER_STATUS`. The view also allows updates to other exposed fields; restricting writes to status alone would require a more limited view definition. Thomas does not need to parse the document in the application. This partial SQL update does not compare an ETAG. Applications requiring optimistic concurrency should read and submit the document with its ETAG using the documented full-document update flow.
+    This statement updates only `status` through `SERVICE_ORDERS_DV`. Oracle maps it to `SERVICE_ORDERS.ORDER_STATUS`. The view also allows updates to other exposed fields; restricting writes to status alone would require a more limited view definition. Thomas does not need to parse the document in the application. This partial SQL update does not compare an ETAG. Applications that need to detect changes made by another user should read and submit the document with its ETAG using the documented full-document update flow.
 
     ```sql
     <copy>
@@ -418,7 +422,9 @@ Thomas now tests a complete subscriber service order. He creates it as one neste
     ```
 
     <!-- capture:CAP-55 -->
-    > **Capture pending (CAP-55):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Create and update a JSON service order](images/sql-duality-confirmed.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     **Expected output: Updated Service Order Rows**
@@ -450,7 +456,9 @@ Thomas has checked that the application can display and update a document. Jessi
     ```
 
     <!-- capture:CAP-56 -->
-    > **Capture pending (CAP-56):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Project JSON fields with SQL](images/sql-duality-projection.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     **Expected output: JSON Field Projection**
@@ -472,7 +480,9 @@ Thomas has checked that the application can display and update a document. Jessi
     ```
 
     <!-- capture:CAP-57 -->
-    > **Capture pending (CAP-57):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Project JSON fields with SQL](images/sql-duality-relational.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     
@@ -489,7 +499,7 @@ Thomas does not have to choose one JSON model for the whole application. He can 
 | JSON Collection Table             | The application owns a set of JSON documents and needs document-style access.               | Store activation drafts while subscribers choose plans, connection counts, and eSIM preferences.                              | A JSON Collection Table with one document in each `DATA` row.                                                  |
 | JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a subscriber service order with its status and monthly service-charge lines, or accept a new service order document from the app. | Relational tables such as `SERVICE_ORDERS` and `SERVICE_ORDER_LINES`; the duality view defines the JSON shape for Thomas' app. |
 
-For Thomas, `SERVICE_ORDERS_DV` is the right choice for the service order feature because `SERVICE_ORDERS` and `SERVICE_ORDER_LINES` already hold shared telecommunications data. The application gets the JSON payload it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
+For Thomas, `SERVICE_ORDERS_DV` is the right choice for the service order feature because `SERVICE_ORDERS` and `SERVICE_ORDER_LINES` already hold shared telecommunications data. The application gets the JSON document it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
 
 
 ## Acknowledgements

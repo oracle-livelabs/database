@@ -4,9 +4,9 @@
 
 ## Introduction
 
-> **Validation status:** Database execution and result screenshots are pending a manually provisioned environment. Run the loader before these exercises.
+> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
-Gilly Bourne is an AI engineer at SEER Telecomms. Her team has built a search feature for the subscriber support operations application. A business user can enter a question such as **which subscribers may be affected by an indoor mobile coverage complaint?** The application should find the relevant service plans first, then show the subscribers who ordered them.
+Gilly Bourne is an AI engineer at SEER Telecomms. Her team has built a search feature for the subscriber-support application. A support analyst can enter a question such as **which subscribers may be affected by an indoor mobile coverage complaint?** The application should find the relevant service plans first, then show the subscribers who ordered them.
 
 Gilly has the service plan, service order, and subscriber data in Oracle AI Database. She needs to match a plain-language question to service plans, then find the subscribers who ordered them. The result must give the service team names and service orders to follow up.
 
@@ -24,7 +24,7 @@ In this lab, you check the embedding model, create service plan vectors, and use
 >
 > - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the telecommunications rows they describe, so the search stays connected to service plan names, service types, billing models, and monthly fees.
 >
-> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which service plans best match a business user's question.
+> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which service plans best match a support analyst's question.
 >
 > - **Semantic search** means searching by meaning instead of exact words. A search for "weak indoor mobile coverage with Wi-Fi calling" can find mobile plans with Wi-Fi calling even when the service plan names use different wording.
 
@@ -46,12 +46,12 @@ Estimated Time: **10 minutes**
 
 | Step                | Telecommunications focus                                                                                                                               |
 | ---------------------| ---------------------------------------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Business users need to find relevant service plans without knowing the exact terms used in the service plan data.                                     |
-| Technical Challenge | Gilly must search by meaning while keeping service plan data, vectors, service orders, subscribers, and access controls together.                          |
-| Persona Focus       | You review Gilly's implementation as she explains how the search connects a business question to service plans, service orders, and subscribers.           |
+| Problem    | Support analysts need to find relevant service plans without knowing the exact terms used in the service plan data.                                     |
+| Database task | Gilly must search by meaning while keeping service plan data, vectors, service orders, subscribers, and access controls together.                          |
+| Your role       | You review Gilly's implementation as she explains how the search connects a business question to service plans, service orders, and subscribers.           |
 | What You Will See   | Vector search ranks service plans by meaning, then SQL adds service order and subscriber details.                                                          |
-| Database Capability | `VECTOR_EMBEDDING`, vector columns, and `VECTOR_DISTANCE` run beside relational telecommunications data.                                               |
-| Outcome             | The application can turn a plain-language concern into a subscriber follow-up list without a separate vector database or copied telecommunications text. |
+| Oracle features | `VECTOR_EMBEDDING`, vector columns, and `VECTOR_DISTANCE` run beside relational telecommunications data.                                               |
+| Result             | The application can turn a plain-language concern into a subscriber follow-up list without a separate vector database or copied telecommunications text. |
 
 Persona focus: You are reviewing the search tool Gilly built for subscriber support operations.
 
@@ -82,7 +82,9 @@ Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Orac
     **Expected output: Available Embedding Models**
 
     <!-- capture:CAP-01 -->
-    > **Capture pending (CAP-01):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Check the embedding model](images/sql-embedding-model.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
     The result should include an embedding model owned by `ADMIN`, such as `ALL_MINILM_L12_V2`. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
@@ -111,7 +113,7 @@ Gilly decides that one vector per service plan is enough. Each service plan reco
     </copy>
     ```
 
-    The combined text gives the model the service plan name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the service plan is.
+    The combined text gives the model the service plan name and its category. Gilly does not need to embed price, dates, or other values that do not describe what the service plan is.
 
 2. Add a vector column to `SERVICE_PLANS`:
 
@@ -152,7 +154,9 @@ Gilly decides that one vector per service plan is enough. Each service plan reco
     ```
 
     <!-- capture:CAP-02 -->
-    > **Capture pending (CAP-02):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Create a service plan vector](images/sql-vector-values.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     
@@ -172,7 +176,7 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
     <details>
     <summary><strong>Why this matters to Gilly</strong></summary>
 
-    > Gilly could export the text to an external embedding pipeline or search service. That would create extra copies of sensitive telecommunications text and make it harder to show which data the application searched.
+    > Gilly could export the text to a separate service that creates embeddings or searches text. That would create extra copies of sensitive telecommunications text and make it harder to show which data the application searched.
     >
     > Oracle AI Vector Search keeps the service plan data, vectors, SQL query, and vector distance with the telecommunications data. Gilly can check the search and use the result in the application without adding another data store.
 
@@ -193,21 +197,23 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
     ```
 
     <!-- capture:CAP-03 -->
-    > **Capture pending (CAP-03):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Test the service plan vector](images/sql-vector-distance.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     **Expected output: Mobile Coverage Plan Matches**
 
-    Inspect the columns described above after executing the statement; a captured database result is pending.
+    Compare the returned columns with the capture above.
 
 2. Review the ranked service plans.
-    The query embeds the analyst phrase at runtime and compares it to the `SERVICE_PLANS.PLAN_EMBEDDING` column. `VECTOR_DISTANCE` calculates the distance between the two vectors using the `COSINE` metric. A lower value means a closer match.
+    The query creates an embedding for the analyst’s phrase when the query runs and compares it to the `SERVICE_PLANS.PLAN_EMBEDDING` column. `VECTOR_DISTANCE` calculates the distance between the two vectors using the `COSINE` metric. A lower value means a closer match.
 
     Use the ranked plans to focus the dashboard review on the subscriber concern.
 
 3. Show the result as a similarity score:
 
-    Vector distance is useful for period startg the search, but business users may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
+    Vector distance is useful for checking the search, but support analysts may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
 
     ```sql
     <copy>
@@ -224,7 +230,9 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
     ```
 
     <!-- capture:CAP-04 -->
-    > **Capture pending (CAP-04):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Test the service plan vector](images/sql-vector-similarity.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
@@ -233,7 +241,7 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
 
 <!-- application-capture:APP-04 -->
 
-In **Subscriber Signals**, enter `weak indoor mobile coverage and dropped calls` in **Mobile Service Signal Search**, then select **Search**. The captured demo returned eight services. Compare the ranked matches with their similarity scores; the rankings belong to the demo dataset, not the lab fixture.
+In **Subscriber Signals**, enter `weak indoor mobile coverage and dropped calls` in **Mobile Service Signal Search**, then select **Search**. The captured demo returned eight services. Compare the ranked matches with their similarity scores; the rankings belong to the demo dataset, not the lab sample data.
 
 ![Live semantic search showing the entered phrase and eight ranked telecom services.](images/app-vector-search.png)
 
@@ -241,7 +249,7 @@ In **Subscriber Signals**, enter `weak indoor mobile coverage and dropped calls`
 
 ## Task 4: Find subscribers affected by a service plan concern
 
-Gilly now has the business requirement for the application. A business user should be able to enter a concern and find subscribers who ordered related service plans. The status filter limits the follow-up to pending, confirmed, and active service orders. The result gives the subscriber-support team a short list for follow-up, with the service plan match, service order status, order date, and subscriber contact details.
+Gilly now has the business requirement for the application. A support analyst should be able to enter a concern and find subscribers who ordered related service plans. The status filter limits the follow-up to pending, confirmed, and active service orders. The result gives the subscriber-support team a short list for follow-up, with the service plan match, service order status, order date, and subscriber contact details.
 
 1. Run the following query for the concern `weak indoor mobile coverage with Wi-Fi calling`:
 
@@ -281,7 +289,9 @@ Gilly now has the business requirement for the application. A business user shou
     ```
 
     <!-- capture:CAP-05 -->
-    > **Capture pending (CAP-05):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Find subscribers affected by a service plan concern](images/sql-vector-subscribers.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     The first part ranks service plans by meaning. The remaining joins use ordinary relational keys to find the matching monthly service charges, service orders, and subscribers.
@@ -299,7 +309,7 @@ Gilly now has the business requirement for the application. A business user shou
 
 ## Conclusion
 
-Gilly has built the search behind the application and connected it to a business action. A plain-language concern can produce ranked service plans and a subscriber follow-up list using vectors, relational joins, and SQL in Oracle AI Database. 
+Gilly has built a search that helps the support team decide which subscribers to contact. A plain-language concern can produce ranked service plans and a subscriber follow-up list using vectors, relational joins, and SQL in Oracle AI Database. 
 
 ## Acknowledgements
 

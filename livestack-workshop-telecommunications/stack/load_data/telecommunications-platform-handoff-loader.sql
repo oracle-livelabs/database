@@ -21,7 +21,7 @@
  4: ACTIVATION_FRAUD_NETWORK is created from the same DDL as the lab appendix.
  5: WGS84 (SRID 8307) subscriber service-address points, network sites and network-region polygons.
  6: populated OML_PLAN_DEMAND_TRAINING_V; learner creates the named GLM model.
- 7-8: existing GENAI profile, telecommunications object list; learner creates agent objects.
+ 7-8: existing GENAI SQL profile, telecommunications object list, GENAI_AGENT reasoning profile; learner creates agent objects.
  9: conceptual quiz; no additional objects.
  Optional PGX: airtime-transfer tables are loaded. The final comment contains
  the PGQL graph DDL to run once in Graph Studio's PGQL interface before the
@@ -376,6 +376,7 @@ COMMENT ON TABLE subscribers IS 'Synthetic subscribers. LOCATION is the service 
 COMMENT ON TABLE service_orders IS 'One initial monthly service period, end exclusive. ORDER_TOTAL includes recurring line charges and a one-time ACTIVATION_FEE. No taxes, proration or monthly_charges recognition.';
 COMMENT ON TABLE service_order_lines IS 'One service plan per line, with a count of simultaneous connections. Quantity is independent of service-period days.';
 COMMENT ON COLUMN service_order_lines.line_total IS 'CONNECTION_COUNT * MONTHLY_FEE: contracted monthly recurring charges, not collected or recognized monthly_charges.';
+COMMENT ON COLUMN service_orders.order_status IS 'Case-sensitive lowercase values: pending, confirmed, active, completed, cancelled, failed_activation. Use these exact lowercase strings in SQL predicates.';
 COMMENT ON COLUMN service_orders.order_total IS 'Sum of LINE_TOTAL plus ACTIVATION_FEE. Loader assertions verify fixture totals and plan-site consistency.';
 COMMENT ON COLUMN service_plans.category IS 'Mobile, fixed wireless, fiber or IoT service family used for semantic search and activation-demand classification.';
 COMMENT ON TABLE subscriber_reports IS 'Synthetic support reports with distinct diagnostic observation intervals. Metrics include dropped sessions, outage minutes, traffic volume and access-site utilization.';
@@ -12119,6 +12120,43 @@ BEGIN
 END;
 /
 
+PROMPT Preparing the agent reasoning profile
+-- Use a separate profile for agent reasoning; GENAI remains the SQL tool profile.
+-- Validated with OCI Llama 3.3 70B on-demand in Chicago.
+DECLARE
+  l_count NUMBER;
+  l_attributes CLOB;
+  l_provider VARCHAR2(128);
+  l_credential VARCHAR2(4000);
+  l_compartment VARCHAR2(4000);
+BEGIN
+  SELECT COUNT(*) INTO l_count
+  FROM user_cloud_ai_profiles WHERE profile_name = 'GENAI_AGENT';
+  IF l_count = 0 THEN
+    SELECT MAX(CASE WHEN attribute_name = 'provider' THEN CAST(attribute_value AS VARCHAR2(4000)) END),
+           MAX(CASE WHEN attribute_name = 'credential_name' THEN CAST(attribute_value AS VARCHAR2(4000)) END),
+           MAX(CASE WHEN attribute_name = 'oci_compartment_id' THEN CAST(attribute_value AS VARCHAR2(4000)) END)
+    INTO l_provider, l_credential, l_compartment
+    FROM user_cloud_ai_profile_attributes WHERE profile_name = 'GENAI';
+    IF NVL(LOWER(l_provider), 'missing') <> 'oci' OR l_credential IS NULL OR l_compartment IS NULL THEN
+      RAISE_APPLICATION_ERROR(-20007, 'GENAI must provide OCI credential and compartment attributes for GENAI_AGENT setup.');
+    END IF;
+    SELECT JSON_OBJECT(
+        'provider' VALUE 'oci',
+        'credential_name' VALUE l_credential,
+        'oci_compartment_id' VALUE l_compartment,
+        'region' VALUE 'us-chicago-1',
+        'model' VALUE 'meta.llama-3.3-70b-instruct',
+        'oci_apiformat' VALUE 'GENERIC',
+        'temperature' VALUE 0,
+        'max_tokens' VALUE 4096 RETURNING CLOB)
+    INTO l_attributes FROM dual;
+    DBMS_CLOUD_AI.CREATE_PROFILE(
+      profile_name => 'GENAI_AGENT', attributes => l_attributes);
+  END IF;
+END;
+/
+
 PROMPT Checking loaded telecommunications data and lab prerequisites
 DECLARE
   l_count NUMBER;
@@ -12227,7 +12265,7 @@ END;
      ) OPTIONS (PG_PGQL);
 
    Then load it from the optional notebook with:
-     session.read_graph_by_name("AIRTIME_GRAPH", "PG_PGQL")
+     session.read_graph_by_name("AIRTIME_GRAPH", "pg_pgql")
    This additional graph is not claimed as created by the SQL loader.
 */
 COMMIT;

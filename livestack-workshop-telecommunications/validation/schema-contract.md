@@ -1,17 +1,17 @@
 # SEER Telecomms schema contract
 
-The canonical loader is [telecommunications-platform-handoff-loader.sql](../stack/load_data/telecommunications-platform-handoff-loader.sql). This document describes the implemented DDL and synthetic fixtures, not a deployed database. The [offline validator](validate.py) reads the SQL inserts, compares the [fixture export](fixture.json), and checks keys, totals, geometry constructors, graphs, and lab references.
+The main loader is [telecommunications-platform-handoff-loader.sql](../stack/load_data/telecommunications-platform-handoff-loader.sql). This document describes the table definitions and sample data. See [manual results](manual-results.md) for the database run. The [offline validator](validate.py) reads the SQL inserts, compares the [sample-data export](fixture.json), and checks keys, totals, geometry constructors, graphs, and lab references.
 
 ## Model and accounting rules
 
 - NETWORK_SITES represents synthetic access infrastructure, with WGS84 point geometry, capacity in Mbps and utilization in percent. These are snapshots; nearest-site distance does not prove coverage or available throughput.
-- SERVICE_PLANS contains site-scoped variants of mobile, fixed wireless, fiber and IoT plans. Technology is 5G, GPON or NB-IoT. Download speed is Mbps; data allowance is GB, with NULL meaning unlimited. A plan is a commercial service variant associated with a workshop service area, not a radio-attachment rule.
+- SERVICE_PLANS contains variants for each site’s service area of mobile, fixed wireless, fiber and IoT plans. Technology is 5G, GPON or NB-IoT. Download speed is Mbps; data allowance is GB, with NULL meaning unlimited. A plan is a commercial service variant associated with a workshop service area, not a radio-attachment rule.
 - SUBSCRIBERS holds synthetic contacts, customer segment, service-address geometry and JSON preferences for Wi-Fi calling, eSIM and contact channel.
-- SERVICE_ORDERS covers one initial monthly period. SERVICE_ORDER_LINES records simultaneous connections and the agreed monthly fee. LINE_TOTAL is generated as CONNECTION_COUNT × MONTHLY_FEE. Quantity is unrelated to period length. ORDER_TOTAL equals summed lines plus ACTIVATION_FEE. The fixture spans [2026-09-01, 2026-10-01); it excludes taxes and proration.
+- SERVICE_ORDERS covers one initial monthly period. SERVICE_ORDER_LINES records simultaneous connections and the agreed monthly fee. LINE_TOTAL is generated as CONNECTION_COUNT × MONTHLY_FEE. Quantity is unrelated to period length. ORDER_TOTAL equals summed lines plus ACTIVATION_FEE. The sample data spans [2026-09-01, 2026-10-01); it excludes taxes and proration.
 - Contracted monthly charges include confirmed, active and completed orders. They exclude cancelled, pending and failed_activation orders, and exclude activation fees. This is not cash collection, recognized revenue, or a measure of the installed subscriber base.
 - SUBSCRIBER_REPORTS combines synthetic support text with diagnostics from distinct observation intervals. Reports are linked to plans through REPORT_PLAN_MENTIONS. Per-report affected-subscriber counts can overlap; summing them does not count distinct people.
 - ACTIVATION_ENTITIES links service orders, network sites, shared activation devices, IP/contact identifiers and tokenized payment references. Case membership and directed evidence edges support review; scores are not proof of fraud.
-- PREPAID_ACCOUNTS and AIRTIME_TRANSFERS model consented transfers of prepaid voice minutes. They preserve the optional PGX algorithms; they are not a cash ledger or a stored balance calculation.
+- PREPAID_ACCOUNTS and AIRTIME_TRANSFERS model sample transfers of prepaid voice minutes. They preserve the optional PGX algorithms; they are not a cash ledger or a stored balance calculation.
 
 ## Ownership and lab readiness
 
@@ -23,21 +23,23 @@ The initial duality view permits UPDATE on root and child. Lab 2 changes both to
 
 Lab 6 creates OTTO_PLAN_DEMAND_SETTINGS, OTTO_PLAN_DEMAND_SURGE_MODEL and OTTO_PLAN_DEMAND_SCORING_DATA. Lab 8 creates NINA_TELECOM_SQL_TOOL, NINA_TELECOM_AGENT, NINA_TELECOM_TASK and NINA_TELECOM_TEAM. These learner-owned objects are not precreated.
 
-Cross-table totals and site consistency are checked for the fixture by the loader. They are not enforced for arbitrary later writes by a cross-table CHECK constraint. An application must validate those invariants transactionally. The same limitation applies to the intended one-month period for later orders.
+Cross-table totals and site consistency are checked for the sample data by the loader. They are not enforced for arbitrary later writes by a cross-table CHECK constraint. An application must check those rules within the transaction that writes the data. The same limitation applies to the intended one-month period for later orders.
 
 ## Training view
 
 OML_PLAN_DEMAND_TRAINING_V has one row per active plan. The inputs are CATEGORY, MONTHLY_FEE, TOTAL_REPORTS, AVG_SENTIMENT, DROPPED_SESSIONS, OUTAGE_MINUTES, DATA_VOLUME_GB, AVG_UTILIZATION_PCT, CONGESTED_INTERVALS, BUSY_INTERVALS, CONNECTIONS_ORDERED and MONTHLY_CHARGES. PLAN_ID is the case identifier. SURGE_LABEL is the target.
 
-Both support observations and accepted orders use September 2026. Orders and reports are aggregated separately to avoid multiplying rows. A congested interval has utilization >=80%; a busy interval has utilization >=60% and <80%. SURGE requires at least 45 ordered connections and at least two busy or congested intervals. The fixture has 96 SURGE and 96 STABLE examples. Because the label comes from the same-window features, this demonstrates classification APIs rather than future-demand accuracy. The twelve perturbed scoring rows are not a holdout set.
+Both support observations and accepted orders use September 2026. Orders and reports are aggregated separately to avoid multiplying rows. A congested interval has utilization >=80%; a busy interval has utilization >=60% and <80%. SURGE requires at least 45 ordered connections and at least two busy or congested intervals. The sample data has 96 SURGE and 96 STABLE examples. The label is calculated from the same month’s inputs. This demonstrates how to train and call a classification model, not how accurately it predicts future demand. The twelve modified rows used for predictions are not independent test data.
 
-## Graph fixtures
+## Graph sample data
 
-ACTIVATION_FRAUD_NETWORK is created by the loader using the same DDL as the lab appendix. ORD-8841, ORD-5077 and ORD-1190 reference real fixture order rows and share DEV-fp-91a7. The fixture supports one-through-four-hop paths and six shared-identifier pairs under the lab's filters. TOKEN-REUSED-017 is a synthetic token, not a card number; IP-198.51.100.44 belongs to a documentation range.
+ACTIVATION_FRAUD_NETWORK is created by the loader using the same DDL as the lab appendix. ORD-8841, ORD-5077 and ORD-1190 reference existing sample order rows and share DEV-fp-91a7. The sample data supports one-through-four-hop paths and six shared-identifier pairs under the lab's filters. TOKEN-REUSED-017 is a synthetic token, not a card number; IP-198.51.100.44 belongs to a documentation range.
 
-AIRTIME_GRAPH is a separate PGQL object. Run the optional setup block after loading, then use `session.read_graph_by_name("AIRTIME_GRAPH", "PG_PGQL")`. Account IDs 534, 597, 934, 387 and 406 support degree, cycles, PageRank, shortest paths, personalized PageRank and hop-distance exercises. Four- and five-hop cycles and a six-hop path from 934 are present. Runtime vertex-identity formatting and Graph Studio import remain untested.
+AIRTIME_GRAPH is a separate PGQL object. Run the optional setup block after loading, then use `session.read_graph_by_name("AIRTIME_GRAPH", "pg_pgql")`. Account IDs 534, 597, 934, 387 and 406 support degree, cycles, PageRank, shortest paths, personalized PageRank and hop-distance exercises. Four- and five-hop cycles and a six-hop path from 934 are present. Manual validation confirmed PREPAID_ACCOUNTS(934), imported the notebook and executed its 43 paragraphs.
 
-## Fixture inventory
+GENAI_AGENT is prepared by the loader for agent reasoning using GENAI's OCI authentication and compartment. The fresh-create and existing-profile branches were tested; see [manual results](manual-results.md).
+
+## Sample-data inventory
 
 | Table | Rows |
 | --- | ---: |

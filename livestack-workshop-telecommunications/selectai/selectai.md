@@ -4,15 +4,15 @@
 
 ## Introduction
 
-> **Validation status:** Database execution and result screenshots are pending a manually provisioned environment. Run the loader before these exercises.
+> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Nina Patel is a subscriber experience analyst at SEER Telecomms. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
-Jessica, the DBA, has already configured a Select AI profile for the telecommunications schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
+Jessica, the DBA, has already configured a Select AI profile for the telecommunications schema. Nina can ask a question in ordinary language. Select AI uses the profile and table and column definitions to generate SQL, run it, or explain the result.
 
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
+Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the analyst needs.
 
-In this lab, you check the available Select AI profile, ask a telecommunications question, inspect the SQL behind the answer, and improve the question for a more useful business result.
+In this lab, you check the available Select AI profile, ask a telecommunications question, inspect the SQL behind the answer, and improve the question for an answer Nina can use.
 
 
 <details>
@@ -34,7 +34,7 @@ In this lab, you check the available Select AI profile, ask a telecommunications
 - Add the telecommunications tables that Select AI may use to the profile.
 - Generate SQL from a telecommunications question and inspect it.
 - Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
-- Improve a question so the result contains the business details Nina needs.
+- Improve a question so the result contains the details Nina needs.
 - Explain why generated SQL still requires review.
 
 Estimated Time: **10 minutes**
@@ -43,12 +43,12 @@ Estimated Time: **10 minutes**
 
 | Step                | Telecommunications focus                                                                                |
 | ---------------------| ----------------------------------------------------------------------------------------------|
-| Business Problem    | Nina needs answers from telecommunications data without writing every query from scratch.               |
-| Technical Challenge | The question must be translated into SQL against the shared telecommunications schema.                |
-| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
+| Problem    | Nina needs answers from telecommunications data without writing every query from scratch.               |
+| Database task | The question must be translated into SQL against the shared telecommunications schema.                |
+| Your role       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
 | What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
-| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Outcome             | Nina gets a repeatable way to ask telecommunications questions while keeping SQL review in the process. |
+| Oracle features | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
+| Result             | Nina gets a repeatable way to ask telecommunications questions while keeping SQL review in the process. |
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -68,7 +68,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also support on-demand inference in the profile’s region. Choose the model and region when the manual database is available. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also accept on-demand requests in the profile’s region. The instructor configures the model and region before the lab. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
   
@@ -86,7 +86,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
 
 ## Task 2: Add the telecommunications tables to the profile
 
-The profile needs a list of tables that Select AI may use. Nina's questions require service plan, service order, service order-night, and subscriber data, so Jessica adds those four tables to the `GENAI` profile.
+The profile needs a list of tables that Select AI may use. Nina's questions require service plans, service orders, order lines, and subscribers, so Jessica adds those four tables to the `GENAI` profile.
 
 1. Add the telecommunications tables to the profile:
 
@@ -117,7 +117,9 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     ```
 
     <!-- capture:CAP-24 -->
-    > **Capture pending (CAP-24):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Add the telecommunications tables to the profile](images/sql-ai-object-list.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
     The result should list `SERVICE_PLANS`, `SERVICE_ORDERS`, `SERVICE_ORDER_LINES`, and `SUBSCRIBERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
@@ -135,7 +137,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.',
+             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase).',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -143,7 +145,9 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     ```
 
     <!-- capture:CAP-25 -->
-    > **Capture pending (CAP-25):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Ask a question and inspect the SQL](images/sql-ai-generated.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
   
     
@@ -169,7 +173,7 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.',
+             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase).',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -177,7 +181,9 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
       ```
 
     <!-- capture:CAP-26 -->
-    > **Capture pending (CAP-26):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Run the question in the database](images/sql-ai-answer.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
   
     
@@ -197,7 +203,7 @@ Nina's first question gives her a service plan ranking, but she also needs enoug
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',
+             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -205,7 +211,9 @@ Nina's first question gives her a service plan ranking, but she also needs enoug
     ```
 
     <!-- capture:CAP-27 -->
-    > **Capture pending (CAP-27):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Improve the business question](images/sql-ai-refined-generated.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
   
     
@@ -215,7 +223,7 @@ Nina's first question gives her a service plan ranking, but she also needs enoug
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',
+             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -223,7 +231,9 @@ Nina's first question gives her a service plan ranking, but she also needs enoug
     ```
 
     <!-- capture:CAP-28 -->
-    > **Capture pending (CAP-28):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Improve the business question](images/sql-ai-refined-answer.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
   
     
@@ -241,7 +251,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only confirmed, active, or completed service_orders; exclude activation fees.',
+             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
@@ -249,14 +259,16 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     ```
 
     <!-- capture:CAP-29 -->
-    > **Capture pending (CAP-29):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Explain the result](images/sql-ai-narration.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
   
     
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+  The explanation is a convenience for a analyst. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 

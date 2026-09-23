@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> **Validation status:** Database execution and result screenshots are pending a manually provisioned environment. Run the loader before these exercises.
+> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Jessica Chan is the database administrator responsible for keeping SEER Telecomms’ telecommunications data reliable and useful. Every morning, the subscriber support operations team asks her a familiar question: **which service plan needs attention first, and which subscribers may need assistance or service review?**
 
@@ -18,7 +18,7 @@ In this lab, you build Jessica’s dashboard query. It combines service alerts, 
 
 ### Objectives
 
-- Explain what Oracle AI Database convergence means in a telecommunications decision workflow.
+- Explain how one database combines the information needed for a subscriber-support decision.
 - Run one query that combines relational, vector, JSON, and spatial database capabilities.
 - Modify the query to investigate a different subscriber-support question and explain the change in results.
 
@@ -28,14 +28,14 @@ Estimated Time: **10 minutes**
 
 | Step                | Telecommunications focus                                                                                                  |
 | ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Support staff need to identify affected plans, assess reported problems, and check recent orders and nearby network sites. |
-| Technical Challenge | The query combines service alerts, plan descriptions, order documents, and network-site locations.                         |
-| Persona Focus       | Jessica Chan, the DBA, builds the query that gives business users this dashboard view.                         |
+| Problem    | Support staff need to identify affected plans, assess reported problems, and check recent orders and nearby network sites. |
+| Database task | The query combines service alerts, plan descriptions, order documents, and network-site locations.                         |
+| Your role       | Jessica Chan, the DBA, builds the query that gives support analysts this dashboard view.                         |
 | What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
-| Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Outcome             | The learner can explain convergence through a useful business result rather than a feature list.               |
+| Oracle features | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
+| Result             | The learner can explain convergence through a useful business result rather than a feature list.               |
 
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one shared query that gives business users a connected view of reported service problems and order activity.
+Persona focus: You are Jessica Chan, the DBA. Your job is to build one shared query that gives support analysts a connected view of reported service problems and order activity.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -183,16 +183,18 @@ The query combines four data types:
     ```
 
     <!-- capture:CAP-30 -->
-    > **Capture pending (CAP-30):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Run a converged service investigation](images/sql-dashboard.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
-3. Review the result as the service plan-level data behind Jessica's dashboard. Each row combines service-alert severity, semantic match, service order activity, and network site location. This gives the dashboard a ranked service plan table and the details a business user needs when deciding what to review.
+3. Review the result as the service plan-level data behind Jessica's dashboard. Each row combines service-alert severity, semantic match, service order activity, and network site location. This gives the dashboard a ranked service plan table and the details a support analyst needs when deciding what to review.
 
     
 
     Each row should include alert impact, semantic similarity, order activity, and regional site context. The query returns up to ten plans. Inspect the actual ranking after the embeddings are created; a missing embedding or an empty regional site set can make the result incomplete.
 
-Use the first row to explain why an plan needs attention. Check its alert severity, service order counts, match to the search phrase, and nearby network site. These values help the service team decide where to start.
+Use the first row to explain why a plan needs attention. Check its alert severity, service order counts, match to the search phrase, and nearby network site. These values help the service team decide where to start.
 
 Jessica can use this SQL result for the dashboard table and detail view. Other dashboard components, such as summary cards, can query the same database.
 
@@ -219,10 +221,12 @@ fixed wireless activation backlog and network capacity
 Run the query again and compare the top rows.
 
 <!-- capture:CAP-31 -->
-> **Capture pending (CAP-31):** Add the SEER Telecomms result here after running this step in the manual database.
+![Change the investigation question](images/sql-dashboard-followup.png)
+
+*Live LLUSER capture, 23 September 2026.*
 
 1. Which service plans moved into or out of the top ten?
-2. Which service plans still have high relational service impact but a lower semantic similarity to the new question?
+2. Which service plans still have high service-alert severity but a lower similarity to the new question?
 3. Does the service order activity make you more or less concerned about the operational impact?
 
 The query sorts by similarity first, so changing the question changes the review order. Service impact breaks ties. Jessica can ask a different question using the same query and service plan data.

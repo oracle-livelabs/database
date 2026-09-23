@@ -1,0 +1,52 @@
+ for these plans are the same, suggesting they have similar pricing and usage patterns. 
+
+
+Elapsed: 00:03:24.228
+1 rows selected.
+
+Copy to clipboard
+ORA-06550: line 28, column 33:
+PLS-00684: invalid data type for the JSON return value
+ORA-06550: line 18, column 5:
+PL/SQL: Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+Error at Line: 28 Column: 33
+Show info
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.033
+
+
+Copy to clipboard
+
+Comment created.
+
+Elapsed: 00:00:00.025
+
+
+Copy to clipboard
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.583
+
+
+Copy to clipboard
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.016
+
+
+Copy to clipboard
+PROFILE_NAME             STATUS   
+------------------------ -------- 
+GENAI_AGENT              ENABLED  
+GENAI_AGENT_LOADER_CHECK DISABLED 
+
+
+Elapsed: 00:00:00.009
+2 rows selected.
+
+Copy to clipboard

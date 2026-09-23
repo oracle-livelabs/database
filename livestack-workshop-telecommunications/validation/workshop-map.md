@@ -18,6 +18,6 @@ Both manifests retain the reference lesson order. The numbered tasks match the r
 
 The two Graph Studio notebooks retain 51 paragraphs, including five Python paragraphs. Their data objects, graph identifiers, markdown and query text use the activation-evidence and prepaid-airtime scenarios. Stored output is cleared so it cannot imply a successful run.
 
-The complete schema, views, graph fixtures, JSON keys, OML features and AI object lists are mapped in [schema-contract.md](schema-contract.md). The [capture queue](screenshots.md) maps every deferred result image to its instruction. The [stack handoff](../stack/README.md) describes template order, prerequisites, loader arguments and the later provisioning boundary.
+The complete schema, views, graph sample data, JSON keys, OML features and AI object lists are mapped in [schema-contract.md](schema-contract.md). The [capture inventory](screenshots.md) maps every result image to its instruction. The [stack handoff](../stack/README.md) describes template order, prerequisites, loader arguments and the later provisioning boundary.
 
 Provisioning templates retain their original logic. Only the loader filename in adb.tf changes. No application source was supplied with this stack; it contains database setup and infrastructure templates. Workshop result captures must come from this revised schema, not an unrelated demo dataset.

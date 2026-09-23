@@ -4,17 +4,17 @@
 
 ## Introduction
 
-> **Validation status:** Database execution and result screenshots are pending a manually provisioned environment. Run the loader before these exercises.
+> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Otto Spencer is SEER Telecomms’ data scientist. His team supplies the predictions used in analytics charts and dashboards.
 
-The service plan team wants a demand watchlist. A business user should be able to see which service plans may need more attention, why the model flagged them, and which service plans are already showing strong activations or subscriber activity.
+The service plan team wants a demand watchlist. A plan analyst should be able to see which service plans may need more attention, why the model flagged them, and which service plans are already showing strong activations or subscriber activity.
 
-Otto has the service plan, activations, and support reports and network diagnostics data in Oracle AI Database. He could copy the data to a separate machine learning platform, train a model there, and copy the scores back. That would create another copy of telecommunications data and another process for keeping scores current.
+Otto has plan details, activation orders, support reports, and network measurements in Oracle AI Database. He could copy the data to a separate machine learning platform, train a model there, and copy the scores back. That would create another copy of telecommunications data and another process for keeping scores current.
 
 Instead, Otto builds and scores the model in the database. The model classifies the September snapshot as `SURGE` or `STABLE`, using order demand and network-support diagnostics. SQL then joins the prediction to the service plan name, activations, and diagnostic values that a dashboard needs.
 
-In this lab, you build Otto's demand-surge model and turn its output into a review list for a business user.
+In this lab, you build Otto's demand-surge model and turn its output into a review list for a plan analyst.
 
 
 <details>
@@ -47,12 +47,12 @@ Estimated Time: **10 minutes**
 
 | Step                | Telecommunications focus                                                                                                        |
 | ---------------------| ----------------------------------------------------------------------------------------------------------------------|
-| Business Problem    | A business user needs a short list of service plans that may require attention.                                           |
-| Technical Challenge | Otto needs to train and score a model without copying service plan activity to another machine learning system.           |
-| Persona Focus       | You follow Otto as he builds the model and checks the result before it reaches a dashboard.                          |
+| Problem    | A plan analyst needs a short list of service plans that may require attention.                                           |
+| Database task | Otto needs to train and score a model without copying service plan activity to another machine learning system.           |
+| Your role       | You follow Otto as he builds the model and checks the result before it reaches a dashboard.                          |
 | What You Will See   | Optionally compare models with AutoML, then use SQL Developer Web to create and score the selected model.             |
-| Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
-| Outcome             | A watchlist for a dashboard combines the model result with the service plan and activity data behind it.                  |
+| Oracle features | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
+| Result             | A watchlist for a dashboard combines the model result with the service plan and activity data behind it.                  |
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -60,7 +60,7 @@ Estimated Time: **10 minutes**
 
 Before Otto creates a model, he checks the data that will teach it. The workshop already provides `OML_PLAN_DEMAND_TRAINING_V`, a view that combines service plan, support reports and network diagnostics, and activations data into one row per active service plan.
 
-The view also contains `SURGE_LABEL`. This is the known label used during training. The fixture assigns `SURGE` when at least 45 connections were ordered and at least two observation intervals had utilization of 60% or more; other plans are `STABLE`. Both aggregations use September 2026. The 192 plans split into 96 examples per class. These same-window labels teach classification APIs; they are not future outcomes. A forecasting project would need later observed labels and a time-separated holdout.
+The view also contains `SURGE_LABEL`. This is the known label used during training. The sample data assigns `SURGE` when at least 45 connections were ordered and at least two observation intervals had utilization of 60% or more; other plans are `STABLE`. Both aggregations use September 2026. The 192 plans split into 96 examples per class. These labels come from the same month as the model inputs. They teach you how to train and call a classification model, not how to predict future demand. To test a forecast, train on earlier periods and reserve a later period for testing.
 
 1. Run the training-data query:
 
@@ -83,7 +83,9 @@ The view also contains `SURGE_LABEL`. This is the known label used during traini
     ```
 
     <!-- capture:CAP-34 -->
-    > **Capture pending (CAP-34):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Read the training data](images/sql-oml-training.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
 2. Identify the parts of each row.
@@ -92,7 +94,7 @@ The view also contains `SURGE_LABEL`. This is the known label used during traini
 
     
 
-    Otto is period startg that the training data already brings together the values he needs. He does not have to export support reports and network diagnostics, activations, and service plan data into separate files before training.
+    Otto is checking that the training data already brings together the values he needs. He does not have to export support reports and network diagnostics, activations, and service plan data into separate files before training.
 
 ## Task 2: Compare models with AutoML (optional)
 
@@ -109,12 +111,16 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     
     
 <!-- capture:CAP-35 -->
-> **Capture pending (CAP-35):** Add the SEER Telecomms result here after running this step in the manual database.
+![Compare models with AutoML (optional)](images/oml-launch.png)
+
+*Live LLUSER capture, 23 September 2026.*
 
 2. Click **AutoML**.
 
     <!-- capture:CAP-36 -->
-    > **Capture pending (CAP-36):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Compare models with AutoML (optional)](images/oml-home.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 3. Create a new experiment with these settings:
   
@@ -127,35 +133,45 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     | Case ID         | `PLAN_ID`            |
   
     <!-- capture:CAP-37 -->
-    > **Capture pending (CAP-37):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Compare models with AutoML (optional)](images/oml-settings.png)
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on database resources and model settings; no run time has been measured for this edition.
+    *Live LLUSER capture, 23 September 2026.*
+
+    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on database resources and model settings.
 
     
 
 4. Review the leaderboard and model details.
 
     <!-- capture:CAP-38 -->
-    > **Capture pending (CAP-38):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Compare models with AutoML (optional)](images/oml-leaderboard.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
   
   
   The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
 
   <!-- capture:CAP-39 -->
-  > **Capture pending (CAP-39):** Add the SEER Telecomms result here after running this step in the manual database.
+  ![Compare models with AutoML (optional)](images/oml-model-comparison.png)
 
-  Inspect the confusion matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
+  *Live LLUSER capture, 23 September 2026.*
 
-  Record the measured balanced accuracy and confusion matrix from your run. The label is derived from same-window connections and utilization, so even a high score demonstrates API behavior rather than future forecasting accuracy. The next task creates a separate GLM using SQL.
+  **Balanced accuracy** averages the proportion of correct predictions for each class. A **confusion matrix** counts correct and incorrect predictions for each class. Inspect that matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
+
+  Record the measured balanced accuracy and confusion matrix from your run. The label is derived from connections and utilization from the same month, so even a high score shows how to train and call the model, not how accurately it predicts future demand. The next task creates a separate GLM using SQL.
 
   <!-- capture:CAP-40 -->
-  > **Capture pending (CAP-40):** Add the SEER Telecomms result here after running this step in the manual database.
+  ![Compare models with AutoML (optional)](images/oml-confusion-matrix.png)
+
+  *Live LLUSER capture, 23 September 2026.*
 
   Review prediction impact for the selected model. Check which features your model used. A feature’s influence on a prediction does not prove that it causes the outcome.
 
   <!-- capture:CAP-41 -->
-  > **Capture pending (CAP-41):** Add the SEER Telecomms result here after running this step in the manual database.
+  ![Compare models with AutoML (optional)](images/oml-prediction-impact.png)
+
+  *Live LLUSER capture, 23 September 2026.*
 
 ## Task 3: Create the selected model in SQL Developer Web
 
@@ -231,7 +247,9 @@ If you skipped the optional AutoML task, use this setting as the example model f
     ```
 
     <!-- capture:CAP-42 -->
-    > **Capture pending (CAP-42):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Create the selected model in SQL Developer Web](images/sql-oml-model.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
     The result should show `CLASSIFICATION` and `GENERALIZED_LINEAR_MODEL`. Otto now has a database model that SQL can call.
 
@@ -365,12 +383,14 @@ Otto creates sample scoring data by changing values from the training view. This
     ```
 
     <!-- capture:CAP-43 -->
-    > **Capture pending (CAP-43):** Add the SEER Telecomms result here after running this step in the manual database.
+    ![Score new service plan activity in SQL](images/sql-oml-scoring.png)
+
+    *Live LLUSER capture, 23 September 2026.*
 
 
 3. Read the result as a dashboard user.
 
-  `PREDICTED_SURGE` tells the dashboard which label the model selected. `SURGE_SCORE` is the model value between 0 and 1, while `SURGE_PCT` presents the same value as a percentage for a dashboard user. The activations and activity columns give the business user something to review alongside the prediction.
+  `PREDICTED_SURGE` tells the dashboard which label the model selected. `SURGE_SCORE` is the model value between 0 and 1, while `SURGE_PCT` presents the same value as a percentage for a dashboard user. The activations and activity columns give the plan analyst something to review alongside the prediction.
 
   One SQL result returns the prediction, service plan name, activations, and support reports and network diagnostics. Otto can use the model without moving the data to an external machine learning platform.
 
@@ -390,7 +410,7 @@ You trained a Generalized Linear Model in SQL Developer Web and scored sample se
 
 The model, training data, scores, and service plan details stay in the database. The dashboard can query them together without combining results from separate systems.
 
-Oracle AI Database makes the model part of the dashboard query. A business user can read the watchlist, inspect the supporting values, and repeat the query using the same access controls that protect the source data.
+Oracle AI Database makes the model part of the dashboard query. A plan analyst can read the watchlist, inspect the supporting values, and repeat the query using the same access controls that protect the source data.
 
 ## Acknowledgements
 
