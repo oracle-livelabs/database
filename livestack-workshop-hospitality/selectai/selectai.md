@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Nina Patel is a guest experience analyst at Seer Hotels. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
 Jessica, the DBA, has already configured a Select AI profile for the hospitality schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
@@ -68,7 +66,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also support on-demand inference in the provider region configured by the profile. The manually provisioned validation used `meta.llama-3.3-70b-instruct` in `us-chicago-1`; the LiveLabs green-button deployment in Jeddah also completed `showsql`, `runsql`, and the agent flow with its provisioned `GENAI` profile. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before a separate deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The configured model must support on-demand inference in the provider region. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before a separate deployment. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
   
@@ -116,9 +114,9 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
-    ![Live hospitality result — ai object list](images/sql-ai-object-list.jpg)
+    ![SQL Worksheet result — ai object list](images/sql-ai-object-list.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     The result should list `STAY_OFFERS`, `RESERVATIONS`, `RESERVATION_NIGHTS`, and `GUESTS`. Select AI can now use these tables when it translates Nina's questions into SQL.
   
@@ -142,9 +140,9 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     </copy>
     ```
 
-    ![Live hospitality result — ai generated](images/sql-ai-generated.jpg)
+    ![SQL Worksheet result — ai generated](images/sql-ai-generated.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -168,9 +166,9 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     </copy>
       ```
 
-    ![Live hospitality result — ai answer](images/sql-ai-answer.jpg)
+    ![SQL Worksheet result — ai answer](images/sql-ai-answer.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -196,9 +194,9 @@ Nina's first question gives her a stay offer ranking, but she also needs enough 
     </copy>
     ```
 
-    ![Live hospitality result — ai refined generated](images/sql-ai-refined-generated.jpg)
+    ![SQL Worksheet result — ai refined generated](images/sql-ai-refined-generated.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -214,9 +212,9 @@ Nina's first question gives her a stay offer ranking, but she also needs enough 
     </copy>
     ```
 
-    ![Live hospitality result — ai refined answer](images/sql-ai-refined-answer.jpg)
+    ![SQL Worksheet result — ai refined answer](images/sql-ai-refined-answer.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
   
     
 
@@ -240,9 +238,9 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     </copy>
     ```
 
-    ![Live hospitality result — ai narration](images/sql-ai-narration.jpg)
+    ![SQL Worksheet result — ai narration](images/sql-ai-narration.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
   
     
 
