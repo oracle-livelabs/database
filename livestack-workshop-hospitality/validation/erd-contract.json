@@ -1,0 +1,44 @@
+{
+  "asset": "introduction/images/seer-hotels-erd.png",
+  "entities": [
+    "GUESTS",
+    "HOTEL_PROPERTIES",
+    "RESERVATIONS",
+    "STAY_OFFERS",
+    "RESERVATION_NIGHTS"
+  ],
+  "relationships": [
+    {
+      "table": "STAY_OFFERS",
+      "column": "PROPERTY_ID",
+      "references": "HOTEL_PROPERTIES",
+      "key": "PROPERTY_ID"
+    },
+    {
+      "table": "RESERVATIONS",
+      "column": "GUEST_ID",
+      "references": "GUESTS",
+      "key": "GUEST_ID"
+    },
+    {
+      "table": "RESERVATIONS",
+      "column": "PROPERTY_ID",
+      "references": "HOTEL_PROPERTIES",
+      "key": "PROPERTY_ID"
+    },
+    {
+      "table": "RESERVATION_NIGHTS",
+      "column": "RESERVATION_ID",
+      "references": "RESERVATIONS",
+      "key": "RESERVATION_ID"
+    },
+    {
+      "table": "RESERVATION_NIGHTS",
+      "column": "OFFER_ID",
+      "references": "STAY_OFFERS",
+      "key": "OFFER_ID"
+    }
+  ],
+  "cardinality": "Each referenced parent is 1; each child side is N. Optional participation is not depicted.",
+  "scope": "Core booking entities only; supporting entities remain in the complete schema contract."
+}

@@ -1,0 +1,249 @@
+Clear output
+Download script output
+LAB5_BLOCK_1
+
+
+Copy to clipboard
+SITE_ID SITE_NAME                CITY    STATE_PROVINCE LATITUDE LONGITUDE LOCATION_GEOJSON                                        
+------- ------------------------ ------- -------------- -------- --------- ------------------------------------------------------- 
+      1 SEER Edison Access Site  Edison  New Jersey      40.5187  -74.4121 { "type": "Point", "coordinates": [-74.4121, 40.5187] } 
+      3 SEER Midtown Access Site Midtown New York         40.758  -73.9855 { "type": "Point", "coordinates": [-73.9855, 40.758] }  
+     16 SEER Joliet Access Site  Joliet  Illinois         41.525  -88.0817 { "type": "Point", "coordinates": [-88.0817, 41.525] }  
+
+
+Elapsed: 00:00:00.216
+3 rows selected.
+
+Copy to clipboard
+LAB5_BLOCK_2
+
+
+Copy to clipboard
+SITE_NAME                     CITY         STATE_PROVINCE BOUNDARY_DISTANCE_KM REGION_NAME             DEMAND_INDEX 
+----------------------------- ------------ -------------- -------------------- ----------------------- ------------ 
+SEER Edison Access Site       Edison       New Jersey                        0 New York Network Region           91 
+SEER Newark Access Site       Newark       New Jersey                        0 New York Network Region           91 
+SEER Midtown Access Site      Midtown      New York                          0 New York Network Region           91 
+SEER Brooklyn Access Site     Brooklyn     New York                          0 New York Network Region           91 
+SEER Queens Access Site       Queens       New York                          0 New York Network Region           91 
+SEER Jersey City Access Site  Jersey City  New Jersey                        0 New York Network Region           91 
+SEER Stamford Access Site     Stamford     Connecticut                       0 New York Network Region           91 
+SEER White Plains Access Site White Plains New York                          0 New York Network Region           91 
+SEER Chicago Loop Access Site Chicago Loop Illinois                    1086.04 New York Network Region           91 
+SEER Evanston Access Site     Evanston     Illinois                    1090.86 New York Network Region           91 
+
+
+Elapsed: 00:00:00.037
+10 rows selected.
+
+Copy to clipboard
+LAB5_BLOCK_3
+
+
+Copy to clipboard
+SITE_NAME                     CITY         STATE_PROVINCE BOUNDARY_DISTANCE_KM BOUNDARY_DISTANCE_MILES REGION_NAME            DEMAND_INDEX 
+----------------------------- ------------ -------------- -------------------- ----------------------- ---------------------- ------------ 
+SEER Chicago Loop Access Site Chicago Loop Illinois                          0                       0 Chicago Network Region           78 
+SEER Joliet Access Site       Joliet       Illinois                          0                       0 Chicago Network Region           78 
+SEER Aurora Access Site       Aurora       Illinois                          0                       0 Chicago Network Region           78 
+SEER Rosemont Access Site     Rosemont     Illinois                          0                       0 Chicago Network Region           78 
+SEER Schaumburg Access Site   Schaumburg   Illinois                          0                       0 Chicago Network Region           78 
+SEER Naperville Access Site   Naperville   Illinois                          0                       0 Chicago Network Region           78 
+SEER Oak Park Access Site     Oak Park     Illinois                          0                       0 Chicago Network Region           78 
+SEER Evanston Access Site     Evanston     Illinois                          0                       0 Chicago Network Region           78 
+SEER Edison Access Site       Edison       New Jersey                  1093.86                   679.7 Chicago Network Region           78 
+SEER Newark Access Site       Newark       New Jersey                  1110.24                  689.87 Chicago Network Region           78 
+
+
+Elapsed: 00:00:00.021
+10 rows selected.
+
+Copy to clipboard
+LAB5_BLOCK_4
+
+
+Copy to clipboard
+REGION_NAME             DEMAND_INDEX SUBSCRIBER_ID SUBSCRIBER_NAME        EMAIL                      CUSTOMER_SEGMENT SITE_NAME                    SITE_CITY   CAPACITY_MBPS UTILIZATION_PCT SUBSCRIBER_SITE_DISTANCE_KM 
+----------------------- ------------ ------------- ---------------------- -------------------------- ---------------- ---------------------------- ----------- ------------- --------------- --------------------------- 
+New York Network Region           91           373 Subscriber0373 Example subscriber0373@example.com Small business   SEER Queens Access Site      Queens              15000              75                        0.55 
+New York Network Region           91           815 Subscriber0815 Example subscriber0815@example.com Enterprise       SEER Queens Access Site      Queens              15000              75                        0.55 
+New York Network Region           91           399 Subscriber0399 Example subscriber0399@example.com Consumer         SEER Jersey City Access Site Jersey City         16000              82                        0.73 
+New York Network Region           91           841 Subscriber0841 Example subscriber0841@example.com Small business   SEER Jersey City Access Site Jersey City         16000              82                        0.73 
+New York Network Region           91           243 Subscriber0243 Example subscriber0243@example.com Consumer         SEER Newark Access Site      Newark              12000              54                        1.21 
+New York Network Region           91           685 Subscriber0685 Example subscriber0685@example.com Small business   SEER Newark Access Site      Newark              12000              54                        1.21 
+New York Network Region           91           333 Subscriber0333 Example subscriber0333@example.com Consumer         SEER Brooklyn Access Site    Brooklyn            14000              68                        1.36 
+New York Network Region           91           775 Subscriber0775 Example subscriber0775@example.com Small business   SEER Brooklyn Access Site    Brooklyn            14000              68                        1.36 
+New York Network Region           91           231 Subscriber0231 Example subscriber0231@example.com Consumer         SEER Midtown Access Site     Midtown             13000              61                        1.51 
+New York Network Region           91           673 Subscriber0673 Example subscriber0673@example.com Small business   SEER Midtown Access Site     Midtown             13000              61                        1.51 
+New York Network Region           91           413 Subscriber0413 Example subscriber0413@example.com Enterprise       SEER Newark Access Site      Newark              12000              54                         1.6 
+New York Network Region           91           855 Subscriber0855 Example subscriber0855@example.com Consumer         SEER Newark Access Site      Newark              12000              54                         1.6 
+New York Network Region           91           385 Subscriber0385 Example subscriber0385@example.com Small business   SEER Brooklyn Access Site    Brooklyn            14000              68                        1.86 
+New York Network Region           91           827 Subscriber0827 Example subscriber0827@example.com Enterprise       SEER Brooklyn Access Site    Brooklyn            14000              68                        1.86 
+New York Network Region           91           283 Subscriber0283 Example subscriber0283@example.com Small business   SEER Midtown Access Site     Midtown             13000              61                        1.95 
+New York Network Region           91           725 Subscriber0725 Example subscriber0725@example.com Enterprise       SEER Midtown Access Site     Midtown             13000              61                        1.95 
+New York Network Region           91           401 Subscriber0401 Example subscriber0401@example.com Enterprise       SEER Midtown Access Site     Midtown             13000              61                        2.25 
+New York Network Region           91           843 Subscriber0843 Example subscriber0843@example.com Consumer         SEER Midtown Access Site     Midtown             13000              61                        2.25 
+New York Network Region           91           347 Subscriber0347 Example subscriber0347@example.com Enterprise       SEER Jersey City Access Site Jersey City         16000              82                        2.34 
+New York Network Region           91           789 Subscriber0789 Example subscriber0789@example.com Consumer         SEER Jersey City Access Site Jersey City         16000              82                        2.34 
+New York Network Region           91           101 Subscriber0101 Example subscriber0101@example.com Enterprise       SEER Queens Access Site      Queens              15000              75                        2.46 
+New York Network Region           91           163 Subscriber0163 Example subscriber0163@example.com Small business   SEER Brooklyn Access Site    Brooklyn            14000              68                        2.46 
+New York Network Region           91           543 Subscriber0543 Example subscriber0543@example.com Consumer         SEER Queens Access Site      Queens              15000              75                        2.46 
+New York Network Region           91           605 Subscriber0605 Example subscriber0605@example.com Enterprise       SEER Brooklyn Access Site    Brooklyn            14000              68                        2.46 
+New York Network Region           91           985 Subscriber0985 Example subscriber0985@example.com Small business   SEER Queens Access Site      Queens              15000              75                        2.46 
+
+
+Elapsed: 00:00:02.334
+25 rows selected.
+
+Copy to clipboard
+LAB6_BLOCK_1
+
+
+Copy to clipboard
+PLAN_ID CATEGORY       MONTHLY_FEE TOTAL_REPORTS AVG_SENTIMENT CONGESTED_INTERVALS BUSY_INTERVALS CONNECTIONS_ORDERED MONTHLY_CHARGES SURGE_LABEL 
+------- -------------- ----------- ------------- ------------- ------------------- -------------- ------------------- --------------- ----------- 
+      1 Mobile                 125             6          -0.3                   0              0                  26            3310 STABLE      
+      2 Mobile                  60             6          -0.3                   3              3                  48            2880 SURGE       
+      3 Mobile                  70             6          -0.3                   0              0                  18            1260 STABLE      
+      4 Fixed wireless          65             6          -0.3                   3              3                  48            3120 SURGE       
+      5 Fixed wireless          75             6          -0.3                   0              0                  18            1350 STABLE      
+      6 Fixed wireless          85             6          -0.3                   3              3                  48            4080 SURGE       
+      7 Fiber                   80             6          -0.3                   0              0                  18            1440 STABLE      
+      8 Fiber                   90             6          -0.3                   3              3                  48            4320 SURGE       
+      9 Fiber                  100             6          -0.3                   0              0                  18            1800 STABLE      
+     10 IoT                     13             6          -0.3                   3              3                  48             624 SURGE       
+
+
+Elapsed: 00:00:00.099
+10 rows selected.
+
+Copy to clipboard
+LAB6_BLOCK_2
+
+
+Copy to clipboard
+
+Table OTTO_PLAN_DEMAND_SETTINGS dropped.
+
+Elapsed: 00:00:00.012
+
+
+Copy to clipboard
+
+Table OTTO_PLAN_DEMAND_SETTINGS created.
+
+Elapsed: 00:00:00.009
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.033
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.004
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.003
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.003
+
+
+Copy to clipboard
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.076
+
+
+Copy to clipboard
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:01.493
+
+
+Copy to clipboard
+LAB6_BLOCK_3
+
+
+Copy to clipboard
+MODEL_NAME                   MINING_FUNCTION ALGORITHM                
+---------------------------- --------------- ------------------------ 
+OTTO_PLAN_DEMAND_SURGE_MODEL CLASSIFICATION  GENERALIZED_LINEAR_MODEL 
+
+
+Elapsed: 00:00:00.012
+1 rows selected.
+
+Copy to clipboard
+LAB6_BLOCK_4
+
+
+Copy to clipboard
+
+Table OTTO_PLAN_DEMAND_SCORING_DATA dropped.
+
+Elapsed: 00:00:00.005
+
+
+Copy to clipboard
+
+Table OTTO_PLAN_DEMAND_SCORING_DATA created.
+
+Elapsed: 00:00:00.014
+
+
+Copy to clipboard
+
+12 rows inserted.
+
+Elapsed: 00:00:00.110
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.003
+
+
+Copy to clipboard
+LAB6_BLOCK_5
+
+
+Copy to clipboard
+PLAN_ID PLAN_NAME                                CATEGORY       PREDICTED_SURGE SURGE_SCORE SURGE_PCT CONNECTIONS_ORDERED MONTHLY_CHARGES TOTAL_REPORTS CONGESTED_INTERVALS BUSY_INTERVALS 
+------- ---------------------------------------- -------------- --------------- ----------- --------- ------------------- --------------- ------------- ------------------- -------------- 
+      2 Edison Mobile Plus - 12-month contract   Mobile         SURGE            0.99999992       100                  51            3060            10                   4              4 
+      4 Edison Home Wireless - Monthly rolling   Fixed wireless SURGE            0.99999992       100                  51            3315            10                   4              4 
+      6 Edison Home Wireless - Business managed  Fixed wireless SURGE            0.99999992       100                  51            4335            10                   4              4 
+      8 Edison Fiber Connect - 12-month contract Fiber          SURGE            0.99999992       100                  51            4590            10                   4              4 
+     10 Edison Sensor Link - Monthly rolling     IoT            SURGE            0.99999992       100                  51             663            10                   4              4 
+     12 Edison Sensor Link - Business managed    IoT            SURGE            0.99999992       100                  51            1683            10                   4              4 
+      1 Edison Mobile Plus - Monthly rolling     Mobile         STABLE           0.00004123         0                  29            3685            10                   1              1 
+      3 Edison Mobile Plus - Business managed    Mobile         STABLE           0.00004123         0                  21            1470            10                   1              1 
+      5 Edison Home Wireless - 12-month contract Fixed wireless STABLE           0.00004123         0                  21            1575            10                   1              1 
+      7 Edison Fiber Connect - Monthly rolling   Fiber          STABLE           0.00004123         0                  21            1680            10                   1              1 
+      9 Edison Fiber Connect - Business managed  Fiber          STABLE           0.00004123         0                  21            2100            10                   1              1 
+     11 Edison Sensor Link - 12-month contract   IoT            STABLE           0.00004123         0                  21             483            10                   1              1 
+
+
+Elapsed: 00:00:00.024
+12 rows selected.
+
+Copy to clipboard

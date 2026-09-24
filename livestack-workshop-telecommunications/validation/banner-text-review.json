@@ -1,0 +1,92 @@
+{
+  "method": "macOS Vision accurate OCR plus visual review of edited images",
+  "banners": [
+    {
+      "path": "activation-fraud-network/images/bob.png",
+      "text": [
+        "Lab 4: Investigate an Activation Fraud Network",
+        "Follow connections between",
+        "suspicious service orders.",
+        "Bob Green",
+        "Graph Specialist"
+      ]
+    },
+    {
+      "path": "network-site-spatial/images/moon.png",
+      "text": [
+        "Lab 5: Find Nearby Network Sites",
+        "Locate network sites near",
+        "subscribers needing support.",
+        "Moon Kai",
+        "Spatial Specialist"
+      ]
+    },
+    {
+      "path": "plan-demand-oml/images/otto.png",
+      "text": [
+        "Lab 6: Build a Service Plan Demand Watchlist",
+        "Use activation activity to flag",
+        "service plans for review.",
+        "Otto Spencer",
+        "Data Scientist"
+      ]
+    },
+    {
+      "path": "selectai-agent/images/nina.png",
+      "text": [
+        "Labs 7 & 8: Ask Telecom Questions and Build an Al Agent",
+        "Ask questions about",
+        "telecom data and review",
+        "the answers.",
+        "Jessica Chan",
+        "Telecom DBA",
+        "Nina Patel",
+        "Subscriber Experience Analyst"
+      ]
+    },
+    {
+      "path": "selectai/images/nina.png",
+      "text": [
+        "Labs 7 & 8: Ask Telecom Questions and Build an Al Agent",
+        "Ask questions about",
+        "telecom data and review",
+        "the answers.",
+        "Jessica Chan",
+        "Telecom DBA",
+        "Nina Patel",
+        "Subscriber Experience Analyst"
+      ]
+    },
+    {
+      "path": "service-order-duality/images/thomas.png",
+      "text": [
+        "Lab 2: Build a JSON Application Model",
+        "Manage subscriber service orders",
+        "from a web and mobile application.",
+        "Thomas",
+        "Application Developer"
+      ]
+    },
+    {
+      "path": "subscriber-concern-vector-search/images/gilly.png",
+      "text": [
+        "Lab 3: Search Service Plans by Meaning",
+        "Find subscribers affected by",
+        "weak indoor mobile coverage.",
+        "Gilly Bourne",
+        "Al Engineer"
+      ]
+    },
+    {
+      "path": "subscriber-operations-dashboard/images/jessica.png",
+      "text": [
+        "Lab 1: Build a Converged Dashboard Query",
+        "Find service plans and subscribers",
+        "that need network support.",
+        "Jessica Chan",
+        "Telecom DBA"
+      ]
+    }
+  ],
+  "limitation": "Raster edits retain the original artwork visually; not a pixel-identical non-text mask."
+}
