@@ -1,8 +1,8 @@
-# Lab 4: Connect Services and Verify the Deployment
+# Lab 5: Connect Services and Verify the Deployment
 
 ## Introduction
 
-In this lab, you create a personalized strategy with the Brand Agent, then perform layered verification to confirm the core platform is production-ready. You will execute health checks, database and memory probes, Slack smoke tests, manual validation, and one complete end-to-end run.
+In this lab, you activate the configured services and perform layered verification to confirm the complete platform is production-ready. You will execute health checks, database and memory probes, Slack smoke tests, OAuth-aware validation, manual validation, and one complete end-to-end run.
 
 Estimated Time: 45 minutes
 
@@ -11,19 +11,79 @@ Estimated Time: 45 minutes
 In this lab, you will:
 
 - Validate service and database health endpoints.
+- Activate the platform services after Google OAuth and external configuration are complete.
 - Create a personalized user strategy with the Brand Agent.
 - Validate Data Agent memory recall.
 - Execute automated and manual Slack validation.
+- Verify the configured external-service handoff.
 - Complete one end-to-end workflow from topic intake to publish.
 - Confirm final platform status is healthy.
 
 ### Prerequisites
 
-- Completion of Lab 3.
-- Active runtime services.
+- Completion of Lab 4.
+- Google OAuth and external-service configuration completed in Lab 4.
 - Access to Slack workspace and channels configured in Lab 3.
 
-## Task 1: Create a Personalized Strategy with the Brand Agent
+## Task 1: Install and Activate Services
+
+1. Use the unit files stored alongside each runtime component. They reference the shared and agent-specific environment files configured in Lab 3 and the Google integration file configured in Lab 4. Do not bulk-copy `deploy/systemd/*.service`: that directory contains deployment-specific and legacy paths.
+
+    ```
+    <copy>
+    cd ~/livelabs-ai-staff
+    rg -n 'WorkingDirectory|EnvironmentFile|ExecStart' \
+      agents/{assistant,pipeline,brand-agent,data,ops,publish}/contentkit-*.service \
+      apps/file-editor/contentkit-file-editor.service
+    </copy>
+    ```
+
+2. Create the File Editor environment file and install the core units:
+
+    ```
+    <copy>
+    sudo install -d -m 700 /etc/sysconfig
+    sudo tee /etc/sysconfig/contentkit-file-editor > /dev/null <<'EOF'
+    # Required EnvironmentFile for contentkit-file-editor.service.
+    # Leave this file without variables when the editor uses local 127.0.0.1 links.
+    EOF
+    sudo chmod 600 /etc/sysconfig/contentkit-file-editor
+    sudo cp agents/pipeline/contentkit-pipeline.service \
+      agents/assistant/contentkit-assistant.service \
+      agents/assistant/contentkit-assistant-reminder.service \
+      agents/assistant/contentkit-assistant-reminder.timer \
+      agents/brand-agent/contentkit-brand.service \
+      agents/data/contentkit-data.service \
+      agents/ops/contentkit-ops.service \
+      agents/publish/contentkit-publish.service \
+      apps/file-editor/contentkit-file-editor.service \
+      /etc/systemd/system/
+    sudo systemctl daemon-reload
+    for unit in contentkit-data contentkit-brand contentkit-ops contentkit-publish \
+                contentkit-assistant contentkit-pipeline contentkit-file-editor; do
+      sudo systemctl enable --now "$unit"
+      systemctl is-active "$unit"
+    done
+    sudo systemctl enable --now contentkit-assistant-reminder.timer
+    systemctl list-timers 'contentkit-*'
+    </copy>
+    ```
+
+3. Enable AI Staff intake automation now that Gmail, Calendar, Drive, and intake configuration are complete:
+
+    ```
+    <copy>
+    sudo cp agents/aistaff/aistaff-intake-watch.service \
+      agents/aistaff/aistaff-intake-watch.timer /etc/systemd/system/
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now aistaff-intake-watch.timer
+    systemctl list-timers 'aistaff-*'
+    </copy>
+    ```
+
+4. If a unit reports `Failed to load environment files`, restore the `etc_t` label. If it reports `203/EXEC`, restore the `bin_t` label on the virtual environment and use `chcon -h` for the `python*` symlink.
+
+## Task 2: Create a Personalized Strategy with the Brand Agent
 
 1. Open a direct message with the Brand Agent configured in Lab 3. This app is the brand and strategy owner for the deployment.
 
@@ -47,10 +107,10 @@ In this lab, you will:
 
 5. Confirm that the generated strategy reflects the customer before running content workflows. If the summary is incomplete, send `setup strategy` again and refine the answers in the same Brand Agent thread.
 
-## Task 2: Run Tier 1 Platform Health Checks
+## Task 3: Run Tier 1 Platform Health Checks
 
-1. Validate that `contentkit-assistant`, `contentkit-pipeline`, `contentkit-brand`, `contentkit-data`, `contentkit-ops`, and `contentkit-publish` are active. Also validate `contentkit-website` when the public intake service is enabled.
-2. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003), Data Agent (8004), and Website Agent (8005 when enabled).
+1. Validate that `contentkit-assistant`, `contentkit-pipeline`, `contentkit-brand`, `contentkit-data`, `contentkit-ops`, and `contentkit-publish` are active. 
+2. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003) and Data Agent (8004).
 3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
 
     ```
@@ -66,7 +126,7 @@ In this lab, you will:
 
 4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
 
-## Task 3: Run Tier 2 and Tier 3 Slack Validation
+## Task 4: Run Tier 2 and Tier 3 Slack Validation
 
 1. Run the automated Slack smoke test script first. This confirms token loading and basic agent routing before you send manual Slack commands.
 
@@ -100,18 +160,28 @@ In this lab, you will:
 
 5. Make sure correct channel-membership, Socket Mode, or token issues before continuing.
 
-## Task 4: Execute One End-to-End Workflow
+## Task 5: Execute One End-to-End Workflow
 
 1. Submit a topic in `#content-start` and follow the Content Agent prompt to begin the run.
 2. Progress through each workflow pause and approval checkpoint with `continue`, `edit`, `done`, or `approve` as requested in the active thread.
 3. Trigger at least one Creative Agent asset revision, then approve the Brand Agent grade-gated content.
 4. Confirm that the Content Agent hands the final item to the Publish Agent in `#publishing`, then run `publish <post-number>` to validate the configured delivery behavior.
 
-## Task 5: Complete Final Status Validation
+## Task 6: Complete Final Status Validation
 
-1. Send `status` to the Assistant Agent in a direct message.
-2. Confirm the response reports all configured agents up and the database healthy. This exercises Assistant Agent routing, the Ops Agent aggregate health check, and the Data Agent database probe.
-3. Capture verification evidence and record any follow-up actions.
+1. Run the OAuth-aware configuration and service smoke checks:
+
+    ```
+    <copy>
+    cd ~/livelabs-ai-staff
+    python3 scripts/validate_config.py --env-only
+    agents/aistaff/venv/bin/python scripts/smoke_test.py
+    </copy>
+    ```
+
+2. Send `status` to the Assistant Agent in a direct message.
+3. Confirm the response reports all configured agents up and the database healthy. This exercises Assistant Agent routing, the Ops Agent aggregate health check, and the Data Agent database probe.
+4. Capture verification evidence and record any follow-up actions.
 
 ## Acknowledgements
 
