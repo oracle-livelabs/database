@@ -67,7 +67,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-The workshop profile is named `SEER_MEDIA_PROFILE`. Confirm that it is enabled. If your workshop administrator has configured a different profile name, use that name in the following tasks.
+    The workshop profile is named `SEER_MEDIA_PROFILE`. Confirm that it is enabled. If your workshop administrator has configured a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
   
