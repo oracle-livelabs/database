@@ -1,0 +1,445 @@
+{
+  "date": "2026-09-23",
+  "method": "Visual inspection plus text review of current character banners and the Seer Hotels introduction image; prior SQL, Graph Studio, AutoML and local-demo review records retained. Green-button runtime evidence is recorded in live-validation.md.",
+  "images": {
+    "booking-abuse-network/images/graph-studio-overview.jpg": {
+      "sha256": "77785111b3c2ad5e91cceba4a3b20bede782c7f7bc07d0d1dfa4bcbcc0054148",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "• livestack/ail × | paperclipai/ x\nPreview San ×\nBuild Conne\n× | Message fri x\n• Instances |\nOracle Data\n-- rddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true#/\n0\nOverview |4\n*\n+\n• ATTACHED\nGraph Studio\n• Ovelview\nPick up active workstreams or launch something new.\n& LLUSER -\nQuickstart\nJobs\nCompute Environment Attach\nUpdated 14 minutes ago\nView All\nCOMPLETED\nCreate Graph\nDefine a graph from database\ntables.\nNew Notebook\nAnalyze graphs interactively.\nRecent Notebooks\nView All\nBooking Abuse Network\nUpdated 10 minutes ago\nUse Cases/Part 1 Exploring Social Netwo...\nUpdated 26 minutes ago\nUse Cases/SQL Graph Part 1 Exploring S...\nUpdated 26 minutes ago\nGraph Explorer\nExplore and visualize property\ngranhs.\nCompute Environment\nConfiguration\nRecently Updated Graphs\nNo data to display.\nView All\nResources\n@ Documentation\nF Blog\n• Tutorials\nCopyright © 2026 Oracle and/or its affiliates."
+    },
+    "guest-operations-dashboard/images/jessica.png": {
+      "sha256": "a1f2a4dd5cf9f2024db1c27a3ccec2456fbd20fd13b58c20acf06c22b2339886",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "introduction/images/details-accordion-closed.jpg": {
+      "sha256": "e5315eae18da472b4e97240c9678fc1c692749a6002f16d9d3f087bbcf1ab810",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "introduction/images/details-accordion-expanded.jpg": {
+      "sha256": "dc2a5b0226c4b54ba0ea94d2a2c160240bb37937840eaba4679d347a456d141e",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "reservation-duality/images/thomas.png": {
+      "sha256": "be57372ab953b5802eddfd956be34169b97d03d729c519243b38108b3e202cd7",
+      "status": "reviewed",
+      "finding": "Hospitality content or generic Oracle platform/persona illustration; no prior-domain labels found"
+    },
+    "introduction/images/seer-hotels-erd.png": {
+      "sha256": "32e664739f05f0d1d9238e57586f3e35c88fb0f2aa6cfe4c4873696e01939f8d",
+      "status": "reviewed",
+      "finding": "Current Seer Hotels illustration visually reviewed during the wording pass. Five entities, primary and foreign keys, and five one-to-many relationships match the core schema. Image content unchanged by this review."
+    },
+    "booking-abuse-network/images/live-04-booking-graph-sql.jpg": {
+      "sha256": "73e205d0fd957c69c21991f34e8449b80f3e9e0404f75ecf62c122eb73e6e00a",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database\nLLUSER V\n[Worksheet ]*\n12\n13\n14\n15\n16\n17\n• g\n* = Aa -\nconnected. entity_type AS connected_type,\nedge. relationship_type AS relationship_type,\nconnected. risk_score AS connected_risk\nConsumer group:\nData Load\nLOW Y\nORDER BY connected _risk DESC;\nQuery Result\nШ\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n...\n1\n2\n3\n4\nDownload - Execution time: 0.017 seconds\nRESERVATION_KE CONNECTED_KEY CONNECTED_TYP\nRELATIONSHIP_T) CONNE\nRSV-8841\nDEV-fp-91a7\ndevice\nUSES_DEVICE\nRSV-8841\nIP-198.51.100.44\nip_address\nUSES_IP\nRSV-8841\nPHONE-212-0199\nphone\nUSES_PHONE\nRSV-8841\nPROPERTY-001\nproperty\nAT_PROPERTY\nx 0 A 0 2030 5:44:14 PM - 4 rows total\nPowered by ORDS"
+    },
+    "guest-concern-vector-search/images/live-03-vector-search.jpg": {
+      "sha256": "ce2c39e7c257ee5ffa397ee4cdbbf6fd610b3685c3e72b1dd35dc64dc444b7f8",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\n4\nEa\nAa -\nData Load\nso. offer_embedding,\nVECTOR_EMBEDDING( ADMIN.ALL_MINILM_12_V2 USING 'accessible ro\nCOSINE), 4) AS similarity\nFROM stay_offers so\nORDER BY similarity DESC\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\nШ\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.289 seconds\n1\n2\n4\nOFFER_NAME\nEdison Accessible king - Flexible - step-free access\nEdison Accessible king - Advance stay - step-free ac...\nMidtown Accessible king - Flexible - step-free access\nCATEGORY SIMILARITY\nAccessible...\nAccessible...\nAccessible...\nChicago Loop Accessible king - Flexible - step-free a... Accessible...\n0.6582\n0.6547\n0.6428\n0.6358\n* 0M 0 2030 5:42:42 PM - 5 rows total\nPowered by ORDS"
+    },
+    "guest-operations-dashboard/images/live-01-dashboard.jpg": {
+      "sha256": "5f910ff8c20032ca6e4f45eac59c70a7aaa7f1e152b9761b3c14a9679133b779",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database\nLLUSER V\nNavigator\nFiles\n3\nLLUSER\nTables\nSearch...\n• # BOOKING_CASES\n• EE BOOKING_CASE_ENTITIES\n• E BOOKING_ENTITIES\n• # BOOKING_RELATIONSHIPS\n• # DBTOOLSSEXECUTION_HISTORY\n• # DEMAND_REGIONS\n• # GUESTS\n• EE GUEST_POSTS\n• EE HOTEL_PROPERTIES\n• EE LOYALTY_MEMBERS\n• E LOYALTY_POINT_TRANSFERS\n[Worksheet ]*\nConsumer\ngroup:\nLOW Y\nE\n118\n119\n120\n121\nann\nData Load\n80\nAa -\n-- Service impact breaks ties so\nORDER BY sm.semantic_similarity D\nimpact.affected reservat\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\n•..\nDownload\nExecution time: 0.419 seconds\nOFFER_NAME\nPROPERTY_NAME OFFE\nNewark Accessib... Seer Newark Hotel Acce\n2\nAurora Accessibl... Seer Aurora Hotel\nAcce\nEdison Accessibl... Seer Edison Hotel\nAcce\n4\nEdison Accessibl... Seer Edison Hotel Acce\n* 0A A 0 2030 | 2:56:03 PM - 10 rows total\n& Powered by ORDS"
+    },
+    "guest-routing-spatial/images/live-05-spatial-routing.jpg": {
+      "sha256": "1dd81e4894d7bcd08fcc95615e8e4b67a6273475edaee4b38bfbead10be7cd9e",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nAa -\nData Load\n6id\n13\n14\n15\n16\n17\n18\ndr. demand_index\nFROM hotel_properties hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = 'New York Visitor Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nШ\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n1\n2\n4\nDownload - Execution time: 0.011 seconds\nPROPERTY_NAME CITY\nSeer Edison Hotel\nEdison\nSeer Newark Hotel\nNewark\nSeer Midtown Ho... Midtown\nSeer Brooklyn Ho... Brooklyn\nSTATE_PROVINCE BOUNDARY_DIST/ REGION\nNew Jersey\n0 New Yor\nNew Jersey\n0 New Yor\nNew York\n0 New Yor\nNew York\n0 New Yor\n* A 0 2@05:44:45 PM - 10 rows total\n& Powered by ORDS"
+    },
+    "reservation-duality/images/live-02-duality-confirmed.jpg": {
+      "sha256": "467710c9ca52df81ae47102eb5c86449080e4a9fe5f9d16cd9ec9af212d154a3",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database\n[Worksheet ]*\nConsumer group:\n* = Aa -\nr. reservation_status AS reservation_status,\ng. email\nAS guest_email\nFROM reservations r\nJOIN\nguests g\nONg. guest_id = r.guest_id\nWHERE\nr. reservation_id = 900001;\nData Load\nQuery Result\nШ\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n1\nDownload - Execution time: 0.007 seconds\nRESERVATION_ID RESERVATION_ST GUEST_EMAIL\n900001 confirmed\nguest0001@exa...\n* 04 0 20 0 5:43:59 PM - 1 rows total\nLLUSER V\nLOW -\n6id\n•••\n& Powered by ORDS"
+    },
+    "selectai/images/live-07-select-ai-answer.jpg": {
+      "sha256": "5733790693cae0b61365f5bf6eb6ae621652cf520d17ef7069beffc8b4de8fe0",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nprompt\nprofile_name\naction\nAS answer;\nAa -\nData Load\n6id\nShow the five stay offers with the highest b\n'genai\"\n'runsql'\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n...\nDownload - Execution time: 53.678 seconds\nColumn \"ANSWER\" row 1\n\"OFFER_NAME\" : \"Joliet Family suite - Advance stay\",\n\"CATEGORY\": \"Family suites\",\n\"TOTAL_REVENUE\": 16620,\n\"TOTAL NIGHTS\": 60\nClc\n* 0 A 0 20 0 5:48:04 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai-agent/images/live-08-agent-answer.jpg": {
+      "sha256": "83d1cce31b0606a6894e32b01fc1b3685d032c15b2bd335599d084928ae89061",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database\nLLUSER V\nNavigator\nLLUSER\nFiles\n[Worksheet ]*\nConsumer\nLOW y\ngroup:\nTables\nSearch....\nData Load\n80\nE\n• E BOOKING_CASES\n• EE BOOKING_CASE_ENTITIES\n• E BOOKING_ENTITIES\n• E BOOKING_RELATIONSHIPS\n• # DBTOOLSSEXECUTION_HISTORY\n• EE DEMAND_REGIONS\n• # DM$P5OTTO_STAY_DEMAND_SUF\n• EE DM$PBOTTO_STAY_DEMAND_SUF\n• # DM$PCOTTO_STAY_DEMAND_SUF\n• EE DM$PDOTTO_STAY_DEMAND_SUF\n• # DM$PEOTTO_STAY_DEMAND_SUF\n2\n4\nAa -\nSELECT DBMS_CLOUD_AI_AGENT .RUN_TEAM(\nteam_name\n→> 'NINA HOS\nuser_prompt =>. Which fi\nparams\n=. '{\"conver:\n) AS agent_answer;\nQuery Result\nScript Output\n•••\nDownload\nExecution time: 14.172 seconds\nAGENT_ANSWER\n1\nThe top 5 stay of...\n* 0 A 0 203 0 5:41:58 PM - 1 rows total\nPowered by ORDS"
+    },
+    "stay-demand-oml/images/live-06-demand-model.jpg": {
+      "sha256": "b1d070c9d1acc25f47051b6cfadd8a78d87fa64140a6c384ad76e94441031519",
+      "status": "reviewed",
+      "finding": "Real hospitality SQL result; visible portion only. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "ORACLE | SQL\nSearch Database\nLLUSER V\n[Worksheet ]*\n• g\nConsumer group:\nData Load\nLOW -\n36\n37\n38\n39\n40\n41\nscored_offer.rising_posts\nFROM scored_offers scored_offer\nJOIN stay_offers so\nON\nso.offer_id\n= scored_offer.offer_id\nORDER BY scored_offer. surge_score DESC,\nso.offer_id;\nQuery Result\nШ\nOFFERID\n1\n2\n4\nScript Output\nDBMS Output\nExplain Plan\nDownload - Execution time: 0.009 seconds\nOFFER_NAME\nCATEGORY\nEdison Standard ...\nStandard rooms\n8 Edison Family sui...\nFamily suites\n1 Edison Accessibl... Accessible rooms\n12 Edison Extended ... Extended stays\nAutotrace\nPREDICTED_SURC SURGE.\nSURGE\nSURGE\nSURGE\nSURGE\n0\n* 0A 0 20305:45:00 PM - 12 rows total\n& Powered by ORDS"
+    },
+    "booking-abuse-network/images/live-09-graph-notebook-table.jpg": {
+      "sha256": "159a514d7c1a580f3038c9433f76af37793b980a537814ebc8152730a736647d",
+      "status": "reviewed",
+      "finding": "Real hospitality Graph Studio result; imported display filters retained. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "• livestack/ail ×\n• paperclipai/ x\nPreview San ×\nBuild Conne x | Message fri x\n• Instances |\nOracle Data\nrddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true#/notebook/dsD3eRBk\nGraph Studio\n• Notebooks > Booking Abuse Network\nBooking Ab\n+\n*\n• ATTACHED\nLLUSER\nШ\nE\nSELECT AI\nreached. risk_score AS risk_score,\nreached. risk_level AS risk_level,\nreached. total_amount AS total_amount,\nreached. channel AS channel\n)\nORDER BY risk_score DESC\nFETCH FIRST 25 ROWS ONLY;\n090 2*\nType to search\nENTITY_KEY -\nRSV-8841\nRSV-5077\nDEV-fp-91a7\nRSV-1190\nIP-198.51.100.44\nDISPLAY_NAME -\nReservation 8841\nReservation 5077\nShared booking device\nReservation 1190\nShared network address\nENTITY_TYPE\nreservation\nreservation\ndevice\nreservation\nip_address\nRISK SCORE\nRISK_LEVEL -\n96.5\n91\n90\n77\n72\nTOTAL_AMOUNT -\nhigh\nhigh\nhigh\nhigh\nhigh\n250\n270\n290\nCHANNEL -\nweb\nweb\nweb\nT web\nweb\nCopyright ® 2026 Oracle and/or its affiliates."
+    },
+    "booking-abuse-network/images/live-10-graph-reservation-network.jpg": {
+      "sha256": "4ad203283c50d140b17d5451b460cb2b70aa3089f2abcce011ce638e7b33709c",
+      "status": "reviewed",
+      "finding": "Real hospitality Graph Studio result; imported display filters retained. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "• livestack/ail x\n• paperclipai/ x\nPreview Sar ×\nBuild Conne x\n• Message fri x\nInstances\nOracle Data\nrddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true#/notebook/dsD3eRBk\nGraph Studio\n• Notebooks > Booking Abuse Network @\nBooking Ab\n+\nATTACHED\n<>\nLLUSER\nШ\n2\nSELECT AI\n- 89\nQ Search =\n* RISK SCORE\nENTITY\nRISK_SCORE < 90\n90\nRISK_SCORE < 90\nRISK_SCORE <= 50\n68\n91\n~ Edges\n72\n96.5\n77\n6 of 7 vertices\n8 of 10 edges\n14\nof 17 elements, 82.35%\nHidden Connection\nRELATED_TO\nCopyright © 2026 Oracle and/or its affiliates."
+    },
+    "booking-abuse-network/images/live-11-graph-shared-device.jpg": {
+      "sha256": "6c78c44cf8f6efe7fd3b2ad16c080b31084af85c72391809620f23638acc85ef",
+      "status": "reviewed",
+      "finding": "Real hospitality Graph Studio result; imported display filters retained. Visual and OCR review found no prior-domain labels.",
+      "ocr_text": "• livestack/ail x | paperclipai/ x\nPreview Sar X\nBuild Conne ×\n• Message fri x\nInstances |\nOracle Data\nrddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true#/notebook/dsD3eRBk\nBooking Ab\n+\nGraph Studio\n• Notebooks > Booking Abuse Network@\nATTACHED\n<>\nLLUSER\nШ\nE\nLo\nSELECT AI\nCOLUMNS (\nvertex_id(reservation) AS reservation_id,\nedge_id (e)\nAS related_to_id,\nvertex_id (device)\nAS device_id\n80\nDEV-fp-91a7\n• - 88\na Search =\nIP_ADDRESSES\nRESERVATIONS\nRSV-8841\n~ Edges\nRSV-5077\nDEV-fp-91a...\nRSV-1190\n4 of 5 vertices\n5 of 7 edges\nof 12 elements, 75.00%\nHidden Connection\nRELATED_TO\nCopyright © 2026 Oracle and/or its affiliates."
+    },
+    "guest-operations-dashboard/images/demo-dashboard.jpg": {
+      "sha256": "4f0892b07d9bf780442f15959e0f3e17b44fbf9b15cff27da98e45def9b61620",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "ORACLE\nHospitality LiveStack\nWelcome\nORACLE AI DATABASE 26AI\nHOSPITALITY OPERATIONS\n26 Data Foundation\nJSON DUALITY\nGRAPH\nProperty Performance\nCommand Center\nIN-MEMORY\nNATIVE JSON\nIF Guest & Demand Signal\nIntelligence\nVECTOR SEARCH\nVPD\nProperty Performance Command Center\nIN-MEMORY\nNATIVE JSON\nUse Your Own Data\nProperty Performance Command Center\nDaily visibility into property performance, revenue, guest experience, room-readiness pressure, and Al-assisted decision\nintelligence.\nSCENE 2 - DETECT THE MULTI-BRAND PORTFOLIO ISSUE\nSpot RePAR opportunity and guest-experience pressure\nbefore it becomes operational fallout.\nThe command center turns the portfolio story into a live operating picture:\noccupancy, ADR, RevPAR, affected brands, room types, arrival pressure,\nguest satisfaction, housekeeping load, maintenance backlog, revenue\nexposure, owner impact, and audited agent activity all come from the same\nOracle foundation.\n• Refresh\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data • 9/18/2026, 11:24:45\nAM\nAC\nAva Chen\nAdmin\n3.0K\nReservations\n1.5K last 30d\n$4,213,387.74\nRevenue Revenue\nImpact\n$2,125,396.43 last 30d\n474\nCritical Guest\nSignals\n1.2K elevated\nWatch Guest Rewards booking pace, occupancy,\nroom revenue, guest issues, and service load move\ntogether.\nLook for overbooking pressure, cancellation spikes,\nroom-readiness risk, and revenue-center impact by\nbrand tier.\nUse the dashboard as the handoff into signals,\ngraph, service coverage, OML, and agents.\nIF\n156\nRoom Types Under\nReview\nAl Decisions Logged\n375 active service\nroutes\n5.OK guest and\noperations signals\n→"
+    },
+    "guest-operations-dashboard/images/demo-dashboard-charts.jpg": {
+      "sha256": "1c79447a94bdf4c2ed3c18bba47040f2324e85ec46d51573fd17d43e1a9e0a47",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "ORACLE\nHospitality LiveStack\nWeicome\nORACLE AI DATABASE 26AI\nHOSPITALITY OPERATIONS\n26 Data Foundation\nJSON DUALITY\nGRAPH\nProperty Performance\nCommand Center\nIN-MEMORY\nNATIVE JSON\nIF Guest & Demand Signal\nIntelligence\nVECTOR SEARCH\nVPD\nReservations\n1.5K last 30d\nnevenue Revenue\nImpact\n$2,125,396.43 last 30d\nCritical Guest\nSignals\n1.2K elevated\nRoom types Under\nAl Decisions Logged\nReview\n5.0K guest and\noperations signals\n375 active service\nroutes\nV Guest and Demand Signal Velocity\n12000007\n900000-\n600000-\n300000-\nTh\n24h\n48h\n7d\n30d\nTyl\n$\nRevenue Impact by Room Type\nand Revenue Center\n22:00\n15:00\n08:00\n01:00\n18:00\n11:00\n03:00\n19:00\n11:00\n09:00\n• Partner Hospitality • Payments• Analytics\n• Guest Services • Group Sales • Guest Service\n• Revenue Operations\n• Luxury Guest Management\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data • 9/18/2026, 11:24:45\nAM\nAC\nAva Chen\nAdmin\nRoom Type or Revenue Centers Under Operational Risk Review - GUEST, CHANNEL, AND OPERATIONS SIGNAL SEVERITY (7 DAY)\nQ\n; Convention\n→\nROOM TYPE OR REVENUE CENTER\nPROPERTY\nGUEST\nSIGNALS\nREVENUE\nIMPACT\nISSUE\nSEVERITY\nSIGNAL\nTREND"
+    },
+    "introduction/images/demo-welcome.jpg": {
+      "sha256": "3b334284588cc9e7b442724cb065aaa15a537ebe7ecd381eb5c3a6686beaf729",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "ORACLE\nHospitality LiveStack\nWelcome\nORACLE AI DATABASE 26AI | HOSPITALITY OPERATIONS\nE\nUse Your Own Data\nWelcome\nORACLE AI DATABASE 26 AI\nHOSPITALITY OPERATIONS\nData Foundation\nJSON DUALITY\nGRAPH\nProperty Performance\nCommand Center\nIN-MEMORY\nNATIVE JSON\nIF Guest & Demand Signal\nIntelligence\nVECTOR SEARCH\nVPD\nPortfolio performance and hotel operations on one\ngoverned Oracle data platform.\nThis demo represents a multi-brand hospitality operator spanning luxury, premium, select-service, extended-stay, resort,\nand convention properties. Leaders can see how loyalty demand, channel mix, room readiness, group blocks, food and\nbeverage, events, labor, and owner value move together before a performance pattern becomes a guest-experience issue.\nFollow a fictional portfolio from demand detection through guest-experience investigation, arrival-readiness protection,\nrevenue analysis, and owner-close validation. Oracle Al Database 26ai keeps operational evidence, access controls,\nanalytics, and decision history together throughout the journey.\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data • 9/18/2026, 11:24:45\nAM\nAva Chen\nAC\n→\nTEN USE CASES, ONE HOSPITALITY EXECUTIVE RESPONSE STORY\nThe demo follows one Guest Rewards-led demand surge and group-event arrival window from signal detection through guest-\nnetwork investigation, room-readiness protection, predictive RePAR, labor, and owner-value scoring, natural-language analysis,\nAl-assisted action, and owner close validation. The scenario proves how the same governed Oracle Al Database 26ai foundation\nsupports a complete hospitality performance conversation at global scale.\nData Foundation\nPortfolio Performance Command Center\nLoad portfolio properties, brand tiers, rooms.\nGuest Rewards guests, reservations, group\nblocks, folios, property hotels, OML outputs,\nand agent audit history.\nSee occupancy, ADR, RePAR, booking pace,\nguest satistaction, owner exposure, open\nservice work, revenue mix, and agent activity\nin one governed view.\nGuest Rewards and Demand Signal\nIntelligence\nSearch Guest Rewards member signals,\nreviews, channel discrepancies, demand\nspikes, event pressure, and operational alerts\nto understand why performance is changing."
+    },
+    "booking-abuse-network/images/graph-import-dialog.jpg": {
+      "sha256": "8bd82e8f28e5f1b3b4be3273a8ce90c7cc3997f6102b247eb3fc6c28cbe8937e",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "• livestack/ail × | paperclipai/ x\nPreview Sar X\nBuild Conne x | Message fri x\n• Instances |\nrddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true##/workspace\nGraph Studio\n• Notebooks\nOracle Data\nNotebooks\n+\nATTACHED\nLLUSER\nImporting notebo D\nCreate\nBooking Abuse\n• Search in all directories\nintroduction\npgql\ngraph server\nmoviestream\nName\nBooking Abuse Network\nHospitality booking-evidence investigati\ngenerated on the deployed dataset.\nE(5) (3)\nsparql\nImport notebook(s)\nLast Edit\nTags\nDrag and Drop\nSelect or drop files here.\n10 minutes ago\nNo files selected.\nCancel\nImport\nCopyright © 2026 Oracle and/or its affiliates."
+    },
+    "booking-abuse-network/images/graph-notebook-top.jpg": {
+      "sha256": "00680b9502bc8783349b713c5abdd83f267bc5d8c79d9f6e8117889c861f99d2",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "• livestack/ail x | paperclipai/ x\nPreview Sar\nBuild Conne ×\n• Message fri x\nInstances\n- rddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true##/notebook/dsD3eRBk\nGraph Studio\n• Notebooks > Booking Abuse Network @\nOracle Data\nBooking Ab\nC\nATTACHED\n+\ng\nLLUSER\n<>\nШ\n2 =\nSELECT AI\n<>\nBooking Abuse Network with Property Graph\nThis query treats the booking abuse data as a graph. In the MATCH pattern, (seed IS entity) is the starting reservation, -[e IS related_to]->(1,2} means follow one or two\nrelationship hops, and (reached IS entity) is every entity reached from that starting point.\nThe WHERE clause anchors the search on RSV-8841, and the COLUMNS clause returns graph properties in a normal SQL result table.\nThis is much easier than writing the same logic with ordinary joins. Without SQL/PGQ graph pattern matching, you would need separate self-joins for one-hop and two-hop\npaths, extra union logic for each relationship depth, and more code every time investigators want to follow another type of relationship.\nThe graph pattern says the investigation in plain terms: start with this reservation, follow the relationships, and show what is connected.\nCopyright ® 2026 Oracle and/or its affiliates."
+    },
+    "booking-abuse-network/images/graph-import-file.jpg": {
+      "sha256": "2d1a516ecf10e420f1be1de7d4736668a92d181637cc6f6f376771c67950b1d4",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "• livestack/ail × | paperclipai/ x\nPreview Sar X\nBuild Conne x | Message fri x\nInstances\nrddainsuh6u1okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true##/workspace\nGraph Studio\n• Notebooks\nOracle Data\nNotebooks\nATTACHED\nC• Importing notebooks....\n+\nLLUSER\nCreate\nBooking Abuse\n• Search in all directories\nintroduction\npgql\ngraph server\nmoviestream\nName\nBooking Abuse Network\nHospitality booking-evidence investigati\ngenerated on the deployed dataset.\nE(5) R(3)\nImport notebook(s)\nDrag and Drop\nSelect or drop files here.\nsparql\nLast Edit\nTags\n10 minutes ago\nSelected files:\nhospitality-booking-abuse-\ngraph-studio.dsnb\nDelete\nCancel\nImport.\nCopyright © 2026 Oracle and/or its affiliates."
+    },
+    "booking-abuse-network/images/graph-notebooks.jpg": {
+      "sha256": "780aaf60dee3c4bc94727d40eab6ca07e5ce683ec62c1244a2c9a1bef613ad21",
+      "status": "reviewed",
+      "finding": "Authentic live viewport capture. Visually inspected and OCR checked. Demo captures illustrate a separate portfolio dataset.",
+      "ocr_text": "• livestack/ail × | paperclipai/ ×\nPreview San x\nBuild Conne x | Message fri x\n• Instances |\n- rddainsuh61okc-livestackhospitality.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/?sso=true#/workspace\nGraph Studio\n• Notebooks\n× 8\nOracle Data\nNotebooks\n+\n*\nATTACHED\nLLUSER -\nImport\nCreate\nBooking Apise\n• Search in all directories\nintroduction\npgql\ngraph server\nmoviestream\npgx\nproperty graphs\nrdf\nsales history\nsh graph\nsparql\nName\nAuthor\nLast Edit\nTags\nBooking Abuse Network\nHospitality booking-evidence investigation; outputs are cleared and must be\ngenerated on the deployed dataset.\nE(5) Ga(3)\nLLUSER\n10 minutes ago\nCopyright © 2026 Oracle and/or its affiliates."
+    },
+    "guest-routing-spatial/images/sql-spatial-routing.jpg": {
+      "sha256": "66ab27b8f9d457b19ee467cdc4d891a448dde2c471d05451c794998e145288c2",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (K+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\n57\n58\n59\n60\n61\n62\n63\n64\n* = Aa -\nproperty_city,\nroom_capacity,\noccupied_rooms_pct,\nguest_property_distance_km\nFROM ranked_properties\nWHERE property_rank\nORDER BY guest_property_distance_km, guest_id\nFETCH FIRST 25 ROWS ONLY;\nData Load\nLOW -\n6id\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n1\n4\nREGION_NAME\nNew York Visitor ...\nNew York Visitor ...\nNew York Visitor ...\nNew York Visitor ...\nNew York Visitor ...\nx) 1\n0 | 6:30:03 PM - 25 rows total\nDownload Execution time: 0.537 seconds\nDEMAND_INDEX\nGUEST_ID\n91\n91\n91\n91\n91\nGUEST_NAME\nEMAIL\n373 Guest0373 Exam...\nguest03\n815 Guest0815 Exam...\nguest08\n399 Guest0399 Exam.. guest03\n841 Guest0841 Exam...\nguest08\n243\nGuest0243 Exam... guest02\nPowered by ORDS"
+    },
+    "guest-routing-spatial/images/sql-spatial-points.jpg": {
+      "sha256": "27b75850768f7851df310e465b40191c18df051f709c531f312a1ec604573c46",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nAa -\nData Load\n6id\n10\n11\n12\nhp. latitude,\nhp. longitude,\nDBMS_LOB.SUBSTR(\nSDO_UTIL. TO_GEOJSON(hp. location), 120, 1\n) AS location_geojson\nFROM hotel_properties hp\nWHERE hp.property_id IN (1, 3, 16)\nORDER BY hp. property_id;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nPROPERTY_ID\n1\nDownload Execution time: 0.021 seconds\nPROPERTY_NAME CITY\n1 Seer Edison Hotel\nEdison\n3 Seer Midtown Ho...\nMidtown\n16 Seer Joliet Hotel\nJoliet\nSTATE_PROVINCE LATITUI\nNew Jersey\nNew York\nIllinois\n* 1\n0 | 6:29:44 PM - 3 rows total\n& Powered by ORDS"
+    },
+    "guest-routing-spatial/images/sql-spatial-chicago.jpg": {
+      "sha256": "d21f35bdf097f414dd6cdc286dbe966b4dd56b9580984eeb22afad11c7fcd518",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\n19\n20\n21\n22\n23\n24\n25\n26\n* = Aa -\n) AS boundary_distance_miles,\ndr. region_name,\ndr. demand_index\nFROM hotel_properties hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = 'Chicago Visitor Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\nData Load\nLOW\n60\n-\nQuery Result\n4\nx 1\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.021 seconds\nPROPERTY_NAME CITY\nSeer Chicago Lo...\nChicago Loop\nSeer Joliet Hotel\nJoliet\nSeer Aurora Hotel\nAurora\nSeer Rosemont H... Rosemont\nSeer Schaumbur... Schaumburg\n6:29:49 PM - 10 rows total\nSTATE_PROVINCE BOUNDARY_DISTA BOUND.\nIllinois\nIllinois\nIllinois\nIllinois\nillinois\n& Powered by ORDS"
+    },
+    "guest-routing-spatial/images/sql-spatial-new-york.jpg": {
+      "sha256": "1ad024d2e431f9316f27b97dc633cbc5da07d3cd6ae2508c2f03090e752d0de9",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n11\n12\n13\n14\n15\n16\n17\n18\n• 8\n* = Aa -\n) AS boundary_distance_km,\ndr. region_name,\ndr. demand_index\nFROM hotel_properties hp\nCROSS JOIN demand_regions dr\nWHERE dr. region_name = 'New York Visitor Region'\nORDER BY boundary_distance_km\nFETCH FIRST 10 ROWS ONLY;\nConsumer group:\nLOW\nData Load\n60\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\n4\nDownload - Execution time: 0.005 seconds\nPROPERTY_NAME CITY\nSeer Edison Hotel Edison\nSeer Newark Hotel\nNewark\nSeer Midtown Ho...\nMidtown\nSeer Brooklyn Ho... Brooklyn\nSeer Queens Hotel Queens\nSTATE_PROVINCE BOUNDARY_DISTA REGION\nNew Jersey\nNew Jersey\nNew York\nNew York\nNew York\n0 New Yor\n0 New Yor\n0 New Yor\n0 New Yor\n0 New Yor\nx 1\n6:29:46 PM - 10 rows total\n& Powered by ORDS"
+    },
+    "stay-demand-oml/images/oml-settings.jpg": {
+      "sha256": "2ce6ac9ab056262c5675b5c5167f91a300ed2cbeb6fd395a661553abf5127b78",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "= ORACLE Marhing\nLLUSER Project\nLLUSER Workspace\n?\nStay Offer Demand Surge\nComment\nData Source\nLLUSER.OML_STAY_DEMAND_TRAI\nPredict\nSURGE_LABEL\nPrediction Type\nClassification\nCase ID\nOFFER_ID\n-\n› Additional Settings\n• Features\nO Refresh\nFilter\nName\nType ="
+    },
+    "stay-demand-oml/images/sql-oml-scoring.jpg": {
+      "sha256": "65da097a5c8a63214fb6d146467d00cb4e1f062a05a5222aabf4fc689a8160be",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n34\n35\n36\n37\n38\n39\n40\n41\n• g\n* = Aa -\nscored_offer. total_posts,\nscored_offer.viral_posts,\nscored_offer.rising_posts\nFROM\nscored_offers scored_offer\nJOIN\nstay_offers so\nON\nso. offer_id = scored_offer.offer_id\nORDER BY scored_offer. surge_score DESC,\nso. offer_id;\nConsumer group:\nLOW\nData Load\n6id\n-\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n4\n* 1 2\nDownload 7 Execution time: 0.003 seconds\nOFFER_ID\nOFFER_NAME\nCATEGORY\n5\nEdison Standard... Standard rooms\n8 Edison Family sui...\nFamily suites\n1 Edison Accessibl...\nAccessible rooms\n12 Edison Extended ... Extended stays\n4 Edison Standard ... Standard rooms\n0 | 6:31:39 PM - 12 rows total\nPREDICTED_SURC SURGE.\nSURGE\nSURGE\nSURGE\nSURGE\nSURGE\n& Powered by ORDS"
+    },
+    "stay-demand-oml/images/oml-launch.jpg": {
+      "sha256": "97da2370b9d5aa46cccfcd5bb20d3b31c6760117fcc09ac7b17516ad28b211b1",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE' Database Actions | Launchpad\nSearch Database (*+K)\nLLUSER V\nPinned & Recently Visited\nDevelopment\nData Studio\nDownloads\nAdministration\nRelated Services\nMonitoring\nEaL SQL\nG Data Modeler\n* REST\nEo Liquibase\n(} JSON\nMachine Learning\nOracle Machine Learning provides several components accessible through a common user interface. OML Notebooks\nsupports Python, SQL, PL/SQL, and Markdown interpreters, with access to in-database ML through OML4Py and\nOML4SQL. OML Models supports managing and deploying in-database models. OML AutoML Ul provides a no-code\nuser interface to build, evaluate, and deploy in-database models using automated machine learning.\n= ORACLE Machine Leaming\nI OMLUSER - *\n› How Do I?\n› Recent Notebooks\nv Quick Actions\n› Recent Experiments\nAuto ML\nModels\nAutoML Experiments\nManage and Deploy\nMachine Leaming\nData Monitors\nMonitor Data Drift\nEe\nModel Monitors\nMonitor Model Drift\nna Charts\nLo Scheduling\n©, JavaScript\nScratchpad\nNotebooks\ndiscovery and\nanalytics\nJobs\nSchedule notebooks\nto run at certain\nChamps»\nexamples\nRecent Activities\n› today\nSo Machine Learning\nLo APEX\n• Graph Studio\nOpen\n• Spatial Studio\n* 0 A 0 20 1 6:32:36 PM - REST call resolved successfully.\n& Powered by ORDS"
+    },
+    "stay-demand-oml/images/sql-oml-training.jpg": {
+      "sha256": "5cc957e016b7a7fabf5dc95e909f77a2be2e80bbb783fcc42a1c87ec9bae474c",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nAa -\nConsumer group:\nData Load\nLOW\n60\n10\n11\n12\n13\nviral_posts,\nrising_posts,\nroom_nights_booked,\nrevenue,\nsurge_label\nFROM oml_stay_demand_training_v\nORDER BY offer_id\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\n1\n4\nDownload - Execution time: 0.023 seconds\nOFFER_ID\nCATEGORY\n1 Accessible rooms\n2 Accessible rooms\n3 Accessible rooms\n4 Standard rooms\n5\nStandard rooms\nNIGHTLY_RATE\n125\n135\n145\n140\n150\n* 1 A 0 203 0 1 6:31:34 PM - 10 rows total\nAutotrace\n...\nTOTAL_POSTS\nAVG_SE\n7 0.15714:\n8\n9 0.42222\n10\n11 0.20909\nPowered by ORDS"
+    },
+    "guest-concern-vector-search/images/sql-vector-guests.jpg": {
+      "sha256": "e23c1a9e2cf3315aeeef430505f7a98227dacea8b76e30dba2ecd5ee5c1a6a64",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• g\nConsumer group:\nData Load\nLOW Y\n6id\n23\n24\n25\n26\n27\n28\n29\n30\nrn. line_total\nFROM matched_offers matched_offer\nJOIN reservation_nights rn ON rn.offer_id = matched_offer.offer_id\nJOIN\nreservations r ON r.reservation_id = rn. reservation_id\nJOIN\nguests g\nON g. guest_id = r. guest_id\nWHERE r. reservation status IN (pending', confirmed, checked in)\nORDER BY matched_offer. similarity DESC,\nr. created_at DESC;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n1\n4\nx 1\nDownload - Execution time: 0.274 seconds\nOFFER_NAME\nSIMILARITY\nGUEST_NAME\nEdison Accessibl...\nEdison Accessibl...\nEdison Accessibl...\nEdison Accessibl...\nEdison Accessibl...\nEMAIL\nRESERV\n0.6582 Guest0001 Exam...\nguest0001@exa...\n0.6582 Guest0252 Exam... guest0252@exa...\n0.6582 Guest0239 Exam... guest0239@exa...\n0.6582 Guest0200 Exam... guest0200@exa...\n0.6582 Guest0187 Exam... guest0187@exa...\n6:30:33 PM - 93 rows total\n& Powered by ORDS"
+    },
+    "guest-concern-vector-search/images/sql-vector-similarity.jpg": {
+      "sha256": "c56ace22366933fbb3bf90c78131fc16a99670f2e0fdedd44a78c8a9094dca46",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nAa -\nData Load\n2\n8\n9\nso. category,\nROUND (1 - VECTOR_DISTANCE(\nso. offer_embedding,\nVECTOR_EMBEDDING (ADMIN. ALL_MINILM_12_V2 USING accessible ro\nCOSINE), 4) AS similarity\nFROM stay_offers so\nORDER BY similarity DESC\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\n4\n* 1 2\nA\nDownload Execution time: 0.267 seconds\nOFFER_NAME\nCATEGORY\nEdison Accessible king - Flexible - step-fr...\nAccessible rooms\nEdison Accessible king - Advance stay - st... Accessible rooms\nMidtown Accessible king - Flexible - step-...\nAccessible rooms\nChicago Loop Accessible king - Flexible - ...\nAccessible rooms\nQueens Accessible king - Flexible - step-f... Accessible rooms\n6:30:10 PM - 5 rows total\nSIMILARITY\n0.6582\n0.6547\n0.6428\n0.6358\n0.6352\n& Powered by ORDS"
+    },
+    "guest-concern-vector-search/images/sql-vector-values.jpg": {
+      "sha256": "f60cd0f4da8e58a2cfbd95cba8b47a9bb3ac01788964917eac5149ad5e9c5849",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nData Load\nSELECT offer_id,\noffer_name,\noffer_embedding\nFROM stay_offers;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.024 seconds\nOFFER_ID\n4\nOFFER_NAME\nOFFER_EMBEDDIN\nEdison Family sui.. [0.048319407,0...\n21 Newark Family su... [0.07228312,0.0...\n34 Midtown Extende...\n[0.06326405,0.0.\n47 Brooklyn Extende...\n[0.054185037,0.0.\n51 Queens Accessib...\n[0.06890718,0.0..\n* 1\nA\n0 | 6:30:06 PM - 192 rows total\nLLUSER V\nLOW -\n60\n•••\nPowered by ORDS"
+    },
+    "guest-concern-vector-search/images/sql-vector-distance.jpg": {
+      "sha256": "275f7475af464158981a273061d3e4bc579401309552bd5a085fdcbc43aa49c7",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nAa -\nData Load\n2\n8\n9\nso. category,\nVECTOR_DISTANCE\nso. offer_embedding,\nVECTOR_EMBEDDING( ADMIN.ALL_MINILM_12_V2 USING accessible ro\nCOSINE) AS vector_distance\nFROM stay_offers so\nORDER BY vector_distance\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\n4\nx 1\nDownload - Execution time: 0.286 seconds\nOFFER_NAME\nCATEGORY\nEdison Accessibl...\nAccessible rooms\nEdison Accessibl...\nAccessible rooms\nMidtown Accessi...\nAccessible rooms\nChicago Loop Ac...\nAccessible rooms\nQueens Accessib... Accessible rooms\n6:30:08 PM - 5 rows total\nVECTOR_DISTANC\n0.341784768275...\n0.34530886225...\n0.357164559622...\n0.364160289740...\n0.364799461460...\n& Powered by ORDS"
+    },
+    "selectai-agent/images/sql-agent-tools.jpg": {
+      "sha256": "1f8c6ff3be1f9a1d941b74f53390df9584a49a38d4117833dedc89c9ddb52541",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nAa -\nConsumer group:\nData Load\nLOW -\n60\nagent_name,\ntask_name,\nstart_date,\nend date\nFROM user_at_agent_tool_history\nORDER BY start_date DESC\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nTOOL_NAME\nNINA_HOSPITALI...\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload Execution time: 0.01 seconds\nINVOCATION_ID\nAGENT_NAME\nTASK_NAME\nSTART-\n1 NINA_HOSPITALI... NINA_HOSPITALI... 09/21/20\n* 1 A 0 203 0 1 6:32:00 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai-agent/images/sql-agent-history.jpg": {
+      "sha256": "d6f782091b8c921cd0c8b7a1fcaa391877ed0405996edc445ac8799569b4912c",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\n* =\nAa -\nData Load\n60\nstate,\nstart_date,\nend_date\nFROM user\nai_agent_team_history\nORDER BY start_date DESC\nFETCH FIRST 5 ROWS ONLY;\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload Execution time: 0.008 seconds\nTEAM_NAME\nTEAM_EXEC_ID\nSTATE\nNINA_HOSPITALI...\n5C02BDB8-5380.. SUCCEEDED\nSTART_DATE\nEND_DA\n09/21/2026, 05:4... 09/21/20\n* 1 A 0 203 0 1 6:31:58 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai-agent/images/sql-agent-answer.jpg": {
+      "sha256": "6016ec528dc65b5db390b83d42169d6eb8de0b3730354cae6b56a8de4349cf31",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (H+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nEa\n* = Aa -\nData Load\n6id\nSELECT DBMS_CLOUD_A1_AGENT. RUN_TEAM(\nteam_name\n→ NINA_HOSPITALITY_TEAM\",\nuser_prompt => Which five stay offers have the highest booke\nddl dllls\n=> {\"conversation_id\": \" - || DBMS_CLOUD_AI. CREAT\n) AS agent_answer;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 13.859 seconds\n1\nColumn \"AGENT_ANSWER\" row 1\nThe top 5 stay offers with the highest booked room revenue are:\n1. Joliet Family suite - Advance stay, Category: Family suites, Total Revenue: $16620, Room\nNights Booked: 60\n2. Schaumburg Family suite - Advance stay, Category: Family suites, Total Revenue: $16040,\nClose\nx 5 A 0 203\n0 | 6:38:39 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai/images/sql-ai-refined-answer.jpg": {
+      "sha256": "f4e73248f66a408f89f18ee3161c6feb28e10034e987d253ac6cad86f4e5b7e1",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\n6id\n4 =\nAa -\nE\nData Load\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\nprofile_name\naction\n) AS answer;\nShow the five stay offers with the highest b\n'genai'\n→> runsql\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 5.889 seconds\nColumn \"ANSWER\" row 1\n1\n\"OFFER_NAME\" : \"Joliet Family suite - Advance stay\".\n\"CATEGORY\": \"Family suites\",\nClose\n* 3Д 0 203 0 1 6:35:35 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai/images/sql-ai-generated.jpg": {
+      "sha256": "24cced1f2632f26cda2ed4d4cff9c7bcc9054c0c3a118fb87633f94fb2a30b3d",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nAa -\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\n→ Which five stay offers have the highest book\nprofile_name = genai',\naction\n= 'showsql\n) AS generated_sqL;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 20.379 seconds\n1\nColumn \"GENERATED_SQL\" row 1\nSELECT\nso.\"OFFER_NAME\" AS offer_name,\nSUM(rn.\"LINE_TOTAL\") AS total_revenue\nFROM\nClose\n* 1 A 0 203 0 1 6:32:33 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai/images/sql-ai-object-list.jpg": {
+      "sha256": "a4aa1730465b0bd04b7a978fa02406588ad9df4bbc1b7f3e9ebc51fc00e7fc14",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\n* = Aa →\nData Load\n60\nSELECT profile_name,\nattribute_name,\nattribute_value\nFROM user_cloud_ai_profile_attributes\nWHERE profile_name \"GENAI'\nAND attribute_name = 'object_list';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nPROFILE_NAME\nGENAI\nDownload Execution time: 0.011 seconds\nATTRIBUTE_NAME ATTRIBUTE_VALU\nobject_list\nK\"owner\": \"LLUS...\n* 14 0\n203\n0 | 6:32:11 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai/images/sql-ai-narration.jpg": {
+      "sha256": "b777e6468d7bc22827631ff841086924219ec4d5e404a485eab3fa38e8a08954",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nAa -\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\nprofile_name = genai',\naction\n→> 'narrate'\n) AS explanation;\n\"Show the five stay offers with the highest b\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload Execution time: 9.678 seconds\n1\nColumn \"EXPLANATION\" row 1\nThe top stay offers are ranked by their total booked room revenue, excluding service fees. This (\nrevenue is calculated from confirmed, checked-in, or checked-out reservations. The key details\nfor each offer include its name, category, total revenue, and total number of room nights\nbooked.\nClose\n0 | 6:37:50 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai/images/sql-ai-refined-generated.jpg": {
+      "sha256": "09e638248617e60943c93b21f8320964cb6bdf473bebe98dfd46ae6ebbd687bb",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nAa -\nData Load\n6id\nSELECT DBMS_CLOUD_AT. GENERATE\nprompt\nprofile_name\n= 'genai'\naction\n→showsql\n) AS generated_sqL;\nShow the five stay offers with the highest b\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload - Execution time: 13.561 seconds\n1\nColumn \"GENERATED_SQL\" row 1\nSELECT\nso.\"OFFER_NAME\" AS offer_name,\nSO.\"CATEGORY\" AS category,\n| SUM(rn.\"LINE_TOTAL\") AS total_revenue,\nClose\n* 2 A 0 203 0 1 6:34:35 PM - 1 rows total\nPowered by ORDS"
+    },
+    "selectai/images/sql-ai-answer.jpg": {
+      "sha256": "a9c6e7eb554afbe1c66a0c19712fa2cc53781d1f778b1a7e535fb226cfaff45a",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\n4 =\nAa →\nData Load\n6id\nSELECT DBMS_CLOUD_AL. GENERATE\nprompt\nprofile_name\naction\n) AS answer;\nWhich five stay offers have the highest book\n→ 'genai',\n→> runsql\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nDownload Execution time: 25.52 seconds\nANS\nColumn \"ANSWER\" row 1\n1\n\"OFFER_NAME\": \"Joliet Family suite - Advance stay\",\n\"TATAL DEVENUE. 16090\n* 1 A 0 203 0 1 6:33:49 PM - 1 rows total\nPowered by ORDS"
+    },
+    "reservation-duality/images/sql-duality-confirmed.jpg": {
+      "sha256": "4fc24e5ba5462202a47809563768b0b75e20626420da06390305ae9035d6b670",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\n10\n* = Aa -\nData Load\nrn.night_line_id,\nso.offer_name,\nrn. room_nights,\nrn. line_total\nFROM\nreservations r\nJOIN reservation_nights rn ON rn. reservation_id = r. reservation_id\nJOIN stay_offers so ON so. offer_id = rn.offer_id\nWHERE r. reservation_id = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.008 seconds\nRESERVATION_ID RESERVATION_ST NIGHT_LINELID\n900001 confirmed\nOFFER_NAME\n990001 Edison Accessibl...\nROOM_\n* 1 A\n03 0 | 6:31:32 PM - 1 rows total\nPowered by ORDS"
+    },
+    "reservation-duality/images/sql-duality-relational.jpg": {
+      "sha256": "165ab3c69d165e24dd6468bc79fabcabfa23c35d561b63523708a52509989052",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• g\nConsumer group:\nLOW Y\nData Load\nSELECT r. reservation_id AS reservation_id,\nr. reservation_status AS reservation_status,\ng. email AS guest_email\nFROM reservations r\nJOIN guests g\nON\ng. guest_id = r.guest_id\nWHERE r. reservation_id = 900001;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.003 seconds\nRESERVATION_ID RESERVATION_ST GUEST_EMAIL\n900001\nconfirmed\nguest0001@exa...\n* 1 A 0 20 0 1 6:30:37 PM - 1 rows total\nPowered by ORDS"
+    },
+    "reservation-duality/images/sql-duality-projection.jpg": {
+      "sha256": "308b606deffe1713e92f263c7cf12664b25e76a110e83e4134da88a55dfaaee0",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]* -\nConsumer group:\nEa\nAa -\nData Load\nSELECT JSON_VALUE(rd.data, 's._id' RETURNING NUMBER) AS reservation_id,\nJSON_VALUE ( rd. data,\n'$.status') AS reservation_status,\ng. email AS guest_email\nFROM reservations_d rd\nJOIN guests g\nON\ng. guest_id = JSON_VALUE rd.data, '$.guestId' RETURNING NUMBER)\nWHERE JSON_VALUE(rd.data, $_id' RETURNING NUMBER) = 900001;\nLOW Y\n6id\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nDownload - Execution time: 0.008 seconds\nRESERVATION_ID RESERVATION_ST GUEST_EMAIL\n900001\nconfirmed\nguest0001@exa...\n* 1 A 0 20 0 1 6:30:39 PM - 1 rows total\nPowered by ORDS"
+    },
+    "reservation-duality/images/sql-duality-document.jpg": {
+      "sha256": "adf4cd938155f259fd342fb7219a7174d743e8cc5a0763b3021a85e23fedd4a5",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\n* = Aa -\nSELECT data AS reservation_document\nFROM reservations_dv\nFETCH FIRST 1 ROW ONLY;\nData Load\nQuery Result\n• ®\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.009 seconds\nColumn \"RESERVATION_DOCUMENT\" row 1\n\"demandScore\": 23,\n\"propertyId\": 1,\n\"checkIn\":\n2026-09-14T00:00:00\",\n\"serviceFee\": 10,\n\"createdAt\": \"2026-08-26T10:00:00\",\n\"items\": [\n6:30:54 PM - 1 rows total\nLLUSER V\nLOW -\n60\n••.\nPowered by ORDS"
+    },
+    "reservation-duality/images/sql-duality-contract.jpg": {
+      "sha256": "34cee6892ad42e4b77b62d75885245aeac581a920cfea0a26089e14fa05a8b07",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nEa\nAa →\nSELECT view_name,\nallow_insert,\nallow_update,\nallow_delete\nFROM user_json_duality_views\nWHERE view_name = 'RESERVATIONS_DV';\nData Load\n60\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n•••\nVIEW_NAME\nRESERVATIONS_...\nDownload Execution time: 0.016 seconds\nALLOW_INSERT\nALLOW_UPDATE\ntrue\ntrue\nALLOW_DELETE\nfalse\n* 1 A 0 203 0 1 6:30:35 PM - 1 rows total\nPowered by ORDS"
+    },
+    "getting-started/images/sql-connection.jpg": {
+      "sha256": "ca924d773ec01fe1695c61ab50c5796c9a10c78db0dd1cf67645c52b65141294",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nE\nData Load\nSELECT USER AS\n• \"User\",\nSYS_CONTEXT 'USEREN', 'CURRENT_SCHEMA') AS\n\"Schema\",\nSYSTIMESTAMP AS \"Checked At\";\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nUSER\nLLUSER\nDownload - Execution time: 0.003 seconds\nSCHEMA\nLLUSER\nCHECKED AT\n09/21/2026, 06:2...\n* 1 A 0 203 0 1 6:29:34 PM - 1 rows total\nLLUSER V\nLOW Y\n60\n•••\nPowered by ORDS"
+    },
+    "booking-abuse-network/images/sql-graph-direct.jpg": {
+      "sha256": "7c7cd7c88f3258f601f18b5abafce796ac695aeae56503d8127e442ae4caa5d2",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\n• g\n* = Aa →\nconnected.entity_type AS connected_type,\nedge. relationship_type AS relationship_type,\nconnected. risk_score AS connected_risk\nConsumer group:\nData Load\nLOW\n60\n12\n13\n14\n15\n16\n17\nORDER BY connected_risk DESC;\n-\nQuery Result\n1\n2\n4\nScript Output\nDBMS Output\nExplain Plan\na Download - Execution time: 0.002 seconds\nRESERVATION_KE CONNECTED_KEY CONNECTED_TYP\nRSV-8841\nDEV-fp-91a7\ndevice\nRSV-8841\nIP-198.51.100.44\nip_address\nRSV-8841\nPHONE-212-0199\nphone\nRSV-8841\nPROPERTY-001\nproperty\nAutotrace\n••.\nRELATIONSHIP_T) CONNE\nUSES_DEVICE\nUSES_IP\nUSES_PHONE\nAT_PROPERTY\n* 1 A 0 203 0 1 6:31:51 PM - 4 rows total\n& Powered by ORDS"
+    },
+    "booking-abuse-network/images/sql-graph-shared.jpg": {
+      "sha256": "7e8d9099fcad314f4bc4b6e287fe2855c3f3638237307a83e85b64d22abe1aff",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nData Load\nLOW Y\n60\n19\n20\n21\n22\n23\n24\n25\n26\n* = A -\na. risk_score AS arisk,\nb. risk_score AS brisk,\ne1. relationship_type AS e1_type,\ne2. relationship_type AS e2_type\nORDER BY combined_risk DESC, sharedentity\nFETCH FIRST 25 ROWS ONLY;\n-\nQuery Result\n1\n2\n4\n* 1\nA\n0\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload Execution time: 0.026 seconds\nRESERVATION_A\nRSV-8841\nRSV-8841\nRSV-8841\nSHARED_ENTITY SHARED_TYPE\nDEV-fp-91a7\ndevice\nIP-198.51.100.44\nip_address\nDEV-fp-91a7\ndevice\nRSV-8841\nPHONE-212-0199\nRSV-5077\nDEV-fp-91a7\nphone\ndevice\n0 | 6:31:55 PM - 6 rows total\n•••\nRESERVATION_B\nRSV-5077\nRSV-5077\nRSV-1190\nRSV-1190\nRSV-1190\nA_RISK\n& Powered by ORDS"
+    },
+    "booking-abuse-network/images/sql-graph-four-hop.jpg": {
+      "sha256": "739acdab48719ca1721c9f0ced3b367c30e0261edf34ff428430b2c6b4f617b6",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW -\n12\n13\n14\n15\n16\n17\n18\n19\n* = Aa -\nreached. risk_score AS risk_score,\nreached. risk_level AS\nrisk_level,\nreached. total_amount AS total_amount,\nreached. channel AS channel\nData Load\n60\nORDER BY risk_score DESC\nFETCH FIRST 25 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\n1\n2\n4\nDownload - Execution time: 0.026 seconds\nENTITY_KEY\nRSV-8841\nRSV-8841\nRSV-5077\nRSV-5077\nDEV-fp-91a7\n* 1\nDISPLAY_NAME\nENTITY_TYPE\nReservation 8841\nreservation\nReservation 8841\nreservation\nReservation 5077\nreservation\nReservation 5077\nreservation\nShared booking d... device\n0 | 6:31:53 PM - 24 rows total\nAutotrace\n••.\nRELATIONSHIP_HI RISK_SI\n2\n4\n2\n4\n1\n& Powered by ORDS"
+    },
+    "guest-operations-dashboard/images/sql-dashboard-followup.jpg": {
+      "sha256": "f4147d0489ccbc276c1041d461cd88f7e4bfd1e54e3da122c1ec149cbee15ef1",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nC\nData Load\n114\n115\n116\n117\n118\n119\n120\n121\nLEFT JOIN reservation_activity activity\nON activity.offer_id = impact.offer_id\nCROSS JOIN nearest_property nearest_hotel\n-- Put stay offers closest to the investigation question first.\n-- Service impact breaks ties so the result still favors larger busine\nORDER BY sm. semantic_similarity DESC NULLS LAST,\nimpact. affected reservations DESC\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n...\n4\nDownload - Execution time: 0.38 seconds\nOFFER_NAME\nPROPERTY_NAME OFFER_CATEGOR) URGENT_SERVICE AVG_SE\nNewark Standard... Seer Newark Hotel Standard rooms\nNewark Extended... Seer Newark Hotel Extended stays\nNaperville Extend... Seer Naperville H.. Extended stays\nNaperville Standa... Seer Naperville H... Standard rooms\nMidtown Standar...\nSeer Midtown Ho... Standard rooms\n6:39:32 PM - 10 rows total\n1\n1\n4\n& Powered by ORDS"
+    },
+    "guest-operations-dashboard/images/sql-dashboard.jpg": {
+      "sha256": "e59ed08038ffd4a78a2dcd9a1d90346a3730ae858461b2add8e1a4c0142c4184",
+      "status": "reviewed",
+      "finding": "Authentic hospitality database or OML capture, visually reviewed and OCR checked. Visible viewport only.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW Y\nC\nData Load\n6id\n114\n115\n116\n117\n118\n119\n120\n121\nLEFT JOIN reservation_activity activity\nON activity.offer_id = impact.offer_id\nCROSS JOIN nearest_property nearest_hotel\n-- Put stay offers closest to the investigation question first.\n-- Service impact breaks ties so the result still favors larger busine\nORDER BY sm. semantic_similarity DESC NULLS LAST,\nimpact. affected reservations DESC\nFETCH FIRST 10 ROWS ONLY;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n...\n4\n* 6 Д 0\nDownload - Execution time: 0.358 seconds\nOFFER_NAME\nPROPERTY_NAME OFFER_CATEGORY\nURGENT_SERVICE AVG_SE\nNewark Accessib...\nSeer Newark Hotel\nAccessible rooms\nAurora Accessibl...\nSeer Aurora Hotel\nAccessible rooms\nEdison Accessibl...\nSeer Edison Hotel\nAccessible rooms\nEdison Accessibl... Seer Edison Hotel\nAccessible rooms\nNewark Accessib... Seer Newark Hotel Accessible rooms\n6:39:28 PM - 10 rows total\n3\n1\n1\n& Powered by ORDS"
+    },
+    "stay-demand-oml/images/oml-leaderboard.jpg": {
+      "sha256": "aac5b162075d6f6545a46e82025e841125030f967103c89aaeb088dc3d9261f6",
+      "status": "reviewed",
+      "finding": "Authentic LLUSER screenshot; visually inspected and OCR checked.",
+      "ocr_text": "= ORACLE Marhing\n<- Experiments\n- LUSER Project\nLLUSER Workspace\nLLUSER V ®\nStay Offer Demand Surge\n› Settings\n• Completed\nEdit\n• Start v\nBalanced Accuracy\n1.0\n0.8\n0.6\n0.4\n0.2\n0.0\nLeader Board\nDeploy\nAlgorithm :\nDecision Tree\nRename\nGeneralized ...\nGeneralized ...\nCreate Notebook\nModel\nName\nDT_48A3312EC4\n1.0000\nGLM_024BA54E\n1.0000\nGLMR_FF692167 1.0000\nMetrics\nBalanced Accuracy v"
+    },
+    "stay-demand-oml/images/oml-prediction-impact.jpg": {
+      "sha256": "9e80d1e1ec88bd4c579ec1b7e18e2f836a00e05ae6eda8524b2d751bb87c6bc8",
+      "status": "reviewed",
+      "finding": "Authentic LLUSER screenshot; visually inspected and OCR checked.",
+      "ocr_text": "= ORACLE Maching\nE LUSER Project\nLLUSER Workspace\nLLUSER VO\n0.4\n0.2\n0.0\nLear\nDel\nAlg\nDer\nGel\nGel\nNei\nRar\nModel Detail - GLM_024BA54E53\nPrediction Impacts\nName -\nPrediction Impact v\nROOM_NIGHTS_BO...\nConfusion Matrix\nV F\nName\nImportance\nType ="
+    },
+    "stay-demand-oml/images/oml-confusion-matrix.jpg": {
+      "sha256": "ee4a5d5a1c9e470d790bec6a77a419e1e94977353d14f0203c6d88888420d624",
+      "status": "reviewed",
+      "finding": "Authentic LLUSER screenshot; visually inspected and OCR checked.",
+      "ocr_text": "= ORACLE Marhing\nLLUSER Project\nLLUSER Workspace\n› Settings\nBalanced Accuracy\n1.0\n0.8\n0.6\n0.4\n0.2\n0.0\nLeac\nDer\nAlg\nDer\nGel\nGel\nNeI\nRar\nModel Detail - GLM_024BA54E53\nPrediction Impacts\nPredicted\nSTABLE\nActual\nSTABLE\nSURGE\n65.91%\n0.00%\nConfusion Matrix\nSURGE\n0.00%\n34.09 %"
+    },
+    "stay-demand-oml/images/oml-home.jpg": {
+      "sha256": "9c596f44c3815c34f1fd6c769488d53376f89feb9e76b478e41b205296d7ff6b",
+      "status": "reviewed",
+      "finding": "Authentic LLUSER screenshot; visually inspected and OCR checked.",
+      "ocr_text": "= ORACLE Marhing\n› What's New\nLLUSER Project\nLLUSER Workspace\nLLUSER V |\nv Recent Notebooks\nNothing to Display\nv Quick Actions\nv Recent Experiments\nNothing to Display\nAutoML\nCreate and run\nAutoML\nExperiments\nWorkflows\nCreate and run OML\nWorkflows\nv Recent Workflows\nNothing to Display\nData Science\nAgent\nChat with Data\nScience Agent\nModels\nManage and Deploy\nMachine Learning\nModels\nNotebooks\nThe place for data\ndiscovery and\nanalytics\nData Monitors\nMonitor Data Drift\nModel Monitors\nMonitor Model Drift\nScratchpad\nRun Scratchpad"
+    },
+    "guest-concern-vector-search/images/sql-embedding-model.jpg": {
+      "sha256": "fd7885c20592dc86b2d8f5f453c4a46b6f1fd17d82a4fe37dcdcb9697dba9ca9",
+      "status": "reviewed",
+      "finding": "Authentic LLUSER screenshot; visually inspected and OCR checked.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\nLLUSER V\n[Worksheet ]*\nConsumer group:\nLOW\nAa -\nData Load\n60\nmodel_name,\nalgorithm,\nmining_function\nFROM all\nmining_models\nWHERE mining function = EMBEDDING\"\nORDER BY owner, model_name;\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\n••.\nOWNER\nADMIN\nDownload - Execution time: 0.025 seconds\nMODEL_NAME\nALGORITHM\nALL_MINILM_L12... ONNX\nMINING_FUNCTIO\nEMBEDDING\n* 6 A 0 203 0 1 6:44:04 PM - 1 rows total\nPowered by ORDS"
+    },
+    "booking-abuse-network/images/graph-launch.jpg": {
+      "sha256": "a2d15ef15d98cbd30ad8edb3d540de36ffb697f23b8fd694586f0e5349a492a4",
+      "status": "reviewed",
+      "finding": "Authentic LLUSER screenshot; visually inspected and OCR checked.",
+      "ocr_text": "ORACLE' | Launchpad\nSearch Database (*+K)\n& LLUSER V\nPinned & Recently Visited\nDevelopment\nData Studio\nDownloads\nBaL SQL\nI Data Modeler\n* REST\nEo Liquibase\nC) JSON\nGraph Studio\nGraph Studio automates the creation of property and\nRDF graphs for knowledge graphs and other graph\napplications, and includes interactive tools to query,\nanalyze, and visualize them in Autonomous Al\nDatabase.\n4 0 2 40\nREXx\nIla Charts\nCo Scheduling\nDocumentation\nUsing Graph Studio\nEs JavaScript\n* Machine Learning\nDo APEX\n• Graph Studio\nOpen\n• Spatial Studio\n6:32:36 PM - REST call resolved successfully.\nPowered by ORDS"
+    },
+    "guest-routing-spatial/images/demo-spatial-map.jpg": {
+      "sha256": "2fc0883007a336130ec70506fc2beed00ae3f65a95cf3138d4b117d2083faa73",
+      "status": "reviewed",
+      "finding": "Authentic local-demo screenshot, visually inspected and OCR checked. Separate application story and graph naming accepted by the user.",
+      "ocr_text": "ORACLE\nHospitality LiveStack\nintengence\nVECTOR SEARCH\nVPD\nGuest Experience Network\nGraph\nPROPERTY GRAPH\nSQL/PGQ\nHousekeeping &\nMaintenance Coverage Map\nORACLE SPATIAL VPD\nReservation & Folio\nOperations\nISON DUALITY\nVPD\nOML Occupancy, Revenue &\nLabor Analytics\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data • 9/18/2026, 11:24:45\nAM\nAC\nAva Chen\nAdmin\n→\n30\nActive Property Hotels\nAva Chen\nAdmin\n4.3K\nRoom & Service\nCapacity\n750\nOccupied Rooms\n30 hotels visible\nNearest Property Hotel\nfind_nearest_centers\nestimated hours\nRANK 1\nAirport Hotel\nConcord Mills\nConcord, North Carolina\nDISTANCE\n32.12 km\nSLA\n0.4 hrs\nGUEST\ndistance_km\nSelect-Service\nHotel\nCAPACITY\n235\nGuest 9059 - Charlotte, North (\nRANK 2\nAirport Hotel Union City\nAtlanta Airport\nUnion City, Georgia\nSelect-\nService\nHotel\nDISTANCE\n386.31 km\nSLA\n4.8 hrs\nCAPACITY\n397\n= MAP LAYERS\n• Guest Segments\n• Property Hotels\n• Case Routes\n50\nSLA Capacity Alerts\n• VPD full access\nROOM TYPE\nRelationship Pricing Bundle - H\nRANK 3\nExtended Stay\nLebanon Nashville\nLebanon, Tennessee\nDISTANCE\n508.34 km\nSLA\n6.4 hrs\nExtended-\nStay Hotel\nCAPACITY\n383\nSDO_GEOMETRY spatial routing"
+    },
+    "booking-abuse-network/images/demo-network-overview.jpg": {
+      "sha256": "660db8e902e76c5acf42371b5c2e1709da533bab36c8dbd84dc1fa631d2589e8",
+      "status": "reviewed",
+      "finding": "Authentic local-demo screenshot, visually inspected and OCR checked. Separate application story and graph naming accepted by the user.",
+      "ocr_text": "ORACLE\nHospitality LiveStack\ncommana Center\nIN-MEMORY\nNATIVE JSON\nIF Guest & Demand Signal\nIntelligence\nVECTOR SEARCH\nVPD\nGuest Experience Network\nGraph\nPROPERTY GRAPH\nSQL/PGQ\nHousekeeping &\nMaintenance Coverage Map\nORACLE SPATIAL VPD\nReservation & Folio\nOperations\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data • 9/18/2026, 11:24:45\nAM\nAC\nAva Chen\nAdmin\n→\nINVESTIGATION DEPTH\n2\n4\n•I GUEST PROFILES (10)\nGUEST-8841\n$18,540.25\nrevenue\nimpact\nmobile\nIF 96.5 evidence\nlinks\nGUEST-9204\n$15,120.00\nrevenue\nimpact\nweb\nIF 24 evidence\nlinks\nGUEST-1190\n$12,420.00\nrevenue\nimpact\nweb\nIF 91\nevidence\nlinks\nGUEST-5077\n$9,450.80\nmobile\nimpact\nIF 38\nevidence\nlinks\nGUEST-2188\n$7,190.00\ncontact center\nimpact\nIF 36\nevidence\nlinks\n$18,540.25\nRevenue Impact\n96.5\nOperational Risk\n96.5%\nEvidence\nstrength\nConnections\n13\nNodes\n20\nEdges\n5 hops\nDepth\nVENUE-gift-card-hub\nGUEST-6642\nGUEST-7712\nwallet-GIFTCARD-3\nCHANNEL-OTA-017\nGUEST-1190\nGUEST 5077\nGUEST-884GUEST-3320\nVENUE-payment-ramp\nCHANNEL-OTA-CGUEST-9204\nGUEST-2188\nEDGE TYPES\n• Shared Stay Context\n• Shared Guest Contact • Shared Guest Context\n• Folio Settlement At • Payment Issue At\n• Venue Activity Spike\n• Uses Booking Channel\n• Linked Reservation"
+    },
+    "booking-abuse-network/images/demo-network-query.jpg": {
+      "sha256": "f518ddce2e8d68748440f2aedd5c5f76e76137aa64a91e014c6c47bd126a0a77",
+      "status": "reviewed",
+      "finding": "Authentic local-demo screenshot, visually inspected and OCR checked. Separate application story and graph naming accepted by the user.",
+      "ocr_text": "ORACLE\nHospitality LiveStack\ncommana center\nIN-MEMORY\nNATIVE JSON\nIF Guest & Demand Signal\nIntelligence\nVECTOR SEARCH\nVPD\nGuest Experience Network\nGraph\nPROPERTY GRAPH\nSQL/PGQ\nHousekeeping &\nMaintenance Coverage Map\nORACLE SPATIAL VPD\nReservation & Folio\nOperations\nScenario lens\nACTIVE HOSPITALITY DATASET\nDemo Data • 9/18/2026, 11:24:45\nAM\nAva Chen\nAC\n2500\nHI! 7 rows returned\n• 23 ms\nEXECUTED SQL/PGQ\n-- SQL/PGQ: Guest profiles converging on shared booking channels\nSELECT source_guest_profile, shared_channel, related_guest_profile,\nsource_amount, related_amount,\nsource_risk, related_risk\nFROM GRAPH_TABLE ( fraud_network\nMATCH (src IS entity)\n-(el IS related_to→> (channel IS entity)\n<-[e2 IS related_to]- (other IS entity)\nWHERE src.entity_type = 'guest_profile'\nAND\nother.entity_type = guest_profile'\nAND src.entity_id < other-entity_id\nAND channel.entity_type = 'booking_channel'\nAND el. total_amount >= 2500\nCOLUMNS (\nsrc.entity_key AS source_guest_profile,\nchannel.entity_key AS shared_channel,\nother.entity_key AS related_guest_profile,\nel.total_amount AS source_amount,\ne2. total_amount AS related_amount,\nsrc. risk_score AS source_risk,\nother. risk_score AS related_risk\n→ Run Query\nHide SQL\nORDER BY source_amount DESC, source_risk DESC\nFETCH FIRST 25 ROWS ONLY;\nSOURCE_GUEST_PROFILE\nSHARED_CHANNEL\nGUEST-8841\nCHANNEL-0TA-017\nGUEST-8841\nCHANNEL-OTA-017\nRELATED_GUEST_PROFILE\nGUEST-1190\nGUEST-3320\nSOURCE_AMOUNT\n14,120\n14,120\n1 ^ 192\nRELATED_AMOUNT\n11130.750\n4,040\nSOURCE_RISK\n96.500\n96.500\nRELATED.\n91\n81.500"
+    },
+    "stay-demand-oml/images/sql-oml-model.jpg": {
+      "sha256": "0a2c83c19605d533f39c7ff5a2a60ab3765cbafe102b7132453d6a11853bcdfe",
+      "status": "reviewed",
+      "finding": "Authentic screenshot reviewed visually and checked with OCR.",
+      "ocr_text": "ORACLE | SQL\nSearch Database (*+K)\n[Worksheet ]*\nConsumer group:\nAa -\nData Load\nSELECT model_name,\nmining_function,\nalgorithm\nFROM user_mining_models\nWHERE model_name =- 'OTTO_STAY_DEMAND_SURGE_MODEL';\nQuery Result\nScript Output\nDBMS Output\nExplain Plan\nAutotrace\nDownload - Execution time: 0.008 seconds\nMODEL_NAME\nMININGFUNCTIO ALGORITHM\nOTTO_STAY_DE...\nCLASSIFICATION GENERALIZED_LI.\n* 1 A 0 503 1 1 6:31:36 PM - 1 rows total\nLLUSER V\nLOW\n60\n••.\nPowered by ORDS"
+    },
+    "stay-demand-oml/images/oml-model-comparison.jpg": {
+      "sha256": "fa51ff65f0e81888a6625d748534b6e85ff9687c392c6e46ee2475e7234adf4b",
+      "status": "reviewed",
+      "finding": "Authentic screenshot reviewed visually and checked with OCR.",
+      "ocr_text": "= ORACLE Marhing\nDeploy\nRename\nCreate Notebook\nAlgorithm -\nModel\nName\nDecision Tree\nDT_48A3312EC4 1.0000\nGeneralized ... GLM_024BA54E53 1.0000\nGeneralized...\nGLMR_FF6921671.0000\nNeural Netw...\nNN_B51F3CC76* 1.0000\nRandom For...\nRF_042D035367 1.0000\nLLUSER Project\nLLUSER Workspace\nMetrics\nLLUSER V ?\nBalanced Accuracy\n• Features\nO Refresh\nFilter\nName\nImportance =\nType -\nAVG_SENTIMENT\nROOM_NIGHTS_BOOKED\nAVG_VIRALITY\nU\nNUMBER\nNUMBER\nNUMBER"
+    },
+    "guest-concern-vector-search/images/gilly.png": {
+      "sha256": "2939aa42885b9da4044287816a0ce8b6906ebeea9087ac89ce5294ee2c2d6cb7",
+      "status": "reviewed 2026-09-23",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 3: Search Stay Offers by Meaning\nFind guests affected by\nan accessible-room concern.\nGilly\nAl Engineer"
+    },
+    "booking-abuse-network/images/bob.png": {
+      "sha256": "76bbc2d632a5dc674c9f6a4b8cce23fc0e0ad85ce5daa3afc40148db62d9c2f0",
+      "status": "reviewed 2026-09-23",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 4: Investigate a Booking Abuse Network\nFollow connections between\nsuspicious reservations.\nBob\nGraph Specialist"
+    },
+    "guest-routing-spatial/images/moon.png": {
+      "sha256": "62a797b5348b4f96d98829b587a7f9f8b5cfab7aa44a549dbfc56740f90ed5ab",
+      "status": "reviewed 2026-09-23",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 5: Route Guests to the Closest Hotel\nHelp guests find the closest\nsuitable hotel.\nMoon\nSpatial & Geo\nSpecialist"
+    },
+    "stay-demand-oml/images/otto.png": {
+      "sha256": "001615c4af76825d9405c47aab3442a66733bde3271a6fecd1e166bcb3f03067",
+      "status": "reviewed 2026-09-23",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Lab 6: Build a Stay Offer Demand Watchlist\nUse booking activity to flag\nstay offers for review.\nOtto\nData Scientist"
+    },
+    "selectai/images/nina.png": {
+      "sha256": "67e2639455007d1c6fd2616842e9386697a7d8c03b8709513f0b3058044ecd7b",
+      "status": "reviewed 2026-09-23",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Labs 7 & 8: Ask Hospitality Questions and Build an Al Agent\nAsk questions about\nhotel data and review\nthe answers.\nJessica\nDBA\nNina\nGuest Experience Analyst"
+    },
+    "selectai-agent/images/nina.png": {
+      "sha256": "67e2639455007d1c6fd2616842e9386697a7d8c03b8709513f0b3058044ecd7b",
+      "status": "reviewed 2026-09-23",
+      "finding": "Hospitality character banner, generated from the original artwork as a text-localization edit; visually reviewed.",
+      "ocr_text": "Labs 7 & 8: Ask Hospitality Questions and Build an Al Agent\nAsk questions about\nhotel data and review\nthe answers.\nJessica\nDBA\nNina\nGuest Experience Analyst"
+    },
+    "introduction/images/seer-hotels-introduction.png": {
+      "sha256": "96400c889bb6b206129e6081957e4a2e2af3c01b3d7ab45f06f7d67ea54efa44",
+      "status": "reviewed 2026-09-23",
+      "finding": "Visually inspected: Seer Hotels lobby, Jessica and Thomas, room concern, affected reservations, guest assistance. All visible wording is hospitality-specific.",
+      "visible_text": "SEER HOTELS. Help guests affected by a room concern. Review the room concern. Find affected reservations. Plan guest assistance. HOTEL."
+    }
+  }
+}

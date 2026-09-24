@@ -149,7 +149,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-        PK FACTS
+    PK     FACTS
     ______ __________________________________________________________________
          1 Atlanta is located in Georgia.
          2 Boston is located in Massachusetts.

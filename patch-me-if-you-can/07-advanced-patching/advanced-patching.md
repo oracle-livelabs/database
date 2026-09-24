@@ -248,7 +248,7 @@ In Task 1, you left AutoUpgrade while it performed the rollback of *UPGR*.
     <summary>*click to see the output*</summary>
 
     ``` text
-       VERSION_FULL
+    VERSION_FULL
     _______________
     19.31.0.0.0
     ```
@@ -605,18 +605,19 @@ In the Oracle home you find other software components, that is patched together 
     <summary>*click to see the output*</summary>
 
     ``` text
-    $ export OLD_ORACLE_HOME=/u01/app/oracle/product/19
-    $ export NEW_ORACLE_HOME=/u01/app/oracle/product/dbhome_19_32
-    $ $OLD_ORACLE_HOME/jdk/bin/java -version
-
-    java version "1.8.0_481"
-    Java(TM) SE Runtime Environment (build 1.8.0_481-b10)
-    Java HotSpot(TM) 64-Bit Server VM (build 25.481-b10, mixed mode)
-    $ $NEW_ORACLE_HOME/jdk/bin/java -version
+    $ export ORACLE_HOME_1=/u01/app/oracle/product/dbhome_19_32
+    $ export ORACLE_HOME_2=/u01/app/oracle/product/dbhome_19_32_au
+    $ $ORACLE_HOME_1/jdk/bin/java -version
 
     java version "1.8.0_491"
     Java(TM) SE Runtime Environment (build 1.8.0_491-b10)
     Java HotSpot(TM) 64-Bit Server VM (build 25.491-b10, mixed mode)
+
+    $ $ORACLE_HOME_2/jdk/bin/java -version
+
+    java version "1.8.0_503"
+    Java(TM) SE Runtime Environment (build 1.8.0_503-b01)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.503-b01, mixed mode)
     ```
 
     </details>

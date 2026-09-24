@@ -54,7 +54,7 @@ You need to prepare a few things before you can start FTEX.
 
 5. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary statistics before starting a Data Pump export job.
 
-    **(In the interest of time, you skip this step in this lab.)**
+    **(In the interest of time, you skip it in this lab.)**
 
     ``` sql
     exec dbms_stats.gather_schema_stats('SYS');

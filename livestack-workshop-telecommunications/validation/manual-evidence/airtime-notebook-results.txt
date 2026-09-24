@@ -1,0 +1,1134 @@
+- text:  
+- banner:
+  - generic "Navigation":
+    - button "Navigation":
+      - generic: 
+      - generic: Navigation
+  - link "Graph Studio":
+    - /url: .homepage
+    - img "Graph Studio"
+  - generic "Help":
+    - button "Help":
+      - generic: 
+      - generic: Help
+  - button "ATTACHED":
+    - generic: 
+    - generic: ATTACHED
+  - generic "Profile":
+    - button "LLUSER":
+      - generic: 
+      - generic: LLUSER
+      - generic: 
+      - text:        
+- button "Navigation"
+- navigation "Application navigation":
+  - heading "Graph Tools" [level=2]
+  - list:
+    - button " Overview":
+      - generic: 
+      - generic: Overview
+    - button "Graph Explorer":
+      - generic: Graph Explorer
+    - button "Modeler":
+      - generic: Modeler
+    - button " Graphs":
+      - generic: 
+      - generic: Graphs
+    - button " Notebooks":
+      - generic: 
+      - generic: Notebooks
+    - button " Templates":
+      - generic: 
+      - generic: Templates
+  - heading "Administrator Dashboard" [level=2]
+  - list:
+    - button " Jobs":
+      - generic: 
+      - generic: Jobs
+- main "notebook":
+  - main:
+    - generic "Modify Notebook":
+      - button "Modify Notebook":
+        - generic: Modify Notebook
+        - generic: 
+    - generic "Run Paragraphs":
+      - button "Run Paragraphs":
+        - generic: Run Paragraphs
+        - generic: 
+    - generic "Restart Session":
+      - button "Restart Session":
+        - generic: Restart Session
+        - generic: 
+    - generic "Delete Notebook":
+      - button "Delete Notebook":
+        - generic: Delete Notebook
+        - generic: 
+    - text:  
+    - generic "Update Notebook State":
+      - button "Update Notebook State":
+        - generic: Update Notebook State
+        - generic: 
+    - generic "Actions":
+      - generic "Actions":
+        - button "Actions":
+          - generic: 
+          - generic: Actions
+          - generic: 
+          - text:   
+    - toolbar "Notebook Toolbar":
+      - generic "Additional Actions":
+        - generic "Additional Actions":
+          - button "Additional Actions":
+            - generic: 
+            - generic: Additional Actions
+            - generic: 
+            - text:      
+      - generic "Clear Result":
+        - button "Clear Result":
+          - generic: Clear Result
+          - generic: 
+      - generic "Clear Paragraph Dependencies":
+        - button "Clear Paragraph Dependencies":
+          - generic: Clear Paragraph Dependencies
+          - generic: 
+      - generic "Copy embedded notebook path to clipboard":
+        - button "Copy embedded notebook path to clipboard":
+          - generic: Copy embedded notebook path to clipboard
+          - generic: 
+      - generic "Share Notebook":
+        - button "Share Notebook":
+          - generic: Share Notebook
+          - generic: 
+      - generic "Clone Notebook":
+        - button "Clone Notebook":
+          - generic: Clone Notebook
+          - generic: 
+      - generic "Export Notebook":
+        - button "Export Notebook":
+          - generic: Export Notebook
+          - generic:  
+      - generic "Print Notebook":
+        - button "Print Notebook":
+          - generic: Print Notebook
+          - generic: 
+      - generic "Actions":
+        - generic "Actions":
+          - button "Actions":
+            - generic: 
+            - generic: Actions
+            - generic: 
+            - text:       
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML" [selected]:
+          - img "HTML": 
+        - tab "Text":
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - heading "Prepaid Airtime Investigation" [level=1]
+      - paragraph: "This optional notebook accompanies the telecommunications workshop's activation-fraud graph lab. It preserves the PGX algorithm exercises using transferable prepaid voice minutes. It is not the SQL/PGQ activation-fraud graph. Prerequisites: a PGQL property graph named AIRTIME_GRAPH over PREPAID_ACCOUNTS and AIRTIME_TRANSFERS, the TRANSFERS edge label, the ACCOUNT_ID vertex property, and access to the in-memory PGX server. The SQL loader supplies the tables; the optional PGQL setup block in the stack runbook creates the graph before this notebook can run. Accounts 534, 597, 934, 387, and 406 are sample dataset IDs. Outputs have been cleared. Run every paragraph in sequence to produce results; rankings, paths, and counts depend on the loaded graph."
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML" [selected]:
+          - img "HTML": 
+        - tab "Text":
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - paragraph: First, load the graph into the in-memory graph server so you can run the graph algorithms.
+      - paragraph: Run the first %python-pgx paragraph, which uses the built-in session object to read the graph into memory from the database and creates a PgXGraph object that handles the loaded graph.
+    - generic "Paragraph container":
+      - generic:                         
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: GRAPH_NAME="AIRTIME_GRAPH"
+        - generic: "# try getting the graph from the in-memory graph server"
+        - generic: graph = session.get_graph(GRAPH_NAME)
+        - generic: "# if it does not exist read it into memory"
+        - generic: "if (graph == None) :"
+        - generic: session.read_graph_by_name(GRAPH_NAME, "pg_pgql")
+        - generic: print("Graph "+ GRAPH_NAME + " successfully loaded")
+        - generic: graph = session.get_graph(GRAPH_NAME)
+        - generic: "else :"
+        - generic: print("Graph '"+ GRAPH_NAME + "' already loaded")
+        - generic: "%python-pgx"
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: "PgxGraph(name: AIRTIME_GRAPH, v: 105, e: 114, directed: True, memory(Mb): 0) Graph AIRTIME_GRAPH successfully loaded"
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Next, execute the paragraph that queries and displays 100 graph elements.</p> <p>This PGQL query fetches the first 100 elements of the graph and displays them. The <strong>MATCH</strong> clause specifies a graph pattern.</p> <ul> <li> <p>(s) is the source node</p> </li> <li> <p>[t] is an edge</p> </li> <li> <p>-&gt; indicates the edge direction, that is, from the source s to a destination d</p> </li> <li> <p>(d) is the destination node</p> </li> </ul> <p>The <strong>LIMIT</strong> clause specifies the maximum of elements that the query should return.</p> <p>See the <a href="https://pgql-lang.org/">PGQL site</a> and specification for more details on the syntax and features of the language. The Getting Started notebook folder also has a tutorial on PGQL.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Query and visualize 100 elements (nodes and edges) of AIRTIME_GRAPH */
+        - generic: SELECT *
+        - generic: FROM MATCH (s)-[t]->(d) ON airtime_graph
+        - generic: LIMIT 100
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph" [selected]:
+          - img "Graph": 
+        - tab "Table":
+          - img "Table": 
+        - tab "Text":
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text:   
+      - button "Move / Zoom":
+        - generic: 
+      - button "Fit to Screen" [pressed]:
+        - generic: 
+      - button "Toggle Sticky Mode":
+        - generic: 
+      - button "Activate Network Evolution":
+        - generic: 
+      - button "Expand - Fetch neighbors based on configurable hop count" [disabled]:
+        - generic: 
+      - button "Select Expand Option" [disabled]:
+        - generic: 
+      - button "Drop - Delete selected vertices and edges" [disabled]:
+        - generic: 
+      - button "Focus - Drops everything and fetches n-hop neighbors of selected vertices" [disabled]:
+        - generic: 
+      - button "Group - Group selected vertices":
+        - generic: 
+      - button "Select Group Option":
+        - generic: 
+      - button "Ungroup - Ungroup selected vertices" [disabled]:
+        - generic: 
+      - button "Undo - Undo last action":
+        - generic: 
+      - button "Redo - Redo last action" [disabled]:
+        - generic: 
+      - button "Reset - Reset the visualization to its default state":
+        - generic: 
+      - search:
+        - generic: 
+        - textbox "Search graph"
+        - button "Conditional search":
+          - generic: 
+        - button "Clear search" [disabled]:
+          - generic: 
+      - iframe
+      - application "Graph Visualization":
+      - generic: 58 of 105 vertices
+      - generic: 42 of 100 edges
+      - slider: "100"
+      - spinbutton: "100"
+      - text: of 205 elements, 48.78%
+      - button "Hide Legend":
+        - generic: 
+      - application "Graph Legend":
+        - button "" [expanded]
+        - text: Vertices
+        - button ""
+        - button ""
+        - generic "ACCOUNT":
+          - checkbox "" [checked]
+          - img "Click to disable this style":
+            - img "Vertex legend with id -3340ba56"
+          - generic: ACCOUNT
+        - button "" [expanded]
+        - text: Edges
+        - button ""
+        - button ""
+        - button "If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.":
+          - generic: 句
+        - generic "Hidden Connection":
+          - checkbox "" [checked] [disabled]
+          - img "The conditions of this legend item do not match any elements of the currently displayed graph":
+            - generic "Edge legend":
+              - generic "Edge legend"
+              - img "Edge with id 1583324064459"
+          - generic "The conditions of this legend item do not match any elements of the currently displayed graph": Hidden Connection
+        - generic "TRANSFERS":
+          - checkbox "" [checked]
+          - img "Click to disable this style":
+            - generic "Edge legend":
+              - generic "Edge legend"
+              - img "Edge with id -a410cd8"
+          - generic: TRANSFERS
+      - iframe
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>This shows the use of bind parameters in a query. The account id value is entered at runtime.</p> <p>Enter <strong>534</strong> as the account id, and then execute the paragraph.</p>
+    - generic "Paragraph container":
+      - text: 
+      - text:    
+      - generic "Run Paragraph":
+        - button "Run Paragraph":
+          - generic: Run Paragraph
+          - generic: 
+      - generic "Enter Dependency Mode":
+        - button "Enter Dependency Mode":
+          - generic: Enter Dependency Mode
+          - generic: 
+      - generic "Comments (0)":
+        - button "Comments":
+          - generic: Comments
+          - generic: 
+      - generic "Expand":
+        - button "Expand":
+          - generic: Expand
+          - generic: 
+      - generic "Show/Hide Line Numbers":
+        - button "Show/Hide Line Numbers":
+          - generic: Show/Hide Line Numbers
+          - generic: 
+      - generic "Hide Code":
+        - button "Hide Code":
+          - generic: Hide Code
+          - generic: 
+      - generic "Visibility":
+        - button "Visibility":
+          - generic: Visibility
+          - generic: 
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+          - generic: 
+          - text:          
+      - text: 
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: "/* Check if there are any circular airtime-transfer chains of between 1 and 5 hops starting from the user-supplied account # */"
+        - generic: SELECT v,e,v2
+        - generic: "FROM MATCH ANY (a)-[:TRANSFERS]->{1,5}(b) ON airtime_graph ONE ROW PER STEP (v,e,v2)"
+        - generic: "WHERE a.account_id=${account_id} AND id(a) = id(b)"
+      - generic: account_id
+      - textbox "account_id":
+        - /placeholder: ""
+        - text: "534"
+      - generic "Clear is only available for Programmatic Forms":
+        - button "Clear forms" [disabled]:
+          - generic: Clear is only available for Programmatic Forms
+          - generic: 
+      - generic "Reset":
+        - button "Reset forms":
+          - generic: Reset
+          - generic: 
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph":
+          - img "Graph": 
+        - tab "Table" [active] [selected]:
+          - img "Table": 
+        - tab "Text":
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - textbox "Type to search"
+      - generic "Visualizer table":
+        - application "Visualizer table":
+          - rowgroup:
+            - row "V E V2":
+              - columnheader "V":
+                - generic: V
+                - generic: 
+              - columnheader "E":
+                - generic: E
+                - generic: 
+              - columnheader "V2":
+                - generic: V2
+                - generic: 
+          - rowgroup:
+            - row "PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)] PgxEdge[provider=AIRTIME_TRANSFERS,key=102,ID=AIRTIME_TRANSFERS(102)] PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)]":
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)]"
+              - cell "PgxEdge[provider=AIRTIME_TRANSFERS,key=102,ID=AIRTIME_TRANSFERS(102)]"
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)]"
+            - row "PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxEdge[provider=AIRTIME_TRANSFERS,key=101,ID=AIRTIME_TRANSFERS(101)] PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)]":
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)]"
+              - cell "PgxEdge[provider=AIRTIME_TRANSFERS,key=101,ID=AIRTIME_TRANSFERS(101)]"
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)]"
+            - row "PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)]":
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)]"
+              - cell "PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)]"
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)]"
+            - row "PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)] PgxEdge[provider=AIRTIME_TRANSFERS,key=103,ID=AIRTIME_TRANSFERS(103)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)]":
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)]"
+              - cell "PgxEdge[provider=AIRTIME_TRANSFERS,key=103,ID=AIRTIME_TRANSFERS(103)]"
+              - cell "PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)]"
+        - status
+        - generic: Select Row
+      - status: Page 1 content loaded
+      - generic: 4Pagination
+      - region "4Pagination":
+        - generic: Page
+        - generic "Go To Page":
+          - textbox "Page"
+        - generic: of 1
+        - text: (
+        - generic: 1-4 of 4 items
+        - text: )
+        - button "First Page" [disabled]:
+          - text: 
+          - generic: First Page
+        - button "Previous Page" [disabled]:
+          - text: 
+          - generic: Previous Page
+        - generic "Go To Page 1":
+          - generic: Page
+          - text: "1"
+        - button "Next Page" [disabled]:
+          - text: 
+          - generic: Next Page
+        - button "Last Page" [disabled]:
+          - text: 
+          - generic: Last Page
+      - button "Load More" [disabled]:
+        - generic: Load More
+      - generic: 1s 80ms @ a few seconds ago
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Use PGQL to find the 10 accounts with the most transfers.</p> <p>PGQL has built-in functions <strong>IN_DEGREE</strong> and <strong>OUT_DEGREE</strong>, which return the number of incoming and outgoing edges of a node. So we can use them in this query.</p> <p>Run the paragraph with the following query.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* List 10 accounts with the most number of airtime transfers (that is, incoming + outgoing edges) */
+        - generic: SELECT a.account_id, (in_degree(a) + out_degree(a)) AS num_transfers
+        - generic: FROM MATCH (a) ON airtime_graph
+        - generic: ORDER BY num_transfers DESC
+        - generic: LIMIT 10
+      - generic: 
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Check if there are any circular airtime-transfer chains of length 4 from account 934 */
+        - generic: SELECT v,e,v2
+        - generic: "FROM MATCH ALL (a)-[:TRANSFERS]->{4}(b) ON airtime_graph ONE ROW PER STEP (v,e,v2)"
+        - generic: WHERE a.account_id=934 AND id(a) = id(b)
+        - generic: LIMIT 100
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph":
+          - img "Graph": 
+        - tab "Table":
+          - img "Table": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: V E V2 PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=82,ID=PREPAID_ACCOUNTS(82)] PgxEdge[provider=AIRTIME_TRANSFERS,key=112,ID=AIRTIME_TRANSFERS(112)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=81,ID=PREPAID_ACCOUNTS(81)] PgxEdge[provider=AIRTIME_TRANSFERS,key=81,ID=AIRTIME_TRANSFERS(81)] PgxVertex[provider=PREPAID_ACCOUNTS,key=82,ID=PREPAID_ACCOUNTS(82)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxEdge[provider=AIRTIME_TRANSFERS,key=111,ID=AIRTIME_TRANSFERS(111)] PgxVertex[provider=PREPAID_ACCOUNTS,key=81,ID=PREPAID_ACCOUNTS(81)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)] PgxEdge[provider=AIRTIME_TRANSFERS,key=103,ID=AIRTIME_TRANSFERS(103)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)] PgxEdge[provider=AIRTIME_TRANSFERS,key=102,ID=AIRTIME_TRANSFERS(102)] PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxEdge[provider=AIRTIME_TRANSFERS,key=101,ID=AIRTIME_TRANSFERS(101)] PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=72,ID=PREPAID_ACCOUNTS(72)] PgxEdge[provider=AIRTIME_TRANSFERS,key=110,ID=AIRTIME_TRANSFERS(110)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=71,ID=PREPAID_ACCOUNTS(71)] PgxEdge[provider=AIRTIME_TRANSFERS,key=71,ID=AIRTIME_TRANSFERS(71)] PgxVertex[provider=PREPAID_ACCOUNTS,key=72,ID=PREPAID_ACCOUNTS(72)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxEdge[provider=AIRTIME_TRANSFERS,key=109,ID=AIRTIME_TRANSFERS(109)] PgxVertex[provider=PREPAID_ACCOUNTS,key=71,ID=PREPAID_ACCOUNTS(71)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=92,ID=PREPAID_ACCOUNTS(92)] PgxEdge[provider=AIRTIME_TRANSFERS,key=114,ID=AIRTIME_TRANSFERS(114)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=91,ID=PREPAID_ACCOUNTS(91)] PgxEdge[provider=AIRTIME_TRANSFERS,key=91,ID=AIRTIME_TRANSFERS(91)] PgxVertex[provider=PREPAID_ACCOUNTS,key=92,ID=PREPAID_ACCOUNTS(92)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxEdge[provider=AIRTIME_TRANSFERS,key=113,ID=AIRTIME_TRANSFERS(113)] PgxVertex[provider=PREPAID_ACCOUNTS,key=91,ID=PREPAID_ACCOUNTS(91)]
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%md"
+        - generic: Compare the four-hop paths with the following five-hop query. Count the cycles in your results; no telecommunications cycle counts have been measured for this edition.
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Compare the four-hop paths with the following five-hop query. Count the cycles in your results; no telecommunications cycle counts have been measured for this edition.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Check if there are any circular airtime-transfer chains of length 5 from account 934 */
+        - generic: SELECT v,e,v2
+        - generic: "FROM MATCH ALL (a)-[:TRANSFERS]->{5}(b) ON airtime_graph ONE ROW PER STEP (v,e,v2)"
+        - generic: WHERE a.account_id=934 AND id(a) = id(b)
+        - generic: LIMIT 100
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph":
+          - img "Graph": 
+        - tab "Table":
+          - img "Table": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: V E V2 PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=52,ID=PREPAID_ACCOUNTS(52)] PgxEdge[provider=AIRTIME_TRANSFERS,key=107,ID=AIRTIME_TRANSFERS(107)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=51,ID=PREPAID_ACCOUNTS(51)] PgxEdge[provider=AIRTIME_TRANSFERS,key=51,ID=AIRTIME_TRANSFERS(51)] PgxVertex[provider=PREPAID_ACCOUNTS,key=52,ID=PREPAID_ACCOUNTS(52)] PgxVertex[provider=PREPAID_ACCOUNTS,key=406,ID=PREPAID_ACCOUNTS(406)] PgxEdge[provider=AIRTIME_TRANSFERS,key=106,ID=AIRTIME_TRANSFERS(106)] PgxVertex[provider=PREPAID_ACCOUNTS,key=51,ID=PREPAID_ACCOUNTS(51)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxEdge[provider=AIRTIME_TRANSFERS,key=105,ID=AIRTIME_TRANSFERS(105)] PgxVertex[provider=PREPAID_ACCOUNTS,key=406,ID=PREPAID_ACCOUNTS(406)]
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Circular airtime transfers can indicate repeated movement among linked accounts. They can also have a legitimate explanation. Compare connectivity with PageRank, which measures graph importance, not a prepaid voice-minute balance. The Python API uses the built-in session and analyst objects and the loaded AIRTIME_GRAPH.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%python-pgx"
+        - generic: graph = session.get_graph("AIRTIME_GRAPH")
+        - generic: analyst.pagerank(graph);
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: "VertexProperty(name: pagerank, type: double, graph: AIRTIME_GRAPH)"
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* List accounts in descending order of pagerank values*/
+        - generic: SELECT a.account_id, a.pagerank AS pageRank
+        - generic: FROM MATCH (a) ON airtime_graph
+        - generic: ORDER BY PageRank DESC
+        - generic: LIMIT 10
+      - generic: 
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Add highlights to symbolize account nodes by PageRank values. Highlight accounts connected to 934 by their computed PageRank.
+        - generic: Choose the hierarchical view. */
+        - generic: SELECT v,e,v2
+        - generic: "FROM MATCH ANY (n)-[:TRANSFERS]->{6}(m) ON airtime_graph ONE ROW PER STEP (v,e,v2)"
+        - generic: WHERE n.account_id = 934
+        - generic: LIMIT 100
+      - generic: 
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* List accounts in descending order of pagerank values*/
+        - generic: SELECT a.account_id, a.pagerank AS pageRank
+        - generic: FROM MATCH (a) ON airtime_graph
+        - generic: ORDER BY PageRank DESC
+        - generic: LIMIT 5
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* List 10 accounts with the most number of airtime transfers (that is, incoming + outgoing edges) */
+        - generic: SELECT a.account_id, (in_degree(a) + out_degree(a)) AS num_transfers
+        - generic: FROM MATCH (a) ON airtime_graph
+        - generic: ORDER BY num_transfers DESC
+        - generic: LIMIT 5
+      - generic: 
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Check the shortest path between account 934 and account 387 */
+        - generic: SELECT v,e,v2
+        - generic: FROM MATCH SHORTEST (a)-[:TRANSFERS]->+(b) ON airtime_graph ONE ROW PER STEP (v,e,v2)
+        - generic: WHERE a.account_id=934 AND b.account_id=387
+      - generic: 
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Find the top 3 shortest paths between account 934 and account 387 */
+        - generic: SELECT v,e,v2
+        - generic: FROM MATCH TOP 3 SHORTEST (a)-[:TRANSFERS]->+ (b) ON airtime_graph ONE ROW PER STEP (v,e,v2)
+        - generic: WHERE a.account_id=934 AND b.account_id=387
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Find the top 5 shortest paths between account 934 and account 387 */
+        - generic: SELECT v,e,v2
+        - generic: FROM MATCH TOP 5 SHORTEST (a)-[:TRANSFERS]->+ (b) ON airtime_graph ONE ROW PER STEP (v,e,v2)
+        - generic: WHERE a.account_id=934 AND b.account_id=387
+      - generic: 
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Treat accounts 934 and 387 as synthetic review seeds, not confirmed offenders. Personalized PageRank ranks graph proximity to this seed set. It helps prioritize review; it is not a probability of abuse. The next Python paragraph uses vertices from PREPAID_ACCOUNTS and the built-in analyst object.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%python-pgx"
+        - generic: vertices = graph.create_vertex_set()
+        - generic: vertices.add_all([graph.get_vertex("PREPAID_ACCOUNTS(934)"),graph.get_vertex("PREPAID_ACCOUNTS(387)")])
+        - generic: analyst.personalized_pagerank(graph, vertices);
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: "VertexProperty(name: personalized_pagerank, type: double, graph: AIRTIME_GRAPH)"
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: SELECT a.account_id, a.personalized_pagerank AS review_proximity FROM MATCH (a) ON airtime_graph
+        - generic: ORDER BY review_proximity DESC
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph":
+          - img "Graph": 
+        - tab "Table":
+          - img "Table": 
+        - tab "Area Chart":
+          - img "Area Chart": 
+        - tab "Bar Chart":
+          - img "Bar Chart": 
+        - tab "Funnel Chart":
+          - img "Funnel Chart": 
+        - tab "Line Chart":
+          - img "Line Chart": 
+        - tab "Pie Chart":
+          - img "Pie Chart": 
+        - tab "Pyramid Chart":
+          - img "Pyramid Chart": 
+        - tab "TreeMap":
+          - img "TreeMap": 
+        - tab "Sunburst":
+          - img "Sunburst": 
+        - tab "Tag Cloud":
+          - img "Tag Cloud": 
+        - tab "Box Plot":
+          - img "Box Plot": 
+        - tab "Scatter Plot":
+          - img "Scatter Plot": 
+        - tab "Maps":
+          - img "Maps": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - button:
+        - generic: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: ACCOUNT_ID REVIEW_PROXIMITY 934 0.19101403563339778 387 0.13649952224492906 71 0.0328176378098759 81 0.030278013581565125 91 0.030024728633582194 61 0.029319685391969753 72 0.02789799886518145 406 0.027058949126671367 597 0.027058949126671367 82 0.025740071210326065 92 0.025520528948666642 62 0.024920447144097576 51 0.022998861990897426 534 0.022998861990897426 63 0.021179610785959938 52 0.019547408953705405 64 0.018002130352590136 65 0.01530094428636224 66 0.012999775976678972 73 0.011855874689517334 67 0.011046449210369503 83 0.010939355854818538 93 0.010849466780061115 74 0.01007384260947295 68 0.00939424324158965 84 0.00929388904531787 94 0.009219836042208317 75 0.008561991420952833 53 0.008307415966826673 69 0.007986036809719823 85 0.007897829060069935 95 0.007832184720308982 76 0.007273461790564915 54 0.0070616360027452715 70 0.006780592679362529 86 0.006717462691329808 96 0.006654601230741696 77 0.00617854848885411 55 0.006000917553205933 87 0.0057036082559177 97 0.005659994538130735 78 0.00525486292012989 56 0.005098936126336288 88 0.0048405464077564955 98 0.004810540399591716 79 0.004469674219228086 57 0.004334586436657317 89 0.004119736523540494 99 0.0040838867606526694 80 0.0037932924302557063 58 0.0036855018136273377 90 0.0034978374214506354 100 0.0034682864027877703 59 0.003131218792892331 1 0.0029422592794617138 60 0.002659661505223665 2 0.0025010430297231034 3 0.0021309709657302994 4 0.0018088135212411573 5 0.001531310332227977 6 0.0012990483176069992 7 0.0011074648251716394 8 9.410781879082206E-4 9 7.967698940506658E-4 10 6.741352197908784E-4 11 5.65195548476096E-4 12 4.806135288494305E-4 13 4.18771625060302E-4 14 3.532233779732404E-4 15 2.880238265823704E-4 16 2.4275207347059893E-4 17 2.190479098090719E-4 18 1.8500246042259217E-4 19 1.4339905155129681E-4 20 1.1820407465146105E-4 21 9.408090979645603E-5 22 8.249571218445592E-5 23 8.221456274610005E-5 24 6.410651808854326E-5 27 5.860799366901242E-5 28 4.331895184231353E-5 25 3.914841159777571E-5 26 3.327614985810935E-5 29 0.0 33 0.0 37 0.0 31 0.0 35 0.0 39 0.0 43 0.0 47 0.0 41 0.0 48 0.0 45 0.0 44 0.0 40 0.0 36 0.0 32 0.0 50 0.0 46 0.0
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* show the airtime transfers for account id 406 */
+        - generic: SELECT *
+        - generic: FROM MATCH (v1)-[e1]->(a)-[e2]->(v2) ON airtime_graph
+        - generic: WHERE a.account_id=406
+      - generic: 
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Use shortest_path_hop_distance to compute the minimum number of directed transfer hops from accounts 934 and 387 to other accounts. Smaller distances mean graph proximity, not guilt. Run both Python paragraphs. They store separate properties named hop_dist_from_934 and hop_dist_from_387 on the loaded graph.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%python-pgx"
+        - generic: "# Compute directed hop distance from account 934"
+        - generic: vertex = graph.get_vertex("PREPAID_ACCOUNTS(934)")
+        - generic: analyst.shortest_path_hop_distance(graph, vertex, "hop_dist_from_934")
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: "AllPaths(source: PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)])"
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%python-pgx"
+        - generic: vertex = graph.get_vertex("PREPAID_ACCOUNTS(387)")
+        - generic: analyst.shortest_path_hop_distance(graph, vertex, "hop_dist_from_387")
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: "AllPaths(source: PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)])"
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - text: /* show the number of accounts with a certain number of hops in descending order for
+        - text: "#934*/"
+        - generic: SELECT COUNT(a.account_id), a.hop_dist_from_934 AS hops FROM MATCH (a) ON airtime_graph
+        - generic: WHERE hops > 0
+        - generic: GROUP BY hops
+        - generic: ORDER BY hops
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Table":
+          - img "Table": 
+        - tab "Area Chart":
+          - img "Area Chart": 
+        - tab "Bar Chart":
+          - img "Bar Chart": 
+        - tab "Funnel Chart":
+          - img "Funnel Chart": 
+        - tab "Line Chart":
+          - img "Line Chart": 
+        - tab "Pie Chart":
+          - img "Pie Chart": 
+        - tab "Pyramid Chart":
+          - img "Pyramid Chart": 
+        - tab "TreeMap":
+          - img "TreeMap": 
+        - tab "Sunburst":
+          - img "Sunburst": 
+        - tab "Tag Cloud":
+          - img "Tag Cloud": 
+        - tab "Box Plot":
+          - img "Box Plot": 
+        - tab "Scatter Plot":
+          - img "Scatter Plot": 
+        - tab "Maps":
+          - img "Maps": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: COUNT(a.account_id) HOPS 6 1.0 6 2.0 6 3.0 5 4.0 5 5.0 5 6.0 5 7.0 5 8.0 5 9.0 5 10.0 2 11.0 1 12.0 1 13.0 1 14.0 1 15.0 1 16.0 1 17.0 1 18.0 1 19.0 1 20.0 1 21.0 1 22.0 1 23.0 1 24.0 1 25.0 1 26.0 1 27.0 1 28.0 1 29.0 1 30.0 1 31.0 1 32.0 1 33.0 1 34.0 1 35.0 1 36.0 1 37.0 1 38.0 1 39.0 1 40.0 1 41.0 1 42.0 1 43.0 1 44.0 1 45.0 1 46.0 1 47.0 1 48.0 1 49.0 1 50.0 1 51.0 1 52.0 1 53.0 1 54.0 1 55.0 1 56.0 1 57.0 1 58.0 1 59.0 1 60.0
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - text: /* show the number of accounts with a certain number of hops in descending order for
+        - text: "#387*/"
+        - generic: SELECT COUNT(a.account_id), a.hop_dist_from_387 AS hops FROM MATCH (a) ON airtime_graph
+        - generic: WHERE hops > 0
+        - generic: GROUP BY hops
+        - generic: ORDER BY hops
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Table":
+          - img "Table": 
+        - tab "Area Chart":
+          - img "Area Chart": 
+        - tab "Bar Chart":
+          - img "Bar Chart": 
+        - tab "Funnel Chart":
+          - img "Funnel Chart": 
+        - tab "Line Chart":
+          - img "Line Chart": 
+        - tab "Pie Chart":
+          - img "Pie Chart": 
+        - tab "Pyramid Chart":
+          - img "Pyramid Chart": 
+        - tab "TreeMap":
+          - img "TreeMap": 
+        - tab "Sunburst":
+          - img "Sunburst": 
+        - tab "Tag Cloud":
+          - img "Tag Cloud": 
+        - tab "Box Plot":
+          - img "Box Plot": 
+        - tab "Scatter Plot":
+          - img "Scatter Plot": 
+        - tab "Maps":
+          - img "Maps": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: COUNT(a.account_id) HOPS 1 1.0 6 2.0 6 3.0 5 4.0 5 5.0 5 6.0 5 7.0 5 8.0 5 9.0 5 10.0 5 11.0 2 12.0 1 13.0 1 14.0 1 15.0 1 16.0 1 17.0 1 18.0 1 19.0 1 20.0 1 21.0 1 22.0 1 23.0 1 24.0 1 25.0 1 26.0 1 27.0 1 28.0 1 29.0 1 30.0 1 31.0 1 32.0 1 33.0 1 34.0 1 35.0 1 36.0 1 37.0 1 38.0 1 39.0 1 40.0 1 41.0 1 42.0 1 43.0 1 44.0 1 45.0 1 46.0 1 47.0 1 48.0 1 49.0 1 50.0 1 51.0 1 52.0 1 53.0 1 54.0 1 55.0 1 56.0 1 57.0 1 58.0 1 59.0 1 60.0 1 61.0
+    - generic "Paragraph container":
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: SELECT a.account_id, a.hop_dist_from_934 AS hops, in_degree(a) + out_degree(a) AS num_transfers FROM MATCH (a) ON airtime_graph
+        - generic: WHERE hops > 0 AND hops <=2
+        - generic: ORDER BY num_transfers DESC
+      - generic: 
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: SELECT a.account_id, a.hop_dist_from_387 AS hops, in_degree(a) + out_degree(a) AS num_transfers FROM MATCH (a) ON airtime_graph
+        - generic: WHERE hops > 0 AND hops <=2
+        - generic: ORDER BY num_transfers DESC
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph":
+          - img "Graph": 
+        - tab "Table":
+          - img "Table": 
+        - tab "Area Chart":
+          - img "Area Chart": 
+        - tab "Bar Chart":
+          - img "Bar Chart": 
+        - tab "Funnel Chart":
+          - img "Funnel Chart": 
+        - tab "Line Chart":
+          - img "Line Chart": 
+        - tab "Pie Chart":
+          - img "Pie Chart": 
+        - tab "Pyramid Chart":
+          - img "Pyramid Chart": 
+        - tab "TreeMap":
+          - img "TreeMap": 
+        - tab "Sunburst":
+          - img "Sunburst": 
+        - tab "Tag Cloud":
+          - img "Tag Cloud": 
+        - tab "Box Plot":
+          - img "Box Plot": 
+        - tab "Scatter Plot":
+          - img "Scatter Plot": 
+        - tab "Maps":
+          - img "Maps": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - button:
+        - generic: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: ACCOUNT_ID HOPS NUM_TRANSFERS 934 1.0 7 91 2.0 3 61 2.0 3 81 2.0 3 71 2.0 3 597 2.0 2 406 2.0 2
+    - generic "Paragraph container":
+      - text: 
+      - tablist "Visualization selection":
+        - tab "HTML":
+          - img "HTML": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: <p>Compare account 406 with the degree, personalized PageRank, and hop-distance results from your run. The final query visualizes two-hop paths from sample accounts 934 and 387. Verify whether 406 appears instead of assuming a connection.</p>
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* show 2-hop accounts from 934 and 387 */
+        - generic: SELECT * FROM MATCH (a) -[e]-> (m)-[e1]->(d) ON airtime_graph
+        - generic: WHERE a.account_id in (934, 387)
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Graph":
+          - img "Graph": 
+        - tab "Table":
+          - img "Table": 
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: A M D E E1 PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=61,ID=PREPAID_ACCOUNTS(61)] PgxVertex[provider=PREPAID_ACCOUNTS,key=62,ID=PREPAID_ACCOUNTS(62)] PgxEdge[provider=AIRTIME_TRANSFERS,key=108,ID=AIRTIME_TRANSFERS(108)] PgxEdge[provider=AIRTIME_TRANSFERS,key=61,ID=AIRTIME_TRANSFERS(61)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=81,ID=PREPAID_ACCOUNTS(81)] PgxVertex[provider=PREPAID_ACCOUNTS,key=82,ID=PREPAID_ACCOUNTS(82)] PgxEdge[provider=AIRTIME_TRANSFERS,key=111,ID=AIRTIME_TRANSFERS(111)] PgxEdge[provider=AIRTIME_TRANSFERS,key=81,ID=AIRTIME_TRANSFERS(81)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)] PgxVertex[provider=PREPAID_ACCOUNTS,key=534,ID=PREPAID_ACCOUNTS(534)] PgxEdge[provider=AIRTIME_TRANSFERS,key=101,ID=AIRTIME_TRANSFERS(101)] PgxEdge[provider=AIRTIME_TRANSFERS,key=102,ID=AIRTIME_TRANSFERS(102)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=406,ID=PREPAID_ACCOUNTS(406)] PgxVertex[provider=PREPAID_ACCOUNTS,key=51,ID=PREPAID_ACCOUNTS(51)] PgxEdge[provider=AIRTIME_TRANSFERS,key=105,ID=AIRTIME_TRANSFERS(105)] PgxEdge[provider=AIRTIME_TRANSFERS,key=106,ID=AIRTIME_TRANSFERS(106)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=71,ID=PREPAID_ACCOUNTS(71)] PgxVertex[provider=PREPAID_ACCOUNTS,key=72,ID=PREPAID_ACCOUNTS(72)] PgxEdge[provider=AIRTIME_TRANSFERS,key=109,ID=AIRTIME_TRANSFERS(109)] PgxEdge[provider=AIRTIME_TRANSFERS,key=71,ID=AIRTIME_TRANSFERS(71)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=91,ID=PREPAID_ACCOUNTS(91)] PgxVertex[provider=PREPAID_ACCOUNTS,key=92,ID=PREPAID_ACCOUNTS(92)] PgxEdge[provider=AIRTIME_TRANSFERS,key=113,ID=AIRTIME_TRANSFERS(113)] PgxEdge[provider=AIRTIME_TRANSFERS,key=91,ID=AIRTIME_TRANSFERS(91)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=61,ID=PREPAID_ACCOUNTS(61)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxEdge[provider=AIRTIME_TRANSFERS,key=108,ID=AIRTIME_TRANSFERS(108)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=81,ID=PREPAID_ACCOUNTS(81)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxEdge[provider=AIRTIME_TRANSFERS,key=111,ID=AIRTIME_TRANSFERS(111)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=597,ID=PREPAID_ACCOUNTS(597)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxEdge[provider=AIRTIME_TRANSFERS,key=101,ID=AIRTIME_TRANSFERS(101)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=406,ID=PREPAID_ACCOUNTS(406)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxEdge[provider=AIRTIME_TRANSFERS,key=105,ID=AIRTIME_TRANSFERS(105)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=71,ID=PREPAID_ACCOUNTS(71)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxEdge[provider=AIRTIME_TRANSFERS,key=109,ID=AIRTIME_TRANSFERS(109)] PgxVertex[provider=PREPAID_ACCOUNTS,key=387,ID=PREPAID_ACCOUNTS(387)] PgxVertex[provider=PREPAID_ACCOUNTS,key=934,ID=PREPAID_ACCOUNTS(934)] PgxVertex[provider=PREPAID_ACCOUNTS,key=91,ID=PREPAID_ACCOUNTS(91)] PgxEdge[provider=AIRTIME_TRANSFERS,key=104,ID=AIRTIME_TRANSFERS(104)] PgxEdge[provider=AIRTIME_TRANSFERS,key=113,ID=AIRTIME_TRANSFERS(113)]
+- generic: Copyright © 2026 Oracle and/or its affiliates.
+- text:        
+- alert
+- alert

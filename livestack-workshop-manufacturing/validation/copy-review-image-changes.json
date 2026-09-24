@@ -1,0 +1,52 @@
+[
+  {
+    "file" : "production-operations-dashboard\/images\/jessica.png",
+    "pixels_identical" : true,
+    "same_dimensions" : true
+  },
+  {
+    "file" : "quality-review-oml\/images\/otto.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "production-order-duality\/images\/thomas.png",
+    "pixels_identical" : true,
+    "same_dimensions" : true
+  },
+  {
+    "file" : "introduction\/images\/seer-manufacturing-introduction.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "introduction\/images\/seer-manufacturing-erd-illustrated.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "plant-routing-spatial\/images\/moon.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "selectai-agent\/images\/nina.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "selectai\/images\/nina.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "production-quality-network\/images\/bob.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  },
+  {
+    "file" : "component-quality-vector-search\/images\/gilly.png",
+    "pixels_identical" : false,
+    "same_dimensions" : false
+  }
+]
