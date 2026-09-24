@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Bob Green is a graph specialist at Seer Hotels. He uses property graphs to investigate booking abuse.
 
 A reservation row may not show coordinated activity. Shared devices, phone numbers, payment tokens, or IP addresses can reveal connections between reservations.
@@ -227,9 +225,9 @@ In graph terms, the reservation and connected objects are **vertices**. The row 
     </copy>
     ```
 
-    ![Live hospitality result — graph direct](images/sql-graph-direct.jpg)
+    ![SQL Worksheet result — graph direct](images/sql-graph-direct.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     In the `MATCH` pattern, `reservation` and `connected` are vertices. `edge` is the edge between them, so this pattern follows one hop. `IS entity` and `IS related_to` refer to the labels defined in `BOOKING_ABUSE_NETWORK`.
 
@@ -273,9 +271,9 @@ Start from suspicious reservation `RSV-8841` and trace the connected entities wi
     </copy>
     ```
 
-    ![Live hospitality result — graph four hop](images/sql-graph-four-hop.jpg)
+    ![SQL Worksheet result — graph four hop](images/sql-graph-four-hop.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `RSV-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
 
@@ -334,9 +332,9 @@ Bob now moves from one suspicious reservation to a broader booking abuse questio
     </copy>
     ```
 
-    ![Live hospitality result — graph shared](images/sql-graph-shared.jpg)
+    ![SQL Worksheet result — graph shared](images/sql-graph-shared.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     The pattern starts at reservation `a`, follows an edge to a shared entity, and follows another edge back to reservation `b`. The two reservations can therefore be connected through the same device, IP address, phone number, or email address. `a.entity_id < b.entity_id` keeps the result from returning the same pair twice in reverse order.
 
@@ -439,7 +437,7 @@ You have used SQL/PGQ to list connected entities and Graph Studio to explore the
 
 ### Optional graph-algorithms extension
 
-The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb) preserves the separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `LOYALTY_GRAPH`, with loyalty members connected by allowed points transfers. It is separate from `BOOKING_ABUSE_NETWORK` and requires the optional PGQL graph and PGX service described in the schema contract. Do not run it until those Phase 2 prerequisites are provisioned. Graph proximity is a review cue, not proof of abuse.
+The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb) provides separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `LOYALTY_GRAPH`, with loyalty members connected by allowed points transfers. It is separate from `BOOKING_ABUSE_NETWORK` and requires the optional PGQL graph, a provisioned `LOYALTY_GRAPH`, and an attached PGX service. Skip this extension if those resources are not available. Graph proximity is a review cue, not proof of abuse.
 
 ## Conclusion: Make Relationships Easy to Review
 
