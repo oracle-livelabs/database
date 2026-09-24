@@ -282,7 +282,7 @@ Request
 
 The team is collaborative because each role receives a structured handoff and contributes a defined part of the work. The team is trustworthy because the owner can inspect, change, approve, or stop every stage.
 
-1. Continue to [Final Quiz](../final-quiz/final-quiz.md).
+1. Continue to [Final Quiz](#next).
 
 ## Task 10: Explore Next Steps With Oracle
 

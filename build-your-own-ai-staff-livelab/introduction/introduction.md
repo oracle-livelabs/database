@@ -90,7 +90,7 @@ Estimated Workshop Time: **55 minutes**
 
 ## Task 1: Start The Lab
 
-1. Continue to [Getting Started](../getting-started/getting-started.md) to open ChatGPT and prepare the Staff Room.
+1. Continue to [Getting Started](#next) to open ChatGPT and prepare the Staff Room.
 
 ## Acknowledgements
 

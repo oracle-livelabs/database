@@ -129,7 +129,7 @@ If you accidentally paste sensitive information, stop. Remove it from the chat i
 
 Prompt guardrails help guide behavior. They are not a complete security boundary. Production systems still need identity, permissions, data classification, logging, retention, and policy controls outside the prompt.
 
-You can now continue to [Choose Your Task](../choose-your-task/choose-your-task.md).
+You can now continue to [Choose Your Task](#next).
 
 ## Acknowledgements
 

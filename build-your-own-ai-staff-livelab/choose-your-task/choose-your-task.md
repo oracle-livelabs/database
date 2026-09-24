@@ -109,7 +109,7 @@ Use three roles if you want to finish the core path in 55 minutes. Add Lumen or 
 
 You know which three roles are required for your task and whether one or both optional roles will add value.
 
-Continue to [Build The Staff](../build-the-staff/build-the-staff.md).
+Continue to [Build The Staff](#next).
 
 ## Acknowledgements
 

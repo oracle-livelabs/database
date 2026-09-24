@@ -161,7 +161,7 @@ Create a private role chat named `Maya Coordinator`. Use `Clarifies repeat work 
 
 ### Test Maya
 
-1. Send Maya the task statement from [Choose Your Task](../choose-your-task/choose-your-task.md). Confirm that Maya returns a clear restatement and a handoff card.
+1. Send Maya the task statement from [Choose Your Task](?lab=choose-your-task). Confirm that Maya returns a clear restatement and a handoff card.
 
 2. If the response is too broad, send:
 
@@ -564,7 +564,7 @@ Jo returns a draft, a change log, a privacy and accessibility check, and a clear
 
 The best first version is not the largest team. It is the smallest group that makes the repeat task easier to understand, complete, and review.
 
-1. Continue to [Run The Staff Together](../run-the-staff-together/run-the-staff-together.md) to pass a real practice request through the roles.
+1. Continue to [Run The Staff Together](#next) to pass a real practice request through the roles.
 
 ## Acknowledgements
 
