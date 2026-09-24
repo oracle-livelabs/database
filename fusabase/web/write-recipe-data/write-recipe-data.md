@@ -129,7 +129,7 @@ Steps 1-4 walk through the rating write pattern piece by piece. Read each step t
       comment: String(fd.get("comment") ?? "").trim()
     });</copy>
     ```
-
+      ![shows the code. ](images/new.png =85%x*)
 6. Save the file.
 
 ## Task 3: Create a recipe and add a rating
