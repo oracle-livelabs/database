@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Midnight Harbor Creator and Community Network",
+    "description": "Graph Studio notebook for Seer Media's Midnight Harbor launch weekend.",
+    "version": "7",
+    "layout": "zeppelin",
+    "type": "Default",
+    "snapshot": false,
+    "isEditable": true,
+    "isRunnable": true,
+    "paragraphs": [
+      {"row":0,"col":0,"width":12,"message":["%md","","**Midnight Harbor Creator and Community Network**","","Explore relationships among the Midnight Harbor Creator Collective, audience sessions, shared devices, and community activity using the `COMMUNITY_NETWORK` property graph."],"selectedVisualization":"html","hideCode":true},
+      {"row":1,"col":0,"width":12,"message":["%sql","SELECT DISTINCT entity_key, display_name, entity_type, engagement_priority, engagement_tier, event_count","FROM GRAPH_TABLE ( community_network","  MATCH (seed IS entity) -[e IS related_to]->{1,2} (reached IS entity)","  WHERE seed.entity_key = 'CREATOR-MH-8841'","  COLUMNS ( reached.entity_key AS entity_key, reached.display_name AS display_name,","            reached.entity_type AS entity_type, reached.risk_score AS engagement_priority,","            reached.risk_level AS engagement_tier, reached.event_count AS event_count )",")","ORDER BY engagement_priority DESC FETCH FIRST 25 ROWS ONLY;"],"selectedVisualization":"table","hideCode":false},
+      {"row":2,"col":0,"width":12,"message":["%sql","SELECT * FROM GRAPH_TABLE ( community_network","  MATCH (creator IS entity) -[edge IS related_to]-> (device IS entity)","  WHERE creator.entity_key = 'CREATOR-MH-8841'","    AND device.entity_key = 'DEV-fp-91a7'","  COLUMNS ( creator.entity_key AS creator_key, edge.relationship_type AS relationship_type,","            device.entity_key AS device_key )",");"],"selectedVisualization":"network","hideCode":false}
+    ]
+  }
+]
