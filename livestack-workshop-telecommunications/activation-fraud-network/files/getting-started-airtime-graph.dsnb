@@ -121,7 +121,7 @@
           "",
           "- (d) is the destination node",
           "",
-          "The **LIMIT** clause specifies the maximum of elements that the query should return.",
+          "The **LIMIT** clause specifies the maximum number of results that the query should return.",
           "",
           "See the [PGQL site](https://pgql-lang.org/) and specification for more details on the syntax and features of the language.",
           "The Getting Started notebook folder also has a tutorial on PGQL."
@@ -175,9 +175,9 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "This shows the use of bind parameters in a query. You enter the account ID when you run the query.",
+          "A bind parameter supplies a value without changing the query's SQL.",
           "",
-          "Enter **534** as the account id, and then execute the paragraph."
+          "Enter account ID **534**, then run the paragraph."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -438,7 +438,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "List PageRank values in descending order. A high rank means that an account has incoming links from accounts that themselves carry rank. This is a structural graph measure; it does not prove abuse or measure airtime volume."
+          "List PageRank values in descending order. A high rank means that an account has incoming links from accounts that themselves carry rank. PageRank ranks accounts using their incoming connections and the ranks of the accounts linking to them; it does not prove abuse or measure airtime volume."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -543,7 +543,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Compare each account’s **PageRank** with the **number of airtime transfers** you counted earlier."
+          "Compare each account\u2019s **PageRank** with the **number of airtime transfers** you counted earlier."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -752,7 +752,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Treat accounts 934 and 387 as sample starting points for review, not confirmed offenders. Personalized PageRank ranks graph proximity to this seed set. It helps prioritize review; it is not a probability of abuse.",
+          "Treat accounts 934 and 387 as sample starting points for review, not confirmed offenders. Personalized PageRank ranks how closely the accounts are connected to this starting accounts. It helps prioritize review; it is not a probability of abuse.",
           "The next Python paragraph uses vertices from PREPAID_ACCOUNTS and the built-in analyst object."
         ],
         "selectedVisualization": "html",
@@ -881,7 +881,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Use shortest_path_hop_distance to compute the minimum number of directed transfer hops from accounts 934 and 387 to other accounts. Smaller distances mean graph proximity, not guilt.",
+          "Use shortest_path_hop_distance to compute the minimum number of directed transfer hops from accounts 934 and 387 to other accounts. Smaller distances mean fewer transfer steps between accounts; they do not prove abuse.",
           "Run both Python paragraphs. They store separate properties named hop_dist_from_934 and hop_dist_from_387 on the loaded graph."
         ],
         "selectedVisualization": "html",
@@ -959,7 +959,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "We can GROUP BY the number of hops and list the hop counts in ascending order."
+          "Group the results by hop count and sort from smallest to largest."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,

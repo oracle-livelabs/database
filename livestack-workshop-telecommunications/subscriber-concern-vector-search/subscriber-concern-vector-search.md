@@ -1,10 +1,8 @@
 # Search Service Plans by Meaning
 
-![Gilly :  telecommunications lab banner](images/gilly.png)
+![Gilly Bourne, AI engineer, introduces service-plan search.](images/gilly.png)
 
 ## Introduction
-
-> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Gilly Bourne is an AI engineer at SEER Telecomms. Her team has built a search feature for the subscriber-support application. A support analyst can enter a question such as **which subscribers may be affected by an indoor mobile coverage complaint?** The application should find the relevant service plans first, then show the subscribers who ordered them.
 
@@ -13,7 +11,6 @@ Gilly has the service plan, service order, and subscriber data in Oracle AI Data
 Gilly runs the search in the database. One SQL statement compares the question with service plan vectors, joins the matches to service orders and subscribers, and returns the follow-up list. This avoids copying text and vectors to a separate search service.
 
 In this lab, you check the embedding model, create service plan vectors, and use a search result to find matching service orders and subscribers.
-
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -55,9 +52,7 @@ Estimated Time: **10 minutes**
 
 Persona focus: You are reviewing the search tool Gilly built for subscriber support operations.
 
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
-
 
 ## Task 1: Check the embedding model
 
@@ -81,10 +76,7 @@ Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Orac
 
     **Expected output: Available Embedding Models**
 
-    <!-- capture:CAP-01 -->
     ![Check the embedding model](images/sql-embedding-model.png)
-
-    *Live LLUSER capture, 23 September 2026.*
 
     The result should include an embedding model owned by `ADMIN`, such as `ALL_MINILM_L12_V2`. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
@@ -92,7 +84,6 @@ Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Orac
 
     Gilly can call the model from SQL with `VECTOR_EMBEDDING(...)`. Jessica manages the model inside the database, while Gilly uses it in her search query. The service plan data, vectors, and access controls stay in the same database.
 
-    > **Note:** The embedding model runs inside Oracle AI Database. Gilly can create vectors without sending telecommunications text to another service.
 
 ## Task 2: Create a service plan vector
 
@@ -153,13 +144,7 @@ Gilly decides that one vector per service plan is enough. Each service plan reco
     </copy>
     ```
 
-    <!-- capture:CAP-02 -->
     ![Create a service plan vector](images/sql-vector-values.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-
-    
 
     Each service plan now has its own 384-dimensional vector. Gilly can use this column directly when the application searches for service plans by meaning.
 
@@ -196,11 +181,7 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
     </copy>
     ```
 
-    <!-- capture:CAP-03 -->
     ![Test the service plan vector](images/sql-vector-distance.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     **Expected output: Mobile Coverage Plan Matches**
 
@@ -229,23 +210,13 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
     </copy>
     ```
 
-    <!-- capture:CAP-04 -->
     ![Test the service plan vector](images/sql-vector-similarity.png)
 
-    *Live LLUSER capture, 23 September 2026.*
-
-
     The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
-
-    
-
-<!-- application-capture:APP-04 -->
 
 In **Subscriber Signals**, enter `weak indoor mobile coverage and dropped calls` in **Mobile Service Signal Search**, then select **Search**. The captured demo returned eight services. Compare the ranked matches with their similarity scores; the rankings belong to the demo dataset, not the lab sample data.
 
 ![Live semantic search showing the entered phrase and eight ranked telecom services.](images/app-vector-search.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ## Task 4: Find subscribers affected by a service plan concern
 
@@ -288,20 +259,13 @@ Gilly now has the business requirement for the application. A support analyst sh
     </copy>
     ```
 
-    <!-- capture:CAP-05 -->
     ![Find subscribers affected by a service plan concern](images/sql-vector-subscribers.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     The first part ranks service plans by meaning. The remaining joins use ordinary relational keys to find the matching monthly service charges, service orders, and subscribers.
 
     **Expected output: Subscriber Follow-up List**
 
     The result shows subscribers who ordered service plans related to the concern. The similarity score explains why the service plan was included, while the service order and subscriber columns give the service team enough information to decide what to do next.
-
-
-    
 
 2. Review the business result.
 

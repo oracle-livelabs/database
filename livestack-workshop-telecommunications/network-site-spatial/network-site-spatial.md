@@ -1,10 +1,8 @@
 # Find Nearby Network Sites
 
-![Moon :  telecommunications lab banner](images/moon.png)
+![Moon Kai, spatial specialist, introduces nearby network sites.](images/moon.png)
 
 ## Introduction
-
-> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Moon Kai is SEER Telecomms’ spatial specialist. Operations teams ask Moon for help when location affects a service decision: which site is closest to a region with growing demand, and which subscriber addresses lie nearby?
 
@@ -14,8 +12,7 @@ Moon wants a query that a service team can use in a dashboard and map:
 
 > Subscribers in a busy network region report poor connectivity. **Which subscribers are in that region, and which site is closest to each one?**
 
-In this lab, you follow Moon's approach. You start with a single point, measure distance to a region, find subscribers inside that region, and finish with a network-support review result that combines location and service data.
-
+In this lab, you follow Moon's approach. You start with a single point, measure distance to a region, find subscribers inside that region, and finish with a list of subscribers and nearby sites for the support team.
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -86,11 +83,7 @@ The same stored location supports distance calculations, relational joins, and J
     </copy>
     ```
 
-    <!-- capture:CAP-49 -->
     ![Look at the locations as points](images/sql-spatial-points.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
@@ -133,11 +126,7 @@ The sample data gives New York Network Region a demand index of `91` for the fir
     </copy>
     ```
 
-    <!-- capture:CAP-50 -->
     ![Find the closest sites to a demand region](images/sql-spatial-new-york.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     `SDO_GEOM.SDO_DISTANCE` compares the network-site point with the demand-region polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
@@ -152,11 +141,9 @@ The sample data gives New York Network Region a demand index of `91` for the fir
 
     The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. The site with the smallest distance is the first site operations should check for available capacity.
 
-    **Expected output: New York Service Coverage**
+    **Expected output: Sites nearest New York Network Region**
 
     Review the closest site and its distance. Rankings depend on the data your loader supplied. Verify the distances after loading the sample data.
-
-    
 
 2. Try another region.
 
@@ -193,25 +180,15 @@ The sample data gives New York Network Region a demand index of `91` for the fir
     </copy>
     ```
 
-    <!-- capture:CAP-51 -->
     ![Find the closest sites to a demand region](images/sql-spatial-chicago.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-
-    
 
     The `unit` parameter controls the measurement unit. Review whether a site lies inside the Chicago Network Region polygon. A point inside or touching the polygon has distance zero. The sample data gives this region a demand index of 78. Check the site rankings in your result.
 
     This is a useful regional result, but distance to the region boundary does not identify the subscribers who need service. Moon now uses the region polygon to find those subscribers and then ranks the closest active site for each address.
 
-<!-- application-capture:APP-06 -->
-
 In **Network Access and Field Operations**, enable **Network Sites** and **Demand Pressure Regions**. Compare the site markers with the region overlays. The demo uses its own locations and capacity data, so this map illustrates spatial presentation rather than the expected New York or Chicago SQL result.
 
 ![Live network map with site and demand-region layers enabled.](images/app-spatial-map.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ## Task 3: Find the closest site for each subscriber
 
@@ -288,27 +265,19 @@ Moon now needs a result that an operations application can use: subscribers insi
     </copy>
     ```
 
-    <!-- capture:CAP-52 -->
-    ![Route Subscribers to the closest site](images/sql-spatial-routing.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
+    ![Subscribers and their nearest active sites](images/sql-spatial-routing.png)
 
     `SDO_GEOM.RELATE` keeps subscribers whose point falls inside or touches the New York Network Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching subscriber to every active site. `ROW_NUMBER` keeps the nearest site for each subscriber.
 
 2. Review the result as an operations decision.
 
-    Subscriber `LOCATION` is the service address supplied in the sample data. Each row gives a operations analyst a subscriber to contact, the closest site, and the information needed to decide where the work should go. The result combines the region's demand score, subscriber details, site capacity, current load, and spatial distance in one SQL result.
+    Subscriber `LOCATION` is the service address supplied in the sample data. Each row gives an operations analyst a subscriber to contact, the closest site, and the information needed to decide where the work should go. The result combines the region's demand score, subscriber details, site capacity, current load, and spatial distance in one SQL result.
 
     A dashboard can use this result to show subscribers in the selected region and the closest network site to each subscriber. The service team can review the location and capacity details together before opening a network-support investigation.
 
-    
-
 3. Change the query to `Chicago Network Region`.
 
-    Compare the subscribers and nearest sites with the New York result. The spatial predicates stay the same; only the region changes. This is the kind of query an operations dashboard can run when a operations analyst selects a different demand region.
-
-    
+    Compare the subscribers and nearest sites with the New York result. The spatial predicates stay the same; only the region changes. This is the kind of query an operations dashboard can run when an operations analyst selects a different demand region.
 
 > **Recommendation boundary:** The query finds the nearest active network site by straight-line distance. It does not establish serving-cell attachment, radio coverage, fiber reach, or available throughput. Check signal measurements, access technology, backhaul, alarms, and current capacity before recommending a service change. `CAPACITY_MBPS` and `UTILIZATION_PCT` are snapshots.
 
@@ -320,7 +289,7 @@ One SQL query finds subscribers by location, joins their records to network site
 
 ## Next Steps
 
-You used Oracle Spatial to turn points and polygons into a routing decision. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+You used points and polygons to find subscribers in a region and nearby sites for the operations team to review. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
