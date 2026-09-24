@@ -43,10 +43,6 @@ In this lab, you will:
 
     [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip)
 
-    The button loads this published release ZIP:
-    
-    [my-ai-staff-oci-stack-v1.0.0.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip).
-
 2. Sign in if prompted. Give the stack a non-sensitive name, select the target
     compartment, select Terraform 1.5.x, and select **Next**.
 3. Supply the required values. Use the following guidance for each field:
@@ -54,9 +50,6 @@ In this lab, you will:
     - **Compartment:** Select the compartment where you want to create the
       workshop resources. If you are using a tenancy provided for this
       workshop, this is usually the assigned or root compartment.
-    - **Tenancy OCID:** Paste your tenancy OCID. In OCI Console, open your
-      profile menu, select **Tenancy**, and copy the value labeled **OCID**. It
-      starts with `ocid1.tenancy...`.
     - **Region:** Select the OCI region where you want to deploy. Use the same
       region selected for the stack and make sure it offers the Always Free ARM
       shape and Autonomous Database 26ai.
@@ -68,50 +61,42 @@ In this lab, you will:
       private address such as `192.168.x.x` or `10.x.x.x`, and do not use
       `0.0.0.0/0`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
+    - **SSH public key:** If you do not already have an SSH key pair, run these commands in a
+       terminal on your computer:
+       ```bash
+       mkdir -p ~/.ssh
+       chmod 700 ~/.ssh
+       ssh-keygen -t ed25519 -f ~/.ssh/my-ai-staff-oci.key -C "my-ai-staff-oci"
+       ```
+       Accept the suggested file path if prompted. The command creates the
+       private key at `~/.ssh/my-ai-staff-oci.key` and the public key at
+       `~/.ssh/my-ai-staff-oci.key.pub`. Protect the private key and never
+       paste or upload it to Resource Manager.
 
-4. Provide the SSH public key:
+        Copy only the public key. On macOS, run:
 
-    - If you do not already have an SSH key pair, run these commands in a
-      terminal on your computer:
+       ```bash
+       pbcopy < ~/.ssh/my-ai-staff-oci.key.pub
+       ```
 
-      ```bash
-      mkdir -p ~/.ssh
-      chmod 700 ~/.ssh
-      ssh-keygen -t ed25519 -f ~/.ssh/my-ai-staff-oci.key -C "my-ai-staff-oci"
-      ```
+       On Linux, you can display it and copy the complete single line manually:
 
-      Accept the suggested file path if prompted. The command creates the
-      private key at `~/.ssh/my-ai-staff-oci.key` and the public key at
-      `~/.ssh/my-ai-staff-oci.key.pub`. Protect the private key and never paste
-      or upload it to Resource Manager.
-    - Copy only the public key. On macOS, run:
+       ```bash
+       cat ~/.ssh/my-ai-staff-oci.key.pub
+       ```
 
-      ```bash
-      pbcopy < ~/.ssh/my-ai-staff-oci.key.pub
-      ```
-
-      On Linux, you can display it and copy the complete single line manually:
-
-      ```bash
-      cat ~/.ssh/my-ai-staff-oci.key.pub
-      ```
-
-      Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
-
+       Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
     - **Autonomous Database ADMIN password:** Create a strong password of at
-      least 12 characters. This is the password for the database `ADMIN` user.
-    - **`AI_FOR_YOU` password:** Create a different strong password of at least
-      12 characters. This is used for the `AI_FOR_YOU` application schema.
+     least 12 characters. This is the password for the database `ADMIN` user.
 
-      Use letters, numbers, and symbols, do not reuse your OCI password, and
-      keep both values in a secure password manager. Resource Manager masks
-      these fields; do not save the passwords in the workshop repository.
-5. Use only a reviewed platform ZIP whose SHA-256 matches `platform_zip_sha256`
-    and which contains `schema/ai_for_you_fresh_ddl.sql`. The previous platform
-    archive contains the reference-only full DDL and must not be used for this
-    release. The default model source is public, but bootstrap verifies its
-    SHA-256 before importing it.
-6. Select **Next**, review the values, leave **Run apply** selected, then
+    - **`AI_FOR_YOU` password:** Create a different strong password of at least
+     12 characters. This is used for the `AI_FOR_YOU` application schema.
+
+     Use letters, numbers, and symbols, do not reuse your OCI password, and
+     keep both values in a secure password manager.
+
+
+5. Select **Next**, review the values, leave **Run apply** selected, then
     select **Create**. Resource Manager starts the apply automatically.
 
 ## Task 2: Monitor Provisioning
@@ -122,7 +107,7 @@ In this lab, you will:
     domain with capacity; the stack deliberately does not fall back to another
     shape or database tier.
 2. Copy the `instance_public_ip`, `ssh_command`, and
-    `autonomous_database_service_name` outputs. No wallet or password is
+    `autonomous_database_service_name` outputs
     displayed as an output.
 3. Follow the bootstrap log until completion. It may take time while packages,
     Python dependencies, the public model, and database initialization finish.
@@ -130,11 +115,7 @@ In this lab, you will:
     ```bash
     sudo tail -f /var/log/my-ai-staff-bootstrap.log
     ```
-
-4. A successful bootstrap creates `/var/lib/my-ai-staff-bootstrap.complete`.
-    If it does not appear, preserve the log and correct the reported failure
-    before moving forward. Do not rerun the manual Lab 1 DDL or Lab 2 runtime
-    installation tasks on this host.
+    A successful bootstrap creates `/var/lib/my-ai-staff-bootstrap.complete`.
 
 ## Task 3: Connect, Validate Packages, and Authenticate Codex
 
