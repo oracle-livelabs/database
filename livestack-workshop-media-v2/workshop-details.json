@@ -87,7 +87,7 @@
     "retained_media_illustrations": 2,
     "svg_illustrations": 7,
     "manual_prose_rating": "4/5 for each reviewed document; scoped editorial judgments",
-    "raw_lanham_scores": "1\u20132/5 retained in VALIDATION-RESULT.md; whole-file algorithm includes SQL, tables, headings and possessives",
+    "raw_lanham_scores": "1\u20132/5 retained in validation-result.md; whole-file algorithm includes SQL, tables, headings and possessives",
     "report": "output/media-loader-alignment/FINAL-QA.md",
     "prose_review": "output/media-loader-alignment/PROSE-REVIEW.md"
   }

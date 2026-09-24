@@ -131,7 +131,7 @@ Open SQL Worksheet as the workshop user before running the media queries. SQL Wo
 
 4. Labs 7 and 8 require an enabled Select AI profile with provider access. Confirm access to `DBMS_CLOUD_AI` and `DBMS_CLOUD_AI_AGENT` with your facilitator. The data loader does not configure those services. The preparation guide includes OCI resource principal setup for `SEER_MEDIA_PROFILE` and the five Media views. Lab 7 checks the profile and granted credential access before testing the provider.
 
-The facilitator can use the [Media platform preparation guide](../MEDIA-PLATFORM-PREPARATION.md). Participants should not rerun the handoff loader: it resets the workshop schema and its data.
+The facilitator can use the [Media platform preparation guide](../media-platform-preparation.md). Participants should not rerun the handoff loader: it resets the workshop schema and its data.
 
 You can now continue to the media labs.
 

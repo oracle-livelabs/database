@@ -53,7 +53,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Check the Select AI profile
 
-An AI profile identifies the provider and the database objects available for questions. Before starting, confirm that the administrator has enabled provider access, granted `EXECUTE` on `DBMS_CLOUD_AI` to `LLUSER`, and created an enabled profile. The [Media platform preparation guide](../MEDIA-PLATFORM-PREPARATION.md) configures `SEER_MEDIA_PROFILE` with an OCI resource principal. It uses the database identity and existing OCI authorization.
+An AI profile identifies the provider and the database objects available for questions. Before starting, confirm that the administrator has enabled provider access, granted `EXECUTE` on `DBMS_CLOUD_AI` to `LLUSER`, and created an enabled profile. The [Media platform preparation guide](../media-platform-preparation.md) configures `SEER_MEDIA_PROFILE` with an OCI resource principal. It uses the database identity and existing OCI authorization.
 
 1. Run this query:
 

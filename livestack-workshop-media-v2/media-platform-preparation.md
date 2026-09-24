@@ -1,8 +1,16 @@
 # Media platform preparation
 
+## Introduction
+
 This facilitator guide documents the supplied handoff loader. It is separate from the participant lab sequence.
 
 Estimated Time: **15–30 minutes**, plus loader execution time.
+
+### Objectives
+
+- Prepare the dedicated Media workshop schema and embedding model.
+- Configure access to Graph Studio, Oracle Machine Learning, and Select AI.
+- Verify the loader data and service prerequisites before participants start.
 
 ## Loader and prerequisites
 

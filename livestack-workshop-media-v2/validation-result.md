@@ -1,5 +1,17 @@
 # LiveLabs Workshop Validation – livestack-workshop-media-v2
 
+## Introduction
+
+This report records the local workshop validation results. The original check did not enforce every repository CI rule; the supporting documents have since been updated to include the required sections and lowercase filenames.
+
+Estimated Time: **5 minutes** to review this report.
+
+### Objectives
+
+- Review the workshop structure and manifest checks.
+- Identify formatting findings and automated prose warnings.
+- Distinguish the recorded local results from the repository CI checks.
+
 Generated on 2026-09-24T20:26:14.434671+00:00
 
 ## Structure Check
@@ -13,7 +25,7 @@ Generated on 2026-09-24T20:26:14.434671+00:00
 - ✅ Manifest structure looks good.
 
 ## Markdown File Ratings
-### MEDIA-PLATFORM-PREPARATION.md
+### media-platform-preparation.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 1/5
   - 6 sentence(s) exceed 20 words; tighten wording.
@@ -104,3 +116,8 @@ Generated on 2026-09-24T20:26:14.434671+00:00
   - Passive voice detected in 1 instance(s).
   - Contractions found; expand them per Lanham rules.
   - Heavy nominalization usage; prefer vivid verbs.
+
+## Acknowledgements
+
+* **Validation** - Local LiveLabs workshop authoring validator; repository formatting requirements checked separately.
+* **Last Updated By/Date** - Workshop maintenance, September 2026
