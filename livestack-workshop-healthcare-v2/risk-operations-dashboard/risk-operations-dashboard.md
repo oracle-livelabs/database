@@ -205,9 +205,9 @@ The query intentionally crosses four data models:
     | --- | ---: | ---: | --- | ---: |
     | Bed Capacity Surge Playbook | 4 | 1 | Hialeah Import Compliance Site | 8.51 miles |
 
-3. Review the result as the care-service data behind Jessica's dashboard. Each row combines operational signals, semantic relevance, request activity, and logistics context. This gives the dashboard a ranked service table and the details an operations user needs when deciding what to review.
+3. Review the result in SQL Worksheet. Each row combines operational signals, semantic relevance, request activity, and logistics context. Confirm that the result includes evidence from all four data models before continuing.
 
-    ![Healthcare Operations Command Center that consumes the governed care operations data](images/product-level-dashboard.png " ")
+    ![SQL Worksheet showing the ranked healthcare service result from the converged query](images/product-level-dashboard.png " ")
 
     Your numbers may be different if the demo data has changed. Each row should include all four types of data.
 
@@ -221,16 +221,21 @@ With separate systems, Jessica would need complex and expensive integration acro
 
 Jessica meets with a care operations analyst to review the results at the data level before she builds the dashboard. They start with services related to **care services facing quality or capacity pressure requiring operational review**. Change the embedded investigation phrase to:
 
+1. Replace the investigation phrase in the `query_vector` section:
 
-```text
-diagnostic service demand and regional logistics capacity
-```
+    ```text
+    diagnostic service demand and regional logistics capacity
+    ```
 
-Run the query again and compare the top rows.
+    ![SQL Worksheet showing the healthcare investigation phrase for diagnostic demand and logistics capacity](images/2026-08-18-004703.png " ")
 
-1. Which care services moved into or out of the top ten?
-2. Which services still have several high-priority signals but a lower semantic similarity to the new question?
-3. Does the active request activity make you more or less concerned about the operational impact?
+2. Run the query again and compare the top rows.
+
+3. Use the result to answer these questions:
+
+    - Which care services moved into or out of the top ten?
+    - Which services still have several high-priority signals but a lower semantic similarity to the new question?
+    - Does the active request activity make you more or less concerned about the operational impact?
 
 The result is ordered by semantic similarity first, so changing the question changes the review queue. High-priority signal count breaks ties. The same governed query can answer a different business question without rebuilding a search index or moving the care-service data.
 

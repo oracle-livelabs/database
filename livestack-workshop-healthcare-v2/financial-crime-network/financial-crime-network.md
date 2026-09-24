@@ -440,23 +440,25 @@ Bob creates a property graph by mapping the relational tables to graph elements.
 
 This statement is provided for reference. `CARE_PATHWAY_GRAPH` has already been created for this workshop, so do not run it again.
 
-```sql
-CREATE PROPERTY GRAPH care_pathway_graph
-  VERTEX TABLES (
-    hc_care_nodes
-      KEY (node_id)
-      LABEL care_node
-      PROPERTIES (node_id, node_type, node_label, risk_score, pathway_volume)
-  )
-  EDGE TABLES (
-    hc_care_edges
-      KEY (edge_id)
-      SOURCE KEY (source_node_id) REFERENCES hc_care_nodes (node_id)
-      DESTINATION KEY (target_node_id) REFERENCES hc_care_nodes (node_id)
-      LABEL care_relationship
-      PROPERTIES (edge_id, relationship_type, evidence_score)
-  );
-```
+1. Review the property graph definition:
+
+    ```sql
+    CREATE PROPERTY GRAPH care_pathway_graph
+      VERTEX TABLES (
+        hc_care_nodes
+          KEY (node_id)
+          LABEL care_node
+          PROPERTIES (node_id, node_type, node_label, risk_score, pathway_volume)
+      )
+      EDGE TABLES (
+        hc_care_edges
+          KEY (edge_id)
+          SOURCE KEY (source_node_id) REFERENCES hc_care_nodes (node_id)
+          DESTINATION KEY (target_node_id) REFERENCES hc_care_nodes (node_id)
+          LABEL care_relationship
+          PROPERTIES (edge_id, relationship_type, evidence_score)
+      );
+    ```
 
 The statement defines the graph structure over the relational tables. `CARE_PATHWAY_GRAPH` can then be queried with `GRAPH_TABLE` while `HC_CARE_NODES` and `HC_CARE_EDGES` remain the source of the data.
 

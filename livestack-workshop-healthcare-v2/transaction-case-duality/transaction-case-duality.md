@@ -467,7 +467,7 @@ Thomas now submits a complete request document with two line items. Oracle appli
     | 990001 | PENDING | Penelope Mendoza | Etna Midwest Specialty Warehouse | 990001 | qPCR Respiratory Panel | 1 | 185.00 | 185.00 |
     | 990001 | PENDING | Penelope Mendoza | Etna Midwest Specialty Warehouse | 990002 | Digital Pathology Slide Batch | 1 | 310.00 | 310.00 |
 
-One document insert created one request row and two related item rows.
+    One document insert created one request row and two related item rows.
 
 3. Update only the request status through JSON.
 
