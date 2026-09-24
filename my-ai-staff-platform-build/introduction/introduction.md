@@ -27,7 +27,7 @@ This workshop assumes you have:
 - A laptop or desktop with a current web browser, an SSH client, and a way to edit remote files. [Visual Studio Code](https://code.visualstudio.com/Download) with the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) is recommended; any equivalent editor and OpenSSH client are also supported. Lab 1 explains when to create or download the SSH key and configure the connection, after the instance receives its public IP.
 - `scp` (included with OpenSSH) or an equivalent browser upload method for transferring the database wallet after the instance is reachable.
 - Access to create and configure a Slack workspace, channels, and apps.
-- An OpenAI account or subscription that can create an API key for `OPENAI_API_KEY`.
+- An OpenAI account or subscription.
 - A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for the workshop identities or OAuth consent flow.
 - Basic Linux administration and shell-command familiarity.
 - Basic familiarity with OCI networking and Oracle Autonomous Database.

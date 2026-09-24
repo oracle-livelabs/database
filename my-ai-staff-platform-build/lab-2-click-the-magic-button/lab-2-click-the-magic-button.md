@@ -47,8 +47,13 @@ In this lab, you will:
     
     [my-ai-staff-oci-stack-v1.0.0.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip).
 
+    ![Accept the Oracle Terms of Use on the Create stack page](images/create-stack-accept-terms.png)
+
 2. Sign in if prompted. Give the stack a non-sensitive name, select the target
     compartment, select Terraform 1.5.x, and select **Next**.
+
+    ![Review the stack information and enter a stack name](images/create-stack-information.png)
+
 3. Supply the required values. Use the following guidance for each field:
 
     - **Compartment:** Select the compartment where you want to create the
@@ -60,6 +65,9 @@ In this lab, you will:
     - **Region:** Select the OCI region where you want to deploy. Use the same
       region selected for the stack and make sure it offers the Always Free ARM
       shape and Autonomous Database 26ai.
+
+    ![Configure the compartment, region, and SSH public key](images/configure-placement-and-ssh-key.png)
+
     - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
       or network you will use to connect, followed by `/32`. To find it, open a
       browser and search for **what is my IP**, or visit a site that displays
@@ -68,6 +76,8 @@ In this lab, you will:
       private address such as `192.168.x.x` or `10.x.x.x`, and do not use
       `0.0.0.0/0`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
+
+    ![Enter the administrator SSH CIDR](images/configure-ssh-cidr.png)
 
 4. Provide the SSH public key:
 
@@ -106,6 +116,9 @@ In this lab, you will:
       Use letters, numbers, and symbols, do not reuse your OCI password, and
       keep both values in a secure password manager. Resource Manager masks
       these fields; do not save the passwords in the workshop repository.
+
+    ![Enter the Autonomous Database and application schema passwords](images/configure-database-passwords.png)
+
 5. Use only a reviewed platform ZIP whose SHA-256 matches `platform_zip_sha256`
     and which contains `schema/ai_for_you_fresh_ddl.sql`. The previous platform
     archive contains the reference-only full DDL and must not be used for this
@@ -113,6 +126,8 @@ In this lab, you will:
     SHA-256 before importing it.
 6. Select **Next**, review the values, leave **Run apply** selected, then
     select **Create**. Resource Manager starts the apply automatically.
+
+    ![Review the advanced stack settings and continue](images/review-advanced-settings.png)
 
 ## Task 2: Monitor Provisioning
 
