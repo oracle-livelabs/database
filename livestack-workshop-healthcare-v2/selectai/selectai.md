@@ -1,14 +1,14 @@
-# Ask Finance Questions with Select AI
+# Ask Healthcare Questions with Select AI
 
 ## Introduction
 
-Nina Patel is a risk analyst at Seer Bank. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
+Nina Patel is a care operations analyst at Seer Health Network. In the previous lab, Otto used Oracle Machine Learning to identify care services and regions with elevated demand risk. Nina now needs to explore those results before the operations team prepares its capacity review.
 
-Jessica, the DBA, has already configured a Select AI profile for the finance schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
+Nina knows the healthcare questions she wants to ask, but she does not want every answer to depend on finding the right view, column, sort order, and row limit first. Jessica, the DBA, has configured a Select AI profile that gives the model focused metadata for the governed healthcare views. Nina can ask a question in ordinary language, then use Select AI to generate SQL, run it, or explain the result.
 
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
+Nina still reviews the generated SQL. The model can misunderstand a question, choose the wrong field, or return a plausible result that does not answer the operational need. Her working pattern is simple: ask, inspect, run, and refine. The database keeps the question, generated SQL, and governed healthcare data connected, while Nina keeps human review in the process.
 
-In this lab, you check the available Select AI profile, ask a finance question, inspect the SQL behind the answer, and improve the question for a more useful business result.
+In this lab, you check the available profile, add the healthcare views Nina needs, inspect the SQL generated from her question, run the approved query, and refine the prompt to produce a more useful capacity-review result.
 
 ![nina](images/nina.png)
 
@@ -21,39 +21,37 @@ In this lab, you check the available Select AI profile, ask a finance question, 
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
-> - A **natural-language prompt** is the question sent to Select AI, such as `Which five products have the highest revenue?`
+> - A **natural-language prompt** is the question sent to Select AI, such as `Which five care services have the highest demand risk?`
 
 </details>
 
 ### Objectives
 
-- Check which Select AI profile is available in the schema.
-- Add the finance tables that Select AI may use to the profile.
-- Generate SQL from a finance question and inspect it.
-- Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
-- Improve a question so the result contains the business details Nina needs.
-- Explain why generated SQL still requires review.
+- Check the Select AI profile available to `LLUSER`.
+- Add the governed healthcare views Nina needs.
+- Inspect and run SQL generated from a healthcare question.
+- Refine the prompt and compare the explanation with the database result.
 
 Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Finance focus                                                                                |
+| Step                | Healthcare focus                                                                             |
 | ---------------------| ----------------------------------------------------------------------------------------------|
-| Business Problem    | Nina needs answers from finance data without writing every query from scratch.               |
-| Technical Challenge | The question must be translated into SQL against the governed finance schema.                |
+| Business Problem    | Nina needs to identify care services and regions that warrant a capacity review.              |
+| Technical Challenge | The question must become reviewable SQL against a focused set of governed healthcare views.  |
 | Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
 | What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
 | Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Outcome             | Nina gets a repeatable way to ask finance questions while keeping SQL review in the process. |
+| Outcome             | Nina gets a repeatable way to ask healthcare questions while keeping SQL review in the process. |
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
 ## Task 1: Check the Select AI profile
 
-Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain a profile for the `LLUSER` schema.
+Before Nina asks a healthcare question, Jessica shows her the control point behind Select AI. The AI profile identifies the configured AI provider and the database objects Select AI may consider when it translates a question into SQL.
 
-1. Run this query:
+1. List the profiles available to `LLUSER`:
 
     ```sql
     <copy>
@@ -65,9 +63,9 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If the query shows a different profile name, use that name in the following tasks.
+    **Expected output:** Find the `GENAI` profile and confirm that its status is `ENABLED`. Nina will use this profile for the questions in this lab.
 
-2. Review the profile attributes:
+2. Review how the profiles are configured:
   
     ```sql
     <copy>
@@ -79,13 +77,15 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
+    The attributes identify the provider, model, region, and database objects associated with each profile. Do not copy credential values. In the next task, Jessica changes only the `object_list` that controls the schema context for Nina's questions.
 
-## Task 2: Add the finance tables to the profile
+    **Expected output:** Review the rows for `GENAI`. You should see the configured provider, model, region, and other profile attributes. The exact provider values depend on the workshop environment.
 
-The profile needs a list of tables that Select AI may use. Nina's questions require product, order, order-line, and customer data, so Jessica adds those four tables to the `GENAI` profile.
+## Task 2: Add the healthcare views to the profile
 
-1. Add the finance tables to the profile:
+Nina wants to ask about care demand, services, quality and capacity signals, and service requests. Jessica narrows the `GENAI` profile to four governed healthcare views that present those facts with business-friendly names.
+
+1. Add the healthcare views to the profile:
 
     ```sql
     <copy>
@@ -93,14 +93,16 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
       DBMS_CLOUD_AI.SET_ATTRIBUTE(
         profile_name    => 'genai',
         attribute_name  => 'object_list',
-        attribute_value => '[{"owner": "' || USER || '", "name": "PRODUCTS"}, {"owner": "' || USER || '", "name": "ORDERS"}, {"owner": "' || USER || '", "name": "ORDER_ITEMS"}, {"owner": "' || USER || '", "name": "CUSTOMERS"}]'
+        attribute_value => '[{"owner": "' || USER || '", "name": "CARE_DEMAND_FORECASTS_V"}, {"owner": "' || USER || '", "name": "CARE_SERVICES_V"}, {"owner": "' || USER || '", "name": "QUALITY_CAPACITY_SIGNALS_V"}, {"owner": "' || USER || '", "name": "CARE_SERVICE_REQUESTS_V"}]'
       );
     END;
     /
     </copy>
     ```
 
-2. Confirm the object list:
+    **Expected output:** The block completes successfully. It changes only the `object_list` for `GENAI`.
+
+2. Confirm the updated object list:
 
     ```sql
     <copy>
@@ -113,123 +115,118 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
-    The result should list `PRODUCTS`, `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
+    **Expected output:** The value lists `CARE_DEMAND_FORECASTS_V`, `CARE_SERVICES_V`, `QUALITY_CAPACITY_SIGNALS_V`, and `CARE_SERVICE_REQUESTS_V`.
+
+    The focused list gives Select AI the healthcare context needed for Nina's questions without exposing unrelated schema objects.
   
     ![task2](images/task2.png)
 
 ## Task 3: Ask a question and inspect the SQL
 
-Nina starts with a simple question: which products have the highest revenue? She first asks Select AI to show the SQL without running it.
+Nina begins with the demand signal from the previous lab. She wants to know which five care services have the highest demand risk, but she first asks Select AI to show the proposed SQL without running it.
 
 Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
 
-1. Run the question with the `GENAI` profile:
+1. Ask the question with the `showsql` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five products have the highest revenue?',
+             prompt       => 'Which five care services have the highest demand risk?',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
-  
-    ![task 3](images/task3.png)
+2. Review the generated SQL before running it.
 
-2. Read the generated SQL before running it.
+    **Expected result:** The statement should query `CARE_DEMAND_FORECASTS_V`, rank the records by demand risk, and limit the result to five rows. The exact SQL can vary by model.
 
-    Check whether the statement uses the expected product and sales data, returns five rows, and calculates revenue in a sensible way. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
+    Nina checks the selected columns, sort order, and row limit. This review lets her catch a plausible SQL statement that does not match the business question before it runs.
 
 ## Task 4: Run the question in the database
 
-Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
+The proposed SQL matches Nina's question, so she asks Select AI to run it against the healthcare views.
 
 1. Run the same question with the `runsql` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five products have the highest revenue?',
+             prompt       => 'Which five care services have the highest demand risk?',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
     </copy>
       ```
-  
-    ![task 4](images/task4.png)
+2. Compare the returned rows with the SQL you inspected in Task 3.
 
-2. Compare the answer with the SQL you inspected in Task 3.
+    **Expected result:** The answer returns five service and region combinations. `mRNA LNP Clinical Batch` in the `Northeast Corridor` should appear first, with predicted demand `2578` and a demand risk factor of `2.06`.
 
-    Select AI has generated and run SQL against the finance schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the finance data.
+    The query runs under the current database user's privileges, and the answer comes from the healthcare data in Oracle AI Database.
 
     > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
 
 ## Task 5: Improve the business question
 
-Nina's first question gives her a product ranking, but she also needs enough detail to decide what to review. She changes the question to request the product category, total revenue, and units sold.
+The first answer identifies the highest-risk services, but Nina needs enough context to prepare a capacity review. She refines the question to request the service name, category, region, predicted demand, and demand risk factor.
 
 1. Use `showsql` to inspect this revised prompt:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
+             prompt       => 'Show the five care services with the highest demand risk. Include the service name, category, region, predicted demand, and demand risk factor.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
-  
-    ![task5](images/task5.png)
-
 2. Review the generated SQL, then run the revised question with `runsql`:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
+             prompt       => 'Show the five care services with the highest demand risk. Include the service name, category, region, predicted demand, and demand risk factor.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
     </copy>
     ```
-  
-    ![task5](images/task52.png)
+3. Compare the first and refined questions.
 
-3. Compare the first and second questions.
+    **Expected result:** The refined answer keeps the five-row ranking and adds the details Nina needs to compare demand pressure across services and regions.
 
-  The second prompt gives Nina a result she can take into a review meeting. The business user did not need to know the table names or write the joins, but Nina still checked the SQL and made the requested columns explicit.
+    Nina did not need to know the view name or write the SQL, but she still inspected the statement and made the required business fields explicit.
 
 ## Task 6: Explain the result
 
-Nina wants a short explanation of the revised result. Select AI can run the SQL and ask the AI provider to describe the returned rows.
+Nina has the detailed rows. She now asks for a short explanation that she can use to open a capacity review conversation.
 
 1. Run the revised question with the `narrate` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five products with the highest revenue. Include the product name, category, total revenue, and units sold.',
+             prompt       => 'Show the five care services with the highest demand risk. Include the service name, category, region, predicted demand, and demand risk factor.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
     </copy>
     ```
-  
-    ![task6](images/task6.png)
+2. Compare the explanation with the SQL result from Task 5.
 
-2. Review the explanation against the SQL result.
+    **Expected result:** The explanation should identify the highest-demand-risk service and summarize the service and region combinations that need attention. Its wording can vary by model.
 
-  The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+    Nina checks every service name and metric against the tabular result. The narrative helps her communicate the finding, while the SQL result remains the repeatable evidence.
 
-  > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
+    > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina used Select AI to turn a finance question into SQL, reviewed the generated statement, ran it in Oracle AI Database, and refined the question when the first result lacked the details she needed. Select AI reduces the amount of SQL a business user has to write, while SQL review keeps the database operation visible.
+Nina used Select AI to turn a healthcare operations question into SQL, reviewed the generated statement, ran it in Oracle AI Database, and refined the question when the first result lacked the details she needed. Select AI reduces the amount of SQL a business user has to write, while SQL review keeps the database operation visible.
 
-This is the practical value of Select AI in Oracle AI Database. The question, generated SQL, and result stay connected to the governed finance schema. Nina can ask in ordinary language, but she does not have to give up database access controls or the ability to inspect the query behind the answer.
+This is the practical value of Select AI in Oracle AI Database. The question, generated SQL, and result stay connected to the governed healthcare views. Nina can ask in ordinary language without giving up database access controls or the ability to inspect the query behind the answer.
 
 Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
 
@@ -239,6 +236,5 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Linda Foinding, Principal Product Manager, Oracle Database Product Management
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026
