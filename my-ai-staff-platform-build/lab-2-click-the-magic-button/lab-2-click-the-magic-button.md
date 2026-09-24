@@ -43,10 +43,6 @@ In this lab, you will:
 
     [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip)
 
-    The button loads this published release ZIP:
-    
-    [my-ai-staff-oci-stack-v1.0.0.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip).
-
     ![Accept the Oracle Terms of Use on the Create stack page](images/create-stack-accept-terms.png)
 
 2. Sign in if prompted. Give the stack a non-sensitive name, select the target
@@ -85,22 +81,10 @@ In this lab, you will:
        `~/.ssh/my-ai-staff-oci.key.pub`. Protect the private key and never
        paste or upload it to Resource Manager.
 
+       Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
+
     ![Enter the administrator SSH CIDR](images/configure-ssh-cidr.png)
 
-4. Provide the SSH public key:
-        Copy only the public key. On macOS, run:
-
-       ```bash
-       pbcopy < ~/.ssh/my-ai-staff-oci.key.pub
-       ```
-
-       On Linux, you can display it and copy the complete single line manually:
-
-       ```bash
-       cat ~/.ssh/my-ai-staff-oci.key.pub
-       ```
-
-       Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
     - **Autonomous Database ADMIN password:** Create a strong password of at
      least 12 characters. This is the password for the database `ADMIN` user.
 
