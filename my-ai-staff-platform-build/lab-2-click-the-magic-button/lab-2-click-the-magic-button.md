@@ -131,9 +131,13 @@ In this lab, you will:
     Python dependencies, the public model, and database initialization finish.
 
     ```bash
+    <copy>
     sudo tail -f /var/log/my-ai-staff-bootstrap.log
+    </copy>
     ```
     A successful bootstrap creates `/var/lib/my-ai-staff-bootstrap.complete`.
+    
+    ![Sudo Tail Validation Terminal Example](images/sudo_tail_validation.png)
 
 ## Task 3: Connect, Validate Packages, and Authenticate Codex
 
