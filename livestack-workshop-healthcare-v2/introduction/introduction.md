@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator at Seer Health Network. Her team is improving care operations, coordinating service requests, investigating quality and capacity signals, routing logistics support, forecasting demand, and adding governed AI to healthcare workflows.
+Jessica Chen is the database administrator at Seer Health Network. Her team is improving care operations, coordinating service requests, investigating quality and capacity signals, routing logistics support, forecasting demand, and adding governed AI to healthcare workflows.
 
 The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team needs to use it in a different way:
 
