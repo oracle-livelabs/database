@@ -2,6 +2,12 @@
 
 Estimated Time: **5 minutes**
 
+## Objectives
+
+- Query connected utility operations data with Oracle AI Database.
+- Use JSON Relational Duality, AI Vector Search, SQL/PGQ, Spatial, and Oracle Machine Learning to investigate service and asset evidence.
+- Review governed Select AI and Select AI Agent patterns for natural-language questions and controlled database tools.
+
 - **Title:** Build Connected Energy and Utilities Solutions with Oracle AI Database
 - **Audience:** Database developers, architects, data engineers, AI engineers, and utility operations technologists
 - **Duration:** 90 minutes
