@@ -1,6 +1,6 @@
 # Phase 1 result: Hospitality LiveLabs workshop
 
-Phase 1 repository transformation is complete, with runtime validation and environment-dependent screenshots explicitly pending. Phase 2 has not started.
+This is the historical Phase 1 transformation record. Runtime validation, environment-dependent screenshots, and LiveLabs green-button provisioning were completed later; current evidence is in `validation/live-validation.md` and `validation/screenshots.md`.
 
 Target: `/Users/mkowalik/Documents/GitHub/oracle-livelabs/database/livestack-workshop-hospitality`
 
@@ -53,9 +53,9 @@ Nine generic raster images and five navigation SVG illustrations were retained. 
 - **PASS: original Phase 1 browser checks.** Introduction, Getting Started and all nine labs loaded with the LiveLabs renderer; task expansion worked; the tenancy route loaded; the worksheet shortcut navigated correctly; notebook links rendered; SQL copying was checked; the quiz returned 7/7 and its SVG badge loaded.
 - **LIMITED: external links.** Direct HTTP checks reached PGQL successfully, but 19 Oracle requests timed out. The browser loaded the actual LiveLabs assets, and Oracle technical references were corroborated through web browsing. Do not interpret this as a full external-link health pass.
 
-Detailed evidence and the rerunnable offline validator are under `validation/`. The browser report is dated evidence of the earlier run; the domain audit records the later checks. No Oracle SQL, PL/SQL, model training, AI call, infrastructure deployment, or Graph Studio import was executed.
+Detailed evidence and the rerunnable offline validator are under `validation/`. The browser report is dated evidence of the earlier run; the domain audit records the later checks. At the end of Phase 1, no Oracle SQL, PL/SQL, model training, AI call, infrastructure deployment, or Graph Studio import had been executed. Those checks were completed during the later live-validation phases.
 
-## Remaining issues and Phase 2 focus
+## Phase 2 acceptance criteria
 
 1. Inspect the Terraform/data-loader ZIP recursively, then reconcile it with the [schema contract](validation/schema-contract.md). No source DDL or loader exists in this Phase 1 reference, so the contract is a proposed implementation boundary, not a deployed schema.
 2. Confirm primary/foreign keys, JSON dates, defaults, derived line totals, reservation-property/date invariants, initial duality permissions, seeded IDs, and rerun behavior. Run every SQL block against Oracle 26ai.
