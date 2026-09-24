@@ -26,43 +26,43 @@ Estimated Time: **3 minutes**
     ```quiz score
     Q: In this workshop, what is an agent?
     - A tool that can take any action without permission.
-    * A role-based helper with a goal, steps, inputs, outputs, boundaries, and a handoff.
     - A password manager for a team.
+    * A role-based helper with a goal, steps, inputs, outputs, boundaries, and a handoff.
     - A database table that stores every conversation.
     > An agent is defined by its job, workflow, boundaries, and handoff. It does not automatically have permission to act outside the conversation.
 
     Q: What is the purpose of a HANDOFF CARD?
-    - To hide work from the owner.
     * To give the next role the task, context, approved sources, constraints, definition of done, and decision status.
+    - To hide work from the owner.
     - To let a role change the instructions of another role.
     - To store passwords for later use.
     > A handoff makes collaboration visible and gives the next role the context it needs without silently expanding scope.
 
     Q: What is the optional plugin step for?
     - To require every participant to build a technical server during the workshop.
-    * To package tested role instructions as reusable skills that can be shared or reused later.
     - To give an agent permission to act outside the conversation without approval.
     - To store every possible document and secret.
+    * To package tested role instructions as reusable skills that can be shared or reused later.
     > The workshop can be completed with role prompts in private chats. Plugin packaging is an optional way to make tested instructions easier to reuse.
 
     Q: Which teammate should usually review a first draft before it is treated as ready?
     - Maya, Coordinator.
-    - Nova, Researcher.
     * Tessa, Reviewer.
+    - Nova, Researcher.
     - Jo, Publisher.
     > Tessa checks accuracy, clarity, inclusion, privacy, and readiness before the owner decides what happens next.
 
     Q: What should a teammate do when it is not sure about a fact or request?
     - Guess so the answer sounds complete.
     - Hide the uncertainty inside a long response.
-    * Add a CONCERNS section that explains the concern, why it matters, what would resolve it, and whether work should continue.
     - Ask for a password.
+    * Add a CONCERNS section that explains the concern, why it matters, what would resolve it, and whether work should continue.
     > A clear concern is better than a confident guess. The owner should be able to see what needs review.
 
     Q: What does useful variation mean in this workshop?
+    * Vary wording, examples, organization, or level of detail while keeping facts, scope, sources, and guardrails stable.
     - Change facts so each answer sounds new.
     - Remove required sources and labels.
-    * Vary wording, examples, organization, or level of detail while keeping facts, scope, sources, and guardrails stable.
     - Use more technical language in every response.
     > Variation should make the result fit the task. It should never change what is known or weaken the safeguards.
 
@@ -75,15 +75,15 @@ Estimated Time: **3 minutes**
 
     Q: What can Jo do in this lab?
     - Publish a message as soon as it has a draft.
-    - Send an email without asking.
     * Prepare a channel-ready draft and release checklist while leaving the final action with the owner.
+    - Send an email without asking.
     - Change a database record.
     > Jo prepares approved work for a channel. Jo does not send, publish, schedule, or change systems in this lab.
 
     Q: Which statement best describes the path from this prototype to Oracle?
+    * Prove the workflow first, then add governed data, durable memory, identity, permissions, logging, and enterprise controls as needed.
     - Prompts alone are a complete security boundary.
     - Every team should copy data into a separate system before testing a workflow.
-    * Prove the workflow first, then add governed data, durable memory, identity, permissions, logging, and enterprise controls as needed.
     - Oracle Cloud Infrastructure is required before a person can define a role.
     > A small prototype helps clarify the use case. Oracle AI Database and Agent Memory can provide a durable, governed foundation when the work grows.
     ```
