@@ -201,4 +201,4 @@ Next, use JSON Relational Duality to expose the same campaign-order data as JSON
 
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

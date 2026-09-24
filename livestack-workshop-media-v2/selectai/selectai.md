@@ -300,4 +300,4 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

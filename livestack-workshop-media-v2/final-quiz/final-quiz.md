@@ -77,4 +77,4 @@ Estimated Time: **3 minutes**
 
 * **Authors** - Pat Shepherd, Linda Foinding
 * **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

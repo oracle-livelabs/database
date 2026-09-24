@@ -354,4 +354,4 @@ The dashboard query combines model scores with content details under the databas
 
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

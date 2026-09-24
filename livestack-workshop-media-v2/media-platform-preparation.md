@@ -73,4 +73,4 @@ Capture Database Actions, Graph Studio, OML, and Select AI screenshots against t
 ## Acknowledgements
 
 * **Source** - User-supplied Media platform handoff loader and Oracle LiveLabs workshop.
-* **Last Updated By/Date** - Workshop maintenance, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

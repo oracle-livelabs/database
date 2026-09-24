@@ -120,4 +120,4 @@ Generated on 2026-09-24T20:26:14.434671+00:00
 ## Acknowledgements
 
 * **Validation** - Local LiveLabs workshop authoring validator; repository formatting requirements checked separately.
-* **Last Updated By/Date** - Workshop maintenance, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

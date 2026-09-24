@@ -264,4 +264,4 @@ The search turns a plain-language question into ranked content assets. Relationa
 
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026

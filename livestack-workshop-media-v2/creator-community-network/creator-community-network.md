@@ -408,4 +408,4 @@ The statement defines a property graph over the relational tables. `GRAPH_TABLE`
 
 * **Author** - Kevin Lazarz, Linda Foinding
 * **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Last Updated By/Date** - Vahn Kessler, September 2026
