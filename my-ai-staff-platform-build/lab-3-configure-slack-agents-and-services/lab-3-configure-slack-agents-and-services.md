@@ -22,8 +22,7 @@ In this lab, you will:
 - Laptop editor access through VS Code Remote - SSH or an equivalent editor connected to the OCI instance; you will edit protected agent environment files on the instance.
 - A Slack account and a workshop Slack workspace. You can use an existing workspace where you can create channels and install internal apps, or create a new workspace at [Slack: Create a workspace](https://slack.com/get-started#/createnew).
 - Permission to create channels and install custom Slack apps. If your organization restricts app installation, ask a Workspace Owner or app manager to approve the seven internal apps you create in this lab.
-- An OpenAI account
-- Database connection values, Slack tokens, channel IDs, and deployment owner member ID.
+- Database connection values, Slack workspace ID, Slack tokens, channel IDs, and deployment owner member ID.
 
 ## Task 1: Prepare Slack, Create Channels, and Capture IDs
 
@@ -415,9 +414,9 @@ In this lab, you will:
 
     ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
-12. Invite each bot to all listed channels. A manifest grants scopes but does not grant membership; without membership, Slack does not deliver channel messages and file upload can fail with `not_in_channel`.
+12. Invite each bot to the channels listed for its role in the table in step 2. A manifest grants scopes but does not grant channel membership; without membership, Slack does not deliver channel messages and file uploads can fail with `not_in_channel`.
 
-13. In your shell, export the Assistant Agent bot token temporarily, then obtain its bot ID and record it as `ASSISTANT_BOT_ID`. It is the only bot allowlisted to issue specialist-agent commands.
+13. In your shell, export the Assistant Agent bot token temporarily, then run `auth.test`. Record `team_id` as `SLACK_WORKSPACE_ID` and `bot_id` as `ASSISTANT_BOT_ID`. The Assistant Agent is the only bot allowlisted to issue specialist-agent commands.
 
     ```
     <copy>
@@ -427,6 +426,11 @@ In this lab, you will:
     unset ASSISTANT_BOT_TOKEN
     </copy>
     ```
+
+    In the command output, use these fields:
+
+    - `team_id`: save as `SLACK_WORKSPACE_ID`.
+    - `bot_id`: save as `ASSISTANT_BOT_ID`.
 
 14. Record the deployment owner's member ID as `SLACK_ASSISTANT_USER_ID`; the Assistant Agent uses it for reminders and privileged routing.
 
@@ -444,17 +448,43 @@ In this lab, you will:
     </copy>
     ```
 
-2. Populate `.env.shared` with `ADB_DSN`, `ADB_USER`, `ADB_PASSWORD`, `ADB_WALLET_DIR`, `ASSISTANT_BOT_ID`, and `OPENAI_API_KEY`. Use the database values from Lab 1.
+2. Open `.env.shared` with VS Code Remote - SSH or a terminal editor. If you use the terminal, run:
 
-    ```
+    ```bash
     <copy>
-    ADB_USER=ADMIN
-    ADB_PASSWORD=<admin-database-password>
-    ADB_WALLET_DIR=/home/opc/oracle/wallet
+    nano .env.shared
     </copy>
     ```
 
-    `ADB_PASSWORD` must be the Autonomous Database `ADMIN` password. It must also match the wallet passphrase from Lab 1. `AI_FOR_YOU` is the application schema, but the runtime connects as `ADMIN` and sets `CURRENT_SCHEMA=AI_FOR_YOU` automatically. The OpenAI key is required by the core visual-generation preflight. Add SMTP and AI Staff channel values only when those optional integrations are enabled.
+    Replace the template placeholders with the database values from Lab 1 and the Slack values collected in Tasks 1 and 2. Keep the API defaults already present in the template.
+
+    ```
+    <copy>
+    ADB_DSN=<adb-low-service-name-from-tnsnames.ora>
+    ADB_USER=ADMIN
+    ADB_PASSWORD=<admin-database-password>
+    ADB_WALLET_DIR=/home/opc/oracle/wallet
+    USER_NAME=<deployment-owner-name>
+    ASSISTANT_TIMEZONE=<iana-time-zone>
+    SLACK_WORKSPACE_ID=<workspace-id-starting-with-T>
+    ASSISTANT_BOT_ID=<assistant-bot-id-starting-with-B>
+    SLACK_ASSISTANT_USER_ID=<deployment-owner-member-id-starting-with-U>
+    SLACK_START_PIPELINE_CHANNEL=<content-start-channel-id>
+    SLACK_CONTROL_CHANNEL=<content-runs-channel-id>
+    SLACK_INTERNAL_CHANNEL=<content-internal-channel-id>
+    SLACK_CREATIVE_CHANNEL=<creative-studio-channel-id>
+    SLACK_PUBLISHING_CHANNEL=<publishing-channel-id>
+    SLACK_DATA_CHANNEL=<data-channel-id>
+    SLACK_OPS_CHANNEL=<ops-channel-id>
+    SLACK_ERRORS_CHANNEL=<errors-channel-id>
+    SLACK_PERSONAL_CHANNEL=<personal-channel-id>
+    SLACK_IDEAS_CHANNEL=<ideas-channel-id>
+    AISTAFF_SLACK_INBOX_CHANNEL=<inbox-channel-id>
+    AISTAFF_SLACK_BRIEFING_CHANNEL=<briefing-channel-id>
+    </copy>
+    ```
+
+    For this workshop, use the Autonomous Database `ADMIN` password as the wallet passphrase in Lab 1 and as `ADB_PASSWORD` here. `AI_FOR_YOU` is the application schema, but the runtime connects as `ADMIN` and sets `CURRENT_SCHEMA=AI_FOR_YOU` automatically. Leave external-service credentials blank until Lab 4.
 
 3. Define all generic display names in `.env.shared`. This is required because the current runtime loads `.env.shared` first, then loads each agent-specific `.env`; do not set competing `*_BOT_NAME` values in the per-agent files.
 
@@ -470,9 +500,29 @@ In this lab, you will:
     </copy>
     ```
 
-4. Use the current token names for a new deployment: `ASSISTANT_*`, `CONTENT_*`, `CREATIVE_*`, `BRAND_*`, `DATA_*`, `OPS_*`, and `PUBLISH_*`.
+4. Add each app's `xoxb-...` bot token and `xapp-...` app token to its agent-specific file. Content Agent and Creative Agent share `agents/pipeline/.env`.
 
-5. Set the same channel ID wherever it is shared. For example, `SLACK_PUBLISHING_CHANNEL` is used by pipeline, assistant, and publish.
+    | Environment file | Required variables |
+    | --- | --- |
+    | `agents/assistant/.env` | `ASSISTANT_BOT_TOKEN`, `ASSISTANT_APP_TOKEN` |
+    | `agents/pipeline/.env` | `CONTENT_BOT_TOKEN`, `CONTENT_APP_TOKEN`, `CREATIVE_BOT_TOKEN`, `CREATIVE_APP_TOKEN` |
+    | `agents/brand-agent/.env` | `BRAND_BOT_TOKEN`, `BRAND_APP_TOKEN` |
+    | `agents/data/.env` | `DATA_BOT_TOKEN`, `DATA_APP_TOKEN` |
+    | `agents/ops/.env` | `OPS_BOT_TOKEN`, `OPS_APP_TOKEN` |
+    | `agents/publish/.env` | `PUBLISH_BOT_TOKEN`, `PUBLISH_APP_TOKEN` |
+
+    Open the files with VS Code Remote - SSH, or use this terminal command:
+
+    ```bash
+    <copy>
+    for env_file in agents/assistant/.env agents/pipeline/.env \
+      agents/brand-agent/.env agents/data/.env agents/ops/.env agents/publish/.env; do
+      nano "$env_file"
+    done
+    </copy>
+    ```
+
+5. Save the files. In `nano`, press **Ctrl+O**, **Enter**, and then **Ctrl+X**. Channel IDs belong only in `.env.shared`; do not duplicate them in the agent-specific files.
 
 6. Restrict access and label every environment file for SELinux.
 
@@ -488,15 +538,24 @@ In this lab, you will:
     </copy>
     ```
 
+7. Validate the environment files before continuing. The command checks required shared values, agent tokens, file ownership, and permissions without requiring the Google or Cloudflare credentials configured in Lab 4.
+
+    ```bash
+    <copy>
+    python3 scripts/validate_config.py --env-only
+    </copy>
+    ```
+
 ## Task 4: Configure the Content Kit Runtime
 
-The current runtime uses the local Codex plugin. The Content Kit configuration stores machine-specific paths and feature flags only. Never store API keys, OAuth tokens, passwords, or other secrets in this file.
+The Content Kit configuration stores machine-specific paths and feature flags only. Never store API keys, OAuth tokens, passwords, or other secrets in this file.
 
 1. Create the Content Kit configuration
 
-    Run these commands from the repository root:
+    Run:
 
     ```bash
+    <copy>
     cd /home/opc/livelabs-ai-staff
 
     export CONTENTKIT_CONFIG=/home/opc/.codex/contentkit/config.json
@@ -508,21 +567,31 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
       "$CONTENTKIT_CONFIG"
 
     chmod 600 "$CONTENTKIT_CONFIG"
+    </copy>
     ```
 
     The `export` command is only required for the current shell when using the default path. Systemd services running as user `opc` use the same default path automatically. If a different configuration path is used, `CONTENTKIT_CONFIG` must also be defined in the environment of every service that invokes Content Kit scripts.
 
-2. Edit the configuration
+2. Edit the configuration file
 
-    Open the configuration file:
+    If you are connected with VS Code Remote - SSH, open this file from the VS Code Explorer:
 
-    ```bash
-    vi "$CONTENTKIT_CONFIG"
+    ```text
+    /home/opc/.codex/contentkit/config.json
     ```
 
-    Replace its contents with valid, strict JSON. Do not include `//` comments or the words `Copy` or `Copymkdir` from rendered documentation.
+    If you are using the terminal, open it with `nano`:
+
+    ```bash
+    <copy>
+    nano "$CONTENTKIT_CONFIG"
+    </copy>
+    ```
+
+    Replace the full file with the JSON below. Keep it as strict JSON: do not include `//` comments or the words `Copy` or `Copymkdir` from rendered documentation. In `nano`, press **Ctrl+O**, **Enter**, and then **Ctrl+X** to save and exit.
 
     ```json
+    <copy>
     {
       "base_dir": "/home/opc/livelabs-ai-staff",
       "python": "/home/opc/notebooklm-venv/bin/python3.12",
@@ -559,9 +628,10 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
         "mcp_path": "~/.codex/substack-mcp"
       }
     }
+    </copy>
     ```
 
-    Replace the following values for the specific deployment:
+    Update only these values when they differ from your deployment:
 
     - `base_dir`: the absolute path of the repository.
     - `python`: the Python 3.12 interpreter that has Pillow and numpy installed.
@@ -569,34 +639,38 @@ The current runtime uses the local Codex plugin. The Content Kit configuration s
     - `paths.content_strategy`: the active deployment's content strategy.
     - `headshot`: the deployment's actual headshot file.
 
+    The `notebooklm-venv` directory name is historical. In this workshop, it is the Python 3.12 runtime used by Content Kit scripts. The Brand Agent creates the user strategy files in Lab 5. Add the deployment headshot before running a workflow that generates personalized images.
 
 3. Verify the Content Kit configuration
 
     First confirm that the file is strict JSON:
 
     ```bash
+    <copy>
     python3 -m json.tool "$CONTENTKIT_CONFIG" >/dev/null
+    </copy>
     ```
 
-    Verify the configured interpreter and important files:
+    Verify the configured interpreter and fonts. Do not check the user strategy or headshot yet; those are added after this lab.
 
     ```bash
+    <copy>
     test -x /home/opc/notebooklm-venv/bin/python3.12
     test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf
     test -f /usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf
-    test -f /home/opc/livelabs-ai-staff/strategy/headshots/active-headshot.png
+    echo "Content Kit prerequisites are available"
+    </copy>
     ```
 
     The configuration file must remain private:
 
     ```bash
+    <copy>
     chmod 600 "$CONTENTKIT_CONFIG"
+    </copy>
     ```
 
-The Content Kit configuration is now prepared for Lab 5, when the services are
-activated after Google OAuth and the external integrations are complete.
-Historical references to `~/.claude`, `~/.claude/skills`, or NotebookLM should
-not be used in a fresh deployment.
+The Content Kit configuration is now prepared for Lab 5, when the services are activated after Google OAuth and the external integrations are complete. Historical references to `~/.claude` or `~/.claude/skills` should not be used in a fresh deployment.
 
 ## Acknowledgements
 

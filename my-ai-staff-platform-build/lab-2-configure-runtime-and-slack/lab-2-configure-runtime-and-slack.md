@@ -80,7 +80,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 2: Download the Platform ZIP, Install Its Codex Plugin, and Build Virtual Environments
+## Task 2: Download the Platform ZIP, Install Its Codex Skills, and Build Virtual Environments
 
 1. Download the supplied platform ZIP and extract it into your home directory. The archive already contains the complete `livelabs-ai-staff/` directory; it is not a Git repository, so do not run `git clone` or expect a repository remote. Use `~/livelabs-ai-staff`; the service units co-located with the agents use this path.
 
@@ -93,20 +93,29 @@ In this lab, you will:
     cd ~/livelabs-ai-staff
     mkdir -p posts pending-posts
     test -f schema/ai_for_you_fresh_ddl.sql
-    test -f .agents/plugins/marketplace.json
+    test -d plugins/livelabsagentic-skills/skills
     find . -maxdepth 1 -type d -print | sort
     </copy>
     ```
 
-2. Install the ZIP's included local Codex skills plugin from the repository root, then start a new Codex session so the skills list refreshes. The marketplace file registers the plugin as `livelabsagentic-skills@personal`. The database schema was completed in Lab 1; do not return to Lab 1 or run the DDL again.
+2. Copy the included Codex skills into your personal skills directory.
 
     ```
     <copy>
-    cd ~/livelabs-ai-staff
-    codex plugin marketplace add .agents/plugins
-    codex plugin add livelabsagentic-skills@personal
+    mkdir -p ~/.codex/skills
+    cp -a /home/opc/livelabs-ai-staff/plugins/livelabsagentic-skills/skills/. ~/.codex/skills/
     </copy>
     ```
+
+    Verify that Codex can find the copied skill definitions:
+
+    ```
+    <copy>
+    find ~/.codex/skills -maxdepth 2 -name SKILL.md | wc -l
+    </copy>
+    ```
+
+    The command must return a value greater than `0`. Start a new Codex session after the copy so the skills list refreshes. The database schema was completed in Lab 1; do not return to Lab 1 or run the DDL again.
 
     The next steps create Python virtual environments that systemd services run later in Lab 5. Oracle Linux uses SELinux to enforce extra access controls beyond standard Linux permissions. The `chcon`, `semanage fcontext`, and `restorecon` commands label only the virtual-environment executable directories as `bin_t`, so systemd can execute the Python interpreters inside those directories.
 

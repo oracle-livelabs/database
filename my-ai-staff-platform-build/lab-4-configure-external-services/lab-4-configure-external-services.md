@@ -93,9 +93,19 @@ In this lab, you will:
 
     ![Finish Google OAuth project configuration](./images/16-google-auth-finish-configuration.jpeg "Finish Google OAuth project configuration")
 
-18. In Google Auth Platform, open **Audience**. Under **Test users**, select **Add users**. Add the Gmail account that will authorize AI Staff and save the change. Keep this account listed while the app remains in Testing mode.
+18. In Google Auth Platform, open **Audience**. Under **Test users**, select **Add users**.
+
+    ![Open Audience and select Add users](./images/27-google-auth-open-audience-test-users.jpeg "Open Audience and select Add users")
+
+    Enter the workshop Gmail address and select **Save**. Keep this account listed while the app remains in Testing mode.
+
+    ![Add and save the Google OAuth test user](./images/28-google-auth-add-test-user.jpeg "Add and save the Google OAuth test user")
 
 19. Open **Data Access**, select **Add or remove scopes**, and add the four scopes below. You must declare the same permissions that `setup_google.py` requests.
+
+    ![Open Data Access in Google Auth Platform](./images/29-google-auth-open-data-access.jpeg "Open Data Access in Google Auth Platform")
+
+    ![Select Add or remove scopes](./images/30-google-auth-add-remove-scopes.jpeg "Select Add or remove scopes")
 
     ```text
     <copy>
@@ -106,7 +116,11 @@ In this lab, you will:
     </copy>
     ```
 
-    Save the scope selection. These permissions support Gmail processing, calendar availability and events, and delivery to the approved Drive root.
+    Paste the values under **Manually add scopes**, one scope per line. Select **Add to table**, verify the four scopes, and select **Update**.
+
+    ![Manually add the required Google OAuth scopes](./images/31-google-auth-manually-add-scopes.jpeg "Manually add the required Google OAuth scopes")
+
+    These permissions support Gmail processing, calendar availability and events, and delivery to the approved Drive root.
 
 20. Return to **Overview** and select **Create OAuth client**.
 
@@ -239,7 +253,7 @@ In this lab, you will:
     ```
 
 
-## Task 4: Validate the External-Service Handoff
+## Task 3: Validate the External-Service Handoff
 
 1. Validate the external configuration before activating services.
 

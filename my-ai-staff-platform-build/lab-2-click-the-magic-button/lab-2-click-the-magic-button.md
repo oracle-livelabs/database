@@ -100,7 +100,7 @@ In this lab, you will:
 
     - **Autonomous Database ADMIN password:** Create a strong password of at
       least 12 characters. This is the password for the database `ADMIN` user.
-    - **AI_FOR_YOU password:** Create a different strong password of at least
+    - **`AI_FOR_YOU` password:** Create a different strong password of at least
       12 characters. This is used for the `AI_FOR_YOU` application schema.
 
       Use letters, numbers, and symbols, do not reuse your OCI password, and

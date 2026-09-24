@@ -1,6 +1,6 @@
 # LiveLabs Workshop Validation – my-ai-staff-platform-build
 
-Generated on 2026-09-23T16:06:27.435789+00:00
+Generated on 2026-09-24T00:21:10.889780+00:00
 
 ## Structure Check
 - ✅ Required folders and workshop variants present.
@@ -41,10 +41,9 @@ Generated on 2026-09-23T16:06:27.435789+00:00
 
 ### lab-2-configure-runtime-and-slack/lab-2-configure-runtime-and-slack.md
 - ✅ LiveLabs formatting checks passed.
-- ✍️ Lanham score: 1/5
-  - 19 sentence(s) exceed 20 words; tighten wording.
+- ✍️ Lanham score: 2/5
+  - 18 sentence(s) exceed 20 words; tighten wording.
   - Passive voice detected in 4 instance(s).
-  - Contractions found; expand them per Lanham rules.
   - Heavy nominalization usage; prefer vivid verbs.
 
 ### lab-3-configure-slack-agents-and-services/lab-3-configure-slack-agents-and-services.md
@@ -58,7 +57,7 @@ Generated on 2026-09-23T16:06:27.435789+00:00
 ### lab-4-configure-external-services/lab-4-configure-external-services.md
 - ✅ LiveLabs formatting checks passed.
 - ✍️ Lanham score: 3/5
-  - 9 sentence(s) exceed 20 words; tighten wording.
+  - 11 sentence(s) exceed 20 words; tighten wording.
   - Heavy nominalization usage; prefer vivid verbs.
 
 ### lab-5-connect-services-and-verify/lab-5-connect-services-and-verify.md
