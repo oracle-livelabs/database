@@ -2,8 +2,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Thomas Brune develops guest applications at Seer Hotels. His team needs reservation documents that match its web and mobile screens and reduce calls to the database.
 
 Thomas wants each JSON document to group guest and property IDs, stay dates, status, nightly charges, and optional app fields. He needs to change the document as the application grows while keeping relational keys, SQL access, transactions, and database controls.
@@ -199,9 +197,9 @@ Thomas now tests the document shape his application can consume directly.
     </copy>
     ```
 
-    ![Live hospitality result — duality document](images/sql-duality-document.jpg)
+    ![SQL Worksheet result — duality document](images/sql-duality-document.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     **Expected output:**
 
@@ -291,9 +289,9 @@ The existing `RESERVATIONS_DV` lets an application update reservation documents.
     </copy>
     ```
 
-    ![Live hospitality result — duality contract](images/sql-duality-contract.jpg)
+    ![SQL Worksheet result — duality contract](images/sql-duality-contract.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     **Expected output: Document Capabilities Enabled**
 
@@ -409,9 +407,9 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
     </copy>
     ```
 
-    ![Live hospitality result — duality confirmed](images/sql-duality-confirmed.jpg)
+    ![SQL Worksheet result — duality confirmed](images/sql-duality-confirmed.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     **Expected output: Updated Reservation Rows**
 
@@ -441,13 +439,13 @@ Thomas has checked that the application can display and update a document. Jessi
     </copy>
     ```
 
-    ![Live hospitality result — duality projection](images/sql-duality-projection.jpg)
+    ![SQL Worksheet result — duality projection](images/sql-duality-projection.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     **Expected output: JSON Field Projection**
 
-    Compare reservation ID 900001, status `confirmed`, and the loaded guest email with the following relational query. The live captures below show these sample-data checks against the workshop database.
+    Compare reservation ID 900001, status `confirmed`, and the loaded guest email with the following relational query.
 
 2. Run the equivalent query against the relational tables.
 
@@ -463,9 +461,9 @@ Thomas has checked that the application can display and update a document. Jessi
     </copy>
     ```
 
-    ![Live hospitality result — duality relational](images/sql-duality-relational.jpg)
+    ![SQL Worksheet result — duality relational](images/sql-duality-relational.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     
 
