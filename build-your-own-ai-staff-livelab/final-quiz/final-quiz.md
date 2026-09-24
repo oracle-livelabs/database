@@ -90,7 +90,7 @@ Estimated Time: **3 minutes**
 
 2. When you achieve the passing score, the workshop displays your completion result.
 
-## Closing Reflection
+## Task 2: Complete The Closing Reflection
 
 Return to the questions from the beginning:
 
@@ -101,9 +101,9 @@ So now, can you tell me what an agent is?
 
 Your answer should include four ideas: a clear job, a repeatable set of steps, boundaries that keep a person in control, and a handoff that helps the next role contribute.
 
-## Keep Going
+## Task 3: Continue Learning
 
-Follow [Angela Wall](https://www.linkedin.com/in/angela-l-wall) and [Kay Malcolm](https://www.linkedin.com/in/kaymalcolm/) for the live follow-up class.
+1. Follow [Angela Wall](https://www.linkedin.com/in/angela-l-wall) and [Kay Malcolm](https://www.linkedin.com/in/kaymalcolm/) for the live follow-up class.
 
 Continue exploring:
 
@@ -111,7 +111,7 @@ Continue exploring:
 - [Oracle AI Database](https://www.oracle.com/database/)
 - [Oracle AI Agent Memory](https://docs.oracle.com/en/database/oracle/agent-memory/)
 
-## For Additional Functionality: Package Your AI Staff As A Plugin
+## Task 4: Package Your AI Staff As A Plugin
 
 You do not need a plugin to complete this workshop. Once your role prompts and handoffs have been tested, you can package the instructions as reusable skills in one private plugin.
 
@@ -129,7 +129,9 @@ Learn more:
 - [OpenAI plugin architecture](https://developers.openai.com/plugins/concepts/plugins)
 - [OpenAI skills](https://developers.openai.com/plugins/concepts/skills)
 
-## Why This Matters After The Workshop
+## Task 5: Plan What Comes After The Workshop
+
+1. Review how this workshop pattern can support a larger workflow.
 
 This workshop is about more than creating helpers. It is about getting more done, staying organized, making repeat work easier, and giving yourself time back for the decisions and relationships that need you.
 

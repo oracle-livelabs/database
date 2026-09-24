@@ -88,9 +88,9 @@ Estimated Workshop Time: **55 minutes**
 | Run The Staff Together | Pass work from role to role. | A tested handoff chain. |
 | Final Quiz | Review the design and optional packaging path. | A completion result and next step. |
 
-## Start The Lab
+## Task 1: Start The Lab
 
-Continue to [Getting Started](../getting-started/getting-started.md) to open ChatGPT and prepare the Staff Room.
+1. Continue to [Getting Started](../getting-started/getting-started.md) to open ChatGPT and prepare the Staff Room.
 
 ## Acknowledgements
 
