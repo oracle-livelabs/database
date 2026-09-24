@@ -1,270 +1,313 @@
-# Build a JSON Application Model
+# Build a JSON Care Service Request Model
 
 ## Introduction
 
-Thomas Brune is an application developer at Seer Bank. He and his team are building a new web and mobile application for customers. The team wants a faster customer experience, with fewer round trips and payloads that match the screens and services they are building.
+Thomas Brune is an application developer at Seer Health Network. His team is building an operational application that helps care coordinators review service requests, logistics assignments, costs, demand indicators, and requested services. The team wants a faster experience with fewer round trips and payloads that match the screens and services they are building.
 
-Thomas needs transaction data as a JSON payload that a web or mobile application can consume directly. One payload can group account details, transaction status, line items, and optional app-specific attributes. JSON lets him evolve that payload as the product changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
+Thomas needs each care service request as one JSON payload that the application can consume directly. One document can group the request status, care site, logistics site, operational values, and nested line items. The data already lives in Oracle AI Database, so his challenge is to provide an application-friendly document without giving up relational keys, constraints, joins, transactions, and database controls.
 
-Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of customer data.
+Thomas asks Jessica Chen, the DBA, to compare three ways to work with JSON in Oracle AI Database. They begin with a JSON value in a relational table, continue with an application-owned JSON collection, and then use a JSON Relational Duality View over the existing healthcare request tables. The goal is to choose the right approach for each application feature without creating a second copy of governed healthcare data.
 
 ![thomas](images/thomas.png)
 
 <details>
 <summary><strong>Key terms: JSON columns, JSON collections, and JSON Relational Duality</strong></summary>
 
-> - A **JSON column** stores a JSON value in a relational table alongside normal typed columns, keys, and constraints. Thomas can use it for optional or changing application attributes without turning every new attribute into a schema change.
+> - A **JSON column** stores a JSON value in a relational table alongside typed columns, keys, and constraints. Thomas can use it for optional application attributes that may change independently of the core request schema.
 >
-> - A **JSON collection** is a special table or view that provides a set of JSON documents through one `JSON`-typed `DATA` column. Each document can have a top-level `_id` used to identify it.
+> - A **JSON collection** stores application-owned documents in a `JSON`-typed `DATA` column. Each document has a string `_id`, and an ETAG can help an application detect conflicting updates.
 >
-> - **JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape Thomas wants for its API. The database keeps the relational rows and controls.
->
+> - **JSON Relational Duality** exposes existing relational rows as application-ready JSON documents without creating a second copy. The application works with a complete request document while the database retains normalized request and line-item rows.
 
 </details>
 
-Thomas's application needs a payload with the transaction and its line items together, such as this:
+Thomas's application needs a payload with the request and its line items together, such as this example from the provided healthcare data:
 
 ```json
 {
-  "_id": 513063,
-  "customerId": 687,
-  "status": "confirmed",
-  "items": [
-    { "productId": 1, "quantity": 2, "unitPrice": 12.50 }
+  "_id": 170104,
+  "requestingCareSiteId": 1002,
+  "requestStatus": "DELIVERED",
+  "lineItems": [
+    {
+      "lineItemId": 4,
+      "serviceSupplyId": 8,
+      "quantity": 1,
+      "unitCost": 310
+    }
   ]
 }
 ```
 
-The application uses this document shape, while the database keeps the transaction and line items in relational form. In this lab, you build and read this type of payload in three ways.
+The application uses this document shape, while Oracle Database keeps the request and its line items in relational form. In this lab, you work with application JSON in three ways and decide which approach fits each requirement.
+
+![Healthcare service-request page](images/healthcare-service-request.png " ")
 
 ### Objectives
 
-- Store flexible application attributes as JSON in a relational table.
-- Create and query a JSON Collection Table of transaction documents.
-- Read and update relational transaction data through `ORDERS_DV`.
-- Compare the three JSON approaches and choose the right one for an application feature.
+- Store flexible application attributes as JSON.
+- Create and query a JSON Collection Table.
+- Read, create, and update a care service request through `CARE_SERVICE_REQUESTS_DV`.
+- Compare the three JSON approaches.
 
-Estimated Time: **10 minutes**
+Estimated Time: **20 minutes**
 
 ### Hands-on Scenario
 
-| Step | Finance focus |
+| Step | Healthcare focus |
 | --- | --- |
-| Business Problem | Thomas's team needs flexible JSON payloads for a new customer web and mobile application. |
-| Technical Challenge | The team needs application-friendly documents while the database keeps relational keys, joins, and controls. |
-| Persona Focus | Thomas tests JSON storage, collections, and duality with Jessica's database guidance. |
-| What You Will See | One Oracle AI Database supports several JSON access patterns over the finance data. |
-| Database Capability | Native JSON, SQL/JSON functions, and JSON Relational Duality work together. |
-| Outcome | Thomas can choose an application shape without creating a second customer-data store. |
+| Business Problem | A care operations application and database users need the same service request in different shapes. |
+| Technical Challenge | A separate document copy could drift from the governed request and line-item rows. |
+| Persona Focus | Thomas builds the application document while Jessica protects the relational model and write contract. |
+| What You Will See | One Oracle AI Database supports three JSON patterns over healthcare application data. |
+| Database Capability | Native JSON, JSON Collection Tables, SQL/JSON, and JSON Relational Duality work together. |
+| Outcome | The application receives a complete JSON request while operations teams retain SQL access to the same governed facts. |
 
-Persona focus: You are Thomas, working with Jessica to decide how the new application should store, assemble, and read customer transaction data.
+Persona focus: You are Thomas Brune, working with Jessica Chen to decide how the care operations application should store, assemble, and update service-request documents.
 
 ### Thomas's three JSON choices
 
-Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes in a relational table. A JSON Collection Table holds documents owned by the application. A duality view assembles a document from existing relational tables. Thomas uses the document shape in the application, while Jessica works with the underlying rows using SQL.
+Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes beside a relational request key. A JSON Collection Table stores documents owned by the application. A duality view assembles a document from existing relational request and item tables.
 
-This keeps the transaction in one database and avoids complex, expensive integration between separate systems. Thomas gets the document shape his application needs, and Jessica keeps the relational rows, SQL access, and database controls.
+This keeps the request in one database and avoids complex and expensive integration between separate systems. Thomas gets the document shape his application needs, while Jessica keeps the relational rows, SQL access, constraints, transactions, and database controls.
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide on how to run SQL statements.
 
 ## Task 1: Store flexible application data as JSON
 
-Thomas starts with data that belongs to the application but does not need its own relational columns. The workshop database already contains the transaction rows. He adds a small application-data table with a native `JSON` column for optional screen and customer-experience settings.
+Thomas starts with settings that belong to the application but do not need dedicated columns in the core request table. He creates a small relational table with a native `JSON` column and links its payload to existing request `170104`.
 
-1. Create the application-data table and add one sample payload.
+1. Create the application-data table and add one settings payload.
+
+    `DROP TABLE IF EXISTS` makes this demonstration object safe to recreate when you repeat the lab. It does not alter the provided healthcare tables.
 
     ```sql
     <copy>
-    CREATE TABLE thomas_app_data (
-        order_id  NUMBER PRIMARY KEY,
-        app_data  JSON NOT NULL
+    DROP TABLE IF EXISTS thomas_care_app_data PURGE;
+
+    CREATE TABLE thomas_care_app_data (
+        request_id NUMBER PRIMARY KEY,
+        app_data   JSON NOT NULL
     );
 
-    INSERT INTO thomas_app_data (order_id, app_data)
-    SELECT order_id,
+    INSERT INTO thomas_care_app_data (request_id, app_data)
+    SELECT request_id,
            JSON_OBJECT(
-               'screen'    VALUE 'transaction-detail',
-               'showTotal' VALUE 'true' FORMAT JSON,
-               'features'  VALUE JSON_ARRAY('live-status', 'saved-recipient')
+               'screen'            VALUE 'care-request-detail',
+               'showLogisticsCost' VALUE 'true' FORMAT JSON,
+               'features'          VALUE JSON_ARRAY(
+                   'live-status',
+                   'capacity-context'
+               )
                RETURNING JSON
            )
-    FROM (
-        SELECT order_id
-        FROM orders
-        ORDER BY order_id
-        FETCH FIRST 1 ROW ONLY
-    );
+    FROM hc_service_requests
+    WHERE request_id = 170104;
 
     COMMIT;
     </copy>
     ```
 
-2. Read values from the JSON column.
+    **Expected output: Application data created**
+
+    Oracle creates `THOMAS_CARE_APP_DATA`, inserts one settings payload for request `170104`, and commits the transaction.
+
+2. Read the relational key and selected JSON values.
 
     ```sql
     <copy>
-    SELECT order_id,
+    SELECT request_id,
            JSON_VALUE(app_data, '$.screen') AS screen_name,
-           JSON_VALUE(app_data, '$.showTotal' RETURNING BOOLEAN) AS show_total,
+           JSON_VALUE(
+               app_data,
+               '$.showLogisticsCost' RETURNING BOOLEAN
+           ) AS show_logistics_cost,
            JSON_QUERY(app_data, '$.features') AS app_features
-    FROM thomas_app_data;
+    FROM thomas_care_app_data;
     </copy>
     ```
 
-    `ORDER_ID` remains a relational key. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.
+    **Expected output: Application settings**
+
+    | Request ID | Screen | Show Logistics Cost | Features |
+    | ---: | --- | --- | --- |
+    | 170104 | care-request-detail | true | ["live-status","capacity-context"] |
+
+`REQUEST_ID` remains a relational key. The JSON payload can evolve as the application changes.
 
 ## Task 2: Create a JSON Collection Table
 
-Thomas now needs a collection of application documents. Unlike the JSON column in Task 1, this object is a JSON Collection Table: each row is a document, the document is stored in `DATA`, and `_id` identifies the document.
+Thomas now compares the JSON column with an application-owned collection. The collection stores complete documents in `DATA`, uses a string `_id`, and adds an ETAG that changes with the document.
 
-1. Create the collection and add the sample transaction document.
+1. Create the collection and populate it from existing request `170104`.
+
+    The scalar subquery constructs one JSON value before inserting it into the collection. The request, logistics, and line-item values come from `HC_SERVICE_REQUESTS` and `HC_REQUEST_ITEMS`.
 
     ```sql
     <copy>
-    CREATE JSON COLLECTION TABLE thomas_transaction_docs
+    DROP TABLE IF EXISTS thomas_care_request_docs PURGE;
+
+    CREATE JSON COLLECTION TABLE thomas_care_request_docs
     WITH ETAG;
 
-    INSERT INTO thomas_transaction_docs (data)
-    SELECT JSON_OBJECT(
-               '_id'        VALUE o.order_id,
-               'customerId' VALUE o.customer_id,
-               'status'     VALUE o.order_status,
-               'items'      VALUE (
+    INSERT INTO thomas_care_request_docs (data)
+    VALUES ((
+      SELECT JSON_OBJECT(
+               '_id'                  VALUE TO_CHAR(r.request_id),
+               'requestingCareSiteId' VALUE r.care_site_id,
+               'logisticsSiteId'      VALUE r.logistics_site_id,
+               'requestStatus'        VALUE r.request_status,
+               'requestValue'         VALUE r.request_value,
+               'logisticsCost'        VALUE r.logistics_cost,
+               'demandScore'          VALUE r.demand_score,
+               'createdAt'            VALUE TO_CHAR(
+                   r.created_at,
+                   'YYYY-MM-DD"T"HH24:MI:SS'
+               ),
+               'lineItems' VALUE (
                    SELECT JSON_ARRAYAGG(
                               JSON_OBJECT(
-                                  'itemId'    VALUE oi.item_id,
-                                  'productId' VALUE oi.product_id,
-                                  'quantity'  VALUE oi.quantity,
-                                  'unitPrice' VALUE oi.unit_price
+                                  'lineItemId'      VALUE i.item_id,
+                                  'serviceSupplyId' VALUE i.service_id,
+                                  'quantity'        VALUE i.quantity,
+                                  'unitCost'        VALUE i.unit_cost,
+                                  'lineValue'       VALUE i.line_value
                                   RETURNING JSON
-                              ) ORDER BY oi.item_id RETURNING JSON
+                              )
+                              ORDER BY i.item_id
+                              RETURNING JSON
                           )
-                   FROM order_items oi
-                   WHERE oi.order_id = o.order_id
+                   FROM hc_request_items i
+                   WHERE i.request_id = r.request_id
                ) FORMAT JSON
                RETURNING JSON
            )
-    FROM orders o
-    JOIN thomas_app_data t ON t.order_id = o.order_id;
+      FROM hc_service_requests r
+      WHERE r.request_id = 170104
+    ));
 
     COMMIT;
     </copy>
     ```
 
-    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. This protects customer data when web and mobile requests try updating the same document at the same time.
+    **Expected output: Collection document created**
 
-2. Query the collection as documents.
+    Oracle creates `THOMAS_CARE_REQUEST_DOCS`, inserts one document for request `170104`, and commits the transaction.
+
+2. Query the application-owned document.
 
     ```sql
     <copy>
-    SELECT JSON_SERIALIZE(data PRETTY) AS transaction_document
-    FROM thomas_transaction_docs
-    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) =
-          (SELECT order_id FROM thomas_app_data);
+    SELECT JSON_SERIALIZE(data PRETTY) AS request_document
+    FROM thomas_care_request_docs
+    WHERE JSON_VALUE(data, '$._id') = '170104';
     </copy>
     ```
 
-    Thomas now has a document collection that a document API can access, and SQL can query the same `DATA` column. The collection stores the documents; it is separate from the relational `ORDERS` and `ORDER_ITEMS` tables.
+    **Expected output: Collection document**
 
-## Task 3: Read a customer document from relational data
+    The result contains `_id` `"170104"`, request status `DELIVERED`, logistics site ID `204`, five line items, and an `_metadata.etag` value generated by Oracle. The formatted document begins with values like these:
 
-Thomas now tests the document shape his application can consume directly.
-
-1. Run this query:
-
-
-
-    This query selects the JSON `DATA` column from `ORDERS_DV` so Thomas can inspect the document shape in SQL Worksheet.
-
-    <details>
-    <summary><strong>Why this matters to Thomas</strong></summary>
-
-    > Thomas can use a JSON Collection Table when the application owns the document. But the transaction already has relational tables that Jessica and other teams rely on.
-    > The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the transaction into another store.
-
-    </details>
-
-    ```sql
-    <copy>
-    SELECT data AS transaction_document
-    FROM orders_dv
-    FETCH FIRST 1 ROW ONLY;
-    </copy>
-    ```
-
-    **Expected output:**
-
-    ![SQL Worksheet showing the transaction document returned by the duality view](images/jsondv-result.png " ")
-
-2. Expand the document in SQL Worksheet.
-    The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a transaction payload without a second copy of the transaction record.
-
-    The \_id value appears in the JSON document while the source data remains relational. The payload includes `customerId`, `status`, totals, timestamps, and line items. The application gets these fields without a second transaction store.
-
-    The same transaction now has two useful forms: API-ready JSON for the application and relational rows for analysis.
-
-    > **Note:** Look for `_metadata.etag` in the document. The ETAG changes when the document changes, so Thomas's application can detect a newer version before updating the transaction and avoid overwriting another request.
-
-## Task 4: Enable document inserts and updates
-
-The existing `ORDERS_DV` lets an application update an existing transaction document. In this task, you extend that contract so the application can also create one. The database continues to control the relational tables, keys, and constraints. The duality view can also act as a security boundary. Thomas's application receives only the document fields and write operations exposed by the view, without direct access to the underlying tables.
-
-1. Check the current document-write capabilities.
-
-    ```sql
-    <copy>
-    SELECT view_name,
-           allow_insert,
-           allow_update,
-           allow_delete
-    FROM user_json_duality_views
-    WHERE view_name = 'ORDERS_DV';
-    </copy>
-    ```
-
-    **Expected output: Current Document Capabilities**
-
-    ![json contract](images/jsondv-contract.png)
-
-    The view currently allows updates but not new top-level documents. The root `ORDERS` table controls document insertion. The nested `ORDER_ITEMS` rows must also allow inserts so the document can include line items.
-
-2. Enable insert and update for the document and its line items.
-
-    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses allow developers to create and update the JSON document. Oracle still enforces the relational keys and data types.
-
-    ```sql
-    <copy>
-    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
-    SELECT JSON {
-        '_id'         : o.order_id,
-        'customerId'  : o.customer_id,
-        'status'      : o.order_status,
-        'total'       : o.order_total,
-        'shippingCost': o.shipping_cost,
-        'demandScore' : o.demand_score,
-        'createdAt'   : o.created_at,
-        'items' : [
-            SELECT JSON {
-                'itemId'    : oi.item_id,
-                'productId' : oi.product_id,
-                'quantity'  : oi.quantity,
-                'unitPrice' : oi.unit_price
-            }
-            FROM order_items oi WITH INSERT UPDATE
-            WHERE oi.order_id = o.order_id
-        ]
+    ```json
+    {
+      "_id" : "170104",
+      "_metadata" : {
+        "etag" : "<generated value>"
+      },
+      "requestingCareSiteId" : 1002,
+      "logisticsSiteId" : 204,
+      "requestStatus" : "DELIVERED",
+      "lineItems" : [
+        {
+          "lineItemId" : 4,
+          "serviceSupplyId" : 8,
+          "quantity" : 1,
+          "unitCost" : 310
+        }
+      ]
     }
-    FROM orders o WITH INSERT UPDATE;
+    ```
+
+    The complete output includes all five line items and collection metadata.
+
+The collection stores its own document. It is useful when the application owns the document lifecycle. The next task uses a duality view because the operational request already belongs in relational tables.
+
+## Task 3: Read a care service request from relational data
+
+`CARE_SERVICE_REQUESTS_DV` exposes existing request and item rows as one JSON document. No synchronization job or second request store is required.
+
+1. Read existing request `170104`.
+
+    ```sql
+    <copy>
+    SELECT JSON_SERIALIZE(data PRETTY) AS request_document
+    FROM care_service_requests_dv
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 170104;
     </copy>
     ```
 
-    This duality view uses two relational tables. `ORDERS` provides the document root. Related `ORDER_ITEMS` rows become the nested `items` collection. The `WITH INSERT UPDATE` clauses let Thomas write the complete JSON document while Oracle maintains the rows and relationships.
+    **Expected output: Duality-view request document**
 
-    **Expected output: View Definition Updated**
+    | Field | Expected value |
+    | --- | --- |
+    | `_id` | 170104 |
+    | `requestingCareSiteId` | 1002 |
+    | `requestStatus` | DELIVERED |
+    | `requestValue` | 943.89 |
+    | `logisticsCost` | 82.5 |
+    | `demandScore` | 64 |
+    | `lineItems` | Five items |
 
-    Oracle created or replaced the duality view. Verify the new capabilities in the next step.
+The application receives one nested document. Jessica can still query the normalized request and item rows with SQL.
 
-2. Run the capability query again.
+## Task 4: Enable document inserts
+
+The provided duality view starts with a controlled contract: applications can update existing request documents, but they cannot insert or delete them. Thomas restores that starting state before inspecting the contract. This makes the exercise repeatable if request `990001` already exists from an earlier run.
+
+1. Reset the reserved exercise request and restore the starting contract.
+
+    The cleanup affects only reserved request ID `990001`. It does not change the existing healthcare requests used elsewhere in the workshop.
+
+    ```sql
+    <copy>
+    DELETE FROM hc_request_items
+    WHERE request_id = 990001;
+
+    DELETE FROM hc_service_requests
+    WHERE request_id = 990001;
+
+    COMMIT;
+
+    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW care_service_requests_dv AS
+    SELECT JSON {
+      '_id'                  : r.request_id,
+      'requestingCareSiteId' : r.care_site_id,
+      'requestStatus'        : r.request_status,
+      'requestValue'         : r.request_value,
+      'logisticsCost'        : r.logistics_cost,
+      'demandScore'          : r.demand_score,
+      'createdAt'            : r.created_at,
+      'lineItems' : [
+        SELECT JSON {
+          'lineItemId'      : i.item_id,
+          'serviceSupplyId' : i.service_id,
+          'quantity'        : i.quantity,
+          'unitCost'        : i.unit_cost,
+          'lineValue'       : i.line_value
+        }
+        FROM hc_request_items i WITH UPDATE
+        WHERE i.request_id = r.request_id
+      ]
+    }
+    FROM hc_service_requests r WITH UPDATE;
+    </copy>
+    ```
+
+    **Expected output: Exercise state reset**
+
+    Oracle removes reserved request `990001` if it exists and restores the update-only duality-view contract. A first run may report that zero request rows were deleted.
+
+2. Check the current document capabilities.
 
     ```sql
     <copy>
@@ -273,184 +316,283 @@ The existing `ORDERS_DV` lets an application update an existing transaction docu
            allow_update,
            allow_delete
     FROM user_json_duality_views
-    WHERE view_name = 'ORDERS_DV';
+    WHERE view_name = 'CARE_SERVICE_REQUESTS_DV';
     </copy>
     ```
 
-    **Expected output: Document Capabilities Enabled**
+    **Expected output: Current document capabilities**
 
-    ![insert json](images/jsondv-insert.png)
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | CARE\_SERVICE\_REQUESTS\_DV | false | true | false |
 
-    The view can now receive a new JSON transaction document and apply a document update. Thomas has a document API over the existing relational transaction data. He can use it for a customer feature such as submitting a new order. The application sends one document, and the database writes the order and its line items to the relational tables.
+3. Enable inserts while preserving updates for the request and its nested line items.
 
-## Task 5: Create and update a JSON transaction
-
-Thomas now tests a complete customer transaction. He creates it as one nested JSON document, then confirms that Jessica can immediately see the same data as structured relational rows.
-
-1. Insert the supplied workshop transaction document.
-
-    The `INSERT` targets `ORDERS_DV`, the JSON Relational Duality View, rather than the underlying `ORDERS` or `ORDER_ITEMS` tables. The database uses the view definition to write the document to those relational tables. The document uses transaction ID `900001`, customer `1`, and product `1`. It includes one nested line item. The statement is safe to run again: after the transaction exists, it inserts zero rows and preserves the existing record. On the first run, the new transaction has status `pending`.
+    The revised contract adds `logisticsSiteId`, which supplies the required logistics-site foreign key when an application creates a request. Delete remains disabled.
 
     ```sql
     <copy>
-    INSERT INTO orders_dv (data)
+    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW care_service_requests_dv AS
+    SELECT JSON {
+      '_id'                  : r.request_id,
+      'requestingCareSiteId' : r.care_site_id,
+      'logisticsSiteId'      : r.logistics_site_id,
+      'requestStatus'        : r.request_status,
+      'requestValue'         : r.request_value,
+      'logisticsCost'        : r.logistics_cost,
+      'demandScore'          : r.demand_score,
+      'createdAt'            : r.created_at,
+      'lineItems' : [
+        SELECT JSON {
+          'lineItemId'      : i.item_id,
+          'serviceSupplyId' : i.service_id,
+          'quantity'        : i.quantity,
+          'unitCost'        : i.unit_cost,
+          'lineValue'       : i.line_value
+        }
+        FROM hc_request_items i WITH INSERT UPDATE
+        WHERE i.request_id = r.request_id
+      ]
+    }
+    FROM hc_service_requests r WITH INSERT UPDATE;
+    </copy>
+    ```
+
+    **Expected output: Document contract updated**
+
+    Oracle creates or replaces `CARE_SERVICE_REQUESTS_DV`. Existing request and item rows remain in place.
+
+4. Verify the enabled capabilities.
+
+    ```sql
+    <copy>
+    SELECT view_name,
+           allow_insert,
+           allow_update,
+           allow_delete
+    FROM user_json_duality_views
+    WHERE view_name = 'CARE_SERVICE_REQUESTS_DV';
+    </copy>
+    ```
+
+    **Expected output: Enabled document capabilities**
+
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | CARE\_SERVICE\_REQUESTS\_DV | true | true | false |
+
+## Task 5: Create and update a JSON care service request
+
+Thomas now submits a complete request document with two line items. Oracle applies the write to the normalized request and item tables.
+
+1. Insert request `990001` through the duality view.
+
+    The supplied care-site, logistics-site, and service identifiers already exist in the provided healthcare data. The two line values total `495.00`. Task 4 removes the reserved exercise request before this insert, while the `NOT EXISTS` condition provides an additional duplicate check.
+
+    ```sql
+    <copy>
+    INSERT INTO care_service_requests_dv (data)
     SELECT JSON(
       '{
-        "_id": 900001,
-        "customerId": 1,
-        "status": "pending",
-        "total": 25.00,
-        "shippingCost": 0,
-        "items": [
+        "_id": 990001,
+        "requestingCareSiteId": 1002,
+        "logisticsSiteId": 204,
+        "requestStatus": "PENDING",
+        "requestValue": 495.00,
+        "logisticsCost": 58.00,
+        "demandScore": 72.00,
+        "createdAt": "2026-06-01T00:00:00",
+        "lineItems": [
           {
-            "itemId": 990001,
-            "productId": 1,
-            "quantity": 2,
-            "unitPrice": 12.50
+            "lineItemId": 990001,
+            "serviceSupplyId": 4,
+            "quantity": 1,
+            "unitCost": 185.00
+          },
+          {
+            "lineItemId": 990002,
+            "serviceSupplyId": 8,
+            "quantity": 1,
+            "unitCost": 310.00
           }
         ]
       }'
     )
+    FROM dual
     WHERE NOT EXISTS (
       SELECT 1
-      FROM orders
-      WHERE order_id = 900001
+      FROM hc_service_requests
+      WHERE request_id = 990001
     );
 
     COMMIT;
     </copy>
     ```
 
-    **Expected output: Transaction Document Created**
+    **Expected output: Request document created**
 
-    On the first run, you insert one document. On later runs, the `NOT EXISTS` check returns zero rows because the workshop transaction is already present.
+    Oracle inserts one document on a fresh run and commits the transaction. A repeated insert affects zero rows because request `990001` already exists.
 
-2. Confirm the JSON document became relational rows.
-
-    >**Note**: We are querying here the relational tables `ORDERS` and `ORDER_ITEMS`!
+2. Retrieve the JSON write as relational evidence.
 
     ```sql
     <copy>
-    SELECT o.order_id AS transaction_id,
-           o.order_status AS transaction_status,
-           c.email AS client_email,
-           oi.item_id,
-           p.product_name,
-           oi.quantity,
-           oi.unit_price,
-           oi.line_total
-    FROM orders o
-    JOIN customers c ON c.customer_id = o.customer_id
-    JOIN order_items oi ON oi.order_id = o.order_id
-    JOIN products p ON p.product_id = oi.product_id
-    WHERE o.order_id = 900001;
+    SELECT r.request_id,
+           r.request_status,
+           cs.care_site_name,
+           ls.logistics_name,
+           i.item_id,
+           s.service_name,
+           i.quantity,
+           i.unit_cost,
+           i.line_value
+    FROM hc_service_requests r
+    JOIN hc_care_sites cs
+      ON cs.care_site_id = r.care_site_id
+    JOIN hc_logistics_sites ls
+      ON ls.logistics_site_id = r.logistics_site_id
+    JOIN hc_request_items i
+      ON i.request_id = r.request_id
+    JOIN hc_care_services s
+      ON s.service_id = i.service_id
+    WHERE r.request_id = 990001
+    ORDER BY i.item_id;
     </copy>
     ```
 
-    **Expected output: Created Transaction Rows**
+    **Expected output: Relational request rows**
 
-    ![json success](images/json-success.png)
+    | Request ID | Status | Care Site | Logistics Site | Item ID | Service | Quantity | Unit Cost | Line Value |
+    | ---: | --- | --- | --- | ---: | --- | ---: | ---: | ---: |
+    | 990001 | PENDING | Penelope Mendoza | Etna Midwest Specialty Warehouse | 990001 | qPCR Respiratory Panel | 1 | 185.00 | 185.00 |
+    | 990001 | PENDING | Penelope Mendoza | Etna Midwest Specialty Warehouse | 990002 | Digital Pathology Slide Batch | 1 | 310.00 | 310.00 |
 
-3. Update the document status through the duality view.
+One document insert created one request row and two related item rows.
 
-    This update changes JSON data through `ORDERS_DV`. The allowed modification here is the document's `status` field, which Oracle maps to `ORDERS.ORDER_STATUS`; Thomas's application is not given unrestricted updates to the underlying tables. He does not need application-side parsing or a second transaction store.
+3. Update only the request status through JSON.
 
     ```sql
     <copy>
-    UPDATE orders_dv
-    SET data = JSON_TRANSFORM(data, SET '$.status' = 'confirmed')
-    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
+    UPDATE care_service_requests_dv
+    SET data = JSON_TRANSFORM(
+                 data,
+                 SET '$.requestStatus' = 'CONFIRMED'
+               )
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 990001;
 
     COMMIT;
     </copy>
     ```
 
-    **Expected output: Transaction Status Updated**
+    **Expected output: Request status updated**
 
-    Oracle updates one document. The following query confirms that the relational order row now has status `confirmed`.
+    Oracle updates one document and commits the change.
 
-4. Verify the updated relational status.
+4. Verify the relational effect.
 
     ```sql
     <copy>
-    SELECT o.order_id AS transaction_id,
-           o.order_status AS transaction_status,
-           oi.item_id,
-           p.product_name,
-           oi.quantity,
-           oi.line_total
-    FROM orders o
-    JOIN order_items oi ON oi.order_id = o.order_id
-    JOIN products p ON p.product_id = oi.product_id
-    WHERE o.order_id = 900001;
+    SELECT r.request_id,
+           r.request_status,
+           i.item_id,
+           s.service_name,
+           i.quantity,
+           i.unit_cost,
+           i.line_value
+    FROM hc_service_requests r
+    JOIN hc_request_items i
+      ON i.request_id = r.request_id
+    JOIN hc_care_services s
+      ON s.service_id = i.service_id
+    WHERE r.request_id = 990001
+    ORDER BY i.item_id;
     </copy>
     ```
 
-    **Expected output: Updated Transaction Rows**
+    **Expected output: Updated root with unchanged line items**
 
-    ![json update](images/json-update-confirm.png)
+    | Request ID | Status | Item ID | Service | Quantity | Unit Cost | Line Value |
+    | ---: | --- | ---: | --- | ---: | ---: | ---: |
+    | 990001 | CONFIRMED | 990001 | qPCR Respiratory Panel | 1 | 185.00 | 185.00 |
+    | 990001 | CONFIRMED | 990002 | Digital Pathology Slide Batch | 1 | 310.00 | 310.00 |
+
+Only `HC_SERVICE_REQUESTS.REQUEST_STATUS` changed. The two `HC_REQUEST_ITEMS` rows stayed intact because the application changed only `requestStatus`.
 
 ## Task 6: Project JSON fields with SQL
 
-Thomas has confirmed that the application can display and update the document. Jessica now checks the same transaction with SQL before the feature goes live. She uses the relational tables for normal reporting and analysis. Here, she queries `ORDERS_DV` to verify the exact JSON contract that Thomas's application receives. She can also project fields from the document to test customer-service searches and status filters. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
+Thomas has confirmed that the application can display and update the document. Jessica now compares a SQL/JSON projection with a direct relational query.
 
-1. Run this SQL/JSON projection query:
-
-    Thomas's document is still available for SQL analysis. The same transaction shape can be queried, filtered, and joined to relational customer data.
-
-    The SQL uses `JSON_VALUE` to extract transaction fields from the duality document. That is the projection step. It returns the transaction ID and status, reads the embedded customer identifier, joins that identifier to `CUSTOMERS`, and orders the result for review.
-
-    Thomas does not need to hand-build this document in the application or copy the transaction to a separate document store. The application gets JSON, while Jessica still has SQL access to the same transaction rows.
+1. Project document fields and join them to governed names.
 
     ```sql
     <copy>
-    SELECT JSON_VALUE(od.data, '$._id' RETURNING NUMBER) AS transaction_id,
-           JSON_VALUE(od.data, '$.status') AS transaction_status,
-           c.email AS client_email
-    FROM orders_dv od
-    JOIN customers c
-      ON c.customer_id = JSON_VALUE(od.data, '$.customerId' RETURNING NUMBER)
-    WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) = 900001;
+    SELECT JSON_VALUE(d.data, '$._id' RETURNING NUMBER) AS request_id,
+           JSON_VALUE(d.data, '$.requestStatus') AS request_status,
+           cs.care_site_name,
+           ls.logistics_name
+    FROM care_service_requests_dv d
+    JOIN hc_care_sites cs
+      ON cs.care_site_id = JSON_VALUE(
+           d.data,
+           '$.requestingCareSiteId' RETURNING NUMBER
+         )
+    JOIN hc_logistics_sites ls
+      ON ls.logistics_site_id = JSON_VALUE(
+           d.data,
+           '$.logisticsSiteId' RETURNING NUMBER
+         )
+    WHERE JSON_VALUE(d.data, '$._id' RETURNING NUMBER) = 990001;
     </copy>
     ```
 
-    **Expected output: JSON Field Projection**
+    **Expected output: JSON field projection**
 
-    ![project json](images/json-project.png)
+    | Request ID | Status | Care Site | Logistics Site |
+    | ---: | --- | --- | --- |
+    | 990001 | CONFIRMED | Penelope Mendoza | Etna Midwest Specialty Warehouse |
 
 2. Run the equivalent query against the relational tables.
 
     ```sql
     <copy>
-    SELECT o.order_id AS transaction_id,
-           o.order_status AS transaction_status,
-           c.email AS client_email
-    FROM orders o
-    JOIN customers c
-      ON c.customer_id = o.customer_id
-    WHERE o.order_id = 900001;
+    SELECT r.request_id,
+           r.request_status,
+           cs.care_site_name,
+           ls.logistics_name
+    FROM hc_service_requests r
+    JOIN hc_care_sites cs
+      ON cs.care_site_id = r.care_site_id
+    JOIN hc_logistics_sites ls
+      ON ls.logistics_site_id = r.logistics_site_id
+    WHERE r.request_id = 990001;
     </copy>
     ```
 
-    ![project relational](images/json-relational.png)
+    **Expected output: Relational field projection**
 
-    Compare the result with the previous query. The transaction ID, status, and client email should match. Thomas's application is reading the JSON document, while Jessica's relational query reads the underlying rows.
+    | Request ID | Status | Care Site | Logistics Site |
+    | ---: | --- | --- | --- |
+    | 990001 | CONFIRMED | Penelope Mendoza | Etna Midwest Specialty Warehouse |
+
+    The relational query returns the same request ID, status, care site, and logistics site as the SQL/JSON projection. The application document and relational query are two access paths to the same governed request.
 
 ## Conclusion: Choose the right JSON approach
 
-Thomas does not have to choose one JSON model for the whole application. He can choose based on who owns the data and whether the application needs a document over existing relational rows.
+Thomas does not have to choose one JSON model for the entire application. He can choose based on who owns the data and whether the application needs a document over existing relational rows.
 
-| Approach                          | Use it when                                                                                 | Example in Thomas's application                                                                            | Where the data lives                                                                                           |
-| -----------------------------------| ---------------------------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------|
-| JSON column in a relational table | A relational record needs optional or changing attributes.                                  | Store screen settings or customer experience options alongside a transaction key.                          | A normal relational table with a native `JSON` column.                                                         |
-| JSON Collection Table             | The application owns a set of JSON documents and needs document-style access.               | Store saved checkout drafts that may change as customers add or remove items.                              | A JSON Collection Table with one document in each `DATA` row.                                                  |
-| JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a customer transaction with its status and line items, or accept a new order document from the app. | Relational tables such as `ORDERS` and `ORDER_ITEMS`; the duality view defines the JSON shape for Thomas' app. |
+| Approach | Use it when | Healthcare example | Where the data lives |
+| --- | --- | --- | --- |
+| JSON column in a relational table | A relational record needs optional or changing application attributes. | Store screen settings and feature flags beside a request key. | A normal relational table with a native `JSON` column. |
+| JSON Collection Table | The application owns a collection of independent documents. | Store application-managed care coordination drafts with ETAG-based change detection. | A JSON Collection Table with one document in each `DATA` row. |
+| JSON Relational Duality View | Governed data already belongs in relational tables, but the application needs one JSON document. | Read, create, or update a care service request with nested line items. | `HC_SERVICE_REQUESTS` and `HC_REQUEST_ITEMS`; the duality view defines the application shape. |
 
-For Thomas, `ORDERS_DV` is the right choice for the transaction feature because `ORDERS` and `ORDER_ITEMS` already hold governed finance data. The application gets the JSON payload it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
+For the operational request feature, `CARE_SERVICE_REQUESTS_DV` is the right choice because the request and line items already belong in the relational healthcare model. Thomas gets an application-ready document while Jessica retains SQL, constraints, transactions, and controlled access to the same data.
 
+## Next Steps
+
+Next, use AI Vector Search to find care services and operational signals by meaning while keeping the semantic result connected to governed healthcare rows.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Linda Foinding, Principal Product Manager, Oracle Database Product Management
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator responsible for keeping Seer Health Network's operational data reliable, governed, and useful. Each morning, the care operations team asks a practical question: **which care services need attention first, and what evidence should guide the response?**
+Jessica Chen is the database administrator responsible for keeping Seer Health Network's operational data reliable, governed, and useful. Each morning, the care operations team asks a practical question: **which care services need attention first, and what evidence should guide the response?**
 
 The answer crosses several forms of data. Quality and capacity signals are relational records. Active service requests are available as JSON documents. Stored vector embeddings describe care services by meaning. Care sites and logistics locations are represented with spatial coordinates. The data is connected by the operational decision, but that does not automatically make the investigation easy to query.
 
@@ -28,12 +28,12 @@ Estimated Time: **10 minutes**
 | --- | --- |
 | Business Problem | Care operations teams need to identify services under pressure and review the supporting operational evidence. |
 | Technical Challenge | The answer crosses quality and capacity signals, service meaning, JSON request activity, and logistics geography. |
-| Persona Focus | Jessica Chan, the DBA, builds the governed query behind the Care Operations Dashboard. |
+| Persona Focus | Jessica Chen, the DBA, builds the governed query behind the Care Operations Dashboard. |
 | What You Will Do | Run one SQL statement that combines four database data models, then change the investigation question. |
 | Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together. |
 | Outcome | The learner can explain how a converged database produces one traceable healthcare operations result without separate data copies. |
 
-Persona focus: You are Jessica Chan, the DBA. Your job is to give care operations teams one governed view of service pressure, request activity, semantic relevance, and logistics context.
+Persona focus: You are Jessica Chen, the DBA. Your job is to give care operations teams one governed view of service pressure, request activity, semantic relevance, and logistics context.
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
 
@@ -79,7 +79,7 @@ The query intentionally crosses four data models:
                  cs.category
     ),
     -- VECTOR DATA: embed the investigation question once and compare it
-    -- with the service embeddings created by the SQL loader.
+    -- with the stored service embeddings.
     query_vector AS (
         SELECT VECTOR_EMBEDDING(
                    ADMIN.ALL_MINILM_L12_V2
@@ -197,11 +197,21 @@ The query intentionally crosses four data models:
     </copy>
     ```
 
+    **Expected output: Converged care operations result**
+
+    The query returns up to ten care services ranked by semantic similarity. The validated result begins with the following care-service and logistics evidence:
+
+    | Care service | High-priority signals | Active requests | Nearest logistics site | Distance |
+    | --- | ---: | ---: | --- | ---: |
+    | Bed Capacity Surge Playbook | 4 | 1 | Hialeah Import Compliance Site | 8.51 miles |
+
 3. Review the result as the care-service data behind Jessica's dashboard. Each row combines operational signals, semantic relevance, request activity, and logistics context. This gives the dashboard a ranked service table and the details an operations user needs when deciding what to review.
 
-    ![SQL Worksheet showing the ranked care-service result behind Jessica's dashboard](images/product-level-dashboard.png " ")
+    ![Healthcare Operations Command Center that consumes the governed care operations data](images/product-level-dashboard.png " ")
 
     Your numbers may be different if the demo data has changed. Each row should include all four types of data.
+
+    If you return to this query after Lab 2, the active-request values can reflect request `990001`. This demonstrates that both labs use the same governed healthcare data.
 
 Use the first row to understand the business takeaway: the signal and request values show why the care service needs attention, the semantic match explains why it fits the question, and the logistics location shows where operational follow-up could begin. Jessica now has the query behind the dashboard's ranked service table and detail view, combining relational signals, vector search, JSON request data, and spatial distance in one result that an operations user can inspect.
 
@@ -216,9 +226,6 @@ Jessica meets with a care operations analyst to review the results at the data l
 diagnostic service demand and regional logistics capacity
 ```
 
-![2026-08-18-004703](images/2026-08-18-004703.png)
-
-
 Run the query again and compare the top rows.
 
 1. Which care services moved into or out of the top ten?
@@ -230,7 +237,7 @@ The result is ordered by semantic similarity first, so changing the question cha
 
 ## Next Steps
 
-Next, use JSON Relational Duality to expose the same transaction data as JSON for an application while keeping SQL access for the database team.
+Next, use JSON Relational Duality to expose the same care service request data as JSON for an application while keeping SQL access for the database team.
 
 ## Acknowledgements
 
