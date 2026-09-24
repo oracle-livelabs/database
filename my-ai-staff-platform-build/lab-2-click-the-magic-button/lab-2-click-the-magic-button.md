@@ -110,6 +110,7 @@ In this lab, you will:
      Use letters, numbers, and symbols, do not reuse your OCI password, and
      keep both values in a secure password manager.
 
+    ![Input Passwords](images/configure-database-passwords.png)
 
 5. Select **Next**, review the values, leave **Run apply** selected, then
     select **Create**. Resource Manager starts the apply automatically.
