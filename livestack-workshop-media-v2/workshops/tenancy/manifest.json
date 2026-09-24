@@ -1,0 +1,18 @@
+{
+  "workshoptitle": "Build Connected Media & Entertainment Solutions with Oracle AI Database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {"title":"Introduction","description":"The Seer Media Midnight Harbor launch-weekend story and workshop goals.","filename":"../../introduction/introduction.md"},
+    {"title":"Getting Started","description":"Launch the environment and open Database Actions SQL Worksheet.","filename":"../../getting-started/getting-started.md"},
+    {"title":"Lab 1: Build a Converged Launch Operations Dashboard","description":"Connect launch signals, viewing engagement, semantic matches, and live-event capacity.","filename":"../../launch-operations-dashboard/launch-operations-dashboard.md"},
+    {"title":"Lab 2: Build a Viewing-Session JSON Application Model","description":"Help Thomas serve viewer session data with JSON Relational Duality.","filename":"../../viewing-session-duality/viewing-session-duality.md"},
+    {"title":"Lab 3: Review a Semantic Content Discovery Search","description":"Use an in-database embedding model to discover Midnight Harbor content by meaning.","filename":"../../content-discovery-vector-search/content-discovery-vector-search.md"},
+    {"title":"Lab 4: Investigate a Creator and Community Network","description":"Use Oracle Property Graph and SQL/PGQ to understand connected creator and audience communities.","filename":"../../creator-community-network/creator-community-network.md"},
+    {"title":"Lab 5: Plan Live-Event Capacity with Oracle Spatial","description":"Use spatial evidence for venue hubs and audience regions.","filename":"../../live-event-capacity-spatial/live-event-capacity-spatial.md"},
+    {"title":"Lab 6: Predict Audience Engagement and Retention with Oracle Machine Learning","description":"Train and score an audience model inside Oracle Database.","filename":"../../predictive-audience-oml/predictive-audience-oml.md"},
+    {"title":"Lab 7: Ask Media Questions with Select AI","description":"Turn natural-language media questions into inspectable SQL.","filename":"../../selectai/selectai.md"},
+    {"title":"Lab 8: Build a Media Operations Agent with Select AI Agent","description":"Create a read-only Media operations agent with an approved SQL tool.","filename":"../../selectai-agent/selectai-agent.md"},
+    {"title":"Lab 9: Final Quiz","description":"Check your understanding with scored questions.","filename":"../../final-quiz/final-quiz.md"},
+    {"title":"Need Help?","description":"Solutions to common problems and directions for receiving Live Help.","filename":"https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"}
+  ]
+}
