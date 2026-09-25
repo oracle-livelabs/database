@@ -8,6 +8,8 @@ Use generic bot identities for every deployment: Assistant Agent, Content Agent,
 
 Estimated Workshop Time: 315 minutes
 
+![Example image](./images/livelabs-ai-staff-image.png)
+
 ### Objectives
 
 In this workshop, you will:
