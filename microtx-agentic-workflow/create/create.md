@@ -185,7 +185,7 @@ Search and add a Terminate task.
 ![Add terminate1 task](images/add-terminate1-task-2.png)
 
 Add a "DEFAULT" Decision Case to the switch task. In the DEFAULT branch, add a *INLINE* task named **generate\_loan\_application\_id** to generate the unique Loan Appliction ID. Use a `javascript` evaluator to generate the Loan Application ID.
-![Add notification1 task](images/generate-loanId-inline-task.png)
+![Add notification1 task](images/generate-loan-id-inline-task.png)
 
   ```javascript
   <copy>
@@ -378,11 +378,11 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
         <copy>
         You are an AI planner for a loan approval workflow. Your goal is to decide the next tool to call based on the results of previous steps. Follow the conditions below exactly.
 
-        1.  **First step:** Connect to oracle database using the tool 'oracle-database-tool' and change status of Loan application with APPLICATION_ID=${workflowId} to UNDER_REVIEW. UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'UNDER_REVIEW' WHERE APPLICATION_ID = workflowId; then, if no tasks have been run, call the `loan_document_verification`.
-        2.  **After document verification:**
+        1. **First step:** Connect to oracle database using the tool 'oracle-database-tool' and change status of Loan application with APPLICATION_ID=${workflowId} to UNDER_REVIEW. UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'UNDER_REVIEW' WHERE APPLICATION_ID = workflowId; then, if no tasks have been run, call the `loan_document_verification`.
+        2. **After document verification:**
             * If `loan_document_verification` task failed, the process stops. Respond with a final status of 'FAILED'.
             * If it succeeded, call the tasks `compliance_and_aml_check` and `Loan_Offer_Underwriter` in parallel.
-        3.  **After compliance and processing:**
+        3. **After compliance and processing:**
             * For any other failure, the process stops. Respond with a final status of 'FAILED'.
             * If all tasks succeed, the process is complete. Respond with a final status of 'SUCCESS'.
 
@@ -557,9 +557,9 @@ After the **Agentic\_Loan\_Planner** task completes, add the **Check\_Planner\_E
 
 4. There are two branches in this **SWITCH** case
 
-  `FAILED` case: Use the **Publish\_Loan\_Rejection\_By\_Agent** *TXEVENTQ\_PUBLISH* task to publish a loan-application rejection message to TxEventQ. The message uses the *LOAN\_APPLICATION\_REJECTED* event type and sets the application status to *REJECTED*. Then terminate the workflow by using the **Terminate\_Loan\_Application** *TERMINATE* task.
+    `FAILED` case: Use the **Publish\_Loan\_Rejection\_By\_Agent** *TXEVENTQ\_PUBLISH* task to publish a loan-application rejection message to TxEventQ. The message uses the *LOAN\_APPLICATION\_REJECTED* event type and sets the application status to *REJECTED*. Then terminate the workflow by using the **Terminate\_Loan\_Application** *TERMINATE* task.
 
-  `Default` case: Use the **Publish\_Loan\_Approval\_Requested** *TXEVENTQ\_PUBLISH* task to publish a loan-application approval-request message to TxEventQ. The message uses the *LOAN\_APPLICATION\_APPROVAL\_REQUESTED* event type and sets the application status to *PENDING\_APPROVAL*. Then create the **Human\_Loan\_Approval** human task, which keeps a human approver in the loop to review the application and approve or reject it.
+    `Default` case: Use the **Publish\_Loan\_Approval\_Requested** *TXEVENTQ\_PUBLISH* task to publish a loan-application approval-request message to TxEventQ. The message uses the *LOAN\_APPLICATION\_APPROVAL\_REQUESTED* event type and sets the application status to *PENDING\_APPROVAL*. Then create the **Human\_Loan\_Approval** human task, which keeps a human approver in the loop to review the application and approve or reject it.
   
 5. Click the **JSON** tab to view the JSON definitions for the **Check\_Planner\_Execution\_Status** *SWITCH* task, the *TxEventQ* publish tasks, and the **Terminate\_Loan\_Application** *TERMINATE* task. If you are creating a new workflow, add a *SWITCH* task, the required *TXEVENTQ\_PUBLISH* tasks, a *HUMAN* task, and a *TERMINATE* task, then configure them as described in the preceding steps. The complete JSON definition of the *SWITCH* task is provided below for reference; you can copy its values when configuring the workflow.
 
@@ -720,9 +720,9 @@ After the **Human\_Loan\_Approval** task records the approver’s decision, the 
     * The generated loan application ID is used to identify the database record.
     * The task is enlisted in the active XA transaction using `enlistInTxn: true`.
 
-  Because the task participates in the transaction, the database update is not permanently committed until the transaction is successfully committed.
+    Because the task participates in the transaction, the database update is not permanently committed until the transaction is successfully committed.
 
-  ![Add update final loan status task](images/update_final_loan_status.png)
+    ![Add update final loan status task](images/update_final_loan_status.png)
 
 6. **Publish the final decision to TxEventQ**
 
@@ -744,9 +744,9 @@ After the **Human\_Loan\_Approval** task records the approver’s decision, the 
     * Transaction type: `XA`
     * Action: *COMMIT*
 
-  The database status update and TxEventQ message are committed together. If either operation fails, the XA transaction is rolled back through the configured failure workflow, preventing only one operation from being committed.
+    The database status update and TxEventQ message are committed together. If either operation fails, the XA transaction is rolled back through the configured failure workflow, preventing only one operation from being committed.
 
-  ![Add commit transaction task](images/commit_transaction.png)
+    ![Add commit transaction task](images/commit_transaction.png)
 
 8. The complete JSON definitions for the transaction, SQL, and TxEventQ tasks are provided below for reference. You can copy the task properties and values when configuring the workflow.
 

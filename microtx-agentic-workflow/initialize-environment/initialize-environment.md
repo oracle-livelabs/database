@@ -38,7 +38,7 @@ This lab assumes you have:
     </copy>
     ```
 
-   Wait until the MicroTx setup is complete. *This can take 5-6 minutes to deploy and start all the services.* Wait until all services are started. When the MicroTx setup is complete, the following messages are displayed.
+    Wait until the MicroTx setup is complete. *This can take 5-6 minutes to deploy and start all the services.* Wait until all services are started. When the MicroTx setup is complete, the following messages are displayed.
 
     **Example output**
 
